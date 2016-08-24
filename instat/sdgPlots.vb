@@ -43,12 +43,21 @@ Public Class sdgPlots
         tabctrlBoxSubdialog.SelectedIndex = 0
     End Sub
 
-    Private Sub SetDefaults()
+    Public Sub SetDefaults()
         TitleDefaults()
         IncludeFacets()
         chkIncludeFacets.Checked = False
+        ucrFacetSelector.Reset()
         ucr1stFactorReceiver.SetMeAsReceiver()
+        ucrInputGraphTitle.SetName("")
+        ucrPlotsAdditionalLayers.Reset()
+        ucrXAxis.Reset()
+        ucrYAxis.Reset()
         ucrInputThemes.SetName("theme_grey")
+    End Sub
+
+    Public Sub Reset()
+        SetDefaults()
     End Sub
 
     Private Sub InitialiseDialog()

@@ -46,6 +46,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetPrefix("Cal")
         ucrSaveResultInto.Reset()
         ucrInputCalOptions.Reset()
+        ucrReceiverForCalculation.cboExpression.ResetText()
         Me.Size = New System.Drawing.Size(436, 402)
         ucrInputCalOptions.cboInput.Text = "Basic"
     End Sub
@@ -68,6 +69,8 @@ Public Class dlgCalculator
         ucrInputCalOptions.cboInput.Items.Add("Basic")
         ucrInputCalOptions.cboInput.Items.Add("Maths")
         ucrInputCalOptions.cboInput.Items.Add("Logical")
+        ucrInputCalOptions.cboInput.Items.Add("Statistics")
+        ucrInputCalOptions.cboInput.Items.Add("Strings")
     End Sub
 
     'Private Sub ucrSaveResultIntoInto_NameChanged() Handles ucrSaveResultInto.NameChanged
@@ -91,77 +94,62 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
-        AddText("0")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("0")
     End Sub
 
     Private Sub cmd1_Click(sender As Object, e As EventArgs) Handles cmd1.Click
-        AddText("1")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("1")
     End Sub
 
     Private Sub cmd2_Click(sender As Object, e As EventArgs) Handles cmd2.Click
-        AddText("2")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("2")
     End Sub
 
     Private Sub cmd3_Click(sender As Object, e As EventArgs) Handles cmd3.Click
-        AddText("3")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("3")
     End Sub
 
     Private Sub cmd4_Click(sender As Object, e As EventArgs) Handles cmd4.Click
-        AddText("4")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("4")
     End Sub
 
     Private Sub cmd5_Click(sender As Object, e As EventArgs) Handles cmd5.Click
-        AddText("5")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("5")
     End Sub
 
     Private Sub cmd6_Click(sender As Object, e As EventArgs) Handles cmd6.Click
-        AddText("6")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("6")
     End Sub
 
     Private Sub cmd7_Click(sender As Object, e As EventArgs) Handles cmd7.Click
-        AddText("7")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("7")
     End Sub
 
     Private Sub cmd8_Click(sender As Object, e As EventArgs) Handles cmd8.Click
-        AddText("8")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("8")
     End Sub
 
     Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles cmd9.Click
-        AddText("9")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("9")
     End Sub
 
     Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
-        AddText(".")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".")
     End Sub
 
     Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
-        AddText("+")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
-        AddText("-")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("-")
     End Sub
 
     Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
-        AddText("*")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("*")
     End Sub
 
     Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
-        AddText("/")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("/")
     End Sub
 
@@ -172,7 +160,6 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
-        AddText("^")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^")
     End Sub
 
@@ -215,17 +202,6 @@ Public Class dlgCalculator
     '    End If
     'End Sub
 
-    Private Sub cmdSqrt_Click(sender As Object, e As EventArgs)
-        AddText("sqrt()", 1, True)
-    End Sub
-
-    Private Sub cmdLog10_Click(sender As Object, e As EventArgs)
-        AddText("log10()", 1, True)
-    End Sub
-
-    Private Sub cmdExp_Click(sender As Object, e As EventArgs)
-        AddText("exp()", 1, True)
-    End Sub
 
     Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -252,18 +228,20 @@ Public Class dlgCalculator
         ucrBase.OKEnabled(True)
     End Sub
 
-    Private Sub cmdGreaterThan_Click(sender As Object, e As EventArgs) Handles cmdGreaterThan.Click
-        AddText(">")
+    Private Sub cmdGreater_Click(sender As Object, e As EventArgs) Handles cmdGreater.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">")
     End Sub
 
-    Private Sub cmdLessThan_Click(sender As Object, e As EventArgs) Handles cmdLessThan.Click
-        AddText("<")
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ucrReceiverForCalculation.Clear()
+    End Sub
+
+    Private Sub cmdLesser_Click(sender As Object, e As EventArgs) Handles cmdLesser.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<")
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-
+        ucrReceiverForCalculation.Clear()
     End Sub
 
 
@@ -275,22 +253,253 @@ Public Class dlgCalculator
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrInputCalOptions.NameChanged
         Select Case ucrInputCalOptions.GetText
             Case "Maths"
+                grpStatistics.Visible = False
                 grpMaths.Visible = True
                 grpLogical.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(601, 402)
+                grpStrings.Visible = False
+                Me.Size = New System.Drawing.Size(614, 402)
             Case "Logical"
+                grpStatistics.Visible = False
                 grpLogical.Visible = True
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(500, 402)
+                grpStrings.Visible = False
+                Me.Size = New System.Drawing.Size(520, 402)
+            Case "Statistics"
+                grpStatistics.Visible = True
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                Me.Size = New System.Drawing.Size(535, 402)
+                grpStrings.Visible = False
+            Case "Strings"
+                grpStrings.Visible = True
+                grpStatistics.Visible = False
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                Me.Size = New System.Drawing.Size(550, 402)
+
             Case Else
                 Me.Size = New System.Drawing.Size(436, 402)
+                grpStatistics.Visible = False
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
+                grpStrings.Visible = False
         End Select
     End Sub
 
+    Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi")
+    End Sub
 
+    Private Sub cmdCeiling_Click(sender As Object, e As EventArgs) Handles cmdCeiling.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ceiling()")
+    End Sub
+
+    Private Sub cmdRound_Click(sender As Object, e As EventArgs) Handles cmdRound.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round()")
+    End Sub
+
+    Private Sub cmdFloor_Click(sender As Object, e As EventArgs) Handles cmdFloor.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("floor()")
+    End Sub
+
+    Private Sub cmdTrunc_Click(sender As Object, e As EventArgs) Handles cmdTrunc.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trunc()")
+    End Sub
+
+    Private Sub cmdSign_Click(sender As Object, e As EventArgs) Handles cmdSign.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sign()")
+    End Sub
+
+    Private Sub cmdAcos_Click(sender As Object, e As EventArgs) Handles cmdAcos.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos()")
+    End Sub
+
+    Private Sub cmdAsin_Click(sender As Object, e As EventArgs) Handles cmdAsin.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin()")
+    End Sub
+
+    Private Sub cmdAtan_Click(sender As Object, e As EventArgs) Handles cmdAtan.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSiginf_Click(sender As Object, e As EventArgs) Handles cmdSiginf.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif()", 1)
+    End Sub
+
+    Private Sub cmdCos_Click(sender As Object, e As EventArgs) Handles cmdCos.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos()", 1)
+    End Sub
+
+    Private Sub cmdSin_Click(sender As Object, e As EventArgs) Handles cmdSin.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin()", 1)
+    End Sub
+
+    Private Sub cmdTan_Click(sender As Object, e As EventArgs) Handles cmdTan.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tan()")
+    End Sub
+
+    Private Sub cmdAbs_Click(sender As Object, e As EventArgs) Handles cmdAbs.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("abs()")
+    End Sub
+
+    Private Sub cmdExp_Click_1(sender As Object, e As EventArgs) Handles cmdExp.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp()")
+    End Sub
+
+    Private Sub cmdLogTen_Click(sender As Object, e As EventArgs) Handles cmdLogTen.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log10()")
+    End Sub
+
+    Private Sub cmdLog_Click(sender As Object, e As EventArgs) Handles cmdLog.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log()")
+    End Sub
+
+    Private Sub cmdSqrt_Click_1(sender As Object, e As EventArgs) Handles cmdSqrt.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt()")
+    End Sub
+
+    Private Sub cmdEquivalent_Click(sender As Object, e As EventArgs) Handles cmdEquivalent.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("==")
+    End Sub
+
+    Private Sub cmdNotEqualsTo_Click(sender As Object, e As EventArgs) Handles cmdNotEqualsTo.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("!=")
+    End Sub
+
+    Private Sub cmdNot_Click(sender As Object, e As EventArgs) Handles cmdNot.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("!")
+    End Sub
+
+    Private Sub cmdOr_Click(sender As Object, e As EventArgs) Handles cmdOr.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("|")
+    End Sub
+
+    Private Sub cmdLesserOrEqualsTo_Click(sender As Object, e As EventArgs) Handles cmdLesserOrEqualsTo.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<=")
+    End Sub
+
+    Private Sub cmdGreaterOrEqualsTo_Click(sender As Object, e As EventArgs) Handles cmdGreaterOrEqualsTo.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">=")
+    End Sub
+
+    Private Sub cmdModulas_Click(sender As Object, e As EventArgs) Handles cmdModulas.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%%")
+    End Sub
+
+    Private Sub cmdIntegerDivision_Click(sender As Object, e As EventArgs) Handles cmdIntegerDivision.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%/%")
+    End Sub
+
+    Private Sub cmdAnd_Click(sender As Object, e As EventArgs) Handles cmdAnd.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("&")
+    End Sub
+
+    Private Sub cmdCount_Click(sender As Object, e As EventArgs) Handles cmdCount.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("length()")
+    End Sub
+
+    Private Sub cmdMiss_Click(sender As Object, e As EventArgs) Handles cmdMiss.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na())")
+    End Sub
+
+    Private Sub cmdSum_Click(sender As Object, e As EventArgs) Handles cmdSum.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum()")
+    End Sub
+
+    Private Sub cmdMean_Click(sender As Object, e As EventArgs) Handles cmdMean.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean()")
+    End Sub
+
+    Private Sub cmdMax_Click(sender As Object, e As EventArgs) Handles cmdMax.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max()")
+    End Sub
+
+    Private Sub cmdMin_Click(sender As Object, e As EventArgs) Handles cmdMin.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min()")
+    End Sub
+
+    Private Sub cmdMedian_Click(sender As Object, e As EventArgs) Handles cmdMedian.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median")
+    End Sub
+
+    Private Sub cmdVar_Click(sender As Object, e As EventArgs) Handles cmdVar.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var()")
+    End Sub
+
+    Private Sub cmdSd_Click(sender As Object, e As EventArgs) Handles cmdSd.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd()")
+    End Sub
+
+    Private Sub cmdRange_Click(sender As Object, e As EventArgs) Handles cmdRange.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range()")
+    End Sub
+
+    Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()")
+    End Sub
+
+    Private Sub cmdIQR_Click(sender As Object, e As EventArgs) Handles cmdIQR.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR()")
+    End Sub
+
+    Private Sub cmdUpper_Click(sender As Object, e As EventArgs) Handles cmdUpper.Click
+
+    End Sub
+
+    Private Sub cmdLower_Click(sender As Object, e As EventArgs) Handles cmdLower.Click
+
+    End Sub
+
+    Private Sub cmdTitle_Click(sender As Object, e As EventArgs) Handles cmdTitle.Click
+
+    End Sub
+
+    Private Sub cmdTrim_Click(sender As Object, e As EventArgs) Handles cmdTrim.Click
+
+    End Sub
+
+    Private Sub cmdPad_Click(sender As Object, e As EventArgs) Handles cmdPad.Click
+
+    End Sub
+
+    Private Sub cmdOrder_Click(sender As Object, e As EventArgs) Handles cmdOrder.Click
+
+    End Sub
+
+    Private Sub cmdSort_Click(sender As Object, e As EventArgs) Handles cmdSort.Click
+
+    End Sub
+
+    Private Sub cmdReplace_Click(sender As Object, e As EventArgs) Handles cmdReplace.Click
+
+    End Sub
+
+    Private Sub cmdLocate_Click(sender As Object, e As EventArgs) Handles cmdLocate.Click
+
+    End Sub
+
+    Private Sub cmdLength_Click(sender As Object, e As EventArgs) Handles cmdLength.Click
+
+    End Sub
+
+    Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
+
+    End Sub
+
+    Private Sub cmdCountstrings_Click(sender As Object, e As EventArgs) Handles cmdCountstrings.Click
+
+    End Sub
+
+    Private Sub cmdDetect_Click(sender As Object, e As EventArgs) Handles cmdDetect.Click
+
+    End Sub
 End Class
