@@ -253,11 +253,11 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       ind = which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes = attributes(col)
+      col_attributes[[data_type_label]] <- class(col)
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
         if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
       }
-      col_attributes[[data_type_label]] <- class(col)
       #if(is.null(col_attributes)) {
       #  col_attributes <- data.frame(class = NA)
       #}
