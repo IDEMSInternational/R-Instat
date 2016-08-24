@@ -69,6 +69,7 @@ Public Class dlgDotPlot
         clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
         ucrVariablesAsFactorDotPlot.ResetControl()
+        sdgPlots.Reset()
         SetXParameter()
         TestOkEnabled()
     End Sub
@@ -99,7 +100,6 @@ Public Class dlgDotPlot
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        sdgPlots.Reset()
     End Sub
 
     Private Sub cmdDotPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdDotPlotOptions.Click
