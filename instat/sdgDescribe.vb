@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgDescribe
-    Public clsBase As New ucrButtons
+    Public clsBase As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -26,23 +26,28 @@ Public Class sdgDescribe
     End Sub
 
     Public Sub SetDefaults()
-        'bFirstLoad = True
         chkNTotal.Tag = "summary_count"
+        chkNonMissing.Tag = "summary_count_non_missing"
+        chkNMissing.Tag = "summary_count_missing"
         chkMean.Tag = "summary_mean"
         chkMinimum.Tag = "summary_min"
+        chkMode.Tag = "summary_mode"
         chkMaximum.Tag = "summary_max"
         chkMedian.Tag = "summary_median"
         chkStdDev.Tag = "summary_sd"
         chkRange.Tag = "summary_range"
+        chkSum.Tag = "summary_sum"
         chkMean.Checked = True
         chkStdDev.Checked = True
+        chkMode.Checked = True
         chkMinimum.Checked = True
         chkMaximum.Checked = True
         chkNMissing.Checked = True
-        chkN.Checked = True
+        chkNonMissing.Checked = True
         chkNTotal.Checked = True
         chkMedian.Checked = True
         chkRange.Checked = True
+        chkSum.Checked = True
         SummariesParameters()
     End Sub
 
@@ -52,7 +57,7 @@ Public Class sdgDescribe
         Dim strSummariesParameter As String = ""
         Dim i As Integer = 0
         If lstCheckboxes.Count = 0 Then
-            lstCheckboxes.AddRange({chkMean, chkMinimum, chkMaximum, chkRange, chkStdDev, chkNTotal, chkMedian})
+            lstCheckboxes.AddRange({chkMean, chkMode, chkMinimum, chkMaximum, chkRange, chkStdDev, chkNTotal, chkMedian, chkQuartiles, chkNonMissing, chkNMissing, chkSum})
         End If
 
         strSummariesParameter = "c("
@@ -67,18 +72,18 @@ Public Class sdgDescribe
         Next
         strSummariesParameter = strSummariesParameter & ")"
         If i > 0 Then
-            clsBase.clsRsyntax.AddParameter("summaries", strSummariesParameter)
+            clsBase.AddParameter("summaries", strSummariesParameter)
         Else
-            clsBase.clsRsyntax.RemoveParameter("summaries")
+            clsBase.RemoveParameterByName("summaries")
         End If
     End Sub
 
-    Public Sub SetUcrBase(clsNewBase As ucrButtons)
+
+    Public Sub SetUcrBase(clsNewBase As RFunction)
         clsBase = clsNewBase
     End Sub
 
-    Private Sub grpSummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkMean.CheckedChanged, chkMinimum.CheckedChanged, chkMaximum.CheckedChanged, chkMedian.CheckedChanged, chkRange.CheckedChanged, chkNTotal.CheckedChanged, chkStdDev.CheckedChanged, chkN.CheckedChanged, chkNMissing.CheckedChanged
+    Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkMinimum.CheckedChanged, chkMaximum.CheckedChanged, chkSum.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged
         SummariesParameters()
-        'dlgDescribeTwoVariable.
     End Sub
 End Class

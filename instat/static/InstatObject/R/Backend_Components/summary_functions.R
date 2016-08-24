@@ -99,6 +99,58 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
 }
 )
 
+instat_object$set("public", "summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = FALSE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
+  calculated_from = list()
+  calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
+  #TODO Change this to store sub_calculations for each column
+  alltypes_collection = c(count_non_missing_label, count_missing_label, count_label, mode_label)
+  numeric_collection = c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label)
+  factor_collection =  c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
+  i = 1
+  for(col_new in columns_to_summarise){
+    col_data_type = self$get_variables_metadata(data_name = data_name, column = col_new, property = data_type_label)
+    if(col_data_type == "numeric" || col_data_type == "integer"){
+      column_summaries = intersect(summaries, numeric_collection)
+    }
+    else if(col_data_type == "factor"){
+      column_summaries = intersect(summaries, factor_collection)
+    }
+    else if(col_data_type == "character"){
+      column_summaries = intersect(summaries, alltypes_collection)
+    }
+    else if(col_data_type == "logical"){
+      #To be defined
+    }
+    else if(col_data_type == "Date"){
+      #To be defined
+    }
+    calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = column_summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
+    results <- self$apply_calculation(calc)
+    if(!is.null(results)){
+      results<-as.data.frame(t(results[,-1]))
+      #row_names(results) <- get_summary_calculation_names(calc, column_summaries, col_new, calc_filters)
+      names( results) <- col_new
+      #use summaries as row names for now. This needs to change in the long run
+      row.names( results) <- column_summaries
+      if(i == 1) {
+        calc_columns <- results
+      }
+      else {
+        calc_columns <- merge(calc_columns, results, by=0, all=TRUE, sort = FALSE)#Sort should be user defined
+        #we need to clarify which filters are being used
+        rownames(calc_columns)=calc_columns$Row.names
+        calc_columns<-calc_columns[,-1]
+      }
+      i = i + 1
+    }
+    else{
+      warning("There is no output to return")
+    }
+  }
+  return(calc_columns)
+}
+)
+
 data_object$set("public", "calculate_summary", function(calc, ...) {
   columns_to_summarise = calc[["parameters"]][["columns_to_summarise"]]
   summaries = calc[["parameters"]][["summaries"]]
@@ -198,6 +250,7 @@ all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_n
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
+  if(is.factor(x)) out <- as.character(out)
   if(is.null(out)) return(NA)
   else return(out)
 }
