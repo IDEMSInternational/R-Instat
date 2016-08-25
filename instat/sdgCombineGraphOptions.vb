@@ -20,6 +20,21 @@ Public Class sdgCombineGraphOptions
     Public clsRsyntax As New RSyntax
     Private WithEvents grdCurrSheet As Worksheet
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        grdLayout.SetSettings(WorkbookSettings.View_ShowSheetTabControl, False)
+        grdLayout.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
+        grdLayout.SheetTabNewButtonVisible = False
+        grdCurrSheet = grdLayout.CurrentWorksheet
+        nudRows.Minimum = 1
+        nudRows.Minimum = 1
+        grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+    End Sub
+
     Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -39,13 +54,8 @@ Public Class sdgCombineGraphOptions
     End Sub
 
     Private Sub InitialiseDialog()
-        grdLayout.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
-        grdLayout.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
-        grdLayout.SheetTabNewButtonVisible = False
-        grdCurrSheet = grdLayout.CurrentWorksheet
-        nudRows.Minimum = 1
-        nudRows.Minimum = 1
-        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.Rows = nudRows.Value
+        grdCurrSheet.Columns = nudColumns.Value
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
@@ -92,7 +102,9 @@ Public Class sdgCombineGraphOptions
         Else
             clsRsyntax.RemoveParameter("nrow")
         End If
-        'grdCurrSheet.Rows = nudRows.Value
+        If grdCurrSheet IsNot Nothing Then
+            grdCurrSheet.Rows = nudRows.Value
+        End If
     End Sub
 
     Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
@@ -101,7 +113,10 @@ Public Class sdgCombineGraphOptions
         Else
             clsRsyntax.RemoveParameter("ncol")
         End If
-        'grdCurrSheet.Columns = nudColumns.Value
+
+        If grdCurrSheet IsNot Nothing Then
+            grdCurrSheet.Columns = nudColumns.Value
+        End If
 
     End Sub
 
@@ -118,13 +133,14 @@ Public Class sdgCombineGraphOptions
         If Not IsNumeric(e.NewData) Then
             MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric character. Please enter a numeric character withinthe range of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
             e.EndReason = EndEditReason.Cancel
-        ElseIf e.NewData > lstGraphs.Items.Count Then
+        ElseIf e.NewData > lstGraphs.Items.Count Or e.NewData < 1 Then
             MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
             e.EndReason = EndEditReason.Cancel
         End If
     End Sub
     Public Sub LoadGraphs()
         Dim i As Integer = 0
+        lstGraphs.Items.Clear()
         For i = 0 To dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count - 1
             lstGraphs.Items.Add((i + 1) & Chr(32) & "." & dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items(i).Text)
         Next
