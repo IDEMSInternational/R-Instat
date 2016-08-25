@@ -640,6 +640,16 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
+instat_object$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name) {
+  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name)
+} 
+)
+
+instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name) {
+  self$get_data_objects(data_name)$anova_tables(x_col_names, y_col_name)
+} 
+)
+
 #TODO remove this method
 instat_object$set("public", "remove_columns_in_data_from_start_position", function(data_name, start_pos, col_numbers) {
   self$get_data_objects(data_name)$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
