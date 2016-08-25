@@ -1013,4 +1013,8 @@ Public Class frmMain
     Private Sub mnuDescribeTwoVariablesSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesSummarise.Click
         dlgDescribeTwoVariable.ShowDialog()
     End Sub
+
+    Private Sub mnuAppendDataFrame_Click(sender As Object, e As EventArgs) Handles mnuAppendDataFrame.Click
+        dlgAppend.ShowDialog()
+    End Sub
 End Class
