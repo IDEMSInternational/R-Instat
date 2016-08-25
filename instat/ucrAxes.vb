@@ -40,6 +40,9 @@ Public Class ucrAxes
         ScalesDefaults()
         TickMarkersDefaults()
     End Sub
+    Public Sub Reset()
+        SetDefaults()
+    End Sub
 
     Private Sub InitialiseControl()
         ucrTickMarkers.cboInput.Items.Add("Interval")

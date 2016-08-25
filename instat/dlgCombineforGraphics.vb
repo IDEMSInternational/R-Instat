@@ -16,7 +16,6 @@
 Imports instat.Translations
 Public Class dlgCombineforGraphics
     Private bFirstLoad As Boolean = True
-    Public clsListFunction As New RFunction
     Private Sub dlgCombineforGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -34,10 +33,10 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 430
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
+        ucrSaveCombinedGraph.strPrefix = "CombineGraph"
         ucrSaveCombinedGraph.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
         sdgCombineGraphOptions.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.SetFunction("gridExtra::grid.arrange")
-        clsListFunction.SetRCommand("list")
     End Sub
 
     Private Sub SetDefaults()
@@ -66,6 +65,7 @@ Public Class dlgCombineforGraphics
     Private Sub ucrCombineGraphReceiver_SelectionChanged() Handles ucrCombineGraphReceiver.SelectionChanged
         If Not ucrCombineGraphReceiver.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("grobs", clsRFunctionParameter:=ucrCombineGraphReceiver.GetVariables())
+            sdgCombineGraphOptions.SetDefaultRowAndColumns()
         Else
             ucrBase.clsRsyntax.RemoveParameter("grobs")
         End If
