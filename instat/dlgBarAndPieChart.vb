@@ -41,6 +41,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.Focus()
         ucrFactorReceiver.SetMeAsReceiver()
+        sdgPlots.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
