@@ -57,7 +57,6 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 1
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
         ucrReceiverForCalculation.SetMeAsReceiver()
         clsAttach.SetRCommand("attach")
@@ -519,7 +518,7 @@ Public Class dlgCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
         End If
-        ucrBase.clsRsyntax.iCallType = 2
+        '  ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub cmdIQR_Click(sender As Object, e As EventArgs) Handles cmdIQR.Click
@@ -531,55 +530,109 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdUpper_Click(sender As Object, e As EventArgs) Handles cmdUpper.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_to_upper(string= , locale='')", 12)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_to_upper()", 1)
+        End If
     End Sub
 
     Private Sub cmdLower_Click(sender As Object, e As EventArgs) Handles cmdLower.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_to_lower(string= , locale='')", 12)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_to_lower()", 1)
+        End If
     End Sub
 
     Private Sub cmdTitle_Click(sender As Object, e As EventArgs) Handles cmdTitle.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_to_title(string= , locale='')", 12)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_to_title()", 1)
+        End If
     End Sub
 
     Private Sub cmdTrim_Click(sender As Object, e As EventArgs) Handles cmdTrim.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_trim(string= , side = c('both', 'left', 'right))", 35)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_trim()", 1)
+        End If
     End Sub
 
     Private Sub cmdPad_Click(sender As Object, e As EventArgs) Handles cmdPad.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_pad(string= , width= , side = c('left', 'right', 'both'))", 46)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_pad()", 1)
+        End If
     End Sub
 
     Private Sub cmdOrder_Click(sender As Object, e As EventArgs) Handles cmdOrder.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_order(x= , decreasing = FALSE, na_last = TRUE, locale = '')", 50)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_order()", 1)
+        End If
     End Sub
 
     Private Sub cmdSort_Click(sender As Object, e As EventArgs) Handles cmdSort.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_sort(x= ,decreasing = FALSE, na_last = TRUE, locale = '',)", 50)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_sort()", 1)
+        End If
     End Sub
 
     Private Sub cmdReplace_Click(sender As Object, e As EventArgs) Handles cmdReplace.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace(string= ,pattern= ,replacement= )", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace()", 1)
+        End If
     End Sub
 
     Private Sub cmdLocate_Click(sender As Object, e As EventArgs) Handles cmdLocate.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate(string= , pattern= )", 12)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate()", 1)
+        End If
     End Sub
 
     Private Sub cmdLength_Click(sender As Object, e As EventArgs) Handles cmdLength.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length(string= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length()", 1)
+        End If
     End Sub
 
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract(string= , pattern= )", 12)
 
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract()", 1)
+        End If
     End Sub
 
     Private Sub cmdCountstrings_Click(sender As Object, e As EventArgs) Handles cmdCountstrings.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_count(String= , pattern ='')", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_count()", 1)
+        End If
 
     End Sub
 
     Private Sub cmdDetect_Click(sender As Object, e As EventArgs) Handles cmdDetect.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_detect(string= , pattern= )", 12)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_detect()", 1)
+        End If
     End Sub
 
 End Class
