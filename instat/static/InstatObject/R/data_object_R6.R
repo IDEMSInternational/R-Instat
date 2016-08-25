@@ -417,6 +417,22 @@ data_object$set("public", "get_columns_from_data", function(col_names, force_as_
 }
 )
 
+data_object$set("public", "frequency_tables", function(x_col_names, y_col_name) {
+  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  for (i in 1:length(x_col_names)){
+    print(table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
+  }
+}
+)
+
+data_object$set("public", "anova_tables", function(x_col_names, y_col_name) {
+  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  for (i in 1:length(x_col_names)){
+    print(summary(aov(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data)))
+  }
+}
+)
+
 data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name="") {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
