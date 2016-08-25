@@ -64,6 +64,7 @@ Public Class dlgCumulativeDistribution
         chkCountsOnYAxis.Checked = False
         chkExceedancePlots.Checked = False
         chkIncludePoints.Checked = False
+        sdgPlots.Reset()
         TestOkEnabled()
     End Sub
 
