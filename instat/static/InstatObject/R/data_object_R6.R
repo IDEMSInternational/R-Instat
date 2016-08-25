@@ -5,18 +5,24 @@ data_object <- R6Class("data_object",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), objects = list(),
-                                                 calculations = list(), keys = list())
+                                                 calculations = list(), keys = list(), keep_attributes = TRUE)
 {
                              
   # Set up the data object
-  self$set_data(data, messages)                           
+  self$set_data(data, messages)
   self$set_changes(list())
   #removed until this can be fixed.
   #self$set_variables_metadata(variables_metadata)
   
   # Set first so that "no_filter" is added
   self$set_filters(filters)
-  self$set_meta(metadata)
+  if(keep_attributes) {
+    self$set_meta(c(attributes(private$data), metadata))
+  }
+  else {
+    self$set_meta(metadata)
+    self$clear_variables_metadata()
+  }
   self$add_defaults_meta()
   self$add_defaults_variables_metadata()
   #self$update_variables_metadata()
@@ -116,14 +122,23 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
 }
 )
 
-# Now merging and not setting because don't want to replace attributes
-# maybe should be renamed?
 data_object$set("public", "set_meta", function(new_meta) {
+  self$clear_metadata()
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
   for(name in names(new_meta)) {
     self$append_to_metadata(name, new_meta[[name]])
   }
-  #private$metadata <- new_meta
+  self$metadata_changed <- TRUE
+  self$append_to_changes(list(Set_property, "meta data"))
+}
+)
+
+#Dangerous to call directly as could remove properties needed by InstatObject
+data_object$set("public", "clear_metadata", function() {
+  for(name in names(attributes(private$data))) {
+    if(!name %in% c(data_type_label, data_name_label, "row.names", "names")) attr(private$data, name) <- NULL
+  }
+  self$add_defaults_meta()
   self$metadata_changed <- TRUE
   self$append_to_changes(list(Set_property, "meta data"))
 }
@@ -253,6 +268,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       ind = which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes = attributes(col)
+      if(is.null(col_attributes)) col_attributes <- list()
       col_attributes[[data_type_label]] <- class(col)
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
@@ -291,6 +307,16 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
     else return(out)
   }
+}
+)
+
+data_object$set("public", "clear_variables_metadata", function() {
+  for(column in self$get_data_frame(use_current_filter = FALSE)) {
+    for(name in names(attributes(column))) {
+      if(!name  %in% c(data_type_label, data_name_label)) attr(self, name) <- NULL
+    }
+  }
+  self$add_defaults_variables_metadata()
 }
 )
 
@@ -641,7 +667,6 @@ data_object$set("public", "append_to_metadata", function(property, new_value = "
 )
 
 data_object$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
-  
   if(missing(property)) stop("property must be specified.")
   if(!is.character(property)) stop("property must be a character")
   if(!missing(col_names)) {
@@ -692,10 +717,12 @@ data_object$set("public", "add_defaults_meta", function() {
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
   invisible(sapply(colnames(self$get_data_frame(use_current_filter = FALSE)), function(x) self$append_to_variables_metadata(x, name_label, x)))
-  has_hidden <- self$is_variables_metadata(is_hidden_label) && self$iget_variables_metadata(property = is_hidden_label)
+  has_hidden <- self$is_variables_metadata(is_hidden_label) && self$get_variables_metadata(property = is_hidden_label)
   if(has_hidden) {
     for(column in colnames(self$get_data_frame(use_current_filter = FALSE))) {
-      if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+      if(!self$is_variables_metadata(is_hidden_label, column)) {
+        self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+      }
     }
   }
   else self$append_to_variables_metadata(property = is_hidden_label, new_val = FALSE)
@@ -1170,6 +1197,7 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
 )
 
 data_object$set("public", "filter_applied", function() {
+  print(private$.current_filter)
   return(!private$.current_filter$parameters[["is_no_filter"]])
 }
 )
@@ -1275,11 +1303,29 @@ data_object$set("public", "reorder_objects", function(new_order) {
 }
 )
 
-data_object$set("public", "data_clone", function() {
-  #TODO somethings are not being copied over yet:
-  #     current_filter, changes list,
-  filters_clone = lapply(private$filters, function(x) x$data_clone())
-  ret = data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), variables_metadata = private$variables_metadata, filters = filters_clone, objects = private$objects)
+data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE) {
+  print("ye")
+  if(include_objects) new_objects <- private$objects
+  else new_objects <- list()
+  if(include_filters) new_filters <- lapply(private$filters, function(x) x$data_clone())
+  else new_filters <- list()
+  if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
+  else new_calculations <- list()
+  
+  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, keep_attributes = include_metadata)
+  if(include_logs) ret$set_changes(private$changes)
+  else ret$set_changes(list())
+  if(include_filters) ret$current_filter <- self$get_current_filter()
+  else {
+    ret$remove_current_filter()
+  }
+  if(!include_metadata) {
+    self$clear_metadata()
+    self$clear_variables_metadata()
+  }
+  ret$data_changed <- TRUE
+  ret$metadata_changed <- TRUE
+  ret$variables_metadata_changed <- TRUE
   return(ret)
 }
 )
