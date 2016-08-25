@@ -43,6 +43,16 @@ calculation$set("public", "add_sub_calculation", function(sub_calculation, name)
 }
 )
 
+calculation$set("public", "data_clone", function() {
+  ret <- calculation$new(function_name = self$function_name, parameters = self$parameters, 
+                         calculated_from = self$calculated_from, is_recalculable = self$is_recalculable,
+                         sub_calculations = self$sub_calculations, type = self$type, 
+                         filter_conditions = self$filter_conditions, filters = self$filters,
+                         name = self$name)
+  return(ret)
+}
+)
+
 # calculation$set("public", "data_clone", function() {
 #   ret = calculation$new(function_name = private$function_name, parameters = private$parameters, calculated_from = private$calculated_from, is_recalculable = private$is_recalculable, sub_calculations = private$sub_calculations, type = private$type, filter_conditions = private$.filter_conditions)
 #   sub_calculations[[name]] <- sub_calculation
