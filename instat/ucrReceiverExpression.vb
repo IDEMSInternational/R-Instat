@@ -77,15 +77,15 @@ Public Class ucrReceiverExpression
         End If
     End Sub
 
-    Public Sub AddToReceiverAtPosition(strText As String, iPosition As Integer)
+    Public Sub AddToReceiverAtPosition(strText As String, iPosition As Integer, Optional iSetCursorBackCharacters As Integer = 0)
         cboExpression.Text = cboExpression.Text.Insert(iPosition, strText)
-        iCurrentPosition = iCurrentPosition + strText.Length
+        iCurrentPosition = iPosition + strText.Length - iSetCursorBackCharacters
         cboExpression.SelectionStart = iCurrentPosition
         cboExpression.SelectedText = ""
     End Sub
 
-    Public Sub AddToReceiverAtCursorPosition(strText As String)
-        AddToReceiverAtPosition(strText, iCurrentPosition)
+    Public Sub AddToReceiverAtCursorPosition(strText As String, Optional iSetCursorBackCharacters As Integer = 0)
+        AddToReceiverAtPosition(strText, iCurrentPosition, iSetCursorBackCharacters)
     End Sub
 
     Public Overrides Sub RemoveSelected()
