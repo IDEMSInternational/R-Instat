@@ -60,8 +60,6 @@ Public Class ucrAdditionalLayers
     Private Sub InitialiseControl()
 
     End Sub
-
-
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
         sdgLayerOptions.ShowDialog()
@@ -129,4 +127,9 @@ Public Class ucrAdditionalLayers
         sdgLayerOptions.ShowDialog()
         AddLayers(lstLayers.SelectedItems(0))
     End Sub
+
+    Public Sub Reset()
+        lstLayers.Clear()
+    End Sub
+
 End Class
