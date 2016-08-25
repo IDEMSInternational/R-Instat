@@ -29,16 +29,17 @@ Partial Class sdgCombineGraphOptions
         Me.nudColumns = New System.Windows.Forms.NumericUpDown()
         Me.nudRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpLabels = New System.Windows.Forms.TabPage()
-        Me.ucrInputLeft = New instat.ucrInputTextBox()
-        Me.ucrInputRight = New instat.ucrInputTextBox()
-        Me.ucrInputBottom = New instat.ucrInputTextBox()
-        Me.ucrInputTop = New instat.ucrInputTextBox()
         Me.lblLeft = New System.Windows.Forms.Label()
         Me.LblRight = New System.Windows.Forms.Label()
         Me.lblBottom = New System.Windows.Forms.Label()
         Me.lblTop = New System.Windows.Forms.Label()
-        Me.ucrsdgLayoutBase = New instat.ucrButtonsSubdialogue()
         Me.grdLayout = New unvell.ReoGrid.ReoGridControl()
+        Me.ucrInputLeft = New instat.ucrInputTextBox()
+        Me.ucrInputRight = New instat.ucrInputTextBox()
+        Me.ucrInputBottom = New instat.ucrInputTextBox()
+        Me.ucrInputTop = New instat.ucrInputTextBox()
+        Me.ucrsdgLayoutBase = New instat.ucrButtonsSubdialogue()
+        Me.lstGraphs = New System.Windows.Forms.ListBox()
         Me.tbcLayout.SuspendLayout()
         Me.tbpLayout.SuspendLayout()
         CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -53,11 +54,12 @@ Partial Class sdgCombineGraphOptions
         Me.tbcLayout.Location = New System.Drawing.Point(13, 13)
         Me.tbcLayout.Name = "tbcLayout"
         Me.tbcLayout.SelectedIndex = 0
-        Me.tbcLayout.Size = New System.Drawing.Size(259, 183)
+        Me.tbcLayout.Size = New System.Drawing.Size(379, 182)
         Me.tbcLayout.TabIndex = 0
         '
         'tbpLayout
         '
+        Me.tbpLayout.Controls.Add(Me.lstGraphs)
         Me.tbpLayout.Controls.Add(Me.lblNumberofColumns)
         Me.tbpLayout.Controls.Add(Me.lblNumberofRows)
         Me.tbpLayout.Controls.Add(Me.nudColumns)
@@ -65,7 +67,7 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLayout.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayout.Name = "tbpLayout"
         Me.tbpLayout.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayout.Size = New System.Drawing.Size(251, 157)
+        Me.tbpLayout.Size = New System.Drawing.Size(371, 156)
         Me.tbpLayout.TabIndex = 0
         Me.tbpLayout.Text = "Layout"
         Me.tbpLayout.UseVisualStyleBackColor = True
@@ -122,38 +124,6 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLabels.Text = "Labels"
         Me.tbpLabels.UseVisualStyleBackColor = True
         '
-        'ucrInputLeft
-        '
-        Me.ucrInputLeft.IsReadOnly = False
-        Me.ucrInputLeft.Location = New System.Drawing.Point(79, 99)
-        Me.ucrInputLeft.Name = "ucrInputLeft"
-        Me.ucrInputLeft.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLeft.TabIndex = 1
-        '
-        'ucrInputRight
-        '
-        Me.ucrInputRight.IsReadOnly = False
-        Me.ucrInputRight.Location = New System.Drawing.Point(79, 69)
-        Me.ucrInputRight.Name = "ucrInputRight"
-        Me.ucrInputRight.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRight.TabIndex = 1
-        '
-        'ucrInputBottom
-        '
-        Me.ucrInputBottom.IsReadOnly = False
-        Me.ucrInputBottom.Location = New System.Drawing.Point(79, 37)
-        Me.ucrInputBottom.Name = "ucrInputBottom"
-        Me.ucrInputBottom.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputBottom.TabIndex = 1
-        '
-        'ucrInputTop
-        '
-        Me.ucrInputTop.IsReadOnly = False
-        Me.ucrInputTop.Location = New System.Drawing.Point(79, 6)
-        Me.ucrInputTop.Name = "ucrInputTop"
-        Me.ucrInputTop.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTop.TabIndex = 1
-        '
         'lblLeft
         '
         Me.lblLeft.AutoSize = True
@@ -190,19 +160,12 @@ Partial Class sdgCombineGraphOptions
         Me.lblTop.TabIndex = 0
         Me.lblTop.Text = "Top"
         '
-        'ucrsdgLayoutBase
-        '
-        Me.ucrsdgLayoutBase.Location = New System.Drawing.Point(60, 202)
-        Me.ucrsdgLayoutBase.Name = "ucrsdgLayoutBase"
-        Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrsdgLayoutBase.TabIndex = 1
-        '
         'grdLayout
         '
         Me.grdLayout.BackColor = System.Drawing.Color.White
         Me.grdLayout.ColumnHeaderContextMenuStrip = Nothing
         Me.grdLayout.LeadHeaderContextMenuStrip = Nothing
-        Me.grdLayout.Location = New System.Drawing.Point(12, 238)
+        Me.grdLayout.Location = New System.Drawing.Point(12, 201)
         Me.grdLayout.Name = "grdLayout"
         Me.grdLayout.RowHeaderContextMenuStrip = Nothing
         Me.grdLayout.Script = Nothing
@@ -214,13 +177,60 @@ Partial Class sdgCombineGraphOptions
         Me.grdLayout.TabIndex = 2
         Me.grdLayout.Text = "ReoGridControl1"
         '
+        'ucrInputLeft
+        '
+        Me.ucrInputLeft.IsReadOnly = False
+        Me.ucrInputLeft.Location = New System.Drawing.Point(79, 99)
+        Me.ucrInputLeft.Name = "ucrInputLeft"
+        Me.ucrInputLeft.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLeft.TabIndex = 1
+        '
+        'ucrInputRight
+        '
+        Me.ucrInputRight.IsReadOnly = False
+        Me.ucrInputRight.Location = New System.Drawing.Point(79, 69)
+        Me.ucrInputRight.Name = "ucrInputRight"
+        Me.ucrInputRight.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRight.TabIndex = 1
+        '
+        'ucrInputBottom
+        '
+        Me.ucrInputBottom.IsReadOnly = False
+        Me.ucrInputBottom.Location = New System.Drawing.Point(79, 37)
+        Me.ucrInputBottom.Name = "ucrInputBottom"
+        Me.ucrInputBottom.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputBottom.TabIndex = 1
+        '
+        'ucrInputTop
+        '
+        Me.ucrInputTop.IsReadOnly = False
+        Me.ucrInputTop.Location = New System.Drawing.Point(79, 6)
+        Me.ucrInputTop.Name = "ucrInputTop"
+        Me.ucrInputTop.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTop.TabIndex = 1
+        '
+        'ucrsdgLayoutBase
+        '
+        Me.ucrsdgLayoutBase.Location = New System.Drawing.Point(60, 416)
+        Me.ucrsdgLayoutBase.Name = "ucrsdgLayoutBase"
+        Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrsdgLayoutBase.TabIndex = 3
+        '
+        'lstGraphs
+        '
+        Me.lstGraphs.FormattingEnabled = True
+        Me.lstGraphs.Location = New System.Drawing.Point(207, 7)
+        Me.lstGraphs.Name = "lstGraphs"
+        Me.lstGraphs.Size = New System.Drawing.Size(120, 134)
+        Me.lstGraphs.TabIndex = 2
+        '
         'sdgCombineGraphOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(404, 450)
-        Me.Controls.Add(Me.grdLayout)
         Me.Controls.Add(Me.ucrsdgLayoutBase)
+        Me.Controls.Add(Me.grdLayout)
         Me.Controls.Add(Me.tbcLayout)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgCombineGraphOptions"
@@ -244,7 +254,6 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents nudColumns As NumericUpDown
     Friend WithEvents nudRows As NumericUpDown
     Friend WithEvents tbpLabels As TabPage
-    Friend WithEvents ucrsdgLayoutBase As ucrButtonsSubdialogue
     Friend WithEvents ucrInputLeft As ucrInputTextBox
     Friend WithEvents ucrInputRight As ucrInputTextBox
     Friend WithEvents ucrInputBottom As ucrInputTextBox
@@ -254,4 +263,6 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents lblBottom As Label
     Friend WithEvents lblTop As Label
     Friend WithEvents grdLayout As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents ucrsdgLayoutBase As ucrButtonsSubdialogue
+    Friend WithEvents lstGraphs As ListBox
 End Class

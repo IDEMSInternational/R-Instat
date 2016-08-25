@@ -27,6 +27,7 @@ Public Class sdgCombineGraphOptions
             bFirstLoad = False
         End If
         Me.BringToFront()
+        LoadGraphs()
     End Sub
 
     Public Sub SetDefaults()
@@ -42,6 +43,8 @@ Public Class sdgCombineGraphOptions
         grdLayout.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
         grdLayout.SheetTabNewButtonVisible = False
         grdCurrSheet = grdLayout.CurrentWorksheet
+        nudRows.Minimum = 1
+        nudRows.Minimum = 1
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
     End Sub
 
@@ -89,6 +92,7 @@ Public Class sdgCombineGraphOptions
         Else
             clsRsyntax.RemoveParameter("nrow")
         End If
+        'grdCurrSheet.Rows = nudRows.Value
     End Sub
 
     Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
@@ -97,6 +101,8 @@ Public Class sdgCombineGraphOptions
         Else
             clsRsyntax.RemoveParameter("ncol")
         End If
+        'grdCurrSheet.Columns = nudColumns.Value
+
     End Sub
 
     Public Sub SetDefaultRowAndColumns()
@@ -109,6 +115,18 @@ Public Class sdgCombineGraphOptions
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
-
+        If Not IsNumeric(e.NewData) Then
+            MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric character. Please enter a numeric character withinthe range of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
+            e.EndReason = EndEditReason.Cancel
+        ElseIf e.NewData > lstGraphs.Items.Count Then
+            MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
+            e.EndReason = EndEditReason.Cancel
+        End If
+    End Sub
+    Public Sub LoadGraphs()
+        Dim i As Integer = 0
+        For i = 0 To dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count - 1
+            lstGraphs.Items.Add((i + 1) & Chr(32) & "." & dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items(i).Text)
+        Next
     End Sub
 End Class
