@@ -123,7 +123,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputName.IsEmpty AndAlso bCanImport Then
+        If (Not ucrInputName.IsEmpty OrElse strFileType = "RDS") AndAlso bCanImport Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -161,10 +161,14 @@ Public Class dlgImportDataset
                 ucrInputFilePath.SetName(strFilePath)
                 grdDataPreview.Show()
                 txtPreview.Show()
+                ucrInputName.Show()
+                lblName.Show()
                 If strFileExt = ".RDS" Then
                     clsReadRDS.SetRCommand("readRDS")
                     clsReadRDS.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                    clsReadRDS.SetAssignTo(strFileName)
+                    'TODO This needs to be different when RDS is a data frame
+                    'need to be able to detect RDS as data.frame/Instat Object
+                    clsReadRDS.SetAssignTo("new_RDS")
                     grpExcel.Hide()
                     grpCSV.Hide()
                     grpRDS.Show()
@@ -175,7 +179,9 @@ Public Class dlgImportDataset
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
                     ucrBase.clsRsyntax.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
                     strFileType = "RDS"
-                    ucrInputName.SetName(strFileName, bSilent:=True)
+                    ucrInputName.Hide()
+                    lblName.Hide()
+                    'ucrInputName.SetName(strFileName, bSilent:=True)
                 ElseIf strFileExt = ".csv" Then
                     clsReadCSV.SetRCommand("rio::import")
                     clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
@@ -188,6 +194,7 @@ Public Class dlgImportDataset
                     strFileType = "csv"
                     ucrInputName.SetName(strFileName, bSilent:=True)
                     RefreshFilePreview()
+                    ucrInputName.Focus()
                 ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
                     clsReadXL.SetRCommand("rio::import")
                     clsReadXL.AddParameter("file", Chr(34) & strFilePath & Chr(34))
@@ -204,6 +211,7 @@ Public Class dlgImportDataset
                         strFileType = "xls"
                     End If
                     FillExcelSheetsAndRegions(strFilePath)
+                    ucrInputName.Focus()
                     'ucrInputName.SetName(strFileName, bSilent:=True)
                 Else
                     ucrBase.clsRsyntax.SetFunction("rio::import")
@@ -214,10 +222,10 @@ Public Class dlgImportDataset
                     grdDataPreview.Show()
                     txtPreview.Hide()
                     ucrInputName.SetName(strFileName, bSilent:=True)
+                    ucrInputName.Focus()
                 End If
                 RefreshFilePreview()
                 RefreshFrameView()
-                ucrInputName.Focus()
             End If
         Else
             If ucrInputFilePath.GetText() = "" Then
@@ -252,7 +260,7 @@ Public Class dlgImportDataset
                 bCanImport = False
             End Try
         Else
-            txtPreview.Text = ""
+            txtPreview.Text = "Preview only available for text files"
         End If
     End Sub
 
@@ -304,8 +312,9 @@ Public Class dlgImportDataset
         Else
             bCanImport = True
             lblCannotImport.Hide()
+            lblNoPreview.Show()
             grdDataPreview.CurrentWorksheet.Reset()
-            grdDataPreview.Hide()
+            grdDataPreview.Show()
         End If
         If grdDataPreview.CurrentWorksheet IsNot Nothing Then
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
@@ -317,17 +326,18 @@ Public Class dlgImportDataset
 
 #Region "RDS options"
     Private Sub SetRDSDefaults()
-        chkExisting.Checked = True
-        chkKeepObjects.Checked = True
-        chkMetadata.Checked = True
-        chkLogs.Checked = True
-        chkKeepFilters.Checked = True
+        chkExistingData.Checked = True
+        chkImportObjects.Checked = True
+        chkImportMetadata.Checked = True
+        chkImportChangesLog.Checked = True
+        chkImportFilters.Checked = True
+        chkImportCalculations.Checked = True
         chkOverWrite.Checked = False
     End Sub
 
 
-    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExisting.CheckStateChanged
-        If chkExisting.Checked Then
+    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExistingData.CheckedChanged
+        If chkExistingData.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("keep_existing", "TRUE")
             Else
@@ -338,8 +348,8 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkLogs_CheckStateChanged(sender As Object, e As EventArgs) Handles chkLogs.CheckStateChanged
-        If chkLogs.Checked Then
+    Private Sub chkLogs_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportChangesLog.CheckedChanged
+        If chkImportChangesLog.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("include_logs", "TRUE")
             Else
@@ -350,7 +360,7 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkOverWrite_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOverWrite.CheckStateChanged
+    Private Sub chkOverWrite_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOverWrite.CheckedChanged
         If chkOverWrite.Checked Then
             clsImportRDS.AddParameter("overwrite_existing", "TRUE")
         Else
@@ -362,8 +372,8 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles chkMetadata.CheckStateChanged
-        If chkMetadata.Checked Then
+    Private Sub chkMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportMetadata.CheckedChanged
+        If chkImportMetadata.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("include_metadata", "TRUE")
             Else
@@ -374,8 +384,8 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkKeepFilters_CheckedChanged(sender As Object, e As EventArgs) Handles chkKeepFilters.CheckedChanged
-        If chkKeepFilters.Checked Then
+    Private Sub chkKeepFilters_CheckedChanged(sender As Object, e As EventArgs) Handles chkImportFilters.CheckedChanged
+        If chkImportFilters.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("include_filters", "TRUE")
             Else
@@ -386,9 +396,20 @@ Public Class dlgImportDataset
         End If
     End Sub
 
+    Private Sub chkImportCalculations_CheckedChanged(sender As Object, e As EventArgs) Handles chkImportCalculations.CheckedChanged
+        If chkImportCalculations.Checked Then
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                clsImportRDS.AddParameter("include_calculations", "TRUE")
+            Else
+                clsImportRDS.RemoveParameterByName("include_calculations")
+            End If
+        Else
+            clsImportRDS.AddParameter("include_calculations", "FALSE")
+        End If
+    End Sub
 
-    Private Sub chkKeepObjects_CheckStateChanged(sender As Object, e As EventArgs) Handles chkKeepObjects.CheckStateChanged
-        If chkKeepObjects.Checked Then
+    Private Sub chkKeepObjects_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportObjects.CheckStateChanged
+        If chkImportObjects.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("include_objects", "TRUE")
             Else
