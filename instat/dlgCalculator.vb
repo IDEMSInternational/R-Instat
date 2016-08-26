@@ -72,6 +72,7 @@ Public Class dlgCalculator
         ucrInputCalOptions.cboInput.Items.Add("Logical")
         ucrInputCalOptions.cboInput.Items.Add("Statistics")
         ucrInputCalOptions.cboInput.Items.Add("Strings")
+        ucrInputCalOptions.cboInput.Items.Add("Probability")
     End Sub
 
     'Private Sub ucrSaveResultIntoInto_NameChanged() Handles ucrSaveResultInto.NameChanged
@@ -204,7 +205,8 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        ucrReceiverForCalculation.Clear()
+        ucrReceiverForCalculation.Addbackspace()
+
     End Sub
 
 
@@ -221,31 +223,43 @@ Public Class dlgCalculator
                 grpLogical.Visible = False
                 grpBasic.Visible = True
                 grpStrings.Visible = False
-                Me.Size = New System.Drawing.Size(614, 402)
+                grpProbabilty.Visible = False
+                Me.Size = New System.Drawing.Size(614, 377)
             Case "Logical"
                 grpStatistics.Visible = False
                 grpLogical.Visible = True
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpStrings.Visible = False
-                Me.Size = New System.Drawing.Size(552, 402)
+                Me.Size = New System.Drawing.Size(552, 377)
+                grpProbabilty.Visible = False
             Case "Statistics"
                 grpStatistics.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(552, 402)
+                Me.Size = New System.Drawing.Size(552, 377)
                 grpStrings.Visible = False
+                grpProbabilty.Visible = False
             Case "Strings"
                 grpStrings.Visible = True
                 grpStatistics.Visible = False
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(580, 402)
-
+                grpProbabilty.Visible = False
+                Me.Size = New System.Drawing.Size(580, 377)
+            Case "Probability"
+                grpProbabilty.Visible = True
+                grpStrings.Visible = False
+                grpStatistics.Visible = False
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                Me.Size = New System.Drawing.Size(749, 377)
             Case Else
-                Me.Size = New System.Drawing.Size(424, 402)
+                Me.Size = New System.Drawing.Size(424, 377)
+                grpProbabilty.Visible = False
                 grpStatistics.Visible = False
                 grpBasic.Visible = True
                 grpLogical.Visible = False
@@ -518,7 +532,7 @@ Public Class dlgCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
         End If
-        '  ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub cmdIQR_Click(sender As Object, e As EventArgs) Handles cmdIQR.Click
@@ -563,7 +577,7 @@ Public Class dlgCalculator
 
     Private Sub cmdPad_Click(sender As Object, e As EventArgs) Handles cmdPad.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_pad(string= , width= , side = c('left', 'right', 'both'))", 46)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_pad(string= , width= , side = c('left', 'right', 'both'), pad= )", 46)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_pad()", 1)
         End If
@@ -635,4 +649,147 @@ Public Class dlgCalculator
         End If
     End Sub
 
+    Private Sub cmdQnorm_Click(sender As Object, e As EventArgs) Handles cmdQnorm.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnorm(p= ,mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)", 52)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnorm()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQt_Click(sender As Object, e As EventArgs) Handles cmdQt.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt(p= , df= ,lower.tail = TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQchisq_Click(sender As Object, e As EventArgs) Handles cmdQchisq.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= ,lower.tail = TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdqF_Click(sender As Object, e As EventArgs) Handles cmdqF.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= ,lower.tail = TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPnorm_Click(sender As Object, e As EventArgs) Handles cmdPnorm.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm(q= , mean = 0, sd = 1, lower.tail = True, Log.p = False)", 52)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPt_Click(sender As Object, e As EventArgs) Handles cmdPt.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt(q= , df= ,lower.tail = TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPChisq_Click(sender As Object, e As EventArgs) Handles cmdPChisq.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= ,lower.tail = TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPf_Click(sender As Object, e As EventArgs) Handles cmdPf.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= ,lower.tail = TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdChoose_Click(sender As Object, e As EventArgs) Handles cmdChoose.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("choose(n= , k= )", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("choose()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFact_Click(sender As Object, e As EventArgs) Handles cmdFact.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("factorial(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("factorial()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdBeta_Click(sender As Object, e As EventArgs) Handles cmdBeta.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("beta(a= , b= )", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("beta()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLchoose_Click(sender As Object, e As EventArgs) Handles cmdLchoose.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lchoose(n= , k= )", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lchoose()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLfact_Click(sender As Object, e As EventArgs) Handles cmdLfact.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lfactorial(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lfactorial()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLbeta_Click(sender As Object, e As EventArgs) Handles cmdLbeta.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lbeta(a= , b= )", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lbeta()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdGamma_Click(sender As Object, e As EventArgs) Handles cmdGamma.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gamma(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gamma()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLgamma_Click(sender As Object, e As EventArgs) Handles cmdLgamma.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lgamma(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lgamma()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDigamma_Click(sender As Object, e As EventArgs) Handles cmdDigamma.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digamma(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digamma()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdTrigamma_Click(sender As Object, e As EventArgs) Handles cmdTrigamma.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trigamma(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trigamma()", 1)
+        End If
+    End Sub
 End Class
