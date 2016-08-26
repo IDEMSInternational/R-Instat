@@ -41,6 +41,7 @@ library(lme4)
 library(dummies)
 library(ggthemes)
 library(lazyeval)
+library(stringr)
 setwd(dirname(parent.frame(2)$ofile))
 
 
