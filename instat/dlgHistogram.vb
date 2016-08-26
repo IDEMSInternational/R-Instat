@@ -137,6 +137,7 @@ Public Class dlgHistogram
         cmdDensityOptions.Visible = False
         cmdFrequencyOptions.Visible = False
         ucrSaveHist.strPrefix = "Histogram"
+        sdgPlots.Reset()
         TestOkEnabled()
     End Sub
 

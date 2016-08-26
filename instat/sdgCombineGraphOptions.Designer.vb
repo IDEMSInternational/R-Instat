@@ -38,6 +38,7 @@ Partial Class sdgCombineGraphOptions
         Me.lblBottom = New System.Windows.Forms.Label()
         Me.lblTop = New System.Windows.Forms.Label()
         Me.ucrsdgLayoutBase = New instat.ucrButtonsSubdialogue()
+        Me.grdLayout = New unvell.ReoGrid.ReoGridControl()
         Me.tbcLayout.SuspendLayout()
         Me.tbpLayout.SuspendLayout()
         CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,7 +92,7 @@ Partial Class sdgCombineGraphOptions
         '
         Me.nudColumns.Location = New System.Drawing.Point(117, 59)
         Me.nudColumns.Name = "nudColumns"
-        Me.nudColumns.Size = New System.Drawing.Size(95, 20)
+        Me.nudColumns.Size = New System.Drawing.Size(42, 20)
         Me.nudColumns.TabIndex = 0
         Me.nudColumns.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
@@ -99,7 +100,7 @@ Partial Class sdgCombineGraphOptions
         '
         Me.nudRows.Location = New System.Drawing.Point(117, 20)
         Me.nudRows.Name = "nudRows"
-        Me.nudRows.Size = New System.Drawing.Size(95, 20)
+        Me.nudRows.Size = New System.Drawing.Size(42, 20)
         Me.nudRows.TabIndex = 0
         Me.nudRows.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
@@ -196,11 +197,29 @@ Partial Class sdgCombineGraphOptions
         Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrsdgLayoutBase.TabIndex = 1
         '
+        'grdLayout
+        '
+        Me.grdLayout.BackColor = System.Drawing.Color.White
+        Me.grdLayout.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdLayout.LeadHeaderContextMenuStrip = Nothing
+        Me.grdLayout.Location = New System.Drawing.Point(12, 238)
+        Me.grdLayout.Name = "grdLayout"
+        Me.grdLayout.RowHeaderContextMenuStrip = Nothing
+        Me.grdLayout.Script = Nothing
+        Me.grdLayout.SheetTabContextMenuStrip = Nothing
+        Me.grdLayout.SheetTabNewButtonVisible = True
+        Me.grdLayout.SheetTabVisible = True
+        Me.grdLayout.SheetTabWidth = 60
+        Me.grdLayout.Size = New System.Drawing.Size(379, 200)
+        Me.grdLayout.TabIndex = 2
+        Me.grdLayout.Text = "ReoGridControl1"
+        '
         'sdgCombineGraphOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(283, 247)
+        Me.ClientSize = New System.Drawing.Size(404, 450)
+        Me.Controls.Add(Me.grdLayout)
         Me.Controls.Add(Me.ucrsdgLayoutBase)
         Me.Controls.Add(Me.tbcLayout)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -234,4 +253,5 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents LblRight As Label
     Friend WithEvents lblBottom As Label
     Friend WithEvents lblTop As Label
+    Friend WithEvents grdLayout As unvell.ReoGrid.ReoGridControl
 End Class

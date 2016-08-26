@@ -69,6 +69,7 @@ Public Class dlgDotPlot
         clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
         ucrVariablesAsFactorDotPlot.ResetControl()
+        sdgPlots.Reset()
         SetXParameter()
         TestOkEnabled()
     End Sub
