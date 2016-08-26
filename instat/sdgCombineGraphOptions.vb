@@ -19,6 +19,7 @@ Public Class sdgCombineGraphOptions
     Private bFirstLoad As Boolean = True
     Public clsRsyntax As New RSyntax
     Private WithEvents grdCurrSheet As Worksheet
+    Public clsMatrixFunction As New RFunction
 
     Public Sub New()
 
@@ -130,6 +131,8 @@ Public Class sdgCombineGraphOptions
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
+        grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
+
         If Not IsNumeric(e.NewData) Then
             MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric character. Please enter a numeric character withinthe range of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
             e.EndReason = EndEditReason.Cancel
@@ -137,6 +140,22 @@ Public Class sdgCombineGraphOptions
             MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
             e.EndReason = EndEditReason.Cancel
         End If
+
+        Dim i As Integer
+        Dim j As Integer
+        Dim matrix As List(Of String)
+
+
+        For i = 0 To i = grdCurrSheet.ColumnCount - 1
+            For j = 0 To j = grdCurrSheet.RowCount - 1
+
+
+
+            Next
+
+        Next
+        clsRsyntax.AddParameter("layout_matrix")
+        clsMatrixFunction.AddParameter("data")
     End Sub
     Public Sub LoadGraphs()
         Dim i As Integer = 0
