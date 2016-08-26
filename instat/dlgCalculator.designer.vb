@@ -105,6 +105,25 @@ Partial Class dlgCalculator
         Me.cmdGreaterOrEqualsTo = New System.Windows.Forms.Button()
         Me.grpLogical = New System.Windows.Forms.GroupBox()
         Me.chkShowArguments = New System.Windows.Forms.CheckBox()
+        Me.grpProbabilty = New System.Windows.Forms.GroupBox()
+        Me.cmdDigamma = New System.Windows.Forms.Button()
+        Me.cmdGamma = New System.Windows.Forms.Button()
+        Me.cmdLbeta = New System.Windows.Forms.Button()
+        Me.cmdqF = New System.Windows.Forms.Button()
+        Me.cmdFact = New System.Windows.Forms.Button()
+        Me.cmdChoose = New System.Windows.Forms.Button()
+        Me.cmdPf = New System.Windows.Forms.Button()
+        Me.cmdPChisq = New System.Windows.Forms.Button()
+        Me.cmdLgamma = New System.Windows.Forms.Button()
+        Me.cmdPnorm = New System.Windows.Forms.Button()
+        Me.cmdQchisq = New System.Windows.Forms.Button()
+        Me.cmdQt = New System.Windows.Forms.Button()
+        Me.cmdQnorm = New System.Windows.Forms.Button()
+        Me.cmdPt = New System.Windows.Forms.Button()
+        Me.cmdLchoose = New System.Windows.Forms.Button()
+        Me.cmdLfact = New System.Windows.Forms.Button()
+        Me.cmdTrigamma = New System.Windows.Forms.Button()
+        Me.cmdBeta = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
@@ -116,6 +135,7 @@ Partial Class dlgCalculator
         Me.grpStrings.SuspendLayout()
         Me.grpStatistics.SuspendLayout()
         Me.grpLogical.SuspendLayout()
+        Me.grpProbabilty.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -683,7 +703,7 @@ Partial Class dlgCalculator
         Me.cmdUpper.Location = New System.Drawing.Point(5, 15)
         Me.cmdUpper.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdUpper.Name = "cmdUpper"
-        Me.cmdUpper.Size = New System.Drawing.Size(38, 30)
+        Me.cmdUpper.Size = New System.Drawing.Size(39, 30)
         Me.cmdUpper.TabIndex = 140
         Me.cmdUpper.Text = "upper"
         Me.cmdUpper.UseVisualStyleBackColor = True
@@ -1057,6 +1077,232 @@ Partial Class dlgCalculator
         Me.chkShowArguments.Text = "Show Arguments"
         Me.chkShowArguments.UseVisualStyleBackColor = True
         '
+        'grpProbabilty
+        '
+        Me.grpProbabilty.Controls.Add(Me.cmdDigamma)
+        Me.grpProbabilty.Controls.Add(Me.cmdGamma)
+        Me.grpProbabilty.Controls.Add(Me.cmdLbeta)
+        Me.grpProbabilty.Controls.Add(Me.cmdqF)
+        Me.grpProbabilty.Controls.Add(Me.cmdFact)
+        Me.grpProbabilty.Controls.Add(Me.cmdChoose)
+        Me.grpProbabilty.Controls.Add(Me.cmdPf)
+        Me.grpProbabilty.Controls.Add(Me.cmdPChisq)
+        Me.grpProbabilty.Controls.Add(Me.cmdLgamma)
+        Me.grpProbabilty.Controls.Add(Me.cmdPnorm)
+        Me.grpProbabilty.Controls.Add(Me.cmdQchisq)
+        Me.grpProbabilty.Controls.Add(Me.cmdQt)
+        Me.grpProbabilty.Controls.Add(Me.cmdQnorm)
+        Me.grpProbabilty.Controls.Add(Me.cmdPt)
+        Me.grpProbabilty.Controls.Add(Me.cmdLchoose)
+        Me.grpProbabilty.Controls.Add(Me.cmdLfact)
+        Me.grpProbabilty.Controls.Add(Me.cmdTrigamma)
+        Me.grpProbabilty.Controls.Add(Me.cmdBeta)
+        Me.grpProbabilty.Location = New System.Drawing.Point(387, 65)
+        Me.grpProbabilty.Name = "grpProbabilty"
+        Me.grpProbabilty.Size = New System.Drawing.Size(337, 140)
+        Me.grpProbabilty.TabIndex = 152
+        Me.grpProbabilty.TabStop = False
+        Me.grpProbabilty.Text = "Probability"
+        '
+        'cmdDigamma
+        '
+        Me.cmdDigamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdDigamma.Location = New System.Drawing.Point(168, 106)
+        Me.cmdDigamma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDigamma.Name = "cmdDigamma"
+        Me.cmdDigamma.Size = New System.Drawing.Size(82, 30)
+        Me.cmdDigamma.TabIndex = 164
+        Me.cmdDigamma.Text = "digamma"
+        Me.cmdDigamma.UseVisualStyleBackColor = True
+        '
+        'cmdGamma
+        '
+        Me.cmdGamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdGamma.Location = New System.Drawing.Point(2, 106)
+        Me.cmdGamma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdGamma.Name = "cmdGamma"
+        Me.cmdGamma.Size = New System.Drawing.Size(82, 30)
+        Me.cmdGamma.TabIndex = 163
+        Me.cmdGamma.Tag = ""
+        Me.cmdGamma.Text = "gamma"
+        Me.cmdGamma.UseVisualStyleBackColor = True
+        '
+        'cmdLbeta
+        '
+        Me.cmdLbeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdLbeta.Location = New System.Drawing.Point(251, 75)
+        Me.cmdLbeta.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdLbeta.Name = "cmdLbeta"
+        Me.cmdLbeta.Size = New System.Drawing.Size(82, 30)
+        Me.cmdLbeta.TabIndex = 159
+        Me.cmdLbeta.Text = "lbeta"
+        Me.cmdLbeta.UseVisualStyleBackColor = True
+        '
+        'cmdqF
+        '
+        Me.cmdqF.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdqF.Location = New System.Drawing.Point(191, 13)
+        Me.cmdqF.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdqF.Name = "cmdqF"
+        Me.cmdqF.Size = New System.Drawing.Size(62, 30)
+        Me.cmdqF.TabIndex = 162
+        Me.cmdqF.Text = "qF"
+        Me.cmdqF.UseVisualStyleBackColor = True
+        '
+        'cmdFact
+        '
+        Me.cmdFact.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdFact.Location = New System.Drawing.Point(254, 44)
+        Me.cmdFact.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFact.Name = "cmdFact"
+        Me.cmdFact.Size = New System.Drawing.Size(79, 30)
+        Me.cmdFact.TabIndex = 154
+        Me.cmdFact.Text = "fact"
+        Me.cmdFact.UseVisualStyleBackColor = True
+        '
+        'cmdChoose
+        '
+        Me.cmdChoose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdChoose.Location = New System.Drawing.Point(191, 44)
+        Me.cmdChoose.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdChoose.Name = "cmdChoose"
+        Me.cmdChoose.Size = New System.Drawing.Size(62, 30)
+        Me.cmdChoose.TabIndex = 161
+        Me.cmdChoose.Text = "choose"
+        Me.cmdChoose.UseVisualStyleBackColor = True
+        '
+        'cmdPf
+        '
+        Me.cmdPf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdPf.Location = New System.Drawing.Point(128, 44)
+        Me.cmdPf.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPf.Name = "cmdPf"
+        Me.cmdPf.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPf.TabIndex = 156
+        Me.cmdPf.Text = "pF"
+        Me.cmdPf.UseVisualStyleBackColor = True
+        '
+        'cmdPChisq
+        '
+        Me.cmdPChisq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdPChisq.Location = New System.Drawing.Point(65, 44)
+        Me.cmdPChisq.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPChisq.Name = "cmdPChisq"
+        Me.cmdPChisq.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPChisq.TabIndex = 155
+        Me.cmdPChisq.Text = "pchisq"
+        Me.cmdPChisq.UseVisualStyleBackColor = True
+        '
+        'cmdLgamma
+        '
+        Me.cmdLgamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdLgamma.Location = New System.Drawing.Point(85, 106)
+        Me.cmdLgamma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdLgamma.Name = "cmdLgamma"
+        Me.cmdLgamma.Size = New System.Drawing.Size(105, 30)
+        Me.cmdLgamma.TabIndex = 152
+        Me.cmdLgamma.Text = "lgamma"
+        Me.cmdLgamma.UseVisualStyleBackColor = True
+        '
+        'cmdPnorm
+        '
+        Me.cmdPnorm.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdPnorm.Location = New System.Drawing.Point(254, 13)
+        Me.cmdPnorm.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPnorm.Name = "cmdPnorm"
+        Me.cmdPnorm.Size = New System.Drawing.Size(79, 30)
+        Me.cmdPnorm.TabIndex = 148
+        Me.cmdPnorm.Text = "pnorm"
+        Me.cmdPnorm.UseVisualStyleBackColor = True
+        '
+        'cmdQchisq
+        '
+        Me.cmdQchisq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdQchisq.Location = New System.Drawing.Point(128, 13)
+        Me.cmdQchisq.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdQchisq.Name = "cmdQchisq"
+        Me.cmdQchisq.Size = New System.Drawing.Size(62, 30)
+        Me.cmdQchisq.TabIndex = 160
+        Me.cmdQchisq.Text = "qchisq"
+        Me.cmdQchisq.UseVisualStyleBackColor = True
+        '
+        'cmdQt
+        '
+        Me.cmdQt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdQt.Location = New System.Drawing.Point(65, 13)
+        Me.cmdQt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdQt.Name = "cmdQt"
+        Me.cmdQt.Size = New System.Drawing.Size(62, 30)
+        Me.cmdQt.TabIndex = 158
+        Me.cmdQt.Text = "qt"
+        Me.cmdQt.UseVisualStyleBackColor = True
+        '
+        'cmdQnorm
+        '
+        Me.cmdQnorm.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdQnorm.Location = New System.Drawing.Point(2, 13)
+        Me.cmdQnorm.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdQnorm.Name = "cmdQnorm"
+        Me.cmdQnorm.Size = New System.Drawing.Size(62, 30)
+        Me.cmdQnorm.TabIndex = 157
+        Me.cmdQnorm.Text = "qnorm"
+        Me.cmdQnorm.UseVisualStyleBackColor = True
+        '
+        'cmdPt
+        '
+        Me.cmdPt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdPt.Location = New System.Drawing.Point(2, 44)
+        Me.cmdPt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPt.Name = "cmdPt"
+        Me.cmdPt.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPt.TabIndex = 153
+        Me.cmdPt.Text = "pt"
+        Me.cmdPt.UseVisualStyleBackColor = True
+        '
+        'cmdLchoose
+        '
+        Me.cmdLchoose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdLchoose.Location = New System.Drawing.Point(85, 75)
+        Me.cmdLchoose.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdLchoose.Name = "cmdLchoose"
+        Me.cmdLchoose.Size = New System.Drawing.Size(82, 30)
+        Me.cmdLchoose.TabIndex = 151
+        Me.cmdLchoose.Text = "lchoose"
+        Me.cmdLchoose.UseVisualStyleBackColor = True
+        '
+        'cmdLfact
+        '
+        Me.cmdLfact.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdLfact.Location = New System.Drawing.Point(168, 75)
+        Me.cmdLfact.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdLfact.Name = "cmdLfact"
+        Me.cmdLfact.Size = New System.Drawing.Size(82, 30)
+        Me.cmdLfact.TabIndex = 150
+        Me.cmdLfact.Text = "lfact"
+        Me.cmdLfact.UseVisualStyleBackColor = True
+        '
+        'cmdTrigamma
+        '
+        Me.cmdTrigamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdTrigamma.Location = New System.Drawing.Point(251, 106)
+        Me.cmdTrigamma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdTrigamma.Name = "cmdTrigamma"
+        Me.cmdTrigamma.Size = New System.Drawing.Size(82, 30)
+        Me.cmdTrigamma.TabIndex = 149
+        Me.cmdTrigamma.Text = "trigamma"
+        Me.cmdTrigamma.UseVisualStyleBackColor = True
+        '
+        'cmdBeta
+        '
+        Me.cmdBeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdBeta.Location = New System.Drawing.Point(2, 75)
+        Me.cmdBeta.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdBeta.Name = "cmdBeta"
+        Me.cmdBeta.Size = New System.Drawing.Size(82, 30)
+        Me.cmdBeta.TabIndex = 149
+        Me.cmdBeta.Text = "beta"
+        Me.cmdBeta.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.IsReadOnly = False
@@ -1114,7 +1360,8 @@ Partial Class dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 338)
+        Me.ClientSize = New System.Drawing.Size(733, 338)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.chkShowArguments)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpMaths)
@@ -1142,6 +1389,7 @@ Partial Class dlgCalculator
         Me.grpStrings.ResumeLayout(False)
         Me.grpStatistics.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
+        Me.grpProbabilty.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1236,4 +1484,23 @@ Partial Class dlgCalculator
     Friend WithEvents cmdGreaterOrEqualsTo As Button
     Friend WithEvents grpLogical As GroupBox
     Friend WithEvents chkShowArguments As CheckBox
+    Friend WithEvents grpProbabilty As GroupBox
+    Friend WithEvents cmdDigamma As Button
+    Friend WithEvents cmdGamma As Button
+    Friend WithEvents cmdLbeta As Button
+    Friend WithEvents cmdqF As Button
+    Friend WithEvents cmdFact As Button
+    Friend WithEvents cmdChoose As Button
+    Friend WithEvents cmdPf As Button
+    Friend WithEvents cmdPChisq As Button
+    Friend WithEvents cmdLgamma As Button
+    Friend WithEvents cmdPnorm As Button
+    Friend WithEvents cmdQchisq As Button
+    Friend WithEvents cmdQt As Button
+    Friend WithEvents cmdQnorm As Button
+    Friend WithEvents cmdPt As Button
+    Friend WithEvents cmdLchoose As Button
+    Friend WithEvents cmdLfact As Button
+    Friend WithEvents cmdBeta As Button
+    Friend WithEvents cmdTrigamma As Button
 End Class
