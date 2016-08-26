@@ -30,6 +30,7 @@ Public Class frmMain
     Public clsRecentItems As New clsRecentFiles
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
+    Public strSaveFilePath As String
 
 
     Dim mnuItems As New List(Of Form)
@@ -49,7 +50,7 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
-
+        strSaveFilePath = ""
 
         clsRLink.SetEngine()
         LoadInstatOptions()
@@ -593,7 +594,16 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
-        dlgSaveAs.ShowDialog()
+        Dim clsSaveRDS As New RFunction
+
+        If strSaveFilePath = "" Then
+            dlgSaveAs.ShowDialog()
+        Else
+            clsSaveRDS.SetRCommand("saveRDS")
+            clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
+            clsSaveRDS.AddParameter("file", Chr(34) & strSaveFilePath & Chr(34))
+            clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
+        End If
     End Sub
 
     Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click

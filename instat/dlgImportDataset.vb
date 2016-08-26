@@ -695,9 +695,11 @@ Public Class dlgImportDataset
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ' add the item to the MRU (Most Recently Used) list...
-        frmMain.clsRecentItems.addToMenu(ucrInputFilePath.Text)
+        frmMain.clsRecentItems.addToMenu(ucrInputFilePath.GetText())
+        If strFileType = "RDS" Then
+            frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+        End If
     End Sub
-
 
     'Private Sub ucrInputNamedRegions_NameChanged() Handles ucrInputNamedRegions.NameChanged
     '    If Not ucrInputNamedRegions.IsEmpty() Then
