@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgDescribe
-    Public clsBase As New RFunction
+    Public clsRDescribe As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -72,15 +72,15 @@ Public Class sdgDescribe
         Next
         strSummariesParameter = strSummariesParameter & ")"
         If i > 0 Then
-            clsBase.AddParameter("summaries", strSummariesParameter)
+            clsRDescribe.AddParameter("summaries", strSummariesParameter)
         Else
-            clsBase.RemoveParameterByName("summaries")
+            clsRDescribe.RemoveParameterByName("summaries")
         End If
     End Sub
 
 
-    Public Sub SetUcrBase(clsNewBase As RFunction)
-        clsBase = clsNewBase
+    Public Sub SetUcrDescribe(clsRNewDescribe As RFunction)
+        clsRDescribe = clsRNewDescribe
     End Sub
 
     Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkMinimum.CheckedChanged, chkMaximum.CheckedChanged, chkSum.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged

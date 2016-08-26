@@ -96,14 +96,14 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
 }
 )
 
-instat_object$set("public", "replace_instat_object", function(new_instatObj) {
-  for(curr_obj in new_instatObj$get_data_objects()) {
+instat_object$set("public", "replace_instat_object", function(new_instat_object) {
+  self$set_data_objects(list())
+  for(curr_obj in new_instat_object$get_data_objects()) {
     self$append_data_object(curr_obj$get_metadata(data_name_label), curr_obj$data_clone())
   }
-  self$set_meta(new_instatObj$get_metadata())
-  self$set_objects(new_instatObj$get_objects(data_name = overall_label, as_list = FALSE))
+  self$set_meta(new_instat_object$get_metadata())
+  self$set_objects(new_instat_object$get_objects(data_name = overall_label, as_list = FALSE))
   self$data_objects_changed <- TRUE
-  invisible(lapply(new_instatObj$get_data_objects(), function(x) x$set_data_changed(TRUE)))
 }
 )
 
@@ -115,54 +115,29 @@ instat_object$set("public", "set_data_objects", function(new_data_objects) {
 }
 )
 
-#' Title
-#'
-#' @param data_RDS 
-#' @param keep_existing 
-#' @param overwrite_existing 
-#' @param include_models 
-#' @param include_graphics 
-#' @param include_metadata 
-#' @param include_logs 
-#' @param messages 
-#'
-#' @return
-#' @export
-#'
-#' @examples
 instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
-                                         include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, messages = TRUE)
+                                         include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
 # TODO add include_calcuations options
-{ 
+{
   if("instat_object" %in% class(data_RDS)) {
-    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters) {
-      self$replace_instat_object(new_instatObj = data_RDS)
-    } 
+    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations) {
+      self$replace_instat_object(new_instat_object = data_RDS)
+    }
     else {
       if(!keep_existing) {
         self$set_data_objects(list())
         self$set_meta(list())
         self$set_objects(list())
       }
-      for (curr_data_obj in data_RDS$get_data_objects()) {
-        if (!(curr_data_obj$get_metadata(data_name_label) %in% self$get_data_names()) || overwrite_existing){
-          if (!include_objects) curr_data_obj$set_objects(list())
-          curr_data_name = curr_data_obj$get_metadata(data_name_label)
-          if (!include_metadata) {
-            curr_data_obj$set_meta(list()) 
-            curr_data_obj$add_defaults_meta()
-            curr_data_obj$add_defaults_variables_metadata()
-            curr_data_obj$set_variables_metadata(data.frame())
-            #curr_data_obj$update_variables_metadata()
-          }
-          if (!include_logs) curr_data_obj$set_changes(list())
-
-          if(!include_filters) {
-            curr_data_obj$set_filters(list())
-            curr_data_obj$remove_current_filter()
-          }
-          self$append_data_object(curr_data_name, curr_data_obj)
+      for(data_obj_name in data_RDS$get_data_names()) {
+        data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
+        if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
+          new_name <- next_default_item(data_obj_name, self$get_data_names())
+          data_obj_clone$append_to_metadata(data_name_label, new_name)
         }
+        #if(!data_obj_clone$is_metadata(data_name_label)) data_obj_clone$append_to_metadata(data_name_label, new_name)
+        curr_data_name = data_obj_clone$get_metadata(data_name_label)
+        self$append_data_object(curr_data_name, data_obj_clone)
       }
       new_objects_list = data_RDS$get_objects(data_name = overall_label)
       new_objects_count = length(new_objects_list)
@@ -177,7 +152,7 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
       new_metadata_count = length(new_metadata)
       if (include_metadata && new_metadata_count > 0) {
         for ( i in (1:new_metadata_count) ) {
-          if (!(names(new_metadata)[i] %in% names(metadata)) || overwrite_existing) {
+          if (!(names(new_metadata)[i] %in% names(private$metadata)) || overwrite_existing) {
             self$append_to_metadata(names(new_metadata)[i], new_metadata[[i]])
           }
         }
@@ -185,22 +160,19 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
     }
     self$data_objects_changed <- TRUE
   }
-  else if (is.data.frame(data_RDS)) {
+  else if (is.data.frame(data_RDS) || is.matrix(data_RDS)) {
     self$import_data(data_tables = list(data_RDS = data_RDS))
   }
-  else {
-    if(messages){
-      #TODO work on messages and error handling
-      #     use build in R defaults for messages
-      stop(paste("Cannot import an objects of clss", class(data_RDS)))
-    }
-  }
+  else stop(paste("Cannot import an objects of class", class(data_RDS)))
 }
 )
 
 # Now appending/merging not setting so maybe should be renamed
 instat_object$set("public", "set_meta", function(new_meta) {
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
+  for(name in names(attributes(self))) {
+    if(!name  %in% c("class")) attr(self, name) <- NULL
+  }
   for(name in names(new_meta)) {
     self$append_to_metadata(name, new_meta[[name]])
   }
@@ -640,6 +612,16 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
+instat_object$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name) {
+  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name)
+} 
+)
+
+instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name) {
+  self$get_data_objects(data_name)$anova_tables(x_col_names, y_col_name)
+} 
+)
+
 #TODO remove this method
 instat_object$set("public", "remove_columns_in_data_from_start_position", function(data_name, start_pos, col_numbers) {
   self$get_data_objects(data_name)$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
@@ -748,14 +730,16 @@ instat_object$set("public", "append_to_dataframe_metadata", function(data_name, 
 } 
 )
 
-instat_object$set("public", "append_to_metadata", function(property, new_val = "") {
+instat_object$set("public", "append_to_metadata", function(property, new_val = "", allow_override_special = FALSE) {
   if(missing(property)) stop("property and new_val arguments must be specified.")
   
   if(!is.character(property)) stop("property must be of type character")
-  
-  attr(self, property) <- new_val
-  self$metadata_changed <- TRUE
-  self$append_to_changes(list(Added_metadata, property))
+  if(!allow_override_special && property %in% c("class")) message("Cannot override property: ", property, ". Specify allow_override_special = TRUE to replace this property.")
+  else {
+    attr(self, property) <- new_val
+    self$metadata_changed <- TRUE
+    self$append_to_changes(list(Added_metadata, property))
+  }
 }
 )
 
