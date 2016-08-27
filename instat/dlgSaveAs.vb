@@ -18,7 +18,6 @@ Imports System.IO
 Imports instat.Translations
 
 Public Class dlgSaveAs
-    Dim dlgSave As New SaveFileDialog
     Dim bFirstLoad As Boolean = True
 
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -61,29 +60,19 @@ Public Class dlgSaveAs
     End Sub
 
     Private Sub SelectFileToSave()
-        dlgSave.Reset()
-        dlgSave.Title = "Save Data File"
-        dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
-        If ucrInputFilePath.GetText() <> "" Then
-            dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
-        Else
-            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        End If
-        If dlgSave.ShowDialog() = DialogResult.OK Then
-            ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub saveTextFiles(strPath As String, strFile As String)
-        Dim sWrite As New StreamWriter(strPath)
-        Try
-            sWrite.Write(strFile)
-            sWrite.Flush()
-            sWrite.Dispose()
-        Catch ex As Exception
-            MsgBox("Cannot save file to this location", MsgBoxStyle.Critical)
-        End Try
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Data File"
+            dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
+            If ucrInputFilePath.GetText() <> "" Then
+                dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
+            Else
+                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            End If
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
+            End If
+            TestOKEnabled()
+        End Using
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
