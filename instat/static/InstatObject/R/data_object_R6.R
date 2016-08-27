@@ -241,7 +241,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     }
     else out <- out[self$current_filter, ]
   }
-  else { 
+  else {
     if(filter_name != "") {
       out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
     }
@@ -1213,7 +1213,6 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
 )
 
 data_object$set("public", "filter_applied", function() {
-  print(private$.current_filter)
   return(!private$.current_filter$parameters[["is_no_filter"]])
 }
 )
