@@ -83,6 +83,7 @@ Public Class frmMain
         'TODO is this sensible?
         clsInstatOptions.SetLanguageCultureCode(Thread.CurrentThread.CurrentCulture.Name)
         clsInstatOptions.SetWorkingDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
+        clsInstatOptions.SetColorPalette(({Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White}).ToList)
     End Sub
 
     Private Sub mnuGraphicsCummulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
