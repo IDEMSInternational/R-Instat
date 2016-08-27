@@ -167,6 +167,10 @@ Partial Class frmMain
         Me.mnuClimaticEventsEndofRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileSaveAsDataAs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileSaveAsOutputAs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileSaveAsLogAs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileSaveAsScriptAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilePrintPreview = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile3 = New System.Windows.Forms.ToolStripSeparator()
@@ -209,6 +213,7 @@ Partial Class frmMain
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.sepEndMRU = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameViewData = New System.Windows.Forms.ToolStripMenuItem()
@@ -343,11 +348,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileSaveAsDataAs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileSaveAsOutputAs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileSaveAsLogAs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileSaveAsScriptAs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1401,6 +1401,30 @@ Partial Class frmMain
         Me.mnuFileSaveAs.Tag = "Save_As"
         Me.mnuFileSaveAs.Text = "Save As"
         '
+        'mnuFileSaveAsDataAs
+        '
+        Me.mnuFileSaveAsDataAs.Name = "mnuFileSaveAsDataAs"
+        Me.mnuFileSaveAsDataAs.Size = New System.Drawing.Size(211, 22)
+        Me.mnuFileSaveAsDataAs.Text = "Save Data As..."
+        '
+        'mnuFileSaveAsOutputAs
+        '
+        Me.mnuFileSaveAsOutputAs.Name = "mnuFileSaveAsOutputAs"
+        Me.mnuFileSaveAsOutputAs.Size = New System.Drawing.Size(211, 22)
+        Me.mnuFileSaveAsOutputAs.Text = "Save Output Window As..."
+        '
+        'mnuFileSaveAsLogAs
+        '
+        Me.mnuFileSaveAsLogAs.Name = "mnuFileSaveAsLogAs"
+        Me.mnuFileSaveAsLogAs.Size = New System.Drawing.Size(211, 22)
+        Me.mnuFileSaveAsLogAs.Text = "Save Log As..."
+        '
+        'mnuFileSaveAsScriptAs
+        '
+        Me.mnuFileSaveAsScriptAs.Name = "mnuFileSaveAsScriptAs"
+        Me.mnuFileSaveAsScriptAs.Size = New System.Drawing.Size(211, 22)
+        Me.mnuFileSaveAsScriptAs.Text = "Save Script Window As..."
+        '
         'mnuFilePrint
         '
         Me.mnuFilePrint.Name = "mnuFilePrint"
@@ -1727,6 +1751,13 @@ Partial Class frmMain
         Me.sepEndMRU.Name = "sepEndMRU"
         Me.sepEndMRU.Size = New System.Drawing.Size(201, 6)
         Me.sepEndMRU.Visible = False
+        '
+        'mnuFileCloseData
+        '
+        Me.mnuFileCloseData.Enabled = False
+        Me.mnuFileCloseData.Name = "mnuFileCloseData"
+        Me.mnuFileCloseData.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileCloseData.Text = "Close Data File"
         '
         'mnuOrganise
         '
@@ -2704,37 +2735,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuFileSaveAsDataAs
-        '
-        Me.mnuFileSaveAsDataAs.Name = "mnuFileSaveAsDataAs"
-        Me.mnuFileSaveAsDataAs.Size = New System.Drawing.Size(211, 22)
-        Me.mnuFileSaveAsDataAs.Text = "Save Data As..."
-        '
-        'mnuFileSaveAsOutputAs
-        '
-        Me.mnuFileSaveAsOutputAs.Name = "mnuFileSaveAsOutputAs"
-        Me.mnuFileSaveAsOutputAs.Size = New System.Drawing.Size(211, 22)
-        Me.mnuFileSaveAsOutputAs.Text = "Save Output Window As..."
-        '
-        'mnuFileSaveAsLogAs
-        '
-        Me.mnuFileSaveAsLogAs.Name = "mnuFileSaveAsLogAs"
-        Me.mnuFileSaveAsLogAs.Size = New System.Drawing.Size(211, 22)
-        Me.mnuFileSaveAsLogAs.Text = "Save Log As..."
-        '
-        'mnuFileSaveAsScriptAs
-        '
-        Me.mnuFileSaveAsScriptAs.Name = "mnuFileSaveAsScriptAs"
-        Me.mnuFileSaveAsScriptAs.Size = New System.Drawing.Size(211, 22)
-        Me.mnuFileSaveAsScriptAs.Text = "Save Script Window As..."
-        '
-        'mnuFileCloseData
-        '
-        Me.mnuFileCloseData.Enabled = False
-        Me.mnuFileCloseData.Name = "mnuFileCloseData"
-        Me.mnuFileCloseData.Size = New System.Drawing.Size(204, 22)
-        Me.mnuFileCloseData.Text = "Close Data File"
         '
         'frmMain
         '
