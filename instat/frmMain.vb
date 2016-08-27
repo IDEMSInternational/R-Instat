@@ -31,9 +31,7 @@ Public Class frmMain
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
     Public strSaveFilePath As String
-
-
-    Dim mnuItems As New List(Of Form)
+    Private mnuItems As New List(Of Form)
 
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
@@ -1026,5 +1024,50 @@ Public Class frmMain
 
     Private Sub mnuAppendDataFrame_Click(sender As Object, e As EventArgs) Handles mnuAppendDataFrame.Click
         dlgAppend.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click
+        Using dlgSaveFile As New SaveFileDialog
+            dlgSaveFile.Title = "Save Output Window"
+            dlgSaveFile.Filter = "Rich Text Format (*.rtf)|*.rtf"
+            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
+                Try
+                    frmCommand.txtCommand.SaveFile(dlgSaveFile.FileName, RichTextBoxStreamType.RichText)
+                Catch
+                    MsgBox("Could not save the output window." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click
+        Using dlgSaveFile As New SaveFileDialog
+            dlgSaveFile.Title = "Save Log Window"
+            dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
+            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSaveFile.FileName, frmLog.txtLog.Text)
+                Catch
+                    MsgBox("Could not save the log file." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnuFileSaveAsScriptAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsScriptAs.Click
+        Using dlgSaveFile As New SaveFileDialog
+            dlgSaveFile.Title = "Save Script Window"
+            dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
+            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSaveFile.FileName, frmScript.txtScript.Text)
+                Catch
+                    MsgBox("Could not save the script file." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
+            End If
+        End Using
     End Sub
 End Class
