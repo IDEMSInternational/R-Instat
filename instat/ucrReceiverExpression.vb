@@ -84,6 +84,15 @@ Public Class ucrReceiverExpression
         cboExpression.SelectedText = ""
     End Sub
 
+    Public Sub Addbackspace()
+
+        If cboExpression.Text = "" Then
+            cboExpression.Text = Mid(cboExpression.Text, 1, Len(cboExpression.Text) - 1 + 1)
+        Else
+            cboExpression.Text = Mid(cboExpression.Text, 1, Len(cboExpression.Text) - 1)
+        End If
+    End Sub
+
     Public Sub AddToReceiverAtCursorPosition(strText As String, Optional iSetCursorBackCharacters As Integer = 0)
         AddToReceiverAtPosition(strText, iCurrentPosition, iSetCursorBackCharacters)
     End Sub
