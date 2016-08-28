@@ -9,6 +9,7 @@ Public Class InstatOptions
     Public strWorkingDirectory As String
     Public iPreviewRows As Integer
     Public iMaxRows As Integer
+    Public lstColourPalette As List(Of Color)
 
     Public Sub SetMaxRows(iRows As Integer)
         iMaxRows = iRows
@@ -36,14 +37,7 @@ Public Class InstatOptions
     Public Sub SetEditorFormat(fntNew As Font, clrNew As Color)
         fntEditor = fntNew
         clrEditor = clrNew
-        '
-        frmMain.clsRLink.SetFormatDataView(fntEditor, clrEditor)
-        Dim tmpSheets As Worksheet
-        For Each tmpSheets In frmEditor.grdData.Worksheets
-            tmpSheets.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
-                             .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName, .TextColor = clrNew, .FontSize = fntNew.Size, .FontName = fntNew.Name})
-
-        Next
+        frmMain.clsGrids.SetFormatDataView(fntEditor, clrEditor)
     End Sub
 
     Public Sub SetPreviewRows(intlines As Integer)
@@ -79,6 +73,9 @@ Public Class InstatOptions
     Public Sub SetWorkingDirectory(strWD As String)
         strWorkingDirectory = strWD
         'frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
+    End Sub
 
+    Public Sub SetColorPalette(lstColours As List(Of Color))
+        lstColourPalette = lstColours
     End Sub
 End Class
