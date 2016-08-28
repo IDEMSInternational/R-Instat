@@ -143,20 +143,17 @@ Public Class ucrFilter
     End Sub
 
     Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
-        SetToggleButtonSettings()
+        ucrFactorLevels.SetSelectionAllLevels(Not ucrFactorLevels.IsAllSelected())
     End Sub
 
     Private Sub SetToggleButtonSettings()
-        If cmdToggleSelectAll.FlatStyle = FlatStyle.Popup Then
-            '            ucrFactorLevels.SetSelectionAllLevels(True)
+        If ucrFactorLevels.IsAllSelected() Then
             cmdToggleSelectAll.Text = "Deselect All"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
         Else
-            '            ucrFactorLevels.SetSelectionAllLevels(False)
             cmdToggleSelectAll.Text = "Select All"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
-        CheckAddEnabled()
     End Sub
 
     Private Sub ucrFilterOperation_NameChanged() Handles ucrFilterOperation.NameChanged
