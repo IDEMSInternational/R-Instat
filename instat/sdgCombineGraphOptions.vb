@@ -18,7 +18,7 @@ Imports unvell.ReoGrid.Events
 Public Class sdgCombineGraphOptions
     Private bFirstLoad As Boolean = True
     Public clsRsyntax As New RSyntax
-    Private WithEvents grdCurrSheet As Worksheet
+    Public WithEvents grdCurrSheet As Worksheet
     Public clsMatrixFunction As New RFunction
 
     Public Sub New()
@@ -99,26 +99,27 @@ Public Class sdgCombineGraphOptions
 
     Private Sub nudRows_TextChanged(sender As Object, e As EventArgs) Handles nudRows.TextChanged
         If nudRows.Text <> "" Then
-            clsRsyntax.AddParameter("nrow", nudRows.Value)
+            clsMatrixFunction.AddParameter("nrow", nudRows.Value)
         Else
-            clsRsyntax.RemoveParameter("nrow")
+            clsMatrixFunction.RemoveParameterByName("nrow")
         End If
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.Rows = nudRows.Value
         End If
+        SetMatrixFunction()
     End Sub
 
     Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
         If nudColumns.Text <> "" Then
-            clsRsyntax.AddParameter("ncol", nudColumns.Value)
+            clsMatrixFunction.AddParameter("ncol", nudColumns.Value)
         Else
-            clsRsyntax.RemoveParameter("ncol")
+            clsMatrixFunction.RemoveParameterByName("ncol")
         End If
 
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.Columns = nudColumns.Value
         End If
-
+        SetMatrixFunction()
     End Sub
 
     Public Sub SetDefaultRowAndColumns()
@@ -140,22 +141,7 @@ Public Class sdgCombineGraphOptions
             MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
             e.EndReason = EndEditReason.Cancel
         End If
-
-        Dim i As Integer
-        Dim j As Integer
-        Dim matrix As List(Of String)
-
-
-        For i = 0 To i = grdCurrSheet.ColumnCount - 1
-            For j = 0 To j = grdCurrSheet.RowCount - 1
-
-
-
-            Next
-
-        Next
-        clsRsyntax.AddParameter("layout_matrix")
-        clsMatrixFunction.AddParameter("data")
+        SetMatrixFunction()
     End Sub
     Public Sub LoadGraphs()
         Dim i As Integer = 0
@@ -164,4 +150,29 @@ Public Class sdgCombineGraphOptions
             lstGraphs.Items.Add((i + 1) & Chr(32) & "." & dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items(i).Text)
         Next
     End Sub
+
+    Public Sub SetMatrixFunction()
+        Dim i As Integer
+        Dim j As Integer
+        Dim strMatrix As String = ""
+        clsMatrixFunction.SetRCommand("matrix")
+
+        If grdCurrSheet IsNot Nothing Then
+            For i = 0 To grdCurrSheet.ColumnCount - 1
+                For j = 0 To grdCurrSheet.RowCount - 1
+                    If Not ((i = grdCurrSheet.ColumnCount - 1) And (j = grdCurrSheet.RowCount - 1)) Then
+                        strMatrix = strMatrix & grdCurrSheet(row:=j, col:=i) & ","
+                    Else
+                        strMatrix = strMatrix & grdCurrSheet(row:=j, col:=i)
+                    End If
+                Next
+            Next
+
+        End If
+        strMatrix = "c" & "(" & strMatrix & ")"
+        clsMatrixFunction.AddParameter("data", strMatrix)
+        clsRsyntax.AddParameter("layout_matrix", clsRFunctionParameter:=clsMatrixFunction)
+    End Sub
+
 End Class
+
