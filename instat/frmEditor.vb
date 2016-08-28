@@ -598,4 +598,16 @@ Public Class frmEditor
     Private Sub grdCurrSheet_BeforeRangeMove(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrSheet.BeforeRangeMove
         e.IsCancelled = True
     End Sub
+
+    Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrSheet.BeforeCellKeyDown
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete Then
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & vbNewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            e.IsCancelled = True
+        End If
+    End Sub
+
+    Private Sub mnuConvert_Click(sender As Object, e As EventArgs) Handles mnuConvert.Click
+        'TODO Selected column should automatically appear in dialog
+        dlgConvertColumns.ShowDialog()
+    End Sub
 End Class
