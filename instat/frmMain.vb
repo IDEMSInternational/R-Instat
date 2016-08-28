@@ -30,9 +30,8 @@ Public Class frmMain
     Public clsRecentItems As New clsRecentFiles
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
-
-
-    Dim mnuItems As New List(Of Form)
+    Public strSaveFilePath As String
+    Private mnuItems As New List(Of Form)
 
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
@@ -49,7 +48,7 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
-
+        strSaveFilePath = ""
 
         clsRLink.SetEngine()
         LoadInstatOptions()
@@ -84,6 +83,7 @@ Public Class frmMain
         'TODO is this sensible?
         clsInstatOptions.SetLanguageCultureCode(Thread.CurrentThread.CurrentCulture.Name)
         clsInstatOptions.SetWorkingDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
+        clsInstatOptions.SetColorPalette(({Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White}).ToList)
     End Sub
 
     Private Sub mnuGraphicsCummulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
@@ -130,132 +130,132 @@ Public Class frmMain
         dlgDotPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsClipBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsClipBoxPlot.Click
+    Private Sub mnuClimateMethodsGraphicsClipBoxPlot_Click(sender As Object, e As EventArgs)
         dlgCliBoxplot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsCliplot_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsCliplot.Click
+    Private Sub mnuClimateMethodsGraphicsCliplot_Click(sender As Object, e As EventArgs)
         dlgCliPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsMissingValues_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsMissingValues.Click
+    Private Sub mnuClimateMethodsGraphicsMissingValues_Click(sender As Object, e As EventArgs)
         dlgMissingValuesplot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsHistogram.Click
+    Private Sub mnuClimateMethodsGraphicsHistogram_Click(sender As Object, e As EventArgs)
         dlgHistogramMethod.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsCumExceedance_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsCumExceedance.Click
+    Private Sub mnuClimateMethodsGraphicsCumExceedance_Click(sender As Object, e As EventArgs)
         dlgCumulativeExceedance.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsBoxplot_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsBoxplot.Click
+    Private Sub mnuClimateMethodsGraphicsBoxplot_Click(sender As Object, e As EventArgs)
         dlgBoxplotMethod.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsInventory_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsInventory.Click
+    Private Sub mnuClimateMethodsGraphicsInventory_Click(sender As Object, e As EventArgs)
         dlgInventoryMethod.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsAnnualRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsAnnualRainfall.Click
+    Private Sub mnuClimateMethodsGraphicsAnnualRainfall_Click(sender As Object, e As EventArgs)
         dlgAnnualRaintotal.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsTimeseries_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsTimeseries.Click
+    Private Sub mnuClimateMethodsGraphicsTimeseries_Click(sender As Object, e As EventArgs)
         dlgTimeseriesPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsWindrose_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsWindrose.Click
+    Private Sub mnuClimateMethodsGraphicsWindrose_Click(sender As Object, e As EventArgs)
         dlgWindrosePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsMultipleLines_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsMultipleLines.Click
+    Private Sub mnuClimateMethodsGraphicsMultipleLines_Click(sender As Object, e As EventArgs)
         dlgLines.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsGraphicsRainCount_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsRainCount.Click
+    Private Sub mnuClimateMethodsGraphicsRainCount_Click(sender As Object, e As EventArgs)
         dlgYearRaincount.ShowDialog()
     End Sub
 
-    Private Sub mnuClmateMethodThreeSummaries_Click(sender As Object, e As EventArgs) Handles mnuClmateMethodThreeSummaries.Click
+    Private Sub mnuClmateMethodThreeSummaries_Click(sender As Object, e As EventArgs)
         dlgThreeSummaries.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationStartOfRain_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationStartOfRain.Click
+    Private Sub mnuClimateMethodsDataManipulationStartOfRain_Click(sender As Object, e As EventArgs)
         dlgAddStartRain.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationEndOfRain_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationEndOfRain.Click
+    Private Sub mnuClimateMethodsDataManipulationEndOfRain_Click(sender As Object, e As EventArgs)
         dlgEndRain.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationChangeFormatDayMonth_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationChangeFormatDayMonth.Click
+    Private Sub mnuClimateMethodsDataManipulationChangeFormatDayMonth_Click(sender As Object, e As EventArgs)
         dlgChangeFormatDayMonth.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationExportCPTToTabular_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationExportCPTToTabular.Click
+    Private Sub mnuClimateMethodsDataManipulationExportCPTToTabular_Click(sender As Object, e As EventArgs)
         dlgCPTtoTabularData.ShowDialog()
     End Sub
 
-    Private Sub nuClimateMethodsDataManipulationDayMonth_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDayMonth.Click
+    Private Sub nuClimateMethodsDataManipulationDayMonth_Click(sender As Object, e As EventArgs)
         dlgDayMonth.ShowDialog()
 
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationDisplayDaily_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDisplayDaily.Click
+    Private Sub mnuClimateMethodsDataManipulationDisplayDaily_Click(sender As Object, e As EventArgs)
         dlgDisplayDaily.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationDisplayDOYOfYear_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDisplayDOYOfYear.Click
+    Private Sub mnuClimateMethodsDataManipulationDisplayDOYOfYear_Click(sender As Object, e As EventArgs)
         dlgDisplayDOYofYear.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationDisplayRainRunningTotal_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDisplayRainRunningTotal.Click
+    Private Sub mnuClimateMethodsDataManipulationDisplayRainRunningTotal_Click(sender As Object, e As EventArgs)
         dlgDisplayRainRunningTotal.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationDisplaySpellLength_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDisplaySpellLength.Click
+    Private Sub mnuClimateMethodsDataManipulationDisplaySpellLength_Click(sender As Object, e As EventArgs)
         dlgDisplaySpellLength.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationExportForPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationExportForPICSA.Click
+    Private Sub mnuClimateMethodsDataManipulationExportForPICSA_Click(sender As Object, e As EventArgs)
         dlgExportforPICSA.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationExtremeEvents_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationExtremeEvents.Click
+    Private Sub mnuClimateMethodsDataManipulationExtremeEvents_Click(sender As Object, e As EventArgs)
         dlgExtremeEvents.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationMissingData_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationMissingData.Click
+    Private Sub mnuClimateMethodsDataManipulationMissingData_Click(sender As Object, e As EventArgs)
         dlgMissingData.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationMissingDataTable_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationMissingDataTable.Click
+    Private Sub mnuClimateMethodsDataManipulationMissingDataTable_Click(sender As Object, e As EventArgs)
         dlgMissingDataTable.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationMonthlySummaries_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationMonthlySummaries.Click
+    Private Sub mnuClimateMethodsDataManipulationMonthlySummaries_Click(sender As Object, e As EventArgs)
         dlgMonthlySummaries.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsDataManipulationOutputForCD_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationOutputForCD.Click
+    Private Sub mnuClimateMethodsDataManipulationOutputForCD_Click(sender As Object, e As EventArgs)
         dlgOutputforCDT.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsAdditionalOutputForCPT_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsAdditionalOutputForCPT.Click
+    Private Sub mnuClimateMethodsAdditionalOutputForCPT_Click(sender As Object, e As EventArgs)
         dlgOutputforCPT.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsAdditionalRainsStatistics_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsAdditionalRainsStatistics.Click
+    Private Sub mnuClimateMethodsAdditionalRainsStatistics_Click(sender As Object, e As EventArgs)
         dlgRainStats.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsAdditionalSeasonalSummary_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsAdditionalSeasonalSummary.Click
+    Private Sub mnuClimateMethodsAdditionalSeasonalSummary_Click(sender As Object, e As EventArgs)
         dlgSeasonalSummary.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsAdditionalSeasonalSummaryRain_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsAdditionalSeasonalSummaryRain.Click
+    Private Sub mnuClimateMethodsAdditionalSeasonalSummaryRain_Click(sender As Object, e As EventArgs)
         dlgSeasonalSummaryRain.ShowDialog()
     End Sub
 
@@ -529,7 +529,7 @@ Public Class frmMain
         dlgRank.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateMethodsCreateClimateObject_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsCreateClimateObject.Click
+    Private Sub mnuClimateMethodsCreateClimateObject_Click(sender As Object, e As EventArgs)
         dlgCreateClimateObject.ShowDialog()
     End Sub
 
@@ -593,7 +593,16 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
-        dlgSaveAs.ShowDialog()
+        Dim clsSaveRDS As New RFunction
+
+        If strSaveFilePath = "" Then
+            dlgSaveAs.ShowDialog()
+        Else
+            clsSaveRDS.SetRCommand("saveRDS")
+            clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
+            clsSaveRDS.AddParameter("file", Chr(34) & strSaveFilePath & Chr(34))
+            clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
+        End If
     End Sub
 
     Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click
@@ -1016,5 +1025,50 @@ Public Class frmMain
 
     Private Sub mnuAppendDataFrame_Click(sender As Object, e As EventArgs) Handles mnuAppendDataFrame.Click
         dlgAppend.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click
+        Using dlgSaveFile As New SaveFileDialog
+            dlgSaveFile.Title = "Save Output Window"
+            dlgSaveFile.Filter = "Rich Text Format (*.rtf)|*.rtf"
+            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
+                Try
+                    frmCommand.txtCommand.SaveFile(dlgSaveFile.FileName, RichTextBoxStreamType.RichText)
+                Catch
+                    MsgBox("Could not save the output window." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click
+        Using dlgSaveFile As New SaveFileDialog
+            dlgSaveFile.Title = "Save Log Window"
+            dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
+            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSaveFile.FileName, frmLog.txtLog.Text)
+                Catch
+                    MsgBox("Could not save the log file." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnuFileSaveAsScriptAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsScriptAs.Click
+        Using dlgSaveFile As New SaveFileDialog
+            dlgSaveFile.Title = "Save Script Window"
+            dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
+            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSaveFile.FileName, frmScript.txtScript.Text)
+                Catch
+                    MsgBox("Could not save the script file." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
+            End If
+        End Using
     End Sub
 End Class
