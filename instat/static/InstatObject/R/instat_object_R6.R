@@ -876,8 +876,8 @@ instat_object$set("public","unfreeze_columns", function(data_name) {
 } 
 )
 
-instat_object$set("public","is_variables_metadata", function(data_name, property, column) {
-  self$get_data_objects(data_name)$is_variables_metadata(property, column)
+instat_object$set("public","is_variables_metadata", function(data_name, property, column, return_vector = FALSE) {
+  self$get_data_objects(data_name)$is_variables_metadata(property, column, return_vector)
 } 
 )
 
@@ -904,5 +904,20 @@ instat_object$set("public","set_structure_columns", function(data_name, struc_ty
 
 instat_object$set("public","add_dependent_columns", function(data_name, columns, dependent_cols) {
   self$get_data_objects(data_name)$add_dependent_columns(columns, dependent_cols)
+}
+)
+
+instat_object$set("public","set_column_colours", function(data_name, columns, colours) {
+  self$get_data_objects(data_name)$set_column_colours(columns, colours)
+}
+)
+
+instat_object$set("public","has_colours", function(data_name, columns) {
+  self$get_data_objects(data_name)$has_colours(columns)
+}
+)
+
+instat_object$set("public","set_column_colours_by_metadata", function(data_name, columns, property) {
+  self$get_data_objects(data_name)$set_column_colours_by_metadata(columns, property)
 }
 )

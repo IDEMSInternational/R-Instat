@@ -51,7 +51,8 @@ Public Class dlgSaveAs
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         'adds the saved file to the recent paths
-        frmMain.clsRecentItems.addToMenu(ucrInputFilePath.GetText())
+        'Disabled until implemented correctly
+        'frmMain.clsRecentItems.addToMenu(ucrInputFilePath.GetText())
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
     End Sub
 
