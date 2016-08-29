@@ -241,7 +241,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     }
     else out <- out[self$current_filter, ]
   }
-  else { 
+  else {
     if(filter_name != "") {
       out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
     }
@@ -291,16 +291,21 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       }
     }
     
+    not_found <- FALSE
     if(!missing(property)) {
       if(!property %in% names(out)) {
         if(error_if_no_property) stop(property, " not found in variables metadata")
-        out=data.frame()
+        not_found <- TRUE
       }
       if(!missing(column)) {
         if(!all(column %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop(column, " not found in data")
-        out = out[column, property]
+        if(not_found) out <- rep(NA, length(column))
+        else out <- out[column, property]
       }
-      else out = out[, property]
+      else {
+        if(not_found) out <- rep(NA, length(names(self$get_data_frame(use_current_filter = FALSE))))
+        else out <- out[, property]
+      }
     }
     
     #TODO get convert_to_character_matrix to work on vectors
@@ -463,7 +468,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if (new_col_name %in% names(curr_data)){
-    stop(paste0(new_col_name," exist in the data."))
+    stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
   }
   if(!is.character(curr_col_name)) {
     stop("Current column name must be of type: character")
@@ -719,10 +724,14 @@ data_object$set("public", "is_metadata", function(str) {
 }
 )
 
-data_object$set("public", "is_variables_metadata", function(str, col) {
+data_object$set("public", "is_variables_metadata", function(str, col, return_vector = FALSE) {
   if(!str %in% names(self$get_variables_metadata())) return(FALSE)
   if(missing(col)) return(TRUE)
-  else return(str %in% names(attributes(self$get_columns_from_data(col, use_current_filter = FALSE))))
+  else {
+    out <- sapply(col, function(x) str %in% names(attributes(self$get_columns_from_data(x, use_current_filter = FALSE))))
+    if(return_vector) return(out)
+    else return(all(out))
+  }
 }
 )
 
@@ -1213,7 +1222,6 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
 )
 
 data_object$set("public", "filter_applied", function() {
-  print(private$.current_filter)
   return(!private$.current_filter$parameters[["is_no_filter"]])
 }
 )
@@ -1409,5 +1417,36 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
     else curr_dependents <- dependent_cols
     self$append_to_variables_metadata(col, dependent_columns_label, curr_dependents)
   }
+}
+)
+
+data_object$set("public", "set_column_colours", function(columns, colours) {
+  if(missing(columns)) columns <- names(self$get_data_frame(use_current_filter = TRUE))
+  if(length(columns) != length(colours)) stop("columns must be the same length as colours")
+  
+  for(i in 1:length(columns)) {
+    self$append_to_variables_metadata(columns[i], colour_label, colours[i])
+  }
+  other_cols <- self$get_column_names()[!self$get_column_names() %in% columns]
+  self$append_to_variables_metadata(other_cols, colour_label, -1)
+}
+)
+
+data_object$set("public", "has_colours", function(columns) {
+  if(!self$is_variables_metadata(str = colour_label)) return(FALSE)
+  if(missing(columns)) colours <- self$get_variables_metadata(property = colour_label)
+  else colours <- self$get_variables_metadata(property = colour_label, column = columns)
+  return(!(-1 %in% colours || anyNA(colours)))
+}
+)
+
+data_object$set("public", "set_column_colours_by_metadata", function(columns, property) {
+  if(missing(columns)) property_values <- self$get_variables_metadata(property = property)
+  else property_values <- self$get_variables_metadata(property = property, column = columns)
+  
+  new_colours <- as.numeric(as.factor(property_values))
+  new_colours[is.na(new_colours)] <- -1
+  if(missing(columns)) self$set_column_colours(colours = new_colours)
+  else self$set_column_colours(columns = columns, colours = new_colours)
 }
 )

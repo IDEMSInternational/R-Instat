@@ -76,7 +76,7 @@ Public Class dlgMetadata
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsGrids.bGrdViewDataByMetadata = True
+        'frmMain.clsGrids.bGrdViewDataByMetadata = True
         frmMain.clsGrids.SetMetadata(ucrInputViewDataBy.txtReceiverSingle.Text)
         frmMain.clsGrids.SetVariablesMetadata(frmVariables.grdVariables)
     End Sub
