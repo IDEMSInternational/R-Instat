@@ -468,7 +468,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if (new_col_name %in% names(curr_data)){
-    stop(paste0(new_col_name," exist in the data."))
+    stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
   }
   if(!is.character(curr_col_name)) {
     stop("Current column name must be of type: character")
