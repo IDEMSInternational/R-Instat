@@ -52,6 +52,8 @@ Public Class sdgCombineGraphOptions
         ucrInputTop.ResetText()
         ucrInputBottom.ResetText()
         SetDefaultRowAndColumns()
+        chkSpecifyOrder.Checked = False
+        grdLayout.Visible = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -69,7 +71,6 @@ Public Class sdgCombineGraphOptions
         Else
             clsRsyntax.RemoveParameter("top")
         End If
-
     End Sub
 
     Private Sub ucrInputBottom_NameChanged() Handles ucrInputBottom.NameChanged
@@ -99,27 +100,25 @@ Public Class sdgCombineGraphOptions
 
     Private Sub nudRows_TextChanged(sender As Object, e As EventArgs) Handles nudRows.TextChanged
         If nudRows.Text <> "" Then
-            clsMatrixFunction.AddParameter("nrow", nudRows.Value)
+            clsRsyntax.AddParameter("nrow", nudRows.Value)
         Else
-            clsMatrixFunction.RemoveParameterByName("nrow")
+            clsRsyntax.RemoveParameter("nrow")
         End If
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.Rows = nudRows.Value
         End If
-        SetMatrixFunction()
     End Sub
 
     Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
         If nudColumns.Text <> "" Then
-            clsMatrixFunction.AddParameter("ncol", nudColumns.Value)
+            clsRsyntax.AddParameter("ncol", nudColumns.Value)
         Else
-            clsMatrixFunction.RemoveParameterByName("ncol")
+            clsRsyntax.RemoveParameter("ncol")
         End If
 
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.Columns = nudColumns.Value
         End If
-        SetMatrixFunction()
     End Sub
 
     Public Sub SetDefaultRowAndColumns()
@@ -174,5 +173,37 @@ Public Class sdgCombineGraphOptions
         clsRsyntax.AddParameter("layout_matrix", clsRFunctionParameter:=clsMatrixFunction)
     End Sub
 
+    Private Sub chkSpecifyOrder_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpecifyOrder.CheckedChanged
+        If chkSpecifyOrder.Checked = True Then
+            grdLayout.Visible = True
+            'SetMatrixFunction()
+            SwitchNcolToMatrixFunc()
+        Else
+            grdLayout.Visible = False
+            RemoveNcolFromMatrixfunc()
+        End If
+    End Sub
+
+    Public Sub SwitchNcolToMatrixFunc()
+        clsRsyntax.RemoveParameter("ncol")
+        clsRsyntax.RemoveParameter("nrow")
+        clsMatrixFunction.AddParameter("ncol", nudColumns.Value)
+        clsMatrixFunction.AddParameter("nrow", nudRows.Value)
+    End Sub
+
+    Public Sub RemoveNcolFromMatrixfunc()
+        clsMatrixFunction.RemoveParameterByName("ncol")
+        clsMatrixFunction.RemoveParameterByName("nrow")
+        clsRsyntax.RemoveParameter("layout_matrix")
+        clsRsyntax.AddParameter("nrow", nudRows.Value)
+        clsRsyntax.AddParameter("ncol", nudColumns.Value)
+    End Sub
+
+    Private Sub grdLayout_Leave(sender As Object, e As EventArgs) Handles grdLayout.Leave
+        If grdCurrSheet.IsEditing Then
+            grdCurrSheet.EndEdit(EndEditReason.NormalFinish)
+            SetMatrixFunction()
+        End If
+    End Sub
 End Class
 
