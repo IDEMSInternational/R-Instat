@@ -174,10 +174,7 @@ Public Class dlgCalculator
     Private Sub saveResults()
         If chkSaveResultInto.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
-
         Else
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
             ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
@@ -686,9 +683,9 @@ Public Class dlgCalculator
 
     Private Sub cmdqF_Click(sender As Object, e As EventArgs) Handles cmdqF.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(p= , df1= ,df2= ,lower.tail = TRUE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf()", 1)
         End If
     End Sub
 
@@ -806,10 +803,20 @@ Public Class dlgCalculator
 
     Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
         saveResults()
+        showControl()
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
         saveResults()
+        showControl()
+    End Sub
+
+    Private Sub showControl()
+        If chkSaveResultInto.Checked Then
+            ucrSaveResultInto.Visible = True
+        Else
+            ucrSaveResultInto.Visible = False
+        End If
     End Sub
 
     Private Sub cmdCombine_Click(sender As Object, e As EventArgs) Handles cmdCombine.Click
