@@ -122,7 +122,11 @@ Public Class ucrFilter
         Else
             clsCurrentConditionView.SetOperation(ucrFilterOperation.GetText())
             clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
-            strCondition = ucrValueForFilter.GetText()
+            If ucrFilterByReceiver.strCurrDataType = "character" Then
+                strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
+            Else
+                strCondition = ucrValueForFilter.GetText()
+            End If
         End If
         clsCurrentConditionView.SetParameter(False, strValue:=strCondition)
         clsCurrentConditionList.AddParameter("value", strCondition)
