@@ -1433,10 +1433,7 @@ data_object$set("public", "set_column_colours", function(columns, colours) {
 )
 
 data_object$set("public", "has_colours", function(columns) {
-  if(!self$is_variables_metadata(str = colour_label)) return(FALSE)
-  if(missing(columns)) colours <- self$get_variables_metadata(property = colour_label)
-  else colours <- self$get_variables_metadata(property = colour_label, column = columns)
-  return(!(-1 %in% colours || anyNA(colours)))
+  return(self$is_variables_metadata(str = colour_label))
 }
 )
 
