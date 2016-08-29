@@ -24,6 +24,8 @@ Partial Class sdgCombineGraphOptions
     Private Sub InitializeComponent()
         Me.tbcLayout = New System.Windows.Forms.TabControl()
         Me.tbpLayout = New System.Windows.Forms.TabPage()
+        Me.chkSpecifyOrder = New System.Windows.Forms.CheckBox()
+        Me.grdLayout = New unvell.ReoGrid.ReoGridControl()
         Me.lblSelectedgrpahs = New System.Windows.Forms.Label()
         Me.lstGraphs = New System.Windows.Forms.ListBox()
         Me.lblNumberofColumns = New System.Windows.Forms.Label()
@@ -31,17 +33,15 @@ Partial Class sdgCombineGraphOptions
         Me.nudColumns = New System.Windows.Forms.NumericUpDown()
         Me.nudRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpLabels = New System.Windows.Forms.TabPage()
+        Me.ucrInputLeft = New instat.ucrInputTextBox()
+        Me.ucrInputRight = New instat.ucrInputTextBox()
+        Me.ucrInputBottom = New instat.ucrInputTextBox()
+        Me.ucrInputTop = New instat.ucrInputTextBox()
         Me.lblLeft = New System.Windows.Forms.Label()
         Me.LblRight = New System.Windows.Forms.Label()
         Me.lblBottom = New System.Windows.Forms.Label()
         Me.lblTop = New System.Windows.Forms.Label()
         Me.ucrsdgLayoutBase = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputLeft = New instat.ucrInputTextBox()
-        Me.ucrInputRight = New instat.ucrInputTextBox()
-        Me.ucrInputBottom = New instat.ucrInputTextBox()
-        Me.ucrInputTop = New instat.ucrInputTextBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.grdLayout = New unvell.ReoGrid.ReoGridControl()
         Me.tbcLayout.SuspendLayout()
         Me.tbpLayout.SuspendLayout()
         CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,7 +61,7 @@ Partial Class sdgCombineGraphOptions
         '
         'tbpLayout
         '
-        Me.tbpLayout.Controls.Add(Me.CheckBox1)
+        Me.tbpLayout.Controls.Add(Me.chkSpecifyOrder)
         Me.tbpLayout.Controls.Add(Me.grdLayout)
         Me.tbpLayout.Controls.Add(Me.lblSelectedgrpahs)
         Me.tbpLayout.Controls.Add(Me.lstGraphs)
@@ -76,6 +76,33 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLayout.TabIndex = 0
         Me.tbpLayout.Text = "Layout"
         Me.tbpLayout.UseVisualStyleBackColor = True
+        '
+        'chkSpecifyOrder
+        '
+        Me.chkSpecifyOrder.AutoSize = True
+        Me.chkSpecifyOrder.Location = New System.Drawing.Point(11, 151)
+        Me.chkSpecifyOrder.Name = "chkSpecifyOrder"
+        Me.chkSpecifyOrder.Size = New System.Drawing.Size(88, 17)
+        Me.chkSpecifyOrder.TabIndex = 6
+        Me.chkSpecifyOrder.Text = "Specify order"
+        Me.chkSpecifyOrder.UseVisualStyleBackColor = True
+        '
+        'grdLayout
+        '
+        Me.grdLayout.BackColor = System.Drawing.Color.White
+        Me.grdLayout.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdLayout.LeadHeaderContextMenuStrip = Nothing
+        Me.grdLayout.Location = New System.Drawing.Point(10, 179)
+        Me.grdLayout.Name = "grdLayout"
+        Me.grdLayout.RowHeaderContextMenuStrip = Nothing
+        Me.grdLayout.Script = Nothing
+        Me.grdLayout.SheetTabContextMenuStrip = Nothing
+        Me.grdLayout.SheetTabNewButtonVisible = True
+        Me.grdLayout.SheetTabVisible = True
+        Me.grdLayout.SheetTabWidth = 60
+        Me.grdLayout.Size = New System.Drawing.Size(343, 179)
+        Me.grdLayout.TabIndex = 5
+        Me.grdLayout.Text = "ReoGridControl1"
         '
         'lblSelectedgrpahs
         '
@@ -141,10 +168,42 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLabels.Location = New System.Drawing.Point(4, 22)
         Me.tbpLabels.Name = "tbpLabels"
         Me.tbpLabels.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLabels.Size = New System.Drawing.Size(371, 156)
+        Me.tbpLabels.Size = New System.Drawing.Size(371, 372)
         Me.tbpLabels.TabIndex = 1
         Me.tbpLabels.Text = "Labels"
         Me.tbpLabels.UseVisualStyleBackColor = True
+        '
+        'ucrInputLeft
+        '
+        Me.ucrInputLeft.IsReadOnly = False
+        Me.ucrInputLeft.Location = New System.Drawing.Point(79, 99)
+        Me.ucrInputLeft.Name = "ucrInputLeft"
+        Me.ucrInputLeft.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLeft.TabIndex = 1
+        '
+        'ucrInputRight
+        '
+        Me.ucrInputRight.IsReadOnly = False
+        Me.ucrInputRight.Location = New System.Drawing.Point(79, 69)
+        Me.ucrInputRight.Name = "ucrInputRight"
+        Me.ucrInputRight.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRight.TabIndex = 1
+        '
+        'ucrInputBottom
+        '
+        Me.ucrInputBottom.IsReadOnly = False
+        Me.ucrInputBottom.Location = New System.Drawing.Point(79, 37)
+        Me.ucrInputBottom.Name = "ucrInputBottom"
+        Me.ucrInputBottom.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputBottom.TabIndex = 1
+        '
+        'ucrInputTop
+        '
+        Me.ucrInputTop.IsReadOnly = False
+        Me.ucrInputTop.Location = New System.Drawing.Point(79, 6)
+        Me.ucrInputTop.Name = "ucrInputTop"
+        Me.ucrInputTop.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTop.TabIndex = 1
         '
         'lblLeft
         '
@@ -189,65 +248,6 @@ Partial Class sdgCombineGraphOptions
         Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrsdgLayoutBase.TabIndex = 3
         '
-        'ucrInputLeft
-        '
-        Me.ucrInputLeft.IsReadOnly = False
-        Me.ucrInputLeft.Location = New System.Drawing.Point(79, 99)
-        Me.ucrInputLeft.Name = "ucrInputLeft"
-        Me.ucrInputLeft.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLeft.TabIndex = 1
-        '
-        'ucrInputRight
-        '
-        Me.ucrInputRight.IsReadOnly = False
-        Me.ucrInputRight.Location = New System.Drawing.Point(79, 69)
-        Me.ucrInputRight.Name = "ucrInputRight"
-        Me.ucrInputRight.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRight.TabIndex = 1
-        '
-        'ucrInputBottom
-        '
-        Me.ucrInputBottom.IsReadOnly = False
-        Me.ucrInputBottom.Location = New System.Drawing.Point(79, 37)
-        Me.ucrInputBottom.Name = "ucrInputBottom"
-        Me.ucrInputBottom.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputBottom.TabIndex = 1
-        '
-        'ucrInputTop
-        '
-        Me.ucrInputTop.IsReadOnly = False
-        Me.ucrInputTop.Location = New System.Drawing.Point(79, 6)
-        Me.ucrInputTop.Name = "ucrInputTop"
-        Me.ucrInputTop.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTop.TabIndex = 1
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(11, 151)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(88, 17)
-        Me.CheckBox1.TabIndex = 6
-        Me.CheckBox1.Text = "Specify order"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'grdLayout
-        '
-        Me.grdLayout.BackColor = System.Drawing.Color.White
-        Me.grdLayout.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdLayout.LeadHeaderContextMenuStrip = Nothing
-        Me.grdLayout.Location = New System.Drawing.Point(10, 179)
-        Me.grdLayout.Name = "grdLayout"
-        Me.grdLayout.RowHeaderContextMenuStrip = Nothing
-        Me.grdLayout.Script = Nothing
-        Me.grdLayout.SheetTabContextMenuStrip = Nothing
-        Me.grdLayout.SheetTabNewButtonVisible = True
-        Me.grdLayout.SheetTabVisible = True
-        Me.grdLayout.SheetTabWidth = 60
-        Me.grdLayout.Size = New System.Drawing.Size(343, 179)
-        Me.grdLayout.TabIndex = 5
-        Me.grdLayout.Text = "ReoGridControl1"
-        '
         'sdgCombineGraphOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -288,6 +288,6 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents ucrsdgLayoutBase As ucrButtonsSubdialogue
     Friend WithEvents lstGraphs As ListBox
     Friend WithEvents lblSelectedgrpahs As Label
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chkSpecifyOrder As CheckBox
     Friend WithEvents grdLayout As unvell.ReoGrid.ReoGridControl
 End Class
