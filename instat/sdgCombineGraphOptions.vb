@@ -126,7 +126,7 @@ Public Class sdgCombineGraphOptions
         If dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 0 Then
             NoOfgraphs = dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count
             nudRows.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
-            nudColumns.Value = Math.Ceiling(NoOfgraphs / nudRows.Value)
+            nudColumns.Value = Math.Ceiling(NoOfgraphs / (Math.Ceiling(Math.Sqrt(NoOfgraphs))))
         End If
     End Sub
 
