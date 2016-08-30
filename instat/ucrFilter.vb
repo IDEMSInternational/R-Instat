@@ -122,7 +122,7 @@ Public Class ucrFilter
         Else
             clsCurrentConditionView.SetOperation(ucrFilterOperation.GetText())
             clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
-            If ucrFilterByReceiver.strCurrDataType = "character" Then
+            If ucrFilterByReceiver.strCurrDataType = "character" AndAlso ucrValueForFilter.GetText() <> "NA" Then
                 strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
             Else
                 strCondition = ucrValueForFilter.GetText()
@@ -200,5 +200,9 @@ Public Class ucrFilter
         Else
             clsFilterFunction.RemoveParameterByName("filter_name")
         End If
+    End Sub
+
+    Private Sub ucrValueForFilter_ContentsChanged() Handles ucrValueForFilter.ContentsChanged
+        CheckAddEnabled()
     End Sub
 End Class
