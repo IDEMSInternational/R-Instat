@@ -32,8 +32,8 @@ Public Class dlgDescribeTwoVariable
         autoTranslate(Me)
     End Sub
 
-    Private Sub cmdstatistics_click(sender As Object, e As EventArgs) Handles cmdStatistics.Click
-        sdgDescribe.ShowDialog()
+    Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+        sdgSummaries.ShowDialog()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
@@ -62,12 +62,12 @@ Public Class dlgDescribeTwoVariable
         clsRAnova.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
         chkSaveResult.Checked = False
         chkSaveResult.Enabled = False
-        cmdStatistics.Visible = False
+        cmdSummaries.Visible = False
         cmdDisplayOptions.Visible = False
-        sdgDescribe.SetUcrDescribe(clsRCustomSummary)
+        sdgSummaries.SetMyRFunction(clsRCustomSummary)
         sdgDescribeDisplay.SetAnovaDispOptions(clsRAnova)
         sdgDescribeDisplay.SetFreqDispOptions(clsRFreqTables)
-        sdgDescribe.SetDefaults()
+        sdgSummaries.SetDefaults()
         sdgDescribeDisplay.SetDefaults()
         ucrSelectorDescribeTwoVar.Reset()
         chkSaveResult.Checked = False
@@ -105,24 +105,24 @@ Public Class dlgDescribeTwoVariable
         SecondVarType()
         If ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
             chkSaveResult.Enabled = False
-            cmdStatistics.Visible = False
+            cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = False
             Correlation()
         ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "factor")) Then
             chkSaveResult.Enabled = True
-            cmdStatistics.Visible = True
+            cmdSummaries.Visible = True
             cmdDisplayOptions.Visible = False
             ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
         ElseIf ((strVarType = "factor") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
             chkSaveResult.Enabled = False
-            cmdStatistics.Visible = False
+            cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = True
             ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRAnova)
             clsRAnova.AddParameter("x_col_names", ucrReceiverFirstVar.GetVariableNames())
             clsRAnova.AddParameter("y_col_name", ucrReceiverSecondVar.GetVariableNames())
         ElseIf ((strVarType = "factor") And (strSecondVarType = "factor")) Then
             chkSaveResult.Enabled = False
-            cmdStatistics.Visible = False
+            cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = True
             ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRFreqTables)
             clsRFreqTables.AddParameter("x_col_names", ucrReceiverFirstVar.GetVariableNames())
@@ -176,14 +176,6 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub OutputOption()
         clsRCustomSummary.AddParameter("return_output", "TRUE")
-    End Sub
-
-    Private Sub ucrReceiverSecondVar_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondVar.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrReceiverSelectedVariables_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstVar.SelectionChanged
-
     End Sub
 
     Private Sub ucrSelectorForColumnStatistics_DataFrameChanged() Handles ucrSelectorDescribeTwoVar.DataFrameChanged
