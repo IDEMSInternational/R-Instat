@@ -87,7 +87,6 @@ data_object <- R6Class("data_object",
                             },
                             current_filter = function(filter) {
                               if(missing(filter)) {
-                                #TODO Change this to call get_filter_as_logical
                                 return(self$get_filter_as_logical(private$.current_filter$name))
                               }
                               else {
@@ -239,7 +238,9 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     if(filter_name != "") {
       out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
     }
-    else out <- out[self$current_filter, ]
+    else {
+      out <- out[self$current_filter, ]
+    }
   }
   else {
     if(filter_name != "") {
@@ -448,18 +449,25 @@ data_object$set("public", "get_columns_from_data", function(col_names, force_as_
 }
 )
 
-data_object$set("public", "frequency_tables", function(x_col_names, y_col_name) {
-  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE, margin_func = list(Sum = sum, Max = max),  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
+  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
   for (i in 1:length(x_col_names)){
-    print(table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
+    if(transpose)(my_table = table(private$data[[y_col_name]], private$data[[x_col_names[i]]])) else(my_table = table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
+    if(percentages && proportions)( my_table*100)
+    if(addmargins && proportions)(print(addmargins(prop.table(my_table)))) #Is FUN appropriate here?
+    else if(addmargins && !proportions)(print(addmargins(my_table)))
+    else if(!addmargins && proportions)(print(prop.table(my_table)))
+    else if(!addmargins && !proportions)(print(my_table))
   }
 }
 )
 
-data_object$set("public", "anova_tables", function(x_col_names, y_col_name) {
+data_object$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE) {
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if(sign_level || signif.stars)warning("This is nolonger descriptive")
+  if(sign_level)(end_col = 5)else(end_col = 4)
   for (i in 1:length(x_col_names)){
-    print(summary(aov(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data)))
+      print(anova(lm(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data))[1:end_col], signif.stars = signif.stars)
   }
 }
 )
@@ -1210,9 +1218,16 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
   else {
     result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
     for(condition in curr_filter$filter_conditions) {
-    func = match.fun(condition[["operation"]])
-    result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
-    i = i + 1
+      func = match.fun(condition[["operation"]])
+      # TODO Have better hanlding and dealing with NA values in filter
+      # and special options for NA in the dialog
+      if(condition[["operation"]] == "==" && is.na(condition[["value"]])) result[ ,i] <- is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
+      else if(condition[["operation"]] == "!=" && is.na(condition[["value"]])) result[ ,i] <- !is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
+      else if(is.na(condition[["value"]])) stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
+      else result[ ,i] <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
+      print(condition[["operation"]])
+      print(condition[["value"]])
+      i = i + 1
     }
     out <- apply(result, 1, all)
     out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
@@ -1433,10 +1448,7 @@ data_object$set("public", "set_column_colours", function(columns, colours) {
 )
 
 data_object$set("public", "has_colours", function(columns) {
-  if(!self$is_variables_metadata(str = colour_label)) return(FALSE)
-  if(missing(columns)) colours <- self$get_variables_metadata(property = colour_label)
-  else colours <- self$get_variables_metadata(property = colour_label, column = columns)
-  return(!(-1 %in% colours || anyNA(colours)))
+  return(self$is_variables_metadata(str = colour_label))
 }
 )
 

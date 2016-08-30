@@ -147,6 +147,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDescribeDisplay.Designer.vb">
+      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDescribeDisplay.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -2550,6 +2556,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDescribe.sw-KE.resx">
       <DependentUpon>sdgDescribe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeDisplay.fr-FR.resx">
+      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeDisplay.resx">
+      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeDisplay.sw-KE.resx">
+      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>

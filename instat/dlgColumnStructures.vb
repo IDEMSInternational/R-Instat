@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgColumnStructure
+    Public clsCourByStructure As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub ucrSelectorColumnStructures_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -31,6 +32,10 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub InitialiseDialog()
+        clsCourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        clsCourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
+        clsCourByStructure.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        'clsCourByStructure.AddParameter("columns")
         ucrReceiverType2.Selector = ucrSelectorColumnStructure
         ucrReceiverType1.Selector = ucrSelectorColumnStructure
         ucrReceiverType3.Selector = ucrSelectorColumnStructure
@@ -92,5 +97,13 @@ Public Class dlgColumnStructure
     Private Sub ucrSelectorColumnStructure_DataFrameChanged() Handles ucrSelectorColumnStructure.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         SetColumnStructureInReceiver()
+    End Sub
+
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If chkColourColumnsByStr.Checked Then
+            frmMain.clsRLink.RunScript(clsCourByStructure.ToScript())
+            clsCourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        End If
     End Sub
 End Class
