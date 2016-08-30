@@ -454,7 +454,7 @@ data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, 
     if(transpose)(my_table = table(private$data[[y_col_name]], private$data[[x_col_names[i]]])) else(my_table = table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
     if(percentages && proportions)( my_table*100)
     if(addmargins && proportions)(print(addmargins(prop.table(my_table)))) #Is FUN appropriate here?
-    else if(addmargins && !proportions)(print(addmargins(my_table, FUN = margin_func, quiet = TRUE)))
+    else if(addmargins && !proportions)(print(addmargins(my_table)))
     else if(!addmargins && proportions)(print(prop.table(my_table)))
     else if(!addmargins && !proportions)(print(my_table))
   }
