@@ -17,6 +17,7 @@
 Public Class ucrInput
     Protected bUserTyped As Boolean = False
     Public Event NameChanged()
+    Public Event ContentsChanged()
     Protected strValidationType As String = "None"
     Dim strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
     Protected clsRList As New RFunction
@@ -42,6 +43,10 @@ Public Class ucrInput
     Public Sub OnNameChanged()
         Me.Text = Me.GetText()
         RaiseEvent NameChanged()
+    End Sub
+
+    Public Sub OnContentsChanged()
+        RaiseEvent ContentsChanged()
     End Sub
 
     Public Function UserTyped() As Boolean
