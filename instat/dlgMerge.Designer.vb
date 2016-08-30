@@ -28,27 +28,26 @@ Partial Class dlgMerge
         Me.rdoChooseMergeColumns = New System.Windows.Forms.RadioButton()
         Me.grpKeys = New System.Windows.Forms.GroupBox()
         Me.cmdAddAnotherPair = New System.Windows.Forms.Button()
-        Me.lblThirdKeyMatch = New System.Windows.Forms.Label()
-        Me.lblSecondKeyMatch = New System.Windows.Forms.Label()
         Me.lblFirstKeyMatch = New System.Windows.Forms.Label()
+        Me.ucrReceiverSecondDF = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFirstDF = New instat.ucrReceiverSingle()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
         Me.grpMergeOptions = New System.Windows.Forms.GroupBox()
         Me.rdoRightJoin = New System.Windows.Forms.RadioButton()
         Me.rdoFullJoin = New System.Windows.Forms.RadioButton()
         Me.rdoLeftJoin = New System.Windows.Forms.RadioButton()
         Me.rdoInnerJoin = New System.Windows.Forms.RadioButton()
+        Me.lstKeyColumns = New System.Windows.Forms.ListView()
+        Me.lblKeyColumns = New System.Windows.Forms.Label()
+        Me.cmdRemoveSelectedPair = New System.Windows.Forms.Button()
+        Me.pnlKeyColumns = New System.Windows.Forms.Panel()
         Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
-        Me.ucrReceiverSecondDFKey3 = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFirstDFKey3 = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSecondDFKey2 = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFirstDFKey2 = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSecondDFKey1 = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFirstDFKey1 = New instat.ucrReceiverSingle()
         Me.ucrSelectorSecondDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSelectorFirstDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpKeys.SuspendLayout()
         Me.grpMergeOptions.SuspendLayout()
+        Me.pnlKeyColumns.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblFirstDataFrame
@@ -63,7 +62,7 @@ Partial Class dlgMerge
         'lblSecondDataFrame
         '
         Me.lblSecondDataFrame.AutoSize = True
-        Me.lblSecondDataFrame.Location = New System.Drawing.Point(264, 11)
+        Me.lblSecondDataFrame.Location = New System.Drawing.Point(227, 13)
         Me.lblSecondDataFrame.Name = "lblSecondDataFrame"
         Me.lblSecondDataFrame.Size = New System.Drawing.Size(151, 13)
         Me.lblSecondDataFrame.TabIndex = 4
@@ -72,7 +71,7 @@ Partial Class dlgMerge
         'rdoMergeByAllColumns
         '
         Me.rdoMergeByAllColumns.AutoSize = True
-        Me.rdoMergeByAllColumns.Location = New System.Drawing.Point(221, 238)
+        Me.rdoMergeByAllColumns.Location = New System.Drawing.Point(220, 227)
         Me.rdoMergeByAllColumns.Name = "rdoMergeByAllColumns"
         Me.rdoMergeByAllColumns.Size = New System.Drawing.Size(221, 17)
         Me.rdoMergeByAllColumns.TabIndex = 5
@@ -83,7 +82,7 @@ Partial Class dlgMerge
         'rdoChooseMergeColumns
         '
         Me.rdoChooseMergeColumns.AutoSize = True
-        Me.rdoChooseMergeColumns.Location = New System.Drawing.Point(12, 238)
+        Me.rdoChooseMergeColumns.Location = New System.Drawing.Point(11, 227)
         Me.rdoChooseMergeColumns.Name = "rdoChooseMergeColumns"
         Me.rdoChooseMergeColumns.Size = New System.Drawing.Size(192, 17)
         Me.rdoChooseMergeColumns.TabIndex = 6
@@ -94,48 +93,24 @@ Partial Class dlgMerge
         'grpKeys
         '
         Me.grpKeys.Controls.Add(Me.cmdAddAnotherPair)
-        Me.grpKeys.Controls.Add(Me.lblThirdKeyMatch)
-        Me.grpKeys.Controls.Add(Me.ucrReceiverSecondDFKey3)
-        Me.grpKeys.Controls.Add(Me.ucrReceiverFirstDFKey3)
-        Me.grpKeys.Controls.Add(Me.lblSecondKeyMatch)
-        Me.grpKeys.Controls.Add(Me.ucrReceiverSecondDFKey2)
-        Me.grpKeys.Controls.Add(Me.ucrReceiverFirstDFKey2)
         Me.grpKeys.Controls.Add(Me.lblFirstKeyMatch)
-        Me.grpKeys.Controls.Add(Me.ucrReceiverSecondDFKey1)
-        Me.grpKeys.Controls.Add(Me.ucrReceiverFirstDFKey1)
-        Me.grpKeys.Location = New System.Drawing.Point(12, 268)
+        Me.grpKeys.Controls.Add(Me.ucrReceiverSecondDF)
+        Me.grpKeys.Controls.Add(Me.ucrReceiverFirstDF)
+        Me.grpKeys.Location = New System.Drawing.Point(10, 259)
         Me.grpKeys.Name = "grpKeys"
-        Me.grpKeys.Size = New System.Drawing.Size(390, 158)
+        Me.grpKeys.Size = New System.Drawing.Size(390, 105)
         Me.grpKeys.TabIndex = 8
         Me.grpKeys.TabStop = False
         Me.grpKeys.Text = "Key Columns"
         '
         'cmdAddAnotherPair
         '
-        Me.cmdAddAnotherPair.Location = New System.Drawing.Point(12, 129)
+        Me.cmdAddAnotherPair.Location = New System.Drawing.Point(12, 74)
         Me.cmdAddAnotherPair.Name = "cmdAddAnotherPair"
         Me.cmdAddAnotherPair.Size = New System.Drawing.Size(118, 23)
         Me.cmdAddAnotherPair.TabIndex = 16
         Me.cmdAddAnotherPair.Text = "Add Another Pair"
         Me.cmdAddAnotherPair.UseVisualStyleBackColor = True
-        '
-        'lblThirdKeyMatch
-        '
-        Me.lblThirdKeyMatch.AutoSize = True
-        Me.lblThirdKeyMatch.Location = New System.Drawing.Point(154, 104)
-        Me.lblThirdKeyMatch.Name = "lblThirdKeyMatch"
-        Me.lblThirdKeyMatch.Size = New System.Drawing.Size(74, 13)
-        Me.lblThirdKeyMatch.TabIndex = 15
-        Me.lblThirdKeyMatch.Text = "Matched With"
-        '
-        'lblSecondKeyMatch
-        '
-        Me.lblSecondKeyMatch.AutoSize = True
-        Me.lblSecondKeyMatch.Location = New System.Drawing.Point(154, 69)
-        Me.lblSecondKeyMatch.Name = "lblSecondKeyMatch"
-        Me.lblSecondKeyMatch.Size = New System.Drawing.Size(74, 13)
-        Me.lblSecondKeyMatch.TabIndex = 12
-        Me.lblSecondKeyMatch.Text = "Matched With"
         '
         'lblFirstKeyMatch
         '
@@ -146,10 +121,28 @@ Partial Class dlgMerge
         Me.lblFirstKeyMatch.TabIndex = 9
         Me.lblFirstKeyMatch.Text = "Matched With"
         '
+        'ucrReceiverSecondDF
+        '
+        Me.ucrReceiverSecondDF.Location = New System.Drawing.Point(255, 32)
+        Me.ucrReceiverSecondDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondDF.Name = "ucrReceiverSecondDF"
+        Me.ucrReceiverSecondDF.Selector = Nothing
+        Me.ucrReceiverSecondDF.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecondDF.TabIndex = 8
+        '
+        'ucrReceiverFirstDF
+        '
+        Me.ucrReceiverFirstDF.Location = New System.Drawing.Point(12, 32)
+        Me.ucrReceiverFirstDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFirstDF.Name = "ucrReceiverFirstDF"
+        Me.ucrReceiverFirstDF.Selector = Nothing
+        Me.ucrReceiverFirstDF.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFirstDF.TabIndex = 7
+        '
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(9, 453)
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(8, 377)
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
         Me.lblNewDataFrameName.Size = New System.Drawing.Size(118, 13)
         Me.lblNewDataFrameName.TabIndex = 9
@@ -161,7 +154,7 @@ Partial Class dlgMerge
         Me.grpMergeOptions.Controls.Add(Me.rdoFullJoin)
         Me.grpMergeOptions.Controls.Add(Me.rdoLeftJoin)
         Me.grpMergeOptions.Controls.Add(Me.rdoInnerJoin)
-        Me.grpMergeOptions.Location = New System.Drawing.Point(455, 236)
+        Me.grpMergeOptions.Location = New System.Drawing.Point(449, 48)
         Me.grpMergeOptions.Name = "grpMergeOptions"
         Me.grpMergeOptions.Size = New System.Drawing.Size(304, 158)
         Me.grpMergeOptions.TabIndex = 11
@@ -212,72 +205,56 @@ Partial Class dlgMerge
         Me.rdoInnerJoin.Text = "Only include observations that match in both data frames"
         Me.rdoInnerJoin.UseVisualStyleBackColor = True
         '
+        'lstKeyColumns
+        '
+        Me.lstKeyColumns.FullRowSelect = True
+        Me.lstKeyColumns.Location = New System.Drawing.Point(6, 21)
+        Me.lstKeyColumns.Name = "lstKeyColumns"
+        Me.lstKeyColumns.Size = New System.Drawing.Size(280, 167)
+        Me.lstKeyColumns.TabIndex = 12
+        Me.lstKeyColumns.UseCompatibleStateImageBehavior = False
+        Me.lstKeyColumns.View = System.Windows.Forms.View.Details
+        '
+        'lblKeyColumns
+        '
+        Me.lblKeyColumns.AutoSize = True
+        Me.lblKeyColumns.Location = New System.Drawing.Point(3, 5)
+        Me.lblKeyColumns.Name = "lblKeyColumns"
+        Me.lblKeyColumns.Size = New System.Drawing.Size(68, 13)
+        Me.lblKeyColumns.TabIndex = 17
+        Me.lblKeyColumns.Text = "Key Columns"
+        '
+        'cmdRemoveSelectedPair
+        '
+        Me.cmdRemoveSelectedPair.Location = New System.Drawing.Point(6, 194)
+        Me.cmdRemoveSelectedPair.Name = "cmdRemoveSelectedPair"
+        Me.cmdRemoveSelectedPair.Size = New System.Drawing.Size(118, 23)
+        Me.cmdRemoveSelectedPair.TabIndex = 17
+        Me.cmdRemoveSelectedPair.Text = "Remove Selected"
+        Me.cmdRemoveSelectedPair.UseVisualStyleBackColor = True
+        '
+        'pnlKeyColumns
+        '
+        Me.pnlKeyColumns.Controls.Add(Me.lstKeyColumns)
+        Me.pnlKeyColumns.Controls.Add(Me.lblKeyColumns)
+        Me.pnlKeyColumns.Controls.Add(Me.cmdRemoveSelectedPair)
+        Me.pnlKeyColumns.Location = New System.Drawing.Point(451, 223)
+        Me.pnlKeyColumns.Name = "pnlKeyColumns"
+        Me.pnlKeyColumns.Size = New System.Drawing.Size(298, 230)
+        Me.pnlKeyColumns.TabIndex = 19
+        '
         'ucrNewDataFrameName
         '
         Me.ucrNewDataFrameName.IsReadOnly = False
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(135, 450)
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(132, 374)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(280, 21)
         Me.ucrNewDataFrameName.TabIndex = 10
         '
-        'ucrReceiverSecondDFKey3
-        '
-        Me.ucrReceiverSecondDFKey3.Location = New System.Drawing.Point(255, 100)
-        Me.ucrReceiverSecondDFKey3.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondDFKey3.Name = "ucrReceiverSecondDFKey3"
-        Me.ucrReceiverSecondDFKey3.Selector = Nothing
-        Me.ucrReceiverSecondDFKey3.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondDFKey3.TabIndex = 14
-        '
-        'ucrReceiverFirstDFKey3
-        '
-        Me.ucrReceiverFirstDFKey3.Location = New System.Drawing.Point(12, 100)
-        Me.ucrReceiverFirstDFKey3.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFirstDFKey3.Name = "ucrReceiverFirstDFKey3"
-        Me.ucrReceiverFirstDFKey3.Selector = Nothing
-        Me.ucrReceiverFirstDFKey3.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFirstDFKey3.TabIndex = 13
-        '
-        'ucrReceiverSecondDFKey2
-        '
-        Me.ucrReceiverSecondDFKey2.Location = New System.Drawing.Point(255, 66)
-        Me.ucrReceiverSecondDFKey2.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondDFKey2.Name = "ucrReceiverSecondDFKey2"
-        Me.ucrReceiverSecondDFKey2.Selector = Nothing
-        Me.ucrReceiverSecondDFKey2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondDFKey2.TabIndex = 11
-        '
-        'ucrReceiverFirstDFKey2
-        '
-        Me.ucrReceiverFirstDFKey2.Location = New System.Drawing.Point(12, 66)
-        Me.ucrReceiverFirstDFKey2.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFirstDFKey2.Name = "ucrReceiverFirstDFKey2"
-        Me.ucrReceiverFirstDFKey2.Selector = Nothing
-        Me.ucrReceiverFirstDFKey2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFirstDFKey2.TabIndex = 10
-        '
-        'ucrReceiverSecondDFKey1
-        '
-        Me.ucrReceiverSecondDFKey1.Location = New System.Drawing.Point(255, 32)
-        Me.ucrReceiverSecondDFKey1.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondDFKey1.Name = "ucrReceiverSecondDFKey1"
-        Me.ucrReceiverSecondDFKey1.Selector = Nothing
-        Me.ucrReceiverSecondDFKey1.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondDFKey1.TabIndex = 8
-        '
-        'ucrReceiverFirstDFKey1
-        '
-        Me.ucrReceiverFirstDFKey1.Location = New System.Drawing.Point(12, 32)
-        Me.ucrReceiverFirstDFKey1.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFirstDFKey1.Name = "ucrReceiverFirstDFKey1"
-        Me.ucrReceiverFirstDFKey1.Selector = Nothing
-        Me.ucrReceiverFirstDFKey1.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFirstDFKey1.TabIndex = 7
-        '
         'ucrSelectorSecondDataFrame
         '
         Me.ucrSelectorSecondDataFrame.bShowHiddenColumns = False
-        Me.ucrSelectorSecondDataFrame.Location = New System.Drawing.Point(267, 24)
+        Me.ucrSelectorSecondDataFrame.Location = New System.Drawing.Point(230, 26)
         Me.ucrSelectorSecondDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSecondDataFrame.Name = "ucrSelectorSecondDataFrame"
         Me.ucrSelectorSecondDataFrame.Size = New System.Drawing.Size(240, 180)
@@ -294,7 +271,7 @@ Partial Class dlgMerge
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 495)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 403)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -303,7 +280,8 @@ Partial Class dlgMerge
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(771, 549)
+        Me.ClientSize = New System.Drawing.Size(762, 457)
+        Me.Controls.Add(Me.pnlKeyColumns)
         Me.Controls.Add(Me.grpMergeOptions)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.lblNewDataFrameName)
@@ -324,6 +302,8 @@ Partial Class dlgMerge
         Me.grpKeys.PerformLayout()
         Me.grpMergeOptions.ResumeLayout(False)
         Me.grpMergeOptions.PerformLayout()
+        Me.pnlKeyColumns.ResumeLayout(False)
+        Me.pnlKeyColumns.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -336,16 +316,10 @@ Partial Class dlgMerge
     Friend WithEvents lblSecondDataFrame As Label
     Friend WithEvents rdoMergeByAllColumns As RadioButton
     Friend WithEvents rdoChooseMergeColumns As RadioButton
-    Friend WithEvents ucrReceiverFirstDFKey1 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverFirstDF As ucrReceiverSingle
     Friend WithEvents grpKeys As GroupBox
-    Friend WithEvents ucrReceiverSecondDFKey1 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSecondDF As ucrReceiverSingle
     Friend WithEvents cmdAddAnotherPair As Button
-    Friend WithEvents lblThirdKeyMatch As Label
-    Friend WithEvents ucrReceiverSecondDFKey3 As ucrReceiverSingle
-    Friend WithEvents ucrReceiverFirstDFKey3 As ucrReceiverSingle
-    Friend WithEvents lblSecondKeyMatch As Label
-    Friend WithEvents ucrReceiverSecondDFKey2 As ucrReceiverSingle
-    Friend WithEvents ucrReceiverFirstDFKey2 As ucrReceiverSingle
     Friend WithEvents lblFirstKeyMatch As Label
     Friend WithEvents lblNewDataFrameName As Label
     Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
@@ -354,4 +328,8 @@ Partial Class dlgMerge
     Friend WithEvents rdoLeftJoin As RadioButton
     Friend WithEvents rdoInnerJoin As RadioButton
     Friend WithEvents rdoRightJoin As RadioButton
+    Friend WithEvents lstKeyColumns As ListView
+    Friend WithEvents lblKeyColumns As Label
+    Friend WithEvents cmdRemoveSelectedPair As Button
+    Friend WithEvents pnlKeyColumns As Panel
 End Class
