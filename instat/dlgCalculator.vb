@@ -536,7 +536,7 @@ Public Class dlgCalculator
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=seq(0,1,0.25), na.rm=FALSE, names=TRUE, type=7)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=0.5, na.rm=FALSE, names=TRUE, type=7)", 44)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
         End If
@@ -620,14 +620,6 @@ Public Class dlgCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate(string= , pattern= )", 12)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate()", 1)
-        End If
-    End Sub
-
-    Private Sub cmdLength_Click(sender As Object, e As EventArgs) Handles cmdLength.Click
-        If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length(string= )", 1)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length()", 1)
         End If
     End Sub
 
