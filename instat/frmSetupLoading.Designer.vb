@@ -22,7 +22,11 @@ Partial Class frmSetupLoading
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblLoading = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pgbProgres = New System.Windows.Forms.ProgressBar()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'lblLoading
@@ -35,6 +39,33 @@ Partial Class frmSetupLoading
         Me.lblLoading.TabIndex = 0
         Me.lblLoading.Text = "Loading packages from R. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please wait."
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblLoading.UseWaitCursor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(28, 140)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(203, 17)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "This may take several minutes."
+        Me.Label1.UseWaitCursor = True
+        '
+        'pgbProgres
+        '
+        Me.pgbProgres.Location = New System.Drawing.Point(13, 123)
+        Me.pgbProgres.MarqueeAnimationSpeed = 75
+        Me.pgbProgres.Name = "pgbProgres"
+        Me.pgbProgres.Size = New System.Drawing.Size(236, 13)
+        Me.pgbProgres.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.pgbProgres.TabIndex = 2
+        Me.pgbProgres.UseWaitCursor = True
+        '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 10
         '
         'frmSetupLoading
         '
@@ -42,16 +73,24 @@ Partial Class frmSetupLoading
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(261, 182)
         Me.ControlBox = False
+        Me.Controls.Add(Me.pgbProgres)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblLoading)
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Location = New System.Drawing.Point(540, 50)
         Me.Name = "frmSetupLoading"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Setup Loading"
         Me.TopMost = True
+        Me.UseWaitCursor = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents lblLoading As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents pgbProgres As ProgressBar
+    Friend WithEvents Timer1 As Timer
 End Class
