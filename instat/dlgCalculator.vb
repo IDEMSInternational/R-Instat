@@ -73,6 +73,8 @@ Public Class dlgCalculator
         ucrInputCalOptions.cboInput.Items.Add("Statistics")
         ucrInputCalOptions.cboInput.Items.Add("Strings")
         ucrInputCalOptions.cboInput.Items.Add("Probability")
+
+
     End Sub
 
     'Private Sub ucrSaveResultIntoInto_NameChanged() Handles ucrSaveResultInto.NameChanged
@@ -165,10 +167,16 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^")
     End Sub
 
-
-
     Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        saveResults()
+    End Sub
+
+    Private Sub saveResults()
+        If chkSaveResultInto.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            ucrBase.clsRsyntax.iCallType = 2
+        End If
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -488,7 +496,7 @@ Public Class dlgCalculator
 
     Private Sub cmdMin_Click(sender As Object, e As EventArgs) Handles cmdMin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x= ,na.rm=FASLE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x= ,na.rm=FALSE)", 13)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min()", 1)
         End If
@@ -496,7 +504,7 @@ Public Class dlgCalculator
 
     Private Sub cmdMedian_Click(sender As Object, e As EventArgs) Handles cmdMedian.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x=na.rm=FALSE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x= ,na.rm=FALSE)", 13)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median()", 1)
         End If
@@ -528,7 +536,7 @@ Public Class dlgCalculator
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=seq(0,1,0.25), na.rm=FALSE, names=TRUE, type=7)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=0.5, na.rm=FALSE, names=TRUE, type=7)", 44)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
         End If
@@ -585,7 +593,7 @@ Public Class dlgCalculator
 
     Private Sub cmdOrder_Click(sender As Object, e As EventArgs) Handles cmdOrder.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_order(x= , decreasing = FALSE, na_last = TRUE, locale = '')", 50)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_order(x= , decreasing = FALSE, na_last = TRUE)", 38)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_order()", 1)
         End If
@@ -612,14 +620,6 @@ Public Class dlgCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate(string= , pattern= )", 12)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate()", 1)
-        End If
-    End Sub
-
-    Private Sub cmdLength_Click(sender As Object, e As EventArgs) Handles cmdLength.Click
-        If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length(string= )", 1)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length()", 1)
         End If
     End Sub
 
@@ -675,9 +675,9 @@ Public Class dlgCalculator
 
     Private Sub cmdqF_Click(sender As Object, e As EventArgs) Handles cmdqF.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(p= , df1= ,df2= ,lower.tail = TRUE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf()", 1)
         End If
     End Sub
 
@@ -790,6 +790,40 @@ Public Class dlgCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trigamma(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trigamma()", 1)
+        End If
+    End Sub
+
+    Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
+        saveResults()
+        showControl()
+    End Sub
+
+    Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
+        saveResults()
+        showControl()
+    End Sub
+
+    Private Sub showControl()
+        If chkSaveResultInto.Checked Then
+            ucrSaveResultInto.Visible = True
+        Else
+            ucrSaveResultInto.Visible = False
+        End If
+    End Sub
+
+    Private Sub cmdCombine_Click(sender As Object, e As EventArgs) Handles cmdCombine.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_c(string= , pattern='')", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_c()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSplit_Click(sender As Object, e As EventArgs) Handles cmdSplit.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_split_fixed(string= , pattern='', n= )", 18)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_split_fixed()", 1)
         End If
     End Sub
 End Class
