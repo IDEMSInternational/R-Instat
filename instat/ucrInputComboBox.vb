@@ -139,4 +139,8 @@ Public Class ucrInputComboBox
         '    e.Handled = True
         'End If
     End Sub
+
+    Private Sub cboInput_TextChanged(sender As Object, e As EventArgs) Handles cboInput.TextChanged
+        OnContentsChanged()
+    End Sub
 End Class
