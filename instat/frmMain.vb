@@ -1071,4 +1071,8 @@ Public Class frmMain
             End If
         End Using
     End Sub
+
+    Private Sub mnuOrganiseDataFrameColumnStructure_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameColumnStructure.Click
+        dlgColumnStructure.ShowDialog()
+    End Sub
 End Class

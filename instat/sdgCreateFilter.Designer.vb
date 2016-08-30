@@ -49,7 +49,7 @@ Partial Class sdgCreateFilter
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgCreateFilter"
-        Me.Text = "sdgCreateFilter"
+        Me.Text = "Define New Filter"
         Me.TopMost = True
         Me.ResumeLayout(False)
 
