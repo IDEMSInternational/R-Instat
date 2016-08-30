@@ -612,13 +612,13 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
-instat_object$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name) {
-  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name)
+instat_object$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name, addmargins = FALSE, proportions = FALSE, percentages = FALSE, transpose = FALSE) {
+  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name, addmargins = addmargins, proportions = proportions, percentages = percentages, transpose = transpose)
 } 
 )
 
-instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name) {
-  self$get_data_objects(data_name)$anova_tables(x_col_names, y_col_name)
+instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE) {
+  self$get_data_objects(data_name)$anova_tables(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level)
 } 
 )
 
