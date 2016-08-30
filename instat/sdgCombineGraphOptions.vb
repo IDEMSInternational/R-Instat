@@ -125,23 +125,26 @@ Public Class sdgCombineGraphOptions
         Dim NoOfgraphs As Integer
         If dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 0 Then
             NoOfgraphs = dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count
-            nudColumns.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
-            nudRows.Value = Math.Ceiling((NoOfgraphs / Math.Sqrt(NoOfgraphs)))
+            nudRows.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
+            nudColumns.Value = Math.Ceiling(NoOfgraphs / nudRows.Value)
         End If
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
 
-        If Not IsNumeric(e.NewData) Then
-            MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric character. Please enter a numeric character withinthe range of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
-            e.EndReason = EndEditReason.Cancel
-        ElseIf e.NewData > lstGraphs.Items.Count Or e.NewData < 1 Then
-            MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
-            e.EndReason = EndEditReason.Cancel
+        If e.NewData.ToString() <> "" Then
+            If Not IsNumeric(e.NewData) Then
+                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric character. Please enter a numeric character withinthe range of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
+                e.EndReason = EndEditReason.Cancel
+            ElseIf e.NewData > lstGraphs.Items.Count Or e.NewData < 1 Then
+                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
+                e.EndReason = EndEditReason.Cancel
+            End If
         End If
         SetMatrixFunction()
     End Sub
+
     Public Sub LoadGraphs()
         Dim i As Integer = 0
         lstGraphs.Items.Clear()
@@ -153,24 +156,34 @@ Public Class sdgCombineGraphOptions
     Public Sub SetMatrixFunction()
         Dim i As Integer
         Dim j As Integer
+        Dim lstNumbers As New List(Of Integer)
         Dim strMatrix As String = ""
         clsMatrixFunction.SetRCommand("matrix")
 
         If grdCurrSheet IsNot Nothing Then
             For i = 0 To grdCurrSheet.ColumnCount - 1
                 For j = 0 To grdCurrSheet.RowCount - 1
-                    If Not ((i = grdCurrSheet.ColumnCount - 1) And (j = grdCurrSheet.RowCount - 1)) Then
-                        strMatrix = strMatrix & grdCurrSheet(row:=j, col:=i) & ","
+                    If grdCurrSheet(row:=j, col:=i) Is Nothing Then
+                        strMatrix = strMatrix & "NA"
                     Else
+                        lstNumbers.Add(grdCurrSheet(row:=j, col:=i))
                         strMatrix = strMatrix & grdCurrSheet(row:=j, col:=i)
                     End If
+                    If Not ((i = grdCurrSheet.ColumnCount - 1) AndAlso (j = grdCurrSheet.RowCount - 1)) Then
+                        strMatrix = strMatrix & ","
+                    End If
+
                 Next
             Next
-
         End If
         strMatrix = "c" & "(" & strMatrix & ")"
         clsMatrixFunction.AddParameter("data", strMatrix)
         clsRsyntax.AddParameter("layout_matrix", clsRFunctionParameter:=clsMatrixFunction)
+        If lstNumbers.Distinct.Count = lstGraphs.Items.Count Then
+            txtLayoutMessage.Text = "Ok: Layout contains all graphs"
+        Else
+            txtLayoutMessage.Text = "Layout incomplete: layout must contain all graphs."
+        End If
     End Sub
 
     Private Sub chkSpecifyOrder_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpecifyOrder.CheckedChanged

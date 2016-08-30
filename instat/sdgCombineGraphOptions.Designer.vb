@@ -42,6 +42,7 @@ Partial Class sdgCombineGraphOptions
         Me.lblBottom = New System.Windows.Forms.Label()
         Me.lblTop = New System.Windows.Forms.Label()
         Me.ucrsdgLayoutBase = New instat.ucrButtonsSubdialogue()
+        Me.txtLayoutMessage = New System.Windows.Forms.TextBox()
         Me.tbcLayout.SuspendLayout()
         Me.tbpLayout.SuspendLayout()
         CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,11 +57,12 @@ Partial Class sdgCombineGraphOptions
         Me.tbcLayout.Location = New System.Drawing.Point(13, 13)
         Me.tbcLayout.Name = "tbcLayout"
         Me.tbcLayout.SelectedIndex = 0
-        Me.tbcLayout.Size = New System.Drawing.Size(379, 398)
+        Me.tbcLayout.Size = New System.Drawing.Size(379, 419)
         Me.tbcLayout.TabIndex = 0
         '
         'tbpLayout
         '
+        Me.tbpLayout.Controls.Add(Me.txtLayoutMessage)
         Me.tbpLayout.Controls.Add(Me.chkSpecifyOrder)
         Me.tbpLayout.Controls.Add(Me.grdLayout)
         Me.tbpLayout.Controls.Add(Me.lblSelectedgrpahs)
@@ -72,7 +74,7 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLayout.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayout.Name = "tbpLayout"
         Me.tbpLayout.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayout.Size = New System.Drawing.Size(371, 372)
+        Me.tbpLayout.Size = New System.Drawing.Size(371, 393)
         Me.tbpLayout.TabIndex = 0
         Me.tbpLayout.Text = "Layout"
         Me.tbpLayout.UseVisualStyleBackColor = True
@@ -243,16 +245,24 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrsdgLayoutBase
         '
-        Me.ucrsdgLayoutBase.Location = New System.Drawing.Point(104, 417)
+        Me.ucrsdgLayoutBase.Location = New System.Drawing.Point(121, 438)
         Me.ucrsdgLayoutBase.Name = "ucrsdgLayoutBase"
         Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrsdgLayoutBase.TabIndex = 3
+        '
+        'txtLayoutMessage
+        '
+        Me.txtLayoutMessage.Location = New System.Drawing.Point(11, 367)
+        Me.txtLayoutMessage.Name = "txtLayoutMessage"
+        Me.txtLayoutMessage.ReadOnly = True
+        Me.txtLayoutMessage.Size = New System.Drawing.Size(342, 20)
+        Me.txtLayoutMessage.TabIndex = 7
         '
         'sdgCombineGraphOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 450)
+        Me.ClientSize = New System.Drawing.Size(404, 469)
         Me.Controls.Add(Me.ucrsdgLayoutBase)
         Me.Controls.Add(Me.tbcLayout)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -290,4 +300,5 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents lblSelectedgrpahs As Label
     Friend WithEvents chkSpecifyOrder As CheckBox
     Friend WithEvents grdLayout As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents txtLayoutMessage As TextBox
 End Class
