@@ -21,8 +21,8 @@ Public Class ucrDataFrame
     Public clsCurrDataFrame As New RFunction
     Public bFirstLoad As Boolean = True
     Private bIncludeOverall As Boolean = False
+    Private bPvtUseFilteredData As Boolean
     Public strCurrDataFrame As String = ""
-    Public bUseFilteredData As Boolean = True
     Public bDataFrameFixed As Boolean = False
     Private strFixedDataFrame As String
 
@@ -32,6 +32,10 @@ Public Class ucrDataFrame
             bFirstLoad = False
         End If
         SetDataFrameProperties()
+    End Sub
+
+    Private Sub InitialiseControl()
+        bUseCurrentFilter = True
     End Sub
 
     Public Sub Reset()
@@ -69,15 +73,6 @@ Public Class ucrDataFrame
             iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(cboAvailableDataFrames.Text)
             clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-            If bUseFilteredData Then
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
-                Else
-                    clsCurrDataFrame.RemoveParameterByName("use_current_filter")
-                End If
-            Else
-                clsCurrDataFrame.AddParameter("use_current_filter", "FALSE")
-            End If
             clsParam.SetArgumentName("data_name")
             clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
             clsCurrDataFrame.AddParameter(clsParam)
@@ -109,4 +104,22 @@ Public Class ucrDataFrame
     Public Function GetIncludeOverall() As Boolean
         Return bIncludeOverall
     End Function
+
+    Public Property bUseCurrentFilter As Boolean
+        Get
+            Return bPvtUseFilteredData
+        End Get
+        Set(bValue As Boolean)
+            bPvtUseFilteredData = bValue
+            If bPvtUseFilteredData Then
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
+                Else
+                    clsCurrDataFrame.RemoveParameterByName("use_current_filter")
+                End If
+            Else
+                clsCurrDataFrame.AddParameter("use_current_filter", "FALSE")
+            End If
+        End Set
+    End Property
 End Class
