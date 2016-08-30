@@ -66,6 +66,7 @@ Partial Class dlgCalculator
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
         Me.grpStrings = New System.Windows.Forms.GroupBox()
+        Me.cmdSplit = New System.Windows.Forms.Button()
         Me.cmdCombine = New System.Windows.Forms.Button()
         Me.cmdDetect = New System.Windows.Forms.Button()
         Me.cmdTrim = New System.Windows.Forms.Button()
@@ -77,7 +78,6 @@ Partial Class dlgCalculator
         Me.cmdOrder = New System.Windows.Forms.Button()
         Me.cmdPad = New System.Windows.Forms.Button()
         Me.cmdExtract = New System.Windows.Forms.Button()
-        Me.cmdLength = New System.Windows.Forms.Button()
         Me.cmdCountstrings = New System.Windows.Forms.Button()
         Me.cmdLocate = New System.Windows.Forms.Button()
         Me.cmdCount = New System.Windows.Forms.Button()
@@ -131,7 +131,6 @@ Partial Class dlgCalculator
         Me.ucrSpaceToMangeResult = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdSplit = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpMaths.SuspendLayout()
         Me.grpStrings.SuspendLayout()
@@ -634,16 +633,27 @@ Partial Class dlgCalculator
         Me.grpStrings.Controls.Add(Me.cmdOrder)
         Me.grpStrings.Controls.Add(Me.cmdPad)
         Me.grpStrings.Controls.Add(Me.cmdExtract)
-        Me.grpStrings.Controls.Add(Me.cmdLength)
         Me.grpStrings.Controls.Add(Me.cmdCountstrings)
         Me.grpStrings.Controls.Add(Me.cmdLocate)
         Me.grpStrings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpStrings.Location = New System.Drawing.Point(385, 64)
+        Me.grpStrings.Location = New System.Drawing.Point(385, 68)
         Me.grpStrings.Name = "grpStrings"
         Me.grpStrings.Size = New System.Drawing.Size(163, 141)
         Me.grpStrings.TabIndex = 150
         Me.grpStrings.TabStop = False
         Me.grpStrings.Text = "Strings"
+        '
+        'cmdSplit
+        '
+        Me.cmdSplit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSplit.Location = New System.Drawing.Point(44, 109)
+        Me.cmdSplit.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSplit.Name = "cmdSplit"
+        Me.cmdSplit.Size = New System.Drawing.Size(38, 30)
+        Me.cmdSplit.TabIndex = 149
+        Me.cmdSplit.Tag = ""
+        Me.cmdSplit.Text = "split"
+        Me.cmdSplit.UseVisualStyleBackColor = True
         '
         'cmdCombine
         '
@@ -767,24 +777,13 @@ Partial Class dlgCalculator
         Me.cmdExtract.Text = "extract"
         Me.cmdExtract.UseVisualStyleBackColor = True
         '
-        'cmdLength
-        '
-        Me.cmdLength.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLength.Location = New System.Drawing.Point(45, 78)
-        Me.cmdLength.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdLength.Name = "cmdLength"
-        Me.cmdLength.Size = New System.Drawing.Size(38, 30)
-        Me.cmdLength.TabIndex = 135
-        Me.cmdLength.Text = "length"
-        Me.cmdLength.UseVisualStyleBackColor = True
-        '
         'cmdCountstrings
         '
         Me.cmdCountstrings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdCountstrings.Location = New System.Drawing.Point(84, 77)
+        Me.cmdCountstrings.Location = New System.Drawing.Point(45, 77)
         Me.cmdCountstrings.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdCountstrings.Name = "cmdCountstrings"
-        Me.cmdCountstrings.Size = New System.Drawing.Size(40, 30)
+        Me.cmdCountstrings.Size = New System.Drawing.Size(79, 30)
         Me.cmdCountstrings.TabIndex = 134
         Me.cmdCountstrings.Text = "count"
         Me.cmdCountstrings.UseVisualStyleBackColor = True
@@ -1112,7 +1111,7 @@ Partial Class dlgCalculator
         Me.grpProbabilty.Controls.Add(Me.cmdLfact)
         Me.grpProbabilty.Controls.Add(Me.cmdTrigamma)
         Me.grpProbabilty.Controls.Add(Me.cmdBeta)
-        Me.grpProbabilty.Location = New System.Drawing.Point(385, 70)
+        Me.grpProbabilty.Location = New System.Drawing.Point(387, 70)
         Me.grpProbabilty.Name = "grpProbabilty"
         Me.grpProbabilty.Size = New System.Drawing.Size(337, 140)
         Me.grpProbabilty.TabIndex = 152
@@ -1371,23 +1370,11 @@ Partial Class dlgCalculator
         Me.ucrBase.Size = New System.Drawing.Size(404, 51)
         Me.ucrBase.TabIndex = 0
         '
-        'cmdSplit
-        '
-        Me.cmdSplit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSplit.Location = New System.Drawing.Point(44, 109)
-        Me.cmdSplit.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdSplit.Name = "cmdSplit"
-        Me.cmdSplit.Size = New System.Drawing.Size(38, 30)
-        Me.cmdSplit.TabIndex = 149
-        Me.cmdSplit.Tag = ""
-        Me.cmdSplit.Text = "split"
-        Me.cmdSplit.UseVisualStyleBackColor = True
-        '
         'dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 338)
+        Me.ClientSize = New System.Drawing.Size(784, 338)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.chkShowArguments)
         Me.Controls.Add(Me.grpStrings)
@@ -1482,7 +1469,6 @@ Partial Class dlgCalculator
     Friend WithEvents cmdOrder As Button
     Friend WithEvents cmdPad As Button
     Friend WithEvents cmdExtract As Button
-    Friend WithEvents cmdLength As Button
     Friend WithEvents cmdCountstrings As Button
     Friend WithEvents cmdLocate As Button
     Friend WithEvents cmdCount As Button
