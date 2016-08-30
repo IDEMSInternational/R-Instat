@@ -634,7 +634,7 @@ Public Class dlgCalculator
 
     Private Sub cmdCountstrings_Click(sender As Object, e As EventArgs) Handles cmdCountstrings.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_count(String= , pattern ='')", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_count(string= , pattern ='')", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_count()", 1)
         End If
