@@ -612,8 +612,8 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
-instat_object$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name, addmargins = FALSE, proportions = FALSE, percentages = FALSE, transpose = FALSE, margin_func = sum) {
-  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name, addmargins = addmargins, proportions = proportions, percentages = percentages, transpose = transpose, margin_func = margin_func)
+instat_object$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name, addmargins = FALSE, proportions = FALSE, percentages = FALSE, transpose = FALSE) {
+  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name, addmargins = addmargins, proportions = proportions, percentages = percentages, transpose = transpose)
 } 
 )
 
