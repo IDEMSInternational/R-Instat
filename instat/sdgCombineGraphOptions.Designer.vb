@@ -24,6 +24,10 @@ Partial Class sdgCombineGraphOptions
     Private Sub InitializeComponent()
         Me.tbcLayout = New System.Windows.Forms.TabControl()
         Me.tbpLayout = New System.Windows.Forms.TabPage()
+        Me.chkSpecifyOrder = New System.Windows.Forms.CheckBox()
+        Me.grdLayout = New unvell.ReoGrid.ReoGridControl()
+        Me.lblSelectedgrpahs = New System.Windows.Forms.Label()
+        Me.lstGraphs = New System.Windows.Forms.ListBox()
         Me.lblNumberofColumns = New System.Windows.Forms.Label()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.nudColumns = New System.Windows.Forms.NumericUpDown()
@@ -38,7 +42,7 @@ Partial Class sdgCombineGraphOptions
         Me.lblBottom = New System.Windows.Forms.Label()
         Me.lblTop = New System.Windows.Forms.Label()
         Me.ucrsdgLayoutBase = New instat.ucrButtonsSubdialogue()
-        Me.grdLayout = New unvell.ReoGrid.ReoGridControl()
+        Me.txtLayoutMessage = New System.Windows.Forms.TextBox()
         Me.tbcLayout.SuspendLayout()
         Me.tbpLayout.SuspendLayout()
         CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -53,11 +57,16 @@ Partial Class sdgCombineGraphOptions
         Me.tbcLayout.Location = New System.Drawing.Point(13, 13)
         Me.tbcLayout.Name = "tbcLayout"
         Me.tbcLayout.SelectedIndex = 0
-        Me.tbcLayout.Size = New System.Drawing.Size(259, 183)
+        Me.tbcLayout.Size = New System.Drawing.Size(379, 419)
         Me.tbcLayout.TabIndex = 0
         '
         'tbpLayout
         '
+        Me.tbpLayout.Controls.Add(Me.txtLayoutMessage)
+        Me.tbpLayout.Controls.Add(Me.chkSpecifyOrder)
+        Me.tbpLayout.Controls.Add(Me.grdLayout)
+        Me.tbpLayout.Controls.Add(Me.lblSelectedgrpahs)
+        Me.tbpLayout.Controls.Add(Me.lstGraphs)
         Me.tbpLayout.Controls.Add(Me.lblNumberofColumns)
         Me.tbpLayout.Controls.Add(Me.lblNumberofRows)
         Me.tbpLayout.Controls.Add(Me.nudColumns)
@@ -65,10 +74,54 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLayout.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayout.Name = "tbpLayout"
         Me.tbpLayout.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayout.Size = New System.Drawing.Size(251, 157)
+        Me.tbpLayout.Size = New System.Drawing.Size(371, 393)
         Me.tbpLayout.TabIndex = 0
         Me.tbpLayout.Text = "Layout"
         Me.tbpLayout.UseVisualStyleBackColor = True
+        '
+        'chkSpecifyOrder
+        '
+        Me.chkSpecifyOrder.AutoSize = True
+        Me.chkSpecifyOrder.Location = New System.Drawing.Point(11, 151)
+        Me.chkSpecifyOrder.Name = "chkSpecifyOrder"
+        Me.chkSpecifyOrder.Size = New System.Drawing.Size(88, 17)
+        Me.chkSpecifyOrder.TabIndex = 6
+        Me.chkSpecifyOrder.Text = "Specify order"
+        Me.chkSpecifyOrder.UseVisualStyleBackColor = True
+        '
+        'grdLayout
+        '
+        Me.grdLayout.BackColor = System.Drawing.Color.White
+        Me.grdLayout.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdLayout.LeadHeaderContextMenuStrip = Nothing
+        Me.grdLayout.Location = New System.Drawing.Point(10, 179)
+        Me.grdLayout.Name = "grdLayout"
+        Me.grdLayout.RowHeaderContextMenuStrip = Nothing
+        Me.grdLayout.Script = Nothing
+        Me.grdLayout.SheetTabContextMenuStrip = Nothing
+        Me.grdLayout.SheetTabNewButtonVisible = True
+        Me.grdLayout.SheetTabVisible = True
+        Me.grdLayout.SheetTabWidth = 60
+        Me.grdLayout.Size = New System.Drawing.Size(343, 179)
+        Me.grdLayout.TabIndex = 5
+        Me.grdLayout.Text = "ReoGridControl1"
+        '
+        'lblSelectedgrpahs
+        '
+        Me.lblSelectedgrpahs.AutoSize = True
+        Me.lblSelectedgrpahs.Location = New System.Drawing.Point(212, 4)
+        Me.lblSelectedgrpahs.Name = "lblSelectedgrpahs"
+        Me.lblSelectedgrpahs.Size = New System.Drawing.Size(86, 13)
+        Me.lblSelectedgrpahs.TabIndex = 3
+        Me.lblSelectedgrpahs.Text = "Selected Graphs"
+        '
+        'lstGraphs
+        '
+        Me.lstGraphs.FormattingEnabled = True
+        Me.lstGraphs.Location = New System.Drawing.Point(218, 18)
+        Me.lstGraphs.Name = "lstGraphs"
+        Me.lstGraphs.Size = New System.Drawing.Size(120, 134)
+        Me.lstGraphs.TabIndex = 2
         '
         'lblNumberofColumns
         '
@@ -117,7 +170,7 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLabels.Location = New System.Drawing.Point(4, 22)
         Me.tbpLabels.Name = "tbpLabels"
         Me.tbpLabels.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLabels.Size = New System.Drawing.Size(251, 157)
+        Me.tbpLabels.Size = New System.Drawing.Size(371, 372)
         Me.tbpLabels.TabIndex = 1
         Me.tbpLabels.Text = "Labels"
         Me.tbpLabels.UseVisualStyleBackColor = True
@@ -192,34 +245,24 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrsdgLayoutBase
         '
-        Me.ucrsdgLayoutBase.Location = New System.Drawing.Point(60, 202)
+        Me.ucrsdgLayoutBase.Location = New System.Drawing.Point(121, 438)
         Me.ucrsdgLayoutBase.Name = "ucrsdgLayoutBase"
         Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrsdgLayoutBase.TabIndex = 1
+        Me.ucrsdgLayoutBase.TabIndex = 3
         '
-        'grdLayout
+        'txtLayoutMessage
         '
-        Me.grdLayout.BackColor = System.Drawing.Color.White
-        Me.grdLayout.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdLayout.LeadHeaderContextMenuStrip = Nothing
-        Me.grdLayout.Location = New System.Drawing.Point(12, 238)
-        Me.grdLayout.Name = "grdLayout"
-        Me.grdLayout.RowHeaderContextMenuStrip = Nothing
-        Me.grdLayout.Script = Nothing
-        Me.grdLayout.SheetTabContextMenuStrip = Nothing
-        Me.grdLayout.SheetTabNewButtonVisible = True
-        Me.grdLayout.SheetTabVisible = True
-        Me.grdLayout.SheetTabWidth = 60
-        Me.grdLayout.Size = New System.Drawing.Size(379, 200)
-        Me.grdLayout.TabIndex = 2
-        Me.grdLayout.Text = "ReoGridControl1"
+        Me.txtLayoutMessage.Location = New System.Drawing.Point(11, 367)
+        Me.txtLayoutMessage.Name = "txtLayoutMessage"
+        Me.txtLayoutMessage.ReadOnly = True
+        Me.txtLayoutMessage.Size = New System.Drawing.Size(342, 20)
+        Me.txtLayoutMessage.TabIndex = 7
         '
         'sdgCombineGraphOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 450)
-        Me.Controls.Add(Me.grdLayout)
+        Me.ClientSize = New System.Drawing.Size(404, 469)
         Me.Controls.Add(Me.ucrsdgLayoutBase)
         Me.Controls.Add(Me.tbcLayout)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -244,7 +287,6 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents nudColumns As NumericUpDown
     Friend WithEvents nudRows As NumericUpDown
     Friend WithEvents tbpLabels As TabPage
-    Friend WithEvents ucrsdgLayoutBase As ucrButtonsSubdialogue
     Friend WithEvents ucrInputLeft As ucrInputTextBox
     Friend WithEvents ucrInputRight As ucrInputTextBox
     Friend WithEvents ucrInputBottom As ucrInputTextBox
@@ -253,5 +295,10 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents LblRight As Label
     Friend WithEvents lblBottom As Label
     Friend WithEvents lblTop As Label
+    Friend WithEvents ucrsdgLayoutBase As ucrButtonsSubdialogue
+    Friend WithEvents lstGraphs As ListBox
+    Friend WithEvents lblSelectedgrpahs As Label
+    Friend WithEvents chkSpecifyOrder As CheckBox
     Friend WithEvents grdLayout As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents txtLayoutMessage As TextBox
 End Class
