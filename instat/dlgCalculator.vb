@@ -174,10 +174,7 @@ Public Class dlgCalculator
     Private Sub saveResults()
         If chkSaveResultInto.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
-
         Else
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
             ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
@@ -539,7 +536,7 @@ Public Class dlgCalculator
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=seq(0,1,0.25), na.rm=FALSE, names=TRUE, type=7)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=0.5, na.rm=FALSE, names=TRUE, type=7)", 44)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
         End If
@@ -626,14 +623,6 @@ Public Class dlgCalculator
         End If
     End Sub
 
-    Private Sub cmdLength_Click(sender As Object, e As EventArgs) Handles cmdLength.Click
-        If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length(string= )", 1)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length()", 1)
-        End If
-    End Sub
-
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract(string= , pattern= )", 12)
@@ -686,9 +675,9 @@ Public Class dlgCalculator
 
     Private Sub cmdqF_Click(sender As Object, e As EventArgs) Handles cmdqF.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(p= , df1= ,df2= ,lower.tail = TRUE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf()", 1)
         End If
     End Sub
 
@@ -806,10 +795,20 @@ Public Class dlgCalculator
 
     Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
         saveResults()
+        showControl()
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
         saveResults()
+        showControl()
+    End Sub
+
+    Private Sub showControl()
+        If chkSaveResultInto.Checked Then
+            ucrSaveResultInto.Visible = True
+        Else
+            ucrSaveResultInto.Visible = False
+        End If
     End Sub
 
     Private Sub cmdCombine_Click(sender As Object, e As EventArgs) Handles cmdCombine.Click
