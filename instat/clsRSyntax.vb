@@ -104,6 +104,14 @@ Public Class RSyntax
         If bUseBaseFunction Then
             clsBaseFunction.RemoveAssignTo()
         End If
+        If bUseCommandString Then
+            strAssignTo = ""
+            strAssignToDataframe = ""
+            strAssignToColumn = ""
+            strAssignToModel = ""
+            bToBeAssigned = False
+            bIsAssigned = False
+        End If
     End Sub
 
     Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
@@ -263,14 +271,13 @@ Public Class RSyntax
         Else
             strTemp = clsFunction.ToScript(strScript)
         End If
-        If bUseBaseFunction Then
-            If bExcludeAssignedFunctionOutput And clsFunction.bIsAssigned Then
+        If bExcludeAssignedFunctionOutput Then
+            If (bUseBaseFunction AndAlso clsFunction.bIsAssigned) OrElse (bUseBaseOperator AndAlso clsBaseOperator.bIsAssigned) OrElse (bUseCommandString AndAlso bIsAssigned) Then
                 Return strScript
                 Exit Function
             End If
         End If
         Return strScript & strTemp
-
     End Function
 
     Public Function GetbIsAssigned() As Boolean

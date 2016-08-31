@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -16,11 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Imports RDotNet
+
 Public Class dlgCalculator
     Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
+
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 14
@@ -43,17 +44,21 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SetDefaults()
+        cmdTry.Enabled = False
+        ucrSpaceToMangeResult.Enabled = False
         ucrSaveResultInto.SetPrefix("Cal")
         ucrSaveResultInto.Reset()
         ucrInputCalOptions.Reset()
         ucrReceiverForCalculation.cboExpression.ResetText()
         Me.Size = New System.Drawing.Size(436, 402)
-        ucrInputCalOptions.cboInput.Text = "Basic"
-        chkShowArguments.Checked = True
+        ucrInputCalOptions.SetName("Basic")
+        chkShowArguments.Checked = False
+        chkSaveResultInto.Checked = True
+        SaveResults()
     End Sub
 
     Private Sub ReopenDialog()
-
+        SaveResults()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -67,34 +72,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.cboInput.Items.Add("Basic")
-        ucrInputCalOptions.cboInput.Items.Add("Maths")
-        ucrInputCalOptions.cboInput.Items.Add("Logical")
-        ucrInputCalOptions.cboInput.Items.Add("Statistics")
-        ucrInputCalOptions.cboInput.Items.Add("Strings")
-        ucrInputCalOptions.cboInput.Items.Add("Probability")
-
-
-    End Sub
-
-    'Private Sub ucrSaveResultIntoInto_NameChanged() Handles ucrSaveResultInto.NameChanged
-    '    ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveResultInto.GetText, strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveResultInto.GetText, bAssignToIsPrefix:=True)
-    'End Sub
-
-    Private Sub AddText(strVar As String, Optional intStepsBack As Integer = 0, Optional bolInsertSelected As Boolean = False)
-        'Dim intCurrCursorPosition As Integer
-        'Dim strSelectedText As String = txtCalcLine.SelectedText
-
-        'txtCalcLine.SelectedText = ""
-        'intCurrCursorPosition = txtCalcLine.SelectionStart
-        'txtCalcLine.Text = txtCalcLine.Text.Insert(txtCalcLine.SelectionStart, strVar)
-        'intCurrCursorPosition = intCurrCursorPosition + strVar.Length - intStepsBack
-        'If bolInsertSelected Then
-        '    txtCalcLine.Text = txtCalcLine.Text.Insert(intCurrCursorPosition, strSelectedText)
-        '    intCurrCursorPosition = intCurrCursorPosition + strSelectedText.Length + 1
-        'End If
-        'txtCalcLine.SelectionStart = intCurrCursorPosition
-        'txtCalcLine.Select()
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical", "Statistics", "Strings", "Probability"})
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -157,25 +135,23 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("/")
     End Sub
 
-    Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs)
-        'If lstAvailableVariable.SelectedItem <> "" Then
-        '    AddText("data[[""" & lstAvailableVariable.SelectedItem & """]]")
-        'End If
-    End Sub
-
     Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^")
     End Sub
 
     Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
-        saveResults()
+        SaveResults()
     End Sub
 
-    Private Sub saveResults()
+    Private Sub SaveResults()
         If chkSaveResultInto.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
         Else
+            ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
 
@@ -197,7 +173,7 @@ Public Class dlgCalculator
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForCalculation.GetVariableNames(False))
-        ucrBase.OKEnabled(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdGreater_Click(sender As Object, e As EventArgs) Handles cmdGreater.Click
@@ -213,10 +189,9 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        ucrReceiverForCalculation.Addbackspace()
+        ucrReceiverForCalculation.Backspace()
 
     End Sub
-
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -794,16 +769,15 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
-        saveResults()
-        showControl()
+        SaveResults()
+        ShowControl()
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
-        saveResults()
-        showControl()
+        SaveResults()
     End Sub
 
-    Private Sub showControl()
+    Private Sub ShowControl()
         If chkSaveResultInto.Checked Then
             ucrSaveResultInto.Visible = True
         Else
