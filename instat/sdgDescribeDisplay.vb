@@ -91,15 +91,6 @@ Public Class sdgDescribeDisplay
 
     Public Sub GrpBoxEnable()
         If ((dlgDescribeTwoVariable.strVarType = "factor") And (dlgDescribeTwoVariable.strSecondVarType = "numeric" OrElse dlgDescribeTwoVariable.strSecondVarType = "integer")) Then
-            grpFrequenciesOptions.Enabled = True
-            chkAddMargins.Enabled = True
-            chkPercentages.Enabled = True
-            chkProportions.Enabled = True
-            chkTranspose.Enabled = True
-            chkSignifLevel.Enabled = False
-            chkSignifStars.Enabled = False
-            grpAnovaOptions.Enabled = False
-        ElseIf ((dlgDescribeTwoVariable.strVarType = "factor") And (dlgDescribeTwoVariable.strSecondVarType = "factor")) Then
             grpAnovaOptions.Enabled = True
             chkAddMargins.Enabled = False
             chkPercentages.Enabled = False
@@ -108,6 +99,15 @@ Public Class sdgDescribeDisplay
             chkSignifLevel.Enabled = True
             chkSignifStars.Enabled = True
             grpFrequenciesOptions.Enabled = False
+        ElseIf ((dlgDescribeTwoVariable.strVarType = "factor") And (dlgDescribeTwoVariable.strSecondVarType = "factor")) Then
+            grpFrequenciesOptions.Enabled = True
+            chkAddMargins.Enabled = True
+            chkPercentages.Enabled = True
+            chkProportions.Enabled = True
+            chkTranspose.Enabled = True
+            chkSignifLevel.Enabled = False
+            chkSignifStars.Enabled = False
+            grpAnovaOptions.Enabled = False
         End If
     End Sub
 End Class
