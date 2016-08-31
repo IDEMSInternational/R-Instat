@@ -23,7 +23,7 @@ Partial Class dlgDescribeTwoVariable
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblFirstVariable = New System.Windows.Forms.Label()
-        Me.cmdStatistics = New System.Windows.Forms.Button()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.chkSaveResult = New System.Windows.Forms.CheckBox()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
@@ -43,15 +43,15 @@ Partial Class dlgDescribeTwoVariable
         Me.lblFirstVariable.Tag = "First_Variable"
         Me.lblFirstVariable.Text = "First Variable"
         '
-        'cmdStatistics
+        'cmdSummaries
         '
-        Me.cmdStatistics.Location = New System.Drawing.Point(309, 178)
-        Me.cmdStatistics.Name = "cmdStatistics"
-        Me.cmdStatistics.Size = New System.Drawing.Size(71, 23)
-        Me.cmdStatistics.TabIndex = 103
-        Me.cmdStatistics.Tag = "Statistics"
-        Me.cmdStatistics.Text = "Statistics..."
-        Me.cmdStatistics.UseVisualStyleBackColor = True
+        Me.cmdSummaries.Location = New System.Drawing.Point(309, 178)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(78, 23)
+        Me.cmdSummaries.TabIndex = 103
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'chkSaveResult
         '
@@ -76,7 +76,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(295, 180)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(299, 179)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(98, 23)
         Me.cmdDisplayOptions.TabIndex = 109
@@ -105,6 +105,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrSelectorDescribeTwoVar
         '
         Me.ucrSelectorDescribeTwoVar.bShowHiddenColumns = False
+        Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = False
         Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(8, -4)
         Me.ucrSelectorDescribeTwoVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDescribeTwoVar.Name = "ucrSelectorDescribeTwoVar"
@@ -129,7 +130,7 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.ucrReceiverFirstVar)
         Me.Controls.Add(Me.lblFirstVariable)
-        Me.Controls.Add(Me.cmdStatistics)
+        Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrSelectorDescribeTwoVar)
         Me.Controls.Add(Me.ucrBaseDescribeTwoVar)
         Me.MaximizeBox = False
@@ -147,7 +148,7 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrSelectorDescribeTwoVar As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverFirstVar As ucrReceiverMultiple
     Friend WithEvents lblFirstVariable As Label
-    Friend WithEvents cmdStatistics As Button
+    Friend WithEvents cmdSummaries As Button
     Friend WithEvents chkSaveResult As CheckBox
     Friend WithEvents lblSecondVariable As Label
     Friend WithEvents ucrReceiverSecondVar As ucrReceiverSingle
