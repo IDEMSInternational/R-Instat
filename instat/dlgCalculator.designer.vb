@@ -1320,7 +1320,7 @@ Partial Class dlgCalculator
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.IsReadOnly = False
-        Me.ucrInputCalOptions.Location = New System.Drawing.Point(222, 42)
+        Me.ucrInputCalOptions.Location = New System.Drawing.Point(225, 42)
         Me.ucrInputCalOptions.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
         Me.ucrInputCalOptions.Size = New System.Drawing.Size(137, 22)
@@ -1328,11 +1328,11 @@ Partial Class dlgCalculator
         '
         'ucrReceiverForCalculation
         '
-        Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(90, 16)
+        Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(91, 13)
         Me.ucrReceiverForCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
         Me.ucrReceiverForCalculation.Selector = Nothing
-        Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(284, 20)
+        Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(284, 28)
         Me.ucrReceiverForCalculation.TabIndex = 118
         '
         'ucrSaveResultInto
@@ -1347,7 +1347,7 @@ Partial Class dlgCalculator
         'ucrSpaceToMangeResult
         '
         Me.ucrSpaceToMangeResult.IsReadOnly = False
-        Me.ucrSpaceToMangeResult.Location = New System.Drawing.Point(91, 230)
+        Me.ucrSpaceToMangeResult.Location = New System.Drawing.Point(91, 228)
         Me.ucrSpaceToMangeResult.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrSpaceToMangeResult.Name = "ucrSpaceToMangeResult"
         Me.ucrSpaceToMangeResult.Size = New System.Drawing.Size(284, 22)
@@ -1356,6 +1356,7 @@ Partial Class dlgCalculator
         'ucrSelectorForCalculations
         '
         Me.ucrSelectorForCalculations.bShowHiddenColumns = False
+        Me.ucrSelectorForCalculations.bUseCurrentFilter = False
         Me.ucrSelectorForCalculations.Location = New System.Drawing.Point(8, 36)
         Me.ucrSelectorForCalculations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
