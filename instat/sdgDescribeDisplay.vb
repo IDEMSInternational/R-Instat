@@ -55,6 +55,9 @@ Public Class sdgDescribeDisplay
         Else
             clsRFreqDispOptions.RemoveParameterByName("percentages")
         End If
+        If chkProportions.Checked = False Then
+            MsgBox("Proportions should be checked to display percentages")
+        End If
     End Sub
 
     Private Sub chkTranspose_CheckedChanged(sender As Object, e As EventArgs) Handles chkTranspose.CheckedChanged
