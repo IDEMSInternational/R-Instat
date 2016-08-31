@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgDescriptiveStatistics
+Partial Class dlgDescribeOneVariable
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class dlgDescriptiveStatistics
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdStatistics = New System.Windows.Forms.Button()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.ucrBaseDescribeOneVar = New instat.ucrButtons()
         Me.chkSaveResult = New System.Windows.Forms.CheckBox()
@@ -32,20 +32,20 @@ Partial Class dlgDescriptiveStatistics
         Me.chkCustomise = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
-        'cmdStatistics
+        'cmdSummaries
         '
-        Me.cmdStatistics.Location = New System.Drawing.Point(318, 185)
-        Me.cmdStatistics.Name = "cmdStatistics"
-        Me.cmdStatistics.Size = New System.Drawing.Size(71, 23)
-        Me.cmdStatistics.TabIndex = 90
-        Me.cmdStatistics.Tag = "Statistics"
-        Me.cmdStatistics.Text = "Statistics "
-        Me.cmdStatistics.UseVisualStyleBackColor = True
+        Me.cmdSummaries.Location = New System.Drawing.Point(289, 176)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(78, 23)
+        Me.cmdSummaries.TabIndex = 90
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(286, 5)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(283, 12)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 94
@@ -54,7 +54,7 @@ Partial Class dlgDescriptiveStatistics
         '
         'ucrBaseDescribeOneVar
         '
-        Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(10, 224)
+        Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(13, 209)
         Me.ucrBaseDescribeOneVar.Name = "ucrBaseDescribeOneVar"
         Me.ucrBaseDescribeOneVar.Size = New System.Drawing.Size(399, 53)
         Me.ucrBaseDescribeOneVar.TabIndex = 95
@@ -63,7 +63,7 @@ Partial Class dlgDescriptiveStatistics
         '
         Me.chkSaveResult.AutoSize = True
         Me.chkSaveResult.Enabled = False
-        Me.chkSaveResult.Location = New System.Drawing.Point(13, 195)
+        Me.chkSaveResult.Location = New System.Drawing.Point(13, 187)
         Me.chkSaveResult.Name = "chkSaveResult"
         Me.chkSaveResult.Size = New System.Drawing.Size(87, 17)
         Me.chkSaveResult.TabIndex = 96
@@ -82,7 +82,7 @@ Partial Class dlgDescriptiveStatistics
         '
         'ucrReceiverDescribeOneVar
         '
-        Me.ucrReceiverDescribeOneVar.Location = New System.Drawing.Point(271, 23)
+        Me.ucrReceiverDescribeOneVar.Location = New System.Drawing.Point(268, 34)
         Me.ucrReceiverDescribeOneVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDescribeOneVar.Name = "ucrReceiverDescribeOneVar"
         Me.ucrReceiverDescribeOneVar.Selector = Nothing
@@ -92,7 +92,8 @@ Partial Class dlgDescriptiveStatistics
         'ucrSelectorDescribeOneVar
         '
         Me.ucrSelectorDescribeOneVar.bShowHiddenColumns = False
-        Me.ucrSelectorDescribeOneVar.Location = New System.Drawing.Point(9, 0)
+        Me.ucrSelectorDescribeOneVar.bUseCurrentFilter = False
+        Me.ucrSelectorDescribeOneVar.Location = New System.Drawing.Point(13, 0)
         Me.ucrSelectorDescribeOneVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDescribeOneVar.Name = "ucrSelectorDescribeOneVar"
         Me.ucrSelectorDescribeOneVar.Size = New System.Drawing.Size(210, 189)
@@ -101,7 +102,7 @@ Partial Class dlgDescriptiveStatistics
         'chkCustomise
         '
         Me.chkCustomise.AutoSize = True
-        Me.chkCustomise.Location = New System.Drawing.Point(317, 162)
+        Me.chkCustomise.Location = New System.Drawing.Point(291, 154)
         Me.chkCustomise.Name = "chkCustomise"
         Me.chkCustomise.Size = New System.Drawing.Size(74, 17)
         Me.chkCustomise.TabIndex = 103
@@ -113,7 +114,7 @@ Partial Class dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 284)
+        Me.ClientSize = New System.Drawing.Size(419, 269)
         Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.chkCustomise)
         Me.Controls.Add(Me.ucrSelectorDescribeOneVar)
@@ -121,7 +122,7 @@ Partial Class dlgDescriptiveStatistics
         Me.Controls.Add(Me.lblNewDataFrame)
         Me.Controls.Add(Me.ucrBaseDescribeOneVar)
         Me.Controls.Add(Me.lblSelectedVariable)
-        Me.Controls.Add(Me.cmdStatistics)
+        Me.Controls.Add(Me.cmdSummaries)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescriptiveStatistics"
@@ -132,7 +133,7 @@ Partial Class dlgDescriptiveStatistics
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents cmdStatistics As Button
+    Friend WithEvents cmdSummaries As Button
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents ucrBaseDescribeOneVar As ucrButtons
     Friend WithEvents chkSaveResult As CheckBox

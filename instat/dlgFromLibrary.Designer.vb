@@ -47,6 +47,7 @@ Partial Class dlgFromLibrary
         'lstCollection
         '
         Me.lstCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
+        Me.lstCollection.FullRowSelect = True
         Me.lstCollection.Location = New System.Drawing.Point(15, 56)
         Me.lstCollection.MultiSelect = False
         Me.lstCollection.Name = "lstCollection"

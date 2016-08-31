@@ -147,6 +147,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDescribeDisplay.Designer.vb">
+      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDescribeDisplay.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -687,10 +693,10 @@
     <Compile Include="sdgDataOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgDescribe.Designer.vb">
-      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    <Compile Include="sdgSummaries.Designer.vb">
+      <DependentUpon>sdgSummaries.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgDescribe.vb">
+    <Compile Include="sdgSummaries.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
@@ -843,10 +849,10 @@
     <Compile Include="dlgDayMonth.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDescriptiveStatistics.Designer.vb">
-      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    <Compile Include="dlgDescribeOneVariable.Designer.vb">
+      <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDescriptiveStatistics.vb">
+    <Compile Include="dlgDescribeOneVariable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDisplayDaily.Designer.vb">
@@ -2542,14 +2548,23 @@
     <EmbeddedResource Include="sdgDataOptions.sw-KE.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDescribe.fr-FR.resx">
-      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
+      <DependentUpon>sdgSummaries.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDescribe.resx">
-      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    <EmbeddedResource Include="sdgSummaries.resx">
+      <DependentUpon>sdgSummaries.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDescribe.sw-KE.resx">
-      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    <EmbeddedResource Include="sdgSummaries.sw-KE.resx">
+      <DependentUpon>sdgSummaries.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeDisplay.fr-FR.resx">
+      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeDisplay.resx">
+      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeDisplay.sw-KE.resx">
+      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
@@ -2696,14 +2711,14 @@
     <EmbeddedResource Include="dlgDayMonth.sw-KE.resx">
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDescriptiveStatistics.fr-FR.resx">
-      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDescribeOneVariable.fr-FR.resx">
+      <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
-      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDescribeOneVariable.resx">
+      <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
-      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDescribeOneVariable.sw-KE.resx">
+      <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayDaily.fr-FR.resx">
       <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
