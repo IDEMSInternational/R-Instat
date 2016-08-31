@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class sdgDescribe
+Partial Class sdgSummaries
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -27,15 +27,10 @@ Partial Class sdgDescribe
         Me.chkNTotal = New System.Windows.Forms.CheckBox()
         Me.chkMode = New System.Windows.Forms.CheckBox()
         Me.grpPecents = New System.Windows.Forms.GroupBox()
-        Me.ucrInputProportions = New instat.ucrInputComboBox()
-        Me.ucrInputInequality = New instat.ucrInputComboBox()
-        Me.ucrInputPercentiles = New instat.ucrInputComboBox()
         Me.chkPercentiles = New System.Windows.Forms.CheckBox()
         Me.chkProportions = New System.Windows.Forms.CheckBox()
         Me.chkResults = New System.Windows.Forms.CheckBox()
         Me.grpPrecision = New System.Windows.Forms.GroupBox()
-        Me.ucrInputUnits = New instat.ucrInputComboBox()
-        Me.ucrInputPrecision = New instat.ucrInputComboBox()
         Me.lblUnits = New System.Windows.Forms.Label()
         Me.lblPrecision = New System.Windows.Forms.Label()
         Me.rdoSignificantFigures = New System.Windows.Forms.RadioButton()
@@ -63,6 +58,11 @@ Partial Class sdgDescribe
         Me.CheckBox25 = New System.Windows.Forms.CheckBox()
         Me.chkSumSquares = New System.Windows.Forms.CheckBox()
         Me.chkHigherMoments = New System.Windows.Forms.CheckBox()
+        Me.ucrInputProportions = New instat.ucrInputComboBox()
+        Me.ucrInputInequality = New instat.ucrInputComboBox()
+        Me.ucrInputPercentiles = New instat.ucrInputComboBox()
+        Me.ucrInputUnits = New instat.ucrInputComboBox()
+        Me.ucrInputPrecision = New instat.ucrInputComboBox()
         Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.grpPecents.SuspendLayout()
         Me.grpPrecision.SuspendLayout()
@@ -136,33 +136,6 @@ Partial Class sdgDescribe
         Me.grpPecents.TabIndex = 16
         Me.grpPecents.TabStop = False
         '
-        'ucrInputProportions
-        '
-        Me.ucrInputProportions.Enabled = False
-        Me.ucrInputProportions.IsReadOnly = False
-        Me.ucrInputProportions.Location = New System.Drawing.Point(118, 53)
-        Me.ucrInputProportions.Name = "ucrInputProportions"
-        Me.ucrInputProportions.Size = New System.Drawing.Size(50, 21)
-        Me.ucrInputProportions.TabIndex = 23
-        '
-        'ucrInputInequality
-        '
-        Me.ucrInputInequality.Enabled = False
-        Me.ucrInputInequality.IsReadOnly = False
-        Me.ucrInputInequality.Location = New System.Drawing.Point(85, 53)
-        Me.ucrInputInequality.Name = "ucrInputInequality"
-        Me.ucrInputInequality.Size = New System.Drawing.Size(28, 21)
-        Me.ucrInputInequality.TabIndex = 22
-        '
-        'ucrInputPercentiles
-        '
-        Me.ucrInputPercentiles.Enabled = False
-        Me.ucrInputPercentiles.IsReadOnly = False
-        Me.ucrInputPercentiles.Location = New System.Drawing.Point(88, 16)
-        Me.ucrInputPercentiles.Name = "ucrInputPercentiles"
-        Me.ucrInputPercentiles.Size = New System.Drawing.Size(84, 21)
-        Me.ucrInputPercentiles.TabIndex = 21
-        '
         'chkPercentiles
         '
         Me.chkPercentiles.AutoSize = True
@@ -212,24 +185,6 @@ Partial Class sdgDescribe
         Me.grpPrecision.Size = New System.Drawing.Size(282, 67)
         Me.grpPrecision.TabIndex = 17
         Me.grpPrecision.TabStop = False
-        '
-        'ucrInputUnits
-        '
-        Me.ucrInputUnits.Enabled = False
-        Me.ucrInputUnits.IsReadOnly = False
-        Me.ucrInputUnits.Location = New System.Drawing.Point(43, 38)
-        Me.ucrInputUnits.Name = "ucrInputUnits"
-        Me.ucrInputUnits.Size = New System.Drawing.Size(43, 21)
-        Me.ucrInputUnits.TabIndex = 23
-        '
-        'ucrInputPrecision
-        '
-        Me.ucrInputPrecision.Enabled = False
-        Me.ucrInputPrecision.IsReadOnly = False
-        Me.ucrInputPrecision.Location = New System.Drawing.Point(60, 15)
-        Me.ucrInputPrecision.Name = "ucrInputPrecision"
-        Me.ucrInputPrecision.Size = New System.Drawing.Size(58, 21)
-        Me.ucrInputPrecision.TabIndex = 22
         '
         'lblUnits
         '
@@ -554,6 +509,51 @@ Partial Class sdgDescribe
         Me.chkHigherMoments.Text = "Higher Moments"
         Me.chkHigherMoments.UseVisualStyleBackColor = True
         '
+        'ucrInputProportions
+        '
+        Me.ucrInputProportions.Enabled = False
+        Me.ucrInputProportions.IsReadOnly = False
+        Me.ucrInputProportions.Location = New System.Drawing.Point(118, 53)
+        Me.ucrInputProportions.Name = "ucrInputProportions"
+        Me.ucrInputProportions.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputProportions.TabIndex = 23
+        '
+        'ucrInputInequality
+        '
+        Me.ucrInputInequality.Enabled = False
+        Me.ucrInputInequality.IsReadOnly = False
+        Me.ucrInputInequality.Location = New System.Drawing.Point(85, 53)
+        Me.ucrInputInequality.Name = "ucrInputInequality"
+        Me.ucrInputInequality.Size = New System.Drawing.Size(28, 21)
+        Me.ucrInputInequality.TabIndex = 22
+        '
+        'ucrInputPercentiles
+        '
+        Me.ucrInputPercentiles.Enabled = False
+        Me.ucrInputPercentiles.IsReadOnly = False
+        Me.ucrInputPercentiles.Location = New System.Drawing.Point(88, 16)
+        Me.ucrInputPercentiles.Name = "ucrInputPercentiles"
+        Me.ucrInputPercentiles.Size = New System.Drawing.Size(84, 21)
+        Me.ucrInputPercentiles.TabIndex = 21
+        '
+        'ucrInputUnits
+        '
+        Me.ucrInputUnits.Enabled = False
+        Me.ucrInputUnits.IsReadOnly = False
+        Me.ucrInputUnits.Location = New System.Drawing.Point(43, 38)
+        Me.ucrInputUnits.Name = "ucrInputUnits"
+        Me.ucrInputUnits.Size = New System.Drawing.Size(43, 21)
+        Me.ucrInputUnits.TabIndex = 23
+        '
+        'ucrInputPrecision
+        '
+        Me.ucrInputPrecision.Enabled = False
+        Me.ucrInputPrecision.IsReadOnly = False
+        Me.ucrInputPrecision.Location = New System.Drawing.Point(60, 15)
+        Me.ucrInputPrecision.Name = "ucrInputPrecision"
+        Me.ucrInputPrecision.Size = New System.Drawing.Size(58, 21)
+        Me.ucrInputPrecision.TabIndex = 22
+        '
         'UcrButtonsSubdialogue1
         '
         Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(71, 290)
@@ -561,7 +561,7 @@ Partial Class sdgDescribe
         Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
         Me.UcrButtonsSubdialogue1.TabIndex = 0
         '
-        'sdgDescribe
+        'sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -571,8 +571,9 @@ Partial Class sdgDescribe
         Me.Controls.Add(Me.UcrButtonsSubdialogue1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "sdgDescribe"
-        Me.Text = "sdgDescribe"
+        Me.Name = "sdgSummaries"
+        Me.Tag = "Summaries"
+        Me.Text = "Summaries"
         Me.grpPecents.ResumeLayout(False)
         Me.grpPecents.PerformLayout()
         Me.grpPrecision.ResumeLayout(False)
