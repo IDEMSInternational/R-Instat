@@ -449,18 +449,25 @@ data_object$set("public", "get_columns_from_data", function(col_names, force_as_
 }
 )
 
-data_object$set("public", "frequency_tables", function(x_col_names, y_col_name) {
-  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE, margin_func = list(Sum = sum, Max = max),  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
+  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
   for (i in 1:length(x_col_names)){
-    print(table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
+    if(transpose)(my_table = table(private$data[[y_col_name]], private$data[[x_col_names[i]]])) else(my_table = table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
+    if(percentages && proportions)( my_table*100)
+    if(addmargins && proportions)(print(addmargins(prop.table(my_table)))) #Is FUN appropriate here?
+    else if(addmargins && !proportions)(print(addmargins(my_table)))
+    else if(!addmargins && proportions)(print(prop.table(my_table)))
+    else if(!addmargins && !proportions)(print(my_table))
   }
 }
 )
 
-data_object$set("public", "anova_tables", function(x_col_names, y_col_name) {
+data_object$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE) {
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if(sign_level || signif.stars)warning("This is nolonger descriptive")
+  if(sign_level)(end_col = 5)else(end_col = 4)
   for (i in 1:length(x_col_names)){
-    print(summary(aov(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data)))
+      print(anova(lm(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data))[1:end_col], signif.stars = signif.stars)
   }
 }
 )

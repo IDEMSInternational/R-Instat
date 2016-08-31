@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgDescriptiveStatistics
+Public Class dlgDescribeOneVariable
     Public bFirstLoad As Boolean = True
     Public clsRBaseFunction, clsRCustomFunction As New RFunction
     Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -29,8 +29,8 @@ Public Class dlgDescriptiveStatistics
         autoTranslate(Me)
     End Sub
 
-    Private Sub cmdstatistics_click(sender As Object, e As EventArgs) Handles cmdStatistics.Click
-        sdgDescribe.ShowDialog()
+    Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+        sdgSummaries.ShowDialog()
     End Sub
 
     Public Sub TestOKEnabled()
@@ -47,8 +47,8 @@ Public Class dlgDescriptiveStatistics
 
     Private Sub SetDefaults()
         chkSaveResult.Checked = False
-        sdgDescribe.SetUcrDescribe(clsRCustomFunction)
-        sdgDescribe.SetDefaults()
+        sdgSummaries.SetMyRFunction(clsRCustomFunction)
+        sdgSummaries.SetDefaults()
         ucrSelectorDescribeOneVar.Reset()
         chkSaveResult.Checked = False
         chkCustomise.Checked = False
@@ -75,10 +75,10 @@ Public Class dlgDescriptiveStatistics
     Private Sub ChooseFunction()
         If chkCustomise.Checked Then
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsRCustomFunction)
-            cmdStatistics.Enabled = True
+            cmdSummaries.Enabled = True
         Else
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsRBaseFunction)
-            cmdStatistics.Enabled = False
+            cmdSummaries.Enabled = False
         End If
     End Sub
 
