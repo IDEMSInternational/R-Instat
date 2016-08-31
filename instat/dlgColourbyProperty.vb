@@ -25,22 +25,43 @@ Public Class dlgColourbyProperty
             TestOKEnabled()
             bFirstLoad = False
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReceiverMetadataProperty.Selector = ucrSelectorColourByMetadata
+        ucrReceiverMetadataProperty.SetMeAsReceiver()
+        ucrReceiverMetadataProperty.SetItemType("metadata")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrSelectorColourByMetadata.Reset()
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If Not ucrReceiverMetadataProperty.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorColourByMetadata_DataframeChanged() Handles ucrSelectorColourByMetadata.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorColourByMetadata.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverMetadataProperty_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverMetadataProperty.SelectionChanged
+        If Not ucrReceiverMetadataProperty.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("property", ucrReceiverMetadataProperty.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("property")
+        End If
         TestOKEnabled()
     End Sub
 End Class

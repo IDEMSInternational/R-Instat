@@ -49,6 +49,10 @@ Public Class ucrInputTextBox
         End If
     End Function
 
+    Private Sub txtInput_TextChanged(sender As Object, e As EventArgs) Handles txtInput.TextChanged
+        OnContentsChanged()
+    End Sub
+
     Public Overrides Property IsReadOnly As Boolean
         Get
             Return MyBase.IsReadOnly
