@@ -14,8 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class sdgDescribe
-    Public clsRDescribe As New RFunction
+Public Class sdgSummaries
+    Public clsRSummaries As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -72,15 +72,16 @@ Public Class sdgDescribe
         Next
         strSummariesParameter = strSummariesParameter & ")"
         If i > 0 Then
-            clsRDescribe.AddParameter("summaries", strSummariesParameter)
+            clsRSummaries.AddParameter("summaries", strSummariesParameter)
         Else
-            clsRDescribe.RemoveParameterByName("summaries")
+            MsgBox("At least one summary should be selected")
+            clsRSummaries.RemoveParameterByName("summaries")
         End If
     End Sub
 
 
-    Public Sub SetUcrDescribe(clsRNewDescribe As RFunction)
-        clsRDescribe = clsRNewDescribe
+    Public Sub SetMyRFunction(clsRNewSummaries As RFunction)
+        clsRSummaries = clsRNewSummaries
     End Sub
 
     Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkMinimum.CheckedChanged, chkMaximum.CheckedChanged, chkSum.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged
