@@ -376,21 +376,25 @@ Public Class RLink
 
     Public Sub CreateNewClimateObject() 'creates an instance of the climate object
         If Not bClimateObjectExists Then
+            frmMain.Cursor = Cursors.WaitCursor
             frmSetupLoading.Show()
             RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strClimateObjectPath & "')")
             RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
             RunScript(strClimateObject & "<-climate$new()")
             bClimateObjectExists = True
             frmSetupLoading.Close()
+            frmMain.Cursor = Cursors.Default
         End If
     End Sub
 
     Public Sub RSetup()
         'run script to load libraries
+        frmMain.Cursor = Cursors.WaitCursor
         frmSetupLoading.Show()
         RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
         frmSetupLoading.Close()
+        frmMain.Cursor = Cursors.Default
     End Sub
 
     Public Sub CreateNewInstatObject()
