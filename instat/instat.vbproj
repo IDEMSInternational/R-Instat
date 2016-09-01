@@ -147,6 +147,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneVariableGraph.Designer.vb">
+      <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVariableGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -2157,6 +2163,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVariableGraph.fr-FR.resx">
+      <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVariableGraph.resx">
+      <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVariableGraph.sw-KE.resx">
+      <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
