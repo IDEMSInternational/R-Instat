@@ -1465,3 +1465,7 @@ data_object$set("public", "set_column_colours_by_metadata", function(columns, pr
   else self$set_column_colours(columns = columns, colours = new_colours)
 }
 )
+
+data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
+}
+)
