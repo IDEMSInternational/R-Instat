@@ -921,3 +921,8 @@ instat_object$set("public","set_column_colours_by_metadata", function(data_name,
   self$get_data_objects(data_name)$set_column_colours_by_metadata(columns, property)
 }
 )
+
+instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
+  self$get_data_objects(data_name)$graph_one_variable(columns, factor, numeric, character, facets, save)
+}
+)
