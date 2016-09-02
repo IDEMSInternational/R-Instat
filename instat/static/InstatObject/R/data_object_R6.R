@@ -227,32 +227,37 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "") {
-  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
-    hidden <- self$get_variables_metadata(property = is_hidden_label)
-    hidden[is.na(hidden)] <- FALSE
-    out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
-  }
-  else out <- private$data
-  if(use_current_filter && self$filter_applied()) {
-    if(filter_name != "") {
-      out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE,...) {
+  if(!stack_data) {
+    if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
+      hidden <- self$get_variables_metadata(property = is_hidden_label)
+      hidden[is.na(hidden)] <- FALSE
+      out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
+    }
+    else out <- private$data
+    if(use_current_filter && self$filter_applied()) {
+      if(filter_name != "") {
+        out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
+      }
+      else {
+        out <- out[self$current_filter, ]
+      }
     }
     else {
-      out <- out[self$current_filter, ]
+      if(filter_name != "") {
+        out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
+      }
     }
+    if(convert_to_character) {
+      decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
+      decimal_places[is.na(decimal_places)] <- 0
+      return(convert_to_character_matrix(out, TRUE, decimal_places))
+    }
+    else return(out)
   }
   else {
-    if(filter_name != "") {
-      out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
-    }
+    return(melt(self$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name), ...))
   }
-  if(convert_to_character) {
-    decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
-    decimal_places[is.na(decimal_places)] <- 0
-    return(convert_to_character_matrix(out, TRUE, decimal_places))
-  }
-  else return(out)
 }
 )
 
@@ -1037,11 +1042,14 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
   var_metadata = self$get_variables_metadata()
   out = c()
   for(col in col_names) {
-    curr_var_metadata = var_metadata[col, ]
-    if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
-       && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% include[[prop]]))) {
-      out = c(out, col)
+    if(length(include) > 0 || length(exclude) > 0) {
+      curr_var_metadata = var_metadata[col, ]
+      if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
+         && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% include[[prop]]))) {
+        out <- c(out, col)
+      }
     }
+    else out <- c(out, col)
   }
   if(length(excluded_items) > 0) {
     ex_ind = which(out %in% excluded_items)
@@ -1467,5 +1475,73 @@ data_object$set("public", "set_column_colours_by_metadata", function(columns, pr
 )
 
 data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
+  if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
+  numeric_geom <- match.fun(numeric)
+  factor_geom <- match.fun(factor)
+  character_geom <- match.fun(character)
+  localenv <- environment()
+  if(facets) {
+    column_types <- unique(self$get_variables_metadata(column = columns, property = data_type_label))
+    column_types[column_types == "integer"] <- "numeric"
+    column_types <- unique(column_types)
+    if(length(column_types) > 1) {
+      if(!missing(facets)) warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
+      facets <- FALSE
+    }
+  }
+  if(facets) {
+    if(column_types == "numeric") {
+      curr_geom <- numeric_geom
+      curr_geom_name <- numeric
+    }
+    else if(column_types == "factor") {
+      curr_geom <- factor_geom
+      curr_geom_name <- factor
+    }
+    else if(column_types == "character") {
+      curr_geom <- character_geom
+      curr_geom_name <- character
+    }
+    curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars=columns)
+    if(curr_geom_name == "geom_boxplot") {
+      g <- ggplot(data = curr_data, mapping = aes(x = "", y=value))
+    }
+    else {
+      g <- ggplot(data = curr_data, mapping = aes(x = value))
+    }
+    return(g + curr_geom() + facet_wrap(facets= ~variable) + ylab(""))
+  }
+  else {
+    column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
+    column_types[column_types == "integer"] <- "numeric"
+    curr_data <- self$get_data_frame()
+    graphs <- list()
+    i = 1
+    for(column in columns) {
+      if(column_types[i] == "numeric") {
+        curr_geom <- numeric_geom
+        curr_geom_name <- numeric
+      }
+      else if(column_types[i] == "factor") {
+        curr_geom <- factor_geom
+        curr_geom_name <- factor
+      }
+      else if(column_types[i] == "character") {
+        curr_geom <- character_geom
+        curr_geom_name <- character
+      }
+      
+      if(curr_geom_name == "geom_boxplot") {
+        g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column)))
+      }
+      else {
+        g <- ggplot(data = curr_data, mapping = aes_(x = as.name(column)))
+      }
+      current_graph <- g + curr_geom()
+      graphs[[i]] <- current_graph
+      i = i + 1
+    }
+    return(gridExtra::grid.arrange(grobs = graphs))
+  }
 }
 )
