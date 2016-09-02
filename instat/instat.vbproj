@@ -159,6 +159,12 @@
     <Compile Include="sdgDescribeDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgOneVarGraph.Designer.vb">
+      <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -2562,6 +2568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDataOptions.sw-KE.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarGraph.resx">
+      <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>

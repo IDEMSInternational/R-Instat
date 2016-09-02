@@ -27,12 +27,13 @@ Partial Class dlgOneVariableGraph
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.cmdGraph = New System.Windows.Forms.Button()
-        Me.UcrSaveGraph1 = New instat.ucrSaveGraph()
+        Me.ucrOneVarGraphSave = New instat.ucrSaveGraph()
         Me.SuspendLayout()
         '
         'ucrSelectorOneVarGraph
         '
         Me.ucrSelectorOneVarGraph.bShowHiddenColumns = False
+        Me.ucrSelectorOneVarGraph.bUseCurrentFilter = False
         Me.ucrSelectorOneVarGraph.Location = New System.Drawing.Point(5, 0)
         Me.ucrSelectorOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarGraph.Name = "ucrSelectorOneVarGraph"
@@ -73,19 +74,19 @@ Partial Class dlgOneVariableGraph
         Me.cmdGraph.Text = "Graph"
         Me.cmdGraph.UseVisualStyleBackColor = True
         '
-        'UcrSaveGraph1
+        'ucrOneVarGraphSave
         '
-        Me.UcrSaveGraph1.Location = New System.Drawing.Point(5, 221)
-        Me.UcrSaveGraph1.Name = "UcrSaveGraph1"
-        Me.UcrSaveGraph1.Size = New System.Drawing.Size(265, 20)
-        Me.UcrSaveGraph1.TabIndex = 7
+        Me.ucrOneVarGraphSave.Location = New System.Drawing.Point(5, 221)
+        Me.ucrOneVarGraphSave.Name = "ucrOneVarGraphSave"
+        Me.ucrOneVarGraphSave.Size = New System.Drawing.Size(265, 20)
+        Me.ucrOneVarGraphSave.TabIndex = 7
         '
         'dlgOneVariableGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(405, 299)
-        Me.Controls.Add(Me.UcrSaveGraph1)
+        Me.Controls.Add(Me.ucrOneVarGraphSave)
         Me.Controls.Add(Me.cmdGraph)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSelectedVariables)
@@ -103,5 +104,5 @@ Partial Class dlgOneVariableGraph
     Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents cmdGraph As Button
-    Friend WithEvents UcrSaveGraph1 As ucrSaveGraph
+    Friend WithEvents ucrOneVarGraphSave As ucrSaveGraph
 End Class

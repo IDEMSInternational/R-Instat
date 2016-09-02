@@ -279,10 +279,11 @@ Partial Class frmMain
         Me.OtherScdMicroDialogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganiseColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganiseColumnCalculateTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateRank = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculatePolynomials = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateRowSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerateRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
@@ -348,7 +349,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -373,15 +373,14 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
-        Me.mnuDescribeOneVariableGraph.Enabled = False
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
@@ -2248,6 +2247,18 @@ Partial Class frmMain
         Me.mnuOrganiseColumnCalculate.Tag = "Column:_Calculate"
         Me.mnuOrganiseColumnCalculate.Text = "Column: Calculate"
         '
+        'mnuOrganiseColumnCalculateCalculations
+        '
+        Me.mnuOrganiseColumnCalculateCalculations.Name = "mnuOrganiseColumnCalculateCalculations"
+        Me.mnuOrganiseColumnCalculateCalculations.Size = New System.Drawing.Size(160, 22)
+        Me.mnuOrganiseColumnCalculateCalculations.Tag = "Calculations..."
+        Me.mnuOrganiseColumnCalculateCalculations.Text = "Calculations..."
+        '
+        'ToolStripSeparator24
+        '
+        Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
+        Me.ToolStripSeparator24.Size = New System.Drawing.Size(157, 6)
+        '
         'mnuOrganiseColumnCalculateTransform
         '
         Me.mnuOrganiseColumnCalculateTransform.Enabled = False
@@ -2269,13 +2280,6 @@ Partial Class frmMain
         Me.mnuOrganiseColumnCalculatePolynomials.Size = New System.Drawing.Size(160, 22)
         Me.mnuOrganiseColumnCalculatePolynomials.Tag = "Polynomials..."
         Me.mnuOrganiseColumnCalculatePolynomials.Text = "Polynomials..."
-        '
-        'mnuOrganiseColumnCalculateCalculations
-        '
-        Me.mnuOrganiseColumnCalculateCalculations.Name = "mnuOrganiseColumnCalculateCalculations"
-        Me.mnuOrganiseColumnCalculateCalculations.Size = New System.Drawing.Size(160, 22)
-        Me.mnuOrganiseColumnCalculateCalculations.Tag = "Calculations..."
-        Me.mnuOrganiseColumnCalculateCalculations.Text = "Calculations..."
         '
         'mnuOrganiseColumnCalculateRowSummary
         '
@@ -2734,11 +2738,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'ToolStripSeparator24
-        '
-        Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
-        Me.ToolStripSeparator24.Size = New System.Drawing.Size(157, 6)
         '
         'frmMain
         '
