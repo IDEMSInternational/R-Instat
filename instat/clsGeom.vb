@@ -16,7 +16,7 @@
 
 Public Class Geoms
     Public strGeomName As String = ""
-    Public clsAesParameters As New List(Of AesParameter)
+    Public clsAesParameters As New List(Of AesParameters)
     Public clsLayerParameters As New List(Of LayerParameter)
 
     Public Sub SetGeomName(strTempName As String)
@@ -25,7 +25,7 @@ Public Class Geoms
 
     Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False)
         'will be adding parameters to the geom as well as the value of the parameter.
-        Dim NewAesParameter As New AesParameter
+        Dim NewAesParameter As New AesParameters
         NewAesParameter.strAesParameterName = strAesParameterName
         NewAesParameter.strAesParameterValue = strAesParameterValue
         NewAesParameter.strIncludedDataTypes = strIncludedDataTypes
@@ -64,7 +64,7 @@ Public Class Geoms
     End Property
 End Class
 
-Public Class AesParameter
+Public Class AesParameters
     'contains info about the geom aesthetics and urguments for the geom
     Public strAesParameterName As String
     Public strIncludedDataTypes As String()
