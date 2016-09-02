@@ -451,12 +451,15 @@ data_object$set("public", "get_columns_from_data", function(col_names, force_as_
 
 data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE, margin_func = list(Sum = sum, Max = max),  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
+  multiply_by = 1
   for (i in 1:length(x_col_names)){
     if(transpose)(my_table = table(private$data[[y_col_name]], private$data[[x_col_names[i]]])) else(my_table = table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
-    if(percentages && proportions)( my_table*100)
-    if(addmargins && proportions)(print(addmargins(prop.table(my_table)))) #Is FUN appropriate here?
+    
+    if(percentages && proportions)( multiply_by = 100)
+    else if(percentages && !proportions)warning("Proportions should be set to true to display percentages.")
+    if(addmargins && proportions)(print(addmargins(prop.table(my_table)*multiply_by))) #Is FUN appropriate here?
     else if(addmargins && !proportions)(print(addmargins(my_table)))
-    else if(!addmargins && proportions)(print(prop.table(my_table)))
+    else if(!addmargins && proportions)(print(prop.table(my_table)*multiply_by))
     else if(!addmargins && !proportions)(print(my_table))
   }
 }
@@ -1460,5 +1463,9 @@ data_object$set("public", "set_column_colours_by_metadata", function(columns, pr
   new_colours[is.na(new_colours)] <- -1
   if(missing(columns)) self$set_column_colours(colours = new_colours)
   else self$set_column_colours(columns = columns, colours = new_colours)
+}
+)
+
+data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
 }
 )
