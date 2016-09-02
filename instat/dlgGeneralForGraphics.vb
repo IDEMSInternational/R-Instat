@@ -59,9 +59,11 @@ Public Class dlgGeneralForGraphics
         strGlobalDataFrame = ""
         clsRggplotFunction.ClearParameters()
         clsGgplotAesFunction.ClearParameters()
+        ucrAdditionalLayers.Reset()
         If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
             ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
