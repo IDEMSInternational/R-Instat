@@ -131,6 +131,7 @@ Public Class ucrAdditionalLayers
 
     Public Sub Reset()
         lstLayers.Clear()
+        lstLayerComplete.Clear()
     End Sub
 
 End Class

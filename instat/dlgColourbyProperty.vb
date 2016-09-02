@@ -40,8 +40,9 @@ Public Class dlgColourbyProperty
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverMetadataProperty.IsEmpty Then
+        If Not ucrReceiverMetadataProperty.IsEmpty OrElse chkRemoveColours.Checked Then
             ucrBase.OKEnabled(True)
+
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -61,6 +62,17 @@ Public Class dlgColourbyProperty
             ucrBase.clsRsyntax.AddParameter("property", ucrReceiverMetadataProperty.GetVariableNames)
         Else
             ucrBase.clsRsyntax.RemoveParameter("property")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub chkRemoveColours_CheckedChanged(sender As Object, e As EventArgs) Handles chkRemoveColours.CheckedChanged
+        If chkRemoveColours.Checked Then
+            ucrSelectorColourByMetadata.Reset()
+            ucrReceiverMetadataProperty.Enabled = False
+        Else
+            ucrReceiverMetadataProperty.Enabled = True
+
         End If
         TestOKEnabled()
     End Sub

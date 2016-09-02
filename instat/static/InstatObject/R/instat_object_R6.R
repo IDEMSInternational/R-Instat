@@ -231,7 +231,7 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name), ...))
+    return(self$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
   }
 }
 )
@@ -923,6 +923,6 @@ instat_object$set("public","set_column_colours_by_metadata", function(data_name,
 )
 
 instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
-  self$get_data_objects(data_name)$graph_one_variable(columns, factor, numeric, character, facets, save)
+  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, factor = factor, character = character, facets = facets)
 }
 )
