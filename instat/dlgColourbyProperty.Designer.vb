@@ -26,6 +26,7 @@ Partial Class dlgColourbyProperty
         Me.ucrSelectorColourByMetadata = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverMetadataProperty = New instat.ucrReceiverSingle()
         Me.lblMetadataProp = New System.Windows.Forms.Label()
+        Me.chkRemoveColours = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -63,11 +64,22 @@ Partial Class dlgColourbyProperty
         Me.lblMetadataProp.TabIndex = 3
         Me.lblMetadataProp.Text = "Metadata Property"
         '
+        'chkRemoveColours
+        '
+        Me.chkRemoveColours.AutoSize = True
+        Me.chkRemoveColours.Location = New System.Drawing.Point(273, 69)
+        Me.chkRemoveColours.Name = "chkRemoveColours"
+        Me.chkRemoveColours.Size = New System.Drawing.Size(110, 17)
+        Me.chkRemoveColours.TabIndex = 4
+        Me.chkRemoveColours.Text = "Remove Colour(s)"
+        Me.chkRemoveColours.UseVisualStyleBackColor = True
+        '
         'dlgColourbyProperty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 261)
+        Me.Controls.Add(Me.chkRemoveColours)
         Me.Controls.Add(Me.lblMetadataProp)
         Me.Controls.Add(Me.ucrReceiverMetadataProperty)
         Me.Controls.Add(Me.ucrSelectorColourByMetadata)
@@ -86,4 +98,5 @@ Partial Class dlgColourbyProperty
     Friend WithEvents ucrSelectorColourByMetadata As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverMetadataProperty As ucrReceiverSingle
     Friend WithEvents lblMetadataProp As Label
+    Friend WithEvents chkRemoveColours As CheckBox
 End Class
