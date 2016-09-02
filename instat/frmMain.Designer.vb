@@ -544,6 +544,7 @@ Partial Class frmMain
         '
         'mnuDescribeOtherGraphicsDialogsWindRose
         '
+        Me.mnuDescribeOtherGraphicsDialogsWindRose.Enabled = False
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Name = "mnuDescribeOtherGraphicsDialogsWindRose"
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Size = New System.Drawing.Size(217, 22)
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Tag = "WindRose..."
@@ -558,6 +559,7 @@ Partial Class frmMain
         '
         'mnuDescribeOtherGraphicsDialogsInventoryPlot
         '
+        Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Enabled = False
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Name = "mnuDescribeOtherGraphicsDialogsInventoryPlot"
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Size = New System.Drawing.Size(217, 22)
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Tag = "Inventory_Plot..."
@@ -565,6 +567,7 @@ Partial Class frmMain
         '
         'mnuDescribeOtherGraphicsDialogsPopulationPyramid
         '
+        Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid.Enabled = False
         Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid.Name = "mnuDescribeOtherGraphicsDialogsPopulationPyramid"
         Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid.Size = New System.Drawing.Size(217, 22)
         Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid.Tag = "Population_Pyramid..."
@@ -631,6 +634,7 @@ Partial Class frmMain
         '
         'mnuDescribeUseObjectsThemes
         '
+        Me.mnuDescribeUseObjectsThemes.Enabled = False
         Me.mnuDescribeUseObjectsThemes.Name = "mnuDescribeUseObjectsThemes"
         Me.mnuDescribeUseObjectsThemes.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeUseObjectsThemes.Tag = "Themes"

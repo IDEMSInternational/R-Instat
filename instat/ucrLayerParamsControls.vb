@@ -29,7 +29,7 @@ Public Class ucrLayerParamsControls
         RaiseEvent RParameterChanged(Me)
     End Sub
 
-    Public Sub SetLayerParameter(clsTempLayerParam As LayerParameters)
+    Public Sub SetLayerParameter(clsTempLayerParam As LayerParameter)
         ucrReceiverMetadataProperty.clsLayerParam = clsTempLayerParam
         ucrReceiverMetadataProperty.SetControls()
         If Not IsNothing(ucrReceiverMetadataProperty.clsLayerParam) Then
