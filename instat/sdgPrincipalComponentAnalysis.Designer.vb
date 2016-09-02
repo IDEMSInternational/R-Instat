@@ -46,6 +46,9 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbBiplot = New System.Windows.Forms.TabPage()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.tbBarPlot = New System.Windows.Forms.TabPage()
+        Me.rdoBarPlot = New System.Windows.Forms.RadioButton()
+        Me.chkRotation = New System.Windows.Forms.CheckBox()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -62,11 +65,12 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
         Me.tbRegOptions.Name = "tbRegOptions"
         Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(246, 206)
+        Me.tbRegOptions.Size = New System.Drawing.Size(320, 206)
         Me.tbRegOptions.TabIndex = 0
         '
         'tbDisplay
         '
+        Me.tbDisplay.Controls.Add(Me.chkRotation)
         Me.tbDisplay.Controls.Add(Me.chkResiduals)
         Me.tbDisplay.Controls.Add(Me.chkEigenVectors)
         Me.tbDisplay.Controls.Add(Me.chkScores)
@@ -74,7 +78,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbDisplay.Name = "tbDisplay"
         Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(238, 180)
+        Me.tbDisplay.Size = New System.Drawing.Size(312, 180)
         Me.tbDisplay.TabIndex = 0
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
@@ -126,6 +130,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbGraphics
         '
+        Me.tbGraphics.Controls.Add(Me.rdoBarPlot)
         Me.tbGraphics.Controls.Add(Me.rdoIndividualsPlot)
         Me.tbGraphics.Controls.Add(Me.rdoBiplot)
         Me.tbGraphics.Controls.Add(Me.rdoVariablesPlot)
@@ -134,7 +139,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(238, 180)
+        Me.tbGraphics.Size = New System.Drawing.Size(312, 180)
         Me.tbGraphics.TabIndex = 1
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
@@ -194,10 +199,11 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGrapOptions.Controls.Add(Me.tbVariables)
         Me.tbGrapOptions.Controls.Add(Me.tbIndividuals)
         Me.tbGrapOptions.Controls.Add(Me.tbBiplot)
+        Me.tbGrapOptions.Controls.Add(Me.tbBarPlot)
         Me.tbGrapOptions.Location = New System.Drawing.Point(6, 61)
         Me.tbGrapOptions.Name = "tbGrapOptions"
         Me.tbGrapOptions.SelectedIndex = 0
-        Me.tbGrapOptions.Size = New System.Drawing.Size(228, 114)
+        Me.tbGrapOptions.Size = New System.Drawing.Size(290, 114)
         Me.tbGrapOptions.TabIndex = 7
         '
         'tbScreePlot
@@ -208,7 +214,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbScreePlot.Location = New System.Drawing.Point(4, 22)
         Me.tbScreePlot.Name = "tbScreePlot"
         Me.tbScreePlot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScreePlot.Size = New System.Drawing.Size(246, 88)
+        Me.tbScreePlot.Size = New System.Drawing.Size(220, 88)
         Me.tbScreePlot.TabIndex = 0
         Me.tbScreePlot.Tag = "Scree_Plot"
         Me.tbScreePlot.Text = "Scree Plot"
@@ -272,7 +278,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbVariables.Location = New System.Drawing.Point(4, 22)
         Me.tbVariables.Name = "tbVariables"
         Me.tbVariables.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbVariables.Size = New System.Drawing.Size(246, 88)
+        Me.tbVariables.Size = New System.Drawing.Size(220, 88)
         Me.tbVariables.TabIndex = 1
         Me.tbVariables.Tag = "Variables"
         Me.tbVariables.Text = "Variables"
@@ -283,7 +289,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbIndividuals.Location = New System.Drawing.Point(4, 22)
         Me.tbIndividuals.Name = "tbIndividuals"
         Me.tbIndividuals.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbIndividuals.Size = New System.Drawing.Size(246, 88)
+        Me.tbIndividuals.Size = New System.Drawing.Size(220, 88)
         Me.tbIndividuals.TabIndex = 2
         Me.tbIndividuals.Tag = "Individuals"
         Me.tbIndividuals.Text = "Individuals"
@@ -305,7 +311,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbSave.Location = New System.Drawing.Point(4, 22)
         Me.tbSave.Name = "tbSave"
         Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSave.Size = New System.Drawing.Size(238, 180)
+        Me.tbSave.Size = New System.Drawing.Size(312, 180)
         Me.tbSave.TabIndex = 2
         Me.tbSave.Tag = "Save"
         Me.tbSave.Text = "Save"
@@ -318,11 +324,45 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
         '
+        'tbBarPlot
+        '
+        Me.tbBarPlot.Location = New System.Drawing.Point(4, 22)
+        Me.tbBarPlot.Name = "tbBarPlot"
+        Me.tbBarPlot.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbBarPlot.Size = New System.Drawing.Size(282, 88)
+        Me.tbBarPlot.TabIndex = 4
+        Me.tbBarPlot.Tag = "Bar_Plot"
+        Me.tbBarPlot.Text = "Bar Plot"
+        Me.tbBarPlot.UseVisualStyleBackColor = True
+        '
+        'rdoBarPlot
+        '
+        Me.rdoBarPlot.AutoSize = True
+        Me.rdoBarPlot.Location = New System.Drawing.Point(226, 14)
+        Me.rdoBarPlot.Name = "rdoBarPlot"
+        Me.rdoBarPlot.Size = New System.Drawing.Size(61, 17)
+        Me.rdoBarPlot.TabIndex = 12
+        Me.rdoBarPlot.TabStop = True
+        Me.rdoBarPlot.Tag = "Bar plot"
+        Me.rdoBarPlot.Text = "Bar plot"
+        Me.rdoBarPlot.UseVisualStyleBackColor = True
+        '
+        'chkRotation
+        '
+        Me.chkRotation.AutoSize = True
+        Me.chkRotation.Location = New System.Drawing.Point(6, 107)
+        Me.chkRotation.Name = "chkRotation"
+        Me.chkRotation.Size = New System.Drawing.Size(66, 17)
+        Me.chkRotation.TabIndex = 4
+        Me.chkRotation.Tag = "Rotation"
+        Me.chkRotation.Text = "Rotation"
+        Me.chkRotation.UseVisualStyleBackColor = True
+        '
         'sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(257, 243)
+        Me.ClientSize = New System.Drawing.Size(325, 243)
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -366,4 +406,7 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents tbVariables As TabPage
     Friend WithEvents tbIndividuals As TabPage
     Friend WithEvents tbBiplot As TabPage
+    Friend WithEvents rdoBarPlot As RadioButton
+    Friend WithEvents tbBarPlot As TabPage
+    Friend WithEvents chkRotation As CheckBox
 End Class
