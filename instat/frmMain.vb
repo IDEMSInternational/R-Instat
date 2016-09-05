@@ -1079,4 +1079,8 @@ Public Class frmMain
     Private Sub mnuOrganiseDataFrameColumnStructure_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameColumnStructure.Click
         dlgColumnStructure.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeTwoVariablesGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesGraph.Click
+        dlgDescribeTwoVarGraph.ShowDialog()
+    End Sub
 End Class
