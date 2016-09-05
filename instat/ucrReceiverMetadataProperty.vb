@@ -1,4 +1,5 @@
-﻿' Instat-R
+﻿
+' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -15,7 +16,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrReceiverMetadataProperty
-    'TODO Have method to set LayerParameters so not setting directly
     Public clsLayerParam As LayerParameter
     Public ctrActive As Control
     Public Event ControlContentsChanged()
@@ -24,7 +24,6 @@ Public Class ucrReceiverMetadataProperty
         nudParamValue.Visible = False
         ucrCboParamValue.Visible = False
         ucrColor.Visible = False
-        ucrInputTextValue.Visible = False
         If Not IsNothing(clsLayerParam) Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
@@ -51,15 +50,12 @@ Public Class ucrReceiverMetadataProperty
                 ctrActive = ucrColor
             ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
                 ctrActive = ucrCboParamValue
+
                 ucrCboParamValue.SetItems(clsLayerParam.lstParameterStrings)
                 ucrCboParamValue.Visible = True
             Else
-                'TODO Textbox case if needed
                 ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
             End If
-        Else
-            'TODO Case where options are obtained from metadata in R
-            ' Metadata values will either be boolean, numeric or from list where list is existing values for property across columns
         End If
     End Sub
 

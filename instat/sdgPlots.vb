@@ -54,6 +54,8 @@ Public Class sdgPlots
         ucrXAxis.Reset()
         ucrYAxis.Reset()
         ucrInputThemes.SetName("theme_grey")
+        rdoLegendTitleAuto.Checked = True
+        LegendDefaults()
     End Sub
 
     Public Sub Reset()
@@ -110,19 +112,21 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("theme")
         End If
     End Sub
-
     Private Sub TitleDefaults()
         chkDisplayLegendTitle.Checked = True
         chkOverwriteLegendTitle.Checked = False
-        txtOverwriteLegendTitle.Visible = False
+        ucrInputLegend.Visible = False
     End Sub
 
-    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs)
-        If chkOverwriteLegendTitle.Checked Then
-            txtOverwriteLegendTitle.Visible = True
-        Else
-            txtOverwriteLegendTitle.Visible = False
-        End If
+    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegendTitle.CheckedChanged
+
+        'Redid this properly
+
+        'If chkOverwriteLegendTitle.Checked Then
+        '    ucrInputLegend.Visible = True
+        'Else
+        '    ucrInputLegend.Visible = False
+        'End If
     End Sub
 
     Private Sub Facets()
@@ -322,4 +326,32 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("ggtitle")
         End If
     End Sub
+
+    Private Sub chkOverwriteLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverwriteLegendTitle.CheckedChanged
+        If chkOverwriteLegendTitle.Checked Then
+            ucrInputLegend.Visible = True
+        Else
+            ucrInputLegend.Visible = False
+        End If
+    End Sub
+
+    Public Sub LegendDefaults()
+        If rdoLegendTitleAuto.Checked Then
+            chkDisplayLegendTitle.Visible = False
+            chkOverwriteLegendTitle.Visible = False
+            ucrInputLegend.Visible = False
+        ElseIf rdoLegendTitleCustom.Checked Then
+            chkDisplayLegendTitle.Visible = True
+            chkOverwriteLegendTitle.Visible = True
+        End If
+    End Sub
+
+    Private Sub rdoLegendTitleAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLegendTitleAuto.CheckedChanged
+        LegendDefaults()
+    End Sub
+
+    Private Sub rdoLegendTitleCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLegendTitleCustom.CheckedChanged
+        LegendDefaults()
+    End Sub
+
 End Class
