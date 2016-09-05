@@ -54,6 +54,13 @@ Public Class RSyntax
         bUseCommandString = False
     End Sub
 
+    Public Sub SetBaseROperator(clsOperator As ROperator)
+        clsBaseOperator = clsOperator
+        bUseBaseFunction = False
+        bUseBaseOperator = True
+        bUseCommandString = False
+    End Sub
+
     Public Sub SetCommandString(strCommand As String)
         strCommandString = strCommand
         bUseBaseFunction = False

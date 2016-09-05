@@ -917,6 +917,11 @@ instat_object$set("public","has_colours", function(data_name, columns) {
 }
 )
 
+instat_object$set("public", "remove_column_colours", function(data_name) {
+  self$get_data_objects(data_name)$remove_column_colours()
+}
+)
+
 instat_object$set("public","set_column_colours_by_metadata", function(data_name, columns, property) {
   self$get_data_objects(data_name)$set_column_colours_by_metadata(columns, property)
 }

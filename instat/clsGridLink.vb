@@ -201,7 +201,7 @@ Public Class clsGridLink
         If iColour >= 0 AndAlso iColour < frmMain.clsInstatOptions.lstColourPalette.Count Then
             grdSheet.ColumnHeaders(iColumn).Style.BackColor = frmMain.clsInstatOptions.lstColourPalette(iColour - 1)
         ElseIf iColour = -1 Then
-            grdSheet.ColumnHeaders(iColumn).Style.BackColor = Color.White
+            grdSheet.ColumnHeaders(iColumn).Style.BackColor = Nothing
         End If
     End Sub
 
