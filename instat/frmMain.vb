@@ -1002,6 +1002,10 @@ Public Class frmMain
         dlgDescribeOneVariable.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableGraph.Click
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         Dim close = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
         If close = DialogResult.Yes Then
