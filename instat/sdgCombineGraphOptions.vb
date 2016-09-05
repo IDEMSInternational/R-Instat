@@ -67,7 +67,7 @@ Public Class sdgCombineGraphOptions
 
     Private Sub ucrInputTop_NameChanged() Handles ucrInputTop.NameChanged
         If Not ucrInputTop.IsEmpty Then
-            clsRsyntax.AddParameter("top", ucrInputTop.GetText)
+            clsRsyntax.AddParameter("top", Chr(34) & ucrInputTop.GetText & Chr(34))
         Else
             clsRsyntax.RemoveParameter("top")
         End If
@@ -75,7 +75,7 @@ Public Class sdgCombineGraphOptions
 
     Private Sub ucrInputBottom_NameChanged() Handles ucrInputBottom.NameChanged
         If Not ucrInputBottom.IsEmpty Then
-            clsRsyntax.AddParameter("bottom", ucrInputBottom.GetText)
+            clsRsyntax.AddParameter("bottom", Chr(34) & ucrInputBottom.GetText & Chr(34))
         Else
             clsRsyntax.RemoveParameter("bottom")
         End If
@@ -83,7 +83,7 @@ Public Class sdgCombineGraphOptions
 
     Private Sub ucrInputRight_NameChanged() Handles ucrInputRight.NameChanged
         If Not ucrInputRight.IsEmpty Then
-            clsRsyntax.AddParameter("right", ucrInputRight.GetText)
+            clsRsyntax.AddParameter("right", Chr(34) & ucrInputRight.GetText & Chr(34))
         Else
             clsRsyntax.RemoveParameter("right")
         End If
@@ -91,7 +91,7 @@ Public Class sdgCombineGraphOptions
 
     Private Sub ucrInputLeft_NameChanged() Handles ucrInputLeft.NameChanged
         If Not ucrInputLeft.IsEmpty Then
-            clsRsyntax.AddParameter("left", ucrInputLeft.GetText)
+            clsRsyntax.AddParameter("left", Chr(34) & ucrInputLeft.GetText & Chr(34))
         Else
             clsRsyntax.RemoveParameter("left")
         End If
