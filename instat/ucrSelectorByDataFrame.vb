@@ -17,6 +17,14 @@
 Public Class ucrSelectorByDataFrame
     Public Event DataFrameChanged()
 
+    Public Overrides Sub LoadList()
+        If ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            MyBase.LoadList()
+        Else
+            lstAvailableVariable.Clear()
+        End If
+    End Sub
+
     Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableDataFrames.DataFrameChanged
         strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
         LoadList()
@@ -49,4 +57,12 @@ Public Class ucrSelectorByDataFrame
         lstAvailableVariable.Enabled = bEnable
     End Sub
 
+    Public Property bUseCurrentFilter As Boolean
+        Get
+            Return ucrAvailableDataFrames.bUseCurrentFilter
+        End Get
+        Set(bValue As Boolean)
+            ucrAvailableDataFrames.bUseCurrentFilter = bValue
+        End Set
+    End Property
 End Class

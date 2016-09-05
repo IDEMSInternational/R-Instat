@@ -64,6 +64,7 @@ Public Class dlgBarAndPieChart
 
 
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'ucrSaveBar.strPrefix = "Graph"
     End Sub
 
@@ -186,10 +187,8 @@ Public Class dlgBarAndPieChart
     Private Sub ucrSaveBar_GraphNameChanged() Handles ucrSaveBar.GraphNameChanged, ucrSaveBar.SaveGraphCheckedChanged
         If ucrSaveBar.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveBar.strGraphName, strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBar.strGraphName)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
         TestOKEnabled()
     End Sub

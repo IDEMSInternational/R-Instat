@@ -23,6 +23,7 @@ Public Class ucrAdditionalLayers
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
     Private strGlobalDataFrame As String = ""
+    Public bSetGlobalIsDefault As Boolean = True
 
     Public Sub New()
 
@@ -57,15 +58,18 @@ Public Class ucrAdditionalLayers
         lstLayerComplete.Clear()
         SetEditDeleteEnabled()
     End Sub
+
     Private Sub InitialiseControl()
 
     End Sub
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0))
+        ParentForm.SendToBack()
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
         AddLayers()
     End Sub
+
     Private Sub SetEditDeleteEnabled()
         If lstLayers.SelectedItems.Count = 1 Then
             cmdDelete.Enabled = True
@@ -129,7 +133,7 @@ Public Class ucrAdditionalLayers
     End Sub
 
     Public Sub Reset()
-        lstLayers.Clear()
+        SetDefaults()
     End Sub
 
 End Class

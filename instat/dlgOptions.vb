@@ -240,8 +240,8 @@ Public Class dlgOptions
         'dlgFont.ShowEffects = False
         dlgFont.MaxSize = 50
         dlgFont.MinSize = 8
-        dlgFont.Font = frmMain.clsRLink.fEditor
-        dlgFont.Color = frmMain.clsRLink.clrEditor
+        dlgFont.Font = frmMain.clsGrids.fntText
+        dlgFont.Color = frmMain.clsGrids.clrText
         If dlgFont.ShowDialog = DialogResult.OK Then
             SetEditorFont(dlgFont.Font, dlgFont.Color)
             ApplyEnabled(True)

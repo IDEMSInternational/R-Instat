@@ -54,8 +54,8 @@ Public Class dlgLabels
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        TestOKEnabled()
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrFactorLabels_GridContentChanged() Handles ucrFactorLabels.GridContentChanged

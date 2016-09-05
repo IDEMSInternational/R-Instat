@@ -5,18 +5,24 @@ data_object <- R6Class("data_object",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), objects = list(),
-                                                 calculations = list(), keys = list())
+                                                 calculations = list(), keys = list(), keep_attributes = TRUE)
 {
                              
   # Set up the data object
-  self$set_data(data, messages)                           
+  self$set_data(data, messages)
   self$set_changes(list())
   #removed until this can be fixed.
   #self$set_variables_metadata(variables_metadata)
   
   # Set first so that "no_filter" is added
   self$set_filters(filters)
-  self$set_meta(metadata)
+  if(keep_attributes) {
+    self$set_meta(c(attributes(private$data), metadata))
+  }
+  else {
+    self$set_meta(metadata)
+    self$clear_variables_metadata()
+  }
   self$add_defaults_meta()
   self$add_defaults_variables_metadata()
   #self$update_variables_metadata()
@@ -81,7 +87,6 @@ data_object <- R6Class("data_object",
                             },
                             current_filter = function(filter) {
                               if(missing(filter)) {
-                                #TODO Change this to call get_filter_as_logical
                                 return(self$get_filter_as_logical(private$.current_filter$name))
                               }
                               else {
@@ -116,14 +121,23 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
 }
 )
 
-# Now merging and not setting because don't want to replace attributes
-# maybe should be renamed?
 data_object$set("public", "set_meta", function(new_meta) {
+  self$clear_metadata()
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
   for(name in names(new_meta)) {
     self$append_to_metadata(name, new_meta[[name]])
   }
-  #private$metadata <- new_meta
+  self$metadata_changed <- TRUE
+  self$append_to_changes(list(Set_property, "meta data"))
+}
+)
+
+#Dangerous to call directly as could remove properties needed by InstatObject
+data_object$set("public", "clear_metadata", function() {
+  for(name in names(attributes(private$data))) {
+    if(!name %in% c(data_type_label, data_name_label, "row.names", "names")) attr(private$data, name) <- NULL
+  }
+  self$add_defaults_meta()
   self$metadata_changed <- TRUE
   self$append_to_changes(list(Set_property, "meta data"))
 }
@@ -213,30 +227,37 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "") {
-  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
-    hidden <- self$get_variables_metadata(property = is_hidden_label)
-    hidden[is.na(hidden)] <- FALSE
-    out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
-  }
-  else out <- private$data
-  if(use_current_filter && self$filter_applied()) {
-    if(filter_name != "") {
-      out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE,...) {
+  if(!stack_data) {
+    if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
+      hidden <- self$get_variables_metadata(property = is_hidden_label)
+      hidden[is.na(hidden)] <- FALSE
+      out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
     }
-    else out <- out[self$current_filter, ]
-  }
-  else { 
-    if(filter_name != "") {
-      out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
+    else out <- private$data
+    if(use_current_filter && self$filter_applied()) {
+      if(filter_name != "") {
+        out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
+      }
+      else {
+        out <- out[self$current_filter, ]
+      }
     }
+    else {
+      if(filter_name != "") {
+        out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
+      }
+    }
+    if(convert_to_character) {
+      decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
+      decimal_places[is.na(decimal_places)] <- 0
+      return(convert_to_character_matrix(out, TRUE, decimal_places))
+    }
+    else return(out)
   }
-  if(convert_to_character) {
-    decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
-    decimal_places[is.na(decimal_places)] <- 0
-    return(convert_to_character_matrix(out, TRUE, decimal_places))
+  else {
+    return(melt(self$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name), ...))
   }
-  else return(out)
 }
 )
 
@@ -253,6 +274,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       ind = which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes = attributes(col)
+      if(is.null(col_attributes)) col_attributes <- list()
       col_attributes[[data_type_label]] <- class(col)
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
@@ -275,22 +297,37 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       }
     }
     
+    not_found <- FALSE
     if(!missing(property)) {
       if(!property %in% names(out)) {
         if(error_if_no_property) stop(property, " not found in variables metadata")
-        out=data.frame()
+        not_found <- TRUE
       }
       if(!missing(column)) {
         if(!all(column %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop(column, " not found in data")
-        out = out[column, property]
+        if(not_found) out <- rep(NA, length(column))
+        else out <- out[column, property]
       }
-      else out = out[, property]
+      else {
+        if(not_found) out <- rep(NA, length(names(self$get_data_frame(use_current_filter = FALSE))))
+        else out <- out[, property]
+      }
     }
     
     #TODO get convert_to_character_matrix to work on vectors
     if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
     else return(out)
   }
+}
+)
+
+data_object$set("public", "clear_variables_metadata", function() {
+  for(column in self$get_data_frame(use_current_filter = FALSE)) {
+    for(name in names(attributes(column))) {
+      if(!name  %in% c(data_type_label, data_name_label)) attr(self, name) <- NULL
+    }
+  }
+  self$add_defaults_variables_metadata()
 }
 )
 
@@ -417,11 +454,37 @@ data_object$set("public", "get_columns_from_data", function(col_names, force_as_
 }
 )
 
+data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE, margin_func = list(Sum = sum, Max = max),  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
+  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
+  multiply_by = 1
+  for (i in 1:length(x_col_names)){
+    if(transpose)(my_table = table(private$data[[y_col_name]], private$data[[x_col_names[i]]])) else(my_table = table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
+    
+    if(percentages && proportions)( multiply_by = 100)
+    else if(percentages && !proportions)warning("Proportions should be set to true to display percentages.")
+    if(addmargins && proportions)(print(addmargins(prop.table(my_table)*multiply_by))) #Is FUN appropriate here?
+    else if(addmargins && !proportions)(print(addmargins(my_table)))
+    else if(!addmargins && proportions)(print(prop.table(my_table)*multiply_by))
+    else if(!addmargins && !proportions)(print(my_table))
+  }
+}
+)
+
+data_object$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE) {
+  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if(sign_level || signif.stars)warning("This is nolonger descriptive")
+  if(sign_level)(end_col = 5)else(end_col = 4)
+  for (i in 1:length(x_col_names)){
+      print(anova(lm(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data))[1:end_col], signif.stars = signif.stars)
+  }
+}
+)
+
 data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name="") {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if (new_col_name %in% names(curr_data)){
-    stop(paste0(new_col_name," exist in the data."))
+    stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
   }
   if(!is.character(curr_col_name)) {
     stop("Current column name must be of type: character")
@@ -641,7 +704,6 @@ data_object$set("public", "append_to_metadata", function(property, new_value = "
 )
 
 data_object$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
-  
   if(missing(property)) stop("property must be specified.")
   if(!is.character(property)) stop("property must be a character")
   if(!missing(col_names)) {
@@ -678,10 +740,14 @@ data_object$set("public", "is_metadata", function(str) {
 }
 )
 
-data_object$set("public", "is_variables_metadata", function(str, col) {
+data_object$set("public", "is_variables_metadata", function(str, col, return_vector = FALSE) {
   if(!str %in% names(self$get_variables_metadata())) return(FALSE)
   if(missing(col)) return(TRUE)
-  else return(str %in% names(attributes(self$get_columns_from_data(col, use_current_filter = FALSE))))
+  else {
+    out <- sapply(col, function(x) str %in% names(attributes(self$get_columns_from_data(x, use_current_filter = FALSE))))
+    if(return_vector) return(out)
+    else return(all(out))
+  }
 }
 )
 
@@ -692,10 +758,12 @@ data_object$set("public", "add_defaults_meta", function() {
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
   invisible(sapply(colnames(self$get_data_frame(use_current_filter = FALSE)), function(x) self$append_to_variables_metadata(x, name_label, x)))
-  has_hidden <- self$is_variables_metadata(is_hidden_label) && self$iget_variables_metadata(property = is_hidden_label)
+  has_hidden <- self$is_variables_metadata(is_hidden_label) && self$get_variables_metadata(property = is_hidden_label)
   if(has_hidden) {
     for(column in colnames(self$get_data_frame(use_current_filter = FALSE))) {
-      if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+      if(!self$is_variables_metadata(is_hidden_label, column)) {
+        self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+      }
     }
   }
   else self$append_to_variables_metadata(property = is_hidden_label, new_val = FALSE)
@@ -974,11 +1042,14 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
   var_metadata = self$get_variables_metadata()
   out = c()
   for(col in col_names) {
-    curr_var_metadata = var_metadata[col, ]
-    if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
-       && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% include[[prop]]))) {
-      out = c(out, col)
+    if(length(include) > 0 || length(exclude) > 0) {
+      curr_var_metadata = var_metadata[col, ]
+      if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
+         && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% include[[prop]]))) {
+        out <- c(out, col)
+      }
     }
+    else out <- c(out, col)
   }
   if(length(excluded_items) > 0) {
     ex_ind = which(out %in% excluded_items)
@@ -1158,9 +1229,14 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
   else {
     result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
     for(condition in curr_filter$filter_conditions) {
-    func = match.fun(condition[["operation"]])
-    result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
-    i = i + 1
+      func = match.fun(condition[["operation"]])
+      # TODO Have better hanlding and dealing with NA values in filter
+      # and special options for NA in the dialog
+      if(condition[["operation"]] == "==" && is.na(condition[["value"]])) result[ ,i] <- is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
+      else if(condition[["operation"]] == "!=" && is.na(condition[["value"]])) result[ ,i] <- !is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
+      else if(is.na(condition[["value"]])) stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
+      else result[ ,i] <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
+      i = i + 1
     }
     out <- apply(result, 1, all)
     out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
@@ -1226,7 +1302,7 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
   if(!is.character(object_name)) stop("object_name must be a character")
-  if(!all(object_name %in% names(curr_objects))) stop(object_name, "not found in objects")
+  if(!all(object_name %in% names(curr_objects))) stop(object_name, " not found in objects")
   if(length(object_name) == 1) {
     if(force_as_list) return(curr_objects[object_name])
     else return(curr_objects[[object_name]])
@@ -1238,8 +1314,8 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
+    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -1275,11 +1351,28 @@ data_object$set("public", "reorder_objects", function(new_order) {
 }
 )
 
-data_object$set("public", "data_clone", function() {
-  #TODO somethings are not being copied over yet:
-  #     current_filter, changes list,
-  filters_clone = lapply(private$filters, function(x) x$data_clone())
-  ret = data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), variables_metadata = private$variables_metadata, filters = filters_clone, objects = private$objects)
+data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE) {
+  if(include_objects) new_objects <- private$objects
+  else new_objects <- list()
+  if(include_filters) new_filters <- lapply(private$filters, function(x) x$data_clone())
+  else new_filters <- list()
+  if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
+  else new_calculations <- list()
+  
+  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, keep_attributes = include_metadata)
+  if(include_logs) ret$set_changes(private$changes)
+  else ret$set_changes(list())
+  if(include_filters) ret$current_filter <- self$get_current_filter()
+  else {
+    ret$remove_current_filter()
+  }
+  if(!include_metadata) {
+    self$clear_metadata()
+    self$clear_variables_metadata()
+  }
+  ret$data_changed <- TRUE
+  ret$metadata_changed <- TRUE
+  ret$variables_metadata_changed <- TRUE
   return(ret)
 }
 )
@@ -1346,6 +1439,113 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
     }
     else curr_dependents <- dependent_cols
     self$append_to_variables_metadata(col, dependent_columns_label, curr_dependents)
+  }
+}
+)
+
+data_object$set("public", "set_column_colours", function(columns, colours) {
+  if(missing(columns)) columns <- names(self$get_data_frame(use_current_filter = TRUE))
+  if(length(columns) != length(colours)) stop("columns must be the same length as colours")
+  
+  for(i in 1:length(columns)) {
+    self$append_to_variables_metadata(columns[i], colour_label, colours[i])
+  }
+  other_cols <- self$get_column_names()[!self$get_column_names() %in% columns]
+  self$append_to_variables_metadata(other_cols, colour_label, -1)
+}
+)
+
+data_object$set("public", "has_colours", function(columns) {
+  return(self$is_variables_metadata(str = colour_label))
+}
+)
+
+data_object$set("public", "set_column_colours_by_metadata", function(columns, property) {
+  if(missing(columns)) property_values <- self$get_variables_metadata(property = property)
+  else property_values <- self$get_variables_metadata(property = property, column = columns)
+  
+  new_colours <- as.numeric(as.factor(property_values))
+  new_colours[is.na(new_colours)] <- -1
+  if(missing(columns)) self$set_column_colours(colours = new_colours)
+  else self$set_column_colours(columns = columns, colours = new_colours)
+}
+)
+
+data_object$set("public", "remove_column_colours", function() {
+  if(self$is_variables_metadata(str = colour_label)) {
+    self$append_to_variables_metadata(property = colour_label, new_val = -1)
+  }
+}
+)
+
+data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
+  if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
+  numeric_geom <- match.fun(numeric)
+  factor_geom <- match.fun(factor)
+  character_geom <- match.fun(character)
+  localenv <- environment()
+  if(facets) {
+    column_types <- unique(self$get_variables_metadata(column = columns, property = data_type_label))
+    column_types[column_types == "integer"] <- "numeric"
+    column_types <- unique(column_types)
+    if(length(column_types) > 1) {
+      if(!missing(facets)) warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
+      facets <- FALSE
+    }
+  }
+  if(facets) {
+    if(column_types == "numeric") {
+      curr_geom <- numeric_geom
+      curr_geom_name <- numeric
+    }
+    else if(column_types == "factor") {
+      curr_geom <- factor_geom
+      curr_geom_name <- factor
+    }
+    else if(column_types == "character") {
+      curr_geom <- character_geom
+      curr_geom_name <- character
+    }
+    curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars=columns)
+    if(curr_geom_name == "geom_boxplot") {
+      g <- ggplot(data = curr_data, mapping = aes(x = "", y=value))
+    }
+    else {
+      g <- ggplot(data = curr_data, mapping = aes(x = value))
+    }
+    return(g + curr_geom() + facet_wrap(facets= ~variable) + ylab(""))
+  }
+  else {
+    column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
+    column_types[column_types == "integer"] <- "numeric"
+    curr_data <- self$get_data_frame()
+    graphs <- list()
+    i = 1
+    for(column in columns) {
+      if(column_types[i] == "numeric") {
+        curr_geom <- numeric_geom
+        curr_geom_name <- numeric
+      }
+      else if(column_types[i] == "factor") {
+        curr_geom <- factor_geom
+        curr_geom_name <- factor
+      }
+      else if(column_types[i] == "character") {
+        curr_geom <- character_geom
+        curr_geom_name <- character
+      }
+      
+      if(curr_geom_name == "geom_boxplot") {
+        g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column)))
+      }
+      else {
+        g <- ggplot(data = curr_data, mapping = aes_(x = as.name(column)))
+      }
+      current_graph <- g + curr_geom()
+      graphs[[i]] <- current_graph
+      i = i + 1
+    }
+    return(gridExtra::grid.arrange(grobs = graphs))
   }
 }
 )
