@@ -59,6 +59,7 @@ Partial Class dlgCumulativeDistribution
         'chkCountsOnYAxis
         '
         Me.chkCountsOnYAxis.AutoSize = True
+        Me.chkCountsOnYAxis.Enabled = False
         Me.chkCountsOnYAxis.Location = New System.Drawing.Point(255, 243)
         Me.chkCountsOnYAxis.Name = "chkCountsOnYAxis"
         Me.chkCountsOnYAxis.Size = New System.Drawing.Size(108, 17)
@@ -70,6 +71,7 @@ Partial Class dlgCumulativeDistribution
         'chkIncludePoints
         '
         Me.chkIncludePoints.AutoSize = True
+        Me.chkIncludePoints.Enabled = False
         Me.chkIncludePoints.Location = New System.Drawing.Point(255, 269)
         Me.chkIncludePoints.Name = "chkIncludePoints"
         Me.chkIncludePoints.Size = New System.Drawing.Size(93, 17)
@@ -110,6 +112,7 @@ Partial Class dlgCumulativeDistribution
         'ucrCumDistSelector
         '
         Me.ucrCumDistSelector.bShowHiddenColumns = False
+        Me.ucrCumDistSelector.bUseCurrentFilter = False
         Me.ucrCumDistSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrCumDistSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCumDistSelector.Name = "ucrCumDistSelector"
