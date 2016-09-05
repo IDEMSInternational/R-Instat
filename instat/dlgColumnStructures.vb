@@ -62,7 +62,11 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(True)
+        If (Not ucrReceiverType1.IsEmpty) OrElse (Not ucrReceiverType2.IsEmpty) OrElse (Not ucrReceiverType3.IsEmpty) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -72,6 +76,7 @@ Public Class dlgColumnStructure
 
     Private Sub ucrReceiverForColumnStructure_SelectionChanged() Handles ucrReceiverType1.SelectionChanged, ucrReceiverType3.SelectionChanged, ucrReceiverType2.SelectionChanged
         StructureParameters()
+        TestOKEnabled()
     End Sub
 
     Private Sub StructureParameters()
