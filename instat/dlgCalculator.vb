@@ -49,12 +49,13 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetPrefix("Cal")
         ucrSaveResultInto.Reset()
         ucrInputCalOptions.Reset()
-        ucrReceiverForCalculation.cboExpression.ResetText()
+        ucrReceiverForCalculation.Clear()
         Me.Size = New System.Drawing.Size(436, 402)
         ucrInputCalOptions.SetName("Basic")
         chkShowArguments.Checked = False
         chkSaveResultInto.Checked = True
         SaveResults()
+        grpDates.Enabled = False
     End Sub
 
     Private Sub ReopenDialog()
@@ -72,7 +73,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical", "Statistics", "Strings", "Probability"})
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical", "Statistics", "Strings", "Probability", "Dates"})
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -209,6 +210,7 @@ Public Class dlgCalculator
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(614, 377)
             Case "Logical"
+                grpDates.Visible = False
                 grpStatistics.Visible = False
                 grpLogical.Visible = True
                 grpMaths.Visible = False
@@ -217,6 +219,7 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(552, 377)
                 grpProbabilty.Visible = False
             Case "Statistics"
+                grpDates.Visible = False
                 grpStatistics.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
@@ -225,6 +228,7 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
             Case "Strings"
+                grpDates.Visible = False
                 grpStrings.Visible = True
                 grpStatistics.Visible = False
                 grpLogical.Visible = False
@@ -233,6 +237,7 @@ Public Class dlgCalculator
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
             Case "Probability"
+                grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpStrings.Visible = False
                 grpStatistics.Visible = False
@@ -240,7 +245,17 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(749, 377)
+            Case "Dates"
+                grpDates.Visible = True
+                grpProbabilty.Visible = False
+                grpStrings.Visible = False
+                grpStatistics.Visible = False
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                Me.Size = New System.Drawing.Size(589, 377)
             Case Else
+                grpDates.Visible = False
                 Me.Size = New System.Drawing.Size(424, 377)
                 grpProbabilty.Visible = False
                 grpStatistics.Visible = False
@@ -799,5 +814,53 @@ Public Class dlgCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_split_fixed()", 1)
         End If
+    End Sub
+
+    Private Sub cmdYear_Click(sender As Object, e As EventArgs) Handles cmdYear.Click
+
+    End Sub
+
+    Private Sub cmdMonth_Click(sender As Object, e As EventArgs) Handles cmdMonth.Click
+
+    End Sub
+
+    Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdDay.Click
+
+    End Sub
+
+    Private Sub cmdWday_Click(sender As Object, e As EventArgs) Handles cmdWday.Click
+
+    End Sub
+
+    Private Sub cmdYday_Click(sender As Object, e As EventArgs) Handles cmdYday.Click
+
+    End Sub
+
+    Private Sub cmdDate_Click(sender As Object, e As EventArgs) Handles cmdDate.Click
+
+    End Sub
+
+    Private Sub cmdLeap_Click(sender As Object, e As EventArgs) Handles cmdLeap.Click
+
+    End Sub
+
+    Private Sub cmdYmd_Click(sender As Object, e As EventArgs) Handles cmdYmd.Click
+
+    End Sub
+
+    Private Sub cmdMdy_Click(sender As Object, e As EventArgs) Handles cmdMdy.Click
+
+    End Sub
+
+    Private Sub cmdDmy_Click(sender As Object, e As EventArgs) Handles cmdDmy.Click
+
+    End Sub
+
+    Private Sub cmdDoy_Click(sender As Object, e As EventArgs) Handles cmdDoy.Click
+
+    End Sub
+
+    Private Sub cmdDek_Click(sender As Object, e As EventArgs) Handles cmdDek.Click
+
     End Sub
 End Class

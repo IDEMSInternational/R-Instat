@@ -146,7 +146,11 @@ Public Class dlgImportDataset
             Else
                 dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html;|All files|*.*;"
                 dlgOpen.Title = "Open Data from file"
-                dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+                If Not ucrInputFilePath.IsEmpty() Then
+                    dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputFilePath.GetText(), "/", "\"))
+                Else
+                    dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+                End If
             End If
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
@@ -213,6 +217,8 @@ Public Class dlgImportDataset
                         ucrInputName.Focus()
                         'ucrInputName.SetName(strFileName, bSilent:=True)
                     Else
+                        strFileType = strFileExt.Substring(1)
+                        ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
                         ucrBase.clsRsyntax.SetFunction("rio::import")
                         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                         grpCSV.Hide()
@@ -227,6 +233,12 @@ Public Class dlgImportDataset
                     RefreshFrameView()
                 End If
             Else
+                If bFromLibrary Then
+                    'TODO something like this so that the Import dialog closes
+                    '     when using open from library but library dialog stays open
+                    'bFromLibrary = False
+                    'Me.Close()
+                End If
                 If ucrInputFilePath.GetText() = "" Then
                     grpCSV.Hide()
                     grpExcel.Hide()
@@ -238,7 +250,6 @@ Public Class dlgImportDataset
             TestOkEnabled()
         End Using
     End Sub
-
 
 #End Region
 
@@ -280,7 +291,8 @@ Public Class dlgImportDataset
                 clsReadCSV.AddParameter("nrows", intLines)
             End If
             lblCannotImport.Hide()
-            If ucrInputFilePath.GetText() = "" Then
+            lblNoPreview.Hide()
+            If ucrInputFilePath.IsEmpty() Then
                 bValid = False
             Else
                 bValid = frmMain.clsRLink.RunInternalScript(ucrBase.clsRsyntax.GetScript(), strTempDataFrameName, bSilent:=True)
@@ -306,7 +318,11 @@ Public Class dlgImportDataset
             If Not bValid Then
                 grdDataPreview.CurrentWorksheet.Reset()
                 grdDataPreview.Enabled = False
-                lblCannotImport.Show()
+                If Not ucrInputFilePath.IsEmpty() Then
+                    lblCannotImport.Show()
+                Else
+                    lblCannotImport.Hide()
+                End If
                 bCanImport = False
             End If
         Else
@@ -314,7 +330,7 @@ Public Class dlgImportDataset
             lblCannotImport.Hide()
             lblNoPreview.Show()
             grdDataPreview.CurrentWorksheet.Reset()
-            grdDataPreview.Show()
+            grdDataPreview.Hide()
         End If
         If grdDataPreview.CurrentWorksheet IsNot Nothing Then
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)

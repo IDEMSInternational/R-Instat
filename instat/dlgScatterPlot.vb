@@ -88,6 +88,8 @@ Public Class dlgScatterPlot
 
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.strPrefix = "Scatter"
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
     End Sub
     Private Sub SetDefaults()
         'setDefaults
@@ -138,10 +140,8 @@ Public Class dlgScatterPlot
     Private Sub ucrSaveScatterPlot_GraphNameChanged() Handles ucrSaveScatterPlot.GraphNameChanged, ucrSaveScatterPlot.SaveGraphCheckedChanged
         If ucrSaveScatterPlot.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveScatterPlot.strGraphName, strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveScatterPlot.strGraphName)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
         TestOkEnabled()
     End Sub
