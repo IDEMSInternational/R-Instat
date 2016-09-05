@@ -26,6 +26,7 @@ Public Class sdgPlots
     Public clsGraphTitleFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
+    Private bAdditionalLayersSetGlobal As Boolean
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,6 +57,7 @@ Public Class sdgPlots
         ucrInputThemes.SetName("theme_grey")
         rdoLegendTitleAuto.Checked = True
         LegendDefaults()
+        bLayersDefaultIsGlobal = False
     End Sub
 
     Public Sub Reset()
@@ -354,4 +356,13 @@ Public Class sdgPlots
         LegendDefaults()
     End Sub
 
+    Public Property bLayersDefaultIsGlobal As Boolean
+        Get
+            Return bAdditionalLayersSetGlobal
+        End Get
+        Set(bValue As Boolean)
+            bAdditionalLayersSetGlobal = bValue
+            ucrPlotsAdditionalLayers.bSetGlobalIsDefault = bValue
+        End Set
+    End Property
 End Class

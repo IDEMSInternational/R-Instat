@@ -48,6 +48,8 @@ Public Class dlgGeneralForGraphics
         ucrAdditionalLayers.SetRSyntax(ucrBase.clsRsyntax)
         ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
 
     End Sub
 
@@ -157,10 +159,8 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
         If ucrSaveGraph.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
 End Class
