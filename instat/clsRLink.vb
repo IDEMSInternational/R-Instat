@@ -214,7 +214,7 @@ Public Class RLink
             Try
                 clsEngine.Evaluate(strScript)
             Catch e As Exception
-                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                MsgBox("Error occurred in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
             End Try
         ElseIf bReturnOutput = 1 Then
             Try
@@ -222,7 +222,7 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Catch e As Exception
-                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                MsgBox("Error occurred in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
             End Try
         Else
             If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
@@ -233,7 +233,7 @@ Public Class RLink
                     Try
                         clsEngine.Evaluate(strSplitScript)
                     Catch e As Exception
-                        MsgBox("Error occured in attempting to run:" & vbNewLine & strSplitScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                        MsgBox("Error occurred in attempting to run:" & vbNewLine & strSplitScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
                     End Try
                 End If
                 strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
@@ -244,7 +244,7 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Catch e As Exception
-                MsgBox("Error occured in attempting to run:" & vbNewLine & strCapturedScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                MsgBox("Error occurred in attempting to run:" & vbNewLine & strCapturedScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
             End Try
         End If
         If bOutput Then
@@ -298,7 +298,7 @@ Public Class RLink
                 expTemp = clsEngine.GetSymbol(strVariableName)
             Catch ex As Exception
                 If Not bSilent Then
-                    MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                    MsgBox("Error occurred in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
                 End If
             End Try
         End If
@@ -314,7 +314,7 @@ Public Class RLink
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
             If Not bSilent Then
-                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                MsgBox("Error occurred in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
             End If
             chrTemp = Nothing
         End Try
@@ -346,8 +346,8 @@ Public Class RLink
                     Return True
                 Catch ex As Exception
                     If Not bSilent Then
-                        MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
-                    End If
+                    MsgBox("Error occurred in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                End If
                     Return False
                 End Try
             Else
@@ -376,21 +376,25 @@ Public Class RLink
 
     Public Sub CreateNewClimateObject() 'creates an instance of the climate object
         If Not bClimateObjectExists Then
+            frmMain.Cursor = Cursors.WaitCursor
             frmSetupLoading.Show()
             RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strClimateObjectPath & "')")
             RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
             RunScript(strClimateObject & "<-climate$new()")
             bClimateObjectExists = True
             frmSetupLoading.Close()
+            frmMain.Cursor = Cursors.Default
         End If
     End Sub
 
     Public Sub RSetup()
         'run script to load libraries
+        frmMain.Cursor = Cursors.WaitCursor
         frmSetupLoading.Show()
         RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
         frmSetupLoading.Close()
+        frmMain.Cursor = Cursors.Default
     End Sub
 
     Public Sub CreateNewInstatObject()

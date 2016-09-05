@@ -231,7 +231,7 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name), ...))
+    return(self$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
   }
 }
 )
@@ -612,13 +612,13 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
-instat_object$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name) {
-  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name)
+instat_object$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name, addmargins = FALSE, proportions = FALSE, percentages = FALSE, transpose = FALSE) {
+  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name, addmargins = addmargins, proportions = proportions, percentages = percentages, transpose = transpose)
 } 
 )
 
-instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name) {
-  self$get_data_objects(data_name)$anova_tables(x_col_names, y_col_name)
+instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE) {
+  self$get_data_objects(data_name)$anova_tables(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level)
 } 
 )
 
@@ -919,5 +919,10 @@ instat_object$set("public","has_colours", function(data_name, columns) {
 
 instat_object$set("public","set_column_colours_by_metadata", function(data_name, columns, property) {
   self$get_data_objects(data_name)$set_column_colours_by_metadata(columns, property)
+}
+)
+
+instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
+  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, factor = factor, character = character, facets = facets)
 }
 )

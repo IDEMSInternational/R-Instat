@@ -66,6 +66,8 @@ Partial Class dlgCalculator
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
         Me.grpStrings = New System.Windows.Forms.GroupBox()
+        Me.cmdSplit = New System.Windows.Forms.Button()
+        Me.cmdCombine = New System.Windows.Forms.Button()
         Me.cmdDetect = New System.Windows.Forms.Button()
         Me.cmdTrim = New System.Windows.Forms.Button()
         Me.cmdReplace = New System.Windows.Forms.Button()
@@ -76,7 +78,6 @@ Partial Class dlgCalculator
         Me.cmdOrder = New System.Windows.Forms.Button()
         Me.cmdPad = New System.Windows.Forms.Button()
         Me.cmdExtract = New System.Windows.Forms.Button()
-        Me.cmdLength = New System.Windows.Forms.Button()
         Me.cmdCountstrings = New System.Windows.Forms.Button()
         Me.cmdLocate = New System.Windows.Forms.Button()
         Me.cmdCount = New System.Windows.Forms.Button()
@@ -124,6 +125,19 @@ Partial Class dlgCalculator
         Me.cmdLfact = New System.Windows.Forms.Button()
         Me.cmdTrigamma = New System.Windows.Forms.Button()
         Me.cmdBeta = New System.Windows.Forms.Button()
+        Me.grpDates = New System.Windows.Forms.GroupBox()
+        Me.cmdDmy = New System.Windows.Forms.Button()
+        Me.cmdDek = New System.Windows.Forms.Button()
+        Me.cmdDay = New System.Windows.Forms.Button()
+        Me.cmdMonth = New System.Windows.Forms.Button()
+        Me.cmdYear = New System.Windows.Forms.Button()
+        Me.cmdDate = New System.Windows.Forms.Button()
+        Me.cmdYday = New System.Windows.Forms.Button()
+        Me.cmdWday = New System.Windows.Forms.Button()
+        Me.cmdMdy = New System.Windows.Forms.Button()
+        Me.cmdYmd = New System.Windows.Forms.Button()
+        Me.cmdDoy = New System.Windows.Forms.Button()
+        Me.cmdLeap = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
@@ -136,6 +150,7 @@ Partial Class dlgCalculator
         Me.grpStatistics.SuspendLayout()
         Me.grpLogical.SuspendLayout()
         Me.grpProbabilty.SuspendLayout()
+        Me.grpDates.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -620,6 +635,8 @@ Partial Class dlgCalculator
         '
         'grpStrings
         '
+        Me.grpStrings.Controls.Add(Me.cmdSplit)
+        Me.grpStrings.Controls.Add(Me.cmdCombine)
         Me.grpStrings.Controls.Add(Me.cmdDetect)
         Me.grpStrings.Controls.Add(Me.cmdTrim)
         Me.grpStrings.Controls.Add(Me.cmdReplace)
@@ -630,24 +647,46 @@ Partial Class dlgCalculator
         Me.grpStrings.Controls.Add(Me.cmdOrder)
         Me.grpStrings.Controls.Add(Me.cmdPad)
         Me.grpStrings.Controls.Add(Me.cmdExtract)
-        Me.grpStrings.Controls.Add(Me.cmdLength)
         Me.grpStrings.Controls.Add(Me.cmdCountstrings)
         Me.grpStrings.Controls.Add(Me.cmdLocate)
         Me.grpStrings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpStrings.Location = New System.Drawing.Point(387, 65)
+        Me.grpStrings.Location = New System.Drawing.Point(385, 68)
         Me.grpStrings.Name = "grpStrings"
         Me.grpStrings.Size = New System.Drawing.Size(163, 141)
         Me.grpStrings.TabIndex = 150
         Me.grpStrings.TabStop = False
         Me.grpStrings.Text = "Strings"
         '
+        'cmdSplit
+        '
+        Me.cmdSplit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSplit.Location = New System.Drawing.Point(44, 109)
+        Me.cmdSplit.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSplit.Name = "cmdSplit"
+        Me.cmdSplit.Size = New System.Drawing.Size(38, 30)
+        Me.cmdSplit.TabIndex = 149
+        Me.cmdSplit.Tag = ""
+        Me.cmdSplit.Text = "split"
+        Me.cmdSplit.UseVisualStyleBackColor = True
+        '
+        'cmdCombine
+        '
+        Me.cmdCombine.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdCombine.Location = New System.Drawing.Point(126, 77)
+        Me.cmdCombine.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdCombine.Name = "cmdCombine"
+        Me.cmdCombine.Size = New System.Drawing.Size(38, 30)
+        Me.cmdCombine.TabIndex = 148
+        Me.cmdCombine.Text = "combine"
+        Me.cmdCombine.UseVisualStyleBackColor = True
+        '
         'cmdDetect
         '
-        Me.cmdDetect.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdDetect.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdDetect.Location = New System.Drawing.Point(5, 109)
         Me.cmdDetect.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDetect.Name = "cmdDetect"
-        Me.cmdDetect.Size = New System.Drawing.Size(78, 30)
+        Me.cmdDetect.Size = New System.Drawing.Size(38, 30)
         Me.cmdDetect.TabIndex = 147
         Me.cmdDetect.Tag = ""
         Me.cmdDetect.Text = "detect"
@@ -752,24 +791,13 @@ Partial Class dlgCalculator
         Me.cmdExtract.Text = "extract"
         Me.cmdExtract.UseVisualStyleBackColor = True
         '
-        'cmdLength
-        '
-        Me.cmdLength.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLength.Location = New System.Drawing.Point(45, 78)
-        Me.cmdLength.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdLength.Name = "cmdLength"
-        Me.cmdLength.Size = New System.Drawing.Size(38, 30)
-        Me.cmdLength.TabIndex = 135
-        Me.cmdLength.Text = "length"
-        Me.cmdLength.UseVisualStyleBackColor = True
-        '
         'cmdCountstrings
         '
         Me.cmdCountstrings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdCountstrings.Location = New System.Drawing.Point(84, 77)
+        Me.cmdCountstrings.Location = New System.Drawing.Point(45, 77)
         Me.cmdCountstrings.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdCountstrings.Name = "cmdCountstrings"
-        Me.cmdCountstrings.Size = New System.Drawing.Size(80, 30)
+        Me.cmdCountstrings.Size = New System.Drawing.Size(79, 30)
         Me.cmdCountstrings.TabIndex = 134
         Me.cmdCountstrings.Text = "count"
         Me.cmdCountstrings.UseVisualStyleBackColor = True
@@ -1097,7 +1125,7 @@ Partial Class dlgCalculator
         Me.grpProbabilty.Controls.Add(Me.cmdLfact)
         Me.grpProbabilty.Controls.Add(Me.cmdTrigamma)
         Me.grpProbabilty.Controls.Add(Me.cmdBeta)
-        Me.grpProbabilty.Location = New System.Drawing.Point(387, 65)
+        Me.grpProbabilty.Location = New System.Drawing.Point(387, 69)
         Me.grpProbabilty.Name = "grpProbabilty"
         Me.grpProbabilty.Size = New System.Drawing.Size(337, 140)
         Me.grpProbabilty.TabIndex = 152
@@ -1262,10 +1290,10 @@ Partial Class dlgCalculator
         'cmdLchoose
         '
         Me.cmdLchoose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLchoose.Location = New System.Drawing.Point(85, 75)
+        Me.cmdLchoose.Location = New System.Drawing.Point(65, 75)
         Me.cmdLchoose.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLchoose.Name = "cmdLchoose"
-        Me.cmdLchoose.Size = New System.Drawing.Size(82, 30)
+        Me.cmdLchoose.Size = New System.Drawing.Size(102, 30)
         Me.cmdLchoose.TabIndex = 151
         Me.cmdLchoose.Text = "lchoose"
         Me.cmdLchoose.UseVisualStyleBackColor = True
@@ -1298,15 +1326,157 @@ Partial Class dlgCalculator
         Me.cmdBeta.Location = New System.Drawing.Point(2, 75)
         Me.cmdBeta.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdBeta.Name = "cmdBeta"
-        Me.cmdBeta.Size = New System.Drawing.Size(82, 30)
+        Me.cmdBeta.Size = New System.Drawing.Size(62, 30)
         Me.cmdBeta.TabIndex = 149
         Me.cmdBeta.Text = "beta"
         Me.cmdBeta.UseVisualStyleBackColor = True
         '
+        'grpDates
+        '
+        Me.grpDates.Controls.Add(Me.cmdDmy)
+        Me.grpDates.Controls.Add(Me.cmdDek)
+        Me.grpDates.Controls.Add(Me.cmdDay)
+        Me.grpDates.Controls.Add(Me.cmdMonth)
+        Me.grpDates.Controls.Add(Me.cmdYear)
+        Me.grpDates.Controls.Add(Me.cmdDate)
+        Me.grpDates.Controls.Add(Me.cmdYday)
+        Me.grpDates.Controls.Add(Me.cmdWday)
+        Me.grpDates.Controls.Add(Me.cmdMdy)
+        Me.grpDates.Controls.Add(Me.cmdYmd)
+        Me.grpDates.Controls.Add(Me.cmdDoy)
+        Me.grpDates.Controls.Add(Me.cmdLeap)
+        Me.grpDates.Location = New System.Drawing.Point(386, 65)
+        Me.grpDates.Name = "grpDates"
+        Me.grpDates.Size = New System.Drawing.Size(189, 144)
+        Me.grpDates.TabIndex = 171
+        Me.grpDates.TabStop = False
+        Me.grpDates.Text = "Dates"
+        '
+        'cmdDmy
+        '
+        Me.cmdDmy.Location = New System.Drawing.Point(3, 111)
+        Me.cmdDmy.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDmy.Name = "cmdDmy"
+        Me.cmdDmy.Size = New System.Drawing.Size(60, 30)
+        Me.cmdDmy.TabIndex = 151
+        Me.cmdDmy.Tag = "dmy"
+        Me.cmdDmy.Text = "dmy"
+        Me.cmdDmy.UseVisualStyleBackColor = True
+        '
+        'cmdDek
+        '
+        Me.cmdDek.Location = New System.Drawing.Point(125, 111)
+        Me.cmdDek.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDek.Name = "cmdDek"
+        Me.cmdDek.Size = New System.Drawing.Size(60, 30)
+        Me.cmdDek.TabIndex = 150
+        Me.cmdDek.Text = "dek"
+        Me.cmdDek.UseVisualStyleBackColor = True
+        '
+        'cmdDay
+        '
+        Me.cmdDay.Location = New System.Drawing.Point(125, 18)
+        Me.cmdDay.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDay.Name = "cmdDay"
+        Me.cmdDay.Size = New System.Drawing.Size(60, 30)
+        Me.cmdDay.TabIndex = 145
+        Me.cmdDay.Text = "day"
+        Me.cmdDay.UseVisualStyleBackColor = True
+        '
+        'cmdMonth
+        '
+        Me.cmdMonth.Location = New System.Drawing.Point(64, 18)
+        Me.cmdMonth.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdMonth.Name = "cmdMonth"
+        Me.cmdMonth.Size = New System.Drawing.Size(60, 30)
+        Me.cmdMonth.TabIndex = 144
+        Me.cmdMonth.Text = "month"
+        Me.cmdMonth.UseVisualStyleBackColor = True
+        '
+        'cmdYear
+        '
+        Me.cmdYear.Location = New System.Drawing.Point(3, 18)
+        Me.cmdYear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdYear.Name = "cmdYear"
+        Me.cmdYear.Size = New System.Drawing.Size(60, 30)
+        Me.cmdYear.TabIndex = 143
+        Me.cmdYear.Text = "year"
+        Me.cmdYear.UseVisualStyleBackColor = True
+        '
+        'cmdDate
+        '
+        Me.cmdDate.Location = New System.Drawing.Point(125, 49)
+        Me.cmdDate.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDate.Name = "cmdDate"
+        Me.cmdDate.Size = New System.Drawing.Size(60, 30)
+        Me.cmdDate.TabIndex = 142
+        Me.cmdDate.Text = "date"
+        Me.cmdDate.UseVisualStyleBackColor = True
+        '
+        'cmdYday
+        '
+        Me.cmdYday.Location = New System.Drawing.Point(64, 49)
+        Me.cmdYday.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdYday.Name = "cmdYday"
+        Me.cmdYday.Size = New System.Drawing.Size(60, 30)
+        Me.cmdYday.TabIndex = 141
+        Me.cmdYday.Text = "yday"
+        Me.cmdYday.UseVisualStyleBackColor = True
+        '
+        'cmdWday
+        '
+        Me.cmdWday.Location = New System.Drawing.Point(3, 49)
+        Me.cmdWday.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdWday.Name = "cmdWday"
+        Me.cmdWday.Size = New System.Drawing.Size(60, 30)
+        Me.cmdWday.TabIndex = 140
+        Me.cmdWday.Text = "wday"
+        Me.cmdWday.UseVisualStyleBackColor = True
+        '
+        'cmdMdy
+        '
+        Me.cmdMdy.Location = New System.Drawing.Point(125, 80)
+        Me.cmdMdy.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdMdy.Name = "cmdMdy"
+        Me.cmdMdy.Size = New System.Drawing.Size(60, 30)
+        Me.cmdMdy.TabIndex = 139
+        Me.cmdMdy.Text = "mdy"
+        Me.cmdMdy.UseVisualStyleBackColor = True
+        '
+        'cmdYmd
+        '
+        Me.cmdYmd.Location = New System.Drawing.Point(64, 80)
+        Me.cmdYmd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdYmd.Name = "cmdYmd"
+        Me.cmdYmd.Size = New System.Drawing.Size(60, 30)
+        Me.cmdYmd.TabIndex = 138
+        Me.cmdYmd.Text = "ymd"
+        Me.cmdYmd.UseVisualStyleBackColor = True
+        '
+        'cmdDoy
+        '
+        Me.cmdDoy.Location = New System.Drawing.Point(64, 111)
+        Me.cmdDoy.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDoy.Name = "cmdDoy"
+        Me.cmdDoy.Size = New System.Drawing.Size(60, 30)
+        Me.cmdDoy.TabIndex = 137
+        Me.cmdDoy.Text = "doy"
+        Me.cmdDoy.UseVisualStyleBackColor = True
+        '
+        'cmdLeap
+        '
+        Me.cmdLeap.Location = New System.Drawing.Point(3, 80)
+        Me.cmdLeap.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdLeap.Name = "cmdLeap"
+        Me.cmdLeap.Size = New System.Drawing.Size(60, 30)
+        Me.cmdLeap.TabIndex = 136
+        Me.cmdLeap.Text = "leap"
+        Me.cmdLeap.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.IsReadOnly = False
-        Me.ucrInputCalOptions.Location = New System.Drawing.Point(222, 42)
+        Me.ucrInputCalOptions.Location = New System.Drawing.Point(225, 42)
         Me.ucrInputCalOptions.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
         Me.ucrInputCalOptions.Size = New System.Drawing.Size(137, 22)
@@ -1314,11 +1484,11 @@ Partial Class dlgCalculator
         '
         'ucrReceiverForCalculation
         '
-        Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(90, 16)
+        Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(91, 13)
         Me.ucrReceiverForCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
         Me.ucrReceiverForCalculation.Selector = Nothing
-        Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(284, 20)
+        Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(284, 28)
         Me.ucrReceiverForCalculation.TabIndex = 118
         '
         'ucrSaveResultInto
@@ -1333,7 +1503,7 @@ Partial Class dlgCalculator
         'ucrSpaceToMangeResult
         '
         Me.ucrSpaceToMangeResult.IsReadOnly = False
-        Me.ucrSpaceToMangeResult.Location = New System.Drawing.Point(91, 230)
+        Me.ucrSpaceToMangeResult.Location = New System.Drawing.Point(91, 228)
         Me.ucrSpaceToMangeResult.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrSpaceToMangeResult.Name = "ucrSpaceToMangeResult"
         Me.ucrSpaceToMangeResult.Size = New System.Drawing.Size(284, 22)
@@ -1342,7 +1512,8 @@ Partial Class dlgCalculator
         'ucrSelectorForCalculations
         '
         Me.ucrSelectorForCalculations.bShowHiddenColumns = False
-        Me.ucrSelectorForCalculations.Location = New System.Drawing.Point(8, 36)
+        Me.ucrSelectorForCalculations.bUseCurrentFilter = False
+        Me.ucrSelectorForCalculations.Location = New System.Drawing.Point(9, 35)
         Me.ucrSelectorForCalculations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
         Me.ucrSelectorForCalculations.Size = New System.Drawing.Size(210, 181)
@@ -1360,7 +1531,8 @@ Partial Class dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(733, 338)
+        Me.ClientSize = New System.Drawing.Size(781, 531)
+        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.chkShowArguments)
         Me.Controls.Add(Me.grpStrings)
@@ -1390,6 +1562,7 @@ Partial Class dlgCalculator
         Me.grpStatistics.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
+        Me.grpDates.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1455,7 +1628,6 @@ Partial Class dlgCalculator
     Friend WithEvents cmdOrder As Button
     Friend WithEvents cmdPad As Button
     Friend WithEvents cmdExtract As Button
-    Friend WithEvents cmdLength As Button
     Friend WithEvents cmdCountstrings As Button
     Friend WithEvents cmdLocate As Button
     Friend WithEvents cmdCount As Button
@@ -1503,4 +1675,19 @@ Partial Class dlgCalculator
     Friend WithEvents cmdLfact As Button
     Friend WithEvents cmdBeta As Button
     Friend WithEvents cmdTrigamma As Button
+    Friend WithEvents cmdCombine As Button
+    Friend WithEvents cmdSplit As Button
+    Friend WithEvents grpDates As GroupBox
+    Friend WithEvents cmdDmy As Button
+    Friend WithEvents cmdDek As Button
+    Friend WithEvents cmdDay As Button
+    Friend WithEvents cmdMonth As Button
+    Friend WithEvents cmdYear As Button
+    Friend WithEvents cmdDate As Button
+    Friend WithEvents cmdYday As Button
+    Friend WithEvents cmdWday As Button
+    Friend WithEvents cmdMdy As Button
+    Friend WithEvents cmdYmd As Button
+    Friend WithEvents cmdDoy As Button
+    Friend WithEvents cmdLeap As Button
 End Class

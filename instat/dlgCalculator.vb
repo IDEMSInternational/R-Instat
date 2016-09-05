@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -16,11 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Imports RDotNet
+
 Public Class dlgCalculator
     Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
+
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 14
@@ -43,17 +44,22 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SetDefaults()
+        cmdTry.Enabled = False
+        ucrSpaceToMangeResult.Enabled = False
         ucrSaveResultInto.SetPrefix("Cal")
         ucrSaveResultInto.Reset()
         ucrInputCalOptions.Reset()
         ucrReceiverForCalculation.cboExpression.ResetText()
         Me.Size = New System.Drawing.Size(436, 402)
-        ucrInputCalOptions.cboInput.Text = "Basic"
-        chkShowArguments.Checked = True
+        ucrInputCalOptions.SetName("Basic")
+        chkShowArguments.Checked = False
+        chkSaveResultInto.Checked = True
+        SaveResults()
+        grpDates.Enabled = False
     End Sub
 
     Private Sub ReopenDialog()
-
+        SaveResults()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -67,32 +73,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.cboInput.Items.Add("Basic")
-        ucrInputCalOptions.cboInput.Items.Add("Maths")
-        ucrInputCalOptions.cboInput.Items.Add("Logical")
-        ucrInputCalOptions.cboInput.Items.Add("Statistics")
-        ucrInputCalOptions.cboInput.Items.Add("Strings")
-        ucrInputCalOptions.cboInput.Items.Add("Probability")
-    End Sub
-
-    'Private Sub ucrSaveResultIntoInto_NameChanged() Handles ucrSaveResultInto.NameChanged
-    '    ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveResultInto.GetText, strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveResultInto.GetText, bAssignToIsPrefix:=True)
-    'End Sub
-
-    Private Sub AddText(strVar As String, Optional intStepsBack As Integer = 0, Optional bolInsertSelected As Boolean = False)
-        'Dim intCurrCursorPosition As Integer
-        'Dim strSelectedText As String = txtCalcLine.SelectedText
-
-        'txtCalcLine.SelectedText = ""
-        'intCurrCursorPosition = txtCalcLine.SelectionStart
-        'txtCalcLine.Text = txtCalcLine.Text.Insert(txtCalcLine.SelectionStart, strVar)
-        'intCurrCursorPosition = intCurrCursorPosition + strVar.Length - intStepsBack
-        'If bolInsertSelected Then
-        '    txtCalcLine.Text = txtCalcLine.Text.Insert(intCurrCursorPosition, strSelectedText)
-        '    intCurrCursorPosition = intCurrCursorPosition + strSelectedText.Length + 1
-        'End If
-        'txtCalcLine.SelectionStart = intCurrCursorPosition
-        'txtCalcLine.Select()
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical", "Statistics", "Strings", "Probability", "Dates"})
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -155,20 +136,24 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("/")
     End Sub
 
-    Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs)
-        'If lstAvailableVariable.SelectedItem <> "" Then
-        '    AddText("data[[""" & lstAvailableVariable.SelectedItem & """]]")
-        'End If
-    End Sub
-
     Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^")
     End Sub
 
-
-
     Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        SaveResults()
+    End Sub
+
+    Private Sub SaveResults()
+        If chkSaveResultInto.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
+        Else
+            ucrBase.clsRsyntax.RemoveAssignTo()
+            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -189,7 +174,7 @@ Public Class dlgCalculator
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForCalculation.GetVariableNames(False))
-        ucrBase.OKEnabled(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdGreater_Click(sender As Object, e As EventArgs) Handles cmdGreater.Click
@@ -205,10 +190,9 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        ucrReceiverForCalculation.Addbackspace()
+        ucrReceiverForCalculation.Backspace()
 
     End Sub
-
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -226,6 +210,7 @@ Public Class dlgCalculator
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(614, 377)
             Case "Logical"
+                grpDates.Visible = False
                 grpStatistics.Visible = False
                 grpLogical.Visible = True
                 grpMaths.Visible = False
@@ -234,6 +219,7 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(552, 377)
                 grpProbabilty.Visible = False
             Case "Statistics"
+                grpDates.Visible = False
                 grpStatistics.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
@@ -242,6 +228,7 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
             Case "Strings"
+                grpDates.Visible = False
                 grpStrings.Visible = True
                 grpStatistics.Visible = False
                 grpLogical.Visible = False
@@ -250,6 +237,7 @@ Public Class dlgCalculator
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
             Case "Probability"
+                grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpStrings.Visible = False
                 grpStatistics.Visible = False
@@ -257,7 +245,17 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(749, 377)
+            Case "Dates"
+                grpDates.Visible = True
+                grpProbabilty.Visible = False
+                grpStrings.Visible = False
+                grpStatistics.Visible = False
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                Me.Size = New System.Drawing.Size(589, 377)
             Case Else
+                grpDates.Visible = False
                 Me.Size = New System.Drawing.Size(424, 377)
                 grpProbabilty.Visible = False
                 grpStatistics.Visible = False
@@ -488,7 +486,7 @@ Public Class dlgCalculator
 
     Private Sub cmdMin_Click(sender As Object, e As EventArgs) Handles cmdMin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x= ,na.rm=FASLE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x= ,na.rm=FALSE)", 13)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min()", 1)
         End If
@@ -496,7 +494,7 @@ Public Class dlgCalculator
 
     Private Sub cmdMedian_Click(sender As Object, e As EventArgs) Handles cmdMedian.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x=na.rm=FALSE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x= ,na.rm=FALSE)", 13)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median()", 1)
         End If
@@ -528,7 +526,7 @@ Public Class dlgCalculator
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=seq(0,1,0.25), na.rm=FALSE, names=TRUE, type=7)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=0.5, na.rm=FALSE, names=TRUE, type=7)", 44)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
         End If
@@ -585,7 +583,7 @@ Public Class dlgCalculator
 
     Private Sub cmdOrder_Click(sender As Object, e As EventArgs) Handles cmdOrder.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_order(x= , decreasing = FALSE, na_last = TRUE, locale = '')", 50)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_order(x= , decreasing = FALSE, na_last = TRUE)", 38)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_order()", 1)
         End If
@@ -615,14 +613,6 @@ Public Class dlgCalculator
         End If
     End Sub
 
-    Private Sub cmdLength_Click(sender As Object, e As EventArgs) Handles cmdLength.Click
-        If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length(string= )", 1)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_length()", 1)
-        End If
-    End Sub
-
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract(string= , pattern= )", 12)
@@ -634,7 +624,7 @@ Public Class dlgCalculator
 
     Private Sub cmdCountstrings_Click(sender As Object, e As EventArgs) Handles cmdCountstrings.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_count(String= , pattern ='')", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_count(string= , pattern ='')", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_count()", 1)
         End If
@@ -675,9 +665,9 @@ Public Class dlgCalculator
 
     Private Sub cmdqF_Click(sender As Object, e As EventArgs) Handles cmdqF.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(p= , df1= ,df2= ,lower.tail = TRUE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf()", 1)
         End If
     End Sub
 
@@ -791,5 +781,86 @@ Public Class dlgCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trigamma()", 1)
         End If
+    End Sub
+
+    Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
+        SaveResults()
+        ShowControl()
+    End Sub
+
+    Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
+        SaveResults()
+    End Sub
+
+    Private Sub ShowControl()
+        If chkSaveResultInto.Checked Then
+            ucrSaveResultInto.Visible = True
+        Else
+            ucrSaveResultInto.Visible = False
+        End If
+    End Sub
+
+    Private Sub cmdCombine_Click(sender As Object, e As EventArgs) Handles cmdCombine.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_c(string= , pattern='')", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_c()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSplit_Click(sender As Object, e As EventArgs) Handles cmdSplit.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_split_fixed(string= , pattern='', n= )", 18)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_split_fixed()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdYear_Click(sender As Object, e As EventArgs) Handles cmdYear.Click
+
+    End Sub
+
+    Private Sub cmdMonth_Click(sender As Object, e As EventArgs) Handles cmdMonth.Click
+
+    End Sub
+
+    Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdDay.Click
+
+    End Sub
+
+    Private Sub cmdWday_Click(sender As Object, e As EventArgs) Handles cmdWday.Click
+
+    End Sub
+
+    Private Sub cmdYday_Click(sender As Object, e As EventArgs) Handles cmdYday.Click
+
+    End Sub
+
+    Private Sub cmdDate_Click(sender As Object, e As EventArgs) Handles cmdDate.Click
+
+    End Sub
+
+    Private Sub cmdLeap_Click(sender As Object, e As EventArgs) Handles cmdLeap.Click
+
+    End Sub
+
+    Private Sub cmdYmd_Click(sender As Object, e As EventArgs) Handles cmdYmd.Click
+
+    End Sub
+
+    Private Sub cmdMdy_Click(sender As Object, e As EventArgs) Handles cmdMdy.Click
+
+    End Sub
+
+    Private Sub cmdDmy_Click(sender As Object, e As EventArgs) Handles cmdDmy.Click
+
+    End Sub
+
+    Private Sub cmdDoy_Click(sender As Object, e As EventArgs) Handles cmdDoy.Click
+
+    End Sub
+
+    Private Sub cmdDek_Click(sender As Object, e As EventArgs) Handles cmdDek.Click
+
     End Sub
 End Class
