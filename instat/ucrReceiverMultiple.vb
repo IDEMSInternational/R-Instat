@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
+
 Public Class ucrReceiverMultiple
 
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -328,4 +330,34 @@ Public Class ucrReceiverMultiple
             frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
         End If
     End Sub
+
+    Public Function GetCurrentItemTypes(Optional bUnique As Boolean = False) As List(Of String)
+        Dim clsGetDataType As New RFunction
+        Dim strDataTypes As New List(Of String)
+        Dim strDataFrame As String
+        Dim strCurrentType As String
+
+        If bTypeSet Then
+            strCurrentType = strType
+        Else
+            strCurrentType = Selector.GetItemType()
+        End If
+
+        If strCurrentType = "column" AndAlso GetDataFrameNames().Count = 1 Then
+            strDataFrame = GetDataFrameNames()(0)
+            clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+            clsGetDataType.AddParameter("property", "data_type_label")
+            clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+            clsGetDataType.AddParameter("column", GetVariableNames())
+            strDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter.ToList()
+            If bUnique Then
+                strDataTypes = strDataTypes.Distinct()
+            End If
+        End If
+        Return strDataTypes
+    End Function
+
+    Public Function IsSingleType() As Boolean
+        Return GetCurrentItemTypes.Count = 1
+    End Function
 End Class
