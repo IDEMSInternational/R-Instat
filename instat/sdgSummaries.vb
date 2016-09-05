@@ -84,7 +84,7 @@ Public Class sdgSummaries
         clsRSummaries = clsRNewSummaries
     End Sub
 
-    Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkMinimum.CheckedChanged, chkMaximum.CheckedChanged, chkSum.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged
+    Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkSum.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged
         SummariesParameters()
     End Sub
 End Class
