@@ -84,12 +84,10 @@ Public Class ucrReceiverExpression
         cboExpression.SelectedText = ""
     End Sub
 
-    Public Sub Addbackspace()
-
-        If cboExpression.Text = "" Then
-            cboExpression.Text = Mid(cboExpression.Text, 1, Len(cboExpression.Text) - 1 + 1)
-        Else
-            cboExpression.Text = Mid(cboExpression.Text, 1, Len(cboExpression.Text) - 1)
+    Public Sub Backspace()
+        If cboExpression.Text <> "" AndAlso iCurrentPosition > 0 Then
+            cboExpression.Text = Mid(cboExpression.Text, 1, iCurrentPosition - 1) & Mid(cboExpression.Text, iCurrentPosition + 1, Len(cboExpression.Text) - iCurrentPosition + 1)
+            iCurrentPosition = iCurrentPosition - 1
         End If
     End Sub
 
@@ -139,4 +137,11 @@ Public Class ucrReceiverExpression
             Return cboExpression.Text
         End If
     End Function
+
+    Private Sub cboExpression_GotFocus(sender As Object, e As EventArgs) Handles cboExpression.GotFocus
+        If iCurrentPosition > 0 Then
+            cboExpression.SelectionStart = iCurrentPosition
+        End If
+        cboExpression.SelectionLength = 0
+    End Sub
 End Class

@@ -49,4 +49,12 @@ Public Class ucrSelectorByDataFrame
         lstAvailableVariable.Enabled = bEnable
     End Sub
 
+    Public Property bUseCurrentFilter As Boolean
+        Get
+            Return ucrAvailableDataFrames.bUseCurrentFilter
+        End Get
+        Set(bValue As Boolean)
+            ucrAvailableDataFrames.bUseCurrentFilter = bValue
+        End Set
+    End Property
 End Class

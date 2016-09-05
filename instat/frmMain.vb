@@ -999,7 +999,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
-        dlgDescriptiveStatistics.ShowDialog()
+        dlgDescribeOneVariable.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableGraph.Click
+        dlgOneVariableGraph.ShowDialog()
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -1070,5 +1074,9 @@ Public Class frmMain
                 End Try
             End If
         End Using
+    End Sub
+
+    Private Sub mnuOrganiseDataFrameColumnStructure_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameColumnStructure.Click
+        dlgColumnStructure.ShowDialog()
     End Sub
 End Class
