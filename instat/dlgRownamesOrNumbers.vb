@@ -28,9 +28,16 @@ Public Class dlgRowNamesOrNumbers
         Else
             ReopenDialog()
         End If
+        TestOKEnabled()
         autoTranslate(Me)
     End Sub
-
+    Private Sub TestOKEnabled()
+        If ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
     Private Sub InitialiseDialog()
         ucrReceiverSingleRownamesOrNumbers.Selector = ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers
         ucrReceiverSingleRownamesOrNumbers.SetMeAsReceiver()
@@ -110,6 +117,7 @@ Public Class dlgRowNamesOrNumbers
     Private Sub ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers_DataFrameChanged() Handles ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.strCurrentDataFrame & Chr(34))
         SetAssignment()
+        TestOKEnabled()
     End Sub
 
     Private Sub rdoSortAscendingDescending_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSortAscending.CheckedChanged, rdoSortDescending.CheckedChanged

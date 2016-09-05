@@ -16,10 +16,10 @@
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
-    Public clsREigenValues, clsREigenVectors, clsRScores, clsPCAModel, clsRVariablesPlotFunction, clsRVariablesPlotTheme As New RFunction
-    Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme As New RFunction
+    Public clsREigenValues, clsREigenVectors, clsRScores, clsPCAModel, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRRotation, clsRCoord, clsRContrib, clsREig, clsRFactor, clsRMelt As New RFunction
+    Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction, clsRBarPlotGeom, clsRBarPlotFacet, clsRBarPlotAes As New RFunction
     Public clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
-
+    Dim clsRBarPlot, clsRBarPlot0 As New ROperator
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
@@ -27,6 +27,32 @@ Public Class sdgPrincipalComponentAnalysis
             SetDefaults()
             bFirstLoad = False
         End If
+    End Sub
+
+    Public Sub SetDefaults()
+        ucrReceiverFactor.Selector = ucrSelectorFactor
+        ucrReceiverFactor.SetDataType("factor")
+        ucrSelectorFactor.Reset()
+        ucrReceiverFactor.SetMeAsReceiver()
+        ucrSelectorFactor.Focus()
+        chkEigenValues.Checked = True
+        chkEigenVectors.Checked = True
+        chkScores.Checked = True
+        chkResiduals.Checked = True
+        chkRotation.Checked = True
+        chkBar.Checked = True
+        chkLine.Checked = True
+        chkBar.Enabled = False
+        chkLine.Enabled = False
+        grpGeom.Enabled = False
+        lblChoice.Enabled = False
+        cmbChoice.SelectedItem = "variance"
+        cmbChoice.Enabled = False
+        rdoVariablesPlot.Checked = False
+        rdoIndividualsPlot.Checked = False
+        rdoBiplot.Checked = False
+        rdoScreePlot.Checked = False
+        rdoBarPlot.Checked = False
     End Sub
 
     Private Sub EigenValues()
@@ -37,12 +63,12 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
     End Sub
 
-    Private Sub EigenVectors()
+    Public Sub EigenVectors()
         clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenVectors.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsREigenVectors.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
         clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
-        clsREigenVectors.AddParameter("value2", Chr(34) & "contrib" & Chr(34))
+        clsREigenVectors.AddParameter("value2", Chr(34) & "coord" & Chr(34))
         frmMain.clsRLink.RunScript(clsREigenVectors.ToScript(), 2)
     End Sub
 
@@ -50,9 +76,27 @@ Public Class sdgPrincipalComponentAnalysis
         clsRScores.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRScores.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRScores.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
-        clsRScores.AddParameter("value1", Chr(34) & "ind" & Chr(34))
+        clsRScores.AddParameter("value1", Chr(34) & "var" & Chr(34))
         clsRScores.AddParameter("value2", Chr(34) & "coord" & Chr(34))
         frmMain.clsRLink.RunScript(clsRScores.ToScript(), 2)
+    End Sub
+
+    Private Sub Rotation()
+        clsRRotation.SetRCommand("sweep")
+        clsRCoord.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCoord.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRCoord.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
+        clsRCoord.AddParameter("value1", Chr(34) & "var" & Chr(34))
+        clsRCoord.AddParameter("value2", Chr(34) & "coord" & Chr(34))
+        clsREig.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREig.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsREig.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
+        clsREig.AddParameter("value1", Chr(34) & "eig" & Chr(34))
+        clsRRotation.AddParameter("x", clsRFunctionParameter:=clsRCoord)
+        clsRRotation.AddParameter("MARGIN", 2)
+        clsRRotation.AddParameter("STATS", "sqrt(" & clsREig.ToScript.ToString & "[,1])")
+        clsRRotation.AddParameter("FUN", " '/'")
+        frmMain.clsRLink.RunScript(clsRRotation.ToScript(), 2)
     End Sub
 
     Private Sub Residuals()
@@ -66,12 +110,11 @@ Public Class sdgPrincipalComponentAnalysis
         clsRScreePlotTheme.SetRCommand("theme_minimal")
         clsRScreePlot.SetOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
         clsRScreePlot.SetOperatorParameter(False, clsRFunc:=clsRScreePlotTheme)
-
         clsRScreePlot.SetFunction("fviz_screeplot")
         clsRScreePlot.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
-
         frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 0)
     End Sub
+
     Private Sub VariablesPlot()
         clsRVariablesPlot.SetOperation("+")
         clsRVariablesPlotFunction.SetRCommand("fviz_pca_var")
@@ -79,9 +122,9 @@ Public Class sdgPrincipalComponentAnalysis
         clsRVariablesPlotTheme.SetRCommand("theme_minimal")
         clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
         clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
-
         frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 0)
     End Sub
+
     Private Sub IndividualsPlot()
         clsRIndividualsPlot.SetOperation("+")
         clsRIndividualsPlotFunction.SetRCommand("fviz_pca_ind")
@@ -91,6 +134,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
         frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 0)
     End Sub
+
     Private Sub Biplot()
         clsRBiplot.SetOperation("+")
         clsRBiplotFunction.SetRCommand("fviz_pca_biplot")
@@ -99,6 +143,31 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
         frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 0)
+    End Sub
+
+    Private Sub Barplot()
+        clsRBarPlot0.SetOperation("+")
+        clsRBarPlot.SetOperation("+")
+        clsRFactor.SetRCommand("cbind")
+        clsRMelt.SetRCommand("melt")
+        clsRMelt.AddParameter("", clsRFunctionParameter:=clsREigenVectors)
+        clsRFactor.AddParameter("factor_col", clsRFunctionParameter:=ucrReceiverFactor.GetVariables())
+        clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
+        clsRBarPlotFunction.SetRCommand("ggplot")
+        clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
+        clsRBarPlotGeom.SetRCommand("geom_bar")
+        clsRBarPlotAes.SetRCommand("aes")
+        clsRBarPlotAes.AddParameter("x", "Var1")
+        clsRBarPlotAes.AddParameter("y", "value")
+        clsRBarPlotAes.AddParameter("fill", "factor_col")
+        clsRBarPlotGeom.AddParameter("", clsRFunctionParameter:=clsRBarPlotAes)
+        clsRBarPlotGeom.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+        clsRBarPlotFacet.SetRCommand("facet_wrap")
+        clsRBarPlotFacet.AddParameter("", "~Var2")
+        clsRBarPlot0.SetParameter(True, clsRFunc:=clsRBarPlotFunction)
+        clsRBarPlot0.SetParameter(False, clsRFunc:=clsRBarPlotGeom)
+        clsRBarPlot.SetParameter(True, clsOp:=clsRBarPlot0)
+        clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
     End Sub
 
     Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs) Handles chkBar.CheckedChanged
@@ -147,25 +216,6 @@ Public Class sdgPrincipalComponentAnalysis
         End If
     End Sub
 
-    Public Sub SetDefaults()
-        chkEigenValues.Checked = True
-        chkEigenVectors.Checked = True
-        chkScores.Checked = True
-        chkResiduals.Checked = True
-        rdoScreePlot.Checked = False
-        chkBar.Checked = True
-        chkLine.Checked = True
-        chkBar.Enabled = False
-        chkLine.Enabled = False
-        grpGeom.Enabled = False
-        lblChoice.Enabled = False
-        cmbChoice.SelectedItem = "variance"
-        cmbChoice.Enabled = False
-        rdoVariablesPlot.Checked = False
-        rdoIndividualsPlot.Checked = False
-        rdoBiplot.Checked = False
-    End Sub
-
     Public Sub PCAOptions()
         If (chkEigenValues.Checked) Then
             EigenValues()
@@ -191,6 +241,16 @@ Public Class sdgPrincipalComponentAnalysis
         If rdoBiplot.Checked Then
             Biplot()
         End If
+        If chkRotation.Checked Then
+            Rotation()
+        End If
+        If rdoBarPlot.Checked Then
+            Barplot()
+            frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 0)
+        End If
     End Sub
 
+    Public Sub ucrReceiverFactor_SelectionChanged() Handles ucrReceiverFactor.SelectionChanged
+        Barplot()
+    End Sub
 End Class
