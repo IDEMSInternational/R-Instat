@@ -33,23 +33,22 @@ Public Class dlgMetadata
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputViewDataBy.IsEmpty Or chkRevertBack.Checked Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrSelectByMetadata.SetItemType("metadata")
-        ucrInputViewDataBy.Selector = ucrSelectByMetadata
+        ucrReceiverChooseProperty.Selector = ucrSelectByMetadata
+        ucrReceiverChooseColumns.Selector = ucrSelectByMetadata
+        ucrReceiverChooseProperty.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 391
+        ucrReceiverChooseColumns.SetItemType("column")
+        ucrReceiverChooseProperty.SetItemType("metadata")
     End Sub
 
     Private Sub setDefaults()
         ucrSelectByMetadata.Reset()
-        ucrInputViewDataBy.SetMeAsReceiver()
-        ucrSelectByMetadata.Focus()
+        ucrCurrentValue.IsReadOnly = True
+        rdoChooseProperty.Checked = True
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -57,27 +56,22 @@ Public Class dlgMetadata
         TestOKEnabled()
     End Sub
 
-    Private Sub chkRevertBack_CheckStateChanged(sender As Object, e As EventArgs) Handles chkRevertBack.CheckStateChanged
-        'this doesn't look right to me DAS
-        If chkRevertBack.Checked Then
-            ucrInputViewDataBy.txtReceiverSingle.Text = "Name"
-            ucrInputViewDataBy.Enabled = False
-            ucrSelectByMetadata.Enabled = False
+    Private Sub ucrInputViewDataBy_SelectionChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub grpProperty_CheckedChanged(sender As Object, e As EventArgs) Handles rdoChooseProperty.CheckedChanged, rdoDefineNewProperty.CheckedChanged
+        DefineProperty()
+    End Sub
+
+    Private Sub DefineProperty()
+        If rdoDefineNewProperty.Checked Then
+            ucrReceiverChooseProperty.Visible = False
+            ucrInputDefineProperty.Visible = True
+            ucrReceiverChooseColumns.Focus()
         Else
-            ucrInputViewDataBy.Enabled = True
-            ucrSelectByMetadata.Enabled = True
-            ucrSelectByMetadata.Focus()
+            ucrReceiverChooseProperty.Visible = True
+            ucrInputDefineProperty.Visible = False
         End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputViewDataBy_SelectionChanged(sender As Object, e As EventArgs) Handles ucrInputViewDataBy.SelectionChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'frmMain.clsGrids.bGrdViewDataByMetadata = True
-        frmMain.clsGrids.SetMetadata(ucrInputViewDataBy.txtReceiverSingle.Text)
-        frmMain.clsGrids.SetVariablesMetadata(frmVariables.grdVariables)
     End Sub
 End Class

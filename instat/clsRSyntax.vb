@@ -25,7 +25,7 @@ Public Class RSyntax
     Public iCallType As Integer = 0
     Public strScript As String
     Public i As Integer
-    Public bExcludeAssignedFunctionOutput As Boolean = True
+    Public bExcludeAssignedFunctionOutput As Boolean
     Private strAssignTo As String
     Private strAssignToDataframe As String
     Private strAssignToColumn As String
@@ -271,7 +271,7 @@ Public Class RSyntax
         Else
             strTemp = clsFunction.ToScript(strScript)
         End If
-        If bExcludeAssignedFunctionOutput Then
+        If bExcludeAssignedFunctionOutput = False Then
             If (bUseBaseFunction AndAlso clsFunction.bIsAssigned) OrElse (bUseBaseOperator AndAlso clsBaseOperator.bIsAssigned) OrElse (bUseCommandString AndAlso bIsAssigned) Then
                 Return strScript
                 Exit Function
