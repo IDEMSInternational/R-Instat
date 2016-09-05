@@ -110,8 +110,6 @@ Public Class RLink
 
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False)
 
-        cboDataFrames.Items.Clear()
-        cboDataFrames.Text = ""
         If bInstatObjectExists Then
             If bIncludeOverall Then
                 cboDataFrames.Items.Add("[Overall]")
