@@ -154,7 +154,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRFactor.AddParameter("factor_col", clsRFunctionParameter:=ucrReceiverFactor.GetVariables())
         clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
         clsRBarPlotFunction.SetRCommand("ggplot")
-        clsRBarPlotFunction.AddParameter("data", clsRFactor.ToScript.ToString)
+        clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
         clsRBarPlotGeom.SetRCommand("geom_bar")
         clsRBarPlotAes.SetRCommand("aes")
         clsRBarPlotAes.AddParameter("x", "Var1")
@@ -168,7 +168,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBarPlot0.SetParameter(False, clsRFunc:=clsRBarPlotGeom)
         clsRBarPlot.SetParameter(True, clsOp:=clsRBarPlot0)
         clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
-        frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 0)
     End Sub
 
     Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs) Handles chkBar.CheckedChanged
@@ -247,6 +246,11 @@ Public Class sdgPrincipalComponentAnalysis
         End If
         If rdoBarPlot.Checked Then
             Barplot()
+            frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 0)
         End If
+    End Sub
+
+    Public Sub ucrReceiverFactor_SelectionChanged() Handles ucrReceiverFactor.SelectionChanged
+        Barplot()
     End Sub
 End Class
