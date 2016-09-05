@@ -26,7 +26,7 @@ Partial Class dlgOneVariableGraph
         Me.ucrReceiverOneVarGraph = New instat.ucrReceiverMultiple()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdGraph = New System.Windows.Forms.Button()
+        Me.cmdGraphOptions = New System.Windows.Forms.Button()
         Me.ucrOneVarGraphSave = New instat.ucrSaveGraph()
         Me.SuspendLayout()
         '
@@ -34,7 +34,7 @@ Partial Class dlgOneVariableGraph
         '
         Me.ucrSelectorOneVarGraph.bShowHiddenColumns = False
         Me.ucrSelectorOneVarGraph.bUseCurrentFilter = False
-        Me.ucrSelectorOneVarGraph.Location = New System.Drawing.Point(5, 0)
+        Me.ucrSelectorOneVarGraph.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarGraph.Name = "ucrSelectorOneVarGraph"
         Me.ucrSelectorOneVarGraph.Size = New System.Drawing.Size(210, 180)
@@ -42,7 +42,7 @@ Partial Class dlgOneVariableGraph
         '
         'ucrReceiverOneVarGraph
         '
-        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(229, 49)
+        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(237, 34)
         Me.ucrReceiverOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
         Me.ucrReceiverOneVarGraph.Selector = Nothing
@@ -52,7 +52,7 @@ Partial Class dlgOneVariableGraph
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(226, 35)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(234, 20)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
         Me.lblSelectedVariables.TabIndex = 2
@@ -60,23 +60,23 @@ Partial Class dlgOneVariableGraph
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 247)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 262)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
         '
-        'cmdGraph
+        'cmdGraphOptions
         '
-        Me.cmdGraph.Location = New System.Drawing.Point(328, 218)
-        Me.cmdGraph.Name = "cmdGraph"
-        Me.cmdGraph.Size = New System.Drawing.Size(75, 23)
-        Me.cmdGraph.TabIndex = 6
-        Me.cmdGraph.Text = "Graph"
-        Me.cmdGraph.UseVisualStyleBackColor = True
+        Me.cmdGraphOptions.Location = New System.Drawing.Point(10, 201)
+        Me.cmdGraphOptions.Name = "cmdGraphOptions"
+        Me.cmdGraphOptions.Size = New System.Drawing.Size(101, 23)
+        Me.cmdGraphOptions.TabIndex = 6
+        Me.cmdGraphOptions.Text = "Graph Options"
+        Me.cmdGraphOptions.UseVisualStyleBackColor = True
         '
         'ucrOneVarGraphSave
         '
-        Me.ucrOneVarGraphSave.Location = New System.Drawing.Point(5, 221)
+        Me.ucrOneVarGraphSave.Location = New System.Drawing.Point(10, 233)
         Me.ucrOneVarGraphSave.Name = "ucrOneVarGraphSave"
         Me.ucrOneVarGraphSave.Size = New System.Drawing.Size(265, 20)
         Me.ucrOneVarGraphSave.TabIndex = 7
@@ -85,13 +85,14 @@ Partial Class dlgOneVariableGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 299)
+        Me.ClientSize = New System.Drawing.Size(418, 316)
         Me.Controls.Add(Me.ucrOneVarGraphSave)
-        Me.Controls.Add(Me.cmdGraph)
+        Me.Controls.Add(Me.cmdGraphOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrReceiverOneVarGraph)
         Me.Controls.Add(Me.ucrSelectorOneVarGraph)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgOneVariableGraph"
         Me.Text = "One Variable Graph"
         Me.ResumeLayout(False)
@@ -103,6 +104,6 @@ Partial Class dlgOneVariableGraph
     Friend WithEvents ucrReceiverOneVarGraph As ucrReceiverMultiple
     Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdGraph As Button
+    Friend WithEvents cmdGraphOptions As Button
     Friend WithEvents ucrOneVarGraphSave As ucrSaveGraph
 End Class
