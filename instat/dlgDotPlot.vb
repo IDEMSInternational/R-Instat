@@ -47,6 +47,8 @@ Public Class dlgDotPlot
         ucrBase.clsRsyntax.iCallType = 0
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        sdgPlots.SetGgplotFunction(clsRggplotFunction)
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
         ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric"})

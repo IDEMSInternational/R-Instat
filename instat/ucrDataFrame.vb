@@ -58,6 +58,9 @@ Public Class ucrDataFrame
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
+        If cboAvailableDataFrames.SelectedIndex = -1 Then
+            cboAvailableDataFrames.Text = ""
+        End If
         SetDataFrameProperties()
         RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
         strCurrDataFrame = cboAvailableDataFrames.Text

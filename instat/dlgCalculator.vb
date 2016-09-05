@@ -49,7 +49,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetPrefix("Cal")
         ucrSaveResultInto.Reset()
         ucrInputCalOptions.Reset()
-        ucrReceiverForCalculation.cboExpression.ResetText()
+        ucrReceiverForCalculation.Clear()
         Me.Size = New System.Drawing.Size(436, 402)
         ucrInputCalOptions.SetName("Basic")
         chkShowArguments.Checked = False
