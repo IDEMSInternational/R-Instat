@@ -43,6 +43,12 @@ Partial Class dlgImportDataset
         Me.rdoRowNamesNo = New System.Windows.Forms.RadioButton()
         Me.rdoRowNamesYes = New System.Windows.Forms.RadioButton()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
+        Me.lblMissingValueString = New System.Windows.Forms.Label()
+        Me.lblNamedRegion = New System.Windows.Forms.Label()
+        Me.lblRowToSkip = New System.Windows.Forms.Label()
+        Me.lblSheets = New System.Windows.Forms.Label()
+        Me.nudxlRowsToSkip = New System.Windows.Forms.NumericUpDown()
+        Me.chkColumnNames = New System.Windows.Forms.CheckBox()
         Me.grpRDS = New System.Windows.Forms.GroupBox()
         Me.chkImportCalculations = New System.Windows.Forms.CheckBox()
         Me.chkImportFilters = New System.Windows.Forms.CheckBox()
@@ -51,12 +57,6 @@ Partial Class dlgImportDataset
         Me.chkImportMetadata = New System.Windows.Forms.CheckBox()
         Me.chkImportObjects = New System.Windows.Forms.CheckBox()
         Me.chkExistingData = New System.Windows.Forms.CheckBox()
-        Me.lblMissingValueString = New System.Windows.Forms.Label()
-        Me.lblNamedRegion = New System.Windows.Forms.Label()
-        Me.lblRowToSkip = New System.Windows.Forms.Label()
-        Me.lblSheets = New System.Windows.Forms.Label()
-        Me.nudxlRowsToSkip = New System.Windows.Forms.NumericUpDown()
-        Me.chkColumnNames = New System.Windows.Forms.CheckBox()
         Me.lblCannotImport = New System.Windows.Forms.Label()
         Me.lblNoPreview = New System.Windows.Forms.Label()
         Me.ucrInputXlMissingValueString = New instat.ucrInputTextBox()
@@ -74,8 +74,8 @@ Partial Class dlgImportDataset
         Me.grpCSV.SuspendLayout()
         Me.pnlRowNames.SuspendLayout()
         Me.grpExcel.SuspendLayout()
-        Me.grpRDS.SuspendLayout()
         CType(Me.nudxlRowsToSkip, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpRDS.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblInputFile
@@ -319,6 +319,59 @@ Partial Class dlgImportDataset
         Me.grpExcel.Text = "Import Excel options"
         Me.grpExcel.Visible = False
         '
+        'lblMissingValueString
+        '
+        Me.lblMissingValueString.AutoSize = True
+        Me.lblMissingValueString.Location = New System.Drawing.Point(6, 126)
+        Me.lblMissingValueString.Name = "lblMissingValueString"
+        Me.lblMissingValueString.Size = New System.Drawing.Size(102, 13)
+        Me.lblMissingValueString.TabIndex = 19
+        Me.lblMissingValueString.Text = "Missing Value String"
+        '
+        'lblNamedRegion
+        '
+        Me.lblNamedRegion.AutoSize = True
+        Me.lblNamedRegion.Location = New System.Drawing.Point(6, 73)
+        Me.lblNamedRegion.Name = "lblNamedRegion"
+        Me.lblNamedRegion.Size = New System.Drawing.Size(90, 13)
+        Me.lblNamedRegion.TabIndex = 17
+        Me.lblNamedRegion.Text = "or Named Region"
+        '
+        'lblRowToSkip
+        '
+        Me.lblRowToSkip.AutoSize = True
+        Me.lblRowToSkip.Location = New System.Drawing.Point(3, 96)
+        Me.lblRowToSkip.Name = "lblRowToSkip"
+        Me.lblRowToSkip.Size = New System.Drawing.Size(70, 13)
+        Me.lblRowToSkip.TabIndex = 7
+        Me.lblRowToSkip.Text = "Rows to Skip"
+        '
+        'lblSheets
+        '
+        Me.lblSheets.AutoSize = True
+        Me.lblSheets.Location = New System.Drawing.Point(6, 27)
+        Me.lblSheets.Name = "lblSheets"
+        Me.lblSheets.Size = New System.Drawing.Size(68, 13)
+        Me.lblSheets.TabIndex = 6
+        Me.lblSheets.Text = "Select Sheet"
+        '
+        'nudxlRowsToSkip
+        '
+        Me.nudxlRowsToSkip.Location = New System.Drawing.Point(77, 94)
+        Me.nudxlRowsToSkip.Name = "nudxlRowsToSkip"
+        Me.nudxlRowsToSkip.Size = New System.Drawing.Size(49, 20)
+        Me.nudxlRowsToSkip.TabIndex = 5
+        '
+        'chkColumnNames
+        '
+        Me.chkColumnNames.AutoSize = True
+        Me.chkColumnNames.Location = New System.Drawing.Point(5, 73)
+        Me.chkColumnNames.Name = "chkColumnNames"
+        Me.chkColumnNames.Size = New System.Drawing.Size(154, 17)
+        Me.chkColumnNames.TabIndex = 2
+        Me.chkColumnNames.Text = "First Row is Column Names"
+        Me.chkColumnNames.UseVisualStyleBackColor = True
+        '
         'grpRDS
         '
         Me.grpRDS.Controls.Add(Me.chkImportCalculations)
@@ -406,59 +459,6 @@ Partial Class dlgImportDataset
         Me.chkExistingData.Text = "Keep existing data frames"
         Me.chkExistingData.UseVisualStyleBackColor = True
         '
-        'lblMissingValueString
-        '
-        Me.lblMissingValueString.AutoSize = True
-        Me.lblMissingValueString.Location = New System.Drawing.Point(6, 126)
-        Me.lblMissingValueString.Name = "lblMissingValueString"
-        Me.lblMissingValueString.Size = New System.Drawing.Size(102, 13)
-        Me.lblMissingValueString.TabIndex = 19
-        Me.lblMissingValueString.Text = "Missing Value String"
-        '
-        'lblNamedRegion
-        '
-        Me.lblNamedRegion.AutoSize = True
-        Me.lblNamedRegion.Location = New System.Drawing.Point(6, 73)
-        Me.lblNamedRegion.Name = "lblNamedRegion"
-        Me.lblNamedRegion.Size = New System.Drawing.Size(90, 13)
-        Me.lblNamedRegion.TabIndex = 17
-        Me.lblNamedRegion.Text = "or Named Region"
-        '
-        'lblRowToSkip
-        '
-        Me.lblRowToSkip.AutoSize = True
-        Me.lblRowToSkip.Location = New System.Drawing.Point(3, 96)
-        Me.lblRowToSkip.Name = "lblRowToSkip"
-        Me.lblRowToSkip.Size = New System.Drawing.Size(70, 13)
-        Me.lblRowToSkip.TabIndex = 7
-        Me.lblRowToSkip.Text = "Rows to Skip"
-        '
-        'lblSheets
-        '
-        Me.lblSheets.AutoSize = True
-        Me.lblSheets.Location = New System.Drawing.Point(6, 27)
-        Me.lblSheets.Name = "lblSheets"
-        Me.lblSheets.Size = New System.Drawing.Size(68, 13)
-        Me.lblSheets.TabIndex = 6
-        Me.lblSheets.Text = "Select Sheet"
-        '
-        'nudxlRowsToSkip
-        '
-        Me.nudxlRowsToSkip.Location = New System.Drawing.Point(77, 94)
-        Me.nudxlRowsToSkip.Name = "nudxlRowsToSkip"
-        Me.nudxlRowsToSkip.Size = New System.Drawing.Size(49, 20)
-        Me.nudxlRowsToSkip.TabIndex = 5
-        '
-        'chkColumnNames
-        '
-        Me.chkColumnNames.AutoSize = True
-        Me.chkColumnNames.Location = New System.Drawing.Point(5, 73)
-        Me.chkColumnNames.Name = "chkColumnNames"
-        Me.chkColumnNames.Size = New System.Drawing.Size(154, 17)
-        Me.chkColumnNames.TabIndex = 2
-        Me.chkColumnNames.Text = "First Row is Column Names"
-        Me.chkColumnNames.UseVisualStyleBackColor = True
-        '
         'lblCannotImport
         '
         Me.lblCannotImport.AutoSize = True
@@ -475,12 +475,12 @@ Partial Class dlgImportDataset
         'lblNoPreview
         '
         Me.lblNoPreview.AutoSize = True
-        Me.lblNoPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNoPreview.Location = New System.Drawing.Point(298, 318)
         Me.lblNoPreview.Name = "lblNoPreview"
-        Me.lblNoPreview.Size = New System.Drawing.Size(346, 20)
+        Me.lblNoPreview.Size = New System.Drawing.Size(333, 18)
         Me.lblNoPreview.TabIndex = 38
-        Me.lblNoPreview.Text = "No data preview available for this file type."
+        Me.lblNoPreview.Text = "Data Frame Preview not available for this file type."
         Me.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblNoPreview.Visible = False
         '
@@ -603,9 +603,9 @@ Partial Class dlgImportDataset
         Me.pnlRowNames.PerformLayout()
         Me.grpExcel.ResumeLayout(False)
         Me.grpExcel.PerformLayout()
+        CType(Me.nudxlRowsToSkip, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpRDS.ResumeLayout(False)
         Me.grpRDS.PerformLayout()
-        CType(Me.nudxlRowsToSkip, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
