@@ -69,7 +69,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
         Me.tbRegOptions.Name = "tbRegOptions"
         Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(416, 345)
+        Me.tbRegOptions.Size = New System.Drawing.Size(416, 296)
         Me.tbRegOptions.TabIndex = 0
         '
         'tbDisplay
@@ -82,7 +82,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbDisplay.Name = "tbDisplay"
         Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(408, 319)
+        Me.tbDisplay.Size = New System.Drawing.Size(408, 270)
         Me.tbDisplay.TabIndex = 0
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
@@ -154,7 +154,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(408, 319)
+        Me.tbGraphics.Size = New System.Drawing.Size(408, 270)
         Me.tbGraphics.TabIndex = 1
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
@@ -163,7 +163,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoBarPlot
         '
         Me.rdoBarPlot.AutoSize = True
-        Me.rdoBarPlot.Location = New System.Drawing.Point(226, 14)
+        Me.rdoBarPlot.Location = New System.Drawing.Point(335, 14)
         Me.rdoBarPlot.Name = "rdoBarPlot"
         Me.rdoBarPlot.Size = New System.Drawing.Size(61, 17)
         Me.rdoBarPlot.TabIndex = 12
@@ -175,7 +175,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoIndividualsPlot
         '
         Me.rdoIndividualsPlot.AutoSize = True
-        Me.rdoIndividualsPlot.Location = New System.Drawing.Point(124, 14)
+        Me.rdoIndividualsPlot.Location = New System.Drawing.Point(179, 14)
         Me.rdoIndividualsPlot.Name = "rdoIndividualsPlot"
         Me.rdoIndividualsPlot.Size = New System.Drawing.Size(96, 17)
         Me.rdoIndividualsPlot.TabIndex = 11
@@ -187,7 +187,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoBiplot
         '
         Me.rdoBiplot.AutoSize = True
-        Me.rdoBiplot.Location = New System.Drawing.Point(124, 38)
+        Me.rdoBiplot.Location = New System.Drawing.Point(281, 14)
         Me.rdoBiplot.Name = "rdoBiplot"
         Me.rdoBiplot.Size = New System.Drawing.Size(51, 17)
         Me.rdoBiplot.TabIndex = 10
@@ -199,7 +199,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoVariablesPlot
         '
         Me.rdoVariablesPlot.AutoSize = True
-        Me.rdoVariablesPlot.Location = New System.Drawing.Point(10, 38)
+        Me.rdoVariablesPlot.Location = New System.Drawing.Point(84, 14)
         Me.rdoVariablesPlot.Name = "rdoVariablesPlot"
         Me.rdoVariablesPlot.Size = New System.Drawing.Size(89, 17)
         Me.rdoVariablesPlot.TabIndex = 9
@@ -227,10 +227,10 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGrapOptions.Controls.Add(Me.tbIndividuals)
         Me.tbGrapOptions.Controls.Add(Me.tbBiplot)
         Me.tbGrapOptions.Controls.Add(Me.tbBarPlot)
-        Me.tbGrapOptions.Location = New System.Drawing.Point(6, 61)
+        Me.tbGrapOptions.Location = New System.Drawing.Point(8, 37)
         Me.tbGrapOptions.Name = "tbGrapOptions"
         Me.tbGrapOptions.SelectedIndex = 0
-        Me.tbGrapOptions.Size = New System.Drawing.Size(394, 252)
+        Me.tbGrapOptions.Size = New System.Drawing.Size(394, 224)
         Me.tbGrapOptions.TabIndex = 7
         '
         'tbScreePlot
@@ -241,7 +241,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbScreePlot.Location = New System.Drawing.Point(4, 22)
         Me.tbScreePlot.Name = "tbScreePlot"
         Me.tbScreePlot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScreePlot.Size = New System.Drawing.Size(386, 226)
+        Me.tbScreePlot.Size = New System.Drawing.Size(386, 198)
         Me.tbScreePlot.TabIndex = 0
         Me.tbScreePlot.Tag = "Scree_Plot"
         Me.tbScreePlot.Text = "Scree Plot"
@@ -305,7 +305,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbVariables.Location = New System.Drawing.Point(4, 22)
         Me.tbVariables.Name = "tbVariables"
         Me.tbVariables.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbVariables.Size = New System.Drawing.Size(386, 226)
+        Me.tbVariables.Size = New System.Drawing.Size(386, 198)
         Me.tbVariables.TabIndex = 1
         Me.tbVariables.Tag = "Variables"
         Me.tbVariables.Text = "Variables"
@@ -316,7 +316,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbIndividuals.Location = New System.Drawing.Point(4, 22)
         Me.tbIndividuals.Name = "tbIndividuals"
         Me.tbIndividuals.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbIndividuals.Size = New System.Drawing.Size(386, 226)
+        Me.tbIndividuals.Size = New System.Drawing.Size(386, 198)
         Me.tbIndividuals.TabIndex = 2
         Me.tbIndividuals.Tag = "Individuals"
         Me.tbIndividuals.Text = "Individuals"
@@ -327,7 +327,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbBiplot.Location = New System.Drawing.Point(4, 22)
         Me.tbBiplot.Name = "tbBiplot"
         Me.tbBiplot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbBiplot.Size = New System.Drawing.Size(386, 226)
+        Me.tbBiplot.Size = New System.Drawing.Size(386, 198)
         Me.tbBiplot.TabIndex = 3
         Me.tbBiplot.Tag = "Biplot"
         Me.tbBiplot.Text = "Biplot"
@@ -341,7 +341,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbBarPlot.Location = New System.Drawing.Point(4, 22)
         Me.tbBarPlot.Name = "tbBarPlot"
         Me.tbBarPlot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbBarPlot.Size = New System.Drawing.Size(386, 226)
+        Me.tbBarPlot.Size = New System.Drawing.Size(386, 198)
         Me.tbBarPlot.TabIndex = 4
         Me.tbBarPlot.Tag = "Bar_Plot"
         Me.tbBarPlot.Text = "Bar Plot"
@@ -372,7 +372,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbSave.Location = New System.Drawing.Point(4, 22)
         Me.tbSave.Name = "tbSave"
         Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSave.Size = New System.Drawing.Size(408, 319)
+        Me.tbSave.Size = New System.Drawing.Size(408, 270)
         Me.tbSave.TabIndex = 2
         Me.tbSave.Tag = "Save"
         Me.tbSave.Text = "Save"
@@ -380,14 +380,14 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'ucrSdgButtons
         '
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(69, 354)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(139, 305)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
         '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 37)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(253, 43)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
@@ -398,7 +398,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 396)
+        Me.ClientSize = New System.Drawing.Size(418, 339)
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
