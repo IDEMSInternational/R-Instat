@@ -81,7 +81,7 @@ Public Class dlgRegularSequence
 
     Private Sub TestOKEnabled()
         If rdoNumeric.Checked Then
-            If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso nudInStepsOf.Text <> "" AndAlso nudRepeatValues.Text <> "" Then
+            If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso nudInStepsOf.Text <> "" AndAlso nudRepeatValues.Text <> "" AndAlso ucrDataFrameLengthForRegularSequence.clsDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -222,6 +222,7 @@ Public Class dlgRegularSequence
         nudTo.Value = ucrSelectDataFrameRegularSequence.iDataFrameLength
         SetNumericOrDatesParameters()
         CheckSequenceLength()
+        TestOKEnabled()
     End Sub
 
     Private Sub CheckSequenceLength()
