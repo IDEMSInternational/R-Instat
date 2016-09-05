@@ -1471,6 +1471,13 @@ data_object$set("public", "set_column_colours_by_metadata", function(columns, pr
 }
 )
 
+data_object$set("public", "remove_column_colours", function() {
+  if(self$is_variables_metadata(str = colour_label)) {
+    self$append_to_variables_metadata(property = colour_label, new_val = -1)
+  }
+}
+)
+
 data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
   if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
   numeric_geom <- match.fun(numeric)
