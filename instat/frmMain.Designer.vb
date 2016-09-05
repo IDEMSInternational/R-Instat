@@ -395,7 +395,7 @@ Partial Class frmMain
         'mnuDescribeTwoVariablesSummarise
         '
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
@@ -403,15 +403,14 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesTabulate.Enabled = False
         Me.mnuDescribeTwoVariablesTabulate.Name = "mnuDescribeTwoVariablesTabulate"
-        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesTabulate.Tag = "Tabulate..."
         Me.mnuDescribeTwoVariablesTabulate.Text = "Tabulate..."
         '
         'mnuDescribeTwoVariablesGraph
         '
-        Me.mnuDescribeTwoVariablesGraph.Enabled = False
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
@@ -419,7 +418,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesCorrelate.Enabled = False
         Me.mnuDescribeTwoVariablesCorrelate.Name = "mnuDescribeTwoVariablesCorrelate"
-        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesCorrelate.Tag = "Correlate..."
         Me.mnuDescribeTwoVariablesCorrelate.Text = "Correlate..."
         '
