@@ -125,4 +125,8 @@ Public Class dlgCumulativeDistribution
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
     End Sub
+
+    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
+        sdgLayerOptions.ShowDialog()
+    End Sub
 End Class
