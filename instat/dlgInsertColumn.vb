@@ -40,18 +40,20 @@ Public Class dlgInsertColumn
 
     Private Sub TestOKEnabled()
         If rdoInsertColumns.Checked Then
-            If ((nudInsertColumns.Text <> "") And (Not ucrInputDefaultValue.IsEmpty) And (Not ucrInputPrefixForInsertedColumns.IsEmpty)) Then
+            If ((nudInsertColumns.Text <> "") And (Not ucrInputDefaultValue.IsEmpty) And (Not ucrInputPrefixForInsertedColumns.IsEmpty) And (ucrDataFramesList.cboAvailableDataFrames.Text <> "")) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
 
             End If
         ElseIf rdoInsertRows.Checked Then
-            If ((nudNumCols.Text <> "") And (nudPos.Text <> "")) Then
+            If ((nudNumCols.Text <> "") And (nudPos.Text <> "") And (ucrDataFramesList.cboAvailableDataFrames.Text <> "")) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -75,8 +77,11 @@ Public Class dlgInsertColumn
         rdoAtEnd.Checked = True
         rdoAfter.Checked = True
         ucrInputBeforeAfter.SetName("After")
-        nudPos.Value = ucrDataFramesList.iDataFrameLength
-
+        If ucrDataFramesList.iDataFrameLength >= nudPos.Minimum AndAlso ucrDataFramesList.iDataFrameLength <= nudPos.Maximum Then
+            nudPos.Value = ucrDataFramesList.iDataFrameLength
+        Else
+            nudPos.Value = 1
+        End If
     End Sub
 
     Private Sub nudPos_TextChanged(sender As Object, e As EventArgs) Handles nudPos.TextChanged
@@ -123,6 +128,7 @@ Public Class dlgInsertColumn
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & Chr(34))
         ucrSelectorInseertColumns.strCurrentDataFrame = ucrDataFramesList.cboAvailableDataFrames.SelectedItem
         ucrSelectorInseertColumns.LoadList()
+        TestOKEnabled()
     End Sub
 
 
