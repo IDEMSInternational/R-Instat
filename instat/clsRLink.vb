@@ -111,22 +111,24 @@ Public Class RLink
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False)
 
         If bInstatObjectExists Then
-            cboDataFrames.Items.Clear()
             If bIncludeOverall Then
                 cboDataFrames.Items.Add("[Overall]")
             End If
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
-        End If
 
-        If bSetDefault Then
-            cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
+            If bSetDefault OrElse (cboDataFrames.SelectedIndex = -1 AndAlso cboDataFrames.Items.Count > 0) Then
+                cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
+            End If
         End If
     End Sub
 
     Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)
         Dim lstCurrColumns As List(Of String)
-
-        lstCurrColumns = GetColumnNames(strDataFrame)
+        If strDataFrame <> "" AndAlso DataFrameExists(strDataFrame) Then
+            lstCurrColumns = GetColumnNames(strDataFrame)
+        Else
+            lstCurrColumns = New List(Of String)
+        End If
         cboColumns.Items.Clear()
         cboColumns.Items.AddRange(lstCurrColumns.ToArray)
     End Sub
@@ -161,7 +163,9 @@ Public Class RLink
         clsGetNextDefault.SetRCommand(strInstatDataObject & "$get_next_default_column_name")
         clsGetNextDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
         clsGetNextDefault.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        strNextDefault = RunInternalScriptGetValue(clsGetNextDefault.ToScript()).AsCharacter(0)
+        If strDataFrameName <> "" AndAlso DataFrameExists(strDataFrameName) Then
+            strNextDefault = RunInternalScriptGetValue(clsGetNextDefault.ToScript()).AsCharacter(0)
+        End If
         Return strNextDefault
     End Function
 

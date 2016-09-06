@@ -14,12 +14,14 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+
 Public Class dlgOneVariableGraph
-    Public clsRggplotFunction As New RFunction
-    Public clsRaesFunction As New RFunction
-    Public clsRgeom_boxplotFunction As New RFunction
-    Public clsRgeom_barFunction As New RFunction
+    Private clsRggplotFunction As New RFunction
+    Private clsRaesFunction As New RFunction
+    Private clsRgeom_Function As New RFunction
     Private bFirstLoad As Boolean = True
+    Private clsBaseOperatorOneColumn As New ROperator
+    Private clsBaseFunctionMultipleVariables As New RFunction
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -34,11 +36,8 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub SetDefaults()
-        clsRaesFunction.ClearParameters()
-        clsRggplotFunction.ClearParameters()
         ucrSelectorOneVarGraph.Reset()
         ucrSelectorOneVarGraph.Focus()
-        ucrReceiverOneVarGraph.ResetText()
         ucrOneVarGraphSave.Reset()
         sdgOneVarGraph.SetDefaults()
         TestOkEnabled()
@@ -48,62 +47,55 @@ Public Class dlgOneVariableGraph
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
         OneOrMoreVariables()
-        TestOkEnabled()
         'ucrBase.iHelpTopicID = 
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        cmdGraphOptions.Enabled = False
+        clsBaseOperatorOneColumn.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRaesFunction.ClearParameters()
+        clsBaseOperatorOneColumn.SetParameter(True, clsRFunc:=clsRggplotFunction)
+        clsBaseOperatorOneColumn.SetParameter(False, clsRFunc:=clsRgeom_Function)
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+
+        clsBaseFunctionMultipleVariables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
     End Sub
 
     Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverOneVarGraph.IsEmpty() Or (ucrOneVarGraphSave.chkSaveGraph.Checked And ucrOneVarGraphSave.ucrInputGraphName.IsEmpty) Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrReceiverOneVarGraph.IsEmpty() OrElse (ucrOneVarGraphSave.chkSaveGraph.Checked AndAlso ucrOneVarGraphSave.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
     Private Sub OneOrMoreVariables()
         If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then
-            ucrBase.clsRsyntax.SetOperation("+")
-            clsRggplotFunction.SetRCommand("ggplot")
-            clsRaesFunction.SetRCommand("aes")
-            clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.clsCurrDataFrame)
-            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-            ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-            'If Numeric Then
-            SetParametersForOneVarNumeric()
-            clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
-            ucrBase.clsRsyntax.AddOperatorParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
-            'ElseIf Factor Then 
-            'SetParametersForOneVarFactor()
-            'clsRgeom_barFunction.SetRCommand("geom_bar")
-            'ucrBase.clsRsyntax.AddOperatorParameter(False, clsRFunc:=clsRgeom_barFunction)
-        ElseIf ucrReceiverOneVarGraph.GetVariableNamesAsList.Count > 1 Then
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-            ucrBase.clsRsyntax.AddParameter("columns", ucrReceiverOneVarGraph.GetVariableNames())
-        End If
-    End Sub
-
-    Private Sub SetParametersForOneVarNumeric()
-        If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then 'This could just be when variable is numeric 
-            clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+            ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperatorOneColumn)
+            If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" Then
+                'TODO Geom should come from the subdialog
+                clsRgeom_Function.SetRCommand("geom_boxplot")
+                If Not ucrReceiverOneVarGraph.IsEmpty() Then
+                    clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
+                End If
+                clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+            Else
+                'TODO Geom should come from the subdialog
+                clsRgeom_Function.SetRCommand("geom_bar")
+                If Not ucrReceiverOneVarGraph.IsEmpty() Then
+                    clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
+                End If
+            End If
         Else
-            clsRaesFunction.RemoveParameterByName("y")
-            clsRaesFunction.RemoveParameterByName("x")
-        End If
-    End Sub
-
-    Private Sub SetParametersForOneVarFactor()
-        If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then 'This could just be when variable is a factor
-            clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("x")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunctionMultipleVariables)
+            clsBaseFunctionMultipleVariables.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+            clsBaseFunctionMultipleVariables.AddParameter("columns", ucrReceiverOneVarGraph.GetVariableNames())
         End If
     End Sub
 
@@ -124,15 +116,13 @@ Public Class dlgOneVariableGraph
     Private Sub ucrOneVarGraphSave_GraphNameChanged() Handles ucrOneVarGraphSave.GraphNameChanged, ucrOneVarGraphSave.SaveGraphCheckedChanged
         If ucrOneVarGraphSave.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrOneVarGraphSave.strGraphName, strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrOneVarGraphSave.strGraphName)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdGraph_Click(sender As Object, e As EventArgs) Handles cmdGraph.Click
+    Private Sub cmdGraph_Click(sender As Object, e As EventArgs) Handles cmdGraphOptions.Click
         sdgOneVarGraph.ShowDialog()
     End Sub
 End Class
