@@ -373,14 +373,14 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
@@ -395,7 +395,7 @@ Partial Class frmMain
         'mnuDescribeTwoVariablesSummarise
         '
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
@@ -403,14 +403,14 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesTabulate.Enabled = False
         Me.mnuDescribeTwoVariablesTabulate.Name = "mnuDescribeTwoVariablesTabulate"
-        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesTabulate.Tag = "Tabulate..."
         Me.mnuDescribeTwoVariablesTabulate.Text = "Tabulate..."
         '
         'mnuDescribeTwoVariablesGraph
         '
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
@@ -418,7 +418,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesCorrelate.Enabled = False
         Me.mnuDescribeTwoVariablesCorrelate.Name = "mnuDescribeTwoVariablesCorrelate"
-        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesCorrelate.Tag = "Correlate..."
         Me.mnuDescribeTwoVariablesCorrelate.Text = "Correlate..."
         '
@@ -2563,6 +2563,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectDataFrameMetadata
         '
+        Me.mnuOrganiseDataObjectDataFrameMetadata.Enabled = False
         Me.mnuOrganiseDataObjectDataFrameMetadata.Name = "mnuOrganiseDataObjectDataFrameMetadata"
         Me.mnuOrganiseDataObjectDataFrameMetadata.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectDataFrameMetadata.Tag = "Data_Frame_Metadata..."
@@ -2604,6 +2605,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectHideDataframes
         '
+        Me.mnuOrganiseDataObjectHideDataframes.Enabled = False
         Me.mnuOrganiseDataObjectHideDataframes.Name = "mnuOrganiseDataObjectHideDataframes"
         Me.mnuOrganiseDataObjectHideDataframes.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectHideDataframes.Text = "Hide Dataframes..."
@@ -2651,28 +2653,28 @@ Partial Class frmMain
         'mnuOrganiseRObjectsView
         '
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
         'mnuOrganiseRObjectsRename
         '
         Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
-        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
         Me.mnuOrganiseRObjectsRename.Text = "Rename..."
         '
         'mnuOrganiseRObjectsReorder
         '
         Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
-        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
         Me.mnuOrganiseRObjectsReorder.Text = "Reorder..."
         '
         'mnuOrganiseRObjectsDelete
         '
         Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
-        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '
