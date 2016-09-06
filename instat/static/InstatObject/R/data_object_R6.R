@@ -1236,8 +1236,6 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
       else if(condition[["operation"]] == "!=" && is.na(condition[["value"]])) result[ ,i] <- !is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
       else if(is.na(condition[["value"]])) stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
       else result[ ,i] <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
-      print(condition[["operation"]])
-      print(condition[["value"]])
       i = i + 1
     }
     out <- apply(result, 1, all)
@@ -1304,7 +1302,7 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
   if(!is.character(object_name)) stop("object_name must be a character")
-  if(!all(object_name %in% names(curr_objects))) stop(object_name, "not found in objects")
+  if(!all(object_name %in% names(curr_objects))) stop(object_name, " not found in objects")
   if(length(object_name) == 1) {
     if(force_as_list) return(curr_objects[object_name])
     else return(curr_objects[[object_name]])
@@ -1316,8 +1314,8 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
+    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -1354,7 +1352,6 @@ data_object$set("public", "reorder_objects", function(new_order) {
 )
 
 data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE) {
-  print("ye")
   if(include_objects) new_objects <- private$objects
   else new_objects <- list()
   if(include_filters) new_filters <- lapply(private$filters, function(x) x$data_clone())
@@ -1471,6 +1468,13 @@ data_object$set("public", "set_column_colours_by_metadata", function(columns, pr
   new_colours[is.na(new_colours)] <- -1
   if(missing(columns)) self$set_column_colours(colours = new_colours)
   else self$set_column_colours(columns = columns, colours = new_colours)
+}
+)
+
+data_object$set("public", "remove_column_colours", function() {
+  if(self$is_variables_metadata(str = colour_label)) {
+    self$append_to_variables_metadata(property = colour_label, new_val = -1)
+  }
 }
 )
 

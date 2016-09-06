@@ -141,6 +141,12 @@
     <Compile Include="dlgAppend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
+      <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribeTwoVarGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVariable.Designer.vb">
       <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
     </Compile>
@@ -157,6 +163,12 @@
       <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDescribeDisplay.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDescribeTwoVarGraph.Designer.vb">
+      <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDescribeTwoVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgOneVarGraph.Designer.vb">
@@ -1999,6 +2011,15 @@
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVarGraph.fr-FR.resx">
+      <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVarGraph.resx">
+      <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVarGraph.sw-KE.resx">
+      <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDescribeTwoVariable.fr-FR.resx">
       <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
     </EmbeddedResource>
@@ -2568,6 +2589,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDataOptions.sw-KE.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeTwoVarGraph.fr-FR.resx">
+      <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeTwoVarGraph.resx">
+      <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
+      <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
