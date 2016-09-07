@@ -149,6 +149,8 @@ Partial Class frmMain
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.mnuClimaticEventsSpells = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimatic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticManage = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticManageNewWorksheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticManageImportDailyData = New System.Windows.Forms.ToolStripMenuItem()
@@ -373,14 +375,14 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
@@ -395,7 +397,7 @@ Partial Class frmMain
         'mnuDescribeTwoVariablesSummarise
         '
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
@@ -403,14 +405,14 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesTabulate.Enabled = False
         Me.mnuDescribeTwoVariablesTabulate.Name = "mnuDescribeTwoVariablesTabulate"
-        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesTabulate.Tag = "Tabulate..."
         Me.mnuDescribeTwoVariablesTabulate.Text = "Tabulate..."
         '
         'mnuDescribeTwoVariablesGraph
         '
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
@@ -418,7 +420,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesCorrelate.Enabled = False
         Me.mnuDescribeTwoVariablesCorrelate.Name = "mnuDescribeTwoVariablesCorrelate"
-        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesCorrelate.Tag = "Correlate..."
         Me.mnuDescribeTwoVariablesCorrelate.Text = "Correlate..."
         '
@@ -1257,11 +1259,24 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticManage, Me.mnuClimaticDisplayDaily, Me.mnuClimaticSummary, Me.mnuClimaticEvents, Me.ToolStripSeparator16, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticMarkovModelling, Me.ToolStripSeparator17, Me.mnuClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.mnuClimaticManage, Me.mnuClimaticDisplayDaily, Me.mnuClimaticSummary, Me.mnuClimaticEvents, Me.ToolStripSeparator16, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticMarkovModelling, Me.ToolStripSeparator17, Me.mnuClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         Me.mnuClimatic.Size = New System.Drawing.Size(63, 20)
         Me.mnuClimatic.Tag = "Climatic"
         Me.mnuClimatic.Text = "Climatic"
+        '
+        'mnuClimaticFile
+        '
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst})
+        Me.mnuClimaticFile.Name = "mnuClimaticFile"
+        Me.mnuClimaticFile.Size = New System.Drawing.Size(171, 22)
+        Me.mnuClimaticFile.Text = "File"
+        '
+        'mnuClimaticFileOpensst
+        '
+        Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
+        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticFileOpensst.Text = "Open SST..."
         '
         'mnuClimaticManage
         '
@@ -2563,6 +2578,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectDataFrameMetadata
         '
+        Me.mnuOrganiseDataObjectDataFrameMetadata.Enabled = False
         Me.mnuOrganiseDataObjectDataFrameMetadata.Name = "mnuOrganiseDataObjectDataFrameMetadata"
         Me.mnuOrganiseDataObjectDataFrameMetadata.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectDataFrameMetadata.Tag = "Data_Frame_Metadata..."
@@ -2604,6 +2620,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectHideDataframes
         '
+        Me.mnuOrganiseDataObjectHideDataframes.Enabled = False
         Me.mnuOrganiseDataObjectHideDataframes.Name = "mnuOrganiseDataObjectHideDataframes"
         Me.mnuOrganiseDataObjectHideDataframes.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectHideDataframes.Text = "Hide Dataframes..."
@@ -3092,4 +3109,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimateMethodsAdditionalWaterBalance As ToolStripMenuItem
     Friend WithEvents mnuClimateMethodsCreateClimateObject As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator24 As ToolStripSeparator
+    Friend WithEvents mnuClimaticFile As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileOpensst As ToolStripMenuItem
 End Class
