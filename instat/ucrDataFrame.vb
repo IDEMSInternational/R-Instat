@@ -49,20 +49,20 @@ Public Class ucrDataFrame
     End Sub
 
     Private Sub FillComboBox(Optional bSetFixed As Boolean = True)
-        Dim iOldIndex As Integer
+        Dim iOldText As String
         'TODO DO change DataFrameChanged event to not need these
         Dim sender As New Object
         Dim e As New EventArgs
 
-        iOldIndex = cboAvailableDataFrames.SelectedIndex
+        iOldText = cboAvailableDataFrames.Text
         cboAvailableDataFrames.Items.Clear()
         cboAvailableDataFrames.Text = ""
-        If cboAvailableDataFrames.SelectedIndex <> iOldIndex Then
-            SelectedDataFrameChanged(sender, e)
-        End If
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, strCurrentDataFrame:=iOldText)
         If bSetFixed AndAlso bDataFrameFixed AndAlso strFixedDataFrame <> "" Then
             SetDataframe(strFixedDataFrame, False)
+        End If
+        If cboAvailableDataFrames.Text <> iOldText Then
+            SelectedDataFrameChanged(sender, e)
         End If
     End Sub
 
