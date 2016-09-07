@@ -108,7 +108,7 @@ Public Class RLink
         Return lstCurrColumns
     End Function
 
-    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False)
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "")
 
         If bInstatObjectExists Then
             If bIncludeOverall Then
@@ -116,8 +116,16 @@ Public Class RLink
             End If
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
 
-            If bSetDefault OrElse (cboDataFrames.SelectedIndex = -1 AndAlso cboDataFrames.Items.Count > 0) Then
+            If bSetDefault Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
+            Else
+                If cboDataFrames.Items.IndexOf(strCurrentDataFrame) <> -1 Then
+                    cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(strCurrentDataFrame)
+                Else
+                    If frmEditor.grdData.CurrentWorksheet IsNot Nothing Then
+                        cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
+                    End If
+                End If
             End If
         End If
     End Sub
@@ -212,9 +220,9 @@ Public Class RLink
             AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
         End If
 
-        If strScript.Length > 2000 Then
-            MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-        ElseIf bReturnOutput = 0 Then
+        'If strScript.Length > 2000 Then
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        If bReturnOutput = 0 Then
             Try
                 clsEngine.Evaluate(strScript)
             Catch e As Exception
@@ -286,9 +294,9 @@ Public Class RLink
 
         expTemp = Nothing
         strCommand = strVariableName & "<-" & strScript
-        If strCommand.Length > 2000 Then
-            MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-        ElseIf clsEngine IsNot Nothing Then
+        'If strCommand.Length > 2000 Then
+        'MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        If clsEngine IsNot Nothing Then
             Try
                 'iRemaining = strScript.Length
                 'iStartPoint = 1000
@@ -331,31 +339,31 @@ Public Class RLink
         Dim strCommand As String
 
         strCommand = strVariableName & "<-" & strScript
-        If strCommand.Length > 2000 Then
-            MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-            Return False
-        ElseIf clsEngine IsNot Nothing Then
+        'If strCommand.Length > 2000 Then
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        '    Return False
+        If clsEngine IsNot Nothing Then
             Try
-                    'iRemaining = strScript.Length
-                    'While iRemaining > 1000
-                    '    iSplitIndex = strScript.Substring(1000).IndexOf(",")
-                    '    iRemaining = strScript.Length - iSplitIndex
-                    '    strScript = strScript.Insert(iSplitIndex + 1, vbNewLine)
-                    'End While
-                    If strVariableName <> "" Then
-                        clsEngine.Evaluate(strVariableName & "<-" & strScript)
-                    Else
-                        clsEngine.Evaluate(strScript)
-                    End If
-                    Return True
-                Catch ex As Exception
-                    If Not bSilent Then
+                'iRemaining = strScript.Length
+                'While iRemaining > 1000
+                '    iSplitIndex = strScript.Substring(1000).IndexOf(",")
+                '    iRemaining = strScript.Length - iSplitIndex
+                '    strScript = strScript.Insert(iSplitIndex + 1, vbNewLine)
+                'End While
+                If strVariableName <> "" Then
+                    clsEngine.Evaluate(strVariableName & "<-" & strScript)
+                Else
+                    clsEngine.Evaluate(strScript)
+                End If
+                Return True
+            Catch ex As Exception
+                If Not bSilent Then
                     MsgBox("Error occurred in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
                 End If
-                    Return False
-                End Try
-            Else
                 Return False
+            End Try
+        Else
+            Return False
         End If
     End Function
 

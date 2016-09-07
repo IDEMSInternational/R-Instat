@@ -210,8 +210,10 @@ Public Class dlgImportDataset
                         grdDataPreview.Enabled = True
                         If strFileExt = ".xlsx" Then
                             strFileType = "xlsx"
+                            clsReadXL.AddParameter("readxl", "FALSE")
                         Else
                             strFileType = "xls"
+                            clsReadXL.RemoveParameterByName("readxl")
                         End If
                         FillExcelSheetsAndRegions(strFilePath)
                         ucrInputName.Focus()
@@ -256,6 +258,7 @@ Public Class dlgImportDataset
 #Region "File Preview options"
     Public Sub RefreshFilePreview()
         Dim sReader As StreamReader
+
         If strFileType = "csv" AndAlso ucrInputFilePath.GetText() <> "" Then
             Try
                 sReader = New StreamReader(ucrInputFilePath.GetText())
@@ -277,11 +280,19 @@ Public Class dlgImportDataset
 
     Private Sub RefreshFrameView()
         Dim dfTemp As CharacterMatrix
-        Dim expTemp As SymbolicExpression
+        Dim expTemp As SymbolicExpression = Nothing
         Dim bToBeAssigned As Boolean
         Dim strTempDataFrameName As String
         Dim bValid As Boolean
+        Dim clsAsCharacterFunc As New RFunction
+        'Dim control As Control
 
+        'Remove as may have other effects
+        'For Each control In Me.Controls
+        '    control.Enabled = False
+        'Next
+        Cursor = Cursors.WaitCursor
+        clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         strTempDataFrameName = "temp"
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
         ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
@@ -289,25 +300,31 @@ Public Class dlgImportDataset
             grdDataPreview.Show()
             If strFileType = "csv" Then
                 clsReadCSV.AddParameter("nrows", intLines)
+            ElseIf strFileType = "xlsx" Then
+                clsReadXL.AddParameter("rows", "1:" & intLines)
             End If
             lblCannotImport.Hide()
             lblNoPreview.Hide()
             If ucrInputFilePath.IsEmpty() Then
                 bValid = False
             Else
-                bValid = frmMain.clsRLink.RunInternalScript(ucrBase.clsRsyntax.GetScript(), strTempDataFrameName, bSilent:=True)
+                clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+                expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
+                bValid = (expTemp IsNot Nothing)
             End If
             If bValid Then
-                expTemp = frmMain.clsRLink.RunInternalScriptGetValue("convert_to_character_matrix(" & strTempDataFrameName & ")", bSilent:=True)
                 dfTemp = Nothing
-                If expTemp IsNot Nothing Then dfTemp = expTemp.AsCharacterMatrix
+                If expTemp IsNot Nothing Then
+                    dfTemp = expTemp.AsCharacterMatrix
+                End If
                 If dfTemp Is Nothing Then
                     bValid = False
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("nrows")
+                    ucrBase.clsRsyntax.RemoveParameter("rows")
                     ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
                     Try
-                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=True)
+                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False)
                         grdDataPreview.Enabled = True
                         bCanImport = True
                     Catch
@@ -336,6 +353,11 @@ Public Class dlgImportDataset
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         End If
+        'Remove as may have other effects
+        'For Each control In Me.Controls
+        '    control.Enabled = True
+        'Next
+        Cursor = Cursors.Default
         TestOkEnabled()
     End Sub
 #End Region
@@ -634,14 +656,24 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub XlColNamesParameter()
+        Dim strColNameParam As String
+
+        If strFileType = "xlsx" Then
+            strColNameParam = "colNames"
+            clsReadXL.RemoveParameterByName("col_names")
+        Else
+            strColNameParam = "col_names"
+            clsReadXL.RemoveParameterByName("colNames")
+        End If
+
         If chkColumnNames.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsReadXL.AddParameter("col_names", "TRUE")
+                clsReadXL.AddParameter(strColNameParam, "TRUE")
             Else
-                clsReadXL.RemoveParameterByName("col_names")
+                clsReadXL.RemoveParameterByName(strColNameParam)
             End If
         Else
-            clsReadXL.AddParameter("col_names", "FALSE")
+            clsReadXL.AddParameter(strColNameParam, "FALSE")
         End If
         RefreshFrameView()
     End Sub

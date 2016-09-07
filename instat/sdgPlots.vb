@@ -296,11 +296,11 @@ Public Class sdgPlots
 
     Private Sub SetScaleOption()
         If chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", "free")
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
         ElseIf chkFreeScalesX.Checked AndAlso Not chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", "free_x")
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
         ElseIf Not chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", "free_y")
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
         Else
             clsRFacetFunction.RemoveParameterByName("scales")
         End If
