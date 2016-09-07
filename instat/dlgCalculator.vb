@@ -73,7 +73,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical", "Statistics", "Strings", "Probability", "Dates"})
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings", "Probability", "Dates"})
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -209,14 +209,14 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(614, 377)
-            Case "Logical"
+            Case "Logical and Symbols"
                 grpDates.Visible = False
                 grpStatistics.Visible = False
                 grpLogical.Visible = True
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpStrings.Visible = False
-                Me.Size = New System.Drawing.Size(552, 377)
+                Me.Size = New System.Drawing.Size(580, 377)
                 grpProbabilty.Visible = False
             Case "Statistics"
                 grpDates.Visible = False
@@ -862,5 +862,28 @@ Public Class dlgCalculator
 
     Private Sub cmdDek_Click(sender As Object, e As EventArgs) Handles cmdDek.Click
 
+    End Sub
+
+    Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("( )", 2)
+    End Sub
+    Private Sub cmdOpeningBracket_Click(sender As Object, e As EventArgs) Handles cmdOpeningBracket.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("(")
+    End Sub
+
+    Private Sub cmdClossingBracket_Click(sender As Object, e As EventArgs) Handles cmdClossingBracket.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(")")
+    End Sub
+
+    Private Sub cmdSquareBrackets_Click(sender As Object, e As EventArgs) Handles cmdSquareBrackets.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[ ]", 2)
+    End Sub
+
+    Private Sub cmdQuotes_Click(sender As Object, e As EventArgs) Handles cmdQuotes.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(Chr(34) & "" & Chr(34), 1)
+    End Sub
+
+    Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(":")
     End Sub
 End Class
