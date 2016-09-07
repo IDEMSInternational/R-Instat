@@ -24,6 +24,7 @@ Public Class sdgPlots
     Public clsRThemeFunction As New RFunction
     Public clsRLegendFunction As New RFunction
     Public clsGraphTitleFunction As New RFunction
+    Public clsLegendFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
     Private bAdditionalLayersSetGlobal As Boolean
@@ -341,7 +342,10 @@ Public Class sdgPlots
         If rdoLegendTitleAuto.Checked Then
             chkDisplayLegendTitle.Visible = False
             chkOverwriteLegendTitle.Visible = False
+            chkOverwriteLegendTitle.Checked = False
             ucrInputLegend.Visible = False
+            ucrInputLegend.Reset()
+
         ElseIf rdoLegendTitleCustom.Checked Then
             chkDisplayLegendTitle.Visible = True
             chkOverwriteLegendTitle.Visible = True
@@ -365,4 +369,14 @@ Public Class sdgPlots
             ucrPlotsAdditionalLayers.bSetGlobalIsDefault = bValue
         End Set
     End Property
+
+    Private Sub ucrInputLegend_NameChanged() Handles ucrInputLegend.NameChanged
+        If rdoLegendTitleCustom.Checked AndAlso (Not ucrInputLegend.IsEmpty()) Then
+            clsLegendFunction.SetRCommand("labs")
+            clsLegendFunction.AddParameter("fill", Chr(34) & ucrInputLegend.GetText() & Chr(34))
+            clsRsyntax.AddOperatorParameter("labs", clsRFunc:=clsLegendFunction)
+        ElseIf rdoLegendTitleAuto.Checked
+            clsRsyntax.RemoveOperatorParameter("labs")
+        End If
+    End Sub
 End Class
