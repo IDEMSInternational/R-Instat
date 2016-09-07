@@ -52,6 +52,11 @@ Public Class ucrButtons
         Dim bToBeAssigned As Boolean
         Dim strAssignTo As String
 
+        For Each control In ParentForm.Controls
+            control.Enabled = False
+        Next
+        ParentForm.Cursor = Cursors.WaitCursor
+
         RaiseEvent BeforeClickOk(sender, e)
 
         If chkComment.Checked Then
@@ -70,7 +75,11 @@ Public Class ucrButtons
         clsRsyntax.SetbIsAssigned(bIsAssigned)
         clsRsyntax.SetbToBeAssigned(bToBeAssigned)
         clsRsyntax.SetstrAssignTo(strAssignTo)
-        Me.ParentForm.Hide()
+        ParentForm.Hide()
+        For Each control In ParentForm.Controls
+            control.Enabled = True
+        Next
+        ParentForm.Cursor = Cursors.Default
 
     End Sub
 

@@ -258,6 +258,7 @@ Public Class dlgImportDataset
 #Region "File Preview options"
     Public Sub RefreshFilePreview()
         Dim sReader As StreamReader
+
         If strFileType = "csv" AndAlso ucrInputFilePath.GetText() <> "" Then
             Try
                 sReader = New StreamReader(ucrInputFilePath.GetText())
@@ -284,7 +285,13 @@ Public Class dlgImportDataset
         Dim strTempDataFrameName As String
         Dim bValid As Boolean
         Dim clsAsCharacterFunc As New RFunction
+        'Dim control As Control
 
+        'Remove as may have other effects
+        'For Each control In Me.Controls
+        '    control.Enabled = False
+        'Next
+        Cursor = Cursors.WaitCursor
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         strTempDataFrameName = "temp"
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
@@ -346,6 +353,11 @@ Public Class dlgImportDataset
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         End If
+        'Remove as may have other effects
+        'For Each control In Me.Controls
+        '    control.Enabled = True
+        'Next
+        Cursor = Cursors.Default
         TestOkEnabled()
     End Sub
 #End Region
