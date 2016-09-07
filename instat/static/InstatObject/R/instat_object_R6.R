@@ -80,7 +80,6 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
     # loop through the data_tables list and create a data object for each
     # data.frame given
     new_data_objects = list()
-    
     for ( i in (1:length(data_tables)) ) {
       new_data = data_object$new(data=data_tables[[i]], data_name = names(data_tables)[[i]],
                                  variables_metadata = data_tables_variables_metadata[[i]],
