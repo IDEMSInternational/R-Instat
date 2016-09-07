@@ -1083,4 +1083,8 @@ Public Class frmMain
     Private Sub mnuDescribeTwoVariablesGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesGraph.Click
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticFileOpensst_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpensst.Click
+        dlgOpenSST.ShowDialog()
+    End Sub
 End Class
