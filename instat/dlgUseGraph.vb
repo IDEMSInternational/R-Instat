@@ -9,13 +9,14 @@
 ' This program is distributed in the hope that it will be useful,
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-' GNU General Public License for more details.
+' GNU General Public License for more details.C:\Users\Fundi\Source\Repos\Instat\instat\clsRSyntax.vb
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgUseGraph
     Private bFirstLoad As Boolean = True
+    Public clsLeftCommand As New RFunction
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -36,13 +37,15 @@ Public Class dlgUseGraph
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 430
+        ucrBase.clsRsyntax.SetOperation("+")
         ucrGraphsSelector.SetItemType("graph")
         ucrGraphReceiver.Selector = ucrGraphsSelector
-        sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        clsLeftCommand.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsLeftCommand)
         ucrSaveGraphForUseGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
         ucrSaveGraphForUseGraph.strPrefix = "Usedgraph"
-
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
     Private Sub ReOpenDialog()
 
@@ -60,7 +63,7 @@ Public Class dlgUseGraph
     End Sub
     Private Sub ucrGraphReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGraphReceiver.SelectionChanged
         If Not ucrGraphReceiver.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("graph_name", ucrGraphReceiver.GetVariableNames())
+            clsLeftCommand.AddParameter("graph_name", ucrGraphReceiver.GetVariableNames())
         Else
             ucrBase.clsRsyntax.RemoveParameter("graph_name")
         End If
@@ -68,8 +71,7 @@ Public Class dlgUseGraph
     End Sub
 
     Private Sub ucrGraphsSelector_DataFrameChanged() Handles ucrGraphsSelector.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-
+        clsLeftCommand.AddParameter("data_name", Chr(34) & ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
@@ -79,12 +81,9 @@ Public Class dlgUseGraph
     Private Sub ucrSaveGraphForUseGraph_GraphNameChanged() Handles ucrSaveGraphForUseGraph.GraphNameChanged, ucrSaveGraphForUseGraph.SaveGraphCheckedChanged
         If ucrSaveGraphForUseGraph.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraphForUseGraph.strGraphName, strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraphForUseGraph.strGraphName)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
-
         TestOkEnabled()
     End Sub
 End Class
