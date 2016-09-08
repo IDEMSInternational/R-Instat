@@ -80,6 +80,7 @@ Public Class dlgDescribeTwoVariable
         ucrBaseDescribeTwoVar.clsRsyntax.iCallType = 2
         ucrReceiverFirstVar.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverFirstVar.SetSingleTypeStatus(True)
         ucrReceiverFirstVar.SetMeAsReceiver()
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
@@ -140,40 +141,6 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub CheckType()
-        Dim strVariableTypes As List(Of String)
-        Dim strOldType As String
-        strOldType = strVarType
-        If (Not ucrReceiverFirstVar.IsEmpty()) Then
-            clsGetDataType.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-            clsGetDataType.AddParameter("column", ucrReceiverFirstVar.GetVariableNames())
-            If ucrReceiverFirstVar.lstSelectedVariables.Items.Count = 1 Then
-                strVarType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
-                If (strVarType = "numeric" OrElse strVarType = "integer") Then
-                    ucrReceiverFirstVar.SetDataType("numeric")
-                Else
-                    ucrReceiverFirstVar.SetDataType(strVarType)
-                End If
-            ElseIf strVarType = "" AndAlso ucrReceiverFirstVar.lstSelectedVariables.Items.Count > 1 Then
-                strVariableTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter.ToList()
-                If strVariableTypes.Distinct().Count > 1 AndAlso Not (strVariableTypes.Distinct().Count = 2 AndAlso strVariableTypes.Distinct().Contains("numeric") AndAlso strVariableTypes.Distinct().Contains("integer")) Then
-                    MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
-                    ucrReceiverFirstVar.Clear()
-                Else
-                    If strVariableTypes.Distinct().Count = 1 Then
-                        strVarType = strVariableTypes(0)
-                    Else
-                        strVarType = "numeric"
-                    End If
-                    ucrReceiverFirstVar.SetDataType(strVarType)
-                End If
-            End If
-        Else
-            strVarType = ""
-            ucrReceiverFirstVar.RemoveIncludedMetadataProperty(strProperty:="class")
-        End If
-    End Sub
-
     Private Sub OutputOption()
         clsRCustomSummary.AddParameter("return_output", "TRUE")
     End Sub
@@ -185,7 +152,6 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrReceiverSelectedVariables_SelectionChanged() Handles ucrReceiverFirstVar.SelectionChanged
-        CheckType()
         If Not ucrReceiverFirstVar.IsEmpty Then
             clsRCustomSummary.AddParameter("columns_to_summarise", ucrReceiverFirstVar.GetVariableNames())
         Else

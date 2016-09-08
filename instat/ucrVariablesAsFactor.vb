@@ -215,4 +215,23 @@
         bSingleVariable = bSingle
         SetReceiverStatus()
     End Sub
+
+    Public Sub SetSingleTypeStatus(bIsSingleType As Boolean)
+        ucrMultipleVariables.SetSingleTypeStatus(bIsSingleType)
+    End Sub
+
+    Public Sub SetMultipleOnlyStatus(bMultipleOnly As Boolean)
+        'TODO Replace this by making stacking a property of 
+        'multiple receiver so it can be used instead
+        If bMultipleOnly Then
+            bSingleVariable = False
+            SetReceiverStatus()
+            cmdVariables.Hide()
+            SetSingleTypeStatus(True)
+        Else
+            SetReceiverStatus()
+            cmdVariables.show()
+            setsingletypestatus(False)
+        End If
+    End Sub
 End Class
