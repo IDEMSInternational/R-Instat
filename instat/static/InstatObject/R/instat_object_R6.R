@@ -80,7 +80,6 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
     # loop through the data_tables list and create a data object for each
     # data.frame given
     new_data_objects = list()
-    
     for ( i in (1:length(data_tables)) ) {
       new_data = data_object$new(data=data_tables[[i]], data_name = names(data_tables)[[i]],
                                  variables_metadata = data_tables_variables_metadata[[i]],
@@ -231,7 +230,7 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(self$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
+    return(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
   }
 }
 )
