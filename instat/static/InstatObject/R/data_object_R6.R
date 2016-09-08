@@ -283,10 +283,13 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       #if(is.null(col_attributes)) {
       #  col_attributes <- data.frame(class = NA)
       #}
+      col_attributes <- data.frame(col_attributes)
       out[[i]] <- col_attributes
       i = i + 1
     }
-    out <- as.data.frame(bind_rows(out))
+    #RLink crashes with bind_rows for data frames with ~50+ columns
+    out <- rbind.fill(out)
+    out <- as.data.frame(out)
     row.names(out) <- names(self$get_data_frame(use_current_filter = FALSE))
     if(data_type != "all") {
       if(data_type == "numeric") {
@@ -296,7 +299,6 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
         out = out[out[[data_type_label]] == data_type, ]        
       }
     }
-    
     not_found <- FALSE
     if(!missing(property)) {
       if(!property %in% names(out)) {
@@ -823,7 +825,7 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
   }
   else rownames(row_data) <- nrow(curr_data) + 1:(number_rows - 1)
   old_attr <- attributes(private$data)
-  # Need to use rbind.fill (not bind.rows) because it preserves column attributes
+  # Need to use rbind.fill (not bind_rows) because it preserves column attributes
   if(before && row_position == 1) {
     self$set_data(rbind.fill(row_data, curr_data))
   }
