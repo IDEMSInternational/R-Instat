@@ -39,6 +39,8 @@ Partial Class dlgCombineforGraphics
         '
         'ucrCombineGraphSelector
         '
+        Me.ucrCombineGraphSelector.bShowHiddenColumns = False
+        Me.ucrCombineGraphSelector.bUseCurrentFilter = False
         Me.ucrCombineGraphSelector.Location = New System.Drawing.Point(9, 9)
         Me.ucrCombineGraphSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphSelector.Name = "ucrCombineGraphSelector"
@@ -91,6 +93,8 @@ Partial Class dlgCombineforGraphics
         Me.Controls.Add(Me.ucrCombineGraphSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCombineforGraphics"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Combine"
