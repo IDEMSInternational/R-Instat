@@ -19,9 +19,9 @@ Public Class dlgDescribeTwoVarGraph
     Public strSecondVarType As String
     Public strVarType As String
     Private clsRGGplotFunction As New RFunction
-    Private clsRBoxPlotGeom, clsRBoxPlotFunction, clsRBoxPlotFacet, clsRScatterPlotGeom, clsRLinePlotGeom, clsRBarDotPlotFacet As New RFunction
+    Private clsRBoxPlotGeom, clsRBoxPlotFacet, clsRScatterPlotGeom, clsRLinePlotGeom, clsRBarDotPlotFacet As New RFunction
     Private clsRBoxAesFunction, clsRScatterAesFunction, clsRDotPlotGeom, clsRBarPlotGeom, clsRBarDotAesFunction As New RFunction
-    Public clsGetDataType, clsGetSecondDataType, clsRSummaryAesFunction, clsRStatSummary, clsRSummaryPlotFacet As New RFunction
+    Public clsRSummaryAesFunction, clsRStatSummary, clsRSummaryPlotFacet As New RFunction
     Dim clsRGGBoxPlot, clsRGGBarDotPlot, clsRGGSummaryPlot As New ROperator
     Private bFirstLoad As Boolean = True
     Private Sub dlgDescribeTwoVarGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -44,12 +44,11 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
         ucrBase.clsRsyntax.SetOperation("+")
         clsRGGplotFunction.SetRCommand("ggplot")
         ucrReceiverMultipleTwoVar.SetSelector(ucrSelectorTwoVarGraph)
         ucrReceiverMultipleTwoVar.SetSingleTypeStatus(True)
-        'ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
+        ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrTwoVarGraphSave.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
         ucrTwoVarGraphSave.strPrefix = "TwoVaribleGraph"
@@ -85,6 +84,7 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Public Sub Results()
+        sdgDescribeTwoVarGraph.GrpBoxEnable()
         If ucrReceiverMultipleTwoVar.ucrMultipleVariables.GetCurrentItemTypes.Count > 0 Then
             strVarType = ucrReceiverMultipleTwoVar.ucrMultipleVariables.GetCurrentItemTypes.Item(0)
         Else
@@ -165,13 +165,10 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub BarDotPlot()
         clsRGGBarDotPlot.SetOperation("+")
         clsRDotPlotGeom.SetRCommand("geom_dotplot")
-        clsRDotPlotGeom.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
         clsRBarPlotGeom.SetRCommand("geom_bar")
-        clsRBarPlotGeom.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
         clsRBarDotAesFunction.SetRCommand("aes")
         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBarDotAesFunction)
-        'clsRBarDotAesFunction.AddParameter("x", Chr(34) & "" & Chr(34))
-        clsRBoxAesFunction.AddParameter("y", "value")
+        clsRBarDotAesFunction.AddParameter("fill", "value")
         clsRBarDotPlotFacet.SetRCommand("facet_wrap")
         clsRBarDotPlotFacet.AddParameter("", "~variable")
         clsRGGBarDotPlot.SetParameter(True, clsRFunc:=clsRGGplotFunction)

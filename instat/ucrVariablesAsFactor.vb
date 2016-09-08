@@ -222,18 +222,16 @@
 
     Public Sub SetMultipleOnlyStatus(bMultipleOnly As Boolean)
         'TODO Replace this by making stacking a property of 
-        'multiple receiver so it can be used inst
-        'SetReceiverStatus()
+        'multiple receiver so it can be used instead
         If bMultipleOnly Then
             bSingleVariable = False
             SetReceiverStatus()
             cmdVariables.Hide()
             SetSingleTypeStatus(True)
-            'Else
-            '    bSingleVariable = True
-            '    SetReceiverStatus()
-            '    cmdVariables.Show()
-            '    SetSingleTypeStatus(False)
+        Else
+            SetReceiverStatus()
+            cmdVariables.show()
+            setsingletypestatus(False)
         End If
     End Sub
 End Class
