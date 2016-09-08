@@ -335,6 +335,7 @@ Public Class sdgPlots
             ucrInputLegend.Visible = True
         Else
             ucrInputLegend.Visible = False
+            ucrInputLegend.ResetText()
         End If
     End Sub
 
@@ -344,7 +345,7 @@ Public Class sdgPlots
             chkOverwriteLegendTitle.Visible = False
             chkOverwriteLegendTitle.Checked = False
             ucrInputLegend.Visible = False
-            ucrInputLegend.Reset()
+            ucrInputLegend.ResetText()
 
         ElseIf rdoLegendTitleCustom.Checked Then
             chkDisplayLegendTitle.Visible = True
