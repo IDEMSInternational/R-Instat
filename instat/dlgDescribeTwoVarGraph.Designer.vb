@@ -24,54 +24,36 @@ Partial Class dlgDescribeTwoVarGraph
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrTwoVarGraphSave = New instat.ucrSaveGraph()
-        Me.cmdGraphOptions = New System.Windows.Forms.Button()
-        Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.ucrReceiverTwoVarGraph = New instat.ucrReceiverMultiple()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
+        Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 255)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 232)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrTwoVarGraphSave
         '
-        Me.ucrTwoVarGraphSave.Location = New System.Drawing.Point(7, 229)
+        Me.ucrTwoVarGraphSave.Location = New System.Drawing.Point(7, 206)
         Me.ucrTwoVarGraphSave.Name = "ucrTwoVarGraphSave"
         Me.ucrTwoVarGraphSave.Size = New System.Drawing.Size(265, 20)
         Me.ucrTwoVarGraphSave.TabIndex = 12
         '
-        'cmdGraphOptions
+        'cmdOptions
         '
-        Me.cmdGraphOptions.Location = New System.Drawing.Point(7, 197)
-        Me.cmdGraphOptions.Name = "cmdGraphOptions"
-        Me.cmdGraphOptions.Size = New System.Drawing.Size(101, 23)
-        Me.cmdGraphOptions.TabIndex = 11
-        Me.cmdGraphOptions.Text = "Graph Options"
-        Me.cmdGraphOptions.UseVisualStyleBackColor = True
-        '
-        'lblSelectedVariables
-        '
-        Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(231, 16)
-        Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
-        Me.lblSelectedVariables.TabIndex = 10
-        Me.lblSelectedVariables.Text = "Selected Variables:"
-        '
-        'ucrReceiverTwoVarGraph
-        '
-        Me.ucrReceiverTwoVarGraph.Location = New System.Drawing.Point(231, 30)
-        Me.ucrReceiverTwoVarGraph.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverTwoVarGraph.Name = "ucrReceiverTwoVarGraph"
-        Me.ucrReceiverTwoVarGraph.Selector = Nothing
-        Me.ucrReceiverTwoVarGraph.Size = New System.Drawing.Size(123, 131)
-        Me.ucrReceiverTwoVarGraph.TabIndex = 9
+        Me.cmdOptions.Location = New System.Drawing.Point(303, 203)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(101, 23)
+        Me.cmdOptions.TabIndex = 11
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Options..."
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSelectorTwoVarGraph
         '
@@ -85,7 +67,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'ucrSecondVariableReceiver
         '
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(232, 197)
+        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(293, 172)
         Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
         Me.ucrSecondVariableReceiver.Selector = Nothing
@@ -95,23 +77,30 @@ Partial Class dlgDescribeTwoVarGraph
         'lblSecondVariable
         '
         Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(231, 172)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(311, 154)
         Me.lblSecondVariable.Name = "lblSecondVariable"
         Me.lblSecondVariable.Size = New System.Drawing.Size(85, 13)
         Me.lblSecondVariable.TabIndex = 14
         Me.lblSecondVariable.Text = "Second Variable"
         '
+        'ucrReceiverMultipleTwoVar
+        '
+        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(293, 12)
+        Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
+        Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 130)
+        Me.ucrReceiverMultipleTwoVar.TabIndex = 15
+        Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 311)
+        Me.ClientSize = New System.Drawing.Size(425, 289)
+        Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.ucrSecondVariableReceiver)
         Me.Controls.Add(Me.ucrTwoVarGraphSave)
-        Me.Controls.Add(Me.cmdGraphOptions)
-        Me.Controls.Add(Me.lblSelectedVariables)
-        Me.Controls.Add(Me.ucrReceiverTwoVarGraph)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSelectorTwoVarGraph)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -127,10 +116,9 @@ Partial Class dlgDescribeTwoVarGraph
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrTwoVarGraphSave As ucrSaveGraph
-    Friend WithEvents cmdGraphOptions As Button
-    Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents ucrReceiverTwoVarGraph As ucrReceiverMultiple
+    Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSelectorTwoVarGraph As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSecondVariableReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondVariable As Label
+    Friend WithEvents ucrReceiverMultipleTwoVar As ucrVariablesAsFactor
 End Class
