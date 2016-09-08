@@ -158,6 +158,8 @@ Partial Class dlgCumulativeDistribution
         Me.Controls.Add(Me.ucrCumDistSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCumulativeDistribution"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Cumulative_Distribution"

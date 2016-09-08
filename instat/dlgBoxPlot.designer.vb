@@ -105,6 +105,8 @@ Partial Class dlgBoxplot
         '
         'ucrSelectorBoxPlot
         '
+        Me.ucrSelectorBoxPlot.bShowHiddenColumns = False
+        Me.ucrSelectorBoxPlot.bUseCurrentFilter = False
         Me.ucrSelectorBoxPlot.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorBoxPlot.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorBoxPlot.Name = "ucrSelectorBoxPlot"
