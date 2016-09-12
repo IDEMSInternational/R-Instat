@@ -28,8 +28,11 @@ Public Class ucrInput
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
     Protected bIsReadOnly As Boolean = False
+    Public bSuggestEditOnLeave As Boolean = False
+    Private bLastSilent As Boolean = False
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        bLastSilent = bSilent
     End Sub
 
     Public Overridable Function GetText() As String
@@ -358,7 +361,7 @@ Public Class ucrInput
     End Sub
 
     Private Sub ucrInput_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
-        SetName(Me.Text)
+        SetName(Me.Text, bLastSilent)
     End Sub
 
     Public Overridable Property IsReadOnly() As Boolean
