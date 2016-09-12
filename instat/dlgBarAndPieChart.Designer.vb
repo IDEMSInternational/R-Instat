@@ -109,6 +109,7 @@ Partial Class dlgBarAndPieChart
         'ucrBarChartSelector
         '
         Me.ucrBarChartSelector.bShowHiddenColumns = False
+        Me.ucrBarChartSelector.bUseCurrentFilter = False
         Me.ucrBarChartSelector.Location = New System.Drawing.Point(10, 41)
         Me.ucrBarChartSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrBarChartSelector.Name = "ucrBarChartSelector"
@@ -180,6 +181,8 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.cmdBarChartOptions)
         Me.Controls.Add(Me.cmdPieChartOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgBarAndPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Bar_And_Pie_Chart"
