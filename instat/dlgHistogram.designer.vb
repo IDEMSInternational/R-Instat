@@ -134,6 +134,8 @@ Partial Class dlgHistogram
         '
         'ucrHistogramSelector
         '
+        Me.ucrHistogramSelector.bShowHiddenColumns = False
+        Me.ucrHistogramSelector.bUseCurrentFilter = False
         Me.ucrHistogramSelector.Location = New System.Drawing.Point(10, 35)
         Me.ucrHistogramSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
@@ -181,6 +183,8 @@ Partial Class dlgHistogram
         Me.Controls.Add(Me.lblfactor)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgHistogram"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Histogram"
