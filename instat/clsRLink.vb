@@ -649,4 +649,13 @@ Public Class RLink
         Return strDataType
     End Function
 
+    Public Function MakeValidText(strText As String) As String
+        Dim strOut As String
+        Dim clsMakeNames As New RFunction
+
+        clsMakeNames.SetRCommand("make.names")
+        clsMakeNames.AddParameter("names", Chr(34) & strText & Chr(34))
+        strOut = RunInternalScriptGetValue(clsMakeNames.ToScript()).AsCharacter(0)
+        Return strOut
+    End Function
 End Class
