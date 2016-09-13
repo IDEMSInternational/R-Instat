@@ -182,7 +182,7 @@ Public Class RFunction
         End If
     End Function
 
-    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
+    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
         Dim clsParam As New RParameter
 
         clsParam.SetArgumentName(strParameterName)
@@ -195,6 +195,7 @@ Public Class RFunction
         If Not clsROperatorParameter Is Nothing Then
             clsParam.SetArgumentOperator(clsROperatorParameter)
         End If
+        clsParam.bIncludeArgumentName = bIncludeArgumentName
         Me.AddParameter(clsParam)
     End Sub
 
