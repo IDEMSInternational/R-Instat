@@ -21,8 +21,8 @@ Public Class ucrDataFrame
     Public clsCurrDataFrame As New RFunction
     Public bFirstLoad As Boolean = True
     Private bIncludeOverall As Boolean = False
+    Private bPvtUseFilteredData As Boolean
     Public strCurrDataFrame As String = ""
-    Public bUseFilteredData As Boolean = True
     Public bDataFrameFixed As Boolean = False
     Private strFixedDataFrame As String
 
@@ -32,6 +32,10 @@ Public Class ucrDataFrame
             bFirstLoad = False
         End If
         SetDataFrameProperties()
+    End Sub
+
+    Private Sub InitialiseControl()
+        bUseCurrentFilter = True
     End Sub
 
     Public Sub Reset()
@@ -45,15 +49,33 @@ Public Class ucrDataFrame
     End Sub
 
     Private Sub FillComboBox(Optional bSetFixed As Boolean = True)
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
+        Dim iOldText As String
+        'TODO DO change DataFrameChanged event to not need these
+        Dim sender As New Object
+        Dim e As New EventArgs
+
+        iOldText = cboAvailableDataFrames.Text
+        cboAvailableDataFrames.Items.Clear()
+        cboAvailableDataFrames.Text = ""
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, strCurrentDataFrame:=iOldText)
         If bSetFixed AndAlso bDataFrameFixed AndAlso strFixedDataFrame <> "" Then
             SetDataframe(strFixedDataFrame, False)
+        End If
+        If cboAvailableDataFrames.Text <> iOldText Then
+            SelectedDataFrameChanged(sender, e)
         End If
     End Sub
 
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
+        SelectedDataFrameChanged(sender, e)
+    End Sub
+
+    Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
+        If cboAvailableDataFrames.SelectedIndex = -1 Then
+            cboAvailableDataFrames.Text = ""
+        End If
         SetDataFrameProperties()
         RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
         strCurrDataFrame = cboAvailableDataFrames.Text
@@ -69,15 +91,6 @@ Public Class ucrDataFrame
             iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(cboAvailableDataFrames.Text)
             clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-            If bUseFilteredData Then
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
-                Else
-                    clsCurrDataFrame.RemoveParameterByName("use_current_filter")
-                End If
-            Else
-                clsCurrDataFrame.AddParameter("use_current_filter", "FALSE")
-            End If
             clsParam.SetArgumentName("data_name")
             clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
             clsCurrDataFrame.AddParameter(clsParam)
@@ -109,4 +122,22 @@ Public Class ucrDataFrame
     Public Function GetIncludeOverall() As Boolean
         Return bIncludeOverall
     End Function
+
+    Public Property bUseCurrentFilter As Boolean
+        Get
+            Return bPvtUseFilteredData
+        End Get
+        Set(bValue As Boolean)
+            bPvtUseFilteredData = bValue
+            If bPvtUseFilteredData Then
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
+                Else
+                    clsCurrDataFrame.RemoveParameterByName("use_current_filter")
+                End If
+            Else
+                clsCurrDataFrame.AddParameter("use_current_filter", "FALSE")
+            End If
+        End Set
+    End Property
 End Class

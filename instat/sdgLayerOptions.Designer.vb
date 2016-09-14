@@ -95,6 +95,8 @@ Partial Class sdgLayerOptions
         Me.Controls.Add(Me.tbcLayers)
         Me.Controls.Add(Me.ucrSdgLayerBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgLayerOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Layer Options"

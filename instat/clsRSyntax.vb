@@ -54,6 +54,13 @@ Public Class RSyntax
         bUseCommandString = False
     End Sub
 
+    Public Sub SetBaseROperator(clsOperator As ROperator)
+        clsBaseOperator = clsOperator
+        bUseBaseFunction = False
+        bUseBaseOperator = True
+        bUseCommandString = False
+    End Sub
+
     Public Sub SetCommandString(strCommand As String)
         strCommandString = strCommand
         bUseBaseFunction = False
@@ -104,10 +111,18 @@ Public Class RSyntax
         If bUseBaseFunction Then
             clsBaseFunction.RemoveAssignTo()
         End If
+        If bUseCommandString Then
+            strAssignTo = ""
+            strAssignToDataframe = ""
+            strAssignToColumn = ""
+            strAssignToModel = ""
+            bToBeAssigned = False
+            bIsAssigned = False
+        End If
     End Sub
 
-    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
-        clsBaseFunction.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter)
+    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
+        clsBaseFunction.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName)
     End Sub
 
     Public Sub AddParameter(clsRParam As RParameter)
@@ -123,12 +138,12 @@ Public Class RSyntax
         Return Nothing
     End Function
 
-    Public Sub SetOperatorParameter(bSetFirst As Boolean, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
-        clsBaseOperator.SetParameter(bSetFirst, strParameterName, strValue, clsParam, clsRFunc, clsOp)
+    Public Sub SetOperatorParameter(bSetFirst As Boolean, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
+        clsBaseOperator.SetParameter(bSetFirst, strParameterName, strValue, clsParam, clsRFunc, clsOp, bIncludeArgumentName)
     End Sub
 
-    Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
-        clsBaseOperator.AddAdditionalParameter(strParameterName, strParameterValue, clsRFunc, clsOp)
+    Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
+        clsBaseOperator.AddAdditionalParameter(strParameterName, strParameterValue, clsRFunc, clsOp, bIncludeArgumentName)
     End Sub
 
     Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
@@ -263,14 +278,13 @@ Public Class RSyntax
         Else
             strTemp = clsFunction.ToScript(strScript)
         End If
-        If bUseBaseFunction Then
-            If bExcludeAssignedFunctionOutput And clsFunction.bIsAssigned Then
+        If bExcludeAssignedFunctionOutput Then
+            If (bUseBaseFunction AndAlso clsFunction.bIsAssigned) OrElse (bUseBaseOperator AndAlso clsBaseOperator.bIsAssigned) OrElse (bUseCommandString AndAlso bIsAssigned) Then
                 Return strScript
                 Exit Function
             End If
         End If
         Return strScript & strTemp
-
     End Function
 
     Public Function GetbIsAssigned() As Boolean

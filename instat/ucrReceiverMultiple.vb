@@ -14,7 +14,11 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
+
 Public Class ucrReceiverMultiple
+
+    Public bSingleType As Boolean = False
 
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -327,5 +331,80 @@ Public Class ucrReceiverMultiple
             SetMeAsReceiver()
             frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
         End If
+    End Sub
+
+    Public Function GetCurrentItemTypes(Optional bUnique As Boolean = False) As List(Of String)
+        Dim clsGetDataType As New RFunction
+        Dim strDataTypes As New List(Of String)
+        Dim strDataFrame As String
+        Dim strCurrentType As String
+
+        If Selector IsNot Nothing Then
+            If bTypeSet Then
+                strCurrentType = strType
+            Else
+                strCurrentType = Selector.GetItemType()
+            End If
+
+            If strCurrentType = "column" AndAlso GetDataFrameNames().Count = 1 Then
+                strDataFrame = GetDataFrameNames()(0)
+                clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+                clsGetDataType.AddParameter("property", "data_type_label")
+                clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+                clsGetDataType.AddParameter("column", GetVariableNames())
+                strDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter.ToList()
+                If bUnique Then
+                    strDataTypes = strDataTypes.Distinct().ToList()
+                End If
+            End If
+        End If
+        Return strDataTypes
+    End Function
+
+    Public Function IsSingleType() As Boolean
+        Return GetCurrentItemTypes.Count = 1
+    End Function
+
+    Public Sub CheckSingleType()
+        Dim strVariableTypes As List(Of String)
+        Dim strVarType As String
+
+        If bSingleType Then
+            strVariableTypes = GetCurrentItemTypes(True)
+            If (Not IsEmpty()) Then
+                If lstSelectedVariables.Items.Count = 1 Then
+                    strVarType = strVariableTypes.Item(0)
+                    If (strVarType = "numeric" OrElse strVarType = "integer") Then
+                        SetDataType("numeric")
+                    Else
+                        SetDataType(strVarType)
+                    End If
+                ElseIf lstSelectedVariables.Items.Count > 1 Then
+                    If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) Then
+                        MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
+                        Clear()
+                    Else
+                        If strVariableTypes.Count = 1 Then
+                            SetDataType(strVariableTypes(0))
+                        Else
+                            SetDataType("numeric")
+                        End If
+                    End If
+                End If
+            Else
+                RemoveIncludedMetadataProperty(strProperty:="class")
+            End If
+        Else
+            RemoveIncludedMetadataProperty(strProperty:="class")
+        End If
+    End Sub
+
+    Public Sub SetSingleTypeStatus(bIsSingleType As Boolean)
+        bSingleType = bIsSingleType
+        CheckSingleType()
+    End Sub
+
+    Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
+        CheckSingleType()
     End Sub
 End Class

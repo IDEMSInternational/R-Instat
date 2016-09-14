@@ -24,8 +24,10 @@ Public Class sdgPlots
     Public clsRThemeFunction As New RFunction
     Public clsRLegendFunction As New RFunction
     Public clsGraphTitleFunction As New RFunction
+    Public clsLegendFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
+    Private bAdditionalLayersSetGlobal As Boolean
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -54,6 +56,9 @@ Public Class sdgPlots
         ucrXAxis.Reset()
         ucrYAxis.Reset()
         ucrInputThemes.SetName("theme_grey")
+        rdoLegendTitleAuto.Checked = True
+        LegendDefaults()
+        bLayersDefaultIsGlobal = False
     End Sub
 
     Public Sub Reset()
@@ -110,19 +115,21 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("theme")
         End If
     End Sub
-
     Private Sub TitleDefaults()
         chkDisplayLegendTitle.Checked = True
         chkOverwriteLegendTitle.Checked = False
-        txtOverwriteLegendTitle.Visible = False
+        ucrInputLegend.Visible = False
     End Sub
 
-    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs)
-        If chkOverwriteLegendTitle.Checked Then
-            txtOverwriteLegendTitle.Visible = True
-        Else
-            txtOverwriteLegendTitle.Visible = False
-        End If
+    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegendTitle.CheckedChanged
+
+        'Redid this properly
+
+        'If chkOverwriteLegendTitle.Checked Then
+        '    ucrInputLegend.Visible = True
+        'Else
+        '    ucrInputLegend.Visible = False
+        'End If
     End Sub
 
     Private Sub Facets()
@@ -290,11 +297,11 @@ Public Class sdgPlots
 
     Private Sub SetScaleOption()
         If chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", "free")
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
         ElseIf chkFreeScalesX.Checked AndAlso Not chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", "free_x")
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
         ElseIf Not chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", "free_y")
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
         Else
             clsRFacetFunction.RemoveParameterByName("scales")
         End If
@@ -320,6 +327,57 @@ Public Class sdgPlots
             clsRsyntax.AddOperatorParameter("ggtitle", clsRFunc:=clsGraphTitleFunction)
         Else
             clsRsyntax.RemoveOperatorParameter("ggtitle")
+        End If
+    End Sub
+
+    Private Sub chkOverwriteLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverwriteLegendTitle.CheckedChanged
+        If chkOverwriteLegendTitle.Checked Then
+            ucrInputLegend.Visible = True
+        Else
+            ucrInputLegend.Visible = False
+            ucrInputLegend.ResetText()
+        End If
+    End Sub
+
+    Public Sub LegendDefaults()
+        If rdoLegendTitleAuto.Checked Then
+            chkDisplayLegendTitle.Visible = False
+            chkOverwriteLegendTitle.Visible = False
+            chkOverwriteLegendTitle.Checked = False
+            ucrInputLegend.Visible = False
+            ucrInputLegend.ResetText()
+
+        ElseIf rdoLegendTitleCustom.Checked Then
+            chkDisplayLegendTitle.Visible = True
+            chkOverwriteLegendTitle.Visible = True
+        End If
+    End Sub
+
+    Private Sub rdoLegendTitleAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLegendTitleAuto.CheckedChanged
+        LegendDefaults()
+    End Sub
+
+    Private Sub rdoLegendTitleCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLegendTitleCustom.CheckedChanged
+        LegendDefaults()
+    End Sub
+
+    Public Property bLayersDefaultIsGlobal As Boolean
+        Get
+            Return bAdditionalLayersSetGlobal
+        End Get
+        Set(bValue As Boolean)
+            bAdditionalLayersSetGlobal = bValue
+            ucrPlotsAdditionalLayers.bSetGlobalIsDefault = bValue
+        End Set
+    End Property
+
+    Private Sub ucrInputLegend_NameChanged() Handles ucrInputLegend.NameChanged
+        If rdoLegendTitleCustom.Checked AndAlso (Not ucrInputLegend.IsEmpty()) Then
+            clsLegendFunction.SetRCommand("labs")
+            clsLegendFunction.AddParameter("fill", Chr(34) & ucrInputLegend.GetText() & Chr(34))
+            clsRsyntax.AddOperatorParameter("labs", clsRFunc:=clsLegendFunction)
+        ElseIf rdoLegendTitleAuto.Checked
+            clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub
 End Class

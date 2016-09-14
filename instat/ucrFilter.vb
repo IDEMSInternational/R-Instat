@@ -122,7 +122,11 @@ Public Class ucrFilter
         Else
             clsCurrentConditionView.SetOperation(ucrFilterOperation.GetText())
             clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
-            strCondition = ucrValueForFilter.GetText()
+            If ucrFilterByReceiver.strCurrDataType = "character" AndAlso ucrValueForFilter.GetText() <> "NA" Then
+                strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
+            Else
+                strCondition = ucrValueForFilter.GetText()
+            End If
         End If
         clsCurrentConditionView.SetParameter(False, strValue:=strCondition)
         clsCurrentConditionList.AddParameter("value", strCondition)
@@ -143,20 +147,17 @@ Public Class ucrFilter
     End Sub
 
     Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
-        SetToggleButtonSettings()
+        ucrFactorLevels.SetSelectionAllLevels(Not ucrFactorLevels.IsAllSelected())
     End Sub
 
     Private Sub SetToggleButtonSettings()
-        If cmdToggleSelectAll.FlatStyle = FlatStyle.Popup Then
-            '            ucrFactorLevels.SetSelectionAllLevels(True)
+        If ucrFactorLevels.IsAllSelected() Then
             cmdToggleSelectAll.Text = "Deselect All"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
         Else
-            '            ucrFactorLevels.SetSelectionAllLevels(False)
             cmdToggleSelectAll.Text = "Select All"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
-        CheckAddEnabled()
     End Sub
 
     Private Sub ucrFilterOperation_NameChanged() Handles ucrFilterOperation.NameChanged
@@ -199,5 +200,9 @@ Public Class ucrFilter
         Else
             clsFilterFunction.RemoveParameterByName("filter_name")
         End If
+    End Sub
+
+    Private Sub ucrValueForFilter_ContentsChanged() Handles ucrValueForFilter.ContentsChanged
+        CheckAddEnabled()
     End Sub
 End Class
