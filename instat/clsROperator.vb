@@ -98,7 +98,9 @@ Public Class ROperator
         bIncludeOperation = bForceIncludeOperation OrElse ((clsLeftParameter IsNot Nothing OrElse clsLeftFunction IsNot Nothing OrElse clsLeftOperator IsNot Nothing) AndAlso (clsAdditionalParameters.Count > 0))
 
         If clsLeftParameter IsNot Nothing Then
-            strTemp = strTemp & clsLeftParameter.ToScript(strScript, False)
+            'TODO Where should this be done?
+            clsLeftParameter.bIncludeArgumentName = False
+            strTemp = strTemp & clsLeftParameter.ToScript(strScript)
         ElseIf clsLeftFunction IsNot Nothing Then
             strTemp = strTemp & clsLeftFunction.ToScript(strScript)
         ElseIf clsLeftOperator IsNot Nothing Then
@@ -125,7 +127,9 @@ Public Class ROperator
             If bIncludeOperation Then
                 strTemp = strTemp & Chr(32) & strOperation & Chr(32)
             End If
-            strTemp = strTemp & clsParam.ToScript(strScript, False)
+            'TODO Where should this be done?
+            clsParam.bIncludeArgumentName = False
+            strTemp = strTemp & clsParam.ToScript(strScript)
         Next
 
         If bToBeAssigned Then
@@ -216,7 +220,7 @@ Public Class ROperator
 
     End Function
 
-    Public Sub SetParameter(bSetFirst As Boolean, Optional strParameterName As String = "Right", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
+    Public Sub SetParameter(bSetFirst As Boolean, Optional strParameterName As String = "Right", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
 
         If strValue <> "" Then
             clsParam = New RParameter
@@ -232,7 +236,7 @@ Public Class ROperator
             If Not IsNothing(clsParam) Then
                 AddAdditionalParameter(clsParam)
             Else
-                AddAdditionalParameter(strParameterName, strValue, clsRFunc, clsOp)
+                AddAdditionalParameter(strParameterName, strValue, clsRFunc, clsOp, bIncludeArgumentName)
             End If
             'clsRightParameter = clsParam
             'clsRightFunction = clsRFunc
@@ -241,7 +245,7 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
-    Public Sub AddAdditionalParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
+    Public Sub AddAdditionalParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
         Dim clsParam As New RParameter
 
         clsParam.SetArgumentName(strParameterName)
@@ -254,6 +258,7 @@ Public Class ROperator
         If Not clsROperatorParameter Is Nothing Then
             clsParam.SetArgumentOperator(clsROperatorParameter)
         End If
+        clsParam.bIncludeArgumentName = bIncludeArgumentName
         Me.AddAdditionalParameter(clsParam)
 
     End Sub
