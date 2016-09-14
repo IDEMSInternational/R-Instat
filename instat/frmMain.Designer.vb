@@ -812,7 +812,6 @@ Partial Class frmMain
         '
         'mnuModelGeneralFitModel
         '
-        Me.mnuModelGeneralFitModel.Enabled = False
         Me.mnuModelGeneralFitModel.Name = "mnuModelGeneralFitModel"
         Me.mnuModelGeneralFitModel.Size = New System.Drawing.Size(160, 22)
         Me.mnuModelGeneralFitModel.Tag = "Fit_Model..."
@@ -1275,7 +1274,7 @@ Partial Class frmMain
         'mnuClimaticFileOpensst
         '
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
-        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(134, 22)
         Me.mnuClimaticFileOpensst.Text = "Open SST..."
         '
         'mnuClimaticManage

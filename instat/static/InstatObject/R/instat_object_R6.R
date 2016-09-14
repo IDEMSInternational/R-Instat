@@ -269,7 +269,7 @@ instat_object$set("public", "get_metadata", function(name) {
 } 
 )
 
-instat_object$set("public", "get_data_names", function(as_list = FALSE) { 
+instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items) { 
   if(as_list) return(list(data_names = names(private$.data_objects)))
   else return(names(private$.data_objects))
 } 
