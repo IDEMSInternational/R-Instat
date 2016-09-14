@@ -22,6 +22,7 @@ Partial Class dlgDescribeTwoVariable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDescribeTwoVariable))
         Me.lblFirstVariable = New System.Windows.Forms.Label()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.chkSaveResult = New System.Windows.Forms.CheckBox()
@@ -35,95 +36,65 @@ Partial Class dlgDescribeTwoVariable
         '
         'lblFirstVariable
         '
-        Me.lblFirstVariable.AutoSize = True
-        Me.lblFirstVariable.Location = New System.Drawing.Point(311, 10)
+        resources.ApplyResources(Me.lblFirstVariable, "lblFirstVariable")
         Me.lblFirstVariable.Name = "lblFirstVariable"
-        Me.lblFirstVariable.Size = New System.Drawing.Size(67, 13)
-        Me.lblFirstVariable.TabIndex = 104
         Me.lblFirstVariable.Tag = "First_Variable"
-        Me.lblFirstVariable.Text = "First Variable"
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(309, 178)
+        resources.ApplyResources(Me.cmdSummaries, "cmdSummaries")
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(78, 23)
-        Me.cmdSummaries.TabIndex = 103
         Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'chkSaveResult
         '
-        Me.chkSaveResult.AutoSize = True
-        Me.chkSaveResult.Location = New System.Drawing.Point(8, 184)
+        resources.ApplyResources(Me.chkSaveResult, "chkSaveResult")
         Me.chkSaveResult.Name = "chkSaveResult"
-        Me.chkSaveResult.Size = New System.Drawing.Size(87, 17)
-        Me.chkSaveResult.TabIndex = 96
         Me.chkSaveResult.Tag = "Save_Result"
-        Me.chkSaveResult.Text = "Save Result "
         Me.chkSaveResult.UseVisualStyleBackColor = True
         '
         'lblSecondVariable
         '
-        Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(302, 133)
+        resources.ApplyResources(Me.lblSecondVariable, "lblSecondVariable")
         Me.lblSecondVariable.Name = "lblSecondVariable"
-        Me.lblSecondVariable.Size = New System.Drawing.Size(85, 13)
-        Me.lblSecondVariable.TabIndex = 107
         Me.lblSecondVariable.Tag = "Second_Variable"
-        Me.lblSecondVariable.Text = "Second Variable"
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(299, 179)
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(98, 23)
-        Me.cmdDisplayOptions.TabIndex = 109
         Me.cmdDisplayOptions.Tag = "Display_Options"
-        Me.cmdDisplayOptions.Text = "Display Options..."
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'ucrReceiverSecondVar
         '
-        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(284, 151)
-        Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSecondVar, "ucrReceiverSecondVar")
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
         Me.ucrReceiverSecondVar.Selector = Nothing
-        Me.ucrReceiverSecondVar.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondVar.TabIndex = 108
         '
         'ucrReceiverFirstVar
         '
-        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(284, 28)
-        Me.ucrReceiverFirstVar.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverFirstVar, "ucrReceiverFirstVar")
         Me.ucrReceiverFirstVar.Name = "ucrReceiverFirstVar"
         Me.ucrReceiverFirstVar.Selector = Nothing
-        Me.ucrReceiverFirstVar.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFirstVar.TabIndex = 105
         '
         'ucrSelectorDescribeTwoVar
         '
         Me.ucrSelectorDescribeTwoVar.bShowHiddenColumns = False
         Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = False
-        Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(8, -4)
-        Me.ucrSelectorDescribeTwoVar.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorDescribeTwoVar, "ucrSelectorDescribeTwoVar")
         Me.ucrSelectorDescribeTwoVar.Name = "ucrSelectorDescribeTwoVar"
-        Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(210, 189)
-        Me.ucrSelectorDescribeTwoVar.TabIndex = 101
         '
         'ucrBaseDescribeTwoVar
         '
-        Me.ucrBaseDescribeTwoVar.Location = New System.Drawing.Point(8, 207)
+        resources.ApplyResources(Me.ucrBaseDescribeTwoVar, "ucrBaseDescribeTwoVar")
         Me.ucrBaseDescribeTwoVar.Name = "ucrBaseDescribeTwoVar"
-        Me.ucrBaseDescribeTwoVar.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBaseDescribeTwoVar.TabIndex = 0
         '
         'dlgDescribeTwoVariable
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 262)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.ucrReceiverSecondVar)
@@ -133,12 +104,11 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrSelectorDescribeTwoVar)
         Me.Controls.Add(Me.ucrBaseDescribeTwoVar)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVariable"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Describe_Two_Variable"
-        Me.Text = "Describe Two Variable"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
