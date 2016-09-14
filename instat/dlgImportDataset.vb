@@ -52,6 +52,7 @@ Public Class dlgImportDataset
         bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
+        ucrInputName.bSuggestEditOnLeave = True
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -279,7 +280,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub RefreshFrameView()
-        Dim dfTemp As CharacterMatrix
+        Dim dfTemp As DataFrame
         Dim expTemp As SymbolicExpression = Nothing
         Dim bToBeAssigned As Boolean
         Dim strTempDataFrameName As String
@@ -315,7 +316,7 @@ Public Class dlgImportDataset
             If bValid Then
                 dfTemp = Nothing
                 If expTemp IsNot Nothing Then
-                    dfTemp = expTemp.AsCharacterMatrix
+                    dfTemp = expTemp.AsDataFrame
                 End If
                 If dfTemp Is Nothing Then
                     bValid = False
