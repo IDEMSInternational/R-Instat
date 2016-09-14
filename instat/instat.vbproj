@@ -153,6 +153,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFitModel.Designer.vb">
+      <DependentUpon>dlgFitModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFitModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVariableGraph.Designer.vb">
       <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
     </Compile>
@@ -2052,6 +2058,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFitModel.fr-FR.resx">
+      <DependentUpon>dlgFitModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFitModel.resx">
+      <DependentUpon>dlgFitModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFitModel.sw-KE.resx">
+      <DependentUpon>dlgFitModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFourVariableModelling.fr-FR.resx">
       <DependentUpon>dlgFourVariableModelling.vb</DependentUpon>
