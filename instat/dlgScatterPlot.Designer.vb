@@ -110,6 +110,7 @@ Partial Class dlgScatterPlot
         'ucrSelectorForScatter
         '
         Me.ucrSelectorForScatter.bShowHiddenColumns = False
+        Me.ucrSelectorForScatter.bUseCurrentFilter = False
         Me.ucrSelectorForScatter.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForScatter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForScatter.Name = "ucrSelectorForScatter"
@@ -139,6 +140,8 @@ Partial Class dlgScatterPlot
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgScatterPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Scatter Plot"

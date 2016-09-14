@@ -230,7 +230,7 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(self$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
+    return(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
   }
 }
 )
@@ -269,7 +269,7 @@ instat_object$set("public", "get_metadata", function(name) {
 } 
 )
 
-instat_object$set("public", "get_data_names", function(as_list = FALSE) { 
+instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items) { 
   if(as_list) return(list(data_names = names(private$.data_objects)))
   else return(names(private$.data_objects))
 } 

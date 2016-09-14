@@ -57,6 +57,8 @@ Partial Class dlgGeneralForGraphics
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgGeneralForGraphics"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General "

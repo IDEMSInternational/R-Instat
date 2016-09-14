@@ -463,6 +463,8 @@ Partial Class sdgPlots
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tabctrlBoxSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgPlots"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Plot_Options"
