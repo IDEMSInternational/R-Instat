@@ -40,6 +40,7 @@ Partial Class dlgUseGraph
         'ucrGraphsSelector
         '
         Me.ucrGraphsSelector.bShowHiddenColumns = False
+        Me.ucrGraphsSelector.bUseCurrentFilter = False
         Me.ucrGraphsSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrGraphsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphsSelector.Name = "ucrGraphsSelector"
@@ -92,6 +93,8 @@ Partial Class dlgUseGraph
         Me.Controls.Add(Me.ucrGraphsSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgUseGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Use_Graph"

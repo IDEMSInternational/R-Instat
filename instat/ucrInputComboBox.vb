@@ -19,7 +19,22 @@ Public Class ucrInputComboBox
     Dim strItemsType As String = ""
 
     Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating
-        e.Cancel = Not ValidateText(cboInput.Text)
+        Dim strCurrent As String
+
+        strCurrent = cboInput.Text
+        If bSuggestEditOnLeave Then
+            If Not IsValid(strCurrent) Then
+                'TODO This message should contain the same message from ValidateText()
+                Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & vbNewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
+                    Case MsgBoxResult.Yes
+                        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
+                    Case Else
+                        e.Cancel = True
+                End Select
+            End If
+        Else
+            e.Cancel = Not ValidateText(strCurrent)
+        End If
         If Not e.Cancel Then OnNameChanged()
     End Sub
 
@@ -89,6 +104,7 @@ Public Class ucrInputComboBox
     End Sub
 
     Public Overrides Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        MyBase.SetName(strName, bSilent)
         If bSilent Then
             cboInput.Text = strName
             If cboInput.FindStringExact(strName) <> -1 Then

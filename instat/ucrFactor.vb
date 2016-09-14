@@ -97,7 +97,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub RefreshFactorData()
-        Dim dfTemp As CharacterMatrix
+        Dim dfTemp As DataFrame
         Dim bShowGrid As Boolean = False
         Dim clsGetFactorData As New RFunction
         Dim clsConvertToCharacter As New RFunction
@@ -109,7 +109,7 @@ Public Class ucrFactor
             clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
             clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
             clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
-            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsCharacterMatrix
+            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsDataFrame
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
