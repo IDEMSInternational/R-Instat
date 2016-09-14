@@ -231,6 +231,8 @@ Partial Class dlgCorrelation
         '
         'ucrSelectorDataFrameVarAddRemove
         '
+        Me.ucrSelectorDataFrameVarAddRemove.bShowHiddenColumns = False
+        Me.ucrSelectorDataFrameVarAddRemove.bUseCurrentFilter = False
         Me.ucrSelectorDataFrameVarAddRemove.Location = New System.Drawing.Point(10, 40)
         Me.ucrSelectorDataFrameVarAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrameVarAddRemove.Name = "ucrSelectorDataFrameVarAddRemove"
@@ -264,6 +266,8 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.rdoTwoColumns)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCorrelation"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Correlation"
