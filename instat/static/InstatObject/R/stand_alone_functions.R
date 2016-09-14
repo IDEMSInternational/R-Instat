@@ -16,22 +16,28 @@ get_default_decimal_places <- function(data) {
   else return(NA)  
 }
 
-convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places) {
-  out = matrix(nrow = nrow(data), ncol = ncol(data))
-  if(!format_decimal_places) decimal_places=rep(NA, ncol(data))
-  else if(missing(decimal_places)) decimal_places = sapply(data, get_default_decimal_places)
-  i = 1
-  for(curr_col in colnames(data)) {
-    if(is.na(decimal_places[i])) {
-      out[,i] <- as.character(data[[i]])
-    }
-    else {
-      out[,i] <- as.character(format(data[[i]], nsmall = decimal_places[i]))
-    }
-    i = i + 1
+convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, return_data_frame = TRUE) {
+  if(nrow(data) == 0) {
+    out <- data
   }
-  colnames(out) <- colnames(data)
-  rownames(out) <- rownames(data)
+  else {
+    out = matrix(nrow = nrow(data), ncol = ncol(data))
+    if(!format_decimal_places) decimal_places=rep(NA, ncol(data))
+    else if(missing(decimal_places)) decimal_places = sapply(data, get_default_decimal_places)
+    i = 1
+    for(curr_col in colnames(data)) {
+      if(is.na(decimal_places[i])) {
+        out[,i] <- as.character(data[[i]])
+      }
+      else {
+        out[,i] <- as.character(format(data[[i]], nsmall = decimal_places[i]))
+      }
+      i = i + 1
+    }
+    colnames(out) <- colnames(data)
+    rownames(out) <- rownames(data)
+  }
+  if(return_data_frame) out <- data.frame(out, stringsAsFactors = FALSE)
   return(out)
 }
 
