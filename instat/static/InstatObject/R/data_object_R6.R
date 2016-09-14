@@ -818,8 +818,12 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
     stop(paste(start_row, " not found in rows"))
   }
   row_position = which(curr_row_names == start_row)
-  row_data <- data.frame(matrix(NA, nrow = number_rows, ncol = ncol(curr_data)))
-  colnames(row_data) <- colnames(curr_data)
+  row_data <- curr_data[0, ]
+  for(i in 1:number_rows) {
+    row_data[i, ] <- NA
+  }
+  #row_data <- data.frame(matrix(NA, nrow = number_rows, ncol = ncol(curr_data)))
+  #colnames(row_data) <- colnames(curr_data)
   if(length(curr_row_names[!is.na(as.numeric(curr_row_names))]) > 0) {
     rownames(row_data) <- max(as.numeric(curr_row_names), na.rm = TRUE) + 1:number_rows
   }

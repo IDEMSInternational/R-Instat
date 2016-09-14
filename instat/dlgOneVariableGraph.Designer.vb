@@ -93,7 +93,10 @@ Partial Class dlgOneVariableGraph
         Me.Controls.Add(Me.ucrReceiverOneVarGraph)
         Me.Controls.Add(Me.ucrSelectorOneVarGraph)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgOneVariableGraph"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "One Variable Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
