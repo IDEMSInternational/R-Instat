@@ -45,6 +45,7 @@ Public Class frmEditor
         'This needs to be added at the part when we are writing data to the grid, not here
         'Needs discussion, with this the grid can show NA's
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
+        grdData.SheetTabWidth = 450
         'grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         SetRFunctions()
     End Sub

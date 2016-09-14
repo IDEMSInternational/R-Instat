@@ -52,6 +52,7 @@ Public Class dlgImportDataset
         bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
+        ucrInputName.bSuggestEditOnLeave = True
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -258,6 +259,7 @@ Public Class dlgImportDataset
 #Region "File Preview options"
     Public Sub RefreshFilePreview()
         Dim sReader As StreamReader
+
         If strFileType = "csv" AndAlso ucrInputFilePath.GetText() <> "" Then
             Try
                 sReader = New StreamReader(ucrInputFilePath.GetText())
@@ -278,13 +280,19 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub RefreshFrameView()
-        Dim dfTemp As CharacterMatrix
+        Dim dfTemp As DataFrame
         Dim expTemp As SymbolicExpression = Nothing
         Dim bToBeAssigned As Boolean
         Dim strTempDataFrameName As String
         Dim bValid As Boolean
         Dim clsAsCharacterFunc As New RFunction
+        'Dim control As Control
 
+        'Remove as may have other effects
+        'For Each control In Me.Controls
+        '    control.Enabled = False
+        'Next
+        Cursor = Cursors.WaitCursor
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         strTempDataFrameName = "temp"
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
@@ -308,7 +316,7 @@ Public Class dlgImportDataset
             If bValid Then
                 dfTemp = Nothing
                 If expTemp IsNot Nothing Then
-                    dfTemp = expTemp.AsCharacterMatrix
+                    dfTemp = expTemp.AsDataFrame
                 End If
                 If dfTemp Is Nothing Then
                     bValid = False
@@ -346,6 +354,11 @@ Public Class dlgImportDataset
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         End If
+        'Remove as may have other effects
+        'For Each control In Me.Controls
+        '    control.Enabled = True
+        'Next
+        Cursor = Cursors.Default
         TestOkEnabled()
     End Sub
 #End Region
