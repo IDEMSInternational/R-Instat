@@ -146,7 +146,7 @@ Public Class clsRecentFiles
             Next
 
             ' show separator
-            frmMain.sepEndMRU.Visible = True
+            'frmMain.sepEndMRU.Visible = True
             sepStart.Visible = True
             sepEnd.Visible = True
         End If

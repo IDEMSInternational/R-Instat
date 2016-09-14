@@ -17,6 +17,13 @@ link <- R6Class("link",
                        )
 )
 
+link$set("public", "data_clone", function() {
+  ret <- link$new(from_data_frame = self$from_data_frame, to_data_frame = self$to_data_frame,
+                  type = self$type, calculation = self$calculation)
+  return(ret)
+}
+)
+
 link$set("public", "equals", function(compare_link) {
   if(self$from_data_frame == compare_link$from_data_frame 
          && self$to_data_frame == compare_link$to_data_frame

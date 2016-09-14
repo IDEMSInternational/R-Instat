@@ -43,10 +43,10 @@ Partial Class sdgPlots
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.grpLegendTitle = New System.Windows.Forms.GroupBox()
+        Me.ucrInputLegend = New instat.ucrInputTextBox()
         Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
         Me.chkDisplayLegendTitle = New System.Windows.Forms.CheckBox()
         Me.chkOverwriteLegendTitle = New System.Windows.Forms.CheckBox()
-        Me.txtOverwriteLegendTitle = New instat.ucrInputTextBox()
         Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
         Me.tbpXAxis = New System.Windows.Forms.TabPage()
         Me.ucrXAxis = New instat.ucrAxes()
@@ -111,6 +111,7 @@ Partial Class sdgPlots
         'ucrFacetSelector
         '
         Me.ucrFacetSelector.bShowHiddenColumns = False
+        Me.ucrFacetSelector.bUseCurrentFilter = False
         Me.ucrFacetSelector.Location = New System.Drawing.Point(8, 36)
         Me.ucrFacetSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFacetSelector.Name = "ucrFacetSelector"
@@ -290,10 +291,10 @@ Partial Class sdgPlots
         '
         'grpLegendTitle
         '
+        Me.grpLegendTitle.Controls.Add(Me.ucrInputLegend)
         Me.grpLegendTitle.Controls.Add(Me.rdoLegendTitleCustom)
         Me.grpLegendTitle.Controls.Add(Me.chkDisplayLegendTitle)
         Me.grpLegendTitle.Controls.Add(Me.chkOverwriteLegendTitle)
-        Me.grpLegendTitle.Controls.Add(Me.txtOverwriteLegendTitle)
         Me.grpLegendTitle.Controls.Add(Me.rdoLegendTitleAuto)
         Me.grpLegendTitle.Location = New System.Drawing.Point(7, 81)
         Me.grpLegendTitle.Name = "grpLegendTitle"
@@ -301,6 +302,14 @@ Partial Class sdgPlots
         Me.grpLegendTitle.TabIndex = 8
         Me.grpLegendTitle.TabStop = False
         Me.grpLegendTitle.Text = "Legend Title"
+        '
+        'ucrInputLegend
+        '
+        Me.ucrInputLegend.IsReadOnly = False
+        Me.ucrInputLegend.Location = New System.Drawing.Point(106, 94)
+        Me.ucrInputLegend.Name = "ucrInputLegend"
+        Me.ucrInputLegend.Size = New System.Drawing.Size(166, 21)
+        Me.ucrInputLegend.TabIndex = 11
         '
         'rdoLegendTitleCustom
         '
@@ -332,14 +341,6 @@ Partial Class sdgPlots
         Me.chkOverwriteLegendTitle.TabIndex = 3
         Me.chkOverwriteLegendTitle.Text = "Overwrite Title"
         Me.chkOverwriteLegendTitle.UseVisualStyleBackColor = True
-        '
-        'txtOverwriteLegendTitle
-        '
-        Me.txtOverwriteLegendTitle.IsReadOnly = False
-        Me.txtOverwriteLegendTitle.Location = New System.Drawing.Point(100, 92)
-        Me.txtOverwriteLegendTitle.Name = "txtOverwriteLegendTitle"
-        Me.txtOverwriteLegendTitle.Size = New System.Drawing.Size(170, 21)
-        Me.txtOverwriteLegendTitle.TabIndex = 4
         '
         'rdoLegendTitleAuto
         '
@@ -462,6 +463,8 @@ Partial Class sdgPlots
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tabctrlBoxSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgPlots"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Plot_Options"
@@ -511,7 +514,6 @@ Partial Class sdgPlots
     Friend WithEvents ucrPlotsAdditionalLayers As ucrAdditionalLayers
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents chkDisplayLegendTitle As CheckBox
-    Friend WithEvents txtOverwriteLegendTitle As ucrInputTextBox
     Friend WithEvents chkOverwriteLegendTitle As CheckBox
     Friend WithEvents ucrFacetSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents grpLegendTitle As GroupBox
@@ -521,6 +523,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphTitle As ucrInputTextBox
     Friend WithEvents ucrXAxis As ucrAxes
     Friend WithEvents ucrYAxis As ucrAxes
+    Friend WithEvents ucrInputLegend As ucrInputTextBox
 End Class
 
 

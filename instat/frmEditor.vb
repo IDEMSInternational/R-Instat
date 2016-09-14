@@ -45,6 +45,7 @@ Public Class frmEditor
         'This needs to be added at the part when we are writing data to the grid, not here
         'Needs discussion, with this the grid can show NA's
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
+        grdData.SheetTabWidth = 450
         'grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         SetRFunctions()
     End Sub
@@ -319,6 +320,11 @@ Public Class frmEditor
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
+        ReplaceValueInData(e.NewData.ToString(), e.Cell.Row, e.Cell.Column)
+        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+    End Sub
+
+    Private Sub ReplaceValueInData(strNewValue As String, iRow As Integer, iCol As Integer)
         Dim dblValue As Double
         Dim iValue As Integer
         Dim lstCurrentDataColumns As String()
@@ -329,8 +335,6 @@ Public Class frmEditor
         Dim chrCurrentFactorLevels As CharacterVector
         Dim bValid As Boolean = False
 
-        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-
         clsGetFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
         clsGetFactorLevels.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
 
@@ -339,44 +343,41 @@ Public Class frmEditor
         clsGetVariablesMetadata.AddParameter("property", "data_type_label")
 
         lstCurrentDataColumns = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
-        strCurrentColumn = lstCurrentDataColumns(e.Cell.Column)
+        strCurrentColumn = lstCurrentDataColumns(iCol)
 
         clsGetVariablesMetadata.AddParameter("column", Chr(34) & strCurrentColumn & Chr(34))
         clsGetFactorLevels.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
         strCellDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacter(0)
 
         clsReplaceValue.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
-        clsReplaceValue.AddParameter("rows", Chr(34) & grdCurrSheet.RowHeaders.Item(e.Cell.Row).Text & Chr(34))
+        clsReplaceValue.AddParameter("rows", Chr(34) & grdCurrSheet.RowHeaders.Item(iRow).Text & Chr(34))
 
-        If e.NewData = "NA" Then
-            clsReplaceValue.AddParameter("new_value", e.NewData)
+        If strNewValue = "NA" Then
+            clsReplaceValue.AddParameter("new_value", strNewValue)
             bValid = True
         Else
             Select Case strCellDataType
                 Case "factor"
                     chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevels.ToScript()).AsCharacter
-                    If Not chrCurrentFactorLevels.Contains(e.NewData.ToString()) Then
-                        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
-                        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                    If Not chrCurrentFactorLevels.Contains(strNewValue) Then
+                        MsgBox("Invalid value: " & strNewValue & vbNewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
                     Else
-                        clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                        clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34))
                         bValid = True
                     End If
                 Case "numeric"
-                    If Double.TryParse(e.NewData, dblValue) Then
-                        clsReplaceValue.AddParameter("new_value", e.NewData)
+                    If Double.TryParse(strNewValue, dblValue) Then
+                        clsReplaceValue.AddParameter("new_value", strNewValue)
                         bValid = True
                     Else
-                        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
-                        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                        MsgBox("Invalid value: " & strNewValue & vbNewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
                 Case "integer"
-                    If Integer.TryParse(e.NewData, iValue) Then
-                        clsReplaceValue.AddParameter("new_value", e.NewData)
+                    If Integer.TryParse(strNewValue, iValue) Then
+                        clsReplaceValue.AddParameter("new_value", strNewValue)
                         bValid = True
                     Else
-                        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
-                        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                        MsgBox("Invalid value: " & strNewValue & vbNewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
                     'Currently removed as this is the class for a blank column
                     'Case "logical"
@@ -392,10 +393,10 @@ Public Class frmEditor
                     'clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
                     'bValid = True
                 Case Else
-                    If Double.TryParse(e.NewData, dblValue) OrElse e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
-                        clsReplaceValue.AddParameter("new_value", e.NewData)
+                    If Double.TryParse(strNewValue, dblValue) OrElse strNewValue = "TRUE" OrElse strNewValue = "FALSE" Then
+                        clsReplaceValue.AddParameter("new_value", strNewValue)
                     Else
-                        clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                        clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34))
                     End If
                     bValid = True
             End Select
@@ -591,11 +592,28 @@ Public Class frmEditor
 
     Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
         e.IsCancelled = True
+        If Not e.Range.IsSingleCell Then
+            MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions." & vbNewLine & "Try pasting one cell at a time.", MsgBoxStyle.Information, "Cannot paste multiple cells")
+        Else
+            ReplaceValueInData(Clipboard.GetText(), e.Range.Row, e.Range.Col)
+        End If
     End Sub
 
     ' Not currently working. Bug with reogrid reported here:
     ' https://reogrid.net/forum/viewtopic.php?id=350
     Private Sub grdCurrSheet_BeforeRangeMove(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrSheet.BeforeRangeMove
         e.IsCancelled = True
+    End Sub
+
+    Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrSheet.BeforeCellKeyDown
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete Then
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & vbNewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            e.IsCancelled = True
+        End If
+    End Sub
+
+    Private Sub mnuConvert_Click(sender As Object, e As EventArgs) Handles mnuConvert.Click
+        'TODO Selected column should automatically appear in dialog
+        dlgConvertColumns.ShowDialog()
     End Sub
 End Class

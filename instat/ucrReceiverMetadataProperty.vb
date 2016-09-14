@@ -16,14 +16,14 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrReceiverMetadataProperty
-    Public clsLayerParam As LayerParameters
+    Public clsLayerParam As LayerParameter
     Public ctrActive As Control
     Public Event ControlContentsChanged()
 
     Public Sub SetControls()
         nudParamValue.Visible = False
         ucrCboParamValue.Visible = False
-        UcrColor.Visible = False
+        ucrColor.Visible = False
         If Not IsNothing(clsLayerParam) Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
@@ -47,7 +47,7 @@ Public Class ucrReceiverMetadataProperty
                 ctrActive = ucrCboParamValue
                 ucrCboParamValue.SetItems({"TRUE", "FALSE"})
             ElseIf clsLayerParam.strLayerParameterDataType = "colour" Then
-                ctrActive = UcrColor
+                ctrActive = ucrColor
             ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
                 ctrActive = ucrCboParamValue
 
@@ -67,7 +67,7 @@ Public Class ucrReceiverMetadataProperty
         RaiseEvent ControlContentsChanged()
     End Sub
 
-    Private Sub ucrColor_NameChanged() Handles UcrColor.NameChanged
+    Private Sub ucrColor_NameChanged() Handles ucrColor.NameChanged
         RaiseEvent ControlContentsChanged()
     End Sub
 

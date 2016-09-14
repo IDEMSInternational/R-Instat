@@ -28,17 +28,17 @@ Partial Class ucrFilter
         Me.lstFilters = New System.Windows.Forms.ListView()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.lblFilterBy = New System.Windows.Forms.Label()
+        Me.cmdClearConditions = New System.Windows.Forms.Button()
+        Me.mcdEditCondition = New System.Windows.Forms.Button()
+        Me.cmdRemoveCondition = New System.Windows.Forms.Button()
+        Me.lblNewFilterName = New System.Windows.Forms.Label()
+        Me.ucrInputFilterName = New instat.ucrInputComboBox()
         Me.ucrValueForFilter = New instat.ucrInputTextBox()
         Me.ucrFilterPreview = New instat.ucrInputTextBox()
         Me.ucrFilterOperation = New instat.ucrInputComboBox()
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.cmdClearConditions = New System.Windows.Forms.Button()
-        Me.mcdEditCondition = New System.Windows.Forms.Button()
-        Me.cmdRemoveCondition = New System.Windows.Forms.Button()
-        Me.lblNewFilterName = New System.Windows.Forms.Label()
-        Me.ucrInputFilterName = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -62,7 +62,6 @@ Partial Class ucrFilter
         '
         'cmdToggleSelectAll
         '
-        Me.cmdToggleSelectAll.Enabled = False
         Me.cmdToggleSelectAll.Location = New System.Drawing.Point(416, 283)
         Me.cmdToggleSelectAll.Name = "cmdToggleSelectAll"
         Me.cmdToggleSelectAll.Size = New System.Drawing.Size(93, 23)
@@ -96,55 +95,6 @@ Partial Class ucrFilter
         Me.lblFilterBy.Size = New System.Drawing.Size(44, 13)
         Me.lblFilterBy.TabIndex = 13
         Me.lblFilterBy.Text = "Filter By"
-        '
-        'ucrValueForFilter
-        '
-        Me.ucrValueForFilter.Location = New System.Drawing.Point(490, 40)
-        Me.ucrValueForFilter.Name = "ucrValueForFilter"
-        Me.ucrValueForFilter.Size = New System.Drawing.Size(120, 21)
-        Me.ucrValueForFilter.TabIndex = 11
-        '
-        'ucrFilterPreview
-        '
-        Me.ucrFilterPreview.Location = New System.Drawing.Point(79, 330)
-        Me.ucrFilterPreview.Name = "ucrFilterPreview"
-        Me.ucrFilterPreview.Size = New System.Drawing.Size(293, 21)
-        Me.ucrFilterPreview.TabIndex = 10
-        '
-        'ucrFilterOperation
-        '
-        Me.ucrFilterOperation.Location = New System.Drawing.Point(421, 41)
-        Me.ucrFilterOperation.Name = "ucrFilterOperation"
-        Me.ucrFilterOperation.Size = New System.Drawing.Size(44, 21)
-        Me.ucrFilterOperation.TabIndex = 5
-        '
-        'ucrFactorLevels
-        '
-        Me.ucrFactorLevels.AutoSize = True
-        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.clsReceiver = Nothing
-        Me.ucrFactorLevels.Location = New System.Drawing.Point(413, 61)
-        Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.shtCurrSheet = Nothing
-        Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 216)
-        Me.ucrFactorLevels.TabIndex = 2
-        '
-        'ucrFilterByReceiver
-        '
-        Me.ucrFilterByReceiver.Location = New System.Drawing.Point(274, 41)
-        Me.ucrFilterByReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFilterByReceiver.Name = "ucrFilterByReceiver"
-        Me.ucrFilterByReceiver.Selector = Nothing
-        Me.ucrFilterByReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFilterByReceiver.TabIndex = 1
-        '
-        'ucrSelectorForFitler
-        '
-        Me.ucrSelectorForFitler.Location = New System.Drawing.Point(4, 4)
-        Me.ucrSelectorForFitler.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
-        Me.ucrSelectorForFitler.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForFitler.TabIndex = 0
         '
         'cmdClearConditions
         '
@@ -189,10 +139,64 @@ Partial Class ucrFilter
         '
         'ucrInputFilterName
         '
+        Me.ucrInputFilterName.IsReadOnly = False
         Me.ucrInputFilterName.Location = New System.Drawing.Point(96, 361)
         Me.ucrInputFilterName.Name = "ucrInputFilterName"
         Me.ucrInputFilterName.Size = New System.Drawing.Size(176, 21)
         Me.ucrInputFilterName.TabIndex = 18
+        '
+        'ucrValueForFilter
+        '
+        Me.ucrValueForFilter.IsReadOnly = False
+        Me.ucrValueForFilter.Location = New System.Drawing.Point(490, 40)
+        Me.ucrValueForFilter.Name = "ucrValueForFilter"
+        Me.ucrValueForFilter.Size = New System.Drawing.Size(120, 21)
+        Me.ucrValueForFilter.TabIndex = 11
+        '
+        'ucrFilterPreview
+        '
+        Me.ucrFilterPreview.IsReadOnly = False
+        Me.ucrFilterPreview.Location = New System.Drawing.Point(79, 330)
+        Me.ucrFilterPreview.Name = "ucrFilterPreview"
+        Me.ucrFilterPreview.Size = New System.Drawing.Size(293, 21)
+        Me.ucrFilterPreview.TabIndex = 10
+        '
+        'ucrFilterOperation
+        '
+        Me.ucrFilterOperation.IsReadOnly = False
+        Me.ucrFilterOperation.Location = New System.Drawing.Point(421, 41)
+        Me.ucrFilterOperation.Name = "ucrFilterOperation"
+        Me.ucrFilterOperation.Size = New System.Drawing.Size(44, 21)
+        Me.ucrFilterOperation.TabIndex = 5
+        '
+        'ucrFactorLevels
+        '
+        Me.ucrFactorLevels.AutoSize = True
+        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevels.clsReceiver = Nothing
+        Me.ucrFactorLevels.Location = New System.Drawing.Point(413, 61)
+        Me.ucrFactorLevels.Name = "ucrFactorLevels"
+        Me.ucrFactorLevels.shtCurrSheet = Nothing
+        Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 216)
+        Me.ucrFactorLevels.TabIndex = 2
+        '
+        'ucrFilterByReceiver
+        '
+        Me.ucrFilterByReceiver.Location = New System.Drawing.Point(274, 41)
+        Me.ucrFilterByReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFilterByReceiver.Name = "ucrFilterByReceiver"
+        Me.ucrFilterByReceiver.Selector = Nothing
+        Me.ucrFilterByReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFilterByReceiver.TabIndex = 1
+        '
+        'ucrSelectorForFitler
+        '
+        Me.ucrSelectorForFitler.bShowHiddenColumns = False
+        Me.ucrSelectorForFitler.Location = New System.Drawing.Point(4, 4)
+        Me.ucrSelectorForFitler.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
+        Me.ucrSelectorForFitler.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForFitler.TabIndex = 0
         '
         'ucrFilter
         '

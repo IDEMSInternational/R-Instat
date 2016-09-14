@@ -17,6 +17,7 @@ Imports System.ComponentModel
 
 Public Class ucrInputTextBox
     Public Overrides Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        MyBase.SetName(strName, bSilent)
         If bSilent Then
             txtInput.Text = strName
             OnNameChanged()
@@ -33,7 +34,22 @@ Public Class ucrInputTextBox
     End Sub
 
     Private Sub txtInput_Validating(sender As Object, e As CancelEventArgs) Handles txtInput.Validating
-        e.Cancel = Not ValidateText(txtInput.Text)
+        Dim strCurrent As String
+
+        strCurrent = txtInput.Text
+        If bSuggestEditOnLeave Then
+            If Not IsValid(strCurrent) Then
+                'TODO This message should contain the same message from ValidateText()
+                Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & vbNewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
+                    Case MsgBoxResult.Yes
+                        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
+                    Case Else
+                        e.Cancel = True
+                End Select
+            End If
+        Else
+            e.Cancel = Not ValidateText(strCurrent)
+        End If
         If Not e.Cancel Then OnNameChanged()
     End Sub
 
@@ -48,6 +64,10 @@ Public Class ucrInputTextBox
             Return False
         End If
     End Function
+
+    Private Sub txtInput_TextChanged(sender As Object, e As EventArgs) Handles txtInput.TextChanged
+        OnContentsChanged()
+    End Sub
 
     Public Overrides Property IsReadOnly As Boolean
         Get

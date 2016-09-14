@@ -97,7 +97,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub RefreshFactorData()
-        Dim dfTemp As CharacterMatrix
+        Dim dfTemp As DataFrame
         Dim bShowGrid As Boolean = False
         Dim clsGetFactorData As New RFunction
         Dim clsConvertToCharacter As New RFunction
@@ -109,7 +109,7 @@ Public Class ucrFactor
             clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
             clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
             clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
-            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsCharacterMatrix
+            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsDataFrame
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
@@ -234,22 +234,30 @@ Public Class ucrFactor
     End Function
 
     Public Function IsAllSelected() As Boolean
-        For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-            If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
-                If Not DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean) Then
+        If grdFactorData.CurrentWorksheet IsNot Nothing Then
+            For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
+                If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
+                    If Not DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean) Then
+                        Return False
+                    End If
+                Else
                     Return False
                 End If
-            Else
-                Return False
-            End If
-        Next
-        Return True
+            Next
+            Return True
+        Else
+            Return False
+        End If
     End Function
 
     Private Sub shtcurrsheet_celldatachanged(sender As Object, e As CellEventArgs) Handles shtCurrSheet.CellDataChanged
+        UpdateCells(e.Cell.Column)
+    End Sub
+
+    Private Sub UpdateCells(Optional iColumn As Integer = -2)
         Dim i As Integer
         Dim iSelected As Boolean
-        If e.Cell.Column = iSelectorColumnIndex Then
+        If iColumn = iSelectorColumnIndex Then
             For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
                 If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
                     iSelected = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
@@ -364,4 +372,8 @@ Public Class ucrFactor
             Return False
         End If
     End Function
+
+    Private Sub shtCurrSheet_RangeDataChanged(sender As Object, e As RangeEventArgs) Handles shtCurrSheet.RangeDataChanged
+        UpdateCells(e.Range.Col)
+    End Sub
 End Class

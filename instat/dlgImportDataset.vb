@@ -52,6 +52,7 @@ Public Class dlgImportDataset
         bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
+        ucrInputName.bSuggestEditOnLeave = True
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -123,7 +124,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputName.IsEmpty AndAlso bCanImport Then
+        If (Not ucrInputName.IsEmpty OrElse strFileType = "RDS") AndAlso bCanImport Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -134,109 +135,131 @@ Public Class dlgImportDataset
 #Region "Import options"
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
-        Dim dlgOpen As New OpenFileDialog
         Dim strFilePath As String = ""
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
-
-        If bFromLibrary Then
-            dlgOpen.Title = "Import from library"
-            dlgOpen.InitialDirectory = strLibraryPath
-            dlgOpen.Filter = "All Data files (*.xlsx,*.RDS)|*.xlsx;*.RDS|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx"
-            bFromLibrary = False
-        Else
-            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html;|All files|*.*;"
-            dlgOpen.Title = "Open Data from file"
-            dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        End If
-
-        If dlgOpen.ShowDialog() = DialogResult.OK Then
-            ucrInputName.SetName("")
-            ucrInputName.Reset()
-            'checks if the file name is not blank'
-            If dlgOpen.FileName <> "" Then
-                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                strFileExt = Path.GetExtension(strFilePath)
-                ucrInputFilePath.SetName(strFilePath)
-                grdDataPreview.Show()
-                txtPreview.Show()
-                If strFileExt = ".RDS" Then
-                    clsReadRDS.SetRCommand("readRDS")
-                    clsReadRDS.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                    clsReadRDS.SetAssignTo(strFileName)
-                    grpExcel.Hide()
-                    grpCSV.Hide()
-                    grpRDS.Show()
-                    txtPreview.Text = ""
-                    txtPreview.Enabled = False
-                    grdDataPreview.Enabled = False
-                    ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
-                    ucrBase.clsRsyntax.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
-                    strFileType = "RDS"
-                    ucrInputName.SetName(strFileName, bSilent:=True)
-                ElseIf strFileExt = ".csv" Then
-                    clsReadCSV.SetRCommand("rio::import")
-                    clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsReadCSV)
-                    grpRDS.Hide()
-                    grpExcel.Hide()
-                    grpCSV.Show()
-                    txtPreview.Enabled = True
-                    grdDataPreview.Enabled = True
-                    strFileType = "csv"
-                    ucrInputName.SetName(strFileName, bSilent:=True)
-                    RefreshFilePreview()
-                ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
-                    clsReadXL.SetRCommand("rio::import")
-                    clsReadXL.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsReadXL)
-                    grpCSV.Hide()
-                    grpRDS.Hide()
-                    grpExcel.Show()
-                    txtPreview.Text = ""
-                    txtPreview.Enabled = False
-                    grdDataPreview.Enabled = True
-                    If strFileExt = ".xlsx" Then
-                        strFileType = "xlsx"
-                    Else
-                        strFileType = "xls"
-                    End If
-                    FillExcelSheetsAndRegions(strFilePath)
-                    'ucrInputName.SetName(strFileName, bSilent:=True)
+        Using dlgOpen As New OpenFileDialog
+            If bFromLibrary Then
+                dlgOpen.Title = "Import from library"
+                dlgOpen.InitialDirectory = strLibraryPath
+                dlgOpen.Filter = "All Data files (*.xlsx,*.RDS)|*.xlsx;*.RDS|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx"
+                bFromLibrary = False
+            Else
+                dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html;|All files|*.*;"
+                dlgOpen.Title = "Open Data from file"
+                If Not ucrInputFilePath.IsEmpty() Then
+                    dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputFilePath.GetText(), "/", "\"))
                 Else
-                    ucrBase.clsRsyntax.SetFunction("rio::import")
-                    ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                    dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+                End If
+            End If
+
+            If dlgOpen.ShowDialog() = DialogResult.OK Then
+                ucrInputName.SetName("")
+                ucrInputName.Reset()
+                'checks if the file name is not blank'
+                If dlgOpen.FileName <> "" Then
+                    strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                    strFilePath = Replace(dlgOpen.FileName, "\", "/")
+                    strFileExt = Path.GetExtension(strFilePath)
+                    ucrInputFilePath.SetName(strFilePath)
+                    grdDataPreview.Show()
+                    txtPreview.Show()
+                    ucrInputName.Show()
+                    lblName.Show()
+                    If strFileExt = ".RDS" Then
+                        clsReadRDS.SetRCommand("readRDS")
+                        clsReadRDS.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        'TODO This needs to be different when RDS is a data frame
+                        'need to be able to detect RDS as data.frame/Instat Object
+                        clsReadRDS.SetAssignTo("new_RDS")
+                        grpExcel.Hide()
+                        grpCSV.Hide()
+                        grpRDS.Show()
+                        txtPreview.Text = ""
+                        txtPreview.Enabled = False
+                        grdDataPreview.Enabled = False
+                        ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
+                        ucrBase.clsRsyntax.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
+                        strFileType = "RDS"
+                        ucrInputName.Hide()
+                        lblName.Hide()
+                        'ucrInputName.SetName(strFileName, bSilent:=True)
+                    ElseIf strFileExt = ".csv" Then
+                        clsReadCSV.SetRCommand("rio::import")
+                        clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsReadCSV)
+                        grpRDS.Hide()
+                        grpExcel.Hide()
+                        grpCSV.Show()
+                        txtPreview.Enabled = True
+                        grdDataPreview.Enabled = True
+                        strFileType = "csv"
+                        ucrInputName.SetName(strFileName, bSilent:=True)
+                        RefreshFilePreview()
+                        ucrInputName.Focus()
+                    ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
+                        clsReadXL.SetRCommand("rio::import")
+                        clsReadXL.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsReadXL)
+                        grpCSV.Hide()
+                        grpRDS.Hide()
+                        grpExcel.Show()
+                        txtPreview.Text = ""
+                        txtPreview.Enabled = False
+                        grdDataPreview.Enabled = True
+                        If strFileExt = ".xlsx" Then
+                            strFileType = "xlsx"
+                            clsReadXL.AddParameter("readxl", "FALSE")
+                        Else
+                            strFileType = "xls"
+                            clsReadXL.RemoveParameterByName("readxl")
+                        End If
+                        FillExcelSheetsAndRegions(strFilePath)
+                        ucrInputName.Focus()
+                        'ucrInputName.SetName(strFileName, bSilent:=True)
+                    Else
+                        strFileType = strFileExt.Substring(1)
+                        ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
+                        ucrBase.clsRsyntax.SetFunction("rio::import")
+                        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        grpCSV.Hide()
+                        grpExcel.Hide()
+                        grpRDS.Hide()
+                        grdDataPreview.Show()
+                        txtPreview.Hide()
+                        ucrInputName.SetName(strFileName, bSilent:=True)
+                        ucrInputName.Focus()
+                    End If
+                    RefreshFilePreview()
+                    RefreshFrameView()
+                End If
+            Else
+                If bFromLibrary Then
+                    'TODO something like this so that the Import dialog closes
+                    '     when using open from library but library dialog stays open
+                    'bFromLibrary = False
+                    'Me.Close()
+                End If
+                If ucrInputFilePath.GetText() = "" Then
                     grpCSV.Hide()
                     grpExcel.Hide()
                     grpRDS.Hide()
-                    grdDataPreview.Show()
+                    grdDataPreview.Hide()
                     txtPreview.Hide()
-                    ucrInputName.SetName(strFileName, bSilent:=True)
                 End If
-                RefreshFilePreview()
-                RefreshFrameView()
-                ucrInputName.Focus()
             End If
-        Else
-            If ucrInputFilePath.GetText() = "" Then
-                grpCSV.Hide()
-                grpExcel.Hide()
-                grpRDS.Hide()
-                grdDataPreview.Hide()
-                txtPreview.Hide()
-            End If
-        End If
-        TestOkEnabled()
+            TestOkEnabled()
+        End Using
     End Sub
-
 
 #End Region
 
 #Region "File Preview options"
     Public Sub RefreshFilePreview()
         Dim sReader As StreamReader
+
         If strFileType = "csv" AndAlso ucrInputFilePath.GetText() <> "" Then
             Try
                 sReader = New StreamReader(ucrInputFilePath.GetText())
@@ -252,17 +275,25 @@ Public Class dlgImportDataset
                 bCanImport = False
             End Try
         Else
-            txtPreview.Text = ""
+            txtPreview.Text = "Preview only available for text files"
         End If
     End Sub
 
     Private Sub RefreshFrameView()
-        Dim dfTemp As CharacterMatrix
-        Dim expTemp As SymbolicExpression
+        Dim dfTemp As DataFrame
+        Dim expTemp As SymbolicExpression = Nothing
         Dim bToBeAssigned As Boolean
         Dim strTempDataFrameName As String
         Dim bValid As Boolean
+        Dim clsAsCharacterFunc As New RFunction
+        'Dim control As Control
 
+        'Remove as may have other effects
+        'For Each control In Me.Controls
+        '    control.Enabled = False
+        'Next
+        Cursor = Cursors.WaitCursor
+        clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         strTempDataFrameName = "temp"
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
         ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
@@ -270,24 +301,31 @@ Public Class dlgImportDataset
             grdDataPreview.Show()
             If strFileType = "csv" Then
                 clsReadCSV.AddParameter("nrows", intLines)
+            ElseIf strFileType = "xlsx" Then
+                clsReadXL.AddParameter("rows", "1:" & intLines)
             End If
             lblCannotImport.Hide()
-            If ucrInputFilePath.GetText() = "" Then
+            lblNoPreview.Hide()
+            If ucrInputFilePath.IsEmpty() Then
                 bValid = False
             Else
-                bValid = frmMain.clsRLink.RunInternalScript(ucrBase.clsRsyntax.GetScript(), strTempDataFrameName, bSilent:=True)
+                clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+                expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
+                bValid = (expTemp IsNot Nothing)
             End If
             If bValid Then
-                expTemp = frmMain.clsRLink.RunInternalScriptGetValue("convert_to_character_matrix(" & strTempDataFrameName & ")", bSilent:=True)
                 dfTemp = Nothing
-                If expTemp IsNot Nothing Then dfTemp = expTemp.AsCharacterMatrix
+                If expTemp IsNot Nothing Then
+                    dfTemp = expTemp.AsDataFrame
+                End If
                 If dfTemp Is Nothing Then
                     bValid = False
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("nrows")
+                    ucrBase.clsRsyntax.RemoveParameter("rows")
                     ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
                     Try
-                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=True)
+                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False)
                         grdDataPreview.Enabled = True
                         bCanImport = True
                     Catch
@@ -298,12 +336,17 @@ Public Class dlgImportDataset
             If Not bValid Then
                 grdDataPreview.CurrentWorksheet.Reset()
                 grdDataPreview.Enabled = False
-                lblCannotImport.Show()
+                If Not ucrInputFilePath.IsEmpty() Then
+                    lblCannotImport.Show()
+                Else
+                    lblCannotImport.Hide()
+                End If
                 bCanImport = False
             End If
         Else
             bCanImport = True
             lblCannotImport.Hide()
+            lblNoPreview.Show()
             grdDataPreview.CurrentWorksheet.Reset()
             grdDataPreview.Hide()
         End If
@@ -311,23 +354,29 @@ Public Class dlgImportDataset
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         End If
+        'Remove as may have other effects
+        'For Each control In Me.Controls
+        '    control.Enabled = True
+        'Next
+        Cursor = Cursors.Default
         TestOkEnabled()
     End Sub
 #End Region
 
 #Region "RDS options"
     Private Sub SetRDSDefaults()
-        chkExisting.Checked = True
-        chkKeepObjects.Checked = True
-        chkMetadata.Checked = True
-        chkLogs.Checked = True
-        chkKeepFilters.Checked = True
+        chkExistingData.Checked = True
+        chkImportObjects.Checked = True
+        chkImportMetadata.Checked = True
+        chkImportChangesLog.Checked = True
+        chkImportFilters.Checked = True
+        chkImportCalculations.Checked = True
         chkOverWrite.Checked = False
     End Sub
 
 
-    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExisting.CheckStateChanged
-        If chkExisting.Checked Then
+    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExistingData.CheckedChanged
+        If chkExistingData.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("keep_existing", "TRUE")
             Else
@@ -338,8 +387,8 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkLogs_CheckStateChanged(sender As Object, e As EventArgs) Handles chkLogs.CheckStateChanged
-        If chkLogs.Checked Then
+    Private Sub chkLogs_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportChangesLog.CheckedChanged
+        If chkImportChangesLog.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("include_logs", "TRUE")
             Else
@@ -350,7 +399,7 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkOverWrite_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOverWrite.CheckStateChanged
+    Private Sub chkOverWrite_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOverWrite.CheckedChanged
         If chkOverWrite.Checked Then
             clsImportRDS.AddParameter("overwrite_existing", "TRUE")
         Else
@@ -362,8 +411,8 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles chkMetadata.CheckStateChanged
-        If chkMetadata.Checked Then
+    Private Sub chkMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportMetadata.CheckedChanged
+        If chkImportMetadata.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("include_metadata", "TRUE")
             Else
@@ -374,8 +423,8 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkKeepFilters_CheckedChanged(sender As Object, e As EventArgs) Handles chkKeepFilters.CheckedChanged
-        If chkKeepFilters.Checked Then
+    Private Sub chkKeepFilters_CheckedChanged(sender As Object, e As EventArgs) Handles chkImportFilters.CheckedChanged
+        If chkImportFilters.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("include_filters", "TRUE")
             Else
@@ -386,9 +435,20 @@ Public Class dlgImportDataset
         End If
     End Sub
 
+    Private Sub chkImportCalculations_CheckedChanged(sender As Object, e As EventArgs) Handles chkImportCalculations.CheckedChanged
+        If chkImportCalculations.Checked Then
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                clsImportRDS.AddParameter("include_calculations", "TRUE")
+            Else
+                clsImportRDS.RemoveParameterByName("include_calculations")
+            End If
+        Else
+            clsImportRDS.AddParameter("include_calculations", "FALSE")
+        End If
+    End Sub
 
-    Private Sub chkKeepObjects_CheckStateChanged(sender As Object, e As EventArgs) Handles chkKeepObjects.CheckStateChanged
-        If chkKeepObjects.Checked Then
+    Private Sub chkKeepObjects_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportObjects.CheckStateChanged
+        If chkImportObjects.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsImportRDS.AddParameter("include_objects", "TRUE")
             Else
@@ -597,14 +657,24 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub XlColNamesParameter()
+        Dim strColNameParam As String
+
+        If strFileType = "xlsx" Then
+            strColNameParam = "colNames"
+            clsReadXL.RemoveParameterByName("col_names")
+        Else
+            strColNameParam = "col_names"
+            clsReadXL.RemoveParameterByName("colNames")
+        End If
+
         If chkColumnNames.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsReadXL.AddParameter("col_names", "TRUE")
+                clsReadXL.AddParameter(strColNameParam, "TRUE")
             Else
-                clsReadXL.RemoveParameterByName("col_names")
+                clsReadXL.RemoveParameterByName(strColNameParam)
             End If
         Else
-            clsReadXL.AddParameter("col_names", "FALSE")
+            clsReadXL.AddParameter(strColNameParam, "FALSE")
         End If
         RefreshFrameView()
     End Sub
@@ -674,9 +744,12 @@ Public Class dlgImportDataset
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ' add the item to the MRU (Most Recently Used) list...
-        frmMain.clsRecentItems.addToMenu(ucrInputFilePath.Text)
+        'Disabled until implemented correctly
+        'frmMain.clsRecentItems.addToMenu(ucrInputFilePath.GetText())
+        If strFileType = "RDS" Then
+            frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+        End If
     End Sub
-
 
     'Private Sub ucrInputNamedRegions_NameChanged() Handles ucrInputNamedRegions.NameChanged
     '    If Not ucrInputNamedRegions.IsEmpty() Then

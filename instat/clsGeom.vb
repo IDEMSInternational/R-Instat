@@ -17,7 +17,7 @@
 Public Class Geoms
     Public strGeomName As String = ""
     Public clsAesParameters As New List(Of AesParameters)
-    Public clsLayerParameters As New List(Of LayerParameters)
+    Public clsLayerParameters As New List(Of LayerParameter)
 
     Public Sub SetGeomName(strTempName As String)
         strGeomName = strTempName
@@ -35,7 +35,7 @@ Public Class Geoms
     End Sub
 
     Public Sub AddLayerParameter(strLayerParameterName As String, strLayerParameterDataType As String, strLayerParameterDefaultValue As String, Optional bIsDependent As Boolean = False, Optional lstParameterStrings As String() = Nothing, Optional strDependentParameter As String = "", Optional strDependantpParameterValue As String = "")
-        Dim NewLayerParameter As New LayerParameters
+        Dim NewLayerParameter As New LayerParameter
 
         If lstParameterStrings Is Nothing Then
             lstParameterStrings = New String() {}
@@ -73,7 +73,7 @@ Public Class AesParameters
     Public bIsMandatory As Boolean
 End Class
 
-Public Class LayerParameters
+Public Class LayerParameter
     'contains info about the layer parameters
     Public strLayerParameterName As String
     Public strLayerParameterDataType As String
