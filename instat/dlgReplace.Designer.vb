@@ -27,18 +27,18 @@ Partial Class dlgReplace
         Me.lblMaximum = New System.Windows.Forms.Label()
         Me.lblRangeMin = New System.Windows.Forms.Label()
         Me.chkIncludeMinimum = New System.Windows.Forms.CheckBox()
+        Me.ucrInputRangeTo = New instat.ucrInputTextBox()
+        Me.ucrInputRangeFrom = New instat.ucrInputTextBox()
+        Me.ucrInputOldValue = New instat.ucrInputTextBox()
         Me.rdoRange = New System.Windows.Forms.RadioButton()
         Me.rdoOldMissing = New System.Windows.Forms.RadioButton()
         Me.rdoOldValue = New System.Windows.Forms.RadioButton()
         Me.grpNew = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNewValue = New instat.ucrInputTextBox()
         Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
         Me.rdoNewValue = New System.Windows.Forms.RadioButton()
         Me.rdoFromAbove = New System.Windows.Forms.RadioButton()
         Me.lblSelectedColumns = New System.Windows.Forms.Label()
-        Me.ucrInputNewValue = New instat.ucrInputTextBox()
-        Me.ucrInputRangeTo = New instat.ucrInputTextBox()
-        Me.ucrInputRangeFrom = New instat.ucrInputTextBox()
-        Me.ucrInputOldValue = New instat.ucrInputTextBox()
         Me.ucrReceiverReplace = New instat.ucrReceiverMultiple()
         Me.ucrSelectorReplace = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseReplace = New instat.ucrButtons()
@@ -108,6 +108,30 @@ Partial Class dlgReplace
         Me.chkIncludeMinimum.Text = "Including"
         Me.chkIncludeMinimum.UseVisualStyleBackColor = True
         '
+        'ucrInputRangeTo
+        '
+        Me.ucrInputRangeTo.IsReadOnly = False
+        Me.ucrInputRangeTo.Location = New System.Drawing.Point(79, 106)
+        Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
+        Me.ucrInputRangeTo.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputRangeTo.TabIndex = 5
+        '
+        'ucrInputRangeFrom
+        '
+        Me.ucrInputRangeFrom.IsReadOnly = False
+        Me.ucrInputRangeFrom.Location = New System.Drawing.Point(79, 76)
+        Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
+        Me.ucrInputRangeFrom.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputRangeFrom.TabIndex = 4
+        '
+        'ucrInputOldValue
+        '
+        Me.ucrInputOldValue.IsReadOnly = False
+        Me.ucrInputOldValue.Location = New System.Drawing.Point(58, 19)
+        Me.ucrInputOldValue.Name = "ucrInputOldValue"
+        Me.ucrInputOldValue.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputOldValue.TabIndex = 3
+        '
         'rdoRange
         '
         Me.rdoRange.AutoSize = True
@@ -158,6 +182,14 @@ Partial Class dlgReplace
         Me.grpNew.Tag = "New"
         Me.grpNew.Text = "New"
         '
+        'ucrInputNewValue
+        '
+        Me.ucrInputNewValue.IsReadOnly = False
+        Me.ucrInputNewValue.Location = New System.Drawing.Point(63, 19)
+        Me.ucrInputNewValue.Name = "ucrInputNewValue"
+        Me.ucrInputNewValue.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputNewValue.TabIndex = 6
+        '
         'rdoNewMissing
         '
         Me.rdoNewMissing.AutoSize = True
@@ -204,38 +236,6 @@ Partial Class dlgReplace
         Me.lblSelectedColumns.Tag = "Selected_Column(s)"
         Me.lblSelectedColumns.Text = "Selected Column(s)"
         '
-        'ucrInputNewValue
-        '
-        Me.ucrInputNewValue.IsReadOnly = False
-        Me.ucrInputNewValue.Location = New System.Drawing.Point(63, 19)
-        Me.ucrInputNewValue.Name = "ucrInputNewValue"
-        Me.ucrInputNewValue.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputNewValue.TabIndex = 6
-        '
-        'ucrInputRangeTo
-        '
-        Me.ucrInputRangeTo.IsReadOnly = False
-        Me.ucrInputRangeTo.Location = New System.Drawing.Point(79, 106)
-        Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
-        Me.ucrInputRangeTo.Size = New System.Drawing.Size(69, 21)
-        Me.ucrInputRangeTo.TabIndex = 5
-        '
-        'ucrInputRangeFrom
-        '
-        Me.ucrInputRangeFrom.IsReadOnly = False
-        Me.ucrInputRangeFrom.Location = New System.Drawing.Point(79, 76)
-        Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
-        Me.ucrInputRangeFrom.Size = New System.Drawing.Size(69, 21)
-        Me.ucrInputRangeFrom.TabIndex = 4
-        '
-        'ucrInputOldValue
-        '
-        Me.ucrInputOldValue.IsReadOnly = False
-        Me.ucrInputOldValue.Location = New System.Drawing.Point(58, 19)
-        Me.ucrInputOldValue.Name = "ucrInputOldValue"
-        Me.ucrInputOldValue.Size = New System.Drawing.Size(95, 21)
-        Me.ucrInputOldValue.TabIndex = 3
-        '
         'ucrReceiverReplace
         '
         Me.ucrReceiverReplace.Location = New System.Drawing.Point(276, 52)
@@ -248,6 +248,7 @@ Partial Class dlgReplace
         'ucrSelectorReplace
         '
         Me.ucrSelectorReplace.bShowHiddenColumns = False
+        Me.ucrSelectorReplace.bUseCurrentFilter = False
         Me.ucrSelectorReplace.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorReplace.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorReplace.Name = "ucrSelectorReplace"
@@ -273,6 +274,8 @@ Partial Class dlgReplace
         Me.Controls.Add(Me.ucrSelectorReplace)
         Me.Controls.Add(Me.ucrBaseReplace)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgReplace"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Replace"

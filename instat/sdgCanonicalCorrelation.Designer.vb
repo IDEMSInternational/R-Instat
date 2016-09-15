@@ -145,6 +145,8 @@ Partial Class sdgCanonicalCorrelation
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgCanonicalCorrelation"
         Me.Tag = "PCA_Options"
         Me.Text = "PCA Options"

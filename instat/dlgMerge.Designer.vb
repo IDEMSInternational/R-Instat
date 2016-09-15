@@ -254,6 +254,7 @@ Partial Class dlgMerge
         'ucrSelectorSecondDataFrame
         '
         Me.ucrSelectorSecondDataFrame.bShowHiddenColumns = False
+        Me.ucrSelectorSecondDataFrame.bUseCurrentFilter = False
         Me.ucrSelectorSecondDataFrame.Location = New System.Drawing.Point(230, 26)
         Me.ucrSelectorSecondDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSecondDataFrame.Name = "ucrSelectorSecondDataFrame"
@@ -263,6 +264,7 @@ Partial Class dlgMerge
         'ucrSelectorFirstDataFrame
         '
         Me.ucrSelectorFirstDataFrame.bShowHiddenColumns = False
+        Me.ucrSelectorFirstDataFrame.bUseCurrentFilter = False
         Me.ucrSelectorFirstDataFrame.Location = New System.Drawing.Point(10, 24)
         Me.ucrSelectorFirstDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFirstDataFrame.Name = "ucrSelectorFirstDataFrame"
@@ -294,6 +296,8 @@ Partial Class dlgMerge
         Me.Controls.Add(Me.ucrSelectorFirstDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgMerge"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Merge"
