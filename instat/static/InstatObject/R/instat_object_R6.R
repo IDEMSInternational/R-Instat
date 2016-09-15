@@ -166,6 +166,14 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
 }
 )
 
+instat_object$set("public", "import_from_ODK", function(username, password, form_name, platform) {
+  out <- import_from_ODK(username, password, form_name, platform)
+  data_list <- list(out)
+  names(data_list) <- form_name
+  self$import_data(data_tables = data_list)
+}
+)
+
 # Now appending/merging not setting so maybe should be renamed
 instat_object$set("public", "set_meta", function(new_meta) {
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
