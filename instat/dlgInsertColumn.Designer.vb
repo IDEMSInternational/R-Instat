@@ -44,8 +44,8 @@ Partial Class dlgInsertColumn
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFramesList = New instat.ucrDataFrame()
         Me.grpOPtions = New System.Windows.Forms.GroupBox()
-        Me.rdoBefore = New System.Windows.Forms.RadioButton()
         Me.rdoAfter = New System.Windows.Forms.RadioButton()
+        Me.rdoBefore = New System.Windows.Forms.RadioButton()
         CType(Me.nudPos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumCols, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpInsert.SuspendLayout()
@@ -126,6 +126,7 @@ Partial Class dlgInsertColumn
         '
         'ucrInputBeforeAfter
         '
+        Me.ucrInputBeforeAfter.IsReadOnly = False
         Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(26, 65)
         Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
         Me.ucrInputBeforeAfter.Size = New System.Drawing.Size(93, 21)
@@ -199,6 +200,7 @@ Partial Class dlgInsertColumn
         '
         'ucrInputPrefixForInsertedColumns
         '
+        Me.ucrInputPrefixForInsertedColumns.IsReadOnly = False
         Me.ucrInputPrefixForInsertedColumns.Location = New System.Drawing.Point(166, 265)
         Me.ucrInputPrefixForInsertedColumns.Name = "ucrInputPrefixForInsertedColumns"
         Me.ucrInputPrefixForInsertedColumns.Size = New System.Drawing.Size(256, 21)
@@ -206,6 +208,7 @@ Partial Class dlgInsertColumn
         '
         'ucrInputDefaultValue
         '
+        Me.ucrInputDefaultValue.IsReadOnly = False
         Me.ucrInputDefaultValue.Location = New System.Drawing.Point(408, 182)
         Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
         Me.ucrInputDefaultValue.Size = New System.Drawing.Size(45, 21)
@@ -222,6 +225,7 @@ Partial Class dlgInsertColumn
         '
         'ucrSelectorInseertColumns
         '
+        Me.ucrSelectorInseertColumns.bShowHiddenColumns = False
         Me.ucrSelectorInseertColumns.Location = New System.Drawing.Point(9, 75)
         Me.ucrSelectorInseertColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorInseertColumns.Name = "ucrSelectorInseertColumns"
@@ -237,6 +241,7 @@ Partial Class dlgInsertColumn
         '
         'ucrDataFramesList
         '
+        Me.ucrDataFramesList.bUseCurrentFilter = False
         Me.ucrDataFramesList.Location = New System.Drawing.Point(12, 32)
         Me.ucrDataFramesList.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFramesList.Name = "ucrDataFramesList"
@@ -254,17 +259,6 @@ Partial Class dlgInsertColumn
         Me.grpOPtions.TabStop = False
         Me.grpOPtions.Text = "OPtions"
         '
-        'rdoBefore
-        '
-        Me.rdoBefore.AutoSize = True
-        Me.rdoBefore.Location = New System.Drawing.Point(7, 20)
-        Me.rdoBefore.Name = "rdoBefore"
-        Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
-        Me.rdoBefore.TabIndex = 0
-        Me.rdoBefore.TabStop = True
-        Me.rdoBefore.Text = "Before"
-        Me.rdoBefore.UseVisualStyleBackColor = True
-        '
         'rdoAfter
         '
         Me.rdoAfter.AutoSize = True
@@ -275,6 +269,17 @@ Partial Class dlgInsertColumn
         Me.rdoAfter.TabStop = True
         Me.rdoAfter.Text = "After"
         Me.rdoAfter.UseVisualStyleBackColor = True
+        '
+        'rdoBefore
+        '
+        Me.rdoBefore.AutoSize = True
+        Me.rdoBefore.Location = New System.Drawing.Point(7, 20)
+        Me.rdoBefore.Name = "rdoBefore"
+        Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
+        Me.rdoBefore.TabIndex = 0
+        Me.rdoBefore.TabStop = True
+        Me.rdoBefore.Text = "Before"
+        Me.rdoBefore.UseVisualStyleBackColor = True
         '
         'dlgInsertColumn
         '
@@ -300,6 +305,8 @@ Partial Class dlgInsertColumn
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDataFramesList)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgInsertColumn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Insert Columns/Rows"

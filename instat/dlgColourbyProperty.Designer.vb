@@ -85,6 +85,8 @@ Partial Class dlgColourbyProperty
         Me.Controls.Add(Me.ucrSelectorColourByMetadata)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgColourbyProperty"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Colour_by_Property"

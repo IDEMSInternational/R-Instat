@@ -327,6 +327,7 @@ Partial Class dlgRegularSequence
         '
         'ucrSelectDataFrameRegularSequence
         '
+        Me.ucrSelectDataFrameRegularSequence.bUseCurrentFilter = False
         Me.ucrSelectDataFrameRegularSequence.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectDataFrameRegularSequence.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectDataFrameRegularSequence.Name = "ucrSelectDataFrameRegularSequence"

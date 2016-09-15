@@ -359,6 +359,8 @@ Partial Class sdgCorrPlot
         Me.Controls.Add(Me.tbSdgCorrelation)
         Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgCorrPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "corrplot"
