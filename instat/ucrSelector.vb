@@ -94,15 +94,19 @@ Public Class ucrSelector
         If CurrentReceiver IsNot Nothing Then
             CurrentReceiver.RemoveColor()
         End If
-        CurrentReceiver = conReceiver
-        CurrentReceiver.SetColor()
-        LoadList()
-        If (TypeOf CurrentReceiver Is ucrReceiverSingle) Then
-            'lstAvailableVariable.SelectionMode = SelectionMode.One
-            lstAvailableVariable.MultiSelect = False
-        ElseIf (TypeOf CurrentReceiver Is ucrReceiverMultiple) Then
-            'lstAvailableVariable.SelectionMode = SelectionMode.MultiExtended
-            lstAvailableVariable.MultiSelect = True
+        If conReceiver IsNot Nothing Then
+            CurrentReceiver = conReceiver
+            CurrentReceiver.SetColor()
+            LoadList()
+            If (TypeOf CurrentReceiver Is ucrReceiverSingle) Then
+                'lstAvailableVariable.SelectionMode = SelectionMode.One
+                lstAvailableVariable.MultiSelect = False
+            ElseIf (TypeOf CurrentReceiver Is ucrReceiverMultiple) Then
+                'lstAvailableVariable.SelectionMode = SelectionMode.MultiExtended
+                lstAvailableVariable.MultiSelect = True
+            End If
+        Else
+            CurrentReceiver = Nothing
         End If
     End Sub
 
