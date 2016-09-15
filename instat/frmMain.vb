@@ -1087,4 +1087,8 @@ Public Class frmMain
     Private Sub mnuClimaticFileOpensst_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpensst.Click
         dlgOpenSST.ShowDialog()
     End Sub
+
+    Private Sub mnuModelGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelGeneralFitModel.Click
+        dlgFitModel.ShowDialog()
+    End Sub
 End Class
