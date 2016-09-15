@@ -36,7 +36,7 @@ Partial Class dlgAppend
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 292)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 290)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(400, 52)
         Me.ucrBase.TabIndex = 0
@@ -44,10 +44,10 @@ Partial Class dlgAppend
         'ucrSelectorDataframes
         '
         Me.ucrSelectorDataframes.bShowHiddenColumns = False
-        Me.ucrSelectorDataframes.Location = New System.Drawing.Point(9, 31)
+        Me.ucrSelectorDataframes.Location = New System.Drawing.Point(10, 31)
         Me.ucrSelectorDataframes.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataframes.Name = "ucrSelectorDataframes"
-        Me.ucrSelectorDataframes.Size = New System.Drawing.Size(195, 193)
+        Me.ucrSelectorDataframes.Size = New System.Drawing.Size(195, 197)
         Me.ucrSelectorDataframes.TabIndex = 1
         '
         'ucrReceiverAppendDataframe
@@ -66,21 +66,21 @@ Partial Class dlgAppend
         Me.lblAppendToDataframe.Name = "lblAppendToDataframe"
         Me.lblAppendToDataframe.Size = New System.Drawing.Size(112, 13)
         Me.lblAppendToDataframe.TabIndex = 3
-        Me.lblAppendToDataframe.Text = "Selected  Data frames"
+        Me.lblAppendToDataframe.Text = "Selected Data Frames"
         '
         'lblDataframes
         '
         Me.lblDataframes.AutoSize = True
-        Me.lblDataframes.Location = New System.Drawing.Point(9, 9)
+        Me.lblDataframes.Location = New System.Drawing.Point(10, 9)
         Me.lblDataframes.Name = "lblDataframes"
-        Me.lblDataframes.Size = New System.Drawing.Size(64, 13)
+        Me.lblDataframes.Size = New System.Drawing.Size(67, 13)
         Me.lblDataframes.TabIndex = 4
-        Me.lblDataframes.Text = "Data frames"
+        Me.lblDataframes.Text = "Data Frames"
         '
         'lblIDColNAme
         '
         Me.lblIDColNAme.AutoSize = True
-        Me.lblIDColNAme.Location = New System.Drawing.Point(128, 262)
+        Me.lblIDColNAme.Location = New System.Drawing.Point(128, 266)
         Me.lblIDColNAme.Name = "lblIDColNAme"
         Me.lblIDColNAme.Size = New System.Drawing.Size(87, 13)
         Me.lblIDColNAme.TabIndex = 3
@@ -89,7 +89,7 @@ Partial Class dlgAppend
         'chkIncludeIDColumn
         '
         Me.chkIncludeIDColumn.AutoSize = True
-        Me.chkIncludeIDColumn.Location = New System.Drawing.Point(9, 262)
+        Me.chkIncludeIDColumn.Location = New System.Drawing.Point(10, 265)
         Me.chkIncludeIDColumn.Name = "chkIncludeIDColumn"
         Me.chkIncludeIDColumn.Size = New System.Drawing.Size(113, 17)
         Me.chkIncludeIDColumn.TabIndex = 5
@@ -99,24 +99,24 @@ Partial Class dlgAppend
         'ucrInputIDColName
         '
         Me.ucrInputIDColName.IsReadOnly = False
-        Me.ucrInputIDColName.Location = New System.Drawing.Point(221, 258)
+        Me.ucrInputIDColName.Location = New System.Drawing.Point(219, 263)
         Me.ucrInputIDColName.Name = "ucrInputIDColName"
-        Me.ucrInputIDColName.Size = New System.Drawing.Size(143, 21)
+        Me.ucrInputIDColName.Size = New System.Drawing.Size(147, 21)
         Me.ucrInputIDColName.TabIndex = 6
         '
         'lblNewDataframeName
         '
         Me.lblNewDataframeName.AutoSize = True
-        Me.lblNewDataframeName.Location = New System.Drawing.Point(12, 239)
+        Me.lblNewDataframeName.Location = New System.Drawing.Point(10, 239)
         Me.lblNewDataframeName.Name = "lblNewDataframeName"
-        Me.lblNewDataframeName.Size = New System.Drawing.Size(115, 13)
+        Me.lblNewDataframeName.Size = New System.Drawing.Size(118, 13)
         Me.lblNewDataframeName.TabIndex = 7
-        Me.lblNewDataframeName.Text = "New Data frame Name"
+        Me.lblNewDataframeName.Text = "New Data Frame Name"
         '
         'ucrInputNewDataframeName
         '
         Me.ucrInputNewDataframeName.IsReadOnly = False
-        Me.ucrInputNewDataframeName.Location = New System.Drawing.Point(131, 231)
+        Me.ucrInputNewDataframeName.Location = New System.Drawing.Point(131, 236)
         Me.ucrInputNewDataframeName.Name = "ucrInputNewDataframeName"
         Me.ucrInputNewDataframeName.Size = New System.Drawing.Size(235, 21)
         Me.ucrInputNewDataframeName.TabIndex = 8
@@ -125,7 +125,7 @@ Partial Class dlgAppend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 356)
+        Me.ClientSize = New System.Drawing.Size(413, 346)
         Me.Controls.Add(Me.ucrInputNewDataframeName)
         Me.Controls.Add(Me.lblNewDataframeName)
         Me.Controls.Add(Me.ucrInputIDColName)
