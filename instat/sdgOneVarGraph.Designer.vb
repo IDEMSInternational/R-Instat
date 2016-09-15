@@ -194,6 +194,9 @@ Partial Class sdgOneVarGraph
         Me.ClientSize = New System.Drawing.Size(237, 169)
         Me.Controls.Add(Me.UcrButtonsOneVarGraph)
         Me.Controls.Add(Me.tbcOneVarGraph)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgOneVarGraph"
         Me.Text = "sdgOneVarGraph"
         Me.tbcOneVarGraph.ResumeLayout(False)
