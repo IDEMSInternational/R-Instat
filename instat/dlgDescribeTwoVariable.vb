@@ -32,10 +32,6 @@ Public Class dlgDescribeTwoVariable
         autoTranslate(Me)
     End Sub
 
-    Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.ShowDialog()
-    End Sub
-
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgDescribeDisplay.GrpBoxEnable()
         sdgDescribeDisplay.ShowDialog()
@@ -44,7 +40,6 @@ Public Class dlgDescribeTwoVariable
     Public Sub TestOKEnabled()
         If ((Not ucrReceiverFirstVar.IsEmpty()) And (Not ucrReceiverSecondVar.IsEmpty())) Then
             ucrBaseDescribeTwoVar.OKEnabled(True)
-            Results()
         Else
             ucrBaseDescribeTwoVar.OKEnabled(False)
         End If
@@ -94,6 +89,10 @@ Public Class dlgDescribeTwoVariable
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+        sdgSummaries.ShowDialog()
+    End Sub
+
     Private Sub Correlation()
         ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRCorelation)
         clsRCorelation.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstVar.GetVariables())
@@ -103,7 +102,17 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Public Sub Results()
-        SecondVarType()
+        If ucrReceiverFirstVar.GetCurrentItemTypes.Count > 0 Then
+            strVarType = ucrReceiverFirstVar.GetCurrentItemTypes.Item(0)
+        Else
+            strVarType = ""
+        End If
+        If (Not ucrReceiverSecondVar.IsEmpty()) Then
+            strSecondVarType = ucrReceiverSecondVar.strCurrDataType
+        Else
+            strSecondVarType = ""
+        End If
+
         If ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
             chkSaveResult.Enabled = False
             cmdSummaries.Visible = False
@@ -128,16 +137,9 @@ Public Class dlgDescribeTwoVariable
             ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRFreqTables)
             clsRFreqTables.AddParameter("x_col_names", ucrReceiverFirstVar.GetVariableNames())
             clsRFreqTables.AddParameter("y_col_name", ucrReceiverSecondVar.GetVariableNames())
-        End If
-    End Sub
-
-    Private Sub SecondVarType()
-        If (Not ucrReceiverSecondVar.IsEmpty()) Then
-            clsGetSecondDataType.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-            clsGetSecondDataType.AddParameter("column", ucrReceiverSecondVar.GetVariableNames())
-            strSecondVarType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetSecondDataType.ToScript()).AsCharacter(0)
         Else
-            strSecondVarType = ""
+            cmdSummaries.Visible = False
+            cmdDisplayOptions.Visible = False
         End If
     End Sub
 
@@ -151,12 +153,23 @@ Public Class dlgDescribeTwoVariable
         clsRAnova.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-    Private Sub ucrReceiverSelectedVariables_SelectionChanged() Handles ucrReceiverFirstVar.SelectionChanged
+    Private Sub ucrReceiverFirstVar_SelectionChanged() Handles ucrReceiverFirstVar.SelectionChanged
         If Not ucrReceiverFirstVar.IsEmpty Then
             clsRCustomSummary.AddParameter("columns_to_summarise", ucrReceiverFirstVar.GetVariableNames())
         Else
             clsRCustomSummary.RemoveParameterByName("columns_to_summarise")
         End If
+        Results()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub uucrReceiverSecondVar_SelectionChanged() Handles ucrReceiverSecondVar.SelectionChanged
+        If Not ucrReceiverSecondVar.IsEmpty Then
+            clsRCustomSummary.AddParameter("factors", ucrReceiverSecondVar.GetVariableNames)
+        Else
+            clsRCustomSummary.RemoveParameterByName("factors")
+        End If
+        Results()
         TestOKEnabled()
     End Sub
 
@@ -181,15 +194,5 @@ Public Class dlgDescribeTwoVariable
             clsRCustomSummary.AddParameter("store_results", "FALSE")
         End If
         clsRCustomSummary.AddParameter("drop", "TRUE")
-    End Sub
-
-    Private Sub ucrReceiverSecondVar_SelectionChanged() Handles ucrReceiverSecondVar.SelectionChanged
-        If Not ucrReceiverSecondVar.IsEmpty Then
-            SecondVarType()
-            clsRCustomSummary.AddParameter("factors", ucrReceiverSecondVar.GetVariableNames)
-        Else
-            clsRCustomSummary.RemoveParameterByName("factors")
-        End If
-        TestOKEnabled()
     End Sub
 End Class

@@ -114,6 +114,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'ucrSelectorPCA
         '
         Me.ucrSelectorPCA.bShowHiddenColumns = False
+        Me.ucrSelectorPCA.bUseCurrentFilter = False
         Me.ucrSelectorPCA.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorPCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPCA.Name = "ucrSelectorPCA"
@@ -143,6 +144,8 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.Controls.Add(Me.ucrSelectorPCA)
         Me.Controls.Add(Me.ucrBasePCA)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgPrincipalComponentAnalysis"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Principal_Component_Analysis"
