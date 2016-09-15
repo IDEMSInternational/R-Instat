@@ -204,7 +204,7 @@ Partial Class sdgModelOptions
         Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.grpLinkFunctions)
         Me.Controls.Add(Me.ucrButtonsSDGModelOptions)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgModelOptions"

@@ -142,7 +142,7 @@ Partial Class sdgDescribeDisplay
         Me.Controls.Add(Me.grpFrequenciesOptions)
         Me.Controls.Add(Me.grpAnovaOptions)
         Me.Controls.Add(Me.ucrButtonsDescribeDisplay)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeDisplay"

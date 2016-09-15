@@ -735,12 +735,6 @@
     <Compile Include="sdgSummaries.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
-      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgFrequencyPolygonOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgLayerOptions.Designer.vb">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </Compile>
@@ -763,12 +757,6 @@
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPrincipalComponentAnalysis.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgThemeOptions.Designer.vb">
-      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgThemeOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgVariableTransformations.Designer.vb">
@@ -2650,15 +2638,6 @@
     <EmbeddedResource Include="sdgDescribeDisplay.sw-KE.resx">
       <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
-      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFrequencyPolygonOptions.resx">
-      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFrequencyPolygonOptions.sw-KE.resx">
-      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgLayerOptions.fr-FR.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -3784,15 +3763,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgThemeOptions.fr-FR.resx">
-      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgThemeOptions.resx">
-      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgThemeOptions.sw-KE.resx">
-      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.fr-FR.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
