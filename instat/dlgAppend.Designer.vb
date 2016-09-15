@@ -22,6 +22,7 @@ Partial Class dlgAppend
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDataframes = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverAppendDataframe = New instat.ucrReceiverMultiple()
@@ -32,6 +33,13 @@ Partial Class dlgAppend
         Me.ucrInputIDColName = New instat.ucrInputTextBox()
         Me.lblNewDataframeName = New System.Windows.Forms.Label()
         Me.ucrInputNewDataframeName = New instat.ucrInputTextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabControl1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -121,11 +129,50 @@ Partial Class dlgAppend
         Me.ucrInputNewDataframeName.Size = New System.Drawing.Size(235, 21)
         Me.ucrInputNewDataframeName.TabIndex = 8
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(7, 79)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.TabIndex = 9
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(131, 79)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(200, 100)
+        Me.TabControl1.TabIndex = 10
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(192, 74)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(192, 74)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
         'dlgAppend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(413, 356)
+        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ucrInputNewDataframeName)
         Me.Controls.Add(Me.lblNewDataframeName)
         Me.Controls.Add(Me.ucrInputIDColName)
@@ -141,6 +188,7 @@ Partial Class dlgAppend
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Append_to_Dataframe"
         Me.Text = "Append to Dataframe"
+        Me.TabControl1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -156,4 +204,10 @@ Partial Class dlgAppend
     Friend WithEvents ucrInputIDColName As ucrInputTextBox
     Friend WithEvents lblNewDataframeName As Label
     Friend WithEvents ucrInputNewDataframeName As ucrInputTextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents Timer2 As Timer
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
 End Class
