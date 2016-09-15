@@ -134,6 +134,7 @@ Partial Class dlgPolynomials
         '
         'ucrInputPolynomial
         '
+        Me.ucrInputPolynomial.IsReadOnly = False
         Me.ucrInputPolynomial.Location = New System.Drawing.Point(116, 207)
         Me.ucrInputPolynomial.Name = "ucrInputPolynomial"
         Me.ucrInputPolynomial.Size = New System.Drawing.Size(145, 21)
@@ -141,6 +142,8 @@ Partial Class dlgPolynomials
         '
         'ucrSelectorForPolynomial
         '
+        Me.ucrSelectorForPolynomial.bShowHiddenColumns = False
+        Me.ucrSelectorForPolynomial.bUseCurrentFilter = False
         Me.ucrSelectorForPolynomial.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForPolynomial.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForPolynomial.Name = "ucrSelectorForPolynomial"
@@ -178,6 +181,8 @@ Partial Class dlgPolynomials
         Me.Controls.Add(Me.grpType)
         Me.Controls.Add(Me.lblDegree)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgPolynomials"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Polynomial"

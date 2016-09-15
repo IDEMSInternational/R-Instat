@@ -29,6 +29,9 @@ Partial Class sdgSummaries
         Me.grpCommon = New System.Windows.Forms.GroupBox()
         Me.tbDescribe = New System.Windows.Forms.TabControl()
         Me.tbAll = New System.Windows.Forms.TabPage()
+        Me.grpNotOrderedFactor = New System.Windows.Forms.GroupBox()
+        Me.chkMinimum = New System.Windows.Forms.CheckBox()
+        Me.chkMaximum = New System.Windows.Forms.CheckBox()
         Me.tbNumeric = New System.Windows.Forms.TabPage()
         Me.grpNumeric = New System.Windows.Forms.GroupBox()
         Me.chkSum = New System.Windows.Forms.CheckBox()
@@ -39,15 +42,12 @@ Partial Class sdgSummaries
         Me.chkQuartiles = New System.Windows.Forms.CheckBox()
         Me.chkMedian = New System.Windows.Forms.CheckBox()
         Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
-        Me.grpNotOrderedFactor = New System.Windows.Forms.GroupBox()
-        Me.chkMinimum = New System.Windows.Forms.CheckBox()
-        Me.chkMaximum = New System.Windows.Forms.CheckBox()
         Me.grpCommon.SuspendLayout()
         Me.tbDescribe.SuspendLayout()
         Me.tbAll.SuspendLayout()
+        Me.grpNotOrderedFactor.SuspendLayout()
         Me.tbNumeric.SuspendLayout()
         Me.grpNumeric.SuspendLayout()
-        Me.grpNotOrderedFactor.SuspendLayout()
         Me.SuspendLayout()
         '
         'chkNonMissing
@@ -130,6 +130,40 @@ Partial Class sdgSummaries
         Me.tbAll.Tag = "All"
         Me.tbAll.Text = "All"
         Me.tbAll.UseVisualStyleBackColor = True
+        '
+        'grpNotOrderedFactor
+        '
+        Me.grpNotOrderedFactor.Controls.Add(Me.chkMinimum)
+        Me.grpNotOrderedFactor.Controls.Add(Me.chkMaximum)
+        Me.grpNotOrderedFactor.Location = New System.Drawing.Point(8, 71)
+        Me.grpNotOrderedFactor.Name = "grpNotOrderedFactor"
+        Me.grpNotOrderedFactor.Size = New System.Drawing.Size(243, 46)
+        Me.grpNotOrderedFactor.TabIndex = 20
+        Me.grpNotOrderedFactor.TabStop = False
+        Me.grpNotOrderedFactor.Tag = "All_but_unrdered_factor"
+        Me.grpNotOrderedFactor.Text = "All but (Unordered) factor"
+        '
+        'chkMinimum
+        '
+        Me.chkMinimum.AutoSize = True
+        Me.chkMinimum.Location = New System.Drawing.Point(15, 19)
+        Me.chkMinimum.Name = "chkMinimum"
+        Me.chkMinimum.Size = New System.Drawing.Size(67, 17)
+        Me.chkMinimum.TabIndex = 4
+        Me.chkMinimum.Tag = "Minimum"
+        Me.chkMinimum.Text = "Minimum"
+        Me.chkMinimum.UseVisualStyleBackColor = True
+        '
+        'chkMaximum
+        '
+        Me.chkMaximum.AutoSize = True
+        Me.chkMaximum.Location = New System.Drawing.Point(133, 19)
+        Me.chkMaximum.Name = "chkMaximum"
+        Me.chkMaximum.Size = New System.Drawing.Size(70, 17)
+        Me.chkMaximum.TabIndex = 5
+        Me.chkMaximum.Tag = "Maximum"
+        Me.chkMaximum.Text = "Maximum"
+        Me.chkMaximum.UseVisualStyleBackColor = True
         '
         'tbNumeric
         '
@@ -244,40 +278,6 @@ Partial Class sdgSummaries
         Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
         Me.UcrButtonsSubdialogue1.TabIndex = 0
         '
-        'grpNotOrderedFactor
-        '
-        Me.grpNotOrderedFactor.Controls.Add(Me.chkMinimum)
-        Me.grpNotOrderedFactor.Controls.Add(Me.chkMaximum)
-        Me.grpNotOrderedFactor.Location = New System.Drawing.Point(8, 71)
-        Me.grpNotOrderedFactor.Name = "grpNotOrderedFactor"
-        Me.grpNotOrderedFactor.Size = New System.Drawing.Size(243, 46)
-        Me.grpNotOrderedFactor.TabIndex = 20
-        Me.grpNotOrderedFactor.TabStop = False
-        Me.grpNotOrderedFactor.Tag = "All_but_unrdered_factor"
-        Me.grpNotOrderedFactor.Text = "All but (Unordered) factor"
-        '
-        'chkMinimum
-        '
-        Me.chkMinimum.AutoSize = True
-        Me.chkMinimum.Location = New System.Drawing.Point(15, 19)
-        Me.chkMinimum.Name = "chkMinimum"
-        Me.chkMinimum.Size = New System.Drawing.Size(67, 17)
-        Me.chkMinimum.TabIndex = 4
-        Me.chkMinimum.Tag = "Minimum"
-        Me.chkMinimum.Text = "Minimum"
-        Me.chkMinimum.UseVisualStyleBackColor = True
-        '
-        'chkMaximum
-        '
-        Me.chkMaximum.AutoSize = True
-        Me.chkMaximum.Location = New System.Drawing.Point(133, 19)
-        Me.chkMaximum.Name = "chkMaximum"
-        Me.chkMaximum.Size = New System.Drawing.Size(70, 17)
-        Me.chkMaximum.TabIndex = 5
-        Me.chkMaximum.Tag = "Maximum"
-        Me.chkMaximum.Text = "Maximum"
-        Me.chkMaximum.UseVisualStyleBackColor = True
-        '
         'sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -285,6 +285,7 @@ Partial Class sdgSummaries
         Me.ClientSize = New System.Drawing.Size(302, 205)
         Me.Controls.Add(Me.tbDescribe)
         Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgSummaries"
@@ -294,11 +295,11 @@ Partial Class sdgSummaries
         Me.grpCommon.PerformLayout()
         Me.tbDescribe.ResumeLayout(False)
         Me.tbAll.ResumeLayout(False)
+        Me.grpNotOrderedFactor.ResumeLayout(False)
+        Me.grpNotOrderedFactor.PerformLayout()
         Me.tbNumeric.ResumeLayout(False)
         Me.grpNumeric.ResumeLayout(False)
         Me.grpNumeric.PerformLayout()
-        Me.grpNotOrderedFactor.ResumeLayout(False)
-        Me.grpNotOrderedFactor.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

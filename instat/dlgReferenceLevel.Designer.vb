@@ -49,6 +49,7 @@ Partial Class dlgReferenceLevel
         'ucrSelectorForReferenceLevels
         '
         Me.ucrSelectorForReferenceLevels.bShowHiddenColumns = False
+        Me.ucrSelectorForReferenceLevels.bUseCurrentFilter = False
         Me.ucrSelectorForReferenceLevels.Location = New System.Drawing.Point(13, 13)
         Me.ucrSelectorForReferenceLevels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForReferenceLevels.Name = "ucrSelectorForReferenceLevels"
@@ -86,6 +87,8 @@ Partial Class dlgReferenceLevel
         Me.Controls.Add(Me.lblFactorSelected)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgReferenceLevel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Reference_Level"
