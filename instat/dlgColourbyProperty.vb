@@ -33,7 +33,6 @@ Public Class dlgColourbyProperty
 
     Private Sub InitialiseDialog()
         ucrReceiverMetadataProperty.Selector = ucrSelectorColourByMetadata
-        ucrReceiverMetadataProperty.SetMeAsReceiver()
         ucrReceiverMetadataProperty.SetItemType("metadata")
         clsSetColoursFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         clsRemoveColoursFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
@@ -78,11 +77,13 @@ Public Class dlgColourbyProperty
     Private Sub SetOrRemoveColours()
         If chkRemoveColours.Checked Then
             ucrSelectorColourByMetadata.Reset()
+            ucrSelectorColourByMetadata.SetCurrentReceiver(Nothing)
             ucrReceiverMetadataProperty.Enabled = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveColoursFunction)
         Else
-            ucrReceiverMetadataProperty.Enabled = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsSetColoursFunction)
+            ucrReceiverMetadataProperty.Enabled = True
+            ucrReceiverMetadataProperty.SetMeAsReceiver()
         End If
         TestOKEnabled()
     End Sub
