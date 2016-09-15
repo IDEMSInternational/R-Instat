@@ -153,8 +153,6 @@ Partial Class sdgDataOptions
         '
         'ucrSelectorFilters
         '
-        Me.ucrSelectorFilters.bShowHiddenColumns = False
-        Me.ucrSelectorFilters.bUseCurrentFilter = False
         Me.ucrSelectorFilters.Location = New System.Drawing.Point(8, 8)
         Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
