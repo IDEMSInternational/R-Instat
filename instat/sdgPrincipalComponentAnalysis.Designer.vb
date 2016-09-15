@@ -47,11 +47,11 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbIndividuals = New System.Windows.Forms.TabPage()
         Me.tbBiplot = New System.Windows.Forms.TabPage()
         Me.tbBarPlot = New System.Windows.Forms.TabPage()
+        Me.ucrReceiverFactor = New instat.ucrReceiverMultiple()
         Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.ucrReceiverFactor = New instat.ucrReceiverMultiple()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -347,6 +347,15 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbBarPlot.Text = "Bar Plot"
         Me.tbBarPlot.UseVisualStyleBackColor = True
         '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(253, 43)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFactor.TabIndex = 4
+        '
         'ucrSelectorFactor
         '
         Me.ucrSelectorFactor.bShowHiddenColumns = False
@@ -385,15 +394,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
         '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(253, 43)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactor.TabIndex = 4
-        '
         'sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -402,6 +402,8 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgPrincipalComponentAnalysis"
         Me.Tag = "PCA_Options"
         Me.Text = "PCA Options"

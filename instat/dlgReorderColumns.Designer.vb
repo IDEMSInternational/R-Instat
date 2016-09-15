@@ -57,6 +57,7 @@ Partial Class dlgReorderColumns
         '
         'ucrDataFrameSelect
         '
+        Me.ucrDataFrameSelect.bUseCurrentFilter = False
         Me.ucrDataFrameSelect.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameSelect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameSelect.Name = "ucrDataFrameSelect"
@@ -73,6 +74,8 @@ Partial Class dlgReorderColumns
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgReorderColumns"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
