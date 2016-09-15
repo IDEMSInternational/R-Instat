@@ -147,6 +147,7 @@ Partial Class dlgDeleteRowsOrColums
         'ucrSelectorForDeleteColumns
         '
         Me.ucrSelectorForDeleteColumns.bShowHiddenColumns = False
+        Me.ucrSelectorForDeleteColumns.bUseCurrentFilter = False
         Me.ucrSelectorForDeleteColumns.Location = New System.Drawing.Point(10, 38)
         Me.ucrSelectorForDeleteColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleteColumns.Name = "ucrSelectorForDeleteColumns"
@@ -163,6 +164,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         'ucrSelectorForDeleteRows
         '
+        Me.ucrSelectorForDeleteRows.bUseCurrentFilter = False
         Me.ucrSelectorForDeleteRows.Location = New System.Drawing.Point(10, 38)
         Me.ucrSelectorForDeleteRows.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleteRows.Name = "ucrSelectorForDeleteRows"
@@ -180,7 +182,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(541, 295)
+        Me.ClientSize = New System.Drawing.Size(423, 295)
         Me.Controls.Add(Me.lblColumnsToDelete)
         Me.Controls.Add(Me.grpRowsToDelete)
         Me.Controls.Add(Me.ucrReceiverForColumnsToDelete)
@@ -192,6 +194,8 @@ Partial Class dlgDeleteRowsOrColums
         Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDeleteRowsOrColums"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Delete_Rows_Columns"

@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgAppend
     Public bFirstLoad As Boolean = True
+
     Private Sub dlgAppend_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
@@ -34,12 +35,16 @@ Public Class dlgAppend
         ucrBase.clsRsyntax.SetFunction("bind_rows")
         ucrReceiverAppendDataframe.SetItemType("dataframe")
         ucrInputIDColName.SetValidationTypeAsRVariable()
-
+        ucrInputNewDataframeName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverAppendDataframe.IsEmpty = False Then
-            ucrBase.OKEnabled(True)
+        If Not ucrReceiverAppendDataframe.IsEmpty AndAlso Not ucrInputNewDataframeName.IsEmpty Then
+            If chkIncludeIDColumn.Checked AndAlso ucrInputIDColName.IsEmpty Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -47,24 +52,23 @@ Public Class dlgAppend
 
     Private Sub SetDefaults()
         ucrSelectorDataframes.Reset()
-        ucrInputIDColName.SetName("ID_Col")
-        ucrInputNewDataframeName.ResetText()
-        ucrInputIDColName.ResetText()
+        ucrInputIDColName.SetName("id")
+        ucrInputNewDataframeName.SetName("Append")
         chkIncludeIDColumn.Checked = False
+        TestOKEnabled()
     End Sub
 
-    Private Sub ReopenDialog()
 
+    Private Sub ReopenDialog()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverAppendDataframe_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverAppendDataframe.SelectionChanged
         If ucrReceiverAppendDataframe.IsEmpty = False Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverAppendDataframe.GetVariables)
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverAppendDataframe.GetVariables, bIncludeArgumentName:=False)
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
@@ -72,22 +76,29 @@ Public Class dlgAppend
     End Sub
 
     Private Sub chkIncludeIDColumn_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeIDColumn.CheckedChanged
-        includeIDColumn()
+        IncludeIDColumn()
     End Sub
 
     Private Sub ucrInputIDColName_NameChanged() Handles ucrInputIDColName.NameChanged
-        includeIDColumn()
+        IncludeIDColumn()
     End Sub
 
-    Private Sub includeIDColumn()
+    Private Sub IncludeIDColumn()
         If chkIncludeIDColumn.Checked Then
             ucrBase.clsRsyntax.AddParameter(".id", Chr(34) & ucrInputIDColName.GetText & Chr(34))
+            ucrInputIDColName.Visible = True
+            lblIDColNAme.Visible = True
         Else
             ucrBase.clsRsyntax.RemoveParameter(".id")
+            ucrInputIDColName.Visible = False
+            lblIDColNAme.Visible = False
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputNewDataframeName_NameChanged() Handles ucrInputNewDataframeName.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(ucrInputNewDataframeName.GetText(), strTempDataframe:=ucrInputNewDataframeName.GetText())
+        TestOKEnabled()
     End Sub
+
 End Class

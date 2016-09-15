@@ -115,6 +115,7 @@ Partial Class dlgRecodeNumeric
         '
         'ucrInputRecode
         '
+        Me.ucrInputRecode.IsReadOnly = False
         Me.ucrInputRecode.Location = New System.Drawing.Point(114, 234)
         Me.ucrInputRecode.Name = "ucrInputRecode"
         Me.ucrInputRecode.Size = New System.Drawing.Size(145, 21)
@@ -145,6 +146,8 @@ Partial Class dlgRecodeNumeric
         '
         'ucrSelectorForRecode
         '
+        Me.ucrSelectorForRecode.bShowHiddenColumns = False
+        Me.ucrSelectorForRecode.bUseCurrentFilter = False
         Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
@@ -175,6 +178,8 @@ Partial Class dlgRecodeNumeric
         Me.Controls.Add(Me.chkAddLabels)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRecodeNumeric"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Recode"

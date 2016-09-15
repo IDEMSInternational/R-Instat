@@ -174,7 +174,7 @@ Partial Class sdgDescribeTwoVarGraph
         Me.Controls.Add(Me.grpVariateByVariate)
         Me.Controls.Add(Me.grpVariateByFactor)
         Me.Controls.Add(Me.UcrButtonsSubdialogue1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeTwoVarGraph"

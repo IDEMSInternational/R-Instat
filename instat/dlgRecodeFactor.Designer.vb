@@ -41,6 +41,7 @@ Partial Class dlgRecodeFactor
         'ucrSelectorForRecode
         '
         Me.ucrSelectorForRecode.bShowHiddenColumns = False
+        Me.ucrSelectorForRecode.bUseCurrentFilter = False
         Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
@@ -106,6 +107,8 @@ Partial Class dlgRecodeFactor
         Me.Controls.Add(Me.ucrSelectorForRecode)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRecodeFactor"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Recode Factor"
