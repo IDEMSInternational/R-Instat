@@ -110,6 +110,8 @@ Partial Class dlgView
         '
         'ucrSelctorForView
         '
+        Me.ucrSelctorForView.bShowHiddenColumns = False
+        Me.ucrSelctorForView.bUseCurrentFilter = False
         Me.ucrSelctorForView.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelctorForView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelctorForView.Name = "ucrSelctorForView"
@@ -136,6 +138,8 @@ Partial Class dlgView
         Me.Controls.Add(Me.grpDisplayFrom)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgView"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "View Data"

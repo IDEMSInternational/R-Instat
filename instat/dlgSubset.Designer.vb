@@ -22,6 +22,7 @@ Partial Class dlgSubset
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSubset))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSubset = New instat.ucrReceiverMultiple()
@@ -32,58 +33,44 @@ Partial Class dlgSubset
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 263)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
         '
         'ucrDataFrameAddRemove
         '
-        Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(12, 12)
+        Me.ucrDataFrameAddRemove.bShowHiddenColumns = False
+        Me.ucrDataFrameAddRemove.bUseCurrentFilter = False
+        resources.ApplyResources(Me.ucrDataFrameAddRemove, "ucrDataFrameAddRemove")
         Me.ucrDataFrameAddRemove.Name = "ucrDataFrameAddRemove"
-        Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
-        Me.ucrDataFrameAddRemove.TabIndex = 1
         '
         'ucrReceiverSubset
         '
-        Me.ucrReceiverSubset.Location = New System.Drawing.Point(260, 43)
+        resources.ApplyResources(Me.ucrReceiverSubset, "ucrReceiverSubset")
         Me.ucrReceiverSubset.Name = "ucrReceiverSubset"
-        Me.ucrReceiverSubset.Size = New System.Drawing.Size(121, 128)
-        Me.ucrReceiverSubset.TabIndex = 2
+        Me.ucrReceiverSubset.Selector = Nothing
         '
         'lblSelectedVariables
         '
-        Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(260, 27)
+        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(100, 13)
-        Me.lblSelectedVariables.TabIndex = 3
         Me.lblSelectedVariables.Tag = "Selected_variables"
-        Me.lblSelectedVariables.Text = "Selected variable(s)"
         '
         'lblDrop
         '
-        Me.lblDrop.AutoSize = True
-        Me.lblDrop.Location = New System.Drawing.Point(257, 178)
+        resources.ApplyResources(Me.lblDrop, "lblDrop")
         Me.lblDrop.Name = "lblDrop"
-        Me.lblDrop.Size = New System.Drawing.Size(30, 13)
-        Me.lblDrop.TabIndex = 3
         Me.lblDrop.Tag = "Drop"
-        Me.lblDrop.Text = "Drop"
         '
         'cboDrop
         '
         Me.cboDrop.FormattingEnabled = True
-        Me.cboDrop.Location = New System.Drawing.Point(260, 197)
+        resources.ApplyResources(Me.cboDrop, "cboDrop")
         Me.cboDrop.Name = "cboDrop"
-        Me.cboDrop.Size = New System.Drawing.Size(121, 21)
-        Me.cboDrop.TabIndex = 4
         '
         'dlgSubset
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(445, 328)
         Me.Controls.Add(Me.cboDrop)
         Me.Controls.Add(Me.lblDrop)
         Me.Controls.Add(Me.lblSelectedVariables)
@@ -91,9 +78,10 @@ Partial Class dlgSubset
         Me.Controls.Add(Me.ucrDataFrameAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgSubset"
         Me.Tag = "Subset"
-        Me.Text = "Subset"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

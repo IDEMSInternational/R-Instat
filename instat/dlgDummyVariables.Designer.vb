@@ -133,6 +133,7 @@ Partial Class dlgDummyVariables
         'ucrSelectorDummyVariable
         '
         Me.ucrSelectorDummyVariable.bShowHiddenColumns = False
+        Me.ucrSelectorDummyVariable.bUseCurrentFilter = False
         Me.ucrSelectorDummyVariable.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDummyVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDummyVariable.Name = "ucrSelectorDummyVariable"
@@ -178,6 +179,8 @@ Partial Class dlgDummyVariables
         Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDummyVariables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Dummy_Variables"

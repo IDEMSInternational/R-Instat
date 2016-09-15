@@ -145,4 +145,8 @@ Public Class dlgDeleteRowsOrColums
             ucrBase.clsRsyntax.RemoveParameter("num_rows")
         End If
     End Sub
+
+    Private Sub ucrReceiveForColumnsToDelete_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForColumnsToDelete.SelectionChanged
+
+    End Sub
 End Class
