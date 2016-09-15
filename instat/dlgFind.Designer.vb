@@ -153,6 +153,8 @@ Partial Class dlgFind
         Me.Controls.Add(Me.cmdReplace)
         Me.Controls.Add(Me.cmdFindNext)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgFind"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Find"

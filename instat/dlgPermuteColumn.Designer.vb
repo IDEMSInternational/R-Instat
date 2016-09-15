@@ -39,7 +39,7 @@ Partial Class dlgPermuteColumn
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(255, 25)
+        Me.lblSelected.Location = New System.Drawing.Point(255, 13)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 1
@@ -95,6 +95,7 @@ Partial Class dlgPermuteColumn
         '
         'ucrInputPermuteRows
         '
+        Me.ucrInputPermuteRows.IsReadOnly = False
         Me.ucrInputPermuteRows.Location = New System.Drawing.Point(114, 205)
         Me.ucrInputPermuteRows.Name = "ucrInputPermuteRows"
         Me.ucrInputPermuteRows.Size = New System.Drawing.Size(145, 21)
@@ -102,7 +103,7 @@ Partial Class dlgPermuteColumn
         '
         'ucrReceiverPermuteRows
         '
-        Me.ucrReceiverPermuteRows.Location = New System.Drawing.Point(255, 42)
+        Me.ucrReceiverPermuteRows.Location = New System.Drawing.Point(255, 30)
         Me.ucrReceiverPermuteRows.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPermuteRows.Name = "ucrReceiverPermuteRows"
         Me.ucrReceiverPermuteRows.Selector = Nothing
@@ -111,6 +112,8 @@ Partial Class dlgPermuteColumn
         '
         'ucrPermuteRowsSelector
         '
+        Me.ucrPermuteRowsSelector.bShowHiddenColumns = False
+        Me.ucrPermuteRowsSelector.bUseCurrentFilter = False
         Me.ucrPermuteRowsSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrPermuteRowsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrPermuteRowsSelector.Name = "ucrPermuteRowsSelector"
@@ -140,6 +143,8 @@ Partial Class dlgPermuteColumn
         Me.Controls.Add(Me.ucrPermuteRowsSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgPermuteColumn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Permute_Column"
