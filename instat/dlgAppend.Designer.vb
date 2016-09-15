@@ -137,6 +137,8 @@ Partial Class dlgAppend
         Me.Controls.Add(Me.ucrSelectorDataframes)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgAppend"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Append_to_Dataframe"
