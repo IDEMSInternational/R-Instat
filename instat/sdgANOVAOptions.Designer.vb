@@ -22,6 +22,7 @@ Partial Class sdgANOVAOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgANOVAOptions))
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpDisplay = New System.Windows.Forms.TabPage()
         Me.chkContrasts = New System.Windows.Forms.CheckBox()
@@ -50,11 +51,9 @@ Partial Class sdgANOVAOptions
         '
         Me.tbcOptions.Controls.Add(Me.tbpDisplay)
         Me.tbcOptions.Controls.Add(Me.tbpGraphics)
-        Me.tbcOptions.Location = New System.Drawing.Point(-1, -1)
+        resources.ApplyResources(Me.tbcOptions, "tbcOptions")
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
-        Me.tbcOptions.Size = New System.Drawing.Size(345, 208)
-        Me.tbcOptions.TabIndex = 1
         '
         'tbpDisplay
         '
@@ -63,81 +62,53 @@ Partial Class sdgANOVAOptions
         Me.tbpDisplay.Controls.Add(Me.chkMeansAndCounts)
         Me.tbpDisplay.Controls.Add(Me.chkEstimateValues)
         Me.tbpDisplay.Controls.Add(Me.chkANOVATable)
-        Me.tbpDisplay.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpDisplay, "tbpDisplay")
         Me.tbpDisplay.Name = "tbpDisplay"
-        Me.tbpDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpDisplay.Size = New System.Drawing.Size(337, 182)
-        Me.tbpDisplay.TabIndex = 0
         Me.tbpDisplay.Tag = "Display"
-        Me.tbpDisplay.Text = "Display"
         Me.tbpDisplay.UseVisualStyleBackColor = True
         '
         'chkContrasts
         '
-        Me.chkContrasts.AutoSize = True
-        Me.chkContrasts.Location = New System.Drawing.Point(10, 131)
+        resources.ApplyResources(Me.chkContrasts, "chkContrasts")
         Me.chkContrasts.Name = "chkContrasts"
-        Me.chkContrasts.Size = New System.Drawing.Size(70, 17)
-        Me.chkContrasts.TabIndex = 7
         Me.chkContrasts.Tag = "Contrasts"
-        Me.chkContrasts.Text = "Contrasts"
         Me.chkContrasts.UseVisualStyleBackColor = True
         '
         'chkStandardErrors
         '
-        Me.chkStandardErrors.AutoSize = True
-        Me.chkStandardErrors.Location = New System.Drawing.Point(130, 98)
+        resources.ApplyResources(Me.chkStandardErrors, "chkStandardErrors")
         Me.chkStandardErrors.Name = "chkStandardErrors"
-        Me.chkStandardErrors.Size = New System.Drawing.Size(98, 17)
-        Me.chkStandardErrors.TabIndex = 6
         Me.chkStandardErrors.Tag = "Standard_errors"
-        Me.chkStandardErrors.Text = "Standard errors"
         Me.chkStandardErrors.UseVisualStyleBackColor = True
         '
         'chkMeansAndCounts
         '
-        Me.chkMeansAndCounts.AutoSize = True
-        Me.chkMeansAndCounts.Location = New System.Drawing.Point(10, 98)
+        resources.ApplyResources(Me.chkMeansAndCounts, "chkMeansAndCounts")
         Me.chkMeansAndCounts.Name = "chkMeansAndCounts"
-        Me.chkMeansAndCounts.Size = New System.Drawing.Size(114, 17)
-        Me.chkMeansAndCounts.TabIndex = 5
         Me.chkMeansAndCounts.Tag = "Means_and_counts"
-        Me.chkMeansAndCounts.Text = "Means and counts"
         Me.chkMeansAndCounts.UseVisualStyleBackColor = True
         '
         'chkEstimateValues
         '
-        Me.chkEstimateValues.AutoSize = True
-        Me.chkEstimateValues.Location = New System.Drawing.Point(10, 59)
+        resources.ApplyResources(Me.chkEstimateValues, "chkEstimateValues")
         Me.chkEstimateValues.Name = "chkEstimateValues"
-        Me.chkEstimateValues.Size = New System.Drawing.Size(67, 17)
-        Me.chkEstimateValues.TabIndex = 4
         Me.chkEstimateValues.Tag = "P_values"
-        Me.chkEstimateValues.Text = "P values"
         Me.chkEstimateValues.UseVisualStyleBackColor = True
         '
         'chkANOVATable
         '
-        Me.chkANOVATable.AutoSize = True
-        Me.chkANOVATable.Location = New System.Drawing.Point(10, 20)
+        resources.ApplyResources(Me.chkANOVATable, "chkANOVATable")
         Me.chkANOVATable.Name = "chkANOVATable"
-        Me.chkANOVATable.Size = New System.Drawing.Size(93, 17)
-        Me.chkANOVATable.TabIndex = 1
         Me.chkANOVATable.Tag = "ANOVA Table"
-        Me.chkANOVATable.Text = "ANOVA Table"
         Me.chkANOVATable.UseVisualStyleBackColor = True
         '
         'tbpGraphics
         '
         Me.tbpGraphics.Controls.Add(Me.grpMeans)
         Me.tbpGraphics.Controls.Add(Me.grpResiduals)
-        Me.tbpGraphics.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpGraphics, "tbpGraphics")
         Me.tbpGraphics.Name = "tbpGraphics"
-        Me.tbpGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpGraphics.Size = New System.Drawing.Size(337, 182)
-        Me.tbpGraphics.TabIndex = 1
         Me.tbpGraphics.Tag = "Graphics"
-        Me.tbpGraphics.Text = "Graphics"
         Me.tbpGraphics.UseVisualStyleBackColor = True
         '
         'grpMeans
@@ -146,94 +117,68 @@ Partial Class sdgANOVAOptions
         Me.grpMeans.Controls.Add(Me.lblConfidenceLevel)
         Me.grpMeans.Controls.Add(Me.chkConfidenceLimits)
         Me.grpMeans.Controls.Add(Me.chkMeans)
-        Me.grpMeans.Location = New System.Drawing.Point(9, 78)
+        resources.ApplyResources(Me.grpMeans, "grpMeans")
         Me.grpMeans.Name = "grpMeans"
-        Me.grpMeans.Size = New System.Drawing.Size(288, 87)
-        Me.grpMeans.TabIndex = 3
         Me.grpMeans.TabStop = False
         Me.grpMeans.Tag = "Means"
-        Me.grpMeans.Text = "Means"
         '
         'nudConfidenceLevel
         '
-        Me.nudConfidenceLevel.Location = New System.Drawing.Point(149, 61)
+        resources.ApplyResources(Me.nudConfidenceLevel, "nudConfidenceLevel")
         Me.nudConfidenceLevel.Name = "nudConfidenceLevel"
-        Me.nudConfidenceLevel.Size = New System.Drawing.Size(46, 20)
-        Me.nudConfidenceLevel.TabIndex = 4
         Me.nudConfidenceLevel.Value = New Decimal(New Integer() {95, 0, 0, 0})
         '
         'lblConfidenceLevel
         '
-        Me.lblConfidenceLevel.AutoSize = True
-        Me.lblConfidenceLevel.Location = New System.Drawing.Point(50, 68)
+        resources.ApplyResources(Me.lblConfidenceLevel, "lblConfidenceLevel")
         Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
-        Me.lblConfidenceLevel.Size = New System.Drawing.Size(86, 13)
-        Me.lblConfidenceLevel.TabIndex = 3
         Me.lblConfidenceLevel.Tag = "Confidence_level"
-        Me.lblConfidenceLevel.Text = "Confidence level"
         '
         'chkConfidenceLimits
         '
-        Me.chkConfidenceLimits.AutoSize = True
-        Me.chkConfidenceLimits.Location = New System.Drawing.Point(6, 42)
+        resources.ApplyResources(Me.chkConfidenceLimits, "chkConfidenceLimits")
         Me.chkConfidenceLimits.Name = "chkConfidenceLimits"
-        Me.chkConfidenceLimits.Size = New System.Drawing.Size(105, 17)
-        Me.chkConfidenceLimits.TabIndex = 2
         Me.chkConfidenceLimits.Tag = "Confidence_limits"
-        Me.chkConfidenceLimits.Text = "Confidence limits"
         Me.chkConfidenceLimits.UseVisualStyleBackColor = True
         '
         'chkMeans
         '
-        Me.chkMeans.AutoSize = True
-        Me.chkMeans.Location = New System.Drawing.Point(5, 19)
+        resources.ApplyResources(Me.chkMeans, "chkMeans")
         Me.chkMeans.Name = "chkMeans"
-        Me.chkMeans.Size = New System.Drawing.Size(58, 17)
-        Me.chkMeans.TabIndex = 1
         Me.chkMeans.Tag = "Means"
-        Me.chkMeans.Text = "Means"
         Me.chkMeans.UseVisualStyleBackColor = True
         '
         'grpResiduals
         '
         Me.grpResiduals.Controls.Add(Me.chkResiduals)
-        Me.grpResiduals.Location = New System.Drawing.Point(9, 6)
+        resources.ApplyResources(Me.grpResiduals, "grpResiduals")
         Me.grpResiduals.Name = "grpResiduals"
-        Me.grpResiduals.Size = New System.Drawing.Size(288, 66)
-        Me.grpResiduals.TabIndex = 2
         Me.grpResiduals.TabStop = False
         Me.grpResiduals.Tag = "Residuals"
-        Me.grpResiduals.Text = "Residuals"
         '
         'chkResiduals
         '
-        Me.chkResiduals.AutoSize = True
-        Me.chkResiduals.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.chkResiduals, "chkResiduals")
         Me.chkResiduals.Name = "chkResiduals"
-        Me.chkResiduals.Size = New System.Drawing.Size(76, 17)
-        Me.chkResiduals.TabIndex = 0
         Me.chkResiduals.Tag = "Four_in_one"
-        Me.chkResiduals.Text = "four in one"
         Me.chkResiduals.UseVisualStyleBackColor = True
         '
         'ucrBaseSdg
         '
-        Me.ucrBaseSdg.Location = New System.Drawing.Point(65, 213)
+        resources.ApplyResources(Me.ucrBaseSdg, "ucrBaseSdg")
         Me.ucrBaseSdg.Name = "ucrBaseSdg"
-        Me.ucrBaseSdg.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSdg.TabIndex = 2
         '
         'sdgANOVAOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(342, 268)
         Me.Controls.Add(Me.ucrBaseSdg)
         Me.Controls.Add(Me.tbcOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgANOVAOptions"
         Me.Tag = "ANOVA_options"
-        Me.Text = "ANOVA options"
         Me.tbcOptions.ResumeLayout(False)
         Me.tbpDisplay.ResumeLayout(False)
         Me.tbpDisplay.PerformLayout()

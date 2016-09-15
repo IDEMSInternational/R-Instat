@@ -26,17 +26,17 @@ Partial Class sdgRestrict
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpFactor_Level = New System.Windows.Forms.TabPage()
         Me.tbpCondition = New System.Windows.Forms.TabPage()
+        Me.rdoExclude = New System.Windows.Forms.RadioButton()
+        Me.rdoInclude = New System.Windows.Forms.RadioButton()
+        Me.lblSelectedColumn = New System.Windows.Forms.Label()
+        Me.ucrReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelector = New instat.ucrSelectorAddRemove()
+        Me.txtGreaterThan = New System.Windows.Forms.TextBox()
+        Me.txtEqualTo = New System.Windows.Forms.TextBox()
+        Me.txtLessThan = New System.Windows.Forms.TextBox()
         Me.rdoGreaterThan = New System.Windows.Forms.RadioButton()
         Me.rdoEqualTo = New System.Windows.Forms.RadioButton()
         Me.rdoLessThan = New System.Windows.Forms.RadioButton()
-        Me.txtLessThan = New System.Windows.Forms.TextBox()
-        Me.txtEqualTo = New System.Windows.Forms.TextBox()
-        Me.txtGreaterThan = New System.Windows.Forms.TextBox()
-        Me.ucrSelector = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiver = New instat.ucrReceiverSingle()
-        Me.lblSelectedColumn = New System.Windows.Forms.Label()
-        Me.rdoInclude = New System.Windows.Forms.RadioButton()
-        Me.rdoExclude = New System.Windows.Forms.RadioButton()
         Me.tbcOptions.SuspendLayout()
         Me.tbpCondition.SuspendLayout()
         Me.SuspendLayout()
@@ -92,6 +92,80 @@ Partial Class sdgRestrict
         Me.tbpCondition.Text = "Condition"
         Me.tbpCondition.UseVisualStyleBackColor = True
         '
+        'rdoExclude
+        '
+        Me.rdoExclude.AutoSize = True
+        Me.rdoExclude.Location = New System.Drawing.Point(279, 75)
+        Me.rdoExclude.Name = "rdoExclude"
+        Me.rdoExclude.Size = New System.Drawing.Size(63, 17)
+        Me.rdoExclude.TabIndex = 6
+        Me.rdoExclude.TabStop = True
+        Me.rdoExclude.Tag = "Exclude"
+        Me.rdoExclude.Text = "Exclude"
+        Me.rdoExclude.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoExclude.UseVisualStyleBackColor = True
+        '
+        'rdoInclude
+        '
+        Me.rdoInclude.AutoSize = True
+        Me.rdoInclude.Location = New System.Drawing.Point(222, 75)
+        Me.rdoInclude.Name = "rdoInclude"
+        Me.rdoInclude.Size = New System.Drawing.Size(60, 17)
+        Me.rdoInclude.TabIndex = 6
+        Me.rdoInclude.TabStop = True
+        Me.rdoInclude.Tag = "Include"
+        Me.rdoInclude.Text = "Include"
+        Me.rdoInclude.UseVisualStyleBackColor = True
+        '
+        'lblSelectedColumn
+        '
+        Me.lblSelectedColumn.AutoSize = True
+        Me.lblSelectedColumn.Location = New System.Drawing.Point(233, 12)
+        Me.lblSelectedColumn.Name = "lblSelectedColumn"
+        Me.lblSelectedColumn.Size = New System.Drawing.Size(87, 13)
+        Me.lblSelectedColumn.TabIndex = 5
+        Me.lblSelectedColumn.Tag = "Selected_Column"
+        Me.lblSelectedColumn.Text = "Selected Column"
+        '
+        'ucrReceiver
+        '
+        Me.ucrReceiver.Location = New System.Drawing.Point(233, 31)
+        Me.ucrReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiver.Name = "ucrReceiver"
+        Me.ucrReceiver.Selector = Nothing
+        Me.ucrReceiver.Size = New System.Drawing.Size(112, 26)
+        Me.ucrReceiver.TabIndex = 4
+        '
+        'ucrSelector
+        '
+        Me.ucrSelector.bShowHiddenColumns = False
+        Me.ucrSelector.Location = New System.Drawing.Point(7, 5)
+        Me.ucrSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelector.Name = "ucrSelector"
+        Me.ucrSelector.Size = New System.Drawing.Size(199, 127)
+        Me.ucrSelector.TabIndex = 3
+        '
+        'txtGreaterThan
+        '
+        Me.txtGreaterThan.Location = New System.Drawing.Point(290, 183)
+        Me.txtGreaterThan.Name = "txtGreaterThan"
+        Me.txtGreaterThan.Size = New System.Drawing.Size(49, 20)
+        Me.txtGreaterThan.TabIndex = 2
+        '
+        'txtEqualTo
+        '
+        Me.txtEqualTo.Location = New System.Drawing.Point(290, 159)
+        Me.txtEqualTo.Name = "txtEqualTo"
+        Me.txtEqualTo.Size = New System.Drawing.Size(49, 20)
+        Me.txtEqualTo.TabIndex = 2
+        '
+        'txtLessThan
+        '
+        Me.txtLessThan.Location = New System.Drawing.Point(290, 136)
+        Me.txtLessThan.Name = "txtLessThan"
+        Me.txtLessThan.Size = New System.Drawing.Size(49, 20)
+        Me.txtLessThan.TabIndex = 2
+        '
         'rdoGreaterThan
         '
         Me.rdoGreaterThan.AutoSize = True
@@ -128,76 +202,6 @@ Partial Class sdgRestrict
         Me.rdoLessThan.Text = "Less Than"
         Me.rdoLessThan.UseVisualStyleBackColor = True
         '
-        'txtLessThan
-        '
-        Me.txtLessThan.Location = New System.Drawing.Point(290, 136)
-        Me.txtLessThan.Name = "txtLessThan"
-        Me.txtLessThan.Size = New System.Drawing.Size(49, 20)
-        Me.txtLessThan.TabIndex = 2
-        '
-        'txtEqualTo
-        '
-        Me.txtEqualTo.Location = New System.Drawing.Point(290, 159)
-        Me.txtEqualTo.Name = "txtEqualTo"
-        Me.txtEqualTo.Size = New System.Drawing.Size(49, 20)
-        Me.txtEqualTo.TabIndex = 2
-        '
-        'txtGreaterThan
-        '
-        Me.txtGreaterThan.Location = New System.Drawing.Point(290, 183)
-        Me.txtGreaterThan.Name = "txtGreaterThan"
-        Me.txtGreaterThan.Size = New System.Drawing.Size(49, 20)
-        Me.txtGreaterThan.TabIndex = 2
-        '
-        'ucrSelector
-        '
-        Me.ucrSelector.Location = New System.Drawing.Point(7, 5)
-        Me.ucrSelector.Name = "ucrSelector"
-        Me.ucrSelector.Size = New System.Drawing.Size(199, 127)
-        Me.ucrSelector.TabIndex = 3
-        '
-        'ucrReceiver
-        '
-        Me.ucrReceiver.Location = New System.Drawing.Point(233, 31)
-        Me.ucrReceiver.Name = "ucrReceiver"
-        Me.ucrReceiver.Size = New System.Drawing.Size(112, 26)
-        Me.ucrReceiver.TabIndex = 4
-        '
-        'lblSelectedColumn
-        '
-        Me.lblSelectedColumn.AutoSize = True
-        Me.lblSelectedColumn.Location = New System.Drawing.Point(233, 12)
-        Me.lblSelectedColumn.Name = "lblSelectedColumn"
-        Me.lblSelectedColumn.Size = New System.Drawing.Size(87, 13)
-        Me.lblSelectedColumn.TabIndex = 5
-        Me.lblSelectedColumn.Tag = "Selected_Column"
-        Me.lblSelectedColumn.Text = "Selected Column"
-        '
-        'rdoInclude
-        '
-        Me.rdoInclude.AutoSize = True
-        Me.rdoInclude.Location = New System.Drawing.Point(222, 75)
-        Me.rdoInclude.Name = "rdoInclude"
-        Me.rdoInclude.Size = New System.Drawing.Size(60, 17)
-        Me.rdoInclude.TabIndex = 6
-        Me.rdoInclude.TabStop = True
-        Me.rdoInclude.Tag = "Include"
-        Me.rdoInclude.Text = "Include"
-        Me.rdoInclude.UseVisualStyleBackColor = True
-        '
-        'rdoExclude
-        '
-        Me.rdoExclude.AutoSize = True
-        Me.rdoExclude.Location = New System.Drawing.Point(279, 75)
-        Me.rdoExclude.Name = "rdoExclude"
-        Me.rdoExclude.Size = New System.Drawing.Size(63, 17)
-        Me.rdoExclude.TabIndex = 6
-        Me.rdoExclude.TabStop = True
-        Me.rdoExclude.Tag = "Exclude"
-        Me.rdoExclude.Text = "Exclude"
-        Me.rdoExclude.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoExclude.UseVisualStyleBackColor = True
-        '
         'sdgRestrict
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -206,6 +210,8 @@ Partial Class sdgRestrict
         Me.Controls.Add(Me.tbcOptions)
         Me.Controls.Add(Me.ucrSubDialogBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgRestrict"
         Me.Text = "Control Options"
         Me.tbcOptions.ResumeLayout(False)
