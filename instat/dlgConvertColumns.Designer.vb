@@ -148,6 +148,8 @@ Partial Class dlgConvertColumns
         '
         'ucrSelectorDataFrameColumns
         '
+        Me.ucrSelectorDataFrameColumns.bShowHiddenColumns = False
+        Me.ucrSelectorDataFrameColumns.bUseCurrentFilter = False
         Me.ucrSelectorDataFrameColumns.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDataFrameColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrameColumns.Name = "ucrSelectorDataFrameColumns"
@@ -182,6 +184,8 @@ Partial Class dlgConvertColumns
         Me.Controls.Add(Me.ucrReceiverColumnsToConvert)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgConvertColumns"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Convert_columns"
