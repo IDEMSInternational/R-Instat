@@ -46,6 +46,8 @@ Partial Class dlgJitter
         '
         'ucrSelectorForJitter
         '
+        Me.ucrSelectorForJitter.bShowHiddenColumns = False
+        Me.ucrSelectorForJitter.bUseCurrentFilter = False
         Me.ucrSelectorForJitter.Location = New System.Drawing.Point(13, 13)
         Me.ucrSelectorForJitter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForJitter.Name = "ucrSelectorForJitter"
@@ -159,6 +161,8 @@ Partial Class dlgJitter
         Me.Controls.Add(Me.ucrSelectorForJitter)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgJitter"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Jitter"

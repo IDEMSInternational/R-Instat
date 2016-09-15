@@ -33,6 +33,8 @@ Partial Class dlgCombine
         '
         'ucrSelectorCombineFactors
         '
+        Me.ucrSelectorCombineFactors.bShowHiddenColumns = False
+        Me.ucrSelectorCombineFactors.bUseCurrentFilter = False
         Me.ucrSelectorCombineFactors.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorCombineFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCombineFactors.Name = "ucrSelectorCombineFactors"
@@ -71,6 +73,7 @@ Partial Class dlgCombine
         '
         'ucrInputColName
         '
+        Me.ucrInputColName.IsReadOnly = False
         Me.ucrInputColName.Location = New System.Drawing.Point(117, 202)
         Me.ucrInputColName.Name = "ucrInputColName"
         Me.ucrInputColName.Size = New System.Drawing.Size(145, 21)
@@ -106,6 +109,8 @@ Partial Class dlgCombine
         Me.Controls.Add(Me.ucrFactorsReceiver)
         Me.Controls.Add(Me.ucrSelectorCombineFactors)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCombine"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Combine_Factors"
