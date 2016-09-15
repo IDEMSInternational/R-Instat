@@ -59,3 +59,64 @@ next_default_item = function(prefix, existing_names = c(), include_index = TRUE,
   }
   return(out)
 }
+
+import_from_ODK = function(username, password, form_name, platform) {
+  if(platform == "kobo") {
+    url <- "https://kc.kobotoolbox.org/api/v1/data"
+  }
+  else if(platform == "ona") {
+    url <- "https://api.ona.io/api/v1/data"
+  }
+  else stop("Unrecognised platform.")
+  
+  if(!missing(username) && !missing(password)) {
+    has_authentication <- TRUE
+    user <- authenticate(username, password)
+    odk_data <- GET(url, user)
+  }
+  else {
+    has_authentication <- FALSE
+    odk_data <- GET(url)
+  }
+  
+  forms <- content(odk_data, "parse")
+  form_names <- sapply(forms, function(x) x$title)
+  
+  if(!form_name %in% form_names) stop(form_name, " not found in available forms:", paste(form_names, collapse = ", "))
+  form_num <- which(form_names == form_name)
+  form_id <- forms[[form_num]]$id
+  
+  if(has_authentication) curr_form <- GET(paste0(url,"/", form_id), user)
+  else curr_form <- GET(paste0(url,"/", form_id))
+  
+  form_data <- content(curr_form, "text")
+  #TODO Look at how to convert columns that are lists
+  #     maybe use tidyr::unnest
+  out <- fromJSON(form_data, flatten = TRUE)
+  return(out)
+}
+
+get_odk_form_names = function(username, password, platform) {
+  #TODO This should not be repeated
+  if(platform == "kobo") {
+    url <- "https://kc.kobotoolbox.org/api/v1/data"
+  }
+  else if(platform == "ona") {
+    url <- "https://api.ona.io/api/v1/data"
+  }
+  else stop("Unrecognised platform.")
+  
+  if(!missing(username) && !missing(password)) {
+    has_authentication <- TRUE
+    user <- authenticate(username, password)
+    odk_data <- GET(url, user)
+  }
+  else {
+    has_authentication <- FALSE
+    odk_data <- GET(url)
+  }
+  
+  forms <- content(odk_data, "parse")
+  form_names <- sapply(forms, function(x) x$title)
+  return(form_names)
+}
