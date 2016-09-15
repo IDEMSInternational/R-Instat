@@ -39,6 +39,8 @@ Partial Class dlgColumnMetadata
         Me.ClientSize = New System.Drawing.Size(420, 261)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgColumnMetadata"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Column_Metadata"

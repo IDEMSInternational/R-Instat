@@ -61,6 +61,8 @@ Partial Class dlgUnusedLevels
         '
         'ucrSelectorFactorColumn
         '
+        Me.ucrSelectorFactorColumn.bShowHiddenColumns = False
+        Me.ucrSelectorFactorColumn.bUseCurrentFilter = False
         Me.ucrSelectorFactorColumn.Location = New System.Drawing.Point(5, 2)
         Me.ucrSelectorFactorColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactorColumn.Name = "ucrSelectorFactorColumn"
@@ -85,6 +87,8 @@ Partial Class dlgUnusedLevels
         Me.Controls.Add(Me.ucrSelectorFactorColumn)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgUnusedLevels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Remove_Unused_Factor_Levels"

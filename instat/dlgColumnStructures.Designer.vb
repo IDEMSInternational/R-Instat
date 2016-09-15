@@ -100,6 +100,7 @@ Partial Class dlgColumnStructure
         'ucrSelectorColumnStructure
         '
         Me.ucrSelectorColumnStructure.bShowHiddenColumns = False
+        Me.ucrSelectorColumnStructure.bUseCurrentFilter = False
         Me.ucrSelectorColumnStructure.Location = New System.Drawing.Point(12, 9)
         Me.ucrSelectorColumnStructure.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorColumnStructure.Name = "ucrSelectorColumnStructure"
@@ -128,6 +129,8 @@ Partial Class dlgColumnStructure
         Me.Controls.Add(Me.ucrSelectorColumnStructure)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgColumnStructure"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Column_Structure"

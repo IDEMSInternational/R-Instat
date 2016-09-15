@@ -187,6 +187,7 @@ Partial Class dlgRowStats
         '
         'ucrInputcboRowSummary
         '
+        Me.ucrInputcboRowSummary.IsReadOnly = False
         Me.ucrInputcboRowSummary.Location = New System.Drawing.Point(114, 271)
         Me.ucrInputcboRowSummary.Name = "ucrInputcboRowSummary"
         Me.ucrInputcboRowSummary.Size = New System.Drawing.Size(141, 25)
@@ -194,6 +195,8 @@ Partial Class dlgRowStats
         '
         'ucrSelectorForRowStats
         '
+        Me.ucrSelectorForRowStats.bShowHiddenColumns = False
+        Me.ucrSelectorForRowStats.bUseCurrentFilter = False
         Me.ucrSelectorForRowStats.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRowStats.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRowStats.Name = "ucrSelectorForRowStats"
@@ -230,6 +233,8 @@ Partial Class dlgRowStats
         Me.Controls.Add(Me.ucrReceiverForRowStatistics)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRowStats"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Row_statistics"
