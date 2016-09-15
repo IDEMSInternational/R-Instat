@@ -22,42 +22,17 @@ Partial Class dlgAppend
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorDataframes = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiverAppendDataframe = New instat.ucrReceiverMultiple()
         Me.lblAppendToDataframe = New System.Windows.Forms.Label()
         Me.lblDataframes = New System.Windows.Forms.Label()
         Me.lblIDColNAme = New System.Windows.Forms.Label()
         Me.chkIncludeIDColumn = New System.Windows.Forms.CheckBox()
-        Me.ucrInputIDColName = New instat.ucrInputTextBox()
         Me.lblNewDataframeName = New System.Windows.Forms.Label()
         Me.ucrInputNewDataframeName = New instat.ucrInputTextBox()
+        Me.ucrInputIDColName = New instat.ucrInputTextBox()
+        Me.ucrReceiverAppendDataframe = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorDataframes = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 290)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(400, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrSelectorDataframes
-        '
-        Me.ucrSelectorDataframes.bShowHiddenColumns = False
-        Me.ucrSelectorDataframes.Location = New System.Drawing.Point(10, 31)
-        Me.ucrSelectorDataframes.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorDataframes.Name = "ucrSelectorDataframes"
-        Me.ucrSelectorDataframes.Size = New System.Drawing.Size(195, 197)
-        Me.ucrSelectorDataframes.TabIndex = 1
-        '
-        'ucrReceiverAppendDataframe
-        '
-        Me.ucrReceiverAppendDataframe.Location = New System.Drawing.Point(246, 31)
-        Me.ucrReceiverAppendDataframe.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverAppendDataframe.Name = "ucrReceiverAppendDataframe"
-        Me.ucrReceiverAppendDataframe.Selector = Nothing
-        Me.ucrReceiverAppendDataframe.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverAppendDataframe.TabIndex = 2
         '
         'lblAppendToDataframe
         '
@@ -96,14 +71,6 @@ Partial Class dlgAppend
         Me.chkIncludeIDColumn.Text = "Include ID Column"
         Me.chkIncludeIDColumn.UseVisualStyleBackColor = True
         '
-        'ucrInputIDColName
-        '
-        Me.ucrInputIDColName.IsReadOnly = False
-        Me.ucrInputIDColName.Location = New System.Drawing.Point(219, 263)
-        Me.ucrInputIDColName.Name = "ucrInputIDColName"
-        Me.ucrInputIDColName.Size = New System.Drawing.Size(147, 21)
-        Me.ucrInputIDColName.TabIndex = 6
-        '
         'lblNewDataframeName
         '
         Me.lblNewDataframeName.AutoSize = True
@@ -120,6 +87,39 @@ Partial Class dlgAppend
         Me.ucrInputNewDataframeName.Name = "ucrInputNewDataframeName"
         Me.ucrInputNewDataframeName.Size = New System.Drawing.Size(235, 21)
         Me.ucrInputNewDataframeName.TabIndex = 8
+        '
+        'ucrInputIDColName
+        '
+        Me.ucrInputIDColName.IsReadOnly = False
+        Me.ucrInputIDColName.Location = New System.Drawing.Point(219, 263)
+        Me.ucrInputIDColName.Name = "ucrInputIDColName"
+        Me.ucrInputIDColName.Size = New System.Drawing.Size(147, 21)
+        Me.ucrInputIDColName.TabIndex = 6
+        '
+        'ucrReceiverAppendDataframe
+        '
+        Me.ucrReceiverAppendDataframe.Location = New System.Drawing.Point(246, 31)
+        Me.ucrReceiverAppendDataframe.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverAppendDataframe.Name = "ucrReceiverAppendDataframe"
+        Me.ucrReceiverAppendDataframe.Selector = Nothing
+        Me.ucrReceiverAppendDataframe.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverAppendDataframe.TabIndex = 2
+        '
+        'ucrSelectorDataframes
+        '
+        Me.ucrSelectorDataframes.bShowHiddenColumns = False
+        Me.ucrSelectorDataframes.Location = New System.Drawing.Point(10, 31)
+        Me.ucrSelectorDataframes.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDataframes.Name = "ucrSelectorDataframes"
+        Me.ucrSelectorDataframes.Size = New System.Drawing.Size(195, 197)
+        Me.ucrSelectorDataframes.TabIndex = 1
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 290)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(400, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgAppend
         '
