@@ -46,7 +46,6 @@ Public Class frmEditor
         'Needs discussion, with this the grid can show NA's
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
         grdData.SheetTabWidth = 450
-        'grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         SetRFunctions()
     End Sub
     ''' <summary>
@@ -606,7 +605,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrSheet.BeforeCellKeyDown
-        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete Then
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
             MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & vbNewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
             e.IsCancelled = True
         End If
