@@ -47,7 +47,7 @@ Public Class dlgRank
 
     'This runs on load and after anything is changed on the dialog.
     Private Sub TestOKEnabled()
-        If ucrReceiverRank.IsEmpty() = False Then
+        If Not ucrReceiverRank.IsEmpty() AndAlso Not ucrInputColName.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -133,5 +133,6 @@ Public Class dlgRank
 
     Private Sub ucrInputColName_NameChnahed() Handles ucrInputColName.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
+        TestOKEnabled()
     End Sub
 End Class
