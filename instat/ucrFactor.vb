@@ -148,6 +148,8 @@ Public Class ucrFactor
         grdFactorData.Visible = bShowGrid
         If shtCurrSheet IsNot Nothing Then
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, Not bIsEditable)
+            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+            shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             ApplyColumnSettings()
         End If
     End Sub
@@ -375,5 +377,16 @@ Public Class ucrFactor
 
     Private Sub shtCurrSheet_RangeDataChanged(sender As Object, e As RangeEventArgs) Handles shtCurrSheet.RangeDataChanged
         UpdateCells(e.Range.Col)
+    End Sub
+
+    Private Sub shtCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles shtCurrSheet.BeforeCellKeyDown
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & vbNewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            e.IsCancelled = True
+        End If
+    End Sub
+
+    Private Sub shtCurrSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles shtCurrSheet.BeforeCut
+        e.IsCancelled = True
     End Sub
 End Class
