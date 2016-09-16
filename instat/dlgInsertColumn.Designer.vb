@@ -257,12 +257,12 @@ Partial Class dlgInsertColumn
         Me.grpOPtions.Size = New System.Drawing.Size(124, 67)
         Me.grpOPtions.TabIndex = 27
         Me.grpOPtions.TabStop = False
-        Me.grpOPtions.Text = "OPtions"
+        Me.grpOPtions.Text = "Options"
         '
         'rdoAfter
         '
         Me.rdoAfter.AutoSize = True
-        Me.rdoAfter.Location = New System.Drawing.Point(7, 44)
+        Me.rdoAfter.Location = New System.Drawing.Point(6, 44)
         Me.rdoAfter.Name = "rdoAfter"
         Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
         Me.rdoAfter.TabIndex = 1
@@ -273,7 +273,7 @@ Partial Class dlgInsertColumn
         'rdoBefore
         '
         Me.rdoBefore.AutoSize = True
-        Me.rdoBefore.Location = New System.Drawing.Point(7, 20)
+        Me.rdoBefore.Location = New System.Drawing.Point(6, 20)
         Me.rdoBefore.Name = "rdoBefore"
         Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
         Me.rdoBefore.TabIndex = 0

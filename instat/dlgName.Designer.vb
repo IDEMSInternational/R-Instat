@@ -22,6 +22,7 @@ Partial Class dlgName
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgName))
         Me.lblName = New System.Windows.Forms.Label()
         Me.lblCurrentName = New System.Windows.Forms.Label()
         Me.ucrInputNewName = New instat.ucrInputTextBox()
@@ -32,58 +33,43 @@ Partial Class dlgName
         '
         'lblName
         '
-        Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(284, 75)
+        resources.ApplyResources(Me.lblName, "lblName")
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(60, 13)
-        Me.lblName.TabIndex = 1
         Me.lblName.Tag = "New_Name"
-        Me.lblName.Text = "New Name"
         '
         'lblCurrentName
         '
-        Me.lblCurrentName.AutoSize = True
-        Me.lblCurrentName.Location = New System.Drawing.Point(284, 15)
+        resources.ApplyResources(Me.lblCurrentName, "lblCurrentName")
         Me.lblCurrentName.Name = "lblCurrentName"
-        Me.lblCurrentName.Size = New System.Drawing.Size(72, 13)
-        Me.lblCurrentName.TabIndex = 3
-        Me.lblCurrentName.Text = "Current Name"
         '
         'ucrInputNewName
         '
-        Me.ucrInputNewName.Location = New System.Drawing.Point(287, 91)
+        Me.ucrInputNewName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNewName, "ucrInputNewName")
         Me.ucrInputNewName.Name = "ucrInputNewName"
-        Me.ucrInputNewName.Size = New System.Drawing.Size(106, 21)
-        Me.ucrInputNewName.TabIndex = 0
         '
         'ucrSelectVariables
         '
-        Me.ucrSelectVariables.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectVariables.bShowHiddenColumns = False
+        Me.ucrSelectVariables.bUseCurrentFilter = False
+        resources.ApplyResources(Me.ucrSelectVariables, "ucrSelectVariables")
         Me.ucrSelectVariables.Name = "ucrSelectVariables"
-        Me.ucrSelectVariables.Size = New System.Drawing.Size(226, 179)
-        Me.ucrSelectVariables.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 194)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(416, 59)
-        Me.ucrBase.TabIndex = 5
         '
         'ucrReceiverName
         '
-        Me.ucrReceiverName.Location = New System.Drawing.Point(287, 31)
+        resources.ApplyResources(Me.ucrReceiverName, "ucrReceiverName")
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
-        Me.ucrReceiverName.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverName.TabIndex = 2
         '
         'dlgName
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 253)
         Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.lblCurrentName)
         Me.Controls.Add(Me.ucrSelectVariables)
@@ -91,10 +77,10 @@ Partial Class dlgName
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.ucrReceiverName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgName"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Rename_Data_Column"
-        Me.Text = "Rename Data Column"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

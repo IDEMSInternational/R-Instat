@@ -22,6 +22,7 @@ Partial Class dlgCopySheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCopySheet))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
         Me.lblNewSheetName = New System.Windows.Forms.Label()
@@ -30,50 +31,39 @@ Partial Class dlgCopySheet
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 69)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
         '
         'ucrDataFrameCopySheets
         '
-        Me.ucrDataFrameCopySheets.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDataFrameCopySheets.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameCopySheets.bUseCurrentFilter = False
+        resources.ApplyResources(Me.ucrDataFrameCopySheets, "ucrDataFrameCopySheets")
         Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
-        Me.ucrDataFrameCopySheets.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameCopySheets.TabIndex = 1
         '
         'lblNewSheetName
         '
-        Me.lblNewSheetName.AutoSize = True
-        Me.lblNewSheetName.Location = New System.Drawing.Point(150, 31)
+        resources.ApplyResources(Me.lblNewSheetName, "lblNewSheetName")
         Me.lblNewSheetName.Name = "lblNewSheetName"
-        Me.lblNewSheetName.Size = New System.Drawing.Size(118, 13)
-        Me.lblNewSheetName.TabIndex = 2
         Me.lblNewSheetName.Tag = "New_Sheet_Name"
-        Me.lblNewSheetName.Text = "New Data Frame Name"
         '
         'ucrNewDataFrameName
         '
         Me.ucrNewDataFrameName.IsReadOnly = False
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(270, 27)
+        resources.ApplyResources(Me.ucrNewDataFrameName, "ucrNewDataFrameName")
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewDataFrameName.TabIndex = 3
         '
         'dlgCopySheet
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 123)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.lblNewSheetName)
         Me.Controls.Add(Me.ucrDataFrameCopySheets)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCopySheet"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Copy Sheet (s) "
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

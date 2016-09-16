@@ -29,12 +29,6 @@ Public Class dlgHideShowColumns
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverHiddenColumns.IsEmpty = False Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-
     End Sub
 
     Private Sub InitialiseDialog()
