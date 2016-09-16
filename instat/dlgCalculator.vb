@@ -37,15 +37,17 @@ Public Class dlgCalculator
 
     Private Sub TestOKEnabled()
         If Not ucrReceiverForCalculation.IsEmpty Then
-            ucrBase.OKEnabled(True)
+            If chkSaveResultInto.Checked AndAlso ucrSaveResultInto.IsEmpty Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
     Private Sub SetDefaults()
-        cmdTry.Enabled = False
-        ucrSpaceToMangeResult.Enabled = False
         ucrSaveResultInto.SetPrefix("Cal")
         ucrSaveResultInto.Reset()
         ucrInputCalOptions.Reset()
@@ -74,6 +76,9 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings", "Probability", "Dates"})
+        ucrSaveResultInto.SetValidationTypeAsRVariable()
+        ucrSpaceToMangeResult.Enabled = False
+        cmdTry.Enabled = False
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -142,6 +147,7 @@ Public Class dlgCalculator
 
     Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
         SaveResults()
+        TestOKEnabled()
     End Sub
 
     Private Sub SaveResults()
