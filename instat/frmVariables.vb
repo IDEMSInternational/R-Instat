@@ -49,6 +49,8 @@ Public Class frmVariables
         grdCurrSheet = grdVariables.CurrentWorksheet
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         frmMain.strCurrentDataFrame = grdCurrSheet.Name
     End Sub
 
@@ -96,4 +98,25 @@ Public Class frmVariables
     Private Sub frmVariables_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         frmMain.mnuViewColumnMetadata.Checked = Me.Visible
     End Sub
+
+    Private Sub grdCurrSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforeCut
+        e.IsCancelled = True
+    End Sub
+
+    Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
+        MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot paste")
+        e.IsCancelled = True
+    End Sub
+
+    Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrSheet.BeforeCellKeyDown
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot delete cells.")
+            e.IsCancelled = True
+        End If
+    End Sub
+
+    Private Sub grdCurrSheet_BeforeRangeMove(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrSheet.BeforeRangeMove
+        e.IsCancelled = True
+    End Sub
+
 End Class
