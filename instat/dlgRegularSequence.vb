@@ -80,14 +80,18 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoNumeric.Checked Then
-            If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso nudInStepsOf.Text <> "" AndAlso nudRepeatValues.Text <> "" AndAlso ucrDataFrameLengthForRegularSequence.clsDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
+        If Not ucrNewColumnName.IsEmpty Then
+            If rdoNumeric.Checked Then
+                If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso nudInStepsOf.Text <> "" AndAlso nudRepeatValues.Text <> "" AndAlso ucrDataFrameLengthForRegularSequence.clsDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            ElseIf rdoDates.Checked Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
-        ElseIf rdoDates.Checked Then
-            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -119,9 +123,10 @@ Public Class dlgRegularSequence
         TestOKEnabled()
     End Sub
 
-    Private Sub nudInstepsOf_ValueChanged(sender As Object, e As EventArgs) Handles nudInStepsOf.ValueChanged
+    Private Sub nudInstepsOf_TextChanged(sender As Object, e As EventArgs) Handles nudInStepsOf.TextChanged
         SetInStepsOfParameter()
         CheckSequenceLength()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetInStepsOfParameter()
@@ -143,8 +148,9 @@ Public Class dlgRegularSequence
             clsSeqFunction.RemoveParameterByName("by")
         End If
     End Sub
-    Private Sub nudRepeatValues_ValueChanged(sender As Object, e As EventArgs) Handles nudRepeatValues.TextChanged
+    Private Sub nudRepeatValues_TextChanged(sender As Object, e As EventArgs) Handles nudRepeatValues.TextChanged
         SetRepeatProperties()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetRepeatProperties()
@@ -165,9 +171,10 @@ Public Class dlgRegularSequence
         CheckSequenceLength()
     End Sub
 
-    Private Sub nudFrom_ValueChanged(sender As Object, e As EventArgs) Handles nudFrom.TextChanged
+    Private Sub nudFrom_TextChanged(sender As Object, e As EventArgs) Handles nudFrom.TextChanged
         SetFromParameter()
         CheckSequenceLength()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetFromParameter()
@@ -182,9 +189,10 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
-    Private Sub nudTo_ValueChanged(sender As Object, e As EventArgs) Handles nudTo.TextChanged
+    Private Sub nudTo_TextChanged(sender As Object, e As EventArgs) Handles nudTo.TextChanged
         SetToParameter()
         CheckSequenceLength()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetToParameter()
@@ -211,6 +219,7 @@ Public Class dlgRegularSequence
 
     Private Sub ucrInputCboRegularSequence_NameChanged() Handles ucrNewColumnName.NameChanged
         SetAssignTo()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetAssignTo()

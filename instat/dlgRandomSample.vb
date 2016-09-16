@@ -48,6 +48,7 @@ Public Class dlgRandomSample
         ucrNewColumnName.SetDefaultTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRandomSamples)
         ucrNewColumnName.SetValidationTypeAsRVariable()
+        ucrPrefixNewColumns.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()
@@ -170,4 +171,5 @@ Public Class dlgRandomSample
         SetSeedParameters()
         TestOKEnabled()
     End Sub
+
 End Class
