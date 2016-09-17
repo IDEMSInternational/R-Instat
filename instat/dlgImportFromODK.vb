@@ -27,15 +27,23 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If cmdFindForms.Enabled = True AndAlso ucrInputChooseForm.IsEmpty = False AndAlso (rdoKobo.Checked Or rdoOna.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub SetDefaults()
-
+        rdoKobo.Checked = True
+        ucrInputUsername.Reset()
+        ucrInputPassword.Reset()
+        ucrInputChooseForm.Reset()
+        enambleCommandButton()
     End Sub
 
     Private Sub ReopenDialog()
@@ -49,21 +57,44 @@ Public Class dlgImportFromODK
 
     Private Sub rdoKobo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKobo.CheckedChanged, rdoOna.CheckedChanged
         If rdoOna.Checked Then
-
+            ucrBase.clsRsyntax.AddParameter("username", Chr(34) & "ona" & Chr(34))
         Else
-
+            ucrBase.clsRsyntax.AddParameter("username", Chr(34) & "kobo" & Chr(34))
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputUsername_NameChanged() Handles ucrInputUsername.NameChanged
-
+        ucrBase.clsRsyntax.AddParameter("username", Chr(34) & ucrInputUsername.GetText & Chr(34))
+        enambleCommandButton()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputPassword_NameChanged() Handles ucrInputPassword.NameChanged
-
+        ucrBase.clsRsyntax.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
+        enambleCommandButton()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputChooseForm_NameChanged() Handles ucrInputChooseForm.NameChanged
-
+        ucrBase.clsRsyntax.AddParameter("form_name", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
+        TestOKEnabled()
     End Sub
+
+    Private Sub cmdFindForms_click(sender As Object, e As EventArgs) Handles cmdFindForms.Click
+
+        'Dim frmnames As String
+        'Dim strrcommand As String
+        'strrcommand = ucrBase.clsRsyntax.clsBaseFunction.ToScript()
+        'frmnames = frmMain.clsRLink.RunInternalScriptGetValue(strrcommand, bSilent:=True).ToString
+        'ucrInputChooseForm.cboInput.Text = frmnames
+    End Sub
+    Private Sub enambleCommandButton()
+        If ((ucrInputPassword.IsEmpty = False) AndAlso (ucrInputUsername.IsEmpty = False)) Then
+            cmdFindForms.Enabled = True
+        Else
+            cmdFindForms.Enabled = False
+        End If
+    End Sub
+
 End Class
