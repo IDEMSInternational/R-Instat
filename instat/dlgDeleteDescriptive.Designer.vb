@@ -22,6 +22,7 @@ Partial Class dlgDeleteDescriptive
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDeleteDescriptive))
         Me.lblObjectsToDelete = New System.Windows.Forms.Label()
         Me.ucrReceiverObjectsToDelete = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDeleteObject = New instat.ucrSelectorByDataFrameAddRemove()
@@ -30,52 +31,41 @@ Partial Class dlgDeleteDescriptive
         '
         'lblObjectsToDelete
         '
-        Me.lblObjectsToDelete.AutoSize = True
-        Me.lblObjectsToDelete.Location = New System.Drawing.Point(255, 25)
+        resources.ApplyResources(Me.lblObjectsToDelete, "lblObjectsToDelete")
         Me.lblObjectsToDelete.Name = "lblObjectsToDelete"
-        Me.lblObjectsToDelete.Size = New System.Drawing.Size(89, 13)
-        Me.lblObjectsToDelete.TabIndex = 2
         Me.lblObjectsToDelete.Tag = "Objects_to_Delete"
-        Me.lblObjectsToDelete.Text = "Objects to Delete"
         '
         'ucrReceiverObjectsToDelete
         '
-        Me.ucrReceiverObjectsToDelete.Location = New System.Drawing.Point(255, 41)
-        Me.ucrReceiverObjectsToDelete.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverObjectsToDelete, "ucrReceiverObjectsToDelete")
         Me.ucrReceiverObjectsToDelete.Name = "ucrReceiverObjectsToDelete"
         Me.ucrReceiverObjectsToDelete.Selector = Nothing
-        Me.ucrReceiverObjectsToDelete.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverObjectsToDelete.TabIndex = 3
         '
         'ucrSelectorDeleteObject
         '
-        Me.ucrSelectorDeleteObject.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorDeleteObject.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDeleteObject.bShowHiddenColumns = False
+        Me.ucrSelectorDeleteObject.bUseCurrentFilter = False
+        resources.ApplyResources(Me.ucrSelectorDeleteObject, "ucrSelectorDeleteObject")
         Me.ucrSelectorDeleteObject.Name = "ucrSelectorDeleteObject"
-        Me.ucrSelectorDeleteObject.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDeleteObject.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 199)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
         '
         'dlgDeleteDescriptive
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 253)
         Me.Controls.Add(Me.ucrReceiverObjectsToDelete)
         Me.Controls.Add(Me.lblObjectsToDelete)
         Me.Controls.Add(Me.ucrSelectorDeleteObject)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDeleteDescriptive"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Delete_Object"
-        Me.Text = "Delete Object"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
