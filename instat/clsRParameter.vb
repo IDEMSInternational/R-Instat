@@ -21,6 +21,7 @@ Public Class RParameter
     Public clsArgumentOperator As ROperator
     Public bIsFunction As Boolean = False
     Public bIsOperator As Boolean = False
+    Public bIncludeArgumentName As Boolean = True
 
     Public Sub SetArgumentName(strTemp As String)
         strArgumentName = strTemp
@@ -44,9 +45,10 @@ Public Class RParameter
         bIsOperator = True
     End Sub
 
-    Public Function ToScript(ByRef strScript As String, Optional bIncludeName As Boolean = True) As String
+    Public Function ToScript(ByRef strScript As String) As String
         Dim strRet As String = ""
-        If strArgumentName <> "" And bIncludeName Then
+
+        If strArgumentName <> "" AndAlso bIncludeArgumentName Then
             strRet = strArgumentName & "="
         End If
         If bIsFunction Then

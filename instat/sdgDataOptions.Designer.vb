@@ -24,17 +24,17 @@ Partial Class sdgDataOptions
     Private Sub InitializeComponent()
         Me.tbcDataOptions = New System.Windows.Forms.TabControl()
         Me.tbRows = New System.Windows.Forms.TabPage()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.grpApplyOptions = New System.Windows.Forms.GroupBox()
         Me.rdoForDialog = New System.Windows.Forms.RadioButton()
         Me.rdoAllDialogs = New System.Windows.Forms.RadioButton()
         Me.cmdDefineNewFilter = New System.Windows.Forms.Button()
         Me.lblFilter = New System.Windows.Forms.Label()
-        Me.tbColumns = New System.Windows.Forms.TabPage()
-        Me.chkShowHiddenColumns = New System.Windows.Forms.CheckBox()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
         Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrame()
+        Me.tbColumns = New System.Windows.Forms.TabPage()
+        Me.chkShowHiddenColumns = New System.Windows.Forms.CheckBox()
         Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
         Me.tbcDataOptions.SuspendLayout()
         Me.tbRows.SuspendLayout()
@@ -69,6 +69,14 @@ Partial Class sdgDataOptions
         Me.tbRows.Tag = "Rows"
         Me.tbRows.Text = "Rows"
         Me.tbRows.UseVisualStyleBackColor = True
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.IsReadOnly = False
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(128, 209)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(167, 21)
+        Me.ucrInputFilterPreview.TabIndex = 6
         '
         'lblFilterPreview
         '
@@ -134,6 +142,23 @@ Partial Class sdgDataOptions
         Me.lblFilter.Tag = "Filter"
         Me.lblFilter.Text = "Filter"
         '
+        'ucrReceiverFilter
+        '
+        Me.ucrReceiverFilter.Location = New System.Drawing.Point(175, 34)
+        Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
+        Me.ucrReceiverFilter.Selector = Nothing
+        Me.ucrReceiverFilter.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFilter.TabIndex = 2
+        '
+        'ucrSelectorFilters
+        '
+        Me.ucrSelectorFilters.Location = New System.Drawing.Point(8, 8)
+        Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
+        Me.ucrSelectorFilters.Size = New System.Drawing.Size(120, 180)
+        Me.ucrSelectorFilters.TabIndex = 0
+        '
         'tbColumns
         '
         Me.tbColumns.Controls.Add(Me.chkShowHiddenColumns)
@@ -157,30 +182,6 @@ Partial Class sdgDataOptions
         Me.chkShowHiddenColumns.Text = "Show Hidden Columns in Selector"
         Me.chkShowHiddenColumns.UseVisualStyleBackColor = True
         '
-        'ucrInputFilterPreview
-        '
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(128, 209)
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(167, 21)
-        Me.ucrInputFilterPreview.TabIndex = 6
-        '
-        'ucrReceiverFilter
-        '
-        Me.ucrReceiverFilter.Location = New System.Drawing.Point(175, 34)
-        Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
-        Me.ucrReceiverFilter.Selector = Nothing
-        Me.ucrReceiverFilter.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFilter.TabIndex = 2
-        '
-        'ucrSelectorFilters
-        '
-        Me.ucrSelectorFilters.Location = New System.Drawing.Point(8, 8)
-        Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
-        Me.ucrSelectorFilters.Size = New System.Drawing.Size(120, 180)
-        Me.ucrSelectorFilters.TabIndex = 0
-        '
         'ucrSubDialogueBase
         '
         Me.ucrSubDialogueBase.Location = New System.Drawing.Point(88, 323)
@@ -196,6 +197,8 @@ Partial Class sdgDataOptions
         Me.Controls.Add(Me.tbcDataOptions)
         Me.Controls.Add(Me.ucrSubDialogueBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgDataOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Data_Options"

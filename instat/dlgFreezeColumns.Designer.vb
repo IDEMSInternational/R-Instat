@@ -30,6 +30,8 @@ Partial Class dlgFreezeColumns
         '
         'ucrSelectorByDataFrameAddRemoveforFreezeColumns
         '
+        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bShowHiddenColumns = False
+        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bUseCurrentFilter = False
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Location = New System.Drawing.Point(12, 0)
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Name = "ucrSelectorByDataFrameAddRemoveforFreezeColumns"
@@ -38,7 +40,7 @@ Partial Class dlgFreezeColumns
         '
         'ucrReceiverMultipleforFreezeColumns
         '
-        Me.ucrReceiverMultipleforFreezeColumns.Location = New System.Drawing.Point(259, 80)
+        Me.ucrReceiverMultipleforFreezeColumns.Location = New System.Drawing.Point(240, 28)
         Me.ucrReceiverMultipleforFreezeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleforFreezeColumns.Name = "ucrReceiverMultipleforFreezeColumns"
         Me.ucrReceiverMultipleforFreezeColumns.Selector = Nothing
@@ -55,7 +57,7 @@ Partial Class dlgFreezeColumns
         'lblFreezeColumns
         '
         Me.lblFreezeColumns.AutoSize = True
-        Me.lblFreezeColumns.Location = New System.Drawing.Point(259, 55)
+        Me.lblFreezeColumns.Location = New System.Drawing.Point(237, 9)
         Me.lblFreezeColumns.Name = "lblFreezeColumns"
         Me.lblFreezeColumns.Size = New System.Drawing.Size(82, 13)
         Me.lblFreezeColumns.TabIndex = 3
@@ -71,6 +73,8 @@ Partial Class dlgFreezeColumns
         Me.Controls.Add(Me.ucrReceiverMultipleforFreezeColumns)
         Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgFreezeColumns"
         Me.Text = "Freeze Columns"
         Me.ResumeLayout(False)

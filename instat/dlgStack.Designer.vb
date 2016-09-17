@@ -89,6 +89,7 @@ Partial Class dlgStack
         '
         'ucrNewDataName
         '
+        Me.ucrNewDataName.IsReadOnly = False
         Me.ucrNewDataName.Location = New System.Drawing.Point(130, 201)
         Me.ucrNewDataName.Name = "ucrNewDataName"
         Me.ucrNewDataName.Size = New System.Drawing.Size(145, 21)
@@ -96,6 +97,7 @@ Partial Class dlgStack
         '
         'ucrStackDataInto
         '
+        Me.ucrStackDataInto.IsReadOnly = False
         Me.ucrStackDataInto.Location = New System.Drawing.Point(130, 252)
         Me.ucrStackDataInto.Name = "ucrStackDataInto"
         Me.ucrStackDataInto.Size = New System.Drawing.Size(145, 21)
@@ -103,6 +105,7 @@ Partial Class dlgStack
         '
         'ucrFactorInto
         '
+        Me.ucrFactorInto.IsReadOnly = False
         Me.ucrFactorInto.Location = New System.Drawing.Point(130, 227)
         Me.ucrFactorInto.Name = "ucrFactorInto"
         Me.ucrFactorInto.Size = New System.Drawing.Size(145, 21)
@@ -119,6 +122,8 @@ Partial Class dlgStack
         '
         'ucrSelectorStack
         '
+        Me.ucrSelectorStack.bShowHiddenColumns = False
+        Me.ucrSelectorStack.bUseCurrentFilter = False
         Me.ucrSelectorStack.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorStack.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStack.Name = "ucrSelectorStack"
@@ -159,6 +164,8 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblColumnsTostack)
         Me.Controls.Add(Me.ucrReceiverColumnsToBeStack)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgStack"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Stack_join_columns"

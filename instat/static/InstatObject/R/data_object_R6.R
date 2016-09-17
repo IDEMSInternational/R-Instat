@@ -33,6 +33,10 @@ data_object <- R6Class("data_object",
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
   if ( !(is.null(data_name) || data_name == "" || missing(data_name))) {
+    if(data_name != make.names(data_name)) {
+      message("data_name is invalid. It will be made valid automatically.")
+      data_name <- make.names(data_name)
+    }
     self$append_to_metadata(data_name_label, data_name)
   }
   else if (!self$is_metadata(data_name_label)) {
@@ -818,8 +822,12 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
     stop(paste(start_row, " not found in rows"))
   }
   row_position = which(curr_row_names == start_row)
-  row_data <- data.frame(matrix(NA, nrow = number_rows, ncol = ncol(curr_data)))
-  colnames(row_data) <- colnames(curr_data)
+  row_data <- curr_data[0, ]
+  for(i in 1:number_rows) {
+    row_data[i, ] <- NA
+  }
+  #row_data <- data.frame(matrix(NA, nrow = number_rows, ncol = ncol(curr_data)))
+  #colnames(row_data) <- colnames(curr_data)
   if(length(curr_row_names[!is.na(as.numeric(curr_row_names))]) > 0) {
     rownames(row_data) <- max(as.numeric(curr_row_names), na.rm = TRUE) + 1:number_rows
   }
@@ -1104,7 +1112,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
 )
 
 data_object$set("public", "set_hidden_columns", function(col_names) {
-  if(col_names == "") self$unhide_all_columns()
+  if(length(col_names) == 0) self$unhide_all_columns()
   else {
     if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
     

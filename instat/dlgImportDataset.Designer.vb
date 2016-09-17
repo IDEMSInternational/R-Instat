@@ -39,12 +39,20 @@ Partial Class dlgImportDataset
         Me.nudSkip = New System.Windows.Forms.NumericUpDown()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
+        Me.ucrInputHeaders = New instat.ucrInputComboBox()
         Me.pnlRowNames = New System.Windows.Forms.Panel()
         Me.rdoRowNamesNo = New System.Windows.Forms.RadioButton()
         Me.rdoRowNamesYes = New System.Windows.Forms.RadioButton()
+        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
+        Me.ucrInputDecimal = New instat.ucrInputComboBox()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
+        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
         Me.lblMissingValueString = New System.Windows.Forms.Label()
+        Me.ucrInputXlMissingValueString = New instat.ucrInputTextBox()
         Me.lblNamedRegion = New System.Windows.Forms.Label()
+        Me.ucrInputNamedRegions = New instat.ucrInputComboBox()
+        Me.ucrInputSheets = New instat.ucrInputComboBox()
         Me.lblRowToSkip = New System.Windows.Forms.Label()
         Me.lblSheets = New System.Windows.Forms.Label()
         Me.nudxlRowsToSkip = New System.Windows.Forms.NumericUpDown()
@@ -59,14 +67,6 @@ Partial Class dlgImportDataset
         Me.chkExistingData = New System.Windows.Forms.CheckBox()
         Me.lblCannotImport = New System.Windows.Forms.Label()
         Me.lblNoPreview = New System.Windows.Forms.Label()
-        Me.ucrInputXlMissingValueString = New instat.ucrInputTextBox()
-        Me.ucrInputNamedRegions = New instat.ucrInputComboBox()
-        Me.ucrInputSheets = New instat.ucrInputComboBox()
-        Me.ucrInputHeaders = New instat.ucrInputComboBox()
-        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
-        Me.ucrInputDecimal = New instat.ucrInputComboBox()
-        Me.ucrInputSeparator = New instat.ucrInputComboBox()
-        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
@@ -267,6 +267,14 @@ Partial Class dlgImportDataset
         Me.grpCSV.Text = "Import csv Options"
         Me.grpCSV.Visible = False
         '
+        'ucrInputHeaders
+        '
+        Me.ucrInputHeaders.IsReadOnly = False
+        Me.ucrInputHeaders.Location = New System.Drawing.Point(9, 82)
+        Me.ucrInputHeaders.Name = "ucrInputHeaders"
+        Me.ucrInputHeaders.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputHeaders.TabIndex = 43
+        '
         'pnlRowNames
         '
         Me.pnlRowNames.Controls.Add(Me.rdoRowNamesNo)
@@ -300,6 +308,38 @@ Partial Class dlgImportDataset
         Me.rdoRowNamesYes.Text = "Yes"
         Me.rdoRowNamesYes.UseVisualStyleBackColor = True
         '
+        'ucrInputNAStrings
+        '
+        Me.ucrInputNAStrings.IsReadOnly = False
+        Me.ucrInputNAStrings.Location = New System.Drawing.Point(5, 247)
+        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
+        Me.ucrInputNAStrings.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNAStrings.TabIndex = 39
+        '
+        'ucrInputDecimal
+        '
+        Me.ucrInputDecimal.IsReadOnly = False
+        Me.ucrInputDecimal.Location = New System.Drawing.Point(74, 196)
+        Me.ucrInputDecimal.Name = "ucrInputDecimal"
+        Me.ucrInputDecimal.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDecimal.TabIndex = 36
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.IsReadOnly = False
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(74, 154)
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSeparator.TabIndex = 35
+        '
+        'ucrInputEncoding
+        '
+        Me.ucrInputEncoding.IsReadOnly = False
+        Me.ucrInputEncoding.Location = New System.Drawing.Point(62, 25)
+        Me.ucrInputEncoding.Name = "ucrInputEncoding"
+        Me.ucrInputEncoding.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputEncoding.TabIndex = 33
+        '
         'grpExcel
         '
         Me.grpExcel.Controls.Add(Me.lblMissingValueString)
@@ -328,6 +368,14 @@ Partial Class dlgImportDataset
         Me.lblMissingValueString.TabIndex = 19
         Me.lblMissingValueString.Text = "Missing Value String"
         '
+        'ucrInputXlMissingValueString
+        '
+        Me.ucrInputXlMissingValueString.IsReadOnly = False
+        Me.ucrInputXlMissingValueString.Location = New System.Drawing.Point(5, 144)
+        Me.ucrInputXlMissingValueString.Name = "ucrInputXlMissingValueString"
+        Me.ucrInputXlMissingValueString.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputXlMissingValueString.TabIndex = 18
+        '
         'lblNamedRegion
         '
         Me.lblNamedRegion.AutoSize = True
@@ -336,6 +384,22 @@ Partial Class dlgImportDataset
         Me.lblNamedRegion.Size = New System.Drawing.Size(90, 13)
         Me.lblNamedRegion.TabIndex = 17
         Me.lblNamedRegion.Text = "or Named Region"
+        '
+        'ucrInputNamedRegions
+        '
+        Me.ucrInputNamedRegions.IsReadOnly = False
+        Me.ucrInputNamedRegions.Location = New System.Drawing.Point(4, 96)
+        Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
+        Me.ucrInputNamedRegions.Size = New System.Drawing.Size(154, 21)
+        Me.ucrInputNamedRegions.TabIndex = 16
+        '
+        'ucrInputSheets
+        '
+        Me.ucrInputSheets.IsReadOnly = False
+        Me.ucrInputSheets.Location = New System.Drawing.Point(6, 43)
+        Me.ucrInputSheets.Name = "ucrInputSheets"
+        Me.ucrInputSheets.Size = New System.Drawing.Size(154, 21)
+        Me.ucrInputSheets.TabIndex = 15
         '
         'lblRowToSkip
         '
@@ -484,70 +548,6 @@ Partial Class dlgImportDataset
         Me.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblNoPreview.Visible = False
         '
-        'ucrInputXlMissingValueString
-        '
-        Me.ucrInputXlMissingValueString.IsReadOnly = False
-        Me.ucrInputXlMissingValueString.Location = New System.Drawing.Point(5, 144)
-        Me.ucrInputXlMissingValueString.Name = "ucrInputXlMissingValueString"
-        Me.ucrInputXlMissingValueString.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputXlMissingValueString.TabIndex = 18
-        '
-        'ucrInputNamedRegions
-        '
-        Me.ucrInputNamedRegions.IsReadOnly = False
-        Me.ucrInputNamedRegions.Location = New System.Drawing.Point(4, 96)
-        Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
-        Me.ucrInputNamedRegions.Size = New System.Drawing.Size(154, 21)
-        Me.ucrInputNamedRegions.TabIndex = 16
-        '
-        'ucrInputSheets
-        '
-        Me.ucrInputSheets.IsReadOnly = False
-        Me.ucrInputSheets.Location = New System.Drawing.Point(6, 43)
-        Me.ucrInputSheets.Name = "ucrInputSheets"
-        Me.ucrInputSheets.Size = New System.Drawing.Size(154, 21)
-        Me.ucrInputSheets.TabIndex = 15
-        '
-        'ucrInputHeaders
-        '
-        Me.ucrInputHeaders.IsReadOnly = False
-        Me.ucrInputHeaders.Location = New System.Drawing.Point(9, 82)
-        Me.ucrInputHeaders.Name = "ucrInputHeaders"
-        Me.ucrInputHeaders.Size = New System.Drawing.Size(149, 21)
-        Me.ucrInputHeaders.TabIndex = 43
-        '
-        'ucrInputNAStrings
-        '
-        Me.ucrInputNAStrings.IsReadOnly = False
-        Me.ucrInputNAStrings.Location = New System.Drawing.Point(5, 247)
-        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
-        Me.ucrInputNAStrings.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputNAStrings.TabIndex = 39
-        '
-        'ucrInputDecimal
-        '
-        Me.ucrInputDecimal.IsReadOnly = False
-        Me.ucrInputDecimal.Location = New System.Drawing.Point(74, 196)
-        Me.ucrInputDecimal.Name = "ucrInputDecimal"
-        Me.ucrInputDecimal.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDecimal.TabIndex = 36
-        '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.IsReadOnly = False
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(74, 154)
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSeparator.TabIndex = 35
-        '
-        'ucrInputEncoding
-        '
-        Me.ucrInputEncoding.IsReadOnly = False
-        Me.ucrInputEncoding.Location = New System.Drawing.Point(62, 25)
-        Me.ucrInputEncoding.Name = "ucrInputEncoding"
-        Me.ucrInputEncoding.Size = New System.Drawing.Size(149, 21)
-        Me.ucrInputEncoding.TabIndex = 33
-        '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.IsReadOnly = False
@@ -559,7 +559,7 @@ Partial Class dlgImportDataset
         'ucrInputName
         '
         Me.ucrInputName.IsReadOnly = False
-        Me.ucrInputName.Location = New System.Drawing.Point(130, 56)
+        Me.ucrInputName.Location = New System.Drawing.Point(128, 61)
         Me.ucrInputName.Name = "ucrInputName"
         Me.ucrInputName.Size = New System.Drawing.Size(102, 21)
         Me.ucrInputName.TabIndex = 15

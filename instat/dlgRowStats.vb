@@ -41,7 +41,7 @@ Public Class dlgRowStats
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForRowStatistics.IsEmpty Then
+        If Not ucrReceiverForRowStatistics.IsEmpty AndAlso Not ucrInputcboRowSummary.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -106,5 +106,6 @@ Public Class dlgRowStats
 
     Private Sub ucrInputcboRowSummary_NameChanged() Handles ucrInputcboRowSummary.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputcboRowSummary.GetText, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputcboRowSummary.GetText)
+        TestOKEnabled()
     End Sub
 End Class

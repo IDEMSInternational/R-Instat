@@ -18,7 +18,6 @@ Imports RDotNet
 
 Public Class dlgReplace
     Public bFirstLoad As Boolean = True
-    Dim strVarType As String
     Dim clsGetDataType As New RFunction
 
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -36,6 +35,7 @@ Public Class dlgReplace
     Private Sub InitialiseDialog()
         ucrBaseReplace.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         ucrReceiverReplace.Selector = ucrSelectorReplace
+        ucrReceiverReplace.SetSingleTypeStatus(True)
         ucrReceiverReplace.SetMeAsReceiver()
         ucrBaseReplace.iHelpTopicID = 47
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
@@ -74,48 +74,6 @@ Public Class dlgReplace
         End If
     End Sub
 
-    Private Sub CheckType()
-        Dim strVariableTypes As List(Of String)
-        Dim strOldType As String
-        strOldType = strVarType
-        If (Not ucrReceiverReplace.IsEmpty()) Then
-            clsGetDataType.AddParameter("data_name", Chr(34) & ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-            clsGetDataType.AddParameter("column", ucrReceiverReplace.GetVariableNames())
-            If ucrReceiverReplace.lstSelectedVariables.Items.Count = 1 Then
-                strVarType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
-                If (strVarType = "numeric" OrElse strVarType = "integer") Then
-                    ucrReceiverReplace.SetDataType("numeric")
-                Else
-                    ucrReceiverReplace.SetDataType(strVarType)
-                End If
-            ElseIf strVarType = "" AndAlso ucrReceiverReplace.lstSelectedVariables.Items.Count > 1 Then
-                strVariableTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter.ToList()
-                If strVariableTypes.Distinct().Count > 1 AndAlso Not (strVariableTypes.Distinct().Count = 2 AndAlso strVariableTypes.Distinct().Contains("numeric") AndAlso strVariableTypes.Distinct().Contains("integer")) Then
-                    MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
-                    ucrReceiverReplace.Clear()
-                Else
-                    If strVariableTypes.Distinct().Count = 1 Then
-                        strVarType = strVariableTypes(0)
-                    Else
-                        strVarType = "numeric"
-                    End If
-                    ucrReceiverReplace.SetDataType(strVarType)
-                End If
-            End If
-        Else
-            strVarType = ""
-            ucrReceiverReplace.RemoveIncludedMetadataProperty(strProperty:="class")
-        End If
-        If rdoOldValue.Checked Then
-            rdoOldValue.Checked = False
-            rdoOldValue.Checked = True
-        End If
-        If rdoNewValue.Checked Then
-            rdoNewValue.Checked = False
-            rdoNewValue.Checked = True
-        End If
-    End Sub
-
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseReplace.ClickReset
         SetDefaults()
         TestOKEnabled()
@@ -127,16 +85,30 @@ Public Class dlgReplace
     End Sub
 
     Private Sub ucrReceiverReplace_SelectionChanged() Handles ucrReceiverReplace.SelectionChanged
-        CheckType()
+        If rdoOldValue.Checked Then
+            rdoOldValue.Checked = False
+            rdoOldValue.Checked = True
+        End If
+        If rdoNewValue.Checked Then
+            rdoNewValue.Checked = False
+            rdoNewValue.Checked = True
+        End If
         RangeEnable()
         ucrBaseReplace.clsRsyntax.AddParameter("col_names", ucrReceiverReplace.GetVariableNames())
         TestOKEnabled()
     End Sub
 
     Private Sub InputOldValue()
+        Dim strVarType As String
+
         If ucrInputOldValue.IsEmpty() Then
             ucrBaseReplace.clsRsyntax.RemoveParameter("old_value")
         Else
+            If Not ucrReceiverReplace.IsEmpty Then
+                strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
+            Else
+                strVarType = ""
+            End If
             If (strVarType = "numeric" OrElse strVarType = "integer") Then
                 ucrBaseReplace.clsRsyntax.AddParameter("old_value", ucrInputOldValue.GetText)
             Else
@@ -146,9 +118,16 @@ Public Class dlgReplace
     End Sub
 
     Private Sub InputNewValue()
+        Dim strVarType As String
+
         If ucrInputNewValue.IsEmpty() Then
             ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
         Else
+            If Not ucrReceiverReplace.IsEmpty Then
+                strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
+            Else
+                strVarType = ""
+            End If
             If (strVarType = "numeric" OrElse strVarType = "integer") Then
                 ucrBaseReplace.clsRsyntax.AddParameter("new_value", ucrInputNewValue.GetText())
             Else
@@ -325,6 +304,14 @@ Public Class dlgReplace
     End Sub
 
     Private Sub RangeEnable()
+        Dim strVarType As String
+
+        If Not ucrReceiverReplace.IsEmpty Then
+            strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
+        Else
+            strVarType = ""
+        End If
+
         If strVarType = "" OrElse strVarType = "numeric" OrElse strVarType = "integer" Then
             rdoRange.Enabled = True
         Else
