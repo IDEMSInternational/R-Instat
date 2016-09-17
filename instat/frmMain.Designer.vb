@@ -351,6 +351,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuImportFromOpenDataKit = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1723,7 +1724,7 @@ Partial Class frmMain
         '
         Me.mnuFileSave.Name = "mnuFileSave"
         Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuFileSave.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileSave.Size = New System.Drawing.Size(224, 22)
         Me.mnuFileSave.Tag = "Save"
         Me.mnuFileSave.Text = "Save"
         '
@@ -1731,7 +1732,7 @@ Partial Class frmMain
         '
         Me.mnuFileSaveAs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileSaveAsDataAs, Me.mnuFileSaveAsOutputAs, Me.mnuFileSaveAsLogAs, Me.mnuFileSaveAsScriptAs})
         Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
-        Me.mnuFileSaveAs.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileSaveAs.Size = New System.Drawing.Size(224, 22)
         Me.mnuFileSaveAs.Tag = "Save_As"
         Me.mnuFileSaveAs.Text = "Save As"
         '
@@ -1763,26 +1764,26 @@ Partial Class frmMain
         '
         Me.mnuFilePrint.Name = "mnuFilePrint"
         Me.mnuFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mnuFilePrint.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFilePrint.Size = New System.Drawing.Size(224, 22)
         Me.mnuFilePrint.Tag = "Print"
         Me.mnuFilePrint.Text = "Print"
         '
         'mnuFilePrintPreview
         '
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
-        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(224, 22)
         Me.mnuFilePrintPreview.Tag = "Print_Preview"
         Me.mnuFilePrintPreview.Text = "Print Preview"
         '
         'tlSeparatorFile3
         '
         Me.tlSeparatorFile3.Name = "tlSeparatorFile3"
-        Me.tlSeparatorFile3.Size = New System.Drawing.Size(201, 6)
+        Me.tlSeparatorFile3.Size = New System.Drawing.Size(221, 6)
         '
         'mnuFIleExit
         '
         Me.mnuFIleExit.Name = "mnuFIleExit"
-        Me.mnuFIleExit.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFIleExit.Size = New System.Drawing.Size(224, 22)
         Me.mnuFIleExit.Tag = "Exit"
         Me.mnuFIleExit.Text = "Exit"
         '
@@ -2040,7 +2041,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuImportFromOpenDataKit, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -2050,7 +2051,7 @@ Partial Class frmMain
         '
         Me.mnuFileNewDataFrame.Name = "mnuFileNewDataFrame"
         Me.mnuFileNewDataFrame.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.mnuFileNewDataFrame.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileNewDataFrame.Size = New System.Drawing.Size(224, 22)
         Me.mnuFileNewDataFrame.Tag = "New_Data_Frame"
         Me.mnuFileNewDataFrame.Text = "New Data Frame"
         '
@@ -2058,33 +2059,33 @@ Partial Class frmMain
         '
         Me.mnuFileOpenFromFile.Name = "mnuFileOpenFromFile"
         Me.mnuFileOpenFromFile.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.mnuFileOpenFromFile.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileOpenFromFile.Size = New System.Drawing.Size(224, 22)
         Me.mnuFileOpenFromFile.Tag = "Open_From_File"
         Me.mnuFileOpenFromFile.Text = "Open From File"
         '
         'mnuFileOpenFromLibrary
         '
         Me.mnuFileOpenFromLibrary.Name = "mnuFileOpenFromLibrary"
-        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(224, 22)
         Me.mnuFileOpenFromLibrary.Tag = "Open_From_Library"
         Me.mnuFileOpenFromLibrary.Text = "Open From Library"
         '
         'tlSeparatorFile
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
-        Me.tlSeparatorFile.Size = New System.Drawing.Size(201, 6)
+        Me.tlSeparatorFile.Size = New System.Drawing.Size(221, 6)
         '
         'mnuExport
         '
         Me.mnuExport.Name = "mnuExport"
-        Me.mnuExport.Size = New System.Drawing.Size(204, 22)
+        Me.mnuExport.Size = New System.Drawing.Size(224, 22)
         Me.mnuExport.Text = "Export Data"
         '
         'mnuFileCloseData
         '
         Me.mnuFileCloseData.Enabled = False
         Me.mnuFileCloseData.Name = "mnuFileCloseData"
-        Me.mnuFileCloseData.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileCloseData.Size = New System.Drawing.Size(224, 22)
         Me.mnuFileCloseData.Text = "Close Data File"
         '
         'mnuOrganise
@@ -2758,6 +2759,12 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
+        'mnuImportFromOpenDataKit
+        '
+        Me.mnuImportFromOpenDataKit.Name = "mnuImportFromOpenDataKit"
+        Me.mnuImportFromOpenDataKit.Size = New System.Drawing.Size(224, 22)
+        Me.mnuImportFromOpenDataKit.Text = "Import from Open Data Kit..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3110,4 +3117,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator24 As ToolStripSeparator
     Friend WithEvents mnuClimaticFile As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileOpensst As ToolStripMenuItem
+    Friend WithEvents mnuImportFromOpenDataKit As ToolStripMenuItem
 End Class
