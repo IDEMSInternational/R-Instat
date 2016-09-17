@@ -1,5 +1,5 @@
 # Necessary packages for the Instat Object
-packs <- c("openxlsx", "reshape2", "lubridate","plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "plotrix", "agridat", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "tidyr", "ggfortify", "rio", "readxl", "lme4", "dummies")
+packs <- c("openxlsx", "reshape2", "lubridate","plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "plotrix", "agridat", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "tidyr", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite")
 # Packages including dependencies (generated from miniCRAN package)
 packs <- c("openxlsx", "reshape2", "lubridate", "plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "Rcpp", "stringr", "stringi", "magrittr", "R.oo", "R.methodsS3", "digest", "gtable", "MASS", "scales", "RColorBrewer", "dichromat", "munsell", "labeling", "colorspace", "Lmoments", "distillery", "car", "mgcv", "nnet", "pbkrtest", "quantreg", "nlme", "Matrix", "SparseM", "MatrixModels", "lattice", "minqa", "nloptr", "RcppEigen", "reshape", "fda", "fields", "spam", "maps", "latticeExtra", "cluster", "ellipse", "flashClust", "leaps", "scatterplot3d", "data.table", "dplyr", "knitr", "chron", "assertthat", "tibble", "lazyeval", "DBI", "BH", "evaluate", "formatR", "highr", "markdown", "yaml", "mime", "heplots", "mapproj", "hexbin", "mapdata", "RgoogleMaps", "png", "RJSONIO", "boot", "zoo", "XML", "selectr", "RCurl", "bitops", "httr", "memoise", "whisker", "rstudioapi", "jsonlite", "git2r", "withr", "curl", "openssl", "dendextend", "ggrepel", "abind", "fpc", "mclust", "flexmix", "prabclus", "class", "diptest", "mvtnorm", "robustbase", "kernlab", "trimcluster", "modeltools", "DEoptimR", "GlobalOptions", "shape", "urltools", "foreign", "haven", "readODS", "xml2", "readr", "feather", "cellranger")
 success <- invisible(sapply(packs, function(x) length(find.package(x, quiet = TRUE))>0))
@@ -42,6 +42,8 @@ library(dummies)
 library(ggthemes)
 library(lazyeval)
 library(stringr)
+library(httr)
+library(jsonlite)
 setwd(dirname(parent.frame(2)$ofile))
 
 
