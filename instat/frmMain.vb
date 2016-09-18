@@ -1092,7 +1092,7 @@ Public Class frmMain
         dlgFitModel.ShowDialog()
     End Sub
 
-    Private Sub mnuImportFromOpenDataKit_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenDataKit.Click
+    Private Sub mnuImportFromOpenDataKit_Click(sender As Object, e As EventArgs) Handles mnuImportFromODK.Click
         dlgImportFromODK.ShowDialog()
     End Sub
 End Class
