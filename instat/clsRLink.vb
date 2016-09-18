@@ -204,6 +204,7 @@ Public Class RLink
         Dim strScriptWithComment As String
         Dim strSplitScript As String
         strOutput = ""
+
         If strComment <> "" Then
             strComment = "# " & strComment
             strScriptWithComment = strComment & vbCrLf & strScript
@@ -405,6 +406,7 @@ Public Class RLink
         frmSetupLoading.Show()
         RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
+        CreateNewInstatObject()
         frmSetupLoading.Close()
         frmMain.Cursor = Cursors.Default
     End Sub
