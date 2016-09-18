@@ -41,6 +41,15 @@ Partial Class sdgSimpleRegOptions
         Me.chkANOVA = New System.Windows.Forms.CheckBox()
         Me.chkModel = New System.Windows.Forms.CheckBox()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
+        Me.tbSave = New System.Windows.Forms.TabPage()
+        Me.ucrLeverageColumnName = New instat.ucrInputComboBox()
+        Me.ucrStdResidualsColumnName = New instat.ucrInputComboBox()
+        Me.ucrResidualsColumnName = New instat.ucrInputComboBox()
+        Me.ucrFittedColumnName = New instat.ucrInputComboBox()
+        Me.chkFittedValues = New System.Windows.Forms.CheckBox()
+        Me.chkResiduals = New System.Windows.Forms.CheckBox()
+        Me.chkStdResiduals = New System.Windows.Forms.CheckBox()
+        Me.chkLeverage = New System.Windows.Forms.CheckBox()
         Me.tbGraphics.SuspendLayout()
         Me.grpModel.SuspendLayout()
         CType(Me.nudGraphicsCLevel, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,6 +57,7 @@ Partial Class sdgSimpleRegOptions
         Me.tbDisplay.SuspendLayout()
         CType(Me.nudDisplayCLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbRegOptions.SuspendLayout()
+        Me.tbSave.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrSdgButtons
@@ -64,7 +74,7 @@ Partial Class sdgSimpleRegOptions
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(246, 167)
+        Me.tbGraphics.Size = New System.Drawing.Size(238, 167)
         Me.tbGraphics.TabIndex = 1
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
@@ -173,7 +183,7 @@ Partial Class sdgSimpleRegOptions
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbDisplay.Name = "tbDisplay"
         Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(246, 167)
+        Me.tbDisplay.Size = New System.Drawing.Size(238, 167)
         Me.tbDisplay.TabIndex = 0
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
@@ -259,17 +269,113 @@ Partial Class sdgSimpleRegOptions
         '
         Me.tbRegOptions.Controls.Add(Me.tbDisplay)
         Me.tbRegOptions.Controls.Add(Me.tbGraphics)
+        Me.tbRegOptions.Controls.Add(Me.tbSave)
         Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
         Me.tbRegOptions.Name = "tbRegOptions"
         Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(254, 193)
+        Me.tbRegOptions.Size = New System.Drawing.Size(246, 193)
         Me.tbRegOptions.TabIndex = 0
+        '
+        'tbSave
+        '
+        Me.tbSave.Controls.Add(Me.ucrLeverageColumnName)
+        Me.tbSave.Controls.Add(Me.ucrStdResidualsColumnName)
+        Me.tbSave.Controls.Add(Me.ucrResidualsColumnName)
+        Me.tbSave.Controls.Add(Me.ucrFittedColumnName)
+        Me.tbSave.Controls.Add(Me.chkFittedValues)
+        Me.tbSave.Controls.Add(Me.chkResiduals)
+        Me.tbSave.Controls.Add(Me.chkStdResiduals)
+        Me.tbSave.Controls.Add(Me.chkLeverage)
+        Me.tbSave.Location = New System.Drawing.Point(4, 22)
+        Me.tbSave.Name = "tbSave"
+        Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbSave.Size = New System.Drawing.Size(238, 167)
+        Me.tbSave.TabIndex = 2
+        Me.tbSave.Tag = "Save"
+        Me.tbSave.Text = "Save"
+        Me.tbSave.UseVisualStyleBackColor = True
+        '
+        'ucrLeverageColumnName
+        '
+        Me.ucrLeverageColumnName.IsReadOnly = False
+        Me.ucrLeverageColumnName.Location = New System.Drawing.Point(108, 120)
+        Me.ucrLeverageColumnName.Name = "ucrLeverageColumnName"
+        Me.ucrLeverageColumnName.Size = New System.Drawing.Size(115, 21)
+        Me.ucrLeverageColumnName.TabIndex = 19
+        '
+        'ucrStdResidualsColumnName
+        '
+        Me.ucrStdResidualsColumnName.IsReadOnly = False
+        Me.ucrStdResidualsColumnName.Location = New System.Drawing.Point(108, 83)
+        Me.ucrStdResidualsColumnName.Name = "ucrStdResidualsColumnName"
+        Me.ucrStdResidualsColumnName.Size = New System.Drawing.Size(115, 21)
+        Me.ucrStdResidualsColumnName.TabIndex = 17
+        '
+        'ucrResidualsColumnName
+        '
+        Me.ucrResidualsColumnName.IsReadOnly = False
+        Me.ucrResidualsColumnName.Location = New System.Drawing.Point(108, 45)
+        Me.ucrResidualsColumnName.Name = "ucrResidualsColumnName"
+        Me.ucrResidualsColumnName.Size = New System.Drawing.Size(115, 21)
+        Me.ucrResidualsColumnName.TabIndex = 15
+        '
+        'ucrFittedColumnName
+        '
+        Me.ucrFittedColumnName.IsReadOnly = False
+        Me.ucrFittedColumnName.Location = New System.Drawing.Point(108, 9)
+        Me.ucrFittedColumnName.Name = "ucrFittedColumnName"
+        Me.ucrFittedColumnName.Size = New System.Drawing.Size(115, 21)
+        Me.ucrFittedColumnName.TabIndex = 13
+        '
+        'chkFittedValues
+        '
+        Me.chkFittedValues.AutoSize = True
+        Me.chkFittedValues.Location = New System.Drawing.Point(13, 13)
+        Me.chkFittedValues.Name = "chkFittedValues"
+        Me.chkFittedValues.Size = New System.Drawing.Size(87, 17)
+        Me.chkFittedValues.TabIndex = 4
+        Me.chkFittedValues.Tag = "Fitted_Values"
+        Me.chkFittedValues.Text = "Fitted Values"
+        Me.chkFittedValues.UseVisualStyleBackColor = True
+        '
+        'chkResiduals
+        '
+        Me.chkResiduals.AutoSize = True
+        Me.chkResiduals.Location = New System.Drawing.Point(13, 49)
+        Me.chkResiduals.Name = "chkResiduals"
+        Me.chkResiduals.Size = New System.Drawing.Size(72, 17)
+        Me.chkResiduals.TabIndex = 3
+        Me.chkResiduals.Tag = "Residuals"
+        Me.chkResiduals.Text = "Residuals"
+        Me.chkResiduals.UseVisualStyleBackColor = True
+        '
+        'chkStdResiduals
+        '
+        Me.chkStdResiduals.AutoSize = True
+        Me.chkStdResiduals.Location = New System.Drawing.Point(13, 87)
+        Me.chkStdResiduals.Name = "chkStdResiduals"
+        Me.chkStdResiduals.Size = New System.Drawing.Size(91, 17)
+        Me.chkStdResiduals.TabIndex = 2
+        Me.chkStdResiduals.Tag = "Std_Residuals"
+        Me.chkStdResiduals.Text = "Std Residuals"
+        Me.chkStdResiduals.UseVisualStyleBackColor = True
+        '
+        'chkLeverage
+        '
+        Me.chkLeverage.AutoSize = True
+        Me.chkLeverage.Location = New System.Drawing.Point(13, 124)
+        Me.chkLeverage.Name = "chkLeverage"
+        Me.chkLeverage.Size = New System.Drawing.Size(71, 17)
+        Me.chkLeverage.TabIndex = 1
+        Me.chkLeverage.Tag = "Leverage"
+        Me.chkLeverage.Text = "Leverage"
+        Me.chkLeverage.UseVisualStyleBackColor = True
         '
         'sdgSimpleRegOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(255, 233)
+        Me.ClientSize = New System.Drawing.Size(251, 233)
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -288,6 +394,8 @@ Partial Class sdgSimpleRegOptions
         Me.tbDisplay.PerformLayout()
         CType(Me.nudDisplayCLevel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbRegOptions.ResumeLayout(False)
+        Me.tbSave.ResumeLayout(False)
+        Me.tbSave.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -311,4 +419,13 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents chkANOVA As CheckBox
     Friend WithEvents chkModel As CheckBox
     Friend WithEvents tbRegOptions As TabControl
+    Friend WithEvents tbSave As TabPage
+    Friend WithEvents chkFittedValues As CheckBox
+    Friend WithEvents chkResiduals As CheckBox
+    Friend WithEvents chkStdResiduals As CheckBox
+    Friend WithEvents chkLeverage As CheckBox
+    Friend WithEvents ucrFittedColumnName As ucrInputComboBox
+    Friend WithEvents ucrLeverageColumnName As ucrInputComboBox
+    Friend WithEvents ucrStdResidualsColumnName As ucrInputComboBox
+    Friend WithEvents ucrResidualsColumnName As ucrInputComboBox
 End Class

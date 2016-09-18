@@ -22,6 +22,7 @@ Partial Class dlgMetadata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMetadata))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectByMetadata = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverChooseProperty = New instat.ucrReceiverSingle()
@@ -40,126 +41,86 @@ Partial Class dlgMetadata
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 255)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(402, 52)
-        Me.ucrBase.TabIndex = 0
         '
         'ucrSelectByMetadata
         '
         Me.ucrSelectByMetadata.bShowHiddenColumns = False
         Me.ucrSelectByMetadata.bUseCurrentFilter = False
-        Me.ucrSelectByMetadata.Location = New System.Drawing.Point(12, 13)
-        Me.ucrSelectByMetadata.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectByMetadata, "ucrSelectByMetadata")
         Me.ucrSelectByMetadata.Name = "ucrSelectByMetadata"
-        Me.ucrSelectByMetadata.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectByMetadata.TabIndex = 8
         '
         'ucrReceiverChooseProperty
         '
-        Me.ucrReceiverChooseProperty.Location = New System.Drawing.Point(216, 38)
-        Me.ucrReceiverChooseProperty.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverChooseProperty, "ucrReceiverChooseProperty")
         Me.ucrReceiverChooseProperty.Name = "ucrReceiverChooseProperty"
         Me.ucrReceiverChooseProperty.Selector = Nothing
-        Me.ucrReceiverChooseProperty.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverChooseProperty.TabIndex = 10
         '
         'rdoChooseProperty
         '
-        Me.rdoChooseProperty.AutoSize = True
-        Me.rdoChooseProperty.Location = New System.Drawing.Point(6, 8)
+        resources.ApplyResources(Me.rdoChooseProperty, "rdoChooseProperty")
         Me.rdoChooseProperty.Name = "rdoChooseProperty"
-        Me.rdoChooseProperty.Size = New System.Drawing.Size(103, 17)
-        Me.rdoChooseProperty.TabIndex = 11
         Me.rdoChooseProperty.TabStop = True
-        Me.rdoChooseProperty.Text = "Choose Property"
         Me.rdoChooseProperty.UseVisualStyleBackColor = True
         '
         'rdoDefineNewProperty
         '
-        Me.rdoDefineNewProperty.AutoSize = True
-        Me.rdoDefineNewProperty.Location = New System.Drawing.Point(115, 8)
+        resources.ApplyResources(Me.rdoDefineNewProperty, "rdoDefineNewProperty")
         Me.rdoDefineNewProperty.Name = "rdoDefineNewProperty"
-        Me.rdoDefineNewProperty.Size = New System.Drawing.Size(121, 17)
-        Me.rdoDefineNewProperty.TabIndex = 11
         Me.rdoDefineNewProperty.TabStop = True
-        Me.rdoDefineNewProperty.Text = "Define new Property"
         Me.rdoDefineNewProperty.UseVisualStyleBackColor = True
         '
         'lblChooseColumns
         '
-        Me.lblChooseColumns.AutoSize = True
-        Me.lblChooseColumns.Location = New System.Drawing.Point(223, 63)
+        resources.ApplyResources(Me.lblChooseColumns, "lblChooseColumns")
         Me.lblChooseColumns.Name = "lblChooseColumns"
-        Me.lblChooseColumns.Size = New System.Drawing.Size(92, 13)
-        Me.lblChooseColumns.TabIndex = 12
-        Me.lblChooseColumns.Text = "Choose Column(s)"
         '
         'ucrReceiverChooseColumns
         '
-        Me.ucrReceiverChooseColumns.Location = New System.Drawing.Point(226, 80)
-        Me.ucrReceiverChooseColumns.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverChooseColumns, "ucrReceiverChooseColumns")
         Me.ucrReceiverChooseColumns.Name = "ucrReceiverChooseColumns"
         Me.ucrReceiverChooseColumns.Selector = Nothing
-        Me.ucrReceiverChooseColumns.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverChooseColumns.TabIndex = 13
         '
         'lblCurrentValue
         '
-        Me.lblCurrentValue.AutoSize = True
-        Me.lblCurrentValue.Location = New System.Drawing.Point(9, 206)
+        resources.ApplyResources(Me.lblCurrentValue, "lblCurrentValue")
         Me.lblCurrentValue.Name = "lblCurrentValue"
-        Me.lblCurrentValue.Size = New System.Drawing.Size(70, 13)
-        Me.lblCurrentValue.TabIndex = 14
-        Me.lblCurrentValue.Text = "Current value"
         '
         'lblNewValue
         '
-        Me.lblNewValue.AutoSize = True
-        Me.lblNewValue.Location = New System.Drawing.Point(9, 239)
+        resources.ApplyResources(Me.lblNewValue, "lblNewValue")
         Me.lblNewValue.Name = "lblNewValue"
-        Me.lblNewValue.Size = New System.Drawing.Size(58, 13)
-        Me.lblNewValue.TabIndex = 15
-        Me.lblNewValue.Text = "New value"
         '
         'ucrCurrentValue
         '
         Me.ucrCurrentValue.IsReadOnly = False
-        Me.ucrCurrentValue.Location = New System.Drawing.Point(97, 202)
+        resources.ApplyResources(Me.ucrCurrentValue, "ucrCurrentValue")
         Me.ucrCurrentValue.Name = "ucrCurrentValue"
-        Me.ucrCurrentValue.Size = New System.Drawing.Size(249, 21)
-        Me.ucrCurrentValue.TabIndex = 16
         '
         'ucrReceiverNewValue
         '
-        Me.ucrReceiverNewValue.Location = New System.Drawing.Point(97, 229)
+        resources.ApplyResources(Me.ucrReceiverNewValue, "ucrReceiverNewValue")
         Me.ucrReceiverNewValue.Name = "ucrReceiverNewValue"
-        Me.ucrReceiverNewValue.Size = New System.Drawing.Size(187, 23)
-        Me.ucrReceiverNewValue.TabIndex = 17
         '
         'grpProperty
         '
         Me.grpProperty.Controls.Add(Me.rdoChooseProperty)
         Me.grpProperty.Controls.Add(Me.rdoDefineNewProperty)
-        Me.grpProperty.Location = New System.Drawing.Point(216, -2)
+        resources.ApplyResources(Me.grpProperty, "grpProperty")
         Me.grpProperty.Name = "grpProperty"
-        Me.grpProperty.Size = New System.Drawing.Size(243, 33)
-        Me.grpProperty.TabIndex = 18
         Me.grpProperty.TabStop = False
         '
         'ucrInputDefineProperty
         '
         Me.ucrInputDefineProperty.IsReadOnly = False
-        Me.ucrInputDefineProperty.Location = New System.Drawing.Point(216, 37)
+        resources.ApplyResources(Me.ucrInputDefineProperty, "ucrInputDefineProperty")
         Me.ucrInputDefineProperty.Name = "ucrInputDefineProperty"
-        Me.ucrInputDefineProperty.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDefineProperty.TabIndex = 19
         '
         'dlgMetadata
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(471, 308)
         Me.Controls.Add(Me.ucrInputDefineProperty)
         Me.Controls.Add(Me.grpProperty)
         Me.Controls.Add(Me.ucrReceiverNewValue)
@@ -172,10 +133,10 @@ Partial Class dlgMetadata
         Me.Controls.Add(Me.ucrSelectByMetadata)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgMetadata"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Metadata"
-        Me.Text = "Metadata"
         Me.grpProperty.ResumeLayout(False)
         Me.grpProperty.PerformLayout()
         Me.ResumeLayout(False)
