@@ -45,7 +45,7 @@ Partial Class dlgDescribeTwoVarGraph
         'lblSecondVariable
         '
         Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(311, 154)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(302, 154)
         Me.lblSecondVariable.Name = "lblSecondVariable"
         Me.lblSecondVariable.Size = New System.Drawing.Size(85, 13)
         Me.lblSecondVariable.TabIndex = 14
@@ -53,7 +53,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'ucrReceiverMultipleTwoVar
         '
-        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(293, 12)
+        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(284, 12)
         Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
         Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 130)
         Me.ucrReceiverMultipleTwoVar.TabIndex = 15
@@ -61,7 +61,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'ucrSecondVariableReceiver
         '
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(293, 172)
+        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(284, 172)
         Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
         Me.ucrSecondVariableReceiver.Selector = Nothing
@@ -95,7 +95,7 @@ Partial Class dlgDescribeTwoVarGraph
         'lblFirstVariables
         '
         Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(311, 21)
+        Me.lblFirstVariables.Location = New System.Drawing.Point(302, 21)
         Me.lblFirstVariables.Name = "lblFirstVariables"
         Me.lblFirstVariables.Size = New System.Drawing.Size(78, 13)
         Me.lblFirstVariables.TabIndex = 16
@@ -106,7 +106,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 289)
+        Me.ClientSize = New System.Drawing.Size(416, 289)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
