@@ -50,7 +50,6 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub SetDefaults()
-        ucrBaseDescribeTwoVar.clsRsyntax.iCallType = 2
         clsRCorelation.SetRCommand("cor")
         clsRCustomSummary.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsRFreqTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$frequency_tables")
@@ -65,7 +64,7 @@ Public Class dlgDescribeTwoVariable
         sdgSummaries.SetDefaults()
         sdgDescribeDisplay.SetDefaults()
         ucrSelectorDescribeTwoVar.Reset()
-        chkSaveResult.Checked = False
+        ucrReceiverFirstVar.Focus()
         StoreResultsParamenter()
         OutputOption()
         TestOKEnabled()
@@ -74,9 +73,9 @@ Public Class dlgDescribeTwoVariable
     Private Sub InitialiseDialog()
         ucrBaseDescribeTwoVar.clsRsyntax.iCallType = 2
         ucrReceiverFirstVar.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverFirstVar.SetSingleTypeStatus(True)
         ucrReceiverFirstVar.SetMeAsReceiver()
+        ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
         clsGetSecondDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
@@ -153,6 +152,14 @@ Public Class dlgDescribeTwoVariable
         clsRAnova.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
+    Private Sub uucrReceiverSecondVar_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondVar.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrReceiverFirstVar_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstVar.SelectionChanged
+
+    End Sub
+
     Private Sub ucrReceiverFirstVar_SelectionChanged() Handles ucrReceiverFirstVar.SelectionChanged
         If Not ucrReceiverFirstVar.IsEmpty Then
             clsRCustomSummary.AddParameter("columns_to_summarise", ucrReceiverFirstVar.GetVariableNames())
@@ -181,6 +188,11 @@ Public Class dlgDescribeTwoVariable
     Private Sub chkDisplayResults_CheckedChanged(sender As Object, e As EventArgs)
         StoreResultsParamenter()
         OutputOption()
+    End Sub
+
+    Private Sub ucrBaseDescribeTwoVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeTwoVar.ClickReset
+        SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub StoreResultsParamenter()
