@@ -24,6 +24,7 @@ Public Class ucrReceiverMetadataProperty
         nudParamValue.Visible = False
         ucrCboParamValue.Visible = False
         ucrColor.Visible = False
+        ucrInputTextValue.Visible = False
         If Not IsNothing(clsLayerParam) Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
