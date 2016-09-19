@@ -48,13 +48,15 @@ Public Class dlgStack
         End If
     End Sub
 
-
-
     Private Sub TestOKEnabled()
         If ucrReceiverColumnsToBeStack.IsEmpty() OrElse ucrNewDataName.IsEmpty() OrElse ucrStackDataInto.IsEmpty() OrElse ucrFactorInto.IsEmpty() Then
             ucrBase.OKEnabled(False)
         Else
-            ucrBase.OKEnabled(True)
+            If chkColumnsToCarry.Checked AndAlso ucrColumnsToCarryReceiver.IsEmpty Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         End If
     End Sub
 
@@ -95,6 +97,7 @@ Public Class dlgStack
 
     Private Sub chkIDVariables_CheckedChanged(sender As Object, e As EventArgs) Handles chkColumnsToCarry.CheckedChanged
         SetColumnsToCarryProperties()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetColumnsToCarryProperties()
@@ -110,7 +113,7 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrReceiverColumnsToBeStack_SelectionChanged() Handles ucrReceiverColumnsToBeStack.SelectionChanged
-        If Not ucrReceiverColumnsToBeStack.IsEmpty Then
+        If Not ucrReceiverColumnsToBeStack.IsEmpty = False Then
             ucrBase.clsRsyntax.AddParameter("measure.vars", ucrReceiverColumnsToBeStack.GetVariableNames())
         Else
             ucrBase.clsRsyntax.RemoveParameter("measure.vars")
@@ -129,6 +132,7 @@ Public Class dlgStack
         Else
             ucrBase.clsRsyntax.AddParameter("id.vars", "NULL")
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorStack_DataFrameChanged() Handles ucrSelectorStack.DataFrameChanged
@@ -144,6 +148,7 @@ Public Class dlgStack
         If e.KeyChar = vbCr Then
             chkColumnsToCarry.Checked = Not chkColumnsToCarry.Checked
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -162,9 +167,19 @@ Public Class dlgStack
 
     Private Sub ucrFactorInto_NameChanged() Handles ucrFactorInto.NameChanged
         SetFactorIntoText()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrStackDataInto_NameChanged() Handles ucrStackDataInto.NameChanged
         SetStackIntoText()
     End Sub
+
+    Private Sub ucrIDVariablesReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColumnsToCarryReceiver.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrReceiverColumnsToBeStack_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToBeStack.SelectionChanged
+
+    End Sub
+
 End Class
