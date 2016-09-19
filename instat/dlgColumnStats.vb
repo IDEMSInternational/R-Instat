@@ -55,6 +55,7 @@ Public Class dlgColumnStats
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
         ucrReceiverSelectedVariables.SetMeAsReceiver()
         ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
+        ' only allow numeric variables in the first receiver? 
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"}) 'This needs to change
         ucrBase.iHelpTopicID = 64
         clsRColumnStats.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
