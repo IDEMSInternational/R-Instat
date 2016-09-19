@@ -53,10 +53,10 @@ Public Class dlgTransposeColumns
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverColumsToTranspose.IsEmpty Then
-            ucrBaseTransposeColumns.OKEnabled(False)
-        Else
+        If Not ucrReceiverColumsToTranspose.IsEmpty AndAlso Not ucrNewDataFrameName.IsEmpty Then
             ucrBaseTransposeColumns.OKEnabled(True)
+        Else
+            ucrBaseTransposeColumns.OKEnabled(False)
         End If
     End Sub
 
@@ -85,6 +85,10 @@ Public Class dlgTransposeColumns
 
     Private Sub chkNameNewColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNameNewColumns.CheckedChanged
         'this is not yet implemented.
+    End Sub
+
+    Private Sub ucrReceiverColumsToTranspose_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverColumsToTranspose.SelectionChanged
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseTransposeColumns.ClickReset

@@ -29,7 +29,7 @@ Public Class dlgCopySheet
         TestOKEnabled()
     End Sub
     Private Sub TestOKEnabled()
-        If ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "" Then
+        If Not ucrNewDataFrameName.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -64,5 +64,7 @@ Public Class dlgCopySheet
 
     Private Sub ucrNewSheetName_NameChanged() Handles ucrNewDataFrameName.NameChanged
         ucrBase.clsRsyntax.AddParameter("new_name", Chr(34) & ucrNewDataFrameName.GetText & Chr(34))
+        TestOKEnabled()
     End Sub
+
 End Class
