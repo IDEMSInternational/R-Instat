@@ -94,4 +94,5 @@ Public Class dlgCombine
     Private Sub ucrSelectorCombineFactors_DataFrameChanged() Handles ucrSelectorCombineFactors.DataFrameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
     End Sub
+
 End Class
