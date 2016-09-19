@@ -108,4 +108,5 @@ Public Class dlgSplitText
         End If
         TestOKEnabled()
     End Sub
+
 End Class
