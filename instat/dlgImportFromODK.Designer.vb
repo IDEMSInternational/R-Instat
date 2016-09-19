@@ -32,6 +32,7 @@ Partial Class dlgImportFromODK
         Me.ucrInputPassword = New instat.ucrInputTextBox()
         Me.ucrInputUsername = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdFindForms = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblChoosePlatform
@@ -86,7 +87,7 @@ Partial Class dlgImportFromODK
         'lblChooseForm
         '
         Me.lblChooseForm.AutoSize = True
-        Me.lblChooseForm.Location = New System.Drawing.Point(9, 98)
+        Me.lblChooseForm.Location = New System.Drawing.Point(9, 123)
         Me.lblChooseForm.Name = "lblChooseForm"
         Me.lblChooseForm.Size = New System.Drawing.Size(72, 13)
         Me.lblChooseForm.TabIndex = 6
@@ -95,7 +96,7 @@ Partial Class dlgImportFromODK
         'ucrInputChooseForm
         '
         Me.ucrInputChooseForm.IsReadOnly = False
-        Me.ucrInputChooseForm.Location = New System.Drawing.Point(105, 94)
+        Me.ucrInputChooseForm.Location = New System.Drawing.Point(105, 117)
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
         Me.ucrInputChooseForm.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputChooseForm.TabIndex = 13
@@ -118,16 +119,26 @@ Partial Class dlgImportFromODK
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 135)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 144)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(420, 52)
         Me.ucrBase.TabIndex = 10
+        '
+        'cmdFindForms
+        '
+        Me.cmdFindForms.Location = New System.Drawing.Point(12, 88)
+        Me.cmdFindForms.Name = "cmdFindForms"
+        Me.cmdFindForms.Size = New System.Drawing.Size(102, 23)
+        Me.cmdFindForms.TabIndex = 14
+        Me.cmdFindForms.Text = "Find Froms"
+        Me.cmdFindForms.UseVisualStyleBackColor = True
         '
         'dlgImportFromODK
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 192)
+        Me.ClientSize = New System.Drawing.Size(424, 201)
+        Me.Controls.Add(Me.cmdFindForms)
         Me.Controls.Add(Me.ucrInputChooseForm)
         Me.Controls.Add(Me.ucrInputPassword)
         Me.Controls.Add(Me.ucrInputUsername)
@@ -159,4 +170,5 @@ Partial Class dlgImportFromODK
     Friend WithEvents ucrInputUsername As ucrInputTextBox
     Friend WithEvents ucrInputPassword As ucrInputTextBox
     Friend WithEvents ucrInputChooseForm As ucrInputComboBox
+    Friend WithEvents cmdFindForms As Button
 End Class
