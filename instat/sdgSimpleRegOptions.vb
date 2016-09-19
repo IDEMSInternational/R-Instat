@@ -154,6 +154,10 @@ Public Class sdgSimpleRegOptions
         frmMain.clsRLink.RunScript(clsRCIFunction.ToScript(), 2)
     End Sub
 
+    Private Sub tbGraphics_Click(sender As Object, e As EventArgs) Handles tbGraphics.Click
+
+    End Sub
+
     Public Sub SetDefaults()
         chkANOVA.Checked = True
         chkModel.Checked = True
