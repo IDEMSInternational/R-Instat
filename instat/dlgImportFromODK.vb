@@ -49,6 +49,7 @@ Public Class dlgImportFromODK
         ucrInputPassword.Reset()
         ucrInputChooseForm.Reset()
         EnableCommandButton()
+        ucrInputPassword.txtInput.UseSystemPasswordChar = True
     End Sub
 
     Private Sub ReopenDialog()
@@ -86,6 +87,7 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub ucrInputPassword_NameChanged() Handles ucrInputPassword.NameChanged
+        useSystemePassword()
         If ucrInputPassword.IsEmpty() Then
             ucrBase.clsRsyntax.RemoveParameter("password")
             clsGetFormsFunction.RemoveParameterByName("password")
@@ -93,6 +95,7 @@ Public Class dlgImportFromODK
             ucrBase.clsRsyntax.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
             clsGetFormsFunction.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
         End If
+
         TestOKEnabled()
     End Sub
 
@@ -137,5 +140,17 @@ Public Class dlgImportFromODK
         ucrInputChooseForm.cboInput.Items.Clear()
         ucrInputChooseForm.SetName("")
         EnableCommandButton()
+    End Sub
+
+    Private Sub chkViewPassword_CheckedChanged(sender As Object, e As EventArgs) Handles chkViewPassword.CheckedChanged
+        useSystemePassword()
+    End Sub
+
+    Private Sub useSystemePassword()
+        If chkViewPassword.Checked Then
+            ucrInputPassword.txtInput.UseSystemPasswordChar = False
+        Else
+            ucrInputPassword.txtInput.UseSystemPasswordChar = True
+        End If
     End Sub
 End Class
