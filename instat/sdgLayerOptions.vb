@@ -33,7 +33,7 @@ Public Class sdgLayerOptions
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
-            'bFirstLoad = False
+            bFirstLoad = False
         Else
             ReopenDialog()
         End If
