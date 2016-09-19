@@ -59,18 +59,20 @@ Public Class dlgMerge
     End Sub
 
     Private Sub TestOKEnabled()
-        Dim bAllowOk As Boolean
-
-        bAllowOk = True
-        If rdoChooseMergeColumns.Checked Then
-            If (Not ucrReceiverFirstDF.IsEmpty() AndAlso Not ucrReceiverSecondDF.IsEmpty) OrElse lstKeyColumns.Items.Count > 0 Then
-                bAllowOk = False
+        If ucrNewDataFrameName.IsEmpty() Then
+            ucrBase.OKEnabled(False)
+        Else
+            If rdoChooseMergeColumns.Checked Then
+                If (Not ucrReceiverFirstDF.IsEmpty() AndAlso Not ucrReceiverSecondDF.IsEmpty) OrElse lstKeyColumns.Items.Count > 0 Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            End If
+            If rdoMergeByAllColumns.Checked Then
+                ucrBase.OKEnabled(True)
             End If
         End If
-        If ucrNewDataFrameName.IsEmpty() Then
-            bAllowOk = False
-        End If
-        ucrBase.OKEnabled(bAllowOk)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -118,6 +120,7 @@ Public Class dlgMerge
         Else
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub KeyOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMergeByAllColumns.CheckedChanged, rdoChooseMergeColumns.CheckedChanged
@@ -132,6 +135,7 @@ Public Class dlgMerge
             ucrSelectorFirstDataFrame.SetVariablesEnabled(False)
             ucrSelectorSecondDataFrame.SetVariablesEnabled(False)
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverFirstDFKey1_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstDF.SelectionChanged
@@ -146,6 +150,7 @@ Public Class dlgMerge
             cmdAddAnotherPair.Enabled = True
         End If
         SetByArgument()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetByArgument()
@@ -183,6 +188,7 @@ Public Class dlgMerge
         Else
             cmdRemoveSelectedPair.Enabled = True
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverSecondDF_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondDF.SelectionChanged
