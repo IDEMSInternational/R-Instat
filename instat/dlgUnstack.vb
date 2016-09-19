@@ -63,7 +63,7 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrFactorToUnstackReceiver.IsEmpty() AndAlso Not ucrColumnToUnstackReceiver.IsEmpty() AndAlso Not ucrIDColumns.IsEmpty() Then
+        If Not ucrFactorToUnstackReceiver.IsEmpty() AndAlso Not ucrColumnToUnstackReceiver.IsEmpty() AndAlso Not ucrIDColumns.IsEmpty() AndAlso Not ucrNewDataName.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
