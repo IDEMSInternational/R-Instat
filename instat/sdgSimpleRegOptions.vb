@@ -18,8 +18,8 @@ Public Class sdgSimpleRegOptions
     Public clsRModelFunction As RFunction
     Public clsRDataFrame As ucrDataFrame
     Public clsRYVariable, clsRXVariable As ucrReceiverSingle
-    Public clsRGraphics, clsRFittedModelGraphics, clsRFittedModelGraphics2 As New RSyntax
-    Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRFourPlotsFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
+    Public clsRGraphics As New RSyntax
+    Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRResidualPlotsFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth, clsRModelsFunction, clsRCIFunction, clsR_ribbon, clsRaes_ribbon As New RFunction
     Public bFirstLoad As Boolean = True
 
@@ -79,72 +79,53 @@ Public Class sdgSimpleRegOptions
         frmMain.clsRLink.RunScript(clsRModelsFunction.ToScript(), 2)
     End Sub
 
-    Private Sub FourPlots()
+    Public Sub ResidualPlots()
         clsRGraphics.SetOperation("+")
-        clsRFourPlotsFunction.SetRCommand("autoplot")
-        clsRFourPlotsFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
-        clsRFourPlotsFunction.AddParameter("ncol", 2) 'these should be an option by the user as either 2 by 2, 4 by 1 or 1 by 4
+        clsRResidualPlotsFunction.SetRCommand("autoplot")
+        clsRResidualPlotsFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
         clsRgeom_point.SetRCommand("geom_point")
-        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRFourPlotsFunction)
-        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
-
-        frmMain.clsRLink.RunScript(clsRGraphics.GetScript, 0)
     End Sub
 
     Private Sub FittedModel()
-        clsRFittedModelGraphics.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        If (chkGraphicsCLimits.Checked = True) Then
-            clsRggplotFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
+        clsRggplotFunction.SetRCommand("visreg")
+        clsRggplotFunction.AddParameter("fit", clsRFunctionParameter:=clsRModelFunction)
+        If rdoConditional.Checked Then
+            clsRggplotFunction.AddParameter("type", Chr(34) & "conditional" & Chr(34))
+        ElseIf rdoContrast.Checked Then
+            clsRggplotFunction.AddParameter("type", Chr(34) & "contrast" & Chr(34))
         End If
-        If (chkPredictionInterval.Checked = True) Then
-            clsRggplotFunction.AddParameter("", clsRFunctionParameter:=clsRDataFrame.clsCurrDataFrame)
+        If rdoLinear.Checked Then
+            clsRggplotFunction.AddParameter("scale", Chr(34) & "linear" & Chr(34))
+        ElseIf rdoResponse.Checked Then
+            clsRggplotFunction.AddParameter("scale", Chr(34) & "response" & Chr(34))
         End If
-        clsRaesFunction.SetRCommand("aes")
-        'this is not the right way of adding the aesthetics x and y since we are using the lm object
-        'The next two lines shoulb be made more robust....
-        clsRaesFunction.AddParameter("y", clsRYVariable.GetVariableNames(bWithQuotes:=False))
-        clsRaesFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        clsRgeom_point.SetRCommand("geom_point")
-        clsRFittedModelGraphics.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        clsRFittedModelGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
-        clsRStat_smooth.SetRCommand("stat_smooth")
-        clsRStat_smooth.AddParameter("method", Chr(34) & "lm" & Chr(34))
-        GraphicsConfidenceSE()
-        clsRFittedModelGraphics.AddOperatorParameter("", clsRFunc:=clsRStat_smooth)
-    End Sub
-
-    Private Sub FitConfidence()
-        FittedModel()
-        frmMain.clsRLink.RunScript(clsRFittedModelGraphics.GetScript, 0)
-    End Sub
-
-    Private Sub AddCols()
-        clsRPredFunction.SetRCommand("predict")
-        clsRPredFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
-        clsRPredFunction.AddParameter("interval", Chr(34) & "prediction" & Chr(34))
-        clsRDFFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsRDFFunction.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
-        clsRDFFunction.AddParameter("col_name", "c(" & Chr(34) & "fit" & Chr(34) & "," & Chr(34) & "lwr" & Chr(34) & "," & Chr(34) & "upr" & Chr(34) & ")")
-        clsRDFFunction.AddParameter("col_data", clsRFunctionParameter:=clsRPredFunction)
-        clsRDFFunction.AddParameter("use_col_name_as_prefix", "FALSE")
-        frmMain.clsRLink.RunScript(clsRDFFunction.ToScript(), 2)
-    End Sub
-
-    Private Sub FitPrediction()
-        AddCols()
-        FittedModel()
-        clsRaes_ribbon.SetRCommand("aes")
-        clsRaes_ribbon.AddParameter("ymin", "lwr")
-        clsRaes_ribbon.AddParameter("ymax", "upr")
-        clsR_ribbon.SetRCommand("geom_ribbon")
-        clsR_ribbon.AddParameter("mapping", clsRFunctionParameter:=clsRaes_ribbon)
-        clsR_ribbon.AddParameter("alpha", 0.3) 'to fix alpha
-        clsR_ribbon.AddParameter("show.legend", "FALSE") 'to fix show  legend
-        clsRFittedModelGraphics.AddOperatorParameter("", clsRFunc:=clsR_ribbon)
-
-        frmMain.clsRLink.RunScript(clsRFittedModelGraphics.GetScript, 0)
+        If chkJitter.Checked Then
+            clsRggplotFunction.AddParameter("jitter", "TRUE")
+        Else
+            clsRggplotFunction.RemoveParameterByName("jitter")
+        End If
+        clsRggplotFunction.AddParameter("alpha", nudGraphicsCLevel.Value)
+        clsRggplotFunction.AddParameter("whitespace", nudWhiteSpace.Value)
+        If chkPartial.Checked Then
+            clsRggplotFunction.AddParameter("partial", "TRUE")
+        Else
+            clsRggplotFunction.AddParameter("partial", "FALSE")
+        End If
+        If chkConfIntervalband.Checked = False Then
+            clsRggplotFunction.AddParameter("band", "FALSE")
+        Else
+            clsRggplotFunction.RemoveParameterByName("band")
+        End If
+        If chkRugs.Checked Then
+            If rdo1.Checked Then
+                clsRggplotFunction.AddParameter("rug", 1)
+            ElseIf rdo2.Checked Then
+                clsRggplotFunction.AddParameter("rug", 2)
+            End If
+        Else
+            clsRggplotFunction.RemoveParameterByName("rug")
+        End If
+        clsRggplotFunction.AddParameter("gg", "TRUE")
     End Sub
 
     Private Sub ConfidenceInterval()
@@ -154,25 +135,161 @@ Public Class sdgSimpleRegOptions
         frmMain.clsRLink.RunScript(clsRCIFunction.ToScript(), 2)
     End Sub
 
+    Private Sub chkPartial_CheckedChanged(sender As Object, e As EventArgs) Handles chkPartial.CheckedChanged
+        FittedModel()
+    End Sub
+
+    Private Sub chkRugs_CheckedChanged(sender As Object, e As EventArgs) Handles chkRugs.CheckedChanged
+        If chkRugs.Checked Then
+            grpRugs.Enabled = True
+            rdoPartial.Checked = True
+        End If
+        FittedModel()
+    End Sub
+
+    Private Sub rdoPartial_CheckedChanged(sender As Object, e As EventArgs) Handles rdoPartial.CheckedChanged
+        FittedModel()
+    End Sub
+
+    Private Sub rdo1_CheckedChanged(sender As Object, e As EventArgs) Handles rdo1.CheckedChanged
+        FittedModel()
+    End Sub
+
+    Private Sub rdo2_CheckedChanged(sender As Object, e As EventArgs) Handles rdo2.CheckedChanged
+        FittedModel()
+    End Sub
+
+    Private Sub rdoConditional_CheckedChanged(sender As Object, e As EventArgs) Handles rdoConditional.CheckedChanged
+        FittedModel()
+    End Sub
+
+    Private Sub rdoContrast_CheckedChanged(sender As Object, e As EventArgs) Handles rdoContrast.CheckedChanged
+        FittedModel()
+    End Sub
+
+    Private Sub chkMultiplePlots_CheckedChanged(sender As Object, e As EventArgs) Handles chkMultiplePlots.CheckedChanged
+        If chkMultiplePlots.Checked Then
+            chkFittedModel.Checked = False
+            chkIndividualPlots.Checked = False
+            grpMultiplePlots.Enabled = True
+            rdoFourPlots.Checked = True
+        Else
+            grpMultiplePlots.Enabled = False
+        End If
+    End Sub
+
+    Private Sub chkIndividualPlots_CheckedChanged(sender As Object, e As EventArgs) Handles chkIndividualPlots.CheckedChanged
+        If chkIndividualPlots.Checked Then
+            chkFittedModel.Checked = False
+            chkMultiplePlots.Checked = False
+            grpIndividualPlots.Enabled = True
+            rdoResidualsFitted.Checked = True
+        Else
+            grpIndividualPlots.Enabled = False
+        End If
+    End Sub
+
+    Private Sub rdoFourPlots_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFourPlots.CheckedChanged
+        ResidualPlots()
+        If rdoFourPlots.Checked Then
+            clsRResidualPlotsFunction.AddParameter("ncol", 2)
+            clsRResidualPlotsFunction.RemoveParameterByName("which")
+            clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+            clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+        End If
+
+    End Sub
+
+    Private Sub rdoSix_Plots2Rows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSixPlots2Rows.CheckedChanged
+        clsRResidualPlotsFunction.AddParameter("ncol", 3)
+        clsRResidualPlotsFunction.AddParameter("which", "1:6")
+        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+    End Sub
+
+    Private Sub rdordoSix_Plots3Rows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSixPlots3Rows.CheckedChanged
+        clsRResidualPlotsFunction.AddParameter("ncol", 2)
+        clsRResidualPlotsFunction.AddParameter("which", "1:6")
+        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+    End Sub
+
+    Private Sub rdoQQ_CheckedChanged(sender As Object, e As EventArgs) Handles rdoQQ.CheckedChanged
+        clsRResidualPlotsFunction.RemoveParameterByName("ncol")
+        clsRResidualPlotsFunction.AddParameter("which", 2)
+        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+    End Sub
+    Private Sub rdoResidualsFitted_CheckedChanged(sender As Object, e As EventArgs) Handles rdoResidualsFitted.CheckedChanged
+        clsRResidualPlotsFunction.RemoveParameterByName("ncol")
+        clsRResidualPlotsFunction.AddParameter("which", 1)
+        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+    End Sub
+
+    Private Sub rdoResidualsLeverage_CheckedChanged(sender As Object, e As EventArgs) Handles rdoResidualsLeverage.CheckedChanged
+        clsRResidualPlotsFunction.RemoveParameterByName("ncol")
+        clsRResidualPlotsFunction.AddParameter("which", 5)
+        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+    End Sub
+
+    Private Sub rdoCooksDistanceLeverage_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCooksDistanceLeverage.CheckedChanged
+        clsRResidualPlotsFunction.RemoveParameterByName("ncol")
+        clsRResidualPlotsFunction.AddParameter("which", 6)
+        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+    End Sub
+
+    Private Sub rdoCooksDistance_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCooksDistance.CheckedChanged
+        clsRResidualPlotsFunction.RemoveParameterByName("ncol")
+        clsRResidualPlotsFunction.AddParameter("which", 4)
+        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+    End Sub
+
+    Private Sub rdoScaleLocation_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScaleLocation.CheckedChanged
+        clsRResidualPlotsFunction.RemoveParameterByName("ncol")
+        clsRResidualPlotsFunction.AddParameter("which", 3)
+        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+    End Sub
+
+    Private Sub Arguments_CheckedChanged(sender As Object, e As EventArgs) Handles chkConfIntervalband.CheckedChanged, rdoLinear.CheckedChanged, rdoResponse.CheckedChanged, chkJitter.CheckedChanged, nudWhiteSpace.ValueChanged
+        FittedModel()
+    End Sub
+
     Public Sub SetDefaults()
         chkANOVA.Checked = True
         chkModel.Checked = True
         chkEstimates.Checked = True
         chkPvalues.Enabled = True
         chkPvalues.Checked = True
-        chkPredictionInterval.Enabled = False
-        chkGraphicsCLimits.Checked = False
-        chkGraphicsCLimits.Enabled = False
-        lblGraphicsCLevel.Enabled = False
+        lblGraphicsSignLevel.Enabled = False
         nudGraphicsCLevel.Enabled = False
-        chkPredictionInterval.Enabled = False
-        chkPredictionInterval.Checked = False
         chkFittedModel.Checked = False
-        chkFourinOne.Checked = False
         chkDisplayCLimits.Checked = True
         lblDisplayCLevel.Enabled = True
         nudDisplayCLevel.Enabled = True
-
+        chkPartial.Enabled = False
+        chkRugs.Enabled = False
+        grpRugs.Enabled = False
+        grpPlotType.Enabled = False
+        grpScale.Enabled = False
+        chkJitter.Enabled = False
+        lblWhiteSpace.Enabled = False
+        nudWhiteSpace.Enabled = False
+        chkMultiplePlots.Checked = False
+        grpMultiplePlots.Enabled = False
+        chkIndividualPlots.Checked = False
+        grpIndividualPlots.Enabled = False
+        rdoConditional.Checked = False
+        rdoLinear.Checked = False
+        chkPartial.Checked = False
+        chkJitter.Checked = False
+        chkRugs.Checked = False
+        chkConfIntervalband.Checked = False
+        chkConfIntervalband.Enabled = False
         ucrFittedColumnName.SetPrefix("Fitted")
         ucrFittedColumnName.SetItemsTypeAsColumns()
         ucrFittedColumnName.SetDefaultTypeAsColumn()
@@ -203,7 +320,6 @@ Public Class sdgSimpleRegOptions
         If (chkANOVA.Checked Or chkEstimates.Checked) Then
             chkPvalues.Enabled = True
         Else
-            'chkPvalues.Checked = False
             chkPvalues.Enabled = False
         End If
     End Sub
@@ -218,37 +334,38 @@ Public Class sdgSimpleRegOptions
 
     Private Sub chkFittedModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkFittedModel.CheckedChanged
         If (chkFittedModel.Checked) Then
-            chkPredictionInterval.Enabled = True
-            chkGraphicsCLimits.Enabled = True
-            chkGraphicsCLimits.Checked = True
-        Else
-            chkPredictionInterval.Enabled = False
-            chkGraphicsCLimits.Checked = False
-            chkGraphicsCLimits.Enabled = False
-        End If
-    End Sub
-
-    Private Sub chkGraphicsCLimits_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphicsCLimits.CheckedChanged
-        If (chkGraphicsCLimits.Checked) Then
-            lblGraphicsCLevel.Enabled = True
+            chkMultiplePlots.Checked = False
+            chkIndividualPlots.Checked = False
+            lblGraphicsSignLevel.Enabled = True
             nudGraphicsCLevel.Enabled = True
-            chkPredictionInterval.Checked = False
+            chkPartial.Enabled = True
+            chkRugs.Enabled = True
+            grpPlotType.Enabled = True
+            grpScale.Enabled = True
+            chkJitter.Enabled = True
+            lblWhiteSpace.Enabled = True
+            nudWhiteSpace.Enabled = True
+            rdoConditional.Checked = True
+            rdoLinear.Checked = True
+            chkPartial.Checked = False
+            chkJitter.Checked = False
+            chkRugs.Checked = False
+            chkConfIntervalband.Checked = True
+            chkConfIntervalband.Enabled = True
         Else
-            lblGraphicsCLevel.Enabled = False
+            lblGraphicsSignLevel.Enabled = False
             nudGraphicsCLevel.Enabled = False
-        End If
-    End Sub
-
-    Private Sub GraphicsConfidenceSE()
-        If (chkGraphicsCLimits.Checked = True) Then
-            clsRStat_smooth.AddParameter("se", "TRUE")
-            clsRStat_smooth.AddParameter("level", nudGraphicsCLevel.Value)
-        ElseIf (chkGraphicsCLimits.Checked = False) Then
-            clsRStat_smooth.AddParameter("se", "FALSE")
-            clsRStat_smooth.RemoveParameterByName("level")
-        Else
-            clsRStat_smooth.RemoveParameterByName("se")
-            clsRStat_smooth.RemoveParameterByName("level")
+            chkPartial.Enabled = False
+            chkRugs.Enabled = False
+            grpPlotType.Enabled = False
+            grpScale.Enabled = False
+            chkJitter.Enabled = False
+            lblWhiteSpace.Enabled = False
+            nudWhiteSpace.Enabled = False
+            rdoConditional.Checked = False
+            rdoLinear.Checked = False
+            chkConfIntervalband.Checked = False
+            chkConfIntervalband.Enabled = False
         End If
     End Sub
 
@@ -269,12 +386,6 @@ Public Class sdgSimpleRegOptions
             clsRCIFunction.AddParameter("level", "")
         Else
             clsRCIFunction.RemoveParameterByName("level")
-        End If
-    End Sub
-
-    Private Sub chkPredictionInterval_CheckedChanged(sender As Object, e As EventArgs) Handles chkPredictionInterval.CheckedChanged
-        If (chkPredictionInterval.Checked) Then
-            chkGraphicsCLimits.Checked = False
         End If
     End Sub
 
@@ -299,16 +410,11 @@ Public Class sdgSimpleRegOptions
         If (chkDisplayCLimits.Checked) Then
             ConfidenceInterval()
         End If
-        If (chkFourinOne.Checked) Then
-            FourPlots()
+        If (rdoFourPlots.Checked Or rdoSixPlots2Rows.Checked Or rdoSixPlots3Rows.Checked Or rdoResidualsFitted.Checked Or rdoQQ.Checked Or rdoResidualsLeverage.Checked Or rdoScaleLocation.Checked Or rdoCooksDistance.Checked Or rdoCooksDistanceLeverage.Checked) Then
+            frmMain.clsRLink.RunScript(clsRGraphics.GetScript, 0)
         End If
         If (chkFittedModel.Checked) Then
-            If (chkGraphicsCLimits.Checked) Then
-                FitConfidence()
-            End If
-            If (chkPredictionInterval.Checked) Then
-                FitPrediction()
-            End If
+            frmMain.clsRLink.RunScript(clsRggplotFunction.ToScript(), 0)
         End If
         If chkFittedValues.Checked Then
             FittedValues()
