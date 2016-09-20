@@ -178,7 +178,7 @@ Partial Class sdgDescribeTwoVarGraph
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeTwoVarGraph"
-        Me.Text = "sdgDescribeTwoVarGraph"
+        Me.Text = "Two Variable Graph"
         Me.grpVariateByVariate.ResumeLayout(False)
         Me.grpVariateByVariate.PerformLayout()
         Me.grpVariateByFactor.ResumeLayout(False)
