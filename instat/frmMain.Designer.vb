@@ -252,9 +252,9 @@ Partial Class frmMain
         Me.mnuFileNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrame = New System.Windows.Forms.ToolStripMenuItem()
@@ -2070,6 +2070,12 @@ Partial Class frmMain
         Me.mnuFileOpenFromLibrary.Tag = "Open_From_Library"
         Me.mnuFileOpenFromLibrary.Text = "Open From Library"
         '
+        'mnuImportFromODK
+        '
+        Me.mnuImportFromODK.Name = "mnuImportFromODK"
+        Me.mnuImportFromODK.Size = New System.Drawing.Size(204, 22)
+        Me.mnuImportFromODK.Text = "Import from ODK..."
+        '
         'tlSeparatorFile
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
@@ -2080,12 +2086,6 @@ Partial Class frmMain
         Me.mnuExport.Name = "mnuExport"
         Me.mnuExport.Size = New System.Drawing.Size(204, 22)
         Me.mnuExport.Text = "Export Data"
-        '
-        'mnuImportFromODK
-        '
-        Me.mnuImportFromODK.Name = "mnuImportFromODK"
-        Me.mnuImportFromODK.Size = New System.Drawing.Size(204, 22)
-        Me.mnuImportFromODK.Text = "Import from ODK..."
         '
         'mnuFileCloseData
         '
@@ -2633,7 +2633,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectMetadata
         '
-        Me.mnuOrganiseDataObjectMetadata.Enabled = False
         Me.mnuOrganiseDataObjectMetadata.Name = "mnuOrganiseDataObjectMetadata"
         Me.mnuOrganiseDataObjectMetadata.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectMetadata.Tag = "Metadata..."
@@ -2674,28 +2673,28 @@ Partial Class frmMain
         'mnuOrganiseRObjectsView
         '
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
         'mnuOrganiseRObjectsRename
         '
         Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
-        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
         Me.mnuOrganiseRObjectsRename.Text = "Rename..."
         '
         'mnuOrganiseRObjectsReorder
         '
         Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
-        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
         Me.mnuOrganiseRObjectsReorder.Text = "Reorder..."
         '
         'mnuOrganiseRObjectsDelete
         '
         Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
-        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '
