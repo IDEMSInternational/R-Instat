@@ -22,6 +22,7 @@ Partial Class dlgOneSample
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgOneSample))
         Me.grpAnalysis = New System.Windows.Forms.GroupBox()
         Me.lblValue = New System.Windows.Forms.Label()
         Me.txtValue = New System.Windows.Forms.TextBox()
@@ -50,149 +51,103 @@ Partial Class dlgOneSample
         Me.grpAnalysis.Controls.Add(Me.cboParameters)
         Me.grpAnalysis.Controls.Add(Me.lblModels)
         Me.grpAnalysis.Controls.Add(Me.cboModels)
-        Me.grpAnalysis.Location = New System.Drawing.Point(325, 19)
+        resources.ApplyResources(Me.grpAnalysis, "grpAnalysis")
         Me.grpAnalysis.Name = "grpAnalysis"
-        Me.grpAnalysis.Size = New System.Drawing.Size(220, 202)
-        Me.grpAnalysis.TabIndex = 3
         Me.grpAnalysis.TabStop = False
         Me.grpAnalysis.Tag = "Analysis"
-        Me.grpAnalysis.Text = "Analysis"
         '
         'lblValue
         '
-        Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(130, 156)
+        resources.ApplyResources(Me.lblValue, "lblValue")
         Me.lblValue.Name = "lblValue"
-        Me.lblValue.Size = New System.Drawing.Size(34, 13)
-        Me.lblValue.TabIndex = 5
         Me.lblValue.Tag = "Value"
-        Me.lblValue.Text = "Value"
-        Me.lblValue.Visible = False
         '
         'txtValue
         '
-        Me.txtValue.Location = New System.Drawing.Point(173, 153)
+        resources.ApplyResources(Me.txtValue, "txtValue")
         Me.txtValue.Name = "txtValue"
-        Me.txtValue.Size = New System.Drawing.Size(41, 20)
-        Me.txtValue.TabIndex = 6
-        Me.txtValue.Visible = False
         '
         'chkSignificanceTest
         '
-        Me.chkSignificanceTest.AutoSize = True
-        Me.chkSignificanceTest.Location = New System.Drawing.Point(16, 156)
+        resources.ApplyResources(Me.chkSignificanceTest, "chkSignificanceTest")
         Me.chkSignificanceTest.Name = "chkSignificanceTest"
-        Me.chkSignificanceTest.Size = New System.Drawing.Size(108, 17)
-        Me.chkSignificanceTest.TabIndex = 4
         Me.chkSignificanceTest.Tag = "Significance_test"
-        Me.chkSignificanceTest.Text = "Significance Test"
         Me.chkSignificanceTest.UseVisualStyleBackColor = True
         '
         'lblParameters
         '
-        Me.lblParameters.AutoSize = True
-        Me.lblParameters.Location = New System.Drawing.Point(13, 92)
+        resources.ApplyResources(Me.lblParameters, "lblParameters")
         Me.lblParameters.Name = "lblParameters"
-        Me.lblParameters.Size = New System.Drawing.Size(55, 13)
-        Me.lblParameters.TabIndex = 2
         Me.lblParameters.Tag = "Parameter"
-        Me.lblParameters.Text = "Parameter"
         '
         'cboParameters
         '
         Me.cboParameters.FormattingEnabled = True
-        Me.cboParameters.Items.AddRange(New Object() {"Mean            " & Global.Microsoft.VisualBasic.ChrW(9) & "   (t-interval)", "Mean, known variance (z-interval)", "Variance        " & Global.Microsoft.VisualBasic.ChrW(9) & "    (F-interval)"})
-        Me.cboParameters.Location = New System.Drawing.Point(13, 111)
+        Me.cboParameters.Items.AddRange(New Object() {resources.GetString("cboParameters.Items"), resources.GetString("cboParameters.Items1"), resources.GetString("cboParameters.Items2")})
+        resources.ApplyResources(Me.cboParameters, "cboParameters")
         Me.cboParameters.Name = "cboParameters"
-        Me.cboParameters.Size = New System.Drawing.Size(201, 21)
-        Me.cboParameters.TabIndex = 3
         '
         'lblModels
         '
-        Me.lblModels.AutoSize = True
-        Me.lblModels.Location = New System.Drawing.Point(10, 34)
+        resources.ApplyResources(Me.lblModels, "lblModels")
         Me.lblModels.Name = "lblModels"
-        Me.lblModels.Size = New System.Drawing.Size(41, 13)
-        Me.lblModels.TabIndex = 0
         Me.lblModels.Tag = "Models"
-        Me.lblModels.Text = "Models"
         '
         'cboModels
         '
         Me.cboModels.FormattingEnabled = True
-        Me.cboModels.Items.AddRange(New Object() {"Normal", "Proportional", "Poisson"})
-        Me.cboModels.Location = New System.Drawing.Point(13, 50)
+        Me.cboModels.Items.AddRange(New Object() {resources.GetString("cboModels.Items"), resources.GetString("cboModels.Items1"), resources.GetString("cboModels.Items2")})
+        resources.ApplyResources(Me.cboModels, "cboModels")
         Me.cboModels.Name = "cboModels"
-        Me.cboModels.Size = New System.Drawing.Size(201, 21)
-        Me.cboModels.TabIndex = 1
         Me.cboModels.Tag = ""
         '
         'lblDataColumn
         '
-        Me.lblDataColumn.AutoSize = True
-        Me.lblDataColumn.Location = New System.Drawing.Point(213, 19)
+        resources.ApplyResources(Me.lblDataColumn, "lblDataColumn")
         Me.lblDataColumn.Name = "lblDataColumn"
-        Me.lblDataColumn.Size = New System.Drawing.Size(68, 13)
-        Me.lblDataColumn.TabIndex = 1
         Me.lblDataColumn.Tag = "Data_Column"
-        Me.lblDataColumn.Text = "Data Column"
         '
         'grpGraphs
         '
         Me.grpGraphs.Controls.Add(Me.lblGraphs)
-        Me.grpGraphs.Location = New System.Drawing.Point(12, 149)
+        resources.ApplyResources(Me.grpGraphs, "grpGraphs")
         Me.grpGraphs.Name = "grpGraphs"
-        Me.grpGraphs.Size = New System.Drawing.Size(173, 130)
-        Me.grpGraphs.TabIndex = 4
         Me.grpGraphs.TabStop = False
         Me.grpGraphs.Tag = "Graphs"
-        Me.grpGraphs.Text = "Graphs"
         '
         'lblGraphs
         '
-        Me.lblGraphs.AutoSize = True
-        Me.lblGraphs.Location = New System.Drawing.Point(6, 35)
+        resources.ApplyResources(Me.lblGraphs, "lblGraphs")
         Me.lblGraphs.Name = "lblGraphs"
-        Me.lblGraphs.Size = New System.Drawing.Size(97, 13)
-        Me.lblGraphs.TabIndex = 0
-        Me.lblGraphs.Text = "To be implemented"
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(446, 237)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 5
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrReceiverDataColumn
         '
-        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(207, 35)
+        resources.ApplyResources(Me.ucrReceiverDataColumn, "ucrReceiverDataColumn")
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
-        Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(110, 26)
-        Me.ucrReceiverDataColumn.TabIndex = 2
+        Me.ucrReceiverDataColumn.Selector = Nothing
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 12)
+        Me.ucrAddRemove.bShowHiddenColumns = False
+        resources.ApplyResources(Me.ucrAddRemove, "ucrAddRemove")
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 131)
-        Me.ucrAddRemove.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(73, 285)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 53)
-        Me.ucrBase.TabIndex = 6
         '
         'dlgOneSample
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(551, 339)
         Me.Controls.Add(Me.ucrReceiverDataColumn)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
@@ -204,9 +159,7 @@ Partial Class dlgOneSample
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOneSample"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "One_Sample"
-        Me.Text = "One Sample"
         Me.grpAnalysis.ResumeLayout(False)
         Me.grpAnalysis.PerformLayout()
         Me.grpGraphs.ResumeLayout(False)

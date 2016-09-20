@@ -22,6 +22,7 @@ Partial Class dlgThreeSummaries
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgThreeSummaries))
         Me.ucrBase = New instat.ucrButtons()
         Me.lblLinetype = New System.Windows.Forms.Label()
         Me.lblLineWidth = New System.Windows.Forms.Label()
@@ -53,176 +54,114 @@ Partial Class dlgThreeSummaries
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 303)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 63)
-        Me.ucrBase.TabIndex = 0
         '
         'lblLinetype
         '
-        Me.lblLinetype.AutoSize = True
-        Me.lblLinetype.Location = New System.Drawing.Point(12, 214)
+        resources.ApplyResources(Me.lblLinetype, "lblLinetype")
         Me.lblLinetype.Name = "lblLinetype"
-        Me.lblLinetype.Size = New System.Drawing.Size(39, 13)
-        Me.lblLinetype.TabIndex = 1
         Me.lblLinetype.Tag = "Line_type"
-        Me.lblLinetype.Text = "Label1"
         '
         'lblLineWidth
         '
-        Me.lblLineWidth.AutoSize = True
-        Me.lblLineWidth.Location = New System.Drawing.Point(54, 265)
+        resources.ApplyResources(Me.lblLineWidth, "lblLineWidth")
         Me.lblLineWidth.Name = "lblLineWidth"
-        Me.lblLineWidth.Size = New System.Drawing.Size(39, 13)
-        Me.lblLineWidth.TabIndex = 2
         Me.lblLineWidth.Tag = "Line_Width"
-        Me.lblLineWidth.Text = "Label2"
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(367, 17)
+        resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(125, 13)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Data list not implemented"
         '
         'lblTitle
         '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(54, 20)
+        resources.ApplyResources(Me.lblTitle, "lblTitle")
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(39, 13)
-        Me.lblTitle.TabIndex = 4
         Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Label4"
         '
         'lblVariable
         '
-        Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(54, 42)
+        resources.ApplyResources(Me.lblVariable, "lblVariable")
         Me.lblVariable.Name = "lblVariable"
-        Me.lblVariable.Size = New System.Drawing.Size(39, 13)
-        Me.lblVariable.TabIndex = 5
-        Me.lblVariable.Text = "Label5"
         '
         'lblYlabel
         '
-        Me.lblYlabel.AutoSize = True
-        Me.lblYlabel.Location = New System.Drawing.Point(54, 62)
+        resources.ApplyResources(Me.lblYlabel, "lblYlabel")
         Me.lblYlabel.Name = "lblYlabel"
-        Me.lblYlabel.Size = New System.Drawing.Size(39, 13)
-        Me.lblYlabel.TabIndex = 6
         Me.lblYlabel.Tag = "Y_label"
-        Me.lblYlabel.Text = "Label6"
         '
         'lblPlotType
         '
-        Me.lblPlotType.AutoSize = True
-        Me.lblPlotType.Location = New System.Drawing.Point(231, 256)
+        resources.ApplyResources(Me.lblPlotType, "lblPlotType")
         Me.lblPlotType.Name = "lblPlotType"
-        Me.lblPlotType.Size = New System.Drawing.Size(39, 13)
-        Me.lblPlotType.TabIndex = 7
         Me.lblPlotType.Tag = "Plot_Type"
-        Me.lblPlotType.Text = "Label7"
         '
         'lblMaximum
         '
-        Me.lblMaximum.AutoSize = True
-        Me.lblMaximum.Location = New System.Drawing.Point(6, 22)
+        resources.ApplyResources(Me.lblMaximum, "lblMaximum")
         Me.lblMaximum.Name = "lblMaximum"
-        Me.lblMaximum.Size = New System.Drawing.Size(39, 13)
-        Me.lblMaximum.TabIndex = 8
         Me.lblMaximum.Tag = "Mean"
-        Me.lblMaximum.Text = "Label8"
         '
         'lblMean
         '
-        Me.lblMean.AutoSize = True
-        Me.lblMean.Location = New System.Drawing.Point(91, 55)
+        resources.ApplyResources(Me.lblMean, "lblMean")
         Me.lblMean.Name = "lblMean"
-        Me.lblMean.Size = New System.Drawing.Size(39, 13)
-        Me.lblMean.TabIndex = 9
-        Me.lblMean.Text = "Label9"
         '
         'lblMinimum
         '
-        Me.lblMinimum.AutoSize = True
-        Me.lblMinimum.Location = New System.Drawing.Point(6, 87)
+        resources.ApplyResources(Me.lblMinimum, "lblMinimum")
         Me.lblMinimum.Name = "lblMinimum"
-        Me.lblMinimum.Size = New System.Drawing.Size(45, 13)
-        Me.lblMinimum.TabIndex = 10
-        Me.lblMinimum.Text = "Label10"
         '
         'nudlineWidth
         '
-        Me.nudlineWidth.Location = New System.Drawing.Point(142, 254)
+        resources.ApplyResources(Me.nudlineWidth, "nudlineWidth")
         Me.nudlineWidth.Name = "nudlineWidth"
-        Me.nudlineWidth.Size = New System.Drawing.Size(49, 20)
-        Me.nudlineWidth.TabIndex = 11
         '
         'nudPlotCharacter
         '
-        Me.nudPlotCharacter.Location = New System.Drawing.Point(195, 207)
+        resources.ApplyResources(Me.nudPlotCharacter, "nudPlotCharacter")
         Me.nudPlotCharacter.Name = "nudPlotCharacter"
-        Me.nudPlotCharacter.Size = New System.Drawing.Size(49, 20)
-        Me.nudPlotCharacter.TabIndex = 12
         '
         'nudLineType
         '
-        Me.nudLineType.Location = New System.Drawing.Point(66, 207)
+        resources.ApplyResources(Me.nudLineType, "nudLineType")
         Me.nudLineType.Name = "nudLineType"
-        Me.nudLineType.Size = New System.Drawing.Size(49, 20)
-        Me.nudLineType.TabIndex = 13
         '
         'txtColourMaximum
         '
-        Me.txtColourMaximum.Location = New System.Drawing.Point(109, 19)
+        resources.ApplyResources(Me.txtColourMaximum, "txtColourMaximum")
         Me.txtColourMaximum.Name = "txtColourMaximum"
-        Me.txtColourMaximum.Size = New System.Drawing.Size(100, 20)
-        Me.txtColourMaximum.TabIndex = 16
         '
         'txtColourMean
         '
-        Me.txtColourMean.Location = New System.Drawing.Point(183, 52)
+        resources.ApplyResources(Me.txtColourMean, "txtColourMean")
         Me.txtColourMean.Name = "txtColourMean"
-        Me.txtColourMean.Size = New System.Drawing.Size(100, 20)
-        Me.txtColourMean.TabIndex = 17
         '
         'txtPlotType
         '
-        Me.txtPlotType.Location = New System.Drawing.Point(289, 249)
+        resources.ApplyResources(Me.txtPlotType, "txtPlotType")
         Me.txtPlotType.Name = "txtPlotType"
-        Me.txtPlotType.Size = New System.Drawing.Size(149, 20)
-        Me.txtPlotType.TabIndex = 18
         '
         'txtColourMinimum
         '
-        Me.txtColourMinimum.Location = New System.Drawing.Point(109, 87)
+        resources.ApplyResources(Me.txtColourMinimum, "txtColourMinimum")
         Me.txtColourMinimum.Name = "txtColourMinimum"
-        Me.txtColourMinimum.Size = New System.Drawing.Size(100, 20)
-        Me.txtColourMinimum.TabIndex = 19
         '
         'txtYlabel
         '
-        Me.txtYlabel.Location = New System.Drawing.Point(142, 59)
+        resources.ApplyResources(Me.txtYlabel, "txtYlabel")
         Me.txtYlabel.Name = "txtYlabel"
-        Me.txtYlabel.Size = New System.Drawing.Size(210, 20)
-        Me.txtYlabel.TabIndex = 20
         '
         'txtVariable
         '
-        Me.txtVariable.Location = New System.Drawing.Point(142, 39)
+        resources.ApplyResources(Me.txtVariable, "txtVariable")
         Me.txtVariable.Name = "txtVariable"
-        Me.txtVariable.Size = New System.Drawing.Size(210, 20)
-        Me.txtVariable.TabIndex = 21
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(142, 17)
+        resources.ApplyResources(Me.txtTitle, "txtTitle")
         Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(210, 20)
-        Me.txtTitle.TabIndex = 22
         '
         'grpColour
         '
@@ -232,29 +171,21 @@ Partial Class dlgThreeSummaries
         Me.grpColour.Controls.Add(Me.lblMinimum)
         Me.grpColour.Controls.Add(Me.lblMean)
         Me.grpColour.Controls.Add(Me.lblMaximum)
-        Me.grpColour.Location = New System.Drawing.Point(12, 94)
+        resources.ApplyResources(Me.grpColour, "grpColour")
         Me.grpColour.Name = "grpColour"
-        Me.grpColour.Size = New System.Drawing.Size(411, 107)
-        Me.grpColour.TabIndex = 23
         Me.grpColour.TabStop = False
         Me.grpColour.Tag = "Colour"
-        Me.grpColour.Text = "Colours for Summaries"
         '
         'lblPlotCharacter
         '
-        Me.lblPlotCharacter.AutoSize = True
-        Me.lblPlotCharacter.Location = New System.Drawing.Point(152, 214)
+        resources.ApplyResources(Me.lblPlotCharacter, "lblPlotCharacter")
         Me.lblPlotCharacter.Name = "lblPlotCharacter"
-        Me.lblPlotCharacter.Size = New System.Drawing.Size(39, 13)
-        Me.lblPlotCharacter.TabIndex = 24
         Me.lblPlotCharacter.Tag = "lblPlotCharacter"
-        Me.lblPlotCharacter.Text = "Label4"
         '
         'dlgThreeSummaries
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(555, 378)
         Me.Controls.Add(Me.lblPlotCharacter)
         Me.Controls.Add(Me.grpColour)
         Me.Controls.Add(Me.txtTitle)
@@ -276,8 +207,6 @@ Partial Class dlgThreeSummaries
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgThreeSummaries"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Three Summaries"
         CType(Me.nudlineWidth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudPlotCharacter, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudLineType, System.ComponentModel.ISupportInitialize).EndInit()
