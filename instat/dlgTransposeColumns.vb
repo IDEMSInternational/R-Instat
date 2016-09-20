@@ -87,10 +87,6 @@ Public Class dlgTransposeColumns
         'this is not yet implemented.
     End Sub
 
-    Private Sub ucrReceiverColumsToTranspose_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverColumsToTranspose.SelectionChanged
-
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseTransposeColumns.ClickReset
         SetDefaults()
     End Sub
