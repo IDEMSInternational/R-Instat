@@ -28,8 +28,9 @@ Public Class dlgCopySheet
         End If
         TestOKEnabled()
     End Sub
+
     Private Sub TestOKEnabled()
-        If Not ucrNewDataFrameName.IsEmpty Then
+        If ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "" AndAlso Not ucrNewDataFrameName.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
