@@ -59,6 +59,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub TestOKEnabled()
+        'If (Not ucrReceiverMultiplePCA.IsEmpty()) And ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 Then
         If (Not ucrReceiverMultiplePCA.IsEmpty()) Then
             ucrBasePCA.OKEnabled(True)
             AssignName()
