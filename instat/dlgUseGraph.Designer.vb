@@ -49,7 +49,7 @@ Partial Class dlgUseGraph
         '
         'ucrGraphReceiver
         '
-        Me.ucrGraphReceiver.Location = New System.Drawing.Point(252, 44)
+        Me.ucrGraphReceiver.Location = New System.Drawing.Point(252, 60)
         Me.ucrGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphReceiver.Name = "ucrGraphReceiver"
         Me.ucrGraphReceiver.Selector = Nothing
@@ -59,11 +59,11 @@ Partial Class dlgUseGraph
         'lblGraphtoUse
         '
         Me.lblGraphtoUse.AutoSize = True
-        Me.lblGraphtoUse.Location = New System.Drawing.Point(249, 19)
+        Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 44)
         Me.lblGraphtoUse.Name = "lblGraphtoUse"
-        Me.lblGraphtoUse.Size = New System.Drawing.Size(70, 13)
+        Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
         Me.lblGraphtoUse.TabIndex = 3
-        Me.lblGraphtoUse.Text = "Graph to Use"
+        Me.lblGraphtoUse.Text = "Graph to Use:"
         '
         'cmdPlotOptions
         '
@@ -76,7 +76,7 @@ Partial Class dlgUseGraph
         '
         'ucrSaveGraphForUseGraph
         '
-        Me.ucrSaveGraphForUseGraph.Location = New System.Drawing.Point(13, 209)
+        Me.ucrSaveGraphForUseGraph.Location = New System.Drawing.Point(10, 209)
         Me.ucrSaveGraphForUseGraph.Name = "ucrSaveGraphForUseGraph"
         Me.ucrSaveGraphForUseGraph.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveGraphForUseGraph.TabIndex = 5
