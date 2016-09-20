@@ -45,15 +45,15 @@ Partial Class dlgDescribeTwoVarGraph
         'lblSecondVariable
         '
         Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(311, 154)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(285, 157)
         Me.lblSecondVariable.Name = "lblSecondVariable"
-        Me.lblSecondVariable.Size = New System.Drawing.Size(85, 13)
+        Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
         Me.lblSecondVariable.TabIndex = 14
-        Me.lblSecondVariable.Text = "Second Variable"
+        Me.lblSecondVariable.Text = "Second Variable:"
         '
         'ucrReceiverMultipleTwoVar
         '
-        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(293, 12)
+        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(284, 12)
         Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
         Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 130)
         Me.ucrReceiverMultipleTwoVar.TabIndex = 15
@@ -61,7 +61,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'ucrSecondVariableReceiver
         '
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(293, 172)
+        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(284, 172)
         Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
         Me.ucrSecondVariableReceiver.Selector = Nothing
@@ -95,12 +95,12 @@ Partial Class dlgDescribeTwoVarGraph
         'lblFirstVariables
         '
         Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(311, 21)
+        Me.lblFirstVariables.Location = New System.Drawing.Point(307, 19)
         Me.lblFirstVariables.Name = "lblFirstVariables"
-        Me.lblFirstVariables.Size = New System.Drawing.Size(78, 13)
+        Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
         Me.lblFirstVariables.TabIndex = 16
         Me.lblFirstVariables.Tag = "First_Variable(s)"
-        Me.lblFirstVariables.Text = "First Variable(s)"
+        Me.lblFirstVariables.Text = "First Variable(s):"
         '
         'dlgDescribeTwoVarGraph
         '
@@ -120,7 +120,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVarGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgDescribeTwoVarGraph"
+        Me.Text = "Two Variable Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
