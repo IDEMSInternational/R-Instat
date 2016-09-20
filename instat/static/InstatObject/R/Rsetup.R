@@ -44,6 +44,7 @@ library(lazyeval)
 library(stringr)
 library(httr)
 library(jsonlite)
+library(visreg)
 setwd(dirname(parent.frame(2)$ofile))
 
 
