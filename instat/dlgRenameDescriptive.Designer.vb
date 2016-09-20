@@ -98,6 +98,7 @@ Partial Class dlgRenameDescriptive
         Me.MinimizeBox = False
         Me.Name = "dlgRenameDescriptive"
         Me.Tag = "Rename_Object"
+        Me.Text = "Rename Objects"
         Me.ResumeLayout(False)
 
     End Sub
