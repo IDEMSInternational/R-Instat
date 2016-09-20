@@ -57,11 +57,11 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverMultipleTwoVar.IsEmpty AndAlso Not ucrSecondVariableReceiver.IsEmpty Then
+        If ucrReceiverMultipleTwoVar.IsEmpty Or ucrSecondVariableReceiver.IsEmpty Or (ucrTwoVarGraphSave.chkSaveGraph.Checked And ucrTwoVarGraphSave.ucrInputGraphName.IsEmpty) Then
+            ucrBase.OKEnabled(False)
+        Else
             ucrBase.OKEnabled(True)
             Results()
-        Else
-            ucrBase.OKEnabled(False)
         End If
     End Sub
 

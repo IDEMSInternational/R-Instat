@@ -58,11 +58,10 @@ Public Class dlgUseGraph
 
 
     Private Sub TestOkEnabled()
-        If Not ucrGraphReceiver.IsEmpty Then
-            'ucr 'save graph for use graph' is checked and empty then we should not enable OK
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrGraphReceiver.IsEmpty Or (ucrSaveGraphForUseGraph.chkSaveGraph.Checked And ucrSaveGraphForUseGraph.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
