@@ -40,6 +40,8 @@ Public Class dlgCopySheet
     Private Sub SetDefaults()
         If ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "" Then
             ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
+        Else
+            ucrNewDataFrameName.SetName("")
         End If
     End Sub
 
