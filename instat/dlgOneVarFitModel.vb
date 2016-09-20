@@ -18,7 +18,7 @@ Imports instat.Translations
 
 
 Public Class dlgOneVarFitModel
-    Public clsRConvert As New RFunction
+    Public clsRConvert, clsRCIFunction As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -27,7 +27,7 @@ Public Class dlgOneVarFitModel
             SetDefaults()
             bfirstload = False
         Else
-            'ReopenDialog()
+            ReopenDialog()
         End If
         autoTranslate(Me)
     End Sub
@@ -48,18 +48,29 @@ Public Class dlgOneVarFitModel
         ucrSelectorOneVarFitMod.Focus()
         ucrSelectorOneVarFitMod.Reset()
         UcrReceiver.SetMeAsReceiver()
-
+        chkConvertToVariate.Checked = False
+        chkConvertToVariate.Visible = False
         ucrSaveModel.Visible = True
         chkSaveModel.Checked = True
         ucrSaveModel.Reset()
         ConverttoVariate()
+        'sdgOneVarFitModel.SetDefaults()
+        '       sdgOneVarFitModDisplay.SetDefaults()
+        ucrSaveModel.Reset()
+        TestOKEnabled()
+        If (ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
+            ucrSaveModel.SetName(ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_dist")
+        Else
+            ucrSaveModel.SetName("")
+        End If
     End Sub
 
+    Private Sub ReopenDialog()
+    End Sub
 
     Private Sub TestOKEnabled()
         If (chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso UcrDistributions.Enabled AndAlso Not UcrReceiver.IsEmpty Then
             UcrBase.OKEnabled(True)
-            ' add in for other things - e.g. receiver, etc
         Else
             UcrBase.OKEnabled(False)
         End If
@@ -143,6 +154,21 @@ Public Class dlgOneVarFitModel
         End If
         AssignSaveModel()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles UcrDistributions.cboDistributionsIndexChanged
+        '    sdgModelOptions.ucrDistributions.ReceiverDatatype(UcrDistributions.strDataType)
+        '   sdgModelOptions.ucrDistributions.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        '  sdgModelOptions.RestrictLink()
+        ' 'TODO:   Include multinomial as an option And the appropriate function
+        'If (UcrDistributions.clsCurrDistribution.strNameTag = "Normal") Then
+        'UcrBase.clsRsyntax.SetFunction("lm")
+        'UcrBase.clsRsyntax.RemoveParameter("family")
+        'Else
+        '   clsRCIFunction.SetRCommand(UcrDistributions.clsCurrDistribution.strGLMFunctionName)
+        '  UcrBase.clsRsyntax.SetFunction("glm")
+        ' UcrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+        'End If
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
