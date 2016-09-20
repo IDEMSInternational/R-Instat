@@ -68,8 +68,7 @@ Public Class dlgMerge
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            End If
-            If rdoMergeByAllColumns.Checked Then
+            ElseIf rdoMergeByAllColumns.Checked Then
                 ucrBase.OKEnabled(True)
             End If
         End If
