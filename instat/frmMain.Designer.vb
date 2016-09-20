@@ -688,7 +688,6 @@ Partial Class frmMain
         '
         'mnuModelOneVariableFitModel
         '
-        Me.mnuModelOneVariableFitModel.Enabled = False
         Me.mnuModelOneVariableFitModel.Name = "mnuModelOneVariableFitModel"
         Me.mnuModelOneVariableFitModel.Size = New System.Drawing.Size(169, 22)
         Me.mnuModelOneVariableFitModel.Tag = "Fit_Model..."
