@@ -159,7 +159,6 @@ Public Class dlgStack
         End If
         TestOKEnabled()
     End Sub
-
     Private Sub ucrFactorInto_NameChanged() Handles ucrFactorInto.NameChanged
         SetFactorIntoText()
     End Sub
