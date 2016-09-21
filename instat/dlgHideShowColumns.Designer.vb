@@ -37,6 +37,8 @@ Partial Class dlgHideShowColumns
         '
         'ucrSelectorForHiddenColumns
         '
+        Me.ucrSelectorForHiddenColumns.bShowHiddenColumns = False
+        Me.ucrSelectorForHiddenColumns.bUseCurrentFilter = False
         Me.ucrSelectorForHiddenColumns.Location = New System.Drawing.Point(13, 13)
         Me.ucrSelectorForHiddenColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForHiddenColumns.Name = "ucrSelectorForHiddenColumns"
@@ -71,6 +73,8 @@ Partial Class dlgHideShowColumns
         Me.Controls.Add(Me.ucrSelectorForHiddenColumns)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgHideShowColumns"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Hidden_Columns"

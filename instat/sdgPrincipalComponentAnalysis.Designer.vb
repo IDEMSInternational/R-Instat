@@ -47,11 +47,11 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbIndividuals = New System.Windows.Forms.TabPage()
         Me.tbBiplot = New System.Windows.Forms.TabPage()
         Me.tbBarPlot = New System.Windows.Forms.TabPage()
+        Me.ucrReceiverFactor = New instat.ucrReceiverMultiple()
         Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.ucrReceiverFactor = New instat.ucrReceiverMultiple()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -115,10 +115,10 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.chkEigenVectors.AutoSize = True
         Me.chkEigenVectors.Location = New System.Drawing.Point(6, 38)
         Me.chkEigenVectors.Name = "chkEigenVectors"
-        Me.chkEigenVectors.Size = New System.Drawing.Size(92, 17)
+        Me.chkEigenVectors.Size = New System.Drawing.Size(88, 17)
         Me.chkEigenVectors.TabIndex = 2
         Me.chkEigenVectors.Tag = "Eigen_Vectors"
-        Me.chkEigenVectors.Text = "Eigen Vectors"
+        Me.chkEigenVectors.Text = "Eigenvectors"
         Me.chkEigenVectors.UseVisualStyleBackColor = True
         '
         'chkScores
@@ -137,10 +137,10 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.chkEigenValues.AutoSize = True
         Me.chkEigenValues.Location = New System.Drawing.Point(6, 15)
         Me.chkEigenValues.Name = "chkEigenValues"
-        Me.chkEigenValues.Size = New System.Drawing.Size(88, 17)
+        Me.chkEigenValues.Size = New System.Drawing.Size(84, 17)
         Me.chkEigenValues.TabIndex = 0
         Me.chkEigenValues.Tag = "Eigen_Values"
-        Me.chkEigenValues.Text = "Eigen Values"
+        Me.chkEigenValues.Text = "Eigenvalues"
         Me.chkEigenValues.UseVisualStyleBackColor = True
         '
         'tbGraphics
@@ -347,6 +347,15 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbBarPlot.Text = "Bar Plot"
         Me.tbBarPlot.UseVisualStyleBackColor = True
         '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(253, 43)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFactor.TabIndex = 4
+        '
         'ucrSelectorFactor
         '
         Me.ucrSelectorFactor.bShowHiddenColumns = False
@@ -385,15 +394,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
         '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(253, 43)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactor.TabIndex = 4
-        '
         'sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -402,6 +402,8 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgPrincipalComponentAnalysis"
         Me.Tag = "PCA_Options"
         Me.Text = "PCA Options"

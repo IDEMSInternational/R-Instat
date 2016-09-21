@@ -55,13 +55,17 @@ Public Class dlgUseGraph
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
+
     Private Sub TestOkEnabled()
-        If Not ucrGraphReceiver.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrGraphReceiver.IsEmpty Or (ucrSaveGraphForUseGraph.chkSaveGraph.Checked And ucrSaveGraphForUseGraph.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
+
+
     Private Sub ucrGraphReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGraphReceiver.SelectionChanged
         If Not ucrGraphReceiver.IsEmpty Then
             clsLeftCommand.AddParameter("graph_name", ucrGraphReceiver.GetVariableNames())

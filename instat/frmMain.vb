@@ -1091,4 +1091,20 @@ Public Class frmMain
     Private Sub mnuModelGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelGeneralFitModel.Click
         dlgFitModel.ShowDialog()
     End Sub
+
+    Private Sub mnuImportFromOpenDataKit_Click(sender As Object, e As EventArgs) Handles mnuImportFromODK.Click
+        dlgImportFromODK.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOneVariableFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelOneVariableFitModel.Click
+        dlgOneVarFitModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelTwoVariablesUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesUseModel.Click
+        dlgTwoVariableUseModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseColumnGenerateEnter_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateEnter.Click
+        dlgEnter.ShowDialog()
+    End Sub
 End Class

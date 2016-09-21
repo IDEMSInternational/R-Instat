@@ -166,6 +166,14 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
 }
 )
 
+instat_object$set("public", "import_from_ODK", function(username, password, form_name, platform) {
+  out <- import_from_ODK(username, password, form_name, platform)
+  data_list <- list(out)
+  names(data_list) <- form_name
+  self$import_data(data_tables = data_list)
+}
+)
+
 # Now appending/merging not setting so maybe should be renamed
 instat_object$set("public", "set_meta", function(new_meta) {
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
@@ -616,8 +624,8 @@ instat_object$set("public", "frequency_tables", function(data_name, x_col_names,
 } 
 )
 
-instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE) {
-  self$get_data_objects(data_name)$anova_tables(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level)
+instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  self$get_data_objects(data_name)$anova_tables(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level, means = means)
 } 
 )
 

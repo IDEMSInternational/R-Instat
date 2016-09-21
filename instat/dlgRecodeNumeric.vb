@@ -33,7 +33,6 @@ Public Class dlgRecodeNumeric
     Private Sub InitialiseDialog()
         ucrReceiverRecode.Selector = ucrSelectorForRecode
         ucrReceiverRecode.SetMeAsReceiver()
-        ucrMultipleNumericRecode.bIsNumericInput = True
         ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
@@ -42,8 +41,8 @@ Public Class dlgRecodeNumeric
         ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrInputRecode.SetValidationTypeAsRVariable()
-
-
+        ucrMultipleLabels.SetValidationTypeAsList()
+        ucrMultipleNumericRecode.SetValidationTypeAsNumericList()
     End Sub
 
     Private Sub SetDefaults()
@@ -52,9 +51,8 @@ Public Class dlgRecodeNumeric
         rdoRight.Checked = True
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
-        ucrMultipleNumericRecode.txtNumericItems.ResetText()
-        ucrMultipleLabels.txtNumericItems.ResetText()
-
+        ucrMultipleNumericRecode.ResetText()
+        ucrMultipleLabels.ResetText()
     End Sub
 
     Private Sub ReopenDialog()
@@ -62,8 +60,16 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverRecode.IsEmpty() = False AndAlso ucrMultipleNumericRecode.txtNumericItems.Text <> "" Then
-            ucrBase.OKEnabled(True)
+        If Not ucrReceiverRecode.IsEmpty() AndAlso Not ucrMultipleNumericRecode.IsEmpty AndAlso Not ucrInputRecode.IsEmpty Then
+            If chkAddLabels.Checked AndAlso Not ucrMultipleLabels.IsEmpty Then
+                If Not ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1 Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -79,43 +85,43 @@ Public Class dlgRecodeNumeric
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrMultipleNumericRecode_Leave(sender As Object, e As EventArgs) Handles ucrMultipleNumericRecode.Leave
-        If ucrMultipleNumericRecode.clsNumericList.clsParameters.Count = 1 Then
-            If ucrMultipleNumericRecode.txtNumericItems.Text < 2 Then
+    Private Sub ucrMultipleNumericRecode_NameChanged() Handles ucrMultipleNumericRecode.NameChanged
+        If ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 Then
+            If ucrMultipleNumericRecode.GetText < 2 Then
                 MsgBox("If break points is a single number, it specify a number of intervals > 1.", vbOKOnly, "Validation Error")
             End If
-
-
         Else
-            ValidateBreakPointLabelCount(True)
+            ValidateBreakPointLabelCount()
         End If
-        ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrMultipleNumericRecode.clsNumericList)
+        ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrMultipleLabels_Leave(sender As Object, e As EventArgs) Handles ucrMultipleLabels.Leave
-        ValidateBreakPointLabelCount(False)
+    Private Sub ucrMultipleLabels_NameChanged() Handles ucrMultipleLabels.NameChanged
         AddLabelsParameter()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrMultipleNumericRecode_Validated(sender As Object, e As EventArgs) Handles ucrMultipleNumericRecode.Validated, ucrMultipleLabels.Validated
+        ValidateBreakPointLabelCount()
+    End Sub
+
+    Private Sub ucrMultipleLabels_Leave(sender As Object, e As EventArgs) Handles ucrMultipleLabels.Leave, ucrMultipleNumericRecode.Leave
     End Sub
 
     Private Sub AddLabelsParameter()
-        If ucrMultipleLabels.txtNumericItems.Text <> "" Then
-            ucrBase.clsRsyntax.AddParameter("labels", clsRFunctionParameter:=ucrMultipleLabels.clsNumericList)
+        If Not ucrMultipleLabels.IsEmpty() Then
+            ucrBase.clsRsyntax.AddParameter("labels", clsRFunctionParameter:=ucrMultipleLabels.clsRList)
         Else
             ucrBase.clsRsyntax.RemoveParameter("labels")
         End If
     End Sub
 
-    Private Sub ValidateBreakPointLabelCount(bBreakPointFocused As Boolean)
-        If ucrMultipleNumericRecode.clsNumericList.clsParameters.Count > 1 Then
-            If ucrMultipleNumericRecode.txtNumericItems.Text <> "" And ucrMultipleLabels.txtNumericItems.Text <> "" Then
-                If ucrMultipleLabels.clsNumericList.clsParameters.Count <> ucrMultipleNumericRecode.clsNumericList.clsParameters.Count - 1 Then
-                    MsgBox("There must be one less label than the number of break points.", vbOKOnly, "Validation Error")
-                    If bBreakPointFocused Then
-                        ucrMultipleNumericRecode.Focus()
-                    Else
-                        ucrMultipleLabels.Focus()
-                    End If
+    Private Sub ValidateBreakPointLabelCount()
+        If ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 Then
+            If Not ucrMultipleNumericRecode.IsEmpty() And Not ucrMultipleLabels.IsEmpty() Then
+                If ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1 Then
+                    MsgBox("There must be one less label than the number of break points. Ok will not be enabled until this is resolved.", vbOKOnly, "Validation Error")
                 End If
             End If
         End If
@@ -129,7 +135,7 @@ Public Class dlgRecodeNumeric
             ucrMultipleLabels.Visible = False
             ucrBase.clsRsyntax.RemoveParameter("labels")
         End If
-
+        TestOKEnabled()
     End Sub
 
     Private Sub grpClosedOn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeft.CheckedChanged, rdoRight.CheckedChanged
@@ -157,11 +163,10 @@ Public Class dlgRecodeNumeric
 
     Private Sub ucrInputRecode_Namechanged() Handles ucrInputRecode.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverRecode_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRecode.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
     End Sub
-
-
 End Class

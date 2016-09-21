@@ -87,6 +87,9 @@ Public Class dlgTransformText
         ucrInputTo.SetName("Lower")
         ucrInputSeparator.SetName("Space")
         ucrInputPad.SetName("Space")
+        If (ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
+            ucrInputPrefixForNewColumn.SetName(ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Transformed")
+        End If
     End Sub
 
     Private Sub TestOkEnabled()

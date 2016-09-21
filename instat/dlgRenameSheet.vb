@@ -42,6 +42,7 @@ Public Class dlgRenameSheet
     Private Sub SetDefaults()
         ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
         ucrInputNewName.Focus()
+        ucrInputNewName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -59,7 +60,7 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrInputNewName.txtInput.Text <> "" Then
+        If Not ucrInputNewName.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

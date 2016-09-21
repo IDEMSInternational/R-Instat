@@ -32,74 +32,74 @@ Partial Class dlgRenameDescriptive
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 196)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 207)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 5
         '
         'ucrSelectorForRenameObject
         '
-        Me.ucrSelectorForRenameObject.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForRenameObject.bShowHiddenColumns = False
+        Me.ucrSelectorForRenameObject.bUseCurrentFilter = False
+        Me.ucrSelectorForRenameObject.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRenameObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRenameObject.Name = "ucrSelectorForRenameObject"
         Me.ucrSelectorForRenameObject.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForRenameObject.TabIndex = 1
+        Me.ucrSelectorForRenameObject.TabIndex = 4
         '
         'ucrReceiverCurrentName
         '
-        Me.ucrReceiverCurrentName.Location = New System.Drawing.Point(279, 39)
+        Me.ucrReceiverCurrentName.Location = New System.Drawing.Point(265, 33)
         Me.ucrReceiverCurrentName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCurrentName.Name = "ucrReceiverCurrentName"
         Me.ucrReceiverCurrentName.Selector = Nothing
         Me.ucrReceiverCurrentName.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCurrentName.TabIndex = 2
+        Me.ucrReceiverCurrentName.TabIndex = 3
         '
         'lblCurrentName
         '
-        Me.lblCurrentName.AutoSize = True
-        Me.lblCurrentName.Location = New System.Drawing.Point(276, 21)
+        Me.lblCurrentName.Location = New System.Drawing.Point(263, 15)
         Me.lblCurrentName.Name = "lblCurrentName"
-        Me.lblCurrentName.Size = New System.Drawing.Size(72, 13)
-        Me.lblCurrentName.TabIndex = 3
+        Me.lblCurrentName.Size = New System.Drawing.Size(100, 23)
+        Me.lblCurrentName.TabIndex = 2
         Me.lblCurrentName.Tag = "Current_Name"
-        Me.lblCurrentName.Text = "Current Name"
+        Me.lblCurrentName.Text = "Current Name:"
         '
         'lblNewName
         '
-        Me.lblNewName.AutoSize = True
-        Me.lblNewName.Location = New System.Drawing.Point(276, 148)
+        Me.lblNewName.Location = New System.Drawing.Point(263, 79)
         Me.lblNewName.Name = "lblNewName"
-        Me.lblNewName.Size = New System.Drawing.Size(60, 13)
-        Me.lblNewName.TabIndex = 4
+        Me.lblNewName.Size = New System.Drawing.Size(100, 23)
+        Me.lblNewName.TabIndex = 1
         Me.lblNewName.Tag = "New_Name"
-        Me.lblNewName.Text = "New Name"
+        Me.lblNewName.Text = "New Name:"
         '
         'ucrInputNewName
         '
         Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(279, 164)
+        Me.ucrInputNewName.Location = New System.Drawing.Point(265, 95)
         Me.ucrInputNewName.Name = "ucrInputNewName"
-        Me.ucrInputNewName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputNewName.TabIndex = 5
+        Me.ucrInputNewName.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputNewName.TabIndex = 0
         '
         'dlgRenameDescriptive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 259)
+        Me.ClientSize = New System.Drawing.Size(417, 264)
+        Me.Controls.Add(Me.ucrReceiverCurrentName)
         Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.lblNewName)
         Me.Controls.Add(Me.lblCurrentName)
-        Me.Controls.Add(Me.ucrReceiverCurrentName)
         Me.Controls.Add(Me.ucrSelectorForRenameObject)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRenameDescriptive"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Rename_Object"
-        Me.Text = "Rename Object"
+        Me.Text = "Rename Objects"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
