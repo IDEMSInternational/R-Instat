@@ -1091,4 +1091,8 @@ Public Class frmMain
     Private Sub mnuModelGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelGeneralFitModel.Click
         dlgFitModel.ShowDialog()
     End Sub
+
+    Private Sub mnuOrganiseColumnGenerateEnter_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateEnter.Click
+        dlgEnter.ShowDialog()
+    End Sub
 End Class
