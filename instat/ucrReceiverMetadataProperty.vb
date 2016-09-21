@@ -24,6 +24,7 @@ Public Class ucrReceiverMetadataProperty
         nudParamValue.Visible = False
         ucrCboParamValue.Visible = False
         ucrColor.Visible = False
+        ucrInputTextValue.Visible = False
         If Not IsNothing(clsLayerParam) Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
@@ -50,12 +51,17 @@ Public Class ucrReceiverMetadataProperty
                 ctrActive = ucrColor
             ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
                 ctrActive = ucrCboParamValue
-
-                ucrCboParamValue.SetItems(clsLayerParam.lstParameterStrings)
-                ucrCboParamValue.Visible = True
+                If clsLayerParam.lstParameterStrings IsNot Nothing AndAlso clsLayerParam.lstParameterStrings.Count > 0 Then
+                    ucrCboParamValue.SetItems(clsLayerParam.lstParameterStrings)
+                Else
+                    ucrCboParamValue.cboInput.Items.Clear()
+                End If
+            ElseIf clsLayerParam.strLayerParameterDataType = "text" Then
+                ctrActive = ucrInputTextValue
             Else
                 ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
             End If
+            ctrActive.Visible = True
         End If
     End Sub
 
@@ -68,6 +74,10 @@ Public Class ucrReceiverMetadataProperty
     End Sub
 
     Private Sub ucrColor_NameChanged() Handles ucrColor.NameChanged
+        RaiseEvent ControlContentsChanged()
+    End Sub
+
+    Private Sub ucrInputTextValue_NameChanged() Handles ucrInputTextValue.NameChanged
         RaiseEvent ControlContentsChanged()
     End Sub
 

@@ -51,6 +51,7 @@ Public Class dlgDescribeOneVariable
         sdgSummaries.SetDefaults()
         ucrSelectorDescribeOneVar.Reset()
         chkSaveResult.Checked = False
+        chkSaveResult.Enabled = False
         chkCustomise.Checked = False
         ChooseFunction()
         StoreResultsParamenter()
@@ -113,8 +114,6 @@ Public Class dlgDescribeOneVariable
     Private Sub chkCustomise_CheckedChanged(sender As Object, e As EventArgs) Handles chkCustomise.CheckedChanged
         ChooseFunction()
     End Sub
-
-
 
     Private Sub StoreResultsParamenter()
         If chkSaveResult.Checked Then

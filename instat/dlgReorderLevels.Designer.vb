@@ -51,6 +51,7 @@ Partial Class dlgReorderLevels
         'ucrReceiverFactor
         '
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(249, 32)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
@@ -58,7 +59,10 @@ Partial Class dlgReorderLevels
         '
         'ucrSelectorFactorLevelsToReorder
         '
+        Me.ucrSelectorFactorLevelsToReorder.bShowHiddenColumns = False
+        Me.ucrSelectorFactorLevelsToReorder.bUseCurrentFilter = False
         Me.ucrSelectorFactorLevelsToReorder.Location = New System.Drawing.Point(5, 6)
+        Me.ucrSelectorFactorLevelsToReorder.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactorLevelsToReorder.Name = "ucrSelectorFactorLevelsToReorder"
         Me.ucrSelectorFactorLevelsToReorder.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorFactorLevelsToReorder.TabIndex = 1
@@ -81,6 +85,8 @@ Partial Class dlgReorderLevels
         Me.Controls.Add(Me.ucrSelectorFactorLevelsToReorder)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgReorderLevels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Reorder_Levels"

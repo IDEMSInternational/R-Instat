@@ -48,6 +48,9 @@ Public Class dlgViewDescriptives
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_objects")
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 349
+        rdoAllContents.Enabled = False
+        rdoComponent.Enabled = False
+        rdoViewGraph.Enabled = False
     End Sub
 
     Private Sub SetDefaults()

@@ -65,10 +65,10 @@ Public Class dlgPermuteColumn
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverPermuteRows.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverPermuteRows.IsEmpty AndAlso Not ucrInputPermuteRows.IsEmpty Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -101,6 +101,7 @@ Public Class dlgPermuteColumn
 
     Private Sub ucrInputPermuteRows_nameChanged() Handles ucrInputPermuteRows.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPermuteRows.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPermuteRows.GetText, bAssignToIsPrefix:=True)
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrPermuteRowsSelector_DataFrameChanged() Handles ucrPermuteRowsSelector.DataFrameChanged

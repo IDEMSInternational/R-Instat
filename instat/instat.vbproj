@@ -107,6 +107,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
@@ -153,10 +154,28 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgEnter.Designer.vb">
+      <DependentUpon>dlgEnter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEnter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFitModel.Designer.vb">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFitModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromODK.Designer.vb">
+      <DependentUpon>dlgImportFromODK.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromODK.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneVarFitModel2.Designer.vb">
+      <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVarFitModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneVariableGraph.Designer.vb">
@@ -171,6 +190,12 @@
     <Compile Include="dlgOpenSST.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTwoVariableUseModel.Designer.vb">
+      <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoVariableUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDescribeDisplay.Designer.vb">
       <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </Compile>
@@ -181,6 +206,18 @@
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDescribeTwoVarGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneVarFitModDisplay.Designer.vb">
+      <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarFitModDisplay.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneVarFitModel.Designer.vb">
+      <DependentUpon>sdgOneVarFitModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarFitModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgOneVarGraph.Designer.vb">
@@ -735,12 +772,6 @@
     <Compile Include="sdgSummaries.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
-      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgFrequencyPolygonOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgLayerOptions.Designer.vb">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </Compile>
@@ -763,12 +794,6 @@
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPrincipalComponentAnalysis.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgThemeOptions.Designer.vb">
-      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgThemeOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgVariableTransformations.Designer.vb">
@@ -2050,6 +2075,9 @@
     <EmbeddedResource Include="dlgDistanceText.sw-KE.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgEnter.resx">
+      <DependentUpon>dlgEnter.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.fr-FR.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
     </EmbeddedResource>
@@ -2152,6 +2180,9 @@
     <EmbeddedResource Include="dlgHideShowColumns.sw-KE.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromODK.resx">
+      <DependentUpon>dlgImportFromODK.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -2217,6 +2248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarFitModel2.resx">
+      <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVariableGraph.fr-FR.resx">
       <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
@@ -2503,6 +2537,9 @@
     <EmbeddedResource Include="dlgTwoSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoVariableUseModel.resx">
+      <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
@@ -2629,6 +2666,12 @@
     <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarFitModDisplay.resx">
+      <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarFitModel.resx">
+      <DependentUpon>sdgOneVarFitModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
     </EmbeddedResource>
@@ -2649,15 +2692,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDescribeDisplay.sw-KE.resx">
       <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
-      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFrequencyPolygonOptions.resx">
-      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFrequencyPolygonOptions.sw-KE.resx">
-      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLayerOptions.fr-FR.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
@@ -3784,15 +3818,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgThemeOptions.fr-FR.resx">
-      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgThemeOptions.resx">
-      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgThemeOptions.sw-KE.resx">
-      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.fr-FR.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>

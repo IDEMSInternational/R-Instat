@@ -31,13 +31,14 @@ Partial Class sdgDescribeDisplay
         Me.chkPercentages = New System.Windows.Forms.CheckBox()
         Me.grpAnovaOptions = New System.Windows.Forms.GroupBox()
         Me.chkSignifStars = New System.Windows.Forms.CheckBox()
+        Me.chkMeans = New System.Windows.Forms.CheckBox()
         Me.grpFrequenciesOptions.SuspendLayout()
         Me.grpAnovaOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrButtonsDescribeDisplay
         '
-        Me.ucrButtonsDescribeDisplay.Location = New System.Drawing.Point(32, 160)
+        Me.ucrButtonsDescribeDisplay.Location = New System.Drawing.Point(32, 178)
         Me.ucrButtonsDescribeDisplay.Name = "ucrButtonsDescribeDisplay"
         Me.ucrButtonsDescribeDisplay.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsDescribeDisplay.TabIndex = 2
@@ -113,11 +114,12 @@ Partial Class sdgDescribeDisplay
         '
         'grpAnovaOptions
         '
+        Me.grpAnovaOptions.Controls.Add(Me.chkMeans)
         Me.grpAnovaOptions.Controls.Add(Me.chkSignifLevel)
         Me.grpAnovaOptions.Controls.Add(Me.chkSignifStars)
         Me.grpAnovaOptions.Location = New System.Drawing.Point(7, 86)
         Me.grpAnovaOptions.Name = "grpAnovaOptions"
-        Me.grpAnovaOptions.Size = New System.Drawing.Size(157, 63)
+        Me.grpAnovaOptions.Size = New System.Drawing.Size(157, 86)
         Me.grpAnovaOptions.TabIndex = 111
         Me.grpAnovaOptions.TabStop = False
         Me.grpAnovaOptions.Tag = "Anova_Options"
@@ -134,15 +136,26 @@ Partial Class sdgDescribeDisplay
         Me.chkSignifStars.Text = "Significance Stars"
         Me.chkSignifStars.UseVisualStyleBackColor = True
         '
+        'chkMeans
+        '
+        Me.chkMeans.AutoSize = True
+        Me.chkMeans.Location = New System.Drawing.Point(8, 61)
+        Me.chkMeans.Name = "chkMeans"
+        Me.chkMeans.Size = New System.Drawing.Size(58, 17)
+        Me.chkMeans.TabIndex = 2
+        Me.chkMeans.Tag = "Means"
+        Me.chkMeans.Text = "Means"
+        Me.chkMeans.UseVisualStyleBackColor = True
+        '
         'sdgDescribeDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(219, 191)
+        Me.ClientSize = New System.Drawing.Size(219, 213)
         Me.Controls.Add(Me.grpFrequenciesOptions)
         Me.Controls.Add(Me.grpAnovaOptions)
         Me.Controls.Add(Me.ucrButtonsDescribeDisplay)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeDisplay"
@@ -165,4 +178,5 @@ Partial Class sdgDescribeDisplay
     Friend WithEvents chkPercentages As CheckBox
     Friend WithEvents grpAnovaOptions As GroupBox
     Friend WithEvents chkSignifStars As CheckBox
+    Friend WithEvents chkMeans As CheckBox
 End Class

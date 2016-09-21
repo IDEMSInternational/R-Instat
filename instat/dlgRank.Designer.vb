@@ -45,7 +45,7 @@ Partial Class dlgRank
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(255, 25)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(255, 13)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 1
@@ -197,6 +197,7 @@ Partial Class dlgRank
         'ucrSelectorForRank
         '
         Me.ucrSelectorForRank.bShowHiddenColumns = False
+        Me.ucrSelectorForRank.bUseCurrentFilter = False
         Me.ucrSelectorForRank.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRank.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRank.Name = "ucrSelectorForRank"
@@ -205,7 +206,7 @@ Partial Class dlgRank
         '
         'ucrReceiverRank
         '
-        Me.ucrReceiverRank.Location = New System.Drawing.Point(255, 41)
+        Me.ucrReceiverRank.Location = New System.Drawing.Point(257, 30)
         Me.ucrReceiverRank.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRank.Name = "ucrReceiverRank"
         Me.ucrReceiverRank.Selector = Nothing
@@ -233,6 +234,8 @@ Partial Class dlgRank
         Me.Controls.Add(Me.ucrReceiverRank)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRank"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Rank"

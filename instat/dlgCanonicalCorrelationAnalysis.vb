@@ -58,7 +58,9 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverYvariables.IsEmpty()) And (Not ucrReceiverXvariables.IsEmpty()) Then
+        If chkSaveResult.Checked AndAlso ucrResultName.IsEmpty Then
+            ucrBaseCCA.OKEnabled(False)
+        ElseIf (Not ucrReceiverYvariables.IsEmpty()) And (Not ucrReceiverXvariables.IsEmpty()) Then
             ucrBaseCCA.OKEnabled(True)
             AssignName()
         Else
@@ -90,6 +92,7 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Private Sub ucrResultName_NameChanged() Handles ucrResultName.NameChanged
         AssignName()
+        TestOKEnabled()
     End Sub
 
     Private Sub chkSaveResult_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResult.CheckedChanged
@@ -99,6 +102,7 @@ Public Class dlgCanonicalCorrelationAnalysis
             ucrResultName.Visible = False
         End If
         AssignName()
+        TestOKEnabled()
     End Sub
 
     Public Sub AssignName()
@@ -116,4 +120,5 @@ Public Class dlgCanonicalCorrelationAnalysis
     Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBaseCCA.ClickOk
         sdgCanonicalCorrelation.CCAOptions()
     End Sub
+
 End Class

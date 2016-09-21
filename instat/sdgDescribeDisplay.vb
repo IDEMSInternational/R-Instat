@@ -39,6 +39,7 @@ Public Class sdgDescribeDisplay
         chkTranspose.Checked = False
         chkSignifLevel.Checked = False
         chkSignifStars.Checked = False
+        chkMeans.Checked = False
     End Sub
 
     Private Sub chkAddMargins_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddMargins.CheckedChanged
@@ -92,6 +93,14 @@ Public Class sdgDescribeDisplay
         End If
     End Sub
 
+    Private Sub chkMeans_CheckedChanged(sender As Object, e As EventArgs) Handles chkMeans.CheckedChanged
+        If chkMeans.Checked Then
+            clsRAnovaDispOptions.AddParameter("means", "TRUE")
+        Else
+            clsRAnovaDispOptions.RemoveParameterByName("means")
+        End If
+    End Sub
+
     Public Sub GrpBoxEnable()
         If ((dlgDescribeTwoVariable.strVarType = "factor") And (dlgDescribeTwoVariable.strSecondVarType = "numeric" OrElse dlgDescribeTwoVariable.strSecondVarType = "integer")) Then
             grpAnovaOptions.Enabled = True
@@ -101,6 +110,7 @@ Public Class sdgDescribeDisplay
             chkTranspose.Enabled = False
             chkSignifLevel.Enabled = True
             chkSignifStars.Enabled = True
+            chkMeans.Enabled = True
             grpFrequenciesOptions.Enabled = False
         ElseIf ((dlgDescribeTwoVariable.strVarType = "factor") And (dlgDescribeTwoVariable.strSecondVarType = "factor")) Then
             grpFrequenciesOptions.Enabled = True
@@ -110,6 +120,7 @@ Public Class sdgDescribeDisplay
             chkTranspose.Enabled = True
             chkSignifLevel.Enabled = False
             chkSignifStars.Enabled = False
+            chkMeans.Enabled = False
             grpAnovaOptions.Enabled = False
         End If
     End Sub

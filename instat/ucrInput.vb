@@ -20,7 +20,7 @@ Public Class ucrInput
     Public Event ContentsChanged()
     Protected strValidationType As String = "None"
     Dim strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
-    Protected clsRList As New RFunction
+    Public clsRList As New RFunction
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
     Protected bMinimumIncluded, bMaximumIncluded As Boolean

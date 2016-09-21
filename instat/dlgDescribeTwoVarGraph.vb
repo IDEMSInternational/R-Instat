@@ -51,17 +51,17 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrTwoVarGraphSave.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
-        ucrTwoVarGraphSave.strPrefix = "TwoVaribleGraph"
+        ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 0
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverMultipleTwoVar.IsEmpty AndAlso Not ucrSecondVariableReceiver.IsEmpty Then
+        If ucrReceiverMultipleTwoVar.IsEmpty Or ucrSecondVariableReceiver.IsEmpty Or (ucrTwoVarGraphSave.chkSaveGraph.Checked And ucrTwoVarGraphSave.ucrInputGraphName.IsEmpty) Then
+            ucrBase.OKEnabled(False)
+        Else
             ucrBase.OKEnabled(True)
             Results()
-        Else
-            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -69,7 +69,7 @@ Public Class dlgDescribeTwoVarGraph
         SetDefaults()
     End Sub
 
-    Private Sub ucrTwoVarGraphSave_Load() Handles ucrTwoVarGraphSave.GraphNameChanged, ucrTwoVarGraphSave.SaveGraphCheckedChanged
+    Private Sub ucrTwoVarGraphSave_Load() Handles ucrTwoVarGraphSave.GraphNameChanged, ucrTwoVarGraphSave.SaveGraphCheckedChanged, ucrTwoVarGraphSave.Load
         If ucrTwoVarGraphSave.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrTwoVarGraphSave.strGraphName, strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrTwoVarGraphSave.strGraphName)
         Else

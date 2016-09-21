@@ -33,6 +33,10 @@ data_object <- R6Class("data_object",
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
   if ( !(is.null(data_name) || data_name == "" || missing(data_name))) {
+    if(data_name != make.names(data_name)) {
+      message("data_name is invalid. It will be made valid automatically.")
+      data_name <- make.names(data_name)
+    }
     self$append_to_metadata(data_name_label, data_name)
   }
   else if (!self$is_metadata(data_name_label)) {
@@ -456,7 +460,7 @@ data_object$set("public", "get_columns_from_data", function(col_names, force_as_
 }
 )
 
-data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE, margin_func = list(Sum = sum, Max = max),  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
+data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE,  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
   multiply_by = 1
   for (i in 1:length(x_col_names)){
@@ -472,12 +476,14 @@ data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, 
 }
 )
 
-data_object$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE) {
+data_object$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
   if(sign_level || signif.stars)warning("This is nolonger descriptive")
   if(sign_level)(end_col = 5)else(end_col = 4)
   for (i in 1:length(x_col_names)){
-      print(anova(lm(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data))[1:end_col], signif.stars = signif.stars)
+    my_model = lm(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data)
+    print(anova(my_model)[1:end_col], signif.stars = signif.stars)
+    if(means)(print(model.tables(aov(my_model), type = "means")))
   }
 }
 )
@@ -1108,7 +1114,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
 )
 
 data_object$set("public", "set_hidden_columns", function(col_names) {
-  if(col_names == "") self$unhide_all_columns()
+  if(length(col_names) == 0) self$unhide_all_columns()
   else {
     if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
     
