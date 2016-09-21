@@ -50,6 +50,7 @@ Partial Class dlgRestrict
         'ucrSelectorFilter
         '
         Me.ucrSelectorFilter.bShowHiddenColumns = False
+        Me.ucrSelectorFilter.bUseCurrentFilter = False
         Me.ucrSelectorFilter.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorFilter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFilter.Name = "ucrSelectorFilter"
@@ -58,7 +59,7 @@ Partial Class dlgRestrict
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 318)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 307)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -84,7 +85,7 @@ Partial Class dlgRestrict
         'lblFilterPreview
         '
         Me.lblFilterPreview.AutoSize = True
-        Me.lblFilterPreview.Location = New System.Drawing.Point(7, 299)
+        Me.lblFilterPreview.Location = New System.Drawing.Point(7, 288)
         Me.lblFilterPreview.Name = "lblFilterPreview"
         Me.lblFilterPreview.Size = New System.Drawing.Size(115, 13)
         Me.lblFilterPreview.TabIndex = 12
@@ -93,7 +94,7 @@ Partial Class dlgRestrict
         'ucrInputFilterPreview
         '
         Me.ucrInputFilterPreview.IsReadOnly = False
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(135, 291)
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(135, 280)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         Me.ucrInputFilterPreview.Size = New System.Drawing.Size(270, 21)
         Me.ucrInputFilterPreview.TabIndex = 13
@@ -102,7 +103,7 @@ Partial Class dlgRestrict
         '
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsSubset)
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsFilter)
-        Me.grpApplyOptions.Location = New System.Drawing.Point(10, 216)
+        Me.grpApplyOptions.Location = New System.Drawing.Point(11, 204)
         Me.grpApplyOptions.Name = "grpApplyOptions"
         Me.grpApplyOptions.Size = New System.Drawing.Size(232, 42)
         Me.grpApplyOptions.TabIndex = 14
@@ -134,7 +135,7 @@ Partial Class dlgRestrict
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(7, 269)
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(7, 258)
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
         Me.lblNewDataFrameName.Size = New System.Drawing.Size(118, 13)
         Me.lblNewDataFrameName.TabIndex = 15
@@ -143,7 +144,7 @@ Partial Class dlgRestrict
         'ucrNewDataFrameName
         '
         Me.ucrNewDataFrameName.IsReadOnly = False
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(135, 264)
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(135, 253)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(190, 21)
         Me.ucrNewDataFrameName.TabIndex = 16
@@ -152,7 +153,7 @@ Partial Class dlgRestrict
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 373)
+        Me.ClientSize = New System.Drawing.Size(417, 367)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.grpApplyOptions)

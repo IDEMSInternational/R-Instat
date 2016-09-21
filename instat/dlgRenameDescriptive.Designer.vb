@@ -22,7 +22,6 @@ Partial Class dlgRenameDescriptive
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRenameDescriptive))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForRenameObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverCurrentName = New instat.ucrReceiverSingle()
@@ -33,48 +32,65 @@ Partial Class dlgRenameDescriptive
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Location = New System.Drawing.Point(10, 207)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 5
         '
         'ucrSelectorForRenameObject
         '
         Me.ucrSelectorForRenameObject.bShowHiddenColumns = False
         Me.ucrSelectorForRenameObject.bUseCurrentFilter = False
-        resources.ApplyResources(Me.ucrSelectorForRenameObject, "ucrSelectorForRenameObject")
+        Me.ucrSelectorForRenameObject.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForRenameObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRenameObject.Name = "ucrSelectorForRenameObject"
+        Me.ucrSelectorForRenameObject.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForRenameObject.TabIndex = 4
         '
         'ucrReceiverCurrentName
         '
-        resources.ApplyResources(Me.ucrReceiverCurrentName, "ucrReceiverCurrentName")
+        Me.ucrReceiverCurrentName.Location = New System.Drawing.Point(265, 33)
+        Me.ucrReceiverCurrentName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCurrentName.Name = "ucrReceiverCurrentName"
         Me.ucrReceiverCurrentName.Selector = Nothing
+        Me.ucrReceiverCurrentName.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverCurrentName.TabIndex = 3
         '
         'lblCurrentName
         '
-        resources.ApplyResources(Me.lblCurrentName, "lblCurrentName")
+        Me.lblCurrentName.Location = New System.Drawing.Point(263, 15)
         Me.lblCurrentName.Name = "lblCurrentName"
+        Me.lblCurrentName.Size = New System.Drawing.Size(100, 23)
+        Me.lblCurrentName.TabIndex = 2
         Me.lblCurrentName.Tag = "Current_Name"
+        Me.lblCurrentName.Text = "Current Name:"
         '
         'lblNewName
         '
-        resources.ApplyResources(Me.lblNewName, "lblNewName")
+        Me.lblNewName.Location = New System.Drawing.Point(263, 79)
         Me.lblNewName.Name = "lblNewName"
+        Me.lblNewName.Size = New System.Drawing.Size(100, 23)
+        Me.lblNewName.TabIndex = 1
         Me.lblNewName.Tag = "New_Name"
+        Me.lblNewName.Text = "New Name:"
         '
         'ucrInputNewName
         '
         Me.ucrInputNewName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNewName, "ucrInputNewName")
+        Me.ucrInputNewName.Location = New System.Drawing.Point(265, 95)
         Me.ucrInputNewName.Name = "ucrInputNewName"
+        Me.ucrInputNewName.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputNewName.TabIndex = 0
         '
         'dlgRenameDescriptive
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(417, 264)
+        Me.Controls.Add(Me.ucrReceiverCurrentName)
         Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.lblNewName)
         Me.Controls.Add(Me.lblCurrentName)
-        Me.Controls.Add(Me.ucrReceiverCurrentName)
         Me.Controls.Add(Me.ucrSelectorForRenameObject)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -82,8 +98,8 @@ Partial Class dlgRenameDescriptive
         Me.MinimizeBox = False
         Me.Name = "dlgRenameDescriptive"
         Me.Tag = "Rename_Object"
+        Me.Text = "Rename Objects"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
