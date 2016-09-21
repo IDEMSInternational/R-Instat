@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDescribeTwoVarGraph
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgDescribeTwoVarGraph
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
@@ -45,15 +45,15 @@ Partial Class dlgDescribeTwoVarGraph
         'lblSecondVariable
         '
         Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(311, 154)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(285, 157)
         Me.lblSecondVariable.Name = "lblSecondVariable"
-        Me.lblSecondVariable.Size = New System.Drawing.Size(85, 13)
+        Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
         Me.lblSecondVariable.TabIndex = 14
-        Me.lblSecondVariable.Text = "Second Variable"
+        Me.lblSecondVariable.Text = "Second Variable:"
         '
         'ucrReceiverMultipleTwoVar
         '
-        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(293, 12)
+        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(284, 12)
         Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
         Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 130)
         Me.ucrReceiverMultipleTwoVar.TabIndex = 15
@@ -61,7 +61,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'ucrSecondVariableReceiver
         '
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(293, 172)
+        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(284, 172)
         Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
         Me.ucrSecondVariableReceiver.Selector = Nothing
@@ -95,18 +95,18 @@ Partial Class dlgDescribeTwoVarGraph
         'lblFirstVariables
         '
         Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(311, 21)
+        Me.lblFirstVariables.Location = New System.Drawing.Point(307, 19)
         Me.lblFirstVariables.Name = "lblFirstVariables"
-        Me.lblFirstVariables.Size = New System.Drawing.Size(78, 13)
+        Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
         Me.lblFirstVariables.TabIndex = 16
         Me.lblFirstVariables.Tag = "First_Variable(s)"
-        Me.lblFirstVariables.Text = "First Variable(s)"
+        Me.lblFirstVariables.Text = "First Variable(s):"
         '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 289)
+        Me.ClientSize = New System.Drawing.Size(416, 289)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
@@ -120,7 +120,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVarGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgDescribeTwoVarGraph"
+        Me.Text = "Two Variable Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

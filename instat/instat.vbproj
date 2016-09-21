@@ -107,6 +107,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
@@ -165,6 +166,12 @@
     <Compile Include="dlgImportFromODK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneVarFitModel2.Designer.vb">
+      <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVarFitModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVariableGraph.Designer.vb">
       <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
     </Compile>
@@ -187,6 +194,18 @@
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDescribeTwoVarGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneVarFitModDisplay.Designer.vb">
+      <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarFitModDisplay.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneVarFitModel.Designer.vb">
+      <DependentUpon>sdgOneVarFitModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarFitModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgOneVarGraph.Designer.vb">
@@ -2215,6 +2234,9 @@
     <EmbeddedResource Include="dlgOneSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarFitModel2.resx">
+      <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVariableGraph.fr-FR.resx">
       <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
     </EmbeddedResource>
@@ -2625,6 +2647,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarFitModDisplay.resx">
+      <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarFitModel.resx">
+      <DependentUpon>sdgOneVarFitModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>

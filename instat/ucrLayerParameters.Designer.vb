@@ -37,7 +37,7 @@ Partial Class ucrLayerParameters
         '
         Me.UcrLayerParamsControls1.Location = New System.Drawing.Point(6, 50)
         Me.UcrLayerParamsControls1.Name = "UcrLayerParamsControls1"
-        Me.UcrLayerParamsControls1.Size = New System.Drawing.Size(290, 25)
+        Me.UcrLayerParamsControls1.Size = New System.Drawing.Size(338, 25)
         Me.UcrLayerParamsControls1.TabIndex = 2
         '
         'UcrLayerParamsControls2
@@ -133,7 +133,7 @@ Partial Class ucrLayerParameters
         Me.Controls.Add(Me.UcrLayerParamsControls2)
         Me.Controls.Add(Me.UcrLayerParamsControls1)
         Me.Name = "ucrLayerParameters"
-        Me.Size = New System.Drawing.Size(300, 355)
+        Me.Size = New System.Drawing.Size(265, 361)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls1, 0)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls2, 0)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls3, 0)

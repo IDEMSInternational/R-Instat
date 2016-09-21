@@ -115,10 +115,10 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.chkEigenVectors.AutoSize = True
         Me.chkEigenVectors.Location = New System.Drawing.Point(6, 38)
         Me.chkEigenVectors.Name = "chkEigenVectors"
-        Me.chkEigenVectors.Size = New System.Drawing.Size(92, 17)
+        Me.chkEigenVectors.Size = New System.Drawing.Size(88, 17)
         Me.chkEigenVectors.TabIndex = 2
         Me.chkEigenVectors.Tag = "Eigen_Vectors"
-        Me.chkEigenVectors.Text = "Eigen Vectors"
+        Me.chkEigenVectors.Text = "Eigenvectors"
         Me.chkEigenVectors.UseVisualStyleBackColor = True
         '
         'chkScores
@@ -137,10 +137,10 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.chkEigenValues.AutoSize = True
         Me.chkEigenValues.Location = New System.Drawing.Point(6, 15)
         Me.chkEigenValues.Name = "chkEigenValues"
-        Me.chkEigenValues.Size = New System.Drawing.Size(88, 17)
+        Me.chkEigenValues.Size = New System.Drawing.Size(84, 17)
         Me.chkEigenValues.TabIndex = 0
         Me.chkEigenValues.Tag = "Eigen_Values"
-        Me.chkEigenValues.Text = "Eigen Values"
+        Me.chkEigenValues.Text = "Eigenvalues"
         Me.chkEigenValues.UseVisualStyleBackColor = True
         '
         'tbGraphics
