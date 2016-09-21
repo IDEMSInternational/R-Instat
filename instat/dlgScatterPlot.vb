@@ -23,9 +23,9 @@ Public Class dlgScatterPlot
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            InitialiseDialog()
             'setdefauts
             SetDefaults()
-            InitialiseDialog()
             bFirstLoad = False
         End If
         autoTranslate(Me)
