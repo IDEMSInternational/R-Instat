@@ -1103,4 +1103,8 @@ Public Class frmMain
     Private Sub mnuModelTwoVariablesUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesUseModel.Click
         dlgTwoVariableUseModel.ShowDialog()
     End Sub
+
+    Private Sub mnuOrganiseColumnGenerateEnter_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateEnter.Click
+        dlgEnter.ShowDialog()
+    End Sub
 End Class
