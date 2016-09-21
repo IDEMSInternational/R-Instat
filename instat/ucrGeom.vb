@@ -58,7 +58,7 @@ Public Class ucrGeom
         Next
         SetGeomFunction(clsTempGeomFunc)
         If clsGeomFunction.strRCommand = Nothing OrElse cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
-            cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_abline")
+            cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
         Else
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand)
         End If
