@@ -184,6 +184,12 @@
     <Compile Include="dlgOpenSST.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTwoVariableUseModel.Designer.vb">
+      <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoVariableUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDescribeDisplay.Designer.vb">
       <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </Compile>
@@ -2521,6 +2527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoVariableUseModel.resx">
+      <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
