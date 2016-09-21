@@ -19,9 +19,9 @@ Imports RDotNet
 Public Class dlgEnter
     Dim dataset As DataFrame
     Dim clsAttach As New RFunction
-        Dim clsDetach As New RFunction
-        Public bFirstLoad As Boolean = True
-        Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim clsDetach As New RFunction
+    Public bFirstLoad As Boolean = True
+    Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 14
         If bFirstLoad Then
@@ -108,19 +108,8 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(":")
         TestOKEnabled()
     End Sub
-
-    Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("*")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdMissingValues_Click(sender As Object, e As EventArgs) Handles cmdMissingValues.Click
+    Private Sub cmdMissingValues_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("NA")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdExponential_Click(sender As Object, e As EventArgs) Handles cmdExponential.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("e")
         TestOKEnabled()
     End Sub
     Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
@@ -128,30 +117,10 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("^")
-        TestOKEnabled()
-    End Sub
-
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("( )", 2)
         TestOKEnabled()
     End Sub
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
-        ucrReceiverForEnterCalculation.Clear()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdSquareBrackets_Click(sender As Object, e As EventArgs) Handles cmdSquareBrackets.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[ ]", 2)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("+")
-        TestOKEnabled()
-    End Sub
-
     Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("-")
         TestOKEnabled()
@@ -165,14 +134,21 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.Backspace()
         TestOKEnabled()
     End Sub
-
-    Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("/")
+    Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("pi")
         TestOKEnabled()
-
     End Sub
 
-    Private Sub cmdConcantenateFunction_Click(sender As Object, e As EventArgs) Handles cmdConcantenateFunction.Click
+    Private Sub cmdSquareBrackets_Click_1(sender As Object, e As EventArgs) Handles cmdSquareBrackets.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[ ]", 2)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdExponential_Click_1(sender As Object, e As EventArgs) Handles cmdExponential.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("E")
+        TestOKEnabled()
+    End Sub
+    Private Sub cmdConcantenateFunction_Click_1(sender As Object, e As EventArgs) Handles cmdConcantenateFunction.Click
         If chkShowEnterArguments.Checked Then
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("c( ,recursive=FALSE)", 17)
         Else
@@ -181,7 +157,7 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdRepelicationFunction_Click(sender As Object, e As EventArgs) Handles cmdRepelicationFunction.Click
+    Private Sub cmdRepelicationFunction_Click_1(sender As Object, e As EventArgs) Handles cmdRepelicationFunction.Click
         If chkShowEnterArguments.Checked Then
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep(x= ,times= ,length= ,each= )", 17)
         Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep( )", 2)
@@ -189,7 +165,7 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdSequenceFunction_Click(sender As Object, e As EventArgs) Handles cmdSequenceFunction.Click
+    Private Sub cmdSequenceFunction_Click_1(sender As Object, e As EventArgs) Handles cmdSequenceFunction.Click
         If chkShowEnterArguments.Checked Then
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq(from= ,to= ,by= )", 11)
         Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq( )", 2)
@@ -197,12 +173,36 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdSequence2_Click(sender As Object, e As EventArgs) Handles cmdSequence2.Click
+    Private Sub cmdSequence2_Click_1(sender As Object, e As EventArgs) Handles cmdSequence2.Click
         Dim length As Integer = ucrDataFrameEnter.iDataFrameLength
         If chkShowEnterArguments.Checked Then
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq(from= ,to= ,length= )", 15)
         Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq( )", 2)
         End If
+        TestOKEnabled()
+    End Sub
+    Private Sub cmdClear_Click_1(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ucrReceiverForEnterCalculation.Clear()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdLETTERS_Click(sender As Object, e As EventArgs) Handles cmdLETTERS.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("LETTERS")
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdLetters2_Click(sender As Object, e As EventArgs) Handles cmdLetters2.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("Letters")
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdMonthMinus_Click(sender As Object, e As EventArgs) Handles cmdMonthMinus.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("month.abb")
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdMonthPlus_Click(sender As Object, e As EventArgs) Handles cmdMonthPlus.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("month.name")
         TestOKEnabled()
     End Sub
 End Class
