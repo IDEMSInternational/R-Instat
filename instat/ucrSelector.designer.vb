@@ -51,7 +51,7 @@ Partial Class ucrSelector
         '
         Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 70)
+        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 92)
         '
         'AddSelectedToolStripMenuItem
         '

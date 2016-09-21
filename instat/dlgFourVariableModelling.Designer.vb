@@ -22,6 +22,7 @@ Partial Class dlgFourVariableModelling
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFourVariableModelling))
         Me.chkFirstFunction = New System.Windows.Forms.CheckBox()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
@@ -49,229 +50,152 @@ Partial Class dlgFourVariableModelling
         '
         'chkFirstFunction
         '
-        Me.chkFirstFunction.AutoSize = True
-        Me.chkFirstFunction.Location = New System.Drawing.Point(271, 102)
+        resources.ApplyResources(Me.chkFirstFunction, "chkFirstFunction")
         Me.chkFirstFunction.Name = "chkFirstFunction"
-        Me.chkFirstFunction.Size = New System.Drawing.Size(67, 17)
-        Me.chkFirstFunction.TabIndex = 23
         Me.chkFirstFunction.Tag = "Function"
-        Me.chkFirstFunction.Text = "Function"
         Me.chkFirstFunction.UseVisualStyleBackColor = True
         '
         'chkConvertToVariate
         '
-        Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(271, 39)
+        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
-        Me.chkConvertToVariate.TabIndex = 20
         Me.chkConvertToVariate.Tag = "Convert_to_Variate"
-        Me.chkConvertToVariate.Text = "Convert to Variate"
         Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
         'cmdModelOptions
         '
-        Me.cmdModelOptions.Location = New System.Drawing.Point(271, 255)
+        resources.ApplyResources(Me.cmdModelOptions, "cmdModelOptions")
         Me.cmdModelOptions.Name = "cmdModelOptions"
-        Me.cmdModelOptions.Size = New System.Drawing.Size(106, 23)
-        Me.cmdModelOptions.TabIndex = 30
         Me.cmdModelOptions.Tag = "Model_Options"
-        Me.cmdModelOptions.Text = "Model Options..."
         Me.cmdModelOptions.UseVisualStyleBackColor = True
         '
         'lblModelPreview
         '
-        Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(7, 229)
+        resources.ApplyResources(Me.lblModelPreview, "lblModelPreview")
         Me.lblModelPreview.Name = "lblModelPreview"
-        Me.lblModelPreview.Size = New System.Drawing.Size(77, 13)
-        Me.lblModelPreview.TabIndex = 27
         Me.lblModelPreview.Tag = "Model_Preview"
-        Me.lblModelPreview.Text = "Model Preview"
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(271, 285)
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(106, 23)
-        Me.cmdDisplayOptions.TabIndex = 33
         Me.cmdDisplayOptions.Tag = "Display_Options"
-        Me.cmdDisplayOptions.Text = "Display Options..."
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'lblSecondExplanatoryVariable
         '
-        Me.lblSecondExplanatoryVariable.AutoSize = True
-        Me.lblSecondExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondExplanatoryVariable.Location = New System.Drawing.Point(271, 145)
+        resources.ApplyResources(Me.lblSecondExplanatoryVariable, "lblSecondExplanatoryVariable")
         Me.lblSecondExplanatoryVariable.Name = "lblSecondExplanatoryVariable"
-        Me.lblSecondExplanatoryVariable.Size = New System.Drawing.Size(143, 13)
-        Me.lblSecondExplanatoryVariable.TabIndex = 25
         Me.lblSecondExplanatoryVariable.Tag = "Second_Explanatory_Variable"
-        Me.lblSecondExplanatoryVariable.Text = "Second Explanatory Variable"
         '
         'chkSaveModel
         '
-        Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(10, 286)
+        resources.ApplyResources(Me.chkSaveModel, "chkSaveModel")
         Me.chkSaveModel.Name = "chkSaveModel"
-        Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
-        Me.chkSaveModel.TabIndex = 31
         Me.chkSaveModel.Tag = "Save_Model"
-        Me.chkSaveModel.Text = "Save Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
         '
         'lblFirstExplanatoryVariable
         '
-        Me.lblFirstExplanatoryVariable.AutoSize = True
-        Me.lblFirstExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(271, 60)
+        resources.ApplyResources(Me.lblFirstExplanatoryVariable, "lblFirstExplanatoryVariable")
         Me.lblFirstExplanatoryVariable.Name = "lblFirstExplanatoryVariable"
-        Me.lblFirstExplanatoryVariable.Size = New System.Drawing.Size(125, 13)
-        Me.lblFirstExplanatoryVariable.TabIndex = 21
         Me.lblFirstExplanatoryVariable.Tag = "First_Explanatory_Variable"
-        Me.lblFirstExplanatoryVariable.Text = "First Explanatory Variable"
         '
         'lblResponse
         '
-        Me.lblResponse.AutoSize = True
-        Me.lblResponse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblResponse.Location = New System.Drawing.Point(271, 0)
+        resources.ApplyResources(Me.lblResponse, "lblResponse")
         Me.lblResponse.Name = "lblResponse"
-        Me.lblResponse.Size = New System.Drawing.Size(96, 13)
-        Me.lblResponse.TabIndex = 18
         Me.lblResponse.Tag = "Response_Variable"
-        Me.lblResponse.Text = "Response Variable"
         '
         'lblThirdExplanatoryVariable
         '
-        Me.lblThirdExplanatoryVariable.AutoSize = True
-        Me.lblThirdExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblThirdExplanatoryVariable.Location = New System.Drawing.Point(271, 210)
+        resources.ApplyResources(Me.lblThirdExplanatoryVariable, "lblThirdExplanatoryVariable")
         Me.lblThirdExplanatoryVariable.Name = "lblThirdExplanatoryVariable"
-        Me.lblThirdExplanatoryVariable.Size = New System.Drawing.Size(130, 13)
-        Me.lblThirdExplanatoryVariable.TabIndex = 34
         Me.lblThirdExplanatoryVariable.Tag = "Third_Explanatory_Variable"
-        Me.lblThirdExplanatoryVariable.Text = "Third Explanatory Variable"
         '
         'cboModelOperators1
         '
         Me.cboModelOperators1.FormattingEnabled = True
-        Me.cboModelOperators1.Items.AddRange(New Object() {"+", ":", "*", "/"})
-        Me.cboModelOperators1.Location = New System.Drawing.Point(339, 119)
+        Me.cboModelOperators1.Items.AddRange(New Object() {resources.GetString("cboModelOperators1.Items"), resources.GetString("cboModelOperators1.Items1"), resources.GetString("cboModelOperators1.Items2"), resources.GetString("cboModelOperators1.Items3")})
+        resources.ApplyResources(Me.cboModelOperators1, "cboModelOperators1")
         Me.cboModelOperators1.Name = "cboModelOperators1"
-        Me.cboModelOperators1.Size = New System.Drawing.Size(39, 21)
-        Me.cboModelOperators1.TabIndex = 38
         '
         'cboModelOperators2
         '
         Me.cboModelOperators2.FormattingEnabled = True
-        Me.cboModelOperators2.Items.AddRange(New Object() {"|", "+", ":", "*", "/"})
-        Me.cboModelOperators2.Location = New System.Drawing.Point(338, 187)
+        Me.cboModelOperators2.Items.AddRange(New Object() {resources.GetString("cboModelOperators2.Items"), resources.GetString("cboModelOperators2.Items1"), resources.GetString("cboModelOperators2.Items2"), resources.GetString("cboModelOperators2.Items3"), resources.GetString("cboModelOperators2.Items4")})
+        resources.ApplyResources(Me.cboModelOperators2, "cboModelOperators2")
         Me.cboModelOperators2.Name = "cboModelOperators2"
-        Me.cboModelOperators2.Size = New System.Drawing.Size(39, 21)
-        Me.cboModelOperators2.TabIndex = 39
         '
         'lblFirstOperator
         '
-        Me.lblFirstOperator.AutoSize = True
-        Me.lblFirstOperator.Location = New System.Drawing.Point(271, 123)
+        resources.ApplyResources(Me.lblFirstOperator, "lblFirstOperator")
         Me.lblFirstOperator.Name = "lblFirstOperator"
-        Me.lblFirstOperator.Size = New System.Drawing.Size(48, 13)
-        Me.lblFirstOperator.TabIndex = 40
         Me.lblFirstOperator.Tag = "Operator"
-        Me.lblFirstOperator.Text = "Operator"
         '
         'lblSecondOperator
         '
-        Me.lblSecondOperator.AutoSize = True
-        Me.lblSecondOperator.Location = New System.Drawing.Point(271, 191)
+        resources.ApplyResources(Me.lblSecondOperator, "lblSecondOperator")
         Me.lblSecondOperator.Name = "lblSecondOperator"
-        Me.lblSecondOperator.Size = New System.Drawing.Size(48, 13)
-        Me.lblSecondOperator.TabIndex = 41
         Me.lblSecondOperator.Tag = "Operator"
-        Me.lblSecondOperator.Text = "Operator"
         '
         'ucrModelName
         '
         Me.ucrModelName.IsReadOnly = False
-        Me.ucrModelName.Location = New System.Drawing.Point(126, 286)
+        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
         Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(122, 21)
-        Me.ucrModelName.TabIndex = 36
         '
         'ucrThirdExplanatoryVariable
         '
-        Me.ucrThirdExplanatoryVariable.Location = New System.Drawing.Point(271, 228)
-        Me.ucrThirdExplanatoryVariable.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrThirdExplanatoryVariable, "ucrThirdExplanatoryVariable")
         Me.ucrThirdExplanatoryVariable.Name = "ucrThirdExplanatoryVariable"
         Me.ucrThirdExplanatoryVariable.Selector = Nothing
-        Me.ucrThirdExplanatoryVariable.Size = New System.Drawing.Size(106, 26)
-        Me.ucrThirdExplanatoryVariable.TabIndex = 35
         '
         'ucrModelPreview
         '
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(94, 226)
+        resources.ApplyResources(Me.ucrModelPreview, "ucrModelPreview")
         Me.ucrModelPreview.Name = "ucrModelPreview"
-        Me.ucrModelPreview.Size = New System.Drawing.Size(142, 21)
-        Me.ucrModelPreview.TabIndex = 28
         '
         'ucrFamily
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(5, 245)
+        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
         Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(225, 35)
-        Me.ucrFamily.TabIndex = 29
         '
         'ucrSecondExplanatoryVariable
         '
-        Me.ucrSecondExplanatoryVariable.Location = New System.Drawing.Point(271, 162)
-        Me.ucrSecondExplanatoryVariable.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSecondExplanatoryVariable, "ucrSecondExplanatoryVariable")
         Me.ucrSecondExplanatoryVariable.Name = "ucrSecondExplanatoryVariable"
         Me.ucrSecondExplanatoryVariable.Selector = Nothing
-        Me.ucrSecondExplanatoryVariable.Size = New System.Drawing.Size(106, 27)
-        Me.ucrSecondExplanatoryVariable.TabIndex = 26
         '
         'ucrFirstExplanatory
         '
-        Me.ucrFirstExplanatory.Location = New System.Drawing.Point(271, 76)
-        Me.ucrFirstExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrFirstExplanatory, "ucrFirstExplanatory")
         Me.ucrFirstExplanatory.Name = "ucrFirstExplanatory"
         Me.ucrFirstExplanatory.Selector = Nothing
-        Me.ucrFirstExplanatory.Size = New System.Drawing.Size(106, 23)
-        Me.ucrFirstExplanatory.TabIndex = 22
         '
         'ucrResponse
         '
-        Me.ucrResponse.Location = New System.Drawing.Point(271, 14)
-        Me.ucrResponse.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
         Me.ucrResponse.Name = "ucrResponse"
         Me.ucrResponse.Selector = Nothing
-        Me.ucrResponse.Size = New System.Drawing.Size(106, 22)
-        Me.ucrResponse.TabIndex = 19
         '
         'ucrSelectorFourVariableModelling
         '
         Me.ucrSelectorFourVariableModelling.bShowHiddenColumns = False
-        Me.ucrSelectorFourVariableModelling.Location = New System.Drawing.Point(11, 9)
-        Me.ucrSelectorFourVariableModelling.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFourVariableModelling.bUseCurrentFilter = False
+        resources.ApplyResources(Me.ucrSelectorFourVariableModelling, "ucrSelectorFourVariableModelling")
         Me.ucrSelectorFourVariableModelling.Name = "ucrSelectorFourVariableModelling"
-        Me.ucrSelectorFourVariableModelling.Size = New System.Drawing.Size(225, 208)
-        Me.ucrSelectorFourVariableModelling.TabIndex = 17
         '
         'ucrBaseFourVariableModelling
         '
-        Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(9, 313)
+        resources.ApplyResources(Me.ucrBaseFourVariableModelling, "ucrBaseFourVariableModelling")
         Me.ucrBaseFourVariableModelling.Name = "ucrBaseFourVariableModelling"
-        Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBaseFourVariableModelling.TabIndex = 0
         '
         'dlgFourVariableModelling
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 368)
         Me.Controls.Add(Me.lblSecondOperator)
         Me.Controls.Add(Me.lblFirstOperator)
         Me.Controls.Add(Me.cboModelOperators2)
@@ -296,12 +220,8 @@ Partial Class dlgFourVariableModelling
         Me.Controls.Add(Me.ucrSelectorFourVariableModelling)
         Me.Controls.Add(Me.ucrBaseFourVariableModelling)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "dlgFourVariableModelling"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Four_Variable_Modelling"
-        Me.Text = "Four Variable Modelling"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

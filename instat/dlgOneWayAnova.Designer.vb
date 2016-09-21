@@ -22,6 +22,7 @@ Partial Class dlgOneWayANOVA
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgOneWayANOVA))
         Me.lblYVariate = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -35,89 +36,63 @@ Partial Class dlgOneWayANOVA
         '
         'lblYVariate
         '
-        Me.lblYVariate.AutoSize = True
-        Me.lblYVariate.Location = New System.Drawing.Point(255, 25)
+        resources.ApplyResources(Me.lblYVariate, "lblYVariate")
         Me.lblYVariate.Name = "lblYVariate"
-        Me.lblYVariate.Size = New System.Drawing.Size(49, 13)
-        Me.lblYVariate.TabIndex = 5
         Me.lblYVariate.Tag = "Y variate"
-        Me.lblYVariate.Text = "Y-variate"
         '
         'lblFactor
         '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(255, 75)
+        resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
-        Me.lblFactor.TabIndex = 6
         Me.lblFactor.Tag = "Factor"
-        Me.lblFactor.Text = "Factor"
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 205)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 11
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrAddRemoveDataFrame
         '
-        Me.ucrAddRemoveDataFrame.Location = New System.Drawing.Point(10, 10)
-        Me.ucrAddRemoveDataFrame.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrAddRemoveDataFrame.bShowHiddenColumns = False
+        Me.ucrAddRemoveDataFrame.bUseCurrentFilter = False
+        resources.ApplyResources(Me.ucrAddRemoveDataFrame, "ucrAddRemoveDataFrame")
         Me.ucrAddRemoveDataFrame.Name = "ucrAddRemoveDataFrame"
-        Me.ucrAddRemoveDataFrame.Size = New System.Drawing.Size(242, 179)
-        Me.ucrAddRemoveDataFrame.TabIndex = 8
         '
         'ucrYVariate
         '
-        Me.ucrYVariate.Location = New System.Drawing.Point(255, 39)
-        Me.ucrYVariate.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrYVariate, "ucrYVariate")
         Me.ucrYVariate.Name = "ucrYVariate"
         Me.ucrYVariate.Selector = Nothing
-        Me.ucrYVariate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrYVariate.TabIndex = 3
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 268)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
         '
         'ucrFactor
         '
-        Me.ucrFactor.Location = New System.Drawing.Point(255, 92)
-        Me.ucrFactor.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrFactor, "ucrFactor")
         Me.ucrFactor.Name = "ucrFactor"
         Me.ucrFactor.Selector = Nothing
-        Me.ucrFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFactor.TabIndex = 4
         '
         'lblFittedModel
         '
-        Me.lblFittedModel.AutoSize = True
-        Me.lblFittedModel.Location = New System.Drawing.Point(10, 245)
+        resources.ApplyResources(Me.lblFittedModel, "lblFittedModel")
         Me.lblFittedModel.Name = "lblFittedModel"
-        Me.lblFittedModel.Size = New System.Drawing.Size(64, 13)
-        Me.lblFittedModel.TabIndex = 9
         Me.lblFittedModel.Tag = "Fitted_model"
-        Me.lblFittedModel.Text = "Fitted model"
         '
         'UcrInputTextBox1
         '
-        Me.UcrInputTextBox1.Location = New System.Drawing.Point(80, 239)
+        Me.UcrInputTextBox1.IsReadOnly = False
+        resources.ApplyResources(Me.UcrInputTextBox1, "UcrInputTextBox1")
         Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
-        Me.UcrInputTextBox1.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputTextBox1.TabIndex = 12
         '
         'dlgOneWayANOVA
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 322)
         Me.Controls.Add(Me.UcrInputTextBox1)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblFittedModel)
@@ -128,10 +103,10 @@ Partial Class dlgOneWayANOVA
         Me.Controls.Add(Me.ucrYVariate)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgOneWayANOVA"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "One_Way_ANOVAN"
-        Me.Text = "One Way ANOVA"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
