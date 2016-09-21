@@ -25,9 +25,9 @@ Partial Class dlgTwoSampleNonparametricTest
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrTwoSampleSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpLayoutOfData = New System.Windows.Forms.GroupBox()
-        Me.rdoDataColandFactorCol = New System.Windows.Forms.RadioButton()
-        Me.rdoTwoColinSeparateDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdotwoColinSamedataframe = New System.Windows.Forms.RadioButton()
+        Me.rdoTwoColinSeparateDataFrame = New System.Windows.Forms.RadioButton()
+        Me.rdoDataColandFactorCol = New System.Windows.Forms.RadioButton()
         Me.rdoSignTest = New System.Windows.Forms.RadioButton()
         Me.rdoWilcoxon = New System.Windows.Forms.RadioButton()
         Me.lblVariable = New System.Windows.Forms.Label()
@@ -35,9 +35,9 @@ Partial Class dlgTwoSampleNonparametricTest
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.grpTypeOfTest = New System.Windows.Forms.GroupBox()
-        Me.rdoTwoSided = New System.Windows.Forms.RadioButton()
-        Me.rdoOnesidedy1 = New System.Windows.Forms.RadioButton()
         Me.rdoOneSidedy2 = New System.Windows.Forms.RadioButton()
+        Me.rdoOnesidedy1 = New System.Windows.Forms.RadioButton()
+        Me.rdoTwoSided = New System.Windows.Forms.RadioButton()
         Me.grpLayoutOfData.SuspendLayout()
         Me.grpTypeOfTest.SuspendLayout()
         Me.SuspendLayout()
@@ -51,7 +51,10 @@ Partial Class dlgTwoSampleNonparametricTest
         '
         'ucrTwoSampleSelector
         '
+        Me.ucrTwoSampleSelector.bShowHiddenColumns = False
+        Me.ucrTwoSampleSelector.bUseCurrentFilter = False
         Me.ucrTwoSampleSelector.Location = New System.Drawing.Point(8, 107)
+        Me.ucrTwoSampleSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrTwoSampleSelector.Name = "ucrTwoSampleSelector"
         Me.ucrTwoSampleSelector.Size = New System.Drawing.Size(242, 179)
         Me.ucrTwoSampleSelector.TabIndex = 1
@@ -69,17 +72,17 @@ Partial Class dlgTwoSampleNonparametricTest
         Me.grpLayoutOfData.Tag = "Layout_Of_Data"
         Me.grpLayoutOfData.Text = "Layout Of Data"
         '
-        'rdoDataColandFactorCol
+        'rdotwoColinSamedataframe
         '
-        Me.rdoDataColandFactorCol.AutoSize = True
-        Me.rdoDataColandFactorCol.Location = New System.Drawing.Point(7, 20)
-        Me.rdoDataColandFactorCol.Name = "rdoDataColandFactorCol"
-        Me.rdoDataColandFactorCol.Size = New System.Drawing.Size(178, 17)
-        Me.rdoDataColandFactorCol.TabIndex = 0
-        Me.rdoDataColandFactorCol.TabStop = True
-        Me.rdoDataColandFactorCol.Tag = "Data_Column_and_Factor_Column"
-        Me.rdoDataColandFactorCol.Text = "Data Column and Factor Column"
-        Me.rdoDataColandFactorCol.UseVisualStyleBackColor = True
+        Me.rdotwoColinSamedataframe.AutoSize = True
+        Me.rdotwoColinSamedataframe.Location = New System.Drawing.Point(7, 66)
+        Me.rdotwoColinSamedataframe.Name = "rdotwoColinSamedataframe"
+        Me.rdotwoColinSamedataframe.Size = New System.Drawing.Size(188, 17)
+        Me.rdotwoColinSamedataframe.TabIndex = 0
+        Me.rdotwoColinSamedataframe.TabStop = True
+        Me.rdotwoColinSamedataframe.Tag = "Two_Columns_in_Same_Data_Frame"
+        Me.rdotwoColinSamedataframe.Text = "Two Columns in Same Data Frame"
+        Me.rdotwoColinSamedataframe.UseVisualStyleBackColor = True
         '
         'rdoTwoColinSeparateDataFrame
         '
@@ -93,17 +96,17 @@ Partial Class dlgTwoSampleNonparametricTest
         Me.rdoTwoColinSeparateDataFrame.Text = "Two Columns in Separate Data Frames"
         Me.rdoTwoColinSeparateDataFrame.UseVisualStyleBackColor = True
         '
-        'rdotwoColinSamedataframe
+        'rdoDataColandFactorCol
         '
-        Me.rdotwoColinSamedataframe.AutoSize = True
-        Me.rdotwoColinSamedataframe.Location = New System.Drawing.Point(7, 66)
-        Me.rdotwoColinSamedataframe.Name = "rdotwoColinSamedataframe"
-        Me.rdotwoColinSamedataframe.Size = New System.Drawing.Size(188, 17)
-        Me.rdotwoColinSamedataframe.TabIndex = 0
-        Me.rdotwoColinSamedataframe.TabStop = True
-        Me.rdotwoColinSamedataframe.Tag = "Two_Columns_in_Same_Data_Frame"
-        Me.rdotwoColinSamedataframe.Text = "Two Columns in Same Data Frame"
-        Me.rdotwoColinSamedataframe.UseVisualStyleBackColor = True
+        Me.rdoDataColandFactorCol.AutoSize = True
+        Me.rdoDataColandFactorCol.Location = New System.Drawing.Point(7, 20)
+        Me.rdoDataColandFactorCol.Name = "rdoDataColandFactorCol"
+        Me.rdoDataColandFactorCol.Size = New System.Drawing.Size(178, 17)
+        Me.rdoDataColandFactorCol.TabIndex = 0
+        Me.rdoDataColandFactorCol.TabStop = True
+        Me.rdoDataColandFactorCol.Tag = "Data_Column_and_Factor_Column"
+        Me.rdoDataColandFactorCol.Text = "Data Column and Factor Column"
+        Me.rdoDataColandFactorCol.UseVisualStyleBackColor = True
         '
         'rdoSignTest
         '
@@ -142,6 +145,7 @@ Partial Class dlgTwoSampleNonparametricTest
         'ucrReceiverVariable
         '
         Me.ucrReceiverVariable.Location = New System.Drawing.Point(259, 173)
+        Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
         Me.ucrReceiverVariable.Size = New System.Drawing.Size(106, 26)
@@ -160,6 +164,7 @@ Partial Class dlgTwoSampleNonparametricTest
         'ucrReceiverFactor
         '
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(259, 227)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
@@ -178,17 +183,17 @@ Partial Class dlgTwoSampleNonparametricTest
         Me.grpTypeOfTest.Tag = "Type_of_Test"
         Me.grpTypeOfTest.Text = "Type of Test"
         '
-        'rdoTwoSided
+        'rdoOneSidedy2
         '
-        Me.rdoTwoSided.AutoSize = True
-        Me.rdoTwoSided.Location = New System.Drawing.Point(7, 20)
-        Me.rdoTwoSided.Name = "rdoTwoSided"
-        Me.rdoTwoSided.Size = New System.Drawing.Size(76, 17)
-        Me.rdoTwoSided.TabIndex = 0
-        Me.rdoTwoSided.TabStop = True
-        Me.rdoTwoSided.Tag = "Two_Sided"
-        Me.rdoTwoSided.Text = "Two-Sided"
-        Me.rdoTwoSided.UseVisualStyleBackColor = True
+        Me.rdoOneSidedy2.AutoSize = True
+        Me.rdoOneSidedy2.Location = New System.Drawing.Point(222, 20)
+        Me.rdoOneSidedy2.Name = "rdoOneSidedy2"
+        Me.rdoOneSidedy2.Size = New System.Drawing.Size(112, 17)
+        Me.rdoOneSidedy2.TabIndex = 0
+        Me.rdoOneSidedy2.TabStop = True
+        Me.rdoOneSidedy2.Tag = "One_Sided _y1y2"
+        Me.rdoOneSidedy2.Text = "One-Sided (y1>y2)"
+        Me.rdoOneSidedy2.UseVisualStyleBackColor = True
         '
         'rdoOnesidedy1
         '
@@ -202,17 +207,17 @@ Partial Class dlgTwoSampleNonparametricTest
         Me.rdoOnesidedy1.Text = "One-Sided (y1<y2)"
         Me.rdoOnesidedy1.UseVisualStyleBackColor = True
         '
-        'rdoOneSidedy2
+        'rdoTwoSided
         '
-        Me.rdoOneSidedy2.AutoSize = True
-        Me.rdoOneSidedy2.Location = New System.Drawing.Point(222, 20)
-        Me.rdoOneSidedy2.Name = "rdoOneSidedy2"
-        Me.rdoOneSidedy2.Size = New System.Drawing.Size(112, 17)
-        Me.rdoOneSidedy2.TabIndex = 0
-        Me.rdoOneSidedy2.TabStop = True
-        Me.rdoOneSidedy2.Tag = "One_Sided _y1y2"
-        Me.rdoOneSidedy2.Text = "One-Sided (y1>y2)"
-        Me.rdoOneSidedy2.UseVisualStyleBackColor = True
+        Me.rdoTwoSided.AutoSize = True
+        Me.rdoTwoSided.Location = New System.Drawing.Point(7, 20)
+        Me.rdoTwoSided.Name = "rdoTwoSided"
+        Me.rdoTwoSided.Size = New System.Drawing.Size(76, 17)
+        Me.rdoTwoSided.TabIndex = 0
+        Me.rdoTwoSided.TabStop = True
+        Me.rdoTwoSided.Tag = "Two_Sided"
+        Me.rdoTwoSided.Text = "Two-Sided"
+        Me.rdoTwoSided.UseVisualStyleBackColor = True
         '
         'dlgTwoSampleNonparametricTest
         '
@@ -230,6 +235,8 @@ Partial Class dlgTwoSampleNonparametricTest
         Me.Controls.Add(Me.ucrTwoSampleSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgTwoSampleNonparametricTest"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Two_Sample_Non_parametric_Tests"
