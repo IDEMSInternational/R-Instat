@@ -22,26 +22,31 @@ Partial Class dlgDeleteSheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDeleteSheet))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameToDelete = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Location = New System.Drawing.Point(10, 67)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'ucrDataFrameToDelete
         '
         Me.ucrDataFrameToDelete.bUseCurrentFilter = False
-        resources.ApplyResources(Me.ucrDataFrameToDelete, "ucrDataFrameToDelete")
+        Me.ucrDataFrameToDelete.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataFrameToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameToDelete.Name = "ucrDataFrameToDelete"
+        Me.ucrDataFrameToDelete.Size = New System.Drawing.Size(120, 40)
+        Me.ucrDataFrameToDelete.TabIndex = 1
         '
         'dlgDeleteSheet
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(419, 127)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDataFrameToDelete)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
