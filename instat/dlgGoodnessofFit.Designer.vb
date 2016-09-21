@@ -39,6 +39,8 @@ Partial Class dlgGoodnessofFit
         Me.ClientSize = New System.Drawing.Size(450, 287)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgGoodnessofFit"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Goodness of Fit"
