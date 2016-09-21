@@ -32,7 +32,7 @@ Partial Class dlgCombineforGraphics
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -41,7 +41,7 @@ Partial Class dlgCombineforGraphics
         '
         Me.ucrCombineGraphSelector.bShowHiddenColumns = False
         Me.ucrCombineGraphSelector.bUseCurrentFilter = False
-        Me.ucrCombineGraphSelector.Location = New System.Drawing.Point(9, 9)
+        Me.ucrCombineGraphSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrCombineGraphSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphSelector.Name = "ucrCombineGraphSelector"
         Me.ucrCombineGraphSelector.Size = New System.Drawing.Size(210, 195)
@@ -49,25 +49,25 @@ Partial Class dlgCombineforGraphics
         '
         'ucrCombineGraphReceiver
         '
-        Me.ucrCombineGraphReceiver.Location = New System.Drawing.Point(238, 53)
+        Me.ucrCombineGraphReceiver.Location = New System.Drawing.Point(252, 60)
         Me.ucrCombineGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphReceiver.Name = "ucrCombineGraphReceiver"
         Me.ucrCombineGraphReceiver.Selector = Nothing
-        Me.ucrCombineGraphReceiver.Size = New System.Drawing.Size(120, 132)
+        Me.ucrCombineGraphReceiver.Size = New System.Drawing.Size(120, 130)
         Me.ucrCombineGraphReceiver.TabIndex = 2
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(235, 25)
+        Me.Label1.Location = New System.Drawing.Point(252, 43)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(101, 13)
+        Me.Label1.Size = New System.Drawing.Size(104, 13)
         Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Graphs To Combine"
+        Me.Label1.Text = "Graphs To Combine:"
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(13, 199)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 199)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 4
@@ -76,7 +76,7 @@ Partial Class dlgCombineforGraphics
         '
         'ucrSaveCombinedGraph
         '
-        Me.ucrSaveCombinedGraph.Location = New System.Drawing.Point(13, 235)
+        Me.ucrSaveCombinedGraph.Location = New System.Drawing.Point(10, 235)
         Me.ucrSaveCombinedGraph.Name = "ucrSaveCombinedGraph"
         Me.ucrSaveCombinedGraph.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveCombinedGraph.TabIndex = 5
@@ -85,7 +85,7 @@ Partial Class dlgCombineforGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 321)
+        Me.ClientSize = New System.Drawing.Size(420, 321)
         Me.Controls.Add(Me.ucrSaveCombinedGraph)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.Label1)
