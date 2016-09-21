@@ -88,7 +88,7 @@ Partial Class dlgBoxplot
         '
         'ucrVariablesAsFactorForBoxplot
         '
-        Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(255, 25)
+        Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(275, 32)
         Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
         Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(120, 130)
         Me.ucrVariablesAsFactorForBoxplot.TabIndex = 1
