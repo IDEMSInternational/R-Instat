@@ -126,6 +126,7 @@ Partial Class dlgRegressionSimple
         'ucrSelectorSimpleReg
         '
         Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
+        Me.ucrSelectorSimpleReg.bUseCurrentFilter = False
         resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
         Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         '
@@ -178,6 +179,8 @@ Partial Class dlgRegressionSimple
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRegressionSimple"
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
