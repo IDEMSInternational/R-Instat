@@ -39,6 +39,8 @@ Partial Class dlgTwoSampleSummaryData
         Me.ClientSize = New System.Drawing.Size(407, 294)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgTwoSampleSummaryData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Two Sample Summary Data"

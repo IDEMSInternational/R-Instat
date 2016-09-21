@@ -77,6 +77,8 @@ Partial Class dlgNon_ParametricOneWayANOVA
         '
         'ucrDataFrameAddRemove
         '
+        Me.ucrDataFrameAddRemove.bShowHiddenColumns = False
+        Me.ucrDataFrameAddRemove.bUseCurrentFilter = False
         Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameAddRemove.Name = "ucrDataFrameAddRemove"
@@ -95,6 +97,8 @@ Partial Class dlgNon_ParametricOneWayANOVA
         Me.Controls.Add(Me.ucrReceiverFactor)
         Me.Controls.Add(Me.ucrReceiverYVariate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgNon_ParametricOneWayANOVA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Non_Parametric_One_Way_ANOVA"
