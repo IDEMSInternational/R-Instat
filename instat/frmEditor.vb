@@ -100,7 +100,6 @@ Public Class frmEditor
         'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
         frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
-
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
         If deleteCol = DialogResult.Yes Then
@@ -432,7 +431,7 @@ Public Class frmEditor
         frmMain.clsRLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
-    Private Function SelectedColumns(Optional bWithQuotes As Boolean = True) As String
+    Public Function SelectedColumns(Optional bWithQuotes As Boolean = True) As String
         Dim lstSelectedColumns As New List(Of String)
         Dim strCols As String = ""
         Dim lstCurrentDataColumns As String()

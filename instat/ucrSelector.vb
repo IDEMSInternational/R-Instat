@@ -24,6 +24,7 @@ Public Class ucrSelector
     Public lstVariablesInReceivers As List(Of String)
     Public bFirstLoad As Boolean
     Public bIncludeOverall As Boolean
+    Private clsDeleteColumns As New RFunction
     Public strCurrentDataFrame As String
     Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
@@ -294,4 +295,14 @@ Public Class ucrSelector
         Next
         Return False
     End Function
+
+
+    Private Sub DeleteColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteColumnsToolStripMenuItem.Click
+        Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
+        clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+        clsDeleteColumns.AddParameter("data_name", Chr(34) & frmEditor.grdCurrSheet.Name & Chr(34))
+        clsDeleteColumns.AddParameter("cols", frmEditor.SelectedColumns())
+        frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
+        Reset()
+    End Sub
 End Class
