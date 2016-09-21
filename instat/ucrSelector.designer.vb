@@ -28,7 +28,6 @@ Partial Class ucrSelector
         Me.AddSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectionMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,36 +49,30 @@ Partial Class ucrSelector
         '
         'SelectionMenuStrip
         '
-        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem, Me.DeleteColumnsToolStripMenuItem})
+        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(167, 114)
+        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 92)
         '
         'AddSelectedToolStripMenuItem
         '
         Me.AddSelectedToolStripMenuItem.Name = "AddSelectedToolStripMenuItem"
-        Me.AddSelectedToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.AddSelectedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AddSelectedToolStripMenuItem.Tag = "Add_selected"
         Me.AddSelectedToolStripMenuItem.Text = "Add Selected"
         '
         'SelectAllToolStripMenuItem
         '
         Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SelectAllToolStripMenuItem.Tag = "Select_All"
         Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'ClearSelectionToolStripMenuItem
         '
         Me.ClearSelectionToolStripMenuItem.Name = "ClearSelectionToolStripMenuItem"
-        Me.ClearSelectionToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.ClearSelectionToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ClearSelectionToolStripMenuItem.Tag = "Clear_Selection"
         Me.ClearSelectionToolStripMenuItem.Text = "Clear Selection"
-        '
-        'DeleteColumnsToolStripMenuItem
-        '
-        Me.DeleteColumnsToolStripMenuItem.Name = "DeleteColumnsToolStripMenuItem"
-        Me.DeleteColumnsToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.DeleteColumnsToolStripMenuItem.Text = "Delete Column(s)"
         '
         'ucrSelector
         '
@@ -98,5 +91,4 @@ Partial Class ucrSelector
     Friend WithEvents AddSelectedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearSelectionToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DeleteColumnsToolStripMenuItem As ToolStripMenuItem
 End Class

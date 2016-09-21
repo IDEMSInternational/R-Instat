@@ -431,7 +431,7 @@ Public Class frmEditor
         frmMain.clsRLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
-    Public Function SelectedColumns(Optional bWithQuotes As Boolean = True) As String
+    Private Function SelectedColumns(Optional bWithQuotes As Boolean = True) As String
         Dim lstSelectedColumns As New List(Of String)
         Dim strCols As String = ""
         Dim lstCurrentDataColumns As String()
