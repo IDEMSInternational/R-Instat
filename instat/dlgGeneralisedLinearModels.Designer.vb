@@ -39,6 +39,8 @@ Partial Class dlgGeneralisedLinearModels
         Me.ClientSize = New System.Drawing.Size(430, 251)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgGeneralisedLinearModels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Generalized Linear Models"
