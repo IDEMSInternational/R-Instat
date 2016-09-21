@@ -37,9 +37,9 @@ Partial Class ucrLayerParamsControls
         '
         'ucrReceiverMetadataProperty
         '
-        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(101, 1)
+        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(101, 2)
         Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
-        Me.ucrReceiverMetadataProperty.Size = New System.Drawing.Size(137, 23)
+        Me.ucrReceiverMetadataProperty.Size = New System.Drawing.Size(161, 23)
         Me.ucrReceiverMetadataProperty.TabIndex = 1
         '
         'ucrLayerParamsControls
@@ -49,7 +49,7 @@ Partial Class ucrLayerParamsControls
         Me.Controls.Add(Me.ucrReceiverMetadataProperty)
         Me.Controls.Add(Me.chkParamName)
         Me.Name = "ucrLayerParamsControls"
-        Me.Size = New System.Drawing.Size(240, 25)
+        Me.Size = New System.Drawing.Size(265, 25)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

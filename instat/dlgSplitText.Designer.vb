@@ -22,7 +22,6 @@ Partial Class dlgSplitText
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSplitText))
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.lblSplitBy = New System.Windows.Forms.Label()
         Me.lblNewColumnNames = New System.Windows.Forms.Label()
@@ -38,69 +37,96 @@ Partial Class dlgSplitText
         '
         'lblSelectedFactor
         '
-        resources.ApplyResources(Me.lblSelectedFactor, "lblSelectedFactor")
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(275, 43)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
+        Me.lblSelectedFactor.Size = New System.Drawing.Size(140, 23)
+        Me.lblSelectedFactor.TabIndex = 7
         Me.lblSelectedFactor.Tag = "Selected_Factor"
+        Me.lblSelectedFactor.Text = "Selected Factor:"
         '
         'lblSplitBy
         '
-        resources.ApplyResources(Me.lblSplitBy, "lblSplitBy")
+        Me.lblSplitBy.Location = New System.Drawing.Point(275, 90)
         Me.lblSplitBy.Name = "lblSplitBy"
+        Me.lblSplitBy.Size = New System.Drawing.Size(140, 23)
+        Me.lblSplitBy.TabIndex = 6
         Me.lblSplitBy.Tag = ""
+        Me.lblSplitBy.Text = "Split by:"
         '
         'lblNewColumnNames
         '
-        resources.ApplyResources(Me.lblNewColumnNames, "lblNewColumnNames")
+        Me.lblNewColumnNames.Location = New System.Drawing.Point(10, 202)
         Me.lblNewColumnNames.Name = "lblNewColumnNames"
+        Me.lblNewColumnNames.Size = New System.Drawing.Size(161, 23)
+        Me.lblNewColumnNames.TabIndex = 5
         Me.lblNewColumnNames.Tag = ""
+        Me.lblNewColumnNames.Text = "Prefix for New Columns:"
         '
         'lblNumberofPiecesToReturn
         '
-        resources.ApplyResources(Me.lblNumberofPiecesToReturn, "lblNumberofPiecesToReturn")
+        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(273, 140)
         Me.lblNumberofPiecesToReturn.Name = "lblNumberofPiecesToReturn"
+        Me.lblNumberofPiecesToReturn.Size = New System.Drawing.Size(149, 23)
+        Me.lblNumberofPiecesToReturn.TabIndex = 4
         Me.lblNumberofPiecesToReturn.Tag = "Number_of_Pieces_to_Return"
+        Me.lblNumberofPiecesToReturn.Text = "Number of Pieces to Return:"
         '
         'nudN
         '
-        resources.ApplyResources(Me.nudN, "nudN")
+        Me.nudN.Location = New System.Drawing.Point(276, 157)
         Me.nudN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudN.Name = "nudN"
+        Me.nudN.Size = New System.Drawing.Size(37, 20)
+        Me.nudN.TabIndex = 3
         Me.nudN.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrInputPattern
         '
         Me.ucrInputPattern.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPattern, "ucrInputPattern")
+        Me.ucrInputPattern.Location = New System.Drawing.Point(276, 60)
         Me.ucrInputPattern.Name = "ucrInputPattern"
+        Me.ucrInputPattern.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPattern.TabIndex = 0
         '
         'ucrReceiverSplitTextColumn
         '
-        resources.ApplyResources(Me.ucrReceiverSplitTextColumn, "ucrReceiverSplitTextColumn")
+        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(276, 106)
+        Me.ucrReceiverSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
+        Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverSplitTextColumn.TabIndex = 1
         '
         'ucrInputColumnsIntoText
         '
         Me.ucrInputColumnsIntoText.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColumnsIntoText, "ucrInputColumnsIntoText")
+        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(131, 200)
         Me.ucrInputColumnsIntoText.Name = "ucrInputColumnsIntoText"
+        Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColumnsIntoText.TabIndex = 2
         '
         'ucrSelectorSplitTextColumn
         '
         Me.ucrSelectorSplitTextColumn.bShowHiddenColumns = False
         Me.ucrSelectorSplitTextColumn.bUseCurrentFilter = False
-        resources.ApplyResources(Me.ucrSelectorSplitTextColumn, "ucrSelectorSplitTextColumn")
+        Me.ucrSelectorSplitTextColumn.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSplitTextColumn.Name = "ucrSelectorSplitTextColumn"
+        Me.ucrSelectorSplitTextColumn.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorSplitTextColumn.TabIndex = 8
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 9
         '
         'dlgSplitText
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(421, 288)
         Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrReceiverSplitTextColumn)
         Me.Controls.Add(Me.ucrInputColumnsIntoText)
@@ -118,7 +144,6 @@ Partial Class dlgSplitText
         Me.Tag = "Split_Text_Column"
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
