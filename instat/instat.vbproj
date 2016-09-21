@@ -153,6 +153,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgEnter.Designer.vb">
+      <DependentUpon>dlgEnter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEnter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFitModel.Designer.vb">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </Compile>
@@ -2049,6 +2055,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDistanceText.sw-KE.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEnter.resx">
+      <DependentUpon>dlgEnter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.fr-FR.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
