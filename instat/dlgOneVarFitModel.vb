@@ -32,9 +32,11 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub InitialiseDialog()
+        sdgOneVarFitModDisplay.InitialiseDialog()
+        sdgOneVarFitModel.InitialiseDialog()
         UcrBase.clsRsyntax.SetFunction("fitdist")
         'ucrBase.iHelpTopicID = 
-        'UcrBase.clsRsyntax.iCallType = 2
+        UcrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
@@ -42,6 +44,9 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetItemsTypeAsModels()
         ucrSaveModel.SetDefaultTypeAsModel()
         ucrSaveModel.SetValidationTypeAsRVariable()
+        UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        sdgOneVarFitModDisplay.SetModelFunction(UcrBase.clsRsyntax.clsBaseFunction)
+        sdgOneVarFitModel.SetMyRSyntax(UcrBase.clsRsyntax)
     End Sub
 
     Private Sub SetDefaults()
@@ -50,7 +55,10 @@ Public Class dlgOneVarFitModel
         chkSaveModel.Checked = True
         ucrSaveModel.Reset()
         SetDataParameter()
+        EnableOptions()
         AssignSaveModel()
+        sdgOneVarFitModDisplay.SetDefaults()
+        sdgOneVarFitModel.SetDefaults()
         TestOKEnabled()
     End Sub
 
@@ -107,10 +115,8 @@ Public Class dlgOneVarFitModel
     Private Sub AssignSaveModel()
         If chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty Then
             UcrBase.clsRsyntax.SetAssignTo(ucrSaveModel.GetText, strTempModel:=ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             UcrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
 
@@ -132,18 +138,40 @@ Public Class dlgOneVarFitModel
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
         SetDataParameter()
         TestOKEnabled()
+        EnableOptions()
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
         sdgOneVarFitModel.ShowDialog()
+        EnableOptions()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgOneVarFitModDisplay.ShowDialog()
+        EnableOptions()
+    End Sub
+
+    Private Sub EnableOptions()
+        If Not UcrReceiver.IsEmpty Then
+            cmdFittingOptions.Enabled = True
+        Else
+            cmdFittingOptions.Enabled = False
+        End If
+        If Not UcrReceiver.IsEmpty Then
+            cmdDisplayOptions.Enabled = True
+        Else
+            cmdDisplayOptions.Enabled = False
+        End If
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
         SetDataParameter()
         TestOKEnabled()
     End Sub
+
+    Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
+        sdgOneVarFitModDisplay.CreateGraphs()
+        'sdgOneVarFitModel.????()
+    End Sub
+
 End Class
