@@ -149,6 +149,8 @@ Partial Class dlgGeneralANOVA
         '
         'ucrSelectorGeneralANOVA
         '
+        Me.ucrSelectorGeneralANOVA.bShowHiddenColumns = False
+        Me.ucrSelectorGeneralANOVA.bUseCurrentFilter = False
         Me.ucrSelectorGeneralANOVA.Location = New System.Drawing.Point(10, 31)
         Me.ucrSelectorGeneralANOVA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGeneralANOVA.Name = "ucrSelectorGeneralANOVA"
@@ -181,6 +183,8 @@ Partial Class dlgGeneralANOVA
         Me.Controls.Add(Me.rdoAnalysis)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgGeneralANOVA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General_ANOVA"
