@@ -24,13 +24,14 @@ Partial Class sdgOneVarFitModDisplay
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.rdoPPPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoQQPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoDensityPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoCDFPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoPlotAll = New System.Windows.Forms.RadioButton()
+        Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
+        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
@@ -47,12 +48,12 @@ Partial Class sdgOneVarFitModDisplay
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.RadioButton6)
-        Me.TabPage1.Controls.Add(Me.RadioButton5)
-        Me.TabPage1.Controls.Add(Me.RadioButton4)
-        Me.TabPage1.Controls.Add(Me.RadioButton3)
-        Me.TabPage1.Controls.Add(Me.RadioButton2)
-        Me.TabPage1.Controls.Add(Me.RadioButton1)
+        Me.TabPage1.Controls.Add(Me.rdoPPPlot)
+        Me.TabPage1.Controls.Add(Me.rdoQQPlot)
+        Me.TabPage1.Controls.Add(Me.rdoDensityPlot)
+        Me.TabPage1.Controls.Add(Me.rdoCDFPlot)
+        Me.TabPage1.Controls.Add(Me.rdoPlotAll)
+        Me.TabPage1.Controls.Add(Me.rdoNoPlot)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -61,90 +62,101 @@ Partial Class sdgOneVarFitModDisplay
         Me.TabPage1.Text = "Plots"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'rdoPPPlot
+        '
+        Me.rdoPPPlot.AutoSize = True
+        Me.rdoPPPlot.Location = New System.Drawing.Point(8, 135)
+        Me.rdoPPPlot.Name = "rdoPPPlot"
+        Me.rdoPPPlot.Size = New System.Drawing.Size(60, 17)
+        Me.rdoPPPlot.TabIndex = 5
+        Me.rdoPPPlot.TabStop = True
+        Me.rdoPPPlot.Text = "PP-Plot"
+        Me.rdoPPPlot.UseVisualStyleBackColor = True
+        '
+        'rdoQQPlot
+        '
+        Me.rdoQQPlot.AutoSize = True
+        Me.rdoQQPlot.Location = New System.Drawing.Point(8, 112)
+        Me.rdoQQPlot.Name = "rdoQQPlot"
+        Me.rdoQQPlot.Size = New System.Drawing.Size(62, 17)
+        Me.rdoQQPlot.TabIndex = 4
+        Me.rdoQQPlot.TabStop = True
+        Me.rdoQQPlot.Text = "QQ-Plot"
+        Me.rdoQQPlot.UseVisualStyleBackColor = True
+        '
+        'rdoDensityPlot
+        '
+        Me.rdoDensityPlot.AutoSize = True
+        Me.rdoDensityPlot.Location = New System.Drawing.Point(8, 89)
+        Me.rdoDensityPlot.Name = "rdoDensityPlot"
+        Me.rdoDensityPlot.Size = New System.Drawing.Size(81, 17)
+        Me.rdoDensityPlot.TabIndex = 3
+        Me.rdoDensityPlot.TabStop = True
+        Me.rdoDensityPlot.Text = "Density Plot"
+        Me.rdoDensityPlot.UseVisualStyleBackColor = True
+        '
+        'rdoCDFPlot
+        '
+        Me.rdoCDFPlot.AutoSize = True
+        Me.rdoCDFPlot.Location = New System.Drawing.Point(8, 66)
+        Me.rdoCDFPlot.Name = "rdoCDFPlot"
+        Me.rdoCDFPlot.Size = New System.Drawing.Size(67, 17)
+        Me.rdoCDFPlot.TabIndex = 2
+        Me.rdoCDFPlot.TabStop = True
+        Me.rdoCDFPlot.Text = "CDF Plot"
+        Me.rdoCDFPlot.UseVisualStyleBackColor = True
+        '
+        'rdoPlotAll
+        '
+        Me.rdoPlotAll.AutoSize = True
+        Me.rdoPlotAll.Location = New System.Drawing.Point(8, 43)
+        Me.rdoPlotAll.Name = "rdoPlotAll"
+        Me.rdoPlotAll.Size = New System.Drawing.Size(57, 17)
+        Me.rdoPlotAll.TabIndex = 1
+        Me.rdoPlotAll.TabStop = True
+        Me.rdoPlotAll.Text = "Plot All"
+        Me.rdoPlotAll.UseVisualStyleBackColor = True
+        '
+        'rdoNoPlot
+        '
+        Me.rdoNoPlot.AutoSize = True
+        Me.rdoNoPlot.Location = New System.Drawing.Point(8, 20)
+        Me.rdoNoPlot.Name = "rdoNoPlot"
+        Me.rdoNoPlot.Size = New System.Drawing.Size(60, 17)
+        Me.rdoNoPlot.TabIndex = 0
+        Me.rdoNoPlot.TabStop = True
+        Me.rdoNoPlot.Text = "No Plot"
+        Me.rdoNoPlot.UseVisualStyleBackColor = True
+        '
         'TabPage2
         '
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(192, 74)
+        Me.TabPage2.Size = New System.Drawing.Size(153, 177)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'RadioButton1
+        'UcrButtonsSubdialogue1
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(8, 20)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(60, 17)
-        Me.RadioButton1.TabIndex = 0
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "No Plot"
-        Me.RadioButton1.UseVisualStyleBackColor = True
-        '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(8, 43)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(57, 17)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "Plot All"
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
-        'RadioButton3
-        '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(8, 66)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(67, 17)
-        Me.RadioButton3.TabIndex = 2
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "CDF Plot"
-        Me.RadioButton3.UseVisualStyleBackColor = True
-        '
-        'RadioButton4
-        '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(8, 89)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(81, 17)
-        Me.RadioButton4.TabIndex = 3
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "Density Plot"
-        Me.RadioButton4.UseVisualStyleBackColor = True
-        '
-        'RadioButton5
-        '
-        Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(8, 112)
-        Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(62, 17)
-        Me.RadioButton5.TabIndex = 4
-        Me.RadioButton5.TabStop = True
-        Me.RadioButton5.Text = "QQ-Plot"
-        Me.RadioButton5.UseVisualStyleBackColor = True
-        '
-        'RadioButton6
-        '
-        Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Location = New System.Drawing.Point(8, 135)
-        Me.RadioButton6.Name = "RadioButton6"
-        Me.RadioButton6.Size = New System.Drawing.Size(60, 17)
-        Me.RadioButton6.TabIndex = 5
-        Me.RadioButton6.TabStop = True
-        Me.RadioButton6.Text = "PP-Plot"
-        Me.RadioButton6.UseVisualStyleBackColor = True
+        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(4, 205)
+        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
+        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
+        Me.UcrButtonsSubdialogue1.TabIndex = 1
         '
         'sdgOneVarFitModDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(162, 205)
+        Me.ClientSize = New System.Drawing.Size(164, 237)
+        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
         Me.Controls.Add(Me.TabControl1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgOneVarFitModDisplay"
-        Me.Text = "sdgOneVarFitModDisplay"
+        Me.Text = "Display Options"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
@@ -155,10 +167,11 @@ Partial Class sdgOneVarFitModDisplay
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents RadioButton6 As RadioButton
-    Friend WithEvents RadioButton5 As RadioButton
-    Friend WithEvents RadioButton4 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents rdoPPPlot As RadioButton
+    Friend WithEvents rdoQQPlot As RadioButton
+    Friend WithEvents rdoDensityPlot As RadioButton
+    Friend WithEvents rdoCDFPlot As RadioButton
+    Friend WithEvents rdoPlotAll As RadioButton
+    Friend WithEvents rdoNoPlot As RadioButton
+    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
 End Class
