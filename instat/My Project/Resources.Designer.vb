@@ -4057,7 +4057,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to von mises.
+        '''  Looks up a localized string similar to von Mises.
         '''</summary>
         Friend ReadOnly Property von_mises() As String
             Get

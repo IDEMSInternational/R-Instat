@@ -22,8 +22,8 @@ Public Class sdgOneVarFitModDisplay
     Private clsRppcompFunction As New RFunction
     Private clsRplotFunction As New RFunction
     Private clsModel As New RFunction
+    Private WithEvents ucrDists As ucrDistributions
     Public bfirstload As Boolean = True
-
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -35,21 +35,9 @@ Public Class sdgOneVarFitModDisplay
         clsRqqcompFunction.SetRCommand("qqcomp")
         clsRppcompFunction.SetRCommand("ppcomp")
         clsRplotFunction.SetRCommand("plot")
-
-        ' If Not dlgOneVarFitModel.UcrDistributions.cboDistributions.iscontinous Then
-        '  rdoDensityPlot.Enabled = False AndAlso rdoQQPlot.Enabled = False AndAlso rdoPPPlot.Enabled = False
-        ' Else
-        'rdoDensityPlot.Enabled = True AndAlso rdoQQPlot.Enabled = True AndAlso rdoPPPlot.Enabled = True
-        'End If
-
-
-
     End Sub
 
     Public Sub SetDefaults()
-        rdoPlotAll.Enabled = True
-        rdoNoPlot.Enabled = True
-        rdoCDFPlot.Enabled = True
         rdoPlotAll.Checked = True
         'ucrBase.ihelptopicID = 
     End Sub
@@ -61,6 +49,11 @@ Public Class sdgOneVarFitModDisplay
         clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
         clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
         clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+    End Sub
+
+    Public Sub SetDistribution(ucrNewDists As ucrDistributions)
+        ucrDists = ucrNewDists
+        SetPlotOptions()
     End Sub
 
     Public Sub CreateGraphs()
@@ -77,4 +70,22 @@ Public Class sdgOneVarFitModDisplay
         End If
     End Sub
 
+    Private Sub ucrDists_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDists.cboDistributionsIndexChanged
+        SetPlotOptions()
+    End Sub
+
+    Private Sub SetPlotOptions()
+        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+            rdoDensityPlot.Enabled = False
+            rdoQQPlot.Enabled = False
+            rdoPPPlot.Enabled = False
+            If rdoDensityPlot.Checked = True Or rdoQQPlot.Checked = True Or rdoPPPlot.Checked = True Then
+                rdoPlotAll.Checked = True
+            End If
+        Else
+            rdoDensityPlot.Enabled = True
+            rdoQQPlot.Enabled = True
+            rdoPPPlot.Enabled = True
+        End If
+    End Sub
 End Class
