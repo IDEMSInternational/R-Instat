@@ -43,6 +43,7 @@ Public Class ucrDistributions
     End Sub
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetDistributions()
     End Sub
 
     Public Sub AddParameter(strArgumentName As String, strArgumentValue As String)
@@ -151,6 +152,8 @@ Public Class ucrDistributions
                                 End If
                         End Select
                     End If
+                Case Else
+                    bUse = True
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
@@ -186,6 +189,7 @@ Public Class ucrDistributions
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
+        clsNormalDist.strRName = "norm"
         clsNormalDist.strRFunctionName = "rnorm"
         clsNormalDist.strPFunctionName = "pnorm"
         clsNormalDist.strQFunctionName = "qnorm"
@@ -198,6 +202,7 @@ Public Class ucrDistributions
 
         ' Exponential Distribution
         clsExponentialDist.strNameTag = "Exponential"
+        clsExponentialDist.strRName = "exp"
         clsExponentialDist.strRFunctionName = "rexp"
         clsExponentialDist.strPFunctionName = "pexp"
         clsExponentialDist.strQFunctionName = "qexp"
@@ -207,6 +212,7 @@ Public Class ucrDistributions
 
         ' Geometric Distribution
         clsGeometricDist.strNameTag = "Geometric"
+        clsGeometricDist.strRName = "geom"
         clsGeometricDist.strRFunctionName = "rgeom"
         clsGeometricDist.strPFunctionName = "pgeom"
         clsGeometricDist.strQFunctionName = "qgeom"
@@ -216,6 +222,7 @@ Public Class ucrDistributions
 
         ' Extreme Value Distribution
         clsExtremeValueDist.strNameTag = "Extreme_Value"
+        clsExtremeValueDist.strRName = "evd"
         clsExtremeValueDist.strRFunctionName = "revd"
         clsExtremeValueDist.strPFunctionName = "pevd"
         clsExtremeValueDist.strQFunctionName = "qqevd"
@@ -227,6 +234,7 @@ Public Class ucrDistributions
 
         ' Weibull Distribution
         clsWeibullDist.strNameTag = "Weibull"
+        clsWeibullDist.strRName = "weibull"
         clsWeibullDist.strRFunctionName = "rweibull"
         clsWeibullDist.strPFunctionName = "pweibull"
         clsWeibullDist.strQFunctionName = "qweibull"
@@ -237,6 +245,7 @@ Public Class ucrDistributions
 
         'Uniform Distribution
         clsUniformDist.strNameTag = "Uniform"
+        clsUniformDist.strRName = "unif"
         clsUniformDist.strRFunctionName = "runif"
         clsUniformDist.strPFunctionName = "punif"
         clsUniformDist.strQFunctionName = "qunif"
@@ -247,6 +256,7 @@ Public Class ucrDistributions
 
         'Bernouli Distribution
         clsBernouliDist.strNameTag = "Bernouli"
+        clsBernouliDist.strRName = "binom"
         clsBernouliDist.strRFunctionName = "rbinom"
         clsBernouliDist.strPFunctionName = "pbinom"
         clsBernouliDist.strQFunctionName = "qbinom"
@@ -256,6 +266,7 @@ Public Class ucrDistributions
 
         'Binomial Distribution
         clsBinomialDist.strNameTag = "Binomial"
+        clsBinomialDist.strRName = "binom"
         clsBinomialDist.strRFunctionName = "rbinom"
         clsBinomialDist.strPFunctionName = "pbinom"
         clsBinomialDist.strQFunctionName = "qbinom"
@@ -268,6 +279,7 @@ Public Class ucrDistributions
 
         'poisson Distribution
         clsPoissonDist.strNameTag = "Poisson"
+        clsPoissonDist.strRName = "pois"
         clsPoissonDist.strRFunctionName = "rpois"
         clsPoissonDist.strPFunctionName = "ppois"
         clsPoissonDist.strQFunctionName = "qpois"
@@ -279,6 +291,7 @@ Public Class ucrDistributions
 
         ' von mises distribution
         clsVonnMisesDist.strNameTag = "von_mises"
+        clsVonnMisesDist.strRName = "vonmises"
         clsVonnMisesDist.strRFunctionName = "rvonmises"
         clsVonnMisesDist.strPFunctionName = "pvonmises"
         clsVonnMisesDist.strQFunctionName = "qvonmises"
@@ -289,6 +302,7 @@ Public Class ucrDistributions
 
         'TODO Categorical distribution
         clsCategoricalDist.strNameTag = "Categorical"
+        clsCategoricalDist.strRName = ""
         clsCategoricalDist.strRFunctionName = ""
         clsCategoricalDist.strPFunctionName = ""
         clsCategoricalDist.strQFunctionName = ""
@@ -299,6 +313,7 @@ Public Class ucrDistributions
 
         'Gamma With Shape and Scale distribution
         clsGammaWithShapeandScale.strNameTag = "Gamma_With_Shape_and_Scale"
+        clsGammaWithShapeandScale.strRName = "gamma"
         clsGammaWithShapeandScale.strRFunctionName = "rgamma"
         clsGammaWithShapeandScale.strPFunctionName = "pgamma"
         clsGammaWithShapeandScale.strQFunctionName = "qgamma"
@@ -309,6 +324,7 @@ Public Class ucrDistributions
 
         'Gamma With Shape and Mean distribution
         clsGammaWithShapeandMean.strNameTag = "Gamma_With_Shape_and_Mean"
+        clsGammaWithShapeandMean.strRName = "gamma"
         clsGammaWithShapeandMean.strRFunctionName = "rgamma"
         clsGammaWithShapeandMean.strPFunctionName = "pgamma"
         clsGammaWithShapeandMean.strQFunctionName = "qgamma"
@@ -319,6 +335,7 @@ Public Class ucrDistributions
 
         'Gamma With Shape and Rate distribution
         clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
+        clsGammaWithShapeandRate.strRName = "gamma"
         clsGammaWithShapeandRate.strRFunctionName = "rgamma"
         clsGammaWithShapeandRate.strPFunctionName = "pgamma"
         clsGammaWithShapeandRate.strQFunctionName = "qgamma"
@@ -329,6 +346,7 @@ Public Class ucrDistributions
 
         'Gamma With Shape and Scale distribution
         clsGamma.strNameTag = "Gamma"
+        clsGamma.strRName = "gamma"
         clsGamma.strGLMFunctionName = "Gamma"
         clsGamma.bNumeric = True
         lstAllDistributions.Add(clsGamma)
@@ -336,6 +354,7 @@ Public Class ucrDistributions
         'Gamma with Zeros distribution
         'TODO Paramaters 
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
+        clsGammaWithZerosDist.strRName = "gamma"
         clsGammaWithZerosDist.strRFunctionName = "rgamma"
         clsGammaWithZerosDist.strPFunctionName = "pgamma"
         clsGammaWithZerosDist.strQFunctionName = "qgamma"
@@ -346,24 +365,28 @@ Public Class ucrDistributions
 
         'Inverse Gaussian distribution
         clsInverseGaussianDist.strNameTag = "Inverse_Gaussian"
+        clsInverseGaussianDist.strRName = "inverse.gaussian"
         clsInverseGaussianDist.strGLMFunctionName = "inverse.gaussian"
         clsInverseGaussianDist.bNumeric = True
         lstAllDistributions.Add(clsInverseGaussianDist)
 
         'Quasi distribution
         clsQuasiDist.strNameTag = "Quasi"
+        clsQuasiDist.strRName = "quasi"
         clsQuasiDist.strGLMFunctionName = "quasi"
         clsQuasiDist.bNumeric = True
         lstAllDistributions.Add(clsQuasiDist)
 
         'Quasibinomial distribution
         clsQuasibinomialDist.strNameTag = "Quasibinomial"
+        clsQuasibinomialDist.strRName = "quasibinomial"
         clsQuasibinomialDist.strGLMFunctionName = "quasibinomial"
         clsQuasibinomialDist.bTwoLevelFactor = True
         lstAllDistributions.Add(clsQuasibinomialDist)
 
         'Quasipoisson distribution
         clsQuasipoissonDist.strNameTag = "Quasipoisson"
+        clsQuasipoissonDist.strRName = "quasipoisson"
         clsQuasipoissonDist.strGLMFunctionName = "quasipoisson"
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)

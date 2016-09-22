@@ -16,6 +16,7 @@
 
 Public Class Distribution
     Public strNameTag As String
+    Public strRName As String
     Public bIncluded As Boolean = True
     Public strRFunctionName As String = ""
     Public strPFunctionName As String = ""
