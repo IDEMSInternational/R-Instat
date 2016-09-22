@@ -47,6 +47,8 @@ Public Class dlgOneVarFitModel
         UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgOneVarFitModDisplay.SetModelFunction(UcrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarFitModel.SetMyRSyntax(UcrBase.clsRsyntax)
+        sdgOneVarFitModDisplay.SetDistribution(UcrDistributions)
+        sdgOneVarFitModel.SetDistribution(UcrDistributions)
     End Sub
 
     Private Sub SetDefaults()
@@ -154,12 +156,9 @@ Public Class dlgOneVarFitModel
     Private Sub EnableOptions()
         If Not UcrReceiver.IsEmpty Then
             cmdFittingOptions.Enabled = True
-        Else
-            cmdFittingOptions.Enabled = False
-        End If
-        If Not UcrReceiver.IsEmpty Then
             cmdDisplayOptions.Enabled = True
         Else
+            cmdFittingOptions.Enabled = False
             cmdDisplayOptions.Enabled = False
         End If
     End Sub
@@ -171,7 +170,6 @@ Public Class dlgOneVarFitModel
 
     Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
         sdgOneVarFitModDisplay.CreateGraphs()
-        'sdgOneVarFitModel.????()
     End Sub
 
 End Class

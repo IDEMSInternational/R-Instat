@@ -19,6 +19,7 @@ Public Class sdgOneVarFitModel
     Public clsRConvert As New RFunction
     Public clsRoptimFunction As New RFunction
     Public clsRSyntax As New RSyntax
+    Private WithEvents ucrDists As ucrDistributions
     Public bfirstload As Boolean = True
 
 
@@ -80,5 +81,24 @@ Public Class sdgOneVarFitModel
         End If
     End Sub
 
-    ' note mge does not work for discrete data.
+    Public Sub SetDistribution(ucrNewDists As ucrDistributions)
+        ucrDists = ucrNewDists
+        SetPlotOptions()
+    End Sub
+
+    Private Sub ucrDists_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDists.cboDistributionsIndexChanged
+        SetPlotOptions()
+    End Sub
+
+    Private Sub SetPlotOptions()
+        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+            rdoMge.Enabled = False
+            If rdoMge.Checked Then
+                rdoMle.Checked = True
+            End If
+        Else
+            rdoMge.Enabled = True
+        End If
+    End Sub
+
 End Class
