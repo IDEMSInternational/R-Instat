@@ -23,7 +23,6 @@ Public Class dlgEnter
     Public bFirstLoad As Boolean = True
     Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 14
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -35,13 +34,24 @@ Public Class dlgEnter
     End Sub
 
     Private Sub InitialiseDialog()
-
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.SetCommandString("")
+        ucrSaveEnterResultInto.SetItemsTypeAsColumns()
+        ucrSaveEnterResultInto.SetDefaultTypeAsColumn()
+        ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
+        ucrDataFrameEnter.Reset()
+        ucrSaveEnterResultInto.SetValidationTypeAsRVariable()
     End Sub
     Private Sub SetDefaults()
-        chkShowEnterArguments.Checked = True
+        chkShowEnterArguments.Checked = False
         ucrDataFrameEnter.Reset()
+        chkSaveEnterResultInto.Checked = True
+        ucrSaveEnterResultInto.SetPrefix("Enter")
     End Sub
     Private Sub ReopenDialog()
+        SaveResults()
     End Sub
     Private Sub TestOKEnabled()
         If Not ucrReceiverForEnterCalculation.IsEmpty Then
@@ -51,6 +61,38 @@ Public Class dlgEnter
         End If
     End Sub
 
+    Private Sub SaveResults()
+        If chkSaveEnterResultInto.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(), strTempDataframe:=ucrDataFrameEnter.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
+        Else
+            ucrBase.clsRsyntax.RemoveAssignTo()
+            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        Dim strScript As String = ""
+        Dim strFunc As String
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
+        strFunc = clsAttach.ToScript(strScript)
+        frmMain.clsRLink.RunScript(strScript & strFunc)
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim strScript As String = ""
+        Dim strFunc As String
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
+        strFunc = clsDetach.ToScript(strScript)
+        frmMain.clsRLink.RunScript(strScript & strFunc)
+    End Sub
+
+    Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
+        ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
+        TestOKEnabled()
+    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
@@ -192,7 +234,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdLetters2_Click(sender As Object, e As EventArgs) Handles cmdLetters2.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("Letters")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("letters")
         TestOKEnabled()
     End Sub
 
@@ -204,5 +246,19 @@ Public Class dlgEnter
     Private Sub cmdMonthPlus_Click(sender As Object, e As EventArgs) Handles cmdMonthPlus.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("month.name")
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSaveEnterResultInto_NameChanged() Handles ucrSaveEnterResultInto.NameChanged
+        SaveResults()
+        ucrReceiverForEnterCalculation.Clear()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub chkSaveEnterResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveEnterResultInto.CheckedChanged
+        If chkSaveEnterResultInto.Checked Then
+            ucrSaveEnterResultInto.Visible = True
+        Else
+            ucrSaveEnterResultInto.Visible = False
+        End If
     End Sub
 End Class
