@@ -136,6 +136,7 @@ Partial Class dlgNon_ParametricOneSampleTests
         'ucrReceiverDataColumn
         '
         Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(265, 97)
+        Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
         Me.ucrReceiverDataColumn.Selector = Nothing
         Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(106, 26)
@@ -143,7 +144,10 @@ Partial Class dlgNon_ParametricOneSampleTests
         '
         'ucrSelectorNPOneSample
         '
+        Me.ucrSelectorNPOneSample.bShowHiddenColumns = False
+        Me.ucrSelectorNPOneSample.bUseCurrentFilter = False
         Me.ucrSelectorNPOneSample.Location = New System.Drawing.Point(2, 2)
+        Me.ucrSelectorNPOneSample.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorNPOneSample.Name = "ucrSelectorNPOneSample"
         Me.ucrSelectorNPOneSample.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorNPOneSample.TabIndex = 1
@@ -170,6 +174,8 @@ Partial Class dlgNon_ParametricOneSampleTests
         Me.Controls.Add(Me.ucrSelectorNPOneSample)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgNon_ParametricOneSampleTests"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Non-Parametric_One_Sample_Tests"
