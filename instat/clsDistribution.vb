@@ -16,7 +16,7 @@
 
 Public Class Distribution
     Public strNameTag As String
-    Public strRName As String
+    Public strRName As String = ""
     Public bIncluded As Boolean = True
     Public strRFunctionName As String = ""
     Public strPFunctionName As String = ""
@@ -27,6 +27,7 @@ Public Class Distribution
     Public bFactor As Boolean = False
     Public bTwoLevelFactor As Boolean = False
     Public bPositiveInt As Boolean = False
+    Public bIsContinuous As Boolean = True
     Public clsParameters As New List(Of DistributionParameter)
 
     Public Sub SetNameTag(strTemp As String)
