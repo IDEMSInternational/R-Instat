@@ -252,9 +252,9 @@ Partial Class frmMain
         Me.mnuFileNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrame = New System.Windows.Forms.ToolStripMenuItem()
@@ -290,6 +290,7 @@ Partial Class frmMain
         Me.mnuOrganiseColumnCalculateRowSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerateRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnGenerateEnter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerateRandomSamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGeneratePermuteRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnFactor = New System.Windows.Forms.ToolStripMenuItem()
@@ -688,9 +689,8 @@ Partial Class frmMain
         '
         'mnuModelOneVariableFitModel
         '
-        Me.mnuModelOneVariableFitModel.Enabled = False
         Me.mnuModelOneVariableFitModel.Name = "mnuModelOneVariableFitModel"
-        Me.mnuModelOneVariableFitModel.Size = New System.Drawing.Size(160, 22)
+        Me.mnuModelOneVariableFitModel.Size = New System.Drawing.Size(169, 22)
         Me.mnuModelOneVariableFitModel.Tag = "Fit_Model..."
         Me.mnuModelOneVariableFitModel.Text = "Fit Model..."
         '
@@ -698,15 +698,15 @@ Partial Class frmMain
         '
         Me.mnuModelOneVariableChooseModel.Enabled = False
         Me.mnuModelOneVariableChooseModel.Name = "mnuModelOneVariableChooseModel"
-        Me.mnuModelOneVariableChooseModel.Size = New System.Drawing.Size(160, 22)
+        Me.mnuModelOneVariableChooseModel.Size = New System.Drawing.Size(169, 22)
         Me.mnuModelOneVariableChooseModel.Tag = "Choose_Model..."
-        Me.mnuModelOneVariableChooseModel.Text = "Choose Model..."
+        Me.mnuModelOneVariableChooseModel.Text = "Compare Model..."
         '
         'mnuModelOneVariableUseModel
         '
         Me.mnuModelOneVariableUseModel.Enabled = False
         Me.mnuModelOneVariableUseModel.Name = "mnuModelOneVariableUseModel"
-        Me.mnuModelOneVariableUseModel.Size = New System.Drawing.Size(160, 22)
+        Me.mnuModelOneVariableUseModel.Size = New System.Drawing.Size(169, 22)
         Me.mnuModelOneVariableUseModel.Tag = "Use_Model..."
         Me.mnuModelOneVariableUseModel.Text = "Use Model..."
         '
@@ -735,7 +735,6 @@ Partial Class frmMain
         '
         'mnuModelTwoVariablesUseModel
         '
-        Me.mnuModelTwoVariablesUseModel.Enabled = False
         Me.mnuModelTwoVariablesUseModel.Name = "mnuModelTwoVariablesUseModel"
         Me.mnuModelTwoVariablesUseModel.Size = New System.Drawing.Size(160, 22)
         Me.mnuModelTwoVariablesUseModel.Tag = "Use_Model..."
@@ -2030,6 +2029,7 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
+        Me.mnuBar.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuOrganise, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
@@ -2070,6 +2070,12 @@ Partial Class frmMain
         Me.mnuFileOpenFromLibrary.Tag = "Open_From_Library"
         Me.mnuFileOpenFromLibrary.Text = "Open From Library"
         '
+        'mnuImportFromODK
+        '
+        Me.mnuImportFromODK.Name = "mnuImportFromODK"
+        Me.mnuImportFromODK.Size = New System.Drawing.Size(204, 22)
+        Me.mnuImportFromODK.Text = "Import from ODK..."
+        '
         'tlSeparatorFile
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
@@ -2080,12 +2086,6 @@ Partial Class frmMain
         Me.mnuExport.Name = "mnuExport"
         Me.mnuExport.Size = New System.Drawing.Size(204, 22)
         Me.mnuExport.Text = "Export Data"
-        '
-        'mnuImportFromODK
-        '
-        Me.mnuImportFromODK.Name = "mnuImportFromODK"
-        Me.mnuImportFromODK.Size = New System.Drawing.Size(204, 22)
-        Me.mnuImportFromODK.Text = "Import from ODK..."
         '
         'mnuFileCloseData
         '
@@ -2314,7 +2314,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnGenerate
         '
-        Me.mnuOrganiseColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnGenerateRegularSequence, Me.mnuOrganiseColumnGenerateRandomSamples, Me.mnuOrganiseColumnGeneratePermuteRows})
+        Me.mnuOrganiseColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnGenerateRegularSequence, Me.mnuOrganiseColumnGenerateEnter, Me.mnuOrganiseColumnGenerateRandomSamples, Me.mnuOrganiseColumnGeneratePermuteRows})
         Me.mnuOrganiseColumnGenerate.Name = "mnuOrganiseColumnGenerate"
         Me.mnuOrganiseColumnGenerate.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseColumnGenerate.Tag = "Column:_Generate"
@@ -2326,6 +2326,12 @@ Partial Class frmMain
         Me.mnuOrganiseColumnGenerateRegularSequence.Size = New System.Drawing.Size(177, 22)
         Me.mnuOrganiseColumnGenerateRegularSequence.Tag = "Regular_Sequence..."
         Me.mnuOrganiseColumnGenerateRegularSequence.Text = "Regular Sequence..."
+        '
+        'mnuOrganiseColumnGenerateEnter
+        '
+        Me.mnuOrganiseColumnGenerateEnter.Name = "mnuOrganiseColumnGenerateEnter"
+        Me.mnuOrganiseColumnGenerateEnter.Size = New System.Drawing.Size(177, 22)
+        Me.mnuOrganiseColumnGenerateEnter.Text = "Enter..."
         '
         'mnuOrganiseColumnGenerateRandomSamples
         '
@@ -2633,7 +2639,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectMetadata
         '
-        Me.mnuOrganiseDataObjectMetadata.Enabled = False
         Me.mnuOrganiseDataObjectMetadata.Name = "mnuOrganiseDataObjectMetadata"
         Me.mnuOrganiseDataObjectMetadata.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectMetadata.Tag = "Metadata..."
@@ -3117,5 +3122,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator24 As ToolStripSeparator
     Friend WithEvents mnuClimaticFile As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileOpensst As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnGenerateEnter As ToolStripMenuItem
     Friend WithEvents mnuImportFromODK As ToolStripMenuItem
 End Class

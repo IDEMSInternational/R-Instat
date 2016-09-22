@@ -65,6 +65,8 @@ Partial Class dlgOneWayANOVA
         '
         'ucrAddRemoveDataFrame
         '
+        Me.ucrAddRemoveDataFrame.bShowHiddenColumns = False
+        Me.ucrAddRemoveDataFrame.bUseCurrentFilter = False
         Me.ucrAddRemoveDataFrame.Location = New System.Drawing.Point(10, 10)
         Me.ucrAddRemoveDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemoveDataFrame.Name = "ucrAddRemoveDataFrame"
@@ -108,6 +110,7 @@ Partial Class dlgOneWayANOVA
         '
         'UcrInputTextBox1
         '
+        Me.UcrInputTextBox1.IsReadOnly = False
         Me.UcrInputTextBox1.Location = New System.Drawing.Point(80, 239)
         Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
         Me.UcrInputTextBox1.Size = New System.Drawing.Size(137, 21)
@@ -128,6 +131,8 @@ Partial Class dlgOneWayANOVA
         Me.Controls.Add(Me.ucrYVariate)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgOneWayANOVA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "One_Way_ANOVAN"

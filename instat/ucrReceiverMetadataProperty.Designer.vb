@@ -23,9 +23,9 @@ Partial Class ucrReceiverMetadataProperty
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.nudParamValue = New System.Windows.Forms.NumericUpDown()
+        Me.ucrInputTextValue = New instat.ucrInputTextBox()
         Me.ucrCboParamValue = New instat.ucrInputComboBox()
         Me.ucrColor = New instat.ucrColors()
-        Me.ucrInputTextValue = New instat.ucrInputTextBox()
         CType(Me.nudParamValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -35,6 +35,14 @@ Partial Class ucrReceiverMetadataProperty
         Me.nudParamValue.Name = "nudParamValue"
         Me.nudParamValue.Size = New System.Drawing.Size(45, 20)
         Me.nudParamValue.TabIndex = 8
+        '
+        'ucrInputTextValue
+        '
+        Me.ucrInputTextValue.IsReadOnly = False
+        Me.ucrInputTextValue.Location = New System.Drawing.Point(0, 0)
+        Me.ucrInputTextValue.Name = "ucrInputTextValue"
+        Me.ucrInputTextValue.Size = New System.Drawing.Size(139, 20)
+        Me.ucrInputTextValue.TabIndex = 11
         '
         'ucrCboParamValue
         '
@@ -51,14 +59,6 @@ Partial Class ucrReceiverMetadataProperty
         Me.ucrColor.Name = "ucrColor"
         Me.ucrColor.Size = New System.Drawing.Size(139, 20)
         Me.ucrColor.TabIndex = 9
-        '
-        'ucrInputTextValue
-        '
-        Me.ucrInputTextValue.IsReadOnly = False
-        Me.ucrInputTextValue.Location = New System.Drawing.Point(0, 0)
-        Me.ucrInputTextValue.Name = "ucrInputTextValue"
-        Me.ucrInputTextValue.Size = New System.Drawing.Size(139, 20)
-        Me.ucrInputTextValue.TabIndex = 11
         '
         'ucrReceiverMetadataProperty
         '

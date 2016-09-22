@@ -90,12 +90,12 @@ Partial Class dlgCorrelation
         '
         'grpMethod
         '
-        Me.grpMethod.Controls.Add(Me.rdoSpearman)
         Me.grpMethod.Controls.Add(Me.rdoKendall)
         Me.grpMethod.Controls.Add(Me.rdoPearson)
+        Me.grpMethod.Controls.Add(Me.rdoSpearman)
         Me.grpMethod.Location = New System.Drawing.Point(10, 230)
         Me.grpMethod.Name = "grpMethod"
-        Me.grpMethod.Size = New System.Drawing.Size(199, 49)
+        Me.grpMethod.Size = New System.Drawing.Size(205, 49)
         Me.grpMethod.TabIndex = 8
         Me.grpMethod.TabStop = False
         Me.grpMethod.Tag = "Method"
@@ -104,7 +104,7 @@ Partial Class dlgCorrelation
         'rdoSpearman
         '
         Me.rdoSpearman.AutoSize = True
-        Me.rdoSpearman.Location = New System.Drawing.Point(122, 14)
+        Me.rdoSpearman.Location = New System.Drawing.Point(128, 14)
         Me.rdoSpearman.Name = "rdoSpearman"
         Me.rdoSpearman.Size = New System.Drawing.Size(73, 17)
         Me.rdoSpearman.TabIndex = 2
@@ -115,7 +115,7 @@ Partial Class dlgCorrelation
         'rdoKendall
         '
         Me.rdoKendall.AutoSize = True
-        Me.rdoKendall.Location = New System.Drawing.Point(65, 14)
+        Me.rdoKendall.Location = New System.Drawing.Point(68, 14)
         Me.rdoKendall.Name = "rdoKendall"
         Me.rdoKendall.Size = New System.Drawing.Size(60, 17)
         Me.rdoKendall.TabIndex = 1
@@ -148,11 +148,11 @@ Partial Class dlgCorrelation
         '
         'grpMissing
         '
-        Me.grpMissing.Controls.Add(Me.rdoPairwise)
         Me.grpMissing.Controls.Add(Me.rdoCompleteRowsOnly)
-        Me.grpMissing.Location = New System.Drawing.Point(221, 230)
+        Me.grpMissing.Controls.Add(Me.rdoPairwise)
+        Me.grpMissing.Location = New System.Drawing.Point(217, 230)
         Me.grpMissing.Name = "grpMissing"
-        Me.grpMissing.Size = New System.Drawing.Size(188, 49)
+        Me.grpMissing.Size = New System.Drawing.Size(190, 49)
         Me.grpMissing.TabIndex = 9
         Me.grpMissing.TabStop = False
         Me.grpMissing.Tag = "Missing"
@@ -161,7 +161,7 @@ Partial Class dlgCorrelation
         'rdoPairwise
         '
         Me.rdoPairwise.AutoSize = True
-        Me.rdoPairwise.Location = New System.Drawing.Point(123, 16)
+        Me.rdoPairwise.Location = New System.Drawing.Point(124, 14)
         Me.rdoPairwise.Name = "rdoPairwise"
         Me.rdoPairwise.Size = New System.Drawing.Size(64, 17)
         Me.rdoPairwise.TabIndex = 1
@@ -173,7 +173,7 @@ Partial Class dlgCorrelation
         '
         Me.rdoCompleteRowsOnly.AutoSize = True
         Me.rdoCompleteRowsOnly.Checked = True
-        Me.rdoCompleteRowsOnly.Location = New System.Drawing.Point(8, 17)
+        Me.rdoCompleteRowsOnly.Location = New System.Drawing.Point(6, 14)
         Me.rdoCompleteRowsOnly.Name = "rdoCompleteRowsOnly"
         Me.rdoCompleteRowsOnly.Size = New System.Drawing.Size(116, 17)
         Me.rdoCompleteRowsOnly.TabIndex = 0
@@ -251,12 +251,12 @@ Partial Class dlgCorrelation
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 339)
+        Me.Controls.Add(Me.grpMethod)
         Me.Controls.Add(Me.nudConfidenceInterval)
         Me.Controls.Add(Me.ucrReceiverMultipleColumns)
         Me.Controls.Add(Me.lblConfInterval)
         Me.Controls.Add(Me.grpMissing)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.grpMethod)
         Me.Controls.Add(Me.lblSecondColumn)
         Me.Controls.Add(Me.lblFirstColumn)
         Me.Controls.Add(Me.ucrReceiverSecondColumn)

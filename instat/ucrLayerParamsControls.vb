@@ -31,6 +31,7 @@ Public Class ucrLayerParamsControls
 
     Public Sub SetLayerParameter(clsTempLayerParam As LayerParameter)
         ucrReceiverMetadataProperty.clsLayerParam = clsTempLayerParam
+        ucrReceiverMetadataProperty.Visible = False
         ucrReceiverMetadataProperty.SetControls()
         If Not IsNothing(ucrReceiverMetadataProperty.clsLayerParam) Then
             chkParamName.Visible = True
