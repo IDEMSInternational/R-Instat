@@ -153,7 +153,9 @@ Public Class ucrDistributions
                         End Select
                     End If
                 Case Else
-                    bUse = True
+                    If Dist.strRName <> "" Then
+                        bUse = True
+                    End If
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
@@ -196,6 +198,7 @@ Public Class ucrDistributions
         clsNormalDist.strDFunctionName = "dnorm"
         clsNormalDist.strGLMFunctionName = "gaussian"
         clsNormalDist.bNumeric = True
+        clsNormalDist.bIsContinuous = True
         clsNormalDist.AddParameter("mean", "Mean", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
@@ -207,6 +210,7 @@ Public Class ucrDistributions
         clsExponentialDist.strPFunctionName = "pexp"
         clsExponentialDist.strQFunctionName = "qexp"
         clsExponentialDist.strDFunctionName = "dexp"
+        clsExponentialDist.bIsContinuous = True
         clsExponentialDist.AddParameter("mean", "Mean", 1)
         lstAllDistributions.Add(clsExponentialDist)
 
@@ -217,6 +221,7 @@ Public Class ucrDistributions
         clsGeometricDist.strPFunctionName = "pgeom"
         clsGeometricDist.strQFunctionName = "qgeom"
         clsGeometricDist.strDFunctionName = "dgeom"
+        clsGeometricDist.bIsContinuous = False
         clsGeometricDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsGeometricDist)
 
@@ -227,6 +232,7 @@ Public Class ucrDistributions
         clsExtremeValueDist.strPFunctionName = "pevd"
         clsExtremeValueDist.strQFunctionName = "qqevd"
         clsExtremeValueDist.strDFunctionName = "devd"
+        clsExtremeValueDist.bIsContinuous = True
         clsExtremeValueDist.AddParameter("shape", "Shape", 0)
         clsExtremeValueDist.AddParameter("scale", "Scale", 1)
         clsExtremeValueDist.AddParameter("loc", "Location", 0)
@@ -239,6 +245,7 @@ Public Class ucrDistributions
         clsWeibullDist.strPFunctionName = "pweibull"
         clsWeibullDist.strQFunctionName = "qweibull"
         clsWeibullDist.strDFunctionName = "dweibull"
+        clsWeibullDist.bIsContinuous = True
         clsWeibullDist.AddParameter("shape", "Shape")
         clsWeibullDist.AddParameter("scale", "Scale", 1)
         lstAllDistributions.Add(clsWeibullDist)
@@ -250,6 +257,7 @@ Public Class ucrDistributions
         clsUniformDist.strPFunctionName = "punif"
         clsUniformDist.strQFunctionName = "qunif"
         clsUniformDist.strDFunctionName = "dunif"
+        'clsUniformDist.bIsContinuous = True
         clsUniformDist.AddParameter("min", "Minimum", 0)
         clsUniformDist.AddParameter("max", "Maximum", 1)
         lstAllDistributions.Add(clsUniformDist)
@@ -261,6 +269,7 @@ Public Class ucrDistributions
         clsBernouliDist.strPFunctionName = "pbinom"
         clsBernouliDist.strQFunctionName = "qbinom"
         clsBernouliDist.strDFunctionName = "dbinom"
+        clsBernouliDist.bIsContinuous = False
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBernouliDist)
 
@@ -273,6 +282,7 @@ Public Class ucrDistributions
         clsBinomialDist.strDFunctionName = "dbinom"
         clsBinomialDist.strGLMFunctionName = "binomial"
         clsBinomialDist.bTwoLevelFactor = True
+        clsBinomialDist.bIsContinuous = False
         clsBinomialDist.AddParameter("size", "Number", 1)
         clsBinomialDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBinomialDist)
@@ -286,6 +296,7 @@ Public Class ucrDistributions
         clsPoissonDist.strDFunctionName = "dpois"
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
+        clsPoissonDist.bIsContinuous = False
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 
@@ -296,6 +307,7 @@ Public Class ucrDistributions
         clsVonnMisesDist.strPFunctionName = "pvonmises"
         clsVonnMisesDist.strQFunctionName = "qvonmises"
         clsVonnMisesDist.strDFunctionName = "dvonmises"
+        clsVonnMisesDist.bIsContinuous = True
         clsVonnMisesDist.AddParameter("mu", "Mean", "pi")
         clsVonnMisesDist.AddParameter("kappa", "Kappa", 0)
         lstAllDistributions.Add(clsVonnMisesDist)
@@ -307,6 +319,7 @@ Public Class ucrDistributions
         clsCategoricalDist.strPFunctionName = ""
         clsCategoricalDist.strQFunctionName = ""
         clsCategoricalDist.strDFunctionName = ""
+        clsCategoricalDist.bIsContinuous = False
         clsCategoricalDist.AddParameter("", "", "")
         clsCategoricalDist.AddParameter("", "", )
         lstAllDistributions.Add(clsCategoricalDist)
@@ -318,6 +331,7 @@ Public Class ucrDistributions
         clsGammaWithShapeandScale.strPFunctionName = "pgamma"
         clsGammaWithShapeandScale.strQFunctionName = "qgamma"
         clsGammaWithShapeandScale.strDFunctionName = "dgamma"
+        clsGammaWithShapeandScale.bIsContinuous = True
         clsGammaWithShapeandScale.AddParameter("shape", "Shape")
         clsGammaWithShapeandScale.AddParameter("scale", "Scale")
         lstAllDistributions.Add(clsGammaWithShapeandScale)
@@ -329,6 +343,7 @@ Public Class ucrDistributions
         clsGammaWithShapeandMean.strPFunctionName = "pgamma"
         clsGammaWithShapeandMean.strQFunctionName = "qgamma"
         clsGammaWithShapeandMean.strDFunctionName = "dgamma"
+        clsGammaWithShapeandMean.bIsContinuous = True
         clsGammaWithShapeandMean.AddParameter("shape", "Shape")
         clsGammaWithShapeandMean.AddParameter("mean", "Mean")
         lstAllDistributions.Add(clsGammaWithShapeandMean)
@@ -340,6 +355,7 @@ Public Class ucrDistributions
         clsGammaWithShapeandRate.strPFunctionName = "pgamma"
         clsGammaWithShapeandRate.strQFunctionName = "qgamma"
         clsGammaWithShapeandRate.strDFunctionName = "dgamma"
+        clsGammaWithShapeandRate.bIsContinuous = True
         clsGammaWithShapeandRate.AddParameter("shape", "Shape")
         clsGammaWithShapeandRate.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithShapeandRate)
@@ -349,6 +365,7 @@ Public Class ucrDistributions
         clsGamma.strRName = "gamma"
         clsGamma.strGLMFunctionName = "Gamma"
         clsGamma.bNumeric = True
+        clsGamma.bIsContinuous = True
         lstAllDistributions.Add(clsGamma)
 
         'Gamma with Zeros distribution
@@ -359,35 +376,39 @@ Public Class ucrDistributions
         clsGammaWithZerosDist.strPFunctionName = "pgamma"
         clsGammaWithZerosDist.strQFunctionName = "qgamma"
         clsGammaWithZerosDist.strDFunctionName = "dgamma"
+        clsGammaWithZerosDist.bIsContinuous = True
         clsGammaWithZerosDist.AddParameter("", "", "")
         clsGammaWithZerosDist.AddParameter("", "", )
         lstAllDistributions.Add(clsGammaWithZerosDist)
 
         'Inverse Gaussian distribution
         clsInverseGaussianDist.strNameTag = "Inverse_Gaussian"
-        clsInverseGaussianDist.strRName = "inverse.gaussian"
+        clsInverseGaussianDist.strRName = ""
         clsInverseGaussianDist.strGLMFunctionName = "inverse.gaussian"
         clsInverseGaussianDist.bNumeric = True
+        clsInverseGaussianDist.bIsContinuous = True
         lstAllDistributions.Add(clsInverseGaussianDist)
 
         'Quasi distribution
         clsQuasiDist.strNameTag = "Quasi"
-        clsQuasiDist.strRName = "quasi"
+        clsQuasiDist.strRName = ""
         clsQuasiDist.strGLMFunctionName = "quasi"
         clsQuasiDist.bNumeric = True
+        'clsQuasiDist.bIsContinuous = 
         lstAllDistributions.Add(clsQuasiDist)
 
         'Quasibinomial distribution
         clsQuasibinomialDist.strNameTag = "Quasibinomial"
-        clsQuasibinomialDist.strRName = "quasibinomial"
         clsQuasibinomialDist.strGLMFunctionName = "quasibinomial"
         clsQuasibinomialDist.bTwoLevelFactor = True
+        'clsQuasibinomialDist.bIsContinuous = 
         lstAllDistributions.Add(clsQuasibinomialDist)
 
         'Quasipoisson distribution
         clsQuasipoissonDist.strNameTag = "Quasipoisson"
-        clsQuasipoissonDist.strRName = "quasipoisson"
+        clsQuasipoissonDist.strRName = ""
         clsQuasipoissonDist.strGLMFunctionName = "quasipoisson"
+        'clsQuasipoissonDist.bIsContinuous = 
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)
 

@@ -24,17 +24,18 @@ Partial Class sdgOneVarFitModel
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.rdoMme = New System.Windows.Forms.RadioButton()
+        Me.rdoQme = New System.Windows.Forms.RadioButton()
+        Me.rdoMle = New System.Windows.Forms.RadioButton()
+        Me.rdoMge = New System.Windows.Forms.RadioButton()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton9 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton8 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton7 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
+        Me.rdoSANN = New System.Windows.Forms.RadioButton()
+        Me.rdoCG = New System.Windows.Forms.RadioButton()
+        Me.rdoBFGS = New System.Windows.Forms.RadioButton()
+        Me.rdoNelderMead = New System.Windows.Forms.RadioButton()
+        Me.rdoDefault = New System.Windows.Forms.RadioButton()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -53,10 +54,10 @@ Partial Class sdgOneVarFitModel
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.RadioButton2)
-        Me.TabPage1.Controls.Add(Me.RadioButton3)
-        Me.TabPage1.Controls.Add(Me.RadioButton1)
-        Me.TabPage1.Controls.Add(Me.RadioButton4)
+        Me.TabPage1.Controls.Add(Me.rdoMme)
+        Me.TabPage1.Controls.Add(Me.rdoQme)
+        Me.TabPage1.Controls.Add(Me.rdoMle)
+        Me.TabPage1.Controls.Add(Me.rdoMge)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -65,49 +66,49 @@ Partial Class sdgOneVarFitModel
         Me.TabPage1.Text = "Fitting Method"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'rdoMme
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(12, 48)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(102, 17)
-        Me.RadioButton2.TabIndex = 2
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "Moments (MME)"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.rdoMme.AutoSize = True
+        Me.rdoMme.Location = New System.Drawing.Point(12, 48)
+        Me.rdoMme.Name = "rdoMme"
+        Me.rdoMme.Size = New System.Drawing.Size(102, 17)
+        Me.rdoMme.TabIndex = 2
+        Me.rdoMme.TabStop = True
+        Me.rdoMme.Text = "Moments (MME)"
+        Me.rdoMme.UseVisualStyleBackColor = True
         '
-        'RadioButton3
+        'rdoQme
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(12, 71)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(99, 17)
-        Me.RadioButton3.TabIndex = 3
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "Quartiles (QME)"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.rdoQme.AutoSize = True
+        Me.rdoQme.Location = New System.Drawing.Point(12, 71)
+        Me.rdoQme.Name = "rdoQme"
+        Me.rdoQme.Size = New System.Drawing.Size(99, 17)
+        Me.rdoQme.TabIndex = 3
+        Me.rdoQme.TabStop = True
+        Me.rdoQme.Text = "Quartiles (QME)"
+        Me.rdoQme.UseVisualStyleBackColor = True
         '
-        'RadioButton1
+        'rdoMle
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(12, 25)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(151, 17)
-        Me.RadioButton1.TabIndex = 1
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Maximum Likelihood (MLE)"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.rdoMle.AutoSize = True
+        Me.rdoMle.Location = New System.Drawing.Point(12, 25)
+        Me.rdoMle.Name = "rdoMle"
+        Me.rdoMle.Size = New System.Drawing.Size(151, 17)
+        Me.rdoMle.TabIndex = 1
+        Me.rdoMle.TabStop = True
+        Me.rdoMle.Text = "Maximum Likelihood (MLE)"
+        Me.rdoMle.UseVisualStyleBackColor = True
         '
-        'RadioButton4
+        'rdoMge
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(12, 94)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(132, 17)
-        Me.RadioButton4.TabIndex = 4
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "Goodness of Fit (MQE)"
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.rdoMge.AutoSize = True
+        Me.rdoMge.Location = New System.Drawing.Point(12, 94)
+        Me.rdoMge.Name = "rdoMge"
+        Me.rdoMge.Size = New System.Drawing.Size(132, 17)
+        Me.rdoMge.TabIndex = 4
+        Me.rdoMge.TabStop = True
+        Me.rdoMge.Text = "Goodness of Fit (MGE)"
+        Me.rdoMge.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
@@ -122,11 +123,11 @@ Partial Class sdgOneVarFitModel
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.RadioButton9)
-        Me.GroupBox1.Controls.Add(Me.RadioButton8)
-        Me.GroupBox1.Controls.Add(Me.RadioButton7)
-        Me.GroupBox1.Controls.Add(Me.RadioButton6)
-        Me.GroupBox1.Controls.Add(Me.RadioButton5)
+        Me.GroupBox1.Controls.Add(Me.rdoSANN)
+        Me.GroupBox1.Controls.Add(Me.rdoCG)
+        Me.GroupBox1.Controls.Add(Me.rdoBFGS)
+        Me.GroupBox1.Controls.Add(Me.rdoNelderMead)
+        Me.GroupBox1.Controls.Add(Me.rdoDefault)
         Me.GroupBox1.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(181, 139)
@@ -134,66 +135,74 @@ Partial Class sdgOneVarFitModel
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Optimisation Method"
         '
-        'RadioButton9
+        'rdoSANN
         '
-        Me.RadioButton9.AutoSize = True
-        Me.RadioButton9.Location = New System.Drawing.Point(6, 111)
-        Me.RadioButton9.Name = "RadioButton9"
-        Me.RadioButton9.Size = New System.Drawing.Size(55, 17)
-        Me.RadioButton9.TabIndex = 4
-        Me.RadioButton9.TabStop = True
-        Me.RadioButton9.Text = "SANN"
-        Me.RadioButton9.UseVisualStyleBackColor = True
+        Me.rdoSANN.AutoSize = True
+        Me.rdoSANN.Location = New System.Drawing.Point(6, 111)
+        Me.rdoSANN.Name = "rdoSANN"
+        Me.rdoSANN.Size = New System.Drawing.Size(55, 17)
+        Me.rdoSANN.TabIndex = 4
+        Me.rdoSANN.TabStop = True
+        Me.rdoSANN.Text = "SANN"
+        Me.rdoSANN.UseVisualStyleBackColor = True
         '
-        'RadioButton8
+        'rdoCG
         '
-        Me.RadioButton8.AutoSize = True
-        Me.RadioButton8.Location = New System.Drawing.Point(6, 88)
-        Me.RadioButton8.Name = "RadioButton8"
-        Me.RadioButton8.Size = New System.Drawing.Size(138, 17)
-        Me.RadioButton8.TabIndex = 3
-        Me.RadioButton8.TabStop = True
-        Me.RadioButton8.Text = "Conjugent Gradent (CG)"
-        Me.RadioButton8.UseVisualStyleBackColor = True
+        Me.rdoCG.AutoSize = True
+        Me.rdoCG.Location = New System.Drawing.Point(6, 88)
+        Me.rdoCG.Name = "rdoCG"
+        Me.rdoCG.Size = New System.Drawing.Size(138, 17)
+        Me.rdoCG.TabIndex = 3
+        Me.rdoCG.TabStop = True
+        Me.rdoCG.Text = "Conjugent Gradent (CG)"
+        Me.rdoCG.UseVisualStyleBackColor = True
         '
-        'RadioButton7
+        'rdoBFGS
         '
-        Me.RadioButton7.AutoSize = True
-        Me.RadioButton7.Location = New System.Drawing.Point(6, 65)
-        Me.RadioButton7.Name = "RadioButton7"
-        Me.RadioButton7.Size = New System.Drawing.Size(53, 17)
-        Me.RadioButton7.TabIndex = 2
-        Me.RadioButton7.TabStop = True
-        Me.RadioButton7.Text = "BFGS"
-        Me.RadioButton7.UseVisualStyleBackColor = True
+        Me.rdoBFGS.AutoSize = True
+        Me.rdoBFGS.Location = New System.Drawing.Point(6, 65)
+        Me.rdoBFGS.Name = "rdoBFGS"
+        Me.rdoBFGS.Size = New System.Drawing.Size(53, 17)
+        Me.rdoBFGS.TabIndex = 2
+        Me.rdoBFGS.TabStop = True
+        Me.rdoBFGS.Text = "BFGS"
+        Me.rdoBFGS.UseVisualStyleBackColor = True
         '
-        'RadioButton6
+        'rdoNelderMead
         '
-        Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Location = New System.Drawing.Point(6, 42)
-        Me.RadioButton6.Name = "RadioButton6"
-        Me.RadioButton6.Size = New System.Drawing.Size(86, 17)
-        Me.RadioButton6.TabIndex = 1
-        Me.RadioButton6.TabStop = True
-        Me.RadioButton6.Text = "Nelder-Mead"
-        Me.RadioButton6.UseVisualStyleBackColor = True
+        Me.rdoNelderMead.AutoSize = True
+        Me.rdoNelderMead.Location = New System.Drawing.Point(6, 42)
+        Me.rdoNelderMead.Name = "rdoNelderMead"
+        Me.rdoNelderMead.Size = New System.Drawing.Size(86, 17)
+        Me.rdoNelderMead.TabIndex = 1
+        Me.rdoNelderMead.TabStop = True
+        Me.rdoNelderMead.Text = "Nelder-Mead"
+        Me.rdoNelderMead.UseVisualStyleBackColor = True
         '
-        'RadioButton5
+        'rdoDefault
         '
-        Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(6, 19)
-        Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(59, 17)
-        Me.RadioButton5.TabIndex = 0
-        Me.RadioButton5.TabStop = True
-        Me.RadioButton5.Text = "Default"
-        Me.RadioButton5.UseVisualStyleBackColor = True
+        Me.rdoDefault.AutoSize = True
+        Me.rdoDefault.Location = New System.Drawing.Point(6, 19)
+        Me.rdoDefault.Name = "rdoDefault"
+        Me.rdoDefault.Size = New System.Drawing.Size(59, 17)
+        Me.rdoDefault.TabIndex = 0
+        Me.rdoDefault.TabStop = True
+        Me.rdoDefault.Text = "Default"
+        Me.rdoDefault.UseVisualStyleBackColor = True
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(16, 195)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.TabIndex = 1
         '
         'sdgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(216, 192)
+        Me.ClientSize = New System.Drawing.Size(216, 228)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -212,15 +221,16 @@ Partial Class sdgOneVarFitModel
 
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents RadioButton4 As RadioButton
+    Friend WithEvents rdoMme As RadioButton
+    Friend WithEvents rdoQme As RadioButton
+    Friend WithEvents rdoMle As RadioButton
+    Friend WithEvents rdoMge As RadioButton
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents RadioButton9 As RadioButton
-    Friend WithEvents RadioButton8 As RadioButton
-    Friend WithEvents RadioButton7 As RadioButton
-    Friend WithEvents RadioButton6 As RadioButton
-    Friend WithEvents RadioButton5 As RadioButton
+    Friend WithEvents rdoSANN As RadioButton
+    Friend WithEvents rdoCG As RadioButton
+    Friend WithEvents rdoBFGS As RadioButton
+    Friend WithEvents rdoNelderMead As RadioButton
+    Friend WithEvents rdoDefault As RadioButton
+    Friend WithEvents ucrBase As ucrButtonsSubdialogue
 End Class
