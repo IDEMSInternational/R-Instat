@@ -39,6 +39,8 @@ Partial Class dlglogLinearModels
         Me.ClientSize = New System.Drawing.Size(419, 270)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlglogLinearModels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Log linear models"

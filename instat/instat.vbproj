@@ -154,6 +154,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgEnter.Designer.vb">
+      <DependentUpon>dlgEnter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEnter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFitModel.Designer.vb">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </Compile>
@@ -182,6 +188,12 @@
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOpenSST.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTwoVariableUseModel.Designer.vb">
+      <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoVariableUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDescribeDisplay.Designer.vb">
@@ -2063,6 +2075,9 @@
     <EmbeddedResource Include="dlgDistanceText.sw-KE.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgEnter.resx">
+      <DependentUpon>dlgEnter.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.fr-FR.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
     </EmbeddedResource>
@@ -2521,6 +2536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoVariableUseModel.resx">
+      <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>

@@ -64,6 +64,8 @@ Partial Class dlgNon_ParametricTwoWayAnova
         '
         'ucrSelectorDataFrameAndVars
         '
+        Me.ucrSelectorDataFrameAndVars.bShowHiddenColumns = False
+        Me.ucrSelectorDataFrameAndVars.bUseCurrentFilter = False
         Me.ucrSelectorDataFrameAndVars.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDataFrameAndVars.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrameAndVars.Name = "ucrSelectorDataFrameAndVars"
@@ -118,6 +120,8 @@ Partial Class dlgNon_ParametricTwoWayAnova
         Me.Controls.Add(Me.ucrReceiverDataColumn)
         Me.Controls.Add(Me.ucrBaseNPTwoWayANOVA)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgNon_ParametricTwoWayAnova"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Non-Parametric_Two_Way_ANOVA"
