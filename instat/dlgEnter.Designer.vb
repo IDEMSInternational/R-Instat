@@ -32,15 +32,16 @@ Partial Class dlgEnter
         Me.cmd5 = New System.Windows.Forms.Button()
         Me.cmd4 = New System.Windows.Forms.Button()
         Me.chkShowEnterArguments = New System.Windows.Forms.CheckBox()
-        Me.grpEnterBasic = New System.Windows.Forms.GroupBox()
+        Me.grpEnterKeybord1 = New System.Windows.Forms.GroupBox()
         Me.cmd3 = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmd2 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
+        Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.lblData = New System.Windows.Forms.Label()
         Me.chkSaveEnterResultInto = New System.Windows.Forms.CheckBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.cmdMonthMinus = New System.Windows.Forms.Button()
         Me.cmdComma = New System.Windows.Forms.Button()
@@ -54,14 +55,13 @@ Partial Class dlgEnter
         Me.cmdSequence2 = New System.Windows.Forms.Button()
         Me.cmdConcantenateFunction = New System.Windows.Forms.Button()
         Me.cmdExponential = New System.Windows.Forms.Button()
-        Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmdMissingValues = New System.Windows.Forms.Button()
         Me.ucrSaveEnterResultInto = New instat.ucrInputComboBox()
         Me.ucrDataFrameEnter = New instat.ucrDataFrame()
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpEnterBasic.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpEnterKeybord1.SuspendLayout()
+        Me.grpEnterKeyboard2.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdBrackets
@@ -166,31 +166,30 @@ Partial Class dlgEnter
         Me.chkShowEnterArguments.Text = "Show Arguments"
         Me.chkShowEnterArguments.UseVisualStyleBackColor = True
         '
-        'grpEnterBasic
+        'grpEnterKeybord1
         '
-        Me.grpEnterBasic.Controls.Add(Me.cmdBrackets)
-        Me.grpEnterBasic.Controls.Add(Me.cmdDelete)
-        Me.grpEnterBasic.Controls.Add(Me.cmdMinus)
-        Me.grpEnterBasic.Controls.Add(Me.cmd9)
-        Me.grpEnterBasic.Controls.Add(Me.cmd8)
-        Me.grpEnterBasic.Controls.Add(Me.cmd7)
-        Me.grpEnterBasic.Controls.Add(Me.cmd6)
-        Me.grpEnterBasic.Controls.Add(Me.cmd5)
-        Me.grpEnterBasic.Controls.Add(Me.cmd4)
-        Me.grpEnterBasic.Controls.Add(Me.cmd3)
-        Me.grpEnterBasic.Controls.Add(Me.cmdClear)
-        Me.grpEnterBasic.Controls.Add(Me.cmd2)
-        Me.grpEnterBasic.Controls.Add(Me.cmd0)
-        Me.grpEnterBasic.Controls.Add(Me.cmdSquareBrackets)
-        Me.grpEnterBasic.Controls.Add(Me.cmd1)
-        Me.grpEnterBasic.Location = New System.Drawing.Point(143, 58)
-        Me.grpEnterBasic.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpEnterBasic.Name = "grpEnterBasic"
-        Me.grpEnterBasic.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpEnterBasic.Size = New System.Drawing.Size(164, 149)
-        Me.grpEnterBasic.TabIndex = 154
-        Me.grpEnterBasic.TabStop = False
-        Me.grpEnterBasic.Text = "Basic"
+        Me.grpEnterKeybord1.Controls.Add(Me.cmdBrackets)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmdDelete)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmdMinus)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd9)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd8)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd7)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd6)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd5)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd4)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd3)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmdClear)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd2)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd0)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmdSquareBrackets)
+        Me.grpEnterKeybord1.Controls.Add(Me.cmd1)
+        Me.grpEnterKeybord1.Location = New System.Drawing.Point(143, 58)
+        Me.grpEnterKeybord1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpEnterKeybord1.Name = "grpEnterKeybord1"
+        Me.grpEnterKeybord1.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpEnterKeybord1.Size = New System.Drawing.Size(164, 149)
+        Me.grpEnterKeybord1.TabIndex = 154
+        Me.grpEnterKeybord1.TabStop = False
         '
         'cmd3
         '
@@ -233,6 +232,16 @@ Partial Class dlgEnter
         Me.cmd0.Text = "0"
         Me.cmd0.UseVisualStyleBackColor = True
         '
+        'cmdSquareBrackets
+        '
+        Me.cmdSquareBrackets.Location = New System.Drawing.Point(125, 14)
+        Me.cmdSquareBrackets.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSquareBrackets.Name = "cmdSquareBrackets"
+        Me.cmdSquareBrackets.Size = New System.Drawing.Size(37, 30)
+        Me.cmdSquareBrackets.TabIndex = 141
+        Me.cmdSquareBrackets.Text = "[ ]"
+        Me.cmdSquareBrackets.UseVisualStyleBackColor = True
+        '
         'cmd1
         '
         Me.cmd1.Location = New System.Drawing.Point(3, 77)
@@ -265,30 +274,29 @@ Partial Class dlgEnter
         Me.chkSaveEnterResultInto.Text = "Save Result into"
         Me.chkSaveEnterResultInto.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'grpEnterKeyboard2
         '
-        Me.GroupBox1.Controls.Add(Me.cmdColon)
-        Me.GroupBox1.Controls.Add(Me.cmdMonthMinus)
-        Me.GroupBox1.Controls.Add(Me.cmdComma)
-        Me.GroupBox1.Controls.Add(Me.cmdLetters2)
-        Me.GroupBox1.Controls.Add(Me.cmdMonthPlus)
-        Me.GroupBox1.Controls.Add(Me.cmdDot)
-        Me.GroupBox1.Controls.Add(Me.cmdPi)
-        Me.GroupBox1.Controls.Add(Me.cmdLETTERS)
-        Me.GroupBox1.Controls.Add(Me.cmdRepelicationFunction)
-        Me.GroupBox1.Controls.Add(Me.cmdSequenceFunction)
-        Me.GroupBox1.Controls.Add(Me.cmdSequence2)
-        Me.GroupBox1.Controls.Add(Me.cmdConcantenateFunction)
-        Me.GroupBox1.Controls.Add(Me.cmdExponential)
-        Me.GroupBox1.Controls.Add(Me.cmdMissingValues)
-        Me.GroupBox1.Location = New System.Drawing.Point(311, 58)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.GroupBox1.Size = New System.Drawing.Size(204, 149)
-        Me.GroupBox1.TabIndex = 159
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Basic"
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdColon)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonthMinus)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdComma)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdLetters2)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonthPlus)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdDot)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdPi)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdLETTERS)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepelicationFunction)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdSequenceFunction)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdSequence2)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdConcantenateFunction)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdExponential)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMissingValues)
+        Me.grpEnterKeyboard2.Location = New System.Drawing.Point(311, 58)
+        Me.grpEnterKeyboard2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
+        Me.grpEnterKeyboard2.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpEnterKeyboard2.Size = New System.Drawing.Size(204, 149)
+        Me.grpEnterKeyboard2.TabIndex = 159
+        Me.grpEnterKeyboard2.TabStop = False
         '
         'cmdColon
         '
@@ -426,16 +434,6 @@ Partial Class dlgEnter
         Me.cmdExponential.Text = "E"
         Me.cmdExponential.UseVisualStyleBackColor = True
         '
-        'cmdSquareBrackets
-        '
-        Me.cmdSquareBrackets.Location = New System.Drawing.Point(125, 14)
-        Me.cmdSquareBrackets.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdSquareBrackets.Name = "cmdSquareBrackets"
-        Me.cmdSquareBrackets.Size = New System.Drawing.Size(37, 30)
-        Me.cmdSquareBrackets.TabIndex = 141
-        Me.cmdSquareBrackets.Text = "[ ]"
-        Me.cmdSquareBrackets.UseVisualStyleBackColor = True
-        '
         'cmdMissingValues
         '
         Me.cmdMissingValues.Location = New System.Drawing.Point(106, 17)
@@ -477,7 +475,7 @@ Partial Class dlgEnter
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 246)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(391, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(419, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgEnter
@@ -485,12 +483,12 @@ Partial Class dlgEnter
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(523, 315)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.grpEnterKeyboard2)
         Me.Controls.Add(Me.ucrSaveEnterResultInto)
         Me.Controls.Add(Me.chkSaveEnterResultInto)
         Me.Controls.Add(Me.ucrDataFrameEnter)
         Me.Controls.Add(Me.chkShowEnterArguments)
-        Me.Controls.Add(Me.grpEnterBasic)
+        Me.Controls.Add(Me.grpEnterKeybord1)
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.ucrReceiverForEnterCalculation)
         Me.Controls.Add(Me.ucrBase)
@@ -500,8 +498,8 @@ Partial Class dlgEnter
         Me.Name = "dlgEnter"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Enter"
-        Me.grpEnterBasic.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
+        Me.grpEnterKeybord1.ResumeLayout(False)
+        Me.grpEnterKeyboard2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -518,7 +516,7 @@ Partial Class dlgEnter
     Friend WithEvents cmd5 As Button
     Friend WithEvents cmd4 As Button
     Friend WithEvents chkShowEnterArguments As CheckBox
-    Friend WithEvents grpEnterBasic As GroupBox
+    Friend WithEvents grpEnterKeybord1 As GroupBox
     Friend WithEvents cmd3 As Button
     Friend WithEvents cmd2 As Button
     Friend WithEvents cmd0 As Button
@@ -528,7 +526,7 @@ Partial Class dlgEnter
     Friend WithEvents ucrDataFrameEnter As ucrDataFrame
     Friend WithEvents ucrSaveEnterResultInto As ucrInputComboBox
     Friend WithEvents chkSaveEnterResultInto As CheckBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents grpEnterKeyboard2 As GroupBox
     Friend WithEvents cmdMonthMinus As Button
     Friend WithEvents cmdLetters2 As Button
     Friend WithEvents cmdMonthPlus As Button
