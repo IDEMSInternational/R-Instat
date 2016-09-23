@@ -16,32 +16,76 @@
 Imports instat.Translations
 
 Public Class sdgOneVarFitModDisplay
+    Private clsRcdfcompFunction As New RFunction
+    Private clsRdenscompFunction As New RFunction
+    Private clsRqqcompFunction As New RFunction
+    Private clsRppcompFunction As New RFunction
+    Private clsRplotFunction As New RFunction
+    Private clsModel As New RFunction
+    Private WithEvents ucrDists As ucrDistributions
     Public bfirstload As Boolean = True
-
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+    End Sub
 
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
+    Public Sub InitialiseDialog()
+        clsRcdfcompFunction.SetRCommand("cdfcomp")
+        clsRdenscompFunction.SetRCommand("denscomp")
+        clsRqqcompFunction.SetRCommand("qqcomp")
+        clsRppcompFunction.SetRCommand("ppcomp")
+        clsRplotFunction.SetRCommand("plot")
+    End Sub
+
+    Public Sub SetDefaults()
+        rdoPlotAll.Checked = True
+        'ucrBase.ihelptopicID = 
+    End Sub
+
+    Public Sub SetModelFunction(clsNewModel As RFunction)
+        clsModel = clsNewModel
+        clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
+        clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+    End Sub
+
+    Public Sub SetDistribution(ucrNewDists As ucrDistributions)
+        ucrDists = ucrNewDists
+        SetPlotOptions()
+    End Sub
+
+    Public Sub CreateGraphs()
+        If rdoPlotAll.Checked Then
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
+        ElseIf rdoPPPlot.Checked Then
+            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
+        ElseIf rdoCDFPlot.Checked Then
+            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+        ElseIf rdoQQPlot.Checked Then
+            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
+        ElseIf rdoDensityPlot.Checked Then
+            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
         End If
     End Sub
 
-
-
-
-    Private Sub SetDefaults()
-        rdoPlotAll.Enabled = True
-        rdoNoPlot.Enabled = False
-        rdoCDFPlot.Enabled = False
-        rdoQQPlot.Enabled = False
-        rdoPPPlot.Enabled = False
-        rdoDensityPlot.Enabled = False
+    Private Sub ucrDists_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDists.cboDistributionsIndexChanged
+        SetPlotOptions()
     End Sub
 
-
-
-
-
+    Private Sub SetPlotOptions()
+        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+            rdoDensityPlot.Enabled = False
+            rdoQQPlot.Enabled = False
+            rdoPPPlot.Enabled = False
+            If rdoDensityPlot.Checked = True Or rdoQQPlot.Checked = True Or rdoPPPlot.Checked = True Then
+                rdoPlotAll.Checked = True
+            End If
+        Else
+            rdoDensityPlot.Enabled = True
+            rdoQQPlot.Enabled = True
+            rdoPPPlot.Enabled = True
+        End If
+    End Sub
 End Class

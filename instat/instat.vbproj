@@ -121,6 +121,10 @@
       <HintPath>..\packages\unvell.ReoGrid.dll.1.2.3.0\lib\20\unvell.ReoGrid.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="unvell.ReoScript, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\unvell.ReoGrid.dll.1.2.3.0\lib\20\unvell.ReoScript.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -4154,43 +4158,13 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="lib\ANTLR 3 License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\Antlr3.Runtime.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\DynamicInterop.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\DynamicInterop.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\FastColoredTextBox License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\FastColoredTextBox.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\RDotNet.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\RDotNet.NativeLibrary.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\RDotNet.NativeLibrary.XML">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\RDotNet.XML">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\unvell.ReoGrid.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\unvell.ReoGrid.XML">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\unvell.ReoScript.dll" />
+    <None Include="lib\Antlr3.Runtime.dll" />
+    <None Include="lib\DynamicInterop.dll" />
+    <None Include="lib\FastColoredTextBox.dll" />
+    <None Include="lib\RDotNet.dll" />
+    <None Include="lib\RDotNet.NativeLibrary.dll" />
+    <None Include="lib\unvell.ReoGrid.dll" />
+    <None Include="lib\unvell.ReoScript.dll" />
     <Content Include="static\InstatObject\R\Backend_Components\link.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
