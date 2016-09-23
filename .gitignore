@@ -229,3 +229,4 @@ ModelManifest.xml
 /packages/R.NET.1.5.5/lib/net40
 /packages/DynamicInterop.0.7.4/lib/net40/DynamicInterop.xml
 /packages/DynamicInterop.0.7.4/lib/net40/DynamicInterop.dll
+/instat/static/InstatObject/R/.RData
