@@ -75,8 +75,8 @@ Public Class dlgTwoVariableUseModel
     Private Sub Model()
         If Not ucrReceiverUseModel.IsEmpty And Not ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = "" Then
             clsRModel.SetRCommand("formula")
-            clsRModel.AddParameter("", clsRFunctionParameter:=clsRCommand)
-            'strDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsRModel.ToScript()).AsCharacter.AsList(0).ToString
+            clsRModel.AddParameter("x", clsRFunctionParameter:=clsRCommand)
+            'strModel = frmMain.clsRLink.RunInternalScriptGetValue(clsRModel.ToScript()).AsCharacter().ToList().ToString()
         Else
             strModel = ""
         End If
