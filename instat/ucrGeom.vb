@@ -270,8 +270,8 @@ Public Class ucrGeom
         clsgeom_crossbar.AddAesParameter("size")
 
         'adding layer parameters
-        clsgeom_count.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        clsgeom_count.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_crossbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_crossbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         lstAllGeoms.Add(clsgeom_crossbar)
 
         clsgeom_curve.strGeomName = "geom_curve"
@@ -389,8 +389,8 @@ Public Class ucrGeom
         clsgeom_errorbar.AddAesParameter("size", strIncludedDataTypes:={"factor"})
         clsgeom_errorbar.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
         'adding layer parameters
-        clsgeom_count.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        clsgeom_count.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_errorbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_errorbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         lstAllGeoms.Add(clsgeom_errorbar)
 
         clsgeom_errorbarh.strGeomName = "geom_errorbarh"
@@ -407,8 +407,8 @@ Public Class ucrGeom
         clsgeom_errorbarh.AddAesParameter("size")
 
         'add layer parameters
-        clsgeom_freqpoly.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_errorbarh.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_errorbarh.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         lstAllGeoms.Add(clsgeom_errorbarh)
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
@@ -436,8 +436,8 @@ Public Class ucrGeom
         clsgeom_hex.AddAesParameter("size")
 
         'add layer parameter 
-        clsgeom_freqpoly.AddLayerParameter("stat", "list", Chr(34) & "binhex" & Chr(34))
-        clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_hex.AddLayerParameter("stat", "list", Chr(34) & "binhex" & Chr(34))
+        clsgeom_hex.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         lstAllGeoms.Add(clsgeom_hex)
 
         clsgeom_histogram.strGeomName = "geom_histogram"
@@ -467,6 +467,7 @@ Public Class ucrGeom
         'geom_hline:yintercept
         'geom_abline: slope and intercept
         'TO DO Discuss how to use these
+        'add layer parameter
         clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0")
         lstAllGeoms.Add(clsgeom_hline)
 
@@ -512,8 +513,8 @@ Public Class ucrGeom
         clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric, factor"})
-        'adding layer parameters
 
+        'adding layer parameters
         clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "stack" & Chr(34)}) 'others options are “jitter”, “dodge” And “stack”
         lstAllGeoms.Add(clsgeom_line)
 
@@ -815,8 +816,8 @@ Public Class ucrGeom
         clsgeom_violin.AddAesParameter("size")
         clsgeom_violin.AddAesParameter("weight")
         'add layer parameter
-        clsgeom_spoke.AddLayerParameter("stat", "list", Chr(34) & "ydensity" & Chr(34))
-        clsgeom_spoke.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34))
+        clsgeom_violin.AddLayerParameter("stat", "list", Chr(34) & "ydensity" & Chr(34))
+        clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34))
         lstAllGeoms.Add(clsgeom_violin)
 
         clsgeom_vline.strGeomName = "geom_vline"
@@ -825,6 +826,7 @@ Public Class ucrGeom
         clsgeom_vline.AddAesParameter("linetype")
         clsgeom_vline.AddAesParameter("size")
         'TO DO  include those that control position
+        'add layer parameter
         clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0")
         lstAllGeoms.Add(clsgeom_vline)
     End Sub
