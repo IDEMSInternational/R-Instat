@@ -143,10 +143,9 @@ Public Class ucrGeom
         'geom_hline:yintercept
         'geom_abline: slope and intercept
         'TO DO Discuss how to use these
-
         'add layer parameters 
         clsgeom_abline.AddLayerParameter("intercept", "numeric", "0")
-        clsgeom_abline.AddLayerParameter("slope", "numeric", "0")
+        clsgeom_abline.AddLayerParameter("xxxxxxxx", "numeric", "0")
         lstAllGeoms.Add(clsgeom_abline)
 
         clsgeom_area.SetGeomName("geom_area")
@@ -458,17 +457,18 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_histogram)
 
 
-        'clsgeom_hline.strGeomName = "geom_hline"
-        'clsgeom_hline.AddAesParameter("alpha")
-        'clsgeom_hline.AddAesParameter("colour")
-        'clsgeom_hline.AddAesParameter("linetype")
-        'clsgeom_hline.AddAesParameter("size")
-        ''aesthetics that control position of line include
-        ''geom_vline:xintercept
-        ''geom_hline:yintercept
-        ''geom_abline: slope and intercept
-        ''TO DO Discuss how to use these
-        'lstAllGeoms.Add(clsgeom_hline)
+        clsgeom_hline.strGeomName = "geom_hline"
+        clsgeom_hline.AddAesParameter("alpha")
+        clsgeom_hline.AddAesParameter("colour")
+        clsgeom_hline.AddAesParameter("linetype")
+        clsgeom_hline.AddAesParameter("size")
+        'aesthetics that control position of line include
+        'geom_vline:xintercept
+        'geom_hline:yintercept
+        'geom_abline: slope and intercept
+        'TO DO Discuss how to use these
+        clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0")
+        lstAllGeoms.Add(clsgeom_hline)
 
         clsgeom_jitter.strGeomName = "geom_jitter"
         'mandatory
@@ -534,16 +534,19 @@ Public Class ucrGeom
         clsgeom_linerange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         lstAllGeoms.Add(clsgeom_linerange)
 
-        'clsgeom_map.strGeomName = "geom_map"
-        ''mandatory
-        'clsgeom_map.AddAesParameter("map_id", bIsMandatory:=True)
-        ''optional
-        'clsgeom_map.AddAesParameter("alpha")
-        'clsgeom_map.AddAesParameter("colour")
-        'clsgeom_map.AddAesParameter("fill")
-        'clsgeom_map.AddAesParameter("linetype")
-        'clsgeom_map.AddAesParameter("size")
-        'lstAllGeoms.Add(clsgeom_map)
+        clsgeom_map.strGeomName = "geom_map"
+        'mandatory
+        clsgeom_map.AddAesParameter("map_id", bIsMandatory:=True)
+        'optional
+        clsgeom_map.AddAesParameter("alpha")
+        clsgeom_map.AddAesParameter("colour")
+        clsgeom_map.AddAesParameter("fill")
+        clsgeom_map.AddAesParameter("linetype")
+        clsgeom_map.AddAesParameter("size")
+
+        'adding layer parameters
+        clsgeom_map.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        lstAllGeoms.Add(clsgeom_map)
 
         clsgeom_path.strGeomName = "geom_path"
         'mandatory
@@ -760,20 +763,29 @@ Public Class ucrGeom
         clsgeom_step.AddLayerParameter("linemitre", "numeric", "1")
         lstAllGeoms.Add(clsgeom_step)
 
-        'clsgeom_text.strGeomName = "geom_text"
-        ''mandatory
-        'clsgeom_text.AddAesParameter("label", bIsMandatory:=True)
-        'clsgeom_text.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_text.AddAesParameter("y", bIsMandatory:=True)
-        ''optional
-        'clsgeom_text.AddAesParameter("alpha")
-        'clsgeom_text.AddAesParameter("colour")
-        'clsgeom_text.AddAesParameter("family")
-        'clsgeom_text.AddAesParameter("fontface")
-        'clsgeom_text.AddAesParameter("hjust")
-        'clsgeom_text.AddAesParameter("lineheight")
-        ''TO DO add size and vjust this might need additon of labels and receivers  
-        'lstAllGeoms.Add(clsgeom_text)
+        clsgeom_text.strGeomName = "geom_text"
+        'mandatory
+        clsgeom_text.AddAesParameter("label", bIsMandatory:=True)
+        clsgeom_text.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_text.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_text.AddAesParameter("alpha")
+        clsgeom_text.AddAesParameter("colour")
+        clsgeom_text.AddAesParameter("family")
+        clsgeom_text.AddAesParameter("fontface")
+        clsgeom_text.AddAesParameter("hjust")
+        clsgeom_text.AddAesParameter("lineheight")
+        'TO DO add size and vjust this might need additon of labels and receivers 
+
+
+        'adding layer parameters
+        clsgeom_text.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_text.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_text.AddLayerParameter("parse", "bolean", "FALSE")
+        clsgeom_text.AddLayerParameter("nudge_x", "numeric", "0")
+        clsgeom_text.AddLayerParameter("nudge_y", "numeric", "0")
+        clsgeom_text.AddLayerParameter("check_overlap", "bolean", "FALSE")
+        lstAllGeoms.Add(clsgeom_text)
 
         clsgeom_tile.strGeomName = "geom_tile"
         'mandatory
@@ -807,13 +819,14 @@ Public Class ucrGeom
         clsgeom_spoke.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34))
         lstAllGeoms.Add(clsgeom_violin)
 
-        'clsgeom_vline.strGeomName = "geom_vline"
-        'clsgeom_vline.AddAesParameter("alpha")
-        'clsgeom_vline.AddAesParameter("colour")
-        'clsgeom_vline.AddAesParameter("linetype")
-        'clsgeom_vline.AddAesParameter("size")
-        ''TO DO  include those that control position
-        'lstAllGeoms.Add(clsgeom_vline)
+        clsgeom_vline.strGeomName = "geom_vline"
+        clsgeom_vline.AddAesParameter("alpha")
+        clsgeom_vline.AddAesParameter("colour")
+        clsgeom_vline.AddAesParameter("linetype")
+        clsgeom_vline.AddAesParameter("size")
+        'TO DO  include those that control position
+        clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0")
+        lstAllGeoms.Add(clsgeom_vline)
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
     Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
