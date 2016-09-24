@@ -186,6 +186,7 @@ Partial Class dlgThreeVariableModelling
         'ucrSelectorThreeVariableModelling
         '
         Me.ucrSelectorThreeVariableModelling.bShowHiddenColumns = False
+        Me.ucrSelectorThreeVariableModelling.bUseCurrentFilter = False
         Me.ucrSelectorThreeVariableModelling.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectorThreeVariableModelling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorThreeVariableModelling.Name = "ucrSelectorThreeVariableModelling"
@@ -272,6 +273,8 @@ Partial Class dlgThreeVariableModelling
         Me.Controls.Add(Me.ucrSelectorThreeVariableModelling)
         Me.Controls.Add(Me.ucrBaseThreeVariableModelling)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgThreeVariableModelling"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Three_Variable_Modelling"
