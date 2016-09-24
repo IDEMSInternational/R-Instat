@@ -16,9 +16,8 @@
 
 Imports instat.Translations
 
-
 Public Class dlgOneVarFitModel
-    Public clsRConvert As New RFunction
+    Public clsRConvert, clsRCIFunction As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -27,39 +26,50 @@ Public Class dlgOneVarFitModel
             SetDefaults()
             bfirstload = False
         Else
-            'ReopenDialog()
+            ReopenDialog()
         End If
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
-        UcrBase.clsRsyntax.SetFunction("")
+        sdgOneVarFitModDisplay.InitialiseDialog()
+        sdgOneVarFitModel.InitialiseDialog()
+        UcrBase.clsRsyntax.SetFunction("fitdist")
         'ucrBase.iHelpTopicID = 
-
+        UcrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
+        UcrReceiver.SetMeAsReceiver()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-        UcrDistributions.SetGLMDistributions()
-
         ucrSaveModel.SetPrefix("dist")
-        AssignSaveModel()
+        ucrSaveModel.SetItemsTypeAsModels()
+        ucrSaveModel.SetDefaultTypeAsModel()
+        ucrSaveModel.SetValidationTypeAsRVariable()
+        UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        sdgOneVarFitModDisplay.SetModelFunction(UcrBase.clsRsyntax.clsBaseFunction)
+        sdgOneVarFitModel.SetMyRSyntax(UcrBase.clsRsyntax)
+        sdgOneVarFitModDisplay.SetDistribution(UcrDistributions)
+        sdgOneVarFitModel.SetDistribution(UcrDistributions)
     End Sub
 
     Private Sub SetDefaults()
-        ucrSelectorOneVarFitMod.Focus()
         ucrSelectorOneVarFitMod.Reset()
-        UcrReceiver.SetMeAsReceiver()
-
-        ucrSaveModel.Visible = True
+        ucrSelectorOneVarFitMod.Focus()
         chkSaveModel.Checked = True
         ucrSaveModel.Reset()
-        ConverttoVariate()
+        SetDataParameter()
+        EnableOptions()
+        AssignSaveModel()
+        sdgOneVarFitModDisplay.SetDefaults()
+        sdgOneVarFitModel.SetDefaults()
+        TestOKEnabled()
     End Sub
 
+    Private Sub ReopenDialog()
+    End Sub
 
     Private Sub TestOKEnabled()
-        If (chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso UcrDistributions.Enabled AndAlso Not UcrReceiver.IsEmpty Then
+        If (chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso Not UcrReceiver.IsEmpty Then
             UcrBase.OKEnabled(True)
-            ' add in for other things - e.g. receiver, etc
         Else
             UcrBase.OKEnabled(False)
         End If
@@ -69,18 +79,9 @@ Public Class dlgOneVarFitModel
         SetDefaults()
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
-        'sdgOneVarFitModel.RegOptions()
-    End Sub
-
-
-
     Private Sub ucrSelectorOneVarFitMod_DataFrameChanged() Handles ucrSelectorOneVarFitMod.DataFrameChanged
-        UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.clsCurrDataFrame)
-        'the above line may not be correct..
         AssignSaveModel()
     End Sub
-
 
 
     Private Sub ucrSaveModel_NameChanged() Handles ucrSaveModel.NameChanged
@@ -89,49 +90,35 @@ Public Class dlgOneVarFitModel
     End Sub
 
 
-    Public Sub ConverttoVariate()
+    Public Sub SetDataParameter()
         If Not UcrReceiver.IsEmpty Then
-
-            ' UcrDistributions.ReceiverDataType(ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, UcrReceiver.GetVariableNames(bWithQuotes:=False))
-
-            If UcrDistributions.strDataType = "numeric" Then
+            If UcrReceiver.strCurrDataType = "numeric" OrElse UcrReceiver.strCurrDataType = "integer" Then
                 chkConvertToVariate.Checked = False
                 chkConvertToVariate.Visible = False
             Else
                 chkConvertToVariate.Visible = True
             End If
-
             If chkConvertToVariate.Checked Then
                 clsRConvert.SetRCommand("as.numeric")
-                clsRConvert.AddParameter("x", UcrReceiver.GetVariableNames(bWithQuotes:=False))
-                'clsModel.SetParameter(True, clsRFunc:=clsRConvert)
-                '   UcrDistributions.ReceiverDataType("numeric")
+                clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+                UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
             Else
-                '      clsmodel.setparameter(True, strValue:=UcrReceiver.GetVariableNames(bWithQuotes:=False))
-                '  UcrDistributions.receiverdatatype(ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, UcrReceiver.GetVariableNames(bWithQuotes:=False))
-
+                'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
+                clsRConvert.SetRCommand("as.vector")
+                clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+                UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
             End If
-            ' sdgModelOptions.ucrDistributions.ReceiverDatatype(ucrDistributions.strDataType)
+        Else
+            chkConvertToVariate.Visible = False
+            UcrBase.clsRsyntax.RemoveParameter("data")
         End If
-
-        'If UcrDistributions.1stCurrentDistribution.Count=0 Or ucrreceiver.IsEmpty() Then
-        'UcrDistributions.Enabled = False
-        'UcrDistributions.cboDistributions.Text = ""
-        'cmdFittingOptions.Enabled = False
-        'Else
-        'UcrDistributions.Enabled = True
-        'cmdFittingOptions.Enabled = True
-        'End If
     End Sub
-
 
     Private Sub AssignSaveModel()
         If chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty Then
             UcrBase.clsRsyntax.SetAssignTo(ucrSaveModel.GetText, strTempModel:=ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             UcrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
 
@@ -145,22 +132,44 @@ Public Class dlgOneVarFitModel
         TestOKEnabled()
     End Sub
 
-    Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
-        ConverttoVariate()
-        TestOKEnabled()
+    Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles UcrDistributions.cboDistributionsIndexChanged
+        UcrBase.clsRsyntax.AddParameter("distr", Chr(34) & UcrDistributions.clsCurrDistribution.strRName & Chr(34))
+        SetDataParameter()
     End Sub
 
-    Private Sub chkConvertToVariate_CheckedChanged_1(sender As Object, e As EventArgs)
-        ConverttoVariate()
+    Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
+        SetDataParameter()
         TestOKEnabled()
+        EnableOptions()
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
         sdgOneVarFitModel.ShowDialog()
-        'UcrDistributions.cboDistributions.SelectedIndex = UcrDistributions.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgFittingOptions.ucrDistributions.clsCurrDistribution.strNameTag)
+        EnableOptions()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgOneVarFitModDisplay.ShowDialog()
+        EnableOptions()
     End Sub
+
+    Private Sub EnableOptions()
+        If Not UcrReceiver.IsEmpty Then
+            cmdFittingOptions.Enabled = True
+            cmdDisplayOptions.Enabled = True
+        Else
+            cmdFittingOptions.Enabled = False
+            cmdDisplayOptions.Enabled = False
+        End If
+    End Sub
+
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
+        SetDataParameter()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
+        sdgOneVarFitModDisplay.CreateGraphs()
+    End Sub
+
 End Class

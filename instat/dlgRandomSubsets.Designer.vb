@@ -125,6 +125,7 @@ Partial Class dlgRandomSubsets
         '
         'ucrNewDataFrameName
         '
+        Me.ucrNewDataFrameName.IsReadOnly = False
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(131, 200)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(145, 21)
@@ -141,6 +142,8 @@ Partial Class dlgRandomSubsets
         '
         'ucrSelectorRandomSubsets
         '
+        Me.ucrSelectorRandomSubsets.bShowHiddenColumns = False
+        Me.ucrSelectorRandomSubsets.bUseCurrentFilter = False
         Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorRandomSubsets.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRandomSubsets.Name = "ucrSelectorRandomSubsets"
@@ -173,6 +176,8 @@ Partial Class dlgRandomSubsets
         Me.Controls.Add(Me.ucrSelectorRandomSubsets)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRandomSubsets"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Random_Subsets"

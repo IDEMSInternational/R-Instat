@@ -39,6 +39,8 @@ Partial Class dlgTwoSamples
         Me.ClientSize = New System.Drawing.Size(424, 312)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgTwoSamples"
         Me.Text = "Two Samples"
         Me.ResumeLayout(False)
