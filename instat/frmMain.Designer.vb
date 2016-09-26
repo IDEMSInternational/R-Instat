@@ -2341,7 +2341,7 @@ Partial Class frmMain
         '
         Me.mnuOrganiseColumnGenerateCountInFactor.Name = "mnuOrganiseColumnGenerateCountInFactor"
         Me.mnuOrganiseColumnGenerateCountInFactor.Size = New System.Drawing.Size(177, 22)
-        Me.mnuOrganiseColumnGenerateCountInFactor.Text = "Count in Factor"
+        Me.mnuOrganiseColumnGenerateCountInFactor.Text = "Count in Factor..."
         '
         'ToolStripSeparator25
         '
@@ -2540,8 +2540,8 @@ Partial Class frmMain
         'mnuOrganiseColumnDateGenerateDateColumnMakeDate
         '
         Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Name = "mnuOrganiseColumnDateGenerateDateColumnMakeDate"
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Size = New System.Drawing.Size(130, 22)
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Text = "Make Date"
+        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Text = "Make Date..."
         '
         'mnuOrganiseColumnDateUseDate
         '
@@ -2553,14 +2553,14 @@ Partial Class frmMain
         'mnuOrganiseColumnDateUseDateMakeTime
         '
         Me.mnuOrganiseColumnDateUseDateMakeTime.Name = "mnuOrganiseColumnDateUseDateMakeTime"
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Size = New System.Drawing.Size(133, 22)
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Text = "Make Time"
+        Me.mnuOrganiseColumnDateUseDateMakeTime.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseColumnDateUseDateMakeTime.Text = "Make Time..."
         '
         'mnuOrganiseColumnDateUseDateUseTime
         '
         Me.mnuOrganiseColumnDateUseDateUseTime.Name = "mnuOrganiseColumnDateUseDateUseTime"
-        Me.mnuOrganiseColumnDateUseDateUseTime.Size = New System.Drawing.Size(133, 22)
-        Me.mnuOrganiseColumnDateUseDateUseTime.Text = "Use Date"
+        Me.mnuOrganiseColumnDateUseDateUseTime.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseColumnDateUseDateUseTime.Text = "Use Date..."
         '
         'mnuOrganiseColumnReshape
         '
@@ -2611,8 +2611,8 @@ Partial Class frmMain
         'mnuAppendDataFrame
         '
         Me.mnuAppendDataFrame.Name = "mnuAppendDataFrame"
-        Me.mnuAppendDataFrame.Size = New System.Drawing.Size(188, 22)
-        Me.mnuAppendDataFrame.Text = "Append Data Frames"
+        Me.mnuAppendDataFrame.Size = New System.Drawing.Size(193, 22)
+        Me.mnuAppendDataFrame.Text = "Append Data Frames..."
         '
         'mnuOrganiseColumnReshapeSubset
         '
