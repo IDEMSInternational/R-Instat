@@ -172,6 +172,12 @@
     <Compile Include="dlgImportFromODK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMakeDate.Designer.vb">
+      <DependentUpon>dlgMakeDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMakeDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVarFitModel2.Designer.vb">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </Compile>
@@ -2209,6 +2215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFactorDataFrame.sw-KE.resx">
       <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMakeDate.resx">
+      <DependentUpon>dlgMakeDate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.fr-FR.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
