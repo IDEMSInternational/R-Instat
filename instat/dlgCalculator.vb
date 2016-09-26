@@ -37,7 +37,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub GetCalculationHistory()
-        ucrReceiverForCalculation.setHistory()
+        ucrReceiverForCalculation.addtocombobox(ucrReceiverForCalculation.GetText)
     End Sub
 
     Private Sub TestOKEnabled()

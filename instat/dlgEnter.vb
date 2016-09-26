@@ -33,7 +33,7 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
     Private Sub GetEntryHistory()
-        ucrReceiverForEnterCalculation.setHistory()
+        ucrReceiverForEnterCalculation.addtocombobox(ucrReceiverForEnterCalculation.GetText)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -44,7 +44,6 @@ Public Class dlgEnter
         ucrSaveEnterResultInto.SetItemsTypeAsColumns()
         ucrSaveEnterResultInto.SetDefaultTypeAsColumn()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
-        ucrDataFrameEnter.Reset()
         ucrSaveEnterResultInto.SetValidationTypeAsRVariable()
     End Sub
     Private Sub SetDefaults()

@@ -113,9 +113,6 @@ Public Class ucrReceiverExpression
         Return cboExpression.Text
     End Function
 
-    Public Sub setHistory()
-        AddToCombobox()
-    End Sub
     Public Overrides Sub Clear()
         RemoveSelected()
         iCurrentPosition = 0
@@ -125,9 +122,9 @@ Public Class ucrReceiverExpression
         Return cboExpression.Text = ""
     End Function
 
-    Public Overridable Sub AddToCombobox()
-        Dim CombText As String = Me.GetText
-        cboExpression.Items.Insert(0, CombText)
+    Public Sub addtocombobox(strnew As String)
+        cboExpression.Items.Insert(0, strnew)
+
     End Sub
 
     Private Sub cboExpression_KeyUp(sender As Object, e As KeyEventArgs) Handles cboExpression.KeyUp
