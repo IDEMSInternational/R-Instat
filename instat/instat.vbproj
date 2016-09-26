@@ -146,6 +146,12 @@
     <Compile Include="dlgAppend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCountinFactor.Designer.vb">
+      <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCountinFactor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -1997,6 +2003,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCountinFactor.resx">
+      <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
