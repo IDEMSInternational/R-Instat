@@ -17,7 +17,7 @@ Imports instat.Translations
 Imports RDotNet
 Public Class dlgTwoVariableUseModel
     Private bFirstLoad As Boolean = True
-    Public clsRModel, clsRCommand As New RFunction
+    Public clsRModel, clsRCommand, clsRFormula As New RFunction
     Dim strModel As String
 
     Private Sub dlgTwoVariableUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -66,17 +66,19 @@ Public Class dlgTwoVariableUseModel
     Private Sub TestOkEnabled()
         If Not ucrReceiverUseModel.IsEmpty Then
             ucrBaseUseModel.OKEnabled(True)
-            Model()
         Else
             ucrBaseUseModel.OKEnabled(False)
         End If
+        Model()
     End Sub
 
     Private Sub Model()
         If Not ucrReceiverUseModel.IsEmpty And Not ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = "" Then
+            clsRFormula.SetRCommand("as.formula")
             clsRModel.SetRCommand("formula")
             clsRModel.AddParameter("x", clsRFunctionParameter:=clsRCommand)
-            'strModel = frmMain.clsRLink.RunInternalScriptGetValue(clsRModel.ToScript()).AsCharacter().ToList().ToString()
+            clsRFormula.AddParameter("", clsRFunctionParameter:=clsRModel)
+            strModel = frmMain.clsRLink.RunInternalScriptGetOutput(clsRFormula.ToScript()).AsCharacter(0)
         Else
             strModel = ""
         End If
