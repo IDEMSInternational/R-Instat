@@ -122,8 +122,8 @@ Public Class ucrReceiverExpression
         Return cboExpression.Text = ""
     End Function
 
-    Public Sub addtocombobox(strnew As String)
-        cboExpression.Items.Insert(0, strnew)
+    Public Sub AddtoCombobox(strNew As String)
+        cboExpression.Items.Insert(0, strNew)
 
     End Sub
 

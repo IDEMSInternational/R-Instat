@@ -32,8 +32,8 @@ Public Class dlgEnter
         End If
         TestOKEnabled()
     End Sub
-    Private Sub GetEntryHistory()
-        ucrReceiverForEnterCalculation.addtocombobox(ucrReceiverForEnterCalculation.GetText)
+    Private Sub SetEntryHistory()
+        ucrReceiverForEnterCalculation.AddtoCombobox(ucrReceiverForEnterCalculation.GetText)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -89,7 +89,7 @@ Public Class dlgEnter
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         strFunc = clsDetach.ToScript(strScript)
         frmMain.clsRLink.RunScript(strScript & strFunc)
-        GetEntryHistory()
+        SetEntryHistory()
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
