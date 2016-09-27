@@ -71,6 +71,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=UcrReceiver.GetVariables())
         TestOKEnabled()
     End Sub
 
@@ -85,12 +86,6 @@ Public Class dlgOneVarCompareModels
         Else
             cmdDisplayObjects.Enabled = False
         End If
-    End Sub
-
-    Private Sub EnableGoF()
-        clsRGOF.SetRCommand("list")
-        clsRGOF.AddParameter("f", clsRFunctionParameter:=UcrReceiver.GetVariables())
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRGOF)
     End Sub
 
 End Class
