@@ -19,8 +19,8 @@ Public Class dlgMakeDate
     Public bFirstLoad As Boolean = True
     Private Sub ucrSeclectorMakeDate_Load(sender As Object, e As EventArgs) Handles ucrSeclectorMakeDate.Load
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -33,23 +33,22 @@ Public Class dlgMakeDate
 
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction("make_datetime")
         ucrReceiverYear.Selector = ucrSeclectorMakeDate
         ucrReceiverMonth.Selector = ucrSeclectorMakeDate
         ucrReceiverDay.Selector = ucrSeclectorMakeDate
-        ucrReceiverYear.SetIncludedDataTypes({"numeric", "factor"})
-        ucrReceiverMonth.SetIncludedDataTypes({"numeric", "factor"})
-        ucrReceiverDay.SetIncludedDataTypes({"numeric", "factor"})
+        ucrReceiverYear.SetIncludedDataTypes({"numeric"})
         ucrReceiverYear.SetMeAsReceiver()
-
         UcrInputNewColumnName.SetPrefix("Date")
         UcrInputNewColumnName.SetItemsTypeAsColumns()
         UcrInputNewColumnName.SetDefaultTypeAsColumn()
         UcrInputNewColumnName.SetDataFrameSelector(ucrSeclectorMakeDate.ucrAvailableDataFrames)
         UcrInputNewColumnName.SetValidationTypeAsRVariable()
-
-
     End Sub
     Private Sub SetDefaults()
+        UcrInputNewColumnName.Reset()
+        ucrSeclectorMakeDate.Reset()
+        TestOkEnabled()
 
     End Sub
     Private Sub TestOkEnabled()
@@ -63,14 +62,26 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrReceiverYear_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYear.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("year", clsRFunctionParameter:=ucrReceiverYear.GetVariables)
         TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverMonth_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverMonth.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("month", clsRFunctionParameter:=ucrReceiverMonth.GetVariables)
         TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverDay_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDay.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("day", clsRFunctionParameter:=ucrReceiverDay.GetVariables)
+
         TestOkEnabled()
+    End Sub
+    Private Sub UcrInputNewColumnName_NameChanged() Handles UcrInputNewColumnName.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=UcrInputNewColumnName.GetText, strTempDataframe:=ucrSeclectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=UcrInputNewColumnName.GetText, bAssignToIsPrefix:=True)
+    End Sub
+
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class

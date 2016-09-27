@@ -74,7 +74,7 @@ Partial Class dlgMakeDate
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(296, 30)
+        Me.lblYear.Location = New System.Drawing.Point(267, 28)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(29, 13)
         Me.lblYear.TabIndex = 2
@@ -83,7 +83,7 @@ Partial Class dlgMakeDate
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(296, 78)
+        Me.lblMonth.Location = New System.Drawing.Point(267, 76)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
         Me.lblMonth.TabIndex = 2
@@ -92,7 +92,7 @@ Partial Class dlgMakeDate
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(296, 131)
+        Me.lblDay.Location = New System.Drawing.Point(267, 129)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(26, 13)
         Me.lblDay.TabIndex = 2
