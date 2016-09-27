@@ -17,7 +17,6 @@
 Imports instat.Translations
 
 Public Class dlgOneVarCompareModels
-    Public clsRGOF As New RFunction
     Public bfirstload As Boolean = True
 
 
@@ -41,14 +40,15 @@ Public Class dlgOneVarCompareModels
         UcrReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("gofstat")
         ucrSelectorOneVarCompModels.SetItemType("model")
+        sdgOneVarCompareModels.InitialiseDialog()
+        'sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorOneVarCompModels.Reset()
         ucrSelectorOneVarCompModels.Focus()
-        'sdgOneVarCompareModels.setdefaults()
+        sdgOneVarCompareModels.SetDefaults()
         TestOKEnabled()
-        'ucrSelectorOneVarCompModels.SetItemType("") I wish to compare models, but only models for one variable!
     End Sub
 
     Private Sub ReopenDialog()
@@ -88,4 +88,7 @@ Public Class dlgOneVarCompareModels
         End If
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        sdgOneVarCompareModels.CreateGraphs()
+    End Sub
 End Class
