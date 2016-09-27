@@ -78,6 +78,12 @@ Public Class sdgOneVarCompareModels
         End If
     End Sub
 
+    'not sure if the following sub should be here or in the main
+    Private Sub Here()
+
+    End Sub
+
+
 
     ' To say if our models are discrete, we cannot use Density, QQ or PP
     'Private Sub SetPlotOptions()
@@ -94,5 +100,6 @@ Public Class sdgOneVarCompareModels
     '        chkPP.Enabled = True
     'End If
     'End Sub
+
 
 End Class

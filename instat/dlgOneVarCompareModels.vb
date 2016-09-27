@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarCompareModels
-
+    Public clsRGOF As New RFunction
     Public bfirstload As Boolean = True
 
 
@@ -39,6 +39,8 @@ Public Class dlgOneVarCompareModels
         ucrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarCompModels
         UcrReceiver.SetMeAsReceiver()
+        ucrBase.clsRsyntax.SetFunction("gofstat")
+        ucrSelectorOneVarCompModels.SetItemType("model")
     End Sub
 
     Private Sub SetDefaults()
@@ -59,6 +61,7 @@ Public Class dlgOneVarCompareModels
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -82,6 +85,12 @@ Public Class dlgOneVarCompareModels
         Else
             cmdDisplayObjects.Enabled = False
         End If
+    End Sub
+
+    Private Sub EnableGoF()
+        clsRGOF.SetRCommand("list")
+        clsRGOF.AddParameter("f", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRGOF)
     End Sub
 
 End Class
