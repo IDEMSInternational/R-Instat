@@ -17,6 +17,7 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgCalculator
+    Dim strCalcHistory As List(Of String)
     Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
@@ -33,6 +34,10 @@ Public Class dlgCalculator
             ReopenDialog()
         End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub GetCalculationHistory()
+        ucrReceiverForCalculation.addtocombobox(ucrReceiverForCalculation.GetText)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -176,6 +181,7 @@ Public Class dlgCalculator
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         strFunc = clsDetach.ToScript(strScript)
         frmMain.clsRLink.RunScript(strScript & strFunc)
+        GetCalculationHistory()
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
