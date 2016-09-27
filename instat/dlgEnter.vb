@@ -32,6 +32,9 @@ Public Class dlgEnter
         End If
         TestOKEnabled()
     End Sub
+    Private Sub SetEntryHistory()
+        ucrReceiverForEnterCalculation.AddtoCombobox(ucrReceiverForEnterCalculation.GetText)
+    End Sub
 
     Private Sub InitialiseDialog()
         clsAttach.SetRCommand("attach")
@@ -41,7 +44,6 @@ Public Class dlgEnter
         ucrSaveEnterResultInto.SetItemsTypeAsColumns()
         ucrSaveEnterResultInto.SetDefaultTypeAsColumn()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
-        ucrDataFrameEnter.Reset()
         ucrSaveEnterResultInto.SetValidationTypeAsRVariable()
     End Sub
     Private Sub SetDefaults()
@@ -87,6 +89,7 @@ Public Class dlgEnter
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         strFunc = clsDetach.ToScript(strScript)
         frmMain.clsRLink.RunScript(strScript & strFunc)
+        SetEntryHistory()
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
