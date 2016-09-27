@@ -1525,7 +1525,7 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value))
     }
-    return(g + curr_geom() + facet_wrap(facets= ~variable) + ylab(""))
+    return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x") + ylab(""))
   }
   else {
     column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
