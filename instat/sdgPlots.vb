@@ -122,14 +122,11 @@ Public Class sdgPlots
     End Sub
 
     Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegendTitle.CheckedChanged
-
-        'Redid this properly
-
-        'If chkOverwriteLegendTitle.Checked Then
-        '    ucrInputLegend.Visible = True
-        'Else
-        '    ucrInputLegend.Visible = False
-        'End If
+        If chkDisplayLegendTitle.Checked Then
+            chkOverwriteLegendTitle.Visible = True
+        Else
+            chkOverwriteLegendTitle.Visible = False
+        End If
     End Sub
 
     Private Sub Facets()
