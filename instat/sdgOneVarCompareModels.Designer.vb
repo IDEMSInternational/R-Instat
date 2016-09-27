@@ -22,7 +22,7 @@ Partial Class sdgOneVarCompareModels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.chkSaveObjects = New System.Windows.Forms.CheckBox()
         Me.chkSaveChi = New System.Windows.Forms.CheckBox()
         Me.chkInputBreakpoints = New System.Windows.Forms.CheckBox()
@@ -40,12 +40,12 @@ Partial Class sdgOneVarCompareModels
         Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'UcrButtonsSubdialogue1
+        'ucrBase
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(14, 168)
-        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
-        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
-        Me.UcrButtonsSubdialogue1.TabIndex = 0
+        Me.ucrBase.Location = New System.Drawing.Point(14, 168)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.TabIndex = 0
         '
         'chkSaveObjects
         '
@@ -178,7 +178,7 @@ Partial Class sdgOneVarCompareModels
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(256, 200)
-        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -194,7 +194,7 @@ Partial Class sdgOneVarCompareModels
 
     End Sub
 
-    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
+    Friend WithEvents ucrBase As ucrButtonsSubdialogue
     Friend WithEvents chkSaveObjects As CheckBox
     Friend WithEvents chkSaveChi As CheckBox
     Friend WithEvents chkInputBreakpoints As CheckBox

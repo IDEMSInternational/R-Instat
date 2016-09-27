@@ -20,6 +20,7 @@ Public Class sdgOneVarCompareModels
     Private clsRdenscompFunction As New RFunction
     Private clsRqqcompFunction As New RFunction
     Private clsRppcompFunction As New RFunction
+    Private clsModel As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub sdgOneVarCompareModels(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -41,22 +42,21 @@ Public Class sdgOneVarCompareModels
         chkQQ.Checked = False
         chkSaveChi.Checked = True
         chkSaveObjects.Checked = True
-        ucrObjectName.Visible = False
         ucrObjectName.SetValidationTypeAsRVariable()
         ucrObjectName.SetPrefix("gof")
+        'look at one where naming an object is in the sdg
         SaveObject()
         CreateGraphs()
         'ucrBase.ihelptopicID = 
     End Sub
 
-    'Public Sub SetModelFunction(clsNewModel As RFunction)
-    '   clsModel = clsNewModel
-    '  clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-    ' clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-    'clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-    'clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-    'End Sub
-
+    Public Sub SetModelFunction(clsNewModel As RFunction)
+        clsModel = clsNewModel
+        clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+    End Sub
 
     Public Sub CreateGraphs()
         If chkPP.Checked Then
@@ -78,10 +78,18 @@ Public Class sdgOneVarCompareModels
         End If
     End Sub
 
-    'not sure if the following sub should be here or in the main
-    Private Sub Here()
+    Private Sub chkSaveObjects_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveObjects.CheckedChanged
+        'saves object
+    End Sub
+
+    Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveChi.CheckedChanged
 
     End Sub
+
+    Private Sub chkInputBreakpoints_CheckedChanged(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
+
+    End Sub
+
 
 
 
