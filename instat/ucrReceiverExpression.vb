@@ -109,6 +109,10 @@ Public Class ucrReceiverExpression
         MyBase.RemoveSelected()
     End Sub
 
+    Public Function GetText() As String
+        Return cboExpression.Text
+    End Function
+
     Public Overrides Sub Clear()
         RemoveSelected()
         iCurrentPosition = 0
@@ -117,6 +121,11 @@ Public Class ucrReceiverExpression
     Public Overrides Function IsEmpty() As Boolean
         Return cboExpression.Text = ""
     End Function
+
+    Public Sub AddtoCombobox(strNew As String)
+        cboExpression.Items.Insert(0, strNew)
+
+    End Sub
 
     Private Sub cboExpression_KeyUp(sender As Object, e As KeyEventArgs) Handles cboExpression.KeyUp
         iCurrentPosition = cboExpression.SelectionStart
