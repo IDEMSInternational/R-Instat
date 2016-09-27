@@ -105,7 +105,7 @@ Partial Class sdgPlots
         Me.tabFacet.Size = New System.Drawing.Size(472, 304)
         Me.tabFacet.TabIndex = 3
         Me.tabFacet.Tag = "Facet"
-        Me.tabFacet.Text = "Facet"
+        Me.tabFacet.Text = "Facets"
         Me.tabFacet.UseVisualStyleBackColor = True
         '
         'ucrFacetSelector
@@ -366,7 +366,7 @@ Partial Class sdgPlots
         '
         'ucrXAxis
         '
-        Me.ucrXAxis.Location = New System.Drawing.Point(0, 3)
+        Me.ucrXAxis.Location = New System.Drawing.Point(0, 1)
         Me.ucrXAxis.Name = "ucrXAxis"
         Me.ucrXAxis.Size = New System.Drawing.Size(470, 300)
         Me.ucrXAxis.TabIndex = 0
