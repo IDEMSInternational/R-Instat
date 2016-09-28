@@ -24,19 +24,20 @@ Partial Class dlgOneVarUseModel
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblReceiver = New System.Windows.Forms.Label()
-        Me.ucrResultsName = New instat.ucrInputTextBox()
         Me.ucrReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.chkSaveResults = New System.Windows.Forms.CheckBox()
         Me.cmdFitModel = New System.Windows.Forms.Button()
         Me.cmdBootstrapOptions = New System.Windows.Forms.Button()
         Me.chkSaveBootstrap = New System.Windows.Forms.CheckBox()
         Me.chkProduceBootstrap = New System.Windows.Forms.CheckBox()
+        Me.ucrSaveObjects = New instat.ucrInputComboBox()
+        Me.ucrSaveModel = New instat.ucrInputComboBox()
+        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 237)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 239)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 19
@@ -49,14 +50,6 @@ Partial Class dlgOneVarUseModel
         Me.lblReceiver.Size = New System.Drawing.Size(86, 13)
         Me.lblReceiver.TabIndex = 18
         Me.lblReceiver.Text = "Selected Object:"
-        '
-        'ucrResultsName
-        '
-        Me.ucrResultsName.IsReadOnly = False
-        Me.ucrResultsName.Location = New System.Drawing.Point(195, 210)
-        Me.ucrResultsName.Name = "ucrResultsName"
-        Me.ucrResultsName.Size = New System.Drawing.Size(143, 21)
-        Me.ucrResultsName.TabIndex = 17
         '
         'ucrReceiver
         '
@@ -77,19 +70,9 @@ Partial Class dlgOneVarUseModel
         Me.ucrSelector.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelector.TabIndex = 15
         '
-        'chkSaveResults
-        '
-        Me.chkSaveResults.AutoSize = True
-        Me.chkSaveResults.Location = New System.Drawing.Point(9, 212)
-        Me.chkSaveResults.Name = "chkSaveResults"
-        Me.chkSaveResults.Size = New System.Drawing.Size(187, 17)
-        Me.chkSaveResults.TabIndex = 14
-        Me.chkSaveResults.Text = "Save Results to New Data Frame:"
-        Me.chkSaveResults.UseVisualStyleBackColor = True
-        '
         'cmdFitModel
         '
-        Me.cmdFitModel.Location = New System.Drawing.Point(239, 166)
+        Me.cmdFitModel.Location = New System.Drawing.Point(239, 209)
         Me.cmdFitModel.Name = "cmdFitModel"
         Me.cmdFitModel.Size = New System.Drawing.Size(101, 23)
         Me.cmdFitModel.TabIndex = 13
@@ -98,7 +81,7 @@ Partial Class dlgOneVarUseModel
         '
         'cmdBootstrapOptions
         '
-        Me.cmdBootstrapOptions.Location = New System.Drawing.Point(239, 135)
+        Me.cmdBootstrapOptions.Location = New System.Drawing.Point(239, 167)
         Me.cmdBootstrapOptions.Name = "cmdBootstrapOptions"
         Me.cmdBootstrapOptions.Size = New System.Drawing.Size(101, 23)
         Me.cmdBootstrapOptions.TabIndex = 12
@@ -125,17 +108,44 @@ Partial Class dlgOneVarUseModel
         Me.chkProduceBootstrap.Text = "Produce Bootstrap"
         Me.chkProduceBootstrap.UseVisualStyleBackColor = True
         '
+        'ucrSaveObjects
+        '
+        Me.ucrSaveObjects.IsReadOnly = False
+        Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 135)
+        Me.ucrSaveObjects.Name = "ucrSaveObjects"
+        Me.ucrSaveObjects.Size = New System.Drawing.Size(137, 21)
+        Me.ucrSaveObjects.TabIndex = 33
+        '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.IsReadOnly = False
+        Me.ucrSaveModel.Location = New System.Drawing.Point(89, 212)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrSaveModel.TabIndex = 31
+        '
+        'chkSaveModel
+        '
+        Me.chkSaveModel.AutoSize = True
+        Me.chkSaveModel.Location = New System.Drawing.Point(7, 214)
+        Me.chkSaveModel.Name = "chkSaveModel"
+        Me.chkSaveModel.Size = New System.Drawing.Size(86, 17)
+        Me.chkSaveModel.TabIndex = 32
+        Me.chkSaveModel.Text = "Save Model:"
+        Me.chkSaveModel.UseVisualStyleBackColor = True
+        '
         'dlgOneVarUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 302)
+        Me.Controls.Add(Me.ucrSaveObjects)
+        Me.Controls.Add(Me.ucrSaveModel)
+        Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblReceiver)
-        Me.Controls.Add(Me.ucrResultsName)
         Me.Controls.Add(Me.ucrReceiver)
         Me.Controls.Add(Me.ucrSelector)
-        Me.Controls.Add(Me.chkSaveResults)
         Me.Controls.Add(Me.cmdFitModel)
         Me.Controls.Add(Me.cmdBootstrapOptions)
         Me.Controls.Add(Me.chkSaveBootstrap)
@@ -152,12 +162,13 @@ Partial Class dlgOneVarUseModel
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblReceiver As Label
-    Friend WithEvents ucrResultsName As ucrInputTextBox
     Friend WithEvents ucrReceiver As ucrReceiverSingle
     Friend WithEvents ucrSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents chkSaveResults As CheckBox
     Friend WithEvents cmdFitModel As Button
     Friend WithEvents cmdBootstrapOptions As Button
     Friend WithEvents chkSaveBootstrap As CheckBox
     Friend WithEvents chkProduceBootstrap As CheckBox
+    Friend WithEvents ucrSaveObjects As ucrInputComboBox
+    Friend WithEvents ucrSaveModel As ucrInputComboBox
+    Friend WithEvents chkSaveModel As CheckBox
 End Class
