@@ -104,27 +104,70 @@ instat_calculation <- R6Class("instat_calculation",
                        )
 )
 
-instat_object$set("public", "apply_instat_calculation", function(calc, current_manipulations = list()) {
-  if(calc$type == "calculation") {
-    for(manipulation in calc$manipulations){
-      current_manipulations <- self$apply_instat_calculation(manipulation, current_manipulations)
-    }
-    sub_calc_results <- list()
-    for(sub_calc in calc$subcalculations) {
-      sub_calc_results[[i]] <- self$apply_instat_calculation(sub_calc, current_manipulations)
-    }
-   curr_data <- self$get_data_for_calculation(calc, current_manipulations)
-   calc$apply_calc()
-   self$save_caculation_results()
+village_group <- instat_calculation$new(type = "manipulation", sub_type = "by", 
+                                        calculated_from = list(survey = "Village."))
+total <- instat_calculation$new(function_name = "n", type = "calculation", 
+                                sub_type = "summary", name = "total")
+variety_group <- instat_calculation$new(type = "manipulation", sub_type = "by", 
+                                        calculated_from = list(survey = "Variety."))
+val <- instat_calculation$new(function_name = "n", type = "calculation", sub_type = "summary", 
+                              name = "val", manipulations = list(variety_group))
+prop_calc <- instat_calculation$new(function_name = "/", type = "calculation", sub_type = "calculation", 
+                                    name = "prop", calculated_from = list("val", "total"), 
+                                    manipulations = list(village_group), sub_calculations = list(total, val))
+
+instat_object$set("public", "apply_instat_calculation", function(calc, curr_data) {
+  for(manipulation in calc$manipulations) {
+    curr_data <- self$apply_instat_calculation(manipulation, curr_data)
   }
-  else if(calc$type == "manipulation") {
+  if(!missing(curr_data)) sub_calc_results <- curr_data
+  first_sub_calc = TRUE
+  for(sub_calc in calc$subcalculations) {
+    curr_sub_calc <- self$apply_instat_calculation(sub_calc, curr_data)
+    if(first_sub_calc) sub_calc_results <- curr_sub_calc
+    else sub_calc_results <- full_join(sub_calc_results, curr_sub_calc)
+    first_sub_calc = FALSE
+  }
+  if(!first_sub_calc) curr_data <- sub_calc_results
+  
+  data_names <- unique(as.vector(names(calc$calculated_from)))
+  if(missing(curr_data)) {
+    if(length(data_names) == 0) stop("No data frame for calculation.")
+    else {
+      curr_data <- self$get_data_frame(data_names[[1]])
+    }
+  }
+  
+  col_names_exp = c()
+  i = 1
+  for(col_name in calc$calculated_from) {
+    if(!(col_name %in% names(curr_data))) {
+      stop(col_name, " not found in data.")
+    }
+    col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+    i = i + 1
+  }
+  
+  if(calc$type == "calculation") {
+    curr_data <- curr_data %>% mutate_(.dots = col_names_exp)
+  }
+  else if(calc$type == "summary") {
+  }
+  else if(calc$type == "by") {
+    curr_data <- curr_data %>% group_by_(.dots = col_names_exp, add = TRUE)
+  }
+  else if(calc$type == "filter") {
     return(c(current_manipulations, calc))
   }
+  else if(calc$type == "join") {
+    return(c(current_manipulations, calc))
+  }
+  else stop("Cannot detect calculation type:", calc$type)
 }
 )
 
 instat_object$set("public", "get_data_for_calculation", function(calc, current_manipulations = list()) {
-  all_manipulations <- c(current_manipulations, calc$manipulations)
+  all_manipulations <- current_manipulations
   data_names <- unique(as.vector(sapply(all_manipulations, function(x) names(x$calculated_from))))
   if(length(data_names == 1)) {
     curr_data <- self$get_data_frame(data_names)
@@ -148,8 +191,3 @@ instat_object$set("public", "get_data_for_calculation", function(calc, current_m
   return(curr_data)
 }
 )
-
-manip_vil <- instat_calculation$new(type = "manipulation", sub_type = "by", calculated_from = list(survey = "Village."))
-manip_var <- instat_calculation$new(type = "manipulation", sub_type = "by", calculated_from = list(survey = "Variety."))
-calc <- instat_calculation$new(manipulations = list(manip_vil, manip_var))
-InstatDataObject$get_data_for_calculation(calc)
