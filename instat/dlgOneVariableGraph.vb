@@ -39,6 +39,8 @@ Public Class dlgOneVariableGraph
         ucrSelectorOneVarGraph.Reset()
         ucrSelectorOneVarGraph.Focus()
         ucrOneVarGraphSave.Reset()
+        rdoFacets.Checked = True
+        rdoCombineGraph.Enabled = False
         sdgOneVarGraph.SetDefaults()
         TestOkEnabled()
     End Sub
@@ -80,16 +82,19 @@ Public Class dlgOneVariableGraph
     Private Sub OneOrMoreVariables()
         If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then
             ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperatorOneColumn)
+
             If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" Then
                 'TODO Geom should come from the subdialog
-                clsRgeom_Function.SetRCommand("geom_boxplot")
+                clsRgeom_Function.SetRCommand(sdgOneVarGraph.strNumericGeomFunction)
                 If Not ucrReceiverOneVarGraph.IsEmpty() Then
                     clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
                 End If
+
                 clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             Else
                 'TODO Geom should come from the subdialog
-                clsRgeom_Function.SetRCommand("geom_bar")
+                clsRgeom_Function.SetRCommand(sdgOneVarGraph.strCategoriacalGeomFunction)
+
                 If Not ucrReceiverOneVarGraph.IsEmpty() Then
                     clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
                 End If
@@ -123,8 +128,10 @@ Public Class dlgOneVariableGraph
         End If
         TestOkEnabled()
     End Sub
-
     Private Sub cmdGraph_Click(sender As Object, e As EventArgs) Handles cmdGraphOptions.Click
         sdgOneVarGraph.ShowDialog()
+    End Sub
+
+    Private Sub CheckDatatypes()
     End Sub
 End Class
