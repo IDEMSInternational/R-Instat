@@ -81,3 +81,75 @@ data_object$set("public", "save_calculation", function(calc) {
   return(calc$name)
 }
 )
+
+instat_calculation <- R6Class("instat_calculation",
+                       public = list(
+                         initialize = function(function_name = "", type = "", sub_type = "", name = "", manipulations = list(),
+                                               sub_calculations = list(), calculated_from = list()) {
+                           self$function_name <- function_name
+                           self$type <- type
+                           self$sub_type <- sub_type
+                           self$name <- name
+                           self$manipulations <- manipulations
+                           self$sub_calculations <- sub_calculations
+                           self$calculated_from <- calculated_from
+                         },
+                         name = "",
+                         type = "",
+                         sub_type = "",
+                         manipulations = list(),
+                         sub_calculations = list(),
+                         function_name = "",
+                         calculated_from = list()
+                       )
+)
+
+instat_object$set("public", "apply_instat_calculation", function(calc, current_manipulations = list()) {
+  if(calc$type == "calculation") {
+    for(manipulation in calc$manipulations){
+      current_manipulations <- self$apply_instat_calculation(manipulation, current_manipulations)
+    }
+    sub_calc_results <- list()
+    for(sub_calc in calc$subcalculations) {
+      sub_calc_results[[i]] <- self$apply_instat_calculation(sub_calc, current_manipulations)
+    }
+   curr_data <- self$get_data_for_calculation(calc, current_manipulations)
+   calc$apply_calc()
+   self$save_caculation_results()
+  }
+  else if(calc$type == "manipulation") {
+    return(c(current_manipulations, calc))
+  }
+}
+)
+
+instat_object$set("public", "get_data_for_calculation", function(calc, current_manipulations = list()) {
+  all_manipulations <- c(current_manipulations, calc$manipulations)
+  data_names <- unique(as.vector(sapply(all_manipulations, function(x) names(x$calculated_from))))
+  if(length(data_names == 1)) {
+    curr_data <- self$get_data_frame(data_names)
+    for(manipulation in all_manipulations) {
+      if(manipulation$sub_type == "by") {
+        col_names_exp = c()
+        i = 1
+        for(col_name in manipulation$calculated_from) {
+          if(!(col_name %in% names(curr_data))) {
+            stop(col_name, " not found in data.")
+          }
+          col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+          i = i + 1
+        }
+        curr_data <- curr_data %>% group_by_(.dots = col_names_exp, add = TRUE)
+      }
+      else if(manipulation$sub_type == "filter") {
+      }
+    }
+  }
+  return(curr_data)
+}
+)
+
+manip_vil <- instat_calculation$new(type = "manipulation", sub_type = "by", calculated_from = list(survey = "Village."))
+manip_var <- instat_calculation$new(type = "manipulation", sub_type = "by", calculated_from = list(survey = "Variety."))
+calc <- instat_calculation$new(manipulations = list(manip_vil, manip_var))
+InstatDataObject$get_data_for_calculation(calc)
