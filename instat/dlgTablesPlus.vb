@@ -45,7 +45,7 @@ Public Class dlgTablesPlus
     Private Sub SetDefaults()
         rdoQuantiles.Checked = True
         chkGraphResults.Checked = True
-        ucrReceiverValues.txtReceiverSingle.ReadOnly = False
+        ucrReceiverValues.SetEditableControl(bEditcontrol:=True)
         ReceiverLabels()
     End Sub
 
@@ -60,8 +60,16 @@ Public Class dlgTablesPlus
 
     Private Sub chkGraphResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphResults.CheckedChanged, chkSaveResults.CheckedChanged
         DisplayGraphResults()
+        SaveResults()
     End Sub
 
+    Private Sub SaveResults()
+        If chkSaveResults.Checked Then
+            ucrInputNewColName.Visible = True
+        Else
+            ucrInputNewColName.Visible = False
+        End If
+    End Sub
     Private Sub DisplayGraphResults()
         If chkGraphResults.Checked Then
             ucrBase.clsRsyntax.iCallType = 0
