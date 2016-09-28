@@ -41,7 +41,7 @@ Public Class dlgOneVarCompareModels
         ucrBase.clsRsyntax.SetFunction("gofstat")
         ucrSelectorOneVarCompModels.SetItemType("model")
         sdgOneVarCompareModels.InitialiseDialog()
-        'sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub SetDefaults()
