@@ -193,8 +193,20 @@ Public Class ucrReceiverSingle
         txtReceiverSingle.BackColor = Color.Aqua
     End Sub
 
+    Public Overridable Sub SetDefaultvalue(defaultValue As String)
+        Me.txtReceiverSingle.Text = defaultValue
+    End Sub
+
     Public Overrides Sub RemoveColor()
         txtReceiverSingle.BackColor = Color.White
+    End Sub
+
+    Public Overridable Sub SetEditableControl(bEditcontrol As Boolean)
+        If bEditcontrol = True Then
+            txtReceiverSingle.ReadOnly = True
+        Else
+            txtReceiverSingle.ReadOnly = True
+        End If
     End Sub
 
     Private Sub txtReceiverSingle_KeyDown(sender As Object, e As KeyEventArgs) Handles txtReceiverSingle.KeyDown
