@@ -51,7 +51,7 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        cmdGraphOptions.Enabled = False
+
         clsBaseOperatorOneColumn.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
@@ -62,9 +62,11 @@ Public Class dlgOneVariableGraph
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
 
         clsBaseFunctionMultipleVariables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub ReopenDialog()
+
     End Sub
 
     Private Sub TestOkEnabled()
