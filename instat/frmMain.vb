@@ -1107,4 +1107,12 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnGenerateEnter_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateEnter.Click
         dlgEnter.ShowDialog()
     End Sub
+
+    Private Sub mnuModelOneVariableCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelOneVariableCompareModels.Click
+        dlgOneVarCompareModels.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOneVariableUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelOneVariableUseModel.Click
+        dlgOneVarUseModel.ShowDialog()
+    End Sub
 End Class
