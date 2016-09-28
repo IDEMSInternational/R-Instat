@@ -40,7 +40,7 @@ Public Class sdgOneVarGraph
         ucrInputNumeric.SetName("Boxplot")
         ucrInputOther.SetName("Bar")
         ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
-        ucrInputOther.SetItems({"Bar", "Pie", "Dot Plot"})
+        ucrInputOther.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
 
         nudNumberofColumns.Maximum = 10
         nudNumberofColumns.Minimum = 1
