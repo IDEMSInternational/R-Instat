@@ -2283,6 +2283,9 @@
     <EmbeddedResource Include="dlgOneVarCompareModels.resx">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarFitModel.resx">
+      <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarFitModel2.resx">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </EmbeddedResource>
