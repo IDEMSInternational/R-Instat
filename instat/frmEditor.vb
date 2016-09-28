@@ -96,8 +96,8 @@ Public Class frmEditor
         'TODO This should be an option in dialog
         'This is now the default in the R method so not needed
         'but should be added if user wants to change from default
-        'clsInsertColumns.AddParameter("col_names", Chr(34) & "X" & Chr(34))
-        'clsInsertColumns.AddParameter("use_col_names_as_prefix", "TRUE")
+        'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
         frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
 
