@@ -33,19 +33,58 @@ Public Class dlgTablesPlus
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReceiverValues.Selector = ucrSelectorForDataFrame
+        ucrReceiverValues.SetMeAsReceiver()
+        ucrReceiverValues.SetIncludedDataTypes({"numeric"})
+        ucrInputNewColName.SetItemsTypeAsColumns()
+        ucrInputNewColName.SetDefaultTypeAsColumn()
+        ucrInputNewColName.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
+        ucrInputNewColName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()
-
+        rdoQuantiles.Checked = True
+        chkGraphResults.Checked = True
+        ucrReceiverValues.txtReceiverSingle.ReadOnly = False
+        ReceiverLabels()
     End Sub
 
     Private Sub ReopenDialog()
-        rdoQuantiles.Checked = True
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub chkGraphResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphResults.CheckedChanged, chkSaveResults.CheckedChanged
+        DisplayGraphResults()
+    End Sub
+
+    Private Sub DisplayGraphResults()
+        If chkGraphResults.Checked Then
+            ucrBase.clsRsyntax.iCallType = 0
+        Else
+        End If
+    End Sub
+    Private Sub rdoProbabilitiesandQuantiles_CheckedChanged(sender As Object, e As EventArgs) Handles rdoProbabilities.CheckedChanged, rdoQuantiles.CheckedChanged
+        ReceiverLabels()
+    End Sub
+
+    Private Sub ReceiverLabels()
+        If rdoProbabilities.Checked Then
+            lblValues.Visible = True
+            lblProbabilities.Visible = False
+            ucrInputNewColName.SetName("prob")
+        Else
+            lblValues.Visible = False
+            lblProbabilities.Visible = True
+            ucrInputNewColName.SetName("Quant")
+        End If
+    End Sub
+
+    Private Sub ucrInputNewColName_NameChanged() Handles ucrInputNewColName.NameChanged
+
     End Sub
 End Class

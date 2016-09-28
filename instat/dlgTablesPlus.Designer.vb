@@ -25,11 +25,19 @@ Partial Class dlgTablesPlus
         Me.ucrBase = New instat.ucrButtons()
         Me.rdoProbabilities = New System.Windows.Forms.RadioButton()
         Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
+        Me.ucrSelectorForDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverValues = New instat.ucrReceiverSingle()
+        Me.lblValues = New System.Windows.Forms.Label()
+        Me.ucrDistributionsWithParametersforTablePlus = New instat.ucrDistributionsWithParameters()
+        Me.chkGraphResults = New System.Windows.Forms.CheckBox()
+        Me.lblProbabilities = New System.Windows.Forms.Label()
+        Me.chkSaveResults = New System.Windows.Forms.CheckBox()
+        Me.ucrInputNewColName = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 281)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 294)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -56,11 +64,91 @@ Partial Class dlgTablesPlus
         Me.rdoQuantiles.Text = "Quantiles"
         Me.rdoQuantiles.UseVisualStyleBackColor = True
         '
+        'ucrSelectorForDataFrame
+        '
+        Me.ucrSelectorForDataFrame.bShowHiddenColumns = False
+        Me.ucrSelectorForDataFrame.bUseCurrentFilter = False
+        Me.ucrSelectorForDataFrame.Location = New System.Drawing.Point(13, 36)
+        Me.ucrSelectorForDataFrame.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForDataFrame.Name = "ucrSelectorForDataFrame"
+        Me.ucrSelectorForDataFrame.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForDataFrame.TabIndex = 2
+        '
+        'ucrReceiverValues
+        '
+        Me.ucrReceiverValues.Location = New System.Drawing.Point(238, 60)
+        Me.ucrReceiverValues.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverValues.Name = "ucrReceiverValues"
+        Me.ucrReceiverValues.Selector = Nothing
+        Me.ucrReceiverValues.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverValues.TabIndex = 3
+        '
+        'lblValues
+        '
+        Me.lblValues.AutoSize = True
+        Me.lblValues.Location = New System.Drawing.Point(235, 40)
+        Me.lblValues.Name = "lblValues"
+        Me.lblValues.Size = New System.Drawing.Size(39, 13)
+        Me.lblValues.TabIndex = 4
+        Me.lblValues.Text = "Values"
+        '
+        'ucrDistributionsWithParametersforTablePlus
+        '
+        Me.ucrDistributionsWithParametersforTablePlus.Location = New System.Drawing.Point(238, 83)
+        Me.ucrDistributionsWithParametersforTablePlus.Name = "ucrDistributionsWithParametersforTablePlus"
+        Me.ucrDistributionsWithParametersforTablePlus.Size = New System.Drawing.Size(198, 182)
+        Me.ucrDistributionsWithParametersforTablePlus.TabIndex = 5
+        '
+        'chkGraphResults
+        '
+        Me.chkGraphResults.AutoSize = True
+        Me.chkGraphResults.Location = New System.Drawing.Point(13, 231)
+        Me.chkGraphResults.Name = "chkGraphResults"
+        Me.chkGraphResults.Size = New System.Drawing.Size(93, 17)
+        Me.chkGraphResults.TabIndex = 6
+        Me.chkGraphResults.Text = "Graph Results"
+        Me.chkGraphResults.UseVisualStyleBackColor = True
+        '
+        'lblProbabilities
+        '
+        Me.lblProbabilities.AutoSize = True
+        Me.lblProbabilities.Location = New System.Drawing.Point(235, 40)
+        Me.lblProbabilities.Name = "lblProbabilities"
+        Me.lblProbabilities.Size = New System.Drawing.Size(63, 13)
+        Me.lblProbabilities.TabIndex = 7
+        Me.lblProbabilities.Text = "Probabilities"
+        '
+        'chkSaveResults
+        '
+        Me.chkSaveResults.AutoSize = True
+        Me.chkSaveResults.Location = New System.Drawing.Point(13, 269)
+        Me.chkSaveResults.Name = "chkSaveResults"
+        Me.chkSaveResults.Size = New System.Drawing.Size(89, 17)
+        Me.chkSaveResults.TabIndex = 6
+        Me.chkSaveResults.Text = "Save Results"
+        Me.chkSaveResults.UseVisualStyleBackColor = True
+        '
+        'ucrInputNewColName
+        '
+        Me.ucrInputNewColName.IsReadOnly = False
+        Me.ucrInputNewColName.Location = New System.Drawing.Point(109, 267)
+        Me.ucrInputNewColName.Name = "ucrInputNewColName"
+        Me.ucrInputNewColName.Size = New System.Drawing.Size(327, 21)
+        Me.ucrInputNewColName.TabIndex = 8
+        '
         'dlgTablesPlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 345)
+        Me.ClientSize = New System.Drawing.Size(440, 348)
+        Me.Controls.Add(Me.ucrInputNewColName)
+        Me.Controls.Add(Me.lblProbabilities)
+        Me.Controls.Add(Me.chkSaveResults)
+        Me.Controls.Add(Me.chkGraphResults)
+        Me.Controls.Add(Me.ucrDistributionsWithParametersforTablePlus)
+        Me.Controls.Add(Me.lblValues)
+        Me.Controls.Add(Me.ucrReceiverValues)
+        Me.Controls.Add(Me.ucrSelectorForDataFrame)
         Me.Controls.Add(Me.rdoQuantiles)
         Me.Controls.Add(Me.rdoProbabilities)
         Me.Controls.Add(Me.ucrBase)
@@ -78,4 +166,12 @@ Partial Class dlgTablesPlus
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents rdoProbabilities As RadioButton
     Friend WithEvents rdoQuantiles As RadioButton
+    Friend WithEvents ucrSelectorForDataFrame As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverValues As ucrReceiverSingle
+    Friend WithEvents lblValues As Label
+    Friend WithEvents ucrDistributionsWithParametersforTablePlus As ucrDistributionsWithParameters
+    Friend WithEvents chkGraphResults As CheckBox
+    Friend WithEvents lblProbabilities As Label
+    Friend WithEvents chkSaveResults As CheckBox
+    Friend WithEvents ucrInputNewColName As ucrInputComboBox
 End Class
