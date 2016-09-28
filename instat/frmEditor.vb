@@ -80,8 +80,8 @@ Public Class frmEditor
         clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
         clsInsertColumns.AddParameter("before", "TRUE")
         'TODO This should be an option in dialog
-        clsInsertColumns.AddParameter("col_names", Chr(34) & "X" & Chr(34))
-        clsInsertColumns.AddParameter("use_col_names_as_prefix", "TRUE")
+        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
         frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
     End Sub
 
