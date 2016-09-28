@@ -80,8 +80,8 @@ Public Class frmEditor
         clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
         clsInsertColumns.AddParameter("before", "TRUE")
         'TODO This should be an option in dialog
-        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
-        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        clsInsertColumns.AddParameter("col_names", Chr(34) & "X" & Chr(34))
+        clsInsertColumns.AddParameter("use_col_names_as_prefix", "TRUE")
         frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
     End Sub
 
@@ -96,8 +96,8 @@ Public Class frmEditor
         'TODO This should be an option in dialog
         'This is now the default in the R method so not needed
         'but should be added if user wants to change from default
-        'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
-        'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        'clsInsertColumns.AddParameter("col_names", Chr(34) & "X" & Chr(34))
+        'clsInsertColumns.AddParameter("use_col_names_as_prefix", "TRUE")
         frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
 
@@ -345,10 +345,10 @@ Public Class frmEditor
         strCurrentColumn = lstCurrentDataColumns(iCol)
 
         clsGetVariablesMetadata.AddParameter("column", Chr(34) & strCurrentColumn & Chr(34))
-        clsGetFactorLevels.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
+        clsGetFactorLevels.AddParameter("col_names", Chr(34) & strCurrentColumn & Chr(34))
         strCellDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacter(0)
 
-        clsReplaceValue.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
+        clsReplaceValue.AddParameter("col_names", Chr(34) & strCurrentColumn & Chr(34))
         clsReplaceValue.AddParameter("rows", Chr(34) & grdCurrSheet.RowHeaders.Item(iRow).Text & Chr(34))
 
         If strNewValue = "NA" Then
@@ -402,7 +402,7 @@ Public Class frmEditor
         End If
 
         If bValid Then
-            frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
+            frmMain.clsRLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value in Data")
         End If
     End Sub
 
