@@ -193,6 +193,10 @@ Public Class ucrReceiverSingle
         txtReceiverSingle.BackColor = Color.Aqua
     End Sub
 
+    Public Overridable Sub SetDefaultvalue(defaultValue As String)
+        Me.txtReceiverSingle.Text = defaultValue
+    End Sub
+
     Public Overrides Sub RemoveColor()
         txtReceiverSingle.BackColor = Color.White
     End Sub

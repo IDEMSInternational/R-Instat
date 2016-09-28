@@ -29,12 +29,15 @@ Public Class dlgTablesPlus
     End Sub
 
     Private Sub TestOKEnabled()
+        If Not ucrReceiverValues.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverValues.Selector = ucrSelectorForDataFrame
-        ucrReceiverValues.SetMeAsReceiver()
         ucrReceiverValues.SetIncludedDataTypes({"numeric"})
         ucrInputNewColName.SetItemsTypeAsColumns()
         ucrInputNewColName.SetDefaultTypeAsColumn()
@@ -47,6 +50,9 @@ Public Class dlgTablesPlus
         chkGraphResults.Checked = True
         ucrReceiverValues.SetEditableControl(bEditcontrol:=True)
         ReceiverLabels()
+        SaveResults()
+        ucrSelectorForDataFrame.Reset()
+        ucrReceiverValues.SetDefaultvalue("0.5")
     End Sub
 
     Private Sub ReopenDialog()
@@ -61,13 +67,18 @@ Public Class dlgTablesPlus
     Private Sub chkGraphResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphResults.CheckedChanged, chkSaveResults.CheckedChanged
         DisplayGraphResults()
         SaveResults()
+        TestOKEnabled()
     End Sub
 
     Private Sub SaveResults()
         If chkSaveResults.Checked Then
+            ucrReceiverValues.Selector = ucrSelectorForDataFrame
+            ucrReceiverValues.SetMeAsReceiver()
             ucrInputNewColName.Visible = True
+            ucrReceiverValues.SetDefaultvalue("")
         Else
             ucrInputNewColName.Visible = False
+            ucrReceiverValues.SetDefaultvalue("0.5")
         End If
     End Sub
     Private Sub DisplayGraphResults()

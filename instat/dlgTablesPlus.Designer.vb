@@ -28,16 +28,16 @@ Partial Class dlgTablesPlus
         Me.ucrSelectorForDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverValues = New instat.ucrReceiverSingle()
         Me.lblValues = New System.Windows.Forms.Label()
-        Me.ucrDistributionsWithParametersforTablePlus = New instat.ucrDistributionsWithParameters()
         Me.chkGraphResults = New System.Windows.Forms.CheckBox()
         Me.lblProbabilities = New System.Windows.Forms.Label()
         Me.chkSaveResults = New System.Windows.Forms.CheckBox()
         Me.ucrInputNewColName = New instat.ucrInputComboBox()
+        Me.ucrDistributionForTablePlus = New instat.ucrDistributions()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 294)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 268)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -92,17 +92,10 @@ Partial Class dlgTablesPlus
         Me.lblValues.TabIndex = 4
         Me.lblValues.Text = "Values"
         '
-        'ucrDistributionsWithParametersforTablePlus
-        '
-        Me.ucrDistributionsWithParametersforTablePlus.Location = New System.Drawing.Point(238, 83)
-        Me.ucrDistributionsWithParametersforTablePlus.Name = "ucrDistributionsWithParametersforTablePlus"
-        Me.ucrDistributionsWithParametersforTablePlus.Size = New System.Drawing.Size(198, 182)
-        Me.ucrDistributionsWithParametersforTablePlus.TabIndex = 5
-        '
         'chkGraphResults
         '
         Me.chkGraphResults.AutoSize = True
-        Me.chkGraphResults.Location = New System.Drawing.Point(13, 231)
+        Me.chkGraphResults.Location = New System.Drawing.Point(13, 219)
         Me.chkGraphResults.Name = "chkGraphResults"
         Me.chkGraphResults.Size = New System.Drawing.Size(93, 17)
         Me.chkGraphResults.TabIndex = 6
@@ -121,7 +114,7 @@ Partial Class dlgTablesPlus
         'chkSaveResults
         '
         Me.chkSaveResults.AutoSize = True
-        Me.chkSaveResults.Location = New System.Drawing.Point(13, 269)
+        Me.chkSaveResults.Location = New System.Drawing.Point(13, 242)
         Me.chkSaveResults.Name = "chkSaveResults"
         Me.chkSaveResults.Size = New System.Drawing.Size(89, 17)
         Me.chkSaveResults.TabIndex = 6
@@ -131,21 +124,28 @@ Partial Class dlgTablesPlus
         'ucrInputNewColName
         '
         Me.ucrInputNewColName.IsReadOnly = False
-        Me.ucrInputNewColName.Location = New System.Drawing.Point(109, 267)
+        Me.ucrInputNewColName.Location = New System.Drawing.Point(109, 241)
         Me.ucrInputNewColName.Name = "ucrInputNewColName"
         Me.ucrInputNewColName.Size = New System.Drawing.Size(327, 21)
         Me.ucrInputNewColName.TabIndex = 8
+        '
+        'ucrDistributionForTablePlus
+        '
+        Me.ucrDistributionForTablePlus.Location = New System.Drawing.Point(238, 84)
+        Me.ucrDistributionForTablePlus.Name = "ucrDistributionForTablePlus"
+        Me.ucrDistributionForTablePlus.Size = New System.Drawing.Size(198, 43)
+        Me.ucrDistributionForTablePlus.TabIndex = 9
         '
         'dlgTablesPlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(440, 348)
+        Me.ClientSize = New System.Drawing.Size(440, 325)
+        Me.Controls.Add(Me.ucrDistributionForTablePlus)
         Me.Controls.Add(Me.ucrInputNewColName)
         Me.Controls.Add(Me.lblProbabilities)
         Me.Controls.Add(Me.chkSaveResults)
         Me.Controls.Add(Me.chkGraphResults)
-        Me.Controls.Add(Me.ucrDistributionsWithParametersforTablePlus)
         Me.Controls.Add(Me.lblValues)
         Me.Controls.Add(Me.ucrReceiverValues)
         Me.Controls.Add(Me.ucrSelectorForDataFrame)
@@ -169,9 +169,9 @@ Partial Class dlgTablesPlus
     Friend WithEvents ucrSelectorForDataFrame As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverValues As ucrReceiverSingle
     Friend WithEvents lblValues As Label
-    Friend WithEvents ucrDistributionsWithParametersforTablePlus As ucrDistributionsWithParameters
     Friend WithEvents chkGraphResults As CheckBox
     Friend WithEvents lblProbabilities As Label
     Friend WithEvents chkSaveResults As CheckBox
     Friend WithEvents ucrInputNewColName As ucrInputComboBox
+    Friend WithEvents ucrDistributionForTablePlus As ucrDistributions
 End Class
