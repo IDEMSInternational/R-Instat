@@ -28,6 +28,9 @@ Partial Class dlgOneVariableGraph
         Me.ucrBase = New instat.ucrButtons()
         Me.cmdGraphOptions = New System.Windows.Forms.Button()
         Me.ucrOneVarGraphSave = New instat.ucrSaveGraph()
+        Me.rdoCombineGraph = New System.Windows.Forms.RadioButton()
+        Me.rdoSingleGraphs = New System.Windows.Forms.RadioButton()
+        Me.rdoFacets = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'ucrSelectorOneVarGraph
@@ -81,11 +84,47 @@ Partial Class dlgOneVariableGraph
         Me.ucrOneVarGraphSave.Size = New System.Drawing.Size(265, 20)
         Me.ucrOneVarGraphSave.TabIndex = 7
         '
+        'rdoCombineGraph
+        '
+        Me.rdoCombineGraph.AutoSize = True
+        Me.rdoCombineGraph.Location = New System.Drawing.Point(237, 194)
+        Me.rdoCombineGraph.Name = "rdoCombineGraph"
+        Me.rdoCombineGraph.Size = New System.Drawing.Size(98, 17)
+        Me.rdoCombineGraph.TabIndex = 8
+        Me.rdoCombineGraph.TabStop = True
+        Me.rdoCombineGraph.Text = "Combine Graph"
+        Me.rdoCombineGraph.UseVisualStyleBackColor = True
+        '
+        'rdoSingleGraphs
+        '
+        Me.rdoSingleGraphs.AutoSize = True
+        Me.rdoSingleGraphs.Location = New System.Drawing.Point(237, 216)
+        Me.rdoSingleGraphs.Name = "rdoSingleGraphs"
+        Me.rdoSingleGraphs.Size = New System.Drawing.Size(91, 17)
+        Me.rdoSingleGraphs.TabIndex = 9
+        Me.rdoSingleGraphs.TabStop = True
+        Me.rdoSingleGraphs.Text = "Single Graphs"
+        Me.rdoSingleGraphs.UseVisualStyleBackColor = True
+        '
+        'rdoFacets
+        '
+        Me.rdoFacets.AutoSize = True
+        Me.rdoFacets.Location = New System.Drawing.Point(237, 171)
+        Me.rdoFacets.Name = "rdoFacets"
+        Me.rdoFacets.Size = New System.Drawing.Size(57, 17)
+        Me.rdoFacets.TabIndex = 10
+        Me.rdoFacets.TabStop = True
+        Me.rdoFacets.Text = "Facets"
+        Me.rdoFacets.UseVisualStyleBackColor = True
+        '
         'dlgOneVariableGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 316)
+        Me.Controls.Add(Me.rdoFacets)
+        Me.Controls.Add(Me.rdoSingleGraphs)
+        Me.Controls.Add(Me.rdoCombineGraph)
         Me.Controls.Add(Me.ucrOneVarGraphSave)
         Me.Controls.Add(Me.cmdGraphOptions)
         Me.Controls.Add(Me.ucrBase)
@@ -109,4 +148,7 @@ Partial Class dlgOneVariableGraph
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents cmdGraphOptions As Button
     Friend WithEvents ucrOneVarGraphSave As ucrSaveGraph
+    Friend WithEvents rdoCombineGraph As RadioButton
+    Friend WithEvents rdoSingleGraphs As RadioButton
+    Friend WithEvents rdoFacets As RadioButton
 End Class
