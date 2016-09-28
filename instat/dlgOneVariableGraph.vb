@@ -52,8 +52,6 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        cmdGraphOptions.Enabled = True
-
         clsBaseOperatorOneColumn.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
