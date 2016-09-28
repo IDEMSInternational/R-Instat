@@ -50,6 +50,10 @@ Public Class sdgOneVarGraph
         clsRsyntax = clsNewRSyntax
     End Sub
     Private Sub chkSpecifyLayout_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpecifyLayout.CheckedChanged
+        SpecifyLayoutControl()
+    End Sub
+
+    Private Sub SpecifyLayoutControl()
         If chkSpecifyLayout.Checked Then
             lblNumberofColumns.Visible = True
             nudNumberofColumns.Visible = True
