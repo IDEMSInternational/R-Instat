@@ -200,6 +200,12 @@
     <Compile Include="dlgOneVariableGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneVarUseModel.Designer.vb">
+      <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVarUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOpenSST.Designer.vb">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
     </Compile>
@@ -2288,6 +2294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVariableGraph.sw-KE.resx">
       <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarUseModel.resx">
+      <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
