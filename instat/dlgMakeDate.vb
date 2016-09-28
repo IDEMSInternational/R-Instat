@@ -16,6 +16,9 @@
 
 Imports instat.Translations
 Public Class dlgMakeDate
+    Public clsMAKE As New RFunction
+
+
     Public bFirstLoad As Boolean = True
     Private Sub ucrSeclectorMakeDate_Load(sender As Object, e As EventArgs) Handles ucrSeclectorMakeDate.Load
         If bFirstLoad Then
@@ -61,17 +64,17 @@ Public Class dlgMakeDate
     Private Sub ReopenDialog()
     End Sub
 
-    Private Sub ucrReceiverYear_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYear.SelectionChanged
+    Private Sub ucrReceiverYear_SelectionChanged(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("year", clsRFunctionParameter:=ucrReceiverYear.GetVariables)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverMonth_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverMonth.SelectionChanged
+    Private Sub ucrReceiverMonth_SelectionChanged(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("month", clsRFunctionParameter:=ucrReceiverMonth.GetVariables)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverDay_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDay.SelectionChanged
+    Private Sub ucrReceiverDay_SelectionChanged(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("day", clsRFunctionParameter:=ucrReceiverDay.GetVariables)
 
         TestOkEnabled()
@@ -84,4 +87,5 @@ Public Class dlgMakeDate
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
 End Class
