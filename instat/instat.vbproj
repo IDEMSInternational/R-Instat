@@ -146,6 +146,12 @@
     <Compile Include="dlgAppend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCountinFactor.Designer.vb">
+      <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCountinFactor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -174,6 +180,12 @@
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgImportFromODK.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneVarCompareModels.Designer.vb">
+      <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVarCompareModels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneVarFitModel2.Designer.vb">
@@ -210,6 +222,12 @@
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDescribeTwoVarGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneVarCompareModels.Designer.vb">
+      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarCompareModels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgOneVarFitModDisplay.Designer.vb">
@@ -1998,6 +2016,9 @@
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCountinFactor.resx">
+      <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </EmbeddedResource>
@@ -2252,6 +2273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarCompareModels.resx">
+      <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarFitModel2.resx">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
@@ -2669,6 +2693,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarCompareModels.resx">
+      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarFitModDisplay.resx">
       <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
