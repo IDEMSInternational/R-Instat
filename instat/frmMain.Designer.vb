@@ -253,6 +253,7 @@ Partial Class frmMain
         Me.mnuFileOpenFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
@@ -361,7 +362,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -705,7 +705,6 @@ Partial Class frmMain
         '
         'mnuModelOneVariableCompareModels
         '
-        Me.mnuModelOneVariableCompareModels.Enabled = False
         Me.mnuModelOneVariableCompareModels.Name = "mnuModelOneVariableCompareModels"
         Me.mnuModelOneVariableCompareModels.Size = New System.Drawing.Size(174, 22)
         Me.mnuModelOneVariableCompareModels.Tag = "Choose_Models..."
@@ -713,7 +712,6 @@ Partial Class frmMain
         '
         'mnuModelOneVariableUseModel
         '
-        Me.mnuModelOneVariableUseModel.Enabled = False
         Me.mnuModelOneVariableUseModel.Name = "mnuModelOneVariableUseModel"
         Me.mnuModelOneVariableUseModel.Size = New System.Drawing.Size(174, 22)
         Me.mnuModelOneVariableUseModel.Tag = "Use_Model..."
@@ -2085,6 +2083,12 @@ Partial Class frmMain
         Me.mnuImportFromODK.Size = New System.Drawing.Size(204, 22)
         Me.mnuImportFromODK.Text = "Import from ODK..."
         '
+        'mnuFileConvert
+        '
+        Me.mnuFileConvert.Name = "mnuFileConvert"
+        Me.mnuFileConvert.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileConvert.Text = "Convert..."
+        '
         'tlSeparatorFile
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
@@ -2540,7 +2544,7 @@ Partial Class frmMain
         'mnuOrganiseColumnDateGenerateDateColumnMakeDate
         '
         Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Name = "mnuOrganiseColumnDateGenerateDateColumnMakeDate"
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Size = New System.Drawing.Size(139, 22)
         Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Text = "Make Date..."
         '
         'mnuOrganiseColumnDateUseDate
@@ -2553,13 +2557,13 @@ Partial Class frmMain
         'mnuOrganiseColumnDateUseDateMakeTime
         '
         Me.mnuOrganiseColumnDateUseDateMakeTime.Name = "mnuOrganiseColumnDateUseDateMakeTime"
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseColumnDateUseDateMakeTime.Size = New System.Drawing.Size(142, 22)
         Me.mnuOrganiseColumnDateUseDateMakeTime.Text = "Make Time..."
         '
         'mnuOrganiseColumnDateUseDateUseTime
         '
         Me.mnuOrganiseColumnDateUseDateUseTime.Name = "mnuOrganiseColumnDateUseDateUseTime"
-        Me.mnuOrganiseColumnDateUseDateUseTime.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseColumnDateUseDateUseTime.Size = New System.Drawing.Size(142, 22)
         Me.mnuOrganiseColumnDateUseDateUseTime.Text = "Use Date..."
         '
         'mnuOrganiseColumnReshape
@@ -2573,40 +2577,40 @@ Partial Class frmMain
         'mnuOrganiseColumnReshapeColumnSummaries
         '
         Me.mnuOrganiseColumnReshapeColumnSummaries.Name = "mnuOrganiseColumnReshapeColumnSummaries"
-        Me.mnuOrganiseColumnReshapeColumnSummaries.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeColumnSummaries.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeColumnSummaries.Tag = "Column_Summaries..."
         Me.mnuOrganiseColumnReshapeColumnSummaries.Text = "Column Summaries..."
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(185, 6)
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(190, 6)
         '
         'mnuOrganiseColumnReshapeStack
         '
         Me.mnuOrganiseColumnReshapeStack.Name = "mnuOrganiseColumnReshapeStack"
-        Me.mnuOrganiseColumnReshapeStack.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeStack.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeStack.Tag = "Stack..."
         Me.mnuOrganiseColumnReshapeStack.Text = "Stack..."
         '
         'mnuOrganiseColumnReshapeUnstack
         '
         Me.mnuOrganiseColumnReshapeUnstack.Name = "mnuOrganiseColumnReshapeUnstack"
-        Me.mnuOrganiseColumnReshapeUnstack.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeUnstack.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeUnstack.Tag = "Unstack..."
         Me.mnuOrganiseColumnReshapeUnstack.Text = "Unstack..."
         '
         'mnuOrganiseColumnReshapeMerge
         '
         Me.mnuOrganiseColumnReshapeMerge.Name = "mnuOrganiseColumnReshapeMerge"
-        Me.mnuOrganiseColumnReshapeMerge.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeMerge.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeMerge.Tag = "Merge..."
         Me.mnuOrganiseColumnReshapeMerge.Text = "Merge..."
         '
         'ToolStripSeparator11
         '
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(185, 6)
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(190, 6)
         '
         'mnuAppendDataFrame
         '
@@ -2617,21 +2621,21 @@ Partial Class frmMain
         'mnuOrganiseColumnReshapeSubset
         '
         Me.mnuOrganiseColumnReshapeSubset.Name = "mnuOrganiseColumnReshapeSubset"
-        Me.mnuOrganiseColumnReshapeSubset.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeSubset.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeSubset.Tag = "Subset..."
         Me.mnuOrganiseColumnReshapeSubset.Text = "Subset..."
         '
         'mnuOrganiseColumnReshapeRandomSubset
         '
         Me.mnuOrganiseColumnReshapeRandomSubset.Name = "mnuOrganiseColumnReshapeRandomSubset"
-        Me.mnuOrganiseColumnReshapeRandomSubset.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeRandomSubset.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeRandomSubset.Tag = "Random_Subset..."
         Me.mnuOrganiseColumnReshapeRandomSubset.Text = "Random Subset..."
         '
         'mnuOrganiseColumnReshapeTranspose
         '
         Me.mnuOrganiseColumnReshapeTranspose.Name = "mnuOrganiseColumnReshapeTranspose"
-        Me.mnuOrganiseColumnReshapeTranspose.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeTranspose.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeTranspose.Tag = "Transpose..."
         Me.mnuOrganiseColumnReshapeTranspose.Text = "Transpose..."
         '
@@ -2829,12 +2833,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuFileConvert
-        '
-        Me.mnuFileConvert.Name = "mnuFileConvert"
-        Me.mnuFileConvert.Size = New System.Drawing.Size(204, 22)
-        Me.mnuFileConvert.Text = "Convert..."
         '
         'frmMain
         '
