@@ -236,6 +236,12 @@
     <Compile Include="sdgOneVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTablesPlus.Designer.vb">
+      <DependentUpon>dlgTablesPlus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTablesPlus.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -3840,6 +3846,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablesPlus.fr-FR.resx">
+      <DependentUpon>dlgTablesPlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablesPlus.resx">
+      <DependentUpon>dlgTablesPlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablesPlus.sw-KE.resx">
+      <DependentUpon>dlgTablesPlus.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.fr-FR.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
