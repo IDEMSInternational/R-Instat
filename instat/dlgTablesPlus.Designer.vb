@@ -26,13 +26,13 @@ Partial Class dlgTablesPlus
         Me.rdoProbabilities = New System.Windows.Forms.RadioButton()
         Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
         Me.ucrSelectorForDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverValues = New instat.ucrReceiverSingle()
         Me.lblValues = New System.Windows.Forms.Label()
         Me.chkGraphResults = New System.Windows.Forms.CheckBox()
         Me.lblProbabilities = New System.Windows.Forms.Label()
         Me.chkSaveResults = New System.Windows.Forms.CheckBox()
         Me.ucrInputNewColName = New instat.ucrInputComboBox()
         Me.ucrDistributionForTablePlus = New instat.ucrDistributions()
+        Me.ucrReceiverExpressionForTablePlus = New instat.ucrReceiverExpression()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -73,15 +73,6 @@ Partial Class dlgTablesPlus
         Me.ucrSelectorForDataFrame.Name = "ucrSelectorForDataFrame"
         Me.ucrSelectorForDataFrame.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForDataFrame.TabIndex = 2
-        '
-        'ucrReceiverValues
-        '
-        Me.ucrReceiverValues.Location = New System.Drawing.Point(238, 60)
-        Me.ucrReceiverValues.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverValues.Name = "ucrReceiverValues"
-        Me.ucrReceiverValues.Selector = Nothing
-        Me.ucrReceiverValues.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverValues.TabIndex = 3
         '
         'lblValues
         '
@@ -136,18 +127,26 @@ Partial Class dlgTablesPlus
         Me.ucrDistributionForTablePlus.Size = New System.Drawing.Size(198, 43)
         Me.ucrDistributionForTablePlus.TabIndex = 9
         '
+        'ucrReceiverExpressionForTablePlus
+        '
+        Me.ucrReceiverExpressionForTablePlus.Location = New System.Drawing.Point(238, 57)
+        Me.ucrReceiverExpressionForTablePlus.Name = "ucrReceiverExpressionForTablePlus"
+        Me.ucrReceiverExpressionForTablePlus.Selector = Nothing
+        Me.ucrReceiverExpressionForTablePlus.Size = New System.Drawing.Size(184, 20)
+        Me.ucrReceiverExpressionForTablePlus.TabIndex = 10
+        '
         'dlgTablesPlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(440, 325)
+        Me.Controls.Add(Me.ucrReceiverExpressionForTablePlus)
         Me.Controls.Add(Me.ucrDistributionForTablePlus)
         Me.Controls.Add(Me.ucrInputNewColName)
         Me.Controls.Add(Me.lblProbabilities)
         Me.Controls.Add(Me.chkSaveResults)
         Me.Controls.Add(Me.chkGraphResults)
         Me.Controls.Add(Me.lblValues)
-        Me.Controls.Add(Me.ucrReceiverValues)
         Me.Controls.Add(Me.ucrSelectorForDataFrame)
         Me.Controls.Add(Me.rdoQuantiles)
         Me.Controls.Add(Me.rdoProbabilities)
@@ -167,11 +166,11 @@ Partial Class dlgTablesPlus
     Friend WithEvents rdoProbabilities As RadioButton
     Friend WithEvents rdoQuantiles As RadioButton
     Friend WithEvents ucrSelectorForDataFrame As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverValues As ucrReceiverSingle
     Friend WithEvents lblValues As Label
     Friend WithEvents chkGraphResults As CheckBox
     Friend WithEvents lblProbabilities As Label
     Friend WithEvents chkSaveResults As CheckBox
     Friend WithEvents ucrInputNewColName As ucrInputComboBox
     Friend WithEvents ucrDistributionForTablePlus As ucrDistributions
+    Friend WithEvents ucrReceiverExpressionForTablePlus As ucrReceiverExpression
 End Class

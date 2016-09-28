@@ -113,6 +113,9 @@ Public Class ucrReceiverExpression
         Return cboExpression.Text
     End Function
 
+    Public Overridable Sub SetDefaultValue(strDefaultVal As String)
+        cboExpression.Text = strDefaultVal
+    End Sub
     Public Overrides Sub Clear()
         RemoveSelected()
         iCurrentPosition = 0

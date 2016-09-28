@@ -201,14 +201,6 @@ Public Class ucrReceiverSingle
         txtReceiverSingle.BackColor = Color.White
     End Sub
 
-    Public Overridable Sub SetEditableControl(bEditcontrol As Boolean)
-        If bEditcontrol = True Then
-            txtReceiverSingle.ReadOnly = True
-        Else
-            txtReceiverSingle.ReadOnly = True
-        End If
-    End Sub
-
     Private Sub txtReceiverSingle_KeyDown(sender As Object, e As KeyEventArgs) Handles txtReceiverSingle.KeyDown
         If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()

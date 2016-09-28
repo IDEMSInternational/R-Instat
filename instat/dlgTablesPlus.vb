@@ -29,7 +29,7 @@ Public Class dlgTablesPlus
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverValues.IsEmpty Then
+        If Not ucrReceiverExpressionForTablePlus.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -38,7 +38,7 @@ Public Class dlgTablesPlus
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverValues.SetIncludedDataTypes({"numeric"})
+        ucrReceiverExpressionForTablePlus.SetIncludedDataTypes({"numeric"})
         ucrInputNewColName.SetItemsTypeAsColumns()
         ucrInputNewColName.SetDefaultTypeAsColumn()
         ucrInputNewColName.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
@@ -48,11 +48,10 @@ Public Class dlgTablesPlus
     Private Sub SetDefaults()
         rdoQuantiles.Checked = True
         chkGraphResults.Checked = True
-        ucrReceiverValues.SetEditableControl(bEditcontrol:=True)
         ReceiverLabels()
         SaveResults()
         ucrSelectorForDataFrame.Reset()
-        ucrReceiverValues.SetDefaultvalue("0.5")
+        ucrReceiverExpressionForTablePlus.SetDefaultValue("0.5")
     End Sub
 
     Private Sub ReopenDialog()
@@ -72,13 +71,13 @@ Public Class dlgTablesPlus
 
     Private Sub SaveResults()
         If chkSaveResults.Checked Then
-            ucrReceiverValues.Selector = ucrSelectorForDataFrame
-            ucrReceiverValues.SetMeAsReceiver()
+            ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
+            ucrReceiverExpressionForTablePlus.SetMeAsReceiver()
             ucrInputNewColName.Visible = True
-            ucrReceiverValues.SetDefaultvalue("")
+            ucrReceiverExpressionForTablePlus.SetDefaultValue("")
         Else
             ucrInputNewColName.Visible = False
-            ucrReceiverValues.SetDefaultvalue("0.5")
+            ucrReceiverExpressionForTablePlus.SetDefaultValue("0.5")
         End If
     End Sub
     Private Sub DisplayGraphResults()
