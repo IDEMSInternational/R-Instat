@@ -24,16 +24,16 @@ Partial Class sdgOneVarGraph
     Private Sub InitializeComponent()
         Me.tbcOneVarGraph = New System.Windows.Forms.TabControl()
         Me.tbpTypes = New System.Windows.Forms.TabPage()
-        Me.lblOther = New System.Windows.Forms.Label()
+        Me.lblCategorical = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
         Me.ucrInputOther = New instat.ucrInputComboBox()
         Me.ucrInputNumeric = New instat.ucrInputComboBox()
         Me.tbpDisplay = New System.Windows.Forms.TabPage()
+        Me.chkFreeScaleAxisforFacets = New System.Windows.Forms.CheckBox()
+        Me.lblNumberofColumns = New System.Windows.Forms.Label()
+        Me.nudNumberofColumns = New System.Windows.Forms.NumericUpDown()
         Me.chkSpecifyLayout = New System.Windows.Forms.CheckBox()
         Me.ucrButtonsOneVarGraph = New instat.ucrButtonsSubdialogue()
-        Me.nudNumberofColumns = New System.Windows.Forms.NumericUpDown()
-        Me.lblNumberofColumns = New System.Windows.Forms.Label()
-        Me.chkFreeScaleAxisforFacets = New System.Windows.Forms.CheckBox()
         Me.tbcOneVarGraph.SuspendLayout()
         Me.tbpTypes.SuspendLayout()
         Me.tbpDisplay.SuspendLayout()
@@ -54,26 +54,26 @@ Partial Class sdgOneVarGraph
         '
         'tbpTypes
         '
-        Me.tbpTypes.Controls.Add(Me.lblOther)
+        Me.tbpTypes.Controls.Add(Me.lblCategorical)
         Me.tbpTypes.Controls.Add(Me.lblNumeric)
         Me.tbpTypes.Controls.Add(Me.ucrInputOther)
         Me.tbpTypes.Controls.Add(Me.ucrInputNumeric)
         Me.tbpTypes.Location = New System.Drawing.Point(4, 22)
         Me.tbpTypes.Name = "tbpTypes"
         Me.tbpTypes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTypes.Size = New System.Drawing.Size(397, 154)
+        Me.tbpTypes.Size = New System.Drawing.Size(268, 146)
         Me.tbpTypes.TabIndex = 0
         Me.tbpTypes.Text = "Types"
         Me.tbpTypes.UseVisualStyleBackColor = True
         '
-        'lblOther
+        'lblCategorical
         '
-        Me.lblOther.AutoSize = True
-        Me.lblOther.Location = New System.Drawing.Point(10, 50)
-        Me.lblOther.Name = "lblOther"
-        Me.lblOther.Size = New System.Drawing.Size(33, 13)
-        Me.lblOther.TabIndex = 4
-        Me.lblOther.Text = "Other"
+        Me.lblCategorical.AutoSize = True
+        Me.lblCategorical.Location = New System.Drawing.Point(10, 50)
+        Me.lblCategorical.Name = "lblCategorical"
+        Me.lblCategorical.Size = New System.Drawing.Size(60, 13)
+        Me.lblCategorical.TabIndex = 4
+        Me.lblCategorical.Text = "Categorical"
         '
         'lblNumeric
         '
@@ -87,7 +87,7 @@ Partial Class sdgOneVarGraph
         'ucrInputOther
         '
         Me.ucrInputOther.IsReadOnly = False
-        Me.ucrInputOther.Location = New System.Drawing.Point(66, 48)
+        Me.ucrInputOther.Location = New System.Drawing.Point(76, 50)
         Me.ucrInputOther.Name = "ucrInputOther"
         Me.ucrInputOther.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputOther.TabIndex = 3
@@ -95,7 +95,7 @@ Partial Class sdgOneVarGraph
         'ucrInputNumeric
         '
         Me.ucrInputNumeric.IsReadOnly = False
-        Me.ucrInputNumeric.Location = New System.Drawing.Point(66, 6)
+        Me.ucrInputNumeric.Location = New System.Drawing.Point(76, 6)
         Me.ucrInputNumeric.Name = "ucrInputNumeric"
         Me.ucrInputNumeric.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputNumeric.TabIndex = 3
@@ -114,6 +114,32 @@ Partial Class sdgOneVarGraph
         Me.tbpDisplay.Text = "Display"
         Me.tbpDisplay.UseVisualStyleBackColor = True
         '
+        'chkFreeScaleAxisforFacets
+        '
+        Me.chkFreeScaleAxisforFacets.AutoSize = True
+        Me.chkFreeScaleAxisforFacets.Location = New System.Drawing.Point(10, 69)
+        Me.chkFreeScaleAxisforFacets.Name = "chkFreeScaleAxisforFacets"
+        Me.chkFreeScaleAxisforFacets.Size = New System.Drawing.Size(149, 17)
+        Me.chkFreeScaleAxisforFacets.TabIndex = 5
+        Me.chkFreeScaleAxisforFacets.Text = "Free Scale Axis for Facets"
+        Me.chkFreeScaleAxisforFacets.UseVisualStyleBackColor = True
+        '
+        'lblNumberofColumns
+        '
+        Me.lblNumberofColumns.AutoSize = True
+        Me.lblNumberofColumns.Location = New System.Drawing.Point(7, 37)
+        Me.lblNumberofColumns.Name = "lblNumberofColumns"
+        Me.lblNumberofColumns.Size = New System.Drawing.Size(99, 13)
+        Me.lblNumberofColumns.TabIndex = 4
+        Me.lblNumberofColumns.Text = "Number of Columns"
+        '
+        'nudNumberofColumns
+        '
+        Me.nudNumberofColumns.Location = New System.Drawing.Point(127, 35)
+        Me.nudNumberofColumns.Name = "nudNumberofColumns"
+        Me.nudNumberofColumns.Size = New System.Drawing.Size(43, 20)
+        Me.nudNumberofColumns.TabIndex = 3
+        '
         'chkSpecifyLayout
         '
         Me.chkSpecifyLayout.AutoSize = True
@@ -130,32 +156,6 @@ Partial Class sdgOneVarGraph
         Me.ucrButtonsOneVarGraph.Name = "ucrButtonsOneVarGraph"
         Me.ucrButtonsOneVarGraph.Size = New System.Drawing.Size(145, 30)
         Me.ucrButtonsOneVarGraph.TabIndex = 1
-        '
-        'nudNumberofColumns
-        '
-        Me.nudNumberofColumns.Location = New System.Drawing.Point(127, 35)
-        Me.nudNumberofColumns.Name = "nudNumberofColumns"
-        Me.nudNumberofColumns.Size = New System.Drawing.Size(43, 20)
-        Me.nudNumberofColumns.TabIndex = 3
-        '
-        'lblNumberofColumns
-        '
-        Me.lblNumberofColumns.AutoSize = True
-        Me.lblNumberofColumns.Location = New System.Drawing.Point(7, 37)
-        Me.lblNumberofColumns.Name = "lblNumberofColumns"
-        Me.lblNumberofColumns.Size = New System.Drawing.Size(99, 13)
-        Me.lblNumberofColumns.TabIndex = 4
-        Me.lblNumberofColumns.Text = "Number of Columns"
-        '
-        'chkFreeScaleAxisforFacets
-        '
-        Me.chkFreeScaleAxisforFacets.AutoSize = True
-        Me.chkFreeScaleAxisforFacets.Location = New System.Drawing.Point(10, 69)
-        Me.chkFreeScaleAxisforFacets.Name = "chkFreeScaleAxisforFacets"
-        Me.chkFreeScaleAxisforFacets.Size = New System.Drawing.Size(149, 17)
-        Me.chkFreeScaleAxisforFacets.TabIndex = 5
-        Me.chkFreeScaleAxisforFacets.Text = "Free Scale Axis for Facets"
-        Me.chkFreeScaleAxisforFacets.UseVisualStyleBackColor = True
         '
         'sdgOneVarGraph
         '
@@ -185,7 +185,7 @@ Partial Class sdgOneVarGraph
     Friend WithEvents ucrButtonsOneVarGraph As ucrButtonsSubdialogue
     Friend WithEvents ucrInputNumeric As ucrInputComboBox
     Friend WithEvents lblNumeric As Label
-    Friend WithEvents lblOther As Label
+    Friend WithEvents lblCategorical As Label
     Friend WithEvents ucrInputOther As ucrInputComboBox
     Friend WithEvents chkSpecifyLayout As CheckBox
     Friend WithEvents lblNumberofColumns As Label
