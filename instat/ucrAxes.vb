@@ -39,7 +39,9 @@ Public Class ucrAxes
         TitleDefaults()
         ScalesDefaults()
         TickMarkersDefaults()
+        ucrTickMarkers.SetName("Interval")
     End Sub
+
     Public Sub Reset()
         SetDefaults()
     End Sub
@@ -286,5 +288,6 @@ Public Class ucrAxes
             clsSeqFunction.RemoveParameterByName("by")
         End If
     End Sub
+
 End Class
 
