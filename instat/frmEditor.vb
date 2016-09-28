@@ -345,10 +345,10 @@ Public Class frmEditor
         strCurrentColumn = lstCurrentDataColumns(iCol)
 
         clsGetVariablesMetadata.AddParameter("column", Chr(34) & strCurrentColumn & Chr(34))
-        clsGetFactorLevels.AddParameter("col_names", Chr(34) & strCurrentColumn & Chr(34))
+        clsGetFactorLevels.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
         strCellDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacter(0)
 
-        clsReplaceValue.AddParameter("col_names", Chr(34) & strCurrentColumn & Chr(34))
+        clsReplaceValue.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
         clsReplaceValue.AddParameter("rows", Chr(34) & grdCurrSheet.RowHeaders.Item(iRow).Text & Chr(34))
 
         If strNewValue = "NA" Then
