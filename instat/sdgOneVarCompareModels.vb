@@ -22,6 +22,8 @@ Public Class sdgOneVarCompareModels
     Private clsRppcompFunction As New RFunction
     Private clsModel As New RFunction
     Private clsRModel As New RFunction
+    Private clsRsyntax As New RFunction
+    Private WithEvents ucrRecs As ucrReceiver
     Public bfirstload As Boolean = True
 
     Private Sub sdgOneVarCompareModels(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -29,6 +31,7 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Public Sub InitialiseDialog()
+        clsRsyntax.AddParameter("chisqbreaks")
         clsRcdfcompFunction.SetRCommand("cdfcomp")
         clsRdenscompFunction.SetRCommand("denscomp")
         clsRqqcompFunction.SetRCommand("qqcomp")
@@ -38,42 +41,62 @@ Public Class sdgOneVarCompareModels
     Public Sub SetDefaults()
         chkCDF.Checked = True
         chkDensity.Checked = False
-        chkInputBreakpoints.Checked = False
         chkPP.Checked = False
         chkQQ.Checked = False
         chkSaveChi.Checked = True
         chkSaveObjects.Checked = True
+        chkInputBreakpoints.Checked = False
         ucrObjectName.SetValidationTypeAsRVariable()
-        ucrObjectName.SetPrefix("gof")
-        'look at one where naming an object is in the sdg
-        SaveObject()
+        ucrObjectName.SetName("gof")
+        ucrSaveChiSq.SetValidationTypeAsRVariable()
+        ucrSaveChiSq.SetDefaultTypeAsDataFrame()
+        ucrSaveChiSq.SetName("ChiSquare")
         CreateGraphs()
+        ReturnEnabled()
         'ucrBase.ihelptopicID = 
     End Sub
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
-        'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-        ' this does not plot the model, just adds the function
-        clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-        clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-        clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+
+        clsRcdfcompFunction.SetRCommand("list")
+        clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("ft", clsRFunctionParameter:=clsRcdfcompFunction)
+
+        'clsRcdfcompFunction.SetRCommand("list")
+        'clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+
+
+
+
+        'clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        'clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        'clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+
     End Sub
 
-    Private Sub SaveObject()
-        If chkSaveObjects.Checked Then
-            ucrObjectName.Visible = True
-        Else
-            ucrObjectName.Visible = False
-        End If
+    Public Sub SetReceiver(ucrNewReceiver As ucrReceiver)
+        ucrRecs = ucrNewReceiver
     End Sub
 
     Private Sub chkSaveObjects_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveObjects.CheckedChanged
-        'saves object
+        If Not chkSaveObjects.Checked Then
+            ucrObjectName.Visible = False
+        Else
+            ucrObjectName.Visible = True
+        End If
+        ReturnEnabled()
     End Sub
 
     Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveChi.CheckedChanged
-
+        If Not chkSaveChi.Checked Then
+            ucrSaveChiSq.Visible = False
+        Else
+            ucrSaveChiSq.Visible = True
+        End If
+        ReturnEnabled()
     End Sub
 
     Private Sub chkInputBreakpoints_CheckedChanged(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
@@ -81,14 +104,13 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Private Sub chkCDF_CheckedChanged(sender As Object, e As EventArgs) Handles chkCDF.CheckedChanged
-        If chkCDF.Checked Then
-            'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            clsRcdfcompFunction.SetRCommand("list")
-            clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        End If
+        '  If chkCDF.Checked Then
+        ' 'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        'clsRcdfcompFunction.SetRCommand("list")
+        'clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        'End If
     End Sub
-
 
     Public Sub CreateGraphs()
         If chkCDF.Checked Then
@@ -114,5 +136,27 @@ Public Class sdgOneVarCompareModels
     'End If
     'End Sub
 
+
+    'Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
+    '   clsRsyntax = clsRNewSyntax
+    'End Sub
+
+    Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
+        If chkInputBreakpoints.Checked Then
+            clsRsyntax.AddParameter("chisqbreaks") 'in the brackets have numbers inputted numbers inputted)
+        End If
+    End Sub
+
+    Private Sub ReturnEnabled()
+        If Not (chkSaveObjects.Checked AndAlso ucrObjectName.IsEmpty) AndAlso Not (chkSaveChi.Checked AndAlso ucrSaveChiSq.IsEmpty) Then
+            ucrBase.cmdReturn.Enabled = True
+        Else
+            ucrBase.cmdReturn.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ucrName_NameChanged() Handles ucrObjectName.NameChanged, ucrSaveChiSq.NameChanged
+        ReturnEnabled()
+    End Sub
 
 End Class
