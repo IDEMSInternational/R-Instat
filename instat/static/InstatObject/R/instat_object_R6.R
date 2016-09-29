@@ -934,7 +934,7 @@ instat_object$set("public","set_column_colours_by_metadata", function(data_name,
 }
 )
 
-instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
-  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, factor = factor, character = character, facets = facets)
+instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, nrow = NULL, ...) {
+  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, nrow = nrow, ... = ...)
 }
 )

@@ -182,6 +182,12 @@
     <Compile Include="dlgImportFromODK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneVarCompareModels.Designer.vb">
+      <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVarCompareModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVarFitModel2.Designer.vb">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </Compile>
@@ -192,6 +198,12 @@
       <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOneVariableGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneVarUseModel.Designer.vb">
+      <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVarUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOpenSST.Designer.vb">
@@ -218,6 +230,12 @@
     <Compile Include="sdgDescribeTwoVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgOneVarCompareModels.Designer.vb">
+      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarCompareModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgOneVarFitModDisplay.Designer.vb">
       <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
     </Compile>
@@ -234,6 +252,12 @@
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOneVarGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneVarUseModBootstrap.Designer.vb">
+      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarUseModBootstrap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -2262,6 +2286,9 @@
     <EmbeddedResource Include="dlgOneSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarCompareModels.resx">
+      <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarFitModel2.resx">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -2273,6 +2300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVariableGraph.sw-KE.resx">
       <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarUseModel.resx">
+      <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
@@ -2679,6 +2709,9 @@
     <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarCompareModels.resx">
+      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarFitModDisplay.resx">
       <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
     </EmbeddedResource>
@@ -2687,6 +2720,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarUseModBootstrap.resx">
+      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>

@@ -69,7 +69,7 @@ Partial Class frmMain
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOneVariableFitModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuModelOneVariableChooseModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelOneVariableCompareModels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOneVariableUseModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelTwoVariables = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelTwoVariablesFitModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -253,6 +253,7 @@ Partial Class frmMain
         Me.mnuFileOpenFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
@@ -277,9 +278,9 @@ Partial Class frmMain
         Me.mnuOrganiseDataFrameHideColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameFreezeColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganisePrepareToShare = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganisePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OtherScdMicroDialogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganiseColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
@@ -290,6 +291,8 @@ Partial Class frmMain
         Me.mnuOrganiseColumnCalculateRowSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerateRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnGenerateCountInFactor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator25 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganiseColumnGenerateEnter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerateRandomSamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGeneratePermuteRows = New System.Windows.Forms.ToolStripMenuItem()
@@ -315,6 +318,12 @@ Partial Class frmMain
         Me.mnuOrganiseColumnTextCombine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnTextMatch = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnTextDistance = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnDateGenerateDateColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnDateUseDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnDateUseDateMakeTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnDateUseDateUseTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
@@ -353,14 +362,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateGenerateDateColumn = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateUseDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateUseDateMakeTime = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateUseDateUseTime = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnGenerateCountInFactor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator25 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -689,7 +690,7 @@ Partial Class frmMain
         '
         'mnuModelOneVariable
         '
-        Me.mnuModelOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOneVariableFitModel, Me.mnuModelOneVariableChooseModel, Me.mnuModelOneVariableUseModel})
+        Me.mnuModelOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOneVariableFitModel, Me.mnuModelOneVariableCompareModels, Me.mnuModelOneVariableUseModel})
         Me.mnuModelOneVariable.Name = "mnuModelOneVariable"
         Me.mnuModelOneVariable.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOneVariable.Tag = "One_Variable"
@@ -698,23 +699,21 @@ Partial Class frmMain
         'mnuModelOneVariableFitModel
         '
         Me.mnuModelOneVariableFitModel.Name = "mnuModelOneVariableFitModel"
-        Me.mnuModelOneVariableFitModel.Size = New System.Drawing.Size(169, 22)
+        Me.mnuModelOneVariableFitModel.Size = New System.Drawing.Size(174, 22)
         Me.mnuModelOneVariableFitModel.Tag = "Fit_Model..."
         Me.mnuModelOneVariableFitModel.Text = "Fit Model..."
         '
-        'mnuModelOneVariableChooseModel
+        'mnuModelOneVariableCompareModels
         '
-        Me.mnuModelOneVariableChooseModel.Enabled = False
-        Me.mnuModelOneVariableChooseModel.Name = "mnuModelOneVariableChooseModel"
-        Me.mnuModelOneVariableChooseModel.Size = New System.Drawing.Size(169, 22)
-        Me.mnuModelOneVariableChooseModel.Tag = "Choose_Model..."
-        Me.mnuModelOneVariableChooseModel.Text = "Compare Model..."
+        Me.mnuModelOneVariableCompareModels.Name = "mnuModelOneVariableCompareModels"
+        Me.mnuModelOneVariableCompareModels.Size = New System.Drawing.Size(174, 22)
+        Me.mnuModelOneVariableCompareModels.Tag = "Choose_Models..."
+        Me.mnuModelOneVariableCompareModels.Text = "Compare Models..."
         '
         'mnuModelOneVariableUseModel
         '
-        Me.mnuModelOneVariableUseModel.Enabled = False
         Me.mnuModelOneVariableUseModel.Name = "mnuModelOneVariableUseModel"
-        Me.mnuModelOneVariableUseModel.Size = New System.Drawing.Size(169, 22)
+        Me.mnuModelOneVariableUseModel.Size = New System.Drawing.Size(174, 22)
         Me.mnuModelOneVariableUseModel.Tag = "Use_Model..."
         Me.mnuModelOneVariableUseModel.Text = "Use Model..."
         '
@@ -2049,7 +2048,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuImportFromODK, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuImportFromODK, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -2084,6 +2083,12 @@ Partial Class frmMain
         Me.mnuImportFromODK.Size = New System.Drawing.Size(204, 22)
         Me.mnuImportFromODK.Text = "Import from ODK..."
         '
+        'mnuFileConvert
+        '
+        Me.mnuFileConvert.Name = "mnuFileConvert"
+        Me.mnuFileConvert.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileConvert.Text = "Convert..."
+        '
         'tlSeparatorFile
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
@@ -2104,7 +2109,7 @@ Partial Class frmMain
         '
         'mnuOrganise
         '
-        Me.mnuOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrame, Me.mnuOrganisePrepareToShare, Me.ToolStripSeparator6, Me.mnuOrganiseColumnCalculate, Me.mnuOrganiseColumnGenerate, Me.mnuOrganiseColumnFactor, Me.mnuOrganiseColumnText, Me.mnuOrganiseColumnDate, Me.mnuOrganiseColumnReshape, Me.ToolStripSeparator7, Me.mnuOrganiseDataObject, Me.mnuOrganiseRObjects})
+        Me.mnuOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrame, Me.mnuOrganiseCheckData, Me.ToolStripSeparator6, Me.mnuOrganiseColumnCalculate, Me.mnuOrganiseColumnGenerate, Me.mnuOrganiseColumnFactor, Me.mnuOrganiseColumnText, Me.mnuOrganiseColumnDate, Me.mnuOrganiseColumnReshape, Me.ToolStripSeparator7, Me.mnuOrganiseDataObject, Me.mnuOrganiseRObjects})
         Me.mnuOrganise.Name = "mnuOrganise"
         Me.mnuOrganise.Size = New System.Drawing.Size(66, 20)
         Me.mnuOrganise.Tag = "Organise"
@@ -2246,12 +2251,13 @@ Partial Class frmMain
         Me.ColourByPropertyToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.ColourByPropertyToolStripMenuItem.Text = "Colour by Property..."
         '
-        'mnuOrganisePrepareToShare
+        'mnuOrganiseCheckData
         '
-        Me.mnuOrganisePrepareToShare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganisePrepareToShareJitter, Me.OtherScdMicroDialogsToolStripMenuItem})
-        Me.mnuOrganisePrepareToShare.Name = "mnuOrganisePrepareToShare"
-        Me.mnuOrganisePrepareToShare.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganisePrepareToShare.Text = "Prepare to Share"
+        Me.mnuOrganiseCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.mnuOrganiseCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganisePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage})
+        Me.mnuOrganiseCheckData.Name = "mnuOrganiseCheckData"
+        Me.mnuOrganiseCheckData.Size = New System.Drawing.Size(172, 22)
+        Me.mnuOrganiseCheckData.Text = "Check Data"
         '
         'mnuOrganisePrepareToShareJitter
         '
@@ -2259,12 +2265,12 @@ Partial Class frmMain
         Me.mnuOrganisePrepareToShareJitter.Size = New System.Drawing.Size(245, 22)
         Me.mnuOrganisePrepareToShareJitter.Text = "Jitter..."
         '
-        'OtherScdMicroDialogsToolStripMenuItem
+        'mnuCheckDataPrePareToShareSdcPackage
         '
-        Me.OtherScdMicroDialogsToolStripMenuItem.Enabled = False
-        Me.OtherScdMicroDialogsToolStripMenuItem.Name = "OtherScdMicroDialogsToolStripMenuItem"
-        Me.OtherScdMicroDialogsToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
-        Me.OtherScdMicroDialogsToolStripMenuItem.Text = "Other scdMicro Package Dialogs"
+        Me.mnuCheckDataPrePareToShareSdcPackage.Enabled = False
+        Me.mnuCheckDataPrePareToShareSdcPackage.Name = "mnuCheckDataPrePareToShareSdcPackage"
+        Me.mnuCheckDataPrePareToShareSdcPackage.Size = New System.Drawing.Size(245, 22)
+        Me.mnuCheckDataPrePareToShareSdcPackage.Text = "Prepare to Share (sdc package)..."
         '
         'ToolStripSeparator6
         '
@@ -2334,6 +2340,17 @@ Partial Class frmMain
         Me.mnuOrganiseColumnGenerateRegularSequence.Size = New System.Drawing.Size(177, 22)
         Me.mnuOrganiseColumnGenerateRegularSequence.Tag = "Regular_Sequence..."
         Me.mnuOrganiseColumnGenerateRegularSequence.Text = "Regular Sequence..."
+        '
+        'mnuOrganiseColumnGenerateCountInFactor
+        '
+        Me.mnuOrganiseColumnGenerateCountInFactor.Name = "mnuOrganiseColumnGenerateCountInFactor"
+        Me.mnuOrganiseColumnGenerateCountInFactor.Size = New System.Drawing.Size(177, 22)
+        Me.mnuOrganiseColumnGenerateCountInFactor.Text = "Count in Factor..."
+        '
+        'ToolStripSeparator25
+        '
+        Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
+        Me.ToolStripSeparator25.Size = New System.Drawing.Size(174, 6)
         '
         'mnuOrganiseColumnGenerateEnter
         '
@@ -2510,6 +2527,45 @@ Partial Class frmMain
         Me.mnuOrganiseColumnTextDistance.Tag = "Distance..."
         Me.mnuOrganiseColumnTextDistance.Text = "Distance..."
         '
+        'mnuOrganiseColumnDate
+        '
+        Me.mnuOrganiseColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateGenerateDateColumn, Me.mnuOrganiseColumnDateUseDate})
+        Me.mnuOrganiseColumnDate.Name = "mnuOrganiseColumnDate"
+        Me.mnuOrganiseColumnDate.Size = New System.Drawing.Size(172, 22)
+        Me.mnuOrganiseColumnDate.Text = "Column: Date"
+        '
+        'mnuOrganiseColumnDateGenerateDateColumn
+        '
+        Me.mnuOrganiseColumnDateGenerateDateColumn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate})
+        Me.mnuOrganiseColumnDateGenerateDateColumn.Name = "mnuOrganiseColumnDateGenerateDateColumn"
+        Me.mnuOrganiseColumnDateGenerateDateColumn.Size = New System.Drawing.Size(194, 22)
+        Me.mnuOrganiseColumnDateGenerateDateColumn.Text = "Generate Date Column"
+        '
+        'mnuOrganiseColumnDateGenerateDateColumnMakeDate
+        '
+        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Name = "mnuOrganiseColumnDateGenerateDateColumnMakeDate"
+        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Size = New System.Drawing.Size(139, 22)
+        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Text = "Make Date..."
+        '
+        'mnuOrganiseColumnDateUseDate
+        '
+        Me.mnuOrganiseColumnDateUseDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateUseDateMakeTime, Me.mnuOrganiseColumnDateUseDateUseTime})
+        Me.mnuOrganiseColumnDateUseDate.Name = "mnuOrganiseColumnDateUseDate"
+        Me.mnuOrganiseColumnDateUseDate.Size = New System.Drawing.Size(194, 22)
+        Me.mnuOrganiseColumnDateUseDate.Text = "Use Date"
+        '
+        'mnuOrganiseColumnDateUseDateMakeTime
+        '
+        Me.mnuOrganiseColumnDateUseDateMakeTime.Name = "mnuOrganiseColumnDateUseDateMakeTime"
+        Me.mnuOrganiseColumnDateUseDateMakeTime.Size = New System.Drawing.Size(142, 22)
+        Me.mnuOrganiseColumnDateUseDateMakeTime.Text = "Make Time..."
+        '
+        'mnuOrganiseColumnDateUseDateUseTime
+        '
+        Me.mnuOrganiseColumnDateUseDateUseTime.Name = "mnuOrganiseColumnDateUseDateUseTime"
+        Me.mnuOrganiseColumnDateUseDateUseTime.Size = New System.Drawing.Size(142, 22)
+        Me.mnuOrganiseColumnDateUseDateUseTime.Text = "Use Date..."
+        '
         'mnuOrganiseColumnReshape
         '
         Me.mnuOrganiseColumnReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnReshapeColumnSummaries, Me.ToolStripSeparator10, Me.mnuOrganiseColumnReshapeStack, Me.mnuOrganiseColumnReshapeUnstack, Me.mnuOrganiseColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuAppendDataFrame, Me.mnuOrganiseColumnReshapeSubset, Me.mnuOrganiseColumnReshapeRandomSubset, Me.mnuOrganiseColumnReshapeTranspose})
@@ -2521,65 +2577,65 @@ Partial Class frmMain
         'mnuOrganiseColumnReshapeColumnSummaries
         '
         Me.mnuOrganiseColumnReshapeColumnSummaries.Name = "mnuOrganiseColumnReshapeColumnSummaries"
-        Me.mnuOrganiseColumnReshapeColumnSummaries.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeColumnSummaries.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeColumnSummaries.Tag = "Column_Summaries..."
         Me.mnuOrganiseColumnReshapeColumnSummaries.Text = "Column Summaries..."
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(185, 6)
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(190, 6)
         '
         'mnuOrganiseColumnReshapeStack
         '
         Me.mnuOrganiseColumnReshapeStack.Name = "mnuOrganiseColumnReshapeStack"
-        Me.mnuOrganiseColumnReshapeStack.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeStack.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeStack.Tag = "Stack..."
         Me.mnuOrganiseColumnReshapeStack.Text = "Stack..."
         '
         'mnuOrganiseColumnReshapeUnstack
         '
         Me.mnuOrganiseColumnReshapeUnstack.Name = "mnuOrganiseColumnReshapeUnstack"
-        Me.mnuOrganiseColumnReshapeUnstack.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeUnstack.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeUnstack.Tag = "Unstack..."
         Me.mnuOrganiseColumnReshapeUnstack.Text = "Unstack..."
         '
         'mnuOrganiseColumnReshapeMerge
         '
         Me.mnuOrganiseColumnReshapeMerge.Name = "mnuOrganiseColumnReshapeMerge"
-        Me.mnuOrganiseColumnReshapeMerge.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeMerge.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeMerge.Tag = "Merge..."
         Me.mnuOrganiseColumnReshapeMerge.Text = "Merge..."
         '
         'ToolStripSeparator11
         '
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(185, 6)
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(190, 6)
         '
         'mnuAppendDataFrame
         '
         Me.mnuAppendDataFrame.Name = "mnuAppendDataFrame"
-        Me.mnuAppendDataFrame.Size = New System.Drawing.Size(188, 22)
-        Me.mnuAppendDataFrame.Text = "Append Data Frames"
+        Me.mnuAppendDataFrame.Size = New System.Drawing.Size(193, 22)
+        Me.mnuAppendDataFrame.Text = "Append Data Frames..."
         '
         'mnuOrganiseColumnReshapeSubset
         '
         Me.mnuOrganiseColumnReshapeSubset.Name = "mnuOrganiseColumnReshapeSubset"
-        Me.mnuOrganiseColumnReshapeSubset.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeSubset.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeSubset.Tag = "Subset..."
         Me.mnuOrganiseColumnReshapeSubset.Text = "Subset..."
         '
         'mnuOrganiseColumnReshapeRandomSubset
         '
         Me.mnuOrganiseColumnReshapeRandomSubset.Name = "mnuOrganiseColumnReshapeRandomSubset"
-        Me.mnuOrganiseColumnReshapeRandomSubset.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeRandomSubset.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeRandomSubset.Tag = "Random_Subset..."
         Me.mnuOrganiseColumnReshapeRandomSubset.Text = "Random Subset..."
         '
         'mnuOrganiseColumnReshapeTranspose
         '
         Me.mnuOrganiseColumnReshapeTranspose.Name = "mnuOrganiseColumnReshapeTranspose"
-        Me.mnuOrganiseColumnReshapeTranspose.Size = New System.Drawing.Size(188, 22)
+        Me.mnuOrganiseColumnReshapeTranspose.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeTranspose.Tag = "Transpose..."
         Me.mnuOrganiseColumnReshapeTranspose.Text = "Transpose..."
         '
@@ -2687,28 +2743,28 @@ Partial Class frmMain
         'mnuOrganiseRObjectsView
         '
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
         'mnuOrganiseRObjectsRename
         '
         Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
-        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
         Me.mnuOrganiseRObjectsRename.Text = "Rename..."
         '
         'mnuOrganiseRObjectsReorder
         '
         Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
-        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
         Me.mnuOrganiseRObjectsReorder.Text = "Reorder..."
         '
         'mnuOrganiseRObjectsDelete
         '
         Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
-        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '
@@ -2777,56 +2833,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuOrganiseColumnDate
-        '
-        Me.mnuOrganiseColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateGenerateDateColumn, Me.mnuOrganiseColumnDateUseDate})
-        Me.mnuOrganiseColumnDate.Name = "mnuOrganiseColumnDate"
-        Me.mnuOrganiseColumnDate.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseColumnDate.Text = "Column: Date"
-        '
-        'mnuOrganiseColumnDateGenerateDateColumn
-        '
-        Me.mnuOrganiseColumnDateGenerateDateColumn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate})
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Name = "mnuOrganiseColumnDateGenerateDateColumn"
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Size = New System.Drawing.Size(194, 22)
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Text = "Generate Date Column"
-        '
-        'mnuOrganiseColumnDateGenerateDateColumnMakeDate
-        '
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Name = "mnuOrganiseColumnDateGenerateDateColumnMakeDate"
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Text = "Make Date"
-        '
-        'mnuOrganiseColumnDateUseDate
-        '
-        Me.mnuOrganiseColumnDateUseDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateUseDateMakeTime, Me.mnuOrganiseColumnDateUseDateUseTime})
-        Me.mnuOrganiseColumnDateUseDate.Name = "mnuOrganiseColumnDateUseDate"
-        Me.mnuOrganiseColumnDateUseDate.Size = New System.Drawing.Size(194, 22)
-        Me.mnuOrganiseColumnDateUseDate.Text = "Use Date"
-        '
-        'mnuOrganiseColumnDateUseDateMakeTime
-        '
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Name = "mnuOrganiseColumnDateUseDateMakeTime"
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Text = "Make Time"
-        '
-        'mnuOrganiseColumnDateUseDateUseTime
-        '
-        Me.mnuOrganiseColumnDateUseDateUseTime.Name = "mnuOrganiseColumnDateUseDateUseTime"
-        Me.mnuOrganiseColumnDateUseDateUseTime.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnDateUseDateUseTime.Text = "Use Date"
-        '
-        'mnuOrganiseColumnGenerateCountInFactor
-        '
-        Me.mnuOrganiseColumnGenerateCountInFactor.Name = "mnuOrganiseColumnGenerateCountInFactor"
-        Me.mnuOrganiseColumnGenerateCountInFactor.Size = New System.Drawing.Size(177, 22)
-        Me.mnuOrganiseColumnGenerateCountInFactor.Text = "Count in Factor"
-        '
-        'ToolStripSeparator25
-        '
-        Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
-        Me.ToolStripSeparator25.Size = New System.Drawing.Size(174, 6)
         '
         'frmMain
         '
@@ -3070,7 +3076,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents mnuModelOneVariable As ToolStripMenuItem
     Friend WithEvents mnuModelOneVariableFitModel As ToolStripMenuItem
-    Friend WithEvents mnuModelOneVariableChooseModel As ToolStripMenuItem
+    Friend WithEvents mnuModelOneVariableCompareModels As ToolStripMenuItem
     Friend WithEvents mnuModelOneVariableUseModel As ToolStripMenuItem
     Friend WithEvents mnuModelTwoVariables As ToolStripMenuItem
     Friend WithEvents mnuModelTwoVariablesFitModel As ToolStripMenuItem
@@ -3123,9 +3129,9 @@ Partial Class frmMain
     Friend WithEvents mnuToolsCheckForUpdates As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator13 As ToolStripSeparator
-    Friend WithEvents mnuOrganisePrepareToShare As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseCheckData As ToolStripMenuItem
     Friend WithEvents mnuOrganisePrepareToShareJitter As ToolStripMenuItem
-    Friend WithEvents OtherScdMicroDialogsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuCheckDataPrePareToShareSdcPackage As ToolStripMenuItem
     Friend WithEvents ColourByPropertyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuViewCascade As ToolStripMenuItem
     Friend WithEvents mnuViewTileVertically As ToolStripMenuItem
@@ -3190,4 +3196,5 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnDateUseDate As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnDateUseDateMakeTime As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnDateUseDateUseTime As ToolStripMenuItem
+    Friend WithEvents mnuFileConvert As ToolStripMenuItem
 End Class

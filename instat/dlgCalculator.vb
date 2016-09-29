@@ -36,8 +36,8 @@ Public Class dlgCalculator
         TestOKEnabled()
     End Sub
 
-    Private Sub GetCalculationHistory()
-        ucrReceiverForCalculation.addtocombobox(ucrReceiverForCalculation.GetText)
+    Private Sub SetCalculationHistory()
+        ucrReceiverForCalculation.AddtoCombobox(ucrReceiverForCalculation.GetText)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -181,7 +181,7 @@ Public Class dlgCalculator
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         strFunc = clsDetach.ToScript(strScript)
         frmMain.clsRLink.RunScript(strScript & strFunc)
-        GetCalculationHistory()
+        SetCalculationHistory()
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
