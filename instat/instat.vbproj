@@ -254,6 +254,12 @@
     <Compile Include="sdgOneVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgOneVarUseModBootstrap.Designer.vb">
+      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarUseModBootstrap.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -2283,9 +2289,6 @@
     <EmbeddedResource Include="dlgOneVarCompareModels.resx">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneVarFitModel.resx">
-      <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarFitModel2.resx">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -2717,6 +2720,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarUseModBootstrap.resx">
+      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
