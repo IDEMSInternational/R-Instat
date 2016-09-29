@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class dlgOneVarCompareModels
     Public bfirstload As Boolean = True
 
-
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bfirstload Then
             InitialiseDialog()
