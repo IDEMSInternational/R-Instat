@@ -145,7 +145,7 @@ Partial Class ucrAxes
         Me.grpTickMarkers.Size = New System.Drawing.Size(194, 254)
         Me.grpTickMarkers.TabIndex = 1
         Me.grpTickMarkers.TabStop = False
-        Me.grpTickMarkers.Text = "Tick Markers"
+        Me.grpTickMarkers.Text = "Tick Marks"
         '
         'ucrTickMarkers
         '
@@ -158,7 +158,7 @@ Partial Class ucrAxes
         'lblTickMarkersNoOfDecimalPlaces
         '
         Me.lblTickMarkersNoOfDecimalPlaces.AutoSize = True
-        Me.lblTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(3, 221)
+        Me.lblTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(3, 118)
         Me.lblTickMarkersNoOfDecimalPlaces.Name = "lblTickMarkersNoOfDecimalPlaces"
         Me.lblTickMarkersNoOfDecimalPlaces.Size = New System.Drawing.Size(132, 13)
         Me.lblTickMarkersNoOfDecimalPlaces.TabIndex = 10
@@ -166,7 +166,7 @@ Partial Class ucrAxes
         '
         'nudTickMarkersNoOfDecimalPlaces
         '
-        Me.nudTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(137, 219)
+        Me.nudTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(141, 115)
         Me.nudTickMarkersNoOfDecimalPlaces.Name = "nudTickMarkersNoOfDecimalPlaces"
         Me.nudTickMarkersNoOfDecimalPlaces.Size = New System.Drawing.Size(38, 20)
         Me.nudTickMarkersNoOfDecimalPlaces.TabIndex = 11
@@ -203,7 +203,7 @@ Partial Class ucrAxes
         '
         'nudInStepsOf
         '
-        Me.nudInStepsOf.Location = New System.Drawing.Point(65, 181)
+        Me.nudInStepsOf.Location = New System.Drawing.Point(68, 219)
         Me.nudInStepsOf.Name = "nudInStepsOf"
         Me.nudInStepsOf.Size = New System.Drawing.Size(46, 20)
         Me.nudInStepsOf.TabIndex = 8
@@ -211,7 +211,7 @@ Partial Class ucrAxes
         'lblInStepsOf
         '
         Me.lblInStepsOf.AutoSize = True
-        Me.lblInStepsOf.Location = New System.Drawing.Point(3, 183)
+        Me.lblInStepsOf.Location = New System.Drawing.Point(6, 221)
         Me.lblInStepsOf.Name = "lblInStepsOf"
         Me.lblInStepsOf.Size = New System.Drawing.Size(58, 13)
         Me.lblInStepsOf.TabIndex = 9
@@ -220,7 +220,7 @@ Partial Class ucrAxes
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(3, 96)
+        Me.lblFrom.Location = New System.Drawing.Point(6, 149)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(30, 13)
         Me.lblFrom.TabIndex = 5
@@ -228,14 +228,14 @@ Partial Class ucrAxes
         '
         'nudFrom
         '
-        Me.nudFrom.Location = New System.Drawing.Point(65, 94)
+        Me.nudFrom.Location = New System.Drawing.Point(68, 146)
         Me.nudFrom.Name = "nudFrom"
         Me.nudFrom.Size = New System.Drawing.Size(46, 20)
         Me.nudFrom.TabIndex = 4
         '
         'nudTo
         '
-        Me.nudTo.Location = New System.Drawing.Point(65, 138)
+        Me.nudTo.Location = New System.Drawing.Point(68, 183)
         Me.nudTo.Name = "nudTo"
         Me.nudTo.Size = New System.Drawing.Size(46, 20)
         Me.nudTo.TabIndex = 7
@@ -243,7 +243,7 @@ Partial Class ucrAxes
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(3, 140)
+        Me.lblTo.Location = New System.Drawing.Point(6, 186)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(20, 13)
         Me.lblTo.TabIndex = 6
