@@ -29,7 +29,7 @@ Partial Class dlgTablePlus
         Me.lblQuantValues = New System.Windows.Forms.Label()
         Me.lblProbValues = New System.Windows.Forms.Label()
         Me.ucrInputProbabilities = New instat.ucrInputTextBox()
-        Me.UcrDistributions1 = New instat.ucrDistributions()
+        Me.ucrDistributionForTablesPlus = New instat.ucrDistributions()
         Me.ucrInputNewColNameforTablePlus = New instat.ucrInputComboBox()
         Me.ucrSelectorForDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverExpressionForTablePlus = New instat.ucrReceiverSingle()
@@ -90,7 +90,7 @@ Partial Class dlgTablePlus
         'lblProbValues
         '
         Me.lblProbValues.AutoSize = True
-        Me.lblProbValues.Location = New System.Drawing.Point(240, 32)
+        Me.lblProbValues.Location = New System.Drawing.Point(243, 32)
         Me.lblProbValues.Name = "lblProbValues"
         Me.lblProbValues.Size = New System.Drawing.Size(63, 13)
         Me.lblProbValues.TabIndex = 9
@@ -104,12 +104,12 @@ Partial Class dlgTablePlus
         Me.ucrInputProbabilities.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputProbabilities.TabIndex = 10
         '
-        'UcrDistributions1
+        'ucrDistributionForTablesPlus
         '
-        Me.UcrDistributions1.Location = New System.Drawing.Point(243, 74)
-        Me.UcrDistributions1.Name = "UcrDistributions1"
-        Me.UcrDistributions1.Size = New System.Drawing.Size(188, 43)
-        Me.UcrDistributions1.TabIndex = 7
+        Me.ucrDistributionForTablesPlus.Location = New System.Drawing.Point(243, 74)
+        Me.ucrDistributionForTablesPlus.Name = "ucrDistributionForTablesPlus"
+        Me.ucrDistributionForTablesPlus.Size = New System.Drawing.Size(188, 43)
+        Me.ucrDistributionForTablesPlus.TabIndex = 7
         '
         'ucrInputNewColNameforTablePlus
         '
@@ -153,7 +153,7 @@ Partial Class dlgTablePlus
         Me.Controls.Add(Me.ucrInputProbabilities)
         Me.Controls.Add(Me.lblProbValues)
         Me.Controls.Add(Me.lblQuantValues)
-        Me.Controls.Add(Me.UcrDistributions1)
+        Me.Controls.Add(Me.ucrDistributionForTablesPlus)
         Me.Controls.Add(Me.ucrInputNewColNameforTablePlus)
         Me.Controls.Add(Me.chkSaveResults)
         Me.Controls.Add(Me.chkGraphResults)
@@ -181,7 +181,7 @@ Partial Class dlgTablePlus
     Friend WithEvents chkGraphResults As CheckBox
     Friend WithEvents chkSaveResults As CheckBox
     Friend WithEvents ucrInputNewColNameforTablePlus As ucrInputComboBox
-    Friend WithEvents UcrDistributions1 As ucrDistributions
+    Friend WithEvents ucrDistributionForTablesPlus As ucrDistributions
     Friend WithEvents lblQuantValues As Label
     Friend WithEvents lblProbValues As Label
     Friend WithEvents ucrInputProbabilities As ucrInputTextBox
