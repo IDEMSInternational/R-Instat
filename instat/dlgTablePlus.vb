@@ -50,7 +50,6 @@ Public Class dlgTablePlus
         chkGraphResults.Checked = True
         ReceiverLabels()
         SaveResults()
-        ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.SetName("0.5")
     End Sub
 
@@ -73,10 +72,14 @@ Public Class dlgTablePlus
         If chkSaveResults.Checked Then
             ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
             ucrReceiverExpressionForTablePlus.SetMeAsReceiver()
-            ucrInputNewColNameforTablePlus.Visible = True
-            ucrInputProbabilities.SetName("")
-        Else
             ucrInputNewColNameforTablePlus.Visible = False
+            ucrReceiverExpressionForTablePlus.Visible = True
+            ucrInputProbabilities.SetName("")
+            ucrSelectorForDataFrame.Reset()
+        Else
+            ucrInputNewColNameforTablePlus.Visible = True
+            ucrReceiverExpressionForTablePlus.Visible = False
+            ucrSelectorForDataFrame.Reset()
             ucrInputProbabilities.SetName("0.5")
         End If
     End Sub
@@ -101,5 +104,4 @@ Public Class dlgTablePlus
             ucrInputNewColNameforTablePlus.SetName("Quant")
         End If
     End Sub
-
 End Class

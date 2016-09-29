@@ -362,6 +362,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TablesPlusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -662,7 +663,7 @@ Partial Class frmMain
         '
         'mnuModelProbabilityDistributions
         '
-        Me.mnuModelProbabilityDistributions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributionsShowModels, Me.mnuModelProbabilityDistributionsRandomSamplesUseModel})
+        Me.mnuModelProbabilityDistributions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributionsShowModels, Me.mnuModelProbabilityDistributionsRandomSamplesUseModel, Me.TablesPlusToolStripMenuItem})
         Me.mnuModelProbabilityDistributions.Name = "mnuModelProbabilityDistributions"
         Me.mnuModelProbabilityDistributions.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelProbabilityDistributions.Tag = "Probability_Distributions"
@@ -2834,6 +2835,12 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
+        'TablesPlusToolStripMenuItem
+        '
+        Me.TablesPlusToolStripMenuItem.Name = "TablesPlusToolStripMenuItem"
+        Me.TablesPlusToolStripMenuItem.Size = New System.Drawing.Size(242, 22)
+        Me.TablesPlusToolStripMenuItem.Text = "Tables Plus"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3197,4 +3204,5 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnDateUseDateMakeTime As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnDateUseDateUseTime As ToolStripMenuItem
     Friend WithEvents mnuFileConvert As ToolStripMenuItem
+    Friend WithEvents TablesPlusToolStripMenuItem As ToolStripMenuItem
 End Class
