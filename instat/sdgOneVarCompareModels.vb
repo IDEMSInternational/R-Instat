@@ -21,6 +21,7 @@ Public Class sdgOneVarCompareModels
     Private clsRqqcompFunction As New RFunction
     Private clsRppcompFunction As New RFunction
     Private clsModel As New RFunction
+    Private clsRModel As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub sdgOneVarCompareModels(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -52,22 +53,11 @@ Public Class sdgOneVarCompareModels
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
-        clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+        ' this does not plot the model, just adds the function
         clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
         clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
         clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-    End Sub
-
-    Public Sub CreateGraphs()
-        If chkPP.Checked Then
-            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
-        ElseIf chkCDF.Checked Then
-            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
-        ElseIf chkQQ.Checked Then
-            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
-        ElseIf chkDensity.Checked Then
-            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
-        End If
     End Sub
 
     Private Sub SaveObject()
@@ -90,6 +80,21 @@ Public Class sdgOneVarCompareModels
 
     End Sub
 
+    Private Sub chkCDF_CheckedChanged(sender As Object, e As EventArgs) Handles chkCDF.CheckedChanged
+        If chkCDF.Checked Then
+            'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            clsRcdfcompFunction.SetRCommand("list")
+            clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        End If
+    End Sub
+
+
+    Public Sub CreateGraphs()
+        If chkCDF.Checked Then
+            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+        End If
+    End Sub
 
 
 
