@@ -402,7 +402,7 @@ Public Class frmEditor
         End If
 
         If bValid Then
-            frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
+            frmMain.clsRLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value in Data")
         End If
     End Sub
 
