@@ -27,41 +27,41 @@ Partial Class dlgMakeDate
         Me.rdoYearandDayofYear = New System.Windows.Forms.RadioButton()
         Me.rdoYearMonthDay = New System.Windows.Forms.RadioButton()
         Me.grpTwoColumns = New System.Windows.Forms.GroupBox()
+        Me.ucrInputComboBoxYearTwo = New instat.ucrInputComboBox()
+        Me.ucrInputComboBoxMonthTwo = New instat.ucrInputComboBox()
+        Me.UcrReceiverSingle4 = New instat.ucrReceiverSingle()
         Me.lblYearTwo = New System.Windows.Forms.Label()
+        Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
         Me.lblDayofYear = New System.Windows.Forms.Label()
+        Me.ucrReceiverDayTwo = New instat.ucrReceiverSingle()
         Me.grpThreeColumns = New System.Windows.Forms.GroupBox()
+        Me.ucrInputComboBoxTearThree = New instat.ucrInputComboBox()
         Me.lblDayofMonth = New System.Windows.Forms.Label()
         Me.lblMonthThree = New System.Windows.Forms.Label()
         Me.lblYearThree = New System.Windows.Forms.Label()
+        Me.UcrReceiverSingle2 = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYearThree = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDayThree = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
+        Me.ucrInputOrigin = New instat.ucrInputComboBox()
         Me.grpFormatField = New System.Windows.Forms.GroupBox()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblSeparator = New System.Windows.Forms.Label()
-        Me.cmdMore = New System.Windows.Forms.Button()
-        Me.rdoSpecifyFormat = New System.Windows.Forms.RadioButton()
-        Me.rdoSpecifyOrigin = New System.Windows.Forms.RadioButton()
-        Me.rdoDefaultFormat = New System.Windows.Forms.RadioButton()
-        Me.ucrInputOrigin = New instat.ucrInputComboBox()
         Me.ucrInputMonth = New instat.ucrInputComboBox()
         Me.ucrInputDay = New instat.ucrInputComboBox()
         Me.ucrInputYear = New instat.ucrInputComboBox()
         Me.ucrInputSeparator = New instat.ucrInputComboBox()
+        Me.rdoSpecifyFormat = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecifyOrigin = New System.Windows.Forms.RadioButton()
+        Me.rdoDefaultFormat = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverForDate = New instat.ucrReceiverSingle()
-        Me.ucrInputComboBoxTearThree = New instat.ucrInputComboBox()
-        Me.UcrReceiverSingle2 = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYearThree = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDayThree = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
-        Me.ucrinputComboBoxYearTwo = New instat.ucrInputComboBox()
-        Me.ucrinputComboBoxMonthTwo = New instat.ucrInputComboBox()
-        Me.UcrReceiverSingle4 = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDayTwo = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNewColumnName = New instat.ucrInputComboBox()
         Me.ucrSeclectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.chkMore = New System.Windows.Forms.CheckBox()
         Me.grpTwoColumns.SuspendLayout()
         Me.grpThreeColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
@@ -112,8 +112,8 @@ Partial Class dlgMakeDate
         '
         'grpTwoColumns
         '
-        Me.grpTwoColumns.Controls.Add(Me.ucrinputComboBoxYearTwo)
-        Me.grpTwoColumns.Controls.Add(Me.ucrinputComboBoxMonthTwo)
+        Me.grpTwoColumns.Controls.Add(Me.ucrInputComboBoxYearTwo)
+        Me.grpTwoColumns.Controls.Add(Me.ucrInputComboBoxMonthTwo)
         Me.grpTwoColumns.Controls.Add(Me.UcrReceiverSingle4)
         Me.grpTwoColumns.Controls.Add(Me.lblYearTwo)
         Me.grpTwoColumns.Controls.Add(Me.ucrReceiverYearTwo)
@@ -126,6 +126,31 @@ Partial Class dlgMakeDate
         Me.grpTwoColumns.TabStop = False
         Me.grpTwoColumns.Text = "Two Columns"
         '
+        'ucrInputComboBoxYearTwo
+        '
+        Me.ucrInputComboBoxYearTwo.IsReadOnly = False
+        Me.ucrInputComboBoxYearTwo.Location = New System.Drawing.Point(111, 28)
+        Me.ucrInputComboBoxYearTwo.Name = "ucrInputComboBoxYearTwo"
+        Me.ucrInputComboBoxYearTwo.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputComboBoxYearTwo.TabIndex = 10
+        '
+        'ucrInputComboBoxMonthTwo
+        '
+        Me.ucrInputComboBoxMonthTwo.IsReadOnly = False
+        Me.ucrInputComboBoxMonthTwo.Location = New System.Drawing.Point(111, 73)
+        Me.ucrInputComboBoxMonthTwo.Name = "ucrInputComboBoxMonthTwo"
+        Me.ucrInputComboBoxMonthTwo.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputComboBoxMonthTwo.TabIndex = 10
+        '
+        'UcrReceiverSingle4
+        '
+        Me.UcrReceiverSingle4.Location = New System.Drawing.Point(0, -40)
+        Me.UcrReceiverSingle4.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrReceiverSingle4.Name = "UcrReceiverSingle4"
+        Me.UcrReceiverSingle4.Selector = Nothing
+        Me.UcrReceiverSingle4.Size = New System.Drawing.Size(120, 20)
+        Me.UcrReceiverSingle4.TabIndex = 7
+        '
         'lblYearTwo
         '
         Me.lblYearTwo.AutoSize = True
@@ -135,6 +160,15 @@ Partial Class dlgMakeDate
         Me.lblYearTwo.TabIndex = 8
         Me.lblYearTwo.Text = "Year"
         '
+        'ucrReceiverYearTwo
+        '
+        Me.ucrReceiverYearTwo.Location = New System.Drawing.Point(3, 29)
+        Me.ucrReceiverYearTwo.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYearTwo.Name = "ucrReceiverYearTwo"
+        Me.ucrReceiverYearTwo.Selector = Nothing
+        Me.ucrReceiverYearTwo.Size = New System.Drawing.Size(95, 20)
+        Me.ucrReceiverYearTwo.TabIndex = 7
+        '
         'lblDayofYear
         '
         Me.lblDayofYear.AutoSize = True
@@ -143,6 +177,15 @@ Partial Class dlgMakeDate
         Me.lblDayofYear.Size = New System.Drawing.Size(63, 13)
         Me.lblDayofYear.TabIndex = 8
         Me.lblDayofYear.Text = "Day of Year"
+        '
+        'ucrReceiverDayTwo
+        '
+        Me.ucrReceiverDayTwo.Location = New System.Drawing.Point(3, 73)
+        Me.ucrReceiverDayTwo.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDayTwo.Name = "ucrReceiverDayTwo"
+        Me.ucrReceiverDayTwo.Selector = Nothing
+        Me.ucrReceiverDayTwo.Size = New System.Drawing.Size(95, 20)
+        Me.ucrReceiverDayTwo.TabIndex = 7
         '
         'grpThreeColumns
         '
@@ -154,17 +197,25 @@ Partial Class dlgMakeDate
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverYearThree)
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverDayThree)
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverMonthThree)
-        Me.grpThreeColumns.Location = New System.Drawing.Point(250, 33)
+        Me.grpThreeColumns.Location = New System.Drawing.Point(253, 35)
         Me.grpThreeColumns.Name = "grpThreeColumns"
-        Me.grpThreeColumns.Size = New System.Drawing.Size(228, 184)
+        Me.grpThreeColumns.Size = New System.Drawing.Size(228, 144)
         Me.grpThreeColumns.TabIndex = 9
         Me.grpThreeColumns.TabStop = False
         Me.grpThreeColumns.Text = "Three Columns"
         '
+        'ucrInputComboBoxTearThree
+        '
+        Me.ucrInputComboBoxTearThree.IsReadOnly = False
+        Me.ucrInputComboBoxTearThree.Location = New System.Drawing.Point(115, 29)
+        Me.ucrInputComboBoxTearThree.Name = "ucrInputComboBoxTearThree"
+        Me.ucrInputComboBoxTearThree.Size = New System.Drawing.Size(107, 21)
+        Me.ucrInputComboBoxTearThree.TabIndex = 10
+        '
         'lblDayofMonth
         '
         Me.lblDayofMonth.AutoSize = True
-        Me.lblDayofMonth.Location = New System.Drawing.Point(7, 148)
+        Me.lblDayofMonth.Location = New System.Drawing.Point(7, 99)
         Me.lblDayofMonth.Name = "lblDayofMonth"
         Me.lblDayofMonth.Size = New System.Drawing.Size(71, 13)
         Me.lblDayofMonth.TabIndex = 8
@@ -188,11 +239,47 @@ Partial Class dlgMakeDate
         Me.lblYearThree.TabIndex = 8
         Me.lblYearThree.Text = "Year"
         '
+        'UcrReceiverSingle2
+        '
+        Me.UcrReceiverSingle2.Location = New System.Drawing.Point(0, -40)
+        Me.UcrReceiverSingle2.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrReceiverSingle2.Name = "UcrReceiverSingle2"
+        Me.UcrReceiverSingle2.Selector = Nothing
+        Me.UcrReceiverSingle2.Size = New System.Drawing.Size(120, 20)
+        Me.UcrReceiverSingle2.TabIndex = 7
+        '
+        'ucrReceiverYearThree
+        '
+        Me.ucrReceiverYearThree.Location = New System.Drawing.Point(2, 30)
+        Me.ucrReceiverYearThree.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYearThree.Name = "ucrReceiverYearThree"
+        Me.ucrReceiverYearThree.Selector = Nothing
+        Me.ucrReceiverYearThree.Size = New System.Drawing.Size(96, 20)
+        Me.ucrReceiverYearThree.TabIndex = 7
+        '
+        'ucrReceiverDayThree
+        '
+        Me.ucrReceiverDayThree.Location = New System.Drawing.Point(2, 112)
+        Me.ucrReceiverDayThree.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDayThree.Name = "ucrReceiverDayThree"
+        Me.ucrReceiverDayThree.Selector = Nothing
+        Me.ucrReceiverDayThree.Size = New System.Drawing.Size(95, 20)
+        Me.ucrReceiverDayThree.TabIndex = 7
+        '
+        'ucrReceiverMonthThree
+        '
+        Me.ucrReceiverMonthThree.Location = New System.Drawing.Point(2, 71)
+        Me.ucrReceiverMonthThree.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMonthThree.Name = "ucrReceiverMonthThree"
+        Me.ucrReceiverMonthThree.Selector = Nothing
+        Me.ucrReceiverMonthThree.Size = New System.Drawing.Size(96, 20)
+        Me.ucrReceiverMonthThree.TabIndex = 7
+        '
         'grpSingleColumn
         '
+        Me.grpSingleColumn.Controls.Add(Me.chkMore)
         Me.grpSingleColumn.Controls.Add(Me.ucrInputOrigin)
         Me.grpSingleColumn.Controls.Add(Me.grpFormatField)
-        Me.grpSingleColumn.Controls.Add(Me.cmdMore)
         Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyFormat)
         Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyOrigin)
         Me.grpSingleColumn.Controls.Add(Me.rdoDefaultFormat)
@@ -203,6 +290,14 @@ Partial Class dlgMakeDate
         Me.grpSingleColumn.TabIndex = 10
         Me.grpSingleColumn.TabStop = False
         Me.grpSingleColumn.Text = "Single Column"
+        '
+        'ucrInputOrigin
+        '
+        Me.ucrInputOrigin.IsReadOnly = False
+        Me.ucrInputOrigin.Location = New System.Drawing.Point(94, 63)
+        Me.ucrInputOrigin.Name = "ucrInputOrigin"
+        Me.ucrInputOrigin.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputOrigin.TabIndex = 11
         '
         'grpFormatField
         '
@@ -257,14 +352,37 @@ Partial Class dlgMakeDate
         Me.lblSeparator.TabIndex = 2
         Me.lblSeparator.Text = "Separator"
         '
-        'cmdMore
+        'ucrInputMonth
         '
-        Me.cmdMore.Location = New System.Drawing.Point(159, 17)
-        Me.cmdMore.Name = "cmdMore"
-        Me.cmdMore.Size = New System.Drawing.Size(41, 31)
-        Me.cmdMore.TabIndex = 9
-        Me.cmdMore.Text = "More"
-        Me.cmdMore.UseVisualStyleBackColor = True
+        Me.ucrInputMonth.IsReadOnly = False
+        Me.ucrInputMonth.Location = New System.Drawing.Point(69, 71)
+        Me.ucrInputMonth.Name = "ucrInputMonth"
+        Me.ucrInputMonth.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputMonth.TabIndex = 1
+        '
+        'ucrInputDay
+        '
+        Me.ucrInputDay.IsReadOnly = False
+        Me.ucrInputDay.Location = New System.Drawing.Point(69, 98)
+        Me.ucrInputDay.Name = "ucrInputDay"
+        Me.ucrInputDay.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDay.TabIndex = 0
+        '
+        'ucrInputYear
+        '
+        Me.ucrInputYear.IsReadOnly = False
+        Me.ucrInputYear.Location = New System.Drawing.Point(69, 44)
+        Me.ucrInputYear.Name = "ucrInputYear"
+        Me.ucrInputYear.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputYear.TabIndex = 0
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.IsReadOnly = False
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(69, 19)
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSeparator.TabIndex = 0
         '
         'rdoSpecifyFormat
         '
@@ -299,46 +417,6 @@ Partial Class dlgMakeDate
         Me.rdoDefaultFormat.Text = "Default Format"
         Me.rdoDefaultFormat.UseVisualStyleBackColor = True
         '
-        'ucrInputOrigin
-        '
-        Me.ucrInputOrigin.IsReadOnly = False
-        Me.ucrInputOrigin.Location = New System.Drawing.Point(94, 63)
-        Me.ucrInputOrigin.Name = "ucrInputOrigin"
-        Me.ucrInputOrigin.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputOrigin.TabIndex = 11
-        '
-        'ucrInputMonth
-        '
-        Me.ucrInputMonth.IsReadOnly = False
-        Me.ucrInputMonth.Location = New System.Drawing.Point(69, 71)
-        Me.ucrInputMonth.Name = "ucrInputMonth"
-        Me.ucrInputMonth.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputMonth.TabIndex = 1
-        '
-        'ucrInputDay
-        '
-        Me.ucrInputDay.IsReadOnly = False
-        Me.ucrInputDay.Location = New System.Drawing.Point(69, 98)
-        Me.ucrInputDay.Name = "ucrInputDay"
-        Me.ucrInputDay.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDay.TabIndex = 0
-        '
-        'ucrInputYear
-        '
-        Me.ucrInputYear.IsReadOnly = False
-        Me.ucrInputYear.Location = New System.Drawing.Point(69, 44)
-        Me.ucrInputYear.Name = "ucrInputYear"
-        Me.ucrInputYear.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputYear.TabIndex = 0
-        '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.IsReadOnly = False
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(69, 19)
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSeparator.TabIndex = 0
-        '
         'ucrReceiverForDate
         '
         Me.ucrReceiverForDate.Location = New System.Drawing.Point(12, 17)
@@ -347,93 +425,6 @@ Partial Class dlgMakeDate
         Me.ucrReceiverForDate.Selector = Nothing
         Me.ucrReceiverForDate.Size = New System.Drawing.Size(129, 20)
         Me.ucrReceiverForDate.TabIndex = 7
-        '
-        'ucrInputComboBoxTearThree
-        '
-        Me.ucrInputComboBoxTearThree.IsReadOnly = False
-        Me.ucrInputComboBoxTearThree.Location = New System.Drawing.Point(123, 29)
-        Me.ucrInputComboBoxTearThree.Name = "ucrInputComboBoxTearThree"
-        Me.ucrInputComboBoxTearThree.Size = New System.Drawing.Size(88, 21)
-        Me.ucrInputComboBoxTearThree.TabIndex = 10
-        '
-        'UcrReceiverSingle2
-        '
-        Me.UcrReceiverSingle2.Location = New System.Drawing.Point(0, -40)
-        Me.UcrReceiverSingle2.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle2.Name = "UcrReceiverSingle2"
-        Me.UcrReceiverSingle2.Selector = Nothing
-        Me.UcrReceiverSingle2.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle2.TabIndex = 7
-        '
-        'ucrReceiverYearThree
-        '
-        Me.ucrReceiverYearThree.Location = New System.Drawing.Point(2, 30)
-        Me.ucrReceiverYearThree.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYearThree.Name = "ucrReceiverYearThree"
-        Me.ucrReceiverYearThree.Selector = Nothing
-        Me.ucrReceiverYearThree.Size = New System.Drawing.Size(96, 20)
-        Me.ucrReceiverYearThree.TabIndex = 7
-        '
-        'ucrReceiverDayThree
-        '
-        Me.ucrReceiverDayThree.Location = New System.Drawing.Point(2, 161)
-        Me.ucrReceiverDayThree.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDayThree.Name = "ucrReceiverDayThree"
-        Me.ucrReceiverDayThree.Selector = Nothing
-        Me.ucrReceiverDayThree.Size = New System.Drawing.Size(95, 20)
-        Me.ucrReceiverDayThree.TabIndex = 7
-        '
-        'ucrReceiverMonthThree
-        '
-        Me.ucrReceiverMonthThree.Location = New System.Drawing.Point(2, 71)
-        Me.ucrReceiverMonthThree.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMonthThree.Name = "ucrReceiverMonthThree"
-        Me.ucrReceiverMonthThree.Selector = Nothing
-        Me.ucrReceiverMonthThree.Size = New System.Drawing.Size(96, 20)
-        Me.ucrReceiverMonthThree.TabIndex = 7
-        '
-        'ucrinputComboBoxYearTwo
-        '
-        Me.ucrinputComboBoxYearTwo.IsReadOnly = False
-        Me.ucrinputComboBoxYearTwo.Location = New System.Drawing.Point(123, 28)
-        Me.ucrinputComboBoxYearTwo.Name = "ucrinputComboBoxYearTwo"
-        Me.ucrinputComboBoxYearTwo.Size = New System.Drawing.Size(88, 21)
-        Me.ucrinputComboBoxYearTwo.TabIndex = 10
-        '
-        'ucrinputComboBoxMonthTwo
-        '
-        Me.ucrinputComboBoxMonthTwo.IsReadOnly = False
-        Me.ucrinputComboBoxMonthTwo.Location = New System.Drawing.Point(123, 73)
-        Me.ucrinputComboBoxMonthTwo.Name = "ucrinputComboBoxMonthTwo"
-        Me.ucrinputComboBoxMonthTwo.Size = New System.Drawing.Size(88, 21)
-        Me.ucrinputComboBoxMonthTwo.TabIndex = 10
-        '
-        'UcrReceiverSingle4
-        '
-        Me.UcrReceiverSingle4.Location = New System.Drawing.Point(0, -40)
-        Me.UcrReceiverSingle4.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle4.Name = "UcrReceiverSingle4"
-        Me.UcrReceiverSingle4.Selector = Nothing
-        Me.UcrReceiverSingle4.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle4.TabIndex = 7
-        '
-        'ucrReceiverYearTwo
-        '
-        Me.ucrReceiverYearTwo.Location = New System.Drawing.Point(3, 29)
-        Me.ucrReceiverYearTwo.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYearTwo.Name = "ucrReceiverYearTwo"
-        Me.ucrReceiverYearTwo.Selector = Nothing
-        Me.ucrReceiverYearTwo.Size = New System.Drawing.Size(95, 20)
-        Me.ucrReceiverYearTwo.TabIndex = 7
-        '
-        'ucrReceiverDayTwo
-        '
-        Me.ucrReceiverDayTwo.Location = New System.Drawing.Point(3, 73)
-        Me.ucrReceiverDayTwo.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDayTwo.Name = "ucrReceiverDayTwo"
-        Me.ucrReceiverDayTwo.Selector = Nothing
-        Me.ucrReceiverDayTwo.Size = New System.Drawing.Size(95, 20)
-        Me.ucrReceiverDayTwo.TabIndex = 7
         '
         'ucrBase
         '
@@ -459,6 +450,16 @@ Partial Class dlgMakeDate
         Me.ucrSeclectorMakeDate.Name = "ucrSeclectorMakeDate"
         Me.ucrSeclectorMakeDate.Size = New System.Drawing.Size(210, 180)
         Me.ucrSeclectorMakeDate.TabIndex = 0
+        '
+        'chkMore
+        '
+        Me.chkMore.AutoSize = True
+        Me.chkMore.Location = New System.Drawing.Point(159, 19)
+        Me.chkMore.Name = "chkMore"
+        Me.chkMore.Size = New System.Drawing.Size(50, 17)
+        Me.chkMore.TabIndex = 12
+        Me.chkMore.Text = "More"
+        Me.chkMore.UseVisualStyleBackColor = True
         '
         'dlgMakeDate
         '
@@ -516,14 +517,13 @@ Partial Class dlgMakeDate
     Friend WithEvents lblYearThree As Label
     Friend WithEvents lblYearTwo As Label
     Friend WithEvents ucrReceiverYearTwo As ucrReceiverSingle
-    Friend WithEvents ucrinputComboBoxYearTwo As ucrInputComboBox
-    Friend WithEvents ucrinputComboBoxMonthTwo As ucrInputComboBox
+    Friend WithEvents ucrInputComboBoxYearTwo As ucrInputComboBox
+    Friend WithEvents ucrInputComboBoxMonthTwo As ucrInputComboBox
     Friend WithEvents ucrInputComboBoxTearThree As ucrInputComboBox
     Friend WithEvents grpSingleColumn As GroupBox
     Friend WithEvents rdoSpecifyFormat As RadioButton
     Friend WithEvents rdoSpecifyOrigin As RadioButton
     Friend WithEvents rdoDefaultFormat As RadioButton
-    Friend WithEvents cmdMore As Button
     Friend WithEvents grpFormatField As GroupBox
     Friend WithEvents lblDay As Label
     Friend WithEvents lblMonth As Label
@@ -534,4 +534,5 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrInputYear As ucrInputComboBox
     Friend WithEvents ucrInputSeparator As ucrInputComboBox
     Friend WithEvents ucrInputOrigin As ucrInputComboBox
+    Friend WithEvents chkMore As CheckBox
 End Class
