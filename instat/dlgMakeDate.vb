@@ -40,9 +40,10 @@ Public Class dlgMakeDate
         ucrInputYear.SetItems({"%Y (4 digits)", "%y (2 digits)"})
         ucrInputMonth.SetItems({"%m (1-12)", "%b (e.g. Jan)", "%B (e.g. January)"})
         ucrInputDay.SetItems({"%d (1-31)", "%j (1-366)"})
-        ucrinputComboBoxMonthTwo.SetItems({"365/366", "366"})
-        ucrinputComboBoxYearTwo.SetItems({"4 digits", "2 digits"})
+        ucrInputComboBoxMonthTwo.SetItems({"365/366", "366"})
+        ucrInputComboBoxYearTwo.SetItems({"4 digits", "2 digits"})
         ucrInputComboBoxTearThree.SetItems({"4 digits", "2 digits"})
+        ucrInputOrigin.SetItems({"30-12-1899 (Excel)", "01-03-1600 (Gregorian)"})
 
     End Sub
     Private Sub SetDefaults()
@@ -52,6 +53,12 @@ Public Class dlgMakeDate
         ucrInputYear.SetName("%Y (4 digits)")
         ucrInputMonth.SetName("%m (1-12)")
         ucrInputDay.SetName("%d (1-31)")
+        ucrInputComboBoxTearThree.SetName("4 digits (eg 1920)")
+        ucrInputComboBoxMonthTwo.SetName("365/366")
+        ucrInputComboBoxYearTwo.SetName("4 digits (eg 1920)")
+        ucrInputOrigin.SetName("30-12-1899 (Excel)")
+        grpFormatField.Visible = False
+        ucrInputOrigin.Visible = False
         TestOKEnabled()
         rdoSingleColumn.Checked = True
         ShowGroups()
@@ -114,7 +121,29 @@ Public Class dlgMakeDate
             grpSingleColumn.Visible = False
         End If
     End Sub
+    Private Sub ShowOrigin()
+        If rdoSpecifyOrigin.Checked Then
+            ucrInputOrigin.Visible = True
+        Else
+            ucrInputOrigin.Visible = False
+        End If
+    End Sub
 
+    Private Sub showFormat()
+        If chkMore.Checked Then
+            grpFormatField.Visible = True
+        Else
+            grpFormatField.Visible = False
+        End If
+    End Sub
+
+    Private Sub rdoSpecifyOrigin_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSpecifyOrigin.CheckedChanged
+        ShowOrigin()
+    End Sub
+
+    Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged
+        showFormat()
+    End Sub
 End Class
 
 
