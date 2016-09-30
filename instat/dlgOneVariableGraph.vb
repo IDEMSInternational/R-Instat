@@ -73,7 +73,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub ReopenDialog()
-
+        CheckDataType()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -117,6 +117,7 @@ Public Class dlgOneVariableGraph
 
     Private Sub ucrReceiverOneVarGraph_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOneVarGraph.SelectionChanged
         OneOrMoreVariables()
+        CheckDataType()
         TestOkEnabled()
     End Sub
 
@@ -137,11 +138,33 @@ Public Class dlgOneVariableGraph
         sdgOneVarGraph.ShowDialog()
     End Sub
 
-    Private Sub rdoFacets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFacets.CheckedChanged
+    Private Sub rdoFacets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFacets.CheckedChanged, rdoCombineGraph.CheckedChanged, rdoSingleGraphs.CheckedChanged
+        SetOutputparameter()
+    End Sub
+
+    Private Sub SetOutputparameter()
         If rdoFacets.Checked Then
-            clsBaseFunctionMultipleVariables.AddParameter("facets", "TRUE")
+            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        ElseIf rdoCombineGraph.Checked Then
+            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "combine" & Chr(34))
+        ElseIf rdoSingleGraphs.Checked Then
+            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "single" & Chr(34))
         Else
-            clsBaseFunctionMultipleVariables.RemoveParameterByName("facets")
+            clsBaseFunctionMultipleVariables.RemoveParameterByName("output") 'this might never run because atleast one must be checked at a time
+        End If
+    End Sub
+
+    Private Sub CheckDataType()
+        If ucrReceiverOneVarGraph.GetCurrentItemTypes(True).Count > 1 Then
+            rdoFacets.Enabled = False
+            rdoFacets.Checked = False
+            rdoCombineGraph.Checked = True
+            rdoCombineGraph.Enabled = True
+        Else
+            rdoFacets.Enabled = True
+            rdoFacets.Checked = True
+            rdoCombineGraph.Checked = False
+            rdoCombineGraph.Enabled = False
         End If
     End Sub
 End Class

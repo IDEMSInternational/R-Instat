@@ -109,4 +109,12 @@ Public Class sdgOneVarGraph
     Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
         SetCategoricalGeomFunction()
     End Sub
+
+    Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScaleAxisforFacets.CheckedChanged
+        If chkFreeScaleAxisforFacets.Checked Then
+            clsRsyntax.AddParameter("free_scale_axis", "TRUE")
+        Else
+            clsRsyntax.AddParameter("free_scale_axis")
+        End If
+    End Sub
 End Class
