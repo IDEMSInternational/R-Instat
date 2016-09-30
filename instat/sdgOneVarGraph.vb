@@ -17,6 +17,10 @@ Imports instat.Translations
 Public Class sdgOneVarGraph
     Public bFirstLoad As Boolean = True
     Public clsRsyntax As New RSyntax
+    Public strNumericGeomFunction As String
+    Public strCategoriacalGeomFunction As String
+    Public strCategoricalGeomFunction As String
+
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -33,21 +37,27 @@ Public Class sdgOneVarGraph
         chkFreeScaleAxisforFacets.Checked = False
         nudNumberofColumns.Value = 3
         ucrInputNumeric.Reset()
-        ucrInputOther.Reset()
+        ucrInputCategorical.Reset()
+        ucrInputNumeric.SetName("Boxplot")
+        ucrInputCategorical.SetName("Bar Chart")
+        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
+        ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
     End Sub
 
     Public Sub InitialiseDialog()
-        ucrInputNumeric.SetName("Boxplot")
-        ucrInputOther.SetName("Bar")
-        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
-        ucrInputOther.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
-
         nudNumberofColumns.Maximum = 10
         nudNumberofColumns.Minimum = 1
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
         clsRsyntax = clsNewRSyntax
+    End Sub
+
+    Public Sub SetNumericGeomFunction(strNumeric As String)
+        strNumericGeomFunction = strNumeric
+    End Sub
+    Public Sub SetCategoricalGeomFunction(strCategorical As String)
+        strCategoriacalGeomFunction = strCategorical
     End Sub
     Private Sub chkSpecifyLayout_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpecifyLayout.CheckedChanged
         SpecifyLayoutControl()
@@ -61,5 +71,42 @@ Public Class sdgOneVarGraph
             lblNumberofColumns.Visible = False
             nudNumberofColumns.Visible = False
         End If
+    End Sub
+
+    Public Sub SetNumericGeomFunction()
+        If ucrInputNumeric.cboInput.SelectedText = "Boxplot" Then
+            strNumericGeomFunction = "geom_boxplot"
+
+        ElseIf ucrInputNumeric.cboInput.SelectedText = "Histogram" Then
+            strNumericGeomFunction = "geom_histogram"
+
+        ElseIf ucrInputNumeric.cboInput.SelectedText = "Dot Plot" Then
+            strNumericGeomFunction = "geom_dotplot"
+
+        ElseIf ucrInputNumeric.cboInput.SelectedText = "Point Plot" Then
+            strNumericGeomFunction = "geom_point"
+
+        ElseIf ucrInputNumeric.cboInput.SelectedText = "Density Plot" Then
+            strNumericGeomFunction = "geom_density"
+        Else
+            strNumericGeomFunction = "geom_freqpoly"
+        End If
+    End Sub
+
+    Private Sub ucrInputNumeric_NameChanged() Handles ucrInputNumeric.NameChanged
+        SetNumericGeomFunction()
+    End Sub
+
+    Public Sub SetCategoricalGeomFunction()
+        If ucrInputCategorical.cboInput.SelectedText = "bar chart" Then
+            strCategoriacalGeomFunction = "geom_bar"
+        ElseIf ucrInputCategorical.cboInput.SelectedText = "pie chart" Then
+            strCategoriacalGeomFunction = "geom_histogram"
+        Else
+            strCategoriacalGeomFunction = "geom_dotplot"
+        End If
+    End Sub
+    Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
+        SetCategoricalGeomFunction()
     End Sub
 End Class
