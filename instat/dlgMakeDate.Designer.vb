@@ -44,6 +44,8 @@ Partial Class dlgMakeDate
         Me.ucrReceiverDayThree = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
+        Me.ucrInputSpecifyDates = New instat.ucrInputComboBox()
+        Me.chkMore = New System.Windows.Forms.CheckBox()
         Me.ucrInputOrigin = New instat.ucrInputComboBox()
         Me.grpFormatField = New System.Windows.Forms.GroupBox()
         Me.lblDay = New System.Windows.Forms.Label()
@@ -61,7 +63,6 @@ Partial Class dlgMakeDate
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNewColumnName = New instat.ucrInputComboBox()
         Me.ucrSeclectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.chkMore = New System.Windows.Forms.CheckBox()
         Me.grpTwoColumns.SuspendLayout()
         Me.grpThreeColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
@@ -71,7 +72,7 @@ Partial Class dlgMakeDate
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 282)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 292)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 4
@@ -277,6 +278,7 @@ Partial Class dlgMakeDate
         '
         'grpSingleColumn
         '
+        Me.grpSingleColumn.Controls.Add(Me.ucrInputSpecifyDates)
         Me.grpSingleColumn.Controls.Add(Me.chkMore)
         Me.grpSingleColumn.Controls.Add(Me.ucrInputOrigin)
         Me.grpSingleColumn.Controls.Add(Me.grpFormatField)
@@ -284,12 +286,30 @@ Partial Class dlgMakeDate
         Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyOrigin)
         Me.grpSingleColumn.Controls.Add(Me.rdoDefaultFormat)
         Me.grpSingleColumn.Controls.Add(Me.ucrReceiverForDate)
-        Me.grpSingleColumn.Location = New System.Drawing.Point(250, 35)
+        Me.grpSingleColumn.Location = New System.Drawing.Point(250, 37)
         Me.grpSingleColumn.Name = "grpSingleColumn"
-        Me.grpSingleColumn.Size = New System.Drawing.Size(231, 236)
+        Me.grpSingleColumn.Size = New System.Drawing.Size(231, 244)
         Me.grpSingleColumn.TabIndex = 10
         Me.grpSingleColumn.TabStop = False
         Me.grpSingleColumn.Text = "Single Column"
+        '
+        'ucrInputSpecifyDates
+        '
+        Me.ucrInputSpecifyDates.IsReadOnly = False
+        Me.ucrInputSpecifyDates.Location = New System.Drawing.Point(94, 90)
+        Me.ucrInputSpecifyDates.Name = "ucrInputSpecifyDates"
+        Me.ucrInputSpecifyDates.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSpecifyDates.TabIndex = 13
+        '
+        'chkMore
+        '
+        Me.chkMore.AutoSize = True
+        Me.chkMore.Location = New System.Drawing.Point(159, 19)
+        Me.chkMore.Name = "chkMore"
+        Me.chkMore.Size = New System.Drawing.Size(50, 17)
+        Me.chkMore.TabIndex = 12
+        Me.chkMore.Text = "More"
+        Me.chkMore.UseVisualStyleBackColor = True
         '
         'ucrInputOrigin
         '
@@ -309,7 +329,7 @@ Partial Class dlgMakeDate
         Me.grpFormatField.Controls.Add(Me.ucrInputDay)
         Me.grpFormatField.Controls.Add(Me.ucrInputYear)
         Me.grpFormatField.Controls.Add(Me.ucrInputSeparator)
-        Me.grpFormatField.Location = New System.Drawing.Point(5, 106)
+        Me.grpFormatField.Location = New System.Drawing.Point(6, 114)
         Me.grpFormatField.Name = "grpFormatField"
         Me.grpFormatField.Size = New System.Drawing.Size(219, 120)
         Me.grpFormatField.TabIndex = 10
@@ -387,7 +407,7 @@ Partial Class dlgMakeDate
         'rdoSpecifyFormat
         '
         Me.rdoSpecifyFormat.AutoSize = True
-        Me.rdoSpecifyFormat.Location = New System.Drawing.Point(0, 83)
+        Me.rdoSpecifyFormat.Location = New System.Drawing.Point(0, 91)
         Me.rdoSpecifyFormat.Name = "rdoSpecifyFormat"
         Me.rdoSpecifyFormat.Size = New System.Drawing.Size(95, 17)
         Me.rdoSpecifyFormat.TabIndex = 8
@@ -428,7 +448,7 @@ Partial Class dlgMakeDate
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 306)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 319)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(417, 54)
         Me.ucrBase.TabIndex = 5
@@ -436,7 +456,7 @@ Partial Class dlgMakeDate
         'ucrInputNewColumnName
         '
         Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(128, 277)
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(128, 287)
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         Me.ucrInputNewColumnName.Size = New System.Drawing.Size(166, 23)
         Me.ucrInputNewColumnName.TabIndex = 3
@@ -451,21 +471,11 @@ Partial Class dlgMakeDate
         Me.ucrSeclectorMakeDate.Size = New System.Drawing.Size(210, 180)
         Me.ucrSeclectorMakeDate.TabIndex = 0
         '
-        'chkMore
-        '
-        Me.chkMore.AutoSize = True
-        Me.chkMore.Location = New System.Drawing.Point(159, 19)
-        Me.chkMore.Name = "chkMore"
-        Me.chkMore.Size = New System.Drawing.Size(50, 17)
-        Me.chkMore.TabIndex = 12
-        Me.chkMore.Text = "More"
-        Me.chkMore.UseVisualStyleBackColor = True
-        '
         'dlgMakeDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(487, 367)
+        Me.ClientSize = New System.Drawing.Size(487, 385)
         Me.Controls.Add(Me.grpSingleColumn)
         Me.Controls.Add(Me.grpThreeColumns)
         Me.Controls.Add(Me.grpTwoColumns)
@@ -535,4 +545,5 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrInputSeparator As ucrInputComboBox
     Friend WithEvents ucrInputOrigin As ucrInputComboBox
     Friend WithEvents chkMore As CheckBox
+    Friend WithEvents ucrInputSpecifyDates As ucrInputComboBox
 End Class
