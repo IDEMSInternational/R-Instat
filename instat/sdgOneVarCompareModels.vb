@@ -20,8 +20,8 @@ Public Class sdgOneVarCompareModels
     Private clsRdenscompFunction As New RFunction
     Private clsRqqcompFunction As New RFunction
     Private clsRppcompFunction As New RFunction
+    Private clsListFunction As New RFunction
     Private clsModel As New RFunction
-    Private clsRModel As New RFunction
     Private clsRsyntax As New RFunction
     Private WithEvents ucrRecs As ucrReceiver
     Public bfirstload As Boolean = True
@@ -58,10 +58,18 @@ Public Class sdgOneVarCompareModels
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
+        clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
 
-        clsRcdfcompFunction.SetRCommand("list")
-        clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("ft", clsRFunctionParameter:=clsRcdfcompFunction)
+
+        ' I don't believe I need to specify that it is a list, which makes the below code redundant.
+        'clsRcdfcompFunction.SetRCommand("cdfcomp")
+        'clsListFunction.SetRCommand("list")
+        'clsListFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
+        'dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("ft", clsRFunctionParameter:=clsListFunction)
+
+        'clsRcdfcompFunction.SetRCommand("list")
+        'clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        'dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("ft", clsRFunctionParameter:=clsRcdfcompFunction)
 
         'clsRcdfcompFunction.SetRCommand("list")
         'clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
@@ -69,12 +77,9 @@ Public Class sdgOneVarCompareModels
         'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
 
 
-
-
-        'clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-        'clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-        'clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-
+        clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+        clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
     End Sub
 
     Public Sub SetReceiver(ucrNewReceiver As ucrReceiver)
@@ -103,18 +108,18 @@ Public Class sdgOneVarCompareModels
 
     End Sub
 
-    Private Sub chkCDF_CheckedChanged(sender As Object, e As EventArgs) Handles chkCDF.CheckedChanged
-        '  If chkCDF.Checked Then
-        ' 'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        'clsRcdfcompFunction.SetRCommand("list")
-        'clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        'End If
-    End Sub
-
     Public Sub CreateGraphs()
         If chkCDF.Checked Then
             frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+        End If
+        If chkPP.Checked Then
+            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
+        End If
+        If chkQQ.Checked Then
+            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
+        End If
+        If chkDensity.Checked Then
+            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
         End If
     End Sub
 

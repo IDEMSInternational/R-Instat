@@ -33,7 +33,6 @@ Public Class dlgOneVarCompareModels
 
     Private Sub InitialiseDialog()
         sdgOneVarCompareModels.InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("fitdist")
         'ucrBase.iHelpTopicID = 
         ucrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarCompModels
@@ -76,8 +75,8 @@ Public Class dlgOneVarCompareModels
             cmdDisplayObjects.Enabled = True
         End If
         ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         TestOKEnabled()
-        'sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
