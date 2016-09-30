@@ -17,6 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarUseModel
+    Public clsRBootDist As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,12 +32,14 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub InitialiseDialog()
-        'sdg----.InitaliseDialog()
+        sdgOneVarUseModBootstrap.InitialiseDialog()
         'ucrBase.iHelpTopicID = 
         'ucrBase.clsRsyntax.iCallType = 2
         ucrReceiver.Selector = ucrSelector
         ucrReceiver.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction("bootdist")
+        'ucrBase.clsRsyntax.SetFunction("bootdist")
+        clsRBootDist.SetRCommand("bootdist")
+        ' don't have one main function - see what is done in a graphical one. How did they set their R commands to do this? And see in these ones as well because I assume they have their "bootdist" in the dlg but their parameters (even if they are default on) in the sub?
         ucrSelector.SetItemType("model")
         'sdg---.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction?)
     End Sub
@@ -44,7 +47,7 @@ Public Class dlgOneVarUseModel
     Private Sub SetDefaults()
         ucrSelector.Reset()
         ucrSelector.Focus()
-        'sdg---.SetDefaults()
+        sdgOneVarUseModBootstrap.SetDefaults()
         chkSaveModel.Checked = True
         ucrSaveModel.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
         ucrSaveModel.SetPrefix("Model")
@@ -124,7 +127,8 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiver.SelectionChanged
-        ''''''ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
+        ' only produced if it is checked to?
         TestOKEnabled()
         BootstrapEnabled()
     End Sub
@@ -165,6 +169,7 @@ Public Class dlgOneVarUseModel
         AssignSaveObjects()
         TestOKEnabled()
     End Sub
+
 
 
 End Class
