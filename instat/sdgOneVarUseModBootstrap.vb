@@ -25,17 +25,42 @@ Public Class sdgOneVarUseModBootstrap
     End Sub
 
     Public Sub InitialiseDialog()
-
-
         clsRsyntax.AddParameter("bootmethod")
-        'bootmethod = "param" is default
         clsRsyntax.AddParameter("niter")
-
+        ' add in CI's,
+        ' do we want this to be plotted? 
     End Sub
 
     Public Sub SetDefaults()
-
+        chkIterations.Checked = True
+        chkParametric.Checked = False
+        nudCI.Value = 0.95
+        nudIterations.Value = 1001
     End Sub
 
+    Private Sub IterationValue()
+        If chkIterations.Checked Then
+            nudIterations.Visible = True
+        Else
+            nudIterations.Visible = False
+        End If
+    End Sub
 
+    Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
+        clsRsyntax = clsRNewSyntax
+    End Sub
+
+    Private Sub chkParametric_CheckedChanged(sender As Object, e As EventArgs) Handles chkParametric.CheckedChanged
+        If chkParametric.Checked Then
+            clsRsyntax.AddParameter("bootmethod", Chr(34) & "param" & Chr(34))
+        Else
+            clsRsyntax.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
+        End If
+    End Sub
+
+    Private Sub chkIterations_CheckedChanged(sender As Object, e As EventArgs) Handles chkIterations.CheckedChanged
+        If chkIterations.Checked Then
+            clsRsyntax.AddParameter("niter", nudIterations.Value) ' ?
+        End If
+    End Sub
 End Class

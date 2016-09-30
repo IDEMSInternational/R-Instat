@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarUseModel
-    Public clsRBootDist As New RFunction
+    Private clsRBootDist As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -34,14 +34,14 @@ Public Class dlgOneVarUseModel
     Private Sub InitialiseDialog()
         sdgOneVarUseModBootstrap.InitialiseDialog()
         'ucrBase.iHelpTopicID = 
-        'ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 2
+        ' do we want this to be plotted?
         ucrReceiver.Selector = ucrSelector
         ucrReceiver.SetMeAsReceiver()
-        'ucrBase.clsRsyntax.SetFunction("bootdist")
-        clsRBootDist.SetRCommand("bootdist")
-        ' don't have one main function - see what is done in a graphical one. How did they set their R commands to do this? And see in these ones as well because I assume they have their "bootdist" in the dlg but their parameters (even if they are default on) in the sub?
+        clsRBootDist.SetRCommand("bootdist")    ' I dont know if we want this to be ucrbase.clsRsyntax.Setfunction("bootdist"), because while it isn't necessarily going to be used, it is going to be built on in the sub dialog.
+        'Maybe check on OneVarUseMod on how they build on a model in the sub, Or look at say dlgTwoVarUseModel
         ucrSelector.SetItemType("model")
-        'sdg---.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction?)
+        sdgOneVarUseModBootstrap.SetMyRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetDefaults()
@@ -55,8 +55,8 @@ Public Class dlgOneVarUseModel
         ucrSaveModel.SetDefaultTypeAsModel()
         ucrSaveModel.SetValidationTypeAsRVariable()
         'ucrSaveObjects.SetPrefix("Bootstrap")
-        ucrSaveObjects.SetItemsTypeAsModels()
-        ucrSaveObjects.SetDefaultTypeAsModel()
+        'ucrSaveObjects.SetItemsTypeAsModels()
+        'ucrSaveObjects.SetDefaultTypeAsModel()
         ucrSaveObjects.SetValidationTypeAsRVariable()
         ucrSaveObjects.Visible = False
         ucrSaveObjects.Enabled = False
@@ -67,6 +67,7 @@ Public Class dlgOneVarUseModel
         chkSaveBootstrap.Visible = False
         cmdBootstrapOptions.Visible = False
         BootstrapEnabled()
+        BootDistGraph()
         TestOKEnabled()
     End Sub
 
@@ -85,9 +86,10 @@ Public Class dlgOneVarUseModel
         SetDefaults()
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'sdg, graph it
-        TestOKEnabled()
+    Private Sub BootDistGraph()
+        If chkProduceBootstrap.Checked Then
+            frmMain.clsRLink.RunScript(clsRBootDist.ToScript(), 2)
+        End If
     End Sub
 
     Private Sub AssignSaveModel()
@@ -127,8 +129,6 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiver.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
-        ' only produced if it is checked to?
         TestOKEnabled()
         BootstrapEnabled()
     End Sub
@@ -151,13 +151,16 @@ Public Class dlgOneVarUseModel
             chkSaveBootstrap.Visible = True
             cmdBootstrapOptions.Visible = True
             ucrSaveObjects.Visible = True
+            clsRBootDist.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
         End If
         TestOKEnabled()
         AssignSaveObjects()
+        BootDistGraph()
     End Sub
 
     Private Sub cmdBootstrapOptions_Click(sender As Object, e As EventArgs) Handles cmdBootstrapOptions.Click
-
+        sdgOneVarUseModBootstrap.ShowDialog()
+        BootstrapEnabled()
     End Sub
 
     Private Sub ucrSaveModel_NameChanged() Handles ucrSaveModel.NameChanged
@@ -170,6 +173,13 @@ Public Class dlgOneVarUseModel
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        'sdgOneVarUseModBootstrap.CreateGraphs()?
+        TestOKEnabled()
+    End Sub
 
-
+    Private Sub ucrSelector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
+        AssignSaveModel()
+        AssignSaveObjects()
+    End Sub
 End Class
