@@ -20,79 +20,83 @@ Public Class sdgDescribeTwoVarGraph
         autoTranslate(Me)
 
         If bFirstLoad Then
-            SetDefaults()
+            'SetDefaults()
             bFirstLoad = False
         End If
     End Sub
 
     Public Sub SetDefaults()
-        grpVariateByVariate.Enabled = True
-        grpVariateByFactor.Enabled = True
-        grpFactorByVariate.Enabled = True
-        grpFactorByFactor.Enabled = True
-        rdoScatterPlot.Enabled = True
-        rdoLinePlot.Enabled = True
-        rdoBoxPlot.Enabled = True
-        rdoSummaryPlot.Enabled = True
-        rdoBarPlot.Enabled = True
-        rdoDotPlot.Enabled = True
-        rdoScatterPlot.Checked = True
-        rdoLinePlot.Checked = False
-        rdoBoxPlot.Checked = True
-        rdoSummaryPlot.Checked = True
-        rdoBarPlot.Checked = True
-        rdoDotPlot.Checked = False
+        lblNumericByNumeric.Enabled = False
+        ucrNumericByNumeric.Enabled = False
+        lblNumericByCategorical.Enabled = False
+        ucrNumericByCategorical.Enabled = False
+        lblCategoricalByNumeric.Enabled = False
+        ucrCategoricalByNumeric.Enabled = False
+        lblCategoricalByCategorical.Enabled = False
+        ucrCategoricalByCategorical.Enabled = False
+        GraphOptions()
     End Sub
 
-    Private Sub rdoTwoVarGraphs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarPlot.CheckedChanged, rdoLinePlot.CheckedChanged, rdoBoxPlot.CheckedChanged, rdoSummaryPlot.CheckedChanged, rdoDotPlot.CheckedChanged, rdoScatterPlot.CheckedChanged
-        dlgDescribeTwoVarGraph.Results()
+    Private Sub GraphOptions()
+        ucrNumericByNumeric.cboInput.Items.Add("Scatter plot")
+        ucrNumericByNumeric.cboInput.Items.Add("Line plot")
+        ucrNumericByNumeric.cboInput.Items.Add("Scatter and line plot")
+        ucrNumericByNumeric.cboInput.SelectedItem = "Scatter plot"
+        ucrNumericByCategorical.cboInput.Items.Add("Box plot")
+        'ucrNumericByCategorical.cboInput.Items.Add("Dot plot")
+        'ucrNumericByCategorical.cboInput.Items.Add("Point plot")
+        ucrNumericByCategorical.cboInput.Items.Add("Histogram")
+        ucrNumericByCategorical.cboInput.Items.Add("Density plot")
+        ucrNumericByCategorical.cboInput.Items.Add("Frequency polygon")
+        ucrNumericByCategorical.cboInput.SelectedItem = "Box plot"
+        ucrCategoricalByNumeric.cboInput.Items.Add("Summary plot")
+        ucrCategoricalByNumeric.cboInput.SelectedItem = "Summary plot"
+        ucrCategoricalByCategorical.cboInput.Items.Add("Bar plot")
+        ucrCategoricalByCategorical.cboInput.Items.Add("Dot plot")
+        ucrCategoricalByCategorical.cboInput.SelectedItem = "Bar plot"
     End Sub
 
     Public Sub GrpBoxEnable()
         If ((dlgDescribeTwoVarGraph.strVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strVarType = "integer") And (dlgDescribeTwoVarGraph.strSecondVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "integer")) Then
-            grpVariateByVariate.Enabled = True
-            grpVariateByFactor.Enabled = False
-            grpFactorByVariate.Enabled = False
-            grpFactorByFactor.Enabled = False
-            rdoScatterPlot.Enabled = True
-            rdoLinePlot.Enabled = True
-            rdoBoxPlot.Enabled = False
-            rdoSummaryPlot.Enabled = False
-            rdoBarPlot.Enabled = False
-            rdoDotPlot.Enabled = False
+            lblNumericByNumeric.Enabled = True
+            ucrNumericByNumeric.Enabled = True
+            lblNumericByCategorical.Enabled = False
+            ucrNumericByCategorical.Enabled = False
+            lblCategoricalByNumeric.Enabled = False
+            ucrCategoricalByNumeric.Enabled = False
+            lblCategoricalByCategorical.Enabled = False
+            ucrCategoricalByCategorical.Enabled = False
         ElseIf ((dlgDescribeTwoVarGraph.strVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strVarType = "integer") And (dlgDescribeTwoVarGraph.strSecondVarType = "factor")) Then
-            grpVariateByVariate.Enabled = False
-            grpVariateByFactor.Enabled = True
-            grpFactorByVariate.Enabled = False
-            grpFactorByFactor.Enabled = False
-            rdoScatterPlot.Enabled = False
-            rdoLinePlot.Enabled = False
-            rdoBoxPlot.Enabled = True
-            rdoSummaryPlot.Enabled = False
-            rdoBarPlot.Enabled = False
-            rdoDotPlot.Enabled = False
+            lblNumericByNumeric.Enabled = False
+            ucrNumericByNumeric.Enabled = False
+            lblNumericByCategorical.Enabled = True
+            ucrNumericByCategorical.Enabled = True
+            lblCategoricalByNumeric.Enabled = False
+            ucrCategoricalByNumeric.Enabled = False
+            lblCategoricalByCategorical.Enabled = False
+            ucrCategoricalByCategorical.Enabled = False
         ElseIf ((dlgDescribeTwoVarGraph.strVarType = "factor") And (dlgDescribeTwoVarGraph.strSecondVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "integer")) Then
-            grpVariateByVariate.Enabled = False
-            grpVariateByFactor.Enabled = False
-            grpFactorByVariate.Enabled = True
-            grpFactorByFactor.Enabled = False
-            rdoScatterPlot.Enabled = False
-            rdoLinePlot.Enabled = False
-            rdoBoxPlot.Enabled = False
-            rdoSummaryPlot.Enabled = True
-            rdoBarPlot.Enabled = False
-            rdoDotPlot.Enabled = False
+            lblNumericByNumeric.Enabled = False
+            ucrNumericByNumeric.Enabled = False
+            lblNumericByCategorical.Enabled = False
+            ucrNumericByCategorical.Enabled = False
+            lblCategoricalByNumeric.Enabled = True
+            ucrCategoricalByNumeric.Enabled = True
+            lblCategoricalByCategorical.Enabled = False
+            ucrCategoricalByCategorical.Enabled = False
         ElseIf ((dlgDescribeTwoVarGraph.strVarType = "factor") And (dlgDescribeTwoVarGraph.strSecondVarType = "factor")) Then
-            grpVariateByVariate.Enabled = False
-            grpVariateByFactor.Enabled = False
-            grpFactorByVariate.Enabled = False
-            grpFactorByFactor.Enabled = True
-            rdoScatterPlot.Enabled = False
-            rdoLinePlot.Enabled = False
-            rdoBoxPlot.Enabled = False
-            rdoSummaryPlot.Enabled = False
-            rdoBarPlot.Enabled = True
-            rdoDotPlot.Enabled = True
+            lblNumericByNumeric.Enabled = False
+            ucrNumericByNumeric.Enabled = False
+            lblNumericByCategorical.Enabled = False
+            ucrNumericByCategorical.Enabled = False
+            lblCategoricalByNumeric.Enabled = False
+            ucrCategoricalByNumeric.Enabled = False
+            lblCategoricalByCategorical.Enabled = True
+            ucrCategoricalByCategorical.Enabled = True
         End If
+    End Sub
+
+    Private Sub ucrGraphs_NameChanged() Handles ucrNumericByNumeric.NameChanged, ucrNumericByCategorical.NameChanged, ucrCategoricalByNumeric.NameChanged, ucrCategoricalByCategorical.NameChanged
+        dlgDescribeTwoVarGraph.Results()
     End Sub
 End Class
