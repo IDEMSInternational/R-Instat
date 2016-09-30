@@ -17,7 +17,6 @@ Imports instat.Translations
 
 Public Class sdgOneVarFitModel
     Public clsRConvert As New RFunction
-    Public clsRoptimFunction As New RFunction
     Public clsRSyntax As New RSyntax
     Private WithEvents ucrDists As ucrDistributions
     Public bfirstload As Boolean = True
