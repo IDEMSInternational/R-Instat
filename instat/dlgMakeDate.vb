@@ -75,8 +75,9 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If ((Not ucrInputSpecifyDates.GetText = "%Y-%m-%d") OrElse (Not ucrInputSpecifyDates.GetText = "%Y/%m/%d") OrElse (Not ucrInputSpecifyDates.GetText = "%d%m%Y")) Then
+        If Not ucrInputSpecifyDates.cboInput.Items.Contains(ucrInputSpecifyDates.GetText) Then
             ucrInputSpecifyDates.cboInput.Items.Insert(0, ucrInputSpecifyDates.GetText)
+        Else
         End If
     End Sub
     Private Sub ReopenDialog()
