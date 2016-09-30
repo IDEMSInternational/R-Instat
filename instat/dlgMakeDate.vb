@@ -48,7 +48,8 @@ Public Class dlgMakeDate
 
     End Sub
     Private Sub SetDefaults()
-        ucrInputSpecifyDates.Visible = False
+        rdoSpecifyFormat.Checked = False
+        specifyformats()
         ucrInputNewColumnName.Reset()
         ucrSeclectorMakeDate.Reset()
         ucrInputSeparator.SetName("/")
@@ -74,8 +75,8 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If ((Not ucrInputSpecifyDates.cboInput.Items.Contains("%Y-%m-%d")) OrElse (Not ucrInputSpecifyDates.cboInput.Items.Contains("%Y/%m/%d")) OrElse (Not ucrInputSpecifyDates.cboInput.Items.Contains("%d%m%Y"))) Then
-            ucrInputSpecifyDates.cboInput.Text.Insert(0, ucrInputSpecifyDates.GetText)
+        If ((Not ucrInputSpecifyDates.GetText = "%Y-%m-%d") OrElse (Not ucrInputSpecifyDates.GetText = "%Y/%m/%d") OrElse (Not ucrInputSpecifyDates.GetText = "%d%m%Y")) Then
+            ucrInputSpecifyDates.cboInput.Items.Insert(0, ucrInputSpecifyDates.GetText)
         End If
     End Sub
     Private Sub ReopenDialog()
