@@ -69,6 +69,7 @@ Public Class dlgOneVariableGraph
         sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
         sdgOneVarGraph.SetNumericGeomFunction(strNumericGeomFunction)
         sdgOneVarGraph.SetCategoricalGeomFunction(strCategoricalGeomFunction)
+
     End Sub
 
     Private Sub ReopenDialog()
@@ -136,6 +137,11 @@ Public Class dlgOneVariableGraph
         sdgOneVarGraph.ShowDialog()
     End Sub
 
-    Private Sub CheckDatatypes()
+    Private Sub rdoFacets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFacets.CheckedChanged
+        If rdoFacets.Checked Then
+            clsBaseFunctionMultipleVariables.AddParameter("facets", "TRUE")
+        Else
+            clsBaseFunctionMultipleVariables.RemoveParameterByName("facets")
+        End If
     End Sub
 End Class
