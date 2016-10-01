@@ -29,11 +29,17 @@ Public Class sdgOneVarUseModBootstrap
         clsRsyntax.AddParameter("niter")
         ' add in CI's,
         ' do we want this to be plotted? 
+        nudIterations.Minimum = 1
+        nudIterations.Maximum = 10001
+        nudCI.Minimum = 0
+        nudCI.Maximum = 1
+        nudIterations.Increment = 100
+        nudCI.Increment = 0.05
     End Sub
 
     Public Sub SetDefaults()
         chkIterations.Checked = True
-        chkParametric.Checked = False
+        chkParametric.Checked = True
         nudCI.Value = 0.95
         nudIterations.Value = 1001
     End Sub
@@ -60,7 +66,9 @@ Public Class sdgOneVarUseModBootstrap
 
     Private Sub chkIterations_CheckedChanged(sender As Object, e As EventArgs) Handles chkIterations.CheckedChanged
         If chkIterations.Checked Then
-            clsRsyntax.AddParameter("niter", nudIterations.Value) ' ?
+            clsRsyntax.AddParameter("niter", nudIterations.Value.ToString())
         End If
     End Sub
+
+    ' confidence interval 
 End Class
