@@ -52,6 +52,8 @@ Public Class dlgMakeDate
         specifyformats()
         ucrInputNewColumnName.Reset()
         ucrSeclectorMakeDate.Reset()
+        ucrInputSpecifyDates.Reset()
+        ucrInputSpecifyDates.SetName("%Y-%m-%d")
         ucrInputSeparator.SetName("/")
         ucrInputYear.SetName("%Y (4 digits)")
         ucrInputMonth.SetName("%m (1-12)")
