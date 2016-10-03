@@ -42,13 +42,18 @@ Public Class dlgMakeDate
         ucrInputDay.SetItems({"%d (1-31)", "%j (1-366)"})
         ucrInputComboBoxMonthTwo.SetItems({"365/366", "366"})
         ucrInputComboBoxYearTwo.SetItems({"4 digits", "2 digits"})
+        ucrInputSpecifyDates.SetItems({"%Y-%m-%d", "%Y/%m/%d", "%d%m%Y"})
         ucrInputComboBoxTearThree.SetItems({"4 digits", "2 digits"})
         ucrInputOrigin.SetItems({"30-12-1899 (Excel)", "01-03-1600 (Gregorian)"})
 
     End Sub
     Private Sub SetDefaults()
+        rdoSpecifyFormat.Checked = False
+        specifyformats()
         ucrInputNewColumnName.Reset()
         ucrSeclectorMakeDate.Reset()
+        ucrInputSpecifyDates.Reset()
+        ucrInputSpecifyDates.SetName("%Y-%m-%d")
         ucrInputSeparator.SetName("/")
         ucrInputYear.SetName("%Y (4 digits)")
         ucrInputMonth.SetName("%m (1-12)")
@@ -71,7 +76,12 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If Not ucrInputSpecifyDates.cboInput.Items.Contains(ucrInputSpecifyDates.GetText) Then
+            ucrInputSpecifyDates.cboInput.Items.Insert(0, ucrInputSpecifyDates.GetText)
+        Else
+        End If
+    End Sub
     Private Sub ReopenDialog()
 
     End Sub
@@ -137,13 +147,22 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Sub rdoSpecifyOrigin_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSpecifyOrigin.CheckedChanged
+    Private Sub rdoSpecifyOrigin_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSpecifyOrigin.CheckedChanged, rdoSpecifyFormat.CheckedChanged
         ShowOrigin()
+        specifyformats()
     End Sub
 
+    Private Sub specifyformats()
+        If rdoSpecifyFormat.Checked Then
+            ucrInputSpecifyDates.Visible = True
+        Else
+            ucrInputSpecifyDates.Visible = False
+        End If
+    End Sub
     Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged
         showFormat()
     End Sub
+
 End Class
 
 
