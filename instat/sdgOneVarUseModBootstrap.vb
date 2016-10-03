@@ -38,18 +38,9 @@ Public Class sdgOneVarUseModBootstrap
     End Sub
 
     Public Sub SetDefaults()
-        chkIterations.Checked = True
         chkParametric.Checked = True
         nudCI.Value = 0.95
         nudIterations.Value = 1001
-    End Sub
-
-    Private Sub IterationValue()
-        If chkIterations.Checked Then
-            nudIterations.Visible = True
-        Else
-            nudIterations.Visible = False
-        End If
     End Sub
 
     Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
@@ -64,10 +55,8 @@ Public Class sdgOneVarUseModBootstrap
         End If
     End Sub
 
-    Private Sub chkIterations_CheckedChanged(sender As Object, e As EventArgs) Handles chkIterations.CheckedChanged
-        If chkIterations.Checked Then
-            clsRsyntax.AddParameter("niter", nudIterations.Value.ToString())
-        End If
+    Private Sub nudIterations_ValueChanged(sender As Object, e As EventArgs) Handles nudIterations.ValueChanged
+        clsRsyntax.AddParameter("niter", nudIterations.Value.ToString())
     End Sub
 
     ' confidence interval 

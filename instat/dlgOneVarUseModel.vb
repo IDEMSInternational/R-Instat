@@ -41,11 +41,12 @@ Public Class dlgOneVarUseModel
         ucrSaveModel.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.SetFunction("bootdist")
         'or is it clsRBootDist.SetRCommand("bootdist")
-        ucrSaveModel.SetPrefix("Model")
+        'clsRquantiledist.SetRCommand("quantile")???
+        ucrSaveModel.SetPrefix("model")
         ucrSaveModel.SetItemsTypeAsModels()
         ucrSaveModel.SetDefaultTypeAsModel()
         ucrSaveModel.SetValidationTypeAsRVariable()
-        ucrSaveObjects.SetPrefix("Bootstrap")
+        ucrSaveObjects.SetPrefix("bootstrap")
         'ucrSaveObjects.SetItemsTypeAsModels()
         'ucrSaveObjects.SetDefaultTypeAsModel()
         ucrSaveObjects.SetValidationTypeAsRVariable()
@@ -60,7 +61,6 @@ Public Class dlgOneVarUseModel
         sdgOneVarUseModBootstrap.SetDefaults()
         chkSaveModel.Checked = True
         ucrSaveObjects.Visible = False
-        ucrSaveObjects.Enabled = False
         ucrSaveObjects.Reset()
         ucrSaveModel.Reset()
         chkProduceBootstrap.Enabled = False
@@ -140,10 +140,10 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub chkSaveBootstrap_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveBootstrap.CheckedChanged
-        If chkSaveBootstrap.Checked Then
-            ucrSaveObjects.Enabled = True
+        If Not chkSaveBootstrap.Checked Then
+            ucrSaveObjects.Visible = False
         Else
-            ucrSaveObjects.Enabled = False
+            ucrSaveObjects.Visible = True
         End If
         AssignSaveObjects()
         TestOKEnabled()
@@ -167,11 +167,9 @@ Public Class dlgOneVarUseModel
         If Not chkProduceBootstrap.Checked Then
             chkSaveBootstrap.Visible = False
             cmdBootstrapOptions.Visible = False
-            ucrSaveObjects.Visible = False
         Else
             chkSaveBootstrap.Visible = True
             cmdBootstrapOptions.Visible = True
-            ucrSaveObjects.Visible = True
         End If
         TestOKEnabled()
         AssignSaveObjects()
