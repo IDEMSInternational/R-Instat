@@ -26,70 +26,45 @@ Public Class sdgDescribeTwoVarGraph
     End Sub
 
     Public Sub SetDefaults()
-        lblNumericByNumeric.Enabled = False
         ucrNumericByNumeric.Enabled = False
-        lblNumericByCategorical.Enabled = False
         ucrNumericByCategorical.Enabled = False
-        lblCategoricalByNumeric.Enabled = False
         ucrCategoricalByNumeric.Enabled = False
-        lblCategoricalByCategorical.Enabled = False
         ucrCategoricalByCategorical.Enabled = False
         GraphOptions()
     End Sub
 
     Private Sub GraphOptions()
-        ucrNumericByNumeric.cboInput.Items.Add("Scatter plot")
-        ucrNumericByNumeric.cboInput.Items.Add("Line plot")
-        ucrNumericByNumeric.cboInput.Items.Add("Scatter and line plot")
+        ucrNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Scatter and line plot"})
         ucrNumericByNumeric.cboInput.SelectedItem = "Scatter plot"
-        ucrNumericByCategorical.cboInput.Items.Add("Box plot")
+        ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon"})
         'ucrNumericByCategorical.cboInput.Items.Add("Dot plot")
         'ucrNumericByCategorical.cboInput.Items.Add("Point plot")
-        ucrNumericByCategorical.cboInput.Items.Add("Histogram")
-        ucrNumericByCategorical.cboInput.Items.Add("Density plot")
-        ucrNumericByCategorical.cboInput.Items.Add("Frequency polygon")
         ucrNumericByCategorical.cboInput.SelectedItem = "Box plot"
-        ucrCategoricalByNumeric.cboInput.Items.Add("Summary plot")
+        ucrCategoricalByNumeric.SetItems({"Summary plot"})
         ucrCategoricalByNumeric.cboInput.SelectedItem = "Summary plot"
-        ucrCategoricalByCategorical.cboInput.Items.Add("Bar plot")
-        ucrCategoricalByCategorical.cboInput.Items.Add("Dot plot")
+        ucrCategoricalByCategorical.SetItems({"Bar plot", "Dot plot"})
         ucrCategoricalByCategorical.cboInput.SelectedItem = "Bar plot"
     End Sub
 
     Public Sub GrpBoxEnable()
         If ((dlgDescribeTwoVarGraph.strVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strVarType = "integer") And (dlgDescribeTwoVarGraph.strSecondVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "integer")) Then
-            lblNumericByNumeric.Enabled = True
             ucrNumericByNumeric.Enabled = True
-            lblNumericByCategorical.Enabled = False
             ucrNumericByCategorical.Enabled = False
-            lblCategoricalByNumeric.Enabled = False
             ucrCategoricalByNumeric.Enabled = False
-            lblCategoricalByCategorical.Enabled = False
             ucrCategoricalByCategorical.Enabled = False
         ElseIf ((dlgDescribeTwoVarGraph.strVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strVarType = "integer") And (dlgDescribeTwoVarGraph.strSecondVarType = "factor")) Then
-            lblNumericByNumeric.Enabled = False
             ucrNumericByNumeric.Enabled = False
-            lblNumericByCategorical.Enabled = True
             ucrNumericByCategorical.Enabled = True
-            lblCategoricalByNumeric.Enabled = False
             ucrCategoricalByNumeric.Enabled = False
-            lblCategoricalByCategorical.Enabled = False
             ucrCategoricalByCategorical.Enabled = False
         ElseIf ((dlgDescribeTwoVarGraph.strVarType = "factor") And (dlgDescribeTwoVarGraph.strSecondVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "integer")) Then
-            lblNumericByNumeric.Enabled = False
             ucrNumericByNumeric.Enabled = False
-            lblNumericByCategorical.Enabled = False
             ucrNumericByCategorical.Enabled = False
-            lblCategoricalByNumeric.Enabled = True
             ucrCategoricalByNumeric.Enabled = True
-            lblCategoricalByCategorical.Enabled = False
             ucrCategoricalByCategorical.Enabled = False
         ElseIf ((dlgDescribeTwoVarGraph.strVarType = "factor") And (dlgDescribeTwoVarGraph.strSecondVarType = "factor")) Then
-            lblNumericByNumeric.Enabled = False
             ucrNumericByNumeric.Enabled = False
-            lblNumericByCategorical.Enabled = False
             ucrNumericByCategorical.Enabled = False
-            lblCategoricalByNumeric.Enabled = False
             ucrCategoricalByNumeric.Enabled = False
             lblCategoricalByCategorical.Enabled = True
             ucrCategoricalByCategorical.Enabled = True
