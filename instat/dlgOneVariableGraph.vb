@@ -22,8 +22,8 @@ Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
     Private clsBaseOperatorOneColumn As New ROperator
     Private clsBaseFunctionMultipleVariables As New RFunction
-    Public strNumericGeomFunction As String
-    Public strCategoricalGeomFunction As String
+    Public strNumericGeomFunction As String = ""
+    Public strCategoricalGeomFunction As String = ""
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
