@@ -18,8 +18,8 @@ Public Class sdgOneVarGraph
     Public bFirstLoad As Boolean = True
     Public clsRsyntax As New RSyntax
     Public strNumericGeomFunction As String
-    Public strCategoriacalGeomFunction As String
-    Public strCategoricalGeomFunction As String
+    Public strCategoriacalGeomFunction As String = ""
+    Public strCategoricalGeomFunction As String = ""
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -58,9 +58,6 @@ Public Class sdgOneVarGraph
     End Sub
     Public Sub SetCategoricalGeomFunction(strCategorical As String)
         strCategoriacalGeomFunction = strCategorical
-    End Sub
-    Private Sub chkSpecifyLayout_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpecifyLayout.CheckedChanged
-        SpecifyLayoutControl()
     End Sub
 
     Private Sub SpecifyLayoutControl()
@@ -115,6 +112,15 @@ Public Class sdgOneVarGraph
             clsRsyntax.AddParameter("free_scale_axis", "TRUE")
         Else
             clsRsyntax.RemoveParameter("free_scale_axis")
+        End If
+    End Sub
+
+    Private Sub nudNumberofColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged, chkSpecifyLayout.CheckedChanged
+        SpecifyLayoutControl()
+        If nudNumberofColumns.Text <> "" AndAlso chkSpecifyLayout.Checked Then
+            clsRsyntax.AddParameter("ncol", nudNumberofColumns.Value)
+        Else
+            clsRsyntax.RemoveParameter("ncol")
         End If
     End Sub
 End Class
