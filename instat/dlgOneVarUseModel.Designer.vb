@@ -46,7 +46,7 @@ Partial Class dlgOneVarUseModel
         '
         'cmdFitModel
         '
-        Me.cmdFitModel.Location = New System.Drawing.Point(239, 208)
+        Me.cmdFitModel.Location = New System.Drawing.Point(239, 200)
         Me.cmdFitModel.Name = "cmdFitModel"
         Me.cmdFitModel.Size = New System.Drawing.Size(101, 23)
         Me.cmdFitModel.TabIndex = 13
@@ -85,7 +85,7 @@ Partial Class dlgOneVarUseModel
         'chkSaveModel
         '
         Me.chkSaveModel.AutoSize = True
-        Me.chkSaveModel.Location = New System.Drawing.Point(9, 212)
+        Me.chkSaveModel.Location = New System.Drawing.Point(10, 204)
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(86, 17)
         Me.chkSaveModel.TabIndex = 21
@@ -103,14 +103,14 @@ Partial Class dlgOneVarUseModel
         'ucrSaveModel
         '
         Me.ucrSaveModel.IsReadOnly = False
-        Me.ucrSaveModel.Location = New System.Drawing.Point(91, 210)
+        Me.ucrSaveModel.Location = New System.Drawing.Point(92, 202)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
         Me.ucrSaveModel.TabIndex = 20
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 237)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 19
