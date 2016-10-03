@@ -35,6 +35,7 @@ Partial Class sdgOneVarCompareModels
         Me.chkCDF = New System.Windows.Forms.CheckBox()
         Me.chkPP = New System.Windows.Forms.CheckBox()
         Me.chkDensity = New System.Windows.Forms.CheckBox()
+        Me.ucrSaveChiSq = New instat.ucrInputTextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -62,9 +63,9 @@ Partial Class sdgOneVarCompareModels
         Me.chkSaveChi.AutoSize = True
         Me.chkSaveChi.Location = New System.Drawing.Point(6, 52)
         Me.chkSaveChi.Name = "chkSaveChi"
-        Me.chkSaveChi.Size = New System.Drawing.Size(176, 17)
+        Me.chkSaveChi.Size = New System.Drawing.Size(106, 17)
         Me.chkSaveChi.TabIndex = 2
-        Me.chkSaveChi.Text = "Save Chi-Square to Data Frame"
+        Me.chkSaveChi.Text = "Save Chi-Square"
         Me.chkSaveChi.UseVisualStyleBackColor = True
         '
         'chkInputBreakpoints
@@ -98,6 +99,7 @@ Partial Class sdgOneVarCompareModels
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.ucrSaveChiSq)
         Me.TabPage1.Controls.Add(Me.ucrObjectName)
         Me.TabPage1.Controls.Add(Me.chkSaveObjects)
         Me.TabPage1.Controls.Add(Me.lblGoF)
@@ -114,9 +116,9 @@ Partial Class sdgOneVarCompareModels
         'ucrObjectName
         '
         Me.ucrObjectName.IsReadOnly = False
-        Me.ucrObjectName.Location = New System.Drawing.Point(92, 27)
+        Me.ucrObjectName.Location = New System.Drawing.Point(112, 27)
         Me.ucrObjectName.Name = "ucrObjectName"
-        Me.ucrObjectName.Size = New System.Drawing.Size(127, 21)
+        Me.ucrObjectName.Size = New System.Drawing.Size(107, 21)
         Me.ucrObjectName.TabIndex = 5
         '
         'TabPage2
@@ -173,6 +175,14 @@ Partial Class sdgOneVarCompareModels
         Me.chkDensity.Text = "Density"
         Me.chkDensity.UseVisualStyleBackColor = True
         '
+        'ucrSaveChiSq
+        '
+        Me.ucrSaveChiSq.IsReadOnly = False
+        Me.ucrSaveChiSq.Location = New System.Drawing.Point(112, 50)
+        Me.ucrSaveChiSq.Name = "ucrSaveChiSq"
+        Me.ucrSaveChiSq.Size = New System.Drawing.Size(107, 21)
+        Me.ucrSaveChiSq.TabIndex = 6
+        '
         'sdgOneVarCompareModels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -207,4 +217,5 @@ Partial Class sdgOneVarCompareModels
     Friend WithEvents chkPP As CheckBox
     Friend WithEvents chkQQ As CheckBox
     Friend WithEvents ucrObjectName As ucrInputTextBox
+    Friend WithEvents ucrSaveChiSq As ucrInputTextBox
 End Class

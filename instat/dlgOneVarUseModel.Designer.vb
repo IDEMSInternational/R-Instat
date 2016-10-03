@@ -27,12 +27,12 @@ Partial Class dlgOneVarUseModel
         Me.cmdBootstrapOptions = New System.Windows.Forms.Button()
         Me.chkSaveBootstrap = New System.Windows.Forms.CheckBox()
         Me.chkProduceBootstrap = New System.Windows.Forms.CheckBox()
+        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
+        Me.ucrSaveObjects = New instat.ucrInputComboBox()
+        Me.ucrSaveModel = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
-        Me.ucrSaveModel = New instat.ucrInputComboBox()
-        Me.ucrSaveObjects = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblReceiver
@@ -46,7 +46,7 @@ Partial Class dlgOneVarUseModel
         '
         'cmdFitModel
         '
-        Me.cmdFitModel.Location = New System.Drawing.Point(239, 208)
+        Me.cmdFitModel.Location = New System.Drawing.Point(239, 200)
         Me.cmdFitModel.Name = "cmdFitModel"
         Me.cmdFitModel.Size = New System.Drawing.Size(101, 23)
         Me.cmdFitModel.TabIndex = 13
@@ -82,9 +82,35 @@ Partial Class dlgOneVarUseModel
         Me.chkProduceBootstrap.Text = "Produce Bootstrap"
         Me.chkProduceBootstrap.UseVisualStyleBackColor = True
         '
+        'chkSaveModel
+        '
+        Me.chkSaveModel.AutoSize = True
+        Me.chkSaveModel.Location = New System.Drawing.Point(10, 204)
+        Me.chkSaveModel.Name = "chkSaveModel"
+        Me.chkSaveModel.Size = New System.Drawing.Size(86, 17)
+        Me.chkSaveModel.TabIndex = 21
+        Me.chkSaveModel.Text = "Save Model:"
+        Me.chkSaveModel.UseVisualStyleBackColor = True
+        '
+        'ucrSaveObjects
+        '
+        Me.ucrSaveObjects.IsReadOnly = False
+        Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 135)
+        Me.ucrSaveObjects.Name = "ucrSaveObjects"
+        Me.ucrSaveObjects.Size = New System.Drawing.Size(137, 21)
+        Me.ucrSaveObjects.TabIndex = 22
+        '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.IsReadOnly = False
+        Me.ucrSaveModel.Location = New System.Drawing.Point(92, 202)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrSaveModel.TabIndex = 20
+        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 237)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 19
@@ -108,32 +134,6 @@ Partial Class dlgOneVarUseModel
         Me.ucrSelector.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelector.TabIndex = 15
         '
-        'chkSaveModel
-        '
-        Me.chkSaveModel.AutoSize = True
-        Me.chkSaveModel.Location = New System.Drawing.Point(9, 212)
-        Me.chkSaveModel.Name = "chkSaveModel"
-        Me.chkSaveModel.Size = New System.Drawing.Size(86, 17)
-        Me.chkSaveModel.TabIndex = 21
-        Me.chkSaveModel.Text = "Save Model:"
-        Me.chkSaveModel.UseVisualStyleBackColor = True
-        '
-        'ucrSaveModel
-        '
-        Me.ucrSaveModel.IsReadOnly = False
-        Me.ucrSaveModel.Location = New System.Drawing.Point(91, 210)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrSaveModel.TabIndex = 20
-        '
-        'ucrSaveObjects
-        '
-        Me.ucrSaveObjects.IsReadOnly = False
-        Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 135)
-        Me.ucrSaveObjects.Name = "ucrSaveObjects"
-        Me.ucrSaveObjects.Size = New System.Drawing.Size(137, 21)
-        Me.ucrSaveObjects.TabIndex = 22
-        '
         'dlgOneVarUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -141,7 +141,6 @@ Partial Class dlgOneVarUseModel
         Me.ClientSize = New System.Drawing.Size(425, 302)
         Me.Controls.Add(Me.ucrSaveObjects)
         Me.Controls.Add(Me.ucrSaveModel)
-        Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblReceiver)
         Me.Controls.Add(Me.ucrReceiver)
