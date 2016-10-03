@@ -17,6 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarUseModel
+    Private clsRBootDist As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,32 +32,37 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub InitialiseDialog()
-        'sdg----.InitaliseDialog()
+        sdgOneVarUseModBootstrap.InitialiseDialog()
         'ucrBase.iHelpTopicID = 
-        'ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 2
+        ' do we want this to be plotted?
         ucrReceiver.Selector = ucrSelector
         ucrReceiver.SetMeAsReceiver()
+        ucrSaveModel.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.SetFunction("bootdist")
+        'or is it clsRBootDist.SetRCommand("bootdist")
+        'clsRquantiledist.SetRCommand("quantile")???
+        ucrSaveModel.SetPrefix("model")
+        ucrSaveModel.SetItemsTypeAsModels()
+        ucrSaveModel.SetDefaultTypeAsModel()
+        ucrSaveModel.SetValidationTypeAsRVariable()
+        ucrSaveObjects.SetPrefix("bootstrap")
+        'ucrSaveObjects.SetItemsTypeAsModels()
+        'ucrSaveObjects.SetDefaultTypeAsModel()
+        ucrSaveObjects.SetValidationTypeAsRVariable()
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrSelector.SetItemType("model")
-        'sdg---.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction?)
+        sdgOneVarUseModBootstrap.SetMyRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetDefaults()
         ucrSelector.Reset()
         ucrSelector.Focus()
-        'sdg---.SetDefaults()
+        sdgOneVarUseModBootstrap.SetDefaults()
         chkSaveModel.Checked = True
-        ucrSaveModel.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
-        ucrSaveModel.SetPrefix("Model")
-        ucrSaveModel.SetItemsTypeAsModels()
-        ucrSaveModel.SetDefaultTypeAsModel()
-        ucrSaveModel.SetValidationTypeAsRVariable()
-        'ucrSaveObjects.SetPrefix("Bootstrap")
-        ucrSaveObjects.SetItemsTypeAsModels()
-        ucrSaveObjects.SetDefaultTypeAsModel()
-        ucrSaveObjects.SetValidationTypeAsRVariable()
         ucrSaveObjects.Visible = False
-        ucrSaveObjects.Enabled = False
+        ucrSaveObjects.Reset()
+        ucrSaveModel.Reset()
         chkProduceBootstrap.Enabled = False
         chkProduceBootstrap.Checked = False
         chkSaveBootstrap.Visible = False
@@ -64,6 +70,7 @@ Public Class dlgOneVarUseModel
         chkSaveBootstrap.Visible = False
         cmdBootstrapOptions.Visible = False
         BootstrapEnabled()
+        SetBootDistFunction()
         TestOKEnabled()
     End Sub
 
@@ -82,9 +89,28 @@ Public Class dlgOneVarUseModel
         SetDefaults()
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'sdg, graph it
+    Private Sub ucrSelector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
+        AssignSaveModel()
+        AssignSaveObjects()
+    End Sub
+
+    Private Sub ucrSaveModel_NameChanged() Handles ucrSaveModel.NameChanged
+        AssignSaveModel()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSaveObjects_NameChanged() Handles ucrSaveObjects.NameChanged
+        AssignSaveObjects()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetBootDistFunction()
+        If chkProduceBootstrap.Checked Then
+            'if in initialise I do clsRbootdist.SetRCommand("bootdist"), then this is clsRBootDist.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("f")
+        End If
     End Sub
 
     Private Sub AssignSaveModel()
@@ -96,11 +122,11 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub AssignSaveObjects()
-        '       If chkSaveBootstrap.Checked AndAlso Not ucrSaveObjects.IsEmpty Then
-        '      ucrBase.clsRsyntax.SetAssignTo(ucrSaveObjects.GetText, strTempModel:=ucrSaveObjects.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '     Else
-        '?    ucrBase.clsRsyntax.SetAssignTo("last_bootstrap", strTempModel:="last_bootstrap", strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '   End If
+        If chkSaveBootstrap.Checked AndAlso Not ucrSaveObjects.IsEmpty Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveObjects.GetText, strTempModel:=ucrSaveObjects.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_bootstrap", strTempModel:="last_bootstrap", strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
     End Sub
 
     Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
@@ -114,17 +140,16 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub chkSaveBootstrap_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveBootstrap.CheckedChanged
-        If chkSaveBootstrap.Checked Then
-            ucrSaveObjects.Enabled = True
+        If Not chkSaveBootstrap.Checked Then
+            ucrSaveObjects.Visible = False
         Else
-            ucrSaveObjects.Enabled = False
+            ucrSaveObjects.Visible = True
         End If
         AssignSaveObjects()
         TestOKEnabled()
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiver.SelectionChanged
-        ''''''ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
         TestOKEnabled()
         BootstrapEnabled()
     End Sub
@@ -142,29 +167,25 @@ Public Class dlgOneVarUseModel
         If Not chkProduceBootstrap.Checked Then
             chkSaveBootstrap.Visible = False
             cmdBootstrapOptions.Visible = False
-            ucrSaveObjects.Visible = False
         Else
             chkSaveBootstrap.Visible = True
             cmdBootstrapOptions.Visible = True
-            ucrSaveObjects.Visible = True
         End If
         TestOKEnabled()
         AssignSaveObjects()
+        SetBootDistFunction()
     End Sub
 
     Private Sub cmdBootstrapOptions_Click(sender As Object, e As EventArgs) Handles cmdBootstrapOptions.Click
-
+        sdgOneVarUseModBootstrap.ShowDialog()
+        BootstrapEnabled()
     End Sub
 
-    Private Sub ucrSaveModel_NameChanged() Handles ucrSaveModel.NameChanged
-        AssignSaveModel()
+    ' Private sub on 'cmdFitOptions.Click'
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        'sdgOneVarUseModBootstrap.CreateGraphs()?
         TestOKEnabled()
     End Sub
-
-    Private Sub ucrSaveObjects_Load(sender As Object, e As EventArgs) Handles ucrSaveObjects.Load
-        AssignSaveObjects()
-        TestOKEnabled()
-    End Sub
-
 
 End Class
