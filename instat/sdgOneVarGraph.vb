@@ -114,7 +114,7 @@ Public Class sdgOneVarGraph
         If chkFreeScaleAxisforFacets.Checked Then
             clsRsyntax.AddParameter("free_scale_axis", "TRUE")
         Else
-            clsRsyntax.AddParameter("free_scale_axis")
+            clsRsyntax.RemoveParameter("free_scale_axis")
         End If
     End Sub
 End Class
