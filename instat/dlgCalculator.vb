@@ -906,11 +906,15 @@ Public Class dlgCalculator
         Dim strVecOutput As CharacterVector
 
         Try
+            If ucrReceiverForCalculation.IsEmpty Then
+                ucrInputTryMessage.SetName("Empty arguments")
+            Else
+            End If
             strRAttachCommand = clsAttach.ToScript()
-            frmMain.clsRLink.RunInternalScript(strRAttachCommand, bSilent:=True)
-            strOutPut = ucrBase.clsRsyntax.GetScript
-            strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True).AsCharacter
-            ucrInputTryMessage.SetName(strVecOutput(0))
+                frmMain.clsRLink.RunInternalScript(strRAttachCommand, bSilent:=True)
+                strOutPut = ucrBase.clsRsyntax.GetScript
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
+                ucrInputTryMessage.SetName(strVecOutput(0))
 
         Catch ex As Exception
             ucrInputTryMessage.SetName("INVALID INPUT!, Please try again")
