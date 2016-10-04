@@ -52,7 +52,7 @@ Public Class dlgMakeDate
     End Sub
     Private Sub SetDefaults()
         rdoSpecifyFormat.Checked = False
-        specifyformats()
+        Formats()
         ucrInputNewColumnName.Reset()
         ucrSeclectorMakeDate.Reset()
         ucrInputFormat.Reset()
@@ -174,26 +174,16 @@ Public Class dlgMakeDate
 
     Private Sub rdoSpecifyOrigin_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSpecifyOrigin.CheckedChanged, rdoSpecifyFormat.CheckedChanged
         ShowOrigin()
-        specifyformats()
+        Formats()
     End Sub
 
-    Private Sub specifyformats()
-        If rdoSpecifyFormat.Checked Then
-            ucrInputFormat.Visible = True
-        Else
-            ucrInputFormat.Visible = False
-        End If
-    End Sub
+
     Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged
         showFormat()
     End Sub
 
-    Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged, rdoSpecifyFormat.CheckedChanged
-        If Not ucrInputFormat.IsEmpty AndAlso rdoSpecifyFormat.Checked Then
-            ucrBase.clsRsyntax.AddParameter("format", Chr(34) & ucrInputFormat.GetText & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("format")
-        End If
+    Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged
+        Formats()
     End Sub
 
     Private Sub ucrSeclectorMakeDate_DataFrameChanged() Handles ucrSeclectorMakeDate.DataFrameChanged
@@ -201,14 +191,31 @@ Public Class dlgMakeDate
     End Sub
 
 
-    Private Sub ucrInputOrigin_NameChanged() Handles ucrInputOrigin.NameChanged, rdoSpecifyOrigin.CheckedChanged
-        Origin()
+    Private Sub ucrInputOrigin_NameChanged() Handles ucrInputOrigin.NameChanged
+        Formats()
     End Sub
 
-    Private Sub Origin()
-        If rdoSpecifyOrigin.Checked AndAlso Not ucrInputOrigin.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & ucrInputOrigin.GetText & Chr(34))
+    Private Sub Formats()
+        If rdoSpecifyOrigin.Checked Then
+            ucrInputFormat.Visible = False
+            ucrBase.clsRsyntax.RemoveParameter("format")
+            If Not ucrInputOrigin.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & ucrInputOrigin.GetText & Chr(34))
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("origin")
+
+            End If
+        ElseIf rdoSpecifyFormat.Checked Then
+            ucrBase.clsRsyntax.RemoveParameter("origin")
+            ucrInputFormat.Visible = True
+            If Not ucrInputFormat.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("format", Chr(34) & ucrInputFormat.GetText & Chr(34))
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("format")
+            End If
         Else
+            ucrInputFormat.Visible = False
+            ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
         End If
     End Sub
