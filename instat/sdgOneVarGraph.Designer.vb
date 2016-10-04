@@ -26,7 +26,7 @@ Partial Class sdgOneVarGraph
         Me.tbpTypes = New System.Windows.Forms.TabPage()
         Me.lblCategorical = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
-        Me.ucrInputOther = New instat.ucrInputComboBox()
+        Me.ucrInputCategorical = New instat.ucrInputComboBox()
         Me.ucrInputNumeric = New instat.ucrInputComboBox()
         Me.tbpDisplay = New System.Windows.Forms.TabPage()
         Me.chkFreeScaleAxisforFacets = New System.Windows.Forms.CheckBox()
@@ -56,7 +56,7 @@ Partial Class sdgOneVarGraph
         '
         Me.tbpTypes.Controls.Add(Me.lblCategorical)
         Me.tbpTypes.Controls.Add(Me.lblNumeric)
-        Me.tbpTypes.Controls.Add(Me.ucrInputOther)
+        Me.tbpTypes.Controls.Add(Me.ucrInputCategorical)
         Me.tbpTypes.Controls.Add(Me.ucrInputNumeric)
         Me.tbpTypes.Location = New System.Drawing.Point(4, 22)
         Me.tbpTypes.Name = "tbpTypes"
@@ -84,13 +84,13 @@ Partial Class sdgOneVarGraph
         Me.lblNumeric.TabIndex = 4
         Me.lblNumeric.Text = "Numeric"
         '
-        'ucrInputOther
+        'ucrInputCategorical
         '
-        Me.ucrInputOther.IsReadOnly = False
-        Me.ucrInputOther.Location = New System.Drawing.Point(76, 50)
-        Me.ucrInputOther.Name = "ucrInputOther"
-        Me.ucrInputOther.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputOther.TabIndex = 3
+        Me.ucrInputCategorical.IsReadOnly = False
+        Me.ucrInputCategorical.Location = New System.Drawing.Point(76, 50)
+        Me.ucrInputCategorical.Name = "ucrInputCategorical"
+        Me.ucrInputCategorical.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputCategorical.TabIndex = 3
         '
         'ucrInputNumeric
         '
@@ -186,7 +186,7 @@ Partial Class sdgOneVarGraph
     Friend WithEvents ucrInputNumeric As ucrInputComboBox
     Friend WithEvents lblNumeric As Label
     Friend WithEvents lblCategorical As Label
-    Friend WithEvents ucrInputOther As ucrInputComboBox
+    Friend WithEvents ucrInputCategorical As ucrInputComboBox
     Friend WithEvents chkSpecifyLayout As CheckBox
     Friend WithEvents lblNumberofColumns As Label
     Friend WithEvents nudNumberofColumns As NumericUpDown
