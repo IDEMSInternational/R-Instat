@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgMakeDate
+    Public clsPaste As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub ucrSeclectorMakeDate_Load(sender As Object, e As EventArgs) Handles ucrSeclectorMakeDate.Load
         If bFirstLoad Then
@@ -31,7 +32,6 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrInputNewColumnName.SetPrefix("Date")
         ucrInputNewColumnName.SetItemsTypeAsColumns()
         ucrInputNewColumnName.SetDefaultTypeAsColumn()
         ucrInputNewColumnName.SetDataFrameSelector(ucrSeclectorMakeDate.ucrAvailableDataFrames)
@@ -42,9 +42,12 @@ Public Class dlgMakeDate
         ucrInputDay.SetItems({"%d (1-31)", "%j (1-366)"})
         ucrInputComboBoxMonthTwo.SetItems({"365/366", "366"})
         ucrInputComboBoxYearTwo.SetItems({"4 digits", "2 digits"})
-        ucrInputSpecifyDates.SetItems({"%Y-%m-%d", "%Y/%m/%d", "%d%m%Y"})
+        ucrInputFormat.SetItems({"%Y-%m-%d", "%Y/%m/%d", "%d%m%Y"})
         ucrInputComboBoxTearThree.SetItems({"4 digits", "2 digits"})
         ucrInputOrigin.SetItems({"30-12-1899 (Excel)", "01-03-1600 (Gregorian)"})
+
+        ucrBase.clsRsyntax.SetFunction("as.Date")
+        ucrBase.clsRsyntax.AddParameter("x")
 
     End Sub
     Private Sub SetDefaults()
@@ -52,8 +55,8 @@ Public Class dlgMakeDate
         specifyformats()
         ucrInputNewColumnName.Reset()
         ucrSeclectorMakeDate.Reset()
-        ucrInputSpecifyDates.Reset()
-        ucrInputSpecifyDates.SetName("%Y-%m-%d")
+        ucrInputFormat.Reset()
+        ucrInputFormat.SetName("%Y-%m-%d")
         ucrInputSeparator.SetName("/")
         ucrInputYear.SetName("%Y (4 digits)")
         ucrInputMonth.SetName("%m (1-12)")
@@ -64,6 +67,7 @@ Public Class dlgMakeDate
         ucrInputOrigin.SetName("30-12-1899 (Excel)")
         grpFormatField.Visible = False
         ucrInputOrigin.Visible = False
+        ucrInputNewColumnName.SetPrefix("Date")
         TestOKEnabled()
         rdoSingleColumn.Checked = True
         ShowGroups()
@@ -77,8 +81,8 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If Not ucrInputSpecifyDates.cboInput.Items.Contains(ucrInputSpecifyDates.GetText) Then
-            ucrInputSpecifyDates.cboInput.Items.Insert(0, ucrInputSpecifyDates.GetText)
+        If Not ucrInputFormat.cboInput.Items.Contains(ucrInputFormat.GetText) Then
+            ucrInputFormat.cboInput.Items.Insert(0, ucrInputFormat.GetText)
         Else
         End If
     End Sub
@@ -87,16 +91,37 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub UcrInputNewColumnName_NameChanged() Handles ucrInputNewColumnName.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSeclectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=True)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSeclectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=False)
     End Sub
 
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
-
-    Private Sub ucrReceiverForDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForDate.SelectionChanged, ucrReceiverYearTwo.SelectionChanged, ucrReceiverDayTwo.SelectionChanged, ucrReceiverYearThree.SelectionChanged, ucrReceiverMonthThree.SelectionChanged, ucrReceiverDayThree.SelectionChanged
+    Private Sub ucrReceiverForDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForDate.SelectionChanged
+        DateCols()
         TestOKEnabled()
+    End Sub
+
+    Private Sub DateCols()
+        If rdoSingleColumn.Checked Then
+            If Not ucrReceiverForDate.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("x")
+            End If
+        ElseIf rdoYearandDayofYear.Checked Then
+
+        Else
+
+            If Not ucrReceiverMonthThree.IsEmpty AndAlso Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverYearThree.IsEmpty Then
+
+                clsPaste.SetRCommand("paste")
+                clsPaste.AddParameter("sep", Chr(34) & "" & Chr(34))
+                clsPaste.AddParameter("x")
+            End If
+        End If
     End Sub
 
     Private Sub ucrReceiverForDate_Load(sender As Object, e As EventArgs)
@@ -154,15 +179,39 @@ Public Class dlgMakeDate
 
     Private Sub specifyformats()
         If rdoSpecifyFormat.Checked Then
-            ucrInputSpecifyDates.Visible = True
+            ucrInputFormat.Visible = True
         Else
-            ucrInputSpecifyDates.Visible = False
+            ucrInputFormat.Visible = False
         End If
     End Sub
     Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged
         showFormat()
     End Sub
 
+    Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged, rdoSpecifyFormat.CheckedChanged
+        If Not ucrInputFormat.IsEmpty AndAlso rdoSpecifyFormat.Checked Then
+            ucrBase.clsRsyntax.AddParameter("format", Chr(34) & ucrInputFormat.GetText & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("format")
+        End If
+    End Sub
+
+    Private Sub ucrSeclectorMakeDate_DataFrameChanged() Handles ucrSeclectorMakeDate.DataFrameChanged
+
+    End Sub
+
+
+    Private Sub ucrInputOrigin_NameChanged() Handles ucrInputOrigin.NameChanged, rdoSpecifyOrigin.CheckedChanged
+        Origin()
+    End Sub
+
+    Private Sub Origin()
+        If rdoSpecifyOrigin.Checked AndAlso Not ucrInputOrigin.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & ucrInputOrigin.GetText & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("origin")
+        End If
+    End Sub
 End Class
 
 
