@@ -5,7 +5,6 @@
 ' it under the terms of the GNU General Public License as published by
 ' the Free Software Foundation, either version 3 of the License, or
 ' (at your option) any later version.
-'
 ' This program is distributed in the hope that it will be useful,
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -32,9 +31,11 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub InitialiseDialog()
+        sdgOneVarFitModDisplay.InitialiseDialog()
+        sdgOneVarFitModel.InitialiseDialog()
         UcrBase.clsRsyntax.SetFunction("fitdist")
         'ucrBase.iHelpTopicID = 
-        'UcrBase.clsRsyntax.iCallType = 2
+        UcrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
@@ -42,6 +43,11 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetItemsTypeAsModels()
         ucrSaveModel.SetDefaultTypeAsModel()
         ucrSaveModel.SetValidationTypeAsRVariable()
+        UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        sdgOneVarFitModDisplay.SetModelFunction(UcrBase.clsRsyntax.clsBaseFunction)
+        sdgOneVarFitModel.SetMyRSyntax(UcrBase.clsRsyntax)
+        sdgOneVarFitModDisplay.SetDistribution(UcrDistributions)
+        sdgOneVarFitModel.SetDistribution(UcrDistributions)
     End Sub
 
     Private Sub SetDefaults()
@@ -50,7 +56,10 @@ Public Class dlgOneVarFitModel
         chkSaveModel.Checked = True
         ucrSaveModel.Reset()
         SetDataParameter()
+        EnableOptions()
         AssignSaveModel()
+        sdgOneVarFitModDisplay.SetDefaults()
+        sdgOneVarFitModel.SetDefaults()
         TestOKEnabled()
     End Sub
 
@@ -107,10 +116,8 @@ Public Class dlgOneVarFitModel
     Private Sub AssignSaveModel()
         If chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty Then
             UcrBase.clsRsyntax.SetAssignTo(ucrSaveModel.GetText, strTempModel:=ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             UcrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
 
@@ -132,18 +139,36 @@ Public Class dlgOneVarFitModel
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
         SetDataParameter()
         TestOKEnabled()
+        EnableOptions()
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
         sdgOneVarFitModel.ShowDialog()
+        EnableOptions()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgOneVarFitModDisplay.ShowDialog()
+        EnableOptions()
+    End Sub
+
+    Private Sub EnableOptions()
+        If Not UcrReceiver.IsEmpty Then
+            cmdFittingOptions.Enabled = True
+            cmdDisplayOptions.Enabled = True
+        Else
+            cmdFittingOptions.Enabled = False
+            cmdDisplayOptions.Enabled = False
+        End If
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
         SetDataParameter()
         TestOKEnabled()
     End Sub
+
+    Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
+        sdgOneVarFitModDisplay.CreateGraphs()
+    End Sub
+
 End Class

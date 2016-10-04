@@ -1490,34 +1490,34 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", factor = "geom_bar", character = "geom_bar", facets = TRUE) {
+data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, nrow = NULL, ...) {
   if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
+  if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
   numeric_geom <- match.fun(numeric)
-  factor_geom <- match.fun(factor)
-  character_geom <- match.fun(character)
+  cat_geom <- match.fun(categorical)
   localenv <- environment()
-  if(facets) {
+  if(output == "facets") {
     column_types <- unique(self$get_variables_metadata(column = columns, property = data_type_label))
+    column_types <- as.vector(column_types)
     column_types[column_types == "integer"] <- "numeric"
+    column_types[column_types == "factor" | column_types == "character" | column_types == "logical"] <- "cat"
     column_types <- unique(column_types)
     if(length(column_types) > 1) {
-      if(!missing(facets)) warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
-      facets <- FALSE
+      if(output == "facets") warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
+      output <- "combine"
     }
   }
-  if(facets) {
+  if(output == "facets") {
     if(column_types == "numeric") {
       curr_geom <- numeric_geom
       curr_geom_name <- numeric
     }
-    else if(column_types == "factor") {
-      curr_geom <- factor_geom
-      curr_geom_name <- factor
+    else if(column_types == "cat") {
+      curr_geom <- cat_geom
+      curr_geom_name <- categorical
     }
-    else if(column_types == "character") {
-      curr_geom <- character_geom
-      curr_geom_name <- character
-    }
+    else stop("Cannot plot columns of type:", column_types[i])
+    
     curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars=columns)
     if(curr_geom_name == "geom_boxplot") {
       g <- ggplot(data = curr_data, mapping = aes(x = "", y=value))
@@ -1525,11 +1525,14 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value))
     }
-    return(g + curr_geom() + facet_wrap(facets= ~variable) + ylab(""))
+    if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free", nrow = nrow) + ylab(""))
+    else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", nrow = nrow) + ylab(""))
   }
   else {
     column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
+    column_types <- as.vector(column_types)
     column_types[column_types == "integer"] <- "numeric"
+    column_types[column_types == "factor" | column_types == "character" | column_types == "logical"] <- "cat"
     curr_data <- self$get_data_frame()
     graphs <- list()
     i = 1
@@ -1538,14 +1541,11 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
         curr_geom <- numeric_geom
         curr_geom_name <- numeric
       }
-      else if(column_types[i] == "factor") {
-        curr_geom <- factor_geom
-        curr_geom_name <- factor
+      else if(column_types[i] == "cat") {
+        curr_geom <- cat_geom
+        curr_geom_name <- categorical
       }
-      else if(column_types[i] == "character") {
-        curr_geom <- character_geom
-        curr_geom_name <- character
-      }
+      else stop("Cannot plot columns of type:", column_types[i])
       
       if(curr_geom_name == "geom_boxplot") {
         g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column)))
@@ -1557,7 +1557,54 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
       graphs[[i]] <- current_graph
       i = i + 1
     }
-    return(gridExtra::grid.arrange(grobs = graphs))
+    if(output == "combine") {
+      return(gridExtra::grid.arrange(grobs = graphs, nrow = nrow))
+    }
+    else return(graphs)
   }
+}
+)
+
+data_object$set("public","make_date_yearmonthday", function(year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
+  year_col <- self$get_columns_from_data(year)
+  month_col <- self$get_columns_from_data(month)
+  day_col <- self$get_columns_from_data(day)
+  if(missing(year_format)) {
+    year_counts <- str_count(year)
+    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
+    else {
+      year_length <- year_counts[1]
+      if(year_length == 2) year_format = "%y"
+      else if(year_length == 4) year_format = "%Y"
+      else stop("Cannot detect year format with ", year_length, " digits.")
+    }
+  }
+  if(missing(month_format)) {
+    #TODO
+  }
+  if(missing(day_format)) {
+    #TODO
+  }
+  return(as.Date(paste(year_col, month_col, day_col), format = paste(year_format, month_format, day_format)))
+}
+)
+
+# Not sure if doy_format should be a parameter? There seems to only be one format for it.
+data_object$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
+  year_col <- self$get_columns_from_data(year)
+  doy_col <- self$get_columns_from_data(doy)
+  
+  if(missing(year_format)) {
+    year_counts <- str_count(year)
+    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
+    else {
+      year_length <- year_counts[1]
+      if(year_length == 2) year_format = "%y"
+      else if(year_length == 4) year_format = "%Y"
+      else stop("Cannot detect year format with ", year_length, " digits.")
+    }
+  }
+  #TODO this will be more complex to make into account of doy_typical_length
+  return(as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
 }
 )

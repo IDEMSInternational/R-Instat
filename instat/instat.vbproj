@@ -121,6 +121,10 @@
       <HintPath>..\packages\unvell.ReoGrid.dll.1.2.3.0\lib\20\unvell.ReoGrid.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="unvell.ReoScript, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\unvell.ReoGrid.dll.1.2.3.0\lib\20\unvell.ReoScript.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -140,6 +144,12 @@
       <DependentUpon>dlgAppend.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgAppend.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCountinFactor.Designer.vb">
+      <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCountinFactor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
@@ -172,6 +182,18 @@
     <Compile Include="dlgImportFromODK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMakeDate.Designer.vb">
+      <DependentUpon>dlgMakeDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMakeDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneVarCompareModels.Designer.vb">
+      <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVarCompareModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVarFitModel2.Designer.vb">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </Compile>
@@ -184,10 +206,22 @@
     <Compile Include="dlgOneVariableGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneVarUseModel.Designer.vb">
+      <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneVarUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOpenSST.Designer.vb">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOpenSST.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTablePlus.Designer.vb">
+      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTablePlus.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
@@ -208,6 +242,12 @@
     <Compile Include="sdgDescribeTwoVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgOneVarCompareModels.Designer.vb">
+      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarCompareModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgOneVarFitModDisplay.Designer.vb">
       <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
     </Compile>
@@ -224,6 +264,12 @@
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOneVarGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneVarUseModBootstrap.Designer.vb">
+      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarUseModBootstrap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -1994,6 +2040,9 @@
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCountinFactor.resx">
+      <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </EmbeddedResource>
@@ -2210,6 +2259,9 @@
     <EmbeddedResource Include="dlgFactorDataFrame.sw-KE.resx">
       <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgMakeDate.resx">
+      <DependentUpon>dlgMakeDate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.fr-FR.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
     </EmbeddedResource>
@@ -2249,6 +2301,9 @@
     <EmbeddedResource Include="dlgOneSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarCompareModels.resx">
+      <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarFitModel2.resx">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -2260,6 +2315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVariableGraph.sw-KE.resx">
       <DependentUpon>dlgOneVariableGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneVarUseModel.resx">
+      <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
@@ -2483,6 +2541,15 @@
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablePlus.fr-FR.resx">
+      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablePlus.resx">
+      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablePlus.sw-KE.resx">
+      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.fr-FR.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
     </EmbeddedResource>
@@ -2666,6 +2733,9 @@
     <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarCompareModels.resx">
+      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarFitModDisplay.resx">
       <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
     </EmbeddedResource>
@@ -2674,6 +2744,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarUseModBootstrap.resx">
+      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
@@ -4154,43 +4227,13 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="lib\ANTLR 3 License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\Antlr3.Runtime.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\DynamicInterop.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\DynamicInterop.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\FastColoredTextBox License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\FastColoredTextBox.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\RDotNet.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\RDotNet.NativeLibrary.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\RDotNet.NativeLibrary.XML">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\RDotNet.XML">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\unvell.ReoGrid.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\unvell.ReoGrid.XML">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\unvell.ReoScript.dll" />
+    <None Include="lib\Antlr3.Runtime.dll" />
+    <None Include="lib\DynamicInterop.dll" />
+    <None Include="lib\FastColoredTextBox.dll" />
+    <None Include="lib\RDotNet.dll" />
+    <None Include="lib\RDotNet.NativeLibrary.dll" />
+    <None Include="lib\unvell.ReoGrid.dll" />
+    <None Include="lib\unvell.ReoScript.dll" />
     <Content Include="static\InstatObject\R\Backend_Components\link.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
