@@ -253,7 +253,7 @@ Public Class RSyntax
                         clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                         clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
                         strAssignTo = clsGetGraphs.ToScript()
-
+                        'bou plus
                         bIsAssigned = True
                         bToBeAssigned = False
                     ElseIf Not strAssignToDataframe = "" Then
