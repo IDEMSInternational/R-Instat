@@ -558,7 +558,7 @@ Public Class frmMain
         dlgPermuteColumn.ShowDialog()
     End Sub
 
-    Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesCorrelate.Click
+    Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs)
         dlgCorrelation.ShowDialog()
     End Sub
 
@@ -625,11 +625,11 @@ Public Class frmMain
         dlgScatterPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuStatistcsMultivariatePrincipalComponents_Click(sender As Object, e As EventArgs) Handles DescribeGeneralPrincipalComponents.Click
+    Private Sub mnuStatistcsMultivariatePrincipalComponents_Click(sender As Object, e As EventArgs)
         dlgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
-    Private Sub mnuStatistcsMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles DescribeGeneralCanonicalCorrelations.Click
+    Private Sub mnuStatistcsMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs)
         dlgCanonicalCorrelationAnalysis.ShowDialog()
     End Sub
 
@@ -710,7 +710,7 @@ Public Class frmMain
         dlgFactorDataFrame.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseObjectsUseGraph.Click
+    Private Sub mnuGraphicsUseGraph_Click(sender As Object, e As EventArgs)
         dlgUseGraph.ShowDialog()
     End Sub
 
@@ -781,11 +781,11 @@ Public Class frmMain
         dlgWindrose.ShowDialog()
     End Sub
 
-    Private Sub ThemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseObjectsThemes.Click
+    Private Sub ThemesToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgThemes.ShowDialog()
     End Sub
 
-    Private Sub CombineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseObjectsCombineGraphs.Click
+    Private Sub CombineToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgCombineforGraphics.ShowDialog()
     End Sub
 
@@ -909,7 +909,7 @@ Public Class frmMain
         dlglogLinearModels.ShowDialog()
     End Sub
 
-    Private Sub DescribeGeneralCorrelations_Click(sender As Object, e As EventArgs) Handles DescribeGeneralCorrelations.Click
+    Private Sub DescribeGeneralCorrelations_Click(sender As Object, e As EventArgs)
         dlgCorrelation.ShowDialog()
     End Sub
 
@@ -1118,5 +1118,29 @@ Public Class frmMain
 
     Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TablesPlusToolStripMenuItem.Click
         dlgTablePlus.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseGraph.Click
+        dlgUseGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeCombineGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeCombineGraph.Click
+        dlgCombineforGraphics.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeThemes_Click(sender As Object, e As EventArgs) Handles mnuDescribeThemes.Click
+        dlgThemes.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeMultivariateCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateCorrelations.Click
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeMultivariateprincipalComponents_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateprincipalComponents.Click
+        dlgPrincipalComponentAnalysis.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateCanonicalCorrelations.Click
+        dlgCanonicalCorrelationAnalysis.ShowDialog()
     End Sub
 End Class
