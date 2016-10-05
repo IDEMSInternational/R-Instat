@@ -182,6 +182,12 @@
     <Compile Include="dlgImportFromODK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMakeDate.Designer.vb">
+      <DependentUpon>dlgMakeDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMakeDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVarCompareModels.Designer.vb">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
     </Compile>
@@ -210,6 +216,12 @@
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOpenSST.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTablePlus.Designer.vb">
+      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTablePlus.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
@@ -252,6 +264,12 @@
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOneVarGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneVarUseModBootstrap.Designer.vb">
+      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarUseModBootstrap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -2241,6 +2259,9 @@
     <EmbeddedResource Include="dlgFactorDataFrame.sw-KE.resx">
       <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgMakeDate.resx">
+      <DependentUpon>dlgMakeDate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.fr-FR.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
     </EmbeddedResource>
@@ -2282,9 +2303,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarCompareModels.resx">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneVarFitModel.resx">
-      <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarFitModel2.resx">
       <DependentUpon>dlgOneVarFitModel.vb</DependentUpon>
@@ -2523,6 +2541,15 @@
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablePlus.fr-FR.resx">
+      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablePlus.resx">
+      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTablePlus.sw-KE.resx">
+      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.fr-FR.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
     </EmbeddedResource>
@@ -2717,6 +2744,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarUseModBootstrap.resx">
+      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>

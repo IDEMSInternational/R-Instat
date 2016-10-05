@@ -16,10 +16,6 @@
 Imports instat.Translations
 
 Public Class sdgOneVarFitModDisplay
-    Private clsRcdfcompFunction As New RFunction
-    Private clsRdenscompFunction As New RFunction
-    Private clsRqqcompFunction As New RFunction
-    Private clsRppcompFunction As New RFunction
     Private clsRplotFunction As New RFunction
     Private clsModel As New RFunction
     Private WithEvents ucrDists As ucrDistributions
@@ -30,11 +26,6 @@ Public Class sdgOneVarFitModDisplay
     End Sub
 
     Public Sub InitialiseDialog()
-        clsRcdfcompFunction.SetRCommand("cdfcomp")
-        clsRdenscompFunction.SetRCommand("denscomp")
-        clsRqqcompFunction.SetRCommand("qqcomp")
-        clsRppcompFunction.SetRCommand("ppcomp")
-        clsRplotFunction.SetRCommand("plot")
     End Sub
 
     Public Sub SetDefaults()
@@ -44,11 +35,6 @@ Public Class sdgOneVarFitModDisplay
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
-        clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
-        clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-        clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-        clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-        clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
     End Sub
 
     Public Sub SetDistribution(ucrNewDists As ucrDistributions)
@@ -58,15 +44,25 @@ Public Class sdgOneVarFitModDisplay
 
     Public Sub CreateGraphs()
         If rdoPlotAll.Checked Then
+            clsRplotFunction.SetRCommand("plot")
+            clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
             frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoPPPlot.Checked Then
-            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
+            clsRplotFunction.SetRCommand("ppcomp")
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoCDFPlot.Checked Then
-            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+            clsRplotFunction.SetRCommand("cdfcomp")
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoQQPlot.Checked Then
-            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
+            clsRplotFunction.SetRCommand("qqcomp")
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoDensityPlot.Checked Then
-            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
+            clsRplotFunction.SetRCommand("denscomp")
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         End If
     End Sub
 
