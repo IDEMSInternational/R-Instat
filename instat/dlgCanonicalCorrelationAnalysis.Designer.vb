@@ -132,7 +132,9 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCanonicalCorrelationAnalysis"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Canonical_Correlation_Analysis"
+        Me.Text = "Canonical Correlations"
         Me.ResumeLayout(False)
 
     End Sub
