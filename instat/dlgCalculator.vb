@@ -82,8 +82,8 @@ Public Class dlgCalculator
         ucrSelectorForCalculations.Reset()
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings", "Probability", "Dates"})
         ucrSaveResultInto.SetValidationTypeAsRVariable()
-        ucrSpaceToMangeResult.Enabled = False
-        cmdTry.Enabled = False
+        ucrInputTryMessage.Enabled = False
+        'cmdTry.Enabled = False
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -897,5 +897,34 @@ Public Class dlgCalculator
 
     Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(":")
+    End Sub
+
+    Private Sub CatchErrors()
+        Dim strRAttachCommand As String
+        Dim strRDettachCommand As String
+        Dim strOutPut As String
+        Dim strVecOutput As CharacterVector
+
+        Try
+            If ucrReceiverForCalculation.IsEmpty Then
+                ucrInputTryMessage.SetName("Empty arguments")
+            Else
+            End If
+            strRAttachCommand = clsAttach.ToScript()
+                frmMain.clsRLink.RunInternalScript(strRAttachCommand, bSilent:=True)
+                strOutPut = ucrBase.clsRsyntax.GetScript
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
+                ucrInputTryMessage.SetName(strVecOutput(0))
+
+        Catch ex As Exception
+            ucrInputTryMessage.SetName("INVALID INPUT!, Please try again")
+        Finally
+            strRDettachCommand = clsDetach.ToScript()
+            frmMain.clsRLink.RunInternalScript(strRDettachCommand, bSilent:=True)
+        End Try
+    End Sub
+
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
+        CatchErrors()
     End Sub
 End Class
