@@ -17,8 +17,8 @@
 Imports instat.Translations
 
 Public Class dlgOneVarCompareModels
+    Private clsRcdfcompFunction As New RFunction
     Public bfirstload As Boolean = True
-
 
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bfirstload Then
@@ -32,16 +32,15 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub InitialiseDialog()
-        'sdgOneVarCompareModels.InitaliseDialog()
-        'UcrBase.clsRsyntax.SetFunction("fitdist")
+        sdgOneVarCompareModels.InitialiseDialog()
         'ucrBase.iHelpTopicID = 
         ucrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarCompModels
         UcrReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("gofstat")
         ucrSelectorOneVarCompModels.SetItemType("model")
-        sdgOneVarCompareModels.InitialiseDialog()
         sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        sdgOneVarCompareModels.SetReceiver(UcrReceiver)
     End Sub
 
     Private Sub SetDefaults()
@@ -70,7 +69,13 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
+        If UcrReceiver.IsEmpty Then
+            cmdDisplayObjects.Enabled = False
+        Else
+            cmdDisplayObjects.Enabled = True
+        End If
         ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         TestOKEnabled()
     End Sub
 
