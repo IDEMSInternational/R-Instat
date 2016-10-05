@@ -1111,4 +1111,12 @@ Public Class frmMain
     Private Sub mnuModelOneVariableCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelOneVariableCompareModels.Click
         dlgOneVarCompareModels.ShowDialog()
     End Sub
+
+    Private Sub mnuModelOneVariableUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelOneVariableUseModel.Click
+        dlgOneVarUseModel.ShowDialog()
+    End Sub
+
+    Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TablesPlusToolStripMenuItem.Click
+        dlgTablePlus.ShowDialog()
+    End Sub
 End Class
