@@ -36,12 +36,12 @@ Public Class sdgDescribeTwoVarGraph
     Private Sub GraphOptions()
         ucrNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Scatter and line plot"})
         ucrNumericByNumeric.cboInput.SelectedItem = "Scatter plot"
-        ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon"})
-        'ucrNumericByCategorical.cboInput.Items.Add("Dot plot")
-        'ucrNumericByCategorical.cboInput.Items.Add("Point plot")
+        ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
+        'How different is the point plot from the summary plot?
         ucrNumericByCategorical.cboInput.SelectedItem = "Box plot"
-        ucrCategoricalByNumeric.SetItems({"Summary plot"})
-        ucrCategoricalByNumeric.cboInput.SelectedItem = "Summary plot"
+        'ucrCategoricalByNumeric.SetItems({"Summary plot"})
+        ucrCategoricalByNumeric.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
+        ucrCategoricalByNumeric.cboInput.SelectedItem = "Box plot"
         ucrCategoricalByCategorical.SetItems({"Bar plot", "Dot plot"})
         ucrCategoricalByCategorical.cboInput.SelectedItem = "Bar plot"
     End Sub
