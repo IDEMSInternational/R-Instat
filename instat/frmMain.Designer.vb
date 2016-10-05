@@ -31,16 +31,12 @@ Partial Class frmMain
         Me.mnuDescribeTwoVariablesSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoVariablesTabulate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoVariablesGraph = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeTwoVariablesCorrelate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralTabulation = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralGraphics = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DescribeGeneralCorrelations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DescribeGeneralPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DescribeGeneralCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuDescribeGraphicsDialogs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeMoregraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOtherGraphicsDialogsScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOtherGraphicsDialogsLinePlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOtherGraphicsDialogsHistogram = New System.Windows.Forms.ToolStripMenuItem()
@@ -53,19 +49,16 @@ Partial Class frmMain
         Me.mnuDescribeOtherGraphicsDialogsCumulativeDistribution = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeTableDialogs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecific = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOtherTableDialogsFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOtherTableDialogsSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOtherTableDialogsMultipleResponse = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuDescribeUseObjects = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeUseObjectsUseGraph = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeUseObjectsCombineGraphs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeUseObjectsThemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsShowModels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TablesPlusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOneVariableFitModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -362,7 +355,13 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TablesPlusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeUseGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeCombineGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeThemes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeMultivariate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeMultivariateCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeMultivariateprincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeMultivariateCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -370,7 +369,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.DescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeGraphicsDialogs, Me.mnuDescribeTableDialogs, Me.ToolStripSeparator13, Me.mnuDescribeUseObjects})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeSpecific, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.mnuDescribeMoregraphs, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes})
         Me.mnuDescribe.Name = "mnuDescribe"
         Me.mnuDescribe.Size = New System.Drawing.Size(64, 20)
         Me.mnuDescribe.Tag = "Describe"
@@ -380,7 +379,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph})
         Me.mnuDescribeOneVariable.Name = "mnuDescribeOneVariable"
-        Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(162, 22)
+        Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(163, 22)
         Me.mnuDescribeOneVariable.Tag = "One_Variable"
         Me.mnuDescribeOneVariable.Text = "One Variable"
         '
@@ -400,9 +399,9 @@ Partial Class frmMain
         '
         'mnuDescribeTwoVariables
         '
-        Me.mnuDescribeTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesTabulate, Me.mnuDescribeTwoVariablesGraph, Me.mnuDescribeTwoVariablesCorrelate})
+        Me.mnuDescribeTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesTabulate, Me.mnuDescribeTwoVariablesGraph})
         Me.mnuDescribeTwoVariables.Name = "mnuDescribeTwoVariables"
-        Me.mnuDescribeTwoVariables.Size = New System.Drawing.Size(162, 22)
+        Me.mnuDescribeTwoVariables.Size = New System.Drawing.Size(163, 22)
         Me.mnuDescribeTwoVariables.Tag = "Two_Variables"
         Me.mnuDescribeTwoVariables.Text = "Two Variables"
         '
@@ -428,21 +427,13 @@ Partial Class frmMain
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
-        'mnuDescribeTwoVariablesCorrelate
+        'mnuDescribeGeneral
         '
-        Me.mnuDescribeTwoVariablesCorrelate.Enabled = False
-        Me.mnuDescribeTwoVariablesCorrelate.Name = "mnuDescribeTwoVariablesCorrelate"
-        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(142, 22)
-        Me.mnuDescribeTwoVariablesCorrelate.Tag = "Correlate..."
-        Me.mnuDescribeTwoVariablesCorrelate.Text = "Correlate..."
-        '
-        'DescribeGeneral
-        '
-        Me.DescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics, Me.DescribeGeneralCorrelations, Me.DescribeGeneralPrincipalComponents, Me.DescribeGeneralCanonicalCorrelations})
-        Me.DescribeGeneral.Name = "DescribeGeneral"
-        Me.DescribeGeneral.Size = New System.Drawing.Size(162, 22)
-        Me.DescribeGeneral.Tag = "General"
-        Me.DescribeGeneral.Text = "General"
+        Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics})
+        Me.mnuDescribeGeneral.Name = "mnuDescribeGeneral"
+        Me.mnuDescribeGeneral.Size = New System.Drawing.Size(163, 22)
+        Me.mnuDescribeGeneral.Tag = "General"
+        Me.mnuDescribeGeneral.Text = "General"
         '
         'DescribeGeneralColumnSummaries
         '
@@ -467,39 +458,18 @@ Partial Class frmMain
         Me.DescribeGeneralGraphics.Tag = "Graphics..."
         Me.DescribeGeneralGraphics.Text = "Graphics..."
         '
-        'DescribeGeneralCorrelations
-        '
-        Me.DescribeGeneralCorrelations.Name = "DescribeGeneralCorrelations"
-        Me.DescribeGeneralCorrelations.Size = New System.Drawing.Size(203, 22)
-        Me.DescribeGeneralCorrelations.Tag = "Correlations"
-        Me.DescribeGeneralCorrelations.Text = "Correlations..."
-        '
-        'DescribeGeneralPrincipalComponents
-        '
-        Me.DescribeGeneralPrincipalComponents.Name = "DescribeGeneralPrincipalComponents"
-        Me.DescribeGeneralPrincipalComponents.Size = New System.Drawing.Size(203, 22)
-        Me.DescribeGeneralPrincipalComponents.Tag = "Principal_Components"
-        Me.DescribeGeneralPrincipalComponents.Text = "Principal Components..."
-        '
-        'DescribeGeneralCanonicalCorrelations
-        '
-        Me.DescribeGeneralCanonicalCorrelations.Name = "DescribeGeneralCanonicalCorrelations"
-        Me.DescribeGeneralCanonicalCorrelations.Size = New System.Drawing.Size(203, 22)
-        Me.DescribeGeneralCanonicalCorrelations.Tag = "Canonical_Correlations"
-        Me.DescribeGeneralCanonicalCorrelations.Text = "Canonical Correlations..."
-        '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(159, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(160, 6)
         '
-        'mnuDescribeGraphicsDialogs
+        'mnuDescribeMoregraphs
         '
-        Me.mnuDescribeGraphicsDialogs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOtherGraphicsDialogsScatterPlot, Me.mnuDescribeOtherGraphicsDialogsLinePlot, Me.mnuDescribeOtherGraphicsDialogsHistogram, Me.mnuDescribeOtherGraphicsDialogsBoxplot, Me.mnuDescribeOtherGraphicsDialogsDotPlot, Me.mnuDescribeOtherGraphicsDialogsBarChart, Me.mnuDescribeOtherGraphicsDialogsBarChartFromSummary, Me.ToolStripSeparator8, Me.mnuDescribeOtherGraphicsDialogsWindRose, Me.mnuDescribeOtherGraphicsDialogsCumulativeDistribution, Me.mnuDescribeOtherGraphicsDialogsInventoryPlot, Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid})
-        Me.mnuDescribeGraphicsDialogs.Name = "mnuDescribeGraphicsDialogs"
-        Me.mnuDescribeGraphicsDialogs.Size = New System.Drawing.Size(162, 22)
-        Me.mnuDescribeGraphicsDialogs.Tag = "Graphics_Dialogs"
-        Me.mnuDescribeGraphicsDialogs.Text = "Graphics Dialogs"
+        Me.mnuDescribeMoregraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOtherGraphicsDialogsScatterPlot, Me.mnuDescribeOtherGraphicsDialogsLinePlot, Me.mnuDescribeOtherGraphicsDialogsHistogram, Me.mnuDescribeOtherGraphicsDialogsBoxplot, Me.mnuDescribeOtherGraphicsDialogsDotPlot, Me.mnuDescribeOtherGraphicsDialogsBarChart, Me.mnuDescribeOtherGraphicsDialogsBarChartFromSummary, Me.ToolStripSeparator8, Me.mnuDescribeOtherGraphicsDialogsWindRose, Me.mnuDescribeOtherGraphicsDialogsCumulativeDistribution, Me.mnuDescribeOtherGraphicsDialogsInventoryPlot, Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid})
+        Me.mnuDescribeMoregraphs.Name = "mnuDescribeMoregraphs"
+        Me.mnuDescribeMoregraphs.Size = New System.Drawing.Size(163, 22)
+        Me.mnuDescribeMoregraphs.Tag = "Graphics_Dialogs"
+        Me.mnuDescribeMoregraphs.Text = "More Graphs"
         '
         'mnuDescribeOtherGraphicsDialogsScatterPlot
         '
@@ -586,13 +556,13 @@ Partial Class frmMain
         Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid.Tag = "Population_Pyramid..."
         Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid.Text = "Population Pyramid..."
         '
-        'mnuDescribeTableDialogs
+        'mnuDescribeSpecific
         '
-        Me.mnuDescribeTableDialogs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOtherTableDialogsFrequency, Me.mnuDescribeOtherTableDialogsSummary, Me.mnuDescribeOtherTableDialogsMultipleResponse})
-        Me.mnuDescribeTableDialogs.Name = "mnuDescribeTableDialogs"
-        Me.mnuDescribeTableDialogs.Size = New System.Drawing.Size(162, 22)
-        Me.mnuDescribeTableDialogs.Tag = "Table_Dialogs"
-        Me.mnuDescribeTableDialogs.Text = "Table Dialogs"
+        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOtherTableDialogsFrequency, Me.mnuDescribeOtherTableDialogsSummary, Me.mnuDescribeOtherTableDialogsMultipleResponse})
+        Me.mnuDescribeSpecific.Name = "mnuDescribeSpecific"
+        Me.mnuDescribeSpecific.Size = New System.Drawing.Size(163, 22)
+        Me.mnuDescribeSpecific.Tag = "Table_Dialogs"
+        Me.mnuDescribeSpecific.Text = "Specific"
         '
         'mnuDescribeOtherTableDialogsFrequency
         '
@@ -621,37 +591,7 @@ Partial Class frmMain
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(159, 6)
-        '
-        'mnuDescribeUseObjects
-        '
-        Me.mnuDescribeUseObjects.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeUseObjectsUseGraph, Me.mnuDescribeUseObjectsCombineGraphs, Me.mnuDescribeUseObjectsThemes})
-        Me.mnuDescribeUseObjects.Name = "mnuDescribeUseObjects"
-        Me.mnuDescribeUseObjects.Size = New System.Drawing.Size(162, 22)
-        Me.mnuDescribeUseObjects.Tag = "Use_Objects"
-        Me.mnuDescribeUseObjects.Text = "Use Objects"
-        '
-        'mnuDescribeUseObjectsUseGraph
-        '
-        Me.mnuDescribeUseObjectsUseGraph.Name = "mnuDescribeUseObjectsUseGraph"
-        Me.mnuDescribeUseObjectsUseGraph.Size = New System.Drawing.Size(172, 22)
-        Me.mnuDescribeUseObjectsUseGraph.Tag = "UseGraph"
-        Me.mnuDescribeUseObjectsUseGraph.Text = "Use Graph..."
-        '
-        'mnuDescribeUseObjectsCombineGraphs
-        '
-        Me.mnuDescribeUseObjectsCombineGraphs.Name = "mnuDescribeUseObjectsCombineGraphs"
-        Me.mnuDescribeUseObjectsCombineGraphs.Size = New System.Drawing.Size(172, 22)
-        Me.mnuDescribeUseObjectsCombineGraphs.Tag = "Combine_Graphs..."
-        Me.mnuDescribeUseObjectsCombineGraphs.Text = "Combine Graphs..."
-        '
-        'mnuDescribeUseObjectsThemes
-        '
-        Me.mnuDescribeUseObjectsThemes.Enabled = False
-        Me.mnuDescribeUseObjectsThemes.Name = "mnuDescribeUseObjectsThemes"
-        Me.mnuDescribeUseObjectsThemes.Size = New System.Drawing.Size(172, 22)
-        Me.mnuDescribeUseObjectsThemes.Tag = "Themes"
-        Me.mnuDescribeUseObjectsThemes.Text = "Themes..."
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(160, 6)
         '
         'mnuModel
         '
@@ -683,6 +623,12 @@ Partial Class frmMain
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel.Size = New System.Drawing.Size(242, 22)
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel.Tag = "RandomSamples_(Use_Model)..."
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel.Text = "Random Samples (Use Model)..."
+        '
+        'TablesPlusToolStripMenuItem
+        '
+        Me.TablesPlusToolStripMenuItem.Name = "TablesPlusToolStripMenuItem"
+        Me.TablesPlusToolStripMenuItem.Size = New System.Drawing.Size(242, 22)
+        Me.TablesPlusToolStripMenuItem.Text = "Tables Plus"
         '
         'ToolStripSeparator3
         '
@@ -2835,11 +2781,48 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
-        'TablesPlusToolStripMenuItem
+        'mnuDescribeUseGraph
         '
-        Me.TablesPlusToolStripMenuItem.Name = "TablesPlusToolStripMenuItem"
-        Me.TablesPlusToolStripMenuItem.Size = New System.Drawing.Size(242, 22)
-        Me.TablesPlusToolStripMenuItem.Text = "Tables Plus"
+        Me.mnuDescribeUseGraph.Name = "mnuDescribeUseGraph"
+        Me.mnuDescribeUseGraph.Size = New System.Drawing.Size(163, 22)
+        Me.mnuDescribeUseGraph.Text = "Use Graph"
+        '
+        'mnuDescribeCombineGraph
+        '
+        Me.mnuDescribeCombineGraph.Name = "mnuDescribeCombineGraph"
+        Me.mnuDescribeCombineGraph.Size = New System.Drawing.Size(163, 22)
+        Me.mnuDescribeCombineGraph.Text = "Combine Graphs"
+        '
+        'mnuDescribeThemes
+        '
+        Me.mnuDescribeThemes.Name = "mnuDescribeThemes"
+        Me.mnuDescribeThemes.Size = New System.Drawing.Size(163, 22)
+        Me.mnuDescribeThemes.Text = "Themes"
+        '
+        'mnuDescribeMultivariate
+        '
+        Me.mnuDescribeMultivariate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeMultivariateCorrelations, Me.mnuDescribeMultivariateprincipalComponents, Me.mnuDescribeMultivariateCanonicalCorrelations})
+        Me.mnuDescribeMultivariate.Name = "mnuDescribeMultivariate"
+        Me.mnuDescribeMultivariate.Size = New System.Drawing.Size(163, 22)
+        Me.mnuDescribeMultivariate.Text = "Multivariate"
+        '
+        'mnuDescribeMultivariateCorrelations
+        '
+        Me.mnuDescribeMultivariateCorrelations.Name = "mnuDescribeMultivariateCorrelations"
+        Me.mnuDescribeMultivariateCorrelations.Size = New System.Drawing.Size(194, 22)
+        Me.mnuDescribeMultivariateCorrelations.Text = "Correlations"
+        '
+        'mnuDescribeMultivariateprincipalComponents
+        '
+        Me.mnuDescribeMultivariateprincipalComponents.Name = "mnuDescribeMultivariateprincipalComponents"
+        Me.mnuDescribeMultivariateprincipalComponents.Size = New System.Drawing.Size(194, 22)
+        Me.mnuDescribeMultivariateprincipalComponents.Text = "Principal Components"
+        '
+        'mnuDescribeMultivariateCanonicalCorrelations
+        '
+        Me.mnuDescribeMultivariateCanonicalCorrelations.Name = "mnuDescribeMultivariateCanonicalCorrelations"
+        Me.mnuDescribeMultivariateCanonicalCorrelations.Size = New System.Drawing.Size(194, 22)
+        Me.mnuDescribeMultivariateCanonicalCorrelations.Text = "Canonical Correlations"
         '
         'frmMain
         '
@@ -3048,19 +3031,11 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeTwoVariablesSummarise As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesTabulate As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesGraph As ToolStripMenuItem
-    Friend WithEvents mnuDescribeTwoVariablesCorrelate As ToolStripMenuItem
-    Friend WithEvents DescribeGeneral As ToolStripMenuItem
+    Friend WithEvents mnuDescribeGeneral As ToolStripMenuItem
     Friend WithEvents DescribeGeneralColumnSummaries As ToolStripMenuItem
     Friend WithEvents DescribeGeneralTabulation As ToolStripMenuItem
     Friend WithEvents DescribeGeneralGraphics As ToolStripMenuItem
-    Friend WithEvents DescribeGeneralCorrelations As ToolStripMenuItem
-    Friend WithEvents DescribeGeneralPrincipalComponents As ToolStripMenuItem
-    Friend WithEvents DescribeGeneralCanonicalCorrelations As ToolStripMenuItem
-    Friend WithEvents mnuDescribeUseObjects As ToolStripMenuItem
-    Friend WithEvents mnuDescribeUseObjectsUseGraph As ToolStripMenuItem
-    Friend WithEvents mnuDescribeUseObjectsCombineGraphs As ToolStripMenuItem
-    Friend WithEvents mnuDescribeUseObjectsThemes As ToolStripMenuItem
-    Friend WithEvents mnuDescribeGraphicsDialogs As ToolStripMenuItem
+    Friend WithEvents mnuDescribeMoregraphs As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsScatterPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsLinePlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsHistogram As ToolStripMenuItem
@@ -3073,7 +3048,7 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeOtherGraphicsDialogsCumulativeDistribution As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsInventoryPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsPopulationPyramid As ToolStripMenuItem
-    Friend WithEvents mnuDescribeTableDialogs As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecific As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherTableDialogsFrequency As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherTableDialogsSummary As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherTableDialogsMultipleResponse As ToolStripMenuItem
@@ -3205,4 +3180,11 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnDateUseDateUseTime As ToolStripMenuItem
     Friend WithEvents mnuFileConvert As ToolStripMenuItem
     Friend WithEvents TablesPlusToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuDescribeMultivariate As ToolStripMenuItem
+    Friend WithEvents mnuDescribeMultivariateCorrelations As ToolStripMenuItem
+    Friend WithEvents mnuDescribeMultivariateprincipalComponents As ToolStripMenuItem
+    Friend WithEvents mnuDescribeMultivariateCanonicalCorrelations As ToolStripMenuItem
+    Friend WithEvents mnuDescribeUseGraph As ToolStripMenuItem
+    Friend WithEvents mnuDescribeCombineGraph As ToolStripMenuItem
+    Friend WithEvents mnuDescribeThemes As ToolStripMenuItem
 End Class
