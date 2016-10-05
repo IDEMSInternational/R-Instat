@@ -18,14 +18,23 @@ Public Class dlgContrasts
     Public bFirstLoad As Boolean = True
     Private Sub dlgContrasts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
+        TestOKEnabled
     End Sub
 
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 353
     End Sub
@@ -36,4 +45,6 @@ Public Class dlgContrasts
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
+
 End Class
