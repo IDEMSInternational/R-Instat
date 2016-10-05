@@ -18,8 +18,8 @@ Imports RDotNet
 Public Class dlgDescribeTwoVarGraph
     Public strSecondVarType, strVarType As String
     Private clsRGGplotFunction, clsRBoxPlotGeom, clsRScatterPlotGeom, clsRLinePlotGeom, clsRSummaryAesFunction, clsRStatSummary, clsRFacet As New RFunction
-    Private clsRBoxAesFunction, clsRScatterAesFunction, clsRDotPlotGeom, clsRBarPlotGeom, clsRBarDotAesFunction As New RFunction
-    Private clsRFrequencyPolygonGeom, clsRHistogramGeom, clsRDensityPlotGeom, clsRFreqPolyAesFunction, clsRHistAesFunction, clsRDensityAesFunction As New RFunction
+    Private clsRBoxAesFunction, clsRBoxAesFunction2, clsRScatterAesFunction, clsRDotPlotGeom, clsRBarPlotGeom, clsRBarAesFunction, clsRDotAesFunction, clsRDotAesFunction2 As New RFunction
+    Private clsRFrequencyPolygonGeom, clsRHistogramGeom, clsRDensityPlotGeom, clsRFreqPolyAesFunction, clsRFreqPolyAesFunction2, clsRHistAesFunction, clsRHistAesFunction2, clsRDensityAesFunction, clsRDensityAesFunction2 As New RFunction
     Private bFirstLoad As Boolean = True
     Private Sub dlgDescribeTwoVarGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,6 +56,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrBase.clsRsyntax.iCallType = 0
         clsRFacet.SetRCommand("facet_wrap")
         clsRFacet.AddParameter("facets", "~variable")
+        ucrBase.clsRsyntax.AddOperatorParameter("facet_wrap", clsRFunc:=clsRFacet)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -95,7 +96,7 @@ Public Class dlgDescribeTwoVarGraph
         strSecondVarType = ucrSecondVariableReceiver.strCurrDataType
         If ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
             ScatterLinePlot()
-            ucrBase.clsRsyntax.RemoveOperatorParameter("facet_wrap")
+            clsRFacet.RemoveParameterByName("scale")
             Select Case sdgDescribeTwoVarGraph.ucrNumericByNumeric.GetText
                 Case "Scatter plot"
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRScatterPlotGeom)
@@ -106,39 +107,71 @@ Public Class dlgDescribeTwoVarGraph
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRLinePlotGeom)
                     ucrBase.clsRsyntax.AddOperatorParameter("geom_point", clsRFunc:=clsRScatterPlotGeom)
             End Select
-        ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "factor")) Then
-            ucrBase.clsRsyntax.AddOperatorParameter("facet_wrap", clsRFunc:=clsRFacet)
+        ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "factor" OrElse strSecondVarType = "character" OrElse strSecondVarType = "logical")) Then
+            clsRFacet.RemoveParameterByName("scale")
             ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
             Select Case sdgDescribeTwoVarGraph.ucrNumericByCategorical.GetText
                 Case "Box plot"
                     BoxPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction)
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRBoxPlotGeom)
                 Case "Frequency polygon"
                     FrequencyPolygon()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRFreqPolyAesFunction)
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRFrequencyPolygonGeom)
                 Case "Histogram"
                     Histogram()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRHistAesFunction)
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRHistogramGeom)
                 Case "Density plot"
                     DensityPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDensityAesFunction)
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRDensityPlotGeom)
+                Case "Dot plot"
+                    clsRFacet.AddParameter("scale", Chr(34) & "free_x" & Chr(34))
+                    DotPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction)
+                    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRDotPlotGeom)
+                Case "Point plot"
             End Select
-        ElseIf ((strVarType = "factor") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
-            SummaryPlot()
+        ElseIf ((strVarType = "factor" OrElse strVarType = "character" OrElse strVarType = "logical") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
+            'SummaryPlot()
             ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
-            ucrBase.clsRsyntax.AddOperatorParameter("facet_wrap", clsRFunc:=clsRFacet)
+            clsRFacet.AddParameter("scale", Chr(34) & "free_x" & Chr(34))
             Select Case sdgDescribeTwoVarGraph.ucrCategoricalByNumeric.GetText
-                Case "Summary plot"
-                    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRStatSummary)
+                Case "Box plot"
+                    BoxPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction2)
+                    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRBoxPlotGeom)
+                Case "Frequency polygon"
+                    FrequencyPolygon()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRFreqPolyAesFunction2)
+                    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRFrequencyPolygonGeom)
+                Case "Histogram"
+                    Histogram()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRHistAesFunction2)
+                    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRHistogramGeom)
+                Case "Density plot"
+                    DensityPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDensityAesFunction2)
+                    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRDensityPlotGeom)
+                Case "Dot plot"
+                    clsRFacet.AddParameter("scale", Chr(34) & "free_x" & Chr(34))
+                    DotPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction2)
+                    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRDotPlotGeom)
+                Case "Point plot"
             End Select
-        ElseIf ((strVarType = "factor") And (strSecondVarType = "factor")) Then
-            BarDotPlot()
+        ElseIf ((strVarType = "factor" OrElse strVarType = "character" OrElse strVarType = "logical") And (strSecondVarType = "factor" OrElse strSecondVarType = "character" OrElse strSecondVarType = "logical")) Then
             ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
-            ucrBase.clsRsyntax.AddOperatorParameter("facet_wrap", clsRFunc:=clsRFacet)
+            clsRFacet.AddParameter("scale", Chr(34) & "free_x" & Chr(34))
             Select Case sdgDescribeTwoVarGraph.ucrCategoricalByCategorical.GetText
                 Case "Dot plot"
+                    DotPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction)
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRDotPlotGeom)
                 Case "Bar plot"
+                    BarPlot()
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRBarPlotGeom)
             End Select
         End If
@@ -149,13 +182,22 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ucrSecondVariableReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondVariableReceiver.SelectionChanged
-        clsRBoxAesFunction.AddParameter("fill", ucrSecondVariableReceiver.GetVariableNames(False))
-        clsRScatterAesFunction.AddParameter("x", ucrSecondVariableReceiver.GetVariableNames(False))
-        clsRBarDotAesFunction.AddParameter("x", ucrSecondVariableReceiver.GetVariableNames(False))
-        clsRSummaryAesFunction.AddParameter("y", ucrSecondVariableReceiver.GetVariableNames(False))
-        clsRFreqPolyAesFunction.AddParameter("color", ucrSecondVariableReceiver.GetVariableNames(False))
-        clsRHistAesFunction.AddParameter("fill", ucrSecondVariableReceiver.GetVariableNames(False))
-        clsRDensityAesFunction.AddParameter("color", ucrSecondVariableReceiver.GetVariableNames(False))
+        If ucrSecondVariableReceiver.IsEmpty() = False Then
+            clsRScatterAesFunction.AddParameter("x", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRBarAesFunction.AddParameter("fill", ucrSecondVariableReceiver.GetVariableNames(False))
+            'clsRSummaryAesFunction.AddParameter("y", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRBoxAesFunction.AddParameter("x", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRDotAesFunction.AddParameter("y", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRFreqPolyAesFunction.AddParameter("color", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRHistAesFunction.AddParameter("color", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRDensityAesFunction.AddParameter("color", ucrSecondVariableReceiver.GetVariableNames(False))
+
+            clsRBoxAesFunction2.AddParameter("y", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRDotAesFunction2.AddParameter("x", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRFreqPolyAesFunction2.AddParameter("x", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRHistAesFunction2.AddParameter("x", ucrSecondVariableReceiver.GetVariableNames(False))
+            clsRDensityAesFunction2.AddParameter("x", ucrSecondVariableReceiver.GetVariableNames(False))
+        End If
         TestOkEnabled()
     End Sub
 
@@ -166,9 +208,9 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub BoxPlot()
         clsRBoxPlotGeom.SetRCommand("geom_boxplot")
         clsRBoxAesFunction.SetRCommand("aes")
-        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction)
-        clsRBoxAesFunction.AddParameter("x", Chr(34) & "" & Chr(34))
         clsRBoxAesFunction.AddParameter("y", "value")
+        clsRBoxAesFunction2.SetRCommand("aes")
+        clsRBoxAesFunction2.AddParameter("x", "value")
     End Sub
 
     Private Sub ScatterLinePlot()
@@ -177,44 +219,57 @@ Public Class dlgDescribeTwoVarGraph
         clsRScatterAesFunction.SetRCommand("aes")
         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction)
         clsRScatterAesFunction.AddParameter("y", "value")
-        clsRScatterAesFunction.AddParameter("colour", "variable")
     End Sub
 
-    Private Sub BarDotPlot()
+
+    Private Sub DotPlot()
         clsRDotPlotGeom.SetRCommand("geom_dotplot")
-        clsRBarPlotGeom.SetRCommand("geom_bar")
-        clsRBarDotAesFunction.SetRCommand("aes")
-        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBarDotAesFunction)
-        clsRBarDotAesFunction.AddParameter("fill", "value")
+        clsRDotPlotGeom.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
+        clsRDotAesFunction.SetRCommand("aes")
+        clsRDotAesFunction.AddParameter("x", "value")
+        clsRDotAesFunction2.SetRCommand("aes")
+        clsRDotAesFunction2.AddParameter("y", "value")
     End Sub
 
-    Private Sub SummaryPlot()
-        clsRStatSummary.SetRCommand("stat_summary")
-        clsRStatSummary.AddParameter("fun.y", Chr(34) & "mean" & Chr(34))
-        clsRStatSummary.AddParameter("geom", Chr(34) & "point" & Chr(34))
-        clsRSummaryAesFunction.SetRCommand("aes")
-        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRSummaryAesFunction)
-        clsRSummaryAesFunction.AddParameter("x", "value")
+    Private Sub BarPlot()
+        clsRBarPlotGeom.SetRCommand("geom_bar")
+        clsRBarPlotGeom.AddParameter("position", Chr(34) & "dodge" & Chr(34))
+        clsRBarAesFunction.SetRCommand("aes")
+        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBarAesFunction)
+        clsRBarAesFunction.AddParameter("x", "value")
     End Sub
+
+    'Private Sub SummaryPlot()
+    '    clsRStatSummary.SetRCommand("stat_summary")
+    '    clsRStatSummary.AddParameter("fun.y", Chr(34) & "mean" & Chr(34))
+    '    clsRStatSummary.AddParameter("geom", Chr(34) & "point" & Chr(34))
+    '    clsRSummaryAesFunction.SetRCommand("aes")
+    '    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRSummaryAesFunction)
+    '    clsRSummaryAesFunction.AddParameter("x", "value")
+    'End Sub
 
     Private Sub FrequencyPolygon()
         clsRFrequencyPolygonGeom.SetRCommand("geom_freqpoly")
         clsRFreqPolyAesFunction.SetRCommand("aes")
-        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRFreqPolyAesFunction)
         clsRFreqPolyAesFunction.AddParameter("x", "value")
+        clsRFreqPolyAesFunction2.SetRCommand("aes")
+        clsRFreqPolyAesFunction2.AddParameter("color", "value")
     End Sub
 
     Private Sub DensityPlot()
         clsRDensityPlotGeom.SetRCommand("geom_density")
         clsRDensityAesFunction.SetRCommand("aes")
-        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDensityAesFunction)
         clsRDensityAesFunction.AddParameter("x", "value")
+        clsRDensityAesFunction2.SetRCommand("aes")
+        clsRDensityAesFunction2.AddParameter("color", "value")
     End Sub
 
     Private Sub Histogram()
         clsRHistogramGeom.SetRCommand("geom_histogram")
+        clsRHistogramGeom.AddParameter("position", Chr(34) & "dodge" & Chr(34))
         clsRHistAesFunction.SetRCommand("aes")
-        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRHistAesFunction)
         clsRHistAesFunction.AddParameter("x", "value")
+        clsRHistAesFunction2.SetRCommand("aes")
+        clsRHistAesFunction2.AddParameter("color", "value")
     End Sub
 End Class
