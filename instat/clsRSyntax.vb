@@ -39,9 +39,8 @@ Public Class RSyntax
     Private strAssignToColumn As String
     Private strAssignToModel As String
     Private strAssignToGraph As String
-    'These are names for the 
     Public bToBeAssigned As Boolean = False
-    'bToBeAssigned is a boolean telling whether or not, AT THE CURRENT STAGE of running code within R, the output NEEDS TO BE assigned to the variable with the appropriate name: strAssignTo.
+    'bToBeAssigned is a boolean telling whether or not, AT THE CURRENT STAGE of running code within R, the output of the Base R-command NEEDS TO BE assigned to the variable with the appropriate name: strAssignTo.
     Public bIsAssigned As Boolean = False
     'bIsAssigned tells blindly whether or not the variabe with the appropriate name has been assigned to the output of the Base R-command.
     Private bAssignToIsPrefix As Boolean
