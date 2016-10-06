@@ -16,32 +16,41 @@
 
 
 Public Class RSyntax
+    'RSyntax is intended to store all the R-commands that are raised by the activity of a dialogue. 
+    'So far, it consists in a main R-command (Base), that takes the form of: 
+    '- an "RFunction", dealing with R-commands of the form __(__=__, __=__, ...), 
+    '- "ROperator", dealing with R-commands of the form: __+__, 
+    '- or more generally a string.
+    'See also RLink to understand how these commands, as RSyntax fields, are then communicated to, and run in R.
     Public clsBaseFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Public strCommandString As String = ""
     Public bUseBaseFunction As Boolean = False
     Public bUseBaseOperator As Boolean = False
     Public bUseCommandString As Boolean = False
+    'Above, the three types of Base R-commands, and their associated "radio bottons booleans".
     Public iCallType As Integer = 0
     Public strScript As String
     Public i As Integer
     Public bExcludeAssignedFunctionOutput As Boolean = True
     Private strAssignTo As String
+    'strAssignTo is the name that should be used to assign in R the output of the main (Base) R-command.
     Private strAssignToDataframe As String
     Private strAssignToColumn As String
     Private strAssignToModel As String
     Private strAssignToGraph As String
+    'These are names for the 
     Public bToBeAssigned As Boolean = False
+    'bToBeAssigned is a boolean telling whether or not, AT THE CURRENT STAGE of running code within R, the output NEEDS TO BE assigned to the variable with the appropriate name: strAssignTo.
     Public bIsAssigned As Boolean = False
+    'bIsAssigned tells blindly whether or not the variabe with the appropriate name has been assigned to the output of the Base R-command.
     Private bAssignToIsPrefix As Boolean
     Private bAssignToColumnWithoutNames As Boolean
     Private bInsertColumnBefore As String
 
-    Public Sub SetFunction(strFunctionName As String, Optional ByRef clsFunction As RFunction = Nothing)
-        If clsFunction Is Nothing Then
-            clsFunction = clsBaseFunction
-        End If
-        clsFunction.SetRCommand(strFunctionName)
+    Public Sub SetFunction(strFunctionName As String)
+        'Warning: confusing name
+        clsBaseFunction.SetRCommand(strFunctionName)
         bUseBaseFunction = True
         bUseBaseOperator = False
         bUseCommandString = False
@@ -53,19 +62,13 @@ Public Class RSyntax
         bUseBaseOperator = False
         bUseCommandString = False
     End Sub
-
+    'Both SetFunction and SetBaseRFunction set the Base R-command to the RFunction type, 
+    'and set the clsBaseFunction by giving respectively the desired RFunction as parameter, or the R-command that characterizes the desired RFunction as parameter.
     Public Sub SetBaseROperator(clsOperator As ROperator)
         clsBaseOperator = clsOperator
         bUseBaseFunction = False
         bUseBaseOperator = True
         bUseCommandString = False
-    End Sub
-
-    Public Sub SetCommandString(strCommand As String)
-        strCommandString = strCommand
-        bUseBaseFunction = False
-        bUseBaseOperator = False
-        bUseCommandString = True
     End Sub
 
     Public Sub SetOperation(strOp As String, Optional bBracketTemp As Boolean = True)
@@ -74,6 +77,15 @@ Public Class RSyntax
         bUseBaseOperator = True
         bUseCommandString = False
     End Sub
+    'Similarly, both SetBaseROperator and SetOperation set the Base R-command to the ROperator type, 
+    'and set the clsBaseOperator by giving respectively the desired ROperator itself as parameter, or the desired R-command that characterize the desired ROperator as parameters.
+    Public Sub SetCommandString(strCommand As String)
+        strCommandString = strCommand
+        bUseBaseFunction = False
+        bUseBaseOperator = False
+        bUseCommandString = True
+    End Sub
+    'In the string case, the class used for the Base R-command is simply a string...
 
     Public Sub SetAssignTo(strAssignToName As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
         If bUseBaseOperator Then
