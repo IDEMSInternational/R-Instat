@@ -94,10 +94,6 @@ Public Class frmMain
         dlgFileNew.ShowDialog()
     End Sub
 
-    Private Sub StartOfTheRainsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticEventsStartOfTheRains.Click
-        dlgStartofRains.ShowDialog()
-    End Sub
-
     Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateRegularSequence.Click
         dlgRegularSequence.ShowDialog()
     End Sub
@@ -108,10 +104,6 @@ Public Class frmMain
 
     Private Sub mnuGraphicsBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBoxplot.Click
         dlgBoxplot.ShowDialog()
-    End Sub
-
-    Private Sub mnuEndofRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticEventsEndofRains.Click
-        dlgEndofRains.ShowDialog()
     End Sub
 
     Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsInventoryPlot.Click
@@ -332,56 +324,36 @@ Public Class frmMain
         dlgNon_ParametricTwoWayAnova.ShowDialog()
     End Sub
 
-    Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageNewWorksheet.Click
+    Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseNewWorksheet.Click
         dlgNewWorksheet.ShowDialog()
     End Sub
 
-    Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageImportDailyData.Click
+    Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseImportDailyData.Click
 
     End Sub
 
-    Private Sub MakeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageMakeFactor.Click
+    Private Sub MakeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseMakeFactor.Click
         dlgMakeFactor.ShowDialog()
     End Sub
 
-    Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageShiftDailyData.Click
+    Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseShiftDailyData.Click
         dlgShiftDailyData.ShowDialog()
     End Sub
 
-    Private Sub UnstackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageUnstackDailyData.Click
+    Private Sub UnstackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseUnstackDailyData.Click
         dlgUnstackDailyData.ShowDialog()
     End Sub
 
-    Private Sub StackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageStackDailyData.Click
+    Private Sub StackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseStackDailyData.Click
         dlgStackDailyData.ShowDialog()
     End Sub
 
-    Private Sub InterpolateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageInterpolate.Click
+    Private Sub InterpolateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseInterpolate.Click
         dlgInterpolate.ShowDialog()
     End Sub
 
-    Private Sub OptionsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageOptions.Click
+    Private Sub OptionsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseOptions.Click
         dlgOptions.ShowDialog()
-    End Sub
-
-    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticDisplayDaily.Click
-        dlgDisplayDaily.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticSummary.Click
-        dlgSummary.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticEventsExtremes_Click(sender As Object, e As EventArgs) Handles mnuClimaticEventsExtremes.Click
-        dlgExtremes.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticEventsSpells_Click(sender As Object, e As EventArgs) Handles mnuClimaticEventsSpells.Click
-        dlgSpells.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticEventsWaterBalance.Click
-        dlgWaterBalance.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticExamine_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamine.Click
@@ -1142,5 +1114,33 @@ Public Class frmMain
 
     Private Sub mnuDescribeMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateCanonicalCorrelations.Click
         dlgCanonicalCorrelationAnalysis.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeDescribeDaily_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeDescribeDaily.Click
+        dlgDisplayDaily.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseSummary.Click
+        dlgSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseEventsStartoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseEventsStartoftheRains.Click
+        dlgStartofRains.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseEventsExtremes_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseEventsExtremes.Click
+        dlgExtremes.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseEventsSpells_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseEventsSpells.Click
+        dlgSpells.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseEventsWaterBalance.Click
+        dlgWaterBalance.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseEventsEndoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseEventsEndoftheRains.Click
+        dlgEndofRains.ShowDialog()
     End Sub
 End Class
