@@ -162,29 +162,3 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   return(curr_data)
 }
 )
-
-# instat_object$set("public", "get_data_for_calculation", function(calc, current_manipulations = list()) {
-#   all_manipulations <- current_manipulations
-#   data_names <- unique(as.vector(sapply(all_manipulations, function(x) names(x$calculated_from))))
-#   if(length(data_names == 1)) {
-#     curr_data <- self$get_data_frame(data_names)
-#     for(manipulation in all_manipulations) {
-#       if(manipulation$sub_type == "by") {
-#         col_names_exp = c()
-#         i = 1
-#         for(col_name in manipulation$calculated_from) {
-#           if(!(col_name %in% names(curr_data))) {
-#             stop(col_name, " not found in data.")
-#           }
-#           col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
-#           i = i + 1
-#         }
-#         curr_data <- curr_data %>% group_by_(.dots = col_names_exp, add = TRUE)
-#       }
-#       else if(manipulation$sub_type == "filter") {
-#       }
-#     }
-#   }
-#   return(curr_data)
-# }
-# )

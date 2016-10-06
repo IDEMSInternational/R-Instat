@@ -1564,3 +1564,47 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
   }
 }
 )
+
+data_object$set("public","make_date_yearmonthday", function(year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
+  year_col <- self$get_columns_from_data(year)
+  month_col <- self$get_columns_from_data(month)
+  day_col <- self$get_columns_from_data(day)
+  if(missing(year_format)) {
+    year_counts <- str_count(year)
+    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
+    else {
+      year_length <- year_counts[1]
+      if(year_length == 2) year_format = "%y"
+      else if(year_length == 4) year_format = "%Y"
+      else stop("Cannot detect year format with ", year_length, " digits.")
+    }
+  }
+  if(missing(month_format)) {
+    #TODO
+  }
+  if(missing(day_format)) {
+    #TODO
+  }
+  return(as.Date(paste(year_col, month_col, day_col), format = paste(year_format, month_format, day_format)))
+}
+)
+
+# Not sure if doy_format should be a parameter? There seems to only be one format for it.
+data_object$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
+  year_col <- self$get_columns_from_data(year)
+  doy_col <- self$get_columns_from_data(doy)
+  
+  if(missing(year_format)) {
+    year_counts <- str_count(year)
+    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
+    else {
+      year_length <- year_counts[1]
+      if(year_length == 2) year_format = "%y"
+      else if(year_length == 4) year_format = "%Y"
+      else stop("Cannot detect year format with ", year_length, " digits.")
+    }
+  }
+  #TODO this will be more complex to make into account of doy_typical_length
+  return(as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
+}
+)
