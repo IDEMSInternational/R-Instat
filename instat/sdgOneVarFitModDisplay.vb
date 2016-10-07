@@ -84,4 +84,9 @@ Public Class sdgOneVarFitModDisplay
             rdoPPPlot.Enabled = True
         End If
     End Sub
+
+    'Private Sub tbcQuantiles_VisibleChanged(sender As Object, e As EventArgs) Handles tbcQuantiles.VisibleChanged
+    'if we are using One Var Fit Model then I do not want this tab to be visible.
+    'tbcQuantiles.Visible = False
+    'End Sub
 End Class

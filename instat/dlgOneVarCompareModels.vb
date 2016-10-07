@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarCompareModels
-    Private clsRcdfcompFunction As New RFunction
+    'Private clsRcdfcompFunction As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
