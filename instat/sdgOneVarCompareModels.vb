@@ -45,17 +45,15 @@ Public Class sdgOneVarCompareModels
         chkQQ.Checked = False
         chkSaveChi.Checked = True
         chkSaveObjects.Checked = True
-        chkInputBreakpoints.Checked = False
+        chkInputBreakpoints.Enabled = False ' disabled for now
         ucrSavePlots.chkSaveGraph.Checked = False
         ucrSavePlots.Enabled = False ' disabled for now
         ucrSavePlots.ucrInputGraphName.SetPrefix("plots")
         ucrObjectName.SetValidationTypeAsRVariable()
         ucrObjectName.SetName("gof")
-        ucrSaveChiSq.SetValidationTypeAsRVariable()
-        ucrSaveChiSq.SetDefaultTypeAsDataFrame()
-        ucrSaveChiSq.SetName("ChiSquare")
         CreateGraphs()
         ReturnEnabled()
+        DisplayChiSquare()
         'ucrBase.ihelptopicID = 
     End Sub
 
@@ -80,17 +78,9 @@ Public Class sdgOneVarCompareModels
         ReturnEnabled()
     End Sub
 
-    Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveChi.CheckedChanged
-        If Not chkSaveChi.Checked Then
-            ucrSaveChiSq.Visible = False
-        Else
-            ucrSaveChiSq.Visible = True
-        End If
-        ReturnEnabled()
-    End Sub
-
-    Private Sub chkInputBreakpoints_CheckedChanged(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
-
+    Private Sub DisplayChiSquare()
+        'If our distribution is continuous, then enable the option to display chi-square
+        'For continuous this is always enabled.
     End Sub
 
     Public Sub CreateGraphs()
@@ -111,8 +101,6 @@ Public Class sdgOneVarCompareModels
 
     End Sub
 
-
-
     ' To say if our models are discrete, we cannot use Density, QQ or PP
     'Private Sub SetPlotOptions()
     'If Not chosenmodels.bIsContinuous Then
@@ -129,23 +117,36 @@ Public Class sdgOneVarCompareModels
     'End If
     'End Sub
 
-
-    'Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
-    '   clsRsyntax = clsRNewSyntax
-    'End Sub
-
     Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
         If chkInputBreakpoints.Checked Then
-            clsRsyntax.AddParameter("chisqbreaks") 'in the brackets have numbers inputted numbers inputted)
+            clsRsyntax.AddParameter("chisqbreaks") 'in the brackets have numbers inputted numbers inputted
         End If
     End Sub
 
     Private Sub ReturnEnabled()
-        If Not (chkSaveObjects.Checked AndAlso ucrObjectName.IsEmpty) AndAlso Not (chkSaveChi.Checked AndAlso ucrSaveChiSq.IsEmpty) Then
-            ucrBase.cmdReturn.Enabled = True
+        If Not (chkSaveObjects.Checked AndAlso ucrObjectName.IsEmpty) Then
+            ucrSubBase.cmdReturn.Enabled = True
         Else
-            ucrBase.cmdReturn.Enabled = False
+            ucrSubBase.cmdReturn.Enabled = False
         End If
+    End Sub
+
+    Public Sub ChiSqObject()
+        'instat_object$set("public", "get_from_model", Function(data_name, model_name, chisqtable, value2, value3)
+
+        dlgOneVarCompareModels.ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        '  dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("model_name") Chr(34) & 
+
+    End Sub
+
+
+    Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveChi.CheckedChanged
+        'dlgOneVarCompareModels.ucrBase.clsRsyntax.
+
+
+        'display 5th element of object - the chisquare if this is selected.
+        ' for discrete this is shown anyway
     End Sub
 
     ' Private Sub ucrSavePlots_NameChanged() Handles ucrSavePlots.Click
