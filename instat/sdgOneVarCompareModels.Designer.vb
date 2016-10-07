@@ -22,14 +22,13 @@ Partial Class sdgOneVarCompareModels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtonsSubdialogue()
+        Me.ucrSubBase = New instat.ucrButtonsSubdialogue()
         Me.chkSaveObjects = New System.Windows.Forms.CheckBox()
         Me.chkSaveChi = New System.Windows.Forms.CheckBox()
         Me.chkInputBreakpoints = New System.Windows.Forms.CheckBox()
         Me.lblGoF = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.ucrSaveChiSq = New instat.ucrInputTextBox()
         Me.ucrObjectName = New instat.ucrInputTextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.ucrSavePlots = New instat.ucrSaveGraph()
@@ -42,12 +41,12 @@ Partial Class sdgOneVarCompareModels
         Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'ucrSubBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(14, 168)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrSubBase.Location = New System.Drawing.Point(14, 168)
+        Me.ucrSubBase.Name = "ucrSubBase"
+        Me.ucrSubBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrSubBase.TabIndex = 0
         '
         'chkSaveObjects
         '
@@ -74,9 +73,9 @@ Partial Class sdgOneVarCompareModels
         Me.chkInputBreakpoints.AutoSize = True
         Me.chkInputBreakpoints.Location = New System.Drawing.Point(6, 75)
         Me.chkInputBreakpoints.Name = "chkInputBreakpoints"
-        Me.chkInputBreakpoints.Size = New System.Drawing.Size(176, 17)
+        Me.chkInputBreakpoints.Size = New System.Drawing.Size(164, 17)
         Me.chkInputBreakpoints.TabIndex = 3
-        Me.chkInputBreakpoints.Text = "Input Breakpoints to Chi-Square"
+        Me.chkInputBreakpoints.Text = "Input Chi-Square Breakpoints"
         Me.chkInputBreakpoints.UseVisualStyleBackColor = True
         '
         'lblGoF
@@ -100,7 +99,6 @@ Partial Class sdgOneVarCompareModels
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.ucrSaveChiSq)
         Me.TabPage1.Controls.Add(Me.ucrObjectName)
         Me.TabPage1.Controls.Add(Me.chkSaveObjects)
         Me.TabPage1.Controls.Add(Me.lblGoF)
@@ -114,18 +112,10 @@ Partial Class sdgOneVarCompareModels
         Me.TabPage1.Text = "Fit"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'ucrSaveChiSq
-        '
-        Me.ucrSaveChiSq.IsReadOnly = False
-        Me.ucrSaveChiSq.Location = New System.Drawing.Point(127, 50)
-        Me.ucrSaveChiSq.Name = "ucrSaveChiSq"
-        Me.ucrSaveChiSq.Size = New System.Drawing.Size(107, 21)
-        Me.ucrSaveChiSq.TabIndex = 6
-        '
         'ucrObjectName
         '
         Me.ucrObjectName.IsReadOnly = False
-        Me.ucrObjectName.Location = New System.Drawing.Point(127, 27)
+        Me.ucrObjectName.Location = New System.Drawing.Point(97, 27)
         Me.ucrObjectName.Name = "ucrObjectName"
         Me.ucrObjectName.Size = New System.Drawing.Size(107, 21)
         Me.ucrObjectName.TabIndex = 5
@@ -197,7 +187,7 @@ Partial Class sdgOneVarCompareModels
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(321, 200)
-        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrSubBase)
         Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -213,7 +203,7 @@ Partial Class sdgOneVarCompareModels
 
     End Sub
 
-    Friend WithEvents ucrBase As ucrButtonsSubdialogue
+    Friend WithEvents ucrSubBase As ucrButtonsSubdialogue
     Friend WithEvents chkSaveObjects As CheckBox
     Friend WithEvents chkSaveChi As CheckBox
     Friend WithEvents chkInputBreakpoints As CheckBox
@@ -226,6 +216,5 @@ Partial Class sdgOneVarCompareModels
     Friend WithEvents chkPP As CheckBox
     Friend WithEvents chkQQ As CheckBox
     Friend WithEvents ucrObjectName As ucrInputTextBox
-    Friend WithEvents ucrSaveChiSq As ucrInputTextBox
     Friend WithEvents ucrSavePlots As ucrSaveGraph
 End Class
