@@ -25,7 +25,7 @@ Partial Class dlgCountinFactor
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrCountSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrCountReceiver = New instat.ucrReceiverSingle()
-        Me.ucrInputColumnName = New instat.ucrInputComboBox()
+        Me.ucrInputCountColumnName = New instat.ucrInputComboBox()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.SuspendLayout()
@@ -56,18 +56,18 @@ Partial Class dlgCountinFactor
         Me.ucrCountReceiver.Size = New System.Drawing.Size(130, 20)
         Me.ucrCountReceiver.TabIndex = 2
         '
-        'ucrInputColumnName
+        'ucrInputCountColumnName
         '
-        Me.ucrInputColumnName.IsReadOnly = False
-        Me.ucrInputColumnName.Location = New System.Drawing.Point(144, 205)
-        Me.ucrInputColumnName.Name = "ucrInputColumnName"
-        Me.ucrInputColumnName.Size = New System.Drawing.Size(204, 21)
-        Me.ucrInputColumnName.TabIndex = 3
+        Me.ucrInputCountColumnName.IsReadOnly = False
+        Me.ucrInputCountColumnName.Location = New System.Drawing.Point(144, 205)
+        Me.ucrInputCountColumnName.Name = "ucrInputCountColumnName"
+        Me.ucrInputCountColumnName.Size = New System.Drawing.Size(204, 21)
+        Me.ucrInputCountColumnName.TabIndex = 3
         '
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 205)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(6, 205)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 4
@@ -89,7 +89,7 @@ Partial Class dlgCountinFactor
         Me.ClientSize = New System.Drawing.Size(423, 297)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputColumnName)
+        Me.Controls.Add(Me.ucrInputCountColumnName)
         Me.Controls.Add(Me.ucrCountReceiver)
         Me.Controls.Add(Me.ucrCountSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -108,7 +108,7 @@ Partial Class dlgCountinFactor
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrCountSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrCountReceiver As ucrReceiverSingle
-    Friend WithEvents ucrInputColumnName As ucrInputComboBox
+    Friend WithEvents ucrInputCountColumnName As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents lblSelectedFactor As Label
 End Class
