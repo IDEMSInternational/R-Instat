@@ -22,7 +22,7 @@ Partial Class sdgOneVarFitModDisplay
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tbcPlots = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.rdoPPPlot = New System.Windows.Forms.RadioButton()
         Me.rdoQQPlot = New System.Windows.Forms.RadioButton()
@@ -31,18 +31,20 @@ Partial Class sdgOneVarFitModDisplay
         Me.rdoPlotAll = New System.Windows.Forms.RadioButton()
         Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
-        Me.TabControl1.SuspendLayout()
+        Me.tbcQuantiles = New System.Windows.Forms.TabPage()
+        Me.tbcPlots.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TabControl1
+        'tbcPlots
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Location = New System.Drawing.Point(10, 10)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(161, 203)
-        Me.TabControl1.TabIndex = 0
+        Me.tbcPlots.Controls.Add(Me.TabPage1)
+        Me.tbcPlots.Controls.Add(Me.tbcQuantiles)
+        Me.tbcPlots.Location = New System.Drawing.Point(10, 10)
+        Me.tbcPlots.Name = "tbcPlots"
+        Me.tbcPlots.SelectedIndex = 0
+        Me.tbcPlots.Size = New System.Drawing.Size(161, 203)
+        Me.tbcPlots.TabIndex = 0
         '
         'TabPage1
         '
@@ -129,26 +131,36 @@ Partial Class sdgOneVarFitModDisplay
         Me.ucrBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrBase.TabIndex = 1
         '
+        'tbcQuantiles
+        '
+        Me.tbcQuantiles.Location = New System.Drawing.Point(4, 22)
+        Me.tbcQuantiles.Name = "tbcQuantiles"
+        Me.tbcQuantiles.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbcQuantiles.Size = New System.Drawing.Size(153, 177)
+        Me.tbcQuantiles.TabIndex = 1
+        Me.tbcQuantiles.Text = "Quantiles"
+        Me.tbcQuantiles.UseVisualStyleBackColor = True
+        '
         'sdgOneVarFitModDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(176, 256)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.tbcPlots)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarFitModDisplay"
         Me.Text = "Display Options"
-        Me.TabControl1.ResumeLayout(False)
+        Me.tbcPlots.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tbcPlots As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents rdoPPPlot As RadioButton
     Friend WithEvents rdoQQPlot As RadioButton
@@ -157,4 +169,5 @@ Partial Class sdgOneVarFitModDisplay
     Friend WithEvents rdoPlotAll As RadioButton
     Friend WithEvents rdoNoPlot As RadioButton
     Friend WithEvents ucrBase As ucrButtonsSubdialogue
+    Friend WithEvents tbcQuantiles As TabPage
 End Class
