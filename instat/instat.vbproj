@@ -242,6 +242,12 @@
     <Compile Include="sdgDescribeTwoVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgMerge.Designer.vb">
+      <DependentUpon>sdgMerge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMerge.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgOneVarCompareModels.Designer.vb">
       <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
     </Compile>
@@ -2732,6 +2738,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMerge.fr-FR.resx">
+      <DependentUpon>sdgMerge.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMerge.resx">
+      <DependentUpon>sdgMerge.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMerge.sw-KE.resx">
+      <DependentUpon>sdgMerge.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarCompareModels.resx">
       <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
