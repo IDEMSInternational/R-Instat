@@ -180,7 +180,7 @@ Public Class dlgOneVarUseModel
         TestOKEnabled()
         ' AssignSaveObjects()
         SetFunctions()
-        sdgOneVarUseModFit.UseCIcdf()
+        sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 
     Private Sub cmdBootstrapOptions_Click(sender As Object, e As EventArgs) Handles cmdBootstrapOptions.Click

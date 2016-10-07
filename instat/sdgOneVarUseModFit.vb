@@ -56,7 +56,7 @@ Public Class sdgOneVarUseModFit
         rdoInsertValues.Enabled = False
         'any of InsertValues needs to be disabled here.
         'ucrBase.ihelptopicID = 
-        UseCIcdf()
+        SetPlotOptions()
         nudFrom.Value = 0
         nudTo.Value = 1
         nudBy.Value = 0.1
@@ -64,14 +64,6 @@ Public Class sdgOneVarUseModFit
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
-    End Sub
-
-    Public Sub UseCIcdf()
-        If Not dlgOneVarUseModel.chkProduceBootstrap.Checked Then
-            rdoCIcdf.Visible = False
-        Else
-            rdoCIcdf.Visible = True
-        End If
     End Sub
 
     Public Sub CreateGraphs()
@@ -112,6 +104,19 @@ Public Class sdgOneVarUseModFit
         clsRseqFunction.AddParameter("to", nudTo.Value.ToString())
         clsRseqFunction.AddParameter("by", nudBy.Value.ToString())
         clsRsyntax.AddParameter("probs", clsRFunctionParameter:=clsRseqFunction)
+    End Sub
+
+    Public Sub SetPlotOptions()
+        If Not dlgOneVarUseModel.chkProduceBootstrap.Checked Then
+            rdoCIcdf.Enabled = False
+            If rdoCIcdf.Checked Then
+                rdoPlotAll.Checked = True
+            End If
+        Else
+            rdoCIcdf.Enabled = True
+        End If
+
+        ' if discrete discribution then cannot do PP, QQ, dens
     End Sub
 
 End Class
