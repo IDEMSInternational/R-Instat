@@ -27,13 +27,13 @@ Partial Class dlgCorrelation
         Me.lblFirstColumn = New System.Windows.Forms.Label()
         Me.lblSecondColumn = New System.Windows.Forms.Label()
         Me.grpMethod = New System.Windows.Forms.GroupBox()
-        Me.rdoSpearman = New System.Windows.Forms.RadioButton()
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
+        Me.rdoSpearman = New System.Windows.Forms.RadioButton()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
-        Me.rdoPairwise = New System.Windows.Forms.RadioButton()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
+        Me.rdoPairwise = New System.Windows.Forms.RadioButton()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.nudConfidenceInterval = New System.Windows.Forms.NumericUpDown()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
@@ -101,17 +101,6 @@ Partial Class dlgCorrelation
         Me.grpMethod.Tag = "Method"
         Me.grpMethod.Text = "Method"
         '
-        'rdoSpearman
-        '
-        Me.rdoSpearman.AutoSize = True
-        Me.rdoSpearman.Location = New System.Drawing.Point(128, 14)
-        Me.rdoSpearman.Name = "rdoSpearman"
-        Me.rdoSpearman.Size = New System.Drawing.Size(73, 17)
-        Me.rdoSpearman.TabIndex = 2
-        Me.rdoSpearman.Tag = "Spearman"
-        Me.rdoSpearman.Text = "Spearman"
-        Me.rdoSpearman.UseVisualStyleBackColor = True
-        '
         'rdoKendall
         '
         Me.rdoKendall.AutoSize = True
@@ -136,14 +125,25 @@ Partial Class dlgCorrelation
         Me.rdoPearson.Text = "Pearson"
         Me.rdoPearson.UseVisualStyleBackColor = True
         '
+        'rdoSpearman
+        '
+        Me.rdoSpearman.AutoSize = True
+        Me.rdoSpearman.Location = New System.Drawing.Point(128, 14)
+        Me.rdoSpearman.Name = "rdoSpearman"
+        Me.rdoSpearman.Size = New System.Drawing.Size(73, 17)
+        Me.rdoSpearman.TabIndex = 2
+        Me.rdoSpearman.Tag = "Spearman"
+        Me.rdoSpearman.Text = "Spearman"
+        Me.rdoSpearman.UseVisualStyleBackColor = True
+        '
         'cmdOptions
         '
         Me.cmdOptions.Location = New System.Drawing.Point(255, 185)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 10
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Tag = "Options..."
+        Me.cmdOptions.Text = "Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'grpMissing
@@ -158,17 +158,6 @@ Partial Class dlgCorrelation
         Me.grpMissing.Tag = "Missing"
         Me.grpMissing.Text = "Missing"
         '
-        'rdoPairwise
-        '
-        Me.rdoPairwise.AutoSize = True
-        Me.rdoPairwise.Location = New System.Drawing.Point(124, 14)
-        Me.rdoPairwise.Name = "rdoPairwise"
-        Me.rdoPairwise.Size = New System.Drawing.Size(64, 17)
-        Me.rdoPairwise.TabIndex = 1
-        Me.rdoPairwise.Tag = "Pairwise"
-        Me.rdoPairwise.Text = "Pairwise"
-        Me.rdoPairwise.UseVisualStyleBackColor = True
-        '
         'rdoCompleteRowsOnly
         '
         Me.rdoCompleteRowsOnly.AutoSize = True
@@ -181,6 +170,17 @@ Partial Class dlgCorrelation
         Me.rdoCompleteRowsOnly.Tag = "Complete_rows_only"
         Me.rdoCompleteRowsOnly.Text = "Complete rows only"
         Me.rdoCompleteRowsOnly.UseVisualStyleBackColor = True
+        '
+        'rdoPairwise
+        '
+        Me.rdoPairwise.AutoSize = True
+        Me.rdoPairwise.Location = New System.Drawing.Point(124, 14)
+        Me.rdoPairwise.Name = "rdoPairwise"
+        Me.rdoPairwise.Size = New System.Drawing.Size(64, 17)
+        Me.rdoPairwise.TabIndex = 1
+        Me.rdoPairwise.Tag = "Pairwise"
+        Me.rdoPairwise.Text = "Pairwise"
+        Me.rdoPairwise.UseVisualStyleBackColor = True
         '
         'lblConfInterval
         '
