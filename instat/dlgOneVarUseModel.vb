@@ -17,8 +17,8 @@
 Imports instat.Translations
 
 Public Class dlgOneVarUseModel
-    Private clsRBootDist As New RFunction
     Public bfirstload As Boolean = True
+    Public clsRbootFunction As New RFunction
 
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bfirstload Then
@@ -35,14 +35,11 @@ Public Class dlgOneVarUseModel
         sdgOneVarUseModBootstrap.InitialiseDialog()
         'ucrBase.iHelpTopicID = 
         ucrBase.clsRsyntax.iCallType = 2
-        ' do we want this to be plotted?
         ucrReceiver.Selector = ucrSelector
         ucrReceiver.SetMeAsReceiver()
         ucrSaveModel.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.SetFunction("bootdist")
-        'or is it clsRBootDist.SetRCommand("bootdist")
-        'clsRquantiledist.SetRCommand("quantile")???
         ucrSaveModel.SetPrefix("model")
+        ucrBase.clsRsyntax.SetFunction("quantile")
         ucrSaveModel.SetItemsTypeAsModels()
         ucrSaveModel.SetDefaultTypeAsModel()
         ucrSaveModel.SetValidationTypeAsRVariable()
@@ -52,6 +49,7 @@ Public Class dlgOneVarUseModel
         ucrSaveObjects.SetValidationTypeAsRVariable()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrSelector.SetItemType("model")
+        sdgOneVarUseModBootstrap.SetMyBootFunction(clsRbootFunction)
         sdgOneVarUseModBootstrap.SetMyRSyntax(ucrBase.clsRsyntax)
     End Sub
 
@@ -70,7 +68,7 @@ Public Class dlgOneVarUseModel
         chkSaveBootstrap.Visible = False
         cmdBootstrapOptions.Visible = False
         BootstrapEnabled()
-        SetBootDistFunction()
+        SetFunctions()
         TestOKEnabled()
     End Sub
 
@@ -104,13 +102,15 @@ Public Class dlgOneVarUseModel
         TestOKEnabled()
     End Sub
 
-    Private Sub SetBootDistFunction()
+    Private Sub SetFunctions()
         If chkProduceBootstrap.Checked Then
-            'if in initialise I do clsRbootdist.SetRCommand("bootdist"), then this is clsRBootDist.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
-            ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
+            clsRbootFunction.SetRCommand("bootdist")
+            clsRbootFunction.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsRbootFunction)
         Else
-            ucrBase.clsRsyntax.RemoveParameter("f")
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiver.GetVariables())
         End If
+
     End Sub
 
     Private Sub AssignSaveModel()
@@ -150,8 +150,9 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiver.SelectionChanged
-        TestOKEnabled()
         BootstrapEnabled()
+        SetFunctions()
+        TestOKEnabled()
     End Sub
 
     Private Sub BootstrapEnabled()
@@ -173,7 +174,7 @@ Public Class dlgOneVarUseModel
         End If
         TestOKEnabled()
         AssignSaveObjects()
-        SetBootDistFunction()
+        SetFunctions()
     End Sub
 
     Private Sub cmdBootstrapOptions_Click(sender As Object, e As EventArgs) Handles cmdBootstrapOptions.Click
@@ -185,7 +186,9 @@ Public Class dlgOneVarUseModel
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         'sdgOneVarUseModBootstrap.CreateGraphs()?
-        TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        frmMain.clsRLink.RunScript(clsRbootFunction.ToScript(), bReturnOutput:=2)
+    End Sub
 End Class

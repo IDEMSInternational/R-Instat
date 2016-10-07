@@ -46,6 +46,9 @@ Public Class sdgOneVarCompareModels
         chkSaveChi.Checked = True
         chkSaveObjects.Checked = True
         chkInputBreakpoints.Checked = False
+        ucrSavePlots.chkSaveGraph.Checked = False
+        ucrSavePlots.Enabled = False ' disabled for now
+        ucrSavePlots.ucrInputGraphName.SetPrefix("plots")
         ucrObjectName.SetValidationTypeAsRVariable()
         ucrObjectName.SetName("gof")
         ucrSaveChiSq.SetValidationTypeAsRVariable()
@@ -160,8 +163,8 @@ Public Class sdgOneVarCompareModels
         End If
     End Sub
 
-    Private Sub ucrName_NameChanged() Handles ucrObjectName.NameChanged, ucrSaveChiSq.NameChanged
-        ReturnEnabled()
-    End Sub
+    ' Private Sub ucrSavePlots_NameChanged() Handles ucrSavePlots.Click
+    'TODO Graph Names assigned go up in increments for any of the graphs selected (e.g. 3 plots are selected and it is named "plots", then automatically we get "plots1", ... , "plots3"
+    'End Sub
 
 End Class
