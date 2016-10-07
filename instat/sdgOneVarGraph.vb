@@ -40,6 +40,7 @@ Public Class sdgOneVarGraph
         ucrInputNumeric.SetName("Boxplot")
         ucrInputCategorical.SetName("Bar Chart")
 
+
     End Sub
 
     Public Sub InitialiseDialog()
@@ -47,22 +48,12 @@ Public Class sdgOneVarGraph
         ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         nudNumberofColumns.Maximum = 10
         nudNumberofColumns.Minimum = 1
-        SetNumericGeomFunction()
-        SetCategoricalGeomFunction()
+
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
         clsRsyntax = clsNewRSyntax
     End Sub
-
-    Public Sub SetCategorical(strCategorical As String)
-        strCategorical = strCategoriacalGeomFunction
-    End Sub
-
-    Public Sub SetNumeric(strNumericVal As String)
-        strNumericVal = strNumericGeomFunction
-    End Sub
-
     Private Sub SpecifyLayoutControl()
         If chkSpecifyLayout.Checked Then
             lblNumberofColumns.Visible = True

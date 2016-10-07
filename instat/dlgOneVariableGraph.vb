@@ -22,14 +22,12 @@ Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
     Private clsBaseOperatorOneColumn As New ROperator
     Private clsBaseFunctionMultipleVariables As New RFunction
-    Private strNumericalFunc As String
-    Private strCategoricalFunc As String
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -43,6 +41,7 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.Reset()
         rdoFacets.Checked = True
         rdoCombineGraph.Enabled = False
+
         sdgOneVarGraph.SetDefaults()
         TestOkEnabled()
     End Sub
@@ -67,11 +66,8 @@ Public Class dlgOneVariableGraph
         clsBaseFunctionMultipleVariables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
         sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
         sdgOneVarGraph.InitialiseDialog()
-        sdgOneVarGraph.SetNumeric(strNumericalFunc)
-        sdgOneVarGraph.SetCategorical(strCategoricalFunc)
+
     End Sub
-
-
     Private Sub ReopenDialog()
         CheckDataType()
     End Sub
@@ -87,17 +83,19 @@ Public Class dlgOneVariableGraph
     Private Sub OneOrMoreVariables()
         If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then
             ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperatorOneColumn)
-            If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" Then
+            If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" OrElse ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "integer" Then
                 'TODO Geom should come from the subdialog
-                clsRgeom_Function.SetRCommand(strNumericalFunc)
+                clsRaesFunction.ClearParameters()
+                clsRgeom_Function.SetRCommand(sdgOneVarGraph.strNumericGeomFunction)
                 If Not ucrReceiverOneVarGraph.IsEmpty() Then
                     clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
                 End If
 
                 clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             Else
+                clsRaesFunction.ClearParameters()
                 'TODO Geom should come from the subdialog
-                clsRgeom_Function.SetRCommand(strCategoricalFunc)
+                clsRgeom_Function.SetRCommand(sdgOneVarGraph.strCategoriacalGeomFunction)
                 If Not ucrReceiverOneVarGraph.IsEmpty() Then
                     clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
                 End If
