@@ -54,8 +54,6 @@ Public Class dlgPermuteColumn
         clsSetSampleFunc.AddParameter("replace", "FALSE")
         nudSetSeed.Visible = False
         ucrBase.iHelpTopicID = 66
-
-        ucrInputPermuteRows.SetPrefix("permute")
         ucrInputPermuteRows.SetItemsTypeAsColumns()
         ucrInputPermuteRows.SetDefaultTypeAsColumn()
         ucrInputPermuteRows.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
