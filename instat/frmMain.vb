@@ -1143,4 +1143,8 @@ Public Class frmMain
     Private Sub mnuClimaticOrganiseEventsEndoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseEventsEndoftheRains.Click
         dlgEndofRains.ShowDialog()
     End Sub
+
+    Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateCountInFactor.Click
+        dlgCountinFactor.ShowDialog()
+    End Sub
 End Class
