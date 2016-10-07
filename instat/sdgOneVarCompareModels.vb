@@ -21,6 +21,7 @@ Public Class sdgOneVarCompareModels
     Private clsRqqcompFunction As New RFunction
     Private clsRppcompFunction As New RFunction
     Private clsListFunction As New RFunction
+    Private clsGetObjectOperator As New ROperator
     Private clsModel As New RFunction
     Private clsRsyntax As New RFunction
     Private WithEvents ucrRecs As ucrReceiver
@@ -36,6 +37,7 @@ Public Class sdgOneVarCompareModels
         clsRdenscompFunction.SetRCommand("denscomp")
         clsRqqcompFunction.SetRCommand("qqcomp")
         clsRppcompFunction.SetRCommand("ppcomp")
+        clsGetObjectOperator.SetOperation("$")
     End Sub
 
     Public Sub SetDefaults()
@@ -65,6 +67,18 @@ Public Class sdgOneVarCompareModels
         clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
     End Sub
 
+    Public Sub DisplayChiSquare()
+        If chkSaveChi.Checked Then
+            clsGetObjectOperator.SetOperation("$")
+            dlgOneVarCompareModels.ucrBase.clsRsyntax.SetOperatorParameter(True, "chisqtable", clsOp:=clsGetObjectOperator)
+            ' frmMain.clsRLink.RunScript(clsGetObjectOperator.ToScript(), 1)
+        End If
+
+
+        'If our distribution is continuous, then enable the option to display chi-square
+        'For continuous this is always enabled.
+    End Sub
+
     Public Sub SetReceiver(ucrNewReceiver As ucrReceiver)
         ucrRecs = ucrNewReceiver
     End Sub
@@ -78,10 +92,6 @@ Public Class sdgOneVarCompareModels
         ReturnEnabled()
     End Sub
 
-    Private Sub DisplayChiSquare()
-        'If our distribution is continuous, then enable the option to display chi-square
-        'For continuous this is always enabled.
-    End Sub
 
     Public Sub CreateGraphs()
         If Not dlgOneVarCompareModels.UcrReceiver.IsEmpty Then
@@ -98,7 +108,6 @@ Public Class sdgOneVarCompareModels
                 frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
             End If
         End If
-
     End Sub
 
     ' To say if our models are discrete, we cannot use Density, QQ or PP
@@ -130,16 +139,6 @@ Public Class sdgOneVarCompareModels
             ucrSubBase.cmdReturn.Enabled = False
         End If
     End Sub
-
-    Public Sub ChiSqObject()
-        'instat_object$set("public", "get_from_model", Function(data_name, model_name, chisqtable, value2, value3)
-
-        dlgOneVarCompareModels.ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        '  dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("model_name") Chr(34) & 
-
-    End Sub
-
 
     Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveChi.CheckedChanged
         'dlgOneVarCompareModels.ucrBase.clsRsyntax.

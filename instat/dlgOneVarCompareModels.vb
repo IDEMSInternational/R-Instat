@@ -41,7 +41,7 @@ Public Class dlgOneVarCompareModels
         ucrSelectorOneVarCompModels.SetItemType("model")
         sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarCompareModels.SetReceiver(UcrReceiver)
-        sdgOneVarCompareModels.ChiSqObject()
+        sdgOneVarCompareModels.DisplayChiSquare()
     End Sub
 
     Private Sub SetDefaults()
