@@ -84,6 +84,8 @@ Public Class dlgOneVarCompareModels
         EnableOptions()
     End Sub
 
+
+
     Private Sub EnableOptions()
         If Not UcrReceiver.IsEmpty Then
             cmdDisplayObjects.Enabled = True

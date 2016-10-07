@@ -62,24 +62,6 @@ Public Class sdgOneVarCompareModels
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
         clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-
-
-        ' I don't believe I need to specify that it is a list, which makes the below code redundant.
-        'clsRcdfcompFunction.SetRCommand("cdfcomp")
-        'clsListFunction.SetRCommand("list")
-        'clsListFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
-        'dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("ft", clsRFunctionParameter:=clsListFunction)
-
-        'clsRcdfcompFunction.SetRCommand("list")
-        'clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        'dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("ft", clsRFunctionParameter:=clsRcdfcompFunction)
-
-        'clsRcdfcompFunction.SetRCommand("list")
-        'clsRcdfcompFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        'clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-
-
         clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
         clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
         clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
@@ -112,18 +94,21 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Public Sub CreateGraphs()
-        If chkCDF.Checked Then
-            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+        If Not dlgOneVarCompareModels.UcrReceiver.IsEmpty Then
+            If chkCDF.Checked Then
+                frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+            End If
+            If chkPP.Checked Then
+                frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
+            End If
+            If chkQQ.Checked Then
+                frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
+            End If
+            If chkDensity.Checked Then
+                frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
+            End If
         End If
-        If chkPP.Checked Then
-            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
-        End If
-        If chkQQ.Checked Then
-            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
-        End If
-        If chkDensity.Checked Then
-            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
-        End If
+
     End Sub
 
 

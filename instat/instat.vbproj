@@ -272,6 +272,12 @@
     <Compile Include="sdgOneVarUseModBootstrap.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgOneVarUseModFit.Designer.vb">
+      <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneVarUseModFit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -2747,6 +2753,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarUseModBootstrap.resx">
       <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneVarUseModFit.resx">
+      <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
