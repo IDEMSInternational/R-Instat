@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class dlgColumnStructure
     Public clsCourByStructure As New RFunction
+    'clsCourByStructure is here to construct the R-command that will colour columns according to their type in case it is required (see relevant tick box).
     Public bFirstLoad As Boolean = True
     Private Sub ucrSelectorColumnStructures_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -51,7 +52,7 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub ReopenDialog()
-
+        'Is this supposed to deal with the reset receiver and stuff things when sheets have been closed ?
     End Sub
 
     Private Sub SetColumnStructureInReceiver()
