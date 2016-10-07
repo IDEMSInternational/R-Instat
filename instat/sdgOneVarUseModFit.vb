@@ -59,7 +59,7 @@ Public Class sdgOneVarUseModFit
         UseCIcdf()
         nudFrom.Value = 0
         nudTo.Value = 1
-        nudBy.Value = 0.25
+        nudBy.Value = 0.1
     End Sub
 
     Public Sub SetModelFunction(clsNewModel As RFunction)

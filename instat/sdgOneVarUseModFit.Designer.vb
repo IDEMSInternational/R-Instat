@@ -195,6 +195,7 @@ Partial Class sdgOneVarUseModFit
         '
         'nudBy
         '
+        Me.nudBy.DecimalPlaces = 5
         Me.nudBy.Location = New System.Drawing.Point(94, 93)
         Me.nudBy.Name = "nudBy"
         Me.nudBy.Size = New System.Drawing.Size(48, 20)
@@ -203,6 +204,7 @@ Partial Class sdgOneVarUseModFit
         '
         'nudTo
         '
+        Me.nudTo.DecimalPlaces = 5
         Me.nudTo.Location = New System.Drawing.Point(94, 67)
         Me.nudTo.Name = "nudTo"
         Me.nudTo.Size = New System.Drawing.Size(48, 20)
@@ -211,6 +213,7 @@ Partial Class sdgOneVarUseModFit
         '
         'nudFrom
         '
+        Me.nudFrom.DecimalPlaces = 5
         Me.nudFrom.Location = New System.Drawing.Point(94, 41)
         Me.nudFrom.Name = "nudFrom"
         Me.nudFrom.Size = New System.Drawing.Size(48, 20)
