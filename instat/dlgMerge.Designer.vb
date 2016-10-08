@@ -36,7 +36,7 @@ Partial Class dlgMerge
         Me.ucrFirstDataFrame = New instat.ucrDataFrame()
         Me.cmdChooseMergeColumns = New System.Windows.Forms.Button()
         Me.ucrInputMergeColumnsOptions = New instat.ucrInputComboBox()
-        Me.lblMergeColumnOptions = New System.Windows.Forms.Label()
+        Me.lblIdColumnOption = New System.Windows.Forms.Label()
         Me.grpMergeOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -174,21 +174,21 @@ Partial Class dlgMerge
         Me.ucrInputMergeColumnsOptions.Size = New System.Drawing.Size(222, 21)
         Me.ucrInputMergeColumnsOptions.TabIndex = 18
         '
-        'lblMergeColumnOptions
+        'lblIdColumnOption
         '
-        Me.lblMergeColumnOptions.AutoSize = True
-        Me.lblMergeColumnOptions.Location = New System.Drawing.Point(6, 89)
-        Me.lblMergeColumnOptions.Name = "lblMergeColumnOptions"
-        Me.lblMergeColumnOptions.Size = New System.Drawing.Size(117, 13)
-        Me.lblMergeColumnOptions.TabIndex = 19
-        Me.lblMergeColumnOptions.Text = "Merge Column Options:"
+        Me.lblIdColumnOption.AutoSize = True
+        Me.lblIdColumnOption.Location = New System.Drawing.Point(11, 92)
+        Me.lblIdColumnOption.Name = "lblIdColumnOption"
+        Me.lblIdColumnOption.Size = New System.Drawing.Size(100, 13)
+        Me.lblIdColumnOption.TabIndex = 19
+        Me.lblIdColumnOption.Text = "ID Columns Options"
         '
         'dlgMerge
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(443, 405)
-        Me.Controls.Add(Me.lblMergeColumnOptions)
+        Me.Controls.Add(Me.lblIdColumnOption)
         Me.Controls.Add(Me.ucrInputMergeColumnsOptions)
         Me.Controls.Add(Me.cmdChooseMergeColumns)
         Me.Controls.Add(Me.ucrSecondDataFrame)
@@ -227,5 +227,5 @@ Partial Class dlgMerge
     Friend WithEvents ucrFirstDataFrame As ucrDataFrame
     Friend WithEvents cmdChooseMergeColumns As Button
     Friend WithEvents ucrInputMergeColumnsOptions As ucrInputComboBox
-    Friend WithEvents lblMergeColumnOptions As Label
+    Friend WithEvents lblIdColumnOption As Label
 End Class
