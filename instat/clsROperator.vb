@@ -221,7 +221,9 @@ Public Class ROperator
     End Function
 
     Public Sub SetParameter(bSetFirst As Boolean, Optional strParameterName As String = "Right", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
-
+        'Only one of the nonboolean parameters should ever be nonempty, but strParameterName.
+        'bSetFirst decides wether we are modifying/adding the first parameter.
+        'The default new parameter name is "Right", in case we are not modyfying the first parameter. Cannot be recursively adding parameters using default name as it will overwrite.
         If strValue <> "" Then
             clsParam = New RParameter
             clsParam.SetArgumentValue(strValue)
