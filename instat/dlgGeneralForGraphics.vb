@@ -18,10 +18,12 @@ Public Class dlgGeneralForGraphics
     Public clsRggplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private lstLayerComplete As New List(Of Boolean)
+    'list of completed layers.
     Private iLayerIndex As Integer
+    'current layer
     Public WithEvents clsGgplotAesFunction As New RFunction
-    Private strGlobalDataFrame As String = ""
-    Public bDataFrameSet As Boolean = False
+    Private strGlobalDataFrame As String
+    Public bDataFrameSet As Boolean
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -41,6 +43,7 @@ Public Class dlgGeneralForGraphics
         clsRggplotFunction.SetRCommand("ggplot")
         clsGgplotAesFunction.SetRCommand("aes")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        'True for "we are setting the first parameter, on the left of +.
         ucrBase.iHelpTopicID = 356
 
         ucrSaveGraph.SetDataFrameSelector(sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames)
@@ -49,7 +52,7 @@ Public Class dlgGeneralForGraphics
         ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
+        'What does that stand for ?
 
     End Sub
 
@@ -59,6 +62,7 @@ Public Class dlgGeneralForGraphics
         lstLayerComplete.Clear()
         'SetEditDeleteEnabled()
         strGlobalDataFrame = ""
+        bDataFrameSet = False
         clsRggplotFunction.ClearParameters()
         clsGgplotAesFunction.ClearParameters()
         ucrAdditionalLayers.Reset()

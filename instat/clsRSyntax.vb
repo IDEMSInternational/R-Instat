@@ -33,6 +33,7 @@ Public Class RSyntax
     Public strScript As String
     Public i As Integer
     Public bExcludeAssignedFunctionOutput As Boolean = True
+    'What is this used for ? When does the value changes ?
     Private strAssignTo As String
     'strAssignTo is the name that should be used to assign in R the output of the main (Base) R-command.
     Private strAssignToDataframe As String
@@ -291,6 +292,7 @@ Public Class RSyntax
             strTemp = clsFunction.ToScript(strScript)
         End If
         If bExcludeAssignedFunctionOutput Then
+            ' what is this doing, mixture of parameter if function and fields if not function, what is excluded ? ...
             If (bUseBaseFunction AndAlso clsFunction.bIsAssigned) OrElse (bUseBaseOperator AndAlso clsBaseOperator.bIsAssigned) OrElse (bUseCommandString AndAlso bIsAssigned) Then
                 Return strScript
                 Exit Function
