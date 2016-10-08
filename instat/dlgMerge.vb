@@ -36,6 +36,11 @@ Public Class dlgMerge
         ucrNewDataFrameName.SetValidationTypeAsRVariable()
         ucrInputMergeColumnsOptions.SetItems({"Merge by all columns with the same name", "Choose which columns to merge by"})
         sdgMerge.SetRSyntax(ucrBase.clsRsyntax)
+        ' This has a bug when using numeric and integer columns as the joining columns.
+        ' Issue reported here: https://github.com/hadley/dplyr/issues/2164
+        ' Alternatives would be to use the much slower base merge 
+        ' or plyrJoin which cannot handle joining columns with different names
+        ' ucrBase.clsRsyntax.SetFunction("join")
     End Sub
 
     Private Sub SetDefaults()
@@ -74,7 +79,7 @@ Public Class dlgMerge
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorDataFrames_DataFrameChanged()
+    Private Sub ucrSelectorDataFrames_DataFrameChanged() Handles ucrFirstDataFrame.DataFrameChanged, ucrSecondDataFrame.DataFrameChanged
         If Not ucrNewDataFrameName.UserTyped() Then
             ucrNewDataFrameName.SetName(ucrFirstDataFrame.cboAvailableDataFrames.Text & "_merged_with_" & ucrSecondDataFrame.cboAvailableDataFrames.Text)
         End If
@@ -85,12 +90,16 @@ Public Class dlgMerge
 
     Private Sub JoinType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFullJoin.CheckedChanged, rdoInnerJoin.CheckedChanged, rdoLeftJoin.CheckedChanged, rdoRightJoin.CheckedChanged
         If rdoLeftJoin.Checked Then
+            'ucrBase.clsRsyntax.AddParameter("type", Chr(34) & "left" & Chr(34))
             ucrBase.clsRsyntax.SetFunction("left_join")
         ElseIf rdoFullJoin.Checked Then
+            'ucrBase.clsRsyntax.AddParameter("type", Chr(34) & "full" & Chr(34))
             ucrBase.clsRsyntax.SetFunction("full_join")
         ElseIf rdoInnerJoin.Checked Then
+            'ucrBase.clsRsyntax.AddParameter("type", Chr(34) & "inner" & Chr(34))
             ucrBase.clsRsyntax.SetFunction("inner_join")
         ElseIf rdoRightJoin.Checked Then
+            'ucrBase.clsRsyntax.AddParameter("type", Chr(34) & "right" & Chr(34))
             ucrBase.clsRsyntax.SetFunction("right_join")
         End If
     End Sub
@@ -109,6 +118,8 @@ Public Class dlgMerge
             cmdChooseMergeColumns.Enabled = False
         ElseIf ucrInputMergeColumnsOptions.GetText() = "Choose which columns to merge by" Then
             cmdChooseMergeColumns.Enabled = True
+            'temp disabled until working
+            cmdChooseMergeColumns.Enabled = False
             ucrBase.clsRsyntax.RemoveParameter("by")
         End If
         TestOKEnabled()
