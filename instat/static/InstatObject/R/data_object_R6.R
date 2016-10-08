@@ -513,6 +513,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
     }
     # Need to use private$data here because changing names of data field
     names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
+    self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
     # TODO decide if we need to do these 2 lines
     self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
     self$data_changed <- TRUE
