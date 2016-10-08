@@ -17,8 +17,8 @@ Imports instat.Translations
 Public Class sdgOneVarGraph
     Public bFirstLoad As Boolean = True
     Public clsRsyntax As New RSyntax
-    Public strNumericGeomFunction As String = ""
-    Public strCategoriacalGeomFunction As String = ""
+    Public strNumericGeomFunction As String
+    Public strCategoriacalGeomFunction As String
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -37,21 +37,23 @@ Public Class sdgOneVarGraph
         nudNumberofColumns.Value = 3
         ucrInputNumeric.Reset()
         ucrInputCategorical.Reset()
-        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
-        ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         ucrInputNumeric.SetName("Boxplot")
         ucrInputCategorical.SetName("Bar Chart")
+
+
     End Sub
 
     Public Sub InitialiseDialog()
+        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
+        ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         nudNumberofColumns.Maximum = 10
         nudNumberofColumns.Minimum = 1
+
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
         clsRsyntax = clsNewRSyntax
     End Sub
-
     Private Sub SpecifyLayoutControl()
         If chkSpecifyLayout.Checked Then
             lblNumberofColumns.Visible = True
