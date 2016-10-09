@@ -52,7 +52,8 @@ Public Class dlgGeneralForGraphics
         ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'What does that stand for ?
+        'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
+        'For example, when a graph is saved, it is assigned to it's place in an R-instat object. If we had set bExcludeAssignedFunctionOutput to True, then we would never print the graph when running the script.
 
     End Sub
 

@@ -43,7 +43,7 @@ Public Class sdgLayerOptions
     Private Sub InitialiseDialog()
         ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
-        'Why does the order in equality not matter here ? Should intuitively be the other way around. 
+        'All these controls are on the current subdialogue and should be linked together as shown above.
     End Sub
 
     Private Sub SetDefaults()
@@ -69,7 +69,6 @@ Public Class sdgLayerOptions
         ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         'Warning, when coming back to a layer where the geom was not fixed, the geom is now fixed... 
-        'when is fix aes used ?
     End Sub
 
     Public Function TestForOKEnabled() As Boolean
