@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class sdgOneVarFitModDisplay
     Private clsRplotFunction As New RFunction
     Private clsModel As New RFunction
+    Private clsRLogLikFunction As New RFunction
     Private WithEvents ucrDists As ucrDistributions
     Public bfirstload As Boolean = True
 
@@ -30,6 +31,8 @@ Public Class sdgOneVarFitModDisplay
 
     Public Sub SetDefaults()
         rdoPlotAll.Checked = True
+        rdoLoglik.Checked = True
+        ucrSaveLikelihood.Enabled = False
         'ucrBase.ihelptopicID = 
     End Sub
 
@@ -47,24 +50,28 @@ Public Class sdgOneVarFitModDisplay
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("plot")
             clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoPPPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("ppcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoCDFPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("cdfcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoQQPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("qqcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoDensityPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("denscomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         End If
-        frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
     End Sub
 
     Private Sub ucrDists_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDists.cboDistributionsIndexChanged
@@ -83,6 +90,30 @@ Public Class sdgOneVarFitModDisplay
             rdoDensityPlot.Enabled = True
             rdoQQPlot.Enabled = True
             rdoPPPlot.Enabled = True
+        End If
+    End Sub
+
+    ' looking into tab2
+
+    Public Sub EnableLikelihood()
+        If Not sdgOneVarFitModel.rdoMle.Checked Then
+            tbclikelihood.Enabled = False
+            If Not rdoNoLik.Checked Then
+                rdoNoLik.Checked = True
+            End If
+        Else
+            rdoLoglik.Checked = True
+        End If
+    End Sub
+
+    Public Sub LikelihoodGraphs()
+        clsRLogLikFunction.SetRCommand("llplot")
+        clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
+        If rdoLoglik.Checked Then
+            frmMain.clsRLink.RunScript(clsRLogLikFunction.ToScript(), 2)
+        ElseIf rdoLik.Checked Then
+            clsRLogLikFunction.AddParameter("loglik", strParameterValue:="FALSE")
+            frmMain.clsRLink.RunScript(clsRLogLikFunction.ToScript(), 2)
         End If
     End Sub
 

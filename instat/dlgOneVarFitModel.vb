@@ -34,7 +34,7 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModDisplay.InitialiseDialog()
         sdgOneVarFitModel.InitialiseDialog()
         UcrBase.clsRsyntax.SetFunction("fitdist")
-        'ucrBase.iHelpTopicID = 
+        UcrBase.iHelpTopicID = 296
         UcrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
@@ -169,6 +169,7 @@ Public Class dlgOneVarFitModel
 
     Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
         sdgOneVarFitModDisplay.CreateGraphs()
+        sdgOneVarFitModDisplay.LikelihoodGraphs()
     End Sub
 
 End Class

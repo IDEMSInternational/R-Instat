@@ -37,7 +37,6 @@ Public Class sdgOneVarCompareModels
         clsRdenscompFunction.SetRCommand("denscomp")
         clsRqqcompFunction.SetRCommand("qqcomp")
         clsRppcompFunction.SetRCommand("ppcomp")
-        clsGetObjectOperator.SetOperation("$")
     End Sub
 
     Public Sub SetDefaults()
@@ -69,12 +68,16 @@ Public Class sdgOneVarCompareModels
 
     Public Sub DisplayChiSquare()
         If chkSaveChi.Checked Then
-            clsGetObjectOperator.SetOperation("$")
-            dlgOneVarCompareModels.ucrBase.clsRsyntax.SetOperatorParameter(True, "chisqtable", clsOp:=clsGetObjectOperator)
-            ' frmMain.clsRLink.RunScript(clsGetObjectOperator.ToScript(), 1)
+            dlgOneVarCompareModels.ucrBase.clsRsyntax.SetOperation("$")
+            dlgOneVarCompareModels.ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsModel)
+            dlgOneVarCompareModels.ucrBase.clsRsyntax.SetOperatorParameter(False, strValue:="chisqtable")
+
+            'dlgOneVarCompareModels.ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsGetObjectOperator)
+            'd lgOneVarCompareModels.ucrBase.clsRsyntax.SetOperatorParameter(False, "chisqtable")
+
+
+
         End If
-
-
         'If our distribution is continuous, then enable the option to display chi-square
         'For continuous this is always enabled.
     End Sub
@@ -106,6 +109,9 @@ Public Class sdgOneVarCompareModels
             End If
             If chkDensity.Checked Then
                 frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
+            End If
+            If chkSaveChi.Checked Then
+                frmMain.clsRLink.RunScript(clsGetObjectOperator.ToScript(), 2)
             End If
         End If
     End Sub
