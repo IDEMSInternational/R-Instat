@@ -34,7 +34,7 @@ Public Class dlgOneVarUseModel
     Private Sub InitialiseDialog()
         sdgOneVarUseModBootstrap.InitialiseDialog()
         sdgOneVarUseModFit.InitialiseDialog()
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 375
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiver.Selector = ucrSelector
         ucrReceiver.SetMeAsReceiver()
