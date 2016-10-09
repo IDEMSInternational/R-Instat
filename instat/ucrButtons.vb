@@ -51,9 +51,13 @@ Public Class ucrButtons
         Dim bIsAssigned As Boolean
         Dim bToBeAssigned As Boolean
         Dim strAssignTo As String
+        Dim lstCurrentEnabled As New List(Of Boolean)
+        Dim ctrTempControl As Control
+        Dim i As Integer
 
-        For Each control In ParentForm.Controls
-            control.Enabled = False
+        For Each ctrTempControl In ParentForm.Controls
+            lstCurrentEnabled.Add(ctrTempControl.Enabled)
+            ctrTempControl.Enabled = False
         Next
         ParentForm.Cursor = Cursors.WaitCursor
 
@@ -81,8 +85,10 @@ Public Class ucrButtons
         'In the process, we want the RSyntax parameters to be set as at the end of GetScript. Hence the reset needs to come after.
         'Eventually, all this should be more neatly incorporated in the RSyntax machinery...
         ParentForm.Hide()
-        For Each control In ParentForm.Controls
-            control.Enabled = True
+        i = 0
+        For Each ctrTempControl In ParentForm.Controls
+            ctrTempControl.Enabled = lstCurrentEnabled(i)
+            i = i + 1
         Next
         ParentForm.Cursor = Cursors.Default
 
