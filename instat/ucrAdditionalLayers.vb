@@ -22,8 +22,8 @@ Public Class ucrAdditionalLayers
     Public bFirstLoad As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
-    Private strGlobalDataFrame As String = ""
-    Public bSetGlobalIsDefault As Boolean = True
+    Private strGlobalDataFrame As String
+    Public bSetGlobalIsDefault As Boolean
 
     Public Sub New()
 
@@ -56,6 +56,9 @@ Public Class ucrAdditionalLayers
         iLayerIndex = 0
         lstLayers.Clear()
         lstLayerComplete.Clear()
+        strGlobalDataFrame = ""
+        bSetGlobalIsDefault = True
+        'This bSetGlobalIsDefault seems to stay True forever, maybe source of some of the errors ? Where is this used ?
         SetEditDeleteEnabled()
     End Sub
 
