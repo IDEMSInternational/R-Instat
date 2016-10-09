@@ -70,6 +70,7 @@ Public Class RFunction
     End Sub
 
     Public Function ToScript(Optional ByRef strScript As String = "") As String
+        'Converting the RFunction into a string that when run in R gives the appropriate output
         Dim strTemp As String = ""
         Dim i As Integer
         Dim clsAddColumns As New RFunction
@@ -85,6 +86,7 @@ Public Class RFunction
         If bIsAssigned Then
             Return (strAssignTo)
         End If
+        'In case R has already stored the output of the function in the string of the appropriate name -AssignTo-, then that variable can be used as script.
 
         strTemp = strRCommand & "("
 
