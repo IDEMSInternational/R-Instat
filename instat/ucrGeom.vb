@@ -48,7 +48,8 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing, Optional bHideApplyToAllLayers As Boolean = False)
+        'last argument bHideApplyToAllLayers is there just in order to be overridable in ucrGeomListWithAes
         Dim GeomCount As New Geoms
 
         cboGeomList.Items.Clear()
@@ -572,12 +573,19 @@ Public Class ucrGeom
         'clsgeom_ribbon.AddAesParameter("size")
         'lstAllGeoms.Add(clsgeom_ribbon)
 
-        'clsgeom_rug.strGeomName = "geom_rug"
-        'clsgeom_rug.AddAesParameter("alpha")
-        'clsgeom_rug.AddAesParameter("colour")
-        'clsgeom_rug.AddAesParameter("linetype")
-        'clsgeom_rug.AddAesParameter("size")
-        'lstAllGeoms.Add(clsgeom_rug)
+        clsgeom_rug.strGeomName = "geom_rug"
+        clsgeom_rug.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_rug.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+        'These two are not made mendatory as we want to be able to choose only one, and could be either.
+        clsgeom_rug.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_rug.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_rug.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_rug.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+
+        'add layer parameters
+        clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "stack" & Chr(34)})
+        clsgeom_rug.AddLayerParameter("sides", "list", Chr(34) & "bl" & Chr(34), lstParameterStrings:={Chr(34) & "trbl" & Chr(34), Chr(34) & "trb" & Chr(34), Chr(34) & "trl" & Chr(34), Chr(34) & "tbl" & Chr(34), Chr(34) & "rbl" & Chr(34), Chr(34) & "tr" & Chr(34), Chr(34) & "tb" & Chr(34), Chr(34) & "tl" & Chr(34), Chr(34) & "rb" & Chr(34), Chr(34) & "rl" & Chr(34), Chr(34) & "bl" & Chr(34), Chr(34) & "t" & Chr(34), Chr(34) & "r" & Chr(34), Chr(34) & "b" & Chr(34), Chr(34) & "l" & Chr(34)})
+        lstAllGeoms.Add(clsgeom_rug)
 
         'clsgeom_segment.strGeomName = "geom_segment"
         ''mandatory

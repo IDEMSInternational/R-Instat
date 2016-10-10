@@ -47,7 +47,7 @@ Partial Class dlgScatterPlot
         'lblFactorOptional
         '
         Me.lblFactorOptional.AutoSize = True
-        Me.lblFactorOptional.Location = New System.Drawing.Point(256, 203)
+        Me.lblFactorOptional.Location = New System.Drawing.Point(262, 219)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(108, 13)
         Me.lblFactorOptional.TabIndex = 4
@@ -57,7 +57,7 @@ Partial Class dlgScatterPlot
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(255, 156)
+        Me.lblXVariable.Location = New System.Drawing.Point(261, 172)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
         Me.lblXVariable.TabIndex = 2
@@ -76,7 +76,7 @@ Partial Class dlgScatterPlot
         '
         'ucrFactorOptionalReceiver
         '
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(256, 218)
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(262, 234)
         Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
@@ -85,7 +85,7 @@ Partial Class dlgScatterPlot
         '
         'ucrReceiverX
         '
-        Me.ucrReceiverX.Location = New System.Drawing.Point(256, 172)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(262, 188)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
@@ -101,7 +101,7 @@ Partial Class dlgScatterPlot
         '
         'ucrVariablesAsFactorForScatter
         '
-        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(255, 11)
+        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(261, 27)
         Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
         Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorForScatter.TabIndex = 1

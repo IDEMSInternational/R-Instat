@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRugPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,21 +20,18 @@ Partial Class dlgRugPlot
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrSaveRugPlot = New instat.ucrSaveGraph()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdRugPlotOptions = New System.Windows.Forms.Button()
         Me.ucrRugPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverFloorVariable = New instat.ucrReceiverSingle()
-        Me.lblFloorVariable = New System.Windows.Forms.Label()
-        Me.lblLeftSideVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverLeftSideVariable = New instat.ucrReceiverSingle()
-        Me.lblCeilingVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverCeilingVariable = New instat.ucrReceiverSingle()
-        Me.lblRightSideVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverRightSideVariable = New instat.ucrReceiverSingle()
+        Me.ucrVariablesAsFactorForRugPlot = New instat.ucrVariablesAsFactor()
+        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
+        Me.lblFactorOptional = New System.Windows.Forms.Label()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.lblXVariable = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrSaveRugPlot
@@ -81,95 +78,62 @@ Partial Class dlgRugPlot
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 17
         '
-        'ucrReceiverFloorVariable
+        'ucrVariablesAsFactorForRugPlot
         '
-        Me.ucrReceiverFloorVariable.Location = New System.Drawing.Point(285, 62)
-        Me.ucrReceiverFloorVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFloorVariable.Name = "ucrReceiverFloorVariable"
-        Me.ucrReceiverFloorVariable.Selector = Nothing
-        Me.ucrReceiverFloorVariable.Size = New System.Drawing.Size(143, 22)
-        Me.ucrReceiverFloorVariable.TabIndex = 19
+        Me.ucrVariablesAsFactorForRugPlot.Location = New System.Drawing.Point(284, 31)
+        Me.ucrVariablesAsFactorForRugPlot.Name = "ucrVariablesAsFactorForRugPlot"
+        Me.ucrVariablesAsFactorForRugPlot.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForRugPlot.TabIndex = 19
+        Me.ucrVariablesAsFactorForRugPlot.ucrVariableSelector = Nothing
         '
-        'lblFloorVariable
+        'ucrFactorOptionalReceiver
         '
-        Me.lblFloorVariable.AutoSize = True
-        Me.lblFloorVariable.Location = New System.Drawing.Point(282, 37)
-        Me.lblFloorVariable.Name = "lblFloorVariable"
-        Me.lblFloorVariable.Size = New System.Drawing.Size(85, 13)
-        Me.lblFloorVariable.TabIndex = 20
-        Me.lblFloorVariable.Tag = "Floor_Variable"
-        Me.lblFloorVariable.Text = "Floor Variable (x)"
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(285, 238)
+        Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
+        Me.ucrFactorOptionalReceiver.Selector = Nothing
+        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFactorOptionalReceiver.TabIndex = 23
         '
-        'lblLeftSideVariable
+        'lblFactorOptional
         '
-        Me.lblLeftSideVariable.AutoSize = True
-        Me.lblLeftSideVariable.Location = New System.Drawing.Point(282, 95)
-        Me.lblLeftSideVariable.Name = "lblLeftSideVariable"
-        Me.lblLeftSideVariable.Size = New System.Drawing.Size(104, 13)
-        Me.lblLeftSideVariable.TabIndex = 22
-        Me.lblLeftSideVariable.Tag = "Left_Side_Variable"
-        Me.lblLeftSideVariable.Text = "Left Side Variable (y)"
+        Me.lblFactorOptional.AutoSize = True
+        Me.lblFactorOptional.Location = New System.Drawing.Point(285, 223)
+        Me.lblFactorOptional.Name = "lblFactorOptional"
+        Me.lblFactorOptional.Size = New System.Drawing.Size(108, 13)
+        Me.lblFactorOptional.TabIndex = 22
+        Me.lblFactorOptional.Tag = "By_Variable_Optional"
+        Me.lblFactorOptional.Text = "By Variable (Optional)"
         '
-        'ucrReceiverLeftSideVariable
+        'ucrReceiverX
         '
-        Me.ucrReceiverLeftSideVariable.Location = New System.Drawing.Point(285, 120)
-        Me.ucrReceiverLeftSideVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLeftSideVariable.Name = "ucrReceiverLeftSideVariable"
-        Me.ucrReceiverLeftSideVariable.Selector = Nothing
-        Me.ucrReceiverLeftSideVariable.Size = New System.Drawing.Size(143, 22)
-        Me.ucrReceiverLeftSideVariable.TabIndex = 21
+        Me.ucrReceiverX.Location = New System.Drawing.Point(285, 192)
+        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverX.TabIndex = 21
         '
-        'lblCeilingVariable
+        'lblXVariable
         '
-        Me.lblCeilingVariable.AutoSize = True
-        Me.lblCeilingVariable.Location = New System.Drawing.Point(282, 163)
-        Me.lblCeilingVariable.Name = "lblCeilingVariable"
-        Me.lblCeilingVariable.Size = New System.Drawing.Size(79, 13)
-        Me.lblCeilingVariable.TabIndex = 24
-        Me.lblCeilingVariable.Tag = "Ceiling_Variable"
-        Me.lblCeilingVariable.Text = "Ceiling Variable"
-        '
-        'ucrReceiverCeilingVariable
-        '
-        Me.ucrReceiverCeilingVariable.Location = New System.Drawing.Point(285, 188)
-        Me.ucrReceiverCeilingVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverCeilingVariable.Name = "ucrReceiverCeilingVariable"
-        Me.ucrReceiverCeilingVariable.Selector = Nothing
-        Me.ucrReceiverCeilingVariable.Size = New System.Drawing.Size(143, 22)
-        Me.ucrReceiverCeilingVariable.TabIndex = 23
-        '
-        'lblRightSideVariable
-        '
-        Me.lblRightSideVariable.AutoSize = True
-        Me.lblRightSideVariable.Location = New System.Drawing.Point(282, 221)
-        Me.lblRightSideVariable.Name = "lblRightSideVariable"
-        Me.lblRightSideVariable.Size = New System.Drawing.Size(97, 13)
-        Me.lblRightSideVariable.TabIndex = 26
-        Me.lblRightSideVariable.Tag = "Right_Side_Variable"
-        Me.lblRightSideVariable.Text = "Right Side Variable"
-        '
-        'ucrReceiverRightSideVariable
-        '
-        Me.ucrReceiverRightSideVariable.Location = New System.Drawing.Point(285, 246)
-        Me.ucrReceiverRightSideVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverRightSideVariable.Name = "ucrReceiverRightSideVariable"
-        Me.ucrReceiverRightSideVariable.Selector = Nothing
-        Me.ucrReceiverRightSideVariable.Size = New System.Drawing.Size(143, 22)
-        Me.ucrReceiverRightSideVariable.TabIndex = 25
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.Location = New System.Drawing.Point(284, 176)
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
+        Me.lblXVariable.TabIndex = 20
+        Me.lblXVariable.Tag = "X_Variable"
+        Me.lblXVariable.Text = "X  - Variable"
         '
         'dlgRugPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(444, 370)
-        Me.Controls.Add(Me.lblRightSideVariable)
-        Me.Controls.Add(Me.ucrReceiverRightSideVariable)
-        Me.Controls.Add(Me.lblCeilingVariable)
-        Me.Controls.Add(Me.ucrReceiverCeilingVariable)
-        Me.Controls.Add(Me.lblLeftSideVariable)
-        Me.Controls.Add(Me.ucrReceiverLeftSideVariable)
-        Me.Controls.Add(Me.lblFloorVariable)
-        Me.Controls.Add(Me.ucrReceiverFloorVariable)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForRugPlot)
+        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
+        Me.Controls.Add(Me.lblFactorOptional)
+        Me.Controls.Add(Me.ucrReceiverX)
+        Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.ucrSaveRugPlot)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdRugPlotOptions)
@@ -190,12 +154,9 @@ Partial Class dlgRugPlot
     Friend WithEvents cmdRugPlotOptions As Button
     Friend WithEvents ucrRugPlotSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverFloorVariable As ucrReceiverSingle
-    Friend WithEvents lblFloorVariable As Label
-    Friend WithEvents lblLeftSideVariable As Label
-    Friend WithEvents ucrReceiverLeftSideVariable As ucrReceiverSingle
-    Friend WithEvents lblCeilingVariable As Label
-    Friend WithEvents ucrReceiverCeilingVariable As ucrReceiverSingle
-    Friend WithEvents lblRightSideVariable As Label
-    Friend WithEvents ucrReceiverRightSideVariable As ucrReceiverSingle
+    Friend WithEvents ucrVariablesAsFactorForRugPlot As ucrVariablesAsFactor
+    Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
+    Friend WithEvents lblFactorOptional As Label
+    Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents lblXVariable As Label
 End Class
