@@ -67,7 +67,7 @@ Partial Class dlgName
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 203)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 210)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
@@ -97,6 +97,7 @@ Partial Class dlgName
         Me.MinimizeBox = False
         Me.Name = "dlgName"
         Me.Tag = "Rename_Data_Column"
+        Me.Text = "Rename Column"
         Me.ResumeLayout(False)
 
     End Sub
