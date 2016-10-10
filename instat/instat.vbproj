@@ -224,6 +224,12 @@
     <Compile Include="dlgTablePlus.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTwoVariabletabulate.Designer.vb">
+      <DependentUpon>dlgTwoVariabletabulate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoVariabletabulate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </Compile>
@@ -2615,6 +2621,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoVariabletabulate.resx">
+      <DependentUpon>dlgTwoVariabletabulate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoVariableUseModel.resx">
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
