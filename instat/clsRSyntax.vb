@@ -35,10 +35,10 @@ Public Class RSyntax
     Public bExcludeAssignedFunctionOutput As Boolean = True
     Private strAssignTo As String
     'strAssignTo is the name that should be used to assign in R the output of the main (Base) R-command.
-    Private strAssignToDataframe As String
-    Private strAssignToColumn As String
-    Private strAssignToModel As String
-    Private strAssignToGraph As String
+    Public strAssignToDataframe As String
+    Public strAssignToColumn As String
+    Public strAssignToModel As String
+    Public strAssignToGraph As String
     'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents.
     Public bToBeAssigned As Boolean = False
     'bToBeAssigned is a boolean telling whether or not, AT THE CURRENT STAGE of running code within R, the output of the Base R-command NEEDS TO BE assigned to the variable with the appropriate name: strAssignTo.
