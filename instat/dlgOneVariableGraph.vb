@@ -163,8 +163,4 @@ Public Class dlgOneVariableGraph
             rdoCombineGraph.Enabled = False
         End If
     End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        OneOrMoreVariables()
-    End Sub
 End Class
