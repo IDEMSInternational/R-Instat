@@ -14,7 +14,9 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgContrasts
+    Public clsLevels As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgContrasts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -25,7 +27,7 @@ Public Class dlgContrasts
         Else
             ReopenDialog()
         End If
-        TestOKEnabled
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -44,14 +46,18 @@ Public Class dlgContrasts
 
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverForContrasts.Selector = ucrSelectorForContrast
         ucrReceiverForContrasts.SetMeAsReceiver()
         ucrReceiverForContrasts.SetIncludedDataTypes({"factor"})
         ucrBase.iHelpTopicID = 353
         ucrFactorLevelsAndLabels.SetReceiver(ucrReceiverForContrasts)
         ucrFactorLevelsAndLabels.SetAsSingleSelector()
+        clsLevels.SetRCommand("levels")
     End Sub
     Private Sub SetDefaults()
+        rdoCurrentContrasts.Checked = True
+        ContrastsFunctions()
         ucrSelectorForContrast.Reset()
     End Sub
 
@@ -60,11 +66,7 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub ucrReceiverForContrasts_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForContrasts.SelectionChanged
-        If ucrReceiverForContrasts.IsEmpty = False Then
-            ucrBase.clsRsyntax.AddParameter("n", clsRFunctionParameter:=ucrReceiverForContrasts.GetVariables)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("n")
-        End If
+        AddLevelsObj()
         TestOKEnabled()
     End Sub
 
@@ -73,11 +75,18 @@ Public Class dlgContrasts
         TestOKEnabled()
     End Sub
 
+    Private Sub AddLevelsObj()
+        If ucrReceiverForContrasts.IsEmpty = False Then
+            clsLevels.AddParameter("x", clsRFunctionParameter:=ucrReceiverForContrasts.GetVariables)
+        Else
+            clsLevels.RemoveParameterByName("x")
+        End If
+        ucrBase.clsRsyntax.AddParameter("n", clsRFunctionParameter:=clsLevels)
+    End Sub
     Private Sub ContrastsFunctions()
         If rdoSumToZero.Checked Then
             ucrBase.clsRsyntax.SetFunction("contr.sum")
         ElseIf rdoCurrentContrasts.Checked Then
-
 
         ElseIf rdoHemert.Checked Then
             ucrBase.clsRsyntax.SetFunction("contr.helmert")
@@ -89,4 +98,5 @@ Public Class dlgContrasts
             ucrBase.clsRsyntax.SetFunction("contr.poly")
         End If
     End Sub
+
 End Class
