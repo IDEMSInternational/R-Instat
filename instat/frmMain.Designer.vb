@@ -321,11 +321,8 @@ Partial Class frmMain
         Me.mnuOrganiseColumnTextMatch = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnTextDistance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateGenerateDateColumn = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnGenerateDates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnDateUseDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateUseDateMakeTime = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateUseDateUseTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
@@ -364,6 +361,9 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnMakeTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnUseTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2519,42 +2519,22 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnDate
         '
-        Me.mnuOrganiseColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateGenerateDateColumn, Me.mnuOrganiseColumnDateUseDate})
+        Me.mnuOrganiseColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnGenerateDates, Me.mnuOrganiseColumnMakeDate, Me.mnuOrganiseColumnDateUseDate, Me.mnuOrganiseColumnMakeTime, Me.mnuOrganiseColumnUseTime})
         Me.mnuOrganiseColumnDate.Name = "mnuOrganiseColumnDate"
         Me.mnuOrganiseColumnDate.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseColumnDate.Text = "Column: Date"
         '
-        'mnuOrganiseColumnDateGenerateDateColumn
+        'mnuOrganiseColumnGenerateDates
         '
-        Me.mnuOrganiseColumnDateGenerateDateColumn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate})
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Name = "mnuOrganiseColumnDateGenerateDateColumn"
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Size = New System.Drawing.Size(194, 22)
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Text = "Generate Date Column"
-        '
-        'mnuOrganiseColumnDateGenerateDateColumnMakeDate
-        '
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Name = "mnuOrganiseColumnDateGenerateDateColumnMakeDate"
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Size = New System.Drawing.Size(139, 22)
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Text = "Make Date..."
+        Me.mnuOrganiseColumnGenerateDates.Name = "mnuOrganiseColumnGenerateDates"
+        Me.mnuOrganiseColumnGenerateDates.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnGenerateDates.Text = "Generate Dates..."
         '
         'mnuOrganiseColumnDateUseDate
         '
-        Me.mnuOrganiseColumnDateUseDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateUseDateMakeTime, Me.mnuOrganiseColumnDateUseDateUseTime})
         Me.mnuOrganiseColumnDateUseDate.Name = "mnuOrganiseColumnDateUseDate"
-        Me.mnuOrganiseColumnDateUseDate.Size = New System.Drawing.Size(194, 22)
+        Me.mnuOrganiseColumnDateUseDate.Size = New System.Drawing.Size(162, 22)
         Me.mnuOrganiseColumnDateUseDate.Text = "Use Date"
-        '
-        'mnuOrganiseColumnDateUseDateMakeTime
-        '
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Name = "mnuOrganiseColumnDateUseDateMakeTime"
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Size = New System.Drawing.Size(142, 22)
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Text = "Make Time..."
-        '
-        'mnuOrganiseColumnDateUseDateUseTime
-        '
-        Me.mnuOrganiseColumnDateUseDateUseTime.Name = "mnuOrganiseColumnDateUseDateUseTime"
-        Me.mnuOrganiseColumnDateUseDateUseTime.Size = New System.Drawing.Size(142, 22)
-        Me.mnuOrganiseColumnDateUseDateUseTime.Text = "Use Date..."
         '
         'mnuOrganiseColumnReshape
         '
@@ -2823,6 +2803,24 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
+        '
+        'mnuOrganiseColumnMakeTime
+        '
+        Me.mnuOrganiseColumnMakeTime.Name = "mnuOrganiseColumnMakeTime"
+        Me.mnuOrganiseColumnMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnMakeTime.Text = "Make Time..."
+        '
+        'mnuOrganiseColumnUseTime
+        '
+        Me.mnuOrganiseColumnUseTime.Name = "mnuOrganiseColumnUseTime"
+        Me.mnuOrganiseColumnUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnUseTime.Text = "Use Time..."
+        '
+        'mnuOrganiseColumnMakeDate
+        '
+        Me.mnuOrganiseColumnMakeDate.Name = "mnuOrganiseColumnMakeDate"
+        Me.mnuOrganiseColumnMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnMakeDate.Text = "Make Date..."
         '
         'frmMain
         '
@@ -3165,11 +3163,8 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnGenerateCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator25 As ToolStripSeparator
     Friend WithEvents mnuOrganiseColumnDate As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateGenerateDateColumn As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateGenerateDateColumnMakeDate As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnGenerateDates As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnDateUseDate As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateUseDateMakeTime As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateUseDateUseTime As ToolStripMenuItem
     Friend WithEvents mnuFileConvert As ToolStripMenuItem
     Friend WithEvents TablesPlusToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariate As ToolStripMenuItem
@@ -3189,4 +3184,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticOrganiseEventsSpells As ToolStripMenuItem
     Friend WithEvents mnuClimaticOrganiseEventsWaterBalance As ToolStripMenuItem
     Friend WithEvents mnuClimaticOrganiseEventsEndoftheRains As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnMakeTime As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnUseTime As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnMakeDate As ToolStripMenuItem
 End Class
