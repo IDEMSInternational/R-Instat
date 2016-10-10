@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarCompareModels
-    Private clsRcdfcompFunction As New RFunction
+    'Private clsRcdfcompFunction As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -41,6 +41,7 @@ Public Class dlgOneVarCompareModels
         ucrSelectorOneVarCompModels.SetItemType("model")
         sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarCompareModels.SetReceiver(UcrReceiver)
+        sdgOneVarCompareModels.ChiSqObject()
     End Sub
 
     Private Sub SetDefaults()
@@ -49,6 +50,10 @@ Public Class dlgOneVarCompareModels
         sdgOneVarCompareModels.SetDefaults()
         TestOKEnabled()
     End Sub
+
+    'Only distributions that can be accepted into the receiver have to be from the same variable
+    ' If variable from variablex is selected then
+    ' variables not fromvariablex cannot be in dataframe
 
     Private Sub ReopenDialog()
     End Sub
@@ -83,6 +88,8 @@ Public Class dlgOneVarCompareModels
         sdgOneVarCompareModels.ShowDialog()
         EnableOptions()
     End Sub
+
+
 
     Private Sub EnableOptions()
         If Not UcrReceiver.IsEmpty Then
