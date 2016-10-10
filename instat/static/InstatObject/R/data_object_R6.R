@@ -1559,7 +1559,7 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
       i = i + 1
     }
     if(output == "combine") {
-      return(gridExtra::grid.arrange(grobs = graphs, nrow = nrow))
+      return(gridExtra::grid.arrange(grobs = graphs, ncol = ncol))
     }
     else return(graphs)
   }
