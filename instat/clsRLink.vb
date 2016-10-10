@@ -322,7 +322,7 @@ Public Class RLink
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
 
-        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent = bSilent)
+        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent)
         Try
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
