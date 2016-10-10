@@ -1147,4 +1147,8 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateCountInFactor.Click
         dlgCountinFactor.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeTwoVariablesTabulate_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesTabulate.Click
+        dlgTwoVariableTabulate.ShowDialog()
+    End Sub
 End Class

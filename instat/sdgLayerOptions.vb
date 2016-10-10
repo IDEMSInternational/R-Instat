@@ -20,7 +20,7 @@ Public Class sdgLayerOptions
     Public clsGgplotFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public bAesInGeom As Boolean
-    Public strGlobalDataFrame As String = ""
+    Public strGlobalDataFrame As String
 
     Public Sub New()
         ' This call is required by the designer.
@@ -43,10 +43,12 @@ Public Class sdgLayerOptions
     Private Sub InitialiseDialog()
         ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
+        'All these controls are on the current subdialogue and should be linked together as shown above.
     End Sub
 
     Private Sub SetDefaults()
         ucrGeomWithAes.UcrSelector.Reset()
+        strGlobalDataFrame = ""
     End Sub
 
     Private Sub ReopenDialog()
@@ -66,6 +68,7 @@ Public Class sdgLayerOptions
         clsGgplotFunction = clsTempGgPlot
         ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
+        'Warning, when coming back to a layer where the geom was not fixed, the geom is now fixed... 
     End Sub
 
     Public Function TestForOKEnabled() As Boolean
