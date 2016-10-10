@@ -48,6 +48,7 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModel.SetMyRSyntax(UcrBase.clsRsyntax)
         sdgOneVarFitModDisplay.SetDistribution(UcrDistributions)
         sdgOneVarFitModel.SetDistribution(UcrDistributions)
+        sdgOneVarFitModDisplay.AssignSaveLikelihood()
     End Sub
 
     Private Sub SetDefaults()
