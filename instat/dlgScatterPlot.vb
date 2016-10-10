@@ -81,7 +81,7 @@ Public Class dlgScatterPlot
         ucrReceiverX.Selector = ucrSelectorForScatter
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
-        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
+        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.iHelpTopicID = 433

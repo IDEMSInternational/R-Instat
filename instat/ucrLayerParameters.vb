@@ -40,8 +40,9 @@ Public Class ucrLayerParameters
     Private Sub InitialiseControl()
     End Sub
 
-    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
-        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms)
+    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing, Optional bHideApplyToAllLayers As Boolean = False)
+        'Modified (added last parameter in order to match with mother sub)
+        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes, bHideApplyToAllLayers)
         SetLayerParameters()
     End Sub
 
@@ -57,7 +58,7 @@ Public Class ucrLayerParameters
         'fill the labels and checkboxes
         If clsCurrGeom IsNot Nothing Then
             For i = 0 To (lstLayerParameterControl.Count - 1)
-                If (i < clsCurrGeom.clsLayerParameters.Count - 1) Then
+                If (i < clsCurrGeom.clsLayerParameters.Count) Then
                     lstLayerParameterControl(i).SetLayerParameter(clsCurrGeom.clsLayerParameters(i))
                 Else
                     lstLayerParameterControl(i).SetLayerParameter(Nothing)
