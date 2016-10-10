@@ -86,7 +86,7 @@ Public Class frmMain
         clsInstatOptions.SetColorPalette(({Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White}).ToList)
     End Sub
 
-    Private Sub mnuGraphicsCummulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
+    Private Sub mnuGraphicsCummulativeDistribution_Click(sender As Object, e As EventArgs)
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
@@ -102,23 +102,23 @@ Public Class frmMain
         dlgCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBoxplot.Click
+    Private Sub mnuGraphicsBoxPlot_Click(sender As Object, e As EventArgs)
         dlgBoxplot.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsInventoryPlot.Click
+    Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs)
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsLinePlot.Click
+    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs)
         dlgPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsHistogram.Click
+    Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs)
         dlgHistogram.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsDotPlot.Click
+    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs)
         dlgDotPlot.ShowDialog()
     End Sub
 
@@ -522,7 +522,7 @@ Public Class frmMain
         dlgInsertColumn.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBarChart.Click
+    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs)
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
@@ -589,11 +589,11 @@ Public Class frmMain
         mnuHelpHelp_Click(sender, e)
     End Sub
 
-    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBarChartFromSummary.Click
+    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs)
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsScatterPlot.Click
+    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs)
         dlgScatterPlot.ShowDialog()
     End Sub
 
@@ -749,7 +749,7 @@ Public Class frmMain
         dlgGeneralRegression.ShowDialog()
     End Sub
 
-    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsWindRose.Click
+    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgWindrose.ShowDialog()
     End Sub
 
@@ -761,7 +761,7 @@ Public Class frmMain
         dlgCombineforGraphics.ShowDialog()
     End Sub
 
-    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsPopulationPyramid.Click
+    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgPopulationPyramids.ShowDialog()
     End Sub
 
@@ -1150,5 +1150,9 @@ Public Class frmMain
 
     Private Sub mnuDescribeTwoVariablesTabulate_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesTabulate.Click
         dlgTwoVariableTabulate.ShowDialog()
+    End Sub
+
+    Private Sub RugPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RugPlotToolStripMenuItem.Click
+        dlgRugPlot.ShowDialog()
     End Sub
 End Class
