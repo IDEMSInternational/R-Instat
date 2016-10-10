@@ -54,6 +54,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.iHelpTopicID = 416
     End Sub
 
     Private Sub TestOkEnabled()
