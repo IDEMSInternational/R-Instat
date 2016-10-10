@@ -513,6 +513,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
     }
     # Need to use private$data here because changing names of data field
     names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
+    self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
     # TODO decide if we need to do these 2 lines
     self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
     self$data_changed <- TRUE
@@ -1490,7 +1491,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, nrow = NULL, ...) {
+data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
   if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
   if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
   numeric_geom <- match.fun(numeric)
@@ -1525,8 +1526,8 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value))
     }
-    if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free", nrow = nrow) + ylab(""))
-    else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", nrow = nrow) + ylab(""))
+    if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
+    else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
   }
   else {
     column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
@@ -1558,9 +1559,53 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
       i = i + 1
     }
     if(output == "combine") {
-      return(gridExtra::grid.arrange(grobs = graphs, nrow = nrow))
+      return(gridExtra::grid.arrange(grobs = graphs, ncol = ncol))
     }
     else return(graphs)
   }
+}
+)
+
+data_object$set("public","make_date_yearmonthday", function(year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
+  year_col <- self$get_columns_from_data(year)
+  month_col <- self$get_columns_from_data(month)
+  day_col <- self$get_columns_from_data(day)
+  if(missing(year_format)) {
+    year_counts <- str_count(year)
+    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
+    else {
+      year_length <- year_counts[1]
+      if(year_length == 2) year_format = "%y"
+      else if(year_length == 4) year_format = "%Y"
+      else stop("Cannot detect year format with ", year_length, " digits.")
+    }
+  }
+  if(missing(month_format)) {
+    #TODO
+  }
+  if(missing(day_format)) {
+    #TODO
+  }
+  return(as.Date(paste(year_col, month_col, day_col), format = paste(year_format, month_format, day_format)))
+}
+)
+
+# Not sure if doy_format should be a parameter? There seems to only be one format for it.
+data_object$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
+  year_col <- self$get_columns_from_data(year)
+  doy_col <- self$get_columns_from_data(doy)
+  
+  if(missing(year_format)) {
+    year_counts <- str_count(year)
+    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
+    else {
+      year_length <- year_counts[1]
+      if(year_length == 2) year_format = "%y"
+      else if(year_length == 4) year_format = "%Y"
+      else stop("Cannot detect year format with ", year_length, " digits.")
+    }
+  }
+  #TODO this will be more complex to make into account of doy_typical_length
+  return(as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
 }
 )

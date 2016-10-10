@@ -51,9 +51,13 @@ Public Class ucrButtons
         Dim bIsAssigned As Boolean
         Dim bToBeAssigned As Boolean
         Dim strAssignTo As String
+        Dim lstCurrentEnabled As New List(Of Boolean)
+        Dim ctrTempControl As Control
+        Dim i As Integer
 
-        For Each control In ParentForm.Controls
-            control.Enabled = False
+        For Each ctrTempControl In ParentForm.Controls
+            lstCurrentEnabled.Add(ctrTempControl.Enabled)
+            ctrTempControl.Enabled = False
         Next
         ParentForm.Cursor = Cursors.WaitCursor
 
@@ -65,6 +69,7 @@ Public Class ucrButtons
         bIsAssigned = clsRsyntax.GetbIsAssigned()
         bToBeAssigned = clsRsyntax.GetbToBeAssigned()
         strAssignTo = clsRsyntax.GetstrAssignTo()
+        'Also need to be getting strAssignToColumn, strAssignToDataFrame etc. maybe one method to get all as a list
         frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
 
         'This clears the script after it has been run, but leave the function and parameters in the base function
@@ -75,9 +80,18 @@ Public Class ucrButtons
         clsRsyntax.SetbIsAssigned(bIsAssigned)
         clsRsyntax.SetbToBeAssigned(bToBeAssigned)
         clsRsyntax.SetstrAssignTo(strAssignTo)
+        'Need to be resetting other AssignTo values as well, maybe through single method
+
+        'Warning: these reinitializing processes of the RSyntax parameters should probably be integrated at the end of GetScript. 
+        'However, for the moment, RSyntax is not playing it's role of capturing the whole set of R-commands that the user wants to run when OK is Cklicked. 
+        'Indeed, the events BeforeClickOk and ClickOk enables for the moment to insert R-commands before and after the Base R-command handle. 
+        'In the process, we want the RSyntax parameters to be set as at the end of GetScript. Hence the reset needs to come after.
+        'Eventually, all this should be more neatly incorporated in the RSyntax machinery...
         ParentForm.Hide()
-        For Each control In ParentForm.Controls
-            control.Enabled = True
+        i = 0
+        For Each ctrTempControl In ParentForm.Controls
+            ctrTempControl.Enabled = lstCurrentEnabled(i)
+            i = i + 1
         Next
         ParentForm.Cursor = Cursors.Default
 
@@ -106,6 +120,7 @@ Public Class ucrButtons
     Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
         frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & "# " & txtComment.Text
         frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & clsRsyntax.GetScript()
+        'here we getscript but we don't reinitialise the AssignTo etc. for when pressing OK button ? ...
         frmScript.Visible = True
         frmScript.BringToFront()
     End Sub

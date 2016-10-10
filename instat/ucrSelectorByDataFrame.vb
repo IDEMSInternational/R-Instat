@@ -29,8 +29,8 @@ Public Class ucrSelectorByDataFrame
         strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
         LoadList()
         If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
-            RaiseEvent DataFrameChanged()
             OnResetReceivers()
+            RaiseEvent DataFrameChanged()
         End If
     End Sub
 
