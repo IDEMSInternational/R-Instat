@@ -55,10 +55,11 @@ Public Class dlgOneVarCompareModels
     ' variables not fromvariablex cannot be in dataframe
 
     Private Sub ReopenDialog()
+        sdgOneVarCompareModels.Reopen()
     End Sub
 
-    Private Sub TestOKEnabled()
-        If Not UcrReceiver.IsEmpty Then
+    Public Sub TestOKEnabled()
+        If sdgOneVarCompareModels.TestOkEnabled() AndAlso Not UcrReceiver.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -70,6 +71,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub ucrSelectorOneVarCompModels_DataFrameChanged() Handles ucrSelectorOneVarCompModels.DataFrameChanged
+        sdgOneVarCompareModels.DisplayChiSquare()
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
@@ -86,6 +88,7 @@ Public Class dlgOneVarCompareModels
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
         sdgOneVarCompareModels.ShowDialog()
         EnableOptions()
+        TestOKEnabled()
     End Sub
 
 
