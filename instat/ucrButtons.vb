@@ -69,6 +69,7 @@ Public Class ucrButtons
         bIsAssigned = clsRsyntax.GetbIsAssigned()
         bToBeAssigned = clsRsyntax.GetbToBeAssigned()
         strAssignTo = clsRsyntax.GetstrAssignTo()
+        'Also need to be getting strAssignToColumn, strAssignToDataFrame etc. maybe one method to get all as a list
         frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
 
         'This clears the script after it has been run, but leave the function and parameters in the base function
@@ -79,6 +80,8 @@ Public Class ucrButtons
         clsRsyntax.SetbIsAssigned(bIsAssigned)
         clsRsyntax.SetbToBeAssigned(bToBeAssigned)
         clsRsyntax.SetstrAssignTo(strAssignTo)
+        'Need to be resetting other AssignTo values as well, maybe through single method
+
         'Warning: these reinitializing processes of the RSyntax parameters should probably be integrated at the end of GetScript. 
         'However, for the moment, RSyntax is not playing it's role of capturing the whole set of R-commands that the user wants to run when OK is Cklicked. 
         'Indeed, the events BeforeClickOk and ClickOk enables for the moment to insert R-commands before and after the Base R-command handle. 

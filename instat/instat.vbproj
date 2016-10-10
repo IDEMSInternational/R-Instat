@@ -218,6 +218,12 @@
     <Compile Include="dlgOpenSST.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRugPlot.Designer.vb">
+      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRugPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTablePlus.Designer.vb">
       <DependentUpon>dlgTablePlus.vb</DependentUpon>
     </Compile>
@@ -2522,6 +2528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRugPlot.resx">
+      <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
