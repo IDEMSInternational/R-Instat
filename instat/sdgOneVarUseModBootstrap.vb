@@ -16,7 +16,7 @@
 Imports instat.Translations
 
 Public Class sdgOneVarUseModBootstrap
-    Public clsRBootMethod As New RFunction
+    Public clsRbootFunction As New RFunction
     Public clsRsyntax As New RSyntax
     Public bfirstload As Boolean = True
 
@@ -25,10 +25,8 @@ Public Class sdgOneVarUseModBootstrap
     End Sub
 
     Public Sub InitialiseDialog()
-        clsRsyntax.AddParameter("bootmethod")
-        clsRsyntax.AddParameter("niter")
-        ' add in CI's,
-        ' do we want this to be plotted? 
+        clsRbootFunction.AddParameter("bootmethod")
+        clsRbootFunction.AddParameter("niter")
         nudIterations.Minimum = 1
         nudIterations.Maximum = 10001
         nudCI.Minimum = 0
@@ -43,21 +41,28 @@ Public Class sdgOneVarUseModBootstrap
         nudIterations.Value = 1001
     End Sub
 
-    Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
-        clsRsyntax = clsRNewSyntax
+    Public Sub SetMyBootFunction(clsRNewbootFunction As RFunction)
+        clsRbootFunction = clsRNewbootFunction
     End Sub
 
     Private Sub chkParametric_CheckedChanged(sender As Object, e As EventArgs) Handles chkParametric.CheckedChanged
         If chkParametric.Checked Then
-            clsRsyntax.AddParameter("bootmethod", Chr(34) & "param" & Chr(34))
+            clsRbootFunction.AddParameter("bootmethod", Chr(34) & "param" & Chr(34))
         Else
-            clsRsyntax.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
+            clsRbootFunction.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
         End If
     End Sub
 
     Private Sub nudIterations_ValueChanged(sender As Object, e As EventArgs) Handles nudIterations.ValueChanged
-        clsRsyntax.AddParameter("niter", nudIterations.Value.ToString())
+        clsRbootFunction.AddParameter("niter", nudIterations.Value.ToString())
     End Sub
 
-    ' confidence interval 
+    Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
+        clsRsyntax = clsRNewSyntax
+    End Sub
+
+    Private Sub nudCI_ValueChanged(sender As Object, e As EventArgs) Handles nudCI.ValueChanged
+        clsRsyntax.AddParameter("CI.level", nudCI.Value.ToString())
+    End Sub
+
 End Class

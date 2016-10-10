@@ -513,6 +513,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
     }
     # Need to use private$data here because changing names of data field
     names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
+    self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
     # TODO decide if we need to do these 2 lines
     self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
     self$data_changed <- TRUE
@@ -1490,7 +1491,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, nrow = NULL, ...) {
+data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
   if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
   if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
   numeric_geom <- match.fun(numeric)
@@ -1525,8 +1526,8 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value))
     }
-    if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free", nrow = nrow) + ylab(""))
-    else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", nrow = nrow) + ylab(""))
+    if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
+    else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
   }
   else {
     column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
