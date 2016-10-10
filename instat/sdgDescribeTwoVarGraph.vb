@@ -52,17 +52,17 @@ Public Class sdgDescribeTwoVarGraph
             ucrNumericByCategorical.Enabled = False
             ucrCategoricalByNumeric.Enabled = False
             ucrCategoricalByCategorical.Enabled = False
-        ElseIf ((dlgDescribeTwoVarGraph.strVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strVarType = "integer") And (dlgDescribeTwoVarGraph.strSecondVarType = "factor")) Then
+        ElseIf ((dlgDescribeTwoVarGraph.strVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strVarType = "integer") And (dlgDescribeTwoVarGraph.strSecondVarType = "factor" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "character" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "logical")) Then
             ucrNumericByNumeric.Enabled = False
             ucrNumericByCategorical.Enabled = True
             ucrCategoricalByNumeric.Enabled = False
             ucrCategoricalByCategorical.Enabled = False
-        ElseIf ((dlgDescribeTwoVarGraph.strVarType = "factor") And (dlgDescribeTwoVarGraph.strSecondVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "integer")) Then
+        ElseIf ((dlgDescribeTwoVarGraph.strVarType = "factor" OrElse dlgDescribeTwoVarGraph.strVarType = "character" OrElse dlgDescribeTwoVarGraph.strVarType = "logical") And (dlgDescribeTwoVarGraph.strSecondVarType = "numeric" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "integer")) Then
             ucrNumericByNumeric.Enabled = False
             ucrNumericByCategorical.Enabled = False
             ucrCategoricalByNumeric.Enabled = True
             ucrCategoricalByCategorical.Enabled = False
-        ElseIf ((dlgDescribeTwoVarGraph.strVarType = "factor") And (dlgDescribeTwoVarGraph.strSecondVarType = "factor")) Then
+        ElseIf ((dlgDescribeTwoVarGraph.strVarType = "factor" OrElse dlgDescribeTwoVarGraph.strVarType = "character" OrElse dlgDescribeTwoVarGraph.strVarType = "logical") And (dlgDescribeTwoVarGraph.strSecondVarType = "factor" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "character" OrElse dlgDescribeTwoVarGraph.strSecondVarType = "logical")) Then
             ucrNumericByNumeric.Enabled = False
             ucrNumericByCategorical.Enabled = False
             ucrCategoricalByNumeric.Enabled = False
