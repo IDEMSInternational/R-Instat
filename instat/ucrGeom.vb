@@ -22,6 +22,7 @@ Public Class ucrGeom
     Public lstGgParameters As New List(Of RParameter)
     Public clsGeomFunction As New RFunction
     Public clsCurrGeom As New Geoms
+    'why is geomfunction not a memeber of the geomclass ?
     Public lstFunctionParameters As New List(Of RParameter)
     Private bFirstLoad As Boolean = True
     Public clsGgplotAesFunction As New RFunction
