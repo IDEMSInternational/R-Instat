@@ -36,11 +36,11 @@ Public Class RSyntax
     'Decides whether or not the output oof the R-command should be part of the script or not, in the case this has already been assigned.
     Private strAssignTo As String
     'strAssignTo is the name that should be used to assign in R the output of the main (Base) R-command.
-    Private strAssignToDataframe As String
-    Private strAssignToColumn As String
-    Private strAssignToModel As String
-    Private strAssignToGraph As String
-    'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents. 
+    Public strAssignToDataframe As String
+    Public strAssignToColumn As String
+    Public strAssignToModel As String
+    Public strAssignToGraph As String
+    'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents.
     'If they are empty, the output Of the command Is Not linked To an R-instat object.
     'If they are non-empty, that gives the name of the R-instat Object fields it needs to be linked with.
     Public bToBeAssigned As Boolean = False
