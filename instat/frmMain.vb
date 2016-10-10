@@ -1167,4 +1167,12 @@ Public Class frmMain
     Private Sub mnuDescribeOtherGraphicsDialogsCumulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
+
+    Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnMakeDate.Click
+        dlgMakeDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseColumnMakeDate_Click_1(sender As Object, e As EventArgs) Handles mnuOrganiseColumnMakeDate.Click
+        dlgMakeDate.ShowDialog()
+    End Sub
 End Class
