@@ -153,7 +153,7 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(":")
         TestOKEnabled()
     End Sub
-    Private Sub cmdMissingValues_Click(sender As Object, e As EventArgs)
+    Private Sub cmdMissingValues_Click(sender As Object, e As EventArgs) Handles cmdMissingValues.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("NA")
         TestOKEnabled()
     End Sub
@@ -264,4 +264,5 @@ Public Class dlgEnter
             ucrSaveEnterResultInto.Visible = False
         End If
     End Sub
+
 End Class
