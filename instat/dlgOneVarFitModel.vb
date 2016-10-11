@@ -48,7 +48,6 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModel.SetMyRSyntax(UcrBase.clsRsyntax)
         sdgOneVarFitModDisplay.SetDistribution(UcrDistributions)
         sdgOneVarFitModel.SetDistribution(UcrDistributions)
-        sdgOneVarFitModDisplay.AssignSaveLikelihood()
     End Sub
 
     Private Sub SetDefaults()
@@ -68,7 +67,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub TestOKEnabled()
-        If (chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso Not UcrReceiver.IsEmpty Then
+        If (chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso Not UcrReceiver.IsEmpty AndAlso sdgOneVarFitModDisplay.TestOkEnabled() Then
             UcrBase.OKEnabled(True)
         Else
             UcrBase.OKEnabled(False)
@@ -83,12 +82,10 @@ Public Class dlgOneVarFitModel
         AssignSaveModel()
     End Sub
 
-
     Private Sub ucrSaveModel_NameChanged() Handles ucrSaveModel.NameChanged
         AssignSaveModel()
         TestOKEnabled()
     End Sub
-
 
     Public Sub SetDataParameter()
         If Not UcrReceiver.IsEmpty Then
@@ -151,6 +148,7 @@ Public Class dlgOneVarFitModel
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgOneVarFitModDisplay.ShowDialog()
         EnableOptions()
+        TestOKEnabled()
     End Sub
 
     Private Sub EnableOptions()
@@ -170,7 +168,9 @@ Public Class dlgOneVarFitModel
 
     Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
         sdgOneVarFitModDisplay.CreateGraphs()
-        sdgOneVarFitModDisplay.LikelihoodGraphs()
+        If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
+            sdgOneVarFitModDisplay.RunLikelihoods()
+        End If
     End Sub
 
 End Class

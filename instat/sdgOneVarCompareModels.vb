@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class sdgOneVarCompareModels
     Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRsyntax, clsOperation As New RFunction
-    Private clsGetObjectOperator As New ROperator
+    Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
     Private WithEvents ucrRecs As ucrReceiver
     Public bfirstload As Boolean = True
 
@@ -26,14 +26,11 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Public Sub InitialiseDialog()
-        clsRsyntax.AddParameter("chisqbreaks")
         clsRcdfcompFunction.SetRCommand("cdfcomp")
         clsRdenscompFunction.SetRCommand("denscomp")
         clsRqqcompFunction.SetRCommand("qqcomp")
         clsRppcompFunction.SetRCommand("ppcomp")
         ucrDisplayChiData.SetValidationTypeAsRVariable()
-        ' set default name
-        ' if not checked, then this doesn't show
     End Sub
 
     Public Sub SetDefaults()
@@ -43,7 +40,6 @@ Public Class sdgOneVarCompareModels
         chkQQ.Checked = False
         chkSaveChi.Checked = True
         chkSaveObjects.Checked = True
-        chkInputBreakpoints.Enabled = False ' disabled for now
         ucrSavePlots.chkSaveGraph.Checked = False
         ucrSavePlots.Enabled = False ' disabled for now
         ucrSavePlots.ucrInputGraphName.SetPrefix("plots")
@@ -51,8 +47,8 @@ Public Class sdgOneVarCompareModels
         ucrObjectName.SetName("gof")
         ucrDisplayChiData.Reset()
         ucrDisplayChiData.SetName(dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare")
-        ReturnEnabled()
         DisplayChiSquare()
+        DisplayChiBreaks()
         'ucrBase.ihelptopicID = 
     End Sub
 
@@ -62,21 +58,16 @@ Public Class sdgOneVarCompareModels
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
-        clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        ' clSr....   :=clsModel
-        clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
     End Sub
 
     Public Sub DisplayChiSquare()
         If chkSaveChi.Checked Then
             ucrDisplayChiData.Visible = True
-            clsGetObjectOperator.SetOperation("$")
-            clsGetObjectOperator.SetParameter(True, clsRFunc:=clsModel)
-            clsGetObjectOperator.SetParameter(False, strValue:="chisqtable")
+            clsOperatorforTable.SetOperation("$")
+            clsOperatorforTable.SetParameter(True, clsRFunc:=clsModel)
+            clsOperatorforTable.SetParameter(False, strValue:="chisqtable")
             clsRAsDataFrame.SetRCommand("as.data.frame")
-            clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsGetObjectOperator)
+            clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
         Else
             ucrDisplayChiData.Visible = False
         End If
@@ -91,10 +82,6 @@ Public Class sdgOneVarCompareModels
         DisplayChiSquare()
     End Sub
 
-
-
-    ' if it is selected and not given a default name then what happens
-
     Public Sub SetReceiver(ucrNewReceiver As ucrReceiver)
         ucrRecs = ucrNewReceiver
     End Sub
@@ -105,7 +92,6 @@ Public Class sdgOneVarCompareModels
         Else
             ucrObjectName.Visible = True
         End If
-        ReturnEnabled()
     End Sub
 
 
@@ -113,23 +99,31 @@ Public Class sdgOneVarCompareModels
         Dim strTemp As String = ""
 
         If chkCDF.Checked Then
+            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
             frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
         End If
         If chkPP.Checked Then
+            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
             frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
         End If
         If chkQQ.Checked Then
+            clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
             frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
         End If
         If chkDensity.Checked Then
+            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
             frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
         End If
         If chkSaveChi.Checked Then
-            frmMain.clsRLink.RunScript(clsGetObjectOperator.ToScript(), 0)
+            frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
             clsRAsDataFrame.ToScript(strTemp)
             frmMain.clsRLink.RunScript(strTemp, 0)
         End If
+        If chkInputBreakpoints.Checked Then
+            frmMain.clsRLink.RunScript(clsOperatorForBreaks.ToScript(), 2)
+        End If
     End Sub
+
 
     ' To say if our models are discrete, we cannot use Density, QQ or PP
     'Private Sub SetPlotOptions()
@@ -148,16 +142,14 @@ Public Class sdgOneVarCompareModels
     'End Sub
 
     Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
-        If chkInputBreakpoints.Checked Then
-            clsRsyntax.AddParameter("chisqbreaks") 'in the brackets have numbers inputted numbers inputted
-        End If
+        DisplayChiBreaks()
     End Sub
 
-    Private Sub ReturnEnabled()
-        If Not (chkSaveObjects.Checked AndAlso ucrObjectName.IsEmpty) Then
-            ucrSubBase.cmdReturn.Enabled = True
-        Else
-            ucrSubBase.cmdReturn.Enabled = False
+    Public Sub DisplayChiBreaks()
+        If chkInputBreakpoints.Checked Then
+            clsOperatorForBreaks.SetOperation("$")
+            clsOperatorForBreaks.SetParameter(True, clsRFunc:=clsModel)
+            clsOperatorForBreaks.SetParameter(False, strValue:="chisqbreaks")
         End If
     End Sub
 
@@ -172,7 +164,7 @@ Public Class sdgOneVarCompareModels
 
     Public Function TestOkEnabled() As Boolean
         Dim bOkEnabled As Boolean
-        If (chkSaveObjects.Checked AndAlso Not ucrObjectName.IsEmpty) AndAlso (chkSaveChi.Checked AndAlso Not ucrDisplayChiData.IsEmpty) Then
+        If (chkSaveObjects.Checked AndAlso Not ucrObjectName.IsEmpty OrElse Not chkSaveObjects.Checked) AndAlso (chkSaveChi.Checked AndAlso Not ucrDisplayChiData.IsEmpty OrElse Not chkSaveChi.Checked) Then
             bOkEnabled = True
         Else
             bOkEnabled = False

@@ -59,23 +59,23 @@ Public Class sdgOneVarUseModFit
         If rdoPlotAll.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("plot")
-            clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
+            clsRplotFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoPPPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("ppcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoCDFPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("cdfcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoQQPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("qqcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoDensityPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("denscomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoCIcdf.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("CIcdfplot")

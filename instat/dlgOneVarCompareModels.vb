@@ -41,6 +41,7 @@ Public Class dlgOneVarCompareModels
         sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarCompareModels.SetReceiver(UcrReceiver)
         sdgOneVarCompareModels.DisplayChiSquare()
+        sdgOneVarCompareModels.DisplayChiBreaks()
     End Sub
 
     Private Sub SetDefaults()
@@ -90,8 +91,6 @@ Public Class dlgOneVarCompareModels
         EnableOptions()
         TestOKEnabled()
     End Sub
-
-
 
     Private Sub EnableOptions()
         If Not UcrReceiver.IsEmpty Then

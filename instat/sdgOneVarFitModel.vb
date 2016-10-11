@@ -78,7 +78,6 @@ Public Class sdgOneVarFitModel
         ElseIf rdoMge.Checked Then
             clsRSyntax.AddParameter("method", Chr(34) & "mge" & Chr(34))
         End If
-        'sdgOneVarFitModDisplay.EnableLikelihood()
     End Sub
 
     Public Sub SetDistribution(ucrNewDists As ucrDistributions)
