@@ -80,7 +80,7 @@ Public Class dlgDescribeTwoVariable
         clsGetDataType.AddParameter("property", "data_type_label")
         clsGetSecondDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetSecondDataType.AddParameter("property", "data_type_label")
-        'ucrBaseDescribeOneVar.iHelpTopicID = 
+        ucrBaseDescribeTwoVar.iHelpTopicID = 414
     End Sub
 
     Private Sub ucrBaseDescribeOneVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeTwoVar.ClickReset

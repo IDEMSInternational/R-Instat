@@ -218,10 +218,22 @@
     <Compile Include="dlgOpenSST.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRugPlot.Designer.vb">
+      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRugPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTablePlus.Designer.vb">
       <DependentUpon>dlgTablePlus.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTablePlus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTwoVariabletabulate.Designer.vb">
+      <DependentUpon>dlgTwoVariabletabulate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoVariabletabulate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
@@ -2517,6 +2529,9 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRugPlot.resx">
+      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -2615,6 +2630,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleSummaryData.sw-KE.resx">
       <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoVariabletabulate.resx">
+      <DependentUpon>dlgTwoVariabletabulate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoVariableUseModel.resx">
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
