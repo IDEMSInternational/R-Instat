@@ -82,7 +82,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings", "Probability", "Dates"})
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text", "Runoff", "Dates"})
         ucrSaveResultInto.SetValidationTypeAsRVariable()
     End Sub
 
@@ -252,7 +252,7 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 ucrBase.iHelpTopicID = 128
-            Case "Strings"
+            Case "Text"
                 grpDates.Visible = False
                 grpStrings.Visible = True
                 grpStatistics.Visible = False
@@ -262,7 +262,7 @@ Public Class dlgCalculator
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
                 ucrBase.iHelpTopicID = 338
-            Case "Probability"
+            Case "Runoff"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpStrings.Visible = False
@@ -291,6 +291,7 @@ Public Class dlgCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpStrings.Visible = False
+                ucrBase.iHelpTopicID = 14
         End Select
     End Sub
     Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
