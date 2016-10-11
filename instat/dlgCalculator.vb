@@ -22,6 +22,7 @@ Public Class dlgCalculator
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
+    Public bHelpClicked As Boolean = False
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -81,7 +82,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings", "Probability", "Dates"})
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings", "Probability", "Dates"})
         ucrSaveResultInto.SetValidationTypeAsRVariable()
     End Sub
 
@@ -212,6 +213,15 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrInputCalOptions.NameChanged
+        CalculationsOptions()
+
+        If ucrBase.bHelpCLicked Then
+            ucrBase.HelpContent()
+        End If
+
+    End Sub
+
+    Private Sub CalculationsOptions()
         Select Case ucrInputCalOptions.GetText
             Case "Maths"
                 grpStatistics.Visible = False
@@ -220,6 +230,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
+                ucrBase.iHelpTopicID = 126
                 Me.Size = New System.Drawing.Size(614, 377)
             Case "Logical and Symbols"
                 grpDates.Visible = False
@@ -230,7 +241,8 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
                 grpProbabilty.Visible = False
-            Case "Statistics"
+                ucrBase.iHelpTopicID = 127
+            Case "Summary"
                 grpDates.Visible = False
                 grpStatistics.Visible = True
                 grpLogical.Visible = False
@@ -239,6 +251,7 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(552, 377)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
+                ucrBase.iHelpTopicID = 128
             Case "Strings"
                 grpDates.Visible = False
                 grpStrings.Visible = True
@@ -248,6 +261,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
+                ucrBase.iHelpTopicID = 338
             Case "Probability"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
@@ -257,6 +271,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(749, 377)
+                ucrBase.iHelpTopicID = 120
             Case "Dates"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
@@ -266,6 +281,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(589, 377)
+                ucrBase.iHelpTopicID = 130
             Case Else
                 grpDates.Visible = False
                 Me.Size = New System.Drawing.Size(424, 377)
@@ -277,7 +293,6 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
         End Select
     End Sub
-
     Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi")
     End Sub
@@ -956,5 +971,9 @@ Public Class dlgCalculator
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
         TryScript()
+    End Sub
+
+    Private Sub ucrBase_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles ucrBase.HelpRequested
+        bHelpClicked = True
     End Sub
 End Class
