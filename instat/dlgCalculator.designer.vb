@@ -150,6 +150,8 @@ Partial Class dlgCalculator
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpMaths.SuspendLayout()
@@ -1601,11 +1603,31 @@ Partial Class dlgCalculator
         Me.ucrSelectorForCalculations.Size = New System.Drawing.Size(210, 181)
         Me.ucrSelectorForCalculations.TabIndex = 106
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(387, 217)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
+        Me.cmdHelp.TabIndex = 172
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(567, 237)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(8, 8)
+        Me.Button2.TabIndex = 173
+        Me.Button2.Text = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(832, 340)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.chkShowArguments)
@@ -1770,4 +1792,6 @@ Partial Class dlgCalculator
     Friend WithEvents cmdClossingBracket As Button
     Friend WithEvents cmdQuotes As Button
     Friend WithEvents cmdSquareBrackets As Button
+    Friend WithEvents cmdHelp As Button
+    Friend WithEvents Button2 As Button
 End Class
