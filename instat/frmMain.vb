@@ -86,10 +86,6 @@ Public Class frmMain
         clsInstatOptions.SetColorPalette(({Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White}).ToList)
     End Sub
 
-    Private Sub mnuGraphicsCummulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
-        dlgCumulativeDistribution.ShowDialog()
-    End Sub
-
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
         dlgFileNew.ShowDialog()
     End Sub
@@ -102,29 +98,13 @@ Public Class frmMain
         dlgCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBoxplot.Click
-        dlgBoxplot.ShowDialog()
-    End Sub
 
-    Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsInventoryPlot.Click
+
+    Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs)
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsLinePlot.Click
-        dlgPlot.ShowDialog()
-    End Sub
 
-    Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsHistogram.Click
-        dlgHistogram.ShowDialog()
-    End Sub
-
-    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsDotPlot.Click
-        dlgDotPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsClipBoxPlot_Click(sender As Object, e As EventArgs)
-        dlgCliBoxplot.ShowDialog()
-    End Sub
 
     Private Sub mnuClimateMethodsGraphicsCliplot_Click(sender As Object, e As EventArgs)
         dlgCliPlot.ShowDialog()
@@ -263,11 +243,11 @@ Public Class frmMain
         dlgOneSample.ShowDialog()
     End Sub
 
-    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherTableDialogsFrequency.Click
+    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
         dlgFreqTables.ShowDialog()
     End Sub
 
-    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherTableDialogsSummary.Click
+    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
         dlgSummaryTables.ShowDialog()
     End Sub
 
@@ -522,7 +502,7 @@ Public Class frmMain
         dlgInsertColumn.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBarChart.Click
+    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs)
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
@@ -589,11 +569,11 @@ Public Class frmMain
         mnuHelpHelp_Click(sender, e)
     End Sub
 
-    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBarChartFromSummary.Click
+    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs)
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsScatterPlot.Click
+    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs)
         dlgScatterPlot.ShowDialog()
     End Sub
 
@@ -729,7 +709,7 @@ Public Class frmMain
         dlgGeneralANOVA.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsTablesMultipleResponse_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherTableDialogsMultipleResponse.Click
+    Private Sub mnuStatisticsTablesMultipleResponse_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMultipleResponse.Click
         dlgMultipleResponse.ShowDialog()
     End Sub
 
@@ -749,7 +729,7 @@ Public Class frmMain
         dlgGeneralRegression.ShowDialog()
     End Sub
 
-    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsWindRose.Click
+    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgWindrose.ShowDialog()
     End Sub
 
@@ -761,7 +741,7 @@ Public Class frmMain
         dlgCombineforGraphics.ShowDialog()
     End Sub
 
-    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsPopulationPyramid.Click
+    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgPopulationPyramids.ShowDialog()
     End Sub
 
@@ -1146,5 +1126,53 @@ Public Class frmMain
 
     Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateCountInFactor.Click
         dlgCountinFactor.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoVariablesTabulate_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesTabulate.Click
+        dlgTwoVariableTabulate.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificScatterPlot.Click
+        dlgScatterPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificLinePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificLinePlot.Click
+        dlgPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificHistogram.Click
+        dlgHistogram.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificBoxplot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBoxplot.Click
+        dlgBoxplot.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificDotPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificDotPlot.Click
+        dlgDotPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificRugPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificRugPlot.Click
+        dlgRugPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarChart.Click
+        dlgBarAndPieChart.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificBarChartFromSummary_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarChartFromSummary.Click
+        dlgSummaryBarOrPieChart.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOtherGraphicsDialogsCumulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
+        dlgCumulativeDistribution.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnMakeDate.Click
+        dlgMakeDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseColumnMakeDate_Click_1(sender As Object, e As EventArgs) Handles mnuOrganiseColumnMakeDate.Click
+        dlgMakeDate.ShowDialog()
     End Sub
 End Class
