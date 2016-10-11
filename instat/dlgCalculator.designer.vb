@@ -144,12 +144,12 @@ Partial Class dlgCalculator
         Me.cmdLfact = New System.Windows.Forms.Button()
         Me.cmdTrigamma = New System.Windows.Forms.Button()
         Me.cmdBeta = New System.Windows.Forms.Button()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpMaths.SuspendLayout()
@@ -1547,6 +1547,14 @@ Partial Class dlgCalculator
         Me.cmdBeta.Text = "beta"
         Me.cmdBeta.UseVisualStyleBackColor = True
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(8, 285)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(404, 51)
+        Me.ucrBase.TabIndex = 0
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.IsReadOnly = False
@@ -1592,14 +1600,6 @@ Partial Class dlgCalculator
         Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
         Me.ucrSelectorForCalculations.Size = New System.Drawing.Size(210, 181)
         Me.ucrSelectorForCalculations.TabIndex = 106
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 285)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 51)
-        Me.ucrBase.TabIndex = 0
         '
         'dlgCalculator
         '
