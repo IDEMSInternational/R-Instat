@@ -1576,7 +1576,7 @@ Partial Class dlgCalculator
         '
         'ucrInputTryMessage
         '
-        Me.ucrInputTryMessage.IsReadOnly = False
+        Me.ucrInputTryMessage.IsReadOnly = True
         Me.ucrInputTryMessage.Location = New System.Drawing.Point(91, 228)
         Me.ucrInputTryMessage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrInputTryMessage.Name = "ucrInputTryMessage"

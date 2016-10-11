@@ -33,8 +33,6 @@ Public Class sdgMerge
         clsByList.SetRCommand("c")
         ucrReceiverFirstDF.bExcludeFromSelector = True
         ucrReceiverSecondDF.bExcludeFromSelector = True
-        'do this only when columns selected
-        clsRSyntax.AddParameter("by", clsRFunctionParameter:=clsByList)
     End Sub
 
     Public Sub SetDefaults()
@@ -67,15 +65,24 @@ Public Class sdgMerge
         For Each lviItem In lstKeyColumns.Items
             clsByList.AddParameter(lviItem.Text(), lviItem.SubItems(2).Text())
         Next
+        ByParameterCheck()
     End Sub
 
     Private Sub ucrReceiverFirstDF_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstDF.SelectionChanged
-        If Not ucrReceiverFirstDF.IsEmpty() Then
-            If ucrReceiverSecondDF.IsEmpty AndAlso ucrSelectorSecondDataFrame.ContainsVariable(ucrReceiverFirstDF.GetVariableNames(False)) Then
-                ucrReceiverSecondDF.Add(ucrReceiverFirstDF.GetVariableNames(False))
+        AutoAddInOtherReceiver(ucrReceiverFirstDF, ucrReceiverSecondDF)
+    End Sub
+
+    Private Sub ucrReceiverSecondDF_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondDF.SelectionChanged
+        AutoAddInOtherReceiver(ucrReceiverSecondDF, ucrReceiverFirstDF)
+    End Sub
+
+    Public Sub AutoAddInOtherReceiver(ucrChangedReceiver As ucrReceiverSingle, ucrOtherReceiver As ucrReceiverSingle)
+        If Not ucrChangedReceiver.IsEmpty() Then
+            If ucrOtherReceiver.IsEmpty AndAlso ucrOtherReceiver.Selector.ContainsVariable(ucrChangedReceiver.GetVariableNames(False)) Then
+                ucrOtherReceiver.Add(ucrChangedReceiver.GetVariableNames(False))
             End If
         End If
-        If ucrReceiverFirstDF.IsEmpty() OrElse ucrReceiverSecondDF.IsEmpty Then
+        If ucrChangedReceiver.IsEmpty() OrElse ucrOtherReceiver.IsEmpty Then
             cmdAddAnotherPair.Enabled = False
         Else
             cmdAddAnotherPair.Enabled = True
@@ -109,11 +116,37 @@ Public Class sdgMerge
         End If
     End Sub
 
-    Public Function IsOkEnabled() As Boolean
+    Public Sub ByParameterCheck()
         If (Not ucrReceiverFirstDF.IsEmpty() AndAlso Not ucrReceiverSecondDF.IsEmpty) OrElse lstKeyColumns.Items.Count > 0 Then
+            clsRSyntax.AddParameter("by", clsRFunctionParameter:=clsByList)
+        Else
+            clsRSyntax.RemoveParameter("by")
+        End If
+    End Sub
+
+    Public Function IsOkEnabled() As Boolean
+        If lstKeyColumns.Items.Count > 0 Then
             Return True
         Else
-            Return False
+            If Not ucrReceiverFirstDF.IsEmpty AndAlso Not ucrReceiverSecondDF.IsEmpty Then
+                Return True
+            Else
+                Return False
+            End If
         End If
     End Function
+
+    Public Sub SetDataFrame(bFirst As Boolean, strDataFrame As String, Optional bEnabled As Boolean = False)
+        Dim ucrCurrentDataFrame As ucrDataFrame
+        If bFirst Then
+            ucrCurrentDataFrame = ucrSelectorFirstDataFrame.ucrAvailableDataFrames
+        Else
+            ucrCurrentDataFrame = ucrSelectorSecondDataFrame.ucrAvailableDataFrames
+        End If
+        ucrCurrentDataFrame.SetDataframe(strDataFrame, bEnabled)
+    End Sub
+
+    Private Sub ucrSelectorsChanged_DataFrameChanged() Handles ucrSelectorFirstDataFrame.DataFrameChanged, ucrSelectorSecondDataFrame.DataFrameChanged
+        ResetKeyList()
+    End Sub
 End Class

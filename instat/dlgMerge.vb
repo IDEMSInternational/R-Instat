@@ -63,13 +63,7 @@ Public Class dlgMerge
                 ucrBase.OKEnabled(False)
             End If
         ElseIf ucrInputMergeColumnsOptions.GetText() = "Choose which columns to merge by" Then
-            If sdgMerge.IsOkEnabled() Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
-            ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(sdgMerge.IsOkEnabled())
         End If
     End Sub
 
@@ -79,7 +73,17 @@ Public Class dlgMerge
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorDataFrames_DataFrameChanged() Handles ucrFirstDataFrame.DataFrameChanged, ucrSecondDataFrame.DataFrameChanged
+    Private Sub ucrSelectorDataFrames_DataFrameChanged() Handles ucrFirstDataFrame.DataFrameChanged
+        sdgMerge.SetDataFrame(True, ucrFirstDataFrame.cboAvailableDataFrames.Text)
+        SetDataFrameParameters()
+    End Sub
+
+    Private Sub ucrSecondDataFrame_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSecondDataFrame.DataFrameChanged
+        sdgMerge.SetDataFrame(False, ucrSecondDataFrame.cboAvailableDataFrames.Text)
+        SetDataFrameParameters()
+    End Sub
+
+    Private Sub SetDataFrameParameters()
         If Not ucrNewDataFrameName.UserTyped() Then
             ucrNewDataFrameName.SetName(ucrFirstDataFrame.cboAvailableDataFrames.Text & "_merged_with_" & ucrSecondDataFrame.cboAvailableDataFrames.Text)
         End If
@@ -118,8 +122,6 @@ Public Class dlgMerge
             cmdChooseMergeColumns.Enabled = False
         ElseIf ucrInputMergeColumnsOptions.GetText() = "Choose which columns to merge by" Then
             cmdChooseMergeColumns.Enabled = True
-            'temp disabled until working
-            cmdChooseMergeColumns.Enabled = False
             ucrBase.clsRsyntax.RemoveParameter("by")
         End If
         TestOKEnabled()

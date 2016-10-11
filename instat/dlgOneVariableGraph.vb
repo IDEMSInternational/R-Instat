@@ -80,7 +80,7 @@ Public Class dlgOneVariableGraph
         End If
     End Sub
 
-    Private Sub OneOrMoreVariables()
+    Public Sub OneOrMoreVariables()
         If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then
             ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperatorOneColumn)
             If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" OrElse ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "integer" Then
