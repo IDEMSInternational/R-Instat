@@ -81,10 +81,10 @@ Public Class dlgMakeDate
     End Sub
     Private Sub DateFormat()
         Select Case ucrInputOrigin.GetText
-            Case "30-12-1899 (Excel)"
-                ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "1899-12-30(Excel)" & Chr(34))
+            Case "30-12-1899"
+                ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "1899-12-30)" & Chr(34))
             Case Else
-                ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "1600-01-03 (Gregorian)" & Chr(34))
+                ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "1600-01-03)" & Chr(34))
         End Select
     End Sub
 
