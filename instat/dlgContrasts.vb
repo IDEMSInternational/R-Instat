@@ -14,26 +14,89 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgContrasts
+    Public clsLevels As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgContrasts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverForContrasts.IsEmpty Then
+            If rdoCurrentContrasts.Checked OrElse rdoHemert.Checked OrElse rdoPolynomials.Checked OrElse rdoSumToZero.Checked OrElse rdoTreatControl.Checked OrElse rdoUserDefined.Checked Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrReceiverForContrasts.Selector = ucrSelectorForContrast
+        ucrReceiverForContrasts.SetMeAsReceiver()
+        ucrReceiverForContrasts.SetIncludedDataTypes({"factor"})
         ucrBase.iHelpTopicID = 353
+        ucrFactorLevelsAndLabels.SetReceiver(ucrReceiverForContrasts)
+        ucrFactorLevelsAndLabels.SetAsSingleSelector()
+        clsLevels.SetRCommand("levels")
     End Sub
     Private Sub SetDefaults()
-
+        rdoCurrentContrasts.Checked = True
+        ContrastsFunctions()
+        ucrSelectorForContrast.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
+    Private Sub ucrReceiverForContrasts_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForContrasts.SelectionChanged
+        AddLevelsObj()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub rdoCurrentContrasts_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCurrentContrasts.CheckedChanged, rdoHemert.CheckedChanged, rdoPolynomials.CheckedChanged, rdoTreatControl.CheckedChanged, rdoUserDefined.CheckedChanged, rdoSumToZero.CheckedChanged
+        ContrastsFunctions()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub AddLevelsObj()
+        If ucrReceiverForContrasts.IsEmpty = False Then
+            clsLevels.AddParameter("x", clsRFunctionParameter:=ucrReceiverForContrasts.GetVariables)
+        Else
+            clsLevels.RemoveParameterByName("x")
+        End If
+        ucrBase.clsRsyntax.AddParameter("n", clsRFunctionParameter:=clsLevels)
+    End Sub
+    Private Sub ContrastsFunctions()
+        If rdoSumToZero.Checked Then
+            ucrBase.clsRsyntax.SetFunction("contr.sum")
+        ElseIf rdoCurrentContrasts.Checked Then
+
+        ElseIf rdoHemert.Checked Then
+            ucrBase.clsRsyntax.SetFunction("contr.helmert")
+        ElseIf rdoTreatControl.Checked Then
+            ucrBase.clsRsyntax.SetFunction("contr.treatment")
+        ElseIf rdoUserDefined.Checked
+
+        Else
+            ucrBase.clsRsyntax.SetFunction("contr.poly")
+        End If
+    End Sub
+
 End Class
