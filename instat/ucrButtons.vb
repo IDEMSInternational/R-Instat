@@ -21,7 +21,6 @@ Public Class ucrButtons
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
     Public strComment As String
-    Public bHelpCLicked As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -131,7 +130,6 @@ Public Class ucrButtons
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        bHelpCLicked = True
         HelpContent()
     End Sub
 

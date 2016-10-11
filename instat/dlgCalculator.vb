@@ -22,11 +22,11 @@ Public Class dlgCalculator
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
-    Public bHelpClicked As Boolean = False
+
+
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 14
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -70,6 +70,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 14
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
         ucrReceiverForCalculation.SetMeAsReceiver()
         clsAttach.SetRCommand("attach")
@@ -84,6 +85,7 @@ Public Class dlgCalculator
         ucrSelectorForCalculations.Reset()
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text", "Runoff", "Dates"})
         ucrSaveResultInto.SetValidationTypeAsRVariable()
+
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -214,11 +216,6 @@ Public Class dlgCalculator
 
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrInputCalOptions.NameChanged
         CalculationsOptions()
-
-        If ucrBase.bHelpCLicked Then
-            ucrBase.HelpContent()
-        End If
-
     End Sub
 
     Private Sub CalculationsOptions()
@@ -242,6 +239,8 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(580, 377)
                 grpProbabilty.Visible = False
                 ucrBase.iHelpTopicID = 127
+
+
             Case "Summary"
                 grpDates.Visible = False
                 grpStatistics.Visible = True
@@ -291,9 +290,9 @@ Public Class dlgCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpStrings.Visible = False
-                ucrBase.iHelpTopicID = 14
         End Select
     End Sub
+
     Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi")
     End Sub
@@ -974,7 +973,8 @@ Public Class dlgCalculator
         TryScript()
     End Sub
 
-    Private Sub ucrBase_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles ucrBase.HelpRequested
-        bHelpClicked = True
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        CalculationsOptions()
+        ucrBase.HelpContent()
     End Sub
 End Class
