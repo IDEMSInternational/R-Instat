@@ -29,14 +29,11 @@ Public Class sdgOneVarFitModDisplay
     End Sub
 
     Public Sub InitialiseDialog()
-        ucrSavePlots.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSavePlots.ucrInputGraphName.SetDefaultTypeAsGraph()
-        ucrSavePlots.ucrInputGraphName.SetValidationTypeAsRVariable()
-        ucrSavePlots.ucrInputGraphName.SetPrefix(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Plot")
-        ucrSaveLikelihood.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSaveLikelihood.ucrInputGraphName.SetDefaultTypeAsGraph()
-        ucrSaveLikelihood.ucrInputGraphName.SetValidationTypeAsRVariable()
-        ucrSaveLikelihood.ucrInputGraphName.SetPrefix(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Likelihood")
+        UcrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        UcrSaveLikelihood.strPrefix = "Likelihood"
+        ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        ucrSavePlots.strPrefix = "Plot"
+        clsRLogLikFunction.SetRCommand("llplot")
     End Sub
 
     Public Sub SetDefaults()
@@ -44,14 +41,13 @@ Public Class sdgOneVarFitModDisplay
         rdoLoglik.Checked = True
         'ucrSaveLikelihood.Enabled = False
         'ucrBase.ihelptopicID = 
-        ucrSaveLikelihood.Reset()
+        UcrSaveLikelihood.Reset()
         ucrSavePlots.Reset()
-        ucrSavePlots.chkSaveGraph.Checked = False
-        ucrSaveLikelihood.chkSaveGraph.Checked = False
     End Sub
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
+        clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
     End Sub
 
     Public Sub SetDistribution(ucrNewDists As ucrDistributions)
@@ -109,38 +105,56 @@ Public Class sdgOneVarFitModDisplay
 
     ' looking into tab2
 
-    Public Sub EnableLikelihood()
-        If Not sdgOneVarFitModel.rdoMle.Checked Then
-            tbclikelihood.Enabled = False
-            If Not rdoNoLik.Checked Then
-                rdoNoLik.Checked = True
-            End If
-        Else
-            rdoLoglik.Checked = True
-        End If
-    End Sub
-
-    Public Sub LikelihoodGraphs()
-        clsRLogLikFunction.SetRCommand("llplot")
-        clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
+    Public Sub rdoLikelihoods_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLoglik.CheckedChanged, rdoLik.CheckedChanged
         If rdoLoglik.Checked Then
-            frmMain.clsRLink.RunScript(clsRLogLikFunction.ToScript(), 2)
+            clsRLogLikFunction.AddParameter("loglik", strParameterValue:="TRUE")
         ElseIf rdoLik.Checked Then
             clsRLogLikFunction.AddParameter("loglik", strParameterValue:="FALSE")
-            frmMain.clsRLink.RunScript(clsRLogLikFunction.ToScript(), 2)
         End If
     End Sub
 
-    Private Sub ucrSaveLikelihood_GraphNameChanged() 
-        AssignSaveLikelihood()
+    Public Sub RunLikelihoods()
+        frmMain.clsRLink.RunScript(clsRLogLikFunction.ToScript(), 2)
     End Sub
 
-    Public Sub AssignSaveLikelihood()
-        '     If ucrSaveLikelihood.chkSaveGraph.Checked AndAlso Not ucrSaveLikelihood.ucrInputGraphName.IsEmpty Then
-    '    dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo(ucrSaveLikelihood.ucrInputGraphName.GetText, strTempGraph:=ucrSaveLikelihood.ucrInputGraphName.GetText, strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-    '   Else
-    '  dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo("last_graph", strTempGraph:="last_graph", strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-    ' End If
-    'End Sub
-    'need to sort this
+
+    Private Sub UcrSaveLikelihood_GraphNameChanged() Handles UcrSaveLikelihood.GraphNameChanged, UcrSaveLikelihood.SaveGraphCheckedChanged
+        If UcrSaveLikelihood.bSaveGraph Then
+            dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo(UcrSaveLikelihood.strGraphName, strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=UcrSaveLikelihood.strGraphName)
+        Else
+            dlgOneVarFitModel.UcrBase.clsRsyntax.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub ucrSavePlots_GraphNameChanged() Handles ucrSavePlots.GraphNameChanged, ucrSavePlots.SaveGraphCheckedChanged
+        If ucrSavePlots.bSaveGraph Then
+            dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo(ucrSavePlots.strGraphName, strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSavePlots.strGraphName)
+        Else
+            dlgOneVarFitModel.UcrBase.clsRsyntax.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub VisibleSaveGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNoPlot.CheckedChanged, rdoNoLik.CheckedChanged
+        If rdoNoPlot.Checked Then
+            ucrSavePlots.Visible = False
+        Else
+            ucrSavePlots.Visible = True
+        End If
+        If rdoNoLik.Checked Then
+            UcrSaveLikelihood.Visible = False
+        Else
+            UcrSaveLikelihood.Visible = True
+        End If
+    End Sub
+
+    Public Function TestOkEnabled() As Boolean
+        Dim bOkEnabled As Boolean
+        If (ucrSavePlots.chkSaveGraph.Checked AndAlso Not ucrSavePlots.ucrInputGraphName.IsEmpty OrElse Not ucrSavePlots.chkSaveGraph.Checked) AndAlso (UcrSaveLikelihood.chkSaveGraph.Checked AndAlso Not UcrSaveLikelihood.ucrInputGraphName.IsEmpty OrElse Not UcrSaveLikelihood.chkSaveGraph.Checked) Then
+            bOkEnabled = True
+        Else
+            bOkEnabled = False
+        End If
+        Return bOkEnabled
+    End Function
+
 End Class

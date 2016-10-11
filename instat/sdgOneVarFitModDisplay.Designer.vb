@@ -24,6 +24,7 @@ Partial Class sdgOneVarFitModDisplay
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.tbclikelihood = New System.Windows.Forms.TabPage()
+        Me.UcrSaveLikelihood = New instat.ucrSaveGraph()
         Me.rdoNoLik = New System.Windows.Forms.RadioButton()
         Me.rdoLik = New System.Windows.Forms.RadioButton()
         Me.rdoLoglik = New System.Windows.Forms.RadioButton()
@@ -36,7 +37,6 @@ Partial Class sdgOneVarFitModDisplay
         Me.rdoPlotAll = New System.Windows.Forms.RadioButton()
         Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
         Me.tbcPlots = New System.Windows.Forms.TabControl()
-        Me.UcrSaveLikelihood = New instat.ucrSaveGraph()
         Me.tbclikelihood.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.tbcPlots.SuspendLayout()
@@ -62,6 +62,13 @@ Partial Class sdgOneVarFitModDisplay
         Me.tbclikelihood.TabIndex = 1
         Me.tbclikelihood.Text = "Likelihood"
         Me.tbclikelihood.UseVisualStyleBackColor = True
+        '
+        'UcrSaveLikelihood
+        '
+        Me.UcrSaveLikelihood.Location = New System.Drawing.Point(8, 158)
+        Me.UcrSaveLikelihood.Name = "UcrSaveLikelihood"
+        Me.UcrSaveLikelihood.Size = New System.Drawing.Size(265, 20)
+        Me.UcrSaveLikelihood.TabIndex = 3
         '
         'rdoNoLik
         '
@@ -108,7 +115,7 @@ Partial Class sdgOneVarFitModDisplay
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(262, 185)
+        Me.TabPage1.Size = New System.Drawing.Size(288, 185)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Plots"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -191,13 +198,6 @@ Partial Class sdgOneVarFitModDisplay
         Me.tbcPlots.SelectedIndex = 0
         Me.tbcPlots.Size = New System.Drawing.Size(296, 211)
         Me.tbcPlots.TabIndex = 0
-        '
-        'UcrSaveLikelihood
-        '
-        Me.UcrSaveLikelihood.Location = New System.Drawing.Point(8, 159)
-        Me.UcrSaveLikelihood.Name = "UcrSaveLikelihood"
-        Me.UcrSaveLikelihood.Size = New System.Drawing.Size(265, 20)
-        Me.UcrSaveLikelihood.TabIndex = 3
         '
         'sdgOneVarFitModDisplay
         '
