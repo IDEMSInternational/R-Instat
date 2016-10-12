@@ -22,7 +22,7 @@ Partial Class sdgMerge
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
+        Me.ucrSubBase = New instat.ucrButtonsSubdialogue()
         Me.pnlKeyColumns = New System.Windows.Forms.Panel()
         Me.lstKeyColumns = New System.Windows.Forms.ListView()
         Me.lblKeyColumns = New System.Windows.Forms.Label()
@@ -40,12 +40,12 @@ Partial Class sdgMerge
         Me.grpKeys.SuspendLayout()
         Me.SuspendLayout()
         '
-        'UcrButtonsSubdialogue1
+        'ucrSubBase
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(289, 381)
-        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
-        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
-        Me.UcrButtonsSubdialogue1.TabIndex = 0
+        Me.ucrSubBase.Location = New System.Drawing.Point(289, 381)
+        Me.ucrSubBase.Name = "ucrSubBase"
+        Me.ucrSubBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrSubBase.TabIndex = 0
         '
         'pnlKeyColumns
         '
@@ -183,7 +183,7 @@ Partial Class sdgMerge
         Me.Controls.Add(Me.ucrSelectorFirstDataFrame)
         Me.Controls.Add(Me.grpKeys)
         Me.Controls.Add(Me.pnlKeyColumns)
-        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.Controls.Add(Me.ucrSubBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -198,7 +198,7 @@ Partial Class sdgMerge
 
     End Sub
 
-    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
+    Friend WithEvents ucrSubBase As ucrButtonsSubdialogue
     Friend WithEvents pnlKeyColumns As Panel
     Friend WithEvents lstKeyColumns As ListView
     Friend WithEvents lblKeyColumns As Label
