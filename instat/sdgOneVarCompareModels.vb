@@ -124,23 +124,6 @@ Public Class sdgOneVarCompareModels
         End If
     End Sub
 
-
-    ' To say if our models are discrete, we cannot use Density, QQ or PP
-    'Private Sub SetPlotOptions()
-    'If Not chosenmodels.bIsContinuous Then
-    '       chkDensity.Enabled = False
-    '       chkQQ.Enabled = False
-    '       rdoPPPlot.Enabled = False
-    'If chkDensity.Checked = True Or chkQQ.Checked = True Or chkPP.Checked = True Then
-    '            chkCDF.Checked = True
-    'End If
-    'Else
-    '        chkDensity.Enabled = True
-    '        chkQQ.Enabled = True
-    '        chkPP.Enabled = True
-    'End If
-    'End Sub
-
     Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
         DisplayChiBreaks()
     End Sub
@@ -160,7 +143,6 @@ Public Class sdgOneVarCompareModels
     ' Private Sub ucrSavePlots_NameChanged() Handles ucrSavePlots.Click
     'TODO Graph Names assigned go up in increments for any of the graphs selected (e.g. 3 plots are selected and it is named "plots", then automatically we get "plots1", ... , "plots3"
     'End Sub
-
 
     Public Function TestOkEnabled() As Boolean
         Dim bOkEnabled As Boolean
