@@ -22,7 +22,7 @@ Public Class dlgCalculator
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
-
+    Public calcHelpId As Integer
 
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -227,7 +227,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
-                ucrBase.iHelpTopicID = 126
+                calcHelpId = 126
                 Me.Size = New System.Drawing.Size(614, 377)
             Case "Logical and Symbols"
                 grpDates.Visible = False
@@ -238,7 +238,7 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
                 grpProbabilty.Visible = False
-                ucrBase.iHelpTopicID = 127
+                calcHelpId = 127
 
 
             Case "Summary"
@@ -250,7 +250,7 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(552, 377)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
-                ucrBase.iHelpTopicID = 128
+                calcHelpId = 128
             Case "Text"
                 grpDates.Visible = False
                 grpStrings.Visible = True
@@ -260,7 +260,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
-                ucrBase.iHelpTopicID = 338
+                calcHelpId = 338
             Case "Runoff"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
@@ -270,7 +270,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(749, 377)
-                ucrBase.iHelpTopicID = 120
+                calcHelpId = 120
             Case "Dates"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
@@ -280,7 +280,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(589, 377)
-                ucrBase.iHelpTopicID = 130
+                calcHelpId = 130
             Case Else
                 grpDates.Visible = False
                 Me.Size = New System.Drawing.Size(424, 377)
@@ -974,7 +974,15 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        HelpContent()
         CalculationsOptions()
-        ucrBase.HelpContent()
+    End Sub
+
+    Private Sub HelpContent()
+        If calcHelpId > 0 Then
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, calcHelpId.ToString())
+        Else
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+        End If
     End Sub
 End Class

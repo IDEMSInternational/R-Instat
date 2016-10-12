@@ -144,13 +144,13 @@ Partial Class dlgCalculator
         Me.cmdLfact = New System.Windows.Forms.Button()
         Me.cmdTrigamma = New System.Windows.Forms.Button()
         Me.cmdBeta = New System.Windows.Forms.Button()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpMaths.SuspendLayout()
@@ -1548,13 +1548,14 @@ Partial Class dlgCalculator
         Me.cmdBeta.Text = "beta"
         Me.cmdBeta.UseVisualStyleBackColor = True
         '
-        'ucrBase
+        'cmdHelp
         '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 285)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 51)
-        Me.ucrBase.TabIndex = 0
+        Me.cmdHelp.Location = New System.Drawing.Point(427, 223)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
+        Me.cmdHelp.TabIndex = 172
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'ucrInputCalOptions
         '
@@ -1602,20 +1603,19 @@ Partial Class dlgCalculator
         Me.ucrSelectorForCalculations.Size = New System.Drawing.Size(210, 181)
         Me.ucrSelectorForCalculations.TabIndex = 106
         '
-        'cmdHelp
+        'ucrBase
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(387, 217)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 172
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
+        Me.ucrBase.Location = New System.Drawing.Point(8, 285)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(404, 51)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(832, 340)
+        Me.ClientSize = New System.Drawing.Size(420, 340)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpProbabilty)
