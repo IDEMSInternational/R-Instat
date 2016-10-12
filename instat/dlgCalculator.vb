@@ -22,10 +22,11 @@ Public Class dlgCalculator
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
+    Public iHelpCalcID As Integer
+
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 14
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -69,6 +70,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 14
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
         ucrReceiverForCalculation.SetMeAsReceiver()
         clsAttach.SetRCommand("attach")
@@ -81,8 +83,9 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings", "Probability", "Dates"})
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text", "Runoff", "Dates"})
         ucrSaveResultInto.SetValidationTypeAsRVariable()
+
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -212,6 +215,10 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrInputCalOptions.NameChanged
+        CalculationsOptions()
+    End Sub
+
+    Private Sub CalculationsOptions()
         Select Case ucrInputCalOptions.GetText
             Case "Maths"
                 grpStatistics.Visible = False
@@ -220,6 +227,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
+                iHelpCalcID = 126
                 Me.Size = New System.Drawing.Size(614, 377)
             Case "Logical and Symbols"
                 grpDates.Visible = False
@@ -230,7 +238,10 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
                 grpProbabilty.Visible = False
-            Case "Statistics"
+                iHelpCalcID = 127
+
+
+            Case "Summary"
                 grpDates.Visible = False
                 grpStatistics.Visible = True
                 grpLogical.Visible = False
@@ -239,7 +250,8 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(552, 377)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
-            Case "Strings"
+                iHelpCalcID = 128
+            Case "Text"
                 grpDates.Visible = False
                 grpStrings.Visible = True
                 grpStatistics.Visible = False
@@ -248,7 +260,8 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
-            Case "Probability"
+                iHelpCalcID = 338
+            Case "Runoff"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpStrings.Visible = False
@@ -257,6 +270,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(749, 377)
+                iHelpCalcID = 120
             Case "Dates"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
@@ -266,6 +280,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(589, 377)
+                iHelpCalcID = 130
             Case Else
                 grpDates.Visible = False
                 Me.Size = New System.Drawing.Size(424, 377)
@@ -956,5 +971,17 @@ Public Class dlgCalculator
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
         TryScript()
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        HelpContent()
+    End Sub
+
+    Private Sub HelpContent()
+        If iHelpCalcID > 0 Then
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+        Else
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+        End If
     End Sub
 End Class
