@@ -133,7 +133,7 @@ Public Class ucrButtons
         HelpContent()
     End Sub
 
-    Public Sub HelpContent()
+    Private Sub HelpContent()
         ' (1) Use HelpNDoc's Help Context number. Not dependent on HelpNDoc.
         If iHelpTopicID > 0 Then
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())

@@ -1615,7 +1615,7 @@ Partial Class dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 340)
+        Me.ClientSize = New System.Drawing.Size(417, 340)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpProbabilty)
