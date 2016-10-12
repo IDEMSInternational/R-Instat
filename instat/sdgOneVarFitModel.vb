@@ -67,7 +67,7 @@ Public Class sdgOneVarFitModel
     End Sub
 
 
-    Private Sub rdoEstimators_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMle.CheckedChanged, rdoMme.CheckedChanged, rdoQme.CheckedChanged, rdoMge.CheckedChanged
+    Public Sub rdoEstimators_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMle.CheckedChanged, rdoMme.CheckedChanged, rdoQme.CheckedChanged, rdoMge.CheckedChanged
         If rdoMle.Checked Then
             clsRSyntax.AddParameter("method", Chr(34) & "mle" & Chr(34))
         ElseIf rdoMme.Checked Then
