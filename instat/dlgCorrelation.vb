@@ -36,6 +36,9 @@ Public Class dlgCorrelation
         ucrReceiverMultipleColumns.Selector = ucrSelectorDataFrameVarAddRemove
         ucrReceiverFirstColumn.SetDataType("numeric")
         ucrReceiverSecondColumn.SetDataType("numeric")
+        ucrSelectorDataFrameVarAddRemove.Reset()
+        ucrSelectorDataFrameVarAddRemove.Focus()
+        ucrReceiverMultipleColumns.SetSingleTypeStatus(True)
         ucrReceiverMultipleColumns.SetDataType("numeric")
         ucrBase.iHelpTopicID = 186
     End Sub
@@ -45,11 +48,10 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub SetDefaults()
-        ucrSelectorDataFrameVarAddRemove.Reset()
-        ucrSelectorDataFrameVarAddRemove.Focus()
         rdoPearson.Checked = True
         rdoMultipleColumns.Checked = True
         sdgCorrPlot.SetDefaults()
+        ucrReceiverMultipleColumns.SetMeAsReceiver()
         TestOKEnabled()
     End Sub
 
