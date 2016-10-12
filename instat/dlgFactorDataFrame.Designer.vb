@@ -26,7 +26,7 @@ Partial Class dlgFactorDataFrame
         Me.ucrReceiverFactorDataFrame = New instat.ucrReceiverSingle()
         Me.chkReplaceFactorSheet = New System.Windows.Forms.CheckBox()
         Me.chkAddCurrentContrast = New System.Windows.Forms.CheckBox()
-        Me.ucrButtons = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -69,12 +69,12 @@ Partial Class dlgFactorDataFrame
         Me.chkAddCurrentContrast.Text = "Add Current Contrasts"
         Me.chkAddCurrentContrast.UseVisualStyleBackColor = True
         '
-        'ucrButtons
+        'ucrBase
         '
-        Me.ucrButtons.Location = New System.Drawing.Point(9, 208)
-        Me.ucrButtons.Name = "ucrButtons"
-        Me.ucrButtons.Size = New System.Drawing.Size(410, 52)
-        Me.ucrButtons.TabIndex = 3
+        Me.ucrBase.Location = New System.Drawing.Point(9, 208)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 3
         '
         'lblSelectedFactor
         '
@@ -91,7 +91,7 @@ Partial Class dlgFactorDataFrame
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 268)
         Me.Controls.Add(Me.lblSelectedFactor)
-        Me.Controls.Add(Me.ucrButtons)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.chkAddCurrentContrast)
         Me.Controls.Add(Me.chkReplaceFactorSheet)
         Me.Controls.Add(Me.ucrReceiverFactorDataFrame)
@@ -111,6 +111,6 @@ Partial Class dlgFactorDataFrame
     Friend WithEvents ucrReceiverFactorDataFrame As ucrReceiverSingle
     Friend WithEvents chkReplaceFactorSheet As CheckBox
     Friend WithEvents chkAddCurrentContrast As CheckBox
-    Friend WithEvents ucrButtons As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblSelectedFactor As Label
 End Class
