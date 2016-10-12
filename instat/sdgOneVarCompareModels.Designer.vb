@@ -36,6 +36,7 @@ Partial Class sdgOneVarCompareModels
         Me.chkCDF = New System.Windows.Forms.CheckBox()
         Me.chkPP = New System.Windows.Forms.CheckBox()
         Me.chkDensity = New System.Windows.Forms.CheckBox()
+        Me.ucrDisplayChiData = New instat.ucrInputTextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -99,6 +100,7 @@ Partial Class sdgOneVarCompareModels
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.ucrDisplayChiData)
         Me.TabPage1.Controls.Add(Me.ucrObjectName)
         Me.TabPage1.Controls.Add(Me.chkSaveObjects)
         Me.TabPage1.Controls.Add(Me.lblGoF)
@@ -115,9 +117,9 @@ Partial Class sdgOneVarCompareModels
         'ucrObjectName
         '
         Me.ucrObjectName.IsReadOnly = False
-        Me.ucrObjectName.Location = New System.Drawing.Point(97, 27)
+        Me.ucrObjectName.Location = New System.Drawing.Point(129, 27)
         Me.ucrObjectName.Name = "ucrObjectName"
-        Me.ucrObjectName.Size = New System.Drawing.Size(107, 21)
+        Me.ucrObjectName.Size = New System.Drawing.Size(139, 21)
         Me.ucrObjectName.TabIndex = 5
         '
         'TabPage2
@@ -182,6 +184,14 @@ Partial Class sdgOneVarCompareModels
         Me.chkDensity.Text = "Density"
         Me.chkDensity.UseVisualStyleBackColor = True
         '
+        'ucrDisplayChiData
+        '
+        Me.ucrDisplayChiData.IsReadOnly = False
+        Me.ucrDisplayChiData.Location = New System.Drawing.Point(129, 51)
+        Me.ucrDisplayChiData.Name = "ucrDisplayChiData"
+        Me.ucrDisplayChiData.Size = New System.Drawing.Size(139, 21)
+        Me.ucrDisplayChiData.TabIndex = 6
+        '
         'sdgOneVarCompareModels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -217,4 +227,5 @@ Partial Class sdgOneVarCompareModels
     Friend WithEvents chkQQ As CheckBox
     Friend WithEvents ucrObjectName As ucrInputTextBox
     Friend WithEvents ucrSavePlots As ucrSaveGraph
+    Friend WithEvents ucrDisplayChiData As ucrInputTextBox
 End Class
