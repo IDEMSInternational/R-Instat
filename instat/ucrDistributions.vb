@@ -188,6 +188,9 @@ Public Class ucrDistributions
         Dim clsQuasiDist As New Distribution
         Dim clsQuasibinomialDist As New Distribution
         Dim clsQuasipoissonDist As New Distribution
+        Dim clsBetaDist As New Distribution
+        Dim clsNegBinomDist As New Distribution
+        Dim clsStudentsTDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -300,6 +303,40 @@ Public Class ucrDistributions
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 
+        'Beta Distribution
+        clsBetaDist.strNameTag = "Beta"
+        clsBetaDist.strRName = "beta"
+        clsBetaDist.strRFunctionName = "rbeta"
+        clsBetaDist.strPFunctionName = "pbeta"
+        clsBetaDist.strQFunctionName = "qbeta"
+        clsBetaDist.strDFunctionName = "dbeta"
+        clsBetaDist.bIsContinuous = True
+        clsBetaDist.AddParameter("shape1", "a", 1)
+        clsBetaDist.AddParameter("shape2", "b", 1)
+        lstAllDistributions.Add(clsBetaDist)
+
+        'Negative Binomial Distribution
+        clsNegBinomDist.strNameTag = "Negative_Binomial"
+        clsNegBinomDist.strRName = "nbinom"
+        clsNegBinomDist.strRFunctionName = "rnbinom"
+        clsNegBinomDist.strPFunctionName = "pnbinom"
+        clsNegBinomDist.strQFunctionName = "qnbinom"
+        clsNegBinomDist.strDFunctionName = "dnbinom"
+        clsNegBinomDist.bIsContinuous = False
+        clsNegBinomDist.AddParameter("size", "Number", 1)
+        clsNegBinomDist.AddParameter("prob", "Probability", 0.5)
+        lstAllDistributions.Add(clsNegBinomDist)
+
+        'T Distribution
+        '        clsStudentsTDist.strNameTag = "Students_t"
+        '        clsStudentsTDist.strRName = "t"
+        '        clsStudentsTDist.strRFunctionName = "rt"
+        '        clsStudentsTDist.strPFunctionName = "pt"
+        '        clsStudentsTDist.strQFunctionName = "qt"
+        '        clsStudentsTDist.strDFunctionName = "dt"
+        '        clsStudentsTDist.AddParameter("df", "DF", 1)
+        '        lstAllDistributions.Add(clsStudentsTDist)
+
         ' von mises distribution
         clsVonnMisesDist.strNameTag = "von_mises"
         clsVonnMisesDist.strRName = "vonmises"
@@ -411,6 +448,7 @@ Public Class ucrDistributions
         'clsQuasipoissonDist.bIsContinuous = 
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)
+
 
         bDistributionsSet = True
     End Sub
