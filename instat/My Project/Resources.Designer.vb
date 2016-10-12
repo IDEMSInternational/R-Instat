@@ -291,6 +291,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Beta.
+        '''</summary>
+        Friend ReadOnly Property Beta() As String
+            Get
+                Return ResourceManager.GetString("Beta", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Binomial.
         '''</summary>
         Friend ReadOnly Property Binomial() As String
@@ -2299,6 +2308,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Negative Binomial.
+        '''</summary>
+        Friend ReadOnly Property Negative_Binomial() As String
+            Get
+                Return ResourceManager.GetString("Negative_Binomial", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to New Column Name.
         '''</summary>
         Friend ReadOnly Property New_Column_Name() As String
@@ -3693,6 +3711,15 @@ Namespace My.Resources
         Friend ReadOnly Property Strings_as_factors() As String
             Get
                 Return ResourceManager.GetString("Strings_as_factors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Students t.
+        '''</summary>
+        Friend ReadOnly Property Students_t() As String
+            Get
+                Return ResourceManager.GetString("Students_t", resourceCulture)
             End Get
         End Property
         
