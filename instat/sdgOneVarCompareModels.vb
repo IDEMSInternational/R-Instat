@@ -16,13 +16,8 @@
 Imports instat.Translations
 
 Public Class sdgOneVarCompareModels
-    Private clsRcdfcompFunction As New RFunction
-    Private clsRdenscompFunction As New RFunction
-    Private clsRqqcompFunction As New RFunction
-    Private clsRppcompFunction As New RFunction
-    Private clsListFunction As New RFunction
-    Private clsModel As New RFunction
-    Private clsRsyntax As New RFunction
+    Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRsyntax, clsOperation As New RFunction
+    Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
     Private WithEvents ucrRecs As ucrReceiver
     Public bfirstload As Boolean = True
 
@@ -31,11 +26,11 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Public Sub InitialiseDialog()
-        clsRsyntax.AddParameter("chisqbreaks")
         clsRcdfcompFunction.SetRCommand("cdfcomp")
         clsRdenscompFunction.SetRCommand("denscomp")
         clsRqqcompFunction.SetRCommand("qqcomp")
         clsRppcompFunction.SetRCommand("ppcomp")
+        ucrDisplayChiData.SetValidationTypeAsRVariable()
     End Sub
 
     Public Sub SetDefaults()
@@ -45,24 +40,46 @@ Public Class sdgOneVarCompareModels
         chkQQ.Checked = False
         chkSaveChi.Checked = True
         chkSaveObjects.Checked = True
-        chkInputBreakpoints.Enabled = False ' disabled for now
         ucrSavePlots.chkSaveGraph.Checked = False
         ucrSavePlots.Enabled = False ' disabled for now
         ucrSavePlots.ucrInputGraphName.SetPrefix("plots")
         ucrObjectName.SetValidationTypeAsRVariable()
         ucrObjectName.SetName("gof")
-        CreateGraphs()
-        ReturnEnabled()
+        ucrDisplayChiData.Reset()
+        ucrDisplayChiData.SetName(dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare")
         DisplayChiSquare()
+        DisplayChiBreaks()
         'ucrBase.ihelptopicID = 
+    End Sub
+
+    Public Sub Reopen()
+        DisplayChiSquare()
     End Sub
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
         clsModel = clsNewModel
-        clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-        clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+    End Sub
+
+    Public Sub DisplayChiSquare()
+        If chkSaveChi.Checked Then
+            ucrDisplayChiData.Visible = True
+            clsOperatorforTable.SetOperation("$")
+            clsOperatorforTable.SetParameter(True, clsRFunc:=clsModel)
+            clsOperatorforTable.SetParameter(False, strValue:="chisqtable")
+            clsRAsDataFrame.SetRCommand("as.data.frame")
+            clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
+        Else
+            ucrDisplayChiData.Visible = False
+        End If
+        If Not ucrDisplayChiData.IsEmpty Then
+            clsRAsDataFrame.SetAssignTo(ucrDisplayChiData.GetText(), strTempDataframe:=ucrDisplayChiData.GetText())
+        Else
+            clsRAsDataFrame.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub ucrDisplayChiData_NameChanged() Handles ucrDisplayChiData.NameChanged
+        DisplayChiSquare()
     End Sub
 
     Public Sub SetReceiver(ucrNewReceiver As ucrReceiver)
@@ -75,31 +92,38 @@ Public Class sdgOneVarCompareModels
         Else
             ucrObjectName.Visible = True
         End If
-        ReturnEnabled()
     End Sub
 
-    Private Sub DisplayChiSquare()
-        'If our distribution is continuous, then enable the option to display chi-square
-        'For continuous this is always enabled.
-    End Sub
 
     Public Sub CreateGraphs()
-        If Not dlgOneVarCompareModels.UcrReceiver.IsEmpty Then
-            If chkCDF.Checked Then
-                frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
-            End If
-            If chkPP.Checked Then
-                frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
-            End If
-            If chkQQ.Checked Then
-                frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
-            End If
-            If chkDensity.Checked Then
-                frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
-            End If
-        End If
+        Dim strTemp As String = ""
 
+        If chkCDF.Checked Then
+            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+        End If
+        If chkPP.Checked Then
+            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
+        End If
+        If chkQQ.Checked Then
+            clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
+        End If
+        If chkDensity.Checked Then
+            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
+        End If
+        If chkSaveChi.Checked Then
+            frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
+            clsRAsDataFrame.ToScript(strTemp)
+            frmMain.clsRLink.RunScript(strTemp, 0)
+        End If
+        If chkInputBreakpoints.Checked Then
+            frmMain.clsRLink.RunScript(clsOperatorForBreaks.ToScript(), 2)
+        End If
     End Sub
+
 
     ' To say if our models are discrete, we cannot use Density, QQ or PP
     'Private Sub SetPlotOptions()
@@ -118,39 +142,34 @@ Public Class sdgOneVarCompareModels
     'End Sub
 
     Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
+        DisplayChiBreaks()
+    End Sub
+
+    Public Sub DisplayChiBreaks()
         If chkInputBreakpoints.Checked Then
-            clsRsyntax.AddParameter("chisqbreaks") 'in the brackets have numbers inputted numbers inputted
+            clsOperatorForBreaks.SetOperation("$")
+            clsOperatorForBreaks.SetParameter(True, clsRFunc:=clsModel)
+            clsOperatorForBreaks.SetParameter(False, strValue:="chisqbreaks")
         End If
     End Sub
-
-    Private Sub ReturnEnabled()
-        If Not (chkSaveObjects.Checked AndAlso ucrObjectName.IsEmpty) Then
-            ucrSubBase.cmdReturn.Enabled = True
-        Else
-            ucrSubBase.cmdReturn.Enabled = False
-        End If
-    End Sub
-
-    Public Sub ChiSqObject()
-        'instat_object$set("public", "get_from_model", Function(data_name, model_name, chisqtable, value2, value3)
-
-        dlgOneVarCompareModels.ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        '  dlgOneVarCompareModels.ucrBase.clsRsyntax.AddParameter("model_name") Chr(34) & 
-
-    End Sub
-
 
     Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveChi.CheckedChanged
-        'dlgOneVarCompareModels.ucrBase.clsRsyntax.
-
-
-        'display 5th element of object - the chisquare if this is selected.
-        ' for discrete this is shown anyway
+        DisplayChiSquare()
     End Sub
 
     ' Private Sub ucrSavePlots_NameChanged() Handles ucrSavePlots.Click
     'TODO Graph Names assigned go up in increments for any of the graphs selected (e.g. 3 plots are selected and it is named "plots", then automatically we get "plots1", ... , "plots3"
     'End Sub
+
+
+    Public Function TestOkEnabled() As Boolean
+        Dim bOkEnabled As Boolean
+        If (chkSaveObjects.Checked AndAlso Not ucrObjectName.IsEmpty OrElse Not chkSaveObjects.Checked) AndAlso (chkSaveChi.Checked AndAlso Not ucrDisplayChiData.IsEmpty OrElse Not chkSaveChi.Checked) Then
+            bOkEnabled = True
+        Else
+            bOkEnabled = False
+        End If
+        Return bOkEnabled
+    End Function
 
 End Class

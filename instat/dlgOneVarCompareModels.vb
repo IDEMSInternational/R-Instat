@@ -17,7 +17,6 @@
 Imports instat.Translations
 
 Public Class dlgOneVarCompareModels
-    'Private clsRcdfcompFunction As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -33,7 +32,7 @@ Public Class dlgOneVarCompareModels
 
     Private Sub InitialiseDialog()
         sdgOneVarCompareModels.InitialiseDialog()
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 174
         ucrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarCompModels
         UcrReceiver.SetMeAsReceiver()
@@ -41,7 +40,8 @@ Public Class dlgOneVarCompareModels
         ucrSelectorOneVarCompModels.SetItemType("model")
         sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarCompareModels.SetReceiver(UcrReceiver)
-        sdgOneVarCompareModels.ChiSqObject()
+        sdgOneVarCompareModels.DisplayChiSquare()
+        sdgOneVarCompareModels.DisplayChiBreaks()
     End Sub
 
     Private Sub SetDefaults()
@@ -56,10 +56,11 @@ Public Class dlgOneVarCompareModels
     ' variables not fromvariablex cannot be in dataframe
 
     Private Sub ReopenDialog()
+        sdgOneVarCompareModels.Reopen()
     End Sub
 
-    Private Sub TestOKEnabled()
-        If Not UcrReceiver.IsEmpty Then
+    Public Sub TestOKEnabled()
+        If sdgOneVarCompareModels.TestOkEnabled() AndAlso Not UcrReceiver.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -71,6 +72,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub ucrSelectorOneVarCompModels_DataFrameChanged() Handles ucrSelectorOneVarCompModels.DataFrameChanged
+        sdgOneVarCompareModels.DisplayChiSquare()
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
@@ -87,9 +89,8 @@ Public Class dlgOneVarCompareModels
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
         sdgOneVarCompareModels.ShowDialog()
         EnableOptions()
+        TestOKEnabled()
     End Sub
-
-
 
     Private Sub EnableOptions()
         If Not UcrReceiver.IsEmpty Then
