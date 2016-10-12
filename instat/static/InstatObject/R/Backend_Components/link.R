@@ -29,11 +29,9 @@ link$set("public", "equals", function(compare_link) {
          && self$to_data_frame == compare_link$to_data_frame
          && self$type == compare_link$type) {
     if(self$type == keyed_link_label) {
-      #print(self$calculation$parameters)
-      #print(compare_link$calculation$parameters)
       if(setequal(self$calculation$parameters, compare_link$calculation$parameters) && setequal(names(self$calculation$parameters), names(compare_link$calculation$parameters))) {
-        for(name in names(compare_link$calculation$parameters)) {
-          if(compare_link$calculation$parameters[[name]] != self$calculation$parameters[[name]]) return(FALSE)
+        for(factor_col in compare_link$calculation$parameters) {
+          if(!factor_col %in% self$calculation$parameters) return(FALSE)
         }
       return(TRUE)
       }
