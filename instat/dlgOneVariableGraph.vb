@@ -87,17 +87,29 @@ Public Class dlgOneVariableGraph
                 'TODO Geom should come from the subdialog
                 clsRaesFunction.ClearParameters()
                 clsRgeom_Function.SetRCommand(sdgOneVarGraph.strNumericGeomFunction)
-                If Not ucrReceiverOneVarGraph.IsEmpty() Then
-                    clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
-                End If
 
-                clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+                If Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Boxplot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Dot Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Point Plot") Then
+                    clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+                    clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
+                ElseIf Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Histogram" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Density Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Frequency Polygon") Then
+                    clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
+                End If
             Else
                 clsRaesFunction.ClearParameters()
                 'TODO Geom should come from the subdialog
                 clsRgeom_Function.SetRCommand(sdgOneVarGraph.strCategoriacalGeomFunction)
                 If Not ucrReceiverOneVarGraph.IsEmpty() Then
                     clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
+                End If
+                If sdgOneVarGraph.ucrInputCategorical.GetText = "Pie Chart" Then
+                    Dim clsTempRFunc As New RFunction
+                    clsRgeom_Function.AddParameter("width", "1")
+                    clsTempRFunc.SetRCommand("coord_polar")
+                    clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
+                    ucrBase.clsRsyntax.AddOperatorParameter("polar", clsRFunc:=clsTempRFunc)
+                Else
+                    clsRgeom_Function.RemoveParameterByName("width")
+                    ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
                 End If
             End If
         Else

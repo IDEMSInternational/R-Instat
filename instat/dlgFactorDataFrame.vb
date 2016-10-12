@@ -13,30 +13,37 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat.Translations
 
+Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
-
-    Private Sub dlgFactorDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
+    Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        TestOkEnabled()
+        autoTranslate(Me)
+
+    End Sub
+    Private Sub InitialiseDialog()
+        SetDefaults()
+    End Sub
+    Private Sub SetDefaults()
+        chkAddCurrentContrast.Checked = False
+        chkReplaceFactorSheet.Checked = False
+    End Sub
+    Private Sub ReopenDialog()
+    End Sub
+    Private Sub TestOkEnabled()
+        If Not ucrReceiverFactorDataFrame.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 162
-
-    End Sub
-    Private Sub SetDefaults()
-
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-    End Sub
 End Class
