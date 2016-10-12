@@ -72,3 +72,18 @@ instat_object$set("public", "link_exists", function(new_link) {
   return(any(sapply(private$.links, function(link) link$equals(new_link))))
 }
 )
+
+instat_object$set("public", "link_exists_from", function(from_data_frame, factors) {
+  link_calc <- calculation$new(type = "summary", parameters = factors)
+  link_obj <- link$new(from_data_frame = from_data_frame, type = keyed_link_label, calculation = link_calc)
+  exists = FALSE
+  for(data_obj in self$get_data_objects()) {
+    link_obj$to_data_frame <- data_obj$get_metadata(data_name_label)
+    if(self$link_exists(link_obj)) {
+      exists = TRUE
+      break
+    }
+  }
+  return(exists)
+}
+)
