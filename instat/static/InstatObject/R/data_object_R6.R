@@ -1609,3 +1609,11 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
   return(as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
 }
 )
+
+data_object$set("public","set_contrasts_of_factor", function(factor, new_contrasts) {
+  if(!factor %in% names(self$get_data_frame())) stop(factor, " not found in the data")
+  if(!is.factor(self$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
+  #checks needed on contrasts before assigning
+  contrasts(private$data[[factor]]) <- new_contrasts
+}
+)
