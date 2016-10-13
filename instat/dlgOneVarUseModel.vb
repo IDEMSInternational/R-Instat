@@ -93,7 +93,7 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub ucrSelector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
-        ' AssignSaveModel()
+        AssignSavetoDataFrame()
         ' AssignSaveObjects()
     End Sub
 
