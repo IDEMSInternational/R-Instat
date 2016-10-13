@@ -29,11 +29,9 @@ link$set("public", "equals", function(compare_link) {
          && self$to_data_frame == compare_link$to_data_frame
          && self$type == compare_link$type) {
     if(self$type == keyed_link_label) {
-      #print(self$calculation$parameters)
-      #print(compare_link$calculation$parameters)
       if(setequal(self$calculation$parameters, compare_link$calculation$parameters) && setequal(names(self$calculation$parameters), names(compare_link$calculation$parameters))) {
-        for(name in names(compare_link$calculation$parameters)) {
-          if(compare_link$calculation$parameters[[name]] != self$calculation$parameters[[name]]) return(FALSE)
+        for(factor_col in compare_link$calculation$parameters) {
+          if(!factor_col %in% self$calculation$parameters) return(FALSE)
         }
       return(TRUE)
       }
@@ -70,5 +68,20 @@ instat_object$set("public", "add_link", function(link_object) {
 
 instat_object$set("public", "link_exists", function(new_link) {
   return(any(sapply(private$.links, function(link) link$equals(new_link))))
+}
+)
+
+instat_object$set("public", "link_exists_from", function(from_data_frame, factors) {
+  link_calc <- calculation$new(type = "summary", parameters = factors)
+  link_obj <- link$new(from_data_frame = from_data_frame, type = keyed_link_label, calculation = link_calc)
+  exists = FALSE
+  for(data_obj in self$get_data_objects()) {
+    link_obj$to_data_frame <- data_obj$get_metadata(data_name_label)
+    if(self$link_exists(link_obj)) {
+      exists = TRUE
+      break
+    }
+  }
+  return(exists)
 }
 )

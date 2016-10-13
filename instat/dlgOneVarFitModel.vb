@@ -34,7 +34,7 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModDisplay.InitialiseDialog()
         sdgOneVarFitModel.InitialiseDialog()
         UcrBase.clsRsyntax.SetFunction("fitdist")
-        'ucrBase.iHelpTopicID = 
+        UcrBase.iHelpTopicID = 296
         UcrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
@@ -67,7 +67,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub TestOKEnabled()
-        If (chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso Not UcrReceiver.IsEmpty Then
+        If (chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso Not UcrReceiver.IsEmpty AndAlso sdgOneVarFitModDisplay.TestOkEnabled() Then
             UcrBase.OKEnabled(True)
         Else
             UcrBase.OKEnabled(False)
@@ -82,12 +82,10 @@ Public Class dlgOneVarFitModel
         AssignSaveModel()
     End Sub
 
-
     Private Sub ucrSaveModel_NameChanged() Handles ucrSaveModel.NameChanged
         AssignSaveModel()
         TestOKEnabled()
     End Sub
-
 
     Public Sub SetDataParameter()
         If Not UcrReceiver.IsEmpty Then
@@ -123,9 +121,9 @@ Public Class dlgOneVarFitModel
 
     Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
         If chkSaveModel.Checked Then
-            ucrSaveModel.Enabled = True
+            ucrSaveModel.Visible = True
         Else
-            ucrSaveModel.Enabled = False
+            ucrSaveModel.Visible = False
         End If
         AssignSaveModel()
         TestOKEnabled()
@@ -150,6 +148,7 @@ Public Class dlgOneVarFitModel
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgOneVarFitModDisplay.ShowDialog()
         EnableOptions()
+        TestOKEnabled()
     End Sub
 
     Private Sub EnableOptions()
@@ -169,6 +168,12 @@ Public Class dlgOneVarFitModel
 
     Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
         sdgOneVarFitModDisplay.CreateGraphs()
+        If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
+            sdgOneVarFitModDisplay.RunLikelihoods()
+        End If
+        '  If Not sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
+        'message to say likelihood won't be displayed
+        ' End If
     End Sub
 
 End Class
