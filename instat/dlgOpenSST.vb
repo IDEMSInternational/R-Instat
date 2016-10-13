@@ -13,52 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-'Imports instat.Translations
-'Public Class dlgOpenSST
-'    Public bFirstLoad As Boolean = True
-'    Private Sub dlgOpenSST_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-'        autoTranslate(Me)
-'        If bFirstLoad Then
-'            SetDefaults()
-'            InitialiseDialog()
-'            bFirstLoad = False
-'        Else
-'            ReopenDialog()
-'        End If
-'        TestOKEnabled()
-'    End Sub
-
-'    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-'        SetDefaults()
-'        TestOKEnabled()
-'    End Sub
-
-'    Private Sub ReopenDialog()
-
-'    End Sub
-
-'    Private Sub TestOKEnabled()
-
-'    End Sub
-
-'    Private Sub InitialiseDialog()
-
-'    End Sub
-
-'    Private Sub SetDefaults()
-
-'    End Sub
-
-'End Class
-
 Imports instat.Translations
 Imports System.IO
 Imports RDotNet
 Imports System.ComponentModel
 
 Public Class dlgOpenSST
-
     Private intLines As Integer
     Private clsReadCSV, clsReadRDS, clsImportRDS, clsReadXL As RFunction
     Private strTempWorkbookName As String
@@ -141,7 +101,6 @@ Public Class dlgOpenSST
         ucrInputEncoding.SetItems({"unknown"})
         ucrInputSeparator.SetItems({"Automatic", ",", "Whitespace", ":", ";", "|", "^"})
         ucrInputHeaders.SetItems({"Automatic", "Yes", "No"})
-        ucrInputHeaders.
         ucrInputDecimal.SetItems({"Automatic", ".", ","})
         nudSkip.Maximum = Integer.MaxValue
     End Sub
@@ -512,7 +471,7 @@ Public Class dlgOpenSST
         ucrInputEncoding.SetName("unknown")
         rdoRowNamesNo.Checked = True
         ucrInputSeparator.SetName("Automatic")
-        ucrInputHeaders.SetName("Automatic")
+        ucrInputHeaders.SetName("No")
         ucrInputDecimal.SetName("Automatic")
         ucrInputNAStrings.SetName("NA")
         nudSkip.Value = 0
@@ -601,6 +560,13 @@ Public Class dlgOpenSST
         'RefreshFrameView()
     End Sub
 
+    Private Sub nudDataFrom_ValueChanged(sender As Object, e As EventArgs) Handles nudDataFrom.ValueChanged
+        If nudDataFrom.Value = 5 Then
+            ucrBaseOpenSST.clsRsyntax.RemoveParameter("data_from")
+        Else
+            ucrBaseOpenSST.clsRsyntax.AddParameter("data_from", nudDataFrom.Value)
+        End If
+    End Sub
 
     Private Sub ucrInputNAStrings_NameChanged() Handles ucrInputNAStrings.NameChanged
         If ucrInputNAStrings.GetText() <> "" AndAlso (ucrInputNAStrings.GetText() <> "NA" OrElse frmMain.clsInstatOptions.bIncludeRDefaultParameters) Then
