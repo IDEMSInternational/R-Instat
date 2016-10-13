@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgRandomSample
     Public bFirstLoad As Boolean = True
     Private clsMultipleSamplesFunction As New RFunction
+    Public clsCurrentDistribution As New Distribution
     Private clsDistribtionFunction As New RFunction
     Private clsSetSeed As New RFunction
 
@@ -85,7 +86,7 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub SetDataFrameParameters()
-        clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
+        '        clsDistribtionFunction.AddParameter(clsRFunctionParameter:=clsCurrentDistribution.strRandNumOfObsParamNam, ucrSelectorRandomSamples.iDataFrameLength)
         SetAssignTo()
         TestOKEnabled()
     End Sub
