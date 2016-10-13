@@ -26,9 +26,14 @@ Partial Class dlgOpenSST
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
+        Me.ucrInputHeaders = New instat.ucrInputComboBox()
         Me.pnlRowNames = New System.Windows.Forms.Panel()
         Me.rdoRowNamesNo = New System.Windows.Forms.RadioButton()
         Me.rdoRowNamesYes = New System.Windows.Forms.RadioButton()
+        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
+        Me.ucrInputDecimal = New instat.ucrInputComboBox()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
+        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.lblEncoding = New System.Windows.Forms.Label()
         Me.lblHeaders = New System.Windows.Forms.Label()
         Me.nudSkip = New System.Windows.Forms.NumericUpDown()
@@ -38,17 +43,15 @@ Partial Class dlgOpenSST
         Me.lblDecimal = New System.Windows.Forms.Label()
         Me.lblNAStrings = New System.Windows.Forms.Label()
         Me.chkStringsAsFactors = New System.Windows.Forms.CheckBox()
-        Me.ucrInputHeaders = New instat.ucrInputComboBox()
-        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
-        Me.ucrInputDecimal = New instat.ucrInputComboBox()
-        Me.ucrInputSeparator = New instat.ucrInputComboBox()
-        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBaseOpenSST = New instat.ucrButtons()
+        Me.nudDataFrom = New System.Windows.Forms.NumericUpDown()
+        Me.lblDataFromRow = New System.Windows.Forms.Label()
         Me.grpCSV.SuspendLayout()
         Me.pnlRowNames.SuspendLayout()
         CType(Me.nudSkip, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDataFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cmdOpenDataSet
@@ -99,13 +102,21 @@ Partial Class dlgOpenSST
         Me.grpCSV.Controls.Add(Me.lblDecimal)
         Me.grpCSV.Controls.Add(Me.lblNAStrings)
         Me.grpCSV.Controls.Add(Me.chkStringsAsFactors)
-        Me.grpCSV.Location = New System.Drawing.Point(287, 9)
+        Me.grpCSV.Location = New System.Drawing.Point(16, 100)
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.Size = New System.Drawing.Size(217, 342)
         Me.grpCSV.TabIndex = 43
         Me.grpCSV.TabStop = False
         Me.grpCSV.Text = "Import csv Options"
         Me.grpCSV.Visible = False
+        '
+        'ucrInputHeaders
+        '
+        Me.ucrInputHeaders.IsReadOnly = False
+        Me.ucrInputHeaders.Location = New System.Drawing.Point(9, 82)
+        Me.ucrInputHeaders.Name = "ucrInputHeaders"
+        Me.ucrInputHeaders.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputHeaders.TabIndex = 43
         '
         'pnlRowNames
         '
@@ -139,6 +150,38 @@ Partial Class dlgOpenSST
         Me.rdoRowNamesYes.Tag = "Yes"
         Me.rdoRowNamesYes.Text = "Yes"
         Me.rdoRowNamesYes.UseVisualStyleBackColor = True
+        '
+        'ucrInputNAStrings
+        '
+        Me.ucrInputNAStrings.IsReadOnly = False
+        Me.ucrInputNAStrings.Location = New System.Drawing.Point(5, 247)
+        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
+        Me.ucrInputNAStrings.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNAStrings.TabIndex = 39
+        '
+        'ucrInputDecimal
+        '
+        Me.ucrInputDecimal.IsReadOnly = False
+        Me.ucrInputDecimal.Location = New System.Drawing.Point(74, 196)
+        Me.ucrInputDecimal.Name = "ucrInputDecimal"
+        Me.ucrInputDecimal.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDecimal.TabIndex = 36
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.IsReadOnly = False
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(74, 154)
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSeparator.TabIndex = 35
+        '
+        'ucrInputEncoding
+        '
+        Me.ucrInputEncoding.IsReadOnly = False
+        Me.ucrInputEncoding.Location = New System.Drawing.Point(62, 25)
+        Me.ucrInputEncoding.Name = "ucrInputEncoding"
+        Me.ucrInputEncoding.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputEncoding.TabIndex = 33
         '
         'lblEncoding
         '
@@ -227,46 +270,6 @@ Partial Class dlgOpenSST
         Me.chkStringsAsFactors.Text = "Convert Strings to Factor Columns"
         Me.chkStringsAsFactors.UseVisualStyleBackColor = True
         '
-        'ucrInputHeaders
-        '
-        Me.ucrInputHeaders.IsReadOnly = False
-        Me.ucrInputHeaders.Location = New System.Drawing.Point(9, 82)
-        Me.ucrInputHeaders.Name = "ucrInputHeaders"
-        Me.ucrInputHeaders.Size = New System.Drawing.Size(149, 21)
-        Me.ucrInputHeaders.TabIndex = 43
-        '
-        'ucrInputNAStrings
-        '
-        Me.ucrInputNAStrings.IsReadOnly = False
-        Me.ucrInputNAStrings.Location = New System.Drawing.Point(5, 247)
-        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
-        Me.ucrInputNAStrings.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputNAStrings.TabIndex = 39
-        '
-        'ucrInputDecimal
-        '
-        Me.ucrInputDecimal.IsReadOnly = False
-        Me.ucrInputDecimal.Location = New System.Drawing.Point(74, 196)
-        Me.ucrInputDecimal.Name = "ucrInputDecimal"
-        Me.ucrInputDecimal.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDecimal.TabIndex = 36
-        '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.IsReadOnly = False
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(74, 154)
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSeparator.TabIndex = 35
-        '
-        'ucrInputEncoding
-        '
-        Me.ucrInputEncoding.IsReadOnly = False
-        Me.ucrInputEncoding.Location = New System.Drawing.Point(62, 25)
-        Me.ucrInputEncoding.Name = "ucrInputEncoding"
-        Me.ucrInputEncoding.Size = New System.Drawing.Size(149, 21)
-        Me.ucrInputEncoding.TabIndex = 33
-        '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.IsReadOnly = False
@@ -285,16 +288,37 @@ Partial Class dlgOpenSST
         '
         'ucrBaseOpenSST
         '
-        Me.ucrBaseOpenSST.Location = New System.Drawing.Point(12, 357)
+        Me.ucrBaseOpenSST.Location = New System.Drawing.Point(12, 447)
         Me.ucrBaseOpenSST.Name = "ucrBaseOpenSST"
         Me.ucrBaseOpenSST.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseOpenSST.TabIndex = 0
+        '
+        'nudDataFrom
+        '
+        Me.nudDataFrom.Location = New System.Drawing.Point(105, 73)
+        Me.nudDataFrom.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudDataFrom.Name = "nudDataFrom"
+        Me.nudDataFrom.Size = New System.Drawing.Size(59, 20)
+        Me.nudDataFrom.TabIndex = 45
+        Me.nudDataFrom.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
+        'lblDataFromRow
+        '
+        Me.lblDataFromRow.AutoSize = True
+        Me.lblDataFromRow.Location = New System.Drawing.Point(12, 75)
+        Me.lblDataFromRow.Name = "lblDataFromRow"
+        Me.lblDataFromRow.Size = New System.Drawing.Size(81, 13)
+        Me.lblDataFromRow.TabIndex = 44
+        Me.lblDataFromRow.Tag = "Data_From_Row"
+        Me.lblDataFromRow.Text = "Data From Row"
         '
         'dlgOpenSST
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(816, 420)
+        Me.ClientSize = New System.Drawing.Size(428, 502)
+        Me.Controls.Add(Me.nudDataFrom)
+        Me.Controls.Add(Me.lblDataFromRow)
         Me.Controls.Add(Me.grpCSV)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.ucrInputName)
@@ -312,6 +336,7 @@ Partial Class dlgOpenSST
         Me.pnlRowNames.ResumeLayout(False)
         Me.pnlRowNames.PerformLayout()
         CType(Me.nudSkip, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDataFrom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -341,4 +366,6 @@ Partial Class dlgOpenSST
     Friend WithEvents lblDecimal As Label
     Friend WithEvents lblNAStrings As Label
     Friend WithEvents chkStringsAsFactors As CheckBox
+    Friend WithEvents nudDataFrom As NumericUpDown
+    Friend WithEvents lblDataFromRow As Label
 End Class
