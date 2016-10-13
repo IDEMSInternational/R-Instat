@@ -397,7 +397,6 @@ Public Class ucrDistributions
         clsHyperGeoDist.strQFunctionName = "qhyper"
         clsHyperGeoDist.strDFunctionName = "dhyper"
         clsHyperGeoDist.bIsContinuous = False
-        clsHyperGeoDist.strRandNumOfObsParamNam = "nn"
         clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
         clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
         clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
