@@ -97,7 +97,6 @@ Public Class dlgTablePlus
             ucrSelectorForDataFrame.Reset()
 
         Else
-
             ucrInputNewColNameforTablePlus.Visible = True
             ucrReceiverExpressionForTablePlus.Visible = False
             ucrInputProbabilities.Visible = True
@@ -113,35 +112,44 @@ Public Class dlgTablePlus
         End If
     End Sub
     Private Sub rdoProbabilitiesandQuantiles_CheckedChanged(sender As Object, e As EventArgs) Handles rdoProbabilities.CheckedChanged, rdoQuantiles.CheckedChanged
+        pqParameters()
         ReceiverLabels()
     End Sub
 
     Private Sub ReceiverLabels()
+        ucrBase.clsRsyntax.ClearParameters()
+        pqParameters()
+        ucrBase.clsRsyntax.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34))
         If rdoProbabilities.Checked Then
             lblQuantValues.Visible = True
             lblProbValues.Visible = False
             ucrBase.clsRsyntax.SetFunction("mosaic::pdist")
             ucrInputNewColNameforTablePlus.SetName("prob")
-            ucrBase.clsRsyntax.AddParameter("dist", ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName)
-            ucrBase.clsRsyntax.ClearParameters()
-            For Each clstempparam In ucrDistributionsFOrTablePlus.clsCurrRFunction.clsParameters
-                ucrBase.clsRsyntax.AddParameter(clstempparam.Clone())
-            Next
         Else
             lblQuantValues.Visible = False
             lblProbValues.Visible = True
             ucrBase.clsRsyntax.SetFunction("mosaic::qdist")
             ucrInputNewColNameforTablePlus.SetName("Quant")
         End If
+
+        For Each clstempparam In ucrDistributionsFOrTablePlus.clsCurrRFunction.clsParameters
+            ucrBase.clsRsyntax.AddParameter(clstempparam.Clone())
+        Next
     End Sub
 
     Private Sub ucrReceiverExpressionForTablePlus_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionForTablePlus.SelectionChanged
         pqParameters()
+        ReceiverLabels()
         TestOKEnabled()
     End Sub
 
     Private Sub ucrInputProbabilities_NameChanged() Handles ucrInputProbabilities.NameChanged
         pqParameters()
+        ReceiverLabels()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDistributionsFOrTablePlus_ParameterChanged() Handles ucrDistributionsFOrTablePlus.ParameterChanged
+        ReceiverLabels()
     End Sub
 End Class
