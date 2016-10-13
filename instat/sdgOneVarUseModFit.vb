@@ -43,8 +43,6 @@ Public Class sdgOneVarUseModFit
         rdoPlotAll.Checked = True
         rdoSeqValues.Checked = True
         rdoInsertValues.Enabled = False
-        'any of InsertValues needs to be disabled here.
-        'ucrBase.ihelptopicID = 
         SetPlotOptions()
         nudFrom.Value = 0
         nudTo.Value = 1
@@ -110,8 +108,14 @@ Public Class sdgOneVarUseModFit
         Else
             rdoCIcdf.Enabled = True
         End If
+    End Sub
 
-        ' if discrete discribution then cannot do PP, QQ, dens
+    Private Sub rdoInsertValues_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertValues.CheckedChanged
+        If rdoInsertValues.Checked Then
+            ucrInputValues.Enabled = True
+        Else
+            ucrInputValues.Enabled = False
+        End If
     End Sub
 
 End Class
