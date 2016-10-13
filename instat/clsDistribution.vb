@@ -28,6 +28,7 @@ Public Class Distribution
     Public bTwoLevelFactor As Boolean = False
     Public bPositiveInt As Boolean = False
     Public bIsContinuous As Boolean = True
+    Public strRandNumOfObsParamNam As String = "n"
     Public clsParameters As New List(Of DistributionParameter)
 
     Public Sub SetNameTag(strTemp As String)
