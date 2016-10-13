@@ -31,17 +31,8 @@ Public Class sdgOneVarFitModel
         clsRSyntax.AddParameter("method")
     End Sub
 
-
     Public Sub SetDefaults()
-        rdoMle.Enabled = True
-        rdoMme.Enabled = True
         rdoQme.Enabled = False
-        rdoMge.Enabled = True
-        rdoDefault.Enabled = True
-        rdoNelderMead.Enabled = True
-        rdoBFGS.Enabled = True
-        rdoCG.Enabled = True
-        rdoSANN.Enabled = True
         rdoDefault.Checked = True
         rdoMle.Checked = True
         'ucrBase.ihelptopicID = 
@@ -52,7 +43,6 @@ Public Class sdgOneVarFitModel
     End Sub
 
     Private Sub rdoOptimMethod_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefault.CheckedChanged, rdoNelderMead.CheckedChanged, rdoBFGS.CheckedChanged, rdoCG.CheckedChanged, rdoSANN.CheckedChanged
-
         If rdoDefault.Checked Then
             clsRSyntax.AddParameter("optim.method", Chr(34) & "default" & Chr(34))
         ElseIf rdoNelderMead.Checked Then
