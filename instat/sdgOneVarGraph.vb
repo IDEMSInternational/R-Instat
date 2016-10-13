@@ -101,25 +101,13 @@ Public Class sdgOneVarGraph
         SetCategoricalGeomFunction()
         dlgOneVariableGraph.OneOrMoreVariables()
     End Sub
-
-    Public Sub EnableFreeScaleAxisforFacets()
-        If Not dlgOneVariableGraph.rdoFacets.Checked Then
-            chkFreeScaleAxisforFacets.Enabled = False
-            If chkFreeScaleAxisforFacets.Checked Then
-                chkFreeScaleAxisforFacets.Checked = False
-            End If
-        Else
-            chkFreeScaleAxisforFacets.Enabled = True
-        End If
-    End Sub
-
+    
     Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScaleAxisforFacets.CheckedChanged
         If chkFreeScaleAxisforFacets.Checked Then
             clsRsyntax.AddParameter("free_scale_axis", "TRUE")
         Else
             clsRsyntax.RemoveParameter("free_scale_axis")
         End If
-        EnableFreeScaleAxisforFacets()
     End Sub
 
     Private Sub nudNumberofColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged, chkSpecifyLayout.CheckedChanged
