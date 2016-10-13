@@ -148,7 +148,6 @@ Public Class dlgOneVariableGraph
 
     Private Sub rdoFacets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFacets.CheckedChanged, rdoCombineGraph.CheckedChanged, rdoSingleGraphs.CheckedChanged
         SetOutputparameter()
-        sdgOneVarGraph.EnableFreeScaleAxisforFacets()
     End Sub
 
     Private Sub SetOutputparameter()
