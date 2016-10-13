@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
-    Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
+    Private Sub dlgFactorDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -35,6 +35,7 @@ Public Class dlgFactorDataFrame
     Private Sub SetDefaults()
         chkAddCurrentContrast.Checked = False
         chkReplaceFactorSheet.Checked = False
+        chkFactorSheet.Checked = False
     End Sub
     Private Sub ReopenDialog()
     End Sub
@@ -45,5 +46,4 @@ Public Class dlgFactorDataFrame
             ucrBase.OKEnabled(False)
         End If
     End Sub
-
 End Class
