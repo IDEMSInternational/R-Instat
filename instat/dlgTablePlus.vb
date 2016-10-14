@@ -156,7 +156,7 @@ Public Class dlgTablePlus
 
     Private Sub results()
         If chkSIngleValues.Checked Then
-            chkSaveResults.Enabled = False
+            chkSaveResults.Visible = False
             chkSaveResults.Checked = False
             ucrInputNewColNameforTablePlus.Enabled = False
             ucrReceiverExpressionForTablePlus.Visible = False
@@ -165,7 +165,7 @@ Public Class dlgTablePlus
             ucrSelectorForDataFrame.Reset()
             ucrInputProbabilities.SetName("0.5")
         Else
-            chkSaveResults.Enabled = True
+            chkSaveResults.Visible = True
             ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
             ucrReceiverExpressionForTablePlus.SetMeAsReceiver()
             ucrReceiverExpressionForTablePlus.Visible = False
