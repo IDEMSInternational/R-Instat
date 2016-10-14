@@ -144,6 +144,9 @@ Public Class ucrGeom
         ''geom_hline:yintercept
         ''geom_abline: slope and intercept
         ''TO DO Discuss how to use these
+        ''add layer parameters 
+        'clsgeom_abline.AddLayerParameter("intercept", "numeric", "0")
+        'clsgeom_abline.AddLayerParameter("xxxxxxxx", "numeric", "0")
         'lstAllGeoms.Add(clsgeom_abline)
 
         'clsgeom_area.SetGeomName("geom_area")
@@ -157,6 +160,11 @@ Public Class ucrGeom
         'clsgeom_area.AddAesParameter("fill")
         'clsgeom_area.AddAesParameter("linetype")
         'clsgeom_area.AddAesParameter("size")
+
+        ''add layer parameters 
+        'clsgeom_area.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_area.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34))
+        'clsgeom_area.AddLayerParameter("na.rm", "boolean", "FALSE")
         'lstAllGeoms.Add(clsgeom_area)
 
         clsgeom_bar.SetGeomName("geom_bar")
@@ -183,6 +191,13 @@ Public Class ucrGeom
         'clsgeom_bin2d.AddAesParameter("y", bIsMandatory:=True)
         ''optional
         'clsgeom_bin2d.AddAesParameter("fill")
+        ''adding layer parameters
+        'clsgeom_bin2d.AddLayerParameter("stat", "list", Chr(34) & "bin2d" & Chr(34))
+        'clsgeom_bin2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_bin2d.AddLayerParameter("na.rm", "boolean", "FALSE")
+        'clsgeom_bin2d.AddLayerParameter("bins", "numeric", "30")
+        'clsgeom_bin2d.AddLayerParameter("binwidth", "numeric", "0.1")
+
         'lstAllGeoms.Add(clsgeom_bin2d)
 
 
@@ -216,6 +231,15 @@ Public Class ucrGeom
         'clsgeom_contour.AddAesParameter("linetype")
         'clsgeom_contour.AddAesParameter("size")
         'clsgeom_contour.AddAesParameter("weight")
+
+        ''add layer parameters 
+        'clsgeom_contour.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
+        'clsgeom_contour.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_contour.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        'clsgeom_contour.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        ''linemitre should 1 or a number >1
+        'clsgeom_contour.AddLayerParameter("linemitre", "numeric", "1")
+        ''bin and binwidth could be added here as well. I am not sure if they are needed.... 
         'lstAllGeoms.Add(clsgeom_contour)
 
         'clsgeom_count.SetGeomName("geom_count")
@@ -229,6 +253,10 @@ Public Class ucrGeom
         'clsgeom_count.AddAesParameter("shape")
         'clsgeom_count.AddAesParameter("size")
         'clsgeom_count.AddAesParameter("stroke")
+
+        ''adding layer parameters
+        'clsgeom_count.AddLayerParameter("stat", "list", Chr(34) & "sum" & Chr(34))
+        'clsgeom_count.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_count)
 
         'clsgeom_crossbar.strGeomName = "geom_crossbar"
@@ -241,6 +269,10 @@ Public Class ucrGeom
         'clsgeom_crossbar.AddAesParameter("colour")
         'clsgeom_crossbar.AddAesParameter("linetype")
         'clsgeom_crossbar.AddAesParameter("size")
+
+        ''adding layer parameters
+        'clsgeom_crossbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_crossbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_crossbar)
 
         'clsgeom_curve.strGeomName = "geom_curve"
@@ -249,11 +281,19 @@ Public Class ucrGeom
         'clsgeom_curve.AddAesParameter("xend", bIsMandatory:=True)
         'clsgeom_curve.AddAesParameter("y", bIsMandatory:=True)
         'clsgeom_curve.AddAesParameter("yend", bIsMandatory:=True)
-        'Optional
+        ''Optional
         'clsgeom_curve.AddAesParameter("alpha")
         'clsgeom_curve.AddAesParameter("colour")
         'clsgeom_curve.AddAesParameter("linetype")
         'clsgeom_curve.AddAesParameter("size")
+
+        ''adding layer parameters
+        'clsgeom_curve.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_curve.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_curve.AddLayerParameter("curvature", "numeric", "0.5") 'numeric values. negative values give a left hand curve while positive values give right hand curves
+        'clsgeom_curve.AddLayerParameter("angle", "numeric", "90") 'needs to be 0-180
+        'clsgeom_curve.AddLayerParameter("ncp", "numeric", "5")  'more control point creates a smoother curve
+        'clsgeom_curve.AddLayerParameter("lineend", "list", "butt", lstParameterStrings:={Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
         'lstAllGeoms.Add(clsgeom_curve)
 
         clsgeom_density.strGeomName = "geom_density"
@@ -286,6 +326,14 @@ Public Class ucrGeom
         'clsgeom_density2d.AddAesParameter("colour")
         'clsgeom_density2d.AddAesParameter("linetype")
         'clsgeom_density2d.AddAesParameter("size")
+
+        ''Adding layer parameters
+        'clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34))
+        'clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        'clsgeom_density2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        ''linemitre should 1 or a number >1
+        'clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_density2d)
 
         'clsgeom_density_2d.strGeomName = "geom_density_2d"
@@ -297,6 +345,14 @@ Public Class ucrGeom
         'clsgeom_density_2d.AddAesParameter("colour")
         'clsgeom_density_2d.AddAesParameter("linetype")
         'clsgeom_density_2d.AddAesParameter("size")
+
+        ''Adding layer parameters
+        'clsgeom_density_2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34))
+        'clsgeom_density_2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_density_2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        'clsgeom_density_2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        ''linemitre should 1 or a number >1
+        'clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
@@ -306,7 +362,6 @@ Public Class ucrGeom
         clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
         clsgeom_dotplot.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_dotplot.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
-
         'adding layer parameters
         clsgeom_dotplot.AddLayerParameter("method", "list", Chr(34) & "dotdensity" & Chr(34), lstParameterStrings:={Chr(34) & "dotdensity" & Chr(34), Chr(34) & "histodot" & Chr(34)})
         clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={1, 1})
@@ -323,18 +378,21 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_dotplot)
 
 
-        clsgeom_errorbar.strGeomName = "geom_errorbar"
-        ''Mandatory
-        clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_errorbar.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_errorbar.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        ''Optional
-        clsgeom_errorbar.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
-        clsgeom_errorbar.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_errorbar.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_errorbar.AddAesParameter("size", strIncludedDataTypes:={"factor"})
-        clsgeom_errorbar.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
-        lstAllGeoms.Add(clsgeom_errorbar)
+        'clsgeom_errorbar.strGeomName = "geom_errorbar"
+        '''Mandatory
+        'clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_errorbar.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        'clsgeom_errorbar.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        '''Optional
+        'clsgeom_errorbar.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        'clsgeom_errorbar.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
+        'clsgeom_errorbar.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        'clsgeom_errorbar.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+        'clsgeom_errorbar.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
+        ''adding layer parameters
+        'clsgeom_errorbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_errorbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'lstAllGeoms.Add(clsgeom_errorbar)
 
         'clsgeom_errorbarh.strGeomName = "geom_errorbarh"
         ''mandatory
@@ -348,7 +406,11 @@ Public Class ucrGeom
         'clsgeom_errorbarh.AddAesParameter("height")
         'clsgeom_errorbarh.AddAesParameter("linetype")
         'clsgeom_errorbarh.AddAesParameter("size")
-        'lstAllGeoms.Add(clsgeom_errorbarh)
+
+        'add layer parameters
+        clsgeom_errorbarh.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_errorbarh.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        lstAllGeoms.Add(clsgeom_errorbarh)
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
         clsgeom_freqpoly.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
@@ -373,6 +435,10 @@ Public Class ucrGeom
         'clsgeom_hex.AddAesParameter("colour")
         'clsgeom_hex.AddAesParameter("fill")
         'clsgeom_hex.AddAesParameter("size")
+
+        ''add layer parameter 
+        'clsgeom_hex.AddLayerParameter("stat", "list", Chr(34) & "binhex" & Chr(34))
+        'clsgeom_hex.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_hex)
 
         clsgeom_histogram.strGeomName = "geom_histogram"
@@ -402,6 +468,8 @@ Public Class ucrGeom
         ''geom_hline:yintercept
         ''geom_abline: slope and intercept
         ''TO DO Discuss how to use these
+        ''add layer parameter
+        'clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0")
         'lstAllGeoms.Add(clsgeom_hline)
 
         'clsgeom_jitter.strGeomName = "geom_jitter"
@@ -415,6 +483,10 @@ Public Class ucrGeom
         'clsgeom_jitter.AddAesParameter("shape")
         'clsgeom_jitter.AddAesParameter("size")
         'clsgeom_jitter.AddAesParameter("stroke")
+
+        ''add layer parameter 
+        'clsgeom_jitter.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_jitter.AddLayerParameter("position", "list", Chr(34) & "jitter" & Chr(34))
         'lstAllGeoms.Add(clsgeom_jitter)
 
         'clsgeom_label.strGeomName = "geom_label"
@@ -442,8 +514,8 @@ Public Class ucrGeom
         clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric, factor"})
-        'adding layer parameters
 
+        'adding layer parameters
         clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "stack" & Chr(34)}) 'others options are “jitter”, “dodge” And “stack”
         lstAllGeoms.Add(clsgeom_line)
 
@@ -458,6 +530,10 @@ Public Class ucrGeom
         'clsgeom_linerange.AddAesParameter("colour")
         'clsgeom_linerange.AddAesParameter("linetype")
         'clsgeom_linerange.AddAesParameter("size")
+
+        ''adding layer parameters
+        'clsgeom_linerange.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_linerange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_linerange)
 
         'clsgeom_map.strGeomName = "geom_map"
@@ -469,6 +545,9 @@ Public Class ucrGeom
         'clsgeom_map.AddAesParameter("fill")
         'clsgeom_map.AddAesParameter("linetype")
         'clsgeom_map.AddAesParameter("size")
+
+        ''adding layer parameters
+        'clsgeom_map.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_map)
 
         'clsgeom_path.strGeomName = "geom_path"
@@ -480,6 +559,13 @@ Public Class ucrGeom
         'clsgeom_path.AddAesParameter("colour")
         'clsgeom_path.AddAesParameter("linetype")
         'clsgeom_path.AddAesParameter("size")
+        ''add layer parameters 
+        'clsgeom_path.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
+        'clsgeom_path.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_path.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        'clsgeom_path.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        ''linemitre should 1 or a number >1
+        'clsgeom_path.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_point.strGeomName = "geom_point"
@@ -506,6 +592,10 @@ Public Class ucrGeom
         'clsgeom_pointrange.AddAesParameter("colour")
         'clsgeom_pointrange.AddAesParameter("linetype")
         'clsgeom_pointrange.AddAesParameter("size")
+        ''adding layer parameters
+        'clsgeom_pointrange.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_pointrange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+
         'lstAllGeoms.Add(clsgeom_pointrange)
 
         'clsgeom_polygon.strGeomName = "geom_polygon"
@@ -517,14 +607,17 @@ Public Class ucrGeom
         'clsgeom_polygon.AddAesParameter("fill")
         'clsgeom_polygon.AddAesParameter("linetype")
         'clsgeom_polygon.AddAesParameter("size")
+        ''add layer parameters 
+        'clsgeom_polygon.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_polygon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_polygon)
 
-        'clsgeom_qq.strGeomName = "geom_qq"
-        'clsgeom_qq.AddAesParameter("sample", bIsMandatory:=True)
-        ''optional
-        'clsgeom_qq.AddAesParameter("x")
-        'clsgeom_qq.AddAesParameter("y")
-        'lstAllGeoms.Add(clsgeom_qq)
+        ''clsgeom_qq.strGeomName = "geom_qq"
+        ''clsgeom_qq.AddAesParameter("sample", bIsMandatory:=True)
+        '''optional
+        ''clsgeom_qq.AddAesParameter("x")
+        ''clsgeom_qq.AddAesParameter("y")
+        ''lstAllGeoms.Add(clsgeom_qq)
 
         'clsgeom_quantile.strGeomName = "geom_quantile"
         'clsgeom_quantile.AddAesParameter("x", bIsMandatory:=True)
@@ -535,6 +628,14 @@ Public Class ucrGeom
         'clsgeom_quantile.AddAesParameter("linetype")
         'clsgeom_quantile.AddAesParameter("size")
         'clsgeom_quantile.AddAesParameter("weight")
+
+        ''adding layer parameter
+        'clsgeom_quantile.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
+        'clsgeom_quantile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_quantile.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        'clsgeom_quantile.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        ''linemitre should 1 or a number >1
+        'clsgeom_quantile.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_quantile)
 
         'clsgeom_raster.strGeomName = "geom_raster"
@@ -547,6 +648,13 @@ Public Class ucrGeom
         'clsgeom_raster.AddAesParameter("fill")
         'clsgeom_raster.AddAesParameter("linetype")
         'clsgeom_raster.AddAesParameter("size")
+
+        ''add layer parameter
+        'clsgeom_raster.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_raster.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_raster.AddLayerParameter("hjust", "numeric", "0.5")
+        'clsgeom_raster.AddLayerParameter("vjust", "numeric", "0.5")
+
         'lstAllGeoms.Add(clsgeom_raster)
 
         'clsgeom_rect.strGeomName = "geom_rect"
@@ -559,6 +667,10 @@ Public Class ucrGeom
         'clsgeom_rect.AddAesParameter("fill")
         'clsgeom_rect.AddAesParameter("linetype")
         'clsgeom_rect.AddAesParameter("size")
+
+        ''clsgeom_raster.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_rect.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_rect.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_rect)
 
         'clsgeom_ribbon.strGeomName = "geom_ribbon"
@@ -570,6 +682,10 @@ Public Class ucrGeom
         'clsgeom_ribbon.AddAesParameter("colour")
         'clsgeom_ribbon.AddAesParameter("linetype")
         'clsgeom_ribbon.AddAesParameter("size")
+
+        ''add layer parameter 
+        'clsgeom_ribbon.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_ribbon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_ribbon)
 
         'clsgeom_rug.strGeomName = "geom_rug"
@@ -577,6 +693,10 @@ Public Class ucrGeom
         'clsgeom_rug.AddAesParameter("colour")
         'clsgeom_rug.AddAesParameter("linetype")
         'clsgeom_rug.AddAesParameter("size")
+
+        ''adding layer  parameters
+        'clsgeom_rug.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_rug)
 
         'clsgeom_segment.strGeomName = "geom_segment"
@@ -590,20 +710,25 @@ Public Class ucrGeom
         'clsgeom_segment.AddAesParameter("colour")
         'clsgeom_segment.AddAesParameter("linetype")
         'clsgeom_segment.AddAesParameter("size")
+        ''add  layer parameter
+        'clsgeom_segment.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_segment.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_segment.AddLayerParameter("hjust", "numeric", "0.5")
+        'clsgeom_segment.AddLayerParameter("vjust", "numeric", "0.5")
         'lstAllGeoms.Add(clsgeom_segment)
 
-        'clsgeom_smooth.strGeomName = "geom_smooth"
-        ''mandatory
-        'clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        ''optional 
-        'clsgeom_smooth.AddAesParameter("alpha")
-        'clsgeom_smooth.AddAesParameter("colour")
-        'clsgeom_smooth.AddAesParameter("fill")
-        'clsgeom_smooth.AddAesParameter("linetype")
-        'clsgeom_smooth.AddAesParameter("size")
-        'clsgeom_smooth.AddAesParameter("weight")
-        'lstAllGeoms.Add(clsgeom_smooth)
+        ''clsgeom_smooth.strGeomName = "geom_smooth"
+        '''mandatory
+        ''clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
+        ''clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
+        '''optional 
+        ''clsgeom_smooth.AddAesParameter("alpha")
+        ''clsgeom_smooth.AddAesParameter("colour")
+        ''clsgeom_smooth.AddAesParameter("fill")
+        ''clsgeom_smooth.AddAesParameter("linetype")
+        ''clsgeom_smooth.AddAesParameter("size")
+        ''clsgeom_smooth.AddAesParameter("weight")
+        ''lstAllGeoms.Add(clsgeom_smooth)
 
         'clsgeom_spoke.strGeomName = "geom_spoke"
         ''mandatory
@@ -616,6 +741,10 @@ Public Class ucrGeom
         'clsgeom_spoke.AddAesParameter("colour")
         'clsgeom_spoke.AddAesParameter("linetype")
         'clsgeom_spoke.AddAesParameter("size")
+
+        ''add layer parameter
+        'clsgeom_spoke.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_spoke.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_spoke)
 
         'clsgeom_step.strGeomName = "geom_step"
@@ -626,6 +755,14 @@ Public Class ucrGeom
         'clsgeom_step.AddAesParameter("colour")
         'clsgeom_step.AddAesParameter("linetype")
         'clsgeom_step.AddAesParameter("size")
+
+        ''adding layer parameter
+        'clsgeom_step.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
+        'clsgeom_step.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_step.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        'clsgeom_step.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        ''linemitre should 1 or a number >1
+        'clsgeom_step.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_step)
 
         'clsgeom_text.strGeomName = "geom_text"
@@ -640,7 +777,16 @@ Public Class ucrGeom
         'clsgeom_text.AddAesParameter("fontface")
         'clsgeom_text.AddAesParameter("hjust")
         'clsgeom_text.AddAesParameter("lineheight")
-        ''TO DO add size and vjust this might need additon of labels and receivers  
+        ''TO DO add size and vjust this might need additon of labels and receivers 
+
+
+        ''adding layer parameters
+        'clsgeom_text.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_text.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_text.AddLayerParameter("parse", "bolean", "FALSE")
+        'clsgeom_text.AddLayerParameter("nudge_x", "numeric", "0")
+        'clsgeom_text.AddLayerParameter("nudge_y", "numeric", "0")
+        'clsgeom_text.AddLayerParameter("check_overlap", "bolean", "FALSE")
         'lstAllGeoms.Add(clsgeom_text)
 
         'clsgeom_tile.strGeomName = "geom_tile"
@@ -653,6 +799,10 @@ Public Class ucrGeom
         'clsgeom_tile.AddAesParameter("fill")
         'clsgeom_tile.AddAesParameter("linetype")
         'clsgeom_tile.AddAesParameter("size")
+
+        ''add layer parameters
+        'clsgeom_tile.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_tile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_tile)
 
         'clsgeom_violin.strGeomName = "geom_violin"
@@ -666,6 +816,9 @@ Public Class ucrGeom
         'clsgeom_violin.AddAesParameter("linetype")
         'clsgeom_violin.AddAesParameter("size")
         'clsgeom_violin.AddAesParameter("weight")
+        ''add layer parameter
+        'clsgeom_violin.AddLayerParameter("stat", "list", Chr(34) & "ydensity" & Chr(34))
+        'clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34))
         'lstAllGeoms.Add(clsgeom_violin)
 
         'clsgeom_vline.strGeomName = "geom_vline"
@@ -674,6 +827,8 @@ Public Class ucrGeom
         'clsgeom_vline.AddAesParameter("linetype")
         'clsgeom_vline.AddAesParameter("size")
         ''TO DO  include those that control position
+        ''add layer parameter
+        'clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0")
         'lstAllGeoms.Add(clsgeom_vline)
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)

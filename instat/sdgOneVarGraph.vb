@@ -101,7 +101,7 @@ Public Class sdgOneVarGraph
         SetCategoricalGeomFunction()
         dlgOneVariableGraph.OneOrMoreVariables()
     End Sub
-
+    
     Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScaleAxisforFacets.CheckedChanged
         If chkFreeScaleAxisforFacets.Checked Then
             clsRsyntax.AddParameter("free_scale_axis", "TRUE")
