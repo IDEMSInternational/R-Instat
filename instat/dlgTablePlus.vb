@@ -53,13 +53,6 @@ Public Class dlgTablePlus
         ReceiverLabels()
         SaveResults()
         ucrInputProbabilities.SetName("0.5")
-        If rdoProbabilities.Checked Then
-            ucrInputNewColNameforTablePlus.SetPrefix("prob")
-            ucrInputNewColNameforTablePlus.SetName("prob")
-        Else
-            ucrInputNewColNameforTablePlus.SetPrefix("Quant")
-            ucrInputNewColNameforTablePlus.SetName("Quant")
-        End If
     End Sub
 
     Private Sub ReopenDialog()
@@ -124,11 +117,15 @@ Public Class dlgTablePlus
         pqParameters()
         ucrBase.clsRsyntax.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34))
         If rdoProbabilities.Checked Then
+            ucrInputNewColNameforTablePlus.SetPrefix("prob")
+            ucrInputNewColNameforTablePlus.SetName("prob")
             lblQuantValues.Visible = True
             lblProbValues.Visible = False
             ucrBase.clsRsyntax.SetFunction("mosaic::pdist")
 
         Else
+            ucrInputNewColNameforTablePlus.SetPrefix("Quant")
+            ucrInputNewColNameforTablePlus.SetName("Quant")
             lblQuantValues.Visible = False
             lblProbValues.Visible = True
             ucrBase.clsRsyntax.SetFunction("mosaic::qdist")
