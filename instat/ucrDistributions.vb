@@ -254,7 +254,7 @@ Public Class ucrDistributions
         clsWeibullDist.strQFunctionName = "qweibull"
         clsWeibullDist.strDFunctionName = "dweibull"
         clsWeibullDist.bIsContinuous = True
-        clsWeibullDist.AddParameter("shape", "Shape")
+        clsWeibullDist.AddParameter("shape", "Shape", 1)
         clsWeibullDist.AddParameter("scale", "Scale", 1)
         lstAllDistributions.Add(clsWeibullDist)
 
@@ -316,8 +316,8 @@ Public Class ucrDistributions
         clsBetaDist.strQFunctionName = "qbeta"
         clsBetaDist.strDFunctionName = "dbeta"
         clsBetaDist.bIsContinuous = True
-        clsBetaDist.AddParameter("shape1", "a", 1)
-        clsBetaDist.AddParameter("shape2", "b", 1)
+        clsBetaDist.AddParameter("shape1", "Shape", 1)
+        clsBetaDist.AddParameter("shape2", "Shape", 1)
         lstAllDistributions.Add(clsBetaDist)
 
         'Negative Binomial Distribution
