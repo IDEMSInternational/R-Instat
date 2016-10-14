@@ -1522,4 +1522,31 @@
   <data name="Students_t" xml:space="preserve">
     <value>Students t</value>
   </data>
+  <data name="b" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Cauchy" xml:space="preserve">
+    <value>Cauchy</value>
+  </data>
+  <data name="Chi_Square" xml:space="preserve">
+    <value>Chi-Square</value>
+  </data>
+  <data name="DF" xml:space="preserve">
+    <value>DF</value>
+  </data>
+  <data name="F" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="Hypergeometric" xml:space="preserve">
+    <value>Hypergeometric</value>
+  </data>
+  <data name="Lognormal" xml:space="preserve">
+    <value>Lognormal</value>
+  </data>
+  <data name="Meanlog" xml:space="preserve">
+    <value>Meanlog</value>
+  </data>
+  <data name="SDlog" xml:space="preserve">
+    <value>SDlog</value>
+  </data>
 </root>
