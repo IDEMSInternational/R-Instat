@@ -191,6 +191,11 @@ Public Class ucrDistributions
         Dim clsBetaDist As New Distribution
         Dim clsNegBinomDist As New Distribution
         Dim clsStudentsTDist As New Distribution
+        Dim clsCauchyDist As New Distribution
+        Dim clsChiSqDist As New Distribution
+        Dim clsFDist As New Distribution
+        Dim clsHyperGeoDist As New Distribution
+        Dim clsLogNormDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -328,14 +333,14 @@ Public Class ucrDistributions
         lstAllDistributions.Add(clsNegBinomDist)
 
         'T Distribution
-        '        clsStudentsTDist.strNameTag = "Students_t"
-        '        clsStudentsTDist.strRName = "t"
-        '        clsStudentsTDist.strRFunctionName = "rt"
-        '        clsStudentsTDist.strPFunctionName = "pt"
-        '        clsStudentsTDist.strQFunctionName = "qt"
-        '        clsStudentsTDist.strDFunctionName = "dt"
-        '        clsStudentsTDist.AddParameter("df", "DF", 1)
-        '        lstAllDistributions.Add(clsStudentsTDist)
+        clsStudentsTDist.strNameTag = "Students_t"
+        clsStudentsTDist.strRName = "t"
+        clsStudentsTDist.strRFunctionName = "rt"
+        clsStudentsTDist.strPFunctionName = "pt"
+        clsStudentsTDist.strQFunctionName = "qt"
+        clsStudentsTDist.strDFunctionName = "dt"
+        clsStudentsTDist.AddParameter("df", "DF", 1)
+        lstAllDistributions.Add(clsStudentsTDist)
 
         ' von mises distribution
         clsVonnMisesDist.strNameTag = "von_mises"
@@ -348,6 +353,65 @@ Public Class ucrDistributions
         clsVonnMisesDist.AddParameter("mu", "Mean", "pi")
         clsVonnMisesDist.AddParameter("kappa", "Kappa", 0)
         lstAllDistributions.Add(clsVonnMisesDist)
+
+        ' Cauchy Distribution
+        clsCauchyDist.strNameTag = "Cauchy"
+        clsCauchyDist.strRName = "cauchy"
+        clsCauchyDist.strRFunctionName = "rcauchy"
+        clsCauchyDist.strPFunctionName = "pcauchy"
+        clsCauchyDist.strQFunctionName = "qcauchy"
+        clsCauchyDist.strDFunctionName = "dcauchy"
+        clsCauchyDist.bIsContinuous = True
+        clsCauchyDist.AddParameter("location", "Location", 0)
+        clsCauchyDist.AddParameter("scale", "Scale", 1)
+        lstAllDistributions.Add(clsCauchyDist)
+
+        ' Chi-Square Distribution
+        clsChiSqDist.strNameTag = "Chi_Square"
+        clsChiSqDist.strRName = "chisq"
+        clsChiSqDist.strRFunctionName = "rchisq"
+        clsChiSqDist.strPFunctionName = "pchisq"
+        clsChiSqDist.strQFunctionName = "qchisq"
+        clsChiSqDist.strDFunctionName = "dchisq"
+        clsChiSqDist.bIsContinuous = True
+        clsChiSqDist.AddParameter("df", "DF", 1)
+        lstAllDistributions.Add(clsChiSqDist)
+
+        ' F Distribution
+        clsFDist.strNameTag = "F"
+        clsFDist.strRName = "f"
+        clsFDist.strRFunctionName = "rf"
+        clsFDist.strPFunctionName = "pf"
+        clsFDist.strQFunctionName = "qf"
+        clsFDist.strDFunctionName = "df"
+        clsFDist.AddParameter("df1", "DF", 1)
+        clsFDist.AddParameter("df2", "DF", 1)
+        lstAllDistributions.Add(clsFDist)
+
+        'Hypergeometric Distribution
+        ' For rhyper, the parameters are nn = size, whereas for the other parameters this is n.
+        clsHyperGeoDist.strNameTag = "Hypergeometric"
+        clsHyperGeoDist.strRName = "hyper"
+        clsHyperGeoDist.strRFunctionName = "rhyper"
+        clsHyperGeoDist.strPFunctionName = "phyper"
+        clsHyperGeoDist.strQFunctionName = "qhyper"
+        clsHyperGeoDist.strDFunctionName = "dhyper"
+        clsHyperGeoDist.bIsContinuous = False
+        clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
+        clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
+        clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
+        lstAllDistributions.Add(clsHyperGeoDist)
+
+        ' Lognormal Distribution
+        clsLogNormDist.strNameTag = "Lognormal"
+        clsLogNormDist.strRName = "lnorm"
+        clsLogNormDist.strRFunctionName = "rlnorm"
+        clsLogNormDist.strPFunctionName = "plnorm"
+        clsLogNormDist.strQFunctionName = "qlnorm"
+        clsLogNormDist.strDFunctionName = "dlnorm"
+        clsLogNormDist.AddParameter("meanlog", "Meanlog", 0)
+        clsLogNormDist.AddParameter("sdlog", "SDlog", 1)
+        lstAllDistributions.Add(clsLogNormDist)
 
         'TODO Categorical distribution
         clsCategoricalDist.strNameTag = "Categorical"
