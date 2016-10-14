@@ -37,6 +37,8 @@ Public Class dlgFactorDataFrame
         chkAddCurrentContrast.Checked = False
         chkReplaceFactorSheet.Checked = False
         ucrSelectorFactorDataFrame.Reset()
+        ucrReceiverFactorDataFrame.SetMeAsReceiver()
+        TestOkEnabled()
     End Sub
     Private Sub ReopenDialog()
     End Sub
@@ -49,7 +51,7 @@ Public Class dlgFactorDataFrame
     End Sub
 
     Private Sub ucrReceiverFactorDataFrame_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactorDataFrame.SelectionChanged
-
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
