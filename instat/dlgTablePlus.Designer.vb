@@ -34,7 +34,7 @@ Partial Class dlgTablePlus
         Me.ucrSelectorForDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverExpressionForTablePlus = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkSIngleValues = New System.Windows.Forms.CheckBox()
+        Me.chkSingleValues = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'rdoProbabilities
@@ -146,22 +146,22 @@ Partial Class dlgTablePlus
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'chkSIngleValues
+        'chkSingleValues
         '
-        Me.chkSIngleValues.AutoSize = True
-        Me.chkSIngleValues.Location = New System.Drawing.Point(9, 247)
-        Me.chkSIngleValues.Name = "chkSIngleValues"
-        Me.chkSIngleValues.Size = New System.Drawing.Size(85, 17)
-        Me.chkSIngleValues.TabIndex = 12
-        Me.chkSIngleValues.Text = "Single Value"
-        Me.chkSIngleValues.UseVisualStyleBackColor = True
+        Me.chkSingleValues.AutoSize = True
+        Me.chkSingleValues.Location = New System.Drawing.Point(9, 247)
+        Me.chkSingleValues.Name = "chkSingleValues"
+        Me.chkSingleValues.Size = New System.Drawing.Size(85, 17)
+        Me.chkSingleValues.TabIndex = 12
+        Me.chkSingleValues.Text = "Single Value"
+        Me.chkSingleValues.UseVisualStyleBackColor = True
         '
         'dlgTablePlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(456, 350)
-        Me.Controls.Add(Me.chkSIngleValues)
+        Me.Controls.Add(Me.chkSingleValues)
         Me.Controls.Add(Me.ucrDistributionsFOrTablePlus)
         Me.Controls.Add(Me.ucrInputProbabilities)
         Me.Controls.Add(Me.lblProbValues)
@@ -197,5 +197,5 @@ Partial Class dlgTablePlus
     Friend WithEvents lblProbValues As Label
     Friend WithEvents ucrInputProbabilities As ucrInputTextBox
     Friend WithEvents ucrDistributionsFOrTablePlus As ucrDistributionsWithParameters
-    Friend WithEvents chkSIngleValues As CheckBox
+    Friend WithEvents chkSingleValues As CheckBox
 End Class

@@ -49,7 +49,7 @@ Public Class dlgTablePlus
     Private Sub SetDefaults()
         rdoQuantiles.Checked = True
         chkGraphResults.Checked = True
-        chkSIngleValues.Checked = True
+        chkSingleValues.Checked = True
         ReceiverLabels()
         SaveResults()
         ucrInputProbabilities.SetName("0.5")
@@ -72,13 +72,13 @@ Public Class dlgTablePlus
 
     Private Sub pqParameters()
         If rdoProbabilities.Checked Then
-            If chkSaveResults.Checked Then
+            If chkSingleValues.Checked Then
                 ucrBase.clsRsyntax.AddParameter("q", clsRFunctionParameter:=ucrReceiverExpressionForTablePlus.GetVariables)
             Else
                 ucrBase.clsRsyntax.AddParameter("q", ucrInputProbabilities.GetText)
             End If
         Else
-            If chkSaveResults.Checked Then
+            If chkSingleValues.Checked Then
                 ucrBase.clsRsyntax.AddParameter("p", clsRFunctionParameter:=ucrReceiverExpressionForTablePlus.GetVariables)
             Else
                 ucrBase.clsRsyntax.AddParameter("p", ucrInputProbabilities.GetText)
@@ -88,7 +88,7 @@ Public Class dlgTablePlus
     End Sub
 
     Private Sub SaveResults()
-        If chkSaveResults.Checked Then
+        If chkSaveResults.Checked AndAlso Not chkSingleValues.Checked Then
             ucrInputNewColNameforTablePlus.Visible = True
             ucrBase.clsRsyntax.SetAssignTo(ucrInputNewColNameforTablePlus.GetText(), strTempColumn:=ucrInputNewColNameforTablePlus.GetText(), strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToIsPrefix:=True)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
@@ -141,7 +141,7 @@ Public Class dlgTablePlus
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputProbabilities_NameChanged(ender As Object, e As EventArgs) Handles ucrInputProbabilities.TextChanged
+    Private Sub ucrInputProbabilities_NameChanged() Handles ucrInputProbabilities.NameChanged
         ReceiverLabels()
         TestOKEnabled()
     End Sub
@@ -150,15 +150,14 @@ Public Class dlgTablePlus
         ReceiverLabels()
     End Sub
 
-    Private Sub chkSIngleValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkSIngleValues.CheckedChanged
+    Private Sub chkSIngleValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkSingleValues.CheckedChanged
         results()
     End Sub
 
     Private Sub results()
-        If chkSIngleValues.Checked Then
+        If chkSingleValues.Checked Then
             chkSaveResults.Visible = False
-            chkSaveResults.Checked = False
-            ucrInputNewColNameforTablePlus.Enabled = False
+            ucrInputNewColNameforTablePlus.Visible = False
             ucrReceiverExpressionForTablePlus.Visible = False
             ucrInputProbabilities.Visible = True
             ucrSelectorForDataFrame.Reset()
@@ -169,7 +168,7 @@ Public Class dlgTablePlus
             ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
             ucrReceiverExpressionForTablePlus.SetMeAsReceiver()
             ucrReceiverExpressionForTablePlus.Visible = False
-            ucrInputNewColNameforTablePlus.Enabled = True
+            ucrInputNewColNameforTablePlus.Visible = True
             ucrInputProbabilities.Visible = False
             ucrInputProbabilities.Reset()
             ucrReceiverExpressionForTablePlus.Visible = True
