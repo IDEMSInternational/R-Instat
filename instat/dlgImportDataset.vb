@@ -30,6 +30,7 @@ Public Class dlgImportDataset
     Dim bCanImport As Boolean
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
+    Public strFilePathToUseOnLoad As String
 
     Public Sub New()
 
@@ -53,6 +54,7 @@ Public Class dlgImportDataset
         bComponentsInitialised = True
         bStartOpenDialog = True
         ucrInputName.bSuggestEditOnLeave = True
+        strFilePathToUseOnLoad = ""
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -65,7 +67,10 @@ Public Class dlgImportDataset
             SetRDSDefaults()
             bFirstLoad = False
         End If
-        If bStartOpenDialog Then
+        If strFilePathToUseOnLoad <> "" Then
+            SetDialogWithFile(strFilePathToUseOnLoad)
+            bStartOpenDialog = False
+        ElseIf bStartOpenDialog Then
             GetFileFromOpenDialog()
             bStartOpenDialog = False
         End If
@@ -135,9 +140,6 @@ Public Class dlgImportDataset
 #Region "Import options"
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
-        Dim strFilePath As String = ""
-        Dim strFileName As String = ""
-        Dim strFileExt As String = ""
         Using dlgOpen As New OpenFileDialog
             If bFromLibrary Then
                 dlgOpen.Title = "Import from library"
@@ -159,81 +161,7 @@ Public Class dlgImportDataset
                 ucrInputName.Reset()
                 'checks if the file name is not blank'
                 If dlgOpen.FileName <> "" Then
-                    strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                    strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                    strFileExt = Path.GetExtension(strFilePath)
-                    ucrInputFilePath.SetName(strFilePath)
-                    grdDataPreview.Show()
-                    txtPreview.Show()
-                    ucrInputName.Show()
-                    lblName.Show()
-                    If strFileExt = ".RDS" Then
-                        clsReadRDS.SetRCommand("readRDS")
-                        clsReadRDS.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                        'TODO This needs to be different when RDS is a data frame
-                        'need to be able to detect RDS as data.frame/Instat Object
-                        clsReadRDS.SetAssignTo("new_RDS")
-                        grpExcel.Hide()
-                        grpCSV.Hide()
-                        grpRDS.Show()
-                        txtPreview.Text = ""
-                        txtPreview.Enabled = False
-                        grdDataPreview.Enabled = False
-                        ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
-                        ucrBase.clsRsyntax.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
-                        strFileType = "RDS"
-                        ucrInputName.Hide()
-                        lblName.Hide()
-                        'ucrInputName.SetName(strFileName, bSilent:=True)
-                    ElseIf strFileExt = ".csv" Then
-                        clsReadCSV.SetRCommand("rio::import")
-                        clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsReadCSV)
-                        grpRDS.Hide()
-                        grpExcel.Hide()
-                        grpCSV.Show()
-                        txtPreview.Enabled = True
-                        grdDataPreview.Enabled = True
-                        strFileType = "csv"
-                        ucrInputName.SetName(strFileName, bSilent:=True)
-                        RefreshFilePreview()
-                        ucrInputName.Focus()
-                    ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
-                        clsReadXL.SetRCommand("rio::import")
-                        clsReadXL.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsReadXL)
-                        grpCSV.Hide()
-                        grpRDS.Hide()
-                        grpExcel.Show()
-                        txtPreview.Text = ""
-                        txtPreview.Enabled = False
-                        grdDataPreview.Enabled = True
-                        If strFileExt = ".xlsx" Then
-                            strFileType = "xlsx"
-                            clsReadXL.AddParameter("readxl", "FALSE")
-                        Else
-                            strFileType = "xls"
-                            clsReadXL.RemoveParameterByName("readxl")
-                        End If
-                        FillExcelSheetsAndRegions(strFilePath)
-                        ucrInputName.Focus()
-                        'ucrInputName.SetName(strFileName, bSilent:=True)
-                    Else
-                        strFileType = strFileExt.Substring(1)
-                        ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
-                        ucrBase.clsRsyntax.SetFunction("rio::import")
-                        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                        grpCSV.Hide()
-                        grpExcel.Hide()
-                        grpRDS.Hide()
-                        grdDataPreview.Show()
-                        txtPreview.Hide()
-                        ucrInputName.SetName(strFileName, bSilent:=True)
-                        ucrInputName.Focus()
-                    End If
-                    RefreshFilePreview()
-                    RefreshFrameView()
+                    SetDialogWithFile(dlgOpen.FileName)
                 End If
             Else
                 If bFromLibrary Then
@@ -252,6 +180,89 @@ Public Class dlgImportDataset
             End If
             TestOkEnabled()
         End Using
+    End Sub
+
+    Public Sub SetDialogWithFile(strFilePath As String)
+        Dim strFileExt As String
+        Dim strFileName As String
+
+        strFileName = Path.GetFileNameWithoutExtension(strFilePath)
+        strFilePath = Replace(strFilePath, "\", "/")
+        strFileExt = Path.GetExtension(strFilePath)
+
+        strFileExt = Path.GetExtension(strFilePath)
+        ucrInputFilePath.SetName(strFilePath)
+        grdDataPreview.Show()
+        txtPreview.Show()
+        ucrInputName.Show()
+        lblName.Show()
+        If strFileExt = ".RDS" Then
+            clsReadRDS.SetRCommand("readRDS")
+            clsReadRDS.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+            'TODO This needs to be different when RDS is a data frame
+            'need to be able to detect RDS as data.frame/Instat Object
+            clsReadRDS.SetAssignTo("new_RDS")
+            grpExcel.Hide()
+            grpCSV.Hide()
+            grpRDS.Show()
+            txtPreview.Text = ""
+            txtPreview.Enabled = False
+            grdDataPreview.Enabled = False
+            ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
+            ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
+            ucrBase.clsRsyntax.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
+            strFileType = "RDS"
+            ucrInputName.Hide()
+            lblName.Hide()
+            'ucrInputName.SetName(strFileName, bSilent:=True)
+        ElseIf strFileExt = ".csv" Then
+            clsReadCSV.SetRCommand("rio::import")
+            clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReadCSV)
+            grpRDS.Hide()
+            grpExcel.Hide()
+            grpCSV.Show()
+            txtPreview.Enabled = True
+            grdDataPreview.Enabled = True
+            strFileType = "csv"
+            ucrInputName.SetName(strFileName, bSilent:=True)
+            RefreshFilePreview()
+            ucrInputName.Focus()
+        ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
+            clsReadXL.SetRCommand("rio::import")
+            clsReadXL.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReadXL)
+            grpCSV.Hide()
+            grpRDS.Hide()
+            grpExcel.Show()
+            txtPreview.Text = ""
+            txtPreview.Enabled = False
+            grdDataPreview.Enabled = True
+            If strFileExt = ".xlsx" Then
+                strFileType = "xlsx"
+                clsReadXL.AddParameter("readxl", "FALSE")
+            Else
+                strFileType = "xls"
+                clsReadXL.RemoveParameterByName("readxl")
+            End If
+            FillExcelSheetsAndRegions(strFilePath)
+            ucrInputName.Focus()
+            'ucrInputName.SetName(strFileName, bSilent:=True)
+        Else
+            strFileType = strFileExt.Substring(1)
+            ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
+            ucrBase.clsRsyntax.SetFunction("rio::import")
+            ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+            grpCSV.Hide()
+            grpExcel.Hide()
+            grpRDS.Hide()
+            grdDataPreview.Show()
+            txtPreview.Hide()
+            ucrInputName.SetName(strFileName, bSilent:=True)
+            ucrInputName.Focus()
+        End If
+        RefreshFilePreview()
+        RefreshFrameView()
     End Sub
 
 #End Region
@@ -745,7 +756,7 @@ Public Class dlgImportDataset
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ' add the item to the MRU (Most Recently Used) list...
         'Disabled until implemented correctly
-        'frmMain.clsRecentItems.addToMenu(ucrInputFilePath.GetText())
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
         If strFileType = "RDS" Then
             frmMain.strSaveFilePath = ucrInputFilePath.GetText()
         End If
