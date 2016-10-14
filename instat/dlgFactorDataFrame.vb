@@ -25,26 +25,31 @@ Public Class dlgFactorDataFrame
         Else
             ReopenDialog()
         End If
-        TestOkEnabled()
+        TestOKEnabled()
         autoTranslate(Me)
 
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
         ucrReceiverFactorDataFrame.Selector = ucrSelectorFactorDataFrame
+        ucrReceiverFactorDataFrame.SetMeAsReceiver()
+        ucrReceiverFactorDataFrame.SetIncludedDataTypes({"factor"})
         SetDefaults()
     End Sub
     Private Sub SetDefaults()
-        chkAddCurrentContrast.Checked = False
+        chkAddCurrentContrast.Checked = True
+        IncludeContrast()
         chkReplaceFactorSheet.Checked = False
+        Replace()
         ucrSelectorFactorDataFrame.Reset()
-        ucrReceiverFactorDataFrame.SetMeAsReceiver()
-        TestOkEnabled()
+        ucrInputFactorNames.ResetText()
     End Sub
+
     Private Sub ReopenDialog()
     End Sub
-    Private Sub TestOkEnabled()
-        If Not ucrReceiverFactorDataFrame.IsEmpty Then
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -53,6 +58,7 @@ Public Class dlgFactorDataFrame
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorFactorDataFrame_DataFrameChanged() Handles ucrSelectorFactorDataFrame.DataFrameChanged
@@ -60,24 +66,51 @@ Public Class dlgFactorDataFrame
     End Sub
 
     Private Sub chkAddCurrentContrast_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddCurrentContrast.CheckedChanged
+        IncludeContrast()
+    End Sub
+    Private Sub IncludeContrast()
         If chkAddCurrentContrast.Checked Then
             ucrBase.clsRsyntax.AddParameter("include_contrasts", "TRUE")
         Else
             ucrBase.clsRsyntax.AddParameter("include_contrasts", "FALSE")
         End If
-
     End Sub
 
     Private Sub chkReplaceFactorSheet_CheckedChanged(sender As Object, e As EventArgs) Handles chkReplaceFactorSheet.CheckedChanged
+        Replace()
+    End Sub
+
+    Private Sub Replace()
         If chkReplaceFactorSheet.Checked Then
             ucrBase.clsRsyntax.AddParameter("replace", "FALSE")
         Else
             ucrBase.clsRsyntax.AddParameter("replace", "TRUE")
         End If
-
     End Sub
 
     Private Sub ucrReceiverFactorDataFrame_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactorDataFrame.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("factor", ucrReceiverFactorDataFrame.GetVariableNames)
+        FactorVariable()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub FactorVariable()
+        If Not ucrReceiverFactorDataFrame.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("factor", ucrReceiverFactorDataFrame.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("factor")
+        End If
+    End Sub
+
+    Private Sub FactorDataFrameName()
+        If Not ucrInputFactorNames.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("factor_data_frame_name", Chr(34) & ucrInputFactorNames.GetText & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("factor_data_frame_name")
+        End If
+    End Sub
+
+    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ContentsChanged
+        FactorDataFrameName()
+        TestOKEnabled()
     End Sub
 End Class
