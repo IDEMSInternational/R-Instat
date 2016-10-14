@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgFactorDataFrame
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgFactorDataFrame
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrSelectorFactorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverFactorDataFrame = New instat.ucrReceiverSingle()
@@ -28,8 +28,6 @@ Partial Class dlgFactorDataFrame
         Me.chkAddCurrentContrast = New System.Windows.Forms.CheckBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
-        Me.chkFactorSheet = New System.Windows.Forms.CheckBox()
-        Me.cmdChooseSheet = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrSelectorFactorDataFrame
@@ -44,7 +42,7 @@ Partial Class dlgFactorDataFrame
         '
         'ucrReceiverFactorDataFrame
         '
-        Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(256, 93)
+        Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(264, 95)
         Me.ucrReceiverFactorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorDataFrame.Name = "ucrReceiverFactorDataFrame"
         Me.ucrReceiverFactorDataFrame.Selector = Nothing
@@ -54,7 +52,7 @@ Partial Class dlgFactorDataFrame
         'chkReplaceFactorSheet
         '
         Me.chkReplaceFactorSheet.AutoSize = True
-        Me.chkReplaceFactorSheet.Location = New System.Drawing.Point(247, 47)
+        Me.chkReplaceFactorSheet.Location = New System.Drawing.Point(255, 49)
         Me.chkReplaceFactorSheet.Name = "chkReplaceFactorSheet"
         Me.chkReplaceFactorSheet.Size = New System.Drawing.Size(166, 17)
         Me.chkReplaceFactorSheet.TabIndex = 2
@@ -64,7 +62,7 @@ Partial Class dlgFactorDataFrame
         'chkAddCurrentContrast
         '
         Me.chkAddCurrentContrast.AutoSize = True
-        Me.chkAddCurrentContrast.Location = New System.Drawing.Point(247, 16)
+        Me.chkAddCurrentContrast.Location = New System.Drawing.Point(255, 15)
         Me.chkAddCurrentContrast.Name = "chkAddCurrentContrast"
         Me.chkAddCurrentContrast.Size = New System.Drawing.Size(129, 17)
         Me.chkAddCurrentContrast.TabIndex = 2
@@ -81,40 +79,19 @@ Partial Class dlgFactorDataFrame
         'lblSelectedFactor
         '
         Me.lblSelectedFactor.AutoSize = True
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(253, 77)
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(261, 79)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
         Me.lblSelectedFactor.Size = New System.Drawing.Size(120, 13)
         Me.lblSelectedFactor.TabIndex = 4
         Me.lblSelectedFactor.Text = "Selected Factor Column"
         '
-        'chkFactorSheet
-        '
-        Me.chkFactorSheet.AutoSize = True
-        Me.chkFactorSheet.Location = New System.Drawing.Point(247, 133)
-        Me.chkFactorSheet.Name = "chkFactorSheet"
-        Me.chkFactorSheet.Size = New System.Drawing.Size(106, 17)
-        Me.chkFactorSheet.TabIndex = 2
-        Me.chkFactorSheet.Text = "UseFactor Sheet"
-        Me.chkFactorSheet.UseVisualStyleBackColor = True
-        '
-        'cmdChooseSheet
-        '
-        Me.cmdChooseSheet.Location = New System.Drawing.Point(278, 164)
-        Me.cmdChooseSheet.Name = "cmdChooseSheet"
-        Me.cmdChooseSheet.Size = New System.Drawing.Size(83, 23)
-        Me.cmdChooseSheet.TabIndex = 5
-        Me.cmdChooseSheet.Text = "Choose Sheet"
-        Me.cmdChooseSheet.UseVisualStyleBackColor = True
-        '
         'dlgFactorDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 268)
-        Me.Controls.Add(Me.cmdChooseSheet)
+        Me.ClientSize = New System.Drawing.Size(424, 268)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.chkFactorSheet)
         Me.Controls.Add(Me.chkAddCurrentContrast)
         Me.Controls.Add(Me.chkReplaceFactorSheet)
         Me.Controls.Add(Me.ucrReceiverFactorDataFrame)
@@ -136,6 +113,4 @@ Partial Class dlgFactorDataFrame
     Friend WithEvents chkAddCurrentContrast As CheckBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblSelectedFactor As Label
-    Friend WithEvents chkFactorSheet As CheckBox
-    Friend WithEvents cmdChooseSheet As Button
 End Class
