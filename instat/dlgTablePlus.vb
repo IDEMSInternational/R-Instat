@@ -49,9 +49,17 @@ Public Class dlgTablePlus
     Private Sub SetDefaults()
         rdoQuantiles.Checked = True
         chkGraphResults.Checked = True
+        chkSIngleValues.Checked = True
         ReceiverLabels()
         SaveResults()
         ucrInputProbabilities.SetName("0.5")
+        If rdoProbabilities.Checked Then
+            ucrInputNewColNameforTablePlus.SetPrefix("prob")
+            ucrInputNewColNameforTablePlus.SetName("prob")
+        Else
+            ucrInputNewColNameforTablePlus.SetPrefix("Quant")
+            ucrInputNewColNameforTablePlus.SetName("Quant")
+        End If
     End Sub
 
     Private Sub ReopenDialog()
@@ -89,7 +97,7 @@ Public Class dlgTablePlus
     Private Sub SaveResults()
         If chkSaveResults.Checked Then
             ucrInputNewColNameforTablePlus.Visible = True
-            ucrBase.clsRsyntax.SetAssignTo(ucrInputNewColNameforTablePlus.GetText(), strTempColumn:=ucrInputNewColNameforTablePlus.GetText(), strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.SetAssignTo(ucrInputNewColNameforTablePlus.GetText(), strTempColumn:=ucrInputNewColNameforTablePlus.GetText(), strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToIsPrefix:=True)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         Else
@@ -119,12 +127,11 @@ Public Class dlgTablePlus
             lblQuantValues.Visible = True
             lblProbValues.Visible = False
             ucrBase.clsRsyntax.SetFunction("mosaic::pdist")
-            ucrInputNewColNameforTablePlus.SetName("prob")
+
         Else
             lblQuantValues.Visible = False
             lblProbValues.Visible = True
             ucrBase.clsRsyntax.SetFunction("mosaic::qdist")
-            ucrInputNewColNameforTablePlus.SetName("Quant")
         End If
 
         For Each clstempparam In ucrDistributionsFOrTablePlus.clsCurrRFunction.clsParameters
@@ -137,7 +144,7 @@ Public Class dlgTablePlus
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputProbabilities_NameChanged() Handles ucrInputProbabilities.NameChanged
+    Private Sub ucrInputProbabilities_NameChanged(ender As Object, e As EventArgs) Handles ucrInputProbabilities.TextChanged
         ReceiverLabels()
         TestOKEnabled()
     End Sub
@@ -153,6 +160,7 @@ Public Class dlgTablePlus
     Private Sub results()
         If chkSIngleValues.Checked Then
             chkSaveResults.Enabled = False
+            chkSaveResults.Checked = False
             ucrInputNewColNameforTablePlus.Enabled = False
             ucrReceiverExpressionForTablePlus.Visible = False
             ucrInputProbabilities.Visible = True
