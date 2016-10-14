@@ -24,12 +24,12 @@ Partial Class dlgDescribeTwoVarGraph
     Private Sub InitializeComponent()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
+        Me.lblFirstVariables = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
         Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
         Me.ucrTwoVarGraphSave = New instat.ucrSaveGraph()
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblFirstVariables = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -38,8 +38,8 @@ Partial Class dlgDescribeTwoVarGraph
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(101, 23)
         Me.cmdOptions.TabIndex = 11
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options ..."
+        Me.cmdOptions.Tag = "Options..."
+        Me.cmdOptions.Text = "Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblSecondVariable
@@ -50,6 +50,16 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
         Me.lblSecondVariable.TabIndex = 14
         Me.lblSecondVariable.Text = "Second Variable:"
+        '
+        'lblFirstVariables
+        '
+        Me.lblFirstVariables.AutoSize = True
+        Me.lblFirstVariables.Location = New System.Drawing.Point(307, 19)
+        Me.lblFirstVariables.Name = "lblFirstVariables"
+        Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
+        Me.lblFirstVariables.TabIndex = 16
+        Me.lblFirstVariables.Tag = "First_Variable(s)"
+        Me.lblFirstVariables.Text = "First Variable(s):"
         '
         'ucrReceiverMultipleTwoVar
         '
@@ -91,16 +101,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'lblFirstVariables
-        '
-        Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(307, 19)
-        Me.lblFirstVariables.Name = "lblFirstVariables"
-        Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
-        Me.lblFirstVariables.TabIndex = 16
-        Me.lblFirstVariables.Tag = "First_Variable(s)"
-        Me.lblFirstVariables.Text = "First Variable(s):"
         '
         'dlgDescribeTwoVarGraph
         '
