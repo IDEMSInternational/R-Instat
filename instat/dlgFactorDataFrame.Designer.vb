@@ -28,8 +28,8 @@ Partial Class dlgFactorDataFrame
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFactorDataFrame = New instat.ucrReceiverSingle()
         Me.ucrSelectorFactorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverFactorNames = New instat.ucrReceiverSingle()
         Me.lblFactorNames = New System.Windows.Forms.Label()
+        Me.ucrInputFactorNames = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'chkReplaceFactorSheet
@@ -55,7 +55,7 @@ Partial Class dlgFactorDataFrame
         'lblSelectedFactor
         '
         Me.lblSelectedFactor.AutoSize = True
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(261, 79)
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(251, 79)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
         Me.lblSelectedFactor.Size = New System.Drawing.Size(120, 13)
         Me.lblSelectedFactor.TabIndex = 4
@@ -63,14 +63,14 @@ Partial Class dlgFactorDataFrame
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 208)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 192)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverFactorDataFrame
         '
-        Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(264, 95)
+        Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(254, 95)
         Me.ucrReceiverFactorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorDataFrame.Name = "ucrReceiverFactorDataFrame"
         Me.ucrReceiverFactorDataFrame.Selector = Nothing
@@ -87,31 +87,30 @@ Partial Class dlgFactorDataFrame
         Me.ucrSelectorFactorDataFrame.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorFactorDataFrame.TabIndex = 0
         '
-        'ucrReceiverFactorNames
-        '
-        Me.ucrReceiverFactorNames.Location = New System.Drawing.Point(264, 145)
-        Me.ucrReceiverFactorNames.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactorNames.Name = "ucrReceiverFactorNames"
-        Me.ucrReceiverFactorNames.Selector = Nothing
-        Me.ucrReceiverFactorNames.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFactorNames.TabIndex = 5
-        '
         'lblFactorNames
         '
         Me.lblFactorNames.AutoSize = True
-        Me.lblFactorNames.Location = New System.Drawing.Point(261, 132)
+        Me.lblFactorNames.Location = New System.Drawing.Point(254, 124)
         Me.lblFactorNames.Name = "lblFactorNames"
         Me.lblFactorNames.Size = New System.Drawing.Size(73, 13)
         Me.lblFactorNames.TabIndex = 6
         Me.lblFactorNames.Text = "Factor Names"
         '
+        'ucrInputFactorNames
+        '
+        Me.ucrInputFactorNames.IsReadOnly = False
+        Me.ucrInputFactorNames.Location = New System.Drawing.Point(255, 140)
+        Me.ucrInputFactorNames.Name = "ucrInputFactorNames"
+        Me.ucrInputFactorNames.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputFactorNames.TabIndex = 7
+        '
         'dlgFactorDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 268)
+        Me.ClientSize = New System.Drawing.Size(424, 245)
+        Me.Controls.Add(Me.ucrInputFactorNames)
         Me.Controls.Add(Me.lblFactorNames)
-        Me.Controls.Add(Me.ucrReceiverFactorNames)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.chkAddCurrentContrast)
@@ -135,6 +134,6 @@ Partial Class dlgFactorDataFrame
     Friend WithEvents chkAddCurrentContrast As CheckBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblSelectedFactor As Label
-    Friend WithEvents ucrReceiverFactorNames As ucrReceiverSingle
     Friend WithEvents lblFactorNames As Label
+    Friend WithEvents ucrInputFactorNames As ucrInputTextBox
 End Class
