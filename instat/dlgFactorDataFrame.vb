@@ -110,7 +110,10 @@ Public Class dlgFactorDataFrame
     End Sub
 
     Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ContentsChanged
-        FactorDataFrameName()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputFactorNames_NameChanged() Handles ucrInputFactorNames.NameChanged
+        FactorDataFrameName()
     End Sub
 End Class
