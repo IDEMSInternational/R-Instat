@@ -28,13 +28,13 @@ Partial Class dlgTablePlus
         Me.chkSaveResults = New System.Windows.Forms.CheckBox()
         Me.lblQuantValues = New System.Windows.Forms.Label()
         Me.lblProbValues = New System.Windows.Forms.Label()
+        Me.chkSingleValues = New System.Windows.Forms.CheckBox()
         Me.ucrDistributionsFOrTablePlus = New instat.ucrDistributionsWithParameters()
         Me.ucrInputProbabilities = New instat.ucrInputTextBox()
         Me.ucrInputNewColNameforTablePlus = New instat.ucrInputComboBox()
         Me.ucrSelectorForDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverExpressionForTablePlus = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkSingleValues = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'rdoProbabilities
@@ -97,6 +97,16 @@ Partial Class dlgTablePlus
         Me.lblProbValues.TabIndex = 9
         Me.lblProbValues.Text = "Probabilities"
         '
+        'chkSingleValues
+        '
+        Me.chkSingleValues.AutoSize = True
+        Me.chkSingleValues.Location = New System.Drawing.Point(9, 247)
+        Me.chkSingleValues.Name = "chkSingleValues"
+        Me.chkSingleValues.Size = New System.Drawing.Size(85, 17)
+        Me.chkSingleValues.TabIndex = 12
+        Me.chkSingleValues.Text = "Single Value"
+        Me.chkSingleValues.UseVisualStyleBackColor = True
+        '
         'ucrDistributionsFOrTablePlus
         '
         Me.ucrDistributionsFOrTablePlus.Location = New System.Drawing.Point(255, 80)
@@ -107,7 +117,7 @@ Partial Class dlgTablePlus
         'ucrInputProbabilities
         '
         Me.ucrInputProbabilities.IsReadOnly = False
-        Me.ucrInputProbabilities.Location = New System.Drawing.Point(243, 57)
+        Me.ucrInputProbabilities.Location = New System.Drawing.Point(243, 56)
         Me.ucrInputProbabilities.Name = "ucrInputProbabilities"
         Me.ucrInputProbabilities.Size = New System.Drawing.Size(140, 21)
         Me.ucrInputProbabilities.TabIndex = 10
@@ -145,16 +155,6 @@ Partial Class dlgTablePlus
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'chkSingleValues
-        '
-        Me.chkSingleValues.AutoSize = True
-        Me.chkSingleValues.Location = New System.Drawing.Point(9, 247)
-        Me.chkSingleValues.Name = "chkSingleValues"
-        Me.chkSingleValues.Size = New System.Drawing.Size(85, 17)
-        Me.chkSingleValues.TabIndex = 12
-        Me.chkSingleValues.Text = "Single Value"
-        Me.chkSingleValues.UseVisualStyleBackColor = True
         '
         'dlgTablePlus
         '
