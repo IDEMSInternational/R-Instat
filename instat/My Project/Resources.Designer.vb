@@ -1433,7 +1433,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Factors", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to File .
         '''</summary>
@@ -1442,7 +1442,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("File", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Filter.
         '''</summary>
@@ -1451,7 +1451,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Filter", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Find.
         '''</summary>
@@ -1460,7 +1460,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Find", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Find from.
         '''</summary>
@@ -1469,7 +1469,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Find_from", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Find Ctrl+F.
         '''</summary>
@@ -1478,7 +1478,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Find1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to First.
         '''</summary>
@@ -1487,7 +1487,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("First", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Flags.
         '''</summary>
@@ -1496,7 +1496,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Flags", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Font Ctrl+T.
         '''</summary>
@@ -1505,7 +1505,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Font", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Four.
         '''</summary>
@@ -1514,7 +1514,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Four", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Freequency Chart.
         '''</summary>
@@ -1523,7 +1523,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Freequency_Chart", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Freequency Polygon.
         '''</summary>
@@ -1532,7 +1532,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Freequency_Polygon", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to French.
         '''</summary>
@@ -1541,7 +1541,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("French", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Gamma.
         '''</summary>
@@ -1550,7 +1550,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Gamma", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Gamma With Shape and Mean.
         '''</summary>
@@ -1559,7 +1559,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Gamma_With_Shape_and_Mean", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Gamma With Shape and Rate.
         '''</summary>
@@ -1568,7 +1568,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Gamma_With_Shape_and_Rate", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Gamma With Shape and Scale.
         '''</summary>
@@ -1577,7 +1577,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Gamma_With_Shape_and_Scale", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Gamma With Zeros.
         '''</summary>
@@ -1586,7 +1586,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Gamma_With_Zeros", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Generate new label column from data.
         '''</summary>
@@ -1595,7 +1595,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Generate_new_label_column_from_data", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Geometric.
         '''</summary>
@@ -1604,7 +1604,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Geometric", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Geometric.
         '''</summary>
@@ -1613,7 +1613,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Geometric1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Graphic options.
         '''</summary>
@@ -1622,7 +1622,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Graphic_options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Graphics.
         '''</summary>
@@ -1631,7 +1631,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Graphics", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Greater Than.
         '''</summary>
@@ -1640,7 +1640,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Greater_Than", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Grid square.
         '''</summary>
@@ -1649,7 +1649,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Grid_square", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Group.
         '''</summary>
@@ -1658,7 +1658,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Group", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Heading.
         '''</summary>
@@ -1667,7 +1667,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Heading", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Heat Sum.
         '''</summary>
@@ -1676,7 +1676,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Heat_Sum", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Height.
         '''</summary>
@@ -1685,7 +1685,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Height", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Help.
         '''</summary>
@@ -1694,7 +1694,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Help", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Histogram.
         '''</summary>
@@ -1703,7 +1703,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Histogram", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Histogram Options.
         '''</summary>
@@ -1712,7 +1712,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Histogram_Options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Horizontal boxplot.
         '''</summary>
@@ -1721,7 +1721,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Horizontal_boxplot", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Hypergeometric.
         '''</summary>
@@ -1730,7 +1730,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Hypergeometric", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Import.
         '''</summary>
@@ -1739,7 +1739,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Import", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Import ASCII.
         '''</summary>
@@ -1748,7 +1748,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Import_ASCII", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Import daily data.
         '''</summary>
@@ -1757,7 +1757,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Import_daily_data", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Import/Export.
         '''</summary>
@@ -1766,7 +1766,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Import_Export", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Include.
         '''</summary>
@@ -1775,7 +1775,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Include", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Include Facets.
         '''</summary>
@@ -1784,7 +1784,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Include_Facets", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Indicator variable.
         '''</summary>
@@ -1793,7 +1793,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Indicator_variable", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Indicator Variables.
         '''</summary>
@@ -1802,7 +1802,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Indicator_Variables", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Indicator variables.
         '''</summary>
@@ -1811,7 +1811,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Indicator_variales", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Input File.
         '''</summary>
@@ -1820,7 +1820,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Input_File", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Interaction.
         '''</summary>
@@ -1829,7 +1829,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Interaction", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Interested variable.
         '''</summary>
@@ -1838,7 +1838,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Interested_variable", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Interpolate.
         '''</summary>
@@ -1847,7 +1847,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Interpolate", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Interractions.
         '''</summary>
@@ -1856,7 +1856,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Interractions", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Into.
         '''</summary>
@@ -1865,7 +1865,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Into", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Inventory.
         '''</summary>
@@ -1874,7 +1874,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Inventory", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Inventory Plot....
         '''</summary>
@@ -1883,7 +1883,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("InventoryPlot", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Inverse Gaussian.
         '''</summary>
@@ -1892,7 +1892,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Inverse_Gaussian", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Kappa.
         '''</summary>
@@ -1901,7 +1901,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Kappa", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Label.
         '''</summary>
@@ -1910,7 +1910,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Label", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Lag.
         '''</summary>
@@ -1919,7 +1919,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Lag", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Language.
         '''</summary>
@@ -1928,7 +1928,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Language", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Last.
         '''</summary>
@@ -1937,7 +1937,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Last", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Layers.
         '''</summary>
@@ -1946,7 +1946,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Layers", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Layout of data.
         '''</summary>
@@ -1955,7 +1955,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Layout_of_data", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to legend bty.
         '''</summary>
@@ -1964,7 +1964,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("legend_bty", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Legend label.
         '''</summary>
@@ -1973,7 +1973,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Legend_label", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Legend position.
         '''</summary>
@@ -1982,7 +1982,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Legend_position", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Length of Dry Spell.
         '''</summary>
@@ -1991,7 +1991,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Length_of_Dry_Spell", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Level.
         '''</summary>
@@ -2000,7 +2000,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Level", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Level number.
         '''</summary>
@@ -2009,7 +2009,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Level_number", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Level Omitted.
         '''</summary>
@@ -2018,7 +2018,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Level_Omitted", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Level to be omitted.
         '''</summary>
@@ -2027,7 +2027,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Level_to_be_omitted", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Line Options.
         '''</summary>
@@ -2036,7 +2036,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Line_Options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Line width.
         '''</summary>
@@ -2045,7 +2045,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Line_width", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Line Plot....
         '''</summary>
@@ -2054,7 +2054,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("LinePlot", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Load Graph.
         '''</summary>
@@ -2063,7 +2063,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Load_Graph", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Location.
         '''</summary>
@@ -2072,7 +2072,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Location", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Lock.
         '''</summary>
@@ -2081,7 +2081,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Lock", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Lock and unlock.
         '''</summary>
@@ -2090,7 +2090,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Lock_and_unlock", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Log-Linear.
         '''</summary>
@@ -2099,7 +2099,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Log_Linear", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Lognormal.
         '''</summary>
@@ -2108,7 +2108,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Lognormal", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Make Factor.
         '''</summary>
@@ -2117,7 +2117,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Make_Factor", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Make Factor an Ordinary Variable.
         '''</summary>
@@ -2126,7 +2126,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Make_Factor_an_Ordinary_Variable", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Make Result as a factor.
         '''</summary>
@@ -2135,7 +2135,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Make_Result_as_a_factor", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Make variable into a factor.
         '''</summary>
@@ -2144,7 +2144,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Make_variable_into_a_factor", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Manage.
         '''</summary>
@@ -2153,7 +2153,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Manage", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Manipulate.
         '''</summary>
@@ -2162,7 +2162,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Manipulate", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Markov Modelling.
         '''</summary>
@@ -2171,7 +2171,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Markov_Modelling", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Matching column.
         '''</summary>
@@ -2180,7 +2180,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Matching_column", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Maximum.
         '''</summary>
@@ -2189,7 +2189,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Maximum", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Maximum Capacity.
         '''</summary>
@@ -2198,7 +2198,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Maximum_Capacity", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Maximum.
         '''</summary>
@@ -2207,7 +2207,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Maximum1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Mean.
         '''</summary>
@@ -2216,7 +2216,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Mean", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Mean.
         '''</summary>
@@ -2225,7 +2225,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Mean1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Meanlog.
         '''</summary>
@@ -2234,7 +2234,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Meanlog", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Median.
         '''</summary>
@@ -2243,7 +2243,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Median", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Minimum.
         '''</summary>
@@ -2252,7 +2252,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Minimum", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Minimum.
         '''</summary>
@@ -2261,7 +2261,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Minimum1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Missing.
         '''</summary>
@@ -2270,7 +2270,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Missing", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Missing Data.
         '''</summary>
@@ -2279,7 +2279,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Missing_Data", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Missing Data Table.
         '''</summary>
@@ -2288,7 +2288,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Missing_Data_Table", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Missing values.
         '''</summary>
@@ -2297,7 +2297,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Missing_values", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Mode.
         '''</summary>
@@ -2306,7 +2306,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Mode", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Model.
         '''</summary>
@@ -2315,7 +2315,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Model", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Model Probabilities.
         '''</summary>
@@ -2324,7 +2324,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Model_Probabilities", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Monthly Summaries.
         '''</summary>
@@ -2333,7 +2333,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Monthly_Summaries", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Moving Averages.
         '''</summary>
@@ -2342,7 +2342,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Moving_Averages", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Multinomial.
         '''</summary>
@@ -2351,7 +2351,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Multinomial", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Multiple lines.
         '''</summary>
@@ -2360,7 +2360,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Multiple_lines", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Name.
         '''</summary>
@@ -2369,7 +2369,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Name", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Name New Columns.
         '''</summary>
@@ -2378,7 +2378,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Name_New_Columns", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Negative Binomial.
         '''</summary>
@@ -2387,7 +2387,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Negative_Binomial", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to New Column Name.
         '''</summary>
@@ -2396,7 +2396,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("New_Column_Name", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to New Data Frame Name.
         '''</summary>
@@ -2405,7 +2405,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("New_Data_Frame_Name", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to New Value.
         '''</summary>
@@ -2414,7 +2414,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("New_Value", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to New worksheet.
         '''</summary>
@@ -2423,7 +2423,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("New_worksheet", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to No.
         '''</summary>
@@ -2432,7 +2432,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("No", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Non-Parametric.
         '''</summary>
@@ -2441,7 +2441,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Non_Parametric", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to None.
         '''</summary>
@@ -2450,7 +2450,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("None", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Normal.
         '''</summary>
@@ -2459,7 +2459,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Normal", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Normal.
         '''</summary>
@@ -2468,7 +2468,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Normal1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Not Yet Implemented.
         '''</summary>
@@ -2477,7 +2477,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Not_Yet_Implemented", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Notched boxplot.
         '''</summary>
@@ -2486,7 +2486,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Notched_boxplot", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Number.
         '''</summary>
@@ -2495,7 +2495,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Number", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Number of Cases.
         '''</summary>
@@ -2504,7 +2504,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Number_of_Cases", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Number Of Columns.
         '''</summary>
@@ -2513,7 +2513,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Number_Of_Columns", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Number of levels.
         '''</summary>
@@ -2522,7 +2522,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Number_of_levels", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Number of Rain Days.
         '''</summary>
@@ -2531,7 +2531,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Number_of_Rain_Days", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Number of Rows.
         '''</summary>
@@ -2540,7 +2540,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Number_of_Rows", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Number of Samples.
         '''</summary>
@@ -2549,7 +2549,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Number_of_Samples", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to ODBC Query.
         '''</summary>
@@ -2558,7 +2558,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ODBC_Query", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Ok.
         '''</summary>
@@ -2567,7 +2567,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Ok", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Omit value.
         '''</summary>
@@ -2576,7 +2576,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Omit_value", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to One.
         '''</summary>
@@ -2585,7 +2585,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("One", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to One Sample Summary Data.
         '''</summary>
@@ -2594,7 +2594,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("One_Sample_Summary_Data", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Open.
         '''</summary>
@@ -2603,7 +2603,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Open", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Open From Library.
         '''</summary>
@@ -2612,7 +2612,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Open_From_Library", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Open Worksheet.
         '''</summary>
@@ -2621,7 +2621,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Open_Worksheet", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Options.
         '''</summary>
@@ -2630,7 +2630,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Order.
         '''</summary>
@@ -2639,7 +2639,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Order", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Output.
         '''</summary>
@@ -2648,7 +2648,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Output", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Output for CDT.
         '''</summary>
@@ -2657,7 +2657,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Output_for_CDT", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Output for CPT.
         '''</summary>
@@ -2666,7 +2666,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Output_for_CPT", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Output options.
         '''</summary>
@@ -2675,7 +2675,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Output_options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Output Spooling.
         '''</summary>
@@ -2684,7 +2684,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Output_Spooling", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Output Window.
         '''</summary>
@@ -2693,7 +2693,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Output_Window", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to (Overtype).
         '''</summary>
@@ -2702,37 +2702,37 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Overtype", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property Oxygen_Icons_org_Oxygen_Actions_window_duplicate() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Oxygen-Icons.org-Oxygen-Actions-window-duplicate", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
+                Return CType(obj, System.Drawing.Bitmap)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property Oxygen_Icons_org_Oxygen_Status_dialog_error() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Oxygen-Icons.org-Oxygen-Status-dialog-error", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
+                Return CType(obj, System.Drawing.Bitmap)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property Paomedia_Small_N_Flat_Window_layout() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Paomedia-Small-N-Flat-Window-layout", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
+                Return CType(obj, System.Drawing.Bitmap)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Paste.
         '''</summary>
@@ -2741,7 +2741,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Paste", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Paste Ctrl+V.
         '''</summary>
@@ -2750,7 +2750,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Paste1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Penman.
         '''</summary>
@@ -2759,7 +2759,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Penman", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Percents.
         '''</summary>
@@ -2768,7 +2768,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Percents", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Permute rows.
         '''</summary>
@@ -2777,7 +2777,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Permute_rows", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Pie Chart.
         '''</summary>
@@ -2786,7 +2786,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Pie_Chart", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Pie Chart Options.
         '''</summary>
@@ -2795,7 +2795,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Pie_Chart_Options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Plot.
         '''</summary>
@@ -2804,7 +2804,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Plot", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Plot character.
         '''</summary>
@@ -2813,7 +2813,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Plot_character", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Plot Options.
         '''</summary>
@@ -2822,7 +2822,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Plot_Options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Plot window.
         '''</summary>
@@ -2831,7 +2831,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Plot_window", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Point Options.
         '''</summary>
@@ -2840,7 +2840,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Point_Options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Points.
         '''</summary>
@@ -2849,7 +2849,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Points", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Poisson.
         '''</summary>
@@ -2858,7 +2858,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Poisson", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Polynomials.
         '''</summary>
@@ -2867,7 +2867,25 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Polynomials", resourceCulture)
             End Get
         End Property
-        
+
+        '''<summary>
+        '''  Looks up a localized string similar to Population Failures.
+        '''</summary>
+        Friend ReadOnly Property Population_Failures() As String
+            Get
+                Return ResourceManager.GetString("Population_Failures", resourceCulture)
+            End Get
+        End Property
+
+        '''<summary>
+        '''  Looks up a localized string similar to Population Successes.
+        '''</summary>
+        Friend ReadOnly Property Population_Successes() As String
+            Get
+                Return ResourceManager.GetString("Population_Successes", resourceCulture)
+            End Get
+        End Property
+
         '''<summary>
         '''  Looks up a localized string similar to Prepare.
         '''</summary>
@@ -2876,7 +2894,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Prepare", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Principal Components.
         '''</summary>
@@ -2885,7 +2903,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Principal_Components", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Print.
         '''</summary>
@@ -2894,7 +2912,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Print", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Print Preview.
         '''</summary>
@@ -2903,7 +2921,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Print_Preview", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Probability.
         '''</summary>
@@ -2912,7 +2930,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Probability", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Probability Distribution.
         '''</summary>
@@ -2921,7 +2939,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Probability_Distribution", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Probability Plot.
         '''</summary>
@@ -2930,7 +2948,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Probability_Plot", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Process.
         '''</summary>
@@ -2939,7 +2957,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Process", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Quasi.
         '''</summary>
@@ -2948,7 +2966,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Quasi", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Quasibinomial.
         '''</summary>
@@ -2957,7 +2975,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Quasibinomial", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Quasipoisson.
         '''</summary>
@@ -2966,7 +2984,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Quasipoisson", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Quote.
         '''</summary>
@@ -2975,7 +2993,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Quote", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Rain count.
         '''</summary>
@@ -2984,7 +3002,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Rain_count", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Rain Statistics.
         '''</summary>
@@ -2993,7 +3011,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Rain_Statistics", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Random Samples.
         '''</summary>
@@ -3002,7 +3020,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Random_Samples", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Random subset.
         '''</summary>
@@ -3011,7 +3029,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Random_subset", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Random Subsets.
         '''</summary>
@@ -3020,7 +3038,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Random_Subsets", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Range End.
         '''</summary>
@@ -3029,7 +3047,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Range_End", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Range Start.
         '''</summary>
@@ -3038,7 +3056,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Range_Start", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Rank.
         '''</summary>
@@ -3047,7 +3065,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Rank", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Rate.
         '''</summary>
@@ -3056,7 +3074,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Rate", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Recall.
         '''</summary>
@@ -3065,7 +3083,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Recall", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Recode.
         '''</summary>
@@ -3074,7 +3092,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Recode", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Reference levels.
         '''</summary>
@@ -3083,7 +3101,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Reference_levels", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Regression.
         '''</summary>
@@ -3092,7 +3110,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Regression", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Regular Sequence.
         '''</summary>
@@ -3101,7 +3119,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Regular_Sequence", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Remove.
         '''</summary>
@@ -3110,7 +3128,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Remove", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Rename sheets.
         '''</summary>
@@ -3119,7 +3137,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Rename_sheets", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Reorder.
         '''</summary>
@@ -3128,7 +3146,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Reorder", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Reorder levels.
         '''</summary>
@@ -3137,7 +3155,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Reorder_levels", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Reoder sheets.
         '''</summary>
@@ -3146,7 +3164,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Reorder_sheets", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Replace.
         '''</summary>
@@ -3155,7 +3173,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Replace", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Replace Ctrl+H.
         '''</summary>
@@ -3164,7 +3182,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Replace1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to REQUIRES FACTOR SELECTORS.
         '''</summary>
@@ -3173,7 +3191,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("REQUIRES_FACTOR_SELECTORS", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Reserve free space.
         '''</summary>
@@ -3182,7 +3200,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Reserve_free_space", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Reset.
         '''</summary>
@@ -3191,7 +3209,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Reset", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Reshape.
         '''</summary>
@@ -3200,7 +3218,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Reshape", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Resize Worksheet.
         '''</summary>
@@ -3209,7 +3227,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Resize_Worksheet", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to 1st Response variable.
         '''</summary>
@@ -3218,7 +3236,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Response_variable1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to 2nd Response variable.
         '''</summary>
@@ -3227,7 +3245,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Response_variable2", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Restrict data values.
         '''</summary>
@@ -3236,7 +3254,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Restrict_data_values", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Restrict(Filter).
         '''</summary>
@@ -3245,7 +3263,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Restrict_filter", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Restrict Options.
         '''</summary>
@@ -3254,7 +3272,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Restrict_Options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Row.
         '''</summary>
@@ -3263,7 +3281,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Row", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Row names.
         '''</summary>
@@ -3272,7 +3290,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Row_names", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Row Statistics.
         '''</summary>
@@ -3281,7 +3299,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Row_Statistics", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Row statistics.
         '''</summary>
@@ -3290,7 +3308,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Row_statistics1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Row summary.
         '''</summary>
@@ -3299,7 +3317,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Row_summary", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Run Worksheet Editor F7.
         '''</summary>
@@ -3308,7 +3326,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Run_Worksheet_Editor", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Sample Size.
         '''</summary>
@@ -3317,7 +3335,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Sample_Size", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Save.
         '''</summary>
@@ -3326,7 +3344,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Save", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Save As.
         '''</summary>
@@ -3335,7 +3353,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Save_As", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Save residuals.
         '''</summary>
@@ -3344,7 +3362,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Save_residuals", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Save results.
         '''</summary>
@@ -3353,7 +3371,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Save_results", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Save results in.
         '''</summary>
@@ -3362,7 +3380,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Save_results_in", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Save values.
         '''</summary>
@@ -3371,7 +3389,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Save_values", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Scale.
         '''</summary>
@@ -3380,7 +3398,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Scale", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Scatter Plot....
         '''</summary>
@@ -3389,7 +3407,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ScatterPlot", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Script.
         '''</summary>
@@ -3398,7 +3416,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Script", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Script Window.
         '''</summary>
@@ -3407,7 +3425,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Script_Window", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to SDlog.
         '''</summary>
@@ -3416,7 +3434,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("SDlog", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Seasonal Summary.
         '''</summary>
@@ -3425,7 +3443,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Seasonal_Summary", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Seasonal Summary Rain.
         '''</summary>
@@ -3434,7 +3452,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Seasonal_Summary_Rain", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Second Factor.
         '''</summary>
@@ -3443,7 +3461,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Second_Factor", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Second Factor(Optional).
         '''</summary>
@@ -3452,7 +3470,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Second_Factor_Optional", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Seed.
         '''</summary>
@@ -3461,7 +3479,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Seed", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Select.
         '''</summary>
@@ -3470,7 +3488,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Select_", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Select All.
         '''</summary>
@@ -3479,7 +3497,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Select_All", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Select All ctrls+A .
         '''</summary>
@@ -3488,7 +3506,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Select_All1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Select and Stack.
         '''</summary>
@@ -3497,7 +3515,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Select_and_Stack", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Selected.
         '''</summary>
@@ -3506,7 +3524,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Selected", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Selected Column.
         '''</summary>
@@ -3515,7 +3533,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Selected_Column", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Selected Variables.
         '''</summary>
@@ -3524,7 +3542,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Selected_Variables", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Selected variables.
         '''</summary>
@@ -3533,7 +3551,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Selected_variables1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Selected variables.
         '''</summary>
@@ -3542,7 +3560,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Selected_variables2", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Selection.
         '''</summary>
@@ -3551,7 +3569,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Selection", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Separator.
         '''</summary>
@@ -3560,7 +3578,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Separator", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Set Seed.
         '''</summary>
@@ -3569,7 +3587,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Set_Seed", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Shape.
         '''</summary>
@@ -3578,7 +3596,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Shape", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Sheet name.
         '''</summary>
@@ -3587,7 +3605,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Sheet_name", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Shift Daily data.
         '''</summary>
@@ -3596,7 +3614,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Shift_Daily_data", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Simple Models.
         '''</summary>
@@ -3605,7 +3623,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Simple_Models", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Simple Regression Options.
         '''</summary>
@@ -3614,7 +3632,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Simple_Regression_Options", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Site.
         '''</summary>
@@ -3623,7 +3641,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Site", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Sort.
         '''</summary>
@@ -3632,7 +3650,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Sort", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Spells.
         '''</summary>
@@ -3641,7 +3659,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Spells", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Stack.
         '''</summary>
@@ -3650,7 +3668,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Stack", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Stack Daily data.
         '''</summary>
@@ -3659,7 +3677,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Stack_Daily_data", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Stack data into.
         '''</summary>
@@ -3668,7 +3686,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Stack_data_into", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Stack/Melt.
         '''</summary>
@@ -3677,7 +3695,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Stack_Melt", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to St. Dev.
         '''</summary>
@@ -3686,7 +3704,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Standard_deviation", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Start of Rain.
         '''</summary>
@@ -3695,7 +3713,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Start_of_Rain", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Start of the Rains.
         '''</summary>
@@ -3704,7 +3722,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Start_of_the_Rains", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Station name.
         '''</summary>
@@ -3713,7 +3731,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Station_name", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Statistcs required.
         '''</summary>
@@ -3722,7 +3740,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Statistcs_required", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Statistic.
         '''</summary>
@@ -3731,7 +3749,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Statistic", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Statistics.
         '''</summary>
@@ -3740,7 +3758,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Statistics", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Std Deviation.
         '''</summary>
@@ -3749,7 +3767,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Std_Deviation", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Stem And Leaf.
         '''</summary>
@@ -3758,7 +3776,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Stem_And_Leaf", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Stem and Leaf....
         '''</summary>
@@ -3767,7 +3785,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("StemLeaf", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to New.
         '''</summary>
@@ -3776,7 +3794,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("String1", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Options.
         '''</summary>
@@ -3785,7 +3803,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("String2", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Strings as factors.
         '''</summary>
@@ -3794,7 +3812,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Strings_as_factors", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Students t.
         '''</summary>
@@ -3803,7 +3821,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Students_t", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Submit.
         '''</summary>
@@ -3812,7 +3830,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Submit", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Sum.
         '''</summary>
