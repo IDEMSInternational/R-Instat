@@ -254,6 +254,12 @@
     <Compile Include="sdgDescribeTwoVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgFactorDataFrame.Designer.vb">
+      <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFactorDataFrame.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgMerge.Designer.vb">
       <DependentUpon>sdgMerge.vb</DependentUpon>
     </Compile>
@@ -2762,6 +2768,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFactorDataFrame.resx">
+      <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMerge.fr-FR.resx">
       <DependentUpon>sdgMerge.vb</DependentUpon>
