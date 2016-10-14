@@ -59,11 +59,16 @@ Public Class dlgRandomSample
         SetNumberOfSamplesParameters()
         chkSetSeed.Checked = False
         nudSeed.Value = 1
+        ucrDistWithParameters.SetParameters()
         SetSeedParameters()
     End Sub
 
     Private Sub ReopenDialog()
         SetAssignTo()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 
     Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorRandomSamples.DataFrameChanged

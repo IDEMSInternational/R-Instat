@@ -1549,4 +1549,22 @@
   <data name="SDlog" xml:space="preserve">
     <value>SDlog</value>
   </data>
+  <data name="Population_Failures" xml:space="preserve">
+    <value>Population Failures</value>
+  </data>
+  <data name="Population_Successes" xml:space="preserve">
+    <value>Population Successes</value>
+  </data>
+  <data name="DF_1" xml:space="preserve">
+    <value>DF 1</value>
+  </data>
+  <data name="DF_2" xml:space="preserve">
+    <value>DF 2</value>
+  </data>
+  <data name="Shape_1" xml:space="preserve">
+    <value>Shape 1</value>
+  </data>
+  <data name="Shape_2" xml:space="preserve">
+    <value>Shape 2</value>
+  </data>
 </root>
