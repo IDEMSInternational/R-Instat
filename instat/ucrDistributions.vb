@@ -254,7 +254,7 @@ Public Class ucrDistributions
         clsWeibullDist.strQFunctionName = "qweibull"
         clsWeibullDist.strDFunctionName = "dweibull"
         clsWeibullDist.bIsContinuous = True
-        clsWeibullDist.AddParameter("shape", "Shape")
+        clsWeibullDist.AddParameter("shape", "Shape", 1)
         clsWeibullDist.AddParameter("scale", "Scale", 1)
         lstAllDistributions.Add(clsWeibullDist)
 
@@ -316,8 +316,8 @@ Public Class ucrDistributions
         clsBetaDist.strQFunctionName = "qbeta"
         clsBetaDist.strDFunctionName = "dbeta"
         clsBetaDist.bIsContinuous = True
-        clsBetaDist.AddParameter("shape1", "a", 1)
-        clsBetaDist.AddParameter("shape2", "b", 1)
+        clsBetaDist.AddParameter("shape1", "Shape1", 1)
+        clsBetaDist.AddParameter("shape2", "Shape2", 1)
         lstAllDistributions.Add(clsBetaDist)
 
         'Negative Binomial Distribution
@@ -384,8 +384,8 @@ Public Class ucrDistributions
         clsFDist.strPFunctionName = "pf"
         clsFDist.strQFunctionName = "qf"
         clsFDist.strDFunctionName = "df"
-        clsFDist.AddParameter("df1", "DF", 1)
-        clsFDist.AddParameter("df2", "DF", 1)
+        clsFDist.AddParameter("df1", "DF1", 1)
+        clsFDist.AddParameter("df2", "DF2", 1)
         lstAllDistributions.Add(clsFDist)
 
         'Hypergeometric Distribution
