@@ -991,6 +991,7 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
     data_frame_list[[factor_data_frame_name]] <- factor_data_frame
     self$import_data(data_frame_list)
     factor_data_obj <- self$get_data_objects(factor_data_frame_name)
+    #TODO Should this be here or in add link?
     factor_data_obj$add_key(factor)
     names(factor) <- factor
     self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)
