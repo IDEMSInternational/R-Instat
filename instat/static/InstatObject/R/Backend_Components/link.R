@@ -1,3 +1,4 @@
+# a link can contain multiple ways to link two data frames
 link <- R6Class("link",
                        public = list(
                          initialize = function(from_data_frame = "", to_data_frame = "", type = "", calculation = NA) {
@@ -9,6 +10,9 @@ link <- R6Class("link",
                          from_data_frame = "",
                          to_data_frame = "",
                          type = "",
+                         # remove calculation
+                         # replace with list of list of pairs of linking columns
+                         # each list of pairs of columns corresponds to a key in the to_data_frame
                          calculation = NA
                        ),
                        private = list(
