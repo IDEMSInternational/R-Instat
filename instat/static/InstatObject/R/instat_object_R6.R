@@ -899,6 +899,11 @@ instat_object$set("public","add_key", function(data_name, col_names) {
 }
 )
 
+instat_object$set("public","is_key", function(data_name, col_names) {
+  self$get_data_objects(data_name)$is_key(col_names)
+}
+)
+
 instat_object$set("public","get_links", function() {
   return(private$.links)
 }
@@ -987,10 +992,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
     self$import_data(data_frame_list)
     factor_data_obj <- self$get_data_objects(factor_data_frame_name)
     factor_data_obj$add_key(factor)
-    link_calc <- calculation$new(type = "summary", parameters = factor)
-    link_obj <- link$new(from_data_frame = data_name, type = keyed_link_label, calculation = link_calc)
-    link_obj$to_data_frame <- factor_data_frame_name
-    self$add_link(link_obj)
+    names(factor) <- factor
+    self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)
   }
 }
 )
