@@ -1405,7 +1405,7 @@ data_object$set("public", "add_key", function(col_names) {
   if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
     stop("key columns must have unique combinations")
   }
-  if(self$key_exists(col_names)) {
+  if(self$is_key(col_names)) {
     message("A key with these columns already exists. No action will be taken.")
   }
   else {
@@ -1418,7 +1418,7 @@ data_object$set("public", "add_key", function(col_names) {
 }
 )
 
-data_object$set("public", "key_exists", function(col_names) {
+data_object$set("public", "is_key", function(col_names) {
   return(any(sapply(private$keys, function(x) setequal(col_names,x))))
 }
 )
