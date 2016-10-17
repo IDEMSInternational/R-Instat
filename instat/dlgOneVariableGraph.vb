@@ -22,8 +22,6 @@ Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
     Private clsBaseOperatorOneColumn As New ROperator
     Private clsBaseFunctionMultipleVariables As New RFunction
-    Public strNumericGeomFunction As String
-    Public strCategoricalGeomFunction As String
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -43,6 +41,7 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.Reset()
         rdoFacets.Checked = True
         rdoCombineGraph.Enabled = False
+
         sdgOneVarGraph.SetDefaults()
         TestOkEnabled()
     End Sub
@@ -50,7 +49,6 @@ Public Class dlgOneVariableGraph
     Private Sub InitialiseDialog()
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
-        OneOrMoreVariables()
         'ucrBase.iHelpTopicID = 
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
@@ -67,13 +65,11 @@ Public Class dlgOneVariableGraph
 
         clsBaseFunctionMultipleVariables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
         sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
-        sdgOneVarGraph.SetNumericGeomFunction(strNumericGeomFunction)
-        sdgOneVarGraph.SetCategoricalGeomFunction(strCategoricalGeomFunction)
+        sdgOneVarGraph.InitialiseDialog()
 
     End Sub
-
     Private Sub ReopenDialog()
-
+        CheckDataType()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -84,24 +80,36 @@ Public Class dlgOneVariableGraph
         End If
     End Sub
 
-    Private Sub OneOrMoreVariables()
+    Public Sub OneOrMoreVariables()
         If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then
             ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperatorOneColumn)
-
-            If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" Then
+            If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" OrElse ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "integer" Then
                 'TODO Geom should come from the subdialog
-                clsRgeom_Function.SetRCommand(strNumericGeomFunction)
-                If Not ucrReceiverOneVarGraph.IsEmpty() Then
+                clsRaesFunction.ClearParameters()
+                clsRgeom_Function.SetRCommand(sdgOneVarGraph.strNumericGeomFunction)
+
+                If Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Boxplot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Dot Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Point Plot") Then
+                    clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
                     clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
+                ElseIf Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Histogram" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Density Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Frequency Polygon") Then
+                    clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
                 End If
-
-                clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             Else
+                clsRaesFunction.ClearParameters()
                 'TODO Geom should come from the subdialog
-                clsRgeom_Function.SetRCommand(strCategoricalGeomFunction)
-
+                clsRgeom_Function.SetRCommand(sdgOneVarGraph.strCategoriacalGeomFunction)
                 If Not ucrReceiverOneVarGraph.IsEmpty() Then
                     clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
+                End If
+                If sdgOneVarGraph.ucrInputCategorical.GetText = "Pie Chart" Then
+                    Dim clsTempRFunc As New RFunction
+                    clsRgeom_Function.AddParameter("width", "1")
+                    clsTempRFunc.SetRCommand("coord_polar")
+                    clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
+                    ucrBase.clsRsyntax.AddOperatorParameter("polar", clsRFunc:=clsTempRFunc)
+                Else
+                    clsRgeom_Function.RemoveParameterByName("width")
+                    ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
                 End If
             End If
         Else
@@ -117,6 +125,7 @@ Public Class dlgOneVariableGraph
 
     Private Sub ucrReceiverOneVarGraph_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOneVarGraph.SelectionChanged
         OneOrMoreVariables()
+        CheckDataType()
         TestOkEnabled()
     End Sub
 
@@ -137,11 +146,33 @@ Public Class dlgOneVariableGraph
         sdgOneVarGraph.ShowDialog()
     End Sub
 
-    Private Sub rdoFacets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFacets.CheckedChanged
+    Private Sub rdoFacets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFacets.CheckedChanged, rdoCombineGraph.CheckedChanged, rdoSingleGraphs.CheckedChanged
+        SetOutputparameter()
+    End Sub
+
+    Private Sub SetOutputparameter()
         If rdoFacets.Checked Then
-            clsBaseFunctionMultipleVariables.AddParameter("facets", "TRUE")
+            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        ElseIf rdoCombineGraph.Checked Then
+            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "combine" & Chr(34))
+        ElseIf rdoSingleGraphs.Checked Then
+            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "single" & Chr(34))
         Else
-            clsBaseFunctionMultipleVariables.RemoveParameterByName("facets")
+            clsBaseFunctionMultipleVariables.RemoveParameterByName("output") 'this might never run because atleast one must be checked at a time
+        End If
+    End Sub
+
+    Private Sub CheckDataType()
+        If ucrReceiverOneVarGraph.GetCurrentItemTypes(True).Count > 1 Then
+            rdoFacets.Enabled = False
+            rdoFacets.Checked = False
+            rdoCombineGraph.Checked = True
+            rdoCombineGraph.Enabled = True
+        Else
+            rdoFacets.Enabled = True
+            rdoFacets.Checked = True
+            rdoCombineGraph.Checked = False
+            rdoCombineGraph.Enabled = False
         End If
     End Sub
 End Class

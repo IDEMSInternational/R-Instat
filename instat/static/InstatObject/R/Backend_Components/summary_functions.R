@@ -33,7 +33,6 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
 instat_object$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
   if(!is.character(data_name)) stop("data_name must be of type character")
   factors_list <- factors
-  names(factors_list) <- factors
   link_calc <- calculation$new(type = "summary", parameters = factors_list)
   link_obj <- link$new(from_data_frame = data_name, type = keyed_link_label, calculation = link_calc)
   exists = FALSE

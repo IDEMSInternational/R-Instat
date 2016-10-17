@@ -22,10 +22,11 @@ Public Class dlgCalculator
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
+    Public iHelpCalcID As Integer
+
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 14
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -53,11 +54,10 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SetDefaults()
-        ucrSaveResultInto.SetPrefix("Cal")
+        ucrSaveResultInto.SetPrefix("Calc")
         ucrSaveResultInto.Reset()
         ucrInputCalOptions.Reset()
         ucrReceiverForCalculation.Clear()
-        Me.Size = New System.Drawing.Size(436, 402)
         ucrInputCalOptions.SetName("Basic")
         chkShowArguments.Checked = False
         chkSaveResultInto.Checked = True
@@ -70,20 +70,22 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 14
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
         ucrReceiverForCalculation.SetMeAsReceiver()
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
         ucrSaveResultInto.SetItemsTypeAsColumns()
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings", "Probability", "Dates"})
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text", "Runoff", "Dates"})
         ucrSaveResultInto.SetValidationTypeAsRVariable()
-        ucrInputTryMessage.Enabled = False
-        'cmdTry.Enabled = False
+
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -178,7 +180,6 @@ Public Class dlgCalculator
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strScript As String = ""
         Dim strFunc As String
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         strFunc = clsDetach.ToScript(strScript)
         frmMain.clsRLink.RunScript(strScript & strFunc)
         SetCalculationHistory()
@@ -186,6 +187,8 @@ Public Class dlgCalculator
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForCalculation.GetVariableNames(False))
+        ucrInputTryMessage.SetName("")
+        cmdTry.Enabled = Not ucrReceiverForCalculation.IsEmpty()
         TestOKEnabled()
     End Sub
 
@@ -212,6 +215,10 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrInputCalOptions.NameChanged
+        CalculationsOptions()
+    End Sub
+
+    Private Sub CalculationsOptions()
         Select Case ucrInputCalOptions.GetText
             Case "Maths"
                 grpStatistics.Visible = False
@@ -220,6 +227,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
+                iHelpCalcID = 126
                 Me.Size = New System.Drawing.Size(614, 377)
             Case "Logical and Symbols"
                 grpDates.Visible = False
@@ -230,7 +238,10 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
                 grpProbabilty.Visible = False
-            Case "Statistics"
+                iHelpCalcID = 127
+
+
+            Case "Summary"
                 grpDates.Visible = False
                 grpStatistics.Visible = True
                 grpLogical.Visible = False
@@ -239,7 +250,8 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(552, 377)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
-            Case "Strings"
+                iHelpCalcID = 128
+            Case "Text"
                 grpDates.Visible = False
                 grpStrings.Visible = True
                 grpStatistics.Visible = False
@@ -248,7 +260,8 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
                 Me.Size = New System.Drawing.Size(580, 377)
-            Case "Probability"
+                iHelpCalcID = 338
+            Case "Runoff"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpStrings.Visible = False
@@ -257,6 +270,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(749, 377)
+                iHelpCalcID = 120
             Case "Dates"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
@@ -266,6 +280,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 Me.Size = New System.Drawing.Size(589, 377)
+                iHelpCalcID = 130
             Case Else
                 grpDates.Visible = False
                 Me.Size = New System.Drawing.Size(424, 377)
@@ -801,6 +816,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
+        ucrInputTryMessage.SetName("")
         SaveResults()
     End Sub
 
@@ -899,32 +915,73 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(":")
     End Sub
 
-    Private Sub CatchErrors()
-        Dim strRAttachCommand As String
-        Dim strRDettachCommand As String
+    Private Sub TryScript()
         Dim strOutPut As String
+        Dim strAttach As String
+        Dim strDetach As String
+        Dim strTempScript As String = ""
         Dim strVecOutput As CharacterVector
+        Dim bIsAssigned As Boolean
+        Dim bToBeAssigned As Boolean
+        Dim strAssignTo As String
+        Dim strAssignToColumn As String
+        Dim strAssignToDataFrame As String
+
+        bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
+        bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
+        strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
+        'These should really be done through RSyntax methods as above
+        strAssignToColumn = ucrBase.clsRsyntax.strAssignToColumn
+        strAssignToDataFrame = ucrBase.clsRsyntax.strAssignToDataframe
 
         Try
             If ucrReceiverForCalculation.IsEmpty Then
-                ucrInputTryMessage.SetName("Empty arguments")
+                ucrInputTryMessage.SetName("")
             Else
-            End If
-            strRAttachCommand = clsAttach.ToScript()
-                frmMain.clsRLink.RunInternalScript(strRAttachCommand, bSilent:=True)
+                'get strScript here
+                strAttach = clsAttach.ToScript(strTempScript)
+                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
+                ucrBase.clsRsyntax.RemoveAssignTo()
                 strOutPut = ucrBase.clsRsyntax.GetScript
                 strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
-                ucrInputTryMessage.SetName(strVecOutput(0))
-
+                If strVecOutput IsNot Nothing Then
+                    If strVecOutput.Length > 1 Then
+                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
+                    Else
+                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                    End If
+                Else
+                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
+                End If
+            End If
         Catch ex As Exception
-            ucrInputTryMessage.SetName("INVALID INPUT!, Please try again")
+            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
         Finally
-            strRDettachCommand = clsDetach.ToScript()
-            frmMain.clsRLink.RunInternalScript(strRDettachCommand, bSilent:=True)
+            strTempScript = ""
+            strDetach = clsDetach.ToScript(strTempScript)
+            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
+            ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
+            ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
+            ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
+            'These should really be done through RSyntax methods as above
+            ucrBase.clsRsyntax.strAssignToColumn = strAssignToColumn
+            ucrBase.clsRsyntax.strAssignToDataframe = strAssignToDataFrame
         End Try
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
-        CatchErrors()
+        TryScript()
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        HelpContent()
+    End Sub
+
+    Private Sub HelpContent()
+        If iHelpCalcID > 0 Then
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+        Else
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+        End If
     End Sub
 End Class
