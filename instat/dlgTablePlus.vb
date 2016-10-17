@@ -48,8 +48,9 @@ Public Class dlgTablePlus
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorForDataFrame.Reset()
+        ucrInputProbabilities.Reset()
         rdoQuantiles.Checked = True
-        chkGraphResults.Checked = True
         chkSingleValues.Checked = True
         results()
         ReceiverLabels()
@@ -154,6 +155,7 @@ Public Class dlgTablePlus
     End Sub
 
     Private Sub ucrReceiverExpressionForTablePlus_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionForTablePlus.SelectionChanged
+        ReceiverLabels()
         TestOKEnabled()
     End Sub
 
