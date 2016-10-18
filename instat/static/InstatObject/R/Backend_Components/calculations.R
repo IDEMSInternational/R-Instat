@@ -150,8 +150,23 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
         else {
           # In this case, join required but no summary has been done, so the join was required by a filter
           # to do the join there must be a key defined in the "largest" dataframe
-          # Because no summary has been done, key can always be checked in to_data_frame of link??
-          
+          # Because no summary has been done, key can always be checked in from_data_frame of link??
+          if(self$has_key(sub_calc_results[[link_label]][["from_data_frame"]])) {
+            keys_list <- self$get_keys(sub_calc_results[[link_label]][["from_data_frame"]])
+            joined <- FALSE
+            for(curr_key in keys_list) {
+              if(all(curr_key %in% names(sub_calc_results[[data_label]])) && all(curr_key %in% names(curr_sub_calc[[data_label]]))) {
+                # Here we need to first subset so that we only get output column and key column(s) so that we don't duplicate other columns in merge.
+                sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]], by = curr_key)
+                joined <- TRUE
+                break
+              }
+            }
+            if(!joined) stop("Could not find a key to join by which appeared in output from all sub calculations.")
+          }
+          else {
+            stop("Cannot merge output from sub calculations because data frame does not have any defined keys.")
+          }
         }
       }
       else {
@@ -161,16 +176,15 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       }
       
       #### Set the link information
-      #TODO Is this ok to do? Not using a link object, but list that can be used to create a link at end
+      #TODO Is this ok to do? Not using a link object, but list that can be used to create a link at the end
       if(length(curr_sub_calc[[link_label]][["link_cols"]]) > length(sub_calc_results[[link_label]][["link_cols"]])) {
         #Could these have different link columns? e.g. c("Village.") vs c("Variety.")
         if(!all(sub_calc_results[[link_label]][["link_cols"]] %in% curr_sub_calc[[link_label]][["link_cols"]])) {
           stop("sub calculations cannot have disjoint linking columns")
         }
-        #TODO need to check they have the same to_data_frame?
+        #TODO need to check they have the same from_data_frame?
         sub_calc_results[[link_label]] <- curr_sub_calc[[link_label]]
       }
-      #print(sub_calc_results[[link_label]][["link_cols"]])
       else {
         if(!all(curr_sub_calc[[link_label]][["link_cols"]] %in% sub_calc_results[[link_label]][["link_cols"]])) {
           stop("sub calculations cannot have disjoint linking columns")
@@ -190,7 +204,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       curr_data_list <- list()
       curr_data_list[[data_label]] <- self$get_data_frame(data_names[[1]])
       link_list <- list(data_names[[1]], c())
-      names(link_list) <- c("to_data_frame", "link_cols")
+      names(link_list) <- c("from_data_frame", "link_cols")
       curr_data_list[[link_label]] <- link_list
       curr_data_list[[require_merge_label]] <- FALSE
     }
@@ -217,7 +231,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   else if(calc$type == "summary") {
     # modify link to include linking columns
     # set requires_key = TRUE
-    # TODO Could to_data_frame ever change?
+    # TODO Could from_data_frame ever change?
     # TODO Is this always replacing the link_cols?
     curr_data_list[[link_label]][["link_cols"]] <- as.character(groups(curr_data_list[[data_label]]))
     curr_data_list[[data_label]] <- curr_data_list[[data_label]] %>% summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$name))
@@ -230,7 +244,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   else if(calc$type == "filter") {
     # link unchanged
     # set requires_key = TRUE
-    curr_data_list[[data_label]] <- curr_data_list[[data_label]] %>% filter_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$name))
+    curr_data_list[[data_label]] <- curr_data_list[[data_label]] %>% filter_(.dots = as.formula(paste0("~", calc$function_exp)))
     curr_data_list[[require_merge_label]] <- TRUE
   }
   else if(calc$type == "join") {

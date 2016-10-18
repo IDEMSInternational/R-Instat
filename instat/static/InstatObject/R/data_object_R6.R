@@ -1423,6 +1423,16 @@ data_object$set("public", "is_key", function(col_names) {
 }
 )
 
+data_object$set("public", "has_key", function() {
+  return(length(private$keys) > 0)
+}
+)
+
+data_object$set("public", "get_keys", function() {
+  return(private$keys)
+}
+)
+
 data_object$set("public", "set_structure_columns", function(struc_type_1, struc_type_2, struc_type_3) {
   if(!all(c(struc_type_1,struc_type_2,struc_type_3) %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop("Some column names not recognised.")
   if(length(intersect(struc_type_1,struc_type_2)) > 0 || length(intersect(struc_type_1,struc_type_3)) > 0 || length(intersect(struc_type_2,struc_type_3)) > 0) {

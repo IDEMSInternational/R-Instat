@@ -904,6 +904,16 @@ instat_object$set("public","is_key", function(data_name, col_names) {
 }
 )
 
+instat_object$set("public","has_key", function(data_name) {
+  self$get_data_objects(data_name)$has_key()
+}
+)
+
+instat_object$set("public","get_keys", function(data_name) {
+  self$get_data_objects(data_name)$get_keys()
+}
+)
+
 instat_object$set("public","get_links", function() {
   return(private$.links)
 }
