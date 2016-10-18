@@ -1,12 +1,11 @@
 ﻿Imports System.IO
 Public Class clsRecentFiles
     Public mnuItems As New List(Of Form)
-    Dim strRecentFiles As String = "Recent_Files\recent.mru"
-    Dim mnuTbShowLast10 As ToolStripDropDownItem
-    Dim mnuFile As ToolStripMenuItem
-    Dim sepStart As ToolStripSeparator
-    Dim sepEnd As ToolStripSeparator
-
+    Private strRecentFilesPath As String
+    Private mnuTbShowLast10 As ToolStripDropDownItem
+    Private mnuFile As ToolStripMenuItem
+    Private sepStart As ToolStripSeparator
+    Private sepEnd As ToolStripSeparator
     ' declare a variable to contain the most recent opened items
     Private strListMRU As New List(Of String)
 
@@ -19,22 +18,16 @@ Public Class clsRecentFiles
         sepEnd.Visible = False
     End Sub
 
-    Private ReadOnly Property MRUPath() As String
-        'Reads the path where the list of MRU are stored
-        Get
-            ' returns a path in the static folder, but with a '.mru' extension
-            Return Path.GetFullPath(frmMain.strStaticPath & "\" & strRecentFiles)
-        End Get
-    End Property
-
     Public Sub checkOnLoad()
-        'Checks for the existe3nce of the file on form load
+        'Checks for the existence of the file on form load
         ' load recently opened files
-        If (File.Exists(MRUPath)) Then
+        strRecentFilesPath = Path.Combine(frmMain.strAppDataPath, "recent.mru")
+        If (File.Exists(strRecentFilesPath)) Then
             ' read file
-            Dim sPaths() As String = File.ReadAllLines(MRUPath)
+            Dim sPaths() As String = File.ReadAllLines(strRecentFilesPath)
             For Each sPath As String In sPaths
                 If Not String.IsNullOrEmpty(sPath) Then
+                    ' Disabled this so that you can still see files that don't exist in the list
                     ' only add files that still exist...
                     'If File.Exists(sPath) Then
                     '    ' add to the list of recently opened files
@@ -45,22 +38,20 @@ Public Class clsRecentFiles
             Next
         End If
         ' display the recently opened files if there are any items to display in the file
-        If strListMRU.Count > 0 Then UpdateItemsMenu()
+        UpdateItemsMenu()
     End Sub
 
     Public Sub saveOnClose()
-        ' temp disabled to prevent error accessing file
-        ' TODO look up app config and Setting file as alternatives
+        Dim sPath As String
 
+        strRecentFilesPath = Path.Combine(frmMain.strAppDataPath, "recent.mru")
         'saves the list of opened files on form close
         ' save MRU - delete existing files first
-        'If File.Exists(MRUPath) Then
-        'File.WriteAllText(MRUPath, "")
-        'End If
-        ' write each item to the file...
-        'For Each sPath As String In strListMRU
-        'File.AppendAllText(MRUPath, sPath & vbCrLf)
-        'Next
+        File.WriteAllText(strRecentFilesPath, "")
+        'Write each item to the file...
+        For Each sPath In strListMRU
+            File.AppendAllText(strRecentFilesPath, sPath & vbCrLf)
+        Next
     End Sub
 
     Public Sub addToMenu(ByVal tempObj As Object)
@@ -153,20 +144,24 @@ Public Class clsRecentFiles
     End Sub
 
     Private Sub mnuFileMRU_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim iResult As Integer
+
         If File.Exists(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)) Then
             'dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
             'dlgImportDataset.SetDataName(Path.GetFileNameWithoutExtension(sender.ToString))
             'Not working as I would like because of the changes made to the Import Dataset
+            dlgImportDataset.strFilePathToUseOnLoad = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
             dlgImportDataset.ShowDialog()
-
         Else
-            MessageBox.Show(frmMain, "The file has either been moved or deleted", "Error trying to open file")
+            iResult = MessageBox.Show(frmMain, "Error: File not accessible. It may have been renamed, moved or deleted." & vbNewLine & vbNewLine & "Would you like to remove this file from the list?", "Error accessing file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             'removes the path to the non existent file
-            strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)
-                                                             Return value.Contains(sender.ToString)
-                                                         End Function))
-            'updates the interfaces
-            UpdateItemsMenu()
+            If iResult = DialogResult.Yes Then
+                strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)
+                                                                 Return value.Contains(sender.ToString)
+                                                             End Function))
+                'updates the interfaces
+                UpdateItemsMenu()
+            End If
         End If
     End Sub
 
@@ -178,5 +173,4 @@ Public Class clsRecentFiles
             End If
         Next
     End Sub
-
 End Class

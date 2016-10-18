@@ -32,6 +32,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoPlotAll = New System.Windows.Forms.RadioButton()
         Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.ucrInputValues = New instat.ucrMultipleInput()
         Me.lblBy = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
@@ -56,7 +57,7 @@ Partial Class sdgOneVarUseModFit
         Me.tbcQuantiles.Location = New System.Drawing.Point(7, 7)
         Me.tbcQuantiles.Name = "tbcQuantiles"
         Me.tbcQuantiles.SelectedIndex = 0
-        Me.tbcQuantiles.Size = New System.Drawing.Size(218, 210)
+        Me.tbcQuantiles.Size = New System.Drawing.Size(218, 209)
         Me.tbcQuantiles.TabIndex = 2
         '
         'tbcPlots
@@ -71,7 +72,7 @@ Partial Class sdgOneVarUseModFit
         Me.tbcPlots.Location = New System.Drawing.Point(4, 22)
         Me.tbcPlots.Name = "tbcPlots"
         Me.tbcPlots.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbcPlots.Size = New System.Drawing.Size(210, 184)
+        Me.tbcPlots.Size = New System.Drawing.Size(210, 191)
         Me.tbcPlots.TabIndex = 0
         Me.tbcPlots.Text = "Plots"
         Me.tbcPlots.UseVisualStyleBackColor = True
@@ -150,6 +151,7 @@ Partial Class sdgOneVarUseModFit
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.ucrInputValues)
         Me.TabPage2.Controls.Add(Me.lblBy)
         Me.TabPage2.Controls.Add(Me.lblTo)
         Me.TabPage2.Controls.Add(Me.lblFrom)
@@ -161,10 +163,17 @@ Partial Class sdgOneVarUseModFit
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(210, 184)
+        Me.TabPage2.Size = New System.Drawing.Size(210, 183)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Quantiles"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'ucrInputValues
+        '
+        Me.ucrInputValues.Location = New System.Drawing.Point(5, 152)
+        Me.ucrInputValues.Name = "ucrInputValues"
+        Me.ucrInputValues.Size = New System.Drawing.Size(156, 29)
+        Me.ucrInputValues.TabIndex = 8
         '
         'lblBy
         '
@@ -243,7 +252,7 @@ Partial Class sdgOneVarUseModFit
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 223)
+        Me.ucrBase.Location = New System.Drawing.Point(44, 218)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrBase.TabIndex = 3
@@ -252,7 +261,7 @@ Partial Class sdgOneVarUseModFit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(229, 259)
+        Me.ClientSize = New System.Drawing.Size(229, 256)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.tbcQuantiles)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -291,4 +300,5 @@ Partial Class sdgOneVarUseModFit
     Friend WithEvents nudBy As NumericUpDown
     Friend WithEvents nudTo As NumericUpDown
     Friend WithEvents nudFrom As NumericUpDown
+    Friend WithEvents ucrInputValues As ucrMultipleInput
 End Class

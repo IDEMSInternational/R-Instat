@@ -899,6 +899,11 @@ instat_object$set("public","add_key", function(data_name, col_names) {
 }
 )
 
+instat_object$set("public","is_key", function(data_name, col_names) {
+  self$get_data_objects(data_name)$is_key(col_names)
+}
+)
+
 instat_object$set("public","get_links", function() {
   return(private$.links)
 }
@@ -951,5 +956,44 @@ instat_object$set("public","make_date_yeardoy", function(data_name, year, doy, y
 
 instat_object$set("public","set_contrasts_of_factor", function(data_name, factor, new_contrasts) {
   self$get_data_objects(data_name)$set_contrasts_of_factor(factor = factor, new_contrasts = new_contrasts)
+}
+)
+
+instat_object$set("public","create_factor_data_frame", function(data_name, factor, factor_data_frame_name, include_contrasts = TRUE, replace = FALSE) {
+  curr_data_obj <- self$get_data_objects(data_name)
+  if(!factor %in% names(curr_data_obj$get_data_frame())) stop(factor, " not found in the data")
+  if(!is.factor(curr_data_obj$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
+  create <- TRUE
+  if(self$link_exists_from(data_name, factor)) {
+    message("Factor data frame already exists.")
+    if(replace) {
+      message("Current factor data frame will be replaced.")
+      #TODO replacing not implemented yet
+      # This line should be removed when implemented
+      create <- FALSE
+    }
+    else create <- FALSE
+  }
+  if(create) {
+    data_frame_list <- list()
+    if(missing(factor_data_frame_name)) factor_data_frame_name <- paste0(data_name, "_", factor)
+    factor_data_frame_name <- make.names(factor_data_frame_name)
+    factor_data_frame_name <- next_default_item(factor_data_frame_name, self$get_data_names(), include_index = FALSE)
+    
+    factor_column <- curr_data_obj$get_columns_from_data(factor)
+    factor_data_frame <- data.frame(levels(factor_column))
+    names(factor_data_frame) <- factor
+    if(include_contrasts) {
+      factor_data_frame <- cbind(factor_data_frame, contrasts(factor_column))
+    }
+    row.names(factor_data_frame) <- 1:nrow(factor_data_frame)
+    names(factor_data_frame)[2:ncol(factor_data_frame)] <- paste0("C", 1:(ncol(factor_data_frame)-1))
+    data_frame_list[[factor_data_frame_name]] <- factor_data_frame
+    self$import_data(data_frame_list)
+    factor_data_obj <- self$get_data_objects(factor_data_frame_name)
+    factor_data_obj$add_key(factor)
+    names(factor) <- factor
+    self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)
+  }
 }
 )

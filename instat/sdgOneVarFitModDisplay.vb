@@ -17,7 +17,6 @@ Imports instat.Translations
 
 Public Class sdgOneVarFitModDisplay
     Private clsRplotFunction As New RFunction
-    Private clsSaveLikelihood As New RFunction
     Private clsModel As New RFunction
     Private clsRLogLikFunction As New RFunction
     Private WithEvents ucrDists As ucrDistributions
