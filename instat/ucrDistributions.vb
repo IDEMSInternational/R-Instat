@@ -188,6 +188,14 @@ Public Class ucrDistributions
         Dim clsQuasiDist As New Distribution
         Dim clsQuasibinomialDist As New Distribution
         Dim clsQuasipoissonDist As New Distribution
+        Dim clsBetaDist As New Distribution
+        Dim clsNegBinomDist As New Distribution
+        Dim clsStudentsTDist As New Distribution
+        Dim clsCauchyDist As New Distribution
+        Dim clsChiSqDist As New Distribution
+        Dim clsFDist As New Distribution
+        Dim clsHyperGeoDist As New Distribution
+        Dim clsLogNormDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -246,7 +254,7 @@ Public Class ucrDistributions
         clsWeibullDist.strQFunctionName = "qweibull"
         clsWeibullDist.strDFunctionName = "dweibull"
         clsWeibullDist.bIsContinuous = True
-        clsWeibullDist.AddParameter("shape", "Shape")
+        clsWeibullDist.AddParameter("shape", "Shape", 1)
         clsWeibullDist.AddParameter("scale", "Scale", 1)
         lstAllDistributions.Add(clsWeibullDist)
 
@@ -300,6 +308,40 @@ Public Class ucrDistributions
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 
+        'Beta Distribution
+        clsBetaDist.strNameTag = "Beta"
+        clsBetaDist.strRName = "beta"
+        clsBetaDist.strRFunctionName = "rbeta"
+        clsBetaDist.strPFunctionName = "pbeta"
+        clsBetaDist.strQFunctionName = "qbeta"
+        clsBetaDist.strDFunctionName = "dbeta"
+        clsBetaDist.bIsContinuous = True
+        clsBetaDist.AddParameter("shape1", "Shape1", 1)
+        clsBetaDist.AddParameter("shape2", "Shape2", 1)
+        lstAllDistributions.Add(clsBetaDist)
+
+        'Negative Binomial Distribution
+        clsNegBinomDist.strNameTag = "Negative_Binomial"
+        clsNegBinomDist.strRName = "nbinom"
+        clsNegBinomDist.strRFunctionName = "rnbinom"
+        clsNegBinomDist.strPFunctionName = "pnbinom"
+        clsNegBinomDist.strQFunctionName = "qnbinom"
+        clsNegBinomDist.strDFunctionName = "dnbinom"
+        clsNegBinomDist.bIsContinuous = False
+        clsNegBinomDist.AddParameter("size", "Number", 1)
+        clsNegBinomDist.AddParameter("prob", "Probability", 0.5)
+        lstAllDistributions.Add(clsNegBinomDist)
+
+        'T Distribution
+        clsStudentsTDist.strNameTag = "Students_t"
+        clsStudentsTDist.strRName = "t"
+        clsStudentsTDist.strRFunctionName = "rt"
+        clsStudentsTDist.strPFunctionName = "pt"
+        clsStudentsTDist.strQFunctionName = "qt"
+        clsStudentsTDist.strDFunctionName = "dt"
+        clsStudentsTDist.AddParameter("df", "DF", 1)
+        lstAllDistributions.Add(clsStudentsTDist)
+
         ' von mises distribution
         clsVonnMisesDist.strNameTag = "von_mises"
         clsVonnMisesDist.strRName = "vonmises"
@@ -311,6 +353,65 @@ Public Class ucrDistributions
         clsVonnMisesDist.AddParameter("mu", "Mean", "pi")
         clsVonnMisesDist.AddParameter("kappa", "Kappa", 0)
         lstAllDistributions.Add(clsVonnMisesDist)
+
+        ' Cauchy Distribution
+        clsCauchyDist.strNameTag = "Cauchy"
+        clsCauchyDist.strRName = "cauchy"
+        clsCauchyDist.strRFunctionName = "rcauchy"
+        clsCauchyDist.strPFunctionName = "pcauchy"
+        clsCauchyDist.strQFunctionName = "qcauchy"
+        clsCauchyDist.strDFunctionName = "dcauchy"
+        clsCauchyDist.bIsContinuous = True
+        clsCauchyDist.AddParameter("location", "Location", 0)
+        clsCauchyDist.AddParameter("scale", "Scale", 1)
+        lstAllDistributions.Add(clsCauchyDist)
+
+        ' Chi-Square Distribution
+        clsChiSqDist.strNameTag = "Chi_Square"
+        clsChiSqDist.strRName = "chisq"
+        clsChiSqDist.strRFunctionName = "rchisq"
+        clsChiSqDist.strPFunctionName = "pchisq"
+        clsChiSqDist.strQFunctionName = "qchisq"
+        clsChiSqDist.strDFunctionName = "dchisq"
+        clsChiSqDist.bIsContinuous = True
+        clsChiSqDist.AddParameter("df", "DF", 1)
+        lstAllDistributions.Add(clsChiSqDist)
+
+        ' F Distribution
+        clsFDist.strNameTag = "F"
+        clsFDist.strRName = "f"
+        clsFDist.strRFunctionName = "rf"
+        clsFDist.strPFunctionName = "pf"
+        clsFDist.strQFunctionName = "qf"
+        clsFDist.strDFunctionName = "df"
+        clsFDist.AddParameter("df1", "DF1", 1)
+        clsFDist.AddParameter("df2", "DF2", 1)
+        lstAllDistributions.Add(clsFDist)
+
+        'Hypergeometric Distribution
+        ' For rhyper, the parameters are nn = size, whereas for the other parameters this is n.
+        clsHyperGeoDist.strNameTag = "Hypergeometric"
+        clsHyperGeoDist.strRName = "hyper"
+        clsHyperGeoDist.strRFunctionName = "rhyper"
+        clsHyperGeoDist.strPFunctionName = "phyper"
+        clsHyperGeoDist.strQFunctionName = "qhyper"
+        clsHyperGeoDist.strDFunctionName = "dhyper"
+        clsHyperGeoDist.bIsContinuous = False
+        clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
+        clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
+        clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
+        lstAllDistributions.Add(clsHyperGeoDist)
+
+        ' Lognormal Distribution
+        clsLogNormDist.strNameTag = "Lognormal"
+        clsLogNormDist.strRName = "lnorm"
+        clsLogNormDist.strRFunctionName = "rlnorm"
+        clsLogNormDist.strPFunctionName = "plnorm"
+        clsLogNormDist.strQFunctionName = "qlnorm"
+        clsLogNormDist.strDFunctionName = "dlnorm"
+        clsLogNormDist.AddParameter("meanlog", "Meanlog", 0)
+        clsLogNormDist.AddParameter("sdlog", "SDlog", 1)
+        lstAllDistributions.Add(clsLogNormDist)
 
         'TODO Categorical distribution
         clsCategoricalDist.strNameTag = "Categorical"
@@ -411,6 +512,7 @@ Public Class ucrDistributions
         'clsQuasipoissonDist.bIsContinuous = 
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)
+
 
         bDistributionsSet = True
     End Sub

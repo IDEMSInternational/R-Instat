@@ -121,9 +121,9 @@ Public Class dlgOneVarFitModel
 
     Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
         If chkSaveModel.Checked Then
-            ucrSaveModel.Enabled = True
+            ucrSaveModel.Visible = True
         Else
-            ucrSaveModel.Enabled = False
+            ucrSaveModel.Visible = False
         End If
         AssignSaveModel()
         TestOKEnabled()
@@ -171,6 +171,9 @@ Public Class dlgOneVarFitModel
         If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
             sdgOneVarFitModDisplay.RunLikelihoods()
         End If
+        '  If Not sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
+        'message to say likelihood won't be displayed
+        ' End If
     End Sub
 
 End Class

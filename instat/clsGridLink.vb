@@ -376,7 +376,7 @@ Public Class clsGridLink
             clsIsVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$is_variables_metadata")
             clsIsVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
             clsIsVarMetaFunc.AddParameter("property", "is_frozen_label")
-
+            'TODO needs to change to get_variables_metadata and check if TRUE
             bIsFrozen = frmMain.clsRLink.RunInternalScriptGetValue(clsIsVarMetaFunc.ToScript()).AsLogical(0)
             If bIsFrozen Then
                 For k = 0 To dfTemp.ColumnCount - 1

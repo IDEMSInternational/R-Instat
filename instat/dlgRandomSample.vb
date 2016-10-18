@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgRandomSample
     Public bFirstLoad As Boolean = True
     Private clsMultipleSamplesFunction As New RFunction
+    Public clsCurrentDistribution As New Distribution
     Private clsDistribtionFunction As New RFunction
     Private clsSetSeed As New RFunction
 
@@ -53,11 +54,12 @@ Public Class dlgRandomSample
 
     Private Sub SetDefaults()
         ucrPrefixNewColumns.SetName("Rand")
-        SetDataFrameParameters()
+        SetDataFrameandDistributionParameters()
         nudNumberOfSamples.Value = 1
         SetNumberOfSamplesParameters()
         chkSetSeed.Checked = False
         nudSeed.Value = 1
+        ucrDistWithParameters.SetParameters()
         SetSeedParameters()
     End Sub
 
@@ -65,8 +67,12 @@ Public Class dlgRandomSample
         SetAssignTo()
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
     Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorRandomSamples.DataFrameChanged
-        SetDataFrameParameters()
+        SetDataFrameandDistributionParameters()
         TestOKEnabled()
     End Sub
 
@@ -84,8 +90,13 @@ Public Class dlgRandomSample
         End If
     End Sub
 
-    Private Sub SetDataFrameParameters()
-        clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
+    Private Sub SetDataFrameandDistributionParameters()
+        If ucrDistWithParameters.clsCurrDistribution.strRName = "hyper" Then
+            clsDistribtionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
+        Else
+            clsDistribtionFunction.RemoveParameterByName("nn")
+            clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
+        End If
         SetAssignTo()
         TestOKEnabled()
     End Sub
@@ -172,4 +183,7 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrDistWithParameters_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDistWithParameters.cboDistributionsIndexChanged
+        SetDataFrameandDistributionParameters()
+    End Sub
 End Class
