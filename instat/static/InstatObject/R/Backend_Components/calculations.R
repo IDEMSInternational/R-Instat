@@ -102,15 +102,6 @@ instat_calculation <- R6Class("instat_calculation",
                        )
 )
 
-# village_group <- instat_calculation$new(type = "by", calculated_from = list(survey = "Village."))
-# total <- instat_calculation$new(function_exp = "n()", type = "summary", name = "total")
-# variety_group <- instat_calculation$new(type = "by", calculated_from = list(survey = "Variety."))
-# val <- instat_calculation$new(function_exp = "n()", type = "summary", name = "val", 
-#                               manipulations = list(variety_group))
-# prop_calc <- instat_calculation$new(function_exp = "val/total", type = "calculation", 
-#                                     name = "prop", manipulations = list(village_group), 
-#                                     sub_calculations = list(total, val))
-
 # pass in and return link with curr_data_list as one argument
 instat_object$set("public", "apply_instat_calculation", function(calc, curr_data_list) {
   data_label <- "data"
@@ -131,26 +122,60 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
     # this needs to change to do the joining correctly
     # through a similar process used by save_calculation to know how to add output
     else {
+      curr_calc_link_cols <- curr_sub_calc[[link_label]][["link_cols"]]
+      overall_calc_link_cols <- sub_calc_results[[link_label]][["link_cols"]]
+      
+      #### Set the require_merge boolean
+      sub_calc_results[[require_merge_label]] <- sub_calc_results[[require_merge_label]] || curr_sub_calc[[require_merge_label]]
+      
       #### Set the data
-      sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]])
+      # check new required merge
+      if(sub_calc_results[[require_merge_label]]) {
+        if(length(curr_calc_link_cols) > 0 || length(overall_calc_link_cols) > 0) {
+          # In this case, a summary has been done so joining column(s) should be available
+          # Join into the "biggest" data frame
+          if(length(curr_calc_link_cols) == 0) {
+            sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]], 
+                                                        by = overall_calc_link_cols)
+          }
+          else if(length(overall_calc_link_cols) == 0) {
+            sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]], 
+                                                        by = curr_calc_link_cols)
+          }
+          else {
+            sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]], 
+                                                        by = intersect(curr_calc_link_cols, overall_calc_link_cols))
+          }
+        }
+        else {
+          # In this case, join required but no summary has been done, so the join was required by a filter
+          # to do the join there must be a key defined in the "largest" dataframe
+          # Because no summary has been done, key can always be checked in to_data_frame of link??
+          
+        }
+      }
+      else {
+        # In this case, no join required so columns are simply added from the new calc into the exisiting calc's data
+        if(sub_calc$name %in% names(sub_calc_results[[data_label]])) warning(sub_calc$name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
+        sub_calc_results[[data_label]][[sub_calc$name]] <- curr_sub_calc[[data_label]][[sub_calc$name]]
+      }
       
       #### Set the link information
       #TODO Is this ok to do? Not using a link object, but list that can be used to create a link at end
-      if(length(curr_sub_calc[[link_label]][[link_cols]]) > length(sub_calc_results[[link_label]][[link_cols]])) {
+      if(length(curr_sub_calc[[link_label]][["link_cols"]]) > length(sub_calc_results[[link_label]][["link_cols"]])) {
         #Could these have different link columns? e.g. c("Village.") vs c("Variety.")
-        if(!all(sub_calc_results[[link_label]][[link_cols]] %in% curr_sub_calc[[link_label]][[link_cols]])) {
+        if(!all(sub_calc_results[[link_label]][["link_cols"]] %in% curr_sub_calc[[link_label]][["link_cols"]])) {
           stop("sub calculations cannot have disjoint linking columns")
         }
         #TODO need to check they have the same to_data_frame?
         sub_calc_results[[link_label]] <- curr_sub_calc[[link_label]]
       }
+      #print(sub_calc_results[[link_label]][["link_cols"]])
       else {
-        if(!all(curr_sub_calc[[link_label]][[link_cols]] %in% sub_calc_results[[link_label]][[link_cols]])) {
+        if(!all(curr_sub_calc[[link_label]][["link_cols"]] %in% sub_calc_results[[link_label]][["link_cols"]])) {
           stop("sub calculations cannot have disjoint linking columns")
         }
       }
-      #### Set the require_merge boolean
-      sub_calc_results[[require_merge_label]] <- sub_calc_results[[require_merge_label]] || curr_sub_calc[[require_merge_label]]
     }
     first_sub_calc <- FALSE
   }
@@ -166,7 +191,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       curr_data_list[[data_label]] <- self$get_data_frame(data_names[[1]])
       link_list <- list(data_names[[1]], c())
       names(link_list) <- c("to_data_frame", "link_cols")
-      curr_data_list[[list_label]] <- link_list
+      curr_data_list[[link_label]] <- link_list
       curr_data_list[[require_merge_label]] <- FALSE
     }
   }
@@ -186,6 +211,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   # replace curr_data_list with curr_data_list[[data]]
   if(calc$type == "calculation") {
     # link unchanged
+    if(calc$name %in% names(curr_data_list[[data_label]])) warning(calc$name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
     curr_data_list[[data_label]] <- curr_data_list[[data_label]] %>% mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$name))
   }
   else if(calc$type == "summary") {
@@ -193,8 +219,8 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
     # set requires_key = TRUE
     # TODO Could to_data_frame ever change?
     # TODO Is this always replacing the link_cols?
-    curr_data_list[[data_label]] <- curr_data_list[[data_label]] %>% summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$name))
     curr_data_list[[link_label]][["link_cols"]] <- as.character(groups(curr_data_list[[data_label]]))
+    curr_data_list[[data_label]] <- curr_data_list[[data_label]] %>% summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$name))
     curr_data_list[[require_merge_label]] <- TRUE
   }
   else if(calc$type == "by") {
