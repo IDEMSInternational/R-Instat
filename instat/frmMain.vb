@@ -27,7 +27,8 @@ Public Class frmMain
     Public clsGrids As New clsGridLink
     Public strStaticPath As String
     Public strHelpFilePath As String
-    Public strInstatOptionsPath As String
+    Public strAppDataPath As String
+    Public strInstatOptionsFile As String
     Public clsInstatOptions As InstatOptions
     Public clsRecentItems As New clsRecentFiles
     Public strCurrentDataFrame As String
@@ -50,7 +51,8 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
-        strInstatOptionsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\RInstatOptions.bin")
+        strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
+        strInstatOptionsFile = "RInstatOptions.bin"
         strSaveFilePath = ""
 
         clsRLink.SetEngine()
@@ -75,8 +77,8 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadInstatOptions()
-        If File.Exists(strInstatOptionsPath) Then
-            LoadInstatOptionsFromFile(strInstatOptionsPath)
+        If File.Exists(strInstatOptionsFile) Then
+            LoadInstatOptionsFromFile(strInstatOptionsFile)
         Else
             clsInstatOptions = New InstatOptions
             'TODO Should these be here or in the constructor (New) of InstatOptions?
@@ -997,8 +999,15 @@ Public Class frmMain
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         Dim close = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
         If close = DialogResult.Yes Then
-            clsRecentItems.saveOnClose()
-            SaveInstatOptions(strInstatOptionsPath)
+            Try
+                If (Not System.IO.Directory.Exists(strAppDataPath)) Then
+                    System.IO.Directory.CreateDirectory(strAppDataPath)
+                End If
+                clsRecentItems.saveOnClose()
+                SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
+            Catch ex As Exception
+                MsgBox("Error attempting to save setting files to App Data folder." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
+            End Try
         Else
             e.Cancel = True
         End If
