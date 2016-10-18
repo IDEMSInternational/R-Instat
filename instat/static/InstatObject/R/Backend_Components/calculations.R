@@ -100,7 +100,7 @@ instat_calculation <- R6Class("instat_calculation",
                          sub_calculations = list(),
                          function_exp = "",
                          calculated_from = list(),
-                         save_output <- FALSE
+                         save_output = FALSE
                        )
 )
 
@@ -263,6 +263,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   }
   else stop("Cannot detect calculation type: ", calc$type)
   
+  #TODO How should save work with main calculation/sub calculations mainly when main calc is "combination"
   if(calc$save_output) self$save_calc_output(calc, curr_data_list)
   # need to add metadata to new columns from calculation
   return(curr_data_list)
@@ -274,9 +275,10 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
   link_label <- "link"
   require_merge_label <- "require_merge"
   
+  calc_from_data_name <- curr_data_list[[link_label]][["from_data_frame"]]
+  calc_link_cols <- curr_data_list[[link_label]][["link_cols"]]
+  
   if(curr_data_list[[require_merge_label]]) {
-    calc_from_data_name <- curr_data_list[[link_label]][["from_data_frame"]]
-    calc_link_cols <- curr_data_list[[link_label]][["link_cols"]]
     if(length(calc_link_cols) > 0) {
       # In this case, a summary has been done so joining column(s) should be available
       if(self$link_exists_from(calc_from_data_name, calc_link_cols)) {
@@ -289,7 +291,8 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
         #   curr_data_list[[data_label]][[calc$name]] <- next_default_item(calc$name, names(to_data))
         # }
         #merge_data method takes care of data frame attributes correctly
-        self$get_data_objects(to_data_name)$merge_data(curr_data_list[[data_label]], by = calc_link_cols, type = "full")
+        #need to subset so that only column from this calc is added (not sub_calc columns as well)
+        self$get_data_objects(to_data_name)$merge_data(curr_data_list[[data_label]][c(calc_link_cols, calc$name)], by = calc_link_cols, type = "full")
       }
       else {
         # In this case, to_data_frame doesn't exist so output from calc becomes new data frame
@@ -299,7 +302,7 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
         to_data_name <- paste(calc_from_data_name, "by", paste(calc_link_cols, collapse = "_"), sep="_")
         to_data_name <- make.names(to_data_name)
         to_data_name <- next_default_item(to_data_name, self$get_data_names(), include_index = FALSE)
-        to_data_list[[to_data_name]] <- curr_data_list[[data_label]]
+        to_data_list[[to_data_name]] <- curr_data_list[[data_label]][c(calc_link_cols, calc$name)]
         self$import_data(to_data_list)
         new_obj <- self$get_data_objects(to_data_name)
         # TODO Should the be done here or in add_link?
@@ -308,22 +311,10 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
         names(new_key) <- new_key
         self$add_link(calc_from_data_name, to_data_name, new_key, keyed_link_label)
       }
-      # Now add metadata for new column
-      # calc_out_columns <- names(out)[-(1:length(factors))]
-      # dependent_cols <- list(calc_out_columns)
-      # names(dependent_cols) <- summary_name
-      # dependencies_cols <- list(columns_to_summarise)
-      # names(dependencies_cols) <- data_name
-      # calc_name <- self$save_calculation(summary_name, calc)
-      output_column <- calc$name
-      names(output_column) <- to_data_name
-      self$append_to_variables_metadata(calc_from_data_name, as.character(calc$calculated_from), has_dependants_label, TRUE)
-      self$add_dependent_columns(calc_from_data_name, as.character(calc$calculated_from), output_column)
-      self$append_to_variables_metadata(to_data_name, calc$name, is_calculated_label, TRUE)
-      self$append_to_variables_metadata(to_data_name, calc$name, calculated_by_label, calc$calculated_from)
       
       if(!to_data_exists) {
-        #TODO Is this correct? link cols may be changed by new calculation e.g. when using filters levels are different
+        # Add some metadata if the data frame did not already exist
+        # TODO Is this correct? link cols may be changed by new calculation e.g. when using filters levels are different
         self$append_to_variables_metadata(to_data_name, calc_link_cols, is_calculated_label, TRUE)
         self$append_to_variables_metadata(to_data_name, calc_link_cols, calculated_by_label, calc$calculated_from)
         self$append_to_dataframe_metadata(to_data_name, is_calculated_label, TRUE)
@@ -333,33 +324,41 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
     }
     else {
       # In this case, join required but no summary has been done, so the join was required by a filter
-      # to do the join there must be a key defined in the "largest" dataframe
+      # to do the join there must be a key defined in from dataframe
       # Because no summary has been done, key can always be checked in from_data_frame of link??
-      if(self$has_key(sub_calc_results[[link_label]][["from_data_frame"]])) {
-        keys_list <- self$get_keys(sub_calc_results[[link_label]][["from_data_frame"]])
+      if(self$has_key(calc_from_data_name)) {
+        keys_list <- self$get_keys(calc_from_data_name)
         joined <- FALSE
         for(curr_key in keys_list) {
-          if(all(curr_key %in% names(sub_calc_results[[data_label]])) && all(curr_key %in% names(curr_sub_calc[[data_label]]))) {
-            # subsets to only get output and key columns, but then join result includes lots of missing values
+          if(all(curr_key %in% names(curr_data_list[[data_label]]))) {
+            # subset first to only get output and key columns
+            # Needed so that sub calculations are not added as well
             #sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]][c(sub_calc$name, curr_key)], by = curr_key)
             #TODO This will join on all columns in the original data (including key), is there any case this could be a problem?
             #TODO Could add suppressMessages() here to prevent message about join
-            sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]])
+            self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[data_label]][c(curr_key, calc$name)], by = curr_key, type = "full")
             joined <- TRUE
             break
           }
         }
-        if(!joined) stop("Could not find a key to join by, which appeared in output from all sub calculations.")
+        if(!joined) stop("Could not find a key to join by, which appeared in output from this calculations.")
       }
       else {
-        stop("Cannot merge output from sub calculations because data frame does not have any defined keys.")
+        stop("Cannot merge output from this calculation because the data frame does not have any defined keys.")
       }
     }
   }
   else {
     # In this case, no join required so columns are simply added from the new calc into the exisiting calc's data
-    if(sub_calc$name %in% names(sub_calc_results[[data_label]])) warning(sub_calc$name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
-    sub_calc_results[[data_label]][[sub_calc$name]] <- curr_sub_calc[[data_label]][[sub_calc$name]]
+    if(calc$name %in% names(self$get_data_frame(calc_from_data_name))) warning(calc$name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
+    self$add_columns_to_data(calc_from_data_name, calc$name, curr_data_list[[data_label]][[calc$name]])
   }
+  # Add metadata for new column
+  output_column <- calc$name
+  names(output_column) <- to_data_name
+  self$append_to_variables_metadata(calc_from_data_name, as.character(calc$calculated_from), has_dependants_label, TRUE)
+  self$add_dependent_columns(calc_from_data_name, as.character(calc$calculated_from), output_column)
+  self$append_to_variables_metadata(to_data_name, calc$name, is_calculated_label, TRUE)
+  self$append_to_variables_metadata(to_data_name, calc$name, calculated_by_label, calc$calculated_from)
 }
 )
