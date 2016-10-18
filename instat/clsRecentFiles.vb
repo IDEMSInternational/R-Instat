@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Public Class clsRecentFiles
     Public mnuItems As New List(Of Form)
-    Private strRecentFilesPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\recent.mru")
+    Private strRecentFilesPath As String
     Private mnuTbShowLast10 As ToolStripDropDownItem
     Private mnuFile As ToolStripMenuItem
     Private sepStart As ToolStripSeparator
@@ -21,6 +21,7 @@ Public Class clsRecentFiles
     Public Sub checkOnLoad()
         'Checks for the existence of the file on form load
         ' load recently opened files
+        strRecentFilesPath = Path.Combine(frmMain.strAppDataPath, "recent.mru")
         If (File.Exists(strRecentFilesPath)) Then
             ' read file
             Dim sPaths() As String = File.ReadAllLines(strRecentFilesPath)
@@ -43,6 +44,7 @@ Public Class clsRecentFiles
     Public Sub saveOnClose()
         Dim sPath As String
 
+        strRecentFilesPath = Path.Combine(frmMain.strAppDataPath, "recent.mru")
         'saves the list of opened files on form close
         ' save MRU - delete existing files first
         File.WriteAllText(strRecentFilesPath, "")
