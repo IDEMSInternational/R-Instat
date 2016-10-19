@@ -25,9 +25,6 @@ Public Class dlgFileNew
         autoTranslate(Me)
         'TODO What should these defaults be?
         '     Defaults should be stored in Options dialog 
-
-        ucrName.Text = frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix).ToString()
-        ucrBase.clsRsyntax.SetAssignTo(ucrName.Text, strTempDataframe:=ucrName.Text)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -35,19 +32,21 @@ Public Class dlgFileNew
         Else
             ReopenDialog()
         End If
+        ucrName.Text = frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix).ToString()
+        ucrBase.clsRsyntax.SetAssignTo(ucrName.Text, strTempDataframe:=ucrName.Text)
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        nudRows.Maximum = 10000
-        nudRows.Minimum = 1
-        nudColumns.Maximum = 10000
-        nudColumns.Minimum = 1
-        ucrName.SetValidationTypeAsRVariable()
         clsMatrix.SetRCommand("matrix")
         clsMatrix.AddParameter("data", "NA")
         ucrBase.clsRsyntax.SetFunction("data.frame")
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsMatrix)
+        nudRows.Maximum = Integer.MaxValue
+        nudRows.Minimum = 1
+        nudColumns.Maximum = Integer.MaxValue
+        nudColumns.Minimum = 1
+        ucrName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub ReopenDialog()
@@ -80,5 +79,8 @@ Public Class dlgFileNew
 
     Private Sub ucrName_NameChanged() Handles ucrName.NameChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    End Sub
 End Class
-End Sub
