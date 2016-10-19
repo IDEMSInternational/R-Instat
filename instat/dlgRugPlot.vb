@@ -56,7 +56,7 @@ Public Class dlgRugPlot
 
     Private Sub TestOkEnabled()
         'tests when okay Is enable
-        If (ucrReceiverX.IsEmpty() And ucrVariablesAsFactorForRugPlot.IsEmpty) Or (ucrSaveRugPlot.chkSaveGraph.Checked And ucrSaveRugPlot.ucrInputGraphName.IsEmpty) Then
+        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForRugPlot.IsEmpty) OrElse (ucrSaveRugPlot.chkSaveGraph.Checked AndAlso ucrSaveRugPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -80,11 +80,12 @@ Public Class dlgRugPlot
         ucrReceiverX.Selector = ucrRugPlotSelector
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.Selector = ucrRugPlotSelector
-        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        'should the sdgLayerOptions be linked here as well ?
+        'should the sdgLayerOptions be linked here as well ? Apparently yes ?
         ucrBase.iHelpTopicID = 433
+        'wrong topic
 
         ucrSaveRugPlot.SetDataFrameSelector(ucrRugPlotSelector.ucrAvailableDataFrames)
         ucrSaveRugPlot.strPrefix = "Rug"
