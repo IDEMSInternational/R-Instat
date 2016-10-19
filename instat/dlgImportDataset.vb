@@ -62,9 +62,6 @@ Public Class dlgImportDataset
         Me.Show()
         If bFirstLoad Then
             InitialiseDialog()
-            SetCSVDefault()
-            setExcelDefaults()
-            SetRDSDefaults()
             SetDefaults()
             bFirstLoad = False
         End If
@@ -118,8 +115,8 @@ Public Class dlgImportDataset
         lblCannotImport.Hide()
         lblDataFrame.Hide()
         grdDataPreview.Hide()
-        ucrInputFilePath.ResetText()
-        ucrInputName.ResetText()
+        ucrInputFilePath.SetName("")
+        ucrInputName.SetName("")
         SetCSVDefault()
         setExcelDefaults()
         SetRDSDefaults()
