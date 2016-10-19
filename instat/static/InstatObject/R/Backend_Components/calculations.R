@@ -183,6 +183,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       overall_calc_link_cols <- sub_calc_results[[c_link_label]][["link_cols"]]
       
       if(sub_calc_results[[c_require_merge_label]]) {
+        #TODO What if summary was done but no linking columns?
         if(length(curr_calc_link_cols) > 0 || length(overall_calc_link_cols) > 0) {
           # If either list has linking columns then a summary has been done so joining column(s) should be available to perform a merge
           # We join into the "biggest" data frame
@@ -245,93 +246,109 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
                 break
               }
             }
+            # If no keys are in both data frames then impossible to join sensibly
             if(!joined) stop("Could not find a key to join by, which appeared in output from all sub calculations.")
           }
+          # If no keys are defined then impossible to join sensibly
           else {
             stop("Cannot merge output from sub calculations because data frame does not have any defined keys.")
           }
         }
       }
       else {
-        # In this case, no join required so columns are simply added from the new calc into the exisiting calc's data
+        # If merge is not required then calculation output can just be added to the data as a new column
+        # If this will replace a column then a warning is given.
+        # Duplicate names should be dealt with internally before applying the calculation unless a replacement is desired.
         if(sub_calc$result_name %in% names(sub_calc_results[[c_data_label]])) warning(sub_calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
         sub_calc_results[[c_data_label]][[sub_calc$result_name]] <- curr_sub_calc[[c_data_label]][[sub_calc$result_name]]
       }
     }
   }
+  # If there were any sub_calculations then the input for the main calculation should be the output from the last sub_calculation
+  # Otherwise it is the output from the mainipulations
   if(!first_sub_calc) curr_data_list <- sub_calc_results
   
+  # Names of the data frames required for the calculation
   data_names <- unique(as.vector(names(calc$calculated_from)))
+  # If argument was missing and there were no manipulations or sub_calculations then it should be created.
   if(missing(curr_data_list)) {
     if(length(data_names) == 0) stop("No data specified for calculation.")
     else if(length(data_names) > 1) stop("Calculations from multiple data frame not yet implemented")
     else {
-      # change to set data part
-      # create/get link from data to itself
-      # set require_merge boolean to FALSE as default
       curr_data_list <- list()
-      #TODO How does current filter work with this? Should current filter be ignored here? (use_current_filter = FALSE)
       #TODO Add current filter as manipulation in calc definition if needed.
+      # The data is the data from the instat object based on data_names
       curr_data_list[[c_data_label]] <- self$get_data_frame(data_names[[1]], use_current_filter = FALSE)
+      # The link has from_data_frame based on data_names and no current linking columns
       link_list <- list(data_names[[1]], c())
       names(link_list) <- c("from_data_frame", "link_cols")
       curr_data_list[[c_link_label]] <- link_list
+      # By default, a merge is not required
       curr_data_list[[c_require_merge_label]] <- FALSE
     }
   }
   
   col_names_exp = c()
   i = 1
+  # This checks that the columns specified in calculated_from appear in the current data
   for(col_name in calc$calculated_from) {
     if(!(col_name %in% names(curr_data_list[[c_data_label]]))) {
       stop(col_name, " not found in data.")
     }
+    # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
     col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
     i = i + 1
   }
   
+  # this type is adding a column to the data
+  # the data is at the same "level" so the link is unchanged
   if(calc$type == "calculation") {
-    # link unchanged
     if(calc$result_name %in% names(curr_data_list[[c_data_label]])) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
   }
+  # this type performs a summary
+  # the data is not at a different "level" so the link is changed and link columns are the groups of the data before summarising
+  # A merge is now required because the data is at a different "level"
   else if(calc$type == "summary") {
-    # modify link to include linking columns
-    # set requires_key = TRUE
-    # from_data_frame only changes in join
-    # TODO Is this always replacing the link_cols?
     curr_data_list[[c_link_label]][["link_cols"]] <- as.character(groups(curr_data_list[[c_data_label]]))
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
     curr_data_list[[c_require_merge_label]] <- TRUE
   }
+  # This type is grouping the data
+  # The data remains unchanged so link and require merge remain unchanged
   else if(calc$type == "by") {
     # link unchanged
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(.dots = col_names_exp, add = TRUE)
   }
+  # This type is filtering the data
+  # The data is at the same "level" so the link is unchanged
+  # The rows are now different so a merge is required
   else if(calc$type == "filter") {
-    # link unchanged
-    # set requires_key = TRUE
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% filter_(.dots = as.formula(paste0("~", calc$function_exp)))
     curr_data_list[[c_require_merge_label]] <- TRUE
   }
+  # This type is merging the data
+  # The link will be changed
   else if(calc$type == "join") {
     # link needs to change
     stop("join not yet implemented.")
   }
+  # This type is when there is no main calculation but some subcalculations
+  # There is no change to the data
   else if(calc$type == "combination") {
-    # No main calculation, but could (should?) have sub calculations
   }
   else stop("Cannot detect calculation type: ", calc$type)
   
-  #TODO How should save work with main calculation/sub calculations mainly when main calc is "combination"
   # if calc$save_output then column generated by calculation is saved into instat object
   # save_calc_output also checks calc$save_calc and saves it in the to_data_frame if TRUE
   if(calc$save_output) self$save_calc_output(calc, curr_data_list)
   else {
-    # if !calc$save_output then calc is saved in the from_data_frame if it is saved
+    # if output is not saved the calculation can still be saved but now it is saved with the from_data_frame
+    # (to_data_frame may not exist)
     # TODO if multiple from_data_frames exist then where should calc be saved?
     if(calc$save_calc) self$save_calculation(data_names, calc)
   }
+  # list is returned so it can be used recursively for manipulations, sub_calculations etc.
   return(curr_data_list)
 }
 )
