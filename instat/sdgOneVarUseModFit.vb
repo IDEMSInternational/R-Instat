@@ -17,11 +17,6 @@ Imports instat.Translations
 
 Public Class sdgOneVarUseModFit
     Private clsRplotFunction As New RFunction
-    Private clsRppFunction As New RFunction
-    Private clsRqqFunction As New RFunction
-    Private clsRdensFunction As New RFunction
-    Private clsRcdfFunction As New RFunction
-    Private clsRCIcdfFunction As New RFunction
     Public clsRbootFunction As New RFunction
     Private clsRseqFunction As New RFunction
     Private clsModel As New RFunction
@@ -33,12 +28,6 @@ Public Class sdgOneVarUseModFit
     End Sub
 
     Public Sub InitialiseDialog()
-        clsRplotFunction.SetRCommand("plot")
-        clsRcdfFunction.SetRCommand("cdfcomp")
-        clsRppFunction.SetRCommand("ppcomp")
-        clsRdensFunction.SetRCommand("denscomp")
-        clsRqqFunction.SetRCommand("qqcomp")
-        clsRCIcdfFunction.SetRCommand("CIcdfplot")
         nudFrom.Minimum = 0
         nudFrom.Maximum = 1
         nudFrom.Increment = 0.05
@@ -54,8 +43,6 @@ Public Class sdgOneVarUseModFit
         rdoPlotAll.Checked = True
         rdoSeqValues.Checked = True
         rdoInsertValues.Enabled = False
-        'any of InsertValues needs to be disabled here.
-        'ucrBase.ihelptopicID = 
         SetPlotOptions()
         nudFrom.Value = 0
         nudTo.Value = 1
@@ -68,26 +55,32 @@ Public Class sdgOneVarUseModFit
 
     Public Sub CreateGraphs()
         If rdoPlotAll.Checked Then
+            clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetRCommand("plot")
             clsRplotFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
         ElseIf rdoPPPlot.Checked Then
-            clsRppFunction.SetRCommand("ppcomp")
-            clsRppFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRppFunction.ToScript(), 2)
+            clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetRCommand("ppcomp")
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoCDFPlot.Checked Then
-            clsRcdfFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRcdfFunction.ToScript(), 2)
+            clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetRCommand("cdfcomp")
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoQQPlot.Checked Then
-            clsRqqFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRqqFunction.ToScript(), 2)
+            clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetRCommand("qqcomp")
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoDensityPlot.Checked Then
-            clsRdensFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRdensFunction.ToScript(), 2)
+            clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetRCommand("denscomp")
+            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
         ElseIf rdoCIcdf.Checked Then
-            clsRCIcdfFunction.AddParameter("b", clsRFunctionParameter:=clsRbootFunction)
-            clsRCIcdfFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
-            frmMain.clsRLink.RunScript(clsRCIcdfFunction.ToScript(), 2)
+            clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetRCommand("CIcdfplot")
+            clsRplotFunction.AddParameter("b", clsRFunctionParameter:=clsRbootFunction)
+            clsRplotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
+        frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
     End Sub
 
     Public Sub SetMyBootFunction(clsRNewBoot As RFunction)
@@ -115,8 +108,14 @@ Public Class sdgOneVarUseModFit
         Else
             rdoCIcdf.Enabled = True
         End If
+    End Sub
 
-        ' if discrete discribution then cannot do PP, QQ, dens
+    Private Sub rdoInsertValues_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertValues.CheckedChanged
+        If rdoInsertValues.Checked Then
+            ucrInputValues.Enabled = True
+        Else
+            ucrInputValues.Enabled = False
+        End If
     End Sub
 
 End Class

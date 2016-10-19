@@ -130,7 +130,10 @@ Public Class ucrButtons
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        HelpContent()
+    End Sub
 
+    Private Sub HelpContent()
         ' (1) Use HelpNDoc's Help Context number. Not dependent on HelpNDoc.
         If iHelpTopicID > 0 Then
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())
@@ -145,7 +148,6 @@ Public Class ucrButtons
         '     covertion from .bas) to refer to the Help Context numbers.
         'Help.ShowHelp(Me, strHelpFilePath, HelpNavigator.TopicId, mHelpConstants.HELP_Maths.ToString)
     End Sub
-
     Private Sub chkComment_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkComment.KeyPress
         If e.KeyChar = vbCr And chkComment.Checked = True Then
             chkComment.Checked = False

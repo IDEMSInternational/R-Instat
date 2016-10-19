@@ -64,9 +64,9 @@ Partial Class frmMain
         Me.mnuDescribeThemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelProbabilityDistributionsTablesPlus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsShowModels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TablesPlusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOneVariableFitModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -322,11 +322,11 @@ Partial Class frmMain
         Me.mnuOrganiseColumnTextMatch = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnTextDistance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateGenerateDateColumn = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateUseDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateUseDateMakeTime = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDateUseDateUseTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnGenerateDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnUseDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnMakeTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnUseTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
@@ -654,11 +654,17 @@ Partial Class frmMain
         '
         'mnuModelProbabilityDistributions
         '
-        Me.mnuModelProbabilityDistributions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributionsShowModels, Me.mnuModelProbabilityDistributionsRandomSamplesUseModel, Me.TablesPlusToolStripMenuItem})
+        Me.mnuModelProbabilityDistributions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributionsTablesPlus, Me.mnuModelProbabilityDistributionsShowModels, Me.mnuModelProbabilityDistributionsRandomSamplesUseModel})
         Me.mnuModelProbabilityDistributions.Name = "mnuModelProbabilityDistributions"
         Me.mnuModelProbabilityDistributions.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelProbabilityDistributions.Tag = "Probability_Distributions"
         Me.mnuModelProbabilityDistributions.Text = "Probability Distributions"
+        '
+        'mnuModelProbabilityDistributionsTablesPlus
+        '
+        Me.mnuModelProbabilityDistributionsTablesPlus.Name = "mnuModelProbabilityDistributionsTablesPlus"
+        Me.mnuModelProbabilityDistributionsTablesPlus.Size = New System.Drawing.Size(242, 22)
+        Me.mnuModelProbabilityDistributionsTablesPlus.Text = "Tables Plus..."
         '
         'mnuModelProbabilityDistributionsShowModels
         '
@@ -674,12 +680,6 @@ Partial Class frmMain
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel.Size = New System.Drawing.Size(242, 22)
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel.Tag = "RandomSamples_(Use_Model)..."
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel.Text = "Random Samples (Use Model)..."
-        '
-        'TablesPlusToolStripMenuItem
-        '
-        Me.TablesPlusToolStripMenuItem.Name = "TablesPlusToolStripMenuItem"
-        Me.TablesPlusToolStripMenuItem.Size = New System.Drawing.Size(242, 22)
-        Me.TablesPlusToolStripMenuItem.Text = "Tables Plus"
         '
         'ToolStripSeparator3
         '
@@ -891,28 +891,28 @@ Partial Class frmMain
         'mnuModelOtherTwoVariablesTwoSamples
         '
         Me.mnuModelOtherTwoVariablesTwoSamples.Name = "mnuModelOtherTwoVariablesTwoSamples"
-        Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesTwoSamples.Tag = "Two_Samples..."
         Me.mnuModelOtherTwoVariablesTwoSamples.Text = "Two Samples..."
         '
         'mnuModelOtherTwoVariablesSummaryData
         '
         Me.mnuModelOtherTwoVariablesSummaryData.Name = "mnuModelOtherTwoVariablesSummaryData"
-        Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesSummaryData.Tag = "Summary_Data"
         Me.mnuModelOtherTwoVariablesSummaryData.Text = "Summary Data..."
         '
         'mnuModelOtherTwoVariablesSimpleRegression
         '
         Me.mnuModelOtherTwoVariablesSimpleRegression.Name = "mnuModelOtherTwoVariablesSimpleRegression"
-        Me.mnuModelOtherTwoVariablesSimpleRegression.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesSimpleRegression.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesSimpleRegression.Tag = "Simple_Regression"
         Me.mnuModelOtherTwoVariablesSimpleRegression.Text = "Simple Regression..."
         '
         'mnuModelOtherTwoVariablesOneWayANOVA
         '
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Name = "mnuModelOtherTwoVariablesOneWayANOVA"
-        Me.mnuModelOtherTwoVariablesOneWayANOVA.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesOneWayANOVA.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Tag = "One_Way_ANOVA"
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Text = "One Way ANOVA..."
         '
@@ -920,14 +920,14 @@ Partial Class frmMain
         '
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Enabled = False
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Name = "mnuModelOtherTwoVariablesNonParametricTwoSamples"
-        Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Tag = "Non_Parameteric_Two_Samples"
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Text = "Non Parametric Two Samples..."
         '
         'mnuModelOtherTwoVariablesNonParametricOneWayANOVA
         '
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Name = "mnuModelOtherTwoVariablesNonParametricOneWayANOVA"
-        Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Tag = "Non_Parameteric_One_Way_ANOVA..."
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Text = "Non Parameteric One Way ANOVA..."
         '
@@ -943,21 +943,21 @@ Partial Class frmMain
         '
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Enabled = False
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Name = "mnuModelOtherThreeVariablesSimpleWithGroups"
-        Me.mnuModelOtherThreeVariablesSimpleWithGroups.Size = New System.Drawing.Size(262, 22)
+        Me.mnuModelOtherThreeVariablesSimpleWithGroups.Size = New System.Drawing.Size(260, 22)
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Tag = "Simple_with_groups"
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Text = "Simple With Groups..."
         '
         'mnuModelOtherThreeVariablesNonParametricTwoWayANOVA
         '
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Name = "mnuModelOtherThreeVariablesNonParametricTwoWayANOVA"
-        Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Size = New System.Drawing.Size(262, 22)
+        Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Size = New System.Drawing.Size(260, 22)
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Tag = "Non_Parametric_Two_Way_ANOVA..."
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Text = "Non Parametric Two Way ANOVA..."
         '
         'mnuModelOtherThreeVariablesChisquareTest
         '
         Me.mnuModelOtherThreeVariablesChisquareTest.Name = "mnuModelOtherThreeVariablesChisquareTest"
-        Me.mnuModelOtherThreeVariablesChisquareTest.Size = New System.Drawing.Size(262, 22)
+        Me.mnuModelOtherThreeVariablesChisquareTest.Size = New System.Drawing.Size(260, 22)
         Me.mnuModelOtherThreeVariablesChisquareTest.Tag = "Chi-square_Test"
         Me.mnuModelOtherThreeVariablesChisquareTest.Text = "Chi-square Test..."
         '
@@ -972,21 +972,21 @@ Partial Class frmMain
         'mnuModelOtherGeneralANOVAGeneral
         '
         Me.mnuModelOtherGeneralANOVAGeneral.Name = "mnuModelOtherGeneralANOVAGeneral"
-        Me.mnuModelOtherGeneralANOVAGeneral.Size = New System.Drawing.Size(167, 22)
+        Me.mnuModelOtherGeneralANOVAGeneral.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralANOVAGeneral.Tag = "ANOVA_General..."
         Me.mnuModelOtherGeneralANOVAGeneral.Text = "ANOVA General..."
         '
         'mnuModelOtherGeneralRegression
         '
         Me.mnuModelOtherGeneralRegression.Name = "mnuModelOtherGeneralRegression"
-        Me.mnuModelOtherGeneralRegression.Size = New System.Drawing.Size(167, 22)
+        Me.mnuModelOtherGeneralRegression.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralRegression.Tag = "Regression"
         Me.mnuModelOtherGeneralRegression.Text = "Regression..."
         '
         'mnuModelOtherGeneralLogLinear
         '
         Me.mnuModelOtherGeneralLogLinear.Name = "mnuModelOtherGeneralLogLinear"
-        Me.mnuModelOtherGeneralLogLinear.Size = New System.Drawing.Size(167, 22)
+        Me.mnuModelOtherGeneralLogLinear.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralLogLinear.Tag = "Log_Linear"
         Me.mnuModelOtherGeneralLogLinear.Text = "Log Linear..."
         '
@@ -2464,7 +2464,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnFactorFactorDataFrame
         '
-        Me.mnuOrganiseColumnFactorFactorDataFrame.Enabled = False
         Me.mnuOrganiseColumnFactorFactorDataFrame.Name = "mnuOrganiseColumnFactorFactorDataFrame"
         Me.mnuOrganiseColumnFactorFactorDataFrame.Size = New System.Drawing.Size(179, 22)
         Me.mnuOrganiseColumnFactorFactorDataFrame.Tag = "Factor_Data_Frame"
@@ -2525,42 +2524,40 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnDate
         '
-        Me.mnuOrganiseColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateGenerateDateColumn, Me.mnuOrganiseColumnDateUseDate})
+        Me.mnuOrganiseColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnGenerateDate, Me.mnuOrganiseColumnMakeDate, Me.mnuOrganiseColumnUseDate, Me.mnuOrganiseColumnMakeTime, Me.mnuOrganiseColumnUseTime})
         Me.mnuOrganiseColumnDate.Name = "mnuOrganiseColumnDate"
         Me.mnuOrganiseColumnDate.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseColumnDate.Text = "Column: Date"
         '
-        'mnuOrganiseColumnDateGenerateDateColumn
+        'mnuOrganiseColumnGenerateDate
         '
-        Me.mnuOrganiseColumnDateGenerateDateColumn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate})
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Name = "mnuOrganiseColumnDateGenerateDateColumn"
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Size = New System.Drawing.Size(194, 22)
-        Me.mnuOrganiseColumnDateGenerateDateColumn.Text = "Generate Date Column"
+        Me.mnuOrganiseColumnGenerateDate.Name = "mnuOrganiseColumnGenerateDate"
+        Me.mnuOrganiseColumnGenerateDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnGenerateDate.Text = "Generate Dates..."
         '
-        'mnuOrganiseColumnDateGenerateDateColumnMakeDate
+        'mnuOrganiseColumnMakeDate
         '
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Name = "mnuOrganiseColumnDateGenerateDateColumnMakeDate"
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Size = New System.Drawing.Size(139, 22)
-        Me.mnuOrganiseColumnDateGenerateDateColumnMakeDate.Text = "Make Date..."
+        Me.mnuOrganiseColumnMakeDate.Name = "mnuOrganiseColumnMakeDate"
+        Me.mnuOrganiseColumnMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnMakeDate.Text = "Make Date..."
         '
-        'mnuOrganiseColumnDateUseDate
+        'mnuOrganiseColumnUseDate
         '
-        Me.mnuOrganiseColumnDateUseDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnDateUseDateMakeTime, Me.mnuOrganiseColumnDateUseDateUseTime})
-        Me.mnuOrganiseColumnDateUseDate.Name = "mnuOrganiseColumnDateUseDate"
-        Me.mnuOrganiseColumnDateUseDate.Size = New System.Drawing.Size(194, 22)
-        Me.mnuOrganiseColumnDateUseDate.Text = "Use Date"
+        Me.mnuOrganiseColumnUseDate.Name = "mnuOrganiseColumnUseDate"
+        Me.mnuOrganiseColumnUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnUseDate.Text = "Use Date..."
         '
-        'mnuOrganiseColumnDateUseDateMakeTime
+        'mnuOrganiseColumnMakeTime
         '
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Name = "mnuOrganiseColumnDateUseDateMakeTime"
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Size = New System.Drawing.Size(142, 22)
-        Me.mnuOrganiseColumnDateUseDateMakeTime.Text = "Make Time..."
+        Me.mnuOrganiseColumnMakeTime.Name = "mnuOrganiseColumnMakeTime"
+        Me.mnuOrganiseColumnMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnMakeTime.Text = "Make Time..."
         '
-        'mnuOrganiseColumnDateUseDateUseTime
+        'mnuOrganiseColumnUseTime
         '
-        Me.mnuOrganiseColumnDateUseDateUseTime.Name = "mnuOrganiseColumnDateUseDateUseTime"
-        Me.mnuOrganiseColumnDateUseDateUseTime.Size = New System.Drawing.Size(142, 22)
-        Me.mnuOrganiseColumnDateUseDateUseTime.Text = "Use Date..."
+        Me.mnuOrganiseColumnUseTime.Name = "mnuOrganiseColumnUseTime"
+        Me.mnuOrganiseColumnUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuOrganiseColumnUseTime.Text = "Use Time..."
         '
         'mnuOrganiseColumnReshape
         '
@@ -2768,7 +2765,7 @@ Partial Class frmMain
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRunRCode, Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsSaveCurrentOptions, Me.mnuToolsLoadOptions, Me.mnuToolsOptions})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(48, 20)
+        Me.mnuTools.Size = New System.Drawing.Size(47, 20)
         Me.mnuTools.Text = "Tools"
         '
         'mnuToolsRunRCode
@@ -3158,13 +3155,10 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnGenerateCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator25 As ToolStripSeparator
     Friend WithEvents mnuOrganiseColumnDate As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateGenerateDateColumn As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateGenerateDateColumnMakeDate As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateUseDate As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateUseDateMakeTime As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnDateUseDateUseTime As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnGenerateDate As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnUseDate As ToolStripMenuItem
     Friend WithEvents mnuFileConvert As ToolStripMenuItem
-    Friend WithEvents TablesPlusToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuModelProbabilityDistributionsTablesPlus As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariate As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariateCorrelations As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariateprincipalComponents As ToolStripMenuItem
@@ -3196,4 +3190,7 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeOtherGraphicsDialogsCumulativeDistribution As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsInventoryPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsPopulationPyramid As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnMakeDate As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnMakeTime As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnUseTime As ToolStripMenuItem
 End Class
