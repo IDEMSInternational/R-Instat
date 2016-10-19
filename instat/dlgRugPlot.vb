@@ -121,10 +121,7 @@ Public Class dlgRugPlot
     End Sub
 
     Private Sub cmdRugPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdRugPlotOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_RugPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True, bHideApplyToAllLayers:=True)
-        'Attempt to solve the Apply to all Layers problem: when I untick the Apply To All Layers that appear on the sdg raised by RugPlotOptions, what I have selected in the options are not carried through to RugPlot dialogue... 
-        'Hence I have added a parameter bHideApplyToAllLayers  to the functions SetupLayer in sdgLayerOptions And subsequently in Setup in ucrGeomListWithAes, that when True (default is False), will trigger chkApplyOnAllLayers.Hide() in the ucrGeomListWithAes.
-        'It is not very very clean in the sense that it doesn't do it for all the specific dialogues and should be added independently, but might work anyway...
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_RugPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
         sdgLayerOptions.ShowDialog()
 
         For Each clsParam In clsRaesFunction.clsParameters

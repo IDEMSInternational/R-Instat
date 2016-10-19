@@ -61,8 +61,7 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
-    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing, Optional bHideApplyToAllLayers As Boolean = False)
-        'the last parameter bHideApplyToAllLayers is there in case we want to hide chkApplyOnAllLayers, see below...
+    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempGlobalAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         strGlobalDataFrame = strDataframe
         If clsTempLocalAes IsNot Nothing Then
@@ -76,11 +75,6 @@ Public Class UcrGeomListWithParameters
         bCurrentFixAes = bFixAes
         SetAes(bCurrentFixAes)
         chkApplyOnAllLayers.Checked = bUseGlobalAes
-        If bHideApplyToAllLayers Then
-            chkApplyOnAllLayers.Hide()
-        Else chkApplyOnAllLayers.Show()
-            'In case the sdg is reused somewhere else...This line might not be needed, to be investigated.
-        End If
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)
