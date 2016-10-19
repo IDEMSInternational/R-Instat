@@ -65,6 +65,7 @@ Public Class dlgImportDataset
             SetCSVDefault()
             setExcelDefaults()
             SetRDSDefaults()
+            SetDefaults()
             bFirstLoad = False
         End If
         If strFilePathToUseOnLoad <> "" Then
@@ -107,6 +108,23 @@ Public Class dlgImportDataset
         nudSkip.Maximum = Integer.MaxValue
     End Sub
 
+    Private Sub SetDefaults()
+        grpCSV.Hide()
+        grpRDS.Hide()
+        grpExcel.Hide()
+        txtPreview.Hide()
+        lblInputFile.Hide()
+        lblNoPreview.Hide()
+        lblCannotImport.Hide()
+        lblDataFrame.Hide()
+        grdDataPreview.Hide()
+        ucrInputFilePath.ResetText()
+        ucrInputName.ResetText()
+        SetCSVDefault()
+        setExcelDefaults()
+        SetRDSDefaults()
+    End Sub
+
 #Region "Shared options"
     Public Sub setLinesToRead(lines As Integer)
         intLines = lines
@@ -124,7 +142,7 @@ Public Class dlgImportDataset
 
 #Region "Dialog options"
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetCSVDefault()
+        SetDefaults()
         RefreshFrameView()
     End Sub
 
@@ -175,7 +193,9 @@ Public Class dlgImportDataset
                     grpExcel.Hide()
                     grpRDS.Hide()
                     grdDataPreview.Hide()
+                    lblDataFrame.Hide()
                     txtPreview.Hide()
+                    lblInputFile.Hide()
                 End If
             End If
             TestOkEnabled()
@@ -193,7 +213,9 @@ Public Class dlgImportDataset
         strFileExt = Path.GetExtension(strFilePath)
         ucrInputFilePath.SetName(strFilePath)
         grdDataPreview.Show()
+        lblDataFrame.Show()
         txtPreview.Show()
+        lblInputFile.Show()
         ucrInputName.Show()
         lblName.Show()
         If strFileExt = ".RDS" Then
@@ -257,7 +279,9 @@ Public Class dlgImportDataset
             grpExcel.Hide()
             grpRDS.Hide()
             grdDataPreview.Show()
+            lblDataFrame.Show()
             txtPreview.Hide()
+            lblInputFile.Hide()
             ucrInputName.SetName(strFileName, bSilent:=True)
             ucrInputName.Focus()
         End If
@@ -270,7 +294,6 @@ Public Class dlgImportDataset
 #Region "File Preview options"
     Public Sub RefreshFilePreview()
         Dim sReader As StreamReader
-
         If strFileType = "csv" AndAlso ucrInputFilePath.GetText() <> "" Then
             Try
                 sReader = New StreamReader(ucrInputFilePath.GetText())
@@ -309,62 +332,64 @@ Public Class dlgImportDataset
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
         ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
         If strFileType <> "RDS" Then
-            grdDataPreview.Show()
-            If strFileType = "csv" Then
-                clsReadCSV.AddParameter("nrows", intLines)
-            ElseIf strFileType = "xlsx" Then
-                clsReadXL.AddParameter("rows", "1:" & intLines)
-            End If
-            lblCannotImport.Hide()
-            lblNoPreview.Hide()
-            If ucrInputFilePath.IsEmpty() Then
-                bValid = False
-            Else
-                clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
-                expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
-                bValid = (expTemp IsNot Nothing)
-            End If
-            If bValid Then
-                dfTemp = Nothing
-                If expTemp IsNot Nothing Then
-                    dfTemp = expTemp.AsDataFrame
+                grdDataPreview.Show()
+                lblDataFrame.Show()
+                If strFileType = "csv" Then
+                    clsReadCSV.AddParameter("nrows", intLines)
+                ElseIf strFileType = "xlsx" Then
+                    clsReadXL.AddParameter("rows", "1:" & intLines)
                 End If
-                If dfTemp Is Nothing Then
+                lblCannotImport.Hide()
+                lblNoPreview.Hide()
+                If ucrInputFilePath.IsEmpty() Then
                     bValid = False
                 Else
-                    ucrBase.clsRsyntax.RemoveParameter("nrows")
-                    ucrBase.clsRsyntax.RemoveParameter("rows")
-                    ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
-                    Try
-                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False)
-                        grdDataPreview.Enabled = True
-                        bCanImport = True
-                    Catch
+                    clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+                    expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
+                    bValid = (expTemp IsNot Nothing)
+                End If
+                If bValid Then
+                    dfTemp = Nothing
+                    If expTemp IsNot Nothing Then
+                        dfTemp = expTemp.AsDataFrame
+                    End If
+                    If dfTemp Is Nothing Then
                         bValid = False
-                    End Try
+                    Else
+                        ucrBase.clsRsyntax.RemoveParameter("nrows")
+                        ucrBase.clsRsyntax.RemoveParameter("rows")
+                        ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
+                        Try
+                            frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False)
+                            grdDataPreview.Enabled = True
+                            bCanImport = True
+                        Catch
+                            bValid = False
+                        End Try
+                    End If
                 End If
-            End If
-            If Not bValid Then
+                If Not bValid Then
+                    grdDataPreview.CurrentWorksheet.Reset()
+                    grdDataPreview.Enabled = False
+                    If Not ucrInputFilePath.IsEmpty() Then
+                        lblCannotImport.Show()
+                    Else
+                        lblCannotImport.Hide()
+                    End If
+                    bCanImport = False
+                End If
+            Else
+                bCanImport = True
+                lblCannotImport.Hide()
+                lblNoPreview.Show()
                 grdDataPreview.CurrentWorksheet.Reset()
-                grdDataPreview.Enabled = False
-                If Not ucrInputFilePath.IsEmpty() Then
-                    lblCannotImport.Show()
-                Else
-                    lblCannotImport.Hide()
-                End If
-                bCanImport = False
+                grdDataPreview.Hide()
+                lblDataFrame.Hide()
             End If
-        Else
-            bCanImport = True
-            lblCannotImport.Hide()
-            lblNoPreview.Show()
-            grdDataPreview.CurrentWorksheet.Reset()
-            grdDataPreview.Hide()
-        End If
-        If grdDataPreview.CurrentWorksheet IsNot Nothing Then
-            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
-        End If
+            If grdDataPreview.CurrentWorksheet IsNot Nothing Then
+                grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+                grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
+            End If
         'Remove as may have other effects
         'For Each control In Me.Controls
         '    control.Enabled = True
