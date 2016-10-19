@@ -59,15 +59,14 @@ Public Class sdgLayerOptions
 
     End Sub
 
-    Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing, Optional bHideApplyToAllLayers As Boolean = False)
-        'the last parameter bHideApplyToAllLayers is there in case we want to hide chkApplyOnAllLayers, it is then given through ucrLayerParameterSetup
+    Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         If clsTempGeomFunc Is Nothing Then
             clsTempGeomFunc = New RFunction
         End If
         clsGeomFunction = clsTempGeomFunc
         clsAesFunction = clsTempAesFunc
         clsGgplotFunction = clsTempGgPlot
-        ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes, bHideApplyToAllLayers)
+        ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes) 'Don't really need to give all parameters through as this function just calls the mother Setup from ucrGeom who doesn't use some of them which are optional, such as clsTempLocalAes...
         'Warning, when coming back to a layer where the geom was not fixed, the geom is now fixed... 
     End Sub
