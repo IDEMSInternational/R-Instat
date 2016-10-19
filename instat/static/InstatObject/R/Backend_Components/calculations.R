@@ -121,35 +121,39 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       sub_calc_results <- curr_sub_calc
       first_sub_calc <- FALSE
     }
-    # change to joining all parts of list (data, link, boolean)
-    # to merge links from all sub calculations, take link of the "biggest" data frame
-    # below is joining the data frame only
-    # this needs to change to do the joining correctly
-    # through a similar process used by save_calculation to know how to add output
     else {
-      curr_calc_link_cols <- curr_sub_calc[[link_label]][["link_cols"]]
-      overall_calc_link_cols <- sub_calc_results[[link_label]][["link_cols"]]
-      
       #### Set the require_merge boolean
       sub_calc_results[[require_merge_label]] <- sub_calc_results[[require_merge_label]] || curr_sub_calc[[require_merge_label]]
       
       #### Set the data
       # check new required merge
+      curr_calc_link_cols <- curr_sub_calc[[link_label]][["link_cols"]]
+      overall_calc_link_cols <- sub_calc_results[[link_label]][["link_cols"]]
       if(sub_calc_results[[require_merge_label]]) {
         if(length(curr_calc_link_cols) > 0 || length(overall_calc_link_cols) > 0) {
           # In this case, a summary has been done so joining column(s) should be available
           # Join into the "biggest" data frame
           if(length(curr_calc_link_cols) == 0) {
-            sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]], 
+            sub_calc_results[[data_label]] <- full_join(curr_sub_calc[[data_label]], sub_calc_results[[data_label]], 
                                                         by = overall_calc_link_cols)
+            sub_calc_results[[link_label]] <- curr_sub_calc[[link_label]]
           }
           else if(length(overall_calc_link_cols) == 0) {
             sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]], 
                                                         by = curr_calc_link_cols)
           }
           else {
-            sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]], 
-                                                        by = intersect(curr_calc_link_cols, overall_calc_link_cols))
+            if(all(sub_calc_results[[link_label]][["link_cols"]] %in% curr_sub_calc[[link_label]][["link_cols"]])) {
+              sub_calc_results[[link_label]] <- curr_sub_calc[[link_label]]
+              sub_calc_results[[data_label]] <- full_join(curr_sub_calc[[data_label]], sub_calc_results[[data_label]],
+                                                          by = intersect(curr_calc_link_cols, overall_calc_link_cols))
+            }
+            else if(all(curr_sub_calc[[link_label]][["link_cols"]] %in% sub_calc_results[[link_label]][["link_cols"]])) {
+              sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]], 
+                                                          by = intersect(curr_calc_link_cols, overall_calc_link_cols))
+            }
+            else stop("sub calculations cannot have disjoint linking columns")
+            #TODO need to check they have the same from_data_frame?
           }
         }
         else {
@@ -165,8 +169,14 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
                 #sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]][c(sub_calc$name, curr_key)], by = curr_key)
                 #TODO This will join on all columns in the original data (including key), is there any case this could be a problem?
                 #TODO Could add suppressMessages() here to prevent message about join
-                sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]])
-                joined <- TRUE
+                if(sub_calc_results[[require_merge_label]]) {
+                  sub_calc_results[[data_label]] <- full_join(curr_sub_calc[[data_label]], sub_calc_results[[data_label]])
+                  joined <- TRUE
+                }
+                else if(curr_sub_calc[[require_merge_label]]) {
+                  sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]])
+                  joined <- TRUE
+                }
                 break
               }
             }
@@ -182,22 +192,6 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
         if(sub_calc$name %in% names(sub_calc_results[[data_label]])) warning(sub_calc$name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
         sub_calc_results[[data_label]][[sub_calc$name]] <- curr_sub_calc[[data_label]][[sub_calc$name]]
       }
-      
-      #### Set the link information
-      #TODO Is this ok to do? Not using a link object, but list that can be used to create a link at the end
-      if(length(curr_sub_calc[[link_label]][["link_cols"]]) > length(sub_calc_results[[link_label]][["link_cols"]])) {
-        #Could these have different link columns? e.g. c("Village.") vs c("Variety.")
-        if(!all(sub_calc_results[[link_label]][["link_cols"]] %in% curr_sub_calc[[link_label]][["link_cols"]])) {
-          stop("sub calculations cannot have disjoint linking columns")
-        }
-        #TODO need to check they have the same from_data_frame?
-        sub_calc_results[[link_label]] <- curr_sub_calc[[link_label]]
-      }
-      else {
-        if(!all(curr_sub_calc[[link_label]][["link_cols"]] %in% sub_calc_results[[link_label]][["link_cols"]])) {
-          stop("sub calculations cannot have disjoint linking columns")
-        }
-      }
     }
   }
   if(!first_sub_calc) curr_data_list <- sub_calc_results
@@ -212,7 +206,8 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       # set require_merge boolean to FALSE as default
       curr_data_list <- list()
       #TODO How does current filter work with this? Should current filter be ignored here? (use_current_filter = FALSE)
-      curr_data_list[[data_label]] <- self$get_data_frame(data_names[[1]])
+      #TODO Add current filter as manipulation in calc definition if needed.
+      curr_data_list[[data_label]] <- self$get_data_frame(data_names[[1]], use_current_filter = FALSE)
       link_list <- list(data_names[[1]], c())
       names(link_list) <- c("from_data_frame", "link_cols")
       curr_data_list[[link_label]] <- link_list
@@ -238,7 +233,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   else if(calc$type == "summary") {
     # modify link to include linking columns
     # set requires_key = TRUE
-    # TODO Could from_data_frame ever change?
+    # from_data_frame only changes in join
     # TODO Is this always replacing the link_cols?
     curr_data_list[[link_label]][["link_cols"]] <- as.character(groups(curr_data_list[[data_label]]))
     curr_data_list[[data_label]] <- curr_data_list[[data_label]] %>% summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$name))
@@ -255,7 +250,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
     curr_data_list[[require_merge_label]] <- TRUE
   }
   else if(calc$type == "join") {
-    # link unchanged?
+    # link needs to change
     stop("join not yet implemented.")
   }
   else if(calc$type == "combination") {
@@ -287,9 +282,10 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
         to_data_name <- self$get_linked_to_data_name(calc_from_data_name, calc_link_cols)
         to_data <- self$get_data_frame(to_data_name, use_current_filter = FALSE)
         # Probably not needed because merge will take care of this?
-        # if(calc$name %in% names(to_data)) {
+        if(calc$name %in% names(to_data)) {
+          #TODO Delete column with this name in to_data
         #   curr_data_list[[data_label]][[calc$name]] <- next_default_item(calc$name, names(to_data))
-        # }
+        }
         #merge_data method takes care of data frame attributes correctly
         #need to subset so that only column from this calc is added (not sub_calc columns as well)
         self$get_data_objects(to_data_name)$merge_data(curr_data_list[[data_label]][c(calc_link_cols, calc$name)], by = calc_link_cols, type = "full")
@@ -304,9 +300,6 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
         to_data_name <- next_default_item(to_data_name, self$get_data_names(), include_index = FALSE)
         to_data_list[[to_data_name]] <- curr_data_list[[data_label]][c(calc_link_cols, calc$name)]
         self$import_data(to_data_list)
-        new_obj <- self$get_data_objects(to_data_name)
-        # TODO Should the be done here or in add_link?
-        #summary_obj$add_key(calc_link_cols)
         new_key <- calc_link_cols
         names(new_key) <- new_key
         self$add_link(calc_from_data_name, to_data_name, new_key, keyed_link_label)
@@ -319,13 +312,13 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
         self$append_to_variables_metadata(to_data_name, calc_link_cols, calculated_by_label, calc$calculated_from)
         self$append_to_dataframe_metadata(to_data_name, is_calculated_label, TRUE)
       }
-      self$append_to_variables_metadata(to_data_name, calc$name, dependencies_label, calc$calculated_from)
       
     }
     else {
       # In this case, join required but no summary has been done, so the join was required by a filter
       # to do the join there must be a key defined in from dataframe
       # Because no summary has been done, key can always be checked in from_data_frame of link??
+      to_data_name <- calc_from_data_name
       if(self$has_key(calc_from_data_name)) {
         keys_list <- self$get_keys(calc_from_data_name)
         joined <- FALSE
@@ -333,8 +326,6 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
           if(all(curr_key %in% names(curr_data_list[[data_label]]))) {
             # subset first to only get output and key columns
             # Needed so that sub calculations are not added as well
-            #sub_calc_results[[data_label]] <- full_join(sub_calc_results[[data_label]], curr_sub_calc[[data_label]][c(sub_calc$name, curr_key)], by = curr_key)
-            #TODO This will join on all columns in the original data (including key), is there any case this could be a problem?
             #TODO Could add suppressMessages() here to prevent message about join
             self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[data_label]][c(curr_key, calc$name)], by = curr_key, type = "full")
             joined <- TRUE
@@ -356,9 +347,13 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list) {
   # Add metadata for new column
   output_column <- calc$name
   names(output_column) <- to_data_name
-  self$append_to_variables_metadata(calc_from_data_name, as.character(calc$calculated_from), has_dependants_label, TRUE)
-  self$add_dependent_columns(calc_from_data_name, as.character(calc$calculated_from), output_column)
+  calc_from_columns <- as.character(calc$calculated_from)[as.character(calc$calculated_from) %in% self$get_column_names(calc_from_data_name)]
+  if(length(calc_from_columns) > 0) {
+    self$append_to_variables_metadata(calc_from_data_name, as.character(calc$calculated_from), has_dependants_label, TRUE)
+    self$add_dependent_columns(calc_from_data_name, as.character(calc$calculated_from), output_column)
+  }
   self$append_to_variables_metadata(to_data_name, calc$name, is_calculated_label, TRUE)
-  self$append_to_variables_metadata(to_data_name, calc$name, calculated_by_label, calc$calculated_from)
+  self$append_to_variables_metadata(to_data_name, calc$name, dependencies_label, calc$calculated_from)
+  if(length(calc$calculated_from) > 0) self$append_to_variables_metadata(to_data_name, calc$name, calculated_by_label, calc$calculated_from)
 }
 )

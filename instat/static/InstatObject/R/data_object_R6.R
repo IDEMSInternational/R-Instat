@@ -1460,7 +1460,7 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
         }
       }
     }
-    else curr_dependents <- dependent_cols
+    else curr_dependents <- as.list(dependent_cols)
     self$append_to_variables_metadata(col, dependent_columns_label, curr_dependents)
   }
 }
