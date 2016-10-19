@@ -1405,7 +1405,7 @@ data_object$set("public", "add_key", function(col_names) {
   if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
     stop("key columns must have unique combinations")
   }
-  if(self$key_exists(col_names)) {
+  if(self$is_key(col_names)) {
     message("A key with these columns already exists. No action will be taken.")
   }
   else {
@@ -1418,7 +1418,7 @@ data_object$set("public", "add_key", function(col_names) {
 }
 )
 
-data_object$set("public", "key_exists", function(col_names) {
+data_object$set("public", "is_key", function(col_names) {
   return(any(sapply(private$keys, function(x) setequal(col_names,x))))
 }
 )
@@ -1607,5 +1607,13 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
   }
   #TODO this will be more complex to make into account of doy_typical_length
   return(as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
+}
+)
+
+data_object$set("public","set_contrasts_of_factor", function(factor, new_contrasts) {
+  if(!factor %in% names(self$get_data_frame())) stop(factor, " not found in the data")
+  if(!is.factor(self$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
+  #checks needed on contrasts before assigning
+  contrasts(private$data[[factor]]) <- new_contrasts
 }
 )
