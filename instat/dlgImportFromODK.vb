@@ -45,8 +45,8 @@ Public Class dlgImportFromODK
 
     Private Sub SetDefaults()
         rdoKobo.Checked = True
-        ucrInputUsername.ResetText()
-        ucrInputPassword.ResetText()
+        ucrInputUsername.SetName("")
+        ucrInputPassword.SetName("")
         ucrInputChooseForm.Reset()
         chkViewPassword.Checked = False
         EnableCommandButton()

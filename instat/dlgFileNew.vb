@@ -32,8 +32,6 @@ Public Class dlgFileNew
         Else
             ReopenDialog()
         End If
-        ucrName.Text = frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix).ToString()
-        ucrBase.clsRsyntax.SetAssignTo(ucrName.Text, strTempDataframe:=ucrName.Text)
         TestOKEnabled()
     End Sub
 
@@ -55,18 +53,21 @@ Public Class dlgFileNew
     Private Sub SetDefaults()
         nudRows.Value = 10
         nudColumns.Value = 2
+        ucrName.SetName(strName:="Sheet1")
     End Sub
 
-    Private Sub nudColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudColumns.ValueChanged
+    Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
         clsMatrix.AddParameter("ncol", nudColumns.Value.ToString())
+        TestOKEnabled()
     End Sub
 
-    Private Sub nudRows_ValueChanged(sender As Object, e As EventArgs) Handles nudRows.ValueChanged
+    Private Sub nudRows_TextChanged(sender As Object, e As EventArgs) Handles nudRows.TextChanged
         clsMatrix.AddParameter("nrow", nudRows.Value.ToString())
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrName.IsEmpty Then
+        If Not ucrName.IsEmpty AndAlso nudColumns.Text <> "" AndAlso nudRows.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -78,9 +79,7 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub ucrName_NameChanged() Handles ucrName.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(ucrName.GetText(), strTempDataframe:=ucrName.GetText())
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
     End Sub
 End Class
