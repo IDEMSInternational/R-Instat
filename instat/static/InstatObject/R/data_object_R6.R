@@ -283,11 +283,14 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
         if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
+        # TODO Possible alternative to include names of list
+        # TODO See how to have data frame properly containing lists
+        #if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(names(unlist(col_attributes[[att_name]])), unlist(col_attributes[[att_name]]), collapse = ",")
       }
       #if(is.null(col_attributes)) {
       #  col_attributes <- data.frame(class = NA)
       #}
-      col_attributes <- data.frame(col_attributes)
+      col_attributes <- data.frame(col_attributes, stringsAsFactors = FALSE)
       out[[i]] <- col_attributes
       i = i + 1
     }
@@ -1448,6 +1451,8 @@ data_object$set("public", "set_structure_columns", function(struc_type_1, struc_
 )
 
 data_object$set("public", "add_dependent_columns", function(columns, dependent_cols) {
+  # print(columns)
+  # print(dependent_cols)
   for(col in columns) {
     if(self$is_variables_metadata(dependent_columns_label, col)) {
       curr_dependents <- self$get_variables_metadata(property = dependent_columns_label, column = col, direct_from_attributes = TRUE)
@@ -1462,6 +1467,7 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
     }
     else curr_dependents <- as.list(dependent_cols)
     self$append_to_variables_metadata(col, dependent_columns_label, curr_dependents)
+    #print(self$get_variables_metadata())
   }
 }
 )
