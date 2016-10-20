@@ -28,7 +28,7 @@ Public Class sdgPlots
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
     Private bAdditionalLayersSetGlobal As Boolean
-
+    'Question: what is this variable used for ? Only changed in the property bLayersDefaultIsGolobal, together with ucrPlotsAdditionalLayers.bSetGlobalIsDefault
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -359,6 +359,7 @@ Public Class sdgPlots
     End Sub
 
     Public Property bLayersDefaultIsGlobal As Boolean
+        'Question: what is this function for again? It is only used in the set dfaults here, which sets it to false
         Get
             Return bAdditionalLayersSetGlobal
         End Get

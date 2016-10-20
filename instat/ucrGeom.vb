@@ -16,16 +16,26 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrGeom
+    'Ucr Geom is used to select the geom that will be used for a specific graph/layer. It is used in ucrGeomListWithAes and ucrLayerParameters both ucr's of sdgLayerOptions. 
+    'Check if there is any other use/place to mention ...
+    'It stores the definition of the different Geoms, using instances of clsGeom, including their R names, the relevant/available parameters and their description (type of values, values, default, ...).
+
     Public strAesParameterName As String
     Public strAesParameterValue As String
+    'Warning: these two seems to be obsolete according to global search, 
+    'only used in Sub AddParameter below, which Is apparently Not used anywhere.
+    'Seems like they are phantoms of the parameters of the same name in the sub AddAesParameters in clsGeom.
     Public lstAllGeoms As New List(Of Geoms)
     Public lstGgParameters As New List(Of RParameter)
-    Public clsGeomFunction As New RFunction
+    'Warning: This is used nowhere ...
+    'Question: lstGgParameters lists of the ggplot parameters ? Let's delete ?
     Public clsCurrGeom As New Geoms
-    'why is geomfunction not a memeber of the geomclass ?
+    Public clsGeomFunction As New RFunction
     Public lstFunctionParameters As New List(Of RParameter)
-    Private bFirstLoad As Boolean = True
+    'Question: clsGeomFunction is the RFunction associated to the clsCurrGeom ? Could it be included in clsCurrGeom, if yes do we wish that ? 
+    'Similarly for lstFunctionParameters. Both, together with clsGgplotAesFunction are supposedly passed through to ucrAdditionalLayers and used in sdgLayerOption.SetupLayer called in ucrAdditionalLayers to ... ?
     Public clsGgplotAesFunction As New RFunction
+    Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
 
     Public Sub New()
@@ -73,6 +83,9 @@ Public Class ucrGeom
     End Sub
 
     Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
+        'Question : this strAesParameterName is used weirdly, its taken as parameter then inside the function only the class field with same name is used... ?
+        'Warning: It seems from both running and searching in the code that this sub is never used. Also, strAesParameterName seems to be used only here i.e. nowhere...
+        'Task: Give an explanation of how this is supposed to work or delete
         'this adds parameters TODO pass appropriate parameters.
         Dim i As Integer
         Dim clsParam As New RParameter
