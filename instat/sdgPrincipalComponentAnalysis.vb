@@ -19,6 +19,7 @@ Public Class sdgPrincipalComponentAnalysis
     Public clsREigenValues, clsREigenVectors, clsRScores, clsPCAModel, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRRotation, clsRCoord, clsRContrib, clsREig, clsRFactor, clsRMelt As New RFunction
     Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction, clsRBarPlotGeom, clsRBarPlotFacet, clsRBarPlotAes As New RFunction
     Public clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
+
     Dim clsRBarPlot, clsRBarPlot0 As New ROperator
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -40,18 +41,16 @@ Public Class sdgPrincipalComponentAnalysis
         chkScores.Checked = True
         chkResiduals.Checked = True
         chkRotation.Checked = True
-        chkBar.Checked = True
-        chkLine.Checked = True
-        chkBar.Enabled = False
-        chkLine.Enabled = False
-        grpGeom.Enabled = False
+        rdoBarGeom.Checked = False
+        rdoLineGeom.Checked = False
+        rdoBothScree.Checked = True
         lblChoice.Enabled = False
-        cmbChoice.SelectedItem = "variance"
-        cmbChoice.Enabled = False
+        cboChoice.SelectedItem = "variance"
+        cboChoice.Enabled = True
         rdoVariablesPlot.Checked = False
         rdoIndividualsPlot.Checked = False
         rdoBiplot.Checked = False
-        rdoScreePlot.Checked = False
+        rdoScreePlot.Checked = True
         rdoBarPlot.Checked = False
     End Sub
 
@@ -110,8 +109,16 @@ Public Class sdgPrincipalComponentAnalysis
         clsRScreePlotTheme.SetRCommand("theme_minimal")
         clsRScreePlot.SetOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
         clsRScreePlot.SetOperatorParameter(False, clsRFunc:=clsRScreePlotTheme)
-        clsRScreePlot.SetFunction("fviz_screeplot")
-        clsRScreePlot.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        'clsRScreePlot.SetFunction("fviz_screeplot")
+        'clsRScreePlot.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        ' I feel we do not need these two lines as they are a repeat of above.
+        If rdoBothScree.Checked Then
+            clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
+        ElseIf rdoLineGeom.Checked Then
+            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
+        ElseIf rdoBarGeom.Checked Then
+            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
+        End If
         frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 0)
     End Sub
 
@@ -122,6 +129,13 @@ Public Class sdgPrincipalComponentAnalysis
         clsRVariablesPlotTheme.SetRCommand("theme_minimal")
         clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
         clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
+        If rdoBothVar.Checked Then
+            clsRVariablesPlotFunction.AddParameter("geom", "c(" & Chr(34) & "arrow" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+        ElseIf rdoArrowVar.Checked Then
+            clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "arrow" & Chr(34))
+        ElseIf rdoTextVar.Checked Then
+            clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+        End If
         frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 0)
     End Sub
 
@@ -132,6 +146,13 @@ Public Class sdgPrincipalComponentAnalysis
         clsRIndividualsPlotTheme.SetRCommand("theme_minimal")
         clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
         clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
+        If rdoBothInd.Checked Then
+            clsRIndividualsPlotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+        ElseIf rdoPointInd.Checked Then
+            clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
+        ElseIf rdoTextInd.Checked Then
+            clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+        End If
         frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 0)
     End Sub
 
@@ -142,6 +163,13 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBiplotTheme.SetRCommand("theme_minimal")
         clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
+        If rdoBothBip.Checked Then
+            clsRBiplotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+        ElseIf rdoPointBip.Checked Then
+            clsRBiplotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
+        ElseIf rdoTextBip.Checked Then
+            clsRBiplotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+        End If
         frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 0)
     End Sub
 
@@ -168,51 +196,50 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBarPlot0.SetParameter(False, clsRFunc:=clsRBarPlotGeom)
         clsRBarPlot.SetParameter(True, clsOp:=clsRBarPlot0)
         clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
+        ' error here
+        ' running ggplot(data=cbind("factor_col"=*receiver*, melt(*eigenvectors*)) + geom_bar(aes=(x=Val1, y=value, fill=factor_col, stat="identity") + facet_wrap(~Var2)
     End Sub
 
-    Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs) Handles chkBar.CheckedChanged
-        If chkBar.Checked Then
-            If chkLine.Checked Then
-                clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
-            Else
-                clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
-            End If
-        Else
-            chkLine.Checked = True
-            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
-        End If
+    Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs)
+        ScreePlot()
     End Sub
 
-    Private Sub chkLine_CheckedChanged(sender As Object, e As EventArgs) Handles chkLine.CheckedChanged
-        If chkLine.Checked Then
-            If chkBar.Checked Then
-                clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
-            Else
-                clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
-            End If
-        Else
-            chkBar.Checked = True
-            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
-        End If
+    Private Sub chkLine_CheckedChanged(sender As Object, e As EventArgs)
+        ScreePlot()
     End Sub
 
-    Private Sub cmbChoice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChoice.SelectedIndexChanged
-        clsRScreePlotFunction.AddParameter("choice", Chr(34) & cmbChoice.SelectedItem.ToString & Chr(34))
+    Private Sub chkBoth_CheckedChanged(sender As Object, e As EventArgs)
+        ScreePlot()
     End Sub
 
-    Private Sub rdoScreePlot_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScreePlot.CheckedChanged
+    Private Sub cmbChoice_SelectedIndexChanged(sender As Object, e As EventArgs)
+        clsRScreePlotFunction.AddParameter("choice", Chr(34) & cboChoice.SelectedItem.ToString & Chr(34))
+    End Sub
+
+    Private Sub rdoPlot_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScreePlot.CheckedChanged, rdoVariablesPlot.CheckedChanged, rdoIndividualsPlot.CheckedChanged, rdoBiplot.CheckedChanged, rdoBarPlot.CheckedChanged
         If rdoScreePlot.Checked Then
-            grpGeom.Enabled = True
-            chkBar.Enabled = True
-            chkLine.Enabled = True
+            grpGeomScree.Enabled = True
             lblChoice.Enabled = True
-            cmbChoice.Enabled = True
+            cboChoice.Enabled = True
         Else
-            chkBar.Enabled = False
-            chkLine.Enabled = False
-            grpGeom.Enabled = False
+            grpGeomScree.Enabled = False
             lblChoice.Enabled = False
-            cmbChoice.Enabled = False
+            cboChoice.Enabled = False
+        End If
+        If rdoVariablesPlot.Checked Then
+            grpGeomVar.Enabled = True
+        Else
+            grpGeomVar.Enabled = False
+        End If
+        If rdoIndividualsPlot.Checked Then
+            grpGeomInd.Enabled = True
+        Else
+            grpGeomInd.Enabled = False
+        End If
+        If rdoBiplot.Checked Then
+            grpGeomBip.Enabled = True
+        Else
+            grpGeomBip.Enabled = False
         End If
     End Sub
 

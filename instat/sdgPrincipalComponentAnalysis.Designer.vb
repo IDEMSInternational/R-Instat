@@ -38,27 +38,46 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
         Me.tbGrapOptions = New System.Windows.Forms.TabControl()
         Me.tbScreePlot = New System.Windows.Forms.TabPage()
-        Me.grpGeom = New System.Windows.Forms.GroupBox()
-        Me.chkBar = New System.Windows.Forms.CheckBox()
-        Me.chkLine = New System.Windows.Forms.CheckBox()
-        Me.lblChoice = New System.Windows.Forms.Label()
-        Me.cmbChoice = New System.Windows.Forms.ComboBox()
         Me.tbVariables = New System.Windows.Forms.TabPage()
         Me.tbIndividuals = New System.Windows.Forms.TabPage()
         Me.tbBiplot = New System.Windows.Forms.TabPage()
         Me.tbBarPlot = New System.Windows.Forms.TabPage()
-        Me.ucrReceiverFactor = New instat.ucrReceiverMultiple()
-        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.tbSave = New System.Windows.Forms.TabPage()
+        Me.grpGeomScree = New System.Windows.Forms.GroupBox()
+        Me.rdoBothScree = New System.Windows.Forms.RadioButton()
+        Me.rdoLineGeom = New System.Windows.Forms.RadioButton()
+        Me.rdoBarGeom = New System.Windows.Forms.RadioButton()
+        Me.lblChoice = New System.Windows.Forms.Label()
+        Me.cboChoice = New System.Windows.Forms.ComboBox()
+        Me.grpGeomVar = New System.Windows.Forms.GroupBox()
+        Me.rdoBothVar = New System.Windows.Forms.RadioButton()
+        Me.rdoTextVar = New System.Windows.Forms.RadioButton()
+        Me.rdoArrowVar = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverFactor = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.grpGeomInd = New System.Windows.Forms.GroupBox()
+        Me.rdoBothInd = New System.Windows.Forms.RadioButton()
+        Me.rdoTextInd = New System.Windows.Forms.RadioButton()
+        Me.rdoPointInd = New System.Windows.Forms.RadioButton()
+        Me.grpGeomBip = New System.Windows.Forms.GroupBox()
+        Me.rdoBothBip = New System.Windows.Forms.RadioButton()
+        Me.rdoTextBip = New System.Windows.Forms.RadioButton()
+        Me.rdoPointBip = New System.Windows.Forms.RadioButton()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
         Me.tbGrapOptions.SuspendLayout()
         Me.tbScreePlot.SuspendLayout()
-        Me.grpGeom.SuspendLayout()
+        Me.tbVariables.SuspendLayout()
+        Me.tbIndividuals.SuspendLayout()
+        Me.tbBiplot.SuspendLayout()
         Me.tbBarPlot.SuspendLayout()
+        Me.grpGeomScree.SuspendLayout()
+        Me.grpGeomVar.SuspendLayout()
+        Me.grpGeomInd.SuspendLayout()
+        Me.grpGeomBip.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbRegOptions
@@ -235,9 +254,9 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbScreePlot
         '
-        Me.tbScreePlot.Controls.Add(Me.grpGeom)
+        Me.tbScreePlot.Controls.Add(Me.grpGeomScree)
         Me.tbScreePlot.Controls.Add(Me.lblChoice)
-        Me.tbScreePlot.Controls.Add(Me.cmbChoice)
+        Me.tbScreePlot.Controls.Add(Me.cboChoice)
         Me.tbScreePlot.Location = New System.Drawing.Point(4, 22)
         Me.tbScreePlot.Name = "tbScreePlot"
         Me.tbScreePlot.Padding = New System.Windows.Forms.Padding(3)
@@ -247,61 +266,9 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbScreePlot.Text = "Scree Plot"
         Me.tbScreePlot.UseVisualStyleBackColor = True
         '
-        'grpGeom
-        '
-        Me.grpGeom.Controls.Add(Me.chkBar)
-        Me.grpGeom.Controls.Add(Me.chkLine)
-        Me.grpGeom.Location = New System.Drawing.Point(6, 15)
-        Me.grpGeom.Name = "grpGeom"
-        Me.grpGeom.Size = New System.Drawing.Size(99, 38)
-        Me.grpGeom.TabIndex = 6
-        Me.grpGeom.TabStop = False
-        Me.grpGeom.Tag = "Geom"
-        Me.grpGeom.Text = "Geom"
-        '
-        'chkBar
-        '
-        Me.chkBar.AutoSize = True
-        Me.chkBar.Location = New System.Drawing.Point(8, 15)
-        Me.chkBar.Name = "chkBar"
-        Me.chkBar.Size = New System.Drawing.Size(42, 17)
-        Me.chkBar.TabIndex = 2
-        Me.chkBar.Tag = "Bar"
-        Me.chkBar.Text = "Bar"
-        Me.chkBar.UseVisualStyleBackColor = True
-        '
-        'chkLine
-        '
-        Me.chkLine.AutoSize = True
-        Me.chkLine.Location = New System.Drawing.Point(52, 15)
-        Me.chkLine.Name = "chkLine"
-        Me.chkLine.Size = New System.Drawing.Size(46, 17)
-        Me.chkLine.TabIndex = 1
-        Me.chkLine.Tag = "Line"
-        Me.chkLine.Text = "Line"
-        Me.chkLine.UseVisualStyleBackColor = True
-        '
-        'lblChoice
-        '
-        Me.lblChoice.AutoSize = True
-        Me.lblChoice.Location = New System.Drawing.Point(123, 30)
-        Me.lblChoice.Name = "lblChoice"
-        Me.lblChoice.Size = New System.Drawing.Size(40, 13)
-        Me.lblChoice.TabIndex = 4
-        Me.lblChoice.Tag = "Choice"
-        Me.lblChoice.Text = "Choice"
-        '
-        'cmbChoice
-        '
-        Me.cmbChoice.FormattingEnabled = True
-        Me.cmbChoice.Items.AddRange(New Object() {"variance", "eigenvalue"})
-        Me.cmbChoice.Location = New System.Drawing.Point(168, 26)
-        Me.cmbChoice.Name = "cmbChoice"
-        Me.cmbChoice.Size = New System.Drawing.Size(50, 21)
-        Me.cmbChoice.TabIndex = 3
-        '
         'tbVariables
         '
+        Me.tbVariables.Controls.Add(Me.grpGeomVar)
         Me.tbVariables.Location = New System.Drawing.Point(4, 22)
         Me.tbVariables.Name = "tbVariables"
         Me.tbVariables.Padding = New System.Windows.Forms.Padding(3)
@@ -313,6 +280,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbIndividuals
         '
+        Me.tbIndividuals.Controls.Add(Me.grpGeomInd)
         Me.tbIndividuals.Location = New System.Drawing.Point(4, 22)
         Me.tbIndividuals.Name = "tbIndividuals"
         Me.tbIndividuals.Padding = New System.Windows.Forms.Padding(3)
@@ -324,6 +292,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbBiplot
         '
+        Me.tbBiplot.Controls.Add(Me.grpGeomBip)
         Me.tbBiplot.Location = New System.Drawing.Point(4, 22)
         Me.tbBiplot.Name = "tbBiplot"
         Me.tbBiplot.Padding = New System.Windows.Forms.Padding(3)
@@ -347,25 +316,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbBarPlot.Text = "Bar Plot"
         Me.tbBarPlot.UseVisualStyleBackColor = True
         '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(253, 43)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactor.TabIndex = 4
-        '
-        'ucrSelectorFactor
-        '
-        Me.ucrSelectorFactor.bShowHiddenColumns = False
-        Me.ucrSelectorFactor.bUseCurrentFilter = False
-        Me.ucrSelectorFactor.Location = New System.Drawing.Point(12, 8)
-        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
-        Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorFactor.TabIndex = 3
-        '
         'lblFactorVariable
         '
         Me.lblFactorVariable.AutoSize = True
@@ -387,12 +337,234 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
         '
+        'grpGeomScree
+        '
+        Me.grpGeomScree.Controls.Add(Me.rdoBothScree)
+        Me.grpGeomScree.Controls.Add(Me.rdoLineGeom)
+        Me.grpGeomScree.Controls.Add(Me.rdoBarGeom)
+        Me.grpGeomScree.Location = New System.Drawing.Point(6, 16)
+        Me.grpGeomScree.Name = "grpGeomScree"
+        Me.grpGeomScree.Size = New System.Drawing.Size(197, 38)
+        Me.grpGeomScree.TabIndex = 9
+        Me.grpGeomScree.TabStop = False
+        Me.grpGeomScree.Tag = "Geom"
+        Me.grpGeomScree.Text = "Geom"
+        '
+        'rdoBothScree
+        '
+        Me.rdoBothScree.AutoSize = True
+        Me.rdoBothScree.Location = New System.Drawing.Point(134, 16)
+        Me.rdoBothScree.Name = "rdoBothScree"
+        Me.rdoBothScree.Size = New System.Drawing.Size(47, 17)
+        Me.rdoBothScree.TabIndex = 2
+        Me.rdoBothScree.TabStop = True
+        Me.rdoBothScree.Text = "Both"
+        Me.rdoBothScree.UseVisualStyleBackColor = True
+        '
+        'rdoLineGeom
+        '
+        Me.rdoLineGeom.AutoSize = True
+        Me.rdoLineGeom.Location = New System.Drawing.Point(69, 16)
+        Me.rdoLineGeom.Name = "rdoLineGeom"
+        Me.rdoLineGeom.Size = New System.Drawing.Size(45, 17)
+        Me.rdoLineGeom.TabIndex = 1
+        Me.rdoLineGeom.TabStop = True
+        Me.rdoLineGeom.Text = "Line"
+        Me.rdoLineGeom.UseVisualStyleBackColor = True
+        '
+        'rdoBarGeom
+        '
+        Me.rdoBarGeom.AutoSize = True
+        Me.rdoBarGeom.Location = New System.Drawing.Point(3, 16)
+        Me.rdoBarGeom.Name = "rdoBarGeom"
+        Me.rdoBarGeom.Size = New System.Drawing.Size(41, 17)
+        Me.rdoBarGeom.TabIndex = 0
+        Me.rdoBarGeom.TabStop = True
+        Me.rdoBarGeom.Text = "Bar"
+        Me.rdoBarGeom.UseVisualStyleBackColor = True
+        '
+        'lblChoice
+        '
+        Me.lblChoice.AutoSize = True
+        Me.lblChoice.Location = New System.Drawing.Point(222, 34)
+        Me.lblChoice.Name = "lblChoice"
+        Me.lblChoice.Size = New System.Drawing.Size(43, 13)
+        Me.lblChoice.TabIndex = 8
+        Me.lblChoice.Tag = "Choice"
+        Me.lblChoice.Text = "Choice:"
+        '
+        'cboChoice
+        '
+        Me.cboChoice.FormattingEnabled = True
+        Me.cboChoice.Items.AddRange(New Object() {"variance", "eigenvalue"})
+        Me.cboChoice.Location = New System.Drawing.Point(269, 30)
+        Me.cboChoice.Name = "cboChoice"
+        Me.cboChoice.Size = New System.Drawing.Size(94, 21)
+        Me.cboChoice.TabIndex = 7
+        '
+        'grpGeomVar
+        '
+        Me.grpGeomVar.Controls.Add(Me.rdoBothVar)
+        Me.grpGeomVar.Controls.Add(Me.rdoTextVar)
+        Me.grpGeomVar.Controls.Add(Me.rdoArrowVar)
+        Me.grpGeomVar.Location = New System.Drawing.Point(6, 16)
+        Me.grpGeomVar.Name = "grpGeomVar"
+        Me.grpGeomVar.Size = New System.Drawing.Size(197, 38)
+        Me.grpGeomVar.TabIndex = 13
+        Me.grpGeomVar.TabStop = False
+        Me.grpGeomVar.Tag = "Geom"
+        Me.grpGeomVar.Text = "Geom"
+        '
+        'rdoBothVar
+        '
+        Me.rdoBothVar.AutoSize = True
+        Me.rdoBothVar.Location = New System.Drawing.Point(134, 16)
+        Me.rdoBothVar.Name = "rdoBothVar"
+        Me.rdoBothVar.Size = New System.Drawing.Size(47, 17)
+        Me.rdoBothVar.TabIndex = 2
+        Me.rdoBothVar.TabStop = True
+        Me.rdoBothVar.Text = "Both"
+        Me.rdoBothVar.UseVisualStyleBackColor = True
+        '
+        'rdoTextVar
+        '
+        Me.rdoTextVar.AutoSize = True
+        Me.rdoTextVar.Location = New System.Drawing.Point(69, 16)
+        Me.rdoTextVar.Name = "rdoTextVar"
+        Me.rdoTextVar.Size = New System.Drawing.Size(46, 17)
+        Me.rdoTextVar.TabIndex = 1
+        Me.rdoTextVar.TabStop = True
+        Me.rdoTextVar.Text = "Text"
+        Me.rdoTextVar.UseVisualStyleBackColor = True
+        '
+        'rdoArrowVar
+        '
+        Me.rdoArrowVar.AutoSize = True
+        Me.rdoArrowVar.Location = New System.Drawing.Point(3, 16)
+        Me.rdoArrowVar.Name = "rdoArrowVar"
+        Me.rdoArrowVar.Size = New System.Drawing.Size(52, 17)
+        Me.rdoArrowVar.TabIndex = 0
+        Me.rdoArrowVar.TabStop = True
+        Me.rdoArrowVar.Text = "Arrow"
+        Me.rdoArrowVar.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(253, 43)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFactor.TabIndex = 4
+        '
+        'ucrSelectorFactor
+        '
+        Me.ucrSelectorFactor.bShowHiddenColumns = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = False
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(12, 8)
+        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
+        Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorFactor.TabIndex = 3
+        '
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.Location = New System.Drawing.Point(139, 305)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
+        '
+        'grpGeomInd
+        '
+        Me.grpGeomInd.Controls.Add(Me.rdoBothInd)
+        Me.grpGeomInd.Controls.Add(Me.rdoTextInd)
+        Me.grpGeomInd.Controls.Add(Me.rdoPointInd)
+        Me.grpGeomInd.Location = New System.Drawing.Point(6, 16)
+        Me.grpGeomInd.Name = "grpGeomInd"
+        Me.grpGeomInd.Size = New System.Drawing.Size(197, 38)
+        Me.grpGeomInd.TabIndex = 13
+        Me.grpGeomInd.TabStop = False
+        Me.grpGeomInd.Tag = "Geom"
+        Me.grpGeomInd.Text = "Geom"
+        '
+        'rdoBothInd
+        '
+        Me.rdoBothInd.AutoSize = True
+        Me.rdoBothInd.Location = New System.Drawing.Point(134, 16)
+        Me.rdoBothInd.Name = "rdoBothInd"
+        Me.rdoBothInd.Size = New System.Drawing.Size(47, 17)
+        Me.rdoBothInd.TabIndex = 2
+        Me.rdoBothInd.TabStop = True
+        Me.rdoBothInd.Text = "Both"
+        Me.rdoBothInd.UseVisualStyleBackColor = True
+        '
+        'rdoTextInd
+        '
+        Me.rdoTextInd.AutoSize = True
+        Me.rdoTextInd.Location = New System.Drawing.Point(69, 16)
+        Me.rdoTextInd.Name = "rdoTextInd"
+        Me.rdoTextInd.Size = New System.Drawing.Size(46, 17)
+        Me.rdoTextInd.TabIndex = 1
+        Me.rdoTextInd.TabStop = True
+        Me.rdoTextInd.Text = "Text"
+        Me.rdoTextInd.UseVisualStyleBackColor = True
+        '
+        'rdoPointInd
+        '
+        Me.rdoPointInd.AutoSize = True
+        Me.rdoPointInd.Location = New System.Drawing.Point(3, 16)
+        Me.rdoPointInd.Name = "rdoPointInd"
+        Me.rdoPointInd.Size = New System.Drawing.Size(49, 17)
+        Me.rdoPointInd.TabIndex = 0
+        Me.rdoPointInd.TabStop = True
+        Me.rdoPointInd.Text = "Point"
+        Me.rdoPointInd.UseVisualStyleBackColor = True
+        '
+        'grpGeomBip
+        '
+        Me.grpGeomBip.Controls.Add(Me.rdoBothBip)
+        Me.grpGeomBip.Controls.Add(Me.rdoTextBip)
+        Me.grpGeomBip.Controls.Add(Me.rdoPointBip)
+        Me.grpGeomBip.Location = New System.Drawing.Point(6, 16)
+        Me.grpGeomBip.Name = "grpGeomBip"
+        Me.grpGeomBip.Size = New System.Drawing.Size(197, 38)
+        Me.grpGeomBip.TabIndex = 14
+        Me.grpGeomBip.TabStop = False
+        Me.grpGeomBip.Tag = "Geom"
+        Me.grpGeomBip.Text = "Geom"
+        '
+        'rdoBothBip
+        '
+        Me.rdoBothBip.AutoSize = True
+        Me.rdoBothBip.Location = New System.Drawing.Point(134, 16)
+        Me.rdoBothBip.Name = "rdoBothBip"
+        Me.rdoBothBip.Size = New System.Drawing.Size(47, 17)
+        Me.rdoBothBip.TabIndex = 2
+        Me.rdoBothBip.TabStop = True
+        Me.rdoBothBip.Text = "Both"
+        Me.rdoBothBip.UseVisualStyleBackColor = True
+        '
+        'rdoTextBip
+        '
+        Me.rdoTextBip.AutoSize = True
+        Me.rdoTextBip.Location = New System.Drawing.Point(69, 16)
+        Me.rdoTextBip.Name = "rdoTextBip"
+        Me.rdoTextBip.Size = New System.Drawing.Size(46, 17)
+        Me.rdoTextBip.TabIndex = 1
+        Me.rdoTextBip.TabStop = True
+        Me.rdoTextBip.Text = "Text"
+        Me.rdoTextBip.UseVisualStyleBackColor = True
+        '
+        'rdoPointBip
+        '
+        Me.rdoPointBip.AutoSize = True
+        Me.rdoPointBip.Location = New System.Drawing.Point(3, 16)
+        Me.rdoPointBip.Name = "rdoPointBip"
+        Me.rdoPointBip.Size = New System.Drawing.Size(49, 17)
+        Me.rdoPointBip.TabIndex = 0
+        Me.rdoPointBip.TabStop = True
+        Me.rdoPointBip.Text = "Point"
+        Me.rdoPointBip.UseVisualStyleBackColor = True
         '
         'sdgPrincipalComponentAnalysis
         '
@@ -415,10 +587,19 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGrapOptions.ResumeLayout(False)
         Me.tbScreePlot.ResumeLayout(False)
         Me.tbScreePlot.PerformLayout()
-        Me.grpGeom.ResumeLayout(False)
-        Me.grpGeom.PerformLayout()
+        Me.tbVariables.ResumeLayout(False)
+        Me.tbIndividuals.ResumeLayout(False)
+        Me.tbBiplot.ResumeLayout(False)
         Me.tbBarPlot.ResumeLayout(False)
         Me.tbBarPlot.PerformLayout()
+        Me.grpGeomScree.ResumeLayout(False)
+        Me.grpGeomScree.PerformLayout()
+        Me.grpGeomVar.ResumeLayout(False)
+        Me.grpGeomVar.PerformLayout()
+        Me.grpGeomInd.ResumeLayout(False)
+        Me.grpGeomInd.PerformLayout()
+        Me.grpGeomBip.ResumeLayout(False)
+        Me.grpGeomBip.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -432,11 +613,6 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents chkScores As CheckBox
     Friend WithEvents chkResiduals As CheckBox
     Friend WithEvents tbSave As TabPage
-    Friend WithEvents grpGeom As GroupBox
-    Friend WithEvents chkBar As CheckBox
-    Friend WithEvents chkLine As CheckBox
-    Friend WithEvents lblChoice As Label
-    Friend WithEvents cmbChoice As ComboBox
     Friend WithEvents rdoIndividualsPlot As RadioButton
     Friend WithEvents rdoBiplot As RadioButton
     Friend WithEvents rdoVariablesPlot As RadioButton
@@ -452,4 +628,22 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrSelectorFactor As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactorVariable As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverMultiple
+    Friend WithEvents grpGeomScree As GroupBox
+    Friend WithEvents rdoBothScree As RadioButton
+    Friend WithEvents rdoLineGeom As RadioButton
+    Friend WithEvents rdoBarGeom As RadioButton
+    Friend WithEvents lblChoice As Label
+    Friend WithEvents cboChoice As ComboBox
+    Friend WithEvents grpGeomVar As GroupBox
+    Friend WithEvents rdoBothVar As RadioButton
+    Friend WithEvents rdoTextVar As RadioButton
+    Friend WithEvents rdoArrowVar As RadioButton
+    Friend WithEvents grpGeomInd As GroupBox
+    Friend WithEvents rdoBothInd As RadioButton
+    Friend WithEvents rdoTextInd As RadioButton
+    Friend WithEvents rdoPointInd As RadioButton
+    Friend WithEvents grpGeomBip As GroupBox
+    Friend WithEvents rdoBothBip As RadioButton
+    Friend WithEvents rdoTextBip As RadioButton
+    Friend WithEvents rdoPointBip As RadioButton
 End Class

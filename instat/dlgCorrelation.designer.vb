@@ -73,20 +73,20 @@ Partial Class dlgCorrelation
         Me.lblFirstColumn.AutoSize = True
         Me.lblFirstColumn.Location = New System.Drawing.Point(255, 55)
         Me.lblFirstColumn.Name = "lblFirstColumn"
-        Me.lblFirstColumn.Size = New System.Drawing.Size(63, 13)
+        Me.lblFirstColumn.Size = New System.Drawing.Size(67, 13)
         Me.lblFirstColumn.TabIndex = 4
         Me.lblFirstColumn.Tag = "First_column"
-        Me.lblFirstColumn.Text = "First column"
+        Me.lblFirstColumn.Text = "First Column:"
         '
         'lblSecondColumn
         '
         Me.lblSecondColumn.AutoSize = True
         Me.lblSecondColumn.Location = New System.Drawing.Point(255, 106)
         Me.lblSecondColumn.Name = "lblSecondColumn"
-        Me.lblSecondColumn.Size = New System.Drawing.Size(81, 13)
+        Me.lblSecondColumn.Size = New System.Drawing.Size(85, 13)
         Me.lblSecondColumn.TabIndex = 6
         Me.lblSecondColumn.Tag = "Second_column"
-        Me.lblSecondColumn.Text = "Second column"
+        Me.lblSecondColumn.Text = "Second Column:"
         '
         'grpMethod
         '
@@ -104,7 +104,7 @@ Partial Class dlgCorrelation
         'rdoKendall
         '
         Me.rdoKendall.AutoSize = True
-        Me.rdoKendall.Location = New System.Drawing.Point(68, 14)
+        Me.rdoKendall.Location = New System.Drawing.Point(68, 18)
         Me.rdoKendall.Name = "rdoKendall"
         Me.rdoKendall.Size = New System.Drawing.Size(60, 17)
         Me.rdoKendall.TabIndex = 1
@@ -116,7 +116,7 @@ Partial Class dlgCorrelation
         '
         Me.rdoPearson.AutoSize = True
         Me.rdoPearson.Checked = True
-        Me.rdoPearson.Location = New System.Drawing.Point(5, 14)
+        Me.rdoPearson.Location = New System.Drawing.Point(5, 18)
         Me.rdoPearson.Name = "rdoPearson"
         Me.rdoPearson.Size = New System.Drawing.Size(64, 17)
         Me.rdoPearson.TabIndex = 0
@@ -128,7 +128,7 @@ Partial Class dlgCorrelation
         'rdoSpearman
         '
         Me.rdoSpearman.AutoSize = True
-        Me.rdoSpearman.Location = New System.Drawing.Point(128, 14)
+        Me.rdoSpearman.Location = New System.Drawing.Point(128, 18)
         Me.rdoSpearman.Name = "rdoSpearman"
         Me.rdoSpearman.Size = New System.Drawing.Size(73, 17)
         Me.rdoSpearman.TabIndex = 2
@@ -138,7 +138,7 @@ Partial Class dlgCorrelation
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(255, 185)
+        Me.cmdOptions.Location = New System.Drawing.Point(255, 189)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 10
@@ -162,7 +162,7 @@ Partial Class dlgCorrelation
         '
         Me.rdoCompleteRowsOnly.AutoSize = True
         Me.rdoCompleteRowsOnly.Checked = True
-        Me.rdoCompleteRowsOnly.Location = New System.Drawing.Point(6, 14)
+        Me.rdoCompleteRowsOnly.Location = New System.Drawing.Point(6, 18)
         Me.rdoCompleteRowsOnly.Name = "rdoCompleteRowsOnly"
         Me.rdoCompleteRowsOnly.Size = New System.Drawing.Size(116, 17)
         Me.rdoCompleteRowsOnly.TabIndex = 0
@@ -174,7 +174,7 @@ Partial Class dlgCorrelation
         'rdoPairwise
         '
         Me.rdoPairwise.AutoSize = True
-        Me.rdoPairwise.Location = New System.Drawing.Point(124, 14)
+        Me.rdoPairwise.Location = New System.Drawing.Point(124, 18)
         Me.rdoPairwise.Name = "rdoPairwise"
         Me.rdoPairwise.Size = New System.Drawing.Size(64, 17)
         Me.rdoPairwise.TabIndex = 1
@@ -185,17 +185,17 @@ Partial Class dlgCorrelation
         'lblConfInterval
         '
         Me.lblConfInterval.AutoSize = True
-        Me.lblConfInterval.Location = New System.Drawing.Point(255, 167)
+        Me.lblConfInterval.Location = New System.Drawing.Point(256, 167)
         Me.lblConfInterval.Name = "lblConfInterval"
-        Me.lblConfInterval.Size = New System.Drawing.Size(99, 13)
+        Me.lblConfInterval.Size = New System.Drawing.Size(102, 13)
         Me.lblConfInterval.TabIndex = 11
-        Me.lblConfInterval.Text = "Confidence Interval"
+        Me.lblConfInterval.Text = "Confidence Interval:"
         '
         'nudConfidenceInterval
         '
         Me.nudConfidenceInterval.DecimalPlaces = 2
         Me.nudConfidenceInterval.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudConfidenceInterval.Location = New System.Drawing.Point(363, 160)
+        Me.nudConfidenceInterval.Location = New System.Drawing.Point(361, 164)
         Me.nudConfidenceInterval.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudConfidenceInterval.Name = "nudConfidenceInterval"
         Me.nudConfidenceInterval.Size = New System.Drawing.Size(43, 20)
