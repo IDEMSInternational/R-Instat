@@ -19,11 +19,13 @@ Public Class ucrAdditionalLayers
     Public clsRSyntax As RSyntax
     Public clsRggplotFunction As New RFunction
     Public clsGgplotAesFunction As New RFunction
+    'Question: Has the same name as ucrGeom.clsGgplotAesFunction, but can't find where these two are linked ?? And the one in Geom doesn't seem to be used independently...
     Public bFirstLoad As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
     Private strGlobalDataFrame As String
     Public bSetGlobalIsDefault As Boolean
+    'Question: What is this variable about again ? it is linked with sdgPlots.bAdditionalLayersSetGlobal in sdgPLots.bLayersDefaultIsGolobal.
 
     Public Sub New()
 
@@ -34,6 +36,8 @@ Public Class ucrAdditionalLayers
 
     End Sub
 
+    'The following three subs enable to link the RSyntax, clsGgplotFunction and clsAesFunction from ucrAdditionalLayers
+    'to the corresponding fields in dlgGeneralForGraphics or sdgPlots depending on which one has been initialised last (indeed, link created in Initialise subs).  
     Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
         clsRSyntax = clsRSyntaxIn
     End Sub
@@ -59,6 +63,7 @@ Public Class ucrAdditionalLayers
         strGlobalDataFrame = ""
         bSetGlobalIsDefault = True
         'This bSetGlobalIsDefault seems to stay True forever, maybe source of some of the errors ? Where is this used ?
+        'This question has alreadyy been answered. It doesn't stay true, it's changed in sdgPlots, set as default value False... But I don't remember what it is doing !!! Need to write down the comments...
         SetEditDeleteEnabled()
     End Sub
 
