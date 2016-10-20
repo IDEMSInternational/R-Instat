@@ -44,16 +44,18 @@ Public Class dlgFileNew
         nudRows.Minimum = 1
         nudColumns.Maximum = Integer.MaxValue
         nudColumns.Minimum = 1
+        'ucrName.SetDefaultTypeAsDataFrame()  This can be added in when the code is written
         ucrName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub ReopenDialog()
+        ucrName.SetName(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
     End Sub
 
     Private Sub SetDefaults()
         nudRows.Value = 10
         nudColumns.Value = 2
-        ucrName.SetName(strName:="Sheet1")
+        ucrName.SetName(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
     End Sub
 
     Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
