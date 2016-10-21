@@ -22,13 +22,78 @@ Partial Class dlgExportToOpenRefine
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.ucrInputDatasetName = New instat.ucrInputTextBox()
+        Me.ucrOpenRefineDataFrame = New instat.ucrDataFrame()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.LblNameDataSet = New System.Windows.Forms.Label()
+        Me.chkCSV = New System.Windows.Forms.CheckBox()
+        Me.chkOpenRefineBrowser1 = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
+        '
+        'ucrInputDatasetName
+        '
+        Me.ucrInputDatasetName.IsReadOnly = False
+        Me.ucrInputDatasetName.Location = New System.Drawing.Point(25, 89)
+        Me.ucrInputDatasetName.Name = "ucrInputDatasetName"
+        Me.ucrInputDatasetName.Size = New System.Drawing.Size(190, 21)
+        Me.ucrInputDatasetName.TabIndex = 5
+        '
+        'ucrOpenRefineDataFrame
+        '
+        Me.ucrOpenRefineDataFrame.bUseCurrentFilter = False
+        Me.ucrOpenRefineDataFrame.Location = New System.Drawing.Point(9, 9)
+        Me.ucrOpenRefineDataFrame.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrOpenRefineDataFrame.Name = "ucrOpenRefineDataFrame"
+        Me.ucrOpenRefineDataFrame.Size = New System.Drawing.Size(160, 40)
+        Me.ucrOpenRefineDataFrame.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 134)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(407, 52)
+        Me.ucrBase.TabIndex = 7
+        '
+        'LblNameDataSet
+        '
+        Me.LblNameDataSet.AutoSize = True
+        Me.LblNameDataSet.Location = New System.Drawing.Point(22, 73)
+        Me.LblNameDataSet.Name = "LblNameDataSet"
+        Me.LblNameDataSet.Size = New System.Drawing.Size(75, 13)
+        Me.LblNameDataSet.TabIndex = 8
+        Me.LblNameDataSet.Text = "Dataset Name"
+        '
+        'chkCSV
+        '
+        Me.chkCSV.AutoSize = True
+        Me.chkCSV.Location = New System.Drawing.Point(237, 50)
+        Me.chkCSV.Name = "chkCSV"
+        Me.chkCSV.Size = New System.Drawing.Size(99, 17)
+        Me.chkCSV.TabIndex = 9
+        Me.chkCSV.Text = "Convert to CSV"
+        Me.chkCSV.UseVisualStyleBackColor = True
+        '
+        'chkOpenRefineBrowser1
+        '
+        Me.chkOpenRefineBrowser1.AutoSize = True
+        Me.chkOpenRefineBrowser1.Location = New System.Drawing.Point(237, 15)
+        Me.chkOpenRefineBrowser1.Name = "chkOpenRefineBrowser1"
+        Me.chkOpenRefineBrowser1.Size = New System.Drawing.Size(153, 17)
+        Me.chkOpenRefineBrowser1.TabIndex = 10
+        Me.chkOpenRefineBrowser1.Text = "Open OpenRefine Browser"
+        Me.chkOpenRefineBrowser1.UseVisualStyleBackColor = True
         '
         'dlgExportToOpenRefine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.ClientSize = New System.Drawing.Size(416, 198)
+        Me.Controls.Add(Me.chkOpenRefineBrowser1)
+        Me.Controls.Add(Me.chkCSV)
+        Me.Controls.Add(Me.LblNameDataSet)
+        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrInputDatasetName)
+        Me.Controls.Add(Me.ucrOpenRefineDataFrame)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -36,6 +101,14 @@ Partial Class dlgExportToOpenRefine
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Export to OpenRefine"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
+
+    Friend WithEvents ucrOpenRefineDataFrame As ucrDataFrame
+    Friend WithEvents ucrInputDatasetName As ucrInputTextBox
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents LblNameDataSet As Label
+    Friend WithEvents chkCSV As CheckBox
+    Friend WithEvents chkOpenRefineBrowser1 As CheckBox
 End Class

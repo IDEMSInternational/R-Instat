@@ -1217,4 +1217,12 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnMakeDate.Click
         dlgMakeDate.ShowDialog()
     End Sub
+
+    Private Sub ImportToToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToOpenRefine.Click
+
+    End Sub
+
+    Private Sub ExportToOpenRefineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToOpenRefine.Click
+        dlgExportToOpenRefine.ShowDialog()
+    End Sub
 End Class
