@@ -35,14 +35,12 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBasePCA.clsRsyntax.SetFunction("PCA")
         ucrBasePCA.clsRsyntax.iCallType = 0
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
-        ucrReceiverMultiplePCA.SetDataType("numeric")
+        ucrReceiverMultiplePCA.SetDataType("numeric") ' this isn't working
         ucrResultName.SetDefaultTypeAsModel()
         ucrResultName.SetItemsTypeAsModels()
         ucrResultName.SetValidationTypeAsRVariable()
         ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBasePCA.iHelpTopicID = 187
-        nudComponents.Minimum = 2
-        ucrReceiverMultiplePCA.SetIncludedDataTypes({"factor", "numeric"})
     End Sub
 
     Private Sub ReopenDialog()
@@ -59,6 +57,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBasePCA.clsRsyntax.AddParameter("graph", "FALSE")
         ucrResultName.SetName("PCA")
         sdgPrincipalComponentAnalysis.SetDefaults()
+        ComponentsMinimum()
         TestOKEnabled()
     End Sub
 
@@ -86,21 +85,19 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Public Sub ucrReceiverMultiplePCA_SelectionChanged() Handles ucrReceiverMultiplePCA.SelectionChanged
-        If ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 5 Then
-            nudComponents.Value = 5
-            'Else
-            '   nudComponents.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
-        End If
         If ucrReceiverMultiplePCA.IsEmpty Then
             AssignName()
         End If
         ucrBasePCA.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverMultiplePCA.GetVariables())
         ucrBasePCA.clsRsyntax.AddParameter("ncp", nudComponents.Value)
+        sdgPrincipalComponentAnalysis.Dimensions()
         TestOKEnabled()
+        ComponentsMinimum()
     End Sub
 
     Private Sub nudComponents_TextChanged(sender As Object, e As EventArgs) Handles nudComponents.TextChanged
         ucrBasePCA.clsRsyntax.AddParameter("ncp", nudComponents.Value)
+        sdgPrincipalComponentAnalysis.Dimensions()
     End Sub
 
     Private Sub chkScaleData_CheckedChanged(sender As Object, e As EventArgs) Handles chkScaleData.CheckedChanged
@@ -144,5 +141,21 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub ucrBasePCA_clickok(sender As Object, e As EventArgs) Handles ucrBasePCA.ClickOk
         sdgPrincipalComponentAnalysis.PCAOptions()
+    End Sub
+
+    Private Sub ComponentsMinimum()
+        If ucrReceiverMultiplePCA.IsEmpty Then
+            nudComponents.Minimum = 0
+            nudComponents.Value = 0
+        ElseIf ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count = 1 Then
+            nudComponents.Minimum = 2
+        ElseIf ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 Then
+            nudComponents.Minimum = 2
+            If ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 5 Then
+                nudComponents.Value = 5
+            Else
+                nudComponents.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
+            End If
+        End If
     End Sub
 End Class
