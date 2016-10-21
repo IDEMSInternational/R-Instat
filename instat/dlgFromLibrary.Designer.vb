@@ -48,7 +48,7 @@ Partial Class dlgFromLibrary
         '
         Me.lstCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
         Me.lstCollection.FullRowSelect = True
-        Me.lstCollection.Location = New System.Drawing.Point(15, 56)
+        Me.lstCollection.Location = New System.Drawing.Point(10, 60)
         Me.lstCollection.MultiSelect = False
         Me.lstCollection.Name = "lstCollection"
         Me.lstCollection.ShowGroups = False
@@ -72,7 +72,7 @@ Partial Class dlgFromLibrary
         'cboPackages
         '
         Me.cboPackages.FormattingEnabled = True
-        Me.cboPackages.Location = New System.Drawing.Point(93, 29)
+        Me.cboPackages.Location = New System.Drawing.Point(97, 33)
         Me.cboPackages.Name = "cboPackages"
         Me.cboPackages.Size = New System.Drawing.Size(121, 21)
         Me.cboPackages.Sorted = True
@@ -81,7 +81,7 @@ Partial Class dlgFromLibrary
         'rdoDefaultDatasets
         '
         Me.rdoDefaultDatasets.AutoSize = True
-        Me.rdoDefaultDatasets.Location = New System.Drawing.Point(15, 6)
+        Me.rdoDefaultDatasets.Location = New System.Drawing.Point(10, 10)
         Me.rdoDefaultDatasets.Name = "rdoDefaultDatasets"
         Me.rdoDefaultDatasets.Size = New System.Drawing.Size(83, 17)
         Me.rdoDefaultDatasets.TabIndex = 12
@@ -92,7 +92,7 @@ Partial Class dlgFromLibrary
         'rdoInstatCollection
         '
         Me.rdoInstatCollection.AutoSize = True
-        Me.rdoInstatCollection.Location = New System.Drawing.Point(15, 235)
+        Me.rdoInstatCollection.Location = New System.Drawing.Point(10, 242)
         Me.rdoInstatCollection.Name = "rdoInstatCollection"
         Me.rdoInstatCollection.Size = New System.Drawing.Size(149, 17)
         Me.rdoInstatCollection.TabIndex = 6
@@ -103,18 +103,18 @@ Partial Class dlgFromLibrary
         'lblFromPackage
         '
         Me.lblFromPackage.AutoSize = True
-        Me.lblFromPackage.Location = New System.Drawing.Point(12, 32)
+        Me.lblFromPackage.Location = New System.Drawing.Point(12, 37)
         Me.lblFromPackage.Name = "lblFromPackage"
-        Me.lblFromPackage.Size = New System.Drawing.Size(75, 13)
+        Me.lblFromPackage.Size = New System.Drawing.Size(79, 13)
         Me.lblFromPackage.TabIndex = 15
-        Me.lblFromPackage.Text = "From package"
+        Me.lblFromPackage.Text = "From Package:"
         '
         'grpCollection
         '
         Me.grpCollection.AutoSize = True
         Me.grpCollection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpCollection.Controls.Add(Me.cmdLibraryCollection)
-        Me.grpCollection.Location = New System.Drawing.Point(15, 258)
+        Me.grpCollection.Location = New System.Drawing.Point(11, 259)
         Me.grpCollection.Name = "grpCollection"
         Me.grpCollection.Size = New System.Drawing.Size(154, 61)
         Me.grpCollection.TabIndex = 16
@@ -124,7 +124,7 @@ Partial Class dlgFromLibrary
         '
         Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(24, 329)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 325)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 53)
         Me.ucrBase.TabIndex = 0
