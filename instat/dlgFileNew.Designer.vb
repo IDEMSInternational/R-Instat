@@ -23,57 +23,38 @@ Partial Class dlgFileNew
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblRows = New System.Windows.Forms.Label()
-        Me.txtRows = New System.Windows.Forms.TextBox()
-        Me.txtColumns = New System.Windows.Forms.TextBox()
         Me.lblColumns = New System.Windows.Forms.Label()
-        Me.txtName = New System.Windows.Forms.TextBox()
         Me.lblName = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrName = New instat.ucrInputComboBox()
+        Me.nudRows = New System.Windows.Forms.NumericUpDown()
+        Me.nudColumns = New System.Windows.Forms.NumericUpDown()
+        CType(Me.nudRows, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblRows
         '
         Me.lblRows.AutoSize = True
-        Me.lblRows.Location = New System.Drawing.Point(10, 18)
+        Me.lblRows.Location = New System.Drawing.Point(10, 15)
         Me.lblRows.Name = "lblRows"
         Me.lblRows.Size = New System.Drawing.Size(37, 13)
         Me.lblRows.TabIndex = 0
         Me.lblRows.Text = "Rows:"
         '
-        'txtRows
-        '
-        Me.txtRows.Location = New System.Drawing.Point(59, 11)
-        Me.txtRows.Name = "txtRows"
-        Me.txtRows.Size = New System.Drawing.Size(39, 20)
-        Me.txtRows.TabIndex = 1
-        '
-        'txtColumns
-        '
-        Me.txtColumns.Location = New System.Drawing.Point(68, 39)
-        Me.txtColumns.Name = "txtColumns"
-        Me.txtColumns.Size = New System.Drawing.Size(39, 20)
-        Me.txtColumns.TabIndex = 3
-        '
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(10, 46)
+        Me.lblColumns.Location = New System.Drawing.Point(10, 43)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(50, 13)
         Me.lblColumns.TabIndex = 2
         Me.lblColumns.Text = "Columns:"
         '
-        'txtName
-        '
-        Me.txtName.Location = New System.Drawing.Point(111, 75)
-        Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(139, 20)
-        Me.txtName.TabIndex = 5
-        '
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(10, 82)
+        Me.lblName.Location = New System.Drawing.Point(7, 78)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(94, 13)
         Me.lblName.TabIndex = 4
@@ -81,37 +62,67 @@ Partial Class dlgFileNew
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 110)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 103)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(399, 48)
         Me.ucrBase.TabIndex = 6
+        '
+        'ucrName
+        '
+        Me.ucrName.IsReadOnly = False
+        Me.ucrName.Location = New System.Drawing.Point(107, 75)
+        Me.ucrName.Name = "ucrName"
+        Me.ucrName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrName.TabIndex = 7
+        '
+        'nudRows
+        '
+        Me.nudRows.Location = New System.Drawing.Point(75, 12)
+        Me.nudRows.Maximum = New Decimal(New Integer() {32767, 0, 0, 0})
+        Me.nudRows.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudRows.Name = "nudRows"
+        Me.nudRows.Size = New System.Drawing.Size(47, 20)
+        Me.nudRows.TabIndex = 8
+        Me.nudRows.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'nudColumns
+        '
+        Me.nudColumns.Location = New System.Drawing.Point(75, 41)
+        Me.nudColumns.Maximum = New Decimal(New Integer() {32767, 0, 0, 0})
+        Me.nudColumns.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudColumns.Name = "nudColumns"
+        Me.nudColumns.Size = New System.Drawing.Size(47, 20)
+        Me.nudColumns.TabIndex = 9
+        Me.nudColumns.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'dlgFileNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 170)
+        Me.ClientSize = New System.Drawing.Size(420, 165)
+        Me.Controls.Add(Me.nudColumns)
+        Me.Controls.Add(Me.nudRows)
+        Me.Controls.Add(Me.ucrName)
         Me.Controls.Add(Me.lblName)
-        Me.Controls.Add(Me.txtName)
-        Me.Controls.Add(Me.txtColumns)
         Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.txtRows)
         Me.Controls.Add(Me.lblRows)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgFileNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "New file"
+        CType(Me.nudRows, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents txtName As TextBox
     Friend WithEvents lblName As Label
     Friend WithEvents lblColumns As Label
-    Friend WithEvents txtColumns As TextBox
-    Friend WithEvents txtRows As TextBox
     Friend WithEvents lblRows As Label
+    Friend WithEvents ucrName As ucrInputComboBox
+    Friend WithEvents nudRows As NumericUpDown
+    Friend WithEvents nudColumns As NumericUpDown
 End Class
