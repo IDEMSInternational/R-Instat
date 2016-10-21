@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class sdgCorrPlot
     Public clsRGGscatmatrix, clsRGGcorrGraphics, clsRGraphics As New RFunction
+    Public strDataFrame As String
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -34,7 +35,7 @@ Public Class sdgCorrPlot
 
     Public Sub GGPairs()
         clsRGraphics.SetRCommand("ggpairs")
-        clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame)
         clsRGraphics.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGraphics)
@@ -51,14 +52,14 @@ Public Class sdgCorrPlot
 
     Public Sub GGscatmatrix()
         clsRGGscatmatrix.SetRCommand("ggscatmat")
-        clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame)
         clsRGGscatmatrix.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames(bWithQuotes:=True))
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)
     End Sub
 
     Public Sub SetDefaults()
-        ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames)
+        ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveGraph.strPrefix = "CorGraph"
         chkCorrelationMatrix.Checked = True
         chkPairwisePlot.Checked = False
@@ -67,6 +68,7 @@ Public Class sdgCorrPlot
         nudAlphaScatter.Value = 1
         cmbgeom.SelectedItem = "tile"
         chkColour.Checked = True
+        ' we need only avaliable thigns in the data frame to be what is abaliable in the thing            ucrSelectFactor.lstAvailableVariable.CanSelect.GetType() = dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
@@ -154,7 +156,7 @@ Public Class sdgCorrPlot
 
     Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
         If ucrSaveGraph.bSaveGraph Then
-            dlgCorrelation.ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=dlgCorrelation.ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
+            dlgCorrelation.ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
         Else
             dlgCorrelation.ucrBase.clsRsyntax.RemoveAssignTo()
         End If
@@ -198,11 +200,8 @@ Public Class sdgCorrPlot
         clsRGGcorrGraphics.AddParameter("geom", Chr(34) & cmbgeom.SelectedItem.ToString & Chr(34))
     End Sub
 
-
-
     Private Sub nudAlpha_ValueChanged(sender As Object, e As EventArgs) Handles nudAlphaScatter.ValueChanged
         clsRGGscatmatrix.AddParameter("alpha", nudAlphaScatter.Value.ToString)
     End Sub
-
 
 End Class

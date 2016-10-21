@@ -39,7 +39,7 @@ Partial Class dlgCorrelation
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
-        Me.ucrSelectorDataFrameVarAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
@@ -229,15 +229,15 @@ Partial Class dlgCorrelation
         Me.ucrReceiverFirstColumn.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFirstColumn.TabIndex = 5
         '
-        'ucrSelectorDataFrameVarAddRemove
+        'ucrSelectorCorrelation
         '
-        Me.ucrSelectorDataFrameVarAddRemove.bShowHiddenColumns = False
-        Me.ucrSelectorDataFrameVarAddRemove.bUseCurrentFilter = False
-        Me.ucrSelectorDataFrameVarAddRemove.Location = New System.Drawing.Point(10, 40)
-        Me.ucrSelectorDataFrameVarAddRemove.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorDataFrameVarAddRemove.Name = "ucrSelectorDataFrameVarAddRemove"
-        Me.ucrSelectorDataFrameVarAddRemove.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDataFrameVarAddRemove.TabIndex = 2
+        Me.ucrSelectorCorrelation.bShowHiddenColumns = False
+        Me.ucrSelectorCorrelation.bUseCurrentFilter = False
+        Me.ucrSelectorCorrelation.Location = New System.Drawing.Point(10, 40)
+        Me.ucrSelectorCorrelation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorCorrelation.Name = "ucrSelectorCorrelation"
+        Me.ucrSelectorCorrelation.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorCorrelation.TabIndex = 2
         '
         'ucrBase
         '
@@ -261,7 +261,7 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.lblFirstColumn)
         Me.Controls.Add(Me.ucrReceiverSecondColumn)
         Me.Controls.Add(Me.ucrReceiverFirstColumn)
-        Me.Controls.Add(Me.ucrSelectorDataFrameVarAddRemove)
+        Me.Controls.Add(Me.ucrSelectorCorrelation)
         Me.Controls.Add(Me.rdoMultipleColumns)
         Me.Controls.Add(Me.rdoTwoColumns)
         Me.Controls.Add(Me.ucrBase)
@@ -284,7 +284,7 @@ Partial Class dlgCorrelation
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents rdoTwoColumns As RadioButton
     Friend WithEvents rdoMultipleColumns As RadioButton
-    Friend WithEvents ucrSelectorDataFrameVarAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorCorrelation As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverFirstColumn As ucrReceiverSingle
     Friend WithEvents ucrReceiverSecondColumn As ucrReceiverSingle
     Friend WithEvents lblFirstColumn As Label
