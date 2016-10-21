@@ -359,7 +359,7 @@ Public Class sdgPlots
     End Sub
 
     Public Property bLayersDefaultIsGlobal As Boolean
-        'Question: what is this function for again? It is only used in the set dfaults here, which sets it to false
+        'Question: what is this property used for again? It is only used in the set defaults here, which sets it to false
         Get
             Return bAdditionalLayersSetGlobal
         End Get

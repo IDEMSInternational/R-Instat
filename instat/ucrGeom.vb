@@ -17,7 +17,6 @@
 
 Public Class ucrGeom
     'Ucr Geom is used to select the geom that will be used for a specific graph/layer. It is used in ucrGeomListWithAes and ucrLayerParameters both ucr's of sdgLayerOptions. 
-    'Check if there is any other use/place to mention ...
     'It stores the definition of the different Geoms, using instances of clsGeom, including their R names, the relevant/available parameters and their description (type of values, values, default, ...).
 
     Public strAesParameterName As String
@@ -32,8 +31,8 @@ Public Class ucrGeom
     Public clsCurrGeom As New Geoms
     Public clsGeomFunction As New RFunction
     Public lstFunctionParameters As New List(Of RParameter)
-    'Question: clsGeomFunction is the RFunction associated to the clsCurrGeom ? Could it be included in clsCurrGeom, if yes do we wish that ? 
-    'Similarly for lstFunctionParameters. Both, together with clsGgplotAesFunction are supposedly passed through to ucrAdditionalLayers and used in sdgLayerOption.SetupLayer called in ucrAdditionalLayers to ... ?
+    'Question: clsGeomFunction is the RFunction associated to the clsCurrGeom ? Could it be included in clsCurrGeom, if yes do we wish that ? Used together with clsGgplotAesFunction... ?
+    'Similarly for lstFunctionParameters. Both, together with clsGgplotAesFunction are supposedly passed through to ucrAdditionalLayers and assigned to smth in ucrAdditionalLayers by calling  sdgLayerOption.SetupLayer which calls setup ? Still need to figure out when/how they are used though...
     Public clsGgplotAesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
@@ -59,14 +58,20 @@ Public Class ucrGeom
     End Sub
 
     Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+        'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
+        'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
 
+        'First we clear the content of the displayed list (in cboGeomList) of available geoms as this may change between different setup's according to the parameter iNumVariablesForGeoms (see below). 
         cboGeomList.Items.Clear()
+        'Then we add geom names from our lstAllGeoms to cboGeomList when the number of available variables to associate to geom Aes (iNumVariablesForGeom) is greater or equal to the number of mandatory Aes of that geom. Correct ?
         For Each GeomCount In lstAllGeoms
             If iNumVariablesForGeoms <= GeomCount.iNumMandatoryAes Then
+                'Warning: Should this not be greater or equal instead of lower or equal ? But then what would the default value be for iNumVariablesForGeom ? Not -1 !!
                 cboGeomList.Items.Add(GeomCount.strGeomName)
             End If
         Next
+        'Task: needs further commenting when understood. clsGeomFunction is set at different occasions, not only in setup. SetGeomFunction overwritten...
         SetGeomFunction(clsTempGeomFunc)
         If clsGeomFunction.strRCommand = Nothing OrElse cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
@@ -86,6 +91,7 @@ Public Class ucrGeom
         'Question : this strAesParameterName is used weirdly, its taken as parameter then inside the function only the class field with same name is used... ?
         'Warning: It seems from both running and searching in the code that this sub is never used. Also, strAesParameterName seems to be used only here i.e. nowhere...
         'Task: Give an explanation of how this is supposed to work or delete
+
         'this adds parameters TODO pass appropriate parameters.
         Dim i As Integer
         Dim clsParam As New RParameter

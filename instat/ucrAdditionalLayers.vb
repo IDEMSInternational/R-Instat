@@ -19,7 +19,7 @@ Public Class ucrAdditionalLayers
     Public clsRSyntax As RSyntax
     Public clsRggplotFunction As New RFunction
     Public clsGgplotAesFunction As New RFunction
-    'Question: Has the same name as ucrGeom.clsGgplotAesFunction, but can't find where these two are linked ?? And the one in Geom doesn't seem to be used independently...
+    'Task: investigate how are used and how are shared between different components. See also setup function...
     Public bFirstLoad As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
@@ -62,8 +62,8 @@ Public Class ucrAdditionalLayers
         lstLayerComplete.Clear()
         strGlobalDataFrame = ""
         bSetGlobalIsDefault = True
-        'This bSetGlobalIsDefault seems to stay True forever, maybe source of some of the errors ? Where is this used ?
-        'This question has alreadyy been answered. It doesn't stay true, it's changed in sdgPlots, set as default value False... But I don't remember what it is doing !!! Need to write down the comments...
+        'Question: This bSetGlobalIsDefault seems to stay True forever, maybe source of some of the errors ? Where is this used ?
+        'Question: This question has already been answered? It doesn't stay true, it's changed in sdgPlots, set as default value False... But I don't remember what it is doing !!! Need to write down the comments...
         SetEditDeleteEnabled()
     End Sub
 
