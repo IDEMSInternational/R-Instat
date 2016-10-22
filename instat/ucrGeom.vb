@@ -18,12 +18,6 @@
 Public Class ucrGeom
     'Ucr Geom is used to select the geom that will be used for a specific graph/layer. It is used in ucrGeomListWithAes and ucrLayerParameters both ucr's of sdgLayerOptions. 
     'It stores the definition of the different Geoms, using instances of clsGeom, including their R names, the relevant/available parameters and their description (type of values, values, default, ...).
-
-    Public strAesParameterName As String
-    Public strAesParameterValue As String
-    'Warning: these two seems to be obsolete according to global search, 
-    'only used in Sub AddParameter below, which Is apparently Not used anywhere.
-    'Seems like they are phantoms of the parameters of the same name in the sub AddAesParameters in clsGeom.
     Public lstAllGeoms As New List(Of Geoms)
     Public lstGgParameters As New List(Of RParameter)
     'Warning: This is used nowhere ...
@@ -87,23 +81,7 @@ Public Class ucrGeom
         clsGeomFunction = clsTempGeomFunc
     End Sub
 
-    Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
-        'Question : this strAesParameterName is used weirdly, its taken as parameter then inside the function only the class field with same name is used... ?
-        'Warning: It seems from both running and searching in the code that this sub is never used. Also, strAesParameterName seems to be used only here i.e. nowhere...
-        'Task: Give an explanation of how this is supposed to work or delete
 
-        'this adds parameters TODO pass appropriate parameters.
-        Dim i As Integer
-        Dim clsParam As New RParameter
-        i = lstFunctionParameters.FindIndex(Function(x) x.strArgumentName.Equals(Me.strAesParameterName))
-        If i = -1 Then
-            clsParam.SetArgumentName(Me.strAesParameterName)
-            clsParam.SetArgumentValue(Me.strAesParameterValue)
-            lstFunctionParameters.Add(clsParam)
-        Else
-            lstFunctionParameters(i).strArgumentValue = Me.strAesParameterValue
-        End If
-    End Sub
 
     Public Sub CreateGeomList()
         Dim clsgeom_abline As New Geoms

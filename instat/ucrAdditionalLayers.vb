@@ -17,9 +17,10 @@
 
 Public Class ucrAdditionalLayers
     Public clsRSyntax As RSyntax
+    'clsRSyntax is playing the role of "+" operator in the construction of the whole ggplot2 command. It will take as first parameter clsRggplotFunction and as other parameters the sdgLayerOptions.clsGeomFunction's of different layers.
     Public clsRggplotFunction As New RFunction
     Public clsGgplotAesFunction As New RFunction
-    'Task: investigate how are used and how are shared between different components. See also setup function...
+    'clsRggplotFunction is the global ggplot function that takes as mapping parameter clsGgplotAesFunction. clsRggplotFunction is linked through to sdgLayerOptions where it might be modified when sdgLayerOptions.chkApplyOnAllLyers is ticked for instance.
     Public bFirstLoad As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
