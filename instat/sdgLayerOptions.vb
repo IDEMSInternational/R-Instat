@@ -17,7 +17,9 @@ Imports instat.Translations
 Public Class sdgLayerOptions
     Public clsGeomFunction As New RFunction
     Public clsAesFunction As New RFunction
+    'clsAesFunction is the global aes function, used as mapping value in the ggplot function.
     Public clsGgplotFunction As New RFunction
+    'clsGgplotFunction is the global ggplot function, linked through the ucrAdditionalLayers to either sdgPlots or dlgGeneralForGraphics.
     Public bFirstLoad As Boolean = True
     Public bAesInGeom As Boolean
     Public strGlobalDataFrame As String
@@ -43,7 +45,8 @@ Public Class sdgLayerOptions
     Private Sub InitialiseDialog()
         ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
-        'All these controls are on the current subdialogue and should be linked together as shown above.
+        'Each ucrLayerParameter has a field of type ucrGeomListWithAes and reciprocally as both of them "collaborate to provide full description of a Layer".
+        'The obvious linking is performed here in sdgLayerOptions.
     End Sub
 
     Private Sub SetDefaults()
@@ -56,7 +59,7 @@ Public Class sdgLayerOptions
     End Sub
 
     Public Sub SetRSyntax(clsRSyntax As RSyntax)
-
+        'Question: sdgLayerOptions has no RSyntax, what would this function be used for ? Should it be deleted ? It is called in dlgBoxplot and dlgDotPlot but obviously doesn't perform anything...
     End Sub
 
     Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
@@ -78,11 +81,14 @@ Public Class sdgLayerOptions
 
     Private Sub ucrSdgLayerBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgLayerBase.ClickReturn
         If ucrGeomWithAes.chkApplyOnAllLayers.Checked Then
+            'First, in case the chkApplyOnAllLayers is checked, what is by default understood as local mapping (clsGeomAesFunction) needs to become global mapping: the Aes parameters in clsGeomAesFunction are sent through to clsAesFunction.
             For Each clsParam In ucrGeomWithAes.clsGeomAesFunction.clsParameters
                 clsAesFunction.AddParameter(clsParam)
             Next
+            'Now, we don't want the parameters "mapping" and "data" in the Layer as these will be fixed globally and then inherited.
             clsGeomFunction.RemoveParameterByName("mapping")
             clsGeomFunction.RemoveParameterByName("data")
+            'Here the global ggplot function takes the relevant "mapping" and "data" parameters as required by "ApplyOnAllLayers".
             clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction)
             clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
             strGlobalDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text

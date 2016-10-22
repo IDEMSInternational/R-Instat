@@ -48,6 +48,7 @@ Public Class dlgDotPlot
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        'Warning: this sub in sdgLayerOptions is not doing anything, there is no RSyntax field in sdgLayerOptions.
         sdgPlots.SetGgplotFunction(clsRggplotFunction)
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)

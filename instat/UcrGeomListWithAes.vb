@@ -26,6 +26,7 @@ Public Class UcrGeomListWithParameters
     Public bCheckEnabled As Boolean = True
     Public Event DataFrameChanged()
     Public clsGeomAesFunction As RFunction
+    'clsGeomAesFunction stores the value (aes function) of the local mapping (of this particular layer). It is used as parameter in sdgLayerOptions.clsGeomFunction.
     Public bAddToLocalAes As Boolean = True
     Public bCurrentFixAes As Boolean = True
 
