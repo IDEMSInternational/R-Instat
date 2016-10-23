@@ -1217,4 +1217,12 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnMakeDate.Click
         dlgMakeDate.ShowDialog()
     End Sub
+
+    Private Sub mnuClimdexCreateClimdexInput_Click(sender As Object, e As EventArgs) Handles mnuClimdexCreateClimdexInput.Click
+        dlgClimdexInput.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimdexIndices_Click(sender As Object, e As EventArgs) Handles mnuClimdexIndices.Click
+        dlgClimdexIndices.ShowDialog()
+    End Sub
 End Class
