@@ -63,8 +63,7 @@ Public Class ucrAdditionalLayers
         lstLayerComplete.Clear()
         strGlobalDataFrame = ""
         bSetGlobalIsDefault = True
-        'Question: This bSetGlobalIsDefault seems to stay True forever, maybe source of some of the errors ? Where is this used ?
-        'Question: This question has already been answered? It doesn't stay true, it's changed in sdgPlots, set as default value False... But I don't remember what it is doing !!! Need to write down the comments...
+        'Question to be discussed: This value is changed in sdgPlots, set as default value False... Is it just saying that the global Aesthetics should be used as default ? Used in the parameters of SetupLayer to choose the value of bUseGlobalAes ...
         SetEditDeleteEnabled()
     End Sub
 
@@ -137,6 +136,10 @@ Public Class ucrAdditionalLayers
             clsLocalAes = Nothing
         End If
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=dlgGeneralForGraphics.clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=dlgGeneralForGraphics.clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=False, clsTempLocalAes:=clsLocalAes)
+        'Question to be discussed: Could solve bug3 in issue #1931 here by adding a parameter in SetupLayer deciding if chkIgnoreGlobalAes is ticked as discussed in ucrGeomWithAes l78 ? 
+        'The value of the parameters bUseForGlobalAes And bUseGlobalAes should then be identified within the Layer but Not quite sure about how to do this. 
+        'The Information about a Layer seems to be stored in RSyntax parameters. Could easily identify if chkIgnoreGlobalAes should be ticked for this Layer as it Is determined by the value of clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).GetParamter("inherit.aes") (warning, would use clsParameters.Find(...) function, what happens if that parameter "inherit.aes" Is Not in the list ?).
+        'However for ApplyOnAllLayers ? Maybe this Apply on all Layers should never be ticked when it comes to edit a Layer ? Is there any way the information about ApplyOnAllLayers of a Layer is stored, or could be stored? ... 
         sdgLayerOptions.ShowDialog()
         AddLayers(lstLayers.SelectedItems(0))
     End Sub
