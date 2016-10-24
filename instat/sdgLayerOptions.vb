@@ -59,7 +59,7 @@ Public Class sdgLayerOptions
     End Sub
 
     Public Sub SetRSyntax(clsRSyntax As RSyntax)
-        'Question: sdgLayerOptions has no RSyntax, what would this function be used for ? Should it be deleted ? It is called in dlgBoxplot and dlgDotPlot but obviously doesn't perform anything...
+        'Question to discuss: sdgLayerOptions has no RSyntax, what would this function be used for ? Should it be deleted ? It is called in dlgBoxplot and dlgDotPlot but obviously doesn't perform anything...
     End Sub
 
     Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
@@ -91,6 +91,8 @@ Public Class sdgLayerOptions
             'Here the global ggplot function takes the relevant "mapping" and "data" parameters as required by "ApplyOnAllLayers".
             clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction)
             clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            'The data frame that is selected in the dataframe selector (lives in ucrGeomWithAes) is communicated to the sdgLayerOptions and the ucrGeomWithAes
+            'Question to be discussed: could these two strGlobalDataFrame and ucrGeomWithAes.strGlobalDataFrame not be linked together in sdgLayerOptions.initialisedialog() ? 
             strGlobalDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             ucrGeomWithAes.strGlobalDataFrame = strGlobalDataFrame
         Else

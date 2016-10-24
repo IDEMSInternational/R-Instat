@@ -76,6 +76,7 @@ Public Class UcrGeomListWithParameters
         bCurrentFixAes = bFixAes
         SetAes(bCurrentFixAes)
         chkApplyOnAllLayers.Checked = bUseGlobalAes
+        'Question to be discussed: should it not be "chkIgnoreGlobalAesthetics.checked = (Not bUseGlobalAes)" ? Also do we need another boolean as argument for chkApplyOnAllLayers e.g. "bUseForGlobalAes" ? Alternatively could we change the name of this one to bUseForGlobalAes and add another one for chkIgnoreGlobalAesthetics.checked
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)
