@@ -38,7 +38,7 @@ Public Class ucrAdditionalLayers
     End Sub
 
     'The following three subs enable to link the RSyntax, clsGgplotFunction and clsAesFunction from ucrAdditionalLayers
-    'to the corresponding fields in dlgGeneralForGraphics or sdgPlots depending on which one has been initialised last (indeed, link created in Initialise subs).  
+    'to the corresponding fields in dlgGeneralForGraphics or sdgPlots (both have an instance of ucrAdditionalLayers).  
     Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
         clsRSyntax = clsRSyntaxIn
     End Sub
