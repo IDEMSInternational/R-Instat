@@ -26,7 +26,8 @@ Public Class ucrAdditionalLayers
     Public iLayerIndex As Integer
     Private strGlobalDataFrame As String
     Public bSetGlobalIsDefault As Boolean
-    'Question: What is this variable about again ? it is linked with sdgPlots.bAdditionalLayersSetGlobal in sdgPLots.bLayersDefaultIsGolobal.
+    'Deciding if the first layer needs to be used for global aesthetics. 
+    'Question to be discussed: What is this variable about again ? it is linked with sdgPlots.bAdditionalLayersSetGlobal in sdgPLots.bLayersDefaultIsGolobal.
 
     Public Sub New()
 
