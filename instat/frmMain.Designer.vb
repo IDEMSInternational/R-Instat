@@ -365,6 +365,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimdex = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1247,7 +1248,7 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.mnuClimaticOrganise, Me.mnuClimaticDescribe, Me.mnuClimaticModel, Me.ToolStripSeparator16, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticMarkovModelling, Me.ToolStripSeparator17, Me.mnuClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.mnuClimaticOrganise, Me.mnuClimaticDescribe, Me.mnuClimaticModel, Me.ToolStripSeparator16, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticMarkovModelling, Me.ToolStripSeparator17, Me.mnuClimateMethods, Me.mnuClimdex})
         Me.mnuClimatic.Name = "mnuClimatic"
         Me.mnuClimatic.Size = New System.Drawing.Size(63, 20)
         Me.mnuClimatic.Tag = "Climatic"
@@ -2827,6 +2828,13 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
+        'mnuClimdex
+        '
+        Me.mnuClimdex.Name = "mnuClimdex"
+        Me.mnuClimdex.Size = New System.Drawing.Size(171, 22)
+        Me.mnuClimdex.Tag = "Climdex"
+        Me.mnuClimdex.Text = "Climdex"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3193,4 +3201,5 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnMakeDate As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnMakeTime As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnUseTime As ToolStripMenuItem
+    Friend WithEvents mnuClimdex As ToolStripMenuItem
 End Class
