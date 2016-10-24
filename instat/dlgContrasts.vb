@@ -31,12 +31,8 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForContrasts.IsEmpty Then
-            If rdoCurrentContrasts.Checked OrElse rdoHemert.Checked OrElse rdoPolynomials.Checked OrElse rdoSumToZero.Checked OrElse rdoTreatControl.Checked OrElse rdoUserDefined.Checked Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+        If Not ucrReceiverForContrasts.IsEmpty AndAlso ucrInputContrast.IsEmpty = False Then
+            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -46,19 +42,18 @@ Public Class dlgContrasts
 
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverForContrasts.Selector = ucrSelectorForContrast
         ucrReceiverForContrasts.SetMeAsReceiver()
         ucrReceiverForContrasts.SetIncludedDataTypes({"factor"})
         ucrBase.iHelpTopicID = 353
-        ucrFactorLevelsAndLabels.SetReceiver(ucrReceiverForContrasts)
-        ucrFactorLevelsAndLabels.SetAsSingleSelector()
-        clsLevels.SetRCommand("levels")
+        ucrInputContrast.SetItems({"Current Contrast", "Helmert", "Polynomials", "Treatment/Control", "Sum to Zero", "User Defined(Overwrite)"})
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor")
+
     End Sub
     Private Sub SetDefaults()
-        rdoCurrentContrasts.Checked = True
-        ContrastsFunctions()
+        ucrInputContrast.SetName("Treatment/Control")
         ucrSelectorForContrast.Reset()
+        ucrInputContrast.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -66,37 +61,41 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub ucrReceiverForContrasts_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForContrasts.SelectionChanged
-        AddLevelsObj()
+        If Not ucrReceiverForContrasts.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("factor", ucrReceiverForContrasts.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("factor")
+        End If
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoCurrentContrasts_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCurrentContrasts.CheckedChanged, rdoHemert.CheckedChanged, rdoPolynomials.CheckedChanged, rdoTreatControl.CheckedChanged, rdoUserDefined.CheckedChanged, rdoSumToZero.CheckedChanged
-        ContrastsFunctions()
+
+    Private Sub ucrSelectorForContrast_DataFrameChanged() Handles ucrSelectorForContrast.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrInputContrast_NameChanged() Handles ucrInputContrast.NameChanged
+        If Not ucrInputContrast.IsEmpty Then
+            SelectContrast()
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("new_contrasts")
+        End If
         TestOKEnabled()
     End Sub
 
-    Private Sub AddLevelsObj()
-        If ucrReceiverForContrasts.IsEmpty = False Then
-            clsLevels.AddParameter("x", clsRFunctionParameter:=ucrReceiverForContrasts.GetVariables)
-        Else
-            clsLevels.RemoveParameterByName("x")
-        End If
-        ucrBase.clsRsyntax.AddParameter("n", clsRFunctionParameter:=clsLevels)
+    Private Sub SelectContrast()
+        Select Case ucrInputContrast.GetText
+            Case "Treatment/Control"
+                ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.treatment" & Chr(34))
+            Case "Helmert"
+                ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.helmert" & Chr(34))
+            Case "Polynomials"
+                ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.poly" & Chr(34))
+            Case "Sum to Zero"
+                ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.sum" & Chr(34))
+            Case "User Defined(Overwrite)"
+                ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & ucrInputContrast.GetText & Chr(34))
+            Case Else
+        End Select
     End Sub
-    Private Sub ContrastsFunctions()
-        If rdoSumToZero.Checked Then
-            ucrBase.clsRsyntax.SetFunction("contr.sum")
-        ElseIf rdoCurrentContrasts.Checked Then
-
-        ElseIf rdoHemert.Checked Then
-            ucrBase.clsRsyntax.SetFunction("contr.helmert")
-        ElseIf rdoTreatControl.Checked Then
-            ucrBase.clsRsyntax.SetFunction("contr.treatment")
-        ElseIf rdoUserDefined.Checked
-
-        Else
-            ucrBase.clsRsyntax.SetFunction("contr.poly")
-        End If
-    End Sub
-
 End Class
