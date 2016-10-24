@@ -169,11 +169,11 @@ Public Class ucrGeom
         'Optional
         'we can map a continuous variable to y but we must include stat = “identity” inside the geom.
         clsgeom_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
-        clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor"}))
-        clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}))
-        clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor"}))
-        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
-        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
+        clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'won't visibly change anything unless you change the theme
+        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"})) ' won't visibly change anything unless you change the theme
 
         'add layer parameters 
         clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
