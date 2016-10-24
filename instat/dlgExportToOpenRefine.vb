@@ -12,7 +12,6 @@
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports instat.Translations
-
 Public Class dlgExportToOpenRefine
     Public bFirstLoad As Boolean = True
 
@@ -23,27 +22,21 @@ Public Class dlgExportToOpenRefine
             SetDefaults()
             bFirstLoad = False
         Else
-            ReopenDialog()
+
         End If
         TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
-        chkOpenRefineBrowser.Checked = False
+        chkRefineBrowser.Checked = False
         chkCSV.Checked = False
         ucrOpenRefineDataFrame.Reset()
         ucrInputDatasetName.Reset()
-        chkOpenRefineBrowser.ResetText()
         ucrInputDatasetName.SetName("TheCurrentDataSetName _ cleanup")
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("refine_upload")
-        'ucrBase.clsRsyntax.SetFunction("write")
-    End Sub
-
-    Private Sub ReopenDialog()
 
     End Sub
 
@@ -56,39 +49,39 @@ Public Class dlgExportToOpenRefine
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        TestOKEnabled()
         SetDefaults()
     End Sub
 
-    Private Sub ucrInputDatasetName_TextChanged(sender As Object, e As EventArgs) Handles ucrInputDatasetName.TextChanged
-        SetDefaults()
-    End Sub
-
-    Private Sub chkOpenRefineBrowser_CheckedChanged(sender As Object, e As EventArgs) Handles  chkCSV.CheckedChanged
-        OpenRefineParameters()
+    Private Sub chkOpenRefineBrowser_CheckedChanged(sender As Object, e As EventArgs) Handles chkCSV.CheckedChanged, chkRefineBrowser.CheckedChanged
+        RefineOrConvertToCSV()
     End Sub
 
     Private Sub ucrOpenRefineDataFrame_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrOpenRefineDataFrame.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrOpenRefineDataFrame.strCurrDataFrame & Chr(34))
-
+        RefineOrConvertToCSV()
     End Sub
 
     Private Sub ucrInputDatasetName_ContentsChanged() Handles ucrInputDatasetName.ContentsChanged
-        ucrBase.clsRsyntax.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
+        RefineOrConvertToCSV()
+        TestOKEnabled()
     End Sub
 
-    Private Sub OpenRefineParameters()
+    Private Sub RefineOrConvertToCSV()
         If chkCSV.Checked Then
-            'ucrBase.clsRsyntax.AddParameter("file")
-            'ucrBase.clsRsyntax.AddParameter("x")
-        Else
-
-        End If
-
-        If chkOpenRefineBrowser.Checked Then
-            ucrBase.clsRsyntax.AddParameter("open.browser", "FALSE")
-        Else
+            ucrBase.clsRsyntax.SetFunction("write.csv")
+            ucrBase.clsRsyntax.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
+            ucrBase.clsRsyntax.RemoveParameter("file")
+            ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText & ".csv" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("row.names", "FALSE")
             ucrBase.clsRsyntax.RemoveParameter("open.browser")
+            ucrBase.clsRsyntax.RemoveParameter("project.name")
+        ElseIf chkRefineBrowser.Checked Then
+            ucrBase.clsRsyntax.SetFunction("rrefine::refine_upload")
+            ucrBase.clsRsyntax.AddParameter("open.browser", "TRUE")
+            ucrBase.clsRsyntax.RemoveParameter("x")
+            ucrBase.clsRsyntax.RemoveParameter("row.names")
+            ucrBase.clsRsyntax.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
+            ucrBase.clsRsyntax.RemoveParameter("file")
+            ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & ".csv" & Chr(34))
         End If
     End Sub
 End Class

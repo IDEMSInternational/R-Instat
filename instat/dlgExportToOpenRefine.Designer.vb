@@ -27,7 +27,7 @@ Partial Class dlgExportToOpenRefine
         Me.ucrBase = New instat.ucrButtons()
         Me.LblNameDataSet = New System.Windows.Forms.Label()
         Me.chkCSV = New System.Windows.Forms.CheckBox()
-        Me.chkOpenRefineBrowser1 = New System.Windows.Forms.CheckBox()
+        Me.chkRefineBrowser = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'ucrInputDatasetName
@@ -66,29 +66,29 @@ Partial Class dlgExportToOpenRefine
         'chkCSV
         '
         Me.chkCSV.AutoSize = True
-        Me.chkCSV.Location = New System.Drawing.Point(237, 50)
+        Me.chkCSV.Location = New System.Drawing.Point(263, 52)
         Me.chkCSV.Name = "chkCSV"
         Me.chkCSV.Size = New System.Drawing.Size(99, 17)
         Me.chkCSV.TabIndex = 9
         Me.chkCSV.Text = "Convert to CSV"
         Me.chkCSV.UseVisualStyleBackColor = True
         '
-        'chkOpenRefineBrowser1
+        'chkRefineBrowser
         '
-        Me.chkOpenRefineBrowser1.AutoSize = True
-        Me.chkOpenRefineBrowser1.Location = New System.Drawing.Point(237, 15)
-        Me.chkOpenRefineBrowser1.Name = "chkOpenRefineBrowser1"
-        Me.chkOpenRefineBrowser1.Size = New System.Drawing.Size(153, 17)
-        Me.chkOpenRefineBrowser1.TabIndex = 10
-        Me.chkOpenRefineBrowser1.Text = "Open OpenRefine Browser"
-        Me.chkOpenRefineBrowser1.UseVisualStyleBackColor = True
+        Me.chkRefineBrowser.AutoSize = True
+        Me.chkRefineBrowser.Location = New System.Drawing.Point(263, 12)
+        Me.chkRefineBrowser.Name = "chkRefineBrowser"
+        Me.chkRefineBrowser.Size = New System.Drawing.Size(93, 17)
+        Me.chkRefineBrowser.TabIndex = 9
+        Me.chkRefineBrowser.Text = "Open Browser"
+        Me.chkRefineBrowser.UseVisualStyleBackColor = True
         '
         'dlgExportToOpenRefine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(416, 198)
-        Me.Controls.Add(Me.chkOpenRefineBrowser1)
+        Me.Controls.Add(Me.chkRefineBrowser)
         Me.Controls.Add(Me.chkCSV)
         Me.Controls.Add(Me.LblNameDataSet)
         Me.Controls.Add(Me.ucrBase)
@@ -110,5 +110,5 @@ Partial Class dlgExportToOpenRefine
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents LblNameDataSet As Label
     Friend WithEvents chkCSV As CheckBox
-    Friend WithEvents chkOpenRefineBrowser1 As CheckBox
+    Friend WithEvents chkRefineBrowser As CheckBox
 End Class
