@@ -58,9 +58,6 @@ Public Class sdgLayerOptions
 
     End Sub
 
-    Public Sub SetRSyntax(clsRSyntax As RSyntax)
-        'Question to discuss: sdgLayerOptions has no RSyntax, what would this function be used for ? Should it be deleted ? It is called in dlgBoxplot and dlgDotPlot but obviously doesn't perform anything...
-    End Sub
 
     Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         If clsTempGeomFunc Is Nothing Then

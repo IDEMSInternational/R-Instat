@@ -142,7 +142,7 @@ Public Class ucrAdditionalLayers
 
         'Before we set-up the Layer in sdgLayerOptions, we determine the value of bIgnoreGlobalAes. We can detect if chkIgnoreGlobalAes was ticked last time the Layer was editted by looking at the "inherit.aes" parameter of the layer parameters.
         clsTempRParameter = clsSelectedGeom.GetParameter("inherit.aes")
-        If (Not clsTempRParameter Is Nothing) AndAlso (clsTempRParameter.strArgumentValue = "False") Then
+        If (clsTempRParameter IsNot Nothing) AndAlso (clsTempRParameter.strArgumentValue = "False") Then
             bIgnoreGlobalAes = True
         Else bIgnoreGlobalAes = False
         End If
