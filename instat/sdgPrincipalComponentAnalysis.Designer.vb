@@ -76,11 +76,11 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoPointBip = New System.Windows.Forms.RadioButton()
         Me.lblBipInd = New System.Windows.Forms.Label()
         Me.tbBarPlot = New System.Windows.Forms.TabPage()
-        Me.ucrReceiverFactor = New instat.ucrReceiverMultiple()
         Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -690,15 +690,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbBarPlot.Text = "Bar Plot"
         Me.tbBarPlot.UseVisualStyleBackColor = True
         '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(253, 43)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactor.TabIndex = 4
-        '
         'ucrSelectorFactor
         '
         Me.ucrSelectorFactor.bShowHiddenColumns = False
@@ -736,6 +727,15 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 44)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.TabIndex = 5
         '
         'sdgPrincipalComponentAnalysis
         '
@@ -807,7 +807,6 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents chkRotation As CheckBox
     Friend WithEvents ucrSelectorFactor As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactorVariable As Label
-    Friend WithEvents ucrReceiverFactor As ucrReceiverMultiple
     Friend WithEvents grpGeomScree As GroupBox
     Friend WithEvents rdoBothScree As RadioButton
     Friend WithEvents rdoLineGeom As RadioButton
@@ -842,4 +841,5 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents cboLabelInd As ComboBox
     Friend WithEvents Label3 As Label
     Friend WithEvents cboLabelBip As ComboBox
+    Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
 End Class
