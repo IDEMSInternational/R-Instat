@@ -71,8 +71,7 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
 
-        sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
-        'Warning: this sub in sdgLayerOptions is not doing anything, there is no RSyntax field in sdgLayerOptions.
+
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.SetGgplotFunction(clsRggplotFunction)
 
