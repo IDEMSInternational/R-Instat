@@ -29,13 +29,13 @@ Public Class dlgFromLibrary
         If bFirstLoad Then
             InitialiseDialog()
             '
-            setDefaults()
+            SetDefaults()
             bFirstLoad = False
         End If
         TestOkEnabled()
     End Sub
 
-    Private Sub setDefaults()
+    Private Sub SetDefaults()
         rdoDefaultDatasets.Checked = True
         cboPackages.SelectedItem = "datasets"
         loadDatasets(cboPackages.SelectedItem.ToString)
@@ -45,6 +45,10 @@ Public Class dlgFromLibrary
         'fills the combo box
         clsDataFunction.SetRCommand("data")
         FillPackagesCombo()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click

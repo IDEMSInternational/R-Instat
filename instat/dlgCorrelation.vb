@@ -31,15 +31,18 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverFirstColumn.Selector = ucrSelectorDataFrameVarAddRemove
-        ucrReceiverSecondColumn.Selector = ucrSelectorDataFrameVarAddRemove
-        ucrReceiverMultipleColumns.Selector = ucrSelectorDataFrameVarAddRemove
+        ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
+        ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
+        ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverFirstColumn.SetDataType("numeric")
         ucrReceiverSecondColumn.SetDataType("numeric")
-        ucrSelectorDataFrameVarAddRemove.Reset()
-        ucrSelectorDataFrameVarAddRemove.Focus()
+        ucrSelectorCorrelation.Reset()
+        ucrSelectorCorrelation.Focus()
         ucrReceiverMultipleColumns.SetSingleTypeStatus(True)
         ucrReceiverMultipleColumns.SetDataType("numeric")
+        nudConfidenceInterval.Minimum = 0
+        nudConfidenceInterval.Maximum = 1
+        nudConfidenceInterval.Increment = 0.05
         ucrBase.iHelpTopicID = 186
     End Sub
 
@@ -49,8 +52,12 @@ Public Class dlgCorrelation
 
     Private Sub SetDefaults()
         rdoPearson.Checked = True
+        rdoCompleteRowsOnly.Checked = True
         rdoMultipleColumns.Checked = True
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        nudConfidenceInterval.Value = 0.95
         sdgCorrPlot.SetDefaults()
+        ucrSelectorCorrelation.Reset()
         ucrReceiverMultipleColumns.SetMeAsReceiver()
         TestOKEnabled()
     End Sub

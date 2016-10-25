@@ -38,16 +38,16 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblExplanatoryVariables
         '
         Me.lblExplanatoryVariables.AutoSize = True
-        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(255, 17)
+        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(248, 18)
         Me.lblExplanatoryVariables.Name = "lblExplanatoryVariables"
-        Me.lblExplanatoryVariables.Size = New System.Drawing.Size(108, 13)
+        Me.lblExplanatoryVariables.Size = New System.Drawing.Size(111, 13)
         Me.lblExplanatoryVariables.TabIndex = 1
         Me.lblExplanatoryVariables.Tag = "Explanatory_Variables"
-        Me.lblExplanatoryVariables.Text = "Explanatory Variables"
+        Me.lblExplanatoryVariables.Text = "Explanatory Variables:"
         '
         'cmdPCAOptions
         '
-        Me.cmdPCAOptions.Location = New System.Drawing.Point(303, 202)
+        Me.cmdPCAOptions.Location = New System.Drawing.Point(301, 201)
         Me.cmdPCAOptions.Name = "cmdPCAOptions"
         Me.cmdPCAOptions.Size = New System.Drawing.Size(106, 23)
         Me.cmdPCAOptions.TabIndex = 8
@@ -57,7 +57,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'nudComponents
         '
-        Me.nudComponents.Location = New System.Drawing.Point(372, 143)
+        Me.nudComponents.Location = New System.Drawing.Point(372, 144)
         Me.nudComponents.Name = "nudComponents"
         Me.nudComponents.Size = New System.Drawing.Size(42, 20)
         Me.nudComponents.TabIndex = 4
@@ -67,15 +67,15 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.lblComponents.AutoSize = True
         Me.lblComponents.Location = New System.Drawing.Point(247, 147)
         Me.lblComponents.Name = "lblComponents"
-        Me.lblComponents.Size = New System.Drawing.Size(118, 13)
+        Me.lblComponents.Size = New System.Drawing.Size(121, 13)
         Me.lblComponents.TabIndex = 3
         Me.lblComponents.Tag = "Number_of_Components"
-        Me.lblComponents.Text = "Number of Components"
+        Me.lblComponents.Text = "Number of Components:"
         '
         'chkScaleData
         '
         Me.chkScaleData.AutoSize = True
-        Me.chkScaleData.Location = New System.Drawing.Point(251, 172)
+        Me.chkScaleData.Location = New System.Drawing.Point(250, 173)
         Me.chkScaleData.Name = "chkScaleData"
         Me.chkScaleData.Size = New System.Drawing.Size(79, 17)
         Me.chkScaleData.TabIndex = 5
@@ -97,14 +97,14 @@ Partial Class dlgPrincipalComponentAnalysis
         'ucrResultName
         '
         Me.ucrResultName.IsReadOnly = False
-        Me.ucrResultName.Location = New System.Drawing.Point(125, 203)
+        Me.ucrResultName.Location = New System.Drawing.Point(103, 205)
         Me.ucrResultName.Name = "ucrResultName"
         Me.ucrResultName.Size = New System.Drawing.Size(145, 21)
         Me.ucrResultName.TabIndex = 11
         '
         'ucrReceiverMultiplePCA
         '
-        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(255, 34)
+        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(250, 33)
         Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
         Me.ucrReceiverMultiplePCA.Selector = Nothing
