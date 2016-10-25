@@ -68,7 +68,6 @@ Public Class sdgCorrPlot
         nudAlphaScatter.Value = 1
         cmbgeom.SelectedItem = "tile"
         chkColour.Checked = True
-        ucrSelectFactor.SetDataframe(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
