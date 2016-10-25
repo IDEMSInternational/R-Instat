@@ -178,6 +178,7 @@ Public Class RFunction
                 bIsAssigned = True
                 bToBeAssigned = False
             End If
+            'Warning: we encountered a few problems with this return, at some point had to change it to strScript for it to give a sensible result. Would be good to discuss this and make sure everything is sound...
             Return strAssignTo
         Else
             Return strTemp
