@@ -64,7 +64,7 @@ Public Class ucrAdditionalLayers
         lstLayerComplete.Clear()
         strGlobalDataFrame = ""
         bSetGlobalIsDefault = True
-        'Question to be discussed: This value is changed in sdgPlots, set as default value False... Is it just saying that the global Aesthetics should be used as default ? Used in the parameters of SetupLayer to choose the value of bUseGlobalAes ...
+        'Task: potentially get rid of this when the sdgPlotOptions has been reviewed to make the first Layer to be the main Layer. Then the procedure to tick the Apply on all Layers should simply be: if First first Layer, then tick by default, otherwise untick by default.
         SetEditDeleteEnabled()
     End Sub
 
@@ -72,7 +72,7 @@ Public Class ucrAdditionalLayers
 
     End Sub
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0))
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), bIgnoreGlobalAes:=False)
         ParentForm.SendToBack()
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
@@ -129,18 +129,26 @@ Public Class ucrAdditionalLayers
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
         Dim clsSelectedGeom As RFunction
         Dim clsLocalAes As RFunction
-
+        Dim bIgnoreGlobalAes As Boolean
+        'bIgnoreGlobalAes is used in Setup(Layer) to determine whether the chkIgnoreGlobalAes should be ticked in the sdgLayerOptions. It's value is determined below. The following RParameter will be used in this procedure.
+        Dim clsTempRParameter As RParameter
+        'The selected geom is found as the RFunction of the appropriate RParameter of RSyntax. The name of that Parameter is the name of the selected item in the lstLayers. That one is fetched using .SelectedItems(0) as there can only be one selected item at a time when the edit button is clicked.
         clsSelectedGeom = clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentFunction
         If clsSelectedGeom.GetParameter("mapping") IsNot Nothing Then
             clsLocalAes = clsSelectedGeom.GetParameter("mapping").clsArgumentFunction
         Else
             clsLocalAes = Nothing
         End If
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=dlgGeneralForGraphics.clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=dlgGeneralForGraphics.clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=False, clsTempLocalAes:=clsLocalAes)
-        'Question to be discussed: Could solve bug3 in issue #1931 here by adding a parameter in SetupLayer deciding if chkIgnoreGlobalAes is ticked as discussed in ucrGeomWithAes l78 ? 
-        'The value of the parameters bUseForGlobalAes And bUseGlobalAes should then be identified within the Layer but Not quite sure about how to do this. 
-        'The Information about a Layer seems to be stored in RSyntax parameters. Could easily identify if chkIgnoreGlobalAes should be ticked for this Layer as it Is determined by the value of clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).GetParamter("inherit.aes") (warning, would use clsParameters.Find(Function(x) x.strArgumentName = strName), if that parameter "inherit.aes" Is Not in the list, then Find will most probably return the default value of RParameter. What would that be ? Nothing or RParameter with empty fields ? Also there might be no parameters at all in clsParameters, then the function GetParameter returns Nothing).
-        'However for ApplyOnAllLayers ? Maybe this Apply on all Layers should never be ticked when it comes to edit a Layer ? Is there any way the information about ApplyOnAllLayers of a Layer is stored, or could be stored? ... 
+
+        'Before we set-up the Layer in sdgLayerOptions, we determine the value of bIgnoreGlobalAes. We can detect if chkIgnoreGlobalAes was ticked last time the Layer was editted by looking at the "inherit.aes" parameter of the layer parameters.
+        clsTempRParameter = clsSelectedGeom.GetParameter("inherit.aes")
+        If (Not clsTempRParameter Is Nothing) AndAlso (clsTempRParameter.strArgumentValue = "False") Then
+            bIgnoreGlobalAes = True
+        Else bIgnoreGlobalAes = False
+        End If
+
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=dlgGeneralForGraphics.clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=dlgGeneralForGraphics.clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=False, bIgnoreGlobalAes:=bIgnoreGlobalAes, clsTempLocalAes:=clsLocalAes)
+        'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.
         sdgLayerOptions.ShowDialog()
         AddLayers(lstLayers.SelectedItems(0))
     End Sub

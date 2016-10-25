@@ -291,8 +291,12 @@ Public Class ROperator
     End Sub
 
     Public Function GetParameter(strName As String) As RParameter
+        Dim iTempIndex As Integer = -1
         If Not clsAdditionalParameters Is Nothing Then
-            Return clsAdditionalParameters.Find(Function(x) x.strArgumentName = strName)
+            iTempIndex = clsAdditionalParameters.FindIndex(Function(x) x.strArgumentName = strName)
+            If iTempIndex <> -1 Then
+                Return clsAdditionalParameters(iTempIndex)
+            End If
         End If
         Return Nothing
     End Function
