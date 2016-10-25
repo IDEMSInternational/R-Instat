@@ -302,7 +302,15 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
     data_frame_name <- names(calc$calculated_from)[i]
     if(!(col_name %in% names(curr_data_list[[c_data_label]]))) {
       #TODO Add by =
-      curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE))
+      # if summary then do by by columns, using the link if exists
+      # otherwise, if there is a link, do by linking columns
+      # otherwie, try to merge naturally
+      if(self$link_exists_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)) {
+        
+      }
+      else {
+        curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE))
+      }
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
     col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
@@ -337,16 +345,9 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% filter_(.dots = as.formula(paste0("~", calc$function_exp)))
     curr_data_list[[c_require_merge_label]] <- TRUE
   }
-  # This type is merging the data
-  # The link will be changed
-  else if(calc$type == "join") {
-    # link needs to change
-    stop("join not yet implemented.")
-  }
-  # This type is when there is no main calculation but some subcalculations
+  # This type is when there is no main calculation but some sub_calculations
   # There is no change to the data
-  else if(calc$type == "combination") {
-  }
+  else if(calc$type == "combination") {}
   else stop("Cannot detect calculation type: ", calc$type)
   
   # This is done to clear the column attributes which are carried from the calculated columns
