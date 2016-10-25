@@ -188,6 +188,12 @@
     <Compile Include="dlgImportFromODK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportOpenRefine.Designer.vb">
+      <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportOpenRefine.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMakeDate.Designer.vb">
       <DependentUpon>dlgMakeDate.vb</DependentUpon>
     </Compile>
@@ -2270,6 +2276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromODK.resx">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportOpenRefine.resx">
+      <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
