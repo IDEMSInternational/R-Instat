@@ -35,7 +35,10 @@ Public Class dlgExportToOpenRefine
     End Sub
 
     Private Sub InitialiseDialog()
+        'The first R function that needs to be run is write.csv
+        clsWriteToCSV.SetRCommand("write.csv")
         ucrBase.clsRsyntax.SetFunction("rrefine::refine_upload")
+        clsWriteToCSV.AddParameter("row.names", "FALSE")
     End Sub
     'Making sure that Ok is Enabled if the ucrInput has a name typed
     Private Sub TestOKEnabled()
@@ -47,10 +50,15 @@ Public Class dlgExportToOpenRefine
     End Sub
 
     Private Sub ucrInputDatasetName_ContentsChanged() Handles ucrInputDatasetName.ContentsChanged
+        'We also use this sub to setup the last parameters of the main R function (in RSyntax) as it will avoid changing the parameters each time the user changes the DataSetName, merely do it once and for all when the user clicks OK.
+        ucrBase.clsRsyntax.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
+        clsWriteToCSV.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText & ".csv" & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrOpenRefineDataFrame_DataFrameChanged() Handles ucrOpenRefineDataFrame.DataFrameChanged
+        clsWriteToCSV.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
         ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
     End Sub
 
@@ -71,18 +79,7 @@ Public Class dlgExportToOpenRefine
 
     'In this dialog, we need to run two separate R functions. Since RSyntax only deals with one R command at a time, we add a sub that runs right before the rest by handling the "beforeClickOk" event, raised within the ucrBase
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        'The first R function that needs to be run is write.csv
-        clsWriteToCSV.SetRCommand("write.csv")
-        'Then we add the relevant parameters...
-        clsWriteToCSV.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
-        clsWriteToCSV.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText & ".csv" & Chr(34))
-        clsWriteToCSV.AddParameter("row.names", "FALSE")
         'Now that the RFunction clsWriteToCSV has been SetUp, we send the script (toscript) to the back-end via RLink.RunScript
         frmMain.clsRLink.RunScript(clsWriteToCSV.ToScript(), strComment:="Convert the data set to csv")
-
-        'We also use this sub to setup the last parameters of the main R function (in RSyntax) as it will avoid changing the parameters each time the user changes the DataSetName, merely do it once and for all when the user clicks OK.
-        ucrBase.clsRsyntax.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
-
     End Sub
 End Class
