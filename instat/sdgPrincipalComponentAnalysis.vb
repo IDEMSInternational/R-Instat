@@ -175,8 +175,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBarPlot0.SetParameter(False, clsRFunc:=clsRBarPlotGeom)
         clsRBarPlot.SetParameter(True, clsOp:=clsRBarPlot0)
         clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
-        ' error here
-        ' running ggplot(data=cbind("factor_col"=*receiver*, melt(*eigenvectors*)) + geom_bar(aes=(x=Val1, y=value, fill=factor_col, stat="identity") + facet_wrap(~Var2)
     End Sub
 
     Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs)
