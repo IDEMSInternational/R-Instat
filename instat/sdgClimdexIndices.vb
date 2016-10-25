@@ -16,7 +16,64 @@
 
 Imports instat.Translations
 Public Class sdgClimdexIndices
+    Public clsRFrostDays, clsRIcingDays, clsRSummerDays, clsRTropicalNights As New RFunction
+    Public bFirstLoad As Boolean = True
     Private Sub sdgClimdexIndices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Public Sub FrostDays()
+        dlgClimdex.ucrBaseClimdex.clsRsyntax.iCallType = 2
+        clsRFrostDays.SetRCommand("climdex.fd")
+        clsRFrostDays.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        dlgClimdex.ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsRFrostDays)
+    End Sub
+
+    Public Sub SummerDays()
+        dlgClimdex.ucrBaseClimdex.clsRsyntax.iCallType = 2
+        clsRSummerDays.SetRCommand("climdex.su")
+        clsRSummerDays.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        dlgClimdex.ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsRSummerDays)
+    End Sub
+
+    Public Sub IcingDays()
+        dlgClimdex.ucrBaseClimdex.clsRsyntax.iCallType = 2
+        clsRIcingDays.SetRCommand("climdex.id")
+        clsRIcingDays.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        dlgClimdex.ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsRIcingDays)
+    End Sub
+
+    Private Sub chkClimdexIndices_CheckedChanged(sender As Object, e As EventArgs) Handles chkFrostDays.CheckedChanged, chkIcingDays.CheckedChanged, chkSummerDays.CheckedChanged, chkTropicalNights.CheckedChanged
+        IndicesOptions()
+    End Sub
+
+    Public Sub TropicalNights()
+        dlgClimdex.ucrBaseClimdex.clsRsyntax.iCallType = 2
+        clsRTropicalNights.SetRCommand("climdex.tn")
+        clsRTropicalNights.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        dlgClimdex.ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsRTropicalNights)
+    End Sub
+
+    Public Sub SetDefaults()
+        chkFrostDays.Checked = True
+    End Sub
+
+    Public Sub IndicesOptions()
+        If (chkFrostDays.Checked = True) Then
+            FrostDays()
+        End If
+        If (chkSummerDays.Checked = True) Then
+            SummerDays()
+        End If
+        If (chkIcingDays.Checked = True) Then
+            IcingDays()
+        End If
+        If (chkTropicalNights.Checked = True) Then
+            TropicalNights()
+        End If
     End Sub
 End Class
