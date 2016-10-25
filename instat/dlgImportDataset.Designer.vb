@@ -83,30 +83,30 @@ Partial Class dlgImportDataset
         Me.lblInputFile.AutoSize = True
         Me.lblInputFile.Location = New System.Drawing.Point(238, 9)
         Me.lblInputFile.Name = "lblInputFile"
-        Me.lblInputFile.Size = New System.Drawing.Size(91, 13)
+        Me.lblInputFile.Size = New System.Drawing.Size(94, 13)
         Me.lblInputFile.TabIndex = 0
         Me.lblInputFile.Tag = "Input_File_Preview"
-        Me.lblInputFile.Text = "Input File Preview"
+        Me.lblInputFile.Text = "Input File Preview:"
         '
         'lblDataFrame
         '
         Me.lblDataFrame.AutoSize = True
         Me.lblDataFrame.Location = New System.Drawing.Point(238, 239)
         Me.lblDataFrame.Name = "lblDataFrame"
-        Me.lblDataFrame.Size = New System.Drawing.Size(103, 13)
+        Me.lblDataFrame.Size = New System.Drawing.Size(106, 13)
         Me.lblDataFrame.TabIndex = 1
         Me.lblDataFrame.Tag = "Data_Frame_Preview"
-        Me.lblDataFrame.Text = "Data Frame Preview"
+        Me.lblDataFrame.Text = "Data Frame Preview:"
         '
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(12, 64)
+        Me.lblName.Location = New System.Drawing.Point(8, 61)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(112, 13)
+        Me.lblName.Size = New System.Drawing.Size(115, 13)
         Me.lblName.TabIndex = 2
         Me.lblName.Tag = "New Dataframe  Name"
-        Me.lblName.Text = "New Dataframe Name"
+        Me.lblName.Text = "New Dataframe Name:"
         '
         'lblEncoding
         '
@@ -207,11 +207,11 @@ Partial Class dlgImportDataset
         'lblFileOpenPath
         '
         Me.lblFileOpenPath.AutoSize = True
-        Me.lblFileOpenPath.Location = New System.Drawing.Point(12, 28)
+        Me.lblFileOpenPath.Location = New System.Drawing.Point(10, 25)
         Me.lblFileOpenPath.Name = "lblFileOpenPath"
-        Me.lblFileOpenPath.Size = New System.Drawing.Size(23, 13)
+        Me.lblFileOpenPath.Size = New System.Drawing.Size(26, 13)
         Me.lblFileOpenPath.TabIndex = 29
-        Me.lblFileOpenPath.Text = "File"
+        Me.lblFileOpenPath.Text = "File:"
         '
         'lblLinesToSkip
         '
@@ -232,7 +232,7 @@ Partial Class dlgImportDataset
         '
         'cmdOpenDataSet
         '
-        Me.cmdOpenDataSet.Location = New System.Drawing.Point(167, 25)
+        Me.cmdOpenDataSet.Location = New System.Drawing.Point(164, 22)
         Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
         Me.cmdOpenDataSet.Size = New System.Drawing.Size(66, 23)
         Me.cmdOpenDataSet.TabIndex = 33
@@ -445,9 +445,9 @@ Partial Class dlgImportDataset
         Me.grpRDS.Controls.Add(Me.chkImportMetadata)
         Me.grpRDS.Controls.Add(Me.chkImportObjects)
         Me.grpRDS.Controls.Add(Me.chkExistingData)
-        Me.grpRDS.Location = New System.Drawing.Point(4, 100)
+        Me.grpRDS.Location = New System.Drawing.Point(16, 88)
         Me.grpRDS.Name = "grpRDS"
-        Me.grpRDS.Size = New System.Drawing.Size(211, 150)
+        Me.grpRDS.Size = New System.Drawing.Size(217, 150)
         Me.grpRDS.TabIndex = 36
         Me.grpRDS.TabStop = False
         Me.grpRDS.Text = "Import RDS options"
@@ -551,7 +551,7 @@ Partial Class dlgImportDataset
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(39, 25)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(39, 23)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.Size = New System.Drawing.Size(119, 21)
         Me.ucrInputFilePath.TabIndex = 37
@@ -559,7 +559,7 @@ Partial Class dlgImportDataset
         'ucrInputName
         '
         Me.ucrInputName.IsReadOnly = False
-        Me.ucrInputName.Location = New System.Drawing.Point(128, 61)
+        Me.ucrInputName.Location = New System.Drawing.Point(128, 58)
         Me.ucrInputName.Name = "ucrInputName"
         Me.ucrInputName.Size = New System.Drawing.Size(102, 21)
         Me.ucrInputName.TabIndex = 15
