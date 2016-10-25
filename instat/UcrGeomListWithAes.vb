@@ -80,14 +80,12 @@ Public Class UcrGeomListWithParameters
         'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
         'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
         If bApplyAesGlobally AndAlso bIgnoreGlobalAes Then
-            MsgBox("Error: the sdgLayerOptions.ucrGeomWithAes.Setup is asking to tick both chk boxes ApplyOnAllLayers and IgnoreGlobalAesthetics which is not appropriate. An error has been made when setting the parameters bApplyAesGlobally and bIgnoreGlobalAes in ucrAdditionalLayers or in a Specific PLot dlg. Both check boxes have been unticked by default.", vbOKOnly)
-            chkApplyOnAllLayers.Checked = False
-            chkIgnoreGlobalAes.Checked = False
-        Else
-            chkApplyOnAllLayers.Checked = bApplyAesGlobally
-            chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes
+            MsgBox("Error: the sdgLayerOptions.ucrGeomWithAes.Setup is asking to tick both check boxes ApplyOnAllLayers and IgnoreGlobalAesthetics which is not appropriate. An error has been made when setting the parameters bApplyAesGlobally and bIgnoreGlobalAes in ucrAdditionalLayers or in a Specific PLot dlg. Both check boxes have been unticked by default.", vbOKOnly)
+            bApplyAesGlobally = False
+            bIgnoreGlobalAes = False
         End If
-
+        chkApplyOnAllLayers.Checked = bApplyAesGlobally
+        chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)
