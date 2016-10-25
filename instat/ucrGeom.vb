@@ -51,7 +51,7 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
         'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
@@ -169,9 +169,9 @@ Public Class ucrGeom
         'Optional
         'we can map a continuous variable to y but we must include stat = “identity” inside the geom.
         clsgeom_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
-        clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor"}))
+        clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}))
+        clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor"}))
         clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'won't visibly change anything unless you change the theme
         clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"})) ' won't visibly change anything unless you change the theme
 
