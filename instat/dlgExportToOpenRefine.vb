@@ -14,7 +14,7 @@
 Imports instat.Translations
 Public Class dlgExportToOpenRefine
     Public bFirstLoad As Boolean = True
-
+    Public clsWriteToCSV As New RFunction
     Private Sub dlgExportToOpenRefine_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -29,17 +29,16 @@ Public Class dlgExportToOpenRefine
 
     Private Sub SetDefaults()
         chkRefineBrowser.Checked = False
-        chkCSV.Checked = False
         ucrOpenRefineDataFrame.Reset()
         ucrInputDatasetName.Reset()
-        ucrInputDatasetName.SetName("TheCurrentDataSetName _ cleanup")
+        ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.clsRsyntax.SetFunction("rrefine::refine_upload")
     End Sub
-
+    'Making sure that Ok is Enabled if the ucrInput has a name typed
     Private Sub TestOKEnabled()
         If ucrInputDatasetName.IsEmpty = True Then
             ucrBase.OKEnabled(False)
@@ -48,40 +47,43 @@ Public Class dlgExportToOpenRefine
         End If
     End Sub
 
+    Private Sub ucrInputDatasetName_ContentsChanged() Handles ucrInputDatasetName.ContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrOpenRefineDataFrame_DataFrameChanged() Handles ucrOpenRefineDataFrame.DataFrameChanged
+        ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
 
-    Private Sub chkOpenRefineBrowser_CheckedChanged(sender As Object, e As EventArgs) Handles chkCSV.CheckedChanged, chkRefineBrowser.CheckedChanged
-        RefineOrConvertToCSV()
-    End Sub
 
-    Private Sub ucrOpenRefineDataFrame_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrOpenRefineDataFrame.DataFrameChanged
-        RefineOrConvertToCSV()
-    End Sub
 
-    Private Sub ucrInputDatasetName_ContentsChanged() Handles ucrInputDatasetName.ContentsChanged
-        RefineOrConvertToCSV()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub RefineOrConvertToCSV()
-        If chkCSV.Checked Then
-            ucrBase.clsRsyntax.SetFunction("write.csv")
-            ucrBase.clsRsyntax.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
-            ucrBase.clsRsyntax.RemoveParameter("file")
-            ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText & ".csv" & Chr(34))
-            ucrBase.clsRsyntax.AddParameter("row.names", "FALSE")
-            ucrBase.clsRsyntax.RemoveParameter("open.browser")
-            ucrBase.clsRsyntax.RemoveParameter("project.name")
-        ElseIf chkRefineBrowser.Checked Then
-            ucrBase.clsRsyntax.SetFunction("rrefine::refine_upload")
+    'this provides the option opening the browser to access OpenRefine
+    Private Sub chkOpenRefineBrowser_CheckedChanged(sender As Object, e As EventArgs) Handles chkRefineBrowser.CheckedChanged
+        If chkRefineBrowser.Checked Then
             ucrBase.clsRsyntax.AddParameter("open.browser", "TRUE")
-            ucrBase.clsRsyntax.RemoveParameter("x")
-            ucrBase.clsRsyntax.RemoveParameter("row.names")
-            ucrBase.clsRsyntax.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
-            ucrBase.clsRsyntax.RemoveParameter("file")
-            ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & ".csv" & Chr(34))
+        Else
+            ucrBase.clsRsyntax.AddParameter("open.browser", "FALSE")
         End If
+    End Sub
+
+    'In this dialog, we need to run two separate R functions. Since RSyntax only deals with one R command at a time, we add a sub that runs right before the rest by handling the "beforeClickOk" event, raised within the ucrBase
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        'The first R function that needs to be run is write.csv
+        clsWriteToCSV.SetRCommand("write.csv")
+        'Then we add the relevant parameters...
+        clsWriteToCSV.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
+        clsWriteToCSV.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText & ".csv" & Chr(34))
+        clsWriteToCSV.AddParameter("row.names", "FALSE")
+        'Now that the RFunction clsWriteToCSV has been SetUp, we send the script (toscript) to the back-end via RLink.RunScript
+        frmMain.clsRLink.RunScript(clsWriteToCSV.ToScript(), strComment:="Convert the data set to csv")
+
+        'We also use this sub to setup the last parameters of the main R function (in RSyntax) as it will avoid changing the parameters each time the user changes the DataSetName, merely do it once and for all when the user clicks OK.
+        ucrBase.clsRsyntax.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
+
     End Sub
 End Class
