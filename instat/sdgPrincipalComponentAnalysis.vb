@@ -35,7 +35,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrSelectorFactor.Reset()
         ucrReceiverFactor.SetMeAsReceiver()
         ucrSelectorFactor.Focus()
-        ucrSelectorFactor.SetDataframe(dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         chkEigenValues.Checked = True
         chkEigenVectors.Checked = True
         chkScores.Checked = True

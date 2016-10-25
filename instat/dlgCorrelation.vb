@@ -41,6 +41,7 @@ Public Class dlgCorrelation
         ucrReceiverMultipleColumns.SetSingleTypeStatus(True)
         ucrReceiverMultipleColumns.SetDataType("numeric")
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         nudConfidenceInterval.Minimum = 0
         nudConfidenceInterval.Maximum = 1
         nudConfidenceInterval.Increment = 0.05
