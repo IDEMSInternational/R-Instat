@@ -227,8 +227,12 @@ Public Class RFunction
     End Sub
 
     Public Function GetParameter(strName As String) As RParameter
+        Dim iTempIndex As Integer = -1
         If Not clsParameters Is Nothing Then
-            Return clsParameters.Find(Function(x) x.strArgumentName = strName)
+            iTempIndex = clsParameters.FindIndex(Function(x) x.strArgumentName = strName)
+            If iTempIndex <> -1 Then
+                Return clsParameters(iTempIndex)
+            End If
         End If
         Return Nothing
     End Function
