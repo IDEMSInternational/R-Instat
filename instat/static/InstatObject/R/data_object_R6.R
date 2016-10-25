@@ -1451,8 +1451,6 @@ data_object$set("public", "set_structure_columns", function(struc_type_1, struc_
 )
 
 data_object$set("public", "add_dependent_columns", function(columns, dependent_cols) {
-  # print(columns)
-  # print(dependent_cols)
   for(col in columns) {
     if(self$is_variables_metadata(dependent_columns_label, col)) {
       curr_dependents <- self$get_variables_metadata(property = dependent_columns_label, column = col, direct_from_attributes = TRUE)
@@ -1467,7 +1465,6 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
     }
     else curr_dependents <- as.list(dependent_cols)
     self$append_to_variables_metadata(col, dependent_columns_label, curr_dependents)
-    #print(self$get_variables_metadata())
   }
 }
 )
