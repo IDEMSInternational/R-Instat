@@ -45,7 +45,7 @@ Public Class dlgContrasts
         ucrReceiverForContrasts.SetMeAsReceiver()
         ucrReceiverForContrasts.SetIncludedDataTypes({"factor"})
         ucrBase.iHelpTopicID = 353
-        ucrInputContrast.SetItems({"Helmert", "Polynomials", "Treatment/Control", "Sum to Zero", "User Defined(Overwrite)"})
+        ucrInputContrast.SetItems({"Helmert", "Polynomials", "Treatment/Control", "Sum to Zero"})
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor")
 
     End Sub
@@ -92,8 +92,7 @@ Public Class dlgContrasts
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.poly" & Chr(34))
             Case "Sum to Zero"
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.sum" & Chr(34))
-            Case "User Defined(Overwrite)"
-                ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & ucrInputContrast.GetText & Chr(34))
+            Case Else
         End Select
     End Sub
 End Class
