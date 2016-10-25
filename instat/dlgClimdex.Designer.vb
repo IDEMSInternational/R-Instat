@@ -36,7 +36,7 @@ Partial Class dlgClimdex
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 261)
+        Me.ClientSize = New System.Drawing.Size(426, 261)
         Me.Controls.Add(Me.ucrBaseClimdex)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
