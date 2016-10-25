@@ -146,6 +146,18 @@
     <Compile Include="dlgAppend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimdexIndices.Designer.vb">
+      <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimdexIndices.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimdexInput.Designer.vb">
+      <DependentUpon>dlgClimdexInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimdexInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCountinFactor.Designer.vb">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </Compile>
@@ -1822,6 +1834,12 @@
     <Compile Include="ucrReorder.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSaveClimdex.Designer.vb">
+      <DependentUpon>ucrSaveClimdex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSaveClimdex.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSaveGraph.Designer.vb">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </Compile>
@@ -2012,6 +2030,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliBoxplot.sw-KE.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimdexIndices.resx">
+      <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimdexInput.resx">
+      <DependentUpon>dlgClimdexInput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.fr-FR.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
@@ -4198,6 +4222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReorder.sw-KE.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveClimdex.resx">
+      <DependentUpon>ucrSaveClimdex.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveGraph.fr-FR.resx">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>

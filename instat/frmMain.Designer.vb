@@ -210,6 +210,8 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsCreateClimateObject = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimdex = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimdexCreateClimdexInput = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAsDataAs = New System.Windows.Forms.ToolStripMenuItem()
@@ -365,6 +367,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimdexIndices = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1247,7 +1250,7 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.mnuClimaticOrganise, Me.mnuClimaticDescribe, Me.mnuClimaticModel, Me.ToolStripSeparator16, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticMarkovModelling, Me.ToolStripSeparator17, Me.mnuClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.mnuClimaticOrganise, Me.mnuClimaticDescribe, Me.mnuClimaticModel, Me.ToolStripSeparator16, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticMarkovModelling, Me.ToolStripSeparator17, Me.mnuClimateMethods, Me.mnuClimdex})
         Me.mnuClimatic.Name = "mnuClimatic"
         Me.mnuClimatic.Size = New System.Drawing.Size(63, 20)
         Me.mnuClimatic.Tag = "Climatic"
@@ -1721,6 +1724,21 @@ Partial Class frmMain
         Me.mnuClimateMethodsCreateClimateObject.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimateMethodsCreateClimateObject.Tag = "Create_Climate_Object"
         Me.mnuClimateMethodsCreateClimateObject.Text = "Create Climate Object..."
+        '
+        'mnuClimdex
+        '
+        Me.mnuClimdex.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimdexCreateClimdexInput, Me.mnuClimdexIndices})
+        Me.mnuClimdex.Name = "mnuClimdex"
+        Me.mnuClimdex.Size = New System.Drawing.Size(171, 22)
+        Me.mnuClimdex.Tag = "Climdex"
+        Me.mnuClimdex.Text = "Climdex"
+        '
+        'mnuClimdexCreateClimdexInput
+        '
+        Me.mnuClimdexCreateClimdexInput.Name = "mnuClimdexCreateClimdexInput"
+        Me.mnuClimdexCreateClimdexInput.Size = New System.Drawing.Size(177, 22)
+        Me.mnuClimdexCreateClimdexInput.Tag = "Create_Input_Object"
+        Me.mnuClimdexCreateClimdexInput.Text = "Create Input Object"
         '
         'mnuFileSave
         '
@@ -2827,6 +2845,13 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
+        'mnuClimdexIndices
+        '
+        Me.mnuClimdexIndices.Name = "mnuClimdexIndices"
+        Me.mnuClimdexIndices.Size = New System.Drawing.Size(177, 22)
+        Me.mnuClimdexIndices.Tag = "Indices"
+        Me.mnuClimdexIndices.Text = "Indices"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3193,4 +3218,7 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnMakeDate As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnMakeTime As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnUseTime As ToolStripMenuItem
+    Friend WithEvents mnuClimdex As ToolStripMenuItem
+    Friend WithEvents mnuClimdexCreateClimdexInput As ToolStripMenuItem
+    Friend WithEvents mnuClimdexIndices As ToolStripMenuItem
 End Class
