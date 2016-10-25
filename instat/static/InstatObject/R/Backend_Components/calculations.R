@@ -155,7 +155,7 @@ c_require_merge_label <- "require_merge"
 
 # This method is called recursively, and it would not be called by a user, another function would always handle the output and display
 # results to the user (usually only the $data part of the list)
-instat_object$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations) {
+instat_object$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations = list()) {
   
   # apply each manipulation first, and recursively store the output and pass to the next manipulation
   # because of this, manipulations are dependant on each other
@@ -297,8 +297,12 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   col_names_exp = c()
   i = 1
   # This checks that the columns specified in calculated_from appear in the current data
-  for(col_name in calc$calculated_from) {
+  for(i in seq_along(calc$calculated_from)) {
+    col_name <- calc$calculated_from[[i]]
+    data_frame_name <- names(calc$calculated_from)[i]
     if(!(col_name %in% names(curr_data_list[[c_data_label]]))) {
+      #TODO Add by =
+      curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE))
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
     col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
@@ -309,6 +313,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   # the data is at the same "level" so the link is unchanged
   if(calc$type == "calculation") {
     if(calc$result_name %in% names(curr_data_list[[c_data_label]])) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
+    View(curr_data_list[[c_data_label]])
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
   }
   # this type performs a summary
