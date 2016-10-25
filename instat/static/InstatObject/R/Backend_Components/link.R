@@ -106,7 +106,17 @@ instat_object$set("public", "get_linked_to_data_name", function(from_data_frame,
 }
 )
 
-instat_object$set("public", "link_exists_from_to", function(from_data_frame, to_data_frame) {
-  return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame)))
+instat_object$set("public", "link_exists_between", function(from_data_frame, to_data_frame) {
+  return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame))
+         || any(sapply(private$.links, function(link) link$from_data_frame == to_data_frame && link$to_data_frame == from_data_frame)))
+}
+)
+
+instat_object$set("public", "get_link_between", function(from_data_frame, to_data_frame) {
+  for(curr_link in private$.links) {
+    if((curr_link$from_data_frame == from_data_frame && curr_link$to_data_frame == to_data_frame) || (curr_link$from_data_frame == to_data_frame && curr_link$to_data_frame == from_data_frame)) {
+      
+    }
+  }
 }
 )
