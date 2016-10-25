@@ -31,7 +31,6 @@ Public Class dlgExportToOpenRefine
         chkRefineBrowser.Checked = False
         ucrOpenRefineDataFrame.Reset()
         ucrInputDatasetName.Reset()
-        ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
         TestOKEnabled()
     End Sub
 
