@@ -492,8 +492,11 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
   }
   # This adds metadata: is_calculated = TRUE to the output column, which indicates that the column has been created by a calculation
   self$append_to_variables_metadata(to_data_name, calc$result_name, is_calculated_label, TRUE)
+  #TODO write this method
+  #TODO check metadata added
+  calc_calculated_from <- calc$get_calculated_from()
   # This adds metadata: dependencies to the output column with value, a list of the calculated_from columns
-  if(length(calc$calculated_from) > 0) self$append_to_variables_metadata(to_data_name, calc$result_name, dependencies_label, calc$calculated_from)
+  if(length(calc_calculated_from) > 0) self$append_to_variables_metadata(to_data_name, calc$result_name, dependencies_label, calc_calculated_from)
   # This adds metadata: calculated_from to the output column, with value as the name of the calculation
   # Only add this metadata if the calc has a name. If the calc is saved, it will always have a name
   # TODO If not saving then probably this shouldn't be added? If not saving would also expect calc$ == ""
