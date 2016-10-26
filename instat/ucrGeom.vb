@@ -203,13 +203,13 @@ Public Class ucrGeom
         'Warning: When x is continuous, there needs to be a grouping variable... for example cut_width(x,0.25). Are there other grouping possibilities ?
         clsgeom_boxplot.AddAesParameter("group", strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+
         'Warning: The following aesthetics should be assigned to calculations for the different parameters of a boxplot. Only relevant for sort of summaries. 
-        'Question to be discussed: do we want to have access to these ?
-        clsgeom_boxplot.AddAesParameter("lower", strIncludedDataTypes:={"numeric"})
-        clsgeom_boxplot.AddAesParameter("upper", strIncludedDataTypes:={"numeric"})
-        clsgeom_boxplot.AddAesParameter("middle", strIncludedDataTypes:={"numeric"})
-        clsgeom_boxplot.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"})
-        clsgeom_boxplot.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("lower", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("upper", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("middle", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"})
 
         clsgeom_boxplot.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_boxplot.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
@@ -233,7 +233,6 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning/Question to discuss: the default value in R is NA. Should that be the default value here ? When the parameter is not ticked on the sdgPlotOptions, it is not mentioned in the layer R command isn't it ?
         clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Could add the possiility to adjust the height and width parameters of these position functions... Sometimes useful to only jitter in one direction for example...
         'Aesthetics as layer parameters...
-        'Question to be discussed: The following Layer parameters can also be set as aes. Do we want them available as parameters as well ? This doesn't (always) fall under themes does it ? 
         clsgeom_boxplot.AddLayerParameter("fill", "colour", "NULL")
         clsgeom_boxplot.AddLayerParameter("colour", "colour", "NULL")
         clsgeom_boxplot.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={1, 0, 6})
