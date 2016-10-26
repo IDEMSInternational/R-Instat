@@ -146,6 +146,12 @@
     <Compile Include="dlgAppend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimdex.Designer.vb">
+      <DependentUpon>dlgClimdex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimdex.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCountinFactor.Designer.vb">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </Compile>
@@ -186,6 +192,12 @@
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgImportFromODK.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportOpenRefine.Designer.vb">
+      <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportOpenRefine.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMakeDate.Designer.vb">
@@ -246,6 +258,12 @@
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimdexIndices.Designer.vb">
+      <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimdexIndices.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDescribeDisplay.Designer.vb">
@@ -2013,6 +2031,9 @@
     <EmbeddedResource Include="dlgCliBoxplot.sw-KE.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimdex.resx">
+      <DependentUpon>dlgClimdex.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.fr-FR.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -2270,6 +2291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromODK.resx">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportOpenRefine.resx">
+      <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
@@ -2741,6 +2765,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimdexIndices.resx">
+      <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.fr-FR.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
