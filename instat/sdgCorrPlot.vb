@@ -53,7 +53,7 @@ Public Class sdgCorrPlot
     Public Sub GGscatmatrix()
         clsRGGscatmatrix.SetRCommand("ggscatmat")
         clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsRGGscatmatrix.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames(bWithQuotes:=True))
+        clsRGGscatmatrix.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames)
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)
     End Sub
@@ -68,7 +68,6 @@ Public Class sdgCorrPlot
         nudAlphaScatter.Value = 1
         cmbgeom.SelectedItem = "tile"
         chkColour.Checked = True
-        ' we need only avaliable thigns in the data frame to be what is abaliable in the thing            ucrSelectFactor.lstAvailableVariable.CanSelect.GetType() = dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
@@ -97,11 +96,7 @@ Public Class sdgCorrPlot
         If chkColour.Checked = True Then
             ucrSelectFactor.Visible = True
             ucrReceiveFactor.Visible = True
-            ' clsRGGscatmatrix.AddParameter("color", chr(34) & ucrReceiveFactor.GetVariables.ToString()   nudAlphaScatter.Value.ToString  & chr(34))
-            '        clsRGGscatmatrix.AddParameter("color", Chr(34) & ucrReceiveFactor.GetItemType.ToString() & Chr(34))
-            '        clsRGGscatmatrix.AddParameter("color", Chr(34) & ucrReceiveFactor.GetDataName.ToString() & Chr(34))
-            '        clsRGGscatmatrix.AddParameter("color", Chr(34) & ucrReceiveFactor.GetVariableNames.ToString() & Chr(34))
-            ' attempt later
+            clsRGGscatmatrix.AddParameter("color", ucrReceiveFactor.GetVariableNames)
         ElseIf chkColour.Checked = False Then
             clsRGGscatmatrix.AddParameter("color", "NULL")
             ucrSelectFactor.Visible = False
@@ -109,16 +104,17 @@ Public Class sdgCorrPlot
         Else
             clsRGGscatmatrix.RemoveParameterByName("color")
         End If
-
     End Sub
 
     Private Sub chkMatrixOrPlots(sender As Object, e As EventArgs) Handles chkCorrelationMatrix.CheckedChanged, chkPairwisePlot.CheckedChanged, chkCorrelationPlot.CheckedChanged, chkScatterplotMatrix.CheckedChanged
-        ' If chkCorrelationMatrix.Checked Then
-        '    ucrSaveGraph.Visible = False
-        '    chkPairwisePlot.Checked = False
-        '    chkCorrelationPlot.Checked = False
-        '    chkScatterplotMatrix.Checked = False
-        'End If
+        If chkCorrelationMatrix.Checked AndAlso Not chkPairwisePlot.Checked AndAlso Not chkCorrelationPlot.Checked AndAlso Not chkScatterplotMatrix.Checked Then
+            ucrSaveGraph.Visible = False
+        Else
+            ucrSaveGraph.Visible = True
+            '    chkPairwisePlot.Checked = False
+            '    chkCorrelationPlot.Checked = False
+            '    chkScatterplotMatrix.Checked = False
+        End If
         If chkPairwisePlot.Checked Then
             tbPairwisePlot.Enabled = True
             tbSaveGraphs.SelectTab(tbPairwisePlot)

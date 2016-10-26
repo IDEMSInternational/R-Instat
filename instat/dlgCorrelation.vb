@@ -40,6 +40,8 @@ Public Class dlgCorrelation
         ucrSelectorCorrelation.Focus()
         ucrReceiverMultipleColumns.SetSingleTypeStatus(True)
         ucrReceiverMultipleColumns.SetDataType("numeric")
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         nudConfidenceInterval.Minimum = 0
         nudConfidenceInterval.Maximum = 1
         nudConfidenceInterval.Increment = 0.05
@@ -54,7 +56,6 @@ Public Class dlgCorrelation
         rdoPearson.Checked = True
         rdoCompleteRowsOnly.Checked = True
         rdoMultipleColumns.Checked = True
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         nudConfidenceInterval.Value = 0.95
         sdgCorrPlot.SetDefaults()
         ucrSelectorCorrelation.Reset()
