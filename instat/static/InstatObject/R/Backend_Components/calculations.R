@@ -211,6 +211,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
             # When both contain summairsed data we merge into the "biggest" data frame i.e. one with fewest linking columns
             # The joining columns are the intersection of two sets of linking columns
             # Which list's columns is contained in the other list, determines which data frame should come first in the merge 
+            # needs to change to get corresponding columns and check lists
             if(all(sub_calc_results[[c_link_label]][["link_cols"]] %in% curr_sub_calc[[c_link_label]][["link_cols"]])) {
               sub_calc_results[[c_link_label]] <- curr_sub_calc[[c_link_label]]
               sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]],
@@ -234,6 +235,9 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
             keys_list <- self$get_keys(sub_calc_results[[c_link_label]][["from_data_frame"]])
             joined <- FALSE
             # Look at each key already defined and if both data frames contain the columns of the key then the merge can be performed 
+            #TODO replace this by general method to find link between two data frame (could be the same data frames)
+            #     same method as used further down in joining different data frames
+            #     will work when adding a key, also adds a link to itself
             for(curr_key in keys_list) {
               if(all(curr_key %in% names(sub_calc_results[[c_data_label]])) && all(curr_key %in% names(curr_sub_calc[[c_data_label]]))) {
                 
@@ -305,12 +309,59 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       # if summary then do by by columns, using the link if exists
       # otherwise, if there is a link, do by linking columns
       # otherwie, try to merge naturally
-      if(self$link_exists_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)) {
-        
+      by = c()
+      if(length(curr_data_list[[c_link_label]][["link_cols"]]) > 0) {
+        if(self$link_exists_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)) {
+          existing_link <- self$get_link_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)
+          link_pairs <- unlist(existing_link$link_columns)
+          for(link_column in curr_data_list[[c_link_label]][["link_cols"]]) {
+            if(existing_link$from_data_frame == curr_data_list[[c_link_label]][["from_data_frame"]]) {
+              if(link_column %in% link_pairs) {
+                by <- c(by, link_column = names(link_pairs)[which(link_pairs == link_column)][1])
+              }
+              else by <- c(by, link_column)
+            }
+            else {
+              if(link_column %in% names(link_pairs)) {
+                by <- c(by, link_column = link_pairs[which(names(link_pairs) == link_column)][1])
+              }
+              else by <- c(by, link_column)
+            }
+          }
+        }
+        # If no link then do by by columns in first data frame
+        else {
+          by <- curr_data_list[[c_link_label]][["link_cols"]]
+        }
       }
+      # If not a summary then look for link
       else {
-        curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE))
+        #TODO This should be general method to find link between two data frames
+        #     should also be used above in joining sub calcs
+        if(self$link_exists_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)) {
+          existing_link <- self$get_link_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)
+          found <- FALSE
+          for(curr_link_set in existing_link$link_columns) {
+            if(existing_link$from_data_frame == curr_data_list[[c_link_label]][["from_data_frame"]]) {
+              if(curr_link_set %in% names(curr_data_list[[c_data_label]])) {
+                by <- curr_link_set
+                break
+              }
+            }
+            else {
+              if(names(curr_link_set) %in% names(curr_data_list[[c_data_label]])) {
+                by <- names(curr_link_set)
+                names(by) <- curr_link_set
+                break
+              }
+            }
+          }
+          
+        }
       }
+      curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
+
+      curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = self$get_by(curr_data_list,list_from_data_frame_name))
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
     col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
@@ -370,6 +421,17 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   }
   # list is returned so it can be used recursively for manipulations, sub_calculations etc.
   return(curr_data_list)
+}
+)
+
+# given a set of columns in one data frame, this will return named list with corresponding columns in second data frame, where a link exists
+instat_object$set("public", "update_by_from_links", function(first_data_frame_from_name, first_data_frame_columns, second_data_frame_from_name) {
+}
+)
+
+# finds a link between two data frames and returns named list used for by
+# also checks link columns still are in both data frames
+instat_object$set("public", "get_by_from_data_frames", function(first_from_data_columns, first_from_data_name) {
 }
 )
 
