@@ -32,13 +32,20 @@ Partial Class dlgOneVarFitModel
         Me.LblVariable = New System.Windows.Forms.Label()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.UcrDistributions = New instat.ucrDistributions()
-        Me.nudCI = New instat.ucrInputConfidenceLimit()
-        Me.rdoGeneral = New System.Windows.Forms.RadioButton()
-        Me.rdoSpecial = New System.Windows.Forms.RadioButton()
         Me.nudHyp = New System.Windows.Forms.NumericUpDown()
         Me.lblprobability = New System.Windows.Forms.Label()
         Me.lblMean = New System.Windows.Forms.Label()
+        Me.chkBinModify = New System.Windows.Forms.CheckBox()
+        Me.lblSuccessIf = New System.Windows.Forms.Label()
+        Me.nudBinomialConditions = New System.Windows.Forms.NumericUpDown()
+        Me.lblConfidenceLimit = New System.Windows.Forms.Label()
+        Me.nudCI = New System.Windows.Forms.NumericUpDown()
+        Me.ucrOperator = New instat.ucrInputComboBox()
+        Me.rdoGeneral = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecific = New System.Windows.Forms.RadioButton()
         CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'UcrBase
@@ -60,7 +67,7 @@ Partial Class dlgOneVarFitModel
         '
         'UcrReceiver
         '
-        Me.UcrReceiver.Location = New System.Drawing.Point(269, 64)
+        Me.UcrReceiver.Location = New System.Drawing.Point(268, 64)
         Me.UcrReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiver.Name = "UcrReceiver"
         Me.UcrReceiver.Selector = Nothing
@@ -78,7 +85,7 @@ Partial Class dlgOneVarFitModel
         'chkConvertToVariate
         '
         Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(269, 90)
+        Me.chkConvertToVariate.Location = New System.Drawing.Point(269, 128)
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
         Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
         Me.chkConvertToVariate.TabIndex = 4
@@ -124,43 +131,14 @@ Partial Class dlgOneVarFitModel
         '
         'UcrDistributions
         '
-        Me.UcrDistributions.Location = New System.Drawing.Point(269, 104)
+        Me.UcrDistributions.Location = New System.Drawing.Point(268, 85)
         Me.UcrDistributions.Name = "UcrDistributions"
         Me.UcrDistributions.Size = New System.Drawing.Size(225, 43)
         Me.UcrDistributions.TabIndex = 11
         '
-        'nudCI
-        '
-        Me.nudCI.Location = New System.Drawing.Point(265, 177)
-        Me.nudCI.Name = "nudCI"
-        Me.nudCI.Size = New System.Drawing.Size(154, 23)
-        Me.nudCI.TabIndex = 12
-        '
-        'rdoGeneral
-        '
-        Me.rdoGeneral.AutoSize = True
-        Me.rdoGeneral.Location = New System.Drawing.Point(12, 12)
-        Me.rdoGeneral.Name = "rdoGeneral"
-        Me.rdoGeneral.Size = New System.Drawing.Size(62, 17)
-        Me.rdoGeneral.TabIndex = 13
-        Me.rdoGeneral.TabStop = True
-        Me.rdoGeneral.Text = "General"
-        Me.rdoGeneral.UseVisualStyleBackColor = True
-        '
-        'rdoSpecial
-        '
-        Me.rdoSpecial.AutoSize = True
-        Me.rdoSpecial.Location = New System.Drawing.Point(269, 12)
-        Me.rdoSpecial.Name = "rdoSpecial"
-        Me.rdoSpecial.Size = New System.Drawing.Size(60, 17)
-        Me.rdoSpecial.TabIndex = 14
-        Me.rdoSpecial.TabStop = True
-        Me.rdoSpecial.Text = "Special"
-        Me.rdoSpecial.UseVisualStyleBackColor = True
-        '
         'nudHyp
         '
-        Me.nudHyp.Location = New System.Drawing.Point(331, 146)
+        Me.nudHyp.Location = New System.Drawing.Point(330, 125)
         Me.nudHyp.Name = "nudHyp"
         Me.nudHyp.Size = New System.Drawing.Size(40, 20)
         Me.nudHyp.TabIndex = 15
@@ -168,7 +146,7 @@ Partial Class dlgOneVarFitModel
         'lblprobability
         '
         Me.lblprobability.AutoSize = True
-        Me.lblprobability.Location = New System.Drawing.Point(267, 150)
+        Me.lblprobability.Location = New System.Drawing.Point(268, 129)
         Me.lblprobability.Name = "lblprobability"
         Me.lblprobability.Size = New System.Drawing.Size(58, 13)
         Me.lblprobability.TabIndex = 16
@@ -177,23 +155,103 @@ Partial Class dlgOneVarFitModel
         'lblMean
         '
         Me.lblMean.AutoSize = True
-        Me.lblMean.Location = New System.Drawing.Point(267, 150)
+        Me.lblMean.Location = New System.Drawing.Point(268, 129)
         Me.lblMean.Name = "lblMean"
         Me.lblMean.Size = New System.Drawing.Size(37, 13)
         Me.lblMean.TabIndex = 17
         Me.lblMean.Text = "Mean:"
+        '
+        'chkBinModify
+        '
+        Me.chkBinModify.AutoSize = True
+        Me.chkBinModify.Location = New System.Drawing.Point(271, 185)
+        Me.chkBinModify.Name = "chkBinModify"
+        Me.chkBinModify.Size = New System.Drawing.Size(172, 17)
+        Me.chkBinModify.TabIndex = 18
+        Me.chkBinModify.Text = "Modify Conditions for 'Success'"
+        Me.chkBinModify.UseVisualStyleBackColor = True
+        '
+        'lblSuccessIf
+        '
+        Me.lblSuccessIf.AutoSize = True
+        Me.lblSuccessIf.Location = New System.Drawing.Point(273, 212)
+        Me.lblSuccessIf.Name = "lblSuccessIf"
+        Me.lblSuccessIf.Size = New System.Drawing.Size(66, 13)
+        Me.lblSuccessIf.TabIndex = 19
+        Me.lblSuccessIf.Text = "Success if X"
+        '
+        'nudBinomialConditions
+        '
+        Me.nudBinomialConditions.DecimalPlaces = 2
+        Me.nudBinomialConditions.Increment = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudBinomialConditions.Location = New System.Drawing.Point(399, 209)
+        Me.nudBinomialConditions.Name = "nudBinomialConditions"
+        Me.nudBinomialConditions.Size = New System.Drawing.Size(38, 20)
+        Me.nudBinomialConditions.TabIndex = 21
+        '
+        'lblConfidenceLimit
+        '
+        Me.lblConfidenceLimit.AutoSize = True
+        Me.lblConfidenceLimit.Location = New System.Drawing.Point(268, 159)
+        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
+        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
+        Me.lblConfidenceLimit.TabIndex = 22
+        Me.lblConfidenceLimit.Text = "Confidence Limit:"
+        '
+        'nudCI
+        '
+        Me.nudCI.DecimalPlaces = 2
+        Me.nudCI.Location = New System.Drawing.Point(362, 157)
+        Me.nudCI.Name = "nudCI"
+        Me.nudCI.Size = New System.Drawing.Size(58, 20)
+        Me.nudCI.TabIndex = 23
+        '
+        'ucrOperator
+        '
+        Me.ucrOperator.IsReadOnly = False
+        Me.ucrOperator.Location = New System.Drawing.Point(349, 208)
+        Me.ucrOperator.Name = "ucrOperator"
+        Me.ucrOperator.Size = New System.Drawing.Size(44, 21)
+        Me.ucrOperator.TabIndex = 24
+        '
+        'rdoGeneral
+        '
+        Me.rdoGeneral.AutoSize = True
+        Me.rdoGeneral.Location = New System.Drawing.Point(10, 12)
+        Me.rdoGeneral.Name = "rdoGeneral"
+        Me.rdoGeneral.Size = New System.Drawing.Size(62, 17)
+        Me.rdoGeneral.TabIndex = 26
+        Me.rdoGeneral.TabStop = True
+        Me.rdoGeneral.Text = "General"
+        Me.rdoGeneral.UseVisualStyleBackColor = True
+        '
+        'rdoSpecific
+        '
+        Me.rdoSpecific.AutoSize = True
+        Me.rdoSpecific.Location = New System.Drawing.Point(268, 12)
+        Me.rdoSpecific.Name = "rdoSpecific"
+        Me.rdoSpecific.Size = New System.Drawing.Size(63, 17)
+        Me.rdoSpecific.TabIndex = 27
+        Me.rdoSpecific.TabStop = True
+        Me.rdoSpecific.Text = "Specific"
+        Me.rdoSpecific.UseVisualStyleBackColor = True
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 322)
+        Me.Controls.Add(Me.rdoSpecific)
+        Me.Controls.Add(Me.rdoGeneral)
+        Me.Controls.Add(Me.ucrOperator)
+        Me.Controls.Add(Me.nudCI)
+        Me.Controls.Add(Me.lblConfidenceLimit)
+        Me.Controls.Add(Me.nudBinomialConditions)
+        Me.Controls.Add(Me.lblSuccessIf)
+        Me.Controls.Add(Me.chkBinModify)
         Me.Controls.Add(Me.lblMean)
         Me.Controls.Add(Me.lblprobability)
         Me.Controls.Add(Me.nudHyp)
-        Me.Controls.Add(Me.rdoSpecial)
-        Me.Controls.Add(Me.rdoGeneral)
-        Me.Controls.Add(Me.nudCI)
         Me.Controls.Add(Me.UcrDistributions)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.LblVariable)
@@ -210,6 +268,8 @@ Partial Class dlgOneVarFitModel
         Me.Name = "dlgOneVarFitModel"
         Me.Text = "Fitting a Model for One Variable"
         CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -225,10 +285,15 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents LblVariable As Label
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents UcrDistributions As ucrDistributions
-    Friend WithEvents nudCI As ucrInputConfidenceLimit
-    Friend WithEvents rdoGeneral As RadioButton
-    Friend WithEvents rdoSpecial As RadioButton
     Friend WithEvents nudHyp As NumericUpDown
     Friend WithEvents lblprobability As Label
     Friend WithEvents lblMean As Label
+    Friend WithEvents chkBinModify As CheckBox
+    Friend WithEvents lblSuccessIf As Label
+    Friend WithEvents nudBinomialConditions As NumericUpDown
+    Friend WithEvents lblConfidenceLimit As Label
+    Friend WithEvents nudCI As NumericUpDown
+    Friend WithEvents ucrOperator As ucrInputComboBox
+    Friend WithEvents rdoGeneral As RadioButton
+    Friend WithEvents rdoSpecific As RadioButton
 End Class
