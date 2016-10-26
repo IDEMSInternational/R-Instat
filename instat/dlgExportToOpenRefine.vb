@@ -49,7 +49,7 @@ Public Class dlgExportToOpenRefine
         End If
     End Sub
 
-    Private Sub ucrInputDatasetName_ContentsChanged() Handles ucrInputDatasetName.ContentsChanged
+    Private Sub ucrInputDatasetName_NameChanged() Handles ucrInputDatasetName.NameChanged
         'We also use this sub to setup the last parameters of the main R function (in RSyntax) as it will avoid changing the parameters each time the user changes the DataSetName, merely do it once and for all when the user clicks OK.
         ucrBase.clsRsyntax.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
         clsWriteToCSV.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText & ".csv" & Chr(34))
