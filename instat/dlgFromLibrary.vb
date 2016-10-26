@@ -37,9 +37,9 @@ Public Class dlgFromLibrary
 
     Private Sub SetDefaults()
         rdoDefaultDatasets.Checked = True
-        cmdHelp.Enabled = False
         cboPackages.SelectedItem = "datasets"
         loadDatasets(cboPackages.SelectedItem.ToString)
+        EnableHelp()
     End Sub
 
     Private Sub InitialiseDialog()
