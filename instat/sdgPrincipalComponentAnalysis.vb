@@ -115,9 +115,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRScreePlotTheme.SetRCommand("theme_minimal")
         clsRScreePlot.SetOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
         clsRScreePlot.SetOperatorParameter(False, clsRFunc:=clsRScreePlotTheme)
-        'clsRScreePlot.SetFunction("fviz_screeplot")
-        'clsRScreePlot.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
-        ' I feel we do not need these two lines as they are a repeat of above.
         frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 0)
     End Sub
 
@@ -160,7 +157,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRFactor.SetRCommand("cbind")
         clsRMelt.SetRCommand("melt")
         clsRMelt.AddParameter("", clsRFunctionParameter:=clsREigenVectors)
-        clsRFactor.AddParameter("factor_col", clsRFunctionParameter:=ucrReceiverFactor.GetVariables())
+        clsRFactor.AddParameter("factor_col", ucrReceiverFactor.GetVariableNames)
         clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
         clsRBarPlotFunction.SetRCommand("ggplot")
         clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
@@ -177,8 +174,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBarPlot0.SetParameter(False, clsRFunc:=clsRBarPlotGeom)
         clsRBarPlot.SetParameter(True, clsOp:=clsRBarPlot0)
         clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
-        ' error here
-        ' running ggplot(data=cbind("factor_col"=*receiver*, melt(*eigenvectors*)) + geom_bar(aes=(x=Val1, y=value, fill=factor_col, stat="identity") + facet_wrap(~Var2)
     End Sub
 
     Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs)
@@ -192,8 +187,6 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub chkBoth_CheckedChanged(sender As Object, e As EventArgs)
         ScreePlot()
     End Sub
-
-
 
     Private Sub rdoPlot_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScreePlot.CheckedChanged, rdoVariablesPlot.CheckedChanged, rdoIndividualsPlot.CheckedChanged, rdoBiplot.CheckedChanged, rdoBarPlot.CheckedChanged
         If rdoScreePlot.Checked Then
