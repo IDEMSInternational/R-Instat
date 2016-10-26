@@ -37,6 +37,7 @@ Public Class dlgFromLibrary
 
     Private Sub SetDefaults()
         rdoDefaultDatasets.Checked = True
+        cmdHelp.Enabled = False
         cboPackages.SelectedItem = "datasets"
         loadDatasets(cboPackages.SelectedItem.ToString)
     End Sub
@@ -132,8 +133,10 @@ Public Class dlgFromLibrary
     Private Sub TestOkEnabled()
         If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked Then
             ucrBase.OKEnabled(True)
+            'cmdHelp.Enabled = True
         Else
             ucrBase.OKEnabled(False)
+            'cmdHelp.Enabled = False
         End If
     End Sub
 
@@ -154,5 +157,12 @@ Public Class dlgFromLibrary
         Else
             frmMain.clsRLink.RunScript(clsDataFunction.ToScript(), strComment:=ucrBase.strComment)
         End If
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        'set the url to be passed to the browser
+        Dim helpAddress As String = ""
+        'this starts the default browser with the help address 
+        Process.Start(helpAddress)
     End Sub
 End Class
