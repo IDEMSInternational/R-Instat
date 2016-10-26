@@ -32,6 +32,7 @@ Partial Class dlgFromLibrary
         Me.lblFromPackage = New System.Windows.Forms.Label()
         Me.grpCollection = New System.Windows.Forms.GroupBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.grpCollection.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -129,11 +130,21 @@ Partial Class dlgFromLibrary
         Me.ucrBase.Size = New System.Drawing.Size(406, 53)
         Me.ucrBase.TabIndex = 0
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(350, 239)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
+        Me.cmdHelp.TabIndex = 17
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'dlgFromLibrary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 382)
+        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.grpCollection)
         Me.Controls.Add(Me.lblFromPackage)
         Me.Controls.Add(Me.cboPackages)
@@ -161,4 +172,5 @@ Partial Class dlgFromLibrary
     Friend WithEvents rdoInstatCollection As RadioButton
     Friend WithEvents lblFromPackage As Label
     Friend WithEvents grpCollection As GroupBox
+    Friend WithEvents cmdHelp As Button
 End Class
