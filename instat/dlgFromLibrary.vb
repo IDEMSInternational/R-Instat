@@ -163,7 +163,7 @@ Public Class dlgFromLibrary
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript)
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Running help for the selected dataset")
     End Sub
 
     Private Sub EnableHelp()
