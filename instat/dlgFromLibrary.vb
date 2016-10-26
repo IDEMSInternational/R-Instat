@@ -133,11 +133,10 @@ Public Class dlgFromLibrary
     Private Sub TestOkEnabled()
         If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked Then
             ucrBase.OKEnabled(True)
-            'cmdHelp.Enabled = True
         Else
             ucrBase.OKEnabled(False)
-            'cmdHelp.Enabled = False
         End If
+        EnableHelp()
     End Sub
 
     Private Function chkString(ByVal strValue As String)
@@ -160,9 +159,18 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        'set the url to be passed to the browser
-        Dim helpAddress As String = ""
-        'this starts the default browser with the help address 
-        Process.Start(helpAddress)
+        Dim clsHelp As New RFunction
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript)
+    End Sub
+
+    Private Sub EnableHelp()
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
+            cmdHelp.Enabled = True
+        Else
+            cmdHelp.Enabled = False
+        End If
     End Sub
 End Class
