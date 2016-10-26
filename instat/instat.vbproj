@@ -152,6 +152,12 @@
     <Compile Include="dlgClimdex.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCompareModels.Designer.vb">
+      <DependentUpon>dlgCompareModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompareModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCountinFactor.Designer.vb">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </Compile>
@@ -2078,6 +2084,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineText.sw-KE.resx">
       <DependentUpon>dlgCombineText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareModels.fr-FR.resx">
+      <DependentUpon>dlgCompareModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareModels.resx">
+      <DependentUpon>dlgCompareModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareModels.sw-KE.resx">
+      <DependentUpon>dlgCompareModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgContrasts.fr-FR.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>

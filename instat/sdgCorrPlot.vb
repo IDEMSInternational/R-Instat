@@ -53,7 +53,7 @@ Public Class sdgCorrPlot
     Public Sub GGscatmatrix()
         clsRGGscatmatrix.SetRCommand("ggscatmat")
         clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsRGGscatmatrix.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames(bWithQuotes:=True))
+        clsRGGscatmatrix.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames)
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)
     End Sub
@@ -96,7 +96,7 @@ Public Class sdgCorrPlot
         If chkColour.Checked = True Then
             ucrSelectFactor.Visible = True
             ucrReceiveFactor.Visible = True
-            clsRGGscatmatrix.AddParameter("color", ucrReceiveFactor.GetVariableNames(bWithQuotes:=True))
+            clsRGGscatmatrix.AddParameter("color", ucrReceiveFactor.GetVariableNames)
         ElseIf chkColour.Checked = False Then
             clsRGGscatmatrix.AddParameter("color", "NULL")
             ucrSelectFactor.Visible = False
