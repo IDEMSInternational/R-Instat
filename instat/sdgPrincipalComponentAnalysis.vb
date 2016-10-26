@@ -157,7 +157,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRFactor.SetRCommand("cbind")
         clsRMelt.SetRCommand("melt")
         clsRMelt.AddParameter("", clsRFunctionParameter:=clsREigenVectors)
-        clsRFactor.AddParameter("factor_col", ucrReceiverFactor.GetVariableNames(bWithQuotes:=True))
+        clsRFactor.AddParameter("factor_col", ucrReceiverFactor.GetVariableNames)
         clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
         clsRBarPlotFunction.SetRCommand("ggplot")
         clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
