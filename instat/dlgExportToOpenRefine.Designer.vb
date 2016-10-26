@@ -25,7 +25,7 @@ Partial Class dlgExportToOpenRefine
         Me.ucrInputDatasetName = New instat.ucrInputTextBox()
         Me.ucrOpenRefineDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.LblNameDataSet = New System.Windows.Forms.Label()
+        Me.lblNameDataSet = New System.Windows.Forms.Label()
         Me.chkRefineBrowser = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
@@ -53,14 +53,14 @@ Partial Class dlgExportToOpenRefine
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
         Me.ucrBase.TabIndex = 7
         '
-        'LblNameDataSet
+        'lblNameDataSet
         '
-        Me.LblNameDataSet.AutoSize = True
-        Me.LblNameDataSet.Location = New System.Drawing.Point(31, 73)
-        Me.LblNameDataSet.Name = "LblNameDataSet"
-        Me.LblNameDataSet.Size = New System.Drawing.Size(75, 13)
-        Me.LblNameDataSet.TabIndex = 8
-        Me.LblNameDataSet.Text = "Dataset Name"
+        Me.lblNameDataSet.AutoSize = True
+        Me.lblNameDataSet.Location = New System.Drawing.Point(31, 73)
+        Me.lblNameDataSet.Name = "lblNameDataSet"
+        Me.lblNameDataSet.Size = New System.Drawing.Size(75, 13)
+        Me.lblNameDataSet.TabIndex = 8
+        Me.lblNameDataSet.Text = "Dataset Name"
         '
         'chkRefineBrowser
         '
@@ -78,7 +78,7 @@ Partial Class dlgExportToOpenRefine
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 198)
         Me.Controls.Add(Me.chkRefineBrowser)
-        Me.Controls.Add(Me.LblNameDataSet)
+        Me.Controls.Add(Me.lblNameDataSet)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrInputDatasetName)
         Me.Controls.Add(Me.ucrOpenRefineDataFrame)
@@ -96,6 +96,6 @@ Partial Class dlgExportToOpenRefine
     Friend WithEvents ucrOpenRefineDataFrame As ucrDataFrame
     Friend WithEvents ucrInputDatasetName As ucrInputTextBox
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents LblNameDataSet As Label
+    Friend WithEvents lblNameDataSet As Label
     Friend WithEvents chkRefineBrowser As CheckBox
 End Class
