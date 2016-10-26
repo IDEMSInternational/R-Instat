@@ -26,6 +26,7 @@ Public Class UcrGeomListWithParameters
     Public bCheckEnabled As Boolean = True
     Public Event DataFrameChanged()
     Public clsGeomAesFunction As RFunction
+    'clsGeomAesFunction stores the value (aes function) of the local mapping (of this particular layer). It is used as parameter in sdgLayerOptions.clsGeomFunction.
     Public bAddToLocalAes As Boolean = True
     Public bCurrentFixAes As Boolean = True
 
@@ -61,8 +62,9 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
-    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
-        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempGlobalAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
+    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+        'See ucrAdditionalLayers and Specific Plots dlg to see how the SetUp Parameters are chosen within the sdgLayerOptions.SetupLayer call.
+        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempGlobalAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         strGlobalDataFrame = strDataframe
         If clsTempLocalAes IsNot Nothing Then
             clsGeomAesFunction = clsTempLocalAes
@@ -70,11 +72,20 @@ Public Class UcrGeomListWithParameters
             clsGeomAesFunction = New RFunction
             clsGeomAesFunction.SetRCommand("aes")
         End If
-        UcrSelector.SetDataframe(strGlobalDataFrame, (Not bUseGlobalAes) OrElse strGlobalDataFrame = "")
+        UcrSelector.SetDataframe(strGlobalDataFrame, (Not bApplyAesGlobally) OrElse strGlobalDataFrame = "")
         UcrSelector.Reset()
         bCurrentFixAes = bFixAes
         SetAes(bCurrentFixAes)
-        chkApplyOnAllLayers.Checked = bUseGlobalAes
+
+        'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
+        'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
+        If bApplyAesGlobally AndAlso bIgnoreGlobalAes Then
+            MsgBox("Error: the sdgLayerOptions.ucrGeomWithAes.Setup is asking to tick both check boxes ApplyOnAllLayers and IgnoreGlobalAesthetics which is not appropriate. An error has been made when setting the parameters bApplyAesGlobally and bIgnoreGlobalAes in ucrAdditionalLayers or in a Specific PLot dlg. Both check boxes have been unticked by default.", vbOKOnly)
+            bApplyAesGlobally = False
+            bIgnoreGlobalAes = False
+        End If
+        chkApplyOnAllLayers.Checked = bApplyAesGlobally
+        chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)

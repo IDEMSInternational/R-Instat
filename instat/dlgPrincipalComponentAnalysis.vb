@@ -40,6 +40,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrResultName.SetItemsTypeAsModels()
         ucrResultName.SetValidationTypeAsRVariable()
         ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        sdgPrincipalComponentAnalysis.ucrSelectorFactor.SetDataframe(ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         ucrBasePCA.iHelpTopicID = 187
     End Sub
 
