@@ -16,16 +16,19 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrGeom
-    Public strAesParameterName As String
-    Public strAesParameterValue As String
+    'Ucr Geom is used to select the geom that will be used for a specific graph/layer. It is used in ucrGeomListWithAes and ucrLayerParameters both ucr's of sdgLayerOptions. 
+    'It stores the definition of the different Geoms, using instances of clsGeom, including their R names, the relevant/available parameters and their description (type of values, values, default, ...).
     Public lstAllGeoms As New List(Of Geoms)
     Public lstGgParameters As New List(Of RParameter)
-    Public clsGeomFunction As New RFunction
+    'Warning: This is used nowhere ...
+    'Question: lstGgParameters lists of the ggplot parameters ? Let's delete ?
     Public clsCurrGeom As New Geoms
-    'why is geomfunction not a memeber of the geomclass ?
+    Public clsGeomFunction As New RFunction
     Public lstFunctionParameters As New List(Of RParameter)
-    Private bFirstLoad As Boolean = True
+    'Question: clsGeomFunction is the RFunction associated to the clsCurrGeom ? Could it be included in clsCurrGeom, if yes do we wish that ? Used together with clsGgplotAesFunction... ?
+    'Similarly for lstFunctionParameters. Both, together with clsGgplotAesFunction are supposedly passed through to ucrAdditionalLayers and assigned to smth in ucrAdditionalLayers by calling  sdgLayerOption.SetupLayer which calls setup ? Still need to figure out when/how they are used though...
     Public clsGgplotAesFunction As New RFunction
+    Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
 
     Public Sub New()
@@ -48,15 +51,21 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+        'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
+        'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
 
+        'First we clear the content of the displayed list (in cboGeomList) of available geoms as this may change between different setup's according to the parameter iNumVariablesForGeoms (see below). 
         cboGeomList.Items.Clear()
+        'Then we add geom names from our lstAllGeoms to cboGeomList when the number of available variables to associate to geom Aes (iNumVariablesForGeom) is greater or equal to the number of mandatory Aes of that geom. Correct ?
         For Each GeomCount In lstAllGeoms
             If iNumVariablesForGeoms <= GeomCount.iNumMandatoryAes Then
+                'Warning: Should this not be greater or equal instead of lower or equal ? But then what would the default value be for iNumVariablesForGeom ? Not -1 !!
                 cboGeomList.Items.Add(GeomCount.strGeomName)
             End If
         Next
+        'Task: needs further commenting when understood. clsGeomFunction is set at different occasions, not only in setup. SetGeomFunction overwritten...
         SetGeomFunction(clsTempGeomFunc)
         If clsGeomFunction.strRCommand = Nothing OrElse cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
@@ -72,19 +81,7 @@ Public Class ucrGeom
         clsGeomFunction = clsTempGeomFunc
     End Sub
 
-    Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
-        'this adds parameters TODO pass appropriate parameters.
-        Dim i As Integer
-        Dim clsParam As New RParameter
-        i = lstFunctionParameters.FindIndex(Function(x) x.strArgumentName.Equals(Me.strAesParameterName))
-        If i = -1 Then
-            clsParam.SetArgumentName(Me.strAesParameterName)
-            clsParam.SetArgumentValue(Me.strAesParameterValue)
-            lstFunctionParameters.Add(clsParam)
-        Else
-            lstFunctionParameters(i).strArgumentValue = Me.strAesParameterValue
-        End If
-    End Sub
+
 
     Public Sub CreateGeomList()
         Dim clsgeom_abline As New Geoms
@@ -175,8 +172,8 @@ Public Class ucrGeom
         clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor"}))
         clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}))
         clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor"}))
-        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
-        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
+        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'won't visibly change anything unless you change the theme
+        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"})) ' won't visibly change anything unless you change the theme
 
         'add layer parameters 
         clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})

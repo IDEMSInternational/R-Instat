@@ -19,6 +19,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   else stop("type must be one of left, right, inner or full")
   self$set_data(new_data)
   self$append_to_changes(Merged_data)
+  #TODO will column/row count be correct here?
   for(name in names(old_metadata)) {
     if(!name %in% c("names", "class", "row.names")) {
       self$append_to_metadata(name, old_metadata[[name]])

@@ -82,7 +82,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     'Private Sub cmdAdd_Click(sender As Object, e As EventArgs)
-    '    sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
+    '    sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=lstLayers.Items.Count = 0, bIgnoreGlobalAes:=False)
     '    sdgLayerOptions.ShowDialog()
     '    strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
     '    AddLayers()
@@ -156,7 +156,7 @@ Public Class dlgGeneralForGraphics
     '    Else
     '        clsLocalAes = Nothing
     '    End If
-    '    sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=False, clsTempLocalAes:=clsLocalAes)
+    '    sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=False, bIgnoreGlobalAes:=False, clsTempLocalAes:=clsLocalAes)
     '    sdgLayerOptions.ShowDialog()
     '    AddLayers(lstLayers.SelectedItems(0))
     'End Sub
