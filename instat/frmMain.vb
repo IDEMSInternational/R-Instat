@@ -1217,4 +1217,16 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnMakeDate.Click
         dlgMakeDate.ShowDialog()
     End Sub
+
+    Private Sub mnuClimdex_Click(sender As Object, e As EventArgs) Handles mnuClimdex.Click
+        dlgClimdex.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileExportToOpenRefine_Click(sender As Object, e As EventArgs) Handles mnuFileExportToOpenRefine.Click
+        dlgExportToOpenRefine.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileImportFromOpenRefine_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromOpenRefine.Click
+        dlgImportOpenRefine.ShowDialog()
+    End Sub
 End Class
