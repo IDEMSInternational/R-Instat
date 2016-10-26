@@ -37,7 +37,9 @@ Public Class dlgExportToOpenRefine
     Private Sub InitialiseDialog()
         'The first R function that needs to be run is write.csv
         clsWriteToCSV.SetRCommand("write.csv")
+        'this function uploads then converted to csv file.
         ucrBase.clsRsyntax.SetFunction("rrefine::refine_upload")
+        'paramater of write.csv that ensures that row names of x are not written along with x, or  character vector of row names to be written
         clsWriteToCSV.AddParameter("row.names", "FALSE")
     End Sub
     'Making sure that Ok is Enabled if the ucrInput has a name typed
@@ -50,15 +52,19 @@ Public Class dlgExportToOpenRefine
     End Sub
 
     Private Sub ucrInputDatasetName_NameChanged() Handles ucrInputDatasetName.NameChanged
-        'We also use this sub to setup the last parameters of the main R function (in RSyntax) as it will avoid changing the parameters each time the user changes the DataSetName, merely do it once and for all when the user clicks OK.
+        'Parameter of refine_upload that takes the converted file to csv
         ucrBase.clsRsyntax.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
+        'Parameter that takes the Name of csv file to be uploaded
         clsWriteToCSV.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText & ".csv" & Chr(34))
+        'parameter that inndicates output 
         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrOpenRefineDataFrame_DataFrameChanged() Handles ucrOpenRefineDataFrame.DataFrameChanged
+        'Parameter to add object to be written/converted
         clsWriteToCSV.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
+        'Parameter to provide the name by which the uploaded file to OpenRefine will bear
         ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
     End Sub
 
