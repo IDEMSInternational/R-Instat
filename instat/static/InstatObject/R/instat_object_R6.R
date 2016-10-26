@@ -895,6 +895,8 @@ instat_object$set("public","data_frame_exists", function(data_name) {
 
 instat_object$set("public","add_key", function(data_name, col_names) {
   self$get_data_objects(data_name)$add_key(col_names)
+  names(col_names) <- col_names
+  self$add_link(data_name, data_name, col_names, keyed_link_label)
   invisible(sapply(self$get_data_objects(), function(x) if(!x$is_metadata(is_linkable)) x$append_to_metadata(is_linkable, FALSE)))
 }
 )
@@ -1001,7 +1003,7 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
     data_frame_list[[factor_data_frame_name]] <- factor_data_frame
     self$import_data(data_frame_list)
     factor_data_obj <- self$get_data_objects(factor_data_frame_name)
-    #TODO Should this be here or in add link?
+    #TODO We shoud now never call add_key directly from the data object method because it needs to add a link as well at this point to itself
     factor_data_obj$add_key(factor)
     names(factor) <- factor
     self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)
