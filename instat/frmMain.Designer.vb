@@ -210,6 +210,7 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsCreateClimateObject = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimdex = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAsDataAs = New System.Windows.Forms.ToolStripMenuItem()
@@ -365,7 +366,8 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimdex = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportToOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1723,11 +1725,18 @@ Partial Class frmMain
         Me.mnuClimateMethodsCreateClimateObject.Tag = "Create_Climate_Object"
         Me.mnuClimateMethodsCreateClimateObject.Text = "Create Climate Object..."
         '
+        'mnuClimdex
+        '
+        Me.mnuClimdex.Name = "mnuClimdex"
+        Me.mnuClimdex.Size = New System.Drawing.Size(171, 22)
+        Me.mnuClimdex.Tag = "Climdex"
+        Me.mnuClimdex.Text = "Climdex"
+        '
         'mnuFileSave
         '
         Me.mnuFileSave.Name = "mnuFileSave"
         Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuFileSave.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileSave.Size = New System.Drawing.Size(206, 22)
         Me.mnuFileSave.Tag = "Save"
         Me.mnuFileSave.Text = "Save"
         '
@@ -1735,7 +1744,7 @@ Partial Class frmMain
         '
         Me.mnuFileSaveAs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileSaveAsDataAs, Me.mnuFileSaveAsOutputAs, Me.mnuFileSaveAsLogAs, Me.mnuFileSaveAsScriptAs})
         Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
-        Me.mnuFileSaveAs.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileSaveAs.Size = New System.Drawing.Size(206, 22)
         Me.mnuFileSaveAs.Tag = "Save_As"
         Me.mnuFileSaveAs.Text = "Save As"
         '
@@ -1767,26 +1776,26 @@ Partial Class frmMain
         '
         Me.mnuFilePrint.Name = "mnuFilePrint"
         Me.mnuFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mnuFilePrint.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFilePrint.Size = New System.Drawing.Size(206, 22)
         Me.mnuFilePrint.Tag = "Print"
         Me.mnuFilePrint.Text = "Print"
         '
         'mnuFilePrintPreview
         '
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
-        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(206, 22)
         Me.mnuFilePrintPreview.Tag = "Print_Preview"
         Me.mnuFilePrintPreview.Text = "Print Preview"
         '
         'tlSeparatorFile3
         '
         Me.tlSeparatorFile3.Name = "tlSeparatorFile3"
-        Me.tlSeparatorFile3.Size = New System.Drawing.Size(201, 6)
+        Me.tlSeparatorFile3.Size = New System.Drawing.Size(203, 6)
         '
         'mnuFIleExit
         '
         Me.mnuFIleExit.Name = "mnuFIleExit"
-        Me.mnuFIleExit.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFIleExit.Size = New System.Drawing.Size(206, 22)
         Me.mnuFIleExit.Tag = "Exit"
         Me.mnuFIleExit.Text = "Exit"
         '
@@ -2045,7 +2054,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuImportFromODK, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuImportFromODK, Me.mnuFileExportToOpenRefine, Me.mnuFileImportFromOpenRefine, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -2055,7 +2064,7 @@ Partial Class frmMain
         '
         Me.mnuFileNewDataFrame.Name = "mnuFileNewDataFrame"
         Me.mnuFileNewDataFrame.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.mnuFileNewDataFrame.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileNewDataFrame.Size = New System.Drawing.Size(206, 22)
         Me.mnuFileNewDataFrame.Tag = "New_Data_Frame"
         Me.mnuFileNewDataFrame.Text = "New Data Frame"
         '
@@ -2063,45 +2072,45 @@ Partial Class frmMain
         '
         Me.mnuFileOpenFromFile.Name = "mnuFileOpenFromFile"
         Me.mnuFileOpenFromFile.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.mnuFileOpenFromFile.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileOpenFromFile.Size = New System.Drawing.Size(206, 22)
         Me.mnuFileOpenFromFile.Tag = "Open_From_File"
         Me.mnuFileOpenFromFile.Text = "Open From File"
         '
         'mnuFileOpenFromLibrary
         '
         Me.mnuFileOpenFromLibrary.Name = "mnuFileOpenFromLibrary"
-        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(206, 22)
         Me.mnuFileOpenFromLibrary.Tag = "Open_From_Library"
         Me.mnuFileOpenFromLibrary.Text = "Open From Library"
         '
         'mnuImportFromODK
         '
         Me.mnuImportFromODK.Name = "mnuImportFromODK"
-        Me.mnuImportFromODK.Size = New System.Drawing.Size(204, 22)
+        Me.mnuImportFromODK.Size = New System.Drawing.Size(206, 22)
         Me.mnuImportFromODK.Text = "Import from ODK..."
         '
         'mnuFileConvert
         '
         Me.mnuFileConvert.Name = "mnuFileConvert"
-        Me.mnuFileConvert.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileConvert.Size = New System.Drawing.Size(206, 22)
         Me.mnuFileConvert.Text = "Convert..."
         '
         'tlSeparatorFile
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
-        Me.tlSeparatorFile.Size = New System.Drawing.Size(201, 6)
+        Me.tlSeparatorFile.Size = New System.Drawing.Size(203, 6)
         '
         'mnuExport
         '
         Me.mnuExport.Name = "mnuExport"
-        Me.mnuExport.Size = New System.Drawing.Size(204, 22)
+        Me.mnuExport.Size = New System.Drawing.Size(206, 22)
         Me.mnuExport.Text = "Export Data"
         '
         'mnuFileCloseData
         '
         Me.mnuFileCloseData.Enabled = False
         Me.mnuFileCloseData.Name = "mnuFileCloseData"
-        Me.mnuFileCloseData.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileCloseData.Size = New System.Drawing.Size(206, 22)
         Me.mnuFileCloseData.Text = "Close Data File"
         '
         'mnuOrganise
@@ -2532,6 +2541,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnGenerateDate
         '
+        Me.mnuOrganiseColumnGenerateDate.Enabled = False
         Me.mnuOrganiseColumnGenerateDate.Name = "mnuOrganiseColumnGenerateDate"
         Me.mnuOrganiseColumnGenerateDate.Size = New System.Drawing.Size(162, 22)
         Me.mnuOrganiseColumnGenerateDate.Text = "Generate Dates..."
@@ -2544,18 +2554,21 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnUseDate
         '
+        Me.mnuOrganiseColumnUseDate.Enabled = False
         Me.mnuOrganiseColumnUseDate.Name = "mnuOrganiseColumnUseDate"
         Me.mnuOrganiseColumnUseDate.Size = New System.Drawing.Size(162, 22)
         Me.mnuOrganiseColumnUseDate.Text = "Use Date..."
         '
         'mnuOrganiseColumnMakeTime
         '
+        Me.mnuOrganiseColumnMakeTime.Enabled = False
         Me.mnuOrganiseColumnMakeTime.Name = "mnuOrganiseColumnMakeTime"
         Me.mnuOrganiseColumnMakeTime.Size = New System.Drawing.Size(162, 22)
         Me.mnuOrganiseColumnMakeTime.Text = "Make Time..."
         '
         'mnuOrganiseColumnUseTime
         '
+        Me.mnuOrganiseColumnUseTime.Enabled = False
         Me.mnuOrganiseColumnUseTime.Name = "mnuOrganiseColumnUseTime"
         Me.mnuOrganiseColumnUseTime.Size = New System.Drawing.Size(162, 22)
         Me.mnuOrganiseColumnUseTime.Text = "Use Time..."
@@ -2828,12 +2841,17 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
-        'mnuClimdex
+        'mnuFileExportToOpenRefine
         '
-        Me.mnuClimdex.Name = "mnuClimdex"
-        Me.mnuClimdex.Size = New System.Drawing.Size(171, 22)
-        Me.mnuClimdex.Tag = "Climdex"
-        Me.mnuClimdex.Text = "Climdex"
+        Me.mnuFileExportToOpenRefine.Name = "mnuFileExportToOpenRefine"
+        Me.mnuFileExportToOpenRefine.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileExportToOpenRefine.Text = "Export To OpenRefine..."
+        '
+        'mnuFileImportFromOpenRefine
+        '
+        Me.mnuFileImportFromOpenRefine.Name = "mnuFileImportFromOpenRefine"
+        Me.mnuFileImportFromOpenRefine.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileImportFromOpenRefine.Text = "Import From OpenRefine..."
         '
         'frmMain
         '
@@ -3202,4 +3220,6 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnMakeTime As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnUseTime As ToolStripMenuItem
     Friend WithEvents mnuClimdex As ToolStripMenuItem
+    Friend WithEvents mnuFileExportToOpenRefine As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromOpenRefine As ToolStripMenuItem
 End Class
