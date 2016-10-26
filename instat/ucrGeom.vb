@@ -218,19 +218,19 @@ Public Class ucrGeom
         clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
         clsgeom_boxplot.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
-        clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
 
         'adding layerParameters
         'Main geom_boxplot parameters
         clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
-        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "0.5", lstParameterStrings:={0.1, 0, 1})
+        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "0.5", lstParameterStrings:={0.1, 0, 1}) 'Question to be discussed: this sets the width of the boxplot as a proportion of the boxplot width. values can be anything in ggplot but negative ones just give a silly looking thing, and I don't know if values above 1 make sense ? The notch would then be larger than the boxplot.
         clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
-        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={0.2, 1, 4}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of th IQR. Are these values ok ?
+        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5") 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. Do we want to restrict the values ? Also the window doesn't adapt to the whiskers length, which means they are cut when too long.
         clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "19", lstParameterStrings:={1, 0, 25}) 'there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
-        clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative as this sends an error in R.
+
         'Global Layer parameters
-        clsgeom_boxplot.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning/Question to discuss: the default value in R is NA. Should that be the default value here ? When the parameter is not ticked on the sdgPlotOptions, it is not mentioned in the layer R command isn't it ?
+        clsgeom_boxplot.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: the default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
         clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Could add the possiility to adjust the height and width parameters of these position functions... Sometimes useful to only jitter in one direction for example...
         'Aesthetics as layer parameters...
         clsgeom_boxplot.AddLayerParameter("fill", "colour", "NULL")

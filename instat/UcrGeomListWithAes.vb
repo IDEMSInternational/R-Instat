@@ -140,6 +140,8 @@ Public Class UcrGeomListWithParameters
             lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9})
         End If
 
+        'Depending on the number of AesParameters in clsCurrGeom, the dialog shows the relevant number of receivers with their (not yet customized) labels.
+        'Task/Question: This could be done in a more economical way within a loop from one until lstAesParameters.count that sets everything visible until
         If clsCurrGeom.clsAesParameters.Count < 9 Then
             lblGgParam9.Visible = False
             ucrReceiverParam9.Visible = False
