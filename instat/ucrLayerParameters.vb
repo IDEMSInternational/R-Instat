@@ -27,7 +27,7 @@ Public Class ucrLayerParameters
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        lstLayerParameterControl.AddRange({UcrLayerParamsControls1, UcrLayerParamsControls2, UcrLayerParamsControls3, UcrLayerParamsControls4, UcrLayerParamsControls5, UcrLayerParamsControls6, UcrLayerParamsControls7, UcrLayerParamsControls8, UcrLayerParamsControls9, UcrLayerParamsControls10, UcrLayerParamsControls11, UcrLayerParamsControls12})
+        lstLayerParameterControl.AddRange({UcrLayerParamsControls1, UcrLayerParamsControls2, UcrLayerParamsControls3, UcrLayerParamsControls4, UcrLayerParamsControls5, UcrLayerParamsControls6, UcrLayerParamsControls7, UcrLayerParamsControls8, UcrLayerParamsControls9, UcrLayerParamsControls10, UcrLayerParamsControls11, UcrLayerParamsControls12, UcrLayerParamsControls13})
     End Sub
 
     Private Sub ucrLayerParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
