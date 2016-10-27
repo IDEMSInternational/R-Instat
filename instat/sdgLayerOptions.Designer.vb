@@ -24,8 +24,8 @@ Partial Class sdgLayerOptions
     Private Sub InitializeComponent()
         Me.tbcLayers = New System.Windows.Forms.TabControl()
         Me.tbpAesthetics = New System.Windows.Forms.TabPage()
-        Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
         Me.ucrGeomWithAes = New instat.UcrGeomListWithParameters()
+        Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
         Me.ucrLayerParameter = New instat.ucrLayerParameters()
         Me.ucrSdgLayerBase = New instat.ucrButtonsSubdialogue()
         Me.tbcLayers.SuspendLayout()
@@ -40,7 +40,7 @@ Partial Class sdgLayerOptions
         Me.tbcLayers.Location = New System.Drawing.Point(13, 13)
         Me.tbcLayers.Name = "tbcLayers"
         Me.tbcLayers.SelectedIndex = 0
-        Me.tbcLayers.Size = New System.Drawing.Size(482, 383)
+        Me.tbcLayers.Size = New System.Drawing.Size(482, 417)
         Me.tbcLayers.TabIndex = 1
         '
         'tbpAesthetics
@@ -49,21 +49,10 @@ Partial Class sdgLayerOptions
         Me.tbpAesthetics.Location = New System.Drawing.Point(4, 22)
         Me.tbpAesthetics.Name = "tbpAesthetics"
         Me.tbpAesthetics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAesthetics.Size = New System.Drawing.Size(474, 357)
+        Me.tbpAesthetics.Size = New System.Drawing.Size(474, 391)
         Me.tbpAesthetics.TabIndex = 0
         Me.tbpAesthetics.Text = "Layer Dimensions(Aesthetics)"
         Me.tbpAesthetics.UseVisualStyleBackColor = True
-        '
-        'tbpGeomParameters
-        '
-        Me.tbpGeomParameters.Controls.Add(Me.ucrLayerParameter)
-        Me.tbpGeomParameters.Location = New System.Drawing.Point(4, 22)
-        Me.tbpGeomParameters.Name = "tbpGeomParameters"
-        Me.tbpGeomParameters.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpGeomParameters.Size = New System.Drawing.Size(474, 357)
-        Me.tbpGeomParameters.TabIndex = 1
-        Me.tbpGeomParameters.Text = "Layer Parameters(Geom Parameters)"
-        Me.tbpGeomParameters.UseVisualStyleBackColor = True
         '
         'ucrGeomWithAes
         '
@@ -72,17 +61,28 @@ Partial Class sdgLayerOptions
         Me.ucrGeomWithAes.Size = New System.Drawing.Size(467, 286)
         Me.ucrGeomWithAes.TabIndex = 0
         '
+        'tbpGeomParameters
+        '
+        Me.tbpGeomParameters.Controls.Add(Me.ucrLayerParameter)
+        Me.tbpGeomParameters.Location = New System.Drawing.Point(4, 22)
+        Me.tbpGeomParameters.Name = "tbpGeomParameters"
+        Me.tbpGeomParameters.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpGeomParameters.Size = New System.Drawing.Size(474, 391)
+        Me.tbpGeomParameters.TabIndex = 1
+        Me.tbpGeomParameters.Text = "Layer Parameters(Geom Parameters)"
+        Me.tbpGeomParameters.UseVisualStyleBackColor = True
+        '
         'ucrLayerParameter
         '
         Me.ucrLayerParameter.Location = New System.Drawing.Point(3, 3)
         Me.ucrLayerParameter.Name = "ucrLayerParameter"
-        Me.ucrLayerParameter.Size = New System.Drawing.Size(308, 355)
+        Me.ucrLayerParameter.Size = New System.Drawing.Size(308, 385)
         Me.ucrLayerParameter.TabIndex = 0
         Me.ucrLayerParameter.ucrGeomWithAes = Nothing
         '
         'ucrSdgLayerBase
         '
-        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(186, 395)
+        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(186, 436)
         Me.ucrSdgLayerBase.Name = "ucrSdgLayerBase"
         Me.ucrSdgLayerBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgLayerBase.TabIndex = 0
@@ -91,7 +91,7 @@ Partial Class sdgLayerOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(507, 425)
+        Me.ClientSize = New System.Drawing.Size(507, 467)
         Me.Controls.Add(Me.tbcLayers)
         Me.Controls.Add(Me.ucrSdgLayerBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
