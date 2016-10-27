@@ -16,7 +16,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
-    Public clsRConvert, clsRCIFunction As New RFunction
+    Public clsRConvert, clsROneVarFitModel, clsRCount As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -33,7 +33,7 @@ Public Class dlgOneVarFitModel
     Private Sub InitialiseDialog()
         sdgOneVarFitModDisplay.InitialiseDialog()
         sdgOneVarFitModel.InitialiseDialog()
-        UcrBase.clsRsyntax.SetFunction("fitdist")
+        '        UcrBase.clsRsyntax.SetFunction("fitdist")
         UcrBase.iHelpTopicID = 296
         UcrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
@@ -44,8 +44,8 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetDefaultTypeAsModel()
         ucrSaveModel.SetValidationTypeAsRVariable()
         UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        sdgOneVarFitModDisplay.SetModelFunction(UcrBase.clsRsyntax.clsBaseFunction)
-        sdgOneVarFitModel.SetMyRSyntax(UcrBase.clsRsyntax)
+        sdgOneVarFitModDisplay.SetModelFunction(clsROneVarFitModel)
+        sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
         sdgOneVarFitModDisplay.SetDistribution(UcrDistributions)
         sdgOneVarFitModel.SetDistribution(UcrDistributions)
     End Sub
@@ -60,6 +60,9 @@ Public Class dlgOneVarFitModel
         AssignSaveModel()
         sdgOneVarFitModDisplay.SetDefaults()
         sdgOneVarFitModel.SetDefaults()
+        Display()
+        SetBaseFunction()
+        rdoGeneral.Checked = True
         TestOKEnabled()
     End Sub
 
@@ -111,6 +114,52 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
+    Public Sub SetBaseFunction()
+        If rdoGeneral.Checked Then
+            clsROneVarFitModel.ClearParameters()
+            FitDistFunction()
+        ElseIf rdoSpecial.Checked Then
+            If UcrDistributions.cboDistributions.SelectedItem = "poisson" Then
+                clsROneVarFitModel.ClearParameters()
+                SetPoissonTest()
+            ElseIf UcrDistributions.cboDistributions.SelectedItem = "normal" Then
+                clsROneVarFitModel.ClearParameters()
+                SetTTest()
+            ElseIf UcrDistributions.cboDistributions.SelectedItem = "binomial" Then
+                clsROneVarFitModel.ClearParameters()
+            End If
+        End If
+    End Sub
+
+    Public Sub FitDistFunction()
+        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        clsROneVarFitModel.SetRCommand("fitdist")
+        clsROneVarFitModel.AddParameter("distr", Chr(34) & UcrDistributions.clsCurrDistribution.strRName & Chr(34))
+        SetDataParameter()
+    End Sub
+
+    Private Sub SetTTest()
+        clsROneVarFitModel.SetRCommand("t.test")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        clsRConvert.SetRCommand("as.vector")
+        clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsROneVarFitModel.AddParameter("x", clsRFunctionParameter:=clsRConvert)
+        clsROneVarFitModel.AddParameter("mu", nudHyp.Value.ToString)
+    End Sub
+
+    Private Sub SetPoissonTest()
+        clsROneVarFitModel.SetRCommand("poisson.test")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        clsRCount.SetRCommand("count")
+        clsRCount.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsROneVarFitModel.AddParameter("x", clsRFunctionParameter:=clsRCount)
+        clsROneVarFitModel.AddParameter("r", nudHyp.Value.ToString)
+    End Sub
+
+    Private Sub SetBinomialTest()
+
+    End Sub
+
     Private Sub AssignSaveModel()
         If chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty Then
             UcrBase.clsRsyntax.SetAssignTo(ucrSaveModel.GetText, strTempModel:=ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -131,11 +180,11 @@ Public Class dlgOneVarFitModel
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles UcrDistributions.cboDistributionsIndexChanged
         UcrBase.clsRsyntax.AddParameter("distr", Chr(34) & UcrDistributions.clsCurrDistribution.strRName & Chr(34))
-        SetDataParameter()
+        SetBaseFunction()
     End Sub
 
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
-        SetDataParameter()
+        SetBaseFunction()
         TestOKEnabled()
         EnableOptions()
     End Sub
@@ -143,10 +192,12 @@ Public Class dlgOneVarFitModel
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
         sdgOneVarFitModel.ShowDialog()
         EnableOptions()
+        Display()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgOneVarFitModDisplay.ShowDialog()
+        Display()
         EnableOptions()
         TestOKEnabled()
     End Sub
@@ -164,6 +215,7 @@ Public Class dlgOneVarFitModel
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
         SetDataParameter()
         TestOKEnabled()
+        Display()
     End Sub
 
     Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
@@ -176,4 +228,53 @@ Public Class dlgOneVarFitModel
         ' End If
     End Sub
 
+    Private Sub Display()
+        If rdoGeneral.Checked Then
+            cmdFittingOptions.Visible = True
+            cmdDisplayOptions.Visible = True
+            nudCI.Visible = False
+            nudHyp.Visible = False
+            lblMean.Visible = False
+            lblprobability.Visible = False
+        ElseIf rdoSpecial.Checked Then
+            cmdFittingOptions.Visible = False
+            cmdDisplayOptions.Visible = False
+            chkConvertToVariate.Visible = False
+            nudCI.Visible = True
+            nudHyp.Visible = True
+            ' UcrDistributions.cbodistributions. distributions avaliable = ...
+            If UcrDistributions.cboDistributions.SelectedItem = "normal" Then
+                lblMean.Visible = True
+                lblprobability.Visible = False
+                nudHyp.Value = 0
+                nudHyp.Maximum = Integer.MaxValue
+                nudHyp.Minimum = Integer.MinValue
+            ElseIf UcrDistributions.cboDistributions.SelectedItem = "binomial" Then
+                lblprobability.Visible = True
+                lblMean.Visible = False
+                nudHyp.Value = 0.5
+                nudHyp.Minimum = 0
+                nudHyp.Maximum = 1
+            ElseIf UcrDistributions.cboDistributions.SelectedItem = "poisson" Then
+                lblMean.Visible = True
+                lblprobability.Visible = False
+                nudHyp.Value = 1
+                nudHyp.Minimum = 0
+                nudHyp.Maximum = Integer.MaxValue
+            End If
+        End If
+    End Sub
+
+    Private Sub rdoButtons_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGeneral.CheckedChanged, rdoSpecial.CheckedChanged
+        Display()
+        EnableOptions()
+    End Sub
+
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblMean.VisibleChanged, lblprobability.VisibleChanged
+        Display()
+    End Sub
+
+    Private Sub nudCIHyp_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHyp.TextChanged
+        Display()
+    End Sub
 End Class

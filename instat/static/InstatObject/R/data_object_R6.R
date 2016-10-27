@@ -283,11 +283,14 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
         if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
+        # TODO Possible alternative to include names of list
+        # TODO See how to have data frame properly containing lists
+        #if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(names(unlist(col_attributes[[att_name]])), unlist(col_attributes[[att_name]]), collapse = ",")
       }
       #if(is.null(col_attributes)) {
       #  col_attributes <- data.frame(class = NA)
       #}
-      col_attributes <- data.frame(col_attributes)
+      col_attributes <- data.frame(col_attributes, stringsAsFactors = FALSE)
       out[[i]] <- col_attributes
       i = i + 1
     }
@@ -1401,6 +1404,8 @@ data_object$set("public", "unfreeze_columns", function() {
 }
 )
 
+#TODO maybe get ride of this method as that you can't create a key without
+#     the instat object also creating a self link
 data_object$set("public", "add_key", function(col_names) {
   if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
     stop("key columns must have unique combinations")
@@ -1420,6 +1425,16 @@ data_object$set("public", "add_key", function(col_names) {
 
 data_object$set("public", "is_key", function(col_names) {
   return(any(sapply(private$keys, function(x) setequal(col_names,x))))
+}
+)
+
+data_object$set("public", "has_key", function() {
+  return(length(private$keys) > 0)
+}
+)
+
+data_object$set("public", "get_keys", function() {
+  return(private$keys)
 }
 )
 
@@ -1450,7 +1465,7 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
         }
       }
     }
-    else curr_dependents <- dependent_cols
+    else curr_dependents <- as.list(dependent_cols)
     self$append_to_variables_metadata(col, dependent_columns_label, curr_dependents)
   }
 }
