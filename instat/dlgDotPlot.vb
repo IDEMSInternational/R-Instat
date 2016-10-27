@@ -72,6 +72,7 @@ Public Class dlgDotPlot
         clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
         ucrVariablesAsFactorDotPlot.ResetControl()
+        ucrSaveDotPlot.Reset()
         sdgPlots.Reset()
         SetXParameter()
         TestOkEnabled()
@@ -146,5 +147,9 @@ Public Class dlgDotPlot
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub ucrSaveDotPlot_ContentsChanged() Handles ucrSaveDotPlot.ContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

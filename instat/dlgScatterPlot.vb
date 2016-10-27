@@ -99,6 +99,7 @@ Public Class dlgScatterPlot
         ucrSelectorForScatter.Focus()
         ucrVariablesAsFactorForScatter.ResetControl()
         sdgPlots.Reset()
+        ucrSaveScatterPlot.Reset()
         TestOkEnabled()
     End Sub
 
@@ -143,6 +144,10 @@ Public Class dlgScatterPlot
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class
