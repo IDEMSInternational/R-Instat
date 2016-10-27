@@ -59,6 +59,7 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam7.Selector = UcrSelector
         ucrReceiverParam8.Selector = UcrSelector
         ucrReceiverParam9.Selector = UcrSelector
+        ucrReceiverParam10.Selector = UcrSelector
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
@@ -132,78 +133,92 @@ Public Class UcrGeomListWithParameters
         Dim i As Integer = 0
 
         If lstAesParameterLabels.Count = 0 Then
-            lstAesParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7, lblGgParam8, lblGgParam9}) 'Adds range for the parameter labels
+            lstAesParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7, lblGgParam8, lblGgParam9, lblGgParam10}) 'Adds range for the parameter labels
         End If
 
         If lstAesParameterUcr.Count = 0 Then
             'Adds range for the parameter receivers
-            lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9})
+            lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9, ucrReceiverParam10})
         End If
 
-        If clsCurrGeom.clsAesParameters.Count < 9 Then
-            lblGgParam9.Visible = False
-            ucrReceiverParam9.Visible = False
-        Else
-            lblGgParam9.Visible = True
-            ucrReceiverParam9.Visible = True
-        End If
-
-        If clsCurrGeom.clsAesParameters.Count < 8 Then
-            lblGgParam8.Visible = False
-            ucrReceiverParam8.Visible = False
-        Else
-            lblGgParam8.Visible = True
-            ucrReceiverParam8.Visible = True
-        End If
-
-        If clsCurrGeom.clsAesParameters.Count < 7 Then
-            lblGgParam7.Visible = False
-            ucrReceiverParam7.Visible = False
-        Else
-            lblGgParam7.Visible = True
-            ucrReceiverParam7.Visible = True
-        End If
-        If clsCurrGeom.clsAesParameters.Count < 6 Then
-            lblGgParam6.Visible = False
-            ucrReceiverParam6.Visible = False
-        Else
-            lblGgParam6.Visible = True
-            ucrReceiverParam6.Visible = True
-        End If
-        If clsCurrGeom.clsAesParameters.Count < 5 Then
-            lblGgParam5.Visible = False
-            ucrReceiverParam5.Visible = False
-        Else
-            lblGgParam5.Visible = True
-            ucrReceiverParam5.Visible = True
-        End If
-
-        If clsCurrGeom.clsAesParameters.Count < 4 Then
-            lblGgParam4.Visible = False
-            ucrReceiverParam4.Visible = False
-        Else
-            lblGgParam4.Visible = True
-            ucrReceiverParam4.Visible = True
-        End If
-
-        If clsCurrGeom.clsAesParameters.Count < 3 Then
-            lblGgParam3.Visible = False
-            ucrReceiverParam3.Visible = False
-        Else
-            lblGgParam3.Visible = True
-            ucrReceiverParam3.Visible = True
-        End If
-
-        If clsCurrGeom.clsAesParameters.Count < 2 Then 'this is available for some cases like piechart
-            lblGgParam2.Visible = False
-            ucrReceiverParam2.Visible = False
-        Else
-            lblGgParam2.Visible = True
-            ucrReceiverParam2.Visible = True
-        End If
-        'populating labels with appropriate names
-        clsGeomAesFunction.ClearParameters()
+        'Depending on the number of AesParameters in clsCurrGeom, the dialog shows the relevant number of receivers with their (not yet customized) labels.
+        'Task/Question: This could be done in a more economical way within a sub that takes as argument j=clsCurrGeom.clsAesParameters.count and goes through the lists lstAesParameterLabels and lstAesParameterUcr and sets the labels and ucr's to visible until index = j, and then hides the rest of the list. Maybe we could also check whether our list of labels and ucr's are long enough here and send a developper message explaining the situation in case not to avoid the bug we had.
+        'Task/Question: Could use something like Dim iMaxIndex As Integer = Math.Min((clsCurrGeom.clsAesParameters.Count - 1),(clsAesParameterLabels.Count - 1)), but then instead of using Math.Min we would use our own If Else... in order to identify if there is a scratch. This max index would then be used in population of labels as well.
+        'Warning: Moved the check clsCurrGeom IsNot Nothing to here as clsCurrGeom is used below.
         If clsCurrGeom IsNot Nothing Then
+            If clsCurrGeom.clsAesParameters.Count < 10 Then
+                lblGgParam10.Visible = False
+                ucrReceiverParam10.Visible = False
+            Else
+                lblGgParam10.Visible = True
+                ucrReceiverParam10.Visible = True
+            End If
+
+            If clsCurrGeom.clsAesParameters.Count < 9 Then
+                lblGgParam9.Visible = False
+                ucrReceiverParam9.Visible = False
+            Else
+                lblGgParam9.Visible = True
+                ucrReceiverParam9.Visible = True
+            End If
+
+            If clsCurrGeom.clsAesParameters.Count < 8 Then
+                lblGgParam8.Visible = False
+                ucrReceiverParam8.Visible = False
+            Else
+                lblGgParam8.Visible = True
+                ucrReceiverParam8.Visible = True
+            End If
+
+            If clsCurrGeom.clsAesParameters.Count < 7 Then
+                lblGgParam7.Visible = False
+                ucrReceiverParam7.Visible = False
+            Else
+                lblGgParam7.Visible = True
+                ucrReceiverParam7.Visible = True
+            End If
+            If clsCurrGeom.clsAesParameters.Count < 6 Then
+                lblGgParam6.Visible = False
+                ucrReceiverParam6.Visible = False
+            Else
+                lblGgParam6.Visible = True
+                ucrReceiverParam6.Visible = True
+            End If
+            If clsCurrGeom.clsAesParameters.Count < 5 Then
+                lblGgParam5.Visible = False
+                ucrReceiverParam5.Visible = False
+            Else
+                lblGgParam5.Visible = True
+                ucrReceiverParam5.Visible = True
+            End If
+
+            If clsCurrGeom.clsAesParameters.Count < 4 Then
+                lblGgParam4.Visible = False
+                ucrReceiverParam4.Visible = False
+            Else
+                lblGgParam4.Visible = True
+                ucrReceiverParam4.Visible = True
+            End If
+
+            If clsCurrGeom.clsAesParameters.Count < 3 Then
+                lblGgParam3.Visible = False
+                ucrReceiverParam3.Visible = False
+            Else
+                lblGgParam3.Visible = True
+                ucrReceiverParam3.Visible = True
+            End If
+
+            If clsCurrGeom.clsAesParameters.Count < 2 Then 'this is available for some cases like piechart
+                lblGgParam2.Visible = False
+                ucrReceiverParam2.Visible = False
+            Else
+                lblGgParam2.Visible = True
+                ucrReceiverParam2.Visible = True
+            End If
+
+            'populating labels with appropriate names
+            clsGeomAesFunction.ClearParameters()
+
             lstCurrArguments.Clear()
             For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
                 lstAesParameterLabels(i).Text = clsCurrGeom.clsAesParameters(i).strAesParameterName
@@ -220,6 +235,7 @@ Public Class UcrGeomListWithParameters
                     lstAesParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsAesParameters(i).strExcludedDataTypes)
                 End If
             Next
+        Else 'Question: Maybe add a developer error message when clsCurrGeom Is Nothing ? Should that not never be the case here ?
         End If
         SetAes(bCurrentFixAes)
     End Sub
@@ -233,7 +249,7 @@ Public Class UcrGeomListWithParameters
         SetParameters()
     End Sub
 
-    Private Sub ucrReceiverParam_WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle) Handles ucrReceiverParam1.WithMeSelectionChanged, ucrReceiverParam2.WithMeSelectionChanged, ucrReceiverParam3.WithMeSelectionChanged, ucrReceiverParam4.WithMeSelectionChanged, ucrReceiverParam5.WithMeSelectionChanged, ucrReceiverParam6.WithMeSelectionChanged, ucrReceiverParam7.WithMeSelectionChanged, ucrReceiverParam8.WithMeSelectionChanged, ucrReceiverParam9.WithMeSelectionChanged
+    Private Sub ucrReceiverParam_WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle) Handles ucrReceiverParam1.WithMeSelectionChanged, ucrReceiverParam2.WithMeSelectionChanged, ucrReceiverParam3.WithMeSelectionChanged, ucrReceiverParam4.WithMeSelectionChanged, ucrReceiverParam5.WithMeSelectionChanged, ucrReceiverParam6.WithMeSelectionChanged, ucrReceiverParam7.WithMeSelectionChanged, ucrReceiverParam8.WithMeSelectionChanged, ucrReceiverParam9.WithMeSelectionChanged, ucrReceiverParam10.WithMeSelectionChanged
         Dim iIndex As Integer
 
         If bAddToLocalAes Then
