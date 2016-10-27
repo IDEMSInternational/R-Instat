@@ -37,6 +37,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 458
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsDetach.AddParameter("unload", "TRUE")
@@ -184,6 +185,10 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdMissingValues_Click_1(sender As Object, e As EventArgs) Handles cmdMissingValues.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("NA")
+    End Sub
+
     Private Sub cmdSquareBrackets_Click_1(sender As Object, e As EventArgs) Handles cmdSquareBrackets.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[ ]", 2)
         TestOKEnabled()
@@ -264,4 +269,5 @@ Public Class dlgEnter
             ucrSaveEnterResultInto.Visible = False
         End If
     End Sub
+
 End Class
