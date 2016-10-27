@@ -52,7 +52,6 @@ Public Class dlgWindrose
         ucrXReceiver.Selector = ucrWindRoseSelector
         ucrYReceiver.Selector = ucrWindRoseSelector
         ucrFillReceiver.Selector = ucrWindRoseSelector
-        ucrXReceiver.SetMeAsReceiver()
 
         ucrSaveWindRose.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
         ucrSaveWindRose.strPrefix = "Windrose"
