@@ -152,7 +152,7 @@ Public Class UcrGeomListWithParameters
             If (clsCurrGeom.clsAesParameters.Count < iMaxIndex) Then
                 'If the number of aes parameters in the current geom is smaller than the number of receivers, then we hide the exceeding receivers and labels.
                 iMaxIndex = clsCurrGeom.clsAesParameters.Count
-                For i = iMaxIndex To lstAesParameterLabels.Count
+                For i = iMaxIndex To (lstAesParameterLabels.Count - 1)
                     lstAesParameterLabels(i).Visible = False
                     lstAesParameterUcr(i).Visible = False
                 Next
