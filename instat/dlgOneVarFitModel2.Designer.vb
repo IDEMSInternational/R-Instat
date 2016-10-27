@@ -32,20 +32,27 @@ Partial Class dlgOneVarFitModel
         Me.LblVariable = New System.Windows.Forms.Label()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.UcrDistributions = New instat.ucrDistributions()
-        Me.nudHyp = New System.Windows.Forms.NumericUpDown()
         Me.lblprobability = New System.Windows.Forms.Label()
         Me.lblMean = New System.Windows.Forms.Label()
         Me.chkBinModify = New System.Windows.Forms.CheckBox()
         Me.lblSuccessIf = New System.Windows.Forms.Label()
-        Me.nudBinomialConditions = New System.Windows.Forms.NumericUpDown()
         Me.lblConfidenceLimit = New System.Windows.Forms.Label()
         Me.nudCI = New System.Windows.Forms.NumericUpDown()
         Me.ucrOperator = New instat.ucrInputComboBox()
         Me.rdoGeneral = New System.Windows.Forms.RadioButton()
         Me.rdoSpecific = New System.Windows.Forms.RadioButton()
+        Me.nudHyp = New System.Windows.Forms.NumericUpDown()
+        Me.nudBinomialConditions = New System.Windows.Forms.NumericUpDown()
+        Me.lblRate = New System.Windows.Forms.Label()
+        Me.lblTimeBase = New System.Windows.Forms.Label()
+        Me.nudTimeBase = New System.Windows.Forms.NumericUpDown()
+        Me.chkModifyPoisson = New System.Windows.Forms.CheckBox()
+        Me.lblCountPoisson = New System.Windows.Forms.Label()
+        Me.ucrInputObjectToCount = New instat.ucrInputTextBox()
+        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudTimeBase, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'UcrBase
@@ -85,7 +92,7 @@ Partial Class dlgOneVarFitModel
         'chkConvertToVariate
         '
         Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(269, 128)
+        Me.chkConvertToVariate.Location = New System.Drawing.Point(269, 150)
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
         Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
         Me.chkConvertToVariate.TabIndex = 4
@@ -136,17 +143,10 @@ Partial Class dlgOneVarFitModel
         Me.UcrDistributions.Size = New System.Drawing.Size(225, 43)
         Me.UcrDistributions.TabIndex = 11
         '
-        'nudHyp
-        '
-        Me.nudHyp.Location = New System.Drawing.Point(330, 125)
-        Me.nudHyp.Name = "nudHyp"
-        Me.nudHyp.Size = New System.Drawing.Size(40, 20)
-        Me.nudHyp.TabIndex = 15
-        '
         'lblprobability
         '
         Me.lblprobability.AutoSize = True
-        Me.lblprobability.Location = New System.Drawing.Point(268, 129)
+        Me.lblprobability.Location = New System.Drawing.Point(268, 151)
         Me.lblprobability.Name = "lblprobability"
         Me.lblprobability.Size = New System.Drawing.Size(58, 13)
         Me.lblprobability.TabIndex = 16
@@ -155,7 +155,7 @@ Partial Class dlgOneVarFitModel
         'lblMean
         '
         Me.lblMean.AutoSize = True
-        Me.lblMean.Location = New System.Drawing.Point(268, 129)
+        Me.lblMean.Location = New System.Drawing.Point(268, 151)
         Me.lblMean.Name = "lblMean"
         Me.lblMean.Size = New System.Drawing.Size(37, 13)
         Me.lblMean.TabIndex = 17
@@ -164,7 +164,7 @@ Partial Class dlgOneVarFitModel
         'chkBinModify
         '
         Me.chkBinModify.AutoSize = True
-        Me.chkBinModify.Location = New System.Drawing.Point(271, 185)
+        Me.chkBinModify.Location = New System.Drawing.Point(272, 210)
         Me.chkBinModify.Name = "chkBinModify"
         Me.chkBinModify.Size = New System.Drawing.Size(172, 17)
         Me.chkBinModify.TabIndex = 18
@@ -174,25 +174,16 @@ Partial Class dlgOneVarFitModel
         'lblSuccessIf
         '
         Me.lblSuccessIf.AutoSize = True
-        Me.lblSuccessIf.Location = New System.Drawing.Point(273, 212)
+        Me.lblSuccessIf.Location = New System.Drawing.Point(277, 241)
         Me.lblSuccessIf.Name = "lblSuccessIf"
         Me.lblSuccessIf.Size = New System.Drawing.Size(66, 13)
         Me.lblSuccessIf.TabIndex = 19
         Me.lblSuccessIf.Text = "Success if X"
         '
-        'nudBinomialConditions
-        '
-        Me.nudBinomialConditions.DecimalPlaces = 2
-        Me.nudBinomialConditions.Increment = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.nudBinomialConditions.Location = New System.Drawing.Point(399, 209)
-        Me.nudBinomialConditions.Name = "nudBinomialConditions"
-        Me.nudBinomialConditions.Size = New System.Drawing.Size(38, 20)
-        Me.nudBinomialConditions.TabIndex = 21
-        '
         'lblConfidenceLimit
         '
         Me.lblConfidenceLimit.AutoSize = True
-        Me.lblConfidenceLimit.Location = New System.Drawing.Point(268, 159)
+        Me.lblConfidenceLimit.Location = New System.Drawing.Point(268, 127)
         Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
         Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
         Me.lblConfidenceLimit.TabIndex = 22
@@ -201,7 +192,7 @@ Partial Class dlgOneVarFitModel
         'nudCI
         '
         Me.nudCI.DecimalPlaces = 2
-        Me.nudCI.Location = New System.Drawing.Point(362, 157)
+        Me.nudCI.Location = New System.Drawing.Point(362, 125)
         Me.nudCI.Name = "nudCI"
         Me.nudCI.Size = New System.Drawing.Size(58, 20)
         Me.nudCI.TabIndex = 23
@@ -209,7 +200,7 @@ Partial Class dlgOneVarFitModel
         'ucrOperator
         '
         Me.ucrOperator.IsReadOnly = False
-        Me.ucrOperator.Location = New System.Drawing.Point(349, 208)
+        Me.ucrOperator.Location = New System.Drawing.Point(349, 237)
         Me.ucrOperator.Name = "ucrOperator"
         Me.ucrOperator.Size = New System.Drawing.Size(44, 21)
         Me.ucrOperator.TabIndex = 24
@@ -236,22 +227,95 @@ Partial Class dlgOneVarFitModel
         Me.rdoSpecific.Text = "Specific"
         Me.rdoSpecific.UseVisualStyleBackColor = True
         '
+        'nudHyp
+        '
+        Me.nudHyp.Location = New System.Drawing.Point(330, 149)
+        Me.nudHyp.Name = "nudHyp"
+        Me.nudHyp.Size = New System.Drawing.Size(48, 20)
+        Me.nudHyp.TabIndex = 29
+        '
+        'nudBinomialConditions
+        '
+        Me.nudBinomialConditions.DecimalPlaces = 2
+        Me.nudBinomialConditions.Location = New System.Drawing.Point(399, 237)
+        Me.nudBinomialConditions.Name = "nudBinomialConditions"
+        Me.nudBinomialConditions.Size = New System.Drawing.Size(51, 20)
+        Me.nudBinomialConditions.TabIndex = 30
+        '
+        'lblRate
+        '
+        Me.lblRate.AutoSize = True
+        Me.lblRate.Location = New System.Drawing.Point(268, 151)
+        Me.lblRate.Name = "lblRate"
+        Me.lblRate.Size = New System.Drawing.Size(33, 13)
+        Me.lblRate.TabIndex = 31
+        Me.lblRate.Text = "Rate:"
+        '
+        'lblTimeBase
+        '
+        Me.lblTimeBase.AutoSize = True
+        Me.lblTimeBase.Location = New System.Drawing.Point(267, 177)
+        Me.lblTimeBase.Name = "lblTimeBase"
+        Me.lblTimeBase.Size = New System.Drawing.Size(60, 13)
+        Me.lblTimeBase.TabIndex = 32
+        Me.lblTimeBase.Text = "Time Base:"
+        '
+        'nudTimeBase
+        '
+        Me.nudTimeBase.Location = New System.Drawing.Point(330, 174)
+        Me.nudTimeBase.Name = "nudTimeBase"
+        Me.nudTimeBase.Size = New System.Drawing.Size(48, 20)
+        Me.nudTimeBase.TabIndex = 33
+        '
+        'chkModifyPoisson
+        '
+        Me.chkModifyPoisson.AutoSize = True
+        Me.chkModifyPoisson.Location = New System.Drawing.Point(272, 210)
+        Me.chkModifyPoisson.Name = "chkModifyPoisson"
+        Me.chkModifyPoisson.Size = New System.Drawing.Size(140, 17)
+        Me.chkModifyPoisson.TabIndex = 34
+        Me.chkModifyPoisson.Text = "Change Object to Count"
+        Me.chkModifyPoisson.UseVisualStyleBackColor = True
+        '
+        'lblCountPoisson
+        '
+        Me.lblCountPoisson.AutoSize = True
+        Me.lblCountPoisson.Location = New System.Drawing.Point(277, 241)
+        Me.lblCountPoisson.Name = "lblCountPoisson"
+        Me.lblCountPoisson.Size = New System.Drawing.Size(54, 13)
+        Me.lblCountPoisson.TabIndex = 35
+        Me.lblCountPoisson.Text = "Count X ="
+        '
+        'ucrInputObjectToCount
+        '
+        Me.ucrInputObjectToCount.IsReadOnly = False
+        Me.ucrInputObjectToCount.Location = New System.Drawing.Point(330, 237)
+        Me.ucrInputObjectToCount.Name = "ucrInputObjectToCount"
+        Me.ucrInputObjectToCount.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputObjectToCount.TabIndex = 36
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 322)
+        Me.Controls.Add(Me.ucrInputObjectToCount)
+        Me.Controls.Add(Me.lblCountPoisson)
+        Me.Controls.Add(Me.chkModifyPoisson)
+        Me.Controls.Add(Me.nudTimeBase)
+        Me.Controls.Add(Me.lblTimeBase)
+        Me.Controls.Add(Me.lblRate)
+        Me.Controls.Add(Me.nudBinomialConditions)
+        Me.Controls.Add(Me.nudHyp)
         Me.Controls.Add(Me.rdoSpecific)
         Me.Controls.Add(Me.rdoGeneral)
         Me.Controls.Add(Me.ucrOperator)
         Me.Controls.Add(Me.nudCI)
         Me.Controls.Add(Me.lblConfidenceLimit)
-        Me.Controls.Add(Me.nudBinomialConditions)
         Me.Controls.Add(Me.lblSuccessIf)
         Me.Controls.Add(Me.chkBinModify)
         Me.Controls.Add(Me.lblMean)
         Me.Controls.Add(Me.lblprobability)
-        Me.Controls.Add(Me.nudHyp)
         Me.Controls.Add(Me.UcrDistributions)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.LblVariable)
@@ -267,9 +331,10 @@ Partial Class dlgOneVarFitModel
         Me.MinimizeBox = False
         Me.Name = "dlgOneVarFitModel"
         Me.Text = "Fitting a Model for One Variable"
+        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudTimeBase, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -285,15 +350,21 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents LblVariable As Label
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents UcrDistributions As ucrDistributions
-    Friend WithEvents nudHyp As NumericUpDown
     Friend WithEvents lblprobability As Label
     Friend WithEvents lblMean As Label
     Friend WithEvents chkBinModify As CheckBox
     Friend WithEvents lblSuccessIf As Label
-    Friend WithEvents nudBinomialConditions As NumericUpDown
     Friend WithEvents lblConfidenceLimit As Label
     Friend WithEvents nudCI As NumericUpDown
     Friend WithEvents ucrOperator As ucrInputComboBox
     Friend WithEvents rdoGeneral As RadioButton
     Friend WithEvents rdoSpecific As RadioButton
+    Friend WithEvents nudHyp As NumericUpDown
+    Friend WithEvents nudBinomialConditions As NumericUpDown
+    Friend WithEvents lblRate As Label
+    Friend WithEvents lblTimeBase As Label
+    Friend WithEvents nudTimeBase As NumericUpDown
+    Friend WithEvents chkModifyPoisson As CheckBox
+    Friend WithEvents lblCountPoisson As Label
+    Friend WithEvents ucrInputObjectToCount As ucrInputTextBox
 End Class
