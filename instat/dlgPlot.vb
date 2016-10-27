@@ -43,6 +43,7 @@ Public Class dlgPlot
         ucrLinePlotSelector.Focus()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
+        ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
         TestOkEnabled()
     End Sub
@@ -160,6 +161,10 @@ Public Class dlgPlot
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveLinePlot_ContentsChanged() Handles ucrSaveLinePlot.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class

@@ -140,6 +140,7 @@ Public Class dlgHistogram
         cmdFrequencyOptions.Visible = False
         ucrSaveHist.strPrefix = "Histogram"
         sdgPlots.Reset()
+        ucrSaveHist.Reset()
         TestOkEnabled()
     End Sub
 
@@ -225,6 +226,10 @@ Public Class dlgHistogram
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveHist_ContentsChanged() Handles ucrSaveHist.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class
