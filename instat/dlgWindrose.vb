@@ -19,6 +19,7 @@ Public Class dlgWindrose
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_barFunction As New RFunction
     Private clsRaesFunction As New RFunction
+    Private clsCoordPolarFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private Sub dlgWindrose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,17 +39,23 @@ Public Class dlgWindrose
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRgeom_barFunction.SetRCommand("geom_bar")
+        clsCoordPolarFunction.SetRCommand("coord_polar")
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_barFunction)
         clsRgeom_barFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
         clsRgeom_barFunction.AddParameter("width", "1")
+        ucrBase.clsRsyntax.AddOperatorParameter("coord_polar", clsRFunc:=clsCoordPolarFunction)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrXReceiver.Selector = ucrWindRoseSelector
         ucrYReceiver.Selector = ucrWindRoseSelector
         ucrFillReceiver.Selector = ucrWindRoseSelector
         ucrXReceiver.SetMeAsReceiver()
+
+        ucrSaveWindRose.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
+        ucrSaveWindRose.strPrefix = "Windrose"
     End Sub
 
     Private Sub SetDefaults()
@@ -61,10 +68,10 @@ Public Class dlgWindrose
 
     End Sub
     Private Sub TestOkEnabled()
-        If Not ucrXReceiver.IsEmpty And Not ucrYReceiver.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
+        If (ucrXReceiver.IsEmpty AndAlso ucrYReceiver.IsEmpty) OrElse (ucrSaveWindRose.chkSaveGraph.Checked AndAlso ucrSaveWindRose.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -72,7 +79,6 @@ Public Class dlgWindrose
         SetDefaults()
     End Sub
     Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.SelectionChanged
-        'this takes in Wind speed 
         If Not ucrXReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
         Else
@@ -82,14 +88,12 @@ Public Class dlgWindrose
     End Sub
 
     Private Sub ucrYReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYReceiver.SelectionChanged
-        'this takes in wind direction
         If Not ucrYReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("y", ucrYReceiver.GetVariableNames(False))
 
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
-
         TestOkEnabled()
     End Sub
 
@@ -103,5 +107,13 @@ Public Class dlgWindrose
 
     Private Sub ucrWindRoseSelector_DataFrameChanged() Handles ucrWindRoseSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrWindRoseSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+    Private Sub ucrSaveWindRose_GraphNameChanged() Handles ucrSaveWindRose.GraphNameChanged, ucrSaveWindRose.SaveGraphCheckedChanged
+        If ucrSaveWindRose.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveWindRose.strGraphName, strTempDataframe:=ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveWindRose.strGraphName)
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        End If
+        TestOkEnabled()
     End Sub
 End Class
