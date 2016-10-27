@@ -1229,4 +1229,8 @@ Public Class frmMain
     Private Sub mnuFileImportFromOpenRefine_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromOpenRefine.Click
         dlgImportOpenRefine.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
 End Class
