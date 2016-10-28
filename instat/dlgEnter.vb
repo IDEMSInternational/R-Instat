@@ -95,6 +95,8 @@ Public Class dlgEnter
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
+        ucrInputTryMessage.SetName("")
+        cmdTry.Enabled = Not ucrReceiverForEnterCalculation.IsEmpty()
         TestOKEnabled()
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -270,4 +272,63 @@ Public Class dlgEnter
         End If
     End Sub
 
+    Private Sub TryScript()
+        Dim strOutPut As String
+        Dim strAttach As String
+        Dim strDetach As String
+        Dim strTempScript As String = ""
+        Dim strVecOutput As CharacterVector
+        Dim bIsAssigned As Boolean
+        Dim bToBeAssigned As Boolean
+        Dim strAssignTo As String
+        Dim strAssignToColumn As String
+        Dim strAssignToDataFrame As String
+
+        'First store the RSyntax settings temporarily, as these will be modified in the Try process. 
+        'Quetion: could we not use a clone RSyntax method ? 
+        bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
+        bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
+        strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
+        strAssignToColumn = ucrBase.clsRsyntax.strAssignToColumn
+        strAssignToDataFrame = ucrBase.clsRsyntax.strAssignToDataframe
+
+        Try
+            If ucrReceiverForEnterCalculation.IsEmpty Then
+                ucrInputTryMessage.SetName("")
+            Else
+                strAttach = clsAttach.ToScript(strTempScript)
+                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
+                ucrBase.clsRsyntax.RemoveAssignTo()
+                strOutPut = ucrBase.clsRsyntax.GetScript
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
+                If strVecOutput IsNot Nothing Then
+                    If strVecOutput.Length > 1 Then
+                        'This is not working as expected. First of all Mid takes as arguments string, start end length. Here we give first entry of strVecOutput (which is a characterVector and not a string apparently..)? Then five would be the start ? Actually displays 19 letters... Does Mid has an overloaded definition I couldn't find ?
+                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
+                    Else
+                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                    End If
+                Else
+                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
+                End If
+            End If
+        Catch ex As Exception
+            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
+        Finally
+            'Need to recover RSyntax settings as they were before proceeding to Try
+            strTempScript = ""
+            strDetach = clsDetach.ToScript(strTempScript)
+            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
+            ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
+            ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
+            ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
+            ucrBase.clsRsyntax.strAssignToColumn = strAssignToColumn
+            ucrBase.clsRsyntax.strAssignToDataframe = strAssignToDataFrame
+        End Try
+    End Sub
+
+
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
+        TryScript()
+    End Sub
 End Class

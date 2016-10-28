@@ -25,12 +25,6 @@ Partial Class dlgEnter
         Me.chkShowEnterArguments = New System.Windows.Forms.CheckBox()
         Me.lblData = New System.Windows.Forms.Label()
         Me.chkSaveEnterResultInto = New System.Windows.Forms.CheckBox()
-        Me.ucrSaveEnterResultInto = New instat.ucrInputComboBox()
-        Me.ucrDataFrameEnter = New instat.ucrDataFrame()
-        Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.txtGetSequencePreview = New System.Windows.Forms.RichTextBox()
-        Me.txtMessageOfPreview = New System.Windows.Forms.TextBox()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
@@ -62,9 +56,12 @@ Partial Class dlgEnter
         Me.cmdMonthMinus = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
-        Me.lblSequencePreview = New System.Windows.Forms.Label()
-        Me.ucrDataFrameLengthForDefinedSequence = New instat.ucrDataFrameLength()
-        Me.lblLengthDataFrame = New System.Windows.Forms.Label()
+        Me.cmdTry = New System.Windows.Forms.Button()
+        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
+        Me.ucrSaveEnterResultInto = New instat.ucrInputComboBox()
+        Me.ucrDataFrameEnter = New instat.ucrDataFrame()
+        Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpEnterKeybord1.SuspendLayout()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.SuspendLayout()
@@ -93,65 +90,13 @@ Partial Class dlgEnter
         'chkSaveEnterResultInto
         '
         Me.chkSaveEnterResultInto.AutoSize = True
-        Me.chkSaveEnterResultInto.Location = New System.Drawing.Point(9, 350)
+        Me.chkSaveEnterResultInto.Location = New System.Drawing.Point(9, 252)
         Me.chkSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.chkSaveEnterResultInto.Name = "chkSaveEnterResultInto"
         Me.chkSaveEnterResultInto.Size = New System.Drawing.Size(104, 17)
         Me.chkSaveEnterResultInto.TabIndex = 157
         Me.chkSaveEnterResultInto.Text = "Save Result into"
         Me.chkSaveEnterResultInto.UseVisualStyleBackColor = True
-        '
-        'ucrSaveEnterResultInto
-        '
-        Me.ucrSaveEnterResultInto.IsReadOnly = False
-        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(120, 347)
-        Me.ucrSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
-        Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(253, 22)
-        Me.ucrSaveEnterResultInto.TabIndex = 158
-        '
-        'ucrDataFrameEnter
-        '
-        Me.ucrDataFrameEnter.bUseCurrentFilter = False
-        Me.ucrDataFrameEnter.Location = New System.Drawing.Point(9, 58)
-        Me.ucrDataFrameEnter.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameEnter.Name = "ucrDataFrameEnter"
-        Me.ucrDataFrameEnter.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameEnter.TabIndex = 156
-        '
-        'ucrReceiverForEnterCalculation
-        '
-        Me.ucrReceiverForEnterCalculation.Location = New System.Drawing.Point(83, 24)
-        Me.ucrReceiverForEnterCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrReceiverForEnterCalculation.Name = "ucrReceiverForEnterCalculation"
-        Me.ucrReceiverForEnterCalculation.Selector = Nothing
-        Me.ucrReceiverForEnterCalculation.Size = New System.Drawing.Size(254, 28)
-        Me.ucrReceiverForEnterCalculation.TabIndex = 153
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 373)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(452, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'txtGetSequencePreview
-        '
-        Me.txtGetSequencePreview.Location = New System.Drawing.Point(143, 228)
-        Me.txtGetSequencePreview.Name = "txtGetSequencePreview"
-        Me.txtGetSequencePreview.Size = New System.Drawing.Size(367, 70)
-        Me.txtGetSequencePreview.TabIndex = 160
-        Me.txtGetSequencePreview.Text = ""
-        '
-        'txtMessageOfPreview
-        '
-        Me.txtMessageOfPreview.Enabled = False
-        Me.txtMessageOfPreview.Location = New System.Drawing.Point(234, 304)
-        Me.txtMessageOfPreview.Multiline = True
-        Me.txtMessageOfPreview.Name = "txtMessageOfPreview"
-        Me.txtMessageOfPreview.ReadOnly = True
-        Me.txtMessageOfPreview.Size = New System.Drawing.Size(208, 37)
-        Me.txtMessageOfPreview.TabIndex = 161
         '
         'cmd1
         '
@@ -501,43 +446,66 @@ Partial Class dlgEnter
         Me.grpEnterKeyboard2.TabIndex = 159
         Me.grpEnterKeyboard2.TabStop = False
         '
-        'lblSequencePreview
+        'cmdTry
         '
-        Me.lblSequencePreview.AutoSize = True
-        Me.lblSequencePreview.Location = New System.Drawing.Point(225, 210)
-        Me.lblSequencePreview.Name = "lblSequencePreview"
-        Me.lblSequencePreview.Size = New System.Drawing.Size(97, 13)
-        Me.lblSequencePreview.TabIndex = 162
-        Me.lblSequencePreview.Text = "Sequence Preview"
+        Me.cmdTry.Location = New System.Drawing.Point(13, 216)
+        Me.cmdTry.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdTry.Name = "cmdTry"
+        Me.cmdTry.Size = New System.Drawing.Size(74, 23)
+        Me.cmdTry.TabIndex = 160
+        Me.cmdTry.Text = "Try"
+        Me.cmdTry.UseVisualStyleBackColor = True
         '
-        'ucrDataFrameLengthForDefinedSequence
+        'ucrInputTryMessage
         '
-        Me.ucrDataFrameLengthForDefinedSequence.clsDataFrameSelector = Nothing
-        Me.ucrDataFrameLengthForDefinedSequence.Location = New System.Drawing.Point(37, 142)
-        Me.ucrDataFrameLengthForDefinedSequence.Name = "ucrDataFrameLengthForDefinedSequence"
-        Me.ucrDataFrameLengthForDefinedSequence.Size = New System.Drawing.Size(51, 23)
-        Me.ucrDataFrameLengthForDefinedSequence.TabIndex = 164
+        Me.ucrInputTryMessage.IsReadOnly = True
+        Me.ucrInputTryMessage.Location = New System.Drawing.Point(96, 217)
+        Me.ucrInputTryMessage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
+        Me.ucrInputTryMessage.Size = New System.Drawing.Size(414, 22)
+        Me.ucrInputTryMessage.TabIndex = 161
         '
-        'lblLengthDataFrame
+        'ucrSaveEnterResultInto
         '
-        Me.lblLengthDataFrame.AutoSize = True
-        Me.lblLengthDataFrame.Location = New System.Drawing.Point(6, 123)
-        Me.lblLengthDataFrame.Name = "lblLengthDataFrame"
-        Me.lblLengthDataFrame.Size = New System.Drawing.Size(128, 13)
-        Me.lblLengthDataFrame.TabIndex = 163
-        Me.lblLengthDataFrame.Tag = "Length"
-        Me.lblLengthDataFrame.Text = "Length of the Data Frame"
+        Me.ucrSaveEnterResultInto.IsReadOnly = False
+        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(120, 249)
+        Me.ucrSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
+        Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(253, 22)
+        Me.ucrSaveEnterResultInto.TabIndex = 158
+        '
+        'ucrDataFrameEnter
+        '
+        Me.ucrDataFrameEnter.bUseCurrentFilter = False
+        Me.ucrDataFrameEnter.Location = New System.Drawing.Point(9, 58)
+        Me.ucrDataFrameEnter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameEnter.Name = "ucrDataFrameEnter"
+        Me.ucrDataFrameEnter.Size = New System.Drawing.Size(120, 40)
+        Me.ucrDataFrameEnter.TabIndex = 156
+        '
+        'ucrReceiverForEnterCalculation
+        '
+        Me.ucrReceiverForEnterCalculation.Location = New System.Drawing.Point(83, 24)
+        Me.ucrReceiverForEnterCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrReceiverForEnterCalculation.Name = "ucrReceiverForEnterCalculation"
+        Me.ucrReceiverForEnterCalculation.Selector = Nothing
+        Me.ucrReceiverForEnterCalculation.Size = New System.Drawing.Size(254, 28)
+        Me.ucrReceiverForEnterCalculation.TabIndex = 153
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 275)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(452, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgEnter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(522, 433)
-        Me.Controls.Add(Me.ucrDataFrameLengthForDefinedSequence)
-        Me.Controls.Add(Me.lblLengthDataFrame)
-        Me.Controls.Add(Me.lblSequencePreview)
-        Me.Controls.Add(Me.txtMessageOfPreview)
-        Me.Controls.Add(Me.txtGetSequencePreview)
+        Me.ClientSize = New System.Drawing.Size(522, 344)
+        Me.Controls.Add(Me.ucrInputTryMessage)
+        Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.grpEnterKeyboard2)
         Me.Controls.Add(Me.ucrSaveEnterResultInto)
         Me.Controls.Add(Me.chkSaveEnterResultInto)
@@ -567,8 +535,6 @@ Partial Class dlgEnter
     Friend WithEvents ucrDataFrameEnter As ucrDataFrame
     Friend WithEvents ucrSaveEnterResultInto As ucrInputComboBox
     Friend WithEvents chkSaveEnterResultInto As CheckBox
-    Friend WithEvents txtGetSequencePreview As RichTextBox
-    Friend WithEvents txtMessageOfPreview As TextBox
     Friend WithEvents cmd1 As Button
     Friend WithEvents cmdSquareBrackets As Button
     Friend WithEvents cmd0 As Button
@@ -600,7 +566,6 @@ Partial Class dlgEnter
     Friend WithEvents cmdMonthMinus As Button
     Friend WithEvents cmdColon As Button
     Friend WithEvents grpEnterKeyboard2 As GroupBox
-    Friend WithEvents lblSequencePreview As Label
-    Friend WithEvents ucrDataFrameLengthForDefinedSequence As ucrDataFrameLength
-    Friend WithEvents lblLengthDataFrame As Label
+    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
+    Friend WithEvents cmdTry As Button
 End Class
