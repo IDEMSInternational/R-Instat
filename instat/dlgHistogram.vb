@@ -33,9 +33,8 @@ Public Class dlgHistogram
             'todo what happens when it reopens
             ReopenDialog()
         End If
-
-
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -118,7 +117,7 @@ Public Class dlgHistogram
 
     Private Sub TestOkEnabled()
         'tests when ok can be enabled
-        If ucrVariablesAsFactorforHist.IsEmpty Or (ucrSaveHist.chkSaveGraph.Checked And ucrSaveHist.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorforHist.IsEmpty OrElse (ucrSaveHist.chkSaveGraph.Checked AndAlso ucrSaveHist.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
