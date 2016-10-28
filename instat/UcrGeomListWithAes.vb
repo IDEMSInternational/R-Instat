@@ -65,9 +65,6 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam8.Selector = UcrSelector
         ucrReceiverParam9.Selector = UcrSelector
         ucrReceiverParam10.Selector = UcrSelector
-        'Set the default receiver.
-        'Question: should that not go into UcrGeomListWithParameters_Load ?
-        ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
     Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
