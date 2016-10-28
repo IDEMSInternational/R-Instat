@@ -53,12 +53,6 @@ Partial Class dlgRegressionSimple
         Me.lblMean = New System.Windows.Forms.Label()
         Me.lblRate = New System.Windows.Forms.Label()
         Me.lblProbability = New System.Windows.Forms.Label()
-        Me.chkModifyPoisson1 = New System.Windows.Forms.CheckBox()
-        Me.chkModifyPoisson2 = New System.Windows.Forms.CheckBox()
-        Me.lblX = New System.Windows.Forms.Label()
-        Me.lblY = New System.Windows.Forms.Label()
-        Me.ucrTextforX = New instat.ucrInputTextBox()
-        Me.ucrTextforY = New instat.ucrInputTextBox()
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -237,50 +231,10 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.lblProbability, "lblProbability")
         Me.lblProbability.Name = "lblProbability"
         '
-        'chkModifyPoisson1
-        '
-        resources.ApplyResources(Me.chkModifyPoisson1, "chkModifyPoisson1")
-        Me.chkModifyPoisson1.Name = "chkModifyPoisson1"
-        Me.chkModifyPoisson1.UseVisualStyleBackColor = True
-        '
-        'chkModifyPoisson2
-        '
-        resources.ApplyResources(Me.chkModifyPoisson2, "chkModifyPoisson2")
-        Me.chkModifyPoisson2.Name = "chkModifyPoisson2"
-        Me.chkModifyPoisson2.UseVisualStyleBackColor = True
-        '
-        'lblX
-        '
-        resources.ApplyResources(Me.lblX, "lblX")
-        Me.lblX.Name = "lblX"
-        '
-        'lblY
-        '
-        resources.ApplyResources(Me.lblY, "lblY")
-        Me.lblY.Name = "lblY"
-        '
-        'ucrTextforX
-        '
-        Me.ucrTextforX.IsReadOnly = False
-        resources.ApplyResources(Me.ucrTextforX, "ucrTextforX")
-        Me.ucrTextforX.Name = "ucrTextforX"
-        '
-        'ucrTextforY
-        '
-        Me.ucrTextforY.IsReadOnly = False
-        resources.ApplyResources(Me.ucrTextforY, "ucrTextforY")
-        Me.ucrTextforY.Name = "ucrTextforY"
-        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrTextforY)
-        Me.Controls.Add(Me.ucrTextforX)
-        Me.Controls.Add(Me.lblY)
-        Me.Controls.Add(Me.lblX)
-        Me.Controls.Add(Me.chkModifyPoisson2)
-        Me.Controls.Add(Me.chkModifyPoisson1)
         Me.Controls.Add(Me.lblProbability)
         Me.Controls.Add(Me.lblRate)
         Me.Controls.Add(Me.lblMean)
@@ -352,10 +306,4 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblMean As Label
     Friend WithEvents lblRate As Label
     Friend WithEvents lblProbability As Label
-    Friend WithEvents chkModifyPoisson1 As CheckBox
-    Friend WithEvents chkModifyPoisson2 As CheckBox
-    Friend WithEvents lblX As Label
-    Friend WithEvents lblY As Label
-    Friend WithEvents ucrTextforX As ucrInputTextBox
-    Friend WithEvents ucrTextforY As ucrInputTextBox
 End Class
