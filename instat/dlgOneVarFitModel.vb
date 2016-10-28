@@ -16,7 +16,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
-    Public clsRConvert, clsROneVarFitModel, clsRCount As New RFunction
+    Public clsRConvert, clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsRBinomTest, clsRPoissonTest As New RFunction
     Public clsFunctionOperator As New ROperator
     Public bfirstload As Boolean = True
 
@@ -63,7 +63,6 @@ Public Class dlgOneVarFitModel
         ucrOperator.SetName("==")
         nudCI.Value = 0.95
         BinomialConditions()
-        ChangingFactorToCountPoisson()
         chkSaveModel.Checked = True
         ucrSaveModel.Reset()
         SetDataParameter()
@@ -125,6 +124,11 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Public Sub SetBaseFunction()
+        clsROneVarFitModel.ClearParameters()
+        clsRPoissonTest.ClearParameters()
+        clsRBinomTest.ClearParameters()
+        clsRTTest.ClearParameters()
+        clsRConvert.ClearParameters()
         If rdoGeneral.Checked Then
             FitDistFunction()
         ElseIf rdoSpecific.Checked Then
@@ -139,7 +143,6 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Public Sub FitDistFunction()
-        clsROneVarFitModel.ClearParameters()
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         clsROneVarFitModel.SetRCommand("fitdist")
         clsROneVarFitModel.AddParameter("distr", Chr(34) & UcrDistributions.clsCurrDistribution.strRName & Chr(34))
@@ -147,51 +150,40 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetTTest()
-        clsROneVarFitModel.ClearParameters()
-        clsROneVarFitModel.SetRCommand("t.test")
-        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        clsRTTest.SetRCommand("t.test")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRConvert.SetRCommand("as.vector")
         clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-        clsROneVarFitModel.AddParameter("x", clsRFunctionParameter:=clsRConvert)
-        clsROneVarFitModel.AddParameter("mu", nudHyp.Value.ToString)
-        clsROneVarFitModel.AddParameter("conf.level", nudCI.Value.ToString)
+        clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
+        clsRTTest.AddParameter("mu", nudHyp.Value.ToString)
+        clsRTTest.AddParameter("conf.level", nudCI.Value.ToString)
     End Sub
 
     Private Sub SetPoissonTest()
-        clsROneVarFitModel.ClearParameters()
-        clsROneVarFitModel.SetRCommand("poisson.test")
-        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
-        clsROneVarFitModel.AddParameter("r", nudHyp.Value.ToString)
-        clsROneVarFitModel.AddParameter("conf.level", nudCI.Value.ToString)
-        clsROneVarFitModel.AddParameter("T", nudTimeBase.Value.ToString)
-        If chkModifyPoisson.Checked Then
-            clsRCount.SetRCommand("count")
-            clsRCount.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
-            clsROneVarFitModel.AddParameter("x", clsRFunctionParameter:=clsRCount)
-            clsFunctionOperator.SetOperation("==")
-            clsFunctionOperator.SetParameter(True, clsRFunc:=UcrReceiver.GetVariables())
-            clsFunctionOperator.SetParameter(False, strValue:=Chr(34) & ucrInputObjectToCount.GetText.ToString & Chr(34))
-        Else
-            clsRCount.SetRCommand("count")
-            clsRCount.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-            clsROneVarFitModel.AddParameter("x", clsRFunctionParameter:=clsRCount)
-        End If
-
+        clsRPoissonTest.SetRCommand("poisson.test")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsRPoissonTest)
+        clsRPoissonTest.AddParameter("r", nudHyp.Value.ToString)
+        clsRPoissonTest.AddParameter("conf.level", nudCI.Value.ToString)
+        clsRPoissonTest.AddParameter("T", clsRFunctionParameter:=clsRMean)
+        clsRPoissonTest.AddParameter("x", clsRFunctionParameter:=clsRLength)
+        clsRLength.SetRCommand("length")
+        clsRLength.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsRMean.SetRCommand("mean")
+        clsRMean.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
     End Sub
 
     Private Sub SetBinomialTest()
-        clsROneVarFitModel.ClearParameters()
-        clsROneVarFitModel.SetRCommand("binom.test")
-        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
-        clsROneVarFitModel.AddParameter("p", nudHyp.Value.ToString)
-        clsROneVarFitModel.AddParameter("conf.level", nudCI.Value.ToString)
+        clsRBinomTest.SetRCommand("binom.test")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsRBinomTest)
+        clsRBinomTest.AddParameter("p", nudHyp.Value.ToString)
+        clsRBinomTest.AddParameter("conf.level", nudCI.Value.ToString)
         If chkBinModify.Checked Then
-            clsROneVarFitModel.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
+            clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
             clsFunctionOperator.SetOperation(ucrOperator.GetText())
             clsFunctionOperator.SetParameter(True, clsRFunc:=UcrReceiver.GetVariables())
             clsFunctionOperator.SetParameter(False, strValue:=nudBinomialConditions.Value.ToString())
         Else
-            clsROneVarFitModel.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+            clsRBinomTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         End If
     End Sub
 
@@ -267,10 +259,8 @@ Public Class dlgOneVarFitModel
             nudHyp.Visible = False
             lblMean.Visible = False
             lblRate.Visible = False
-            lblTimeBase.Visible = False
             lblprobability.Visible = False
             lblConfidenceLimit.Visible = False
-            nudTimeBase.Visible = False
         ElseIf rdoSpecific.Checked Then
             cmdFittingOptions.Visible = False
             cmdDisplayOptions.Visible = False
@@ -282,8 +272,6 @@ Public Class dlgOneVarFitModel
                 lblMean.Visible = True
                 lblRate.Visible = False
                 lblprobability.Visible = False
-                lblTimeBase.Visible = False
-                nudTimeBase.Visible = False
                 nudHyp.Visible = True
                 nudHyp.Value = 0
                 nudHyp.Increment = 1
@@ -294,9 +282,7 @@ Public Class dlgOneVarFitModel
                 lblprobability.Visible = True
                 lblMean.Visible = False
                 lblRate.Visible = False
-                lblTimeBase.Visible = False
                 nudHyp.Visible = True
-                nudTimeBase.Visible = False
                 nudHyp.Value = 0.5
                 nudHyp.Maximum = 1
                 nudHyp.Minimum = 0
@@ -305,8 +291,6 @@ Public Class dlgOneVarFitModel
             ElseIf UcrDistributions.clsCurrDistribution.strNameTag = "Poisson" Then
                 lblMean.Visible = False
                 lblRate.Visible = True
-                lblTimeBase.Visible = True
-                nudTimeBase.Visible = True
                 lblprobability.Visible = False
                 nudHyp.Visible = True
                 nudHyp.Value = 1
@@ -314,11 +298,6 @@ Public Class dlgOneVarFitModel
                 nudHyp.DecimalPlaces = 2
                 nudHyp.Maximum = Integer.MaxValue
                 nudHyp.Minimum = 0
-                nudTimeBase.Value = 1
-                nudTimeBase.Increment = 1
-                nudTimeBase.DecimalPlaces = 2
-                nudTimeBase.Maximum = Integer.MaxValue
-                nudTimeBase.Minimum = 0
             End If
         End If
     End Sub
@@ -326,7 +305,6 @@ Public Class dlgOneVarFitModel
     Private Sub rdoButtons_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSpecific.CheckedChanged, rdoGeneral.CheckedChanged
         EnableOptions()
         BinomialConditions()
-        ChangingFactorToCountPoisson()
         sdgOneVarFitModel.OptimisationMethod()
         sdgOneVarFitModel.Estimators()
     End Sub
@@ -334,14 +312,13 @@ Public Class dlgOneVarFitModel
     Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles UcrDistributions.cboDistributionsIndexChanged
         SetBaseFunction()
         BinomialConditions()
-        ChangingFactorToCountPoisson()
     End Sub
 
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblMean.VisibleChanged, lblTimeBase.VisibleChanged, lblRate.VisibleChanged, lblprobability.VisibleChanged, lblConfidenceLimit.VisibleChanged, lblSuccessIf.VisibleChanged, lblCountPoisson.VisibleChanged
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblMean.VisibleChanged, lblRate.VisibleChanged, lblprobability.VisibleChanged, lblConfidenceLimit.VisibleChanged, lblSuccessIf.VisibleChanged
         Display()
     End Sub
 
-    Private Sub nudCI_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHyp.TextChanged, nudTimeBase.TextChanged
+    Private Sub nudCI_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHyp.TextChanged
         SetBaseFunction()
     End Sub
 
@@ -377,33 +354,5 @@ Public Class dlgOneVarFitModel
 
     Private Sub nudBinomialConditions_ValueChanged(sender As Object, e As EventArgs) Handles nudBinomialConditions.ValueChanged
         SetBinomialTest()
-    End Sub
-
-    Private Sub chkModifyPoisson_CheckedChanged(sender As Object, e As EventArgs) Handles chkModifyPoisson.CheckedChanged
-        ChangingFactorToCountPoisson()
-        SetPoissonTest()
-    End Sub
-
-    Private Sub ChangingFactorToCountPoisson()
-        If rdoSpecific.Checked AndAlso UcrDistributions.clsCurrDistribution.strNameTag = "Poisson" Then
-            chkModifyPoisson.Visible = True
-            If chkModifyPoisson.Checked Then
-                lblCountPoisson.Visible = True
-                ucrInputObjectToCount.Visible = True
-            Else
-                lblCountPoisson.Visible = False
-                ucrInputObjectToCount.Visible = False
-            End If
-        Else
-            chkModifyPoisson.Visible = False
-            chkModifyPoisson.Checked = False
-            lblCountPoisson.Visible = False
-            ucrInputObjectToCount.Visible = False
-        End If
-        Display()
-    End Sub
-
-    Private Sub ucrInputObjectToCount_TextChanged(sender As Object, e As EventArgs) Handles ucrInputObjectToCount.TextChanged
-        SetPoissonTest()
     End Sub
 End Class

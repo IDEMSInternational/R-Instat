@@ -44,15 +44,9 @@ Partial Class dlgOneVarFitModel
         Me.nudHyp = New System.Windows.Forms.NumericUpDown()
         Me.nudBinomialConditions = New System.Windows.Forms.NumericUpDown()
         Me.lblRate = New System.Windows.Forms.Label()
-        Me.lblTimeBase = New System.Windows.Forms.Label()
-        Me.nudTimeBase = New System.Windows.Forms.NumericUpDown()
-        Me.chkModifyPoisson = New System.Windows.Forms.CheckBox()
-        Me.lblCountPoisson = New System.Windows.Forms.Label()
-        Me.ucrInputObjectToCount = New instat.ucrInputTextBox()
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudTimeBase, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'UcrBase
@@ -251,59 +245,11 @@ Partial Class dlgOneVarFitModel
         Me.lblRate.TabIndex = 31
         Me.lblRate.Text = "Rate:"
         '
-        'lblTimeBase
-        '
-        Me.lblTimeBase.AutoSize = True
-        Me.lblTimeBase.Location = New System.Drawing.Point(267, 177)
-        Me.lblTimeBase.Name = "lblTimeBase"
-        Me.lblTimeBase.Size = New System.Drawing.Size(60, 13)
-        Me.lblTimeBase.TabIndex = 32
-        Me.lblTimeBase.Text = "Time Base:"
-        '
-        'nudTimeBase
-        '
-        Me.nudTimeBase.Location = New System.Drawing.Point(330, 174)
-        Me.nudTimeBase.Name = "nudTimeBase"
-        Me.nudTimeBase.Size = New System.Drawing.Size(48, 20)
-        Me.nudTimeBase.TabIndex = 33
-        '
-        'chkModifyPoisson
-        '
-        Me.chkModifyPoisson.AutoSize = True
-        Me.chkModifyPoisson.Location = New System.Drawing.Point(272, 210)
-        Me.chkModifyPoisson.Name = "chkModifyPoisson"
-        Me.chkModifyPoisson.Size = New System.Drawing.Size(140, 17)
-        Me.chkModifyPoisson.TabIndex = 34
-        Me.chkModifyPoisson.Text = "Change Object to Count"
-        Me.chkModifyPoisson.UseVisualStyleBackColor = True
-        '
-        'lblCountPoisson
-        '
-        Me.lblCountPoisson.AutoSize = True
-        Me.lblCountPoisson.Location = New System.Drawing.Point(277, 241)
-        Me.lblCountPoisson.Name = "lblCountPoisson"
-        Me.lblCountPoisson.Size = New System.Drawing.Size(54, 13)
-        Me.lblCountPoisson.TabIndex = 35
-        Me.lblCountPoisson.Text = "Count X ="
-        '
-        'ucrInputObjectToCount
-        '
-        Me.ucrInputObjectToCount.IsReadOnly = False
-        Me.ucrInputObjectToCount.Location = New System.Drawing.Point(330, 237)
-        Me.ucrInputObjectToCount.Name = "ucrInputObjectToCount"
-        Me.ucrInputObjectToCount.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputObjectToCount.TabIndex = 36
-        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 322)
-        Me.Controls.Add(Me.ucrInputObjectToCount)
-        Me.Controls.Add(Me.lblCountPoisson)
-        Me.Controls.Add(Me.chkModifyPoisson)
-        Me.Controls.Add(Me.nudTimeBase)
-        Me.Controls.Add(Me.lblTimeBase)
         Me.Controls.Add(Me.lblRate)
         Me.Controls.Add(Me.nudBinomialConditions)
         Me.Controls.Add(Me.nudHyp)
@@ -334,7 +280,6 @@ Partial Class dlgOneVarFitModel
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudTimeBase, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -362,9 +307,4 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents nudHyp As NumericUpDown
     Friend WithEvents nudBinomialConditions As NumericUpDown
     Friend WithEvents lblRate As Label
-    Friend WithEvents lblTimeBase As Label
-    Friend WithEvents nudTimeBase As NumericUpDown
-    Friend WithEvents chkModifyPoisson As CheckBox
-    Friend WithEvents lblCountPoisson As Label
-    Friend WithEvents ucrInputObjectToCount As ucrInputTextBox
 End Class
