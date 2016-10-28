@@ -15,7 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgPlots
+    'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made. For the moment all these are scattered around. Might be necessary to have this flexibility though... 
+    'Question to be discussed (later)/Exploration Task: Why do we have RSyntax given through here and not in the LayerOptions dialog ? Would it be easier to just give through the RSyntax everywhere, and locally extract/edit the necessary info in the different sdg's, ucr's ?  Sort of like it is done here ? But as far as I understand, there is no clear attitude concerning what is shared, what is carried through, where, using what method. Maybe if we uniformise, choose a coherent attitiude, it will be easier to edit things, avoid bugs, add on functionalities...
+    'Question to be discussed: Maybe there is a need for a more radical change: create a clsGgplot that would be carried through all graphics components and contain all the well organised ggplot necessary info, about different Layers, different parameters, theme, ... Then in the main dlg's initiating plots, there would be a method that interprets the info in clsGgplot inside the RSyntax. Big project, don't know if it's worth it, but could make things cleaner, easier to work with ? Maybe need a more detailed sketch of how this would be implemented before making decision whether it's worth the time investment or not...
+    'Task: write an issue/proposal about this when ideas are a bit clearer.
     Public clsRsyntax As New RSyntax
+    'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
     Public clsAesFunction As New RFunction
     Public clsRFacetFunction As New RFunction
@@ -25,10 +30,12 @@ Public Class sdgPlots
     Public clsRLegendFunction As New RFunction
     Public clsGraphTitleFunction As New RFunction
     Public clsLegendFunction As New RFunction
+    'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
+    'They are treated separately from the RSyntax for the sake of clarity, then sinked in eventually.
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
     Private bAdditionalLayersSetGlobal As Boolean
-    'Question: what is this variable used for ? Only changed in the property bLayersDefaultIsGolobal, together with ucrPlotsAdditionalLayers.bSetGlobalIsDefault
+    'See bLayersDefaultIsGolobal below.
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -38,21 +45,17 @@ Public Class sdgPlots
         autoTranslate(Me)
     End Sub
 
-    Private Sub InitialiseTabs()
-        For i = 0 To tabctrlBoxSubdialog.TabCount - 1
-            tabctrlBoxSubdialog.SelectedIndex = i
-        Next
-        tabctrlBoxSubdialog.SelectedIndex = 0
-    End Sub
-
     Public Sub SetDefaults()
         TitleDefaults()
+
         IncludeFacets()
         chkIncludeFacets.Checked = False
         ucrFacetSelector.Reset()
+
         ucr1stFactorReceiver.SetMeAsReceiver()
         ucrInputGraphTitle.SetName("")
         ucrPlotsAdditionalLayers.Reset()
+        'Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
         ucrXAxis.Reset()
         ucrYAxis.Reset()
         ucrInputThemes.SetName("theme_grey")
@@ -60,8 +63,13 @@ Public Class sdgPlots
         LegendDefaults()
         bLayersDefaultIsGlobal = False
     End Sub
+    Private Sub TitleDefaults()
+        chkDisplayLegendTitle.Checked = True
+        chkOverwriteLegendTitle.Checked = False
+        ucrInputLegend.Visible = False
+    End Sub
 
-    Public Sub Reset()
+    Public Sub Reset() 'Task: Should just use SetDefaults instead of creating a new sub. Change later in quick merge.
         SetDefaults()
     End Sub
 
@@ -78,57 +86,31 @@ Public Class sdgPlots
         ucrYAxis.SetXorY(False)
         ucrYAxis.SetRsyntaxAxis(clsRsyntax)
     End Sub
-
-    Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
-        clsRggplotFunction = clsGgplotFunc
+    Private Sub InitialiseTabs()
+        'Question: Tabs are set in turn as selected, using their index. Then the first tab is set as selected again. For some reason this initialises the tabs ?
+        For i = 0 To tabctrlBoxSubdialog.TabCount - 1
+            tabctrlBoxSubdialog.SelectedIndex = i
+        Next
+        tabctrlBoxSubdialog.SelectedIndex = 0
     End Sub
 
     Public Sub me_me() Handles tabctrlBoxSubdialog.TabIndexChanged
+        'Question: I thought this would be the explanation of the tabs initialisation, but after reflexion I don't see the point of this function. Are these setup's not done in the Initialisedialog() ? Lines 83 and 85. Does it need to be performed again each time we go back to these particular tabs ?
         If tabctrlBoxSubdialog.SelectedTab Is tbpXAxis Then
             ucrXAxis.bIsX = True
         ElseIf tabctrlBoxSubdialog.SelectedTab Is tbpYAxis Then
             ucrYAxis.bIsX = False
         End If
     End Sub
-
     Private Sub CreateThemes()
+        'Adds the available themes in the relevant "Themes combo box".
         Dim strThemes() As String
         strThemes = {"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"}
         Array.Sort(strThemes)
-        ucrInputThemes.SetItems({"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"})
+        ucrInputThemes.SetItems(strThemes)
+        'Task: Need to implement theme options. The "All Options" button is temporarily disabled.
         cmdAllOptions.Enabled = False
     End Sub
-
-    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.NameChanged
-        If Not ucrInputThemes.IsEmpty Then
-            clsRThemeFunction.SetRCommand(ucrInputThemes.GetText())
-            If ucrInputThemes.GetText() = "theme_grey" Then
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
-                Else
-                    clsRsyntax.RemoveOperatorParameter("theme")
-                End If
-            Else
-                clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
-            End If
-        Else
-            clsRsyntax.RemoveOperatorParameter("theme")
-        End If
-    End Sub
-    Private Sub TitleDefaults()
-        chkDisplayLegendTitle.Checked = True
-        chkOverwriteLegendTitle.Checked = False
-        ucrInputLegend.Visible = False
-    End Sub
-
-    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegendTitle.CheckedChanged
-        If chkDisplayLegendTitle.Checked Then
-            chkOverwriteLegendTitle.Visible = True
-        Else
-            chkOverwriteLegendTitle.Visible = False
-        End If
-    End Sub
-
     Private Sub Facets()
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
@@ -168,11 +150,6 @@ Public Class sdgPlots
         End If
         SetFacets()
         IncludeFacetsOperator()
-    End Sub
-
-    Public Sub SetDataFrame(strNewDataFrame As String)
-        strDataFrame = strNewDataFrame
-        ucrFacetSelector.SetDataframe(strDataFrame, False)
     End Sub
 
     Private Sub SetFacets()
@@ -230,6 +207,48 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("facet")
         End If
     End Sub
+
+    'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
+    Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
+        clsRggplotFunction = clsGgplotFunc
+    End Sub
+
+
+    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.NameChanged
+        If Not ucrInputThemes.IsEmpty Then
+            clsRThemeFunction.SetRCommand(ucrInputThemes.GetText())
+            If ucrInputThemes.GetText() = "theme_grey" Then
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+                Else
+                    clsRsyntax.RemoveOperatorParameter("theme")
+                End If
+            Else
+                clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+            End If
+        Else
+            clsRsyntax.RemoveOperatorParameter("theme")
+        End If
+    End Sub
+
+
+    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegendTitle.CheckedChanged
+        'The Overwrite Legend Title check box should only be available when the Display Legend Title is ticked.
+        If chkDisplayLegendTitle.Checked Then
+            chkOverwriteLegendTitle.Visible = True
+        Else
+            chkOverwriteLegendTitle.Visible = False
+        End If
+    End Sub
+
+
+
+    Public Sub SetDataFrame(strNewDataFrame As String)
+        strDataFrame = strNewDataFrame
+        ucrFacetSelector.SetDataframe(strDataFrame, False)
+    End Sub
+
+
 
     Private Sub VisibileNumberOfRowsOrColumns()
         If chkMargin.Checked OrElse Not ucr2ndFactorReceiver.IsEmpty Then
@@ -314,9 +333,7 @@ Public Class sdgPlots
         clsRsyntax = clsRSyntaxIn
     End Sub
 
-    Public Sub SetRsyntaxAxis(clsRsyntaxAxis As RSyntax)
-        clsRsyntax = clsRsyntaxAxis
-    End Sub
+
     Private Sub ucrInputGraphTitle_NameChanged() Handles ucrInputGraphTitle.NameChanged
         If Not ucrInputGraphTitle.IsEmpty Then
             clsGraphTitleFunction.SetRCommand("ggtitle")
@@ -359,7 +376,8 @@ Public Class sdgPlots
     End Sub
 
     Public Property bLayersDefaultIsGlobal As Boolean
-        'Question: what is this property used for again? It is only used in the set defaults here, which sets it to false
+        'Warning: This is used to decide whether the default setting of the first created layer should be to apply aes on all layers. Indeed, coming from plotoptions, it might be that the first layer is the "first additional layer" (don't want to ApplyOnAllLayers), whereas coming from generalforgraphics, the first layer is the first layer. This should be eliminated when the plotoptions sdg will be edited to have as first layer the non-editable layer coming from the main dlg. See issue #1948
+        'It is only used in the set defaults here, which sets it to false
         Get
             Return bAdditionalLayersSetGlobal
         End Get
@@ -374,7 +392,7 @@ Public Class sdgPlots
             clsLegendFunction.SetRCommand("labs")
             clsLegendFunction.AddParameter("fill", Chr(34) & ucrInputLegend.GetText() & Chr(34))
             clsRsyntax.AddOperatorParameter("labs", clsRFunc:=clsLegendFunction)
-        ElseIf rdoLegendTitleAuto.Checked
+        ElseIf rdoLegendTitleAuto.Checked Then
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub

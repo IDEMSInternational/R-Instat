@@ -16,8 +16,10 @@
 Imports instat.Translations
 Public Class dlgBoxplot
     Private clsRggplotFunction As New RFunction
+    'clsRggplotFunction is the global ggplot function, will be used as RFunction of the first RParameter of ucrBase.clsRSyntax (which has "+" as main command). It is emphasised as a public field as it is used/editted in the sdgLayerOptions. The link is operated via SetupLayer that sets sdgLayerOptions.clsGgplotFunction = dlgBoxPlot.clsRggplotFunction.
     Private clsRgeom_boxplotFunction As New RFunction
     Private clsRaesFunction As New RFunction
+    'Similarly clsRgeom_boxplotFunction and clsRaesFunction (respectively the geom_boxplot function and the global aes function) are given through SetupLayer to sdgLayerOptions for edit. 
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
