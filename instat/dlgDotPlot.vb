@@ -60,7 +60,7 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrVariablesAsFactorDotPlot.IsEmpty Or (ucrSaveDotPlot.chkSaveGraph.Checked And ucrSaveDotPlot.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorDotPlot.IsEmpty OrElse (ucrSaveDotPlot.chkSaveGraph.Checked AndAlso ucrSaveDotPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)

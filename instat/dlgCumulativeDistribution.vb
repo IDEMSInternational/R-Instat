@@ -72,7 +72,7 @@ Public Class dlgCumulativeDistribution
 
     Private Sub TestOkEnabled()
         'TODO what enables ok
-        If ucrVariablesAsFactorforCumDist.IsEmpty Or (ucrSaveCumDist.chkSaveGraph.Checked And ucrSaveCumDist.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorforCumDist.IsEmpty OrElse (ucrSaveCumDist.chkSaveGraph.Checked AndAlso ucrSaveCumDist.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
