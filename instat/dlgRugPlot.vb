@@ -145,4 +145,8 @@ Public Class dlgRugPlot
         End If
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrSaveRugPlot_ContentsChanged() Handles ucrSaveRugPlot.ContentsChanged
+        TestOkEnabled()
+    End Sub
 End Class
