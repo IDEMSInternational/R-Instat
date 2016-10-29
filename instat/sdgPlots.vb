@@ -15,9 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgPlots
-    'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made. For the moment all these are scattered around. Might be necessary to have this flexibility though... 
-    'Question to be discussed (later)/Exploration Task: Why do we have RSyntax given through here and not in the LayerOptions dialog ? Would it be easier to just give through the RSyntax everywhere, and locally extract/edit the necessary info in the different sdg's, ucr's ?  Sort of like it is done here ? But as far as I understand, there is no clear attitude concerning what is shared, what is carried through, where, using what method. Maybe if we uniformise, choose a coherent attitiude, it will be easier to edit things, avoid bugs, add on functionalities...
+    'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
+    'Question to be discussed (later)/Exploration Task: Why do we have RSyntax given through here and not in the LayerOptions dialog ? Would it be easier to just give through the RSyntax everywhere, and locally extract/edit the necessary info in the different sdg's, ucr's ?  Sort of like it is done here ? As far as I understand, there is no clear attitude concerning what is shared, what is carried through, where, using what method. Maybe if we uniformise, choose a coherent attitiude, it will be easier to edit things, avoid bugs, add on functionalities...
     'Question to be discussed: Maybe there is a need for a more radical change: create a clsGgplot that would be carried through all graphics components and contain all the well organised ggplot necessary info, about different Layers, different parameters, theme, ... Then in the main dlg's initiating plots, there would be a method that interprets the info in clsGgplot inside the RSyntax. Big project, don't know if it's worth it, but could make things cleaner, easier to work with ? Maybe need a more detailed sketch of how this would be implemented before making decision whether it's worth the time investment or not...
+    'Reaction to question/Task/more questions: Alternatively the RSyntax is already sort of playing this role. So maybe facilitating the access to the information stored inthe Rsyntax instead ? (Would consist in just writing a few methods ?) Then cleaning the material that is carried through to different graphics components editors by essentially sending the RSyntax ? But extracting deep info is probably combersome to do several times... Which is why there are these clsGgplotFunction, clsAesFunction ... ? Need to create a diagram of what is shared by whom, how and for what purpose in order to clarify best strategy...
     'Task: write an issue/proposal about this when ideas are a bit clearer.
     Public clsRsyntax As New RSyntax
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
@@ -48,8 +49,8 @@ Public Class sdgPlots
     Public Sub SetDefaults()
         TitleDefaults()
 
-        IncludeFacets()
         chkIncludeFacets.Checked = False
+        'Changing the chkIncludeFacets will trigger IncludeFacets() ...
         ucrFacetSelector.Reset()
 
         ucr1stFactorReceiver.SetMeAsReceiver()
@@ -69,7 +70,7 @@ Public Class sdgPlots
         ucrInputLegend.Visible = False
     End Sub
 
-    Public Sub Reset() 'Task: Should just use SetDefaults instead of creating a new sub. Change later in quick merge.
+    Public Sub Reset() 'Task/Question: Really can we not just use SetDefaults immediately ? 
         SetDefaults()
     End Sub
 
@@ -77,10 +78,12 @@ Public Class sdgPlots
         InitialiseTabs()
         CreateThemes()
         Facets()
-        IncludeFacets()
+        'The following three setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function and aesthetics, as well as the whole PLots RSyntax.
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetAesFunction(clsAesFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
+        'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
+        'Also carry the RSyntax through to these ucr's .
         ucrXAxis.SetXorY(True)
         ucrXAxis.SetRsyntaxAxis(clsRsyntax)
         ucrYAxis.SetXorY(False)
@@ -112,6 +115,7 @@ Public Class sdgPlots
         cmdAllOptions.Enabled = False
     End Sub
     Private Sub Facets()
+        'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
@@ -148,11 +152,15 @@ Public Class sdgPlots
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
         End If
+        'Question to be discussed: should SetFacets not only be run when chkIncludeFacets is checked ?
         SetFacets()
         IncludeFacetsOperator()
     End Sub
 
     Private Sub SetFacets()
+        'Depending on the settings on the dialog, this function sets the Facets command , stored within clsRFacetFunction.
+        'The choice between grid and wrap are done systematically depending on the chosen settings.
+        'Task: detailed comments about the procedure below
         Dim clsTempOp As New ROperator
         clsTempOp.SetOperation("~")
         clsRFacetFunction.RemoveParameterByName("nrow")
@@ -163,6 +171,7 @@ Public Class sdgPlots
                 clsRFacetFunction.SetRCommand("facet_grid")
                 clsTempOp.SetParameter(True, strValue:=".")
                 clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                'As there are only a left and a right parameter for clsTempOp, no need to specify a parameter name, the default "right" will be used.
                 clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
 
             ElseIf rdoVertical.Checked AndAlso (chkMargin.Checked OrElse Not chkNoOfRowsOrColumns.Checked) Then
@@ -262,14 +271,12 @@ Public Class sdgPlots
 
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
         IncludeFacets()
-        If Not chkIncludeFacets.Checked Then
-            clsRsyntax.RemoveOperatorParameter("facet")
-        End If
     End Sub
 
     Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
         SetFacets()
         IncludeFacetsOperator()
+        'Question: Do we not only need IncludeFacetsOperator here and not in the following subs, as only the first receiver and the chkIncludeFacets decides whether the operator should be added ? Can I delete the others ?
     End Sub
 
     Private Sub ucr2ndFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged

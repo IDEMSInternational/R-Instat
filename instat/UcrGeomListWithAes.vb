@@ -20,7 +20,9 @@ Imports instat
 Public Class UcrGeomListWithParameters
     Public lstAesParameterLabels As New List(Of Label)
     Public lstAesParameterUcr As New List(Of ucrReceiverSingle)
+    'The two previous fields are the lists of parameter labels and receivers on the ucr.
     Public lstCurrArguments As New List(Of String)
+    'Question: lstCurrArguments is the list of aes parameters names of the current geom (ucrGeom.clsCurrGeom), i.e. the list of parameter names of clsGeomAesFunction. Right ?
     Public bFirstLoad As Boolean = True
     Public ucrLayersControl As ucrLayerParameters
     Public bCheckEnabled As Boolean = True
@@ -94,6 +96,7 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)
+        'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes and then in the local aes.
         Dim bFirstEnabled As Boolean = True
         Dim iFirstEnabled As Integer = 0
         bAddToLocalAes = False
@@ -101,8 +104,9 @@ Public Class UcrGeomListWithParameters
             lstAesParameterUcr(i).Enabled = True
             For Each clsParam In clsGgplotAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    'Should do this for any geom where x = "" ?
-                    If (clsCurrGeom.strGeomName = "geom_boxplot" OrElse clsCurrGeom.strGeomName = "geom_dotplot" OrElse clsCurrGeom.strGeomName = "geom_bar") AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    If clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        'For some geoms like BoxPlot, when the x aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer (might want to avoid this to be written in the global aes at first... This should only ever appear in the appropriate geoms...). This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers. Note: cannot filter our exclusion by checking if the current geom is BoxPlot or similar, like in the next For loop, as the current geom has in general nothing to do with the origin of the global aes. That origin is untrackable for the moment.
+                        'Question Task Warning: maybe add a warning for the user to not call his variables (colums) "" !
                         lstAesParameterUcr(i).Clear()
                         lstAesParameterUcr(i).Enabled = True
                     Else
@@ -114,7 +118,9 @@ Public Class UcrGeomListWithParameters
             Next
             For Each clsParam In clsGeomAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If clsCurrGeom.strGeomName = "geom_boxplot" AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    'Should do this for any geom with x="" ?
+                    If (clsCurrGeom.strGeomName = "geom_boxplot" OrElse clsCurrGeom.strGeomName = "geom_dotplot" OrElse clsCurrGeom.strGeomName = "geom_bar") AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        'Similar check to the one just above. However, in this case, we can filter by looking at who the current geom is.
                         lstAesParameterUcr(i).Clear()
                         lstAesParameterUcr(i).Enabled = True
                     Else
