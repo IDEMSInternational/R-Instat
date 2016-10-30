@@ -87,7 +87,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrVariablesAsFactorForBoxplot.IsEmpty Or (ucrSaveBoxplot.chkSaveGraph.Checked And ucrSaveBoxplot.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse (ucrSaveBoxplot.chkSaveGraph.Checked AndAlso ucrSaveBoxplot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
