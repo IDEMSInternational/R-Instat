@@ -1222,14 +1222,6 @@ Public Class frmMain
         dlgClimdex.ShowDialog()
     End Sub
 
-    Private Sub mnuFileExportToOpenRefine_Click(sender As Object, e As EventArgs)
-        dlgExportToOpenRefine.ShowDialog()
-    End Sub
-
-    Private Sub mnuFileImportFromOpenRefine_Click(sender As Object, e As EventArgs)
-        dlgImportOpenRefine.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsWindRose.Click
         dlgWindrose.ShowDialog()
     End Sub
