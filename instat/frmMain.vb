@@ -1114,7 +1114,7 @@ Public Class frmMain
         dlgOneVarUseModel.ShowDialog()
     End Sub
 
-    Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsTablesPlus.Click
+    Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsShowModel.Click
         dlgTablePlus.ShowDialog()
     End Sub
 
