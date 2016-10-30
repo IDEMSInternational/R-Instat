@@ -57,7 +57,7 @@ Public Class dlgScatterPlot
 
     Private Sub TestOkEnabled()
         'tests when okay Is enable
-        If ucrReceiverX.IsEmpty() Or ucrVariablesAsFactorForScatter.IsEmpty Or (ucrSaveScatterPlot.chkSaveGraph.Checked And ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
+        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForScatter.IsEmpty) OrElse (ucrSaveScatterPlot.chkSaveGraph.Checked AndAlso ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -99,6 +99,7 @@ Public Class dlgScatterPlot
         ucrSelectorForScatter.Focus()
         ucrVariablesAsFactorForScatter.ResetControl()
         sdgPlots.Reset()
+        ucrSaveScatterPlot.Reset()
         TestOkEnabled()
     End Sub
 
@@ -143,6 +144,10 @@ Public Class dlgScatterPlot
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class
