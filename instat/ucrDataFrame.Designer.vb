@@ -29,7 +29,7 @@ Partial Class ucrDataFrame
         'cboAvailableDataFrames
         '
         Me.cboAvailableDataFrames.FormattingEnabled = True
-        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(0, 25)
+        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(0, 19)
         Me.cboAvailableDataFrames.Name = "cboAvailableDataFrames"
         Me.cboAvailableDataFrames.Size = New System.Drawing.Size(120, 21)
         Me.cboAvailableDataFrames.TabIndex = 0

@@ -92,7 +92,9 @@ Public Class RLink
 
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
         chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
-        lstDataFrameNames.AddRange(chrDataFrameNames)
+        If chrDataFrameNames IsNot Nothing Then
+            lstDataFrameNames.AddRange(chrDataFrameNames)
+        End If
         Return lstDataFrameNames
     End Function
 
@@ -593,7 +595,7 @@ Public Class RLink
             clsGetModelNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         End If
         expModelNames = RunInternalScriptGetValue(clsGetModelNames.ToScript(), bSilent:=True)
-        If Not expModelNames.Type = Internals.SymbolicExpressionType.Null Then
+        If expModelNames IsNot Nothing AndAlso (Not expModelNames.Type = Internals.SymbolicExpressionType.Null) Then
             chrModelNames = expModelNames.AsCharacter()
             If chrModelNames.Length > 0 Then
                 lstModelNames.AddRange(chrModelNames)
