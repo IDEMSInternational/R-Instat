@@ -50,7 +50,7 @@ Public Class sdgPlots
         TitleDefaults()
 
         chkIncludeFacets.Checked = False
-        'Changing the chkIncludeFacets will trigger IncludeFacets() ...
+        IncludeFacets()
         ucrFacetSelector.Reset()
 
         ucr1stFactorReceiver.SetMeAsReceiver()
@@ -70,14 +70,14 @@ Public Class sdgPlots
         ucrInputLegend.Visible = False
     End Sub
 
-    Public Sub Reset() 'Task/Question: Really can we not just use SetDefaults immediately ? 
+    Public Sub Reset()
         SetDefaults()
     End Sub
 
     Private Sub InitialiseDialog()
         InitialiseTabs()
         CreateThemes()
-        Facets()
+        FacetsReceiversSetup()
         'The following three setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function and aesthetics, as well as the whole PLots RSyntax.
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetAesFunction(clsAesFunction)
@@ -97,14 +97,6 @@ Public Class sdgPlots
         tabctrlBoxSubdialog.SelectedIndex = 0
     End Sub
 
-    Public Sub me_me() Handles tabctrlBoxSubdialog.TabIndexChanged
-        'Question: I thought this would be the explanation of the tabs initialisation, but after reflexion I don't see the point of this function. Are these setup's not done in the Initialisedialog() ? Lines 83 and 85. Does it need to be performed again each time we go back to these particular tabs ?
-        If tabctrlBoxSubdialog.SelectedTab Is tbpXAxis Then
-            ucrXAxis.bIsX = True
-        ElseIf tabctrlBoxSubdialog.SelectedTab Is tbpYAxis Then
-            ucrYAxis.bIsX = False
-        End If
-    End Sub
     Private Sub CreateThemes()
         'Adds the available themes in the relevant "Themes combo box".
         Dim strThemes() As String
@@ -114,7 +106,7 @@ Public Class sdgPlots
         'Task: Need to implement theme options. The "All Options" button is temporarily disabled.
         cmdAllOptions.Enabled = False
     End Sub
-    Private Sub Facets()
+    Private Sub FacetsReceiversSetup()
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
@@ -123,6 +115,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub IncludeFacets()
+        'If the user wants facets, the facets options need to be shown, otherwise hide them.
         If chkIncludeFacets.Checked Then
             ucrFacetSelector.Visible = True
             ucr1stFactorReceiver.Visible = True
@@ -138,6 +131,8 @@ Public Class sdgPlots
             chkMargin.Visible = True
             chkFreeScalesX.Visible = True
             chkFreeScalesY.Visible = True
+            'In case IncludeFacets is checked, the facets need to be set. Still might not be included as RSyntax parameter if no no variable has been set for faceting, but this is then decided in the IncludeFacetsParameter below.
+            SetFacets()
         Else
             ucrFacetSelector.Visible = False
             ucr1stFactorReceiver.Visible = False
@@ -152,76 +147,148 @@ Public Class sdgPlots
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
         End If
-        'Question to be discussed: should SetFacets not only be run when chkIncludeFacets is checked ?
-        SetFacets()
-        IncludeFacetsOperator()
+        'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
+        IncludeFacetsParameter()
     End Sub
 
     Private Sub SetFacets()
-        'Depending on the settings on the dialog, this function sets the Facets command , stored within clsRFacetFunction.
-        'The choice between grid and wrap are done systematically depending on the chosen settings.
-        'Task: detailed comments about the procedure below
+        'Depending on the settings on the dialog, this function sets the Facets command, stored within clsRFacetFunction.
+        'Then IncludeFacetsParameter() will add the facets command to the ggplot script as a parameter within RSyntax (unless no factor has been for fasceting, as R requires at least one facets argument).
+        'The choice between grid and wrap is done systematically depending on the chosen settings.
         Dim clsTempOp As New ROperator
+        Dim strSingleFactor As String
         clsTempOp.SetOperation("~")
+        'The following two parameters (of the facet function) will be reset in this sub according to the settings selected on the dialog. They need to be cleared in case they are not relevant anymore for example if margins has been checked (they are specific to facet_wrap).
         clsRFacetFunction.RemoveParameterByName("nrow")
         clsRFacetFunction.RemoveParameterByName("ncol")
 
-        If Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty() Then
+        If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) OrElse (ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty()) Then
+            If ucr2ndFactorReceiver.IsEmpty() Then
+                strSingleFactor = ucr1stFactorReceiver.GetVariableNames(False)
+            Else strSingleFactor = ucr2ndFactorReceiver.GetVariableNames(False)
+            End If
+            'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
+            'In case only one of the receivers is non-empty, margins are checked (grid argument) or number of rows are not checked (wrap argument), then fecet_grid is used. Otherwise, wrap is used.
+            'The place of the argument, left or right, in the facets parameter of the facets function is determined by the choice "vertical" or "horizontal" faceting.
             If rdoHorizontal.Checked AndAlso (chkMargin.Checked OrElse Not chkNoOfRowsOrColumns.Checked) Then
                 clsRFacetFunction.SetRCommand("facet_grid")
                 clsTempOp.SetParameter(True, strValue:=".")
-                clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                clsTempOp.SetParameter(False, strValue:=strSingleFactor)
                 'As there are only a left and a right parameter for clsTempOp, no need to specify a parameter name, the default "right" will be used.
-                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+                'The boolean argument "false" is there to indicate we don't want quotes.
+
 
             ElseIf rdoVertical.Checked AndAlso (chkMargin.Checked OrElse Not chkNoOfRowsOrColumns.Checked) Then
                 clsRFacetFunction.SetRCommand("facet_grid")
                 clsTempOp.SetParameter(False, strValue:=".")
-                clsTempOp.SetParameter(True, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+                clsTempOp.SetParameter(True, strValue:=strSingleFactor)
 
             Else
+                'Warning: could be refined a little...
                 clsRFacetFunction.SetRCommand("facet_wrap")
                 clsTempOp.SetParameter(True, strValue:="")
-                clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+                clsTempOp.SetParameter(False, strValue:=strSingleFactor)
                 If rdoHorizontal.Checked AndAlso chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
                     clsRFacetFunction.AddParameter("nrow", nudNoOfRowsOrColumns.Value)
                 ElseIf rdoVertical.Checked AndAlso chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
                     clsRFacetFunction.AddParameter("ncol", nudNoOfRowsOrColumns.Value)
                 End If
             End If
-
+            clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+            'In case the two receivers are filled, facet_grid is used.
         ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
             clsRFacetFunction.SetRCommand("facet_grid")
             If rdoHorizontal.Checked Then
                 clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
                 clsTempOp.SetParameter(True, strValue:=ucr2ndFactorReceiver.GetVariableNames(False))
-                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
             ElseIf rdoVertical.Checked Then
                 clsTempOp.SetParameter(True, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
                 clsTempOp.SetParameter(False, strValue:=ucr2ndFactorReceiver.GetVariableNames(False))
-                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
             End If
+            clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
         Else
             clsRFacetFunction.RemoveParameterByName("facets")
         End If
-
     End Sub
 
-    Private Sub IncludeFacetsOperator()
-        If chkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty() Then
+    Private Sub IncludeFacetsParameter()
+        If chkIncludeFacets.Checked AndAlso Not (ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
             clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRFacetFunction)
         Else
             clsRsyntax.RemoveOperatorParameter("facet")
         End If
     End Sub
-
-    'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
-    Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
-        clsRggplotFunction = clsGgplotFunc
+    Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
+        IncludeFacets()
     End Sub
 
+    Private Sub SetScaleOption()
+        'This sub is setting the right scale parameter in the clsRFacetFunctions, according to the scale chk boxes. 
+        'It only needs to be called when these are modified, as this parameter is common to both facets_grid and facets_wrap. Although graphics on the same row or column in facets_grid share the y or x axis respectively. Still different rows might benefit from having different y-axis scales for instance.
+        If chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
+        ElseIf chkFreeScalesX.Checked AndAlso Not chkFreeScalesY.Checked Then
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
+        ElseIf Not chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
+            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
+        Else
+            clsRFacetFunction.RemoveParameterByName("scales")
+        End If
+    End Sub
+
+    Private Sub chkScales_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScalesX.CheckedChanged, chkFreeScalesY.CheckedChanged
+        SetScaleOption()
+        SetFacets()
+    End Sub
+    Private Sub VisibileNumberOfRowsOrColumns()
+        If chkMargin.Checked OrElse Not ucr2ndFactorReceiver.IsEmpty Then
+            chkNoOfRowsOrColumns.Visible = False
+            nudNoOfRowsOrColumns.Visible = False
+        Else
+            chkNoOfRowsOrColumns.Visible = True
+            nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+        End If
+    End Sub
+
+    Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
+        SetFacets()
+        IncludeFacetsParameter()
+    End Sub
+
+    Private Sub ucr2ndFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
+        VisibileNumberOfRowsOrColumns()
+        SetFacets()
+        IncludeFacetsParameter()
+    End Sub
+
+    Private Sub rdoHorVer_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHorizontal.CheckedChanged, rdoVertical.CheckedChanged
+        If rdoHorizontal.Checked Then
+            chkNoOfRowsOrColumns.Text = "Fixed Number of Rows"
+        ElseIf rdoVertical.Checked Then
+            chkNoOfRowsOrColumns.Text = "Fixed Number of Columns"
+        End If
+        SetFacets()
+    End Sub
+
+    Private Sub chkNoOfRowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoOfRowsOrColumns.CheckedChanged
+        nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+        SetFacets()
+    End Sub
+
+    Private Sub nudNoOfRowsOrColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNoOfRowsOrColumns.TextChanged
+        SetFacets()
+    End Sub
+
+    Private Sub chkMargin_CheckedChanged(sender As Object, e As EventArgs) Handles chkMargin.CheckedChanged
+        If chkMargin.Checked Then
+            clsRFacetFunction.AddParameter("margins", "TRUE")
+        Else
+            clsRFacetFunction.RemoveParameterByName("margins")
+
+        End If
+        VisibileNumberOfRowsOrColumns()
+        SetFacets()
+    End Sub
 
     Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.NameChanged
         If Not ucrInputThemes.IsEmpty Then
@@ -250,7 +317,10 @@ Public Class sdgPlots
         End If
     End Sub
 
-
+    'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
+    Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
+        clsRggplotFunction = clsGgplotFunc
+    End Sub
 
     Public Sub SetDataFrame(strNewDataFrame As String)
         strDataFrame = strNewDataFrame
@@ -259,82 +329,7 @@ Public Class sdgPlots
 
 
 
-    Private Sub VisibileNumberOfRowsOrColumns()
-        If chkMargin.Checked OrElse Not ucr2ndFactorReceiver.IsEmpty Then
-            chkNoOfRowsOrColumns.Visible = False
-            nudNoOfRowsOrColumns.Visible = False
-        Else
-            chkNoOfRowsOrColumns.Visible = True
-            nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
-        End If
-    End Sub
 
-    Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
-        IncludeFacets()
-    End Sub
-
-    Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
-        SetFacets()
-        IncludeFacetsOperator()
-        'Question: Do we not only need IncludeFacetsOperator here and not in the following subs, as only the first receiver and the chkIncludeFacets decides whether the operator should be added ? Can I delete the others ?
-    End Sub
-
-    Private Sub ucr2ndFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
-        VisibileNumberOfRowsOrColumns()
-        SetFacets()
-        IncludeFacetsOperator()
-    End Sub
-
-    Private Sub rdoHorVer_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHorizontal.CheckedChanged, rdoVertical.CheckedChanged
-        If rdoHorizontal.Checked Then
-            chkNoOfRowsOrColumns.Text = "Fixed Number of Rows"
-        ElseIf rdoVertical.Checked Then
-            chkNoOfRowsOrColumns.Text = "Fixed Number of Columns"
-        End If
-        SetFacets()
-        IncludeFacetsOperator()
-    End Sub
-
-    Private Sub chkNoOfRowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoOfRowsOrColumns.CheckedChanged
-        nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
-        SetFacets()
-        IncludeFacetsOperator()
-    End Sub
-
-    Private Sub nudNoOfRowsOrColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNoOfRowsOrColumns.TextChanged
-        SetFacets()
-        IncludeFacetsOperator()
-    End Sub
-
-    Private Sub chkMargin_CheckedChanged(sender As Object, e As EventArgs) Handles chkMargin.CheckedChanged
-        If chkMargin.Checked Then
-            clsRFacetFunction.AddParameter("margins", "TRUE")
-        Else
-            clsRFacetFunction.RemoveParameterByName("margins")
-
-        End If
-        VisibileNumberOfRowsOrColumns()
-        SetFacets()
-        IncludeFacetsOperator()
-    End Sub
-
-    Private Sub SetScaleOption()
-        If chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
-        ElseIf chkFreeScalesX.Checked AndAlso Not chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
-        ElseIf Not chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
-        Else
-            clsRFacetFunction.RemoveParameterByName("scales")
-        End If
-    End Sub
-
-    Private Sub chkScales_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScalesX.CheckedChanged, chkFreeScalesY.CheckedChanged
-        SetScaleOption()
-        IncludeFacetsOperator()
-        SetFacets()
-    End Sub
 
     Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
         clsRsyntax = clsRSyntaxIn
