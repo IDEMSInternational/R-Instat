@@ -37,16 +37,16 @@ Public Class sdgSummaries
         chkStdDev.Tag = "summary_sd"
         chkRange.Tag = "summary_range"
         chkSum.Tag = "summary_sum"
-        chkMean.Checked = True
-        chkStdDev.Checked = True
-        chkMode.Checked = True
-        chkMinimum.Checked = True
-        chkMaximum.Checked = True
-        chkNMissing.Checked = True
+        chkMean.Checked = False
+        chkStdDev.Checked = False
+        chkMode.Checked = False
+        chkMinimum.Checked = False
+        chkMaximum.Checked = False
+        chkNMissing.Checked = False
         chkNonMissing.Checked = True
         chkNTotal.Checked = True
-        chkMedian.Checked = True
-        chkRange.Checked = True
+        chkMedian.Checked = False
+        chkRange.Checked = False
         chkSum.Checked = True
         SummariesParameters()
     End Sub
@@ -79,12 +79,23 @@ Public Class sdgSummaries
         End If
     End Sub
 
-
     Public Sub SetMyRFunction(clsRNewSummaries As RFunction)
         clsRSummaries = clsRNewSummaries
     End Sub
 
     Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkSum.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged
         SummariesParameters()
+    End Sub
+
+    Private Sub grpCommon_Enter(sender As Object, e As EventArgs) Handles grpCommon.Enter
+
+    End Sub
+
+    Private Sub grpNotOrderedFactor_Enter(sender As Object, e As EventArgs) Handles grpNotOrderedFactor.Enter
+
+    End Sub
+
+    Private Sub grpNumeric_Enter(sender As Object, e As EventArgs) Handles grpNumeric.Enter
+
     End Sub
 End Class
