@@ -33,7 +33,6 @@ Public Class dlgRegressionSimple
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
-        '        ucrBase.clsRsyntax.SetFunction("")
         clsModel.SetOperation("~")
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
@@ -59,6 +58,8 @@ Public Class dlgRegressionSimple
         nudCI.Maximum = 1
         nudCI.DecimalPlaces = 2
         nudHypothesis.DecimalPlaces = 2
+        '        ucrFamily.SetGLMDistributions()
+        DistributionsOffered()
     End Sub
 
     Private Sub ReopenDialog()
@@ -81,7 +82,6 @@ Public Class dlgRegressionSimple
         sdgModelOptions.SetDefaults()
         ucrModelName.Reset()
         ucrModelPreview.SetName("")
-        ResponseConvert()
         SetRCode()
         TestOKEnabled()
     End Sub
@@ -104,8 +104,8 @@ Public Class dlgRegressionSimple
         clsModel.SetOperation("~")
         clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
         clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
-        clsRLmOrGLM.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+        clsRLmOrGLM.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
     End Sub
 
     Private Sub SetTTest()
@@ -211,7 +211,6 @@ Public Class dlgRegressionSimple
 
     Public Sub ResponseConvert()
         If Not ucrResponse.IsEmpty AndAlso rdoGeneral.Checked Then
-
             ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             If ucrFamily.strDataType = "numeric" Then
                 chkConvertToVariate.Checked = False
@@ -233,7 +232,7 @@ Public Class dlgRegressionSimple
         End If
 
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
-            '            ucrFamily.cboDistributions.Text = ""
+            ucrFamily.cboDistributions.Text = ""
             cmdModelOptions.Enabled = False
         Else
             cmdModelOptions.Enabled = True
@@ -242,7 +241,7 @@ Public Class dlgRegressionSimple
 
     Private Sub DistributionsOffered()
         '        If rdoGeneral.Checked Then
-        'ucrFamily.SetGLMDistributions()
+        '        ucrFamily.SetGLMDistributions()
         '        Else
         '        only normal, poisson and binomial
         '       End If
@@ -254,7 +253,7 @@ Public Class dlgRegressionSimple
         TestOKEnabled()
     End Sub
 
-    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged, chkConvertToVariate.VisibleChanged
         ResponseConvert()
         TestOKEnabled()
         Display()
@@ -295,7 +294,9 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        If rdoGeneral.Checked Then
+            sdgSimpleRegOptions.RegOptions()
+        End If
     End Sub
 
     Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
@@ -330,11 +331,6 @@ Public Class dlgRegressionSimple
         sdgModelOptions.ShowDialog()
         ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
         Display()
-    End Sub
-
-    Private Sub chkConvertToVariate_CheckedChanged_1(sender As Object, e As EventArgs)
-        ResponseConvert()
-        TestOKEnabled()
     End Sub
 
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
@@ -417,7 +413,7 @@ Public Class dlgRegressionSimple
         SetRCode()
     End Sub
 
-    Private Sub chkboxes_VisibleChanged(sender As Object, e As EventArgs) Handles chkFunction.VisibleChanged, chkConvertToVariate.VisibleChanged, chkPaired.VisibleChanged
+    Private Sub chkboxes_VisibleChanged(sender As Object, e As EventArgs) Handles chkFunction.VisibleChanged, chkPaired.VisibleChanged
         Display()
         ExplanatoryFunctionSelect()
         ResponseConvert()
@@ -427,8 +423,6 @@ Public Class dlgRegressionSimple
     Private Sub rdoTop_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGeneral.CheckedChanged, rdoSpecific.CheckedChanged
         Display()
         SetRCode()
-        ResponseConvert()
-        ExplanatoryFunctionSelect()
         DistributionsOffered()
     End Sub
 End Class
