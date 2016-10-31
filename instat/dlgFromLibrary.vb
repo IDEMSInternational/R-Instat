@@ -127,14 +127,17 @@ Public Class dlgFromLibrary
         ucrBase.clsRsyntax.SetAssignTo(chkString(lstCollection.SelectedItems(0).SubItems(0).Text), strTempDataframe:=chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         clsDataFunction.AddParameter("X", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
+
         TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
-        If (rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0) OrElse (rdoInstatCollection.Checked AndAlso dlgImportDataset.DialogResult = DialogResult.OK) Then
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(False)
+            If rdoInstatCollection.Checked OrElse rdoInstatCollection.Checked = False Then
+                ucrBase.OKEnabled(False)
+            End If
         End If
         EnableHelp()
     End Sub
@@ -173,4 +176,5 @@ Public Class dlgFromLibrary
             cmdHelp.Enabled = False
         End If
     End Sub
+
 End Class
