@@ -30,17 +30,20 @@ Partial Class dlgPopulationPyramids
         Me.ucrYVariableReceiver = New instat.ucrReceiverSingle()
         Me.lblSecondFactor = New System.Windows.Forms.Label()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSavePopulationPyramid = New instat.ucrSaveGraph()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 207)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 244)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrPopulationPyramidselector
         '
+        Me.ucrPopulationPyramidselector.bShowHiddenColumns = False
+        Me.ucrPopulationPyramidselector.bUseCurrentFilter = False
         Me.ucrPopulationPyramidselector.Location = New System.Drawing.Point(10, 10)
         Me.ucrPopulationPyramidselector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrPopulationPyramidselector.Name = "ucrPopulationPyramidselector"
@@ -101,11 +104,19 @@ Partial Class dlgPopulationPyramids
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrSecondFactorReceiver.TabIndex = 3
         '
+        'ucrSavePopulationPyramid
+        '
+        Me.ucrSavePopulationPyramid.Location = New System.Drawing.Point(10, 209)
+        Me.ucrSavePopulationPyramid.Name = "ucrSavePopulationPyramid"
+        Me.ucrSavePopulationPyramid.Size = New System.Drawing.Size(265, 20)
+        Me.ucrSavePopulationPyramid.TabIndex = 4
+        '
         'dlgPopulationPyramids
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 261)
+        Me.ClientSize = New System.Drawing.Size(421, 298)
+        Me.Controls.Add(Me.ucrSavePopulationPyramid)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.ucrYVariableReceiver)
@@ -132,4 +143,5 @@ Partial Class dlgPopulationPyramids
     Friend WithEvents ucrYVariableReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondFactor As Label
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
+    Friend WithEvents ucrSavePopulationPyramid As ucrSaveGraph
 End Class
