@@ -1237,4 +1237,8 @@ Public Class frmMain
     Private Sub mnuFileSaveAsDataAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsDataAs.Click
         dlgSaveAs.ShowDialog()
     End Sub
+
+    Private Sub mnuModelProbabilityDistributionsCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsCompareModels.Click
+        dlgCompareModels.ShowDialog()
+    End Sub
 End Class
