@@ -187,7 +187,6 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       # Defined as variables as these are used throughout 
       curr_calc_link_cols <- curr_sub_calc[[c_link_label]][["link_cols"]]
       overall_calc_link_cols <- sub_calc_results[[c_link_label]][["link_cols"]]
-      
       if(sub_calc_results[[c_require_merge_label]]) {
         #TODO What if summary was done but no linking columns?
         if(length(curr_calc_link_cols) > 0 || length(overall_calc_link_cols) > 0) {
@@ -218,11 +217,14 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
             # The joining columns are the intersection of two sets of linking columns
             # Which list's columns is contained in the other list, determines which data frame should come first in the merge 
             # needs to change to get corresponding columns and check lists
-            by_curr <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
-            by_overall <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
-            #print(curr_sub_calc[[c_link_label]][["from_data_frame"]])
-            #print(sub_calc_results[[c_link_label]][["from_data_frame"]])
-            #print(overall_calc_link_cols)
+            by_curr <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], curr_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
+            by_overall <- self$get_corresponding_link_columns(sub_calc_results[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, curr_sub_calc[[c_link_label]][["from_data_frame"]])
+            # print(by_curr)
+            # print(by_overall)
+            # print(curr_sub_calc[[c_link_label]][["from_data_frame"]])
+            # print(sub_calc_results[[c_link_label]][["from_data_frame"]])
+            # print(overall_calc_link_cols)
+            # print(curr_calc_link_cols)
             if(all(by_overall %in% names(by_curr))) {
               intersect_curr <- intersect(by_curr, names(by_overall))
               by <- by_curr[by_curr %in% intersect_curr]
@@ -232,6 +234,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
             else if(all(names(by_overall) %in% by_curr)) {
               intersect_overall <- intersect(by_overall, names(by_curr))
               by <- by_curr[by_overall %in% intersect_overall]
+              
               sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], by = by)
             }
             # If one set is not a subset of the other, then they do not contain any common linking columns and a merge is impossible
@@ -240,6 +243,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
           }
         }
         else {
+          #TODO below is not true! There could be a summary by no factors. So a merge required from summary but no linking columns
           # If a merge is required but there are no linking columns in either data frame, then, the merge was not required by a summary
           # so it was required by a filter
           # To be able to join data that has been filtered, there must be a key (unique identifier) defined in the data frame
@@ -260,6 +264,9 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
                 # Note: if both require a merge then the order of the rows in the output may not be sensible, but this case should be rare
                 #       as would require two different filters to be applied to make the row order strange
             by <- self$get_link_columns_from_data_frames(curr_sub_calc[[c_link_label]][["from_data_frame"]], names(curr_sub_calc[[c_data_label]]), sub_calc_results[[c_link_label]][["from_data_frame"]], names(sub_calc_results[[c_data_label]]))
+            additional_cols <- intersect(names(sub_calc_results[[c_data_label]]), names(curr_sub_calc[[c_data_label]]))
+            additional_cols <- additional_cols[!additional_cols %in% by]
+            if(length(additional_cols) > 0) by <- c(by, additional_cols)
             if(length(by) == 0) {
               #TODO Should this be attempted or just stop here?
               warning("Could not find a key to join by, Attempting to merge by all columns with the same name. The output may be incorrect.")
@@ -384,7 +391,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
         # }
       }
       #curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
-      curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
+      curr_data_list[[c_data_label]] <- suppressMessages(full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by))
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
     col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
@@ -454,16 +461,18 @@ instat_object$set("public", "get_corresponding_link_columns", function(first_dat
     link_pairs <- unlist(existing_link$link_columns)
     for(link_column in first_data_frame_columns) {
       if(existing_link$from_data_frame == first_data_frame_name && existing_link$to_data_frame == second_data_frame_name) {
-        if(link_column %in% link_pairs) {
-          by <- c(by, link_column = names(link_pairs)[which(link_pairs == link_column)][1])
+        if(link_column %in% names(link_pairs)) {
+          by[link_column] <- link_pairs[which(names(link_pairs) == link_column)][1]
+          #print("t2")
         }
-        else by <- c(by, link_column)
+        else by[link_column] <- link_column
       }
       else if(existing_link$from_data_frame == second_data_frame_name && existing_link$to_data_frame == first_data_frame_name) {
-        if(link_column %in% names(link_pairs)) {
-          by <- c(by, link_column = link_pairs[which(names(link_pairs) == link_column)][1])
+        if(link_column %in% link_pairs) {
+          by[link_column] <- names(link_pairs)[which(link_pairs == link_column)][1]
+          #print("t3")
         }
-        else by <- c(by, link_column)
+        else by[link_column] <- link_column
       }
     }
   }
