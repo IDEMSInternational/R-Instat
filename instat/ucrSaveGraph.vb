@@ -1,6 +1,7 @@
 ﻿Public Class ucrSaveGraph
     Public Event SaveGraphCheckedChanged()
     Public Event GraphNameChanged()
+    Public Event ContentsChanged()
     Public bFirstLoad As Boolean
 
     Public Sub New()
@@ -43,6 +44,10 @@
         If chkSaveGraph.Checked Then
             RaiseEvent GraphNameChanged()
         End If
+    End Sub
+
+    Private Sub ucrInputGraphName_ContentsChanged() Handles ucrInputGraphName.ContentsChanged
+        RaiseEvent ContentsChanged()
     End Sub
 
     Public ReadOnly Property bSaveGraph() As Boolean

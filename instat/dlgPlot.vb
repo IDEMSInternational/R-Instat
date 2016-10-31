@@ -43,6 +43,7 @@ Public Class dlgPlot
         ucrLinePlotSelector.Focus()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
+        ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
         TestOkEnabled()
     End Sub
@@ -81,7 +82,7 @@ Public Class dlgPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverX.IsEmpty() Or ucrVariablesAsFactorForLinePlot.IsEmpty()) Or (ucrSaveLinePlot.chkSaveGraph.Checked And ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
+        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -160,6 +161,10 @@ Public Class dlgPlot
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveLinePlot_ContentsChanged() Handles ucrSaveLinePlot.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class

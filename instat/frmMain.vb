@@ -1114,7 +1114,7 @@ Public Class frmMain
         dlgOneVarUseModel.ShowDialog()
     End Sub
 
-    Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsTablesPlus.Click
+    Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsShowModel.Click
         dlgTablePlus.ShowDialog()
     End Sub
 
@@ -1220,5 +1220,21 @@ Public Class frmMain
 
     Private Sub mnuClimdex_Click(sender As Object, e As EventArgs) Handles mnuClimdex.Click
         dlgClimdex.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseCheckDataExportOpenRefine_Click(sender As Object, e As EventArgs) Handles mnuOrganiseCheckDataExportOpenRefine.Click
+        dlgExportToOpenRefine.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseCheckDataImportOpenRefine_Click(sender As Object, e As EventArgs) Handles mnuOrganiseCheckDataImportOpenRefine.Click
+        dlgImportOpenRefine.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileSaveAsDataAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsDataAs.Click
+        dlgSaveAs.ShowDialog()
     End Sub
 End Class

@@ -41,6 +41,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.Focus()
         ucrFactorReceiver.SetMeAsReceiver()
+        ucrSaveBar.Reset()
         sdgPlots.Reset()
     End Sub
 
@@ -65,7 +66,7 @@ Public Class dlgBarAndPieChart
 
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'ucrSaveBar.strPrefix = "Graph"
+        ucrSaveBar.strPrefix = "Bar"
     End Sub
 
     Private Sub ReopenDialog()
@@ -190,6 +191,10 @@ Public Class dlgBarAndPieChart
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSaveBar_ContentsChanged() Handles ucrSaveBar.ContentsChanged
         TestOKEnabled()
     End Sub
 End Class
