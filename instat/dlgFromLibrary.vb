@@ -131,7 +131,7 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse (rdoInstatCollection.Checked AndAlso dlgImportDataset.DialogResult = DialogResult.OK) Then
+        If (rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0) OrElse (rdoInstatCollection.Checked AndAlso dlgImportDataset.DialogResult = DialogResult.OK) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
