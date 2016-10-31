@@ -19,7 +19,7 @@ Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel, clsFunctionOperation As New ROperator
     Public clsRConvert, clsRCIFunction, clsTwoVarModel, clsRPoisson, clsRTTest, clsRBinomial, clsRLength, clsRMean, clsRMean2, clsRLength2 As New RFunction
-
+    Public clsRLmOrGLM As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -33,7 +33,7 @@ Public Class dlgRegressionSimple
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.SetFunction("")
+        '        ucrBase.clsRsyntax.SetFunction("")
         clsModel.SetOperation("~")
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
@@ -44,7 +44,7 @@ Public Class dlgRegressionSimple
         ucrModelName.SetDefaultTypeAsModel()
         ucrModelName.SetValidationTypeAsRVariable()
         ucrModelPreview.IsReadOnly = True
-        sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        sdgSimpleRegOptions.SetRModelFunction(clsRModelFunc:=clsRLmOrGLM)
         'sdgSimpleRegOptions.SetRModelFunction(clsTwoVarModel)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
         sdgSimpleRegOptions.SetRYVariable(ucrResponse)
@@ -87,31 +87,13 @@ Public Class dlgRegressionSimple
         TestOKEnabled()
     End Sub
 
-    Private Sub SimpleRegression()
-        clsTwoVarModel.SetRCommand("")
-        TestOKEnabled()
-        '        If rdoGeneral.Checked Then
-        '        If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
-        '        clsTwoVarModel.ClearParameters()
-        '        clsTwoVarModel.SetRCommand("")
-        '        clsTwoVarModel.AddParameter("lm")
-        '        Else
-        '        clsTwoVarModel.ClearParameters()
-        '        clsTwoVarModel.SetRCommand("")
-        '        clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
-        '        clsTwoVarModel.AddParameter("glm")
-        '        clsTwoVarModel.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
-        '        End If
-        '       End If
-        'TODO:   Include multinomial as an option And the appropriate function
-        If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
-            ucrBase.clsRsyntax.SetFunction("lm")
-            ucrBase.clsRsyntax.RemoveParameter("family")
-        Else
-            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
-            ucrBase.clsRsyntax.SetFunction("glm")
-            clsTwoVarModel.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
-        End If
+    Private Sub LM()
+        clsRLmOrGLM.SetRCommand("lm")
+        clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
+        clsModel.SetOperation("~")
+        clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+        clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
     End Sub
 
     Private Sub SetTTest()
@@ -176,7 +158,15 @@ Public Class dlgRegressionSimple
         clsRTTest.ClearParameters()
         clsTwoVarModel.ClearParameters()
         If rdoGeneral.Checked Then
-            SimpleRegression()
+            If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
+                clsRLmOrGLM.ClearParameters()
+                LM()
+            Else
+                clsRLmOrGLM.ClearParameters()
+                '            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+                '            clsRglm.SetRCommand("glm")
+                '?           clsTwoVarModel.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+            End If
         ElseIf rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
                 SetTTest()
@@ -186,6 +176,7 @@ Public Class dlgRegressionSimple
                 SetBinomTest()
             End If
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -199,8 +190,8 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         AssignModelName()
+        SetRCode()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
