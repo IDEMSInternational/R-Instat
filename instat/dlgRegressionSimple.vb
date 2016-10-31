@@ -89,7 +89,7 @@ Public Class dlgRegressionSimple
 
     Private Sub LM()
         clsRLmOrGLM.SetRCommand("lm")
-        clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        '        clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
         clsModel.SetOperation("~")
         clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
@@ -313,7 +313,7 @@ Public Class dlgRegressionSimple
         sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         DistributionsOffered()
-        SimpleRegression()
+        SetRCode()
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
