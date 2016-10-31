@@ -135,10 +135,9 @@ Public Class dlgFromLibrary
         If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
             ucrBase.OKEnabled(True)
         Else
-            If rdoInstatCollection.Checked OrElse rdoInstatCollection.Checked = False Then
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(False)
         End If
+
         EnableHelp()
     End Sub
 
