@@ -220,6 +220,9 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
             # needs to change to get corresponding columns and check lists
             by_curr <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
             by_overall <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
+            #print(curr_sub_calc[[c_link_label]][["from_data_frame"]])
+            #print(sub_calc_results[[c_link_label]][["from_data_frame"]])
+            #print(overall_calc_link_cols)
             if(all(by_overall %in% names(by_curr))) {
               intersect_curr <- intersect(by_curr, names(by_overall))
               by <- by_curr[by_curr %in% intersect_curr]
@@ -380,9 +383,8 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
         #   
         # }
       }
+      #curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
       curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
-
-      curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = self$get_by(curr_data_list,list_from_data_frame_name))
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
     col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
@@ -393,7 +395,6 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   # the data is at the same "level" so the link is unchanged
   if(calc$type == "calculation") {
     if(calc$result_name %in% names(curr_data_list[[c_data_label]])) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
-    View(curr_data_list[[c_data_label]])
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
   }
   # this type performs a summary
@@ -447,7 +448,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
 
 # given a set of columns in one data frame, this will return named list with corresponding columns in second data frame, where a link exists
 instat_object$set("public", "get_corresponding_link_columns", function(first_data_frame_name, first_data_frame_columns, second_data_frame_name) {
-  by = c()
+  by <- c()
   if(self$link_exists_between(first_data_frame_name, second_data_frame_name)) {
     existing_link <- self$get_link_between(first_data_frame_name, second_data_frame_name)
     link_pairs <- unlist(existing_link$link_columns)
@@ -467,8 +468,10 @@ instat_object$set("public", "get_corresponding_link_columns", function(first_dat
     }
   }
   # If no link then do by by columns in first data frame
-  else by <- first_data_frame_columns
-  
+  else {
+    by <- first_data_frame_columns
+    names(by) <- first_data_frame_columns
+  }
   return(by)
 }
 )
