@@ -44,8 +44,7 @@ Public Class dlgRegressionSimple
         ucrModelName.SetDefaultTypeAsModel()
         ucrModelName.SetValidationTypeAsRVariable()
         ucrModelPreview.IsReadOnly = True
-        sdgSimpleRegOptions.SetRModelFunction(clsRModelFunc:=clsRLmOrGLM)
-        'sdgSimpleRegOptions.SetRModelFunction(clsTwoVarModel)
+        sdgSimpleRegOptions.SetRModelFunction(clsRLmOrGLM)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
         sdgSimpleRegOptions.SetRYVariable(ucrResponse)
         sdgSimpleRegOptions.SetRXVariable(ucrExplanatory)
@@ -88,12 +87,25 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub LM()
+        clsRLmOrGLM.ClearParameters()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         clsRLmOrGLM.SetRCommand("lm")
-        '        clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
         clsModel.SetOperation("~")
         clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
         clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+    End Sub
+
+    Private Sub GLM()
+        clsRLmOrGLM.ClearParameters()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
+        clsRLmOrGLM.SetRCommand("glm")
+        clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
+        clsModel.SetOperation("~")
+        clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+        clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+        clsRLmOrGLM.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+        clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
     End Sub
 
     Private Sub SetTTest()
@@ -163,9 +175,7 @@ Public Class dlgRegressionSimple
                 LM()
             Else
                 clsRLmOrGLM.ClearParameters()
-                '            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
-                '            clsRglm.SetRCommand("glm")
-                '?           clsTwoVarModel.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+                GLM()
             End If
         ElseIf rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
@@ -223,7 +233,7 @@ Public Class dlgRegressionSimple
         End If
 
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
-            ucrFamily.cboDistributions.Text = ""
+            '            ucrFamily.cboDistributions.Text = ""
             cmdModelOptions.Enabled = False
         Else
             cmdModelOptions.Enabled = True
@@ -232,7 +242,7 @@ Public Class dlgRegressionSimple
 
     Private Sub DistributionsOffered()
         '        If rdoGeneral.Checked Then
-        '        ucrFamily.SetGLMDistributions()
+        'ucrFamily.SetGLMDistributions()
         '        Else
         '        only normal, poisson and binomial
         '       End If
