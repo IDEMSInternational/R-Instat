@@ -28,17 +28,15 @@ Partial Class ucrDataFrame
         '
         'cboAvailableDataFrames
         '
-        Me.cboAvailableDataFrames.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.cboAvailableDataFrames.FormattingEnabled = True
-        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(0, 18)
+        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(0, 19)
         Me.cboAvailableDataFrames.Name = "cboAvailableDataFrames"
         Me.cboAvailableDataFrames.Size = New System.Drawing.Size(120, 21)
         Me.cboAvailableDataFrames.TabIndex = 0
         '
         'lblDataFrame
         '
-        Me.lblDataFrame.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.lblDataFrame.Location = New System.Drawing.Point(0, 0)
+        Me.lblDataFrame.Location = New System.Drawing.Point(0, 3)
         Me.lblDataFrame.Name = "lblDataFrame"
         Me.lblDataFrame.Size = New System.Drawing.Size(65, 13)
         Me.lblDataFrame.TabIndex = 1
@@ -53,7 +51,7 @@ Partial Class ucrDataFrame
         Me.Controls.Add(Me.cboAvailableDataFrames)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrDataFrame"
-        Me.Size = New System.Drawing.Size(120, 40)
+        Me.Size = New System.Drawing.Size(120, 50)
         Me.ResumeLayout(False)
 
     End Sub

@@ -46,6 +46,7 @@ library(httr)
 library(jsonlite)
 library(fitdistrplus)
 library(visreg)
+library(climdex.pcic)
 setwd(dirname(parent.frame(2)$ofile))
 
 
