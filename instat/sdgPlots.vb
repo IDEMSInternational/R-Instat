@@ -126,13 +126,14 @@ Public Class sdgPlots
             rdoHorizontal.Checked = True
             rdoVertical.Visible = True
             chkNoOfRowsOrColumns.Visible = True
-            chkNoOfRowsOrColumns.Checked = True
+            chkNoOfRowsOrColumns.Checked = False
             nudNoOfRowsOrColumns.Visible = True
             chkMargin.Visible = True
             chkFreeScalesX.Visible = True
             chkFreeScalesY.Visible = True
             'In case IncludeFacets is checked, the facets need to be set. Still might not be included as RSyntax parameter if no no variable has been set for faceting, but this is then decided in the IncludeFacetsParameter below.
             SetFacets()
+            SecondFactorReceiverEnabled()
         Else
             ucrFacetSelector.Visible = False
             ucr1stFactorReceiver.Visible = False
@@ -162,11 +163,10 @@ Public Class sdgPlots
         clsRFacetFunction.RemoveParameterByName("nrow")
         clsRFacetFunction.RemoveParameterByName("ncol")
 
-        If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) OrElse (ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty()) Then
-            If ucr2ndFactorReceiver.IsEmpty() Then
-                strSingleFactor = ucr1stFactorReceiver.GetVariableNames(False)
-            Else strSingleFactor = ucr2ndFactorReceiver.GetVariableNames(False)
-            End If
+        If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
+
+            strSingleFactor = ucr1stFactorReceiver.GetVariableNames(False)
+
             'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
             'In case only one of the receivers is non-empty, margins are checked (grid argument) or number of rows are not checked (wrap argument), then fecet_grid is used. Otherwise, wrap is used.
             'The place of the argument, left or right, in the facets parameter of the facets function is determined by the choice "vertical" or "horizontal" faceting.
@@ -212,7 +212,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub IncludeFacetsParameter()
-        If chkIncludeFacets.Checked AndAlso Not (ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
+        If chkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty() Then
             clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRFacetFunction)
         Else
             clsRsyntax.RemoveOperatorParameter("facet")
@@ -225,6 +225,7 @@ Public Class sdgPlots
     Private Sub SetScaleOption()
         'This sub is setting the right scale parameter in the clsRFacetFunctions, according to the scale chk boxes. 
         'It only needs to be called when these are modified, as this parameter is common to both facets_grid and facets_wrap. Although graphics on the same row or column in facets_grid share the y or x axis respectively. Still different rows might benefit from having different y-axis scales for instance.
+        'Warning: ggplot allows the extra parameter "space" in the facet_grid case. That one takes as values "free" or "fixed" (with quotes). It determines whether the size of rows and columns should adapt to the range of the scale.
         If chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
             clsRFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
         ElseIf chkFreeScalesX.Checked AndAlso Not chkFreeScalesY.Checked Then
@@ -240,8 +241,10 @@ Public Class sdgPlots
         SetScaleOption()
         SetFacets()
     End Sub
-    Private Sub VisibileNumberOfRowsOrColumns()
-        If chkMargin.Checked OrElse Not ucr2ndFactorReceiver.IsEmpty Then
+    Private Sub FacetsNumberOfRowsOrColumns()
+        'This sub decides whether the option to fix the number of rows or columns should be available or not.
+        'When chkMargin is checked, or when both receivers are used (i.e. the second optional is filled), facet_grid is used, and thus the number of rows or columns can't be fixed.
+        If (chkMargin.Checked OrElse chkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
         Else
@@ -253,12 +256,19 @@ Public Class sdgPlots
     Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
         SetFacets()
         IncludeFacetsParameter()
+        SecondFactorReceiverEnabled()
+    End Sub
+
+    Private Sub SecondFactorReceiverEnabled()
+        If ucr1stFactorReceiver.IsEmpty() Then
+            ucr2ndFactorReceiver.Enabled = False
+        Else ucr2ndFactorReceiver.Enabled = True
+        End If
     End Sub
 
     Private Sub ucr2ndFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
-        VisibileNumberOfRowsOrColumns()
+        FacetsNumberOfRowsOrColumns()
         SetFacets()
-        IncludeFacetsParameter()
     End Sub
 
     Private Sub rdoHorVer_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHorizontal.CheckedChanged, rdoVertical.CheckedChanged
@@ -284,9 +294,18 @@ Public Class sdgPlots
             clsRFacetFunction.AddParameter("margins", "TRUE")
         Else
             clsRFacetFunction.RemoveParameterByName("margins")
-
         End If
-        VisibileNumberOfRowsOrColumns()
+        FacetsNumberOfRowsOrColumns()
+        SetFacets()
+    End Sub
+
+    Private Sub chkFreeSpace_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeSpace.CheckedChanged
+        If chkMargin.Checked Then
+            clsRFacetFunction.AddParameter("space", Chr(34) & "free" & Chr(34))
+        Else
+            clsRFacetFunction.RemoveParameterByName("space")
+        End If
+        FacetsNumberOfRowsOrColumns()
         SetFacets()
     End Sub
 
@@ -326,10 +345,6 @@ Public Class sdgPlots
         strDataFrame = strNewDataFrame
         ucrFacetSelector.SetDataframe(strDataFrame, False)
     End Sub
-
-
-
-
 
     Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
         clsRsyntax = clsRSyntaxIn
@@ -398,4 +413,6 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub
+
+
 End Class
