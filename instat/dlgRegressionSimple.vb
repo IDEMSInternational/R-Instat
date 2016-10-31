@@ -84,6 +84,7 @@ Public Class dlgRegressionSimple
         ucrModelPreview.SetName("")
         SetRCode()
         TestOKEnabled()
+        ConvertToVariate()
     End Sub
 
     Private Sub LM()
@@ -92,8 +93,18 @@ Public Class dlgRegressionSimple
         clsRLmOrGLM.SetRCommand("lm")
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
         clsModel.SetOperation("~")
-        clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
-        clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+        If chkConvertToVariate.Checked Then
+            clsRConvert.SetRCommand("as.numeric")
+            clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
+            clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+            clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+            '            ucrFamily.RecieverDatatype("numeric")
+        Else
+            clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+            clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+            '            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+            '           ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+        End If
     End Sub
 
     Private Sub GLM()
@@ -209,24 +220,14 @@ Public Class dlgRegressionSimple
         Display()
     End Sub
 
-    Public Sub ResponseConvert()
-        If Not ucrResponse.IsEmpty AndAlso rdoGeneral.Checked Then
+    Public Sub ConvertToVariate()
+        If rdoGeneral.Checked AndAlso Not ucrResponse.IsEmpty Then
             ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             If ucrFamily.strDataType = "numeric" Then
                 chkConvertToVariate.Checked = False
                 chkConvertToVariate.Visible = False
             Else
                 chkConvertToVariate.Visible = True
-            End If
-
-            If chkConvertToVariate.Checked Then
-                clsRConvert.SetRCommand("as.numeric")
-                clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                clsModel.SetParameter(True, clsRFunc:=clsRConvert)
-                ucrFamily.RecieverDatatype("numeric")
-            Else
-                clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         End If
@@ -248,13 +249,13 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
-        ResponseConvert()
+        ConvertToVariate()
         SetRCode()
         TestOKEnabled()
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged, chkConvertToVariate.VisibleChanged
-        ResponseConvert()
+        ConvertToVariate()
         TestOKEnabled()
         Display()
     End Sub
@@ -416,7 +417,7 @@ Public Class dlgRegressionSimple
     Private Sub chkboxes_VisibleChanged(sender As Object, e As EventArgs) Handles chkFunction.VisibleChanged, chkPaired.VisibleChanged
         Display()
         ExplanatoryFunctionSelect()
-        ResponseConvert()
+        ConvertToVariate()
         TestOKEnabled()
     End Sub
 
