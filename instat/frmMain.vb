@@ -1115,7 +1115,7 @@ Public Class frmMain
     End Sub
 
     Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsShowModel.Click
-        dlgTablePlus.ShowDialog()
+        dlgShowModel.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseGraph.Click
@@ -1236,5 +1236,9 @@ Public Class frmMain
 
     Private Sub mnuFileSaveAsDataAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsDataAs.Click
         dlgSaveAs.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelProbabilityDistributionsCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsCompareModels.Click
+        dlgCompareModels.ShowDialog()
     End Sub
 End Class
