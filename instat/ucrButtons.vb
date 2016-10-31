@@ -114,7 +114,12 @@ Public Class ucrButtons
     Private Sub SetDefaults()
         chkComment.Checked = True
         'TODO default text should be translatable
-        txtComment.Text = ParentForm.Name & " " & frmMain.clsInstatOptions.strComment & " " & ParentForm.Text
+        'This is needed only so that the designer displays correctly in VS
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            txtComment.Text = ParentForm.Name & " " & frmMain.clsInstatOptions.strComment & " " & ParentForm.Text
+        Else
+            txtComment.Text = ParentForm.Name & " " & ParentForm.Text
+        End If
     End Sub
 
     Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
