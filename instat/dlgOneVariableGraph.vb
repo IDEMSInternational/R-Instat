@@ -41,7 +41,7 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.Reset()
         rdoFacets.Checked = True
         rdoCombineGraph.Enabled = False
-
+        ucrOneVarGraphSave.Reset()
         sdgOneVarGraph.SetDefaults()
         TestOkEnabled()
     End Sub
@@ -174,5 +174,9 @@ Public Class dlgOneVariableGraph
             rdoCombineGraph.Checked = False
             rdoCombineGraph.Enabled = False
         End If
+    End Sub
+
+    Private Sub ucrOneVarGraphSave_ContentsChanged() Handles ucrOneVarGraphSave.ContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
