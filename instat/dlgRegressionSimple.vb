@@ -89,7 +89,6 @@ Public Class dlgRegressionSimple
 
     Private Sub LM()
         clsRLmOrGLM.ClearParameters()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         clsRLmOrGLM.SetRCommand("lm")
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
         clsModel.SetOperation("~")
@@ -99,11 +98,13 @@ Public Class dlgRegressionSimple
             clsModel.SetParameter(True, clsRFunc:=clsRConvert)
             clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
             '            ucrFamily.RecieverDatatype("numeric")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         Else
             clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
             clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
             '            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
             '           ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         End If
     End Sub
 
@@ -256,6 +257,7 @@ Public Class dlgRegressionSimple
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged, chkConvertToVariate.VisibleChanged
         ConvertToVariate()
+        SetRCode()
         TestOKEnabled()
         Display()
     End Sub
