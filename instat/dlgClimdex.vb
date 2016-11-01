@@ -68,6 +68,7 @@ Public Class dlgClimdex
         If ucrReceiverTmax.IsEmpty AndAlso ucrReceiverTmin.IsEmpty AndAlso ucrReceiverPrec.IsEmpty Then
             ucrBaseClimdex.OKEnabled(False)
         Else
+            'This should be turned on once the climate object is ready
             ucrBaseClimdex.OKEnabled(True)
         End If
     End Sub
@@ -118,7 +119,7 @@ Public Class dlgClimdex
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdClimdexIndices_Click(sender As Object, e As EventArgs) Handles cmdClimdexOptions.Click
+    Private Sub cmdIndices_Click(sender As Object, e As EventArgs) Handles cmdIndices.Click
         sdgClimdexIndices.ShowDialog()
     End Sub
 
@@ -157,10 +158,6 @@ Public Class dlgClimdex
         End If
     End Sub
 
-    Private Sub ucrInputFreq_Load(sender As Object, e As EventArgs) Handles ucrInputFreq.Load
-
-    End Sub
-
     Private Sub nudMonthlyMaxMissingDays_ValueChanged(sender As Object, e As EventArgs) Handles nudMothlyMissingDays.ValueChanged
         clsRMaxMisingDays.AddParameter("monthly", nudMothlyMissingDays.Value)
         If nudAnnualMissingDays.Value = 15 AndAlso nudMothlyMissingDays.Value = 3 Then
@@ -168,6 +165,10 @@ Public Class dlgClimdex
         Else
             clsRClimdexInput.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
         End If
+    End Sub
+
+    Private Sub ucrInputFreq_Load(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub nudMinBaseData_ValueChanged(sender As Object, e As EventArgs) Handles nudMinBaseData.ValueChanged
