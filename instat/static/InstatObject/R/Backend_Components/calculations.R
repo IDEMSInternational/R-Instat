@@ -603,7 +603,7 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
         by <- self$get_link_columns_from_data_frames(calc_from_data_name, names(curr_data_list[[c_data_label]]), calc_from_data_name, self$get_column_names(calc_from_data_name))
         # subset first to only get output and key columns, do not want sub_calculation or extra columns to be merged as well
         #TODO If by = NULL should we try the merge or just stop?
-        if(length(by) == 0) self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[c_data_label]][c(as.vector(by), calc$result_name)], by = by, type = "full")
+        self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[c_data_label]][c(as.vector(by), calc$result_name)], by = by, type = "full")
         # keys_list <- self$get_keys(calc_from_data_name)
         # joined <- FALSE
         # for(curr_key in keys_list) {
