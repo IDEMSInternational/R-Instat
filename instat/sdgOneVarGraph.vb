@@ -68,32 +68,42 @@ Public Class sdgOneVarGraph
         Select Case ucrInputNumeric.GetText
             Case "Boxplot"
                 strNumericGeomFunction = "geom_boxplot"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case "Histogram"
                 strNumericGeomFunction = "geom_histogram"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case "Dot Plot"
                 strNumericGeomFunction = "geom_dotplot"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case "Point Plot"
                 strNumericGeomFunction = "geom_point"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case "Density Plot"
                 strNumericGeomFunction = "geom_density"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case Else
                 strNumericGeomFunction = "geom_freqpoly"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
         End Select
     End Sub
 
     Private Sub ucrInputNumeric_NameChanged() Handles ucrInputNumeric.NameChanged
         SetNumericGeomFunction()
         dlgOneVariableGraph.OneOrMoreVariables()
+
     End Sub
 
     Public Sub SetCategoricalGeomFunction()
         Select Case ucrInputCategorical.GetText
             Case "Bar Chart"
                 strCategoriacalGeomFunction = "geom_bar"
+                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
             Case "Dot Plot"
                 strCategoriacalGeomFunction = "geom_dotplot"
+                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
             Case Else
                 strCategoriacalGeomFunction = "geom_bar"
+                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
         End Select
 
     End Sub
