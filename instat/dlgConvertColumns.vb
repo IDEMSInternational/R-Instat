@@ -126,8 +126,6 @@ Public Class dlgConvertColumns
         If rdoConvertLevels.Checked = True Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
-
-
             Else
                 ucrBase.clsRsyntax.RemoveParameter("factor_numeric")
             End If
