@@ -25,14 +25,15 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.chkOmitMissing = New System.Windows.Forms.CheckBox()
         Me.chkdropUnusedLevels = New System.Windows.Forms.CheckBox()
         Me.chkStoreResults = New System.Windows.Forms.CheckBox()
         Me.chkPrintOutput = New System.Windows.Forms.CheckBox()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -56,15 +57,25 @@ Partial Class dlgColumnStats
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.chkOmitMissing)
         Me.grpOptions.Controls.Add(Me.chkdropUnusedLevels)
         Me.grpOptions.Controls.Add(Me.chkStoreResults)
         Me.grpOptions.Controls.Add(Me.chkPrintOutput)
         Me.grpOptions.Location = New System.Drawing.Point(9, 196)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(184, 93)
+        Me.grpOptions.Size = New System.Drawing.Size(184, 112)
         Me.grpOptions.TabIndex = 9
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
+        '
+        'chkOmitMissing
+        '
+        Me.chkOmitMissing.Location = New System.Drawing.Point(7, 85)
+        Me.chkOmitMissing.Name = "chkOmitMissing"
+        Me.chkOmitMissing.Size = New System.Drawing.Size(126, 25)
+        Me.chkOmitMissing.TabIndex = 11
+        Me.chkOmitMissing.Text = "Omit Missing Values"
+        Me.chkOmitMissing.UseVisualStyleBackColor = True
         '
         'chkdropUnusedLevels
         '
@@ -94,6 +105,16 @@ Partial Class dlgColumnStats
         Me.chkPrintOutput.TabIndex = 0
         Me.chkPrintOutput.Text = "Print Results to Output Window"
         Me.chkPrintOutput.UseVisualStyleBackColor = True
+        '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.Location = New System.Drawing.Point(289, 266)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSummaries.TabIndex = 10
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'ucrReceiverByFactor
         '
@@ -125,26 +146,16 @@ Partial Class dlgColumnStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 294)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 327)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 53)
         Me.ucrBase.TabIndex = 2
-        '
-        'cmdSummaries
-        '
-        Me.cmdSummaries.Location = New System.Drawing.Point(290, 266)
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSummaries.TabIndex = 10
-        Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
-        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 354)
+        Me.ClientSize = New System.Drawing.Size(417, 382)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverByFactor)
@@ -176,4 +187,5 @@ Partial Class dlgColumnStats
     Friend WithEvents chkPrintOutput As CheckBox
     Friend WithEvents chkStoreResults As CheckBox
     Friend WithEvents cmdSummaries As Button
+    Friend WithEvents chkOmitMissing As CheckBox
 End Class

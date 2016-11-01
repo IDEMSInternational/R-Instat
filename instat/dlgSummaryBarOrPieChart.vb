@@ -74,6 +74,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSummarybarSelector.Focus()
         cmdBarChartOptions.Visible = False
         cmdPieChartOptions.Visible = False
+        ucrSaveSummaryBar.Reset()
         TestOkEnabled()
     End Sub
     Private Sub grpChartOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
@@ -204,6 +205,10 @@ Public Class dlgSummaryBarOrPieChart
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSummarybarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveSummaryBar_ContentsChanged() Handles ucrSaveSummaryBar.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class
