@@ -19,6 +19,7 @@ Public Class sdgOneVarGraph
     Public clsRsyntax As New RSyntax
     Public strNumericGeomFunction As String
     Public strCategoriacalGeomFunction As String
+    Public clsPieChartFunction As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -44,6 +45,7 @@ Public Class sdgOneVarGraph
     End Sub
 
     Public Sub InitialiseDialog()
+        clsPieChartFunction.SetRCommand("coord_polar")
         ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
         ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         nudNumberofColumns.Maximum = 10
@@ -104,6 +106,8 @@ Public Class sdgOneVarGraph
             Case Else
                 strCategoriacalGeomFunction = "geom_bar"
                 clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
+                clsPieChartFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
+                clsRsyntax.AddOperatorParameter("coorp_polar", clsRFunc:=clsPieChartFunction)
         End Select
 
     End Sub
