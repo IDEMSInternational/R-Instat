@@ -204,10 +204,10 @@ Partial Class dlgOneVarFitModel
         Me.rdoGeneral.AutoSize = True
         Me.rdoGeneral.Location = New System.Drawing.Point(10, 12)
         Me.rdoGeneral.Name = "rdoGeneral"
-        Me.rdoGeneral.Size = New System.Drawing.Size(62, 17)
+        Me.rdoGeneral.Size = New System.Drawing.Size(89, 17)
         Me.rdoGeneral.TabIndex = 26
         Me.rdoGeneral.TabStop = True
-        Me.rdoGeneral.Text = "General"
+        Me.rdoGeneral.Text = "General Case"
         Me.rdoGeneral.UseVisualStyleBackColor = True
         '
         'rdoSpecific
@@ -215,10 +215,10 @@ Partial Class dlgOneVarFitModel
         Me.rdoSpecific.AutoSize = True
         Me.rdoSpecific.Location = New System.Drawing.Point(268, 12)
         Me.rdoSpecific.Name = "rdoSpecific"
-        Me.rdoSpecific.Size = New System.Drawing.Size(63, 17)
+        Me.rdoSpecific.Size = New System.Drawing.Size(93, 17)
         Me.rdoSpecific.TabIndex = 27
         Me.rdoSpecific.TabStop = True
-        Me.rdoSpecific.Text = "Specific"
+        Me.rdoSpecific.Text = "Exact Solution"
         Me.rdoSpecific.UseVisualStyleBackColor = True
         '
         'nudHyp
