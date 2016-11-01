@@ -395,7 +395,9 @@ Public Class ucrReceiverMultiple
                 RemoveIncludedMetadataProperty(strProperty:="class")
             End If
         Else
-            RemoveIncludedMetadataProperty(strProperty:="class")
+            ' Removed as this was causing data type to be removed on reset for any receiver
+            ' Left as comment in case this cause other issues
+            'RemoveIncludedMetadataProperty(strProperty:="class")
         End If
     End Sub
 

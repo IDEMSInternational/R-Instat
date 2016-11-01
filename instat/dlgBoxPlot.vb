@@ -47,6 +47,7 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.Focus()
         ucrVariablesAsFactorForBoxplot.ResetControl()
         chkHorizontalBoxplot.Checked = False
+        ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
         TestOkEnabled()
         SetXParameter()
@@ -86,8 +87,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub TestOkEnabled()
-
-        If ucrVariablesAsFactorForBoxplot.IsEmpty Or (ucrSaveBoxplot.chkSaveGraph.Checked And ucrSaveBoxplot.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse (ucrSaveBoxplot.chkSaveGraph.Checked AndAlso ucrSaveBoxplot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -168,6 +168,10 @@ Public Class dlgBoxplot
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveBoxplot_ContentsChanged() Handles ucrSaveBoxplot.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class
