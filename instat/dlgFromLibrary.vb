@@ -39,6 +39,7 @@ Public Class dlgFromLibrary
         rdoDefaultDatasets.Checked = True
         cboPackages.SelectedItem = "datasets"
         loadDatasets(cboPackages.SelectedItem.ToString)
+        EnableHelp()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -126,15 +127,18 @@ Public Class dlgFromLibrary
         ucrBase.clsRsyntax.SetAssignTo(chkString(lstCollection.SelectedItems(0).SubItems(0).Text), strTempDataframe:=chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         clsDataFunction.AddParameter("X", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
+
         TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked Then
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+
+        EnableHelp()
     End Sub
 
     Private Function chkString(ByVal strValue As String)
@@ -155,4 +159,21 @@ Public Class dlgFromLibrary
             frmMain.clsRLink.RunScript(clsDataFunction.ToScript(), strComment:=ucrBase.strComment)
         End If
     End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim clsHelp As New RFunction
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:=" dlgOpenFromLibrary Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset")
+    End Sub
+
+    Private Sub EnableHelp()
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
+            cmdHelp.Enabled = True
+        Else
+            cmdHelp.Enabled = False
+        End If
+    End Sub
+
 End Class
