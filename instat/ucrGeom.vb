@@ -180,7 +180,7 @@ Public Class ucrGeom
 
         'Optional aesthetics
         clsgeom_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
-        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom.
+        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
         'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
         'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
         clsgeom_bar.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
