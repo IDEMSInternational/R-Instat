@@ -42,30 +42,45 @@ Public Class sdgOneVarFitModel
     End Sub
 
     Private Sub rdoOptimMethod_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefault.CheckedChanged, rdoNelderMead.CheckedChanged, rdoBFGS.CheckedChanged, rdoCG.CheckedChanged, rdoSANN.CheckedChanged
-        If rdoDefault.Checked Then
-            clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "default" & Chr(34))
-        ElseIf rdoNelderMead.Checked Then
-            clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "Nelder-Mead" & Chr(34))
-        ElseIf rdoBFGS.Checked Then
-            clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "BFGS" & Chr(34))
-        ElseIf rdoCG.Checked Then
-            clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "CG" & Chr(34))
-        ElseIf rdoSANN.Checked Then
-            clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "SANN" & Chr(34))
+        OptimisationMethod()
+    End Sub
+
+    Public Sub rdoEstimators_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMle.CheckedChanged, rdoMme.CheckedChanged, rdoQme.CheckedChanged, rdoMge.CheckedChanged
+        Estimators()
+    End Sub
+
+    Public Sub Estimators()
+        If dlgOneVarFitModel.rdoGeneral.Checked Then
+            If rdoMle.Checked Then
+                clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
+            ElseIf rdoMme.Checked Then
+                clsROneVarFitModel.AddParameter("method", Chr(34) & "mme" & Chr(34))
+            ElseIf rdoQme.Checked Then
+                clsROneVarFitModel.AddParameter("method", Chr(34) & "qme" & Chr(34))
+                'TODO needs a probs argument
+            ElseIf rdoMge.Checked Then
+                clsROneVarFitModel.AddParameter("method", Chr(34) & "mge" & Chr(34))
+            End If
+        Else
+            clsROneVarFitModel.RemoveParameterByName("method")
         End If
     End Sub
 
-
-    Public Sub rdoEstimators_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMle.CheckedChanged, rdoMme.CheckedChanged, rdoQme.CheckedChanged, rdoMge.CheckedChanged
-        If rdoMle.Checked Then
-            clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
-        ElseIf rdoMme.Checked Then
-            clsROneVarFitModel.AddParameter("method", Chr(34) & "mme" & Chr(34))
-        ElseIf rdoQme.Checked Then
-            clsROneVarFitModel.AddParameter("method", Chr(34) & "qme" & Chr(34))
-            'TODO needs a probs argument
-        ElseIf rdoMge.Checked Then
-            clsROneVarFitModel.AddParameter("method", Chr(34) & "mge" & Chr(34))
+    Public Sub OptimisationMethod()
+        If dlgOneVarFitModel.rdoGeneral.Checked Then
+            If rdoDefault.Checked Then
+                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "default" & Chr(34))
+            ElseIf rdoNelderMead.Checked Then
+                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "Nelder-Mead" & Chr(34))
+            ElseIf rdoBFGS.Checked Then
+                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "BFGS" & Chr(34))
+            ElseIf rdoCG.Checked Then
+                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "CG" & Chr(34))
+            ElseIf rdoSANN.Checked Then
+                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "SANN" & Chr(34))
+            End If
+        Else
+            clsROneVarFitModel.RemoveParameterByName("optim.method")
         End If
     End Sub
 

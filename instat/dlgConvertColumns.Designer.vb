@@ -29,6 +29,7 @@ Partial Class dlgConvertColumns
         Me.rdoFactor = New System.Windows.Forms.RadioButton()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.grpFactorToNumericOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoOrderedFactor = New System.Windows.Forms.RadioButton()
         Me.rdoConvertOrdinals = New System.Windows.Forms.RadioButton()
         Me.rdoConvertLevels = New System.Windows.Forms.RadioButton()
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
@@ -50,13 +51,14 @@ Partial Class dlgConvertColumns
         '
         'grpTo
         '
+        Me.grpTo.Controls.Add(Me.rdoOrderedFactor)
         Me.grpTo.Controls.Add(Me.rdoInteger)
         Me.grpTo.Controls.Add(Me.rdoCharacter)
         Me.grpTo.Controls.Add(Me.rdoFactor)
         Me.grpTo.Controls.Add(Me.rdoNumeric)
         Me.grpTo.Location = New System.Drawing.Point(10, 193)
         Me.grpTo.Name = "grpTo"
-        Me.grpTo.Size = New System.Drawing.Size(120, 103)
+        Me.grpTo.Size = New System.Drawing.Size(120, 120)
         Me.grpTo.TabIndex = 4
         Me.grpTo.TabStop = False
         Me.grpTo.Tag = "To"
@@ -65,7 +67,7 @@ Partial Class dlgConvertColumns
         'rdoInteger
         '
         Me.rdoInteger.AutoSize = True
-        Me.rdoInteger.Location = New System.Drawing.Point(11, 77)
+        Me.rdoInteger.Location = New System.Drawing.Point(11, 103)
         Me.rdoInteger.Name = "rdoInteger"
         Me.rdoInteger.Size = New System.Drawing.Size(58, 17)
         Me.rdoInteger.TabIndex = 3
@@ -77,7 +79,7 @@ Partial Class dlgConvertColumns
         'rdoCharacter
         '
         Me.rdoCharacter.AutoSize = True
-        Me.rdoCharacter.Location = New System.Drawing.Point(11, 55)
+        Me.rdoCharacter.Location = New System.Drawing.Point(11, 80)
         Me.rdoCharacter.Name = "rdoCharacter"
         Me.rdoCharacter.Size = New System.Drawing.Size(71, 17)
         Me.rdoCharacter.TabIndex = 2
@@ -101,7 +103,7 @@ Partial Class dlgConvertColumns
         'rdoNumeric
         '
         Me.rdoNumeric.AutoSize = True
-        Me.rdoNumeric.Location = New System.Drawing.Point(11, 33)
+        Me.rdoNumeric.Location = New System.Drawing.Point(11, 57)
         Me.rdoNumeric.Name = "rdoNumeric"
         Me.rdoNumeric.Size = New System.Drawing.Size(64, 17)
         Me.rdoNumeric.TabIndex = 0
@@ -116,16 +118,27 @@ Partial Class dlgConvertColumns
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertLevels)
         Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(139, 215)
         Me.grpFactorToNumericOptions.Name = "grpFactorToNumericOptions"
-        Me.grpFactorToNumericOptions.Size = New System.Drawing.Size(260, 37)
+        Me.grpFactorToNumericOptions.Size = New System.Drawing.Size(260, 46)
         Me.grpFactorToNumericOptions.TabIndex = 7
         Me.grpFactorToNumericOptions.TabStop = False
         Me.grpFactorToNumericOptions.Tag = "Factor_Options"
         Me.grpFactorToNumericOptions.Text = "Factor Options"
         '
+        'rdoOrderedFactor
+        '
+        Me.rdoOrderedFactor.AutoSize = True
+        Me.rdoOrderedFactor.Location = New System.Drawing.Point(11, 34)
+        Me.rdoOrderedFactor.Name = "rdoOrderedFactor"
+        Me.rdoOrderedFactor.Size = New System.Drawing.Size(96, 17)
+        Me.rdoOrderedFactor.TabIndex = 4
+        Me.rdoOrderedFactor.TabStop = True
+        Me.rdoOrderedFactor.Text = "Ordered Factor"
+        Me.rdoOrderedFactor.UseVisualStyleBackColor = True
+        '
         'rdoConvertOrdinals
         '
         Me.rdoConvertOrdinals.AutoSize = True
-        Me.rdoConvertOrdinals.Location = New System.Drawing.Point(139, 13)
+        Me.rdoConvertOrdinals.Location = New System.Drawing.Point(133, 19)
         Me.rdoConvertOrdinals.Name = "rdoConvertOrdinals"
         Me.rdoConvertOrdinals.Size = New System.Drawing.Size(103, 17)
         Me.rdoConvertOrdinals.TabIndex = 8
@@ -137,7 +150,7 @@ Partial Class dlgConvertColumns
         'rdoConvertLevels
         '
         Me.rdoConvertLevels.AutoSize = True
-        Me.rdoConvertLevels.Location = New System.Drawing.Point(14, 13)
+        Me.rdoConvertLevels.Location = New System.Drawing.Point(6, 19)
         Me.rdoConvertLevels.Name = "rdoConvertLevels"
         Me.rdoConvertLevels.Size = New System.Drawing.Size(96, 17)
         Me.rdoConvertLevels.TabIndex = 7
@@ -167,7 +180,7 @@ Partial Class dlgConvertColumns
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 309)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 319)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
@@ -176,7 +189,7 @@ Partial Class dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 361)
+        Me.ClientSize = New System.Drawing.Size(419, 383)
         Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDataFrameColumns)
@@ -211,4 +224,5 @@ Partial Class dlgConvertColumns
     Friend WithEvents grpFactorToNumericOptions As GroupBox
     Friend WithEvents rdoConvertOrdinals As RadioButton
     Friend WithEvents rdoConvertLevels As RadioButton
+    Friend WithEvents rdoOrderedFactor As RadioButton
 End Class
