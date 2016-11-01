@@ -58,6 +58,7 @@ Public Class dlgRegressionSimple
         nudCI.Maximum = 1
         nudCI.DecimalPlaces = 2
         nudHypothesis.DecimalPlaces = 2
+        nudHyp2.DecimalPlaces = 2
         '        ucrFamily.SetGLMDistributions()
         DistributionsOffered()
     End Sub
@@ -108,46 +109,73 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetTTest()
-        ' only variables the response receiver can accept is numerical
+        ' only variables the response receiver can accept is 
+        ' if the explanatory receiver accepts a factor it needs to only use two levels
         clsRTTest.SetRCommand("t.test")
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("mu", nudHypothesis.Value.ToString())
         If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" Then
             clsRTTest.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
             clsRTTest.AddParameter("y", clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        Else   ' note we can only have two levels
+        Else
             clsModel.SetOperation("~")
             clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
             clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
             clsRTTest.AddParameter("x", clsROperatorParameter:=clsModel)
-            clsRTTest.AddParameter("y", clsROperatorParameter:=clsModel)
         End If
         If chkPaired.Checked Then
             clsRTTest.AddParameter("paired", "TRUE")
         Else
             clsRTTest.RemoveParameterByName("paired")
         End If
+
+        If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+            If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
+                ucrResponse.Clear()
+            End If
+            '            ucrResponse.SetDataType("numeric")
+            ' do i need to do ucrExplanatory.set all data types
+            ' only accept numeric, integer or positive integer for response
+        End If
+
     End Sub
 
     Private Sub SetBinomTest()
-        ' only variables the response receiver can accept is numerical
+        ' only variables the response receiver can accept is a factor
         ' only variables the explanatory receiver can accept is factor
         clsRBinomial.SetRCommand("prop.test")
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
-        clsRBinomial.AddParameter("p", nudHypothesis.Value.ToString())
+        clsRBinomial.AddParameter("p", "c(" & nudHypothesis.Value.ToString() & "," & nudHyp2.Value.ToString() & ")")
         clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
         clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
-        clsRBinomial.AddParameter("", clsROperatorParameter:=clsModel)
+        clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
+        clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
+        If ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Then
+            If ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer" Then
+                ucrExplanatory.Clear()
+            End If
+            If ucrResponse.strCurrDataType = "numeric" Or ucrResponse.strCurrDataType = "integer" Or ucrResponse.strCurrDataType = "positive integer" Then
+                ucrResponse.Clear()
+            End If
 
-        clsRBinomial.AddParameter("n", ucrSelectorSimpleReg.ucrAvailableDataFrames.iDataFrameLength)
-        ' n = length(x ~ y)
-
+            ' only accept character or factor for response or explanatory
+        End If
     End Sub
 
     Private Sub SetPoissonTest()
         ' can accept only numerical in both receivers
-        ' factor receiver needs two levels at most.
+        If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+            If ucrExplanatory.strCurrDataType = "factor" Or ucrExplanatory.strCurrDataType = "character" Then
+                ucrExplanatory.Clear()
+            End If
+            If ucrResponse.strCurrDataType = "factor" Or ucrResponse.strCurrDataType = "character" Then
+                ucrResponse.Clear()
+            End If
+            '            ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer"
+            '            ucrResponse.strCurrDataType = "numeric" Or ucrResponse.strCurrDataType = "integer" Or ucrResponse.strCurrDataType = "positive integer"
+        End If
+
 
         clsRPoisson.SetRCommand("poisson.test")
         clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
@@ -172,6 +200,7 @@ Public Class dlgRegressionSimple
         clsRBinomial.ClearParameters()
         clsRTTest.ClearParameters()
         clsTwoVarModel.ClearParameters()
+        clsRLength.ClearParameters()
         If rdoGeneral.Checked Then
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
                 clsRLmOrGLM.ClearParameters()
@@ -339,6 +368,7 @@ Public Class dlgRegressionSimple
         ConvertToVariate()
         ExplanatoryFunctionSelect()
         SetRCode()
+        Display()
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
@@ -359,12 +389,14 @@ Public Class dlgRegressionSimple
     Private Sub Display()
         If rdoGeneral.Checked Then
             nudHypothesis.Visible = False
+            nudHyp2.Visible = False
             nudCI.Visible = False
             chkPaired.Visible = False
             lblMean.Visible = False
             lblFactor.Visible = False
             lblNumeric.Visible = False
             lblProbability.Visible = False
+            lblProbability2.Visible = False
             lblRate.Visible = False
             lblCI.Visible = False
             ucrModelPreview.Visible = True
@@ -390,40 +422,50 @@ Public Class dlgRegressionSimple
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
                 lblMean.Visible = True
                 lblProbability.Visible = False
+                lblProbability2.Visible = False
                 lblRate.Visible = False
                 nudHypothesis.Increment = 1
                 nudHypothesis.Maximum = Integer.MaxValue
                 nudHypothesis.Minimum = Integer.MinValue
                 nudHypothesis.Value = 0
+                nudHyp2.Visible = False
                 '                If ucrExplanatory. GetVariables Is From same dataset
                 chkPaired.Visible = True
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 lblMean.Visible = False
                 lblProbability.Visible = False
+                lblProbability2.Visible = False
                 lblRate.Visible = True
                 chkPaired.Visible = False
                 nudHypothesis.Increment = 1
                 nudHypothesis.Maximum = Integer.MaxValue
                 nudHypothesis.Minimum = 0
                 nudHypothesis.Value = 1
+                nudHyp2.Visible = False
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Then
                 lblMean.Visible = False
                 lblProbability.Visible = True
+                lblProbability2.Visible = True
                 lblRate.Visible = False
                 chkPaired.Visible = False
                 nudHypothesis.Increment = 0.1
                 nudHypothesis.Maximum = 1
                 nudHypothesis.Minimum = 0
                 nudHypothesis.Value = 0.5
+                nudHyp2.Visible = True
+                nudHyp2.Increment = 0.1
+                nudHyp2.Maximum = 0.95
+                nudHyp2.Minimum = 0.05
+                nudHyp2.Value = 0.5
             End If
         End If
     End Sub
 
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblCI.VisibleChanged, lblRate.VisibleChanged, lblProbability.VisibleChanged, lblMean.VisibleChanged, lblExplanatory.VisibleChanged, lblResponse.VisibleChanged, lblModelPreview.VisibleChanged, lblFactor.VisibleChanged, lblNumeric.VisibleChanged
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblCI.VisibleChanged, lblRate.VisibleChanged, lblProbability2.VisibleChanged, lblProbability.VisibleChanged, lblMean.VisibleChanged, lblExplanatory.VisibleChanged, lblResponse.VisibleChanged, lblModelPreview.VisibleChanged, lblFactor.VisibleChanged, lblNumeric.VisibleChanged
         Display()
     End Sub
 
-    Private Sub nuds_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHypothesis.TextChanged
+    Private Sub nuds_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHypothesis.TextChanged, nudHyp2.TextChanged
         SetRCode()
     End Sub
 
