@@ -220,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblResponse.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>26</value>
   </data>
   <data name="lblExplanatory.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -250,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblExplanatory.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>25</value>
   </data>
   <data name="cmdDisplayOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -277,7 +277,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>24</value>
   </data>
   <data name="chkSaveModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -304,7 +304,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkSaveModel.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>23</value>
   </data>
   <data name="cmdModelOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -331,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdModelOptions.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="chkFunction.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -361,7 +361,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkFunction.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="chkConvertToVariate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -391,7 +391,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkConvertToVariate.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="lblModelPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -421,7 +421,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblModelPreview.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 296</value>
@@ -442,7 +442,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelName.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="ucrSelectorSimpleReg.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 37</value>
@@ -466,7 +466,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorSimpleReg.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="ucrFamily.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 226</value>
@@ -487,7 +487,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFamily.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 323</value>
@@ -508,7 +508,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>27</value>
   </data>
   <data name="ucrResponse.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 76</value>
@@ -532,7 +532,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrResponse.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="ucrExplanatory.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 153</value>
@@ -556,7 +556,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrExplanatory.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="ucrModelPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 269</value>
@@ -577,7 +577,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelPreview.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="chkPaired.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -604,7 +604,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkPaired.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="rdoGeneral.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -631,7 +631,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoGeneral.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="rdoSpecific.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -658,7 +658,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSpecific.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="lblNumeric.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -667,13 +667,13 @@
     <value>236, 62</value>
   </data>
   <data name="lblNumeric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 13</value>
+    <value>70, 13</value>
   </data>
   <data name="lblNumeric.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
   <data name="lblNumeric.Text" xml:space="preserve">
-    <value>Numeric Variable:</value>
+    <value>First Variable:</value>
   </data>
   <data name="&gt;&gt;lblNumeric.Name" xml:space="preserve">
     <value>lblNumeric</value>
@@ -685,7 +685,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNumeric.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -712,10 +712,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="nudCI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 203</value>
+    <value>342, 201</value>
   </data>
   <data name="nudCI.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -733,10 +733,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nudCI.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="nudHypothesis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 230</value>
+    <value>342, 228</value>
   </data>
   <data name="nudHypothesis.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -754,13 +754,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nudHypothesis.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="lblCI.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblCI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 206</value>
+    <value>238, 204</value>
   </data>
   <data name="lblCI.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
@@ -781,7 +781,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCI.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblMean.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -808,7 +808,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblMean.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblRate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -838,7 +838,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblRate.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblProbability.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -847,16 +847,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblProbability.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 230</value>
+    <value>238, 232</value>
   </data>
   <data name="lblProbability.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+    <value>80, 13</value>
   </data>
   <data name="lblProbability.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
   <data name="lblProbability.Text" xml:space="preserve">
-    <value>Probability:</value>
+    <value>First Probability:</value>
   </data>
   <data name="&gt;&gt;lblProbability.Name" xml:space="preserve">
     <value>lblProbability</value>
@@ -868,6 +868,57 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblProbability.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblProbability2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblProbability2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblProbability2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 258</value>
+  </data>
+  <data name="lblProbability2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lblProbability2.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="lblProbability2.Text" xml:space="preserve">
+    <value>Second Probability:</value>
+  </data>
+  <data name="&gt;&gt;lblProbability2.Name" xml:space="preserve">
+    <value>lblProbability2</value>
+  </data>
+  <data name="&gt;&gt;lblProbability2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblProbability2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblProbability2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nudHyp2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>342, 254</value>
+  </data>
+  <data name="nudHyp2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="nudHyp2.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="&gt;&gt;nudHyp2.Name" xml:space="preserve">
+    <value>nudHyp2</value>
+  </data>
+  <data name="&gt;&gt;nudHyp2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudHyp2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;nudHyp2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
