@@ -59,6 +59,7 @@ Partial Class sdgPlots
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.lblTheme = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.chkFreeSpace = New System.Windows.Forms.CheckBox()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabFacet.SuspendLayout()
         CType(Me.nudNoOfRowsOrColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,6 +87,7 @@ Partial Class sdgPlots
         '
         'tabFacet
         '
+        Me.tabFacet.Controls.Add(Me.chkFreeSpace)
         Me.tabFacet.Controls.Add(Me.ucrFacetSelector)
         Me.tabFacet.Controls.Add(Me.nudNoOfRowsOrColumns)
         Me.tabFacet.Controls.Add(Me.chkNoOfRowsOrColumns)
@@ -149,7 +151,7 @@ Partial Class sdgPlots
         'chkFreeScalesY
         '
         Me.chkFreeScalesY.AutoSize = True
-        Me.chkFreeScalesY.Location = New System.Drawing.Point(273, 264)
+        Me.chkFreeScalesY.Location = New System.Drawing.Point(273, 241)
         Me.chkFreeScalesY.Name = "chkFreeScalesY"
         Me.chkFreeScalesY.Size = New System.Drawing.Size(114, 17)
         Me.chkFreeScalesY.TabIndex = 14
@@ -160,7 +162,7 @@ Partial Class sdgPlots
         'chkMargin
         '
         Me.chkMargin.AutoSize = True
-        Me.chkMargin.Location = New System.Drawing.Point(273, 199)
+        Me.chkMargin.Location = New System.Drawing.Point(273, 183)
         Me.chkMargin.Name = "chkMargin"
         Me.chkMargin.Size = New System.Drawing.Size(63, 17)
         Me.chkMargin.TabIndex = 13
@@ -170,7 +172,7 @@ Partial Class sdgPlots
         'chkFreeScalesX
         '
         Me.chkFreeScalesX.AutoSize = True
-        Me.chkFreeScalesX.Location = New System.Drawing.Point(273, 231)
+        Me.chkFreeScalesX.Location = New System.Drawing.Point(273, 212)
         Me.chkFreeScalesX.Name = "chkFreeScalesX"
         Me.chkFreeScalesX.Size = New System.Drawing.Size(114, 17)
         Me.chkFreeScalesX.TabIndex = 12
@@ -455,6 +457,17 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'chkFreeSpace
+        '
+        Me.chkFreeSpace.AutoSize = True
+        Me.chkFreeSpace.Location = New System.Drawing.Point(273, 269)
+        Me.chkFreeSpace.Name = "chkFreeSpace"
+        Me.chkFreeSpace.Size = New System.Drawing.Size(81, 17)
+        Me.chkFreeSpace.TabIndex = 21
+        Me.chkFreeSpace.Tag = "Free_scales"
+        Me.chkFreeSpace.Text = "Free Space"
+        Me.chkFreeSpace.UseVisualStyleBackColor = True
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -524,6 +537,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrXAxis As ucrAxes
     Friend WithEvents ucrYAxis As ucrAxes
     Friend WithEvents ucrInputLegend As ucrInputTextBox
+    Friend WithEvents chkFreeSpace As CheckBox
 End Class
 
 

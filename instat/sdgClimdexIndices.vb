@@ -26,14 +26,6 @@ Public Class sdgClimdexIndices
         End If
     End Sub
 
-    Private Sub grpClimdexIndices_Enter(sender As Object, e As EventArgs) Handles grpClimdexIndices.Enter
-
-    End Sub
-
-    Private Sub lblThreshold_Click(sender As Object, e As EventArgs) Handles lblThreshold.Click
-
-    End Sub
-
     Public Sub SetDefaults()
         chkFrostDays.Checked = True
         chkCenterMean.Checked = False
