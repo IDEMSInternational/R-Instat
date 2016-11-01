@@ -273,31 +273,31 @@ Public Class dlgOneVarFitModel
                 lblRate.Visible = False
                 lblprobability.Visible = False
                 nudHyp.Visible = True
-                nudHyp.Value = 0
                 nudHyp.Increment = 1
                 nudHyp.DecimalPlaces = 2
                 nudHyp.Maximum = Integer.MaxValue
                 nudHyp.Minimum = Integer.MinValue
+                nudHyp.Value = 0
             ElseIf UcrDistributions.clsCurrDistribution.strNameTag = "Binomial" Then
                 lblprobability.Visible = True
                 lblMean.Visible = False
                 lblRate.Visible = False
                 nudHyp.Visible = True
-                nudHyp.Value = 0.5
                 nudHyp.Maximum = 1
                 nudHyp.Minimum = 0
                 nudHyp.Increment = 0.1
                 nudHyp.DecimalPlaces = 2
+                nudHyp.Value = 0.5
             ElseIf UcrDistributions.clsCurrDistribution.strNameTag = "Poisson" Then
                 lblMean.Visible = False
                 lblRate.Visible = True
                 lblprobability.Visible = False
                 nudHyp.Visible = True
-                nudHyp.Value = 1
                 nudHyp.Increment = 1
                 nudHyp.DecimalPlaces = 2
                 nudHyp.Maximum = Integer.MaxValue
                 nudHyp.Minimum = 0
+                nudHyp.Value = 1
             End If
         End If
     End Sub
