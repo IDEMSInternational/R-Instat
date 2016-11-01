@@ -86,7 +86,7 @@ data_object$set("public", "save_calculation", function(calc) {
 # Fields:
 # function_exp     : string - passed directly to one of dplyr functions e.g. "Yield > 50" for a filter or "Yield * Size" for a calculation
 # type             : string - one of "by", "calculation", "filter", "summary", "combination" to determine the type of calculation to do
-#                             corresponds directly to one of dplyr's functions (except combination).
+#                             each corresponds directly to one of dplyr's functions (except combination).
 #                             "by" - for dplyr's "group_by", to group the data by column(s) (usually factors) in preparation for doing summaries, for example.
 #                             "calculation" - for dplyr's "mutate", a simple calculation to produce a column within the same data frame
 #                             "filter" - for dplyr's "filter", to filter the rows of a data frame by any logical expression
@@ -106,17 +106,18 @@ data_object$set("public", "save_calculation", function(calc) {
 #                             If the order is important, then manipulations should be used instead.
 # calculated_from  : list   - a list with values as the names of the columns the calculation depends on, 
 #                             and names as the names of the data frames corresponding the columns e.g. list(survey = "Yield", survey = "Size")
-# save_output      : logical- should the output produced by the calculation (usually a column) be saved into the instat object?
-# save_calc        : logical- should the calculation itself be saved? If yes, it can be re-run at a later date.
+# save             : integer- either, 0: nothing is saved, 1: calculation is saved but not the result or 2: calculation and result is saved
+#                             (saving the result without saving the calculation was decided not to be a sensible option - prevents recalculating etc.
+#                              saving calculation only is useful to reproduce results in output window without needing to save in a data frame e.g. single value summaries)  
 
 instat_calculation <- R6Class("instat_calculation",
                        public = list(
-                         initialize = function(function_exp = "", type = "", name = "", result_name = "", manipulations = list(),
-                                               sub_calculations = list(), calculated_from = list(), save_output = FALSE, save_calc = FALSE) {
+                         initialize = function(function_exp = "", type = "", name = "calc", result_name = "", manipulations = list(),
+                                               sub_calculations = list(), calculated_from = list(), save = 0) {
                            if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
-                           if(type == "combination" && save_output) {
+                           if(type == "combination" && save > 0) {
                              warning("combination types do not have a main calculation which can be saved. save_output will be stored as FALSE")
-                             save_output <- FALSE
+                             save <- 0
                              #TODO Should this do something else like set save_output = TRUE for all sub_calculations?
                            }
                            self$function_exp <- function_exp
@@ -126,18 +127,16 @@ instat_calculation <- R6Class("instat_calculation",
                            self$manipulations <- manipulations
                            self$sub_calculations <- sub_calculations
                            self$calculated_from <- calculated_from
-                           self$save_output <- save_output
-                           self$save_calc <- save_calc
+                           self$save <- save
                          },
-                         name = "",
+                         name = "calc",
                          result_name = "",
                          type = "",
                          manipulations = list(),
                          sub_calculations = list(),
                          function_exp = "",
                          calculated_from = list(),
-                         save_output = FALSE,
-                         save_calc = FALSE
+                         save = 0
                        )
 )
 
@@ -219,12 +218,6 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
             # needs to change to get corresponding columns and check lists
             by_curr <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], curr_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
             by_overall <- self$get_corresponding_link_columns(sub_calc_results[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, curr_sub_calc[[c_link_label]][["from_data_frame"]])
-            # print(by_curr)
-            # print(by_overall)
-            # print(curr_sub_calc[[c_link_label]][["from_data_frame"]])
-            # print(sub_calc_results[[c_link_label]][["from_data_frame"]])
-            # print(overall_calc_link_cols)
-            # print(curr_calc_link_cols)
             if(all(by_overall %in% names(by_curr))) {
               intersect_curr <- intersect(by_curr, names(by_overall))
               by <- by_curr[by_curr %in% intersect_curr]
@@ -264,22 +257,31 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
                 # Note: if both require a merge then the order of the rows in the output may not be sensible, but this case should be rare
                 #       as would require two different filters to be applied to make the row order strange
             by <- self$get_link_columns_from_data_frames(curr_sub_calc[[c_link_label]][["from_data_frame"]], names(curr_sub_calc[[c_data_label]]), sub_calc_results[[c_link_label]][["from_data_frame"]], names(sub_calc_results[[c_data_label]]))
-            additional_cols <- intersect(names(sub_calc_results[[c_data_label]]), names(curr_sub_calc[[c_data_label]]))
-            additional_cols <- additional_cols[!additional_cols %in% by]
-            if(length(additional_cols) > 0) by <- c(by, additional_cols)
             if(length(by) == 0) {
               #TODO Should this be attempted or just stop here?
               warning("Could not find a key to join by, Attempting to merge by all columns with the same name. The output may be incorrect.")
               suppressMessages(sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]]))
             }
-            else if(overall_merge_required) {
+            else if(overall_merge_required && current_calc_merge_required) {
+              # This should be a rare case where two (possibly different) filters have been used in different subcalculations
+              # To avoid possibly losing data by subsetting columns we don't subset here and instead add to by columns
+              additional_cols <- intersect(names(sub_calc_results[[c_data_label]]), names(curr_sub_calc[[c_data_label]]))
+              additional_cols <- additional_cols[!additional_cols %in% by]
+              if(length(additional_cols) > 0) by <- c(by, additional_cols)
               sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
               joined <- TRUE
             }
+            else if(overall_merge_required) {
+              # Here we can subset the current data to only have by and output columns so that merge doesn't produce duplicate columns
+              # Overall sub data should be full data so we don't lose any data by subsetting the current sub calc
+              sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], sub_calc_results[[c_data_label]], by = by)
+              joined <- TRUE
+            }
             else if(current_calc_merge_required) {
+              # Same as above case by with current and overall switched
               new_by <- names(by)
               names(new_by) <- by
-              sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], by = new_by)
+              sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], by = new_by)
               joined <- TRUE
             }
             #break
@@ -439,15 +441,11 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       attr(curr_data_list[[c_data_label]][[calc$result_name]], att) <- NULL
     }
   }
-  # if calc$save_output then column generated by calculation is saved into instat object
-  # save_calc_output also checks calc$save_calc and saves it in the to_data_frame if TRUE
-  if(calc$save_output) self$save_calc_output(calc, curr_data_list, previous_manipulations)
-  else {
-    # if output is not saved the calculation can still be saved but now it is saved with the from_data_frame
-    # (to_data_frame may not exist)
-    # TODO if multiple from_data_frames exist then where should calc be saved?
-    if(calc$save_calc) self$save_calculation(data_names, calc)
-  }
+  # if calc$save == 2 then column generated by calculation is saved into instat object and calc saved in to_data_frame
+  if(calc$save == 2) self$save_calc_output(calc, curr_data_list, previous_manipulations)
+  # if output is not saved the calculation can still be saved but now it is saved with the from_data_frame
+  # (to_data_frame may not exist)
+  else if(calc$save == 1) self$save_calculation(data_names, calc)
   # list is returned so it can be used recursively for manipulations, sub_calculations etc.
   return(curr_data_list)
 }
@@ -515,12 +513,9 @@ instat_object$set("public", "get_link_columns_from_data_frames", function(first_
 # Called from apply_instat_calculation if calc$save_calc == TRUE
 instat_object$set("public", "save_calc_output", function(calc, curr_data_list, previous_manipulations) {
 
-  # This is done first because calc$name is used later when adding metadata
-  #TODO This needs to change
-  if(calc$name == "") calc$name <- next_default_item("calc", names(private$calculations))
-  
+  # Add previous manipulations to calc so that it can be rerun on its own (it may have been a sub calculation)
   calc$manipulations <- c(previous_manipulations, calc$manipulations)
-  
+  calc_dependencies <- calc$get_dependencies()
   # Variables used throughout method
   calc_from_data_name <- curr_data_list[[c_link_label]][["from_data_frame"]]
   calc_link_cols <- curr_data_list[[c_link_label]][["link_cols"]]
@@ -535,15 +530,22 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
         to_data_exists <- TRUE
         #gets the name of the to_data_frame based on the link
         to_data_name <- self$get_linked_to_data_name(calc_from_data_name, calc_link_cols)
-        if(calc$result_name %in% names(self$get_column_names(to_data_name))) {
-          #TODO Delete column with this name in to_data and give warning
+        # This is done so that calc$name can be used later and we know it won't be changed
+        # We can only do this check once we know the to_data_frame as this is where the calc is stored
+        if(calc$name %in% self$get_calculation_names(to_data_name)) {
+          calc$name <- next_default_item(calc$name, self$get_calculation_names(to_data_name))
+        }
+        if(calc$result_name %in% self$get_column_names(to_data_name)) {
           #     Delete is needed because merge will not replace
           #     If not wanting to replace, this should be checked when calculation is defined.
+          warning("A column named ", calc$result_name, " already exists in ", to_data_name, ". It will be replaced.")
+          self$remove_columns_in_data(to_data_name, calc$result_name)
         }
         # merge_data merges into to_data_frame in instat object
         # method takes care of data frame attributes correctly
         # need to subset so that only the new column from this calc is added (not sub_calc columns as well as they have already been added if saved)
         # type = "full" so that we do not lose any data from either part of the merge
+        #TODO calc_link_cols should be named list already by this point
         self$get_data_objects(to_data_name)$merge_data(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)], by = calc_link_cols, type = "full")
       }
       else {
@@ -559,31 +561,35 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
         to_data_exists <- TRUE
         # Add the link to the new to_data_frame
         new_key <- calc_link_cols
-        names(new_key) <- new_key
+        names(new_key) <- calc_link_cols
         self$add_link(calc_from_data_name, to_data_name, new_key, keyed_link_label)
+        
         # Add metadata to the linking columns 
         # This adds metadata: is_calculated = TRUE to the linking columns, which indicates that the column has been created by a calculation
         self$append_to_variables_metadata(to_data_name, calc_link_cols, is_calculated_label, TRUE)
+        # This adds metadata: calc_dependencies to the output column, with value as the name of the calculation
+        # TODO Is this correct for the link columns?
+        # Probably not, done below instead
+        # if(length(calc_dependencies) > 0) self$append_to_variables_metadata(to_data_name, calc_link_cols, dependencies_label, calc_dependencies)
+        
         # This creates list to indicate the dependent columns of the link columns in the to_data_frame, the name of the list is the from_data_name
         # Need to do separately for each link column because they have different dependencies
         for(curr_link_col in calc_link_cols) {
-          # TODO Maybe there should be one method to do this next section
-          link_cols_in_from_data <- list(curr_link_col)
-          names(link_cols_in_from_data) <- calc_from_data_name
-          self$append_to_variables_metadata(to_data_name, curr_link_col, dependencies_label, link_cols_in_from_data)
+          #TODO not sure this is correct dependencies, see TODO above
+          link_col_in_from_data <- list(curr_link_col)
+          names(link_col_in_from_data) <- calc_from_data_name
+          self$append_to_variables_metadata(to_data_name, curr_link_col, dependencies_label, link_col_in_from_data)
           # Same list as above except has name to_data_frame, to be passed in to indicate the columns which depend on the link columns in the from_data_frame
-          link_cols_in_to_data <- list(curr_link_col)
-          names(link_cols_in_to_data) <- to_data_name
-          self$add_dependent_columns(calc_from_data_name, curr_link_col, link_cols_in_to_data)
+          link_col_in_to_data <- list(curr_link_col)
+          names(link_col_in_to_data) <- to_data_name
+          self$add_dependent_columns(calc_from_data_name, curr_link_col, link_col_in_to_data)
         }
 
         # Adds metadata at data frame level to indicate that the data frame is calculated
         self$append_to_dataframe_metadata(to_data_name, is_calculated_label, TRUE)
-        # This adds metadata: calculated_from to the output column, with value as the name of the calculation
-        # Only add this metadata if the calc has a name. If the calc is saved, it will always have a name
-        # TODO If not saving then probably this shouldn't be added? If not saving would also expect calc$ == ""
-        # TODO How should calculated_by work? sub_calc name or main calc name?
-        if(calc$name != "") self$append_to_variables_metadata(to_data_name, calc_link_cols, calculated_by_label, calc$name)
+        
+        # This adds metadata: calculated_by to the linking columns, with value as the name of the calculation
+        self$append_to_variables_metadata(to_data_name, calc_link_cols, calculated_by_label, calc$name)
       }
     }
     else {
@@ -594,21 +600,26 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
       to_data_name <- calc_from_data_name
       # If the data frame has keys defined then go through each key and if all columns of the key are in the output data then the merge can be done
       if(self$has_key(calc_from_data_name)) {
-        keys_list <- self$get_keys(calc_from_data_name)
-        joined <- FALSE
-        for(curr_key in keys_list) {
-          if(all(curr_key %in% names(curr_data_list[[c_data_label]]))) {
-            # subset first to only get output and key columns, do not want sub_calculation or extra columns to be merged as well
-            self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[c_data_label]][c(curr_key, calc$result_name)], by = curr_key, type = "full")
-            joined <- TRUE
-            break
-          }
-        }
-        # Cannot do merge if not all columns of any key is found in the output
-        if(!joined) stop("Could not find a key to join by, which appeared in output from this calculations.")
+        by <- self$get_link_columns_from_data_frames(calc_from_data_name, names(curr_data_list[[c_data_label]]), calc_from_data_name, self$get_column_names(calc_from_data_name))
+        # subset first to only get output and key columns, do not want sub_calculation or extra columns to be merged as well
+        #TODO If by = NULL should we try the merge or just stop?
+        if(length(by) == 0) self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[c_data_label]][c(as.vector(by), calc$result_name)], by = by, type = "full")
+        # keys_list <- self$get_keys(calc_from_data_name)
+        # joined <- FALSE
+        # for(curr_key in keys_list) {
+        #   if(all(curr_key %in% names(curr_data_list[[c_data_label]]))) {
+        #     # subset first to only get output and key columns, do not want sub_calculation or extra columns to be merged as well
+        #     self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[c_data_label]][c(curr_key, calc$result_name)], by = curr_key, type = "full")
+        #     joined <- TRUE
+        #     break
+        #   }
+        # }
+        # # Cannot do merge if not all columns of any key is found in the output
+        # if(!joined) stop("Could not find a key to join by, which appeared in output from this calculations.")
       }
       # Cannot do merge if the data frame has no ketys defined
       else {
+        #TODO Should we try the merge?
         stop("Cannot merge output from this calculation because the data frame does not have any defined keys.")
       }
     }
@@ -621,31 +632,51 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
     if(calc$result_name %in% names(self$get_data_frame(calc_from_data_name))) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
     self$add_columns_to_data(calc_from_data_name, calc$result_name, curr_data_list[[c_data_label]][[calc$result_name]])
     to_data_name <- calc_from_data_name
+    if(calc$name %in% self$get_calculation_names(to_data_name)) {
+      calc$name <- next_default_item(calc$name, self$get_calculation_names(to_data_name))
+    }
   }
   # Add metadata for the new column
   output_column <- calc$result_name
   names(output_column) <- to_data_name
-  # Add metadata to calculated_from column, but only if they appear in the instat object data
+  # Add metadata to calculated_from columns
   # for example, calculated_from may include sub_calculation columns which were not saved and so don't appear in the instat object data
-  for(i in seq_along(calc$calculated_from)) {
-    if(calc$calculated_from[[i]] %in% self$get_column_names(names(calc$calculated_from[i]))) {
+  for(i in seq_along(calc_dependencies)) {
       # This adds metadata: has_dependants = TRUE which indicates that the calculated_from columns have columns that depend on them 
-      self$append_to_variables_metadata(names(calc$calculated_from[i]), calc$calculated_from[[i]], has_dependants_label, TRUE)
+      self$append_to_variables_metadata(names(calc_dependencies[i]), calc_dependencies[[i]], has_dependants_label, TRUE)
       # This adds the output_column to the calculated_from columns' list of dependent columns
-      self$add_dependent_columns(names(calc$calculated_from[i]), calc$calculated_from[[i]], output_column)
-    }
+      self$add_dependent_columns(names(calc_dependencies[i]), calc_dependencies[[i]], output_column)
   }
   # This adds metadata: is_calculated = TRUE to the output column, which indicates that the column has been created by a calculation
   self$append_to_variables_metadata(to_data_name, calc$result_name, is_calculated_label, TRUE)
-  #TODO write this method
-  #TODO check metadata added
-  calc_calculated_from <- calc$get_calculated_from()
+  
   # This adds metadata: dependencies to the output column with value, a list of the calculated_from columns
-  if(length(calc_calculated_from) > 0) self$append_to_variables_metadata(to_data_name, calc$result_name, dependencies_label, calc_calculated_from)
-  # This adds metadata: calculated_from to the output column, with value as the name of the calculation
-  # Only add this metadata if the calc has a name. If the calc is saved, it will always have a name
-  # TODO If not saving then probably this shouldn't be added? If not saving would also expect calc$ == ""
-  if(calc$name != "") self$append_to_variables_metadata(to_data_name, calc$result_name, calculated_by_label, calc$name)
-  if(calc$save_calc) self$save_calculation(to_data_name, calc)
+  if(length(calc_dependencies) > 0) self$append_to_variables_metadata(to_data_name, calc$result_name, dependencies_label, calc_dependencies)
+  # This adds metadata: calculated_by to the output column, with value as the name of the calculation
+  self$append_to_variables_metadata(to_data_name, calc$result_name, calculated_by_label, calc$name)
+  self$save_calculation(to_data_name, calc)
+}
+)
+
+# Could be a standalone method? Method of calculation?
+instat_calculation$set("public", "get_dependencies", function(depens = c()) {
+  for(manip in self$manipulations) {
+    for(i in seq_along(manip$calculated_from)) {
+      ind <- which(depens == manip$calculated_from[[i]])
+      if(length(ind) == 0 || names(depens)[ind] != names(manip$calculated_from)[i]) {
+        depens <- c(depens, manip$calculated_from[i])
+      }
+    }
+  }
+  for(sub_calc in self$sub_calculations) {
+    depens <- sub_calc$get_dependencies(depens)
+  }
+  for(j in seq_along(self$calculated_from)) {
+    ind <- which(depens == self$calculated_from[[j]])
+    if(length(ind) == 0 || names(depens)[ind] != names(self$calculated_from)[j]) {
+      depens <- c(depens, self$calculated_from[j])
+    }
+  }
+  return(depens)
 }
 )

@@ -322,6 +322,16 @@ instat_object$set("public", "get_metadata_changed", function(data_name) {
 } 
 )
 
+instat_object$set("public", "get_calculations", function(data_name) {
+  return(self$get_data_objects(data_name)$get_calculations())
+} 
+)
+
+instat_object$set("public", "get_calculation_names", function(data_name) {
+  return(self$get_data_objects(data_name)$get_calculation_names())
+} 
+)
+
 instat_object$set("public", "dataframe_count", function() {
   return(length(private$.data_objects))
 } 
