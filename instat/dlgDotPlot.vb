@@ -60,7 +60,7 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrVariablesAsFactorDotPlot.IsEmpty Or (ucrSaveDotPlot.chkSaveGraph.Checked And ucrSaveDotPlot.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorDotPlot.IsEmpty OrElse (ucrSaveDotPlot.chkSaveGraph.Checked AndAlso ucrSaveDotPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -72,6 +72,7 @@ Public Class dlgDotPlot
         clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
         ucrVariablesAsFactorDotPlot.ResetControl()
+        ucrSaveDotPlot.Reset()
         sdgPlots.Reset()
         SetXParameter()
         TestOkEnabled()
@@ -146,5 +147,9 @@ Public Class dlgDotPlot
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub ucrSaveDotPlot_ContentsChanged() Handles ucrSaveDotPlot.ContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

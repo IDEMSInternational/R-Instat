@@ -64,8 +64,8 @@ Partial Class frmMain
         Me.mnuDescribeThemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuModelProbabilityDistributionsTablesPlus = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuModelProbabilityDistributionsShowModels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelProbabilityDistributionsShowModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelProbabilityDistributionsCompareModels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
@@ -257,12 +257,12 @@ Partial Class frmMain
         Me.mnuFileOpenFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileExportToOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileImportFromOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameViewData = New System.Windows.Forms.ToolStripMenuItem()
@@ -286,6 +286,8 @@ Partial Class frmMain
         Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganisePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseCheckDataExportOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseCheckDataImportOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganiseColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
@@ -656,25 +658,25 @@ Partial Class frmMain
         '
         'mnuModelProbabilityDistributions
         '
-        Me.mnuModelProbabilityDistributions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributionsTablesPlus, Me.mnuModelProbabilityDistributionsShowModels, Me.mnuModelProbabilityDistributionsRandomSamplesUseModel})
+        Me.mnuModelProbabilityDistributions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributionsShowModel, Me.mnuModelProbabilityDistributionsCompareModels, Me.mnuModelProbabilityDistributionsRandomSamplesUseModel})
         Me.mnuModelProbabilityDistributions.Name = "mnuModelProbabilityDistributions"
         Me.mnuModelProbabilityDistributions.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelProbabilityDistributions.Tag = "Probability_Distributions"
         Me.mnuModelProbabilityDistributions.Text = "Probability Distributions"
         '
-        'mnuModelProbabilityDistributionsTablesPlus
+        'mnuModelProbabilityDistributionsShowModel
         '
-        Me.mnuModelProbabilityDistributionsTablesPlus.Name = "mnuModelProbabilityDistributionsTablesPlus"
-        Me.mnuModelProbabilityDistributionsTablesPlus.Size = New System.Drawing.Size(242, 22)
-        Me.mnuModelProbabilityDistributionsTablesPlus.Text = "Tables Plus..."
+        Me.mnuModelProbabilityDistributionsShowModel.Name = "mnuModelProbabilityDistributionsShowModel"
+        Me.mnuModelProbabilityDistributionsShowModel.Size = New System.Drawing.Size(242, 22)
+        Me.mnuModelProbabilityDistributionsShowModel.Text = "Show Model..."
         '
-        'mnuModelProbabilityDistributionsShowModels
+        'mnuModelProbabilityDistributionsCompareModels
         '
-        Me.mnuModelProbabilityDistributionsShowModels.Enabled = False
-        Me.mnuModelProbabilityDistributionsShowModels.Name = "mnuModelProbabilityDistributionsShowModels"
-        Me.mnuModelProbabilityDistributionsShowModels.Size = New System.Drawing.Size(242, 22)
-        Me.mnuModelProbabilityDistributionsShowModels.Tag = "Show_Models..."
-        Me.mnuModelProbabilityDistributionsShowModels.Text = "Show Models..."
+        Me.mnuModelProbabilityDistributionsCompareModels.Enabled = False
+        Me.mnuModelProbabilityDistributionsCompareModels.Name = "mnuModelProbabilityDistributionsCompareModels"
+        Me.mnuModelProbabilityDistributionsCompareModels.Size = New System.Drawing.Size(242, 22)
+        Me.mnuModelProbabilityDistributionsCompareModels.Tag = "Show_Models..."
+        Me.mnuModelProbabilityDistributionsCompareModels.Text = "Compare Models..."
         '
         'mnuModelProbabilityDistributionsRandomSamplesUseModel
         '
@@ -1735,7 +1737,7 @@ Partial Class frmMain
         '
         Me.mnuFileSave.Name = "mnuFileSave"
         Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuFileSave.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileSave.Size = New System.Drawing.Size(204, 22)
         Me.mnuFileSave.Tag = "Save"
         Me.mnuFileSave.Text = "Save"
         '
@@ -1743,7 +1745,7 @@ Partial Class frmMain
         '
         Me.mnuFileSaveAs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileSaveAsDataAs, Me.mnuFileSaveAsOutputAs, Me.mnuFileSaveAsLogAs, Me.mnuFileSaveAsScriptAs})
         Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
-        Me.mnuFileSaveAs.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileSaveAs.Size = New System.Drawing.Size(204, 22)
         Me.mnuFileSaveAs.Tag = "Save_As"
         Me.mnuFileSaveAs.Text = "Save As"
         '
@@ -1775,26 +1777,26 @@ Partial Class frmMain
         '
         Me.mnuFilePrint.Name = "mnuFilePrint"
         Me.mnuFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mnuFilePrint.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFilePrint.Size = New System.Drawing.Size(204, 22)
         Me.mnuFilePrint.Tag = "Print"
         Me.mnuFilePrint.Text = "Print"
         '
         'mnuFilePrintPreview
         '
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
-        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(204, 22)
         Me.mnuFilePrintPreview.Tag = "Print_Preview"
         Me.mnuFilePrintPreview.Text = "Print Preview"
         '
         'tlSeparatorFile3
         '
         Me.tlSeparatorFile3.Name = "tlSeparatorFile3"
-        Me.tlSeparatorFile3.Size = New System.Drawing.Size(212, 6)
+        Me.tlSeparatorFile3.Size = New System.Drawing.Size(201, 6)
         '
         'mnuFIleExit
         '
         Me.mnuFIleExit.Name = "mnuFIleExit"
-        Me.mnuFIleExit.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFIleExit.Size = New System.Drawing.Size(204, 22)
         Me.mnuFIleExit.Tag = "Exit"
         Me.mnuFIleExit.Text = "Exit"
         '
@@ -2053,7 +2055,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuImportFromODK, Me.mnuFileExportToOpenRefine, Me.mnuFileImportFromOpenRefine, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuImportFromODK, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -2063,7 +2065,7 @@ Partial Class frmMain
         '
         Me.mnuFileNewDataFrame.Name = "mnuFileNewDataFrame"
         Me.mnuFileNewDataFrame.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.mnuFileNewDataFrame.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileNewDataFrame.Size = New System.Drawing.Size(204, 22)
         Me.mnuFileNewDataFrame.Tag = "New_Data_Frame"
         Me.mnuFileNewDataFrame.Text = "New Data Frame"
         '
@@ -2071,58 +2073,56 @@ Partial Class frmMain
         '
         Me.mnuFileOpenFromFile.Name = "mnuFileOpenFromFile"
         Me.mnuFileOpenFromFile.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.mnuFileOpenFromFile.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileOpenFromFile.Size = New System.Drawing.Size(204, 22)
         Me.mnuFileOpenFromFile.Tag = "Open_From_File"
         Me.mnuFileOpenFromFile.Text = "Open From File"
         '
         'mnuFileOpenFromLibrary
         '
         Me.mnuFileOpenFromLibrary.Name = "mnuFileOpenFromLibrary"
-        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(204, 22)
         Me.mnuFileOpenFromLibrary.Tag = "Open_From_Library"
         Me.mnuFileOpenFromLibrary.Text = "Open From Library"
         '
         'mnuImportFromODK
         '
         Me.mnuImportFromODK.Name = "mnuImportFromODK"
-        Me.mnuImportFromODK.Size = New System.Drawing.Size(215, 22)
+        Me.mnuImportFromODK.Size = New System.Drawing.Size(204, 22)
         Me.mnuImportFromODK.Text = "Import from ODK..."
         '
-        'mnuFileExportToOpenRefine
+        'ToolStripSeparator27
         '
-        Me.mnuFileExportToOpenRefine.Name = "mnuFileExportToOpenRefine"
-        Me.mnuFileExportToOpenRefine.Size = New System.Drawing.Size(215, 22)
-        Me.mnuFileExportToOpenRefine.Text = "Export To OpenRefine..."
-        '
-        'mnuFileImportFromOpenRefine
-        '
-        Me.mnuFileImportFromOpenRefine.Name = "mnuFileImportFromOpenRefine"
-        Me.mnuFileImportFromOpenRefine.Size = New System.Drawing.Size(215, 22)
-        Me.mnuFileImportFromOpenRefine.Text = "Import From OpenRefine..."
+        Me.ToolStripSeparator27.Name = "ToolStripSeparator27"
+        Me.ToolStripSeparator27.Size = New System.Drawing.Size(201, 6)
         '
         'mnuFileConvert
         '
         Me.mnuFileConvert.Name = "mnuFileConvert"
-        Me.mnuFileConvert.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileConvert.Size = New System.Drawing.Size(204, 22)
         Me.mnuFileConvert.Text = "Convert..."
         '
         'tlSeparatorFile
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
-        Me.tlSeparatorFile.Size = New System.Drawing.Size(212, 6)
+        Me.tlSeparatorFile.Size = New System.Drawing.Size(201, 6)
         '
         'mnuExport
         '
         Me.mnuExport.Name = "mnuExport"
-        Me.mnuExport.Size = New System.Drawing.Size(215, 22)
+        Me.mnuExport.Size = New System.Drawing.Size(204, 22)
         Me.mnuExport.Text = "Export Data"
         '
         'mnuFileCloseData
         '
         Me.mnuFileCloseData.Enabled = False
         Me.mnuFileCloseData.Name = "mnuFileCloseData"
-        Me.mnuFileCloseData.Size = New System.Drawing.Size(215, 22)
+        Me.mnuFileCloseData.Size = New System.Drawing.Size(204, 22)
         Me.mnuFileCloseData.Text = "Close Data File"
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(201, 6)
         '
         'mnuOrganise
         '
@@ -2271,7 +2271,7 @@ Partial Class frmMain
         'mnuOrganiseCheckData
         '
         Me.mnuOrganiseCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuOrganiseCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganisePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage})
+        Me.mnuOrganiseCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganisePrepareToShareJitter, Me.mnuOrganiseCheckDataExportOpenRefine, Me.mnuOrganiseCheckDataImportOpenRefine, Me.mnuCheckDataPrePareToShareSdcPackage})
         Me.mnuOrganiseCheckData.Name = "mnuOrganiseCheckData"
         Me.mnuOrganiseCheckData.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseCheckData.Text = "Check Data"
@@ -2281,6 +2281,20 @@ Partial Class frmMain
         Me.mnuOrganisePrepareToShareJitter.Name = "mnuOrganisePrepareToShareJitter"
         Me.mnuOrganisePrepareToShareJitter.Size = New System.Drawing.Size(245, 22)
         Me.mnuOrganisePrepareToShareJitter.Text = "Jitter..."
+        '
+        'mnuOrganiseCheckDataExportOpenRefine
+        '
+        Me.mnuOrganiseCheckDataExportOpenRefine.Enabled = False
+        Me.mnuOrganiseCheckDataExportOpenRefine.Name = "mnuOrganiseCheckDataExportOpenRefine"
+        Me.mnuOrganiseCheckDataExportOpenRefine.Size = New System.Drawing.Size(245, 22)
+        Me.mnuOrganiseCheckDataExportOpenRefine.Text = "Export To OpenRefine..."
+        '
+        'mnuOrganiseCheckDataImportOpenRefine
+        '
+        Me.mnuOrganiseCheckDataImportOpenRefine.Enabled = False
+        Me.mnuOrganiseCheckDataImportOpenRefine.Name = "mnuOrganiseCheckDataImportOpenRefine"
+        Me.mnuOrganiseCheckDataImportOpenRefine.Size = New System.Drawing.Size(245, 22)
+        Me.mnuOrganiseCheckDataImportOpenRefine.Text = "Import From OpenRefine..."
         '
         'mnuCheckDataPrePareToShareSdcPackage
         '
@@ -3060,7 +3074,7 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeSpecificSummary As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMultipleResponse As ToolStripMenuItem
     Friend WithEvents mnuModelProbabilityDistributions As ToolStripMenuItem
-    Friend WithEvents mnuModelProbabilityDistributionsShowModels As ToolStripMenuItem
+    Friend WithEvents mnuModelProbabilityDistributionsCompareModels As ToolStripMenuItem
     Friend WithEvents mnuModelProbabilityDistributionsRandomSamplesUseModel As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents mnuModelOneVariable As ToolStripMenuItem
@@ -3183,7 +3197,7 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnGenerateDate As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnUseDate As ToolStripMenuItem
     Friend WithEvents mnuFileConvert As ToolStripMenuItem
-    Friend WithEvents mnuModelProbabilityDistributionsTablesPlus As ToolStripMenuItem
+    Friend WithEvents mnuModelProbabilityDistributionsShowModel As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariate As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariateCorrelations As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariateprincipalComponents As ToolStripMenuItem
@@ -3219,6 +3233,8 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnMakeTime As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnUseTime As ToolStripMenuItem
     Friend WithEvents mnuClimdex As ToolStripMenuItem
-    Friend WithEvents mnuFileExportToOpenRefine As ToolStripMenuItem
-    Friend WithEvents mnuFileImportFromOpenRefine As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseCheckDataExportOpenRefine As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseCheckDataImportOpenRefine As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
 End Class
