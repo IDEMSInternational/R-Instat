@@ -283,11 +283,14 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
         if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
+        # TODO Possible alternative to include names of list
+        # TODO See how to have data frame properly containing lists
+        #if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(names(unlist(col_attributes[[att_name]])), unlist(col_attributes[[att_name]]), collapse = ",")
       }
       #if(is.null(col_attributes)) {
       #  col_attributes <- data.frame(class = NA)
       #}
-      col_attributes <- data.frame(col_attributes)
+      col_attributes <- data.frame(col_attributes, stringsAsFactors = FALSE)
       out[[i]] <- col_attributes
       i = i + 1
     }
@@ -363,6 +366,16 @@ data_object$set("public", "get_metadata", function(label, include_calculated = T
 
 data_object$set("public", "get_changes", function() {
   return(private$changes)
+}
+)
+
+data_object$set("public", "get_calculations", function() {
+  return(private$calculations)
+}
+)
+
+data_object$set("public", "get_calculation_names", function() {
+  return(names(private$calculations))
 }
 )
 
@@ -1401,6 +1414,8 @@ data_object$set("public", "unfreeze_columns", function() {
 }
 )
 
+#TODO maybe get ride of this method as that you can't create a key without
+#     the instat object also creating a self link
 data_object$set("public", "add_key", function(col_names) {
   if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
     stop("key columns must have unique combinations")
@@ -1420,6 +1435,16 @@ data_object$set("public", "add_key", function(col_names) {
 
 data_object$set("public", "is_key", function(col_names) {
   return(any(sapply(private$keys, function(x) setequal(col_names,x))))
+}
+)
+
+data_object$set("public", "has_key", function() {
+  return(length(private$keys) > 0)
+}
+)
+
+data_object$set("public", "get_keys", function() {
+  return(private$keys)
 }
 )
 
@@ -1450,7 +1475,7 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
         }
       }
     }
-    else curr_dependents <- dependent_cols
+    else curr_dependents <- as.list(dependent_cols)
     self$append_to_variables_metadata(col, dependent_columns_label, curr_dependents)
   }
 }
@@ -1491,7 +1516,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
+data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, polar = FALSE,...) {
   if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
   if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
   numeric_geom <- match.fun(numeric)
@@ -1520,7 +1545,7 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     else stop("Cannot plot columns of type:", column_types[i])
     
     curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars=columns)
-    if(curr_geom_name == "geom_boxplot") {
+    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point") {
       g <- ggplot(data = curr_data, mapping = aes(x = "", y=value))
     }
     else {
@@ -1528,6 +1553,9 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     }
     if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
     else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
+    
+    if(polar) g <- g + coord_polar(theta = "x")
+    return(g)
   }
   else {
     column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
@@ -1548,13 +1576,15 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
       }
       else stop("Cannot plot columns of type:", column_types[i])
       
-      if(curr_geom_name == "geom_boxplot") {
+    
+      if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point") {
         g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column)))
       }
       else {
         g <- ggplot(data = curr_data, mapping = aes_(x = as.name(column)))
       }
       current_graph <- g + curr_geom()
+      if(polar && column_types[i] == "cat") current_graph <- current_graph + coord_polar(theta = "x")
       graphs[[i]] <- current_graph
       i = i + 1
     }

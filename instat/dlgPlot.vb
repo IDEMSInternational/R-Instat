@@ -43,6 +43,7 @@ Public Class dlgPlot
         ucrLinePlotSelector.Focus()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
+        ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
         TestOkEnabled()
     End Sub
@@ -81,7 +82,7 @@ Public Class dlgPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverX.IsEmpty() Or ucrVariablesAsFactorForLinePlot.IsEmpty()) Or (ucrSaveLinePlot.chkSaveGraph.Checked And ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
+        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -148,7 +149,7 @@ Public Class dlgPlot
     End Sub
 
     Private Sub cmdPointOptions_Click(sender As Object, e As EventArgs) Handles cmdPointOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_lineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_lineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
 
         For Each clsParam In clsRaesFunction.clsParameters
@@ -160,6 +161,10 @@ Public Class dlgPlot
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveLinePlot_ContentsChanged() Handles ucrSaveLinePlot.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class

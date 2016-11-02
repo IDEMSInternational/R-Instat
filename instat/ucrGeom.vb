@@ -16,16 +16,19 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrGeom
-    Public strAesParameterName As String
-    Public strAesParameterValue As String
+    'Ucr Geom is used to select the geom that will be used for a specific graph/layer. It is used in ucrGeomListWithAes and ucrLayerParameters both ucr's of sdgLayerOptions. 
+    'It stores the definition of the different Geoms, using instances of clsGeom, including their R names, the relevant/available parameters and their description (type of values, values, default, ...).
     Public lstAllGeoms As New List(Of Geoms)
     Public lstGgParameters As New List(Of RParameter)
-    Public clsGeomFunction As New RFunction
+    'Warning: This is used nowhere ...
+    'Question: lstGgParameters lists of the ggplot parameters ? Let's delete ?
     Public clsCurrGeom As New Geoms
-    'why is geomfunction not a memeber of the geomclass ?
+    Public clsGeomFunction As New RFunction
     Public lstFunctionParameters As New List(Of RParameter)
-    Private bFirstLoad As Boolean = True
+    'Question: clsGeomFunction is the RFunction associated to the clsCurrGeom ? Could it be included in clsCurrGeom, if yes do we wish that ? Used together with clsGgplotAesFunction... ?
+    'Similarly for lstFunctionParameters. Both, together with clsGgplotAesFunction are supposedly passed through to ucrAdditionalLayers and assigned to smth in ucrAdditionalLayers by calling  sdgLayerOption.SetupLayer which calls setup ? Still need to figure out when/how they are used though...
     Public clsGgplotAesFunction As New RFunction
+    Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
 
     Public Sub New()
@@ -48,15 +51,21 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+        'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
+        'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
 
+        'First we clear the content of the displayed list (in cboGeomList) of available geoms as this may change between different setup's according to the parameter iNumVariablesForGeoms (see below). 
         cboGeomList.Items.Clear()
+        'Then we add geom names from our lstAllGeoms to cboGeomList when the number of available variables to associate to geom Aes (iNumVariablesForGeom) is greater or equal to the number of mandatory Aes of that geom. Correct ?
         For Each GeomCount In lstAllGeoms
             If iNumVariablesForGeoms <= GeomCount.iNumMandatoryAes Then
+                'Warning: Should this not be greater or equal instead of lower or equal ? But then what would the default value be for iNumVariablesForGeom ? Not -1 !!
                 cboGeomList.Items.Add(GeomCount.strGeomName)
             End If
         Next
+        'Task: needs further commenting when understood. clsGeomFunction is set at different occasions, not only in setup. SetGeomFunction overwritten...
         SetGeomFunction(clsTempGeomFunc)
         If clsGeomFunction.strRCommand = Nothing OrElse cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
@@ -72,19 +81,7 @@ Public Class ucrGeom
         clsGeomFunction = clsTempGeomFunc
     End Sub
 
-    Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
-        'this adds parameters TODO pass appropriate parameters.
-        Dim i As Integer
-        Dim clsParam As New RParameter
-        i = lstFunctionParameters.FindIndex(Function(x) x.strArgumentName.Equals(Me.strAesParameterName))
-        If i = -1 Then
-            clsParam.SetArgumentName(Me.strAesParameterName)
-            clsParam.SetArgumentValue(Me.strAesParameterValue)
-            lstFunctionParameters.Add(clsParam)
-        Else
-            lstFunctionParameters(i).strArgumentValue = Me.strAesParameterValue
-        End If
-    End Sub
+
 
     Public Sub CreateGeomList()
         Dim clsgeom_abline As New Geoms
@@ -175,8 +172,8 @@ Public Class ucrGeom
         clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor"}))
         clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}))
         clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor"}))
-        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
-        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
+        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'won't visibly change anything unless you change the theme
+        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"})) ' won't visibly change anything unless you change the theme
 
         'add layer parameters 
         clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
@@ -202,23 +199,46 @@ Public Class ucrGeom
 
 
         clsgeom_boxplot.SetGeomName("geom_boxplot")
-        clsgeom_boxplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_boxplot.AddAesParameter("x")
         clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_boxplot.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
-        clsgeom_boxplot.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_boxplot.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor"})
-        clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        'Warning: When x is continuous, there needs to be a grouping variable... for example cut_width(x,0.25). In our setting, a factor column can be used. If group is empty, R will send a warning message and ignore the x variable (still labels x though).
+        'Task: Add a warning message in the front end to explain the necessity to specify group. Give suggestions on how to proceed (use an existing factor, create a new factor column using cut_width...). To do when front-end messages will have been sorted properly.
         clsgeom_boxplot.AddAesParameter("group", strIncludedDataTypes:={"factor"})
 
+        'Warning: The following aesthetics should be assigned to calculations for the different parameters of a boxplot. Only relevant for sort of summaries. 
+        'clsgeom_boxplot.AddAesParameter("lower", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("upper", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("middle", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"})
+        'clsgeom_boxplot.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"})
+
+        clsgeom_boxplot.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_boxplot.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_boxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_boxplot.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        clsgeom_boxplot.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
+
         'adding layerParameters
+        'Main geom_boxplot parameters
         clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
-        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "0.5", lstParameterStrings:={1})
+        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "0.5", lstParameterStrings:={1}) 'Question to be discussed: this sets the width of the notch as a proportion of the boxplot width. Values can be anything in ggplot but negative ones just give a silly looking thing (I ve left it in for now, but would suggest we exclude ?), and I don't know if values above 1 make sense ? The notch would then be larger than the boxplot.
         clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
-        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1})
-        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "19", lstParameterStrings:={1, 0, 25}) 'there are other symbols that we can add here 
+        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
+        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Warning: there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
-        clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={0, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
+
+        'Global Layer parameters
+        clsgeom_boxplot.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: The default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
+        clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: Could add the possiility to adjust the height and width parameters in the position function position_jitter, also width for dodge... Sometimes useful to only jitter in one direction for example...
+        'Aesthetics as layer parameters... Used fo fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_boxplot.AddLayerParameter("fill", "colour", "NULL")
+        clsgeom_boxplot.AddLayerParameter("colour", "colour", "NULL")
+        clsgeom_boxplot.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_boxplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
         lstAllGeoms.Add(clsgeom_boxplot)
 
         'clsgeom_contour.SetGeomName("geom_contour")
@@ -688,16 +708,19 @@ Public Class ucrGeom
         'clsgeom_ribbon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_ribbon)
 
-        'clsgeom_rug.strGeomName = "geom_rug"
-        'clsgeom_rug.AddAesParameter("alpha")
-        'clsgeom_rug.AddAesParameter("colour")
-        'clsgeom_rug.AddAesParameter("linetype")
-        'clsgeom_rug.AddAesParameter("size")
+        clsgeom_rug.strGeomName = "geom_rug"
+        clsgeom_rug.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_rug.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+        'These two are not made mendatory as we want to be able to choose only one, and could be either.
+        clsgeom_rug.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_rug.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_rug.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_rug.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
 
-        ''adding layer  parameters
-        'clsgeom_rug.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_rug)
+        'add layer parameters
+        clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "stack" & Chr(34)})
+        clsgeom_rug.AddLayerParameter("sides", "list", Chr(34) & "bl" & Chr(34), lstParameterStrings:={Chr(34) & "trbl" & Chr(34), Chr(34) & "trb" & Chr(34), Chr(34) & "trl" & Chr(34), Chr(34) & "tbl" & Chr(34), Chr(34) & "rbl" & Chr(34), Chr(34) & "tr" & Chr(34), Chr(34) & "tb" & Chr(34), Chr(34) & "tl" & Chr(34), Chr(34) & "rb" & Chr(34), Chr(34) & "rl" & Chr(34), Chr(34) & "bl" & Chr(34), Chr(34) & "t" & Chr(34), Chr(34) & "r" & Chr(34), Chr(34) & "b" & Chr(34), Chr(34) & "l" & Chr(34)})
+        lstAllGeoms.Add(clsgeom_rug)
 
         'clsgeom_segment.strGeomName = "geom_segment"
         ''mandatory
@@ -777,7 +800,7 @@ Public Class ucrGeom
         'clsgeom_text.AddAesParameter("fontface")
         'clsgeom_text.AddAesParameter("hjust")
         'clsgeom_text.AddAesParameter("lineheight")
-        ''TO DO add size and vjust this might need additon of labels and receivers 
+        ''TO DO add size and vjust this might need additon of labels and receivers  
 
 
         ''adding layer parameters

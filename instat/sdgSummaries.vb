@@ -37,16 +37,17 @@ Public Class sdgSummaries
         chkStdDev.Tag = "summary_sd"
         chkRange.Tag = "summary_range"
         chkSum.Tag = "summary_sum"
-        chkMean.Checked = True
-        chkStdDev.Checked = True
-        chkMode.Checked = True
-        chkMinimum.Checked = True
-        chkMaximum.Checked = True
-        chkNMissing.Checked = True
+        'To add quartiles, variance etc
+        chkMean.Checked = False
+        chkStdDev.Checked = False
+        chkMode.Checked = False
+        chkMinimum.Checked = False
+        chkMaximum.Checked = False
+        chkNMissing.Checked = False
         chkNonMissing.Checked = True
         chkNTotal.Checked = True
-        chkMedian.Checked = True
-        chkRange.Checked = True
+        chkMedian.Checked = False
+        chkRange.Checked = False
         chkSum.Checked = True
         SummariesParameters()
     End Sub
@@ -57,7 +58,7 @@ Public Class sdgSummaries
         Dim strSummariesParameter As String = ""
         Dim i As Integer = 0
         If lstCheckboxes.Count = 0 Then
-            lstCheckboxes.AddRange({chkMean, chkMode, chkMinimum, chkMaximum, chkRange, chkStdDev, chkNTotal, chkMedian, chkQuartiles, chkNonMissing, chkNMissing, chkSum})
+            lstCheckboxes.AddRange({chkNTotal, chkNonMissing, chkNMissing, chkMean, chkMinimum, chkMode, chkMaximum, chkMedian, chkStdDev, chkRange, chkSum, chkQuartiles})
         End If
 
         strSummariesParameter = "c("
@@ -79,12 +80,11 @@ Public Class sdgSummaries
         End If
     End Sub
 
-
     Public Sub SetMyRFunction(clsRNewSummaries As RFunction)
         clsRSummaries = clsRNewSummaries
     End Sub
 
-    Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkSum.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged
+    Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkSum.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged, chkMaximum.CheckedChanged, chkMinimum.CheckedChanged
         SummariesParameters()
     End Sub
 End Class

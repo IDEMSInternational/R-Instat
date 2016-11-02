@@ -322,6 +322,16 @@ instat_object$set("public", "get_metadata_changed", function(data_name) {
 } 
 )
 
+instat_object$set("public", "get_calculations", function(data_name) {
+  return(self$get_data_objects(data_name)$get_calculations())
+} 
+)
+
+instat_object$set("public", "get_calculation_names", function(data_name) {
+  return(self$get_data_objects(data_name)$get_calculation_names())
+} 
+)
+
 instat_object$set("public", "dataframe_count", function() {
   return(length(private$.data_objects))
 } 
@@ -696,6 +706,17 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
+  ind <- c()
+  for(i in seq_along(private$.links)) {
+    if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
+      ind <- c(ind, i)
+    }
+  }
+  #TODO Should this be delete or disable?
+  if(length(ind) > 0) {
+    private$.links[ind] <- NULL
+    message(length(ind), " links removed")
+  }
 } 
 )
 
@@ -895,12 +916,24 @@ instat_object$set("public","data_frame_exists", function(data_name) {
 
 instat_object$set("public","add_key", function(data_name, col_names) {
   self$get_data_objects(data_name)$add_key(col_names)
+  names(col_names) <- col_names
+  self$add_link(data_name, data_name, col_names, keyed_link_label)
   invisible(sapply(self$get_data_objects(), function(x) if(!x$is_metadata(is_linkable)) x$append_to_metadata(is_linkable, FALSE)))
 }
 )
 
 instat_object$set("public","is_key", function(data_name, col_names) {
   self$get_data_objects(data_name)$is_key(col_names)
+}
+)
+
+instat_object$set("public","has_key", function(data_name) {
+  self$get_data_objects(data_name)$has_key()
+}
+)
+
+instat_object$set("public","get_keys", function(data_name) {
+  self$get_data_objects(data_name)$get_keys()
 }
 )
 
@@ -939,8 +972,8 @@ instat_object$set("public","set_column_colours_by_metadata", function(data_name,
 }
 )
 
-instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
-  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, ncol = ncol, ... = ...)
+instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL,polar = FALSE, ...) {
+  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, ncol = ncol,polar = polar, ... = ...)
 }
 )
 
@@ -991,6 +1024,7 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
     data_frame_list[[factor_data_frame_name]] <- factor_data_frame
     self$import_data(data_frame_list)
     factor_data_obj <- self$get_data_objects(factor_data_frame_name)
+    #TODO We shoud now never call add_key directly from the data object method because it needs to add a link as well at this point to itself
     factor_data_obj$add_key(factor)
     names(factor) <- factor
     self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)

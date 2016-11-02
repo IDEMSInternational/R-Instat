@@ -153,7 +153,9 @@ Partial Class dlgUnstack
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgUnstack"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Unstack_Columns"
+        Me.Text = "Unstack Columns"
         Me.ResumeLayout(False)
 
     End Sub

@@ -19,6 +19,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   else stop("type must be one of left, right, inner or full")
   self$set_data(new_data)
   self$append_to_changes(Merged_data)
+  #TODO will column/row count be correct here?
   for(name in names(old_metadata)) {
     if(!name %in% c("names", "class", "row.names")) {
       self$append_to_metadata(name, old_metadata[[name]])
@@ -150,6 +151,8 @@ data_object$set("public", "calculate_summary", function(calc, ...) {
   factors = calc[["parameters"]][["factors"]]
   drop = calc[["parameters"]][["drop"]]
   add_cols = calc[["parameters"]][["add_cols"]]
+  if("na.rm" %in% names(calc[["parameters"]])) na.rm = calc[["parameters"]][["na.rm"]]
+  else na.rm = FALSE
   filter_names = calc[["filters"]]
   if(missing(columns_to_summarise)) stop("columns_to_summarise must be specified")
   if(missing(summaries)) stop("summaries must be specified")
@@ -184,7 +187,8 @@ data_object$set("public", "calculate_summary", function(calc, ...) {
     if(!all(factors %in% names(curr_data_filter))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
     
     out <- ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) {
-      na.rm <- missing_values_check(x[[y[[2]]]])
+      # temp disabled to allow na.rm to be passed in
+      #na.rm <- missing_values_check(x[[y[[2]]]])
       if("na.rm" %in% names(list(...))) stop("na.rm should not be specified. Use xxx to specify missing values handling.")
       match.fun(y[[1]])(x[[y[[2]]]], add_cols = x[add_cols], na.rm = na.rm, ...)
     }

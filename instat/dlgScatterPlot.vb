@@ -57,7 +57,7 @@ Public Class dlgScatterPlot
 
     Private Sub TestOkEnabled()
         'tests when okay Is enable
-        If ucrReceiverX.IsEmpty() Or ucrVariablesAsFactorForScatter.IsEmpty Or (ucrSaveScatterPlot.chkSaveGraph.Checked And ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
+        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForScatter.IsEmpty) OrElse (ucrSaveScatterPlot.chkSaveGraph.Checked AndAlso ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -99,6 +99,7 @@ Public Class dlgScatterPlot
         ucrSelectorForScatter.Focus()
         ucrVariablesAsFactorForScatter.ResetControl()
         sdgPlots.Reset()
+        ucrSaveScatterPlot.Reset()
         TestOkEnabled()
     End Sub
 
@@ -121,7 +122,7 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_scatterplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_scatterplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
 
         For Each clsParam In clsRaesFunction.clsParameters
@@ -143,6 +144,10 @@ Public Class dlgScatterPlot
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ContentsChanged
         TestOkEnabled()
     End Sub
 End Class
