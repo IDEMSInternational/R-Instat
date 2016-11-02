@@ -2486,7 +2486,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnFactorContrasts
         '
-        Me.mnuOrganiseColumnFactorContrasts.Enabled = False
         Me.mnuOrganiseColumnFactorContrasts.Name = "mnuOrganiseColumnFactorContrasts"
         Me.mnuOrganiseColumnFactorContrasts.Size = New System.Drawing.Size(179, 22)
         Me.mnuOrganiseColumnFactorContrasts.Tag = "Contrasts..."
@@ -2775,28 +2774,28 @@ Partial Class frmMain
         'mnuOrganiseRObjectsView
         '
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
         'mnuOrganiseRObjectsRename
         '
         Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
-        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
         Me.mnuOrganiseRObjectsRename.Text = "Rename..."
         '
         'mnuOrganiseRObjectsReorder
         '
         Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
-        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
         Me.mnuOrganiseRObjectsReorder.Text = "Reorder..."
         '
         'mnuOrganiseRObjectsDelete
         '
         Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
-        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '
