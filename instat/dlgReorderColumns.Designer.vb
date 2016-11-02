@@ -78,7 +78,7 @@ Partial Class dlgReorderColumns
         Me.MinimizeBox = False
         Me.Name = "dlgReorderColumns"
         Me.ShowIcon = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Reorder Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()

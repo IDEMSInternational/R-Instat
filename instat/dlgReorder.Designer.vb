@@ -40,6 +40,7 @@ Partial Class dlgReorder
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgReorder"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Reorder"
         Me.Text = "Reorder"
         Me.ResumeLayout(False)

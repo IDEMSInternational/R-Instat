@@ -266,6 +266,12 @@
     <Compile Include="dlgTwoVariableUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgAddNewDistribution.Designer.vb">
+      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgAddNewDistribution.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimdexIndices.Designer.vb">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
     </Compile>
@@ -2771,6 +2777,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAddNewDistribution.fr-FR.resx">
+      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAddNewDistribution.resx">
+      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAddNewDistribution.sw-KE.resx">
+      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>

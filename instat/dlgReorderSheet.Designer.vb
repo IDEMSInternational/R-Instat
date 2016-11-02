@@ -22,7 +22,6 @@ Partial Class dlgReorderSheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReorderSheet))
         Me.lblSheetsToReoder = New System.Windows.Forms.Label()
         Me.ucrSheetsToReorder = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
@@ -30,25 +29,33 @@ Partial Class dlgReorderSheet
         '
         'lblSheetsToReoder
         '
-        resources.ApplyResources(Me.lblSheetsToReoder, "lblSheetsToReoder")
+        Me.lblSheetsToReoder.Location = New System.Drawing.Point(12, 21)
         Me.lblSheetsToReoder.Name = "lblSheetsToReoder"
+        Me.lblSheetsToReoder.Size = New System.Drawing.Size(100, 23)
+        Me.lblSheetsToReoder.TabIndex = 0
+        Me.lblSheetsToReoder.Text = "Sheets to Reoder"
         '
         'ucrSheetsToReorder
         '
-        resources.ApplyResources(Me.ucrSheetsToReorder, "ucrSheetsToReorder")
+        Me.ucrSheetsToReorder.Location = New System.Drawing.Point(15, 47)
         Me.ucrSheetsToReorder.Name = "ucrSheetsToReorder"
+        Me.ucrSheetsToReorder.Size = New System.Drawing.Size(154, 139)
+        Me.ucrSheetsToReorder.TabIndex = 1
         Me.ucrSheetsToReorder.ucrDataFrameList = Nothing
         Me.ucrSheetsToReorder.ucrReceiver = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Location = New System.Drawing.Point(12, 206)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 2
         '
         'dlgReorderSheet
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(419, 261)
         Me.Controls.Add(Me.lblSheetsToReoder)
         Me.Controls.Add(Me.ucrSheetsToReorder)
         Me.Controls.Add(Me.ucrBase)
@@ -56,8 +63,9 @@ Partial Class dlgReorderSheet
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgReorderSheet"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Reoder Sheets"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
