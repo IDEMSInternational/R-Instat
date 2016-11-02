@@ -706,6 +706,17 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
+  ind <- c()
+  for(i in seq_along(private$.links)) {
+    if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
+      ind <- c(ind, i)
+    }
+  }
+  #TODO Should this be delete or disable?
+  if(length(ind) > 0) {
+    private$.links[ind] <- NULL
+    message(length(ind), " links removed")
+  }
 } 
 )
 
