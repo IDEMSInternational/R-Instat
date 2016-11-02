@@ -29,6 +29,7 @@ Public Class ucrDataFrame
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillComboBox()
         If bFirstLoad Then
+            InitialiseControl()
             bFirstLoad = False
         End If
         SetDataFrameProperties()
