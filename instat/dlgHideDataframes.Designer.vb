@@ -22,33 +22,40 @@ Partial Class dlgHideDataframes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHideDataframes))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataframeHide = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Location = New System.Drawing.Point(12, 197)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 1
         '
         'ucrDataframeHide
         '
         Me.ucrDataframeHide.bUseCurrentFilter = False
-        resources.ApplyResources(Me.ucrDataframeHide, "ucrDataframeHide")
+        Me.ucrDataframeHide.Location = New System.Drawing.Point(9, 9)
+        Me.ucrDataframeHide.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataframeHide.Name = "ucrDataframeHide"
+        Me.ucrDataframeHide.Size = New System.Drawing.Size(120, 50)
+        Me.ucrDataframeHide.TabIndex = 0
         '
         'dlgHideDataframes
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(422, 261)
         Me.Controls.Add(Me.ucrDataframeHide)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgHideDataframes"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Hide_Dataframes"
+        Me.Text = "Hide Dataframes"
         Me.ResumeLayout(False)
 
     End Sub

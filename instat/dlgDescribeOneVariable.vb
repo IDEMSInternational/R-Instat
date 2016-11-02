@@ -126,4 +126,19 @@ Public Class dlgDescribeOneVariable
         End If
         clsRCustomFunction.AddParameter("drop", "TRUE")
     End Sub
+
+    Private Sub chkExcludeMissing_CheckedChanged(sender As Object, e As EventArgs) Handles chkOmitMissing.CheckedChanged
+        If chkOmitMissing.Checked Then
+            clsRCustomFunction.AddParameter("na.rm", "TRUE")
+            clsRBaseFunction.AddParameter("na.rm", "TRUE")
+        Else
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                clsRCustomFunction.AddParameter("na.rm", "FALSE")
+                clsRBaseFunction.AddParameter("na.rm", "FALSE")
+            Else
+                clsRCustomFunction.RemoveParameterByName("na.rm")
+                clsRBaseFunction.RemoveParameterByName("na.rm")
+            End If
+        End If
+    End Sub
 End Class

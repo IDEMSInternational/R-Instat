@@ -141,7 +141,9 @@ Partial Class dlgSplitText
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSplitText"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Split_Text_Column"
+        Me.Text = "Split Text Column"
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
