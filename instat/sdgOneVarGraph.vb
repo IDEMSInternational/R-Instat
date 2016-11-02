@@ -40,8 +40,6 @@ Public Class sdgOneVarGraph
         ucrInputCategorical.Reset()
         ucrInputNumeric.SetName("Boxplot")
         ucrInputCategorical.SetName("Bar Chart")
-
-
     End Sub
 
     Public Sub InitialiseDialog()
@@ -67,6 +65,7 @@ Public Class sdgOneVarGraph
     End Sub
 
     Public Sub SetNumericGeomFunction()
+        clsRsyntax.ClearParameters()
         Select Case ucrInputNumeric.GetText
             Case "Boxplot"
                 strNumericGeomFunction = "geom_boxplot"
@@ -96,6 +95,7 @@ Public Class sdgOneVarGraph
     End Sub
 
     Public Sub SetCategoricalGeomFunction()
+        clsRsyntax.ClearParameters()
         Select Case ucrInputCategorical.GetText
             Case "Bar Chart"
                 strCategoriacalGeomFunction = "geom_bar"
@@ -106,10 +106,8 @@ Public Class sdgOneVarGraph
             Case Else
                 strCategoriacalGeomFunction = "geom_bar"
                 clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
-                clsPieChartFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
-                clsRsyntax.AddOperatorParameter("coorp_polar", clsRFunc:=clsPieChartFunction)
+                clsRsyntax.AddParameter("polar", "TRUE")
         End Select
-
     End Sub
     Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
         SetCategoricalGeomFunction()
