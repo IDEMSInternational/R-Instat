@@ -22,7 +22,6 @@ Partial Class dlgRenameMetadata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRenameMetadata))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForDeleTeMetadata = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSelectedMetadata = New instat.ucrReceiverSingle()
@@ -33,42 +32,59 @@ Partial Class dlgRenameMetadata
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Location = New System.Drawing.Point(3, 208)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 5
         '
         'ucrSelectorForDeleTeMetadata
         '
         Me.ucrSelectorForDeleTeMetadata.bShowHiddenColumns = False
         Me.ucrSelectorForDeleTeMetadata.bUseCurrentFilter = False
-        resources.ApplyResources(Me.ucrSelectorForDeleTeMetadata, "ucrSelectorForDeleTeMetadata")
+        Me.ucrSelectorForDeleTeMetadata.Location = New System.Drawing.Point(3, 9)
+        Me.ucrSelectorForDeleTeMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleTeMetadata.Name = "ucrSelectorForDeleTeMetadata"
+        Me.ucrSelectorForDeleTeMetadata.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForDeleTeMetadata.TabIndex = 4
         '
         'ucrReceiverSelectedMetadata
         '
-        resources.ApplyResources(Me.ucrReceiverSelectedMetadata, "ucrReceiverSelectedMetadata")
+        Me.ucrReceiverSelectedMetadata.Location = New System.Drawing.Point(219, 48)
+        Me.ucrReceiverSelectedMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedMetadata.Name = "ucrReceiverSelectedMetadata"
         Me.ucrReceiverSelectedMetadata.Selector = Nothing
+        Me.ucrReceiverSelectedMetadata.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSelectedMetadata.TabIndex = 3
         '
         'lblSelectedMetadata
         '
-        resources.ApplyResources(Me.lblSelectedMetadata, "lblSelectedMetadata")
+        Me.lblSelectedMetadata.Location = New System.Drawing.Point(216, 25)
         Me.lblSelectedMetadata.Name = "lblSelectedMetadata"
+        Me.lblSelectedMetadata.Size = New System.Drawing.Size(100, 23)
+        Me.lblSelectedMetadata.TabIndex = 2
+        Me.lblSelectedMetadata.Text = "Selected Metadata"
         '
         'lblNewMetadataName
         '
-        resources.ApplyResources(Me.lblNewMetadataName, "lblNewMetadataName")
+        Me.lblNewMetadataName.Location = New System.Drawing.Point(216, 90)
         Me.lblNewMetadataName.Name = "lblNewMetadataName"
+        Me.lblNewMetadataName.Size = New System.Drawing.Size(137, 23)
+        Me.lblNewMetadataName.TabIndex = 1
+        Me.lblNewMetadataName.Text = "New Metadata Name"
         '
         'ucrInputNewMetadataName
         '
         Me.ucrInputNewMetadataName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNewMetadataName, "ucrInputNewMetadataName")
+        Me.ucrInputNewMetadataName.Location = New System.Drawing.Point(219, 116)
         Me.ucrInputNewMetadataName.Name = "ucrInputNewMetadataName"
+        Me.ucrInputNewMetadataName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNewMetadataName.TabIndex = 0
         '
         'dlgRenameMetadata
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(432, 272)
         Me.Controls.Add(Me.ucrInputNewMetadataName)
         Me.Controls.Add(Me.lblNewMetadataName)
         Me.Controls.Add(Me.lblSelectedMetadata)
@@ -79,8 +95,9 @@ Partial Class dlgRenameMetadata
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRenameMetadata"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Rename Metadata"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
