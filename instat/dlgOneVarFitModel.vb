@@ -113,9 +113,15 @@ Public Class dlgOneVarFitModel
                 UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
             Else
                 'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
-                clsRConvert.SetRCommand("as.vector")
-                clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
+                If UcrDistributions.clsCurrDistribution.strNameTag = "Poisson" OrElse UcrDistributions.clsCurrDistribution.strNameTag = "Geometric" OrElse UcrDistributions.clsCurrDistribution.strNameTag = "Negative_Binomial" Then
+                    clsRConvert.SetRCommand("as.integer")
+                    clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+                    UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
+                Else
+                    clsRConvert.SetRCommand("as.vector")
+                    clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+                    UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
+                End If
             End If
         Else
             chkConvertToVariate.Visible = False
@@ -312,6 +318,7 @@ Public Class dlgOneVarFitModel
     Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles UcrDistributions.cboDistributionsIndexChanged
         SetBaseFunction()
         BinomialConditions()
+        SetDataParameter()
     End Sub
 
     Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblMean.VisibleChanged, lblRate.VisibleChanged, lblprobability.VisibleChanged, lblConfidenceLimit.VisibleChanged, lblSuccessIf.VisibleChanged
