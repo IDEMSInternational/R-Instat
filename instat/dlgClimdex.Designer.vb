@@ -25,7 +25,7 @@ Partial Class dlgClimdex
         Me.lblTmax = New System.Windows.Forms.Label()
         Me.lblTmin = New System.Windows.Forms.Label()
         Me.lblPrec = New System.Windows.Forms.Label()
-        Me.cmdClimdexOptions = New System.Windows.Forms.Button()
+        Me.cmdIndices = New System.Windows.Forms.Button()
         Me.lblBaseRangeFrom = New System.Windows.Forms.Label()
         Me.nudYearFrom = New System.Windows.Forms.NumericUpDown()
         Me.nudYearTo = New System.Windows.Forms.NumericUpDown()
@@ -44,6 +44,7 @@ Partial Class dlgClimdex
         Me.lblTempQuantiles = New System.Windows.Forms.Label()
         Me.lblPrecQuantiles = New System.Windows.Forms.Label()
         Me.lblFreq = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrInputFreq = New instat.ucrInputComboBox()
         Me.ucrMultipleInputTempQtiles = New instat.ucrMultipleInput()
         Me.ucrMultipleInputPrecQtiles = New instat.ucrMultipleInput()
@@ -92,15 +93,15 @@ Partial Class dlgClimdex
         Me.lblPrec.Tag = "Prec"
         Me.lblPrec.Text = "Prec"
         '
-        'cmdClimdexOptions
+        'cmdIndices
         '
-        Me.cmdClimdexOptions.Location = New System.Drawing.Point(293, 321)
-        Me.cmdClimdexOptions.Name = "cmdClimdexOptions"
-        Me.cmdClimdexOptions.Size = New System.Drawing.Size(111, 23)
-        Me.cmdClimdexOptions.TabIndex = 20
-        Me.cmdClimdexOptions.Tag = "Climdex_Options..."
-        Me.cmdClimdexOptions.Text = "Climdex Options..."
-        Me.cmdClimdexOptions.UseVisualStyleBackColor = True
+        Me.cmdIndices.Location = New System.Drawing.Point(316, 321)
+        Me.cmdIndices.Name = "cmdIndices"
+        Me.cmdIndices.Size = New System.Drawing.Size(62, 23)
+        Me.cmdIndices.TabIndex = 20
+        Me.cmdIndices.Tag = "Indices..."
+        Me.cmdIndices.Text = "Indices..."
+        Me.cmdIndices.UseVisualStyleBackColor = True
         '
         'lblBaseRangeFrom
         '
@@ -291,6 +292,16 @@ Partial Class dlgClimdex
         Me.lblFreq.Tag = "Frequency"
         Me.lblFreq.Text = "Frequency"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.Label1.Location = New System.Drawing.Point(196, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(78, 39)
+        Me.Label1.TabIndex = 22
+        Me.Label1.Text = "OK disabled " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "until climate " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "object is ready!"
+        '
         'ucrInputFreq
         '
         Me.ucrInputFreq.IsReadOnly = False
@@ -362,6 +373,7 @@ Partial Class dlgClimdex
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(424, 402)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrInputFreq)
         Me.Controls.Add(Me.lblFreq)
         Me.Controls.Add(Me.ucrMultipleInputTempQtiles)
@@ -375,7 +387,7 @@ Partial Class dlgClimdex
         Me.Controls.Add(Me.chkNHemisphere)
         Me.Controls.Add(Me.lblN)
         Me.Controls.Add(Me.nudN)
-        Me.Controls.Add(Me.cmdClimdexOptions)
+        Me.Controls.Add(Me.cmdIndices)
         Me.Controls.Add(Me.lblPrec)
         Me.Controls.Add(Me.lblTmin)
         Me.Controls.Add(Me.lblTmax)
@@ -389,8 +401,8 @@ Partial Class dlgClimdex
         Me.MinimizeBox = False
         Me.Name = "dlgClimdex"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Tag = "Climdex"
-        Me.Text = "Climdex"
+        Me.Tag = "Climdex Indices"
+        Me.Text = "Climdex Indices"
         CType(Me.nudYearFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudYearTo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).EndInit()
@@ -415,7 +427,7 @@ Partial Class dlgClimdex
     Friend WithEvents lblTmax As Label
     Friend WithEvents lblTmin As Label
     Friend WithEvents lblPrec As Label
-    Friend WithEvents cmdClimdexOptions As Button
+    Friend WithEvents cmdIndices As Button
     Friend WithEvents lblBaseRangeFrom As Label
     Friend WithEvents nudYearFrom As NumericUpDown
     Friend WithEvents nudYearTo As NumericUpDown
@@ -437,4 +449,5 @@ Partial Class dlgClimdex
     Friend WithEvents ucrMultipleInputTempQtiles As ucrMultipleInput
     Friend WithEvents lblFreq As Label
     Friend WithEvents ucrInputFreq As ucrInputComboBox
+    Friend WithEvents Label1 As Label
 End Class
