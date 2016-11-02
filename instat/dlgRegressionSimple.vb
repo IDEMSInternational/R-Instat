@@ -216,7 +216,7 @@ Public Class dlgRegressionSimple
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 SetPoissonTest()
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
-            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Then
+            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 SetBinomTest()
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
             End If
@@ -284,7 +284,7 @@ Public Class dlgRegressionSimple
         '        If rdoGeneral.Checked Then
         '        ucrFamily.SetGLMDistributions()
         '        Else
-        '        only normal, poisson and binomial
+        '        only normal, poisson and bernouli
         '       End If
     End Sub
 
@@ -442,7 +442,7 @@ Public Class dlgRegressionSimple
                 nudHypothesis.Minimum = 0
                 nudHypothesis.Value = 1
                 nudHyp2.Visible = False
-            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Then
+            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 lblMean.Visible = False
                 lblProbability.Visible = True
                 lblProbability2.Visible = True
