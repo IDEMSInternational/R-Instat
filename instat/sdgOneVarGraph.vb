@@ -65,7 +65,6 @@ Public Class sdgOneVarGraph
     End Sub
 
     Public Sub SetNumericGeomFunction()
-        clsRsyntax.ClearParameters()
         Select Case ucrInputNumeric.GetText
             Case "Boxplot"
                 strNumericGeomFunction = "geom_boxplot"
@@ -95,14 +94,15 @@ Public Class sdgOneVarGraph
     End Sub
 
     Public Sub SetCategoricalGeomFunction()
-        clsRsyntax.ClearParameters()
         Select Case ucrInputCategorical.GetText
             Case "Bar Chart"
                 strCategoriacalGeomFunction = "geom_bar"
                 clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
+                clsRsyntax.RemoveParameter("polar")
             Case "Dot Plot"
                 strCategoriacalGeomFunction = "geom_dotplot"
                 clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
+                clsRsyntax.RemoveParameter("polar")
             Case Else
                 strCategoriacalGeomFunction = "geom_bar"
                 clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
