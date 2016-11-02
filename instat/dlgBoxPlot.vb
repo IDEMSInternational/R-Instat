@@ -145,6 +145,7 @@ Public Class dlgBoxplot
         Else chkVarwidth.Checked = False
         End If
 
+        'The aesthetics parameters on the main dialog are repopulated as required. 
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
                 If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
@@ -152,12 +153,16 @@ Public Class dlgBoxplot
                 Else
                     ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
                 End If
-            ElseIf clsParam.strArgumentName = "y" Then
+                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBoxplot.bSingleVariable) Then
                 ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "fill" Then
                 ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
+        'Question to be discussed: After running through the sdgLayerOptions, the clsCurrDataFrame parameters seem to have been cleared, such that in the multiple variable case, clsCurrDataFrame needs to be repopulated with "stack", "measure.vars" and "id.vars" parameters. Actually, even when repopulated, they are still not appearing in the script. ??
+        ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
