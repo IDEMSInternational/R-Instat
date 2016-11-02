@@ -207,4 +207,16 @@ Public Class dlgDescribeTwoVariable
         End If
         clsRCustomSummary.AddParameter("drop", "TRUE")
     End Sub
+
+    Private Sub chkExcludeMissing_CheckedChanged(sender As Object, e As EventArgs) Handles chkOmitMissing.CheckedChanged
+        If chkOmitMissing.Checked Then
+            clsRCustomSummary.AddParameter("na.rm", "TRUE")
+        Else
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                clsRCustomSummary.AddParameter("na.rm", "FALSE")
+            Else
+                clsRCustomSummary.RemoveParameterByName("na.rm")
+            End If
+        End If
+    End Sub
 End Class
