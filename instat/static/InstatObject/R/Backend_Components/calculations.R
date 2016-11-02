@@ -343,56 +343,11 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       by = c()
       if(length(curr_data_list[[c_link_label]][["link_cols"]]) > 0) {
         by <- self$get_corresponding_link_columns(curr_data_list[[c_link_label]][["from_data_frame"]], curr_data_list[[c_link_label]][["link_cols"]], data_frame_name)
-        # Now done by method above
-        # if(self$link_exists_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)) {
-        #   existing_link <- self$get_link_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)
-        #   link_pairs <- unlist(existing_link$link_columns)
-        #   for(link_column in curr_data_list[[c_link_label]][["link_cols"]]) {
-        #     if(existing_link$from_data_frame == curr_data_list[[c_link_label]][["from_data_frame"]]) {
-        #       if(link_column %in% link_pairs) {
-        #         by <- c(by, link_column = names(link_pairs)[which(link_pairs == link_column)][1])
-        #       }
-        #       else by <- c(by, link_column)
-        #     }
-        #     else {
-        #       if(link_column %in% names(link_pairs)) {
-        #         by <- c(by, link_column = link_pairs[which(names(link_pairs) == link_column)][1])
-        #       }
-        #       else by <- c(by, link_column)
-        #     }
-        #   }
-        # }
-        # # If no link then do by by columns in first data frame
-        # else {
-        #   by <- curr_data_list[[c_link_label]][["link_cols"]]
-        # }
       }
       # If not a summary then look for link
       else {
         by <- self$get_link_columns_from_data_frames(curr_data_list[[c_link_label]][["from_data_frame"]], names(curr_data_list[[c_data_label]]), data_frame_name, self$get_column_names(data_frame_name))
-        # This now done in the above method
-        # if(self$link_exists_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)) {
-        #   existing_link <- self$get_link_between(curr_data_list[[c_link_label]][["from_data_frame"]], data_frame_name)
-        #   found <- FALSE
-        #   for(curr_link_set in existing_link$link_columns) {
-        #     if(existing_link$from_data_frame == curr_data_list[[c_link_label]][["from_data_frame"]]) {
-        #       if(curr_link_set %in% names(curr_data_list[[c_data_label]])) {
-        #         by <- curr_link_set
-        #         break
-        #       }
-        #     }
-        #     else {
-        #       if(names(curr_link_set) %in% names(curr_data_list[[c_data_label]])) {
-        #         by <- names(curr_link_set)
-        #         names(by) <- curr_link_set
-        #         break
-        #       }
-        #     }
-        #   }
-        #   
-        # }
       }
-      #curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
       curr_data_list[[c_data_label]] <- suppressMessages(full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by))
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
