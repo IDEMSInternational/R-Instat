@@ -1506,7 +1506,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
+data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, polar = FALSE,...) {
   if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
   if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
   numeric_geom <- match.fun(numeric)
@@ -1535,7 +1535,7 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     else stop("Cannot plot columns of type:", column_types[i])
     
     curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars=columns)
-    if(curr_geom_name == "geom_boxplot") {
+    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point") {
       g <- ggplot(data = curr_data, mapping = aes(x = "", y=value))
     }
     else {
@@ -1543,6 +1543,9 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     }
     if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
     else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
+    
+    if(polar) g <- g + coord_polar(theta = "x")
+    return(g)
   }
   else {
     column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
@@ -1563,13 +1566,15 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
       }
       else stop("Cannot plot columns of type:", column_types[i])
       
-      if(curr_geom_name == "geom_boxplot") {
+    
+      if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point") {
         g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column)))
       }
       else {
         g <- ggplot(data = curr_data, mapping = aes_(x = as.name(column)))
       }
       current_graph <- g + curr_geom()
+      if(polar && column_types[i] == "cat") current_graph <- current_graph + coord_polar(theta = "x")
       graphs[[i]] <- current_graph
       i = i + 1
     }
