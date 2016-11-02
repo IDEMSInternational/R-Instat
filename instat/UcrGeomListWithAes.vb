@@ -20,7 +20,9 @@ Imports instat
 Public Class UcrGeomListWithParameters
     Public lstAesParameterLabels As New List(Of Label)
     Public lstAesParameterUcr As New List(Of ucrReceiverSingle)
+    'The two previous fields are the lists of parameter labels and receivers on the ucr.
     Public lstCurrArguments As New List(Of String)
+    'lstCurrArguments is the list of aes parameters names of the current geom (ucrGeom.clsCurrGeom), i.e. the list of parameter names of clsGeomAesFunction.
     Public bFirstLoad As Boolean = True
     Public ucrLayersControl As ucrLayerParameters
     Public bCheckEnabled As Boolean = True
@@ -37,6 +39,10 @@ Public Class UcrGeomListWithParameters
 
         ' Add any initialization after the InitializeComponent() call.
         SetSelector()
+        'Get the lists of parameter labels and receivers.
+        lstAesParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7, lblGgParam8, lblGgParam9, lblGgParam10})
+        lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9, ucrReceiverParam10})
+        'Set the R command of the local Aes function.
         clsGeomAesFunction = New RFunction
         clsGeomAesFunction.SetRCommand("aes")
     End Sub
@@ -50,6 +56,7 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Sub SetSelector()
+        'Link the selector and the receivers
         ucrReceiverParam1.Selector = UcrSelector
         ucrReceiverParam2.Selector = UcrSelector
         ucrReceiverParam3.Selector = UcrSelector
@@ -60,7 +67,6 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam8.Selector = UcrSelector
         ucrReceiverParam9.Selector = UcrSelector
         ucrReceiverParam10.Selector = UcrSelector
-        ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
     Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
@@ -90,6 +96,7 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)
+        'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes and then in the local aes.
         Dim bFirstEnabled As Boolean = True
         Dim iFirstEnabled As Integer = 0
         bAddToLocalAes = False
@@ -97,8 +104,8 @@ Public Class UcrGeomListWithParameters
             lstAesParameterUcr(i).Enabled = True
             For Each clsParam In clsGgplotAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    'Should do this for any geom where x = "" ?
-                    If (clsCurrGeom.strGeomName = "geom_boxplot" OrElse clsCurrGeom.strGeomName = "geom_dotplot" OrElse clsCurrGeom.strGeomName = "geom_bar") AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    If clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        'For some geoms like BoxPlot, when the x aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
                         lstAesParameterUcr(i).Clear()
                         lstAesParameterUcr(i).Enabled = True
                     Else
@@ -110,7 +117,9 @@ Public Class UcrGeomListWithParameters
             Next
             For Each clsParam In clsGeomAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If clsCurrGeom.strGeomName = "geom_boxplot" AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    'Should do this for any geom with x="" ?
+                    If clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        'Similar check to the one just above.
                         lstAesParameterUcr(i).Clear()
                         lstAesParameterUcr(i).Enabled = True
                     Else
@@ -130,97 +139,36 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Public Sub SetParameters() 'this will set function or aes parameters
-        Dim i As Integer = 0
 
-        If lstAesParameterLabels.Count = 0 Then
-            lstAesParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7, lblGgParam8, lblGgParam9, lblGgParam10}) 'Adds range for the parameter labels
-        End If
+        Dim iMaxIndex As Integer = lstAesParameterLabels.Count
+        'iMaxIndex will be set as the minimum between the number of aes parameters in the current geom and the number of aesthetics recievers on the dialog.
+        Dim i As Integer = iMaxIndex
+        'i is just an index variable for the loops.
 
-        If lstAesParameterUcr.Count = 0 Then
-            'Adds range for the parameter receivers
-            lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9, ucrReceiverParam10})
-        End If
-
-        'Depending on the number of AesParameters in clsCurrGeom, the dialog shows the relevant number of receivers with their (not yet customized) labels.
-        'Task/Question: This could be done in a more economical way within a sub that takes as argument j=clsCurrGeom.clsAesParameters.count and goes through the lists lstAesParameterLabels and lstAesParameterUcr and sets the labels and ucr's to visible until index = j, and then hides the rest of the list. Maybe we could also check whether our list of labels and ucr's are long enough here and send a developper message explaining the situation in case not to avoid the bug we had.
-        'Task/Question: Could use something like Dim iMaxIndex As Integer = Math.Min((clsCurrGeom.clsAesParameters.Count - 1),(clsAesParameterLabels.Count - 1)), but then instead of using Math.Min we would use our own If Else... in order to identify if there is a scratch. This max index would then be used in population of labels as well.
-        'Warning: Moved the check clsCurrGeom IsNot Nothing to here as clsCurrGeom is used below.
+        'Security check: our current geom has been populated.
         If clsCurrGeom IsNot Nothing Then
-            If clsCurrGeom.clsAesParameters.Count < 10 Then
-                lblGgParam10.Visible = False
-                ucrReceiverParam10.Visible = False
-            Else
-                lblGgParam10.Visible = True
-                ucrReceiverParam10.Visible = True
-            End If
-
-            If clsCurrGeom.clsAesParameters.Count < 9 Then
-                lblGgParam9.Visible = False
-                ucrReceiverParam9.Visible = False
-            Else
-                lblGgParam9.Visible = True
-                ucrReceiverParam9.Visible = True
-            End If
-
-            If clsCurrGeom.clsAesParameters.Count < 8 Then
-                lblGgParam8.Visible = False
-                ucrReceiverParam8.Visible = False
-            Else
-                lblGgParam8.Visible = True
-                ucrReceiverParam8.Visible = True
-            End If
-
-            If clsCurrGeom.clsAesParameters.Count < 7 Then
-                lblGgParam7.Visible = False
-                ucrReceiverParam7.Visible = False
-            Else
-                lblGgParam7.Visible = True
-                ucrReceiverParam7.Visible = True
-            End If
-            If clsCurrGeom.clsAesParameters.Count < 6 Then
-                lblGgParam6.Visible = False
-                ucrReceiverParam6.Visible = False
-            Else
-                lblGgParam6.Visible = True
-                ucrReceiverParam6.Visible = True
-            End If
-            If clsCurrGeom.clsAesParameters.Count < 5 Then
-                lblGgParam5.Visible = False
-                ucrReceiverParam5.Visible = False
-            Else
-                lblGgParam5.Visible = True
-                ucrReceiverParam5.Visible = True
-            End If
-
-            If clsCurrGeom.clsAesParameters.Count < 4 Then
-                lblGgParam4.Visible = False
-                ucrReceiverParam4.Visible = False
-            Else
-                lblGgParam4.Visible = True
-                ucrReceiverParam4.Visible = True
-            End If
-
-            If clsCurrGeom.clsAesParameters.Count < 3 Then
-                lblGgParam3.Visible = False
-                ucrReceiverParam3.Visible = False
-            Else
-                lblGgParam3.Visible = True
-                ucrReceiverParam3.Visible = True
-            End If
-
-            If clsCurrGeom.clsAesParameters.Count < 2 Then 'this is available for some cases like piechart
-                lblGgParam2.Visible = False
-                ucrReceiverParam2.Visible = False
-            Else
-                lblGgParam2.Visible = True
-                ucrReceiverParam2.Visible = True
-            End If
-
-            'populating labels with appropriate names
+            'The following two will be reset as desired.
             clsGeomAesFunction.ClearParameters()
-
             lstCurrArguments.Clear()
-            For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
+
+            If (clsCurrGeom.clsAesParameters.Count < iMaxIndex) Then
+                'If the number of aes parameters in the current geom is smaller than the number of receivers, then we hide the exceeding receivers and labels.
+                iMaxIndex = clsCurrGeom.clsAesParameters.Count
+                For i = iMaxIndex To (lstAesParameterLabels.Count - 1)
+                    lstAesParameterLabels(i).Visible = False
+                    lstAesParameterUcr(i).Visible = False
+                Next
+            ElseIf (clsCurrGeom.clsAesParameters.Count > iMaxIndex) Then
+                'If the number of parameters in the current geom is greater than the number of receivers, then there is an error.
+                MsgBox("Developer Error, the number of aesthetics parameters of the current geom exceeds the number of aesthetic receivers in ucrGeomListWithAes, on the sdgLayerOptions. The exceding parameters will be ignored.", MsgBoxStyle.OkOnly)
+            End If
+
+            'In any case, we show all the receivers that have index lower than the iMaxIndex, and we populate the labels with the appropriate names.
+            i = 0
+            For i = 0 To (iMaxIndex - 1)
+                lstAesParameterLabels(i).Visible = True
+                lstAesParameterUcr(i).Visible = True
+
                 lstAesParameterLabels(i).Text = clsCurrGeom.clsAesParameters(i).strAesParameterName
                 lstCurrArguments.Add(clsCurrGeom.clsAesParameters(i).strAesParameterName)
                 lstAesParameterUcr(i).Clear()
@@ -235,7 +183,8 @@ Public Class UcrGeomListWithParameters
                     lstAesParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsAesParameters(i).strExcludedDataTypes)
                 End If
             Next
-        Else 'Question: Maybe add a developer error message when clsCurrGeom Is Nothing ? Should that not never be the case here ?
+        Else 'If the current geom has not been populated, then an error has been made in the code
+            MsgBox("Developer Error: the current geom (clsCurrGeom) has not been populated before setting the aes parameters for the ucrGeomListWithAes on the sdgLayerOptions.", MsgBoxStyle.OkOnly)
         End If
         SetAes(bCurrentFixAes)
     End Sub
