@@ -19,7 +19,7 @@ Public Class sdgOneVarGraph
     Public clsRsyntax As New RSyntax
     Public strNumericGeomFunction As String
     Public strCategoriacalGeomFunction As String
-    Public clsPieChartFunction As New RFunction
+    Public clsCoordPolarFunction As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -43,7 +43,7 @@ Public Class sdgOneVarGraph
     End Sub
 
     Public Sub InitialiseDialog()
-        clsPieChartFunction.SetRCommand("coord_polar")
+        clsCoordPolarFunction.SetRCommand("coord_polar")
         ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
         ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         nudNumberofColumns.Maximum = 10
@@ -81,9 +81,11 @@ Public Class sdgOneVarGraph
             Case "Density Plot"
                 strNumericGeomFunction = "geom_density"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
-            Case Else
+            Case "Frequency Polygon"
                 strNumericGeomFunction = "geom_freqpoly"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+            Case Else
+                clsRsyntax.RemoveParameter("numeric")
         End Select
     End Sub
 
@@ -103,10 +105,13 @@ Public Class sdgOneVarGraph
                 strCategoriacalGeomFunction = "geom_dotplot"
                 clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
                 clsRsyntax.RemoveParameter("polar")
-            Case Else
+            Case "Pie Chart"
                 strCategoriacalGeomFunction = "geom_bar"
                 clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
                 clsRsyntax.AddParameter("polar", "TRUE")
+            Case Else
+                clsRsyntax.RemoveParameter("categorical")
+                clsRsyntax.RemoveParameter("polar")
         End Select
     End Sub
     Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
