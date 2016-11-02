@@ -76,8 +76,9 @@ Partial Class dlgDeleteDescriptive
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteDescriptive"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Delete_Object"
-        Me.Text = "Delete"
+        Me.Text = "Delete Object"
         Me.ResumeLayout(False)
 
     End Sub
