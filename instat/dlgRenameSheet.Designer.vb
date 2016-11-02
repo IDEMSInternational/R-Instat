@@ -74,6 +74,8 @@ Partial Class dlgRenameSheet
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRenameSheet"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Rename Sheet"
         Me.ResumeLayout(False)
 
     End Sub

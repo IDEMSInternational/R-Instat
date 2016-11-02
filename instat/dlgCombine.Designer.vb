@@ -109,7 +109,9 @@ Partial Class dlgCombine
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCombine"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Combine_Factors"
+        Me.Text = "Combine Factors"
         Me.ResumeLayout(False)
 
     End Sub
