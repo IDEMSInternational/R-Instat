@@ -19,6 +19,7 @@ Public Class sdgOneVarGraph
     Public clsRsyntax As New RSyntax
     Public strNumericGeomFunction As String
     Public strCategoriacalGeomFunction As String
+    Public clsCoordPolarFunction As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -39,11 +40,10 @@ Public Class sdgOneVarGraph
         ucrInputCategorical.Reset()
         ucrInputNumeric.SetName("Boxplot")
         ucrInputCategorical.SetName("Bar Chart")
-
-
     End Sub
 
     Public Sub InitialiseDialog()
+        clsCoordPolarFunction.SetRCommand("coord_polar")
         ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
         ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         nudNumberofColumns.Maximum = 10
@@ -68,34 +68,51 @@ Public Class sdgOneVarGraph
         Select Case ucrInputNumeric.GetText
             Case "Boxplot"
                 strNumericGeomFunction = "geom_boxplot"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case "Histogram"
                 strNumericGeomFunction = "geom_histogram"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case "Dot Plot"
                 strNumericGeomFunction = "geom_dotplot"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case "Point Plot"
                 strNumericGeomFunction = "geom_point"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case "Density Plot"
                 strNumericGeomFunction = "geom_density"
-            Case Else
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+            Case "Frequency Polygon"
                 strNumericGeomFunction = "geom_freqpoly"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+            Case Else
+                clsRsyntax.RemoveParameter("numeric")
         End Select
     End Sub
 
     Private Sub ucrInputNumeric_NameChanged() Handles ucrInputNumeric.NameChanged
         SetNumericGeomFunction()
         dlgOneVariableGraph.OneOrMoreVariables()
+
     End Sub
 
     Public Sub SetCategoricalGeomFunction()
         Select Case ucrInputCategorical.GetText
             Case "Bar Chart"
                 strCategoriacalGeomFunction = "geom_bar"
+                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
+                clsRsyntax.RemoveParameter("polar")
             Case "Dot Plot"
                 strCategoriacalGeomFunction = "geom_dotplot"
-            Case Else
+                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
+                clsRsyntax.RemoveParameter("polar")
+            Case "Pie Chart"
                 strCategoriacalGeomFunction = "geom_bar"
+                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
+                clsRsyntax.AddParameter("polar", "TRUE")
+            Case Else
+                clsRsyntax.RemoveParameter("categorical")
+                clsRsyntax.RemoveParameter("polar")
         End Select
-
     End Sub
     Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
         SetCategoricalGeomFunction()
