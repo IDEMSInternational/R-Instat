@@ -29,14 +29,15 @@ Partial Class dlgDescribeOneVariable
         Me.ucrReceiverDescribeOneVar = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeOneVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.chkCustomise = New System.Windows.Forms.CheckBox()
+        Me.chkOmitMissing = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(306, 191)
+        Me.cmdSummaries.Location = New System.Drawing.Point(306, 194)
         Me.cmdSummaries.Name = "cmdSummaries"
         Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSummaries.TabIndex = 7
+        Me.cmdSummaries.TabIndex = 6
         Me.cmdSummaries.Tag = "Summaries"
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
@@ -46,7 +47,7 @@ Partial Class dlgDescribeOneVariable
         Me.lblSelectedVariable.Location = New System.Drawing.Point(281, 14)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(124, 23)
-        Me.lblSelectedVariable.TabIndex = 6
+        Me.lblSelectedVariable.TabIndex = 1
         Me.lblSelectedVariable.Tag = "Selected_Variable"
         Me.lblSelectedVariable.Text = "Selected Variable(s)"
         '
@@ -55,14 +56,14 @@ Partial Class dlgDescribeOneVariable
         Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(10, 222)
         Me.ucrBaseDescribeOneVar.Name = "ucrBaseDescribeOneVar"
         Me.ucrBaseDescribeOneVar.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseDescribeOneVar.TabIndex = 5
+        Me.ucrBaseDescribeOneVar.TabIndex = 7
         '
         'chkSaveResult
         '
-        Me.chkSaveResult.Location = New System.Drawing.Point(10, 191)
+        Me.chkSaveResult.Location = New System.Drawing.Point(10, 193)
         Me.chkSaveResult.Name = "chkSaveResult"
         Me.chkSaveResult.Size = New System.Drawing.Size(104, 24)
-        Me.chkSaveResult.TabIndex = 0
+        Me.chkSaveResult.TabIndex = 4
         Me.chkSaveResult.Tag = "Save_Result"
         Me.chkSaveResult.Text = "Save Result"
         Me.chkSaveResult.UseVisualStyleBackColor = True
@@ -74,7 +75,7 @@ Partial Class dlgDescribeOneVariable
         Me.ucrReceiverDescribeOneVar.Name = "ucrReceiverDescribeOneVar"
         Me.ucrReceiverDescribeOneVar.Selector = Nothing
         Me.ucrReceiverDescribeOneVar.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverDescribeOneVar.TabIndex = 3
+        Me.ucrReceiverDescribeOneVar.TabIndex = 2
         '
         'ucrSelectorDescribeOneVar
         '
@@ -84,23 +85,33 @@ Partial Class dlgDescribeOneVariable
         Me.ucrSelectorDescribeOneVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDescribeOneVar.Name = "ucrSelectorDescribeOneVar"
         Me.ucrSelectorDescribeOneVar.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDescribeOneVar.TabIndex = 2
+        Me.ucrSelectorDescribeOneVar.TabIndex = 0
         '
         'chkCustomise
         '
-        Me.chkCustomise.Location = New System.Drawing.Point(291, 161)
+        Me.chkCustomise.Location = New System.Drawing.Point(306, 161)
         Me.chkCustomise.Name = "chkCustomise"
-        Me.chkCustomise.Size = New System.Drawing.Size(104, 24)
-        Me.chkCustomise.TabIndex = 1
+        Me.chkCustomise.Size = New System.Drawing.Size(75, 24)
+        Me.chkCustomise.TabIndex = 3
         Me.chkCustomise.Tag = "Customise"
         Me.chkCustomise.Text = "Customise"
         Me.chkCustomise.UseVisualStyleBackColor = True
+        '
+        'chkOmitMissing
+        '
+        Me.chkOmitMissing.Location = New System.Drawing.Point(134, 193)
+        Me.chkOmitMissing.Name = "chkOmitMissing"
+        Me.chkOmitMissing.Size = New System.Drawing.Size(126, 25)
+        Me.chkOmitMissing.TabIndex = 5
+        Me.chkOmitMissing.Text = "Omit Missing Values"
+        Me.chkOmitMissing.UseVisualStyleBackColor = True
         '
         'dlgDescribeOneVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 281)
+        Me.Controls.Add(Me.chkOmitMissing)
         Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.chkCustomise)
         Me.Controls.Add(Me.ucrSelectorDescribeOneVar)
@@ -126,4 +137,5 @@ Partial Class dlgDescribeOneVariable
     Friend WithEvents ucrReceiverDescribeOneVar As ucrReceiverMultiple
     Friend WithEvents ucrSelectorDescribeOneVar As ucrSelectorByDataFrameAddRemove
     Friend WithEvents chkCustomise As CheckBox
+    Friend WithEvents chkOmitMissing As CheckBox
 End Class

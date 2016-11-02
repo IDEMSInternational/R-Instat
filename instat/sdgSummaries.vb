@@ -37,6 +37,7 @@ Public Class sdgSummaries
         chkStdDev.Tag = "summary_sd"
         chkRange.Tag = "summary_range"
         chkSum.Tag = "summary_sum"
+        'To add quartiles, variance etc
         chkMean.Checked = False
         chkStdDev.Checked = False
         chkMode.Checked = False
@@ -57,7 +58,7 @@ Public Class sdgSummaries
         Dim strSummariesParameter As String = ""
         Dim i As Integer = 0
         If lstCheckboxes.Count = 0 Then
-            lstCheckboxes.AddRange({chkMean, chkMode, chkMinimum, chkMaximum, chkRange, chkStdDev, chkNTotal, chkMedian, chkQuartiles, chkNonMissing, chkNMissing, chkSum})
+            lstCheckboxes.AddRange({chkNTotal, chkNonMissing, chkNMissing, chkMean, chkMinimum, chkMode, chkMaximum, chkMedian, chkStdDev, chkRange, chkSum, chkQuartiles})
         End If
 
         strSummariesParameter = "c("
@@ -83,19 +84,7 @@ Public Class sdgSummaries
         clsRSummaries = clsRNewSummaries
     End Sub
 
-    Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkSum.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged
+    Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkSum.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged, chkMaximum.CheckedChanged, chkMinimum.CheckedChanged
         SummariesParameters()
-    End Sub
-
-    Private Sub grpCommon_Enter(sender As Object, e As EventArgs) Handles grpCommon.Enter
-
-    End Sub
-
-    Private Sub grpNotOrderedFactor_Enter(sender As Object, e As EventArgs) Handles grpNotOrderedFactor.Enter
-
-    End Sub
-
-    Private Sub grpNumeric_Enter(sender As Object, e As EventArgs) Handles grpNumeric.Enter
-
     End Sub
 End Class
