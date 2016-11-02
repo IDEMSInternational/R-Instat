@@ -208,6 +208,7 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub SetStackedFactorMode(bDisableReceiver As Boolean)
+        'This sub is called by ucrVariableAsFactors on dialogs such as BoxPLot, where the ReiceiverSingle, used as factor receiver for the x aesthetics, need to take as fixed value the variable "variable" created to distinguish the variables from the multiple receiver that will have been stacked into one variable called "value".
         If bDisableReceiver Then
             Add("variable", "")
             Me.Enabled = False
