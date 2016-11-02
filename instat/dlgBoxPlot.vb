@@ -140,9 +140,9 @@ Public Class dlgBoxplot
         If clsRgeom_boxplotFunction.GetParameter("varwidth") IsNot Nothing Then
             If clsRgeom_boxplotFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
                 chkVarwidth.Checked = True
-            Else chkVarwidth.Checked = False
                 'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
+        Else chkVarwidth.Checked = False
         End If
 
         For Each clsParam In clsRaesFunction.clsParameters
