@@ -32,7 +32,7 @@ Public Class dlgBoxplot
             ReopenDialog()
         End If
     End Sub
-    Public Sub SetOperator()
+    Public Sub SetCoordFlip()
         Dim clsTempRFunc As New RFunction
         If chkHorizontalBoxplot.Checked Then
             clsTempRFunc.SetRCommand("coord_flip")
@@ -49,6 +49,8 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.Focus()
         ucrVariablesAsFactorForBoxplot.ResetControl()
         chkHorizontalBoxplot.Checked = False
+        chkVarwidth.Checked = False
+        'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
         TestOkEnabled()
@@ -99,6 +101,7 @@ Public Class dlgBoxplot
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
+        'Task: work on the link.
     End Sub
 
     Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
@@ -130,11 +133,21 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
+        'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_boxplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
+        'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
+        If clsRgeom_boxplotFunction.GetParameter("varwidth") IsNot Nothing Then
+            If clsRgeom_boxplotFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
+                chkVarwidth.Checked = True
+            Else chkVarwidth.Checked = False
+                'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
+            End If
+        End If
+
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = "" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                     ucrByFactorsReceiver.Clear()
                 Else
                     ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
@@ -152,7 +165,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontalBoxplot.CheckedChanged
-        SetOperator()
+        SetCoordFlip()
     End Sub
 
     Private Sub UcrVariablesAsFactor1_SelectionChanged() Handles ucrVariablesAsFactorForBoxplot.SelectionChanged
@@ -175,5 +188,13 @@ Public Class dlgBoxplot
 
     Private Sub ucrSaveBoxplot_ContentsChanged() Handles ucrSaveBoxplot.ContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub chkVarwidth_CheckedChanged(sender As Object, e As EventArgs) Handles chkVarwidth.CheckedChanged
+        'If the Varwidth check box is ticked or unticked, the parameter "varwidth" is set to true or removed.
+        If chkVarwidth.Checked = True Then
+            clsRgeom_boxplotFunction.AddParameter("varwidth", "TRUE")
+        Else clsRgeom_boxplotFunction.RemoveParameterByName("varwidth")
+        End If
     End Sub
 End Class

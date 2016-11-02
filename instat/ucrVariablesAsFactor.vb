@@ -65,6 +65,7 @@
         Return strVariablesToStack
     End Function
 
+    'Warning: The two following subs seem obsolete.
     Public Function GetStackedVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strVariablesToStack As String = ""
         If Not bSingleVariable Then
