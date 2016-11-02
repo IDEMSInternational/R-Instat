@@ -1,3 +1,3 @@
-﻿Public Class DlgUseTime
+﻿Public Class DlgUseDate
 
 End Class

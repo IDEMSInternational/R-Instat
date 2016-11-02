@@ -2578,7 +2578,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnUseDate
         '
-        Me.mnuOrganiseColumnUseDate.Enabled = False
         Me.mnuOrganiseColumnUseDate.Name = "mnuOrganiseColumnUseDate"
         Me.mnuOrganiseColumnUseDate.Size = New System.Drawing.Size(162, 22)
         Me.mnuOrganiseColumnUseDate.Text = "Use Date..."
@@ -2774,28 +2773,28 @@ Partial Class frmMain
         'mnuOrganiseRObjectsView
         '
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
         'mnuOrganiseRObjectsRename
         '
         Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
-        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
         Me.mnuOrganiseRObjectsRename.Text = "Rename..."
         '
         'mnuOrganiseRObjectsReorder
         '
         Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
-        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
         Me.mnuOrganiseRObjectsReorder.Text = "Reorder..."
         '
         'mnuOrganiseRObjectsDelete
         '
         Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
-        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '

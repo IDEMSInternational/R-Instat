@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class DlgUseTime
+Partial Class DlgUseDate
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,16 +24,16 @@ Partial Class DlgUseTime
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'DlgUseTime
+        'DlgUseDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
-        Me.Name = "DlgUseTime"
+        Me.Name = "DlgUseDate"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Use time"
+        Me.Text = "Use date"
         Me.ResumeLayout(False)
 
     End Sub
