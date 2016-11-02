@@ -109,10 +109,10 @@ Public Class dlgDotPlot
     Private Sub cmdDotPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdDotPlotOptions.Click
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_dotplot, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
-
+        'Task: adapt for multivariable case...
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = "" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                     ucrFactorReceiver.Clear()
                 Else
                     ucrFactorReceiver.Add(clsParam.strArgumentValue)

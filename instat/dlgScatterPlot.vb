@@ -56,8 +56,8 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        'tests when okay Is enable
-        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForScatter.IsEmpty) OrElse (ucrSaveScatterPlot.chkSaveGraph.Checked AndAlso ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
+        'tests when okay Is enable. Both x and y aesthetics are mandatory.
+        If (ucrReceiverX.IsEmpty() OrElse ucrVariablesAsFactorForScatter.IsEmpty) OrElse (ucrSaveScatterPlot.chkSaveGraph.Checked AndAlso ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
