@@ -7,9 +7,9 @@ License: LGPL (>= 2)
 Package: agridat
 Version: 1.12
 Imports: graphics, grDevices, grid, lattice, reshape2, stats
-Suggests: AER, agricolae (>= 1.2), betareg, car, coin, corrgram, effects, equivalence, FrF2, gam,
-           gstat, HH, knitr, latticeExtra, lme4 (>= 1.1-5), lucid, mapproj, maps, MASS, MCMCglmm,
-           mgcv, nlme, ordinal, pls, pscl, qtl, sp, survival, vcd
+Suggests: AER, agricolae (>= 1.2), betareg, car, coin, corrgram, effects, equivalence, FrF2, gam, gstat,
+           HH, knitr, latticeExtra, lme4 (>= 1.1-5), lucid, mapproj, maps, MASS, MCMCglmm, mgcv, nlme,
+           ordinal, pls, pscl, qtl, sp, survival, vcd
 License: GPL-2
 
 Package: assertthat
@@ -47,10 +47,13 @@ Suggests: alr4, boot, coxme, leaps, lme4, lmtest, Matrix, MatrixModels, nlme, rg
            sandwich, SparseM, survival, survey
 License: GPL (>= 2)
 
-Package: CCA
-Version: 1.2
-Depends: fda, fields
-License: GPL (>= 2)
+Package: caTools
+Version: 1.17.1
+Depends: R (>= 2.2.0)
+Imports: bitops
+Suggests: MASS, rpart
+License: GPL-3
+Archs: i386, x64
 
 Package: cellranger
 Version: 1.1.0
@@ -69,7 +72,7 @@ License: GPL-2
 Archs: i386, x64
 
 Package: circlize
-Version: 0.3.8
+Version: 0.3.9
 Depends: R (>= 2.10.0), graphics
 Imports: GlobalOptions (>= 0.0.10), shape, grDevices, utils, stats, colorspace, methods, grid
 Suggests: knitr, dendextend (>= 1.0.1)
@@ -102,8 +105,16 @@ Imports: methods, lubridate, XML, selectr, RCurl, utils, ggplot2 (>= 2.0.0), sca
 Suggests: knitr, rmarkdown, ggmap (>= 2.6), pander
 License: GPL-2
 
+Package: climdex.pcic
+Version: 1.1-6
+Depends: R (>= 2.12.0), PCICt (>= 0.5-4)
+Imports: caTools (>= 1.0), methods, Rcpp (>= 0.11.4)
+Suggests: compiler, RUnit
+License: GPL-3
+Archs: i386, x64
+
 Package: cluster
-Version: 2.0.4
+Version: 2.0.5
 Priority: recommended
 Depends: R (>= 3.0.1)
 Imports: graphics, grDevices, stats, utils
@@ -112,10 +123,10 @@ License: GPL (>= 2)
 Archs: i386, x64
 
 Package: colorspace
-Version: 1.2-6
+Version: 1.2-7
 Depends: R (>= 2.13.0), methods
-Imports: graphics
-Suggests: KernSmooth, MASS, kernlab, mvtnorm, vcd, dichromat, tcltk
+Imports: graphics, grDevices
+Suggests: datasets, stats, utils, KernSmooth, MASS, kernlab, mvtnorm, vcd, dichromat, tcltk
 License: BSD_3_clause + file LICENSE
 Archs: i386, x64
 
@@ -126,7 +137,7 @@ Suggests: data.table, readr, testthat, datasets
 License: GPL-2
 
 Package: curl
-Version: 1.2
+Version: 2.2
 Depends: R (>= 3.0.0)
 Suggests: testthat (>= 1.0.0), knitr, jsonlite, rmarkdown, magrittr
 License: MIT + file LICENSE
@@ -143,8 +154,8 @@ Package: data.table
 Version: 1.9.6
 Depends: R (>= 2.14.1)
 Imports: methods, chron
-Suggests: ggplot2 (>= 0.9.0), plyr, reshape, reshape2, testthat (>= 0.4), hexbin, fastmatch, nlme,
-           xts, bit64, gdata, GenomicRanges, caret, knitr, curl, zoo, plm
+Suggests: ggplot2 (>= 0.9.0), plyr, reshape, reshape2, testthat (>= 0.4), hexbin, fastmatch, nlme, xts,
+           bit64, gdata, GenomicRanges, caret, knitr, curl, zoo, plm
 License: GPL (>= 2)
 Archs: i386, x64
 
@@ -175,9 +186,9 @@ Version: 1.12.0
 Depends: R (>= 3.0.2)
 Imports: httr (>= 0.4), utils, tools, methods, memoise (>= 1.0.0), whisker, digest, rstudioapi (>=
            0.2.0), jsonlite, stats, git2r (>= 0.11.0), withr
-Suggests: curl (>= 0.9), crayon, testthat (>= 0.7), BiocInstaller, Rcpp (>= 0.10.0), MASS,
-           rmarkdown, knitr, hunspell (>= 1.2), lintr (>= 0.2.1), bitops, roxygen2 (>= 5.0.0),
-           evaluate, rversions, covr, gmailr (> 0.7.0)
+Suggests: curl (>= 0.9), crayon, testthat (>= 0.7), BiocInstaller, Rcpp (>= 0.10.0), MASS, rmarkdown,
+           knitr, hunspell (>= 1.2), lintr (>= 0.2.1), bitops, roxygen2 (>= 5.0.0), evaluate,
+           rversions, covr, gmailr (> 0.7.0)
 License: GPL (>= 2)
 Archs: i386, x64
 
@@ -206,8 +217,7 @@ License: GPL (>= 2)
 Package: dplyr
 Version: 0.5.0
 Depends: R (>= 3.1.2)
-Imports: assertthat, utils, R6, Rcpp (>= 0.12.3), tibble, magrittr, lazyeval (>= 0.1.10), DBI (>=
-           0.4.1)
+Imports: assertthat, utils, R6, Rcpp (>= 0.12.3), tibble, magrittr, lazyeval (>= 0.1.10), DBI (>= 0.4.1)
 LinkingTo: Rcpp (>= 0.12.0), BH (>= 1.58.0-1)
 Suggests: RSQLite (>= 1.0.0), RMySQL, RPostgreSQL, testthat, knitr, microbenchmark, ggplot2, mgcv,
            Lahman (>= 3.0-1), nycflights13, methods, rmarkdown, covr, dtplyr
@@ -226,7 +236,7 @@ Suggests: MASS
 License: GPL (>= 2)
 
 Package: evaluate
-Version: 0.9
+Version: 0.10
 Depends: R (>= 3.0.2)
 Imports: methods, stringr (>= 0.6.2)
 Suggests: testthat, lattice, ggplot2
@@ -260,18 +270,6 @@ Imports:
 Suggests: missMDA
 License: GPL (>= 2)
 
-Package: fda
-Version: 2.4.4
-Depends: R (>= 2.10.0), splines, Matrix, graphics
-Suggests: deSolve, R.matlab, quadprog, nlme, lattice, RCurl, zoo
-License: GPL (>= 2)
-
-Package: fields
-Version: 8.4-1
-Depends: R (>= 3.0), methods, spam, maps
-License: GPL (>= 2)
-Archs: i386, x64
-
 Package: fitdistrplus
 Version: 1.0-7
 Depends: R (>= 3.2.0), MASS, grDevices, survival, methods
@@ -289,8 +287,8 @@ Package: flexmix
 Version: 2.3-13
 Depends: R (>= 2.15.0), lattice
 Imports: grid, methods, modeltools (>= 0.2-16), nnet, stats, stats4
-Suggests: codetools, diptest, ellipse, gclus, glmnet, lme4 (>= 1.0), MASS, mgcv (>= 1.8-0),
-           mlbench, mlogit, multcomp, mvtnorm, survival
+Suggests: codetools, diptest, ellipse, gclus, glmnet, lme4 (>= 1.0), MASS, mgcv (>= 1.8-0), mlbench,
+           mlogit, multcomp, mvtnorm, survival
 License: GPL (>= 2)
 
 Package: foreign
@@ -318,34 +316,39 @@ Package: GGally
 Version: 1.2.0
 Depends: R (>= 3.1)
 Imports: ggplot2 (>= 2.1.0), grid, gtable (>= 0.2.0), plyr (>= 1.8.3), reshape (>= 0.8.5)
-Suggests: broom (>= 0.4.0), geosphere (>= 1.5-1), igraph (>= 1.0.1), intergraph (>= 2.0-2), maps
-           (>= 3.1.0), mapproj, network (>= 1.12.0), RColorBrewer, scagnostics, scales (>= 0.4.0),
-           sna (>= 2.3-2), survival, knitr, rmarkdown, roxygen2, testthat
+Suggests: broom (>= 0.4.0), geosphere (>= 1.5-1), igraph (>= 1.0.1), intergraph (>= 2.0-2), maps (>=
+           3.1.0), mapproj, network (>= 1.12.0), RColorBrewer, scagnostics, scales (>= 0.4.0), sna (>=
+           2.3-2), survival, knitr, rmarkdown, roxygen2, testthat
 License: GPL (>= 2.0)
+
+Package: ggdendro
+Version: 0.1-20
+Imports: MASS, ggplot2(>= 0.9.2)
+Suggests: rpart(>= 4.0-0), tree, testthat, knitr, cluster, scales
+License: GPL-2 | GPL-3
 
 Package: ggfortify
 Version: 0.2.0
 Depends: methods, ggplot2 (>= 2.0.0)
 Imports: dplyr (>= 0.3), tidyr, gridExtra, scales
 Suggests: testthat, cluster, changepoint, dlm, fGarch, forecast, ggrepel, glmnet, grDevices, KFAS,
-           knitr, mapdata, MASS, MSwM, nlme, sp, stats, strucchange, survival, timeSeries,
-           tseries, utils, vars, xts, zoo, lfda
+           knitr, mapdata, MASS, MSwM, nlme, sp, stats, strucchange, survival, timeSeries, tseries,
+           utils, vars, xts, zoo, lfda
 License: GPL-2
 
 Package: ggplot2
 Version: 2.1.0
 Depends: R (>= 3.1)
-Imports: digest, grid, gtable (>= 0.1.1), MASS, plyr (>= 1.7.1), reshape2, scales (>= 0.3.0),
-           stats
-Suggests: covr, ggplot2movies, hexbin, Hmisc, lattice, mapproj, maps, maptools, mgcv, multcomp,
-           nlme, testthat (>= 0.11.0), quantreg, knitr, rpart, rmarkdown, svglite
+Imports: digest, grid, gtable (>= 0.1.1), MASS, plyr (>= 1.7.1), reshape2, scales (>= 0.3.0), stats
+Suggests: covr, ggplot2movies, hexbin, Hmisc, lattice, mapproj, maps, maptools, mgcv, multcomp, nlme,
+           testthat (>= 0.11.0), quantreg, knitr, rpart, rmarkdown, svglite
 Enhances: sp
 License: GPL-2
 
 Package: ggrepel
-Version: 0.5
+Version: 0.6.3
 Depends: R (>= 3.0.0), ggplot2 (>= 2.0.0)
-Imports: grid, Rcpp
+Imports: grid, Rcpp, scales (>= 0.3.0)
 LinkingTo: Rcpp
 Suggests: knitr, rmarkdown
 License: GPL-2
@@ -385,20 +388,20 @@ Suggests: testthat, covr
 License: GPL-2
 
 Package: haven
-Version: 0.2.1
+Version: 1.0.0
 Depends: R (>= 3.1.0)
-Imports: Rcpp (>= 0.11.4)
+Imports: Rcpp (>= 0.11.4), readr (>= 0.1.0), hms, tibble
 LinkingTo: Rcpp, BH
-Suggests: dplyr, testthat, knitr
+Suggests: testthat, knitr, rmarkdown, covr
 License: MIT + file LICENSE
 Archs: i386, x64
 
 Package: heplots
-Version: 1.3-1
+Version: 1.3-3
 Depends: R (>= 2.10), car
 Imports: MASS, graphics, grDevices, stats, utils
-Suggests: rgl, candisc, effects, reshape, gplots, nlme, lattice, reshape2, corrgram, FRB,
-           animation, mvinfluence
+Suggests: rgl, candisc, effects, reshape, gplots, nlme, lattice, reshape2, corrgram, FRB, animation,
+           mvinfluence
 License: GPL (>= 2)
 
 Package: hexbin
@@ -436,7 +439,7 @@ License: MIT + file LICENSE
 Archs: i386, x64
 
 Package: kernlab
-Version: 0.9-24
+Version: 0.9-25
 Depends: R (>= 2.10)
 Imports: methods, stats, grDevices, graphics
 License: GPL-2
@@ -447,8 +450,8 @@ Version: 1.14
 Depends: R (> 3.0.2)
 Imports: evaluate (>= 0.8), digest, formatR, highr, markdown, stringr (>= 0.6), yaml (>= 2.1.5),
            methods, tools
-Suggests: testit, rgl (>= 0.95.1201), codetools, rmarkdown, htmlwidgets, webshot, tikzDevice (>=
-           0.10), png, jpeg, XML, RCurl, DBI (>= 0.4-1), tibble
+Suggests: testit, rgl (>= 0.95.1201), codetools, rmarkdown, htmlwidgets, webshot, tikzDevice (>= 0.10),
+           png, jpeg, XML, RCurl, DBI (>= 0.4-1), tibble
 License: GPL
 
 Package: labeling
@@ -488,11 +491,11 @@ Archs: i386, x64
 Package: lme4
 Version: 1.1-12
 Depends: R (>= 3.0.2), Matrix (>= 1.1.1), methods, stats
-Imports: graphics, grid, splines, utils, parallel, MASS, lattice, nlme (>= 3.1-123), minqa (>=
-           1.1.15), nloptr (>= 1.0.4)
+Imports: graphics, grid, splines, utils, parallel, MASS, lattice, nlme (>= 3.1-123), minqa (>= 1.1.15),
+           nloptr (>= 1.0.4)
 LinkingTo: Rcpp (>= 0.10.5), RcppEigen
-Suggests: knitr, boot, PKPDmodels, MEMSS, testthat (>= 0.8.1), ggplot2, mlmRev, optimx (>=
-           2013.8.6), gamm4, pbkrtest, HSAUR2, numDeriv
+Suggests: knitr, boot, PKPDmodels, MEMSS, testthat (>= 0.8.1), ggplot2, mlmRev, optimx (>= 2013.8.6),
+           gamm4, pbkrtest, HSAUR2, numDeriv
 License: GPL (>= 2)
 Archs: i386, x64
 
@@ -610,6 +613,22 @@ Depends: stats, stats4
 Imports: methods
 License: GPL-2
 
+Package: mosaic
+Version: 0.14.4
+Depends: R (>= 3.0.0), dplyr, lattice (>= 0.20-21), ggplot2, mosaicData, Matrix
+Imports: lazyeval (>= 0.2.0), MASS, grid, tidyr, readr, methods, utils, splines, latticeExtra, ggdendro,
+           gridExtra
+Suggests: lubridate, fastR, magrittr, NHANES, RCurl, sp, maptools, vcd, testthat, knitr, tools,
+           parallel, mapproj, rgl, rmarkdown
+Enhances: manipulate
+License: GPL (>= 2)
+
+Package: mosaicData
+Version: 0.14.0
+Depends: R (>= 3.0.0)
+Suggests: lattice, mosaic, reshape2, ggplot2, dplyr
+License: GPL (>= 2)
+
 Package: munsell
 Version: 0.4.3
 Imports: colorspace, methods
@@ -647,19 +666,18 @@ License: GPL-2 | GPL-3
 Archs: i386, x64
 
 Package: openair
-Version: 1.8-6
-Depends: R (>= 2.15.1), maps,
+Version: 1.9-0
+Depends: R (>= 3.2.0), maps,
 Imports: grid, plyr, lazyeval, dplyr, reshape2, mgcv, lattice, latticeExtra, lubridate, cluster,
-           RColorBrewer, mapproj, hexbin, mapdata, RgoogleMaps, Rcpp, grDevices, graphics,
-           methods, stats, utils
+           RColorBrewer, mapproj, hexbin, mapdata, Rcpp, grDevices, graphics, methods, stats, utils
 LinkingTo: Rcpp
-Suggests: png, KernSmooth
+Suggests: KernSmooth
 License: GPL (>= 2)
 Archs: i386, x64
 
 Package: openssl
-Version: 0.9.4
-Suggests: testthat, digest, knitr, rmarkdown, jsonlite
+Version: 0.9.5
+Suggests: testthat, digest, knitr, rmarkdown, jsonlite, jose
 License: MIT + file LICENSE
 Archs: i386, x64
 
@@ -678,6 +696,13 @@ Imports: Matrix (>= 1.2.3), parallel, MASS, methods
 Suggests: gplots
 License: GPL (>= 2)
 
+Package: PCICt
+Version: 0.5-4
+Depends: R (>= 2.12.0), methods, graphics
+Suggests: RUnit
+License: GPL-2
+Archs: i386, x64
+
 Package: plotrix
 Version: 3.6-3
 Imports: grDevices, graphics, stats, utils
@@ -692,22 +717,11 @@ Suggests: abind, testthat, tcltk, foreach, doParallel, itertools, iterators, cov
 License: MIT + file LICENSE
 Archs: i386, x64
 
-Package: png
-Version: 0.1-7
-Depends: R (>= 2.9.0)
-License: GPL-2 | GPL-3
-Archs: i386, x64
-
 Package: prabclus
 Version: 2.2-6
 Depends: R (>= 2.10), MASS, mclust
 Suggests: spdep, maptools, foreign, mvtnorm
 License: GPL
-
-Package: proto
-Version: 0.3-10
-Suggests: graph, Rgraphviz
-License: GPL-2
 
 Package: quantreg
 Version: 5.29
@@ -731,7 +745,7 @@ Suggests: tools
 License: LGPL (>= 2.1)
 
 Package: R6
-Version: 2.1.3
+Version: 2.2.0
 Depends: R (>= 3.0)
 Suggests: knitr, microbenchmark, pryr, testthat, ggplot2, scales
 License: MIT + file LICENSE
@@ -794,31 +808,24 @@ Suggests: covr, testthat
 License: MIT + file LICENSE
 
 Package: reshape
-Version: 0.8.5
+Version: 0.8.6
 Depends: R (>= 2.6.1)
 Imports: plyr
 License: MIT + file LICENSE
 
 Package: reshape2
-Version: 1.4.1
+Version: 1.4.2
 Imports: plyr (>= 1.8.1), stringr, Rcpp
 LinkingTo: Rcpp
 Suggests: testthat (>= 0.8.0), lattice
 License: MIT + file LICENSE
 Archs: i386, x64
 
-Package: RgoogleMaps
-Version: 1.4.1
-Depends: R (>= 2.10)
-Imports: graphics, stats, utils, grDevices, methods, png
-Suggests: PBSmapping, maptools, sp, loa, RColorBrewer, leaflet
-License: GPL
-
 Package: rio
-Version: 0.4.12
+Version: 0.4.16
 Depends: R (>= 2.15.0)
-Imports: tools, stats, utils, urltools, foreign, haven, openxlsx, readODS, jsonlite, xml2, curl
-           (>= 0.6), data.table (>= 1.9.5), readxl, readr, yaml, csvy
+Imports: tools, stats, utils, urltools, foreign, haven (> 0.2.1), openxlsx, readODS, jsonlite, xml2 (>=
+           1.0.0), curl (>= 0.6), data.table (>= 1.9.5), readxl, readr, yaml, csvy
 Suggests: datasets, bit64, testthat, knitr, magrittr, feather
 License: GPL-2
 
@@ -826,8 +833,8 @@ Package: robustbase
 Version: 0.92-6
 Depends: R (>= 3.0.2)
 Imports: stats, graphics, utils, methods, DEoptimR
-Suggests: grid, MASS, lattice, boot, cluster, Matrix, robust, fit.models, MPV, xtable, ggplot2,
-           GGally, RColorBrewer, reshape2, sfsmisc, catdata
+Suggests: grid, MASS, lattice, boot, cluster, Matrix, robust, fit.models, MPV, xtable, ggplot2, GGally,
+           RColorBrewer, reshape2, sfsmisc, catdata
 License: GPL (>= 2)
 Archs: i386, x64
 
@@ -870,14 +877,6 @@ Version: 1.4.2
 Depends: R (>= 2.01), stats
 License: GPL (>= 3)
 
-Package: spam
-Version: 1.4-0
-Depends: R (>= 3.0), grid
-Imports: methods
-Suggests: fields, Matrix, R.rsp, truncdist
-License: LGPL-2
-Archs: i386, x64
-
 Package: SparseM
 Version: 1.72
 Depends: R (>= 2.15), methods
@@ -886,7 +885,7 @@ License: GPL (>= 2)
 Archs: i386, x64
 
 Package: stringi
-Version: 1.1.1
+Version: 1.1.2
 Depends: R (>= 2.13.1)
 Imports: tools, utils, stats
 License: file LICENSE
@@ -901,7 +900,7 @@ Suggests: testthat, knitr, htmltools, htmlwidgets, rmarkdown, covr
 License: GPL-2
 
 Package: survival
-Version: 2.39-5
+Version: 2.40-1
 Priority: recommended
 Depends: R (>= 2.13.0)
 Imports: graphics, Matrix, methods, splines, stats, utils
@@ -941,7 +940,7 @@ Suggests: fpc
 License: GPL
 
 Package: urltools
-Version: 1.5.1
+Version: 1.6.0
 Depends: R (>= 2.10)
 Imports: Rcpp, methods, triebeard
 LinkingTo: Rcpp
@@ -994,8 +993,8 @@ Package: zoo
 Version: 1.7-13
 Depends: R (>= 2.10.0), stats
 Imports: utils, graphics, grDevices, lattice (>= 0.20-27)
-Suggests: coda, chron, DAAG, fts, its, ggplot2, mondate, scales, strucchange, timeDate,
-           timeSeries, tis, tseries, xts
+Suggests: coda, chron, DAAG, fts, its, ggplot2, mondate, scales, strucchange, timeDate, timeSeries, tis,
+           tseries, xts
 License: GPL-2 | GPL-3
 Archs: i386, x64
 
