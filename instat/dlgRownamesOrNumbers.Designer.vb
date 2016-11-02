@@ -200,6 +200,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRowNamesOrNumbers"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Row Names Or Numbers"
         Me.grpboxOptionsforRowNamesorNumbercols.ResumeLayout(False)
         Me.grpboxOptionsforRowNamesorNumbercols.PerformLayout()
