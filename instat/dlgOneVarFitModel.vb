@@ -142,7 +142,7 @@ Public Class dlgOneVarFitModel
                 SetPoissonTest()
             ElseIf UcrDistributions.clsCurrDistribution.strNameTag = "Normal" Then
                 SetTTest()
-            ElseIf UcrDistributions.clsCurrDistribution.strNameTag = "Binomial" Then
+            ElseIf UcrDistributions.clsCurrDistribution.strNameTag = "Bernouli" Then
                 SetBinomialTest()
             End If
         End If
@@ -284,7 +284,7 @@ Public Class dlgOneVarFitModel
                 nudHyp.Maximum = Integer.MaxValue
                 nudHyp.Minimum = Integer.MinValue
                 nudHyp.Value = 0
-            ElseIf UcrDistributions.clsCurrDistribution.strNameTag = "Binomial" Then
+            ElseIf UcrDistributions.clsCurrDistribution.strNameTag = "Bernouli" Then
                 lblprobability.Visible = True
                 lblMean.Visible = False
                 lblRate.Visible = False
@@ -335,7 +335,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub BinomialConditions()
-        If rdoSpecific.Checked AndAlso UcrDistributions.clsCurrDistribution.strNameTag = "Binomial" Then
+        If rdoSpecific.Checked AndAlso UcrDistributions.clsCurrDistribution.strNameTag = "Bernouli" Then
             chkBinModify.Visible = True
             If chkBinModify.Checked Then
                 lblSuccessIf.Visible = True
