@@ -69,7 +69,7 @@ Partial Class dlgEnter
         'chkShowEnterArguments
         '
         Me.chkShowEnterArguments.AutoSize = True
-        Me.chkShowEnterArguments.Location = New System.Drawing.Point(365, 28)
+        Me.chkShowEnterArguments.Location = New System.Drawing.Point(347, 26)
         Me.chkShowEnterArguments.Name = "chkShowEnterArguments"
         Me.chkShowEnterArguments.Size = New System.Drawing.Size(106, 17)
         Me.chkShowEnterArguments.TabIndex = 155
@@ -79,7 +79,7 @@ Partial Class dlgEnter
         'lblData
         '
         Me.lblData.AutoSize = True
-        Me.lblData.Location = New System.Drawing.Point(34, 27)
+        Me.lblData.Location = New System.Drawing.Point(11, 26)
         Me.lblData.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblData.Name = "lblData"
         Me.lblData.Size = New System.Drawing.Size(30, 13)
@@ -90,7 +90,7 @@ Partial Class dlgEnter
         'chkSaveEnterResultInto
         '
         Me.chkSaveEnterResultInto.AutoSize = True
-        Me.chkSaveEnterResultInto.Location = New System.Drawing.Point(9, 252)
+        Me.chkSaveEnterResultInto.Location = New System.Drawing.Point(11, 252)
         Me.chkSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.chkSaveEnterResultInto.Name = "chkSaveEnterResultInto"
         Me.chkSaveEnterResultInto.Size = New System.Drawing.Size(104, 17)
@@ -100,20 +100,20 @@ Partial Class dlgEnter
         '
         'cmd1
         '
-        Me.cmd1.Location = New System.Drawing.Point(3, 77)
+        Me.cmd1.Location = New System.Drawing.Point(4, 77)
         Me.cmd1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd1.Name = "cmd1"
-        Me.cmd1.Size = New System.Drawing.Size(37, 30)
+        Me.cmd1.Size = New System.Drawing.Size(36, 30)
         Me.cmd1.TabIndex = 117
         Me.cmd1.Text = "1"
         Me.cmd1.UseVisualStyleBackColor = True
         '
         'cmdSquareBrackets
         '
-        Me.cmdSquareBrackets.Location = New System.Drawing.Point(125, 14)
+        Me.cmdSquareBrackets.Location = New System.Drawing.Point(123, 14)
         Me.cmdSquareBrackets.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSquareBrackets.Name = "cmdSquareBrackets"
-        Me.cmdSquareBrackets.Size = New System.Drawing.Size(37, 30)
+        Me.cmdSquareBrackets.Size = New System.Drawing.Size(36, 30)
         Me.cmdSquareBrackets.TabIndex = 141
         Me.cmdSquareBrackets.Text = "[ ]"
         Me.cmdSquareBrackets.UseVisualStyleBackColor = True
@@ -123,17 +123,17 @@ Partial Class dlgEnter
         Me.cmd0.Location = New System.Drawing.Point(44, 108)
         Me.cmd0.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd0.Name = "cmd0"
-        Me.cmd0.Size = New System.Drawing.Size(37, 30)
+        Me.cmd0.Size = New System.Drawing.Size(36, 30)
         Me.cmd0.TabIndex = 118
         Me.cmd0.Text = "0"
         Me.cmd0.UseVisualStyleBackColor = True
         '
         'cmd2
         '
-        Me.cmd2.Location = New System.Drawing.Point(43, 77)
+        Me.cmd2.Location = New System.Drawing.Point(44, 77)
         Me.cmd2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd2.Name = "cmd2"
-        Me.cmd2.Size = New System.Drawing.Size(37, 30)
+        Me.cmd2.Size = New System.Drawing.Size(36, 30)
         Me.cmd2.TabIndex = 119
         Me.cmd2.Text = "2"
         Me.cmd2.UseVisualStyleBackColor = True
@@ -141,7 +141,7 @@ Partial Class dlgEnter
         'cmdClear
         '
         Me.cmdClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdClear.Location = New System.Drawing.Point(125, 77)
+        Me.cmdClear.Location = New System.Drawing.Point(123, 77)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(37, 61)
@@ -154,7 +154,7 @@ Partial Class dlgEnter
         Me.cmd3.Location = New System.Drawing.Point(83, 77)
         Me.cmd3.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd3.Name = "cmd3"
-        Me.cmd3.Size = New System.Drawing.Size(37, 30)
+        Me.cmd3.Size = New System.Drawing.Size(36, 30)
         Me.cmd3.TabIndex = 120
         Me.cmd3.Text = "3"
         Me.cmd3.UseVisualStyleBackColor = True
@@ -164,7 +164,7 @@ Partial Class dlgEnter
         Me.cmd4.Location = New System.Drawing.Point(4, 45)
         Me.cmd4.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd4.Name = "cmd4"
-        Me.cmd4.Size = New System.Drawing.Size(37, 30)
+        Me.cmd4.Size = New System.Drawing.Size(36, 30)
         Me.cmd4.TabIndex = 121
         Me.cmd4.Text = "4"
         Me.cmd4.UseVisualStyleBackColor = True
@@ -174,17 +174,17 @@ Partial Class dlgEnter
         Me.cmd5.Location = New System.Drawing.Point(44, 45)
         Me.cmd5.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd5.Name = "cmd5"
-        Me.cmd5.Size = New System.Drawing.Size(37, 30)
+        Me.cmd5.Size = New System.Drawing.Size(36, 30)
         Me.cmd5.TabIndex = 122
         Me.cmd5.Text = "5"
         Me.cmd5.UseVisualStyleBackColor = True
         '
         'cmd6
         '
-        Me.cmd6.Location = New System.Drawing.Point(84, 45)
+        Me.cmd6.Location = New System.Drawing.Point(83, 45)
         Me.cmd6.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd6.Name = "cmd6"
-        Me.cmd6.Size = New System.Drawing.Size(37, 30)
+        Me.cmd6.Size = New System.Drawing.Size(36, 30)
         Me.cmd6.TabIndex = 123
         Me.cmd6.Text = "6"
         Me.cmd6.UseVisualStyleBackColor = True
@@ -194,7 +194,7 @@ Partial Class dlgEnter
         Me.cmd7.Location = New System.Drawing.Point(4, 14)
         Me.cmd7.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd7.Name = "cmd7"
-        Me.cmd7.Size = New System.Drawing.Size(37, 30)
+        Me.cmd7.Size = New System.Drawing.Size(36, 30)
         Me.cmd7.TabIndex = 124
         Me.cmd7.Text = "7"
         Me.cmd7.UseVisualStyleBackColor = True
@@ -204,27 +204,27 @@ Partial Class dlgEnter
         Me.cmd8.Location = New System.Drawing.Point(44, 14)
         Me.cmd8.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd8.Name = "cmd8"
-        Me.cmd8.Size = New System.Drawing.Size(37, 30)
+        Me.cmd8.Size = New System.Drawing.Size(36, 30)
         Me.cmd8.TabIndex = 125
         Me.cmd8.Text = "8"
         Me.cmd8.UseVisualStyleBackColor = True
         '
         'cmd9
         '
-        Me.cmd9.Location = New System.Drawing.Point(84, 14)
+        Me.cmd9.Location = New System.Drawing.Point(83, 14)
         Me.cmd9.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd9.Name = "cmd9"
-        Me.cmd9.Size = New System.Drawing.Size(37, 30)
+        Me.cmd9.Size = New System.Drawing.Size(36, 30)
         Me.cmd9.TabIndex = 126
         Me.cmd9.Text = "9"
         Me.cmd9.UseVisualStyleBackColor = True
         '
         'cmdMinus
         '
-        Me.cmdMinus.Location = New System.Drawing.Point(125, 45)
+        Me.cmdMinus.Location = New System.Drawing.Point(123, 45)
         Me.cmdMinus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMinus.Name = "cmdMinus"
-        Me.cmdMinus.Size = New System.Drawing.Size(37, 30)
+        Me.cmdMinus.Size = New System.Drawing.Size(36, 30)
         Me.cmdMinus.TabIndex = 129
         Me.cmdMinus.Text = "-"
         Me.cmdMinus.UseVisualStyleBackColor = True
@@ -235,7 +235,7 @@ Partial Class dlgEnter
         Me.cmdDelete.Location = New System.Drawing.Point(4, 108)
         Me.cmdDelete.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(37, 30)
+        Me.cmdDelete.Size = New System.Drawing.Size(36, 30)
         Me.cmdDelete.TabIndex = 132
         Me.cmdDelete.Tag = "Del"
         Me.cmdDelete.Text = "Del"
@@ -243,10 +243,10 @@ Partial Class dlgEnter
         '
         'cmdBrackets
         '
-        Me.cmdBrackets.Location = New System.Drawing.Point(83, 109)
+        Me.cmdBrackets.Location = New System.Drawing.Point(83, 108)
         Me.cmdBrackets.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdBrackets.Name = "cmdBrackets"
-        Me.cmdBrackets.Size = New System.Drawing.Size(37, 30)
+        Me.cmdBrackets.Size = New System.Drawing.Size(36, 30)
         Me.cmdBrackets.TabIndex = 136
         Me.cmdBrackets.Text = "( )"
         Me.cmdBrackets.UseVisualStyleBackColor = True
@@ -278,10 +278,10 @@ Partial Class dlgEnter
         '
         'cmdMissingValues
         '
-        Me.cmdMissingValues.Location = New System.Drawing.Point(106, 17)
+        Me.cmdMissingValues.Location = New System.Drawing.Point(106, 14)
         Me.cmdMissingValues.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMissingValues.Name = "cmdMissingValues"
-        Me.cmdMissingValues.Size = New System.Drawing.Size(44, 30)
+        Me.cmdMissingValues.Size = New System.Drawing.Size(45, 30)
         Me.cmdMissingValues.TabIndex = 142
         Me.cmdMissingValues.Text = "NA"
         Me.cmdMissingValues.UseVisualStyleBackColor = True
@@ -289,17 +289,17 @@ Partial Class dlgEnter
         'cmdExponential
         '
         Me.cmdExponential.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdExponential.Location = New System.Drawing.Point(7, 112)
+        Me.cmdExponential.Location = New System.Drawing.Point(7, 109)
         Me.cmdExponential.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdExponential.Name = "cmdExponential"
-        Me.cmdExponential.Size = New System.Drawing.Size(45, 26)
+        Me.cmdExponential.Size = New System.Drawing.Size(45, 30)
         Me.cmdExponential.TabIndex = 143
         Me.cmdExponential.Text = "E"
         Me.cmdExponential.UseVisualStyleBackColor = True
         '
         'cmdConcantenateFunction
         '
-        Me.cmdConcantenateFunction.Location = New System.Drawing.Point(56, 17)
+        Me.cmdConcantenateFunction.Location = New System.Drawing.Point(56, 14)
         Me.cmdConcantenateFunction.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdConcantenateFunction.Name = "cmdConcantenateFunction"
         Me.cmdConcantenateFunction.Size = New System.Drawing.Size(45, 30)
@@ -310,10 +310,10 @@ Partial Class dlgEnter
         'cmdSequence2
         '
         Me.cmdSequence2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSequence2.Location = New System.Drawing.Point(56, 112)
+        Me.cmdSequence2.Location = New System.Drawing.Point(56, 109)
         Me.cmdSequence2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSequence2.Name = "cmdSequence2"
-        Me.cmdSequence2.Size = New System.Drawing.Size(45, 27)
+        Me.cmdSequence2.Size = New System.Drawing.Size(45, 30)
         Me.cmdSequence2.TabIndex = 146
         Me.cmdSequence2.Text = "seq2"
         Me.cmdSequence2.UseVisualStyleBackColor = True
@@ -321,7 +321,7 @@ Partial Class dlgEnter
         'cmdSequenceFunction
         '
         Me.cmdSequenceFunction.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSequenceFunction.Location = New System.Drawing.Point(56, 80)
+        Me.cmdSequenceFunction.Location = New System.Drawing.Point(56, 77)
         Me.cmdSequenceFunction.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSequenceFunction.Name = "cmdSequenceFunction"
         Me.cmdSequenceFunction.Size = New System.Drawing.Size(45, 30)
@@ -333,7 +333,7 @@ Partial Class dlgEnter
         'cmdRepelicationFunction
         '
         Me.cmdRepelicationFunction.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRepelicationFunction.Location = New System.Drawing.Point(56, 48)
+        Me.cmdRepelicationFunction.Location = New System.Drawing.Point(56, 45)
         Me.cmdRepelicationFunction.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdRepelicationFunction.Name = "cmdRepelicationFunction"
         Me.cmdRepelicationFunction.Size = New System.Drawing.Size(45, 30)
@@ -343,7 +343,7 @@ Partial Class dlgEnter
         '
         'cmdLETTERS
         '
-        Me.cmdLETTERS.Location = New System.Drawing.Point(154, 17)
+        Me.cmdLETTERS.Location = New System.Drawing.Point(154, 14)
         Me.cmdLETTERS.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLETTERS.Name = "cmdLETTERS"
         Me.cmdLETTERS.Size = New System.Drawing.Size(45, 61)
@@ -353,17 +353,17 @@ Partial Class dlgEnter
         '
         'cmdPi
         '
-        Me.cmdPi.Location = New System.Drawing.Point(106, 48)
+        Me.cmdPi.Location = New System.Drawing.Point(106, 45)
         Me.cmdPi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPi.Name = "cmdPi"
-        Me.cmdPi.Size = New System.Drawing.Size(44, 30)
+        Me.cmdPi.Size = New System.Drawing.Size(45, 30)
         Me.cmdPi.TabIndex = 149
         Me.cmdPi.Text = "pi"
         Me.cmdPi.UseVisualStyleBackColor = True
         '
         'cmdDot
         '
-        Me.cmdDot.Location = New System.Drawing.Point(7, 17)
+        Me.cmdDot.Location = New System.Drawing.Point(7, 14)
         Me.cmdDot.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDot.Name = "cmdDot"
         Me.cmdDot.Size = New System.Drawing.Size(45, 30)
@@ -373,27 +373,27 @@ Partial Class dlgEnter
         '
         'cmdMonthPlus
         '
-        Me.cmdMonthPlus.Location = New System.Drawing.Point(105, 111)
+        Me.cmdMonthPlus.Location = New System.Drawing.Point(106, 108)
         Me.cmdMonthPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMonthPlus.Name = "cmdMonthPlus"
-        Me.cmdMonthPlus.Size = New System.Drawing.Size(45, 27)
+        Me.cmdMonthPlus.Size = New System.Drawing.Size(45, 30)
         Me.cmdMonthPlus.TabIndex = 150
         Me.cmdMonthPlus.Text = "mon+"
         Me.cmdMonthPlus.UseVisualStyleBackColor = True
         '
         'cmdLetters2
         '
-        Me.cmdLetters2.Location = New System.Drawing.Point(154, 80)
+        Me.cmdLetters2.Location = New System.Drawing.Point(154, 77)
         Me.cmdLetters2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLetters2.Name = "cmdLetters2"
-        Me.cmdLetters2.Size = New System.Drawing.Size(45, 59)
+        Me.cmdLetters2.Size = New System.Drawing.Size(45, 61)
         Me.cmdLetters2.TabIndex = 152
         Me.cmdLetters2.Text = "ltrs"
         Me.cmdLetters2.UseVisualStyleBackColor = True
         '
         'cmdComma
         '
-        Me.cmdComma.Location = New System.Drawing.Point(7, 48)
+        Me.cmdComma.Location = New System.Drawing.Point(7, 45)
         Me.cmdComma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComma.Name = "cmdComma"
         Me.cmdComma.Size = New System.Drawing.Size(45, 30)
@@ -404,7 +404,7 @@ Partial Class dlgEnter
         '
         'cmdMonthMinus
         '
-        Me.cmdMonthMinus.Location = New System.Drawing.Point(105, 80)
+        Me.cmdMonthMinus.Location = New System.Drawing.Point(106, 77)
         Me.cmdMonthMinus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMonthMinus.Name = "cmdMonthMinus"
         Me.cmdMonthMinus.Size = New System.Drawing.Size(45, 30)
@@ -414,7 +414,7 @@ Partial Class dlgEnter
         '
         'cmdColon
         '
-        Me.cmdColon.Location = New System.Drawing.Point(7, 80)
+        Me.cmdColon.Location = New System.Drawing.Point(7, 77)
         Me.cmdColon.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdColon.Name = "cmdColon"
         Me.cmdColon.Size = New System.Drawing.Size(45, 30)
@@ -448,7 +448,7 @@ Partial Class dlgEnter
         '
         'cmdTry
         '
-        Me.cmdTry.Location = New System.Drawing.Point(13, 216)
+        Me.cmdTry.Location = New System.Drawing.Point(11, 216)
         Me.cmdTry.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTry.Name = "cmdTry"
         Me.cmdTry.Size = New System.Drawing.Size(74, 23)
@@ -468,16 +468,16 @@ Partial Class dlgEnter
         'ucrSaveEnterResultInto
         '
         Me.ucrSaveEnterResultInto.IsReadOnly = False
-        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(120, 249)
+        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(124, 249)
         Me.ucrSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
-        Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(253, 22)
+        Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(288, 22)
         Me.ucrSaveEnterResultInto.TabIndex = 158
         '
         'ucrDataFrameEnter
         '
         Me.ucrDataFrameEnter.bUseCurrentFilter = False
-        Me.ucrDataFrameEnter.Location = New System.Drawing.Point(9, 58)
+        Me.ucrDataFrameEnter.Location = New System.Drawing.Point(11, 65)
         Me.ucrDataFrameEnter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameEnter.Name = "ucrDataFrameEnter"
         Me.ucrDataFrameEnter.Size = New System.Drawing.Size(120, 40)
@@ -485,7 +485,7 @@ Partial Class dlgEnter
         '
         'ucrReceiverForEnterCalculation
         '
-        Me.ucrReceiverForEnterCalculation.Location = New System.Drawing.Point(83, 24)
+        Me.ucrReceiverForEnterCalculation.Location = New System.Drawing.Point(65, 26)
         Me.ucrReceiverForEnterCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForEnterCalculation.Name = "ucrReceiverForEnterCalculation"
         Me.ucrReceiverForEnterCalculation.Selector = Nothing
@@ -494,7 +494,7 @@ Partial Class dlgEnter
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 275)
+        Me.ucrBase.Location = New System.Drawing.Point(11, 275)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(452, 52)
         Me.ucrBase.TabIndex = 0

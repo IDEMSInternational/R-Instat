@@ -20,7 +20,11 @@ Public Class dlgEnter
     Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
+    Dim clsLength As New RFunction
     Public bFirstLoad As Boolean = True
+    Public strOutput As String
+    Public clsCommands As New RFunction
+
     Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -99,6 +103,7 @@ Public Class dlgEnter
         cmdTry.Enabled = Not ucrReceiverForEnterCalculation.IsEmpty()
         TestOKEnabled()
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
@@ -211,7 +216,7 @@ Public Class dlgEnter
 
     Private Sub cmdRepelicationFunction_Click_1(sender As Object, e As EventArgs) Handles cmdRepelicationFunction.Click
         If chkShowEnterArguments.Checked Then
-            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep(x= ,times= ,length= ,each= )", 17)
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep(x= ,times= ,length= ,each= )", 25)
         Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep( )", 2)
         End If
         TestOKEnabled()
@@ -260,7 +265,6 @@ Public Class dlgEnter
 
     Private Sub ucrSaveEnterResultInto_NameChanged() Handles ucrSaveEnterResultInto.NameChanged
         SaveResults()
-        ucrReceiverForEnterCalculation.Clear()
         TestOKEnabled()
     End Sub
 
@@ -270,6 +274,7 @@ Public Class dlgEnter
         Else
             ucrSaveEnterResultInto.Visible = False
         End If
+        SaveResults()
     End Sub
 
     Private Sub TryScript()
@@ -285,7 +290,8 @@ Public Class dlgEnter
         Dim strAssignToDataFrame As String
 
         'First store the RSyntax settings temporarily, as these will be modified in the Try process. 
-        'Quetion: could we not use a clone RSyntax method ? 
+        'Task: could use a clone RSyntax method
+
         bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
         bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
         strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
@@ -301,9 +307,11 @@ Public Class dlgEnter
                 ucrBase.clsRsyntax.RemoveAssignTo()
                 strOutPut = ucrBase.clsRsyntax.GetScript
                 strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
+                'Mid does only take Strings And strVecOutput Is a CharacterVector (a custom type from RDotNet), 
+                'but each element of strVecOutput i.e. strVecOutput(0) Is a String.
+                'It doesn't show all the output, just the output from the first line you would get in the R console. So strVecOutput(1) would give you the next line.
                 If strVecOutput IsNot Nothing Then
                     If strVecOutput.Length > 1 Then
-                        'This is not working as expected. First of all Mid takes as arguments string, start end length. Here we give first entry of strVecOutput (which is a characterVector and not a string apparently..)? Then five would be the start ? Actually displays 19 letters... Does Mid has an overloaded definition I couldn't find ?
                         ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
                     Else
                         ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
@@ -315,7 +323,7 @@ Public Class dlgEnter
         Catch ex As Exception
             ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
         Finally
-            'Need to recover RSyntax settings as they were before proceeding to Try
+
             strTempScript = ""
             strDetach = clsDetach.ToScript(strTempScript)
             frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
