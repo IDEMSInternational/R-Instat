@@ -1636,6 +1636,8 @@ Partial Class dlgCalculator
         Me.Controls.Add(Me.grpStatistics)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCalculator"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

@@ -109,7 +109,9 @@ Partial Class dlgTransposeColumns
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTransposeColumns"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Transpose_Columns"
+        Me.Text = "Transpose Columns"
         Me.ResumeLayout(False)
 
     End Sub

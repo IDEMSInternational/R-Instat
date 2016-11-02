@@ -248,10 +248,10 @@
     <Compile Include="dlgRugPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgTablePlus.Designer.vb">
-      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    <Compile Include="dlgShowModel.Designer.vb">
+      <DependentUpon>dlgShowModel.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgTablePlus.vb">
+    <Compile Include="dlgShowModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariabletabulate.Designer.vb">
@@ -264,6 +264,12 @@
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgAddNewDistribution.Designer.vb">
+      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgAddNewDistribution.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimdexIndices.Designer.vb">
@@ -2622,14 +2628,14 @@
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTablePlus.fr-FR.resx">
-      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    <EmbeddedResource Include="dlgShowModel.fr-FR.resx">
+      <DependentUpon>dlgShowModel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTablePlus.resx">
-      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    <EmbeddedResource Include="dlgShowModel.resx">
+      <DependentUpon>dlgShowModel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTablePlus.sw-KE.resx">
-      <DependentUpon>dlgTablePlus.vb</DependentUpon>
+    <EmbeddedResource Include="dlgShowModel.sw-KE.resx">
+      <DependentUpon>dlgShowModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.fr-FR.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
@@ -2771,6 +2777,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAddNewDistribution.fr-FR.resx">
+      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAddNewDistribution.resx">
+      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAddNewDistribution.sw-KE.resx">
+      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>

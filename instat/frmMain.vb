@@ -1114,8 +1114,8 @@ Public Class frmMain
         dlgOneVarUseModel.ShowDialog()
     End Sub
 
-    Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsTablesPlus.Click
-        dlgTablePlus.ShowDialog()
+    Private Sub TablesPlusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsShowModel.Click
+        dlgShowModel.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseGraph.Click
@@ -1236,5 +1236,13 @@ Public Class frmMain
 
     Private Sub mnuFileSaveAsDataAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsDataAs.Click
         dlgSaveAs.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelProbabilityDistributionsCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsCompareModels.Click
+        dlgCompareModels.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeGeneralColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralColumnSummaries.Click
+        dlgColumnStats.ShowDialog()
     End Sub
 End Class
