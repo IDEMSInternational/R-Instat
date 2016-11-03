@@ -22,66 +22,34 @@ Partial Class dlgOneVarFitModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrBase = New instat.ucrButtons()
-        Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrReceiver = New instat.ucrReceiverSingle()
-        Me.ucrSaveModel = New instat.ucrInputComboBox()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.LblVariable = New System.Windows.Forms.Label()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
-        Me.UcrDistributions = New instat.ucrDistributions()
         Me.lblprobability = New System.Windows.Forms.Label()
         Me.lblMean = New System.Windows.Forms.Label()
         Me.chkBinModify = New System.Windows.Forms.CheckBox()
         Me.lblSuccessIf = New System.Windows.Forms.Label()
         Me.lblConfidenceLimit = New System.Windows.Forms.Label()
         Me.nudCI = New System.Windows.Forms.NumericUpDown()
-        Me.ucrOperator = New instat.ucrInputComboBox()
         Me.rdoGeneral = New System.Windows.Forms.RadioButton()
         Me.rdoSpecific = New System.Windows.Forms.RadioButton()
         Me.nudHyp = New System.Windows.Forms.NumericUpDown()
         Me.nudBinomialConditions = New System.Windows.Forms.NumericUpDown()
         Me.lblRate = New System.Windows.Forms.Label()
+        Me.lblEquals = New System.Windows.Forms.Label()
+        Me.cboVariables = New instat.ucrInputComboBox()
+        Me.ucrOperator = New instat.ucrInputComboBox()
+        Me.UcrDistributions = New instat.ucrDistributions()
+        Me.ucrSaveModel = New instat.ucrInputComboBox()
+        Me.UcrReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.UcrBase = New instat.ucrButtons()
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'UcrBase
-        '
-        Me.UcrBase.Location = New System.Drawing.Point(10, 270)
-        Me.UcrBase.Name = "UcrBase"
-        Me.UcrBase.Size = New System.Drawing.Size(410, 52)
-        Me.UcrBase.TabIndex = 0
-        '
-        'ucrSelectorOneVarFitMod
-        '
-        Me.ucrSelectorOneVarFitMod.bShowHiddenColumns = False
-        Me.ucrSelectorOneVarFitMod.bUseCurrentFilter = False
-        Me.ucrSelectorOneVarFitMod.Location = New System.Drawing.Point(10, 42)
-        Me.ucrSelectorOneVarFitMod.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorOneVarFitMod.Name = "ucrSelectorOneVarFitMod"
-        Me.ucrSelectorOneVarFitMod.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorOneVarFitMod.TabIndex = 1
-        '
-        'UcrReceiver
-        '
-        Me.UcrReceiver.Location = New System.Drawing.Point(268, 64)
-        Me.UcrReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiver.Name = "UcrReceiver"
-        Me.UcrReceiver.Selector = Nothing
-        Me.UcrReceiver.Size = New System.Drawing.Size(137, 20)
-        Me.UcrReceiver.TabIndex = 2
-        '
-        'ucrSaveModel
-        '
-        Me.ucrSaveModel.IsReadOnly = False
-        Me.ucrSaveModel.Location = New System.Drawing.Point(99, 239)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrSaveModel.TabIndex = 3
         '
         'chkConvertToVariate
         '
@@ -130,17 +98,10 @@ Partial Class dlgOneVarFitModel
         Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
-        'UcrDistributions
-        '
-        Me.UcrDistributions.Location = New System.Drawing.Point(268, 85)
-        Me.UcrDistributions.Name = "UcrDistributions"
-        Me.UcrDistributions.Size = New System.Drawing.Size(225, 43)
-        Me.UcrDistributions.TabIndex = 11
-        '
         'lblprobability
         '
         Me.lblprobability.AutoSize = True
-        Me.lblprobability.Location = New System.Drawing.Point(268, 151)
+        Me.lblprobability.Location = New System.Drawing.Point(269, 151)
         Me.lblprobability.Name = "lblprobability"
         Me.lblprobability.Size = New System.Drawing.Size(58, 13)
         Me.lblprobability.TabIndex = 16
@@ -191,14 +152,6 @@ Partial Class dlgOneVarFitModel
         Me.nudCI.Size = New System.Drawing.Size(58, 20)
         Me.nudCI.TabIndex = 23
         '
-        'ucrOperator
-        '
-        Me.ucrOperator.IsReadOnly = False
-        Me.ucrOperator.Location = New System.Drawing.Point(349, 237)
-        Me.ucrOperator.Name = "ucrOperator"
-        Me.ucrOperator.Size = New System.Drawing.Size(44, 21)
-        Me.ucrOperator.TabIndex = 24
-        '
         'rdoGeneral
         '
         Me.rdoGeneral.AutoSize = True
@@ -245,11 +198,79 @@ Partial Class dlgOneVarFitModel
         Me.lblRate.TabIndex = 31
         Me.lblRate.Text = "Rate:"
         '
+        'lblEquals
+        '
+        Me.lblEquals.AutoSize = True
+        Me.lblEquals.Location = New System.Drawing.Point(343, 241)
+        Me.lblEquals.Name = "lblEquals"
+        Me.lblEquals.Size = New System.Drawing.Size(13, 13)
+        Me.lblEquals.TabIndex = 33
+        Me.lblEquals.Text = "="
+        '
+        'cboVariables
+        '
+        Me.cboVariables.IsReadOnly = False
+        Me.cboVariables.Location = New System.Drawing.Point(362, 237)
+        Me.cboVariables.Name = "cboVariables"
+        Me.cboVariables.Size = New System.Drawing.Size(88, 21)
+        Me.cboVariables.TabIndex = 32
+        '
+        'ucrOperator
+        '
+        Me.ucrOperator.IsReadOnly = False
+        Me.ucrOperator.Location = New System.Drawing.Point(349, 237)
+        Me.ucrOperator.Name = "ucrOperator"
+        Me.ucrOperator.Size = New System.Drawing.Size(44, 21)
+        Me.ucrOperator.TabIndex = 24
+        '
+        'UcrDistributions
+        '
+        Me.UcrDistributions.Location = New System.Drawing.Point(268, 85)
+        Me.UcrDistributions.Name = "UcrDistributions"
+        Me.UcrDistributions.Size = New System.Drawing.Size(225, 43)
+        Me.UcrDistributions.TabIndex = 11
+        '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.IsReadOnly = False
+        Me.ucrSaveModel.Location = New System.Drawing.Point(99, 239)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrSaveModel.TabIndex = 3
+        '
+        'UcrReceiver
+        '
+        Me.UcrReceiver.Location = New System.Drawing.Point(268, 64)
+        Me.UcrReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrReceiver.Name = "UcrReceiver"
+        Me.UcrReceiver.Selector = Nothing
+        Me.UcrReceiver.Size = New System.Drawing.Size(137, 20)
+        Me.UcrReceiver.TabIndex = 2
+        '
+        'ucrSelectorOneVarFitMod
+        '
+        Me.ucrSelectorOneVarFitMod.bShowHiddenColumns = False
+        Me.ucrSelectorOneVarFitMod.bUseCurrentFilter = False
+        Me.ucrSelectorOneVarFitMod.Location = New System.Drawing.Point(10, 42)
+        Me.ucrSelectorOneVarFitMod.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorOneVarFitMod.Name = "ucrSelectorOneVarFitMod"
+        Me.ucrSelectorOneVarFitMod.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOneVarFitMod.TabIndex = 1
+        '
+        'UcrBase
+        '
+        Me.UcrBase.Location = New System.Drawing.Point(10, 270)
+        Me.UcrBase.Name = "UcrBase"
+        Me.UcrBase.Size = New System.Drawing.Size(410, 52)
+        Me.UcrBase.TabIndex = 0
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 322)
+        Me.Controls.Add(Me.lblEquals)
+        Me.Controls.Add(Me.cboVariables)
         Me.Controls.Add(Me.lblRate)
         Me.Controls.Add(Me.nudBinomialConditions)
         Me.Controls.Add(Me.nudHyp)
@@ -307,4 +328,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents nudHyp As NumericUpDown
     Friend WithEvents nudBinomialConditions As NumericUpDown
     Friend WithEvents lblRate As Label
+    Friend WithEvents cboVariables As ucrInputComboBox
+    Friend WithEvents lblEquals As Label
 End Class
