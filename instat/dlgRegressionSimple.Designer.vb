@@ -50,9 +50,7 @@ Partial Class dlgRegressionSimple
         Me.nudCI = New System.Windows.Forms.NumericUpDown()
         Me.nudHypothesis = New System.Windows.Forms.NumericUpDown()
         Me.lblCI = New System.Windows.Forms.Label()
-        Me.lblMean = New System.Windows.Forms.Label()
-        Me.lblRate = New System.Windows.Forms.Label()
-        Me.lblProbability = New System.Windows.Forms.Label()
+        Me.lblHyp1 = New System.Windows.Forms.Label()
         Me.lblProbability2 = New System.Windows.Forms.Label()
         Me.nudHyp2 = New System.Windows.Forms.NumericUpDown()
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -219,20 +217,10 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.lblCI, "lblCI")
         Me.lblCI.Name = "lblCI"
         '
-        'lblMean
+        'lblHyp1
         '
-        resources.ApplyResources(Me.lblMean, "lblMean")
-        Me.lblMean.Name = "lblMean"
-        '
-        'lblRate
-        '
-        resources.ApplyResources(Me.lblRate, "lblRate")
-        Me.lblRate.Name = "lblRate"
-        '
-        'lblProbability
-        '
-        resources.ApplyResources(Me.lblProbability, "lblProbability")
-        Me.lblProbability.Name = "lblProbability"
+        resources.ApplyResources(Me.lblHyp1, "lblHyp1")
+        Me.lblHyp1.Name = "lblHyp1"
         '
         'lblProbability2
         '
@@ -250,9 +238,7 @@ Partial Class dlgRegressionSimple
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.nudHyp2)
         Me.Controls.Add(Me.lblProbability2)
-        Me.Controls.Add(Me.lblProbability)
-        Me.Controls.Add(Me.lblRate)
-        Me.Controls.Add(Me.lblMean)
+        Me.Controls.Add(Me.lblHyp1)
         Me.Controls.Add(Me.lblCI)
         Me.Controls.Add(Me.nudHypothesis)
         Me.Controls.Add(Me.nudCI)
@@ -319,9 +305,7 @@ Partial Class dlgRegressionSimple
     Friend WithEvents nudCI As NumericUpDown
     Friend WithEvents nudHypothesis As NumericUpDown
     Friend WithEvents lblCI As Label
-    Friend WithEvents lblMean As Label
-    Friend WithEvents lblRate As Label
-    Friend WithEvents lblProbability As Label
+    Friend WithEvents lblHyp1 As Label
     Friend WithEvents lblProbability2 As Label
     Friend WithEvents nudHyp2 As NumericUpDown
 End Class
