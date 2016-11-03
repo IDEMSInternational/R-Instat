@@ -28,7 +28,8 @@ Public Class dlgCompareModels
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
-
+        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.SetFunction("plotDist")
     End Sub
 
     Private Sub TestOKEnabled()
@@ -46,5 +47,22 @@ Public Class dlgCompareModels
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDistributionForCompareModels_ParameterChanged() Handles ucrDistributionForCompareModels.ParameterChanged
+        distParameters()
+    End Sub
+
+    Private Sub distParameters()
+        ucrBase.clsRsyntax.ClearParameters()
+        ucrBase.clsRsyntax.AddParameter("dist", Chr(34) & ucrDistributionForCompareModels.clsCurrDistribution.strRName & Chr(34))
+
+        For Each clstempparam In ucrDistributionForCompareModels.clsCurrRFunction.clsParameters
+            ucrBase.clsRsyntax.AddParameter(clstempparam.Clone())
+        Next
+    End Sub
+
+    Private Sub cmdAddNewDistributions_Click(sender As Object, e As EventArgs) Handles cmdAddNewDistributions.Click
+        sdgAddNewDistribution.ShowDialog()
     End Sub
 End Class
