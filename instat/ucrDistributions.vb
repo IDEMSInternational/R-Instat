@@ -207,7 +207,9 @@ Public Class ucrDistributions
         clsNormalDist.strGLMFunctionName = "gaussian"
         clsNormalDist.bNumeric = True
         clsNormalDist.bIsContinuous = True
-        clsNormalDist.AddParameter("mean", "Mean", 0)
+        clsNormalDist.bIsExact = True
+        clsNormalDist.lstExact = {"mean", "Mean", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
+        clsNormalDist.AddParameter("mean", "Mean:", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
 
@@ -278,6 +280,8 @@ Public Class ucrDistributions
         clsBernouliDist.strQFunctionName = "qbinom"
         clsBernouliDist.strDFunctionName = "dbinom"
         clsBernouliDist.bIsContinuous = False
+        clsBernouliDist.bIsExact = True
+        clsBernouliDist.lstExact = {"prob", "Probability:", 0.5, 0.1, 2, 0, 1}
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBernouliDist)
 
@@ -305,6 +309,8 @@ Public Class ucrDistributions
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
         clsPoissonDist.bIsContinuous = False
+        clsPoissonDist.bIsExact = True
+        clsPoissonDist.lstExact = {"r", "Rate:", 1, 1, 2, 0, Integer.MaxValue}
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 

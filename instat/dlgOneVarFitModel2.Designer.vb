@@ -27,8 +27,7 @@ Partial Class dlgOneVarFitModel
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.LblVariable = New System.Windows.Forms.Label()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
-        Me.lblprobability = New System.Windows.Forms.Label()
-        Me.lblMean = New System.Windows.Forms.Label()
+        Me.lblHyp = New System.Windows.Forms.Label()
         Me.chkBinModify = New System.Windows.Forms.CheckBox()
         Me.lblSuccessIf = New System.Windows.Forms.Label()
         Me.lblConfidenceLimit = New System.Windows.Forms.Label()
@@ -37,11 +36,10 @@ Partial Class dlgOneVarFitModel
         Me.rdoSpecific = New System.Windows.Forms.RadioButton()
         Me.nudHyp = New System.Windows.Forms.NumericUpDown()
         Me.nudBinomialConditions = New System.Windows.Forms.NumericUpDown()
-        Me.lblRate = New System.Windows.Forms.Label()
         Me.lblEquals = New System.Windows.Forms.Label()
         Me.cboVariables = New instat.ucrInputComboBox()
         Me.ucrOperator = New instat.ucrInputComboBox()
-        Me.UcrDistributions = New instat.ucrDistributions()
+        Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrSaveModel = New instat.ucrInputComboBox()
         Me.UcrReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
@@ -98,23 +96,13 @@ Partial Class dlgOneVarFitModel
         Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
-        'lblprobability
+        'lblHyp
         '
-        Me.lblprobability.AutoSize = True
-        Me.lblprobability.Location = New System.Drawing.Point(269, 151)
-        Me.lblprobability.Name = "lblprobability"
-        Me.lblprobability.Size = New System.Drawing.Size(58, 13)
-        Me.lblprobability.TabIndex = 16
-        Me.lblprobability.Text = "Probability:"
-        '
-        'lblMean
-        '
-        Me.lblMean.AutoSize = True
-        Me.lblMean.Location = New System.Drawing.Point(268, 151)
-        Me.lblMean.Name = "lblMean"
-        Me.lblMean.Size = New System.Drawing.Size(37, 13)
-        Me.lblMean.TabIndex = 17
-        Me.lblMean.Text = "Mean:"
+        Me.lblHyp.AutoSize = True
+        Me.lblHyp.Location = New System.Drawing.Point(268, 151)
+        Me.lblHyp.Name = "lblHyp"
+        Me.lblHyp.Size = New System.Drawing.Size(0, 13)
+        Me.lblHyp.TabIndex = 17
         '
         'chkBinModify
         '
@@ -189,15 +177,6 @@ Partial Class dlgOneVarFitModel
         Me.nudBinomialConditions.Size = New System.Drawing.Size(51, 20)
         Me.nudBinomialConditions.TabIndex = 30
         '
-        'lblRate
-        '
-        Me.lblRate.AutoSize = True
-        Me.lblRate.Location = New System.Drawing.Point(268, 151)
-        Me.lblRate.Name = "lblRate"
-        Me.lblRate.Size = New System.Drawing.Size(33, 13)
-        Me.lblRate.TabIndex = 31
-        Me.lblRate.Text = "Rate:"
-        '
         'lblEquals
         '
         Me.lblEquals.AutoSize = True
@@ -223,12 +202,12 @@ Partial Class dlgOneVarFitModel
         Me.ucrOperator.Size = New System.Drawing.Size(44, 21)
         Me.ucrOperator.TabIndex = 24
         '
-        'UcrDistributions
+        'ucrFamily
         '
-        Me.UcrDistributions.Location = New System.Drawing.Point(268, 85)
-        Me.UcrDistributions.Name = "UcrDistributions"
-        Me.UcrDistributions.Size = New System.Drawing.Size(225, 43)
-        Me.UcrDistributions.TabIndex = 11
+        Me.ucrFamily.Location = New System.Drawing.Point(268, 85)
+        Me.ucrFamily.Name = "ucrFamily"
+        Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
+        Me.ucrFamily.TabIndex = 11
         '
         'ucrSaveModel
         '
@@ -271,7 +250,6 @@ Partial Class dlgOneVarFitModel
         Me.ClientSize = New System.Drawing.Size(477, 322)
         Me.Controls.Add(Me.lblEquals)
         Me.Controls.Add(Me.cboVariables)
-        Me.Controls.Add(Me.lblRate)
         Me.Controls.Add(Me.nudBinomialConditions)
         Me.Controls.Add(Me.nudHyp)
         Me.Controls.Add(Me.rdoSpecific)
@@ -281,9 +259,8 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.lblConfidenceLimit)
         Me.Controls.Add(Me.lblSuccessIf)
         Me.Controls.Add(Me.chkBinModify)
-        Me.Controls.Add(Me.lblMean)
-        Me.Controls.Add(Me.lblprobability)
-        Me.Controls.Add(Me.UcrDistributions)
+        Me.Controls.Add(Me.lblHyp)
+        Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.LblVariable)
         Me.Controls.Add(Me.cmdFittingOptions)
@@ -315,9 +292,8 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents cmdFittingOptions As Button
     Friend WithEvents LblVariable As Label
     Friend WithEvents cmdDisplayOptions As Button
-    Friend WithEvents UcrDistributions As ucrDistributions
-    Friend WithEvents lblprobability As Label
-    Friend WithEvents lblMean As Label
+    Friend WithEvents ucrFamily As ucrDistributions
+    Friend WithEvents lblHyp As Label
     Friend WithEvents chkBinModify As CheckBox
     Friend WithEvents lblSuccessIf As Label
     Friend WithEvents lblConfidenceLimit As Label
@@ -327,7 +303,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents rdoSpecific As RadioButton
     Friend WithEvents nudHyp As NumericUpDown
     Friend WithEvents nudBinomialConditions As NumericUpDown
-    Friend WithEvents lblRate As Label
     Friend WithEvents cboVariables As ucrInputComboBox
     Friend WithEvents lblEquals As Label
 End Class
