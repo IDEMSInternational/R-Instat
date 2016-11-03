@@ -97,6 +97,7 @@ Partial Class dlgRenameDescriptive
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRenameDescriptive"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Rename_Object"
         Me.Text = "Rename Objects"
         Me.ResumeLayout(False)
