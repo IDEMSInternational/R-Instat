@@ -322,6 +322,16 @@ instat_object$set("public", "get_metadata_changed", function(data_name) {
 } 
 )
 
+instat_object$set("public", "get_calculations", function(data_name) {
+  return(self$get_data_objects(data_name)$get_calculations())
+} 
+)
+
+instat_object$set("public", "get_calculation_names", function(data_name) {
+  return(self$get_data_objects(data_name)$get_calculation_names())
+} 
+)
+
 instat_object$set("public", "dataframe_count", function() {
   return(length(private$.data_objects))
 } 
@@ -696,6 +706,17 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
+  ind <- c()
+  for(i in seq_along(private$.links)) {
+    if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
+      ind <- c(ind, i)
+    }
+  }
+  #TODO Should this be delete or disable?
+  if(length(ind) > 0) {
+    private$.links[ind] <- NULL
+    message(length(ind), " links removed")
+  }
 } 
 )
 
