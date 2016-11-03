@@ -428,7 +428,7 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
-        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'Optional
         clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
@@ -641,9 +641,9 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_point.strGeomName = "geom_point"
-        'mandatory
-        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
-        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        'mandatory aesthetics : here x and y are mandatory, however, if one is filled, the other one get's default value "", hence one of the two needs to be filled.
+        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}) ' bIsDependentlyMandatory:=True  
+        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}) ' bIsDependentlyMandatory:=True : will add these two if Bug Fixing #2002 is merged with the jointly mandatory method.
         'optional
         clsgeom_point.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
