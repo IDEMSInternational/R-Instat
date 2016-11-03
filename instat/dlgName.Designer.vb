@@ -96,6 +96,7 @@ Partial Class dlgName
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgName"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Rename_Data_Column"
         Me.Text = "Rename Column"
         Me.ResumeLayout(False)
