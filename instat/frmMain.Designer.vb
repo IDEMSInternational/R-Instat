@@ -2577,7 +2577,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnUseDate
         '
-        Me.mnuOrganiseColumnUseDate.Enabled = False
         Me.mnuOrganiseColumnUseDate.Name = "mnuOrganiseColumnUseDate"
         Me.mnuOrganiseColumnUseDate.Size = New System.Drawing.Size(162, 22)
         Me.mnuOrganiseColumnUseDate.Text = "Use Date..."
