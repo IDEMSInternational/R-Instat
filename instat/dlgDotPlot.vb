@@ -117,7 +117,9 @@ Public Class dlgDotPlot
                 Else
                     ucrFactorReceiver.Add(clsParam.strArgumentValue)
                 End If
-            ElseIf clsParam.strArgumentName = "y" Then
+                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorDotPlot.bSingleVariable) Then
                 ucrVariablesAsFactorDotPlot.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "fill" Then
                 ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)

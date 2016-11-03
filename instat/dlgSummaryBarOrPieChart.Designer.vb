@@ -82,7 +82,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrYReceiver
         '
-        Me.ucrYReceiver.Location = New System.Drawing.Point(287, 69)
+        Me.ucrYReceiver.Location = New System.Drawing.Point(291, 69)
         Me.ucrYReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYReceiver.Name = "ucrYReceiver"
         Me.ucrYReceiver.Selector = Nothing
@@ -91,7 +91,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrFactorReceiver
         '
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(287, 123)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(291, 123)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
@@ -101,7 +101,7 @@ Partial Class dlgSummaryBarOrPieChart
         'lblYvariable
         '
         Me.lblYvariable.AutoSize = True
-        Me.lblYvariable.Location = New System.Drawing.Point(284, 47)
+        Me.lblYvariable.Location = New System.Drawing.Point(291, 47)
         Me.lblYvariable.Name = "lblYvariable"
         Me.lblYvariable.Size = New System.Drawing.Size(54, 13)
         Me.lblYvariable.TabIndex = 2
@@ -111,7 +111,7 @@ Partial Class dlgSummaryBarOrPieChart
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(293, 104)
+        Me.lblFactor.Location = New System.Drawing.Point(291, 104)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(37, 13)
         Me.lblFactor.TabIndex = 4
@@ -140,7 +140,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrSecondFactorReceiver
         '
-        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(287, 180)
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(291, 180)
         Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
@@ -150,7 +150,7 @@ Partial Class dlgSummaryBarOrPieChart
         'lblSecondFactor
         '
         Me.lblSecondFactor.AutoSize = True
-        Me.lblSecondFactor.Location = New System.Drawing.Point(293, 161)
+        Me.lblSecondFactor.Location = New System.Drawing.Point(291, 161)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(77, 13)
         Me.lblSecondFactor.TabIndex = 6
