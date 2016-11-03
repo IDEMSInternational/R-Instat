@@ -266,6 +266,12 @@
     <Compile Include="dlgTwoVariableUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DlgUseDate.Designer.vb">
+      <DependentUpon>DlgUseDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DlgUseDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgAddNewDistribution.Designer.vb">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </Compile>
@@ -2705,6 +2711,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgUseDate.resx">
+      <DependentUpon>DlgUseDate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseGraph.fr-FR.resx">
       <DependentUpon>dlgUseGraph.vb</DependentUpon>
