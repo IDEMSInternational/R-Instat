@@ -22,12 +22,15 @@ Public Class Distribution
     Public strPFunctionName As String = ""
     Public strQFunctionName As String = ""
     Public strDFunctionName As String = ""
+    Public strExactName As String = ""
     Public strGLMFunctionName As String = ""
     Public bNumeric As Boolean = False
     Public bFactor As Boolean = False
     Public bTwoLevelFactor As Boolean = False
     Public bPositiveInt As Boolean = False
     Public bIsContinuous As Boolean = True
+    Public bIsExact As Boolean = False
+    Public lstExact As String()
     Public clsParameters As New List(Of DistributionParameter)
 
     Public Sub SetNameTag(strTemp As String)
