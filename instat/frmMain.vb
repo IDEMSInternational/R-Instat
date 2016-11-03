@@ -1241,4 +1241,12 @@ Public Class frmMain
     Private Sub mnuModelProbabilityDistributionsCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsCompareModels.Click
         dlgCompareModels.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeGeneralColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralColumnSummaries.Click
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnUseDate.Click
+        DlgUseDate.ShowDialog()
+    End Sub
 End Class

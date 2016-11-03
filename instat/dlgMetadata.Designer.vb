@@ -40,7 +40,7 @@ Partial Class dlgMetadata
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(32, 273)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 279)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -49,7 +49,7 @@ Partial Class dlgMetadata
         '
         Me.ucrSelectByMetadata.bShowHiddenColumns = False
         Me.ucrSelectByMetadata.bUseCurrentFilter = False
-        Me.ucrSelectByMetadata.Location = New System.Drawing.Point(9, 48)
+        Me.ucrSelectByMetadata.Location = New System.Drawing.Point(9, 12)
         Me.ucrSelectByMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectByMetadata.Name = "ucrSelectByMetadata"
         Me.ucrSelectByMetadata.Size = New System.Drawing.Size(210, 180)
@@ -57,7 +57,7 @@ Partial Class dlgMetadata
         '
         'ucrReceiverChooseProperty
         '
-        Me.ucrReceiverChooseProperty.Location = New System.Drawing.Point(242, 82)
+        Me.ucrReceiverChooseProperty.Location = New System.Drawing.Point(242, 65)
         Me.ucrReceiverChooseProperty.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverChooseProperty.Name = "ucrReceiverChooseProperty"
         Me.ucrReceiverChooseProperty.Selector = Nothing
@@ -86,7 +86,7 @@ Partial Class dlgMetadata
         '
         'lblChooseColumns
         '
-        Me.lblChooseColumns.Location = New System.Drawing.Point(239, 146)
+        Me.lblChooseColumns.Location = New System.Drawing.Point(239, 89)
         Me.lblChooseColumns.Name = "lblChooseColumns"
         Me.lblChooseColumns.Size = New System.Drawing.Size(100, 23)
         Me.lblChooseColumns.TabIndex = 7
@@ -94,7 +94,7 @@ Partial Class dlgMetadata
         '
         'ucrReceiverChooseColumns
         '
-        Me.ucrReceiverChooseColumns.Location = New System.Drawing.Point(242, 169)
+        Me.ucrReceiverChooseColumns.Location = New System.Drawing.Point(242, 112)
         Me.ucrReceiverChooseColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverChooseColumns.Name = "ucrReceiverChooseColumns"
         Me.ucrReceiverChooseColumns.Selector = Nothing
@@ -103,7 +103,7 @@ Partial Class dlgMetadata
         '
         'lblCurrentValue
         '
-        Me.lblCurrentValue.Location = New System.Drawing.Point(382, 135)
+        Me.lblCurrentValue.Location = New System.Drawing.Point(6, 221)
         Me.lblCurrentValue.Name = "lblCurrentValue"
         Me.lblCurrentValue.Size = New System.Drawing.Size(84, 23)
         Me.lblCurrentValue.TabIndex = 5
@@ -111,7 +111,7 @@ Partial Class dlgMetadata
         '
         'lblNewValue
         '
-        Me.lblNewValue.Location = New System.Drawing.Point(390, 172)
+        Me.lblNewValue.Location = New System.Drawing.Point(6, 255)
         Me.lblNewValue.Name = "lblNewValue"
         Me.lblNewValue.Size = New System.Drawing.Size(76, 18)
         Me.lblNewValue.TabIndex = 4
@@ -120,14 +120,14 @@ Partial Class dlgMetadata
         'ucrCurrentValue
         '
         Me.ucrCurrentValue.IsReadOnly = False
-        Me.ucrCurrentValue.Location = New System.Drawing.Point(472, 135)
+        Me.ucrCurrentValue.Location = New System.Drawing.Point(105, 221)
         Me.ucrCurrentValue.Name = "ucrCurrentValue"
         Me.ucrCurrentValue.Size = New System.Drawing.Size(137, 21)
         Me.ucrCurrentValue.TabIndex = 3
         '
         'ucrNewValue
         '
-        Me.ucrNewValue.Location = New System.Drawing.Point(471, 169)
+        Me.ucrNewValue.Location = New System.Drawing.Point(102, 251)
         Me.ucrNewValue.Name = "ucrNewValue"
         Me.ucrNewValue.Size = New System.Drawing.Size(140, 22)
         Me.ucrNewValue.TabIndex = 2
@@ -145,7 +145,7 @@ Partial Class dlgMetadata
         'ucrInputDefineProperty
         '
         Me.ucrInputDefineProperty.IsReadOnly = False
-        Me.ucrInputDefineProperty.Location = New System.Drawing.Point(242, 82)
+        Me.ucrInputDefineProperty.Location = New System.Drawing.Point(242, 65)
         Me.ucrInputDefineProperty.Name = "ucrInputDefineProperty"
         Me.ucrInputDefineProperty.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputDefineProperty.TabIndex = 0
@@ -154,7 +154,7 @@ Partial Class dlgMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(684, 337)
+        Me.ClientSize = New System.Drawing.Size(528, 338)
         Me.Controls.Add(Me.ucrInputDefineProperty)
         Me.Controls.Add(Me.grpProperty)
         Me.Controls.Add(Me.ucrNewValue)
@@ -170,7 +170,9 @@ Partial Class dlgMetadata
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgMetadata"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Metadata"
+        Me.Text = "Metadata"
         Me.grpProperty.ResumeLayout(False)
         Me.ResumeLayout(False)
 

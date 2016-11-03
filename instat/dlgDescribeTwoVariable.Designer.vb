@@ -32,6 +32,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverFirstVar = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseDescribeTwoVar = New instat.ucrButtons()
+        Me.chkOmitMissing = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblFirstVariable
@@ -64,7 +65,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(282, 198)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(282, 199)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 0
@@ -126,11 +127,21 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrBaseDescribeTwoVar.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseDescribeTwoVar.TabIndex = 8
         '
+        'chkOmitMissing
+        '
+        Me.chkOmitMissing.Location = New System.Drawing.Point(132, 198)
+        Me.chkOmitMissing.Name = "chkOmitMissing"
+        Me.chkOmitMissing.Size = New System.Drawing.Size(126, 25)
+        Me.chkOmitMissing.TabIndex = 12
+        Me.chkOmitMissing.Text = "Omit Missing Values"
+        Me.chkOmitMissing.UseVisualStyleBackColor = True
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 292)
+        Me.Controls.Add(Me.chkOmitMissing)
         Me.Controls.Add(Me.lbSecondVariable)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.cmdDisplayOptions)
@@ -163,4 +174,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents lblFirstVariables As Label
     Friend WithEvents lbSecondVariable As Label
+    Friend WithEvents chkOmitMissing As CheckBox
 End Class
