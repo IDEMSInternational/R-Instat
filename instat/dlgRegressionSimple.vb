@@ -421,34 +421,17 @@ Public Class dlgRegressionSimple
             lblHyp1.Visible = True
             nudHypothesis.Visible = True
 
+            ' once OneVarHyp has been merged, the below code can be used
 
-            ' need to implement once this and OneVarHyp have been merged.
+            '           If ucrFamily.clsCurrDistribution.bIsExact = True Then
+            '           lblHyp1.Text = ucrFamily.clsCurrDistribution.lstExact(1)
+            '           nudHyp1.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+            '           nudHyp1.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
+            '           nudHyp1.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
+            '           nudHyp1.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+            '           nudHyp1.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
+            '       End If
             '''' write in the code I need to implement
-
-
-
-            ' "Normal"
-            'nudHypothesis.Increment = 1
-            'nudHypothesis.Maximum = Integer.MaxValue
-            'nudHypothesis.Minimum = Integer.MinValue
-            'nudHypothesis.Value = 0
-            'nudHyp2.Visible = False
-
-            '"Poisson" Then
-            '    chkPaired.Visible = False
-            '    nudHypothesis.Increment = 1
-            '    nudHypothesis.Maximum = Integer.MaxValue
-            '    nudHypothesis.Minimum = 0
-            '    nudHypothesis.Value = 1
-            '    nudHyp2.Visible = False
-
-            ' bernoulli
-            '    chkPaired.Visible = False
-            '    nudHypothesis.Increment = 0.1
-            '    nudHypothesis.Maximum = 1
-            '    nudHypothesis.Minimum = 0
-            '    nudHypothesis.Value = 0.5
-
             If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 nudHyp2.Visible = True
                 nudHyp2.Increment = 0.1
