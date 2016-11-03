@@ -225,8 +225,10 @@ Public Class ucrGeom
 
 
         clsgeom_boxplot.SetGeomName("geom_boxplot")
-        clsgeom_boxplot.AddAesParameter("x")
+        'Mandatory Aesthetics
         clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        'Optional Aesthetics
+        clsgeom_boxplot.AddAesParameter("x")
         'Warning: When x is continuous, there needs to be a grouping variable... for example cut_width(x,0.25). In our setting, a factor column can be used. If group is empty, R will send a warning message and ignore the x variable (still labels x though).
         'Task: Add a warning message in the front end to explain the necessity to specify group. Give suggestions on how to proceed (use an existing factor, create a new factor column using cut_width...). To do when front-end messages will have been sorted properly.
         clsgeom_boxplot.AddAesParameter("group", strIncludedDataTypes:={"factor"})
@@ -347,25 +349,45 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_curve)
 
         clsgeom_density.strGeomName = "geom_density"
-        'mandatory
-        clsgeom_density.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        'we can map a continuous variable to y but we must include stat = “identity” inside the geom
-        clsgeom_density.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
-        'optional
-        clsgeom_density.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("size", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        'Mandatory Aesthetics
+        ''All datatypes work as x aesthetics although the most common one is factor.
+        clsgeom_density.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True) 'Question/Task: Could take factors, doesn't give error. However don't know if that makes sense ? 
+        'Optional Aesthetics
+        'clsgeom_density.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
+        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. However don't know how much sense this makes. Also all the geom_density parameters are actually stat_density parameters. Hence if stat is changed, get in trouble.
+        'Question to be discussed: So the only valid y value seems to be ..count.. which could be a tick on the dialog, that is then ticked automatically when position "stack" is used ?
+        'clsgeom_density.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"})) 'Warning/question: Don't really understand how this is used. When I give a numeric variable, sends a warning message saying that our density plot won't be a real density plot, still plots. When given a factor, there is a plot but nothing on it + warning message.
+        clsgeom_density.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"})) 'Varies transparence of the fill.
+        clsgeom_density.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_density.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"})) 'Colour of the outline.
+        clsgeom_density.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Outline linetype.
+        clsgeom_density.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"})) 'Varies the size of the outline.
 
         'adding layer parameters
+        'Geom_density layer parameters
+        clsgeom_density.AddLayerParameter("bw", "list", "nrd0", lstParameterStrings:={"nrd0", "SJ", "nrd", "ucv", "bcv"}) 'Bandwidth.
+        clsgeom_density.AddLayerParameter("adjust", "numeric", "1", lstParameterStrings:={1, 0}) 'The bandwidth used is actually adjust*bw. This makes it easy to specify values like ‘half the default’ bandwidth.
+        clsgeom_density.AddLayerParameter("kernel", "list", Chr(34) & "gaussian" & Chr(34), lstParameterStrings:={Chr(34) & "gaussian" & Chr(34), Chr(34) & "rectangular" & Chr(34), Chr(34) & "triangular" & Chr(34), Chr(34) & "epanechnikov" & Chr(34), Chr(34) & "biweight" & Chr(34), Chr(34) & "cosine" & Chr(34), Chr(34) & "optcosin" & Chr(34)}) 'A character string giving the smoothing kernel to be used.
+        clsgeom_density.AddLayerParameter("n", "integer", "512", lstParameterStrings:={0, 0}) 'The number of equally spaced points at which the density is to be estimated. When n > 512, it is rounded up to a power of 2 during the calculations. If negative, sends an error.
+        clsgeom_density.AddLayerParameter("trim", "boolean", "FALSE")
+        'This parameter only matters if you are displaying multiple densities in one plot. If FALSE, the default, each density is computed on the full range of the data. If TRUE, each density is computed over the range of that group: this typically means the estimated x values will not line-up, and hence you won't be able to stack density values.
+
+        'Global Layer parameters
         clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34)})
-        clsgeom_density.AddLayerParameter("bw", "list", "nrd0", lstParameterStrings:={"nrd0", "nrd", "ucv", "bcv", "SJ"})
-        clsgeom_density.AddLayerParameter("adjust", "numeric", "1", lstParameterStrings:={1, 1})
-        clsgeom_density.AddLayerParameter("kernel", "list", Chr(34) & "gaussian" & Chr(34), lstParameterStrings:={Chr(34) & "gaussian" & Chr(34), Chr(34) & "rectangular" & Chr(34), Chr(34) & "triangular" & Chr(34), Chr(34) & "epanechnikov" & Chr(34), Chr(34) & "biweight" & Chr(34), Chr(34) & "cosine" & Chr(34), Chr(34) & "optcosin" & Chr(34)})
+        clsgeom_density.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: The default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
+        clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34)})
+        'Warning: "Stacked density plots: if you want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
+        'Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
+        'See global comments about position.
+
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_density.AddLayerParameter("fill", "colour", "White")
+        clsgeom_density.AddLayerParameter("colour", "colour", "Black")
+        clsgeom_density.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={1, 0, 6})
+        clsgeom_density.AddLayerParameter("alpha", "numeric", "0", lstParameterStrings:={0.01, 0, 1}) 'Varies transparence of fill.
+
         lstAllGeoms.Add(clsgeom_density)
+
 
         'clsgeom_density2d.strGeomName = "geom_density2d"
         ''Mandatory
