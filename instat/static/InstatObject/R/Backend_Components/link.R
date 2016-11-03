@@ -142,7 +142,7 @@ instat_object$set("public", "get_linked_to_definition", function(from_data_frame
     for(curr_link in private$.links) {
       for(curr_link_pairs in curr_link$link_columns) {
         if(length(link_pairs) == length(curr_link_pairs) && setequal(link_pairs, names(curr_link_pairs))) {
-          return(list(to_data_name, curr_link_pairs))
+          return(list(to_data_name, as.vector(curr_link_pairs)))
         }
       }
     }
@@ -155,13 +155,36 @@ instat_object$set("public", "get_possible_linked_to_defintion", function(from_da
   def <- self$get_linked_to_definition(from_data_frame, link_pairs)
   if(length(def) != 0) return(def)
   else {
-    curr_data_frames <- c(from_data_frame)
-    for(data_name in self$get_data_names()) {
-      if(self$link_exists_between_containing()) {
-        curr_data_frames <- c(curr_data_frames, data_name)
+    prev_data_links <- list(list(from_data_frame, link_pairs))
+    continue <- TRUE
+    while(continue) {
+      curr_data_links <- prev_data_links
+      curr_data_names <- sapply(curr_data_links, function(x) x[[1]])
+      for(to_data_name in self$get_data_names()) {
+        i = 1
+        for(curr_from_data_frame in curr_data_names) {
+          curr_link_cols <- self$link_between_containing(curr_from_data_frame, curr_data_links[[i]][[2]], to_data_name)
+          # Is it enough to check unqiue data frames?
+          if(length(curr_link_cols) != 0 && !(to_data_name %in% sapply(curr_data_links, function(x) x[[1]]))) {
+            curr_data_links[[length(curr_data_links) + 1]] <- list(to_data_name, curr_link_cols)
+          }
+          i = i + 1
+        }
       }
+      if(length(prev_data_links) != length(curr_data_links)) {
+        curr_data_names <- sapply(curr_data_links, function(x) x[[1]])
+        prev_data_names <- sapply(prev_data_links, function(x) x[[1]])
+        for(i in seq_along(curr_data_names)) {
+          if(curr_data_names[i] %in% setdiff(curr_data_names, prev_data_names)) {
+            def <- self$get_linked_to_definition(curr_data_names[i], curr_data_links[[i]][[2]])
+            if(length(def) > 0) return(def)
+          }
+        }
+        prev_data_links <- curr_data_links
+      }
+      else continue <- FALSE
     }
-    curr_data_frames <- unique(curr_data_frames)
+    return(c())
   }
 }
 )
@@ -177,18 +200,20 @@ instat_object$set("public", "link_between_containing", function(from_data_frame,
     curr_link <- self$get_link_between(from_data_frame, to_data_frame)
     for(curr_link_pairs in curr_link$link_columns) {
       if(curr_link$from_data_frame == from_data_frame) {
-        if(length(containing_columns) <= length(curr_link_pairs) && all(containing_columns %in% names(curr_link_pairs))) {
+        if(all(containing_columns %in% names(curr_link_pairs))) {
           ind <- which(names(curr_link_pairs) %in% containing_columns)
-          return(names(curr_link_pairs)[ind])
+          return(as.vector(curr_link_pairs[ind]))
         }
       }
       else {
-        if(length(containing_columns) <= length(curr_link_pairs) && all(containing_columns %in% curr_link_pairs)) {
-          return(TRUE)
+        if(all(containing_columns %in% curr_link_pairs)) {
+          ind <- which(curr_link_pairs %in% containing_columns)
+          return(names(curr_link_pairs)[ind])
         }
       }
     }
   }
+  return(c())
 }
 )
 
