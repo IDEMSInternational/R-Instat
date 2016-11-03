@@ -230,8 +230,7 @@ Public Class dlgMakeDate
                 ucrInputFormat.Visible = False
                 ucrBase.clsRsyntax.RemoveParameter("format")
                 ucrBase.clsRsyntax.RemoveParameter("origin")
-                ucrBase.clsRsyntax.RemoveParameter("as.Date")
-                ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
+                ucrReceiverForDate.SetIncludedDataTypes({"character", "factor", "Date"})
             End If
             ucrBase.clsRsyntax.RemoveParameter("year")
             ucrBase.clsRsyntax.RemoveParameter("doy")
