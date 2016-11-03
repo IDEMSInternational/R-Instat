@@ -74,6 +74,8 @@ Partial Class dlgCopySheet
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCopySheet"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Copy Sheet"
         Me.ResumeLayout(False)
 
     End Sub
