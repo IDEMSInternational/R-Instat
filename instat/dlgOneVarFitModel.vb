@@ -16,8 +16,8 @@
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
-    Public clsRConvert, clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsRBinomTest, clsRPoissonTest As New RFunction
-    Public clsFunctionOperator As New ROperator
+    Public clsRConvert, clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart As New RFunction
+    Public clsFunctionOperator, clsFactorOperator As New ROperator
     Public bfirstload As Boolean = True
 
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -54,6 +54,7 @@ Public Class dlgOneVarFitModel
         nudCI.Maximum = 1
         nudCI.Minimum = 0
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
+        cboVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
     End Sub
 
     Private Sub SetDefaults()
@@ -113,14 +114,19 @@ Public Class dlgOneVarFitModel
                 UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
             Else
                 'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
-                If UcrDistributions.clsCurrDistribution.strNameTag = "Poisson" OrElse UcrDistributions.clsCurrDistribution.strNameTag = "Geometric" OrElse UcrDistributions.clsCurrDistribution.strNameTag = "Negative_Binomial" Then
+                If UcrDistributions.clsCurrDistribution.strNameTag = "Poisson" OrElse UcrDistributions.clsCurrDistribution.strNameTag = "Geometric" Then
                     clsRConvert.SetRCommand("as.integer")
                     clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                    UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvert)
                 Else
                     clsRConvert.SetRCommand("as.vector")
                     clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                    UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvert)
+                End If
+                If UcrDistributions.clsCurrDistribution.strNameTag = "Extreme_Value" Or UcrDistributions.clsCurrDistribution.strNameTag = "Binomial" Or UcrDistributions.clsCurrDistribution.strNameTag = "Bernouli" Or UcrDistributions.clsCurrDistribution.strNameTag = "Students_t" Or UcrDistributions.clsCurrDistribution.strNameTag = "Chi_Square" Or UcrDistributions.clsCurrDistribution.strNameTag = "F" Or UcrDistributions.clsCurrDistribution.strNameTag = "Hypergeometric" Then
+                    clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
+                    clsRStartValues.SetRCommand("mean")
+                    clsRStartValues.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
                 End If
             End If
         Else
@@ -135,6 +141,7 @@ Public Class dlgOneVarFitModel
         clsRBinomTest.ClearParameters()
         clsRTTest.ClearParameters()
         clsRConvert.ClearParameters()
+        clsRStartValues.ClearParameters()
         If rdoGeneral.Checked Then
             FitDistFunction()
         ElseIf rdoSpecific.Checked Then
@@ -184,12 +191,41 @@ Public Class dlgOneVarFitModel
         clsRBinomTest.AddParameter("p", nudHyp.Value.ToString)
         clsRBinomTest.AddParameter("conf.level", nudCI.Value.ToString)
         If chkBinModify.Checked Then
-            clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
-            clsFunctionOperator.SetOperation(ucrOperator.GetText())
-            clsFunctionOperator.SetParameter(True, clsRFunc:=UcrReceiver.GetVariables())
-            clsFunctionOperator.SetParameter(False, strValue:=nudBinomialConditions.Value.ToString())
+            If UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character" Then
+                clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
+                clsFactorOperator.SetOperation("==")
+                clsFactorOperator.SetParameter(True, clsRFunc:=UcrReceiver.GetVariables())
+                clsFactorOperator.SetParameter(False, strValue:=cboVariables.GetText())
+            Else
+                clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
+                clsFunctionOperator.SetOperation(ucrOperator.GetText())
+                clsFunctionOperator.SetParameter(True, clsRFunc:=UcrReceiver.GetVariables())
+                clsFunctionOperator.SetParameter(False, strValue:=nudBinomialConditions.Value.ToString())
+            End If
         Else
             clsRBinomTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        End If
+    End Sub
+
+    Private Sub PlotResiduals()
+        clsRConvert.ClearParameters()
+        clsRplot.SetRCommand("plot")
+        clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
+        clsRfitdist.SetRCommand("fitdist")
+        clsRfitdist.AddParameter("distr", Chr(34) & UcrDistributions.clsCurrDistribution.strRName & Chr(34))
+        If UcrDistributions.clsCurrDistribution.strNameTag = "Poisson" Then
+            clsRConvert.SetRCommand("as.integer")
+            clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvert)
+        Else
+            clsRConvert.SetRCommand("as.vector")
+            clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvert)
+        End If
+        If UcrDistributions.clsCurrDistribution.strNameTag = "Bernouli" Then
+            clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
+            clsRBinomStart.SetRCommand("mean")
+            clsRBinomStart.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         End If
     End Sub
 
@@ -215,6 +251,7 @@ Public Class dlgOneVarFitModel
         SetBaseFunction()
         TestOKEnabled()
         EnableOptions()
+        PlotResiduals()
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
@@ -252,8 +289,9 @@ Public Class dlgOneVarFitModel
             If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
                 sdgOneVarFitModDisplay.RunLikelihoods()
             End If
-            '  If Not sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
-            'message to say likelihood won't be displayed
+        Else
+            PlotResiduals()
+            frmMain.clsRLink.RunScript(clsRplot.ToScript(), 2)
         End If
     End Sub
 
@@ -319,10 +357,11 @@ Public Class dlgOneVarFitModel
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()
+        PlotResiduals()
     End Sub
 
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblMean.VisibleChanged, lblRate.VisibleChanged, lblprobability.VisibleChanged, lblConfidenceLimit.VisibleChanged, lblSuccessIf.VisibleChanged
-        Display()
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblMean.VisibleChanged, lblRate.VisibleChanged, lblprobability.VisibleChanged, lblConfidenceLimit.VisibleChanged, lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged
+        BinomialConditions()
     End Sub
 
     Private Sub nudCI_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHyp.TextChanged
@@ -331,7 +370,7 @@ Public Class dlgOneVarFitModel
 
     Private Sub chkBinModify_CheckedChanged(sender As Object, e As EventArgs) Handles chkBinModify.CheckedChanged
         BinomialConditions()
-        SetBinomialTest() '''' do we need this?
+        SetBinomialTest()
     End Sub
 
     Private Sub BinomialConditions()
@@ -339,19 +378,31 @@ Public Class dlgOneVarFitModel
             chkBinModify.Visible = True
             If chkBinModify.Checked Then
                 lblSuccessIf.Visible = True
-                nudBinomialConditions.Visible = True
-                ucrOperator.Visible = True
+                If UcrReceiver.strCurrDataType = "factor" Then
+                    cboVariables.Visible = True
+                    lblEquals.Visible = True
+                Else
+                    lblEquals.Visible = False
+                    nudBinomialConditions.Visible = True
+                    ucrOperator.Visible = True
+                    cboVariables.Visible = False
+                End If
+
             Else
                 lblSuccessIf.Visible = False
+                lblEquals.Visible = False
                 nudBinomialConditions.Visible = False
                 ucrOperator.Visible = False
+                cboVariables.Visible = False
             End If
         Else
             chkBinModify.Visible = False
             chkBinModify.Checked = False
             lblSuccessIf.Visible = False
+            lblEquals.Visible = False
             nudBinomialConditions.Visible = False
             ucrOperator.Visible = False
+            cboVariables.Visible = False
         End If
         nudBinomialConditions.Value = 1
         nudBinomialConditions.Maximum = Integer.MaxValue
@@ -360,6 +411,11 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub nudBinomialConditions_ValueChanged(sender As Object, e As EventArgs) Handles nudBinomialConditions.ValueChanged
+        SetBinomialTest()
+    End Sub
+
+    Private Sub cboVariables_TextChanged(sender As Object, e As EventArgs) Handles cboVariables.TextChanged
+        BinomialConditions()
         SetBinomialTest()
     End Sub
 End Class
