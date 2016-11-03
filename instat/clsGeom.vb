@@ -23,7 +23,7 @@ Public Class Geoms
         strGeomName = strTempName
     End Sub
 
-    Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False)
+    Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False, Optional bIsDependentlyMandatory As Boolean = False)
         'will be adding parameters to the geom as well as the value of the parameter.
         Dim NewAesParameter As New AesParameters
         NewAesParameter.strAesParameterName = strAesParameterName
@@ -31,6 +31,7 @@ Public Class Geoms
         NewAesParameter.strIncludedDataTypes = strIncludedDataTypes
         NewAesParameter.strExcludedDataTypes = strExcludedDataTypes
         NewAesParameter.bIsMandatory = bIsMandatory
+        NewAesParameter.bIsDependentlyMandatory = bIsDependentlyMandatory
         clsAesParameters.Add(NewAesParameter)
     End Sub
 
@@ -71,6 +72,7 @@ Public Class AesParameters
     Public strExcludedDataTypes As String()
     Public strAesParameterValue As String
     Public bIsMandatory As Boolean
+    Public bIsDependentlyMandatory As Boolean 'proposition for solving the situation in which one out of two aes need to be filled. For the moment in scatterplot only.
 End Class
 
 Public Class LayerParameter

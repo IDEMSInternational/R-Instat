@@ -119,6 +119,12 @@ Public Class sdgLayerOptions
             If clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If
+        ElseIf clsGeomFunction.strRCommand = "geom_point" Then
+            If clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+                clsAesFunction.AddParameter("x", Chr(34) & Chr(34))
+            ElseIf clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
+                clsAesFunction.AddParameter("y", Chr(34) & Chr(34))
+            End If
         End If
     End Sub
 End Class
