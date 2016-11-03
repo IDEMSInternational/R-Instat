@@ -527,24 +527,23 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
         # Probably not, done below instead
         # if(length(calc_dependencies) > 0) self$append_to_variables_metadata(to_data_name, calc_link_cols, dependencies_label, calc_dependencies)
         
-        # This creates list to indicate the dependent columns of the link columns in the to_data_frame, the name of the list is the from_data_name
-        # Need to do separately for each link column because they have different dependencies
-        for(curr_link_col in calc_link_cols) {
-          #TODO not sure this is correct dependencies, see TODO above
-          link_col_in_from_data <- list(curr_link_col)
-          names(link_col_in_from_data) <- calc_from_data_name
-          self$append_to_variables_metadata(to_data_name, curr_link_col, dependencies_label, link_col_in_from_data)
-          # Same list as above except has name to_data_frame, to be passed in to indicate the columns which depend on the link columns in the from_data_frame
-          link_col_in_to_data <- list(curr_link_col)
-          names(link_col_in_to_data) <- to_data_name
-          self$add_dependent_columns(calc_from_data_name, curr_link_col, link_col_in_to_data)
-        }
+        # Now removed. The link columns are not classed as calculated, they are classed as "key"
+        # and they are part of the link between the two data frames
+        # self$append_to_variables_metadata(to_data_name, calc_link_cols, calculated_by_label, calc$name)
+        # for(curr_link_col in calc_link_cols) {
+        #   link_col_in_from_data <- list(curr_link_col)
+        #   names(link_col_in_from_data) <- calc_from_data_name
+        #   self$append_to_variables_metadata(to_data_name, curr_link_col, dependencies_label, link_col_in_from_data)
+        #   # Same list as above except has name to_data_frame, to be passed in to indicate the columns which depend on the link columns in the from_data_frame
+        #   link_col_in_to_data <- list(curr_link_col)
+        #   names(link_col_in_to_data) <- to_data_name
+        #   self$add_dependent_columns(calc_from_data_name, curr_link_col, link_col_in_to_data)
+        # }
 
         # Adds metadata at data frame level to indicate that the data frame is calculated
+        # Note: all columns do not have to be calculated for data frame to be classed as calculated
         self$append_to_dataframe_metadata(to_data_name, is_calculated_label, TRUE)
         
-        # This adds metadata: calculated_by to the linking columns, with value as the name of the calculation
-        self$append_to_variables_metadata(to_data_name, calc_link_cols, calculated_by_label, calc$name)
       }
     }
     else {
