@@ -369,6 +369,16 @@ data_object$set("public", "get_changes", function() {
 }
 )
 
+data_object$set("public", "get_calculations", function() {
+  return(private$calculations)
+}
+)
+
+data_object$set("public", "get_calculation_names", function() {
+  return(names(private$calculations))
+}
+)
+
 data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
   
   # Column name must be character
