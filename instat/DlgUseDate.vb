@@ -51,7 +51,7 @@ Public Class dlgUseDate
 
 
     End Sub
-    'Disabling ok
+    'Disabling TesOKEnabled by Ensuring in all cases its disabled
     Private Sub TestOKEnabled()
         If Not ucrReceiverUseDate.IsEmpty Then
             ucrBase.OKEnabled(False)
