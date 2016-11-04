@@ -172,6 +172,8 @@ Public Class dlgRegressionSimple
             If ucrResponse.strCurrDataType = "factor" Or ucrResponse.strCurrDataType = "character" Then
                 ucrResponse.Clear()
             End If
+            '           ucrExplanatory.SetDataType = {"numeric", "integer"}
+
             '            ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer"
             '            ucrResponse.strCurrDataType = "numeric" Or ucrResponse.strCurrDataType = "integer" Or ucrResponse.strCurrDataType = "positive integer"
         End If
@@ -191,8 +193,8 @@ Public Class dlgRegressionSimple
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
 
-        '        clsRPoisson.AddParameter("x", "c(" & clsRLength & "," & clsRLength2 & ")")
-        '        clsRPoisson.AddParameter("T", "c(" & clsRMean & "," & clsRMean2 & ")")
+        clsRPoisson.AddParameter("x", "c(" & clsRLength.ToScript & "," & clsRLength2.ToScript & ")")
+        clsRPoisson.AddParameter("T", "c(" & clsRMean.ToScript & "," & clsRMean2.ToScript & ")")
     End Sub
 
     Private Sub SetRCode()
