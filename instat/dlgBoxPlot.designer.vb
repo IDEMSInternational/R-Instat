@@ -27,12 +27,13 @@ Partial Class dlgBoxplot
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
         Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
+        Me.ucrSaveBoxplot = New instat.ucrSaveGraph()
         Me.ucrVariablesAsFactorForBoxplot = New instat.ucrVariablesAsFactor()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveBoxplot = New instat.ucrSaveGraph()
+        Me.chkVarwidth = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -86,6 +87,13 @@ Partial Class dlgBoxplot
         Me.chkHorizontalBoxplot.Text = "Horizontal Boxplot"
         Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
         '
+        'ucrSaveBoxplot
+        '
+        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 262)
+        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
+        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(268, 23)
+        Me.ucrSaveBoxplot.TabIndex = 10
+        '
         'ucrVariablesAsFactorForBoxplot
         '
         Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(275, 32)
@@ -129,18 +137,23 @@ Partial Class dlgBoxplot
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
         '
-        'ucrSaveBoxplot
+        'chkVarwidth
         '
-        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 262)
-        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
-        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(268, 23)
-        Me.ucrSaveBoxplot.TabIndex = 10
+        Me.chkVarwidth.AutoSize = True
+        Me.chkVarwidth.Location = New System.Drawing.Point(138, 202)
+        Me.chkVarwidth.Name = "chkVarwidth"
+        Me.chkVarwidth.Size = New System.Drawing.Size(112, 17)
+        Me.chkVarwidth.TabIndex = 11
+        Me.chkVarwidth.Tag = "Vary_boxplot_width"
+        Me.chkVarwidth.Text = "Vary boxplot width"
+        Me.chkVarwidth.UseVisualStyleBackColor = True
         '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 344)
+        Me.Controls.Add(Me.chkVarwidth)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
         Me.Controls.Add(Me.chkHorizontalBoxplot)
@@ -176,4 +189,5 @@ Partial Class dlgBoxplot
     Friend WithEvents chkHorizontalBoxplot As CheckBox
     Friend WithEvents ucrVariablesAsFactorForBoxplot As ucrVariablesAsFactor
     Friend WithEvents ucrSaveBoxplot As ucrSaveGraph
+    Friend WithEvents chkVarwidth As CheckBox
 End Class

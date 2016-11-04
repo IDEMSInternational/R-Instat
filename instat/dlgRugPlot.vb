@@ -125,9 +125,7 @@ Public Class dlgRugPlot
         sdgLayerOptions.ShowDialog()
 
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "y" Then
-                'TODO Fix this generally
-                'ucrVariablesAsFactorForScatter.SetSingleReceiverStatus(True)
+            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForRugPlot.bSingleVariable) Then
                 ucrVariablesAsFactorForRugPlot.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "x" Then
                 ucrReceiverX.Add(clsParam.strArgumentValue)
