@@ -641,9 +641,9 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_point.strGeomName = "geom_point"
-        'mandatory aesthetics : here x and y are mandatory, however, if one is filled, the other one get's default value "", hence one of the two needs to be filled.
-        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}) ' bIsDependentlyMandatory:=True  
-        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}) ' bIsDependentlyMandatory:=True : will add these two if Bug Fixing #2002 is merged with the jointly mandatory method.
+        'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=True in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
+        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
         'optional
         clsgeom_point.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
