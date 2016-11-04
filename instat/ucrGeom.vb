@@ -367,7 +367,8 @@ Public Class ucrGeom
         clsgeom_density.AddLayerParameter("bw", "list", Chr(34) & "nrd0" & Chr(34), lstParameterStrings:={Chr(34) & "nrd0" & Chr(34), Chr(34) & "SJ" & Chr(34), Chr(34) & "nrd" & Chr(34), Chr(34) & "ucv" & Chr(34), Chr(34) & "bcv" & Chr(34)}) 'Bandwidth.
         clsgeom_density.AddLayerParameter("adjust", "numeric", "1", lstParameterStrings:={1, 0}) 'The bandwidth used is actually adjust*bw. This makes it easy to specify values like ‘half the default’ bandwidth.
         clsgeom_density.AddLayerParameter("kernel", "list", Chr(34) & "gaussian" & Chr(34), lstParameterStrings:={Chr(34) & "gaussian" & Chr(34), Chr(34) & "rectangular" & Chr(34), Chr(34) & "triangular" & Chr(34), Chr(34) & "epanechnikov" & Chr(34), Chr(34) & "biweight" & Chr(34), Chr(34) & "cosine" & Chr(34), Chr(34) & "optcosin" & Chr(34)}) 'A character string giving the smoothing kernel to be used.
-        clsgeom_density.AddLayerParameter("n", "numeric", "512", lstParameterStrings:={0, 0}) 'The number of equally spaced points at which the density is to be estimated. When n > 512, it is rounded up to a power of 2 during the calculations. If negative, sends an error.
+        'This is only a parameter in developer version of ggplot. May soon be in release version.
+        'clsgeom_density.AddLayerParameter("n", "numeric", "512", lstParameterStrings:={0, 0}) 'The number of equally spaced points at which the density is to be estimated. When n > 512, it is rounded up to a power of 2 during the calculations. If negative, sends an error.
         clsgeom_density.AddLayerParameter("trim", "boolean", "FALSE")
         'This parameter only matters if you are displaying multiple densities in one plot. If FALSE, the default, each density is computed on the full range of the data. If TRUE, each density is computed over the range of that group: this typically means the estimated x values will not line-up, and hence you won't be able to stack density values.
 
@@ -450,11 +451,11 @@ Public Class ucrGeom
 
 
         'clsgeom_errorbar.strGeomName = "geom_errorbar"
-        '''Mandatory
+        'Mandatory
         'clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
         'clsgeom_errorbar.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'clsgeom_errorbar.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        '''Optional
+        'Optional
         'clsgeom_errorbar.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
         'clsgeom_errorbar.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         'clsgeom_errorbar.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
@@ -685,7 +686,7 @@ Public Class ucrGeom
 
         ''clsgeom_qq.strGeomName = "geom_qq"
         ''clsgeom_qq.AddAesParameter("sample", bIsMandatory:=True)
-        '''optional
+        'optional
         ''clsgeom_qq.AddAesParameter("x")
         ''clsgeom_qq.AddAesParameter("y")
         ''lstAllGeoms.Add(clsgeom_qq)
@@ -792,10 +793,10 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_segment)
 
         ''clsgeom_smooth.strGeomName = "geom_smooth"
-        '''mandatory
+        'mandatory
         ''clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
         ''clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        '''optional 
+        'optional 
         ''clsgeom_smooth.AddAesParameter("alpha")
         ''clsgeom_smooth.AddAesParameter("colour")
         ''clsgeom_smooth.AddAesParameter("fill")
