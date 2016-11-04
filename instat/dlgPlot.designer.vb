@@ -39,7 +39,7 @@ Partial Class dlgPlot
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(267, 147)
+        Me.lblXVariable.Location = New System.Drawing.Point(266, 165)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
         Me.lblXVariable.TabIndex = 2
@@ -77,7 +77,7 @@ Partial Class dlgPlot
         'lblFactorOptional
         '
         Me.lblFactorOptional.AutoSize = True
-        Me.lblFactorOptional.Location = New System.Drawing.Point(267, 191)
+        Me.lblFactorOptional.Location = New System.Drawing.Point(266, 209)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(88, 13)
         Me.lblFactorOptional.TabIndex = 4
@@ -97,14 +97,14 @@ Partial Class dlgPlot
         '
         'ucrSaveLinePlot
         '
-        Me.ucrSaveLinePlot.Location = New System.Drawing.Point(8, 254)
+        Me.ucrSaveLinePlot.Location = New System.Drawing.Point(10, 254)
         Me.ucrSaveLinePlot.Name = "ucrSaveLinePlot"
         Me.ucrSaveLinePlot.Size = New System.Drawing.Size(265, 27)
         Me.ucrSaveLinePlot.TabIndex = 9
         '
         'ucrVariablesAsFactorForLinePlot
         '
-        Me.ucrVariablesAsFactorForLinePlot.Location = New System.Drawing.Point(269, 8)
+        Me.ucrVariablesAsFactorForLinePlot.Location = New System.Drawing.Point(266, 21)
         Me.ucrVariablesAsFactorForLinePlot.Name = "ucrVariablesAsFactorForLinePlot"
         Me.ucrVariablesAsFactorForLinePlot.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorForLinePlot.TabIndex = 1
@@ -112,6 +112,8 @@ Partial Class dlgPlot
         '
         'ucrLinePlotSelector
         '
+        Me.ucrLinePlotSelector.bShowHiddenColumns = False
+        Me.ucrLinePlotSelector.bUseCurrentFilter = False
         Me.ucrLinePlotSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrLinePlotSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrLinePlotSelector.Name = "ucrLinePlotSelector"
@@ -120,14 +122,14 @@ Partial Class dlgPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 284)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 284)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 10
         '
         'ucrFactorOptionalReceiver
         '
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(270, 207)
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(266, 225)
         Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
@@ -136,7 +138,7 @@ Partial Class dlgPlot
         '
         'ucrReceiverX
         '
-        Me.ucrReceiverX.Location = New System.Drawing.Point(270, 163)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(266, 181)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
