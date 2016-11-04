@@ -206,7 +206,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrFamily.Location = New System.Drawing.Point(268, 85)
         Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
+        Me.ucrFamily.Size = New System.Drawing.Size(197, 43)
         Me.ucrFamily.TabIndex = 11
         '
         'ucrSaveModel

@@ -58,7 +58,6 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetDefaults()
-        ucrFamily.cboDistributions.SelectedItem = "Normal"
         ucrSelectorOneVarFitMod.Reset()
         ucrSelectorOneVarFitMod.Focus()
         ucrOperator.SetName("==")
@@ -74,6 +73,15 @@ Public Class dlgOneVarFitModel
         SetBaseFunction()
         rdoGeneral.Checked = True
         TestOKEnabled()
+        SetDistributions()
+    End Sub
+
+    Private Sub SetDistributions()
+        If rdoGeneral.Checked Then
+            ucrFamily.SetAllDistributions()
+        ElseIf rdoSpecific.Checked Then
+            ucrFamily.SetExactDistributions()
+        End If
     End Sub
 
     Private Sub ReopenDialog()
@@ -329,6 +337,7 @@ Public Class dlgOneVarFitModel
         BinomialConditions()
         sdgOneVarFitModel.OptimisationMethod()
         sdgOneVarFitModel.Estimators()
+        SetDistributions()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
