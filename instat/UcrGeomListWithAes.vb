@@ -209,7 +209,7 @@ Public Class UcrGeomListWithParameters
             iIndex = lstAesParameterUcr.IndexOf(ucrChangedReceiver)
             If Not ucrChangedReceiver.IsEmpty Then
                 clsGeomAesFunction.AddParameter(lstCurrArguments(iIndex), ucrChangedReceiver.GetVariableNames(False))
-            Else
+            ElseIf iIndex < lstCurrArguments.Count Then 'Warning/Task: got an error here. The iIndex was longer than lstCurrArguments when clicking on edit layer. Don't really understand how this is possible. Just added the reality check but might need to put more thoughts into this...
                 clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
             End If
         End If
