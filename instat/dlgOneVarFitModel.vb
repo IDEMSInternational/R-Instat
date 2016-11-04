@@ -164,6 +164,18 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
+    Public Sub DataTypeAccepted()
+        If rdoGeneral.Checked Then
+            UcrReceiver.SetDataType(strTemp:=("integer" OrElse "numeric" OrElse "character" OrElse "factor"))
+        ElseIf rdoSpecific.Checked Then
+            If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Or ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+                UcrReceiver.SetDataType(strTemp:=("integer" OrElse "numeric"))
+            Else
+                UcrReceiver.SetDataType(strTemp:=("integer" OrElse "numeric" OrElse "character" OrElse "factor"))
+            End If
+        End If
+    End Sub
+
     Public Sub FitDistFunction()
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         clsROneVarFitModel.SetRCommand("fitdist")
@@ -172,6 +184,9 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetTTest()
+        If ucrFamily.clsCurrDistribution.strNameTag = "Normal" AndAlso (UcrReceiver.strCurrDataType = "factor" Or UcrReceiver.strCurrDataType = "character") Then
+            UcrReceiver.Clear()
+        End If
         clsRTTest.SetRCommand("t.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRConvert.SetRCommand("as.vector")
@@ -182,6 +197,9 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetPoissonTest()
+        If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" AndAlso (UcrReceiver.strCurrDataType = "factor" Or UcrReceiver.strCurrDataType = "character") Then
+            UcrReceiver.Clear()
+        End If
         clsRPoissonTest.SetRCommand("poisson.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRPoissonTest)
         clsRPoissonTest.AddParameter("r", nudHyp.Value.ToString)
@@ -195,6 +213,9 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetBinomialTest()
+        If ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Then
+            UcrReceiver.SetDataType(strTemp:="integer" OrElse "numeric" OrElse "character" OrElse "factor")
+        End If
         clsRBinomTest.SetRCommand("binom.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRBinomTest)
         clsRBinomTest.AddParameter("p", nudHyp.Value.ToString)
@@ -261,6 +282,7 @@ Public Class dlgOneVarFitModel
         TestOKEnabled()
         EnableOptions()
         PlotResiduals()
+        DataTypeAccepted()
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
@@ -338,6 +360,7 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModel.OptimisationMethod()
         sdgOneVarFitModel.Estimators()
         SetDistributions()
+        DataTypeAccepted()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
@@ -345,6 +368,7 @@ Public Class dlgOneVarFitModel
         BinomialConditions()
         SetDataParameter()
         PlotResiduals()
+        DataTypeAccepted()
     End Sub
 
     Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblHyp.VisibleChanged, lblConfidenceLimit.VisibleChanged, lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged
