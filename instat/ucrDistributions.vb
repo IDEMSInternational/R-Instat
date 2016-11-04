@@ -221,8 +221,8 @@ Public Class ucrDistributions
         clsNormalDist.bIsContinuous = True
         clsNormalDist.bIsExact = True
         clsNormalDist.strExactName = "norm"
-        clsNormalDist.lstExact = {"mean", "Mean", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
-        clsNormalDist.AddParameter("mean", "Mean:", 0)
+        clsNormalDist.lstExact = {"mean", "Mean:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
+        clsNormalDist.AddParameter("mean", "Mean", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
 
