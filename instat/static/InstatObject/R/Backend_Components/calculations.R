@@ -416,14 +416,12 @@ instat_object$set("public", "get_corresponding_link_columns", function(first_dat
       if(existing_link$from_data_frame == first_data_frame_name && existing_link$to_data_frame == second_data_frame_name) {
         if(link_column %in% names(link_pairs)) {
           by[link_column] <- link_pairs[which(names(link_pairs) == link_column)][1]
-          #print("t2")
         }
         else by[link_column] <- link_column
       }
       else if(existing_link$from_data_frame == second_data_frame_name && existing_link$to_data_frame == first_data_frame_name) {
         if(link_column %in% link_pairs) {
           by[link_column] <- names(link_pairs)[which(link_pairs == link_column)][1]
-          #print("t3")
         }
         else by[link_column] <- link_column
       }
@@ -480,8 +478,6 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
     #If require merge then either summary or filter has been done.
     if(length(calc_link_cols) > 0) {
       # If there are link columns, a summary has been done so joining column(s) should be available
-      print(calc_from_data_name)
-      print(calc_link_cols)
       link_def <- self$get_possible_linked_to_defintion(calc_from_data_name, calc_link_cols)
       # If possible link exists
       if(length(link_def) > 0) {
