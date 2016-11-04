@@ -30,7 +30,7 @@ Public Class Distribution
     Public bPositiveInt As Boolean = False
     Public bIsContinuous As Boolean = True
     Public bIsExact As Boolean = False
-    Public lstExact As String()
+    Public lstExact As String() ' Seven values in the string, {R-Code, Label, nudValue, nudIncrements, nudDecimalPlace, nudMin, nudMax}
     Public clsParameters As New List(Of DistributionParameter)
 
     Public Sub SetNameTag(strTemp As String)
