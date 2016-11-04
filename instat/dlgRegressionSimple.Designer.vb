@@ -53,9 +53,11 @@ Partial Class dlgRegressionSimple
         Me.lblHyp1 = New System.Windows.Forms.Label()
         Me.lblProbability2 = New System.Windows.Forms.Label()
         Me.nudHyp2 = New System.Windows.Forms.NumericUpDown()
+        Me.grpParameters = New System.Windows.Forms.GroupBox()
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHyp2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -140,7 +142,7 @@ Partial Class dlgRegressionSimple
         'ucrSelectorSimpleReg
         '
         Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
-        Me.ucrSelectorSimpleReg.bUseCurrentFilter = False
+        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
         Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         '
@@ -232,21 +234,28 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.nudHyp2, "nudHyp2")
         Me.nudHyp2.Name = "nudHyp2"
         '
+        'grpParameters
+        '
+        Me.grpParameters.Controls.Add(Me.lblCI)
+        Me.grpParameters.Controls.Add(Me.nudHyp2)
+        Me.grpParameters.Controls.Add(Me.nudCI)
+        Me.grpParameters.Controls.Add(Me.lblProbability2)
+        Me.grpParameters.Controls.Add(Me.nudHypothesis)
+        Me.grpParameters.Controls.Add(Me.chkPaired)
+        Me.grpParameters.Controls.Add(Me.lblHyp1)
+        resources.ApplyResources(Me.grpParameters, "grpParameters")
+        Me.grpParameters.Name = "grpParameters"
+        Me.grpParameters.TabStop = False
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.nudHyp2)
-        Me.Controls.Add(Me.lblProbability2)
-        Me.Controls.Add(Me.lblHyp1)
-        Me.Controls.Add(Me.lblCI)
-        Me.Controls.Add(Me.nudHypothesis)
-        Me.Controls.Add(Me.nudCI)
+        Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblNumeric)
         Me.Controls.Add(Me.rdoSpecific)
         Me.Controls.Add(Me.rdoGeneral)
-        Me.Controls.Add(Me.chkPaired)
         Me.Controls.Add(Me.ucrModelPreview)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
@@ -273,6 +282,8 @@ Partial Class dlgRegressionSimple
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudHyp2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpParameters.ResumeLayout(False)
+        Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -308,4 +319,5 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblHyp1 As Label
     Friend WithEvents lblProbability2 As Label
     Friend WithEvents nudHyp2 As NumericUpDown
+    Friend WithEvents grpParameters As GroupBox
 End Class

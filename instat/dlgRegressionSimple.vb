@@ -369,7 +369,6 @@ Public Class dlgRegressionSimple
         ExplanatoryFunctionSelect()
         SetRCode()
         Display()
-        PairedEnabled()
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
@@ -389,21 +388,15 @@ Public Class dlgRegressionSimple
 
     Private Sub Display()
         If rdoGeneral.Checked Then
-            nudHypothesis.Visible = False
-            nudHyp2.Visible = False
-            nudCI.Visible = False
-            chkPaired.Visible = False
-            lblHyp1.Visible = False
             lblFactor.Visible = False
             lblNumeric.Visible = False
-            lblProbability2.Visible = False
-            lblCI.Visible = False
             ucrModelPreview.Visible = True
             lblModelPreview.Visible = True
             lblResponse.Visible = True
             lblExplanatory.Visible = True
             cmdDisplayOptions.Visible = True
             cmdModelOptions.Visible = True
+            grpParameters.Visible = False
         ElseIf rdoSpecific.Checked Then
             ucrModelPreview.Visible = False
             lblModelPreview.Visible = False
@@ -413,14 +406,9 @@ Public Class dlgRegressionSimple
             cmdModelOptions.Visible = False
             lblFactor.Visible = True
             lblNumeric.Visible = True
-            nudCI.Visible = True
-            nudHypothesis.Visible = True
-            lblCI.Visible = True
             chkConvertToVariate.Visible = False
             chkFunction.Visible = False
-            lblHyp1.Visible = True
-            nudHypothesis.Visible = True
-
+            grpParameters.Visible = True
             ' once OneVarHyp has been merged, the below code can be used
 
             '           If ucrFamily.clsCurrDistribution.bIsExact = True Then
@@ -434,25 +422,24 @@ Public Class dlgRegressionSimple
             '''' write in the code I need to implement
             If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 nudHyp2.Visible = True
+                lblProbability2.Visible = True
                 nudHyp2.Increment = 0.1
                 nudHyp2.Maximum = 0.95
                 nudHyp2.Minimum = 0.05
                 nudHyp2.Value = 0.5
             Else
                 nudHyp2.Visible = False
+                lblProbability2.Visible = False
+            End If
+            If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
+                '         'If ucrExplanatory. GetVariables Is From same dataset
+                chkPaired.Visible = True
+            Else
+                chkPaired.Visible = False
             End If
         End If
     End Sub
 
-
-    Private Sub PairedEnabled()
-        If rdoSpecific.Checked AndAlso ucrFamily.clsCurrDistribution.strRName = "Normal" Then
-            '         'If ucrExplanatory. GetVariables Is From same dataset
-            chkPaired.Visible = True
-        Else
-            chkPaired.Visible = False
-        End If
-    End Sub
 
     Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblCI.VisibleChanged, lblProbability2.VisibleChanged, lblHyp1.VisibleChanged, lblExplanatory.VisibleChanged, lblResponse.VisibleChanged, lblModelPreview.VisibleChanged, lblFactor.VisibleChanged, lblNumeric.VisibleChanged
         Display()
@@ -467,7 +454,6 @@ Public Class dlgRegressionSimple
         ExplanatoryFunctionSelect()
         ConvertToVariate()
         TestOKEnabled()
-        PairedEnabled()
     End Sub
 
     Private Sub rdoTop_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGeneral.CheckedChanged, rdoSpecific.CheckedChanged
@@ -475,6 +461,5 @@ Public Class dlgRegressionSimple
         SetRCode()
         DistributionsOffered()
         TestOKEnabled()
-        PairedEnabled()
     End Sub
 End Class
