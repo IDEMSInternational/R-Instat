@@ -47,6 +47,7 @@ Public Class dlgColumnStructure
     Private Sub SetDefaults()
         SetColumnStructureInReceiver()
         ucrReceiverType1.SetMeAsReceiver()
+        chkColourColumnsByStr.Checked = False
     End Sub
 
     Private Sub ReopenDialog()
