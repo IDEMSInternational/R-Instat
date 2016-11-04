@@ -96,33 +96,31 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)
-        'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes and then in the local aes.
+        'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes (if IgnoreGlobalAes is not chacked) and then in the local aes.
         Dim bFirstEnabled As Boolean = True
         Dim iFirstEnabled As Integer = 0
         bAddToLocalAes = False
+        'We are changing the content of the receivers according to the info in the clsGgplotAesFunction and clsGeomAesFunction. We don't want to change the content of clsGeomAesFunction according to the changed content of the receivers. Hence we set bApplyToLocalAes to False at the beginning of this procedure, then reset it to True at the end (see ucrReceiverParam_WithMeSelectionChanged).
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
+            'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
+            lstAesParameterUcr(i).Clear()
             lstAesParameterUcr(i).Enabled = True
-            For Each clsParam In clsGgplotAesFunction.clsParameters
-                If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+            'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
+            If Not chkIgnoreGlobalAes.Checked Then
+                For Each clsParam In clsGgplotAesFunction.clsParameters
+                    If clsParam.strArgumentName = lstCurrArguments(i) Then
                         'For some geoms like BoxPlot, when the x aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
-                        lstAesParameterUcr(i).Clear()
-                        lstAesParameterUcr(i).Enabled = True
-                    Else
-                        lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                        lstAesParameterUcr(i).Enabled = Not bFixAes
-                        Exit For
+                        If Not clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                            lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
+                            lstAesParameterUcr(i).Enabled = Not bFixAes
+                            Exit For
+                        End If
                     End If
-                End If
-            Next
+                Next
+            End If
             For Each clsParam In clsGeomAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    'Should do this for any geom with x="" ?
-                    If clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                        'Similar check to the one just above.
-                        lstAesParameterUcr(i).Clear()
-                        lstAesParameterUcr(i).Enabled = True
-                    Else
+                    If Not (clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'Similar check to the one just above.
                         lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
                         lstAesParameterUcr(i).Enabled = True
                         Exit For
@@ -200,7 +198,7 @@ Public Class UcrGeomListWithParameters
 
     Private Sub ucrReceiverParam_WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle) Handles ucrReceiverParam1.WithMeSelectionChanged, ucrReceiverParam2.WithMeSelectionChanged, ucrReceiverParam3.WithMeSelectionChanged, ucrReceiverParam4.WithMeSelectionChanged, ucrReceiverParam5.WithMeSelectionChanged, ucrReceiverParam6.WithMeSelectionChanged, ucrReceiverParam7.WithMeSelectionChanged, ucrReceiverParam8.WithMeSelectionChanged, ucrReceiverParam9.WithMeSelectionChanged, ucrReceiverParam10.WithMeSelectionChanged
         Dim iIndex As Integer
-
+        'bApplyToLocalAes is used to avoid changing the content of clsGeomAesFunction when the receivers are setup according to the content of clsGeomAesFunction and clsGgplotAesFunction in SetAes().
         If bAddToLocalAes Then
             iIndex = lstAesParameterUcr.IndexOf(ucrChangedReceiver)
             If Not ucrChangedReceiver.IsEmpty Then
@@ -208,7 +206,6 @@ Public Class UcrGeomListWithParameters
             Else
                 clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
             End If
-            TestForOkEnabled()
         End If
     End Sub
 
@@ -248,5 +245,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsGeomFunction.RemoveParameterByName("inherit.aes")
         End If
+        'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers anymore.
+        SetAes()
     End Sub
 End Class
