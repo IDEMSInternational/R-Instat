@@ -480,11 +480,24 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
     #If require merge then either summary or filter has been done.
     if(length(calc_link_cols) > 0) {
       # If there are link columns, a summary has been done so joining column(s) should be available
-      if(self$link_exists_from(calc_from_data_name, calc_link_cols)) {
+      print(calc_from_data_name)
+      print(calc_link_cols)
+      link_def <- self$get_possible_linked_to_defintion(calc_from_data_name, calc_link_cols)
+      # If possible link exists
+      if(length(link_def) > 0) {
         # If a link exists it means the to_data_frame already exists so we merge into it
         to_data_exists <- TRUE
-        #gets the name of the to_data_frame based on the link
-        to_data_name <- self$get_linked_to_data_name(calc_from_data_name, calc_link_cols)
+        # gets the name of the to_data_frame based on the link
+        # this is either from a real link or a "possible" link
+        if(self$link_exists_from(calc_from_data_name, calc_link_cols)) {
+          to_data_name <- self$get_linked_to_data_name(calc_from_data_name, calc_link_cols)
+        }
+        else {
+          to_data_name <- link_def[[1]]
+          link_pairs <- link_def[[2]]
+          names(link_pairs) <- calc_link_cols
+          self$add_link(calc_from_data_name, to_data_name, link_pairs, keyed_link_label)
+        }
         # This is done so that calc$name can be used later and we know it won't be changed
         # We can only do this check once we know the to_data_frame as this is where the calc is stored
         if(calc$name %in% self$get_calculation_names(to_data_name)) {
@@ -501,6 +514,8 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
         # need to subset so that only the new column from this calc is added (not sub_calc columns as well as they have already been added if saved)
         # type = "full" so that we do not lose any data from either part of the merge
         #TODO calc_link_cols should be named list already by this point
+        View(self$get_data_frame(to_data_name))
+        View(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)])
         self$get_data_objects(to_data_name)$merge_data(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)], by = calc_link_cols, type = "full")
       }
       else {
@@ -522,28 +537,10 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
         # Add metadata to the linking columns 
         # This adds metadata: is_calculated = TRUE to the linking columns, which indicates that the column has been created by a calculation
         self$append_to_variables_metadata(to_data_name, calc_link_cols, is_calculated_label, TRUE)
-        # This adds metadata: calc_dependencies to the output column, with value as the name of the calculation
-        # TODO Is this correct for the link columns?
-        # Probably not, done below instead
-        # if(length(calc_dependencies) > 0) self$append_to_variables_metadata(to_data_name, calc_link_cols, dependencies_label, calc_dependencies)
-        
-        # Now removed. The link columns are not classed as calculated, they are classed as "key"
-        # and they are part of the link between the two data frames
-        # self$append_to_variables_metadata(to_data_name, calc_link_cols, calculated_by_label, calc$name)
-        # for(curr_link_col in calc_link_cols) {
-        #   link_col_in_from_data <- list(curr_link_col)
-        #   names(link_col_in_from_data) <- calc_from_data_name
-        #   self$append_to_variables_metadata(to_data_name, curr_link_col, dependencies_label, link_col_in_from_data)
-        #   # Same list as above except has name to_data_frame, to be passed in to indicate the columns which depend on the link columns in the from_data_frame
-        #   link_col_in_to_data <- list(curr_link_col)
-        #   names(link_col_in_to_data) <- to_data_name
-        #   self$add_dependent_columns(calc_from_data_name, curr_link_col, link_col_in_to_data)
-        # }
-
+  
         # Adds metadata at data frame level to indicate that the data frame is calculated
         # Note: all columns do not have to be calculated for data frame to be classed as calculated
         self$append_to_dataframe_metadata(to_data_name, is_calculated_label, TRUE)
-        
       }
     }
     else {
