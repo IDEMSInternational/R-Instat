@@ -126,7 +126,7 @@ Public Class UcrGeomListWithParameters
             End If
             For Each clsParam In clsGeomAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If Not (clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'Similar check to the one just above.
+                    If Not (clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
                         lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
                         lstAesParameterUcr(i).Enabled = True
                         Exit For
