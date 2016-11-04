@@ -81,8 +81,6 @@ Public Class UcrGeomListWithParameters
         End If
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bApplyAesGlobally) OrElse strGlobalDataFrame = "")
         UcrSelector.Reset()
-        bCurrentFixAes = bFixAes
-        SetAes(bCurrentFixAes)
 
         'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
         'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
@@ -92,7 +90,12 @@ Public Class UcrGeomListWithParameters
             bIgnoreGlobalAes = False
         End If
         chkApplyOnAllLayers.Checked = bApplyAesGlobally
-        chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes
+        chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes 'Task: check if this launches checkchanged and accordingly delete SetAes below.
+
+        'SetAes needs to be called after the IgnoreGlobalAes has been setup as it determines whether the global aes are written in the rceivers or not.
+        bCurrentFixAes = bFixAes
+        SetAes(bCurrentFixAes)
+        'Warning: SetAes is called three times when a layer is created... one in the load, one in the setup ... (and one in the ignoreGAes check changed ?)
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)
@@ -110,7 +113,7 @@ Public Class UcrGeomListWithParameters
                 For Each clsParam In clsGgplotAesFunction.clsParameters
                     If clsParam.strArgumentName = lstCurrArguments(i) Then
                         'For some geoms like BoxPlot, when the x aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
-                        If Not clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        If Not (clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
                             lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
                             lstAesParameterUcr(i).Enabled = Not bFixAes
                             Exit For
