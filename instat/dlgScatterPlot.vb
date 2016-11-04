@@ -69,6 +69,8 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.ResetControl()
         sdgPlots.Reset()
         ucrSaveScatterPlot.Reset()
+        SetXParameter()
+        SetYParameter()
         TestOkEnabled()
     End Sub
     Private Sub ucrSelectorForScatter_DataFrameChanged() Handles ucrSelectorForScatter.DataFrameChanged
