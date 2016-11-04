@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgColumnStructure
-    Public clsCourByStructure As New RFunction
+    Public clsCourByStructure, clsRemoveColoursFunction As New RFunction
     'clsCourByStructure is here to construct the R-command that will colour columns according to their type in case it is required (see relevant tick box).
     Public bFirstLoad As Boolean = True
     Private Sub ucrSelectorColumnStructures_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -42,11 +42,13 @@ Public Class dlgColumnStructure
         ucrReceiverType3.bExcludeFromSelector = True
         ucrReceiverType2.bExcludeFromSelector = True
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
+        clsRemoveColoursFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
     End Sub
 
     Private Sub SetDefaults()
         SetColumnStructureInReceiver()
         ucrReceiverType1.SetMeAsReceiver()
+        chkColourColumnsByStr.Checked = False
     End Sub
 
     Private Sub ReopenDialog()
@@ -100,13 +102,15 @@ Public Class dlgColumnStructure
     Private Sub ucrSelectorColumnStructure_DataFrameChanged() Handles ucrSelectorColumnStructure.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsCourByStructure.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRemoveColoursFunction.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         SetColumnStructureInReceiver()
     End Sub
-
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         If chkColourColumnsByStr.Checked Then
             frmMain.clsRLink.RunScript(clsCourByStructure.ToScript())
+        Else
+            frmMain.clsRLink.RunScript(clsRemoveColoursFunction.ToScript())
         End If
     End Sub
 End Class
