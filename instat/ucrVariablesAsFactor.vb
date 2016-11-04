@@ -2,6 +2,7 @@
     Public bSingleVariable As Boolean
     Public bFirstLoad As Boolean
     Public ucrFactorReceiver As ucrReceiverSingle
+    'The ucrVariablesAsFactor has an associated ucrFactorReceiver, set on the dialog it is living in. In multiple mode, the ucrVariablesAsFactor can receive multiple variables that are then stacked in one and distinguished using a factor variable called "variable". The associated factor receiver will then be set in StackedFactorMode and fix it's content to this "variable" factor. 
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
 
     Public Sub New()
@@ -18,6 +19,10 @@
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
+        Else
+            'This resets the factor receiver on the dialog every time the dialog opens.
+            'We don't want this on reopen
+            'SetReceiverStatus()
         End If
     End Sub
 
@@ -26,9 +31,12 @@
         SetReceiverStatus()
     End Sub
 
+    'The following few subs serve to initialise the ucrVariablesAsFactor in the different dialogs where it is used. They also serve to update parameters such as the dataframe that can be changed on the dlg containing the ucrVariablesAsFactors.
     Public Sub SetFactorReceiver(ucrReceiverToSet As ucrReceiverSingle)
         ucrFactorReceiver = ucrReceiverToSet
     End Sub
+
+    'Question to be discussed: what are the differences between the following three ?
     Public Sub SetDataType(strTemp As String)
         ucrSingleVariable.SetDataType(strTemp)
         ucrMultipleVariables.SetDataType(strTemp)
@@ -49,22 +57,31 @@
         ucrMultipleVariables.Selector = ucrSelectorToSet
     End Sub
 
+
     Private Sub cmdVariables_Click(sender As Object, e As EventArgs) Handles cmdVariables.Click
+        'Switching from single to multiple receiver.
         bSingleVariable = Not bSingleVariable
         SetReceiverStatus()
+        'After setting the receiver status, the SelectionChanged event is raised for the dlg's that contain the ucrVariablesAsFactors to adapt to the changes operated locally. For instance in the dlgBoxPlot, the sub UcrVariablesAsFactor1_SelectionChanged() is then called and updates it's aesthetics receivers. 
         RaiseEvent SelectionChanged()
     End Sub
 
     Public Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+        'This sub provides the name of the variable that should be used by external components that want to access the "content" of this receiver. If it is in single mode, this is simply providing the name of the variable in use. 
+        'However in multiple mode, a New variable will be created using the "stack" And "measure.vars" explained in SetReceiverStatus.
         Dim strVariablesToStack As String = ""
         If bSingleVariable Then
             strVariablesToStack = ucrSingleVariable.GetVariableNames(bWithQuotes)
         Else
-            strVariablesToStack = "value"
+            If Not bWithQuotes Then
+                strVariablesToStack = "value"
+            Else strVariablesToStack = Chr(34) & "value" & Chr(34)
+            End If
         End If
-        Return strVariablesToStack
+            Return strVariablesToStack
     End Function
 
+    'Warning: The two following subs seem obsolete.
     Public Function GetStackedVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strVariablesToStack As String = ""
         If Not bSingleVariable Then
@@ -140,12 +157,15 @@
     End Function
 
     Public Sub SetReceiverStatus()
+        'This sub sets up the receiver for it to operate as desired depending on the status it is in: multiple or single.
+        'In the multiple case, stack_data, measure.vars and id.vars are added to the parameters of the current dataframe RFunction. In the single case, these are removed.
+        'In practice, the variables in the multiple receiver will be stacked into one variable called "value" in a temporary dataframe, and a factor variable called "variable" will enable to distinguish the different variables stacked in "value".
+        'The associated factor receiver will then be set to StackedFactorMode, which makes it disabled with fixed content "variables". This is done in SetMeasureVars() below.
         If bSingleVariable Then
             'need to translate correctly
             cmdVariables.Text = "Single Variable"
             cmdVariables.FlatStyle = FlatStyle.Popup
             ucrSingleVariable.Visible = True
-            'ucrSingleVariable.SetMeAsReceiver()
             ucrMultipleVariables.Visible = False
             If ucrVariableSelector IsNot Nothing Then
                 ucrSingleVariable.SetMeAsReceiver()
@@ -160,7 +180,6 @@
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
-            'ucrMultipleVariables.SetMeAsReceiver()
             'TODO need to translate correctly
             cmdVariables.Text = "Multiple Variables"
             cmdVariables.FlatStyle = FlatStyle.Flat
@@ -180,6 +199,7 @@
     End Sub
 
     Private Sub SetMeasureVars()
+        'This sub sets the ucrFactorReceiver associated to this ucrVariablesAsFactors to the StackedFactorMode. The factor that is then given through is the factor "variables" that distinguishes the different variables that have been stacked into one "value".
         If ucrFactorReceiver IsNot Nothing Then
             ucrFactorReceiver.SetStackedFactorMode(True)
         End If
