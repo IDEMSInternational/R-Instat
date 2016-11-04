@@ -51,8 +51,13 @@ Public Class dlgUseDate
 
 
     End Sub
-
+    'Disabling ok
     Private Sub TestOKEnabled()
+        If Not ucrReceiverUseDate.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
