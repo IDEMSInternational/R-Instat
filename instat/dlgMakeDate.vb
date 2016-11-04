@@ -225,6 +225,7 @@ Public Class dlgMakeDate
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("format")
                 End If
+
             Else
                 ucrInputOrigin.Visible = False
                 ucrInputFormat.Visible = False
