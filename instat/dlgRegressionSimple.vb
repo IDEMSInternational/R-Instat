@@ -59,8 +59,6 @@ Public Class dlgRegressionSimple
         nudCI.DecimalPlaces = 2
         nudHypothesis.DecimalPlaces = 2
         nudHyp2.DecimalPlaces = 2
-        '        ucrFamily.SetGLMDistributions()
-        DistributionsOffered()
     End Sub
 
     Private Sub ReopenDialog()
@@ -85,6 +83,7 @@ Public Class dlgRegressionSimple
         ucrModelPreview.SetName("")
         SetRCode()
         TestOKEnabled()
+        DistributionsOffered()
     End Sub
 
     Private Sub LM()
@@ -109,8 +108,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetTTest()
-        ' only variables the response receiver can accept is 
-        ' if the explanatory receiver accepts a factor it needs to only use two levels
         clsRTTest.SetRCommand("t.test")
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("mu", nudHypothesis.Value.ToString())
@@ -133,16 +130,31 @@ Public Class dlgRegressionSimple
             If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
                 ucrResponse.Clear()
             End If
-            '            ucrResponse.SetDataType("numeric")
-            ' do i need to do ucrExplanatory.set all data types
-            ' only accept numeric, integer or positive integer for response
         End If
 
     End Sub
 
+    Public Sub DataTypeAccepted()
+        If rdoGeneral.Checked Then
+            ucrResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+            ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+        ElseIf rdoSpecific.Checked Then
+            If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+                ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
+                ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+            End If
+            If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+                ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
+                ucrExplanatory.SetIncludedDataTypes({"integer", "numeric"})
+            End If
+            If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+                ucrResponse.SetIncludedDataTypes({"character", "factor"})
+                ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
+            End If
+        End If
+    End Sub
+
     Private Sub SetBinomTest()
-        ' only variables the response receiver can accept is a factor
-        ' only variables the explanatory receiver can accept is factor
         clsRBinomial.SetRCommand("prop.test")
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
         clsRBinomial.AddParameter("p", "c(" & nudHypothesis.Value.ToString() & "," & nudHyp2.Value.ToString() & ")")
@@ -158,13 +170,10 @@ Public Class dlgRegressionSimple
             If ucrResponse.strCurrDataType = "numeric" Or ucrResponse.strCurrDataType = "integer" Or ucrResponse.strCurrDataType = "positive integer" Then
                 ucrResponse.Clear()
             End If
-
-            ' only accept character or factor for response or explanatory
         End If
     End Sub
 
     Private Sub SetPoissonTest()
-        ' can accept only numerical in both receivers
         If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
             If ucrExplanatory.strCurrDataType = "factor" Or ucrExplanatory.strCurrDataType = "character" Then
                 ucrExplanatory.Clear()
@@ -172,27 +181,18 @@ Public Class dlgRegressionSimple
             If ucrResponse.strCurrDataType = "factor" Or ucrResponse.strCurrDataType = "character" Then
                 ucrResponse.Clear()
             End If
-            '           ucrExplanatory.SetDataType = {"numeric", "integer"}
-
-            '            ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer"
-            '            ucrResponse.strCurrDataType = "numeric" Or ucrResponse.strCurrDataType = "integer" Or ucrResponse.strCurrDataType = "positive integer"
         End If
-
-
         clsRPoisson.SetRCommand("poisson.test")
         clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
         clsRPoisson.AddParameter("r", nudHypothesis.Value.ToString())
-
         clsRLength.SetRCommand("length")
         clsRLength.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
         clsRLength2.SetRCommand("length")
         clsRLength2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
-
         clsRMean.SetRCommand("mean")
         clsRMean.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
-
         clsRPoisson.AddParameter("x", "c(" & clsRLength.ToScript & "," & clsRLength2.ToScript & ")")
         clsRPoisson.AddParameter("T", "c(" & clsRMean.ToScript & "," & clsRMean2.ToScript & ")")
     End Sub
@@ -250,7 +250,7 @@ Public Class dlgRegressionSimple
 
     Public Sub ConvertToVariate()
         If rdoGeneral.Checked AndAlso Not ucrResponse.IsEmpty Then
-            '           ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+            '            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             If ucrFamily.strDataType = "numeric" Then
                 chkConvertToVariate.Checked = False
                 chkConvertToVariate.Visible = False
@@ -269,11 +269,9 @@ Public Class dlgRegressionSimple
         Else
             clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
             clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
-            '            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
             '            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
         End If
-
-
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
             ucrFamily.cboDistributions.Text = ""
             cmdModelOptions.Enabled = False
@@ -283,16 +281,18 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub DistributionsOffered()
-        '        If rdoGeneral.Checked Then
-        '        ucrFamily.SetGLMDistributions()
-        '        Else
-        '        only normal, poisson and bernouli
-        '       End If
+        If rdoGeneral.Checked Then
+            '            ucrFamily.SetGLMDistributions()
+            ucrFamily.SetAllDistributions() ' this is just temporary. It will move back to SetGLMDistributions once some bugs are fixed
+        Else
+            ucrFamily.SetExactDistributions()
+        End If
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
         SetRCode()
         TestOKEnabled()
+        DataTypeAccepted()
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged, chkConvertToVariate.VisibleChanged
@@ -325,6 +325,7 @@ Public Class dlgRegressionSimple
         ExplanatoryFunctionSelect()
         SetRCode()
         TestOKEnabled()
+        DataTypeAccepted()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -366,11 +367,11 @@ Public Class dlgRegressionSimple
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
-        DistributionsOffered()
         ConvertToVariate()
         ExplanatoryFunctionSelect()
         SetRCode()
         Display()
+        DataTypeAccepted()
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
@@ -411,17 +412,14 @@ Public Class dlgRegressionSimple
             chkConvertToVariate.Visible = False
             chkFunction.Visible = False
             grpParameters.Visible = True
-            ' once OneVarHyp has been merged, the below code can be used
-
-            '           If ucrFamily.clsCurrDistribution.bIsExact = True Then
-            '           lblHyp1.Text = ucrFamily.clsCurrDistribution.lstExact(1)
-            '           nudHyp1.Value = ucrFamily.clsCurrDistribution.lstExact(2)
-            '           nudHyp1.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
-            '           nudHyp1.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
-            '           nudHyp1.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
-            '           nudHyp1.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
-            '       End If
-            '''' write in the code I need to implement
+            If ucrFamily.clsCurrDistribution.bIsExact = True Then
+                lblHyp1.Text = ucrFamily.clsCurrDistribution.lstExact(1)
+                nudHypothesis.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                nudHypothesis.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
+                nudHypothesis.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
+                nudHypothesis.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+                nudHypothesis.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
+            End If
             If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 nudHyp2.Visible = True
                 lblProbability2.Visible = True
@@ -431,15 +429,15 @@ Public Class dlgRegressionSimple
                 nudHyp2.Value = 0.5
             Else
                 nudHyp2.Visible = False
-                lblProbability2.Visible = False
+                    lblProbability2.Visible = False
+                End If
+                If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
+                    '         'If ucrExplanatory. GetVariables Is From same dataset
+                    chkPaired.Visible = True
+                Else
+                    chkPaired.Visible = False
+                End If
             End If
-            If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
-                '         'If ucrExplanatory. GetVariables Is From same dataset
-                chkPaired.Visible = True
-            Else
-                chkPaired.Visible = False
-            End If
-        End If
     End Sub
 
 
@@ -463,5 +461,6 @@ Public Class dlgRegressionSimple
         SetRCode()
         DistributionsOffered()
         TestOKEnabled()
+        DataTypeAccepted()
     End Sub
 End Class
