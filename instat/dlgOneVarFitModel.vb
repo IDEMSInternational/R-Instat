@@ -166,12 +166,12 @@ Public Class dlgOneVarFitModel
 
     Public Sub DataTypeAccepted()
         If rdoGeneral.Checked Then
-            UcrReceiver.SetDataType(strTemp:=("integer" OrElse "numeric" OrElse "character" OrElse "factor"))
+            UcrReceiver.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
         ElseIf rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Or ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
-                UcrReceiver.SetDataType(strTemp:=("integer" OrElse "numeric"))
+                UcrReceiver.SetIncludedDataTypes({"integer", "numeric"})
             Else
-                UcrReceiver.SetDataType(strTemp:=("integer" OrElse "numeric" OrElse "character" OrElse "factor"))
+                UcrReceiver.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
             End If
         End If
     End Sub
