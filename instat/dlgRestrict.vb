@@ -62,6 +62,7 @@ Public Class dlgRestrict
         ucrReceiverFilter.SetMeAsReceiver()
         ucrNewDataFrameName.SetValidationTypeAsRVariable()
         ucrBase.iHelpTopicID = 340
+        rdoApplyAsSubset.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
