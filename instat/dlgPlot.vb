@@ -153,7 +153,7 @@ Public Class dlgPlot
         sdgLayerOptions.ShowDialog()
 
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "y" Then
+            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
                 ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "x" Then
                 ucrReceiverX.Add(clsParam.strArgumentValue)
