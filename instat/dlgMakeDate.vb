@@ -228,7 +228,7 @@ Public Class dlgMakeDate
             Else
                 ucrInputOrigin.Visible = False
                 ucrInputFormat.Visible = False
-                ucrReceiverForDate.SetIncludedDataTypes({"character", "factor", "Date"})
+                ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
                 ucrBase.clsRsyntax.RemoveParameter("format")
                 ucrBase.clsRsyntax.RemoveParameter("origin")
             End If
