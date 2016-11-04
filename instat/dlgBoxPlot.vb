@@ -162,7 +162,8 @@ Public Class dlgBoxplot
             End If
         Next
         'Question to be discussed: After running through the sdgLayerOptions, the clsCurrDataFrame parameters seem to have been cleared, such that in the multiple variable case, clsCurrDataFrame needs to be repopulated with "stack", "measure.vars" and "id.vars" parameters. Actually, even when repopulated, they are still not appearing in the script. ??
-        ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
+        'This resets the factor receiver and causes it to be cleared of the correct variable. We don't want this.
+        'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

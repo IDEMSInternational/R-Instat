@@ -22,7 +22,6 @@ Public Class dlgDotPlot
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.OKEnabled(False)
         autoTranslate(Me)
 
         If bFirstLoad Then

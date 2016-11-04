@@ -23,7 +23,7 @@ Public Class Geoms
         strGeomName = strTempName
     End Sub
 
-    Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False, Optional bIsDependentlyMandatory As Boolean = False)
+    Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False)
         'will be adding parameters to the geom as well as the value of the parameter.
         Dim NewAesParameter As New AesParameters
         NewAesParameter.strAesParameterName = strAesParameterName
