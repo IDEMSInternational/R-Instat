@@ -50,9 +50,11 @@ Public Class UcrGeomListWithParameters
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetParameters()
+            'This one is called when the geom is changed, which is apparently the case when the Layer is loaded (first thing that happens). Left in for security but could be taken out.
             bFirstLoad = False
         End If
-        SetAes(bCurrentFixAes)
+        'SetAes(bCurrentFixAes)
+        'Apparently, this is not necessary as SetAes is called several places, when geom is changed and when Layer is set up which always happen at load.
     End Sub
 
     Private Sub SetSelector()
@@ -106,6 +108,7 @@ Public Class UcrGeomListWithParameters
         'We are changing the content of the receivers according to the info in the clsGgplotAesFunction and clsGeomAesFunction. We don't want to change the content of clsGeomAesFunction according to the changed content of the receivers. Hence we set bApplyToLocalAes to False at the beginning of this procedure, then reset it to True at the end (see ucrReceiverParam_WithMeSelectionChanged).
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
             'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
+            'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
             lstAesParameterUcr(i).Clear()
             lstAesParameterUcr(i).Enabled = True
             'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
