@@ -217,22 +217,22 @@ Public Class UcrGeomListWithParameters
 
     Public Function TestForOkEnabled() As Boolean
         Dim i As Integer = 0
-        Dim iNumberOfMissingDependentlyMandatoryAes As Integer = 0
+        'Dim iNumberOfMissingDependentlyMandatoryAes As Integer = 0
         'Added a proposal for jointly mandatory situations. For the moment the only case is two jointly mandatory aes.Turns out to be not necessary for geom_point so not used for now.
         'If a mandatory aes or two jointly mandatory aes have empty mapping, then not ok, otherwise ok.
         For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
-            If (lstAesParameterUcr(i).IsEmpty()) Then
-                If clsCurrGeom.clsAesParameters(i).bIsMandatory Then
-                    Return False
-                ElseIf clsCurrGeom.clsAesParameters(i).bIsDependentlyMandatory Then
-                    iNumberOfMissingDependentlyMandatoryAes = iNumberOfMissingDependentlyMandatoryAes + 1
-                End If
+            If (lstAesParameterUcr(i).IsEmpty()) AndAlso clsCurrGeom.clsAesParameters(i).bIsMandatory Then
+                ' If clsCurrGeom.clsAesParameters(i).bIsMandatory Then
+                Return False
+                'ElseIf clsCurrGeom.clsAesParameters(i).bIsDependentlyMandatory Then
+                'iNumberOfMissingDependentlyMandatoryAes = iNumberOfMissingDependentlyMandatoryAes + 1
+                'End If
             End If
         Next
-        If iNumberOfMissingDependentlyMandatoryAes <= 1 Then
-            Return True
-        Else Return False
-        End If
+        'If iNumberOfMissingDependentlyMandatoryAes <= 1 Then
+        Return True
+        ' Else Return False
+        ' End If
     End Function
 
     Private Sub chkChangeAes_CheckedChanged(sender As Object, e As EventArgs) Handles chkApplyOnAllLayers.CheckedChanged

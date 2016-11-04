@@ -31,7 +31,7 @@ Public Class Geoms
         NewAesParameter.strIncludedDataTypes = strIncludedDataTypes
         NewAesParameter.strExcludedDataTypes = strExcludedDataTypes
         NewAesParameter.bIsMandatory = bIsMandatory
-        NewAesParameter.bIsDependentlyMandatory = bIsDependentlyMandatory
+        'NewAesParameter.bIsDependentlyMandatory = bIsDependentlyMandatory
         clsAesParameters.Add(NewAesParameter)
     End Sub
 
@@ -72,7 +72,7 @@ Public Class AesParameters
     Public strExcludedDataTypes As String()
     Public strAesParameterValue As String
     Public bIsMandatory As Boolean
-    Public bIsDependentlyMandatory As Boolean 'proposition for solving the situation in which one out of two aes need to be filled. For the moment not in use.
+    'Public bIsDependentlyMandatory As Boolean 'proposition for solving the situation in which one out of two aes need to be filled. For the moment not in use.
     'Task: modify the mandatory method to have three cases: not mandatory, mandatory and partial mandatory (requires mapping to "" when not filled). Would enable to clean methods in sdgLayerOptions: ucrSdgLayerBase_ClickReturn; ucrGeomListWithAes: SetAes and dlg[SpecificGraphs]: cmd[SpecificGraph]Options_Click and SetX/YParameter.
 End Class
 
