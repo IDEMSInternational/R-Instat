@@ -41,6 +41,7 @@ Public Class dlgColourbyProperty
     Private Sub SetDefaults()
         ucrSelectorColourByMetadata.Reset()
         SetOrRemoveColours()
+        chkRemoveColours.Checked = False
     End Sub
 
     Private Sub TestOKEnabled()
