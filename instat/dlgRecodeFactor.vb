@@ -81,7 +81,8 @@ Public Class dlgRecodeFactor
         clsReplaceFunction.ClearParameters()
         If ucrFactorGrid.IsColumnComplete(2) AndAlso strCurrentLevels.Count = strNewLevels.Count Then
             For i = 0 To strCurrentLevels.Count - 1
-                clsReplaceFunction.AddParameter(strCurrentLevels(i), strNewLevels(i))
+                ' Backtick needed for names of the vector incase the levels are not valid R names
+                clsReplaceFunction.AddParameter(Chr(96) & strCurrentLevels(i) & Chr(96), strNewLevels(i))
             Next
         End If
         TestOKEnabled()
