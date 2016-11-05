@@ -362,7 +362,39 @@ Public Class ucrReceiverMultiple
     End Function
 
     Public Function IsSingleType() As Boolean
-        Return GetCurrentItemTypes.Count = 1
+        Return GetCurrentItemTypes(True).Count = 1
+    End Function
+
+    Public Function IsAllNumeric() As Boolean
+        Dim lstUniqueTypes As List(Of String)
+        Dim i As Integer
+
+        lstUniqueTypes = GetCurrentItemTypes(True)
+        For i = 0 To lstUniqueTypes.Count - 1
+            If lstUniqueTypes(i) = "integer" Then
+                lstUniqueTypes(i) = "numeric"
+            End If
+        Next
+        lstUniqueTypes = lstUniqueTypes.Distinct.ToList()
+        Return lstUniqueTypes.Count = 1
+    End Function
+
+    ' Categorical is defined as everything that isnt numeric
+    ' This may change as more types are added
+    Public Function IsAllCategorical() As Boolean
+        Dim lstUniqueTypes As List(Of String)
+        Dim i As Integer
+        Dim bAllCat As Boolean
+
+        bAllCat = True
+        lstUniqueTypes = GetCurrentItemTypes(True)
+        For i = 0 To lstUniqueTypes.Count - 1
+            If lstUniqueTypes(i) = "integer" OrElse lstUniqueTypes(i) = "numeric" Then
+                bAllCat = False
+                Exit For
+            End If
+        Next
+        Return bAllCat
     End Function
 
     Public Sub CheckSingleType()

@@ -743,7 +743,7 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
 } 
 )
 
-instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type ="factor", factor_numeric = "by_levels") {
+instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels") {
   self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric)
 } 
 )
