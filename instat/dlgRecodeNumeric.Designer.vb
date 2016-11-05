@@ -41,7 +41,7 @@ Partial Class dlgRecodeNumeric
         'chkAddLabels
         '
         Me.chkAddLabels.AutoSize = True
-        Me.chkAddLabels.Location = New System.Drawing.Point(10, 211)
+        Me.chkAddLabels.Location = New System.Drawing.Point(10, 207)
         Me.chkAddLabels.Name = "chkAddLabels"
         Me.chkAddLabels.Size = New System.Drawing.Size(79, 17)
         Me.chkAddLabels.TabIndex = 2
@@ -52,17 +52,17 @@ Partial Class dlgRecodeNumeric
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(255, 25)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(255, 28)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
         Me.lblSelectedVariable.TabIndex = 17
         Me.lblSelectedVariable.Tag = "Selected_Variable"
-        Me.lblSelectedVariable.Text = "Selected Variable"
+        Me.lblSelectedVariable.Text = "Selected Variable:"
         '
         'lblBreakPoints
         '
         Me.lblBreakPoints.AutoSize = True
-        Me.lblBreakPoints.Location = New System.Drawing.Point(255, 76)
+        Me.lblBreakPoints.Location = New System.Drawing.Point(255, 77)
         Me.lblBreakPoints.Name = "lblBreakPoints"
         Me.lblBreakPoints.Size = New System.Drawing.Size(70, 13)
         Me.lblBreakPoints.TabIndex = 20
@@ -75,7 +75,7 @@ Partial Class dlgRecodeNumeric
         Me.grpClosedOn.Controls.Add(Me.rdoRight)
         Me.grpClosedOn.Location = New System.Drawing.Point(255, 126)
         Me.grpClosedOn.Name = "grpClosedOn"
-        Me.grpClosedOn.Size = New System.Drawing.Size(115, 74)
+        Me.grpClosedOn.Size = New System.Drawing.Size(120, 74)
         Me.grpClosedOn.TabIndex = 22
         Me.grpClosedOn.TabStop = False
         Me.grpClosedOn.Tag = "Closed_on"
@@ -106,12 +106,12 @@ Partial Class dlgRecodeNumeric
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 242)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 237)
         Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 26
         Me.lblNewColumnName.Tag = "New_Column_Name"
-        Me.lblNewColumnName.Text = "New Column Name"
+        Me.lblNewColumnName.Text = "New Column Name:"
         '
         'ucrInputRecode
         '
@@ -133,7 +133,7 @@ Partial Class dlgRecodeNumeric
         'ucrSelectorForRecode
         '
         Me.ucrSelectorForRecode.bShowHiddenColumns = False
-        Me.ucrSelectorForRecode.bUseCurrentFilter = False
+        Me.ucrSelectorForRecode.bUseCurrentFilter = True
         Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
@@ -142,7 +142,7 @@ Partial Class dlgRecodeNumeric
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 261)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 1
@@ -150,7 +150,7 @@ Partial Class dlgRecodeNumeric
         'ucrMultipleLabels
         '
         Me.ucrMultipleLabels.IsReadOnly = False
-        Me.ucrMultipleLabels.Location = New System.Drawing.Point(114, 207)
+        Me.ucrMultipleLabels.Location = New System.Drawing.Point(114, 206)
         Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
         Me.ucrMultipleLabels.Size = New System.Drawing.Size(145, 21)
         Me.ucrMultipleLabels.TabIndex = 28
