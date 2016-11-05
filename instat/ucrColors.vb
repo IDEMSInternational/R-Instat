@@ -16,14 +16,14 @@
 
 Public Class ucrColors
     Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Me.SetItems({"Pick Colour", "black", "white", "blue", "red", "yellow", "purple", "green", "orange", "grey", "brown", "pink", "NULL"})
+        Me.SetItems({Chr(34) & "Pick Colour" & Chr(34), Chr(34) & "black" & Chr(34), Chr(34) & "white" & Chr(34), Chr(34) & "blue" & Chr(34), Chr(34) & "red" & Chr(34), Chr(34) & "yellow" & Chr(34), Chr(34) & "purple" & Chr(34), Chr(34) & "green" & Chr(34), Chr(34) & "orange" & Chr(34), Chr(34) & "grey" & Chr(34), Chr(34) & "brown" & Chr(34), Chr(34) & "pink" & Chr(34)})
     End Sub
 
     Private Sub ucrColors_NameChanged() Handles Me.NameChanged
         Dim dlgColour As New ColorDialog
-        If Me.cboInput.Text = "Pick Colour" Then
+        If Me.cboInput.Text = Chr(34) & "Pick Colour" & Chr(34) Then
             dlgColour.ShowDialog()
-            SetName(dlgColour.Color.Name)
+            SetName(Chr(34) & dlgColour.Color.Name & Chr(34))
         End If
     End Sub
 End Class
