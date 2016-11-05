@@ -134,12 +134,4 @@ Public Class dlgDeleteRowsOrColums
     Private Sub nudRowNames_TextChanged(sender As Object, e As EventArgs) Handles nudRowNames.TextChanged
         RowNamesParam()
     End Sub
-
-    Private Sub ucrReceiveForColumnsToDelete_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForColumnsToDelete.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrSelectorForDeleteRows_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorForDeleteRows.DataFrameChanged
-
-    End Sub
 End Class
