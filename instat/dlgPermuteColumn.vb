@@ -35,7 +35,10 @@ Public Class dlgPermuteColumn
     Private Sub SetDefaults()
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
         ucrReceiverPermuteRows.SetMeAsReceiver()
-        ucrInputPermuteRows.SetPrefix("permute")
+        ucrPermuteRowsSelector.Reset()
+        nudNumberOfColumns.Value = 1
+        nudSetSeed.Value = 1
+        ucrInputPermuteRows.SetPrefix("Permute")
         chkSetSeed.Checked = False
         nudSetSeed.Visible = False
         TestOkEnabled()
@@ -52,14 +55,11 @@ Public Class dlgPermuteColumn
         clsSetSampleFunc.SetRCommand("sample")
         clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
         clsSetSampleFunc.AddParameter("replace", "FALSE")
-        nudSetSeed.Visible = False
         ucrBase.iHelpTopicID = 66
         ucrInputPermuteRows.SetItemsTypeAsColumns()
         ucrInputPermuteRows.SetDefaultTypeAsColumn()
         ucrInputPermuteRows.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
         ucrInputPermuteRows.SetValidationTypeAsRVariable()
-
-
     End Sub
 
     Private Sub TestOkEnabled()
@@ -87,6 +87,7 @@ Public Class dlgPermuteColumn
     End Sub
     Private Sub nudSetSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
         clsSetSeedFunc.AddParameter("seed", nudSetSeed.Value)
+        nudSetSeed.Minimum = Integer.MinValue
     End Sub
 
     Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.TextChanged
