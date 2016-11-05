@@ -34,8 +34,8 @@ Partial Class dlgCombine
         'ucrSelectorCombineFactors
         '
         Me.ucrSelectorCombineFactors.bShowHiddenColumns = False
-        Me.ucrSelectorCombineFactors.bUseCurrentFilter = False
-        Me.ucrSelectorCombineFactors.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorCombineFactors.bUseCurrentFilter = True
+        Me.ucrSelectorCombineFactors.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorCombineFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCombineFactors.Name = "ucrSelectorCombineFactors"
         Me.ucrSelectorCombineFactors.Size = New System.Drawing.Size(210, 180)
@@ -43,7 +43,7 @@ Partial Class dlgCombine
         '
         'ucrFactorsReceiver
         '
-        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(271, 60)
+        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(273, 50)
         Me.ucrFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorsReceiver.Name = "ucrFactorsReceiver"
         Me.ucrFactorsReceiver.Selector = Nothing
@@ -52,16 +52,16 @@ Partial Class dlgCombine
         '
         'lblFactors
         '
-        Me.lblFactors.Location = New System.Drawing.Point(270, 35)
+        Me.lblFactors.Location = New System.Drawing.Point(273, 34)
         Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Size = New System.Drawing.Size(100, 23)
+        Me.lblFactors.Size = New System.Drawing.Size(100, 15)
         Me.lblFactors.TabIndex = 4
-        Me.lblFactors.Tag = "Factors"
-        Me.lblFactors.Text = "Factors:"
+        Me.lblFactors.Tag = "Factors_Selected:"
+        Me.lblFactors.Text = "Factors Selected:"
         '
         'chkDropUnusedLevels
         '
-        Me.chkDropUnusedLevels.Location = New System.Drawing.Point(271, 165)
+        Me.chkDropUnusedLevels.Location = New System.Drawing.Point(273, 153)
         Me.chkDropUnusedLevels.Name = "chkDropUnusedLevels"
         Me.chkDropUnusedLevels.Size = New System.Drawing.Size(127, 24)
         Me.chkDropUnusedLevels.TabIndex = 3
@@ -72,23 +72,23 @@ Partial Class dlgCombine
         'ucrInputColName
         '
         Me.ucrInputColName.IsReadOnly = False
-        Me.ucrInputColName.Location = New System.Drawing.Point(119, 196)
+        Me.ucrInputColName.Location = New System.Drawing.Point(115, 197)
         Me.ucrInputColName.Name = "ucrInputColName"
         Me.ucrInputColName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputColName.TabIndex = 2
         '
         'lblNewColumnName
         '
-        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 199)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 199)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(107, 23)
         Me.lblNewColumnName.TabIndex = 1
-        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Tag = "New_Column_Name:"
         Me.lblNewColumnName.Text = "New Column Name:"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 221)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 225)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -97,7 +97,7 @@ Partial Class dlgCombine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 285)
+        Me.ClientSize = New System.Drawing.Size(418, 285)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblNewColumnName)
