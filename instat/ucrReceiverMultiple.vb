@@ -402,25 +402,18 @@ Public Class ucrReceiverMultiple
         Dim strVarType As String
 
         If bSingleType Then
-            strVariableTypes = GetCurrentItemTypes(True)
             If (Not IsEmpty()) Then
-                If lstSelectedVariables.Items.Count = 1 Then
-                    strVarType = strVariableTypes.Item(0)
-                    If (strVarType = "numeric" OrElse strVarType = "integer") Then
+                strVariableTypes = GetCurrentItemTypes(True)
+                If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("factor") AndAlso strVariableTypes.Contains("ordered,factor")) Then
+                    MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
+                    Clear()
+                Else
+                    If strVariableTypes(0) = "integer" Then
                         SetDataType("numeric")
+                    ElseIf strVariableTypes(0) = "ordered,factor" Then
+                        SetDataType("factor")
                     Else
-                        SetDataType(strVarType)
-                    End If
-                ElseIf lstSelectedVariables.Items.Count > 1 Then
-                    If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) Then
-                        MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
-                        Clear()
-                    Else
-                        If strVariableTypes.Count = 1 Then
-                            SetDataType(strVariableTypes(0))
-                        Else
-                            SetDataType("numeric")
-                        End If
+                        SetDataType(strVariableTypes(0))
                     End If
                 End If
             Else
