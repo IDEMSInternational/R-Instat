@@ -320,16 +320,15 @@ Public Class clsGridLink
                 vecColumnDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsCharacter
 
                 For k = 0 To dfTemp.ColumnCount - 1
-                    Select Case vecColumnDataTypes(k)
-                        Case "factor"
-                            fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (f)"
-                        Case "character"
-                            fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (c)"
-                        Case "Date"
-                            fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (D)"
-                        Case Else
-                            fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k)
-                    End Select
+                    If vecColumnDataTypes(k).Contains("factor") Then
+                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (f)"
+                    ElseIf vecColumnDataTypes(k).Contains("character") Then
+                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (c)"
+                    ElseIf vecColumnDataTypes(k).Contains("Date") Then
+                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (D)"
+                    Else
+                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k)
+                    End If
                 Next
             Else
                 If strColumnNames IsNot Nothing Then
