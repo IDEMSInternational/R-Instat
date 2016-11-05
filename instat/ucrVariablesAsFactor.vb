@@ -103,7 +103,11 @@
 
     Public Function GetIDVarNamesFromSelector(Optional bWithQuotes As Boolean = True) As String
         Dim strIDVars As String
-        Dim lstVariablesFromSelector As List(Of String) = ucrVariableSelector.lstVariablesInReceivers
+        Dim arrTemp(ucrVariableSelector.lstVariablesInReceivers.Count - 1) As String
+        Dim lstVariablesFromSelector As List(Of String)
+
+        Array.Copy(ucrVariableSelector.lstVariablesInReceivers.ToArray, arrTemp, arrTemp.Length)
+        lstVariablesFromSelector = arrTemp.ToList()
 
         For i = 0 To ucrMultipleVariables.lstSelectedVariables.Items.Count - 1
             lstVariablesFromSelector.Remove(ucrMultipleVariables.lstSelectedVariables.Items(i).Text)
