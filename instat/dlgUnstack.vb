@@ -39,7 +39,6 @@ Public Class dlgUnstack
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForunstack
         ucrBase.clsRsyntax.SetFunction("dcast")
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
-        ucrSelectorForunstack.Reset()
         ucrBase.iHelpTopicID = 58
         ucrFactorToUnstackReceiver.SetDataType("factor")
         ucrIDColumns.Selector = ucrSelectorForunstack
@@ -56,6 +55,7 @@ Public Class dlgUnstack
         chkDropMissingCombinations.Checked = True
         SetDropParameter()
         ucrNewDataName.Reset()
+        ucrSelectorForunstack.Reset()
         SetDefaultDataName()
     End Sub
 
