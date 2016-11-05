@@ -60,6 +60,8 @@ Public Class dlgPermuteColumn
         ucrInputPermuteRows.SetDefaultTypeAsColumn()
         ucrInputPermuteRows.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
         ucrInputPermuteRows.SetValidationTypeAsRVariable()
+        nudSetSeed.Minimum = Integer.MinValue
+        nudSetSeed.Maximum = Integer.MaxValue
     End Sub
 
     Private Sub TestOkEnabled()
@@ -87,7 +89,6 @@ Public Class dlgPermuteColumn
     End Sub
     Private Sub nudSetSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
         clsSetSeedFunc.AddParameter("seed", nudSetSeed.Value)
-        nudSetSeed.Minimum = Integer.MinValue
     End Sub
 
     Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.TextChanged
