@@ -37,7 +37,7 @@ Partial Class dlgUnstack
         '
         'lblFactorToUnstackBy
         '
-        Me.lblFactorToUnstackBy.Location = New System.Drawing.Point(287, 32)
+        Me.lblFactorToUnstackBy.Location = New System.Drawing.Point(277, 31)
         Me.lblFactorToUnstackBy.Name = "lblFactorToUnstackBy"
         Me.lblFactorToUnstackBy.Size = New System.Drawing.Size(121, 16)
         Me.lblFactorToUnstackBy.TabIndex = 8
@@ -46,7 +46,7 @@ Partial Class dlgUnstack
         '
         'lblColumnToUnstack
         '
-        Me.lblColumnToUnstack.Location = New System.Drawing.Point(288, 80)
+        Me.lblColumnToUnstack.Location = New System.Drawing.Point(278, 79)
         Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
         Me.lblColumnToUnstack.Size = New System.Drawing.Size(119, 23)
         Me.lblColumnToUnstack.TabIndex = 7
@@ -55,7 +55,7 @@ Partial Class dlgUnstack
         '
         'chkDropMissingCombinations
         '
-        Me.chkDropMissingCombinations.Location = New System.Drawing.Point(10, 201)
+        Me.chkDropMissingCombinations.Location = New System.Drawing.Point(10, 199)
         Me.chkDropMissingCombinations.Name = "chkDropMissingCombinations"
         Me.chkDropMissingCombinations.Size = New System.Drawing.Size(210, 24)
         Me.chkDropMissingCombinations.TabIndex = 6
@@ -65,7 +65,7 @@ Partial Class dlgUnstack
         '
         'lblDataFrameForUnstack
         '
-        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(8, 231)
+        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(8, 232)
         Me.lblDataFrameForUnstack.Name = "lblDataFrameForUnstack"
         Me.lblDataFrameForUnstack.Size = New System.Drawing.Size(125, 23)
         Me.lblDataFrameForUnstack.TabIndex = 3
@@ -74,7 +74,7 @@ Partial Class dlgUnstack
         '
         'lblIDColumns
         '
-        Me.lblIDColumns.Location = New System.Drawing.Point(288, 130)
+        Me.lblIDColumns.Location = New System.Drawing.Point(282, 124)
         Me.lblIDColumns.Name = "lblIDColumns"
         Me.lblIDColumns.Size = New System.Drawing.Size(100, 23)
         Me.lblIDColumns.TabIndex = 1
@@ -84,23 +84,23 @@ Partial Class dlgUnstack
         'ucrNewDataName
         '
         Me.ucrNewDataName.IsReadOnly = False
-        Me.ucrNewDataName.Location = New System.Drawing.Point(133, 229)
+        Me.ucrNewDataName.Location = New System.Drawing.Point(131, 229)
         Me.ucrNewDataName.Name = "ucrNewDataName"
         Me.ucrNewDataName.Size = New System.Drawing.Size(137, 21)
         Me.ucrNewDataName.TabIndex = 0
         '
         'ucrIDColumns
         '
-        Me.ucrIDColumns.Location = New System.Drawing.Point(288, 150)
+        Me.ucrIDColumns.Location = New System.Drawing.Point(281, 140)
         Me.ucrIDColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrIDColumns.Name = "ucrIDColumns"
         Me.ucrIDColumns.Selector = Nothing
-        Me.ucrIDColumns.Size = New System.Drawing.Size(120, 100)
+        Me.ucrIDColumns.Size = New System.Drawing.Size(120, 110)
         Me.ucrIDColumns.TabIndex = 2
         '
         'ucrColumnToUnstackReceiver
         '
-        Me.ucrColumnToUnstackReceiver.Location = New System.Drawing.Point(289, 97)
+        Me.ucrColumnToUnstackReceiver.Location = New System.Drawing.Point(279, 96)
         Me.ucrColumnToUnstackReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrColumnToUnstackReceiver.Name = "ucrColumnToUnstackReceiver"
         Me.ucrColumnToUnstackReceiver.Selector = Nothing
@@ -109,7 +109,7 @@ Partial Class dlgUnstack
         '
         'ucrFactorToUnstackReceiver
         '
-        Me.ucrFactorToUnstackReceiver.Location = New System.Drawing.Point(289, 49)
+        Me.ucrFactorToUnstackReceiver.Location = New System.Drawing.Point(279, 48)
         Me.ucrFactorToUnstackReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorToUnstackReceiver.Name = "ucrFactorToUnstackReceiver"
         Me.ucrFactorToUnstackReceiver.Selector = Nothing
@@ -119,7 +119,7 @@ Partial Class dlgUnstack
         'ucrSelectorForunstack
         '
         Me.ucrSelectorForunstack.bShowHiddenColumns = False
-        Me.ucrSelectorForunstack.bUseCurrentFilter = False
+        Me.ucrSelectorForunstack.bUseCurrentFilter = True
         Me.ucrSelectorForunstack.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForunstack.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForunstack.Name = "ucrSelectorForunstack"
@@ -128,7 +128,7 @@ Partial Class dlgUnstack
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 259)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 256)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -137,7 +137,7 @@ Partial Class dlgUnstack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 318)
+        Me.ClientSize = New System.Drawing.Size(417, 318)
         Me.Controls.Add(Me.ucrNewDataName)
         Me.Controls.Add(Me.ucrIDColumns)
         Me.Controls.Add(Me.lblDataFrameForUnstack)
