@@ -131,7 +131,7 @@ Public Class ucrDataFrame
         Set(bValue As Boolean)
             bPvtUseFilteredData = bValue
             If bPvtUseFilteredData Then
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                     clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
                 Else
                     clsCurrDataFrame.RemoveParameterByName("use_current_filter")
