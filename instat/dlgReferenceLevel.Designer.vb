@@ -43,7 +43,7 @@ Partial Class dlgReferenceLevel
         Me.lblFactorSelected.Name = "lblFactorSelected"
         Me.lblFactorSelected.Size = New System.Drawing.Size(85, 13)
         Me.lblFactorSelected.TabIndex = 4
-        Me.lblFactorSelected.Tag = "Factor_Selected"
+        Me.lblFactorSelected.Tag = "Factor_Selected:"
         Me.lblFactorSelected.Text = "Factor Selected:"
         '
         'ucrSelectorForReferenceLevels
