@@ -52,7 +52,7 @@ Partial Class dlgOneVarFitModel
         'chkConvertToVariate
         '
         Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(269, 150)
+        Me.chkConvertToVariate.Location = New System.Drawing.Point(271, 150)
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
         Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
         Me.chkConvertToVariate.TabIndex = 4
@@ -101,8 +101,9 @@ Partial Class dlgOneVarFitModel
         Me.lblHyp.AutoSize = True
         Me.lblHyp.Location = New System.Drawing.Point(268, 151)
         Me.lblHyp.Name = "lblHyp"
-        Me.lblHyp.Size = New System.Drawing.Size(0, 13)
+        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
         Me.lblHyp.TabIndex = 17
+        Me.lblHyp.Text = "Null Hypothesis:"
         '
         'chkBinModify
         '
@@ -135,7 +136,7 @@ Partial Class dlgOneVarFitModel
         'nudCI
         '
         Me.nudCI.DecimalPlaces = 2
-        Me.nudCI.Location = New System.Drawing.Point(362, 125)
+        Me.nudCI.Location = New System.Drawing.Point(362, 124)
         Me.nudCI.Name = "nudCI"
         Me.nudCI.Size = New System.Drawing.Size(58, 20)
         Me.nudCI.TabIndex = 23
@@ -164,9 +165,9 @@ Partial Class dlgOneVarFitModel
         '
         'nudHyp
         '
-        Me.nudHyp.Location = New System.Drawing.Point(330, 149)
+        Me.nudHyp.Location = New System.Drawing.Point(362, 149)
         Me.nudHyp.Name = "nudHyp"
-        Me.nudHyp.Size = New System.Drawing.Size(48, 20)
+        Me.nudHyp.Size = New System.Drawing.Size(58, 20)
         Me.nudHyp.TabIndex = 29
         '
         'nudBinomialConditions
@@ -229,7 +230,7 @@ Partial Class dlgOneVarFitModel
         'ucrSelectorOneVarFitMod
         '
         Me.ucrSelectorOneVarFitMod.bShowHiddenColumns = False
-        Me.ucrSelectorOneVarFitMod.bUseCurrentFilter = False
+        Me.ucrSelectorOneVarFitMod.bUseCurrentFilter = True
         Me.ucrSelectorOneVarFitMod.Location = New System.Drawing.Point(10, 42)
         Me.ucrSelectorOneVarFitMod.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarFitMod.Name = "ucrSelectorOneVarFitMod"

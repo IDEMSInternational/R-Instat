@@ -221,7 +221,7 @@ Public Class ucrDistributions
         clsNormalDist.bIsContinuous = True
         clsNormalDist.bIsExact = True
         clsNormalDist.strExactName = "norm"
-        clsNormalDist.lstExact = {"mean", "Mean:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
+        clsNormalDist.lstExact = {"mean", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
         clsNormalDist.AddParameter("mean", "Mean", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
@@ -294,7 +294,7 @@ Public Class ucrDistributions
         clsBernouliDist.strDFunctionName = "dbinom"
         clsBernouliDist.bIsContinuous = False
         clsBernouliDist.bIsExact = True
-        clsBernouliDist.lstExact = {"prob", "Probability:", 0.5, 0.1, 2, 0, 1}
+        clsBernouliDist.lstExact = {"prob", "Difference in Proportions:", 0.5, 0.1, 2, 0, 1}
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
         clsBernouliDist.strExactName = "binom"
         lstAllDistributions.Add(clsBernouliDist)
@@ -325,7 +325,7 @@ Public Class ucrDistributions
         clsPoissonDist.bIsContinuous = False
         clsPoissonDist.bIsExact = True
         clsPoissonDist.strExactName = "pois"
-        clsPoissonDist.lstExact = {"r", "Rate:", 1, 1, 2, 0, Integer.MaxValue}
+        clsPoissonDist.lstExact = {"r", "Rate Ratio:", 1, 1, 2, 0, Integer.MaxValue}
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 

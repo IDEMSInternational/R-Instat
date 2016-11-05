@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel, clsFunctionOperation As New ROperator
-    Public clsRConvert, clsRCIFunction, clsTwoVarModel, clsRPoisson, clsRTTest, clsRBinomial, clsRLength, clsRMean, clsRMean2, clsRLength2 As New RFunction
+    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRBinomial, clsRLength, clsRMean, clsRMean2, clsRLength2 As New RFunction
     Public clsRLmOrGLM As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -69,7 +69,8 @@ Public Class dlgRegressionSimple
         ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
-        chkSaveModel.Checked = True
+        chkSaveModel.Checked = False 'this is temporary
+        chkSaveModel.Enabled = False 'this is disabled temporarily
         ucrModelName.Visible = True
         chkConvertToVariate.Checked = False
         chkConvertToVariate.Visible = False
@@ -89,17 +90,17 @@ Public Class dlgRegressionSimple
     Private Sub LM()
         clsRLmOrGLM.ClearParameters()
         clsRLmOrGLM.SetRCommand("lm")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
         clsModel.SetOperation("~")
         clsRLmOrGLM.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         ConvertToVariate()
     End Sub
 
     Private Sub GLM()
         clsRLmOrGLM.ClearParameters()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         clsRLmOrGLM.SetRCommand("glm")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
         clsModel.SetOperation("~")
         clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
@@ -109,6 +110,7 @@ Public Class dlgRegressionSimple
 
     Private Sub SetTTest()
         clsRTTest.SetRCommand("t.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("mu", nudHypothesis.Value.ToString())
         If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" Then
@@ -156,6 +158,7 @@ Public Class dlgRegressionSimple
 
     Private Sub SetBinomTest()
         clsRBinomial.SetRCommand("prop.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
         clsRBinomial.AddParameter("p", "c(" & nudHypothesis.Value.ToString() & "," & nudHyp2.Value.ToString() & ")")
         clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
@@ -163,7 +166,7 @@ Public Class dlgRegressionSimple
         clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
         clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
-        If ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Then
+        If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
             If ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer" Then
                 ucrExplanatory.Clear()
             End If
@@ -183,6 +186,7 @@ Public Class dlgRegressionSimple
             End If
         End If
         clsRPoisson.SetRCommand("poisson.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
         clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
         clsRPoisson.AddParameter("r", nudHypothesis.Value.ToString())
         clsRLength.SetRCommand("length")
@@ -201,8 +205,8 @@ Public Class dlgRegressionSimple
         clsRPoisson.ClearParameters()
         clsRBinomial.ClearParameters()
         clsRTTest.ClearParameters()
-        clsTwoVarModel.ClearParameters()
         clsRLength.ClearParameters()
+        clsRLmOrGLM.ClearParameters()
         If rdoGeneral.Checked Then
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
                 clsRLmOrGLM.ClearParameters()
@@ -214,16 +218,14 @@ Public Class dlgRegressionSimple
         ElseIf rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
                 SetTTest()
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 SetPoissonTest()
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 SetBinomTest()
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
             End If
         End If
         TestOKEnabled()
+        '        AssignModelName()
     End Sub
 
     Private Sub TestOKEnabled()
