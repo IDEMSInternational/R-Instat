@@ -97,7 +97,7 @@ Public Class dlgDeleteRowsOrColums
             nudRowNames.Visible = True
             ucrSelectorForDeleteRows.Visible = True
             ucrDataFrameLengthForDeleteRows.Visible = True
-            lblNumberofRows.Visible = True
+            lblRowNames.Visible = True
             ucrSelectorForDeleteColumns.Visible = False
             lblColumnsToDelete.Visible = False
             ucrReceiverForColumnsToDelete.Visible = False
@@ -111,12 +111,11 @@ Public Class dlgDeleteRowsOrColums
             nudRowNames.Visible = False
             ucrSelectorForDeleteRows.Visible = False
             ucrDataFrameLengthForDeleteRows.Visible = False
-            lblNumberofRows.Visible = False
+            lblRowNames.Visible = False
             ucrSelectorForDeleteColumns.Visible = True
             lblColumnsToDelete.Visible = True
             ucrReceiverForColumnsToDelete.Visible = True
         End If
-
     End Sub
 
     Private Sub RowNamesParam()
@@ -135,5 +134,4 @@ Public Class dlgDeleteRowsOrColums
     Private Sub nudRowNames_TextChanged(sender As Object, e As EventArgs) Handles nudRowNames.TextChanged
         RowNamesParam()
     End Sub
-
 End Class
