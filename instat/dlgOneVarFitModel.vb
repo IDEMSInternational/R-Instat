@@ -320,9 +320,11 @@ Public Class dlgOneVarFitModel
             If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
                 sdgOneVarFitModDisplay.RunLikelihoods()
             End If
-        Else
-            PlotResiduals()
-            frmMain.clsRLink.RunScript(clsRplot.ToScript(), 2)
+        ElseIf rdoSpecific.Checked Then
+            If ucrFamily.clsCurrDistribution.strNameTag = "Normal" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
+                PlotResiduals()
+                frmMain.clsRLink.RunScript(clsRplot.ToScript(), 2)
+            End If
         End If
     End Sub
 
@@ -342,9 +344,7 @@ Public Class dlgOneVarFitModel
             nudHyp.Visible = True
             lblHyp.Visible = True
             lblConfidenceLimit.Visible = True
-            ' UcrDistributions.cbodistributions. distributions avaliable = ...
             If ucrFamily.clsCurrDistribution.bIsExact = True Then
-                lblHyp.Text = ucrFamily.clsCurrDistribution.lstExact(1)
                 nudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
                 nudHyp.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
                 nudHyp.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
