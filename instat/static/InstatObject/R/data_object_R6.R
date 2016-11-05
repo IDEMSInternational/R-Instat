@@ -936,7 +936,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type = "factor", factor_numeric = "by_levels") {
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels") {
   for(col_name in col_names){
     if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
       stop(col_name, " is not a column in ", get_metadata(data_name_label))
@@ -949,7 +949,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
   }
   
   
-  if(!(to_type %in% c("integer", "factor", "numeric", "character"))){
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))){
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -962,20 +962,19 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     if(to_type=="factor"){
       self$add_columns_to_data(col_name = col_name, col_data = as.factor(curr_col))
     }
-    
-    if(to_type=="integer"){
+    else if(to_type=="ordered_factor") {
+      self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
+    }
+    else if(to_type=="integer") {
       self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
     }
-    
-    if(to_type=="numeric"){
-      if(is.factor(curr_col) && (factor_numeric == "by_levels")){
+    else if(to_type=="numeric") {
+      if(is.factor(curr_col) && (factor_numeric == "by_levels")) {
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(curr_col))[curr_col])
-      }else{
-        self$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col) )
       }
+      elseself$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col))
     }
-    
-    if(to_type=="character"){
+    else if(to_type=="character") {
       self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))
     }
     self$append_to_variables_metadata(property = display_decimal_label, col_names = col_name, new_val = get_default_decimal_places(curr_col))
@@ -1521,12 +1520,17 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
   if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
   numeric_geom <- match.fun(numeric)
   cat_geom <- match.fun(categorical)
-  localenv <- environment()
+  
+  curr_data <- self$get_data_frame()
+  column_types <- c()
+  for(col in columns) {
+    # TODO this could be method to avoid needing to get full data frame in this method
+    # Everything non numeric is treated as categorical
+    if(is.numeric(curr_data[[col]])) column_types <- c(column_types, "numeric")
+    else column_types <- c(column_types, "cat")
+  }
+  
   if(output == "facets") {
-    column_types <- unique(self$get_variables_metadata(column = columns, property = data_type_label))
-    column_types <- as.vector(column_types)
-    column_types[column_types == "integer"] <- "numeric"
-    column_types[column_types == "factor" | column_types == "character" | column_types == "logical"] <- "cat"
     column_types <- unique(column_types)
     if(length(column_types) > 1) {
       if(output == "facets") warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
@@ -1558,11 +1562,6 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     return(g)
   }
   else {
-    column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
-    column_types <- as.vector(column_types)
-    column_types[column_types == "integer"] <- "numeric"
-    column_types[column_types == "factor" | column_types == "character" | column_types == "logical"] <- "cat"
-    curr_data <- self$get_data_frame()
     graphs <- list()
     i = 1
     for(column in columns) {
@@ -1576,7 +1575,6 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
       }
       else stop("Cannot plot columns of type:", column_types[i])
       
-    
       if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point") {
         g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column)))
       }
