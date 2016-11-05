@@ -64,9 +64,9 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.Controls.Add(Me.rdoNumeric)
         Me.grpSequenceType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.grpSequenceType.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequenceType.Location = New System.Drawing.Point(10, 61)
+        Me.grpSequenceType.Location = New System.Drawing.Point(11, 58)
         Me.grpSequenceType.Name = "grpSequenceType"
-        Me.grpSequenceType.Size = New System.Drawing.Size(195, 39)
+        Me.grpSequenceType.Size = New System.Drawing.Size(204, 47)
         Me.grpSequenceType.TabIndex = 3
         Me.grpSequenceType.TabStop = False
         Me.grpSequenceType.Tag = "Sequence_type"
@@ -77,7 +77,7 @@ Partial Class dlgRegularSequence
         Me.rdoDates.AutoSize = True
         Me.rdoDates.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdoDates.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoDates.Location = New System.Drawing.Point(103, 15)
+        Me.rdoDates.Location = New System.Drawing.Point(103, 19)
         Me.rdoDates.Name = "rdoDates"
         Me.rdoDates.Size = New System.Drawing.Size(59, 18)
         Me.rdoDates.TabIndex = 1
@@ -90,7 +90,7 @@ Partial Class dlgRegularSequence
         Me.rdoNumeric.AutoSize = True
         Me.rdoNumeric.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdoNumeric.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoNumeric.Location = New System.Drawing.Point(6, 15)
+        Me.rdoNumeric.Location = New System.Drawing.Point(6, 19)
         Me.rdoNumeric.Name = "rdoNumeric"
         Me.rdoNumeric.Size = New System.Drawing.Size(70, 18)
         Me.rdoNumeric.TabIndex = 0
@@ -131,9 +131,9 @@ Partial Class dlgRegularSequence
         Me.lblNumberDecimalPlaces.AutoSize = True
         Me.lblNumberDecimalPlaces.Location = New System.Drawing.Point(12, 183)
         Me.lblNumberDecimalPlaces.Name = "lblNumberDecimalPlaces"
-        Me.lblNumberDecimalPlaces.Size = New System.Drawing.Size(132, 13)
+        Me.lblNumberDecimalPlaces.Size = New System.Drawing.Size(135, 13)
         Me.lblNumberDecimalPlaces.TabIndex = 16
-        Me.lblNumberDecimalPlaces.Text = "Number of Decimal Places"
+        Me.lblNumberDecimalPlaces.Text = "Number of Decimal Places:"
         '
         'nudNumberofDecimalPlaces
         '
@@ -208,10 +208,10 @@ Partial Class dlgRegularSequence
         Me.lblLength.AutoSize = True
         Me.lblLength.Location = New System.Drawing.Point(12, 133)
         Me.lblLength.Name = "lblLength"
-        Me.lblLength.Size = New System.Drawing.Size(40, 13)
+        Me.lblLength.Size = New System.Drawing.Size(43, 13)
         Me.lblLength.TabIndex = 1
         Me.lblLength.Tag = "Length"
-        Me.lblLength.Text = "Length"
+        Me.lblLength.Text = "Length:"
         '
         'chkDefineAsFactor
         '
@@ -229,7 +229,7 @@ Partial Class dlgRegularSequence
         'lblTimes1
         '
         Me.lblTimes1.AutoSize = True
-        Me.lblTimes1.Location = New System.Drawing.Point(148, 108)
+        Me.lblTimes1.Location = New System.Drawing.Point(151, 108)
         Me.lblTimes1.Name = "lblTimes1"
         Me.lblTimes1.Size = New System.Drawing.Size(41, 13)
         Me.lblTimes1.TabIndex = 10
@@ -241,10 +241,10 @@ Partial Class dlgRegularSequence
         Me.lblRepeatValues.AutoSize = True
         Me.lblRepeatValues.Location = New System.Drawing.Point(12, 108)
         Me.lblRepeatValues.Name = "lblRepeatValues"
-        Me.lblRepeatValues.Size = New System.Drawing.Size(77, 13)
+        Me.lblRepeatValues.Size = New System.Drawing.Size(80, 13)
         Me.lblRepeatValues.TabIndex = 8
         Me.lblRepeatValues.Tag = "Repeat_values"
-        Me.lblRepeatValues.Text = "Repeat Values"
+        Me.lblRepeatValues.Text = "Repeat Values:"
         '
         'lblSteps
         '
@@ -252,10 +252,10 @@ Partial Class dlgRegularSequence
         Me.lblSteps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSteps.Location = New System.Drawing.Point(12, 82)
         Me.lblSteps.Name = "lblSteps"
-        Me.lblSteps.Size = New System.Drawing.Size(58, 13)
+        Me.lblSteps.Size = New System.Drawing.Size(61, 13)
         Me.lblSteps.TabIndex = 6
         Me.lblSteps.Tag = "In_steps_of"
-        Me.lblSteps.Text = "In Steps of"
+        Me.lblSteps.Text = "In Steps of:"
         '
         'lblTo
         '
@@ -263,10 +263,10 @@ Partial Class dlgRegularSequence
         Me.lblTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTo.Location = New System.Drawing.Point(12, 56)
         Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(20, 13)
+        Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 3
         Me.lblTo.Tag = "To"
-        Me.lblTo.Text = "To"
+        Me.lblTo.Text = "To:"
         '
         'lblFrom
         '
@@ -276,18 +276,18 @@ Partial Class dlgRegularSequence
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(30, 13)
         Me.lblFrom.TabIndex = 0
-        Me.lblFrom.Tag = "From"
+        Me.lblFrom.Tag = "From:"
         Me.lblFrom.Text = "From"
         '
         'lblPreview
         '
         Me.lblPreview.AutoSize = True
-        Me.lblPreview.Location = New System.Drawing.Point(255, 25)
+        Me.lblPreview.Location = New System.Drawing.Point(239, 28)
         Me.lblPreview.Name = "lblPreview"
-        Me.lblPreview.Size = New System.Drawing.Size(97, 13)
+        Me.lblPreview.Size = New System.Drawing.Size(100, 13)
         Me.lblPreview.TabIndex = 7
         Me.lblPreview.Tag = "Preview"
-        Me.lblPreview.Text = "Sequence Preview"
+        Me.lblPreview.Text = "Sequence Preview:"
         '
         'txtGetPreview
         '
@@ -300,12 +300,12 @@ Partial Class dlgRegularSequence
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 325)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 325)
         Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 12
         Me.lblNewColumnName.Tag = "New_Column_Name"
-        Me.lblNewColumnName.Text = "New Column Name"
+        Me.lblNewColumnName.Text = "New Column Name:"
         '
         'txtMessage
         '
@@ -327,7 +327,7 @@ Partial Class dlgRegularSequence
         '
         'ucrSelectDataFrameRegularSequence
         '
-        Me.ucrSelectDataFrameRegularSequence.bUseCurrentFilter = False
+        Me.ucrSelectDataFrameRegularSequence.bUseCurrentFilter = True
         Me.ucrSelectDataFrameRegularSequence.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectDataFrameRegularSequence.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectDataFrameRegularSequence.Name = "ucrSelectDataFrameRegularSequence"
@@ -355,6 +355,7 @@ Partial Class dlgRegularSequence
         Me.Controls.Add(Me.ucrSelectDataFrameRegularSequence)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpSequenceType)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRegularSequence"
