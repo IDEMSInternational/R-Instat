@@ -160,7 +160,13 @@ Public Class ucrReceiver
         Dim iIncludeIndex As Integer
         'Dim iExcludeIndex As Integer
         Dim kvpIncludeProperty As KeyValuePair(Of String, String())
-
+        If strProperty = "class" AndAlso strInclude.Contains(Chr(34) & "factor" & Chr(34)) Then
+            Array.Resize(strInclude, strInclude.Length + 1)
+            ' WARNING: This is dependent on the way the metadata is displayed by the Instat object
+            ' If this changes in Instat object, ordered factors will not be displayed
+            ' TODO: Make this solid - should somehow use is.factor() in R
+            strInclude(strInclude.Length - 1) = Chr(34) & "ordered,factor" & Chr(34)
+        End If
         kvpIncludeProperty = New KeyValuePair(Of String, String())(strProperty, strInclude)
         iIncludeIndex = lstIncludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
         If iIncludeIndex <> -1 Then
