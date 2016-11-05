@@ -53,7 +53,7 @@ Partial Class dlgDeleteSheet
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteSheet"
-        Me.Text = "Delete Sheet"
+        Me.Text = "Delete Data Frame"
         Me.ResumeLayout(False)
 
     End Sub
