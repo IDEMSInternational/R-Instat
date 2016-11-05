@@ -932,6 +932,12 @@
     <Compile Include="ucrColors.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDialogDisabled.Designer.vb">
+      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDialogDisabled.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
@@ -4092,6 +4098,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDialogDisabled.fr-FR.resx">
+      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDialogDisabled.resx">
+      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDialogDisabled.sw-KE.resx">
+      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributions.fr-FR.resx">
       <DependentUpon>ucrDistributions.vb</DependentUpon>

@@ -44,7 +44,6 @@ Partial Class dlgClimdex
         Me.lblTempQuantiles = New System.Windows.Forms.Label()
         Me.lblPrecQuantiles = New System.Windows.Forms.Label()
         Me.lblFreq = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrInputFreq = New instat.ucrInputComboBox()
         Me.ucrMultipleInputTempQtiles = New instat.ucrMultipleInput()
         Me.ucrMultipleInputPrecQtiles = New instat.ucrMultipleInput()
@@ -53,6 +52,7 @@ Partial Class dlgClimdex
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimdex = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseClimdex = New instat.ucrButtons()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         CType(Me.nudYearFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudYearTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -292,16 +292,6 @@ Partial Class dlgClimdex
         Me.lblFreq.Tag = "Frequency"
         Me.lblFreq.Text = "Frequency"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.Label1.Location = New System.Drawing.Point(196, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(78, 39)
-        Me.Label1.TabIndex = 22
-        Me.Label1.Text = "OK disabled " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "until climate " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "object is ready!"
-        '
         'ucrInputFreq
         '
         Me.ucrInputFreq.IsReadOnly = False
@@ -354,7 +344,7 @@ Partial Class dlgClimdex
         'ucrSelectorClimdex
         '
         Me.ucrSelectorClimdex.bShowHiddenColumns = False
-        Me.ucrSelectorClimdex.bUseCurrentFilter = False
+        Me.ucrSelectorClimdex.bUseCurrentFilter = True
         Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 9)
         Me.ucrSelectorClimdex.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimdex.Name = "ucrSelectorClimdex"
@@ -368,12 +358,20 @@ Partial Class dlgClimdex
         Me.ucrBaseClimdex.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseClimdex.TabIndex = 21
         '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(74, 114)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 22
+        '
         'dlgClimdex
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(424, 402)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.ucrInputFreq)
         Me.Controls.Add(Me.lblFreq)
         Me.Controls.Add(Me.ucrMultipleInputTempQtiles)
@@ -449,5 +447,5 @@ Partial Class dlgClimdex
     Friend WithEvents ucrMultipleInputTempQtiles As ucrMultipleInput
     Friend WithEvents lblFreq As Label
     Friend WithEvents ucrInputFreq As ucrInputComboBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class
