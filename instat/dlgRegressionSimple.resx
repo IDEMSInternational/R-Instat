@@ -715,7 +715,7 @@
     <value>1</value>
   </data>
   <data name="nudCI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 14</value>
+    <value>134, 14</value>
   </data>
   <data name="nudCI.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -736,7 +736,7 @@
     <value>2</value>
   </data>
   <data name="nudHypothesis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 40</value>
+    <value>134, 39</value>
   </data>
   <data name="nudHypothesis.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -760,7 +760,7 @@
     <value>True</value>
   </data>
   <data name="lblCI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 17</value>
+    <value>6, 17</value>
   </data>
   <data name="lblCI.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
@@ -790,7 +790,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHyp1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 43</value>
+    <value>6, 43</value>
   </data>
   <data name="lblHyp1.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
@@ -817,7 +817,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblProbability2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 69</value>
+    <value>6, 69</value>
   </data>
   <data name="lblProbability2.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -841,7 +841,7 @@
     <value>3</value>
   </data>
   <data name="nudHyp2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 65</value>
+    <value>134, 64</value>
   </data>
   <data name="nudHyp2.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -865,7 +865,7 @@
     <value>238, 200</value>
   </data>
   <data name="grpParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 90</value>
+    <value>185, 90</value>
   </data>
   <data name="grpParameters.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -892,7 +892,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 383</value>
+    <value>433, 383</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
