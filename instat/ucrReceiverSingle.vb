@@ -45,7 +45,17 @@ Public Class ucrReceiverSingle
     Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
-        RemoveSelected()
+
+        'Would prefer to have remove selected but that will first clear the receiver
+        'This has issues when reading RSyntax and filling receivers e.g. in Specific plot dialogs
+        'Because it modifies the list of parameters it is looping through when clearing first, crashing
+        'Below is the part from RemoveSelected() that is needed
+        'This is only an issue with single receiver
+        'If RemoveSelected() later contains other things, this may need to be updated.
+        'RemoveSelected()
+        If Selector IsNot Nothing Then
+            Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+        End If
         MyBase.Add(strItem, strDataFrame)
 
         If bTypeSet Then
