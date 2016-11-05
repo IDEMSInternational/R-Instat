@@ -252,6 +252,7 @@ Public Class dlgInsertColumn
             ucrInputBeforeAfter.Enabled = True
         Else
             ucrInputBeforeAfter.Enabled = False
+            ucrReceiverColumnsToInsert.Clear()
         End If
     End Sub
 
