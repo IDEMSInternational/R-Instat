@@ -43,7 +43,7 @@ Partial Class dlgMerge
         'lblFirstDataFrame
         '
         Me.lblFirstDataFrame.AutoSize = True
-        Me.lblFirstDataFrame.Location = New System.Drawing.Point(9, 11)
+        Me.lblFirstDataFrame.Location = New System.Drawing.Point(10, 10)
         Me.lblFirstDataFrame.Name = "lblFirstDataFrame"
         Me.lblFirstDataFrame.Size = New System.Drawing.Size(133, 13)
         Me.lblFirstDataFrame.TabIndex = 3
@@ -52,7 +52,7 @@ Partial Class dlgMerge
         'lblSecondDataFrame
         '
         Me.lblSecondDataFrame.AutoSize = True
-        Me.lblSecondDataFrame.Location = New System.Drawing.Point(227, 13)
+        Me.lblSecondDataFrame.Location = New System.Drawing.Point(227, 10)
         Me.lblSecondDataFrame.Name = "lblSecondDataFrame"
         Me.lblSecondDataFrame.Size = New System.Drawing.Size(151, 13)
         Me.lblSecondDataFrame.TabIndex = 4
@@ -63,9 +63,9 @@ Partial Class dlgMerge
         Me.lblNewDataFrameName.AutoSize = True
         Me.lblNewDataFrameName.Location = New System.Drawing.Point(6, 319)
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
-        Me.lblNewDataFrameName.Size = New System.Drawing.Size(118, 13)
+        Me.lblNewDataFrameName.Size = New System.Drawing.Size(121, 13)
         Me.lblNewDataFrameName.TabIndex = 9
-        Me.lblNewDataFrameName.Text = "New Data Frame Name"
+        Me.lblNewDataFrameName.Text = "New Data Frame Name:"
         '
         'grpMergeOptions
         '
@@ -129,7 +129,7 @@ Partial Class dlgMerge
         Me.ucrNewDataFrameName.IsReadOnly = False
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(130, 316)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(280, 21)
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(277, 21)
         Me.ucrNewDataFrameName.TabIndex = 10
         '
         'ucrBase
@@ -141,7 +141,7 @@ Partial Class dlgMerge
         '
         'ucrSecondDataFrame
         '
-        Me.ucrSecondDataFrame.bUseCurrentFilter = False
+        Me.ucrSecondDataFrame.bUseCurrentFilter = True
         Me.ucrSecondDataFrame.Location = New System.Drawing.Point(230, 34)
         Me.ucrSecondDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondDataFrame.Name = "ucrSecondDataFrame"
@@ -150,8 +150,8 @@ Partial Class dlgMerge
         '
         'ucrFirstDataFrame
         '
-        Me.ucrFirstDataFrame.bUseCurrentFilter = False
-        Me.ucrFirstDataFrame.Location = New System.Drawing.Point(9, 34)
+        Me.ucrFirstDataFrame.bUseCurrentFilter = True
+        Me.ucrFirstDataFrame.Location = New System.Drawing.Point(13, 34)
         Me.ucrFirstDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstDataFrame.Name = "ucrFirstDataFrame"
         Me.ucrFirstDataFrame.Size = New System.Drawing.Size(120, 40)
@@ -169,19 +169,19 @@ Partial Class dlgMerge
         'ucrInputMergeColumnsOptions
         '
         Me.ucrInputMergeColumnsOptions.IsReadOnly = False
-        Me.ucrInputMergeColumnsOptions.Location = New System.Drawing.Point(128, 86)
+        Me.ucrInputMergeColumnsOptions.Location = New System.Drawing.Point(121, 86)
         Me.ucrInputMergeColumnsOptions.Name = "ucrInputMergeColumnsOptions"
-        Me.ucrInputMergeColumnsOptions.Size = New System.Drawing.Size(222, 21)
+        Me.ucrInputMergeColumnsOptions.Size = New System.Drawing.Size(229, 21)
         Me.ucrInputMergeColumnsOptions.TabIndex = 18
         '
         'lblIdColumnOption
         '
         Me.lblIdColumnOption.AutoSize = True
-        Me.lblIdColumnOption.Location = New System.Drawing.Point(11, 92)
+        Me.lblIdColumnOption.Location = New System.Drawing.Point(12, 90)
         Me.lblIdColumnOption.Name = "lblIdColumnOption"
-        Me.lblIdColumnOption.Size = New System.Drawing.Size(100, 13)
+        Me.lblIdColumnOption.Size = New System.Drawing.Size(103, 13)
         Me.lblIdColumnOption.TabIndex = 19
-        Me.lblIdColumnOption.Text = "ID Columns Options"
+        Me.lblIdColumnOption.Text = "ID Columns Options:"
         '
         'dlgMerge
         '
