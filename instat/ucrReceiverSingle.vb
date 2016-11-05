@@ -45,7 +45,7 @@ Public Class ucrReceiverSingle
     Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
-
+        RemoveSelected()
         MyBase.Add(strItem, strDataFrame)
 
         If bTypeSet Then
