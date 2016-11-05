@@ -254,4 +254,14 @@
             setsingletypestatus(False)
         End If
     End Sub
+
+    Public Sub SetMeAsReceiver()
+        If ucrVariableSelector IsNot Nothing Then
+            If bSingleVariable Then
+                ucrSingleVariable.SetMeAsReceiver()
+            Else
+                ucrMultipleVariables.SetMeAsReceiver()
+            End If
+        End If
+    End Sub
 End Class
