@@ -142,7 +142,8 @@ Public Class dlgBoxplot
                 chkVarwidth.Checked = True
                 'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
-        Else chkVarwidth.Checked = False
+        Else
+            chkVarwidth.Checked = False
         End If
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
