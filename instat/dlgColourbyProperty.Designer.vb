@@ -31,7 +31,7 @@ Partial Class dlgColourbyProperty
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 197)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 201)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -39,8 +39,8 @@ Partial Class dlgColourbyProperty
         'ucrSelectorColourByMetadata
         '
         Me.ucrSelectorColourByMetadata.bShowHiddenColumns = False
-        Me.ucrSelectorColourByMetadata.bUseCurrentFilter = False
-        Me.ucrSelectorColourByMetadata.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorColourByMetadata.bUseCurrentFilter = True
+        Me.ucrSelectorColourByMetadata.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorColourByMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorColourByMetadata.Name = "ucrSelectorColourByMetadata"
         Me.ucrSelectorColourByMetadata.Size = New System.Drawing.Size(210, 180)
@@ -48,7 +48,7 @@ Partial Class dlgColourbyProperty
         '
         'ucrReceiverMetadataProperty
         '
-        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(273, 31)
+        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(274, 50)
         Me.ucrReceiverMetadataProperty.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
         Me.ucrReceiverMetadataProperty.Selector = Nothing
@@ -58,16 +58,16 @@ Partial Class dlgColourbyProperty
         'lblMetadataProp
         '
         Me.lblMetadataProp.AutoSize = True
-        Me.lblMetadataProp.Location = New System.Drawing.Point(270, 14)
+        Me.lblMetadataProp.Location = New System.Drawing.Point(275, 34)
         Me.lblMetadataProp.Name = "lblMetadataProp"
-        Me.lblMetadataProp.Size = New System.Drawing.Size(94, 13)
+        Me.lblMetadataProp.Size = New System.Drawing.Size(97, 13)
         Me.lblMetadataProp.TabIndex = 3
-        Me.lblMetadataProp.Text = "Metadata Property"
+        Me.lblMetadataProp.Text = "Metadata Property:"
         '
         'chkRemoveColours
         '
         Me.chkRemoveColours.AutoSize = True
-        Me.chkRemoveColours.Location = New System.Drawing.Point(273, 69)
+        Me.chkRemoveColours.Location = New System.Drawing.Point(274, 85)
         Me.chkRemoveColours.Name = "chkRemoveColours"
         Me.chkRemoveColours.Size = New System.Drawing.Size(110, 17)
         Me.chkRemoveColours.TabIndex = 4
