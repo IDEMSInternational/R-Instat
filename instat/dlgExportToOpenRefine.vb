@@ -29,10 +29,11 @@ Public Class dlgExportToOpenRefine
         End Sub
 
         Private Sub SetDefaults()
-            chkRefineBrowser.Checked = False
-            ucrOpenRefineDataFrame.Reset()
-            ucrInputDatasetName.Reset()
-            TestOKEnabled()
+        chkRefineBrowser.Checked = False
+        ucrOpenRefineDataFrame.Reset()
+        ucrInputDatasetName.Reset()
+        ucrBase.OKEnabled(False)
+        TestOKEnabled()
         End Sub
 
         Private Sub InitialiseDialog()
@@ -41,11 +42,11 @@ Public Class dlgExportToOpenRefine
         clsWriteToCSV.AddParameter("row.names", "FALSE")
     End Sub
     Private Sub TestOKEnabled()
-        If ucrInputDatasetName.IsEmpty = True Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
+        '    If ucrInputDatasetName.IsEmpty = True Then
+        '            ucrBase.OKEnabled(False)
+        '    Else
+        '            ucrBase.OKEnabled(True)
+        '    End If
     End Sub
 
     Private Sub ucrInputDatasetName_NameChanged() Handles ucrInputDatasetName.NameChanged
