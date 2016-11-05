@@ -42,7 +42,6 @@ Public Class dlgRecodeFactor
         clsReplaceFunction.strRCommand = "c"
         ucrBase.clsRsyntax.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
 
-        ucrInputColumnName.SetPrefix("Recode")
         ucrInputColumnName.SetItemsTypeAsColumns()
         ucrInputColumnName.SetDefaultTypeAsColumn()
         ucrInputColumnName.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
@@ -56,6 +55,9 @@ Public Class dlgRecodeFactor
 
     Private Sub SetDefaults()
         ucrSelectorForRecode.Reset()
+        ucrSelectorForRecode.Focus()
+        ucrFactorGrid.ResetText()
+        ucrInputColumnName.SetPrefix("Recode")
         TestOKEnabled()
     End Sub
 
@@ -104,5 +106,9 @@ Public Class dlgRecodeFactor
             ucrBase.clsRsyntax.SetAssignTo(ucrInputColumnName.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnName.GetText())
         End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
