@@ -32,6 +32,7 @@ Public Class dlgCombine
         ucrSelectorCombineFactors.Focus()
         ucrInputColName.Reset()
         chkDropUnusedLevels.Checked = False
+        ucrInputColName.SetPrefix("Interact")
     End Sub
 
     Private Sub InitialiseDialog()
@@ -39,7 +40,6 @@ Public Class dlgCombine
         ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
         ucrBase.clsRsyntax.SetFunction("interaction")
-        ucrInputColName.SetPrefix("Interact")
         ucrInputColName.SetItemsTypeAsColumns()
         ucrInputColName.SetDefaultTypeAsColumn()
         ucrInputColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
@@ -95,4 +95,7 @@ Public Class dlgCombine
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
     End Sub
 
+    Private Sub ucrFactorsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorsReceiver.SelectionChanged
+
+    End Sub
 End Class
