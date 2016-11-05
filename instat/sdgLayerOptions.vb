@@ -87,7 +87,16 @@ Public Class sdgLayerOptions
             clsGeomFunction.RemoveParameterByName("data")
             'Here the global ggplot function takes the relevant "mapping" and "data" parameters as required by "ApplyOnAllLayers".
             clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction)
-            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            ' Temp disabled this, it resolves the issue of overwriting the data parameter in the main dialog
+            ' Only noticeable when main dialog uses multiple columns as a factor
+            ' Since in this case, chkApplyOnAllLayers is checked, it wasn't possible to change the data frame
+            ' from the main dialog so nothing is lost by not doing this.
+            ' clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            ' Only bug it causes is when defining the first layer e.g. from General
+            ' So here we add it in such cases:
+            If clsGgplotFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "data") = -1 Then
+                clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            End If
             'The data frame that is selected in the dataframe selector (lives in ucrGeomWithAes) is communicated to the sdgLayerOptions and the ucrGeomWithAes
             'Question to be discussed: could these two strGlobalDataFrame and ucrGeomWithAes.strGlobalDataFrame not be linked together in sdgLayerOptions.initialisedialog() ? 
             strGlobalDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
