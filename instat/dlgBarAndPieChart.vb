@@ -43,6 +43,7 @@ Public Class dlgBarAndPieChart
         ucrFactorReceiver.SetMeAsReceiver()
         ucrSaveBar.Reset()
         sdgPlots.Reset()
+        chkFlipCoordinates.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -196,5 +197,19 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrSaveBar_ContentsChanged() Handles ucrSaveBar.ContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Public Sub SetCoordFlip()
+        Dim clsTempRFunc As New RFunction
+        If chkFlipCoordinates.Checked Then
+            clsTempRFunc.SetRCommand("coord_flip")
+            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
+        Else
+            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
+        End If
+    End Sub
+
+    Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
+        SetCoordFlip()
     End Sub
 End Class
