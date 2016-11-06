@@ -36,6 +36,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrSelectorTwoVarGraph.Reset()
         ucrSelectorTwoVarGraph.Focus()
         ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
+        sdgDescribeTwoVarGraph.Initialise()
         TestOkEnabled()
     End Sub
 
@@ -58,7 +59,6 @@ Public Class dlgDescribeTwoVarGraph
         clsRFacet.AddParameter("facets", "~variable")
         ucrBase.clsRsyntax.AddOperatorParameter("facet_wrap", clsRFunc:=clsRFacet)
         ucrBase.iHelpTopicID = 416
-        sdgDescribeTwoVarGraph.Initialise()
     End Sub
 
     Private Sub TestOkEnabled()
