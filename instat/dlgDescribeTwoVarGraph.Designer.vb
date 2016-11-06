@@ -34,7 +34,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(308, 224)
+        Me.cmdOptions.Location = New System.Drawing.Point(280, 224)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(101, 23)
         Me.cmdOptions.TabIndex = 11
