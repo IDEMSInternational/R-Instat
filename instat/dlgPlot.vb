@@ -40,7 +40,9 @@ Public Class dlgPlot
         clsRaesFunction.ClearParameters()
         clsRgeom_lineplotFunction.ClearParameters()
         chkPoints.Checked = False
-        ucrLinePlotSelector.Focus()
+        '        ucrLinePlotSelector.Focus()
+        ucrSaveLinePlot.strPrefix = "Line"
+        ucrVariablesAsFactorForLinePlot.Focus()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
         ucrSaveLinePlot.Reset()
@@ -75,7 +77,6 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetIncludedDataType({"numeric", "factor"})
 
         ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
-        ucrSaveLinePlot.strPrefix = "Line"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
 
@@ -135,6 +136,11 @@ Public Class dlgPlot
             clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForLinePlot.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("y")
+        End If
+        If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
+            ucrVariablesAsFactorForLinePlot.ucrSingleVariable.Focus()
+        Else
+            ucrVariablesAsFactorForLinePlot.ucrMultipleVariables.Focus()
         End If
         TestOkEnabled()
     End Sub
