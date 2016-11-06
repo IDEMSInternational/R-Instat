@@ -64,10 +64,12 @@ Public Class sdgPlots
         LegendDefaults()
         bLayersDefaultIsGlobal = False
     End Sub
+
     Private Sub TitleDefaults()
         chkDisplayLegendTitle.Checked = True
         chkOverwriteLegendTitle.Checked = False
         ucrInputLegend.Visible = False
+        ucrInputGraphTitle.ResetText()
     End Sub
 
     Public Sub Reset()
@@ -125,12 +127,17 @@ Public Class sdgPlots
             rdoHorizontal.Visible = True
             rdoHorizontal.Checked = True
             rdoVertical.Visible = True
-            chkNoOfRowsOrColumns.Visible = True
             chkNoOfRowsOrColumns.Checked = False
             nudNoOfRowsOrColumns.Visible = True
+            nudNoOfRowsOrColumns.Value = 0
+            chkMargin.Checked = False
+            chkFreeScalesX.Checked = False
+            chkFreeScalesY.Checked = False
+            chkFreeSpace.Checked = False
             chkMargin.Visible = True
             chkFreeScalesX.Visible = True
             chkFreeScalesY.Visible = True
+            chkFreeSpace.Visible = True
             'In case IncludeFacets is checked, the facets need to be set. Still might not be included as RSyntax parameter if no no variable has been set for faceting, but this is then decided in the IncludeFacetsParameter below.
             SetFacets()
             SecondFactorReceiverEnabled()
@@ -147,6 +154,7 @@ Public Class sdgPlots
             chkFreeScalesY.Visible = False
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
+            chkFreeSpace.Visible = False
         End If
         'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
         IncludeFacetsParameter()
@@ -326,7 +334,6 @@ Public Class sdgPlots
         End If
     End Sub
 
-
     Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegendTitle.CheckedChanged
         'The Overwrite Legend Title check box should only be available when the Display Legend Title is ticked.
         If chkDisplayLegendTitle.Checked Then
@@ -377,7 +384,6 @@ Public Class sdgPlots
             chkOverwriteLegendTitle.Checked = False
             ucrInputLegend.Visible = False
             ucrInputLegend.ResetText()
-
         ElseIf rdoLegendTitleCustom.Checked Then
             chkDisplayLegendTitle.Visible = True
             chkOverwriteLegendTitle.Visible = True
