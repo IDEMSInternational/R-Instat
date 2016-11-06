@@ -53,7 +53,6 @@ Public Class dlgDotPlot
         ucrBase.iHelpTopicID = 437
 
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
-        ucrSaveDotPlot.strPrefix = "Dotplot"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
     End Sub
@@ -70,6 +69,7 @@ Public Class dlgDotPlot
         clsRaesFunction.ClearParameters()
         clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
+        ucrSaveDotPlot.strPrefix = "Dotplot"
         ucrVariablesAsFactorDotPlot.ResetControl()
         ucrSaveDotPlot.Reset()
         sdgPlots.Reset()
@@ -132,6 +132,11 @@ Public Class dlgDotPlot
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_dotplot)
             clsRaesFunction.AddParameter("y", ucrVariablesAsFactorDotPlot.GetVariableNames(False))
             clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
+        End If
+        If ucrVariablesAsFactorDotPlot.bSingleVariable Then
+            ucrVariablesAsFactorDotPlot.ucrSingleVariable.Focus()
+        Else
+            ucrVariablesAsFactorDotPlot.ucrMultipleVariables.Focus()
         End If
         TestOkEnabled()
     End Sub
