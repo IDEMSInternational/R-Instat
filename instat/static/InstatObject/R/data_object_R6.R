@@ -851,6 +851,11 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
   old_attr <- attributes(private$data)
   # Need to use rbind.fill (not bind_rows) because it preserves column attributes
   if(before && row_position == 1) {
+    # This transfers attributes to new data so that they are kept after rbind.fill
+    # Only needed when row_data is first argument to rbind.fill
+    for(i in seq_along(row_data)) {
+      attributes(row_data[[i]]) <- attributes(curr_data[[i]])
+    }
     self$set_data(rbind.fill(row_data, curr_data))
   }
   else if(!before && row_position == nrow(curr_data)) {
