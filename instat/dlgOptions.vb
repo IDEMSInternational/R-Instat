@@ -44,6 +44,7 @@ Public Class dlgOptions
     Private Sub InitialiseDialog()
         Dim strPreviewText As String
         nudMaxRows.Maximum = Integer.MaxValue
+        nudMaxRows.Increment = 10
         strPreviewText = "R-Instat 2016"
         rtbCommandPreview.Text = strPreviewText
         rtbCommentPreview.Text = strPreviewText
