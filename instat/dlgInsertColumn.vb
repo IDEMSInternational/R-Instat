@@ -33,9 +33,8 @@ Public Class dlgInsertColumn
     Private Sub InitialiseDialog()
         ucrReceiverColumnsToInsert.Selector = ucrSelectorInseertColumns
         ucrReceiverColumnsToInsert.SetMeAsReceiver()
-        ucrInputBeforeAfter.cboInput.Items.Add("Before")
-        ucrInputBeforeAfter.cboInput.Items.Add("After")
-
+        ucrInputBeforeAfter.SetItems({"Before", "After"})
+        ucrInputPrefixForInsertedColumns.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -254,6 +253,7 @@ Public Class dlgInsertColumn
             ucrInputBeforeAfter.Enabled = False
             ucrReceiverColumnsToInsert.Clear()
         End If
+        BeforeParameter()
     End Sub
 
     Private Sub ucrInputBeforeAfter_NameChanged() Handles ucrInputBeforeAfter.NameChanged
