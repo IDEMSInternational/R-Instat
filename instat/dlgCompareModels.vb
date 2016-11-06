@@ -15,8 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgCompareModels
-    Public lstCheckboxes As New List(Of CheckBox)
-    Public lstVals As New List(Of String)
     Public clsPlotDist As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,7 +41,6 @@ Public Class dlgCompareModels
         rdoSingle.Checked = True
         nudNumberofColumns.Enabled = True
         lblNumberofColumns.Enabled = True
-        lstVals.Clear()
     End Sub
 
     Private Sub ReopenDialog()
