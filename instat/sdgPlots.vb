@@ -69,7 +69,7 @@ Public Class sdgPlots
         chkDisplayLegendTitle.Checked = True
         chkOverwriteLegendTitle.Checked = False
         ucrInputLegend.Visible = False
-        ucrInputGraphTitle.ResetText()
+        ucrInputGraphTitle.Reset()
     End Sub
 
     Public Sub Reset()
