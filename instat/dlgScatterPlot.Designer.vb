@@ -49,24 +49,24 @@ Partial Class dlgScatterPlot
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.Location = New System.Drawing.Point(262, 219)
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(108, 13)
+        Me.lblFactorOptional.Size = New System.Drawing.Size(111, 13)
         Me.lblFactorOptional.TabIndex = 4
-        Me.lblFactorOptional.Tag = "By_Variable_Optional"
-        Me.lblFactorOptional.Text = "By Variable (Optional)"
+        Me.lblFactorOptional.Tag = "By_Variable_Optional:"
+        Me.lblFactorOptional.Text = "By Variable (Optional):"
         '
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.Location = New System.Drawing.Point(261, 172)
         Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
+        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXVariable.TabIndex = 2
-        Me.lblXVariable.Tag = "X_Variable"
-        Me.lblXVariable.Text = "X  - Variable"
+        Me.lblXVariable.Tag = "X_Variable:"
+        Me.lblXVariable.Text = "X Variable:"
         '
         'cmdScatterPlotOptions
         '
-        Me.cmdScatterPlotOptions.Location = New System.Drawing.Point(10, 201)
+        Me.cmdScatterPlotOptions.Location = New System.Drawing.Point(10, 205)
         Me.cmdScatterPlotOptions.Name = "cmdScatterPlotOptions"
         Me.cmdScatterPlotOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdScatterPlotOptions.TabIndex = 7
@@ -110,7 +110,7 @@ Partial Class dlgScatterPlot
         'ucrSelectorForScatter
         '
         Me.ucrSelectorForScatter.bShowHiddenColumns = False
-        Me.ucrSelectorForScatter.bUseCurrentFilter = False
+        Me.ucrSelectorForScatter.bUseCurrentFilter = True
         Me.ucrSelectorForScatter.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForScatter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForScatter.Name = "ucrSelectorForScatter"
