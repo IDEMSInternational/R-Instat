@@ -51,22 +51,22 @@ Partial Class sdgDescribeTwoVarGraph
         'lblNumericByNumeric
         '
         Me.lblNumericByNumeric.AutoSize = True
-        Me.lblNumericByNumeric.Location = New System.Drawing.Point(9, 17)
+        Me.lblNumericByNumeric.Location = New System.Drawing.Point(9, 15)
         Me.lblNumericByNumeric.Name = "lblNumericByNumeric"
-        Me.lblNumericByNumeric.Size = New System.Drawing.Size(102, 13)
+        Me.lblNumericByNumeric.Size = New System.Drawing.Size(105, 13)
         Me.lblNumericByNumeric.TabIndex = 0
-        Me.lblNumericByNumeric.Tag = "Numeric_by_Numeric"
-        Me.lblNumericByNumeric.Text = "Numeric by Numeric"
+        Me.lblNumericByNumeric.Tag = "Numeric_by_Numeric:"
+        Me.lblNumericByNumeric.Text = "Numeric by Numeric:"
         '
         'lblNumericByCategorical
         '
         Me.lblNumericByCategorical.AutoSize = True
-        Me.lblNumericByCategorical.Location = New System.Drawing.Point(9, 49)
+        Me.lblNumericByCategorical.Location = New System.Drawing.Point(9, 47)
         Me.lblNumericByCategorical.Name = "lblNumericByCategorical"
-        Me.lblNumericByCategorical.Size = New System.Drawing.Size(116, 13)
+        Me.lblNumericByCategorical.Size = New System.Drawing.Size(119, 13)
         Me.lblNumericByCategorical.TabIndex = 2
-        Me.lblNumericByCategorical.Tag = "Numeric_by_Categorical"
-        Me.lblNumericByCategorical.Text = "Numeric by Categorical"
+        Me.lblNumericByCategorical.Tag = "Numeric_by_Categorical:"
+        Me.lblNumericByCategorical.Text = "Numeric by Categorical:"
         '
         'ucrNumericByCategorical
         '
@@ -79,12 +79,12 @@ Partial Class sdgDescribeTwoVarGraph
         'lblCategoricalByCategorical
         '
         Me.lblCategoricalByCategorical.AutoSize = True
-        Me.lblCategoricalByCategorical.Location = New System.Drawing.Point(9, 113)
+        Me.lblCategoricalByCategorical.Location = New System.Drawing.Point(9, 111)
         Me.lblCategoricalByCategorical.Name = "lblCategoricalByCategorical"
-        Me.lblCategoricalByCategorical.Size = New System.Drawing.Size(130, 13)
+        Me.lblCategoricalByCategorical.Size = New System.Drawing.Size(133, 13)
         Me.lblCategoricalByCategorical.TabIndex = 6
-        Me.lblCategoricalByCategorical.Tag = "Categorical_by_Categorical"
-        Me.lblCategoricalByCategorical.Text = "Categorical by Categorical"
+        Me.lblCategoricalByCategorical.Tag = "Categorical_by_Categorical:"
+        Me.lblCategoricalByCategorical.Text = "Categorical by Categorical:"
         '
         'ucrCategoricalByCategorical
         '
@@ -97,12 +97,12 @@ Partial Class sdgDescribeTwoVarGraph
         'lblCategoricalByNumeric
         '
         Me.lblCategoricalByNumeric.AutoSize = True
-        Me.lblCategoricalByNumeric.Location = New System.Drawing.Point(9, 81)
+        Me.lblCategoricalByNumeric.Location = New System.Drawing.Point(9, 79)
         Me.lblCategoricalByNumeric.Name = "lblCategoricalByNumeric"
-        Me.lblCategoricalByNumeric.Size = New System.Drawing.Size(116, 13)
+        Me.lblCategoricalByNumeric.Size = New System.Drawing.Size(119, 13)
         Me.lblCategoricalByNumeric.TabIndex = 4
-        Me.lblCategoricalByNumeric.Tag = "Categorical_by_Numeric"
-        Me.lblCategoricalByNumeric.Text = "Categorical by Numeric"
+        Me.lblCategoricalByNumeric.Tag = "Categorical_by_Numeric:"
+        Me.lblCategoricalByNumeric.Text = "Categorical by Numeric:"
         '
         'ucrCategoricalByNumeric
         '
@@ -130,6 +130,7 @@ Partial Class sdgDescribeTwoVarGraph
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeTwoVarGraph"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Two Variable Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()

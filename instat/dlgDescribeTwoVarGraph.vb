@@ -35,6 +35,11 @@ Public Class dlgDescribeTwoVarGraph
         ucrTwoVarGraphSave.Reset()
         ucrSelectorTwoVarGraph.Reset()
         ucrSelectorTwoVarGraph.Focus()
+        ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
+        sdgDescribeTwoVarGraph.ucrNumericByNumeric.Text = "Scatter plot"
+        sdgDescribeTwoVarGraph.ucrNumericByCategorical.Text = "Box plot"
+        sdgDescribeTwoVarGraph.ucrCategoricalByNumeric.Text = "Box plot"
+        sdgDescribeTwoVarGraph.ucrCategoricalByCategorical.Text = "Bar plot"
         TestOkEnabled()
     End Sub
 
@@ -51,7 +56,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrTwoVarGraphSave.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
-        ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 0
         clsRFacet.SetRCommand("facet_wrap")
