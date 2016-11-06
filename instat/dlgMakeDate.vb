@@ -32,6 +32,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 461
         ucrInputNewColumnName.SetItemsTypeAsColumns()
         ucrInputNewColumnName.SetDefaultTypeAsColumn()
         ucrInputNewColumnName.SetDataFrameSelector(ucrSeclectorMakeDate.ucrAvailableDataFrames)

@@ -30,6 +30,7 @@ Public Class dlgAppend
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 465
         ucrReceiverAppendDataframe.Selector = ucrSelectorDataframes
         ucrReceiverAppendDataframe.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("bind_rows")
