@@ -34,7 +34,7 @@ Public Class dlgDisplayDaily
         ucrBase.clsRsyntax.SetFunction("climate_obj$display_daily_rain()")
     End Sub
     Private Sub SetDefaults()
-
+        ucrBase.OKEnabled(False)
     End Sub
     Private Sub ReopenDialog()
 
