@@ -47,7 +47,7 @@ Partial Class sdgSummaries
         'chkNonMissing
         '
         Me.chkNonMissing.AutoSize = True
-        Me.chkNonMissing.Location = New System.Drawing.Point(13, 14)
+        Me.chkNonMissing.Location = New System.Drawing.Point(13, 17)
         Me.chkNonMissing.Name = "chkNonMissing"
         Me.chkNonMissing.Size = New System.Drawing.Size(95, 17)
         Me.chkNonMissing.TabIndex = 0
@@ -58,7 +58,7 @@ Partial Class sdgSummaries
         'chkNMissing
         '
         Me.chkNMissing.AutoSize = True
-        Me.chkNMissing.Location = New System.Drawing.Point(13, 34)
+        Me.chkNMissing.Location = New System.Drawing.Point(13, 37)
         Me.chkNMissing.Name = "chkNMissing"
         Me.chkNMissing.Size = New System.Drawing.Size(72, 17)
         Me.chkNMissing.TabIndex = 2
@@ -69,7 +69,7 @@ Partial Class sdgSummaries
         'chkNTotal
         '
         Me.chkNTotal.AutoSize = True
-        Me.chkNTotal.Location = New System.Drawing.Point(151, 14)
+        Me.chkNTotal.Location = New System.Drawing.Point(151, 17)
         Me.chkNTotal.Name = "chkNTotal"
         Me.chkNTotal.Size = New System.Drawing.Size(61, 17)
         Me.chkNTotal.TabIndex = 1
@@ -117,7 +117,7 @@ Partial Class sdgSummaries
         'chkMinimum
         '
         Me.chkMinimum.AutoSize = True
-        Me.chkMinimum.Location = New System.Drawing.Point(15, 19)
+        Me.chkMinimum.Location = New System.Drawing.Point(12, 19)
         Me.chkMinimum.Name = "chkMinimum"
         Me.chkMinimum.Size = New System.Drawing.Size(67, 17)
         Me.chkMinimum.TabIndex = 0
@@ -128,7 +128,7 @@ Partial Class sdgSummaries
         'chkMaximum
         '
         Me.chkMaximum.AutoSize = True
-        Me.chkMaximum.Location = New System.Drawing.Point(151, 19)
+        Me.chkMaximum.Location = New System.Drawing.Point(150, 19)
         Me.chkMaximum.Name = "chkMaximum"
         Me.chkMaximum.Size = New System.Drawing.Size(70, 17)
         Me.chkMaximum.TabIndex = 1
@@ -156,7 +156,7 @@ Partial Class sdgSummaries
         'chkSum
         '
         Me.chkSum.AutoSize = True
-        Me.chkSum.Location = New System.Drawing.Point(13, 16)
+        Me.chkSum.Location = New System.Drawing.Point(12, 19)
         Me.chkSum.Name = "chkSum"
         Me.chkSum.Size = New System.Drawing.Size(47, 17)
         Me.chkSum.TabIndex = 0
@@ -167,7 +167,7 @@ Partial Class sdgSummaries
         'chkMean
         '
         Me.chkMean.AutoSize = True
-        Me.chkMean.Location = New System.Drawing.Point(13, 38)
+        Me.chkMean.Location = New System.Drawing.Point(12, 40)
         Me.chkMean.Name = "chkMean"
         Me.chkMean.Size = New System.Drawing.Size(53, 17)
         Me.chkMean.TabIndex = 2
@@ -178,7 +178,7 @@ Partial Class sdgSummaries
         'chkRange
         '
         Me.chkRange.AutoSize = True
-        Me.chkRange.Location = New System.Drawing.Point(13, 59)
+        Me.chkRange.Location = New System.Drawing.Point(12, 61)
         Me.chkRange.Name = "chkRange"
         Me.chkRange.Size = New System.Drawing.Size(58, 17)
         Me.chkRange.TabIndex = 4
@@ -190,7 +190,7 @@ Partial Class sdgSummaries
         '
         Me.chkVariance.AutoSize = True
         Me.chkVariance.Enabled = False
-        Me.chkVariance.Location = New System.Drawing.Point(151, 59)
+        Me.chkVariance.Location = New System.Drawing.Point(150, 61)
         Me.chkVariance.Name = "chkVariance"
         Me.chkVariance.Size = New System.Drawing.Size(68, 17)
         Me.chkVariance.TabIndex = 5
@@ -201,7 +201,7 @@ Partial Class sdgSummaries
         'chkStdDev
         '
         Me.chkStdDev.AutoSize = True
-        Me.chkStdDev.Location = New System.Drawing.Point(13, 80)
+        Me.chkStdDev.Location = New System.Drawing.Point(12, 82)
         Me.chkStdDev.Name = "chkStdDev"
         Me.chkStdDev.Size = New System.Drawing.Size(117, 17)
         Me.chkStdDev.TabIndex = 6
@@ -213,7 +213,7 @@ Partial Class sdgSummaries
         '
         Me.chkQuartiles.AutoSize = True
         Me.chkQuartiles.Enabled = False
-        Me.chkQuartiles.Location = New System.Drawing.Point(151, 38)
+        Me.chkQuartiles.Location = New System.Drawing.Point(150, 40)
         Me.chkQuartiles.Name = "chkQuartiles"
         Me.chkQuartiles.Size = New System.Drawing.Size(67, 17)
         Me.chkQuartiles.TabIndex = 3
@@ -224,7 +224,7 @@ Partial Class sdgSummaries
         'chkMedian
         '
         Me.chkMedian.AutoSize = True
-        Me.chkMedian.Location = New System.Drawing.Point(151, 17)
+        Me.chkMedian.Location = New System.Drawing.Point(150, 19)
         Me.chkMedian.Name = "chkMedian"
         Me.chkMedian.Size = New System.Drawing.Size(61, 17)
         Me.chkMedian.TabIndex = 1
@@ -252,6 +252,7 @@ Partial Class sdgSummaries
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgSummaries"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Summaries"
         Me.Text = "Summaries"
         Me.grpCommon.ResumeLayout(False)
