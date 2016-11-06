@@ -134,6 +134,8 @@ Public Class dlgBarAndPieChart
             cmdPieChartOptions.Visible = False
             ucrSecondReceiver.Visible = True
             lblSecondFactor.Visible = True
+            chkFlipCoordinates.Visible = True
+            SetCoordFlip()
         ElseIf rdoPieChart.Checked = True Then
             ucrSaveBar.strPrefix = "Pie"
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -145,15 +147,18 @@ Public Class dlgBarAndPieChart
             cmdPieChartOptions.Visible = True
             ucrSecondReceiver.Visible = False
             lblSecondFactor.Visible = False
+            chkFlipCoordinates.Visible = False
+            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
         End If
+        SetSecondFactorReceiverParameter() 'Warning: need to set second factor first, as in the pie chart case, it erases "fill" parameter (in clsRaesFunction), which is the parameter that takes the value in the first factor receiver.
         SetFactorReceiverParameter()
-        SetSecondFactorReceiverParameter()
         TestOKEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
+        'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with chkFlipCoordinates...
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
