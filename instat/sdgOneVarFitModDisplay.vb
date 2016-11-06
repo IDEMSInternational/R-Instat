@@ -29,9 +29,7 @@ Public Class sdgOneVarFitModDisplay
 
     Public Sub InitialiseDialog()
         UcrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-        UcrSaveLikelihood.strPrefix = "Likelihood"
         ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-        ucrSavePlots.strPrefix = "Plot"
         clsRLogLikFunction.SetRCommand("llplot")
     End Sub
 
@@ -40,6 +38,8 @@ Public Class sdgOneVarFitModDisplay
         rdoLoglik.Checked = True
         'ucrSaveLikelihood.Enabled = False
         'ucrBase.ihelptopicID = 
+        ucrSavePlots.strPrefix = "Plot"
+        UcrSaveLikelihood.strPrefix = "Likelihood"
         UcrSaveLikelihood.Reset()
         ucrSavePlots.Reset()
     End Sub
