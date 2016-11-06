@@ -180,7 +180,7 @@
             If ucrFactorReceiver IsNot Nothing Then
                 ucrFactorReceiver.SetStackedFactorMode(False)
             End If
-
+            ucrSingleVariable.SetMeAsReceiver()
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
@@ -193,6 +193,7 @@
                 SetMeasureVars()
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
+            ucrMultipleVariables.SetMeAsReceiver()
         End If
     End Sub
 
