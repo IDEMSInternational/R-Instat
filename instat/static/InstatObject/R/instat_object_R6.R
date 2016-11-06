@@ -687,7 +687,7 @@ instat_object$set("public", "reorder_columns_in_data", function(data_name, col_o
 )
 
 #TODO Think how to use row_data argument
-instat_object$set("public", "insert_row_in_data", function(data_name, start_row, row_data = c(), number_rows, before = FALSE) {
+instat_object$set("public", "insert_row_in_data", function(data_name, start_row, row_data = c(), number_rows = 1, before = FALSE) {
   self$get_data_objects(data_name)$insert_row_in_data(start_row = start_row, row_data = row_data, number_rows = number_rows, before = before)
 }
 )

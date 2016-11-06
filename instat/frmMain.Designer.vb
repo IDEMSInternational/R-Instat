@@ -2283,7 +2283,6 @@ Partial Class frmMain
         '
         'mnuOrganiseCheckDataExportOpenRefine
         '
-        Me.mnuOrganiseCheckDataExportOpenRefine.Enabled = False
         Me.mnuOrganiseCheckDataExportOpenRefine.Name = "mnuOrganiseCheckDataExportOpenRefine"
         Me.mnuOrganiseCheckDataExportOpenRefine.Size = New System.Drawing.Size(245, 22)
         Me.mnuOrganiseCheckDataExportOpenRefine.Text = "Export To OpenRefine..."
