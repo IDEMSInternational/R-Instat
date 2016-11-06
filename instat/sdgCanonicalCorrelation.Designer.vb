@@ -62,7 +62,7 @@ Partial Class sdgCanonicalCorrelation
         'chkCoef
         '
         Me.chkCoef.AutoSize = True
-        Me.chkCoef.Location = New System.Drawing.Point(6, 49)
+        Me.chkCoef.Location = New System.Drawing.Point(10, 39)
         Me.chkCoef.Name = "chkCoef"
         Me.chkCoef.Size = New System.Drawing.Size(81, 17)
         Me.chkCoef.TabIndex = 1
@@ -73,7 +73,7 @@ Partial Class sdgCanonicalCorrelation
         'chkCanonicalCorrelations
         '
         Me.chkCanonicalCorrelations.AutoSize = True
-        Me.chkCanonicalCorrelations.Location = New System.Drawing.Point(6, 15)
+        Me.chkCanonicalCorrelations.Location = New System.Drawing.Point(10, 15)
         Me.chkCanonicalCorrelations.Name = "chkCanonicalCorrelations"
         Me.chkCanonicalCorrelations.Size = New System.Drawing.Size(131, 17)
         Me.chkCanonicalCorrelations.TabIndex = 0
@@ -98,7 +98,7 @@ Partial Class sdgCanonicalCorrelation
         'rdoYVariables
         '
         Me.rdoYVariables.AutoSize = True
-        Me.rdoYVariables.Location = New System.Drawing.Point(117, 33)
+        Me.rdoYVariables.Location = New System.Drawing.Point(18, 61)
         Me.rdoYVariables.Name = "rdoYVariables"
         Me.rdoYVariables.Size = New System.Drawing.Size(78, 17)
         Me.rdoYVariables.TabIndex = 3
@@ -110,7 +110,7 @@ Partial Class sdgCanonicalCorrelation
         'rdoXVariables
         '
         Me.rdoXVariables.AutoSize = True
-        Me.rdoXVariables.Location = New System.Drawing.Point(35, 33)
+        Me.rdoXVariables.Location = New System.Drawing.Point(18, 38)
         Me.rdoXVariables.Name = "rdoXVariables"
         Me.rdoXVariables.Size = New System.Drawing.Size(78, 17)
         Me.rdoXVariables.TabIndex = 2
@@ -122,7 +122,7 @@ Partial Class sdgCanonicalCorrelation
         'chkPairwisePlot
         '
         Me.chkPairwisePlot.AutoSize = True
-        Me.chkPairwisePlot.Location = New System.Drawing.Point(14, 20)
+        Me.chkPairwisePlot.Location = New System.Drawing.Point(10, 15)
         Me.chkPairwisePlot.Name = "chkPairwisePlot"
         Me.chkPairwisePlot.Size = New System.Drawing.Size(86, 17)
         Me.chkPairwisePlot.TabIndex = 1
@@ -148,6 +148,7 @@ Partial Class sdgCanonicalCorrelation
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgCanonicalCorrelation"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "PCA_Options"
         Me.Text = "PCA Options"
         Me.tbRegOptions.ResumeLayout(False)
