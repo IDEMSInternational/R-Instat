@@ -49,6 +49,10 @@ Public Class dlgOptions
         rtbCommentPreview.Text = strPreviewText
         rtbOutputPreview.Text = strPreviewText
         SetView()
+        'temp disabled as not functioning yet
+        rdoFrench.Enabled = False
+        rdoKiswahili.Enabled = False
+        rdoSpanish.Enabled = False
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -65,12 +69,15 @@ Public Class dlgOptions
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-            Case "fr-FR"
-                rdoFrench.Checked = True
-            Case "sw-KE"
-                rdoKiswahili.Checked = True
-            Case "es-ES"
-                rdoSpanish.Checked = True
+                ' temp disabled as not functioning
+                'Case "fr-FR"
+                '    rdoFrench.Checked = True
+                'Case "sw-KE"
+                '    rdoKiswahili.Checked = True
+                'Case "es-ES"
+                '    rdoSpanish.Checked = True
+            Case Else
+                rdoEnglish.Checked = True
         End Select
     End Sub
 
