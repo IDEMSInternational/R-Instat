@@ -42,6 +42,7 @@ Public Class dlgOneVariableGraph
         rdoFacets.Checked = True
         ucrOneVarGraphSave.Reset()
         sdgOneVarGraph.SetDefaults()
+        ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         TestOkEnabled()
     End Sub
 
@@ -50,7 +51,6 @@ Public Class dlgOneVariableGraph
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
         'ucrBase.iHelpTopicID = 
-        ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
