@@ -142,7 +142,8 @@ Public Class dlgBoxplot
                 chkVarwidth.Checked = True
                 'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
-        Else chkVarwidth.Checked = False
+        Else
+            chkVarwidth.Checked = False
         End If
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
@@ -179,6 +180,13 @@ Public Class dlgBoxplot
             clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForBoxplot.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("y")
+        End If
+        If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
+            cmdBoxPlotOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            cmdBoxPlotOptions.Enabled = False
+            cmdOptions.Enabled = False
         End If
         TestOkEnabled()
     End Sub

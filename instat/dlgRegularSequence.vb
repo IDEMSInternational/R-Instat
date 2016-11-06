@@ -68,6 +68,8 @@ Public Class dlgRegularSequence
         nudRepeatValues.Value = 1
         SetNumericOrDatesParameters()
         CheckSequenceLength()
+        nudNumberofDecimalPlaces.Value = 2
+        ucrNewColumnName.SetPrefix("Regular")
     End Sub
 
     Private Sub ReopenDialog()

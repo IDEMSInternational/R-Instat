@@ -35,7 +35,10 @@ Public Class dlgPermuteColumn
     Private Sub SetDefaults()
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
         ucrReceiverPermuteRows.SetMeAsReceiver()
-        ucrInputPermuteRows.SetPrefix("permute")
+        ucrPermuteRowsSelector.Reset()
+        nudNumberOfColumns.Value = 1
+        nudSetSeed.Value = 1
+        ucrInputPermuteRows.SetPrefix("Permute")
         chkSetSeed.Checked = False
         nudSetSeed.Visible = False
         TestOkEnabled()
@@ -52,14 +55,13 @@ Public Class dlgPermuteColumn
         clsSetSampleFunc.SetRCommand("sample")
         clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
         clsSetSampleFunc.AddParameter("replace", "FALSE")
-        nudSetSeed.Visible = False
         ucrBase.iHelpTopicID = 66
         ucrInputPermuteRows.SetItemsTypeAsColumns()
         ucrInputPermuteRows.SetDefaultTypeAsColumn()
         ucrInputPermuteRows.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
         ucrInputPermuteRows.SetValidationTypeAsRVariable()
-
-
+        nudSetSeed.Minimum = Integer.MinValue
+        nudSetSeed.Maximum = Integer.MaxValue
     End Sub
 
     Private Sub TestOkEnabled()
