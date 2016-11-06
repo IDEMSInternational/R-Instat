@@ -141,4 +141,9 @@ Public Class ucrDataFrame
             End If
         End Set
     End Property
+
+    Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
+        'TODO Combo box should be replaced by ucrInput so that context menu done automatically
+        Clipboard.SetText(cboAvailableDataFrames.SelectedText)
+    End Sub
 End Class

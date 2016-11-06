@@ -21,9 +21,10 @@ Partial Class ucrReceiverSingle
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.txtReceiverSingle = New System.Windows.Forms.TextBox()
-        Me.SelectionMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SelectionMenuStrip.SuspendLayout()
+        Me.mnuRightClick = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuRightClickRemove = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRightClickCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRightClick.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtReceiverSingle
@@ -31,24 +32,31 @@ Partial Class ucrReceiverSingle
         Me.txtReceiverSingle.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtReceiverSingle.ContextMenuStrip = Me.mnuRightClick
         Me.txtReceiverSingle.Location = New System.Drawing.Point(0, 0)
         Me.txtReceiverSingle.Name = "txtReceiverSingle"
         Me.txtReceiverSingle.ReadOnly = True
         Me.txtReceiverSingle.Size = New System.Drawing.Size(120, 20)
         Me.txtReceiverSingle.TabIndex = 0
         '
-        'SelectionMenuStrip
+        'mnuRightClick
         '
-        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem})
-        Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(118, 26)
+        Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickRemove, Me.mnuRightClickCopy})
+        Me.mnuRightClick.Name = "SelectionMenuStrip"
+        Me.mnuRightClick.Size = New System.Drawing.Size(118, 48)
         '
-        'RemoveToolStripMenuItem
+        'mnuRightClickRemove
         '
-        Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
-        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
-        Me.RemoveToolStripMenuItem.Tag = "remove"
-        Me.RemoveToolStripMenuItem.Text = "Remove"
+        Me.mnuRightClickRemove.Name = "mnuRightClickRemove"
+        Me.mnuRightClickRemove.Size = New System.Drawing.Size(117, 22)
+        Me.mnuRightClickRemove.Tag = "remove"
+        Me.mnuRightClickRemove.Text = "Remove"
+        '
+        'mnuRightClickCopy
+        '
+        Me.mnuRightClickCopy.Name = "mnuRightClickCopy"
+        Me.mnuRightClickCopy.Size = New System.Drawing.Size(117, 22)
+        Me.mnuRightClickCopy.Text = "Copy"
         '
         'ucrReceiverSingle
         '
@@ -57,13 +65,14 @@ Partial Class ucrReceiverSingle
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrReceiverSingle"
         Me.Size = New System.Drawing.Size(120, 20)
-        Me.SelectionMenuStrip.ResumeLayout(False)
+        Me.mnuRightClick.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents txtReceiverSingle As TextBox
-    Friend WithEvents SelectionMenuStrip As ContextMenuStrip
-    Friend WithEvents RemoveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuRightClick As ContextMenuStrip
+    Friend WithEvents mnuRightClickRemove As ToolStripMenuItem
+    Friend WithEvents mnuRightClickCopy As ToolStripMenuItem
 End Class
