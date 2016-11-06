@@ -58,6 +58,7 @@ Public Class dlgDescribeTwoVariable
         chkSaveResult.Enabled = False
         cmdSummaries.Visible = False
         cmdDisplayOptions.Visible = False
+        chkOmitMissing.Checked = False
         sdgSummaries.SetMyRFunction(clsRCustomSummary)
         sdgDescribeDisplay.SetAnovaDispOptions(clsRAnova)
         sdgDescribeDisplay.SetFreqDispOptions(clsRFreqTables)
