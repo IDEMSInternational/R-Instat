@@ -36,10 +36,10 @@ Public Class dlgDescribeTwoVarGraph
         ucrSelectorTwoVarGraph.Reset()
         ucrSelectorTwoVarGraph.Focus()
         ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
-        sdgDescribeTwoVarGraph.ucrNumericByNumeric.Text = "Scatter plot"
-        sdgDescribeTwoVarGraph.ucrNumericByCategorical.Text = "Box plot"
-        sdgDescribeTwoVarGraph.ucrCategoricalByNumeric.Text = "Box plot"
-        sdgDescribeTwoVarGraph.ucrCategoricalByCategorical.Text = "Bar plot"
+        sdgDescribeTwoVarGraph.ucrNumericByNumeric.SetName("Scatter plot")
+        sdgDescribeTwoVarGraph.ucrNumericByCategorical.SetName("Box plot")
+        sdgDescribeTwoVarGraph.ucrCategoricalByNumeric.SetName("Box plot")
+        sdgDescribeTwoVarGraph.ucrCategoricalByCategorical.SetName("Bar plot")
         TestOkEnabled()
     End Sub
 
