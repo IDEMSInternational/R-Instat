@@ -181,7 +181,10 @@ Public Class dlgBoxplot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
-        If Not ucrVariablesAsFactorForBoxplot.bSingleVariable Then
+        If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
+            cmdBoxPlotOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
             cmdBoxPlotOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
