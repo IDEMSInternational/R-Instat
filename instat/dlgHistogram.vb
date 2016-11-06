@@ -175,7 +175,7 @@ Public Class dlgHistogram
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_histogramFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
+            If clsParam.strArgumentName = "x" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorforHist.bSingleVariable) Then
                 ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "fill" Then
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)

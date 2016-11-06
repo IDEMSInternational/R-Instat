@@ -61,6 +61,7 @@ Public Class dlgMetadata
     Private Sub SetDefaults()
         ucrSelectByMetadata.Reset()
         rdoChooseProperty.Checked = True
+        ucrBase.OKEnabled(False) ' this is temporary
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

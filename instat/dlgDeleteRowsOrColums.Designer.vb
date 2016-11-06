@@ -41,10 +41,10 @@ Partial Class dlgDeleteRowsOrColums
         Me.lblNumberofRows.AutoSize = True
         Me.lblNumberofRows.Location = New System.Drawing.Point(10, 91)
         Me.lblNumberofRows.Name = "lblNumberofRows"
-        Me.lblNumberofRows.Size = New System.Drawing.Size(86, 13)
+        Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
         Me.lblNumberofRows.TabIndex = 3
         Me.lblNumberofRows.Tag = "Number_of_Rows"
-        Me.lblNumberofRows.Text = "Number of Rows"
+        Me.lblNumberofRows.Text = "Number of Rows:"
         '
         'rdoColumns
         '
@@ -75,10 +75,10 @@ Partial Class dlgDeleteRowsOrColums
         Me.lblColumnsToDelete.AutoSize = True
         Me.lblColumnsToDelete.Location = New System.Drawing.Point(244, 38)
         Me.lblColumnsToDelete.Name = "lblColumnsToDelete"
-        Me.lblColumnsToDelete.Size = New System.Drawing.Size(93, 13)
+        Me.lblColumnsToDelete.Size = New System.Drawing.Size(96, 13)
         Me.lblColumnsToDelete.TabIndex = 14
         Me.lblColumnsToDelete.Tag = "Columns_to_Delete"
-        Me.lblColumnsToDelete.Text = "Columns to Delete"
+        Me.lblColumnsToDelete.Text = "Columns to Delete:"
         '
         'ucrReceiverForColumnsToDelete
         '
@@ -92,8 +92,8 @@ Partial Class dlgDeleteRowsOrColums
         'ucrSelectorForDeleteColumns
         '
         Me.ucrSelectorForDeleteColumns.bShowHiddenColumns = False
-        Me.ucrSelectorForDeleteColumns.bUseCurrentFilter = False
-        Me.ucrSelectorForDeleteColumns.Location = New System.Drawing.Point(9, 38)
+        Me.ucrSelectorForDeleteColumns.bUseCurrentFilter = True
+        Me.ucrSelectorForDeleteColumns.Location = New System.Drawing.Point(10, 38)
         Me.ucrSelectorForDeleteColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleteColumns.Name = "ucrSelectorForDeleteColumns"
         Me.ucrSelectorForDeleteColumns.Size = New System.Drawing.Size(210, 180)
@@ -102,14 +102,14 @@ Partial Class dlgDeleteRowsOrColums
         'ucrDataFrameLengthForDeleteRows
         '
         Me.ucrDataFrameLengthForDeleteRows.clsDataFrameSelector = Nothing
-        Me.ucrDataFrameLengthForDeleteRows.Location = New System.Drawing.Point(112, 87)
+        Me.ucrDataFrameLengthForDeleteRows.Location = New System.Drawing.Point(103, 87)
         Me.ucrDataFrameLengthForDeleteRows.Name = "ucrDataFrameLengthForDeleteRows"
         Me.ucrDataFrameLengthForDeleteRows.Size = New System.Drawing.Size(53, 23)
         Me.ucrDataFrameLengthForDeleteRows.TabIndex = 9
         '
         'ucrSelectorForDeleteRows
         '
-        Me.ucrSelectorForDeleteRows.bUseCurrentFilter = False
+        Me.ucrSelectorForDeleteRows.bUseCurrentFilter = True
         Me.ucrSelectorForDeleteRows.Location = New System.Drawing.Point(10, 38)
         Me.ucrSelectorForDeleteRows.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleteRows.Name = "ucrSelectorForDeleteRows"
@@ -125,7 +125,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         'nudRowNames
         '
-        Me.nudRowNames.Location = New System.Drawing.Point(343, 36)
+        Me.nudRowNames.Location = New System.Drawing.Point(328, 36)
         Me.nudRowNames.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudRowNames.Name = "nudRowNames"
         Me.nudRowNames.Size = New System.Drawing.Size(39, 20)
@@ -135,12 +135,12 @@ Partial Class dlgDeleteRowsOrColums
         'lblRowNames
         '
         Me.lblRowNames.AutoSize = True
-        Me.lblRowNames.Location = New System.Drawing.Point(244, 38)
+        Me.lblRowNames.Location = New System.Drawing.Point(245, 38)
         Me.lblRowNames.Name = "lblRowNames"
-        Me.lblRowNames.Size = New System.Drawing.Size(63, 13)
+        Me.lblRowNames.Size = New System.Drawing.Size(78, 13)
         Me.lblRowNames.TabIndex = 16
         Me.lblRowNames.Tag = ""
-        Me.lblRowNames.Text = "Row names"
+        Me.lblRowNames.Text = "Row to Delete:"
         '
         'dlgDeleteRowsOrColums
         '

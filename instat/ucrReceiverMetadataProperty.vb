@@ -21,11 +21,12 @@ Public Class ucrReceiverMetadataProperty
     Public Event ControlContentsChanged()
 
     Public Sub SetControls()
+        'This sub creates adapts the ucrReceiverMetadataProperty to the type of layer parameter, it's default value, the available values etc, stored within clsLayerParam.
         nudParamValue.Visible = False
         ucrCboParamValue.Visible = False
         ucrColor.Visible = False
         ucrInputTextValue.Visible = False
-        If Not IsNothing(clsLayerParam) Then
+        If clsLayerParam IsNot Nothing Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
                     nudParamValue.DecimalPlaces = clsLayerParam.lstParameterStrings(0)

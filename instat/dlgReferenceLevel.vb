@@ -35,11 +35,9 @@ Public Class dlgReferenceLevel
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
         ucrReceiverReferenceLevels.SetMeAsReceiver()
         ucrReceiverReferenceLevels.SetIncludedDataTypes({"factor"})
+        ucrReceiverReferenceLevels.SetExcludedDataTypes({"ordered,factor"})
         ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
         ucrFactorReferenceLevels.SetAsSingleSelector()
-
-
-
     End Sub
 
     Private Sub SetDefaults()

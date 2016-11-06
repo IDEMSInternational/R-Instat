@@ -36,7 +36,7 @@ Partial Class dlgColumnStructure
         'chkColourColumnsByStr
         '
         Me.chkColourColumnsByStr.AutoSize = True
-        Me.chkColourColumnsByStr.Location = New System.Drawing.Point(12, 224)
+        Me.chkColourColumnsByStr.Location = New System.Drawing.Point(10, 206)
         Me.chkColourColumnsByStr.Name = "chkColourColumnsByStr"
         Me.chkColourColumnsByStr.Size = New System.Drawing.Size(159, 17)
         Me.chkColourColumnsByStr.TabIndex = 17
@@ -46,29 +46,29 @@ Partial Class dlgColumnStructure
         'lblMeasurement
         '
         Me.lblMeasurement.AutoSize = True
-        Me.lblMeasurement.Location = New System.Drawing.Point(247, 210)
+        Me.lblMeasurement.Location = New System.Drawing.Point(250, 210)
         Me.lblMeasurement.Name = "lblMeasurement"
-        Me.lblMeasurement.Size = New System.Drawing.Size(71, 13)
+        Me.lblMeasurement.Size = New System.Drawing.Size(74, 13)
         Me.lblMeasurement.TabIndex = 16
-        Me.lblMeasurement.Text = "Measurement"
+        Me.lblMeasurement.Text = "Measurement:"
         '
         'lblTreatment
         '
         Me.lblTreatment.AutoSize = True
-        Me.lblTreatment.Location = New System.Drawing.Point(244, 117)
+        Me.lblTreatment.Location = New System.Drawing.Point(250, 117)
         Me.lblTreatment.Name = "lblTreatment"
-        Me.lblTreatment.Size = New System.Drawing.Size(55, 13)
+        Me.lblTreatment.Size = New System.Drawing.Size(58, 13)
         Me.lblTreatment.TabIndex = 15
-        Me.lblTreatment.Text = "Treatment"
+        Me.lblTreatment.Text = "Treatment:"
         '
         'lblLayout
         '
         Me.lblLayout.AutoSize = True
-        Me.lblLayout.Location = New System.Drawing.Point(247, 18)
+        Me.lblLayout.Location = New System.Drawing.Point(250, 24)
         Me.lblLayout.Name = "lblLayout"
-        Me.lblLayout.Size = New System.Drawing.Size(39, 13)
+        Me.lblLayout.Size = New System.Drawing.Size(42, 13)
         Me.lblLayout.TabIndex = 14
-        Me.lblLayout.Text = "Layout"
+        Me.lblLayout.Text = "Layout:"
         '
         'ucrReceiverType3
         '
@@ -81,7 +81,7 @@ Partial Class dlgColumnStructure
         '
         'ucrReceiverType2
         '
-        Me.ucrReceiverType2.Location = New System.Drawing.Point(247, 135)
+        Me.ucrReceiverType2.Location = New System.Drawing.Point(247, 132)
         Me.ucrReceiverType2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverType2.Name = "ucrReceiverType2"
         Me.ucrReceiverType2.Selector = Nothing
@@ -101,7 +101,7 @@ Partial Class dlgColumnStructure
         '
         Me.ucrSelectorColumnStructure.bShowHiddenColumns = False
         Me.ucrSelectorColumnStructure.bUseCurrentFilter = False
-        Me.ucrSelectorColumnStructure.Location = New System.Drawing.Point(12, 9)
+        Me.ucrSelectorColumnStructure.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorColumnStructure.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorColumnStructure.Name = "ucrSelectorColumnStructure"
         Me.ucrSelectorColumnStructure.Size = New System.Drawing.Size(210, 180)
@@ -109,7 +109,7 @@ Partial Class dlgColumnStructure
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 304)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 309)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9

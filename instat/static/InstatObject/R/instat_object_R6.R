@@ -687,7 +687,7 @@ instat_object$set("public", "reorder_columns_in_data", function(data_name, col_o
 )
 
 #TODO Think how to use row_data argument
-instat_object$set("public", "insert_row_in_data", function(data_name, start_row, row_data = c(), number_rows, before = FALSE) {
+instat_object$set("public", "insert_row_in_data", function(data_name, start_row, row_data = c(), number_rows = 1, before = FALSE) {
   self$get_data_objects(data_name)$insert_row_in_data(start_row = start_row, row_data = row_data, number_rows = number_rows, before = before)
 }
 )
@@ -743,7 +743,7 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
 } 
 )
 
-instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type ="factor", factor_numeric = "by_levels") {
+instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels") {
   self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric)
 } 
 )

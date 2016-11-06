@@ -20,7 +20,11 @@ Public Class dlgEnter
     Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
+    Dim clsLength As New RFunction
     Public bFirstLoad As Boolean = True
+    Public strOutput As String
+    Public clsCommands As New RFunction
+
     Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -37,6 +41,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 458
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsDetach.AddParameter("unload", "TRUE")
@@ -94,8 +99,11 @@ Public Class dlgEnter
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
+        ucrInputTryMessage.SetName("")
+        cmdTry.Enabled = Not ucrReceiverForEnterCalculation.IsEmpty()
         TestOKEnabled()
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
@@ -184,6 +192,10 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdMissingValues_Click_1(sender As Object, e As EventArgs) Handles cmdMissingValues.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("NA")
+    End Sub
+
     Private Sub cmdSquareBrackets_Click_1(sender As Object, e As EventArgs) Handles cmdSquareBrackets.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[ ]", 2)
         TestOKEnabled()
@@ -204,7 +216,7 @@ Public Class dlgEnter
 
     Private Sub cmdRepelicationFunction_Click_1(sender As Object, e As EventArgs) Handles cmdRepelicationFunction.Click
         If chkShowEnterArguments.Checked Then
-            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep(x= ,times= ,length= ,each= )", 17)
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep(x= ,times= ,length= ,each= )", 25)
         Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep( )", 2)
         End If
         TestOKEnabled()
@@ -253,7 +265,6 @@ Public Class dlgEnter
 
     Private Sub ucrSaveEnterResultInto_NameChanged() Handles ucrSaveEnterResultInto.NameChanged
         SaveResults()
-        ucrReceiverForEnterCalculation.Clear()
         TestOKEnabled()
     End Sub
 
@@ -263,5 +274,69 @@ Public Class dlgEnter
         Else
             ucrSaveEnterResultInto.Visible = False
         End If
+        SaveResults()
+    End Sub
+
+    Private Sub TryScript()
+        Dim strOutPut As String
+        Dim strAttach As String
+        Dim strDetach As String
+        Dim strTempScript As String = ""
+        Dim strVecOutput As CharacterVector
+        Dim bIsAssigned As Boolean
+        Dim bToBeAssigned As Boolean
+        Dim strAssignTo As String
+        Dim strAssignToColumn As String
+        Dim strAssignToDataFrame As String
+
+        'First store the RSyntax settings temporarily, as these will be modified in the Try process. 
+        'Task: could use a clone RSyntax method
+
+        bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
+        bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
+        strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
+        strAssignToColumn = ucrBase.clsRsyntax.strAssignToColumn
+        strAssignToDataFrame = ucrBase.clsRsyntax.strAssignToDataframe
+
+        Try
+            If ucrReceiverForEnterCalculation.IsEmpty Then
+                ucrInputTryMessage.SetName("")
+            Else
+                strAttach = clsAttach.ToScript(strTempScript)
+                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
+                ucrBase.clsRsyntax.RemoveAssignTo()
+                strOutPut = ucrBase.clsRsyntax.GetScript
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
+                'Mid does only take Strings And strVecOutput Is a CharacterVector (a custom type from RDotNet), 
+                'but each element of strVecOutput i.e. strVecOutput(0) Is a String.
+                'It doesn't show all the output, just the output from the first line you would get in the R console. So strVecOutput(1) would give you the next line.
+                If strVecOutput IsNot Nothing Then
+                    If strVecOutput.Length > 1 Then
+                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
+                    Else
+                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                    End If
+                Else
+                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
+                End If
+            End If
+        Catch ex As Exception
+            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
+        Finally
+
+            strTempScript = ""
+            strDetach = clsDetach.ToScript(strTempScript)
+            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
+            ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
+            ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
+            ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
+            ucrBase.clsRsyntax.strAssignToColumn = strAssignToColumn
+            ucrBase.clsRsyntax.strAssignToDataframe = strAssignToDataFrame
+        End Try
+    End Sub
+
+
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
+        TryScript()
     End Sub
 End Class

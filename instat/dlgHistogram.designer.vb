@@ -39,7 +39,7 @@ Partial Class dlgHistogram
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 263)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 259)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 8
@@ -49,7 +49,7 @@ Partial Class dlgHistogram
         '
         'cmdHistogramOptions
         '
-        Me.cmdHistogramOptions.Location = New System.Drawing.Point(10, 228)
+        Me.cmdHistogramOptions.Location = New System.Drawing.Point(9, 228)
         Me.cmdHistogramOptions.Name = "cmdHistogramOptions"
         Me.cmdHistogramOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdHistogramOptions.TabIndex = 8
@@ -60,7 +60,7 @@ Partial Class dlgHistogram
         'rdoHistogram
         '
         Me.rdoHistogram.AutoSize = True
-        Me.rdoHistogram.Location = New System.Drawing.Point(10, 10)
+        Me.rdoHistogram.Location = New System.Drawing.Point(11, 12)
         Me.rdoHistogram.Name = "rdoHistogram"
         Me.rdoHistogram.Size = New System.Drawing.Size(72, 17)
         Me.rdoHistogram.TabIndex = 0
@@ -72,7 +72,7 @@ Partial Class dlgHistogram
         'rdoDensity
         '
         Me.rdoDensity.AutoSize = True
-        Me.rdoDensity.Location = New System.Drawing.Point(125, 10)
+        Me.rdoDensity.Location = New System.Drawing.Point(139, 12)
         Me.rdoDensity.Name = "rdoDensity"
         Me.rdoDensity.Size = New System.Drawing.Size(60, 17)
         Me.rdoDensity.TabIndex = 1
@@ -84,7 +84,7 @@ Partial Class dlgHistogram
         'rdoFreequencyPolygon
         '
         Me.rdoFreequencyPolygon.AutoSize = True
-        Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(255, 10)
+        Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(255, 12)
         Me.rdoFreequencyPolygon.Name = "rdoFreequencyPolygon"
         Me.rdoFreequencyPolygon.Size = New System.Drawing.Size(116, 17)
         Me.rdoFreequencyPolygon.TabIndex = 2
@@ -98,14 +98,14 @@ Partial Class dlgHistogram
         Me.lblfactor.AutoSize = True
         Me.lblfactor.Location = New System.Drawing.Point(255, 196)
         Me.lblfactor.Name = "lblfactor"
-        Me.lblfactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblfactor.Size = New System.Drawing.Size(85, 13)
         Me.lblfactor.TabIndex = 5
-        Me.lblfactor.Tag = "Factor"
-        Me.lblfactor.Text = "Factor"
+        Me.lblfactor.Tag = "Factor_Selected:"
+        Me.lblfactor.Text = "Factor Selected:"
         '
         'cmdDensityOptions
         '
-        Me.cmdDensityOptions.Location = New System.Drawing.Point(10, 228)
+        Me.cmdDensityOptions.Location = New System.Drawing.Point(9, 228)
         Me.cmdDensityOptions.Name = "cmdDensityOptions"
         Me.cmdDensityOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdDensityOptions.TabIndex = 8
@@ -115,7 +115,7 @@ Partial Class dlgHistogram
         '
         'cmdFrequencyOptions
         '
-        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(10, 227)
+        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdFrequencyOptions.Name = "cmdFrequencyOptions"
         Me.cmdFrequencyOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdFrequencyOptions.TabIndex = 7
@@ -135,7 +135,7 @@ Partial Class dlgHistogram
         'ucrHistogramSelector
         '
         Me.ucrHistogramSelector.bShowHiddenColumns = False
-        Me.ucrHistogramSelector.bUseCurrentFilter = False
+        Me.ucrHistogramSelector.bUseCurrentFilter = True
         Me.ucrHistogramSelector.Location = New System.Drawing.Point(10, 35)
         Me.ucrHistogramSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
@@ -144,21 +144,21 @@ Partial Class dlgHistogram
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 330)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 320)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
         'ucrSaveHist
         '
-        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 299)
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 294)
         Me.ucrSaveHist.Name = "ucrSaveHist"
         Me.ucrSaveHist.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveHist.TabIndex = 9
         '
         'ucrVariablesAsFactorforHist
         '
-        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(255, 50)
+        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(255, 46)
         Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
         Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorforHist.TabIndex = 4

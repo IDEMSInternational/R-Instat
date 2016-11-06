@@ -85,6 +85,7 @@ Partial Class ucrReorder
         Me.lstAvailableData.Location = New System.Drawing.Point(3, 3)
         Me.lstAvailableData.Name = "lstAvailableData"
         Me.lstAvailableData.Size = New System.Drawing.Size(121, 133)
+        Me.lstAvailableData.FullRowSelect = True
         Me.lstAvailableData.TabIndex = 5
         Me.lstAvailableData.UseCompatibleStateImageBehavior = False
         Me.lstAvailableData.View = System.Windows.Forms.View.Details
