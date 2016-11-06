@@ -210,6 +210,7 @@ Partial Class sdgOneVarFitModDisplay
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarFitModDisplay"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Display Options"
         Me.tbclikelihood.ResumeLayout(False)
         Me.tbclikelihood.PerformLayout()
