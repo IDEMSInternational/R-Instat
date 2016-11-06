@@ -35,13 +35,15 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 238)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrWindRoseSelector
         '
+        Me.ucrWindRoseSelector.bShowHiddenColumns = False
+        Me.ucrWindRoseSelector.bUseCurrentFilter = True
         Me.ucrWindRoseSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrWindRoseSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrWindRoseSelector.Name = "ucrWindRoseSelector"
@@ -50,7 +52,7 @@ Partial Class dlgWindrose
         '
         'ucrSaveWindRose
         '
-        Me.ucrSaveWindRose.Location = New System.Drawing.Point(10, 209)
+        Me.ucrSaveWindRose.Location = New System.Drawing.Point(10, 200)
         Me.ucrSaveWindRose.Name = "ucrSaveWindRose"
         Me.ucrSaveWindRose.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveWindRose.TabIndex = 2
@@ -58,15 +60,15 @@ Partial Class dlgWindrose
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(255, 25)
+        Me.lblXVariable.Location = New System.Drawing.Point(256, 40)
         Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(55, 13)
+        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXVariable.TabIndex = 3
-        Me.lblXVariable.Text = "X Variable"
+        Me.lblXVariable.Text = "X Variable:"
         '
         'ucrXReceiver
         '
-        Me.ucrXReceiver.Location = New System.Drawing.Point(255, 42)
+        Me.ucrXReceiver.Location = New System.Drawing.Point(255, 55)
         Me.ucrXReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrXReceiver.Name = "ucrXReceiver"
         Me.ucrXReceiver.Selector = Nothing
@@ -76,15 +78,15 @@ Partial Class dlgWindrose
         'lblYVariable
         '
         Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.Location = New System.Drawing.Point(255, 76)
+        Me.lblYVariable.Location = New System.Drawing.Point(257, 91)
         Me.lblYVariable.Name = "lblYVariable"
-        Me.lblYVariable.Size = New System.Drawing.Size(55, 13)
+        Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblYVariable.TabIndex = 3
-        Me.lblYVariable.Text = "Y Variable"
+        Me.lblYVariable.Text = "Y Variable:"
         '
         'ucrYReceiver
         '
-        Me.ucrYReceiver.Location = New System.Drawing.Point(255, 93)
+        Me.ucrYReceiver.Location = New System.Drawing.Point(255, 106)
         Me.ucrYReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYReceiver.Name = "ucrYReceiver"
         Me.ucrYReceiver.Selector = Nothing
@@ -94,15 +96,15 @@ Partial Class dlgWindrose
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(255, 128)
+        Me.lblFactor.Location = New System.Drawing.Point(258, 142)
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.Size = New System.Drawing.Size(40, 13)
         Me.lblFactor.TabIndex = 3
-        Me.lblFactor.Text = "Factor"
+        Me.lblFactor.Text = "Factor:"
         '
         'ucrFillReceiver
         '
-        Me.ucrFillReceiver.Location = New System.Drawing.Point(255, 145)
+        Me.ucrFillReceiver.Location = New System.Drawing.Point(255, 157)
         Me.ucrFillReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFillReceiver.Name = "ucrFillReceiver"
         Me.ucrFillReceiver.Selector = Nothing
@@ -124,6 +126,8 @@ Partial Class dlgWindrose
         Me.Controls.Add(Me.ucrWindRoseSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgWindrose"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Windrose"

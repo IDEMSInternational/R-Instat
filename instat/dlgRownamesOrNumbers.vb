@@ -75,15 +75,14 @@ Public Class dlgRowNamesOrNumbers
         If rdoCopytoFirstColumn.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
             ucrBase.clsRsyntax.ClearParameters()
-            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Enabled = False
+            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.SetVariablesEnabled(False)
             ucrReceiverSingleRownamesOrNumbers.Visible = False
             grpSortOptions.Visible = False
             lblColumnName.Visible = True
             ucrNewColumnName.Visible = True
         ElseIf rdoCopyfromColumn.Checked Then
-            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Enabled = True
+            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.SetVariablesEnabled(True)
             ucrReceiverSingleRownamesOrNumbers.Visible = True
-            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Enabled = True
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
             ucrBase.clsRsyntax.ClearParameters()
             grpSortOptions.Visible = False
@@ -93,7 +92,7 @@ Public Class dlgRowNamesOrNumbers
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
             ucrBase.clsRsyntax.ClearParameters()
             ucrReceiverSingleRownamesOrNumbers.Visible = False
-            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Enabled = False
+            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.SetVariablesEnabled(False)
             grpSortOptions.Visible = False
             lblColumnName.Visible = False
             ucrNewColumnName.Visible = False
@@ -102,7 +101,7 @@ Public Class dlgRowNamesOrNumbers
             ucrBase.clsRsyntax.ClearParameters()
             ucrBase.clsRsyntax.AddParameter("by_row_names", "TRUE")
             ucrReceiverSingleRownamesOrNumbers.Visible = False
-            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Enabled = False
+            ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.SetVariablesEnabled(False)
             grpSortOptions.Visible = True
             lblColumnName.Visible = False
             ucrNewColumnName.Visible = False
@@ -160,10 +159,6 @@ Public Class dlgRowNamesOrNumbers
         End If
     End Sub
 
-    Private Sub ucrNewColumnName_NameChanged()
-        SetAssignment()
-    End Sub
-
     Private Sub SetAssignment()
         If rdoCopytoFirstColumn.Checked AndAlso Not ucrNewColumnName.IsEmpty Then
             ucrBase.clsRsyntax.SetAssignTo(ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
@@ -186,5 +181,10 @@ Public Class dlgRowNamesOrNumbers
         Else
             ucrBase.clsRsyntax.RemoveParameter("row_names")
         End If
+    End Sub
+
+    Private Sub ucrNewColumnName_NameChanged() Handles ucrNewColumnName.NameChanged
+        SetRowNamesParameter()
+        SetAssignment()
     End Sub
 End Class

@@ -33,7 +33,7 @@ Partial Class dlgRecodeFactor
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 354)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 335)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -41,7 +41,7 @@ Partial Class dlgRecodeFactor
         'ucrSelectorForRecode
         '
         Me.ucrSelectorForRecode.bShowHiddenColumns = False
-        Me.ucrSelectorForRecode.bUseCurrentFilter = False
+        Me.ucrSelectorForRecode.bUseCurrentFilter = True
         Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
@@ -60,18 +60,18 @@ Partial Class dlgRecodeFactor
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(255, 31)
+        Me.lblFactor.Location = New System.Drawing.Point(255, 35)
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblFactor.TabIndex = 3
-        Me.lblFactor.Text = "Factor"
+        Me.lblFactor.Text = "Factor Selected:"
         '
         'ucrFactorGrid
         '
         Me.ucrFactorGrid.AutoSize = True
         Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorGrid.clsReceiver = Nothing
-        Me.ucrFactorGrid.Location = New System.Drawing.Point(255, 83)
+        Me.ucrFactorGrid.Location = New System.Drawing.Point(255, 77)
         Me.ucrFactorGrid.Name = "ucrFactorGrid"
         Me.ucrFactorGrid.shtCurrSheet = Nothing
         Me.ucrFactorGrid.Size = New System.Drawing.Size(288, 221)
@@ -80,7 +80,7 @@ Partial Class dlgRecodeFactor
         'ucrInputColumnName
         '
         Me.ucrInputColumnName.IsReadOnly = False
-        Me.ucrInputColumnName.Location = New System.Drawing.Point(114, 322)
+        Me.ucrInputColumnName.Location = New System.Drawing.Point(111, 308)
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
         Me.ucrInputColumnName.Size = New System.Drawing.Size(178, 21)
         Me.ucrInputColumnName.TabIndex = 5
@@ -88,17 +88,17 @@ Partial Class dlgRecodeFactor
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 325)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 311)
         Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 7
-        Me.lblNewColumnName.Text = "New Column Name"
+        Me.lblNewColumnName.Text = "New Column Name:"
         '
         'dlgRecodeFactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(555, 410)
+        Me.ClientSize = New System.Drawing.Size(555, 396)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputColumnName)
         Me.Controls.Add(Me.ucrFactorGrid)
