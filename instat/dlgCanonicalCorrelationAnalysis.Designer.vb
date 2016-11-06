@@ -35,25 +35,25 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'lblYVariables
         '
-        Me.lblYVariables.Location = New System.Drawing.Point(291, 15)
+        Me.lblYVariables.Location = New System.Drawing.Point(267, 25)
         Me.lblYVariables.Name = "lblYVariables"
-        Me.lblYVariables.Size = New System.Drawing.Size(100, 23)
+        Me.lblYVariables.Size = New System.Drawing.Size(100, 19)
         Me.lblYVariables.TabIndex = 4
-        Me.lblYVariables.Tag = "Y_Variables"
+        Me.lblYVariables.Tag = "Y_Variables:"
         Me.lblYVariables.Text = "Y Variables:"
         '
         'lblXVariables
         '
-        Me.lblXVariables.Location = New System.Drawing.Point(290, 144)
+        Me.lblXVariables.Location = New System.Drawing.Point(269, 152)
         Me.lblXVariables.Name = "lblXVariables"
         Me.lblXVariables.Size = New System.Drawing.Size(100, 23)
         Me.lblXVariables.TabIndex = 3
-        Me.lblXVariables.Tag = "X_Variables"
+        Me.lblXVariables.Tag = "X_Variables:"
         Me.lblXVariables.Text = "X Variables:"
         '
         'cmdCCAOptions
         '
-        Me.cmdCCAOptions.Location = New System.Drawing.Point(313, 270)
+        Me.cmdCCAOptions.Location = New System.Drawing.Point(291, 270)
         Me.cmdCCAOptions.Name = "cmdCCAOptions"
         Me.cmdCCAOptions.Size = New System.Drawing.Size(95, 23)
         Me.cmdCCAOptions.TabIndex = 2
@@ -73,7 +73,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrReceiverXvariables
         '
-        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(288, 161)
+        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(266, 167)
         Me.ucrReceiverXvariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverXvariables.Name = "ucrReceiverXvariables"
         Me.ucrReceiverXvariables.Selector = Nothing
@@ -90,7 +90,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrReceiverYvariables
         '
-        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(288, 34)
+        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(266, 40)
         Me.ucrReceiverYvariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYvariables.Name = "ucrReceiverYvariables"
         Me.ucrReceiverYvariables.Selector = Nothing
@@ -100,7 +100,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         'ucrSelectorCCA
         '
         Me.ucrSelectorCCA.bShowHiddenColumns = False
-        Me.ucrSelectorCCA.bUseCurrentFilter = False
+        Me.ucrSelectorCCA.bUseCurrentFilter = True
         Me.ucrSelectorCCA.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorCCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCCA.Name = "ucrSelectorCCA"
