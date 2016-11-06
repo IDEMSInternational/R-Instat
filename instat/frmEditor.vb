@@ -38,6 +38,8 @@ Public Class frmEditor
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        FreezeToHereToolStripMenuItem.Enabled = False
+        UnfreezeToolStripMenuItem.Enabled = False
         frmMain.clsGrids.SetData(grdData)
         grdData.Visible = False
         autoTranslate(Me)
