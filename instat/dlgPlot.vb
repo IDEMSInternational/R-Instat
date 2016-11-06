@@ -42,7 +42,7 @@ Public Class dlgPlot
         chkPoints.Checked = False
         '        ucrLinePlotSelector.Focus()
         ucrSaveLinePlot.strPrefix = "Line"
-        ucrVariablesAsFactorForLinePlot.Focus()
+        ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
         ucrSaveLinePlot.Reset()
