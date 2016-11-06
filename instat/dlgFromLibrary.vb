@@ -43,6 +43,7 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 156
         'fills the combo box
         clsDataFunction.SetRCommand("data")
         FillPackagesCombo()

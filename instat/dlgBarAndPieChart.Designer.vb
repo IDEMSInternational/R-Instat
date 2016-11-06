@@ -41,22 +41,22 @@ Partial Class dlgBarAndPieChart
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(255, 88)
+        Me.lblFactor.Location = New System.Drawing.Point(255, 69)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(40, 13)
         Me.lblFactor.TabIndex = 2
-        Me.lblFactor.Tag = "Factor"
-        Me.lblFactor.Text = "Factor "
+        Me.lblFactor.Tag = "Factor:"
+        Me.lblFactor.Text = "Factor:"
         '
         'lblSecondFactor
         '
         Me.lblSecondFactor.AutoSize = True
-        Me.lblSecondFactor.Location = New System.Drawing.Point(255, 139)
+        Me.lblSecondFactor.Location = New System.Drawing.Point(254, 120)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(128, 13)
         Me.lblSecondFactor.TabIndex = 4
-        Me.lblSecondFactor.Tag = "Second_Factor"
-        Me.lblSecondFactor.Text = "Second Factor  (Optional)"
+        Me.lblSecondFactor.Tag = "Second_Factor:"
+        Me.lblSecondFactor.Text = "Second Factor (Optional):"
         '
         'cmdBarChartOptions
         '
@@ -90,7 +90,7 @@ Partial Class dlgBarAndPieChart
         '
         'ucrSecondReceiver
         '
-        Me.ucrSecondReceiver.Location = New System.Drawing.Point(255, 154)
+        Me.ucrSecondReceiver.Location = New System.Drawing.Point(255, 135)
         Me.ucrSecondReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondReceiver.Name = "ucrSecondReceiver"
         Me.ucrSecondReceiver.Selector = Nothing
@@ -99,7 +99,7 @@ Partial Class dlgBarAndPieChart
         '
         'ucrFactorReceiver
         '
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 104)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 85)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
@@ -109,7 +109,7 @@ Partial Class dlgBarAndPieChart
         'ucrBarChartSelector
         '
         Me.ucrBarChartSelector.bShowHiddenColumns = False
-        Me.ucrBarChartSelector.bUseCurrentFilter = False
+        Me.ucrBarChartSelector.bUseCurrentFilter = True
         Me.ucrBarChartSelector.Location = New System.Drawing.Point(10, 41)
         Me.ucrBarChartSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrBarChartSelector.Name = "ucrBarChartSelector"
@@ -168,7 +168,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 376)
+        Me.ClientSize = New System.Drawing.Size(421, 379)
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.grpSelection)
         Me.Controls.Add(Me.cmdOptions)
@@ -186,7 +186,7 @@ Partial Class dlgBarAndPieChart
         Me.Name = "dlgBarAndPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Bar_And_Pie_Chart"
-        Me.Text = "Bar And Pie Chart"
+        Me.Text = "Bar and Pie Chart"
         Me.grpSelection.ResumeLayout(False)
         Me.grpSelection.PerformLayout()
         Me.ResumeLayout(False)

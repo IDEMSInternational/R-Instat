@@ -35,42 +35,44 @@ Partial Class dlgCombineText
         'lblSeparator
         '
         Me.lblSeparator.AutoSize = True
-        Me.lblSeparator.Location = New System.Drawing.Point(255, 160)
+        Me.lblSeparator.Location = New System.Drawing.Point(255, 152)
         Me.lblSeparator.Name = "lblSeparator"
-        Me.lblSeparator.Size = New System.Drawing.Size(53, 13)
+        Me.lblSeparator.Size = New System.Drawing.Size(56, 13)
         Me.lblSeparator.TabIndex = 4
-        Me.lblSeparator.Text = "Separator"
+        Me.lblSeparator.Text = "Separator:"
         '
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 219)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 213)
         Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 5
-        Me.lblNewColumnName.Tag = "New_Column_Name"
-        Me.lblNewColumnName.Text = "New Column Name"
+        Me.lblNewColumnName.Tag = "New_Column_Name:"
+        Me.lblNewColumnName.Text = "New Column Name:"
         '
         'lblColumnsToCobine
         '
         Me.lblColumnsToCobine.AutoSize = True
-        Me.lblColumnsToCobine.Location = New System.Drawing.Point(255, 25)
+        Me.lblColumnsToCobine.Location = New System.Drawing.Point(255, 28)
         Me.lblColumnsToCobine.Name = "lblColumnsToCobine"
-        Me.lblColumnsToCobine.Size = New System.Drawing.Size(103, 13)
+        Me.lblColumnsToCobine.Size = New System.Drawing.Size(106, 13)
         Me.lblColumnsToCobine.TabIndex = 7
-        Me.lblColumnsToCobine.Tag = "Columns_to_Combine"
-        Me.lblColumnsToCobine.Text = "Columns to Combine"
+        Me.lblColumnsToCobine.Tag = "Columns_to_Combine:"
+        Me.lblColumnsToCobine.Text = "Columns to Combine:"
         '
         'ucrInputSeparator
         '
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(255, 178)
+        Me.ucrInputSeparator.IsReadOnly = False
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(255, 168)
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
         Me.ucrInputSeparator.Size = New System.Drawing.Size(145, 21)
         Me.ucrInputSeparator.TabIndex = 10
         '
         'ucrInputColumnInto
         '
-        Me.ucrInputColumnInto.Location = New System.Drawing.Point(112, 213)
+        Me.ucrInputColumnInto.IsReadOnly = False
+        Me.ucrInputColumnInto.Location = New System.Drawing.Point(116, 209)
         Me.ucrInputColumnInto.Name = "ucrInputColumnInto"
         Me.ucrInputColumnInto.Size = New System.Drawing.Size(145, 21)
         Me.ucrInputColumnInto.TabIndex = 9
@@ -86,6 +88,8 @@ Partial Class dlgCombineText
         '
         'ucrSelectorForCombineText
         '
+        Me.ucrSelectorForCombineText.bShowHiddenColumns = False
+        Me.ucrSelectorForCombineText.bUseCurrentFilter = True
         Me.ucrSelectorForCombineText.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForCombineText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForCombineText.Name = "ucrSelectorForCombineText"
@@ -94,7 +98,7 @@ Partial Class dlgCombineText
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 247)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 236)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -103,7 +107,7 @@ Partial Class dlgCombineText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 301)
+        Me.ClientSize = New System.Drawing.Size(423, 297)
         Me.Controls.Add(Me.ucrInputSeparator)
         Me.Controls.Add(Me.ucrInputColumnInto)
         Me.Controls.Add(Me.lblColumnsToCobine)
@@ -113,6 +117,8 @@ Partial Class dlgCombineText
         Me.Controls.Add(Me.ucrSelectorForCombineText)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCombineText"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Combine_Text_Columns"

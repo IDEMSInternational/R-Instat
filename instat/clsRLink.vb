@@ -117,7 +117,7 @@ Public Class RLink
                 cboDataFrames.Items.Add("[Overall]")
             End If
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
-
+            AdjustComboBoxWidth(cboDataFrames)
             If bSetDefault Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
             Else
@@ -130,6 +130,28 @@ Public Class RLink
                 End If
             End If
         End If
+    End Sub
+
+    'TODO This is used above but will not be once ucrDataFrame uses proper controls
+    ' Then this can be removed
+    Public Shared Sub AdjustComboBoxWidth(cboCurrent As ComboBox)
+        Dim iWidth As Integer = cboCurrent.DropDownWidth
+        Dim graTemp As Graphics = cboCurrent.CreateGraphics()
+        Dim font As Font = cboCurrent.Font
+        Dim iScrollBarWidth As Integer
+        Dim iNewWidth As Integer
+
+        If cboCurrent.Items.Count > cboCurrent.MaxDropDownItems Then
+            iScrollBarWidth = SystemInformation.VerticalScrollBarWidth
+        Else
+            iScrollBarWidth = 0
+        End If
+
+        For Each strItem As String In cboCurrent.Items
+            iNewWidth = CInt(graTemp.MeasureString(strItem, font).Width) + iScrollBarWidth
+            iWidth = Math.Max(iWidth, iNewWidth)
+        Next
+        cboCurrent.DropDownWidth = iWidth
     End Sub
 
     Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)

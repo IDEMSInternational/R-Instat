@@ -40,20 +40,20 @@ Partial Class dlgColumnStats
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(264, 7)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(264, 27)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(120, 13)
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(123, 13)
         Me.lblSelectedVariables.TabIndex = 4
-        Me.lblSelectedVariables.Text = "Variables To Summarise"
+        Me.lblSelectedVariables.Text = "Variables To Summarise:"
         '
         'lblByFactors
         '
         Me.lblByFactors.AutoSize = True
-        Me.lblByFactors.Location = New System.Drawing.Point(264, 135)
+        Me.lblByFactors.Location = New System.Drawing.Point(264, 155)
         Me.lblByFactors.Name = "lblByFactors"
-        Me.lblByFactors.Size = New System.Drawing.Size(63, 13)
+        Me.lblByFactors.Size = New System.Drawing.Size(66, 13)
         Me.lblByFactors.TabIndex = 5
-        Me.lblByFactors.Text = "By Factor(s)"
+        Me.lblByFactors.Text = "By Factor(s):"
         '
         'grpOptions
         '
@@ -61,7 +61,7 @@ Partial Class dlgColumnStats
         Me.grpOptions.Controls.Add(Me.chkdropUnusedLevels)
         Me.grpOptions.Controls.Add(Me.chkStoreResults)
         Me.grpOptions.Controls.Add(Me.chkPrintOutput)
-        Me.grpOptions.Location = New System.Drawing.Point(9, 196)
+        Me.grpOptions.Location = New System.Drawing.Point(9, 197)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(184, 112)
         Me.grpOptions.TabIndex = 9
@@ -108,7 +108,7 @@ Partial Class dlgColumnStats
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(289, 266)
+        Me.cmdSummaries.Location = New System.Drawing.Point(330, 286)
         Me.cmdSummaries.Name = "cmdSummaries"
         Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
         Me.cmdSummaries.TabIndex = 10
@@ -118,7 +118,7 @@ Partial Class dlgColumnStats
         '
         'ucrReceiverByFactor
         '
-        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(267, 152)
+        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(267, 172)
         Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
         Me.ucrReceiverByFactor.Selector = Nothing
@@ -127,7 +127,7 @@ Partial Class dlgColumnStats
         '
         'ucrReceiverSelectedVariables
         '
-        Me.ucrReceiverSelectedVariables.Location = New System.Drawing.Point(267, 26)
+        Me.ucrReceiverSelectedVariables.Location = New System.Drawing.Point(267, 46)
         Me.ucrReceiverSelectedVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedVariables.Name = "ucrReceiverSelectedVariables"
         Me.ucrReceiverSelectedVariables.Selector = Nothing
@@ -137,7 +137,7 @@ Partial Class dlgColumnStats
         'ucrSelectorForColumnStatistics
         '
         Me.ucrSelectorForColumnStatistics.bShowHiddenColumns = False
-        Me.ucrSelectorForColumnStatistics.bUseCurrentFilter = False
+        Me.ucrSelectorForColumnStatistics.bUseCurrentFilter = True
         Me.ucrSelectorForColumnStatistics.Location = New System.Drawing.Point(9, 7)
         Me.ucrSelectorForColumnStatistics.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForColumnStatistics.Name = "ucrSelectorForColumnStatistics"
@@ -146,7 +146,7 @@ Partial Class dlgColumnStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 327)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 317)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 53)
         Me.ucrBase.TabIndex = 2
@@ -155,7 +155,7 @@ Partial Class dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 382)
+        Me.ClientSize = New System.Drawing.Size(417, 374)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverByFactor)
@@ -165,6 +165,8 @@ Partial Class dlgColumnStats
         Me.Controls.Add(Me.ucrSelectorForColumnStatistics)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgColumnStats"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Column_Statistics"
