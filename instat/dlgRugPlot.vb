@@ -117,11 +117,6 @@ Public Class dlgRugPlot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
-        If ucrVariablesAsFactorForRugPlot.bSingleVariable Then
-            ucrVariablesAsFactorForRugPlot.ucrSingleVariable.Focus()
-        Else
-            ucrVariablesAsFactorForRugPlot.ucrMultipleVariables.Focus()
-        End If
         TestOkEnabled()
     End Sub
 

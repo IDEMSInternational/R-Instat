@@ -133,11 +133,6 @@ Public Class dlgDotPlot
             clsRaesFunction.AddParameter("y", ucrVariablesAsFactorDotPlot.GetVariableNames(False))
             clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
         End If
-        If ucrVariablesAsFactorDotPlot.bSingleVariable Then
-            ucrVariablesAsFactorDotPlot.ucrSingleVariable.Focus()
-        Else
-            ucrVariablesAsFactorDotPlot.ucrMultipleVariables.Focus()
-        End If
         TestOkEnabled()
     End Sub
 
