@@ -35,6 +35,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrTwoVarGraphSave.Reset()
         ucrSelectorTwoVarGraph.Reset()
         ucrSelectorTwoVarGraph.Focus()
+        ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
+        sdgDescribeTwoVarGraph.Initialise()
         TestOkEnabled()
     End Sub
 
@@ -51,14 +53,12 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrTwoVarGraphSave.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
-        ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 0
         clsRFacet.SetRCommand("facet_wrap")
         clsRFacet.AddParameter("facets", "~variable")
         ucrBase.clsRsyntax.AddOperatorParameter("facet_wrap", clsRFunc:=clsRFacet)
         ucrBase.iHelpTopicID = 416
-        sdgDescribeTwoVarGraph.Initialise()
     End Sub
 
     Private Sub TestOkEnabled()
