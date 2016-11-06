@@ -54,6 +54,8 @@ Public Class dlgBoxplot
         'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
+        cmdBoxPlotOptions.Enabled = True
+        cmdOptions.Enabled = True
         TestOkEnabled()
         SetXParameter()
     End Sub
