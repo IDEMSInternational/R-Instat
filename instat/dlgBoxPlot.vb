@@ -184,11 +184,9 @@ Public Class dlgBoxplot
         If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
             cmdBoxPlotOptions.Enabled = True
             cmdOptions.Enabled = True
-            ucrVariablesAsFactorForBoxplot.ucrSingleVariable.Focus()
         Else
             cmdBoxPlotOptions.Enabled = False
             cmdOptions.Enabled = False
-            ucrVariablesAsFactorForBoxplot.ucrMultipleVariables.Focus()
         End If
         TestOkEnabled()
     End Sub
