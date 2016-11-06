@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgCompareModels
-    Public lstCheckboxes As List(Of CheckBox)
-    Public lstVals As List(Of String)
-
+    Public lstCheckboxes As New List(Of CheckBox)
+    Public lstVals As New List(Of String)
+    Public clsPlotDist As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -32,7 +32,7 @@ Public Class dlgCompareModels
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 0
-        ucrBase.clsRsyntax.SetFunction("plotDist")
+        clsPlotDist.SetRCommand("plotDist")
     End Sub
 
     Private Sub TestOKEnabled()
@@ -40,7 +40,10 @@ Public Class dlgCompareModels
     End Sub
 
     Private Sub SetDefaults()
-
+        rdoSingle.Checked = True
+        nudNumberofColumns.Enabled = True
+        lblNumberofColumns.Enabled = True
+        lstVals.Clear()
     End Sub
 
     Private Sub ReopenDialog()
@@ -58,10 +61,10 @@ Public Class dlgCompareModels
 
     Private Sub distParameters()
         ucrBase.clsRsyntax.ClearParameters()
-        ucrBase.clsRsyntax.AddParameter("dist", Chr(34) & ucrDistributionForCompareModels.clsCurrDistribution.strRName & Chr(34))
+        clsPlotDist.AddParameter("dist", Chr(34) & ucrDistributionForCompareModels.clsCurrDistribution.strRName & Chr(34))
 
         For Each clstempparam In ucrDistributionForCompareModels.clsCurrRFunction.clsParameters
-            ucrBase.clsRsyntax.AddParameter(clstempparam.Clone())
+            clsPlotDist.AddParameter(clstempparam.Clone())
         Next
     End Sub
 
@@ -74,49 +77,51 @@ Public Class dlgCompareModels
         Ylimits()
     End Sub
 
-    Private Sub grpPlotOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkCDF.CheckedChanged, chkDensity.CheckedChanged, chkHistogram.CheckedChanged
+    Private Sub grpPlotOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCDF.CheckedChanged, rdoDensity.CheckedChanged, rdoHistogram.CheckedChanged, rdoqq.CheckedChanged
         kindParameters()
     End Sub
+
     Private Sub Ylimits()
         If nudYlimMax.Text <> "" AndAlso nudYlimMin.Text <> "" Then
-            ucrBase.clsRsyntax.AddParameter("ylim", "c(" & nudYlimMin.Text & "," & nudYlimMax.Text & ")")
+            clsPlotDist.AddParameter("ylim", "c(" & nudYlimMin.Text & "," & nudYlimMax.Text & ")")
         Else
-            ucrBase.clsRsyntax.RemoveParameter("ylim")
+            clsPlotDist.RemoveParameterByName("ylim")
         End If
     End Sub
     Private Sub XLimits()
         If nudXlimMax.Text <> "" AndAlso nudXlimMin.Text <> "" Then
-            ucrBase.clsRsyntax.AddParameter("xlim", "c(" & nudXlimMin.Text & "," & nudXlimMax.Text & ")")
+            clsPlotDist.AddParameter("xlim", "c(" & nudXlimMin.Text & "," & nudXlimMax.Text & ")")
         Else
-            ucrBase.clsRsyntax.RemoveParameter("xlim")
+            clsPlotDist.RemoveParameterByName("xlim")
         End If
     End Sub
 
     Private Sub kindParameters()
-        lstCheckboxes.AddRange({chkCDF, chkDensity, chkqq, chkHistogram})
-        lstVals.AddRange({"cdf", "density", "qq", "histogram"})
-        Dim ival As Integer
-        Dim icheckedVal As Integer = lstCheckboxes(ival).Checked
-        Dim strTemp As String = ""
-
-        If lstCheckboxes(0).Checked Then
-            ucrBase.clsRsyntax.AddParameter("kind", lstVals(0))
-        ElseIf lstCheckboxes(1).Checked Then
-            ucrBase.clsRsyntax.AddParameter("kind", lstVals(1))
-        ElseIf lstCheckboxes(2).Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("kind", lstVals(2))
-        ElseIf lstCheckboxes(3).Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("kind", lstVals(3))
-        ElseIf icheckedVal > 1 Then
-            strTemp = "c" & "("
-            For icheckedVal = 0 To lstCheckboxes.Count - 1
-                If icheckedVal > 1 Then
-                    strTemp = strTemp & ","
-                End If
-            Next
-
-            strTemp = strTemp & ")"
+        If rdoqq.Checked Then
+            clsPlotDist.AddParameter("kind", Chr(34) & "qq" & Chr(34))
+        ElseIf rdoHistogram.Checked Then
+            clsPlotDist.AddParameter("kind", Chr(34) & "histogram" & Chr(34))
+        ElseIf rdoCDF.Checked Then
+            clsPlotDist.AddParameter("kind", Chr(34) & "cdf" & Chr(34))
+        Else
+            clsPlotDist.AddParameter("kind", Chr(34) & "density" & Chr(34))
         End If
+
     End Sub
 
+    Private Sub plotgraphspar()
+        ucrBase.clsRsyntax.SetFunction("grid.arrange")
+        If rdoSingle.Checked Then
+            cmdAddNewDistributions.Enabled = False
+            ucrBase.clsRsyntax.AddParameter("x", clsPlotDist.ToScript)
+            ucrBase.clsRsyntax.AddParameter("ncol", 1)
+        ElseIf rdoCombine.Checked Then
+            cmdAddNewDistributions.Enabled = True
+            nudNumberofColumns.Enabled = True
+            lblNumberofColumns.Enabled = True
+        End If
+    End Sub
+    Private Sub grpPlotGraphs_Enter(sender As Object, e As EventArgs) Handles rdoCombine.CheckedChanged, rdoSingle.CheckedChanged
+        plotgraphspar()
+    End Sub
 End Class
