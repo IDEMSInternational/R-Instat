@@ -69,6 +69,10 @@ Public Class ucrInputTextBox
         OnContentsChanged()
     End Sub
 
+    Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
+        txtInput.Copy()
+    End Sub
+
     Public Overrides Property IsReadOnly As Boolean
         Get
             Return MyBase.IsReadOnly
