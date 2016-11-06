@@ -40,17 +40,17 @@ Public Class dlgOneVariableGraph
         ucrSelectorOneVarGraph.Focus()
         ucrOneVarGraphSave.Reset()
         rdoFacets.Checked = True
-        rdoCombineGraph.Enabled = False
         ucrOneVarGraphSave.Reset()
         sdgOneVarGraph.SetDefaults()
+        ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        rdoSingleGraphs.Enabled = False
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
         'ucrBase.iHelpTopicID = 
-        ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -163,16 +163,13 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub CheckDataType()
-        If ucrReceiverOneVarGraph.GetCurrentItemTypes(True).Count > 1 Then
-            rdoFacets.Enabled = False
-            rdoFacets.Checked = False
-            rdoCombineGraph.Checked = True
-            rdoCombineGraph.Enabled = True
-        Else
+        If ucrReceiverOneVarGraph.IsAllNumeric() OrElse ucrReceiverOneVarGraph.IsAllCategorical() Then
             rdoFacets.Enabled = True
-            rdoFacets.Checked = True
-            rdoCombineGraph.Checked = False
-            rdoCombineGraph.Enabled = False
+        Else
+            rdoFacets.Enabled = False
+            If rdoFacets.Checked Then
+                rdoCombineGraph.Checked = True
+            End If
         End If
     End Sub
 

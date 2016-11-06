@@ -33,16 +33,16 @@ Partial Class dlgLabels
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(271, 18)
+        Me.lblFactor.Location = New System.Drawing.Point(256, 22)
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblFactor.TabIndex = 3
-        Me.lblFactor.Tag = "Factor"
-        Me.lblFactor.Text = "Factor"
+        Me.lblFactor.Tag = "Factor_Selected:"
+        Me.lblFactor.Text = "Factor Selected:"
         '
         'ucrReceiverLabels
         '
-        Me.ucrReceiverLabels.Location = New System.Drawing.Point(274, 34)
+        Me.ucrReceiverLabels.Location = New System.Drawing.Point(256, 37)
         Me.ucrReceiverLabels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLabels.Name = "ucrReceiverLabels"
         Me.ucrReceiverLabels.Selector = Nothing
@@ -54,7 +54,7 @@ Partial Class dlgLabels
         Me.ucrFactorLabels.AutoSize = True
         Me.ucrFactorLabels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorLabels.clsReceiver = Nothing
-        Me.ucrFactorLabels.Location = New System.Drawing.Point(274, 66)
+        Me.ucrFactorLabels.Location = New System.Drawing.Point(256, 66)
         Me.ucrFactorLabels.Name = "ucrFactorLabels"
         Me.ucrFactorLabels.shtCurrSheet = Nothing
         Me.ucrFactorLabels.Size = New System.Drawing.Size(267, 171)
@@ -63,23 +63,23 @@ Partial Class dlgLabels
         'ucrSelectorForLabels
         '
         Me.ucrSelectorForLabels.bShowHiddenColumns = False
-        Me.ucrSelectorForLabels.bUseCurrentFilter = False
-        Me.ucrSelectorForLabels.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectorForLabels.bUseCurrentFilter = True
+        Me.ucrSelectorForLabels.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForLabels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForLabels.Name = "ucrSelectorForLabels"
-        Me.ucrSelectorForLabels.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForLabels.Size = New System.Drawing.Size(242, 196)
         Me.ucrSelectorForLabels.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 287)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 272)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
         'cmdAddLevel
         '
-        Me.cmdAddLevel.Location = New System.Drawing.Point(274, 243)
+        Me.cmdAddLevel.Location = New System.Drawing.Point(256, 243)
         Me.cmdAddLevel.Name = "cmdAddLevel"
         Me.cmdAddLevel.Size = New System.Drawing.Size(75, 23)
         Me.cmdAddLevel.TabIndex = 5
@@ -90,7 +90,7 @@ Partial Class dlgLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(553, 348)
+        Me.ClientSize = New System.Drawing.Size(533, 332)
         Me.Controls.Add(Me.cmdAddLevel)
         Me.Controls.Add(Me.ucrReceiverLabels)
         Me.Controls.Add(Me.lblFactor)

@@ -35,12 +35,14 @@ Partial Class dlgMetadata
         Me.ucrNewValue = New instat.ucrReceiverMetadataProperty()
         Me.grpProperty = New System.Windows.Forms.GroupBox()
         Me.ucrInputDefineProperty = New instat.ucrInputTextBox()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
+        Me.lblProperty = New System.Windows.Forms.Label()
         Me.grpProperty.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 279)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 279)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -48,8 +50,8 @@ Partial Class dlgMetadata
         'ucrSelectByMetadata
         '
         Me.ucrSelectByMetadata.bShowHiddenColumns = False
-        Me.ucrSelectByMetadata.bUseCurrentFilter = False
-        Me.ucrSelectByMetadata.Location = New System.Drawing.Point(9, 12)
+        Me.ucrSelectByMetadata.bUseCurrentFilter = True
+        Me.ucrSelectByMetadata.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectByMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectByMetadata.Name = "ucrSelectByMetadata"
         Me.ucrSelectByMetadata.Size = New System.Drawing.Size(210, 180)
@@ -57,7 +59,7 @@ Partial Class dlgMetadata
         '
         'ucrReceiverChooseProperty
         '
-        Me.ucrReceiverChooseProperty.Location = New System.Drawing.Point(242, 65)
+        Me.ucrReceiverChooseProperty.Location = New System.Drawing.Point(254, 45)
         Me.ucrReceiverChooseProperty.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverChooseProperty.Name = "ucrReceiverChooseProperty"
         Me.ucrReceiverChooseProperty.Selector = Nothing
@@ -66,7 +68,7 @@ Partial Class dlgMetadata
         '
         'rdoChooseProperty
         '
-        Me.rdoChooseProperty.Location = New System.Drawing.Point(6, 19)
+        Me.rdoChooseProperty.Location = New System.Drawing.Point(9, 22)
         Me.rdoChooseProperty.Name = "rdoChooseProperty"
         Me.rdoChooseProperty.Size = New System.Drawing.Size(104, 24)
         Me.rdoChooseProperty.TabIndex = 0
@@ -76,9 +78,9 @@ Partial Class dlgMetadata
         '
         'rdoDefineNewProperty
         '
-        Me.rdoDefineNewProperty.Location = New System.Drawing.Point(116, 19)
+        Me.rdoDefineNewProperty.Location = New System.Drawing.Point(9, 49)
         Me.rdoDefineNewProperty.Name = "rdoDefineNewProperty"
-        Me.rdoDefineNewProperty.Size = New System.Drawing.Size(138, 24)
+        Me.rdoDefineNewProperty.Size = New System.Drawing.Size(127, 24)
         Me.rdoDefineNewProperty.TabIndex = 1
         Me.rdoDefineNewProperty.TabStop = True
         Me.rdoDefineNewProperty.Text = "Define New Property"
@@ -86,75 +88,94 @@ Partial Class dlgMetadata
         '
         'lblChooseColumns
         '
-        Me.lblChooseColumns.Location = New System.Drawing.Point(239, 89)
+        Me.lblChooseColumns.Location = New System.Drawing.Point(254, 73)
         Me.lblChooseColumns.Name = "lblChooseColumns"
-        Me.lblChooseColumns.Size = New System.Drawing.Size(100, 23)
+        Me.lblChooseColumns.Size = New System.Drawing.Size(100, 30)
         Me.lblChooseColumns.TabIndex = 7
-        Me.lblChooseColumns.Text = "Choose Columns"
+        Me.lblChooseColumns.Text = "Choose Columns:"
         '
         'ucrReceiverChooseColumns
         '
-        Me.ucrReceiverChooseColumns.Location = New System.Drawing.Point(242, 112)
+        Me.ucrReceiverChooseColumns.Location = New System.Drawing.Point(254, 87)
         Me.ucrReceiverChooseColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverChooseColumns.Name = "ucrReceiverChooseColumns"
         Me.ucrReceiverChooseColumns.Selector = Nothing
-        Me.ucrReceiverChooseColumns.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverChooseColumns.Size = New System.Drawing.Size(120, 103)
         Me.ucrReceiverChooseColumns.TabIndex = 6
         '
         'lblCurrentValue
         '
-        Me.lblCurrentValue.Location = New System.Drawing.Point(6, 221)
+        Me.lblCurrentValue.Location = New System.Drawing.Point(10, 215)
         Me.lblCurrentValue.Name = "lblCurrentValue"
         Me.lblCurrentValue.Size = New System.Drawing.Size(84, 23)
         Me.lblCurrentValue.TabIndex = 5
-        Me.lblCurrentValue.Text = "Current Value"
+        Me.lblCurrentValue.Text = "Current Value:"
         '
         'lblNewValue
         '
-        Me.lblNewValue.Location = New System.Drawing.Point(6, 255)
+        Me.lblNewValue.Location = New System.Drawing.Point(10, 248)
         Me.lblNewValue.Name = "lblNewValue"
         Me.lblNewValue.Size = New System.Drawing.Size(76, 18)
         Me.lblNewValue.TabIndex = 4
-        Me.lblNewValue.Text = "New Value"
+        Me.lblNewValue.Text = "New Value:"
         '
         'ucrCurrentValue
         '
         Me.ucrCurrentValue.IsReadOnly = False
-        Me.ucrCurrentValue.Location = New System.Drawing.Point(105, 221)
+        Me.ucrCurrentValue.Location = New System.Drawing.Point(92, 213)
         Me.ucrCurrentValue.Name = "ucrCurrentValue"
         Me.ucrCurrentValue.Size = New System.Drawing.Size(137, 21)
         Me.ucrCurrentValue.TabIndex = 3
         '
         'ucrNewValue
         '
-        Me.ucrNewValue.Location = New System.Drawing.Point(102, 251)
+        Me.ucrNewValue.Location = New System.Drawing.Point(92, 244)
         Me.ucrNewValue.Name = "ucrNewValue"
-        Me.ucrNewValue.Size = New System.Drawing.Size(140, 22)
+        Me.ucrNewValue.Size = New System.Drawing.Size(140, 29)
         Me.ucrNewValue.TabIndex = 2
         '
         'grpProperty
         '
         Me.grpProperty.Controls.Add(Me.rdoChooseProperty)
         Me.grpProperty.Controls.Add(Me.rdoDefineNewProperty)
-        Me.grpProperty.Location = New System.Drawing.Point(242, 12)
+        Me.grpProperty.Location = New System.Drawing.Point(254, 193)
         Me.grpProperty.Name = "grpProperty"
-        Me.grpProperty.Size = New System.Drawing.Size(282, 49)
+        Me.grpProperty.Size = New System.Drawing.Size(153, 80)
         Me.grpProperty.TabIndex = 1
         Me.grpProperty.TabStop = False
+        Me.grpProperty.Text = "Property"
         '
         'ucrInputDefineProperty
         '
         Me.ucrInputDefineProperty.IsReadOnly = False
-        Me.ucrInputDefineProperty.Location = New System.Drawing.Point(242, 65)
+        Me.ucrInputDefineProperty.Location = New System.Drawing.Point(254, 45)
         Me.ucrInputDefineProperty.Name = "ucrInputDefineProperty"
-        Me.ucrInputDefineProperty.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDefineProperty.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputDefineProperty.TabIndex = 0
+        '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(92, 157)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 11
+        '
+        'lblProperty
+        '
+        Me.lblProperty.Location = New System.Drawing.Point(252, 30)
+        Me.lblProperty.Name = "lblProperty"
+        Me.lblProperty.Size = New System.Drawing.Size(100, 15)
+        Me.lblProperty.TabIndex = 12
+        Me.lblProperty.Text = "Property:"
         '
         'dlgMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(528, 338)
+        Me.ClientSize = New System.Drawing.Size(426, 338)
+        Me.Controls.Add(Me.lblProperty)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.ucrInputDefineProperty)
         Me.Controls.Add(Me.grpProperty)
         Me.Controls.Add(Me.ucrNewValue)
@@ -191,4 +212,6 @@ Partial Class dlgMetadata
     Friend WithEvents ucrNewValue As ucrReceiverMetadataProperty
     Friend WithEvents grpProperty As GroupBox
     Friend WithEvents ucrInputDefineProperty As ucrInputTextBox
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
+    Friend WithEvents lblProperty As Label
 End Class

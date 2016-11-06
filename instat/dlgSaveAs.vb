@@ -31,6 +31,7 @@ Public Class dlgSaveAs
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 332
         ucrInputFilePath.IsReadOnly = True
         ucrBase.clsRsyntax.SetFunction("saveRDS")
         ucrBase.clsRsyntax.AddParameter("object", frmMain.clsRLink.strInstatDataObject)

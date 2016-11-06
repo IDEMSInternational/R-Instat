@@ -103,7 +103,8 @@ Public Class ucrFactor
         Dim clsConvertToCharacter As New RFunction
 
         grdFactorData.Worksheets.Clear()
-        If clsReceiver IsNot Nothing AndAlso Not clsReceiver.IsEmpty() AndAlso clsReceiver.strCurrDataType = "factor" Then
+        ' Contains allows ordered factors to be included
+        If clsReceiver IsNot Nothing AndAlso Not clsReceiver.IsEmpty() AndAlso clsReceiver.strCurrDataType.Contains("factor") Then
             clsGetFactorData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
             clsGetFactorData.AddParameter("data_name", Chr(34) & clsReceiver.GetDataName() & Chr(34))
             clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
