@@ -48,6 +48,7 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.Focus()
         ucrVariablesAsFactorForBoxplot.ResetControl()
+        ucrSaveBoxplot.strPrefix = "Boxplot"
         chkHorizontalBoxplot.Checked = False
         chkVarwidth.Checked = False
         'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
@@ -86,7 +87,6 @@ Public Class dlgBoxplot
 
 
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
-        ucrSaveBoxplot.strPrefix = "Boxplot"
 
     End Sub
 
@@ -184,9 +184,11 @@ Public Class dlgBoxplot
         If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
             cmdBoxPlotOptions.Enabled = True
             cmdOptions.Enabled = True
+            ucrVariablesAsFactorForBoxplot.ucrSingleVariable.Focus()
         Else
             cmdBoxPlotOptions.Enabled = False
             cmdOptions.Enabled = False
+            ucrVariablesAsFactorForBoxplot.ucrMultipleVariables.Focus()
         End If
         TestOkEnabled()
     End Sub
