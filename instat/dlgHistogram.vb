@@ -138,6 +138,8 @@ Public Class dlgHistogram
         cmdDensityOptions.Visible = False
         cmdFrequencyOptions.Visible = False
         ucrSaveHist.strPrefix = "Histogram"
+        cmdHistogramOptions.Enabled = True
+        cmdOptions.Enabled = True
         sdgPlots.Reset()
         ucrSaveHist.Reset()
         TestOkEnabled()
@@ -215,6 +217,13 @@ Public Class dlgHistogram
             clsRaesFunction.AddParameter("x", ucrVariablesAsFactorforHist.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("x")
+        End If
+        If ucrVariablesAsFactorforHist.bSingleVariable Then
+            cmdHistogramOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            cmdHistogramOptions.Enabled = False
+            cmdOptions.Enabled = False
         End If
         TestOkEnabled()
     End Sub

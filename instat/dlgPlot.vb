@@ -45,6 +45,8 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
+        cmdLineOptions.Enabled = True
+        cmdOptions.Enabled = True
         ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
         TestOkEnabled()
@@ -137,6 +139,13 @@ Public Class dlgPlot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
+        If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
+            cmdLineOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            cmdLineOptions.Enabled = False
+            cmdOptions.Enabled = False
+        End If
         TestOkEnabled()
     End Sub
 
@@ -149,7 +158,7 @@ Public Class dlgPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdPointOptions_Click(sender As Object, e As EventArgs) Handles cmdPointOptions.Click
+    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_lineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
 
