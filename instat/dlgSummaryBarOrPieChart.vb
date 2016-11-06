@@ -60,7 +60,6 @@ Public Class dlgSummaryBarOrPieChart
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
         ucrSaveSummaryBar.SetDataFrameSelector(ucrSummarybarSelector.ucrAvailableDataFrames)
-        ucrSaveSummaryBar.strPrefix = "Graph"
         ucrSaveSummaryBar.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveSummaryBar.ucrInputGraphName.SetDefaultTypeAsGraph()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -74,6 +73,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSummarybarSelector.Focus()
         cmdBarChartOptions.Visible = False
         cmdPieChartOptions.Visible = False
+        ucrSaveSummaryBar.strPrefix = "Graph"
         ucrSaveSummaryBar.Reset()
         TestOkEnabled()
     End Sub
