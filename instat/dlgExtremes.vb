@@ -36,6 +36,10 @@ Public Class dlgExtremes
         ucrReceiverDataToFit.SetMeAsReceiver()
     End Sub
 
+    Private Sub SetDefaults()
+        ucrBase.OKEnabled(False)
+    End Sub
+
     Private Sub chkRestrictValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkRestrictValues.CheckedChanged
         If chkRestrictValues.Checked = True Then
             lblBetween.Visible = True
