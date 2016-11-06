@@ -128,6 +128,7 @@ Public Class ucrInputComboBox
             cboInput.Items.Clear()
         End If
         cboInput.Items.AddRange(strItems)
+        AdjustComboBoxWidth(cboInput)
     End Sub
 
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
@@ -162,5 +163,31 @@ Public Class ucrInputComboBox
 
     Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
         Clipboard.SetText(cboInput.SelectedText)
+    End Sub
+
+    'This seems overly complicated, but appears only way to auto size
+    'Adapted from: http://dotnetanaya.blogspot.co.uk/2012/12/vbnet-adjusting-combobox-dropdownlist.html
+    'Need to make sure this is called from all places needed
+    'There is no build in event to check items added
+    'TODO this is repeat in clsRLink for ucrDataFrame, will not be needed once controls changed
+    'Should have a place for shared methods
+    Public Sub AdjustComboBoxWidth(cboCurrent As ComboBox)
+        Dim iWidth As Integer = cboCurrent.DropDownWidth
+        Dim graTemp As Graphics = cboCurrent.CreateGraphics()
+        Dim font As Font = cboCurrent.Font
+        Dim iScrollBarWidth As Integer
+        Dim iNewWidth As Integer
+
+        If cboCurrent.Items.Count > cboCurrent.MaxDropDownItems Then
+            iScrollBarWidth = SystemInformation.VerticalScrollBarWidth
+        Else
+            iScrollBarWidth = 0
+        End If
+
+        For Each strItem As String In cboCurrent.Items
+            iNewWidth = CInt(graTemp.MeasureString(strItem, font).Width) + iScrollBarWidth
+            iWidth = Math.Max(iWidth, iNewWidth)
+        Next
+        cboCurrent.DropDownWidth = iWidth
     End Sub
 End Class
