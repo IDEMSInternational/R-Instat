@@ -137,11 +137,6 @@ Public Class dlgPlot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
-        If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
-            ucrVariablesAsFactorForLinePlot.ucrSingleVariable.Focus()
-        Else
-            ucrVariablesAsFactorForLinePlot.ucrMultipleVariables.Focus()
-        End If
         TestOkEnabled()
     End Sub
 
