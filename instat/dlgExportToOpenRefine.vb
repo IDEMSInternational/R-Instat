@@ -36,7 +36,8 @@ Public Class dlgExportToOpenRefine
         TestOKEnabled()
         End Sub
 
-        Private Sub InitialiseDialog()
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 466
         clsWriteToCSV.SetRCommand("write.csv")
         ucrBase.clsRsyntax.SetFunction("rrefine::refine_upload")
         clsWriteToCSV.AddParameter("row.names", "FALSE")

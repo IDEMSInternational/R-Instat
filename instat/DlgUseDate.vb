@@ -30,6 +30,7 @@ Public Class dlgUseDate
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 462
 
     End Sub
 
