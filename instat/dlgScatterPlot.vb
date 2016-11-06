@@ -56,12 +56,12 @@ Public Class dlgScatterPlot
         ucrBase.iHelpTopicID = 433
 
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
-        ucrSaveScatterPlot.strPrefix = "Scatter"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
     End Sub
     Private Sub SetDefaults()
         'setDefaults
+        ucrSaveScatterPlot.strPrefix = "Scatter"
         clsRaesFunction.ClearParameters()
         clsRgeom_scatterplotFunction.ClearParameters()
         ucrSelectorForScatter.Reset()
