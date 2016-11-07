@@ -63,9 +63,11 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub TestOKEnabled()
+        Dim iTemp As Integer
+
         If Not ucrReceiverRecode.IsEmpty() AndAlso Not ucrMultipleNumericRecode.IsEmpty AndAlso Not ucrInputRecode.IsEmpty Then
             If chkAddLabels.Checked AndAlso Not ucrMultipleLabels.IsEmpty Then
-                If (ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 AndAlso (Not ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1)) OrElse (ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 AndAlso (Convert.ToInt32(ucrMultipleNumericRecode.clsRList.clsParameters(0).strArgumentValue) = ucrMultipleLabels.clsRList.clsParameters.Count)) Then
+                If (ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 AndAlso (Not ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1)) OrElse (ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 AndAlso Integer.TryParse(ucrMultipleNumericRecode.clsRList.clsParameters(0).strArgumentValue, iTemp) AndAlso iTemp = ucrMultipleLabels.clsRList.clsParameters.Count) Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -93,7 +95,7 @@ Public Class dlgRecodeNumeric
         'This sub is sending validation errors to the user for him/her to fill in the settingsof the dialogue in an appropriate way.
         'In case he/she enters only one number in ucrMultipleNumericRecode, this number has to be greater than one, as it is the number of intervals for cut.
         'Otherwise, if the user enters the list of break points, the resulting number of intervals should be smaller than the number of labels (see
-        If ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 Then
+        If ucrMultipleNumericRecode.GetText <> "" AndAlso ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 Then
             MsgBox("If the input of break points is a single number, it is understood as the number of intervals. It has to be > 1, otherwise an error will occur.", vbOKOnly, "Validation Error")
         Else
             ValidateBreakPointLabelCount()
@@ -120,15 +122,13 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub ValidateBreakPointLabelCount()
+        Dim iTemp As Integer
+
         If Not ucrMultipleNumericRecode.IsEmpty() AndAlso (Not ucrMultipleLabels.IsEmpty()) Then
             If ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 AndAlso ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1 Then
-
                 MsgBox("There must be one less label than the number of break points. Ok will not be enabled until this is resolved.", vbOKOnly, "Validation Error")
-
-            ElseIf ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 AndAlso (Convert.toInt32(ucrMultipleNumericRecode.clsRList.clsParameters(0).strArgumentValue) <> ucrMultipleLabels.clsRList.clsParameters.Count) Then
-
+            ElseIf ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 AndAlso Integer.TryParse(ucrMultipleNumericRecode.clsRList.clsParameters(0).strArgumentValue, iTemp) AndAlso iTemp <> ucrMultipleLabels.clsRList.clsParameters.Count Then
                 MsgBox("There must be the same number of labels to the number of intervals. Ok will not be enabled until this is resolved.", vbOKOnly, "Validation Error")
-
             End If
         End If
     End Sub
