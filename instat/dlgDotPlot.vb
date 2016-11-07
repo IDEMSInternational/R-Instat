@@ -53,7 +53,6 @@ Public Class dlgDotPlot
         ucrBase.iHelpTopicID = 437
 
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
-        ucrSaveDotPlot.strPrefix = "Dotplot"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
     End Sub
@@ -70,6 +69,7 @@ Public Class dlgDotPlot
         clsRaesFunction.ClearParameters()
         clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
+        ucrSaveDotPlot.strPrefix = "Dotplot"
         ucrVariablesAsFactorDotPlot.ResetControl()
         ucrSaveDotPlot.Reset()
         sdgPlots.Reset()
