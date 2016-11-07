@@ -29,6 +29,8 @@ Public Class dlgExtremes
         cboMethodOfMoments.Visible = False
         chkProbabilityPlot.Checked = False
 
+        ucrBase.OKEnabled(False) ' temporarily for beta
+
         ucrBase.clsRsyntax.SetFunction("gev.fit")
         ucrBase.clsRsyntax.iCallType = 1
         autoTranslate(Me)
@@ -37,7 +39,6 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.OKEnabled(False)
     End Sub
 
     Private Sub chkRestrictValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkRestrictValues.CheckedChanged
