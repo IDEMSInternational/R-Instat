@@ -14,7 +14,9 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgCompareModels
+    Public strOutput As String
     Public clsPlotDist As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -45,7 +47,6 @@ Public Class dlgCompareModels
     Private Sub SetDefaults()
         rdoSingle.Checked = True
         rdoDensity.Checked = True
-        kindParameters()
         nudNumberofColumns.Enabled = False
         lblNumberofColumns.Enabled = False
         rdoCombine.Enabled = False
@@ -66,7 +67,6 @@ Public Class dlgCompareModels
 
     Private Sub distParameters()
         clsPlotDist.ClearParameters()
-        kindParameters()
         clsPlotDist.AddParameter("dist", Chr(34) & ucrDistributionForCompareModels.clsCurrDistribution.strRName & Chr(34))
         For Each clstempparam In ucrDistributionForCompareModels.clsCurrRFunction.clsParameters
             clsPlotDist.AddParameter(clstempparam.Clone())
@@ -106,8 +106,8 @@ Public Class dlgCompareModels
                 clsPlotDist.RemoveParameterByName("xlim")
             End If
         Else
-                clsPlotDist.RemoveParameterByName("xlim")
-            End If
+            clsPlotDist.RemoveParameterByName("xlim")
+        End If
 
     End Sub
 
@@ -138,5 +138,4 @@ Public Class dlgCompareModels
     Private Sub grpPlotGraphs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCombine.CheckedChanged, rdoSingle.CheckedChanged
         plotgraphspar()
     End Sub
-
 End Class
