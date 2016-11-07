@@ -113,7 +113,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrSelectorDescribeTwoVar
         '
         Me.ucrSelectorDescribeTwoVar.bShowHiddenColumns = False
-        Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = False
+        Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = True
         Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(8, 10)
         Me.ucrSelectorDescribeTwoVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDescribeTwoVar.Name = "ucrSelectorDescribeTwoVar"
@@ -158,7 +158,7 @@ Partial Class dlgDescribeTwoVariable
         Me.Name = "dlgDescribeTwoVariable"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Describe_Two_Variable"
-        Me.Text = "Describe Two Variable"
+        Me.Text = "Describe Two Variables"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
