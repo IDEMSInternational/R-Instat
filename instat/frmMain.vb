@@ -574,9 +574,7 @@ Public Class frmMain
         mnuFileOpenFromFile_Click(sender, e)
     End Sub
 
-    Private Sub mnuTbImport_Click(sender As Object, e As EventArgs) Handles mnuTbImport.Click
-        mnuFileOpenFromFile_Click(sender, e)
-    End Sub
+
 
     Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
         mnuFileSave_Click(sender, e)
