@@ -22,6 +22,7 @@ Partial Class dlgShowModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.rdoProbabilities = New System.Windows.Forms.RadioButton()
         Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
         Me.chkGraphResults = New System.Windows.Forms.CheckBox()
@@ -29,6 +30,7 @@ Partial Class dlgShowModel
         Me.lblQuantValues = New System.Windows.Forms.Label()
         Me.lblProbValues = New System.Windows.Forms.Label()
         Me.chkSingleValues = New System.Windows.Forms.CheckBox()
+        Me.ttprobability = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrDistributionsFOrTablePlus = New instat.ucrDistributionsWithParameters()
         Me.ucrInputProbabilities = New instat.ucrInputTextBox()
         Me.ucrInputNewColNameforTablePlus = New instat.ucrInputComboBox()
@@ -102,10 +104,14 @@ Partial Class dlgShowModel
         Me.chkSingleValues.AutoSize = True
         Me.chkSingleValues.Location = New System.Drawing.Point(9, 247)
         Me.chkSingleValues.Name = "chkSingleValues"
-        Me.chkSingleValues.Size = New System.Drawing.Size(85, 17)
+        Me.chkSingleValues.Size = New System.Drawing.Size(92, 17)
         Me.chkSingleValues.TabIndex = 12
-        Me.chkSingleValues.Text = "Single Value"
+        Me.chkSingleValues.Text = "Enter Value(s)"
         Me.chkSingleValues.UseVisualStyleBackColor = True
+        '
+        'ttprobability
+        '
+        Me.ttprobability.ToolTipTitle = "Hint"
         '
         'ucrDistributionsFOrTablePlus
         '
@@ -133,7 +139,7 @@ Partial Class dlgShowModel
         'ucrSelectorForDataFrame
         '
         Me.ucrSelectorForDataFrame.bShowHiddenColumns = False
-        Me.ucrSelectorForDataFrame.bUseCurrentFilter = False
+        Me.ucrSelectorForDataFrame.bUseCurrentFilter = True
         Me.ucrSelectorForDataFrame.Location = New System.Drawing.Point(9, 32)
         Me.ucrSelectorForDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDataFrame.Name = "ucrSelectorForDataFrame"
@@ -198,4 +204,5 @@ Partial Class dlgShowModel
     Friend WithEvents ucrInputProbabilities As ucrInputTextBox
     Friend WithEvents ucrDistributionsFOrTablePlus As ucrDistributionsWithParameters
     Friend WithEvents chkSingleValues As CheckBox
+    Friend WithEvents ttprobability As ToolTip
 End Class

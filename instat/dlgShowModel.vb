@@ -76,9 +76,11 @@ Public Class dlgShowModel
 
     Private Sub pqParameters()
         If rdoProbabilities.Checked Then
+            ucrInputProbabilities.SetName("1")
+            ttprobability.SetToolTip(ucrInputProbabilities, "enter e.g 0.1, 1, 3, 5, 10 " & vbCrLf & "-2, -1, 0, 1, 2 ")
             If chkSingleValues.Checked Then
                 If ucrInputProbabilities.IsEmpty = False Then
-                    ucrBase.clsRsyntax.AddParameter("q", ucrInputProbabilities.GetText)
+                    ucrBase.clsRsyntax.AddParameter("q", "c(" & ucrInputProbabilities.GetText & ")")
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("q")
                 End If
@@ -89,10 +91,12 @@ Public Class dlgShowModel
                     ucrBase.clsRsyntax.RemoveParameter("q")
                 End If
             End If
-            Else
+        Else
+            ucrInputProbabilities.SetName("0.5")
+            ttprobability.SetToolTip(ucrInputProbabilities, "enter e.g 0.1, 0.2, 0.4, 0.6, 0.8, 0.9 " & vbCrLf & "0.2, 0.5, 0.8" & vbCrLf & " 0.5, 0.8, 0.9, 0.95, 0.99")
             If chkSingleValues.Checked Then
                 If ucrInputProbabilities.IsEmpty = False Then
-                    ucrBase.clsRsyntax.AddParameter("p", ucrInputProbabilities.GetText)
+                    ucrBase.clsRsyntax.AddParameter("p", "c(" & ucrInputProbabilities.GetText & ")")
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("p")
                 End If
@@ -180,7 +184,6 @@ Public Class dlgShowModel
             ucrInputNewColNameforTablePlus.Visible = False
             ucrReceiverExpressionForTablePlus.Visible = False
             ucrInputProbabilities.Visible = True
-            ucrInputProbabilities.SetName("0.5")
         Else
             chkSaveResults.Visible = True
             ucrReceiverExpressionForTablePlus.Visible = False
@@ -188,5 +191,9 @@ Public Class dlgShowModel
             ucrInputProbabilities.Visible = False
             ucrReceiverExpressionForTablePlus.Visible = True
         End If
+    End Sub
+
+    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ttprobability.Popup
+
     End Sub
 End Class
