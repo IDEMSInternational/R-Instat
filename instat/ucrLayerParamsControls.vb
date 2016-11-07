@@ -30,13 +30,16 @@ Public Class ucrLayerParamsControls
     End Sub
 
     Public Sub SetLayerParameter(clsTempLayerParam As LayerParameter)
+        'This sets up the Layer parameter of the current control. First get the right LayerParameter stored in the ucrReceiverMetadataProperty.
         ucrReceiverMetadataProperty.clsLayerParam = clsTempLayerParam
-        ucrReceiverMetadataProperty.Visible = False
+        'The following sub sets the right form for the ucrReceiverProperty according to the type, default value and other features of the layer parameter (info from clsLayerParam).
         ucrReceiverMetadataProperty.SetControls()
-        If Not IsNothing(ucrReceiverMetadataProperty.clsLayerParam) Then
+        'Then the parameter's label, ucrReceiverMP, and value are set if clsLayerParameter is non-empty. Otherwise parameter name chk is hiddeN
+        If ucrReceiverMetadataProperty.clsLayerParam IsNot Nothing Then
             chkParamName.Visible = True
             chkParamName.Text = ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName
 
+            'If that parameter has already a value in the clsGeomFunction, it needs to be setup accordingly on the dialog. Otherwise defaults are applied.
             If clsGeomFunction.GetParameter(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName) Is Nothing Then
                 ucrReceiverMetadataProperty.SetValue(ucrReceiverMetadataProperty.clsLayerParam.strParameterDefaultValue)
                 chkParamName.Checked = False
@@ -44,6 +47,8 @@ Public Class ucrLayerParamsControls
                 ucrReceiverMetadataProperty.SetValue(clsGeomFunction.GetParameter(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName).strArgumentValue)
                 chkParamName.Checked = True
             End If
+            'If the parameter is checked, the value it takes should be visible.
+            ucrReceiverMPVisible()
             ucrReceiverMetadataProperty.ctrActive.Visible = chkParamName.Checked
         Else
             chkParamName.Visible = False
@@ -51,8 +56,11 @@ Public Class ucrLayerParamsControls
 
     End Sub
 
-    Private Sub chkParamName_CheckedChanged(sender As Object, e As EventArgs) Handles chkParamName.CheckedChanged
+    Private Sub ucrReceiverMPVisible()
         ucrReceiverMetadataProperty.Visible = chkParamName.Checked
+    End Sub
+    Private Sub chkParamName_CheckedChanged(sender As Object, e As EventArgs) Handles chkParamName.CheckedChanged
+        ucrReceiverMPVisible()
         ucrReceiverMetadataProperty.ctrActive.Visible = True
         RaiseEvent RParameterChanged(Me)
     End Sub

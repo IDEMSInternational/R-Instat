@@ -36,7 +36,7 @@ Partial Class dlgOneVariableGraph
         'ucrSelectorOneVarGraph
         '
         Me.ucrSelectorOneVarGraph.bShowHiddenColumns = False
-        Me.ucrSelectorOneVarGraph.bUseCurrentFilter = False
+        Me.ucrSelectorOneVarGraph.bUseCurrentFilter = True
         Me.ucrSelectorOneVarGraph.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarGraph.Name = "ucrSelectorOneVarGraph"
@@ -45,17 +45,17 @@ Partial Class dlgOneVariableGraph
         '
         'ucrReceiverOneVarGraph
         '
-        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(237, 34)
+        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(237, 55)
         Me.ucrReceiverOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
         Me.ucrReceiverOneVarGraph.Selector = Nothing
-        Me.ucrReceiverOneVarGraph.Size = New System.Drawing.Size(123, 131)
+        Me.ucrReceiverOneVarGraph.Size = New System.Drawing.Size(123, 110)
         Me.ucrReceiverOneVarGraph.TabIndex = 1
         '
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(234, 20)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(238, 40)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
         Me.lblSelectedVariables.TabIndex = 2
@@ -63,7 +63,7 @@ Partial Class dlgOneVariableGraph
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 262)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 270)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
@@ -79,7 +79,7 @@ Partial Class dlgOneVariableGraph
         '
         'ucrOneVarGraphSave
         '
-        Me.ucrOneVarGraphSave.Location = New System.Drawing.Point(10, 233)
+        Me.ucrOneVarGraphSave.Location = New System.Drawing.Point(10, 244)
         Me.ucrOneVarGraphSave.Name = "ucrOneVarGraphSave"
         Me.ucrOneVarGraphSave.Size = New System.Drawing.Size(265, 20)
         Me.ucrOneVarGraphSave.TabIndex = 7
@@ -121,7 +121,7 @@ Partial Class dlgOneVariableGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 316)
+        Me.ClientSize = New System.Drawing.Size(418, 333)
         Me.Controls.Add(Me.rdoFacets)
         Me.Controls.Add(Me.rdoSingleGraphs)
         Me.Controls.Add(Me.rdoCombineGraph)

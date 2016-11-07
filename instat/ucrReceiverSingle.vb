@@ -46,6 +46,16 @@ Public Class ucrReceiverSingle
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
 
+        'Would prefer to have remove selected but that will first clear the receiver
+        'This has issues when reading RSyntax and filling receivers e.g. in Specific plot dialogs
+        'Because it modifies the list of parameters it is looping through when clearing first, crashing
+        'Below is the part from RemoveSelected() that is needed
+        'This is only an issue with single receiver
+        'If RemoveSelected() later contains other things, this may need to be updated.
+        'RemoveSelected()
+        If Selector IsNot Nothing Then
+            Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+        End If
         MyBase.Add(strItem, strDataFrame)
 
         If bTypeSet Then
@@ -203,11 +213,8 @@ Public Class ucrReceiverSingle
         End If
     End Sub
 
-    Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
-        RemoveSelected()
-    End Sub
-
     Public Sub SetStackedFactorMode(bDisableReceiver As Boolean)
+        'This sub is called by ucrVariableAsFactors on dialogs such as BoxPLot, where the ReiceiverSingle, used as factor receiver for the x aesthetics, need to take as fixed value the variable "variable" created to distinguish the variables from the multiple receiver that will have been stacked into one variable called "value".
         If bDisableReceiver Then
             Add("variable", "")
             Me.Enabled = False
@@ -220,5 +227,13 @@ Public Class ucrReceiverSingle
 
     Private Sub ucrReceiverSingle_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
         RaiseEvent WithMeSelectionChanged(Me)
+    End Sub
+
+    Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
+        txtReceiverSingle.Copy()
+    End Sub
+
+    Private Sub mnuRightClickRemove_Click(sender As Object, e As EventArgs) Handles mnuRightClickRemove.Click
+        RemoveSelected()
     End Sub
 End Class

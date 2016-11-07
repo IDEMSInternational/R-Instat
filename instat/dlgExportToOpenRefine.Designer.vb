@@ -22,61 +22,71 @@ Partial Class dlgExportToOpenRefine
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrInputDatasetName = New instat.ucrInputTextBox()
-        Me.ucrOpenRefineDataFrame = New instat.ucrDataFrame()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblNameDataSet = New System.Windows.Forms.Label()
         Me.chkRefineBrowser = New System.Windows.Forms.CheckBox()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputDatasetName = New instat.ucrInputTextBox()
+        Me.ucrOpenRefineDataFrame = New instat.ucrDataFrame()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.SuspendLayout()
-        '
-        'ucrInputDatasetName
-        '
-        Me.ucrInputDatasetName.IsReadOnly = False
-        Me.ucrInputDatasetName.Location = New System.Drawing.Point(29, 89)
-        Me.ucrInputDatasetName.Name = "ucrInputDatasetName"
-        Me.ucrInputDatasetName.Size = New System.Drawing.Size(149, 21)
-        Me.ucrInputDatasetName.TabIndex = 5
-        '
-        'ucrOpenRefineDataFrame
-        '
-        Me.ucrOpenRefineDataFrame.bUseCurrentFilter = False
-        Me.ucrOpenRefineDataFrame.Location = New System.Drawing.Point(9, 9)
-        Me.ucrOpenRefineDataFrame.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrOpenRefineDataFrame.Name = "ucrOpenRefineDataFrame"
-        Me.ucrOpenRefineDataFrame.Size = New System.Drawing.Size(160, 40)
-        Me.ucrOpenRefineDataFrame.TabIndex = 0
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 134)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(407, 52)
-        Me.ucrBase.TabIndex = 7
         '
         'lblNameDataSet
         '
         Me.lblNameDataSet.AutoSize = True
-        Me.lblNameDataSet.Location = New System.Drawing.Point(31, 73)
+        Me.lblNameDataSet.Location = New System.Drawing.Point(218, 14)
         Me.lblNameDataSet.Name = "lblNameDataSet"
-        Me.lblNameDataSet.Size = New System.Drawing.Size(75, 13)
+        Me.lblNameDataSet.Size = New System.Drawing.Size(78, 13)
         Me.lblNameDataSet.TabIndex = 8
-        Me.lblNameDataSet.Text = "Dataset Name"
+        Me.lblNameDataSet.Text = "Dataset Name:"
         '
         'chkRefineBrowser
         '
         Me.chkRefineBrowser.AutoSize = True
-        Me.chkRefineBrowser.Location = New System.Drawing.Point(242, 27)
+        Me.chkRefineBrowser.Location = New System.Drawing.Point(10, 76)
         Me.chkRefineBrowser.Name = "chkRefineBrowser"
         Me.chkRefineBrowser.Size = New System.Drawing.Size(93, 17)
         Me.chkRefineBrowser.TabIndex = 9
         Me.chkRefineBrowser.Text = "Open Browser"
         Me.chkRefineBrowser.UseVisualStyleBackColor = True
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 99)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(407, 52)
+        Me.ucrBase.TabIndex = 7
+        '
+        'ucrInputDatasetName
+        '
+        Me.ucrInputDatasetName.IsReadOnly = False
+        Me.ucrInputDatasetName.Location = New System.Drawing.Point(217, 29)
+        Me.ucrInputDatasetName.Name = "ucrInputDatasetName"
+        Me.ucrInputDatasetName.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputDatasetName.TabIndex = 5
+        '
+        'ucrOpenRefineDataFrame
+        '
+        Me.ucrOpenRefineDataFrame.bUseCurrentFilter = True
+        Me.ucrOpenRefineDataFrame.Location = New System.Drawing.Point(10, 10)
+        Me.ucrOpenRefineDataFrame.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrOpenRefineDataFrame.Name = "ucrOpenRefineDataFrame"
+        Me.ucrOpenRefineDataFrame.Size = New System.Drawing.Size(160, 40)
+        Me.ucrOpenRefineDataFrame.TabIndex = 0
+        '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(91, 46)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 10
+        '
         'dlgExportToOpenRefine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 198)
+        Me.ClientSize = New System.Drawing.Size(425, 162)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.chkRefineBrowser)
         Me.Controls.Add(Me.lblNameDataSet)
         Me.Controls.Add(Me.ucrBase)
@@ -98,4 +108,5 @@ Partial Class dlgExportToOpenRefine
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblNameDataSet As Label
     Friend WithEvents chkRefineBrowser As CheckBox
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class

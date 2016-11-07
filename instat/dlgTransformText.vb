@@ -71,6 +71,7 @@ Public Class dlgTransformText
         rdoConvertCase.Checked = True
         ucrSelectorForTransformText.Reset()
         ucrSelectorForTransformText.Focus()
+        ucrReceiverTransformText.Focus()
         ucrInputPrefixForNewColumn.ResetText()
         ucrInputSeparator.ResetText()
         ucrInputPad.ResetText()
@@ -90,6 +91,10 @@ Public Class dlgTransformText
         If (ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
             ucrInputPrefixForNewColumn.SetName(ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Transformed")
         End If
+        nudFirstWord.Value = 1
+        nudLastWord.Value = 1
+        chkFirstWord.Checked = False
+        chkLastWord.Checked = False
     End Sub
 
     Private Sub TestOkEnabled()
