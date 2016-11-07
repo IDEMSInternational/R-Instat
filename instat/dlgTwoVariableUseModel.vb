@@ -37,6 +37,7 @@ Public Class dlgTwoVariableUseModel
         ucrReceiverUseModel.SetMeAsReceiver()
         ucrSelectorUseModel.Reset()
         ucrModel.SetName("")
+        cmdPredict.Enabled = False
         TestOkEnabled()
     End Sub
 
