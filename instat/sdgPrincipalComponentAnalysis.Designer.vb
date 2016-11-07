@@ -76,11 +76,11 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoPointBip = New System.Windows.Forms.RadioButton()
         Me.lblBipInd = New System.Windows.Forms.Label()
         Me.tbBarPlot = New System.Windows.Forms.TabPage()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -690,10 +690,19 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbBarPlot.Text = "Bar Plot"
         Me.tbBarPlot.UseVisualStyleBackColor = True
         '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 44)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.TabIndex = 5
+        '
         'ucrSelectorFactor
         '
         Me.ucrSelectorFactor.bShowHiddenColumns = False
-        Me.ucrSelectorFactor.bUseCurrentFilter = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = True
         Me.ucrSelectorFactor.Location = New System.Drawing.Point(12, 8)
         Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
@@ -728,15 +737,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
         '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 44)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFactor.TabIndex = 5
-        '
         'sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -748,6 +748,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgPrincipalComponentAnalysis"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "PCA_Options"
         Me.Text = "PCA Options"
         Me.tbRegOptions.ResumeLayout(False)

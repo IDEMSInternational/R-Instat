@@ -53,7 +53,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrBase.OKEnabled(False)
     End Sub
 
     Private Sub ReopenDialog()

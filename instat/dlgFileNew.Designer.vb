@@ -99,7 +99,7 @@ Partial Class dlgFileNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 165)
+        Me.ClientSize = New System.Drawing.Size(418, 162)
         Me.Controls.Add(Me.nudColumns)
         Me.Controls.Add(Me.nudRows)
         Me.Controls.Add(Me.ucrName)
@@ -108,6 +108,8 @@ Partial Class dlgFileNew
         Me.Controls.Add(Me.lblRows)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgFileNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "New file"

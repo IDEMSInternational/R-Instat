@@ -33,6 +33,7 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 51
         clsCourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         clsCourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
         ucrReceiverType2.Selector = ucrSelectorColumnStructure
