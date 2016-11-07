@@ -22,15 +22,16 @@ Public Class ucrInputComboBox
         Dim strCurrent As String
 
         strCurrent = cboInput.Text
-        If bSuggestEditOnLeave Then
+        If bAutoChangeOnLeave Then
             If Not IsValid(strCurrent) Then
                 'TODO This message should contain the same message from ValidateText()
-                Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & vbNewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
-                    Case MsgBoxResult.Yes
-                        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
-                    Case Else
-                        e.Cancel = True
-                End Select
+                'Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & vbNewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
+                '    Case MsgBoxResult.Yes
+                '        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
+                '    Case Else
+                '        e.Cancel = True
+                'End Select
+                SetName(frmMain.clsRLink.MakeValidText(strCurrent))
             End If
         Else
             e.Cancel = Not ValidateText(strCurrent)

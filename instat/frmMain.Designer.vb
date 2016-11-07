@@ -370,6 +370,12 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpHistoryAndFAQ = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpGettingStarted = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpMenusAndDialogues = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpRPackagesAndCommands = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpDataSets = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -643,6 +649,7 @@ Partial Class frmMain
         '
         'mnuDescribeThemes
         '
+        Me.mnuDescribeThemes.Enabled = False
         Me.mnuDescribeThemes.Name = "mnuDescribeThemes"
         Me.mnuDescribeThemes.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeThemes.Text = "Themes..."
@@ -1222,8 +1229,9 @@ Partial Class frmMain
         '
         'mnuHelpHelp
         '
+        Me.mnuHelpHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpIntroduction, Me.mnuHelpHistoryAndFAQ, Me.mnuHelpGettingStarted, Me.mnuHelpMenusAndDialogues, Me.mnuHelpRPackagesAndCommands, Me.mnuHelpDataSets})
         Me.mnuHelpHelp.Name = "mnuHelpHelp"
-        Me.mnuHelpHelp.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpHelp.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpHelp.Tag = "Help"
         Me.mnuHelpHelp.Text = "Help"
         '
@@ -1231,7 +1239,7 @@ Partial Class frmMain
         '
         Me.mnuHelpLicence.Enabled = False
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
         Me.mnuHelpLicence.Text = "Licence..."
         '
@@ -1239,7 +1247,7 @@ Partial Class frmMain
         '
         Me.mnuHelpAboutRInstat.Enabled = False
         Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
         Me.mnuHelpAboutRInstat.Text = "About R-Instat"
         '
@@ -1286,6 +1294,7 @@ Partial Class frmMain
         '
         'mnuClimaticOrganiseEventsStartoftheRains
         '
+        Me.mnuClimaticOrganiseEventsStartoftheRains.Enabled = False
         Me.mnuClimaticOrganiseEventsStartoftheRains.Name = "mnuClimaticOrganiseEventsStartoftheRains"
         Me.mnuClimaticOrganiseEventsStartoftheRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticOrganiseEventsStartoftheRains.Text = "Start of the Rains..."
@@ -1298,24 +1307,28 @@ Partial Class frmMain
         '
         'mnuClimaticOrganiseEventsSpells
         '
+        Me.mnuClimaticOrganiseEventsSpells.Enabled = False
         Me.mnuClimaticOrganiseEventsSpells.Name = "mnuClimaticOrganiseEventsSpells"
         Me.mnuClimaticOrganiseEventsSpells.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticOrganiseEventsSpells.Text = "Spells..."
         '
         'mnuClimaticOrganiseEventsWaterBalance
         '
+        Me.mnuClimaticOrganiseEventsWaterBalance.Enabled = False
         Me.mnuClimaticOrganiseEventsWaterBalance.Name = "mnuClimaticOrganiseEventsWaterBalance"
         Me.mnuClimaticOrganiseEventsWaterBalance.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticOrganiseEventsWaterBalance.Text = "Water Balance..."
         '
         'mnuClimaticOrganiseEventsEndoftheRains
         '
+        Me.mnuClimaticOrganiseEventsEndoftheRains.Enabled = False
         Me.mnuClimaticOrganiseEventsEndoftheRains.Name = "mnuClimaticOrganiseEventsEndoftheRains"
         Me.mnuClimaticOrganiseEventsEndoftheRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticOrganiseEventsEndoftheRains.Text = "End of the Rains..."
         '
         'mnuClimaticOrganiseSummary
         '
+        Me.mnuClimaticOrganiseSummary.Enabled = False
         Me.mnuClimaticOrganiseSummary.Name = "mnuClimaticOrganiseSummary"
         Me.mnuClimaticOrganiseSummary.Size = New System.Drawing.Size(181, 22)
         Me.mnuClimaticOrganiseSummary.Text = "Summary..."
@@ -1404,6 +1417,7 @@ Partial Class frmMain
         '
         'mnuClimaticModel
         '
+        Me.mnuClimaticModel.Enabled = False
         Me.mnuClimaticModel.Name = "mnuClimaticModel"
         Me.mnuClimaticModel.Size = New System.Drawing.Size(171, 22)
         Me.mnuClimaticModel.Text = "Model"
@@ -1809,6 +1823,7 @@ Partial Class frmMain
         '
         'mnuEditFind
         '
+        Me.mnuEditFind.Enabled = False
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
         Me.mnuEditFind.Size = New System.Drawing.Size(183, 22)
@@ -1817,6 +1832,7 @@ Partial Class frmMain
         '
         'mnuEditFindNext
         '
+        Me.mnuEditFindNext.Enabled = False
         Me.mnuEditFindNext.Name = "mnuEditFindNext"
         Me.mnuEditFindNext.Size = New System.Drawing.Size(183, 22)
         Me.mnuEditFindNext.Text = "Find Next"
@@ -2862,6 +2878,42 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
+        'mnuHelpIntroduction
+        '
+        Me.mnuHelpIntroduction.Name = "mnuHelpIntroduction"
+        Me.mnuHelpIntroduction.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpIntroduction.Text = "Introduction"
+        '
+        'mnuHelpHistoryAndFAQ
+        '
+        Me.mnuHelpHistoryAndFAQ.Name = "mnuHelpHistoryAndFAQ"
+        Me.mnuHelpHistoryAndFAQ.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpHistoryAndFAQ.Text = "History and FAQ "
+        '
+        'mnuHelpGettingStarted
+        '
+        Me.mnuHelpGettingStarted.Name = "mnuHelpGettingStarted"
+        Me.mnuHelpGettingStarted.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpGettingStarted.Text = "Getting Started"
+        '
+        'mnuHelpMenusAndDialogues
+        '
+        Me.mnuHelpMenusAndDialogues.Name = "mnuHelpMenusAndDialogues"
+        Me.mnuHelpMenusAndDialogues.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpMenusAndDialogues.Text = "Menus and Dialogues "
+        '
+        'mnuHelpRPackagesAndCommands
+        '
+        Me.mnuHelpRPackagesAndCommands.Name = "mnuHelpRPackagesAndCommands"
+        Me.mnuHelpRPackagesAndCommands.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpRPackagesAndCommands.Text = "R packages and Commands"
+        '
+        'mnuHelpDataSets
+        '
+        Me.mnuHelpDataSets.Name = "mnuHelpDataSets"
+        Me.mnuHelpDataSets.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpDataSets.Text = "Data Sets"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3233,4 +3285,10 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseCheckDataImportOpenRefine As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
+    Friend WithEvents mnuHelpIntroduction As ToolStripMenuItem
+    Friend WithEvents mnuHelpHistoryAndFAQ As ToolStripMenuItem
+    Friend WithEvents mnuHelpGettingStarted As ToolStripMenuItem
+    Friend WithEvents mnuHelpMenusAndDialogues As ToolStripMenuItem
+    Friend WithEvents mnuHelpRPackagesAndCommands As ToolStripMenuItem
+    Friend WithEvents mnuHelpDataSets As ToolStripMenuItem
 End Class
