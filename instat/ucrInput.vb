@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrInput
-    Protected bUserTyped As Boolean = False
+    Public bUserTyped As Boolean = False
     Public Event NameChanged()
     Public Event ContentsChanged()
     Protected strValidationType As String = "None"
