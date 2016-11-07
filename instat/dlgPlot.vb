@@ -84,7 +84,7 @@ Public Class dlgPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        'Both x and y aesthetics are mandatory for geom_line.
+        'Both x and y aesthetics are mandatory for geom_line. However, when not filled they will be automatically populated by "".
         If (ucrReceiverX.IsEmpty() OrElse ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
