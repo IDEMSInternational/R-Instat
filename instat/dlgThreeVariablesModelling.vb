@@ -95,6 +95,9 @@ Public Class dlgThreeVariableModelling
         ResponseConvert()
         ModelOperator()
         TestOKEnabled()
+        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
+        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
     End Sub
 
     Public Sub TestOKEnabled()

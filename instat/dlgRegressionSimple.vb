@@ -85,6 +85,9 @@ Public Class dlgRegressionSimple
         SetRCode()
         TestOKEnabled()
         DistributionsOffered()
+        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
+        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
     End Sub
 
     Private Sub LM()
