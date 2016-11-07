@@ -37,7 +37,7 @@ Public Class dlgThreeVariableModelling
     Private Sub InitialiseDialog()
         ucrBaseThreeVariableModelling.clsRsyntax.iCallType = 2
         ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("")
-        ucrBaseThreeVariableModelling.iHelpTopicID = 176
+        ucrBaseThreeVariableModelling.iHelpTopicID = 369
         clsModel.SetOperation("~")
         clsModel.SetParameter(False, clsOp:=clsModel1)
         clsModel1.bBrackets = False

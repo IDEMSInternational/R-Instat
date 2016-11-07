@@ -51,8 +51,10 @@ Public Class dlgRecodeNumeric
         rdoRight.Checked = True
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
-        ucrMultipleNumericRecode.ResetText()
-        ucrMultipleLabels.ResetText()
+        ucrMultipleNumericRecode.Reset()
+        ucrMultipleNumericRecode.SetName("")
+        ucrMultipleLabels.Reset()
+        ucrMultipleLabels.SetName("")
         TestOKEnabled()
     End Sub
 
