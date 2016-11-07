@@ -35,6 +35,7 @@ Partial Class dlgBarAndPieChart
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.grpSelection = New System.Windows.Forms.GroupBox()
+        Me.chkFlipCoordinates = New System.Windows.Forms.CheckBox()
         Me.grpSelection.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -164,11 +165,23 @@ Partial Class dlgBarAndPieChart
         Me.grpSelection.TabIndex = 0
         Me.grpSelection.TabStop = False
         '
+        'chkFlipCoordinates
+        '
+        Me.chkFlipCoordinates.AutoSize = True
+        Me.chkFlipCoordinates.Location = New System.Drawing.Point(258, 249)
+        Me.chkFlipCoordinates.Name = "chkFlipCoordinates"
+        Me.chkFlipCoordinates.Size = New System.Drawing.Size(100, 17)
+        Me.chkFlipCoordinates.TabIndex = 10
+        Me.chkFlipCoordinates.Tag = "Horizontal_Boxplot"
+        Me.chkFlipCoordinates.Text = "Flip coordinates"
+        Me.chkFlipCoordinates.UseVisualStyleBackColor = True
+        '
         'dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 379)
+        Me.Controls.Add(Me.chkFlipCoordinates)
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.grpSelection)
         Me.Controls.Add(Me.cmdOptions)
@@ -207,4 +220,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents rdoBarChart As RadioButton
     Friend WithEvents grpSelection As GroupBox
+    Friend WithEvents chkFlipCoordinates As CheckBox
 End Class
