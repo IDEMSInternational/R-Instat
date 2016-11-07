@@ -53,6 +53,7 @@ Public Class dlgContrasts
         ucrInputContrast.SetName("Treatment/Control")
         ucrSelectorForContrast.Reset()
         ucrInputContrast.Reset()
+        chkOverwriteExistContrast.Checked = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

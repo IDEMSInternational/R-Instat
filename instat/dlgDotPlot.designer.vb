@@ -36,7 +36,7 @@ Partial Class dlgDotPlot
         '
         'cmdDotPlotOptions
         '
-        Me.cmdDotPlotOptions.Location = New System.Drawing.Point(10, 204)
+        Me.cmdDotPlotOptions.Location = New System.Drawing.Point(10, 200)
         Me.cmdDotPlotOptions.Name = "cmdDotPlotOptions"
         Me.cmdDotPlotOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdDotPlotOptions.TabIndex = 7
@@ -46,7 +46,7 @@ Partial Class dlgDotPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 239)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 231)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 8
@@ -61,18 +61,18 @@ Partial Class dlgDotPlot
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(88, 13)
         Me.lblFactor.TabIndex = 3
-        Me.lblFactor.Tag = "Factor_Optional"
-        Me.lblFactor.Text = "Factor  (Optional)"
+        Me.lblFactor.Tag = "Factor_Optional:"
+        Me.lblFactor.Text = "Factor (Optional):"
         '
         'lblSecondFactor
         '
         Me.lblSecondFactor.AutoSize = True
-        Me.lblSecondFactor.Location = New System.Drawing.Point(255, 212)
+        Me.lblSecondFactor.Location = New System.Drawing.Point(254, 212)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(128, 13)
         Me.lblSecondFactor.TabIndex = 5
-        Me.lblSecondFactor.Tag = "Second_Factor_Optional"
-        Me.lblSecondFactor.Text = "Second Factor  (Optional)"
+        Me.lblSecondFactor.Tag = "Second_Factor_Optional:"
+        Me.lblSecondFactor.Text = "Second Factor (Optional):"
         '
         'ucrVariablesAsFactorDotPlot
         '
@@ -84,7 +84,7 @@ Partial Class dlgDotPlot
         '
         'ucrSaveDotPlot
         '
-        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(10, 275)
+        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(10, 266)
         Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
         Me.ucrSaveDotPlot.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveDotPlot.TabIndex = 10
@@ -92,6 +92,7 @@ Partial Class dlgDotPlot
         'ucrDotPlotSelector
         '
         Me.ucrDotPlotSelector.bShowHiddenColumns = False
+        Me.ucrDotPlotSelector.bUseCurrentFilter = True
         Me.ucrDotPlotSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrDotPlotSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDotPlotSelector.Name = "ucrDotPlotSelector"
@@ -118,7 +119,7 @@ Partial Class dlgDotPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 306)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 292)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -127,7 +128,7 @@ Partial Class dlgDotPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 360)
+        Me.ClientSize = New System.Drawing.Size(421, 350)
         Me.Controls.Add(Me.ucrVariablesAsFactorDotPlot)
         Me.Controls.Add(Me.ucrSaveDotPlot)
         Me.Controls.Add(Me.cmdOptions)
@@ -138,7 +139,7 @@ Partial Class dlgDotPlot
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDotPlot"
