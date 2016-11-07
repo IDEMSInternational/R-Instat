@@ -51,6 +51,7 @@ Partial Class sdgCreateFilter
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgCreateFilter"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Define New Filter"
         Me.TopMost = True
         Me.ResumeLayout(False)

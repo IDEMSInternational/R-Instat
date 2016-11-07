@@ -45,7 +45,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificBarChart = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificBarChartFromSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralTabulation = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralGraphics = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
@@ -529,19 +529,18 @@ Partial Class frmMain
         '
         'mnuDescribeGeneral
         '
-        Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics})
+        Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics})
         Me.mnuDescribeGeneral.Name = "mnuDescribeGeneral"
         Me.mnuDescribeGeneral.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeGeneral.Tag = "General"
         Me.mnuDescribeGeneral.Text = "General"
         '
-        'DescribeGeneralColumnSummaries
+        'mnuDescribeGeneralColumnSummaries
         '
-        Me.DescribeGeneralColumnSummaries.Enabled = False
-        Me.DescribeGeneralColumnSummaries.Name = "DescribeGeneralColumnSummaries"
-        Me.DescribeGeneralColumnSummaries.Size = New System.Drawing.Size(188, 22)
-        Me.DescribeGeneralColumnSummaries.Tag = "Column_Summaries..."
-        Me.DescribeGeneralColumnSummaries.Text = "Column Summaries..."
+        Me.mnuDescribeGeneralColumnSummaries.Name = "mnuDescribeGeneralColumnSummaries"
+        Me.mnuDescribeGeneralColumnSummaries.Size = New System.Drawing.Size(188, 22)
+        Me.mnuDescribeGeneralColumnSummaries.Tag = "Column_Summaries..."
+        Me.mnuDescribeGeneralColumnSummaries.Text = "Column Summaries..."
         '
         'DescribeGeneralTabulation
         '
@@ -2284,7 +2283,6 @@ Partial Class frmMain
         '
         'mnuOrganiseCheckDataExportOpenRefine
         '
-        Me.mnuOrganiseCheckDataExportOpenRefine.Enabled = False
         Me.mnuOrganiseCheckDataExportOpenRefine.Name = "mnuOrganiseCheckDataExportOpenRefine"
         Me.mnuOrganiseCheckDataExportOpenRefine.Size = New System.Drawing.Size(245, 22)
         Me.mnuOrganiseCheckDataExportOpenRefine.Text = "Export To OpenRefine..."
@@ -2578,7 +2576,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnUseDate
         '
-        Me.mnuOrganiseColumnUseDate.Enabled = False
         Me.mnuOrganiseColumnUseDate.Name = "mnuOrganiseColumnUseDate"
         Me.mnuOrganiseColumnUseDate.Size = New System.Drawing.Size(162, 22)
         Me.mnuOrganiseColumnUseDate.Text = "Use Date..."
@@ -2774,28 +2771,28 @@ Partial Class frmMain
         'mnuOrganiseRObjectsView
         '
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
         'mnuOrganiseRObjectsRename
         '
         Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
-        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
         Me.mnuOrganiseRObjectsRename.Text = "Rename..."
         '
         'mnuOrganiseRObjectsReorder
         '
         Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
-        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
         Me.mnuOrganiseRObjectsReorder.Text = "Reorder..."
         '
         'mnuOrganiseRObjectsDelete
         '
         Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
-        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '
@@ -3065,7 +3062,7 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeTwoVariablesTabulate As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesGraph As ToolStripMenuItem
     Friend WithEvents mnuDescribeGeneral As ToolStripMenuItem
-    Friend WithEvents DescribeGeneralColumnSummaries As ToolStripMenuItem
+    Friend WithEvents mnuDescribeGeneralColumnSummaries As ToolStripMenuItem
     Friend WithEvents DescribeGeneralTabulation As ToolStripMenuItem
     Friend WithEvents DescribeGeneralGraphics As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecific As ToolStripMenuItem

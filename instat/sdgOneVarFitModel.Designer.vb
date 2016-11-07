@@ -208,6 +208,7 @@ Partial Class sdgOneVarFitModel
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarFitModel"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Fitting Options"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)

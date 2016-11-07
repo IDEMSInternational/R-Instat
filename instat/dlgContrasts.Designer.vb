@@ -33,7 +33,7 @@ Partial Class dlgContrasts
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 196)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 200)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 0
@@ -41,7 +41,7 @@ Partial Class dlgContrasts
         'ucrSelectorForContrast
         '
         Me.ucrSelectorForContrast.bShowHiddenColumns = False
-        Me.ucrSelectorForContrast.bUseCurrentFilter = False
+        Me.ucrSelectorForContrast.bUseCurrentFilter = True
         Me.ucrSelectorForContrast.Location = New System.Drawing.Point(13, 13)
         Me.ucrSelectorForContrast.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForContrast.Name = "ucrSelectorForContrast"
@@ -50,7 +50,7 @@ Partial Class dlgContrasts
         '
         'ucrReceiverForContrasts
         '
-        Me.ucrReceiverForContrasts.Location = New System.Drawing.Point(239, 26)
+        Me.ucrReceiverForContrasts.Location = New System.Drawing.Point(244, 48)
         Me.ucrReceiverForContrasts.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForContrasts.Name = "ucrReceiverForContrasts"
         Me.ucrReceiverForContrasts.Selector = Nothing
@@ -60,44 +60,44 @@ Partial Class dlgContrasts
         'lblFactorReceiver
         '
         Me.lblFactorReceiver.AutoSize = True
-        Me.lblFactorReceiver.Location = New System.Drawing.Point(236, 9)
+        Me.lblFactorReceiver.Location = New System.Drawing.Point(243, 33)
         Me.lblFactorReceiver.Name = "lblFactorReceiver"
-        Me.lblFactorReceiver.Size = New System.Drawing.Size(90, 13)
+        Me.lblFactorReceiver.Size = New System.Drawing.Size(93, 13)
         Me.lblFactorReceiver.TabIndex = 3
-        Me.lblFactorReceiver.Text = "Selected Variable"
+        Me.lblFactorReceiver.Text = "Selected Variable:"
         '
         'chkOverwriteExistContrast
         '
         Me.chkOverwriteExistContrast.AutoSize = True
-        Me.chkOverwriteExistContrast.Location = New System.Drawing.Point(242, 153)
+        Me.chkOverwriteExistContrast.Location = New System.Drawing.Point(244, 131)
         Me.chkOverwriteExistContrast.Name = "chkOverwriteExistContrast"
-        Me.chkOverwriteExistContrast.Size = New System.Drawing.Size(192, 17)
+        Me.chkOverwriteExistContrast.Size = New System.Drawing.Size(195, 17)
         Me.chkOverwriteExistContrast.TabIndex = 11
-        Me.chkOverwriteExistContrast.Text = "Overwrite existing contrast columns"
+        Me.chkOverwriteExistContrast.Text = "Overwrite Existing Contrast Columns"
         Me.chkOverwriteExistContrast.UseVisualStyleBackColor = True
         '
         'ucrInputContrast
         '
         Me.ucrInputContrast.IsReadOnly = False
-        Me.ucrInputContrast.Location = New System.Drawing.Point(241, 71)
+        Me.ucrInputContrast.Location = New System.Drawing.Point(244, 93)
         Me.ucrInputContrast.Name = "ucrInputContrast"
-        Me.ucrInputContrast.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputContrast.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputContrast.TabIndex = 13
         '
         'lblSelectContrast
         '
         Me.lblSelectContrast.AutoSize = True
-        Me.lblSelectContrast.Location = New System.Drawing.Point(239, 54)
+        Me.lblSelectContrast.Location = New System.Drawing.Point(244, 78)
         Me.lblSelectContrast.Name = "lblSelectContrast"
-        Me.lblSelectContrast.Size = New System.Drawing.Size(79, 13)
+        Me.lblSelectContrast.Size = New System.Drawing.Size(82, 13)
         Me.lblSelectContrast.TabIndex = 14
-        Me.lblSelectContrast.Text = "Select Contrast"
+        Me.lblSelectContrast.Text = "Select Contrast:"
         '
         'dlgContrasts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 256)
+        Me.ClientSize = New System.Drawing.Size(444, 255)
         Me.Controls.Add(Me.lblSelectContrast)
         Me.Controls.Add(Me.ucrInputContrast)
         Me.Controls.Add(Me.chkOverwriteExistContrast)

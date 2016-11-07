@@ -30,6 +30,7 @@ Public Class dlgFactorDataFrame
 
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 162
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
         ucrReceiverFactorDataFrame.Selector = ucrSelectorFactorDataFrame
         ucrReceiverFactorDataFrame.SetMeAsReceiver()

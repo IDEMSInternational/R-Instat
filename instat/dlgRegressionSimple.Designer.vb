@@ -42,6 +42,22 @@ Partial Class dlgRegressionSimple
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
+        Me.chkPaired = New System.Windows.Forms.CheckBox()
+        Me.rdoGeneral = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecific = New System.Windows.Forms.RadioButton()
+        Me.lblNumeric = New System.Windows.Forms.Label()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.nudCI = New System.Windows.Forms.NumericUpDown()
+        Me.nudHypothesis = New System.Windows.Forms.NumericUpDown()
+        Me.lblCI = New System.Windows.Forms.Label()
+        Me.lblHyp1 = New System.Windows.Forms.Label()
+        Me.lblProbability2 = New System.Windows.Forms.Label()
+        Me.nudHyp2 = New System.Windows.Forms.NumericUpDown()
+        Me.grpParameters = New System.Windows.Forms.GroupBox()
+        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudHyp2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -126,7 +142,7 @@ Partial Class dlgRegressionSimple
         'ucrSelectorSimpleReg
         '
         Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
-        Me.ucrSelectorSimpleReg.bUseCurrentFilter = False
+        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
         Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         '
@@ -158,10 +174,88 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrModelPreview, "ucrModelPreview")
         Me.ucrModelPreview.Name = "ucrModelPreview"
         '
+        'chkPaired
+        '
+        resources.ApplyResources(Me.chkPaired, "chkPaired")
+        Me.chkPaired.Name = "chkPaired"
+        Me.chkPaired.UseVisualStyleBackColor = True
+        '
+        'rdoGeneral
+        '
+        resources.ApplyResources(Me.rdoGeneral, "rdoGeneral")
+        Me.rdoGeneral.Name = "rdoGeneral"
+        Me.rdoGeneral.TabStop = True
+        Me.rdoGeneral.UseVisualStyleBackColor = True
+        '
+        'rdoSpecific
+        '
+        resources.ApplyResources(Me.rdoSpecific, "rdoSpecific")
+        Me.rdoSpecific.Name = "rdoSpecific"
+        Me.rdoSpecific.TabStop = True
+        Me.rdoSpecific.UseVisualStyleBackColor = True
+        '
+        'lblNumeric
+        '
+        resources.ApplyResources(Me.lblNumeric, "lblNumeric")
+        Me.lblNumeric.Name = "lblNumeric"
+        '
+        'lblFactor
+        '
+        resources.ApplyResources(Me.lblFactor, "lblFactor")
+        Me.lblFactor.Name = "lblFactor"
+        '
+        'nudCI
+        '
+        resources.ApplyResources(Me.nudCI, "nudCI")
+        Me.nudCI.Name = "nudCI"
+        '
+        'nudHypothesis
+        '
+        resources.ApplyResources(Me.nudHypothesis, "nudHypothesis")
+        Me.nudHypothesis.Name = "nudHypothesis"
+        '
+        'lblCI
+        '
+        resources.ApplyResources(Me.lblCI, "lblCI")
+        Me.lblCI.Name = "lblCI"
+        '
+        'lblHyp1
+        '
+        resources.ApplyResources(Me.lblHyp1, "lblHyp1")
+        Me.lblHyp1.Name = "lblHyp1"
+        '
+        'lblProbability2
+        '
+        resources.ApplyResources(Me.lblProbability2, "lblProbability2")
+        Me.lblProbability2.Name = "lblProbability2"
+        '
+        'nudHyp2
+        '
+        resources.ApplyResources(Me.nudHyp2, "nudHyp2")
+        Me.nudHyp2.Name = "nudHyp2"
+        '
+        'grpParameters
+        '
+        Me.grpParameters.Controls.Add(Me.lblCI)
+        Me.grpParameters.Controls.Add(Me.nudHyp2)
+        Me.grpParameters.Controls.Add(Me.nudCI)
+        Me.grpParameters.Controls.Add(Me.lblProbability2)
+        Me.grpParameters.Controls.Add(Me.nudHypothesis)
+        Me.grpParameters.Controls.Add(Me.chkPaired)
+        Me.grpParameters.Controls.Add(Me.lblHyp1)
+        resources.ApplyResources(Me.grpParameters, "grpParameters")
+        Me.grpParameters.Name = "grpParameters"
+        Me.grpParameters.TabStop = False
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpParameters)
+        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.lblNumeric)
+        Me.Controls.Add(Me.rdoSpecific)
+        Me.Controls.Add(Me.rdoGeneral)
         Me.Controls.Add(Me.ucrModelPreview)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
@@ -185,6 +279,11 @@ Partial Class dlgRegressionSimple
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Tag = "Simple_Regression"
+        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudHyp2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpParameters.ResumeLayout(False)
+        Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -209,4 +308,16 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
     Friend WithEvents ucrModelPreview As ucrInputTextBox
+    Friend WithEvents chkPaired As CheckBox
+    Friend WithEvents rdoGeneral As RadioButton
+    Friend WithEvents rdoSpecific As RadioButton
+    Friend WithEvents lblNumeric As Label
+    Friend WithEvents lblFactor As Label
+    Friend WithEvents nudCI As NumericUpDown
+    Friend WithEvents nudHypothesis As NumericUpDown
+    Friend WithEvents lblCI As Label
+    Friend WithEvents lblHyp1 As Label
+    Friend WithEvents lblProbability2 As Label
+    Friend WithEvents nudHyp2 As NumericUpDown
+    Friend WithEvents grpParameters As GroupBox
 End Class

@@ -199,16 +199,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 54</value>
+    <value>236, 62</value>
   </data>
   <data name="lblResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 13</value>
+    <value>99, 13</value>
   </data>
   <data name="lblResponse.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblResponse.Text" xml:space="preserve">
-    <value>Response Variable</value>
+    <value>Response Variable:</value>
   </data>
   <data name="&gt;&gt;lblResponse.Name" xml:space="preserve">
     <value>lblResponse</value>
@@ -220,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblResponse.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>18</value>
   </data>
   <data name="lblExplanatory.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -229,16 +229,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblExplanatory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 131</value>
+    <value>236, 139</value>
   </data>
   <data name="lblExplanatory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
+    <value>106, 13</value>
   </data>
   <data name="lblExplanatory.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="lblExplanatory.Text" xml:space="preserve">
-    <value>Explanatory Variable</value>
+    <value>Explanatory Variable:</value>
   </data>
   <data name="&gt;&gt;lblExplanatory.Name" xml:space="preserve">
     <value>lblExplanatory</value>
@@ -250,13 +250,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblExplanatory.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>17</value>
   </data>
   <data name="cmdDisplayOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 266</value>
+    <value>302, 294</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 23</value>
@@ -277,13 +277,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>16</value>
   </data>
   <data name="chkSaveModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="chkSaveModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 268</value>
+    <value>10, 296</value>
   </data>
   <data name="chkSaveModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 24</value>
@@ -304,13 +304,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkSaveModel.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>15</value>
   </data>
   <data name="cmdModelOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 207</value>
+    <value>302, 267</value>
   </data>
   <data name="cmdModelOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 23</value>
@@ -331,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdModelOptions.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>14</value>
   </data>
   <data name="chkFunction.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -340,7 +340,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 148</value>
+    <value>239, 180</value>
   </data>
   <data name="chkFunction.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 17</value>
@@ -361,7 +361,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkFunction.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>13</value>
   </data>
   <data name="chkConvertToVariate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkConvertToVariate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 71</value>
+    <value>239, 99</value>
   </data>
   <data name="chkConvertToVariate.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 17</value>
@@ -391,7 +391,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkConvertToVariate.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>9</value>
   </data>
   <data name="lblModelPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -400,7 +400,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 245</value>
+    <value>8, 271</value>
   </data>
   <data name="lblModelPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -421,10 +421,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblModelPreview.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>8</value>
   </data>
   <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 268</value>
+    <value>96, 296</value>
   </data>
   <data name="ucrModelName.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 21</value>
@@ -442,10 +442,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelName.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>10</value>
   </data>
   <data name="ucrSelectorSimpleReg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 9</value>
+    <value>10, 37</value>
   </data>
   <data name="ucrSelectorSimpleReg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -466,10 +466,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorSimpleReg.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>11</value>
   </data>
   <data name="ucrFamily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 198</value>
+    <value>9, 220</value>
   </data>
   <data name="ucrFamily.Size" type="System.Drawing.Size, System.Drawing">
     <value>233, 43</value>
@@ -487,10 +487,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFamily.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>12</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 295</value>
+    <value>10, 323</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 54</value>
@@ -508,10 +508,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>19</value>
   </data>
   <data name="ucrResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 68</value>
+    <value>239, 76</value>
   </data>
   <data name="ucrResponse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -532,10 +532,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrResponse.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="ucrExplanatory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 145</value>
+    <value>239, 153</value>
   </data>
   <data name="ucrExplanatory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -556,10 +556,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrExplanatory.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="ucrModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 241</value>
+    <value>96, 269</value>
   </data>
   <data name="ucrModelPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 21</value>
@@ -577,6 +577,312 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelPreview.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="chkPaired.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkPaired.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 68</value>
+  </data>
+  <data name="chkPaired.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 17</value>
+  </data>
+  <data name="chkPaired.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="chkPaired.Text" xml:space="preserve">
+    <value>Paired</value>
+  </data>
+  <data name="&gt;&gt;chkPaired.Name" xml:space="preserve">
+    <value>chkPaired</value>
+  </data>
+  <data name="&gt;&gt;chkPaired.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkPaired.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;chkPaired.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoGeneral.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoGeneral.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="rdoGeneral.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 17</value>
+  </data>
+  <data name="rdoGeneral.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="rdoGeneral.Text" xml:space="preserve">
+    <value>General Case</value>
+  </data>
+  <data name="&gt;&gt;rdoGeneral.Name" xml:space="preserve">
+    <value>rdoGeneral</value>
+  </data>
+  <data name="&gt;&gt;rdoGeneral.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoGeneral.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoGeneral.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoSpecific.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSpecific.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 17</value>
+  </data>
+  <data name="rdoSpecific.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 17</value>
+  </data>
+  <data name="rdoSpecific.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="rdoSpecific.Text" xml:space="preserve">
+    <value>Exact Solutions</value>
+  </data>
+  <data name="&gt;&gt;rdoSpecific.Name" xml:space="preserve">
+    <value>rdoSpecific</value>
+  </data>
+  <data name="&gt;&gt;rdoSpecific.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSpecific.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoSpecific.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblNumeric.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumeric.Location" type="System.Drawing.Point, System.Drawing">
+    <value>236, 62</value>
+  </data>
+  <data name="lblNumeric.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="lblNumeric.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="lblNumeric.Text" xml:space="preserve">
+    <value>First Variable:</value>
+  </data>
+  <data name="&gt;&gt;lblNumeric.Name" xml:space="preserve">
+    <value>lblNumeric</value>
+  </data>
+  <data name="&gt;&gt;lblNumeric.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumeric.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNumeric.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblFactor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 139</value>
+  </data>
+  <data name="lblFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="lblFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="lblFactor.Text" xml:space="preserve">
+    <value>Second Variable:</value>
+  </data>
+  <data name="&gt;&gt;lblFactor.Name" xml:space="preserve">
+    <value>lblFactor</value>
+  </data>
+  <data name="&gt;&gt;lblFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFactor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nudCI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 14</value>
+  </data>
+  <data name="nudCI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="nudCI.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;nudCI.Name" xml:space="preserve">
+    <value>nudCI</value>
+  </data>
+  <data name="&gt;&gt;nudCI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudCI.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;nudCI.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nudHypothesis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 39</value>
+  </data>
+  <data name="nudHypothesis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="nudHypothesis.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;nudHypothesis.Name" xml:space="preserve">
+    <value>nudHypothesis</value>
+  </data>
+  <data name="&gt;&gt;nudHypothesis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudHypothesis.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;nudHypothesis.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblCI.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="lblCI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="lblCI.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="lblCI.Text" xml:space="preserve">
+    <value>Confidence Interval:</value>
+  </data>
+  <data name="&gt;&gt;lblCI.Name" xml:space="preserve">
+    <value>lblCI</value>
+  </data>
+  <data name="&gt;&gt;lblCI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCI.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;lblCI.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblHyp1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblHyp1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblHyp1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="lblHyp1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lblHyp1.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;lblHyp1.Name" xml:space="preserve">
+    <value>lblHyp1</value>
+  </data>
+  <data name="&gt;&gt;lblHyp1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblHyp1.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;lblHyp1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblProbability2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblProbability2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblProbability2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 69</value>
+  </data>
+  <data name="lblProbability2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lblProbability2.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="lblProbability2.Text" xml:space="preserve">
+    <value>Second Probability:</value>
+  </data>
+  <data name="&gt;&gt;lblProbability2.Name" xml:space="preserve">
+    <value>lblProbability2</value>
+  </data>
+  <data name="&gt;&gt;lblProbability2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblProbability2.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;lblProbability2.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="nudHyp2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 64</value>
+  </data>
+  <data name="nudHyp2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="nudHyp2.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="&gt;&gt;nudHyp2.Name" xml:space="preserve">
+    <value>nudHyp2</value>
+  </data>
+  <data name="&gt;&gt;nudHyp2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudHyp2.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;nudHyp2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpParameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 200</value>
+  </data>
+  <data name="grpParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 90</value>
+  </data>
+  <data name="grpParameters.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="grpParameters.Text" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="&gt;&gt;grpParameters.Name" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;grpParameters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpParameters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpParameters.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -586,13 +892,13 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>474, 350</value>
+    <value>433, 383</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Simple Regression</value>
+    <value>Two Variable Fit Model</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgRegressionSimple</value>
