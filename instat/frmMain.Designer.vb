@@ -1328,6 +1328,7 @@ Partial Class frmMain
         '
         'mnuClimaticOrganiseSummary
         '
+        Me.mnuClimaticOrganiseSummary.Enabled = False
         Me.mnuClimaticOrganiseSummary.Name = "mnuClimaticOrganiseSummary"
         Me.mnuClimaticOrganiseSummary.Size = New System.Drawing.Size(181, 22)
         Me.mnuClimaticOrganiseSummary.Text = "Summary..."
@@ -1416,6 +1417,7 @@ Partial Class frmMain
         '
         'mnuClimaticModel
         '
+        Me.mnuClimaticModel.Enabled = False
         Me.mnuClimaticModel.Name = "mnuClimaticModel"
         Me.mnuClimaticModel.Size = New System.Drawing.Size(171, 22)
         Me.mnuClimaticModel.Text = "Model"
