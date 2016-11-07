@@ -39,7 +39,7 @@ Public Class dlgOpenSST
         bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
-        ucrInputName.bSuggestEditOnLeave = True
+        ucrInputName.bAutoChangeOnLeave = True
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
