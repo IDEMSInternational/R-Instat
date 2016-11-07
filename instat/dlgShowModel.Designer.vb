@@ -22,7 +22,6 @@ Partial Class dlgShowModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.rdoProbabilities = New System.Windows.Forms.RadioButton()
         Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
         Me.chkGraphResults = New System.Windows.Forms.CheckBox()
@@ -30,13 +29,12 @@ Partial Class dlgShowModel
         Me.lblQuantValues = New System.Windows.Forms.Label()
         Me.lblProbValues = New System.Windows.Forms.Label()
         Me.chkSingleValues = New System.Windows.Forms.CheckBox()
-        Me.ttprobability = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrDistributionsFOrTablePlus = New instat.ucrDistributionsWithParameters()
-        Me.ucrInputProbabilities = New instat.ucrInputTextBox()
         Me.ucrInputNewColNameforTablePlus = New instat.ucrInputComboBox()
         Me.ucrSelectorForDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverExpressionForTablePlus = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputProbabilities = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'rdoProbabilities
@@ -109,24 +107,12 @@ Partial Class dlgShowModel
         Me.chkSingleValues.Text = "Enter Value(s)"
         Me.chkSingleValues.UseVisualStyleBackColor = True
         '
-        'ttprobability
-        '
-        Me.ttprobability.ToolTipTitle = "Hint"
-        '
         'ucrDistributionsFOrTablePlus
         '
         Me.ucrDistributionsFOrTablePlus.Location = New System.Drawing.Point(255, 80)
         Me.ucrDistributionsFOrTablePlus.Name = "ucrDistributionsFOrTablePlus"
         Me.ucrDistributionsFOrTablePlus.Size = New System.Drawing.Size(209, 185)
         Me.ucrDistributionsFOrTablePlus.TabIndex = 11
-        '
-        'ucrInputProbabilities
-        '
-        Me.ucrInputProbabilities.IsReadOnly = False
-        Me.ucrInputProbabilities.Location = New System.Drawing.Point(243, 56)
-        Me.ucrInputProbabilities.Name = "ucrInputProbabilities"
-        Me.ucrInputProbabilities.Size = New System.Drawing.Size(140, 21)
-        Me.ucrInputProbabilities.TabIndex = 10
         '
         'ucrInputNewColNameforTablePlus
         '
@@ -162,14 +148,22 @@ Partial Class dlgShowModel
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
+        'ucrInputProbabilities
+        '
+        Me.ucrInputProbabilities.IsReadOnly = False
+        Me.ucrInputProbabilities.Location = New System.Drawing.Point(246, 57)
+        Me.ucrInputProbabilities.Name = "ucrInputProbabilities"
+        Me.ucrInputProbabilities.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputProbabilities.TabIndex = 13
+        '
         'dlgShowModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(456, 350)
+        Me.ClientSize = New System.Drawing.Size(572, 350)
+        Me.Controls.Add(Me.ucrInputProbabilities)
         Me.Controls.Add(Me.chkSingleValues)
         Me.Controls.Add(Me.ucrDistributionsFOrTablePlus)
-        Me.Controls.Add(Me.ucrInputProbabilities)
         Me.Controls.Add(Me.lblProbValues)
         Me.Controls.Add(Me.lblQuantValues)
         Me.Controls.Add(Me.ucrInputNewColNameforTablePlus)
@@ -201,8 +195,7 @@ Partial Class dlgShowModel
     Friend WithEvents ucrInputNewColNameforTablePlus As ucrInputComboBox
     Friend WithEvents lblQuantValues As Label
     Friend WithEvents lblProbValues As Label
-    Friend WithEvents ucrInputProbabilities As ucrInputTextBox
     Friend WithEvents ucrDistributionsFOrTablePlus As ucrDistributionsWithParameters
     Friend WithEvents chkSingleValues As CheckBox
-    Friend WithEvents ttprobability As ToolTip
+    Friend WithEvents ucrInputProbabilities As ucrInputComboBox
 End Class
