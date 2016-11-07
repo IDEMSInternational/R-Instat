@@ -570,6 +570,7 @@ Public Class frmMain
         mnuFileNewDataFrame_Click(sender, e)
     End Sub
 
+
     Private Sub mnuTbOpen_Click(sender As Object, e As EventArgs) Handles mnuTbOpen.Click
         mnuFileOpenFromFile_Click(sender, e)
     End Sub
@@ -591,6 +592,10 @@ Public Class frmMain
             clsSaveRDS.AddParameter("file", Chr(34) & strSaveFilePath & Chr(34))
             clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
         End If
+    End Sub
+
+    Private Sub mnuTbCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.Click
+        mnuEditCopy_Click(sender, e)
     End Sub
 
     Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click
@@ -1271,4 +1276,6 @@ Public Class frmMain
     Private Sub mnuHelpDataSets_Click(sender As Object, e As EventArgs) Handles mnuHelpDataSets.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "71")
     End Sub
+
+
 End Class
