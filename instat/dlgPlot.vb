@@ -84,7 +84,8 @@ Public Class dlgPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
+        'Both x and y aesthetics are mandatory for geom_line.
+        If (ucrReceiverX.IsEmpty() OrElse ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
