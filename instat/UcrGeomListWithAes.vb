@@ -82,7 +82,7 @@ Public Class UcrGeomListWithParameters
             clsGeomAesFunction.SetRCommand("aes")
         End If
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bApplyAesGlobally) OrElse strGlobalDataFrame = "")
-        UcrSelector.Reset()
+        UcrSelector.Reset() 'Warning/Question: should this guy not be called one line before ?
 
         'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
         'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
@@ -109,8 +109,8 @@ Public Class UcrGeomListWithParameters
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
             'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
             'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
-            lstAesParameterUcr(i).Clear()
             lstAesParameterUcr(i).Enabled = True
+            lstAesParameterUcr(i).Clear()
             'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
             If Not chkIgnoreGlobalAes.Checked Then
                 For Each clsParam In clsGgplotAesFunction.clsParameters
@@ -118,10 +118,13 @@ Public Class UcrGeomListWithParameters
                         'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
                         If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
                             lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                            lstAesParameterUcr(i).Enabled = Not bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
+                            If bFixAes Then
+                                lstAesParameterUcr(i).Enabled = Not bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
+                            End If
+                            'Warning, need to invert the order of Add and Enabled? as if disabled then add, then blank and if add and enabled then blank... 
                             Exit For
+                            End If
                         End If
-                    End If
                 Next
             End If
             For Each clsParam In clsGeomAesFunction.clsParameters
