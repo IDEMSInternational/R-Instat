@@ -36,7 +36,7 @@ Public Class dlgRegressionSimple
         clsModel.SetOperation("~")
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
-        ucrBase.iHelpTopicID = 171
+        ucrBase.iHelpTopicID = 366
         ucrModelName.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("reg")
         ucrModelName.SetItemsTypeAsModels()
@@ -85,6 +85,9 @@ Public Class dlgRegressionSimple
         SetRCode()
         TestOKEnabled()
         DistributionsOffered()
+        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
+        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
     End Sub
 
     Private Sub LM()

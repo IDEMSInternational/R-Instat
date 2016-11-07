@@ -268,9 +268,10 @@ Public Class sdgSimpleRegOptions
         lblGraphicsSignLevel.Enabled = False
         nudGraphicsCLevel.Enabled = False
         chkFittedModel.Checked = False
-        chkDisplayCLimits.Checked = True
-        lblDisplayCLevel.Enabled = True
-        nudDisplayCLevel.Enabled = True
+        chkDisplayCLimits.Checked = False
+        chkDisplayCLimits.Enabled = False
+        lblDisplayCLevel.Enabled = False
+        nudDisplayCLevel.Enabled = False
         chkPartial.Enabled = False
         chkRugs.Enabled = False
         grpRugs.Enabled = False

@@ -39,7 +39,7 @@ Public Class dlgOpenSST
         bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
-        ucrInputName.bSuggestEditOnLeave = True
+        ucrInputName.bAutoChangeOnLeave = True
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -58,6 +58,7 @@ Public Class dlgOpenSST
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBaseOpenSST.iHelpTopicID = 102
         ucrInputName.SetValidationTypeAsRVariable()
         'temp disabled until can easily switch between fread and read.csv
         'disabled until issue is resolved: http://stackoverflow.com/questions/37635541/rio-r-package-can-i-import-a-csv-file-with-non-comma-separator

@@ -570,13 +570,12 @@ Public Class frmMain
         mnuFileNewDataFrame_Click(sender, e)
     End Sub
 
+
     Private Sub mnuTbOpen_Click(sender As Object, e As EventArgs) Handles mnuTbOpen.Click
         mnuFileOpenFromFile_Click(sender, e)
     End Sub
 
-    Private Sub mnuTbImport_Click(sender As Object, e As EventArgs) Handles mnuTbImport.Click
-        mnuFileOpenFromFile_Click(sender, e)
-    End Sub
+
 
     Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
         mnuFileSave_Click(sender, e)
@@ -593,6 +592,10 @@ Public Class frmMain
             clsSaveRDS.AddParameter("file", Chr(34) & strSaveFilePath & Chr(34))
             clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
         End If
+    End Sub
+
+    Private Sub mnuTbCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.Click
+        mnuEditCopy_Click(sender, e)
     End Sub
 
     Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click
@@ -1249,4 +1252,30 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnUseDate.Click
         DlgUseDate.ShowDialog()
     End Sub
+
+    Private Sub mnuHelpIntroduction_Click(sender As Object, e As EventArgs) Handles mnuHelpIntroduction.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "0")
+    End Sub
+
+    Private Sub mnuHelpHistoryAndFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpHistoryAndFAQ.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "290")
+    End Sub
+
+    Private Sub mnuHelpGettingStarted_Click(sender As Object, e As EventArgs) Handles mnuHelpGettingStarted.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "3")
+    End Sub
+
+    Private Sub mnuHelpMenusAndDialogues_Click(sender As Object, e As EventArgs) Handles mnuHelpMenusAndDialogues.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
+    End Sub
+
+    Private Sub mnuHelpRPackagesAndCommands_Click(sender As Object, e As EventArgs) Handles mnuHelpRPackagesAndCommands.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "26")
+    End Sub
+
+    Private Sub mnuHelpDataSets_Click(sender As Object, e As EventArgs) Handles mnuHelpDataSets.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "71")
+    End Sub
+
+
 End Class

@@ -66,7 +66,7 @@ Public Class dlgDescribeOneVariable
         ucrReceiverDescribeOneVar.SetMeAsReceiver()
         clsRCustomFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
         clsRBaseFunction.SetRCommand("summary")
-        'ucrBaseDescribeOneVar.iHelpTopicID = 
+        ucrBaseDescribeOneVar.iHelpTopicID = 410
     End Sub
 
     Private Sub ucrBaseDescribeOneVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeOneVar.ClickReset
