@@ -34,7 +34,7 @@ Public Class dlgUseGraph
         ucrGraphReceiver.SetMeAsReceiver()
         ucrGraphsSelector.Reset()
         ucrSaveGraphForUseGraph.chkSaveGraph.Checked = False
-        ucrSaveGraphForUseGraph.strPrefix = "Usedgraph"
+        ucrSaveGraphForUseGraph.strPrefix = "UseGraph"
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
