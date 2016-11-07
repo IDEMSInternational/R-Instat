@@ -32,7 +32,7 @@ Partial Class dlgCombineforGraphics
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 254)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -40,7 +40,7 @@ Partial Class dlgCombineforGraphics
         'ucrCombineGraphSelector
         '
         Me.ucrCombineGraphSelector.bShowHiddenColumns = False
-        Me.ucrCombineGraphSelector.bUseCurrentFilter = False
+        Me.ucrCombineGraphSelector.bUseCurrentFilter = True
         Me.ucrCombineGraphSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrCombineGraphSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphSelector.Name = "ucrCombineGraphSelector"
@@ -76,7 +76,7 @@ Partial Class dlgCombineforGraphics
         '
         'ucrSaveCombinedGraph
         '
-        Me.ucrSaveCombinedGraph.Location = New System.Drawing.Point(10, 235)
+        Me.ucrSaveCombinedGraph.Location = New System.Drawing.Point(10, 228)
         Me.ucrSaveCombinedGraph.Name = "ucrSaveCombinedGraph"
         Me.ucrSaveCombinedGraph.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveCombinedGraph.TabIndex = 5
@@ -85,7 +85,7 @@ Partial Class dlgCombineforGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 321)
+        Me.ClientSize = New System.Drawing.Size(420, 312)
         Me.Controls.Add(Me.ucrSaveCombinedGraph)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.Label1)

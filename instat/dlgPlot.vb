@@ -40,11 +40,14 @@ Public Class dlgPlot
         clsRaesFunction.ClearParameters()
         clsRgeom_lineplotFunction.ClearParameters()
         chkPoints.Checked = False
-        ucrLinePlotSelector.Focus()
+        '        ucrLinePlotSelector.Focus()
+        ucrSaveLinePlot.strPrefix = "Line"
+        ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
         ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
@@ -75,14 +78,14 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetIncludedDataType({"numeric", "factor"})
 
         ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
-        ucrSaveLinePlot.strPrefix = "Line"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
 
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
+        'Both x and y aesthetics are mandatory for geom_line. However, when not filled they will be automatically populated by "".
+        If (ucrReceiverX.IsEmpty() OrElse ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -136,9 +139,19 @@ Public Class dlgPlot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
+    Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
+            cmdLineOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            cmdLineOptions.Enabled = False
+            cmdOptions.Enabled = False
+        End If
+    End Sub
     Private Sub ucrSaveLinePlot_GraphNameChanged() Handles ucrSaveLinePlot.GraphNameChanged, ucrSaveLinePlot.SaveGraphCheckedChanged
         If ucrSaveLinePlot.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveLinePlot.strGraphName, strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveLinePlot.strGraphName)
@@ -148,7 +161,7 @@ Public Class dlgPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdPointOptions_Click(sender As Object, e As EventArgs) Handles cmdPointOptions.Click
+    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_lineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
 

@@ -31,6 +31,7 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 468
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
         clsGetFormsFunction.SetRCommand("get_odk_form_names")
     End Sub
