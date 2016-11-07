@@ -45,8 +45,7 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
-        cmdLineOptions.Enabled = True
-        cmdOptions.Enabled = True
+        TempOptionsDisabledInMultipleVariablesCase()
         ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
         TestOkEnabled()
@@ -139,6 +138,11 @@ Public Class dlgPlot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
+        TempOptionsDisabledInMultipleVariablesCase()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
             cmdLineOptions.Enabled = True
             cmdOptions.Enabled = True
@@ -146,9 +150,7 @@ Public Class dlgPlot
             cmdLineOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
-        TestOkEnabled()
     End Sub
-
     Private Sub ucrSaveLinePlot_GraphNameChanged() Handles ucrSaveLinePlot.GraphNameChanged, ucrSaveLinePlot.SaveGraphCheckedChanged
         If ucrSaveLinePlot.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveLinePlot.strGraphName, strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveLinePlot.strGraphName)
