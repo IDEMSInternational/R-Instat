@@ -48,9 +48,9 @@ Partial Class sdgModelOptions
         Me.grpLinkFunctions.Controls.Add(Me.rdoLogit)
         Me.grpLinkFunctions.Controls.Add(Me.rdoLog)
         Me.grpLinkFunctions.Controls.Add(Me.rdoIdentity)
-        Me.grpLinkFunctions.Location = New System.Drawing.Point(12, 61)
+        Me.grpLinkFunctions.Location = New System.Drawing.Point(10, 53)
         Me.grpLinkFunctions.Name = "grpLinkFunctions"
-        Me.grpLinkFunctions.Size = New System.Drawing.Size(229, 87)
+        Me.grpLinkFunctions.Size = New System.Drawing.Size(224, 104)
         Me.grpLinkFunctions.TabIndex = 2
         Me.grpLinkFunctions.TabStop = False
         Me.grpLinkFunctions.Tag = "Link_Functions"
@@ -60,7 +60,7 @@ Partial Class sdgModelOptions
         '
         Me.rdocloglog.AutoSize = True
         Me.rdocloglog.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdocloglog.Location = New System.Drawing.Point(77, 22)
+        Me.rdocloglog.Location = New System.Drawing.Point(79, 21)
         Me.rdocloglog.Name = "rdocloglog"
         Me.rdocloglog.Size = New System.Drawing.Size(59, 17)
         Me.rdocloglog.TabIndex = 23
@@ -74,7 +74,7 @@ Partial Class sdgModelOptions
         '
         Me.rdoSqrt.AutoSize = True
         Me.rdoSqrt.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoSqrt.Location = New System.Drawing.Point(77, 45)
+        Me.rdoSqrt.Location = New System.Drawing.Point(79, 43)
         Me.rdoSqrt.Name = "rdoSqrt"
         Me.rdoSqrt.Size = New System.Drawing.Size(44, 17)
         Me.rdoSqrt.TabIndex = 24
@@ -88,7 +88,7 @@ Partial Class sdgModelOptions
         '
         Me.rdoMuSquaredInverse.AutoSize = True
         Me.rdoMuSquaredInverse.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoMuSquaredInverse.Location = New System.Drawing.Point(77, 64)
+        Me.rdoMuSquaredInverse.Location = New System.Drawing.Point(79, 65)
         Me.rdoMuSquaredInverse.Name = "rdoMuSquaredInverse"
         Me.rdoMuSquaredInverse.Size = New System.Drawing.Size(62, 17)
         Me.rdoMuSquaredInverse.TabIndex = 25
@@ -102,7 +102,7 @@ Partial Class sdgModelOptions
         '
         Me.rdoInverse.AutoSize = True
         Me.rdoInverse.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoInverse.Location = New System.Drawing.Point(150, 64)
+        Me.rdoInverse.Location = New System.Drawing.Point(149, 67)
         Me.rdoInverse.Name = "rdoInverse"
         Me.rdoInverse.Size = New System.Drawing.Size(60, 17)
         Me.rdoInverse.TabIndex = 26
@@ -116,7 +116,7 @@ Partial Class sdgModelOptions
         '
         Me.rdoCauchit.AutoSize = True
         Me.rdoCauchit.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoCauchit.Location = New System.Drawing.Point(149, 22)
+        Me.rdoCauchit.Location = New System.Drawing.Point(149, 21)
         Me.rdoCauchit.Name = "rdoCauchit"
         Me.rdoCauchit.Size = New System.Drawing.Size(61, 17)
         Me.rdoCauchit.TabIndex = 22
@@ -130,7 +130,7 @@ Partial Class sdgModelOptions
         '
         Me.rdoProbit.AutoSize = True
         Me.rdoProbit.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoProbit.Location = New System.Drawing.Point(150, 45)
+        Me.rdoProbit.Location = New System.Drawing.Point(149, 44)
         Me.rdoProbit.Name = "rdoProbit"
         Me.rdoProbit.Size = New System.Drawing.Size(52, 17)
         Me.rdoProbit.TabIndex = 21
@@ -144,7 +144,7 @@ Partial Class sdgModelOptions
         '
         Me.rdoLogit.AutoSize = True
         Me.rdoLogit.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoLogit.Location = New System.Drawing.Point(9, 66)
+        Me.rdoLogit.Location = New System.Drawing.Point(9, 65)
         Me.rdoLogit.Name = "rdoLogit"
         Me.rdoLogit.Size = New System.Drawing.Size(48, 17)
         Me.rdoLogit.TabIndex = 20
@@ -158,7 +158,7 @@ Partial Class sdgModelOptions
         '
         Me.rdoLog.AutoSize = True
         Me.rdoLog.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoLog.Location = New System.Drawing.Point(9, 45)
+        Me.rdoLog.Location = New System.Drawing.Point(9, 43)
         Me.rdoLog.Name = "rdoLog"
         Me.rdoLog.Size = New System.Drawing.Size(43, 17)
         Me.rdoLog.TabIndex = 19
@@ -184,14 +184,14 @@ Partial Class sdgModelOptions
         '
         'ucrButtonsSDGModelOptions
         '
-        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(38, 163)
+        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(47, 163)
         Me.ucrButtonsSDGModelOptions.Name = "ucrButtonsSDGModelOptions"
         Me.ucrButtonsSDGModelOptions.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSDGModelOptions.TabIndex = 1
         '
         'ucrFamily
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(12, 12)
+        Me.ucrFamily.Location = New System.Drawing.Point(10, 4)
         Me.ucrFamily.Name = "ucrFamily"
         Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
         Me.ucrFamily.TabIndex = 3
@@ -208,6 +208,7 @@ Partial Class sdgModelOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgModelOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Model_Options"
         Me.Text = "Model Options"
         Me.grpLinkFunctions.ResumeLayout(False)
