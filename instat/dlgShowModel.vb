@@ -57,11 +57,7 @@ Public Class dlgShowModel
         results()
         ReceiverLabels()
         SaveResults()
-        If rdoProbabilities.Checked Then
-            ucrInputProbabilities.SetName("1")
-        Else
-            ucrInputProbabilities.SetName("0.5")
-        End If
+        setname()
     End Sub
 
     Private Sub ReopenDialog()
@@ -73,6 +69,13 @@ Public Class dlgShowModel
         TestOKEnabled()
     End Sub
 
+    Private Sub setname()
+        If rdoProbabilities.Checked Then
+            ucrInputProbabilities.SetName("1")
+        Else
+            ucrInputProbabilities.SetName("0.5")
+        End If
+    End Sub
     Private Sub chkGraphResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphResults.CheckedChanged, chkSaveResults.CheckedChanged
         DisplayGraphResults()
         SaveResults()
@@ -137,6 +140,7 @@ Public Class dlgShowModel
         End If
     End Sub
     Private Sub rdoProbabilitiesandQuantiles_CheckedChanged(sender As Object, e As EventArgs) Handles rdoProbabilities.CheckedChanged, rdoQuantiles.CheckedChanged
+        setname()
         ReceiverLabels()
     End Sub
 
