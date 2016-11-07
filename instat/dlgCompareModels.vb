@@ -29,18 +29,26 @@ Public Class dlgCompareModels
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 0
         clsPlotDist.SetRCommand("plotDist")
+        ucrBase.clsRsyntax.SetFunction("grid.arrange")
     End Sub
 
     Private Sub TestOKEnabled()
+        If nudXlimMax.Value > nudXlimMin.Value AndAlso nudYlimMax.Value > nudYlimMin.Value Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
     Private Sub SetDefaults()
         rdoSingle.Checked = True
-        nudNumberofColumns.Enabled = True
-        lblNumberofColumns.Enabled = True
+        rdoDensity.Checked = True
+        kindParameters()
+        nudNumberofColumns.Enabled = False
+        lblNumberofColumns.Enabled = False
+        rdoCombine.Enabled = False
     End Sub
 
     Private Sub ReopenDialog()
@@ -57,9 +65,9 @@ Public Class dlgCompareModels
     End Sub
 
     Private Sub distParameters()
-        ucrBase.clsRsyntax.ClearParameters()
+        clsPlotDist.ClearParameters()
+        kindParameters()
         clsPlotDist.AddParameter("dist", Chr(34) & ucrDistributionForCompareModels.clsCurrDistribution.strRName & Chr(34))
-
         For Each clstempparam In ucrDistributionForCompareModels.clsCurrRFunction.clsParameters
             clsPlotDist.AddParameter(clstempparam.Clone())
         Next
@@ -72,6 +80,7 @@ Public Class dlgCompareModels
     Private Sub nudXlimMin_ValueChanged(sender As Object, e As EventArgs) Handles nudXlimMin.ValueChanged, nudYlimMin.ValueChanged, nudNumberofColumns.ValueChanged, nudXlimMax.ValueChanged, nudYlimMax.ValueChanged
         XLimits()
         Ylimits()
+        TestOKEnabled()
     End Sub
 
     Private Sub grpPlotOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCDF.CheckedChanged, rdoDensity.CheckedChanged, rdoHistogram.CheckedChanged, rdoqq.CheckedChanged
@@ -79,18 +88,27 @@ Public Class dlgCompareModels
     End Sub
 
     Private Sub Ylimits()
-        If nudYlimMax.Text <> "" AndAlso nudYlimMin.Text <> "" Then
-            clsPlotDist.AddParameter("ylim", "c(" & nudYlimMin.Text & "," & nudYlimMax.Text & ")")
-        Else
+        If nudYlimMax.Value > nudYlimMin.Value Then
+            If nudYlimMax.Text <> "" AndAlso nudYlimMin.Text <> "" Then
+                clsPlotDist.AddParameter("ylim", "c(" & nudYlimMin.Text & "," & nudYlimMax.Text & ")")
+            Else
+                clsPlotDist.RemoveParameterByName("ylim")
+            End If
             clsPlotDist.RemoveParameterByName("ylim")
         End If
     End Sub
     Private Sub XLimits()
-        If nudXlimMax.Text <> "" AndAlso nudXlimMin.Text <> "" Then
-            clsPlotDist.AddParameter("xlim", "c(" & nudXlimMin.Text & "," & nudXlimMax.Text & ")")
+        If nudXlimMax.Value > nudXlimMin.Value Then
+            If nudXlimMax.Text <> "" AndAlso nudXlimMin.Text <> "" Then
+                clsPlotDist.AddParameter("xlim", "c(" & nudXlimMin.Text & "," & nudXlimMax.Text & ")")
+
+            Else
+                clsPlotDist.RemoveParameterByName("xlim")
+            End If
         Else
-            clsPlotDist.RemoveParameterByName("xlim")
-        End If
+                clsPlotDist.RemoveParameterByName("xlim")
+            End If
+
     End Sub
 
     Private Sub kindParameters()
@@ -107,7 +125,6 @@ Public Class dlgCompareModels
     End Sub
 
     Private Sub plotgraphspar()
-        ucrBase.clsRsyntax.SetFunction("grid.arrange")
         If rdoSingle.Checked Then
             cmdAddNewDistributions.Enabled = False
             ucrBase.clsRsyntax.AddParameter("x", clsPlotDist.ToScript)
@@ -118,7 +135,8 @@ Public Class dlgCompareModels
             lblNumberofColumns.Enabled = True
         End If
     End Sub
-    Private Sub grpPlotGraphs_Enter(sender As Object, e As EventArgs) Handles rdoCombine.CheckedChanged, rdoSingle.CheckedChanged
+    Private Sub grpPlotGraphs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCombine.CheckedChanged, rdoSingle.CheckedChanged
         plotgraphspar()
     End Sub
+
 End Class
