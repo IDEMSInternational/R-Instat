@@ -139,7 +139,6 @@ Public Class dlgShowModel
             ucrInputNewColNameforTablePlus.Visible = False
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
-        ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub DisplayGraphResults()
