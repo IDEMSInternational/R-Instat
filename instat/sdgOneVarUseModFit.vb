@@ -43,7 +43,7 @@ Public Class sdgOneVarUseModFit
         rdoPlotAll.Checked = True
         rdoSeqValues.Checked = True
         rdoInsertValues.Enabled = False
-        ucrInputValues.Visible = False
+        ucrInputValues.Enabled = False
         SetPlotOptions()
         nudFrom.Value = 0
         nudTo.Value = 1
