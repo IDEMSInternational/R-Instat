@@ -57,6 +57,11 @@ Public Class dlgShowModel
         results()
         ReceiverLabels()
         SaveResults()
+        If rdoProbabilities.Checked Then
+            ucrInputProbabilities.SetName("1")
+        Else
+            ucrInputProbabilities.SetName("0.5")
+        End If
     End Sub
 
     Private Sub ReopenDialog()
@@ -76,7 +81,6 @@ Public Class dlgShowModel
 
     Private Sub pqParameters()
         If rdoProbabilities.Checked Then
-            ucrInputProbabilities.SetName("1")
             ttprobability.SetToolTip(ucrInputProbabilities, "enter e.g 0.1, 1, 3, 5, 10 " & vbCrLf & "-2, -1, 0, 1, 2 ")
             If chkSingleValues.Checked Then
                 If ucrInputProbabilities.IsEmpty = False Then
@@ -92,7 +96,7 @@ Public Class dlgShowModel
                 End If
             End If
         Else
-            ucrInputProbabilities.SetName("0.5")
+
             ttprobability.SetToolTip(ucrInputProbabilities, "enter e.g 0.1, 0.2, 0.4, 0.6, 0.8, 0.9 " & vbCrLf & "0.2, 0.5, 0.8" & vbCrLf & " 0.5, 0.8, 0.9, 0.95, 0.99")
             If chkSingleValues.Checked Then
                 If ucrInputProbabilities.IsEmpty = False Then
