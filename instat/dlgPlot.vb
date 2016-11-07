@@ -45,9 +45,9 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
-        TempOptionsDisabledInMultipleVariablesCase()
         ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
