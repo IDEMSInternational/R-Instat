@@ -32,7 +32,7 @@ Partial Class dlgUseGraph
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 241)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -40,7 +40,7 @@ Partial Class dlgUseGraph
         'ucrGraphsSelector
         '
         Me.ucrGraphsSelector.bShowHiddenColumns = False
-        Me.ucrGraphsSelector.bUseCurrentFilter = False
+        Me.ucrGraphsSelector.bUseCurrentFilter = True
         Me.ucrGraphsSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrGraphsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphsSelector.Name = "ucrGraphsSelector"
@@ -67,7 +67,7 @@ Partial Class dlgUseGraph
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(252, 95)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(252, 94)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdPlotOptions.TabIndex = 4
@@ -76,7 +76,7 @@ Partial Class dlgUseGraph
         '
         'ucrSaveGraphForUseGraph
         '
-        Me.ucrSaveGraphForUseGraph.Location = New System.Drawing.Point(10, 209)
+        Me.ucrSaveGraphForUseGraph.Location = New System.Drawing.Point(10, 202)
         Me.ucrSaveGraphForUseGraph.Name = "ucrSaveGraphForUseGraph"
         Me.ucrSaveGraphForUseGraph.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveGraphForUseGraph.TabIndex = 5
@@ -85,7 +85,7 @@ Partial Class dlgUseGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 294)
+        Me.ClientSize = New System.Drawing.Size(420, 287)
         Me.Controls.Add(Me.ucrSaveGraphForUseGraph)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.lblGraphtoUse)

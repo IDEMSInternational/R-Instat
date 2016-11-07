@@ -84,11 +84,10 @@ Public Class dlgRugPlot
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         'should the sdgLayerOptions be linked here as well ? Apparently yes ?
-        ucrBase.iHelpTopicID = 433
-        'wrong topic
+        ucrBase.iHelpTopicID = 476
+
 
         ucrSaveRugPlot.SetDataFrameSelector(ucrRugPlotSelector.ucrAvailableDataFrames)
-        ucrSaveRugPlot.strPrefix = "Rug"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
     End Sub
@@ -98,6 +97,7 @@ Public Class dlgRugPlot
         ucrRugPlotSelector.Reset()
         ucrRugPlotSelector.Focus()
         ucrVariablesAsFactorForRugPlot.ResetControl()
+        ucrSaveRugPlot.strPrefix = "Rug"
         sdgPlots.Reset()
         TestOkEnabled()
     End Sub
@@ -125,9 +125,7 @@ Public Class dlgRugPlot
         sdgLayerOptions.ShowDialog()
 
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "y" Then
-                'TODO Fix this generally
-                'ucrVariablesAsFactorForScatter.SetSingleReceiverStatus(True)
+            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForRugPlot.bSingleVariable) Then
                 ucrVariablesAsFactorForRugPlot.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "x" Then
                 ucrReceiverX.Add(clsParam.strArgumentValue)

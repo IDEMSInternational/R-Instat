@@ -50,9 +50,11 @@ Public Class UcrGeomListWithParameters
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetParameters()
+            'This one is called when the geom is changed, which is apparently the case when the Layer is loaded (first thing that happens). Left in for security but could be taken out.
             bFirstLoad = False
         End If
-        SetAes(bCurrentFixAes)
+        'SetAes(bCurrentFixAes)
+        'Apparently, this is not necessary as SetAes is called several places, when geom is changed and when Layer is set up which always happen at load.
     End Sub
 
     Private Sub SetSelector()
@@ -81,8 +83,6 @@ Public Class UcrGeomListWithParameters
         End If
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bApplyAesGlobally) OrElse strGlobalDataFrame = "")
         UcrSelector.Reset()
-        bCurrentFixAes = bFixAes
-        SetAes(bCurrentFixAes)
 
         'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
         'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
@@ -92,37 +92,41 @@ Public Class UcrGeomListWithParameters
             bIgnoreGlobalAes = False
         End If
         chkApplyOnAllLayers.Checked = bApplyAesGlobally
-        chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes
+        chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes 'Task: check if this launches checkchanged and accordingly delete SetAes below.
+
+        bCurrentFixAes = bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
+        'SetAes needs to be called after the IgnoreGlobalAes has been setup as it determines whether the global aes are written in the rceivers or not.
+        SetAes(bCurrentFixAes)
+        'Warning: SetAes is called three times when a layer is created... one in the load, one in the setup ... (and one in the ignoreGAes check changed ?)
     End Sub
 
     Private Sub SetAes(Optional bFixAes As Boolean = False)
-        'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes and then in the local aes.
+        'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes (if IgnoreGlobalAes is not chacked) and then in the local aes.
         Dim bFirstEnabled As Boolean = True
         Dim iFirstEnabled As Integer = 0
         bAddToLocalAes = False
+        'We are changing the content of the receivers according to the info in the clsGgplotAesFunction and clsGeomAesFunction. We don't want to change the content of clsGeomAesFunction according to the changed content of the receivers. Hence we set bApplyToLocalAes to False at the beginning of this procedure, then reset it to True at the end (see ucrReceiverParam_WithMeSelectionChanged).
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
+            'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
+            'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
+            lstAesParameterUcr(i).Clear()
             lstAesParameterUcr(i).Enabled = True
-            For Each clsParam In clsGgplotAesFunction.clsParameters
-                If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                        'For some geoms like BoxPlot, when the x aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
-                        lstAesParameterUcr(i).Clear()
-                        lstAesParameterUcr(i).Enabled = True
-                    Else
-                        lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                        lstAesParameterUcr(i).Enabled = Not bFixAes
-                        Exit For
+            'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
+            If Not chkIgnoreGlobalAes.Checked Then
+                For Each clsParam In clsGgplotAesFunction.clsParameters
+                    If clsParam.strArgumentName = lstCurrArguments(i) Then
+                        'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
+                        If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
+                            lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
+                            lstAesParameterUcr(i).Enabled = Not bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
+                            Exit For
+                        End If
                     End If
-                End If
-            Next
+                Next
+            End If
             For Each clsParam In clsGeomAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    'Should do this for any geom with x="" ?
-                    If clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                        'Similar check to the one just above.
-                        lstAesParameterUcr(i).Clear()
-                        lstAesParameterUcr(i).Enabled = True
-                    Else
+                    If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
                         lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
                         lstAesParameterUcr(i).Enabled = True
                         Exit For
@@ -200,27 +204,36 @@ Public Class UcrGeomListWithParameters
 
     Private Sub ucrReceiverParam_WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle) Handles ucrReceiverParam1.WithMeSelectionChanged, ucrReceiverParam2.WithMeSelectionChanged, ucrReceiverParam3.WithMeSelectionChanged, ucrReceiverParam4.WithMeSelectionChanged, ucrReceiverParam5.WithMeSelectionChanged, ucrReceiverParam6.WithMeSelectionChanged, ucrReceiverParam7.WithMeSelectionChanged, ucrReceiverParam8.WithMeSelectionChanged, ucrReceiverParam9.WithMeSelectionChanged, ucrReceiverParam10.WithMeSelectionChanged
         Dim iIndex As Integer
-
+        'bApplyToLocalAes is used to avoid changing the content of clsGeomAesFunction when the receivers are setup according to the content of clsGeomAesFunction and clsGgplotAesFunction in SetAes().
         If bAddToLocalAes Then
             iIndex = lstAesParameterUcr.IndexOf(ucrChangedReceiver)
             If Not ucrChangedReceiver.IsEmpty Then
                 clsGeomAesFunction.AddParameter(lstCurrArguments(iIndex), ucrChangedReceiver.GetVariableNames(False))
-            Else
+            ElseIf iIndex < lstCurrArguments.Count Then 'Warning/Task: got an error here. The iIndex was longer than lstCurrArguments when clicking on edit layer. Don't really understand how this is possible. Just added the reality check but might need to put more thoughts into this...
                 clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
+            Else MsgBox("Developer Error: the iIndex (going through lstAesParameterUcr) in ucrReceiverParam_WithMeSelectionChanged is greater than lstAesParameterUcr.count. We beleive that this occurs when editting a layer with fewer aes parameters than there are filled aesthetics parameters in the GlobalAesthetics.", MsgBoxStyle.OkOnly)
             End If
-            TestForOkEnabled()
         End If
     End Sub
 
     Public Function TestForOkEnabled() As Boolean
         Dim i As Integer = 0
-
+        'Dim iNumberOfMissingDependentlyMandatoryAes As Integer = 0
+        'Added a proposal for jointly mandatory situations. For the moment the only case is two jointly mandatory aes.Turns out to be not necessary for geom_point so not used for now.
+        'If a mandatory aes or two jointly mandatory aes have empty mapping, then not ok, otherwise ok.
         For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
-            If (clsCurrGeom.clsAesParameters(i).bIsMandatory = True) AndAlso (lstAesParameterUcr(i).IsEmpty()) Then
+            If (lstAesParameterUcr(i).IsEmpty()) AndAlso clsCurrGeom.clsAesParameters(i).bIsMandatory Then
+                ' If clsCurrGeom.clsAesParameters(i).bIsMandatory Then
                 Return False
+                'ElseIf clsCurrGeom.clsAesParameters(i).bIsDependentlyMandatory Then
+                'iNumberOfMissingDependentlyMandatoryAes = iNumberOfMissingDependentlyMandatoryAes + 1
+                'End If
             End If
         Next
+        'If iNumberOfMissingDependentlyMandatoryAes <= 1 Then
         Return True
+        ' Else Return False
+        ' End If
     End Function
 
     Private Sub chkChangeAes_CheckedChanged(sender As Object, e As EventArgs) Handles chkApplyOnAllLayers.CheckedChanged
@@ -239,5 +252,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsGeomFunction.RemoveParameterByName("inherit.aes")
         End If
+        'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers anymore.
+        SetAes()
     End Sub
 End Class

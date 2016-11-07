@@ -31,10 +31,12 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub SetDefaults()
+        ucrReceiverMultipleTwoVar.SetMeAsReceiver()
         ucrTwoVarGraphSave.Reset()
         ucrSelectorTwoVarGraph.Reset()
         ucrSelectorTwoVarGraph.Focus()
-        sdgDescribeTwoVarGraph.SetDefaults()
+        ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
+        sdgDescribeTwoVarGraph.Initialise()
         TestOkEnabled()
     End Sub
 
@@ -51,7 +53,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrTwoVarGraphSave.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
-        ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 0
         clsRFacet.SetRCommand("facet_wrap")
@@ -83,19 +84,18 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgDescribeTwoVarGraph.GrpBoxEnable()
         sdgDescribeTwoVarGraph.ShowDialog()
     End Sub
 
     Public Sub Results()
-        sdgDescribeTwoVarGraph.GrpBoxEnable()
         If ucrReceiverMultipleTwoVar.ucrMultipleVariables.GetCurrentItemTypes.Count > 0 Then
             strVarType = ucrReceiverMultipleTwoVar.ucrMultipleVariables.GetCurrentItemTypes.Item(0)
         Else
             strVarType = ""
         End If
         strSecondVarType = ucrSecondVariableReceiver.strCurrDataType
-        If ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
+        'numeric by numeric case
+        If ((strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
             ScatterLinePlot()
             clsRFacet.RemoveParameterByName("scale")
             Select Case sdgDescribeTwoVarGraph.ucrNumericByNumeric.GetText
@@ -111,7 +111,8 @@ Public Class dlgDescribeTwoVarGraph
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRLinePlotGeom)
                     ucrBase.clsRsyntax.AddOperatorParameter("geom_point", clsRFunc:=clsRScatterPlotGeom)
             End Select
-        ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "factor" OrElse strSecondVarType = "character" OrElse strSecondVarType = "logical")) Then
+            'numeric by categorical case
+        ElseIf (strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType <> "numeric" AndAlso strSecondVarType <> "integer") Then
             clsRFacet.RemoveParameterByName("scale")
             ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
             Select Case sdgDescribeTwoVarGraph.ucrNumericByCategorical.GetText
@@ -140,7 +141,8 @@ Public Class dlgDescribeTwoVarGraph
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction)
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRScatterPlotGeom)
             End Select
-        ElseIf ((strVarType = "factor" OrElse strVarType = "character" OrElse strVarType = "logical") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
+            'categorical by numeric case
+        ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strSecondVarType = "numeric" OrElse strSecondVarType = "integer") Then
             ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
             clsRFacet.AddParameter("scale", Chr(34) & "free_x" & Chr(34))
             Select Case sdgDescribeTwoVarGraph.ucrCategoricalByNumeric.GetText
@@ -169,7 +171,8 @@ Public Class dlgDescribeTwoVarGraph
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction2)
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRScatterPlotGeom)
             End Select
-        ElseIf ((strVarType = "factor" OrElse strVarType = "character" OrElse strVarType = "logical") And (strSecondVarType = "factor" OrElse strSecondVarType = "character" OrElse strSecondVarType = "logical")) Then
+            'catogerical by cateogrical case
+        ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strVarType <> "numeric" AndAlso strVarType <> "integer") Then
             ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
             clsRFacet.AddParameter("scale", Chr(34) & "free_x" & Chr(34))
             Select Case sdgDescribeTwoVarGraph.ucrCategoricalByCategorical.GetText
@@ -181,6 +184,10 @@ Public Class dlgDescribeTwoVarGraph
                     BarPlot()
                     ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRBarPlotGeom)
             End Select
+            'Should never reach this case
+        Else
+            MsgBox("Developer error: Unrecognised column types. Graph may be blank or produce an error.", MsgBoxStyle.Critical)
+            ucrBase.clsRsyntax.RemoveOperatorParameter("right")
         End If
     End Sub
 

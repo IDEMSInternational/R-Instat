@@ -32,13 +32,13 @@ Partial Class dlgDisplayDaily
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.lblSummaryNames = New System.Windows.Forms.Label()
         Me.lblMonth_Summaries = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.chkMonthAbbreviation = New System.Windows.Forms.CheckBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputMonthSummaries = New instat.ucrInputTextBox()
         Me.ucrInputVariable = New instat.ucrInputTextBox()
         Me.ucrInputDayDisplay = New instat.ucrInputTextBox()
         Me.ucrInputSummaryNames = New instat.ucrInputTextBox()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         CType(Me.nudDecimalPlaces, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -46,7 +46,7 @@ Partial Class dlgDisplayDaily
         'chkPrintTables
         '
         Me.chkPrintTables.AutoSize = True
-        Me.chkPrintTables.Location = New System.Drawing.Point(194, 220)
+        Me.chkPrintTables.Location = New System.Drawing.Point(15, 186)
         Me.chkPrintTables.Name = "chkPrintTables"
         Me.chkPrintTables.Size = New System.Drawing.Size(82, 17)
         Me.chkPrintTables.TabIndex = 1
@@ -57,7 +57,7 @@ Partial Class dlgDisplayDaily
         'chkRemoveNA
         '
         Me.chkRemoveNA.AutoSize = True
-        Me.chkRemoveNA.Location = New System.Drawing.Point(301, 220)
+        Me.chkRemoveNA.Location = New System.Drawing.Point(15, 209)
         Me.chkRemoveNA.Name = "chkRemoveNA"
         Me.chkRemoveNA.Size = New System.Drawing.Size(139, 17)
         Me.chkRemoveNA.TabIndex = 2
@@ -67,92 +67,83 @@ Partial Class dlgDisplayDaily
         '
         'nudDecimalPlaces
         '
-        Me.nudDecimalPlaces.Location = New System.Drawing.Point(346, 132)
+        Me.nudDecimalPlaces.Location = New System.Drawing.Point(326, 109)
         Me.nudDecimalPlaces.Maximum = New Decimal(New Integer() {3, 0, 0, 0})
         Me.nudDecimalPlaces.Name = "nudDecimalPlaces"
-        Me.nudDecimalPlaces.Size = New System.Drawing.Size(67, 20)
+        Me.nudDecimalPlaces.Size = New System.Drawing.Size(49, 20)
         Me.nudDecimalPlaces.TabIndex = 3
         '
         'nudThreshold
         '
-        Me.nudThreshold.Location = New System.Drawing.Point(109, 127)
+        Me.nudThreshold.Location = New System.Drawing.Point(116, 109)
         Me.nudThreshold.Name = "nudThreshold"
-        Me.nudThreshold.Size = New System.Drawing.Size(76, 20)
+        Me.nudThreshold.Size = New System.Drawing.Size(49, 20)
         Me.nudThreshold.TabIndex = 4
         '
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(27, 65)
+        Me.lblVariable.Location = New System.Drawing.Point(12, 58)
         Me.lblVariable.Name = "lblVariable"
-        Me.lblVariable.Size = New System.Drawing.Size(45, 13)
+        Me.lblVariable.Size = New System.Drawing.Size(48, 13)
         Me.lblVariable.TabIndex = 10
-        Me.lblVariable.Tag = "Variable"
-        Me.lblVariable.Text = "Variable"
+        Me.lblVariable.Tag = "Variable:"
+        Me.lblVariable.Text = "Variable:"
         '
         'lblDayDisplay
         '
         Me.lblDayDisplay.AutoSize = True
-        Me.lblDayDisplay.Location = New System.Drawing.Point(27, 94)
+        Me.lblDayDisplay.Location = New System.Drawing.Point(12, 85)
         Me.lblDayDisplay.Name = "lblDayDisplay"
-        Me.lblDayDisplay.Size = New System.Drawing.Size(63, 13)
+        Me.lblDayDisplay.Size = New System.Drawing.Size(66, 13)
         Me.lblDayDisplay.TabIndex = 11
-        Me.lblDayDisplay.Tag = "Day_Display"
-        Me.lblDayDisplay.Text = "Day Display"
+        Me.lblDayDisplay.Tag = "Day_Display:"
+        Me.lblDayDisplay.Text = "Day Display:"
         '
         'lblDecimalPlaces
         '
         Me.lblDecimalPlaces.AutoSize = True
-        Me.lblDecimalPlaces.Location = New System.Drawing.Point(236, 134)
+        Me.lblDecimalPlaces.Location = New System.Drawing.Point(237, 112)
         Me.lblDecimalPlaces.Name = "lblDecimalPlaces"
-        Me.lblDecimalPlaces.Size = New System.Drawing.Size(80, 13)
+        Me.lblDecimalPlaces.Size = New System.Drawing.Size(83, 13)
         Me.lblDecimalPlaces.TabIndex = 12
-        Me.lblDecimalPlaces.Tag = "Decimal_Places"
-        Me.lblDecimalPlaces.Text = "Decimal Places"
+        Me.lblDecimalPlaces.Tag = "Decimal_Places:"
+        Me.lblDecimalPlaces.Text = "Decimal Places:"
         '
         'lblThreshold
         '
         Me.lblThreshold.AutoSize = True
-        Me.lblThreshold.Location = New System.Drawing.Point(27, 134)
+        Me.lblThreshold.Location = New System.Drawing.Point(12, 112)
         Me.lblThreshold.Name = "lblThreshold"
-        Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
+        Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
         Me.lblThreshold.TabIndex = 13
-        Me.lblThreshold.Tag = "Threshold"
-        Me.lblThreshold.Text = "Threshold"
+        Me.lblThreshold.Tag = "Threshold:"
+        Me.lblThreshold.Text = "Threshold:"
         '
         'lblSummaryNames
         '
         Me.lblSummaryNames.AutoSize = True
-        Me.lblSummaryNames.Location = New System.Drawing.Point(27, 177)
+        Me.lblSummaryNames.Location = New System.Drawing.Point(12, 139)
         Me.lblSummaryNames.Name = "lblSummaryNames"
-        Me.lblSummaryNames.Size = New System.Drawing.Size(86, 13)
+        Me.lblSummaryNames.Size = New System.Drawing.Size(89, 13)
         Me.lblSummaryNames.TabIndex = 14
-        Me.lblSummaryNames.Tag = "Summary_Names"
-        Me.lblSummaryNames.Text = "Summary Names"
+        Me.lblSummaryNames.Tag = "Summary_Names:"
+        Me.lblSummaryNames.Text = "Summary Names:"
         '
         'lblMonth_Summaries
         '
         Me.lblMonth_Summaries.AutoSize = True
-        Me.lblMonth_Summaries.Location = New System.Drawing.Point(27, 39)
+        Me.lblMonth_Summaries.Location = New System.Drawing.Point(12, 31)
         Me.lblMonth_Summaries.Name = "lblMonth_Summaries"
-        Me.lblMonth_Summaries.Size = New System.Drawing.Size(91, 13)
+        Me.lblMonth_Summaries.Size = New System.Drawing.Size(94, 13)
         Me.lblMonth_Summaries.TabIndex = 16
-        Me.lblMonth_Summaries.Tag = "Month_Summaries"
-        Me.lblMonth_Summaries.Text = "Month Summaries"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(82, 9)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(88, 13)
-        Me.Label3.TabIndex = 17
-        Me.Label3.Text = "Not implememted"
+        Me.lblMonth_Summaries.Tag = "Month_Summaries:"
+        Me.lblMonth_Summaries.Text = "Month Summaries:"
         '
         'chkMonthAbbreviation
         '
         Me.chkMonthAbbreviation.AutoSize = True
-        Me.chkMonthAbbreviation.Location = New System.Drawing.Point(30, 220)
+        Me.chkMonthAbbreviation.Location = New System.Drawing.Point(15, 163)
         Me.chkMonthAbbreviation.Name = "chkMonthAbbreviation"
         Me.chkMonthAbbreviation.Size = New System.Drawing.Size(118, 17)
         Me.chkMonthAbbreviation.TabIndex = 18
@@ -162,50 +153,62 @@ Partial Class dlgDisplayDaily
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(30, 243)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 232)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
         '
         'ucrInputMonthSummaries
         '
-        Me.ucrInputMonthSummaries.Location = New System.Drawing.Point(194, 31)
+        Me.ucrInputMonthSummaries.IsReadOnly = False
+        Me.ucrInputMonthSummaries.Location = New System.Drawing.Point(116, 28)
         Me.ucrInputMonthSummaries.Name = "ucrInputMonthSummaries"
         Me.ucrInputMonthSummaries.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputMonthSummaries.TabIndex = 19
         '
         'ucrInputVariable
         '
-        Me.ucrInputVariable.Location = New System.Drawing.Point(194, 59)
+        Me.ucrInputVariable.IsReadOnly = False
+        Me.ucrInputVariable.Location = New System.Drawing.Point(116, 55)
         Me.ucrInputVariable.Name = "ucrInputVariable"
         Me.ucrInputVariable.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputVariable.TabIndex = 20
         '
         'ucrInputDayDisplay
         '
-        Me.ucrInputDayDisplay.Location = New System.Drawing.Point(194, 86)
+        Me.ucrInputDayDisplay.IsReadOnly = False
+        Me.ucrInputDayDisplay.Location = New System.Drawing.Point(116, 82)
         Me.ucrInputDayDisplay.Name = "ucrInputDayDisplay"
         Me.ucrInputDayDisplay.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputDayDisplay.TabIndex = 21
         '
         'ucrInputSummaryNames
         '
-        Me.ucrInputSummaryNames.Location = New System.Drawing.Point(119, 169)
+        Me.ucrInputSummaryNames.IsReadOnly = False
+        Me.ucrInputSummaryNames.Location = New System.Drawing.Point(116, 136)
         Me.ucrInputSummaryNames.Name = "ucrInputSummaryNames"
-        Me.ucrInputSummaryNames.Size = New System.Drawing.Size(90, 21)
+        Me.ucrInputSummaryNames.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputSummaryNames.TabIndex = 22
+        '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(93, 107)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 23
         '
         'dlgDisplayDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(462, 304)
+        Me.ClientSize = New System.Drawing.Size(427, 291)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.ucrInputSummaryNames)
         Me.Controls.Add(Me.ucrInputDayDisplay)
         Me.Controls.Add(Me.ucrInputVariable)
         Me.Controls.Add(Me.ucrInputMonthSummaries)
         Me.Controls.Add(Me.chkMonthAbbreviation)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblMonth_Summaries)
         Me.Controls.Add(Me.lblSummaryNames)
         Me.Controls.Add(Me.lblThreshold)
@@ -241,10 +244,10 @@ Partial Class dlgDisplayDaily
     Friend WithEvents lblThreshold As Label
     Friend WithEvents lblSummaryNames As Label
     Friend WithEvents lblMonth_Summaries As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents chkMonthAbbreviation As CheckBox
     Friend WithEvents ucrInputMonthSummaries As ucrInputTextBox
     Friend WithEvents ucrInputVariable As ucrInputTextBox
     Friend WithEvents ucrInputDayDisplay As ucrInputTextBox
     Friend WithEvents ucrInputSummaryNames As ucrInputTextBox
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class

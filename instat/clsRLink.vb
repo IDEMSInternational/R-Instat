@@ -111,25 +111,43 @@ Public Class RLink
     End Function
 
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "")
-
+        'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
+        'It is used on the ucrDataFrame in the FillComboBox sub.
         If bInstatObjectExists Then
             If bIncludeOverall Then
-                cboDataFrames.Items.Add("[Overall]")
+                cboDataFrames.Items.Add("[Overall]") 'Task/question: explain this.
             End If
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
-
-            If bSetDefault Then
+            AdjustComboBoxWidth(cboDataFrames)
+            'Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
+            If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (frmEditor.grdData IsNot Nothing) AndAlso (frmEditor.grdData.CurrentWorksheet IsNot Nothing) Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
-            Else
-                If cboDataFrames.Items.IndexOf(strCurrentDataFrame) <> -1 Then
-                    cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(strCurrentDataFrame)
-                Else
-                    If frmEditor.grdData.CurrentWorksheet IsNot Nothing Then
-                        cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
-                    End If
-                End If
+            ElseIf cboDataFrames.Items.IndexOf(strCurrentDataFrame) <> -1 Then
+                cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(strCurrentDataFrame)
             End If
         End If
+    End Sub
+
+    'TODO This is used above but will not be once ucrDataFrame uses proper controls
+    ' Then this can be removed
+    Public Shared Sub AdjustComboBoxWidth(cboCurrent As ComboBox)
+        Dim iWidth As Integer = cboCurrent.DropDownWidth
+        Dim graTemp As Graphics = cboCurrent.CreateGraphics()
+        Dim font As Font = cboCurrent.Font
+        Dim iScrollBarWidth As Integer
+        Dim iNewWidth As Integer
+
+        If cboCurrent.Items.Count > cboCurrent.MaxDropDownItems Then
+            iScrollBarWidth = SystemInformation.VerticalScrollBarWidth
+        Else
+            iScrollBarWidth = 0
+        End If
+
+        For Each strItem As String In cboCurrent.Items
+            iNewWidth = CInt(graTemp.MeasureString(strItem, font).Width) + iScrollBarWidth
+            iWidth = Math.Max(iWidth, iNewWidth)
+        Next
+        cboCurrent.DropDownWidth = iWidth
     End Sub
 
     Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)

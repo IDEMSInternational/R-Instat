@@ -53,12 +53,12 @@ Public Class dlgCumulativeDistribution
 
 
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
-        ucrSaveCumDist.strPrefix = "Graph"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
     End Sub
 
     Private Sub SetDefaults()
         'set defaults here 
+        ucrSaveCumDist.strPrefix = "Graph"
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.Focus()
         ucrVariablesAsFactorforCumDist.ResetControl()

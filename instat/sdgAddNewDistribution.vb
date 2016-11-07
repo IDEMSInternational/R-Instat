@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class sdgAddNewDistribution
     Public bFirstLoad As Boolean = True
+    Public clsCompareDist As New RFunction
     Private Sub sdgAddNewDistribution_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -33,4 +34,16 @@ Public Class sdgAddNewDistribution
 
     End Sub
 
+    Private Sub ucrNewDistributions_ParameterChanged() Handles ucrNewDistributions.ParameterChanged
+        newDist()
+    End Sub
+
+    Private Sub newDist()
+        clsCompareDist.ClearParameters()
+        clsCompareDist.AddParameter("dist", Chr(34) & ucrNewDistributions.clsCurrDistribution.strRName & Chr(34))
+
+        For Each clstempparam In ucrNewDistributions.clsCurrRFunction.clsParameters
+            clsCompareDist.AddParameter(clstempparam.Clone())
+        Next
+    End Sub
 End Class

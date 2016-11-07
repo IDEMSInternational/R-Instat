@@ -266,6 +266,12 @@
     <Compile Include="dlgTwoVariableUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DlgUseDate.Designer.vb">
+      <DependentUpon>DlgUseDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DlgUseDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgAddNewDistribution.Designer.vb">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </Compile>
@@ -924,6 +930,12 @@
       <DependentUpon>ucrColors.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrColors.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDialogDisabled.Designer.vb">
+      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDialogDisabled.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrFilter.Designer.vb">
@@ -2706,6 +2718,9 @@
     <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DlgUseDate.resx">
+      <DependentUpon>DlgUseDate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUseGraph.fr-FR.resx">
       <DependentUpon>dlgUseGraph.vb</DependentUpon>
     </EmbeddedResource>
@@ -4084,6 +4099,15 @@
     <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDialogDisabled.fr-FR.resx">
+      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDialogDisabled.resx">
+      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDialogDisabled.sw-KE.resx">
+      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributions.fr-FR.resx">
       <DependentUpon>ucrDistributions.vb</DependentUpon>
     </EmbeddedResource>
@@ -4332,6 +4356,9 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <Content Include="LICENCE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

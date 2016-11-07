@@ -38,7 +38,7 @@ Partial Class dlgHideShowColumns
         'ucrSelectorForHiddenColumns
         '
         Me.ucrSelectorForHiddenColumns.bShowHiddenColumns = False
-        Me.ucrSelectorForHiddenColumns.bUseCurrentFilter = False
+        Me.ucrSelectorForHiddenColumns.bUseCurrentFilter = True
         Me.ucrSelectorForHiddenColumns.Location = New System.Drawing.Point(13, 13)
         Me.ucrSelectorForHiddenColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForHiddenColumns.Name = "ucrSelectorForHiddenColumns"
@@ -57,11 +57,11 @@ Partial Class dlgHideShowColumns
         'lblHiddenColumns
         '
         Me.lblHiddenColumns.AutoSize = True
-        Me.lblHiddenColumns.Location = New System.Drawing.Point(246, 23)
+        Me.lblHiddenColumns.Location = New System.Drawing.Point(248, 26)
         Me.lblHiddenColumns.Name = "lblHiddenColumns"
-        Me.lblHiddenColumns.Size = New System.Drawing.Size(90, 13)
+        Me.lblHiddenColumns.Size = New System.Drawing.Size(93, 13)
         Me.lblHiddenColumns.TabIndex = 3
-        Me.lblHiddenColumns.Text = "Hidden Column(s)"
+        Me.lblHiddenColumns.Text = "Hidden Column(s):"
         '
         'dlgHideShowColumns
         '

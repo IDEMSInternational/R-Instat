@@ -37,15 +37,18 @@ Public Class ucrInputTextBox
         Dim strCurrent As String
 
         strCurrent = txtInput.Text
-        If bSuggestEditOnLeave Then
+        If bAutoChangeOnLeave Then
             If Not IsValid(strCurrent) Then
                 'TODO This message should contain the same message from ValidateText()
-                Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & vbNewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
-                    Case MsgBoxResult.Yes
-                        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
-                    Case Else
-                        e.Cancel = True
-                End Select
+                'Temp disabled so that change is done automatically
+                'TODO Think about more subtle ways to do this without being annoying to the user
+                'Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & vbNewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
+                '    Case MsgBoxResult.Yes
+                '        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
+                '    Case Else
+                '        e.Cancel = True
+                'End Select
+                SetName(frmMain.clsRLink.MakeValidText(strCurrent))
             End If
         Else
             e.Cancel = Not ValidateText(strCurrent)
@@ -67,6 +70,10 @@ Public Class ucrInputTextBox
 
     Private Sub txtInput_TextChanged(sender As Object, e As EventArgs) Handles txtInput.TextChanged
         OnContentsChanged()
+    End Sub
+
+    Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
+        txtInput.Copy()
     End Sub
 
     Public Overrides Property IsReadOnly As Boolean

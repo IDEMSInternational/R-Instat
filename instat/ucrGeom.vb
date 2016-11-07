@@ -128,6 +128,14 @@ Public Class ucrGeom
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
+        'Global comments:
+        'Warning: cannot use default values like NULL in the specification of our aesthetics as parameters (fill, colour, ...) as running a command like "ggplot(survey, aes(x="",y=Yield)) + geom_boxplot(colour = NULL)" will give an error (Error: Aesthetics must be either length 1 or the same as the data (4): colour). 
+        '           however, NULL is still valid as parameter value for outlier.colour for example ( ggplot(survey, aes(x="",y=Yield)) + geom_boxplot(outlier.colour = NULL) runs ok).
+        'Warning: Concerning the global parameter position: 
+        '           We haven't implemented position_jitterdodge yet. It is seems to be mainly usefull in presence of a dodged layer, on top of which we want to display the points of the events (see explanation http://docs.ggplot2.org/current/position_jitterdodge.html). However it doesn't seem to work as the others when specified as position = "jitterdodge" (get errors). Works fine when specified by position = position_jitterdodge(), for geoms such as point, but also bar (and produces outputs that are not completely silly), ...
+        '           Could add the possiility to adjust the height and width parameters in the position function position_jitter, also width for dodge... Sometimes useful to only jitter in one direction for example... Then need to specify position as -position=position_jitter([parameters])- instead of -position = "jitter". This is also required for position_jitterdodge (see below). Seems necessary to specify x and y parameters in position_nudge as well in order to obtain any result (see below).
+        '           Another option that is not yet available is position_nudge, which makes it possible to move a whole layer by a given (x,y) value. It doesn't seem to do anything by default i.e. when not specifying any argument (position = "nudge" or position = position_nudge()), just uses (x=0,y=0). When x or y is assigned to a factor, each factor corresponds to one unit along the axis (e.g. if x is a factor, position_nudge(x=2) would shift the layer by two factors along the x axis). While testing what happens when x = "" in boxplot case, a weird error was identified: "y aesthetics required", even when both x and y aesthetics are in use.
+        '           Dodge requires a factor to dodge by, if none, just doesn't dodge. However, gives a warning in the geom_point case for instance.
 
         'clsgeom_abline.SetGeomName("geom_abline")
         'clsgeom_abline.AddAesParameter("x", bIsMandatory:=True)
@@ -165,20 +173,38 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_area)
 
         clsgeom_bar.SetGeomName("geom_bar")
-        clsgeom_bar.AddAesParameter("x", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
-        'Optional
-        'we can map a continuous variable to y but we must include stat = “identity” inside the geom.
-        clsgeom_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
-        clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor"}))
-        clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}))
-        clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor"}))
-        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'won't visibly change anything unless you change the theme
-        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"})) ' won't visibly change anything unless you change the theme
+        'Mandatory Aesthetics
+        clsgeom_bar.AddAesParameter("x", bIsMandatory:=True)
+        'All datatypes work as x aesthetics although the most common one is factor.
+        'Warning: the group aesthetic could be added, doesn't send errors, but using group doesn't work very well. Histograms have been designed to deal with continuous x and grouping (using stat_bin). Group is not mentioned as an available aesthetic in the documentation.
 
-        'add layer parameters 
+        'Optional aesthetics
+        clsgeom_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
+        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
+        'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
+        'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
+        clsgeom_bar.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
+        clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
+        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
+        'Warning: Also varies the outline of the bars, hence difficult to see if fill and colour take the same values. 
+        'Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
+
+        'Geom_Bar layer parameters
+        clsgeom_bar.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
+        'Global Layer parameters
         clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34)})
-        clsgeom_bar.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1})
+        clsgeom_bar.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: The default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
+        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        'See global comments about position.
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_bar.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_bar.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_bar.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_bar.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+
         lstAllGeoms.Add(clsgeom_bar)
 
 
@@ -199,13 +225,15 @@ Public Class ucrGeom
 
 
         clsgeom_boxplot.SetGeomName("geom_boxplot")
-        clsgeom_boxplot.AddAesParameter("x")
+        'Mandatory Aesthetics
         clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        'Optional Aesthetics
+        clsgeom_boxplot.AddAesParameter("x")
         'Warning: When x is continuous, there needs to be a grouping variable... for example cut_width(x,0.25). In our setting, a factor column can be used. If group is empty, R will send a warning message and ignore the x variable (still labels x though).
         'Task: Add a warning message in the front end to explain the necessity to specify group. Give suggestions on how to proceed (use an existing factor, create a new factor column using cut_width...). To do when front-end messages will have been sorted properly.
         clsgeom_boxplot.AddAesParameter("group", strIncludedDataTypes:={"factor"})
 
-        'Warning: The following aesthetics should be assigned to calculations for the different parameters of a boxplot. Only relevant for sort of summaries. 
+        'Warning: The following aesthetics should be assigned to calculations for the different parameters of a boxplot. Only relevant for sort of summaries. These are required if the stat of the geom_boxplot is changed to "identity" for instance.
         'clsgeom_boxplot.AddAesParameter("lower", strIncludedDataTypes:={"numeric"})
         'clsgeom_boxplot.AddAesParameter("upper", strIncludedDataTypes:={"numeric"})
         'clsgeom_boxplot.AddAesParameter("middle", strIncludedDataTypes:={"numeric"})
@@ -216,26 +244,30 @@ Public Class ucrGeom
         clsgeom_boxplot.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_boxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_boxplot.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"}) 'Warning: map a factor with the size aes is not recommended (R message).
         clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
         clsgeom_boxplot.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
 
         'adding layerParameters
         'Main geom_boxplot parameters
-        clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
+        clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE") 'Note: notch = False + notchwidth = 0.7 works fine (i.e. can specify nothwidth with no notch)
         clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "0.5", lstParameterStrings:={1}) 'Question to be discussed: this sets the width of the notch as a proportion of the boxplot width. Values can be anything in ggplot but negative ones just give a silly looking thing (I ve left it in for now, but would suggest we exclude ?), and I don't know if values above 1 make sense ? The notch would then be larger than the boxplot.
         clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
         clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
         clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Warning: there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
-        clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={0, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
+        clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
 
         'Global Layer parameters
         clsgeom_boxplot.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: The default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
-        clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: Could add the possiility to adjust the height and width parameters in the position function position_jitter, also width for dodge... Sometimes useful to only jitter in one direction for example...
+        'Warning: when x is continuous, position_dodge requires non-overlapping x intervals (would still work if not respected but sends a warning message).
+        clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        'clsgeom_boxplot.AddLayerParameter("stat", "list", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        'The stat is usually not changed in boxplot as it comes together with stat_boxplot. However identity can be taken as value for instance, but then all the aesthetics ymin, ymax, ... need to be filled.
+
         'Aesthetics as layer parameters... Used fo fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_boxplot.AddLayerParameter("fill", "colour", "NULL")
-        clsgeom_boxplot.AddLayerParameter("colour", "colour", "NULL")
+        clsgeom_boxplot.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_boxplot.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_boxplot.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
         clsgeom_boxplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
@@ -317,25 +349,45 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_curve)
 
         clsgeom_density.strGeomName = "geom_density"
-        'mandatory
-        clsgeom_density.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        'we can map a continuous variable to y but we must include stat = “identity” inside the geom
-        clsgeom_density.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
-        'optional
-        clsgeom_density.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("size", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        'Mandatory Aesthetics
+        clsgeom_density.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True) 'Question/Task: Can take factors, doesn't give error. However don't know if that makes sense ? 
+        'Optional Aesthetics
+        'clsgeom_density.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
+        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. However don't know how much sense this makes. Also all the geom_density parameters are actually stat_density parameters. Hence if stat is changed, get in trouble. Still can happen when y is inherited from global aes. Might be confusing for the user to leave out y as geom_density will actually take y from global aes ! 
+        'Question to be discussed: So the only valid y value seems to be ..count.. which could be a tick on the dialog, that is then ticked automatically when position "stack" is used ?
+        clsgeom_density.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"})) 'Warning/question: Don't really understand how this is used. When I give a numeric variable, sends a warning message saying that our density plot won't be a real density plot, still plots. When given a factor, there is a plot but nothing on it + warning message.
+        clsgeom_density.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"})) 'Varies transparence of the fill.
+        clsgeom_density.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_density.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"})) 'Colour of the outline.
+        clsgeom_density.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Outline linetype.
+        clsgeom_density.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"})) 'Varies the size of the outline.
 
         'adding layer parameters
-        clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34)})
-        clsgeom_density.AddLayerParameter("bw", "list", "nrd0", lstParameterStrings:={"nrd0", "nrd", "ucv", "bcv", "SJ"})
-        clsgeom_density.AddLayerParameter("adjust", "numeric", "1", lstParameterStrings:={1, 1})
-        clsgeom_density.AddLayerParameter("kernel", "list", Chr(34) & "gaussian" & Chr(34), lstParameterStrings:={Chr(34) & "gaussian" & Chr(34), Chr(34) & "rectangular" & Chr(34), Chr(34) & "triangular" & Chr(34), Chr(34) & "epanechnikov" & Chr(34), Chr(34) & "biweight" & Chr(34), Chr(34) & "cosine" & Chr(34), Chr(34) & "optcosin" & Chr(34)})
+        'Geom_density layer parameters
+        clsgeom_density.AddLayerParameter("bw", "list", Chr(34) & "nrd0" & Chr(34), lstParameterStrings:={Chr(34) & "nrd0" & Chr(34), Chr(34) & "SJ" & Chr(34), Chr(34) & "nrd" & Chr(34), Chr(34) & "ucv" & Chr(34), Chr(34) & "bcv" & Chr(34)}) 'Bandwidth.
+        clsgeom_density.AddLayerParameter("adjust", "numeric", "1", lstParameterStrings:={1, 0}) 'The bandwidth used is actually adjust*bw. This makes it easy to specify values like ‘half the default’ bandwidth.
+        clsgeom_density.AddLayerParameter("kernel", "list", Chr(34) & "gaussian" & Chr(34), lstParameterStrings:={Chr(34) & "gaussian" & Chr(34), Chr(34) & "rectangular" & Chr(34), Chr(34) & "triangular" & Chr(34), Chr(34) & "epanechnikov" & Chr(34), Chr(34) & "biweight" & Chr(34), Chr(34) & "cosine" & Chr(34), Chr(34) & "optcosin" & Chr(34)}) 'A character string giving the smoothing kernel to be used.
+        'This is only a parameter in developer version of ggplot. May soon be in release version.
+        'clsgeom_density.AddLayerParameter("n", "numeric", "512", lstParameterStrings:={0, 0}) 'The number of equally spaced points at which the density is to be estimated. When n > 512, it is rounded up to a power of 2 during the calculations. If negative, sends an error.
+        clsgeom_density.AddLayerParameter("trim", "boolean", "FALSE")
+        'This parameter only matters if you are displaying multiple densities in one plot. If FALSE, the default, each density is computed on the full range of the data. If TRUE, each density is computed over the range of that group: this typically means the estimated x values will not line-up, and hence you won't be able to stack density values.
+
+        'Global Layer parameters
+        'clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
+        clsgeom_density.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: The default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
+        clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34)})
+        'Warning: "Stacked density plots: if you want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
+        'Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
+        'See global comments about position.
+
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_density.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_density.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_density.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_density.AddLayerParameter("alpha", "numeric", "0", lstParameterStrings:={2, 0, 1}) 'Varies transparence of fill.
+
         lstAllGeoms.Add(clsgeom_density)
+
 
         'clsgeom_density2d.strGeomName = "geom_density2d"
         ''Mandatory
@@ -376,7 +428,7 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
-        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'Optional
         clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
@@ -399,11 +451,11 @@ Public Class ucrGeom
 
 
         'clsgeom_errorbar.strGeomName = "geom_errorbar"
-        '''Mandatory
+        'Mandatory
         'clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
         'clsgeom_errorbar.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'clsgeom_errorbar.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        '''Optional
+        'Optional
         'clsgeom_errorbar.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
         'clsgeom_errorbar.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         'clsgeom_errorbar.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
@@ -428,9 +480,9 @@ Public Class ucrGeom
         'clsgeom_errorbarh.AddAesParameter("size")
 
         'add layer parameters
-        clsgeom_errorbarh.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        clsgeom_errorbarh.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        lstAllGeoms.Add(clsgeom_errorbarh)
+        'clsgeom_errorbarh.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_errorbarh.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'lstAllGeoms.Add(clsgeom_errorbarh)
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
         clsgeom_freqpoly.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
@@ -527,8 +579,9 @@ Public Class ucrGeom
 
         clsgeom_line.strGeomName = "geom_line"
         'mandatory
-        clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
-        clsgeom_line.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        'x and y are mandatory, but these are autofilled by "" when no variable is mapped. "Partially mandatory"
+        clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_line.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
         'optional
         clsgeom_line.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
@@ -589,9 +642,9 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_point.strGeomName = "geom_point"
-        'mandatory
-        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
-        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=True in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
+        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
         'optional
         clsgeom_point.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
@@ -634,7 +687,7 @@ Public Class ucrGeom
 
         ''clsgeom_qq.strGeomName = "geom_qq"
         ''clsgeom_qq.AddAesParameter("sample", bIsMandatory:=True)
-        '''optional
+        'optional
         ''clsgeom_qq.AddAesParameter("x")
         ''clsgeom_qq.AddAesParameter("y")
         ''lstAllGeoms.Add(clsgeom_qq)
@@ -741,10 +794,10 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_segment)
 
         ''clsgeom_smooth.strGeomName = "geom_smooth"
-        '''mandatory
+        'mandatory
         ''clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
         ''clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        '''optional 
+        'optional 
         ''clsgeom_smooth.AddAesParameter("alpha")
         ''clsgeom_smooth.AddAesParameter("colour")
         ''clsgeom_smooth.AddAesParameter("fill")

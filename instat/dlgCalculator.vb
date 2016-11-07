@@ -228,7 +228,7 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 iHelpCalcID = 126
-                Me.Size = New System.Drawing.Size(614, 377)
+                Me.Size = New System.Drawing.Size(659, 377)
             Case "Logical and Symbols"
                 grpDates.Visible = False
                 grpStatistics.Visible = False
@@ -236,7 +236,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpStrings.Visible = False
-                Me.Size = New System.Drawing.Size(580, 377)
+                Me.Size = New System.Drawing.Size(617, 377)
                 grpProbabilty.Visible = False
                 iHelpCalcID = 127
 
@@ -247,7 +247,7 @@ Public Class dlgCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(552, 377)
+                Me.Size = New System.Drawing.Size(600, 377)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 iHelpCalcID = 128
@@ -259,7 +259,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
-                Me.Size = New System.Drawing.Size(580, 377)
+                Me.Size = New System.Drawing.Size(491, 377)
                 iHelpCalcID = 338
             Case "Runoff"
                 grpDates.Visible = False
@@ -269,7 +269,7 @@ Public Class dlgCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(749, 377)
+                Me.Size = New System.Drawing.Size(779, 377)
                 iHelpCalcID = 120
             Case "Dates"
                 grpDates.Visible = True
@@ -279,11 +279,11 @@ Public Class dlgCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(589, 377)
+                Me.Size = New System.Drawing.Size(639, 377)
                 iHelpCalcID = 130
             Case Else
                 grpDates.Visible = False
-                Me.Size = New System.Drawing.Size(424, 377)
+                Me.Size = New System.Drawing.Size(491, 377)
                 grpProbabilty.Visible = False
                 grpStatistics.Visible = False
                 grpBasic.Visible = True

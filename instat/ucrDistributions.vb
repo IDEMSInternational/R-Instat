@@ -25,6 +25,7 @@ Public Class ucrDistributions
     Public bDistributionsSet As Boolean
     Public clsCurrRFunction As RFunction
     Public strDataType As String
+    Public bFirstLoad As Boolean
 
     Public Sub New()
 
@@ -40,10 +41,14 @@ Public Class ucrDistributions
         clsCurrRFunction = New RFunction
         strDataType = ""
         CreateDistributions()
+        bFirstLoad = True
     End Sub
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetDistributions()
+        If bFirstLoad Then
+            SetDistributions()
+            bFirstLoad = False
+        End If
     End Sub
 
     Public Sub AddParameter(strArgumentName As String, strArgumentValue As String)
@@ -118,6 +123,16 @@ Public Class ucrDistributions
 
     End Sub
 
+    Public Sub SetExactDistributions()  ' this addition is temporary
+        strDistributionType = "ExactSolution"
+        SetDistributions()
+    End Sub
+
+    Public Sub SetAllDistributions()
+        strDistributionType = ""
+        SetDistributions()
+    End Sub
+
     Private Sub SetDistributions()
 
         Dim bUse As Boolean
@@ -135,6 +150,8 @@ Public Class ucrDistributions
                     bUse = (Dist.strQFunctionName <> "")
                 Case "DFunctions"
                     bUse = (Dist.strDFunctionName <> "")
+                Case "ExactSolution"
+                    bUse = (Dist.strExactName <> "")
                 Case "GLMFunctions"
                     If (Dist.strGLMFunctionName <> "") Then
                         Select Case strDataType
@@ -207,6 +224,9 @@ Public Class ucrDistributions
         clsNormalDist.strGLMFunctionName = "gaussian"
         clsNormalDist.bNumeric = True
         clsNormalDist.bIsContinuous = True
+        clsNormalDist.bIsExact = True
+        clsNormalDist.strExactName = "norm"
+        clsNormalDist.lstExact = {"mean", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
         clsNormalDist.AddParameter("mean", "Mean", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
@@ -278,7 +298,10 @@ Public Class ucrDistributions
         clsBernouliDist.strQFunctionName = "qbinom"
         clsBernouliDist.strDFunctionName = "dbinom"
         clsBernouliDist.bIsContinuous = False
+        clsBernouliDist.bIsExact = True
+        clsBernouliDist.lstExact = {"prob", "Difference in Proportions:", 0.5, 0.1, 2, 0, 1}
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
+        clsBernouliDist.strExactName = "binom"
         lstAllDistributions.Add(clsBernouliDist)
 
         'Binomial Distribution
@@ -305,6 +328,9 @@ Public Class ucrDistributions
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
         clsPoissonDist.bIsContinuous = False
+        clsPoissonDist.bIsExact = True
+        clsPoissonDist.strExactName = "pois"
+        clsPoissonDist.lstExact = {"r", "Rate Ratio:", 1, 1, 2, 0, Integer.MaxValue}
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 

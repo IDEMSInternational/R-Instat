@@ -140,6 +140,7 @@ Public Class dlgHistogram
         ucrSaveHist.strPrefix = "Histogram"
         sdgPlots.Reset()
         ucrSaveHist.Reset()
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
@@ -175,7 +176,7 @@ Public Class dlgHistogram
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_histogramFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
+            If clsParam.strArgumentName = "x" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorforHist.bSingleVariable) Then
                 ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "fill" Then
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)
@@ -216,9 +217,23 @@ Public Class dlgHistogram
         Else
             clsRaesFunction.RemoveParameterByName("x")
         End If
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
+    Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        If ucrVariablesAsFactorforHist.bSingleVariable Then
+            cmdHistogramOptions.Enabled = True
+            cmdDensityOptions.Enabled = True
+            cmdFrequencyOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            cmdHistogramOptions.Enabled = False
+            cmdDensityOptions.Enabled = False
+            cmdFrequencyOptions.Enabled = False
+            cmdOptions.Enabled = False
+        End If
+    End Sub
     Private Sub ucrSaveHist_GraphNameChanged() Handles ucrSaveHist.GraphNameChanged, ucrSaveHist.SaveGraphCheckedChanged
         If ucrSaveHist.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveHist.strGraphName, strTempDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveHist.strGraphName)

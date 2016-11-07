@@ -33,9 +33,8 @@ Public Class dlgInsertColumn
     Private Sub InitialiseDialog()
         ucrReceiverColumnsToInsert.Selector = ucrSelectorInseertColumns
         ucrReceiverColumnsToInsert.SetMeAsReceiver()
-        ucrInputBeforeAfter.cboInput.Items.Add("Before")
-        ucrInputBeforeAfter.cboInput.Items.Add("After")
-
+        ucrInputBeforeAfter.SetItems({"Before", "After"})
+        ucrInputPrefixForInsertedColumns.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -191,14 +190,8 @@ Public Class dlgInsertColumn
             nudInsertColumns.Visible = True
             lblNumberOfRowsToInsert.Visible = False
             lblStartPos.Visible = False
-            rdoAtEnd.Visible = True
-            rdoAtStart.Visible = True
-            rdoBeforeAfter.Visible = True
-            ucrInputBeforeAfter.Visible = True
             nudNumCols.Focus()
             nudPos.Focus()
-
-
         ElseIf rdoInsertRows.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
             lblNumberOfRowsToInsert.Visible = True
@@ -209,10 +202,6 @@ Public Class dlgInsertColumn
             dataFrameListMaxMinPos()
             startpo()
             nudNumCols.Maximum = 1000
-            rdoAtEnd.Visible = False
-            rdoAtStart.Visible = False
-            rdoBeforeAfter.Visible = False
-            ucrInputBeforeAfter.Visible = False
             addColumData()
             InsertParam()
             BeforeAfterPara()
@@ -249,7 +238,6 @@ Public Class dlgInsertColumn
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
             ucrSelectorInseertColumns.Visible = False
-
         ElseIf rdoAtStart.Checked Then
             ucrBase.clsRsyntax.AddParameter("before", "TRUE")
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
@@ -259,7 +247,13 @@ Public Class dlgInsertColumn
             ucrReceiverColumnsToInsert.Visible = True
             ucrSelectorInseertColumns.Visible = True
         End If
-
+        If rdoBeforeAfter.Checked Then
+            ucrInputBeforeAfter.Enabled = True
+        Else
+            ucrInputBeforeAfter.Enabled = False
+            ucrReceiverColumnsToInsert.Clear()
+        End If
+        BeforeParameter()
     End Sub
 
     Private Sub ucrInputBeforeAfter_NameChanged() Handles ucrInputBeforeAfter.NameChanged

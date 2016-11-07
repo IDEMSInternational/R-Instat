@@ -172,7 +172,8 @@ Public Class ucrReorder
                     vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ")").AsCharacter
                 End If
             Case "factor"
-                If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType = "factor" Then
+                'Using Contains means ordered factors will also be shown.
+                If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType.Contains("factor") Then
                     vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
                 End If
             Case "data frame"
@@ -198,6 +199,8 @@ Public Class ucrReorder
                 lstAvailableData.Items.Add(vecNames(i))
             Next
             RaiseEvent OrderChanged()
+        Else
+            lstAvailableData.Items.Clear()
         End If
     End Sub
 
