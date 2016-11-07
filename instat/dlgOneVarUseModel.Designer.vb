@@ -127,7 +127,7 @@ Partial Class dlgOneVarUseModel
         'ucrSelector
         '
         Me.ucrSelector.bShowHiddenColumns = False
-        Me.ucrSelector.bUseCurrentFilter = False
+        Me.ucrSelector.bUseCurrentFilter = True
         Me.ucrSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelector.Name = "ucrSelector"
@@ -154,6 +154,7 @@ Partial Class dlgOneVarUseModel
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOneVarUseModel"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "One Variable Use Model"
         Me.ResumeLayout(False)
         Me.PerformLayout()

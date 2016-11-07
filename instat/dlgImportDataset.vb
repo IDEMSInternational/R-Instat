@@ -53,7 +53,7 @@ Public Class dlgImportDataset
         bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
-        ucrInputName.bSuggestEditOnLeave = True
+        ucrInputName.bAutoChangeOnLeave = True
         strFilePathToUseOnLoad = ""
     End Sub
 

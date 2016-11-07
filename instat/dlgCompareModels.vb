@@ -14,7 +14,10 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgCompareModels
+    Public strOutput As String
+    Public clsPlotDist As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -28,15 +31,25 @@ Public Class dlgCompareModels
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
-
+        clsPlotDist.SetRCommand("plotDist")
+        ucrBase.clsRsyntax.SetFunction("grid.arrange")
     End Sub
 
     Private Sub TestOKEnabled()
+        If nudXlimMax.Value > nudXlimMin.Value AndAlso nudYlimMax.Value > nudYlimMin.Value Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
     Private Sub SetDefaults()
-
+        rdoSingle.Checked = True
+        rdoDensity.Checked = True
+        nudNumberofColumns.Enabled = False
+        lblNumberofColumns.Enabled = False
+        rdoCombine.Enabled = False
     End Sub
 
     Private Sub ReopenDialog()
@@ -46,5 +59,83 @@ Public Class dlgCompareModels
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDistributionForCompareModels_ParameterChanged() Handles ucrDistributionForCompareModels.ParameterChanged
+        distParameters()
+    End Sub
+
+    Private Sub distParameters()
+        clsPlotDist.ClearParameters()
+        clsPlotDist.AddParameter("dist", Chr(34) & ucrDistributionForCompareModels.clsCurrDistribution.strRName & Chr(34))
+        For Each clstempparam In ucrDistributionForCompareModels.clsCurrRFunction.clsParameters
+            clsPlotDist.AddParameter(clstempparam.Clone())
+        Next
+    End Sub
+
+    Private Sub cmdAddNewDistributions_Click(sender As Object, e As EventArgs) Handles cmdAddNewDistributions.Click
+        sdgAddNewDistribution.ShowDialog()
+    End Sub
+
+    Private Sub nudXlimMin_ValueChanged(sender As Object, e As EventArgs) Handles nudXlimMin.ValueChanged, nudYlimMin.ValueChanged, nudNumberofColumns.ValueChanged, nudXlimMax.ValueChanged, nudYlimMax.ValueChanged
+        XLimits()
+        Ylimits()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub grpPlotOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCDF.CheckedChanged, rdoDensity.CheckedChanged, rdoHistogram.CheckedChanged, rdoqq.CheckedChanged
+        kindParameters()
+    End Sub
+
+    Private Sub Ylimits()
+        If nudYlimMax.Value > nudYlimMin.Value Then
+            If nudYlimMax.Text <> "" AndAlso nudYlimMin.Text <> "" Then
+                clsPlotDist.AddParameter("ylim", "c(" & nudYlimMin.Text & "," & nudYlimMax.Text & ")")
+            Else
+                clsPlotDist.RemoveParameterByName("ylim")
+            End If
+            clsPlotDist.RemoveParameterByName("ylim")
+        End If
+    End Sub
+    Private Sub XLimits()
+        If nudXlimMax.Value > nudXlimMin.Value Then
+            If nudXlimMax.Text <> "" AndAlso nudXlimMin.Text <> "" Then
+                clsPlotDist.AddParameter("xlim", "c(" & nudXlimMin.Text & "," & nudXlimMax.Text & ")")
+
+            Else
+                clsPlotDist.RemoveParameterByName("xlim")
+            End If
+        Else
+            clsPlotDist.RemoveParameterByName("xlim")
+        End If
+
+    End Sub
+
+    Private Sub kindParameters()
+        If rdoqq.Checked Then
+            clsPlotDist.AddParameter("kind", Chr(34) & "qq" & Chr(34))
+        ElseIf rdoHistogram.Checked Then
+            clsPlotDist.AddParameter("kind", Chr(34) & "histogram" & Chr(34))
+        ElseIf rdoCDF.Checked Then
+            clsPlotDist.AddParameter("kind", Chr(34) & "cdf" & Chr(34))
+        Else
+            clsPlotDist.AddParameter("kind", Chr(34) & "density" & Chr(34))
+        End If
+
+    End Sub
+
+    Private Sub plotgraphspar()
+        If rdoSingle.Checked Then
+            cmdAddNewDistributions.Enabled = False
+            ucrBase.clsRsyntax.AddParameter("x", clsPlotDist.ToScript)
+            ucrBase.clsRsyntax.AddParameter("ncol", 1)
+        ElseIf rdoCombine.Checked Then
+            cmdAddNewDistributions.Enabled = True
+            nudNumberofColumns.Enabled = True
+            lblNumberofColumns.Enabled = True
+        End If
+    End Sub
+    Private Sub grpPlotGraphs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCombine.CheckedChanged, rdoSingle.CheckedChanged
+        plotgraphspar()
     End Sub
 End Class
