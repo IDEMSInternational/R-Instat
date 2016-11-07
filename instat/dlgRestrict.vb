@@ -62,6 +62,7 @@ Public Class dlgRestrict
         ucrReceiverFilter.SetMeAsReceiver()
         ucrNewDataFrameName.SetValidationTypeAsRVariable()
         ucrBase.iHelpTopicID = 340
+        rdoApplyAsSubset.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -70,6 +71,8 @@ Public Class dlgRestrict
         SetDefaultNewDataFrameName()
         SetFilterSubsetStatus()
         SetDefaultDataFrame()
+        ucrNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
+        lblNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
     End Sub
 
     Private Sub TestOkEnabled()

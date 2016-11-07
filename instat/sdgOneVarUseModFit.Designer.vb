@@ -72,7 +72,7 @@ Partial Class sdgOneVarUseModFit
         Me.tbcPlots.Location = New System.Drawing.Point(4, 22)
         Me.tbcPlots.Name = "tbcPlots"
         Me.tbcPlots.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbcPlots.Size = New System.Drawing.Size(210, 191)
+        Me.tbcPlots.Size = New System.Drawing.Size(210, 183)
         Me.tbcPlots.TabIndex = 0
         Me.tbcPlots.Text = "Plots"
         Me.tbcPlots.UseVisualStyleBackColor = True
@@ -268,6 +268,7 @@ Partial Class sdgOneVarUseModFit
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarUseModFit"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Fit Model"
         Me.tbcQuantiles.ResumeLayout(False)
         Me.tbcPlots.ResumeLayout(False)

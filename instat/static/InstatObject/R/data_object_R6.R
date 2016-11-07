@@ -369,6 +369,16 @@ data_object$set("public", "get_changes", function() {
 }
 )
 
+data_object$set("public", "get_calculations", function() {
+  return(private$calculations)
+}
+)
+
+data_object$set("public", "get_calculation_names", function() {
+  return(names(private$calculations))
+}
+)
+
 data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
   
   # Column name must be character
@@ -559,7 +569,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
     done = FALSE
     str_data_type <- self$get_variables_metadata(property = data_type_label, column = col_name)
     curr_column <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-    if(str_data_type == "factor") {
+    if("factor" %in% str_data_type) {
       if(!missing(rows)) {
         if(!is.na(new_value) && !new_value %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) {
           stop("new_value must be an existing level of the factor column.")
@@ -841,6 +851,11 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
   old_attr <- attributes(private$data)
   # Need to use rbind.fill (not bind_rows) because it preserves column attributes
   if(before && row_position == 1) {
+    # This transfers attributes to new data so that they are kept after rbind.fill
+    # Only needed when row_data is first argument to rbind.fill
+    for(i in seq_along(row_data)) {
+      attributes(row_data[[i]]) <- attributes(curr_data[[i]])
+    }
     self$set_data(rbind.fill(row_data, curr_data))
   }
   else if(!before && row_position == nrow(curr_data)) {
@@ -926,7 +941,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type = "factor", factor_numeric = "by_levels") {
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels") {
   for(col_name in col_names){
     if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
       stop(col_name, " is not a column in ", get_metadata(data_name_label))
@@ -939,7 +954,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
   }
   
   
-  if(!(to_type %in% c("integer", "factor", "numeric", "character"))){
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))){
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -950,22 +965,23 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
   for(col_name in col_names) {
     curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
     if(to_type=="factor"){
-      self$add_columns_to_data(col_name = col_name, col_data = as.factor(curr_col))
+      # Warning: this is different from expected R behaviour
+      # Any ordered columns would become unordered factors
+      self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
     }
-    
-    if(to_type=="integer"){
+    else if(to_type=="ordered_factor") {
+      self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
+    }
+    else if(to_type=="integer") {
       self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
     }
-    
-    if(to_type=="numeric"){
-      if(is.factor(curr_col) && (factor_numeric == "by_levels")){
+    else if(to_type=="numeric") {
+      if(is.factor(curr_col) && (factor_numeric == "by_levels")) {
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(curr_col))[curr_col])
-      }else{
-        self$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col) )
       }
+      elseself$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col))
     }
-    
-    if(to_type=="character"){
+    else if(to_type=="character") {
       self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))
     }
     self$append_to_variables_metadata(property = display_decimal_label, col_names = col_name, new_val = get_default_decimal_places(curr_col))
@@ -1036,7 +1052,7 @@ data_object$set("public", "reorder_factor_levels", function(col_name, new_level_
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
   if(length(new_level_names)!=length(levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop("Incorrect number of new level names given.")
   if(!all(new_level_names %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop(paste("new_level_names must be a reordering of the current levels:",paste(levels(data[[col_name]]), collapse = " ")))
-  self$add_columns_to_data(col_name = col_name, col_data = factor(self$get_columns_from_data(col_name, use_current_filter = FALSE), levels = new_level_names))
+  self$add_columns_to_data(col_name = col_name, col_data = factor(self$get_columns_from_data(col_name, use_current_filter = FALSE), levels = new_level_names, ordered = is.ordered(self$get_columns_from_data(col_name, use_current_filter = FALSE))))
   self$variables_metadata_changed <- TRUE
 }
 )
@@ -1061,7 +1077,7 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
     if(length(include) > 0 || length(exclude) > 0) {
       curr_var_metadata = var_metadata[col, ]
       if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
-         && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% include[[prop]]))) {
+         && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
         out <- c(out, col)
       }
     }
@@ -1511,12 +1527,17 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
   if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
   numeric_geom <- match.fun(numeric)
   cat_geom <- match.fun(categorical)
-  localenv <- environment()
+  
+  curr_data <- self$get_data_frame()
+  column_types <- c()
+  for(col in columns) {
+    # TODO this could be method to avoid needing to get full data frame in this method
+    # Everything non numeric is treated as categorical
+    if(is.numeric(curr_data[[col]])) column_types <- c(column_types, "numeric")
+    else column_types <- c(column_types, "cat")
+  }
+  
   if(output == "facets") {
-    column_types <- unique(self$get_variables_metadata(column = columns, property = data_type_label))
-    column_types <- as.vector(column_types)
-    column_types[column_types == "integer"] <- "numeric"
-    column_types[column_types == "factor" | column_types == "character" | column_types == "logical"] <- "cat"
     column_types <- unique(column_types)
     if(length(column_types) > 1) {
       if(output == "facets") warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
@@ -1548,11 +1569,6 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     return(g)
   }
   else {
-    column_types <- self$get_variables_metadata(column = columns, property = data_type_label)
-    column_types <- as.vector(column_types)
-    column_types[column_types == "integer"] <- "numeric"
-    column_types[column_types == "factor" | column_types == "character" | column_types == "logical"] <- "cat"
-    curr_data <- self$get_data_frame()
     graphs <- list()
     i = 1
     for(column in columns) {
@@ -1566,7 +1582,6 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
       }
       else stop("Cannot plot columns of type:", column_types[i])
       
-    
       if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point") {
         g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column)))
       }

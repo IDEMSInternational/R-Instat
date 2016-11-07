@@ -29,6 +29,7 @@ Public Class ucrDataFrame
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillComboBox()
         If bFirstLoad Then
+            InitialiseControl()
             bFirstLoad = False
         End If
         SetDataFrameProperties()
@@ -130,7 +131,7 @@ Public Class ucrDataFrame
         Set(bValue As Boolean)
             bPvtUseFilteredData = bValue
             If bPvtUseFilteredData Then
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                     clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
                 Else
                     clsCurrDataFrame.RemoveParameterByName("use_current_filter")
@@ -140,4 +141,9 @@ Public Class ucrDataFrame
             End If
         End Set
     End Property
+
+    Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
+        'TODO Combo box should be replaced by ucrInput so that context menu done automatically
+        Clipboard.SetText(cboAvailableDataFrames.SelectedText)
+    End Sub
 End Class

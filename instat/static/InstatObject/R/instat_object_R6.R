@@ -322,6 +322,16 @@ instat_object$set("public", "get_metadata_changed", function(data_name) {
 } 
 )
 
+instat_object$set("public", "get_calculations", function(data_name) {
+  return(self$get_data_objects(data_name)$get_calculations())
+} 
+)
+
+instat_object$set("public", "get_calculation_names", function(data_name) {
+  return(self$get_data_objects(data_name)$get_calculation_names())
+} 
+)
+
 instat_object$set("public", "dataframe_count", function() {
   return(length(private$.data_objects))
 } 
@@ -677,7 +687,7 @@ instat_object$set("public", "reorder_columns_in_data", function(data_name, col_o
 )
 
 #TODO Think how to use row_data argument
-instat_object$set("public", "insert_row_in_data", function(data_name, start_row, row_data = c(), number_rows, before = FALSE) {
+instat_object$set("public", "insert_row_in_data", function(data_name, start_row, row_data = c(), number_rows = 1, before = FALSE) {
   self$get_data_objects(data_name)$insert_row_in_data(start_row = start_row, row_data = row_data, number_rows = number_rows, before = before)
 }
 )
@@ -696,6 +706,17 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
+  ind <- c()
+  for(i in seq_along(private$.links)) {
+    if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
+      ind <- c(ind, i)
+    }
+  }
+  #TODO Should this be delete or disable?
+  if(length(ind) > 0) {
+    private$.links[ind] <- NULL
+    message(length(ind), " links removed")
+  }
 } 
 )
 
@@ -722,7 +743,7 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
 } 
 )
 
-instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type ="factor", factor_numeric = "by_levels") {
+instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels") {
   self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric)
 } 
 )
