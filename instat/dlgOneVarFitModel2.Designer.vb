@@ -275,6 +275,7 @@ Partial Class dlgOneVarFitModel
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOneVarFitModel"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Fitting a Model for One Variable"
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).EndInit()

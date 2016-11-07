@@ -34,6 +34,7 @@ Public Class dlgUseGraph
         ucrGraphReceiver.SetMeAsReceiver()
         ucrGraphsSelector.Reset()
         ucrSaveGraphForUseGraph.chkSaveGraph.Checked = False
+        ucrSaveGraphForUseGraph.strPrefix = "UseGraph"
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
@@ -44,7 +45,6 @@ Public Class dlgUseGraph
         clsLeftCommand.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsLeftCommand)
         ucrSaveGraphForUseGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
-        ucrSaveGraphForUseGraph.strPrefix = "Usedgraph"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
