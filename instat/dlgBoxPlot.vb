@@ -54,8 +54,7 @@ Public Class dlgBoxplot
         'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
-        cmdBoxPlotOptions.Enabled = True
-        cmdOptions.Enabled = True
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
         SetXParameter()
     End Sub
@@ -183,6 +182,11 @@ Public Class dlgBoxplot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
+
+        TestOkEnabled()
+    End Sub
+
+    Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
             cmdBoxPlotOptions.Enabled = True
             cmdOptions.Enabled = True
@@ -190,9 +194,7 @@ Public Class dlgBoxplot
             cmdBoxPlotOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
-        TestOkEnabled()
     End Sub
-
     Private Sub ucrSaveBoxplot_GraphNameChanged() Handles ucrSaveBoxplot.GraphNameChanged, ucrSaveBoxplot.SaveGraphCheckedChanged
         If ucrSaveBoxplot.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveBoxplot.strGraphName, strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBoxplot.strGraphName)
