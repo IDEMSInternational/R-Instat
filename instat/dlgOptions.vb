@@ -42,6 +42,7 @@ Public Class dlgOptions
     End Sub
 
     Private Sub InitialiseDialog()
+        'ucrBase.iHelpTopicID = 336
         Dim strPreviewText As String
         nudMaxRows.Maximum = Integer.MaxValue
         nudMaxRows.Increment = 10
