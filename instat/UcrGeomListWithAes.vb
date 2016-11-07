@@ -115,8 +115,8 @@ Public Class UcrGeomListWithParameters
             If Not chkIgnoreGlobalAes.Checked Then
                 For Each clsParam In clsGgplotAesFunction.clsParameters
                     If clsParam.strArgumentName = lstCurrArguments(i) Then
-                        'For some geoms like BoxPlot, when the x aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
-                        If Not (clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
+                        'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
+                        If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
                             lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
                             lstAesParameterUcr(i).Enabled = Not bFixAes
                             Exit For
@@ -126,7 +126,7 @@ Public Class UcrGeomListWithParameters
             End If
             For Each clsParam In clsGeomAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If Not (clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
+                    If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
                         lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
                         lstAesParameterUcr(i).Enabled = True
                         Exit For
