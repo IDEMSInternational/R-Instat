@@ -643,6 +643,7 @@ Partial Class frmMain
         '
         'mnuDescribeThemes
         '
+        Me.mnuDescribeThemes.Enabled = False
         Me.mnuDescribeThemes.Name = "mnuDescribeThemes"
         Me.mnuDescribeThemes.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeThemes.Text = "Themes..."
@@ -1026,7 +1027,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticEvaporationSite.Enabled = False
         Me.mnuClimaticEvaporationSite.Name = "mnuClimaticEvaporationSite"
-        Me.mnuClimaticEvaporationSite.Size = New System.Drawing.Size(127, 22)
+        Me.mnuClimaticEvaporationSite.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticEvaporationSite.Tag = "Site"
         Me.mnuClimaticEvaporationSite.Text = "Site..."
         '
@@ -1034,7 +1035,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticEvaporationPenman.Enabled = False
         Me.mnuClimaticEvaporationPenman.Name = "mnuClimaticEvaporationPenman"
-        Me.mnuClimaticEvaporationPenman.Size = New System.Drawing.Size(127, 22)
+        Me.mnuClimaticEvaporationPenman.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticEvaporationPenman.Tag = "Penman"
         Me.mnuClimaticEvaporationPenman.Text = "Penman..."
         '
@@ -1266,7 +1267,7 @@ Partial Class frmMain
         'mnuClimaticFileOpensst
         '
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
-        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(134, 22)
+        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticFileOpensst.Text = "Open SST..."
         '
         'mnuClimaticOrganise
@@ -1286,6 +1287,7 @@ Partial Class frmMain
         '
         'mnuClimaticOrganiseEventsStartoftheRains
         '
+        Me.mnuClimaticOrganiseEventsStartoftheRains.Enabled = False
         Me.mnuClimaticOrganiseEventsStartoftheRains.Name = "mnuClimaticOrganiseEventsStartoftheRains"
         Me.mnuClimaticOrganiseEventsStartoftheRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticOrganiseEventsStartoftheRains.Text = "Start of the Rains..."
@@ -1298,18 +1300,21 @@ Partial Class frmMain
         '
         'mnuClimaticOrganiseEventsSpells
         '
+        Me.mnuClimaticOrganiseEventsSpells.Enabled = False
         Me.mnuClimaticOrganiseEventsSpells.Name = "mnuClimaticOrganiseEventsSpells"
         Me.mnuClimaticOrganiseEventsSpells.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticOrganiseEventsSpells.Text = "Spells..."
         '
         'mnuClimaticOrganiseEventsWaterBalance
         '
+        Me.mnuClimaticOrganiseEventsWaterBalance.Enabled = False
         Me.mnuClimaticOrganiseEventsWaterBalance.Name = "mnuClimaticOrganiseEventsWaterBalance"
         Me.mnuClimaticOrganiseEventsWaterBalance.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticOrganiseEventsWaterBalance.Text = "Water Balance..."
         '
         'mnuClimaticOrganiseEventsEndoftheRains
         '
+        Me.mnuClimaticOrganiseEventsEndoftheRains.Enabled = False
         Me.mnuClimaticOrganiseEventsEndoftheRains.Name = "mnuClimaticOrganiseEventsEndoftheRains"
         Me.mnuClimaticOrganiseEventsEndoftheRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticOrganiseEventsEndoftheRains.Text = "End of the Rains..."
@@ -1399,7 +1404,7 @@ Partial Class frmMain
         'mnuClimaticDescribeDescribeDaily
         '
         Me.mnuClimaticDescribeDescribeDaily.Name = "mnuClimaticDescribeDescribeDaily"
-        Me.mnuClimaticDescribeDescribeDaily.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticDescribeDescribeDaily.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticDescribeDescribeDaily.Text = "Display Daily..."
         '
         'mnuClimaticModel
@@ -1809,6 +1814,7 @@ Partial Class frmMain
         '
         'mnuEditFind
         '
+        Me.mnuEditFind.Enabled = False
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
         Me.mnuEditFind.Size = New System.Drawing.Size(183, 22)
@@ -1817,6 +1823,7 @@ Partial Class frmMain
         '
         'mnuEditFindNext
         '
+        Me.mnuEditFindNext.Enabled = False
         Me.mnuEditFindNext.Name = "mnuEditFindNext"
         Me.mnuEditFindNext.Size = New System.Drawing.Size(183, 22)
         Me.mnuEditFindNext.Text = "Find Next"

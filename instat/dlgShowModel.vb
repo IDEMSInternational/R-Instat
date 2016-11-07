@@ -38,6 +38,7 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 157
         ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
         ucrReceiverExpressionForTablePlus.SetMeAsReceiver()
         ucrReceiverExpressionForTablePlus.SetIncludedDataTypes({"numeric"})

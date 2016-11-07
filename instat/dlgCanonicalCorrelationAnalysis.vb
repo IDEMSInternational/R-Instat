@@ -34,7 +34,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrBaseCCA.clsRsyntax.iCallType = 0
         ucrReceiverYvariables.Selector = ucrSelectorCCA
         ucrReceiverXvariables.Selector = ucrSelectorCCA
-        ucrBaseCCA.iHelpTopicID = 188
+        ucrBaseCCA.iHelpTopicID = 423
         ucrReceiverYvariables.SetDataType("numeric")
         ucrReceiverXvariables.SetDataType("numeric")
         ucrResultName.SetDefaultTypeAsModel()
