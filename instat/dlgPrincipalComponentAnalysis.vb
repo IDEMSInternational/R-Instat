@@ -41,7 +41,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrResultName.SetValidationTypeAsRVariable()
         ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgPrincipalComponentAnalysis.ucrSelectorFactor.SetDataframe(ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
-        ucrBasePCA.iHelpTopicID = 187
+        ucrBasePCA.iHelpTopicID = 422
     End Sub
 
     Private Sub ReopenDialog()
