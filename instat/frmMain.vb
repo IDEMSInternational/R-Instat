@@ -1249,4 +1249,28 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnUseDate.Click
         DlgUseDate.ShowDialog()
     End Sub
+
+    Private Sub mnuHelpIntroduction_Click(sender As Object, e As EventArgs) Handles mnuHelpIntroduction.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "0")
+    End Sub
+
+    Private Sub mnuHelpHistoryAndFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpHistoryAndFAQ.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "290")
+    End Sub
+
+    Private Sub mnuHelpGettingStarted_Click(sender As Object, e As EventArgs) Handles mnuHelpGettingStarted.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "3")
+    End Sub
+
+    Private Sub mnuHelpMenusAndDialogues_Click(sender As Object, e As EventArgs) Handles mnuHelpMenusAndDialogues.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
+    End Sub
+
+    Private Sub mnuHelpRPackagesAndCommands_Click(sender As Object, e As EventArgs) Handles mnuHelpRPackagesAndCommands.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "26")
+    End Sub
+
+    Private Sub mnuHelpDataSets_Click(sender As Object, e As EventArgs) Handles mnuHelpDataSets.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "71")
+    End Sub
 End Class
