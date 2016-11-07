@@ -745,6 +745,7 @@ Partial Class sdgSimpleRegOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgSimpleRegOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Graph_and_Display_Options"
         Me.Text = "Graph and Display Options"
         Me.tbGraphics.ResumeLayout(False)
