@@ -88,7 +88,6 @@ Public Class dlgRugPlot
         'wrong topic
 
         ucrSaveRugPlot.SetDataFrameSelector(ucrRugPlotSelector.ucrAvailableDataFrames)
-        ucrSaveRugPlot.strPrefix = "Rug"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
     End Sub
@@ -98,6 +97,7 @@ Public Class dlgRugPlot
         ucrRugPlotSelector.Reset()
         ucrRugPlotSelector.Focus()
         ucrVariablesAsFactorForRugPlot.ResetControl()
+        ucrSaveRugPlot.strPrefix = "Rug"
         sdgPlots.Reset()
         TestOkEnabled()
     End Sub
