@@ -45,7 +45,8 @@ Public Class dlgCorrelation
         nudConfidenceInterval.Minimum = 0
         nudConfidenceInterval.Maximum = 1
         nudConfidenceInterval.Increment = 0.05
-        ucrBase.iHelpTopicID = 186
+        ucrBase.iHelpTopicID = 421
+        'Help ID changed from 186
     End Sub
 
     Private Sub ReopenDialog()
