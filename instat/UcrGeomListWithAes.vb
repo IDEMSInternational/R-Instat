@@ -94,8 +94,8 @@ Public Class UcrGeomListWithParameters
         chkApplyOnAllLayers.Checked = bApplyAesGlobally
         chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes 'Task: check if this launches checkchanged and accordingly delete SetAes below.
 
+        bCurrentFixAes = bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
         'SetAes needs to be called after the IgnoreGlobalAes has been setup as it determines whether the global aes are written in the rceivers or not.
-        bCurrentFixAes = bFixAes
         SetAes(bCurrentFixAes)
         'Warning: SetAes is called three times when a layer is created... one in the load, one in the setup ... (and one in the ignoreGAes check changed ?)
     End Sub
@@ -115,10 +115,10 @@ Public Class UcrGeomListWithParameters
             If Not chkIgnoreGlobalAes.Checked Then
                 For Each clsParam In clsGgplotAesFunction.clsParameters
                     If clsParam.strArgumentName = lstCurrArguments(i) Then
-                        'For some geoms like BoxPlot, when the x aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
-                        If Not (clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
+                        'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
+                        If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
                             lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                            lstAesParameterUcr(i).Enabled = Not bFixAes
+                            lstAesParameterUcr(i).Enabled = Not bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
                             Exit For
                         End If
                     End If
@@ -126,7 +126,7 @@ Public Class UcrGeomListWithParameters
             End If
             For Each clsParam In clsGeomAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If Not (clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
+                    If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
                         lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
                         lstAesParameterUcr(i).Enabled = True
                         Exit For
@@ -211,6 +211,7 @@ Public Class UcrGeomListWithParameters
                 clsGeomAesFunction.AddParameter(lstCurrArguments(iIndex), ucrChangedReceiver.GetVariableNames(False))
             ElseIf iIndex < lstCurrArguments.Count Then 'Warning/Task: got an error here. The iIndex was longer than lstCurrArguments when clicking on edit layer. Don't really understand how this is possible. Just added the reality check but might need to put more thoughts into this...
                 clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
+            Else MsgBox("Developer Error: the iIndex (going through lstAesParameterUcr) in ucrReceiverParam_WithMeSelectionChanged is greater than lstAesParameterUcr.count. We beleive that this occurs when editting a layer with fewer aes parameters than there are filled aesthetics parameters in the GlobalAesthetics.", MsgBoxStyle.OkOnly)
             End If
         End If
     End Sub

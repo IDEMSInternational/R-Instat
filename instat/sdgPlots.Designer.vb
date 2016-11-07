@@ -60,6 +60,8 @@ Partial Class sdgPlots
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.lblTheme = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.tabCoordinates = New System.Windows.Forms.TabPage()
+        Me.lblWarning = New System.Windows.Forms.Label()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabFacet.SuspendLayout()
         CType(Me.nudNoOfRowsOrColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +71,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.SuspendLayout()
         Me.tbpYAxis.SuspendLayout()
         Me.tabTheme.SuspendLayout()
+        Me.tabCoordinates.SuspendLayout()
         Me.SuspendLayout()
         '
         'tabctrlBoxSubdialog
@@ -79,6 +82,7 @@ Partial Class sdgPlots
         Me.tabctrlBoxSubdialog.Controls.Add(Me.tbpXAxis)
         Me.tabctrlBoxSubdialog.Controls.Add(Me.tbpYAxis)
         Me.tabctrlBoxSubdialog.Controls.Add(Me.tabTheme)
+        Me.tabctrlBoxSubdialog.Controls.Add(Me.tabCoordinates)
         Me.tabctrlBoxSubdialog.Location = New System.Drawing.Point(1, 3)
         Me.tabctrlBoxSubdialog.Name = "tabctrlBoxSubdialog"
         Me.tabctrlBoxSubdialog.SelectedIndex = 0
@@ -468,6 +472,27 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'tabCoordinates
+        '
+        Me.tabCoordinates.Controls.Add(Me.lblWarning)
+        Me.tabCoordinates.Location = New System.Drawing.Point(4, 22)
+        Me.tabCoordinates.Name = "tabCoordinates"
+        Me.tabCoordinates.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabCoordinates.Size = New System.Drawing.Size(472, 304)
+        Me.tabCoordinates.TabIndex = 7
+        Me.tabCoordinates.Text = "Coordinates"
+        Me.tabCoordinates.UseVisualStyleBackColor = True
+        '
+        'lblWarning
+        '
+        Me.lblWarning.AutoSize = True
+        Me.lblWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWarning.Location = New System.Drawing.Point(99, 93)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Size = New System.Drawing.Size(213, 20)
+        Me.lblWarning.TabIndex = 0
+        Me.lblWarning.Text = "This is yet to be implemented"
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -496,6 +521,8 @@ Partial Class sdgPlots
         Me.tbpYAxis.ResumeLayout(False)
         Me.tabTheme.ResumeLayout(False)
         Me.tabTheme.PerformLayout()
+        Me.tabCoordinates.ResumeLayout(False)
+        Me.tabCoordinates.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -538,6 +565,8 @@ Partial Class sdgPlots
     Friend WithEvents ucrYAxis As ucrAxes
     Friend WithEvents ucrInputLegend As ucrInputTextBox
     Friend WithEvents chkFreeSpace As CheckBox
+    Friend WithEvents tabCoordinates As TabPage
+    Friend WithEvents lblWarning As Label
 End Class
 
 

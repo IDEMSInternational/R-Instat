@@ -23,8 +23,7 @@ Public Class dlgExportDataset
 
     Private Sub setDefaultValues()
         txtExportFile.Text = ""
-        chkOptions.Enabled = False
-        grpOptions.Enabled = False
+        chkOptions.Checked = False
         ucrAvailableSheets.Reset()
     End Sub
 
@@ -39,6 +38,8 @@ Public Class dlgExportDataset
             bFirstLoad = False
         End If
         TestOkEnabled()
+        grpOptions.Visible = False
+        chkOptions.Enabled = False
     End Sub
 
     Private Sub TestOkEnabled()
@@ -64,7 +65,8 @@ Public Class dlgExportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWriteCSV)
             Case ".xlsx"
                 clsWriteXLSX.SetRCommand("rio::export")
-                chkOptions.Enabled = True
+                'temp disabled
+                'chkOptions.Enabled = True
                 clsWriteXLSX.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                 clsWriteXLSX.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWriteXLSX)
@@ -72,7 +74,8 @@ Public Class dlgExportDataset
 
             Case ".tsv", ".psv", ".feather", ".fwf", ".rds", ".RData", ".json", ".yml", ".dta", ".sav", ".dbf", ".arff", ".R", ".xml", ".html"
                 clsWriteOthers.SetRCommand("rio::export")
-                chkOptions.Enabled = True
+                'temp disabled
+                'chkOptions.Enabled = True
                 clsWriteOthers.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                 clsWriteOthers.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWriteOthers)

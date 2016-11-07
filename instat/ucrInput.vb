@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrInput
-    Protected bUserTyped As Boolean = False
+    Public bUserTyped As Boolean = False
     Public Event NameChanged()
     Public Event ContentsChanged()
     Protected strValidationType As String = "None"
@@ -28,7 +28,7 @@ Public Class ucrInput
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
     Protected bIsReadOnly As Boolean = False
-    Public bSuggestEditOnLeave As Boolean = False
+    Public bAutoChangeOnLeave As Boolean = False
     Private bLastSilent As Boolean = False
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)

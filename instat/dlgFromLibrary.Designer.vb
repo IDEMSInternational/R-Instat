@@ -153,6 +153,8 @@ Partial Class dlgFromLibrary
         Me.Controls.Add(Me.lstCollection)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgFromLibrary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Open dataset from library"
