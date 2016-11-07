@@ -36,21 +36,6 @@ Public Class dlgPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub SetDefaults()
-        clsRaesFunction.ClearParameters()
-        clsRgeom_lineplotFunction.ClearParameters()
-        chkPoints.Checked = False
-        '        ucrLinePlotSelector.Focus()
-        ucrSaveLinePlot.strPrefix = "Line"
-        ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
-        ucrLinePlotSelector.Reset()
-        ucrVariablesAsFactorForLinePlot.ResetControl()
-        ucrSaveLinePlot.Reset()
-        sdgPlots.Reset()
-        TempOptionsDisabledInMultipleVariablesCase()
-        TestOkEnabled()
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -82,7 +67,41 @@ Public Class dlgPlot
 
 
     End Sub
+    Private Sub SetDefaults()
+        clsRaesFunction.ClearParameters()
+        clsRgeom_lineplotFunction.ClearParameters()
+        chkPoints.Checked = False
+        '        ucrLinePlotSelector.Focus()
+        ucrSaveLinePlot.strPrefix = "Line"
+        ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
+        ucrLinePlotSelector.Reset()
+        ucrVariablesAsFactorForLinePlot.ResetControl()
+        ucrSaveLinePlot.Reset()
+        sdgPlots.Reset()
+        SetXParameter()
+        SetYParameter()
+        TempOptionsDisabledInMultipleVariablesCase()
+        TestOkEnabled()
+    End Sub
 
+
+
+    Private Sub SetXParameter()
+        If Not ucrReceiverX.IsEmpty Then
+            clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
+            ucrFactorOptionalReceiver.SetMeAsReceiver()
+        Else
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+    End Sub
+
+    Private Sub SetYParameter()
+        If Not ucrVariablesAsFactorForLinePlot.IsEmpty Then
+            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForLinePlot.GetVariableNames(False))
+        Else
+            clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
+        End If
+    End Sub
     Private Sub TestOkEnabled()
         'Both x and y aesthetics are mandatory for geom_line. However, when not filled they will be automatically populated by "".
         If (ucrReceiverX.IsEmpty() OrElse ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
@@ -98,12 +117,7 @@ Public Class dlgPlot
 
     Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
 
-        If ucrReceiverX.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
-            ucrFactorOptionalReceiver.SetMeAsReceiver()
-        Else
-            clsRaesFunction.RemoveParameterByName("x")
-        End If
+        SetXParameter()
         TestOkEnabled()
     End Sub
 
@@ -134,11 +148,7 @@ Public Class dlgPlot
     End Sub
 
     Private Sub UcrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForLinePlot.SelectionChanged
-        If Not ucrVariablesAsFactorForLinePlot.IsEmpty() Then
-            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForLinePlot.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("y")
-        End If
+        SetYParameter()
         TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
@@ -164,12 +174,24 @@ Public Class dlgPlot
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_lineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
+        'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
 
+        'The aesthetics parameters on the main dialog are repopulated as required. 
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
-                ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "x" Then
-                ucrReceiverX.Add(clsParam.strArgumentValue)
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrReceiverX.Clear()
+                Else
+                    ucrReceiverX.Add(clsParam.strArgumentValue)
+                End If
+                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
+                'Still might be in the case of bSingleVariable with mapping y="".
+                If clsParam.strArgumentValue <> (Chr(34) & Chr(34)) Then
+                    ucrVariablesAsFactorForLinePlot.Clear()
+                Else ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
+                End If
             ElseIf clsParam.strArgumentName = "colour" Then
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
             End If
