@@ -35,7 +35,7 @@ Partial Class dlgDeleteSheet
         '
         'ucrDataFrameToDelete
         '
-        Me.ucrDataFrameToDelete.bUseCurrentFilter = False
+        Me.ucrDataFrameToDelete.bUseCurrentFilter = True
         Me.ucrDataFrameToDelete.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameToDelete.Name = "ucrDataFrameToDelete"
@@ -49,10 +49,11 @@ Partial Class dlgDeleteSheet
         Me.ClientSize = New System.Drawing.Size(419, 127)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDataFrameToDelete)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteSheet"
+        Me.Text = "Delete Data Frame"
         Me.ResumeLayout(False)
 
     End Sub

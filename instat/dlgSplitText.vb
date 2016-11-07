@@ -60,6 +60,7 @@ Public Class dlgSplitText
         ucrSelectorSplitTextColumn.Focus()
         ucrInputColumnsIntoText.Reset()
         ucrInputColumnsIntoText.SetName("SplitText")
+        ucrInputPattern.ResetText()
         nudN.Value = 2
     End Sub
 

@@ -105,7 +105,7 @@ Public Class sdgLayerOptions
             End If
         End If
         If clsGeomFunction.strRCommand = "geom_bar" OrElse clsGeomFunction.strRCommand = "geom_density" OrElse clsGeomFunction.strRCommand = "geom_freqpoly" Then
-            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1 OrElse ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y")) AndAlso clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "identity") = -1 Then
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1 AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "TRUE")) OrElse (ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
                 clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             End If
             If clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") <> -1 Then
@@ -118,6 +118,12 @@ Public Class sdgLayerOptions
         ElseIf clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" Then
             If clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsAesFunction.AddParameter("x", Chr(34) & Chr(34))
+            End If
+        ElseIf clsGeomFunction.strRCommand = "geom_point" Then
+            If clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+                clsAesFunction.AddParameter("x", Chr(34) & Chr(34))
+            ElseIf clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
+                clsAesFunction.AddParameter("y", Chr(34) & Chr(34))
             End If
         End If
     End Sub

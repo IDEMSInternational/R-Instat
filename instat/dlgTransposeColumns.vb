@@ -42,6 +42,7 @@ Public Class dlgTransposeColumns
     Private Sub SetDefaults()
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataFrameName.Reset()
+        chkNameNewColumns.Checked = False
         If (ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
             ucrNewDataFrameName.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
         Else

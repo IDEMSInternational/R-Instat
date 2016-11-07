@@ -28,11 +28,11 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblFirstVariables = New System.Windows.Forms.Label()
         Me.lbSecondVariable = New System.Windows.Forms.Label()
+        Me.chkOmitMissing = New System.Windows.Forms.CheckBox()
         Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVar = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseDescribeTwoVar = New instat.ucrButtons()
-        Me.chkOmitMissing = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblFirstVariable
@@ -45,9 +45,9 @@ Partial Class dlgDescribeTwoVariable
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(297, 198)
+        Me.cmdSummaries.Location = New System.Drawing.Point(300, 198)
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSummaries.Size = New System.Drawing.Size(105, 23)
         Me.cmdSummaries.TabIndex = 6
         Me.cmdSummaries.Tag = "Summaries"
         Me.cmdSummaries.Text = "Summaries..."
@@ -55,7 +55,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'chkSaveResult
         '
-        Me.chkSaveResult.Location = New System.Drawing.Point(8, 198)
+        Me.chkSaveResult.Location = New System.Drawing.Point(10, 198)
         Me.chkSaveResult.Name = "chkSaveResult"
         Me.chkSaveResult.Size = New System.Drawing.Size(104, 24)
         Me.chkSaveResult.TabIndex = 6
@@ -65,7 +65,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(282, 199)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 198)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 0
@@ -76,21 +76,30 @@ Partial Class dlgDescribeTwoVariable
         'lblFirstVariables
         '
         Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(295, 9)
+        Me.lblFirstVariables.Location = New System.Drawing.Point(275, 41)
         Me.lblFirstVariables.Name = "lblFirstVariables"
-        Me.lblFirstVariables.Size = New System.Drawing.Size(78, 13)
+        Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
         Me.lblFirstVariables.TabIndex = 1
-        Me.lblFirstVariables.Tag = "First_Variable(s)"
-        Me.lblFirstVariables.Text = "First Variable(s)"
+        Me.lblFirstVariables.Tag = "First_Variable(s):"
+        Me.lblFirstVariables.Text = "First Variable(s):"
         '
         'lbSecondVariable
         '
-        Me.lbSecondVariable.Location = New System.Drawing.Point(284, 140)
+        Me.lbSecondVariable.Location = New System.Drawing.Point(274, 152)
         Me.lbSecondVariable.Name = "lbSecondVariable"
-        Me.lbSecondVariable.Size = New System.Drawing.Size(100, 23)
+        Me.lbSecondVariable.Size = New System.Drawing.Size(100, 15)
         Me.lbSecondVariable.TabIndex = 10
-        Me.lbSecondVariable.Tag = "Second_Variable"
-        Me.lbSecondVariable.Text = "Second Variable"
+        Me.lbSecondVariable.Tag = "Second_Variable:"
+        Me.lbSecondVariable.Text = "Second Variable:"
+        '
+        'chkOmitMissing
+        '
+        Me.chkOmitMissing.Location = New System.Drawing.Point(142, 198)
+        Me.chkOmitMissing.Name = "chkOmitMissing"
+        Me.chkOmitMissing.Size = New System.Drawing.Size(126, 25)
+        Me.chkOmitMissing.TabIndex = 12
+        Me.chkOmitMissing.Text = "Omit Missing Values"
+        Me.chkOmitMissing.UseVisualStyleBackColor = True
         '
         'ucrReceiverSecondVar
         '
@@ -103,18 +112,18 @@ Partial Class dlgDescribeTwoVariable
         '
         'ucrReceiverFirstVar
         '
-        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(274, 29)
+        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(274, 56)
         Me.ucrReceiverFirstVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstVar.Name = "ucrReceiverFirstVar"
         Me.ucrReceiverFirstVar.Selector = Nothing
-        Me.ucrReceiverFirstVar.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFirstVar.Size = New System.Drawing.Size(120, 87)
         Me.ucrReceiverFirstVar.TabIndex = 2
         '
         'ucrSelectorDescribeTwoVar
         '
         Me.ucrSelectorDescribeTwoVar.bShowHiddenColumns = False
-        Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = False
-        Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(8, 10)
+        Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = True
+        Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDescribeTwoVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDescribeTwoVar.Name = "ucrSelectorDescribeTwoVar"
         Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(210, 180)
@@ -122,19 +131,10 @@ Partial Class dlgDescribeTwoVariable
         '
         'ucrBaseDescribeTwoVar
         '
-        Me.ucrBaseDescribeTwoVar.Location = New System.Drawing.Point(8, 228)
+        Me.ucrBaseDescribeTwoVar.Location = New System.Drawing.Point(10, 228)
         Me.ucrBaseDescribeTwoVar.Name = "ucrBaseDescribeTwoVar"
         Me.ucrBaseDescribeTwoVar.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseDescribeTwoVar.TabIndex = 8
-        '
-        'chkOmitMissing
-        '
-        Me.chkOmitMissing.Location = New System.Drawing.Point(132, 198)
-        Me.chkOmitMissing.Name = "chkOmitMissing"
-        Me.chkOmitMissing.Size = New System.Drawing.Size(126, 25)
-        Me.chkOmitMissing.TabIndex = 12
-        Me.chkOmitMissing.Text = "Omit Missing Values"
-        Me.chkOmitMissing.UseVisualStyleBackColor = True
         '
         'dlgDescribeTwoVariable
         '

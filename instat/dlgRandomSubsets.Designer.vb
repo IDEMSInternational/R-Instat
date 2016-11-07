@@ -43,43 +43,43 @@ Partial Class dlgRandomSubsets
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(255, 25)
+        Me.lblSelected.Location = New System.Drawing.Point(258, 27)
         Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(49, 13)
+        Me.lblSelected.Size = New System.Drawing.Size(93, 13)
         Me.lblSelected.TabIndex = 1
-        Me.lblSelected.Tag = "Selected"
-        Me.lblSelected.Text = "Selected"
+        Me.lblSelected.Tag = "Selected_Variable:"
+        Me.lblSelected.Text = "Selected Variable:"
         '
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(280, 84)
+        Me.lblSampleSize.Location = New System.Drawing.Point(258, 71)
         Me.lblSampleSize.Name = "lblSampleSize"
-        Me.lblSampleSize.Size = New System.Drawing.Size(65, 13)
+        Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
         Me.lblSampleSize.TabIndex = 6
-        Me.lblSampleSize.Tag = "Sample_Size"
-        Me.lblSampleSize.Text = "Sample Size"
+        Me.lblSampleSize.Tag = "Sample_Size:"
+        Me.lblSampleSize.Text = "Sample Size:"
         '
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(248, 114)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(258, 96)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
-        Me.lblNumberOfColumns.Size = New System.Drawing.Size(99, 13)
+        Me.lblNumberOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberOfColumns.TabIndex = 8
-        Me.lblNumberOfColumns.Tag = "Number_of_Columns"
-        Me.lblNumberOfColumns.Text = "Number of Columns"
+        Me.lblNumberOfColumns.Tag = "Number_of_Columns:"
+        Me.lblNumberOfColumns.Text = "Number of Columns:"
         '
         'nudSampleSize
         '
-        Me.nudSampleSize.Location = New System.Drawing.Point(353, 77)
+        Me.nudSampleSize.Location = New System.Drawing.Point(363, 68)
         Me.nudSampleSize.Name = "nudSampleSize"
         Me.nudSampleSize.Size = New System.Drawing.Size(53, 20)
         Me.nudSampleSize.TabIndex = 11
         '
         'nudNumberOfColumns
         '
-        Me.nudNumberOfColumns.Location = New System.Drawing.Point(353, 107)
+        Me.nudNumberOfColumns.Location = New System.Drawing.Point(363, 94)
         Me.nudNumberOfColumns.Name = "nudNumberOfColumns"
         Me.nudNumberOfColumns.Size = New System.Drawing.Size(53, 20)
         Me.nudNumberOfColumns.TabIndex = 12
@@ -87,7 +87,7 @@ Partial Class dlgRandomSubsets
         'chkWithReplacement
         '
         Me.chkWithReplacement.AutoSize = True
-        Me.chkWithReplacement.Location = New System.Drawing.Point(287, 170)
+        Me.chkWithReplacement.Location = New System.Drawing.Point(257, 146)
         Me.chkWithReplacement.Name = "chkWithReplacement"
         Me.chkWithReplacement.Size = New System.Drawing.Size(114, 17)
         Me.chkWithReplacement.TabIndex = 13
@@ -98,16 +98,16 @@ Partial Class dlgRandomSubsets
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(10, 205)
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(10, 203)
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
-        Me.lblNewDataFrameName.Size = New System.Drawing.Size(118, 13)
+        Me.lblNewDataFrameName.Size = New System.Drawing.Size(121, 13)
         Me.lblNewDataFrameName.TabIndex = 15
-        Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name"
-        Me.lblNewDataFrameName.Text = "New Data Frame Name"
+        Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name:"
+        Me.lblNewDataFrameName.Text = "New Data Frame Name:"
         '
         'nudSetSeed
         '
-        Me.nudSetSeed.Location = New System.Drawing.Point(351, 138)
+        Me.nudSetSeed.Location = New System.Drawing.Point(363, 120)
         Me.nudSetSeed.Name = "nudSetSeed"
         Me.nudSetSeed.Size = New System.Drawing.Size(53, 20)
         Me.nudSetSeed.TabIndex = 16
@@ -115,7 +115,7 @@ Partial Class dlgRandomSubsets
         'chkSetSeed
         '
         Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(294, 141)
+        Me.chkSetSeed.Location = New System.Drawing.Point(257, 121)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(51, 17)
         Me.chkSetSeed.TabIndex = 17
@@ -133,7 +133,7 @@ Partial Class dlgRandomSubsets
         '
         'ucrReceiverSelected
         '
-        Me.ucrReceiverSelected.Location = New System.Drawing.Point(257, 44)
+        Me.ucrReceiverSelected.Location = New System.Drawing.Point(257, 41)
         Me.ucrReceiverSelected.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelected.Name = "ucrReceiverSelected"
         Me.ucrReceiverSelected.Selector = Nothing
@@ -143,7 +143,7 @@ Partial Class dlgRandomSubsets
         'ucrSelectorRandomSubsets
         '
         Me.ucrSelectorRandomSubsets.bShowHiddenColumns = False
-        Me.ucrSelectorRandomSubsets.bUseCurrentFilter = False
+        Me.ucrSelectorRandomSubsets.bUseCurrentFilter = True
         Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorRandomSubsets.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRandomSubsets.Name = "ucrSelectorRandomSubsets"
@@ -161,7 +161,7 @@ Partial Class dlgRandomSubsets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 282)
+        Me.ClientSize = New System.Drawing.Size(425, 282)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.chkSetSeed)
         Me.Controls.Add(Me.nudSetSeed)

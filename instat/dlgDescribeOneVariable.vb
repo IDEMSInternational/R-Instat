@@ -53,6 +53,7 @@ Public Class dlgDescribeOneVariable
         chkSaveResult.Checked = False
         chkSaveResult.Enabled = False
         chkCustomise.Checked = False
+        chkOmitMissing.Checked = False
         ChooseFunction()
         StoreResultsParamenter()
         OutputOption()

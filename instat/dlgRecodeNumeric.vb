@@ -53,6 +53,7 @@ Public Class dlgRecodeNumeric
         ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.ResetText()
         ucrMultipleLabels.ResetText()
+        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -106,9 +107,6 @@ Public Class dlgRecodeNumeric
         ValidateBreakPointLabelCount()
     End Sub
 
-    Private Sub ucrMultipleLabels_Leave(sender As Object, e As EventArgs) Handles ucrMultipleLabels.Leave, ucrMultipleNumericRecode.Leave
-    End Sub
-
     Private Sub AddLabelsParameter()
         If Not ucrMultipleLabels.IsEmpty() Then
             ucrBase.clsRsyntax.AddParameter("labels", clsRFunctionParameter:=ucrMultipleLabels.clsRList)
@@ -157,8 +155,6 @@ Public Class dlgRecodeNumeric
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
-
     End Sub
 
     Private Sub ucrInputRecode_Namechanged() Handles ucrInputRecode.NameChanged

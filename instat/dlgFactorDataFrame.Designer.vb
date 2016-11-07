@@ -35,17 +35,17 @@ Partial Class dlgFactorDataFrame
         'chkReplaceFactorSheet
         '
         Me.chkReplaceFactorSheet.AutoSize = True
-        Me.chkReplaceFactorSheet.Location = New System.Drawing.Point(255, 49)
+        Me.chkReplaceFactorSheet.Location = New System.Drawing.Point(251, 123)
         Me.chkReplaceFactorSheet.Name = "chkReplaceFactorSheet"
-        Me.chkReplaceFactorSheet.Size = New System.Drawing.Size(166, 17)
+        Me.chkReplaceFactorSheet.Size = New System.Drawing.Size(167, 17)
         Me.chkReplaceFactorSheet.TabIndex = 2
-        Me.chkReplaceFactorSheet.Text = "Replace current Factor Sheet"
+        Me.chkReplaceFactorSheet.Text = "Replace Current Factor Sheet"
         Me.chkReplaceFactorSheet.UseVisualStyleBackColor = True
         '
         'chkAddCurrentContrast
         '
         Me.chkAddCurrentContrast.AutoSize = True
-        Me.chkAddCurrentContrast.Location = New System.Drawing.Point(255, 15)
+        Me.chkAddCurrentContrast.Location = New System.Drawing.Point(251, 146)
         Me.chkAddCurrentContrast.Name = "chkAddCurrentContrast"
         Me.chkAddCurrentContrast.Size = New System.Drawing.Size(129, 17)
         Me.chkAddCurrentContrast.TabIndex = 2
@@ -55,22 +55,22 @@ Partial Class dlgFactorDataFrame
         'lblSelectedFactor
         '
         Me.lblSelectedFactor.AutoSize = True
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(251, 79)
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(253, 34)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
-        Me.lblSelectedFactor.Size = New System.Drawing.Size(120, 13)
+        Me.lblSelectedFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblSelectedFactor.TabIndex = 4
-        Me.lblSelectedFactor.Text = "Selected Factor Column"
+        Me.lblSelectedFactor.Text = "Selected Factor:"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 192)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 205)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverFactorDataFrame
         '
-        Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(254, 95)
+        Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(252, 49)
         Me.ucrReceiverFactorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorDataFrame.Name = "ucrReceiverFactorDataFrame"
         Me.ucrReceiverFactorDataFrame.Selector = Nothing
@@ -80,8 +80,8 @@ Partial Class dlgFactorDataFrame
         'ucrSelectorFactorDataFrame
         '
         Me.ucrSelectorFactorDataFrame.bShowHiddenColumns = False
-        Me.ucrSelectorFactorDataFrame.bUseCurrentFilter = False
-        Me.ucrSelectorFactorDataFrame.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorFactorDataFrame.bUseCurrentFilter = True
+        Me.ucrSelectorFactorDataFrame.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorFactorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactorDataFrame.Name = "ucrSelectorFactorDataFrame"
         Me.ucrSelectorFactorDataFrame.Size = New System.Drawing.Size(210, 180)
@@ -90,16 +90,16 @@ Partial Class dlgFactorDataFrame
         'lblFactorNames
         '
         Me.lblFactorNames.AutoSize = True
-        Me.lblFactorNames.Location = New System.Drawing.Point(254, 124)
+        Me.lblFactorNames.Location = New System.Drawing.Point(249, 81)
         Me.lblFactorNames.Name = "lblFactorNames"
-        Me.lblFactorNames.Size = New System.Drawing.Size(73, 13)
+        Me.lblFactorNames.Size = New System.Drawing.Size(76, 13)
         Me.lblFactorNames.TabIndex = 6
-        Me.lblFactorNames.Text = "Factor Names"
+        Me.lblFactorNames.Text = "Factor Names:"
         '
         'ucrInputFactorNames
         '
         Me.ucrInputFactorNames.IsReadOnly = False
-        Me.ucrInputFactorNames.Location = New System.Drawing.Point(255, 140)
+        Me.ucrInputFactorNames.Location = New System.Drawing.Point(251, 96)
         Me.ucrInputFactorNames.Name = "ucrInputFactorNames"
         Me.ucrInputFactorNames.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputFactorNames.TabIndex = 7
@@ -108,7 +108,7 @@ Partial Class dlgFactorDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 245)
+        Me.ClientSize = New System.Drawing.Size(428, 264)
         Me.Controls.Add(Me.ucrInputFactorNames)
         Me.Controls.Add(Me.lblFactorNames)
         Me.Controls.Add(Me.lblSelectedFactor)

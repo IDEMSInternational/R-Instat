@@ -30,6 +30,7 @@ Public Class dlgUseDate
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 462
 
     End Sub
 
@@ -51,8 +52,13 @@ Public Class dlgUseDate
 
 
     End Sub
-
+    'Disabling TesOKEnabled by Ensuring in all cases its disabled
     Private Sub TestOKEnabled()
+        If Not ucrReceiverUseDate.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 

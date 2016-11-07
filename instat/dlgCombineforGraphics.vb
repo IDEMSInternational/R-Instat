@@ -33,7 +33,6 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 430
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
-        ucrSaveCombinedGraph.strPrefix = "CombineGraph"
         ucrSaveCombinedGraph.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
         sdgCombineGraphOptions.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -45,6 +44,7 @@ Public Class dlgCombineforGraphics
         ucrCombineGraphSelector.Reset()
         ucrSaveCombinedGraph.chkSaveGraph.Checked = False
         sdgCombineGraphOptions.SetDefaults()
+        ucrSaveCombinedGraph.strPrefix = "CombineGraph"
         TestOkEnabled()
     End Sub
 

@@ -33,7 +33,7 @@ Partial Class dlgTransposeColumns
         '
         'lblColumnsToTranspose
         '
-        Me.lblColumnsToTranspose.Location = New System.Drawing.Point(269, 28)
+        Me.lblColumnsToTranspose.Location = New System.Drawing.Point(272, 30)
         Me.lblColumnsToTranspose.Name = "lblColumnsToTranspose"
         Me.lblColumnsToTranspose.Size = New System.Drawing.Size(133, 23)
         Me.lblColumnsToTranspose.TabIndex = 3
@@ -42,7 +42,7 @@ Partial Class dlgTransposeColumns
         '
         'chkNameNewColumns
         '
-        Me.chkNameNewColumns.Location = New System.Drawing.Point(272, 161)
+        Me.chkNameNewColumns.Location = New System.Drawing.Point(272, 153)
         Me.chkNameNewColumns.Name = "chkNameNewColumns"
         Me.chkNameNewColumns.Size = New System.Drawing.Size(125, 24)
         Me.chkNameNewColumns.TabIndex = 2
@@ -79,7 +79,7 @@ Partial Class dlgTransposeColumns
         'ucrSelectorTransposeColumns
         '
         Me.ucrSelectorTransposeColumns.bShowHiddenColumns = False
-        Me.ucrSelectorTransposeColumns.bUseCurrentFilter = False
+        Me.ucrSelectorTransposeColumns.bUseCurrentFilter = True
         Me.ucrSelectorTransposeColumns.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorTransposeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTransposeColumns.Name = "ucrSelectorTransposeColumns"
