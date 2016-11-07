@@ -182,7 +182,7 @@ Public Class dlgBoxplot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
-
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
