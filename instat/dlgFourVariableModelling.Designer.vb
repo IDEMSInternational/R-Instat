@@ -32,8 +32,6 @@ Partial Class dlgFourVariableModelling
         Me.lblFirstExplanatoryVariable = New System.Windows.Forms.Label()
         Me.lblResponse = New System.Windows.Forms.Label()
         Me.lblThirdExplanatoryVariable = New System.Windows.Forms.Label()
-        Me.cboModelOperators1 = New System.Windows.Forms.ComboBox()
-        Me.cboModelOperators2 = New System.Windows.Forms.ComboBox()
         Me.lblFirstOperator = New System.Windows.Forms.Label()
         Me.lblSecondOperator = New System.Windows.Forms.Label()
         Me.ucrModelName = New instat.ucrInputComboBox()
@@ -45,6 +43,8 @@ Partial Class dlgFourVariableModelling
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorFourVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseFourVariableModelling = New instat.ucrButtons()
+        Me.ucrInputModelOperators1 = New instat.ucrInputComboBox()
+        Me.ucrInputModelOperators2 = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'chkFirstFunction
@@ -154,24 +154,6 @@ Partial Class dlgFourVariableModelling
         Me.lblThirdExplanatoryVariable.Tag = "Third_Explanatory_Variable"
         Me.lblThirdExplanatoryVariable.Text = "Third Explanatory Variable"
         '
-        'cboModelOperators1
-        '
-        Me.cboModelOperators1.FormattingEnabled = True
-        Me.cboModelOperators1.Items.AddRange(New Object() {"+", ":", "*", "/"})
-        Me.cboModelOperators1.Location = New System.Drawing.Point(339, 119)
-        Me.cboModelOperators1.Name = "cboModelOperators1"
-        Me.cboModelOperators1.Size = New System.Drawing.Size(39, 21)
-        Me.cboModelOperators1.TabIndex = 38
-        '
-        'cboModelOperators2
-        '
-        Me.cboModelOperators2.FormattingEnabled = True
-        Me.cboModelOperators2.Items.AddRange(New Object() {"|", "+", ":", "*", "/"})
-        Me.cboModelOperators2.Location = New System.Drawing.Point(338, 187)
-        Me.cboModelOperators2.Name = "cboModelOperators2"
-        Me.cboModelOperators2.Size = New System.Drawing.Size(39, 21)
-        Me.cboModelOperators2.TabIndex = 39
-        '
         'lblFirstOperator
         '
         Me.lblFirstOperator.AutoSize = True
@@ -254,6 +236,7 @@ Partial Class dlgFourVariableModelling
         'ucrSelectorFourVariableModelling
         '
         Me.ucrSelectorFourVariableModelling.bShowHiddenColumns = False
+        Me.ucrSelectorFourVariableModelling.bUseCurrentFilter = True
         Me.ucrSelectorFourVariableModelling.Location = New System.Drawing.Point(11, 9)
         Me.ucrSelectorFourVariableModelling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFourVariableModelling.Name = "ucrSelectorFourVariableModelling"
@@ -267,15 +250,31 @@ Partial Class dlgFourVariableModelling
         Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(405, 52)
         Me.ucrBaseFourVariableModelling.TabIndex = 0
         '
+        'ucrInputModelOperators1
+        '
+        Me.ucrInputModelOperators1.IsReadOnly = False
+        Me.ucrInputModelOperators1.Location = New System.Drawing.Point(338, 121)
+        Me.ucrInputModelOperators1.Name = "ucrInputModelOperators1"
+        Me.ucrInputModelOperators1.Size = New System.Drawing.Size(39, 21)
+        Me.ucrInputModelOperators1.TabIndex = 42
+        '
+        'ucrInputModelOperators2
+        '
+        Me.ucrInputModelOperators2.IsReadOnly = False
+        Me.ucrInputModelOperators2.Location = New System.Drawing.Point(338, 186)
+        Me.ucrInputModelOperators2.Name = "ucrInputModelOperators2"
+        Me.ucrInputModelOperators2.Size = New System.Drawing.Size(39, 21)
+        Me.ucrInputModelOperators2.TabIndex = 43
+        '
         'dlgFourVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(413, 368)
+        Me.Controls.Add(Me.ucrInputModelOperators2)
+        Me.Controls.Add(Me.ucrInputModelOperators1)
         Me.Controls.Add(Me.lblSecondOperator)
         Me.Controls.Add(Me.lblFirstOperator)
-        Me.Controls.Add(Me.cboModelOperators2)
-        Me.Controls.Add(Me.cboModelOperators1)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.lblThirdExplanatoryVariable)
         Me.Controls.Add(Me.ucrThirdExplanatoryVariable)
@@ -326,8 +325,8 @@ Partial Class dlgFourVariableModelling
     Friend WithEvents lblThirdExplanatoryVariable As Label
     Friend WithEvents ucrThirdExplanatoryVariable As ucrReceiverSingle
     Friend WithEvents ucrModelName As ucrInputComboBox
-    Friend WithEvents cboModelOperators1 As ComboBox
-    Friend WithEvents cboModelOperators2 As ComboBox
     Friend WithEvents lblFirstOperator As Label
     Friend WithEvents lblSecondOperator As Label
+    Friend WithEvents ucrInputModelOperators1 As ucrInputComboBox
+    Friend WithEvents ucrInputModelOperators2 As ucrInputComboBox
 End Class
