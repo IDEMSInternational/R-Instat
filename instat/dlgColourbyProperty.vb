@@ -32,6 +32,7 @@ Public Class dlgColourbyProperty
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 391
         ucrReceiverMetadataProperty.Selector = ucrSelectorColourByMetadata
         ucrReceiverMetadataProperty.SetItemType("metadata")
         clsSetColoursFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")

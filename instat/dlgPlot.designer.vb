@@ -25,7 +25,7 @@ Partial Class dlgPlot
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdPointOptions = New System.Windows.Forms.Button()
+        Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.chkPoints = New System.Windows.Forms.CheckBox()
         Me.ucrSaveLinePlot = New instat.ucrSaveGraph()
@@ -64,15 +64,15 @@ Partial Class dlgPlot
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'cmdPointOptions
+        'cmdLineOptions
         '
-        Me.cmdPointOptions.Location = New System.Drawing.Point(10, 225)
-        Me.cmdPointOptions.Name = "cmdPointOptions"
-        Me.cmdPointOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdPointOptions.TabIndex = 8
-        Me.cmdPointOptions.Tag = "Point_Options"
-        Me.cmdPointOptions.Text = "Point Options"
-        Me.cmdPointOptions.UseVisualStyleBackColor = True
+        Me.cmdLineOptions.Location = New System.Drawing.Point(10, 225)
+        Me.cmdLineOptions.Name = "cmdLineOptions"
+        Me.cmdLineOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdLineOptions.TabIndex = 8
+        Me.cmdLineOptions.Tag = "Line_Options"
+        Me.cmdLineOptions.Text = "Line Options"
+        Me.cmdLineOptions.UseVisualStyleBackColor = True
         '
         'lblFactorOptional
         '
@@ -153,7 +153,7 @@ Partial Class dlgPlot
         Me.Controls.Add(Me.ucrSaveLinePlot)
         Me.Controls.Add(Me.ucrVariablesAsFactorForLinePlot)
         Me.Controls.Add(Me.chkPoints)
-        Me.Controls.Add(Me.cmdPointOptions)
+        Me.Controls.Add(Me.cmdLineOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrLinePlotSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -179,7 +179,7 @@ Partial Class dlgPlot
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrLinePlotSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdPointOptions As Button
+    Friend WithEvents cmdLineOptions As Button
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
     Friend WithEvents chkPoints As CheckBox

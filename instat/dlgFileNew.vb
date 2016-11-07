@@ -36,6 +36,7 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 6
         clsMatrix.SetRCommand("matrix")
         clsMatrix.AddParameter("data", "NA")
         ucrBase.clsRsyntax.SetFunction("data.frame")

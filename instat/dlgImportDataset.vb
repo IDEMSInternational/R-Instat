@@ -76,6 +76,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 11
         'Removes the Sheet Tab control
         grdDataPreview.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
         grdDataPreview.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
