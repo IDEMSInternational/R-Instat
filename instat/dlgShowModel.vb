@@ -38,6 +38,7 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 157
         ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
         ucrReceiverExpressionForTablePlus.SetMeAsReceiver()
@@ -51,6 +52,7 @@ Public Class dlgShowModel
     Private Sub SetDefaults()
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
+        ucrInputNewColNameforTablePlus.Reset()
         rdoQuantiles.Checked = True
         chkSingleValues.Checked = True
         chkGraphResults.Checked = True
@@ -132,18 +134,17 @@ Public Class dlgShowModel
             ucrInputNewColNameforTablePlus.Visible = True
             ucrBase.clsRsyntax.SetAssignTo(ucrInputNewColNameforTablePlus.GetText(), strTempColumn:=ucrInputNewColNameforTablePlus.GetText(), strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToIsPrefix:=False)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
-            ucrBase.clsRsyntax.iCallType = 0
         Else
             ucrBase.clsRsyntax.RemoveAssignTo()
-            ucrBase.clsRsyntax.iCallType = 0
             ucrInputNewColNameforTablePlus.Visible = False
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        ucrBase.clsRsyntax.iCallType = 2
     End Sub
+
     Private Sub DisplayGraphResults()
         If chkGraphResults.Checked Then
             ucrBase.clsRsyntax.AddParameter("plot", "TRUE")
-            ucrBase.clsRsyntax.iCallType = 0
         Else
             ucrBase.clsRsyntax.AddParameter("plot", "FALSE")
         End If
@@ -159,14 +160,16 @@ Public Class dlgShowModel
         ucrBase.clsRsyntax.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34))
         pqParameters()
         If rdoProbabilities.Checked Then
-            ucrInputNewColNameforTablePlus.SetName("prob")
+            If Not ucrInputNewColNameforTablePlus.bUserTyped Then
+                ucrInputNewColNameforTablePlus.SetPrefix("Prob")
+            End If
             lblQuantValues.Visible = True
-            lblProbValues.Visible = False
-            ucrBase.clsRsyntax.SetFunction("mosaic:: pdist")
-
-        Else
-            ucrInputNewColNameforTablePlus.SetPrefix("Quant")
-            ucrInputNewColNameforTablePlus.SetName("Quant")
+                lblProbValues.Visible = False
+                ucrBase.clsRsyntax.SetFunction("mosaic:: pdist")
+            Else
+            If Not ucrInputNewColNameforTablePlus.bUserTyped Then
+                ucrInputNewColNameforTablePlus.SetPrefix("Quant")
+            End If
             lblQuantValues.Visible = False
             lblProbValues.Visible = True
             ucrBase.clsRsyntax.SetFunction("mosaic::qdist")
@@ -209,5 +212,9 @@ Public Class dlgShowModel
             ucrInputProbabilities.Visible = False
             ucrReceiverExpressionForTablePlus.Visible = True
         End If
+    End Sub
+
+    Private Sub ucrInputNewColNameforTablePlus_NameChanged() Handles ucrInputNewColNameforTablePlus.NameChanged
+        SaveResults()
     End Sub
 End Class
