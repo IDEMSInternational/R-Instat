@@ -745,8 +745,8 @@ Partial Class sdgSimpleRegOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgSimpleRegOptions"
-        Me.Tag = "Graph_Display_Options"
-        Me.Text = "Graph Display Options"
+        Me.Tag = "Graph_and_Display_Options"
+        Me.Text = "Graph and Display Options"
         Me.tbGraphics.ResumeLayout(False)
         Me.tcGraphics.ResumeLayout(False)
         Me.tbModel.ResumeLayout(False)
