@@ -33,6 +33,7 @@ Public Class dlgTwoVariableUseModel
     End Sub
 
     Private Sub SetDefaults()
+        ucrBaseUseModel.iHelpTopicID = 379
         ucrReceiverUseModel.SetMeAsReceiver()
         ucrSelectorUseModel.Reset()
         ucrModel.SetName("")
