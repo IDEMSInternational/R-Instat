@@ -49,7 +49,7 @@ Public Class dlgOneVariableGraph
         rdoSingleGraphs.Enabled = False
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 412
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False

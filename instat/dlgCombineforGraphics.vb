@@ -30,7 +30,7 @@ Public Class dlgCombineforGraphics
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 430
+        ucrBase.iHelpTopicID = 431
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
         ucrSaveCombinedGraph.strPrefix = "CombineGraph"

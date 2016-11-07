@@ -73,7 +73,7 @@ Partial Class dlgSummaryBarOrPieChart
         'ucrSummarybarSelector
         '
         Me.ucrSummarybarSelector.bShowHiddenColumns = False
-        Me.ucrSummarybarSelector.bUseCurrentFilter = False
+        Me.ucrSummarybarSelector.bUseCurrentFilter = True
         Me.ucrSummarybarSelector.Location = New System.Drawing.Point(13, 33)
         Me.ucrSummarybarSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSummarybarSelector.Name = "ucrSummarybarSelector"
@@ -208,7 +208,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.Name = "dlgSummaryBarOrPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Summary_Bar_Pie_Chart"
-        Me.Text = "Summary Bar Or PieChart"
+        Me.Text = "Summary Bar Or Pie Chart"
         Me.grpChartOptions.ResumeLayout(False)
         Me.grpChartOptions.PerformLayout()
         Me.ResumeLayout(False)

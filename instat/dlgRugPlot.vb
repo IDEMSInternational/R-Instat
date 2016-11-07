@@ -84,8 +84,8 @@ Public Class dlgRugPlot
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         'should the sdgLayerOptions be linked here as well ? Apparently yes ?
-        ucrBase.iHelpTopicID = 433
-        'wrong topic
+        ucrBase.iHelpTopicID = 476
+
 
         ucrSaveRugPlot.SetDataFrameSelector(ucrRugPlotSelector.ucrAvailableDataFrames)
         ucrSaveRugPlot.strPrefix = "Rug"
