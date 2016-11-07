@@ -41,7 +41,7 @@ Public Class dlgFourVariableModelling
         ucrFirstExplanatory.Selector = ucrSelectorFourVariableModelling
         ucrSecondExplanatoryVariable.Selector = ucrSelectorFourVariableModelling
         ucrThirdExplanatoryVariable.Selector = ucrSelectorFourVariableModelling
-        ucrBaseFourVariableModelling.iHelpTopicID = 176 'this is not the correct ID
+        ucrBaseFourVariableModelling.iHelpTopicID = 385 'this is now the correct ID
         ucrFamily.SetGLMDistributions()
         ucrModelName.SetDataFrameSelector(ucrSelectorFourVariableModelling.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("reg")

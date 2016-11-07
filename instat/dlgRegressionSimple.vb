@@ -36,7 +36,7 @@ Public Class dlgRegressionSimple
         clsModel.SetOperation("~")
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
-        ucrBase.iHelpTopicID = 171
+        ucrBase.iHelpTopicID = 366
         ucrModelName.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("reg")
         ucrModelName.SetItemsTypeAsModels()
