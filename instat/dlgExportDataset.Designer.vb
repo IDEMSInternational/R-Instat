@@ -67,7 +67,7 @@ Partial Class dlgExportDataset
         Me.grpSaveOptions.Size = New System.Drawing.Size(398, 171)
         Me.grpSaveOptions.TabIndex = 1
         Me.grpSaveOptions.TabStop = False
-        Me.grpSaveOptions.Text = "File to which Data will be Exported To"
+        Me.grpSaveOptions.Text = ""
         '
         'grpOptions
         '
@@ -214,7 +214,7 @@ Partial Class dlgExportDataset
         Me.grpSheetSelection.Size = New System.Drawing.Size(398, 69)
         Me.grpSheetSelection.TabIndex = 0
         Me.grpSheetSelection.TabStop = False
-        Me.grpSheetSelection.Text = "Worksheet from which Data will be Exported From"
+        Me.grpSheetSelection.Text = "Select Data Frame to Export"
         '
         'ucrAvailableSheets
         '

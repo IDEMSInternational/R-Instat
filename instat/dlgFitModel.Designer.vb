@@ -27,10 +27,9 @@ Partial Class dlgFitModel
         Me.lblResponseVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
-        Me.ucrDistributionForFitModel = New instat.ucrDistributions()
+        Me.ucrFamily = New instat.ucrDistributions()
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.ucrInputModelPreview = New instat.ucrInputTextBox()
-        Me.ucrSaveModel = New instat.ucrSaveModel()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblExplanatoryModel = New System.Windows.Forms.Label()
         Me.ucrReceiverExpressionFitModel = New instat.ucrReceiverExpression()
@@ -53,6 +52,9 @@ Partial Class dlgFitModel
         Me.cmdLog = New System.Windows.Forms.Button()
         Me.cmdTan = New System.Windows.Forms.Button()
         Me.cmdExp = New System.Windows.Forms.Button()
+        Me.ucrModelName = New instat.ucrInputComboBox()
+        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
+        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -67,7 +69,7 @@ Partial Class dlgFitModel
         'ucrSelectorByDataFrameAddRemoveForFitModel
         '
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.bShowHiddenColumns = False
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = False
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = True
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.Name = "ucrSelectorByDataFrameAddRemoveForFitModel"
@@ -101,12 +103,12 @@ Partial Class dlgFitModel
         Me.cmdModelOptions.Text = "Model options"
         Me.cmdModelOptions.UseVisualStyleBackColor = True
         '
-        'ucrDistributionForFitModel
+        'ucrFamily
         '
-        Me.ucrDistributionForFitModel.Location = New System.Drawing.Point(12, 222)
-        Me.ucrDistributionForFitModel.Name = "ucrDistributionForFitModel"
-        Me.ucrDistributionForFitModel.Size = New System.Drawing.Size(207, 43)
-        Me.ucrDistributionForFitModel.TabIndex = 5
+        Me.ucrFamily.Location = New System.Drawing.Point(12, 222)
+        Me.ucrFamily.Name = "ucrFamily"
+        Me.ucrFamily.Size = New System.Drawing.Size(207, 43)
+        Me.ucrFamily.TabIndex = 5
         '
         'lblModelPreview
         '
@@ -124,13 +126,6 @@ Partial Class dlgFitModel
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
         Me.ucrInputModelPreview.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputModelPreview.TabIndex = 7
-        '
-        'ucrSaveModel
-        '
-        Me.ucrSaveModel.Location = New System.Drawing.Point(9, 293)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveModel.TabIndex = 8
         '
         'cmdDisplayOptions
         '
@@ -361,20 +356,52 @@ Partial Class dlgFitModel
         Me.cmdExp.Text = "exp"
         Me.cmdExp.UseVisualStyleBackColor = True
         '
+        'ucrModelName
+        '
+        Me.ucrModelName.IsReadOnly = False
+        Me.ucrModelName.Location = New System.Drawing.Point(87, 293)
+        Me.ucrModelName.Name = "ucrModelName"
+        Me.ucrModelName.Size = New System.Drawing.Size(203, 21)
+        Me.ucrModelName.TabIndex = 164
+        '
+        'chkSaveModel
+        '
+        Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.chkSaveModel.Location = New System.Drawing.Point(6, 291)
+        Me.chkSaveModel.Name = "chkSaveModel"
+        Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
+        Me.chkSaveModel.TabIndex = 163
+        Me.chkSaveModel.Tag = "Save_Model"
+        Me.chkSaveModel.Text = "Save Model"
+        Me.chkSaveModel.UseVisualStyleBackColor = True
+        '
+        'chkConvertToVariate
+        '
+        Me.chkConvertToVariate.AutoSize = True
+        Me.chkConvertToVariate.Location = New System.Drawing.Point(388, 43)
+        Me.chkConvertToVariate.Name = "chkConvertToVariate"
+        Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
+        Me.chkConvertToVariate.TabIndex = 165
+        Me.chkConvertToVariate.Tag = "Convert_to_Variate"
+        Me.chkConvertToVariate.Text = "Convert to Variate"
+        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        '
         'dlgFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(502, 371)
+        Me.Controls.Add(Me.chkConvertToVariate)
+        Me.Controls.Add(Me.ucrModelName)
+        Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.grpSecondCalc)
         Me.Controls.Add(Me.grpFirstCalc)
         Me.Controls.Add(Me.ucrReceiverExpressionFitModel)
         Me.Controls.Add(Me.lblExplanatoryModel)
         Me.Controls.Add(Me.cmdDisplayOptions)
-        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrInputModelPreview)
         Me.Controls.Add(Me.lblModelPreview)
-        Me.Controls.Add(Me.ucrDistributionForFitModel)
+        Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.ucrReceiverResponseVar)
         Me.Controls.Add(Me.lblResponseVariable)
@@ -399,10 +426,9 @@ Partial Class dlgFitModel
     Friend WithEvents lblResponseVariable As Label
     Friend WithEvents ucrReceiverResponseVar As ucrReceiverSingle
     Friend WithEvents cmdModelOptions As Button
-    Friend WithEvents ucrDistributionForFitModel As ucrDistributions
+    Friend WithEvents ucrFamily As ucrDistributions
     Friend WithEvents lblModelPreview As Label
     Friend WithEvents ucrInputModelPreview As ucrInputTextBox
-    Friend WithEvents ucrSaveModel As ucrSaveModel
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents lblExplanatoryModel As Label
     Friend WithEvents ucrReceiverExpressionFitModel As ucrReceiverExpression
@@ -425,4 +451,7 @@ Partial Class dlgFitModel
     Friend WithEvents cmdTan As Button
     Friend WithEvents cmdExp As Button
     Friend WithEvents cmdPower As Button
+    Friend WithEvents ucrModelName As ucrInputComboBox
+    Friend WithEvents chkSaveModel As CheckBox
+    Friend WithEvents chkConvertToVariate As CheckBox
 End Class
