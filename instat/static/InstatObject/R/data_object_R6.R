@@ -964,7 +964,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
   
   for(col_name in col_names) {
     curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-    if(to_type=="factor"){
+    if(to_type=="factor") {
       # Warning: this is different from expected R behaviour
       # Any ordered columns would become unordered factors
       self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
@@ -979,7 +979,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       if(is.factor(curr_col) && (factor_numeric == "by_levels")) {
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(curr_col))[curr_col])
       }
-      elseself$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col))
+      else self$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col))
     }
     else if(to_type=="character") {
       self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))

@@ -54,7 +54,7 @@ Partial Class dlgPrintPreviewOptions
         'chkGridLines
         '
         Me.chkGridLines.AutoSize = True
-        Me.chkGridLines.Location = New System.Drawing.Point(8, 57)
+        Me.chkGridLines.Location = New System.Drawing.Point(3, 48)
         Me.chkGridLines.Name = "chkGridLines"
         Me.chkGridLines.Size = New System.Drawing.Size(97, 17)
         Me.chkGridLines.TabIndex = 2
@@ -150,9 +150,9 @@ Partial Class dlgPrintPreviewOptions
         Me.cmdExitPreview.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmdExitPreview.Location = New System.Drawing.Point(168, 102)
+        Me.cmdExitPreview.Location = New System.Drawing.Point(168, 99)
         Me.cmdExitPreview.Name = "cmdExitPreview"
-        Me.cmdExitPreview.Size = New System.Drawing.Size(156, 32)
+        Me.cmdExitPreview.Size = New System.Drawing.Size(160, 32)
         Me.cmdExitPreview.TabIndex = 3
         Me.cmdExitPreview.Text = "Exit Preview and Print"
         Me.cmdExitPreview.UseVisualStyleBackColor = True
@@ -167,6 +167,8 @@ Partial Class dlgPrintPreviewOptions
         Me.Controls.Add(Me.pnlLog)
         Me.Controls.Add(Me.pnlEditor)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgPrintPreviewOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Print and Preview Options"
