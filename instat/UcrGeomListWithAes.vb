@@ -94,8 +94,8 @@ Public Class UcrGeomListWithParameters
         chkApplyOnAllLayers.Checked = bApplyAesGlobally
         chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes 'Task: check if this launches checkchanged and accordingly delete SetAes below.
 
+        bCurrentFixAes = bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
         'SetAes needs to be called after the IgnoreGlobalAes has been setup as it determines whether the global aes are written in the rceivers or not.
-        bCurrentFixAes = bFixAes
         SetAes(bCurrentFixAes)
         'Warning: SetAes is called three times when a layer is created... one in the load, one in the setup ... (and one in the ignoreGAes check changed ?)
     End Sub
@@ -118,7 +118,7 @@ Public Class UcrGeomListWithParameters
                         'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
                         If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
                             lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                            lstAesParameterUcr(i).Enabled = Not bFixAes
+                            lstAesParameterUcr(i).Enabled = Not bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
                             Exit For
                         End If
                     End If

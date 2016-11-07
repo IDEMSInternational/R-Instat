@@ -104,7 +104,7 @@ Public Class dlgPlot
     End Sub
     Private Sub TestOkEnabled()
         'Both x and y aesthetics are mandatory for geom_line. However, when not filled they will be automatically populated by "".
-        If (ucrReceiverX.IsEmpty() OrElse ucrVariablesAsFactorForLinePlot.IsEmpty()) OrElse (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
+        If (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -116,7 +116,6 @@ Public Class dlgPlot
     End Sub
 
     Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
-
         SetXParameter()
         TestOkEnabled()
     End Sub
@@ -188,7 +187,7 @@ Public Class dlgPlot
                 'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
             ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
                 'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue <> (Chr(34) & Chr(34)) Then
+                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
                     ucrVariablesAsFactorForLinePlot.Clear()
                 Else ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
                 End If
