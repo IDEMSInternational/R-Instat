@@ -179,7 +179,7 @@ Public Class dlgBarAndPieChart
         sdgLayerOptions.ShowDialog()
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = "" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                     ucrFactorReceiver.Clear()
                 Else
                     ucrFactorReceiver.Add(clsParam.strArgumentValue)

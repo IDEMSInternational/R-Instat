@@ -147,7 +147,7 @@ Public Class dlgScatterPlot
                 'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
             ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForScatter.bSingleVariable) Then
                 'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue <> (Chr(34) & Chr(34)) Then
+                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
                     ucrVariablesAsFactorForScatter.Clear()
                 Else ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
                 End If
