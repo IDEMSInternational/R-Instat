@@ -28,7 +28,7 @@ Public Class ucrInput
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
     Protected bIsReadOnly As Boolean = False
-    Public bSuggestEditOnLeave As Boolean = False
+    Public bAutoChangeOnLeave As Boolean = True
     Private bLastSilent As Boolean = False
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
