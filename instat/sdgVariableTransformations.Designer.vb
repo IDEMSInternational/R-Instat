@@ -42,7 +42,7 @@ Partial Class sdgVariableTransformations
         Me.grpGeneralFunctions.Controls.Add(Me.rdoPower)
         Me.grpGeneralFunctions.Controls.Add(Me.rdoSquareroot)
         Me.grpGeneralFunctions.Controls.Add(Me.rdoLogBase10)
-        Me.grpGeneralFunctions.Location = New System.Drawing.Point(12, 12)
+        Me.grpGeneralFunctions.Location = New System.Drawing.Point(10, 10)
         Me.grpGeneralFunctions.Name = "grpGeneralFunctions"
         Me.grpGeneralFunctions.Size = New System.Drawing.Size(151, 134)
         Me.grpGeneralFunctions.TabIndex = 1
@@ -76,7 +76,7 @@ Partial Class sdgVariableTransformations
         '
         'nudPower
         '
-        Me.nudPower.Location = New System.Drawing.Point(86, 109)
+        Me.nudPower.Location = New System.Drawing.Point(74, 108)
         Me.nudPower.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudPower.Name = "nudPower"
         Me.nudPower.Size = New System.Drawing.Size(41, 20)
@@ -121,7 +121,7 @@ Partial Class sdgVariableTransformations
         '
         'ucrButtonsSDGVarTransform
         '
-        Me.ucrButtonsSDGVarTransform.Location = New System.Drawing.Point(21, 154)
+        Me.ucrButtonsSDGVarTransform.Location = New System.Drawing.Point(10, 150)
         Me.ucrButtonsSDGVarTransform.Name = "ucrButtonsSDGVarTransform"
         Me.ucrButtonsSDGVarTransform.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSDGVarTransform.TabIndex = 2
@@ -130,14 +130,15 @@ Partial Class sdgVariableTransformations
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(186, 186)
+        Me.ClientSize = New System.Drawing.Size(173, 186)
         Me.Controls.Add(Me.ucrButtonsSDGVarTransform)
         Me.Controls.Add(Me.grpGeneralFunctions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgVariableTransformations"
-        Me.Tag = "Variable _ransformations"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Tag = "Variable _Transformations"
         Me.Text = "Variable Transformations"
         Me.grpGeneralFunctions.ResumeLayout(False)
         Me.grpGeneralFunctions.PerformLayout()
