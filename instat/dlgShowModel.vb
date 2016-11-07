@@ -58,10 +58,20 @@ Public Class dlgShowModel
         results()
         ReceiverLabels()
         SaveResults()
+        setItems()
+        setname()
     End Sub
 
     Private Sub ReopenDialog()
 
+    End Sub
+
+    Private Sub setItems()
+        If rdoProbabilities.Checked Then
+            ucrInputProbabilities.SetItems({"1", "0.1, 1, 3, 5, 10 ", "-2, -1, 0, 1, 2"})
+        Else
+            ucrInputProbabilities.SetItems({"0.5", "0.1, 0.2, 0.4, 0.6, 0.8, 0.9 ", "0.2, 0.5, 0.8", " 0.5, 0.8, 0.9, 0.95, 0.99"})
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -69,7 +79,15 @@ Public Class dlgShowModel
         TestOKEnabled()
     End Sub
 
+    Private Sub setname()
+        If rdoProbabilities.Checked Then
+            ucrInputProbabilities.SetName("1")
+        Else
+            ucrInputProbabilities.SetName("0.5")
+        End If
+    End Sub
     Private Sub chkGraphResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphResults.CheckedChanged, chkSaveResults.CheckedChanged
+        ucrInputProbabilities.Reset()
         DisplayGraphResults()
         SaveResults()
         TestOKEnabled()
@@ -79,7 +97,7 @@ Public Class dlgShowModel
         If rdoProbabilities.Checked Then
             If chkSingleValues.Checked Then
                 If ucrInputProbabilities.IsEmpty = False Then
-                    ucrBase.clsRsyntax.AddParameter("q", ucrInputProbabilities.GetText)
+                    ucrBase.clsRsyntax.AddParameter("q", "c(" & ucrInputProbabilities.GetText & ")")
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("q")
                 End If
@@ -90,10 +108,11 @@ Public Class dlgShowModel
                     ucrBase.clsRsyntax.RemoveParameter("q")
                 End If
             End If
-            Else
+        Else
+
             If chkSingleValues.Checked Then
                 If ucrInputProbabilities.IsEmpty = False Then
-                    ucrBase.clsRsyntax.AddParameter("p", ucrInputProbabilities.GetText)
+                    ucrBase.clsRsyntax.AddParameter("p", "c(" & ucrInputProbabilities.GetText & ")")
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("p")
                 End If
@@ -130,6 +149,8 @@ Public Class dlgShowModel
         End If
     End Sub
     Private Sub rdoProbabilitiesandQuantiles_CheckedChanged(sender As Object, e As EventArgs) Handles rdoProbabilities.CheckedChanged, rdoQuantiles.CheckedChanged
+        setname()
+        setItems()
         ReceiverLabels()
     End Sub
 
@@ -141,7 +162,7 @@ Public Class dlgShowModel
             ucrInputNewColNameforTablePlus.SetName("prob")
             lblQuantValues.Visible = True
             lblProbValues.Visible = False
-            ucrBase.clsRsyntax.SetFunction("mosaic::pdist")
+            ucrBase.clsRsyntax.SetFunction("mosaic:: pdist")
 
         Else
             ucrInputNewColNameforTablePlus.SetPrefix("Quant")
@@ -181,7 +202,6 @@ Public Class dlgShowModel
             ucrInputNewColNameforTablePlus.Visible = False
             ucrReceiverExpressionForTablePlus.Visible = False
             ucrInputProbabilities.Visible = True
-            ucrInputProbabilities.SetName("0.5")
         Else
             chkSaveResults.Visible = True
             ucrReceiverExpressionForTablePlus.Visible = False
