@@ -106,6 +106,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarUseModBootstrap"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Bootstrap Options"
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudIterations, System.ComponentModel.ISupportInitialize).EndInit()

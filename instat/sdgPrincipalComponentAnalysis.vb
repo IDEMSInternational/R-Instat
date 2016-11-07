@@ -38,7 +38,7 @@ Public Class sdgPrincipalComponentAnalysis
         chkEigenValues.Checked = True
         chkEigenVectors.Checked = True
         chkScores.Checked = True
-        chkResiduals.Checked = True
+        chkResiduals.Checked = False ' this is temporary
         chkRotation.Checked = True
         rdoBarGeom.Checked = False
         rdoLineGeom.Checked = False
@@ -57,6 +57,7 @@ Public Class sdgPrincipalComponentAnalysis
         rdoScreePlot.Checked = True
         rdoBarPlot.Checked = False
         nudDim2Var.Value = 2
+        chkResiduals.Enabled = False ' this is temporary
         Dimensions()
     End Sub
 
