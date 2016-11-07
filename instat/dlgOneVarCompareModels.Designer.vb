@@ -48,7 +48,7 @@ Partial Class dlgOneVarCompareModels
         'ucrSelectorOneVarCompModels
         '
         Me.ucrSelectorOneVarCompModels.bShowHiddenColumns = False
-        Me.ucrSelectorOneVarCompModels.bUseCurrentFilter = False
+        Me.ucrSelectorOneVarCompModels.bUseCurrentFilter = True
         Me.ucrSelectorOneVarCompModels.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorOneVarCompModels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarCompModels.Name = "ucrSelectorOneVarCompModels"
@@ -87,6 +87,7 @@ Partial Class dlgOneVarCompareModels
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOneVarCompareModels"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Compare Models for One Variable"
         Me.ResumeLayout(False)
         Me.PerformLayout()
