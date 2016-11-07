@@ -196,8 +196,4 @@ Public Class dlgShowModel
             ucrReceiverExpressionForTablePlus.Visible = True
         End If
     End Sub
-
-    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ttprobability.Popup
-
-    End Sub
 End Class
