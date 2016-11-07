@@ -253,22 +253,6 @@ Public Class dlgFourVariableModelling
         End If
     End Sub
 
-    Private Sub ucrSecondRandomEffect_SelectionChanged(sender As Object, e As EventArgs) Handles ucrThirdExplanatoryVariable.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrFirstRandomEffect_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondExplanatoryVariable.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrFirstExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFirstExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
-    End Sub
-
     Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
         ChooseRFunction()
     End Sub
