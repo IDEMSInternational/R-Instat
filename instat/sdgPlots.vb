@@ -96,6 +96,7 @@ Public Class sdgPlots
         For i = 0 To tabctrlBoxSubdialog.TabCount - 1
             tabctrlBoxSubdialog.SelectedIndex = i
         Next
+        tabctrlBoxSubdialog.TabPages(6).Enabled = False
         tabctrlBoxSubdialog.SelectedIndex = 0
     End Sub
 

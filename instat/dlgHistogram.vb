@@ -140,6 +140,7 @@ Public Class dlgHistogram
         ucrSaveHist.strPrefix = "Histogram"
         sdgPlots.Reset()
         ucrSaveHist.Reset()
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
@@ -216,9 +217,23 @@ Public Class dlgHistogram
         Else
             clsRaesFunction.RemoveParameterByName("x")
         End If
+        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
+    Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        If ucrVariablesAsFactorforHist.bSingleVariable Then
+            cmdHistogramOptions.Enabled = True
+            cmdDensityOptions.Enabled = True
+            cmdFrequencyOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            cmdHistogramOptions.Enabled = False
+            cmdDensityOptions.Enabled = False
+            cmdFrequencyOptions.Enabled = False
+            cmdOptions.Enabled = False
+        End If
+    End Sub
     Private Sub ucrSaveHist_GraphNameChanged() Handles ucrSaveHist.GraphNameChanged, ucrSaveHist.SaveGraphCheckedChanged
         If ucrSaveHist.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveHist.strGraphName, strTempDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveHist.strGraphName)
