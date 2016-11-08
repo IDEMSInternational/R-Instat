@@ -49,6 +49,7 @@ Public Class dlgPermuteColumn
     Private Sub InitialiseDialog()
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
         ucrReceiverPermuteRows.SetMeAsReceiver()
+        ucrReceiverPermuteRows.bUseFilteredData = False
         clsSetSeedFunc.SetRCommand("set.seed")
         ucrBase.clsRsyntax.SetFunction("replicate")
         ucrBase.clsRsyntax.AddParameter("expr", clsRFunctionParameter:=clsSetSampleFunc)

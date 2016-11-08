@@ -50,6 +50,14 @@ Public Class dlgMakeDate
         ucrReceiverYearThree.Selector = ucrSeclectorMakeDate
         ucrReceiverMonthThree.Selector = ucrSeclectorMakeDate
         ucrReceiverDayThree.Selector = ucrSeclectorMakeDate
+
+        ucrReceiverForDate.bUseFilteredData = False
+        ucrReceiverYearTwo.bUseFilteredData = False
+        ucrReceiverDayTwo.bUseFilteredData = False
+        ucrReceiverYearThree.bUseFilteredData = False
+        ucrReceiverMonthThree.bUseFilteredData = False
+        ucrReceiverDayThree.bUseFilteredData = False
+
     End Sub
 
     Private Sub SetDefaults()
@@ -64,7 +72,6 @@ Public Class dlgMakeDate
         ucrInputDay.SetName("%d (1-31)")
         ucrInputComboBoxMonthTwo.SetName("365/366")
         ucrInputOrigin.SetName("30-12-1899 (Excel)")
-        grpFormatField.Visible = False
         ucrInputOrigin.Visible = False
         ucrInputNewColumnName.SetPrefix("Date")
         TestOKEnabled()
@@ -73,10 +80,24 @@ Public Class dlgMakeDate
         rdoDefaultFormat.Checked = True
         chkTwoDigitYearThree.Checked = False
         chkTwoDigitYearTwo.Checked = False
-        nudCutOffThree.Visible = False
-        nudCutOffTwo.Visible = False
+
         lblCutOffThree.Visible = False
         lblCutOffTwo.Visible = False
+        'Disabling the check boxes, Input,... which are yet to be Implemented.
+        'To be return to how it was prev...
+        chkTwoDigitYearThree.Enabled = False
+        chkTwoDigitYearTwo.Enabled = False
+        nudCutOffThree.Visible = True
+        nudCutOffTwo.Visible = True
+        nudCutOffThree.Enabled = False
+        nudCutOffTwo.Enabled = False
+        chkMore.Enabled = False
+        lblCutOffTwo.Visible = True
+        lblCutOffThree.Visible = True
+        lblCutOffThree.Enabled = False
+        lblCutOffTwo.Enabled = False
+        ucrInputComboBoxMonthTwo.Enabled = False
+
     End Sub
 
     Private Sub TestOKEnabled()
@@ -155,26 +176,29 @@ Public Class dlgMakeDate
         Else
             ucrBase.clsRsyntax.RemoveParameter("origin")
         End If
+        'to be removed later
+        grpFormatField.Visible = True
+        grpFormatField.Enabled = False
         TestOKEnabled()
     End Sub
 
     Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged, chkTwoDigitYearThree.CheckedChanged, chkTwoDigitYearTwo.CheckedChanged
         Formats()
-        If chkTwoDigitYearTwo.Checked Then
-            lblCutOffTwo.Visible = True
-            nudCutOffTwo.Visible = True
-        Else
-            lblCutOffTwo.Visible = False
-            nudCutOffTwo.Visible = False
-        End If
-        If chkTwoDigitYearThree.Checked Then
-            lblCutOffThree.Visible = True
-            nudCutOffThree.Visible = True
-        Else
-            lblCutOffThree.Visible = False
-            nudCutOffThree.Visible = False
+        'If chkTwoDigitYearTwo.Checked Then
+        'lblCutOffTwo.Visible = True
+        'nudCutOffTwo.Visible = True
+        'Else
+        'lblCutOffTwo.Visible = False
+        'nudCutOffTwo.Visible = False
+        'End If
+        'If chkTwoDigitYearThree.Checked Then
+        'lblCutOffThree.Visible = True
+        'nudCutOffThree.Visible = True
+        'Else
+        'lblCutOffThree.Visible = False
+        'nudCutOffThree.Visible = False
 
-        End If
+        'End If
     End Sub
 
     Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged
