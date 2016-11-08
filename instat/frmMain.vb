@@ -277,10 +277,6 @@ Public Class frmMain
         dlgRegressionSimple.ShowDialog()
     End Sub
 
-    Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableExactResults.Click
-        dlgOneSample.ShowDialog()
-    End Sub
-
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
         dlgFreqTables.ShowDialog()
     End Sub
