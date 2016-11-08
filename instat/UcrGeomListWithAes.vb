@@ -53,7 +53,7 @@ Public Class UcrGeomListWithParameters
             'This one is called when the geom is changed, which is apparently the case when the Layer is loaded (first thing that happens). Left in for security but could be taken out.
             bFirstLoad = False
         End If
-        'SetAes(bCurrentFixAes)
+        SetAes(bCurrentFixAes)
         'Apparently, this is not necessary as SetAes is called several places, when geom is changed and when Layer is set up which always happen at load.
     End Sub
 
@@ -82,7 +82,7 @@ Public Class UcrGeomListWithParameters
             clsGeomAesFunction.SetRCommand("aes")
         End If
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bApplyAesGlobally) OrElse strGlobalDataFrame = "")
-        UcrSelector.Reset()
+        UcrSelector.Reset() 'Warning/Question: should this guy not be called one line before ?
 
         'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
         'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
@@ -104,13 +104,20 @@ Public Class UcrGeomListWithParameters
         'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes (if IgnoreGlobalAes is not chacked) and then in the local aes.
         Dim bFirstEnabled As Boolean = True
         Dim iFirstEnabled As Integer = 0
+        Dim DebugString1 As String 'Warning: to be deleted
+        Dim DebugString2 As String 'Warning: to be deleted
+        Dim DebugString3 As String = "DebugString"
         bAddToLocalAes = False
         'We are changing the content of the receivers according to the info in the clsGgplotAesFunction and clsGeomAesFunction. We don't want to change the content of clsGeomAesFunction according to the changed content of the receivers. Hence we set bApplyToLocalAes to False at the beginning of this procedure, then reset it to True at the end (see ucrReceiverParam_WithMeSelectionChanged).
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
             'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
             'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
-            lstAesParameterUcr(i).Clear()
             lstAesParameterUcr(i).Enabled = True
+            lstAesParameterUcr(i).Clear()
+            'Warning: the following is setup for debug purposes.
+            DebugString1 = lstCurrArguments(i)
+            DebugString2 = lstAesParameterUcr(i).GetVariableNames(False)
+
             'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
             If Not chkIgnoreGlobalAes.Checked Then
                 For Each clsParam In clsGgplotAesFunction.clsParameters
@@ -118,10 +125,16 @@ Public Class UcrGeomListWithParameters
                         'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
                         If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
                             lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                            lstAesParameterUcr(i).Enabled = Not bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
+                            If bFixAes Then
+                                lstAesParameterUcr(i).Enabled = Not bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
+                            End If
+                            'Warning, need to invert the order of Add and Enabled? as if disabled then add, then blank and if add and enabled then blank... 
                             Exit For
                         End If
                     End If
+                    'Warning: the following is setup for debug purposes.
+                    DebugString1 = lstCurrArguments(i)
+                    DebugString2 = lstAesParameterUcr(i).GetVariableNames()
                 Next
             End If
             For Each clsParam In clsGeomAesFunction.clsParameters
@@ -132,7 +145,15 @@ Public Class UcrGeomListWithParameters
                         Exit For
                     End If
                 End If
+                'Warning: the following is setup for debug purposes.
+                DebugString1 = lstCurrArguments(i)
+                DebugString2 = lstAesParameterUcr(i).GetVariableNames(False)
             Next
+
+            'Warning: the following is setup for debug purposes.
+            DebugString1 = lstCurrArguments(i)
+            DebugString2 = lstAesParameterUcr(i).GetVariableNames(False)
+
             If bFirstEnabled AndAlso lstAesParameterUcr(i).Enabled Then
                 iFirstEnabled = i
                 bFirstEnabled = False
@@ -140,6 +161,11 @@ Public Class UcrGeomListWithParameters
         Next
         lstAesParameterUcr(iFirstEnabled).SetMeAsReceiver()
         bAddToLocalAes = True
+        'Warning: the following loop is setup for debug purposes.
+        For j = 0 To lstCurrArguments.Count - 1
+            DebugString1 = lstCurrArguments(j)
+            DebugString2 = lstAesParameterUcr(j).GetVariableNames(False)
+        Next
     End Sub
 
     Public Sub SetParameters() 'this will set function or aes parameters
