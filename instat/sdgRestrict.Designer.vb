@@ -213,6 +213,7 @@ Partial Class sdgRestrict
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgRestrict"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Control Options"
         Me.tbcOptions.ResumeLayout(False)
         Me.tbpCondition.ResumeLayout(False)

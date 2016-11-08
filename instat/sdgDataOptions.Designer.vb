@@ -153,6 +153,8 @@ Partial Class sdgDataOptions
         '
         'ucrSelectorFilters
         '
+        Me.ucrSelectorFilters.bShowHiddenColumns = False
+        Me.ucrSelectorFilters.bUseCurrentFilter = True
         Me.ucrSelectorFilters.Location = New System.Drawing.Point(8, 8)
         Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
@@ -200,7 +202,7 @@ Partial Class sdgDataOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDataOptions"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Data_Options"
         Me.Text = "Data Options"
         Me.TopMost = True

@@ -131,13 +131,17 @@ Partial Class dlgProbabilityPlot
         'ucrReceiverPlotVariable
         '
         Me.ucrReceiverPlotVariable.Location = New System.Drawing.Point(216, 29)
+        Me.ucrReceiverPlotVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPlotVariable.Name = "ucrReceiverPlotVariable"
+        Me.ucrReceiverPlotVariable.Selector = Nothing
         Me.ucrReceiverPlotVariable.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverPlotVariable.TabIndex = 7
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(7, 3)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(202, 154)
         Me.ucrAddRemove.TabIndex = 6
@@ -164,6 +168,7 @@ Partial Class dlgProbabilityPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgProbabilityPlot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Probability_Plot"
         Me.Text = "Probability Plot"
         Me.grpDistributions.ResumeLayout(False)
