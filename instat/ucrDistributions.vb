@@ -25,6 +25,7 @@ Public Class ucrDistributions
     Public bDistributionsSet As Boolean
     Public clsCurrRFunction As RFunction
     Public strDataType As String
+    Public bFirstLoad As Boolean
 
     Public Sub New()
 
@@ -40,10 +41,14 @@ Public Class ucrDistributions
         clsCurrRFunction = New RFunction
         strDataType = ""
         CreateDistributions()
+        bFirstLoad = True
     End Sub
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetDistributions()
+        If bFirstLoad Then
+            SetDistributions()
+            bFirstLoad = False
+        End If
     End Sub
 
     Public Sub AddParameter(strArgumentName As String, strArgumentValue As String)
