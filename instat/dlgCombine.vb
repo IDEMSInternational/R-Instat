@@ -39,6 +39,7 @@ Public Class dlgCombine
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorsReceiver.bUseFilteredData = False
         ucrBase.clsRsyntax.SetFunction("interaction")
         ucrInputColName.SetItemsTypeAsColumns()
         ucrInputColName.SetDefaultTypeAsColumn()
