@@ -43,7 +43,7 @@ Partial Class dlgPopulationPyramids
         'ucrPopulationPyramidselector
         '
         Me.ucrPopulationPyramidselector.bShowHiddenColumns = False
-        Me.ucrPopulationPyramidselector.bUseCurrentFilter = False
+        Me.ucrPopulationPyramidselector.bUseCurrentFilter = True
         Me.ucrPopulationPyramidselector.Location = New System.Drawing.Point(10, 10)
         Me.ucrPopulationPyramidselector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrPopulationPyramidselector.Name = "ucrPopulationPyramidselector"
@@ -126,6 +126,8 @@ Partial Class dlgPopulationPyramids
         Me.Controls.Add(Me.ucrPopulationPyramidselector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgPopulationPyramids"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Population Pyramids"

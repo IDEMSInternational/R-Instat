@@ -95,6 +95,7 @@ Partial Class dlgIsNAList
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgIsNAList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Is_NA_List"
         Me.Text = "Is NA List"
         Me.ResumeLayout(False)

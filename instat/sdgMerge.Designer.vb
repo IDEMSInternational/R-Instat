@@ -155,7 +155,7 @@ Partial Class sdgMerge
         'ucrSelectorSecondDataFrame
         '
         Me.ucrSelectorSecondDataFrame.bShowHiddenColumns = False
-        Me.ucrSelectorSecondDataFrame.bUseCurrentFilter = False
+        Me.ucrSelectorSecondDataFrame.bUseCurrentFilter = True
         Me.ucrSelectorSecondDataFrame.Location = New System.Drawing.Point(231, 23)
         Me.ucrSelectorSecondDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSecondDataFrame.Name = "ucrSelectorSecondDataFrame"
@@ -165,7 +165,7 @@ Partial Class sdgMerge
         'ucrSelectorFirstDataFrame
         '
         Me.ucrSelectorFirstDataFrame.bShowHiddenColumns = False
-        Me.ucrSelectorFirstDataFrame.bUseCurrentFilter = False
+        Me.ucrSelectorFirstDataFrame.bUseCurrentFilter = True
         Me.ucrSelectorFirstDataFrame.Location = New System.Drawing.Point(11, 21)
         Me.ucrSelectorFirstDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFirstDataFrame.Name = "ucrSelectorFirstDataFrame"
@@ -188,6 +188,7 @@ Partial Class sdgMerge
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgMerge"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "sdgMerge"
         Me.pnlKeyColumns.ResumeLayout(False)
         Me.pnlKeyColumns.PerformLayout()
