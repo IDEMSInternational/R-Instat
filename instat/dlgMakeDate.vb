@@ -50,6 +50,14 @@ Public Class dlgMakeDate
         ucrReceiverYearThree.Selector = ucrSeclectorMakeDate
         ucrReceiverMonthThree.Selector = ucrSeclectorMakeDate
         ucrReceiverDayThree.Selector = ucrSeclectorMakeDate
+
+        ucrReceiverForDate.bUseFilteredData = False
+        ucrReceiverYearTwo.bUseFilteredData = False
+        ucrReceiverDayTwo.bUseFilteredData = False
+        ucrReceiverYearThree.bUseFilteredData = False
+        ucrReceiverMonthThree.bUseFilteredData = False
+        ucrReceiverDayThree.bUseFilteredData = False
+
     End Sub
 
     Private Sub SetDefaults()

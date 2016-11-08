@@ -231,7 +231,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE,...) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -250,6 +250,13 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     else {
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
+      }
+    }
+    # This is needed as some R function misinterpret the class of a column
+    # when there are extra attributes on columns
+    if(remove_attr) {
+      for(i in seq_along(out)) {
+        attributes(out[[i]])[!names(attributes(out[[i]])) %in% c("class", "levels")] <- NULL
       }
     }
     if(convert_to_character) {
@@ -1602,9 +1609,9 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
 )
 
 data_object$set("public","make_date_yearmonthday", function(year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
-  year_col <- self$get_columns_from_data(year)
-  month_col <- self$get_columns_from_data(month)
-  day_col <- self$get_columns_from_data(day)
+  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  month_col <- self$get_columns_from_data(month, use_current_filter = FALSE)
+  day_col <- self$get_columns_from_data(day, use_current_filter = FALSE)
   if(missing(year_format)) {
     year_counts <- str_count(year)
     if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
@@ -1627,8 +1634,8 @@ data_object$set("public","make_date_yearmonthday", function(year, month, day, ye
 
 # Not sure if doy_format should be a parameter? There seems to only be one format for it.
 data_object$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
-  year_col <- self$get_columns_from_data(year)
-  doy_col <- self$get_columns_from_data(doy)
+  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  doy_col <- self$get_columns_from_data(doy, use_current_filter = FALSE)
   
   if(missing(year_format)) {
     year_counts <- str_count(year)
