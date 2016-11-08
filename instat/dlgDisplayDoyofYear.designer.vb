@@ -198,6 +198,7 @@ Partial Class dlgDisplayDOYofYear
         '
         'ucrInputTitle
         '
+        Me.ucrInputTitle.IsReadOnly = False
         Me.ucrInputTitle.Location = New System.Drawing.Point(144, 12)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(142, 21)
@@ -205,6 +206,7 @@ Partial Class dlgDisplayDOYofYear
         '
         'ucrInputDisplayDaily
         '
+        Me.ucrInputDisplayDaily.IsReadOnly = False
         Me.ucrInputDisplayDaily.Location = New System.Drawing.Point(144, 39)
         Me.ucrInputDisplayDaily.Name = "ucrInputDisplayDaily"
         Me.ucrInputDisplayDaily.Size = New System.Drawing.Size(142, 21)
@@ -212,6 +214,7 @@ Partial Class dlgDisplayDOYofYear
         '
         'ucrInputFile
         '
+        Me.ucrInputFile.IsReadOnly = False
         Me.ucrInputFile.Location = New System.Drawing.Point(144, 66)
         Me.ucrInputFile.Name = "ucrInputFile"
         Me.ucrInputFile.Size = New System.Drawing.Size(142, 21)
@@ -219,6 +222,7 @@ Partial Class dlgDisplayDOYofYear
         '
         'ucrInputMissingValues
         '
+        Me.ucrInputMissingValues.IsReadOnly = False
         Me.ucrInputMissingValues.Location = New System.Drawing.Point(144, 93)
         Me.ucrInputMissingValues.Name = "ucrInputMissingValues"
         Me.ucrInputMissingValues.Size = New System.Drawing.Size(142, 21)
@@ -250,6 +254,8 @@ Partial Class dlgDisplayDOYofYear
         Me.Controls.Add(Me.lblHeight)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDisplayDOYofYear"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Display_DOY_of_Year"
