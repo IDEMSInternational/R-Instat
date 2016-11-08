@@ -544,19 +544,23 @@ Public Class ucrDistributions
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
-        clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
-        Select Case strDistributionType
-            Case "RFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
-            Case "PFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strPFunctionName)
-            Case "DFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strDFunctionName)
-            Case "QFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strQFunctionName)
-            Case "GLMFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strGLMFunctionName)
-        End Select
+        If cboDistributions.SelectedIndex <> -1 Then
+            clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
+            Select Case strDistributionType
+                Case "RFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
+                Case "PFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strPFunctionName)
+                Case "DFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strDFunctionName)
+                Case "QFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strQFunctionName)
+                Case "GLMFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strGLMFunctionName)
+            End Select
+        Else
+            clsCurrRFunction = New RFunction
+        End If
         RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
 
