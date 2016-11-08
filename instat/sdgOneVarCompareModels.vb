@@ -46,7 +46,9 @@ Public Class sdgOneVarCompareModels
         ucrObjectName.SetValidationTypeAsRVariable()
         ucrObjectName.SetName("gof")
         ucrDisplayChiData.Reset()
-        ucrDisplayChiData.SetName(dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare")
+        If dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrDisplayChiData.SetName(dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare")
+        End If
         DisplayChiSquare()
         DisplayChiBreaks()
         'ucrBase.ihelptopicID = 

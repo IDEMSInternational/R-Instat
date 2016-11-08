@@ -2928,7 +2928,7 @@ Partial Class frmMain
         Me.mnuToolsClearOutputWindow.Name = "mnuToolsClearOutputWindow"
         Me.mnuToolsClearOutputWindow.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsClearOutputWindow.Tag = "Clear_Output_Window..."
-        Me.mnuToolsClearOutputWindow.Text = "Clear_Output_Window..."
+        Me.mnuToolsClearOutputWindow.Text = "Clear Output Window..."
         '
         'ToolStripSeparator5
         '
