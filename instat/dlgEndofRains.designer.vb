@@ -171,6 +171,7 @@ Partial Class dlgEndofRains
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgEndofRains"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "End_of_Rains"
         Me.Text = "End of Rains"
         CType(Me.nudCapacityMax, System.ComponentModel.ISupportInitialize).EndInit()

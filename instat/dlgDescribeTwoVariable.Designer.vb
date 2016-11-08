@@ -156,7 +156,7 @@ Partial Class dlgDescribeTwoVariable
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVariable"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Describe_Two_Variable"
         Me.Text = "Describe Two Variables"
         Me.ResumeLayout(False)

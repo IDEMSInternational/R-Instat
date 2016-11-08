@@ -124,7 +124,7 @@ Partial Class dlgDescribeOneVariable
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeOneVariable"
         Me.ShowIcon = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Describe_One_Variable"
         Me.Text = "Describe One Variable"
         Me.ResumeLayout(False)
