@@ -66,8 +66,14 @@ Public Class sdgCanonicalCorrelation
     End Sub
 
     Private Sub GGPairs()
+        Dim clsTempFunc As RFunction
+
+        'temp solution to fix bug in ggpairs function
+        clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
+        clsTempFunc.AddParameter("remove_attr", "TRUE")
+
         clsRGraphics.SetFunction("ggpairs")
-        clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsRGraphics.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         frmMain.clsRLink.RunScript(clsRGraphics.GetScript(), 2)
     End Sub
 

@@ -38,7 +38,6 @@ Public Class dlgRegressionSimple
         ucrExplanatory.Selector = ucrSelectorSimpleReg
         ucrBase.iHelpTopicID = 366
         ucrModelName.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
-        ucrModelName.SetPrefix("reg")
         ucrModelName.SetItemsTypeAsModels()
         ucrModelName.SetDefaultTypeAsModel()
         ucrModelName.SetValidationTypeAsRVariable()
@@ -66,11 +65,12 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetDefaults()
+        ucrModelName.SetPrefix("reg")
         ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
-        chkSaveModel.Checked = False 'this is temporary
-        chkSaveModel.Enabled = False 'this is disabled temporarily
+        chkSaveModel.Checked = True
+        chkSaveModel.Enabled = True
         ucrModelName.Visible = True
         chkConvertToVariate.Checked = False
         chkConvertToVariate.Visible = False
@@ -434,15 +434,15 @@ Public Class dlgRegressionSimple
                 nudHyp2.Value = 0.5
             Else
                 nudHyp2.Visible = False
-                    lblProbability2.Visible = False
-                End If
-                If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
-                    '         'If ucrExplanatory. GetVariables Is From same dataset
-                    chkPaired.Visible = True
-                Else
-                    chkPaired.Visible = False
-                End If
+                lblProbability2.Visible = False
             End If
+            If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
+                '         'If ucrExplanatory. GetVariables Is From same dataset
+                chkPaired.Visible = True
+            Else
+                chkPaired.Visible = False
+            End If
+        End If
     End Sub
 
 
@@ -467,5 +467,14 @@ Public Class dlgRegressionSimple
         DistributionsOffered()
         TestOKEnabled()
         DataTypeAccepted()
+        If rdoGeneral.Checked Then
+            chkSaveModel.Enabled = True
+            ucrModelName.Visible = True
+            AssignModelName()
+        ElseIf rdoSpecific.Checked Then
+            chkSaveModel.Enabled = False
+            ucrModelName.Visible = False
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
     End Sub
 End Class

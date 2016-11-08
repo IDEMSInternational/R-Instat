@@ -16,17 +16,19 @@
 Imports instat.Translations
 
 Public Class dlgOneWayANOVA
-
     Public bFirstLoad As Boolean = True
     Dim clsModel As New ROperator
 
     Private Sub dlgOneWayAnova_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaultSettings()
+            SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -42,7 +44,7 @@ Public Class dlgOneWayANOVA
         ucrBase.iHelpTopicID = 160
     End Sub
 
-    Private Sub SetDefaultSettings()
+    Private Sub SetDefaults()
         ucrAddRemoveDataFrame.Reset()
         ucrAddRemoveDataFrame.Focus()
         ucrYVariate.SetMeAsReceiver()
@@ -50,6 +52,9 @@ Public Class dlgOneWayANOVA
 
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
 
     Private Sub ucrYVariate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYVariate.SelectionChanged
         clsModel.SetParameter(True, strValue:=ucrYVariate.GetVariableNames(bWithQuotes:=False))
@@ -78,6 +83,6 @@ Public Class dlgOneWayANOVA
         sdgANOVAOptions.ShowDialog()
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaultSettings()
+        SetDefaults()
     End Sub
 End Class
