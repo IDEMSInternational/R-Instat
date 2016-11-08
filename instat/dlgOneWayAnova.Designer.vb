@@ -102,6 +102,7 @@ Partial Class dlgOneWayANOVA
         'lblFittedModel
         '
         Me.lblFittedModel.AutoSize = True
+        Me.lblFittedModel.Enabled = False
         Me.lblFittedModel.Location = New System.Drawing.Point(10, 211)
         Me.lblFittedModel.Name = "lblFittedModel"
         Me.lblFittedModel.Size = New System.Drawing.Size(64, 13)
@@ -111,6 +112,7 @@ Partial Class dlgOneWayANOVA
         '
         'UcrInputTextBox1
         '
+        Me.UcrInputTextBox1.Enabled = False
         Me.UcrInputTextBox1.IsReadOnly = False
         Me.UcrInputTextBox1.Location = New System.Drawing.Point(80, 207)
         Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
