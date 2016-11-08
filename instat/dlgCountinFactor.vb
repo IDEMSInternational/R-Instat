@@ -36,6 +36,7 @@ Public Class dlgCountinFactor
         ucrInputCountColumnName.SetDataFrameSelector(ucrCountSelector.ucrAvailableDataFrames)
         ucrInputCountColumnName.SetValidationTypeAsRVariable()
         ucrBase.clsRsyntax.SetFunction("fac.nested")
+        ucrBase.OKEnabled(False)
     End Sub
     Private Sub SetDefaults()
         ucrCountSelector.Reset()
@@ -47,11 +48,11 @@ Public Class dlgCountinFactor
 
     End Sub
     Private Sub TestOkEnabled()
-        If Not ucrCountReceiver.IsEmpty AndAlso Not ucrInputCountColumnName.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        '        If Not ucrCountReceiver.IsEmpty AndAlso Not ucrInputCountColumnName.IsEmpty Then
+        '        ucrBase.OKEnabled(True)
+        '       Else
+        '      ucrBase.OKEnabled(False)
+        '     End If
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
