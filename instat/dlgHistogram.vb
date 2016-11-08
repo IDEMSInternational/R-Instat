@@ -173,8 +173,8 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_histogramFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
-        sdgLayerOptions.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_histogramFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False, clsTempLocalAes:=clsRaesFunction) 'Warning: gave through clsRaesFunction as both local and global aes... Otherwise whan applyOnAllLayers is not ticked, things don't happen.
+        sdgLayerOptions.ShowDialog() 'Warning In the process of loading sdgLayer options, the setup done above is lost ...
         'Warning: bfixAes is set to false. Will have to sort out things for the multiple variables case when LayerOptions will be enabled again.
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorforHist.bSingleVariable) Then
@@ -182,7 +182,7 @@ Public Class dlgHistogram
             ElseIf clsParam.strArgumentName = "fill" Then
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)
             End If
-        Next
+        Next ' Warning: this one is causing errors sometimes. It says that it is an inappropriate operator...
         TestOkEnabled()
     End Sub
 

@@ -47,6 +47,8 @@ Public Class sdgLayerOptions
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
         'Each ucrLayerParameter has a field of type ucrGeomListWithAes and reciprocally as both of them "collaborate to provide full description of a Layer".
         'The obvious linking is performed here in sdgLayerOptions.
+        'Warning: I think that the problem with SetAes is here...
+        ucrGeomWithAes.SetParameters()
     End Sub
 
     Private Sub SetDefaults()
