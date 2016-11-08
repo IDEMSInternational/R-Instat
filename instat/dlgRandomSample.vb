@@ -50,6 +50,7 @@ Public Class dlgRandomSample
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRandomSamples)
         ucrNewColumnName.SetValidationTypeAsRVariable()
         ucrPrefixNewColumns.SetValidationTypeAsRVariable()
+        ucrSelectorRandomSamples.bUseCurrentFilter = False
     End Sub
 
     Private Sub SetDefaults()
