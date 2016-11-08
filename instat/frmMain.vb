@@ -43,6 +43,8 @@ Public Class frmMain
     Public strDefaultDataFrame As String = ""
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'temp removed
+        mnuHelpAboutRInstat.Visible = False
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
@@ -1283,5 +1285,9 @@ Public Class frmMain
 
     Private Sub mnuHelpGuideGlosary_Click(sender As Object, e As EventArgs) Handles mnuHelpGuideGlosary.Click
         Process.Start(Path.Combine(strStaticPath, "Help", "Statistics Glossary.pdf"))
+    End Sub
+
+    Private Sub mnuHelpLicence_Click(sender As Object, e As EventArgs) Handles mnuHelpLicence.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "323")
     End Sub
 End Class

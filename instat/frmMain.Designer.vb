@@ -1336,7 +1336,6 @@ Partial Class frmMain
         '
         'mnuHelpLicence
         '
-        Me.mnuHelpLicence.Enabled = False
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
         Me.mnuHelpLicence.Size = New System.Drawing.Size(221, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
