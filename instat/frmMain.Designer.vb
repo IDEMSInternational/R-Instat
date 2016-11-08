@@ -908,6 +908,7 @@ Partial Class frmMain
         '
         'mnuModelOtherTwoVariablesTwoSamples
         '
+        Me.mnuModelOtherTwoVariablesTwoSamples.Enabled = False
         Me.mnuModelOtherTwoVariablesTwoSamples.Name = "mnuModelOtherTwoVariablesTwoSamples"
         Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesTwoSamples.Tag = "Two_Samples..."
@@ -915,6 +916,7 @@ Partial Class frmMain
         '
         'mnuModelOtherTwoVariablesSummaryData
         '
+        Me.mnuModelOtherTwoVariablesSummaryData.Enabled = False
         Me.mnuModelOtherTwoVariablesSummaryData.Name = "mnuModelOtherTwoVariablesSummaryData"
         Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesSummaryData.Tag = "Summary_Data"
@@ -967,6 +969,7 @@ Partial Class frmMain
         '
         'mnuModelOtherThreeVariablesNonParametricTwoWayANOVA
         '
+        Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Enabled = False
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Name = "mnuModelOtherThreeVariablesNonParametricTwoWayANOVA"
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Size = New System.Drawing.Size(260, 22)
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Tag = "Non_Parametric_Two_Way_ANOVA..."
@@ -982,6 +985,7 @@ Partial Class frmMain
         'mnuModelOtherGeneral
         '
         Me.mnuModelOtherGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOtherGeneralANOVAGeneral, Me.mnuModelOtherGeneralRegression, Me.mnuModelOtherGeneralLogLinear})
+        Me.mnuModelOtherGeneral.Enabled = False
         Me.mnuModelOtherGeneral.Name = "mnuModelOtherGeneral"
         Me.mnuModelOtherGeneral.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherGeneral.Tag = "Other_(General)"
@@ -989,6 +993,7 @@ Partial Class frmMain
         '
         'mnuModelOtherGeneralANOVAGeneral
         '
+        Me.mnuModelOtherGeneralANOVAGeneral.Enabled = False
         Me.mnuModelOtherGeneralANOVAGeneral.Name = "mnuModelOtherGeneralANOVAGeneral"
         Me.mnuModelOtherGeneralANOVAGeneral.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralANOVAGeneral.Tag = "ANOVA_General..."
@@ -996,6 +1001,7 @@ Partial Class frmMain
         '
         'mnuModelOtherGeneralRegression
         '
+        Me.mnuModelOtherGeneralRegression.Enabled = False
         Me.mnuModelOtherGeneralRegression.Name = "mnuModelOtherGeneralRegression"
         Me.mnuModelOtherGeneralRegression.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralRegression.Tag = "Regression"
@@ -1003,6 +1009,7 @@ Partial Class frmMain
         '
         'mnuModelOtherGeneralLogLinear
         '
+        Me.mnuModelOtherGeneralLogLinear.Enabled = False
         Me.mnuModelOtherGeneralLogLinear.Name = "mnuModelOtherGeneralLogLinear"
         Me.mnuModelOtherGeneralLogLinear.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralLogLinear.Tag = "Log_Linear"
