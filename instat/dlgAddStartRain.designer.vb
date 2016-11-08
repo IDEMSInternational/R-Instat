@@ -42,6 +42,7 @@ Partial Class dlgAddStartRain
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAddStartRain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Add_Start_Rain"
         Me.Text = "Add Start of Rain"
         Me.ResumeLayout(False)

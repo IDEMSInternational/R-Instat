@@ -398,7 +398,7 @@ Partial Class dlgClimdex
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimdex"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Climdex Indices"
         Me.Text = "Climdex Indices"
         CType(Me.nudYearFrom, System.ComponentModel.ISupportInitialize).EndInit()

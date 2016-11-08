@@ -170,7 +170,7 @@ Partial Class dlgPrintPreviewOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPrintPreviewOptions"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Print and Preview Options"
         Me.pnlEditor.ResumeLayout(False)
         Me.pnlEditor.PerformLayout()

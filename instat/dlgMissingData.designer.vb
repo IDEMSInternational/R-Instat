@@ -42,6 +42,7 @@ Partial Class dlgMissingData
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgMissingData"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Missing_Data"
         Me.Text = "Missing Data"
         Me.ResumeLayout(False)
