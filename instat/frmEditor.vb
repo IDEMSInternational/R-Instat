@@ -617,4 +617,8 @@ Public Class frmEditor
         'TODO Selected column should automatically appear in dialog
         dlgConvertColumns.ShowDialog()
     End Sub
+
+    Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
+        grdData.CurrentWorksheet.Copy()
+    End Sub
 End Class
