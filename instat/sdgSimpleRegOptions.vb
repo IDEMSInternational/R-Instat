@@ -168,6 +168,10 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub chkMultiplePlots_CheckedChanged(sender As Object, e As EventArgs) Handles chkMultiplePlots.CheckedChanged
+        GraphMultiplePlots()
+    End Sub
+
+    Private Sub GraphMultiplePlots()
         If chkMultiplePlots.Checked Then
             chkFittedModel.Checked = False
             chkIndividualPlots.Checked = False
@@ -178,7 +182,7 @@ Public Class sdgSimpleRegOptions
         End If
     End Sub
 
-    Private Sub chkIndividualPlots_CheckedChanged(sender As Object, e As EventArgs) Handles chkIndividualPlots.CheckedChanged
+    Private Sub GraphIndividualPlots()
         If chkIndividualPlots.Checked Then
             chkFittedModel.Checked = False
             chkMultiplePlots.Checked = False
@@ -189,7 +193,11 @@ Public Class sdgSimpleRegOptions
         End If
     End Sub
 
-    Private Sub rdoFourPlots_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFourPlots.CheckedChanged
+    Private Sub chkIndividualPlots_CheckedChanged(sender As Object, e As EventArgs) Handles chkIndividualPlots.CheckedChanged
+        GraphIndividualPlots()
+    End Sub
+
+    Private Sub rdoMultiplePlots(sender As Object, e As EventArgs) Handles rdoFourPlots.CheckedChanged, rdoSixPlots3Rows.CheckedChanged, rdoSixPlots2Rows.CheckedChanged
         ResidualPlots()
         If rdoFourPlots.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 2)
@@ -197,21 +205,18 @@ Public Class sdgSimpleRegOptions
             clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
             clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
         End If
-
-    End Sub
-
-    Private Sub rdoSix_Plots2Rows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSixPlots2Rows.CheckedChanged
-        clsRResidualPlotsFunction.AddParameter("ncol", 3)
-        clsRResidualPlotsFunction.AddParameter("which", "1:6")
-        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
-        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
-    End Sub
-
-    Private Sub rdordoSix_Plots3Rows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSixPlots3Rows.CheckedChanged
-        clsRResidualPlotsFunction.AddParameter("ncol", 2)
-        clsRResidualPlotsFunction.AddParameter("which", "1:6")
-        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
-        clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+        If rdoSixPlots2Rows.Checked Then
+            clsRResidualPlotsFunction.AddParameter("ncol", 3)
+            clsRResidualPlotsFunction.AddParameter("which", "1:6")
+            clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+            clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+        End If
+        If rdoSixPlots3Rows.Checked Then
+            clsRResidualPlotsFunction.AddParameter("ncol", 2)
+            clsRResidualPlotsFunction.AddParameter("which", "1:6")
+            clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
+            clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+        End If
     End Sub
 
     Private Sub rdoQQ_CheckedChanged(sender As Object, e As EventArgs) Handles rdoQQ.CheckedChanged
@@ -255,42 +260,26 @@ Public Class sdgSimpleRegOptions
         clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
     End Sub
 
-    Private Sub Arguments_CheckedChanged(sender As Object, e As EventArgs) Handles chkConfIntervalband.CheckedChanged, rdoLinear.CheckedChanged, rdoResponse.CheckedChanged, chkJitter.CheckedChanged, nudWhiteSpace.ValueChanged
+    Private Sub FittedModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkConfIntervalband.CheckedChanged, chkJitter.CheckedChanged, chkPartial.CheckedChanged, rdoLinear.CheckedChanged, rdoResponse.CheckedChanged, rdoContrast.CheckedChanged, rdoConditional.CheckedChanged, nudWhiteSpace.ValueChanged, nudGraphicsCLevel.ValueChanged, rdoPartial.CheckedChanged, rdo1.CheckedChanged, rdo2.CheckedChanged
         FittedModel()
     End Sub
 
-    Public Sub SetDefaults()
+    Private Sub CheckRugs_CheckedChanged(sender As Object, e As EventArgs) Handles chkRugs.CheckedChanged
+        GraphFittedModel()
+    End Sub
+
+    Private Sub DisplayTabDefaults()
         chkANOVA.Checked = True
         chkModel.Checked = True
         chkEstimates.Checked = True
         chkPvalues.Enabled = True
         chkPvalues.Checked = True
-        lblGraphicsSignLevel.Enabled = False
-        nudGraphicsCLevel.Enabled = False
-        chkFittedModel.Checked = False
         chkDisplayCLimits.Checked = False
-        chkDisplayCLimits.Enabled = False
         lblDisplayCLevel.Enabled = False
         nudDisplayCLevel.Enabled = False
-        chkPartial.Enabled = False
-        chkRugs.Enabled = False
-        grpRugs.Enabled = False
-        grpPlotType.Enabled = False
-        grpScale.Enabled = False
-        chkJitter.Enabled = False
-        lblWhiteSpace.Enabled = False
-        nudWhiteSpace.Enabled = False
-        chkMultiplePlots.Checked = False
-        grpMultiplePlots.Enabled = False
-        chkIndividualPlots.Checked = False
-        grpIndividualPlots.Enabled = False
-        rdoConditional.Checked = False
-        rdoLinear.Checked = False
-        chkPartial.Checked = False
-        chkJitter.Checked = False
-        chkRugs.Checked = False
-        chkConfIntervalband.Checked = False
-        chkConfIntervalband.Enabled = False
+    End Sub
+
+    Private Sub SaveTab()
         ucrFittedColumnName.SetPrefix("Fitted")
         ucrFittedColumnName.SetItemsTypeAsColumns()
         ucrFittedColumnName.SetDefaultTypeAsColumn()
@@ -315,6 +304,25 @@ Public Class sdgSimpleRegOptions
         ucrResidualsColumnName.Enabled = False
         ucrStdResidualsColumnName.Enabled = False
         ucrLeverageColumnName.Enabled = False
+        chkFittedValues.Checked = False
+        chkLeverage.Checked = False
+        chkStdResiduals.Checked = False
+        chkResiduals.Checked = False
+    End Sub
+
+    Private Sub GraphsTabDefaults()
+        GraphFittedModel()
+        GraphMultiplePlots()
+        GraphIndividualPlots()
+    End Sub
+
+    Public Sub SetDefaults()
+        DisplayTabDefaults()
+        SaveTab()
+        GraphsTabDefaults()
+        chkFittedModel.Checked = False
+        chkMultiplePlots.Checked = False
+        chkIndividualPlots.Checked = False
     End Sub
 
     Private Sub pvalues()
@@ -333,44 +341,38 @@ Public Class sdgSimpleRegOptions
         pvalues()
     End Sub
 
-    Private Sub chkFittedModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkFittedModel.CheckedChanged
+    Private Sub GraphFittedModel()
         If (chkFittedModel.Checked) Then
-            chkMultiplePlots.Checked = False
-            chkIndividualPlots.Checked = False
-            lblGraphicsSignLevel.Enabled = True
-            nudGraphicsCLevel.Enabled = True
-            chkPartial.Enabled = True
-            chkRugs.Enabled = True
             grpPlotType.Enabled = True
             grpScale.Enabled = True
-            chkJitter.Enabled = True
-            lblWhiteSpace.Enabled = True
+            nudDisplayCLevel.Enabled = True
             nudWhiteSpace.Enabled = True
-            rdoConditional.Checked = True
-            rdoLinear.Checked = True
-            chkPartial.Checked = False
-            chkJitter.Checked = False
-            chkRugs.Checked = False
-            chkConfIntervalband.Checked = True
+            chkPartial.Enabled = True
+            chkRugs.Enabled = True
+            chkJitter.Enabled = True
             chkConfIntervalband.Enabled = True
+            chkIndividualPlots.Checked = False
+            chkMultiplePlots.Checked = False
         Else
-            lblGraphicsSignLevel.Enabled = False
-            nudGraphicsCLevel.Enabled = False
-            chkPartial.Enabled = False
-            chkRugs.Enabled = False
             grpPlotType.Enabled = False
             grpScale.Enabled = False
-            chkJitter.Enabled = False
-            lblWhiteSpace.Enabled = False
+            nudDisplayCLevel.Enabled = False
             nudWhiteSpace.Enabled = False
-            rdoConditional.Checked = False
-            rdoLinear.Checked = False
-            chkConfIntervalband.Checked = False
+            chkPartial.Enabled = False
+            chkRugs.Enabled = False
+            chkJitter.Enabled = False
             chkConfIntervalband.Enabled = False
         End If
-    End Sub
-
-    Private Sub chkDisplayCLimits_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayCLimits.CheckedChanged
+        rdoConditional.Checked = True
+        rdoLinear.Checked = True
+        nudDisplayCLevel.Value = 0.05
+        nudWhiteSpace.Value = 0.2
+        rdoPartial.Checked = True
+        If chkRugs.Checked = True Then
+            grpRugs.Enabled = True
+        Else
+            grpRugs.Enabled = False
+        End If
         If (chkDisplayCLimits.Checked) Then
             lblDisplayCLevel.Enabled = True
             nudDisplayCLevel.Enabled = True
@@ -378,6 +380,16 @@ Public Class sdgSimpleRegOptions
             lblDisplayCLevel.Enabled = False
             nudDisplayCLevel.Enabled = False
         End If
+
+    End Sub
+
+    Private Sub chkFittedModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkFittedModel.CheckedChanged
+        GraphFittedModel()
+    End Sub
+
+    Private Sub chkDisplayCLimits_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayCLimits.CheckedChanged
+        GraphFittedModel()
+        DisplayConfidence()
     End Sub
 
     Private Sub DisplayConfidence()
