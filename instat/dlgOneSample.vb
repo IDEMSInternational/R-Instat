@@ -34,13 +34,19 @@ Public Class dlgOneSample
         ucrBase.clsRsyntax.SetFunction("t.test")
         cboModels.Text = "Normal"
         cboParameters.Text = "Mean(t-interval)"
+        nudValue.Minimum = 0
+        nudValue.Maximum = 1
+        nudValue.Increment = 0.05
+        nudValue.DecimalPlaces = 2
     End Sub
 
     Private Sub SetDefaults()
         ucBaseOneSample.Reset()
         ucrReceiverDataColumn.SetMeAsReceiver()
-        txtValue.Visible = False
+        nudValue.Value = 0.05
+        nudValue.Visible = False
         lblValue.Visible = False
+        chkSignificanceTest.Checked = False
         TestOKEnabled()
     End Sub
 
@@ -58,10 +64,10 @@ Public Class dlgOneSample
 
     Private Sub chkSignificanceTest_CheckedChanged(sender As Object, e As EventArgs) Handles chkSignificanceTest.CheckedChanged
         If chkSignificanceTest.Checked = True Then
-            txtValue.Visible = True
+            nudValue.Visible = True
             lblValue.Visible = True
         Else
-            txtValue.Visible = False
+            nudValue.Visible = False
             lblValue.Visible = False
         End If
     End Sub
@@ -90,13 +96,13 @@ Public Class dlgOneSample
     Private Sub chkSignificanceTest_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkSignificanceTest.KeyPress
         If e.KeyChar = vbCr Then
             chkSignificanceTest.Checked = True
-            txtValue.Visible = True
+            nudValue.Visible = True
             lblValue.Visible = True
         End If
     End Sub
 
-    Private Sub txtValue_Leave(sender As Object, e As EventArgs) Handles txtValue.Leave
-        ucrBase.clsRsyntax.AddParameter("mu", txtValue.Text)
+    Private Sub txtValue_TextChanged(sender As Object, e As EventArgs) Handles nudValue.TextChanged
+        ucrBase.clsRsyntax.AddParameter("mu", nudValue.Text)
     End Sub
 
 End Class
