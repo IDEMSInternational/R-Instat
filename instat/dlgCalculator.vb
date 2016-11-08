@@ -63,6 +63,7 @@ Public Class dlgCalculator
         chkSaveResultInto.Checked = True
         SaveResults()
         grpDates.Enabled = False
+        ucrSelectorForCalculations.bUseCurrentFilter = False
     End Sub
 
     Private Sub ReopenDialog()
