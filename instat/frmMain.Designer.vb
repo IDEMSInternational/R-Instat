@@ -141,9 +141,22 @@ Partial Class frmMain
         Me.mnuViewTileVertically = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewTileHorizontally = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpHistFAQ = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpSpreadsheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpGetingStarted = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator28 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuHelpMenus = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpR = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpRPackagesCommands = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpDataset = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAboutRInstat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpGuide = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpGuidesCaseStudy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpGuideGlosary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuhelpGuidesMore = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -236,7 +249,6 @@ Partial Class frmMain
         Me.Tool_strip = New System.Windows.Forms.ToolStrip()
         Me.mnuTbNew = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbOpen = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbImport = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbSave = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbPrint = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
@@ -370,12 +382,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpHistoryAndFAQ = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpGettingStarted = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpMenusAndDialogues = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpRPackagesAndCommands = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpDataSets = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1221,25 +1227,75 @@ Partial Class frmMain
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelp, Me.mnuHelpLicence, Me.mnuHelpAboutRInstat})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpHistFAQ, Me.mnuHelpSpreadsheet, Me.mnuHelpGetingStarted, Me.ToolStripSeparator28, Me.mnuHelpMenus, Me.mnuHelpR, Me.mnuHelpRPackagesCommands, Me.mnuHelpDataset, Me.ToolStripSeparator29, Me.mnuHelpGuide, Me.mnuHelpAboutRInstat, Me.mnuHelpLicence})
         Me.mnuHelp.Name = "mnuHelp"
         Me.mnuHelp.Size = New System.Drawing.Size(44, 20)
         Me.mnuHelp.Tag = "Help"
         Me.mnuHelp.Text = "Help"
         '
-        'mnuHelpHelp
+        'mnuHelpHelpIntroduction
         '
-        Me.mnuHelpHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpIntroduction, Me.mnuHelpHistoryAndFAQ, Me.mnuHelpGettingStarted, Me.mnuHelpMenusAndDialogues, Me.mnuHelpRPackagesAndCommands, Me.mnuHelpDataSets})
-        Me.mnuHelpHelp.Name = "mnuHelpHelp"
-        Me.mnuHelpHelp.Size = New System.Drawing.Size(152, 22)
-        Me.mnuHelpHelp.Tag = "Help"
-        Me.mnuHelpHelp.Text = "Help"
+        Me.mnuHelpHelpIntroduction.Name = "mnuHelpHelpIntroduction"
+        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpHelpIntroduction.Text = "Introduction"
+        '
+        'mnuHelpHistFAQ
+        '
+        Me.mnuHelpHistFAQ.Name = "mnuHelpHistFAQ"
+        Me.mnuHelpHistFAQ.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpHistFAQ.Text = "History and FAQ"
+        '
+        'mnuHelpSpreadsheet
+        '
+        Me.mnuHelpSpreadsheet.Name = "mnuHelpSpreadsheet"
+        Me.mnuHelpSpreadsheet.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpSpreadsheet.Text = "Spreadsheet"
+        '
+        'mnuHelpGetingStarted
+        '
+        Me.mnuHelpGetingStarted.Name = "mnuHelpGetingStarted"
+        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpGetingStarted.Text = "Getting Started"
+        '
+        'ToolStripSeparator28
+        '
+        Me.ToolStripSeparator28.Name = "ToolStripSeparator28"
+        Me.ToolStripSeparator28.Size = New System.Drawing.Size(218, 6)
+        '
+        'mnuHelpMenus
+        '
+        Me.mnuHelpMenus.Name = "mnuHelpMenus"
+        Me.mnuHelpMenus.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpMenus.Text = "Menus and Dialogs"
+        '
+        'mnuHelpR
+        '
+        Me.mnuHelpR.Name = "mnuHelpR"
+        Me.mnuHelpR.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpR.Text = "About R"
+        '
+        'mnuHelpRPackagesCommands
+        '
+        Me.mnuHelpRPackagesCommands.Name = "mnuHelpRPackagesCommands"
+        Me.mnuHelpRPackagesCommands.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpRPackagesCommands.Text = "R Packages and Commands"
+        '
+        'mnuHelpDataset
+        '
+        Me.mnuHelpDataset.Name = "mnuHelpDataset"
+        Me.mnuHelpDataset.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpDataset.Text = "Datasets"
+        '
+        'ToolStripSeparator29
+        '
+        Me.ToolStripSeparator29.Name = "ToolStripSeparator29"
+        Me.ToolStripSeparator29.Size = New System.Drawing.Size(218, 6)
         '
         'mnuHelpLicence
         '
         Me.mnuHelpLicence.Enabled = False
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(152, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(221, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
         Me.mnuHelpLicence.Text = "Licence..."
         '
@@ -1247,9 +1303,35 @@ Partial Class frmMain
         '
         Me.mnuHelpAboutRInstat.Enabled = False
         Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(152, 22)
+        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(221, 22)
         Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
         Me.mnuHelpAboutRInstat.Text = "About R-Instat"
+        '
+        'mnuHelpGuide
+        '
+        Me.mnuHelpGuide.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpGuidesCaseStudy, Me.mnuHelpGuideGlosary, Me.mnuhelpGuidesMore})
+        Me.mnuHelpGuide.Name = "mnuHelpGuide"
+        Me.mnuHelpGuide.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpGuide.Text = "Guides"
+        '
+        'mnuHelpGuidesCaseStudy
+        '
+        Me.mnuHelpGuidesCaseStudy.Name = "mnuHelpGuidesCaseStudy"
+        Me.mnuHelpGuidesCaseStudy.Size = New System.Drawing.Size(166, 22)
+        Me.mnuHelpGuidesCaseStudy.Text = "Case Study Guide"
+        '
+        'mnuHelpGuideGlosary
+        '
+        Me.mnuHelpGuideGlosary.Name = "mnuHelpGuideGlosary"
+        Me.mnuHelpGuideGlosary.Size = New System.Drawing.Size(166, 22)
+        Me.mnuHelpGuideGlosary.Text = "Glossary"
+        '
+        'mnuhelpGuidesMore
+        '
+        Me.mnuhelpGuidesMore.Enabled = False
+        Me.mnuhelpGuidesMore.Name = "mnuhelpGuidesMore"
+        Me.mnuhelpGuidesMore.Size = New System.Drawing.Size(166, 22)
+        Me.mnuhelpGuidesMore.Text = "More..."
         '
         'ToolStripSeparator16
         '
@@ -1907,7 +1989,7 @@ Partial Class frmMain
         'Tool_strip
         '
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbNew, Me.mnuTbOpen, Me.mnuTbImport, Me.mnuTbSave, Me.mnuTbPrint, Me.toolStripSeparator, Me.mnuTbCut, Me.mnuTbCopy, Me.mnuTbPaste, Me.mnuTbDelete, Me.separator1, Me.EditLastDialogueToolStrip, Me.mnuTbShowLast10, Me.separator2, Me.mnuTbHelp})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbNew, Me.mnuTbOpen, Me.mnuTbSave, Me.mnuTbPrint, Me.toolStripSeparator, Me.mnuTbCut, Me.mnuTbCopy, Me.mnuTbPaste, Me.mnuTbDelete, Me.separator1, Me.EditLastDialogueToolStrip, Me.mnuTbShowLast10, Me.separator2, Me.mnuTbHelp})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -1932,16 +2014,6 @@ Partial Class frmMain
         Me.mnuTbOpen.Name = "mnuTbOpen"
         Me.mnuTbOpen.Size = New System.Drawing.Size(23, 22)
         Me.mnuTbOpen.Text = "&Open"
-        '
-        'mnuTbImport
-        '
-        Me.mnuTbImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbImport.Image = Global.instat.My.Resources.Resources.Carlosjj_Microsoft_Office_2013_Excel
-        Me.mnuTbImport.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbImport.Name = "mnuTbImport"
-        Me.mnuTbImport.Size = New System.Drawing.Size(23, 22)
-        Me.mnuTbImport.Text = "&Import"
-        Me.mnuTbImport.ToolTipText = "Import from excel"
         '
         'mnuTbSave
         '
@@ -2878,42 +2950,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
-        'mnuHelpIntroduction
-        '
-        Me.mnuHelpIntroduction.Name = "mnuHelpIntroduction"
-        Me.mnuHelpIntroduction.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpIntroduction.Text = "Introduction"
-        '
-        'mnuHelpHistoryAndFAQ
-        '
-        Me.mnuHelpHistoryAndFAQ.Name = "mnuHelpHistoryAndFAQ"
-        Me.mnuHelpHistoryAndFAQ.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpHistoryAndFAQ.Text = "History and FAQ "
-        '
-        'mnuHelpGettingStarted
-        '
-        Me.mnuHelpGettingStarted.Name = "mnuHelpGettingStarted"
-        Me.mnuHelpGettingStarted.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpGettingStarted.Text = "Getting Started"
-        '
-        'mnuHelpMenusAndDialogues
-        '
-        Me.mnuHelpMenusAndDialogues.Name = "mnuHelpMenusAndDialogues"
-        Me.mnuHelpMenusAndDialogues.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpMenusAndDialogues.Text = "Menus and Dialogues "
-        '
-        'mnuHelpRPackagesAndCommands
-        '
-        Me.mnuHelpRPackagesAndCommands.Name = "mnuHelpRPackagesAndCommands"
-        Me.mnuHelpRPackagesAndCommands.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpRPackagesAndCommands.Text = "R packages and Commands"
-        '
-        'mnuHelpDataSets
-        '
-        Me.mnuHelpDataSets.Name = "mnuHelpDataSets"
-        Me.mnuHelpDataSets.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpDataSets.Text = "Data Sets"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2996,7 +3032,6 @@ Partial Class frmMain
     Private WithEvents Tool_strip As ToolStrip
     Friend WithEvents mnuTbNew As ToolStripButton
     Friend WithEvents mnuTbOpen As ToolStripButton
-    Friend WithEvents mnuTbImport As ToolStripButton
     Friend WithEvents mnuTbSave As ToolStripButton
     Friend WithEvents mnuTbPrint As ToolStripButton
     Friend WithEvents toolStripSeparator As ToolStripSeparator
@@ -3175,7 +3210,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator22 As ToolStripSeparator
     Friend WithEvents mnuModelOtherOneVariableGoodnessofFit As ToolStripMenuItem
     Friend WithEvents mnuHelpAboutRInstat As ToolStripMenuItem
-    Friend WithEvents mnuHelpHelp As ToolStripMenuItem
     Friend WithEvents mnuHelpLicence As ToolStripMenuItem
     Friend WithEvents mnuToolsCheckForUpdates As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
@@ -3285,10 +3319,18 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseCheckDataImportOpenRefine As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
-    Friend WithEvents mnuHelpIntroduction As ToolStripMenuItem
-    Friend WithEvents mnuHelpHistoryAndFAQ As ToolStripMenuItem
-    Friend WithEvents mnuHelpGettingStarted As ToolStripMenuItem
-    Friend WithEvents mnuHelpMenusAndDialogues As ToolStripMenuItem
-    Friend WithEvents mnuHelpRPackagesAndCommands As ToolStripMenuItem
-    Friend WithEvents mnuHelpDataSets As ToolStripMenuItem
+    Friend WithEvents mnuHelpHelpIntroduction As ToolStripMenuItem
+    Friend WithEvents mnuHelpHistFAQ As ToolStripMenuItem
+    Friend WithEvents mnuHelpSpreadsheet As ToolStripMenuItem
+    Friend WithEvents mnuHelpGetingStarted As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator28 As ToolStripSeparator
+    Friend WithEvents mnuHelpMenus As ToolStripMenuItem
+    Friend WithEvents mnuHelpR As ToolStripMenuItem
+    Friend WithEvents mnuHelpRPackagesCommands As ToolStripMenuItem
+    Friend WithEvents mnuHelpDataset As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator29 As ToolStripSeparator
+    Friend WithEvents mnuHelpGuide As ToolStripMenuItem
+    Friend WithEvents mnuHelpGuidesCaseStudy As ToolStripMenuItem
+    Friend WithEvents mnuHelpGuideGlosary As ToolStripMenuItem
+    Friend WithEvents mnuhelpGuidesMore As ToolStripMenuItem
 End Class
