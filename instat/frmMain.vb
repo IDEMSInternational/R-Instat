@@ -330,10 +330,6 @@ Public Class frmMain
         dlglogLinearModels.ShowDialog()
     End Sub
 
-    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableNonParametric.Click
-        dlgNon_ParametricOneSampleTests.ShowDialog()
-    End Sub
-
     Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Click
         dlgNon_ParametricTwoWayAnova.ShowDialog()
     End Sub
@@ -756,10 +752,6 @@ Public Class frmMain
 
     Private Sub mnuStatisticsSimpleModelsTwoSamplesSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSummaryData.Click
         dlgTwoSampleSummaryData.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsSimpleModelsGoodnessOfFit_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableGoodnessofFit.Click
-        dlgGoodnessofFit.ShowDialog()
     End Sub
 
     Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
