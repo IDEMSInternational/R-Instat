@@ -39,6 +39,8 @@ Partial Class dlgInterpolate
         Me.ClientSize = New System.Drawing.Size(419, 213)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgInterpolate"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Interpolate"

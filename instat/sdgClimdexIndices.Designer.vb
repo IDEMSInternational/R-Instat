@@ -807,6 +807,7 @@ Partial Class sdgClimdexIndices
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgClimdexIndices"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Indices"
         Me.Text = "Indices"
         Me.panIndices.ResumeLayout(False)
