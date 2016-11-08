@@ -24,6 +24,9 @@ Public Class ucrDistributionsWithParameters
 
     Private Sub ucrDistributionsWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetParameters()
+        'temp disabled
+        txtParameter4.Visible = False
+        lblParameter4.Visible = False
     End Sub
 
     Public Sub SetParameters()
