@@ -39,6 +39,8 @@ Partial Class dlgWaterSatisfactionIndex
         Me.ClientSize = New System.Drawing.Size(417, 288)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgWaterSatisfactionIndex"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Water_Satisfaction_Index"

@@ -42,6 +42,7 @@ Partial Class dlgTwoSamples
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTwoSamples"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Two Samples"
         Me.ResumeLayout(False)
 

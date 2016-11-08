@@ -168,6 +168,7 @@ Partial Class dlgInventoryPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgInventoryPlot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Inventory_Plot"
         Me.Text = "Inventory Plot"
         Me.ResumeLayout(False)
