@@ -51,5 +51,4 @@ Public Class sdgANOVAOptions
             AnovaTable()
         End If
     End Sub
-
 End Class
