@@ -83,7 +83,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text", "Runoff", "Dates"})
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates"})
         ucrSaveResultInto.SetValidationTypeAsRVariable()
 
     End Sub
@@ -241,17 +241,17 @@ Public Class dlgCalculator
                 iHelpCalcID = 127
 
 
-            Case "Summary"
+            Case "Statistics"
                 grpDates.Visible = False
                 grpStatistics.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(600, 377)
+                Me.Size = New System.Drawing.Size(568, 377)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 iHelpCalcID = 128
-            Case "Text"
+            Case "Strings (Character Columns)"
                 grpDates.Visible = False
                 grpStrings.Visible = True
                 grpStatistics.Visible = False
@@ -259,9 +259,9 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
-                Me.Size = New System.Drawing.Size(491, 377)
+                Me.Size = New System.Drawing.Size(610, 377)
                 iHelpCalcID = 338
-            Case "Runoff"
+            Case "Probability"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpStrings.Visible = False
@@ -289,6 +289,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
+                iHelpCalcID = 14
                 grpStrings.Visible = False
         End Select
     End Sub
