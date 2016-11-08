@@ -1602,9 +1602,9 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
 )
 
 data_object$set("public","make_date_yearmonthday", function(year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
-  year_col <- self$get_columns_from_data(year)
-  month_col <- self$get_columns_from_data(month)
-  day_col <- self$get_columns_from_data(day)
+  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  month_col <- self$get_columns_from_data(month, use_current_filter = FALSE)
+  day_col <- self$get_columns_from_data(day, use_current_filter = FALSE)
   if(missing(year_format)) {
     year_counts <- str_count(year)
     if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
@@ -1627,8 +1627,8 @@ data_object$set("public","make_date_yearmonthday", function(year, month, day, ye
 
 # Not sure if doy_format should be a parameter? There seems to only be one format for it.
 data_object$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
-  year_col <- self$get_columns_from_data(year)
-  doy_col <- self$get_columns_from_data(doy)
+  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  doy_col <- self$get_columns_from_data(doy, use_current_filter = FALSE)
   
   if(missing(year_format)) {
     year_counts <- str_count(year)
