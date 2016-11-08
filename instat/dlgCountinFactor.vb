@@ -30,6 +30,7 @@ Public Class dlgCountinFactor
         ucrCountReceiver.Selector = ucrCountSelector
         ucrCountReceiver.SetIncludedDataTypes({"factor"})
         ucrCountReceiver.SetMeAsReceiver()
+        ucrCountReceiver.bUseFilteredData = False
         ucrBase.iHelpTopicID = 457
         ucrInputCountColumnName.SetItemsTypeAsColumns()
         ucrInputCountColumnName.SetDefaultTypeAsColumn()
