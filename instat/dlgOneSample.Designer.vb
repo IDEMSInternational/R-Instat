@@ -35,8 +35,8 @@ Partial Class dlgOneSample
         Me.lblGraphs = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrReceiverDataColumn = New instat.ucrReceiverSingle()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucBaseOneSample = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpAnalysis.SuspendLayout()
         Me.grpGraphs.SuspendLayout()
         Me.SuspendLayout()
@@ -50,9 +50,9 @@ Partial Class dlgOneSample
         Me.grpAnalysis.Controls.Add(Me.cboParameters)
         Me.grpAnalysis.Controls.Add(Me.lblModels)
         Me.grpAnalysis.Controls.Add(Me.cboModels)
-        Me.grpAnalysis.Location = New System.Drawing.Point(325, 19)
+        Me.grpAnalysis.Location = New System.Drawing.Point(238, 83)
         Me.grpAnalysis.Name = "grpAnalysis"
-        Me.grpAnalysis.Size = New System.Drawing.Size(220, 202)
+        Me.grpAnalysis.Size = New System.Drawing.Size(220, 153)
         Me.grpAnalysis.TabIndex = 3
         Me.grpAnalysis.TabStop = False
         Me.grpAnalysis.Tag = "Analysis"
@@ -61,7 +61,7 @@ Partial Class dlgOneSample
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(130, 156)
+        Me.lblValue.Location = New System.Drawing.Point(130, 120)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(34, 13)
         Me.lblValue.TabIndex = 5
@@ -71,7 +71,7 @@ Partial Class dlgOneSample
         '
         'txtValue
         '
-        Me.txtValue.Location = New System.Drawing.Point(173, 153)
+        Me.txtValue.Location = New System.Drawing.Point(173, 117)
         Me.txtValue.Name = "txtValue"
         Me.txtValue.Size = New System.Drawing.Size(41, 20)
         Me.txtValue.TabIndex = 6
@@ -80,7 +80,7 @@ Partial Class dlgOneSample
         'chkSignificanceTest
         '
         Me.chkSignificanceTest.AutoSize = True
-        Me.chkSignificanceTest.Location = New System.Drawing.Point(16, 156)
+        Me.chkSignificanceTest.Location = New System.Drawing.Point(16, 120)
         Me.chkSignificanceTest.Name = "chkSignificanceTest"
         Me.chkSignificanceTest.Size = New System.Drawing.Size(108, 17)
         Me.chkSignificanceTest.TabIndex = 4
@@ -91,7 +91,7 @@ Partial Class dlgOneSample
         'lblParameters
         '
         Me.lblParameters.AutoSize = True
-        Me.lblParameters.Location = New System.Drawing.Point(13, 92)
+        Me.lblParameters.Location = New System.Drawing.Point(14, 69)
         Me.lblParameters.Name = "lblParameters"
         Me.lblParameters.Size = New System.Drawing.Size(55, 13)
         Me.lblParameters.TabIndex = 2
@@ -102,7 +102,7 @@ Partial Class dlgOneSample
         '
         Me.cboParameters.FormattingEnabled = True
         Me.cboParameters.Items.AddRange(New Object() {"Mean            " & Global.Microsoft.VisualBasic.ChrW(9) & "   (t-interval)", "Mean, known variance (z-interval)", "Variance        " & Global.Microsoft.VisualBasic.ChrW(9) & "    (F-interval)"})
-        Me.cboParameters.Location = New System.Drawing.Point(13, 111)
+        Me.cboParameters.Location = New System.Drawing.Point(13, 88)
         Me.cboParameters.Name = "cboParameters"
         Me.cboParameters.Size = New System.Drawing.Size(201, 21)
         Me.cboParameters.TabIndex = 3
@@ -110,7 +110,7 @@ Partial Class dlgOneSample
         'lblModels
         '
         Me.lblModels.AutoSize = True
-        Me.lblModels.Location = New System.Drawing.Point(10, 34)
+        Me.lblModels.Location = New System.Drawing.Point(10, 21)
         Me.lblModels.Name = "lblModels"
         Me.lblModels.Size = New System.Drawing.Size(41, 13)
         Me.lblModels.TabIndex = 0
@@ -121,7 +121,7 @@ Partial Class dlgOneSample
         '
         Me.cboModels.FormattingEnabled = True
         Me.cboModels.Items.AddRange(New Object() {"Normal", "Proportional", "Poisson"})
-        Me.cboModels.Location = New System.Drawing.Point(13, 50)
+        Me.cboModels.Location = New System.Drawing.Point(13, 39)
         Me.cboModels.Name = "cboModels"
         Me.cboModels.Size = New System.Drawing.Size(201, 21)
         Me.cboModels.TabIndex = 1
@@ -130,7 +130,7 @@ Partial Class dlgOneSample
         'lblDataColumn
         '
         Me.lblDataColumn.AutoSize = True
-        Me.lblDataColumn.Location = New System.Drawing.Point(213, 19)
+        Me.lblDataColumn.Location = New System.Drawing.Point(314, 26)
         Me.lblDataColumn.Name = "lblDataColumn"
         Me.lblDataColumn.Size = New System.Drawing.Size(68, 13)
         Me.lblDataColumn.TabIndex = 1
@@ -140,9 +140,9 @@ Partial Class dlgOneSample
         'grpGraphs
         '
         Me.grpGraphs.Controls.Add(Me.lblGraphs)
-        Me.grpGraphs.Location = New System.Drawing.Point(12, 149)
+        Me.grpGraphs.Location = New System.Drawing.Point(9, 201)
         Me.grpGraphs.Name = "grpGraphs"
-        Me.grpGraphs.Size = New System.Drawing.Size(173, 130)
+        Me.grpGraphs.Size = New System.Drawing.Size(173, 66)
         Me.grpGraphs.TabIndex = 4
         Me.grpGraphs.TabStop = False
         Me.grpGraphs.Tag = "Graphs"
@@ -159,42 +159,48 @@ Partial Class dlgOneSample
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(446, 237)
+        Me.cmdOptions.Enabled = False
+        Me.cmdOptions.Location = New System.Drawing.Point(311, 249)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 5
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Tag = "Options..."
+        Me.cmdOptions.Text = "Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrReceiverDataColumn
         '
-        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(207, 35)
+        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(293, 48)
+        Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
+        Me.ucrReceiverDataColumn.Selector = Nothing
         Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(110, 26)
         Me.ucrReceiverDataColumn.TabIndex = 2
         '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 131)
-        Me.ucrAddRemove.TabIndex = 0
-        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(73, 285)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 279)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 53)
         Me.ucrBase.TabIndex = 6
+        '
+        'ucBaseOneSample
+        '
+        Me.ucBaseOneSample.bShowHiddenColumns = False
+        Me.ucBaseOneSample.bUseCurrentFilter = True
+        Me.ucBaseOneSample.Location = New System.Drawing.Point(9, 14)
+        Me.ucBaseOneSample.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucBaseOneSample.Name = "ucBaseOneSample"
+        Me.ucBaseOneSample.Size = New System.Drawing.Size(210, 180)
+        Me.ucBaseOneSample.TabIndex = 0
         '
         'dlgOneSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(551, 339)
+        Me.ClientSize = New System.Drawing.Size(469, 339)
+        Me.Controls.Add(Me.ucBaseOneSample)
         Me.Controls.Add(Me.ucrReceiverDataColumn)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpGraphs)
@@ -229,6 +235,6 @@ Partial Class dlgOneSample
     Friend WithEvents lblGraphs As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverDataColumn As ucrReceiverSingle
+    Friend WithEvents ucBaseOneSample As ucrSelectorByDataFrameAddRemove
 End Class
