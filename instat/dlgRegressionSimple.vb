@@ -38,7 +38,6 @@ Public Class dlgRegressionSimple
         ucrExplanatory.Selector = ucrSelectorSimpleReg
         ucrBase.iHelpTopicID = 366
         ucrModelName.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
-        ucrModelName.SetPrefix("reg")
         ucrModelName.SetItemsTypeAsModels()
         ucrModelName.SetDefaultTypeAsModel()
         ucrModelName.SetValidationTypeAsRVariable()
@@ -66,12 +65,11 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetDefaults()
+        ucrModelName.SetPrefix("reg")
         ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
         chkSaveModel.Checked = True
-        chkSaveModel.Enabled = True
-        ucrModelName.Visible = True
         chkConvertToVariate.Checked = False
         chkConvertToVariate.Visible = False
         chkFunction.Checked = False
@@ -88,27 +86,25 @@ Public Class dlgRegressionSimple
         sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
         sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        SetEnableDists()
     End Sub
 
     Private Sub LM()
-        clsRLmOrGLM.ClearParameters()
         clsRLmOrGLM.SetRCommand("lm")
+        clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
         clsModel.SetOperation("~")
-        clsRLmOrGLM.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        ConvertToVariate()
     End Sub
 
     Private Sub GLM()
-        clsRLmOrGLM.ClearParameters()
         clsRLmOrGLM.SetRCommand("glm")
+        clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
         clsModel.SetOperation("~")
         clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
         clsRLmOrGLM.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
-        ConvertToVariate()
     End Sub
 
     Private Sub SetTTest()
@@ -180,6 +176,9 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetPoissonTest()
+        Dim clsxFunc As New RFunction
+        Dim clsTFunc As New RFunction
+
         If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
             If ucrExplanatory.strCurrDataType = "factor" Or ucrExplanatory.strCurrDataType = "character" Then
                 ucrExplanatory.Clear()
@@ -200,8 +199,16 @@ Public Class dlgRegressionSimple
         clsRMean.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsRPoisson.AddParameter("x", "c(" & clsRLength.ToScript & "," & clsRLength2.ToScript & ")")
-        clsRPoisson.AddParameter("T", "c(" & clsRMean.ToScript & "," & clsRMean2.ToScript & ")")
+
+        clsxFunc.SetRCommand("c")
+        clsxFunc.AddParameter("l1", clsRFunctionParameter:=clsRLength, bIncludeArgumentName:=False)
+        clsxFunc.AddParameter("l2", clsRFunctionParameter:=clsRLength2, bIncludeArgumentName:=False)
+        clsRPoisson.AddParameter("x", clsRFunctionParameter:=clsxFunc)
+
+        clsTFunc.SetRCommand("c")
+        clsTFunc.AddParameter("m1", clsRFunctionParameter:=clsRMean, bIncludeArgumentName:=False)
+        clsTFunc.AddParameter("m2", clsRFunctionParameter:=clsRMean2, bIncludeArgumentName:=False)
+        clsRPoisson.AddParameter("T", clsRFunctionParameter:=clsTFunc)
     End Sub
 
     Private Sub SetRCode()
@@ -212,10 +219,8 @@ Public Class dlgRegressionSimple
         clsRLmOrGLM.ClearParameters()
         If rdoGeneral.Checked Then
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
-                clsRLmOrGLM.ClearParameters()
                 LM()
             Else
-                clsRLmOrGLM.ClearParameters()
                 GLM()
             End If
         ElseIf rdoSpecific.Checked Then
@@ -254,41 +259,44 @@ Public Class dlgRegressionSimple
     End Sub
 
     Public Sub ConvertToVariate()
-        If rdoGeneral.Checked AndAlso Not ucrResponse.IsEmpty Then
-            '            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-            If ucrFamily.strDataType = "numeric" Then
-                chkConvertToVariate.Checked = False
-                chkConvertToVariate.Visible = False
+        If rdoGeneral.Checked Then
+            If Not ucrResponse.IsEmpty Then
+                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                If ucrFamily.strDataType = "numeric" Then
+                    chkConvertToVariate.Checked = False
+                    chkConvertToVariate.Visible = False
+                Else
+                    chkConvertToVariate.Visible = True
+                End If
+                sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+                If chkConvertToVariate.Checked Then
+                    clsRConvert.SetRCommand("as.numeric")
+                    clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
+                    clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+                    clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+                    ucrFamily.RecieverDatatype("numeric")
+                Else
+                    clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+                    clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+                    clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                    ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                End If
             Else
-                chkConvertToVariate.Visible = True
+                If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
+                    ucrFamily.cboDistributions.Text = ""
+                    cmdModelOptions.Enabled = False
+                Else
+                    cmdModelOptions.Enabled = True
+                End If
             End If
-            sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         End If
 
-        If chkConvertToVariate.Checked Then
-            clsRConvert.SetRCommand("as.numeric")
-            clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-            clsModel.SetParameter(True, clsRFunc:=clsRConvert)
-            clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
-            '            ucrFamily.RecieverDatatype("numeric")
-        Else
-            clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
-            clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
-            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-            '            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-        End If
-        If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
-            ucrFamily.cboDistributions.Text = ""
-            cmdModelOptions.Enabled = False
-        Else
-            cmdModelOptions.Enabled = True
-        End If
     End Sub
 
     Private Sub DistributionsOffered()
         If rdoGeneral.Checked Then
-            '            ucrFamily.SetGLMDistributions()
-            ucrFamily.SetAllDistributions() ' this is just temporary. It will move back to SetGLMDistributions once some bugs are fixed
+            ucrFamily.SetGLMDistributions()
+            'ucrFamily.SetAllDistributions() ' this is just temporary. It will move back to SetGLMDistributions once some bugs are fixed
         Else
             ucrFamily.SetExactDistributions()
         End If
@@ -296,8 +304,14 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
         SetRCode()
+        ConvertToVariate()
         TestOKEnabled()
         DataTypeAccepted()
+        SetEnableDists()
+    End Sub
+
+    Public Sub SetEnableDists()
+        ucrFamily.Enabled = Not ucrResponse.IsEmpty
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged, chkConvertToVariate.VisibleChanged
@@ -350,9 +364,9 @@ Public Class dlgRegressionSimple
 
     Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
         If chkSaveModel.Checked Then
-            ucrModelName.Enabled = True
+            ucrModelName.Visible = True
         Else
-            ucrModelName.Enabled = False
+            ucrModelName.Visible = False
         End If
         AssignModelName()
         TestOKEnabled()
@@ -361,7 +375,11 @@ Public Class dlgRegressionSimple
     Private Sub AssignModelName()
         If chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty Then
             ucrBase.clsRsyntax.SetAssignTo(ucrModelName.GetText, strTempModel:=ucrModelName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            If rdoGeneral.Checked Then
+                ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            Else
+                ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            End If
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -372,7 +390,6 @@ Public Class dlgRegressionSimple
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
-        ConvertToVariate()
         ExplanatoryFunctionSelect()
         SetRCode()
         Display()
@@ -467,14 +484,6 @@ Public Class dlgRegressionSimple
         DistributionsOffered()
         TestOKEnabled()
         DataTypeAccepted()
-        If rdoGeneral.Checked Then
-            chkSaveModel.Enabled = True
-            ucrModelName.Visible = True
-            AssignModelName()
-        ElseIf rdoSpecific.Checked Then
-            chkSaveModel.Enabled = False
-            ucrModelName.Visible = False
-            ucrBase.clsRsyntax.RemoveAssignTo()
-        End If
+        AssignModelName()
     End Sub
 End Class
