@@ -30,14 +30,14 @@ Public Class dlgOneSample
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 1
         'ucrBase.iHelpTopicID = 371
-        ucrReceiverDataColumn.Selector = ucrAddRemove
+        ucrReceiverDataColumn.Selector = ucBaseOneSample
         ucrBase.clsRsyntax.SetFunction("t.test")
         cboModels.Text = "Normal"
         cboParameters.Text = "Mean(t-interval)"
     End Sub
 
     Private Sub SetDefaults()
-        ucrAddRemove.Reset()
+        ucBaseOneSample.Reset()
         ucrReceiverDataColumn.SetMeAsReceiver()
         txtValue.Visible = False
         lblValue.Visible = False
