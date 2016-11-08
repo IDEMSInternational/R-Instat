@@ -36,7 +36,7 @@ Partial Class dlgOneSample
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrReceiverDataColumn = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucBaseOneSample = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpAnalysis.SuspendLayout()
         Me.grpGraphs.SuspendLayout()
         Me.SuspendLayout()
@@ -159,6 +159,7 @@ Partial Class dlgOneSample
         '
         'cmdOptions
         '
+        Me.cmdOptions.Enabled = False
         Me.cmdOptions.Location = New System.Drawing.Point(311, 249)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
@@ -183,22 +184,22 @@ Partial Class dlgOneSample
         Me.ucrBase.Size = New System.Drawing.Size(405, 53)
         Me.ucrBase.TabIndex = 6
         '
-        'ucrAddRemove
+        'ucBaseOneSample
         '
-        Me.ucrAddRemove.bShowHiddenColumns = False
-        Me.ucrAddRemove.bUseCurrentFilter = True
-        Me.ucrAddRemove.Location = New System.Drawing.Point(9, 14)
-        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(210, 180)
-        Me.ucrAddRemove.TabIndex = 0
+        Me.ucBaseOneSample.bShowHiddenColumns = False
+        Me.ucBaseOneSample.bUseCurrentFilter = True
+        Me.ucBaseOneSample.Location = New System.Drawing.Point(9, 14)
+        Me.ucBaseOneSample.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucBaseOneSample.Name = "ucBaseOneSample"
+        Me.ucBaseOneSample.Size = New System.Drawing.Size(210, 180)
+        Me.ucBaseOneSample.TabIndex = 0
         '
         'dlgOneSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(469, 339)
-        Me.Controls.Add(Me.ucrAddRemove)
+        Me.Controls.Add(Me.ucBaseOneSample)
         Me.Controls.Add(Me.ucrReceiverDataColumn)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdOptions)
@@ -235,5 +236,5 @@ Partial Class dlgOneSample
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverDataColumn As ucrReceiverSingle
-    Friend WithEvents ucrAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucBaseOneSample As ucrSelectorByDataFrameAddRemove
 End Class
