@@ -231,7 +231,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE,...) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -250,6 +250,13 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     else {
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
+      }
+    }
+    # This is needed as some R function misinterpret the class of a column
+    # when there are extra attributes on columns
+    if(remove_attr) {
+      for(i in seq_along(out)) {
+        attributes(out[[i]])[!names(attributes(out[[i]])) %in% c("class", "levels")] <- NULL
       }
     }
     if(convert_to_character) {

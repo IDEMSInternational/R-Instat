@@ -34,8 +34,13 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub GGPairs()
+        Dim clsTempFunc As RFunction
+
+        'temp solution to fix bug in ggpairs function
+        clsTempFunc = dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
+        clsTempFunc.AddParameter("remove_attr", "TRUE")
         clsRGraphics.SetRCommand("ggpairs")
-        clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsRGraphics.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         clsRGraphics.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGraphics)
