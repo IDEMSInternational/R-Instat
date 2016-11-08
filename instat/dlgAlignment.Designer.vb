@@ -81,6 +81,7 @@ Partial Class dlgAlignment
         'ucrMultiple
         '
         Me.ucrMultiple.Location = New System.Drawing.Point(239, 23)
+        Me.ucrMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrMultiple.Name = "ucrMultiple"
         Me.ucrMultiple.Selector = Nothing
         Me.ucrMultiple.Size = New System.Drawing.Size(127, 106)
@@ -88,7 +89,9 @@ Partial Class dlgAlignment
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(10, 10)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Padding = New System.Windows.Forms.Padding(10)
         Me.ucrAddRemove.Size = New System.Drawing.Size(226, 127)
@@ -116,6 +119,8 @@ Partial Class dlgAlignment
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.lstAlignment)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgAlignment"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Format_current_or_selected_columns"

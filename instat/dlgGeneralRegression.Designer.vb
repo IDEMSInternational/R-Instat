@@ -42,7 +42,7 @@ Partial Class dlgGeneralRegression
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgGeneralRegression"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General_Regression"
         Me.Text = "General Regression"
         Me.ResumeLayout(False)

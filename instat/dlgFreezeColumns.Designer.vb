@@ -31,7 +31,7 @@ Partial Class dlgFreezeColumns
         'ucrSelectorByDataFrameAddRemoveforFreezeColumns
         '
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bShowHiddenColumns = False
-        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bUseCurrentFilter = False
+        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bUseCurrentFilter = True
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Location = New System.Drawing.Point(12, 0)
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Name = "ucrSelectorByDataFrameAddRemoveforFreezeColumns"
@@ -76,6 +76,7 @@ Partial Class dlgFreezeColumns
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgFreezeColumns"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Freeze Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()

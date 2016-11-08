@@ -265,6 +265,7 @@ Partial Class dlgDisplayDailyDataRain
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDisplayDailyDataRain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Display_Daily_Data_Rain"
         Me.Text = "dlgDisplayDailyDataRain"
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
