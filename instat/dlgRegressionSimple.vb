@@ -434,15 +434,15 @@ Public Class dlgRegressionSimple
                 nudHyp2.Value = 0.5
             Else
                 nudHyp2.Visible = False
-                    lblProbability2.Visible = False
-                End If
-                If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
-                    '         'If ucrExplanatory. GetVariables Is From same dataset
-                    chkPaired.Visible = True
-                Else
-                    chkPaired.Visible = False
-                End If
+                lblProbability2.Visible = False
             End If
+            If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
+                '         'If ucrExplanatory. GetVariables Is From same dataset
+                chkPaired.Visible = True
+            Else
+                chkPaired.Visible = False
+            End If
+        End If
     End Sub
 
 
