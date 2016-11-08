@@ -38,7 +38,6 @@ Public Class dlgRegressionSimple
         ucrExplanatory.Selector = ucrSelectorSimpleReg
         ucrBase.iHelpTopicID = 366
         ucrModelName.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
-        ucrModelName.SetPrefix("reg")
         ucrModelName.SetItemsTypeAsModels()
         ucrModelName.SetDefaultTypeAsModel()
         ucrModelName.SetValidationTypeAsRVariable()
@@ -66,6 +65,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetDefaults()
+        ucrModelName.SetPrefix("reg")
         ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
