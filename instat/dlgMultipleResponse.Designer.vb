@@ -39,6 +39,8 @@ Partial Class dlgMultipleResponse
         Me.ClientSize = New System.Drawing.Size(411, 380)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgMultipleResponse"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Multiple Response"

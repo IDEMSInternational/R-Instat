@@ -39,6 +39,8 @@ Partial Class dlgCropCoefficients
         Me.ClientSize = New System.Drawing.Size(424, 307)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCropCoefficients"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Crop_coefficients"
