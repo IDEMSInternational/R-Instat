@@ -301,10 +301,6 @@ Public Class frmMain
         dlgUnstack.ShowDialog()
     End Sub
 
-    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesChisquareTest.Click
-        dlgChiSquareTest.ShowDialog()
-    End Sub
-
     Private Sub mnuManageAddColumnRecode_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorRecodeNumeric.Click
         dlgRecodeNumeric.ShowDialog()
     End Sub
@@ -1278,5 +1274,14 @@ Public Class frmMain
 
     Private Sub mnuHelpMenus_Click(sender As Object, e As EventArgs) Handles mnuHelpMenus.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
+    End Sub
+
+
+    Private Sub mnuHelpGuidesCaseStudy_Click(sender As Object, e As EventArgs) Handles mnuHelpGuidesCaseStudy.Click
+        Process.Start(Path.Combine(strStaticPath, "Help", "Case_Study_Guide_June_2016.pdf"))
+    End Sub
+
+    Private Sub mnuHelpGuideGlosary_Click(sender As Object, e As EventArgs) Handles mnuHelpGuideGlosary.Click
+        Process.Start(Path.Combine(strStaticPath, "Help", "Statistics Glossary.pdf"))
     End Sub
 End Class
