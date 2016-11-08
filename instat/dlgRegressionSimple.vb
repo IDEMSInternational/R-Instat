@@ -69,8 +69,8 @@ Public Class dlgRegressionSimple
         ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
-        chkSaveModel.Checked = False 'this is temporary
-        chkSaveModel.Enabled = False 'this is disabled temporarily
+        chkSaveModel.Checked = True
+        chkSaveModel.Enabled = True
         ucrModelName.Visible = True
         chkConvertToVariate.Checked = False
         chkConvertToVariate.Visible = False
@@ -467,5 +467,14 @@ Public Class dlgRegressionSimple
         DistributionsOffered()
         TestOKEnabled()
         DataTypeAccepted()
+        If rdoGeneral.Checked Then
+            chkSaveModel.Enabled = True
+            ucrModelName.Visible = True
+            AssignModelName()
+        ElseIf rdoSpecific.Checked Then
+            chkSaveModel.Enabled = False
+            ucrModelName.Visible = False
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
     End Sub
 End Class
