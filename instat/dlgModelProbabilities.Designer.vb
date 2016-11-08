@@ -42,6 +42,7 @@ Partial Class dlgModelProbabilities
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgModelProbabilities"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Model Probabilities"
         Me.ResumeLayout(False)
 

@@ -59,9 +59,9 @@ Partial Class sdgPlots
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.lblTheme = New System.Windows.Forms.Label()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tabCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabFacet.SuspendLayout()
         CType(Me.nudNoOfRowsOrColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -465,13 +465,6 @@ Partial Class sdgPlots
         Me.lblTheme.TabIndex = 0
         Me.lblTheme.Text = "Select Theme"
         '
-        'ucrBaseSubdialog
-        '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(157, 330)
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
-        Me.ucrBaseSubdialog.TabIndex = 1
-        '
         'tabCoordinates
         '
         Me.tabCoordinates.Controls.Add(Me.lblWarning)
@@ -493,6 +486,13 @@ Partial Class sdgPlots
         Me.lblWarning.TabIndex = 0
         Me.lblWarning.Text = "This is yet to be implemented"
         '
+        'ucrBaseSubdialog
+        '
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(157, 330)
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
+        Me.ucrBaseSubdialog.TabIndex = 1
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -504,7 +504,7 @@ Partial Class sdgPlots
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgPlots"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Plot_Options"
         Me.Text = "Plot Options"
         Me.TopMost = True

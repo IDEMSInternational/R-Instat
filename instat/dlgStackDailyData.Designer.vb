@@ -39,6 +39,8 @@ Partial Class dlgStackDailyData
         Me.ClientSize = New System.Drawing.Size(420, 254)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgStackDailyData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Stack_Daily_Data"

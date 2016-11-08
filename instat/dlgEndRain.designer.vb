@@ -192,6 +192,7 @@ Partial Class dlgEndRain
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgEndRain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "End_Rain"
         Me.Text = "End Rain"
         CType(Me.nudEarliestDay, System.ComponentModel.ISupportInitialize).EndInit()
