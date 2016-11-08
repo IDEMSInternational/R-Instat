@@ -32,12 +32,11 @@ Public Class dlgRowNamesOrNumbers
         autoTranslate(Me)
     End Sub
     Private Sub TestOKEnabled()
-        If ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
+        If (ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "") OrElse (rdoCopyfromColumn.Checked AndAlso ucrReceiverSingleRownamesOrNumbers.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
-        OptionSettings()
     End Sub
     Private Sub InitialiseDialog()
         ucrReceiverSingleRownamesOrNumbers.Selector = ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers
@@ -66,6 +65,7 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub ucrBaseRownamesOrNumbers_clickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub rdoOptionSettings_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCopytoFirstColumn.CheckedChanged, rdoCopyfromColumn.CheckedChanged, rdoResetintoPositiveIntegers.CheckedChanged, rdoSortbyRowNames.CheckedChanged
@@ -90,13 +90,6 @@ Public Class dlgRowNamesOrNumbers
             grpSortOptions.Visible = False
             lblColumnName.Visible = False
             ucrNewColumnName.Visible = False
-            If rdoCopyfromColumn.Checked Then
-                If Not ucrReceiverSingleRownamesOrNumbers.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
-            End If
         ElseIf rdoResetintoPositiveIntegers.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
             ucrBase.clsRsyntax.ClearParameters()
@@ -178,7 +171,7 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub ucrReceiverSingleRownamesOrNumbers_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSingleRownamesOrNumbers.SelectionChanged
         SetRowNamesParameter()
-        OptionSettings()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetRowNamesParameter()
