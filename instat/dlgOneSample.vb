@@ -101,7 +101,7 @@ Public Class dlgOneSample
         End If
     End Sub
 
-    Private Sub txtValue_Leave(sender As Object, e As EventArgs) Handles nudValue.Leave
+    Private Sub txtValue_TextChanged(sender As Object, e As EventArgs) Handles nudValue.TextChanged
         ucrBase.clsRsyntax.AddParameter("mu", nudValue.Text)
     End Sub
 
