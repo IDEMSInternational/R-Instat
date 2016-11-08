@@ -151,12 +151,12 @@ Partial Class frmMain
         Me.mnuHelpRPackagesCommands = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpDataset = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpAboutRInstat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGuide = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGuidesCaseStudy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGuideGlosary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuhelpGuidesMore = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpAboutRInstat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -906,6 +906,7 @@ Partial Class frmMain
         '
         'mnuModelOtherTwoVariablesTwoSamples
         '
+        Me.mnuModelOtherTwoVariablesTwoSamples.Enabled = False
         Me.mnuModelOtherTwoVariablesTwoSamples.Name = "mnuModelOtherTwoVariablesTwoSamples"
         Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesTwoSamples.Tag = "Two_Samples..."
@@ -913,6 +914,7 @@ Partial Class frmMain
         '
         'mnuModelOtherTwoVariablesSummaryData
         '
+        Me.mnuModelOtherTwoVariablesSummaryData.Enabled = False
         Me.mnuModelOtherTwoVariablesSummaryData.Name = "mnuModelOtherTwoVariablesSummaryData"
         Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesSummaryData.Tag = "Summary_Data"
@@ -1291,22 +1293,6 @@ Partial Class frmMain
         Me.ToolStripSeparator29.Name = "ToolStripSeparator29"
         Me.ToolStripSeparator29.Size = New System.Drawing.Size(218, 6)
         '
-        'mnuHelpLicence
-        '
-        Me.mnuHelpLicence.Enabled = False
-        Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpLicence.Tag = "Licence..."
-        Me.mnuHelpLicence.Text = "Licence..."
-        '
-        'mnuHelpAboutRInstat
-        '
-        Me.mnuHelpAboutRInstat.Enabled = False
-        Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
-        Me.mnuHelpAboutRInstat.Text = "About R-Instat"
-        '
         'mnuHelpGuide
         '
         Me.mnuHelpGuide.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpGuidesCaseStudy, Me.mnuHelpGuideGlosary, Me.mnuhelpGuidesMore})
@@ -1332,6 +1318,22 @@ Partial Class frmMain
         Me.mnuhelpGuidesMore.Name = "mnuhelpGuidesMore"
         Me.mnuhelpGuidesMore.Size = New System.Drawing.Size(166, 22)
         Me.mnuhelpGuidesMore.Text = "More..."
+        '
+        'mnuHelpAboutRInstat
+        '
+        Me.mnuHelpAboutRInstat.Enabled = False
+        Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
+        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
+        Me.mnuHelpAboutRInstat.Text = "About R-Instat"
+        '
+        'mnuHelpLicence
+        '
+        Me.mnuHelpLicence.Enabled = False
+        Me.mnuHelpLicence.Name = "mnuHelpLicence"
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpLicence.Tag = "Licence..."
+        Me.mnuHelpLicence.Text = "Licence..."
         '
         'ToolStripSeparator16
         '

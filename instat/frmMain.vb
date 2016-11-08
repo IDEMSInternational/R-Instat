@@ -434,10 +434,6 @@ Public Class frmMain
         dlgTotals.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsSimpleModelsTwoSample_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesTwoSamples.Click
-        dlgTwoSamples.ShowDialog()
-    End Sub
-
     Private Sub mnuFIleExit_Click(sender As Object, e As EventArgs) Handles mnuFIleExit.Click
         Me.Close()
     End Sub
@@ -756,10 +752,6 @@ Public Class frmMain
 
     Private Sub mnuStatisticsSimpleModelsOneSampleSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableSampleSummaryData.Click
         dlgOneSampleSummaryData.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsSimpleModelsTwoSamplesSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSummaryData.Click
-        dlgTwoSampleSummaryData.ShowDialog()
     End Sub
 
     Private Sub mnuStatisticsSimpleModelsGoodnessOfFit_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableGoodnessofFit.Click
