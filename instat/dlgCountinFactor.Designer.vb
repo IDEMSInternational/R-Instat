@@ -28,6 +28,7 @@ Partial Class dlgCountinFactor
         Me.ucrInputCountColumnName = New instat.ucrInputComboBox()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -40,7 +41,7 @@ Partial Class dlgCountinFactor
         'ucrCountSelector
         '
         Me.ucrCountSelector.bShowHiddenColumns = False
-        Me.ucrCountSelector.bUseCurrentFilter = False
+        Me.ucrCountSelector.bUseCurrentFilter = True
         Me.ucrCountSelector.Location = New System.Drawing.Point(9, 9)
         Me.ucrCountSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCountSelector.Name = "ucrCountSelector"
@@ -82,11 +83,20 @@ Partial Class dlgCountinFactor
         Me.lblSelectedFactor.TabIndex = 5
         Me.lblSelectedFactor.Text = "Selected Factor"
         '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(92, 109)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 6
+        '
         'dlgCountinFactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 297)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputCountColumnName)
@@ -111,4 +121,5 @@ Partial Class dlgCountinFactor
     Friend WithEvents ucrInputCountColumnName As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents lblSelectedFactor As Label
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class
