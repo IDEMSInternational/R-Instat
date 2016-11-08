@@ -171,6 +171,7 @@ Partial Class dlgCPTtoTabularData
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCPTtoTabularData"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "CPT_to_Tabular_Data"
         Me.Text = "CPT to Tabular Data"
         Me.grpDomain.ResumeLayout(False)

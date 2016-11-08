@@ -80,6 +80,7 @@ Partial Class dlgDayMonth
         '
         'ucrInputColumnName1
         '
+        Me.ucrInputColumnName1.IsReadOnly = False
         Me.ucrInputColumnName1.Location = New System.Drawing.Point(161, 67)
         Me.ucrInputColumnName1.Name = "ucrInputColumnName1"
         Me.ucrInputColumnName1.Size = New System.Drawing.Size(100, 21)
@@ -87,6 +88,7 @@ Partial Class dlgDayMonth
         '
         'ucrInputTimePeriod
         '
+        Me.ucrInputTimePeriod.IsReadOnly = False
         Me.ucrInputTimePeriod.Location = New System.Drawing.Point(161, 94)
         Me.ucrInputTimePeriod.Name = "ucrInputTimePeriod"
         Me.ucrInputTimePeriod.Size = New System.Drawing.Size(100, 21)
@@ -94,6 +96,7 @@ Partial Class dlgDayMonth
         '
         'ucrInputRequiredTimeFormat
         '
+        Me.ucrInputRequiredTimeFormat.IsReadOnly = False
         Me.ucrInputRequiredTimeFormat.Location = New System.Drawing.Point(161, 121)
         Me.ucrInputRequiredTimeFormat.Name = "ucrInputRequiredTimeFormat"
         Me.ucrInputRequiredTimeFormat.Size = New System.Drawing.Size(100, 21)
@@ -113,6 +116,8 @@ Partial Class dlgDayMonth
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDayMonth"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Day_Month"
