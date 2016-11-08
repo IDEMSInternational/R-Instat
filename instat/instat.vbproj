@@ -5097,6 +5097,12 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\urltools_1.6.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Help\Case_Study_Guide_June_2016.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Help\Statistics Glossary.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
