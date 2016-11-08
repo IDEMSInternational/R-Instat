@@ -32,10 +32,10 @@ Public Class dlgRowNamesOrNumbers
         autoTranslate(Me)
     End Sub
     Private Sub TestOKEnabled()
-        If ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
+        If (ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "") OrElse (rdoCopyfromColumn.Checked AndAlso ucrReceiverSingleRownamesOrNumbers.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
     Private Sub InitialiseDialog()
@@ -65,10 +65,12 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub ucrBaseRownamesOrNumbers_clickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub rdoOptionSettings_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCopytoFirstColumn.CheckedChanged, rdoCopyfromColumn.CheckedChanged, rdoResetintoPositiveIntegers.CheckedChanged, rdoSortbyRowNames.CheckedChanged
         OptionSettings()
+        TestOKEnabled()
     End Sub
 
     Private Sub OptionSettings()
@@ -169,6 +171,7 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub ucrReceiverSingleRownamesOrNumbers_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSingleRownamesOrNumbers.SelectionChanged
         SetRowNamesParameter()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetRowNamesParameter()

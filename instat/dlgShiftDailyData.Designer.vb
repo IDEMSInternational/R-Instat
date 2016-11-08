@@ -39,6 +39,8 @@ Partial Class dlgShiftDailyData
         Me.ClientSize = New System.Drawing.Size(424, 218)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgShiftDailyData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Shift_Daily_Data"

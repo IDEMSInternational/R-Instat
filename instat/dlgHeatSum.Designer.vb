@@ -39,6 +39,8 @@ Partial Class dlgHeatSum
         Me.ClientSize = New System.Drawing.Size(409, 300)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgHeatSum"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Heat_Sum"

@@ -159,7 +159,7 @@ Partial Class sdgDescribeDisplay
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeDisplay"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Describe_Display_Options"
         Me.Text = "Describe Display Options"
         Me.grpFrequenciesOptions.ResumeLayout(False)

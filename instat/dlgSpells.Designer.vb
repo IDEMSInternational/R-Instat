@@ -38,7 +38,10 @@ Partial Class dlgSpells
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 261)
         Me.Controls.Add(Me.ucrBase)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgSpells"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "dlgSpells"
         Me.ResumeLayout(False)
 

@@ -40,6 +40,9 @@ Public Class dlgTransformText
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
+        ucrReceiverFirstWord.bUseFilteredData = False
+        ucrReceiverLastWord.bUseFilteredData = False
+        ucrReceiverTransformText.bUseFilteredData = False
         ucrReceiverTransformText.SetMeAsReceiver()
         ucrBase.clsRsyntax.bUseBaseFunction = True
         ucrInputTo.cboInput.Items.Add("Lower")
