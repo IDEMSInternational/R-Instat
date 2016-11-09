@@ -39,6 +39,8 @@ Partial Class dlgInterpolateDaily
         Me.ClientSize = New System.Drawing.Size(423, 261)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgInterpolateDaily"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Interpolate_Daily"

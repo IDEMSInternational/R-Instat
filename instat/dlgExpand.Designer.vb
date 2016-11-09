@@ -42,7 +42,9 @@ Partial Class dlgExpand
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove.TabIndex = 1
@@ -50,7 +52,9 @@ Partial Class dlgExpand
         'ucrReceiverExpand
         '
         Me.ucrReceiverExpand.Location = New System.Drawing.Point(243, 28)
+        Me.ucrReceiverExpand.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExpand.Name = "ucrReceiverExpand"
+        Me.ucrReceiverExpand.Selector = Nothing
         Me.ucrReceiverExpand.Size = New System.Drawing.Size(121, 94)
         Me.ucrReceiverExpand.TabIndex = 2
         '
@@ -129,6 +133,8 @@ Partial Class dlgExpand
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgExpand"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Expand"

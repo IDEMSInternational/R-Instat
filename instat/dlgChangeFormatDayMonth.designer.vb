@@ -113,6 +113,7 @@ Partial Class dlgChangeFormatDayMonth
         '
         'ucrInputPeriod
         '
+        Me.ucrInputPeriod.IsReadOnly = False
         Me.ucrInputPeriod.Location = New System.Drawing.Point(129, 37)
         Me.ucrInputPeriod.Name = "ucrInputPeriod"
         Me.ucrInputPeriod.Size = New System.Drawing.Size(100, 21)
@@ -120,6 +121,7 @@ Partial Class dlgChangeFormatDayMonth
         '
         'ucrInputColumnName
         '
+        Me.ucrInputColumnName.IsReadOnly = False
         Me.ucrInputColumnName.Location = New System.Drawing.Point(129, 63)
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
         Me.ucrInputColumnName.Size = New System.Drawing.Size(100, 21)
@@ -127,6 +129,7 @@ Partial Class dlgChangeFormatDayMonth
         '
         'ucrInputMonthFormat
         '
+        Me.ucrInputMonthFormat.IsReadOnly = False
         Me.ucrInputMonthFormat.Location = New System.Drawing.Point(129, 89)
         Me.ucrInputMonthFormat.Name = "ucrInputMonthFormat"
         Me.ucrInputMonthFormat.Size = New System.Drawing.Size(100, 21)
@@ -134,6 +137,7 @@ Partial Class dlgChangeFormatDayMonth
         '
         'ucrInputRequiredFormat
         '
+        Me.ucrInputRequiredFormat.IsReadOnly = False
         Me.ucrInputRequiredFormat.Location = New System.Drawing.Point(129, 115)
         Me.ucrInputRequiredFormat.Name = "ucrInputRequiredFormat"
         Me.ucrInputRequiredFormat.Size = New System.Drawing.Size(100, 21)
@@ -160,6 +164,7 @@ Partial Class dlgChangeFormatDayMonth
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgChangeFormatDayMonth"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Change_Format_Day_Month"
         Me.Text = "Change Format Day Month"
         CType(Me.nudOption, System.ComponentModel.ISupportInitialize).EndInit()

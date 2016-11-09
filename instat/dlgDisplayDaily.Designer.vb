@@ -224,6 +224,7 @@ Partial Class dlgDisplayDaily
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDisplayDaily"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Display_Daily"
         Me.Text = "Display Daily"
         CType(Me.nudDecimalPlaces, System.ComponentModel.ISupportInitialize).EndInit()

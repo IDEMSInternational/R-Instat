@@ -281,7 +281,8 @@ Public Class ucrSelector
                     lstExcludedMetadataProperties.RemoveAt(iHiddenIndex)
                 End If
             End If
-            sdgDataOptions.ShowHiddenColumns = bShowHiddenCols
+            'temp disabled as causing crash
+            'sdgDataOptions.ShowHiddenColumns = bShowHiddenCols
         End Set
     End Property
 
