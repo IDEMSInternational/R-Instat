@@ -136,6 +136,8 @@ Public Class ucrGeom
         '           Could add the possiility to adjust the height and width parameters in the position function position_jitter, also width for dodge... Sometimes useful to only jitter in one direction for example... Then need to specify position as -position=position_jitter([parameters])- instead of -position = "jitter". This is also required for position_jitterdodge (see below). Seems necessary to specify x and y parameters in position_nudge as well in order to obtain any result (see below).
         '           Another option that is not yet available is position_nudge, which makes it possible to move a whole layer by a given (x,y) value. It doesn't seem to do anything by default i.e. when not specifying any argument (position = "nudge" or position = position_nudge()), just uses (x=0,y=0). When x or y is assigned to a factor, each factor corresponds to one unit along the axis (e.g. if x is a factor, position_nudge(x=2) would shift the layer by two factors along the x axis). While testing what happens when x = "" in boxplot case, a weird error was identified: "y aesthetics required", even when both x and y aesthetics are in use.
         '           Dodge requires a factor to dodge by, if none, just doesn't dodge. However, gives a warning in the geom_point case for instance.
+        ''Warning: About the show.legend layer parameter, the default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
+
 
         'clsgeom_abline.SetGeomName("geom_abline")
         'clsgeom_abline.AddAesParameter("x", bIsMandatory:=True)
@@ -196,7 +198,7 @@ Public Class ucrGeom
         clsgeom_bar.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
         'Global Layer parameters
         clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_bar.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: The default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
+        clsgeom_bar.AddLayerParameter("show.legend", "boolean", "TRUE")
         clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'See global comments about position.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
@@ -259,7 +261,7 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
 
         'Global Layer parameters
-        clsgeom_boxplot.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: The default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
+        clsgeom_boxplot.AddLayerParameter("show.legend", "boolean", "TRUE")
         'Warning: when x is continuous, position_dodge requires non-overlapping x intervals (would still work if not respected but sends a warning message).
         clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
         'clsgeom_boxplot.AddLayerParameter("stat", "list", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34), Chr(34) & "identity" & Chr(34)})
@@ -374,7 +376,7 @@ Public Class ucrGeom
 
         'Global Layer parameters
         'clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
-        clsgeom_density.AddLayerParameter("show.legend", "boolean", "TRUE") 'Warning: The default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
+        clsgeom_density.AddLayerParameter("show.legend", "boolean", "TRUE")
         clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34)})
         'Warning: "Stacked density plots: if you want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
         'Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
@@ -428,25 +430,45 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
-        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
-        clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        'Optional
-        clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
-        clsgeom_dotplot.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_dotplot.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
-        'adding layer parameters
-        clsgeom_dotplot.AddLayerParameter("method", "list", Chr(34) & "dotdensity" & Chr(34), lstParameterStrings:={Chr(34) & "dotdensity" & Chr(34), Chr(34) & "histodot" & Chr(34)})
-        clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={1, 1})
-        clsgeom_dotplot.AddLayerParameter("binaxis", "list", Chr(34) & "x" & Chr(34), lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)})
-        clsgeom_dotplot.AddLayerParameter("binpositions", "list", Chr(34) & "bygroup" & Chr(34), lstParameterStrings:={Chr(34) & "bygroup" & Chr(34), Chr(34) & "all" & Chr(34)})
+
+        'Aesthetics parameters
+        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}) 'x is partially mandatory, need to be given value "" when not filled.
+        clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"})
+        'When the binaxis is x/y, then if y/x is a factor, several dotplots are displayed according to each factor. However, when y/x is continuous, the axis label is changed but that's all the mapping does. Still the number of dots represent the number of stacked dots represent the number of events in each bin.
+        'Task: Try character, ...
+
+        clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"}) 'Warning: varies transparence of both the fill and the outline.
+        clsgeom_dotplot.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dotplot.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Adding layer parameters
+        'Geom_dotplot layer parameters
+        'Warning: when parameter is irrelevant (e.g. mentioning width when binaxis is "x" or right when method is "dotdensity"), this parameter is simply ignored...
+
+        clsgeom_dotplot.AddLayerParameter("method", "list", Chr(34) & "dotdensity" & Chr(34), lstParameterStrings:={Chr(34) & "dotdensity" & Chr(34), Chr(34) & "histodot" & Chr(34)}) 'For when the binaxis is continuous, "dotdensity" (default) for dot-density binning, or "histodot" for fixed bin widths (like stat_bin)
+        clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={2}) 'When method is "dotdensity", this specifies maximum bin width. When method is "histodot", this specifies bin width. Defaults to 1/30 of the range of the data
+        'Warning: here default has been set to 1 as calculating 1/30 of the range of the data is not possible. 
+        clsgeom_dotplot.AddLayerParameter("binaxis", "list", Chr(34) & "x" & Chr(34), lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)}) 'The axis to bin along, "x" (default) or "y"
+        clsgeom_dotplot.AddLayerParameter("binpositions", "list", Chr(34) & "bygroup" & Chr(34), lstParameterStrings:={Chr(34) & "bygroup" & Chr(34), Chr(34) & "all" & Chr(34)}) 'When method is "dotdensity", "bygroup" (default) determines positions of the bins for each group separately. "all" determines positions of the bins with all the data taken together; this is used for aligning dot stacks across multiple groups.
         clsgeom_dotplot.AddLayerParameter("stackdir", "list", Chr(34) & "up" & Chr(34), lstParameterStrings:={Chr(34) & "up" & Chr(34), Chr(34) & "down" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centerwhole" & Chr(34)})
         clsgeom_dotplot.AddLayerParameter("stackratio", "numeric", "1", lstParameterStrings:={1})
-        clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1", lstParameterStrings:={1})
+        clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1", lstParameterStrings:={1}) 'Warning: negative values seem to result in having the dots stacking downwards. However the window on the graph does not adapt... No errors
         clsgeom_dotplot.AddLayerParameter("stackgroups", "Boolean", "FALSE")
-        clsgeom_dotplot.AddLayerParameter("origin", "numeric", "0", lstParameterStrings:={1})
-        clsgeom_dotplot.AddLayerParameter("right", "Boolean", "TRUE")
-        clsgeom_dotplot.AddLayerParameter("width", "numeric", "0.9", lstParameterStrings:={1})
+        clsgeom_dotplot.AddLayerParameter("origin", "numeric", "0", lstParameterStrings:={1}) 'When method is "histodot", origin of first bin
+        clsgeom_dotplot.AddLayerParameter("right", "Boolean", "TRUE") 'When method is "histodot", should intervals be closed on the right (a, b], or not [a, b)
+        clsgeom_dotplot.AddLayerParameter("width", "numeric", "0.9", lstParameterStrings:={1, 0}) 'When binaxis is "y", the spacing of the dot stacks for dodging. 
+        'Warning: didn't manage to get any visible changes on the graph.
         clsgeom_dotplot.AddLayerParameter("drop", "Boolean", "FALSE")
+        'Global Layer parameters
+        'Warning: stat is not a parameter of geom_dotplot. Anyway the stat that is used is "bindot".
+        clsgeom_bar.AddLayerParameter("show.legend", "boolean", "TRUE")
+        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_density.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dotplot.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dotplot.AddLayerParameter("alpha", "numeric", "0", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
+
         lstAllGeoms.Add(clsgeom_dotplot)
 
 
