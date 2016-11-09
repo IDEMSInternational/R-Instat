@@ -88,7 +88,7 @@ Public Class dlgImportFromODK
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputPassword_NameChanged()
+    Private Sub ucrInputPassword_NameChanged() Handles ucrInputPassword.NameChanged
         useSystemePassword()
         If ucrInputPassword.IsEmpty() Then
             ucrBase.clsRsyntax.RemoveParameter("password")
@@ -138,7 +138,7 @@ Public Class dlgImportFromODK
         End If
     End Sub
 
-    Private Sub UsernamePassword_ContentsChanged() Handles ucrInputUsername.ContentsChanged
+    Private Sub UsernamePassword_ContentsChanged() Handles ucrInputUsername.ContentsChanged, ucrInputPassword.ContentsChanged
         ucrInputChooseForm.cboInput.Items.Clear()
         ucrInputChooseForm.SetName("")
         EnableCommandButton()
