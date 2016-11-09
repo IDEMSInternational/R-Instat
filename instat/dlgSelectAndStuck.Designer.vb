@@ -53,7 +53,9 @@ Partial Class dlgSelectAndStuck
         '
         'ucrAddRemove1
         '
+        Me.ucrAddRemove1.bShowHiddenColumns = False
         Me.ucrAddRemove1.Location = New System.Drawing.Point(10, 12)
+        Me.ucrAddRemove1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove1.Name = "ucrAddRemove1"
         Me.ucrAddRemove1.Size = New System.Drawing.Size(203, 109)
         Me.ucrAddRemove1.TabIndex = 1
@@ -61,7 +63,9 @@ Partial Class dlgSelectAndStuck
         'ucrReceiverSelectAndStuck
         '
         Me.ucrReceiverSelectAndStuck.Location = New System.Drawing.Point(219, 12)
+        Me.ucrReceiverSelectAndStuck.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectAndStuck.Name = "ucrReceiverSelectAndStuck"
+        Me.ucrReceiverSelectAndStuck.Selector = Nothing
         Me.ucrReceiverSelectAndStuck.Size = New System.Drawing.Size(121, 109)
         Me.ucrReceiverSelectAndStuck.TabIndex = 2
         '
@@ -232,6 +236,8 @@ Partial Class dlgSelectAndStuck
         Me.Controls.Add(Me.ucrAddRemove1)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgSelectAndStuck"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Select_And_Stuck"
