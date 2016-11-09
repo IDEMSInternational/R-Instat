@@ -54,7 +54,9 @@ Partial Class dlgFormat
         'ucrMultiple
         '
         Me.ucrMultiple.Location = New System.Drawing.Point(211, 19)
+        Me.ucrMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrMultiple.Name = "ucrMultiple"
+        Me.ucrMultiple.Selector = Nothing
         Me.ucrMultiple.Size = New System.Drawing.Size(121, 131)
         Me.ucrMultiple.TabIndex = 3
         '
@@ -70,8 +72,10 @@ Partial Class dlgFormat
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Dock = System.Windows.Forms.DockStyle.Left
         Me.ucrAddRemove.Location = New System.Drawing.Point(0, 0)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(205, 214)
         Me.ucrAddRemove.TabIndex = 5
@@ -95,6 +99,8 @@ Partial Class dlgFormat
         Me.Controls.Add(Me.lblRequiredFormat)
         Me.Controls.Add(Me.lstRequiredFormat)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgFormat"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Format_Data"

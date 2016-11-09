@@ -39,7 +39,10 @@ Partial Class dlgModelAmounts
         Me.ClientSize = New System.Drawing.Size(405, 261)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgModelAmounts"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "dlgModelAmounts"
         Me.ResumeLayout(False)
 

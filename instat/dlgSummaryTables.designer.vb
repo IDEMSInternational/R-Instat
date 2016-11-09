@@ -55,7 +55,9 @@ Partial Class dlgSummaryTables
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(2, 3)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(207, 127)
         Me.ucrAddRemove.TabIndex = 1
@@ -63,14 +65,18 @@ Partial Class dlgSummaryTables
         'ucrReceiverFactor
         '
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(205, 19)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(91, 101)
         Me.ucrReceiverFactor.TabIndex = 2
         '
         'ucrReceiverVariate
         '
         Me.ucrReceiverVariate.Location = New System.Drawing.Point(305, 19)
+        Me.ucrReceiverVariate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariate.Name = "ucrReceiverVariate"
+        Me.ucrReceiverVariate.Selector = Nothing
         Me.ucrReceiverVariate.Size = New System.Drawing.Size(91, 101)
         Me.ucrReceiverVariate.TabIndex = 3
         '
@@ -247,6 +253,8 @@ Partial Class dlgSummaryTables
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgSummaryTables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Summary_Tables"

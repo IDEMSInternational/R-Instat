@@ -148,13 +148,17 @@ Partial Class dlgFreqTables
         'ucrReceiverMultiple
         '
         Me.ucrReceiverMultiple.Location = New System.Drawing.Point(205, 45)
+        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Selector = Nothing
         Me.ucrReceiverMultiple.Size = New System.Drawing.Size(127, 136)
         Me.ucrReceiverMultiple.TabIndex = 3
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(-2, 28)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(204, 132)
         Me.ucrAddRemove.TabIndex = 1
@@ -181,6 +185,8 @@ Partial Class dlgFreqTables
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgFreqTables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Frequency_table"

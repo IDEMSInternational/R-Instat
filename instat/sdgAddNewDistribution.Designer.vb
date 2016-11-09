@@ -195,7 +195,7 @@ Partial Class sdgAddNewDistribution
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgAddNewDistribution"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "New Distribution"
         Me.grpChangeLimits.ResumeLayout(False)
         Me.grpChangeLimits.PerformLayout()
