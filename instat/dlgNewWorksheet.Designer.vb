@@ -39,6 +39,8 @@ Partial Class dlgNewWorksheet
         Me.ClientSize = New System.Drawing.Size(428, 198)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgNewWorksheet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "New_Worksheet"

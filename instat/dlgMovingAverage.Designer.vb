@@ -115,7 +115,9 @@ Partial Class dlgMovingAverage
         'ucrReceiverDataToAverage
         '
         Me.ucrReceiverDataToAverage.Location = New System.Drawing.Point(236, 38)
+        Me.ucrReceiverDataToAverage.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataToAverage.Name = "ucrReceiverDataToAverage"
+        Me.ucrReceiverDataToAverage.Selector = Nothing
         Me.ucrReceiverDataToAverage.Size = New System.Drawing.Size(102, 26)
         Me.ucrReceiverDataToAverage.TabIndex = 2
         '
@@ -128,7 +130,9 @@ Partial Class dlgMovingAverage
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove.TabIndex = 0
@@ -151,6 +155,8 @@ Partial Class dlgMovingAverage
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgMovingAverage"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Moving_Averages"

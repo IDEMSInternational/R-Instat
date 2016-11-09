@@ -35,37 +35,37 @@ Partial Class dlgNon_ParametricTwoWayAnova
         'lblDataColumn
         '
         Me.lblDataColumn.AutoSize = True
-        Me.lblDataColumn.Location = New System.Drawing.Point(255, 25)
+        Me.lblDataColumn.Location = New System.Drawing.Point(240, 38)
         Me.lblDataColumn.Name = "lblDataColumn"
-        Me.lblDataColumn.Size = New System.Drawing.Size(67, 13)
+        Me.lblDataColumn.Size = New System.Drawing.Size(71, 13)
         Me.lblDataColumn.TabIndex = 5
-        Me.lblDataColumn.Tag = "Data_column"
-        Me.lblDataColumn.Text = "Data column"
+        Me.lblDataColumn.Tag = "Data_Column:"
+        Me.lblDataColumn.Text = "Data Column:"
         '
         'lblFirstFactor
         '
         Me.lblFirstFactor.AutoSize = True
-        Me.lblFirstFactor.Location = New System.Drawing.Point(255, 80)
+        Me.lblFirstFactor.Location = New System.Drawing.Point(241, 91)
         Me.lblFirstFactor.Name = "lblFirstFactor"
-        Me.lblFirstFactor.Size = New System.Drawing.Size(56, 13)
+        Me.lblFirstFactor.Size = New System.Drawing.Size(62, 13)
         Me.lblFirstFactor.TabIndex = 6
-        Me.lblFirstFactor.Tag = "First_factor"
-        Me.lblFirstFactor.Text = "First factor"
+        Me.lblFirstFactor.Tag = "First_Factor:"
+        Me.lblFirstFactor.Text = "First Factor:"
         '
         'lblSecondFactor
         '
         Me.lblSecondFactor.AutoSize = True
-        Me.lblSecondFactor.Location = New System.Drawing.Point(255, 135)
+        Me.lblSecondFactor.Location = New System.Drawing.Point(240, 144)
         Me.lblSecondFactor.Name = "lblSecondFactor"
-        Me.lblSecondFactor.Size = New System.Drawing.Size(74, 13)
+        Me.lblSecondFactor.Size = New System.Drawing.Size(80, 13)
         Me.lblSecondFactor.TabIndex = 7
-        Me.lblSecondFactor.Tag = "Second_factor"
-        Me.lblSecondFactor.Text = "Second factor"
+        Me.lblSecondFactor.Tag = "Second_Factor:"
+        Me.lblSecondFactor.Text = "Second Factor:"
         '
         'ucrSelectorDataFrameAndVars
         '
         Me.ucrSelectorDataFrameAndVars.bShowHiddenColumns = False
-        Me.ucrSelectorDataFrameAndVars.bUseCurrentFilter = False
+        Me.ucrSelectorDataFrameAndVars.bUseCurrentFilter = True
         Me.ucrSelectorDataFrameAndVars.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDataFrameAndVars.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrameAndVars.Name = "ucrSelectorDataFrameAndVars"
@@ -74,7 +74,7 @@ Partial Class dlgNon_ParametricTwoWayAnova
         '
         'ucrReceiverSecondFactor
         '
-        Me.ucrReceiverSecondFactor.Location = New System.Drawing.Point(255, 150)
+        Me.ucrReceiverSecondFactor.Location = New System.Drawing.Point(240, 159)
         Me.ucrReceiverSecondFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondFactor.Name = "ucrReceiverSecondFactor"
         Me.ucrReceiverSecondFactor.Selector = Nothing
@@ -83,7 +83,7 @@ Partial Class dlgNon_ParametricTwoWayAnova
         '
         'ucrReceiverFirstFactor
         '
-        Me.ucrReceiverFirstFactor.Location = New System.Drawing.Point(255, 97)
+        Me.ucrReceiverFirstFactor.Location = New System.Drawing.Point(240, 106)
         Me.ucrReceiverFirstFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstFactor.Name = "ucrReceiverFirstFactor"
         Me.ucrReceiverFirstFactor.Selector = Nothing
@@ -92,7 +92,7 @@ Partial Class dlgNon_ParametricTwoWayAnova
         '
         'ucrReceiverDataColumn
         '
-        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(255, 44)
+        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(240, 53)
         Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
         Me.ucrReceiverDataColumn.Selector = Nothing

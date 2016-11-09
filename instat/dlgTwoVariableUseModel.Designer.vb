@@ -126,7 +126,7 @@ Partial Class dlgTwoVariableUseModel
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTwoVariableUseModel"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Two_Variable_Use_Model"
         Me.Text = "Two Variable Use Model"
         Me.ResumeLayout(False)
