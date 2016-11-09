@@ -434,7 +434,9 @@ Public Class ucrGeom
         'Aesthetics parameters
         clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}) 'x is partially mandatory, need to be given value "" when not filled.
         clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"})
-        'When the binaxis is x/y, then if y/x is a factor, several dotplots are displayed according to each factor. However, when y/x is continuous, the axis label is changed but that's all the mapping does. Still the number of dots represent the number of stacked dots represent the number of events in each bin.
+        'When the binaxis is y, then if x is a factor or character, several dotplots lines are displayed according to each group along the x axis. 
+        'When the binaxis is x, and y is a factor or character, dot stacks are split according to the y mapping, but not aligned with the labels along the y axis. So all stacks stay at the bottom. Also this is visible only if stackratio < 1, and stackgroups = FALSE.
+        'However, when y/x is continuous, the axis label is changed but that's all the mapping does. Still the number of dots represent the number of stacked dots represent the number of events in each bin.
         'Task: Try character, ...
 
         clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"}) 'Warning: varies transparence of both the fill and the outline.
@@ -451,11 +453,11 @@ Public Class ucrGeom
         clsgeom_dotplot.AddLayerParameter("binaxis", "list", Chr(34) & "x" & Chr(34), lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)}) 'The axis to bin along
         clsgeom_dotplot.AddLayerParameter("binpositions", "list", Chr(34) & "bygroup" & Chr(34), lstParameterStrings:={Chr(34) & "bygroup" & Chr(34), Chr(34) & "all" & Chr(34)}) 'When method is "dotdensity", "bygroup" (default) determines positions of the bins for each group separately. "all" determines positions of the bins with all the data taken together; this is used for aligning dot stacks across multiple groups.
         clsgeom_dotplot.AddLayerParameter("stackdir", "list", Chr(34) & "up" & Chr(34), lstParameterStrings:={Chr(34) & "up" & Chr(34), Chr(34) & "down" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centerwhole" & Chr(34)}) 'which direction to stack the dots. "centerwhole" (centered, but with dots aligned)
-        clsgeom_dotplot.AddLayerParameter("stackratio", "numeric", "1", lstParameterStrings:={1}) 'how close to stack the dots. Default is 1, where dots just just touch. Use smaller values for closer, overlapping dots.
-        clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1", lstParameterStrings:={1}) 'Warning: negative values seem to result in having the dots stacking downwards. However the window on the graph does not adapt... No errors
-        clsgeom_dotplot.AddLayerParameter("stackgroups", "Boolean", "FALSE")
-        clsgeom_dotplot.AddLayerParameter("origin", "numeric", "0", lstParameterStrings:={1}) 'When method is "histodot", origin of first bin
-        'Warning: can't get any sensible change on the graph by changing origin.
+        clsgeom_dotplot.AddLayerParameter("stackratio", "numeric", "1", lstParameterStrings:={1}) 'how close to stack the dots. Default is 1, where dots just just touch. Use smaller values for closer, overlapping dots. Negative values sort of revert the direction of stacking.
+        clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1", lstParameterStrings:={1}) 'The diameter of the dots relative to binwidth, default 1
+        'Warning: negative values seem to result in having the dots stacking downwards. However the window on the graph does not adapt... No errors
+        clsgeom_dotplot.AddLayerParameter("stackgroups", "Boolean", "FALSE") 'should dots be stacked across groups? This has the effect that position = "stack" should have, but can't (because this geom has some odd properties)
+        clsgeom_dotplot.AddLayerParameter("origin", "numeric", "0", lstParameterStrings:={1}) 'When method is "histodot", origin of first bin, and moves all subsequent bins accordingly (shift)
         clsgeom_dotplot.AddLayerParameter("right", "Boolean", "TRUE") 'When method is "histodot", should intervals be closed on the right (a, b], or not [a, b)
         clsgeom_dotplot.AddLayerParameter("width", "numeric", "0.9", lstParameterStrings:={1, 0}) 'When binaxis is "y", the spacing of the dot stacks for dodging. 
         'Warning: didn't manage to get any visible changes on the graph.
