@@ -61,7 +61,7 @@ Partial Class dlgFitModel
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 319)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 298)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -70,7 +70,7 @@ Partial Class dlgFitModel
         '
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.bShowHiddenColumns = False
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = True
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.Name = "ucrSelectorByDataFrameAddRemoveForFitModel"
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.Size = New System.Drawing.Size(210, 180)
@@ -79,11 +79,11 @@ Partial Class dlgFitModel
         'lblResponseVariable
         '
         Me.lblResponseVariable.AutoSize = True
-        Me.lblResponseVariable.Location = New System.Drawing.Point(240, 26)
+        Me.lblResponseVariable.Location = New System.Drawing.Point(244, 28)
         Me.lblResponseVariable.Name = "lblResponseVariable"
-        Me.lblResponseVariable.Size = New System.Drawing.Size(96, 13)
+        Me.lblResponseVariable.Size = New System.Drawing.Size(99, 13)
         Me.lblResponseVariable.TabIndex = 2
-        Me.lblResponseVariable.Text = "Response Variable"
+        Me.lblResponseVariable.Text = "Response Variable:"
         '
         'ucrReceiverResponseVar
         '
@@ -96,7 +96,7 @@ Partial Class dlgFitModel
         '
         'cmdModelOptions
         '
-        Me.cmdModelOptions.Location = New System.Drawing.Point(296, 231)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(303, 243)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdModelOptions.TabIndex = 4
@@ -105,7 +105,7 @@ Partial Class dlgFitModel
         '
         'ucrFamily
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(12, 222)
+        Me.ucrFamily.Location = New System.Drawing.Point(10, 193)
         Me.ucrFamily.Name = "ucrFamily"
         Me.ucrFamily.Size = New System.Drawing.Size(207, 43)
         Me.ucrFamily.TabIndex = 5
@@ -113,23 +113,23 @@ Partial Class dlgFitModel
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(9, 272)
+        Me.lblModelPreview.Location = New System.Drawing.Point(7, 248)
         Me.lblModelPreview.Name = "lblModelPreview"
-        Me.lblModelPreview.Size = New System.Drawing.Size(79, 13)
+        Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 6
-        Me.lblModelPreview.Text = "Model preview:"
+        Me.lblModelPreview.Text = "Model Preview:"
         '
         'ucrInputModelPreview
         '
         Me.ucrInputModelPreview.IsReadOnly = False
-        Me.ucrInputModelPreview.Location = New System.Drawing.Point(94, 266)
+        Me.ucrInputModelPreview.Location = New System.Drawing.Point(90, 245)
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
-        Me.ucrInputModelPreview.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputModelPreview.Size = New System.Drawing.Size(200, 21)
         Me.ucrInputModelPreview.TabIndex = 7
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(296, 290)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(303, 271)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 9
@@ -139,23 +139,23 @@ Partial Class dlgFitModel
         'lblExplanatoryModel
         '
         Me.lblExplanatoryModel.AutoSize = True
-        Me.lblExplanatoryModel.Location = New System.Drawing.Point(240, 72)
+        Me.lblExplanatoryModel.Location = New System.Drawing.Point(245, 73)
         Me.lblExplanatoryModel.Name = "lblExplanatoryModel"
-        Me.lblExplanatoryModel.Size = New System.Drawing.Size(94, 13)
+        Me.lblExplanatoryModel.Size = New System.Drawing.Size(97, 13)
         Me.lblExplanatoryModel.TabIndex = 10
-        Me.lblExplanatoryModel.Text = "Explanatory Model"
+        Me.lblExplanatoryModel.Text = "Explanatory Model:"
         '
         'ucrReceiverExpressionFitModel
         '
-        Me.ucrReceiverExpressionFitModel.Location = New System.Drawing.Point(243, 88)
+        Me.ucrReceiverExpressionFitModel.Location = New System.Drawing.Point(243, 89)
         Me.ucrReceiverExpressionFitModel.Name = "ucrReceiverExpressionFitModel"
         Me.ucrReceiverExpressionFitModel.Selector = Nothing
-        Me.ucrReceiverExpressionFitModel.Size = New System.Drawing.Size(256, 20)
+        Me.ucrReceiverExpressionFitModel.Size = New System.Drawing.Size(256, 30)
         Me.ucrReceiverExpressionFitModel.TabIndex = 11
         '
         'cmdDiv
         '
-        Me.cmdDiv.Location = New System.Drawing.Point(97, 11)
+        Me.cmdDiv.Location = New System.Drawing.Point(97, 10)
         Me.cmdDiv.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDiv.Name = "cmdDiv"
         Me.cmdDiv.Size = New System.Drawing.Size(29, 30)
@@ -176,15 +176,15 @@ Partial Class dlgFitModel
         Me.grpFirstCalc.Controls.Add(Me.cmdClear)
         Me.grpFirstCalc.Controls.Add(Me.cmdZero)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
-        Me.grpFirstCalc.Location = New System.Drawing.Point(242, 115)
+        Me.grpFirstCalc.Location = New System.Drawing.Point(243, 125)
         Me.grpFirstCalc.Name = "grpFirstCalc"
-        Me.grpFirstCalc.Size = New System.Drawing.Size(131, 110)
+        Me.grpFirstCalc.Size = New System.Drawing.Size(131, 111)
         Me.grpFirstCalc.TabIndex = 161
         Me.grpFirstCalc.TabStop = False
         '
         'cmdMultiply
         '
-        Me.cmdMultiply.Location = New System.Drawing.Point(67, 11)
+        Me.cmdMultiply.Location = New System.Drawing.Point(67, 10)
         Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMultiply.Name = "cmdMultiply"
         Me.cmdMultiply.Size = New System.Drawing.Size(29, 30)
@@ -194,7 +194,7 @@ Partial Class dlgFitModel
         '
         'cmdColon
         '
-        Me.cmdColon.Location = New System.Drawing.Point(37, 11)
+        Me.cmdColon.Location = New System.Drawing.Point(37, 10)
         Me.cmdColon.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdColon.Name = "cmdColon"
         Me.cmdColon.Size = New System.Drawing.Size(29, 30)
@@ -204,7 +204,7 @@ Partial Class dlgFitModel
         '
         'cmdPlus
         '
-        Me.cmdPlus.Location = New System.Drawing.Point(7, 11)
+        Me.cmdPlus.Location = New System.Drawing.Point(7, 10)
         Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPlus.Name = "cmdPlus"
         Me.cmdPlus.Size = New System.Drawing.Size(29, 30)
@@ -214,7 +214,7 @@ Partial Class dlgFitModel
         '
         'cmdPower
         '
-        Me.cmdPower.Location = New System.Drawing.Point(97, 42)
+        Me.cmdPower.Location = New System.Drawing.Point(97, 41)
         Me.cmdPower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPower.Name = "cmdPower"
         Me.cmdPower.Size = New System.Drawing.Size(29, 32)
@@ -224,7 +224,7 @@ Partial Class dlgFitModel
         '
         'cmdClosingBracket
         '
-        Me.cmdClosingBracket.Location = New System.Drawing.Point(67, 42)
+        Me.cmdClosingBracket.Location = New System.Drawing.Point(67, 41)
         Me.cmdClosingBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClosingBracket.Name = "cmdClosingBracket"
         Me.cmdClosingBracket.Size = New System.Drawing.Size(29, 32)
@@ -234,7 +234,7 @@ Partial Class dlgFitModel
         '
         'cmdOpeningBracket
         '
-        Me.cmdOpeningBracket.Location = New System.Drawing.Point(37, 42)
+        Me.cmdOpeningBracket.Location = New System.Drawing.Point(37, 41)
         Me.cmdOpeningBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOpeningBracket.Name = "cmdOpeningBracket"
         Me.cmdOpeningBracket.Size = New System.Drawing.Size(29, 32)
@@ -244,7 +244,7 @@ Partial Class dlgFitModel
         '
         'cmdDoubleBracket
         '
-        Me.cmdDoubleBracket.Location = New System.Drawing.Point(7, 42)
+        Me.cmdDoubleBracket.Location = New System.Drawing.Point(7, 41)
         Me.cmdDoubleBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDoubleBracket.Name = "cmdDoubleBracket"
         Me.cmdDoubleBracket.Size = New System.Drawing.Size(29, 32)
@@ -254,7 +254,7 @@ Partial Class dlgFitModel
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(67, 75)
+        Me.cmdClear.Location = New System.Drawing.Point(67, 74)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(60, 30)
@@ -264,7 +264,7 @@ Partial Class dlgFitModel
         '
         'cmdZero
         '
-        Me.cmdZero.Location = New System.Drawing.Point(37, 75)
+        Me.cmdZero.Location = New System.Drawing.Point(37, 74)
         Me.cmdZero.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdZero.Name = "cmdZero"
         Me.cmdZero.Size = New System.Drawing.Size(29, 30)
@@ -274,7 +274,7 @@ Partial Class dlgFitModel
         '
         'cmdMinus
         '
-        Me.cmdMinus.Location = New System.Drawing.Point(7, 75)
+        Me.cmdMinus.Location = New System.Drawing.Point(7, 74)
         Me.cmdMinus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMinus.Name = "cmdMinus"
         Me.cmdMinus.Size = New System.Drawing.Size(29, 30)
@@ -290,9 +290,9 @@ Partial Class dlgFitModel
         Me.grpSecondCalc.Controls.Add(Me.cmdLog)
         Me.grpSecondCalc.Controls.Add(Me.cmdTan)
         Me.grpSecondCalc.Controls.Add(Me.cmdExp)
-        Me.grpSecondCalc.Location = New System.Drawing.Point(373, 115)
+        Me.grpSecondCalc.Location = New System.Drawing.Point(373, 125)
         Me.grpSecondCalc.Name = "grpSecondCalc"
-        Me.grpSecondCalc.Size = New System.Drawing.Size(126, 109)
+        Me.grpSecondCalc.Size = New System.Drawing.Size(126, 111)
         Me.grpSecondCalc.TabIndex = 162
         Me.grpSecondCalc.TabStop = False
         '
@@ -318,7 +318,7 @@ Partial Class dlgFitModel
         '
         'cmdSin
         '
-        Me.cmdSin.Location = New System.Drawing.Point(62, 41)
+        Me.cmdSin.Location = New System.Drawing.Point(62, 42)
         Me.cmdSin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSin.Name = "cmdSin"
         Me.cmdSin.Size = New System.Drawing.Size(56, 30)
@@ -328,7 +328,7 @@ Partial Class dlgFitModel
         '
         'cmdLog
         '
-        Me.cmdLog.Location = New System.Drawing.Point(5, 41)
+        Me.cmdLog.Location = New System.Drawing.Point(5, 42)
         Me.cmdLog.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLog.Name = "cmdLog"
         Me.cmdLog.Size = New System.Drawing.Size(56, 30)
@@ -338,7 +338,7 @@ Partial Class dlgFitModel
         '
         'cmdTan
         '
-        Me.cmdTan.Location = New System.Drawing.Point(62, 72)
+        Me.cmdTan.Location = New System.Drawing.Point(62, 74)
         Me.cmdTan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTan.Name = "cmdTan"
         Me.cmdTan.Size = New System.Drawing.Size(56, 30)
@@ -348,7 +348,7 @@ Partial Class dlgFitModel
         '
         'cmdExp
         '
-        Me.cmdExp.Location = New System.Drawing.Point(5, 72)
+        Me.cmdExp.Location = New System.Drawing.Point(5, 74)
         Me.cmdExp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdExp.Name = "cmdExp"
         Me.cmdExp.Size = New System.Drawing.Size(56, 30)
@@ -359,15 +359,15 @@ Partial Class dlgFitModel
         'ucrModelName
         '
         Me.ucrModelName.IsReadOnly = False
-        Me.ucrModelName.Location = New System.Drawing.Point(87, 293)
+        Me.ucrModelName.Location = New System.Drawing.Point(90, 271)
         Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(203, 21)
+        Me.ucrModelName.Size = New System.Drawing.Size(200, 21)
         Me.ucrModelName.TabIndex = 164
         '
         'chkSaveModel
         '
         Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(6, 291)
+        Me.chkSaveModel.Location = New System.Drawing.Point(9, 271)
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
         Me.chkSaveModel.TabIndex = 163
@@ -378,7 +378,7 @@ Partial Class dlgFitModel
         'chkConvertToVariate
         '
         Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(388, 43)
+        Me.chkConvertToVariate.Location = New System.Drawing.Point(380, 45)
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
         Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
         Me.chkConvertToVariate.TabIndex = 165
@@ -390,7 +390,7 @@ Partial Class dlgFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(502, 371)
+        Me.ClientSize = New System.Drawing.Size(510, 357)
         Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.chkSaveModel)

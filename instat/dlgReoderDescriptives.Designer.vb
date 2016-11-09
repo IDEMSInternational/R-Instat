@@ -56,6 +56,7 @@ Partial Class dlgReoderDescriptives
         '
         'ucrDataFrameReoder
         '
+        Me.ucrDataFrameReoder.bUseCurrentFilter = True
         Me.ucrDataFrameReoder.Location = New System.Drawing.Point(13, 13)
         Me.ucrDataFrameReoder.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameReoder.Name = "ucrDataFrameReoder"
@@ -72,6 +73,8 @@ Partial Class dlgReoderDescriptives
         Me.Controls.Add(Me.ucrDataFrameReoder)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgReoderDescriptives"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Reoder_Objects"

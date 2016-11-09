@@ -187,7 +187,10 @@ Partial Class dlgAdvanceOptions
         Me.Controls.Add(Me.chkConvert)
         Me.Controls.Add(Me.chkMessages)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgAdvanceOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Advance Options"
         Me.ResumeLayout(False)
         Me.PerformLayout()
