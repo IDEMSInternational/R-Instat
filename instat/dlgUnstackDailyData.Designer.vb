@@ -39,6 +39,8 @@ Partial Class dlgUnstackDailyData
         Me.ClientSize = New System.Drawing.Size(426, 262)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgUnstackDailyData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "unstack_Daily_Data"

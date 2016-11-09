@@ -298,7 +298,7 @@ Partial Class dlgFourVariableModelling
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgFourVariableModelling"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Four_Variable_Modelling"
         Me.Text = "Four Variable Modelling"
         Me.ResumeLayout(False)

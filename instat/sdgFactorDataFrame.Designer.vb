@@ -40,7 +40,7 @@ Partial Class sdgFactorDataFrame
         'ucrSelectorSubDlgFactorDatafrme
         '
         Me.ucrSelectorSubDlgFactorDatafrme.bShowHiddenColumns = False
-        Me.ucrSelectorSubDlgFactorDatafrme.bUseCurrentFilter = False
+        Me.ucrSelectorSubDlgFactorDatafrme.bUseCurrentFilter = True
         Me.ucrSelectorSubDlgFactorDatafrme.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectorSubDlgFactorDatafrme.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSubDlgFactorDatafrme.Name = "ucrSelectorSubDlgFactorDatafrme"
@@ -98,7 +98,7 @@ Partial Class sdgFactorDataFrame
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgFactorDataFrame"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Use Factor Sheet"
         Me.ResumeLayout(False)
         Me.PerformLayout()
