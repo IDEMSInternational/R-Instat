@@ -39,7 +39,6 @@ Public Class dlgNon_ParametricOneWayANOVA
         ucrReceiverFactor.SetDataType("factor")
         clsModel.SetOperation("~")
         ucrBase.iHelpTopicID = 183
-        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -60,7 +59,6 @@ Public Class dlgNon_ParametricOneWayANOVA
 
     Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
         clsModel.SetParameter(False, strValue:=ucrReceiverFactor.GetVariableNames(bWithQuotes:=False))
-
         TestOKEnabled()
     End Sub
 
