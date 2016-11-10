@@ -30,10 +30,10 @@ Partial Class dlgImportFromODK
         Me.lblChooseForm = New System.Windows.Forms.Label()
         Me.cmdFindForms = New System.Windows.Forms.Button()
         Me.ucrInputChooseForm = New instat.ucrInputComboBox()
-        Me.ucrInputPassword = New instat.ucrInputTextBox()
         Me.ucrInputUsername = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.chkViewPassword = New System.Windows.Forms.CheckBox()
+        Me.ucrInputPassword = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblChoosePlatform
@@ -88,7 +88,7 @@ Partial Class dlgImportFromODK
         'lblChooseForm
         '
         Me.lblChooseForm.AutoSize = True
-        Me.lblChooseForm.Location = New System.Drawing.Point(9, 120)
+        Me.lblChooseForm.Location = New System.Drawing.Point(15, 127)
         Me.lblChooseForm.Name = "lblChooseForm"
         Me.lblChooseForm.Size = New System.Drawing.Size(72, 13)
         Me.lblChooseForm.TabIndex = 6
@@ -96,7 +96,7 @@ Partial Class dlgImportFromODK
         '
         'cmdFindForms
         '
-        Me.cmdFindForms.Location = New System.Drawing.Point(10, 88)
+        Me.cmdFindForms.Location = New System.Drawing.Point(13, 95)
         Me.cmdFindForms.Name = "cmdFindForms"
         Me.cmdFindForms.Size = New System.Drawing.Size(102, 23)
         Me.cmdFindForms.TabIndex = 14
@@ -106,20 +106,10 @@ Partial Class dlgImportFromODK
         'ucrInputChooseForm
         '
         Me.ucrInputChooseForm.IsReadOnly = False
-        Me.ucrInputChooseForm.Location = New System.Drawing.Point(92, 117)
+        Me.ucrInputChooseForm.Location = New System.Drawing.Point(98, 124)
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
         Me.ucrInputChooseForm.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputChooseForm.TabIndex = 13
-        '
-        'ucrInputPassword
-        '
-        Me.ucrInputPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ucrInputPassword.IsReadOnly = False
-        Me.ucrInputPassword.Location = New System.Drawing.Point(92, 60)
-        Me.ucrInputPassword.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
-        Me.ucrInputPassword.Name = "ucrInputPassword"
-        Me.ucrInputPassword.Size = New System.Drawing.Size(137, 20)
-        Me.ucrInputPassword.TabIndex = 12
         '
         'ucrInputUsername
         '
@@ -131,7 +121,7 @@ Partial Class dlgImportFromODK
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 144)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 151)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(420, 52)
         Me.ucrBase.TabIndex = 10
@@ -146,15 +136,23 @@ Partial Class dlgImportFromODK
         Me.chkViewPassword.Text = "View Password"
         Me.chkViewPassword.UseVisualStyleBackColor = True
         '
+        'ucrInputPassword
+        '
+        Me.ucrInputPassword.IsReadOnly = False
+        Me.ucrInputPassword.Location = New System.Drawing.Point(92, 63)
+        Me.ucrInputPassword.Name = "ucrInputPassword"
+        Me.ucrInputPassword.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPassword.TabIndex = 16
+        '
         'dlgImportFromODK
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 201)
+        Me.ClientSize = New System.Drawing.Size(424, 209)
+        Me.Controls.Add(Me.ucrInputPassword)
         Me.Controls.Add(Me.chkViewPassword)
         Me.Controls.Add(Me.cmdFindForms)
         Me.Controls.Add(Me.ucrInputChooseForm)
-        Me.Controls.Add(Me.ucrInputPassword)
         Me.Controls.Add(Me.ucrInputUsername)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblChooseForm)
@@ -182,8 +180,8 @@ Partial Class dlgImportFromODK
     Friend WithEvents lblChooseForm As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrInputUsername As ucrInputTextBox
-    Friend WithEvents ucrInputPassword As ucrInputTextBox
     Friend WithEvents ucrInputChooseForm As ucrInputComboBox
     Friend WithEvents cmdFindForms As Button
     Friend WithEvents chkViewPassword As CheckBox
+    Friend WithEvents ucrInputPassword As ucrInputTextBox
 End Class
