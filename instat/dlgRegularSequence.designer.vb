@@ -190,7 +190,7 @@ Partial Class dlgRegularSequence
         '
         Me.nudInStepsOf.Location = New System.Drawing.Point(98, 78)
         Me.nudInStepsOf.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
-        Me.nudInStepsOf.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudInStepsOf.Minimum = New Decimal(New Integer() {2147483647, 0, 0, -2147483648})
         Me.nudInStepsOf.Name = "nudInStepsOf"
         Me.nudInStepsOf.Size = New System.Drawing.Size(51, 20)
         Me.nudInStepsOf.TabIndex = 10

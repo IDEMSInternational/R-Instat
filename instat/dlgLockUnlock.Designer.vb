@@ -34,14 +34,16 @@ Partial Class dlgLockUnlock
         'ucrBase
         '
         Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 161)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 181)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(443, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(443, 79)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(3, 2)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 155)
         Me.ucrAddRemove.TabIndex = 1
@@ -49,7 +51,9 @@ Partial Class dlgLockUnlock
         'ucrReceiverLockUnlock
         '
         Me.ucrReceiverLockUnlock.Location = New System.Drawing.Point(203, 23)
+        Me.ucrReceiverLockUnlock.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLockUnlock.Name = "ucrReceiverLockUnlock"
+        Me.ucrReceiverLockUnlock.Selector = Nothing
         Me.ucrReceiverLockUnlock.Size = New System.Drawing.Size(121, 134)
         Me.ucrReceiverLockUnlock.TabIndex = 2
         '
@@ -102,7 +106,7 @@ Partial Class dlgLockUnlock
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(443, 193)
+        Me.ClientSize = New System.Drawing.Size(443, 260)
         Me.Controls.Add(Me.chkReservefree)
         Me.Controls.Add(Me.rdoUnlock)
         Me.Controls.Add(Me.rdoLock)
@@ -111,6 +115,8 @@ Partial Class dlgLockUnlock
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgLockUnlock"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Lock_and_unlock"

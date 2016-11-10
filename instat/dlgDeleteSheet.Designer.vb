@@ -53,6 +53,7 @@ Partial Class dlgDeleteSheet
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteSheet"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Delete Data Frame"
         Me.ResumeLayout(False)
 
