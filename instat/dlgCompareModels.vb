@@ -66,31 +66,33 @@ Public Class dlgCompareModels
     End Sub
 
     Private Sub distParameters()
-        clsPlotDist.ClearParameters()
+        XLimits()
+        Ylimits()
+        kindParameters()
         clsPlotDist.AddParameter("dist", Chr(34) & ucrDistributionForCompareModels.clsCurrDistribution.strRName & Chr(34))
         For Each clstempparam In ucrDistributionForCompareModels.clsCurrRFunction.clsParameters
             clsPlotDist.AddParameter(clstempparam.Clone())
         Next
+
     End Sub
 
     Private Sub cmdAddNewDistributions_Click(sender As Object, e As EventArgs) Handles cmdAddNewDistributions.Click
         sdgAddNewDistribution.ShowDialog()
     End Sub
 
-    Private Sub nudXlimMin_ValueChanged(sender As Object, e As EventArgs) Handles nudXlimMin.ValueChanged, nudYlimMin.ValueChanged, nudNumberofColumns.ValueChanged, nudXlimMax.ValueChanged, nudYlimMax.ValueChanged
-        XLimits()
-        Ylimits()
+    Private Sub nudXlimMin_TextChanged(sender As Object, e As EventArgs) Handles nudXlimMin.TextChanged, nudYlimMin.TextChanged, nudNumberofColumns.TextChanged, nudXlimMax.TextChanged, nudYlimMax.TextChanged
+        distParameters()
         TestOKEnabled()
     End Sub
 
     Private Sub grpPlotOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCDF.CheckedChanged, rdoDensity.CheckedChanged, rdoHistogram.CheckedChanged, rdoqq.CheckedChanged
-        kindParameters()
+        distParameters()
     End Sub
 
     Private Sub Ylimits()
         If nudYlimMax.Value > nudYlimMin.Value Then
             If nudYlimMax.Text <> "" AndAlso nudYlimMin.Text <> "" Then
-                clsPlotDist.AddParameter("ylim", "c(" & nudYlimMin.Text & "," & nudYlimMax.Text & ")")
+                clsPlotDist.AddParameter("ylim", "c(" & nudYlimMin.Value & "," & nudYlimMax.Value & ")")
             Else
                 clsPlotDist.RemoveParameterByName("ylim")
             End If
@@ -100,7 +102,7 @@ Public Class dlgCompareModels
     Private Sub XLimits()
         If nudXlimMax.Value > nudXlimMin.Value Then
             If nudXlimMax.Text <> "" AndAlso nudXlimMin.Text <> "" Then
-                clsPlotDist.AddParameter("xlim", "c(" & nudXlimMin.Text & "," & nudXlimMax.Text & ")")
+                clsPlotDist.AddParameter("xlim", "c(" & nudXlimMin.Value & "," & nudXlimMax.Value & ")")
 
             Else
                 clsPlotDist.RemoveParameterByName("xlim")
