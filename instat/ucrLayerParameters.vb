@@ -27,7 +27,7 @@ Public Class ucrLayerParameters
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        lstLayerParameterControl.AddRange({UcrLayerParamsControls1, UcrLayerParamsControls2, UcrLayerParamsControls3, UcrLayerParamsControls4, UcrLayerParamsControls5, UcrLayerParamsControls6, UcrLayerParamsControls7, UcrLayerParamsControls8, UcrLayerParamsControls9, UcrLayerParamsControls10, UcrLayerParamsControls11, UcrLayerParamsControls12, UcrLayerParamsControls13})
+        lstLayerParameterControl.AddRange({UcrLayerParamsControls1, UcrLayerParamsControls2, UcrLayerParamsControls3, UcrLayerParamsControls4, UcrLayerParamsControls5, UcrLayerParamsControls6, UcrLayerParamsControls7, UcrLayerParamsControls8, UcrLayerParamsControls9, UcrLayerParamsControls10, UcrLayerParamsControls11, UcrLayerParamsControls12, UcrLayerParamsControls13, UcrLayerParamsControls14, UcrLayerParamsControls15, UcrLayerParamsControls16, UcrLayerParamsControls17})
     End Sub
 
     Private Sub ucrLayerParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -77,7 +77,7 @@ Public Class ucrLayerParameters
 
     End Sub
 
-    Private Sub UcrLayerParamsControls_RParameterChanged(ucrControl As ucrLayerParamsControls) Handles UcrLayerParamsControls1.RParameterChanged, UcrLayerParamsControls2.RParameterChanged, UcrLayerParamsControls3.RParameterChanged, UcrLayerParamsControls4.RParameterChanged, UcrLayerParamsControls5.RParameterChanged, UcrLayerParamsControls6.RParameterChanged, UcrLayerParamsControls7.RParameterChanged, UcrLayerParamsControls8.RParameterChanged, UcrLayerParamsControls9.RParameterChanged, UcrLayerParamsControls10.RParameterChanged, UcrLayerParamsControls11.RParameterChanged, UcrLayerParamsControls12.RParameterChanged
+    Private Sub UcrLayerParamsControls_RParameterChanged(ucrControl As ucrLayerParamsControls) Handles UcrLayerParamsControls1.RParameterChanged, UcrLayerParamsControls2.RParameterChanged, UcrLayerParamsControls3.RParameterChanged, UcrLayerParamsControls4.RParameterChanged, UcrLayerParamsControls5.RParameterChanged, UcrLayerParamsControls6.RParameterChanged, UcrLayerParamsControls7.RParameterChanged, UcrLayerParamsControls8.RParameterChanged, UcrLayerParamsControls9.RParameterChanged, UcrLayerParamsControls10.RParameterChanged, UcrLayerParamsControls11.RParameterChanged, UcrLayerParamsControls12.RParameterChanged, UcrLayerParamsControls14.RParameterChanged, UcrLayerParamsControls15.RParameterChanged, UcrLayerParamsControls16.RParameterChanged, UcrLayerParamsControls17.RParameterChanged
 
     End Sub
 End Class

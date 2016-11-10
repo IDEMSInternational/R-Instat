@@ -35,8 +35,12 @@ Public Class RFunction
     Public Event ParametersChanged()
 
     Public Sub SetRCommand(strTemp As String)
+        'Warning/Question/Task: would be nice to clear the RParameters when the RCommand is changed (really changed)... Don't know if this would have any consequence elsewhere... Could comment it out if needed.
+        If strRCommand <> strTemp Then
+            ClearParameters()
         strRCommand = strTemp
-        bIsAssigned = False
+        End If
+        bIsAssigned = False 'Question to be discussed: Why is the bIsAssigned set to False when Parameters are cleared ?
     End Sub
 
     Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
@@ -249,7 +253,7 @@ Public Class RFunction
 
     Public Sub ClearParameters()
         clsParameters.Clear()
-        bIsAssigned = False
+        bIsAssigned = False 'Question to be discussed: Why is the bIsAssigned set to False when Parameters are cleared ?
         RaiseEvent ParametersChanged()
     End Sub
 
