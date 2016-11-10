@@ -35,11 +35,7 @@ Public Class RFunction
     Public Event ParametersChanged()
 
     Public Sub SetRCommand(strTemp As String)
-        'Warning: would be nice to clear the RParameters when the RCommand is changed (really changed)... Although would have consequences elsewhere for the moment... For now it can be done explicitely on the side
-        'If strRCommand <> strTemp Then
-        'ClearParameters()
         strRCommand = strTemp
-        'End If
         bIsAssigned = False
     End Sub
 
