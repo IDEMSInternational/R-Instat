@@ -937,11 +937,15 @@ Public Class ucrGeom
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
     Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
+        Dim clsParam As LayerParameter
+
         'Here, the clsCurrGeom is chosen according to the selected geom in cboGeomList. Then the Rcommand of the GeomFunction is chosen accordingly.
         clsCurrGeom = lstAllGeoms(cboGeomList.SelectedIndex)
         'Erase parameters in the clsGeomFunction when geom has indeed changed... necessary to not have irrelevant parameters staying in the geom function when geom has changed...
         If clsGeomFunction.strRCommand <> clsCurrGeom.strGeomName Then
-            clsGeomFunction.ClearParameters()
+            For Each clsParam In lstAllGeoms(lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)).clsLayerParameters
+                clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
+            Next
             clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
         End If
 
