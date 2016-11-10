@@ -73,12 +73,5 @@ Public Class ucrLayerParameters
         SetLayerParameters()
     End Sub
 
-    Private Sub SetDefaults()
-
-    End Sub
-
-    Private Sub UcrLayerParamsControls_RParameterChanged(ucrControl As ucrLayerParamsControls) Handles UcrLayerParamsControls1.RParameterChanged, UcrLayerParamsControls2.RParameterChanged, UcrLayerParamsControls3.RParameterChanged, UcrLayerParamsControls4.RParameterChanged, UcrLayerParamsControls5.RParameterChanged, UcrLayerParamsControls6.RParameterChanged, UcrLayerParamsControls7.RParameterChanged, UcrLayerParamsControls8.RParameterChanged, UcrLayerParamsControls9.RParameterChanged, UcrLayerParamsControls10.RParameterChanged, UcrLayerParamsControls11.RParameterChanged, UcrLayerParamsControls12.RParameterChanged, UcrLayerParamsControls14.RParameterChanged, UcrLayerParamsControls15.RParameterChanged, UcrLayerParamsControls16.RParameterChanged, UcrLayerParamsControls17.RParameterChanged
-
-    End Sub
 End Class
 

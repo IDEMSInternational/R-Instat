@@ -66,7 +66,6 @@ Public Class ucrGeom
                 cboGeomList.Items.Add(GeomCount.strGeomName)
             End If
         Next
-        'Task: needs further commenting when understood. clsGeomFunction is set at different occasions, not only in setup. WARNING: clsGeomFunction might be overwritten... see issue #2174 ?
         'Next, the clsGeomFunction is set. Either this one is empty, or it has already been setup on the dialogue that is calling Setup...
         SetGeomFunction(clsTempGeomFunc)
         'From the clsGeomFunction, the selected Geom in the cboGeomList is chosen. If clsGeomFunction is Nothing, then the default choice is geom_boxplot. Later, in cboGeomList_SelectedIndexChanged, the clsCurrGeom is chosen to be the selected geom, then the Rcommand of clsGeomFunction will be set according to the choice of clsCurrGeom. Hence the Rcommand sets the clsCurrGeom indirectly, then it is set by the clsCurrGeom. This looks like an inefficient loop, but it does no harm and actually sets clsGeomFunction when it was initially nothing.
@@ -435,16 +434,16 @@ Public Class ucrGeom
         clsgeom_dotplot.strGeomName = "geom_dotplot"
 
         'Aesthetics parameters
-        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor", "character"}) 'x is partially mandatory, need to be given value "" (or anything) when not filled.
-        clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor", "character"})
+        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}) 'x is partially mandatory, need to be given value "" (or anything) when not filled.
+        clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"})
         'When the binaxis is y, then if x is a factor or character, several dotplots lines are displayed according to each group along the x axis. 
         'When the binaxis is x, and y is a factor or character, dot stacks are split according to the y mapping, but not aligned with the labels along the y axis. So all stacks stay at the bottom. Also this is visible only if stackratio < 1, and stackgroups = FALSE.
         'However, when binaxis is x/y and y/x is continuous, the axis label is changed but that's all the mapping does. Still the number of dots represent the number of stacked dots represent the number of events in each bin.
         'Date variables give silly outcomes but no crash/error/warning.
 
-        clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric", "character"}) 'Warning: varies transparence of both the fill and the outline.
-        clsgeom_dotplot.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric", "character"})
-        clsgeom_dotplot.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric", "character"})
+        clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"}) 'Warning: varies transparence of both the fill and the outline.
+        clsgeom_dotplot.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dotplot.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
 
         'Adding layer parameters
         'Geom_dotplot layer parameters
@@ -474,7 +473,7 @@ Public Class ucrGeom
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_dotplot.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_dotplot.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_dotplot.AddLayerParameter("alpha", "numeric", "0", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
+        clsgeom_dotplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
 
         lstAllGeoms.Add(clsgeom_dotplot)
 
@@ -940,8 +939,12 @@ Public Class ucrGeom
     Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
         'Here, the clsCurrGeom is chosen according to the selected geom in cboGeomList. Then the Rcommand of the GeomFunction is chosen accordingly.
         clsCurrGeom = lstAllGeoms(cboGeomList.SelectedIndex)
-        'Warning/question/task : would be nice to erase parameters in the clsGeomFunction when geom has indeed changed... Maybe clear parameters in RFunction when Rcommand is actually changed (really changed)...
-        clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
+        'Erase parameters in the clsGeomFunction when geom has indeed changed... necessary to not have irrelevant parameters staying in the geom function when geom has changed...
+        If clsGeomFunction.strRCommand <> clsCurrGeom.strGeomName Then
+            clsGeomFunction.ClearParameters()
+            clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
+        End If
+
         RaiseEvent GeomChanged(sender, e)
     End Sub
 End Class
