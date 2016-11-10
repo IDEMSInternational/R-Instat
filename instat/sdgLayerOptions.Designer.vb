@@ -24,8 +24,8 @@ Partial Class sdgLayerOptions
     Private Sub InitializeComponent()
         Me.tbcLayers = New System.Windows.Forms.TabControl()
         Me.tbpAesthetics = New System.Windows.Forms.TabPage()
-        Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
         Me.ucrGeomWithAes = New instat.UcrGeomListWithParameters()
+        Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
         Me.ucrLayerParameter = New instat.ucrLayerParameters()
         Me.ucrSdgLayerBase = New instat.ucrButtonsSubdialogue()
         Me.tbcLayers.SuspendLayout()
@@ -54,6 +54,13 @@ Partial Class sdgLayerOptions
         Me.tbpAesthetics.Text = "Layer Dimensions(Aesthetics)"
         Me.tbpAesthetics.UseVisualStyleBackColor = True
         '
+        'ucrGeomWithAes
+        '
+        Me.ucrGeomWithAes.Location = New System.Drawing.Point(6, 6)
+        Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
+        Me.ucrGeomWithAes.Size = New System.Drawing.Size(467, 347)
+        Me.ucrGeomWithAes.TabIndex = 0
+        '
         'tbpGeomParameters
         '
         Me.tbpGeomParameters.Controls.Add(Me.ucrLayerParameter)
@@ -64,13 +71,6 @@ Partial Class sdgLayerOptions
         Me.tbpGeomParameters.TabIndex = 1
         Me.tbpGeomParameters.Text = "Layer Parameters(Geom Parameters)"
         Me.tbpGeomParameters.UseVisualStyleBackColor = True
-        '
-        'ucrGeomWithAes
-        '
-        Me.ucrGeomWithAes.Location = New System.Drawing.Point(6, 6)
-        Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
-        Me.ucrGeomWithAes.Size = New System.Drawing.Size(467, 347)
-        Me.ucrGeomWithAes.TabIndex = 0
         '
         'ucrLayerParameter
         '
@@ -98,7 +98,7 @@ Partial Class sdgLayerOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgLayerOptions"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Layer Options"
         Me.tbcLayers.ResumeLayout(False)
         Me.tbpAesthetics.ResumeLayout(False)

@@ -56,6 +56,8 @@ Partial Class dlgStemAndLeaf
         '
         'ucrStemLeafSelector
         '
+        Me.ucrStemLeafSelector.bShowHiddenColumns = False
+        Me.ucrStemLeafSelector.bUseCurrentFilter = True
         Me.ucrStemLeafSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrStemLeafSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrStemLeafSelector.Name = "ucrStemLeafSelector"
@@ -75,6 +77,7 @@ Partial Class dlgStemAndLeaf
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgStemAndLeaf"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Stem_and_Leaf"
         Me.Text = "Stem and Leaf"
         Me.ResumeLayout(False)

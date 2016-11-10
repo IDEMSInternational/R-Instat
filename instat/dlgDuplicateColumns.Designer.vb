@@ -30,7 +30,10 @@ Partial Class dlgDuplicateColumns
         '
         'ucrSelectColumnstoCopy
         '
+        Me.ucrSelectColumnstoCopy.bShowHiddenColumns = False
+        Me.ucrSelectColumnstoCopy.bUseCurrentFilter = True
         Me.ucrSelectColumnstoCopy.Location = New System.Drawing.Point(3, 1)
+        Me.ucrSelectColumnstoCopy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectColumnstoCopy.Name = "ucrSelectColumnstoCopy"
         Me.ucrSelectColumnstoCopy.Size = New System.Drawing.Size(147, 177)
         Me.ucrSelectColumnstoCopy.TabIndex = 8
@@ -56,6 +59,7 @@ Partial Class dlgDuplicateColumns
         'ucrReceiveColumns
         '
         Me.ucrReceiveColumns.Location = New System.Drawing.Point(285, 74)
+        Me.ucrReceiveColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiveColumns.Name = "ucrReceiveColumns"
         Me.ucrReceiveColumns.Selector = Nothing
         Me.ucrReceiveColumns.Size = New System.Drawing.Size(121, 104)
@@ -71,6 +75,8 @@ Partial Class dlgDuplicateColumns
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiveColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDuplicateColumns"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Duplicate_copy_paste_columns"
