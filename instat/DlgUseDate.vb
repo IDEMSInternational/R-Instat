@@ -59,8 +59,43 @@ Public Class dlgUseDate
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub DateFunctions()
+        If chkYear.Checked Then
+            ucrBase.clsRsyntax.SetFunction("year")
+        End If
+        If chkMonth.Checked Then
+            ucrBase.clsRsyntax.SetFunction("month")
+        End If
+        If chkWeek.Checked Then
+            ucrBase.clsRsyntax.SetFunction("week")
+        End If
+        If chkDayInYear.Checked Then
+            ucrBase.clsRsyntax.SetFunction("yday")
+        End If
+        If chkDayInMonth.Checked Then
+            ucrBase.clsRsyntax.SetFunction("mday")
+        End If
+        If chkWeekDay.Checked Then
+            ucrBase.clsRsyntax.SetFunction("wday")
+        End If
+        If chkDayYear.Checked Then
+            ucrBase.clsRsyntax.SetFunction("")
+        End If
+        If chkLeapYear.Checked Then
+            ucrBase.clsRsyntax.SetFunction("")
+        End If
+        If chkPentade.Checked Then
+            ucrBase.clsRsyntax.SetFunction("")
+        End If
+        If chkDecade.Checked Then
+            ucrBase.clsRsyntax.SetFunction("")
+        End If
 
     End Sub
 
-
+    Private Sub chkYear_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDecade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonth.CheckedChanged, chkPentade.CheckedChanged, chkWeek.CheckedChanged, chkWeekDay.CheckedChanged
+        DateFunctions()
+    End Sub
 End Class
