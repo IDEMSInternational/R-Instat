@@ -987,8 +987,8 @@ instat_object$set("public","make_date_yeardoy", function(data_name, year, doy, y
 }
 )
 
-instat_object$set("public","set_contrasts_of_factor", function(data_name, factor, new_contrasts) {
-  self$get_data_objects(data_name)$set_contrasts_of_factor(factor = factor, new_contrasts = new_contrasts)
+instat_object$set("public","set_contrasts_of_factor", function(data_name, col_name, new_contrasts) {
+  self$get_data_objects(data_name)$set_contrasts_of_factor(col_name = col_name, new_contrasts = new_contrasts)
 }
 )
 
