@@ -1652,10 +1652,14 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
 }
 )
 
-data_object$set("public","set_contrasts_of_factor", function(factor, new_contrasts) {
-  if(!factor %in% names(self$get_data_frame())) stop(factor, " not found in the data")
-  if(!is.factor(self$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
+data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts) {
+  if(!col_name %in% names(self$get_data_frame())) stop(col_name, " not found in the data")
+  if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
   #checks needed on contrasts before assigning
-  contrasts(private$data[[factor]]) <- new_contrasts
+  
+  if(!(new_contrasts %in% c("contr.treatment","contr.helmert","contr.poly","contr.sum"))){
+    stop(new_contrasts, " is not a valid contrast name")
+  }
+   contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
