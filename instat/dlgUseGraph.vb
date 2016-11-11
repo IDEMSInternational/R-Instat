@@ -47,6 +47,7 @@ Public Class dlgUseGraph
         ucrSaveGraphForUseGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        ucrGraphReceiver.strSelectorHeading = "Graphs"
     End Sub
     Private Sub ReOpenDialog()
 
