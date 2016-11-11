@@ -51,6 +51,7 @@ Public Class dlgTwoVariableUseModel
         ucrModel.IsReadOnly = True
         sdgSimpleRegOptions.SetRModelFunction(clsRCommand)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorUseModel.ucrAvailableDataFrames)
+        ucrReceiverUseModel.strSelectorHeading = "Models"
     End Sub
 
     Private Sub ReOpenDialog()
