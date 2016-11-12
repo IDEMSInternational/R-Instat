@@ -24,7 +24,7 @@ Public Class ucrAdditionalLayers
     Public bFirstLoad As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
-    Private strGlobalDataFrame As String
+    Public strGlobalDataFrame As String
     Public bSetGlobalIsDefault As Boolean
     'Deciding if the first layer needs to be used for global aesthetics. 
     'Question to be discussed: What is this variable about again ? it is linked with sdgPlots.bAdditionalLayersSetGlobal in sdgPLots.bLayersDefaultIsGolobal.
@@ -116,6 +116,7 @@ Public Class ucrAdditionalLayers
         clsRSyntax.SetOperatorParameter(False, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone())
 
         dlgGeneralForGraphics.TestOKEnabled()
+        dlgGeneralForGraphics.OptionsEnabled()
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
@@ -123,6 +124,9 @@ Public Class ucrAdditionalLayers
             clsRSyntax.RemoveOperatorParameter(lstLayers.SelectedItems(0).Text)
             lstLayerComplete.RemoveAt(lstLayers.SelectedIndices(0))
             lstLayers.Items.Remove(lstLayers.SelectedItems(0))
+
+            dlgGeneralForGraphics.TestOKEnabled()
+            dlgGeneralForGraphics.OptionsEnabled()
         End If
     End Sub
 

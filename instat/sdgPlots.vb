@@ -46,6 +46,13 @@ Public Class sdgPlots
         autoTranslate(Me)
     End Sub
 
+    Public Sub DisableLayersTab()
+        tabLayers.Enabled = False
+    End Sub
+
+    Public Sub EnableLayersTab()
+        tabLayers.Enabled = True
+    End Sub
     Public Sub SetDefaults()
         TitleDefaults()
 
