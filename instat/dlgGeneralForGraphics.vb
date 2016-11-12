@@ -51,6 +51,8 @@ Public Class dlgGeneralForGraphics
         ucrAdditionalLayers.SetRSyntax(ucrBase.clsRsyntax)
         ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax) 'Warning/question: sdgPlots is treated as sort of a ucr of the main. But then there is only one instance for all dialogues. How comes this doesn't causes problems ? The RSyntax of differetn dialogues should be linked through here ? Why does this not actually happen ?
+        'Warning: in some specific plots, GgplotFunction is set here as well. In others not...
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
         'For example, when a graph is saved, it is assigned to it's place in an R-instat object. If we had set bExcludeAssignedFunctionOutput to True, then we would never print the graph when running the script.
@@ -70,6 +72,9 @@ Public Class dlgGeneralForGraphics
         If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
             ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
         End If
+        sdgPlots.Reset()
+        'Warning/to be discussed: sdgPlots doesn't work like sdgLayerOptions. Information actually stays on the dialogue, as it cannot be editted on the general for graphics (yet) I think that sdgPlots should work like LayerOptions and be filled in at load, thanks to a setup function and setsettings sub. 
+        OptionsEnabled()
         TestOKEnabled()
     End Sub
 
@@ -77,6 +82,13 @@ Public Class dlgGeneralForGraphics
 
     End Sub
 
+    Public Sub OptionsEnabled() 'probably not necessary...
+        If ucrAdditionalLayers.lstLayers.Items.Count < 1 Then
+            cmdOptions.Enabled = False
+        Else
+            cmdOptions.Enabled = True
+        End If
+    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
@@ -167,5 +179,18 @@ Public Class dlgGeneralForGraphics
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+    End Sub
+
+    Private Sub SetUpPlotOptions()
+        'Note: in specific plots, this is in initialise dialog. Also, in set defaults, reset sdgPlots is called. sdgPlots is considered as a ucr on the main. What if we try sdgPlots to behave like sdgLayerOptions, using RSyntax. I think would be safer...
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        sdgPlots.SetGgplotFunction(clsRggplotFunction)
+        'Warning there is no dataframe on dlgGenerelForGraphics !! how do we setup the dataframe for facets ? Could we add facets on the main dlg, there we need to chose which dataframe to chose,then that one can be sent to plotOptions... I think we should actually do this after rethinking the link between sdgPlots and others...
+    End Sub
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.DisableLayersTab()
+        sdgPlots.SetDataFrame(strNewDataFrame:=ucrAdditionalLayers.strGlobalDataFrame) 'Warning: temporary solution...
+        sdgPlots.ShowDialog()
+        sdgPlots.EnableLayersTab()
     End Sub
 End Class
