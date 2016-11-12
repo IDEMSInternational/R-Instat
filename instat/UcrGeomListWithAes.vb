@@ -183,8 +183,11 @@ Public Class UcrGeomListWithParameters
                 End If
                 If clsCurrGeom.clsAesParameters(i).strIncludedDataTypes IsNot Nothing Then
                     lstAesParameterUcr(i).SetIncludedDataTypes(clsCurrGeom.clsAesParameters(i).strIncludedDataTypes)
-                ElseIf clsCurrGeom.clsAesParameters(i).strExcludedDataTypes IsNot Nothing Then
+                Else lstAesParameterUcr(i).RemoveIncludedMetadataProperty("class")
+                End If
+                If clsCurrGeom.clsAesParameters(i).strExcludedDataTypes IsNot Nothing Then
                     lstAesParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsAesParameters(i).strExcludedDataTypes)
+                Else lstAesParameterUcr(i).RemoveExcludedMetadataProperty("class")
                 End If
             Next
         Else 'If the current geom has not been populated, then an error has been made in the code
