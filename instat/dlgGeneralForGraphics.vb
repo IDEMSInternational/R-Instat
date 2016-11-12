@@ -74,7 +74,6 @@ Public Class dlgGeneralForGraphics
         End If
         sdgPlots.Reset()
         'Warning/to be discussed: sdgPlots doesn't work like sdgLayerOptions. Information actually stays on the dialogue, as it cannot be editted on the general for graphics (yet) I think that sdgPlots should work like LayerOptions and be filled in at load, thanks to a setup function and setsettings sub. 
-        OptionsEnabled()
         TestOKEnabled()
     End Sub
 
@@ -82,13 +81,6 @@ Public Class dlgGeneralForGraphics
 
     End Sub
 
-    Public Sub OptionsEnabled() 'probably not necessary...
-        If ucrAdditionalLayers.lstLayers.Items.Count < 1 Then
-            cmdOptions.Enabled = False
-        Else
-            cmdOptions.Enabled = True
-        End If
-    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
@@ -181,15 +173,9 @@ Public Class dlgGeneralForGraphics
         End If
     End Sub
 
-    Private Sub SetUpPlotOptions()
-        'Note: in specific plots, this is in initialise dialog. Also, in set defaults, reset sdgPlots is called. sdgPlots is considered as a ucr on the main. What if we try sdgPlots to behave like sdgLayerOptions, using RSyntax. I think would be safer...
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgPlots.SetGgplotFunction(clsRggplotFunction)
-        'Warning there is no dataframe on dlgGenerelForGraphics !! how do we setup the dataframe for facets ? Could we add facets on the main dlg, there we need to chose which dataframe to chose,then that one can be sent to plotOptions... I think we should actually do this after rethinking the link between sdgPlots and others...
-    End Sub
+    'Warning: never setup sdgPlots.SetGgplotFunction(clsRggplotFunction) ? same in scattered plot which works well. In dotplot, adds it in initialise, but then additional layers don't work ...
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.DisableLayersTab()
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrAdditionalLayers.strGlobalDataFrame) 'Warning: temporary solution...
         sdgPlots.ShowDialog()
         sdgPlots.EnableLayersTab()
     End Sub
