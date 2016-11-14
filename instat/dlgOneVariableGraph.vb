@@ -89,7 +89,7 @@ Public Class dlgOneVariableGraph
                 clsRaesFunction.ClearParameters()
                 clsRgeom_Function.SetRCommand(sdgOneVarGraph.strNumericGeomFunction)
 
-                If Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Boxplot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Dot Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Point Plot") Then
+                If Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Boxplot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Dot Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Point Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Jitter Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Violin Plot") Then
                     clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
                     clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
                 ElseIf Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Histogram" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Density Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Frequency Polygon") Then
