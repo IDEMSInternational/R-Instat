@@ -31,6 +31,7 @@ Partial Class dlgOneVariableGraph
         Me.rdoCombineGraph = New System.Windows.Forms.RadioButton()
         Me.rdoSingleGraphs = New System.Windows.Forms.RadioButton()
         Me.rdoFacets = New System.Windows.Forms.RadioButton()
+        Me.chkFlipCoordinates = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'ucrSelectorOneVarGraph
@@ -117,11 +118,22 @@ Partial Class dlgOneVariableGraph
         Me.rdoFacets.Text = "Facets"
         Me.rdoFacets.UseVisualStyleBackColor = True
         '
+        'chkFlipCoordinates
+        '
+        Me.chkFlipCoordinates.AutoSize = True
+        Me.chkFlipCoordinates.Location = New System.Drawing.Point(237, 240)
+        Me.chkFlipCoordinates.Name = "chkFlipCoordinates"
+        Me.chkFlipCoordinates.Size = New System.Drawing.Size(101, 17)
+        Me.chkFlipCoordinates.TabIndex = 11
+        Me.chkFlipCoordinates.Text = "Flip Coordinates"
+        Me.chkFlipCoordinates.UseVisualStyleBackColor = True
+        '
         'dlgOneVariableGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 333)
+        Me.Controls.Add(Me.chkFlipCoordinates)
         Me.Controls.Add(Me.rdoFacets)
         Me.Controls.Add(Me.rdoSingleGraphs)
         Me.Controls.Add(Me.rdoCombineGraph)
@@ -151,4 +163,5 @@ Partial Class dlgOneVariableGraph
     Friend WithEvents rdoCombineGraph As RadioButton
     Friend WithEvents rdoSingleGraphs As RadioButton
     Friend WithEvents rdoFacets As RadioButton
+    Friend WithEvents chkFlipCoordinates As CheckBox
 End Class

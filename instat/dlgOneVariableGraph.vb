@@ -177,4 +177,15 @@ Public Class dlgOneVariableGraph
     Private Sub ucrOneVarGraphSave_ContentsChanged() Handles ucrOneVarGraphSave.ContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
+        Dim clsTempRFunc As New RFunction
+
+        If chkFlipCoordinates.Checked = True Then
+            clsTempRFunc.SetRCommand("coord_flip")
+            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
+        Else
+            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
+        End If
+    End Sub
 End Class
