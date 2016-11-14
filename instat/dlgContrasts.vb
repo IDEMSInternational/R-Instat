@@ -62,9 +62,9 @@ Public Class dlgContrasts
 
     Private Sub ucrReceiverForContrasts_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForContrasts.SelectionChanged
         If Not ucrReceiverForContrasts.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("factor", ucrReceiverForContrasts.GetVariableNames)
+            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames)
         Else
-            ucrBase.clsRsyntax.RemoveParameter("factor")
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
         TestOKEnabled()
     End Sub
