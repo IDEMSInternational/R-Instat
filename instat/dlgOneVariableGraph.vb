@@ -43,6 +43,7 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.Reset()
         sdgOneVarGraph.SetDefaults()
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
+        chkFlipCoordinates.Checked = False
         TestOkEnabled()
     End Sub
 
@@ -89,7 +90,7 @@ Public Class dlgOneVariableGraph
                 clsRaesFunction.ClearParameters()
                 clsRgeom_Function.SetRCommand(sdgOneVarGraph.strNumericGeomFunction)
 
-                If Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Boxplot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Dot Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Point Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Jitter Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Violin Plot") Then
+                If Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Boxplot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Dot Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Point Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Jitter Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Violin Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Boxplot + Jitter" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Violin +Jitter" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Violin + Boxplot") Then
                     clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
                     clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
                 ElseIf Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Histogram" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Density Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Frequency Polygon") Then
@@ -184,8 +185,10 @@ Public Class dlgOneVariableGraph
         If chkFlipCoordinates.Checked = True Then
             clsTempRFunc.SetRCommand("coord_flip")
             ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
+            ucrBase.clsRsyntax.AddParameter("coord_flip", "TRUE")
         Else
             ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
+            ucrBase.clsRsyntax.RemoveParameter("coord_flip")
         End If
     End Sub
 End Class

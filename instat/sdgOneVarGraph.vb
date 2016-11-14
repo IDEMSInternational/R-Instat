@@ -100,15 +100,15 @@ Public Class sdgOneVarGraph
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
 
             Case "Boxplot + Jitter"
-                strNumericGeomFunction = "geom_boxplot" & "+" & "geom_jitter"
+                strNumericGeomFunction = "geom_boxplot()" & " + " & "geom_jitter"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
 
             Case "Violin +Jitter"
-                strNumericGeomFunction = "geom_violin" & "+" & "geom_jitter"
+                strNumericGeomFunction = "geom_violin()" & " + " & "geom_jitter"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
 
             Case "Violin + Boxplot"
-                strNumericGeomFunction = "geom_boxplot" & "+" & "geom_violin"
+                strNumericGeomFunction = "geom_boxplot()" & " + " & "geom_violin"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
             Case Else
                 clsRsyntax.RemoveParameter("numeric")
