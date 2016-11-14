@@ -1680,9 +1680,9 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
      contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
-data_object$set("public","Split_Date", function(data_name,col_names="", week=FALSE, month=FALSE, year=FALSE,day=FALSE, use_col_name_as_prefix = TRUE) {
+data_object$set("public","split_date", function(data_name,col_names="", week=FALSE, month=FALSE, year=FALSE,day=FALSE, use_col_name_as_prefix = TRUE) {
   col_data <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
-if(self$get_data_type(col_names=col_names) != "Date") stop("This column must be a date or time!")
+if(self$get_data_type(col_name=col_names) != "Date") stop("This column must be a date or time!")
  
   if(week==TRUE){
     week=week(col_data)

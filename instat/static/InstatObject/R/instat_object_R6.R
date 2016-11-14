@@ -1032,7 +1032,7 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
 }
 )
 
-instat_object$set("public","Split_Date", function(data_name, col_names="", year=FALSE, month=FALSE, day=FALSE, week=FALSE,use_col_name_as_prefix = TRUE ) {
-  self$get_data_objects(data_name)$Split_Date(year = year,col_names=col_names, month = month, day = day, week=week,use_col_name_as_prefix = use_col_name_as_prefix )
+instat_object$set("public","split_date", function(data_name, col_names="", year=FALSE, month=FALSE, day=FALSE, week=FALSE,use_col_name_as_prefix = TRUE ) {
+  self$get_data_objects(data_name)$split_date(year = year,col_names=col_names, month = month, day = day, week=week,use_col_name_as_prefix = use_col_name_as_prefix )
 }
 )
