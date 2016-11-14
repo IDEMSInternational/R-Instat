@@ -38,7 +38,6 @@ Public Class dlgCorrelation
         ucrReceiverSecondColumn.SetDataType("numeric")
         ucrSelectorCorrelation.Reset()
         ucrSelectorCorrelation.Focus()
-        ucrReceiverMultipleColumns.SetSingleTypeStatus(True)
         ucrReceiverMultipleColumns.SetDataType("numeric")
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
