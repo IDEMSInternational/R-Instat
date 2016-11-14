@@ -187,7 +187,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.EnableLayersTab()
     End Sub
 
-    Private Sub ucrAdditionalLayers_OkOrReturnInDanger() Handles ucrAdditionalLayers.OkOrReturnInDanger
+    Private Sub ucrAdditionalLayers_NumberOfLayersChanged() Handles ucrAdditionalLayers.NumberOfLayersChanged
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         TestOKEnabled()
     End Sub
