@@ -427,16 +427,8 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub
-    Private Sub TestReturnEnabled()
-        Dim bTemp As Boolean = False
-        For Each bTemp In ucrAdditionalLayers.lstLayerComplete
-            If Not bTemp Then
-                Exit For
-            End If
-        Next
-        ucrBaseSubdialog.cmdReturn.Enabled = bTemp 'Task/ question ?: should add a method in the ucrBaseSubdialog ...
-    End Sub
-    Private Sub ucrPlotsAdditionalLayers_OkOrReturnInDanger() Handles ucrPlotsAdditionalLayers.OkOrReturnInDanger
-        TestReturnEnabled()
-    End Sub
+
+
+    'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... OR introduce a TestReturnEnabled on ucrBaseSubdialog. Would perhaps be better to have a cancel button in that case ? ...
+
 End Class
