@@ -81,12 +81,12 @@ Public Class dlgRegressionSimple
         ucrModelName.Reset()
         ucrModelPreview.SetName("")
         SetRCode()
-        TestOKEnabled()
         DistributionsOffered()
         sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
         sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
         SetEnableDists()
+        TestOKEnabled()
     End Sub
 
     Private Sub LM()
@@ -254,8 +254,8 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.ShowDialog()
         Display()
+        sdgSimpleRegOptions.ShowDialog()
     End Sub
 
     Public Sub ConvertToVariate()
