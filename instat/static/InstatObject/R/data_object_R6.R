@@ -1652,15 +1652,27 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
 }
 )
 
-data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, matrix = NA) {
+data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, contr_vector = NA) {
   if(!col_name %in% names(self$get_data_frame())) stop(col_name, " not found in the data")
   if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
   #checks needed on contrasts before assigning
-  
+  factor_col=self$get_columns_from_data(col_name)
   if(!(new_contrasts %in% c("contr.treatment","contr.helmert","contr.poly","contr.sum", "user_defined"))){
     stop(new_contrasts, " is not a valid contrast name")
   }  else if (!is.character(new_contrasts)) {
     stop("New column name must be of type: character")
+  }
+  
+  if((new_contrast=="user_defined")){
+   if (!is.na(contr_vector)){
+   contr_col=nlevels(factor_col)-1
+   contr_row=nlevels(factor_col)
+   if (length(contr_vector)==contr_col*contr_col){
+    contr_matrix<-as.matrix(contr_vector,  contr_row, contr_col)
+   } else {
+   stop("Specify correct number of rows and columns in the defined matrix")
+    }
+  }
   }
 
      contrasts(private$data[[col_name]]) <- new_contrasts
