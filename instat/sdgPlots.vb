@@ -427,6 +427,16 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub
-
-
+    Private Sub TestReturnEnabled()
+        Dim bTemp As Boolean = False
+        For Each bTemp In ucrAdditionalLayers.lstLayerComplete
+            If Not bTemp Then
+                Exit For
+            End If
+        Next
+        ucrBaseSubdialog.cmdReturn.Enabled = bTemp 'Task/ question ?: should add a method in the ucrBaseSubdialog ...
+    End Sub
+    Private Sub ucrPlotsAdditionalLayers_OkOrReturnInDanger() Handles ucrPlotsAdditionalLayers.OkOrReturnInDanger
+        TestReturnEnabled()
+    End Sub
 End Class
