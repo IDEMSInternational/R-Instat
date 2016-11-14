@@ -33,13 +33,9 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Public Sub TestOKEnabled()
-        If ((Not ucrReceiverFirstVar.IsEmpty()) And (Not ucrReceiverSecondVar.IsEmpty())) Then
-            If ((strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType = "factor")) Then
-                If sdgSummaries.strSummariesParameter = "c()" Then
-                    ucrBaseDescribeTwoVar.OKEnabled(False)
-                Else
-                    ucrBaseDescribeTwoVar.OKEnabled(True)
-                End If
+        If ((Not ucrReceiverFirstVar.IsEmpty()) AndAlso (Not ucrReceiverSecondVar.IsEmpty())) Then
+            If ((strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType = "factor")) AndAlso sdgSummaries.strSummariesParameter = "c()" Then
+                ucrBaseDescribeTwoVar.OKEnabled(False)
             Else
                 ucrBaseDescribeTwoVar.OKEnabled(True)
             End If

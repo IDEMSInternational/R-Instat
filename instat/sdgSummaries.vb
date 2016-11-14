@@ -90,7 +90,7 @@ Public Class sdgSummaries
     Public Sub TestSummaries()
         SummariesParameters()
         If strSummariesParameter = "c()" Then
-            MsgBox("OK will be disabled until you check atleast one summary.")
+            MsgBox("OK will be disabled until you check at least one summary.")
         End If
     End Sub
 End Class
