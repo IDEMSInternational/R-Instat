@@ -44,7 +44,7 @@ Public Class sdgOneVarGraph
 
     Public Sub InitialiseDialog()
         clsCoordPolarFunction.SetRCommand("coord_polar")
-        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
+        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon", "Violin Plot", "Jitter Plot", "Boxplot + Jitter", "Violin +Jitter", "Violin + Boxplot"})
         ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         nudNumberofColumns.Maximum = 10
         nudNumberofColumns.Minimum = 1
@@ -69,21 +69,48 @@ Public Class sdgOneVarGraph
             Case "Boxplot"
                 strNumericGeomFunction = "geom_boxplot"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
             Case "Histogram"
                 strNumericGeomFunction = "geom_histogram"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
             Case "Dot Plot"
                 strNumericGeomFunction = "geom_dotplot"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
             Case "Point Plot"
                 strNumericGeomFunction = "geom_point"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
             Case "Density Plot"
                 strNumericGeomFunction = "geom_density"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
             Case "Frequency Polygon"
                 strNumericGeomFunction = "geom_freqpoly"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
+            Case "Violin Plot"
+                strNumericGeomFunction = "geom_violin"
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
+
+            Case "Jitter Plot"
+                strNumericGeomFunction = ""
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
+            Case "Boxplot + Jitter"
+                strNumericGeomFunction = ""
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
+            Case "Violin +Jitter"
+                strNumericGeomFunction = ""
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
+            Case "Violin + Boxplot"
+                strNumericGeomFunction = ""
+                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
+
             Case Else
                 clsRsyntax.RemoveParameter("numeric")
         End Select
