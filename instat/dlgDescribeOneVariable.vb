@@ -31,11 +31,21 @@ Public Class dlgDescribeOneVariable
 
     Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.ShowDialog()
+        sdgSummaries.TestSummaries()
+        TestOKEnabled()
     End Sub
 
     Public Sub TestOKEnabled()
         If Not ucrReceiverDescribeOneVar.IsEmpty() Then
-            ucrBaseDescribeOneVar.OKEnabled(True)
+            If chkCustomise.Checked Then
+                If sdgSummaries.strSummariesParameter = "c()" Then
+                    ucrBaseDescribeOneVar.OKEnabled(False)
+                Else
+                    ucrBaseDescribeOneVar.OKEnabled(True)
+                End If
+            Else
+                ucrBaseDescribeOneVar.OKEnabled(True)
+            End If
         Else
             ucrBaseDescribeOneVar.OKEnabled(False)
         End If
@@ -114,6 +124,7 @@ Public Class dlgDescribeOneVariable
 
     Private Sub chkCustomise_CheckedChanged(sender As Object, e As EventArgs) Handles chkCustomise.CheckedChanged
         ChooseFunction()
+        TestOKEnabled()
     End Sub
 
     Private Sub StoreResultsParamenter()
