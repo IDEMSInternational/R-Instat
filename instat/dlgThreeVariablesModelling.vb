@@ -44,10 +44,7 @@ Public Class dlgThreeVariableModelling
         ucrResponse.Selector = ucrSelectorThreeVariableModelling
         ucrFirstExplanatory.Selector = ucrSelectorThreeVariableModelling
         ucrSecondExplanatory.Selector = ucrSelectorThreeVariableModelling
-        ucrModelOperator.cboInput.Items.Add("+")
-        ucrModelOperator.cboInput.Items.Add("*")
-        ucrModelOperator.cboInput.Items.Add(":")
-        ucrModelOperator.cboInput.Items.Add("/")
+        ucrModelOperator.SetItems({"+", "*", ":", "/"})
         ucrFamily.SetGLMDistributions()
         ucrModelName.SetDataFrameSelector(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("reg")
@@ -63,8 +60,6 @@ Public Class dlgThreeVariableModelling
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
         sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         AssignModelName()
-        ModelOperator()
-        TestOKEnabled()
         ucrModelName.SetValidationTypeAsRVariable()
     End Sub
 
@@ -94,10 +89,10 @@ Public Class dlgThreeVariableModelling
         ucrModelPreview.Reset()
         ResponseConvert()
         ModelOperator()
-        TestOKEnabled()
         sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
         sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        TestOKEnabled()
     End Sub
 
     Public Sub TestOKEnabled()
@@ -114,10 +109,6 @@ Public Class dlgThreeVariableModelling
     Private Sub ucrSelectorThreeVariableModelling_DataFrameChanged() Handles ucrSelectorThreeVariableModelling.DataFrameChanged
         ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.clsCurrDataFrame)
         AssignModelName()
-    End Sub
-
-    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.ShowDialog()
     End Sub
 
     Public Sub ResponseConvert()
