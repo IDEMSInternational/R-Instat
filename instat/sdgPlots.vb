@@ -430,5 +430,5 @@ Public Class sdgPlots
 
 
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... OR introduce a TestReturnEnabled on ucrBaseSubdialog. Would perhaps be better to have a cancel button in that case ? ...
-
+    'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
 End Class
