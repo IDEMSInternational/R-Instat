@@ -1652,14 +1652,40 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
 }
 )
 
-data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts) {
+data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, matrix = NA) {
   if(!col_name %in% names(self$get_data_frame())) stop(col_name, " not found in the data")
   if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
   #checks needed on contrasts before assigning
   
-  if(!(new_contrasts %in% c("contr.treatment","contr.helmert","contr.poly","contr.sum"))){
+  if(!(new_contrasts %in% c("contr.treatment","contr.helmert","contr.poly","contr.sum", "user_defined"))){
     stop(new_contrasts, " is not a valid contrast name")
+  }  else if (!is.character(new_contrasts)) {
+    stop("New column name must be of type: character")
   }
-   contrasts(private$data[[col_name]]) <- new_contrasts
+
+     contrasts(private$data[[col_name]]) <- new_contrasts
+}
+)
+data_object$set("public","Split_Date", function(data_name,col_names="", week=FALSE, month=FALSE, year=FALSE,day=FALSE, use_col_name_as_prefix = TRUE) {
+  col_data <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
+  if(!(is.Date(col_data)))(stop("This column must be a date!"))
+    
+ 
+  if(week==TRUE){
+    week=week(col_data)
+    self$add_columns_to_data(col_name = "week", col_data = week, use_col_name_as_prefix = use_col_name_as_prefix)
+   }
+  if(month==TRUE){
+    month=month(col_data)
+    self$add_columns_to_data(col_name = "month", col_data = month,use_col_name_as_prefix = use_col_name_as_prefix)
+  }
+  if(year==TRUE){
+    year=year(col_data)
+    self$add_columns_to_data(col_name = "year", col_data = year, use_col_name_as_prefix = use_col_name_as_prefix)
+  }
+  if(day==TRUE){
+    day=day(col_data)
+    self$add_columns_to_data(col_name = "day", col_data = day, use_col_name_as_prefix = use_col_name_as_prefix)
+  }
 }
 )
