@@ -1663,8 +1663,8 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
     stop("New column name must be of type: character")
   }
   
-  if((new_contrast=="user_defined")){
-   if (!is.na(contr_vector)){
+  if(new_contrast=="user_defined"){
+   if (!is.na(contr_vector) & is.numeric(contr_vector)){
    contr_col=nlevels(factor_col)-1
    contr_row=nlevels(factor_col)
    if (length(contr_vector)==contr_col*contr_col){
@@ -1680,24 +1680,24 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 )
 data_object$set("public","Split_Date", function(data_name,col_names="", week=FALSE, month=FALSE, year=FALSE,day=FALSE, use_col_name_as_prefix = TRUE) {
   col_data <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
-  if(!(is.Date(col_data)))(stop("This column must be a date!"))
-    
- 
+  if(!is.Date(col_data) | !is.period(col_data)| !is.POSIXt(col_data) | !is.POSIXct(col_data) | !is.POSIXlt(col_data)) (stop("This column must be a date or time!"))
   if(week==TRUE){
     week=week(col_data)
     self$add_columns_to_data(col_name = "week", col_data = week, use_col_name_as_prefix = use_col_name_as_prefix)
-   }
+}
   if(month==TRUE){
     month=month(col_data)
     self$add_columns_to_data(col_name = "month", col_data = month,use_col_name_as_prefix = use_col_name_as_prefix)
-  }
+}
   if(year==TRUE){
     year=year(col_data)
     self$add_columns_to_data(col_name = "year", col_data = year, use_col_name_as_prefix = use_col_name_as_prefix)
-  }
+}
   if(day==TRUE){
     day=day(col_data)
     self$add_columns_to_data(col_name = "day", col_data = day, use_col_name_as_prefix = use_col_name_as_prefix)
-  }
+}
+  #TO Do
+  #Implement option for the day of the year
 }
 )
