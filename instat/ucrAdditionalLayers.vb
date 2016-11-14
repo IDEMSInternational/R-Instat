@@ -26,6 +26,7 @@ Public Class ucrAdditionalLayers
     Public iLayerIndex As Integer
     Private strGlobalDataFrame As String
     Public bSetGlobalIsDefault As Boolean
+    Public Event OkOrReturnInDanger() 'This event is raised when the number of Layers in the lstLayers on ucrAdditionalLayers has been changed, then handled by testOk/ReturnEnabled On sdgPlots. 
     'Deciding if the first layer needs to be used for global aesthetics. 
     'Question to be discussed: What is this variable about again ? it is linked with sdgPlots.bAdditionalLayersSetGlobal in sdgPLots.bLayersDefaultIsGolobal.
 
@@ -115,7 +116,9 @@ Public Class ucrAdditionalLayers
 
         clsRSyntax.SetOperatorParameter(False, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone())
         'Note: as the GeomFunction on sdgLayerOptions will be edited for different layers, it cannot be linked like clsGgplotFunction would, it needs to be cloned.
-        dlgGeneralForGraphics.TestOKEnabled()
+
+        'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
+        RaiseEvent OkOrReturnInDanger()
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
@@ -124,7 +127,8 @@ Public Class ucrAdditionalLayers
             lstLayerComplete.RemoveAt(lstLayers.SelectedIndices(0))
             lstLayers.Items.Remove(lstLayers.SelectedItems(0))
 
-            dlgGeneralForGraphics.TestOKEnabled()
+            'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
+            RaiseEvent OkOrReturnInDanger()
         End If
     End Sub
 
