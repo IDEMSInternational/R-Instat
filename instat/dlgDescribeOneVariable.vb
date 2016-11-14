@@ -36,18 +36,10 @@ Public Class dlgDescribeOneVariable
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not ucrReceiverDescribeOneVar.IsEmpty() Then
-            If chkCustomise.Checked Then
-                If sdgSummaries.strSummariesParameter = "c()" Then
-                    ucrBaseDescribeOneVar.OKEnabled(False)
-                Else
-                    ucrBaseDescribeOneVar.OKEnabled(True)
-                End If
-            Else
-                ucrBaseDescribeOneVar.OKEnabled(True)
-            End If
-        Else
+        If ucrReceiverDescribeOneVar.IsEmpty() OrElse (chkCustomise.Checked AndAlso sdgSummaries.strSummariesParameter = "c()") Then
             ucrBaseDescribeOneVar.OKEnabled(False)
+        Else
+            ucrBaseDescribeOneVar.OKEnabled(True)
         End If
     End Sub
 
