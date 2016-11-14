@@ -32,14 +32,17 @@ Public Class dlgDescribeTwoVariable
         autoTranslate(Me)
     End Sub
 
-    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgDescribeDisplay.GrpBoxEnable()
-        sdgDescribeDisplay.ShowDialog()
-    End Sub
-
     Public Sub TestOKEnabled()
         If ((Not ucrReceiverFirstVar.IsEmpty()) And (Not ucrReceiverSecondVar.IsEmpty())) Then
-            ucrBaseDescribeTwoVar.OKEnabled(True)
+            If ((strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType = "factor")) Then
+                If sdgSummaries.strSummariesParameter = "c()" Then
+                    ucrBaseDescribeTwoVar.OKEnabled(False)
+                Else
+                    ucrBaseDescribeTwoVar.OKEnabled(True)
+                End If
+            Else
+                ucrBaseDescribeTwoVar.OKEnabled(True)
+            End If
         Else
             ucrBaseDescribeTwoVar.OKEnabled(False)
         End If
@@ -64,8 +67,9 @@ Public Class dlgDescribeTwoVariable
         sdgDescribeDisplay.SetFreqDispOptions(clsRFreqTables)
         sdgSummaries.SetDefaults()
         sdgDescribeDisplay.SetDefaults()
+        ucrReceiverFirstVar.SetMeAsReceiver()
         ucrSelectorDescribeTwoVar.Reset()
-        ucrReceiverFirstVar.Focus()
+        ucrSelectorDescribeTwoVar.Focus()
         StoreResultsParamenter()
         OutputOption()
         TestOKEnabled()
@@ -91,6 +95,13 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.ShowDialog()
+        sdgSummaries.TestSummaries()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgDescribeDisplay.GrpBoxEnable()
+        sdgDescribeDisplay.ShowDialog()
     End Sub
 
     Private Sub Correlation()
@@ -153,14 +164,6 @@ Public Class dlgDescribeTwoVariable
         clsRAnova.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-    Private Sub uucrReceiverSecondVar_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondVar.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrReceiverFirstVar_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstVar.SelectionChanged
-
-    End Sub
-
     Private Sub ucrReceiverFirstVar_SelectionChanged() Handles ucrReceiverFirstVar.SelectionChanged
         If Not ucrReceiverFirstVar.IsEmpty Then
             clsRCustomSummary.AddParameter("columns_to_summarise", ucrReceiverFirstVar.GetVariableNames())
@@ -171,7 +174,7 @@ Public Class dlgDescribeTwoVariable
         TestOKEnabled()
     End Sub
 
-    Private Sub uucrReceiverSecondVar_SelectionChanged() Handles ucrReceiverSecondVar.SelectionChanged
+    Private Sub ucrReceiverSecondVar_SelectionChanged() Handles ucrReceiverSecondVar.SelectionChanged
         If Not ucrReceiverSecondVar.IsEmpty Then
             clsRCustomSummary.AddParameter("factors", ucrReceiverSecondVar.GetVariableNames)
         Else
