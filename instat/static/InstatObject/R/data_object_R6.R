@@ -1118,6 +1118,8 @@ data_object$set("public", "get_data_type", function(col_name = "") {
     type = "logical"
   }
   else if(is.Date(private$data[[col_name]])){
+    # #TODO
+    #we can add options for other forms of dates serch as POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects.
     type = "Date"
   }
   else if(is.numeric(private$data[[col_name]])) {
@@ -1680,7 +1682,8 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 )
 data_object$set("public","Split_Date", function(data_name,col_names="", week=FALSE, month=FALSE, year=FALSE,day=FALSE, use_col_name_as_prefix = TRUE) {
   col_data <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
-  if(!is.Date(col_data) | !is.period(col_data)| !is.POSIXt(col_data) | !is.POSIXct(col_data) | !is.POSIXlt(col_data)) (stop("This column must be a date or time!"))
+if(self$get_data_type(col_names=col_names) != "Date") stop("This column must be a date or time!")
+ 
   if(week==TRUE){
     week=week(col_data)
     self$add_columns_to_data(col_name = "week", col_data = week, use_col_name_as_prefix = use_col_name_as_prefix)
