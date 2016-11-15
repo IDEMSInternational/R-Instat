@@ -145,6 +145,15 @@ Partial Class dlgCalculator
         Me.cmdBeta = New System.Windows.Forms.Button()
         Me.chkShowArguments = New System.Windows.Forms.CheckBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.grpRows = New System.Windows.Forms.GroupBox()
+        Me.cmdLag = New System.Windows.Forms.Button()
+        Me.cmdLead = New System.Windows.Forms.Button()
+        Me.cmdpmax = New System.Windows.Forms.Button()
+        Me.cmdPMin = New System.Windows.Forms.Button()
+        Me.cmdcummax = New System.Windows.Forms.Button()
+        Me.cmdcummin = New System.Windows.Forms.Button()
+        Me.cmdcumsum = New System.Windows.Forms.Button()
+        Me.cmdpercentrank = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
@@ -158,6 +167,7 @@ Partial Class dlgCalculator
         Me.grpMaths.SuspendLayout()
         Me.grpLogical.SuspendLayout()
         Me.grpProbabilty.SuspendLayout()
+        Me.grpRows.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -432,7 +442,7 @@ Partial Class dlgCalculator
         Me.grpStrings.Controls.Add(Me.cmdCountstrings)
         Me.grpStrings.Controls.Add(Me.cmdLocate)
         Me.grpStrings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpStrings.Location = New System.Drawing.Point(430, 66)
+        Me.grpStrings.Location = New System.Drawing.Point(430, 69)
         Me.grpStrings.Name = "grpStrings"
         Me.grpStrings.Size = New System.Drawing.Size(163, 146)
         Me.grpStrings.TabIndex = 150
@@ -1141,7 +1151,7 @@ Partial Class dlgCalculator
         Me.grpLogical.Controls.Add(Me.cmdNot)
         Me.grpLogical.Controls.Add(Me.cmdNotEqualsTo)
         Me.grpLogical.Controls.Add(Me.cmdEquivalent)
-        Me.grpLogical.Location = New System.Drawing.Point(431, 71)
+        Me.grpLogical.Location = New System.Drawing.Point(431, 68)
         Me.grpLogical.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpLogical.Name = "grpLogical"
         Me.grpLogical.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -1332,7 +1342,7 @@ Partial Class dlgCalculator
         Me.grpProbabilty.Controls.Add(Me.cmdLfact)
         Me.grpProbabilty.Controls.Add(Me.cmdTrigamma)
         Me.grpProbabilty.Controls.Add(Me.cmdBeta)
-        Me.grpProbabilty.Location = New System.Drawing.Point(431, 65)
+        Me.grpProbabilty.Location = New System.Drawing.Point(431, 69)
         Me.grpProbabilty.Name = "grpProbabilty"
         Me.grpProbabilty.Size = New System.Drawing.Size(325, 148)
         Me.grpProbabilty.TabIndex = 152
@@ -1557,6 +1567,96 @@ Partial Class dlgCalculator
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+        'grpRows
+        '
+        Me.grpRows.Controls.Add(Me.cmdpercentrank)
+        Me.grpRows.Controls.Add(Me.cmdcumsum)
+        Me.grpRows.Controls.Add(Me.cmdcummin)
+        Me.grpRows.Controls.Add(Me.cmdcummax)
+        Me.grpRows.Controls.Add(Me.cmdPMin)
+        Me.grpRows.Controls.Add(Me.cmdpmax)
+        Me.grpRows.Controls.Add(Me.cmdLead)
+        Me.grpRows.Controls.Add(Me.cmdLag)
+        Me.grpRows.Location = New System.Drawing.Point(429, 69)
+        Me.grpRows.Name = "grpRows"
+        Me.grpRows.Size = New System.Drawing.Size(137, 147)
+        Me.grpRows.TabIndex = 173
+        Me.grpRows.TabStop = False
+        Me.grpRows.Text = "Rows"
+        '
+        'cmdLag
+        '
+        Me.cmdLag.Location = New System.Drawing.Point(5, 15)
+        Me.cmdLag.Name = "cmdLag"
+        Me.cmdLag.Size = New System.Drawing.Size(62, 30)
+        Me.cmdLag.TabIndex = 174
+        Me.cmdLag.Text = "lag"
+        Me.cmdLag.UseVisualStyleBackColor = True
+        '
+        'cmdLead
+        '
+        Me.cmdLead.Location = New System.Drawing.Point(67, 15)
+        Me.cmdLead.Name = "cmdLead"
+        Me.cmdLead.Size = New System.Drawing.Size(62, 30)
+        Me.cmdLead.TabIndex = 175
+        Me.cmdLead.Text = "lead"
+        Me.cmdLead.UseVisualStyleBackColor = True
+        '
+        'cmdpmax
+        '
+        Me.cmdpmax.Location = New System.Drawing.Point(5, 45)
+        Me.cmdpmax.Name = "cmdpmax"
+        Me.cmdpmax.Size = New System.Drawing.Size(62, 30)
+        Me.cmdpmax.TabIndex = 176
+        Me.cmdpmax.Text = "pmax"
+        Me.cmdpmax.UseVisualStyleBackColor = True
+        '
+        'cmdPMin
+        '
+        Me.cmdPMin.Location = New System.Drawing.Point(67, 45)
+        Me.cmdPMin.Name = "cmdPMin"
+        Me.cmdPMin.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPMin.TabIndex = 177
+        Me.cmdPMin.Text = "pmin"
+        Me.cmdPMin.UseVisualStyleBackColor = True
+        '
+        'cmdcummax
+        '
+        Me.cmdcummax.Location = New System.Drawing.Point(5, 75)
+        Me.cmdcummax.Name = "cmdcummax"
+        Me.cmdcummax.Size = New System.Drawing.Size(62, 30)
+        Me.cmdcummax.TabIndex = 178
+        Me.cmdcummax.Text = "cummax"
+        Me.cmdcummax.UseVisualStyleBackColor = True
+        '
+        'cmdcummin
+        '
+        Me.cmdcummin.Location = New System.Drawing.Point(67, 75)
+        Me.cmdcummin.Name = "cmdcummin"
+        Me.cmdcummin.Size = New System.Drawing.Size(62, 30)
+        Me.cmdcummin.TabIndex = 179
+        Me.cmdcummin.Text = "cummin"
+        Me.cmdcummin.UseVisualStyleBackColor = True
+        '
+        'cmdcumsum
+        '
+        Me.cmdcumsum.Location = New System.Drawing.Point(5, 105)
+        Me.cmdcumsum.Name = "cmdcumsum"
+        Me.cmdcumsum.Size = New System.Drawing.Size(62, 30)
+        Me.cmdcumsum.TabIndex = 180
+        Me.cmdcumsum.Text = "cumsum"
+        Me.cmdcumsum.UseVisualStyleBackColor = True
+        '
+        'cmdpercentrank
+        '
+        Me.cmdpercentrank.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
+        Me.cmdpercentrank.Location = New System.Drawing.Point(67, 105)
+        Me.cmdpercentrank.Name = "cmdpercentrank"
+        Me.cmdpercentrank.Size = New System.Drawing.Size(62, 30)
+        Me.cmdpercentrank.TabIndex = 181
+        Me.cmdpercentrank.Text = "percent_rank"
+        Me.cmdpercentrank.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.IsReadOnly = False
@@ -1616,6 +1716,7 @@ Partial Class dlgCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(552, 339)
+        Me.Controls.Add(Me.grpRows)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpProbabilty)
@@ -1650,6 +1751,7 @@ Partial Class dlgCalculator
         Me.grpMaths.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
+        Me.grpRows.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1784,4 +1886,13 @@ Partial Class dlgCalculator
     Friend WithEvents cmdQuotes As Button
     Friend WithEvents cmdSquareBrackets As Button
     Friend WithEvents cmdHelp As Button
+    Friend WithEvents grpRows As GroupBox
+    Friend WithEvents cmdpercentrank As Button
+    Friend WithEvents cmdcumsum As Button
+    Friend WithEvents cmdcummin As Button
+    Friend WithEvents cmdcummax As Button
+    Friend WithEvents cmdPMin As Button
+    Friend WithEvents cmdpmax As Button
+    Friend WithEvents cmdLead As Button
+    Friend WithEvents cmdLag As Button
 End Class
