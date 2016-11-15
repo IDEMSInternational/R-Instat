@@ -1683,29 +1683,29 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 }
 )
 data_object$set("public","split_date", function(data_name, col_name = "", week=FALSE, month=FALSE, year = FALSE, day = FALSE) {
-  col_data <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
-if(self$get_data_type(col_name=col_name) != "Date") stop("This column must be a date or time!")
+  col_data <- self$get_columns_from_data(col_names = col_name, use_current_filter = FALSE)
+  if(self$get_data_type(col_name = col_name) != "Date") stop("This column must be a date or time!")
  
-  if(!week){
-    week=week(col_data)
-	col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = week, use_col_name_as_prefix = use_col_name_as_prefix)
-}
-  if(!month){
-    month=month(col_data)
-	col_name <- next_default_item(prefix = "month", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month, use_col_name_as_prefix = use_col_name_as_prefix)
-}
-  if(!year){
-    year=year(col_data)
-	col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = year, use_col_name_as_prefix = use_col_name_as_prefix)
-}
-  if(!day){
-    day=day(col_data)
-	col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day, use_col_name_as_prefix = use_col_name_as_prefix)
-}
+  if(week){
+    week <- week(col_data)
+	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = week)
+  }
+  if(month){
+    month <- month(col_data)
+	  col_name <- next_default_item(prefix = "month", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month)
+  }
+  if(year){
+    year <- year(col_data)
+	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = year)
+  }
+  if(day){
+    day <- day(col_data)
+	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day)
+  }
   #TO Do
   #Implement option for the day of the year
 }
