@@ -1654,24 +1654,26 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
 }
 )
 
-data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, contr_vector = NA) {
+data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, defined_contr_matrix = NA) {
   if(!col_name %in% names(self$get_data_frame())) stop(col_name, " not found in the data")
   if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
   #checks needed on contrasts before assigning
-  factor_col=self$get_columns_from_data(col_name)
-  if(!(new_contrasts %in% c("contr.treatment","contr.helmert","contr.poly","contr.sum", "user_defined"))){
+  factor_col <- self$get_columns_from_data(col_name)
+  if(!(new_contrasts %in% c("contr.treatment" ,"contr.helmert", "contr.poly", "contr.sum", "user_defined"))) {
     stop(new_contrasts, " is not a valid contrast name")
-  }  else if (!is.character(new_contrasts)) {
+  } 
+  else if(!is.character(new_contrasts)) {
     stop("New column name must be of type: character")
   }
   
-  if(new_contrast=="user_defined"){
-   if (!is.na(contr_vector) & is.numeric(contr_vector)){
-   contr_col=nlevels(factor_col)-1
-   contr_row=nlevels(factor_col)
-   if (length(contr_vector)==contr_col*contr_col){
-    contr_matrix<-as.matrix(contr_vector,  contr_row, contr_col)
-   } else {
+  if(new_contrast == "user_defined"){
+   if (!is.na(defined_contr_matrix) && is.numeric(defined_contr_matrix)) {
+   contr_col = nlevels(factor_col)-1
+   contr_row = nlevels(factor_col)
+   if (length(defined_contr_matrix) == contr_row*contr_col) {
+    contr_matrix<-as.matrix(defined_contr_matrix,  contr_row, contr_col)
+   } 
+  else{
    stop("Specify correct number of rows and columns in the defined matrix")
     }
   }
@@ -1680,25 +1682,29 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
      contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
-data_object$set("public","split_date", function(data_name,col_names="", week=FALSE, month=FALSE, year=FALSE,day=FALSE, use_col_name_as_prefix = TRUE) {
+data_object$set("public","split_date", function(data_name, col_name = "", week=FALSE, month=FALSE, year = FALSE, day = FALSE) {
   col_data <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
-if(self$get_data_type(col_name=col_names) != "Date") stop("This column must be a date or time!")
+if(self$get_data_type(col_name=col_name) != "Date") stop("This column must be a date or time!")
  
-  if(week==TRUE){
+  if(!week){
     week=week(col_data)
-    self$add_columns_to_data(col_name = "week", col_data = week, use_col_name_as_prefix = use_col_name_as_prefix)
+	col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = week, use_col_name_as_prefix = use_col_name_as_prefix)
 }
-  if(month==TRUE){
+  if(!month){
     month=month(col_data)
-    self$add_columns_to_data(col_name = "month", col_data = month,use_col_name_as_prefix = use_col_name_as_prefix)
+	col_name <- next_default_item(prefix = "month", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month, use_col_name_as_prefix = use_col_name_as_prefix)
 }
-  if(year==TRUE){
+  if(!year){
     year=year(col_data)
-    self$add_columns_to_data(col_name = "year", col_data = year, use_col_name_as_prefix = use_col_name_as_prefix)
+	col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = year, use_col_name_as_prefix = use_col_name_as_prefix)
 }
-  if(day==TRUE){
+  if(!day){
     day=day(col_data)
-    self$add_columns_to_data(col_name = "day", col_data = day, use_col_name_as_prefix = use_col_name_as_prefix)
+	col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day, use_col_name_as_prefix = use_col_name_as_prefix)
 }
   #TO Do
   #Implement option for the day of the year
