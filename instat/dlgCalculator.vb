@@ -84,7 +84,7 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates"})
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates", "Rows"}) ' "Rows" is a temp. name
         ucrSaveResultInto.SetValidationTypeAsRVariable()
 
     End Sub
@@ -228,6 +228,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
+                grpRows.Visible = False
                 iHelpCalcID = 126
                 Me.Size = New System.Drawing.Size(659, 377)
             Case "Logical and Symbols"
@@ -239,6 +240,7 @@ Public Class dlgCalculator
                 grpStrings.Visible = False
                 Me.Size = New System.Drawing.Size(617, 377)
                 grpProbabilty.Visible = False
+                grpRows.Visible = False
                 iHelpCalcID = 127
 
 
@@ -251,6 +253,7 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(568, 377)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
+                grpRows.Visible = False
                 iHelpCalcID = 128
             Case "Strings (Character Columns)"
                 grpDates.Visible = False
@@ -260,6 +263,7 @@ Public Class dlgCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
+                grpRows.Visible = False
                 Me.Size = New System.Drawing.Size(610, 377)
                 iHelpCalcID = 338
             Case "Probability"
@@ -270,6 +274,7 @@ Public Class dlgCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
+                grpRows.Visible = False
                 Me.Size = New System.Drawing.Size(779, 377)
                 iHelpCalcID = 120
             Case "Dates"
@@ -280,8 +285,20 @@ Public Class dlgCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
+                grpRows.Visible = False
                 Me.Size = New System.Drawing.Size(639, 377)
                 iHelpCalcID = 130
+            Case "Rows"
+                grpProbabilty.Visible = False
+                grpStatistics.Visible = False
+                grpBasic.Visible = True
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpRows.Visible = False
+                iHelpCalcID =
+                grpStrings.Visible = False
+                grpRows.Visible = True
+                Me.Size = New System.Drawing.Size(595, 377)
             Case Else
                 grpDates.Visible = False
                 Me.Size = New System.Drawing.Size(491, 377)
@@ -290,6 +307,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
+                grpRows.Visible = False
                 iHelpCalcID = 14
                 grpStrings.Visible = False
         End Select
@@ -984,6 +1002,70 @@ Public Class dlgCalculator
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
         Else
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+        End If
+    End Sub
+
+    Private Sub cmdLag_Click(sender As Object, e As EventArgs) Handles cmdLag.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lag(x=)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lag()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLead_Click(sender As Object, e As EventArgs) Handles cmdLead.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lead(x=)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lead()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdpmax_Click(sender As Object, e As EventArgs) Handles cmdpmax.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmax(x=)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmax()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPMin_Click(sender As Object, e As EventArgs) Handles cmdPMin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmin(x=)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmin()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdcummax_Click(sender As Object, e As EventArgs) Handles cmdcummax.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummax(x=)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummax()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdcummin_Click(sender As Object, e As EventArgs) Handles cmdcummin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummin(x=)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummin()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdcumsum_Click(sender As Object, e As EventArgs) Handles cmdcumsum.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cumsum(x=)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cumsum()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdpercentrank_Click(sender As Object, e As EventArgs) Handles cmdpercentrank.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("percent_rank(x=)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("percent_rank()", 1)
         End If
     End Sub
 End Class
