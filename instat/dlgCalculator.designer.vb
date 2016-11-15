@@ -223,11 +223,11 @@ Partial Class dlgCalculator
         Me.grpBasic.Controls.Add(Me.cmd2)
         Me.grpBasic.Controls.Add(Me.cmd0)
         Me.grpBasic.Controls.Add(Me.cmd1)
-        Me.grpBasic.Location = New System.Drawing.Point(222, 69)
+        Me.grpBasic.Location = New System.Drawing.Point(222, 68)
         Me.grpBasic.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpBasic.Name = "grpBasic"
         Me.grpBasic.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpBasic.Size = New System.Drawing.Size(205, 147)
+        Me.grpBasic.Size = New System.Drawing.Size(205, 148)
         Me.grpBasic.TabIndex = 119
         Me.grpBasic.TabStop = False
         Me.grpBasic.Text = "Basic"
@@ -442,9 +442,9 @@ Partial Class dlgCalculator
         Me.grpStrings.Controls.Add(Me.cmdCountstrings)
         Me.grpStrings.Controls.Add(Me.cmdLocate)
         Me.grpStrings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpStrings.Location = New System.Drawing.Point(430, 69)
+        Me.grpStrings.Location = New System.Drawing.Point(431, 68)
         Me.grpStrings.Name = "grpStrings"
-        Me.grpStrings.Size = New System.Drawing.Size(163, 146)
+        Me.grpStrings.Size = New System.Drawing.Size(163, 148)
         Me.grpStrings.TabIndex = 150
         Me.grpStrings.TabStop = False
         Me.grpStrings.Text = "Strings (Character Columns)"
@@ -452,7 +452,7 @@ Partial Class dlgCalculator
         'cmdSplit
         '
         Me.cmdSplit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSplit.Location = New System.Drawing.Point(44, 109)
+        Me.cmdSplit.Location = New System.Drawing.Point(44, 108)
         Me.cmdSplit.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSplit.Name = "cmdSplit"
         Me.cmdSplit.Size = New System.Drawing.Size(38, 30)
@@ -475,7 +475,7 @@ Partial Class dlgCalculator
         'cmdDetect
         '
         Me.cmdDetect.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdDetect.Location = New System.Drawing.Point(5, 109)
+        Me.cmdDetect.Location = New System.Drawing.Point(5, 108)
         Me.cmdDetect.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDetect.Name = "cmdDetect"
         Me.cmdDetect.Size = New System.Drawing.Size(38, 30)
@@ -575,7 +575,7 @@ Partial Class dlgCalculator
         'cmdExtract
         '
         Me.cmdExtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdExtract.Location = New System.Drawing.Point(84, 109)
+        Me.cmdExtract.Location = New System.Drawing.Point(84, 108)
         Me.cmdExtract.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdExtract.Name = "cmdExtract"
         Me.cmdExtract.Size = New System.Drawing.Size(80, 30)
@@ -619,7 +619,7 @@ Partial Class dlgCalculator
         Me.grpStatistics.Controls.Add(Me.cmdSum)
         Me.grpStatistics.Controls.Add(Me.cmdMiss)
         Me.grpStatistics.Controls.Add(Me.cmdCount)
-        Me.grpStatistics.Location = New System.Drawing.Point(429, 69)
+        Me.grpStatistics.Location = New System.Drawing.Point(431, 68)
         Me.grpStatistics.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpStatistics.Name = "grpStatistics"
         Me.grpStatistics.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -768,7 +768,7 @@ Partial Class dlgCalculator
         Me.grpDates.Controls.Add(Me.cmdYmd)
         Me.grpDates.Controls.Add(Me.cmdDoy)
         Me.grpDates.Controls.Add(Me.cmdLeap)
-        Me.grpDates.Location = New System.Drawing.Point(430, 69)
+        Me.grpDates.Location = New System.Drawing.Point(431, 68)
         Me.grpDates.Name = "grpDates"
         Me.grpDates.Size = New System.Drawing.Size(189, 147)
         Me.grpDates.TabIndex = 171
@@ -777,7 +777,7 @@ Partial Class dlgCalculator
         '
         'cmdDmy
         '
-        Me.cmdDmy.Location = New System.Drawing.Point(4, 106)
+        Me.cmdDmy.Location = New System.Drawing.Point(4, 77)
         Me.cmdDmy.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDmy.Name = "cmdDmy"
         Me.cmdDmy.Size = New System.Drawing.Size(60, 30)
@@ -788,7 +788,7 @@ Partial Class dlgCalculator
         '
         'cmdDek
         '
-        Me.cmdDek.Location = New System.Drawing.Point(124, 106)
+        Me.cmdDek.Location = New System.Drawing.Point(124, 108)
         Me.cmdDek.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDek.Name = "cmdDek"
         Me.cmdDek.Size = New System.Drawing.Size(60, 30)
@@ -798,7 +798,7 @@ Partial Class dlgCalculator
         '
         'cmdDay
         '
-        Me.cmdDay.Location = New System.Drawing.Point(124, 13)
+        Me.cmdDay.Location = New System.Drawing.Point(124, 15)
         Me.cmdDay.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDay.Name = "cmdDay"
         Me.cmdDay.Size = New System.Drawing.Size(60, 30)
@@ -808,7 +808,7 @@ Partial Class dlgCalculator
         '
         'cmdMonth
         '
-        Me.cmdMonth.Location = New System.Drawing.Point(64, 13)
+        Me.cmdMonth.Location = New System.Drawing.Point(64, 15)
         Me.cmdMonth.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMonth.Name = "cmdMonth"
         Me.cmdMonth.Size = New System.Drawing.Size(60, 30)
@@ -818,7 +818,7 @@ Partial Class dlgCalculator
         '
         'cmdYear
         '
-        Me.cmdYear.Location = New System.Drawing.Point(4, 13)
+        Me.cmdYear.Location = New System.Drawing.Point(4, 15)
         Me.cmdYear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdYear.Name = "cmdYear"
         Me.cmdYear.Size = New System.Drawing.Size(60, 30)
@@ -828,7 +828,7 @@ Partial Class dlgCalculator
         '
         'cmdDate
         '
-        Me.cmdDate.Location = New System.Drawing.Point(124, 44)
+        Me.cmdDate.Location = New System.Drawing.Point(124, 46)
         Me.cmdDate.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDate.Name = "cmdDate"
         Me.cmdDate.Size = New System.Drawing.Size(60, 30)
@@ -838,7 +838,7 @@ Partial Class dlgCalculator
         '
         'cmdYday
         '
-        Me.cmdYday.Location = New System.Drawing.Point(64, 44)
+        Me.cmdYday.Location = New System.Drawing.Point(64, 46)
         Me.cmdYday.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdYday.Name = "cmdYday"
         Me.cmdYday.Size = New System.Drawing.Size(60, 30)
@@ -848,7 +848,7 @@ Partial Class dlgCalculator
         '
         'cmdWday
         '
-        Me.cmdWday.Location = New System.Drawing.Point(4, 44)
+        Me.cmdWday.Location = New System.Drawing.Point(4, 46)
         Me.cmdWday.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdWday.Name = "cmdWday"
         Me.cmdWday.Size = New System.Drawing.Size(60, 30)
@@ -858,7 +858,7 @@ Partial Class dlgCalculator
         '
         'cmdMdy
         '
-        Me.cmdMdy.Location = New System.Drawing.Point(124, 75)
+        Me.cmdMdy.Location = New System.Drawing.Point(124, 77)
         Me.cmdMdy.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMdy.Name = "cmdMdy"
         Me.cmdMdy.Size = New System.Drawing.Size(60, 30)
@@ -868,7 +868,7 @@ Partial Class dlgCalculator
         '
         'cmdYmd
         '
-        Me.cmdYmd.Location = New System.Drawing.Point(64, 75)
+        Me.cmdYmd.Location = New System.Drawing.Point(64, 77)
         Me.cmdYmd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdYmd.Name = "cmdYmd"
         Me.cmdYmd.Size = New System.Drawing.Size(60, 30)
@@ -878,7 +878,7 @@ Partial Class dlgCalculator
         '
         'cmdDoy
         '
-        Me.cmdDoy.Location = New System.Drawing.Point(64, 106)
+        Me.cmdDoy.Location = New System.Drawing.Point(64, 108)
         Me.cmdDoy.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDoy.Name = "cmdDoy"
         Me.cmdDoy.Size = New System.Drawing.Size(60, 30)
@@ -888,7 +888,7 @@ Partial Class dlgCalculator
         '
         'cmdLeap
         '
-        Me.cmdLeap.Location = New System.Drawing.Point(4, 75)
+        Me.cmdLeap.Location = New System.Drawing.Point(4, 108)
         Me.cmdLeap.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLeap.Name = "cmdLeap"
         Me.cmdLeap.Size = New System.Drawing.Size(60, 30)
@@ -918,11 +918,11 @@ Partial Class dlgCalculator
         Me.grpMaths.Controls.Add(Me.cmdAcos)
         Me.grpMaths.Controls.Add(Me.cmdCos)
         Me.grpMaths.Controls.Add(Me.cmdSqrt)
-        Me.grpMaths.Location = New System.Drawing.Point(429, 69)
+        Me.grpMaths.Location = New System.Drawing.Point(431, 68)
         Me.grpMaths.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpMaths.Name = "grpMaths"
         Me.grpMaths.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpMaths.Size = New System.Drawing.Size(208, 147)
+        Me.grpMaths.Size = New System.Drawing.Size(208, 148)
         Me.grpMaths.TabIndex = 148
         Me.grpMaths.TabStop = False
         Me.grpMaths.Text = "Maths"
@@ -1342,9 +1342,9 @@ Partial Class dlgCalculator
         Me.grpProbabilty.Controls.Add(Me.cmdLfact)
         Me.grpProbabilty.Controls.Add(Me.cmdTrigamma)
         Me.grpProbabilty.Controls.Add(Me.cmdBeta)
-        Me.grpProbabilty.Location = New System.Drawing.Point(431, 69)
+        Me.grpProbabilty.Location = New System.Drawing.Point(431, 68)
         Me.grpProbabilty.Name = "grpProbabilty"
-        Me.grpProbabilty.Size = New System.Drawing.Size(325, 148)
+        Me.grpProbabilty.Size = New System.Drawing.Size(334, 148)
         Me.grpProbabilty.TabIndex = 152
         Me.grpProbabilty.TabStop = False
         Me.grpProbabilty.Text = "Probability"
@@ -1352,7 +1352,7 @@ Partial Class dlgCalculator
         'cmdDigamma
         '
         Me.cmdDigamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdDigamma.Location = New System.Drawing.Point(161, 106)
+        Me.cmdDigamma.Location = New System.Drawing.Point(161, 108)
         Me.cmdDigamma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDigamma.Name = "cmdDigamma"
         Me.cmdDigamma.Size = New System.Drawing.Size(92, 30)
@@ -1363,7 +1363,7 @@ Partial Class dlgCalculator
         'cmdGamma
         '
         Me.cmdGamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdGamma.Location = New System.Drawing.Point(2, 107)
+        Me.cmdGamma.Location = New System.Drawing.Point(2, 108)
         Me.cmdGamma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdGamma.Name = "cmdGamma"
         Me.cmdGamma.Size = New System.Drawing.Size(62, 30)
@@ -1375,7 +1375,7 @@ Partial Class dlgCalculator
         'cmdLbeta
         '
         Me.cmdLbeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLbeta.Location = New System.Drawing.Point(254, 75)
+        Me.cmdLbeta.Location = New System.Drawing.Point(254, 77)
         Me.cmdLbeta.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLbeta.Name = "cmdLbeta"
         Me.cmdLbeta.Size = New System.Drawing.Size(62, 30)
@@ -1386,7 +1386,7 @@ Partial Class dlgCalculator
         'cmdqF
         '
         Me.cmdqF.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdqF.Location = New System.Drawing.Point(191, 13)
+        Me.cmdqF.Location = New System.Drawing.Point(191, 15)
         Me.cmdqF.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdqF.Name = "cmdqF"
         Me.cmdqF.Size = New System.Drawing.Size(62, 30)
@@ -1397,7 +1397,7 @@ Partial Class dlgCalculator
         'cmdFact
         '
         Me.cmdFact.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdFact.Location = New System.Drawing.Point(254, 44)
+        Me.cmdFact.Location = New System.Drawing.Point(254, 46)
         Me.cmdFact.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdFact.Name = "cmdFact"
         Me.cmdFact.Size = New System.Drawing.Size(62, 30)
@@ -1408,7 +1408,7 @@ Partial Class dlgCalculator
         'cmdChoose
         '
         Me.cmdChoose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdChoose.Location = New System.Drawing.Point(191, 44)
+        Me.cmdChoose.Location = New System.Drawing.Point(191, 46)
         Me.cmdChoose.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdChoose.Name = "cmdChoose"
         Me.cmdChoose.Size = New System.Drawing.Size(62, 30)
@@ -1419,7 +1419,7 @@ Partial Class dlgCalculator
         'cmdPf
         '
         Me.cmdPf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPf.Location = New System.Drawing.Point(128, 44)
+        Me.cmdPf.Location = New System.Drawing.Point(128, 46)
         Me.cmdPf.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPf.Name = "cmdPf"
         Me.cmdPf.Size = New System.Drawing.Size(62, 30)
@@ -1430,7 +1430,7 @@ Partial Class dlgCalculator
         'cmdPChisq
         '
         Me.cmdPChisq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPChisq.Location = New System.Drawing.Point(65, 44)
+        Me.cmdPChisq.Location = New System.Drawing.Point(65, 46)
         Me.cmdPChisq.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPChisq.Name = "cmdPChisq"
         Me.cmdPChisq.Size = New System.Drawing.Size(62, 30)
@@ -1441,7 +1441,7 @@ Partial Class dlgCalculator
         'cmdLgamma
         '
         Me.cmdLgamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLgamma.Location = New System.Drawing.Point(65, 106)
+        Me.cmdLgamma.Location = New System.Drawing.Point(65, 108)
         Me.cmdLgamma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLgamma.Name = "cmdLgamma"
         Me.cmdLgamma.Size = New System.Drawing.Size(95, 30)
@@ -1452,7 +1452,7 @@ Partial Class dlgCalculator
         'cmdPnorm
         '
         Me.cmdPnorm.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPnorm.Location = New System.Drawing.Point(254, 13)
+        Me.cmdPnorm.Location = New System.Drawing.Point(254, 15)
         Me.cmdPnorm.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPnorm.Name = "cmdPnorm"
         Me.cmdPnorm.Size = New System.Drawing.Size(62, 30)
@@ -1463,7 +1463,7 @@ Partial Class dlgCalculator
         'cmdQchisq
         '
         Me.cmdQchisq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdQchisq.Location = New System.Drawing.Point(128, 13)
+        Me.cmdQchisq.Location = New System.Drawing.Point(128, 15)
         Me.cmdQchisq.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdQchisq.Name = "cmdQchisq"
         Me.cmdQchisq.Size = New System.Drawing.Size(62, 30)
@@ -1474,7 +1474,7 @@ Partial Class dlgCalculator
         'cmdQt
         '
         Me.cmdQt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdQt.Location = New System.Drawing.Point(65, 13)
+        Me.cmdQt.Location = New System.Drawing.Point(65, 15)
         Me.cmdQt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdQt.Name = "cmdQt"
         Me.cmdQt.Size = New System.Drawing.Size(62, 30)
@@ -1485,7 +1485,7 @@ Partial Class dlgCalculator
         'cmdQnorm
         '
         Me.cmdQnorm.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdQnorm.Location = New System.Drawing.Point(2, 13)
+        Me.cmdQnorm.Location = New System.Drawing.Point(2, 15)
         Me.cmdQnorm.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdQnorm.Name = "cmdQnorm"
         Me.cmdQnorm.Size = New System.Drawing.Size(62, 30)
@@ -1496,7 +1496,7 @@ Partial Class dlgCalculator
         'cmdPt
         '
         Me.cmdPt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPt.Location = New System.Drawing.Point(2, 44)
+        Me.cmdPt.Location = New System.Drawing.Point(2, 46)
         Me.cmdPt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPt.Name = "cmdPt"
         Me.cmdPt.Size = New System.Drawing.Size(62, 30)
@@ -1507,7 +1507,7 @@ Partial Class dlgCalculator
         'cmdLchoose
         '
         Me.cmdLchoose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLchoose.Location = New System.Drawing.Point(65, 75)
+        Me.cmdLchoose.Location = New System.Drawing.Point(65, 77)
         Me.cmdLchoose.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLchoose.Name = "cmdLchoose"
         Me.cmdLchoose.Size = New System.Drawing.Size(95, 30)
@@ -1518,7 +1518,7 @@ Partial Class dlgCalculator
         'cmdLfact
         '
         Me.cmdLfact.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLfact.Location = New System.Drawing.Point(161, 75)
+        Me.cmdLfact.Location = New System.Drawing.Point(161, 77)
         Me.cmdLfact.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLfact.Name = "cmdLfact"
         Me.cmdLfact.Size = New System.Drawing.Size(92, 30)
@@ -1529,7 +1529,7 @@ Partial Class dlgCalculator
         'cmdTrigamma
         '
         Me.cmdTrigamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdTrigamma.Location = New System.Drawing.Point(254, 106)
+        Me.cmdTrigamma.Location = New System.Drawing.Point(254, 108)
         Me.cmdTrigamma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTrigamma.Name = "cmdTrigamma"
         Me.cmdTrigamma.Size = New System.Drawing.Size(62, 30)
@@ -1540,7 +1540,7 @@ Partial Class dlgCalculator
         'cmdBeta
         '
         Me.cmdBeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdBeta.Location = New System.Drawing.Point(2, 75)
+        Me.cmdBeta.Location = New System.Drawing.Point(2, 77)
         Me.cmdBeta.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdBeta.Name = "cmdBeta"
         Me.cmdBeta.Size = New System.Drawing.Size(62, 30)
@@ -1577,9 +1577,9 @@ Partial Class dlgCalculator
         Me.grpRows.Controls.Add(Me.cmdpmax)
         Me.grpRows.Controls.Add(Me.cmdLead)
         Me.grpRows.Controls.Add(Me.cmdLag)
-        Me.grpRows.Location = New System.Drawing.Point(429, 69)
+        Me.grpRows.Location = New System.Drawing.Point(431, 68)
         Me.grpRows.Name = "grpRows"
-        Me.grpRows.Size = New System.Drawing.Size(137, 147)
+        Me.grpRows.Size = New System.Drawing.Size(137, 148)
         Me.grpRows.TabIndex = 173
         Me.grpRows.TabStop = False
         Me.grpRows.Text = "Rows"
@@ -1604,7 +1604,7 @@ Partial Class dlgCalculator
         '
         'cmdpmax
         '
-        Me.cmdpmax.Location = New System.Drawing.Point(5, 45)
+        Me.cmdpmax.Location = New System.Drawing.Point(5, 46)
         Me.cmdpmax.Name = "cmdpmax"
         Me.cmdpmax.Size = New System.Drawing.Size(62, 30)
         Me.cmdpmax.TabIndex = 176
@@ -1613,7 +1613,7 @@ Partial Class dlgCalculator
         '
         'cmdPMin
         '
-        Me.cmdPMin.Location = New System.Drawing.Point(67, 45)
+        Me.cmdPMin.Location = New System.Drawing.Point(67, 46)
         Me.cmdPMin.Name = "cmdPMin"
         Me.cmdPMin.Size = New System.Drawing.Size(62, 30)
         Me.cmdPMin.TabIndex = 177
@@ -1622,7 +1622,7 @@ Partial Class dlgCalculator
         '
         'cmdcummax
         '
-        Me.cmdcummax.Location = New System.Drawing.Point(5, 75)
+        Me.cmdcummax.Location = New System.Drawing.Point(5, 77)
         Me.cmdcummax.Name = "cmdcummax"
         Me.cmdcummax.Size = New System.Drawing.Size(62, 30)
         Me.cmdcummax.TabIndex = 178
@@ -1631,7 +1631,7 @@ Partial Class dlgCalculator
         '
         'cmdcummin
         '
-        Me.cmdcummin.Location = New System.Drawing.Point(67, 75)
+        Me.cmdcummin.Location = New System.Drawing.Point(67, 77)
         Me.cmdcummin.Name = "cmdcummin"
         Me.cmdcummin.Size = New System.Drawing.Size(62, 30)
         Me.cmdcummin.TabIndex = 179
@@ -1640,7 +1640,7 @@ Partial Class dlgCalculator
         '
         'cmdcumsum
         '
-        Me.cmdcumsum.Location = New System.Drawing.Point(5, 105)
+        Me.cmdcumsum.Location = New System.Drawing.Point(5, 108)
         Me.cmdcumsum.Name = "cmdcumsum"
         Me.cmdcumsum.Size = New System.Drawing.Size(62, 30)
         Me.cmdcumsum.TabIndex = 180
@@ -1650,7 +1650,7 @@ Partial Class dlgCalculator
         'cmdpercentrank
         '
         Me.cmdpercentrank.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
-        Me.cmdpercentrank.Location = New System.Drawing.Point(67, 105)
+        Me.cmdpercentrank.Location = New System.Drawing.Point(67, 108)
         Me.cmdpercentrank.Name = "cmdpercentrank"
         Me.cmdpercentrank.Size = New System.Drawing.Size(62, 30)
         Me.cmdpercentrank.TabIndex = 181
@@ -1715,7 +1715,8 @@ Partial Class dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(552, 339)
+        Me.ClientSize = New System.Drawing.Size(494, 339)
+        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpRows)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpLogical)
@@ -1734,7 +1735,6 @@ Partial Class dlgCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.grpStatistics)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpDates)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.MaximizeBox = False

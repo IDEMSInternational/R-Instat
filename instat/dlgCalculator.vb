@@ -62,8 +62,9 @@ Public Class dlgCalculator
         chkShowArguments.Checked = False
         chkSaveResultInto.Checked = True
         SaveResults()
-        grpDates.Enabled = False
         ucrSelectorForCalculations.bUseCurrentFilter = False
+        cmdDoy.Enabled = False
+        cmdDek.Enabled = False
     End Sub
 
     Private Sub ReopenDialog()
@@ -865,43 +866,83 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdYear_Click(sender As Object, e As EventArgs) Handles cmdYear.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("year(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("year()", 1)
+        End If
     End Sub
 
     Private Sub cmdMonth_Click(sender As Object, e As EventArgs) Handles cmdMonth.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("month(x= , label=FALSE, abbr=TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("month()", 1)
+        End If
     End Sub
 
     Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdDay.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("day(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("day()", 1)
+        End If
     End Sub
 
     Private Sub cmdWday_Click(sender As Object, e As EventArgs) Handles cmdWday.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wday(x= , label=FALSE, abbr=TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wday()", 1)
+        End If
     End Sub
 
     Private Sub cmdYday_Click(sender As Object, e As EventArgs) Handles cmdYday.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("yday(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("yday()", 1)
+        End If
     End Sub
 
     Private Sub cmdDate_Click(sender As Object, e As EventArgs) Handles cmdDate.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("date(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("date()", 1)
+        End If
     End Sub
 
     Private Sub cmdLeap_Click(sender As Object, e As EventArgs) Handles cmdLeap.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("leap_year(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("leap_year()", 1)
+        End If
     End Sub
 
     Private Sub cmdYmd_Click(sender As Object, e As EventArgs) Handles cmdYmd.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ymd(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ymd()", 1)
+        End If
     End Sub
 
     Private Sub cmdMdy_Click(sender As Object, e As EventArgs) Handles cmdMdy.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mdy(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mdy()", 1)
+        End If
     End Sub
 
     Private Sub cmdDmy_Click(sender As Object, e As EventArgs) Handles cmdDmy.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dmy(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dmy()", 1)
+        End If
     End Sub
 
     Private Sub cmdDoy_Click(sender As Object, e As EventArgs) Handles cmdDoy.Click
