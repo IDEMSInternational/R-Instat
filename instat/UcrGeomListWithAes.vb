@@ -27,6 +27,7 @@ Public Class UcrGeomListWithParameters
     Public ucrLayersControl As ucrLayerParameters
     Public bCheckEnabled As Boolean = True
     Public Event DataFrameChanged()
+    Public clsGgplotFunction As New RFunction
     Public clsGeomAesFunction As RFunction
     'clsGeomAesFunction stores the value (aes function) of the local mapping (of this particular layer). It is used as parameter in sdgLayerOptions.clsGeomFunction.
     Public bAddToLocalAes As Boolean = True
@@ -81,6 +82,7 @@ Public Class UcrGeomListWithParameters
             clsGeomAesFunction = New RFunction
             clsGeomAesFunction.SetRCommand("aes")
         End If
+        clsGgplotFunction = clsTempGgPlot
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bApplyAesGlobally) OrElse strGlobalDataFrame = "")
         UcrSelector.Reset()
 
@@ -111,8 +113,8 @@ Public Class UcrGeomListWithParameters
             'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
             lstAesParameterUcr(i).Clear()
             lstAesParameterUcr(i).Enabled = True
-            'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
-            If Not chkIgnoreGlobalAes.Checked Then
+            'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers. Also, when the dataframe is not the same for global ggplot and local geom, then aesthetics mappings shouldn't be copied... At this point clsGgplotFunction should be nonempty ...
+            If (Not chkIgnoreGlobalAes.Checked) AndAlso Not (clsGeomFunction.GetParameter("mapping") IsNot Nothing AndAlso clsGgplotFunction.GetParameter("mapping") IsNot Nothing AndAlso clsGeomFunction.GetParameter("mapping").strArgumentValue <> clsGgplotFunction.GetParameter("mapping").strArgumentValue) Then
                 For Each clsParam In clsGgplotAesFunction.clsParameters
                     If clsParam.strArgumentName = lstCurrArguments(i) Then
                         'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
