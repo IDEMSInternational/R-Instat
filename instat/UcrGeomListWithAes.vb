@@ -27,7 +27,6 @@ Public Class UcrGeomListWithParameters
     Public ucrLayersControl As ucrLayerParameters
     Public bCheckEnabled As Boolean = True
     Public Event DataFrameChanged()
-    Public clsGgplotFunction As New RFunction
     Public clsGeomAesFunction As RFunction
     'clsGeomAesFunction stores the value (aes function) of the local mapping (of this particular layer). It is used as parameter in sdgLayerOptions.clsGeomFunction.
     Public bAddToLocalAes As Boolean = True
@@ -97,7 +96,6 @@ Public Class UcrGeomListWithParameters
             clsGeomAesFunction = New RFunction
             clsGeomAesFunction.SetRCommand("aes")
         End If
-        clsGgplotFunction = clsTempGgPlot
 
         'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
         'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
@@ -141,7 +139,7 @@ Public Class UcrGeomListWithParameters
             'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
             lstAesParameterUcr(i).Clear()
             lstAesParameterUcr(i).Enabled = True
-            'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers. Also, when the dataframe is not the same for global ggplot and local geom, then aesthetics mappings shouldn't be copied... At this point clsGgplotFunction should be nonempty ...
+            'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
             If Not chkIgnoreGlobalAes.Checked Then
                 For Each clsParam In clsGgplotAesFunction.clsParameters
                     If clsParam.strArgumentName = lstCurrArguments(i) Then
