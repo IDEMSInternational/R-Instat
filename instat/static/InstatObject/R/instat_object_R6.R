@@ -987,8 +987,8 @@ instat_object$set("public","make_date_yeardoy", function(data_name, year, doy, y
 }
 )
 
-instat_object$set("public","set_contrasts_of_factor", function(data_name, col_name, new_contrasts, contr_vector = NA) {
-  self$get_data_objects(data_name)$set_contrasts_of_factor(col_name = col_name, new_contrasts = new_contrasts, contr_vector =contr_vector)
+instat_object$set("public","set_contrasts_of_factor", function(data_name, col_name, new_contrasts,defined_contr_matrix = NA) {
+  self$get_data_objects(data_name)$set_contrasts_of_factor(col_name = col_name, new_contrasts = new_contrasts, defined_contr_matrix=defined_contr_matrix)
 }
 )
 
@@ -1032,7 +1032,7 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
 }
 )
 
-instat_object$set("public","split_date", function(data_name, col_names="", year=FALSE, month=FALSE, day=FALSE, week=FALSE,use_col_name_as_prefix = TRUE ) {
-  self$get_data_objects(data_name)$split_date(year = year,col_names=col_names, month = month, day = day, week=week,use_col_name_as_prefix = use_col_name_as_prefix )
+instat_object$set("public","split_date", function(data_name, col_name="", year=FALSE, month=FALSE, day=FALSE, week=FALSE) {
+  self$get_data_objects(data_name)$split_date(year = year,col_name=col_name, month = month, day = day)
 }
 )
