@@ -106,7 +106,7 @@ Public Class sdgLayerOptions
         End If
         If clsGeomFunction.strRCommand = "geom_bar" OrElse clsGeomFunction.strRCommand = "geom_density" OrElse clsGeomFunction.strRCommand = "geom_freqpoly" Then
             'Warning: this is not working quite ok yet. Got some bad behaviour when "" comes from global aes, but is overwritten I think. Will tidy this up when introducing partially mandatory aesthetics method.
-            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1 AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "TRUE")) OrElse (ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
+            If (((clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1) AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "FALSE"))) OrElse (ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
                 clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             End If
             If clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") <> -1 Then
