@@ -38,7 +38,7 @@ Partial Class sdgSummaries
         Me.chkStdDev = New System.Windows.Forms.CheckBox()
         Me.chkQuartiles = New System.Windows.Forms.CheckBox()
         Me.chkMedian = New System.Windows.Forms.CheckBox()
-        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
+        Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.grpCommon.SuspendLayout()
         Me.grpNotOrderedFactor.SuspendLayout()
         Me.grpNumeric.SuspendLayout()
@@ -232,12 +232,12 @@ Partial Class sdgSummaries
         Me.chkMedian.Text = "Median"
         Me.chkMedian.UseVisualStyleBackColor = True
         '
-        'UcrButtonsSubdialogue1
+        'ucrButtonsSummaries
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(62, 236)
-        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
-        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
-        Me.UcrButtonsSubdialogue1.TabIndex = 3
+        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(62, 236)
+        Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
+        Me.ucrButtonsSummaries.Size = New System.Drawing.Size(142, 30)
+        Me.ucrButtonsSummaries.TabIndex = 3
         '
         'sdgSummaries
         '
@@ -247,7 +247,7 @@ Partial Class sdgSummaries
         Me.Controls.Add(Me.grpNumeric)
         Me.Controls.Add(Me.grpCommon)
         Me.Controls.Add(Me.grpNotOrderedFactor)
-        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.Controls.Add(Me.ucrButtonsSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -265,7 +265,7 @@ Partial Class sdgSummaries
 
     End Sub
 
-    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
+    Friend WithEvents ucrButtonsSummaries As ucrButtonsSubdialogue
     Friend WithEvents chkNonMissing As CheckBox
     Friend WithEvents chkNMissing As CheckBox
     Friend WithEvents chkNTotal As CheckBox
