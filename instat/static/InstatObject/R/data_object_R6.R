@@ -1659,7 +1659,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
   #checks needed on contrasts before assigning
   factor_col <- self$get_columns_from_data(col_name)
-  if(!(new_contrasts %in% c("contr.treatment" ,"contr.helmert", "contr.poly", "contr.sum", "user_defined"))) {
+  if(!(new_contrasts %in% c("contr.treatment", "contr.helmert", "contr.poly", "contr.sum", "user_defined"))) {
     stop(new_contrasts, " is not a valid contrast name")
   } 
   else if(!is.character(new_contrasts)) {
@@ -1667,9 +1667,9 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   }
   
   if(new_contrast == "user_defined"){
-   if (!is.na(defined_contr_matrix) && is.numeric(defined_contr_matrix)) {
-   contr_col = nlevels(factor_col)-1
-   contr_row = nlevels(factor_col)
+   if(!is.na(defined_contr_matrix) && is.numeric(defined_contr_matrix)) {
+   contr_col <- nlevels(factor_col)-1
+   contr_row <- nlevels(factor_col)
    if (length(defined_contr_matrix) == contr_row*contr_col) {
     contr_matrix<-as.matrix(defined_contr_matrix,  contr_row, contr_col)
    } 
@@ -1682,7 +1682,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
      contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
-data_object$set("public","split_date", function(data_name, col_name = "", week=FALSE, month=FALSE, year = FALSE, day = FALSE) {
+data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month = FALSE, year = FALSE, day = FALSE) {
   col_data <- self$get_columns_from_data(col_names = col_name, use_current_filter = FALSE)
   if(self$get_data_type(col_name = col_name) != "Date") stop("This column must be a date or time!")
  
