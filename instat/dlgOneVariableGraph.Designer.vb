@@ -51,7 +51,7 @@ Partial Class dlgOneVariableGraph
         Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
         Me.ucrReceiverOneVarGraph.Selector = Nothing
         Me.ucrReceiverOneVarGraph.Size = New System.Drawing.Size(123, 110)
-        Me.ucrReceiverOneVarGraph.TabIndex = 1
+        Me.ucrReceiverOneVarGraph.TabIndex = 2
         '
         'lblSelectedVariables
         '
@@ -59,7 +59,7 @@ Partial Class dlgOneVariableGraph
         Me.lblSelectedVariables.Location = New System.Drawing.Point(238, 40)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
-        Me.lblSelectedVariables.TabIndex = 2
+        Me.lblSelectedVariables.TabIndex = 1
         Me.lblSelectedVariables.Text = "Selected Variables:"
         '
         'ucrBase
@@ -67,14 +67,14 @@ Partial Class dlgOneVariableGraph
         Me.ucrBase.Location = New System.Drawing.Point(10, 270)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 3
+        Me.ucrBase.TabIndex = 0
         '
         'cmdGraphOptions
         '
         Me.cmdGraphOptions.Location = New System.Drawing.Point(10, 201)
         Me.cmdGraphOptions.Name = "cmdGraphOptions"
         Me.cmdGraphOptions.Size = New System.Drawing.Size(101, 23)
-        Me.cmdGraphOptions.TabIndex = 6
+        Me.cmdGraphOptions.TabIndex = 3
         Me.cmdGraphOptions.Text = "Graph Options"
         Me.cmdGraphOptions.UseVisualStyleBackColor = True
         '
@@ -83,7 +83,7 @@ Partial Class dlgOneVariableGraph
         Me.ucrOneVarGraphSave.Location = New System.Drawing.Point(10, 244)
         Me.ucrOneVarGraphSave.Name = "ucrOneVarGraphSave"
         Me.ucrOneVarGraphSave.Size = New System.Drawing.Size(265, 20)
-        Me.ucrOneVarGraphSave.TabIndex = 7
+        Me.ucrOneVarGraphSave.TabIndex = 8
         '
         'rdoCombineGraph
         '
@@ -91,7 +91,7 @@ Partial Class dlgOneVariableGraph
         Me.rdoCombineGraph.Location = New System.Drawing.Point(237, 194)
         Me.rdoCombineGraph.Name = "rdoCombineGraph"
         Me.rdoCombineGraph.Size = New System.Drawing.Size(98, 17)
-        Me.rdoCombineGraph.TabIndex = 8
+        Me.rdoCombineGraph.TabIndex = 5
         Me.rdoCombineGraph.TabStop = True
         Me.rdoCombineGraph.Text = "Combine Graph"
         Me.rdoCombineGraph.UseVisualStyleBackColor = True
@@ -102,7 +102,7 @@ Partial Class dlgOneVariableGraph
         Me.rdoSingleGraphs.Location = New System.Drawing.Point(237, 216)
         Me.rdoSingleGraphs.Name = "rdoSingleGraphs"
         Me.rdoSingleGraphs.Size = New System.Drawing.Size(91, 17)
-        Me.rdoSingleGraphs.TabIndex = 9
+        Me.rdoSingleGraphs.TabIndex = 6
         Me.rdoSingleGraphs.TabStop = True
         Me.rdoSingleGraphs.Text = "Single Graphs"
         Me.rdoSingleGraphs.UseVisualStyleBackColor = True
@@ -113,7 +113,7 @@ Partial Class dlgOneVariableGraph
         Me.rdoFacets.Location = New System.Drawing.Point(237, 171)
         Me.rdoFacets.Name = "rdoFacets"
         Me.rdoFacets.Size = New System.Drawing.Size(57, 17)
-        Me.rdoFacets.TabIndex = 10
+        Me.rdoFacets.TabIndex = 4
         Me.rdoFacets.TabStop = True
         Me.rdoFacets.Text = "Facets"
         Me.rdoFacets.UseVisualStyleBackColor = True
@@ -124,7 +124,7 @@ Partial Class dlgOneVariableGraph
         Me.chkFlipCoordinates.Location = New System.Drawing.Point(237, 240)
         Me.chkFlipCoordinates.Name = "chkFlipCoordinates"
         Me.chkFlipCoordinates.Size = New System.Drawing.Size(101, 17)
-        Me.chkFlipCoordinates.TabIndex = 11
+        Me.chkFlipCoordinates.TabIndex = 7
         Me.chkFlipCoordinates.Text = "Flip Coordinates"
         Me.chkFlipCoordinates.UseVisualStyleBackColor = True
         '
