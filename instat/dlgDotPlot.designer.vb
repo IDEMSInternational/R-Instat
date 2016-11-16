@@ -154,10 +154,10 @@ Partial Class dlgDotPlot
         Me.lblBinAxis.AutoSize = True
         Me.lblBinAxis.Location = New System.Drawing.Point(252, 14)
         Me.lblBinAxis.Name = "lblBinAxis"
-        Me.lblBinAxis.Size = New System.Drawing.Size(50, 13)
+        Me.lblBinAxis.Size = New System.Drawing.Size(47, 13)
         Me.lblBinAxis.TabIndex = 14
-        Me.lblBinAxis.Tag = "Bin_Axis"
-        Me.lblBinAxis.Text = "Bin Axis :"
+        Me.lblBinAxis.Tag = "Bin_Axis:"
+        Me.lblBinAxis.Text = "Bin Axis:"
         '
         'dlgDotPlot
         '
