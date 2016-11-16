@@ -77,7 +77,7 @@ Public Class dlgSplitText
     Private Sub PatternParameter()
         Select Case ucrInputPattern.GetText
             Case "Whitespace"
-                ucrBase.clsRsyntax.AddParameter("pattern", "fixed (" & Chr(34) & " " & Chr(34) & ")")
+                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & " " & Chr(34))
             Case ""
                 If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                     ucrBase.clsRsyntax.AddParameter("pattern", "fixed (" & Chr(34) & "" & Chr(34) & ")")
