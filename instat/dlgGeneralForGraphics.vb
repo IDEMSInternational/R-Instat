@@ -51,10 +51,6 @@ Public Class dlgGeneralForGraphics
         ucrAdditionalLayers.SetRSyntax(ucrBase.clsRsyntax)
         ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
-        'Warning: commented the following out and set them up when clicking on sdgPlotOptions... making sure to rewrite the links that have been made with other dlg in specific plots...
-        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax) 'Warning/question: sdgPlots is treated as sort of a ucr of the main. But then there is only one instance for all dialogues. How comes this doesn't causes problems ? The RSyntax of different dialogues should be unfortunately linked through here ? Is this actually happening in specific plots ?
-        'sdgPlots.SetGgplotFunction(clsRggplotFunction)
-        'Warning: in some specific plots, GgplotFunction is set here as well. In others not... In scattered plot it is not, and scattered plot works fine with Layers. Now here Layers is disabled on sdgPLots so theer is no need to link clsRggplotFunction.
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
         'For example, when a graph is saved, it is assigned to it's place in an R-instat object. If we had set bExcludeAssignedFunctionOutput to True, then we would never print the graph when running the script.
@@ -179,7 +175,6 @@ Public Class dlgGeneralForGraphics
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.SetGgplotFunction(clsRggplotFunction)
     End Sub
-    'Warning: never setup sdgPlots.SetGgplotFunction(clsRggplotFunction) ? same in scattered plot which works well. In dotplot, adds it in initialise, but then additional layers don't work ...
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.DisableLayersTab()
         SetupPlotOptions()
