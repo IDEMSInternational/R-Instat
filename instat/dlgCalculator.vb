@@ -1048,7 +1048,7 @@ Public Class dlgCalculator
 
     Private Sub cmdLag_Click(sender As Object, e As EventArgs) Handles cmdLag.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lag(x=)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lag(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lag()", 1)
         End If
@@ -1056,7 +1056,7 @@ Public Class dlgCalculator
 
     Private Sub cmdLead_Click(sender As Object, e As EventArgs) Handles cmdLead.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lead(x=)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lead(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lead()", 1)
         End If
@@ -1064,7 +1064,7 @@ Public Class dlgCalculator
 
     Private Sub cmdpmax_Click(sender As Object, e As EventArgs) Handles cmdpmax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmax(x=)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmax(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmax()", 1)
         End If
@@ -1072,7 +1072,7 @@ Public Class dlgCalculator
 
     Private Sub cmdPMin_Click(sender As Object, e As EventArgs) Handles cmdPMin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmin(x=)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmin(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pmin()", 1)
         End If
@@ -1080,7 +1080,7 @@ Public Class dlgCalculator
 
     Private Sub cmdcummax_Click(sender As Object, e As EventArgs) Handles cmdcummax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummax(x=)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummax(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummax()", 1)
         End If
@@ -1088,7 +1088,7 @@ Public Class dlgCalculator
 
     Private Sub cmdcummin_Click(sender As Object, e As EventArgs) Handles cmdcummin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummin(x=)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummin(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cummin()", 1)
         End If
@@ -1096,7 +1096,7 @@ Public Class dlgCalculator
 
     Private Sub cmdcumsum_Click(sender As Object, e As EventArgs) Handles cmdcumsum.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cumsum(x=)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cumsum(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cumsum()", 1)
         End If
@@ -1104,7 +1104,7 @@ Public Class dlgCalculator
 
     Private Sub cmdpercentrank_Click(sender As Object, e As EventArgs) Handles cmdpercentrank.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("percent_rank(x=)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("percent_rank(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("percent_rank()", 1)
         End If
