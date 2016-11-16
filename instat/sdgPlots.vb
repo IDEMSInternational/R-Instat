@@ -89,6 +89,9 @@ Public Class sdgPlots
         FacetsReceiversSetup()
         'The following sets up the clsGgplotAesFunction in ucrAdditionalLayers. Not sure this should happen in the initialise dialog... Not sure of the objective either... It is never linked to the main dlg anyway...
         ucrPlotsAdditionalLayers.SetAesFunction(clsAesFunction)
+        'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
+        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+        ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
 
         'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
         'Also carry the RSyntax through to these ucr's .
