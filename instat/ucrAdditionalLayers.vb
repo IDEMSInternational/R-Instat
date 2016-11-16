@@ -152,8 +152,10 @@ Public Class ucrAdditionalLayers
             bIgnoreGlobalAes = False
         End If
 
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=dlgGeneralForGraphics.clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=dlgGeneralForGraphics.clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=False, bIgnoreGlobalAes:=bIgnoreGlobalAes, clsTempLocalAes:=clsLocalAes)
-        'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.
+        'Warning: sdgLayerOptions should not be setup using dlgGeneralForGraphics' fields !! These fields should be given through to the ucrAdditionalLayers (which should have all these) 
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=False, bIgnoreGlobalAes:=bIgnoreGlobalAes, clsTempLocalAes:=clsLocalAes)
+        'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.       
+        ParentForm.SendToBack() 'Otherwise sdgLayerOptions appears behind sdgPLotOptions
         sdgLayerOptions.ShowDialog()
         AddLayers(lstLayers.SelectedItems(0))
     End Sub
