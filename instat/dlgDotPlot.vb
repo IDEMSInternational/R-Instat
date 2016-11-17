@@ -161,6 +161,7 @@ Public Class dlgDotPlot
             rdoXBinAxis.Checked = True 'Note: the default value of "binaxis" is "x"
         End If
         'Task: adapt for multivariable case...
+        'Warning: In specific plots in general, we still have the bug that if ApplyOnAllLayers is unchecked on the LayerOptions, then the aesthetics will be stored in the LocalAes.
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = strOtherAxis Then
                 If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
