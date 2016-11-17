@@ -62,7 +62,11 @@ Public Class dlgEnter
     End Sub
     Private Sub TestOKEnabled()
         If Not ucrReceiverForEnterCalculation.IsEmpty Then
-            ucrBase.OKEnabled(True)
+            If chkSaveEnterResultInto.Checked AndAlso Not ucrSaveEnterResultInto.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
