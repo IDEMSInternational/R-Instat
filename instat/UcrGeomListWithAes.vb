@@ -289,10 +289,13 @@ Public Class UcrGeomListWithParameters
         'When the dataframes in local layers don't correspond to the data in the global layer, inherit.aes should be set to false (otherwise risk for errors). Then the IgnoreGlobalAes should remain ticked until dataframes coincide.
         If LocalAndGlobalDataFramesAreDifferent() Then
             chkIgnoreGlobalAes.Checked = True
-            chkIgnoreGlobalAes.Enabled = False
+            'chkIgnoreGlobalAes.Enabled = False 'Proposal 
+            chkApplyOnAllLayers.Enabled = False
         Else
             chkIgnoreGlobalAes.Enabled = True
+            'chkApplyOnAllLayers.Enabled = True 'Proposal
             chkIgnoreGlobalAes.Checked = False 'Warning, if IgnoreGlobalAes was checked before changing dataframe and coming back, then it will be unchecked now...
+
         End If
         'Note SetAes will be called automatically if chkIgnoreGlobalAes.checked has been changed.
     End Sub
