@@ -82,22 +82,12 @@ Public Class dlgMakeDate
         chkTwoDigitYearTwo.Checked = False
         lblCutOffThree.Visible = False
         lblCutOffTwo.Visible = False
-        'Disabling the check boxes, Input,... which are yet to be Implemented.
-        'To be return to how it was prev...
-        'chkTwoDigitYearThree.Enabled = False
-        'chkTwoDigitYearTwo.Enabled = False
-        nudCutOffThree.Visible = True
-        nudCutOffTwo.Visible = True
-        nudCutOffThree.Enabled = False
-        nudCutOffTwo.Enabled = False
+        chkTwoDigitYearThree.Visible = True
+        chkTwoDigitYearTwo.Visible = True
+        nudCutOffThree.Visible = False
+        nudCutOffTwo.Visible = False
         chkMore.Checked = False
-        'chkMore.Enabled = False
-        lblCutOffTwo.Visible = True
-        lblCutOffThree.Visible = True
-        lblCutOffThree.Enabled = False
-        lblCutOffTwo.Enabled = False
-        ucrInputComboBoxMonthTwo.Enabled = False
-        grpFormatField.Visible = False
+        chkMore.Visible = True
 
     End Sub
 
@@ -177,8 +167,6 @@ Public Class dlgMakeDate
         Else
             ucrBase.clsRsyntax.RemoveParameter("origin")
         End If
-        'to be removed later
-        grpFormatField.Enabled = False
         TestOKEnabled()
     End Sub
 

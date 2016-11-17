@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class sdgSummaries
     Public clsRSummaries As New RFunction
     Public bFirstLoad As Boolean = True
+    Public strSummariesParameter
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -55,7 +56,6 @@ Public Class sdgSummaries
     Public Sub SummariesParameters()
         Dim lstCheckboxes As New List(Of CheckBox)
         Dim chkSummary As CheckBox
-        Dim strSummariesParameter As String = ""
         Dim i As Integer = 0
         If lstCheckboxes.Count = 0 Then
             lstCheckboxes.AddRange({chkNTotal, chkNonMissing, chkNMissing, chkMean, chkMinimum, chkMode, chkMaximum, chkMedian, chkStdDev, chkRange, chkSum, chkQuartiles})
@@ -75,7 +75,6 @@ Public Class sdgSummaries
         If i > 0 Then
             clsRSummaries.AddParameter("summaries", strSummariesParameter)
         Else
-            MsgBox("At least one summary should be selected")
             clsRSummaries.RemoveParameterByName("summaries")
         End If
     End Sub
@@ -86,5 +85,12 @@ Public Class sdgSummaries
 
     Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkNTotal.CheckedChanged, chkNonMissing.CheckedChanged, chkNMissing.CheckedChanged, chkMode.CheckedChanged, chkMean.CheckedChanged, chkRange.CheckedChanged, chkStdDev.CheckedChanged, chkMedian.CheckedChanged, chkSum.CheckedChanged, chkQuartiles.CheckedChanged, chkVariance.CheckedChanged, chkMaximum.CheckedChanged, chkMinimum.CheckedChanged
         SummariesParameters()
+    End Sub
+
+    Public Sub TestSummaries()
+        SummariesParameters()
+        If strSummariesParameter = "c()" Then
+            MsgBox("OK will be disabled until you check at least one summary.")
+        End If
     End Sub
 End Class
