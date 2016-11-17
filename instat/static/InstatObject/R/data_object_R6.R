@@ -1535,7 +1535,7 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
   if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
   if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
  
-  if (!(numeric %in% c("box_jitter" ,"violin_jitter","violin_box"))) {
+  if (!numeric %in% c("box_jitter", "violin_jitter", "violin_box")) {
      numeric_geom <- match.fun(numeric)
   }
   
@@ -1573,15 +1573,14 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
     else stop("Cannot plot columns of type:", column_types[i])
     
     curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars=columns)
-    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "geom_jitter"|| curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
+    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
       g <- ggplot(data = curr_data, mapping = aes(x = "", y=value))
     }
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value))
     }
-    
-    
-    if (curr_geom_name == "box_jitter"){
+        
+    if(curr_geom_name == "box_jitter"){
       if(free_scale_axis) return(g + geom_boxplot() + geom_jitter() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
       else return(g + geom_boxplot() + geom_jitter() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
       
