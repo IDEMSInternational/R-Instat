@@ -73,7 +73,7 @@ Public Class UcrGeomListWithParameters
 
     Private Sub InitialiseSelectedDataFrame()
         'When setting up the ucrGeomListWithAes, we want the selected dataframe to be the one used in the clsGeomFunction that has been given through. This is also needed for the method in LocalAndGlobalDataFramesAreDifferent() to work when editing a layer.
-        Dim strDataFrameName As String = strGlobalDataFrame
+        Dim strDataFrameName As String = String.Copy(strGlobalDataFrame)
         Dim iIndexOfData_nameParameter As Integer
         If clsGeomFunction.GetParameter("data") IsNot Nothing AndAlso clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name") <> -1 Then
             iIndexOfData_nameParameter = clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name")
@@ -83,7 +83,6 @@ Public Class UcrGeomListWithParameters
         Else
             UcrSelector.SetDataframe(strDataFrameName, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
         End If
-
     End Sub
     Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         'See ucrAdditionalLayers and Specific Plots dlg to see how the SetUp Parameters are chosen within the sdgLayerOptions.SetupLayer call.
@@ -106,11 +105,9 @@ Public Class UcrGeomListWithParameters
         chkApplyOnAllLayers.Checked = bApplyAesGlobally
         chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes 'Note: raises the event check changed if the value has indeed changed.
 
-        UcrSelector.Reset()
+        'UcrSelector.Reset() 'Warning: Not sure this is necessary anymore... Testing will confirm.
         InitialiseSelectedDataFrame()
         'UcrSelector.SetDataframe(strGlobalDataFrame, (Not bApplyAesGlobally) OrElse strGlobalDataFrame = "")
-
-
 
 
         bCurrentFixAes = bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
@@ -136,8 +133,8 @@ Public Class UcrGeomListWithParameters
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
             'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
             'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
-            lstAesParameterUcr(i).Clear()
             lstAesParameterUcr(i).Enabled = True
+            lstAesParameterUcr(i).Clear()
             'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
             If Not chkIgnoreGlobalAes.Checked Then
                 For Each clsParam In clsGgplotAesFunction.clsParameters
