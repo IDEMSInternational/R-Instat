@@ -107,7 +107,7 @@ Public Class UcrGeomListWithParameters
 
         'UcrSelector.Reset() 'Warning: Not sure this is necessary anymore... Testing will confirm.
         InitialiseSelectedDataFrame()
-        'UcrSelector.SetDataframe(strGlobalDataFrame, (Not bApplyAesGlobally) OrElse strGlobalDataFrame = "")
+
 
 
         bCurrentFixAes = bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
@@ -119,7 +119,7 @@ Public Class UcrGeomListWithParameters
     Private Function LocalAndGlobalDataFramesAreDifferent() As Boolean
         'This methods checks whether the dataframe used for this layer is different from the global dataframe. If they are different, then chkIgnoreGlobalAes should be permanently checked. See UcrSelector_DataFrameChanged.
         Dim bValue As Boolean = False
-        If strGlobalDataFrame <> "" AndAlso UcrSelector.strCurrentDataFrame <> strGlobalDataFrame Then 'Warning: if the CurrentDataframe is chosen appropriately 
+        If strGlobalDataFrame <> "" AndAlso UcrSelector.strCurrentDataFrame <> strGlobalDataFrame Then 'Warning: if the CurrentDataframe is chosen appropriately, which is the case thanks to InitialiseSelectedDataFrame
             bValue = True
         End If
         Return bValue
@@ -133,6 +133,7 @@ Public Class UcrGeomListWithParameters
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
             'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
             'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
+            'Warning: the order in which the two following are called counts as clearing only operates when ucr is enabled. Not that this sub will always enable all ucr's that were previously disabled.
             lstAesParameterUcr(i).Enabled = True
             lstAesParameterUcr(i).Clear()
             'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
@@ -265,7 +266,7 @@ Public Class UcrGeomListWithParameters
 
     Private Sub chkChangeAes_CheckedChanged(sender As Object, e As EventArgs) Handles chkApplyOnAllLayers.CheckedChanged
         'Sets the dataframe to the globaldataframe and fixes it in case that one is not empty and chkApplyOnAllLayers is checked.
-        'Question to be discussed: are we happy with this ? We don't want it to be the opposite, i.e. the global data frame to be changed when apply on all layers is ticked ? Would then need to "reset the global aes function"...
+        'Question to be discussed: are we happy with this ? We don't want it to be the opposite, i.e. the global data frame to be changed when apply on all layers is ticked ? Would then need to "reset the global aes function"... See issue on github... All this should be revised when linking is studied.
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
         'Warning: the dataframe needs to be set first. Indeed, this will enable IgnoreGlobalAes in the "datafram_changed" sub. In the same sub, Ignore global aes will be unticked and thus setAes called. If not done in this order, Ignore global aes is unticked below before the check box has been enabled and thus the event IngnoreGlobalAes.check.changed is not raised, and set aes never called.
         If chkApplyOnAllLayers.Checked Then
@@ -287,16 +288,13 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Sub UcrSelector_DataFrameChanged() Handles UcrSelector.DataFrameChanged
-        'When the dataframes in local layers don't correspond to the data in the global layer, inherit.aes should be set to false (otherwise risk for errors). Then the IgnoreGlobalAes should remain ticked until dataframes coincide.
+        'When the dataframes in local layers don't correspond to the data in the global ggplot function, inherit.aes should be set to false (otherwise risk for errors). Then the IgnoreGlobalAes should remain ticked until dataframes coincide.
         If LocalAndGlobalDataFramesAreDifferent() Then
             chkIgnoreGlobalAes.Checked = True
             chkIgnoreGlobalAes.Enabled = False
-            'chkApplyOnAllLayers.Enabled = False 'Proposal 
         Else
             chkIgnoreGlobalAes.Enabled = True
-            'chkApplyOnAllLayers.Enabled = True 'Proposal
             chkIgnoreGlobalAes.Checked = False 'Warning, if IgnoreGlobalAes was checked before changing dataframe and coming back, then it will be unchecked now...
-
         End If
         'Note SetAes will be called automatically if chkIgnoreGlobalAes.checked has been changed.
     End Sub

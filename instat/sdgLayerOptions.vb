@@ -93,7 +93,7 @@ Public Class sdgLayerOptions
             'Question: why do we even do this ? Should it not have been done earlier ? What's the point of changing parameters on sdgLayerOptions right before closing it ?
             strGlobalDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             ucrGeomWithAes.strGlobalDataFrame = strGlobalDataFrame
-        Else 'Warning: in case the dggLayerOptions has been called by specific dlg, need to refill the aes on that dlg. Imagine the ApplyOnAllLayers has been unticked ? Problem... Also in order to solve this, would need to know on the specific dialog if it has been unticked or not in order to know how to fill in the aes receivers ! Or could disable Ignore and Apply on all layers when coming from specific plots as suggested before. Don't remember why we deleted it.
+        Else 'Warning: in case the dggLayerOptions has been called by specific dlg, need to refill the aes on that dlg. Imagine the ApplyOnAllLayers has been unticked ? Problem... Also in order to solve this, would need to know on the specific dialog if it has been unticked or not in order to know how to fill in the aes receivers ! The linking will be restudied anyway. There are many ways to go, see discussion on github.
             If ucrGeomWithAes.clsGeomAesFunction.iParameterCount > 0 Then
                 clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsGeomAesFunction.Clone())
             Else
@@ -106,8 +106,8 @@ Public Class sdgLayerOptions
             End If
         End If
         If clsGeomFunction.strRCommand = "geom_bar" OrElse clsGeomFunction.strRCommand = "geom_density" OrElse clsGeomFunction.strRCommand = "geom_freqpoly" Then
-            'Warning: this is not working quite ok yet. Got some bad behaviour when "" comes from global aes, but is overwritten I think. Will tidy this up when introducing partially mandatory aesthetics method.
-            If (((clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1) AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "FALSE"))) OrElse (ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
+            'If there is a y in the global aes, and the global aes are not ignored or if there is a y in the local aes then in case stat has not been set manually, stat is set to identity.
+            If (((clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1) AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "TRUE"))) OrElse (ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
                 clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             End If
             If clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") <> -1 Then
