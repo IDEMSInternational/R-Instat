@@ -1534,78 +1534,62 @@ data_object$set("public", "remove_column_colours", function() {
 data_object$set("public","graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, polar = FALSE, ...) {
   if(!all(columns %in% self$get_column_names())) stop("Not all columns found in the data")
   if(!output %in% c("facets", "combine", "single")) stop("output must be one of: facets, combine or single")
- 
-  if (!numeric %in% c("box_jitter", "violin_jitter", "violin_box")) {
+  if(!numeric %in% c("box_jitter", "violin_jitter", "violin_box")) {
      numeric_geom <- match.fun(numeric)
-  }
-  
-  else {
+ }
+    else {
     numeric_geom <- numeric
-  }
-  
-  cat_geom <- match.fun(categorical)
-  
-  curr_data <- self$get_data_frame()
-  column_types <- c()
+ }
+    cat_geom <- match.fun(categorical)
+    curr_data <- self$get_data_frame()
+    column_types <- c()
   for(col in columns) {
     # TODO this could be method to avoid needing to get full data frame in this method
     # Everything non numeric is treated as categorical
     if(is.numeric(curr_data[[col]])) column_types <- c(column_types, "numeric")
     else column_types <- c(column_types, "cat")
-  }
-  
-  if(output == "facets") {
+ }
+    if(output == "facets") {
     column_types <- unique(column_types)
     if(length(column_types) > 1) {
       if(output == "facets") warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
       output <- "combine"
     }
-  }
+ }
   if(output == "facets") {
     if(column_types == "numeric") {
       curr_geom <- numeric_geom
       curr_geom_name <- numeric
-    }
-    else if(column_types == "cat") {
+     }
+     else if(column_types == "cat") {
       curr_geom <- cat_geom
       curr_geom_name <- categorical
-    }
-    else stop("Cannot plot columns of type:", column_types[i])
-    
-    curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars=columns)
-    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
+     }
+      else stop("Cannot plot columns of type:", column_types[i])
+      curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars=columns)
+      if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
       g <- ggplot(data = curr_data, mapping = aes(x = "", y=value))
-    }
-    else {
+  }
+      else{
       g <- ggplot(data = curr_data, mapping = aes(x = value))
-    }
-        
-    if(curr_geom_name == "box_jitter"){
-      if(free_scale_axis) return(g + geom_boxplot() + geom_jitter() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
+      }
+      if(curr_geom_name == "box_jitter"){
+      if(free_scale_axis) return(g + geom_boxplot() + geom_jitter() + facet_wrap(facets= ~ variable, scales = "free", ncol = ncol) + ylab(""))
       else return(g + geom_boxplot() + geom_jitter() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
-      
-    }
-    
-    else if (curr_geom_name == "violin_jitter"){
-      if(free_scale_axis) return(g + geom_violin() + geom_jitter() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
+     }
+      else if(curr_geom_name == "violin_jitter"){
+      if(free_scale_axis) return(g + geom_violin() + geom_jitter() + facet_wrap(facets= ~ variable, scales = "free", ncol = ncol) + ylab(""))
       else return(g + geom_boxplot() + geom_jitter() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
-      
-    }
-    
-    else if (curr_geom_name == "violin_box"){
-      if(free_scale_axis) return(g + geom_boxplot() + geom_violin() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
-      else return(g + geom_boxplot() + geom_jitter() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
-      
-    }
-    
-    else{
-    
-    if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free", ncol = ncol) + ylab(""))
-    else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
-    
-    }
-    
-    if(polar) g <- g + coord_polar(theta = "x")
+     }
+      else if(curr_geom_name == "violin_box"){
+      if(free_scale_axis) return(g + geom_boxplot() + geom_violin() + facet_wrap(facets= ~ variable, scales = "free", ncol = ncol) + ylab(""))
+      else return(g + geom_boxplot() + geom_jitter() + facet_wrap(facets= ~ variable, scales = "free_x", ncol = ncol) + ylab(""))
+     }
+      else{
+      if(free_scale_axis) return(g + curr_geom() + facet_wrap(facets= ~ variable, scales = "free", ncol = ncol) + ylab(""))
+      else return(g + curr_geom() + facet_wrap(facets= ~variable, scales = "free_x", ncol = ncol) + ylab(""))
+     }
+      if(polar) g <- g + coord_polar(theta = "x")
        return(g)
   }
   else {
@@ -1621,33 +1605,28 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
         curr_geom_name <- categorical
       }
       else stop("Cannot plot columns of type:", column_types[i])
-      
       if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point"|| curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
         g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column)))
       }
       else {
         g <- ggplot(data = curr_data, mapping = aes_(x = as.name(column)))
       }
-      
       if (curr_geom_name == "box_jitter"){
         current_graph <- g + geom_boxplot() + geom_jitter()
       }
-      
       else if (curr_geom_name == "violin_jitter"){
         current_graph <- g + geom_violin() + geom_jitter()
       }
       else if (curr_geom_name == "violin_box"){
         current_graph <- g + geom_boxplot() + geom_violin()
       }
-      
       else{
         current_graph <- g + curr_geom()
       }
-      
       if(polar && column_types[i] == "cat") current_graph <- current_graph + coord_polar(theta = "x")
            graphs[[i]] <- current_graph
       i = i + 1
-    }
+     }
     if(output == "combine") {
       return(gridExtra::grid.arrange(grobs = graphs, ncol = ncol))
     }
