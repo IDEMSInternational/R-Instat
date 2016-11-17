@@ -198,7 +198,7 @@ Public Class UcrGeomListWithParameters
                 lstAesParameterLabels(i).Visible = True
                 lstAesParameterUcr(i).Visible = True
 
-                lstAesParameterLabels(i).Text = clsCurrGeom.clsAesParameters(i).strAesParameterName
+                lstAesParameterLabels(i).Text = clsCurrGeom.clsAesParameters(i).strAesParameterName & ":"
                 lstCurrArguments.Add(clsCurrGeom.clsAesParameters(i).strAesParameterName)
                 lstAesParameterUcr(i).Clear()
                 If clsCurrGeom.clsAesParameters(i).bIsMandatory Then
