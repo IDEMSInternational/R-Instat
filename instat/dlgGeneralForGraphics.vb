@@ -43,7 +43,7 @@ Public Class dlgGeneralForGraphics
         clsRggplotFunction.SetRCommand("ggplot")
         clsGgplotAesFunction.SetRCommand("aes")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        'True for "we are setting the first parameter, on the left of +.
+        'True for "we are setting the first parameter, on the left of +".
         ucrBase.iHelpTopicID = 356
 
         ucrSaveGraph.SetDataFrameSelector(sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames)
@@ -70,6 +70,8 @@ Public Class dlgGeneralForGraphics
         If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
             ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
         End If
+        sdgPlots.Reset()
+        'Warning/to be discussed: sdgPlots doesn't work like sdgLayerOptions. Information actually stays on the dialogue, as it cannot be editted on the general for graphics (yet) I think that sdgPlots should work like LayerOptions and be filled in at load, thanks to a setup function and setsettings sub. 
         TestOKEnabled()
     End Sub
 
@@ -167,5 +169,21 @@ Public Class dlgGeneralForGraphics
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
+    End Sub
+
+    Private Sub SetupPlotOptions() 'Warning to be discussed: I m hoping to have a Setup function in sdgPlots itself... ?
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        sdgPlots.SetGgplotFunction(clsRggplotFunction)
+    End Sub
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.DisableLayersTab()
+        SetupPlotOptions()
+        sdgPlots.ShowDialog()
+        sdgPlots.EnableLayersTab()
+    End Sub
+
+    Private Sub ucrAdditionalLayers_NumberOfLayersChanged() Handles ucrAdditionalLayers.NumberOfLayersChanged
+        'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
+        TestOKEnabled()
     End Sub
 End Class
