@@ -154,7 +154,7 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^")
     End Sub
 
-    Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
+    Private Sub ucrSaveResultInto_ContentsChanged() Handles ucrSaveResultInto.ContentsChanged
         SaveResults()
         TestOKEnabled()
     End Sub
