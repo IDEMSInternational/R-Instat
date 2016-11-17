@@ -23,7 +23,7 @@ Public Class sdgPlots
     Public clsRsyntax As New RSyntax
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
-    Public clsAesFunction As New RFunction
+    Public clsAesFunction As New RFunction 'Warning: I m not sure this field is useful... Will all be revised when changing links though...
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
@@ -46,6 +46,13 @@ Public Class sdgPlots
         autoTranslate(Me)
     End Sub
 
+    Public Sub DisableLayersTab()
+        tabLayers.Enabled = False
+    End Sub
+
+    Public Sub EnableLayersTab()
+        tabLayers.Enabled = True
+    End Sub
     Public Sub SetDefaults()
         TitleDefaults()
 
@@ -80,10 +87,12 @@ Public Class sdgPlots
         InitialiseTabs()
         CreateThemes()
         FacetsReceiversSetup()
-        'The following three setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function and aesthetics, as well as the whole PLots RSyntax.
-        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+        'The following sets up the clsGgplotAesFunction in ucrAdditionalLayers. Not sure this should happen in the initialise dialog... Not sure of the objective either... It is never linked to the main dlg anyway...
         ucrPlotsAdditionalLayers.SetAesFunction(clsAesFunction)
+        'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
+        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
+
         'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
         'Also carry the RSyntax through to these ucr's .
         ucrXAxis.SetXorY(True)
@@ -346,7 +355,9 @@ Public Class sdgPlots
 
     'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
     Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
+        'When the link for clsRggplotFunction has been changed, the ucrAdditionalLayers GgplotFunction needs to be updated.
         clsRggplotFunction = clsGgplotFunc
+        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
     End Sub
 
     Public Sub SetDataFrame(strNewDataFrame As String)
@@ -355,7 +366,9 @@ Public Class sdgPlots
     End Sub
 
     Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
+        'When the link for RSyntax has been changed, the ucrAdditionalLayers RSyntax needs to be updated.
         clsRsyntax = clsRSyntaxIn
+        ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
     End Sub
 
 
@@ -422,4 +435,6 @@ Public Class sdgPlots
     End Sub
 
 
+    'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
+    'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
 End Class
