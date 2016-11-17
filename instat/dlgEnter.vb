@@ -267,7 +267,7 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSaveEnterResultInto_NameChanged() Handles ucrSaveEnterResultInto.NameChanged
+    Private Sub ucrSaveEnterResultInto_ContentsChanged() Handles ucrSaveEnterResultInto.ContentsChanged
         SaveResults()
         TestOKEnabled()
     End Sub
