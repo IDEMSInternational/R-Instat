@@ -155,10 +155,10 @@ Public Class dlgDotPlot
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_dotplot, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
         iIndex = clsRgeom_dotplot.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
-        If iIndex <> -1 AndAlso clsRgeom_dotplot.clsParameters(iIndex).strArgumentValue = "y" Then
+        If iIndex <> -1 AndAlso clsRgeom_dotplot.clsParameters(iIndex).strArgumentValue = Chr(34) & "y" & Chr(34) Then
             rdoYBinAxis.Checked = True
         Else
-            rdoXBinAxis.Checked = True 'Note the default value of "binaxis" is "x"
+            rdoXBinAxis.Checked = True 'Note: the default value of "binaxis" is "x"
         End If
         'Task: adapt for multivariable case...
         For Each clsParam In clsRaesFunction.clsParameters
