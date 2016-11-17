@@ -42,16 +42,16 @@ Public Class dlgDotPlot
         clsRgeom_dotplot.SetRCommand("geom_dotplot")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        ucrOtherAxisReceiver.Selector = ucrDotPlotSelector
+        ucrOtherAxisReceiver.SetIncludedDataTypes({"factor", "numeric"}) 'Warning: Even if having "factor" only would maybe be more appropriate for the Axi that is not BinAxis, when coming back from the LayerOptions, where x and y can take both numeric and factor values, we would get bugs.
         ucrFactorReceiver.Selector = ucrDotPlotSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrSecondFactorReceiver.Selector = ucrDotPlotSelector
-        ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrBase.clsRsyntax.iCallType = 0
 
 
-        ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
+        ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrOtherAxisReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
-        ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric"})
+        ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric", "factor"})
         ucrBase.iHelpTopicID = 437
 
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
@@ -86,9 +86,11 @@ Public Class dlgDotPlot
             strOtherAxis = "x"
             clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
         Else
+            strBinAxis = "x"
+            strOtherAxis = "y"
             clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
         End If
-        'The aes parameters for x and y need to be updated.
+        'The aes parameters for x and y in the AesFunction need to be updated, unless we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
         If bEditAesFunction Then
             SetFactorAxisAes()
             SetBinAxisAes()
@@ -97,9 +99,8 @@ Public Class dlgDotPlot
 
 
     Private Sub SetFactorAxisAes()
-
-        If ucrFactorReceiver.IsEmpty() = False Then
-            clsRaesFunction.AddParameter(strOtherAxis, ucrFactorReceiver.GetVariableNames(False))
+        If ucrOtherAxisReceiver.IsEmpty() = False Then
+            clsRaesFunction.AddParameter(strOtherAxis, ucrOtherAxisReceiver.GetVariableNames(False))
         Else
             clsRaesFunction.AddParameter(strOtherAxis, Chr(34) & "" & Chr(34))
         End If
@@ -116,21 +117,21 @@ Public Class dlgDotPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
-        If bEditAesFunction Then
+    Private Sub ucrOtherAxisReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrOtherAxisReceiver.SelectionChanged
+        If bEditAesFunction Then 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
             SetFactorAxisAes()
         End If
     End Sub
 
     Private Sub ucrVariablesAsFactorDotPlot_SelectionChanged() Handles ucrVariablesAsFactorDotPlot.SelectionChanged
-        If bEditAesFunction Then
+        If bEditAesFunction Then 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
             SetBinAxisAes()
         End If
     End Sub
-    Private Sub ucrSecondFactorReceiver_SelectonChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
-        If bEditAesFunction Then
-            If ucrSecondFactorReceiver.IsEmpty() = False Then
-                clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+    Private Sub ucrFactorReceiver_SelectonChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        If bEditAesFunction Then 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
+            If ucrFactorReceiver.IsEmpty() = False Then
+                clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
             Else
                 clsRaesFunction.RemoveParameterByName("fill")
             End If
@@ -149,7 +150,8 @@ Public Class dlgDotPlot
 
     Private Sub cmdDotPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdDotPlotOptions.Click
         Dim iIndex As Integer
-        bEditAesFunction = False
+        bEditAesFunction = False 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
+
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_dotplot, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
         iIndex = clsRgeom_dotplot.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
@@ -162,19 +164,21 @@ Public Class dlgDotPlot
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = strOtherAxis Then
                 If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrFactorReceiver.Clear()
+                    ucrOtherAxisReceiver.Clear()
                 Else
-                    ucrFactorReceiver.Add(clsParam.strArgumentValue)
+                    ucrOtherAxisReceiver.Add(clsParam.strArgumentValue)
                 End If
                 'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
                 'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
             ElseIf clsParam.strArgumentName = strBinAxis AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorDotPlot.bSingleVariable) Then
                 ucrVariablesAsFactorDotPlot.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
+
         bEditAesFunction = True
+
         TestOkEnabled()
     End Sub
 
