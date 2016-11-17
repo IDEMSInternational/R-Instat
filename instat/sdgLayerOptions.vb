@@ -80,7 +80,7 @@ Public Class sdgLayerOptions
         If ucrGeomWithAes.chkApplyOnAllLayers.Checked Then
             'First, in case the chkApplyOnAllLayers is checked, what is by default understood as local mapping (clsGeomAesFunction) needs to become global mapping: the Aes parameters in clsGeomAesFunction are sent through to clsAesFunction.
             For Each clsParam In ucrGeomWithAes.clsGeomAesFunction.clsParameters
-                clsAesFunction.AddParameter(clsParam)
+                clsAesFunction.AddParameter(clsParam) 'Warning: This never removes the parameters that have been previously inserted...
             Next
             'Now, we don't want the parameters "mapping" and "data" in the Layer as these will be fixed globally and then inherited.
             clsGeomFunction.RemoveParameterByName("mapping")
