@@ -20,7 +20,7 @@ Public Class dlgOneVariableGraph
     Private clsRaesFunction As New RFunction
     Private clsRgeom_Function As New RFunction
     Private bFirstLoad As Boolean = True
-    Private clsBaseOperatorOneColumn As New ROperator
+    'Private clsBaseOperatorOneColumn As New ROperator
     Private clsBaseFunctionMultipleVariables As New RFunction
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -56,14 +56,14 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        clsBaseOperatorOneColumn.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.ClearParameters()
-        clsBaseOperatorOneColumn.SetParameter(True, clsRFunc:=clsRggplotFunction)
-        clsBaseOperatorOneColumn.SetParameter(False, clsRFunc:=clsRgeom_Function)
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        'clsBaseOperatorOneColumn.SetOperation("+")
+        'clsRggplotFunction.SetRCommand("ggplot")
+        'clsRaesFunction.SetRCommand("aes")
+        'clsRaesFunction.ClearParameters()
+        'clsBaseOperatorOneColumn.SetParameter(True, clsRFunc:=clsRggplotFunction)
+        'clsBaseOperatorOneColumn.SetParameter(False, clsRFunc:=clsRgeom_Function)
+        'clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.clsCurrDataFrame)
+        'clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
 
         clsBaseFunctionMultipleVariables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
         sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
@@ -83,6 +83,10 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Public Sub OneOrMoreVariables()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunctionMultipleVariables)
+        clsBaseFunctionMultipleVariables.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsBaseFunctionMultipleVariables.AddParameter("columns", ucrReceiverOneVarGraph.GetVariableNames())
+
         'If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then
         '    ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperatorOneColumn)
         '    If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" OrElse ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "integer" Then
@@ -115,11 +119,8 @@ Public Class dlgOneVariableGraph
         '        End If
         '    End If
         'Else
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunctionMultipleVariables)
-        clsBaseFunctionMultipleVariables.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-        clsBaseFunctionMultipleVariables.AddParameter("columns", ucrReceiverOneVarGraph.GetVariableNames())
         ' End If
+
     End Sub
 
     Private Sub ucrSelectorOneVarGraph_DataFrameChanged() Handles ucrSelectorOneVarGraph.DataFrameChanged
@@ -181,14 +182,9 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
-        Dim clsTempRFunc As New RFunction
-
         If chkFlipCoordinates.Checked = True Then
-            clsTempRFunc.SetRCommand("coord_flip")
-            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
             ucrBase.clsRsyntax.AddParameter("coord_flip", "TRUE")
         Else
-            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
             ucrBase.clsRsyntax.RemoveParameter("coord_flip")
         End If
     End Sub
