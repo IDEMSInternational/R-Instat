@@ -33,7 +33,7 @@ Public Class dlgSplitText
 
     End Sub
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso nudN.Text <> "" Then
+        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso nudN.Text <> "" AndAlso Not ucrInputPattern.IsEmpty AndAlso Not ucrInputColumnsIntoText.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -59,7 +59,6 @@ Public Class dlgSplitText
     Private Sub SetDefaults()
         ucrSelectorSplitTextColumn.Reset()
         ucrSelectorSplitTextColumn.Focus()
-        ucrInputColumnsIntoText.Reset()
         ucrInputColumnsIntoText.SetName("SplitText")
         ucrInputPattern.ResetText()
         nudN.Value = 2
@@ -72,6 +71,7 @@ Public Class dlgSplitText
 
     Private Sub cboInputPattern_Namechanged() Handles ucrInputPattern.NameChanged
         PatternParameter()
+        TestOKEnabled()
     End Sub
 
     Private Sub PatternParameter()
@@ -80,17 +80,18 @@ Public Class dlgSplitText
                 ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & " " & Chr(34))
             Case ""
                 If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "" & Chr(34))
+                    ucrBase.clsRsyntax.AddParameter("pattern", "fixed (" & Chr(34) & "" & Chr(34) & ")")
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("pattern")
                 End If
             Case Else
-                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText() & Chr(34))
+                ucrBase.clsRsyntax.AddParameter("pattern", "fixed (" & Chr(34) & ucrInputPattern.GetText() & Chr(34) & ")")
         End Select
     End Sub
 
     Private Sub ucrInputColumnIntText_NameChanged() Handles ucrInputColumnsIntoText.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumnsIntoText.GetText, strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnsIntoText.GetText, bAssignToIsPrefix:=True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverSplitTextColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSplitTextColumn.SelectionChanged
