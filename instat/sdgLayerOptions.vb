@@ -90,9 +90,10 @@ Public Class sdgLayerOptions
             clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
             'The data frame that is selected in the dataframe selector (lives in ucrGeomWithAes) is communicated to the sdgLayerOptions and the ucrGeomWithAes
             'Question to be discussed: could these two strGlobalDataFrame and ucrGeomWithAes.strGlobalDataFrame not be linked together in sdgLayerOptions.initialisedialog() ? 
+            'Question: why do we even do this ? Should it not have been done earlier ? What's the point of changing parameters on sdgLayerOptions right before closing it ?
             strGlobalDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             ucrGeomWithAes.strGlobalDataFrame = strGlobalDataFrame
-        Else
+        Else 'Warning: in case the dggLayerOptions has been called by specific dlg, need to refill the aes on that dlg. Imagine the ApplyOnAllLayers has been unticked ? Problem... Also in order to solve this, would need to know on the specific dialog if it has been unticked or not in order to know how to fill in the aes receivers !
             If ucrGeomWithAes.clsGeomAesFunction.iParameterCount > 0 Then
                 clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsGeomAesFunction.Clone())
             Else
