@@ -102,26 +102,31 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoSingleColumn.Checked Then
-            If Not ucrReceiverForDate.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+        If Not ucrInputNewColumnName.IsEmpty Then
+            If rdoSingleColumn.Checked Then
+                If Not ucrReceiverForDate.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
 
-        ElseIf rdoYearandDayofYear.Checked Then
-            If Not ucrReceiverYearTwo.IsEmpty AndAlso Not ucrReceiverDayTwo.IsEmpty Then
-                ucrBase.OKEnabled(True)
+            ElseIf rdoYearandDayofYear.Checked Then
+                If Not ucrReceiverYearTwo.IsEmpty AndAlso Not ucrReceiverDayTwo.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             Else
-                ucrBase.OKEnabled(False)
+                If Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             End If
         Else
-            If Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty AndAlso Not ucrReceiverYearThree.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(False)
         End If
+
     End Sub
 
     Private Sub DateFormat()
@@ -157,8 +162,9 @@ Public Class dlgMakeDate
 
     End Sub
 
-    Private Sub UcrInputNewColumnName_NameChanged() Handles ucrInputNewColumnName.NameChanged
+    Private Sub UcrInputNewColumnName_ContentsChanged() Handles ucrInputNewColumnName.ContentsChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSeclectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=False)
+        TestOKEnabled()
     End Sub
 
 
