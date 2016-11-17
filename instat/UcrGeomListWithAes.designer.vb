@@ -137,7 +137,7 @@ Partial Class UcrGeomListWithParameters
         Me.grpAesList.Size = New System.Drawing.Size(219, 321)
         Me.grpAesList.TabIndex = 9
         Me.grpAesList.TabStop = False
-        Me.grpAesList.Text = "Geom Aesthetics"
+        Me.grpAesList.Text = "Geom Aesthetics:"
         '
         'lblGgParam6
         '
