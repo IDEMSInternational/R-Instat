@@ -56,6 +56,7 @@ Public Class dlgEnter
         ucrDataFrameEnter.Reset()
         chkSaveEnterResultInto.Checked = True
         ucrSaveEnterResultInto.SetPrefix("Enter")
+        ucrReceiverForEnterCalculation.Clear()
     End Sub
     Private Sub ReopenDialog()
         SaveResults()
