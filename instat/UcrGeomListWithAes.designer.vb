@@ -19,7 +19,7 @@ Partial Class UcrGeomListWithParameters
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrGeomWithAesSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblAesList = New System.Windows.Forms.Label()
         Me.ucrReceiverParam1 = New instat.ucrReceiverSingle()
         Me.ucrReceiverParam2 = New instat.ucrReceiverSingle()
@@ -47,15 +47,15 @@ Partial Class UcrGeomListWithParameters
         Me.grpAesList.SuspendLayout()
         Me.SuspendLayout()
         '
-        'UcrSelector
+        'ucrGeomWithAesSelector
         '
-        Me.UcrSelector.bShowHiddenColumns = False
-        Me.UcrSelector.bUseCurrentFilter = True
-        Me.UcrSelector.Location = New System.Drawing.Point(3, 56)
-        Me.UcrSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrSelector.Name = "UcrSelector"
-        Me.UcrSelector.Size = New System.Drawing.Size(232, 192)
-        Me.UcrSelector.TabIndex = 5
+        Me.ucrGeomWithAesSelector.bShowHiddenColumns = False
+        Me.ucrGeomWithAesSelector.bUseCurrentFilter = True
+        Me.ucrGeomWithAesSelector.Location = New System.Drawing.Point(3, 56)
+        Me.ucrGeomWithAesSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrGeomWithAesSelector.Name = "ucrGeomWithAesSelector"
+        Me.ucrGeomWithAesSelector.Size = New System.Drawing.Size(232, 192)
+        Me.ucrGeomWithAesSelector.TabIndex = 5
         '
         'lblAesList
         '
@@ -301,10 +301,10 @@ Partial Class UcrGeomListWithParameters
         Me.Controls.Add(Me.chkApplyOnAllLayers)
         Me.Controls.Add(Me.grpAesList)
         Me.Controls.Add(Me.lblAesList)
-        Me.Controls.Add(Me.UcrSelector)
+        Me.Controls.Add(Me.ucrGeomWithAesSelector)
         Me.Name = "UcrGeomListWithParameters"
         Me.Size = New System.Drawing.Size(467, 343)
-        Me.Controls.SetChildIndex(Me.UcrSelector, 0)
+        Me.Controls.SetChildIndex(Me.ucrGeomWithAesSelector, 0)
         Me.Controls.SetChildIndex(Me.lblAesList, 0)
         Me.Controls.SetChildIndex(Me.grpAesList, 0)
         Me.Controls.SetChildIndex(Me.chkApplyOnAllLayers, 0)
@@ -315,7 +315,7 @@ Partial Class UcrGeomListWithParameters
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents UcrSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrGeomWithAesSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblAesList As Label
     Friend WithEvents ucrReceiverParam1 As ucrReceiverSingle
     Friend WithEvents ucrReceiverParam2 As ucrReceiverSingle

@@ -59,16 +59,16 @@ Public Class UcrGeomListWithParameters
 
     Private Sub SetSelector()
         'Link the selector and the receivers
-        ucrReceiverParam1.Selector = UcrSelector
-        ucrReceiverParam2.Selector = UcrSelector
-        ucrReceiverParam3.Selector = UcrSelector
-        ucrReceiverParam4.Selector = UcrSelector
-        ucrReceiverParam5.Selector = UcrSelector
-        ucrReceiverParam6.Selector = UcrSelector
-        ucrReceiverParam7.Selector = UcrSelector
-        ucrReceiverParam8.Selector = UcrSelector
-        ucrReceiverParam9.Selector = UcrSelector
-        ucrReceiverParam10.Selector = UcrSelector
+        ucrReceiverParam1.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam2.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam3.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam4.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam5.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam6.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam7.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam8.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam9.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam10.Selector = ucrGeomWithAesSelector
     End Sub
 
     Private Sub InitialiseSelectedDataFrame()
@@ -79,9 +79,9 @@ Public Class UcrGeomListWithParameters
             iIndexOfData_nameParameter = clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name")
             strDataFrameName = String.Copy(clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters(iIndexOfData_nameParameter).strArgumentValue)
             strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2)
-            UcrSelector.SetDataframe(strDataFrameName)
+            ucrGeomWithAesSelector.SetDataframe(strDataFrameName)
         Else
-            UcrSelector.SetDataframe(strDataFrameName, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
+            ucrGeomWithAesSelector.SetDataframe(strDataFrameName, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
         End If
     End Sub
     Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
@@ -119,7 +119,7 @@ Public Class UcrGeomListWithParameters
     Private Function LocalAndGlobalDataFramesAreDifferent() As Boolean
         'This methods checks whether the dataframe used for this layer is different from the global dataframe. If they are different, then chkIgnoreGlobalAes should be permanently checked. See UcrSelector_DataFrameChanged.
         Dim bValue As Boolean = False
-        If strGlobalDataFrame <> "" AndAlso UcrSelector.strCurrentDataFrame <> strGlobalDataFrame Then 'Warning: if the CurrentDataframe is chosen appropriately, which is the case thanks to InitialiseSelectedDataFrame
+        If strGlobalDataFrame <> "" AndAlso ucrGeomWithAesSelector.strCurrentDataFrame <> strGlobalDataFrame Then 'Warning: if the CurrentDataframe is chosen appropriately, which is the case thanks to InitialiseSelectedDataFrame
             bValue = True
         End If
         Return bValue
@@ -267,7 +267,7 @@ Public Class UcrGeomListWithParameters
     Private Sub chkChangeAes_CheckedChanged(sender As Object, e As EventArgs) Handles chkApplyOnAllLayers.CheckedChanged
         'Sets the dataframe to the globaldataframe and fixes it in case that one is not empty and chkApplyOnAllLayers is checked.
         'Question to be discussed: are we happy with this ? We don't want it to be the opposite, i.e. the global data frame to be changed when apply on all layers is ticked ? Would then need to "reset the global aes function"... See issue on github... All this should be revised when linking is studied.
-        UcrSelector.SetDataframe(strGlobalDataFrame, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
+        ucrGeomWithAesSelector.SetDataframe(strGlobalDataFrame, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
         'Warning: the dataframe needs to be set first. Indeed, this will enable IgnoreGlobalAes in the "datafram_changed" sub. In the same sub, Ignore global aes will be unticked and thus setAes called. If not done in this order, Ignore global aes is unticked below before the check box has been enabled and thus the event IngnoreGlobalAes.check.changed is not raised, and set aes never called.
         If chkApplyOnAllLayers.Checked Then
             chkIgnoreGlobalAes.Checked = False
@@ -287,7 +287,7 @@ Public Class UcrGeomListWithParameters
         SetAes()
     End Sub
 
-    Private Sub UcrSelector_DataFrameChanged() Handles UcrSelector.DataFrameChanged
+    Private Sub ucrGeomWithAesSelector_DataFrameChanged() Handles ucrGeomWithAesSelector.DataFrameChanged
         'When the dataframes in local layers don't correspond to the data in the global ggplot function, inherit.aes should be set to false (otherwise risk for errors). Then the IgnoreGlobalAes should remain ticked until dataframes coincide.
         If LocalAndGlobalDataFramesAreDifferent() Then
             chkIgnoreGlobalAes.Checked = True

@@ -50,7 +50,7 @@ Public Class sdgLayerOptions
     End Sub
 
     Private Sub SetDefaults()
-        ucrGeomWithAes.UcrSelector.Reset()
+        ucrGeomWithAes.ucrGeomWithAesSelector.Reset()
         strGlobalDataFrame = ""
     End Sub
 
@@ -87,11 +87,11 @@ Public Class sdgLayerOptions
             clsGeomFunction.RemoveParameterByName("data")
             'Here the global ggplot function takes the relevant "mapping" and "data" parameters as required by "ApplyOnAllLayers".
             clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction)
-            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
             'The data frame that is selected in the dataframe selector (lives in ucrGeomWithAes) is communicated to the sdgLayerOptions and the ucrGeomWithAes
             'Question to be discussed: could these two strGlobalDataFrame and ucrGeomWithAes.strGlobalDataFrame not be linked together in sdgLayerOptions.initialisedialog() ? 
             'Question: why do we even do this ? Should it not have been done earlier ? What's the point of changing parameters on sdgLayerOptions right before closing it ?
-            strGlobalDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+            strGlobalDataFrame = ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             ucrGeomWithAes.strGlobalDataFrame = strGlobalDataFrame
         Else 'Warning: in case the dggLayerOptions has been called by specific dlg, need to refill the aes on that dlg. Imagine the ApplyOnAllLayers has been unticked ? Problem... Also in order to solve this, would need to know on the specific dialog if it has been unticked or not in order to know how to fill in the aes receivers ! The linking will be restudied anyway. There are many ways to go, see discussion on github.
             If ucrGeomWithAes.clsGeomAesFunction.iParameterCount > 0 Then
@@ -99,8 +99,8 @@ Public Class sdgLayerOptions
             Else
                 clsGeomFunction.RemoveParameterByName("mapping")
             End If
-            If ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> strGlobalDataFrame Then
-                clsGeomFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            If ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> strGlobalDataFrame Then
+                clsGeomFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
             Else
                 clsGeomFunction.RemoveParameterByName("data")
             End If
