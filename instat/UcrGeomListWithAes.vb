@@ -80,7 +80,7 @@ Public Class UcrGeomListWithParameters
         If clsGeomFunction.GetParameter("data") IsNot Nothing AndAlso clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name") <> -1 Then
             iIndexOfData_nameParameter = clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name")
             strDataFrameName = String.Copy(clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters(iIndexOfData_nameParameter).strArgumentValue) 'Note: copy is supposidely necessary here to avoid editing the value of the "data_name" parameter in clsArgumentFunction (in any case it doesn't do any harm).
-            strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2) 'The value of the parameter "data_name" has quotes around it hat need to be erased as we merely want the name of the data_frame.
+            strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2) 'The value of the parameter "data_name" has quotes around it that need to be erased as we merely want the name of the data_frame.
             ucrGeomWithAesSelector.SetDataframe(strDataFrameName)
         Else
             ucrGeomWithAesSelector.SetDataframe(strDataFrameName, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
