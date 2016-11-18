@@ -242,6 +242,12 @@
     <Compile Include="dlgOpenSST.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRainfall.Designer.vb">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </Compile>
@@ -2486,6 +2492,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.sw-KE.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainfall.fr-FR.resx">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainfall.resx">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainfall.sw-KE.resx">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
