@@ -188,34 +188,44 @@ Public Class sdgPlots
             'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
             'In case only one of the receivers is non-empty, margins are checked (grid argument) or number of rows are not checked (wrap argument), then fecet_grid is used. Otherwise, wrap is used.
             'The place of the argument, left or right, in the facets parameter of the facets function is determined by the choice "vertical" or "horizontal" faceting.
-            If rdoHorizontal.Checked AndAlso (chkMargin.Checked OrElse Not chkNoOfRowsOrColumns.Checked) Then
-                clsRFacetFunction.SetRCommand("facet_grid")
-                clsTempOp.SetParameter(True, strValue:=".")
+            If rdoHorizontal.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
+                clsRFacetFunction.SetRCommand("facet_wrap")
+                clsTempOp.SetParameter(True, strValue:="")
                 clsTempOp.SetParameter(False, strValue:=strSingleFactor)
+                clsRFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+                SetFixRowColumnParameter()
                 'As there are only a left and a right parameter for clsTempOp, no need to specify a parameter name, the default "right" will be used.
                 'The boolean argument "false" is there to indicate we don't want quotes.
 
 
-            ElseIf rdoVertical.Checked AndAlso (chkMargin.Checked OrElse Not chkNoOfRowsOrColumns.Checked) Then
+            ElseIf rdoVertical.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
+                clsRFacetFunction.SetRCommand("facet_wrap")
+                RemoveGridParameters()
+                clsTempOp.SetParameter(True, strValue:="")
+                clsTempOp.SetParameter(False, strValue:=strSingleFactor)
+                clsRFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
+                SetFixRowColumnParameter()
+
+            Else
+                'Warning: could be refined a little...
+                RemoveWrapParameters()
                 clsRFacetFunction.SetRCommand("facet_grid")
                 clsTempOp.SetParameter(False, strValue:=".")
                 clsTempOp.SetParameter(True, strValue:=strSingleFactor)
 
-            Else
-                'Warning: could be refined a little...
-                clsRFacetFunction.SetRCommand("facet_wrap")
-                clsTempOp.SetParameter(True, strValue:="")
-                clsTempOp.SetParameter(False, strValue:=strSingleFactor)
-                If rdoHorizontal.Checked AndAlso chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
-                    clsRFacetFunction.AddParameter("nrow", nudNoOfRowsOrColumns.Value)
-                ElseIf rdoVertical.Checked AndAlso chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
-                    clsRFacetFunction.AddParameter("ncol", nudNoOfRowsOrColumns.Value)
+                If rdoHorizontal.Checked Then
+                    clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                    clsTempOp.SetParameter(True, strValue:=".")
+                ElseIf rdoVertical.Checked Then
+                    clsTempOp.SetParameter(True, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                    clsTempOp.SetParameter(False, strValue:=".")
                 End If
             End If
             clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
             'In case the two receivers are filled, facet_grid is used.
         ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
             clsRFacetFunction.SetRCommand("facet_grid")
+            RemoveWrapParameters()
             If rdoHorizontal.Checked Then
                 clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
                 clsTempOp.SetParameter(True, strValue:=ucr2ndFactorReceiver.GetVariableNames(False))
@@ -226,6 +236,28 @@ Public Class sdgPlots
             clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
         Else
             clsRFacetFunction.RemoveParameterByName("facets")
+        End If
+    End Sub
+
+    Private Sub RemoveWrapParameters()
+        clsRFacetFunction.RemoveParameterByName("dir")
+        clsRFacetFunction.RemoveParameterByName("ncol")
+        clsRFacetFunction.RemoveParameterByName("nrow")
+    End Sub
+
+    Private Sub RemoveGridParameters()
+
+
+    End Sub
+    Private Sub SetFixRowColumnParameter()
+        If chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
+            If rdoHorizontal.Checked Then
+                clsRFacetFunction.AddParameter("nrow", nudNoOfRowsOrColumns.Value)
+                clsRFacetFunction.RemoveParameterByName("ncol")
+            Else
+                clsRFacetFunction.RemoveParameterByName("nrow")
+                clsRFacetFunction.AddParameter("ncol", nudNoOfRowsOrColumns.Value)
+            End If
         End If
     End Sub
 
@@ -434,6 +466,10 @@ Public Class sdgPlots
         ElseIf rdoLegendTitleAuto.Checked Then
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
+    End Sub
+
+    Private Sub nudNoOfRowsOrColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNoOfRowsOrColumns.ValueChanged
+
     End Sub
 
 
