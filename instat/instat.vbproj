@@ -164,6 +164,12 @@
     <Compile Include="dlgCountinFactor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCropsPICSA.Designer.vb">
+      <DependentUpon>dlgCropsPICSA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCropsPICSA.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -2144,6 +2150,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCountinFactor.resx">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCropsPICSA.fr-FR.resx">
+      <DependentUpon>dlgCropsPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCropsPICSA.resx">
+      <DependentUpon>dlgCropsPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCropsPICSA.sw-KE.resx">
+      <DependentUpon>dlgCropsPICSA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
