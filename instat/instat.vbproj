@@ -254,6 +254,12 @@
     <Compile Include="dlgShowModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTemperature.Designer.vb">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTwoVariabletabulate.Designer.vb">
       <DependentUpon>dlgTwoVariabletabulate.vb</DependentUpon>
     </Compile>
@@ -2648,6 +2654,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgShowModel.sw-KE.resx">
       <DependentUpon>dlgShowModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTemperature.fr-FR.resx">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTemperature.resx">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTemperature.sw-KE.resx">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.fr-FR.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
