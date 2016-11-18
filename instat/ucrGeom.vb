@@ -606,18 +606,27 @@ Public Class ucrGeom
 
 
         clsgeom_line.strGeomName = "geom_line"
-        'mandatory
         'x and y are mandatory, but these are autofilled by "" when no variable is mapped. "Partially mandatory"
         clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_line.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
-        'optional
+        'Optional
         clsgeom_line.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric, factor"})
+        'Adding layer parameters
+        'Geom_line Parameters
 
-        'adding layer parameters
-        clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "stack" & Chr(34)}) 'others options are “jitter”, “dodge” And “stack”
+        'Global Layer parameters
+        clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_line.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
+        clsgeom_line.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_line.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
+        clsgeom_line.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_line.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_line.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
         lstAllGeoms.Add(clsgeom_line)
 
 
@@ -684,10 +693,9 @@ Public Class ucrGeom
         'Geom_poitn Parameters
 
         'Global Layer parameters
-
-        clsgeom_point.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_point.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_point.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
+        clsgeom_point.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_point.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
         clsgeom_point.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
@@ -812,9 +820,18 @@ Public Class ucrGeom
         clsgeom_rug.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_rug.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
 
-        'add layer parameters
-        clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "stack" & Chr(34)})
+        'Adding layer parameters
+        'Geom_line Parameters
         clsgeom_rug.AddLayerParameter("sides", "list", Chr(34) & "bl" & Chr(34), lstParameterStrings:={Chr(34) & "trbl" & Chr(34), Chr(34) & "trb" & Chr(34), Chr(34) & "trl" & Chr(34), Chr(34) & "tbl" & Chr(34), Chr(34) & "rbl" & Chr(34), Chr(34) & "tr" & Chr(34), Chr(34) & "tb" & Chr(34), Chr(34) & "tl" & Chr(34), Chr(34) & "rb" & Chr(34), Chr(34) & "rl" & Chr(34), Chr(34) & "bl" & Chr(34), Chr(34) & "t" & Chr(34), Chr(34) & "r" & Chr(34), Chr(34) & "b" & Chr(34), Chr(34) & "l" & Chr(34)})
+        'Global Layer parameters
+        clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_rug.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
+        clsgeom_rug.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_rug.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
+        clsgeom_rug.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_rug.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_rug.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_rug)
 
         'clsgeom_segment.strGeomName = "geom_segment"
