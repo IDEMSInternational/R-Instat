@@ -39,6 +39,8 @@ Partial Class dlgTotals
         Me.ClientSize = New System.Drawing.Size(409, 269)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgTotals"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Totals"

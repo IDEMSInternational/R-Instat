@@ -16,33 +16,36 @@
 
 Imports instat.Translations
 Public Class dlgNon_ParametricOneWayANOVA
-
     Public bFirstLoad As Boolean = True
     Public clsModel As New ROperator
 
     Private Sub dlgNon_ParametricOneWayANOVA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         If bFirstLoad Then
-            InitializeDialog()
-            DefaultSettings()
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
 
-
-
+        autoTranslate(Me)
     End Sub
-    Private Sub InitializeDialog()
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("kruskal.test")
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverYVariate.Selector = ucrDataFrameAddRemove
         ucrReceiverFactor.Selector = ucrDataFrameAddRemove
         ucrReceiverFactor.SetDataType("factor")
         clsModel.SetOperation("~")
-        autoTranslate(Me)
-        TestOKEnabled()
         ucrBase.iHelpTopicID = 183
     End Sub
 
-    Private Sub DefaultSettings()
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
         ucrDataFrameAddRemove.Reset()
         ucrDataFrameAddRemove.Focus()
         ucrReceiverYVariate.SetMeAsReceiver()
@@ -56,14 +59,10 @@ Public Class dlgNon_ParametricOneWayANOVA
 
     Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
         clsModel.SetParameter(False, strValue:=ucrReceiverFactor.GetVariableNames(bWithQuotes:=False))
-
         TestOKEnabled()
     End Sub
 
-
-
     Private Sub TestOKEnabled()
-
         If (Not ucrReceiverYVariate.IsEmpty()) And (Not ucrReceiverFactor.IsEmpty()) Then
             ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBase.OKEnabled(True)
@@ -78,7 +77,6 @@ Public Class dlgNon_ParametricOneWayANOVA
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        DefaultSettings()
+        SetDefaults()
     End Sub
-
 End Class

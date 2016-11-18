@@ -154,6 +154,7 @@ Partial Class dlgDisplayRainRunningTotal
         '
         'ucrInputColumnName
         '
+        Me.ucrInputColumnName.IsReadOnly = False
         Me.ucrInputColumnName.Location = New System.Drawing.Point(88, 32)
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
         Me.ucrInputColumnName.Size = New System.Drawing.Size(142, 21)
@@ -161,6 +162,7 @@ Partial Class dlgDisplayRainRunningTotal
         '
         'ucrInputDisplayDay
         '
+        Me.ucrInputDisplayDay.IsReadOnly = False
         Me.ucrInputDisplayDay.Location = New System.Drawing.Point(88, 55)
         Me.ucrInputDisplayDay.Name = "ucrInputDisplayDay"
         Me.ucrInputDisplayDay.Size = New System.Drawing.Size(142, 21)
@@ -186,6 +188,8 @@ Partial Class dlgDisplayRainRunningTotal
         Me.Controls.Add(Me.chkMonthList)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDisplayRainRunningTotal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Display_Rain_Running_Total"

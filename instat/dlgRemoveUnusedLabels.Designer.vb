@@ -39,14 +39,18 @@ Partial Class dlgRemoveUnusedLabels
         '
         'ucrDataFrame
         '
+        Me.ucrDataFrame.bUseCurrentFilter = True
         Me.ucrDataFrame.Location = New System.Drawing.Point(2, 2)
+        Me.ucrDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrame.Name = "ucrDataFrame"
         Me.ucrDataFrame.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFrame.TabIndex = 1
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(2, 59)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove.TabIndex = 2
@@ -54,7 +58,9 @@ Partial Class dlgRemoveUnusedLabels
         'ucrSelectedVariable
         '
         Me.ucrSelectedVariable.Location = New System.Drawing.Point(234, 103)
+        Me.ucrSelectedVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectedVariable.Name = "ucrSelectedVariable"
+        Me.ucrSelectedVariable.Selector = Nothing
         Me.ucrSelectedVariable.Size = New System.Drawing.Size(106, 26)
         Me.ucrSelectedVariable.TabIndex = 3
         '
@@ -89,7 +95,10 @@ Partial Class dlgRemoveUnusedLabels
         Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRemoveUnusedLabels"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Remove_unused_labels"
         Me.Text = "Remove Unused Labels"
         Me.ResumeLayout(False)
