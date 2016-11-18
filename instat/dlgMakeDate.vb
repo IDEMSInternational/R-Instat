@@ -107,7 +107,7 @@ Public Class dlgMakeDate
                     ucrBase.OKEnabled(False)
                 End If
             Else
-                If Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty Then
+                If Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty AndAlso Not ucrReceiverYearThree.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -116,7 +116,6 @@ Public Class dlgMakeDate
         Else
             ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
     Private Sub DateFormat()
@@ -154,7 +153,6 @@ Public Class dlgMakeDate
 
     Private Sub UcrInputNewColumnName_NameChanged() Handles ucrInputNewColumnName.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSeclectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=False)
-        TestOKEnabled()
     End Sub
 
 
@@ -310,4 +308,7 @@ Public Class dlgMakeDate
         End If
     End Sub
 
+    Private Sub ucrInputNewColumnName_ContentsChanged() Handles ucrInputNewColumnName.ContentsChanged
+        TestOKEnabled
+    End Sub
 End Class
