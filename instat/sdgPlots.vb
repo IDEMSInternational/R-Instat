@@ -55,8 +55,8 @@ Public Class sdgPlots
     End Sub
     Public Sub SetDefaults()
         TitleDefaults()
-
         chkIncludeFacets.Checked = False
+        chkNoOfRowsOrColumns.Visible = False
         IncludeFacets()
         ucrFacetSelector.Reset()
 
@@ -238,6 +238,7 @@ Public Class sdgPlots
     End Sub
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
         IncludeFacets()
+        FacetsNumberOfRowsOrColumns()
     End Sub
 
     Private Sub SetScaleOption()
@@ -266,8 +267,9 @@ Public Class sdgPlots
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
         Else
-            chkNoOfRowsOrColumns.Visible = True
+        chkNoOfRowsOrColumns.Visible = True
             nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+
         End If
     End Sub
 
@@ -433,6 +435,7 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub
+
 
 
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
