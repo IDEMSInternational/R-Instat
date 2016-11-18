@@ -450,7 +450,7 @@ Public Class ucrGeom
         'Warning: when a parameter is irrelevant (e.g. mentioning 'width' when 'binaxis' is "x" or 'right' when 'method' is "dotdensity"), this parameter is simply ignored...
 
         clsgeom_dotplot.AddLayerParameter("method", "list", Chr(34) & "dotdensity" & Chr(34), lstParameterStrings:={Chr(34) & "dotdensity" & Chr(34), Chr(34) & "histodot" & Chr(34)}) 'For when the binaxis is continuous, "dotdensity" (default) for dot-density binning, or "histodot" for fixed bin widths (like stat_bin)
-        clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={2}) 'When method is "dotdensity", this specifies maximum bin width. When method is "histodot", this specifies bin width. Defaults to 1/30 of the range of the data
+        clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={2, 0.01}) 'When method is "dotdensity", this specifies maximum bin width. When method is "histodot", this specifies bin width. Defaults to 1/30 of the range of the data, need to be strictly positive.
         'Warning: here default has been set to 1 as calculating 1/30 of the range of the data is not possible. 
         clsgeom_dotplot.AddLayerParameter("binaxis", "list", Chr(34) & "x" & Chr(34), lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)}) 'The axis to bin along
         clsgeom_dotplot.AddLayerParameter("binpositions", "list", Chr(34) & "bygroup" & Chr(34), lstParameterStrings:={Chr(34) & "bygroup" & Chr(34), Chr(34) & "all" & Chr(34)}) 'When method is "dotdensity", "bygroup" (default) determines positions of the bins for each group separately. "all" determines positions of the bins with all the data taken together; this is used for aligning dot stacks across multiple groups.
@@ -513,17 +513,35 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_errorbarh)
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
-        clsgeom_freqpoly.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        'we can map a continuous variable to y but stat= "identity" must be included within the geom
+        'Adding aesthetics parameters.
+        clsgeom_freqpoly.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True) 'Note: Mapping a factor to x is possible but requires stat "identity" ("count" doesn't give any results, but no error, just warning). However the output is the same as if we would have used line... Left it as it is to avoid complications even though things that are allowed are usually included.
+        'Warning: a continuous variable can be mapped to y but stat= "identity" must be included within the geom. Very silly results, but differetn from geom_line so...
         clsgeom_freqpoly.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
-        clsgeom_freqpoly.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
-        clsgeom_freqpoly.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddAesParameter("weight", strIncludedDataTypes:={"numeric"}) 'An alternative to mapping something to y...
+        clsgeom_freqpoly.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_freqpoly.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_freqpoly.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_freqpoly.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
 
         'Add layer parameters
-        clsgeom_freqpoly.AddLayerParameter("stat", "list", Chr(34) & "bin" & Chr(34), lstParameterStrings:={Chr(34) & "bin" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34)})
+        'Geom_freqpoly parameters
+        clsgeom_freqpoly.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={2, 0.01}) 'Defaults to 1/30 of the range of the data, need to be strictly positive.
+        'Warning: here default has been set to 1 as calculating 1/30 of the range of the data is not possible. 
+        clsgeom_freqpoly.AddLayerParameter("bins", "numeric", "30", lstParameterStrings:={0, 1}) 'Number of bins. Overridden by binwidth. Defaults to 30, need at least one.
+        clsgeom_freqpoly.AddLayerParameter("center", "numeric", "0", lstParameterStrings:={1}) 'Finds the bin that is closest to that "centre" and centres that bin on it. All other bins are then shifted accordingly. Note that If center Is above Or below the range Of the data, things will oficcially be shifted by an appropriate number Of widths (testing shows that nothing actually happens in this version of R, wait for next version). To center On integers, for example, use width=1 And center=0, even if 0 Is outside the range of the data. At most one of center And boundary may be specified.
+        clsgeom_freqpoly.AddLayerParameter("boundary", "numeric", "0", lstParameterStrings:={1}) 'Finds the bin with the closest boundary to this "boudary" and shifts that bin for the boundary to be on that value. All other bins are then shifted accordingly. As with center, things are shifted when boundary is outside the range of the data (testing shows that nothing actually happens in this version of R, wait for next version). For example, to center on integers, use width = 1 and boundary = 0.5, even if 1 is outside the range of the data. At most one of center and boundary may be specified.
+        'Warning to be discussed: as mentioned above, only one of the two preceding parameters can be called at a time. If both are mentioned, an error is sent and the software crashes. Should introduce this case in the declaration of parameters ?
+        clsgeom_freqpoly.AddLayerParameter("closed", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34)})      'One of "right" Or "left" indicating whether right Or left edges of bins are included in the bin.
+        clsgeom_freqpoly.AddLayerParameter("pad", "boolean", "FALSE") 'If True Then, adds empty bins at either End Of x. This ensures frequency polygons touch 0. Defaults To False.
+        'Global Layer parameters
+        clsgeom_freqpoly.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_freqpoly.AddLayerParameter("stat", "list", Chr(34) & "bin" & Chr(34), lstParameterStrings:={Chr(34) & "bin" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34)}) 'Note, count and identity simply give the same results as with geom_line.
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_density.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_freqpoly.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_freqpoly.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
+
         lstAllGeoms.Add(clsgeom_freqpoly)
 
         'clsgeom_hex.strGeomName = "geom_hex"
@@ -542,19 +560,39 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_hex)
 
         clsgeom_histogram.strGeomName = "geom_histogram"
+        'Adding aesthetics parametters
+        'Mandatory Aesthetics
         clsgeom_histogram.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_histogram.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
-        clsgeom_histogram.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_histogram.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
-        clsgeom_histogram.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_histogram.AddAesParameter("size", strIncludedDataTypes:={"factor"}) 'nothing will visibly change unless the theme is changed 
+        'Optional aesthetics
         clsgeom_histogram.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        clsgeom_histogram.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_histogram.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_histogram.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_histogram.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
 
-        'adding layer parameters
-        clsgeom_histogram.AddLayerParameter("bins", "numeric", "30", lstParameterStrings:={0, 1})
-        clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={1, 1})
-        clsgeom_histogram.AddLayerParameter("closed", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34)})
-        clsgeom_histogram.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34)})
+        'Adding layer parameters
+
+        'Geom_histogram parameters
+        clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={2, 0.01}) 'Defaults to 1/30 of the range of the data, need to be strictly positive.
+        'Warning: here default has been set to 1 as calculating 1/30 of the range of the data is not possible. 
+        clsgeom_histogram.AddLayerParameter("bins", "numeric", "30", lstParameterStrings:={0, 1}) 'Number of bins. Overridden by binwidth. Defaults to 30, need at least one.
+        clsgeom_histogram.AddLayerParameter("center", "numeric", "0", lstParameterStrings:={1}) 'Finds the bin that is closest to that "centre" and centres that bin on it. All other bins are then shifted accordingly. Note that If center Is above Or below the range Of the data, things will oficcially be shifted by an appropriate number Of widths (testing shows that nothing actually happens in this version of R, wait for next version). To center On integers, for example, use width=1 And center=0, even if 0 Is outside the range of the data. At most one of center And boundary may be specified.
+        clsgeom_histogram.AddLayerParameter("boundary", "numeric", "0", lstParameterStrings:={1}) 'Finds the bin with the closest boundary to this "boudary" and shifts that bin for the boundary to be on that value. All other bins are then shifted accordingly. As with center, things are shifted when boundary is outside the range of the data (testing shows that nothing actually happens in this version of R, wait for next version). For example, to center on integers, use width = 1 and boundary = 0.5, even if 1 is outside the range of the data. At most one of center and boundary may be specified.
+        'Warning to be discussed: as mentioned above, only one of the two preceding parameters can be called at a time. If both are mentioned, an error is sent and the software crashes. Should introduce this case in the declaration of parameters ?
+        clsgeom_histogram.AddLayerParameter("closed", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34)})      'One of "right" Or "left" indicating whether right Or left edges of bins are included in the bin.
+        clsgeom_histogram.AddLayerParameter("pad", "boolean", "FALSE") 'If True Then, adds empty bins at either End Of x. This ensures frequency polygons touch 0. Defaults To False.
+
+        'Global Layer parameters
+        clsgeom_histogram.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_histogram.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_histogram.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_histogram.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_histogram.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_histogram.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+
         lstAllGeoms.Add(clsgeom_histogram)
 
 
@@ -619,7 +657,7 @@ Public Class ucrGeom
 
         'Global Layer parameters
         clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
-        clsgeom_line.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
+        clsgeom_line.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
         clsgeom_line.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_line.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
@@ -694,7 +732,7 @@ Public Class ucrGeom
 
         'Global Layer parameters
         clsgeom_point.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
-        clsgeom_point.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
+        clsgeom_point.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
         clsgeom_point.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_point.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
@@ -825,7 +863,7 @@ Public Class ucrGeom
         clsgeom_rug.AddLayerParameter("sides", "list", Chr(34) & "bl" & Chr(34), lstParameterStrings:={Chr(34) & "trbl" & Chr(34), Chr(34) & "trb" & Chr(34), Chr(34) & "trl" & Chr(34), Chr(34) & "tbl" & Chr(34), Chr(34) & "rbl" & Chr(34), Chr(34) & "tr" & Chr(34), Chr(34) & "tb" & Chr(34), Chr(34) & "tl" & Chr(34), Chr(34) & "rb" & Chr(34), Chr(34) & "rl" & Chr(34), Chr(34) & "bl" & Chr(34), Chr(34) & "t" & Chr(34), Chr(34) & "r" & Chr(34), Chr(34) & "b" & Chr(34), Chr(34) & "l" & Chr(34)})
         'Global Layer parameters
         clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
-        clsgeom_rug.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
+        clsgeom_rug.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "function" & Chr(34), Chr(34) & "qq" & Chr(34), Chr(34) & "spoke" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
         clsgeom_rug.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_rug.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
