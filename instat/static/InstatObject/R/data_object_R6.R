@@ -1631,7 +1631,7 @@ data_object$set("public", "graph_one_variable", function(columns,
         )
     }
     else if(curr_geom_name == "violin_box") {
-      if (free_scale_axis)
+      if(free_scale_axis)
         return(
           g + geom_boxplot() + geom_violin() + facet_wrap(
             facets = ~ variable,
