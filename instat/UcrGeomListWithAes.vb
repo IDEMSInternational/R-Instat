@@ -73,12 +73,14 @@ Public Class UcrGeomListWithParameters
 
     Private Sub InitialiseSelectedDataFrame()
         'When setting up the ucrGeomListWithAes, we want the selected dataframe to be the one used in the clsGeomFunction that has been given through. This is also needed for the method in LocalAndGlobalDataFramesAreDifferent() to work when editing a layer.
-        Dim strDataFrameName As String = String.Copy(strGlobalDataFrame)
+        Dim strDataFrameName As String
         Dim iIndexOfData_nameParameter As Integer
+
+        strDataFrameName = String.Copy(strGlobalDataFrame)
         If clsGeomFunction.GetParameter("data") IsNot Nothing AndAlso clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name") <> -1 Then
             iIndexOfData_nameParameter = clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name")
-            strDataFrameName = String.Copy(clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters(iIndexOfData_nameParameter).strArgumentValue)
-            strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2)
+            strDataFrameName = String.Copy(clsGeomFunction.GetParameter("data").clsArgumentFunction.clsParameters(iIndexOfData_nameParameter).strArgumentValue) 'Note: copy is necessary herre to avoid editing the value of the "data_name" parameter in clsArgumentFunction (in any case it doesn't do any harm).
+            strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2) 'The value of the parameter "data_name" has quotes around it hat need to be erased as we merely want the name of the data_frame.
             ucrGeomWithAesSelector.SetDataframe(strDataFrameName)
         Else
             ucrGeomWithAesSelector.SetDataframe(strDataFrameName, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
@@ -289,9 +291,10 @@ Public Class UcrGeomListWithParameters
 
     Private Sub ucrGeomWithAesSelector_DataFrameChanged() Handles ucrGeomWithAesSelector.DataFrameChanged
         'When the dataframes in local layers don't correspond to the data in the global ggplot function, inherit.aes should be set to false (otherwise risk for errors). Then the IgnoreGlobalAes should remain ticked until dataframes coincide.
+        'Warning: in ggplot, one can work with data1 in the global ggplot function and data2 in some layer. If the parameter inherit.aes is not set to false, the mapping in ggplot function will be copied into the layer with different dataframe. Unless the variables used in data1 are also variables in data2, this will give an error and crash the software... 
         If LocalAndGlobalDataFramesAreDifferent() Then
             chkIgnoreGlobalAes.Checked = True
-            chkIgnoreGlobalAes.Enabled = False
+            'chkIgnoreGlobalAes.Enabled = False
         Else
             chkIgnoreGlobalAes.Enabled = True
             chkIgnoreGlobalAes.Checked = False 'Warning, if IgnoreGlobalAes was checked before changing dataframe and coming back, then it will be unchecked now...
