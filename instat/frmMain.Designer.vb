@@ -151,12 +151,12 @@ Partial Class frmMain
         Me.mnuHelpRPackagesCommands = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpDataset = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpAboutRInstat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGuide = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGuidesCaseStudy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGuideGlosary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuhelpGuidesMore = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpAboutRInstat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -406,14 +406,14 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
@@ -428,7 +428,7 @@ Partial Class frmMain
         'mnuDescribeTwoVariablesSummarise
         '
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
@@ -436,14 +436,14 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesTabulate.Enabled = False
         Me.mnuDescribeTwoVariablesTabulate.Name = "mnuDescribeTwoVariablesTabulate"
-        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesTabulate.Tag = "Tabulate..."
         Me.mnuDescribeTwoVariablesTabulate.Text = "Tabulate..."
         '
         'mnuDescribeTwoVariablesGraph
         '
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
@@ -884,6 +884,7 @@ Partial Class frmMain
         '
         'mnuModelOtherOneVariableNonParametric
         '
+        Me.mnuModelOtherOneVariableNonParametric.Enabled = False
         Me.mnuModelOtherOneVariableNonParametric.Name = "mnuModelOtherOneVariableNonParametric"
         Me.mnuModelOtherOneVariableNonParametric.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherOneVariableNonParametric.Tag = "Non_Parametric..."
@@ -891,6 +892,7 @@ Partial Class frmMain
         '
         'mnuModelOtherOneVariableGoodnessofFit
         '
+        Me.mnuModelOtherOneVariableGoodnessofFit.Enabled = False
         Me.mnuModelOtherOneVariableGoodnessofFit.Name = "mnuModelOtherOneVariableGoodnessofFit"
         Me.mnuModelOtherOneVariableGoodnessofFit.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherOneVariableGoodnessofFit.Tag = "Goodness_of_Fit"
@@ -906,6 +908,7 @@ Partial Class frmMain
         '
         'mnuModelOtherTwoVariablesTwoSamples
         '
+        Me.mnuModelOtherTwoVariablesTwoSamples.Enabled = False
         Me.mnuModelOtherTwoVariablesTwoSamples.Name = "mnuModelOtherTwoVariablesTwoSamples"
         Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesTwoSamples.Tag = "Two_Samples..."
@@ -913,6 +916,7 @@ Partial Class frmMain
         '
         'mnuModelOtherTwoVariablesSummaryData
         '
+        Me.mnuModelOtherTwoVariablesSummaryData.Enabled = False
         Me.mnuModelOtherTwoVariablesSummaryData.Name = "mnuModelOtherTwoVariablesSummaryData"
         Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesSummaryData.Tag = "Summary_Data"
@@ -950,6 +954,7 @@ Partial Class frmMain
         'mnuModelOtherThreeVariables
         '
         Me.mnuModelOtherThreeVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOtherThreeVariablesSimpleWithGroups, Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA, Me.mnuModelOtherThreeVariablesChisquareTest})
+        Me.mnuModelOtherThreeVariables.Enabled = False
         Me.mnuModelOtherThreeVariables.Name = "mnuModelOtherThreeVariables"
         Me.mnuModelOtherThreeVariables.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherThreeVariables.Tag = "Other_(Three_Variable)"
@@ -980,6 +985,7 @@ Partial Class frmMain
         'mnuModelOtherGeneral
         '
         Me.mnuModelOtherGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOtherGeneralANOVAGeneral, Me.mnuModelOtherGeneralRegression, Me.mnuModelOtherGeneralLogLinear})
+        Me.mnuModelOtherGeneral.Enabled = False
         Me.mnuModelOtherGeneral.Name = "mnuModelOtherGeneral"
         Me.mnuModelOtherGeneral.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherGeneral.Tag = "Other_(General)"
@@ -987,6 +993,7 @@ Partial Class frmMain
         '
         'mnuModelOtherGeneralANOVAGeneral
         '
+        Me.mnuModelOtherGeneralANOVAGeneral.Enabled = False
         Me.mnuModelOtherGeneralANOVAGeneral.Name = "mnuModelOtherGeneralANOVAGeneral"
         Me.mnuModelOtherGeneralANOVAGeneral.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralANOVAGeneral.Tag = "ANOVA_General..."
@@ -994,6 +1001,7 @@ Partial Class frmMain
         '
         'mnuModelOtherGeneralRegression
         '
+        Me.mnuModelOtherGeneralRegression.Enabled = False
         Me.mnuModelOtherGeneralRegression.Name = "mnuModelOtherGeneralRegression"
         Me.mnuModelOtherGeneralRegression.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralRegression.Tag = "Regression"
@@ -1001,6 +1009,7 @@ Partial Class frmMain
         '
         'mnuModelOtherGeneralLogLinear
         '
+        Me.mnuModelOtherGeneralLogLinear.Enabled = False
         Me.mnuModelOtherGeneralLogLinear.Name = "mnuModelOtherGeneralLogLinear"
         Me.mnuModelOtherGeneralLogLinear.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralLogLinear.Tag = "Log_Linear"
@@ -1291,22 +1300,6 @@ Partial Class frmMain
         Me.ToolStripSeparator29.Name = "ToolStripSeparator29"
         Me.ToolStripSeparator29.Size = New System.Drawing.Size(218, 6)
         '
-        'mnuHelpLicence
-        '
-        Me.mnuHelpLicence.Enabled = False
-        Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpLicence.Tag = "Licence..."
-        Me.mnuHelpLicence.Text = "Licence..."
-        '
-        'mnuHelpAboutRInstat
-        '
-        Me.mnuHelpAboutRInstat.Enabled = False
-        Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(221, 22)
-        Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
-        Me.mnuHelpAboutRInstat.Text = "About R-Instat"
-        '
         'mnuHelpGuide
         '
         Me.mnuHelpGuide.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpGuidesCaseStudy, Me.mnuHelpGuideGlosary, Me.mnuhelpGuidesMore})
@@ -1333,6 +1326,21 @@ Partial Class frmMain
         Me.mnuhelpGuidesMore.Size = New System.Drawing.Size(166, 22)
         Me.mnuhelpGuidesMore.Text = "More..."
         '
+        'mnuHelpAboutRInstat
+        '
+        Me.mnuHelpAboutRInstat.Enabled = False
+        Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
+        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
+        Me.mnuHelpAboutRInstat.Text = "About R-Instat"
+        '
+        'mnuHelpLicence
+        '
+        Me.mnuHelpLicence.Name = "mnuHelpLicence"
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(221, 22)
+        Me.mnuHelpLicence.Tag = "Licence..."
+        Me.mnuHelpLicence.Text = "Licence..."
+        '
         'ToolStripSeparator16
         '
         Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
@@ -1356,7 +1364,7 @@ Partial Class frmMain
         'mnuClimaticFileOpensst
         '
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
-        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(134, 22)
+        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticFileOpensst.Text = "Open SST..."
         '
         'mnuClimaticOrganise
@@ -2920,7 +2928,7 @@ Partial Class frmMain
         Me.mnuToolsClearOutputWindow.Name = "mnuToolsClearOutputWindow"
         Me.mnuToolsClearOutputWindow.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsClearOutputWindow.Tag = "Clear_Output_Window..."
-        Me.mnuToolsClearOutputWindow.Text = "Clear_Output_Window..."
+        Me.mnuToolsClearOutputWindow.Text = "Clear Output Window..."
         '
         'ToolStripSeparator5
         '

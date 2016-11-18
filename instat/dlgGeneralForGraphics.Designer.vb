@@ -25,6 +25,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrAdditionalLayers
@@ -48,11 +49,22 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(267, 45)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdOptions.TabIndex = 9
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 303)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrAdditionalLayers)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrBase)
@@ -70,4 +82,5 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSaveGraph As ucrSaveGraph
     Friend WithEvents ucrAdditionalLayers As ucrAdditionalLayers
+    Friend WithEvents cmdOptions As Button
 End Class

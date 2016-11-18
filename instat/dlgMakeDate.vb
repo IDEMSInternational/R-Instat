@@ -50,6 +50,14 @@ Public Class dlgMakeDate
         ucrReceiverYearThree.Selector = ucrSeclectorMakeDate
         ucrReceiverMonthThree.Selector = ucrSeclectorMakeDate
         ucrReceiverDayThree.Selector = ucrSeclectorMakeDate
+
+        ucrReceiverForDate.bUseFilteredData = False
+        ucrReceiverYearTwo.bUseFilteredData = False
+        ucrReceiverDayTwo.bUseFilteredData = False
+        ucrReceiverYearThree.bUseFilteredData = False
+        ucrReceiverMonthThree.bUseFilteredData = False
+        ucrReceiverDayThree.bUseFilteredData = False
+
     End Sub
 
     Private Sub SetDefaults()
@@ -64,7 +72,6 @@ Public Class dlgMakeDate
         ucrInputDay.SetName("%d (1-31)")
         ucrInputComboBoxMonthTwo.SetName("365/366")
         ucrInputOrigin.SetName("30-12-1899 (Excel)")
-        grpFormatField.Visible = False
         ucrInputOrigin.Visible = False
         ucrInputNewColumnName.SetPrefix("Date")
         TestOKEnabled()
@@ -73,10 +80,15 @@ Public Class dlgMakeDate
         rdoDefaultFormat.Checked = True
         chkTwoDigitYearThree.Checked = False
         chkTwoDigitYearTwo.Checked = False
-        nudCutOffThree.Visible = False
-        nudCutOffTwo.Visible = False
         lblCutOffThree.Visible = False
         lblCutOffTwo.Visible = False
+        chkTwoDigitYearThree.Visible = True
+        chkTwoDigitYearTwo.Visible = True
+        nudCutOffThree.Visible = False
+        nudCutOffTwo.Visible = False
+        chkMore.Checked = False
+        chkMore.Visible = True
+
     End Sub
 
     Private Sub TestOKEnabled()

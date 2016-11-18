@@ -178,7 +178,10 @@ Partial Class dlgWaterBalance
         Me.Controls.Add(Me.nudEvaporation)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgWaterBalance"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Water_Balance"
         Me.Text = "dlgWaterBalance"
         CType(Me.nudEvaporation, System.ComponentModel.ISupportInitialize).EndInit()

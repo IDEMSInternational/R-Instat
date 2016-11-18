@@ -231,7 +231,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE,...) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -250,6 +250,13 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     else {
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
+      }
+    }
+    # This is needed as some R function misinterpret the class of a column
+    # when there are extra attributes on columns
+    if(remove_attr) {
+      for(i in seq_along(out)) {
+        attributes(out[[i]])[!names(attributes(out[[i]])) %in% c("class", "levels")] <- NULL
       }
     }
     if(convert_to_character) {
@@ -1111,6 +1118,8 @@ data_object$set("public", "get_data_type", function(col_name = "") {
     type = "logical"
   }
   else if(is.Date(private$data[[col_name]])){
+    # #TODO
+    #we can add options for other forms of dates serch as POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects.
     type = "Date"
   }
   else if(is.numeric(private$data[[col_name]])) {
@@ -1602,9 +1611,9 @@ data_object$set("public","graph_one_variable", function(columns, numeric = "geom
 )
 
 data_object$set("public","make_date_yearmonthday", function(year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
-  year_col <- self$get_columns_from_data(year)
-  month_col <- self$get_columns_from_data(month)
-  day_col <- self$get_columns_from_data(day)
+  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  month_col <- self$get_columns_from_data(month, use_current_filter = FALSE)
+  day_col <- self$get_columns_from_data(day, use_current_filter = FALSE)
   if(missing(year_format)) {
     year_counts <- str_count(year)
     if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
@@ -1627,8 +1636,8 @@ data_object$set("public","make_date_yearmonthday", function(year, month, day, ye
 
 # Not sure if doy_format should be a parameter? There seems to only be one format for it.
 data_object$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
-  year_col <- self$get_columns_from_data(year)
-  doy_col <- self$get_columns_from_data(doy)
+  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  doy_col <- self$get_columns_from_data(doy, use_current_filter = FALSE)
   
   if(missing(year_format)) {
     year_counts <- str_count(year)
@@ -1645,10 +1654,49 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
 }
 )
 
-data_object$set("public","set_contrasts_of_factor", function(factor, new_contrasts) {
-  if(!factor %in% names(self$get_data_frame())) stop(factor, " not found in the data")
-  if(!is.factor(self$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
-  #checks needed on contrasts before assigning
-  contrasts(private$data[[factor]]) <- new_contrasts
-}
+data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, defined_contr_matrix) {
+  if(!col_name %in% names(self$get_data_frame())) stop(col_name, " not found in the data")
+  if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
+  factor_col <- self$get_columns_from_data(col_name)
+  contr_col <- nlevels(factor_col) - 1
+  contr_row <- nlevels(factor_col)
+  if(new_contrasts == "user_defined") {
+    if(any(is.na(defined_contr_matrix)) ||!is.numeric(defined_contr_matrix) ||nrow(defined_contr_matrix) != contr_row || ncol(defined_contr_matrix) != contr_col) stop(paste0("The contrast matrix should have ", contr_col, " column(s) and ",  contr_row, " row(s) "))
+    }
+    #checks needed on contrasts before assigning
+    if(!(new_contrasts %in% c("contr.treatment", "contr.helmert", "contr.poly", "contr.sum", "user_defined"))) {
+    stop(new_contrasts, " is not a valid contrast name")
+  } 
+  else if(!is.character(new_contrasts)) {
+    stop("New column name must be of type: character")
+  }
+       contrasts(private$data[[col_name]]) <- new_contrasts
+  }
+)
+data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month = FALSE, year = FALSE, day = FALSE) {
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.Date(col_data)) stop("This column must be a date or time!")
+  if(week) {
+    week <- week(col_data)
+	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = week)
+  }
+  if(month) {
+    month <- month(col_data)
+	  col_name <- next_default_item(prefix = "month", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month)
+  }
+  if(year) {
+    year <- year(col_data)
+	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = year)
+  }
+  if(day) {
+    day <- day(col_data)
+	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day)
+  }
+  #TO Do
+  #Implement option for the day of the year
+  }
 )

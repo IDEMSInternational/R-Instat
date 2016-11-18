@@ -39,6 +39,8 @@ Partial Class dlgExtremesClimatic
         Me.ClientSize = New System.Drawing.Size(432, 374)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgExtremesClimatic"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Extremes"

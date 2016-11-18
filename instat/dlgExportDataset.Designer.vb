@@ -67,7 +67,6 @@ Partial Class dlgExportDataset
         Me.grpSaveOptions.Size = New System.Drawing.Size(398, 171)
         Me.grpSaveOptions.TabIndex = 1
         Me.grpSaveOptions.TabStop = False
-        Me.grpSaveOptions.Text = ""
         '
         'grpOptions
         '
@@ -238,7 +237,7 @@ Partial Class dlgExportDataset
         Me.MinimizeBox = False
         Me.Name = "dlgExportDataset"
         Me.ShowIcon = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Export Datasets"
         Me.grpSaveOptions.ResumeLayout(False)
         Me.grpSaveOptions.PerformLayout()

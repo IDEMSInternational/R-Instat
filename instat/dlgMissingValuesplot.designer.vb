@@ -353,7 +353,10 @@ Partial Class dlgMissingValuesplot
         Me.Controls.Add(Me.chkStationName)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgMissingValuesplot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "dlgMissingValuesplot"
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudYlim, System.ComponentModel.ISupportInitialize).EndInit()

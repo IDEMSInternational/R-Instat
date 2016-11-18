@@ -186,6 +186,9 @@ Public Class ucrReceiverMultiple
                 If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                     clsColumnFunction.AddParameter("force_as_data_frame", "FALSE")
                 End If
+                If Not bUseFilteredData Then
+                    clsColumnFunction.AddParameter("use_current_filter", "FALSE")
+                End If
                 lstColumnFunctions.Add(clsColumnFunction)
             Next
         End If

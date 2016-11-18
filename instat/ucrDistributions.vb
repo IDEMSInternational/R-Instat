@@ -298,10 +298,10 @@ Public Class ucrDistributions
         clsBernouliDist.strQFunctionName = "qbinom"
         clsBernouliDist.strDFunctionName = "dbinom"
         clsBernouliDist.bIsContinuous = False
-        clsBernouliDist.bIsExact = True
-        clsBernouliDist.lstExact = {"prob", "Difference in Proportions:", 0.5, 0.1, 2, 0, 1}
+        '        clsBernouliDist.bIsExact = True
+        '        clsBernouliDist.strExactName = "binom"
+        '        clsBernouliDist.lstExact = {"prob", "Difference in Proportions:", 0.5, 0.1, 2, 0, 1}
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
-        clsBernouliDist.strExactName = "binom"
         lstAllDistributions.Add(clsBernouliDist)
 
         'Binomial Distribution
@@ -328,9 +328,9 @@ Public Class ucrDistributions
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
         clsPoissonDist.bIsContinuous = False
-        clsPoissonDist.bIsExact = True
-        clsPoissonDist.strExactName = "pois"
-        clsPoissonDist.lstExact = {"r", "Rate Ratio:", 1, 1, 2, 0, Integer.MaxValue}
+        '        clsPoissonDist.bIsExact = True
+        '        clsPoissonDist.strExactName = "pois"
+        '        clsPoissonDist.lstExact = {"r", "Rate Ratio:", 1, 1, 2, 0, Integer.MaxValue}
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 
@@ -544,19 +544,23 @@ Public Class ucrDistributions
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
-        clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
-        Select Case strDistributionType
-            Case "RFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
-            Case "PFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strPFunctionName)
-            Case "DFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strDFunctionName)
-            Case "QFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strQFunctionName)
-            Case "GLMFunctions"
-                clsCurrRFunction.SetRCommand(clsCurrDistribution.strGLMFunctionName)
-        End Select
+        If cboDistributions.SelectedIndex <> -1 Then
+            clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
+            Select Case strDistributionType
+                Case "RFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
+                Case "PFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strPFunctionName)
+                Case "DFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strDFunctionName)
+                Case "QFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strQFunctionName)
+                Case "GLMFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strGLMFunctionName)
+            End Select
+        Else
+            clsCurrRFunction = New RFunction
+        End If
         RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
 

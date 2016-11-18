@@ -223,17 +223,17 @@ instat_object$set("public", "get_data_objects", function(data_name, as_list = FA
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", ...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, ...) {
   if(!stack_data) {
     if(missing(data_name)) data_name <- self$get_data_names()
     if(length(data_name) > 1) {
       retlist <- list()
       for (curr_name in data_name) {
-        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name)
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
@@ -987,8 +987,8 @@ instat_object$set("public","make_date_yeardoy", function(data_name, year, doy, y
 }
 )
 
-instat_object$set("public","set_contrasts_of_factor", function(data_name, factor, new_contrasts) {
-  self$get_data_objects(data_name)$set_contrasts_of_factor(factor = factor, new_contrasts = new_contrasts)
+instat_object$set("public","set_contrasts_of_factor", function(data_name, col_name, new_contrasts, defined_contr_matrix) {
+  self$get_data_objects(data_name)$set_contrasts_of_factor(col_name = col_name, new_contrasts = new_contrasts, defined_contr_matrix = defined_contr_matrix)
 }
 )
 
@@ -1029,5 +1029,10 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
     names(factor) <- factor
     self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)
   }
+}
+)
+
+instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, month = FALSE, day = FALSE, week = FALSE) {
+  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month = month, day = day, year = year)
 }
 )
