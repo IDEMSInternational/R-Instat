@@ -32,7 +32,7 @@ Partial Class dlgPICSATempAndRainfall
         Me.nudThreshholdVal = New System.Windows.Forms.NumericUpDown()
         Me.lblThreshhold = New System.Windows.Forms.Label()
         Me.lblTemperatureCol = New System.Windows.Forms.Label()
-        Me.ucrReceiverForPICSATemp = New instat.ucrReceiverSingle()
+        Me.ucrReceiverForPICSATemporRainFall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForPICSATempandRainfall = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrbase = New instat.ucrButtons()
         Me.ucrInputTempOrRainfall = New instat.ucrInputComboBox()
@@ -144,14 +144,14 @@ Partial Class dlgPICSATempAndRainfall
         Me.lblTemperatureCol.TabIndex = 12
         Me.lblTemperatureCol.Text = "Temperature Variable"
         '
-        'ucrReceiverForPICSATemp
+        'ucrReceiverForPICSATemporRainFall
         '
-        Me.ucrReceiverForPICSATemp.Location = New System.Drawing.Point(251, 68)
-        Me.ucrReceiverForPICSATemp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverForPICSATemp.Name = "ucrReceiverForPICSATemp"
-        Me.ucrReceiverForPICSATemp.Selector = Nothing
-        Me.ucrReceiverForPICSATemp.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverForPICSATemp.TabIndex = 11
+        Me.ucrReceiverForPICSATemporRainFall.Location = New System.Drawing.Point(251, 68)
+        Me.ucrReceiverForPICSATemporRainFall.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForPICSATemporRainFall.Name = "ucrReceiverForPICSATemporRainFall"
+        Me.ucrReceiverForPICSATemporRainFall.Selector = Nothing
+        Me.ucrReceiverForPICSATemporRainFall.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverForPICSATemporRainFall.TabIndex = 11
         '
         'ucrSelectorForPICSATempandRainfall
         '
@@ -264,7 +264,7 @@ Partial Class dlgPICSATempAndRainfall
         Me.Controls.Add(Me.nudThreshholdVal)
         Me.Controls.Add(Me.lblThreshhold)
         Me.Controls.Add(Me.lblTemperatureCol)
-        Me.Controls.Add(Me.ucrReceiverForPICSATemp)
+        Me.Controls.Add(Me.ucrReceiverForPICSATemporRainFall)
         Me.Controls.Add(Me.ucrSelectorForPICSATempandRainfall)
         Me.Controls.Add(Me.ucrbase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -293,7 +293,7 @@ Partial Class dlgPICSATempAndRainfall
     Friend WithEvents nudThreshholdVal As NumericUpDown
     Friend WithEvents lblThreshhold As Label
     Friend WithEvents lblTemperatureCol As Label
-    Friend WithEvents ucrReceiverForPICSATemp As ucrReceiverSingle
+    Friend WithEvents ucrReceiverForPICSATemporRainFall As ucrReceiverSingle
     Friend WithEvents ucrSelectorForPICSATempandRainfall As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrbase As ucrButtons
     Friend WithEvents ucrInputTempOrRainfall As ucrInputComboBox

@@ -248,6 +248,12 @@
     <Compile Include="dlgOpenSST.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPICSA.Designer.vb">
+      <DependentUpon>dlgPICSA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPICSA.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPICSATempAndRainfall.Designer.vb">
       <DependentUpon>dlgPICSATempAndRainfall.vb</DependentUpon>
     </Compile>
@@ -2474,6 +2480,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSA.fr-FR.resx">
+      <DependentUpon>dlgPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSA.resx">
+      <DependentUpon>dlgPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSA.sw-KE.resx">
+      <DependentUpon>dlgPICSA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPICSATempAndRainfall.fr-FR.resx">
       <DependentUpon>dlgPICSATempAndRainfall.vb</DependentUpon>
