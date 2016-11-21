@@ -92,25 +92,29 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoSingleColumn.Checked Then
-            If Not ucrReceiverForDate.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+        If Not ucrInputNewColumnName.IsEmpty Then
+            If rdoSingleColumn.Checked Then
+                If Not ucrReceiverForDate.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
 
-        ElseIf rdoYearandDayofYear.Checked Then
-            If Not ucrReceiverYearTwo.IsEmpty AndAlso Not ucrReceiverDayTwo.IsEmpty Then
-                ucrBase.OKEnabled(True)
+            ElseIf rdoYearandDayofYear.Checked Then
+                If Not ucrReceiverYearTwo.IsEmpty AndAlso Not ucrReceiverDayTwo.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             Else
-                ucrBase.OKEnabled(False)
+                If Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty AndAlso Not ucrReceiverYearThree.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             End If
         Else
-            If Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty AndAlso Not ucrReceiverYearThree.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -304,4 +308,7 @@ Public Class dlgMakeDate
         End If
     End Sub
 
+    Private Sub ucrInputNewColumnName_ContentsChanged() Handles ucrInputNewColumnName.ContentsChanged
+        TestOKEnabled
+    End Sub
 End Class
