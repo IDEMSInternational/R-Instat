@@ -141,6 +141,7 @@ Public Class ucrGeom
         'Warning: About the show.legend layer parameter, the default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
         'Question/Task: we are focusing a lot on numeric and factor variables when it comes to aesthetics mappings. Should we allow more characters ?
         'Warning/question: for line, point and rug (and in general), more stats are available, such as stat_function. However, they require parameters. For instance stat_summary needs some, but a default parameter mean_se() is given. Should we make it possible for users to have access to these ? Would need to be able to pass functions as parameters. Same difficulty as for the position functions such as position_jitterdodge... see above.
+        'Warning: the colour type of parameter is not working quite right. Problems with pick colour and some of the available colours such as ff0000a0 and ff400040 are not recognised in R.
 
         'clsgeom_abline.SetGeomName("geom_abline")
         'clsgeom_abline.AddAesParameter("x", bIsMandatory:=True)
@@ -737,7 +738,7 @@ Public Class ucrGeom
         clsgeom_point.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_point.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
-        clsgeom_point.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
+        clsgeom_point.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
         clsgeom_point.AddLayerParameter("stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Use the stroke aes to change the width of the outline of the shapes. When no outline stroke overrides size. 'Warning: sometimes negative values give errors...
         clsgeom_point.AddLayerParameter("shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Note: 16 and 19 seem to have exact same behaviour.
         clsgeom_point.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
