@@ -121,6 +121,7 @@ Partial Class dlgOneVariableGraph
         'chkFlipCoordinates
         '
         Me.chkFlipCoordinates.AutoSize = True
+        Me.chkFlipCoordinates.Enabled = False
         Me.chkFlipCoordinates.Location = New System.Drawing.Point(237, 240)
         Me.chkFlipCoordinates.Name = "chkFlipCoordinates"
         Me.chkFlipCoordinates.Size = New System.Drawing.Size(101, 17)
