@@ -48,7 +48,7 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForContrasts.IsEmpty AndAlso Not ucrInputContrast.IsEmpty Then
+        If (Not ucrReceiverForContrasts.IsEmpty AndAlso Not ucrInputContrast.IsEmpty) OrElse (ucrInputContrast.GetText = "User_defined" AndAlso CheckForEmptyCells(True)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -103,7 +103,7 @@ Public Class dlgContrasts
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-    Private Sub ucrInputContrast_ContentsChanged() Handles ucrInputContrast.ContentsChanged
+    Private Sub ucrInputContrast_ContentsChanged() Handles ucrInputContrast.NameChanged
         If Not ucrInputContrast.IsEmpty Then
             SelectContrast()
         Else
@@ -183,9 +183,25 @@ Public Class dlgContrasts
                 e.EndReason = EndEditReason.Cancel
             End If
         End If
+        TestOKEnabled()
         SetMatrixFunction()
+
     End Sub
 
+    Public Function CheckForEmptyCells(bIsEmpty As Boolean) As Boolean
+        For i = 0 To grdCurrSheet.ColumnCount - 1
+            For j = 0 To grdCurrSheet.RowCount - 1
+                If grdCurrSheet(row:=j, col:=i) = "" Then
+                    bIsEmpty = False
+                    Exit For
+                Else
+                    bIsEmpty = True
+                End If
+            Next
+        Next
+
+        Return bIsEmpty
+    End Function
     Private Sub grdLayoutForContrasts_Leave(sender As Object, e As EventArgs) Handles grdLayoutForContrasts.Leave
         If grdCurrSheet.IsEditing Then
             grdCurrSheet.EndEdit(EndEditReason.NormalFinish)
