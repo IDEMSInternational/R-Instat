@@ -106,7 +106,7 @@ Public Class sdgCorrPlot
     End Sub
 
     Private Sub chkMatrixOrPlots(sender As Object, e As EventArgs) Handles chkCorrelationMatrix.CheckedChanged, chkPairwisePlot.CheckedChanged, chkCorrelationPlot.CheckedChanged, chkScatterplotMatrix.CheckedChanged
-        If chkCorrelationMatrix.Checked AndAlso Not chkPairwisePlot.Checked AndAlso Not chkCorrelationPlot.Checked AndAlso Not chkScatterplotMatrix.Checked Then
+        If Not chkPairwisePlot.Checked AndAlso Not chkCorrelationPlot.Checked AndAlso Not chkScatterplotMatrix.Checked Then
             ucrSaveGraph.Visible = False
         Else
             ucrSaveGraph.Visible = True
