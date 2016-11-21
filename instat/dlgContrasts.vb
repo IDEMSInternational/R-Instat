@@ -48,7 +48,7 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverForContrasts.IsEmpty) AndAlso Not ((ucrInputContrast.IsEmpty) OrElse (ucrInputContrast.GetText = "User_defined" AndAlso IsEmptyCells() = True))) Then
+        If ((Not ucrReceiverForContrasts.IsEmpty) AndAlso Not ((ucrInputContrast.IsEmpty) OrElse (ucrInputContrast.GetText = "User_defined" AndAlso IsEmptyCells() = False))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
