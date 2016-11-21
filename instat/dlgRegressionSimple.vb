@@ -57,7 +57,6 @@ Public Class dlgRegressionSimple
         nudCI.Maximum = 1
         nudCI.DecimalPlaces = 2
         nudHypothesis.DecimalPlaces = 2
-        nudHyp2.DecimalPlaces = 2
     End Sub
 
     Private Sub ReopenDialog()
@@ -81,24 +80,12 @@ Public Class dlgRegressionSimple
         ucrModelName.Reset()
         ucrModelPreview.SetName("")
         SetRCode()
-        DistributionsOffered()
+        ucrFamily.SetGLMDistributions()
         sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
         sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
         SetEnableDists()
         TestOKEnabled()
-    End Sub
-
-    Private Sub DistributionsOffered()
-        If rdoGeneral.Checked Then
-            ucrFamily.SetGLMDistributions()
-        Else
-            If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
-                ucrFamily.clsCurrDistribution.strNameTag = "Bernouli"
-            Else
-                ucrFamily.SetExactDistributions()
-            End If
-        End If
     End Sub
 
     Private Sub LM()
@@ -142,29 +129,17 @@ Public Class dlgRegressionSimple
     End Sub
 
     Public Sub DataTypeAccepted()
-        If rdoGeneral.Checked Then
-            ucrResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
-            ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
-        ElseIf rdoSpecific.Checked Then
-            If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
-                If ucrFamily.Enabled = False Then
-                    ucrResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
-                Else
-                    ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
-                    If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
-                        ucrResponse.Clear()
-                    End If
+        ucrResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+        ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+        If rdoSpecific.Checked Then
+            If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+                ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
+                If ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer" Then
+                    ucrExplanatory.Clear()
                 End If
-                ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
             End If
-            If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
-                ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
-                ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
-            End If
-            If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
-                ucrResponse.SetIncludedDataTypes({"character", "factor", "numeric", "integer"})
-                ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
-            End If
+        Else
+            ucrExplanatory.SetIncludedDataTypes({"numeric", "integer", "character", "factor"})
         End If
     End Sub
 
@@ -172,34 +147,15 @@ Public Class dlgRegressionSimple
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
-        clsRBinomial.AddParameter("p", "c(" & nudHypothesis.Value.ToString() & "," & nudHyp2.Value.ToString() & ")")
         clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
         clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
         clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
         clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
-        If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
-            If ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer" Then
-                ucrExplanatory.Clear()
-            End If
-            If ucrResponse.strCurrDataType = "numeric" Or ucrResponse.strCurrDataType = "integer" Or ucrResponse.strCurrDataType = "positive integer" Then
-                ucrFamily.clsCurrDistribution.strNameTag = "Bernouli"
-            End If
-        End If
     End Sub
 
     Private Sub SetPoissonTest()
         Dim clsxFunc As New RFunction
         Dim clsTFunc As New RFunction
-
-        If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
-            If ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Then
-                ucrExplanatory.Clear()
-            End If
-            If ucrResponse.strCurrDataType = "factor" Or ucrResponse.strCurrDataType = "character" Then
-                ucrResponse.Clear()
-            End If
-        End If
 
         clsRPoisson.SetRCommand("poisson.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
@@ -260,10 +216,6 @@ Public Class dlgRegressionSimple
         '        clsRMean.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
         '        clsRMean2.SetRCommand("mean")
         '        clsRMean2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
-
-
-
-
     End Sub
 
     Private Sub SetRCode()
@@ -288,11 +240,10 @@ Public Class dlgRegressionSimple
             End If
         End If
         TestOKEnabled()
-        '        AssignModelName()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
+        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso ucrFamily.cboDistributions.Text <> "" AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
             ucrBase.OKEnabled(True)
             ucrModelPreview.SetName(clsModel.ToScript)
             If rdoGeneral.Checked Then
@@ -344,8 +295,23 @@ Public Class dlgRegressionSimple
                     cmdModelOptions.Enabled = True
                 End If
             End If
+        Else
+            If Not ucrResponse.IsEmpty Then
+                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ' this needs work still. Nothing is being shown once any of the "Exact"'s are selected
+                ' Additionally, we need to have that we can switch between rdos and the cbo's to change appropriately. 
+                If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
+                    ucrFamily.RecieverDatatype("factor")
+                ElseIf ucrResponse.strCurrDataType = "positive integer" Then
+                    ucrFamily.RecieverDatatype("positive integer")
+                ElseIf ucrResponse.strCurrDataType = "numeric" OrElse ucrResponse.strCurrDataType = "integer" Then
+                    ucrFamily.RecieverDatatype("numeric")
+                Else
+                    ucrFamily.cboDistributions.Text = ""
+                End If
+            End If
         End If
-
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
@@ -488,19 +454,8 @@ Public Class dlgRegressionSimple
                 nudHypothesis.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
                 nudHypothesis.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
             End If
-            If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
-                nudHyp2.Visible = True
-                lblProbability2.Visible = True
-                nudHyp2.Increment = 0.1
-                nudHyp2.Maximum = 0.95
-                nudHyp2.Minimum = 0.05
-                nudHyp2.Value = 0.5
-            Else
-                nudHyp2.Visible = False
-                lblProbability2.Visible = False
-            End If
             If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
-                '         'If ucrExplanatory. GetVariables Is From same dataset
+                '            '         'If ucrExplanatory. GetVariables Is From same dataset
                 chkPaired.Visible = True
             Else
                 chkPaired.Visible = False
@@ -508,12 +463,11 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblCI.VisibleChanged, lblProbability2.VisibleChanged, lblHyp1.VisibleChanged, lblExplanatory.VisibleChanged, lblResponse.VisibleChanged, lblModelPreview.VisibleChanged, lblFactor.VisibleChanged, lblNumeric.VisibleChanged
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblCI.VisibleChanged, lblHyp1.VisibleChanged, lblExplanatory.VisibleChanged, lblResponse.VisibleChanged, lblModelPreview.VisibleChanged, lblFactor.VisibleChanged, lblNumeric.VisibleChanged
         Display()
     End Sub
 
-    Private Sub nuds_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHypothesis.TextChanged, nudHyp2.TextChanged
+    Private Sub nuds_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHypothesis.TextChanged
         SetRCode()
     End Sub
 
@@ -525,11 +479,25 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub rdoTop_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGeneral.CheckedChanged, rdoSpecific.CheckedChanged
+        If rdoGeneral.Checked Then
+            ucrFamily.SetGLMDistributions()
+        Else
+            ucrFamily.SetExactDistributions()
+        End If
         Display()
         SetRCode()
-        DistributionsOffered()
         TestOKEnabled()
         DataTypeAccepted()
         AssignModelName()
+        ConvertToVariate()
+    End Sub
+
+    Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrFamily.EnabledChanged
+        '        If ucrFamily.Enabled = False Then
+        '        ucrFamily.cboDistributions.Text = ""
+        '        End If
+        DataTypeAccepted()
+        TestOKEnabled()
+        SetEnableDists()
     End Sub
 End Class
