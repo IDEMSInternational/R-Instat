@@ -26,7 +26,7 @@ Public Class dlgDotPlot
     Private strBinAxis As String
     Private strOtherAxis As String
     'bEditAesFunction is used to avoid the aesthetics to be edited within clsRaesFunction when the receivers are actually setup according to the content of clsRaesFunction (for example coming back from LayerOptions).
-    Private bEditAesFunction As Boolean = True
+    Private bEditAesFunction As Boolean
 
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -73,6 +73,7 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub SetDefaults()
+        bEditAesFunction = True
         clsRaesFunction.ClearParameters()
         clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
@@ -90,12 +91,11 @@ Public Class dlgDotPlot
         If rdoYBinAxis.Checked Then
             strBinAxis = "y"
             strOtherAxis = "x"
-            clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
         Else
             strBinAxis = "x"
             strOtherAxis = "y"
-            clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
         End If
+        clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & strBinAxis & Chr(34))
         'The aes parameters for x and y in the AesFunction need to be updated, unless we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
         If bEditAesFunction Then
             SetFactorAxisAes()
@@ -106,6 +106,8 @@ Public Class dlgDotPlot
 
     Private Sub SetFactorAxisAes()
         'This sets the mapping in the aesthetics for the axis that is not binaxis.
+        'Warning: when binaxis is "x", mapping any variable doesn't come out very well. stacks are not aligned with the factor value along the y axis like it does for the x axis when binaxis is y. 
+        'Question to be discussed: Should we always keep in binaxis y and add a coordinate flip instead of changing bin axis ? or on top of what's available ? Coordinate flip could be nice ? I Don't know if they intend to change things in the next ggplot2 version.
         If ucrOtherAxisReceiver.IsEmpty() = False Then
             clsRaesFunction.AddParameter(strOtherAxis, ucrOtherAxisReceiver.GetVariableNames(False))
         Else
