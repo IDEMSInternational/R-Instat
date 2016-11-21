@@ -48,7 +48,7 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverForContrasts.IsEmpty AndAlso Not ucrInputContrast.IsEmpty) OrElse (ucrInputContrast.GetText = "User_defined" AndAlso CheckForEmptyCells(True)) Then
+        If ((Not ucrReceiverForContrasts.IsEmpty) AndAlso Not ((ucrInputContrast.IsEmpty) OrElse (ucrInputContrast.GetText = "User_defined" AndAlso IsEmptyCells() = True))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -81,6 +81,7 @@ Public Class dlgContrasts
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverForContrasts_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForContrasts.SelectionChanged
@@ -103,7 +104,7 @@ Public Class dlgContrasts
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-    Private Sub ucrInputContrast_ContentsChanged() Handles ucrInputContrast.NameChanged
+    Private Sub ucrInputContrast_NameChangedChanged() Handles ucrInputContrast.NameChanged
         If Not ucrInputContrast.IsEmpty Then
             SelectContrast()
         Else
@@ -184,28 +185,24 @@ Public Class dlgContrasts
             End If
         End If
         TestOKEnabled()
-        SetMatrixFunction()
-
     End Sub
 
-    Public Function CheckForEmptyCells(bIsEmpty As Boolean) As Boolean
+    Private Function IsEmptyCells() As Boolean
         For i = 0 To grdCurrSheet.ColumnCount - 1
             For j = 0 To grdCurrSheet.RowCount - 1
-                If grdCurrSheet(row:=j, col:=i) = "" Then
-                    bIsEmpty = False
-                    Exit For
-                Else
-                    bIsEmpty = True
+                If grdCurrSheet(row:=j, col:=i) Is Nothing Then
+                    Return True
                 End If
             Next
         Next
-
-        Return bIsEmpty
+        Return False
     End Function
     Private Sub grdLayoutForContrasts_Leave(sender As Object, e As EventArgs) Handles grdLayoutForContrasts.Leave
         If grdCurrSheet.IsEditing Then
             grdCurrSheet.EndEdit(EndEditReason.NormalFinish)
             SetMatrixFunction()
         End If
+        TestOKEnabled()
     End Sub
+
 End Class
