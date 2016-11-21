@@ -97,6 +97,9 @@ Public Class UcrGeomListWithParameters
             clsGeomAesFunction.SetRCommand("aes")
         End If
 
+        'ucrGeomWithAesSelector.Reset() 'Warning: Not sure this is necessary anymore... Testing will confirm.
+        InitialiseSelectedDataFrame()
+
         'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
         'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
         If bApplyAesGlobally AndAlso bIgnoreGlobalAes Then
@@ -107,8 +110,7 @@ Public Class UcrGeomListWithParameters
         chkApplyOnAllLayers.Checked = bApplyAesGlobally
         chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes 'Note: raises the event check changed if the value has indeed changed.
 
-        'ucrGeomWithAesSelector.Reset() 'Warning: Not sure this is necessary anymore... Testing will confirm.
-        InitialiseSelectedDataFrame()
+
 
 
 
