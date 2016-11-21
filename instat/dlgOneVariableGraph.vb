@@ -66,6 +66,8 @@ Public Class dlgOneVariableGraph
         'clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
 
         clsBaseFunctionMultipleVariables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunctionMultipleVariables) 'What the difference between SetRCommand and SetBaseRFunction. they both seem to do similar thing.
+
         sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
         sdgOneVarGraph.InitialiseDialog()
 
@@ -83,7 +85,6 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Public Sub OneOrMoreVariables()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunctionMultipleVariables)
         clsBaseFunctionMultipleVariables.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
         clsBaseFunctionMultipleVariables.AddParameter("columns", ucrReceiverOneVarGraph.GetVariableNames())
 
