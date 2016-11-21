@@ -14,8 +14,9 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+
 Public Class sdgCorrPlot
-    Public clsRGGscatmatrix, clsRGGcorrGraphics, clsRGraphics As New RFunction
+    Public clsRGGscatmatrix, clsRGGcorrGraphics As New RFunction
     Public strDataFrame As String
     Public bFirstLoad As Boolean = True
 
@@ -34,16 +35,9 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub GGPairs()
-        Dim clsTempFunc As RFunction
-
-        'temp solution to fix bug in ggpairs function
-        clsTempFunc = dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
-        clsTempFunc.AddParameter("remove_attr", "TRUE")
-        clsRGraphics.SetRCommand("ggpairs")
-        clsRGraphics.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
-        clsRGraphics.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
+        dlgCorrelation.Pairs()
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGraphics)
+        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRGraphics)
     End Sub
 
     Public Sub GGcorr()
@@ -78,17 +72,17 @@ Public Class sdgCorrPlot
         ucrSelectFactor.Reset()
     End Sub
 
-    Public Sub RegOptions()
-        If (chkCorrelationMatrix.Checked = True) Then
+    Public Sub CorrOptions()
+        If chkCorrelationMatrix.Checked Then
             CorrelationMatrix()
         End If
-        If (chkPairwisePlot.Checked = True) Then
+        If chkPairwisePlot.Checked Then
             GGPairs()
         End If
-        If (chkScatterplotMatrix.Checked = True) Then
+        If chkScatterplotMatrix.Checked Then
             GGscatmatrix()
         End If
-        If (chkCorrelationPlot.Checked = True) Then
+        If chkCorrelationPlot.Checked Then
             GGcorr()
         End If
     End Sub
@@ -152,7 +146,7 @@ Public Class sdgCorrPlot
             tbScatterplotMatrix.Enabled = False
         End If
         dlgCorrelation.TestOKEnabled()
-        RegOptions()
+        CorrOptions()
     End Sub
 
     Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
@@ -178,10 +172,6 @@ Public Class sdgCorrPlot
         ColourbyFactor()
     End Sub
 
-    Private Sub lblFactorVariable_Click(sender As Object, e As EventArgs) Handles lblFactorVariable.Click
-
-    End Sub
-
     Private Sub cmbgeom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbgeom.SelectedIndexChanged
         If cmbgeom.SelectedItem = "circle" Then
             lblMaximumSize.Enabled = True
@@ -204,5 +194,4 @@ Public Class sdgCorrPlot
     Private Sub nudAlpha_ValueChanged(sender As Object, e As EventArgs) Handles nudAlphaScatter.ValueChanged
         clsRGGscatmatrix.AddParameter("alpha", nudAlphaScatter.Value.ToString)
     End Sub
-
 End Class

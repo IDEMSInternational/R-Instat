@@ -84,7 +84,7 @@ Partial Class dlgCorrelation
         Me.lblSecondColumn.Location = New System.Drawing.Point(255, 106)
         Me.lblSecondColumn.Name = "lblSecondColumn"
         Me.lblSecondColumn.Size = New System.Drawing.Size(85, 13)
-        Me.lblSecondColumn.TabIndex = 6
+        Me.lblSecondColumn.TabIndex = 5
         Me.lblSecondColumn.Tag = "Second_column"
         Me.lblSecondColumn.Text = "Second Column:"
         '
@@ -96,7 +96,7 @@ Partial Class dlgCorrelation
         Me.grpMethod.Location = New System.Drawing.Point(10, 230)
         Me.grpMethod.Name = "grpMethod"
         Me.grpMethod.Size = New System.Drawing.Size(205, 49)
-        Me.grpMethod.TabIndex = 8
+        Me.grpMethod.TabIndex = 10
         Me.grpMethod.TabStop = False
         Me.grpMethod.Tag = "Method"
         Me.grpMethod.Text = "Method"
@@ -141,7 +141,7 @@ Partial Class dlgCorrelation
         Me.cmdOptions.Location = New System.Drawing.Point(255, 189)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 10
+        Me.cmdOptions.TabIndex = 9
         Me.cmdOptions.Tag = "Options..."
         Me.cmdOptions.Text = "Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -153,7 +153,7 @@ Partial Class dlgCorrelation
         Me.grpMissing.Location = New System.Drawing.Point(217, 230)
         Me.grpMissing.Name = "grpMissing"
         Me.grpMissing.Size = New System.Drawing.Size(190, 49)
-        Me.grpMissing.TabIndex = 9
+        Me.grpMissing.TabIndex = 11
         Me.grpMissing.TabStop = False
         Me.grpMissing.Tag = "Missing"
         Me.grpMissing.Text = "Missing"
@@ -188,7 +188,7 @@ Partial Class dlgCorrelation
         Me.lblConfInterval.Location = New System.Drawing.Point(256, 167)
         Me.lblConfInterval.Name = "lblConfInterval"
         Me.lblConfInterval.Size = New System.Drawing.Size(102, 13)
-        Me.lblConfInterval.TabIndex = 11
+        Me.lblConfInterval.TabIndex = 7
         Me.lblConfInterval.Text = "Confidence Interval:"
         '
         'nudConfidenceInterval
@@ -199,7 +199,7 @@ Partial Class dlgCorrelation
         Me.nudConfidenceInterval.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudConfidenceInterval.Name = "nudConfidenceInterval"
         Me.nudConfidenceInterval.Size = New System.Drawing.Size(43, 20)
-        Me.nudConfidenceInterval.TabIndex = 14
+        Me.nudConfidenceInterval.TabIndex = 8
         Me.nudConfidenceInterval.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'ucrReceiverMultipleColumns
@@ -218,7 +218,7 @@ Partial Class dlgCorrelation
         Me.ucrReceiverSecondColumn.Name = "ucrReceiverSecondColumn"
         Me.ucrReceiverSecondColumn.Selector = Nothing
         Me.ucrReceiverSecondColumn.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondColumn.TabIndex = 7
+        Me.ucrReceiverSecondColumn.TabIndex = 6
         '
         'ucrReceiverFirstColumn
         '
@@ -227,12 +227,12 @@ Partial Class dlgCorrelation
         Me.ucrReceiverFirstColumn.Name = "ucrReceiverFirstColumn"
         Me.ucrReceiverFirstColumn.Selector = Nothing
         Me.ucrReceiverFirstColumn.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFirstColumn.TabIndex = 5
+        Me.ucrReceiverFirstColumn.TabIndex = 4
         '
         'ucrSelectorCorrelation
         '
         Me.ucrSelectorCorrelation.bShowHiddenColumns = False
-        Me.ucrSelectorCorrelation.bUseCurrentFilter = False
+        Me.ucrSelectorCorrelation.bUseCurrentFilter = True
         Me.ucrSelectorCorrelation.Location = New System.Drawing.Point(10, 40)
         Me.ucrSelectorCorrelation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCorrelation.Name = "ucrSelectorCorrelation"
@@ -244,7 +244,7 @@ Partial Class dlgCorrelation
         Me.ucrBase.Location = New System.Drawing.Point(10, 285)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 13
+        Me.ucrBase.TabIndex = 12
         '
         'dlgCorrelation
         '
