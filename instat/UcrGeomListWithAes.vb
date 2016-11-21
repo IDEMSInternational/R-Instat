@@ -119,7 +119,7 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Function LocalAndGlobalDataFramesAreDifferent() As Boolean
-        'This methods checks whether the dataframe used for this layer is different from the global dataframe. If they are different, then chkIgnoreGlobalAes should be permanently checked. See UcrSelector_DataFrameChanged.
+        'This methods checks whether the dataframe used for this layer is different from the global dataframe. If they are different, then chkIgnoreGlobalAes is checked. See UcrSelector_DataFrameChanged. Might also be used to print global aes in red when dataframes are different.
         Dim bValue As Boolean = False
         If strGlobalDataFrame <> "" AndAlso ucrGeomWithAesSelector.strCurrentDataFrame <> strGlobalDataFrame Then 'Warning: if the CurrentDataframe is chosen appropriately, which is the case thanks to InitialiseSelectedDataFrame
             bValue = True
@@ -139,6 +139,7 @@ Public Class UcrGeomListWithParameters
             lstAesParameterUcr(i).Enabled = True
             lstAesParameterUcr(i).Clear()
             'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
+            'Task: print global aesthetics in blue within the receivers and perhaps global aesthetics inherited from another dataframe in red ?
             If Not chkIgnoreGlobalAes.Checked Then
                 For Each clsParam In clsGgplotAesFunction.clsParameters
                     If clsParam.strArgumentName = lstCurrArguments(i) Then
@@ -290,14 +291,15 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Sub ucrGeomWithAesSelector_DataFrameChanged() Handles ucrGeomWithAesSelector.DataFrameChanged
-        'When the dataframes in local layers don't correspond to the data in the global ggplot function, inherit.aes should be set to false (otherwise risk for errors). Then the IgnoreGlobalAes should remain ticked until dataframes coincide.
+        'Warning: When the dataframes in local layers don't correspond to the data in the global ggplot function, inherit.aes should be set to false unless variables have the same name in different dataframes...
         'Warning: in ggplot, one can work with data1 in the global ggplot function and data2 in some layer. If the parameter inherit.aes is not set to false, the mapping in ggplot function will be copied into the layer with different dataframe. Unless the variables used in data1 are also variables in data2, this will give an error and crash the software... 
         If LocalAndGlobalDataFramesAreDifferent() Then
             chkIgnoreGlobalAes.Checked = True
-            'chkIgnoreGlobalAes.Enabled = False
+
         Else
-            chkIgnoreGlobalAes.Enabled = True
-            chkIgnoreGlobalAes.Checked = False 'Warning, if IgnoreGlobalAes was checked before changing dataframe and coming back, then it will be unchecked now...
+            'Task: add a warning message explaining the situation to the user when warning messages will have been implemented homogenuously through out the software...
+
+            'chkIgnoreGlobalAes.Checked = False 'Warning, if IgnoreGlobalAes was checked before changing dataframe and coming back, then it will be unchecked now...
         End If
         'Note SetAes will be called automatically if chkIgnoreGlobalAes.checked has been changed.
     End Sub
