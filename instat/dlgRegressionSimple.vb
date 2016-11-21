@@ -17,8 +17,8 @@
 Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
-    Public clsModel, clsFunctionOperation As New ROperator
-    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRBinomial, clsRLength, clsRMean, clsRMean2, clsRLength2 As New RFunction
+    Public clsModel, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2 As New ROperator
+    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRBinomial, clsRLength, clsRMean, clsRMean2, clsRLength2, clsRGroup, clsRGroup2, clsRLengthGrouped, clsRLengthGrouped2 As New RFunction
     Public clsRLmOrGLM As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -89,6 +89,18 @@ Public Class dlgRegressionSimple
         TestOKEnabled()
     End Sub
 
+    Private Sub DistributionsOffered()
+        If rdoGeneral.Checked Then
+            ucrFamily.SetGLMDistributions()
+        Else
+            If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
+                ucrFamily.clsCurrDistribution.strNameTag = "Bernouli"
+            Else
+                ucrFamily.SetExactDistributions()
+            End If
+        End If
+    End Sub
+
     Private Sub LM()
         clsRLmOrGLM.SetRCommand("lm")
         clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -127,12 +139,6 @@ Public Class dlgRegressionSimple
             clsRTTest.RemoveParameterByName("paired")
         End If
 
-        If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
-            If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
-                ucrResponse.Clear()
-            End If
-        End If
-
     End Sub
 
     Public Sub DataTypeAccepted()
@@ -141,15 +147,22 @@ Public Class dlgRegressionSimple
             ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
         ElseIf rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
-                ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
+                If ucrFamily.Enabled = False Then
+                    ucrResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+                Else
+                    ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
+                    If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
+                        ucrResponse.Clear()
+                    End If
+                End If
                 ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
             End If
             If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
-                ucrExplanatory.SetIncludedDataTypes({"integer", "numeric"})
+                ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
             End If
             If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
-                ucrResponse.SetIncludedDataTypes({"character", "factor"})
+                ucrResponse.SetIncludedDataTypes({"character", "factor", "numeric", "integer"})
                 ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
             End If
         End If
@@ -170,7 +183,7 @@ Public Class dlgRegressionSimple
                 ucrExplanatory.Clear()
             End If
             If ucrResponse.strCurrDataType = "numeric" Or ucrResponse.strCurrDataType = "integer" Or ucrResponse.strCurrDataType = "positive integer" Then
-                ucrResponse.Clear()
+                ucrFamily.clsCurrDistribution.strNameTag = "Bernouli"
             End If
         End If
     End Sub
@@ -180,35 +193,77 @@ Public Class dlgRegressionSimple
         Dim clsTFunc As New RFunction
 
         If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
-            If ucrExplanatory.strCurrDataType = "factor" Or ucrExplanatory.strCurrDataType = "character" Then
+            If ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Then
                 ucrExplanatory.Clear()
             End If
             If ucrResponse.strCurrDataType = "factor" Or ucrResponse.strCurrDataType = "character" Then
                 ucrResponse.Clear()
             End If
         End If
+
         clsRPoisson.SetRCommand("poisson.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
         clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
         clsRPoisson.AddParameter("r", nudHypothesis.Value.ToString())
-        clsRLength.SetRCommand("length")
-        clsRLength.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
-        clsRLength2.SetRCommand("length")
-        clsRLength2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsRMean.SetRCommand("mean")
-        clsRMean.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
-        clsRMean2.SetRCommand("mean")
-        clsRMean2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
+
+        ' x = ...
 
         clsxFunc.SetRCommand("c")
         clsxFunc.AddParameter("l1", clsRFunctionParameter:=clsRLength, bIncludeArgumentName:=False)
         clsxFunc.AddParameter("l2", clsRFunctionParameter:=clsRLength2, bIncludeArgumentName:=False)
         clsRPoisson.AddParameter("x", clsRFunctionParameter:=clsxFunc)
 
+        ' poisson.test(x = c(length(x=Calls[Group == 1]), length(x=Calls[Group == 2])), T =c(mean(Calls[Group == 1]), mean(Calls[Group == 2])))
+
+        clsRLength.SetRCommand("length")
+        clsRLength.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped)
+        clsRLengthGrouped.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup.ToScript & "]")
+        clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
+        clsPoissonOperation.SetOperation("==")
+        clsPoissonOperation.SetParameter(True, clsRFunc:=ucrExplanatory.GetVariables())
+        clsPoissonOperation.SetParameter(False, strValue:="1") 'in there we have the level, get column name???
+
+
+        clsRLength2.SetRCommand("length")
+        clsRLength2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
+        clsRLengthGrouped2.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup2.ToScript & "]")
+        clsRGroup2.AddParameter("x", clsROperatorParameter:=clsPoissonOperation2)
+        clsPoissonOperation2.SetOperation("==")
+        clsPoissonOperation2.SetParameter(True, clsRFunc:=ucrExplanatory.GetVariables())
+        clsPoissonOperation2.SetParameter(False, strValue:="2") 'in there we have the level, get column name???
+
+
+        ' T = ...
+        ' T =c(mean(Calls[Group == 1]), mean(Calls[Group == 2])))
         clsTFunc.SetRCommand("c")
         clsTFunc.AddParameter("m1", clsRFunctionParameter:=clsRMean, bIncludeArgumentName:=False)
         clsTFunc.AddParameter("m2", clsRFunctionParameter:=clsRMean2, bIncludeArgumentName:=False)
         clsRPoisson.AddParameter("T", clsRFunctionParameter:=clsTFunc)
+
+        clsRMean.SetRCommand("mean")
+        clsRMean.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped)
+
+        clsRMean2.SetRCommand("mean")
+        clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
+
+
+
+        '        clsRPoisson.SetRCommand("poisson.test")
+        '        ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
+        '        clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
+        '        clsRPoisson.AddParameter("r", nudHypothesis.Value.ToString())
+        '        clsRLength.SetRCommand("length")
+        '        clsRLength.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
+        '        clsRLength2.SetRCommand("length")
+        '        clsRLength2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        '        clsRMean.SetRCommand("mean")
+        '        clsRMean.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
+        '        clsRMean2.SetRCommand("mean")
+        '        clsRMean2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
+
+
+
+
     End Sub
 
     Private Sub SetRCode()
@@ -291,15 +346,6 @@ Public Class dlgRegressionSimple
             End If
         End If
 
-    End Sub
-
-    Private Sub DistributionsOffered()
-        If rdoGeneral.Checked Then
-            ucrFamily.SetGLMDistributions()
-            'ucrFamily.SetAllDistributions() ' this is just temporary. It will move back to SetGLMDistributions once some bugs are fixed
-        Else
-            ucrFamily.SetExactDistributions()
-        End If
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
