@@ -73,7 +73,7 @@ Partial Class sdgCorrPlot
         Me.chkScatterplotMatrix.Location = New System.Drawing.Point(10, 79)
         Me.chkScatterplotMatrix.Name = "chkScatterplotMatrix"
         Me.chkScatterplotMatrix.Size = New System.Drawing.Size(108, 17)
-        Me.chkScatterplotMatrix.TabIndex = 1
+        Me.chkScatterplotMatrix.TabIndex = 3
         Me.chkScatterplotMatrix.Tag = "Scatterplot_Matrix"
         Me.chkScatterplotMatrix.Text = "Scatterplot Matrix"
         Me.chkScatterplotMatrix.UseVisualStyleBackColor = True
@@ -95,7 +95,7 @@ Partial Class sdgCorrPlot
         Me.chkPairwisePlot.Location = New System.Drawing.Point(10, 33)
         Me.chkPairwisePlot.Name = "chkPairwisePlot"
         Me.chkPairwisePlot.Size = New System.Drawing.Size(89, 17)
-        Me.chkPairwisePlot.TabIndex = 3
+        Me.chkPairwisePlot.TabIndex = 1
         Me.chkPairwisePlot.Tag = "Pairwise_Plot"
         Me.chkPairwisePlot.Text = "Pairwise_Plot"
         Me.chkPairwisePlot.UseVisualStyleBackColor = True
