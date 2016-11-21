@@ -118,7 +118,7 @@ Partial Class dlgOneVarFitModel
         'lblSuccessIf
         '
         Me.lblSuccessIf.AutoSize = True
-        Me.lblSuccessIf.Location = New System.Drawing.Point(277, 241)
+        Me.lblSuccessIf.Location = New System.Drawing.Point(274, 241)
         Me.lblSuccessIf.Name = "lblSuccessIf"
         Me.lblSuccessIf.Size = New System.Drawing.Size(66, 13)
         Me.lblSuccessIf.TabIndex = 19
@@ -181,7 +181,7 @@ Partial Class dlgOneVarFitModel
         'lblEquals
         '
         Me.lblEquals.AutoSize = True
-        Me.lblEquals.Location = New System.Drawing.Point(343, 241)
+        Me.lblEquals.Location = New System.Drawing.Point(336, 241)
         Me.lblEquals.Name = "lblEquals"
         Me.lblEquals.Size = New System.Drawing.Size(13, 13)
         Me.lblEquals.TabIndex = 33
@@ -190,9 +190,9 @@ Partial Class dlgOneVarFitModel
         'cboVariables
         '
         Me.cboVariables.IsReadOnly = False
-        Me.cboVariables.Location = New System.Drawing.Point(362, 237)
+        Me.cboVariables.Location = New System.Drawing.Point(349, 237)
         Me.cboVariables.Name = "cboVariables"
-        Me.cboVariables.Size = New System.Drawing.Size(88, 21)
+        Me.cboVariables.Size = New System.Drawing.Size(101, 21)
         Me.cboVariables.TabIndex = 32
         '
         'ucrOperator

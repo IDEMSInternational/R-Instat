@@ -225,7 +225,7 @@ Public Class dlgOneVarFitModel
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
                 clsFactorOperator.SetOperation("==")
                 clsFactorOperator.SetParameter(True, clsRFunc:=UcrReceiver.GetVariables())
-                clsFactorOperator.SetParameter(False, strValue:=cboVariables.GetText())
+                clsFactorOperator.SetParameter(False, strValue:=Chr(34) & cboVariables.GetText() & Chr(34))   ' check
             Else
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
                 clsFunctionOperator.SetOperation(ucrOperator.GetText())
@@ -283,6 +283,7 @@ Public Class dlgOneVarFitModel
         EnableOptions()
         PlotResiduals()
         DataTypeAccepted()
+        BinomialConditions()
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
