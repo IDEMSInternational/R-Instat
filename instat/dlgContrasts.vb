@@ -73,9 +73,9 @@ Public Class dlgContrasts
     Private Sub SetDefaults()
         ucrInputContrast.SetName("Treatment/Control")
         ucrSelectorForContrast.Reset()
-        ucrInputContrast.Reset()
         ucrInputContrast.Enabled = False
         SelectContrast()
+        grdCurrSheet.Reset()
         ucrInputContrast.SetEditable(True)
     End Sub
 
@@ -147,10 +147,6 @@ Public Class dlgContrasts
         End Select
     End Sub
 
-    Private Sub grdLayoutForContrasts_Leave(sender As Object, e As EventArgs) Handles grdLayoutForContrasts.Leave
-        SetMatrixFunction()
-    End Sub
-
     Public Sub SetMatrixFunction()
         Dim i As Integer
         Dim j As Integer
@@ -174,5 +170,26 @@ Public Class dlgContrasts
         clsContrMatrix.AddParameter("ncol", grdCurrSheet.Columns)
         clsContrMatrix.AddParameter("nrow", grdCurrSheet.Rows)
         ucrBase.clsRsyntax.AddParameter("defined_contr_matrix", clsRFunctionParameter:=clsContrMatrix)
+    End Sub
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
+        grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
+        If e.NewData.ToString() <> "" Then
+            If Not IsNumeric(e.NewData) Then
+                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric value. Please enter a numeric value ", MsgBoxStyle.Exclamation, "Invalid Value")
+                e.EndReason = EndEditReason.Cancel
+            ElseIf e.NewData Is Nothing Then
+                MsgBox("All the cells in the grid must not be empty", MsgBoxStyle.Exclamation)
+                e.EndReason = EndEditReason.Cancel
+            End If
+        End If
+        SetMatrixFunction()
+    End Sub
+
+    Private Sub grdLayoutForContrasts_Leave(sender As Object, e As EventArgs) Handles grdLayoutForContrasts.Leave
+        If grdCurrSheet.IsEditing Then
+            grdCurrSheet.EndEdit(EndEditReason.NormalFinish)
+            SetMatrixFunction()
+        End If
     End Sub
 End Class
