@@ -46,7 +46,7 @@ Public Class dlgGeneralForGraphics
         'True for "we are setting the first parameter, on the left of +".
         ucrBase.iHelpTopicID = 356
 
-        ucrSaveGraph.SetDataFrameSelector(sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames)
+        ucrSaveGraph.SetDataFrameSelector(sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames)
         ucrSaveGraph.strPrefix = "Graph"
         ucrAdditionalLayers.SetRSyntax(ucrBase.clsRsyntax)
         ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
@@ -165,9 +165,9 @@ Public Class dlgGeneralForGraphics
 
     Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
         If ucrSaveGraph.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
         Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         End If
     End Sub
 
