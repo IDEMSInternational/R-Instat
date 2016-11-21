@@ -56,7 +56,6 @@ Public Class sdgPlots
     Public Sub SetDefaults()
         TitleDefaults()
         chkIncludeFacets.Checked = False
-        chkNoOfRowsOrColumns.Visible = False
         IncludeFacets()
         ucrFacetSelector.Reset()
 
@@ -200,7 +199,6 @@ Public Class sdgPlots
 
             ElseIf rdoVertical.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
                 clsRFacetFunction.SetRCommand("facet_wrap")
-                RemoveGridParameters()
                 clsTempOp.SetParameter(True, strValue:="")
                 clsTempOp.SetParameter(False, strValue:=strSingleFactor)
                 clsRFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
@@ -245,10 +243,6 @@ Public Class sdgPlots
         clsRFacetFunction.RemoveParameterByName("nrow")
     End Sub
 
-    Private Sub RemoveGridParameters()
-
-
-    End Sub
     Private Sub SetFixRowColumnParameter()
         If chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
             If rdoHorizontal.Checked Then
@@ -299,9 +293,8 @@ Public Class sdgPlots
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
         Else
-        chkNoOfRowsOrColumns.Visible = True
+            chkNoOfRowsOrColumns.Visible = True
             nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
-
         End If
     End Sub
 
@@ -467,12 +460,6 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub
-
-    Private Sub nudNoOfRowsOrColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNoOfRowsOrColumns.ValueChanged
-
-    End Sub
-
-
 
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
