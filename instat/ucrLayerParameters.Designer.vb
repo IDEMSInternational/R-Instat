@@ -32,6 +32,10 @@ Partial Class ucrLayerParameters
         Me.UcrLayerParamsControls11 = New instat.ucrLayerParamsControls()
         Me.UcrLayerParamsControls12 = New instat.ucrLayerParamsControls()
         Me.UcrLayerParamsControls13 = New instat.ucrLayerParamsControls()
+        Me.UcrLayerParamsControls17 = New instat.ucrLayerParamsControls()
+        Me.UcrLayerParamsControls16 = New instat.ucrLayerParamsControls()
+        Me.UcrLayerParamsControls15 = New instat.ucrLayerParamsControls()
+        Me.UcrLayerParamsControls14 = New instat.ucrLayerParamsControls()
         Me.SuspendLayout()
         '
         'UcrLayerParamsControls1
@@ -125,9 +129,41 @@ Partial Class ucrLayerParameters
         Me.UcrLayerParamsControls13.Size = New System.Drawing.Size(290, 25)
         Me.UcrLayerParamsControls13.TabIndex = 14
         '
+        'UcrLayerParamsControls17
+        '
+        Me.UcrLayerParamsControls17.Location = New System.Drawing.Point(6, 450)
+        Me.UcrLayerParamsControls17.Name = "UcrLayerParamsControls17"
+        Me.UcrLayerParamsControls17.Size = New System.Drawing.Size(290, 25)
+        Me.UcrLayerParamsControls17.TabIndex = 18
+        '
+        'UcrLayerParamsControls16
+        '
+        Me.UcrLayerParamsControls16.Location = New System.Drawing.Point(6, 425)
+        Me.UcrLayerParamsControls16.Name = "UcrLayerParamsControls16"
+        Me.UcrLayerParamsControls16.Size = New System.Drawing.Size(290, 25)
+        Me.UcrLayerParamsControls16.TabIndex = 17
+        '
+        'UcrLayerParamsControls15
+        '
+        Me.UcrLayerParamsControls15.Location = New System.Drawing.Point(6, 400)
+        Me.UcrLayerParamsControls15.Name = "UcrLayerParamsControls15"
+        Me.UcrLayerParamsControls15.Size = New System.Drawing.Size(290, 25)
+        Me.UcrLayerParamsControls15.TabIndex = 16
+        '
+        'UcrLayerParamsControls14
+        '
+        Me.UcrLayerParamsControls14.Location = New System.Drawing.Point(6, 375)
+        Me.UcrLayerParamsControls14.Name = "UcrLayerParamsControls14"
+        Me.UcrLayerParamsControls14.Size = New System.Drawing.Size(290, 25)
+        Me.UcrLayerParamsControls14.TabIndex = 15
+        '
         'ucrLayerParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.Controls.Add(Me.UcrLayerParamsControls17)
+        Me.Controls.Add(Me.UcrLayerParamsControls16)
+        Me.Controls.Add(Me.UcrLayerParamsControls15)
+        Me.Controls.Add(Me.UcrLayerParamsControls14)
         Me.Controls.Add(Me.UcrLayerParamsControls13)
         Me.Controls.Add(Me.UcrLayerParamsControls12)
         Me.Controls.Add(Me.UcrLayerParamsControls6)
@@ -142,7 +178,7 @@ Partial Class ucrLayerParameters
         Me.Controls.Add(Me.UcrLayerParamsControls2)
         Me.Controls.Add(Me.UcrLayerParamsControls1)
         Me.Name = "ucrLayerParameters"
-        Me.Size = New System.Drawing.Size(265, 382)
+        Me.Size = New System.Drawing.Size(265, 481)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls1, 0)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls2, 0)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls3, 0)
@@ -156,6 +192,10 @@ Partial Class ucrLayerParameters
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls6, 0)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls12, 0)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls13, 0)
+        Me.Controls.SetChildIndex(Me.UcrLayerParamsControls14, 0)
+        Me.Controls.SetChildIndex(Me.UcrLayerParamsControls15, 0)
+        Me.Controls.SetChildIndex(Me.UcrLayerParamsControls16, 0)
+        Me.Controls.SetChildIndex(Me.UcrLayerParamsControls17, 0)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -174,4 +214,8 @@ Partial Class ucrLayerParameters
     Friend WithEvents UcrLayerParamsControls11 As ucrLayerParamsControls
     Friend WithEvents UcrLayerParamsControls12 As ucrLayerParamsControls
     Friend WithEvents UcrLayerParamsControls13 As ucrLayerParamsControls
+    Friend WithEvents UcrLayerParamsControls17 As ucrLayerParamsControls
+    Friend WithEvents UcrLayerParamsControls16 As ucrLayerParamsControls
+    Friend WithEvents UcrLayerParamsControls15 As ucrLayerParamsControls
+    Friend WithEvents UcrLayerParamsControls14 As ucrLayerParamsControls
 End Class

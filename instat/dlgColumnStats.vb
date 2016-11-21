@@ -30,8 +30,8 @@ Public Class dlgColumnStats
         TestOKEnabled()
     End Sub
 
-    Private Sub TestOKEnabled()
-        If (Not ucrReceiverSelectedVariables.IsEmpty()) Then
+    Public Sub TestOKEnabled()
+        If (Not ucrReceiverSelectedVariables.IsEmpty() AndAlso Not sdgSummaries.strSummariesParameter = "c()") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -50,6 +50,7 @@ Public Class dlgColumnStats
         ucrSelectorForColumnStatistics.Reset()
         ucrReceiverSelectedVariables.SetMeAsReceiver()
         sdgSummaries.SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -134,6 +135,8 @@ Public Class dlgColumnStats
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.ShowDialog()
+        sdgSummaries.TestSummaries()
+        TestOKEnabled()
     End Sub
 
     Private Sub chkExcludeMissing_CheckedChanged(sender As Object, e As EventArgs) Handles chkOmitMissing.CheckedChanged
