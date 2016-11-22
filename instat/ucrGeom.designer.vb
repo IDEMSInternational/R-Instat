@@ -40,9 +40,9 @@ Partial Class ucrGeom
         Me.lblTypeofLayer.AutoSize = True
         Me.lblTypeofLayer.Location = New System.Drawing.Point(4, 4)
         Me.lblTypeofLayer.Name = "lblTypeofLayer"
-        Me.lblTypeofLayer.Size = New System.Drawing.Size(106, 13)
+        Me.lblTypeofLayer.Size = New System.Drawing.Size(109, 13)
         Me.lblTypeofLayer.TabIndex = 1
-        Me.lblTypeofLayer.Text = "Type of Layer(Geom)"
+        Me.lblTypeofLayer.Text = "Type of Layer(Geom):"
         Me.lblTypeofLayer.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'ucrGeom
