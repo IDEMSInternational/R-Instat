@@ -10,7 +10,7 @@ Public Class frmWebBrowser
     End Sub
 
     Private Sub Initialise()
-        wbOutput.ObjectForScripting = Me
+        'wbOutput.ObjectForScripting = Me
         'https://msdn.microsoft.com/en-us/library/system.windows.forms.webbrowser.objectforscripting(v=vs.110).aspx
 
 
