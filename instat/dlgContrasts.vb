@@ -74,7 +74,7 @@ Public Class dlgContrasts
         ucrSelectorForContrast.Reset()
         SelectContrast()
         grdCurrSheet.Reset()
-        ucrInputContrastName.SetEditable(True)
+        ' ucrInputContrastName.SetEditable(True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
