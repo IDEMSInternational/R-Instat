@@ -94,7 +94,6 @@ Public Class sdgOneVarGraph
                 strNumericGeomFunction = "geom_violin"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
 
-
             Case "Jitter Plot"
                 strNumericGeomFunction = "geom_jitter"
                 clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
