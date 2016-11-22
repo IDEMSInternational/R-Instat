@@ -114,10 +114,6 @@ Public Class dlgMerge
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdChooseMergeColumns_Click(sender As Object, e As EventArgs)
-        sdgMerge.ShowDialog()
-    End Sub
-
     Private Sub MatchingColumns_CheckedChanged(sender As Object, e As EventArgs) Handles rdoByAllMatching.CheckedChanged, rdoChooseColumns.CheckedChanged
         If rdoByAllMatching.Checked Then
             ucrSelectorFirstDF.SetVariablesVisible(False)
