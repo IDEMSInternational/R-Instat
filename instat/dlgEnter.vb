@@ -56,13 +56,18 @@ Public Class dlgEnter
         ucrDataFrameEnter.Reset()
         chkSaveEnterResultInto.Checked = True
         ucrSaveEnterResultInto.SetPrefix("Enter")
+        ucrReceiverForEnterCalculation.Clear()
     End Sub
     Private Sub ReopenDialog()
         SaveResults()
     End Sub
     Private Sub TestOKEnabled()
         If Not ucrReceiverForEnterCalculation.IsEmpty Then
-            ucrBase.OKEnabled(True)
+            If chkSaveEnterResultInto.Checked AndAlso Not ucrSaveEnterResultInto.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -265,6 +270,9 @@ Public Class dlgEnter
 
     Private Sub ucrSaveEnterResultInto_NameChanged() Handles ucrSaveEnterResultInto.NameChanged
         SaveResults()
+    End Sub
+
+    Private Sub ucrSaveEnterResultInto_ContentsChanged() Handles ucrSaveEnterResultInto.ContentsChanged
         TestOKEnabled()
     End Sub
 
