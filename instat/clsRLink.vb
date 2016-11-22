@@ -295,18 +295,44 @@ Public Class RLink
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
-    Public Sub DisplayGraphInRTB(strImageLocation As String)
-        'TEST temporary
-        txtOutput.ReadOnly = False
+    Public Function GetImageRTFCode(strImageLocation As String, iWidth As Integer, iHeight As Integer) As String
+
+        'use reference
+        'http://stackoverflow.com/questions/1490734/programatically-adding-images-to-rtf-document
 
         Dim img As Image = Image.FromFile(strImageLocation)
+        'Dim bimg = New Bitmap(Image.FromFile(strImageLocation), width, height)
+        Dim stream As New System.IO.MemoryStream
+        img.Save(stream, System.Drawing.Imaging.ImageFormat.Png)
+        Dim bytes As Byte() = stream.ToArray()
+        Dim strBytes As String = BitConverter.ToString(bytes).Replace("-", "")
+
+        Dim strRTFPic As String = "{\pict\pngblip\picw" +
+        img.Width.ToString() & "\pich" & img.Height.ToString() &
+        "\picwgoa" & iWidth.ToString() + "\pichgoa" & iHeight.ToString() +
+        "\hex " & strBytes & "}"
+
+        stream.Dispose()
+
+        Return strRTFPic
+    End Function
+
+    Public Sub DisplayGraphInRTB(strImageLocation As String)
+        'TEST temporary
+        'First method, pasting
+        txtOutput.ReadOnly = False
+        Dim img As Image = Image.FromFile(strImageLocation)
         Dim bimg = New Bitmap(img, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
+
         Dim orgData = Clipboard.GetDataObject
         Clipboard.SetImage(bimg)
         txtOutput.Paste()
         Clipboard.SetDataObject(orgData)
-        txtOutput.PerformLayout()
         txtOutput.ReadOnly = True
+
+        'Second method add to rtf code, this doesn't work yet.. either because GetImage is crap, or because the code is not inserted at the right place...
+        txtOutput.Rtf = txtOutput.Rtf & GetImageRTFCode(strImageLocation, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
+
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
         'TEST temporary
