@@ -1589,7 +1589,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
         g <- g + geom_violin() + geom_jitter() 
       }
       else if(curr_geom_name == "violin_box") {
-        g <- g + geom_boxplot() + geom_violin() 
+        g <- g + geom_violin() + geom_boxplot() 
       }
     }
 
@@ -1633,7 +1633,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
         g <- g + geom_violin() + geom_jitter()
       }
       else if(curr_geom_name == "violin_box") {
-        g <- g + geom_boxplot() + geom_violin()
+        g <- g + geom_violin() + geom_boxplot()
       }
       else {
         g <- g + curr_geom()
