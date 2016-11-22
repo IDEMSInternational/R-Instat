@@ -135,7 +135,9 @@ Public Class dlgOneVarFitModel
                     clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
                     clsRStartValues.SetRCommand("mean")
                     clsRStartValues.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                    ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
+                    ' TODO llplot() no longer works with starting values.
+                    ' Chi-square, F and T cannot give llplots
+                    ' llplot option to be disabled for these ones?
                 End If
             End If
         Else
@@ -143,6 +145,19 @@ Public Class dlgOneVarFitModel
             UcrBase.clsRsyntax.RemoveParameter("data")
         End If
     End Sub
+
+    '    If UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character" Then
+    '    If Not chkConvertToVariate.Checked Then
+    '    ' only options in the receiver are poisson.
+    '    Else
+    '    ' receiver options are all again, except beta(?)
+    '    End If
+    '    '  if the values are between 0 and 1, beta is allowed as well as everything else
+    '    ' if chisq, t, F selected, then llplot options are removed and set to not run?
+    '    ' chisq, t, f are our sampling distributions so they would be good to group together on the ucrDists.
+    '    ' uniform needs a "from" and "to"
+    '    ' bernouli, bimon, nbinom and hypergeo give error code 100.
+    '    End If
 
     Public Sub SetBaseFunction()
         clsROneVarFitModel.ClearParameters()
