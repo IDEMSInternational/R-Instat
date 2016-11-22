@@ -116,7 +116,6 @@ Public Class sdgOneVarGraph
 
     Private Sub ucrInputNumeric_NameChanged() Handles ucrInputNumeric.NameChanged
         SetNumericGeomFunction()
-        dlgOneVariableGraph.AddFunctionParameters()
     End Sub
 
     Public Sub SetCategoricalGeomFunction()
@@ -140,7 +139,6 @@ Public Class sdgOneVarGraph
     End Sub
     Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
         SetCategoricalGeomFunction()
-        dlgOneVariableGraph.AddFunctionParameters()
     End Sub
     
     Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScaleAxisforFacets.CheckedChanged
