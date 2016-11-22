@@ -46,18 +46,18 @@ Partial Class dlgContrasts
         Me.lblSelectContrastName.AutoSize = True
         Me.lblSelectContrastName.Location = New System.Drawing.Point(244, 78)
         Me.lblSelectContrastName.Name = "lblSelectContrastName"
-        Me.lblSelectContrastName.Size = New System.Drawing.Size(111, 13)
+        Me.lblSelectContrastName.Size = New System.Drawing.Size(113, 13)
         Me.lblSelectContrastName.TabIndex = 14
-        Me.lblSelectContrastName.Text = "Select Contrast name:"
+        Me.lblSelectContrastName.Text = "Select Contrast Name:"
         '
         'lblDefineContrast
         '
         Me.lblDefineContrast.AutoSize = True
         Me.lblDefineContrast.Location = New System.Drawing.Point(442, 13)
         Me.lblDefineContrast.Name = "lblDefineContrast"
-        Me.lblDefineContrast.Size = New System.Drawing.Size(91, 13)
+        Me.lblDefineContrast.Size = New System.Drawing.Size(92, 13)
         Me.lblDefineContrast.TabIndex = 16
-        Me.lblDefineContrast.Text = "Define a contrast:"
+        Me.lblDefineContrast.Text = "Define a Contrast:"
         '
         'grdLayoutForContrasts
         '
