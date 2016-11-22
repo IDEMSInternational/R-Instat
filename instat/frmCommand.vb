@@ -5,6 +5,7 @@ Imports instat.Translations
 Public Class frmCommand
     Private Sub frmCommand_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        ' txtCommand.ScrollBars.Both
     End Sub
 
     Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)

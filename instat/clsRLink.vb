@@ -298,11 +298,14 @@ Public Class RLink
     Public Sub DisplayGraphInRTB(strImageLocation As String)
         'TEST temporary
         txtOutput.ReadOnly = False
+
         Dim img As Image = Image.FromFile(strImageLocation)
+        Dim bimg = New Bitmap(img, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
         Dim orgData = Clipboard.GetDataObject
-        Clipboard.SetImage(img)
+        Clipboard.SetImage(bimg)
         txtOutput.Paste()
         Clipboard.SetDataObject(orgData)
+        txtOutput.PerformLayout()
         txtOutput.ReadOnly = True
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
