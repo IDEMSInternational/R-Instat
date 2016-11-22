@@ -134,7 +134,7 @@ Public Class dlgRegressionSimple
         If rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
-                If ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer" Then
+                If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" OrElse ucrExplanatory.strCurrDataType = "positive integer" Then
                     ucrExplanatory.Clear()
                 End If
             End If
@@ -288,7 +288,7 @@ Public Class dlgRegressionSimple
                     ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 End If
             Else
-                If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
+                If ucrFamily.lstCurrentDistributions.Count = 0 OrElse ucrResponse.IsEmpty() Then
                     ucrFamily.cboDistributions.Text = ""
                     cmdModelOptions.Enabled = False
                 Else
@@ -300,7 +300,7 @@ Public Class dlgRegressionSimple
                 ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ' this needs work still. Nothing is being shown once any of the "Exact"'s are selected
                 ' Additionally, we need to have that we can switch between rdos and the cbo's to change appropriately. 
-                If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
+                If ucrResponse.strCurrDataType = "character" OrElse ucrResponse.strCurrDataType = "factor" Then
                     ucrFamily.RecieverDatatype("factor")
                 ElseIf ucrResponse.strCurrDataType = "positive integer" Then
                     ucrFamily.RecieverDatatype("positive integer")
@@ -337,7 +337,7 @@ Public Class dlgRegressionSimple
         Dim strExplanatoryType As String
         If Not ucrExplanatory.IsEmpty AndAlso rdoGeneral.Checked Then
             strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-            If rdoGeneral.Checked AndAlso (strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer") Then
+            If rdoGeneral.Checked AndAlso (strExplanatoryType = "numeric" OrElse strExplanatoryType = "positive integer" OrElse strExplanatoryType = "integer") Then
                 chkFunction.Visible = True
             Else
                 chkFunction.Checked = False
