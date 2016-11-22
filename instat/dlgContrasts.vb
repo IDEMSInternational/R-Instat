@@ -74,6 +74,7 @@ Public Class dlgContrasts
         ucrSelectorForContrast.Reset()
         SelectContrast()
         grdCurrSheet.Reset()
+        grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
         ' ucrInputContrastName.SetEditable(True)
     End Sub
 
@@ -164,7 +165,6 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
-        grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
         If e.NewData.ToString() <> "" Then
             If Not IsNumeric(e.NewData) Then
                 MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric value. Please enter a numeric value ", MsgBoxStyle.Exclamation, "Invalid Value")
