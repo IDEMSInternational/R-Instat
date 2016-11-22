@@ -51,7 +51,7 @@ Partial Class sdgModelOptions
         Me.grpLinkFunctions.Location = New System.Drawing.Point(10, 53)
         Me.grpLinkFunctions.Name = "grpLinkFunctions"
         Me.grpLinkFunctions.Size = New System.Drawing.Size(224, 104)
-        Me.grpLinkFunctions.TabIndex = 2
+        Me.grpLinkFunctions.TabIndex = 1
         Me.grpLinkFunctions.TabStop = False
         Me.grpLinkFunctions.Tag = "Link_Functions"
         Me.grpLinkFunctions.Text = "Link Functions"
@@ -59,142 +59,133 @@ Partial Class sdgModelOptions
         'rdocloglog
         '
         Me.rdocloglog.AutoSize = True
-        Me.rdocloglog.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdocloglog.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdocloglog.Location = New System.Drawing.Point(79, 21)
         Me.rdocloglog.Name = "rdocloglog"
         Me.rdocloglog.Size = New System.Drawing.Size(59, 17)
-        Me.rdocloglog.TabIndex = 23
+        Me.rdocloglog.TabIndex = 1
         Me.rdocloglog.TabStop = True
         Me.rdocloglog.Tag = "cloglog"
         Me.rdocloglog.Text = "cloglog"
         Me.rdocloglog.UseVisualStyleBackColor = True
-        Me.rdocloglog.UseWaitCursor = True
         '
         'rdoSqrt
         '
         Me.rdoSqrt.AutoSize = True
-        Me.rdoSqrt.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdoSqrt.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoSqrt.Location = New System.Drawing.Point(79, 43)
         Me.rdoSqrt.Name = "rdoSqrt"
         Me.rdoSqrt.Size = New System.Drawing.Size(44, 17)
-        Me.rdoSqrt.TabIndex = 24
+        Me.rdoSqrt.TabIndex = 4
         Me.rdoSqrt.TabStop = True
         Me.rdoSqrt.Tag = "Sqrt"
         Me.rdoSqrt.Text = "Sqrt"
         Me.rdoSqrt.UseVisualStyleBackColor = True
-        Me.rdoSqrt.UseWaitCursor = True
         '
         'rdoMuSquaredInverse
         '
         Me.rdoMuSquaredInverse.AutoSize = True
-        Me.rdoMuSquaredInverse.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdoMuSquaredInverse.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoMuSquaredInverse.Location = New System.Drawing.Point(79, 65)
         Me.rdoMuSquaredInverse.Name = "rdoMuSquaredInverse"
         Me.rdoMuSquaredInverse.Size = New System.Drawing.Size(62, 17)
-        Me.rdoMuSquaredInverse.TabIndex = 25
+        Me.rdoMuSquaredInverse.TabIndex = 7
         Me.rdoMuSquaredInverse.TabStop = True
         Me.rdoMuSquaredInverse.Tag = "1/mu^2"
         Me.rdoMuSquaredInverse.Text = "1/mu^2"
         Me.rdoMuSquaredInverse.UseVisualStyleBackColor = True
-        Me.rdoMuSquaredInverse.UseWaitCursor = True
         '
         'rdoInverse
         '
         Me.rdoInverse.AutoSize = True
-        Me.rdoInverse.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdoInverse.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoInverse.Location = New System.Drawing.Point(149, 67)
         Me.rdoInverse.Name = "rdoInverse"
         Me.rdoInverse.Size = New System.Drawing.Size(60, 17)
-        Me.rdoInverse.TabIndex = 26
+        Me.rdoInverse.TabIndex = 8
         Me.rdoInverse.TabStop = True
         Me.rdoInverse.Tag = "Inverse"
         Me.rdoInverse.Text = "Inverse"
         Me.rdoInverse.UseVisualStyleBackColor = True
-        Me.rdoInverse.UseWaitCursor = True
         '
         'rdoCauchit
         '
         Me.rdoCauchit.AutoSize = True
-        Me.rdoCauchit.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdoCauchit.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoCauchit.Location = New System.Drawing.Point(149, 21)
         Me.rdoCauchit.Name = "rdoCauchit"
         Me.rdoCauchit.Size = New System.Drawing.Size(61, 17)
-        Me.rdoCauchit.TabIndex = 22
+        Me.rdoCauchit.TabIndex = 2
         Me.rdoCauchit.TabStop = True
         Me.rdoCauchit.Tag = "Cauchit"
         Me.rdoCauchit.Text = "Cauchit"
         Me.rdoCauchit.UseVisualStyleBackColor = True
-        Me.rdoCauchit.UseWaitCursor = True
         '
         'rdoProbit
         '
         Me.rdoProbit.AutoSize = True
-        Me.rdoProbit.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdoProbit.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoProbit.Location = New System.Drawing.Point(149, 44)
         Me.rdoProbit.Name = "rdoProbit"
         Me.rdoProbit.Size = New System.Drawing.Size(52, 17)
-        Me.rdoProbit.TabIndex = 21
+        Me.rdoProbit.TabIndex = 5
         Me.rdoProbit.TabStop = True
         Me.rdoProbit.Tag = "Probit"
         Me.rdoProbit.Text = "Probit"
         Me.rdoProbit.UseVisualStyleBackColor = True
-        Me.rdoProbit.UseWaitCursor = True
         '
         'rdoLogit
         '
         Me.rdoLogit.AutoSize = True
-        Me.rdoLogit.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdoLogit.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoLogit.Location = New System.Drawing.Point(9, 65)
         Me.rdoLogit.Name = "rdoLogit"
         Me.rdoLogit.Size = New System.Drawing.Size(48, 17)
-        Me.rdoLogit.TabIndex = 20
+        Me.rdoLogit.TabIndex = 6
         Me.rdoLogit.TabStop = True
         Me.rdoLogit.Tag = "Logit"
         Me.rdoLogit.Text = "Logit"
         Me.rdoLogit.UseVisualStyleBackColor = True
-        Me.rdoLogit.UseWaitCursor = True
         '
         'rdoLog
         '
         Me.rdoLog.AutoSize = True
-        Me.rdoLog.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdoLog.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoLog.Location = New System.Drawing.Point(9, 43)
         Me.rdoLog.Name = "rdoLog"
         Me.rdoLog.Size = New System.Drawing.Size(43, 17)
-        Me.rdoLog.TabIndex = 19
+        Me.rdoLog.TabIndex = 3
         Me.rdoLog.TabStop = True
         Me.rdoLog.Tag = "Log"
         Me.rdoLog.Text = "Log"
         Me.rdoLog.UseVisualStyleBackColor = True
-        Me.rdoLog.UseWaitCursor = True
         '
         'rdoIdentity
         '
         Me.rdoIdentity.AutoSize = True
-        Me.rdoIdentity.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.rdoIdentity.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoIdentity.Location = New System.Drawing.Point(9, 21)
         Me.rdoIdentity.Name = "rdoIdentity"
         Me.rdoIdentity.Size = New System.Drawing.Size(59, 17)
-        Me.rdoIdentity.TabIndex = 18
+        Me.rdoIdentity.TabIndex = 0
         Me.rdoIdentity.TabStop = True
         Me.rdoIdentity.Tag = "Identity"
         Me.rdoIdentity.Text = "Identity"
         Me.rdoIdentity.UseVisualStyleBackColor = True
-        Me.rdoIdentity.UseWaitCursor = True
         '
         'ucrButtonsSDGModelOptions
         '
         Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(47, 163)
         Me.ucrButtonsSDGModelOptions.Name = "ucrButtonsSDGModelOptions"
         Me.ucrButtonsSDGModelOptions.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsSDGModelOptions.TabIndex = 1
+        Me.ucrButtonsSDGModelOptions.TabIndex = 2
         '
         'ucrFamily
         '
         Me.ucrFamily.Location = New System.Drawing.Point(10, 4)
         Me.ucrFamily.Name = "ucrFamily"
         Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
-        Me.ucrFamily.TabIndex = 3
+        Me.ucrFamily.TabIndex = 0
         '
         'sdgModelOptions
         '

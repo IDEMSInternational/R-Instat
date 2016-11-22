@@ -82,45 +82,39 @@ Public Class dlgMakeDate
         chkTwoDigitYearTwo.Checked = False
         lblCutOffThree.Visible = False
         lblCutOffTwo.Visible = False
-        'Disabling the check boxes, Input,... which are yet to be Implemented.
-        'To be return to how it was prev...
-        'chkTwoDigitYearThree.Enabled = False
-        'chkTwoDigitYearTwo.Enabled = False
-        nudCutOffThree.Visible = True
-        nudCutOffTwo.Visible = True
-        nudCutOffThree.Enabled = False
-        nudCutOffTwo.Enabled = False
+        chkTwoDigitYearThree.Visible = True
+        chkTwoDigitYearTwo.Visible = True
+        nudCutOffThree.Visible = False
+        nudCutOffTwo.Visible = False
         chkMore.Checked = False
-        'chkMore.Enabled = False
-        lblCutOffTwo.Visible = True
-        lblCutOffThree.Visible = True
-        lblCutOffThree.Enabled = False
-        lblCutOffTwo.Enabled = False
-        ucrInputComboBoxMonthTwo.Enabled = False
-        grpFormatField.Visible = False
+        chkMore.Visible = True
 
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoSingleColumn.Checked Then
-            If Not ucrReceiverForDate.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+        If Not ucrInputNewColumnName.IsEmpty Then
+            If rdoSingleColumn.Checked Then
+                If Not ucrReceiverForDate.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
 
-        ElseIf rdoYearandDayofYear.Checked Then
-            If Not ucrReceiverYearTwo.IsEmpty AndAlso Not ucrReceiverDayTwo.IsEmpty Then
-                ucrBase.OKEnabled(True)
+            ElseIf rdoYearandDayofYear.Checked Then
+                If Not ucrReceiverYearTwo.IsEmpty AndAlso Not ucrReceiverDayTwo.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             Else
-                ucrBase.OKEnabled(False)
+                If Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty AndAlso Not ucrReceiverYearThree.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             End If
         Else
-            If Not ucrReceiverDayThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty AndAlso Not ucrReceiverYearThree.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -177,8 +171,6 @@ Public Class dlgMakeDate
         Else
             ucrBase.clsRsyntax.RemoveParameter("origin")
         End If
-        'to be removed later
-        grpFormatField.Enabled = False
         TestOKEnabled()
     End Sub
 
@@ -316,4 +308,7 @@ Public Class dlgMakeDate
         End If
     End Sub
 
+    Private Sub ucrInputNewColumnName_ContentsChanged() Handles ucrInputNewColumnName.ContentsChanged
+        TestOKEnabled
+    End Sub
 End Class
