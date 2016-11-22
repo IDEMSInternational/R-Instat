@@ -53,7 +53,7 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
+        'this sets the main function to be used in the dialog
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
         sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
         sdgOneVarGraph.InitialiseDialog()
@@ -64,6 +64,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub TestOkEnabled()
+        'this test when to enable okay button. Should be enabled only when the receiver is not empty or when the save graph is schecked and the save graph is not empty
         If ucrReceiverOneVarGraph.IsEmpty() OrElse (ucrOneVarGraphSave.chkSaveGraph.Checked AndAlso ucrOneVarGraphSave.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
@@ -72,10 +73,12 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub ucrSelectorOneVarGraph_DataFrameChanged() Handles ucrSelectorOneVarGraph.DataFrameChanged
+        'this adds the parameter data_name to the syntax
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 
     Private Sub ucrReceiverOneVarGraph_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOneVarGraph.SelectionChanged
+        ' this adds the parameter columns to the syntax
         ucrBase.clsRsyntax.AddParameter("columns", ucrReceiverOneVarGraph.GetVariableNames())
         CheckDataType()
         TestOkEnabled()
@@ -87,6 +90,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub ucrOneVarGraphSave_GraphNameChanged() Handles ucrOneVarGraphSave.GraphNameChanged, ucrOneVarGraphSave.SaveGraphCheckedChanged
+        'this sub saves graphs 
         If ucrOneVarGraphSave.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrOneVarGraphSave.strGraphName, strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrOneVarGraphSave.strGraphName)
         Else
@@ -103,6 +107,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub SetOutputparameter()
+        'this adds different outputs parameters to the syntax
         If rdoFacets.Checked Then
             ucrBase.clsRsyntax.AddParameter("output", Chr(34) & "facets" & Chr(34))
         ElseIf rdoCombineGraph.Checked Then
@@ -115,6 +120,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub CheckDataType()
+        'this checks for data types and if all the selected variable are of same type, enables facets 
         If ucrReceiverOneVarGraph.IsAllNumeric() OrElse ucrReceiverOneVarGraph.IsAllCategorical() Then
             rdoFacets.Enabled = True
         Else
@@ -130,6 +136,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
+        'adds flip crdinates when the chkFlipCoordinates is checked
         If chkFlipCoordinates.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("coord_flip", "TRUE")
         Else
