@@ -136,11 +136,14 @@ Public Class ucrInputComboBox
         bUserTyped = True
     End Sub
 
-    Public Sub SetEditable(bEditable As Boolean)
-        If bEditable Then
-            cboInput.DropDownStyle = ComboBoxStyle.DropDownList
-        End If
-    End Sub
+    'Public Sub SetEditable(bEditable As Boolean)
+
+    '    If bEditable Then
+    '        cboInput.DropDownStyle = ComboBoxStyle.DropDownList
+    '    Else
+    '        cboInput.DropDownStyle = ComboBoxStyle.DropDown
+    '    End If
+    'End Sub
     Public Overrides Function IsEmpty() As Boolean
         If cboInput.Text = "" Then
             Return True
