@@ -272,6 +272,12 @@
     <Compile Include="DlgUseDate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmWebBrowser.Designer.vb">
+      <DependentUpon>frmWebBrowser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmWebBrowser.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgAddNewDistribution.Designer.vb">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </Compile>
@@ -2774,6 +2780,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWebBrowser.resx">
+      <DependentUpon>frmWebBrowser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>

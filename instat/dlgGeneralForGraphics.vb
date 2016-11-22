@@ -164,6 +164,7 @@ Public Class dlgGeneralForGraphics
     'End Sub
 
     Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
+        'Warning/Task: this method seems weird to me, why do we get the dataframe from sdgLayerOptions ???!
         If ucrSaveGraph.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
         Else
@@ -185,5 +186,16 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrAdditionalLayers_NumberOfLayersChanged() Handles ucrAdditionalLayers.NumberOfLayersChanged
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         TestOKEnabled()
+    End Sub
+
+    Private Sub DisplayGraphInOutputWindow_When_ClickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim clsSaveFunction As New RFunction
+        Dim strFileName As String
+        clsSaveFunction.SetRCommand("ggsave")
+        strFileName = ucrSaveGraph.strGraphName & ".png"
+        clsSaveFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34))
+        frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saved graph as png file in the working directory.")
+        frmMain.clsRLink.DisplayGraphInRTB(IO.Path.GetFullPath(".\" & strFileName))
+        frmMain.clsRLink.DisplayGraphInWB(IO.Path.GetFullPath(".\" & strFileName))
     End Sub
 End Class

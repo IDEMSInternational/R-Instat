@@ -24,6 +24,7 @@ Public Class RLink
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
     Dim txtOutput As New RichTextBox
+    Dim wbOutput As New WebBrowser 'TEST temporary...
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -77,6 +78,11 @@ Public Class RLink
 
     Public Sub SetOutput(tempOutput As RichTextBox)
         txtOutput = tempOutput
+        bOutput = True
+    End Sub
+    Public Sub SetWbOutput(tempOutput As WebBrowser)
+        'TEST temporary
+        wbOutput = tempOutput
         bOutput = True
     End Sub
 
@@ -237,8 +243,10 @@ Public Class RLink
         If bOutput Then
             If strComment <> "" Then
                 AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
+                WbAppendText(wbOutput, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
             End If
             AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+            WbAppendText(wbOutput, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
         End If
 
         'If strScript.Length > 2000 Then
@@ -282,8 +290,34 @@ Public Class RLink
         End If
         If bOutput Then
             AppendText(txtOutput, clrOutput, fOutput, strOutput)
+            WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
         End If
         frmMain.clsGrids.UpdateGrids()
+    End Sub
+
+    Public Sub DisplayGraphInRTB(strImageLocation As String)
+        'TEST temporary
+        txtOutput.ReadOnly = False
+        Dim img As Image = Image.FromFile(strImageLocation)
+        Dim orgData = Clipboard.GetDataObject
+        Clipboard.SetImage(img)
+        txtOutput.Paste()
+        Clipboard.SetDataObject(orgData)
+        txtOutput.ReadOnly = True
+    End Sub
+    Public Sub DisplayGraphInWB(strImageLocation As String)
+        'TEST temporary
+        Dim img As Image = Image.FromFile(strImageLocation)
+
+        'WebBrowser.DocumentStream.??? 
+        'https://msdn.microsoft.com/en-us/library/system.windows.forms.webbrowser.documentstream(v=vs.110).aspx
+
+        'Use references... also need something handles DocumentFinished event... or something...
+        'https://social.msdn.microsoft.com/Forums/en-US/2b2244ed-c628-4e82-9751-d829be620689/display-images-in-web-browser-control?forum=vblanguage
+        'http://www.dotnetspark.com/Forum/2673-insert-image-web-browser-control-windows.aspx
+        wbOutput.DocumentText = 'WebBrowser.DocumentText &
+            "<img src='" & strImageLocation & "' />"
+        'http://www.rasteredge.com/how-to/asp-net-imaging/imaging-viewing/
     End Sub
 
     Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
@@ -304,6 +338,28 @@ Public Class RLink
         ' clear
         box.SelectionStart = box.Text.Length
         box.ScrollToCaret()
+    End Sub
+
+    Private Sub WbAppendText(WebBrowser As WebBrowser, color As Color, font As Font, text As String)
+        'TEST temporary
+        Dim iStart As Integer
+        Dim iEnd As Integer
+
+        iStart = WebBrowser.DocumentText.Length
+        'WebBrowser.DocumentText = WebBrowser.DocumentText & text
+        'WebBrowser.Document.Write(text)
+        iEnd = WebBrowser.DocumentText.Length
+
+        'Warning: so far don't know how to change font and colour of the text...
+        ' Textbox may transform chars, so (end-start) != text.Length
+        ' WebBrowser.DocumentText.Substring(iStart, iEnd - iStart)
+        'WebBrowser.SelectionColor = color
+        'WebBrowser.SelectionFont = font
+        'TClears selection
+        'WebBrowser.SelectionLength = 0
+        ' clear
+        'WebBrowser.SelectionStart = WebBrowser.Text.Length
+        'WebBrowser.ScrollToCaret()
     End Sub
 
     Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False) As SymbolicExpression

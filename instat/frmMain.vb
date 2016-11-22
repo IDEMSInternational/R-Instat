@@ -42,9 +42,17 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
+    Private Sub InitialiseWebBrowser()
+        'TEST temporary
+        frmWebBrowser.MdiParent = Me
+        frmWebBrowser.Show()
+        clsRLink.SetWbOutput(frmWebBrowser.wbOutput)
+    End Sub
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'temp removed
         mnuHelpAboutRInstat.Visible = False
+        InitialiseWebBrowser() 'TEST temporary
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
