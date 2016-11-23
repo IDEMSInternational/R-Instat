@@ -338,10 +338,11 @@ Public Class RLink
         Clipboard.SetImage(bimg)
         txtOutput.Paste()
         Clipboard.SetDataObject(orgData)
-
-
+        img.Dispose()
+        bimg.Dispose()
         'Second method add to rtf code, this doesn't work yet.. either because GetImage is crap, or because the code is not inserted at the right place...
-        txtOutput.Rtf = txtOutput.Rtf & GetImageRTFCode(strImageLocation, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
+        'txtOutput.Rtf = txtOutput.Rtf & GetImageRTFCode(strImageLocation, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
+
         'IO.File.Delete(strImageLocation) 'need to close the file first... It's still in use when coming to this line...
         'FileIO.FileSystem.DeleteFile(strImageLocation) 
 
@@ -371,6 +372,7 @@ Public Class RLink
         wbOutput.DocumentText = 'WebBrowser.DocumentText &
             "<img src='" & strImageLocation & "' />"
         'http://www.rasteredge.com/how-to/asp-net-imaging/imaging-viewing/
+        img.Dispose()
     End Sub
 
     Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
@@ -394,10 +396,11 @@ Public Class RLink
     End Sub
 
     Private Sub AppendText2(TempRtf As ucrWPFRichTextBox, color As Color, font As Font, text As String)
-        Dim Paragraph As New Windows.Documents.Paragraph(New System.Windows.Documents.Run(text))
+        Dim Paragraph As New Windows.Documents.Paragraph(New Windows.Documents.Run(text))
         Paragraph.FontFamily = New Windows.Media.FontFamily(font.FontFamily.Name)
         Paragraph.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color.Name)
         TempRtf.rtbOutput.Document.Blocks.Add(Paragraph)
+        'Warning/Task: still got spacing problem. Maybe work with one paragraph and use linebreaks ?... To be tested.
     End Sub
 
     Private Sub WbAppendText(WebBrowser As WebBrowser, color As Color, font As Font, text As String)
