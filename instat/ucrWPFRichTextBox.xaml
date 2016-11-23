@@ -9,6 +9,12 @@
     <Grid>
         <RichTextBox x:Name="rtbOutput" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto">
             <FlowDocument>
+                <FlowDocument.Resources>
+                    <!-- This style is used to set the margins for all paragraphs in the FlowDocument to 0. -->
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </FlowDocument.Resources>
                 <Paragraph AllowDrop="False">
                     <Run Text="Welcome to R-Instat"/>
                 </Paragraph>

@@ -354,6 +354,8 @@ Public Class RLink
         Dim UIEimage As New Windows.Controls.Image()
         UIEimage.Source = bimg
         conImage = New Windows.Documents.BlockUIContainer(UIEimage)
+        conImage.BorderThickness = New Windows.Thickness(1)
+        conImage.BorderBrush = Windows.Media.Brushes.Black
         rtbOutput2.rtbOutput.Document.Blocks.Add(conImage)
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
