@@ -31,8 +31,6 @@ Public Class dlgMerge
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         TestOKEnabled()
     End Sub
@@ -58,10 +56,6 @@ Public Class dlgMerge
         ucrSelectorSecondDF.Reset()
         sdgMerge.SetDefaults()
         rdoByAllMatching.Checked = True
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub TestOKEnabled()
