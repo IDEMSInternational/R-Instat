@@ -191,11 +191,13 @@ Public Class dlgGeneralForGraphics
     Private Sub DisplayGraphInOutputWindow_When_ClickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim clsSaveFunction As New RFunction
         Dim strFileName As String
+        Dim strImageLocation As String
         clsSaveFunction.SetRCommand("ggsave")
         strFileName = ucrSaveGraph.strGraphName & ".png"
         clsSaveFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34))
         frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saved graph as png file in the working directory.")
-        frmMain.clsRLink.DisplayGraphInRTB(IO.Path.GetFullPath(".\" & strFileName))
-        frmMain.clsRLink.DisplayGraphInWB(IO.Path.GetFullPath(".\" & strFileName))
+        strImageLocation = IO.Path.GetFullPath(".\" & strFileName)
+        frmMain.clsRLink.DisplayGraphInRTB(strImageLocation)
+        frmMain.clsRLink.DisplayGraphInWB(strImageLocation)
     End Sub
 End Class

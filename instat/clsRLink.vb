@@ -332,7 +332,8 @@ Public Class RLink
 
         'Second method add to rtf code, this doesn't work yet.. either because GetImage is crap, or because the code is not inserted at the right place...
         txtOutput.Rtf = txtOutput.Rtf & GetImageRTFCode(strImageLocation, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
-
+        'IO.File.Delete(strImageLocation) 'need to close the file first... It's still in use when coming to this line...
+        'FileIO.FileSystem.DeleteFile(strImageLocation) 
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
         'TEST temporary
