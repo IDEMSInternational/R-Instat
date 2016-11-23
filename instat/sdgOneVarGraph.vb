@@ -44,16 +44,16 @@ Public Class sdgOneVarGraph
 
     Public Sub InitialiseDialog()
         clsCoordPolarFunction.SetRCommand("coord_polar")
-        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon", "Violin Plot", "Jitter Plot", "Boxplot + Jitter", "Violin +Jitter", "Violin + Boxplot"})
+        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon", "Violin Plot", "Jitter Plot", "Boxplot + Jitter", "Violin + Jitter", "Violin + Boxplot"})
         ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         nudNumberofColumns.Maximum = 10
         nudNumberofColumns.Minimum = 1
-
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
         clsRsyntax = clsNewRSyntax
     End Sub
+
     Private Sub SpecifyLayoutControl()
         If chkSpecifyLayout.Checked Then
             lblNumberofColumns.Visible = True
@@ -84,7 +84,7 @@ Public Class sdgOneVarGraph
                 clsRsyntax.AddParameter("numeric", Chr(34) & "geom_jitter" & Chr(34))
             Case "Boxplot + Jitter"
                 clsRsyntax.AddParameter("numeric", Chr(34) & "box_jitter" & Chr(34))
-            Case "Violin +Jitter"
+            Case "Violin + Jitter"
                 clsRsyntax.AddParameter("numeric", Chr(34) & "violin_jitter" & Chr(34))
             Case "Violin + Boxplot"
                 clsRsyntax.AddParameter("numeric", Chr(34) & "violin_box" & Chr(34))
@@ -113,6 +113,7 @@ Public Class sdgOneVarGraph
                 clsRsyntax.RemoveParameter("polar")
         End Select
     End Sub
+
     Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
         SetCategoricalGeomFunction()
     End Sub
