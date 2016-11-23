@@ -78,14 +78,16 @@ Public Class sdgLayerOptions
 
     Private Sub PartiallyMandatoryAesFillingMethod(clsRelevantAesFunction As RFunction)
         'This sub is called to add "" mapping for axis x or y when no variables are mapped to them (only relavant for a few geoms). The mapping is added in the global or local aes depending on whether apply on all layers is checked or not (choice of clsRelevantAesFunction).
+        Dim bTempIgnoreGlobalAes As Boolean
+        bTempIgnoreGlobalAes = ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") <> -1) AndAlso (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "FALSE"))
         If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" Then
-            If clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsRelevantAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If
         ElseIf clsGeomFunction.strRCommand = "geom_point" OrElse clsGeomFunction.strRCommand = "geom_line" Then
-            If clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsRelevantAesFunction.AddParameter("x", Chr(34) & Chr(34))
-            ElseIf clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
+            ElseIf (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
                 clsRelevantAesFunction.AddParameter("y", Chr(34) & Chr(34))
             End If
         End If
