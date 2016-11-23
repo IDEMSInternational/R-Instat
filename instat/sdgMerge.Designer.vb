@@ -22,167 +22,128 @@ Partial Class sdgMerge
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgMerge))
+        Me.grpJoinType = New System.Windows.Forms.GroupBox()
+        Me.rdoAntiJoin = New System.Windows.Forms.RadioButton()
+        Me.rdoSemiJoin = New System.Windows.Forms.RadioButton()
+        Me.rdoRightJoin = New System.Windows.Forms.RadioButton()
+        Me.rdoLeftJoin = New System.Windows.Forms.RadioButton()
+        Me.rdoFullJoin = New System.Windows.Forms.RadioButton()
+        Me.rdoInnerJoin = New System.Windows.Forms.RadioButton()
+        Me.ttJoinDetails = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrSubBase = New instat.ucrButtonsSubdialogue()
-        Me.pnlKeyColumns = New System.Windows.Forms.Panel()
-        Me.lstKeyColumns = New System.Windows.Forms.ListView()
-        Me.lblKeyColumns = New System.Windows.Forms.Label()
-        Me.cmdRemoveSelectedPair = New System.Windows.Forms.Button()
-        Me.grpKeys = New System.Windows.Forms.GroupBox()
-        Me.cmdAddAnotherPair = New System.Windows.Forms.Button()
-        Me.lblFirstKeyMatch = New System.Windows.Forms.Label()
-        Me.ucrReceiverSecondDF = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFirstDF = New instat.ucrReceiverSingle()
-        Me.lblSecondDataFrame = New System.Windows.Forms.Label()
-        Me.lblFirstDataFrame = New System.Windows.Forms.Label()
-        Me.ucrSelectorSecondDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSelectorFirstDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.pnlKeyColumns.SuspendLayout()
-        Me.grpKeys.SuspendLayout()
+        Me.grpJoinType.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'grpJoinType
+        '
+        Me.grpJoinType.Controls.Add(Me.rdoAntiJoin)
+        Me.grpJoinType.Controls.Add(Me.rdoSemiJoin)
+        Me.grpJoinType.Controls.Add(Me.rdoRightJoin)
+        Me.grpJoinType.Controls.Add(Me.rdoLeftJoin)
+        Me.grpJoinType.Controls.Add(Me.rdoFullJoin)
+        Me.grpJoinType.Controls.Add(Me.rdoInnerJoin)
+        Me.grpJoinType.Location = New System.Drawing.Point(12, 21)
+        Me.grpJoinType.Name = "grpJoinType"
+        Me.grpJoinType.Size = New System.Drawing.Size(106, 166)
+        Me.grpJoinType.TabIndex = 26
+        Me.grpJoinType.TabStop = False
+        Me.grpJoinType.Text = "Join Type"
+        '
+        'rdoAntiJoin
+        '
+        Me.rdoAntiJoin.AutoSize = True
+        Me.rdoAntiJoin.Location = New System.Drawing.Point(6, 140)
+        Me.rdoAntiJoin.Name = "rdoAntiJoin"
+        Me.rdoAntiJoin.Size = New System.Drawing.Size(65, 17)
+        Me.rdoAntiJoin.TabIndex = 29
+        Me.rdoAntiJoin.TabStop = True
+        Me.rdoAntiJoin.Text = "Anti Join"
+        Me.ttJoinDetails.SetToolTip(Me.rdoAntiJoin, "Include all rows from the 1st data frame where there are not matching values in t" &
+        "he second data frame, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "keeping just columns from the first data frame.")
+        Me.rdoAntiJoin.UseVisualStyleBackColor = True
+        '
+        'rdoSemiJoin
+        '
+        Me.rdoSemiJoin.AutoSize = True
+        Me.rdoSemiJoin.Location = New System.Drawing.Point(6, 116)
+        Me.rdoSemiJoin.Name = "rdoSemiJoin"
+        Me.rdoSemiJoin.Size = New System.Drawing.Size(70, 17)
+        Me.rdoSemiJoin.TabIndex = 28
+        Me.rdoSemiJoin.TabStop = True
+        Me.rdoSemiJoin.Text = "Semi Join"
+        Me.ttJoinDetails.SetToolTip(Me.rdoSemiJoin, resources.GetString("rdoSemiJoin.ToolTip"))
+        Me.rdoSemiJoin.UseVisualStyleBackColor = True
+        '
+        'rdoRightJoin
+        '
+        Me.rdoRightJoin.AutoSize = True
+        Me.rdoRightJoin.Location = New System.Drawing.Point(6, 92)
+        Me.rdoRightJoin.Name = "rdoRightJoin"
+        Me.rdoRightJoin.Size = New System.Drawing.Size(72, 17)
+        Me.rdoRightJoin.TabIndex = 27
+        Me.rdoRightJoin.TabStop = True
+        Me.rdoRightJoin.Text = "Right Join"
+        Me.ttJoinDetails.SetToolTip(Me.rdoRightJoin, resources.GetString("rdoRightJoin.ToolTip"))
+        Me.rdoRightJoin.UseVisualStyleBackColor = True
+        '
+        'rdoLeftJoin
+        '
+        Me.rdoLeftJoin.AutoSize = True
+        Me.rdoLeftJoin.Location = New System.Drawing.Point(6, 20)
+        Me.rdoLeftJoin.Name = "rdoLeftJoin"
+        Me.rdoLeftJoin.Size = New System.Drawing.Size(65, 17)
+        Me.rdoLeftJoin.TabIndex = 16
+        Me.rdoLeftJoin.TabStop = True
+        Me.rdoLeftJoin.Text = "Left Join"
+        Me.ttJoinDetails.SetToolTip(Me.rdoLeftJoin, resources.GetString("rdoLeftJoin.ToolTip"))
+        Me.rdoLeftJoin.UseVisualStyleBackColor = True
+        '
+        'rdoFullJoin
+        '
+        Me.rdoFullJoin.AutoSize = True
+        Me.rdoFullJoin.Location = New System.Drawing.Point(6, 44)
+        Me.rdoFullJoin.Name = "rdoFullJoin"
+        Me.rdoFullJoin.Size = New System.Drawing.Size(63, 17)
+        Me.rdoFullJoin.TabIndex = 14
+        Me.rdoFullJoin.TabStop = True
+        Me.rdoFullJoin.Text = "Full Join"
+        Me.ttJoinDetails.SetToolTip(Me.rdoFullJoin, "Include all rows and all columns from both data frames." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Where there are not matc" &
+        "hing values, NAs are used for the one missing.")
+        Me.rdoFullJoin.UseVisualStyleBackColor = True
+        '
+        'rdoInnerJoin
+        '
+        Me.rdoInnerJoin.AutoSize = True
+        Me.rdoInnerJoin.Location = New System.Drawing.Point(6, 68)
+        Me.rdoInnerJoin.Name = "rdoInnerJoin"
+        Me.rdoInnerJoin.Size = New System.Drawing.Size(71, 17)
+        Me.rdoInnerJoin.TabIndex = 12
+        Me.rdoInnerJoin.TabStop = True
+        Me.rdoInnerJoin.Text = "Inner Join"
+        Me.ttJoinDetails.SetToolTip(Me.rdoInnerJoin, resources.GetString("rdoInnerJoin.ToolTip"))
+        Me.rdoInnerJoin.UseVisualStyleBackColor = True
+        '
+        'ttJoinDetails
+        '
+        Me.ttJoinDetails.AutoPopDelay = 10000
+        Me.ttJoinDetails.InitialDelay = 500
+        Me.ttJoinDetails.ReshowDelay = 100
         '
         'ucrSubBase
         '
-        Me.ucrSubBase.Location = New System.Drawing.Point(289, 381)
+        Me.ucrSubBase.Location = New System.Drawing.Point(12, 212)
         Me.ucrSubBase.Name = "ucrSubBase"
         Me.ucrSubBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrSubBase.TabIndex = 0
-        '
-        'pnlKeyColumns
-        '
-        Me.pnlKeyColumns.Controls.Add(Me.lstKeyColumns)
-        Me.pnlKeyColumns.Controls.Add(Me.lblKeyColumns)
-        Me.pnlKeyColumns.Controls.Add(Me.cmdRemoveSelectedPair)
-        Me.pnlKeyColumns.Location = New System.Drawing.Point(449, 159)
-        Me.pnlKeyColumns.Name = "pnlKeyColumns"
-        Me.pnlKeyColumns.Size = New System.Drawing.Size(298, 230)
-        Me.pnlKeyColumns.TabIndex = 20
-        '
-        'lstKeyColumns
-        '
-        Me.lstKeyColumns.FullRowSelect = True
-        Me.lstKeyColumns.Location = New System.Drawing.Point(6, 21)
-        Me.lstKeyColumns.Name = "lstKeyColumns"
-        Me.lstKeyColumns.Size = New System.Drawing.Size(280, 167)
-        Me.lstKeyColumns.TabIndex = 12
-        Me.lstKeyColumns.UseCompatibleStateImageBehavior = False
-        Me.lstKeyColumns.View = System.Windows.Forms.View.Details
-        '
-        'lblKeyColumns
-        '
-        Me.lblKeyColumns.AutoSize = True
-        Me.lblKeyColumns.Location = New System.Drawing.Point(3, 5)
-        Me.lblKeyColumns.Name = "lblKeyColumns"
-        Me.lblKeyColumns.Size = New System.Drawing.Size(68, 13)
-        Me.lblKeyColumns.TabIndex = 17
-        Me.lblKeyColumns.Text = "Key Columns"
-        '
-        'cmdRemoveSelectedPair
-        '
-        Me.cmdRemoveSelectedPair.Location = New System.Drawing.Point(6, 194)
-        Me.cmdRemoveSelectedPair.Name = "cmdRemoveSelectedPair"
-        Me.cmdRemoveSelectedPair.Size = New System.Drawing.Size(118, 23)
-        Me.cmdRemoveSelectedPair.TabIndex = 17
-        Me.cmdRemoveSelectedPair.Text = "Remove Selected"
-        Me.cmdRemoveSelectedPair.UseVisualStyleBackColor = True
-        '
-        'grpKeys
-        '
-        Me.grpKeys.Controls.Add(Me.cmdAddAnotherPair)
-        Me.grpKeys.Controls.Add(Me.lblFirstKeyMatch)
-        Me.grpKeys.Controls.Add(Me.ucrReceiverSecondDF)
-        Me.grpKeys.Controls.Add(Me.ucrReceiverFirstDF)
-        Me.grpKeys.Location = New System.Drawing.Point(11, 216)
-        Me.grpKeys.Name = "grpKeys"
-        Me.grpKeys.Size = New System.Drawing.Size(390, 105)
-        Me.grpKeys.TabIndex = 21
-        Me.grpKeys.TabStop = False
-        Me.grpKeys.Text = "Key Columns"
-        '
-        'cmdAddAnotherPair
-        '
-        Me.cmdAddAnotherPair.Location = New System.Drawing.Point(12, 74)
-        Me.cmdAddAnotherPair.Name = "cmdAddAnotherPair"
-        Me.cmdAddAnotherPair.Size = New System.Drawing.Size(118, 23)
-        Me.cmdAddAnotherPair.TabIndex = 16
-        Me.cmdAddAnotherPair.Text = "Add Another Pair"
-        Me.cmdAddAnotherPair.UseVisualStyleBackColor = True
-        '
-        'lblFirstKeyMatch
-        '
-        Me.lblFirstKeyMatch.AutoSize = True
-        Me.lblFirstKeyMatch.Location = New System.Drawing.Point(154, 35)
-        Me.lblFirstKeyMatch.Name = "lblFirstKeyMatch"
-        Me.lblFirstKeyMatch.Size = New System.Drawing.Size(74, 13)
-        Me.lblFirstKeyMatch.TabIndex = 9
-        Me.lblFirstKeyMatch.Text = "Matched With"
-        '
-        'ucrReceiverSecondDF
-        '
-        Me.ucrReceiverSecondDF.Location = New System.Drawing.Point(255, 32)
-        Me.ucrReceiverSecondDF.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondDF.Name = "ucrReceiverSecondDF"
-        Me.ucrReceiverSecondDF.Selector = Nothing
-        Me.ucrReceiverSecondDF.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondDF.TabIndex = 8
-        '
-        'ucrReceiverFirstDF
-        '
-        Me.ucrReceiverFirstDF.Location = New System.Drawing.Point(12, 32)
-        Me.ucrReceiverFirstDF.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFirstDF.Name = "ucrReceiverFirstDF"
-        Me.ucrReceiverFirstDF.Selector = Nothing
-        Me.ucrReceiverFirstDF.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFirstDF.TabIndex = 7
-        '
-        'lblSecondDataFrame
-        '
-        Me.lblSecondDataFrame.AutoSize = True
-        Me.lblSecondDataFrame.Location = New System.Drawing.Point(228, 10)
-        Me.lblSecondDataFrame.Name = "lblSecondDataFrame"
-        Me.lblSecondDataFrame.Size = New System.Drawing.Size(151, 13)
-        Me.lblSecondDataFrame.TabIndex = 25
-        Me.lblSecondDataFrame.Text = "Second Data Frame To Merge"
-        '
-        'lblFirstDataFrame
-        '
-        Me.lblFirstDataFrame.AutoSize = True
-        Me.lblFirstDataFrame.Location = New System.Drawing.Point(10, 8)
-        Me.lblFirstDataFrame.Name = "lblFirstDataFrame"
-        Me.lblFirstDataFrame.Size = New System.Drawing.Size(133, 13)
-        Me.lblFirstDataFrame.TabIndex = 24
-        Me.lblFirstDataFrame.Text = "First Data Frame To Merge"
-        '
-        'ucrSelectorSecondDataFrame
-        '
-        Me.ucrSelectorSecondDataFrame.bShowHiddenColumns = False
-        Me.ucrSelectorSecondDataFrame.bUseCurrentFilter = True
-        Me.ucrSelectorSecondDataFrame.Location = New System.Drawing.Point(231, 23)
-        Me.ucrSelectorSecondDataFrame.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorSecondDataFrame.Name = "ucrSelectorSecondDataFrame"
-        Me.ucrSelectorSecondDataFrame.Size = New System.Drawing.Size(217, 180)
-        Me.ucrSelectorSecondDataFrame.TabIndex = 23
-        '
-        'ucrSelectorFirstDataFrame
-        '
-        Me.ucrSelectorFirstDataFrame.bShowHiddenColumns = False
-        Me.ucrSelectorFirstDataFrame.bUseCurrentFilter = True
-        Me.ucrSelectorFirstDataFrame.Location = New System.Drawing.Point(11, 21)
-        Me.ucrSelectorFirstDataFrame.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFirstDataFrame.Name = "ucrSelectorFirstDataFrame"
-        Me.ucrSelectorFirstDataFrame.Size = New System.Drawing.Size(240, 180)
-        Me.ucrSelectorFirstDataFrame.TabIndex = 22
         '
         'sdgMerge
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(755, 413)
-        Me.Controls.Add(Me.lblSecondDataFrame)
-        Me.Controls.Add(Me.lblFirstDataFrame)
-        Me.Controls.Add(Me.ucrSelectorSecondDataFrame)
-        Me.Controls.Add(Me.ucrSelectorFirstDataFrame)
-        Me.Controls.Add(Me.grpKeys)
-        Me.Controls.Add(Me.pnlKeyColumns)
+        Me.ClientSize = New System.Drawing.Size(171, 244)
+        Me.Controls.Add(Me.grpJoinType)
         Me.Controls.Add(Me.ucrSubBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -190,27 +151,19 @@ Partial Class sdgMerge
         Me.Name = "sdgMerge"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "sdgMerge"
-        Me.pnlKeyColumns.ResumeLayout(False)
-        Me.pnlKeyColumns.PerformLayout()
-        Me.grpKeys.ResumeLayout(False)
-        Me.grpKeys.PerformLayout()
+        Me.grpJoinType.ResumeLayout(False)
+        Me.grpJoinType.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrSubBase As ucrButtonsSubdialogue
-    Friend WithEvents pnlKeyColumns As Panel
-    Friend WithEvents lstKeyColumns As ListView
-    Friend WithEvents lblKeyColumns As Label
-    Friend WithEvents cmdRemoveSelectedPair As Button
-    Friend WithEvents grpKeys As GroupBox
-    Friend WithEvents cmdAddAnotherPair As Button
-    Friend WithEvents lblFirstKeyMatch As Label
-    Friend WithEvents ucrReceiverSecondDF As ucrReceiverSingle
-    Friend WithEvents ucrReceiverFirstDF As ucrReceiverSingle
-    Friend WithEvents lblSecondDataFrame As Label
-    Friend WithEvents lblFirstDataFrame As Label
-    Friend WithEvents ucrSelectorSecondDataFrame As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrSelectorFirstDataFrame As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents grpJoinType As GroupBox
+    Friend WithEvents rdoFullJoin As RadioButton
+    Friend WithEvents rdoInnerJoin As RadioButton
+    Friend WithEvents rdoAntiJoin As RadioButton
+    Friend WithEvents ttJoinDetails As ToolTip
+    Friend WithEvents rdoSemiJoin As RadioButton
+    Friend WithEvents rdoRightJoin As RadioButton
+    Friend WithEvents rdoLeftJoin As RadioButton
 End Class
