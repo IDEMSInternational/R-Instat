@@ -31,8 +31,11 @@ Public Class sdgCorrPlot
 
     Public Sub CorrelationMatrix()
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        'dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRCorrelation)
-        frmMain.clsRLink.RunScript(dlgCorrelation.clsRCorrelation.ToScript(), 2)
+        If Not chkPairwisePlot.Checked AndAlso Not chkCorrelationPlot.Checked AndAlso Not chkScatterplotMatrix.Checked Then
+            dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRCorrelation)
+        Else
+            'frmMain.clsRLink.RunScript(dlgCorrelation.clsRCorrelation.ToScript(), 2)
+        End If
     End Sub
 
     Public Sub GGPairs()
@@ -40,9 +43,8 @@ Public Class sdgCorrPlot
         dlgCorrelation.clsRGraphics.SetRCommand("ggpairs")
         dlgCorrelation.clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.clsGetDataFrame)
         dlgCorrelation.clsRGraphics.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
-        'dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        'dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRGraphics)
-        frmMain.clsRLink.RunScript(dlgCorrelation.clsRGraphics.ToScript(), 2)
+        dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
+        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRGraphics)
     End Sub
 
     Public Sub GGcorr()
@@ -50,9 +52,8 @@ Public Class sdgCorrPlot
         clsRGGcorrGraphics.SetRCommand("ggcorr")
         clsRGGcorrGraphics.AddParameter("data", "NULL")
         clsRGGcorrGraphics.AddParameter("cor_matrix", clsRFunctionParameter:=dlgCorrelation.clsRCorrelation)
-        'dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        'dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGcorrGraphics)
-        frmMain.clsRLink.RunScript(clsRGGcorrGraphics.ToScript(), 2)
+        dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
+        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGcorrGraphics)
     End Sub
 
     Public Sub GGscatmatrix()
@@ -60,9 +61,8 @@ Public Class sdgCorrPlot
         clsRGGscatmatrix.SetRCommand("ggscatmat")
         clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.clsGetDataFrame)
         clsRGGscatmatrix.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames)
-        'dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        'dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)
-        frmMain.clsRLink.RunScript(clsRGGscatmatrix.ToScript(), 2)
+        dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
+        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)
     End Sub
 
     Public Sub SetDefaults()
@@ -78,11 +78,17 @@ Public Class sdgCorrPlot
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
+        CorrOptions()
     End Sub
 
     Public Sub CorrOptions()
         If chkCorrelationMatrix.Checked Then
             CorrelationMatrix()
+            'If Not chkPairwisePlot.Checked AndAlso Not chkCorrelationPlot.Checked AndAlso Not chkScatterplotMatrix.Checked Then
+            '    dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRCorrelation)
+            'Else
+            '    frmMain.clsRLink.RunScript(dlgCorrelation.clsRCorrelation.ToScript(), 2)
+            'End If
         End If
         If chkPairwisePlot.Checked Then
             GGPairs()
@@ -98,7 +104,6 @@ Public Class sdgCorrPlot
     Private Sub chkColor_CheckedChanged(sender As Object, e As EventArgs) Handles chkColour.CheckedChanged
         ColourbyFactor()
     End Sub
-
 
     Public Sub ColourbyFactor()
         If chkColour.Checked = True Then
@@ -155,7 +160,7 @@ Public Class sdgCorrPlot
             tbScatterplotMatrix.Enabled = False
         End If
         dlgCorrelation.TestOKEnabled()
-        'CorrOptions()
+        CorrOptions()
     End Sub
 
     Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
@@ -198,10 +203,6 @@ Public Class sdgCorrPlot
             clsRGGcorrGraphics.RemoveParameterByName("max_size")
         End If
         clsRGGcorrGraphics.AddParameter("geom", Chr(34) & cmbgeom.SelectedItem.ToString & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiveFactor_Load(sender As Object, e As EventArgs) Handles ucrReceiveFactor.Load
-
     End Sub
 
     Private Sub nudAlpha_ValueChanged(sender As Object, e As EventArgs) Handles nudAlphaScatter.ValueChanged
