@@ -102,15 +102,17 @@ Public Class dlgContrasts
         TestOKEnabled()
     End Sub
 
-    Private Sub SetGrdDimensions()
+    Private Sub SetGridDimensions()
         If Not ucrReceiverForContrasts.IsEmpty AndAlso ucrInputContrastName.GetText = "User Defined" Then
             clsFactorColumn.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames())
             clsNlevels.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
             grdCurrSheet.Rows = frmMain.clsRLink.RunInternalScriptGetValue(clsNlevels.ToScript).AsNumeric(0)
             grdCurrSheet.Columns = grdCurrSheet.Rows - 1
+            grdLayoutForContrasts.Enabled = True
         Else
             clsFactorColumn.RemoveParameterByName("col_name")
             clsNlevels.RemoveParameterByName("x")
+            grdLayoutForContrasts.Enabled = False
         End If
     End Sub
 
@@ -129,12 +131,8 @@ Public Class dlgContrasts
                 Me.Size = New System.Drawing.Size(435, 294)
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.sum" & Chr(34))
             Case "User Defined"
-                SetGrdDimensions()
-                If Not ucrReceiverForContrasts.IsEmpty Then
-                    Me.Size = New System.Drawing.Size(440 + grdLayoutForContrasts.Width, 294)
-                Else
-                    Me.Size = New System.Drawing.Size(435, 294)
-                End If
+                SetGridDimensions()
+                Me.Size = New System.Drawing.Size(440 + grdLayoutForContrasts.Width, 294)
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "user_defined" & Chr(34))
         End Select
     End Sub
@@ -157,12 +155,15 @@ Public Class dlgContrasts
             strMatrix = "c" & "(" & strMatrix & ")"
 
             clsContractMatrix.AddParameter("data", strMatrix)
+            clsContractMatrix.AddParameter("ncol", grdCurrSheet.Columns)
+            clsContractMatrix.AddParameter("nrow", grdCurrSheet.Rows)
+            ucrBase.clsRsyntax.AddParameter("defined_contr_matrix", clsRFunctionParameter:=clsContractMatrix)
         Else
+            clsContractMatrix.RemoveParameterByName("ncol")
             clsContractMatrix.RemoveParameterByName("data")
+            clsContractMatrix.RemoveParameterByName("nrow")
+            ucrBase.clsRsyntax.RemoveParameter("defined_contr_matrix")
         End If
-        clsContractMatrix.AddParameter("ncol", grdCurrSheet.Columns)
-        clsContractMatrix.AddParameter("nrow", grdCurrSheet.Rows)
-        ucrBase.clsRsyntax.AddParameter("defined_contr_matrix", clsRFunctionParameter:=clsContractMatrix)
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
