@@ -45,7 +45,7 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverForContrasts.IsEmpty) AndAlso Not ((ucrInputContrastName.IsEmpty) OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()))) Then
+        If ((Not ucrReceiverForContrasts.IsEmpty) AndAlso ((Not ucrInputContrastName.IsEmpty) OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso Not IsEmptyCells()))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -141,7 +141,7 @@ Public Class dlgContrasts
         Dim i As Integer
         Dim j As Integer
         Dim strMatrix As String = ""
-        If Not IsEmptyCells() Then
+        If Not IsEmptyCells()  Then
             If grdCurrSheet IsNot Nothing Then
                 For i = 0 To grdCurrSheet.ColumnCount - 1
                     For j = 0 To grdCurrSheet.RowCount - 1
