@@ -25,7 +25,7 @@ Public Class RLink
     Public clsEngine As REngine
     Dim txtOutput As New RichTextBox
     Dim wbOutput As New WebBrowser 'TEST temporary...
-    Dim rtfOutput2 As New ucrWPFRichTextBox 'TEST temporary...
+    Dim rtbOutput2 As New ucrWPFRichTextBox 'TEST temporary...
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -87,9 +87,9 @@ Public Class RLink
         bOutput = True
     End Sub
 
-    Public Sub SetWbOutput(tempOutput As ucrWPFRichTextBox)
+    Public Sub SetOutput2(tempOutput As ucrWPFRichTextBox)
         'TEST temporary
-        rtfOutput2 = tempOutput
+        rtbOutput2 = tempOutput
         bOutput = True
     End Sub
 
@@ -250,11 +250,11 @@ Public Class RLink
         If bOutput Then
             If strComment <> "" Then
                 AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
-                AppendText2(rtfOutput2, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
+                AppendText2(rtbOutput2, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
                 WbAppendText(wbOutput, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
             End If
             AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
-            AppendText2(rtfOutput2, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+            AppendText2(rtbOutput2, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
             WbAppendText(wbOutput, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
         End If
 
@@ -299,7 +299,7 @@ Public Class RLink
         End If
         If bOutput Then
             AppendText(txtOutput, clrOutput, fOutput, strOutput)
-            AppendText2(rtfOutput2, clrOutput, fOutput, strOutput) 'TEST temporary
+            AppendText2(rtbOutput2, clrOutput, fOutput, strOutput) 'TEST temporary
             WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
         End If
         frmMain.clsGrids.UpdateGrids()
@@ -354,7 +354,7 @@ Public Class RLink
         Dim UIEimage As New Windows.Controls.Image()
         UIEimage.Source = bimg
         conImage = New Windows.Documents.BlockUIContainer(UIEimage)
-        rtfOutput2.rtfOutput.Document.Blocks.Add(conImage)
+        rtbOutput2.rtbOutput.Document.Blocks.Add(conImage)
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
         'TEST temporary
@@ -395,7 +395,7 @@ Public Class RLink
         Dim Paragraph As New Windows.Documents.Paragraph(New System.Windows.Documents.Run(text))
         Paragraph.FontFamily = New Windows.Media.FontFamily(font.FontFamily.Name)
         Paragraph.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color.Name)
-        TempRtf.rtfOutput.Document.Blocks.Add(Paragraph)
+        TempRtf.rtbOutput.Document.Blocks.Add(Paragraph)
     End Sub
 
     Private Sub WbAppendText(WebBrowser As WebBrowser, color As Color, font As Font, text As String)

@@ -58,8 +58,8 @@ Partial Class frmOutputWindow2
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(644, 324)
         Me.Controls.Add(Me.ucrWPFrtfElementHost)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmOutputWindow2"
+        Me.ShowIcon = False
         Me.Text = "WPF Output Window"
         Me.mnuContextRTB.ResumeLayout(False)
         Me.ResumeLayout(False)

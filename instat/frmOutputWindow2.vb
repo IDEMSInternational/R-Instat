@@ -23,11 +23,11 @@ Public Class frmOutputWindow2
     End Sub
 
     Public Sub copyText()
-        ucrRichTextBox.rtfOutput.Copy()
+        ucrRichTextBox.rtbOutput.Copy()
     End Sub
 
     Public Sub selectAllText()
-        ucrRichTextBox.rtfOutput.SelectAll()
+        ucrRichTextBox.rtbOutput.SelectAll()
     End Sub
 
     Private Sub frmCommand_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
@@ -35,7 +35,7 @@ Public Class frmOutputWindow2
     End Sub
 
     Private Sub ucrWPFrtfElementHost_MouseDown(sender As Object, e As MouseEventArgs) Handles ucrWPFrtfElementHost.MouseDown
-        If e.Button = MouseButtons.Right And ucrRichTextBox.rtfOutput.Selection IsNot Nothing Then
+        If e.Button = MouseButtons.Right And ucrRichTextBox.rtbOutput.Selection IsNot Nothing Then
             ucrWPFrtfElementHost.ContextMenuStrip = mnuContextRTB
         Else
             ucrWPFrtfElementHost.ContextMenu = Nothing

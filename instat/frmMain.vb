@@ -54,7 +54,7 @@ Public Class frmMain
         'Task: If keep, Still need to add on all the places where frmCommand is
         frmOutputWindow2.MdiParent = Me
         frmOutputWindow2.Show()
-        clsRLink.SetWbOutput(frmWebBrowser.wbOutput)
+        clsRLink.SetOutput2(frmOutputWindow2.ucrRichTextBox)
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
