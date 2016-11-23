@@ -147,6 +147,7 @@ Public Class sdgLayerOptions
             'If there is a y in the global aes, and the global aes are not ignored or if there is a y in the local aes then in case stat has not been set manually, stat is set to identity.
             If (((clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1) AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "TRUE"))) OrElse (ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
                 clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+                'Task: send a message to the user saying that stat = identity has been added as a parameter in order to avoid error. Can be modified on the LayerParameter tab.
                 'In case the "y" mapping has been removed after editing the layer, the added "stat" parameter should be removed, unless it has ben set using the settings on sdgLayerParameters.
             ElseIf ucrLayerParameter.lstLayerParameterControl.FindIndex(Function(x) x.ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName = "stat") <> -1 AndAlso Not ucrLayerParameter.lstLayerParameterControl.Find(Function(x) x.ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName = "stat").chkParamName.Checked Then
                 clsGeomFunction.RemoveParameterByName("stat")
