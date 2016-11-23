@@ -88,7 +88,6 @@ Public Class dlgContrasts
         TestOKEnabled()
     End Sub
 
-
     Private Sub ucrSelectorForContrast_DataFrameChanged() Handles ucrSelectorForContrast.DataFrameChanged
         clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
@@ -163,7 +162,6 @@ Public Class dlgContrasts
         clsContractMatrix.AddParameter("ncol", grdCurrSheet.Columns)
         clsContractMatrix.AddParameter("nrow", grdCurrSheet.Rows)
         ucrBase.clsRsyntax.AddParameter("defined_contr_matrix", clsRFunctionParameter:=clsContractMatrix)
-
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
@@ -190,6 +188,7 @@ Public Class dlgContrasts
         Next
         Return False
     End Function
+
     Private Sub grdLayoutForContrasts_Leave(sender As Object, e As EventArgs) Handles grdLayoutForContrasts.Leave
         If grdCurrSheet.IsEditing Then
             grdCurrSheet.EndEdit(EndEditReason.NormalFinish)
