@@ -16,8 +16,7 @@
 Imports instat.Translations
 
 Public Class sdgCorrPlot
-    Public clsRGGscatmatrix, clsRGGcorrGraphics As New RFunction
-    Public strDataFrame As String
+    Public clsRGGscatmatrix, clsRGGcorrGraphics, clsRGraphics As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -33,18 +32,13 @@ Public Class sdgCorrPlot
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         If Not chkPairwisePlot.Checked AndAlso Not chkCorrelationPlot.Checked AndAlso Not chkScatterplotMatrix.Checked Then
             dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRCorrelation)
-        Else
-            'frmMain.clsRLink.RunScript(dlgCorrelation.clsRCorrelation.ToScript(), 2)
         End If
     End Sub
 
     Public Sub GGPairs()
-        dlgCorrelation.GetDataFrame()
-        dlgCorrelation.clsRGraphics.SetRCommand("ggpairs")
-        dlgCorrelation.clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.clsGetDataFrame)
-        dlgCorrelation.clsRGraphics.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
+        clsRGraphics.SetRCommand("ggpairs")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRGraphics)
+        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGraphics)
     End Sub
 
     Public Sub GGcorr()
@@ -57,10 +51,7 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub GGscatmatrix()
-        dlgCorrelation.GetDataFrame()
         clsRGGscatmatrix.SetRCommand("ggscatmat")
-        clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.clsGetDataFrame)
-        clsRGGscatmatrix.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames)
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)
     End Sub
@@ -74,7 +65,7 @@ Public Class sdgCorrPlot
         chkScatterplotMatrix.Checked = False
         nudAlphaScatter.Value = 1
         cmbgeom.SelectedItem = "tile"
-        chkColour.Checked = True
+        chkColour.Checked = False
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
@@ -84,11 +75,6 @@ Public Class sdgCorrPlot
     Public Sub CorrOptions()
         If chkCorrelationMatrix.Checked Then
             CorrelationMatrix()
-            'If Not chkPairwisePlot.Checked AndAlso Not chkCorrelationPlot.Checked AndAlso Not chkScatterplotMatrix.Checked Then
-            '    dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRCorrelation)
-            'Else
-            '    frmMain.clsRLink.RunScript(dlgCorrelation.clsRCorrelation.ToScript(), 2)
-            'End If
         End If
         If chkPairwisePlot.Checked Then
             GGPairs()
@@ -109,11 +95,13 @@ Public Class sdgCorrPlot
         If chkColour.Checked = True Then
             ucrSelectFactor.Visible = True
             ucrReceiveFactor.Visible = True
+            lblFactorVariable.Visible = True
             clsRGGscatmatrix.AddParameter("color", ucrReceiveFactor.GetVariableNames)
         ElseIf chkColour.Checked = False Then
             clsRGGscatmatrix.AddParameter("color", "NULL")
             ucrSelectFactor.Visible = False
             ucrReceiveFactor.Visible = False
+            lblFactorVariable.Visible = False
         Else
             clsRGGscatmatrix.RemoveParameterByName("color")
         End If
@@ -153,6 +141,7 @@ Public Class sdgCorrPlot
             tbSaveGraphs.SelectTab(tbScatterplotMatrix)
             ucrSaveGraph.Visible = True
             ucrReceiveFactor.Focus()
+            ColourbyFactor()
             '   chkPairwisePlot.Checked = False
             '   chkCorrelationPlot.Checked = False
             '   chkCorrelationMatrix.Checked = False

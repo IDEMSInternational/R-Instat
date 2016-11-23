@@ -18,8 +18,8 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Public bFirstLoad As Boolean = True
     Public bIsTwoColumnFunction As Boolean
-    Public strModelName As String = ""
-    Public clsRCorrelation, clsRGraphics, clsGetDataFrame As New RFunction
+    Public clsRCorrelation As New RFunction
+    Public clsTempFunc As RFunction
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -41,9 +41,6 @@ Public Class dlgCorrelation
         ucrReceiverMultipleColumns.SetIncludedDataTypes({"numeric"})
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
-        ucrResultName.SetDefaultTypeAsModel()
-        ucrResultName.SetPrefix("Cor")
-        ucrResultName.SetValidationTypeAsRVariable()
         nudConfidenceInterval.Minimum = 0
         nudConfidenceInterval.Maximum = 1
         nudConfidenceInterval.Increment = 0.05
@@ -63,8 +60,6 @@ Public Class dlgCorrelation
         sdgCorrPlot.SetDefaults()
         ucrSelectorCorrelation.Reset()
         ucrReceiverMultipleColumns.SetMeAsReceiver()
-        chkSaveResult.Checked = True
-        ucrResultName.Visible = True
         TestOKEnabled()
     End Sub
 
@@ -80,9 +75,8 @@ Public Class dlgCorrelation
 
     Public Sub ucrReceiverMultipleColumns_SelectionChanged() Handles ucrReceiverMultipleColumns.SelectionChanged
         clsRCorrelation.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleColumns.GetVariables())
-        Pairs()
-        'sdgCorrPlot.GGscatmatrix()
-        'sdgCorrPlot.GGPairs()
+        sdgCorrPlot.clsRGraphics.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames())
+        sdgCorrPlot.clsRGGscatmatrix.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames)
         TestOKEnabled()
     End Sub
 
@@ -148,10 +142,8 @@ Public Class dlgCorrelation
     End Sub
 
     Public Sub SetMultipleColumnAsFunction()
-        'ucrBase.clsRsyntax.iCallType = 0
         ucrReceiverMultipleColumns.SetMeAsReceiver()
         clsRCorrelation.SetRCommand("cor")
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelation)
         grpMissing.Visible = True
         cmdOptions.Visible = True
         lblConfInterval.Visible = False
@@ -189,16 +181,13 @@ Public Class dlgCorrelation
 
     Public Sub TestOKEnabled()
         If (rdoTwoColumns.Checked = True) Then
-            ucrBase.clsRsyntax.RemoveAssignTo()
             If (Not ucrReceiverFirstColumn.IsEmpty()) And (Not ucrReceiverSecondColumn.IsEmpty()) And (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
                 ucrBase.OKEnabled(True)
             Else
-
                 ucrBase.OKEnabled(False)
             End If
         ElseIf (rdoMultipleColumns.Checked = True) And (sdgCorrPlot.chkCorrelationMatrix.Checked OrElse sdgCorrPlot.chkCorrelationPlot.Checked OrElse sdgCorrPlot.chkScatterplotMatrix.Checked OrElse sdgCorrPlot.chkPairwisePlot.Checked) Then
             If (Not ucrReceiverMultipleColumns.IsEmpty()) And ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 And (rdoCompleteRowsOnly.Checked = True Or rdoPairwise.Checked = True) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
-                ' ucrBase.clsRsyntax.iCallType = 0
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -209,17 +198,11 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrSelectorCorrelation_DataFrameChanged() Handles ucrSelectorCorrelation.DataFrameChanged
-        Pairs()
+        clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
+        clsTempFunc.AddParameter("remove_attr", "TRUE")
+        sdgCorrPlot.clsRGraphics.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+        sdgCorrPlot.clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         TestOKEnabled()
-    End Sub
-
-    Public Sub Pairs()
-        'Dim clsTempFunc As RFunction
-        'temp solution to fix bug in ggpairs function
-        'clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
-        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsGetDataFrame.AddParameter("data_name", Chr(34) & ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsGetDataFrame.AddParameter("remove_attr", "TRUE")
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -227,5 +210,4 @@ Public Class dlgCorrelation
             frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
         End If
     End Sub
-
 End Class
