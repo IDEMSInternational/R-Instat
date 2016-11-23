@@ -44,8 +44,16 @@ Public Class frmMain
 
     Private Sub InitialiseWebBrowser()
         'TEST temporary
+        'Task: If keep, Still need to add on all the places where frmCommand is
         frmWebBrowser.MdiParent = Me
         frmWebBrowser.Show()
+        clsRLink.SetWbOutput(frmWebBrowser.wbOutput)
+    End Sub
+    Private Sub InitialiseWPFOutputWindow()
+        'TEST temporary
+        'Task: If keep, Still need to add on all the places where frmCommand is
+        frmOutputWindow2.MdiParent = Me
+        frmOutputWindow2.Show()
         clsRLink.SetWbOutput(frmWebBrowser.wbOutput)
     End Sub
 
@@ -53,6 +61,7 @@ Public Class frmMain
         'temp removed
         mnuHelpAboutRInstat.Visible = False
         InitialiseWebBrowser() 'TEST temporary
+        InitialiseWPFOutputWindow() 'TEST temporary
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
         frmLog.MdiParent = Me

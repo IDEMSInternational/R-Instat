@@ -18,7 +18,7 @@ Public Class frmCommand
     End Sub
 
     Private Sub CopyRTB_Click(sender As Object, e As EventArgs) Handles CopyRTB.Click
-        txtCommand.Copy()
+        copyText()
     End Sub
 
     Private Sub txtCommand_MouseDown(sender As Object, e As MouseEventArgs) Handles txtCommand.MouseDown
@@ -42,5 +42,4 @@ Public Class frmCommand
     Private Sub frmCommand_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         frmMain.mnuViewOutputWindow.Checked = Me.Visible
     End Sub
-
 End Class

@@ -198,6 +198,7 @@ Public Class dlgGeneralForGraphics
         frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saved graph as png file in the working directory.")
         strImageLocation = IO.Path.GetFullPath(".\" & strFileName)
         frmMain.clsRLink.DisplayGraphInRTB(strImageLocation)
+        frmMain.clsRLink.DisplayGraphInOutput2(strImageLocation)
         frmMain.clsRLink.DisplayGraphInWB(strImageLocation)
     End Sub
 End Class

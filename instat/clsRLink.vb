@@ -25,6 +25,7 @@ Public Class RLink
     Public clsEngine As REngine
     Dim txtOutput As New RichTextBox
     Dim wbOutput As New WebBrowser 'TEST temporary...
+    Dim rtfOutput2 As New ucrWPFRichTextBox 'TEST temporary...
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -83,6 +84,12 @@ Public Class RLink
     Public Sub SetWbOutput(tempOutput As WebBrowser)
         'TEST temporary
         wbOutput = tempOutput
+        bOutput = True
+    End Sub
+
+    Public Sub SetWbOutput(tempOutput As ucrWPFRichTextBox)
+        'TEST temporary
+        rtfOutput2 = tempOutput
         bOutput = True
     End Sub
 
@@ -243,9 +250,11 @@ Public Class RLink
         If bOutput Then
             If strComment <> "" Then
                 AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
+                AppendText2(rtfOutput2, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
                 WbAppendText(wbOutput, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
             End If
             AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+            AppendText2(rtfOutput2, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
             WbAppendText(wbOutput, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
         End If
 
@@ -290,6 +299,7 @@ Public Class RLink
         End If
         If bOutput Then
             AppendText(txtOutput, clrOutput, fOutput, strOutput)
+            AppendText2(rtfOutput2, clrOutput, fOutput, strOutput) 'TEST temporary
             WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
         End If
         frmMain.clsGrids.UpdateGrids()
@@ -323,17 +333,28 @@ Public Class RLink
         txtOutput.ReadOnly = False
         Dim img As Image = Image.FromFile(strImageLocation)
         Dim bimg = New Bitmap(img, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
-
         Dim orgData = Clipboard.GetDataObject
+
         Clipboard.SetImage(bimg)
         txtOutput.Paste()
         Clipboard.SetDataObject(orgData)
-        txtOutput.ReadOnly = True
+
 
         'Second method add to rtf code, this doesn't work yet.. either because GetImage is crap, or because the code is not inserted at the right place...
         txtOutput.Rtf = txtOutput.Rtf & GetImageRTFCode(strImageLocation, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
         'IO.File.Delete(strImageLocation) 'need to close the file first... It's still in use when coming to this line...
         'FileIO.FileSystem.DeleteFile(strImageLocation) 
+
+        txtOutput.ReadOnly = True
+    End Sub
+    Public Sub DisplayGraphInOutput2(strImageLocation As String)
+        'TEST temporary
+        Dim conImage As Windows.Documents.BlockUIContainer
+        Dim bimg As New Windows.Media.Imaging.BitmapImage(New Uri(strImageLocation))
+        Dim UIEimage As New Windows.Controls.Image()
+        UIEimage.Source = bimg
+        conImage = New Windows.Documents.BlockUIContainer(UIEimage)
+        rtfOutput2.rtfOutput.Document.Blocks.Add(conImage)
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
         'TEST temporary
@@ -368,6 +389,13 @@ Public Class RLink
         ' clear
         box.SelectionStart = box.Text.Length
         box.ScrollToCaret()
+    End Sub
+
+    Private Sub AppendText2(TempRtf As ucrWPFRichTextBox, color As Color, font As Font, text As String)
+        Dim Paragraph As New Windows.Documents.Paragraph(New System.Windows.Documents.Run(text))
+        Paragraph.FontFamily = New Windows.Media.FontFamily(font.FontFamily.Name)
+        Paragraph.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color.Name)
+        TempRtf.rtfOutput.Document.Blocks.Add(Paragraph)
     End Sub
 
     Private Sub WbAppendText(WebBrowser As WebBrowser, color As Color, font As Font, text As String)
