@@ -45,7 +45,7 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverForContrasts.IsEmpty) AndAlso ((Not ucrInputContrastName.IsEmpty) OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso Not IsEmptyCells()))) Then
+        If ((Not ucrReceiverForContrasts.IsEmpty) AndAlso Not ((ucrInputContrastName.IsEmpty) OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -70,18 +70,19 @@ Public Class dlgContrasts
         ucrSelectorForContrast.Reset()
         SelectContrast()
         grdCurrSheet.Reset()
+        TestOKEnabled()
         ' ucrInputContrastName.SetEditable(True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverForContrasts_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForContrasts.SelectionChanged
         If Not ucrReceiverForContrasts.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames)
         Else
+            grdCurrSheet.Reset()
             ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
         SelectContrast()
@@ -141,7 +142,7 @@ Public Class dlgContrasts
         Dim i As Integer
         Dim j As Integer
         Dim strMatrix As String = ""
-        If Not IsEmptyCells()  Then
+        If Not IsEmptyCells() Then
             If grdCurrSheet IsNot Nothing Then
                 For i = 0 To grdCurrSheet.ColumnCount - 1
                     For j = 0 To grdCurrSheet.RowCount - 1
