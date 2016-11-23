@@ -68,8 +68,6 @@ Public Class sdgLayerOptions
         clsGgplotFunction = clsTempGgPlot
         ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes) 'Don't really need to give all parameters through as this function just calls the mother Setup from ucrGeom who doesn't use some of them which are optional, such as clsTempLocalAes...
-        'Warning: when coming back to a layer where the geom was not fixed, the geom is now fixed... 
-        'Task: should be written as an issue
     End Sub
 
     Public Function TestForOKEnabled() As Boolean
