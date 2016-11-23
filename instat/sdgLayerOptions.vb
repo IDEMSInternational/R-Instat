@@ -87,7 +87,8 @@ Public Class sdgLayerOptions
         ElseIf clsGeomFunction.strRCommand = "geom_point" OrElse clsGeomFunction.strRCommand = "geom_line" Then
             If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsRelevantAesFunction.AddParameter("x", Chr(34) & Chr(34))
-            ElseIf (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
+            End If
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
                 clsRelevantAesFunction.AddParameter("y", Chr(34) & Chr(34))
             End If
         End If
@@ -129,6 +130,8 @@ Public Class sdgLayerOptions
         'Partially mandatory aes filling method
         If ucrGeomWithAes.chkApplyOnAllLayers.Checked Then
             PartiallyMandatoryAesFillingMethod(clsAesFunction)
+
+            'Warning: in some cases, this is sources of errors in R: is a continuous variable is mapped to y (for instance plot1 <- ggplot(diamonds,aes(y=price,x="") + geom_boxplot()), and in some layer where global aes are ignored, "" is mapped to y (e.g. plot1 + geom_point(inherit.aes = FALSE, mapping = aes(x="",y="")) ), then an error occurs as a discrete vriable cannot be mapped to a continuous scale.
         ElseIf clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "mapping") <> -1 Then
             PartiallyMandatoryAesFillingMethod(clsGeomFunction.clsParameters.Find(Function(x) x.strArgumentName = "mapping").clsArgumentFunction)
         Else
