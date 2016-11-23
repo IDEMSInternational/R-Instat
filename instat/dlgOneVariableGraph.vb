@@ -20,8 +20,6 @@ Public Class dlgOneVariableGraph
     Private clsRaesFunction As New RFunction
     Private clsRgeom_Function As New RFunction
     Private bFirstLoad As Boolean = True
-    Private clsBaseOperatorOneColumn As New ROperator
-    Private clsBaseFunctionMultipleVariables As New RFunction
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -43,6 +41,7 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.Reset()
         sdgOneVarGraph.SetDefaults()
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
+        chkFlipCoordinates.Checked = False
         TestOkEnabled()
     End Sub
 
@@ -54,17 +53,8 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
-        clsBaseOperatorOneColumn.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.ClearParameters()
-        clsBaseOperatorOneColumn.SetParameter(True, clsRFunc:=clsRggplotFunction)
-        clsBaseOperatorOneColumn.SetParameter(False, clsRFunc:=clsRgeom_Function)
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-
-        clsBaseFunctionMultipleVariables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        'this sets the main function to be used in the dialog
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
         sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
         sdgOneVarGraph.InitialiseDialog()
 
@@ -74,6 +64,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub TestOkEnabled()
+        'this test when to enable okay button. Should be enabled only when the receiver is not empty or when the save graph is schecked and the save graph is not empty
         If ucrReceiverOneVarGraph.IsEmpty() OrElse (ucrOneVarGraphSave.chkSaveGraph.Checked AndAlso ucrOneVarGraphSave.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
@@ -81,51 +72,14 @@ Public Class dlgOneVariableGraph
         End If
     End Sub
 
-    Public Sub OneOrMoreVariables()
-        If ucrReceiverOneVarGraph.GetVariablesAsList.Count = 1 Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperatorOneColumn)
-            If ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "numeric" OrElse ucrReceiverOneVarGraph.GetCurrentItemTypes()(0) = "integer" Then
-                'TODO Geom should come from the subdialog
-                clsRaesFunction.ClearParameters()
-                clsRgeom_Function.SetRCommand(sdgOneVarGraph.strNumericGeomFunction)
-
-                If Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Boxplot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Dot Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Point Plot") Then
-                    clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-                    clsRaesFunction.AddParameter("y", ucrReceiverOneVarGraph.GetVariableNames(False))
-                ElseIf Not ucrReceiverOneVarGraph.IsEmpty() AndAlso (sdgOneVarGraph.ucrInputNumeric.GetText = "Histogram" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Density Plot" OrElse sdgOneVarGraph.ucrInputNumeric.GetText = "Frequency Polygon") Then
-                    clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
-                End If
-            Else
-                clsRaesFunction.ClearParameters()
-                'TODO Geom should come from the subdialog
-                clsRgeom_Function.SetRCommand(sdgOneVarGraph.strCategoriacalGeomFunction)
-                If Not ucrReceiverOneVarGraph.IsEmpty() Then
-                    clsRaesFunction.AddParameter("x", ucrReceiverOneVarGraph.GetVariableNames(False))
-                End If
-                If sdgOneVarGraph.ucrInputCategorical.GetText = "Pie Chart" Then
-                    Dim clsTempRFunc As New RFunction
-                    clsRgeom_Function.AddParameter("width", "1")
-                    clsTempRFunc.SetRCommand("coord_polar")
-                    clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
-                    ucrBase.clsRsyntax.AddOperatorParameter("polar", clsRFunc:=clsTempRFunc)
-                Else
-                    clsRgeom_Function.RemoveParameterByName("width")
-                    ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
-                End If
-            End If
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunctionMultipleVariables)
-            clsBaseFunctionMultipleVariables.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-            clsBaseFunctionMultipleVariables.AddParameter("columns", ucrReceiverOneVarGraph.GetVariableNames())
-        End If
-    End Sub
-
     Private Sub ucrSelectorOneVarGraph_DataFrameChanged() Handles ucrSelectorOneVarGraph.DataFrameChanged
-        OneOrMoreVariables()
+        'this adds the parameter data_name to the syntax
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 
     Private Sub ucrReceiverOneVarGraph_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOneVarGraph.SelectionChanged
-        OneOrMoreVariables()
+        ' this adds the parameter columns to the syntax
+        ucrBase.clsRsyntax.AddParameter("columns", ucrReceiverOneVarGraph.GetVariableNames())
         CheckDataType()
         TestOkEnabled()
     End Sub
@@ -136,6 +90,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub ucrOneVarGraphSave_GraphNameChanged() Handles ucrOneVarGraphSave.GraphNameChanged, ucrOneVarGraphSave.SaveGraphCheckedChanged
+        'this sub saves graphs 
         If ucrOneVarGraphSave.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrOneVarGraphSave.strGraphName, strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrOneVarGraphSave.strGraphName)
         Else
@@ -152,18 +107,20 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub SetOutputparameter()
+        'this adds different outputs parameters to the syntax
         If rdoFacets.Checked Then
-            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "facets" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("output", Chr(34) & "facets" & Chr(34))
         ElseIf rdoCombineGraph.Checked Then
-            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "combine" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("output", Chr(34) & "combine" & Chr(34))
         ElseIf rdoSingleGraphs.Checked Then
-            clsBaseFunctionMultipleVariables.AddParameter("output", Chr(34) & "single" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("output", Chr(34) & "single" & Chr(34))
         Else
-            clsBaseFunctionMultipleVariables.RemoveParameterByName("output") 'this might never run because atleast one must be checked at a time
+            ucrBase.clsRsyntax.RemoveParameter("output") 'this might never run because atleast one must be checked at a time
         End If
     End Sub
 
     Private Sub CheckDataType()
+        'this checks for data types and if all the selected variable are of same type, enables facets 
         If ucrReceiverOneVarGraph.IsAllNumeric() OrElse ucrReceiverOneVarGraph.IsAllCategorical() Then
             rdoFacets.Enabled = True
         Else
@@ -176,5 +133,14 @@ Public Class dlgOneVariableGraph
 
     Private Sub ucrOneVarGraphSave_ContentsChanged() Handles ucrOneVarGraphSave.ContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
+        'adds flip crdinates when the chkFlipCoordinates is checked
+        If chkFlipCoordinates.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("coord_flip", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("coord_flip")
+        End If
     End Sub
 End Class
