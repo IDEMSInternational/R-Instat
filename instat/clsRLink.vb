@@ -297,7 +297,7 @@ Public Class RLink
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         End If
-        If bOutput Then
+        If bOutput AndAlso strOutput <> "" Then
             AppendText(txtOutput, clrOutput, fOutput, strOutput)
             AppendText2(rtbOutput2, clrOutput, fOutput, strOutput) 'TEST temporary
             WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
@@ -311,9 +311,8 @@ Public Class RLink
         'http://stackoverflow.com/questions/1490734/programatically-adding-images-to-rtf-document
 
         Dim img As Image = Image.FromFile(strImageLocation)
-        'Dim bimg = New Bitmap(Image.FromFile(strImageLocation), width, height)
-        Dim stream As New System.IO.MemoryStream
-        img.Save(stream, System.Drawing.Imaging.ImageFormat.Png)
+        Dim stream As New IO.MemoryStream
+        img.Save(stream, Imaging.ImageFormat.Png)
         Dim bytes As Byte() = stream.ToArray()
         Dim strBytes As String = BitConverter.ToString(bytes).Replace("-", "")
 
@@ -351,13 +350,24 @@ Public Class RLink
     Public Sub DisplayGraphInOutput2(strImageLocation As String)
         'TEST temporary
         Dim conImage As Windows.Documents.BlockUIContainer
-        Dim bimg As New Windows.Media.Imaging.BitmapImage(New Uri(strImageLocation))
         Dim UIEimage As New Windows.Controls.Image()
+        Dim bimg As New Windows.Media.Imaging.BitmapImage()
+        Dim thickness As New Windows.Thickness(1)
+        Using fstream As New IO.FileStream(strImageLocation, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            bimg.BeginInit()
+            bimg.CacheOption = Windows.Media.Imaging.BitmapCacheOption.OnLoad
+            bimg.StreamSource = fstream
+            bimg.EndInit()
+        End Using
+        bimg.Freeze()
         UIEimage.Source = bimg
+        UIEimage.Stretch = Windows.Media.Stretch.UniformToFill
         conImage = New Windows.Documents.BlockUIContainer(UIEimage)
-        conImage.BorderThickness = New Windows.Thickness(1)
+        conImage.BorderThickness = thickness
         conImage.BorderBrush = Windows.Media.Brushes.Black
+        conImage.Padding = thickness
         rtbOutput2.rtbOutput.Document.Blocks.Add(conImage)
+        rtbOutput2.rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
         'TEST temporary
