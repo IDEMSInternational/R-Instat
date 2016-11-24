@@ -15,11 +15,7 @@
                         <Setter Property="Margin" Value="0"/>
                     </Style>
                 </FlowDocument.Resources>
-                <Paragraph AllowDrop="False">
-                    <Run Text="Welcome to R-Instat"/>
-                </Paragraph>
             </FlowDocument>
         </RichTextBox>
-
     </Grid>
 </UserControl>

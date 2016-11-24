@@ -193,9 +193,11 @@ Public Class dlgGeneralForGraphics
         Dim strFileName As String
         Dim strImageLocation As String
         clsSaveFunction.SetRCommand("ggsave")
-        strFileName = ucrSaveGraph.strGraphName & ".png"
+        'strFileName = ucrSaveGraph.strGraphName & ".png"
+        strFileName = ucrSaveGraph.strGraphName & ".jpg"
         clsSaveFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34))
-        frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saved graph as png file in the working directory.")
+        'frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saving graph as png file in the working directory.")
+        frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saving graph as jpg file in the working directory.")
         strImageLocation = IO.Path.GetFullPath(".\" & strFileName)
         frmMain.clsRLink.DisplayGraphInRTB(strImageLocation)
         frmMain.clsRLink.DisplayGraphInOutput2(strImageLocation)

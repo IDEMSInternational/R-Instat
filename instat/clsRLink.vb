@@ -250,12 +250,15 @@ Public Class RLink
         If bOutput Then
             If strComment <> "" Then
                 AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
-                AppendText2(rtbOutput2, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
+                AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+                AppendText2(rtbOutput2, clrComments, fComments, strComment & vbCrLf, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
                 WbAppendText(wbOutput, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
+                WbAppendText(wbOutput, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+            Else
+                AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+                AppendText2(rtbOutput2, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+                WbAppendText(wbOutput, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
             End If
-            AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
-            AppendText2(rtbOutput2, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
-            WbAppendText(wbOutput, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
         End If
 
         'If strScript.Length > 2000 Then
@@ -406,12 +409,19 @@ Public Class RLink
         box.ScrollToCaret()
     End Sub
 
-    Private Sub AppendText2(TempRtf As ucrWPFRichTextBox, color As Color, font As Font, text As String)
-        Dim Paragraph As New Windows.Documents.Paragraph(New Windows.Documents.Run(text))
-        Paragraph.FontFamily = New Windows.Media.FontFamily(font.FontFamily.Name)
-        Paragraph.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color.Name)
+    Private Sub AppendText2(TempRtf As ucrWPFRichTextBox, color As Color, font As Font, text As String, Optional color2 As Color = Nothing, Optional font2 As Font = Nothing, Optional text2 As String = Nothing)
+
+        Dim run1 As New Windows.Documents.Run(text)
+        run1.FontFamily = New Windows.Media.FontFamily(font.FontFamily.Name)
+        run1.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color.Name)
+        Dim Paragraph As New Windows.Documents.Paragraph(run1)
+        If font2 IsNot Nothing AndAlso text2 IsNot Nothing AndAlso color2 <> Nothing Then 'Note: IsNot only works for reference types...
+            Dim run2 As New Windows.Documents.Run(text2)
+            run2.FontFamily = New Windows.Media.FontFamily(font2.FontFamily.Name)
+            run2.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color2.Name)
+            Paragraph.Inlines.Add(run2)
+        End If
         TempRtf.rtbOutput.Document.Blocks.Add(Paragraph)
-        'Warning/Task: still got spacing problem. Maybe work with one paragraph and use linebreaks ?... To be tested.
     End Sub
 
     Private Sub WbAppendText(WebBrowser As WebBrowser, color As Color, font As Font, text As String)

@@ -23,6 +23,14 @@ Public Class frmOutputWindow2
     End Sub
 
     Public Sub copyText()
+        Dim lstImages As New List(Of Windows.UIElement)
+        For Each block As Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
+            If TypeOf (block) Is Windows.Documents.BlockUIContainer AndAlso ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) Then
+                Dim conImage As Windows.Documents.BlockUIContainer = block
+                lstImages.Add(conImage.Child)
+            End If
+        Next
+
         ucrRichTextBox.rtbOutput.Copy()
     End Sub
 
@@ -41,4 +49,13 @@ Public Class frmOutputWindow2
             ucrWPFrtfElementHost.ContextMenu = Nothing
         End If
     End Sub
+
+    Private Sub frmOutputWindow2_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
+        If e.Button = MouseButtons.Right And ucrRichTextBox.rtbOutput.Selection IsNot Nothing Then
+            ucrWPFrtfElementHost.ContextMenuStrip = mnuContextRTB
+        Else
+            ucrWPFrtfElementHost.ContextMenu = Nothing
+        End If
+    End Sub
+    'Warning !! the events mouse down and click copy above are never raised, the strip menu seems to come from somewhere else, ... for the moment quite mysterious, need to investigate...
 End Class
