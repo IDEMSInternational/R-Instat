@@ -38,7 +38,7 @@ Public Class dlgCorrelation
         ucrReceiverSecondColumn.SetDataType("numeric")
         ucrSelectorCorrelation.Reset()
         ucrSelectorCorrelation.Focus()
-        ucrReceiverMultipleColumns.SetIncludedDataTypes({"numeric"})
+        ucrReceiverMultipleColumns.SetDataType("numeric")
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         nudConfidenceInterval.Minimum = 0
@@ -198,6 +198,7 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrSelectorCorrelation_DataFrameChanged() Handles ucrSelectorCorrelation.DataFrameChanged
+        sdgCorrPlot.SetDataFrame(strNewDataFrame:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
         clsTempFunc.AddParameter("remove_attr", "TRUE")
         sdgCorrPlot.clsRGraphics.AddParameter("data", clsRFunctionParameter:=clsTempFunc)

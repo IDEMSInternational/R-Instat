@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class sdgCorrPlot
     Public clsRGGscatmatrix, clsRGGcorrGraphics, clsRGraphics As New RFunction
     Public bFirstLoad As Boolean = True
+    Public strDataFrame As String
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -196,5 +197,10 @@ Public Class sdgCorrPlot
 
     Private Sub nudAlpha_ValueChanged(sender As Object, e As EventArgs) Handles nudAlphaScatter.ValueChanged
         clsRGGscatmatrix.AddParameter("alpha", nudAlphaScatter.Value.ToString)
+    End Sub
+
+    Public Sub SetDataFrame(strNewDataFrame As String)
+        strDataFrame = strNewDataFrame
+        ucrSelectFactor.SetDataframe(strDataFrame, False)
     End Sub
 End Class
