@@ -361,7 +361,8 @@ Public Class RLink
         End Using
         bimg.Freeze()
         UIEimage.Source = bimg
-        UIEimage.Stretch = Windows.Media.Stretch.UniformToFill
+        UIEimage.Stretch = Windows.Media.Stretch.Uniform
+        UIEimage.StretchDirection = Windows.Controls.StretchDirection.DownOnly
         conImage = New Windows.Documents.BlockUIContainer(UIEimage)
         conImage.BorderThickness = thickness
         conImage.BorderBrush = Windows.Media.Brushes.Black
