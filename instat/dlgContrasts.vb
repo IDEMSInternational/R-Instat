@@ -45,10 +45,10 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverForContrasts.IsEmpty) AndAlso Not ((ucrInputContrastName.IsEmpty) OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()))) Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrReceiverForContrasts.IsEmpty OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -122,15 +122,19 @@ Public Class dlgContrasts
             Case "Treatment/Control"
                 Me.Size = New System.Drawing.Size(435, 294)
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.treatment" & Chr(34))
+                ucrBase.clsRsyntax.RemoveParameter("defined_contr_matrix")
             Case "Helmert"
                 Me.Size = New System.Drawing.Size(435, 294)
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.helmert" & Chr(34))
+                ucrBase.clsRsyntax.RemoveParameter("defined_contr_matrix")
             Case "Polynomials"
                 Me.Size = New System.Drawing.Size(435, 294)
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.poly" & Chr(34))
+                ucrBase.clsRsyntax.RemoveParameter("defined_contr_matrix")
             Case "Sum to Zero"
                 Me.Size = New System.Drawing.Size(435, 294)
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "contr.sum" & Chr(34))
+                ucrBase.clsRsyntax.RemoveParameter("defined_contr_matrix")
             Case "User Defined"
                 SetGridDimensions()
                 Me.Size = New System.Drawing.Size(440 + grdLayoutForContrasts.Width, 294)
@@ -142,7 +146,12 @@ Public Class dlgContrasts
         Dim i As Integer
         Dim j As Integer
         Dim strMatrix As String = ""
-        If Not IsEmptyCells() Then
+        If IsEmptyCells() Then
+            clsContractMatrix.RemoveParameterByName("ncol")
+            clsContractMatrix.RemoveParameterByName("data")
+            clsContractMatrix.RemoveParameterByName("nrow")
+            ucrBase.clsRsyntax.RemoveParameter("defined_contr_matrix")
+        Else
             If grdCurrSheet IsNot Nothing Then
                 For i = 0 To grdCurrSheet.ColumnCount - 1
                     For j = 0 To grdCurrSheet.RowCount - 1
@@ -154,16 +163,10 @@ Public Class dlgContrasts
                 Next
             End If
             strMatrix = "c" & "(" & strMatrix & ")"
-
             clsContractMatrix.AddParameter("data", strMatrix)
             clsContractMatrix.AddParameter("ncol", grdCurrSheet.Columns)
             clsContractMatrix.AddParameter("nrow", grdCurrSheet.Rows)
             ucrBase.clsRsyntax.AddParameter("defined_contr_matrix", clsRFunctionParameter:=clsContractMatrix)
-        Else
-            clsContractMatrix.RemoveParameterByName("ncol")
-            clsContractMatrix.RemoveParameterByName("data")
-            clsContractMatrix.RemoveParameterByName("nrow")
-            ucrBase.clsRsyntax.RemoveParameter("defined_contr_matrix")
         End If
     End Sub
 
@@ -181,7 +184,7 @@ Public Class dlgContrasts
         TestOKEnabled()
     End Sub
 
-    Private Function IsEmptyCells() As Boolean
+    Public Function IsEmptyCells() As Boolean
         For i = 0 To grdCurrSheet.ColumnCount - 1
             For j = 0 To grdCurrSheet.RowCount - 1
                 If grdCurrSheet(row:=j, col:=i) Is Nothing Then
@@ -196,5 +199,10 @@ Public Class dlgContrasts
         If grdCurrSheet.IsEditing Then
             grdCurrSheet.EndEdit(EndEditReason.NormalFinish)
         End If
+    End Sub
+
+    Private Sub grdCurrSheet_CellKeyUp(sender As Object, e As EventArgs) Handles grdCurrSheet.CellKeyUp, grdCurrSheet.CellMouseUp
+        SetMatrixFunction()
+        TestOKEnabled()
     End Sub
 End Class
