@@ -57,6 +57,7 @@ Public Class sdgPlots
         TitleDefaults()
         chkIncludeFacets.Checked = False
         IncludeFacets()
+        nudNoOfRowsOrColumns.Value = 1
         ucrFacetSelector.Reset()
 
         ucr1stFactorReceiver.SetMeAsReceiver()
@@ -140,7 +141,6 @@ Public Class sdgPlots
             rdoVertical.Visible = True
             chkNoOfRowsOrColumns.Checked = False
             nudNoOfRowsOrColumns.Visible = True
-            nudNoOfRowsOrColumns.Value = 1
             chkMargin.Checked = False
             chkFreeScalesX.Checked = False
             chkFreeScalesY.Checked = False
