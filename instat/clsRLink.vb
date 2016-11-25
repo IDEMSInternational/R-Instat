@@ -390,7 +390,7 @@ Public Class RLink
 <tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">critical</td><td>30</td><td>74.767</td><td>9.895</td><td>49</td><td>92</td></tr>
 <tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">advance</td><td>30</td><td>42.933</td><td>10.289</td><td>25</td><td>72</td></tr>
 <tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom: 1px solid black" & Chr(34) & "></td></tr></table>"
-        'rtbOutput2.AddIntoWebBrowser(strFilePath:="file:///C:/Users/Fran%C3%A7ois/Documents/Administratif/jobs/ADI/R_HTML_Files/firstggplotgrphinhtml.html")
+        rtbOutput2.AddIntoWebBrowser(strFilePath:="file:///C:/Users/Fran%C3%A7ois/Documents/Administratif/jobs/ADI/R_HTML_Files/firstggplotgrphinhtml.html")
         rtbOutput2.AddIntoWebBrowser(strHtmlCode:=strStargazer)
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
@@ -403,8 +403,15 @@ Public Class RLink
         'https://social.msdn.microsoft.com/Forums/en-US/2b2244ed-c628-4e82-9751-d829be620689/display-images-in-web-browser-control?forum=vblanguage
         'http://www.dotnetspark.com/Forum/2673-insert-image-web-browser-control-windows.aspx
 
-        wbOutput.DocumentText = " < img src='" & strImageLocation & "' />"
+        'wbOutput.DocumentText = "< img src='" & strImageLocation & "' />"
         'http://www.rasteredge.com/how-to/asp-net-imaging/imaging-viewing/
+        If (wbOutput.Document IsNot Nothing) Then
+            With wbOutput.Document
+                Dim imgElement As HtmlElement = .CreateElement("img src")
+                imgElement.InnerText = strImageLocation
+                .Body.AppendChild(imgElement)
+            End With
+        End If
 
 
     End Sub
@@ -446,6 +453,14 @@ Public Class RLink
 
     Private Sub WbAppendText(WebBrowser As WebBrowser, color As Color, font As Font, text As String)
         'TEST temporary
+
+        If (WebBrowser.Document IsNot Nothing) Then
+            With WebBrowser.Document
+                Dim TextElem As HtmlElement = .CreateElement("DIV")
+                TextElem.InnerText = text
+                .Body.AppendChild(TextElem)
+            End With
+        End If
 
         'wbOutput.DocumentText.Insert(wbOutput.DocumentText.Length, text)
         'Dim iStart As Integer

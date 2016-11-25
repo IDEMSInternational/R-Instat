@@ -19,26 +19,38 @@ Public Class ucrWPFRichTextBox
         End If
     End Sub
 
+    Private Class NewWebBrowser
+        'This class enables to keep some control over these NewWebbrowsers that are added while the software is running. 
+        'It enables to create subs that 
+        Public WithEvents NewWebBrowser As Controls.WebBrowser
+
+        Public Sub New()
+            NewWebBrowser = New Controls.WebBrowser()
+        End Sub
+        Private Sub NewWebBrowser_On_LoadCompleted() Handles NewWebBrowser.LoadCompleted
+            'NewWebBrowser.Height = NewWebBrowser.Document.Body.ScrollRectangle.Size.Height 'Unfortunately this is for the windows forms webbrowser... 
+        End Sub
+    End Class
     Public Sub AddIntoWebBrowser(Optional strHtmlCode As String = Nothing, Optional strFilePath As String = Nothing)
         Dim conWebBrowser As Documents.BlockUIContainer
-        Dim NewWebBrowser As New Controls.WebBrowser()
+        Dim clsNewWebBrowser As New NewWebBrowser()
         Dim thickness As New Thickness(1)
 
-        NewWebBrowser.BeginInit()
+        clsNewWebBrowser.NewWebBrowser.BeginInit()
         If strHtmlCode IsNot Nothing Then
-            NewWebBrowser.NavigateToString(strHtmlCode)
+            clsNewWebBrowser.NewWebBrowser.NavigateToString(strHtmlCode)
         ElseIf strFilePath IsNot Nothing Then
-            NewWebBrowser.Navigate(New Uri(strFilePath))
+            clsNewWebBrowser.NewWebBrowser.Navigate(New Uri(strFilePath))
         End If
-        NewWebBrowser.MinHeight = 400
-        NewWebBrowser.EndInit()
-
-        conWebBrowser = New Documents.BlockUIContainer(NewWebBrowser)
+        clsNewWebBrowser.NewWebBrowser.MinHeight = 300
+        clsNewWebBrowser.NewWebBrowser.EndInit()
+        conWebBrowser = New Documents.BlockUIContainer(clsNewWebBrowser.NewWebBrowser)
         conWebBrowser.BorderThickness = thickness
         conWebBrowser.BorderBrush = Media.Brushes.Black
         conWebBrowser.Padding = thickness
         rtbOutput.Document.Blocks.Add(conWebBrowser)
         rtbOutput.Document.Blocks.Add(New Documents.Paragraph)
+        'Warning: Maybe find a way to keep track of these webbrowsers... Set this as a function ?
     End Sub
 
     Public Sub CleanWebBrowsers()
