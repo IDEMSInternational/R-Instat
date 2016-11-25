@@ -47,6 +47,7 @@ Public Class dlgFactorDataFrame
     End Sub
 
     Private Sub ReopenDialog()
+        ucrSelectorFactorDataFrame.Reset()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -83,9 +84,9 @@ Public Class dlgFactorDataFrame
 
     Private Sub Replace()
         If chkReplaceFactorSheet.Checked Then
-            ucrBase.clsRsyntax.AddParameter("replace", "FALSE")
-        Else
             ucrBase.clsRsyntax.AddParameter("replace", "TRUE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("replace", "FALSE")
         End If
     End Sub
 
