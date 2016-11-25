@@ -55,7 +55,7 @@ Partial Class dlgOneVarFitModel
         Me.chkConvertToVariate.Location = New System.Drawing.Point(271, 150)
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
         Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
-        Me.chkConvertToVariate.TabIndex = 9
+        Me.chkConvertToVariate.TabIndex = 4
         Me.chkConvertToVariate.Text = "Convert to Variate"
         Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
@@ -65,7 +65,7 @@ Partial Class dlgOneVarFitModel
         Me.chkSaveModel.Location = New System.Drawing.Point(10, 241)
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(86, 17)
-        Me.chkSaveModel.TabIndex = 18
+        Me.chkSaveModel.TabIndex = 5
         Me.chkSaveModel.Text = "Save Model:"
         Me.chkSaveModel.UseVisualStyleBackColor = True
         '
@@ -74,7 +74,7 @@ Partial Class dlgOneVarFitModel
         Me.cmdFittingOptions.Location = New System.Drawing.Point(270, 207)
         Me.cmdFittingOptions.Name = "cmdFittingOptions"
         Me.cmdFittingOptions.Size = New System.Drawing.Size(92, 23)
-        Me.cmdFittingOptions.TabIndex = 11
+        Me.cmdFittingOptions.TabIndex = 7
         Me.cmdFittingOptions.Text = "Fitting Options"
         Me.cmdFittingOptions.UseVisualStyleBackColor = True
         '
@@ -84,7 +84,7 @@ Partial Class dlgOneVarFitModel
         Me.LblVariable.Location = New System.Drawing.Point(268, 47)
         Me.LblVariable.Name = "LblVariable"
         Me.LblVariable.Size = New System.Drawing.Size(48, 13)
-        Me.LblVariable.TabIndex = 3
+        Me.LblVariable.TabIndex = 8
         Me.LblVariable.Text = "Variable:"
         '
         'cmdDisplayOptions
@@ -92,7 +92,7 @@ Partial Class dlgOneVarFitModel
         Me.cmdDisplayOptions.Location = New System.Drawing.Point(270, 236)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(92, 23)
-        Me.cmdDisplayOptions.TabIndex = 12
+        Me.cmdDisplayOptions.TabIndex = 10
         Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
@@ -102,7 +102,7 @@ Partial Class dlgOneVarFitModel
         Me.lblHyp.Location = New System.Drawing.Point(268, 151)
         Me.lblHyp.Name = "lblHyp"
         Me.lblHyp.Size = New System.Drawing.Size(83, 13)
-        Me.lblHyp.TabIndex = 8
+        Me.lblHyp.TabIndex = 17
         Me.lblHyp.Text = "Null Hypothesis:"
         '
         'chkBinModify
@@ -111,17 +111,17 @@ Partial Class dlgOneVarFitModel
         Me.chkBinModify.Location = New System.Drawing.Point(272, 210)
         Me.chkBinModify.Name = "chkBinModify"
         Me.chkBinModify.Size = New System.Drawing.Size(172, 17)
-        Me.chkBinModify.TabIndex = 13
+        Me.chkBinModify.TabIndex = 18
         Me.chkBinModify.Text = "Modify Conditions for 'Success'"
         Me.chkBinModify.UseVisualStyleBackColor = True
         '
         'lblSuccessIf
         '
         Me.lblSuccessIf.AutoSize = True
-        Me.lblSuccessIf.Location = New System.Drawing.Point(274, 241)
+        Me.lblSuccessIf.Location = New System.Drawing.Point(277, 241)
         Me.lblSuccessIf.Name = "lblSuccessIf"
         Me.lblSuccessIf.Size = New System.Drawing.Size(66, 13)
-        Me.lblSuccessIf.TabIndex = 14
+        Me.lblSuccessIf.TabIndex = 19
         Me.lblSuccessIf.Text = "Success if X"
         '
         'lblConfidenceLimit
@@ -130,7 +130,7 @@ Partial Class dlgOneVarFitModel
         Me.lblConfidenceLimit.Location = New System.Drawing.Point(268, 127)
         Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
         Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
-        Me.lblConfidenceLimit.TabIndex = 6
+        Me.lblConfidenceLimit.TabIndex = 22
         Me.lblConfidenceLimit.Text = "Confidence Limit:"
         '
         'nudCI
@@ -139,7 +139,7 @@ Partial Class dlgOneVarFitModel
         Me.nudCI.Location = New System.Drawing.Point(362, 124)
         Me.nudCI.Name = "nudCI"
         Me.nudCI.Size = New System.Drawing.Size(58, 20)
-        Me.nudCI.TabIndex = 7
+        Me.nudCI.TabIndex = 23
         '
         'rdoGeneral
         '
@@ -147,7 +147,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoGeneral.Location = New System.Drawing.Point(10, 12)
         Me.rdoGeneral.Name = "rdoGeneral"
         Me.rdoGeneral.Size = New System.Drawing.Size(89, 17)
-        Me.rdoGeneral.TabIndex = 0
+        Me.rdoGeneral.TabIndex = 26
         Me.rdoGeneral.TabStop = True
         Me.rdoGeneral.Text = "General Case"
         Me.rdoGeneral.UseVisualStyleBackColor = True
@@ -158,7 +158,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoSpecific.Location = New System.Drawing.Point(268, 12)
         Me.rdoSpecific.Name = "rdoSpecific"
         Me.rdoSpecific.Size = New System.Drawing.Size(93, 17)
-        Me.rdoSpecific.TabIndex = 1
+        Me.rdoSpecific.TabIndex = 27
         Me.rdoSpecific.TabStop = True
         Me.rdoSpecific.Text = "Exact Solution"
         Me.rdoSpecific.UseVisualStyleBackColor = True
@@ -168,7 +168,7 @@ Partial Class dlgOneVarFitModel
         Me.nudHyp.Location = New System.Drawing.Point(362, 149)
         Me.nudHyp.Name = "nudHyp"
         Me.nudHyp.Size = New System.Drawing.Size(58, 20)
-        Me.nudHyp.TabIndex = 10
+        Me.nudHyp.TabIndex = 29
         '
         'nudBinomialConditions
         '
@@ -176,24 +176,24 @@ Partial Class dlgOneVarFitModel
         Me.nudBinomialConditions.Location = New System.Drawing.Point(399, 237)
         Me.nudBinomialConditions.Name = "nudBinomialConditions"
         Me.nudBinomialConditions.Size = New System.Drawing.Size(51, 20)
-        Me.nudBinomialConditions.TabIndex = 17
+        Me.nudBinomialConditions.TabIndex = 30
         '
         'lblEquals
         '
         Me.lblEquals.AutoSize = True
-        Me.lblEquals.Location = New System.Drawing.Point(336, 241)
+        Me.lblEquals.Location = New System.Drawing.Point(343, 241)
         Me.lblEquals.Name = "lblEquals"
         Me.lblEquals.Size = New System.Drawing.Size(13, 13)
-        Me.lblEquals.TabIndex = 15
+        Me.lblEquals.TabIndex = 33
         Me.lblEquals.Text = "="
         '
         'cboVariables
         '
         Me.cboVariables.IsReadOnly = False
-        Me.cboVariables.Location = New System.Drawing.Point(349, 237)
+        Me.cboVariables.Location = New System.Drawing.Point(362, 237)
         Me.cboVariables.Name = "cboVariables"
-        Me.cboVariables.Size = New System.Drawing.Size(101, 21)
-        Me.cboVariables.TabIndex = 16
+        Me.cboVariables.Size = New System.Drawing.Size(88, 21)
+        Me.cboVariables.TabIndex = 32
         '
         'ucrOperator
         '
@@ -208,15 +208,15 @@ Partial Class dlgOneVarFitModel
         Me.ucrFamily.Location = New System.Drawing.Point(268, 85)
         Me.ucrFamily.Name = "ucrFamily"
         Me.ucrFamily.Size = New System.Drawing.Size(197, 43)
-        Me.ucrFamily.TabIndex = 5
+        Me.ucrFamily.TabIndex = 11
         '
         'ucrSaveModel
         '
         Me.ucrSaveModel.IsReadOnly = False
-        Me.ucrSaveModel.Location = New System.Drawing.Point(99, 239)
+        Me.ucrSaveModel.Location = New System.Drawing.Point(92, 239)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrSaveModel.TabIndex = 19
+        Me.ucrSaveModel.TabIndex = 3
         '
         'UcrReceiver
         '
@@ -225,7 +225,7 @@ Partial Class dlgOneVarFitModel
         Me.UcrReceiver.Name = "UcrReceiver"
         Me.UcrReceiver.Selector = Nothing
         Me.UcrReceiver.Size = New System.Drawing.Size(137, 20)
-        Me.UcrReceiver.TabIndex = 4
+        Me.UcrReceiver.TabIndex = 2
         '
         'ucrSelectorOneVarFitMod
         '
@@ -235,20 +235,21 @@ Partial Class dlgOneVarFitModel
         Me.ucrSelectorOneVarFitMod.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarFitMod.Name = "ucrSelectorOneVarFitMod"
         Me.ucrSelectorOneVarFitMod.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorOneVarFitMod.TabIndex = 2
+        Me.ucrSelectorOneVarFitMod.TabIndex = 1
         '
         'UcrBase
         '
         Me.UcrBase.Location = New System.Drawing.Point(10, 270)
         Me.UcrBase.Name = "UcrBase"
         Me.UcrBase.Size = New System.Drawing.Size(410, 52)
-        Me.UcrBase.TabIndex = 20
+        Me.UcrBase.TabIndex = 0
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 322)
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.lblEquals)
         Me.Controls.Add(Me.cboVariables)
         Me.Controls.Add(Me.nudBinomialConditions)
@@ -267,7 +268,6 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.cmdFittingOptions)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.chkConvertToVariate)
-        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.UcrReceiver)
         Me.Controls.Add(Me.ucrSelectorOneVarFitMod)
         Me.Controls.Add(Me.UcrBase)
