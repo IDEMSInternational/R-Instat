@@ -22,52 +22,19 @@ Partial Class dlgInventoryPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.UcrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSaveInventoryPlot = New instat.ucrSaveGraph()
-        Me.ucrYearReceiver = New instat.ucrReceiverSingle()
         Me.lblYear = New System.Windows.Forms.Label()
-        Me.ucrDayOfYearReceiver = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle2 = New instat.ucrReceiverSingle()
         Me.lblDayOfyear = New System.Windows.Forms.Label()
-        Me.lblFill = New System.Windows.Forms.Label()
+        Me.lblColourBand = New System.Windows.Forms.Label()
         Me.chkFlipCoordinates = New System.Windows.Forms.CheckBox()
         Me.lblDoY = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.ucrColourReceiver = New instat.ucrReceiverSingle()
+        Me.ucrDayOfYearReceiver = New instat.ucrReceiverSingle()
+        Me.ucrYearReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSaveInventoryPlot = New instat.ucrSaveGraph()
+        Me.UcrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 285)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 12
-        '
-        'UcrInventoryPlotSelector
-        '
-        Me.UcrInventoryPlotSelector.bShowHiddenColumns = False
-        Me.UcrInventoryPlotSelector.bUseCurrentFilter = True
-        Me.UcrInventoryPlotSelector.Location = New System.Drawing.Point(9, 9)
-        Me.UcrInventoryPlotSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrInventoryPlotSelector.Name = "UcrInventoryPlotSelector"
-        Me.UcrInventoryPlotSelector.Size = New System.Drawing.Size(210, 180)
-        Me.UcrInventoryPlotSelector.TabIndex = 13
-        '
-        'ucrSaveInventoryPlot
-        '
-        Me.ucrSaveInventoryPlot.Location = New System.Drawing.Point(12, 238)
-        Me.ucrSaveInventoryPlot.Name = "ucrSaveInventoryPlot"
-        Me.ucrSaveInventoryPlot.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveInventoryPlot.TabIndex = 14
-        '
-        'ucrYearReceiver
-        '
-        Me.ucrYearReceiver.Location = New System.Drawing.Point(292, 53)
-        Me.ucrYearReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrYearReceiver.Name = "ucrYearReceiver"
-        Me.ucrYearReceiver.Selector = Nothing
-        Me.ucrYearReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrYearReceiver.TabIndex = 15
         '
         'lblYear
         '
@@ -78,24 +45,6 @@ Partial Class dlgInventoryPlot
         Me.lblYear.TabIndex = 16
         Me.lblYear.Text = "Year"
         '
-        'ucrDayOfYearReceiver
-        '
-        Me.ucrDayOfYearReceiver.Location = New System.Drawing.Point(292, 113)
-        Me.ucrDayOfYearReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDayOfYearReceiver.Name = "ucrDayOfYearReceiver"
-        Me.ucrDayOfYearReceiver.Selector = Nothing
-        Me.ucrDayOfYearReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrDayOfYearReceiver.TabIndex = 17
-        '
-        'UcrReceiverSingle2
-        '
-        Me.UcrReceiverSingle2.Location = New System.Drawing.Point(292, 168)
-        Me.UcrReceiverSingle2.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle2.Name = "UcrReceiverSingle2"
-        Me.UcrReceiverSingle2.Selector = Nothing
-        Me.UcrReceiverSingle2.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle2.TabIndex = 18
-        '
         'lblDayOfyear
         '
         Me.lblDayOfyear.AutoSize = True
@@ -104,14 +53,14 @@ Partial Class dlgInventoryPlot
         Me.lblDayOfyear.Size = New System.Drawing.Size(0, 13)
         Me.lblDayOfyear.TabIndex = 19
         '
-        'lblFill
+        'lblColourBand
         '
-        Me.lblFill.AutoSize = True
-        Me.lblFill.Location = New System.Drawing.Point(289, 146)
-        Me.lblFill.Name = "lblFill"
-        Me.lblFill.Size = New System.Drawing.Size(19, 13)
-        Me.lblFill.TabIndex = 20
-        Me.lblFill.Text = "Fill"
+        Me.lblColourBand.AutoSize = True
+        Me.lblColourBand.Location = New System.Drawing.Point(289, 146)
+        Me.lblColourBand.Name = "lblColourBand"
+        Me.lblColourBand.Size = New System.Drawing.Size(65, 13)
+        Me.lblColourBand.TabIndex = 20
+        Me.lblColourBand.Text = "Colour Band"
         '
         'chkFlipCoordinates
         '
@@ -128,9 +77,9 @@ Partial Class dlgInventoryPlot
         Me.lblDoY.AutoSize = True
         Me.lblDoY.Location = New System.Drawing.Point(289, 90)
         Me.lblDoY.Name = "lblDoY"
-        Me.lblDoY.Size = New System.Drawing.Size(79, 13)
+        Me.lblDoY.Size = New System.Drawing.Size(81, 13)
         Me.lblDoY.TabIndex = 22
-        Me.lblDoY.Text = "Day of the year"
+        Me.lblDoY.Text = "Day of the Year"
         '
         'cmdOptions
         '
@@ -141,17 +90,68 @@ Partial Class dlgInventoryPlot
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'ucrColourReceiver
+        '
+        Me.ucrColourReceiver.Location = New System.Drawing.Point(292, 168)
+        Me.ucrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrColourReceiver.Name = "ucrColourReceiver"
+        Me.ucrColourReceiver.Selector = Nothing
+        Me.ucrColourReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrColourReceiver.TabIndex = 18
+        '
+        'ucrDayOfYearReceiver
+        '
+        Me.ucrDayOfYearReceiver.Location = New System.Drawing.Point(292, 113)
+        Me.ucrDayOfYearReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDayOfYearReceiver.Name = "ucrDayOfYearReceiver"
+        Me.ucrDayOfYearReceiver.Selector = Nothing
+        Me.ucrDayOfYearReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrDayOfYearReceiver.TabIndex = 17
+        '
+        'ucrYearReceiver
+        '
+        Me.ucrYearReceiver.Location = New System.Drawing.Point(292, 53)
+        Me.ucrYearReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrYearReceiver.Name = "ucrYearReceiver"
+        Me.ucrYearReceiver.Selector = Nothing
+        Me.ucrYearReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrYearReceiver.TabIndex = 15
+        '
+        'ucrSaveInventoryPlot
+        '
+        Me.ucrSaveInventoryPlot.Location = New System.Drawing.Point(12, 238)
+        Me.ucrSaveInventoryPlot.Name = "ucrSaveInventoryPlot"
+        Me.ucrSaveInventoryPlot.Size = New System.Drawing.Size(265, 20)
+        Me.ucrSaveInventoryPlot.TabIndex = 14
+        '
+        'UcrInventoryPlotSelector
+        '
+        Me.UcrInventoryPlotSelector.bShowHiddenColumns = False
+        Me.UcrInventoryPlotSelector.bUseCurrentFilter = True
+        Me.UcrInventoryPlotSelector.Location = New System.Drawing.Point(9, 9)
+        Me.UcrInventoryPlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrInventoryPlotSelector.Name = "UcrInventoryPlotSelector"
+        Me.UcrInventoryPlotSelector.Size = New System.Drawing.Size(210, 180)
+        Me.UcrInventoryPlotSelector.TabIndex = 13
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 283)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 12
+        '
         'dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 348)
+        Me.ClientSize = New System.Drawing.Size(431, 337)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblDoY)
         Me.Controls.Add(Me.chkFlipCoordinates)
-        Me.Controls.Add(Me.lblFill)
+        Me.Controls.Add(Me.lblColourBand)
         Me.Controls.Add(Me.lblDayOfyear)
-        Me.Controls.Add(Me.UcrReceiverSingle2)
+        Me.Controls.Add(Me.ucrColourReceiver)
         Me.Controls.Add(Me.ucrDayOfYearReceiver)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.ucrYearReceiver)
@@ -175,9 +175,9 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrYearReceiver As ucrReceiverSingle
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrDayOfYearReceiver As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle2 As ucrReceiverSingle
+    Friend WithEvents ucrColourReceiver As ucrReceiverSingle
     Friend WithEvents lblDayOfyear As Label
-    Friend WithEvents lblFill As Label
+    Friend WithEvents lblColourBand As Label
     Friend WithEvents chkFlipCoordinates As CheckBox
     Friend WithEvents lblDoY As Label
     Friend WithEvents cmdOptions As Button

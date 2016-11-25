@@ -44,17 +44,17 @@ Public Class dlgInventoryPlot
 
         ucrYearReceiver.SetIncludedDataTypes({"factor"})
         ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric"})
-        UcrReceiverSingle2.SetIncludedDataTypes({"factor"})
+        ucrColourReceiver.SetIncludedDataTypes({"factor"})
 
         ucrYearReceiver.Selector = UcrInventoryPlotSelector
-        UcrReceiverSingle2.Selector = UcrInventoryPlotSelector
+        ucrColourReceiver.Selector = UcrInventoryPlotSelector
         ucrDayOfYearReceiver.Selector = UcrInventoryPlotSelector
         ucrSaveInventoryPlot.strPrefix = "InventoryPlot"
         ucrSaveInventoryPlot.SetDataFrameSelector(UcrInventoryPlotSelector.ucrAvailableDataFrames)
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not UcrReceiverSingle2.IsEmpty) OrElse (ucrSaveInventoryPlot.chkSaveGraph.Checked AndAlso Not ucrSaveInventoryPlot.ucrInputGraphName.IsEmpty) Then
+        If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not ucrColourReceiver.IsEmpty) OrElse (ucrSaveInventoryPlot.chkSaveGraph.Checked AndAlso Not ucrSaveInventoryPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -111,9 +111,9 @@ Public Class dlgInventoryPlot
 
     End Sub
 
-    Private Sub UcrReceiverSingle2_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiverSingle2.SelectionChanged
-        If Not UcrReceiverSingle2.IsEmpty Then
-            clsRaesFunction.AddParameter("colour", UcrReceiverSingle2.GetVariableNames(False))
+    Private Sub ucrColourReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColourReceiver.SelectionChanged
+        If Not ucrColourReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("colour", ucrColourReceiver.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("colour")
         End If
