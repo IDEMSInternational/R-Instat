@@ -24,10 +24,11 @@ Public Class frmOutputWindow2
 
     Public Sub copyText()
         Dim lstImages As New List(Of Windows.UIElement)
-        For Each block As Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
-            If TypeOf (block) Is Windows.Documents.BlockUIContainer AndAlso ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) Then
-                Dim conImage As Windows.Documents.BlockUIContainer = block
-                lstImages.Add(conImage.Child)
+        For Each block As Windows.Documents.BlockUIContainer In ucrRichTextBox.rtbOutput.Document.Blocks
+            If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) Then
+                'There are two cases now: consider webbrowser case ...
+                'Dim conImage As Windows.Documents.BlockUIContainer = block
+                'lstImages.Add(conImage.Child)
             End If
         Next
 

@@ -351,6 +351,7 @@ Public Class RLink
         txtOutput.ReadOnly = True
     End Sub
     Public Sub DisplayGraphInOutput2(strImageLocation As String)
+        'Task: migrate the sub to the ucrWPFRichTextBox class ?
         'TEST temporary
         Dim conImage As Windows.Documents.BlockUIContainer
         Dim UIEimage As New Windows.Controls.Image()
@@ -410,7 +411,7 @@ Public Class RLink
     End Sub
 
     Private Sub AppendText2(TempRtf As ucrWPFRichTextBox, color As Color, font As Font, text As String, Optional color2 As Color = Nothing, Optional font2 As Font = Nothing, Optional text2 As String = Nothing)
-
+        'Task: migrate the sub to the ucrWPFRichTextBox...
         Dim run1 As New Windows.Documents.Run(text)
         run1.FontFamily = New Windows.Media.FontFamily(font.FontFamily.Name)
         run1.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color.Name)
