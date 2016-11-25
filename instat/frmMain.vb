@@ -1307,4 +1307,14 @@ Public Class frmMain
     Private Sub mnuHelpLicence_Click(sender As Object, e As EventArgs) Handles mnuHelpLicence.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "323")
     End Sub
+
+    Private Sub HtmlTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HtmlTestToolStripMenuItem.Click
+        'TEST temporary 
+        'TESTING TO BE ERASED !!!!!!!
+        Dim clsTestStargizer As New RFunction
+        clsTestStargizer.SetRCommand("stargazer")
+        clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
+        clsTestStargizer.AddParameter("Type", Chr(34) & "html" & Chr(34))
+        clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
+    End Sub
 End Class

@@ -23,20 +23,16 @@ Public Class ucrWPFRichTextBox
         Dim conWebBrowser As Documents.BlockUIContainer
         Dim NewWebBrowser As New Controls.WebBrowser()
         Dim thickness As New Thickness(1)
+
+        NewWebBrowser.BeginInit()
         If strHtmlCode IsNot Nothing Then
-            NewWebBrowser.BeginInit()
-            'LocalWebBrowser.CacheOption = Windows.Media.Imaging.BitmapCacheOption.OnLoad
             NewWebBrowser.NavigateToString(strHtmlCode)
-            NewWebBrowser.EndInit()
         ElseIf strFilePath IsNot Nothing Then
-            Using fstream As New IO.FileStream(strFilePath, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
-                NewWebBrowser.BeginInit()
-                'LocalWebBrowser.CacheOption = Windows.Media.Imaging.BitmapCacheOption.OnLoad
-                NewWebBrowser.NavigateToStream(fstream)
-                NewWebBrowser.EndInit()
-            End Using
+            NewWebBrowser.Navigate(New Uri(strFilePath))
         End If
-        'LocalWebBrowser.Freeze()
+        NewWebBrowser.MinHeight = 400
+        NewWebBrowser.EndInit()
+
         conWebBrowser = New Documents.BlockUIContainer(NewWebBrowser)
         conWebBrowser.BorderThickness = thickness
         conWebBrowser.BorderBrush = Media.Brushes.Black

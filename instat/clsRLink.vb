@@ -229,7 +229,7 @@ Public Class RLink
         Return strNextDefault
     End Function
 
-    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
+    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "", Optional bHtmlOutput As Boolean = False)
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
@@ -301,11 +301,17 @@ Public Class RLink
             End Try
         End If
         If bOutput AndAlso strOutput <> "" Then
-            AppendText(txtOutput, clrOutput, fOutput, strOutput)
-            AppendText2(rtbOutput2, clrOutput, fOutput, strOutput) 'TEST temporary
-            WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
+            If bHtmlOutput Then 'TEST temporary
+                AppendText(txtOutput, clrOutput, fOutput, strOutput)
+                rtbOutput2.AddIntoWebBrowser(strHtmlCode:=strOutput)
+                WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
+            Else
+                AppendText(txtOutput, clrOutput, fOutput, strOutput)
+                AppendText2(rtbOutput2, clrOutput, fOutput, strOutput) 'TEST temporary
+                WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
+            End If
         End If
-        frmMain.clsGrids.UpdateGrids()
+            frmMain.clsGrids.UpdateGrids()
     End Sub
 
     Public Function GetImageRTFCode(strImageLocation As String, iWidth As Integer, iHeight As Integer) As String
@@ -373,10 +379,22 @@ Public Class RLink
         conImage.Padding = thickness
         rtbOutput2.rtbOutput.Document.Blocks.Add(conImage)
         rtbOutput2.rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
+
+        'TESTING TO BE REMOVED
+        Dim strStargazer As String = "<table style=" & Chr(34) & "text-align:center" & Chr(34) & "><tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>
+<tr><td colspan = " & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">rating</td><td>30</td><td>64.633</td><td>12.173</td><td>40</td><td>85</td></tr>
+<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">complaints</td><td>30</td><td>66.600</td><td>13.315</td><td>37</td><td>90</td></tr>
+<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">privileges</td><td>30</td><td>53.133</td><td>12.235</td><td>30</td><td>83</td></tr>
+<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">learning</td><td>30</td><td>56.367</td><td>11.737</td><td>34</td><td>75</td></tr>
+<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">raises</td><td>30</td><td>64.633</td><td>10.397</td><td>43</td><td>88</td></tr>
+<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">critical</td><td>30</td><td>74.767</td><td>9.895</td><td>49</td><td>92</td></tr>
+<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">advance</td><td>30</td><td>42.933</td><td>10.289</td><td>25</td><td>72</td></tr>
+<tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom: 1px solid black" & Chr(34) & "></td></tr></table>"
+        'rtbOutput2.AddIntoWebBrowser(strFilePath:="file:///C:/Users/Fran%C3%A7ois/Documents/Administratif/jobs/ADI/R_HTML_Files/firstggplotgrphinhtml.html")
+        rtbOutput2.AddIntoWebBrowser(strHtmlCode:=strStargazer)
     End Sub
     Public Sub DisplayGraphInWB(strImageLocation As String)
         'TEST temporary
-        Dim img As Image = Image.FromFile(strImageLocation)
 
         'WebBrowser.DocumentStream.??? 
         'https://msdn.microsoft.com/en-us/library/system.windows.forms.webbrowser.documentstream(v=vs.110).aspx
@@ -384,10 +402,11 @@ Public Class RLink
         'Use references... also need something handles DocumentFinished event... or something...
         'https://social.msdn.microsoft.com/Forums/en-US/2b2244ed-c628-4e82-9751-d829be620689/display-images-in-web-browser-control?forum=vblanguage
         'http://www.dotnetspark.com/Forum/2673-insert-image-web-browser-control-windows.aspx
-        wbOutput.DocumentText = 'WebBrowser.DocumentText &
-            "<img src='" & strImageLocation & "' />"
+
+        wbOutput.DocumentText = " < img src='" & strImageLocation & "' />"
         'http://www.rasteredge.com/how-to/asp-net-imaging/imaging-viewing/
-        img.Dispose()
+
+
     End Sub
 
     Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
@@ -427,13 +446,15 @@ Public Class RLink
 
     Private Sub WbAppendText(WebBrowser As WebBrowser, color As Color, font As Font, text As String)
         'TEST temporary
-        Dim iStart As Integer
-        Dim iEnd As Integer
 
-        iStart = WebBrowser.DocumentText.Length
+        'wbOutput.DocumentText.Insert(wbOutput.DocumentText.Length, text)
+        'Dim iStart As Integer
+        'Dim iEnd As Integer
+
+        'iStart = WebBrowser.DocumentText.Length
         'WebBrowser.DocumentText = WebBrowser.DocumentText & text
         'WebBrowser.Document.Write(text)
-        iEnd = WebBrowser.DocumentText.Length
+        'iEnd = WebBrowser.DocumentText.Length
 
         'Warning: so far don't know how to change font and colour of the text...
         ' Textbox may transform chars, so (end-start) != text.Length
