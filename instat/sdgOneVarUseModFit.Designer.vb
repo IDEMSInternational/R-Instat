@@ -58,7 +58,7 @@ Partial Class sdgOneVarUseModFit
         Me.tbcQuantiles.Name = "tbcQuantiles"
         Me.tbcQuantiles.SelectedIndex = 0
         Me.tbcQuantiles.Size = New System.Drawing.Size(218, 209)
-        Me.tbcQuantiles.TabIndex = 2
+        Me.tbcQuantiles.TabIndex = 0
         '
         'tbcPlots
         '
@@ -181,7 +181,7 @@ Partial Class sdgOneVarUseModFit
         Me.lblBy.Location = New System.Drawing.Point(13, 96)
         Me.lblBy.Name = "lblBy"
         Me.lblBy.Size = New System.Drawing.Size(22, 13)
-        Me.lblBy.TabIndex = 7
+        Me.lblBy.TabIndex = 5
         Me.lblBy.Text = "By:"
         '
         'lblTo
@@ -190,7 +190,7 @@ Partial Class sdgOneVarUseModFit
         Me.lblTo.Location = New System.Drawing.Point(13, 69)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 6
+        Me.lblTo.TabIndex = 3
         Me.lblTo.Text = "To:"
         '
         'lblFrom
@@ -199,7 +199,7 @@ Partial Class sdgOneVarUseModFit
         Me.lblFrom.Location = New System.Drawing.Point(13, 44)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 5
+        Me.lblFrom.TabIndex = 1
         Me.lblFrom.Text = "From:"
         '
         'nudBy
@@ -208,7 +208,7 @@ Partial Class sdgOneVarUseModFit
         Me.nudBy.Location = New System.Drawing.Point(94, 93)
         Me.nudBy.Name = "nudBy"
         Me.nudBy.Size = New System.Drawing.Size(48, 20)
-        Me.nudBy.TabIndex = 4
+        Me.nudBy.TabIndex = 6
         Me.nudBy.Value = New Decimal(New Integer() {25, 0, 0, 131072})
         '
         'nudTo
@@ -217,7 +217,7 @@ Partial Class sdgOneVarUseModFit
         Me.nudTo.Location = New System.Drawing.Point(94, 67)
         Me.nudTo.Name = "nudTo"
         Me.nudTo.Size = New System.Drawing.Size(48, 20)
-        Me.nudTo.TabIndex = 3
+        Me.nudTo.TabIndex = 4
         Me.nudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'nudFrom
@@ -234,7 +234,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoInsertValues.Location = New System.Drawing.Point(8, 134)
         Me.rdoInsertValues.Name = "rdoInsertValues"
         Me.rdoInsertValues.Size = New System.Drawing.Size(86, 17)
-        Me.rdoInsertValues.TabIndex = 1
+        Me.rdoInsertValues.TabIndex = 7
         Me.rdoInsertValues.Text = "Insert Values"
         Me.rdoInsertValues.UseVisualStyleBackColor = True
         '
@@ -255,7 +255,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrBase.Location = New System.Drawing.Point(44, 218)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 3
+        Me.ucrBase.TabIndex = 1
         '
         'sdgOneVarUseModFit
         '
