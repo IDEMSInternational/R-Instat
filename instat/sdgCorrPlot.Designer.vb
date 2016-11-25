@@ -23,9 +23,6 @@ Partial Class sdgCorrPlot
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.chkCorrelationMatrix = New System.Windows.Forms.CheckBox()
-        Me.chkScatterplotMatrix = New System.Windows.Forms.CheckBox()
-        Me.chkCorrelationPlot = New System.Windows.Forms.CheckBox()
-        Me.chkPairwisePlot = New System.Windows.Forms.CheckBox()
         Me.tbSaveGraphs = New System.Windows.Forms.TabControl()
         Me.tbPairwisePlot = New System.Windows.Forms.TabPage()
         Me.tbCorrelationPlot = New System.Windows.Forms.TabPage()
@@ -39,14 +36,19 @@ Partial Class sdgCorrPlot
         Me.lblMinimumSize = New System.Windows.Forms.Label()
         Me.lblgeom = New System.Windows.Forms.Label()
         Me.tbScatterplotMatrix = New System.Windows.Forms.TabPage()
-        Me.ucrSelectFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.chkColour = New System.Windows.Forms.CheckBox()
         Me.lblAlpha = New System.Windows.Forms.Label()
         Me.nudAlphaScatter = New System.Windows.Forms.NumericUpDown()
-        Me.ucrReceiveFactor = New instat.ucrReceiverSingle()
+        Me.rdoScatterplotMatrix = New System.Windows.Forms.RadioButton()
+        Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoPairwisePlot = New System.Windows.Forms.RadioButton()
+        Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.grpGraphs = New System.Windows.Forms.GroupBox()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
         Me.ucrSaveGraph = New instat.ucrSaveGraph()
+        Me.ucrSelectFactor = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiveFactor = New instat.ucrReceiverSingle()
         Me.tbSaveGraphs.SuspendLayout()
         Me.tbCorrelationPlot.SuspendLayout()
         CType(Me.nudAlphaCorr, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,6 +56,7 @@ Partial Class sdgCorrPlot
         CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbScatterplotMatrix.SuspendLayout()
         CType(Me.nudAlphaScatter, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpGraphs.SuspendLayout()
         Me.SuspendLayout()
         '
         'chkCorrelationMatrix
@@ -67,39 +70,6 @@ Partial Class sdgCorrPlot
         Me.chkCorrelationMatrix.Text = "Correlation Matrix"
         Me.chkCorrelationMatrix.UseVisualStyleBackColor = True
         '
-        'chkScatterplotMatrix
-        '
-        Me.chkScatterplotMatrix.AutoSize = True
-        Me.chkScatterplotMatrix.Location = New System.Drawing.Point(10, 79)
-        Me.chkScatterplotMatrix.Name = "chkScatterplotMatrix"
-        Me.chkScatterplotMatrix.Size = New System.Drawing.Size(108, 17)
-        Me.chkScatterplotMatrix.TabIndex = 3
-        Me.chkScatterplotMatrix.Tag = "Scatterplot_Matrix"
-        Me.chkScatterplotMatrix.Text = "Scatterplot Matrix"
-        Me.chkScatterplotMatrix.UseVisualStyleBackColor = True
-        '
-        'chkCorrelationPlot
-        '
-        Me.chkCorrelationPlot.AutoSize = True
-        Me.chkCorrelationPlot.Location = New System.Drawing.Point(10, 56)
-        Me.chkCorrelationPlot.Name = "chkCorrelationPlot"
-        Me.chkCorrelationPlot.Size = New System.Drawing.Size(97, 17)
-        Me.chkCorrelationPlot.TabIndex = 2
-        Me.chkCorrelationPlot.Tag = "Correlation_Plot"
-        Me.chkCorrelationPlot.Text = "Correlation Plot"
-        Me.chkCorrelationPlot.UseVisualStyleBackColor = True
-        '
-        'chkPairwisePlot
-        '
-        Me.chkPairwisePlot.AutoSize = True
-        Me.chkPairwisePlot.Location = New System.Drawing.Point(10, 33)
-        Me.chkPairwisePlot.Name = "chkPairwisePlot"
-        Me.chkPairwisePlot.Size = New System.Drawing.Size(89, 17)
-        Me.chkPairwisePlot.TabIndex = 1
-        Me.chkPairwisePlot.Tag = "Pairwise_Plot"
-        Me.chkPairwisePlot.Text = "Pairwise_Plot"
-        Me.chkPairwisePlot.UseVisualStyleBackColor = True
-        '
         'tbSaveGraphs
         '
         Me.tbSaveGraphs.Controls.Add(Me.tbPairwisePlot)
@@ -109,7 +79,7 @@ Partial Class sdgCorrPlot
         Me.tbSaveGraphs.Name = "tbSaveGraphs"
         Me.tbSaveGraphs.SelectedIndex = 0
         Me.tbSaveGraphs.Size = New System.Drawing.Size(352, 283)
-        Me.tbSaveGraphs.TabIndex = 4
+        Me.tbSaveGraphs.TabIndex = 2
         '
         'tbPairwisePlot
         '
@@ -250,16 +220,6 @@ Partial Class sdgCorrPlot
         Me.tbScatterplotMatrix.Text = "Scatterplot Matrix"
         Me.tbScatterplotMatrix.UseVisualStyleBackColor = True
         '
-        'ucrSelectFactor
-        '
-        Me.ucrSelectFactor.bShowHiddenColumns = False
-        Me.ucrSelectFactor.bUseCurrentFilter = True
-        Me.ucrSelectFactor.Location = New System.Drawing.Point(3, 59)
-        Me.ucrSelectFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectFactor.Name = "ucrSelectFactor"
-        Me.ucrSelectFactor.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectFactor.TabIndex = 13
-        '
         'lblFactorVariable
         '
         Me.lblFactorVariable.AutoSize = True
@@ -302,6 +262,92 @@ Partial Class sdgCorrPlot
         Me.nudAlphaScatter.TabIndex = 7
         Me.nudAlphaScatter.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
+        'rdoScatterplotMatrix
+        '
+        Me.rdoScatterplotMatrix.AutoSize = True
+        Me.rdoScatterplotMatrix.Location = New System.Drawing.Point(177, 41)
+        Me.rdoScatterplotMatrix.Name = "rdoScatterplotMatrix"
+        Me.rdoScatterplotMatrix.Size = New System.Drawing.Size(107, 17)
+        Me.rdoScatterplotMatrix.TabIndex = 3
+        Me.rdoScatterplotMatrix.TabStop = True
+        Me.rdoScatterplotMatrix.Tag = "Scatterplot_Matrix"
+        Me.rdoScatterplotMatrix.Text = "Scatterplot Matrix"
+        Me.rdoScatterplotMatrix.UseVisualStyleBackColor = True
+        '
+        'rdoCorrelationPlot
+        '
+        Me.rdoCorrelationPlot.AutoSize = True
+        Me.rdoCorrelationPlot.Location = New System.Drawing.Point(177, 19)
+        Me.rdoCorrelationPlot.Name = "rdoCorrelationPlot"
+        Me.rdoCorrelationPlot.Size = New System.Drawing.Size(96, 17)
+        Me.rdoCorrelationPlot.TabIndex = 1
+        Me.rdoCorrelationPlot.TabStop = True
+        Me.rdoCorrelationPlot.Tag = "Correlation_Plot"
+        Me.rdoCorrelationPlot.Text = "Correlation Plot"
+        Me.rdoCorrelationPlot.UseVisualStyleBackColor = True
+        '
+        'rdoPairwisePlot
+        '
+        Me.rdoPairwisePlot.AutoSize = True
+        Me.rdoPairwisePlot.Location = New System.Drawing.Point(6, 41)
+        Me.rdoPairwisePlot.Name = "rdoPairwisePlot"
+        Me.rdoPairwisePlot.Size = New System.Drawing.Size(85, 17)
+        Me.rdoPairwisePlot.TabIndex = 2
+        Me.rdoPairwisePlot.TabStop = True
+        Me.rdoPairwisePlot.Tag = "Pairwise_Plot"
+        Me.rdoPairwisePlot.Text = "Pairwise Plot"
+        Me.rdoPairwisePlot.UseVisualStyleBackColor = True
+        '
+        'rdoNone
+        '
+        Me.rdoNone.AutoSize = True
+        Me.rdoNone.Location = New System.Drawing.Point(6, 19)
+        Me.rdoNone.Name = "rdoNone"
+        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
+        Me.rdoNone.TabIndex = 0
+        Me.rdoNone.TabStop = True
+        Me.rdoNone.Tag = "None"
+        Me.rdoNone.Text = "None"
+        Me.rdoNone.UseVisualStyleBackColor = True
+        '
+        'grpGraphs
+        '
+        Me.grpGraphs.Controls.Add(Me.rdoScatterplotMatrix)
+        Me.grpGraphs.Controls.Add(Me.rdoCorrelationPlot)
+        Me.grpGraphs.Controls.Add(Me.rdoPairwisePlot)
+        Me.grpGraphs.Controls.Add(Me.rdoNone)
+        Me.grpGraphs.Location = New System.Drawing.Point(10, 33)
+        Me.grpGraphs.Name = "grpGraphs"
+        Me.grpGraphs.Size = New System.Drawing.Size(348, 64)
+        Me.grpGraphs.TabIndex = 1
+        Me.grpGraphs.TabStop = False
+        Me.grpGraphs.Tag = "Graphs"
+        Me.grpGraphs.Text = "Graphs"
+        '
+        'ucrBaseSdgCorrPlot
+        '
+        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(108, 419)
+        Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
+        Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSdgCorrPlot.TabIndex = 4
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(13, 391)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(236, 22)
+        Me.ucrSaveGraph.TabIndex = 3
+        '
+        'ucrSelectFactor
+        '
+        Me.ucrSelectFactor.bShowHiddenColumns = False
+        Me.ucrSelectFactor.bUseCurrentFilter = True
+        Me.ucrSelectFactor.Location = New System.Drawing.Point(3, 59)
+        Me.ucrSelectFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectFactor.Name = "ucrSelectFactor"
+        Me.ucrSelectFactor.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectFactor.TabIndex = 13
+        '
         'ucrReceiveFactor
         '
         Me.ucrReceiveFactor.Location = New System.Drawing.Point(213, 81)
@@ -311,30 +357,14 @@ Partial Class sdgCorrPlot
         Me.ucrReceiveFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiveFactor.TabIndex = 12
         '
-        'ucrBaseSdgCorrPlot
-        '
-        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(108, 419)
-        Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
-        Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSdgCorrPlot.TabIndex = 6
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(14, 391)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(236, 22)
-        Me.ucrSaveGraph.TabIndex = 5
-        '
         'sdgCorrPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(371, 455)
+        Me.Controls.Add(Me.grpGraphs)
         Me.Controls.Add(Me.chkCorrelationMatrix)
-        Me.Controls.Add(Me.chkScatterplotMatrix)
         Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
-        Me.Controls.Add(Me.chkPairwisePlot)
-        Me.Controls.Add(Me.chkCorrelationPlot)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.tbSaveGraphs)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -353,6 +383,8 @@ Partial Class sdgCorrPlot
         Me.tbScatterplotMatrix.ResumeLayout(False)
         Me.tbScatterplotMatrix.PerformLayout()
         CType(Me.nudAlphaScatter, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpGraphs.ResumeLayout(False)
+        Me.grpGraphs.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -365,9 +397,6 @@ Partial Class sdgCorrPlot
     Friend WithEvents tbCorrelationPlot As TabPage
     Friend WithEvents tbScatterplotMatrix As TabPage
     Friend WithEvents chkCorrelationMatrix As CheckBox
-    Friend WithEvents chkScatterplotMatrix As CheckBox
-    Friend WithEvents chkCorrelationPlot As CheckBox
-    Friend WithEvents chkPairwisePlot As CheckBox
     Friend WithEvents chkLabel As CheckBox
     Friend WithEvents nudAlphaCorr As NumericUpDown
     Friend WithEvents nudMaximumSize As NumericUpDown
@@ -383,4 +412,17 @@ Partial Class sdgCorrPlot
     Friend WithEvents ucrReceiveFactor As ucrReceiverSingle
     Friend WithEvents lblFactorVariable As Label
     Friend WithEvents ucrSelectFactor As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents rdoScatterplotMatrix As RadioButton
+    Friend WithEvents rdoCorrelationPlot As RadioButton
+    Friend WithEvents rdoPairwisePlot As RadioButton
+    Friend WithEvents rdoNone As RadioButton
+    Friend WithEvents grpGraphs As GroupBox
+
+    Private Sub chkMatrixOrPlots(sender As Object, e As EventArgs) Handles chkCorrelationMatrix.CheckedChanged
+
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs)
+
+    End Sub
 End Class
