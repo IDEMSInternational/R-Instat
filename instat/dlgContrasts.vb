@@ -85,7 +85,6 @@ Public Class dlgContrasts
             grdCurrSheet.Reset()
             ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
-        SelectContrast()
         TestOKEnabled()
     End Sub
 
@@ -100,6 +99,7 @@ Public Class dlgContrasts
         Else
             ucrBase.clsRsyntax.RemoveParameter("new_contrasts")
         End If
+        IsEmptyCells()
         TestOKEnabled()
     End Sub
 
@@ -201,7 +201,7 @@ Public Class dlgContrasts
         End If
     End Sub
 
-    Private Sub grdCurrSheet_CellKeyUp(sender As Object, e As EventArgs) Handles grdCurrSheet.CellKeyUp, grdCurrSheet.CellMouseUp
+    Private Sub grdCurrSheet_CellKeyUp(sender As Object, e As EventArgs) Handles grdCurrSheet.CellDataChanged
         SetMatrixFunction()
         TestOKEnabled()
     End Sub
