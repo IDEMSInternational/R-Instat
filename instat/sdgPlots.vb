@@ -69,7 +69,7 @@ Public Class sdgPlots
         rdoLegendTitleAuto.Checked = True
         LegendDefaults()
         bLayersDefaultIsGlobal = False
-        nudNoOfRowsOrColumns.Value = 1
+
     End Sub
 
     Private Sub TitleDefaults()
@@ -92,6 +92,7 @@ Public Class sdgPlots
         'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
+        nudNoOfRowsOrColumns.Minimum = 1
 
         'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
         'Also carry the RSyntax through to these ucr's .
@@ -139,7 +140,7 @@ Public Class sdgPlots
             rdoVertical.Visible = True
             chkNoOfRowsOrColumns.Checked = False
             nudNoOfRowsOrColumns.Visible = True
-            nudNoOfRowsOrColumns.Value = 0
+            nudNoOfRowsOrColumns.Value = 1
             chkMargin.Checked = False
             chkFreeScalesX.Checked = False
             chkFreeScalesY.Checked = False
