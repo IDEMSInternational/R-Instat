@@ -1312,9 +1312,9 @@ Public Class frmMain
         'TEST temporary 
         'TESTING TO BE ERASED !!!!!!!
         Dim clsTestStargizer As New RFunction
-        clsTestStargizer.SetRCommand("stargazer")
+        clsTestStargizer.SetRCommand("stargazer::stargazer")
         clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
-        clsTestStargizer.AddParameter("Type", Chr(34) & "html" & Chr(34))
+        clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
         clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
     End Sub
 End Class

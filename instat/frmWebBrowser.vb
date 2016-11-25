@@ -15,7 +15,7 @@ Public Class frmWebBrowser
     End Sub
 
     Private Sub Initialise()
-        'wbOutput.ObjectForScripting = Me
+        'Warning, need to initialise this webbrowser with some file, url or something... That's the reason for which it is not printing anything ...
         'https://msdn.microsoft.com/en-us/library/system.windows.forms.webbrowser.objectforscripting(v=vs.110).aspx
         'Dim appPath As String
         'appPath = Application.StartupPath
