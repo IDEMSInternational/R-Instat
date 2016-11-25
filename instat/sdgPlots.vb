@@ -69,6 +69,7 @@ Public Class sdgPlots
         rdoLegendTitleAuto.Checked = True
         LegendDefaults()
         bLayersDefaultIsGlobal = False
+        nudNoOfRowsOrColumns.Value = 1
     End Sub
 
     Private Sub TitleDefaults()
@@ -244,7 +245,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub SetFixRowColumnParameter()
-        If chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
+        If chkNoOfRowsOrColumns.Checked Then
             If rdoHorizontal.Checked Then
                 clsRFacetFunction.AddParameter("nrow", nudNoOfRowsOrColumns.Value)
                 clsRFacetFunction.RemoveParameterByName("ncol")
