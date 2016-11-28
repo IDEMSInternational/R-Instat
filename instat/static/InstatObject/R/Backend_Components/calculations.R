@@ -255,9 +255,6 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
           curr_calc_links <- self$get_keys(curr_calc_from)
         }
         by <- NULL
-        # print(overall_links)
-        # print("***")
-        # print(curr_calc_links)
         for(temp_overall_link in overall_links) {
           for(temp_curr_link in curr_calc_links) {
             equ_curr_cols <- self$get_equivalent_columns(overall_calc_from, temp_overall_link, curr_calc_from)
@@ -457,7 +454,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   # If argument was missing and there were no manipulations or sub_calculations then it should be created.
   if(missing(curr_data_list)) {
     if(length(data_names) == 0) stop("No data specified for calculation.")
-    else if(length(data_names) > 1) stop("Calculations from multiple data frame not yet implemented")
+    #else if(length(data_names) > 1) stop("Calculations from multiple data frame not yet implemented")
     else {
       curr_data_list <- list()
       #TODO Add current filter as manipulation in calc definition if needed.
@@ -480,19 +477,54 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   for(i in seq_along(calc$calculated_from)) {
     col_name <- calc$calculated_from[[i]]
     data_frame_name <- names(calc$calculated_from)[i]
+    overall_calc_from <- curr_data_list[[c_link_label]][["from_data_frame"]]
+    # TODO Is this a good check?
     if(!(col_name %in% names(curr_data_list[[c_data_label]]))) {
-      # if summary then do by by columns, using the link if exists
-      # otherwise, if there is a link, do by linking columns
-      # otherwise, try to merge naturally
-      by = c()
-      if(length(curr_data_list[[c_link_label]][["link_cols"]]) > 0) {
-        by <- self$get_corresponding_link_columns(curr_data_list[[c_link_label]][["from_data_frame"]], curr_data_list[[c_link_label]][["link_cols"]], data_frame_name)
+      if(curr_data_list[[c_has_summary_label]]) {
+        overall_links <- list()
+        overall_links[[1]] <- curr_data_list[[c_link_label]][["link_cols"]]
       }
-      # If not a summary then look for link
+      # Otherwise, there must be existing keys defined in the data frame
       else {
-        by <- self$get_link_columns_from_data_frames(curr_data_list[[c_link_label]][["from_data_frame"]], names(curr_data_list[[c_data_label]]), data_frame_name, self$get_column_names(data_frame_name))
+        if(!self$has_key(overall_calc_from))  stop("Cannot merge calculated_from columns into exisiting data as there is no key defined in ", curr_data_list[[c_link_label]][["from_data_frame"]])
+        overall_links <- self$get_keys(overall_calc_from)
       }
-      curr_data_list[[c_data_label]] <- suppressMessages(full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by))
+      if(!self$has_key(data_frame_name))  stop("Cannot merge calculated_from columns into exisiting data as there is no key defined in ", data_frame_name)
+      new_data_links <- self$get_keys(data_frame_name)
+      #TODO Make this it's own method?
+      by <- NULL
+      for(temp_overall_link in overall_links) {
+        for(temp_curr_link in new_data_links) {
+          equ_curr_cols <- self$get_equivalent_columns(overall_calc_from, temp_overall_link, data_frame_name)
+          if(length(equ_curr_cols) > 0 && all(equ_curr_cols %in% temp_curr_link)) {
+            by <- temp_overall_link
+            names(by) <- equ_curr_cols
+            join_into_overall <- FALSE
+            break
+          }
+          equ_overall_cols <- self$get_equivalent_columns(data_frame_name, temp_curr_link, overall_calc_from)
+          if(length(equ_overall_cols) > 0 && all(equ_overall_cols %in% temp_overall_link)) {
+            by <- temp_curr_link
+            names(by) <- equ_overall_cols
+            join_into_overall <- TRUE
+            break
+          }
+          
+        }
+        if(length(by) > 0) break
+      }
+      if(length(by) == 0) stop("Cannot find linking columns to merge output from sub calculations with data for calculated_from.")
+      if(join_into_overall) curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
+      else curr_data_list[[c_data_label]] <- full_join(self$get_data_frame(data_frame_name, use_current_filter = FALSE), curr_data_list[[c_data_label]], by = by)
+      # by = c()
+      # if(length(curr_data_list[[c_link_label]][["link_cols"]]) > 0) {
+      #   by <- self$get_corresponding_link_columns(curr_data_list[[c_link_label]][["from_data_frame"]], curr_data_list[[c_link_label]][["link_cols"]], data_frame_name)
+      # }
+      # # If not a summary then look for link
+      # else {
+      #   by <- self$get_link_columns_from_data_frames(curr_data_list[[c_link_label]][["from_data_frame"]], names(curr_data_list[[c_data_label]]), data_frame_name, self$get_column_names(data_frame_name))
+      # }
+      # curr_data_list[[c_data_label]] <- suppressMessages(full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by))
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
     col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
