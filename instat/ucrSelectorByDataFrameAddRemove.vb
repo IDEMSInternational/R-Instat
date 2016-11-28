@@ -16,5 +16,13 @@
     Public Overrides Sub SetVariablesEnabled(bEnable As Boolean)
         MyBase.SetVariablesEnabled(bEnable)
         btnAdd.Enabled = bEnable
+        btnDataOptions.Enabled = bEnable
     End Sub
+
+    Public Overrides Sub SetVariablesVisible(bVisible As Boolean)
+        MyBase.SetVariablesVisible(bVisible)
+        btnAdd.Visible = bVisible
+        btnDataOptions.Visible = bVisible
+    End Sub
+
 End Class
