@@ -159,6 +159,34 @@ Public Class ucrGeom
         'clsgeom_abline.AddLayerParameter("intercept", "numeric", "0")
         'clsgeom_abline.AddLayerParameter("xxxxxxxx", "numeric", "0")
         'lstAllGeoms.Add(clsgeom_abline)
+        clsgeom_abline.SetGeomName("geom_abline") 'Warning: this geom never inherits global aesthetics ! It also doesn't affect the x and y scales. Can specify yintercept either with aes, or with parameter (second one overwrites). If want to vary with facets, need to mention as aes.
+        'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
+        'Task: untick and disable IgnoreGlobalAes and ApplyOnAllLayers for this geom.
+        'Task: add warning message to user...
+        'Adding aesthetics parametters
+        'Mandatory Aesthetics
+        clsgeom_abline.AddAesParameter("slope", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_abline.AddAesParameter("intercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True) '(required) intercept with the y axis of the line (the "b" in "y=ax+b") 
+        'Warning/to be discussed: when these are set as parameters, they are not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
+        'Optional aesthetics
+        clsgeom_abline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_abline.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_abline.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_abline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_hline parameters
+        clsgeom_abline.AddLayerParameter("slope", "numeric", "0") 'Parameters that control the position of the line. If these are set, data, mapping and show.legend are overridden
+        clsgeom_abline.AddLayerParameter("intercept", "numeric", "0")
+        'Task: add warning message to user...
+        'Global Layer parameters
+        clsgeom_abline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_abline.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_abline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_abline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_abline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
+        lstAllGeoms.Add(clsgeom_hline)
 
         'clsgeom_area.SetGeomName("geom_area")
         ''mandatory aesthetics 
@@ -202,7 +230,7 @@ Public Class ucrGeom
         clsgeom_bar.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
         'Global Layer parameters
         clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_bar.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_bar.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'See global comments about position.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
@@ -265,7 +293,7 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
 
         'Global Layer parameters
-        clsgeom_boxplot.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_boxplot.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Warning: when x is continuous, position_dodge requires non-overlapping x intervals (would still work if not respected but sends a warning message).
         clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
         'clsgeom_boxplot.AddLayerParameter("stat", "list", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34), Chr(34) & "identity" & Chr(34)})
@@ -380,7 +408,7 @@ Public Class ucrGeom
 
         'Global Layer parameters
         'clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
-        clsgeom_density.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34)})
         'Warning: "Stacked density plots: if you want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
         'Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
@@ -469,7 +497,7 @@ Public Class ucrGeom
         'Warning/question: as bins with zero counts have zero dots, what is meant by remove ? Can't see any difference on the graphs when changing drop.
         'Global Layer parameters
         'Warning: stat is not a parameter of geom_dotplot. Anyway the stat that is used is "bindot".
-        clsgeom_dotplot.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_dotplot.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_dotplot.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
 
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
@@ -536,7 +564,7 @@ Public Class ucrGeom
         clsgeom_freqpoly.AddLayerParameter("closed", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34)})      'One of "right" Or "left" indicating whether right Or left edges of bins are included in the bin.
         clsgeom_freqpoly.AddLayerParameter("pad", "boolean", "FALSE") 'If True Then, adds empty bins at either End Of x. This ensures frequency polygons touch 0. Defaults To False.
         'Global Layer parameters
-        clsgeom_freqpoly.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_freqpoly.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_freqpoly.AddLayerParameter("stat", "list", Chr(34) & "bin" & Chr(34), lstParameterStrings:={Chr(34) & "bin" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34)}) 'Note, count and identity simply give the same results as with geom_line.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
@@ -561,7 +589,34 @@ Public Class ucrGeom
         'clsgeom_hex.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_hex)
 
-        clsgeom_histogram.strGeomName = "geom_histogram"
+        clsgeom_hline.SetGeomName("geom_hline") 'Warning: this geom never inherits global aesthetics ! It also doesn't affect the x and y scales. Can specify yintercept either with aes, or with parameter (second one overwrites). If want to vary with facets, need to mention as aes.
+        'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
+        'Task: untick and disable IgnoreGlobalAes and ApplyOnAllLayers for this geom.
+        'Task: add warning message to user...
+        'Adding aesthetics parametters
+        'Mandatory Aesthetics
+        clsgeom_hline.AddAesParameter("yintercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        'Warning/to be discussed: when this is set as parameter, it is not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
+        'Optional aesthetics
+        clsgeom_hline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_hline.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_hline.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_hline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_hline parameters
+        clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0") 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
+        'Task: add warning message to user...
+        'Global Layer parameters
+        clsgeom_hline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_hline.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_hline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_hline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_hline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
+        lstAllGeoms.Add(clsgeom_hline)
+
+        clsgeom_histogram.SetGeomName("geom_histogram")
         'Adding aesthetics parametters
         'Mandatory Aesthetics
         clsgeom_histogram.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
@@ -586,7 +641,7 @@ Public Class ucrGeom
         clsgeom_histogram.AddLayerParameter("pad", "boolean", "FALSE") 'If True Then, adds empty bins at either End Of x. This ensures frequency polygons touch 0. Defaults To False.
 
         'Global Layer parameters
-        clsgeom_histogram.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_histogram.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_histogram.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
 
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
@@ -598,19 +653,7 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_histogram)
 
 
-        'clsgeom_hline.strGeomName = "geom_hline"
-        'clsgeom_hline.AddAesParameter("alpha")
-        'clsgeom_hline.AddAesParameter("colour")
-        'clsgeom_hline.AddAesParameter("linetype")
-        'clsgeom_hline.AddAesParameter("size")
-        ''aesthetics that control position of line include
-        ''geom_vline:xintercept
-        ''geom_hline:yintercept
-        ''geom_abline: slope and intercept
-        ''TO DO Discuss how to use these
-        ''add layer parameter
-        'clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0")
-        'lstAllGeoms.Add(clsgeom_hline)
+
 
         'clsgeom_jitter.strGeomName = "geom_jitter"
         ''mandatory
@@ -645,7 +688,7 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_label)
 
 
-        clsgeom_line.strGeomName = "geom_line"
+        clsgeom_line.SetGeomName("geom_line")
         'x and y are mandatory, but these are autofilled by "" when no variable is mapped. "Partially mandatory"
         clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_line.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
@@ -660,7 +703,7 @@ Public Class ucrGeom
         'Global Layer parameters
         clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_line.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)})
-        clsgeom_line.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_line.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_line.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
         clsgeom_line.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
@@ -718,31 +761,31 @@ Public Class ucrGeom
         'clsgeom_path.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_path)
 
-        clsgeom_point.strGeomName = "geom_point"
+        clsgeom_point.SetGeomName("geom_point")
         'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=True in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
         clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
         'optional
         clsgeom_point.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
-        clsgeom_point.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
         clsgeom_point.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_point.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
         'Adding layer parameters
         'Geom_poitn Parameters
 
         'Global Layer parameters
         clsgeom_point.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_point.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
-        clsgeom_point.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_point.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_point.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
-        clsgeom_point.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
-        clsgeom_point.AddLayerParameter("stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Use the stroke aes to change the width of the outline of the shapes. When no outline stroke overrides size. 'Warning: sometimes negative values give errors...
         clsgeom_point.AddLayerParameter("shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Note: 16 and 19 seem to have exact same behaviour.
         clsgeom_point.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_point.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
+        clsgeom_point.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
+        clsgeom_point.AddLayerParameter("stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Use the stroke aes to change the width of the outline of the shapes. When no outline stroke overrides size. 'Warning: sometimes negative values give errors...
+        clsgeom_point.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
 
         lstAllGeoms.Add(clsgeom_point)
 
@@ -851,7 +894,7 @@ Public Class ucrGeom
         'clsgeom_ribbon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_ribbon)
 
-        clsgeom_rug.strGeomName = "geom_rug"
+        clsgeom_rug.SetGeomName("geom_rug")
         clsgeom_rug.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_rug.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
         'These two are not made mendatory as we want to be able to choose only one, and could be either.
@@ -866,7 +909,7 @@ Public Class ucrGeom
         'Global Layer parameters
         clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_rug.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
-        clsgeom_rug.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_rug.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_rug.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
         clsgeom_rug.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
@@ -996,15 +1039,32 @@ Public Class ucrGeom
         'clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34))
         'lstAllGeoms.Add(clsgeom_violin)
 
-        'clsgeom_vline.strGeomName = "geom_vline"
-        'clsgeom_vline.AddAesParameter("alpha")
-        'clsgeom_vline.AddAesParameter("colour")
-        'clsgeom_vline.AddAesParameter("linetype")
-        'clsgeom_vline.AddAesParameter("size")
-        ''TO DO  include those that control position
-        ''add layer parameter
-        'clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0")
-        'lstAllGeoms.Add(clsgeom_vline)
+        clsgeom_vline.SetGeomName("geom_vline") 'Warning: this geom never inherits global aesthetics ! It also doesn't affect the x and y scales. Can specify yintercept either with aes, or with parameter (second one overwrites). If want to vary with facets, need to mention as aes.
+        'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
+        'Task: untick and disable IgnoreGlobalAes and ApplyOnAllLayers for this geom.
+        'Task: add warning message to user...
+        'Adding aesthetics parametters
+        'Mandatory Aesthetics
+        clsgeom_vline.AddAesParameter("xintercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        'Warning/to be discussed: when this is set as parameter, it is not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
+        'Optional aesthetics
+        clsgeom_vline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_vline.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_vline.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_vline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_hline parameters
+        clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0") 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
+        'Task: add warning message to user...
+        'Global Layer parameters
+        clsgeom_vline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_vline.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_vline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_vline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_vline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
+        lstAllGeoms.Add(clsgeom_hline)
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
     Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
