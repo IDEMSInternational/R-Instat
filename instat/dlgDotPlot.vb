@@ -86,7 +86,7 @@ Public Class dlgDotPlot
         SetBinAxisAes() 'TestOk is done within this sub.
     End Sub
 
-    Private Sub rdoBinAxis_CheckedChanged(sender As Object, e As EventArgs) Handles rdoXBinAxis.CheckedChanged
+    Private Sub rdoBinAxis_CheckedChanged(sender As Object, e As EventArgs) Handles rdoXBinAxis.CheckedChanged, rdoYBinAxis.CheckedChanged
         'This sub changes the choice of bin axis.
         If rdoYBinAxis.Checked Then
             strBinAxis = "y"
