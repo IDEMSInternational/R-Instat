@@ -190,7 +190,8 @@ instat_object$set("public", "get_possible_linked_to_defintion", function(from_da
 )
 
 instat_object$set("public", "get_equivalent_columns", function(from_data_name, columns, to_data_name) {
-  equivalent_columns <- self$link_between_containing(from_data_name, columns, to_data_name)
+  if(from_data_name == to_data_name) equivalent_columns <- columns
+  else equivalent_columns <- self$link_between_containing(from_data_name, columns, to_data_name)
   if(length(equivalent_columns) != 0) return(equivalent_columns)
   else {
     prev_data_links <- list(list(from_data_name, columns))
@@ -201,6 +202,7 @@ instat_object$set("public", "get_equivalent_columns", function(from_data_name, c
       for(temp_data_name in self$get_data_names()) {
         i = 1
         for(curr_from_data_frame in curr_data_names) {
+          if(curr_from_data_frame == temp_data_name) curr_link_cols <- curr_data_links[[i]][[2]]
           curr_link_cols <- self$link_between_containing(curr_from_data_frame, curr_data_links[[i]][[2]], temp_data_name)
           if(length(curr_link_cols) != 0) {
             if(temp_data_name == to_data_name) {

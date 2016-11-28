@@ -255,20 +255,23 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
           curr_calc_links <- self$get_keys(curr_calc_from)
         }
         by <- NULL
+        # print(overall_links)
+        # print("***")
+        # print(curr_calc_links)
         for(temp_overall_link in overall_links) {
           for(temp_curr_link in curr_calc_links) {
             equ_curr_cols <- self$get_equivalent_columns(overall_calc_from, temp_overall_link, curr_calc_from)
             if(length(equ_curr_cols) > 0 && all(equ_curr_cols %in% temp_curr_link)) {
-              # Need to decide order of this
               by <- temp_overall_link
               names(by) <- equ_curr_cols
+              join_into_overall <- FALSE
               break
             }
             equ_overall_cols <- self$get_equivalent_columns(curr_calc_from, temp_curr_link, overall_calc_from)
             if(length(equ_overall_cols) > 0 && all(equ_overall_cols %in% temp_overall_link)) {
-              # Need to decide order of this
               by <- temp_curr_link
               names(by) <- equ_overall_cols
+              join_into_overall <- TRUE
               break
             }
             
@@ -277,139 +280,174 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
         }
         if(length(by) == 0) stop("Cannot find linking columns to merge output from sub calculations.")
         
-        #TODO How to tell which one is at higher/lower level?
-        #     Use length of data? Could be problem if used filter
-      }
-      # If either sub calculation is a summary of their original data frames
-      if(overall_has_summary || current_calc_has_summary) {
-        # If either has no linking columns then at least one of the outputs is a single value
-        # This case is done separately as a join cannot be done, instead add columns
-        # Else, at least one calc is a summary with linking columns
-        # and this can be done by a join.
-        # else {
-        # }
-        if(overall_has_summary && current_calc_has_summary) {
-          
-        }
-        #TODO What if summary was done but no linking columns?
-        if(length(curr_calc_link_cols) > 0 || length(overall_calc_link_cols) > 0) {
-          # If either list has linking columns then a summary has been done so joining column(s) should be available to perform a merge
-          # We join into the "biggest" data frame
-          if(length(curr_calc_link_cols) == 0) {
-            #In this case, the current sub_calculation has unsummarised data so it should be the first data frame of the merge
-            by <- self$get_corresponding_link_columns(sub_calc_results[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, curr_sub_calc[[c_link_label]][["from_data_frame"]])
-            new_by <- names(by)
-            names(new_by) <- by
-            sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], 
-                                                        by = new_by)
-            # The join produces unsummarised data so the link should be updated to now have no linking columns
-            sub_calc_results[[c_link_label]] <- curr_sub_calc[[c_link_label]]
+        # If the data frames are the same and filters have been used then need to subset before the join
+        # so that we don't get duplicate columns
+        joined <- FALSE
+        if(curr_calc_from == overall_calc_from) {
+          if(overall_has_filter && current_calc_has_filter) {
+            # If both sub calcs have filter then the order of the rows in the output may not be sensible
+            # if filters are different but this case should be rare
+            # To avoid possibly losing data by subsetting columns we don't subset here and instead add to by columns
+            additional_cols <- intersect(names(sub_calc_results[[c_data_label]]), names(curr_sub_calc[[c_data_label]]))
+            additional_cols <- additional_cols[!additional_cols %in% by]
+            if(length(additional_cols) > 0) by <- c(by, additional_cols)
+            sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
+            joined <- TRUE
           }
-          else if(length(overall_calc_link_cols) == 0) {
-            # In this case, the overall output has unsummarised data and the current calculation has summaried data,
-            # so we merge the summarised data into the unsummarised data
-            by <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
-            new_by <- names(by)
-            names(new_by) <- by
-            sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], 
-                                                        by = new_by)
-            # The merge produces unsummarised data, so the link is unchanged.
+          else if(overall_has_filter) {
+            # If the overall data has a filter and current does not, then we should merge the overall into the current
+            # We subset the current data to only have by and the output columns so that merge doesn't produce duplicate columns
+            # Overall sub data should be full data so we don't lose any data by subsetting the current sub calc
+            sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], sub_calc_results[[c_data_label]], by = by)
+            # Current data has no filter so output now does not
+            sub_calc_results[[c_has_filter_label]] <- FALSE
+            joined <- TRUE
           }
-          else {
-            # When both contain summairsed data we merge into the "biggest" data frame i.e. one with fewest linking columns
-            # The joining columns are the intersection of two sets of linking columns
-            # Which list's columns is contained in the other list, determines which data frame should come first in the merge 
-            # needs to change to get corresponding columns and check lists
-            by_curr <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], curr_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
-            by_overall <- self$get_corresponding_link_columns(sub_calc_results[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, curr_sub_calc[[c_link_label]][["from_data_frame"]])
-            if(all(by_overall %in% names(by_curr))) {
-              intersect_curr <- intersect(by_curr, names(by_overall))
-              by <- by_curr[by_curr %in% intersect_curr]
-              sub_calc_results[[c_link_label]] <- curr_sub_calc[[c_link_label]]
-              sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
-            }
-            else if(all(by_curr %in% names(by_overall))) {
-              intersect_overall <- intersect(by_overall, names(by_curr))
-              by <- by_curr[by_overall %in% intersect_overall]
-              
-              sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], by = by)
-            }
-            # If one set is not a subset of the other, then they do not contain any common linking columns and a merge is impossible
-            # No sensible calculation should require such a case.
-            else stop("sub calculations cannot have disjoint linking columns")
+          else if(current_calc_has_filter) {
+            # If the current data has a filter and overall does not, then we should merge the current into the overall
+            # We subset the current data to only have by and output columns so that merge doesn't produce duplicate columns
+            # Overall sub data should be full data so we don't lose any data by subsetting the current sub calc
+            sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], by = by)
+            # Overall data has no filter so output does even though current does
+            joined <- TRUE
           }
         }
-        else {
-          #TODO below is not true! There could be a summary by no factors. So a merge required from summary but no linking columns
-          # If a merge is required but there are no linking columns in either data frame, then, the merge was not required by a summary
-          # so it was required by a filter
-          # To be able to join data that has been filtered, there must be a key (unique identifier) defined in the data frame
-          # so that rows can property be matched from the merged data
-          # This is now also done through links because key => link to self
-          if(self$has_key(sub_calc_results[[c_link_label]][["from_data_frame"]])) {
-            # keys_list <- self$get_keys(sub_calc_results[[c_link_label]][["from_data_frame"]])
-            # joined <- FALSE
-            # Look at each key already defined and if both data frames contain the columns of the key then the merge can be performed 
-            #TODO replace this by general method to find link between two data frame (could be the same data frames)
-            #     same method as used further down in joining different data frames
-            #     will work when adding a key, also adds a link to itself
-            # for(curr_key in keys_list) {
-            #   if(all(curr_key %in% names(sub_calc_results[[c_data_label]])) && all(curr_key %in% names(curr_sub_calc[[c_data_label]]))) {
-                
-                # Whichever data frame required the merge should be the second data frame in the merge
-                # (output is the same in both cases but this should give a more sensible order on the rows in the output)
-                # Note: if both require a merge then the order of the rows in the output may not be sensible, but this case should be rare
-                #       as would require two different filters to be applied to make the row order strange
-            by <- self$get_link_columns_from_data_frames(curr_sub_calc[[c_link_label]][["from_data_frame"]], names(curr_sub_calc[[c_data_label]]), sub_calc_results[[c_link_label]][["from_data_frame"]], names(sub_calc_results[[c_data_label]]))
-            if(length(by) == 0) {
-              #TODO Should this be attempted or just stop here?
-              warning("Could not find a key to join by, Attempting to merge by all columns with the same name. The output may be incorrect.")
-              suppressMessages(sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]]))
-            }
-            else if(overall_merge_required && current_calc_merge_required) {
-              # This should be a rare case where two (possibly different) filters have been used in different subcalculations
-              # To avoid possibly losing data by subsetting columns we don't subset here and instead add to by columns
-              additional_cols <- intersect(names(sub_calc_results[[c_data_label]]), names(curr_sub_calc[[c_data_label]]))
-              additional_cols <- additional_cols[!additional_cols %in% by]
-              if(length(additional_cols) > 0) by <- c(by, additional_cols)
-              sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
-              joined <- TRUE
-            }
-            else if(overall_merge_required) {
-              # Here we can subset the current data to only have by and output columns so that merge doesn't produce duplicate columns
-              # Overall sub data should be full data so we don't lose any data by subsetting the current sub calc
-              sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], sub_calc_results[[c_data_label]], by = by)
-              joined <- TRUE
-            }
-            else if(current_calc_merge_required) {
-              # Same as above case by with current and overall switched
-              new_by <- names(by)
-              names(new_by) <- by
-              sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], by = new_by)
-              joined <- TRUE
-            }
-            #break
-            #   }
-            # }
-            # If no keys are in both data frames then impossible to join sensibly
-            #if(!joined) stop("Could not find a key to join by, which appeared in output from all sub calculations.")
-          }
-          # If no keys are defined then impossible to join sensibly
-          else {
-            stop("Cannot merge output from sub calculations because data frame does not have any defined keys.")
-          }
+        if(!joined) {
+          if(join_into_overall) sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], by = by)
+          else sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
         }
-      }
-      else {
-        # TODO Is this still true?
-        # If merge is not required then calculation output can just be added to the data as a new column
-        # If this will replace a column then a warning is given.
-        # Duplicate names should be dealt with internally before applying the calculation unless a replacement is desired.
-        if(sub_calc$result_name %in% names(sub_calc_results[[c_data_label]])) warning(sub_calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
-        sub_calc_results[[c_data_label]][[sub_calc$result_name]] <- curr_sub_calc[[c_data_label]][[sub_calc$result_name]]
       }
     }
   }
+      # # If either sub calculation is a summary of their original data frames
+      # if(overall_has_summary || current_calc_has_summary) {
+      #   # If either has no linking columns then at least one of the outputs is a single value
+      #   # This case is done separately as a join cannot be done, instead add columns
+      #   # Else, at least one calc is a summary with linking columns
+      #   # and this can be done by a join.
+      #   # else {
+      #   # }
+      #   if(overall_has_summary && current_calc_has_summary) {
+      #     
+      #   }
+      #   #TODO What if summary was done but no linking columns?
+      #   if(length(curr_calc_link_cols) > 0 || length(overall_calc_link_cols) > 0) {
+      #     # If either list has linking columns then a summary has been done so joining column(s) should be available to perform a merge
+      #     # We join into the "biggest" data frame
+      #     if(length(curr_calc_link_cols) == 0) {
+      #       #In this case, the current sub_calculation has unsummarised data so it should be the first data frame of the merge
+      #       by <- self$get_corresponding_link_columns(sub_calc_results[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, curr_sub_calc[[c_link_label]][["from_data_frame"]])
+      #       new_by <- names(by)
+      #       names(new_by) <- by
+      #       sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], 
+      #                                                   by = new_by)
+      #       # The join produces unsummarised data so the link should be updated to now have no linking columns
+      #       sub_calc_results[[c_link_label]] <- curr_sub_calc[[c_link_label]]
+      #     }
+      #     else if(length(overall_calc_link_cols) == 0) {
+      #       # In this case, the overall output has unsummarised data and the current calculation has summaried data,
+      #       # so we merge the summarised data into the unsummarised data
+      #       by <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
+      #       new_by <- names(by)
+      #       names(new_by) <- by
+      #       sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], 
+      #                                                   by = new_by)
+      #       # The merge produces unsummarised data, so the link is unchanged.
+      #     }
+      #     else {
+      #       # When both contain summairsed data we merge into the "biggest" data frame i.e. one with fewest linking columns
+      #       # The joining columns are the intersection of two sets of linking columns
+      #       # Which list's columns is contained in the other list, determines which data frame should come first in the merge 
+      #       # needs to change to get corresponding columns and check lists
+      #       by_curr <- self$get_corresponding_link_columns(curr_sub_calc[[c_link_label]][["from_data_frame"]], curr_calc_link_cols, sub_calc_results[[c_link_label]][["from_data_frame"]])
+      #       by_overall <- self$get_corresponding_link_columns(sub_calc_results[[c_link_label]][["from_data_frame"]], overall_calc_link_cols, curr_sub_calc[[c_link_label]][["from_data_frame"]])
+      #       if(all(by_overall %in% names(by_curr))) {
+      #         intersect_curr <- intersect(by_curr, names(by_overall))
+      #         by <- by_curr[by_curr %in% intersect_curr]
+      #         sub_calc_results[[c_link_label]] <- curr_sub_calc[[c_link_label]]
+      #         sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
+      #       }
+      #       else if(all(by_curr %in% names(by_overall))) {
+      #         intersect_overall <- intersect(by_overall, names(by_curr))
+      #         by <- by_curr[by_overall %in% intersect_overall]
+      #         
+      #         sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], by = by)
+      #       }
+      #       # If one set is not a subset of the other, then they do not contain any common linking columns and a merge is impossible
+      #       # No sensible calculation should require such a case.
+      #       else stop("sub calculations cannot have disjoint linking columns")
+      #     }
+      #   }
+      #   else {
+      #     #TODO below is not true! There could be a summary by no factors. So a merge required from summary but no linking columns
+      #     # If a merge is required but there are no linking columns in either data frame, then, the merge was not required by a summary
+      #     # so it was required by a filter
+      #     # To be able to join data that has been filtered, there must be a key (unique identifier) defined in the data frame
+      #     # so that rows can property be matched from the merged data
+      #     # This is now also done through links because key => link to self
+      #     if(self$has_key(sub_calc_results[[c_link_label]][["from_data_frame"]])) {
+      #       # keys_list <- self$get_keys(sub_calc_results[[c_link_label]][["from_data_frame"]])
+      #       # joined <- FALSE
+      #       # Look at each key already defined and if both data frames contain the columns of the key then the merge can be performed 
+      #       #TODO replace this by general method to find link between two data frame (could be the same data frames)
+      #       #     same method as used further down in joining different data frames
+      #       #     will work when adding a key, also adds a link to itself
+      #       # for(curr_key in keys_list) {
+      #       #   if(all(curr_key %in% names(sub_calc_results[[c_data_label]])) && all(curr_key %in% names(curr_sub_calc[[c_data_label]]))) {
+      #           
+      #           # Whichever data frame required the merge should be the second data frame in the merge
+      #           # (output is the same in both cases but this should give a more sensible order on the rows in the output)
+      #           # Note: if both require a merge then the order of the rows in the output may not be sensible, but this case should be rare
+      #           #       as would require two different filters to be applied to make the row order strange
+      #       by <- self$get_link_columns_from_data_frames(curr_sub_calc[[c_link_label]][["from_data_frame"]], names(curr_sub_calc[[c_data_label]]), sub_calc_results[[c_link_label]][["from_data_frame"]], names(sub_calc_results[[c_data_label]]))
+      #       if(length(by) == 0) {
+      #         #TODO Should this be attempted or just stop here?
+      #         warning("Could not find a key to join by, Attempting to merge by all columns with the same name. The output may be incorrect.")
+      #         suppressMessages(sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]]))
+      #       }
+      #       else if(overall_merge_required && current_calc_merge_required) {
+      #         # This should be a rare case where two (possibly different) filters have been used in different subcalculations
+      #         # To avoid possibly losing data by subsetting columns we don't subset here and instead add to by columns
+      #         additional_cols <- intersect(names(sub_calc_results[[c_data_label]]), names(curr_sub_calc[[c_data_label]]))
+      #         additional_cols <- additional_cols[!additional_cols %in% by]
+      #         if(length(additional_cols) > 0) by <- c(by, additional_cols)
+      #         sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
+      #         joined <- TRUE
+      #       }
+      #       else if(overall_merge_required) {
+      #         # Here we can subset the current data to only have by and output columns so that merge doesn't produce duplicate columns
+      #         # Overall sub data should be full data so we don't lose any data by subsetting the current sub calc
+      #         sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], sub_calc_results[[c_data_label]], by = by)
+      #         joined <- TRUE
+      #       }
+      #       else if(current_calc_merge_required) {
+      #         # Same as above case by with current and overall switched
+      #         new_by <- names(by)
+      #         names(new_by) <- by
+      #         sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], by = new_by)
+      #         joined <- TRUE
+      #       }
+      #       #break
+      #       #   }
+      #       # }
+      #       # If no keys are in both data frames then impossible to join sensibly
+      #       #if(!joined) stop("Could not find a key to join by, which appeared in output from all sub calculations.")
+      #     }
+      #     # If no keys are defined then impossible to join sensibly
+      #     else {
+      #       stop("Cannot merge output from sub calculations because data frame does not have any defined keys.")
+      #     }
+      #   }
+      # }
+      # else {
+      #   # TODO Is this still true?
+      #   # If merge is not required then calculation output can just be added to the data as a new column
+      #   # If this will replace a column then a warning is given.
+      #   # Duplicate names should be dealt with internally before applying the calculation unless a replacement is desired.
+      #   if(sub_calc$result_name %in% names(sub_calc_results[[c_data_label]])) warning(sub_calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
+      #   sub_calc_results[[c_data_label]][[sub_calc$result_name]] <- curr_sub_calc[[c_data_label]][[sub_calc$result_name]]
+      # }
+      
   # If there were any sub_calculations then the input for the main calculation should be the output from the last sub_calculation
   # Otherwise it is the output from the mainipulations
   if(!first_sub_calc) curr_data_list <- sub_calc_results
