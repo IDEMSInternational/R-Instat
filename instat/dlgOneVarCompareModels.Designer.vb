@@ -34,7 +34,7 @@ Partial Class dlgOneVarCompareModels
         Me.ucrBase.Location = New System.Drawing.Point(10, 204)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 4
         '
         'UcrReceiver
         '
@@ -43,7 +43,7 @@ Partial Class dlgOneVarCompareModels
         Me.UcrReceiver.Name = "UcrReceiver"
         Me.UcrReceiver.Selector = Nothing
         Me.UcrReceiver.Size = New System.Drawing.Size(120, 100)
-        Me.UcrReceiver.TabIndex = 1
+        Me.UcrReceiver.TabIndex = 2
         '
         'ucrSelectorOneVarCompModels
         '
@@ -53,7 +53,7 @@ Partial Class dlgOneVarCompareModels
         Me.ucrSelectorOneVarCompModels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarCompModels.Name = "ucrSelectorOneVarCompModels"
         Me.ucrSelectorOneVarCompModels.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorOneVarCompModels.TabIndex = 2
+        Me.ucrSelectorOneVarCompModels.TabIndex = 0
         '
         'cmdDisplayObjects
         '
@@ -70,7 +70,7 @@ Partial Class dlgOneVarCompareModels
         Me.lblReceiver.Location = New System.Drawing.Point(250, 44)
         Me.lblReceiver.Name = "lblReceiver"
         Me.lblReceiver.Size = New System.Drawing.Size(97, 13)
-        Me.lblReceiver.TabIndex = 4
+        Me.lblReceiver.TabIndex = 1
         Me.lblReceiver.Text = "Selected Object(s):"
         '
         'dlgOneVarCompareModels
