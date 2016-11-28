@@ -32,9 +32,10 @@ Partial Class dlgDotPlot
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrOtherAxisReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoXBinAxis = New System.Windows.Forms.RadioButton()
+        Me.grpBinAxis = New System.Windows.Forms.GroupBox()
         Me.rdoYBinAxis = New System.Windows.Forms.RadioButton()
-        Me.lblBinAxis = New System.Windows.Forms.Label()
+        Me.rdoXBinAxis = New System.Windows.Forms.RadioButton()
+        Me.grpBinAxis.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdDotPlotOptions
@@ -70,7 +71,7 @@ Partial Class dlgDotPlot
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(254, 229)
+        Me.lblFactor.Location = New System.Drawing.Point(255, 229)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(86, 13)
         Me.lblFactor.TabIndex = 5
@@ -79,7 +80,7 @@ Partial Class dlgDotPlot
         '
         'ucrVariablesAsFactorDotPlot
         '
-        Me.ucrVariablesAsFactorDotPlot.Location = New System.Drawing.Point(255, 42)
+        Me.ucrVariablesAsFactorDotPlot.Location = New System.Drawing.Point(255, 43)
         Me.ucrVariablesAsFactorDotPlot.Name = "ucrVariablesAsFactorDotPlot"
         Me.ucrVariablesAsFactorDotPlot.Size = New System.Drawing.Size(125, 133)
         Me.ucrVariablesAsFactorDotPlot.TabIndex = 11
@@ -127,46 +128,46 @@ Partial Class dlgDotPlot
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
         '
-        'rdoXBinAxis
+        'grpBinAxis
         '
-        Me.rdoXBinAxis.AutoSize = True
-        Me.rdoXBinAxis.Location = New System.Drawing.Point(311, 12)
-        Me.rdoXBinAxis.Name = "rdoXBinAxis"
-        Me.rdoXBinAxis.Size = New System.Drawing.Size(30, 17)
-        Me.rdoXBinAxis.TabIndex = 12
-        Me.rdoXBinAxis.TabStop = True
-        Me.rdoXBinAxis.Text = "x"
-        Me.rdoXBinAxis.UseVisualStyleBackColor = True
+        Me.grpBinAxis.Controls.Add(Me.rdoYBinAxis)
+        Me.grpBinAxis.Controls.Add(Me.rdoXBinAxis)
+        Me.grpBinAxis.Location = New System.Drawing.Point(255, 3)
+        Me.grpBinAxis.Name = "grpBinAxis"
+        Me.grpBinAxis.Size = New System.Drawing.Size(100, 33)
+        Me.grpBinAxis.TabIndex = 15
+        Me.grpBinAxis.TabStop = False
+        Me.grpBinAxis.Tag = "Bin_Axis:"
+        Me.grpBinAxis.Text = "Bin Axis:"
         '
         'rdoYBinAxis
         '
         Me.rdoYBinAxis.AutoSize = True
-        Me.rdoYBinAxis.Location = New System.Drawing.Point(351, 12)
+        Me.rdoYBinAxis.Location = New System.Drawing.Point(64, 13)
         Me.rdoYBinAxis.Name = "rdoYBinAxis"
         Me.rdoYBinAxis.Size = New System.Drawing.Size(30, 17)
-        Me.rdoYBinAxis.TabIndex = 13
+        Me.rdoYBinAxis.TabIndex = 16
         Me.rdoYBinAxis.TabStop = True
         Me.rdoYBinAxis.Text = "y"
         Me.rdoYBinAxis.UseVisualStyleBackColor = True
         '
-        'lblBinAxis
+        'rdoXBinAxis
         '
-        Me.lblBinAxis.AutoSize = True
-        Me.lblBinAxis.Location = New System.Drawing.Point(252, 14)
-        Me.lblBinAxis.Name = "lblBinAxis"
-        Me.lblBinAxis.Size = New System.Drawing.Size(47, 13)
-        Me.lblBinAxis.TabIndex = 14
-        Me.lblBinAxis.Tag = "Bin_Axis:"
-        Me.lblBinAxis.Text = "Bin Axis:"
+        Me.rdoXBinAxis.AutoSize = True
+        Me.rdoXBinAxis.Location = New System.Drawing.Point(28, 13)
+        Me.rdoXBinAxis.Name = "rdoXBinAxis"
+        Me.rdoXBinAxis.Size = New System.Drawing.Size(30, 17)
+        Me.rdoXBinAxis.TabIndex = 15
+        Me.rdoXBinAxis.TabStop = True
+        Me.rdoXBinAxis.Text = "x"
+        Me.rdoXBinAxis.UseVisualStyleBackColor = True
         '
         'dlgDotPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 350)
-        Me.Controls.Add(Me.lblBinAxis)
-        Me.Controls.Add(Me.rdoYBinAxis)
-        Me.Controls.Add(Me.rdoXBinAxis)
+        Me.Controls.Add(Me.grpBinAxis)
         Me.Controls.Add(Me.ucrVariablesAsFactorDotPlot)
         Me.Controls.Add(Me.ucrSaveDotPlot)
         Me.Controls.Add(Me.cmdOptions)
@@ -184,6 +185,8 @@ Partial Class dlgDotPlot
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Dot_Plot"
         Me.Text = "Dot Plot"
+        Me.grpBinAxis.ResumeLayout(False)
+        Me.grpBinAxis.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -199,7 +202,7 @@ Partial Class dlgDotPlot
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrSaveDotPlot As ucrSaveGraph
     Friend WithEvents ucrVariablesAsFactorDotPlot As ucrVariablesAsFactor
-    Friend WithEvents rdoXBinAxis As RadioButton
+    Friend WithEvents grpBinAxis As GroupBox
     Friend WithEvents rdoYBinAxis As RadioButton
-    Friend WithEvents lblBinAxis As Label
+    Friend WithEvents rdoXBinAxis As RadioButton
 End Class
