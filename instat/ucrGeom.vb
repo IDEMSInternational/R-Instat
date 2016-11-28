@@ -181,12 +181,11 @@ Public Class ucrGeom
         'Global Layer parameters
         clsgeom_abline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_abline.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_abline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_abline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
         clsgeom_abline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
-        lstAllGeoms.Add(clsgeom_hline)
+        lstAllGeoms.Add(clsgeom_abline)
 
         'clsgeom_area.SetGeomName("geom_area")
         ''mandatory aesthetics 
@@ -609,7 +608,6 @@ Public Class ucrGeom
         'Global Layer parameters
         clsgeom_hline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_hline.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_hline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_hline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
         clsgeom_hline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
@@ -1059,12 +1057,11 @@ Public Class ucrGeom
         'Global Layer parameters
         clsgeom_vline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_vline.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_vline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_vline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
         clsgeom_vline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
-        lstAllGeoms.Add(clsgeom_hline)
+        lstAllGeoms.Add(clsgeom_vline)
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
     Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
