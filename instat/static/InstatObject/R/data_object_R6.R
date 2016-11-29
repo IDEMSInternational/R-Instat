@@ -1531,7 +1531,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, polar = FALSE, ...) {
+data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
   if(!all(columns %in% self$get_column_names())) {
     stop("Not all columns found in the data")
   }
@@ -1544,7 +1544,12 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
   else {
     numeric_geom <- numeric
   }
-  cat_geom <- match.fun(categorical)
+  if(categorical %in% c("pie_chart")) {
+    cat_geom <- categorical
+  }
+  else {
+    cat_geom <- match.fun(categorical)
+  }
   curr_data <- self$get_data_frame()
   column_types <- c()
   for(col in columns) {
@@ -1591,6 +1596,9 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       else if(curr_geom_name == "violin_box") {
         g <- g + geom_violin() + geom_boxplot() 
       }
+      else if(curr_geom_name == "pie_chart") {
+        g <- g + geom_bar() + coord_polar(theta = "x")
+      }
     }
 
     if(free_scale_axis) {
@@ -1600,9 +1608,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + facet_wrap(facets = ~ variable, scales = "free_x", ncol = ncol)
     }
     
-    if(polar) {
-      g <- g + coord_polar(theta = "x")
-    }
     return(g)    
   }
   else {

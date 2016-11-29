@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.ComponentModel
+Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
@@ -132,6 +133,20 @@ Public Class ucrInputComboBox
         AdjustComboBoxWidth(cboInput)
     End Sub
 
+    Public Sub SetItems(lstItemParameterValuePairs As List(Of KeyValuePair(Of String, String)), Optional bClearExisting As Boolean = True)
+        Dim kvpTemp As KeyValuePair(Of String, String)
+
+        If bClearExisting Then
+            cboInput.Items.Clear()
+            lstRecognisedItemParameterValuePairs.Clear()
+        End If
+        For Each kvpTemp In lstItemParameterValuePairs
+            cboInput.Items.Add(kvpTemp.Key)
+        Next
+        lstRecognisedItemParameterValuePairs.AddRange(lstItemParameterValuePairs)
+        AdjustComboBoxWidth(cboInput)
+    End Sub
+
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
         bUserTyped = True
     End Sub
@@ -190,5 +205,9 @@ Public Class ucrInputComboBox
             iWidth = Math.Max(iWidth, iNewWidth)
         Next
         cboCurrent.DropDownWidth = iWidth
+    End Sub
+
+    Public Overrides Sub UpdateControl(clsRFunction As RFunction)
+        MyBase.UpdateControl(clsRFunction)
     End Sub
 End Class

@@ -20,6 +20,7 @@ Public Class dlgOneVariableGraph
     Private clsRaesFunction As New RFunction
     Private clsRgeom_Function As New RFunction
     Private bFirstLoad As Boolean = True
+    Private clsDefaultRFunction As New RFunction
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -34,18 +35,27 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub SetDefaults()
+        ' Set default RFunction as base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+        ' Update main dialog controls from base function
+        UpdateControls(Me, ucrBase.clsRsyntax.clsBaseFunction)
         ucrSelectorOneVarGraph.Reset()
         ucrSelectorOneVarGraph.Focus()
         ucrOneVarGraphSave.Reset()
-        rdoFacets.Checked = True
+        'rdoFacets.Checked = True
         ucrOneVarGraphSave.Reset()
         sdgOneVarGraph.SetDefaults()
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
-        chkFlipCoordinates.Checked = False
+        'chkFlipCoordinates.Checked = False
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsDefaultRFunction.AddParameter("numeric", "geom_boxplot")
+        clsDefaultRFunction.AddParameter("cateogrical", "geom_bar")
+        clsDefaultRFunction.AddParameter("output", "facets")
+        'Define default RFunction
         rdoSingleGraphs.Enabled = False
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
@@ -55,10 +65,9 @@ Public Class dlgOneVariableGraph
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'this sets the main function to be used in the dialog
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
-        sdgOneVarGraph.InitialiseDialog()
-
+        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
+
     Private Sub ReopenDialog()
         CheckDataType()
     End Sub
@@ -98,7 +107,9 @@ Public Class dlgOneVariableGraph
         End If
         TestOkEnabled()
     End Sub
+
     Private Sub cmdGraph_Click(sender As Object, e As EventArgs) Handles cmdGraphOptions.Click
+        sdgOneVarGraph.SetDefaults()
         sdgOneVarGraph.ShowDialog()
     End Sub
 
