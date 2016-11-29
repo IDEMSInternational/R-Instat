@@ -42,6 +42,8 @@ Public Class dlgView
         ucrSelctorForView.Focus()
         rdoTop.Checked = True
         grpDisplayFrom.ResetText()
+        rdoViewPreview.Checked = True
+        rdoViewDataFrame.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -56,7 +58,9 @@ Public Class dlgView
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverView.IsEmpty() = False And nudNumberRows.Text <> "" Then
+        If (ucrReceiverView.IsEmpty() = False And nudNumberRows.Text <> "") AndAlso rdoViewPreview.Checked Then
+            ucrBase.OKEnabled(True)
+        ElseIf rdoViewDataFrame.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -68,28 +72,17 @@ Public Class dlgView
     End Sub
 
     Private Sub grpRowsToBeSelected()
-        If rdoTop.Checked Then
-            ucrBase.clsRsyntax.SetFunction("head")
-        Else
-            ucrBase.clsRsyntax.SetFunction("tail")
-        End If
+        SetCommands()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverView_SelctionChanged() Handles ucrReceiverView.SelectionChanged
-        If Not ucrReceiverView.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
+        SetCommands()
         TestOKEnabled()
     End Sub
 
     Private Sub nudNumberRows_TextChanged(sender As Object, e As EventArgs) Handles nudNumberRows.TextChanged
-        If Not nudNumberRows.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("n")
-        End If
+        SetCommands()
         TestOKEnabled()
     End Sub
 
@@ -100,5 +93,40 @@ Public Class dlgView
 
     Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelctorForView.DataFrameChanged
         nudNumberRows.Maximum = ucrSelctorForView.ucrAvailableDataFrames.iDataFrameLength
+        TestOKEnabled()
     End Sub
+
+    Private Sub rdoViewPreview_CheckedChanged(sender As Object, e As EventArgs) Handles rdoViewPreview.CheckedChanged, rdoViewDataFrame.CheckedChanged
+        SetCommands()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetCommands()
+        If rdoViewDataFrame.Checked Then
+            ucrBase.clsRsyntax.RemoveParameter("n")
+            ucrBase.clsRsyntax.SetFunction("View")
+            ucrBase.clsRsyntax.AddParameter("x", ucrSelctorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        End If
+
+        If rdoViewPreview.Checked Then
+            If Not ucrReceiverView.IsEmpty Then
+                If rdoTop.Checked Then
+                    ucrBase.clsRsyntax.SetFunction("head")
+                Else
+                    ucrBase.clsRsyntax.SetFunction("tail")
+                End If
+                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("x")
+            End If
+            If Not nudNumberRows.Text = "" Then
+                ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("n")
+            End If
+        End If
+    End Sub
+
 End Class
