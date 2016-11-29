@@ -1002,29 +1002,44 @@ Public Class ucrGeom
         'clsgeom_step.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_step)
 
-        'clsgeom_text.strGeomName = "geom_text"
-        ''mandatory
-        'clsgeom_text.AddAesParameter("label", bIsMandatory:=True)
-        'clsgeom_text.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_text.AddAesParameter("y", bIsMandatory:=True)
-        ''optional
-        'clsgeom_text.AddAesParameter("alpha")
-        'clsgeom_text.AddAesParameter("colour")
-        'clsgeom_text.AddAesParameter("family")
-        'clsgeom_text.AddAesParameter("fontface")
-        'clsgeom_text.AddAesParameter("hjust")
-        'clsgeom_text.AddAesParameter("lineheight")
-        ''TO DO add size and vjust this might need additon of labels and receivers  
-
-
-        ''adding layer parameters
-        'clsgeom_text.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_text.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_text.AddLayerParameter("parse", "bolean", "FALSE")
-        'clsgeom_text.AddLayerParameter("nudge_x", "numeric", "0")
-        'clsgeom_text.AddLayerParameter("nudge_y", "numeric", "0")
-        'clsgeom_text.AddLayerParameter("check_overlap", "bolean", "FALSE")
-        'lstAllGeoms.Add(clsgeom_text)
+        clsgeom_text.SetGeomName("geom_text") 'Note: can also add text on the graph via annotate (to be added on sdgplots).
+        'Adding aesthetics parameters
+        'Mandatory Aesthetics
+        clsgeom_text.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_text.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_text.AddAesParameter("label", strIncludedDataTypes:={"numeric", "factor", "character", "date"}, bIsMandatory:=True)
+        'Optional aesthetics
+        clsgeom_text.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"}) 'Note: for the text
+        clsgeom_text.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"}) 'size of the font
+        clsgeom_text.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        'The following aesthetics are arguably more relevant relevant as parameters. Setting them as parameters overwrites the aes mapping.
+        clsgeom_text.AddAesParameter("family", strIncludedDataTypes:={"factor"})
+        clsgeom_text.AddAesParameter("fontface", strIncludedDataTypes:={"factor"})
+        clsgeom_text.AddAesParameter("lineheight", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_text.AddAesParameter("hjust", strIncludedDataTypes:={"numeric"}) 'position of the anchor (0=left edge, 1=right edge), can go below 0 or above 1 
+        clsgeom_text.AddAesParameter("vjust", strIncludedDataTypes:={"numeric"}) 'position of the anchor (0=bottom edge, 1=top edge), can go below 0 or above 1 
+        clsgeom_text.AddAesParameter("angle", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_text Parameters
+        clsgeom_text.AddLayerParameter("nudge_x", "numeric", "0.15", lstParameterStrings:={2})
+        clsgeom_text.AddLayerParameter("nudge_y", "numeric", "0.15", lstParameterStrings:={2}) 'Horizontal and vertical adjustment to nudge labels by (if nonzero, avoid superposition, then can accentuate in both directions, negative or positive). Useful for offsetting text from points, particularly on discrete scales. 
+        clsgeom_text.AddLayerParameter("check_overlap", "boolean", "FALSE") 'If TRUE, text that overlaps previous text in the same layer will not be plotted. A quick and dirty way
+        clsgeom_text.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
+        'Global Layer parameters
+        clsgeom_text.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_text.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), "position_jitterdodge()", Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        clsgeom_text.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning: stat count cannot be used with y aesthetic !!! 'Warning: summary and ecdf is source of errors.
+        'Aesthetics as layer parameters.
+        clsgeom_text.AddLayerParameter("family", "list", Chr(34) & Chr(34), lstParameterStrings:={Chr(34) & Chr(34), Chr(34) & "serif" & Chr(34), Chr(34) & "sans" & Chr(34), Chr(34) & "mono" & Chr(34), Chr(34) & "symbol" & Chr(34)}) 'Warning: could add more fonts, maybe use extrafonts package ?
+        clsgeom_text.AddLayerParameter("fontface", "list", Chr(34) & "plain" & Chr(34), lstParameterStrings:={Chr(34) & "plain" & Chr(34), Chr(34) & "bold" & Chr(34), Chr(34) & "italic" & Chr(34), Chr(34) & "bold.italic" & Chr(34)})
+        clsgeom_text.AddLayerParameter("lineheight", "numeric", "1.2", lstParameterStrings:={1}) 'can be negative or positive, moving text out of the label box when negative or big values...
+        clsgeom_text.AddLayerParameter("hjust", "numeric", "0.5", lstParameterStrings:={1}) 'position of the anchor (0=left edge, 1=right edge), can go below 0 or above 1 
+        clsgeom_text.AddLayerParameter("vjust", "numeric", "0.5", lstParameterStrings:={1}) 'position of the anchor (0=bottom edge, 1=top edge), can go below 0 or above 1 
+        clsgeom_text.AddLayerParameter("angle", "numeric", "0", lstParameterStrings:={0, 0, 360}) 'the angle at which to draw the text label 'this is not working for label !! only for text.
+        clsgeom_text.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34)) 'Note: for the text
+        clsgeom_text.AddLayerParameter("size", "numeric", "5", lstParameterStrings:={0, 0}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
+        clsgeom_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+        lstAllGeoms.Add(clsgeom_text)
 
         'clsgeom_tile.strGeomName = "geom_tile"
         ''mandatory
