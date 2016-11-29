@@ -142,7 +142,7 @@ Public Class ucrGeom
         'Question/Task: we are focusing a lot on numeric and factor variables when it comes to aesthetics mappings. Should we allow more characters ?
         'Warning/question: for line, point and rug (and in general), more stats are available, such as stat_function. However, they require parameters. For instance stat_summary needs some, but a default parameter mean_se() is given. Should we make it possible for users to have access to these ? Would need to be able to pass functions as parameters. Same difficulty as for the position functions such as position_jitterdodge... see above.
         'Warning: the colour type of parameter is not working quite right. Problems with pick colour and some of the available colours such as ff0000a0 and ff400040 are not recognised in R.
-
+        'Warning/Task: need a new type of parameter: units, or perhaps function, in order to be able to specify units(value, unit) or for the position: position_dodge(width = value)... !!!
 
         clsgeom_abline.SetGeomName("geom_abline") 'Warning: this geom never inherits global aesthetics ! It also doesn't affect the x and y scales. Can specify yintercept either with aes, or with parameter (second one overwrites). If want to vary with facets, need to mention as aes.
         'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
@@ -606,7 +606,7 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_hline)
 
         clsgeom_histogram.SetGeomName("geom_histogram")
-        'Adding aesthetics parametters
+        'Adding aesthetics parameters
         'Mandatory Aesthetics
         clsgeom_histogram.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'Optional aesthetics
@@ -618,7 +618,6 @@ Public Class ucrGeom
         clsgeom_histogram.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
 
         'Adding layer parameters
-
         'Geom_histogram parameters
         clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={2, 0.01}) 'Defaults to 1/30 of the range of the data, need to be strictly positive.
         'Warning: here default has been set to 1 as calculating 1/30 of the range of the data is not possible. 
@@ -662,20 +661,50 @@ Public Class ucrGeom
         'clsgeom_jitter.AddLayerParameter("position", "list", Chr(34) & "jitter" & Chr(34))
         'lstAllGeoms.Add(clsgeom_jitter)
 
-        'clsgeom_label.strGeomName = "geom_label"
-        ''mandatory
-        'clsgeom_label.AddAesParameter("label", bIsMandatory:=True)
-        'clsgeom_label.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_label.AddAesParameter("y", bIsMandatory:=True)
-        ''optional
-        'clsgeom_label.AddAesParameter("alpha")
-        'clsgeom_label.AddAesParameter("colour")
-        'clsgeom_label.AddAesParameter("family")
-        'clsgeom_label.AddAesParameter("fontface")
-        'clsgeom_label.AddAesParameter("hjust")
-        'clsgeom_label.AddAesParameter("lineheight")
-        ''TO DO add size and vjust this might need additon of labels and receivers  
-        'lstAllGeoms.Add(clsgeom_label)
+        clsgeom_label.SetGeomName("geom_label") 'Note: can also add text on the graph via annotate (to be added on sdgplots).
+        'Adding aesthetics parameters
+        'Mandatory Aesthetics
+        clsgeom_label.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_label.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_label.AddAesParameter("label", strIncludedDataTypes:={"numeric", "factor", "character", "date"}, bIsMandatory:=True)
+        'Optional aesthetics
+        clsgeom_label.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"}) 'Note: for the background of the label 
+        clsgeom_label.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"}) 'Note: for the text
+        clsgeom_label.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"}) 'size of the font
+        clsgeom_label.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        'The following aesthetics are arguably more relevant relevant as parameters. Setting them as parameters overwrites the aes mapping.
+        clsgeom_label.AddAesParameter("family", strIncludedDataTypes:={"factor"})
+        clsgeom_label.AddAesParameter("fontface", strIncludedDataTypes:={"factor"})
+        clsgeom_label.AddAesParameter("lineheight", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_label.AddAesParameter("hjust", strIncludedDataTypes:={"numeric"}) 'position of the anchor (0=left edge, 1=right edge), can go below 0 or above 1 
+        clsgeom_label.AddAesParameter("vjust", strIncludedDataTypes:={"numeric"}) 'position of the anchor (0=bottom edge, 1=top edge), can go below 0 or above 1 
+        clsgeom_label.AddAesParameter("angle", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_label Parameters
+        clsgeom_label.AddLayerParameter("label.size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Size of label border, in mm, 0 gives minimum size (nonzero), negative gives error.
+        'Warning: The two following parameters need to specified with the help of unit objects... unit(value, unit), so need a type of parameter "unit".
+        'clsgeom_label.AddLayerParameter("label.padding", "numeric", "0.25", lstParameterStrings:={2, 0}) 'Amount of padding around label. Defaults to 0.25 lines. 
+        'clsgeom_label.AddLayerParameter("label.r", "numeric", "0.15", lstParameterStrings:={2, 0}) 'Radius of rounded corners. Defaults to 0.15 lines.
+        clsgeom_label.AddLayerParameter("nudge_x", "numeric", "0.15", lstParameterStrings:={2})
+        clsgeom_label.AddLayerParameter("nudge_y", "numeric", "0.15", lstParameterStrings:={2}) 'Horizontal and vertical adjustment to nudge labels by (if nonzero, avoid superposition, then can accentuate in both directions, negative or positive). Useful for offsetting text from points, particularly on discrete scales. 
+        clsgeom_label.AddLayerParameter("check_overlap", "boolean", "FALSE") 'If TRUE, text that overlaps previous text in the same layer will not be plotted. A quick and dirty way
+        clsgeom_label.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
+        'Global Layer parameters
+        clsgeom_label.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_label.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), "position_jitterdodge()", Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        clsgeom_label.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning: stat count cannot be used with y aesthetic !!! 'Warning: summary and ecdf is source of errors.
+        'Aesthetics as layer parameters.
+        clsgeom_label.AddLayerParameter("family", "list", Chr(34) & Chr(34), lstParameterStrings:={Chr(34) & Chr(34), Chr(34) & "serif" & Chr(34), Chr(34) & "sans" & Chr(34), Chr(34) & "mono" & Chr(34), Chr(34) & "symbol" & Chr(34)}) 'Warning: could add more fonts, maybe use extrafonts package ?
+        clsgeom_label.AddLayerParameter("fontface", "list", Chr(34) & "plain" & Chr(34), lstParameterStrings:={Chr(34) & "plain" & Chr(34), Chr(34) & "bold" & Chr(34), Chr(34) & "italic" & Chr(34), Chr(34) & "bold.italic" & Chr(34)})
+        clsgeom_label.AddLayerParameter("lineheight", "numeric", "1.2", lstParameterStrings:={1}) 'can be negative or positive, moving text out of the label box when negative or big values...
+        clsgeom_label.AddLayerParameter("hjust", "numeric", "0.5", lstParameterStrings:={1}) 'position of the anchor (0=left edge, 1=right edge), can go below 0 or above 1 
+        clsgeom_label.AddLayerParameter("vjust", "numeric", "0.5", lstParameterStrings:={1}) 'position of the anchor (0=bottom edge, 1=top edge), can go below 0 or above 1 
+        'clsgeom_label.AddLayerParameter("angle", "numeric", "0", lstParameterStrings:={0, 0, 360}) 'the angle at which to draw the text label 'this is not working for label !! only for text.
+        clsgeom_label.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34)) 'Note: for the background of the label 
+        clsgeom_label.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34)) 'Note: for the text
+        clsgeom_label.AddLayerParameter("size", "numeric", "5", lstParameterStrings:={0, 0}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
+        clsgeom_label.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+        lstAllGeoms.Add(clsgeom_label)
 
 
         clsgeom_line.SetGeomName("geom_line")
@@ -766,7 +795,7 @@ Public Class ucrGeom
         'Geom_poitn Parameters
 
         'Global Layer parameters
-        clsgeom_point.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_point.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_jitterdodge()"})
         clsgeom_point.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
         clsgeom_point.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
