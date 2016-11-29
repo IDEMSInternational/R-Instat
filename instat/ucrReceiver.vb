@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class ucrReceiver
     Public WithEvents Selector As ucrSelector
@@ -289,5 +290,13 @@ Public Class ucrReceiver
         Dim sender As New Object
         Dim e As New EventArgs
         RaiseEvent SelectionChanged(sender, e)
+    End Sub
+
+    Public Overrides Sub UpdateControl(clsRFunction As RFunction)
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Overrides Sub UpdateRFunction(clsRFunction As RFunction)
+        Throw New NotImplementedException()
     End Sub
 End Class

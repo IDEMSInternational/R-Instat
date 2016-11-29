@@ -272,6 +272,7 @@
     <Compile Include="DlgUseDate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="mdlCoreControl.vb" />
     <Compile Include="sdgAddNewDistribution.Designer.vb">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </Compile>

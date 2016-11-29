@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrInput
     Public bUserTyped As Boolean = False
     Public Event NameChanged()
@@ -30,6 +32,7 @@ Public Class ucrInput
     Protected bIsReadOnly As Boolean = False
     Public bAutoChangeOnLeave As Boolean = False
     Private bLastSilent As Boolean = False
+    Protected lstRecognisedItemParameterValuePairs As New List(Of KeyValuePair(Of String, String))
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
         bLastSilent = bSilent
@@ -372,4 +375,55 @@ Public Class ucrInput
             bIsReadOnly = bReadOnly
         End Set
     End Property
+
+    Public Overrides Sub UpdateControl(clsRFunction As RFunction)
+        Dim clsTempParam As RParameter
+        'TODO Add methods in RFunction/base class for RFunction/ROperator to do these checks better
+        clsTempParam = clsRFunction.GetParameter(strParameterName)
+        If strParameterName <> "" Then
+            If clsTempParam IsNot Nothing Then
+                If GetAllRecognisedParameterValues.Contains(clsTempParam.strArgumentValue) Then
+                    SetName(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Value = clsTempParam.strArgumentValue).Key)
+                Else
+                    SetName(clsTempParam.strArgumentValue)
+                End If
+            Else
+                SetName("")
+            End If
+        End If
+    End Sub
+
+    Public Overrides Sub UpdateRFunction(clsRFunction As RFunction)
+        Throw New NotImplementedException()
+    End Sub
+
+    ' key = parameter value
+    ' value = item text
+    Public Sub SetParameterValueItemsPairs(lstNewParameterValueItemsPairs As List(Of KeyValuePair(Of String, String)))
+        lstRecognisedItemParameterValuePairs = lstNewParameterValueItemsPairs
+    End Sub
+
+    Public Sub AddToParameterValueItemsPairs(kvpNewPair As KeyValuePair(Of String, String))
+        lstRecognisedItemParameterValuePairs.Add(kvpNewPair)
+    End Sub
+
+    Public Function GetAllRecognisedParameterValues() As List(Of String)
+        Dim lstParamValues As New List(Of String)
+        Dim kvpTemp As KeyValuePair(Of String, String)
+
+        For Each kvpTemp In lstRecognisedItemParameterValuePairs
+            lstParamValues.Add(kvpTemp.Value)
+        Next
+        Return lstParamValues
+    End Function
+
+    Public Function GetAllRecognisedItems() As List(Of String)
+        Dim lstItems As New List(Of String)
+        Dim kvpTemp As KeyValuePair(Of String, String)
+
+        For Each kvpTemp In lstRecognisedItemParameterValuePairs
+            lstItems.Add(kvpTemp.Key)
+        Next
+        Return lstItems
+    End Function
 End Class

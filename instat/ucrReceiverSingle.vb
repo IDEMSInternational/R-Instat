@@ -236,4 +236,8 @@ Public Class ucrReceiverSingle
     Private Sub mnuRightClickRemove_Click(sender As Object, e As EventArgs) Handles mnuRightClickRemove.Click
         RemoveSelected()
     End Sub
+
+    Public Overrides Sub UpdateControl(clsRFunction As RFunction)
+        Throw New NotImplementedException()
+    End Sub
 End Class

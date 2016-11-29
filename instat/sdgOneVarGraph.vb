@@ -16,7 +16,7 @@
 Imports instat.Translations
 Public Class sdgOneVarGraph
     Public bFirstLoad As Boolean = True
-    Public clsRsyntax As New RSyntax
+    Public clsGraphOneVariable As New RFunction
     Public strNumericGeomFunction As String
     Public strCategoriacalGeomFunction As String
     Public clsCoordPolarFunction As New RFunction
@@ -28,6 +28,7 @@ Public Class sdgOneVarGraph
             bFirstLoad = False
         End If
         autoTranslate(Me)
+        UpdateControls(Me, clsGraphOneVariable)
     End Sub
 
     Public Sub SetDefaults()
@@ -38,20 +39,34 @@ Public Class sdgOneVarGraph
         nudNumberofColumns.Value = 3
         ucrInputNumeric.Reset()
         ucrInputCategorical.Reset()
-        ucrInputNumeric.SetName("Boxplot")
-        ucrInputCategorical.SetName("Bar Chart")
+        'ucrInputNumeric.SetName("Boxplot")
+        'ucrInputCategorical.SetName("Bar Chart")
     End Sub
 
     Public Sub InitialiseDialog()
+        Dim lstNumericPairs As New List(Of KeyValuePair(Of String, String))
+        Dim lstCategoricalPairs As New List(Of KeyValuePair(Of String, String))
+
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Boxplot", Chr(34) & "geom_boxplot" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Dotplot", "geom_dotplot"))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Histogram", "geom_histogram"))
+        ucrInputNumeric.SetItems(lstNumericPairs)
+        'ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon", "Violin Plot", "Jitter Plot", "Boxplot + Jitter", "Violin + Jitter", "Violin + Boxplot"})
+
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Bar Chart", "geom_bar"))
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Pie Chart", "pie_chart"))
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", "geom_dotplot"))
+        ucrInputCategorical.SetItems(lstCategoricalPairs)
+        'ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         clsCoordPolarFunction.SetRCommand("coord_polar")
-        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon", "Violin Plot", "Jitter Plot", "Boxplot + Jitter", "Violin + Jitter", "Violin + Boxplot"})
-        ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
         nudNumberofColumns.Maximum = 10
         nudNumberofColumns.Minimum = 1
+        ucrInputNumeric.SetParameterName("numeric")
+        ucrInputCategorical.SetParameterName("categorical")
     End Sub
 
-    Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
-        clsRsyntax = clsNewRSyntax
+    Public Sub SetRFunction(clsNewRFunction As RFunction)
+        clsGraphOneVariable = clsNewRFunction
     End Sub
 
     Private Sub SpecifyLayoutControl()
@@ -67,29 +82,29 @@ Public Class sdgOneVarGraph
     Public Sub SetNumericGeomFunction()
         Select Case ucrInputNumeric.GetText
             Case "Boxplot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
             Case "Histogram"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "geom_histogram" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "geom_histogram" & Chr(34))
             Case "Dot Plot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "geom_dotplot" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "geom_dotplot" & Chr(34))
             Case "Point Plot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "geom_point" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "geom_point" & Chr(34))
             Case "Density Plot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "geom_density" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "geom_density" & Chr(34))
             Case "Frequency Polygon"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "geom_freqpoly" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "geom_freqpoly" & Chr(34))
             Case "Violin Plot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "geom_violin" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "geom_violin" & Chr(34))
             Case "Jitter Plot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "geom_jitter" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "geom_jitter" & Chr(34))
             Case "Boxplot + Jitter"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "box_jitter" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "box_jitter" & Chr(34))
             Case "Violin + Jitter"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "violin_jitter" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "violin_jitter" & Chr(34))
             Case "Violin + Boxplot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & "violin_box" & Chr(34))
+                clsGraphOneVariable.AddParameter("numeric", Chr(34) & "violin_box" & Chr(34))
             Case Else
-                clsRsyntax.RemoveParameter("numeric")
+                clsGraphOneVariable.RemoveParameterByName("numeric")
         End Select
     End Sub
 
@@ -100,38 +115,38 @@ Public Class sdgOneVarGraph
     Public Sub SetCategoricalGeomFunction()
         Select Case ucrInputCategorical.GetText
             Case "Bar Chart"
-                clsRsyntax.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-                clsRsyntax.RemoveParameter("polar")
+                clsGraphOneVariable.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+                clsGraphOneVariable.RemoveParameterByName("polar")
             Case "Dot Plot"
-                clsRsyntax.AddParameter("categorical", Chr(34) & "geom_dotplot" & Chr(34))
-                clsRsyntax.RemoveParameter("polar")
+                clsGraphOneVariable.AddParameter("categorical", Chr(34) & "geom_dotplot" & Chr(34))
+                clsGraphOneVariable.RemoveParameterByName("polar")
             Case "Pie Chart"
-                clsRsyntax.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-                clsRsyntax.AddParameter("polar", "TRUE")
+                clsGraphOneVariable.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+                clsGraphOneVariable.AddParameter("polar", "TRUE")
             Case Else
-                clsRsyntax.RemoveParameter("categorical")
-                clsRsyntax.RemoveParameter("polar")
+                clsGraphOneVariable.RemoveParameterByName("categorical")
+                clsGraphOneVariable.RemoveParameterByName("polar")
         End Select
     End Sub
 
     Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
         SetCategoricalGeomFunction()
     End Sub
-    
+
     Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScaleAxisforFacets.CheckedChanged
         If chkFreeScaleAxisforFacets.Checked Then
-            clsRsyntax.AddParameter("free_scale_axis", "TRUE")
+            clsGraphOneVariable.AddParameter("free_scale_axis", "TRUE")
         Else
-            clsRsyntax.RemoveParameter("free_scale_axis")
+            clsGraphOneVariable.RemoveParameterByName("free_scale_axis")
         End If
     End Sub
 
     Private Sub nudNumberofColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged, chkSpecifyLayout.CheckedChanged
         SpecifyLayoutControl()
         If nudNumberofColumns.Text <> "" AndAlso chkSpecifyLayout.Checked Then
-            clsRsyntax.AddParameter("ncol", nudNumberofColumns.Value)
+            clsGraphOneVariable.AddParameter("ncol", nudNumberofColumns.Value)
         Else
-            clsRsyntax.RemoveParameter("ncol")
+            clsGraphOneVariable.RemoveParameterByName("ncol")
         End If
     End Sub
 End Class
