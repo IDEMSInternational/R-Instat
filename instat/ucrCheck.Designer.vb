@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrInput
+Partial Class ucrCheck
     Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
@@ -22,16 +22,29 @@ Partial Class ucrInput
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.chkCheck = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
-        'ucrInput
+        'chkCheck
+        '
+        Me.chkCheck.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkCheck.Location = New System.Drawing.Point(0, 0)
+        Me.chkCheck.Name = "chkCheck"
+        Me.chkCheck.Size = New System.Drawing.Size(100, 20)
+        Me.chkCheck.TabIndex = 0
+        Me.chkCheck.Text = "CheckBox1"
+        Me.chkCheck.UseVisualStyleBackColor = True
+        '
+        'ucrCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Name = "ucrInput"
-        Me.Size = New System.Drawing.Size(142, 29)
+        Me.Controls.Add(Me.chkCheck)
+        Me.Name = "ucrCheck"
+        Me.Size = New System.Drawing.Size(100, 20)
         Me.ResumeLayout(False)
 
     End Sub
 
+    Friend WithEvents chkCheck As CheckBox
 End Class
