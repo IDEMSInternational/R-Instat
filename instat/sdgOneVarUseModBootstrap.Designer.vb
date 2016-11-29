@@ -40,7 +40,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.chkParametric.Location = New System.Drawing.Point(13, 67)
         Me.chkParametric.Name = "chkParametric"
         Me.chkParametric.Size = New System.Drawing.Size(76, 17)
-        Me.chkParametric.TabIndex = 2
+        Me.chkParametric.TabIndex = 4
         Me.chkParametric.Text = "Parametric"
         Me.chkParametric.UseVisualStyleBackColor = True
         '
@@ -52,7 +52,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.nudCI.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudCI.Name = "nudCI"
         Me.nudCI.Size = New System.Drawing.Size(54, 20)
-        Me.nudCI.TabIndex = 3
+        Me.nudCI.TabIndex = 1
         Me.nudCI.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'nudIterations
@@ -63,7 +63,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.nudIterations.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudIterations.Name = "nudIterations"
         Me.nudIterations.Size = New System.Drawing.Size(54, 20)
-        Me.nudIterations.TabIndex = 4
+        Me.nudIterations.TabIndex = 3
         Me.nudIterations.Value = New Decimal(New Integer() {1001, 0, 0, 0})
         '
         'lblCI
@@ -72,7 +72,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.lblCI.Location = New System.Drawing.Point(10, 23)
         Me.lblCI.Name = "lblCI"
         Me.lblCI.Size = New System.Drawing.Size(102, 13)
-        Me.lblCI.TabIndex = 5
+        Me.lblCI.TabIndex = 0
         Me.lblCI.Text = "Confidence Interval:"
         '
         'UcrButtonsSubdialogue1
@@ -80,7 +80,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(12, 124)
         Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
         Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
-        Me.UcrButtonsSubdialogue1.TabIndex = 6
+        Me.UcrButtonsSubdialogue1.TabIndex = 5
         '
         'lblIterations
         '
@@ -88,7 +88,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.lblIterations.Location = New System.Drawing.Point(10, 45)
         Me.lblIterations.Name = "lblIterations"
         Me.lblIterations.Size = New System.Drawing.Size(105, 13)
-        Me.lblIterations.TabIndex = 7
+        Me.lblIterations.TabIndex = 2
         Me.lblIterations.Text = "Number of Iterations:"
         '
         'sdgOneVarUseModBootstrap
