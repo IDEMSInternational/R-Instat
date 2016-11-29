@@ -47,7 +47,7 @@ Partial Class sdgOneVarCompareModels
         Me.ucrSubBase.Location = New System.Drawing.Point(14, 168)
         Me.ucrSubBase.Name = "ucrSubBase"
         Me.ucrSubBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSubBase.TabIndex = 0
+        Me.ucrSubBase.TabIndex = 1
         '
         'chkSaveObjects
         '
@@ -65,7 +65,7 @@ Partial Class sdgOneVarCompareModels
         Me.chkSaveChi.Location = New System.Drawing.Point(6, 52)
         Me.chkSaveChi.Name = "chkSaveChi"
         Me.chkSaveChi.Size = New System.Drawing.Size(115, 17)
-        Me.chkSaveChi.TabIndex = 2
+        Me.chkSaveChi.TabIndex = 3
         Me.chkSaveChi.Text = "Display Chi-Square"
         Me.chkSaveChi.UseVisualStyleBackColor = True
         '
@@ -75,7 +75,7 @@ Partial Class sdgOneVarCompareModels
         Me.chkInputBreakpoints.Location = New System.Drawing.Point(6, 75)
         Me.chkInputBreakpoints.Name = "chkInputBreakpoints"
         Me.chkInputBreakpoints.Size = New System.Drawing.Size(164, 17)
-        Me.chkInputBreakpoints.TabIndex = 3
+        Me.chkInputBreakpoints.TabIndex = 5
         Me.chkInputBreakpoints.Text = "Input Chi-Square Breakpoints"
         Me.chkInputBreakpoints.UseVisualStyleBackColor = True
         '
@@ -85,7 +85,7 @@ Partial Class sdgOneVarCompareModels
         Me.lblGoF.Location = New System.Drawing.Point(6, 10)
         Me.lblGoF.Name = "lblGoF"
         Me.lblGoF.Size = New System.Drawing.Size(126, 13)
-        Me.lblGoF.TabIndex = 4
+        Me.lblGoF.TabIndex = 0
         Me.lblGoF.Text = "Goodness of Fit Statistics"
         '
         'TabControl1
@@ -96,7 +96,7 @@ Partial Class sdgOneVarCompareModels
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(299, 152)
-        Me.TabControl1.TabIndex = 5
+        Me.TabControl1.TabIndex = 0
         '
         'TabPage1
         '
@@ -120,7 +120,7 @@ Partial Class sdgOneVarCompareModels
         Me.ucrDisplayChiData.Location = New System.Drawing.Point(129, 51)
         Me.ucrDisplayChiData.Name = "ucrDisplayChiData"
         Me.ucrDisplayChiData.Size = New System.Drawing.Size(139, 21)
-        Me.ucrDisplayChiData.TabIndex = 6
+        Me.ucrDisplayChiData.TabIndex = 4
         '
         'ucrObjectName
         '
@@ -128,7 +128,7 @@ Partial Class sdgOneVarCompareModels
         Me.ucrObjectName.Location = New System.Drawing.Point(129, 27)
         Me.ucrObjectName.Name = "ucrObjectName"
         Me.ucrObjectName.Size = New System.Drawing.Size(139, 21)
-        Me.ucrObjectName.TabIndex = 5
+        Me.ucrObjectName.TabIndex = 2
         '
         'TabPage2
         '
@@ -150,7 +150,7 @@ Partial Class sdgOneVarCompareModels
         Me.ucrSavePlots.Location = New System.Drawing.Point(6, 95)
         Me.ucrSavePlots.Name = "ucrSavePlots"
         Me.ucrSavePlots.Size = New System.Drawing.Size(265, 22)
-        Me.ucrSavePlots.TabIndex = 10
+        Me.ucrSavePlots.TabIndex = 4
         '
         'chkQQ
         '
@@ -158,7 +158,7 @@ Partial Class sdgOneVarCompareModels
         Me.chkQQ.Location = New System.Drawing.Point(6, 75)
         Me.chkQQ.Name = "chkQQ"
         Me.chkQQ.Size = New System.Drawing.Size(42, 17)
-        Me.chkQQ.TabIndex = 9
+        Me.chkQQ.TabIndex = 3
         Me.chkQQ.Text = "QQ"
         Me.chkQQ.UseVisualStyleBackColor = True
         '
@@ -168,7 +168,7 @@ Partial Class sdgOneVarCompareModels
         Me.chkCDF.Location = New System.Drawing.Point(6, 6)
         Me.chkCDF.Name = "chkCDF"
         Me.chkCDF.Size = New System.Drawing.Size(47, 17)
-        Me.chkCDF.TabIndex = 6
+        Me.chkCDF.TabIndex = 0
         Me.chkCDF.Text = "CDF"
         Me.chkCDF.UseVisualStyleBackColor = True
         '
@@ -178,7 +178,7 @@ Partial Class sdgOneVarCompareModels
         Me.chkPP.Location = New System.Drawing.Point(6, 52)
         Me.chkPP.Name = "chkPP"
         Me.chkPP.Size = New System.Drawing.Size(40, 17)
-        Me.chkPP.TabIndex = 8
+        Me.chkPP.TabIndex = 2
         Me.chkPP.Text = "PP"
         Me.chkPP.UseVisualStyleBackColor = True
         '
@@ -188,7 +188,7 @@ Partial Class sdgOneVarCompareModels
         Me.chkDensity.Location = New System.Drawing.Point(6, 29)
         Me.chkDensity.Name = "chkDensity"
         Me.chkDensity.Size = New System.Drawing.Size(61, 17)
-        Me.chkDensity.TabIndex = 7
+        Me.chkDensity.TabIndex = 1
         Me.chkDensity.Text = "Density"
         Me.chkDensity.UseVisualStyleBackColor = True
         '
