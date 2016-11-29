@@ -41,7 +41,7 @@ Public Class UcrGeomListWithParameters
         SetSelector()
         'Get the lists of parameter labels and receivers.
         lstAesParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7, lblGgParam8, lblGgParam9, lblGgParam10})
-        lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9, ucrReceiverParam10})
+        lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9, ucrReceiverParam10, ucrReceiverParam11, ucrReceiverParam12, ucrReceiverParam13})
         'Set the R command of the local Aes function.
         clsGeomAesFunction = New RFunction
         clsGeomAesFunction.SetRCommand("aes")
@@ -69,6 +69,9 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam8.Selector = ucrGeomWithAesSelector
         ucrReceiverParam9.Selector = ucrGeomWithAesSelector
         ucrReceiverParam10.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam11.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam12.Selector = ucrGeomWithAesSelector
+        ucrReceiverParam13.Selector = ucrGeomWithAesSelector
     End Sub
 
     Private Sub InitialiseSelectedDataFrame()
