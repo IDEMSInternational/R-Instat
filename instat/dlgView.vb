@@ -25,8 +25,6 @@ Public Class dlgView
             SetDefaults()
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         'Checks if Ok can be enabled.
         TestOKEnabled()
@@ -50,10 +48,6 @@ Public Class dlgView
         ucrReceiverView.Selector = ucrSelctorForView
         ucrReceiverView.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 32
-
-    End Sub
-
-    Private Sub ReopenDialog()
 
     End Sub
 

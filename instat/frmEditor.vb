@@ -626,6 +626,6 @@ Public Class frmEditor
 
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
         clsViewDataFrame.AddParameter("x", grdCurrSheet.Name)
-        frmMain.clsRLink.RunScript(clsViewDataFrame.ToScript, strComment:="Having a view of the data")
+        frmMain.clsRLink.RunScript(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame")
     End Sub
 End Class
