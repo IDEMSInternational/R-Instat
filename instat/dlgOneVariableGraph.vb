@@ -33,11 +33,13 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub SetDefaults()
-        ' Set default RFunction as base function
+        ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+        ' Link the base function to the sub dialog
         sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction)
-        ' Update main dialog controls from base function
+        ' Update the main dialog controls from base function
         UpdateControls(Me, ucrBase.clsRsyntax.clsBaseFunction)
+
         ucrSelectorOneVarGraph.Reset()
         ucrSelectorOneVarGraph.Focus()
         ucrOneVarGraphSave.Reset()
@@ -49,12 +51,12 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub InitialiseDialog()
+        'Define the default RFunction
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
         clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
         clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
         clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultRFunction.AddParameter("coord_flip", "TRUE")
-        'Define default RFunction
+
         rdoSingleGraphs.Enabled = False
 
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
@@ -65,14 +67,13 @@ Public Class dlgOneVariableGraph
 
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameterName("coord_flip")
+        'When checked add coord_flip = TRUE, when unchecked remove coord_flip parameter
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "")
 
         ucrBase.iHelpTopicID = 412
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'this sets the main function to be used in the dialog
-        'ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
     End Sub
 
     Private Sub ReopenDialog()
@@ -149,7 +150,11 @@ Public Class dlgOneVariableGraph
         TestOkEnabled()
     End Sub
 
+    'When any of the ucrCore controls have been changed we update the R Code to match the contents
     Private Sub ucrSelectorOneVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged, ucrChkFlip.ControlValueChanged
+        'The control that has changed updates the R code
         ucrChangedControl.UpdateRCode(ucrBase.clsRsyntax.clsBaseFunction)
+        'This line may be needed if there are linked controls that need to be updated after other controls have changed
+        UpdateControls(Me, ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 End Class

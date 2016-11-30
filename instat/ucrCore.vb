@@ -30,7 +30,13 @@ Public Class ucrCore
     'Uses of False would be if the control only adds a parameter when another control is checked
     Public bAddIfParameterNotPresent As Boolean = True
 
+    'ValueChanged is raised when a new value has been set in the control
     Public Event ControlValueChanged(ucrChangedControl As ucrCore)
+    'ContentsChanged is raised when the content of the control has changed, but possibly the value has not been set
+    'e.g. text in a textbox changes, but the value is not changed until the user leaves the text box
+    'For some controls these two events will be equivalent
+    'For all controls ValueChanged can't happen without ContentsChanged happening just before
+    'ContentsChanged is probably only needed for TestOK
     Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
 
     Public Sub SetParameterName(strParamName As String)
