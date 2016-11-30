@@ -39,13 +39,13 @@ Public Class sdgPrincipalComponentAnalysis
         chkEigenVectors.Checked = True
         chkRotation.Checked = True
         chkPercentageScree.Checked = False
-        Dimensions()
-        DisplayOptions()
         rdoScreePlot.Checked = True
         cboChoiceScree.SelectedItem = "variance"
         cboLabel.SelectedItem = "all"
         rdoScreePlot.Checked = True
         nudDim2.Value = 2
+        Dimensions()
+        DisplayOptions()
     End Sub
 
     Private Sub EigenValues()
@@ -90,15 +90,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRScreePlotTheme.SetRCommand("theme_minimal")
         clsRScreePlot.SetOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
         clsRScreePlot.SetOperatorParameter(False, clsRFunc:=clsRScreePlotTheme)
-        If rdoBoth.Checked Then
-            clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
-        ElseIf rdoOne.Checked Then
-            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
-        ElseIf rdoTwo.Checked Then
-            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
-        Else
-            clsRScreePlotFunction.RemoveParameterByName("geom")
-        End If
         If chkPercentageScree.Checked Then
             clsRScreePlotFunction.AddParameter("addlabels", "TRUE")
         ElseIf Not chkPercentageScree.Checked Then
@@ -118,15 +109,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
         clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
         clsRVariablesPlotFunction.AddParameter("axes", "c(" & nudDim1.Value & "," & nudDim2.Value & ")")
-        If rdoBoth.Checked Then
-            clsRVariablesPlotFunction.AddParameter("geom", "c(" & Chr(34) & "arrow" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
-        ElseIf rdoOne.Checked Then
-            clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "arrow" & Chr(34))
-        ElseIf rdoTwo.Checked Then
-            clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-        Else
-            clsRVariablesPlotFunction.RemoveParameterByName("geom")
-        End If
         frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 0)
     End Sub
 
@@ -138,15 +120,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
         clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
         clsRIndividualsPlotFunction.AddParameter("axes", "c(" & nudDim1.Value & "," & nudDim2.Value & ")")
-        If rdoBoth.Checked Then
-            clsRIndividualsPlotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
-        ElseIf rdoOne.Checked Then
-            clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
-        ElseIf rdoTwo.Checked Then
-            clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-        Else
-            clsRIndividualsPlotFunction.RemoveParameterByName("geom")
-        End If
         frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 0)
     End Sub
 
@@ -158,15 +131,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
         clsRBiplotFunction.AddParameter("axes", "c(" & nudDim1.Value & "," & nudDim2.Value & ")")
-        If rdoBoth.Checked Then
-            clsRBiplotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
-        ElseIf rdoOne.Checked Then
-            clsRBiplotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
-        ElseIf rdoTwo.Checked Then
-            clsRBiplotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-        Else
-            clsRBiplotFunction.RemoveParameterByName("geom")
-        End If
         frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 0)
     End Sub
 
@@ -193,21 +157,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBarPlot0.SetParameter(False, clsRFunc:=clsRBarPlotGeom)
         clsRBarPlot.SetParameter(True, clsOp:=clsRBarPlot0)
         clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
-    End Sub
-
-    ' temp
-    Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs)
-        ScreePlot()
-    End Sub
-
-    'temp
-    Private Sub chkLine_CheckedChanged(sender As Object, e As EventArgs)
-        ScreePlot()
-    End Sub
-
-    'temp
-    Private Sub chkBoth_CheckedChanged(sender As Object, e As EventArgs)
-        ScreePlot()
     End Sub
 
     Private Sub cmbChoice_SelectedIndexChanged(sender As Object, e As EventArgs)
@@ -252,21 +201,30 @@ Public Class sdgPrincipalComponentAnalysis
         If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.IsEmpty OrElse dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count = 1 Then
             nudDim2.Value = 2
         ElseIf dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 Then
-            If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > dlgPrincipalComponentAnalysis.nudComponents.Value Then
-                nudDim1.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
-                nudDim2.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
+            If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count Then
+                If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.nudComponents.Value Then
+                    nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength - 1
+                    nudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength - 1
+                Else
+                    nudDim1.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
+                    nudDim2.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
+                End If
             Else
-                nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
-                nudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
+                If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count <= dlgPrincipalComponentAnalysis.nudComponents.Value Then
+                    nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
+                    nudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
+                Else
+                    nudDim1.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
+                    nudDim2.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
+                End If
             End If
-        End If
-        ' This number must be the minimum between components selected and items in receiver
+            End If
+
+        ' This number must be the minimum between components selected and items in receiver.
+        ' However, if the rows are shorter than the columns then it must be the minimum between rows and components
+        ' Then if rows is shorter overall, it must be the number of rows minus one.
     End Sub
 
-
-
-
-    ' all  mine
     Private Sub DisplayOptions()
         If rdoBarPlot.Checked Then
             lblChoiceScree.Visible = False
@@ -278,10 +236,16 @@ Public Class sdgPrincipalComponentAnalysis
             cboChoiceScree.Visible = False
             cboLabel.Visible = False
             'rdoBoth.Checked = False
+            ucrSelectorFactor.Visible = True
+            ucrReceiverFactor.Visible = True
+            lblFactorVariable.Visible = True
         Else
+            'rdoBoth.Checked = True
             lblChoiceScree.Visible = True
             grpGeom.Visible = True
-            ' rdoBoth.Checked = True
+            ucrSelectorFactor.Visible = False
+            ucrReceiverFactor.Visible = False
+            lblFactorVariable.Visible = False
             If rdoScreePlot.Checked Then
                 grpGeom.Visible = True
                 lblChoiceScree.Text = "Choice:"
@@ -315,18 +279,54 @@ Public Class sdgPrincipalComponentAnalysis
     DisplayOptions()
 End Sub
 
-Private Sub rdoPlotItems_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoth.CheckedChanged, rdoOne.CheckedChanged, rdoTwo.CheckedChanged
-    PCAOptions()
-End Sub
+    Private Sub rdoPlotItems_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoth.CheckedChanged, rdoOne.CheckedChanged, rdoTwo.CheckedChanged
+        GeomChecked()
+    End Sub
 
-Private Sub rdoScreeItems_CheckedChanged(sender As Object, e As EventArgs) Handles chkPercentageScree.CheckedChanged
-    ScreePlot()
-End Sub
+    Private Sub GeomChecked()
+        If rdoScreePlot.Checked Then
+            If rdoBoth.Checked Then
+                clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
+            ElseIf rdoOne.Checked Then
+                clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
+            ElseIf rdoTwo.Checked Then
+                clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
+            End If
+        ElseIf rdoVariablesPlot.Checked Then
+            If rdoBoth.Checked Then
+                clsRVariablesPlotFunction.AddParameter("geom", "c(" & Chr(34) & "arrow" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+            ElseIf rdoOne.Checked Then
+                clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "arrow" & Chr(34))
+            ElseIf rdoTwo.Checked Then
+                clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+            End If
+        ElseIf rdoIndividualsPlot.Checked Then
+            If rdoBoth.Checked Then
+                clsRIndividualsPlotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+            ElseIf rdoOne.Checked Then
+                clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
+            ElseIf rdoTwo.Checked Then
+                clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+            End If
+        ElseIf rdoBiplot.Checked Then
+            If rdoBoth.Checked Then
+                clsRBiplotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+            ElseIf rdoOne.Checked Then
+                clsRBiplotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
+            ElseIf rdoTwo.Checked Then
+                clsRBiplotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+            Else
+                clsRBiplotFunction.RemoveParameterByName("geom")
+            End If
+        Else
+            clsRScreePlotFunction.RemoveParameterByName("geom")
+        End If
+    End Sub
 
-Private Sub cboChoiceScree_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboChoiceScree.SelectedIndexChanged
+    Private Sub cboChoiceScree_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboChoiceScree.SelectedIndexChanged
     clsRScreePlotFunction.AddParameter("choice", Chr(34) & cboChoiceScree.SelectedItem.ToString & Chr(34))
-    ' have one combo box which they all use.
-End Sub
+        ' have one combo box which they all use.
+    End Sub
 
     Private Sub cboLabelVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLabel.SelectedIndexChanged
         If rdoVariablesPlot.Checked Then
@@ -338,5 +338,10 @@ End Sub
         If rdoBiplot.Checked Then
             clsRBiplotFunction.AddParameter("label", Chr(34) & cboLabel.SelectedItem.ToString & Chr(34))
         End If
+    End Sub
+
+    Private Sub rdoPlots_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScreePlot.CheckedChanged, rdoBarPlot.CheckedChanged, rdoBiplot.CheckedChanged, rdoVariablesPlot.CheckedChanged, rdoIndividualsPlot.CheckedChanged
+        DisplayOptions()
+        GeomChecked()
     End Sub
 End Class

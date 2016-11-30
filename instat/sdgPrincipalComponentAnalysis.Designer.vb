@@ -68,7 +68,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
         Me.tbRegOptions.Name = "tbRegOptions"
         Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(343, 364)
+        Me.tbRegOptions.Size = New System.Drawing.Size(390, 380)
         Me.tbRegOptions.TabIndex = 0
         '
         'tbDisplay
@@ -129,7 +129,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(335, 338)
+        Me.tbGraphics.Size = New System.Drawing.Size(382, 354)
         Me.tbGraphics.TabIndex = 1
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
@@ -159,7 +159,10 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'grpScree
         '
+        Me.grpScree.Controls.Add(Me.ucrReceiverFactor)
+        Me.grpScree.Controls.Add(Me.lblFactorVariable)
         Me.grpScree.Controls.Add(Me.cboChoiceScree)
+        Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
         Me.grpScree.Controls.Add(Me.lblChoiceScree)
         Me.grpScree.Controls.Add(Me.chkPercentageScree)
         Me.grpScree.Controls.Add(Me.grpGeom)
@@ -169,7 +172,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.Controls.Add(Me.nudDim2)
         Me.grpScree.Location = New System.Drawing.Point(10, 136)
         Me.grpScree.Name = "grpScree"
-        Me.grpScree.Size = New System.Drawing.Size(226, 196)
+        Me.grpScree.Size = New System.Drawing.Size(365, 212)
         Me.grpScree.TabIndex = 34
         Me.grpScree.TabStop = False
         Me.grpScree.Text = "Plot Options"
@@ -327,7 +330,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'lblFactorVariable
         '
         Me.lblFactorVariable.AutoSize = True
-        Me.lblFactorVariable.Location = New System.Drawing.Point(652, 121)
+        Me.lblFactorVariable.Location = New System.Drawing.Point(235, 35)
         Me.lblFactorVariable.Name = "lblFactorVariable"
         Me.lblFactorVariable.Size = New System.Drawing.Size(81, 13)
         Me.lblFactorVariable.TabIndex = 2
@@ -336,7 +339,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(655, 138)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(236, 50)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
@@ -347,7 +350,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         Me.ucrSelectorFactor.bShowHiddenColumns = False
         Me.ucrSelectorFactor.bUseCurrentFilter = True
-        Me.ucrSelectorFactor.Location = New System.Drawing.Point(445, 92)
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(7, 15)
         Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
         Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
@@ -355,7 +358,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'ucrSdgButtons
         '
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(47, 370)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(116, 385)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 1
@@ -364,10 +367,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1130, 412)
-        Me.Controls.Add(Me.ucrReceiverFactor)
-        Me.Controls.Add(Me.ucrSelectorFactor)
-        Me.Controls.Add(Me.lblFactorVariable)
+        Me.ClientSize = New System.Drawing.Size(399, 412)
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -389,7 +389,6 @@ Partial Class sdgPrincipalComponentAnalysis
         CType(Me.nudDim1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudDim2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
