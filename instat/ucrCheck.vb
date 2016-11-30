@@ -14,15 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
-
 Public Class ucrCheck
     Protected strValueIfChecked As String = "TRUE"
     Protected strValueIfUnchecked As String = "FALSE"
-    Public bCheckIfParameterPresent As Boolean = True
+    Public bParameterIncludedWhenChecked As Boolean = True
     Public bIsParameterValue As Boolean = True
     Public bIsParameterPresent As Boolean = False
-    Public Event evtCheckChanged(sender As Object, e As EventArgs)
+    Public Event CheckedChanged(sender As Object, e As EventArgs)
 
     Public Overrides Sub UpdateControl(clsRFunction As RFunction)
         Dim clsTempParam As RParameter
@@ -32,26 +30,50 @@ Public Class ucrCheck
             If bIsParameterValue Then
                 If clsTempParam IsNot Nothing Then
                     If clsTempParam.strArgumentValue = strValueIfChecked OrElse clsTempParam.strArgumentValue = strValueIfUnchecked Then
-                        chkCheck.Checked = clsTempParam.strArgumentValue = strValueIfChecked
+                        chkCheck.Checked = (clsTempParam.strArgumentValue = strValueIfChecked)
                     Else
                         MsgBox("Developer error: The value of parameter " & clsTempParam.strArgumentName & ": " & clsTempParam.strArgumentValue & " does not match strValueIfChecked or strValueIfUnchecked so cannot determine state for the checkbox. Defaulting to unchecked.")
                         chkCheck.Checked = False
                     End If
                 Else
-                    chkCheck.Checked = bCheckIfParameterPresent
+                    chkCheck.Checked = bParameterIncludedWhenChecked
                 End If
             End If
         ElseIf bIsParameterPresent Then
             If clsTempParam IsNot Nothing Then
-                chkCheck.Checked = bCheckIfParameterPresent
+                chkCheck.Checked = bParameterIncludedWhenChecked
             Else
-                chkCheck.Checked = Not bCheckIfParameterPresent
+                chkCheck.Checked = Not bParameterIncludedWhenChecked
             End If
         End If
     End Sub
 
     Public Overrides Sub UpdateRFunction(clsRFunction As RFunction)
-        Throw New NotImplementedException()
+        If strParameterName <> "" Then
+            If bIsParameterValue Then
+                If chkCheck.Checked Then
+                    If strValueIfChecked <> "" Then
+                        clsRFunction.AddParameter(strParameterName, strValueIfChecked)
+                    Else
+                        clsRFunction.RemoveParameterByName(strParameterName)
+                    End If
+                Else
+                    If strValueIfUnchecked <> "" Then
+                        clsRFunction.AddParameter(strParameterName, strValueIfUnchecked)
+                    Else
+                        clsRFunction.RemoveParameterByName(strParameterName)
+                    End If
+                End If
+            ElseIf bIsParameterPresent Then
+                If (chkCheck.Checked AndAlso bParameterIncludedWhenChecked) OrElse ((Not chkCheck.Checked) AndAlso (Not bParameterIncludedWhenChecked)) Then
+                    If clsRFunction.GetParameter(strParameterName) IsNot Nothing Then
+                        clsRFunction.AddParameter(strParameterName, strValueIfPresent)
+                    End If
+                Else
+                    clsRFunction.RemoveParameterByName(strParameterName)
+                End If
+            End If
+        End If
     End Sub
 
     Public Sub SetValueIfChecked(strNewValueIfChecked As String)
@@ -82,7 +104,7 @@ Public Class ucrCheck
     End Sub
 
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
-        RaiseEvent evtCheckChanged(sender, e)
+        RaiseEvent CheckedChanged(sender, e)
     End Sub
 
     Public Property Checked As Boolean

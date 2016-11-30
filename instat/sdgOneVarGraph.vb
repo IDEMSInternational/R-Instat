@@ -19,7 +19,6 @@ Public Class sdgOneVarGraph
     Public clsGraphOneVariable As New RFunction
     Public strNumericGeomFunction As String
     Public strCategoriacalGeomFunction As String
-    Public clsCoordPolarFunction As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -33,10 +32,10 @@ Public Class sdgOneVarGraph
 
     Public Sub SetDefaults()
         lblNumberofColumns.Visible = False
-        nudNumberofColumns.Visible = False
-        chkSpecifyLayout.Checked = False
-        chkFreeScaleAxisforFacets.Checked = False
-        nudNumberofColumns.Value = 3
+        'nudNumberofColumns.Visible = False
+        'chkSpecifyLayout.Checked = False
+        'chkFreeScaleAxisforFacets.Checked = False
+        'nudNumberofColumns.Value = 3
         ucrInputNumeric.Reset()
         ucrInputCategorical.Reset()
         'ucrInputNumeric.SetName("Boxplot")
@@ -58,11 +57,15 @@ Public Class sdgOneVarGraph
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", "geom_dotplot"))
         ucrInputCategorical.SetItems(lstCategoricalPairs)
         'ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
-        clsCoordPolarFunction.SetRCommand("coord_polar")
-        nudNumberofColumns.Maximum = 10
-        nudNumberofColumns.Minimum = 1
+
+        'nudNumberofColumns.Maximum = 10
+        'nudNumberofColumns.Minimum = 1
         ucrInputNumeric.SetParameterName("numeric")
         ucrInputCategorical.SetParameterName("categorical")
+
+        'TODO See if we can get the Text property on the Properties tab in design view to avoid this
+        ucrChkSpecifyLayout.SetText("Specify Layout")
+        ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction)
@@ -70,13 +73,13 @@ Public Class sdgOneVarGraph
     End Sub
 
     Private Sub SpecifyLayoutControl()
-        If chkSpecifyLayout.Checked Then
-            lblNumberofColumns.Visible = True
-            nudNumberofColumns.Visible = True
-        Else
-            lblNumberofColumns.Visible = False
-            nudNumberofColumns.Visible = False
-        End If
+        'If chkSpecifyLayout.Checked Then
+        '    lblNumberofColumns.Visible = True
+        '    nudNumberofColumns.Visible = True
+        'Else
+        '    lblNumberofColumns.Visible = False
+        '    nudNumberofColumns.Visible = False
+        'End If
     End Sub
 
     Public Sub SetNumericGeomFunction()
@@ -133,20 +136,20 @@ Public Class sdgOneVarGraph
         SetCategoricalGeomFunction()
     End Sub
 
-    Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScaleAxisforFacets.CheckedChanged
-        If chkFreeScaleAxisforFacets.Checked Then
-            clsGraphOneVariable.AddParameter("free_scale_axis", "TRUE")
-        Else
-            clsGraphOneVariable.RemoveParameterByName("free_scale_axis")
-        End If
+    Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs)
+        'If chkFreeScaleAxisforFacets.Checked Then
+        '    clsGraphOneVariable.AddParameter("free_scale_axis", "TRUE")
+        'Else
+        '    clsGraphOneVariable.RemoveParameterByName("free_scale_axis")
+        'End If
     End Sub
 
-    Private Sub nudNumberofColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged, chkSpecifyLayout.CheckedChanged
+    Private Sub nudNumberofColumns_TextChanged(sender As Object, e As EventArgs)
         SpecifyLayoutControl()
-        If nudNumberofColumns.Text <> "" AndAlso chkSpecifyLayout.Checked Then
-            clsGraphOneVariable.AddParameter("ncol", nudNumberofColumns.Value)
-        Else
-            clsGraphOneVariable.RemoveParameterByName("ncol")
-        End If
+        'If nudNumberofColumns.Text <> "" AndAlso chkSpecifyLayout.Checked Then
+        '    clsGraphOneVariable.AddParameter("ncol", nudNumberofColumns.Value)
+        'Else
+        '    clsGraphOneVariable.RemoveParameterByName("ncol")
+        'End If
     End Sub
 End Class

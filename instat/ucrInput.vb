@@ -394,7 +394,17 @@ Public Class ucrInput
     End Sub
 
     Public Overrides Sub UpdateRFunction(clsRFunction As RFunction)
-        Throw New NotImplementedException()
+        If strParameterName <> "" Then
+            If Not IsEmpty() Then
+                If GetAllRecognisedItems.Contains(GetText()) Then
+                    clsRFunction.AddParameter(strParameterName, lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value)
+                Else
+                    clsRFunction.AddParameter(strParameterName, GetText())
+                End If
+            Else
+                clsRFunction.RemoveParameterByName(strParameterName)
+            End If
+        End If
     End Sub
 
     ' key = parameter value
