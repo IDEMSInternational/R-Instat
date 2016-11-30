@@ -19,6 +19,11 @@ Public Class sdgPrincipalComponentAnalysis
     Public clsREigenValues, clsREigenVectors, clsRScores, clsPCAModel, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRRotation, clsRCoord, clsRContrib, clsREig, clsRFactor, clsRMelt As New RFunction
     Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction, clsRBarPlotGeom, clsRBarPlotFacet, clsRBarPlotAes As New RFunction
     Public clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
+
+    Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
+
+    End Sub
+
     Dim clsRBarPlot, clsRBarPlot0 As New ROperator
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -43,7 +48,9 @@ Public Class sdgPrincipalComponentAnalysis
         cboChoiceScree.SelectedItem = "variance"
         cboLabel.SelectedItem = "all"
         rdoScreePlot.Checked = True
+        nudDim1.Value = 1
         nudDim2.Value = 2
+        rdoBoth.Checked = True
         Dimensions()
         DisplayOptions()
     End Sub

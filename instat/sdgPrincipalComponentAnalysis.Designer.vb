@@ -32,6 +32,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoBarPlot = New System.Windows.Forms.RadioButton()
         Me.rdoIndividualsPlot = New System.Windows.Forms.RadioButton()
         Me.grpScree = New System.Windows.Forms.GroupBox()
+        Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.cboChoiceScree = New System.Windows.Forms.ComboBox()
         Me.lblChoiceScree = New System.Windows.Forms.Label()
         Me.chkPercentageScree = New System.Windows.Forms.CheckBox()
@@ -47,7 +48,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoVariablesPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
         Me.tbSave = New System.Windows.Forms.TabPage()
-        Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
@@ -79,7 +79,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbDisplay.Name = "tbDisplay"
         Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(335, 338)
+        Me.tbDisplay.Size = New System.Drawing.Size(382, 354)
         Me.tbDisplay.TabIndex = 0
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
@@ -177,6 +177,16 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.TabStop = False
         Me.grpScree.Text = "Plot Options"
         '
+        'lblFactorVariable
+        '
+        Me.lblFactorVariable.AutoSize = True
+        Me.lblFactorVariable.Location = New System.Drawing.Point(227, 35)
+        Me.lblFactorVariable.Name = "lblFactorVariable"
+        Me.lblFactorVariable.Size = New System.Drawing.Size(81, 13)
+        Me.lblFactorVariable.TabIndex = 2
+        Me.lblFactorVariable.Tag = "Factor_Variable"
+        Me.lblFactorVariable.Text = "Factor Variable:"
+        '
         'cboChoiceScree
         '
         Me.cboChoiceScree.FormattingEnabled = True
@@ -210,9 +220,9 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpGeom.Controls.Add(Me.rdoBoth)
         Me.grpGeom.Controls.Add(Me.rdoTwo)
         Me.grpGeom.Controls.Add(Me.rdoOne)
-        Me.grpGeom.Location = New System.Drawing.Point(11, 19)
+        Me.grpGeom.Location = New System.Drawing.Point(11, 18)
         Me.grpGeom.Name = "grpGeom"
-        Me.grpGeom.Size = New System.Drawing.Size(197, 38)
+        Me.grpGeom.Size = New System.Drawing.Size(197, 45)
         Me.grpGeom.TabIndex = 13
         Me.grpGeom.TabStop = False
         Me.grpGeom.Tag = "Geom"
@@ -221,7 +231,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoBoth
         '
         Me.rdoBoth.AutoSize = True
-        Me.rdoBoth.Location = New System.Drawing.Point(139, 14)
+        Me.rdoBoth.Location = New System.Drawing.Point(142, 17)
         Me.rdoBoth.Name = "rdoBoth"
         Me.rdoBoth.Size = New System.Drawing.Size(47, 17)
         Me.rdoBoth.TabIndex = 2
@@ -232,7 +242,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoTwo
         '
         Me.rdoTwo.AutoSize = True
-        Me.rdoTwo.Location = New System.Drawing.Point(74, 16)
+        Me.rdoTwo.Location = New System.Drawing.Point(74, 17)
         Me.rdoTwo.Name = "rdoTwo"
         Me.rdoTwo.Size = New System.Drawing.Size(14, 13)
         Me.rdoTwo.TabIndex = 1
@@ -242,7 +252,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoOne
         '
         Me.rdoOne.AutoSize = True
-        Me.rdoOne.Location = New System.Drawing.Point(8, 16)
+        Me.rdoOne.Location = New System.Drawing.Point(8, 17)
         Me.rdoOne.Name = "rdoOne"
         Me.rdoOne.Size = New System.Drawing.Size(14, 13)
         Me.rdoOne.TabIndex = 0
@@ -321,25 +331,15 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbSave.Location = New System.Drawing.Point(4, 22)
         Me.tbSave.Name = "tbSave"
         Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSave.Size = New System.Drawing.Size(335, 338)
+        Me.tbSave.Size = New System.Drawing.Size(382, 354)
         Me.tbSave.TabIndex = 2
         Me.tbSave.Tag = "Save"
         Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
         '
-        'lblFactorVariable
-        '
-        Me.lblFactorVariable.AutoSize = True
-        Me.lblFactorVariable.Location = New System.Drawing.Point(235, 35)
-        Me.lblFactorVariable.Name = "lblFactorVariable"
-        Me.lblFactorVariable.Size = New System.Drawing.Size(81, 13)
-        Me.lblFactorVariable.TabIndex = 2
-        Me.lblFactorVariable.Tag = "Factor_Variable"
-        Me.lblFactorVariable.Text = "Factor Variable:"
-        '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(236, 50)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(228, 50)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
@@ -350,7 +350,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         Me.ucrSelectorFactor.bShowHiddenColumns = False
         Me.ucrSelectorFactor.bUseCurrentFilter = True
-        Me.ucrSelectorFactor.Location = New System.Drawing.Point(7, 15)
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(9, 15)
         Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
         Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
