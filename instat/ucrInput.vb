@@ -49,10 +49,12 @@ Public Class ucrInput
     Public Sub OnNameChanged()
         Me.Text = Me.GetText()
         RaiseEvent NameChanged()
+        OnControlValueChanged()
     End Sub
 
     Public Sub OnContentsChanged()
         RaiseEvent ContentsChanged()
+        OnControlContentsChanged()
     End Sub
 
     Public Function UserTyped() As Boolean
@@ -376,10 +378,13 @@ Public Class ucrInput
         End Set
     End Property
 
-    Public Overrides Sub UpdateControl(clsRFunction As RFunction)
+    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
         Dim clsTempParam As RParameter
+
+        MyBase.UpdateControl(clsRCodeObject)
+
         'TODO Add methods in RFunction/base class for RFunction/ROperator to do these checks better
-        clsTempParam = clsRFunction.GetParameter(strParameterName)
+        clsTempParam = clsRCodeObject.GetParameter(strParameterName)
         If strParameterName <> "" Then
             If clsTempParam IsNot Nothing Then
                 If GetAllRecognisedParameterValues.Contains(clsTempParam.strArgumentValue) Then
@@ -393,7 +398,7 @@ Public Class ucrInput
         End If
     End Sub
 
-    Public Overrides Sub UpdateRFunction(clsRFunction As RFunction)
+    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
         If strParameterName <> "" Then
             If Not IsEmpty() Then
                 If GetAllRecognisedItems.Contains(GetText()) Then

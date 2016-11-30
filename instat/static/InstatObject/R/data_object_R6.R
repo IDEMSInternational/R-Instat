@@ -1587,18 +1587,22 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value)) + ylab("")
-      if(curr_geom_name == "box_jitter") {
-        g <- g + geom_boxplot() + geom_jitter() 
-      }
-      else if(curr_geom_name == "violin_jitter") {
-        g <- g + geom_violin() + geom_jitter() 
-      }
-      else if(curr_geom_name == "violin_box") {
-        g <- g + geom_violin() + geom_boxplot() 
-      }
-      else if(curr_geom_name == "pie_chart") {
-        g <- g + geom_bar() + coord_polar(theta = "x")
-      }
+    }
+    
+    if(curr_geom_name == "box_jitter") {
+      g <- g + geom_boxplot() + geom_jitter() 
+    }
+    else if(curr_geom_name == "violin_jitter") {
+      g <- g + geom_violin() + geom_jitter() 
+    }
+    else if(curr_geom_name == "violin_box") {
+      g <- g + geom_violin() + geom_boxplot() 
+    }
+    else if(curr_geom_name == "pie_chart") {
+      g <- g + geom_bar() + coord_polar(theta = "x")
+    }
+    else {
+      g <- g + curr_geom()
     }
 
     if(free_scale_axis) {

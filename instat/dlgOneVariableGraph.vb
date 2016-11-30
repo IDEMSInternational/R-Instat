@@ -13,12 +13,10 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVariableGraph
-    Private clsRggplotFunction As New RFunction
-    Private clsRaesFunction As New RFunction
-    Private clsRgeom_Function As New RFunction
     Private bFirstLoad As Boolean = True
     Private clsDefaultRFunction As New RFunction
 
@@ -37,6 +35,7 @@ Public Class dlgOneVariableGraph
     Private Sub SetDefaults()
         ' Set default RFunction as base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction)
         ' Update main dialog controls from base function
         UpdateControls(Me, ucrBase.clsRsyntax.clsBaseFunction)
         ucrSelectorOneVarGraph.Reset()
@@ -52,20 +51,24 @@ Public Class dlgOneVariableGraph
 
     Private Sub InitialiseDialog()
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultRFunction.AddParameter("numeric", "geom_boxplot")
-        clsDefaultRFunction.AddParameter("cateogrical", "geom_bar")
-        clsDefaultRFunction.AddParameter("output", "facets")
+        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
         'Define default RFunction
         rdoSingleGraphs.Enabled = False
+
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
+
+        ucrSelectorOneVarGraph.SetParameterName("data")
+        ucrSelectorOneVarGraph.SetParameterIsString()
+
         ucrBase.iHelpTopicID = 412
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'this sets the main function to be used in the dialog
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        'ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
     End Sub
 
     Private Sub ReopenDialog()
@@ -153,5 +156,9 @@ Public Class dlgOneVariableGraph
         Else
             ucrBase.clsRsyntax.RemoveParameter("coord_flip")
         End If
+    End Sub
+
+    Private Sub ucrSelectorOneVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged
+        ucrChangedControl.UpdateRCode(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 End Class

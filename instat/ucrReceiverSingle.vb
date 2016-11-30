@@ -237,7 +237,7 @@ Public Class ucrReceiverSingle
         RemoveSelected()
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRFunction As RFunction)
+    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
         Throw New NotImplementedException()
     End Sub
 End Class

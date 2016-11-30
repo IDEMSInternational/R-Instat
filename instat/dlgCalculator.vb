@@ -992,8 +992,8 @@ Public Class dlgCalculator
         bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
         strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
         'These should really be done through RSyntax methods as above
-        strAssignToColumn = ucrBase.clsRsyntax.strAssignToColumn
-        strAssignToDataFrame = ucrBase.clsRsyntax.strAssignToDataframe
+        strAssignToColumn = ucrBase.clsRsyntax.GetstrAssignToColumn()
+        strAssignToDataFrame = ucrBase.clsRsyntax.GetstrAssignToDataFrame()
 
         Try
             If ucrReceiverForCalculation.IsEmpty Then
@@ -1025,8 +1025,8 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
             ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
             'These should really be done through RSyntax methods as above
-            ucrBase.clsRsyntax.strAssignToColumn = strAssignToColumn
-            ucrBase.clsRsyntax.strAssignToDataframe = strAssignToDataFrame
+            ucrBase.clsRsyntax.SetstrAssignToColumn(strAssignToColumn)
+            ucrBase.clsRsyntax.SetstrAssignToDataFrame(strAssignToDataFrame)
         End Try
     End Sub
 

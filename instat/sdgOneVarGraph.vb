@@ -13,12 +13,11 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class sdgOneVarGraph
     Public bFirstLoad As Boolean = True
     Public clsGraphOneVariable As New RFunction
-    Public strNumericGeomFunction As String
-    Public strCategoriacalGeomFunction As String
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -31,13 +30,13 @@ Public Class sdgOneVarGraph
     End Sub
 
     Public Sub SetDefaults()
-        lblNumberofColumns.Visible = False
+        'lblNumberofColumns.Visible = False
         'nudNumberofColumns.Visible = False
         'chkSpecifyLayout.Checked = False
         'chkFreeScaleAxisforFacets.Checked = False
         'nudNumberofColumns.Value = 3
-        ucrInputNumeric.Reset()
-        ucrInputCategorical.Reset()
+        'ucrInputNumeric.Reset()
+        'ucrInputCategorical.Reset()
         'ucrInputNumeric.SetName("Boxplot")
         'ucrInputCategorical.SetName("Bar Chart")
     End Sub
@@ -47,14 +46,15 @@ Public Class sdgOneVarGraph
         Dim lstCategoricalPairs As New List(Of KeyValuePair(Of String, String))
 
         lstNumericPairs.Add(New KeyValuePair(Of String, String)("Boxplot", Chr(34) & "geom_boxplot" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Dotplot", "geom_dotplot"))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Histogram", "geom_histogram"))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Dotplot", Chr(34) & "geom_dotplot" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Histogram", Chr(34) & "geom_histogram" & Chr(34)))
+        'TODO add other geoms from below to lstNumericPairs
         ucrInputNumeric.SetItems(lstNumericPairs)
         'ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon", "Violin Plot", "Jitter Plot", "Boxplot + Jitter", "Violin + Jitter", "Violin + Boxplot"})
 
-        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Bar Chart", "geom_bar"))
-        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Pie Chart", "pie_chart"))
-        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", "geom_dotplot"))
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Bar Chart", Chr(34) & "geom_bar" & Chr(34)))
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Pie Chart", Chr(34) & "pie_chart" & Chr(34)))
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
         ucrInputCategorical.SetItems(lstCategoricalPairs)
         'ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
 
@@ -66,6 +66,10 @@ Public Class sdgOneVarGraph
         'TODO See if we can get the Text property on the Properties tab in design view to avoid this
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
+        ucrNudNumberofColumns.SetParameterName("ncol")
+        ucrNudNumberofColumns.SetLinkedControl(ucrChkSpecifyLayout)
+        ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
+        ucrNudNumberofColumns.SetMinMax(1, 10)
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction)
@@ -112,7 +116,7 @@ Public Class sdgOneVarGraph
     End Sub
 
     Private Sub ucrInputNumeric_NameChanged() Handles ucrInputNumeric.NameChanged
-        SetNumericGeomFunction()
+        'SetNumericGeomFunction()
     End Sub
 
     Public Sub SetCategoricalGeomFunction()
@@ -133,7 +137,7 @@ Public Class sdgOneVarGraph
     End Sub
 
     Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
-        SetCategoricalGeomFunction()
+        'SetCategoricalGeomFunction()
     End Sub
 
     Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs)
@@ -145,11 +149,15 @@ Public Class sdgOneVarGraph
     End Sub
 
     Private Sub nudNumberofColumns_TextChanged(sender As Object, e As EventArgs)
-        SpecifyLayoutControl()
+        'SpecifyLayoutControl()
         'If nudNumberofColumns.Text <> "" AndAlso chkSpecifyLayout.Checked Then
         '    clsGraphOneVariable.AddParameter("ncol", nudNumberofColumns.Value)
         'Else
         '    clsGraphOneVariable.RemoveParameterByName("ncol")
         'End If
+    End Sub
+
+    Private Sub CoreControlsValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScaleAxisforFacets.ControlValueChanged, ucrChkSpecifyLayout.ControlContentsChanged, ucrInputCategorical.ControlContentsChanged, ucrInputNumeric.ControlContentsChanged, ucrNudNumberofColumns.ControlContentsChanged
+        ucrChangedControl.UpdateRCode(clsGraphOneVariable)
     End Sub
 End Class
