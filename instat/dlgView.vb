@@ -40,6 +40,7 @@ Public Class dlgView
         ucrSelctorForView.Focus()
         rdoTop.Checked = True
         grpDisplayFrom.ResetText()
+        ' By default the dialogue is in preview mode rather than View mode. See SetCommands() for details.
         rdoViewPreview.Checked = True
         rdoViewDataFrame.Checked = False
     End Sub
@@ -52,9 +53,9 @@ Public Class dlgView
     End Sub
 
     Private Sub TestOKEnabled()
-        If (ucrReceiverView.IsEmpty() = False And nudNumberRows.Text <> "") AndAlso rdoViewPreview.Checked Then
-            ucrBase.OKEnabled(True)
-        ElseIf rdoViewDataFrame.Checked Then
+        'OK is enabled 1st when the View preview radio button is checked and the receiver and  up and down rows are non-empty 
+        'ALSO, when the radio button View Data Frame is checked, the OK should be enabled regardless of the receiver being empty or non-empty since it is not connected to it at all(It striggers the View command to pick the current dataframe as its argument only).
+        If ((Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> "") AndAlso rdoViewPreview.Checked) OrElse rdoViewDataFrame.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -62,10 +63,6 @@ Public Class dlgView
     End Sub
 
     Private Sub grpDisplayFrom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
-        grpRowsToBeSelected()
-    End Sub
-
-    Private Sub grpRowsToBeSelected()
         SetCommands()
         TestOKEnabled()
     End Sub
@@ -96,11 +93,13 @@ Public Class dlgView
     End Sub
 
     Private Sub SetCommands()
+        'Adding the View command and its parameter while ensuring the the "n" parameter of the tail nd head are excluded as its parameters
         If rdoViewDataFrame.Checked Then
             ucrBase.clsRsyntax.RemoveParameter("n")
             ucrBase.clsRsyntax.SetFunction("View")
-            ucrBase.clsRsyntax.AddParameter("x", ucrSelctorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.AddParameter("x", ucrSelctorForView.strCurrentDataFrame)
         ElseIf rdoViewPreview.Checked Then
+            'Adding commands and parameter for head and tail 
             If Not ucrReceiverView.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
                 If rdoTop.Checked Then
