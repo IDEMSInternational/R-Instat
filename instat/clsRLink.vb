@@ -24,6 +24,8 @@ Public Class RLink
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
     Dim txtOutput As New RichTextBox
+    Dim wbOutput As New WebBrowser 'TEST temporary...
+    Dim rtbOutput2 As New ucrWPFRichTextBox 'TEST temporary...
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -77,6 +79,17 @@ Public Class RLink
 
     Public Sub SetOutput(tempOutput As RichTextBox)
         txtOutput = tempOutput
+        bOutput = True
+    End Sub
+    Public Sub SetWbOutput(tempOutput As WebBrowser)
+        'TEST temporary
+        wbOutput = tempOutput
+        bOutput = True
+    End Sub
+
+    Public Sub SetOutput2(tempOutput As ucrWPFRichTextBox)
+        'TEST temporary
+        rtbOutput2 = tempOutput
         bOutput = True
     End Sub
 
@@ -216,7 +229,7 @@ Public Class RLink
         Return strNextDefault
     End Function
 
-    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
+    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "", Optional bHtmlOutput As Boolean = False)
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
@@ -237,8 +250,15 @@ Public Class RLink
         If bOutput Then
             If strComment <> "" Then
                 AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
+                AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+                AppendText2(rtbOutput2, clrComments, fComments, strComment & vbCrLf, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+                WbAppendText(wbOutput, clrComments, fComments, strComment & vbCrLf) 'TEST temporary
+                WbAppendText(wbOutput, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+            Else
+                AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+                AppendText2(rtbOutput2, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+                WbAppendText(wbOutput, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
             End If
-            AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
         End If
 
         'If strScript.Length > 2000 Then
@@ -280,10 +300,120 @@ Public Class RLink
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         End If
-        If bOutput Then
-            AppendText(txtOutput, clrOutput, fOutput, strOutput)
+        If bOutput AndAlso strOutput <> "" Then
+            If bHtmlOutput Then 'TEST temporary
+                AppendText(txtOutput, clrOutput, fOutput, strOutput)
+                rtbOutput2.AddIntoWebBrowser(strHtmlCode:=strOutput)
+                WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
+            Else
+                AppendText(txtOutput, clrOutput, fOutput, strOutput)
+                AppendText2(rtbOutput2, clrOutput, fOutput, strOutput) 'TEST temporary
+                WbAppendText(wbOutput, clrOutput, fOutput, strOutput) 'TEST temporary
+            End If
         End If
-        frmMain.clsGrids.UpdateGrids()
+            frmMain.clsGrids.UpdateGrids()
+    End Sub
+
+    Public Function GetImageRTFCode(strImageLocation As String, iWidth As Integer, iHeight As Integer) As String
+
+        'use reference
+        'http://stackoverflow.com/questions/1490734/programatically-adding-images-to-rtf-document
+
+        Dim img As Image = Image.FromFile(strImageLocation)
+        Dim stream As New IO.MemoryStream
+        img.Save(stream, Imaging.ImageFormat.Png)
+        Dim bytes As Byte() = stream.ToArray()
+        Dim strBytes As String = BitConverter.ToString(bytes).Replace("-", "")
+
+        Dim strRTFPic As String = "{\pict\pngblip\picw" +
+        img.Width.ToString() & "\pich" & img.Height.ToString() &
+        "\picwgoa" & iWidth.ToString() + "\pichgoa" & iHeight.ToString() +
+        "\hex " & strBytes & "}"
+
+        stream.Dispose()
+
+        Return strRTFPic
+    End Function
+
+    Public Sub DisplayGraphInRTB(strImageLocation As String)
+        'TEST temporary
+        'First method, pasting
+        txtOutput.ReadOnly = False
+        Dim img As Image = Image.FromFile(strImageLocation)
+        Dim bimg = New Bitmap(img, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
+        Dim orgData = Clipboard.GetDataObject
+
+        Clipboard.SetImage(bimg)
+        txtOutput.Paste()
+        Clipboard.SetDataObject(orgData)
+        img.Dispose()
+        bimg.Dispose()
+        'Second method add to rtf code, this doesn't work yet.. either because GetImage is crap, or because the code is not inserted at the right place...
+        'txtOutput.Rtf = txtOutput.Rtf & GetImageRTFCode(strImageLocation, (txtOutput.Width * 0.9), (img.Height * (txtOutput.Width / img.Width) * 0.9))
+
+        'IO.File.Delete(strImageLocation) 'need to close the file first... It's still in use when coming to this line...
+        'FileIO.FileSystem.DeleteFile(strImageLocation) 
+
+        txtOutput.ReadOnly = True
+    End Sub
+    Public Sub DisplayGraphInOutput2(strImageLocation As String)
+        'Task: migrate the sub to the ucrWPFRichTextBox class ?
+        'TEST temporary
+        Dim conImage As Windows.Documents.BlockUIContainer
+        Dim UIEimage As New Windows.Controls.Image()
+        Dim bimg As New Windows.Media.Imaging.BitmapImage()
+        Dim thickness As New Windows.Thickness(1)
+        Using fstream As New IO.FileStream(strImageLocation, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            bimg.BeginInit()
+            bimg.CacheOption = Windows.Media.Imaging.BitmapCacheOption.OnLoad
+            bimg.StreamSource = fstream
+            bimg.EndInit()
+        End Using
+        bimg.Freeze()
+        UIEimage.Source = bimg
+        UIEimage.Stretch = Windows.Media.Stretch.Uniform
+        UIEimage.StretchDirection = Windows.Controls.StretchDirection.DownOnly
+        conImage = New Windows.Documents.BlockUIContainer(UIEimage)
+        conImage.BorderThickness = thickness
+        conImage.BorderBrush = Windows.Media.Brushes.Black
+        conImage.Padding = thickness
+        rtbOutput2.rtbOutput.Document.Blocks.Add(conImage)
+        rtbOutput2.rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
+
+        'TESTING TO BE REMOVED
+        Dim strStargazer As String = "<table style=" & Chr(34) & "text-align:center" & Chr(34) & "><tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>
+<tr><td colspan = " & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">rating</td><td>30</td><td>64.633</td><td>12.173</td><td>40</td><td>85</td></tr>
+<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">complaints</td><td>30</td><td>66.600</td><td>13.315</td><td>37</td><td>90</td></tr>
+<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">privileges</td><td>30</td><td>53.133</td><td>12.235</td><td>30</td><td>83</td></tr>
+<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">learning</td><td>30</td><td>56.367</td><td>11.737</td><td>34</td><td>75</td></tr>
+<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">raises</td><td>30</td><td>64.633</td><td>10.397</td><td>43</td><td>88</td></tr>
+<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">critical</td><td>30</td><td>74.767</td><td>9.895</td><td>49</td><td>92</td></tr>
+<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">advance</td><td>30</td><td>42.933</td><td>10.289</td><td>25</td><td>72</td></tr>
+<tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom: 1px solid black" & Chr(34) & "></td></tr></table>"
+        rtbOutput2.AddIntoWebBrowser(strFilePath:="file:///C:/Users/Fran%C3%A7ois/Documents/Administratif/jobs/ADI/R_HTML_Files/firstggplotgrphinhtml.html")
+        rtbOutput2.AddIntoWebBrowser(strHtmlCode:=strStargazer)
+    End Sub
+    Public Sub DisplayGraphInWB(strImageLocation As String)
+        'TEST temporary
+
+        'WebBrowser.DocumentStream.??? 
+        'https://msdn.microsoft.com/en-us/library/system.windows.forms.webbrowser.documentstream(v=vs.110).aspx
+
+        'Use references... also need something handles DocumentFinished event... or something...
+        'https://social.msdn.microsoft.com/Forums/en-US/2b2244ed-c628-4e82-9751-d829be620689/display-images-in-web-browser-control?forum=vblanguage
+        'http://www.dotnetspark.com/Forum/2673-insert-image-web-browser-control-windows.aspx
+
+        'wbOutput.DocumentText = "< img src='" & strImageLocation & "' />"
+        'http://www.rasteredge.com/how-to/asp-net-imaging/imaging-viewing/
+        If (wbOutput.Document IsNot Nothing) Then
+            With wbOutput.Document
+                Dim imgElement As HtmlElement = .CreateElement("img src")
+                imgElement.InnerText = strImageLocation
+                .Body.AppendChild(imgElement)
+            End With
+        End If
+
+
     End Sub
 
     Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
@@ -304,6 +434,53 @@ Public Class RLink
         ' clear
         box.SelectionStart = box.Text.Length
         box.ScrollToCaret()
+    End Sub
+
+    Private Sub AppendText2(TempRtf As ucrWPFRichTextBox, color As Color, font As Font, text As String, Optional color2 As Color = Nothing, Optional font2 As Font = Nothing, Optional text2 As String = Nothing)
+        'Task: migrate the sub to the ucrWPFRichTextBox...
+        Dim run1 As New Windows.Documents.Run(text)
+        run1.FontFamily = New Windows.Media.FontFamily(font.FontFamily.Name)
+        run1.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color.Name)
+        Dim Paragraph As New Windows.Documents.Paragraph(run1)
+        If font2 IsNot Nothing AndAlso text2 IsNot Nothing AndAlso color2 <> Nothing Then 'Note: IsNot only works for reference types...
+            Dim run2 As New Windows.Documents.Run(text2)
+            run2.FontFamily = New Windows.Media.FontFamily(font2.FontFamily.Name)
+            run2.Foreground = New Windows.Media.BrushConverter().ConvertFromString(color2.Name)
+            Paragraph.Inlines.Add(run2)
+        End If
+        TempRtf.rtbOutput.Document.Blocks.Add(Paragraph)
+    End Sub
+
+    Private Sub WbAppendText(WebBrowser As WebBrowser, color As Color, font As Font, text As String)
+        'TEST temporary
+
+        If (WebBrowser.Document IsNot Nothing) Then
+            With WebBrowser.Document
+                Dim TextElem As HtmlElement = .CreateElement("DIV")
+                TextElem.InnerText = text
+                .Body.AppendChild(TextElem)
+            End With
+        End If
+
+        'wbOutput.DocumentText.Insert(wbOutput.DocumentText.Length, text)
+        'Dim iStart As Integer
+        'Dim iEnd As Integer
+
+        'iStart = WebBrowser.DocumentText.Length
+        'WebBrowser.DocumentText = WebBrowser.DocumentText & text
+        'WebBrowser.Document.Write(text)
+        'iEnd = WebBrowser.DocumentText.Length
+
+        'Warning: so far don't know how to change font and colour of the text...
+        ' Textbox may transform chars, so (end-start) != text.Length
+        ' WebBrowser.DocumentText.Substring(iStart, iEnd - iStart)
+        'WebBrowser.SelectionColor = color
+        'WebBrowser.SelectionFont = font
+        'TClears selection
+        'WebBrowser.SelectionLength = 0
+        ' clear
+        'WebBrowser.SelectionStart = WebBrowser.Text.Length
+        'WebBrowser.ScrollToCaret()
     End Sub
 
     Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False) As SymbolicExpression
