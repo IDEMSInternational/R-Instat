@@ -122,24 +122,20 @@ get_odk_form_names = function(username, password, platform) {
 }
 
 import_CPT <- function(dataset, data_from = 5){
-  start_year <-min(get_years_from_data(dataset))
-  end_year <-max(get_years_from_data(dataset))
-  duration =length(get_years_from_data(dataset))
+  start_year <-get_years_from_data(dataset)[1]
+  end_year <-get_years_from_data(dataset)[length(get_years_from_data(dataset))]
+  duration =get_years_from_data(dataset)
 
   lon = get_lon_from_data(dataset)
   lat = get_lat_from_data(dataset)
+  lat_lon_df = lat_lon_dataframe(dataset)
   
-  column_names<-c()
-  for (i in 1:length(lat)){
-    for (j in 1:length(lon)){
-      column_names = append(column_names, paste(paste("lat", lat[i], sep = ""), paste("lon", lon[j], sep = ""), sep = "_"))
-    }
-  }
-  my_data = as.data.frame(matrix(NA, nrow = duration, ncol = (length(lat)*length(lon)+1)))
+  my_data = as.data.frame(matrix(NA, nrow = length(duration), ncol = (length(lat)*length(lon)+1)))
   my_data[,1] = get_years_from_data(dataset)
-  names(my_data) <- c("year",column_names)
-  for (k in 1:duration){
-    nam <- paste("year", start_year + k-1, sep = "_")
+  names(my_data) <- c("Period", as.character(lat_lon_df$column_names))
+  v=1
+  for (k in duration){
+    nam <- k #paste("year", start_year + k-1, sep = "_")
     year <-matrix(NA, nrow = length(lat), ncol = length(lon))
     for (i in 1:length(lat)){
       for (j in 1:length(lon)){
@@ -153,14 +149,14 @@ import_CPT <- function(dataset, data_from = 5){
     year=stack(year)
     data_from = data_from+length(lat)+2
     g=as.numeric(year$values)
-    my_data[k,2:ncol(my_data)] = g
-    k=k+1
+    my_data[v,2:ncol(my_data)] = g
+    v=v+1
   }
   return(my_data)
 }
 
 get_years_from_data <- function(dataset){
-  return(as.numeric(format(as.Date(na.omit(t(unique(dataset[3,2:ncol(dataset)])))), '%Y')))
+  return(na.omit(t(unique(dataset[3,2:ncol(dataset)])))) #will apply order
 }
 
 get_lat_from_data <- function(dataset){
@@ -169,4 +165,18 @@ get_lat_from_data <- function(dataset){
 
 get_lon_from_data <- function(dataset){
   return(as.numeric(na.omit(t(unique(dataset[5,2:ncol(dataset)])))))
+}
+
+lat_lon_dataframe <- function(dataset){
+  latitude  = get_lat_from_data(dataset)
+  longitude = get_lon_from_data(dataset)
+  lat = rep(latitude, each = length(longitude))
+  lon = rep(longitude, length(latitude))
+  lat_lon = as.data.frame(cbind(lat, lon))
+  
+  column_names<-c()
+  for (j in 1:nrow(lat_lon)){
+    column_names = append(column_names, paste(paste("lat", lat_lon[j,1], sep = ""), paste("lon", lat_lon[j,2], sep = ""), sep = "_"))
+  }
+  return(cbind(lat_lon,column_names))
 }

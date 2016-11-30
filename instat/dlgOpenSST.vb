@@ -18,7 +18,7 @@ Imports System.IO
 
 Public Class dlgOpenSST
     'Private intLines As Integer
-    Private clsReadCSV As RFunction
+    Private clsReadCSV, clsReadLatLon, clsRList, clsReadLatLon0 As RFunction
     Private strTempWorkbookName As String
     Dim bFirstLoad As Boolean
     Dim strFileType As String
@@ -33,8 +33,16 @@ Public Class dlgOpenSST
         ' Add any initialization after the InitializeComponent() call.
         'intLines = 10
         clsReadCSV = New RFunction
+        clsReadLatLon = New RFunction
+        clsRList = New RFunction
+        clsReadLatLon0 = New RFunction
         ucrBaseOpenSST.clsRsyntax.SetFunction("import_CPT")
         ucrBaseOpenSST.clsRsyntax.AddParameter("dataset", clsRFunctionParameter:=clsReadCSV)
+        clsReadLatLon.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+        clsRList.SetRCommand("list")
+        clsReadLatLon.AddParameter("data_tables", clsRFunctionParameter:=clsRList)
+        clsReadLatLon0.SetRCommand("lat_lon_dataframe")
+        clsReadLatLon0.AddParameter("dataset", clsRFunctionParameter:=clsReadCSV)
         bFirstLoad = True
         bCanImport = True
         bComponentsInitialised = True
@@ -77,6 +85,7 @@ Public Class dlgOpenSST
     Private Sub ucrInputName_NameChanged() Handles ucrInputName.NameChanged
         If Not ucrInputName.IsEmpty Then
             ucrBaseOpenSST.clsRsyntax.SetAssignTo(ucrInputName.GetText(), strTempDataframe:=ucrInputName.GetText())
+            clsRList.AddParameter("lat_lon_data", clsRFunctionParameter:=clsReadLatLon0)
         Else
             ucrBaseOpenSST.clsRsyntax.RemoveAssignTo()
         End If
@@ -105,7 +114,7 @@ Public Class dlgOpenSST
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
         Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "Comma separated files|*.csv"
+            dlgOpen.Filter = "All Data files|*.csv;*.tsv;*.txt|Comma separated files|*.csv|Tab separated files|*.tsv|Text Separated files|*.txt"
             dlgOpen.Title = "Open Data from file"
             If Not ucrInputFilePath.IsEmpty() Then
                 dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputFilePath.GetText(), "/", "\"))
@@ -131,6 +140,29 @@ Public Class dlgOpenSST
                         strFileType = "csv"
                         ucrInputName.SetName(strFileName, bSilent:=True)
                         ucrInputName.Focus()
+                        clsReadCSV.RemoveParameterByName("fread")
+                        clsReadCSV.RemoveParameterByName("fill")
+                    End If
+
+                    If strFileExt = ".tsv" Then
+                        clsReadCSV.SetRCommand("rio::import")
+                        clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        grpCSV.Show()
+                        strFileType = "tsv"
+                        ucrInputName.SetName(strFileName, bSilent:=True)
+                        ucrInputName.Focus()
+                        clsReadCSV.AddParameter("fread", "FALSE")
+                        clsReadCSV.AddParameter("fill", "TRUE")
+                    End If
+                    If strFileExt = ".txt" Then
+                        clsReadCSV.SetRCommand("rio::import")
+                        clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        grpCSV.Show()
+                        strFileType = "txt"
+                        ucrInputName.SetName(strFileName, bSilent:=True)
+                        ucrInputName.Focus()
+                        clsReadCSV.AddParameter("fread", "FALSE")
+                        clsReadCSV.AddParameter("fill", "TRUE")
                     End If
                 End If
             Else
@@ -143,7 +175,6 @@ Public Class dlgOpenSST
     End Sub
 
 #End Region
-
 
 #Region "CSV options"
     Private Sub SetCSVDefault()
@@ -164,7 +195,6 @@ Public Class dlgOpenSST
         End If
 
     End Sub
-
 
     Private Sub ucrInputDecimal_NameChanged() Handles ucrInputDecimal.NameChanged
         Select Case ucrInputDecimal.GetText
@@ -218,6 +248,10 @@ Public Class dlgOpenSST
         End If
     End Sub
 
+    Private Sub ucrInputName_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
     Private Sub nudSkips_TextChanged(sender As Object, e As EventArgs) Handles nudSkip.TextChanged
         If bComponentsInitialised Then
             If nudSkip.Value = 0 Then
@@ -232,4 +266,8 @@ Public Class dlgOpenSST
         GetFileFromOpenDialog()
     End Sub
 #End Region
+
+    Private Sub ucrBaseOpenSST_clickok(sender As Object, e As EventArgs) Handles ucrBaseOpenSST.ClickOk
+        frmMain.clsRLink.RunScript(clsReadLatLon.ToScript(), 0)
+    End Sub
 End Class
