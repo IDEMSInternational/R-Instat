@@ -133,6 +133,8 @@ Public Class ucrReceiver
 
     Public Sub OnValueChanged(ByVal sender As Object, ByVal e As EventArgs)
         RaiseEvent ValueChanged(sender, e)
+        OnControlContentsChanged()
+        OnControlValueChanged()
     End Sub
 
     'TODO remove this method and replace with SetIncludedDataTypes
@@ -290,13 +292,15 @@ Public Class ucrReceiver
         Dim sender As New Object
         Dim e As New EventArgs
         RaiseEvent SelectionChanged(sender, e)
+        OnControlContentsChanged()
+        OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRFunction As RFunction)
-        Throw New NotImplementedException()
+    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
+        MyBase.UpdateControl(clsRCodeObject)
     End Sub
 
-    Public Overrides Sub UpdateRFunction(clsRFunction As RFunction)
-        Throw New NotImplementedException()
+    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+        MyBase.UpdateRCode(clsRFunction, clsROperator)
     End Sub
 End Class

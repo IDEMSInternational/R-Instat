@@ -140,6 +140,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="dlgAppend.Designer.vb">
       <DependentUpon>dlgAppend.vb</DependentUpon>
     </Compile>

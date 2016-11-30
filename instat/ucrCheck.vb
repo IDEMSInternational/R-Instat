@@ -20,12 +20,14 @@ Public Class ucrCheck
     Public bParameterIncludedWhenChecked As Boolean = True
     Public bIsParameterValue As Boolean = True
     Public bIsParameterPresent As Boolean = False
-    Public Event CheckedChanged(sender As Object, e As EventArgs)
 
-    Public Overrides Sub UpdateControl(clsRFunction As RFunction)
+    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
         Dim clsTempParam As RParameter
+
+        MyBase.UpdateControl(clsRCodeObject)
+
         'TODO Add methods in RFunction/base class for RFunction/ROperator to do these checks better
-        clsTempParam = clsRFunction.GetParameter(strParameterName)
+        clsTempParam = clsRCodeObject.GetParameter(strParameterName)
         If strParameterName <> "" Then
             If bIsParameterValue Then
                 If clsTempParam IsNot Nothing Then
@@ -48,7 +50,7 @@ Public Class ucrCheck
         End If
     End Sub
 
-    Public Overrides Sub UpdateRFunction(clsRFunction As RFunction)
+    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
         If strParameterName <> "" Then
             If bIsParameterValue Then
                 If chkCheck.Checked Then
@@ -59,15 +61,21 @@ Public Class ucrCheck
                     End If
                 Else
                     If strValueIfUnchecked <> "" Then
-                        clsRFunction.AddParameter(strParameterName, strValueIfUnchecked)
+                        If clsRFunction IsNot Nothing Then
+                            clsRFunction.AddParameter(strParameterName, strValueIfUnchecked)
+                        ElseIf clsROperator IsNot Nothing Then
+                            'TODO Implement this
+                            'clsROperator.SetParameter()
+                            'clsROperator.AddAdditionalParameter()
+                        End If
                     Else
                         clsRFunction.RemoveParameterByName(strParameterName)
                     End If
                 End If
             ElseIf bIsParameterPresent Then
                 If (chkCheck.Checked AndAlso bParameterIncludedWhenChecked) OrElse ((Not chkCheck.Checked) AndAlso (Not bParameterIncludedWhenChecked)) Then
-                    If clsRFunction.GetParameter(strParameterName) IsNot Nothing Then
-                        clsRFunction.AddParameter(strParameterName, strValueIfPresent)
+                    If ucrLinkedControl IsNot Nothing Then
+                        ucrLinkedControl.UpdateRCode(clsRFunction)
                     End If
                 Else
                     clsRFunction.RemoveParameterByName(strParameterName)
@@ -98,13 +106,20 @@ Public Class ucrCheck
         bIsParameterValue = False
     End Sub
 
+    Public Overrides Sub SetLinkedControl(ucrNewLinkedControl As ucrCore)
+        MyBase.SetLinkedControl(ucrNewLinkedControl)
+        bIsParameterPresent = True
+        bIsParameterValue = False
+    End Sub
+
     Public Sub SetIsParameterValue(bNewIsParameterValue As Boolean)
         bIsParameterValue = bNewIsParameterValue
         bIsParameterPresent = False
     End Sub
 
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
-        RaiseEvent CheckedChanged(sender, e)
+        OnControlContentsChanged()
+        OnControlValueChanged()
     End Sub
 
     Public Property Checked As Boolean
