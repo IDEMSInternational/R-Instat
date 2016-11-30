@@ -15,11 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrCheck
-    Protected strValueIfChecked As String = "TRUE"
-    Protected strValueIfUnchecked As String = "FALSE"
+    Private strValueIfChecked As String = "TRUE"
+    Private strValueIfUnchecked As String = "FALSE"
     Public bParameterIncludedWhenChecked As Boolean = True
-    Public bIsParameterValue As Boolean = True
-    Public bIsParameterPresent As Boolean = False
+    Private bIsParameterValue As Boolean = True
+    Private bIsParameterPresent As Boolean = False
 
     Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
         Dim clsTempParam As RParameter
@@ -51,6 +51,8 @@ Public Class ucrCheck
     End Sub
 
     Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+        Dim bCurrentAddValue As Boolean
+
         If strParameterName <> "" Then
             If bIsParameterValue Then
                 If chkCheck.Checked Then
@@ -75,7 +77,10 @@ Public Class ucrCheck
             ElseIf bIsParameterPresent Then
                 If (chkCheck.Checked AndAlso bParameterIncludedWhenChecked) OrElse ((Not chkCheck.Checked) AndAlso (Not bParameterIncludedWhenChecked)) Then
                     If ucrLinkedControl IsNot Nothing Then
+                        bCurrentAddValue = ucrLinkedControl.bAddIfParameterNotPresent
+                        ucrLinkedControl.bAddIfParameterNotPresent = True
                         ucrLinkedControl.UpdateRCode(clsRFunction)
+                        ucrLinkedControl.bAddIfParameterNotPresent = bCurrentAddValue
                     End If
                 Else
                     clsRFunction.RemoveParameterByName(strParameterName)
@@ -101,20 +106,20 @@ Public Class ucrCheck
         SetValueIfUnchecked(strNewValueIfUnchecked)
     End Sub
 
-    Public Sub SetIsParameterPresent(bNewIsParameterPresent As Boolean)
-        bIsParameterPresent = bNewIsParameterPresent
+    Public Sub SetIsParameterPresent()
+        bIsParameterPresent = True
         bIsParameterValue = False
+    End Sub
+
+    Public Sub SetIsParameterValue()
+        bIsParameterValue = True
+        bIsParameterPresent = False
     End Sub
 
     Public Overrides Sub SetLinkedControl(ucrNewLinkedControl As ucrCore)
         MyBase.SetLinkedControl(ucrNewLinkedControl)
         bIsParameterPresent = True
         bIsParameterValue = False
-    End Sub
-
-    Public Sub SetIsParameterValue(bNewIsParameterValue As Boolean)
-        bIsParameterValue = bNewIsParameterValue
-        bIsParameterPresent = False
     End Sub
 
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged

@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrCore
     'Name of parameter control sets
     Protected strParameterName As String
@@ -24,6 +26,9 @@ Public Class ucrCore
     'These determine what happens to the control when the linked parameter is not found in the code
     Protected bHideIfLinkedParameterMissing As Boolean = False
     Protected bDisabledIfLinkedParameterMissing As Boolean = False
+    'If the parameter is not in the code, should the control add the parameter with its value
+    'Uses of False would be if the control only adds a parameter when another control is checked
+    Public bAddIfParameterNotPresent As Boolean = True
 
     Public Event ControlValueChanged(ucrChangedControl As ucrCore)
     Public Event ControlContentsChanged(ucrChangedControl As ucrCore)

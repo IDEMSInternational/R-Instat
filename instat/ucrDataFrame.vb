@@ -28,10 +28,10 @@ Public Class ucrDataFrame
     Private strFixedDataFrame As String
     'If the control is used to set a parameter that is a string i.e. data = "survey"
     Private bParameterIsString As Boolean = False
-    'If the control is used to set a parameter that is an RFunction i.e. x= InstatDataObject$get_data_frame(data = "survey")
+    'If the control is used to set a parameter that is an RFunction i.e. x= InstatDataObject$get_data_frame(data_name = "survey")
     Private bParameterIsRFunction As Boolean = False
     'When bParameterIsRFunction = True what is the name of the parameter setting the data frame name inside that RFunction
-    Private strDataParameterNameInRFunction As String = "data"
+    Private strDataParameterNameInRFunction As String = "data_name"
     'TODO need method to set this (but probably no dialog needs to change from default yet)
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -35,10 +35,20 @@ Public Class ucrNud
     End Sub
 
     Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        If strParameterName <> "" Then
-            clsRFunction.AddParameter(strParameterName, nudUpDown.Value)
-        Else
-            clsRFunction.RemoveParameterByName(strParameterName)
+        Dim clsTempParam As RParameter
+
+        If clsRFunction IsNot Nothing Then
+            clsTempParam = clsRFunction.GetParameter(strParameterName)
+            If strParameterName <> "" Then
+                If clsTempParam IsNot Nothing OrElse bAddIfParameterNotPresent Then
+                    clsRFunction.AddParameter(strParameterName, nudUpDown.Value)
+                End If
+            Else
+                clsRFunction.RemoveParameterByName(strParameterName)
+            End If
+        ElseIf clsROperator IsNot Nothing Then
+            clsTempParam = clsROperator.GetParameter(strParameterName)
+            'TODO
         End If
     End Sub
 
