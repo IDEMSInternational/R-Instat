@@ -1563,11 +1563,11 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
   }
   if(output == "facets") {
-    column_types <- unique(column_types)
     if(length(column_types) > 1) {
       warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
       output <- "combine"
     }
+    else column_types <- unique(column_types)
   }
   if(output == "facets") {
     if(column_types == "numeric") {
@@ -1646,9 +1646,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       }
       else {
         g <- g + curr_geom()
-      }
-      if(polar && column_types[i] == "cat") {
-        g <- g + coord_polar(theta = "x")
       }
       graphs[[i]] <- g
       i = i + 1
