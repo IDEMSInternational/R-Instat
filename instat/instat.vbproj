@@ -1841,6 +1841,12 @@
     <Compile Include="ucrNewColumnName.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrNud.Designer.vb">
+      <DependentUpon>ucrNud.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNud.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrRadio.Designer.vb">
       <DependentUpon>ucrRadio.vb</DependentUpon>
     </Compile>
@@ -4255,6 +4261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.sw-KE.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNud.resx">
+      <DependentUpon>ucrNud.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrRadio.resx">
       <DependentUpon>ucrRadio.vb</DependentUpon>
