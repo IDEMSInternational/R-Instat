@@ -9,10 +9,11 @@ Public Class dlgEndofRains
         strScript = strScript & ", capacity_max=" & nudCapacityMax.Value.ToString()
         strScript = strScript & ", col_name=" & Chr(34) & txtColumnName.Text & Chr(34) & ", water_balance_col_name=" & Chr(34) & txtColumnName.Text & Chr(34)
         strScript = strScript & ",replace=TRUE)"
-        frmMain.clsRInterface.climateObject()
-        frmMain.clsRInterface.RunScript(strScript, False)
-        frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
-        frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
+
+        frmMain.clsRLink.RunScript(strScript, False)
+        'TODO fix this to update grids instead of calling FillData which no longer exists
+        '        frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
+        '        frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
         Me.Hide()
     End Sub
 

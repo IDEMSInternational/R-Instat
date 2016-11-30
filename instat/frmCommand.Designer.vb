@@ -22,18 +22,34 @@ Partial Class frmCommand
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtCommand = New System.Windows.Forms.TextBox()
+        Me.components = New System.ComponentModel.Container()
+        Me.txtCommand = New System.Windows.Forms.RichTextBox()
+        Me.mnuContextRTB = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopyRTB = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuContextRTB.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtCommand
         '
         Me.txtCommand.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtCommand.Location = New System.Drawing.Point(0, 0)
-        Me.txtCommand.Multiline = True
         Me.txtCommand.Name = "txtCommand"
-        Me.txtCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtCommand.ReadOnly = True
         Me.txtCommand.Size = New System.Drawing.Size(631, 261)
         Me.txtCommand.TabIndex = 0
+        Me.txtCommand.Text = ""
+        '
+        'mnuContextRTB
+        '
+        Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB})
+        Me.mnuContextRTB.Name = "mnuContextRTB"
+        Me.mnuContextRTB.Size = New System.Drawing.Size(103, 26)
+        '
+        'CopyRTB
+        '
+        Me.CopyRTB.Name = "CopyRTB"
+        Me.CopyRTB.Size = New System.Drawing.Size(102, 22)
+        Me.CopyRTB.Text = "Copy"
         '
         'frmCommand
         '
@@ -45,10 +61,12 @@ Partial Class frmCommand
         Me.ShowIcon = False
         Me.Tag = "Output_Window"
         Me.Text = "Output Window"
+        Me.mnuContextRTB.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents txtCommand As TextBox
+    Friend WithEvents txtCommand As RichTextBox
+    Friend WithEvents mnuContextRTB As ContextMenuStrip
+    Friend WithEvents CopyRTB As ToolStripMenuItem
 End Class

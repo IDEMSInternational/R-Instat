@@ -22,88 +22,143 @@ Partial Class dlgDotPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblPlotTitle = New System.Windows.Forms.Label()
-        Me.txtTitle = New System.Windows.Forms.TextBox()
+        Me.cmdDotPlotOptions = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.lblSecondFactor = New System.Windows.Forms.Label()
+        Me.ucrVariablesAsFactorDotPlot = New instat.ucrVariablesAsFactor()
+        Me.ucrSaveDotPlot = New instat.ucrSaveGraph()
+        Me.ucrDotPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
-        Me.lblVariableToPlot = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'lblPlotTitle
+        'cmdDotPlotOptions
         '
-        Me.lblPlotTitle.AutoSize = True
-        Me.lblPlotTitle.Location = New System.Drawing.Point(25, 141)
-        Me.lblPlotTitle.Name = "lblPlotTitle"
-        Me.lblPlotTitle.Size = New System.Drawing.Size(51, 13)
-        Me.lblPlotTitle.TabIndex = 1
-        Me.lblPlotTitle.Text = "Plot Title "
+        Me.cmdDotPlotOptions.Location = New System.Drawing.Point(10, 200)
+        Me.cmdDotPlotOptions.Name = "cmdDotPlotOptions"
+        Me.cmdDotPlotOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdDotPlotOptions.TabIndex = 7
+        Me.cmdDotPlotOptions.Tag = "Dot_Plot_Options"
+        Me.cmdDotPlotOptions.Text = "Dot Plot Options"
+        Me.cmdDotPlotOptions.UseVisualStyleBackColor = True
         '
-        'txtTitle
+        'cmdOptions
         '
-        Me.txtTitle.Location = New System.Drawing.Point(82, 141)
-        Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(273, 20)
-        Me.txtTitle.TabIndex = 2
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 231)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(255, 165)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(88, 13)
+        Me.lblFactor.TabIndex = 3
+        Me.lblFactor.Tag = "Factor_Optional:"
+        Me.lblFactor.Text = "Factor (Optional):"
+        '
+        'lblSecondFactor
+        '
+        Me.lblSecondFactor.AutoSize = True
+        Me.lblSecondFactor.Location = New System.Drawing.Point(254, 212)
+        Me.lblSecondFactor.Name = "lblSecondFactor"
+        Me.lblSecondFactor.Size = New System.Drawing.Size(128, 13)
+        Me.lblSecondFactor.TabIndex = 5
+        Me.lblSecondFactor.Tag = "Second_Factor_Optional:"
+        Me.lblSecondFactor.Text = "Second Factor (Optional):"
+        '
+        'ucrVariablesAsFactorDotPlot
+        '
+        Me.ucrVariablesAsFactorDotPlot.Location = New System.Drawing.Point(255, 25)
+        Me.ucrVariablesAsFactorDotPlot.Name = "ucrVariablesAsFactorDotPlot"
+        Me.ucrVariablesAsFactorDotPlot.Size = New System.Drawing.Size(125, 133)
+        Me.ucrVariablesAsFactorDotPlot.TabIndex = 11
+        Me.ucrVariablesAsFactorDotPlot.ucrVariableSelector = Nothing
+        '
+        'ucrSaveDotPlot
+        '
+        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(10, 266)
+        Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
+        Me.ucrSaveDotPlot.Size = New System.Drawing.Size(265, 20)
+        Me.ucrSaveDotPlot.TabIndex = 10
+        '
+        'ucrDotPlotSelector
+        '
+        Me.ucrDotPlotSelector.bShowHiddenColumns = False
+        Me.ucrDotPlotSelector.bUseCurrentFilter = True
+        Me.ucrDotPlotSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDotPlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDotPlotSelector.Name = "ucrDotPlotSelector"
+        Me.ucrDotPlotSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrDotPlotSelector.TabIndex = 0
+        '
+        'ucrSecondFactorReceiver
+        '
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(255, 226)
+        Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
+        Me.ucrSecondFactorReceiver.Selector = Nothing
+        Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSecondFactorReceiver.TabIndex = 6
+        '
+        'ucrFactorReceiver
+        '
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 181)
+        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Selector = Nothing
+        Me.ucrFactorReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFactorReceiver.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 185)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 292)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(186, 129)
-        Me.ucrAddRemove.TabIndex = 3
-        '
-        'ucrReceiverSingle
-        '
-        Me.ucrReceiverSingle.Location = New System.Drawing.Point(211, 38)
-        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
-        Me.ucrReceiverSingle.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverSingle.TabIndex = 4
-        '
-        'lblVariableToPlot
-        '
-        Me.lblVariableToPlot.AutoSize = True
-        Me.lblVariableToPlot.Location = New System.Drawing.Point(211, 13)
-        Me.lblVariableToPlot.Name = "lblVariableToPlot"
-        Me.lblVariableToPlot.Size = New System.Drawing.Size(78, 13)
-        Me.lblVariableToPlot.TabIndex = 5
-        Me.lblVariableToPlot.Tag = "Variable_to_Plot"
-        Me.lblVariableToPlot.Text = "Variable to Plot"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 9
         '
         'dlgDotPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 226)
-        Me.Controls.Add(Me.lblVariableToPlot)
-        Me.Controls.Add(Me.ucrReceiverSingle)
-        Me.Controls.Add(Me.ucrAddRemove)
-        Me.Controls.Add(Me.txtTitle)
-        Me.Controls.Add(Me.lblPlotTitle)
+        Me.ClientSize = New System.Drawing.Size(421, 350)
+        Me.Controls.Add(Me.ucrVariablesAsFactorDotPlot)
+        Me.Controls.Add(Me.ucrSaveDotPlot)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.cmdDotPlotOptions)
+        Me.Controls.Add(Me.ucrDotPlotSelector)
+        Me.Controls.Add(Me.lblSecondFactor)
+        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.ucrSecondFactorReceiver)
+        Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDotPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Dot_Plot"
-        Me.Text = "Dox Plot"
+        Me.Text = "Dot Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblPlotTitle As Label
-    Friend WithEvents txtTitle As TextBox
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
-    Friend WithEvents lblVariableToPlot As Label
+    Friend WithEvents ucrDotPlotSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdDotPlotOptions As Button
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblFactor As Label
+    Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblSecondFactor As Label
+    Friend WithEvents ucrSaveDotPlot As ucrSaveGraph
+    Friend WithEvents ucrVariablesAsFactorDotPlot As ucrVariablesAsFactor
 End Class

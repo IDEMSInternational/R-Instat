@@ -22,232 +22,154 @@ Partial Class dlgRandomSample
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.grpSampling = New System.Windows.Forms.GroupBox()
-        Me.txtSampleSize = New System.Windows.Forms.TextBox()
-        Me.txtNumberofSamples = New System.Windows.Forms.TextBox()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
-        Me.cboSampleType = New System.Windows.Forms.ComboBox()
-        Me.lblSampleType = New System.Windows.Forms.Label()
-        Me.grpProbabilityDistribution = New System.Windows.Forms.GroupBox()
-        Me.txtStDev = New System.Windows.Forms.TextBox()
-        Me.txtMean = New System.Windows.Forms.TextBox()
-        Me.lblStDev = New System.Windows.Forms.Label()
-        Me.lblMean = New System.Windows.Forms.Label()
-        Me.lblParameters = New System.Windows.Forms.Label()
-        Me.lblDistributionType = New System.Windows.Forms.Label()
-        Me.cboDistributionType = New System.Windows.Forms.ComboBox()
-        Me.grpSampleDataColumn = New System.Windows.Forms.GroupBox()
-        Me.UcrReceiverSingle = New instat.ucrReceiverSingle()
-        Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.lblPrefixColumnName = New System.Windows.Forms.Label()
+        Me.nudNumberOfSamples = New System.Windows.Forms.NumericUpDown()
+        Me.nudSeed = New System.Windows.Forms.NumericUpDown()
+        Me.chkSetSeed = New System.Windows.Forms.CheckBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.ucrNewColumnName = New instat.ucrInputComboBox()
+        Me.ucrPrefixNewColumns = New instat.ucrInputTextBox()
+        Me.ucrSampleSize = New instat.ucrDataFrameLength()
+        Me.ucrSelectorRandomSamples = New instat.ucrDataFrame()
+        Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblSelectedVariable = New System.Windows.Forms.Label()
-        Me.grpSampling.SuspendLayout()
-        Me.grpProbabilityDistribution.SuspendLayout()
-        Me.grpSampleDataColumn.SuspendLayout()
+        CType(Me.nudNumberOfSamples, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSeed, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'grpSampling
-        '
-        Me.grpSampling.Controls.Add(Me.txtSampleSize)
-        Me.grpSampling.Controls.Add(Me.txtNumberofSamples)
-        Me.grpSampling.Controls.Add(Me.lblSampleSize)
-        Me.grpSampling.Controls.Add(Me.lblNumberofSamples)
-        Me.grpSampling.Controls.Add(Me.cboSampleType)
-        Me.grpSampling.Controls.Add(Me.lblSampleType)
-        Me.grpSampling.Location = New System.Drawing.Point(12, 12)
-        Me.grpSampling.Name = "grpSampling"
-        Me.grpSampling.Size = New System.Drawing.Size(232, 172)
-        Me.grpSampling.TabIndex = 1
-        Me.grpSampling.TabStop = False
-        Me.grpSampling.Tag = "Sampling"
-        Me.grpSampling.Text = "Sampling"
-        '
-        'txtSampleSize
-        '
-        Me.txtSampleSize.Location = New System.Drawing.Point(86, 99)
-        Me.txtSampleSize.Name = "txtSampleSize"
-        Me.txtSampleSize.Size = New System.Drawing.Size(100, 20)
-        Me.txtSampleSize.TabIndex = 5
-        '
-        'txtNumberofSamples
-        '
-        Me.txtNumberofSamples.Location = New System.Drawing.Point(86, 74)
-        Me.txtNumberofSamples.Name = "txtNumberofSamples"
-        Me.txtNumberofSamples.Size = New System.Drawing.Size(100, 20)
-        Me.txtNumberofSamples.TabIndex = 4
         '
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(6, 106)
+        Me.lblSampleSize.Location = New System.Drawing.Point(254, 124)
         Me.lblSampleSize.Name = "lblSampleSize"
-        Me.lblSampleSize.Size = New System.Drawing.Size(65, 13)
-        Me.lblSampleSize.TabIndex = 3
-        Me.lblSampleSize.Tag = "Sample_Size"
-        Me.lblSampleSize.Text = "Sample Size"
+        Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
+        Me.lblSampleSize.TabIndex = 10
+        Me.lblSampleSize.Tag = "Sample_Size:"
+        Me.lblSampleSize.Text = "Sample Size:"
         '
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.AutoSize = True
-        Me.lblNumberofSamples.Location = New System.Drawing.Point(6, 77)
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(254, 98)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
-        Me.lblNumberofSamples.Size = New System.Drawing.Size(99, 13)
-        Me.lblNumberofSamples.TabIndex = 2
-        Me.lblNumberofSamples.Tag = "Number_of_Samples"
-        Me.lblNumberofSamples.Text = "Number of Samples"
+        Me.lblNumberofSamples.Size = New System.Drawing.Size(102, 13)
+        Me.lblNumberofSamples.TabIndex = 10
+        Me.lblNumberofSamples.Tag = "Number_of_Samples:"
+        Me.lblNumberofSamples.Text = "Number of Samples:"
         '
-        'cboSampleType
+        'lblPrefixColumnName
         '
-        Me.cboSampleType.FormattingEnabled = True
-        Me.cboSampleType.Items.AddRange(New Object() {"Probability Distribution", "Data column (without replacement)", "Data column (with replacement)", "Permute integers 1 to n"})
-        Me.cboSampleType.Location = New System.Drawing.Point(32, 33)
-        Me.cboSampleType.Name = "cboSampleType"
-        Me.cboSampleType.Size = New System.Drawing.Size(121, 21)
-        Me.cboSampleType.TabIndex = 1
+        Me.lblPrefixColumnName.AutoSize = True
+        Me.lblPrefixColumnName.Location = New System.Drawing.Point(6, 224)
+        Me.lblPrefixColumnName.Name = "lblPrefixColumnName"
+        Me.lblPrefixColumnName.Size = New System.Drawing.Size(122, 13)
+        Me.lblPrefixColumnName.TabIndex = 15
+        Me.lblPrefixColumnName.Tag = "Prefix_For_New_Columns"
+        Me.lblPrefixColumnName.Text = "Prefix For New Columns:"
         '
-        'lblSampleType
+        'nudNumberOfSamples
         '
-        Me.lblSampleType.AutoSize = True
-        Me.lblSampleType.Location = New System.Drawing.Point(58, 16)
-        Me.lblSampleType.Name = "lblSampleType"
-        Me.lblSampleType.Size = New System.Drawing.Size(69, 13)
-        Me.lblSampleType.TabIndex = 0
-        Me.lblSampleType.Tag = "Sample_Type"
-        Me.lblSampleType.Text = "Sample Type"
+        Me.nudNumberOfSamples.Location = New System.Drawing.Point(359, 94)
+        Me.nudNumberOfSamples.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudNumberOfSamples.Name = "nudNumberOfSamples"
+        Me.nudNumberOfSamples.Size = New System.Drawing.Size(35, 20)
+        Me.nudNumberOfSamples.TabIndex = 17
+        Me.nudNumberOfSamples.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'grpProbabilityDistribution
+        'nudSeed
         '
-        Me.grpProbabilityDistribution.Controls.Add(Me.txtStDev)
-        Me.grpProbabilityDistribution.Controls.Add(Me.txtMean)
-        Me.grpProbabilityDistribution.Controls.Add(Me.lblStDev)
-        Me.grpProbabilityDistribution.Controls.Add(Me.lblMean)
-        Me.grpProbabilityDistribution.Controls.Add(Me.lblParameters)
-        Me.grpProbabilityDistribution.Controls.Add(Me.lblDistributionType)
-        Me.grpProbabilityDistribution.Controls.Add(Me.cboDistributionType)
-        Me.grpProbabilityDistribution.Location = New System.Drawing.Point(252, 20)
-        Me.grpProbabilityDistribution.Name = "grpProbabilityDistribution"
-        Me.grpProbabilityDistribution.Size = New System.Drawing.Size(244, 164)
-        Me.grpProbabilityDistribution.TabIndex = 2
-        Me.grpProbabilityDistribution.TabStop = False
-        Me.grpProbabilityDistribution.Tag = "Probability_Distribution"
-        Me.grpProbabilityDistribution.Text = "Probability Distribution"
+        Me.nudSeed.Location = New System.Drawing.Point(359, 68)
+        Me.nudSeed.Name = "nudSeed"
+        Me.nudSeed.Size = New System.Drawing.Size(35, 20)
+        Me.nudSeed.TabIndex = 18
         '
-        'txtStDev
+        'chkSetSeed
         '
-        Me.txtStDev.Location = New System.Drawing.Point(128, 136)
-        Me.txtStDev.Name = "txtStDev"
-        Me.txtStDev.Size = New System.Drawing.Size(100, 20)
-        Me.txtStDev.TabIndex = 6
+        Me.chkSetSeed.AutoSize = True
+        Me.chkSetSeed.Location = New System.Drawing.Point(257, 69)
+        Me.chkSetSeed.Name = "chkSetSeed"
+        Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
+        Me.chkSetSeed.TabIndex = 19
+        Me.chkSetSeed.Tag = "Set_Seed"
+        Me.chkSetSeed.Text = "Set Seed"
+        Me.chkSetSeed.UseVisualStyleBackColor = True
         '
-        'txtMean
+        'lblNewColumnName
         '
-        Me.txtMean.Location = New System.Drawing.Point(128, 98)
-        Me.txtMean.Name = "txtMean"
-        Me.txtMean.Size = New System.Drawing.Size(100, 20)
-        Me.txtMean.TabIndex = 5
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 224)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColumnName.TabIndex = 21
+        Me.lblNewColumnName.Tag = "New_Column_Name:"
+        Me.lblNewColumnName.Text = "New Column Name:"
         '
-        'lblStDev
+        'ucrNewColumnName
         '
-        Me.lblStDev.AutoSize = True
-        Me.lblStDev.Location = New System.Drawing.Point(40, 139)
-        Me.lblStDev.Name = "lblStDev"
-        Me.lblStDev.Size = New System.Drawing.Size(43, 13)
-        Me.lblStDev.TabIndex = 4
-        Me.lblStDev.Tag = "St.Dev."
-        Me.lblStDev.Text = "St.Dev."
+        Me.ucrNewColumnName.IsReadOnly = False
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(131, 221)
+        Me.ucrNewColumnName.Name = "ucrNewColumnName"
+        Me.ucrNewColumnName.Size = New System.Drawing.Size(145, 21)
+        Me.ucrNewColumnName.TabIndex = 20
         '
-        'lblMean
+        'ucrPrefixNewColumns
         '
-        Me.lblMean.AutoSize = True
-        Me.lblMean.Location = New System.Drawing.Point(40, 105)
-        Me.lblMean.Name = "lblMean"
-        Me.lblMean.Size = New System.Drawing.Size(34, 13)
-        Me.lblMean.TabIndex = 3
-        Me.lblMean.Tag = "Mean"
-        Me.lblMean.Text = "Mean"
+        Me.ucrPrefixNewColumns.IsReadOnly = False
+        Me.ucrPrefixNewColumns.Location = New System.Drawing.Point(131, 222)
+        Me.ucrPrefixNewColumns.Name = "ucrPrefixNewColumns"
+        Me.ucrPrefixNewColumns.Size = New System.Drawing.Size(145, 21)
+        Me.ucrPrefixNewColumns.TabIndex = 16
         '
-        'lblParameters
+        'ucrSampleSize
         '
-        Me.lblParameters.AutoSize = True
-        Me.lblParameters.Location = New System.Drawing.Point(40, 64)
-        Me.lblParameters.Name = "lblParameters"
-        Me.lblParameters.Size = New System.Drawing.Size(60, 13)
-        Me.lblParameters.TabIndex = 2
-        Me.lblParameters.Tag = "Parameters"
-        Me.lblParameters.Text = "Parameters"
+        Me.ucrSampleSize.clsDataFrameSelector = Nothing
+        Me.ucrSampleSize.Location = New System.Drawing.Point(344, 120)
+        Me.ucrSampleSize.Name = "ucrSampleSize"
+        Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
+        Me.ucrSampleSize.TabIndex = 13
         '
-        'lblDistributionType
+        'ucrSelectorRandomSamples
         '
-        Me.lblDistributionType.AutoSize = True
-        Me.lblDistributionType.Location = New System.Drawing.Point(40, 33)
-        Me.lblDistributionType.Name = "lblDistributionType"
-        Me.lblDistributionType.Size = New System.Drawing.Size(86, 13)
-        Me.lblDistributionType.TabIndex = 1
-        Me.lblDistributionType.Tag = "Distribution_Type"
-        Me.lblDistributionType.Text = "Distribution Type"
+        Me.ucrSelectorRandomSamples.bUseCurrentFilter = True
+        Me.ucrSelectorRandomSamples.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorRandomSamples.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorRandomSamples.Name = "ucrSelectorRandomSamples"
+        Me.ucrSelectorRandomSamples.Size = New System.Drawing.Size(120, 40)
+        Me.ucrSelectorRandomSamples.TabIndex = 8
         '
-        'cboDistributionType
+        'ucrDistWithParameters
         '
-        Me.cboDistributionType.FormattingEnabled = True
-        Me.cboDistributionType.Items.AddRange(New Object() {"Normal", "Geometric", "Exponential", "Extreme Value", "Weibull", "Uniform", "Bernoulli", "Binomial", "Poisson", "Beta", "Chi- Square", "F", "Gamma", "Hypergeometric", "Log-normal", "Multinomial", "Negative Binomial", "Student's t"})
-        Me.cboDistributionType.Location = New System.Drawing.Point(132, 30)
-        Me.cboDistributionType.Name = "cboDistributionType"
-        Me.cboDistributionType.Size = New System.Drawing.Size(96, 21)
-        Me.cboDistributionType.TabIndex = 0
-        '
-        'grpSampleDataColumn
-        '
-        Me.grpSampleDataColumn.Controls.Add(Me.lblSelectedVariable)
-        Me.grpSampleDataColumn.Controls.Add(Me.UcrReceiverSingle)
-        Me.grpSampleDataColumn.Controls.Add(Me.UcrAddRemove)
-        Me.grpSampleDataColumn.Location = New System.Drawing.Point(541, 12)
-        Me.grpSampleDataColumn.Name = "grpSampleDataColumn"
-        Me.grpSampleDataColumn.Size = New System.Drawing.Size(338, 172)
-        Me.grpSampleDataColumn.TabIndex = 3
-        Me.grpSampleDataColumn.TabStop = False
-        Me.grpSampleDataColumn.Tag = "Sample_from_data_column"
-        Me.grpSampleDataColumn.Text = "Sample from data column"
-        '
-        'UcrReceiverSingle
-        '
-        Me.UcrReceiverSingle.Location = New System.Drawing.Point(226, 64)
-        Me.UcrReceiverSingle.Name = "UcrReceiverSingle"
-        Me.UcrReceiverSingle.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle.TabIndex = 1
-        '
-        'UcrAddRemove
-        '
-        Me.UcrAddRemove.Location = New System.Drawing.Point(8, 30)
-        Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(182, 118)
-        Me.UcrAddRemove.TabIndex = 0
+        Me.ucrDistWithParameters.Location = New System.Drawing.Point(10, 55)
+        Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
+        Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 156)
+        Me.ucrDistWithParameters.TabIndex = 7
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(21, 371)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'lblSelectedVariable
-        '
-        Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(223, 41)
-        Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
-        Me.lblSelectedVariable.TabIndex = 2
-        Me.lblSelectedVariable.Tag = "Selected_Variable"
-        Me.lblSelectedVariable.Text = "Selected Variable"
         '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(907, 463)
-        Me.Controls.Add(Me.grpSampleDataColumn)
-        Me.Controls.Add(Me.grpProbabilityDistribution)
-        Me.Controls.Add(Me.grpSampling)
+        Me.ClientSize = New System.Drawing.Size(419, 300)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.ucrNewColumnName)
+        Me.Controls.Add(Me.chkSetSeed)
+        Me.Controls.Add(Me.nudSeed)
+        Me.Controls.Add(Me.nudNumberOfSamples)
+        Me.Controls.Add(Me.ucrPrefixNewColumns)
+        Me.Controls.Add(Me.lblPrefixColumnName)
+        Me.Controls.Add(Me.ucrSampleSize)
+        Me.Controls.Add(Me.lblNumberofSamples)
+        Me.Controls.Add(Me.lblSampleSize)
+        Me.Controls.Add(Me.ucrSelectorRandomSamples)
+        Me.Controls.Add(Me.ucrDistWithParameters)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -255,34 +177,24 @@ Partial Class dlgRandomSample
         Me.Name = "dlgRandomSample"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Generate Random Sample"
-        Me.grpSampling.ResumeLayout(False)
-        Me.grpSampling.PerformLayout()
-        Me.grpProbabilityDistribution.ResumeLayout(False)
-        Me.grpProbabilityDistribution.PerformLayout()
-        Me.grpSampleDataColumn.ResumeLayout(False)
-        Me.grpSampleDataColumn.PerformLayout()
+        CType(Me.nudNumberOfSamples, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSeed, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents grpSampling As GroupBox
-    Friend WithEvents txtSampleSize As TextBox
-    Friend WithEvents txtNumberofSamples As TextBox
+    Friend WithEvents ucrDistWithParameters As ucrDistributionsWithParameters
+    Friend WithEvents ucrSelectorRandomSamples As ucrDataFrame
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberofSamples As Label
-    Friend WithEvents cboSampleType As ComboBox
-    Friend WithEvents lblSampleType As Label
-    Friend WithEvents grpProbabilityDistribution As GroupBox
-    Friend WithEvents lblParameters As Label
-    Friend WithEvents lblDistributionType As Label
-    Friend WithEvents cboDistributionType As ComboBox
-    Friend WithEvents txtStDev As TextBox
-    Friend WithEvents txtMean As TextBox
-    Friend WithEvents lblStDev As Label
-    Friend WithEvents lblMean As Label
-    Friend WithEvents grpSampleDataColumn As GroupBox
-    Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverSingle As ucrReceiverSingle
-    Friend WithEvents lblSelectedVariable As Label
+    Friend WithEvents ucrSampleSize As ucrDataFrameLength
+    Friend WithEvents lblPrefixColumnName As Label
+    Friend WithEvents ucrPrefixNewColumns As ucrInputTextBox
+    Friend WithEvents nudNumberOfSamples As NumericUpDown
+    Friend WithEvents nudSeed As NumericUpDown
+    Friend WithEvents chkSetSeed As CheckBox
+    Friend WithEvents ucrNewColumnName As ucrInputComboBox
+    Friend WithEvents lblNewColumnName As Label
 End Class

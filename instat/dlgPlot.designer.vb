@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,148 +20,169 @@ Partial Class dlgPlot
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.txtX = New System.Windows.Forms.TextBox()
-        Me.txtY = New System.Windows.Forms.TextBox()
-        Me.txtTitle = New System.Windows.Forms.TextBox()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.cmdRemove = New System.Windows.Forms.Button()
-        Me.cmdAdd = New System.Windows.Forms.Button()
-        Me.lblX = New System.Windows.Forms.Label()
-        Me.lblY = New System.Windows.Forms.Label()
+        Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
-        Me.lstBoxAvailable = New System.Windows.Forms.ListBox()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdLineOptions = New System.Windows.Forms.Button()
+        Me.lblFactorOptional = New System.Windows.Forms.Label()
+        Me.chkPoints = New System.Windows.Forms.CheckBox()
+        Me.ucrSaveLinePlot = New instat.ucrSaveGraph()
+        Me.ucrVariablesAsFactorForLinePlot = New instat.ucrVariablesAsFactor()
+        Me.ucrLinePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
-        'txtX
+        'lblXVariable
         '
-        Me.txtX.Location = New System.Drawing.Point(285, 168)
-        Me.txtX.Name = "txtX"
-        Me.txtX.Size = New System.Drawing.Size(100, 20)
-        Me.txtX.TabIndex = 24
-        '
-        'txtY
-        '
-        Me.txtY.Location = New System.Drawing.Point(285, 58)
-        Me.txtY.Name = "txtY"
-        Me.txtY.Size = New System.Drawing.Size(100, 20)
-        Me.txtY.TabIndex = 23
-        '
-        'txtTitle
-        '
-        Me.txtTitle.Location = New System.Drawing.Point(30, 255)
-        Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(326, 20)
-        Me.txtTitle.TabIndex = 22
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(27, 239)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
-        Me.lblTitle.TabIndex = 21
-        Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Title"
-        '
-        'cmdRemove
-        '
-        Me.cmdRemove.Location = New System.Drawing.Point(153, 166)
-        Me.cmdRemove.Name = "cmdRemove"
-        Me.cmdRemove.Size = New System.Drawing.Size(92, 23)
-        Me.cmdRemove.TabIndex = 20
-        Me.cmdRemove.Text = "X variable"
-        Me.cmdRemove.UseVisualStyleBackColor = True
-        '
-        'cmdAdd
-        '
-        Me.cmdAdd.Location = New System.Drawing.Point(153, 55)
-        Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(92, 23)
-        Me.cmdAdd.TabIndex = 19
-        Me.cmdAdd.Text = "Y variable"
-        Me.cmdAdd.UseVisualStyleBackColor = True
-        '
-        'lblX
-        '
-        Me.lblX.AutoSize = True
-        Me.lblX.Location = New System.Drawing.Point(282, 152)
-        Me.lblX.Name = "lblX"
-        Me.lblX.Size = New System.Drawing.Size(64, 13)
-        Me.lblX.TabIndex = 18
-        Me.lblX.Text = "X  - Variable"
-        '
-        'lblY
-        '
-        Me.lblY.AutoSize = True
-        Me.lblY.Location = New System.Drawing.Point(282, 31)
-        Me.lblY.Name = "lblY"
-        Me.lblY.Size = New System.Drawing.Size(72, 13)
-        Me.lblY.TabIndex = 17
-        Me.lblY.Text = "Y - Variable(s)"
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.Location = New System.Drawing.Point(255, 165)
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblXVariable.TabIndex = 2
+        Me.lblXVariable.Tag = "X_Variable:"
+        Me.lblXVariable.Text = "X Variable:"
         '
         'lblAvailable
         '
         Me.lblAvailable.AutoSize = True
         Me.lblAvailable.Location = New System.Drawing.Point(27, 15)
         Me.lblAvailable.Name = "lblAvailable"
-        Me.lblAvailable.Size = New System.Drawing.Size(96, 13)
-        Me.lblAvailable.TabIndex = 16
-        Me.lblAvailable.Text = "Available Variables"
+        Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
+        Me.lblAvailable.TabIndex = 1
         '
-        'lstBoxAvailable
+        'cmdOptions
         '
-        Me.lstBoxAvailable.FormattingEnabled = True
-        Me.lstBoxAvailable.Location = New System.Drawing.Point(30, 31)
-        Me.lstBoxAvailable.Name = "lstBoxAvailable"
-        Me.lstBoxAvailable.Size = New System.Drawing.Size(117, 173)
-        Me.lstBoxAvailable.TabIndex = 15
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 196)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdOptions.TabIndex = 7
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'UcrButtons1
+        'cmdLineOptions
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(34, 297)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(322, 32)
-        Me.UcrButtons1.TabIndex = 14
+        Me.cmdLineOptions.Location = New System.Drawing.Point(10, 225)
+        Me.cmdLineOptions.Name = "cmdLineOptions"
+        Me.cmdLineOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdLineOptions.TabIndex = 8
+        Me.cmdLineOptions.Tag = "Line_Options"
+        Me.cmdLineOptions.Text = "Line Options"
+        Me.cmdLineOptions.UseVisualStyleBackColor = True
+        '
+        'lblFactorOptional
+        '
+        Me.lblFactorOptional.AutoSize = True
+        Me.lblFactorOptional.Location = New System.Drawing.Point(255, 209)
+        Me.lblFactorOptional.Name = "lblFactorOptional"
+        Me.lblFactorOptional.Size = New System.Drawing.Size(88, 13)
+        Me.lblFactorOptional.TabIndex = 4
+        Me.lblFactorOptional.Tag = "Factor_Optional:"
+        Me.lblFactorOptional.Text = "Factor (Optional):"
+        '
+        'chkPoints
+        '
+        Me.chkPoints.AutoSize = True
+        Me.chkPoints.Location = New System.Drawing.Point(10, 257)
+        Me.chkPoints.Name = "chkPoints"
+        Me.chkPoints.Size = New System.Drawing.Size(55, 17)
+        Me.chkPoints.TabIndex = 6
+        Me.chkPoints.Tag = "Points"
+        Me.chkPoints.Text = "Points"
+        Me.chkPoints.UseVisualStyleBackColor = True
+        '
+        'ucrSaveLinePlot
+        '
+        Me.ucrSaveLinePlot.Location = New System.Drawing.Point(10, 282)
+        Me.ucrSaveLinePlot.Name = "ucrSaveLinePlot"
+        Me.ucrSaveLinePlot.Size = New System.Drawing.Size(265, 27)
+        Me.ucrSaveLinePlot.TabIndex = 9
+        '
+        'ucrVariablesAsFactorForLinePlot
+        '
+        Me.ucrVariablesAsFactorForLinePlot.Location = New System.Drawing.Point(255, 26)
+        Me.ucrVariablesAsFactorForLinePlot.Name = "ucrVariablesAsFactorForLinePlot"
+        Me.ucrVariablesAsFactorForLinePlot.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForLinePlot.TabIndex = 1
+        Me.ucrVariablesAsFactorForLinePlot.ucrVariableSelector = Nothing
+        '
+        'ucrLinePlotSelector
+        '
+        Me.ucrLinePlotSelector.bShowHiddenColumns = False
+        Me.ucrLinePlotSelector.bUseCurrentFilter = True
+        Me.ucrLinePlotSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrLinePlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrLinePlotSelector.Name = "ucrLinePlotSelector"
+        Me.ucrLinePlotSelector.Size = New System.Drawing.Size(242, 189)
+        Me.ucrLinePlotSelector.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 310)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 10
+        '
+        'ucrFactorOptionalReceiver
+        '
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(255, 225)
+        Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
+        Me.ucrFactorOptionalReceiver.Selector = Nothing
+        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(125, 26)
+        Me.ucrFactorOptionalReceiver.TabIndex = 5
+        '
+        'ucrReceiverX
+        '
+        Me.ucrReceiverX.Location = New System.Drawing.Point(255, 181)
+        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 26)
+        Me.ucrReceiverX.TabIndex = 3
         '
         'dlgPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(401, 344)
-        Me.Controls.Add(Me.txtX)
-        Me.Controls.Add(Me.txtY)
-        Me.Controls.Add(Me.txtTitle)
-        Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.cmdRemove)
-        Me.Controls.Add(Me.cmdAdd)
-        Me.Controls.Add(Me.lblX)
-        Me.Controls.Add(Me.lblY)
+        Me.ClientSize = New System.Drawing.Size(419, 368)
+        Me.Controls.Add(Me.ucrSaveLinePlot)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForLinePlot)
+        Me.Controls.Add(Me.chkPoints)
+        Me.Controls.Add(Me.cmdLineOptions)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.ucrLinePlotSelector)
+        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
+        Me.Controls.Add(Me.lblFactorOptional)
+        Me.Controls.Add(Me.ucrReceiverX)
+        Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.lblAvailable)
-        Me.Controls.Add(Me.lstBoxAvailable)
-        Me.Controls.Add(Me.UcrButtons1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Plot"
+        Me.Tag = "Line_Plot"
+        Me.Text = "Line Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtX As TextBox
-    Friend WithEvents txtY As TextBox
-    Friend WithEvents txtTitle As TextBox
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents cmdRemove As Button
-    Friend WithEvents cmdAdd As Button
-    Friend WithEvents lblX As Label
-    Friend WithEvents lblY As Label
+    Friend WithEvents lblXVariable As Label
     Friend WithEvents lblAvailable As Label
-    Friend WithEvents lstBoxAvailable As ListBox
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrLinePlotSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdLineOptions As Button
+    Friend WithEvents lblFactorOptional As Label
+    Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
+    Friend WithEvents chkPoints As CheckBox
+    Friend WithEvents ucrVariablesAsFactorForLinePlot As ucrVariablesAsFactor
+    Friend WithEvents ucrSaveLinePlot As ucrSaveGraph
 End Class

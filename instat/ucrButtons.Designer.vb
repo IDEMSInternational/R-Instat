@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrButtons
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,77 +20,100 @@ Partial Class ucrButtons
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdPaste = New System.Windows.Forms.Button()
+        Me.chkComment = New System.Windows.Forms.CheckBox()
+        Me.txtComment = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(3, 4)
+        Me.cmdOk.Location = New System.Drawing.Point(0, 26)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOk.TabIndex = 82
+        Me.cmdOk.TabIndex = 2
         Me.cmdOk.Tag = "Ok "
         Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(163, 4)
+        Me.cmdCancel.Location = New System.Drawing.Point(160, 26)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCancel.TabIndex = 81
+        Me.cmdCancel.TabIndex = 4
         Me.cmdCancel.Tag = "Close"
         Me.cmdCancel.Text = "Close"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(82, 4)
+        Me.cmdReset.Location = New System.Drawing.Point(79, 26)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(75, 23)
-        Me.cmdReset.TabIndex = 80
+        Me.cmdReset.TabIndex = 3
         Me.cmdReset.Tag = "Reset"
         Me.cmdReset.Text = "Reset "
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(244, 4)
+        Me.cmdHelp.Location = New System.Drawing.Point(241, 26)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 79
+        Me.cmdHelp.TabIndex = 5
         Me.cmdHelp.Tag = "Help"
         Me.cmdHelp.Text = "Help "
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdPaste
         '
-        Me.cmdPaste.Location = New System.Drawing.Point(326, 4)
+        Me.cmdPaste.Location = New System.Drawing.Point(323, 26)
         Me.cmdPaste.Name = "cmdPaste"
         Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPaste.TabIndex = 83
+        Me.cmdPaste.TabIndex = 6
         Me.cmdPaste.Tag = "To_Script"
         Me.cmdPaste.Text = "To Script"
         Me.cmdPaste.UseVisualStyleBackColor = True
+        '
+        'chkComment
+        '
+        Me.chkComment.AutoSize = True
+        Me.chkComment.Location = New System.Drawing.Point(0, 3)
+        Me.chkComment.Name = "chkComment"
+        Me.chkComment.Size = New System.Drawing.Size(73, 17)
+        Me.chkComment.TabIndex = 0
+        Me.chkComment.Tag = "comment:"
+        Me.chkComment.Text = "Comment:"
+        Me.chkComment.UseVisualStyleBackColor = True
+        '
+        'txtComment
+        '
+        Me.txtComment.Location = New System.Drawing.Point(82, 1)
+        Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(316, 20)
+        Me.txtComment.TabIndex = 1
         '
         'ucrButtons
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.txtComment)
+        Me.Controls.Add(Me.chkComment)
         Me.Controls.Add(Me.cmdPaste)
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
-        Me.Size = New System.Drawing.Size(410, 32)
+        Me.Size = New System.Drawing.Size(410, 52)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -99,4 +122,6 @@ Partial Class ucrButtons
     Friend WithEvents cmdReset As Button
     Friend WithEvents cmdHelp As Button
     Friend WithEvents cmdPaste As Button
+    Friend WithEvents chkComment As CheckBox
+    Friend WithEvents txtComment As TextBox
 End Class

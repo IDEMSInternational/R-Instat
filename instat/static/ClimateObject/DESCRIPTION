@@ -1,0 +1,10 @@
+Package: climssc
+Type: Package
+Title: What the package does (short line)
+Version: 0.11
+Date: 2015-01-10
+Author: David Stern
+Maintainer: <d.a.stern@reading.ac.uk>
+Description: A reference class based climate object
+License: GPL-3
+Depends: lubridate, openair, tcltk

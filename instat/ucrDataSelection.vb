@@ -42,12 +42,12 @@ Public Class ucrDataSelection
     End Sub
 
     Public Sub loadColumns()
-        Dim dataset As DataFrame
-        Dim i As Integer
-        dataset = frmMain.clsRInterface.GetData("data")
-        For i = 0 To dataset.ColumnCount - 1
-            lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
-        Next
+        'Dim dataset As DataFrame
+        'Dim i As Integer
+        'dataset = frmMain.clsRLink.GetData("data")
+        'For i = 0 To dataset.ColumnCount - 1
+        'lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
+        'Next
     End Sub
 
     Private Sub lstAvailableVariable_MouseDoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.MouseDoubleClick

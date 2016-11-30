@@ -28,12 +28,12 @@ Partial Class dlgInventoryPlot
         Me.lblYLabel = New System.Windows.Forms.Label()
         Me.chkSort = New System.Windows.Forms.CheckBox()
         Me.chkRemoveNA = New System.Windows.Forms.CheckBox()
-        Me.UcrButtons1 = New instat.ucrButtons()
         Me.txtWetColour = New System.Windows.Forms.TextBox()
         Me.txtDryColour = New System.Windows.Forms.TextBox()
         Me.lblDry = New System.Windows.Forms.Label()
         Me.lblWet = New System.Windows.Forms.Label()
         Me.lblColour = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'txtPlotName
@@ -94,13 +94,6 @@ Partial Class dlgInventoryPlot
         Me.chkRemoveNA.Text = "CheckBox2"
         Me.chkRemoveNA.UseVisualStyleBackColor = True
         '
-        'UcrButtons1
-        '
-        Me.UcrButtons1.Location = New System.Drawing.Point(145, 229)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(324, 32)
-        Me.UcrButtons1.TabIndex = 6
-        '
         'txtWetColour
         '
         Me.txtWetColour.Location = New System.Drawing.Point(119, 87)
@@ -147,28 +140,37 @@ Partial Class dlgInventoryPlot
         Me.lblColour.Tag = "Colour"
         Me.lblColour.Text = "Colour"
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(27, 217)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 12
+        '
         'dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(481, 268)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblColour)
         Me.Controls.Add(Me.lblWet)
         Me.Controls.Add(Me.lblDry)
         Me.Controls.Add(Me.txtDryColour)
         Me.Controls.Add(Me.txtWetColour)
-        Me.Controls.Add(Me.UcrButtons1)
         Me.Controls.Add(Me.chkRemoveNA)
         Me.Controls.Add(Me.chkSort)
         Me.Controls.Add(Me.lblYLabel)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtYlabel)
         Me.Controls.Add(Me.txtPlotName)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgInventoryPlot"
-        Me.Text = "dlgInventoryPlot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Inventory_Plot"
+        Me.Text = "Inventory Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -180,10 +182,10 @@ Partial Class dlgInventoryPlot
     Friend WithEvents lblYLabel As Label
     Friend WithEvents chkSort As CheckBox
     Friend WithEvents chkRemoveNA As CheckBox
-    Friend WithEvents UcrButtons1 As ucrButtons
     Friend WithEvents txtWetColour As TextBox
     Friend WithEvents txtDryColour As TextBox
     Friend WithEvents lblDry As Label
     Friend WithEvents lblWet As Label
     Friend WithEvents lblColour As Label
+    Friend WithEvents ucrBase As ucrButtons
 End Class

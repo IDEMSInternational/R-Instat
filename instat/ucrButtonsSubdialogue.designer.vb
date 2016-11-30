@@ -29,7 +29,7 @@ Partial Class ucrButtonsSubdialogue
         '
         'cmdReturn
         '
-        Me.cmdReturn.Location = New System.Drawing.Point(12, 13)
+        Me.cmdReturn.Location = New System.Drawing.Point(0, 3)
         Me.cmdReturn.Name = "cmdReturn"
         Me.cmdReturn.Size = New System.Drawing.Size(63, 23)
         Me.cmdReturn.TabIndex = 0
@@ -39,7 +39,7 @@ Partial Class ucrButtonsSubdialogue
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(97, 13)
+        Me.cmdHelp.Location = New System.Drawing.Point(81, 3)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(60, 23)
         Me.cmdHelp.TabIndex = 1
@@ -49,7 +49,7 @@ Partial Class ucrButtonsSubdialogue
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(175, 13)
+        Me.cmdCancel.Location = New System.Drawing.Point(159, 3)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(62, 23)
         Me.cmdCancel.TabIndex = 2
@@ -65,7 +65,7 @@ Partial Class ucrButtonsSubdialogue
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdReturn)
         Me.Name = "ucrButtonsSubdialogue"
-        Me.Size = New System.Drawing.Size(253, 44)
+        Me.Size = New System.Drawing.Size(142, 30)
         Me.ResumeLayout(False)
 
     End Sub

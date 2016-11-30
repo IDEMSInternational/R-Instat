@@ -18,8 +18,8 @@ Imports instat.Translations
 
 Public Class dlgProbabilityPlot
     Private Sub dlgProbabilityPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        UcrReceiverSingle.Selector = ucrAddRemove
-        UcrReceiverSingle.SetMeAsReceiver()
+        ucrReceiverPlotVariable.Selector = ucrAddRemove
+        ucrReceiverPlotVariable.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("qqnorm")
         ucrBase.clsRsyntax.iCallType = 0
         rdoNormal.Checked = True
@@ -30,7 +30,7 @@ Public Class dlgProbabilityPlot
 
     Private Sub rdoNormal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNormal.CheckedChanged
         If rdoNormal.Checked = True Then
-            txtTitle.Text = "Normal Probability Plot of " & UcrReceiverSingle.txtReceiverSingle.Text & ""
+            txtTitle.Text = "Normal Probability Plot of " & ucrReceiverPlotVariable.txtReceiverSingle.Text & ""
         End If
 
     End Sub
@@ -63,8 +63,8 @@ Public Class dlgProbabilityPlot
         ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
     End Sub
 
-    Private Sub UcrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle.Leave
-        ucrBase.clsRsyntax.AddParameter("y", UcrReceiverSingle.GetVariables())
+    Private Sub UcrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverPlotVariable.Leave
+        ucrBase.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverPlotVariable.GetVariables())
     End Sub
 End Class
 

@@ -127,9 +127,9 @@ Partial Class dlgEndofRains
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(34, 258)
+        Me.ucrBase.Location = New System.Drawing.Point(24, 256)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 50)
         Me.ucrBase.TabIndex = 20
         '
         'txtWaterBalanceColumnName
@@ -154,7 +154,7 @@ Partial Class dlgEndofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(454, 289)
+        Me.ClientSize = New System.Drawing.Size(454, 307)
         Me.Controls.Add(Me.IbIWaterBalanceColumnName)
         Me.Controls.Add(Me.txtWaterBalanceColumnName)
         Me.Controls.Add(Me.nudCapacityMax)
@@ -167,11 +167,13 @@ Partial Class dlgEndofRains
         Me.Controls.Add(Me.lblEarliest)
         Me.Controls.Add(Me.lblDataList)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgEndofRains"
-        Me.Text = "dlgEndofRains"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "End_of_Rains"
+        Me.Text = "End of Rains"
         CType(Me.nudCapacityMax, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudEarliest, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudEvaporation, System.ComponentModel.ISupportInitialize).EndInit()

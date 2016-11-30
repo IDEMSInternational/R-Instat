@@ -22,62 +22,169 @@ Partial Class dlgHistogram
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrSingleReceiver = New instat.ucrReceiverSingle()
-        Me.UcrBase = New instat.ucrButtons()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.txtHistogramTitle = New System.Windows.Forms.TextBox()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdHistogramOptions = New System.Windows.Forms.Button()
+        Me.rdoHistogram = New System.Windows.Forms.RadioButton()
+        Me.rdoDensity = New System.Windows.Forms.RadioButton()
+        Me.rdoFreequencyPolygon = New System.Windows.Forms.RadioButton()
+        Me.lblfactor = New System.Windows.Forms.Label()
+        Me.cmdDensityOptions = New System.Windows.Forms.Button()
+        Me.cmdFrequencyOptions = New System.Windows.Forms.Button()
+        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveHist = New instat.ucrSaveGraph()
+        Me.ucrVariablesAsFactorforHist = New instat.ucrVariablesAsFactor()
         Me.SuspendLayout()
         '
-        'ucrAddRemove
+        'cmdOptions
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(186, 129)
-        Me.ucrAddRemove.TabIndex = 1
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 259)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'ucrSingleReceiver
+        'cmdHistogramOptions
         '
-        Me.ucrSingleReceiver.Location = New System.Drawing.Point(204, 33)
-        Me.ucrSingleReceiver.Name = "ucrSingleReceiver"
-        Me.ucrSingleReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSingleReceiver.TabIndex = 2
+        Me.cmdHistogramOptions.Location = New System.Drawing.Point(9, 228)
+        Me.cmdHistogramOptions.Name = "cmdHistogramOptions"
+        Me.cmdHistogramOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdHistogramOptions.TabIndex = 8
+        Me.cmdHistogramOptions.Tag = "Histogram_Options"
+        Me.cmdHistogramOptions.Text = "Histogram Options"
+        Me.cmdHistogramOptions.UseVisualStyleBackColor = True
         '
-        'UcrBase
+        'rdoHistogram
         '
-        Me.UcrBase.Location = New System.Drawing.Point(12, 155)
-        Me.UcrBase.Name = "UcrBase"
-        Me.UcrBase.Size = New System.Drawing.Size(410, 32)
-        Me.UcrBase.TabIndex = 3
+        Me.rdoHistogram.AutoSize = True
+        Me.rdoHistogram.Location = New System.Drawing.Point(11, 12)
+        Me.rdoHistogram.Name = "rdoHistogram"
+        Me.rdoHistogram.Size = New System.Drawing.Size(72, 17)
+        Me.rdoHistogram.TabIndex = 0
+        Me.rdoHistogram.TabStop = True
+        Me.rdoHistogram.Tag = "Histogram"
+        Me.rdoHistogram.Text = "Histogram"
+        Me.rdoHistogram.UseVisualStyleBackColor = True
         '
-        'lblTitle
+        'rdoDensity
         '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(205, 66)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(107, 13)
-        Me.lblTitle.TabIndex = 4
-        Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Title of the Histogram"
+        Me.rdoDensity.AutoSize = True
+        Me.rdoDensity.Location = New System.Drawing.Point(139, 12)
+        Me.rdoDensity.Name = "rdoDensity"
+        Me.rdoDensity.Size = New System.Drawing.Size(60, 17)
+        Me.rdoDensity.TabIndex = 1
+        Me.rdoDensity.TabStop = True
+        Me.rdoDensity.Tag = "Density"
+        Me.rdoDensity.Text = "Density"
+        Me.rdoDensity.UseVisualStyleBackColor = True
         '
-        'txtHistogramTitle
+        'rdoFreequencyPolygon
         '
-        Me.txtHistogramTitle.Location = New System.Drawing.Point(208, 82)
-        Me.txtHistogramTitle.Name = "txtHistogramTitle"
-        Me.txtHistogramTitle.Size = New System.Drawing.Size(100, 20)
-        Me.txtHistogramTitle.TabIndex = 5
+        Me.rdoFreequencyPolygon.AutoSize = True
+        Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(255, 12)
+        Me.rdoFreequencyPolygon.Name = "rdoFreequencyPolygon"
+        Me.rdoFreequencyPolygon.Size = New System.Drawing.Size(116, 17)
+        Me.rdoFreequencyPolygon.TabIndex = 2
+        Me.rdoFreequencyPolygon.TabStop = True
+        Me.rdoFreequencyPolygon.Tag = "Frequency_Polygon"
+        Me.rdoFreequencyPolygon.Text = "Frequency Polygon"
+        Me.rdoFreequencyPolygon.UseVisualStyleBackColor = True
+        '
+        'lblfactor
+        '
+        Me.lblfactor.AutoSize = True
+        Me.lblfactor.Location = New System.Drawing.Point(255, 196)
+        Me.lblfactor.Name = "lblfactor"
+        Me.lblfactor.Size = New System.Drawing.Size(85, 13)
+        Me.lblfactor.TabIndex = 5
+        Me.lblfactor.Tag = "Factor_Selected:"
+        Me.lblfactor.Text = "Factor Selected:"
+        '
+        'cmdDensityOptions
+        '
+        Me.cmdDensityOptions.Location = New System.Drawing.Point(9, 228)
+        Me.cmdDensityOptions.Name = "cmdDensityOptions"
+        Me.cmdDensityOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdDensityOptions.TabIndex = 8
+        Me.cmdDensityOptions.Tag = "Density_Options"
+        Me.cmdDensityOptions.Text = "Density Options"
+        Me.cmdDensityOptions.UseVisualStyleBackColor = True
+        '
+        'cmdFrequencyOptions
+        '
+        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(10, 228)
+        Me.cmdFrequencyOptions.Name = "cmdFrequencyOptions"
+        Me.cmdFrequencyOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdFrequencyOptions.TabIndex = 7
+        Me.cmdFrequencyOptions.Tag = "Frequency_Polygon_Options"
+        Me.cmdFrequencyOptions.Text = "Frequency Polygon Options"
+        Me.cmdFrequencyOptions.UseVisualStyleBackColor = True
+        '
+        'ucrFactorReceiver
+        '
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 212)
+        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Selector = Nothing
+        Me.ucrFactorReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFactorReceiver.TabIndex = 6
+        '
+        'ucrHistogramSelector
+        '
+        Me.ucrHistogramSelector.bShowHiddenColumns = False
+        Me.ucrHistogramSelector.bUseCurrentFilter = True
+        Me.ucrHistogramSelector.Location = New System.Drawing.Point(10, 35)
+        Me.ucrHistogramSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
+        Me.ucrHistogramSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrHistogramSelector.TabIndex = 3
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 320)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 10
+        '
+        'ucrSaveHist
+        '
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 294)
+        Me.ucrSaveHist.Name = "ucrSaveHist"
+        Me.ucrSaveHist.Size = New System.Drawing.Size(265, 20)
+        Me.ucrSaveHist.TabIndex = 9
+        '
+        'ucrVariablesAsFactorforHist
+        '
+        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(255, 46)
+        Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
+        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorforHist.TabIndex = 4
+        Me.ucrVariablesAsFactorforHist.ucrVariableSelector = Nothing
         '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 188)
-        Me.Controls.Add(Me.txtHistogramTitle)
-        Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.UcrBase)
-        Me.Controls.Add(Me.ucrSingleReceiver)
-        Me.Controls.Add(Me.ucrAddRemove)
+        Me.ClientSize = New System.Drawing.Size(419, 384)
+        Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
+        Me.Controls.Add(Me.ucrSaveHist)
+        Me.Controls.Add(Me.ucrFactorReceiver)
+        Me.Controls.Add(Me.rdoFreequencyPolygon)
+        Me.Controls.Add(Me.rdoDensity)
+        Me.Controls.Add(Me.rdoHistogram)
+        Me.Controls.Add(Me.cmdFrequencyOptions)
+        Me.Controls.Add(Me.cmdDensityOptions)
+        Me.Controls.Add(Me.cmdHistogramOptions)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.ucrHistogramSelector)
+        Me.Controls.Add(Me.lblfactor)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgHistogram"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Histogram"
@@ -86,9 +193,17 @@ Partial Class dlgHistogram
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrSingleReceiver As ucrReceiverSingle
-    Friend WithEvents UcrBase As ucrButtons
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents txtHistogramTitle As TextBox
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrHistogramSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdHistogramOptions As Button
+    Friend WithEvents rdoHistogram As RadioButton
+    Friend WithEvents rdoDensity As RadioButton
+    Friend WithEvents rdoFreequencyPolygon As RadioButton
+    Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblfactor As Label
+    Friend WithEvents cmdDensityOptions As Button
+    Friend WithEvents cmdFrequencyOptions As Button
+    Friend WithEvents ucrSaveHist As ucrSaveGraph
+    Friend WithEvents ucrVariablesAsFactorforHist As ucrVariablesAsFactor
 End Class

@@ -54,9 +54,6 @@
   <data name="Manage" xml:space="preserve">
     <value>Simamia</value>
   </data>
-  <data name="New_Worksheet" xml:space="preserve">
-    <value>Lahakazi mpya</value>
-  </data>
   <data name="Ok" xml:space="preserve">
     <value>Sawa</value>
   </data>
@@ -218,5 +215,302 @@
   </data>
   <data name="Days" xml:space="preserve">
     <value>Siku</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Kuchaguza A-Z</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Kuchangua Z-A</value>
+  </data>
+  <data name="Four" xml:space="preserve">
+    <value>Nne</value>
+  </data>
+  <data name="One" xml:space="preserve">
+    <value>Moja</value>
+  </data>
+  <data name="Three" xml:space="preserve">
+    <value>Tatu</value>
+  </data>
+  <data name="Two" xml:space="preserve">
+    <value>Mbili</value>
+  </data>
+  <data name="New_Value" xml:space="preserve">
+    <value>Thamani Mpya</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Mpya</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>chaguo</value>
+  </data>
+  <data name="arrows_up" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrows_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Density" xml:space="preserve">
+    <value>Uzito</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>Kwanza</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Tovuti</value>
+  </data>
+  <data name="Append" xml:space="preserve">
+    <value>Ambatisho</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Leta</value>
+  </data>
+  <data name="Percents" xml:space="preserve">
+    <value>Asilimia</value>
+  </data>
+  <data name="arrows_down" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrows_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Hakuna</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Namba</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Hesabu</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Maoni:</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Lebo</value>
+  </data>
+  <data name="New_worksheet" xml:space="preserve">
+    <value>Lahakazi mpya</value>
+  </data>
+  <data name="arrows_bottom" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrows_bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Normal1" xml:space="preserve">
+    <value>Kawaida</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Hapana</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Modeli</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Kichujio</value>
+  </data>
+  <data name="Station_name" xml:space="preserve">
+    <value>Jina la Kituo</value>
+  </data>
+  <data name="Kappa" xml:space="preserve">
+    <value>Kappa</value>
+  </data>
+  <data name="Maximum1" xml:space="preserve">
+    <value>Upeo</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Matukio</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Jumla:</value>
+  </data>
+  <data name="Statistic" xml:space="preserve">
+    <value>Takwimu</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>Matabaka</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Kimo:</value>
+  </data>
+  <data name="Convert_to" xml:space="preserve">
+    <value>Geuza kwa:</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Kawaida</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Funga</value>
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value>Upeo</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Tazama</value>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>Tayarisha</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>Chini</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="Interaction" xml:space="preserve">
+    <value>Kutangamana</value>
+  </data>
+  <data name="Cases" xml:space="preserve">
+    <value>Kesi</value>
+  </data>
+  <data name="Missing" xml:space="preserve">
+    <value>(Inakosekana)</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Kipimo</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Mwisho</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Output_options" xml:space="preserve">
+    <value>Chaguo towe</value>
+  </data>
+  <data name="Median" xml:space="preserve">
+    <value>Kati</value>
+  </data>
+  <data name="Lock_and_unlock" xml:space="preserve">
+    <value>Kufunga na kufungua</value>
+  </data>
+  <data name="Quote" xml:space="preserve">
+    <value>Nukuu</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ndiyo</value>
+  </data>
+  <data name="Heading" xml:space="preserve">
+    <value>Kichwa cha habari</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Hali-tumizi:</value>
+  </data>
+  <data name="Minimum1" xml:space="preserve">
+    <value>Kiasi</value>
+  </data>
+  <data name="Sheet_name" xml:space="preserve">
+    <value>Jina la Loho</value>
+  </data>
+  <data name="Exponential" xml:space="preserve">
+    <value>Nambari kipeo</value>
+  </data>
+  <data name="Greater_Than" xml:space="preserve">
+    <value>Kubwa kuliko...</value>
+  </data>
+  <data name="Expand1" xml:space="preserve">
+    <value>Finyuza</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Mchakato</value>
+  </data>
+  <data name="Include" xml:space="preserve">
+    <value>Husisha</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Kichwa</value>
+  </data>
+  <data name="Shape" xml:space="preserve">
+    <value>Umbo</value>
+  </data>
+  <data name="Uniform" xml:space="preserve">
+    <value>Sare</value>
+  </data>
+  <data name="Overtype" xml:space="preserve">
+    <value>Chapa juu ya</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Aina:</value>
+  </data>
+  <data name="Exclude" xml:space="preserve">
+    <value>Tenga</value>
+  </data>
+  <data name="Axes" xml:space="preserve">
+    <value>Jira</value>
+  </data>
+  <data name="Chart_Type" xml:space="preserve">
+    <value>Aina ya Chati</value>
+  </data>
+  <data name="Equal_To" xml:space="preserve">
+    <value>Sawa Na</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Mandhari</value>
+  </data>
+  <data name="Bar_Chart" xml:space="preserve">
+    <value>Chati Mwambaa</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Mpangilio</value>
+  </data>
+  <data name="Line_width" xml:space="preserve">
+    <value> Unene wa mstari</value>
+  </data>
+  <data name="Existing_worksheet" xml:space="preserve">
+    <value>Lahakazi iliyopo:</value>
+  </data>
+  <data name="Pie_Chart" xml:space="preserve">
+    <value>Chati Duara</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Safu ulalo</value>
+  </data>
+  <data name="Condition" xml:space="preserve">
+    <value>Sharti:</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Uzani</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Fungua</value>
+  </data>
+  <data name="Data_file" xml:space="preserve">
+    <value>Jalada la Data:</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Juu</value>
+  </data>
+  <data name="a" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>Kiasi</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Ngazi</value>
+  </data>
+  <data name="Exponential1" xml:space="preserve">
+    <value>Nambari kipeo</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Usimbaji</value>
+  </data>
+  <data name="Separator" xml:space="preserve">
+    <value>Mtengano</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Panga upya</value>
+  </data>
+  <data name="arrows_top" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrows_top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Kiwango:</value>
+  </data>
+  <data name="Line_Options" xml:space="preserve">
+    <value>Chaguo Mstari...</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Pointi</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Iliyoteuliwa</value>
+  </data>
+  <data name="BarCharts" xml:space="preserve">
+    <value>Chati Mwambaa</value>
   </data>
 </root>

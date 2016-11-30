@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgWaterBalance
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,9 @@ Partial Class dlgWaterBalance
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.nudEvaporation = New System.Windows.Forms.NumericUpDown()
         Me.nudMaximumCapacity = New System.Windows.Forms.NumericUpDown()
         Me.nudDecimalPlace = New System.Windows.Forms.NumericUpDown()
@@ -34,17 +34,18 @@ Partial Class dlgWaterBalance
         Me.lblMaximumCapacity = New System.Windows.Forms.Label()
         Me.lblColumnName = New System.Windows.Forms.Label()
         Me.chkPrintTable = New System.Windows.Forms.CheckBox()
+        Me.chkMonthAbbreviations = New System.Windows.Forms.CheckBox()
         CType(Me.nudEvaporation, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMaximumCapacity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDecimalPlace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(55, 245)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
-        Me.UcrButtons1.TabIndex = 0
+        Me.ucrBase.Location = New System.Drawing.Point(55, 245)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 0
         '
         'nudEvaporation
         '
@@ -147,11 +148,23 @@ Partial Class dlgWaterBalance
         Me.chkPrintTable.Text = "CheckBox1"
         Me.chkPrintTable.UseVisualStyleBackColor = True
         '
+        'chkMonthAbbreviations
+        '
+        Me.chkMonthAbbreviations.AutoSize = True
+        Me.chkMonthAbbreviations.Location = New System.Drawing.Point(113, 194)
+        Me.chkMonthAbbreviations.Name = "chkMonthAbbreviations"
+        Me.chkMonthAbbreviations.Size = New System.Drawing.Size(81, 17)
+        Me.chkMonthAbbreviations.TabIndex = 15
+        Me.chkMonthAbbreviations.Tag = "Month_Abbreviations"
+        Me.chkMonthAbbreviations.Text = "CheckBox1"
+        Me.chkMonthAbbreviations.UseVisualStyleBackColor = True
+        '
         'dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(464, 277)
+        Me.Controls.Add(Me.chkMonthAbbreviations)
         Me.Controls.Add(Me.chkPrintTable)
         Me.Controls.Add(Me.lblColumnName)
         Me.Controls.Add(Me.lblMaximumCapacity)
@@ -163,9 +176,12 @@ Partial Class dlgWaterBalance
         Me.Controls.Add(Me.nudDecimalPlace)
         Me.Controls.Add(Me.nudMaximumCapacity)
         Me.Controls.Add(Me.nudEvaporation)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgWaterBalance"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Water_Balance"
         Me.Text = "dlgWaterBalance"
         CType(Me.nudEvaporation, System.ComponentModel.ISupportInitialize).EndInit()
@@ -176,7 +192,7 @@ Partial Class dlgWaterBalance
 
     End Sub
 
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents nudEvaporation As NumericUpDown
     Friend WithEvents nudMaximumCapacity As NumericUpDown
     Friend WithEvents nudDecimalPlace As NumericUpDown
@@ -188,4 +204,5 @@ Partial Class dlgWaterBalance
     Friend WithEvents lblMaximumCapacity As Label
     Friend WithEvents lblColumnName As Label
     Friend WithEvents chkPrintTable As CheckBox
+    Friend WithEvents chkMonthAbbreviations As CheckBox
 End Class

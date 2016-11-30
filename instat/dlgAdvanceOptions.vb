@@ -1,6 +1,6 @@
 ﻿Public Class dlgAdvanceOptions
     Dim strScript As String
-    Private Sub UcrButtonsSubdialogue1_ClickReturn(sender As Object, e As EventArgs) Handles UcrButtonsSubdialogue1.ClickReturn
+    Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs)
         'strScript = strScript & ", data_tables_meta_data=" & txtDataTablesMetaData.Text.ToString()
         'strScript = strScript & ", climate_object_meta_data=" & txt.Value.ToString()
         'strScript = strScript & ", data_tables_meta_data=" & txtDataTablesMetaData.Text.ToString()
@@ -15,7 +15,5 @@
 
     End Sub
 
-    Private Sub UcrButtonsSubdialogue1_Load(sender As Object, e As EventArgs) Handles UcrButtonsSubdialogue1.Load
 
-    End Sub
 End Class

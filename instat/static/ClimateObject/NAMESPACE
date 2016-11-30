@@ -1,0 +1,5 @@
+exportPattern("^[[:alpha:]]+")
+exportClasses(
+    "climate",
+     "climate_data" 
+)

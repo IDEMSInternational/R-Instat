@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRegressionSimple
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,91 +20,45 @@ Partial Class dlgRegressionSimple
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRegressionSimple))
-        Me.tbctrlSimple = New System.Windows.Forms.TabControl()
-        Me.tbRegress = New System.Windows.Forms.TabPage()
-        Me.ucrReceiverSingleB = New instat.ucrReceiverSingle()
-        Me.grpLackFit = New System.Windows.Forms.GroupBox()
-        Me.txtdf = New System.Windows.Forms.TextBox()
-        Me.txtResidualMsg = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.lblResidualMsg = New System.Windows.Forms.Label()
-        Me.chkLackFit = New System.Windows.Forms.CheckBox()
-        Me.chkAnovaTable = New System.Windows.Forms.CheckBox()
-        Me.chkShowPlots = New System.Windows.Forms.CheckBox()
-        Me.chkSiginificance = New System.Windows.Forms.CheckBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.lblConfidence = New System.Windows.Forms.Label()
-        Me.lblExplanatoryVariable = New System.Windows.Forms.Label()
-        Me.lblResponseVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingleA = New instat.ucrReceiverSingle()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.tbPlot = New System.Windows.Forms.TabPage()
-        Me.tbSave = New System.Windows.Forms.TabPage()
+        Me.lblDF = New System.Windows.Forms.Label()
+        Me.txtResidualMsg = New System.Windows.Forms.TextBox()
+        Me.txtdf = New System.Windows.Forms.TextBox()
+        Me.lblResponse = New System.Windows.Forms.Label()
+        Me.lblExplanatory = New System.Windows.Forms.Label()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
+        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
+        Me.cmdModelOptions = New System.Windows.Forms.Button()
+        Me.chkFunction = New System.Windows.Forms.CheckBox()
+        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.lblModelPreview = New System.Windows.Forms.Label()
+        Me.ucrModelName = New instat.ucrInputComboBox()
+        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
-        Me.tbctrlSimple.SuspendLayout()
-        Me.tbRegress.SuspendLayout()
-        Me.grpLackFit.SuspendLayout()
+        Me.ucrResponse = New instat.ucrReceiverSingle()
+        Me.ucrExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrModelPreview = New instat.ucrInputTextBox()
+        Me.chkPaired = New System.Windows.Forms.CheckBox()
+        Me.rdoGeneral = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecific = New System.Windows.Forms.RadioButton()
+        Me.lblNumeric = New System.Windows.Forms.Label()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.nudCI = New System.Windows.Forms.NumericUpDown()
+        Me.nudHypothesis = New System.Windows.Forms.NumericUpDown()
+        Me.lblCI = New System.Windows.Forms.Label()
+        Me.lblHyp1 = New System.Windows.Forms.Label()
+        Me.lblProbability2 = New System.Windows.Forms.Label()
+        Me.nudHyp2 = New System.Windows.Forms.NumericUpDown()
+        Me.grpParameters = New System.Windows.Forms.GroupBox()
+        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudHyp2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'tbctrlSimple
-        '
-        Me.tbctrlSimple.Controls.Add(Me.tbRegress)
-        Me.tbctrlSimple.Controls.Add(Me.tbPlot)
-        Me.tbctrlSimple.Controls.Add(Me.tbSave)
-        resources.ApplyResources(Me.tbctrlSimple, "tbctrlSimple")
-        Me.tbctrlSimple.Name = "tbctrlSimple"
-        Me.tbctrlSimple.SelectedIndex = 0
-        '
-        'tbRegress
-        '
-        Me.tbRegress.Controls.Add(Me.ucrReceiverSingleB)
-        Me.tbRegress.Controls.Add(Me.grpLackFit)
-        Me.tbRegress.Controls.Add(Me.chkLackFit)
-        Me.tbRegress.Controls.Add(Me.chkAnovaTable)
-        Me.tbRegress.Controls.Add(Me.chkShowPlots)
-        Me.tbRegress.Controls.Add(Me.chkSiginificance)
-        Me.tbRegress.Controls.Add(Me.ComboBox1)
-        Me.tbRegress.Controls.Add(Me.lblConfidence)
-        Me.tbRegress.Controls.Add(Me.lblExplanatoryVariable)
-        Me.tbRegress.Controls.Add(Me.lblResponseVariable)
-        Me.tbRegress.Controls.Add(Me.ucrReceiverSingleA)
-        Me.tbRegress.Controls.Add(Me.ucrAddRemove)
-        resources.ApplyResources(Me.tbRegress, "tbRegress")
-        Me.tbRegress.Name = "tbRegress"
-        Me.tbRegress.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverSingleB
-        '
-        resources.ApplyResources(Me.ucrReceiverSingleB, "ucrReceiverSingleB")
-        Me.ucrReceiverSingleB.Name = "ucrReceiverSingleB"
-        '
-        'grpLackFit
-        '
-        Me.grpLackFit.Controls.Add(Me.txtdf)
-        Me.grpLackFit.Controls.Add(Me.txtResidualMsg)
-        Me.grpLackFit.Controls.Add(Me.Label1)
-        Me.grpLackFit.Controls.Add(Me.lblResidualMsg)
-        resources.ApplyResources(Me.grpLackFit, "grpLackFit")
-        Me.grpLackFit.Name = "grpLackFit"
-        Me.grpLackFit.TabStop = False
-        '
-        'txtdf
-        '
-        resources.ApplyResources(Me.txtdf, "txtdf")
-        Me.txtdf.Name = "txtdf"
-        '
-        'txtResidualMsg
-        '
-        resources.ApplyResources(Me.txtResidualMsg, "txtResidualMsg")
-        Me.txtResidualMsg.Name = "txtResidualMsg"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
         '
         'lblResidualMsg
         '
@@ -112,126 +66,258 @@ Partial Class dlgRegressionSimple
         Me.lblResidualMsg.Name = "lblResidualMsg"
         Me.lblResidualMsg.Tag = "Residual_Msg"
         '
-        'chkLackFit
+        'lblDF
         '
-        resources.ApplyResources(Me.chkLackFit, "chkLackFit")
-        Me.chkLackFit.Name = "chkLackFit"
-        Me.chkLackFit.Tag = "Lack_Of_Fit"
-        Me.chkLackFit.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblDF, "lblDF")
+        Me.lblDF.Name = "lblDF"
+        Me.lblDF.Tag = "Degrees_of_freedom"
         '
-        'chkAnovaTable
+        'txtResidualMsg
         '
-        resources.ApplyResources(Me.chkAnovaTable, "chkAnovaTable")
-        Me.chkAnovaTable.Name = "chkAnovaTable"
-        Me.chkAnovaTable.Tag = "Show_Anova_Table"
-        Me.chkAnovaTable.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.txtResidualMsg, "txtResidualMsg")
+        Me.txtResidualMsg.Name = "txtResidualMsg"
         '
-        'chkShowPlots
+        'txtdf
         '
-        resources.ApplyResources(Me.chkShowPlots, "chkShowPlots")
-        Me.chkShowPlots.Name = "chkShowPlots"
-        Me.chkShowPlots.Tag = "Show_Plot"
-        Me.chkShowPlots.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.txtdf, "txtdf")
+        Me.txtdf.Name = "txtdf"
         '
-        'chkSiginificance
+        'lblResponse
         '
-        resources.ApplyResources(Me.chkSiginificance, "chkSiginificance")
-        Me.chkSiginificance.Name = "chkSiginificance"
-        Me.chkSiginificance.Tag = "Significance_Test"
-        Me.chkSiginificance.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblResponse, "lblResponse")
+        Me.lblResponse.Name = "lblResponse"
+        Me.lblResponse.Tag = "Response_Variable"
         '
-        'ComboBox1
+        'lblExplanatory
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4"), resources.GetString("ComboBox1.Items5")})
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
-        Me.ComboBox1.Name = "ComboBox1"
+        resources.ApplyResources(Me.lblExplanatory, "lblExplanatory")
+        Me.lblExplanatory.Name = "lblExplanatory"
+        Me.lblExplanatory.Tag = "Explanatory_Variable"
         '
-        'lblConfidence
+        'cmdDisplayOptions
         '
-        resources.ApplyResources(Me.lblConfidence, "lblConfidence")
-        Me.lblConfidence.Name = "lblConfidence"
-        Me.lblConfidence.Tag = "Confidence_Limits"
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.Tag = "Display_Options..."
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
-        'lblExplanatoryVariable
+        'chkSaveModel
         '
-        resources.ApplyResources(Me.lblExplanatoryVariable, "lblExplanatoryVariable")
-        Me.lblExplanatoryVariable.Name = "lblExplanatoryVariable"
-        Me.lblExplanatoryVariable.Tag = "Explanatory_Variable"
+        resources.ApplyResources(Me.chkSaveModel, "chkSaveModel")
+        Me.chkSaveModel.Name = "chkSaveModel"
+        Me.chkSaveModel.Tag = "Save_Model"
+        Me.chkSaveModel.UseVisualStyleBackColor = True
         '
-        'lblResponseVariable
+        'cmdModelOptions
         '
-        resources.ApplyResources(Me.lblResponseVariable, "lblResponseVariable")
-        Me.lblResponseVariable.Name = "lblResponseVariable"
-        Me.lblResponseVariable.Tag = "Response_Variable"
+        resources.ApplyResources(Me.cmdModelOptions, "cmdModelOptions")
+        Me.cmdModelOptions.Name = "cmdModelOptions"
+        Me.cmdModelOptions.Tag = "Model_Options..."
+        Me.cmdModelOptions.UseVisualStyleBackColor = True
         '
-        'ucrReceiverSingleA
+        'chkFunction
         '
-        resources.ApplyResources(Me.ucrReceiverSingleA, "ucrReceiverSingleA")
-        Me.ucrReceiverSingleA.Name = "ucrReceiverSingleA"
+        resources.ApplyResources(Me.chkFunction, "chkFunction")
+        Me.chkFunction.Name = "chkFunction"
+        Me.chkFunction.Tag = "Function"
+        Me.chkFunction.UseVisualStyleBackColor = True
         '
-        'ucrAddRemove
+        'chkConvertToVariate
         '
-        resources.ApplyResources(Me.ucrAddRemove, "ucrAddRemove")
-        Me.ucrAddRemove.Name = "ucrAddRemove"
+        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
+        Me.chkConvertToVariate.Name = "chkConvertToVariate"
+        Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
-        'tbPlot
+        'lblModelPreview
         '
-        resources.ApplyResources(Me.tbPlot, "tbPlot")
-        Me.tbPlot.Name = "tbPlot"
-        Me.tbPlot.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblModelPreview, "lblModelPreview")
+        Me.lblModelPreview.Name = "lblModelPreview"
         '
-        'tbSave
+        'ucrModelName
         '
-        resources.ApplyResources(Me.tbSave, "tbSave")
-        Me.tbSave.Name = "tbSave"
-        Me.tbSave.UseVisualStyleBackColor = True
+        Me.ucrModelName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
+        Me.ucrModelName.Name = "ucrModelName"
+        '
+        'ucrSelectorSimpleReg
+        '
+        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
+        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
+        '
+        'ucrFamily
+        '
+        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
+        Me.ucrFamily.Name = "ucrFamily"
         '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrResponse
+        '
+        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
+        Me.ucrResponse.Name = "ucrResponse"
+        Me.ucrResponse.Selector = Nothing
+        '
+        'ucrExplanatory
+        '
+        resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
+        Me.ucrExplanatory.Name = "ucrExplanatory"
+        Me.ucrExplanatory.Selector = Nothing
+        '
+        'ucrModelPreview
+        '
+        Me.ucrModelPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrModelPreview, "ucrModelPreview")
+        Me.ucrModelPreview.Name = "ucrModelPreview"
+        '
+        'chkPaired
+        '
+        resources.ApplyResources(Me.chkPaired, "chkPaired")
+        Me.chkPaired.Name = "chkPaired"
+        Me.chkPaired.UseVisualStyleBackColor = True
+        '
+        'rdoGeneral
+        '
+        resources.ApplyResources(Me.rdoGeneral, "rdoGeneral")
+        Me.rdoGeneral.Name = "rdoGeneral"
+        Me.rdoGeneral.TabStop = True
+        Me.rdoGeneral.UseVisualStyleBackColor = True
+        '
+        'rdoSpecific
+        '
+        resources.ApplyResources(Me.rdoSpecific, "rdoSpecific")
+        Me.rdoSpecific.Name = "rdoSpecific"
+        Me.rdoSpecific.TabStop = True
+        Me.rdoSpecific.UseVisualStyleBackColor = True
+        '
+        'lblNumeric
+        '
+        resources.ApplyResources(Me.lblNumeric, "lblNumeric")
+        Me.lblNumeric.Name = "lblNumeric"
+        '
+        'lblFactor
+        '
+        resources.ApplyResources(Me.lblFactor, "lblFactor")
+        Me.lblFactor.Name = "lblFactor"
+        '
+        'nudCI
+        '
+        resources.ApplyResources(Me.nudCI, "nudCI")
+        Me.nudCI.Name = "nudCI"
+        '
+        'nudHypothesis
+        '
+        resources.ApplyResources(Me.nudHypothesis, "nudHypothesis")
+        Me.nudHypothesis.Name = "nudHypothesis"
+        '
+        'lblCI
+        '
+        resources.ApplyResources(Me.lblCI, "lblCI")
+        Me.lblCI.Name = "lblCI"
+        '
+        'lblHyp1
+        '
+        resources.ApplyResources(Me.lblHyp1, "lblHyp1")
+        Me.lblHyp1.Name = "lblHyp1"
+        '
+        'lblProbability2
+        '
+        resources.ApplyResources(Me.lblProbability2, "lblProbability2")
+        Me.lblProbability2.Name = "lblProbability2"
+        '
+        'nudHyp2
+        '
+        resources.ApplyResources(Me.nudHyp2, "nudHyp2")
+        Me.nudHyp2.Name = "nudHyp2"
+        '
+        'grpParameters
+        '
+        Me.grpParameters.Controls.Add(Me.lblCI)
+        Me.grpParameters.Controls.Add(Me.nudHyp2)
+        Me.grpParameters.Controls.Add(Me.nudCI)
+        Me.grpParameters.Controls.Add(Me.lblProbability2)
+        Me.grpParameters.Controls.Add(Me.nudHypothesis)
+        Me.grpParameters.Controls.Add(Me.chkPaired)
+        Me.grpParameters.Controls.Add(Me.lblHyp1)
+        resources.ApplyResources(Me.grpParameters, "grpParameters")
+        Me.grpParameters.Name = "grpParameters"
+        Me.grpParameters.TabStop = False
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpParameters)
+        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.lblNumeric)
+        Me.Controls.Add(Me.rdoSpecific)
+        Me.Controls.Add(Me.rdoGeneral)
+        Me.Controls.Add(Me.ucrModelPreview)
+        Me.Controls.Add(Me.ucrExplanatory)
+        Me.Controls.Add(Me.ucrResponse)
+        Me.Controls.Add(Me.lblModelPreview)
+        Me.Controls.Add(Me.chkConvertToVariate)
+        Me.Controls.Add(Me.ucrModelName)
+        Me.Controls.Add(Me.ucrSelectorSimpleReg)
+        Me.Controls.Add(Me.ucrFamily)
+        Me.Controls.Add(Me.chkFunction)
+        Me.Controls.Add(Me.cmdModelOptions)
+        Me.Controls.Add(Me.chkSaveModel)
+        Me.Controls.Add(Me.cmdDisplayOptions)
+        Me.Controls.Add(Me.lblExplanatory)
+        Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.tbctrlSimple)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRegressionSimple"
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Tag = "Simple_Regression"
-        Me.tbctrlSimple.ResumeLayout(False)
-        Me.tbRegress.ResumeLayout(False)
-        Me.tbRegress.PerformLayout()
-        Me.grpLackFit.ResumeLayout(False)
-        Me.grpLackFit.PerformLayout()
+        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudHyp2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpParameters.ResumeLayout(False)
+        Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents tbctrlSimple As TabControl
-    Friend WithEvents tbRegress As TabPage
-    Friend WithEvents grpLackFit As GroupBox
-    Friend WithEvents txtdf As TextBox
-    Friend WithEvents txtResidualMsg As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents lblResidualMsg As Label
-    Friend WithEvents chkLackFit As CheckBox
-    Friend WithEvents chkAnovaTable As CheckBox
-    Friend WithEvents chkShowPlots As CheckBox
-    Friend WithEvents chkSiginificance As CheckBox
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents lblConfidence As Label
-    Friend WithEvents lblExplanatoryVariable As Label
-    Friend WithEvents lblResponseVariable As Label
-    Friend WithEvents ucrReceiverSingleA As ucrReceiverSingle
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents tbPlot As TabPage
-    Friend WithEvents tbSave As TabPage
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverSingleB As ucrReceiverSingle
+    Friend WithEvents lblResidualMsg As Label
+    Friend WithEvents lblDF As Label
+    Friend WithEvents txtResidualMsg As TextBox
+    Friend WithEvents txtdf As TextBox
+
+    Friend WithEvents lblResponse As Label
+    Friend WithEvents lblExplanatory As Label
+    Friend WithEvents cmdDisplayOptions As Button
+    Friend WithEvents chkSaveModel As CheckBox
+    Friend WithEvents cmdModelOptions As Button
+    Friend WithEvents chkFunction As CheckBox
+    Friend WithEvents ucrFamily As ucrDistributions
+    Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrModelName As ucrInputComboBox
+    Friend WithEvents chkConvertToVariate As CheckBox
+    Friend WithEvents lblModelPreview As Label
+    Friend WithEvents ucrResponse As ucrReceiverSingle
+    Friend WithEvents ucrExplanatory As ucrReceiverSingle
+    Friend WithEvents ucrModelPreview As ucrInputTextBox
+    Friend WithEvents chkPaired As CheckBox
+    Friend WithEvents rdoGeneral As RadioButton
+    Friend WithEvents rdoSpecific As RadioButton
+    Friend WithEvents lblNumeric As Label
+    Friend WithEvents lblFactor As Label
+    Friend WithEvents nudCI As NumericUpDown
+    Friend WithEvents nudHypothesis As NumericUpDown
+    Friend WithEvents lblCI As Label
+    Friend WithEvents lblHyp1 As Label
+    Friend WithEvents lblProbability2 As Label
+    Friend WithEvents nudHyp2 As NumericUpDown
+    Friend WithEvents grpParameters As GroupBox
 End Class

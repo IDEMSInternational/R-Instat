@@ -23,30 +23,90 @@ Partial Class dlgOutputforCDT
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblFilename = New System.Windows.Forms.Label()
+        Me.lblInterestedVariables = New System.Windows.Forms.Label()
+        Me.ucrInputFileName = New instat.ucrInputTextBox()
+        Me.ucrInputInterestedVariables = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(24, 229)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 83)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(73, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(125, 13)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Data list not implemented"
+        '
+        'lblFilename
+        '
+        Me.lblFilename.AutoSize = True
+        Me.lblFilename.Location = New System.Drawing.Point(21, 37)
+        Me.lblFilename.Name = "lblFilename"
+        Me.lblFilename.Size = New System.Drawing.Size(54, 13)
+        Me.lblFilename.TabIndex = 2
+        Me.lblFilename.Tag = "Filename"
+        Me.lblFilename.Text = "File Name"
+        '
+        'lblInterestedVariables
+        '
+        Me.lblInterestedVariables.AutoSize = True
+        Me.lblInterestedVariables.Location = New System.Drawing.Point(12, 64)
+        Me.lblInterestedVariables.Name = "lblInterestedVariables"
+        Me.lblInterestedVariables.Size = New System.Drawing.Size(100, 13)
+        Me.lblInterestedVariables.TabIndex = 3
+        Me.lblInterestedVariables.Tag = "Interested_Variables"
+        Me.lblInterestedVariables.Text = "Interested Variables"
+        '
+        'ucrInputFileName
+        '
+        Me.ucrInputFileName.Location = New System.Drawing.Point(133, 25)
+        Me.ucrInputFileName.Name = "ucrInputFileName"
+        Me.ucrInputFileName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputFileName.TabIndex = 6
+        '
+        'ucrInputInterestedVariables
+        '
+        Me.ucrInputInterestedVariables.Location = New System.Drawing.Point(133, 56)
+        Me.ucrInputInterestedVariables.Name = "ucrInputInterestedVariables"
+        Me.ucrInputInterestedVariables.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputInterestedVariables.TabIndex = 6
         '
         'dlgOutputforCDT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(456, 262)
+        Me.ClientSize = New System.Drawing.Size(456, 147)
+        Me.Controls.Add(Me.ucrInputInterestedVariables)
+        Me.Controls.Add(Me.ucrInputFileName)
+        Me.Controls.Add(Me.lblInterestedVariables)
+        Me.Controls.Add(Me.lblFilename)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOutputforCDT"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Output_for_CDT"
-        Me.Text = "dlgOutputforCDT"
+        Me.Text = "Output for CDT"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblFilename As Label
+    Friend WithEvents lblInterestedVariables As Label
+    Friend WithEvents ucrInputFileName As ucrInputTextBox
+    Friend WithEvents ucrInputInterestedVariables As ucrInputTextBox
 End Class

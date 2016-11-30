@@ -29,8 +29,8 @@ Partial Class dlgProbabilityPlot
         Me.rdoGamma = New System.Windows.Forms.RadioButton()
         Me.rdoNormal = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtons()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.UcrReceiverSingle = New instat.ucrReceiverSingle()
+        Me.lblVariableToPlot = New System.Windows.Forms.Label()
+        Me.ucrReceiverPlotVariable = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.grpDistributions.SuspendLayout()
@@ -59,7 +59,7 @@ Partial Class dlgProbabilityPlot
         Me.rdoExtrmeValue.Size = New System.Drawing.Size(93, 17)
         Me.rdoExtrmeValue.TabIndex = 0
         Me.rdoExtrmeValue.TabStop = True
-        Me.rdoExtrmeValue.Tag = "ExtrmeValue"
+        Me.rdoExtrmeValue.Tag = "Extreme_Value"
         Me.rdoExtrmeValue.Text = "Extreme Value"
         Me.rdoExtrmeValue.UseVisualStyleBackColor = True
         '
@@ -115,28 +115,33 @@ Partial Class dlgProbabilityPlot
         '
         Me.ucrBase.Location = New System.Drawing.Point(-1, 157)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 0
         '
-        'Label2
+        'lblVariableToPlot
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(218, 5)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(78, 13)
-        Me.Label2.TabIndex = 8
-        Me.Label2.Text = "Variable to Plot"
+        Me.lblVariableToPlot.AutoSize = True
+        Me.lblVariableToPlot.Location = New System.Drawing.Point(218, 5)
+        Me.lblVariableToPlot.Name = "lblVariableToPlot"
+        Me.lblVariableToPlot.Size = New System.Drawing.Size(78, 13)
+        Me.lblVariableToPlot.TabIndex = 8
+        Me.lblVariableToPlot.Tag = "Variable_to_Plot"
+        Me.lblVariableToPlot.Text = "Variable to Plot"
         '
-        'UcrReceiverSingle
+        'ucrReceiverPlotVariable
         '
-        Me.UcrReceiverSingle.Location = New System.Drawing.Point(216, 29)
-        Me.UcrReceiverSingle.Name = "UcrReceiverSingle"
-        Me.UcrReceiverSingle.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle.TabIndex = 7
+        Me.ucrReceiverPlotVariable.Location = New System.Drawing.Point(216, 29)
+        Me.ucrReceiverPlotVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPlotVariable.Name = "ucrReceiverPlotVariable"
+        Me.ucrReceiverPlotVariable.Selector = Nothing
+        Me.ucrReceiverPlotVariable.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverPlotVariable.TabIndex = 7
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(7, 3)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(202, 154)
         Me.ucrAddRemove.TabIndex = 6
@@ -152,10 +157,10 @@ Partial Class dlgProbabilityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(402, 186)
+        Me.ClientSize = New System.Drawing.Size(402, 212)
         Me.Controls.Add(Me.txtTitle)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.UcrReceiverSingle)
+        Me.Controls.Add(Me.lblVariableToPlot)
+        Me.Controls.Add(Me.ucrReceiverPlotVariable)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.grpDistributions)
         Me.Controls.Add(Me.ucrBase)
@@ -163,7 +168,9 @@ Partial Class dlgProbabilityPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgProbabilityPlot"
-        Me.Text = "dlgProbabilityPlot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Probability_Plot"
+        Me.Text = "Probability Plot"
         Me.grpDistributions.ResumeLayout(False)
         Me.grpDistributions.PerformLayout()
         Me.ResumeLayout(False)
@@ -178,8 +185,8 @@ Partial Class dlgProbabilityPlot
     Friend WithEvents rdoEmperical As RadioButton
     Friend WithEvents rdoGamma As RadioButton
     Friend WithEvents rdoNormal As RadioButton
-    Friend WithEvents Label2 As Label
-    Friend WithEvents UcrReceiverSingle As ucrReceiverSingle
+    Friend WithEvents lblVariableToPlot As Label
+    Friend WithEvents ucrReceiverPlotVariable As ucrReceiverSingle
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents txtTitle As TextBox
 End Class

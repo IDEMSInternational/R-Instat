@@ -15,37 +15,475 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgRegressionSimple
+    Public bFirstLoad As Boolean = True
+    Public clsModel, clsFunctionOperation As New ROperator
+    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRBinomial, clsRLength, clsRMean, clsRMean2, clsRLength2 As New RFunction
+    Public clsRLmOrGLM As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrBase.clsRsyntax.SetFunction("summary(lm")
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.iFunctionType = 1
-        ucrReceiverSingleA.Selector = ucrAddRemove
-        ucrReceiverSingleA.SetMeAsReceiver()
-        grpLackFit.Enabled = False
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
         autoTranslate(Me)
     End Sub
 
-    Private Sub chkLackFit_CheckedChanged(sender As Object, e As EventArgs) Handles chkLackFit.CheckedChanged
-        If chkLackFit.Checked = True Then
-            grpLackFit.Enabled = True
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 2
+        clsModel.SetOperation("~")
+        ucrResponse.Selector = ucrSelectorSimpleReg
+        ucrExplanatory.Selector = ucrSelectorSimpleReg
+        ucrBase.iHelpTopicID = 366
+        ucrModelName.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
+        ucrModelName.SetItemsTypeAsModels()
+        ucrModelName.SetDefaultTypeAsModel()
+        ucrModelName.SetValidationTypeAsRVariable()
+        ucrModelPreview.IsReadOnly = True
+        sdgSimpleRegOptions.SetRModelFunction(clsRLmOrGLM)
+        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
+        sdgSimpleRegOptions.SetRYVariable(ucrResponse)
+        sdgSimpleRegOptions.SetRXVariable(ucrExplanatory)
+        sdgVariableTransformations.SetRYVariable(ucrResponse)
+        sdgVariableTransformations.SetRXVariable(ucrExplanatory)
+        sdgVariableTransformations.SetRModelOperator(clsModel)
+        sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        AssignModelName()
+        nudCI.Increment = 0.05
+        nudCI.Minimum = 0
+        nudCI.Maximum = 1
+        nudCI.DecimalPlaces = 2
+        nudHypothesis.DecimalPlaces = 2
+        nudHyp2.DecimalPlaces = 2
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrModelName.SetPrefix("reg")
+        ucrSelectorSimpleReg.Reset()
+        ucrResponse.SetMeAsReceiver()
+        ucrSelectorSimpleReg.Focus()
+        chkSaveModel.Checked = True
+        chkConvertToVariate.Checked = False
+        chkConvertToVariate.Visible = False
+        chkFunction.Checked = False
+        chkFunction.Visible = False
+        rdoGeneral.Checked = True
+        nudCI.Value = 0.95
+        sdgSimpleRegOptions.SetDefaults()
+        sdgModelOptions.SetDefaults()
+        ucrModelName.Reset()
+        ucrModelPreview.SetName("")
+        SetRCode()
+        DistributionsOffered()
+        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
+        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        SetEnableDists()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub LM()
+        clsRLmOrGLM.SetRCommand("lm")
+        clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
+        clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
+        clsModel.SetOperation("~")
+    End Sub
+
+    Private Sub GLM()
+        clsRLmOrGLM.SetRCommand("glm")
+        clsRLmOrGLM.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
+        clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel)
+        clsModel.SetOperation("~")
+        clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+        clsRLmOrGLM.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+    End Sub
+
+    Private Sub SetTTest()
+        clsRTTest.SetRCommand("t.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
+        clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
+        clsRTTest.AddParameter("mu", nudHypothesis.Value.ToString())
+        If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" Then
+            clsRTTest.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
+            clsRTTest.AddParameter("y", clsRFunctionParameter:=ucrExplanatory.GetVariables())
         Else
-            grpLackFit.Enabled = False
+            clsModel.SetOperation("~")
+            clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+            clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+            clsRTTest.AddParameter("x", clsROperatorParameter:=clsModel)
+        End If
+        If chkPaired.Checked Then
+            clsRTTest.AddParameter("paired", "TRUE")
+        Else
+            clsRTTest.RemoveParameterByName("paired")
+        End If
+
+        If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+            If ucrResponse.strCurrDataType = "character" Or ucrResponse.strCurrDataType = "factor" Then
+                ucrResponse.Clear()
+            End If
+        End If
+
+    End Sub
+
+    Public Sub DataTypeAccepted()
+        If rdoGeneral.Checked Then
+            ucrResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+            ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+        ElseIf rdoSpecific.Checked Then
+            If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+                ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
+                ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+            End If
+            If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+                ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
+                ucrExplanatory.SetIncludedDataTypes({"integer", "numeric"})
+            End If
+            If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+                ucrResponse.SetIncludedDataTypes({"character", "factor"})
+                ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
+            End If
         End If
     End Sub
 
-    Private Sub ucrReceiverSingleB_Enter(sender As Object, e As EventArgs) Handles ucrReceiverSingleB.Enter
-        ucrReceiverSingleB.Selector = ucrAddRemove
-        ucrReceiverSingleB.SetMeAsReceiver()
+    Private Sub SetBinomTest()
+        clsRBinomial.SetRCommand("prop.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
+        clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
+        clsRBinomial.AddParameter("p", "c(" & nudHypothesis.Value.ToString() & "," & nudHyp2.Value.ToString() & ")")
+        clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+        clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+        clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
+        clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+
+        If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+            If ucrExplanatory.strCurrDataType = "numeric" Or ucrExplanatory.strCurrDataType = "integer" Or ucrExplanatory.strCurrDataType = "positive integer" Then
+                ucrExplanatory.Clear()
+            End If
+            If ucrResponse.strCurrDataType = "numeric" Or ucrResponse.strCurrDataType = "integer" Or ucrResponse.strCurrDataType = "positive integer" Then
+                ucrResponse.Clear()
+            End If
+        End If
     End Sub
 
-    Private Sub ucrReceiverSingleA_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingleA.Leave
-        ucrBase.clsRsyntax.AddParameter(ucrReceiverSingleA.txtReceiverSingle.Text, "")
+    Private Sub SetPoissonTest()
+        Dim clsxFunc As New RFunction
+        Dim clsTFunc As New RFunction
+
+        If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+            If ucrExplanatory.strCurrDataType = "factor" Or ucrExplanatory.strCurrDataType = "character" Then
+                ucrExplanatory.Clear()
+            End If
+            If ucrResponse.strCurrDataType = "factor" Or ucrResponse.strCurrDataType = "character" Then
+                ucrResponse.Clear()
+            End If
+        End If
+        clsRPoisson.SetRCommand("poisson.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
+        clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
+        clsRPoisson.AddParameter("r", nudHypothesis.Value.ToString())
+        clsRLength.SetRCommand("length")
+        clsRLength.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
+        clsRLength2.SetRCommand("length")
+        clsRLength2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsRMean.SetRCommand("mean")
+        clsRMean.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
+        clsRMean2.SetRCommand("mean")
+        clsRMean2.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
+
+        clsxFunc.SetRCommand("c")
+        clsxFunc.AddParameter("l1", clsRFunctionParameter:=clsRLength, bIncludeArgumentName:=False)
+        clsxFunc.AddParameter("l2", clsRFunctionParameter:=clsRLength2, bIncludeArgumentName:=False)
+        clsRPoisson.AddParameter("x", clsRFunctionParameter:=clsxFunc)
+
+        clsTFunc.SetRCommand("c")
+        clsTFunc.AddParameter("m1", clsRFunctionParameter:=clsRMean, bIncludeArgumentName:=False)
+        clsTFunc.AddParameter("m2", clsRFunctionParameter:=clsRMean2, bIncludeArgumentName:=False)
+        clsRPoisson.AddParameter("T", clsRFunctionParameter:=clsTFunc)
     End Sub
 
-    Private Sub ucrReceiverSingleB_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingleB.Leave
-        ucrBase.clsRsyntax.AddParameter(ucrReceiverSingleB.txtReceiverSingle.Text, "")
+    Private Sub SetRCode()
+        clsRPoisson.ClearParameters()
+        clsRBinomial.ClearParameters()
+        clsRTTest.ClearParameters()
+        clsRLength.ClearParameters()
+        clsRLmOrGLM.ClearParameters()
+        If rdoGeneral.Checked Then
+            If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
+                LM()
+            Else
+                GLM()
+            End If
+        ElseIf rdoSpecific.Checked Then
+            If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+                SetTTest()
+            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+                SetPoissonTest()
+            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+                SetBinomTest()
+            End If
+        End If
+        TestOKEnabled()
+        '        AssignModelName()
     End Sub
 
+    Private Sub TestOKEnabled()
+        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
+            ucrBase.OKEnabled(True)
+            ucrModelPreview.SetName(clsModel.ToScript)
+            If rdoGeneral.Checked Then
+                ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
+            End If
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.DataFrameChanged
+        AssignModelName()
+        SetRCode()
+    End Sub
+
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        Display()
+        sdgSimpleRegOptions.ShowDialog()
+    End Sub
+
+    Public Sub ConvertToVariate()
+        If rdoGeneral.Checked Then
+            If Not ucrResponse.IsEmpty Then
+                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                If ucrFamily.strDataType = "numeric" Then
+                    chkConvertToVariate.Checked = False
+                    chkConvertToVariate.Visible = False
+                Else
+                    chkConvertToVariate.Visible = True
+                End If
+                sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+                If chkConvertToVariate.Checked Then
+                    clsRConvert.SetRCommand("as.numeric")
+                    clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
+                    clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+                    clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+                    ucrFamily.RecieverDatatype("numeric")
+                Else
+                    clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+                    clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+                    clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                    ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                End If
+            Else
+                If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
+                    ucrFamily.cboDistributions.Text = ""
+                    cmdModelOptions.Enabled = False
+                Else
+                    cmdModelOptions.Enabled = True
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub DistributionsOffered()
+        If rdoGeneral.Checked Then
+            ucrFamily.SetGLMDistributions()
+            'ucrFamily.SetAllDistributions() ' this is just temporary. It will move back to SetGLMDistributions once some bugs are fixed
+        Else
+            ucrFamily.SetExactDistributions()
+        End If
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+        SetRCode()
+        ConvertToVariate()
+        TestOKEnabled()
+        DataTypeAccepted()
+        SetEnableDists()
+    End Sub
+
+    Public Sub SetEnableDists()
+        ucrFamily.Enabled = Not ucrResponse.IsEmpty
+    End Sub
+
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged, chkConvertToVariate.VisibleChanged
+        SetRCode()
+        ConvertToVariate()
+        TestOKEnabled()
+        Display()
+    End Sub
+
+    Private Sub ExplanatoryFunctionSelect()
+        Dim strExplanatoryType As String
+        If Not ucrExplanatory.IsEmpty AndAlso rdoGeneral.Checked Then
+            strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+            If rdoGeneral.Checked AndAlso (strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer") Then
+                chkFunction.Visible = True
+            Else
+                chkFunction.Checked = False
+                chkFunction.Visible = False
+            End If
+            If chkFunction.Checked Then
+                sdgVariableTransformations.ModelFunction(False)
+            Else
+                sdgVariableTransformations.rdoIdentity.Checked = True
+                clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
+        ExplanatoryFunctionSelect()
+        SetRCode()
+        TestOKEnabled()
+        DataTypeAccepted()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub ucrModelName_NameChanged() Handles ucrModelName.NameChanged
+        AssignModelName()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If rdoGeneral.Checked Then
+            sdgSimpleRegOptions.RegOptions()
+        End If
+    End Sub
+
+    Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
+        If chkSaveModel.Checked Then
+            ucrModelName.Visible = True
+        Else
+            ucrModelName.Visible = False
+        End If
+        AssignModelName()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub AssignModelName()
+        If chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrModelName.GetText, strTempModel:=ucrModelName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            If rdoGeneral.Checked Then
+                ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            Else
+                ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            End If
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+    End Sub
+
+    Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+        sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.RestrictLink()
+        ExplanatoryFunctionSelect()
+        SetRCode()
+        Display()
+        DataTypeAccepted()
+    End Sub
+
+    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgModelOptions.ShowDialog()
+        ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+        Display()
+    End Sub
+
+    Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
+        If chkFunction.Checked Then
+            sdgVariableTransformations.ShowDialog()
+        End If
+        ExplanatoryFunctionSelect()
+        TestOKEnabled()
+        Display()
+    End Sub
+
+    Private Sub Display()
+        If rdoGeneral.Checked Then
+            lblFactor.Visible = False
+            lblNumeric.Visible = False
+            ucrModelPreview.Visible = True
+            lblModelPreview.Visible = True
+            lblResponse.Visible = True
+            lblExplanatory.Visible = True
+            cmdDisplayOptions.Visible = True
+            cmdModelOptions.Visible = True
+            grpParameters.Visible = False
+        ElseIf rdoSpecific.Checked Then
+            ucrModelPreview.Visible = False
+            lblModelPreview.Visible = False
+            lblResponse.Visible = False
+            lblExplanatory.Visible = False
+            cmdDisplayOptions.Visible = False
+            cmdModelOptions.Visible = False
+            lblFactor.Visible = True
+            lblNumeric.Visible = True
+            chkConvertToVariate.Visible = False
+            chkFunction.Visible = False
+            grpParameters.Visible = True
+            If ucrFamily.clsCurrDistribution.bIsExact = True Then
+                lblHyp1.Text = ucrFamily.clsCurrDistribution.lstExact(1)
+                nudHypothesis.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                nudHypothesis.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
+                nudHypothesis.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
+                nudHypothesis.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+                nudHypothesis.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
+            End If
+            If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+                nudHyp2.Visible = True
+                lblProbability2.Visible = True
+                nudHyp2.Increment = 0.1
+                nudHyp2.Maximum = 0.95
+                nudHyp2.Minimum = 0.05
+                nudHyp2.Value = 0.5
+            Else
+                nudHyp2.Visible = False
+                lblProbability2.Visible = False
+            End If
+            If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
+                '         'If ucrExplanatory. GetVariables Is From same dataset
+                chkPaired.Visible = True
+            Else
+                chkPaired.Visible = False
+            End If
+        End If
+    End Sub
+
+
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblCI.VisibleChanged, lblProbability2.VisibleChanged, lblHyp1.VisibleChanged, lblExplanatory.VisibleChanged, lblResponse.VisibleChanged, lblModelPreview.VisibleChanged, lblFactor.VisibleChanged, lblNumeric.VisibleChanged
+        Display()
+    End Sub
+
+    Private Sub nuds_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHypothesis.TextChanged, nudHyp2.TextChanged
+        SetRCode()
+    End Sub
+
+    Private Sub chkboxes_VisibleChanged(sender As Object, e As EventArgs) Handles chkFunction.VisibleChanged, chkPaired.VisibleChanged
+        Display()
+        ExplanatoryFunctionSelect()
+        ConvertToVariate()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub rdoTop_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGeneral.CheckedChanged, rdoSpecific.CheckedChanged
+        Display()
+        SetRCode()
+        DistributionsOffered()
+        TestOKEnabled()
+        DataTypeAccepted()
+        AssignModelName()
+    End Sub
 End Class

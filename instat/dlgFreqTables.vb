@@ -24,6 +24,7 @@ Public Class dlgFreqTables
         autoTranslate(Me)
         ucrReceiverMultiple.Selector = ucrAddRemove
         ucrReceiverMultiple.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 144
     End Sub
 
     Private Sub chkWeights_CheckedChanged(sender As Object, e As EventArgs) Handles chkWeights.CheckedChanged
@@ -42,7 +43,8 @@ Public Class dlgFreqTables
         End If
     End Sub
 
-    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.LeftList
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.SelectedItem & "")
+    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
+        'TODO fix this
+        'ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.SelectedItem & "")
     End Sub
 End Class

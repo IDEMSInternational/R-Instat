@@ -20,12 +20,21 @@ Partial Class ucrSelectorAddRemove
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
+        '
+        'lstAvailableVariable
+        '
+        Me.lstAvailableVariable.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
+        Me.lstAvailableVariable.Size = New System.Drawing.Size(164, 187)
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(124, 33)
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.Location = New System.Drawing.Point(173, 49)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 83
@@ -33,30 +42,31 @@ Partial Class ucrSelectorAddRemove
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
-        'btnRemove
+        'cmdOptions
         '
-        Me.btnRemove.Location = New System.Drawing.Point(123, 72)
-        Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemove.TabIndex = 84
-        Me.btnRemove.Tag = "Remove"
-        Me.btnRemove.Text = "Remove"
-        Me.btnRemove.UseVisualStyleBackColor = True
+        Me.cmdOptions.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdOptions.Location = New System.Drawing.Point(173, 153)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 34)
+        Me.cmdOptions.TabIndex = 84
+        Me.cmdOptions.Tag = "Data_Options"
+        Me.cmdOptions.Text = "Data Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSelectorAddRemove
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.Controls.Add(Me.btnRemove)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorAddRemove"
-        Me.Size = New System.Drawing.Size(203, 127)
+        Me.Size = New System.Drawing.Size(250, 187)
+        Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
-        Me.Controls.SetChildIndex(Me.btnRemove, 0)
+        Me.Controls.SetChildIndex(Me.cmdOptions, 0)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents btnAdd As Button
-    Friend WithEvents btnRemove As Button
+    Friend WithEvents cmdOptions As Button
 End Class

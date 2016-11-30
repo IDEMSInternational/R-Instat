@@ -27,9 +27,9 @@ Partial Class dlgLines
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 220)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 195)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'dlgLines
@@ -38,11 +38,13 @@ Partial Class dlgLines
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 264)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgLines"
-        Me.Text = "dlgLines"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Multiple_Lines"
+        Me.Text = "Multiple Lines"
         Me.ResumeLayout(False)
 
     End Sub

@@ -19,27 +19,60 @@ Partial Class ucrReceiverSingle
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtReceiverSingle = New System.Windows.Forms.TextBox()
+        Me.mnuRightClick = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuRightClickRemove = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRightClickCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRightClick.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtReceiverSingle
         '
-        Me.txtReceiverSingle.Location = New System.Drawing.Point(3, 3)
+        Me.txtReceiverSingle.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtReceiverSingle.ContextMenuStrip = Me.mnuRightClick
+        Me.txtReceiverSingle.Location = New System.Drawing.Point(0, 0)
         Me.txtReceiverSingle.Name = "txtReceiverSingle"
         Me.txtReceiverSingle.ReadOnly = True
-        Me.txtReceiverSingle.Size = New System.Drawing.Size(100, 20)
+        Me.txtReceiverSingle.Size = New System.Drawing.Size(120, 20)
         Me.txtReceiverSingle.TabIndex = 0
+        '
+        'mnuRightClick
+        '
+        Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickRemove, Me.mnuRightClickCopy})
+        Me.mnuRightClick.Name = "SelectionMenuStrip"
+        Me.mnuRightClick.Size = New System.Drawing.Size(118, 48)
+        '
+        'mnuRightClickRemove
+        '
+        Me.mnuRightClickRemove.Name = "mnuRightClickRemove"
+        Me.mnuRightClickRemove.Size = New System.Drawing.Size(117, 22)
+        Me.mnuRightClickRemove.Tag = "remove"
+        Me.mnuRightClickRemove.Text = "Remove"
+        '
+        'mnuRightClickCopy
+        '
+        Me.mnuRightClickCopy.Name = "mnuRightClickCopy"
+        Me.mnuRightClickCopy.Size = New System.Drawing.Size(117, 22)
+        Me.mnuRightClickCopy.Text = "Copy"
         '
         'ucrReceiverSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.txtReceiverSingle)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrReceiverSingle"
-        Me.Size = New System.Drawing.Size(106, 26)
+        Me.Size = New System.Drawing.Size(120, 20)
+        Me.mnuRightClick.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents txtReceiverSingle As TextBox
+    Friend WithEvents mnuRightClick As ContextMenuStrip
+    Friend WithEvents mnuRightClickRemove As ToolStripMenuItem
+    Friend WithEvents mnuRightClickCopy As ToolStripMenuItem
 End Class

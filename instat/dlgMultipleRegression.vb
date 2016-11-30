@@ -1,14 +1,51 @@
-﻿Public Class dlgMultipleRegression
+﻿' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat.Translations
+
+Public Class dlgMultipleRegression
+    Private bFirstLoad As Boolean = True
     Private Sub dlgMultipleRegression_Load(sender As Object, e As EventArgs) Handles Me.Load
-        UcrReceiverSingle1.Selector = UcrSelectorAddRemove1
-        UcrReceiverMultiple1.Selector = UcrSelectorAddRemove1
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+
+        End If
+        autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
-    Private Sub UcrReceiverMultiple1_GotFocus(sender As Object, e As EventArgs) Handles UcrReceiverMultiple1.Enter
-        UcrReceiverMultiple1.SetMeAsReceiver()
+    Private Sub InitialiseDialog()
+
     End Sub
 
-    Private Sub UcrReceiverSingle1_GotFocus(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.Enter
-        UcrReceiverSingle1.SetMeAsReceiver()
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+    Private Sub TestOkEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class

@@ -46,7 +46,7 @@ Partial Class dlgEndRain
         '
         Me.ucrBase.Location = New System.Drawing.Point(9, 247)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'nudEarliestDay
@@ -177,7 +177,7 @@ Partial Class dlgEndRain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 281)
+        Me.ClientSize = New System.Drawing.Size(431, 305)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.grpColumnName)
         Me.Controls.Add(Me.chkReplace)
@@ -188,12 +188,13 @@ Partial Class dlgEndRain
         Me.Controls.Add(Me.nudMaximumCapacity)
         Me.Controls.Add(Me.nudEarliestDay)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgEndRain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "End_Rain"
-        Me.Text = "dlgEndRain"
+        Me.Text = "End Rain"
         CType(Me.nudEarliestDay, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudMaximumCapacity, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudEvaporation, System.ComponentModel.ISupportInitialize).EndInit()

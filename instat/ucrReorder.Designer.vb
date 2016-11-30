@@ -1,0 +1,114 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class ucrReorder
+    Inherits System.Windows.Forms.UserControl
+
+    'UserControl overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.cmdTop = New System.Windows.Forms.Button()
+        Me.cmdUp = New System.Windows.Forms.Button()
+        Me.cmdDown = New System.Windows.Forms.Button()
+        Me.cmdBottom = New System.Windows.Forms.Button()
+        Me.lstAvailableData = New System.Windows.Forms.ListView()
+        Me.SuspendLayout()
+        '
+        'cmdTop
+        '
+        Me.cmdTop.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.cmdTop.AutoSize = True
+        Me.cmdTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.cmdTop.Image = Global.instat.My.Resources.Resources.arrows_top
+        Me.cmdTop.Location = New System.Drawing.Point(130, 14)
+        Me.cmdTop.Name = "cmdTop"
+        Me.cmdTop.Size = New System.Drawing.Size(22, 22)
+        Me.cmdTop.TabIndex = 0
+        Me.cmdTop.UseVisualStyleBackColor = True
+        '
+        'cmdUp
+        '
+        Me.cmdUp.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.cmdUp.AutoSize = True
+        Me.cmdUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.cmdUp.Image = Global.instat.My.Resources.Resources.arrows_up
+        Me.cmdUp.Location = New System.Drawing.Point(130, 43)
+        Me.cmdUp.Name = "cmdUp"
+        Me.cmdUp.Size = New System.Drawing.Size(22, 22)
+        Me.cmdUp.TabIndex = 1
+        Me.cmdUp.UseVisualStyleBackColor = True
+        '
+        'cmdDown
+        '
+        Me.cmdDown.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.cmdDown.AutoSize = True
+        Me.cmdDown.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.cmdDown.Image = Global.instat.My.Resources.Resources.arrows_down
+        Me.cmdDown.Location = New System.Drawing.Point(130, 72)
+        Me.cmdDown.Name = "cmdDown"
+        Me.cmdDown.Size = New System.Drawing.Size(22, 22)
+        Me.cmdDown.TabIndex = 2
+        Me.cmdDown.UseVisualStyleBackColor = True
+        '
+        'cmdBottom
+        '
+        Me.cmdBottom.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.cmdBottom.AutoSize = True
+        Me.cmdBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.cmdBottom.Image = Global.instat.My.Resources.Resources.arrows_bottom
+        Me.cmdBottom.Location = New System.Drawing.Point(130, 101)
+        Me.cmdBottom.Name = "cmdBottom"
+        Me.cmdBottom.Size = New System.Drawing.Size(22, 22)
+        Me.cmdBottom.TabIndex = 3
+        Me.cmdBottom.UseVisualStyleBackColor = True
+        '
+        'lstAvailableData
+        '
+        Me.lstAvailableData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstAvailableData.Location = New System.Drawing.Point(3, 3)
+        Me.lstAvailableData.Name = "lstAvailableData"
+        Me.lstAvailableData.Size = New System.Drawing.Size(121, 133)
+        Me.lstAvailableData.FullRowSelect = True
+        Me.lstAvailableData.TabIndex = 5
+        Me.lstAvailableData.UseCompatibleStateImageBehavior = False
+        Me.lstAvailableData.View = System.Windows.Forms.View.Details
+        '
+        'ucrReorder
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lstAvailableData)
+        Me.Controls.Add(Me.cmdBottom)
+        Me.Controls.Add(Me.cmdDown)
+        Me.Controls.Add(Me.cmdUp)
+        Me.Controls.Add(Me.cmdTop)
+        Me.Name = "ucrReorder"
+        Me.Size = New System.Drawing.Size(154, 139)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+
+    Friend WithEvents cmdTop As Button
+    Friend WithEvents cmdUp As Button
+    Friend WithEvents cmdDown As Button
+    Friend WithEvents cmdBottom As Button
+    Friend WithEvents lstAvailableData As ListView
+End Class

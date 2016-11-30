@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRowStats
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,184 +20,246 @@ Partial Class dlgRowStats
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
-        Me.CheckBox6 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.chkCount = New System.Windows.Forms.CheckBox()
-        Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
+        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.grpStatistic = New System.Windows.Forms.GroupBox()
+        Me.rdoMinimum = New System.Windows.Forms.RadioButton()
+        Me.rdoMaximum = New System.Windows.Forms.RadioButton()
+        Me.rdoCount = New System.Windows.Forms.RadioButton()
+        Me.rdoMean = New System.Windows.Forms.RadioButton()
+        Me.rdoStandardDeviation = New System.Windows.Forms.RadioButton()
+        Me.rdoNumberofMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoMedian = New System.Windows.Forms.RadioButton()
+        Me.rdoSum = New System.Windows.Forms.RadioButton()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.cmdUserDefined = New System.Windows.Forms.Button()
+        Me.ucrInputcboRowSummary = New instat.ucrInputComboBox()
+        Me.ucrSelectorForRowStats = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForRowStatistics = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
-        Me.grpStatistcsRequired.SuspendLayout()
+        Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
-        'grpStatistcsRequired
+        'lblSelected
         '
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox6)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox5)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox4)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox3)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox2)
-        Me.grpStatistcsRequired.Controls.Add(Me.chkCount)
-        Me.grpStatistcsRequired.Location = New System.Drawing.Point(276, 12)
-        Me.grpStatistcsRequired.Name = "grpStatistcsRequired"
-        Me.grpStatistcsRequired.Size = New System.Drawing.Size(110, 155)
-        Me.grpStatistcsRequired.TabIndex = 5
-        Me.grpStatistcsRequired.TabStop = False
-        Me.grpStatistcsRequired.Tag = "Statistcs_Required"
-        Me.grpStatistcsRequired.Text = "StatistcsRequired"
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.Location = New System.Drawing.Point(252, 37)
+        Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(104, 13)
+        Me.lblSelected.TabIndex = 1
+        Me.lblSelected.Tag = "Selected"
+        Me.lblSelected.Text = "Selected Variable(s):"
         '
-        'CheckBox6
+        'grpStatistic
         '
-        Me.CheckBox6.AutoSize = True
-        Me.CheckBox6.Location = New System.Drawing.Point(7, 135)
-        Me.CheckBox6.Name = "CheckBox6"
-        Me.CheckBox6.Size = New System.Drawing.Size(47, 17)
-        Me.CheckBox6.TabIndex = 0
-        Me.CheckBox6.Text = "Sum"
-        Me.CheckBox6.UseVisualStyleBackColor = True
+        Me.grpStatistic.Controls.Add(Me.rdoMinimum)
+        Me.grpStatistic.Controls.Add(Me.rdoMaximum)
+        Me.grpStatistic.Controls.Add(Me.rdoCount)
+        Me.grpStatistic.Controls.Add(Me.rdoMean)
+        Me.grpStatistic.Controls.Add(Me.rdoStandardDeviation)
+        Me.grpStatistic.Controls.Add(Me.rdoNumberofMissing)
+        Me.grpStatistic.Controls.Add(Me.rdoMedian)
+        Me.grpStatistic.Controls.Add(Me.rdoSum)
+        Me.grpStatistic.Location = New System.Drawing.Point(10, 198)
+        Me.grpStatistic.Name = "grpStatistic"
+        Me.grpStatistic.Size = New System.Drawing.Size(397, 71)
+        Me.grpStatistic.TabIndex = 3
+        Me.grpStatistic.TabStop = False
+        Me.grpStatistic.Tag = "Statistic"
+        Me.grpStatistic.Text = "Statistic"
         '
-        'CheckBox5
+        'rdoMinimum
         '
-        Me.CheckBox5.AutoSize = True
-        Me.CheckBox5.Location = New System.Drawing.Point(7, 112)
-        Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.Size = New System.Drawing.Size(62, 17)
-        Me.CheckBox5.TabIndex = 0
-        Me.CheckBox5.Text = "St. Dev"
-        Me.CheckBox5.UseVisualStyleBackColor = True
+        Me.rdoMinimum.AutoSize = True
+        Me.rdoMinimum.Location = New System.Drawing.Point(125, 19)
+        Me.rdoMinimum.Name = "rdoMinimum"
+        Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
+        Me.rdoMinimum.TabIndex = 2
+        Me.rdoMinimum.TabStop = True
+        Me.rdoMinimum.Tag = "Minimum"
+        Me.rdoMinimum.Text = "Minimum"
+        Me.rdoMinimum.UseVisualStyleBackColor = True
         '
-        'CheckBox4
+        'rdoMaximum
         '
-        Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(7, 89)
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(73, 17)
-        Me.CheckBox4.TabIndex = 0
-        Me.CheckBox4.Text = "Maximum "
-        Me.CheckBox4.UseVisualStyleBackColor = True
+        Me.rdoMaximum.AutoSize = True
+        Me.rdoMaximum.Location = New System.Drawing.Point(248, 48)
+        Me.rdoMaximum.Name = "rdoMaximum"
+        Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
+        Me.rdoMaximum.TabIndex = 5
+        Me.rdoMaximum.TabStop = True
+        Me.rdoMaximum.Tag = "Maximum"
+        Me.rdoMaximum.Text = "Maximum"
+        Me.rdoMaximum.UseVisualStyleBackColor = True
         '
-        'CheckBox3
+        'rdoCount
         '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(7, 66)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(67, 17)
-        Me.CheckBox3.TabIndex = 0
-        Me.CheckBox3.Text = "Minimum"
-        Me.CheckBox3.UseVisualStyleBackColor = True
+        Me.rdoCount.AutoSize = True
+        Me.rdoCount.Location = New System.Drawing.Point(326, 48)
+        Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
+        Me.rdoCount.TabIndex = 7
+        Me.rdoCount.TabStop = True
+        Me.rdoCount.Tag = "Count"
+        Me.rdoCount.Text = "Count"
+        Me.rdoCount.UseVisualStyleBackColor = True
         '
-        'CheckBox2
+        'rdoMean
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(7, 43)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(53, 17)
-        Me.CheckBox2.TabIndex = 0
-        Me.CheckBox2.Text = "Mean"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.rdoMean.AutoSize = True
+        Me.rdoMean.Location = New System.Drawing.Point(4, 19)
+        Me.rdoMean.Name = "rdoMean"
+        Me.rdoMean.Size = New System.Drawing.Size(52, 17)
+        Me.rdoMean.TabIndex = 0
+        Me.rdoMean.TabStop = True
+        Me.rdoMean.Tag = "Mean"
+        Me.rdoMean.Text = "Mean"
+        Me.rdoMean.UseVisualStyleBackColor = True
         '
-        'chkCount
+        'rdoStandardDeviation
         '
-        Me.chkCount.AutoSize = True
-        Me.chkCount.Location = New System.Drawing.Point(7, 20)
-        Me.chkCount.Name = "chkCount"
-        Me.chkCount.Size = New System.Drawing.Size(57, 17)
-        Me.chkCount.TabIndex = 0
-        Me.chkCount.Tag = "Count"
-        Me.chkCount.Text = "Count "
-        Me.chkCount.UseVisualStyleBackColor = True
+        Me.rdoStandardDeviation.AutoSize = True
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(125, 48)
+        Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
+        Me.rdoStandardDeviation.Size = New System.Drawing.Size(114, 17)
+        Me.rdoStandardDeviation.TabIndex = 3
+        Me.rdoStandardDeviation.TabStop = True
+        Me.rdoStandardDeviation.Tag = "Standard_deviation"
+        Me.rdoStandardDeviation.Text = "Standard deviation"
+        Me.rdoStandardDeviation.UseVisualStyleBackColor = True
         '
-        'lblSelectedVariables
+        'rdoNumberofMissing
         '
-        Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(175, 9)
-        Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
-        Me.lblSelectedVariables.TabIndex = 14
-        Me.lblSelectedVariables.Text = "Selected Variables"
+        Me.rdoNumberofMissing.AutoSize = True
+        Me.rdoNumberofMissing.Location = New System.Drawing.Point(4, 48)
+        Me.rdoNumberofMissing.Name = "rdoNumberofMissing"
+        Me.rdoNumberofMissing.Size = New System.Drawing.Size(112, 17)
+        Me.rdoNumberofMissing.TabIndex = 1
+        Me.rdoNumberofMissing.TabStop = True
+        Me.rdoNumberofMissing.Tag = "Number_of_Missing"
+        Me.rdoNumberofMissing.Text = "Number of Missing"
+        Me.rdoNumberofMissing.UseVisualStyleBackColor = True
         '
-        'UcrReceiverMultiple1
+        'rdoMedian
         '
-        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(175, 22)
-        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(91, 142)
-        Me.UcrReceiverMultiple1.TabIndex = 13
+        Me.rdoMedian.AutoSize = True
+        Me.rdoMedian.Location = New System.Drawing.Point(326, 19)
+        Me.rdoMedian.Name = "rdoMedian"
+        Me.rdoMedian.Size = New System.Drawing.Size(60, 17)
+        Me.rdoMedian.TabIndex = 6
+        Me.rdoMedian.TabStop = True
+        Me.rdoMedian.Tag = "Median"
+        Me.rdoMedian.Text = "Median"
+        Me.rdoMedian.UseVisualStyleBackColor = True
         '
-        'UcrSelectorAddRemove1
+        'rdoSum
         '
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(1, 9)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(182, 118)
-        Me.UcrSelectorAddRemove1.TabIndex = 7
+        Me.rdoSum.AutoSize = True
+        Me.rdoSum.Location = New System.Drawing.Point(248, 19)
+        Me.rdoSum.Name = "rdoSum"
+        Me.rdoSum.Size = New System.Drawing.Size(46, 17)
+        Me.rdoSum.TabIndex = 4
+        Me.rdoSum.TabStop = True
+        Me.rdoSum.Tag = "Sum"
+        Me.rdoSum.Text = "Sum"
+        Me.rdoSum.UseVisualStyleBackColor = True
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 280)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColumnName.TabIndex = 4
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name:"
+        '
+        'cmdUserDefined
+        '
+        Me.cmdUserDefined.Location = New System.Drawing.Point(307, 275)
+        Me.cmdUserDefined.Name = "cmdUserDefined"
+        Me.cmdUserDefined.Size = New System.Drawing.Size(100, 23)
+        Me.cmdUserDefined.TabIndex = 6
+        Me.cmdUserDefined.Tag = "User_Define"
+        Me.cmdUserDefined.Text = "User Define"
+        Me.cmdUserDefined.UseVisualStyleBackColor = True
+        '
+        'ucrInputcboRowSummary
+        '
+        Me.ucrInputcboRowSummary.IsReadOnly = False
+        Me.ucrInputcboRowSummary.Location = New System.Drawing.Point(114, 277)
+        Me.ucrInputcboRowSummary.Name = "ucrInputcboRowSummary"
+        Me.ucrInputcboRowSummary.Size = New System.Drawing.Size(141, 25)
+        Me.ucrInputcboRowSummary.TabIndex = 5
+        '
+        'ucrSelectorForRowStats
+        '
+        Me.ucrSelectorForRowStats.bShowHiddenColumns = False
+        Me.ucrSelectorForRowStats.bUseCurrentFilter = True
+        Me.ucrSelectorForRowStats.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForRowStats.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForRowStats.Name = "ucrSelectorForRowStats"
+        Me.ucrSelectorForRowStats.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForRowStats.TabIndex = 0
+        '
+        'ucrReceiverForRowStatistics
+        '
+        Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(251, 52)
+        Me.ucrReceiverForRowStatistics.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForRowStatistics.Name = "ucrReceiverForRowStatistics"
+        Me.ucrReceiverForRowStatistics.Selector = Nothing
+        Me.ucrReceiverForRowStatistics.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverForRowStatistics.TabIndex = 2
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 169)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 302)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 6
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(13, 124)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(122, 17)
-        Me.CheckBox1.TabIndex = 15
-        Me.CheckBox1.Text = "Restrict Data values"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'CheckBox7
-        '
-        Me.CheckBox7.AutoSize = True
-        Me.CheckBox7.Location = New System.Drawing.Point(13, 150)
-        Me.CheckBox7.Name = "CheckBox7"
-        Me.CheckBox7.Size = New System.Drawing.Size(65, 17)
-        Me.CheckBox7.TabIndex = 16
-        Me.CheckBox7.Text = "Weights"
-        Me.CheckBox7.UseVisualStyleBackColor = True
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 7
         '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 201)
-        Me.Controls.Add(Me.CheckBox7)
-        Me.Controls.Add(Me.CheckBox1)
-        Me.Controls.Add(Me.lblSelectedVariables)
-        Me.Controls.Add(Me.UcrReceiverMultiple1)
-        Me.Controls.Add(Me.UcrSelectorAddRemove1)
+        Me.ClientSize = New System.Drawing.Size(419, 356)
+        Me.Controls.Add(Me.cmdUserDefined)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.ucrInputcboRowSummary)
+        Me.Controls.Add(Me.ucrSelectorForRowStats)
+        Me.Controls.Add(Me.grpStatistic)
+        Me.Controls.Add(Me.lblSelected)
+        Me.Controls.Add(Me.ucrReceiverForRowStatistics)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpStatistcsRequired)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRowStats"
-        Me.Text = "dlgRowStats"
-        Me.grpStatistcsRequired.ResumeLayout(False)
-        Me.grpStatistcsRequired.PerformLayout()
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Row_statistics"
+        Me.Text = "Row Statistics"
+        Me.grpStatistic.ResumeLayout(False)
+        Me.grpStatistic.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents grpStatistcsRequired As GroupBox
-    Friend WithEvents CheckBox6 As CheckBox
-    Friend WithEvents CheckBox5 As CheckBox
-    Friend WithEvents CheckBox4 As CheckBox
-    Friend WithEvents CheckBox3 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents chkCount As CheckBox
-    Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
-    Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents CheckBox7 As CheckBox
+    Friend WithEvents ucrReceiverForRowStatistics As ucrReceiverMultiple
+    Friend WithEvents lblSelected As Label
+    Friend WithEvents grpStatistic As GroupBox
+    Friend WithEvents rdoMinimum As RadioButton
+    Friend WithEvents rdoMaximum As RadioButton
+    Friend WithEvents rdoCount As RadioButton
+    Friend WithEvents rdoMean As RadioButton
+    Friend WithEvents rdoStandardDeviation As RadioButton
+    Friend WithEvents rdoSum As RadioButton
+    Friend WithEvents ucrSelectorForRowStats As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents rdoNumberofMissing As RadioButton
+    Friend WithEvents rdoMedian As RadioButton
+    Friend WithEvents ucrInputcboRowSummary As ucrInputComboBox
+    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents cmdUserDefined As Button
 End Class

@@ -33,14 +33,15 @@ Partial Class frmLog
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
         Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtLog.Size = New System.Drawing.Size(284, 261)
+        Me.txtLog.Size = New System.Drawing.Size(531, 415)
         Me.txtLog.TabIndex = 0
+        Me.txtLog.TabStop = False
         '
         'frmLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.ClientSize = New System.Drawing.Size(531, 415)
         Me.Controls.Add(Me.txtLog)
         Me.Name = "frmLog"
         Me.ShowIcon = False

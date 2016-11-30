@@ -27,23 +27,24 @@ Partial Class dlgMissingDataTable
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(41, 227)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 209)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 59)
         Me.ucrBase.TabIndex = 0
         '
         'dlgMissingDataTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(486, 262)
+        Me.ClientSize = New System.Drawing.Size(437, 270)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgMissingDataTable"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Missing_Data_Table"
-        Me.Text = "dlgMissingDataTable"
+        Me.Text = "Missing Data Table"
         Me.ResumeLayout(False)
 
     End Sub
