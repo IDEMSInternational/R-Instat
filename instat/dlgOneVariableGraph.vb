@@ -45,7 +45,6 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.Reset()
         sdgOneVarGraph.SetDefaults()
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
-        'chkFlipCoordinates.Checked = False
         TestOkEnabled()
     End Sub
 
@@ -54,6 +53,7 @@ Public Class dlgOneVariableGraph
         clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
         clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
         clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsDefaultRFunction.AddParameter("coord_flip", "TRUE")
         'Define default RFunction
         rdoSingleGraphs.Enabled = False
 
@@ -62,6 +62,10 @@ Public Class dlgOneVariableGraph
 
         ucrSelectorOneVarGraph.SetParameterName("data")
         ucrSelectorOneVarGraph.SetParameterIsString()
+
+        ucrChkFlip.SetText("Flip Coordinates")
+        ucrChkFlip.SetParameterName("coord_flip")
+        ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "")
 
         ucrBase.iHelpTopicID = 412
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
@@ -76,6 +80,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub TestOkEnabled()
+        'Question: What should TestOK do in the new implementation? Still check controls or check the code?
         'this test when to enable okay button. Should be enabled only when the receiver is not empty or when the save graph is schecked and the save graph is not empty
         If ucrReceiverOneVarGraph.IsEmpty() OrElse (ucrOneVarGraphSave.chkSaveGraph.Checked AndAlso ucrOneVarGraphSave.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
@@ -144,16 +149,7 @@ Public Class dlgOneVariableGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
-        'adds flip crdinates when the chkFlipCoordinates is checked
-        If chkFlipCoordinates.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("coord_flip", "TRUE")
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("coord_flip")
-        End If
-    End Sub
-
-    Private Sub ucrSelectorOneVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged
+    Private Sub ucrSelectorOneVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged, ucrChkFlip.ControlValueChanged
         ucrChangedControl.UpdateRCode(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 End Class

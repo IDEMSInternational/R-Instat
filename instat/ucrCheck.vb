@@ -15,11 +15,17 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrCheck
+    'Is the checkbox linked to specific parameter values when checked/unchecked
+    Private bIsParameterValue As Boolean = True
+    'If either of these = "" then the parameter will be removed in the case where = ""
+    'TODO may want this more sophisticated so that it can store an unchecked value but still uncheck if that value is given
     Private strValueIfChecked As String = "TRUE"
     Private strValueIfUnchecked As String = "FALSE"
-    Public bParameterIncludedWhenChecked As Boolean = True
-    Private bIsParameterValue As Boolean = True
+    'Is the checkbox linked to a parameter only by whether the parameter is present or not, irrespective of the parameter value
     Private bIsParameterPresent As Boolean = False
+    'When bIsParameterPresent should the control be checked when the parameter is present (and unchecked when not present)
+    'If = False then the opposite.
+    Public bParameterIncludedWhenChecked As Boolean = True
 
     Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
         Dim clsTempParam As RParameter
@@ -38,7 +44,14 @@ Public Class ucrCheck
                         chkCheck.Checked = False
                     End If
                 Else
-                    chkCheck.Checked = bParameterIncludedWhenChecked
+                    If strValueIfChecked = "" Then
+                        chkCheck.Checked = True
+                    ElseIf strValueIfUnchecked = "" Then
+                        chkCheck.Checked = False
+                    Else
+                        'If parameter is missing with no information about what that means, then uncheck by default
+                        chkCheck.Checked = False
+                    End If
                 End If
             End If
         ElseIf bIsParameterPresent Then
@@ -56,22 +69,25 @@ Public Class ucrCheck
         If strParameterName <> "" Then
             If bIsParameterValue Then
                 If chkCheck.Checked Then
-                    If strValueIfChecked <> "" Then
-                        clsRFunction.AddParameter(strParameterName, strValueIfChecked)
-                    Else
-                        clsRFunction.RemoveParameterByName(strParameterName)
+                    If clsRFunction IsNot Nothing Then
+                        If strValueIfChecked <> "" Then
+                            clsRFunction.AddParameter(strParameterName, strValueIfChecked)
+                        Else
+                            clsRFunction.RemoveParameterByName(strParameterName)
+                        End If
+                    ElseIf clsROperator IsNot Nothing Then
+                        'TODO
                     End If
                 Else
-                    If strValueIfUnchecked <> "" Then
-                        If clsRFunction IsNot Nothing Then
+                    If clsRFunction IsNot Nothing Then
+                        If strValueIfUnchecked <> "" Then
                             clsRFunction.AddParameter(strParameterName, strValueIfUnchecked)
-                        ElseIf clsROperator IsNot Nothing Then
-                            'TODO Implement this
-                            'clsROperator.SetParameter()
-                            'clsROperator.AddAdditionalParameter()
+                        Else
+                            clsRFunction.RemoveParameterByName(strParameterName)
                         End If
-                    Else
-                        clsRFunction.RemoveParameterByName(strParameterName)
+                    ElseIf clsROperator IsNot Nothing Then
+                        'TODO Implement something like this
+                        'clsROperator.SetParameter() or clsROperator.AddAdditionalParameter()
                     End If
                 End If
             ElseIf bIsParameterPresent Then
