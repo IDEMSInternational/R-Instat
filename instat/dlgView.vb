@@ -106,25 +106,17 @@ Public Class dlgView
             ucrBase.clsRsyntax.RemoveParameter("n")
             ucrBase.clsRsyntax.SetFunction("View")
             ucrBase.clsRsyntax.AddParameter("x", ucrSelctorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
-
-        If rdoViewPreview.Checked Then
+        ElseIf rdoViewPreview.Checked Then
             If Not ucrReceiverView.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
                 If rdoTop.Checked Then
                     ucrBase.clsRsyntax.SetFunction("head")
                 Else
                     ucrBase.clsRsyntax.SetFunction("tail")
                 End If
-                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("x")
-            End If
-            If Not nudNumberRows.Text = "" Then
-                ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("n")
+                If Not nudNumberRows.Text = "" Then
+                    ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
+                End If
             End If
         End If
     End Sub
