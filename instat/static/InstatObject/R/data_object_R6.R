@@ -1717,29 +1717,19 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
        contrasts(private$data[[col_name]]) <- new_contrasts
   }
 )
-
+#This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
 data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
+  if(day) {
+    day <- day(col_data)
+	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day)
+  }
   if(week) {
     week <- week(col_data)
 	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = week)
-  }
-  if(month_val) {
-    month_val <- month(col_data)
-	  col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_val)
-  }
-   if(month_abbr) {
-    month_abbr <- month(col_data, label = TRUE)
-	  col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_abbr)
-  }
-   if(month_name) {
-    month_name <- month(col_data, label = TRUE, abbr = FALSE)
-	  col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_name)
   }
    if(weekday_val) {
     weekday_val <- wday(col_data)
@@ -1756,15 +1746,25 @@ data_object$set("public","split_date", function(data_name, col_name = "", week =
 	  col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = weekday_name)
   }
+  if(month_val) {
+    month_val <- month(col_data)
+	  col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_val)
+  }
+   if(month_abbr) {
+    month_abbr <- month(col_data, label = TRUE)
+	  col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_abbr)
+  }
+   if(month_name) {
+    month_name <- month(col_data, label = TRUE, abbr = FALSE)
+	  col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_name)
+  }
   if(year) {
     year <- year(col_data)
 	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = year)
-  }
-  if(day) {
-    day <- day(col_data)
-	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day)
   }
   #TO Do
   #Implement option for the day of the year
