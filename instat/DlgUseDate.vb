@@ -114,7 +114,7 @@ Public Class dlgUseDate
             ucrBase.clsRsyntax.RemoveParameter("weekday_abbr")
         End If
 
-        If chkAbbrWeekDay.Checked Then
+        If chkWeekdayName.Checked Then
             ucrBase.clsRsyntax.AddParameter("weekday_name", "TRUE")
         Else
             ucrBase.clsRsyntax.RemoveParameter("weekday_name")
@@ -146,7 +146,7 @@ Public Class dlgUseDate
 
     End Sub
 
-    Private Sub chkYear_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDecade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonthValue.CheckedChanged, chkPentade.CheckedChanged, chkWeekDayVal.CheckedChanged, chkWeek.CheckedChanged, chkMonthNam.CheckedChanged, chkAbbrMonthName.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkAbbrWeekDay.CheckedChanged
+    Private Sub chkYear_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDecade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonthValue.CheckedChanged, chkPentade.CheckedChanged, chkWeekDayVal.CheckedChanged, chkWeek.CheckedChanged, chkMonthNam.CheckedChanged, chkAbbrMonthName.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkWeekdayName.CheckedChanged
         SetParameters()
         TestOKEnabled()
     End Sub
