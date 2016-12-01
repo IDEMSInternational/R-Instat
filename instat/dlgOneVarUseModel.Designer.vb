@@ -41,7 +41,7 @@ Partial Class dlgOneVarUseModel
         Me.lblReceiver.Location = New System.Drawing.Point(239, 42)
         Me.lblReceiver.Name = "lblReceiver"
         Me.lblReceiver.Size = New System.Drawing.Size(86, 13)
-        Me.lblReceiver.TabIndex = 18
+        Me.lblReceiver.TabIndex = 1
         Me.lblReceiver.Text = "Selected Object:"
         '
         'cmdFitModel
@@ -49,7 +49,7 @@ Partial Class dlgOneVarUseModel
         Me.cmdFitModel.Location = New System.Drawing.Point(275, 201)
         Me.cmdFitModel.Name = "cmdFitModel"
         Me.cmdFitModel.Size = New System.Drawing.Size(101, 23)
-        Me.cmdFitModel.TabIndex = 13
+        Me.cmdFitModel.TabIndex = 7
         Me.cmdFitModel.Text = "Fit Model"
         Me.cmdFitModel.UseVisualStyleBackColor = True
         '
@@ -58,7 +58,7 @@ Partial Class dlgOneVarUseModel
         Me.cmdBootstrapOptions.Location = New System.Drawing.Point(275, 167)
         Me.cmdBootstrapOptions.Name = "cmdBootstrapOptions"
         Me.cmdBootstrapOptions.Size = New System.Drawing.Size(101, 23)
-        Me.cmdBootstrapOptions.TabIndex = 12
+        Me.cmdBootstrapOptions.TabIndex = 6
         Me.cmdBootstrapOptions.Text = "Bootstrap Options"
         Me.cmdBootstrapOptions.UseVisualStyleBackColor = True
         '
@@ -68,7 +68,7 @@ Partial Class dlgOneVarUseModel
         Me.chkSaveBootstrap.Location = New System.Drawing.Point(239, 112)
         Me.chkSaveBootstrap.Name = "chkSaveBootstrap"
         Me.chkSaveBootstrap.Size = New System.Drawing.Size(138, 17)
-        Me.chkSaveBootstrap.TabIndex = 11
+        Me.chkSaveBootstrap.TabIndex = 4
         Me.chkSaveBootstrap.Text = "Save Bootstrap Objects"
         Me.chkSaveBootstrap.UseVisualStyleBackColor = True
         '
@@ -78,7 +78,7 @@ Partial Class dlgOneVarUseModel
         Me.chkProduceBootstrap.Location = New System.Drawing.Point(239, 89)
         Me.chkProduceBootstrap.Name = "chkProduceBootstrap"
         Me.chkProduceBootstrap.Size = New System.Drawing.Size(114, 17)
-        Me.chkProduceBootstrap.TabIndex = 10
+        Me.chkProduceBootstrap.TabIndex = 3
         Me.chkProduceBootstrap.Text = "Produce Bootstrap"
         Me.chkProduceBootstrap.UseVisualStyleBackColor = True
         '
@@ -88,7 +88,7 @@ Partial Class dlgOneVarUseModel
         Me.chkSaveDataFrame.Location = New System.Drawing.Point(10, 204)
         Me.chkSaveDataFrame.Name = "chkSaveDataFrame"
         Me.chkSaveDataFrame.Size = New System.Drawing.Size(115, 17)
-        Me.chkSaveDataFrame.TabIndex = 21
+        Me.chkSaveDataFrame.TabIndex = 8
         Me.chkSaveDataFrame.Text = "Save to Dataframe"
         Me.chkSaveDataFrame.UseVisualStyleBackColor = True
         '
@@ -98,7 +98,7 @@ Partial Class dlgOneVarUseModel
         Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 135)
         Me.ucrSaveObjects.Name = "ucrSaveObjects"
         Me.ucrSaveObjects.Size = New System.Drawing.Size(137, 21)
-        Me.ucrSaveObjects.TabIndex = 22
+        Me.ucrSaveObjects.TabIndex = 5
         '
         'ucrNewDataframeName
         '
@@ -106,14 +106,14 @@ Partial Class dlgOneVarUseModel
         Me.ucrNewDataframeName.Location = New System.Drawing.Point(128, 202)
         Me.ucrNewDataframeName.Name = "ucrNewDataframeName"
         Me.ucrNewDataframeName.Size = New System.Drawing.Size(138, 21)
-        Me.ucrNewDataframeName.TabIndex = 20
+        Me.ucrNewDataframeName.TabIndex = 9
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 19
+        Me.ucrBase.TabIndex = 10
         '
         'ucrReceiver
         '
@@ -122,7 +122,7 @@ Partial Class dlgOneVarUseModel
         Me.ucrReceiver.Name = "ucrReceiver"
         Me.ucrReceiver.Selector = Nothing
         Me.ucrReceiver.Size = New System.Drawing.Size(138, 20)
-        Me.ucrReceiver.TabIndex = 16
+        Me.ucrReceiver.TabIndex = 2
         '
         'ucrSelector
         '
@@ -132,7 +132,7 @@ Partial Class dlgOneVarUseModel
         Me.ucrSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelector.Name = "ucrSelector"
         Me.ucrSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelector.TabIndex = 15
+        Me.ucrSelector.TabIndex = 0
         '
         'dlgOneVarUseModel
         '
