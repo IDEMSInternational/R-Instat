@@ -1036,3 +1036,10 @@ instat_object$set("public","split_date", function(data_name, col_name = "", year
   self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month = month, day = day, year = year)
 }
 )
+
+instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_names = c()) {
+  data_list <- convert_SST(dataset, data_from)
+  names(data_list) = data_names
+  self$import_data(data_tables = data_list)
+}
+)
