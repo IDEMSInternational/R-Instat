@@ -165,6 +165,12 @@
     <Compile Include="dlgCountinFactor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCropsPICSA.Designer.vb">
+      <DependentUpon>dlgCropsPICSA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCropsPICSA.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -243,6 +249,24 @@
     <Compile Include="dlgOpenSST.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPICSA.Designer.vb">
+      <DependentUpon>dlgPICSA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPICSA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPICSATempAndRainfall.Designer.vb">
+      <DependentUpon>dlgPICSATempAndRainfall.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPICSATempAndRainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRainfall.Designer.vb">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </Compile>
@@ -253,6 +277,12 @@
       <DependentUpon>dlgShowModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgShowModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTemperature.Designer.vb">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTemperature.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariabletabulate.Designer.vb">
@@ -2159,6 +2189,15 @@
     <EmbeddedResource Include="dlgCountinFactor.resx">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCropsPICSA.fr-FR.resx">
+      <DependentUpon>dlgCropsPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCropsPICSA.resx">
+      <DependentUpon>dlgCropsPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCropsPICSA.sw-KE.resx">
+      <DependentUpon>dlgCropsPICSA.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </EmbeddedResource>
@@ -2468,6 +2507,24 @@
     <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSA.fr-FR.resx">
+      <DependentUpon>dlgPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSA.resx">
+      <DependentUpon>dlgPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSA.sw-KE.resx">
+      <DependentUpon>dlgPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSATempAndRainfall.fr-FR.resx">
+      <DependentUpon>dlgPICSATempAndRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSATempAndRainfall.resx">
+      <DependentUpon>dlgPICSATempAndRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSATempAndRainfall.sw-KE.resx">
+      <DependentUpon>dlgPICSATempAndRainfall.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgPopulationPyramids.fr-FR.resx">
       <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
     </EmbeddedResource>
@@ -2506,6 +2563,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.sw-KE.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainfall.fr-FR.resx">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainfall.resx">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainfall.sw-KE.resx">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
@@ -2674,6 +2740,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgShowModel.sw-KE.resx">
       <DependentUpon>dlgShowModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTemperature.fr-FR.resx">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTemperature.resx">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTemperature.sw-KE.resx">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.fr-FR.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
