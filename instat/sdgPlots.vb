@@ -93,6 +93,7 @@ Public Class sdgPlots
         'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
+        'This is necessary to make sure the minimum number of rows or columns is one to avoid the check if they are >0
         nudNoOfRowsOrColumns.Minimum = 1
 
         'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
@@ -187,8 +188,8 @@ Public Class sdgPlots
             strSingleFactor = ucr1stFactorReceiver.GetVariableNames(False)
 
             'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
-            'In case only one of the receivers is non-empty, margins are checked (grid argument) or number of rows are not checked (wrap argument), then fecet_grid is used. Otherwise, wrap is used.
-            'The place of the argument, left or right, in the facets parameter of the facets function is determined by the choice "vertical" or "horizontal" faceting.
+            'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
+            'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
             If rdoHorizontal.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
                 clsRFacetFunction.SetRCommand("facet_wrap")
                 clsTempOp.SetParameter(True, strValue:="")
@@ -222,7 +223,7 @@ Public Class sdgPlots
                 End If
             End If
             clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
-            'In case the two receivers are filled, facet_grid is used.
+
         ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
             clsRFacetFunction.SetRCommand("facet_grid")
             RemoveWrapParameters()
@@ -240,12 +241,14 @@ Public Class sdgPlots
     End Sub
 
     Private Sub RemoveWrapParameters()
+        'This sub is called when the clsRFacet function's RCommand is changed from wrap to grid to remove the parameters that are only relevant in the wrap case.
         clsRFacetFunction.RemoveParameterByName("dir")
         clsRFacetFunction.RemoveParameterByName("ncol")
         clsRFacetFunction.RemoveParameterByName("nrow")
     End Sub
 
     Private Sub SetFixRowColumnParameter()
+        'This sub is called in the wrap case to set up the parameter fixing the number of rows or columns when working in the horizontal or vertical case.
         If chkNoOfRowsOrColumns.Checked Then
             If rdoHorizontal.Checked Then
                 clsRFacetFunction.AddParameter("nrow", nudNoOfRowsOrColumns.Value)
@@ -254,6 +257,9 @@ Public Class sdgPlots
                 clsRFacetFunction.RemoveParameterByName("nrow")
                 clsRFacetFunction.AddParameter("ncol", nudNoOfRowsOrColumns.Value)
             End If
+        Else
+            clsRFacetFunction.RemoveParameterByName("ncol")
+            clsRFacetFunction.RemoveParameterByName("nrow")
         End If
     End Sub
 
