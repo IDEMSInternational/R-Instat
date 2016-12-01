@@ -50,7 +50,7 @@ Partial Class dlgUseDate
         Me.lblDateVariable.Location = New System.Drawing.Point(251, 18)
         Me.lblDateVariable.Name = "lblDateVariable"
         Me.lblDateVariable.Size = New System.Drawing.Size(71, 13)
-        Me.lblDateVariable.TabIndex = 168
+        Me.lblDateVariable.TabIndex = 1
         Me.lblDateVariable.Text = "Date Column:"
         '
         'grpDateFunctions
@@ -72,7 +72,7 @@ Partial Class dlgUseDate
         Me.grpDateFunctions.Location = New System.Drawing.Point(14, 196)
         Me.grpDateFunctions.Name = "grpDateFunctions"
         Me.grpDateFunctions.Size = New System.Drawing.Size(407, 153)
-        Me.grpDateFunctions.TabIndex = 170
+        Me.grpDateFunctions.TabIndex = 3
         Me.grpDateFunctions.TabStop = False
         Me.grpDateFunctions.Text = "Date Functions"
         '
@@ -82,7 +82,7 @@ Partial Class dlgUseDate
         Me.chkWeekdayName.Location = New System.Drawing.Point(153, 66)
         Me.chkWeekdayName.Name = "chkWeekdayName"
         Me.chkWeekdayName.Size = New System.Drawing.Size(122, 17)
-        Me.chkWeekdayName.TabIndex = 13
+        Me.chkWeekdayName.TabIndex = 7
         Me.chkWeekdayName.Text = "Full Weekday Name"
         Me.chkWeekdayName.UseVisualStyleBackColor = True
         '
@@ -92,7 +92,7 @@ Partial Class dlgUseDate
         Me.chkAbbrWeekDay.Location = New System.Drawing.Point(153, 43)
         Me.chkAbbrWeekDay.Name = "chkAbbrWeekDay"
         Me.chkAbbrWeekDay.Size = New System.Drawing.Size(132, 17)
-        Me.chkAbbrWeekDay.TabIndex = 12
+        Me.chkAbbrWeekDay.TabIndex = 4
         Me.chkAbbrWeekDay.Text = "Abbreviated Weekday"
         Me.chkAbbrWeekDay.UseVisualStyleBackColor = True
         '
@@ -102,7 +102,7 @@ Partial Class dlgUseDate
         Me.chkMonthNam.Location = New System.Drawing.Point(7, 89)
         Me.chkMonthNam.Name = "chkMonthNam"
         Me.chkMonthNam.Size = New System.Drawing.Size(106, 17)
-        Me.chkMonthNam.TabIndex = 11
+        Me.chkMonthNam.TabIndex = 9
         Me.chkMonthNam.Text = "Full Month Name"
         Me.chkMonthNam.UseVisualStyleBackColor = True
         '
@@ -112,7 +112,7 @@ Partial Class dlgUseDate
         Me.chkAbbrMonthName.Location = New System.Drawing.Point(7, 66)
         Me.chkAbbrMonthName.Name = "chkAbbrMonthName"
         Me.chkAbbrMonthName.Size = New System.Drawing.Size(147, 17)
-        Me.chkAbbrMonthName.TabIndex = 10
+        Me.chkAbbrMonthName.TabIndex = 6
         Me.chkAbbrMonthName.Text = "Abbreviated Month Name"
         Me.chkAbbrMonthName.UseVisualStyleBackColor = True
         '
@@ -122,7 +122,7 @@ Partial Class dlgUseDate
         Me.chkLeapYear.Location = New System.Drawing.Point(7, 126)
         Me.chkLeapYear.Name = "chkLeapYear"
         Me.chkLeapYear.Size = New System.Drawing.Size(75, 17)
-        Me.chkLeapYear.TabIndex = 9
+        Me.chkLeapYear.TabIndex = 11
         Me.chkLeapYear.Text = "Leap Year"
         Me.chkLeapYear.UseVisualStyleBackColor = True
         '
@@ -132,7 +132,7 @@ Partial Class dlgUseDate
         Me.chkDecade.Location = New System.Drawing.Point(153, 126)
         Me.chkDecade.Name = "chkDecade"
         Me.chkDecade.Size = New System.Drawing.Size(64, 17)
-        Me.chkDecade.TabIndex = 8
+        Me.chkDecade.TabIndex = 12
         Me.chkDecade.Text = "Decade"
         Me.chkDecade.UseVisualStyleBackColor = True
         '
@@ -142,7 +142,7 @@ Partial Class dlgUseDate
         Me.chkPentade.Location = New System.Drawing.Point(286, 126)
         Me.chkPentade.Name = "chkPentade"
         Me.chkPentade.Size = New System.Drawing.Size(66, 17)
-        Me.chkPentade.TabIndex = 7
+        Me.chkPentade.TabIndex = 13
         Me.chkPentade.Text = "Pentade"
         Me.chkPentade.UseVisualStyleBackColor = True
         '
@@ -152,7 +152,7 @@ Partial Class dlgUseDate
         Me.chkDayYear.Location = New System.Drawing.Point(286, 65)
         Me.chkDayYear.Name = "chkDayYear"
         Me.chkDayYear.Size = New System.Drawing.Size(108, 17)
-        Me.chkDayYear.TabIndex = 6
+        Me.chkDayYear.TabIndex = 8
         Me.chkDayYear.Text = "Day in Year (366)"
         Me.chkDayYear.UseVisualStyleBackColor = True
         '
@@ -162,7 +162,7 @@ Partial Class dlgUseDate
         Me.chkMonthValue.Location = New System.Drawing.Point(7, 43)
         Me.chkMonthValue.Name = "chkMonthValue"
         Me.chkMonthValue.Size = New System.Drawing.Size(86, 17)
-        Me.chkMonthValue.TabIndex = 5
+        Me.chkMonthValue.TabIndex = 3
         Me.chkMonthValue.Text = "Month Value"
         Me.chkMonthValue.UseVisualStyleBackColor = True
         '
@@ -172,7 +172,7 @@ Partial Class dlgUseDate
         Me.chkWeek.Location = New System.Drawing.Point(153, 89)
         Me.chkWeek.Name = "chkWeek"
         Me.chkWeek.Size = New System.Drawing.Size(55, 17)
-        Me.chkWeek.TabIndex = 4
+        Me.chkWeek.TabIndex = 10
         Me.chkWeek.Text = "Week"
         Me.chkWeek.UseVisualStyleBackColor = True
         '
@@ -182,7 +182,7 @@ Partial Class dlgUseDate
         Me.chkDayInYear.Location = New System.Drawing.Point(286, 19)
         Me.chkDayInYear.Name = "chkDayInYear"
         Me.chkDayInYear.Size = New System.Drawing.Size(79, 17)
-        Me.chkDayInYear.TabIndex = 3
+        Me.chkDayInYear.TabIndex = 2
         Me.chkDayInYear.Text = "Day in year"
         Me.chkDayInYear.UseVisualStyleBackColor = True
         '
@@ -192,7 +192,7 @@ Partial Class dlgUseDate
         Me.chkDayInMonth.Location = New System.Drawing.Point(286, 42)
         Me.chkDayInMonth.Name = "chkDayInMonth"
         Me.chkDayInMonth.Size = New System.Drawing.Size(89, 17)
-        Me.chkDayInMonth.TabIndex = 2
+        Me.chkDayInMonth.TabIndex = 5
         Me.chkDayInMonth.Text = "Day in Month"
         Me.chkDayInMonth.UseVisualStyleBackColor = True
         '
@@ -223,14 +223,14 @@ Partial Class dlgUseDate
         Me.ucrReceiverUseDate.Name = "ucrReceiverUseDate"
         Me.ucrReceiverUseDate.Selector = Nothing
         Me.ucrReceiverUseDate.Size = New System.Drawing.Size(151, 20)
-        Me.ucrReceiverUseDate.TabIndex = 169
+        Me.ucrReceiverUseDate.TabIndex = 2
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(14, 355)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
-        Me.ucrBase.TabIndex = 2
+        Me.ucrBase.TabIndex = 4
         '
         'ucrSelectorUseDate
         '
