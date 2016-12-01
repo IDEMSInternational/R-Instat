@@ -30,7 +30,9 @@ link$set("public", "data_clone", function() {
 instat_object$set("public", "add_link", function(from_data_frame, to_data_frame, link_pairs, type) {
   if(length(names(link_pairs)) != length(link_pairs)) stop("link_pairs must be a named vector or list.")
   if(!self$link_exists_between(from_data_frame, to_data_frame)) {
-    if(!self$is_key(to_data_frame, link_pairs)) {
+    # This means when creating a link to single value data frame, there will be no key in to_data_frame
+    # Will this cause any issues?
+    if(length(link_pairs) > 0 && !self$is_key(to_data_frame, link_pairs)) {
       message("link columns must be a key in the to_data_frame\nAttempting to create key...")
       self$add_key(to_data_frame, as.character(link_pairs))
       message("New key created")

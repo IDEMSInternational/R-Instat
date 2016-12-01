@@ -650,114 +650,105 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
   calc_from_data_name <- curr_data_list[[c_link_label]][["from_data_frame"]]
   calc_link_cols <- curr_data_list[[c_link_label]][["link_cols"]]
   
-  # Below are similar checks as in apply_instat_calculation when merging sub_calculations
-  if(curr_data_list[[c_require_merge_label]]) {
-    #If require merge then either summary or filter has been done.
-    if(length(calc_link_cols) > 0) {
-      # If there are link columns, a summary has been done so joining column(s) should be available
-      link_def <- self$get_possible_linked_to_defintion(calc_from_data_name, calc_link_cols)
-      # If possible link exists
-      if(length(link_def) > 0) {
-        # If a link exists it means the to_data_frame already exists so we merge into it
-        to_data_exists <- TRUE
-        # gets the name of the to_data_frame based on the link
-        # this is either from a real link or a "possible" link
-        if(self$link_exists_from(calc_from_data_name, calc_link_cols)) {
-          to_data_name <- self$get_linked_to_data_name(calc_from_data_name, calc_link_cols)
-        }
-        else {
-          to_data_name <- link_def[[1]]
-          link_pairs <- link_def[[2]]
-          names(link_pairs) <- calc_link_cols
-          self$add_link(calc_from_data_name, to_data_name, link_pairs, keyed_link_label)
-        }
-        # This is done so that calc$name can be used later and we know it won't be changed
-        # We can only do this check once we know the to_data_frame as this is where the calc is stored
-        if(calc$name %in% self$get_calculation_names(to_data_name)) {
-          calc$name <- next_default_item(calc$name, self$get_calculation_names(to_data_name))
-        }
-        if(calc$result_name %in% self$get_column_names(to_data_name)) {
-          #     Delete is needed because merge will not replace
-          #     If not wanting to replace, this should be checked when calculation is defined.
-          warning("A column named ", calc$result_name, " already exists in ", to_data_name, ". It will be replaced.")
-          self$remove_columns_in_data(to_data_name, calc$result_name)
-        }
+  if(calc$result_name %in% names(self$get_data_frame(calc_from_data_name))) warning(calc$result_name, " is already a column in the existing data. The column will be replaced by the output from the calculation. This may have unintended consequences for the calculation")
+  if(curr_data_list[[c_has_summary_label]]) {
+    print("a")
+    # If there has been a summary, we look for an existing data frame that this could be linked to
+    link_def <- self$get_possible_linked_to_defintion(calc_from_data_name, calc_link_cols)
+    # If this is not empty then it is a list of two items: 1. the data frame to link to 2. the columns to link to
+    if(length(link_def) > 0) {
+      to_data_exists <- TRUE
+      to_data_name <- link_def[[1]]
+      # The check above only confirms it is possible to have a direct link to link_def[[1]]
+      # If there is not already a direct link between the data frames, we add one
+      if(!self$link_exists_from(calc_from_data_name, calc_link_cols)) {
+        link_pairs <- link_def[[2]]
+        names(link_pairs) <- calc_link_cols
+        self$add_link(calc_from_data_name, to_data_name, link_pairs, keyed_link_label)
+      }
+      # This is done so that calc$name can be used later and we know it won't be changed
+      # We can only do this check once we know the to_data_frame as this is where the calc is stored
+      if(calc$name %in% self$get_calculation_names(to_data_name)) {
+        calc$name <- next_default_item(calc$name, self$get_calculation_names(to_data_name))
+      }
+      if(calc$result_name %in% self$get_column_names(to_data_name)) {
+        #     Delete is needed because merge will not replace
+        #     If not wanting to replace, this should be checked when calculation is defined.
+        warning("A column named ", calc$result_name, " already exists in ", to_data_name, ". It will be replaced by the output from the calculation.")
+        self$remove_columns_in_data(to_data_name, calc$result_name)
+      }
+      if(length(calc_link_cols) > 0) {
         # merge_data merges into to_data_frame in instat object
         # method takes care of data frame attributes correctly
         # need to subset so that only the new column from this calc is added (not sub_calc columns as well as they have already been added if saved)
         # type = "full" so that we do not lose any data from either part of the merge
-        #TODO calc_link_cols should be named list already by this point
-        self$get_data_objects(to_data_name)$merge_data(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)], by = calc_link_cols, type = "full")
+        by <- calc_link_cols
+        names(by) <- link_def[[2]]
+        self$get_data_objects(to_data_name)$merge_data(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)], by = by, type = "full")
       }
       else {
-        # If no link exists then the to_data_frame doesn't exist so output from calc becomes new to_data_frame
-        # and a link will be added to new to_data_frame
-        to_data_list <- list()
-        # Ensures that the to_data_name is a valid name that doesn't exist in list of current data frame names
-        to_data_name <- paste(calc_from_data_name, "by", paste(calc_link_cols, collapse = "_"), sep="_")
-        to_data_name <- make.names(to_data_name)
-        to_data_name <- next_default_item(to_data_name, self$get_data_names(), include_index = FALSE)
-        to_data_list[[to_data_name]] <- curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)]
-        self$import_data(to_data_list)
-        to_data_exists <- TRUE
-        # Add the link to the new to_data_frame
-        new_key <- calc_link_cols
-        names(new_key) <- calc_link_cols
-        self$add_link(calc_from_data_name, to_data_name, new_key, keyed_link_label)
-        
-        # Add metadata to the linking columns 
-        # This adds metadata: is_calculated = TRUE to the linking columns, which indicates that the column has been created by a calculation
-        self$append_to_variables_metadata(to_data_name, calc_link_cols, is_calculated_label, TRUE)
-  
-        # Adds metadata at data frame level to indicate that the data frame is calculated
-        # Note: all columns do not have to be calculated for data frame to be classed as calculated
-        self$append_to_dataframe_metadata(to_data_name, is_calculated_label, TRUE)
+        self$get_data_objects(to_data_name)$add_column_to_data(calc$result_name, curr_data_list[[c_data_label]])
       }
     }
     else {
-      # If not linking columns but join required, then no summary has been done, so the join was required by a filter
-      # to do the join there must be a key defined in from dataframe because output has a subset of rows of original data
-      # The to_data_frame is the same as the from_data_frame in this case
-      # TODO should we still add a link in this case?
-      to_data_name <- calc_from_data_name
-      # If the data frame has keys defined then go through each key and if all columns of the key are in the output data then the merge can be done
-      if(self$has_key(calc_from_data_name)) {
-        by <- self$get_link_columns_from_data_frames(calc_from_data_name, names(curr_data_list[[c_data_label]]), calc_from_data_name, self$get_column_names(calc_from_data_name))
-        # subset first to only get output and key columns, do not want sub_calculation or extra columns to be merged as well
-        #TODO If by = NULL should we try the merge or just stop?
-        self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[c_data_label]][c(as.vector(by), calc$result_name)], by = by, type = "full")
-        # keys_list <- self$get_keys(calc_from_data_name)
-        # joined <- FALSE
-        # for(curr_key in keys_list) {
-        #   if(all(curr_key %in% names(curr_data_list[[c_data_label]]))) {
-        #     # subset first to only get output and key columns, do not want sub_calculation or extra columns to be merged as well
-        #     self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[c_data_label]][c(curr_key, calc$result_name)], by = curr_key, type = "full")
-        #     joined <- TRUE
-        #     break
-        #   }
-        # }
-        # # Cannot do merge if not all columns of any key is found in the output
-        # if(!joined) stop("Could not find a key to join by, which appeared in output from this calculations.")
+      # If no link exists then the to_data_frame doesn't exist so output from calc becomes new to_data_frame
+      # and a link will be added to new to_data_frame
+      to_data_list <- list()
+      # Ensures that the to_data_name is a valid name that doesn't exist in list of current data frame names
+      to_data_name <- paste(calc_from_data_name, "by", paste(calc_link_cols, collapse = "_"), sep="_")
+      to_data_name <- make.names(to_data_name)
+      to_data_name <- next_default_item(to_data_name, self$get_data_names(), include_index = FALSE)
+      # Subset to only get linking columns and result (don't want sub calcs as well, saved separately)
+      to_data_list[[to_data_name]] <- curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)]
+      self$import_data(to_data_list)
+      to_data_exists <- TRUE
+      # Add the link to the new to_data_frame
+      new_key <- calc_link_cols
+      names(new_key) <- calc_link_cols
+      self$add_link(calc_from_data_name, to_data_name, new_key, keyed_link_label)
+      
+      if(length(calc_link_cols) > 0) {
+        # Add metadata to the linking columns 
+        # This adds metadata: is_calculated = TRUE to the linking columns, which indicates that the column has been created by a calculation
+        self$append_to_variables_metadata(to_data_name, calc_link_cols, is_calculated_label, TRUE)
       }
-      # Cannot do merge if the data frame has no ketys defined
-      else {
-        #TODO Should we try the merge?
-        stop("Cannot merge output from this calculation because the data frame does not have any defined keys.")
-      }
+      
+      # Adds metadata at data frame level to indicate that the data frame is calculated
+      # Note: all columns do not have to be calculated for data frame to be set as calculated
+      self$append_to_dataframe_metadata(to_data_name, is_calculated_label, TRUE)
+    }
+  }
+  else if(curr_data_list[[c_has_filter_label]]) {
+    print("b")
+    # If filter done and no summary done then to_data_frame == from_data_frame
+    # to do the join there must be a key defined in from dataframe because output may have a subset of rows of original data
+    # TODO should we still add a link in this case?
+    to_data_name <- calc_from_data_name
+    # If the data frame has keys defined then we use get_link_columns_from_data_frames to find the by
+    if(self$has_key(calc_from_data_name)) {
+      by <- self$get_link_columns_from_data_frames(calc_from_data_name, names(curr_data_list[[c_data_label]]), calc_from_data_name, self$get_column_names(calc_from_data_name))
+      # subset to only get output and key columns, do not want sub_calculation or extra columns to be merged as well
+      #TODO If by = NULL should we try the merge with a warning or just stop?
+      if(length(by) == 0) stop("Cannot save output because the key columns are not present in the calculation output")
+      self$get_data_objects(calc_from_data_name)$merge_data(curr_data_list[[c_data_label]][c(as.vector(by), calc$result_name)], by = by, type = "full")
+    }
+    # Cannot do merge if the data frame has no keys defined
+    else {
+      #TODO Should we try the merge?
+      stop("Cannot save output from this calculation because the data frame does not have any defined keys.")
     }
   }
   else {
-    # If join is not required, columns are simply added from the new calc into the exisiting calc's data
+    print("c")
+    # If no summary or join, then simply add result as new column
     # Because no join was required, the rows should match 1-1 in both data frames
-    # Warning if this will replace an existing column.
-    # If replacement is not wanted then result_name should be changed before applying the calculation
-    if(calc$result_name %in% names(self$get_data_frame(calc_from_data_name))) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
     self$add_columns_to_data(calc_from_data_name, calc$result_name, curr_data_list[[c_data_label]][[calc$result_name]])
     to_data_name <- calc_from_data_name
     if(calc$name %in% self$get_calculation_names(to_data_name)) {
       calc$name <- next_default_item(calc$name, self$get_calculation_names(to_data_name))
     }
   }
+  
   # Add metadata for the new column
   output_column <- calc$result_name
   names(output_column) <- to_data_name
