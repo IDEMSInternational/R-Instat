@@ -49,9 +49,9 @@ Partial Class dlgUseDate
         Me.lblDateVariable.AutoSize = True
         Me.lblDateVariable.Location = New System.Drawing.Point(251, 18)
         Me.lblDateVariable.Name = "lblDateVariable"
-        Me.lblDateVariable.Size = New System.Drawing.Size(68, 13)
+        Me.lblDateVariable.Size = New System.Drawing.Size(71, 13)
         Me.lblDateVariable.TabIndex = 168
-        Me.lblDateVariable.Text = "Date Column"
+        Me.lblDateVariable.Text = "Date Column:"
         '
         'grpDateFunctions
         '
