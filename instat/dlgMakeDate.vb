@@ -35,7 +35,7 @@ Public Class dlgMakeDate
         ucrBase.iHelpTopicID = 461
         ucrInputNewColumnName.SetItemsTypeAsColumns()
         ucrInputNewColumnName.SetDefaultTypeAsColumn()
-        ucrInputNewColumnName.SetDataFrameSelector(ucrSeclectorMakeDate.ucrAvailableDataFrames)
+        ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
         ucrInputNewColumnName.SetValidationTypeAsRVariable()
         ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
         ucrInputYear.SetItems({"%Y (4 digits)", "%y (2 digits)"})
@@ -44,12 +44,12 @@ Public Class dlgMakeDate
         ucrInputComboBoxMonthTwo.SetItems({"365/366", "366"})
         ucrInputFormat.SetItems({"%Y-%m-%d", "%Y/%m/%d", "%d%m%Y"})
         ucrInputOrigin.SetItems({"30-12-1899 (Excel)", "01-03-1600 (Gregorian)"})
-        ucrReceiverForDate.Selector = ucrSeclectorMakeDate
-        ucrReceiverYearTwo.Selector = ucrSeclectorMakeDate
-        ucrReceiverDayTwo.Selector = ucrSeclectorMakeDate
-        ucrReceiverYearThree.Selector = ucrSeclectorMakeDate
-        ucrReceiverMonthThree.Selector = ucrSeclectorMakeDate
-        ucrReceiverDayThree.Selector = ucrSeclectorMakeDate
+        ucrReceiverForDate.Selector = ucrSelectorMakeDate
+        ucrReceiverYearTwo.Selector = ucrSelectorMakeDate
+        ucrReceiverDayTwo.Selector = ucrSelectorMakeDate
+        ucrReceiverYearThree.Selector = ucrSelectorMakeDate
+        ucrReceiverMonthThree.Selector = ucrSelectorMakeDate
+        ucrReceiverDayThree.Selector = ucrSelectorMakeDate
 
         ucrReceiverForDate.bUseFilteredData = False
         ucrReceiverYearTwo.bUseFilteredData = False
@@ -63,7 +63,7 @@ Public Class dlgMakeDate
     Private Sub SetDefaults()
         Formats()
         ucrInputNewColumnName.Reset()
-        ucrSeclectorMakeDate.Reset()
+        ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
         ucrInputFormat.SetName("%d/%m/%Y")
         ucrInputSeparator.SetName("/")
@@ -71,8 +71,8 @@ Public Class dlgMakeDate
         ucrInputMonth.SetName("%m (1-12)")
         ucrInputDay.SetName("%d (1-31)")
         ucrInputComboBoxMonthTwo.SetName("365/366")
-        ucrInputOrigin.SetName("30-12-1899 (Excel)")
         ucrInputOrigin.Visible = False
+        ucrInputOrigin.SetName("30-12-1899 (Excel)")
         ucrInputNewColumnName.SetPrefix("Date")
         TestOKEnabled()
         rdoSingleColumn.Checked = True
@@ -86,6 +86,8 @@ Public Class dlgMakeDate
         chkTwoDigitYearTwo.Visible = True
         nudCutOffThree.Visible = False
         nudCutOffTwo.Visible = False
+        nudCutOffThree.Value = 0
+        nudCutOffTwo.Value = 0
         chkMore.Checked = False
         chkMore.Visible = True
 
@@ -152,7 +154,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub UcrInputNewColumnName_NameChanged() Handles ucrInputNewColumnName.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSeclectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=False)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=False)
     End Sub
 
 
@@ -197,7 +199,7 @@ Public Class dlgMakeDate
         Formats()
     End Sub
 
-    Private Sub ucrSeclectorMakeDate_DataFrameChanged() Handles ucrSeclectorMakeDate.DataFrameChanged
+    Private Sub ucrSeclectorMakeDate_DataFrameChanged() Handles ucrSelectorMakeDate.DataFrameChanged
         Formats()
     End Sub
 
@@ -257,7 +259,7 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.RemoveParameter("data_name")
         ElseIf rdoYearandDayofYear.Checked Then
             ucrReceiverYearTwo.SetMeAsReceiver()
-            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSeclectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             ucrBase.clsRsyntax.RemoveParameter("x")
             ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
@@ -280,7 +282,7 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.RemoveParameter("day")
         Else
             ucrReceiverYearThree.SetMeAsReceiver()
-            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSeclectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             ucrBase.clsRsyntax.RemoveParameter("doy")
             ucrBase.clsRsyntax.RemoveParameter("year")
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
