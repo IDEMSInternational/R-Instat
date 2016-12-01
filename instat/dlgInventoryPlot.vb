@@ -26,9 +26,7 @@ Public Class dlgInventoryPlot
             InitialiseDialog()
             SetDefaults()
         End If
-
         autoTranslate(Me)
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -40,10 +38,10 @@ Public Class dlgInventoryPlot
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_geompointFunction)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'ucrBase.iHelpTopicID 
+        ucrBase.iHelpTopicID = 455
 
-        ucrYearReceiver.SetIncludedDataTypes({"factor"})
-        ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric"})
+        ucrYearReceiver.SetIncludedDataTypes({"numeric", "factor"})
+        ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric", "factor"})
         ucrColourReceiver.SetIncludedDataTypes({"factor"})
 
         ucrYearReceiver.Selector = UcrInventoryPlotSelector
