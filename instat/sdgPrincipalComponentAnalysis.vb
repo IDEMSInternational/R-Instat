@@ -20,10 +20,6 @@ Public Class sdgPrincipalComponentAnalysis
     Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction, clsRBarPlotGeom, clsRBarPlotFacet, clsRBarPlotAes As New RFunction
     Public clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
 
-    Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
-
-    End Sub
-
     Dim clsRBarPlot, clsRBarPlot0 As New ROperator
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -225,7 +221,7 @@ Public Class sdgPrincipalComponentAnalysis
                     nudDim2.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
                 End If
             End If
-            End If
+        End If
 
         ' This number must be the minimum between components selected and items in receiver.
         ' However, if the rows are shorter than the columns then it must be the minimum between rows and components
@@ -283,8 +279,8 @@ Public Class sdgPrincipalComponentAnalysis
     End Sub
 
     Private Sub lblNames_TextChanged(sender As Object, e As EventArgs) Handles lblChoiceScree.TextChanged, rdoOne.TextChanged, rdoTwo.TextChanged
-    DisplayOptions()
-End Sub
+        DisplayOptions()
+    End Sub
 
     Private Sub rdoPlotItems_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoth.CheckedChanged, rdoOne.CheckedChanged, rdoTwo.CheckedChanged
         GeomChecked()
@@ -331,8 +327,7 @@ End Sub
     End Sub
 
     Private Sub cboChoiceScree_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboChoiceScree.SelectedIndexChanged
-    clsRScreePlotFunction.AddParameter("choice", Chr(34) & cboChoiceScree.SelectedItem.ToString & Chr(34))
-        ' have one combo box which they all use.
+        clsRScreePlotFunction.AddParameter("choice", Chr(34) & cboChoiceScree.SelectedItem.ToString & Chr(34))
     End Sub
 
     Private Sub cboLabelVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLabel.SelectedIndexChanged
