@@ -1531,7 +1531,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, polar = FALSE, ...) {
+data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
   if(!all(columns %in% self$get_column_names())) {
     stop("Not all columns found in the data")
   }
@@ -1544,7 +1544,12 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
   else {
     numeric_geom <- numeric
   }
-  cat_geom <- match.fun(categorical)
+  if(categorical %in% c("pie_chart")) {
+    cat_geom <- categorical
+  }
+  else {
+    cat_geom <- match.fun(categorical)
+  }
   curr_data <- self$get_data_frame()
   column_types <- c()
   for(col in columns) {
@@ -1558,11 +1563,11 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
   }
   if(output == "facets") {
-    column_types <- unique(column_types)
     if(length(column_types) > 1) {
       warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
       output <- "combine"
     }
+    else column_types <- unique(column_types)
   }
   if(output == "facets") {
     if(column_types == "numeric") {
@@ -1582,15 +1587,22 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value)) + ylab("")
-      if(curr_geom_name == "box_jitter") {
-        g <- g + geom_boxplot() + geom_jitter() 
-      }
-      else if(curr_geom_name == "violin_jitter") {
-        g <- g + geom_violin() + geom_jitter() 
-      }
-      else if(curr_geom_name == "violin_box") {
-        g <- g + geom_violin() + geom_boxplot() 
-      }
+    }
+    
+    if(curr_geom_name == "box_jitter") {
+      g <- g + geom_boxplot() + geom_jitter() 
+    }
+    else if(curr_geom_name == "violin_jitter") {
+      g <- g + geom_violin() + geom_jitter() 
+    }
+    else if(curr_geom_name == "violin_box") {
+      g <- g + geom_violin() + geom_boxplot() 
+    }
+    else if(curr_geom_name == "pie_chart") {
+      g <- g + geom_bar() + coord_polar(theta = "x")
+    }
+    else {
+      g <- g + curr_geom()
     }
 
     if(free_scale_axis) {
@@ -1600,9 +1612,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + facet_wrap(facets = ~ variable, scales = "free_x", ncol = ncol)
     }
     
-    if(polar) {
-      g <- g + coord_polar(theta = "x")
-    }
     return(g)    
   }
   else {
@@ -1637,9 +1646,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       }
       else {
         g <- g + curr_geom()
-      }
-      if(polar && column_types[i] == "cat") {
-        g <- g + coord_polar(theta = "x")
       }
       graphs[[i]] <- g
       i = i + 1
@@ -1717,28 +1723,54 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
        contrasts(private$data[[col_name]]) <- new_contrasts
   }
 )
-data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month = FALSE, year = FALSE, day = FALSE) {
+#This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
+data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
+  if(day) {
+    day <- day(col_data)
+	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day)
+  }
   if(week) {
     week <- week(col_data)
 	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = week)
   }
-  if(month) {
-    month <- month(col_data)
-	  col_name <- next_default_item(prefix = "month", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month)
+   if(weekday_val) {
+    weekday_val <- wday(col_data)
+	  col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_val)
+  }
+   if(weekday_abbr) {
+     weekday_abbr <- wday(col_data, label = TRUE)
+	  col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_abbr)
+  }
+   if(weekday_name) {
+     weekday_name <- wday(col_data, label = TRUE, abbr = FALSE)
+	  col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_name)
+  }
+  if(month_val) {
+    month_val <- month(col_data)
+	  col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_val)
+  }
+   if(month_abbr) {
+    month_abbr <- month(col_data, label = TRUE)
+	  col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_abbr)
+  }
+   if(month_name) {
+    month_name <- month(col_data, label = TRUE, abbr = FALSE)
+	  col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_name)
   }
   if(year) {
     year <- year(col_data)
 	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = year)
-  }
-  if(day) {
-    day <- day(col_data)
-	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day)
   }
   #TO Do
   #Implement option for the day of the year
