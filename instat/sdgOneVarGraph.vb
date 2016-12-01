@@ -22,15 +22,12 @@ Public Class sdgOneVarGraph
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
         autoTranslate(Me)
         UpdateControls(Me, clsGraphOneVariable)
     End Sub
 
-    Public Sub SetDefaults()
-    End Sub
 
     Public Sub InitialiseDialog()
         Dim lstNumericPairs As New List(Of KeyValuePair(Of String, String))
@@ -69,7 +66,9 @@ Public Class sdgOneVarGraph
         ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
         ucrNudNumberofColumns.bAddIfParameterNotPresent = False
         'This needs to be done last as it changes the Value because default value is 0.
-        'If not done last then R code may be updated worngly because its happening before all properties of the control are set 
+        'If not done last then R code may be updated worngly because its happening before all properties of the control are set
+        'This line is needed if there already a value for the nud in the RFunction, otherwise setting min/max may override the RFunction's value
+        ucrNudNumberofColumns.UpdateControl(clsGraphOneVariable)
         ucrNudNumberofColumns.SetMinMax(1, 10)
     End Sub
 

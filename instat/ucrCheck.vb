@@ -33,8 +33,8 @@ Public Class ucrCheck
         MyBase.UpdateControl(clsRCodeObject)
 
         'TODO Add methods in RFunction/base class for RFunction/ROperator to do these checks better
-        clsTempParam = clsRCodeObject.GetParameter(strParameterName)
         If strParameterName <> "" Then
+            clsTempParam = clsRCodeObject.GetParameter(strParameterName)
             If bIsParameterValue Then
                 If clsTempParam IsNot Nothing Then
                     If clsTempParam.strArgumentValue = strValueIfChecked OrElse clsTempParam.strArgumentValue = strValueIfUnchecked Then
@@ -53,12 +53,12 @@ Public Class ucrCheck
                         chkCheck.Checked = False
                     End If
                 End If
-            End If
-        ElseIf bIsParameterPresent Then
-            If clsTempParam IsNot Nothing Then
-                chkCheck.Checked = bParameterIncludedWhenChecked
-            Else
-                chkCheck.Checked = Not bParameterIncludedWhenChecked
+            ElseIf bIsParameterPresent Then
+                If clsTempParam IsNot Nothing Then
+                    chkCheck.Checked = bParameterIncludedWhenChecked
+                Else
+                    chkCheck.Checked = Not bParameterIncludedWhenChecked
+                End If
             End If
         End If
     End Sub

@@ -78,18 +78,19 @@ Public Class ucrDataFrame
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
-        SelectedDataFrameChanged(sender, e)
-    End Sub
-
-    Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
         If cboAvailableDataFrames.SelectedIndex = -1 Then
             cboAvailableDataFrames.Text = ""
         End If
-        SetDataFrameProperties()
-        RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
-        OnControlContentsChanged()
-        OnControlValueChanged()
-        strCurrDataFrame = cboAvailableDataFrames.Text
+        If strCurrDataFrame <> cboAvailableDataFrames.Text Then
+            RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
+            strCurrDataFrame = cboAvailableDataFrames.Text
+            SetDataFrameProperties()
+            OnControlContentsChanged()
+            OnControlValueChanged()
+        End If
+    End Sub
+
+    Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
     End Sub
 
     Public Sub SetDataFrameProperties()
@@ -177,7 +178,7 @@ Public Class ucrDataFrame
                 End If
             End If
         End If
-        If strDataFrameName <> "" Then
+        If strDataFrameName <> "" AndAlso strDataFrameName <> strCurrDataFrame Then
             'Substring used to removed quotes on either side
             strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2)
             SetDataframe(strDataFrameName)
