@@ -89,7 +89,7 @@ Partial Class dlgUseDate
         'chkAbbrWeekDay
         '
         Me.chkAbbrWeekDay.AutoSize = True
-        Me.chkAbbrWeekDay.Location = New System.Drawing.Point(153, 44)
+        Me.chkAbbrWeekDay.Location = New System.Drawing.Point(153, 43)
         Me.chkAbbrWeekDay.Name = "chkAbbrWeekDay"
         Me.chkAbbrWeekDay.Size = New System.Drawing.Size(132, 17)
         Me.chkAbbrWeekDay.TabIndex = 12
@@ -99,7 +99,7 @@ Partial Class dlgUseDate
         'chkMonthNam
         '
         Me.chkMonthNam.AutoSize = True
-        Me.chkMonthNam.Location = New System.Drawing.Point(7, 90)
+        Me.chkMonthNam.Location = New System.Drawing.Point(7, 89)
         Me.chkMonthNam.Name = "chkMonthNam"
         Me.chkMonthNam.Size = New System.Drawing.Size(106, 17)
         Me.chkMonthNam.TabIndex = 11
