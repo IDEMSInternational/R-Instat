@@ -57,6 +57,10 @@ Public Class ucrSelectorByDataFrame
         lstAvailableVariable.Enabled = bEnable
     End Sub
 
+    Public Overridable Sub SetVariablesVisible(bVisible As Boolean)
+        lstAvailableVariable.Visible = bVisible
+    End Sub
+
     Public Property bUseCurrentFilter As Boolean
         Get
             Return ucrAvailableDataFrames.bUseCurrentFilter
