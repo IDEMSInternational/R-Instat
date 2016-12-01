@@ -53,8 +53,8 @@ Public Class ucrNud
     End Sub
 
     Public Sub SetMinMax(Optional iNewMin As Integer = Integer.MinValue, Optional iNewMax As Integer = Integer.MaxValue)
-        nudUpDown.Minimum = iNewMin
-        nudUpDown.Maximum = iNewMax
+        Minimum = iNewMin
+        Maximum = iNewMax
     End Sub
 
     Private Sub nudUpDown_TextChanged(sender As Object, e As EventArgs) Handles nudUpDown.TextChanged
