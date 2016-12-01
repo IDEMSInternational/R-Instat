@@ -93,7 +93,7 @@ Public Class sdgPlots
         'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
-        'This is necessary to make sure the minimum number of rows or columns is one to avoid the check if they are >0
+        'This is necessary to make sure the minimum number of fixed rows or columns is 1.
         nudNoOfRowsOrColumns.Minimum = 1
 
         'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
