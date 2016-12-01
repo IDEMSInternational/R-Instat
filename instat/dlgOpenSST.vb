@@ -18,7 +18,8 @@ Imports System.IO
 
 Public Class dlgOpenSST
     'Private intLines As Integer
-    Private clsReadCSV, clsReadLatLon, clsRList, clsReadLatLon0 As RFunction
+    Private clsReadFile As RFunction
+    Private clsRBaseFunc As New RFunction
     Private strTempWorkbookName As String
     Dim bFirstLoad As Boolean
     Dim strFileType As String
@@ -32,17 +33,9 @@ Public Class dlgOpenSST
 
         ' Add any initialization after the InitializeComponent() call.
         'intLines = 10
-        clsReadCSV = New RFunction
-        clsReadLatLon = New RFunction
-        clsRList = New RFunction
-        clsReadLatLon0 = New RFunction
-        ucrBaseOpenSST.clsRsyntax.SetFunction("import_CPT")
-        ucrBaseOpenSST.clsRsyntax.AddParameter("dataset", clsRFunctionParameter:=clsReadCSV)
-        clsReadLatLon.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
-        clsRList.SetRCommand("list")
-        clsReadLatLon.AddParameter("data_tables", clsRFunctionParameter:=clsRList)
-        clsReadLatLon0.SetRCommand("lat_lon_dataframe")
-        clsReadLatLon0.AddParameter("dataset", clsRFunctionParameter:=clsReadCSV)
+        clsReadFile = New RFunction
+        ucrBaseOpenSST.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$import_SST")
+        ucrBaseOpenSST.clsRsyntax.AddParameter("dataset", clsRFunctionParameter:=clsReadFile)
         bFirstLoad = True
         bCanImport = True
         bComponentsInitialised = True
@@ -68,13 +61,15 @@ Public Class dlgOpenSST
     Private Sub InitialiseDialog()
         ucrBaseOpenSST.iHelpTopicID = 102
         ucrInputName.SetValidationTypeAsRVariable()
+        ucrInputName2.SetValidationTypeAsRVariable()
+        ucrInputName2.SetName("lat_lon_data")
         'temp disabled until can easily switch between fread and read.csv
         'disabled until issue is resolved: http://stackoverflow.com/questions/37635541/rio-r-package-can-i-import-a-csv-file-with-non-comma-separator
         ucrInputSeparator.Enabled = False
         ucrInputFilePath.IsReadOnly = True
         'csv options settings
-        clsReadCSV.AddParameter("check.names", "TRUE")
-        clsReadCSV.AddParameter("header", "FALSE")
+        clsReadFile.AddParameter("check.names", "TRUE")
+        clsReadFile.AddParameter("header", "FALSE")
         ucrInputEncoding.SetItems({"unknown"})
         ucrInputSeparator.SetItems({"Automatic", ",", "Whitespace", ":", ";", "|", "^"})
         ucrInputDecimal.SetItems({"Automatic", ".", ","})
@@ -82,15 +77,10 @@ Public Class dlgOpenSST
     End Sub
 
 #Region "Shared options"
-    Private Sub ucrInputName_NameChanged() Handles ucrInputName.NameChanged
-        If Not ucrInputName.IsEmpty Then
-            ucrBaseOpenSST.clsRsyntax.SetAssignTo(ucrInputName.GetText(), strTempDataframe:=ucrInputName.GetText())
-            clsRList.AddParameter("lat_lon_data", clsRFunctionParameter:=clsReadLatLon0)
-        Else
-            ucrBaseOpenSST.clsRsyntax.RemoveAssignTo()
-        End If
-        TestOkEnabled()
+    Private Sub ucrInputDataName_NameChanged() Handles ucrInputName.NameChanged, ucrInputName2.NameChanged
+        ucrBaseOpenSST.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputName.GetText() & Chr(34) & "," & Chr(34) & ucrInputName2.GetText() & Chr(34) & ")")
     End Sub
+
 #End Region
 
 #Region "Dialog options"
@@ -99,7 +89,7 @@ Public Class dlgOpenSST
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrInputName.IsEmpty) AndAlso bCanImport Then
+        If bCanImport Then
             ucrBaseOpenSST.OKEnabled(True)
         Else
             ucrBaseOpenSST.OKEnabled(False)
@@ -132,37 +122,37 @@ Public Class dlgOpenSST
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(strFilePath)
                     ucrInputName.Show()
-                    lblName.Show()
+                    lblSSTName.Show()
                     If strFileExt = ".csv" Then
-                        clsReadCSV.SetRCommand("rio::import")
-                        clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        clsReadFile.SetRCommand("rio::import")
+                        clsReadFile.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                         grpCSV.Show()
                         strFileType = "csv"
                         ucrInputName.SetName(strFileName, bSilent:=True)
                         ucrInputName.Focus()
-                        clsReadCSV.RemoveParameterByName("fread")
-                        clsReadCSV.RemoveParameterByName("fill")
+                        clsReadFile.RemoveParameterByName("fread")
+                        clsReadFile.RemoveParameterByName("fill")
                     End If
 
                     If strFileExt = ".tsv" Then
-                        clsReadCSV.SetRCommand("rio::import")
-                        clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        clsReadFile.SetRCommand("rio::import")
+                        clsReadFile.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                         grpCSV.Show()
                         strFileType = "tsv"
                         ucrInputName.SetName(strFileName, bSilent:=True)
                         ucrInputName.Focus()
-                        clsReadCSV.AddParameter("fread", "FALSE")
-                        clsReadCSV.AddParameter("fill", "TRUE")
+                        clsReadFile.AddParameter("fread", "FALSE")
+                        clsReadFile.AddParameter("fill", "TRUE")
                     End If
                     If strFileExt = ".txt" Then
-                        clsReadCSV.SetRCommand("rio::import")
-                        clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                        clsReadFile.SetRCommand("rio::import")
+                        clsReadFile.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                         grpCSV.Show()
                         strFileType = "txt"
                         ucrInputName.SetName(strFileName, bSilent:=True)
                         ucrInputName.Focus()
-                        clsReadCSV.AddParameter("fread", "FALSE")
-                        clsReadCSV.AddParameter("fill", "TRUE")
+                        clsReadFile.AddParameter("fread", "FALSE")
+                        clsReadFile.AddParameter("fill", "TRUE")
                     End If
                 End If
             Else
@@ -189,9 +179,9 @@ Public Class dlgOpenSST
     Private Sub ucrInputEncoding_NameChanged() Handles ucrInputEncoding.NameChanged
 
         If ucrInputEncoding.GetText() <> "" AndAlso (ucrInputEncoding.GetText() <> "unknown" OrElse frmMain.clsInstatOptions.bIncludeRDefaultParameters) Then
-            clsReadCSV.AddParameter("encoding", ucrInputEncoding.GetText)
+            clsReadFile.AddParameter("encoding", ucrInputEncoding.GetText)
         Else
-            clsReadCSV.RemoveParameterByName("encoding")
+            clsReadFile.RemoveParameterByName("encoding")
         End If
 
     End Sub
@@ -199,9 +189,9 @@ Public Class dlgOpenSST
     Private Sub ucrInputDecimal_NameChanged() Handles ucrInputDecimal.NameChanged
         Select Case ucrInputDecimal.GetText
             Case "Automatic"
-                clsReadCSV.RemoveParameterByName("dec")
+                clsReadFile.RemoveParameterByName("dec")
             Case Else
-                clsReadCSV.AddParameter("dec", Chr(34) & ucrInputDecimal.GetText() & Chr(34))
+                clsReadFile.AddParameter("dec", Chr(34) & ucrInputDecimal.GetText() & Chr(34))
         End Select
     End Sub
 
@@ -209,26 +199,26 @@ Public Class dlgOpenSST
         Select Case ucrInputSeparator.GetText
             Case "Automatic"
                 If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsReadCSV.AddParameter("sep", Chr(34) & "auto" & Chr(34))
+                    clsReadFile.AddParameter("sep", Chr(34) & "auto" & Chr(34))
                 Else
-                    clsReadCSV.RemoveParameterByName("sep")
+                    clsReadFile.RemoveParameterByName("sep")
                 End If
-                clsReadCSV.RemoveParameterByName("sep")
+                clsReadFile.RemoveParameterByName("sep")
             Case "Whitespace"
-                clsReadCSV.AddParameter("sep", Chr(34) & "" & Chr(34))
+                clsReadFile.AddParameter("sep", Chr(34) & "" & Chr(34))
             Case ""
-                clsReadCSV.RemoveParameterByName("sep")
+                clsReadFile.RemoveParameterByName("sep")
             Case Else
-                clsReadCSV.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText() & Chr(34))
+                clsReadFile.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText() & Chr(34))
         End Select
     End Sub
 
     Private Sub ucrInputDecimal_TextChanged(sender As Object, e As EventArgs) Handles ucrInputDecimal.TextChanged
         Select Case ucrInputDecimal.GetText
             Case "Period"
-                clsReadCSV.AddParameter("dec", Chr(34) & "." & Chr(34))
+                clsReadFile.AddParameter("dec", Chr(34) & "." & Chr(34))
             Case "Comma"
-                clsReadCSV.AddParameter("dec", Chr(34) & "," & Chr(34))
+                clsReadFile.AddParameter("dec", Chr(34) & "," & Chr(34))
         End Select
     End Sub
 
@@ -242,22 +232,18 @@ Public Class dlgOpenSST
 
     Private Sub ucrInputNAStrings_NameChanged() Handles ucrInputNAStrings.NameChanged
         If ucrInputNAStrings.GetText() <> "" AndAlso (ucrInputNAStrings.GetText() <> "NA" OrElse frmMain.clsInstatOptions.bIncludeRDefaultParameters) Then
-            clsReadCSV.AddParameter("na.strings", Chr(34) & ucrInputNAStrings.GetText() & Chr(34))
+            clsReadFile.AddParameter("na.strings", Chr(34) & ucrInputNAStrings.GetText() & Chr(34))
         Else
-            clsReadCSV.RemoveParameterByName("na.strings")
+            clsReadFile.RemoveParameterByName("na.strings")
         End If
-    End Sub
-
-    Private Sub ucrInputName_Load(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub nudSkips_TextChanged(sender As Object, e As EventArgs) Handles nudSkip.TextChanged
         If bComponentsInitialised Then
             If nudSkip.Value = 0 Then
-                clsReadCSV.RemoveParameterByName("skip")
+                clsReadFile.RemoveParameterByName("skip")
             Else
-                clsReadCSV.AddParameter("skip", nudSkip.Value)
+                clsReadFile.AddParameter("skip", nudSkip.Value)
             End If
         End If
     End Sub
@@ -265,9 +251,7 @@ Public Class dlgOpenSST
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
         GetFileFromOpenDialog()
     End Sub
+
 #End Region
 
-    Private Sub ucrBaseOpenSST_clickok(sender As Object, e As EventArgs) Handles ucrBaseOpenSST.ClickOk
-        frmMain.clsRLink.RunScript(clsReadLatLon.ToScript(), 0)
-    End Sub
 End Class
