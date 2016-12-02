@@ -165,6 +165,12 @@
     <Compile Include="dlgCountinFactor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DlgDefineClimaticData.Designer.vb">
+      <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DlgDefineClimaticData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -2167,6 +2173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.sw-KE.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgDefineClimaticData.resx">
+      <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
