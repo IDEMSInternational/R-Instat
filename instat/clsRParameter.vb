@@ -77,8 +77,7 @@ Public Class RParameter
             Else
                 clsTempRParam.clsArgument = clsArgument.Clone
             End If
-
         End If
-            Return clsTempRParam
+        Return clsTempRParam
     End Function
 End Class
