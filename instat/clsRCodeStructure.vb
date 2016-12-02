@@ -190,6 +190,7 @@ Public Class RCodeStructure
                     strParameterName = "Left"
                 Else
                     strParameterName = "Parameter" & clsParameters.Count + 1
+                    bIncludeArgumentName = False
                 End If
             End If
             clsParam.SetArgumentName(strParameterName)
