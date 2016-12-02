@@ -195,9 +195,9 @@ Public Class RCodeStructure
             clsParam.SetArgumentName(strParameterName)
             If Not strParameterValue = "" Then
                 clsParam.SetArgumentValue(strParameterValue)
-            ElseIf clsRFunctionParameter Is Nothing Then
+            ElseIf clsRFunctionParameter IsNot Nothing Then
                 clsParam.SetArgument(clsRFunctionParameter, bIsFunc:=True)
-            ElseIf clsROperatorParameter Is Nothing Then
+            ElseIf clsROperatorParameter IsNot Nothing Then
                 clsParam.SetArgument(clsROperatorParameter, bIsOp:=True)
             End If
             clsParam.bIncludeArgumentName = bIncludeArgumentName
