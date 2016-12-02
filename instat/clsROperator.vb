@@ -88,7 +88,6 @@ Public Class ROperator
 
     Public Overrides Function Clone() As RCodeStructure
         Dim clsTempROperator As New ROperator
-        Dim clsParam As RParameter
 
         clsTempROperator.strOperation = strOperation
         clsTempROperator.bBrackets = bBrackets
@@ -102,7 +101,7 @@ Public Class ROperator
         clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
 
-        For Each clsParam In MyBase.clsParameters
+        For Each clsParam As RParameter In MyBase.clsParameters
             clsTempROperator.AddParameter(clsParam.Clone)
         Next
         Return clsTempROperator
