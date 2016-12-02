@@ -170,10 +170,10 @@ Public Class ucrDataFrame
             If bParameterIsString Then
                 strDataFrameName = clsTempParam.strArgumentValue
             ElseIf bParameterIsRFunction Then
-                If clsTempParam.clsArgumentFunction IsNot Nothing Then
-                    clsTempDataParameter = clsTempParam.clsArgumentFunction.GetParameter(strDataParameterNameInRFunction)
+                If clsTempParam.clsArgument IsNot Nothing Then
+                    clsTempDataParameter = clsTempParam.clsArgument.GetParameter(strDataParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        strDataFrameName = clsTempParam.clsArgumentFunction.GetParameter(strDataParameterNameInRFunction).strArgumentValue
+                        strDataFrameName = clsTempParam.clsArgument.GetParameter(strDataParameterNameInRFunction).strArgumentValue
                     End If
                 End If
             End If

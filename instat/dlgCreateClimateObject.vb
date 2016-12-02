@@ -51,7 +51,7 @@ Public Class dlgCreateClimateObject
 
         clsTempFunction.SetRCommand("list")
         clsTempParameter.SetArgumentName(ucrDataFrameImportClimateObject.cboAvailableDataFrames.Text)
-        clsTempParameter.SetArgumentFunction(ucrDataFrameImportClimateObject.clsCurrDataFrame)
+        clsTempParameter.SetArgument(ucrDataFrameImportClimateObject.clsCurrDataFrame, bIsFunc:=True)
         clsTempFunction.AddParameter(clsTempParameter)
         ucrBase.clsRsyntax.AddParameter("data_tables", clsRFunctionParameter:=clsTempFunction)
 

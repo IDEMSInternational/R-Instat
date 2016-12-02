@@ -17,7 +17,6 @@
 Public Class RFunction
     Inherits RCodeStructure
 
-    Public clsParameters As New List(Of RParameter)
     Public strRCommand As String
 
     Public Sub New()
@@ -46,45 +45,12 @@ Public Class RFunction
         Return MyBase.ToScript(strScript, strTemp)
     End Function
 
-    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
-        Dim clsParam As New RParameter
-
-        clsParam.SetArgumentName(strParameterName)
-        If Not strParameterValue = "" Then
-            clsParam.SetArgumentValue(strParameterValue)
-        End If
-        If Not clsRFunctionParameter Is Nothing Then
-            clsParam.SetArgumentFunction(clsRFunctionParameter)
-        End If
-        If Not clsROperatorParameter Is Nothing Then
-            clsParam.SetArgumentOperator(clsROperatorParameter)
-        End If
-        clsParam.bIncludeArgumentName = bIncludeArgumentName
-        Me.AddParameter(clsParam)
+    Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional bSetFirst As Boolean = False)
+        bSetFirst = False
+        MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, clsParam, bSetFirst)
     End Sub
-
-    Public Sub AddParameter(clsParam As RParameter)
-        Dim i As Integer = -1
-        If Not clsParameters Is Nothing Then
-            If clsParam.strArgumentName IsNot Nothing Then
-                i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
-            End If
-        End If
-
-        If i = -1 Then
-            clsParameters.Add(clsParam)
-        Else
-            If clsParam.strArgumentValue IsNot Nothing Then
-                clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
-            End If
-            If clsParam.clsArgumentFunction IsNot Nothing Then
-                clsParameters(i).SetArgumentFunction(clsParam.clsArgumentFunction)
-            End If
-            If clsParam.clsArgumentOperator IsNot Nothing Then
-                clsParameters(i).SetArgumentOperator(clsParam.clsArgumentOperator)
-            End If
-        End If
-        bIsAssigned = False
+    Public Overrides Sub AddParameter(clsParam As RParameter, Optional bSetFirst As Boolean = False)
+        MyBase.AddParameter(clsParam)
         OnParametersChanged()
     End Sub
 
@@ -99,23 +65,17 @@ Public Class RFunction
         Return Nothing
     End Function
 
-    Public Sub RemoveParameterByName(strArgName)
-        Dim clsParam
-        If Not clsParameters Is Nothing Then
-            clsParam = clsParameters.Find(Function(x) x.strArgumentName = strArgName)
-            clsParameters.Remove(clsParam)
-        End If
-        bIsAssigned = False
+    Public Overrides Sub RemoveParameterByName(strArgName)
+        MyBase.RemoveParameterByName(strArgName)
         OnParametersChanged()
     End Sub
 
-    Public Sub ClearParameters()
-        clsParameters.Clear()
-        bIsAssigned = False
+    Public Overrides Sub ClearParameters()
+        MyBase.ClearParameters()
         OnParametersChanged()
     End Sub
 
-    Public Function Clone() As RFunction
+    Public Overrides Function Clone() As RCodeStructure
 
         Dim clsRFunction As New RFunction
         Dim clsRParam As RParameter

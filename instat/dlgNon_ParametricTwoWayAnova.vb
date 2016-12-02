@@ -60,7 +60,7 @@ Public Class dlgNon_ParametricTwoWayAnova
     Public Sub TestOKEnabled()
         If (Not ucrReceiverDataColumn.IsEmpty()) And (Not ucrReceiverFirstFactor.IsEmpty()) And (Not ucrReceiverSecondFactor.IsEmpty()) Then
             clsModel1.bBrackets = False
-            clsModel1.SetParameter(True, clsOp:=clsModel)
+            clsModel1.AddParameter(bSetFirst:=True, clsROperatorParameter:=clsModel)
 
             ucrBaseNPTwoWayANOVA.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
             ucrBaseNPTwoWayANOVA.OKEnabled(True)
@@ -75,17 +75,17 @@ Public Class dlgNon_ParametricTwoWayAnova
     End Sub
 
     Private Sub ucrReceiverDataColumn_SelectionChanged() Handles ucrReceiverDataColumn.SelectionChanged
-        clsModel.SetParameter(True, strValue:=ucrReceiverDataColumn.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(bSetFirst:=True, strParameterValue:=ucrReceiverDataColumn.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverFirstFactor_SelectionChanged() Handles ucrReceiverFirstFactor.SelectionChanged
-        clsModel.SetParameter(False, strValue:=ucrReceiverFirstFactor.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(bSetFirst:=False, strParameterValue:=ucrReceiverFirstFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverSecondFactor_SelectionChanged() Handles ucrReceiverSecondFactor.SelectionChanged
-        clsModel1.SetParameter(False, strValue:=ucrReceiverSecondFactor.GetVariableNames(bWithQuotes:=False))
+        clsModel1.AddParameter(bSetFirst:=False, strParameterValue:=ucrReceiverSecondFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 

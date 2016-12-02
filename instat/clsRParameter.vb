@@ -17,10 +17,10 @@
 Public Class RParameter
     Public strArgumentName As String
     Public strArgumentValue As String
-    Public clsArgumentFunction As RFunction
-    Public clsArgumentOperator As ROperator
+    Public clsArgument As RCodeStructure
     Public bIsFunction As Boolean = False
     Public bIsOperator As Boolean = False
+    Public bIsString As Boolean = False
     Public bIncludeArgumentName As Boolean = True
 
     Public Sub SetArgumentName(strTemp As String)
@@ -31,18 +31,14 @@ Public Class RParameter
         strArgumentValue = strTemp
         bIsFunction = False
         bIsOperator = False
+        bIsString = True
     End Sub
 
-    Public Sub SetArgumentFunction(clsFunc As RFunction)
-        clsArgumentFunction = clsFunc
-        bIsFunction = True
-        bIsOperator = False
-    End Sub
-
-    Public Sub SetArgumentOperator(clsROp As ROperator)
-        clsArgumentOperator = clsROp
-        bIsFunction = False
-        bIsOperator = True
+    Public Sub SetArgument(clsArg As RCodeStructure, Optional bIsFunc As Boolean = False, Optional bIsOp As Boolean = False)
+        clsArgument = clsArg
+        bIsFunction = bIsFunc
+        bIsOperator = bIsOp
+        bIsString = False
     End Sub
 
     Public Function ToScript(ByRef strScript As String) As String
@@ -52,11 +48,16 @@ Public Class RParameter
             strRet = strArgumentName & "="
         End If
         If bIsFunction Then
-            strRet = strRet & clsArgumentFunction.ToScript(strScript)
+            strRet = strRet & CType(clsArgument, RFunction).ToScript(strScript)
         ElseIf bIsOperator Then
-            strRet = strRet & clsArgumentOperator.ToScript(strScript)
-        Else
+            strRet = strRet & CType(clsArgument, ROperator).ToScript(strScript)
+        ElseIf bIsString Then
             strRet = strRet & strArgumentValue
+        ElseIf clsArgument IsNot Nothing Then
+            strRet = strRet & clsArgument.ToScript(strScript)
+            'message
+        Else
+            'message
         End If
         Return strRet
     End Function
@@ -68,12 +69,16 @@ Public Class RParameter
         clsTempRParam.strArgumentValue = strArgumentValue
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
-        If clsArgumentFunction IsNot Nothing Then
-            clsTempRParam.clsArgumentFunction = clsArgumentFunction.Clone
+        If clsArgument IsNot Nothing Then
+            If bIsFunction Then
+                clsTempRParam.clsArgument = CType(clsArgument, RFunction).Clone
+            ElseIf bIsOperator Then
+                clsTempRParam.clsArgument = CType(clsArgument, ROperator).Clone
+            Else
+                clsTempRParam.clsArgument = clsArgument.Clone
+            End If
+
         End If
-        If clsArgumentOperator IsNot Nothing Then
-            clsTempRParam.clsArgumentOperator = clsArgumentOperator.Clone
-        End If
-        Return clsTempRParam
+            Return clsTempRParam
     End Function
 End Class

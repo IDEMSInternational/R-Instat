@@ -46,7 +46,7 @@ Public Class dlgUnstack
         clsFormula.bBrackets = False
         clsIDColumns.SetOperation("+")
         clsIDColumns.bForceIncludeOperation = False
-        clsFormula.SetParameter(True, clsOp:=clsIDColumns)
+        clsFormula.AddParameter(bSetFirst:=True, clsROperatorParameter:=clsIDColumns)
         ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsFormula)
         ucrNewDataName.SetValidationTypeAsRVariable()
     End Sub
@@ -83,9 +83,9 @@ Public Class dlgUnstack
 
     Private Sub ucrFactorToUnstackReceiver_SelectionChanged() Handles ucrFactorToUnstackReceiver.SelectionChanged
         If Not ucrFactorToUnstackReceiver.IsEmpty Then
-            clsFormula.SetParameter(False, strValue:=ucrFactorToUnstackReceiver.GetVariableNames(False))
+            clsFormula.AddParameter(bSetFirst:=False, strParameterValue:=ucrFactorToUnstackReceiver.GetVariableNames(False))
         Else
-            clsFormula.RemoveParameter(False)
+            clsFormula.RemoveAllAdditionalParameters()
         End If
         TestOKEnabled()
     End Sub
@@ -134,15 +134,15 @@ Public Class dlgUnstack
     Private Sub ucrIDColumns_SelectionChanged() Handles ucrIDColumns.SelectionChanged
         Dim lstColumns As List(Of String)
 
-        clsIDColumns.RemoveAllParameters()
+        clsIDColumns.ClearParameters()
         lstColumns = ucrIDColumns.GetVariableNamesAsList()
         For i = 0 To lstColumns.Count - 1
             If i = 0 Then
-                clsIDColumns.SetParameter(True, strValue:=lstColumns(i))
+                clsIDColumns.AddParameter(bSetFirst:=True, strParameterValue:=lstColumns(i))
             ElseIf i = 1 Then
-                clsIDColumns.SetParameter(False, strValue:=lstColumns(i))
+                clsIDColumns.AddParameter(bSetFirst:=False, strParameterValue:=lstColumns(i))
             Else
-                clsIDColumns.AddAdditionalParameter("X" & i, lstColumns(i))
+                clsIDColumns.AddParameter("X" & i, lstColumns(i))
             End If
         Next
         TestOKEnabled()
