@@ -56,17 +56,17 @@ Public Class sdgVariableTransformations
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
         If strFunctionName = "power" Then
             If strPower <> "1" Then
-                'clsRModel.SetParameter(False, strValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
+                'clsRModel.AddParameter(False, strParameterValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetOperation("^")
                 clsModel0.bBrackets = False
-                clsModel0.SetParameter(True, strValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
-                clsModel0.SetParameter(False, strValue:=strPower)
-                clsRModel.SetParameter(choice, clsOp:=clsModel0.Clone())
+                clsModel0.AddParameter(bSetFirst:=True, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
+                clsModel0.AddParameter(bSetFirst:=False, strParameterValue:=strPower)
+                clsRModel.AddParameter(bSetFirst:=choice, clsROperatorParameter:=clsModel0.Clone())
             End If
         Else
             clsRToFunction.SetRCommand(strFunctionName)
             clsRToFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
-            clsRModel.SetParameter(choice, clsRFunc:=clsRToFunction.Clone())
+            clsRModel.AddParameter(bSetFirst:=choice, clsRFunctionParameter:=clsRToFunction.Clone())
         End If
     End Sub
 

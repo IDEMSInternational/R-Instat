@@ -171,10 +171,10 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBarPlotGeom.AddParameter("stat", Chr(34) & "identity" & Chr(34))
         clsRBarPlotFacet.SetRCommand("facet_wrap")
         clsRBarPlotFacet.AddParameter("", "~Var2")
-        clsRBarPlot0.SetParameter(True, clsRFunc:=clsRBarPlotFunction)
-        clsRBarPlot0.SetParameter(False, clsRFunc:=clsRBarPlotGeom)
-        clsRBarPlot.SetParameter(True, clsOp:=clsRBarPlot0)
-        clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
+        clsRBarPlot0.AddParameter(bSetFirst:=True, clsRFunctionParameter:=clsRBarPlotFunction)
+        clsRBarPlot0.AddParameter(bSetFirst:=False, clsRFunctionParameter:=clsRBarPlotGeom)
+        clsRBarPlot.AddParameter(bSetFirst:=True, clsROperatorParameter:=clsRBarPlot0)
+        clsRBarPlot.AddParameter(bSetFirst:=False, clsRFunctionParameter:=clsRBarPlotFacet)
     End Sub
 
     Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs)

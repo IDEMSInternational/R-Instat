@@ -36,6 +36,7 @@ Public Class RCodeStructure
     Public bAssignToIsPrefix As Boolean = False
     Public bAssignToColumnWithoutNames As Boolean = False
     Public bInsertColumnBefore As Boolean = False
+    Public clsParameters As New List(Of RParameter)
 
     Public Event ParametersChanged()
 
@@ -179,6 +180,75 @@ Public Class RCodeStructure
 
     Public Overridable Function GetParameter(strName As String) As RParameter
         Return New RParameter
+    End Function
+
+    Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional bSetFirst As Boolean = False)
+        If clsParam Is Nothing Then
+            clsParam = New RParameter
+            If strParameterName <> "" Then
+                If bSetFirst = True Then
+                    strParameterName = "Left"
+                Else
+                    strParameterName = "Parameter" & clsParameters.Count + 1
+                End If
+            End If
+            clsParam.SetArgumentName(strParameterName)
+            If Not strParameterValue = "" Then
+                clsParam.SetArgumentValue(strParameterValue)
+            ElseIf clsRFunctionParameter Is Nothing Then
+                clsParam.SetArgument(clsRFunctionParameter, bIsFunc:=True)
+            ElseIf clsROperatorParameter Is Nothing Then
+                clsParam.SetArgument(clsROperatorParameter, bIsOp:=True)
+            End If
+            clsParam.bIncludeArgumentName = bIncludeArgumentName
+        End If
+        AddParameter(clsParam, bSetFirst)
+    End Sub
+
+    Public Overridable Sub AddParameter(clsParam As RParameter, Optional bSetFirst As Boolean = False)
+        Dim i As Integer = -1
+        If clsParameters IsNot Nothing Then
+            If clsParam.strArgumentName IsNot Nothing Then
+                i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
+            End If
+        End If
+
+        If i = -1 Then
+            If bSetFirst Then
+                clsParameters(0) = clsParam
+            Else
+                clsParameters.Add(clsParam)
+            End If
+        ElseIf Not bSetFirst Then
+            If clsParam.strArgumentValue IsNot Nothing Then
+                clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
+            End If
+            If clsParam.clsArgument IsNot Nothing Then
+                clsParameters(i).SetArgument(clsParam.clsArgument, bIsFunc:=clsParam.bIsFunction, bIsOp:=clsParam.bIsOperator)
+            End If
+        Else
+            'Task: Question to be discussed: message ? or remove i and replace 0 ?
+        End If
+        bIsAssigned = False
+    End Sub
+    Public Overridable Sub RemoveParameterByName(strArgName)
+        Dim clsParam
+        If Not clsParameters Is Nothing Then
+            clsParam = clsParameters.Find(Function(x) x.strArgumentName = strArgName)
+            clsParameters.Remove(clsParam)
+        End If
+        bIsAssigned = False
+        OnParametersChanged()
+    End Sub
+
+    Public Overridable Sub ClearParameters()
+        clsParameters.Clear()
+        bIsAssigned = False
+    End Sub
+
+    Public Overridable Function Clone() As RCodeStructure
+        Dim clsTemp As New RCodeStructure
+        Return clsTemp
     End Function
 
 End Class

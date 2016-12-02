@@ -115,11 +115,11 @@ Public Class RSyntax
     End Function
 
     Public Sub SetOperatorParameter(bSetFirst As Boolean, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
-        clsBaseOperator.SetParameter(bSetFirst, strParameterName, strValue, clsParam, clsRFunc, clsOp, bIncludeArgumentName)
+        clsBaseOperator.AddParameter(strParameterName, strValue, clsRFunc, clsOp, bIncludeArgumentName, clsParam, bSetFirst)
     End Sub
 
     Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
-        clsBaseOperator.AddAdditionalParameter(strParameterName, strParameterValue, clsRFunc, clsOp, bIncludeArgumentName)
+        clsBaseOperator.AddParameter(strParameterName, strParameterValue, clsRFunc, clsOp, bIncludeArgumentName)
     End Sub
 
     Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
