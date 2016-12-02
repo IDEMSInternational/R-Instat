@@ -185,12 +185,12 @@ Public Class RCodeStructure
     Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional bSetFirst As Boolean = False)
         If clsParam Is Nothing Then
             clsParam = New RParameter
-            If strParameterName <> "" Then
+            If strParameterName = "" Then
+                bIncludeArgumentName = False
                 If bSetFirst = True Then
                     strParameterName = "Left"
                 Else
                     strParameterName = "Parameter" & clsParameters.Count + 1
-                    bIncludeArgumentName = False
                 End If
             End If
             clsParam.SetArgumentName(strParameterName)
@@ -210,25 +210,27 @@ Public Class RCodeStructure
         Dim i As Integer = -1
         If clsParameters IsNot Nothing Then
             If clsParam.strArgumentName IsNot Nothing Then
+                'Dim match As Predicate(Of RParameter) = Function(x) x.strArgumentName.Equals(clsParam.strArgumentName)
                 i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
             End If
-        End If
-
-        If i = -1 Then
-            If bSetFirst Then
-                clsParameters(0) = clsParam
+            If i = -1 Then
+                If bSetFirst AndAlso clsParameters.Count > 0 Then
+                    clsParameters(0) = clsParam
+                Else
+                    clsParameters.Add(clsParam)
+                End If
+            ElseIf Not bSetFirst Then
+                If clsParam.strArgumentValue IsNot Nothing Then
+                    clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
+                End If
+                If clsParam.clsArgument IsNot Nothing Then
+                    clsParameters(i).SetArgument(clsParam.clsArgument, bIsFunc:=clsParam.bIsFunction, bIsOp:=clsParam.bIsOperator)
+                End If
             Else
-                clsParameters.Add(clsParam)
-            End If
-        ElseIf Not bSetFirst Then
-            If clsParam.strArgumentValue IsNot Nothing Then
-                clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
-            End If
-            If clsParam.clsArgument IsNot Nothing Then
-                clsParameters(i).SetArgument(clsParam.clsArgument, bIsFunc:=clsParam.bIsFunction, bIsOp:=clsParam.bIsOperator)
+                'Task: Question to be discussed: message ? or remove i and replace 0 ?
             End If
         Else
-            'Task: Question to be discussed: message ? or remove i and replace 0 ?
+            'message
         End If
         bIsAssigned = False
     End Sub
