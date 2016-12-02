@@ -1531,7 +1531,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, polar = FALSE, ...) {
+data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
   if(!all(columns %in% self$get_column_names())) {
     stop("Not all columns found in the data")
   }
@@ -1544,7 +1544,12 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
   else {
     numeric_geom <- numeric
   }
-  cat_geom <- match.fun(categorical)
+  if(categorical %in% c("pie_chart")) {
+    cat_geom <- categorical
+  }
+  else {
+    cat_geom <- match.fun(categorical)
+  }
   curr_data <- self$get_data_frame()
   column_types <- c()
   for(col in columns) {
@@ -1558,11 +1563,11 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
   }
   if(output == "facets") {
-    column_types <- unique(column_types)
     if(length(column_types) > 1) {
       warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
       output <- "combine"
     }
+    else column_types <- unique(column_types)
   }
   if(output == "facets") {
     if(column_types == "numeric") {
@@ -1582,15 +1587,22 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value)) + ylab("")
-      if(curr_geom_name == "box_jitter") {
-        g <- g + geom_boxplot() + geom_jitter() 
-      }
-      else if(curr_geom_name == "violin_jitter") {
-        g <- g + geom_violin() + geom_jitter() 
-      }
-      else if(curr_geom_name == "violin_box") {
-        g <- g + geom_violin() + geom_boxplot() 
-      }
+    }
+    
+    if(curr_geom_name == "box_jitter") {
+      g <- g + geom_boxplot() + geom_jitter() 
+    }
+    else if(curr_geom_name == "violin_jitter") {
+      g <- g + geom_violin() + geom_jitter() 
+    }
+    else if(curr_geom_name == "violin_box") {
+      g <- g + geom_violin() + geom_boxplot() 
+    }
+    else if(curr_geom_name == "pie_chart") {
+      g <- g + geom_bar() + coord_polar(theta = "x")
+    }
+    else {
+      g <- g + curr_geom()
     }
 
     if(free_scale_axis) {
@@ -1600,9 +1612,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + facet_wrap(facets = ~ variable, scales = "free_x", ncol = ncol)
     }
     
-    if(polar) {
-      g <- g + coord_polar(theta = "x")
-    }
     return(g)    
   }
   else {
@@ -1637,9 +1646,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       }
       else {
         g <- g + curr_geom()
-      }
-      if(polar && column_types[i] == "cat") {
-        g <- g + coord_polar(theta = "x")
       }
       graphs[[i]] <- g
       i = i + 1

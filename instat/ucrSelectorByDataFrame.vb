@@ -14,8 +14,15 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrSelectorByDataFrame
     Public Event DataFrameChanged()
+    'These are defined here because ucrSelector is not a ucrCore but ucrDataFrame is
+    'Since only the data frame controls a parameter, ucrSelector is not a ucrCore
+    'So these are just ways to pass through events from ucrDataFrame
+    Public Event ControlValueChanged(ucrChangedControl As ucrCore)
+    Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
 
     Public Overrides Sub LoadList()
         If ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
@@ -69,4 +76,33 @@ Public Class ucrSelectorByDataFrame
             ucrAvailableDataFrames.bUseCurrentFilter = bValue
         End Set
     End Property
+
+    'These are just wrappers for accessing ucrAvailableDataFrames's methods from the selector
+    Public Sub UpdateControl(clsRCodeObject As RCodeStructure)
+        ucrAvailableDataFrames.UpdateControl(clsRCodeObject)
+    End Sub
+
+    Public Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+        ucrAvailableDataFrames.UpdateRCode(clsRFunction, clsROperator)
+    End Sub
+
+    Public Sub SetParameterIsString()
+        ucrAvailableDataFrames.SetParameterIsString()
+    End Sub
+
+    Public Sub SetParameterIsrfunction()
+        ucrAvailableDataFrames.SetParameterIsRFunction()
+    End Sub
+
+    Public Sub SetParameterName(strParamName As String)
+        ucrAvailableDataFrames.SetParameterName(strParamName)
+    End Sub
+
+    Private Sub ucrAvailableDataFrames_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrAvailableDataFrames.ControlContentsChanged
+        RaiseEvent ControlContentsChanged(ucrChangedControl)
+    End Sub
+
+    Private Sub ucrAvailableDataFrames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrAvailableDataFrames.ControlValueChanged
+        RaiseEvent ControlValueChanged(ucrChangedControl)
+    End Sub
 End Class

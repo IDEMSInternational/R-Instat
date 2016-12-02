@@ -133,10 +133,8 @@ Public Class ucrDistributions
         SetDistributions()
     End Sub
 
-    Private Sub SetDistributions()
-
+    Public Sub SetDistributions()
         Dim bUse As Boolean
-
         lstCurrentDistributions.Clear()
         cboDistributions.Items.Clear()
         For Each Dist In lstAllDistributions
@@ -151,7 +149,22 @@ Public Class ucrDistributions
                 Case "DFunctions"
                     bUse = (Dist.strDFunctionName <> "")
                 Case "ExactSolution"
-                    bUse = (Dist.strExactName <> "")
+                    If (Dist.strExactName <> "") Then
+                        Select Case strDataType
+                            Case "numeric"
+                                If Dist.bIntAndNumeric Then
+                                    bUse = True
+                                End If
+                            Case "positive integer" ' or integer
+                                If Dist.bPositiveInt Then
+                                    bUse = True
+                                End If
+                            Case "factor" ' or character
+                                If Dist.bTwoLevelFactor Then
+                                    bUse = True
+                                End If
+                        End Select
+                    End If
                 Case "GLMFunctions"
                     If (Dist.strGLMFunctionName <> "") Then
                         Select Case strDataType
@@ -224,6 +237,7 @@ Public Class ucrDistributions
         clsNormalDist.strGLMFunctionName = "gaussian"
         clsNormalDist.bNumeric = True
         clsNormalDist.bIsContinuous = True
+        clsNormalDist.bIntAndNumeric = True
         clsNormalDist.bIsExact = True
         clsNormalDist.strExactName = "norm"
         clsNormalDist.lstExact = {"mean", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
@@ -298,9 +312,10 @@ Public Class ucrDistributions
         clsBernouliDist.strQFunctionName = "qbinom"
         clsBernouliDist.strDFunctionName = "dbinom"
         clsBernouliDist.bIsContinuous = False
-        '        clsBernouliDist.bIsExact = True
-        '        clsBernouliDist.strExactName = "binom"
-        '        clsBernouliDist.lstExact = {"prob", "Difference in Proportions:", 0.5, 0.1, 2, 0, 1}
+        clsBernouliDist.bIsExact = True
+        clsBernouliDist.bTwoLevelFactor = True
+        clsBernouliDist.strExactName = "binom"
+        clsBernouliDist.lstExact = {"prob", "Probability:", 0.5, 0.1, 2, 0, 1}
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBernouliDist)
 
@@ -327,10 +342,11 @@ Public Class ucrDistributions
         clsPoissonDist.strDFunctionName = "dpois"
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
+        clsPoissonDist.bIntAndNumeric = True
         clsPoissonDist.bIsContinuous = False
-        '        clsPoissonDist.bIsExact = True
-        '        clsPoissonDist.strExactName = "pois"
-        '        clsPoissonDist.lstExact = {"r", "Rate Ratio:", 1, 1, 2, 0, Integer.MaxValue}
+        clsPoissonDist.bIsExact = True
+        clsPoissonDist.strExactName = "pois"
+        clsPoissonDist.lstExact = {"r", "Rate Ratio:", 1, 1, 2, 0, Integer.MaxValue}
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 
@@ -538,8 +554,6 @@ Public Class ucrDistributions
         'clsQuasipoissonDist.bIsContinuous = 
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)
-
-
         bDistributionsSet = True
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
@@ -557,6 +571,8 @@ Public Class ucrDistributions
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strQFunctionName)
                 Case "GLMFunctions"
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strGLMFunctionName)
+                Case "ExactSolution"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strExactName)
             End Select
         Else
             clsCurrRFunction = New RFunction
