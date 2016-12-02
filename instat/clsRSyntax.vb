@@ -22,6 +22,7 @@ Public Class RSyntax
     '- "ROperator", dealing with R-commands of the form: __+__, 
     '- or more generally a string.
     'See also RLink to understand how these commands, as RSyntax fields, are then communicated to, and run in R.
+    'Task: Adapt RSyntax to new style... 
     Public clsBaseFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Public clsBaseCommandString As New RCodeStructure

@@ -44,7 +44,7 @@ Public Class ROperator
             'message
         End If
 
-        For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 2)
+        For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
             'If bIncludeOperation Then
             strTemp = strTemp & Chr(32) & strOperation & Chr(32)
             'End If

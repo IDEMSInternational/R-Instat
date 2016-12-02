@@ -47,10 +47,8 @@ Public Class RParameter
         If strArgumentName <> "" AndAlso bIncludeArgumentName Then
             strRet = strArgumentName & "="
         End If
-        If bIsFunction Then
-            strRet = strRet & CType(clsArgument, RFunction).ToScript(strScript)
-        ElseIf bIsOperator Then
-            strRet = strRet & CType(clsArgument, ROperator).ToScript(strScript)
+        If bIsFunction OrElse bIsOperator Then
+            strRet = strRet & clsArgument.ToScript(strScript)
         ElseIf bIsString Then
             strRet = strRet & strArgumentValue
         ElseIf clsArgument IsNot Nothing Then
@@ -70,13 +68,7 @@ Public Class RParameter
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
         If clsArgument IsNot Nothing Then
-            If bIsFunction Then
-                clsTempRParam.clsArgument = CType(clsArgument, RFunction).Clone
-            ElseIf bIsOperator Then
-                clsTempRParam.clsArgument = CType(clsArgument, ROperator).Clone
-            Else
-                clsTempRParam.clsArgument = clsArgument.Clone
-            End If
+            clsTempRParam.clsArgument = clsArgument.Clone
         End If
         Return clsTempRParam
     End Function
