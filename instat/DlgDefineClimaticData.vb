@@ -34,6 +34,9 @@ Public Class DlgDefineClimaticData
         ucrReceiverMinTemp.Selector = ucrSelectorDefineClimaticData
         ucrReceiverSunshine.Selector = ucrSelectorDefineClimaticData
         ucrReceiverWind.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverCloudCover.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverRadiation.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverWindDirection.Selector = ucrSelectorDefineClimaticData
 
     End Sub
 
@@ -55,11 +58,15 @@ Public Class DlgDefineClimaticData
         SetDefaults()
     End Sub
 
-    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged, ucrReceiverMaxTemp.SelectionChanged, ucrReceiverMinTemp.SelectionChanged, ucrReceiverRain.SelectionChanged, ucrReceiverSunshine.SelectionChanged, ucrReceiverWind.SelectionChanged
+    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs)
         TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorDefineClimaticData_DataFrameChanged() Handles ucrSelectorDefineClimaticData.DataFrameChanged
+
+    End Sub
+
+    Private Sub grpClimaticType_Enter(sender As Object, e As EventArgs) Handles grpClimaticType.Enter
 
     End Sub
 End Class
