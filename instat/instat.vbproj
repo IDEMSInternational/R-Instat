@@ -189,6 +189,12 @@
     <Compile Include="dlgEnter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportToCPT.Designer.vb">
+      <DependentUpon>dlgExportToCPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToCPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToOpenRefine.Designer.vb">
       <DependentUpon>dlgExportToOpenRefine.vb</DependentUpon>
     </Compile>
@@ -2260,6 +2266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToCPT.resx">
+      <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToOpenRefine.resx">
       <DependentUpon>dlgExportToOpenRefine.vb</DependentUpon>
