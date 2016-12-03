@@ -40,7 +40,7 @@ Public Class dlgOpenSST
         bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
-        ucrInputName.bAutoChangeOnLeave = True
+        ucrInputNameWide.bAutoChangeOnLeave = True
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -60,9 +60,10 @@ Public Class dlgOpenSST
 
     Private Sub InitialiseDialog()
         ucrBaseOpenSST.iHelpTopicID = 102
-        ucrInputName.SetValidationTypeAsRVariable()
-        ucrInputName2.SetValidationTypeAsRVariable()
-        ucrInputName2.SetName("lat_lon_data")
+        ucrInputNameWide.SetValidationTypeAsRVariable()
+        ucrInputNameLocation.SetValidationTypeAsRVariable()
+        ucrInputNameLocation.SetName("lat_lon_data")
+        ucrInputNameStacked.SetName("stacked_SST")
         'temp disabled until can easily switch between fread and read.csv
         'disabled until issue is resolved: http://stackoverflow.com/questions/37635541/rio-r-package-can-i-import-a-csv-file-with-non-comma-separator
         ucrInputSeparator.Enabled = False
@@ -77,8 +78,8 @@ Public Class dlgOpenSST
     End Sub
 
 #Region "Shared options"
-    Private Sub ucrInputDataName_NameChanged() Handles ucrInputName.NameChanged, ucrInputName2.NameChanged
-        ucrBaseOpenSST.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputName.GetText() & Chr(34) & "," & Chr(34) & ucrInputName2.GetText() & Chr(34) & ")")
+    Private Sub ucrInputDataName_NameChanged() Handles ucrInputNameWide.NameChanged, ucrInputNameLocation.NameChanged, ucrInputNameStacked.NameChanged
+        ucrBaseOpenSST.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputNameStacked.GetText() & Chr(34) & "," & Chr(34) & ucrInputNameWide.GetText() & Chr(34) & "," & Chr(34) & ucrInputNameLocation.GetText() & Chr(34) & ")")
     End Sub
 
 #End Region
@@ -113,23 +114,23 @@ Public Class dlgOpenSST
             End If
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
-                ucrInputName.SetName("")
-                ucrInputName.Reset()
+                ucrInputNameWide.SetName("")
+                ucrInputNameWide.Reset()
                 'checks if the file name is not blank'
                 If dlgOpen.FileName <> "" Then
                     strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
                     strFilePath = Replace(dlgOpen.FileName, "\", "/")
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(strFilePath)
-                    ucrInputName.Show()
-                    lblSSTName.Show()
+                    ucrInputNameWide.Show()
+                    lblSSTNameWide.Show()
                     If strFileExt = ".csv" Then
                         clsReadFile.SetRCommand("rio::import")
                         clsReadFile.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                         grpCSV.Show()
                         strFileType = "csv"
-                        ucrInputName.SetName(strFileName, bSilent:=True)
-                        ucrInputName.Focus()
+                        ucrInputNameWide.SetName(strFileName, bSilent:=True)
+                        ucrInputNameWide.Focus()
                         clsReadFile.RemoveParameterByName("fread")
                         clsReadFile.RemoveParameterByName("fill")
                     End If
@@ -139,8 +140,8 @@ Public Class dlgOpenSST
                         clsReadFile.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                         grpCSV.Show()
                         strFileType = "tsv"
-                        ucrInputName.SetName(strFileName, bSilent:=True)
-                        ucrInputName.Focus()
+                        ucrInputNameWide.SetName(strFileName, bSilent:=True)
+                        ucrInputNameWide.Focus()
                         clsReadFile.AddParameter("fread", "FALSE")
                         clsReadFile.AddParameter("fill", "TRUE")
                     End If
@@ -149,8 +150,8 @@ Public Class dlgOpenSST
                         clsReadFile.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                         grpCSV.Show()
                         strFileType = "txt"
-                        ucrInputName.SetName(strFileName, bSilent:=True)
-                        ucrInputName.Focus()
+                        ucrInputNameWide.SetName(strFileName, bSilent:=True)
+                        ucrInputNameWide.Focus()
                         clsReadFile.AddParameter("fread", "FALSE")
                         clsReadFile.AddParameter("fill", "TRUE")
                     End If

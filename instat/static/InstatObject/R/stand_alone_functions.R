@@ -132,7 +132,7 @@ convert_SST <- function(datafile, data_from = 5){
   
   my_data = as.data.frame(matrix(NA, nrow = length(duration), ncol = (length(lat)*length(lon)+1)))
   my_data[,1] = get_years_from_data(datafile)
-  names(my_data) <- c("Period", as.character(lat_lon_df$column_names))
+  names(my_data) <- c("period", as.character(lat_lon_df$station))
   v=1
   for (k in duration){
     nam <- k #paste("year", start_year + k-1, sep = "_")
@@ -152,7 +152,10 @@ convert_SST <- function(datafile, data_from = 5){
     my_data[v,2:ncol(my_data)] = g
     v=v+1
   }
-  return(list(my_data, lat_lon_df))
+  my_data_stacked <- melt(data=my_data, id.vars="period", value.name="value", measure.vars=as.character(lat_lon_df$station))
+  names(my_data_stacked) = c("period", "station","sst_value")
+  
+  return(list(my_data_stacked, my_data, lat_lon_df))
 }
 
 get_years_from_data <- function(datafile){
@@ -174,9 +177,9 @@ lat_lon_dataframe <- function(datafile){
   lon = rep(longitude, length(latitude))
   lat_lon = as.data.frame(cbind(lat, lon))
   
-  column_names<-c()
+  station <- c()
   for (j in 1:nrow(lat_lon)){
-    column_names = append(column_names, paste(paste("lat", lat_lon[j,1], sep = ""), paste("lon", lat_lon[j,2], sep = ""), sep = "_"))
+    station = append(station, paste(paste("lat", lat_lon[j,1], sep = ""), paste("lon", lat_lon[j,2], sep = ""), sep = "_"))
   }
-  return(cbind(lat_lon,column_names))
+  return(cbind(lat_lon,station))
 }

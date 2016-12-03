@@ -1039,7 +1039,9 @@ instat_object$set("public","split_date", function(data_name, col_name = "", year
 
 instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_names = c()) {
   data_list <- convert_SST(dataset, data_from)
+  if(length(data_list)!=length(data_names))stop("data_names vector should be of length 3")
   names(data_list) = data_names
   self$import_data(data_tables = data_list)
+  self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[3], link_pairs = c(station = "station"), type = keyed_link_label)
 }
 )
