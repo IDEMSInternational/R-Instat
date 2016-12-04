@@ -155,11 +155,12 @@ convert_SST <- function(datafile, data_from = 5){
   my_data_stacked <- melt(data=my_data, id.vars="period", value.name="value", measure.vars=as.character(lat_lon_df$station))
   names(my_data_stacked) = c("period", "station","sst_value")
   
-  return(list(my_data_stacked, my_data, lat_lon_df))
+  return(list(my_data_stacked, lat_lon_df))
+  #return(list(my_data_stacked, my_data, lat_lon_df))
 }
 
 get_years_from_data <- function(datafile){
-  return(na.omit(t(unique(datafile[3,2:ncol(datafile)])))) #will apply order
+  return(na.omit(t(unique(datafile[3,2:ncol(datafile)]))))
 }
 
 get_lat_from_data <- function(datafile){
