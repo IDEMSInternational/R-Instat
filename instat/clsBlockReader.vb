@@ -78,7 +78,8 @@ Public Class BlockReader
             Return Nothing
         End If
 
-        'First if string is (...), eleminate external brackets.
+        'First the string is formatted, removing spaces, if string is (...), eleminate external brackets.
+        RemoveExtremitySpaces(strRCommand)
         RemoveExtremityBrackets(strRCommand)
         'Also the command is split in case there is something being assigned. Unnecessary spaces are eliminated.
         lstAssignToCheck = SplitSmart(strRCommand, "<-")
@@ -91,7 +92,7 @@ Public Class BlockReader
         Else
             'message
         End If
-        RemoveExtremitySpaces(strRCommand)
+
 
         'This identifies if the RCommand is an RFunction or ROperator, set's the RCommand, edits strRCommand if RFunction case, and returns the relevant separator for arguments
         chrSeparator = IdentifyCommand(strRCommand, clsReturnRParameter)
@@ -121,10 +122,10 @@ Public Class BlockReader
     End Sub
 
     Private Sub RemoveExtremityBrackets(ByRef strToTrim As String)
-        If strToTrim.StartsWith("(") AndAlso (FindMatchingBracket(strToTrim, 0) = strToTrim.Length - 1) Then
+        While (strToTrim.StartsWith("(") AndAlso (FindMatchingBracket(strToTrim, 0) = strToTrim.Length - 1))
             strToTrim.Remove(0, 1)
             strToTrim.Remove(strToTrim.Length - 1)
-        End If
+        End While
     End Sub
 
     Private Function SplitSmart(strToSplit As String, strSeparator As String) As List(Of String)
@@ -165,6 +166,13 @@ Public Class BlockReader
             lstReturn.Add(strToSplit)
         End If
 
+        'Format the output strings
+        For iIndex As Integer = 0 To lstReturn.Count - 1
+            RemoveExtremitySpaces(lstReturn(iIndex))
+            RemoveExtremityBrackets(lstReturn(iIndex))
+            RemoveExtremitySpaces(lstReturn(iIndex))
+        Next
+
         Return lstReturn
     End Function
     Private Function FindMatchingBracket(strToRead As String, iIndex As Integer) As Integer
@@ -196,7 +204,12 @@ Public Class BlockReader
         Dim chrCandidateOperator As Char
         Dim iIndexOfMatchingBracket As Integer
         Dim lstListOfIdentifiers As Char() = {"(", "+", ":", "-", "*", "/", "|"} 'Might need to deal with "$" one day...
-        'Finding the first 
+
+        'First make sure string is in right format.
+        RemoveExtremitySpaces(strRCommand)
+        RemoveExtremityBrackets(strRCommand)
+        RemoveExtremitySpaces(strRCommand)
+
         iIndexOfIdentifier = strRCommand.IndexOfAny(lstListOfIdentifiers)
         If iIndexOfIdentifier <> -1 Then
             If strRCommand(iIndexOfIdentifier) = "(" Then
@@ -206,6 +219,7 @@ Public Class BlockReader
                     clsRFunction.SetRCommand(strRCommand.Substring(0, iIndexOfIdentifier - 1))
                     'The whole strRCommand is replaced by the string giving the parameters of the RFunction.
                     strRCommand = strRCommand.Substring(iIndexOfIdentifier + 1, strRCommand.Length - 2)
+                    RemoveExtremitySpaces(strRCommand)
                     clsRParameter.SetArgumentFunction(clsRFunction) 'later SetArgument(clsRFunction, bIsFunction = TRUE) or something like that.
                     Return ","
                 ElseIf Not lstListOfIdentifiers.Contains(chrCandidateOperator) Then
@@ -226,6 +240,11 @@ Public Class BlockReader
 
         Dim lstRPNameAndValue As List(Of String)
         Dim clsNewRParameter As RParameter
+
+        'First make sure string is in right format.
+        RemoveExtremitySpaces(strRParameter)
+        RemoveExtremityBrackets(strRParameter)
+        RemoveExtremitySpaces(strRParameter)
 
         lstRPNameAndValue = SplitSmart(strRParameter, "=")
         'Have an overridable sub AddParameter in RCodeStructure... bIncludeParam name would be ignored when in operator case for instance.
