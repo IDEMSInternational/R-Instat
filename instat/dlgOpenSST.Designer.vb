@@ -24,7 +24,7 @@ Partial Class dlgOpenSST
     Private Sub InitializeComponent()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
-        Me.lblSSTNameWide = New System.Windows.Forms.Label()
+        Me.lblSSTName = New System.Windows.Forms.Label()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
         Me.ucrInputNAStrings = New instat.ucrInputTextBox()
         Me.ucrInputDecimal = New instat.ucrInputComboBox()
@@ -40,12 +40,10 @@ Partial Class dlgOpenSST
         Me.nudDataFrom = New System.Windows.Forms.NumericUpDown()
         Me.lblDataFromRow = New System.Windows.Forms.Label()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrInputNameWide = New instat.ucrInputTextBox()
+        Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBaseOpenSST = New instat.ucrButtons()
         Me.lblLocationName = New System.Windows.Forms.Label()
         Me.ucrInputNameLocation = New instat.ucrInputTextBox()
-        Me.ucrInputNameStacked = New instat.ucrInputTextBox()
-        Me.lblSSTNameStacked = New System.Windows.Forms.Label()
         Me.grpCSV.SuspendLayout()
         CType(Me.nudSkip, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDataFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,15 +68,15 @@ Partial Class dlgOpenSST
         Me.lblFileOpenPath.TabIndex = 0
         Me.lblFileOpenPath.Text = "File:"
         '
-        'lblSSTNameWide
+        'lblSSTName
         '
-        Me.lblSSTNameWide.AutoSize = True
-        Me.lblSSTNameWide.Location = New System.Drawing.Point(10, 48)
-        Me.lblSSTNameWide.Name = "lblSSTNameWide"
-        Me.lblSSTNameWide.Size = New System.Drawing.Size(142, 13)
-        Me.lblSSTNameWide.TabIndex = 3
-        Me.lblSSTNameWide.Tag = "Wide_SST_Dataframe_Name:"
-        Me.lblSSTNameWide.Text = "Wide SST Dataframe Name:"
+        Me.lblSSTName.AutoSize = True
+        Me.lblSSTName.Location = New System.Drawing.Point(10, 48)
+        Me.lblSSTName.Name = "lblSSTName"
+        Me.lblSSTName.Size = New System.Drawing.Size(114, 13)
+        Me.lblSSTName.TabIndex = 3
+        Me.lblSSTName.Tag = "SST_Dataframe_Name:"
+        Me.lblSSTName.Text = "SST Dataframe Name:"
         '
         'grpCSV
         '
@@ -95,7 +93,7 @@ Partial Class dlgOpenSST
         Me.grpCSV.Controls.Add(Me.lblDecimal)
         Me.grpCSV.Controls.Add(Me.lblNAStrings)
         Me.grpCSV.Controls.Add(Me.chkStringsAsFactors)
-        Me.grpCSV.Location = New System.Drawing.Point(13, 154)
+        Me.grpCSV.Location = New System.Drawing.Point(13, 132)
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.Size = New System.Drawing.Size(261, 195)
         Me.grpCSV.TabIndex = 11
@@ -204,7 +202,7 @@ Partial Class dlgOpenSST
         '
         'nudDataFrom
         '
-        Me.nudDataFrom.Location = New System.Drawing.Point(131, 128)
+        Me.nudDataFrom.Location = New System.Drawing.Point(131, 106)
         Me.nudDataFrom.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudDataFrom.Name = "nudDataFrom"
         Me.nudDataFrom.Size = New System.Drawing.Size(59, 20)
@@ -214,7 +212,7 @@ Partial Class dlgOpenSST
         'lblDataFromRow
         '
         Me.lblDataFromRow.AutoSize = True
-        Me.lblDataFromRow.Location = New System.Drawing.Point(10, 132)
+        Me.lblDataFromRow.Location = New System.Drawing.Point(10, 110)
         Me.lblDataFromRow.Name = "lblDataFromRow"
         Me.lblDataFromRow.Size = New System.Drawing.Size(84, 13)
         Me.lblDataFromRow.TabIndex = 9
@@ -229,17 +227,17 @@ Partial Class dlgOpenSST
         Me.ucrInputFilePath.Size = New System.Drawing.Size(161, 21)
         Me.ucrInputFilePath.TabIndex = 1
         '
-        'ucrInputNameWide
+        'ucrInputName
         '
-        Me.ucrInputNameWide.IsReadOnly = False
-        Me.ucrInputNameWide.Location = New System.Drawing.Point(159, 44)
-        Me.ucrInputNameWide.Name = "ucrInputNameWide"
-        Me.ucrInputNameWide.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputNameWide.TabIndex = 4
+        Me.ucrInputName.IsReadOnly = False
+        Me.ucrInputName.Location = New System.Drawing.Point(138, 44)
+        Me.ucrInputName.Name = "ucrInputName"
+        Me.ucrInputName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputName.TabIndex = 4
         '
         'ucrBaseOpenSST
         '
-        Me.ucrBaseOpenSST.Location = New System.Drawing.Point(12, 355)
+        Me.ucrBaseOpenSST.Location = New System.Drawing.Point(12, 333)
         Me.ucrBaseOpenSST.Name = "ucrBaseOpenSST"
         Me.ucrBaseOpenSST.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseOpenSST.TabIndex = 12
@@ -247,7 +245,7 @@ Partial Class dlgOpenSST
         'lblLocationName
         '
         Me.lblLocationName.AutoSize = True
-        Me.lblLocationName.Location = New System.Drawing.Point(10, 103)
+        Me.lblLocationName.Location = New System.Drawing.Point(10, 81)
         Me.lblLocationName.Name = "lblLocationName"
         Me.lblLocationName.Size = New System.Drawing.Size(134, 13)
         Me.lblLocationName.TabIndex = 7
@@ -257,46 +255,26 @@ Partial Class dlgOpenSST
         'ucrInputNameLocation
         '
         Me.ucrInputNameLocation.IsReadOnly = False
-        Me.ucrInputNameLocation.Location = New System.Drawing.Point(154, 98)
+        Me.ucrInputNameLocation.Location = New System.Drawing.Point(154, 76)
         Me.ucrInputNameLocation.Name = "ucrInputNameLocation"
         Me.ucrInputNameLocation.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputNameLocation.TabIndex = 8
-        '
-        'ucrInputNameStacked
-        '
-        Me.ucrInputNameStacked.IsReadOnly = False
-        Me.ucrInputNameStacked.Location = New System.Drawing.Point(173, 74)
-        Me.ucrInputNameStacked.Name = "ucrInputNameStacked"
-        Me.ucrInputNameStacked.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputNameStacked.TabIndex = 6
-        '
-        'lblSSTNameStacked
-        '
-        Me.lblSSTNameStacked.AutoSize = True
-        Me.lblSSTNameStacked.Location = New System.Drawing.Point(9, 78)
-        Me.lblSSTNameStacked.Name = "lblSSTNameStacked"
-        Me.lblSSTNameStacked.Size = New System.Drawing.Size(157, 13)
-        Me.lblSSTNameStacked.TabIndex = 5
-        Me.lblSSTNameStacked.Tag = "Stacked_SST_Dataframe_Name:"
-        Me.lblSSTNameStacked.Text = "Stacked SST Dataframe Name:"
         '
         'dlgOpenSST
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 410)
-        Me.Controls.Add(Me.ucrInputNameStacked)
-        Me.Controls.Add(Me.lblSSTNameStacked)
+        Me.ClientSize = New System.Drawing.Size(428, 388)
         Me.Controls.Add(Me.ucrInputNameLocation)
         Me.Controls.Add(Me.lblLocationName)
         Me.Controls.Add(Me.nudDataFrom)
         Me.Controls.Add(Me.lblDataFromRow)
         Me.Controls.Add(Me.grpCSV)
         Me.Controls.Add(Me.ucrInputFilePath)
-        Me.Controls.Add(Me.ucrInputNameWide)
+        Me.Controls.Add(Me.ucrInputName)
         Me.Controls.Add(Me.cmdOpenDataSet)
         Me.Controls.Add(Me.lblFileOpenPath)
-        Me.Controls.Add(Me.lblSSTNameWide)
+        Me.Controls.Add(Me.lblSSTName)
         Me.Controls.Add(Me.ucrBaseOpenSST)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -316,10 +294,10 @@ Partial Class dlgOpenSST
 
     Friend WithEvents ucrBaseOpenSST As ucrButtons
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
-    Friend WithEvents ucrInputNameWide As ucrInputTextBox
+    Friend WithEvents ucrInputName As ucrInputTextBox
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents lblFileOpenPath As Label
-    Friend WithEvents lblSSTNameWide As Label
+    Friend WithEvents lblSSTName As Label
     Friend WithEvents grpCSV As GroupBox
     Friend WithEvents ucrInputNAStrings As ucrInputTextBox
     Friend WithEvents ucrInputDecimal As ucrInputComboBox
@@ -336,6 +314,4 @@ Partial Class dlgOpenSST
     Friend WithEvents lblDataFromRow As Label
     Friend WithEvents lblLocationName As Label
     Friend WithEvents ucrInputNameLocation As ucrInputTextBox
-    Friend WithEvents ucrInputNameStacked As ucrInputTextBox
-    Friend WithEvents lblSSTNameStacked As Label
 End Class
