@@ -197,9 +197,9 @@ Public Class RCodeStructure
             If Not strParameterValue = "" Then
                 clsParam.SetArgumentValue(strParameterValue)
             ElseIf clsRFunctionParameter IsNot Nothing Then
-                clsParam.SetArgument(clsRFunctionParameter, bIsFunc:=True)
+                clsParam.SetArgument(clsRFunctionParameter)
             ElseIf clsROperatorParameter IsNot Nothing Then
-                clsParam.SetArgument(clsROperatorParameter, bIsOp:=True)
+                clsParam.SetArgument(clsROperatorParameter)
             End If
             clsParam.bIncludeArgumentName = bIncludeArgumentName
         End If
@@ -224,7 +224,7 @@ Public Class RCodeStructure
                     clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
                 End If
                 If clsParam.clsArgument IsNot Nothing Then
-                    clsParameters(i).SetArgument(clsParam.clsArgument, bIsFunc:=clsParam.bIsFunction, bIsOp:=clsParam.bIsOperator)
+                    clsParameters(i).SetArgument(clsParam.clsArgument)
                 End If
             Else
                 'Task: Question to be discussed: message ? or remove i and replace 0 ?
