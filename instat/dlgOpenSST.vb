@@ -78,7 +78,6 @@ Public Class dlgOpenSST
 
 #Region "Shared options"
     Private Sub ucrInputDataName_NameChanged() Handles ucrInputName.NameChanged, ucrInputNameLocation.NameChanged
-        'ucrBaseOpenSST.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputNameStacked.GetText() & Chr(34) & "," & Chr(34) & ucrInputNameWide.GetText() & Chr(34) & "," & Chr(34) & ucrInputNameLocation.GetText() & Chr(34) & ")")
         ucrBaseOpenSST.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputName.GetText() & Chr(34) & "," & Chr(34) & ucrInputNameLocation.GetText() & Chr(34) & ")")
     End Sub
 
@@ -254,5 +253,4 @@ Public Class dlgOpenSST
     End Sub
 
 #End Region
-
 End Class

@@ -125,17 +125,13 @@ convert_SST <- function(datafile, data_from = 5){
   start_year <-get_years_from_data(datafile)[1]
   end_year <-get_years_from_data(datafile)[length(get_years_from_data(datafile))]
   duration =get_years_from_data(datafile)
-
   lon = get_lon_from_data(datafile)
   lat = get_lat_from_data(datafile)
   lat_lon_df = lat_lon_dataframe(datafile)
+  period = rep(get_years_from_data(datafile), each = (length(lat)*length(lon)))
+  SST_value = c()
   
-  my_data = as.data.frame(matrix(NA, nrow = length(duration), ncol = (length(lat)*length(lon)+1)))
-  my_data[,1] = get_years_from_data(datafile)
-  names(my_data) <- c("period", as.character(lat_lon_df$station))
-  v=1
   for (k in duration){
-    nam <- k #paste("year", start_year + k-1, sep = "_")
     year <-matrix(NA, nrow = length(lat), ncol = length(lon))
     for (i in 1:length(lat)){
       for (j in 1:length(lon)){
@@ -149,14 +145,10 @@ convert_SST <- function(datafile, data_from = 5){
     year=stack(year)
     data_from = data_from+length(lat)+2
     g=as.numeric(year$values)
-    my_data[v,2:ncol(my_data)] = g
-    v=v+1
+    SST_value = append(SST_value, g)
   }
-  my_data_stacked <- melt(data=my_data, id.vars="period", value.name="value", measure.vars=as.character(lat_lon_df$station))
-  names(my_data_stacked) = c("period", "station","sst_value")
-  
-  return(list(my_data_stacked, lat_lon_df))
-  #return(list(my_data_stacked, my_data, lat_lon_df))
+  my_data = cbind(period, lat_lon_df, SST_value)
+  return(list(my_data, lat_lon_df))
 }
 
 get_years_from_data <- function(datafile){
@@ -168,7 +160,7 @@ get_lat_from_data <- function(datafile){
 }
 
 get_lon_from_data <- function(datafile){
-  return(as.numeric(na.omit(t(unique(datafile[5,2:ncol(datafile)])))))
+  return(na.omit(as.numeric(unique(t(datafile[5,2:ncol(datafile)])))))
 }
 
 lat_lon_dataframe <- function(datafile){
@@ -177,10 +169,15 @@ lat_lon_dataframe <- function(datafile){
   lat = rep(latitude, each = length(longitude))
   lon = rep(longitude, length(latitude))
   lat_lon = as.data.frame(cbind(lat, lon))
-  
   station <- c()
   for (j in 1:nrow(lat_lon)){
-    station = append(station, paste(paste("lat", lat_lon[j,1], sep = ""), paste("lon", lat_lon[j,2], sep = ""), sep = "_"))
+    if(lat_lon[j,1]>=0){
+      station = append(station, paste(paste("latN", lat_lon[j,1], sep = ""), paste("lon", lat_lon[j,2], sep = ""), sep = "_"))
+    }
+    else{
+      station = append(station, paste(paste("latS", abs(lat_lon[j,1]), sep = ""), paste("lon", lat_lon[j,2], sep = ""), sep = "_"))
+    }
+    
   }
   return(cbind(lat_lon,station))
 }
