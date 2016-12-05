@@ -144,6 +144,7 @@ Public Class ucrGeom
         'Warning: the colour type of parameter is not working quite right. Problems with pick colour and some of the available colours such as ff0000a0 and ff400040 are not recognised in R.
         'Warning/Task: need a new type of parameter: units, or perhaps function, in order to be able to specify units(value, unit) or for the position: position_dodge(width = value)... !!!
         'Warning: some parameters are incompatible such as position and nudge_x/nudge_y in geom_text, geom_label... need to introduce method for these...
+        'Question/Task: Using aes mapping such as ..count.. or ..density.. in bar and histogram for instance. To be investigated...
 
         clsgeom_abline.SetGeomName("geom_abline") 'Warning: this geom never inherits global aesthetics ! It also doesn't affect the x and y scales. Can specify yintercept either with aes, or with parameter (second one overwrites). If want to vary with facets, need to mention as aes.
         'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
@@ -194,7 +195,7 @@ Public Class ucrGeom
 
         clsgeom_bar.SetGeomName("geom_bar")
         'Mandatory Aesthetics
-        clsgeom_bar.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_bar.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
         'All datatypes work as x aesthetics although the most common one is factor.
         'Warning: the group aesthetic could be added, doesn't send errors, but using group doesn't work very well. Histograms have been designed to deal with continuous x and grouping (using stat_bin). Group is not mentioned as an available aesthetic in the documentation.
 
