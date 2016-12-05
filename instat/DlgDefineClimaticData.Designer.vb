@@ -24,6 +24,14 @@ Partial Class DlgDefineClimaticData
     Private Sub InitializeComponent()
         Me.grpClimaticType = New System.Windows.Forms.GroupBox()
         Me.panClimateType = New System.Windows.Forms.Panel()
+        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
+        Me.lblDay = New System.Windows.Forms.Label()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.lblMonth = New System.Windows.Forms.Label()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverRain = New instat.ucrReceiverSingle()
         Me.ucrReceiverMaxTemp = New instat.ucrReceiverSingle()
@@ -53,7 +61,7 @@ Partial Class DlgDefineClimaticData
         Me.grpClimaticType.Controls.Add(Me.panClimateType)
         Me.grpClimaticType.Location = New System.Drawing.Point(237, 9)
         Me.grpClimaticType.Name = "grpClimaticType"
-        Me.grpClimaticType.Size = New System.Drawing.Size(175, 180)
+        Me.grpClimaticType.Size = New System.Drawing.Size(187, 306)
         Me.grpClimaticType.TabIndex = 39
         Me.grpClimaticType.TabStop = False
         Me.grpClimaticType.Text = "Climatic Type"
@@ -61,6 +69,14 @@ Partial Class DlgDefineClimaticData
         'panClimateType
         '
         Me.panClimateType.AutoScroll = True
+        Me.panClimateType.Controls.Add(Me.ucrReceiverDay)
+        Me.panClimateType.Controls.Add(Me.lblDay)
+        Me.panClimateType.Controls.Add(Me.ucrReceiverMonth)
+        Me.panClimateType.Controls.Add(Me.lblMonth)
+        Me.panClimateType.Controls.Add(Me.ucrReceiverYear)
+        Me.panClimateType.Controls.Add(Me.lblYear)
+        Me.panClimateType.Controls.Add(Me.ucrReceiverStation)
+        Me.panClimateType.Controls.Add(Me.lblStation)
         Me.panClimateType.Controls.Add(Me.ucrReceiverDate)
         Me.panClimateType.Controls.Add(Me.ucrReceiverRain)
         Me.panClimateType.Controls.Add(Me.ucrReceiverMaxTemp)
@@ -79,14 +95,86 @@ Partial Class DlgDefineClimaticData
         Me.panClimateType.Controls.Add(Me.lblMinTemp)
         Me.panClimateType.Controls.Add(Me.lblMaxTemp)
         Me.panClimateType.Controls.Add(Me.lblDate)
-        Me.panClimateType.Location = New System.Drawing.Point(7, 19)
+        Me.panClimateType.Location = New System.Drawing.Point(8, 13)
         Me.panClimateType.Name = "panClimateType"
-        Me.panClimateType.Size = New System.Drawing.Size(157, 150)
+        Me.panClimateType.Size = New System.Drawing.Size(172, 272)
         Me.panClimateType.TabIndex = 39
+        '
+        'ucrReceiverDay
+        '
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(14, 543)
+        Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDay.Name = "ucrReceiverDay"
+        Me.ucrReceiverDay.Selector = Nothing
+        Me.ucrReceiverDay.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDay.TabIndex = 58
+        '
+        'lblDay
+        '
+        Me.lblDay.AutoSize = True
+        Me.lblDay.Location = New System.Drawing.Point(14, 525)
+        Me.lblDay.Name = "lblDay"
+        Me.lblDay.Size = New System.Drawing.Size(29, 13)
+        Me.lblDay.TabIndex = 57
+        Me.lblDay.Text = "Day:"
+        '
+        'ucrReceiverMonth
+        '
+        Me.ucrReceiverMonth.Location = New System.Drawing.Point(14, 500)
+        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMonth.TabIndex = 56
+        '
+        'lblMonth
+        '
+        Me.lblMonth.AutoSize = True
+        Me.lblMonth.Location = New System.Drawing.Point(14, 482)
+        Me.lblMonth.Name = "lblMonth"
+        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
+        Me.lblMonth.TabIndex = 55
+        Me.lblMonth.Text = "Month:"
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(14, 457)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYear.TabIndex = 54
+        '
+        'lblYear
+        '
+        Me.lblYear.AutoSize = True
+        Me.lblYear.Location = New System.Drawing.Point(14, 439)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.TabIndex = 53
+        Me.lblYear.Text = "Year:"
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(14, 70)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStation.TabIndex = 52
+        '
+        'lblStation
+        '
+        Me.lblStation.AutoSize = True
+        Me.lblStation.Location = New System.Drawing.Point(14, 52)
+        Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.TabIndex = 51
+        Me.lblStation.Text = "Station:"
         '
         'ucrReceiverDate
         '
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(14, 26)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(14, 27)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -95,7 +183,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverRain
         '
-        Me.ucrReceiverRain.Location = New System.Drawing.Point(14, 67)
+        Me.ucrReceiverRain.Location = New System.Drawing.Point(14, 113)
         Me.ucrReceiverRain.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRain.Name = "ucrReceiverRain"
         Me.ucrReceiverRain.Selector = Nothing
@@ -104,7 +192,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverMaxTemp
         '
-        Me.ucrReceiverMaxTemp.Location = New System.Drawing.Point(14, 149)
+        Me.ucrReceiverMaxTemp.Location = New System.Drawing.Point(14, 199)
         Me.ucrReceiverMaxTemp.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMaxTemp.Name = "ucrReceiverMaxTemp"
         Me.ucrReceiverMaxTemp.Selector = Nothing
@@ -113,7 +201,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverWindDirection
         '
-        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(14, 231)
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(14, 285)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
@@ -122,7 +210,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverSunshine
         '
-        Me.ucrReceiverSunshine.Location = New System.Drawing.Point(14, 272)
+        Me.ucrReceiverSunshine.Location = New System.Drawing.Point(14, 328)
         Me.ucrReceiverSunshine.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSunshine.Name = "ucrReceiverSunshine"
         Me.ucrReceiverSunshine.Selector = Nothing
@@ -131,7 +219,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverRadiation
         '
-        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(14, 313)
+        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(14, 371)
         Me.ucrReceiverRadiation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRadiation.Name = "ucrReceiverRadiation"
         Me.ucrReceiverRadiation.Selector = Nothing
@@ -140,7 +228,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverCloudCover
         '
-        Me.ucrReceiverCloudCover.Location = New System.Drawing.Point(14, 354)
+        Me.ucrReceiverCloudCover.Location = New System.Drawing.Point(14, 414)
         Me.ucrReceiverCloudCover.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCloudCover.Name = "ucrReceiverCloudCover"
         Me.ucrReceiverCloudCover.Selector = Nothing
@@ -150,7 +238,7 @@ Partial Class DlgDefineClimaticData
         'lblCloudCover
         '
         Me.lblCloudCover.AutoSize = True
-        Me.lblCloudCover.Location = New System.Drawing.Point(14, 337)
+        Me.lblCloudCover.Location = New System.Drawing.Point(14, 396)
         Me.lblCloudCover.Name = "lblCloudCover"
         Me.lblCloudCover.Size = New System.Drawing.Size(68, 13)
         Me.lblCloudCover.TabIndex = 47
@@ -159,7 +247,7 @@ Partial Class DlgDefineClimaticData
         'lblRadiation
         '
         Me.lblRadiation.AutoSize = True
-        Me.lblRadiation.Location = New System.Drawing.Point(14, 296)
+        Me.lblRadiation.Location = New System.Drawing.Point(14, 353)
         Me.lblRadiation.Name = "lblRadiation"
         Me.lblRadiation.Size = New System.Drawing.Size(55, 13)
         Me.lblRadiation.TabIndex = 45
@@ -168,7 +256,7 @@ Partial Class DlgDefineClimaticData
         'lblWindDirection
         '
         Me.lblWindDirection.AutoSize = True
-        Me.lblWindDirection.Location = New System.Drawing.Point(14, 214)
+        Me.lblWindDirection.Location = New System.Drawing.Point(14, 267)
         Me.lblWindDirection.Name = "lblWindDirection"
         Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
         Me.lblWindDirection.TabIndex = 43
@@ -177,7 +265,7 @@ Partial Class DlgDefineClimaticData
         'lblSunshine
         '
         Me.lblSunshine.AutoSize = True
-        Me.lblSunshine.Location = New System.Drawing.Point(14, 255)
+        Me.lblSunshine.Location = New System.Drawing.Point(14, 310)
         Me.lblSunshine.Name = "lblSunshine"
         Me.lblSunshine.Size = New System.Drawing.Size(85, 13)
         Me.lblSunshine.TabIndex = 41
@@ -186,7 +274,7 @@ Partial Class DlgDefineClimaticData
         'lblWindSpeed
         '
         Me.lblWindSpeed.AutoSize = True
-        Me.lblWindSpeed.Location = New System.Drawing.Point(14, 173)
+        Me.lblWindSpeed.Location = New System.Drawing.Point(14, 224)
         Me.lblWindSpeed.Name = "lblWindSpeed"
         Me.lblWindSpeed.Size = New System.Drawing.Size(69, 13)
         Me.lblWindSpeed.TabIndex = 39
@@ -194,7 +282,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverMinTemp
         '
-        Me.ucrReceiverMinTemp.Location = New System.Drawing.Point(14, 108)
+        Me.ucrReceiverMinTemp.Location = New System.Drawing.Point(14, 156)
         Me.ucrReceiverMinTemp.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMinTemp.Name = "ucrReceiverMinTemp"
         Me.ucrReceiverMinTemp.Selector = Nothing
@@ -203,7 +291,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverWindSpeed
         '
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(14, 190)
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(14, 242)
         Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
@@ -213,7 +301,7 @@ Partial Class DlgDefineClimaticData
         'lblRain
         '
         Me.lblRain.AutoSize = True
-        Me.lblRain.Location = New System.Drawing.Point(14, 50)
+        Me.lblRain.Location = New System.Drawing.Point(14, 95)
         Me.lblRain.Name = "lblRain"
         Me.lblRain.Size = New System.Drawing.Size(32, 13)
         Me.lblRain.TabIndex = 36
@@ -222,7 +310,7 @@ Partial Class DlgDefineClimaticData
         'lblMinTemp
         '
         Me.lblMinTemp.AutoSize = True
-        Me.lblMinTemp.Location = New System.Drawing.Point(14, 91)
+        Me.lblMinTemp.Location = New System.Drawing.Point(14, 138)
         Me.lblMinTemp.Name = "lblMinTemp"
         Me.lblMinTemp.Size = New System.Drawing.Size(111, 13)
         Me.lblMinTemp.TabIndex = 35
@@ -231,7 +319,7 @@ Partial Class DlgDefineClimaticData
         'lblMaxTemp
         '
         Me.lblMaxTemp.AutoSize = True
-        Me.lblMaxTemp.Location = New System.Drawing.Point(14, 132)
+        Me.lblMaxTemp.Location = New System.Drawing.Point(14, 181)
         Me.lblMaxTemp.Name = "lblMaxTemp"
         Me.lblMaxTemp.Size = New System.Drawing.Size(117, 13)
         Me.lblMaxTemp.TabIndex = 34
@@ -258,7 +346,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 207)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 337)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(423, 52)
         Me.ucrBase.TabIndex = 13
@@ -267,7 +355,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 269)
+        Me.ClientSize = New System.Drawing.Size(434, 398)
         Me.Controls.Add(Me.grpClimaticType)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDefineClimaticData)
@@ -306,4 +394,12 @@ Partial Class DlgDefineClimaticData
     Friend WithEvents lblMaxTemp As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrReceiverDay As ucrReceiverSingle
+    Friend WithEvents lblDay As Label
+    Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
+    Friend WithEvents lblMonth As Label
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents lblYear As Label
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents lblStation As Label
 End Class
