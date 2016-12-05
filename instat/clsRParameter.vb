@@ -48,7 +48,6 @@ Public Class RParameter
             bIsOperator = False
             bIsFunction = False
         End If
-
     End Sub
 
     Public Function ToScript(ByRef strScript As String) As String
