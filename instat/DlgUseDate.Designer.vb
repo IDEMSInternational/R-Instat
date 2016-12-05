@@ -257,7 +257,7 @@ Partial Class dlgUseDate
         Me.MinimizeBox = False
         Me.Name = "dlgUseDate"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Use date"
+        Me.Text = "Use Date"
         Me.grpDateFunctions.ResumeLayout(False)
         Me.grpDateFunctions.PerformLayout()
         Me.ResumeLayout(False)
