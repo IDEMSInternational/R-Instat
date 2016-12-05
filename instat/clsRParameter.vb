@@ -34,11 +34,21 @@ Public Class RParameter
         bIsString = True
     End Sub
 
-    Public Sub SetArgument(clsArg As RCodeStructure, Optional bIsFunc As Boolean = False, Optional bIsOp As Boolean = False)
+    Public Sub SetArgument(clsArg As RCodeStructure)
         clsArgument = clsArg
-        bIsFunction = bIsFunc
-        bIsOperator = bIsOp
         bIsString = False
+        If TypeOf (clsArg) Is RFunction Then
+            bIsFunction = True
+            bIsOperator = False
+        ElseIf TypeOf (clsArg) Is ROperator Then
+            bIsOperator = True
+            bIsFunction = False
+        Else
+            'message
+            bIsOperator = False
+            bIsFunction = False
+        End If
+
     End Sub
 
     Public Function ToScript(ByRef strScript As String) As String
