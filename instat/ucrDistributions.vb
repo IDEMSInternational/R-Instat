@@ -149,22 +149,7 @@ Public Class ucrDistributions
                 Case "DFunctions"
                     bUse = (Dist.strDFunctionName <> "")
                 Case "ExactSolution"
-                    If (Dist.strExactName <> "") Then
-                        Select Case strDataType
-                            Case "numeric"
-                                If Dist.bIntAndNumeric Then
-                                    bUse = True
-                                End If
-                            Case "positive integer" ' or integer
-                                If Dist.bPositiveInt Then
-                                    bUse = True
-                                End If
-                            Case "factor" ' or character
-                                If Dist.bTwoLevelFactor Then
-                                    bUse = True
-                                End If
-                        End Select
-                    End If
+                    bUse = (Dist.strExactName <> "")
                 Case "GLMFunctions"
                     If (Dist.strGLMFunctionName <> "") Then
                         Select Case strDataType
@@ -237,7 +222,6 @@ Public Class ucrDistributions
         clsNormalDist.strGLMFunctionName = "gaussian"
         clsNormalDist.bNumeric = True
         clsNormalDist.bIsContinuous = True
-        clsNormalDist.bIntAndNumeric = True
         clsNormalDist.bIsExact = True
         clsNormalDist.strExactName = "norm"
         clsNormalDist.lstExact = {"mean", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
@@ -342,7 +326,6 @@ Public Class ucrDistributions
         clsPoissonDist.strDFunctionName = "dpois"
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
-        clsPoissonDist.bIntAndNumeric = True
         clsPoissonDist.bIsContinuous = False
         clsPoissonDist.bIsExact = True
         clsPoissonDist.strExactName = "pois"

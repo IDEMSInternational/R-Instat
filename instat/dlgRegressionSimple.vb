@@ -111,15 +111,15 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("mu", nudHypothesis.Value.ToString())
-        If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" Then
-            clsRTTest.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
-            clsRTTest.AddParameter("y", clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        Else
-            clsModel.SetOperation("~")
-            clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
-            clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
-            clsRTTest.AddParameter("x", clsROperatorParameter:=clsModel)
-        End If
+        '        If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" Then
+        '        clsRTTest.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
+        '        clsRTTest.AddParameter("y", clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        '        Else
+        clsModel.SetOperation("~")
+        clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+        clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+        clsRTTest.AddParameter("x", clsROperatorParameter:=clsModel)
+        '        End If
         If chkPaired.Checked Then
             clsRTTest.AddParameter("paired", "TRUE")
         Else
@@ -129,17 +129,15 @@ Public Class dlgRegressionSimple
     End Sub
 
     Public Sub DataTypeAccepted()
-        ucrResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
-        ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
         If rdoSpecific.Checked Then
-            If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
-                ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
-                If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" OrElse ucrExplanatory.strCurrDataType = "positive integer" Then
-                    ucrExplanatory.Clear()
-                End If
+            ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
+            ucrExplanatory.SetIncludedDataTypes({"character", "factor"})
+            If ucrResponse.strCurrDataType = "factor" OrElse ucrResponse.strCurrDataType = "character" Then
+                ucrResponse.Clear()
             End If
-        Else
-            ucrExplanatory.SetIncludedDataTypes({"numeric", "integer", "character", "factor"})
+            If ucrExplanatory.strCurrDataType = "integer" OrElse ucrExplanatory.strCurrDataType = "numeric" OrElse ucrResponse.strCurrDataType = "positive integer" Then
+                ucrExplanatory.Clear()
+            End If
         End If
     End Sub
 
@@ -147,9 +145,10 @@ Public Class dlgRegressionSimple
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
-        clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
-        clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
-        clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
+        ' If two factors:
+        'clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+        'clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+        'clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
         clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
 
@@ -201,7 +200,6 @@ Public Class dlgRegressionSimple
 
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
-
 
 
         '        clsRPoisson.SetRCommand("poisson.test")
@@ -300,15 +298,6 @@ Public Class dlgRegressionSimple
                 ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ' this needs work still. Nothing is being shown once any of the "Exact"'s are selected
                 ' Additionally, we need to have that we can switch between rdos and the cbo's to change appropriately. 
-                If ucrResponse.strCurrDataType = "character" OrElse ucrResponse.strCurrDataType = "factor" Then
-                    ucrFamily.RecieverDatatype("factor")
-                ElseIf ucrResponse.strCurrDataType = "positive integer" Then
-                    ucrFamily.RecieverDatatype("positive integer")
-                ElseIf ucrResponse.strCurrDataType = "numeric" OrElse ucrResponse.strCurrDataType = "integer" Then
-                    ucrFamily.RecieverDatatype("numeric")
-                Else
-                    ucrFamily.cboDistributions.Text = ""
-                End If
             End If
         End If
         TestOKEnabled()
@@ -455,7 +444,6 @@ Public Class dlgRegressionSimple
                 nudHypothesis.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
             End If
             If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
-                '            '         'If ucrExplanatory. GetVariables Is From same dataset
                 chkPaired.Visible = True
             Else
                 chkPaired.Visible = False
@@ -493,9 +481,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrFamily.EnabledChanged
-        '        If ucrFamily.Enabled = False Then
-        '        ucrFamily.cboDistributions.Text = ""
-        '        End If
         DataTypeAccepted()
         TestOKEnabled()
         SetEnableDists()
