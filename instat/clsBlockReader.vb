@@ -55,7 +55,8 @@ Public Class BlockReader
             lstRCommands = New List(Of RParameter)
         End If
         For i As Integer = 0 To lstLines.Count - 1
-            If lstLines(i).First = "#" Then
+            RemoveExtremitySpaces(lstLines(i))
+            If lstLines(i).StartsWith("#") Then
                 Comment = lstLines(i)
             Else
                 lstRCommands.Add(ReadRCommand(lstLines(i)))
@@ -66,32 +67,33 @@ Public Class BlockReader
 
     Public Function ReadRCommand(strRCommand As String) As RParameter
         Dim clsReturnRParameter As New RParameter
-        Dim iNumberOfUnclosedBrackets As Integer
         Dim chrSeparator As Char
         Dim bFirstOpParam As Boolean = False
-        Dim lstAssignToCheck As List(Of String)
+        Dim lstAssignToCheck As New List(Of String)
         Dim lstParameterStrings As List(Of String)
         Dim strAssignTo As String
+        Dim lstToDeleteIndices As New List(Of Integer)
 
-        'This is the read through method
-        For Each chrSymbol As Char In strRCommand
-            If chrSymbol = "(" Then
-                iNumberOfUnclosedBrackets = iNumberOfUnclosedBrackets + 1
-            ElseIf chrSymbol = ")" Then
-                iNumberOfUnclosedBrackets = iNumberOfUnclosedBrackets - 1
-            ElseIf iNumberOfUnclosedBrackets = 0 Then
-                'Do things
-            End If
-        Next
+        If strRCommand Is Nothing Then
+            Return Nothing
+        End If
+
+        'First the string is formatted, removing spaces, if string is (...), eleminate external brackets.
+        RemoveExtremitySpaces(strRCommand)
+        RemoveExtremityBrackets(strRCommand)
+        'Also the command is split in case there is something being assigned. Unnecessary spaces are eliminated.
         lstAssignToCheck = SplitSmart(strRCommand, "<-")
         If lstAssignToCheck.Count = 2 Then
             strAssignTo = lstAssignToCheck(0)
             strRCommand = lstAssignToCheck(1)
+            RemoveExtremitySpaces(strAssignTo)
         ElseIf lstAssignToCheck.Count = 1 Then
             strAssignTo = Nothing
         Else
             'message
         End If
+
+
         'This identifies if the RCommand is an RFunction or ROperator, set's the RCommand, edits strRCommand if RFunction case, and returns the relevant separator for arguments
         chrSeparator = IdentifyCommand(strRCommand, clsReturnRParameter)
         'Each argument is isolated adn then all of them are assimilated by the RCodeStructure.
@@ -110,16 +112,32 @@ Public Class BlockReader
         Return clsReturnRParameter
     End Function
 
+    Private Sub RemoveExtremitySpaces(ByRef strToTrim As String)
+        While strToTrim.StartsWith(" ")
+            strToTrim.Remove(0, 1)
+        End While
+        While strToTrim.EndsWith(" ")
+            strToTrim.Remove(strToTrim.Length - 1)
+        End While
+    End Sub
+
+    Private Sub RemoveExtremityBrackets(ByRef strToTrim As String)
+        While (strToTrim.StartsWith("(") AndAlso (FindMatchingBracket(strToTrim, 0) = strToTrim.Length - 1))
+            strToTrim.Remove(0, 1)
+            strToTrim.Remove(strToTrim.Length - 1)
+        End While
+    End Sub
+
     Private Function SplitSmart(strToSplit As String, strSeparator As String) As List(Of String)
         'This function takes a string containing an RCommand, and a separator. It then acts as the function Split, but ignoring instances of the separator that occur within closed brackets.
-        Dim strSymbol As String
+        Dim strRead As String
         Dim lstIndices As New List(Of Integer)
         Dim lstReturn As New List(Of String)
 
         'Getting the list of indices at which the separator starts, skipping potential occurences of the separator inside a closed bracket.
         For iIndex As Integer = 0 To strToSplit.Count - strSeparator.Length
-            strSymbol = strToSplit.Substring(iIndex, iIndex + strSeparator.Length - 1)
-            If strSymbol.First = "(" Then
+            strRead = strToSplit.Substring(iIndex, iIndex + strSeparator.Length - 1)
+            If strRead.First = "(" Then
                 iIndex = FindMatchingBracket(strToSplit, iIndex)
                 If iIndex <> -1 Then
                     Continue For
@@ -127,7 +145,7 @@ Public Class BlockReader
                     'message
                     Exit For
                 End If
-            ElseIf strSymbol = strSeparator Then
+            ElseIf strRead = strSeparator Then
                 lstIndices.Add(iIndex)
             End If
         Next
@@ -147,6 +165,13 @@ Public Class BlockReader
         Else
             lstReturn.Add(strToSplit)
         End If
+
+        'Format the output strings
+        For iIndex As Integer = 0 To lstReturn.Count - 1
+            RemoveExtremitySpaces(lstReturn(iIndex))
+            RemoveExtremityBrackets(lstReturn(iIndex))
+            RemoveExtremitySpaces(lstReturn(iIndex))
+        Next
 
         Return lstReturn
     End Function
@@ -172,14 +197,19 @@ Public Class BlockReader
         End If
     End Function
 
-    Private Function IdentifyCommand(ByRef strRCommand As String, clsRParameter As RParameter) As Char
+    Private Function IdentifyCommand(ByRef strRCommand As String, ByRef clsRParameter As RParameter) As Char
         Dim clsRFunction As New RFunction
         Dim clsROperator As New ROperator
         Dim iIndexOfIdentifier As Integer
         Dim chrCandidateOperator As Char
         Dim iIndexOfMatchingBracket As Integer
-        Dim lstListOfIdentifiers As Char() = {"(", "+", ":", "-", "*", "/"} 'Might need to deal with "$" one day...
-        'Finding the first 
+        Dim lstListOfIdentifiers As Char() = {"(", "+", ":", "-", "*", "/", "|"} 'Might need to deal with "$" one day...
+
+        'First make sure string is in right format.
+        RemoveExtremitySpaces(strRCommand)
+        RemoveExtremityBrackets(strRCommand)
+        RemoveExtremitySpaces(strRCommand)
+
         iIndexOfIdentifier = strRCommand.IndexOfAny(lstListOfIdentifiers)
         If iIndexOfIdentifier <> -1 Then
             If strRCommand(iIndexOfIdentifier) = "(" Then
@@ -189,6 +219,7 @@ Public Class BlockReader
                     clsRFunction.SetRCommand(strRCommand.Substring(0, iIndexOfIdentifier - 1))
                     'The whole strRCommand is replaced by the string giving the parameters of the RFunction.
                     strRCommand = strRCommand.Substring(iIndexOfIdentifier + 1, strRCommand.Length - 2)
+                    RemoveExtremitySpaces(strRCommand)
                     clsRParameter.SetArgumentFunction(clsRFunction) 'later SetArgument(clsRFunction, bIsFunction = TRUE) or something like that.
                     Return ","
                 ElseIf Not lstListOfIdentifiers.Contains(chrCandidateOperator) Then
@@ -205,20 +236,26 @@ Public Class BlockReader
             Return Nothing
         End If
     End Function
-    Private Sub AssimilateParameter(strRParameter As String, clsMotherCodeStructure As RCodeStructure)
+    Private Sub AssimilateParameter(strRParameter As String, ByRef clsMotherCodeStructure As RCodeStructure)
 
         Dim lstRPNameAndValue As List(Of String)
         Dim clsNewRParameter As RParameter
+
+        'First make sure string is in right format.
+        RemoveExtremitySpaces(strRParameter)
+        RemoveExtremityBrackets(strRParameter)
+        RemoveExtremitySpaces(strRParameter)
 
         lstRPNameAndValue = SplitSmart(strRParameter, "=")
         'Have an overridable sub AddParameter in RCodeStructure... bIncludeParam name would be ignored when in operator case for instance.
         If lstRPNameAndValue.Count = 2 Then
             clsNewRParameter = ReadRCommand(lstRPNameAndValue(1))
+            RemoveExtremitySpaces(lstRPNameAndValue(0))
             clsNewRParameter.SetArgumentName(lstRPNameAndValue(0))
             clsNewRParameter.bIncludeArgumentName = True
 
         ElseIf lstRPNameAndValue.Count = 1 Then
-            clsNewRParameter = ReadRCommand(lstRPNameAndValue(1))
+            clsNewRParameter = ReadRCommand(lstRPNameAndValue(0))
             clsNewRParameter.bIncludeArgumentName = False
         Else
             'message
