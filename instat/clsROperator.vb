@@ -81,7 +81,7 @@ Public Class ROperator
     'End Sub
 
     Public Sub RemoveAllAdditionalParameters()
-        Dim clsTempParam As RParameter = MyBase.clsParameters(0)
+        Dim clsTempParam As RParameter = MyBase.clsParameters(0).Clone()
         ClearParameters()
         MyBase.clsParameters.Add(clsTempParam)
     End Sub
