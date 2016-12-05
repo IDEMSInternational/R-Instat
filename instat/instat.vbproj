@@ -165,6 +165,12 @@
     <Compile Include="dlgCountinFactor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DlgDefineClimaticData.Designer.vb">
+      <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DlgDefineClimaticData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -181,6 +187,12 @@
       <DependentUpon>dlgEnter.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgEnter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportToCPT.Designer.vb">
+      <DependentUpon>dlgExportToCPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToCPT.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportToOpenRefine.Designer.vb">
@@ -2168,6 +2180,9 @@
     <EmbeddedResource Include="dlgCumulativeDistribution.sw-KE.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DlgDefineClimaticData.resx">
+      <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -2251,6 +2266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToCPT.resx">
+      <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToOpenRefine.resx">
       <DependentUpon>dlgExportToOpenRefine.vb</DependentUpon>
