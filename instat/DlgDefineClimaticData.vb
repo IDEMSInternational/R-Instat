@@ -29,14 +29,14 @@ Public Class DlgDefineClimaticData
 
     Private Sub InitialiseDialog()
         ucrReceiverDate.Selector = ucrSelectorDefineClimaticData
-        ucrReceiverRain.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverCloudCover.Selector = ucrSelectorDefineClimaticData
         ucrReceiverMaxTemp.Selector = ucrSelectorDefineClimaticData
         ucrReceiverMinTemp.Selector = ucrSelectorDefineClimaticData
-        ucrReceiverSunshine.Selector = ucrSelectorDefineClimaticData
-        ucrReceiverWind.Selector = ucrSelectorDefineClimaticData
-        ucrReceiverCloudCover.Selector = ucrSelectorDefineClimaticData
         ucrReceiverRadiation.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverRain.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverSunshine.Selector = ucrSelectorDefineClimaticData
         ucrReceiverWindDirection.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverWindSpeed.Selector = ucrSelectorDefineClimaticData
 
     End Sub
 
@@ -56,6 +56,7 @@ Public Class DlgDefineClimaticData
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs)
@@ -66,7 +67,4 @@ Public Class DlgDefineClimaticData
 
     End Sub
 
-    Private Sub grpClimaticType_Enter(sender As Object, e As EventArgs) Handles grpClimaticType.Enter
-
-    End Sub
 End Class
