@@ -53,7 +53,7 @@ Partial Class DlgDefineClimaticData
         Me.grpClimaticType.Controls.Add(Me.panClimateType)
         Me.grpClimaticType.Location = New System.Drawing.Point(237, 9)
         Me.grpClimaticType.Name = "grpClimaticType"
-        Me.grpClimaticType.Size = New System.Drawing.Size(195, 180)
+        Me.grpClimaticType.Size = New System.Drawing.Size(175, 180)
         Me.grpClimaticType.TabIndex = 39
         Me.grpClimaticType.TabStop = False
         Me.grpClimaticType.Text = "Climatic Type"
@@ -79,9 +79,9 @@ Partial Class DlgDefineClimaticData
         Me.panClimateType.Controls.Add(Me.lblMinTemp)
         Me.panClimateType.Controls.Add(Me.lblMaxTemp)
         Me.panClimateType.Controls.Add(Me.lblDate)
-        Me.panClimateType.Location = New System.Drawing.Point(21, 19)
+        Me.panClimateType.Location = New System.Drawing.Point(7, 19)
         Me.panClimateType.Name = "panClimateType"
-        Me.panClimateType.Size = New System.Drawing.Size(161, 150)
+        Me.panClimateType.Size = New System.Drawing.Size(157, 150)
         Me.panClimateType.TabIndex = 39
         '
         'ucrReceiverDate
@@ -267,7 +267,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(444, 269)
+        Me.ClientSize = New System.Drawing.Size(421, 269)
         Me.Controls.Add(Me.grpClimaticType)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDefineClimaticData)
