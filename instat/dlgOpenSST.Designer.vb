@@ -93,6 +93,7 @@ Partial Class dlgOpenSST
         Me.grpCSV.Controls.Add(Me.lblDecimal)
         Me.grpCSV.Controls.Add(Me.lblNAStrings)
         Me.grpCSV.Controls.Add(Me.chkStringsAsFactors)
+        Me.grpCSV.Enabled = False
         Me.grpCSV.Location = New System.Drawing.Point(13, 132)
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.Size = New System.Drawing.Size(261, 195)

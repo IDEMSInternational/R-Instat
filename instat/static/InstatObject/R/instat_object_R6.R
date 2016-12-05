@@ -1042,6 +1042,7 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
   if(length(data_list)!=length(data_names))stop("data_names vector should be of length 2")
   names(data_list) = data_names
   self$import_data(data_tables = data_list)
-  self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(station = "station"), type = keyed_link_label)
+  self$add_key(data_names[2], c("lat", "lon"))
+  self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
 )
