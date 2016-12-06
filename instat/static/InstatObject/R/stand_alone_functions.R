@@ -122,29 +122,29 @@ get_odk_form_names = function(username, password, platform) {
 }
 
 convert_SST <- function(datafile, data_from = 5){
-  start_year <-get_years_from_data(datafile)[1]
-  end_year <-get_years_from_data(datafile)[length(get_years_from_data(datafile))]
-  duration =get_years_from_data(datafile)
-  lon = get_lon_from_data(datafile)
-  lat = get_lat_from_data(datafile)
-  lat_lon_df = lat_lon_dataframe(datafile)
-  period = rep(get_years_from_data(datafile), each = (length(lat)*length(lon)))
-  SST_value = c()
+  start_year <- get_years_from_data(datafile)[1]
+  end_year <- get_years_from_data(datafile)[length(get_years_from_data(datafile))]
+  duration <- get_years_from_data(datafile)
+  lon <- get_lon_from_data(datafile)
+  lat <- get_lat_from_data(datafile)
+  lat_lon_df <- lat_lon_dataframe(datafile)
+  period <- rep(get_years_from_data(datafile), each = (length(lat)*length(lon)))
+  SST_value <- c()
   
   for (k in duration){
-    year <-matrix(NA, nrow = length(lat), ncol = length(lon))
+    year <- matrix(NA, nrow = length(lat), ncol = length(lon))
     for (i in 1:length(lat)){
       for (j in 1:length(lon)){
-        dat = as.numeric(as.character(datafile[data_from+i, j+1]))
-        year[i,j] = dat
-        j=j+1
+        dat <- as.numeric(as.character(datafile[data_from+i, j+1]))
+        year[i,j] <- dat
+        j = j+1
       }
-      i=i+1
+      i = i+1
     }
-    year=as.data.frame(t(year))
-    year=stack(year)
-    data_from = data_from+length(lat)+2
-    g=as.numeric(year$values)
+    year = as.data.frame(t(year))
+    year = stack(year)
+    data_from = data_from + length(lat) + 2
+    g <- as.numeric(year$values)
     SST_value = append(SST_value, g)
   }
   my_data = cbind(period, lat_lon_df, SST_value)
@@ -164,11 +164,11 @@ get_lon_from_data <- function(datafile){
 }
 
 lat_lon_dataframe <- function(datafile){
-  latitude  = get_lat_from_data(datafile)
-  longitude = get_lon_from_data(datafile)
-  lat = rep(latitude, each = length(longitude))
-  lon = rep(longitude, length(latitude))
-  lat_lon = as.data.frame(cbind(lat, lon))
+  latitude  <- get_lat_from_data(datafile)
+  longitude <- get_lon_from_data(datafile)
+  lat <- rep(latitude, each = length(longitude))
+  lon <- rep(longitude, length(latitude))
+  lat_lon <- as.data.frame(cbind(lat, lon))
   station <- c()
   for (j in 1:nrow(lat_lon)){
     if(lat_lon[j,1]>=0){
