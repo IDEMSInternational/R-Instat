@@ -29,7 +29,6 @@ Partial Class dlgInventoryPlot
         Me.lblDoY = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.chkAddRecodetoData = New System.Windows.Forms.CheckBox()
-        Me.chkThreshold = New System.Windows.Forms.CheckBox()
         Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
         Me.ucrColourReceiver = New instat.ucrReceiverSingle()
         Me.ucrDayOfYearReceiver = New instat.ucrReceiverSingle()
@@ -37,13 +36,16 @@ Partial Class dlgInventoryPlot
         Me.ucrSaveInventoryPlot = New instat.ucrSaveGraph()
         Me.UcrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.ucrFacetsReceiver = New instat.ucrReceiverSingle()
+        Me.lblFacet = New System.Windows.Forms.Label()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(289, 31)
+        Me.lblYear.Location = New System.Drawing.Point(289, 10)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(29, 13)
         Me.lblYear.TabIndex = 16
@@ -60,7 +62,7 @@ Partial Class dlgInventoryPlot
         'lblColourBand
         '
         Me.lblColourBand.AutoSize = True
-        Me.lblColourBand.Location = New System.Drawing.Point(289, 146)
+        Me.lblColourBand.Location = New System.Drawing.Point(289, 113)
         Me.lblColourBand.Name = "lblColourBand"
         Me.lblColourBand.Size = New System.Drawing.Size(29, 13)
         Me.lblColourBand.TabIndex = 20
@@ -69,7 +71,7 @@ Partial Class dlgInventoryPlot
         'chkFlipCoordinates
         '
         Me.chkFlipCoordinates.AutoSize = True
-        Me.chkFlipCoordinates.Location = New System.Drawing.Point(292, 204)
+        Me.chkFlipCoordinates.Location = New System.Drawing.Point(292, 257)
         Me.chkFlipCoordinates.Name = "chkFlipCoordinates"
         Me.chkFlipCoordinates.Size = New System.Drawing.Size(101, 17)
         Me.chkFlipCoordinates.TabIndex = 21
@@ -79,7 +81,7 @@ Partial Class dlgInventoryPlot
         'lblDoY
         '
         Me.lblDoY.AutoSize = True
-        Me.lblDoY.Location = New System.Drawing.Point(289, 90)
+        Me.lblDoY.Location = New System.Drawing.Point(289, 59)
         Me.lblDoY.Name = "lblDoY"
         Me.lblDoY.Size = New System.Drawing.Size(81, 13)
         Me.lblDoY.TabIndex = 22
@@ -98,33 +100,23 @@ Partial Class dlgInventoryPlot
         'chkAddRecodetoData
         '
         Me.chkAddRecodetoData.AutoSize = True
-        Me.chkAddRecodetoData.Location = New System.Drawing.Point(292, 228)
+        Me.chkAddRecodetoData.Location = New System.Drawing.Point(292, 234)
         Me.chkAddRecodetoData.Name = "chkAddRecodetoData"
         Me.chkAddRecodetoData.Size = New System.Drawing.Size(124, 17)
         Me.chkAddRecodetoData.TabIndex = 24
         Me.chkAddRecodetoData.Text = "Add Recode to Data"
         Me.chkAddRecodetoData.UseVisualStyleBackColor = True
         '
-        'chkThreshold
-        '
-        Me.chkThreshold.AutoSize = True
-        Me.chkThreshold.Location = New System.Drawing.Point(292, 252)
-        Me.chkThreshold.Name = "chkThreshold"
-        Me.chkThreshold.Size = New System.Drawing.Size(76, 17)
-        Me.chkThreshold.TabIndex = 25
-        Me.chkThreshold.Text = "Threshold "
-        Me.chkThreshold.UseVisualStyleBackColor = True
-        '
         'nudThreshold
         '
-        Me.nudThreshold.Location = New System.Drawing.Point(375, 252)
+        Me.nudThreshold.Location = New System.Drawing.Point(371, 160)
         Me.nudThreshold.Name = "nudThreshold"
         Me.nudThreshold.Size = New System.Drawing.Size(41, 20)
         Me.nudThreshold.TabIndex = 26
         '
         'ucrColourReceiver
         '
-        Me.ucrColourReceiver.Location = New System.Drawing.Point(292, 168)
+        Me.ucrColourReceiver.Location = New System.Drawing.Point(292, 135)
         Me.ucrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrColourReceiver.Name = "ucrColourReceiver"
         Me.ucrColourReceiver.Selector = Nothing
@@ -133,7 +125,7 @@ Partial Class dlgInventoryPlot
         '
         'ucrDayOfYearReceiver
         '
-        Me.ucrDayOfYearReceiver.Location = New System.Drawing.Point(292, 113)
+        Me.ucrDayOfYearReceiver.Location = New System.Drawing.Point(292, 82)
         Me.ucrDayOfYearReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDayOfYearReceiver.Name = "ucrDayOfYearReceiver"
         Me.ucrDayOfYearReceiver.Selector = Nothing
@@ -142,7 +134,7 @@ Partial Class dlgInventoryPlot
         '
         'ucrYearReceiver
         '
-        Me.ucrYearReceiver.Location = New System.Drawing.Point(292, 53)
+        Me.ucrYearReceiver.Location = New System.Drawing.Point(292, 32)
         Me.ucrYearReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYearReceiver.Name = "ucrYearReceiver"
         Me.ucrYearReceiver.Selector = Nothing
@@ -173,13 +165,42 @@ Partial Class dlgInventoryPlot
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 12
         '
+        'lblThreshold
+        '
+        Me.lblThreshold.AutoSize = True
+        Me.lblThreshold.Location = New System.Drawing.Point(292, 165)
+        Me.lblThreshold.Name = "lblThreshold"
+        Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
+        Me.lblThreshold.TabIndex = 27
+        Me.lblThreshold.Text = "Threshold"
+        '
+        'ucrFacetsReceiver
+        '
+        Me.ucrFacetsReceiver.Location = New System.Drawing.Point(292, 204)
+        Me.ucrFacetsReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFacetsReceiver.Name = "ucrFacetsReceiver"
+        Me.ucrFacetsReceiver.Selector = Nothing
+        Me.ucrFacetsReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFacetsReceiver.TabIndex = 28
+        '
+        'lblFacet
+        '
+        Me.lblFacet.AutoSize = True
+        Me.lblFacet.Location = New System.Drawing.Point(295, 189)
+        Me.lblFacet.Name = "lblFacet"
+        Me.lblFacet.Size = New System.Drawing.Size(49, 13)
+        Me.lblFacet.TabIndex = 29
+        Me.lblFacet.Text = "Facet By"
+        '
         'dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(431, 337)
+        Me.Controls.Add(Me.lblFacet)
+        Me.Controls.Add(Me.ucrFacetsReceiver)
+        Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.nudThreshold)
-        Me.Controls.Add(Me.chkThreshold)
         Me.Controls.Add(Me.chkAddRecodetoData)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblDoY)
@@ -218,6 +239,8 @@ Partial Class dlgInventoryPlot
     Friend WithEvents lblDoY As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents chkAddRecodetoData As CheckBox
-    Friend WithEvents chkThreshold As CheckBox
     Friend WithEvents nudThreshold As NumericUpDown
+    Friend WithEvents lblThreshold As Label
+    Friend WithEvents ucrFacetsReceiver As ucrReceiverSingle
+    Friend WithEvents lblFacet As Label
 End Class

@@ -31,13 +31,13 @@ Public Class dlgInventoryPlot
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 455
 
-        ucrYearReceiver.SetIncludedDataTypes({"factor"})
         ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric"})
         ucrColourReceiver.SetIncludedDataTypes({"numeric"})
 
         ucrYearReceiver.Selector = UcrInventoryPlotSelector
         ucrColourReceiver.Selector = UcrInventoryPlotSelector
         ucrDayOfYearReceiver.Selector = UcrInventoryPlotSelector
+        ucrFacetsReceiver.Selector = UcrInventoryPlotSelector
         ucrSaveInventoryPlot.strPrefix = "InventoryPlot"
         ucrSaveInventoryPlot.SetDataFrameSelector(UcrInventoryPlotSelector.ucrAvailableDataFrames)
         nudThreshold.Minimum = 0.85
@@ -54,12 +54,13 @@ Public Class dlgInventoryPlot
     Private Sub SetDefaults()
         UcrInventoryPlotSelector.Reset()
         ucrYearReceiver.SetMeAsReceiver()
-        chkThreshold.Checked = False
-        nudThreshold.Visible = False
         nudThreshold.Value = 0.85
         nudThreshold.Increment = 0.01
         nudThreshold.DecimalPlaces = 2
         ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value)
+        chkAddRecodetoData.Checked = False
+        chkFlipCoordinates.Checked = False
+        ucrSaveInventoryPlot.Reset()
         TestOkEnabled()
     End Sub
 
@@ -136,7 +137,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub SetThreshold()
-        If chkThreshold.Checked AndAlso nudThreshold.Value > 0.85 Then
+        If nudThreshold.Value > 0.85 Then
             ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value)
         Else
             ucrBase.clsRsyntax.RemoveParameter("threshold")
@@ -147,16 +148,15 @@ Public Class dlgInventoryPlot
         SetThreshold()
     End Sub
 
-    Private Sub chkThreshold_CheckedChanged(sender As Object, e As EventArgs) Handles chkThreshold.CheckedChanged
-        If chkThreshold.Checked Then
-            nudThreshold.Visible = True
-        Else
-            nudThreshold.Visible = False
-            ucrBase.clsRsyntax.AddParameter("threshold", 0.85)
-        End If
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrFacets_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFacetsReceiver.SelectionChanged
+        If Not ucrFacetsReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("facets", ucrFacetsReceiver.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("facets")
+        End If
     End Sub
 End Class
