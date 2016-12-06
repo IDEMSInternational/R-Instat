@@ -81,9 +81,7 @@ Public Class ROperator
     'End Sub
 
     Public Sub RemoveAllAdditionalParameters()
-        Dim clsTempParam As RParameter = MyBase.clsParameters(0).Clone()
-        ClearParameters()
-        MyBase.clsParameters.Add(clsTempParam)
+        clsParameters.RemoveRange(1, clsParameters.Count - 1)
     End Sub
 
     Public Overrides Function Clone() As RCodeStructure
