@@ -1744,3 +1744,32 @@ data_object$set("public","split_date", function(data_name, col_name = "", week =
   #Implement option for the day of the year
   }
 )
+#Method for creating inventory plot
+data_object$set("public","make_inventory_plot", function(year, doy, col_name, add_to_data = FALSE, coord_flip = FALSE ,threshold ){
+  curr_data <- self$get_data_frame()
+  col_data <- self$get_columns_from_data(col_name)
+  if(!is.numeric(col_data)) stop("The rainfall column should be numeric")
+  recode<-ifelse(is.na(col_data), "missing", ifelse(col_data>threshold, "rain", "dry"))
+  recode <- as.factor(recode)
+  if(add_to_data){
+    col_name<- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = recode)
+  }
+  
+  if(!is.factor(self$get_columns_from_data(year))){
+    as.factor(self$get_columns_from_data(year))
+  }
+  
+  g <- ggplot(data = curr_data, mapping = aes_(x = as.name(year), y = as.name(doy), colour = recode)) + geom_point() + xlab("") + ylab("") + labs(color="Recode")  
+  
+  if(coord_flip){
+    g <- g + coord_flip()
+    return(g)
+    
+  }
+  else {
+    return(g)
+  } 
+  
+}
+)
