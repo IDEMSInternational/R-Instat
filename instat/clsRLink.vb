@@ -474,7 +474,7 @@ Public Class RLink
                     clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
                 Next
                 clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
-                End If
+            End If
             If lstExcludedDataTypes.Count > 0 Then
                 clsExcludeList.SetRCommand("list")
                 For Each kvpExclude In lstExcludedDataTypes
@@ -490,25 +490,25 @@ Public Class RLink
             End If
             vecColumns = RunInternalScriptGetValue(clsGetItems.ToScript()).AsList
 
-                For i = 0 To vecColumns.Count - 1
-                    If vecColumns.Count > 1 Then
-                        grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
-                        lstView.Groups.Add(grps)
-                    End If
-                    chrCurrColumns = vecColumns(i).AsCharacter
-                    If chrCurrColumns IsNot Nothing Then
-                        For j = 0 To chrCurrColumns.Count - 1
-                            lstView.Items.Add(chrCurrColumns(j))
-                            lstView.Items(j).Tag = vecColumns.Names(i)
-                            If vecColumns.Count > 1 Then
-                                lstView.Items(j).Group = lstView.Groups(i)
-                            End If
-                        Next
-                    End If
-                Next
-                'TODO Find out how to get this to set automatically ( Width = -2 almost works)
-                lstView.Columns(0).Width = lstView.Width - 25
-            End If
+            For i = 0 To vecColumns.Count - 1
+                If vecColumns.Count > 1 Then
+                    grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
+                    lstView.Groups.Add(grps)
+                End If
+                chrCurrColumns = vecColumns(i).AsCharacter
+                If chrCurrColumns IsNot Nothing Then
+                    For j = 0 To chrCurrColumns.Count - 1
+                        lstView.Items.Add(chrCurrColumns(j))
+                        lstView.Items(j).Tag = vecColumns.Names(i)
+                        If vecColumns.Count > 1 Then
+                            lstView.Items(j).Group = lstView.Groups(i)
+                        End If
+                    Next
+                End If
+            Next
+            'TODO Find out how to get this to set automatically ( Width = -2 almost works)
+            lstView.Columns(0).Width = lstView.Width - 25
+        End If
     End Sub
 
     Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiverMultiple, strDataFrameName As String, strProperty As String, strValues As String())
