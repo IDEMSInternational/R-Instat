@@ -298,6 +298,7 @@ Public Class sdgPlots
         'This sub decides whether the option to fix the number of rows or columns should be available or not.
         'When chkMargin is checked, or when both receivers are used (i.e. the second optional is filled), facet_grid is used, and thus the number of rows or columns can't be fixed.
         If (chkMargin.Checked OrElse chkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
+            chkNoOfRowsOrColumns.Checked = False
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
         Else
