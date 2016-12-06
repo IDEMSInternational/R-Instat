@@ -53,8 +53,7 @@ Public Class dlgView
     End Sub
 
     Private Sub TestOKEnabled()
-        'OK is enabled 1st when the View preview radio button is checked and the receiver and  up and down rows are non-empty 
-        'ALSO, when the radio button View Data Frame is checked, the OK should be enabled regardless of the receiver being empty or non-empty since it is not connected to it at all(It striggers the View command to pick the current dataframe as its argument only).
+
         If Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
@@ -95,17 +94,17 @@ Public Class dlgView
     Private Sub SetCommands()
         'Adding Separate Viewer window for the selected variables in the selector.
         If rdoViewDataFrame.Checked Then
-            lblNumberofRows.Visible = False
-            nudNumberRows.Visible = False
-            grpDisplayFrom.Visible = False
+            lblNumberofRows.Enabled = False
+            nudNumberRows.Enabled = False
+            grpDisplayFrom.Enabled = False
             ucrBase.clsRsyntax.RemoveParameter("n")
             ucrBase.clsRsyntax.SetFunction("View")
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
         ElseIf rdoViewPreview.Checked Then
             'Setting head and tail commands to help in previewing the data with specified number of observations "n"
-            lblNumberofRows.Visible = True
-            nudNumberRows.Visible = True
-            grpDisplayFrom.Visible = True
+            lblNumberofRows.Enabled = True
+            nudNumberRows.Enabled = True
+            grpDisplayFrom.Enabled = True
             If Not ucrReceiverView.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
                 If rdoTop.Checked Then
