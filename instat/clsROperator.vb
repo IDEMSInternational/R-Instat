@@ -81,7 +81,9 @@ Public Class ROperator
     'End Sub
 
     Public Sub RemoveAllAdditionalParameters()
-        clsParameters.RemoveRange(1, clsParameters.Count - 1)
+        If clsParameters.Count > 1 Then
+            clsParameters.RemoveRange(1, clsParameters.Count - 1)
+        End If
     End Sub
 
     Public Overrides Function Clone() As RCodeStructure
