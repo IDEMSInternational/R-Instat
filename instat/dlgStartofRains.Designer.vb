@@ -33,9 +33,11 @@ Partial Class dlgStartofRains
         Me.grpConditionsForSatrtofRains = New System.Windows.Forms.GroupBox()
         Me.nudLengthofTime = New System.Windows.Forms.NumericUpDown()
         Me.nudMaximumDays = New System.Windows.Forms.NumericUpDown()
+        Me.nudOverDays = New System.Windows.Forms.NumericUpDown()
         Me.lblLengthofTime = New System.Windows.Forms.Label()
         Me.lblMaximumDays = New System.Windows.Forms.Label()
         Me.lblVal = New System.Windows.Forms.Label()
+        Me.lblOverDays = New System.Windows.Forms.Label()
         Me.lblMinimum = New System.Windows.Forms.Label()
         Me.chkDrySpell = New System.Windows.Forms.CheckBox()
         Me.chkTotalRainfall = New System.Windows.Forms.CheckBox()
@@ -44,43 +46,44 @@ Partial Class dlgStartofRains
         Me.nudFrom = New System.Windows.Forms.NumericUpDown()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
-        Me.nudOverDays = New System.Windows.Forms.NumericUpDown()
         Me.nudTo = New System.Windows.Forms.NumericUpDown()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.lblOverDays = New System.Windows.Forms.Label()
+        Me.lblDOY = New System.Windows.Forms.Label()
+        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
+        Me.lblWidth = New System.Windows.Forms.Label()
         CType(Me.nudValue, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMinimum, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpConditionsForSatrtofRains.SuspendLayout()
         CType(Me.nudLengthofTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMaximumDays, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudOverDays, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpRainParameters.SuspendLayout()
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudOverDays, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'nudValue
         '
-        Me.nudValue.Location = New System.Drawing.Point(173, 77)
+        Me.nudValue.Location = New System.Drawing.Point(201, 42)
         Me.nudValue.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.nudValue.Name = "nudValue"
-        Me.nudValue.Size = New System.Drawing.Size(48, 20)
+        Me.nudValue.Size = New System.Drawing.Size(41, 20)
         Me.nudValue.TabIndex = 4
         Me.nudValue.Value = New Decimal(New Integer() {30, 0, 0, 0})
         '
         'nudMinimum
         '
-        Me.nudMinimum.Location = New System.Drawing.Point(173, 37)
+        Me.nudMinimum.Location = New System.Drawing.Point(201, 18)
         Me.nudMinimum.Name = "nudMinimum"
-        Me.nudMinimum.Size = New System.Drawing.Size(45, 20)
+        Me.nudMinimum.Size = New System.Drawing.Size(41, 20)
         Me.nudMinimum.TabIndex = 2
-        Me.nudMinimum.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudMinimum.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 375)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 331)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
@@ -89,7 +92,7 @@ Partial Class dlgStartofRains
         '
         Me.ucrSelectorForStartofRains.bShowHiddenColumns = False
         Me.ucrSelectorForStartofRains.bUseCurrentFilter = True
-        Me.ucrSelectorForStartofRains.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorForStartofRains.Location = New System.Drawing.Point(18, 9)
         Me.ucrSelectorForStartofRains.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForStartofRains.Name = "ucrSelectorForStartofRains"
         Me.ucrSelectorForStartofRains.Size = New System.Drawing.Size(210, 180)
@@ -133,42 +136,55 @@ Partial Class dlgStartofRains
         '
         'grpConditionsForSatrtofRains
         '
+        Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblWidth)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.nudLengthofTime)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.nudMaximumDays)
+        Me.grpConditionsForSatrtofRains.Controls.Add(Me.nudOverDays)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblLengthofTime)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblMaximumDays)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblVal)
+        Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblOverDays)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblMinimum)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkDrySpell)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkTotalRainfall)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkConsecutiveRainyDays)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.nudMinimum)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.nudValue)
-        Me.grpConditionsForSatrtofRains.Location = New System.Drawing.Point(9, 201)
+        Me.grpConditionsForSatrtofRains.Location = New System.Drawing.Point(12, 220)
         Me.grpConditionsForSatrtofRains.Name = "grpConditionsForSatrtofRains"
-        Me.grpConditionsForSatrtofRains.Size = New System.Drawing.Size(369, 168)
+        Me.grpConditionsForSatrtofRains.Size = New System.Drawing.Size(395, 105)
         Me.grpConditionsForSatrtofRains.TabIndex = 7
         Me.grpConditionsForSatrtofRains.TabStop = False
         Me.grpConditionsForSatrtofRains.Text = "Conditions for Start of Rains"
         '
         'nudLengthofTime
         '
-        Me.nudLengthofTime.Location = New System.Drawing.Point(173, 144)
+        Me.nudLengthofTime.Location = New System.Drawing.Point(332, 72)
         Me.nudLengthofTime.Name = "nudLengthofTime"
-        Me.nudLengthofTime.Size = New System.Drawing.Size(48, 20)
+        Me.nudLengthofTime.Size = New System.Drawing.Size(53, 20)
         Me.nudLengthofTime.TabIndex = 9
         '
         'nudMaximumDays
         '
-        Me.nudMaximumDays.Location = New System.Drawing.Point(173, 118)
+        Me.nudMaximumDays.Location = New System.Drawing.Point(201, 68)
         Me.nudMaximumDays.Name = "nudMaximumDays"
-        Me.nudMaximumDays.Size = New System.Drawing.Size(48, 20)
+        Me.nudMaximumDays.Size = New System.Drawing.Size(41, 20)
         Me.nudMaximumDays.TabIndex = 7
+        '
+        'nudOverDays
+        '
+        Me.nudOverDays.Location = New System.Drawing.Point(332, 46)
+        Me.nudOverDays.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
+        Me.nudOverDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudOverDays.Name = "nudOverDays"
+        Me.nudOverDays.Size = New System.Drawing.Size(53, 20)
+        Me.nudOverDays.TabIndex = 7
+        Me.nudOverDays.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblLengthofTime
         '
         Me.lblLengthofTime.AutoSize = True
-        Me.lblLengthofTime.Location = New System.Drawing.Point(86, 144)
+        Me.lblLengthofTime.Location = New System.Drawing.Point(246, 74)
         Me.lblLengthofTime.Name = "lblLengthofTime"
         Me.lblLengthofTime.Size = New System.Drawing.Size(81, 13)
         Me.lblLengthofTime.TabIndex = 8
@@ -177,7 +193,7 @@ Partial Class dlgStartofRains
         'lblMaximumDays
         '
         Me.lblMaximumDays.AutoSize = True
-        Me.lblMaximumDays.Location = New System.Drawing.Point(86, 121)
+        Me.lblMaximumDays.Location = New System.Drawing.Point(114, 72)
         Me.lblMaximumDays.Name = "lblMaximumDays"
         Me.lblMaximumDays.Size = New System.Drawing.Size(81, 13)
         Me.lblMaximumDays.TabIndex = 6
@@ -186,16 +202,26 @@ Partial Class dlgStartofRains
         'lblVal
         '
         Me.lblVal.AutoSize = True
-        Me.lblVal.Location = New System.Drawing.Point(130, 84)
+        Me.lblVal.Location = New System.Drawing.Point(163, 44)
         Me.lblVal.Name = "lblVal"
         Me.lblVal.Size = New System.Drawing.Size(37, 13)
         Me.lblVal.TabIndex = 3
         Me.lblVal.Text = "Value:"
         '
+        'lblOverDays
+        '
+        Me.lblOverDays.AutoSize = True
+        Me.lblOverDays.Location = New System.Drawing.Point(268, 49)
+        Me.lblOverDays.Name = "lblOverDays"
+        Me.lblOverDays.Size = New System.Drawing.Size(60, 13)
+        Me.lblOverDays.TabIndex = 6
+        Me.lblOverDays.Tag = ""
+        Me.lblOverDays.Text = "Over Days:"
+        '
         'lblMinimum
         '
         Me.lblMinimum.AutoSize = True
-        Me.lblMinimum.Location = New System.Drawing.Point(116, 44)
+        Me.lblMinimum.Location = New System.Drawing.Point(149, 21)
         Me.lblMinimum.Name = "lblMinimum"
         Me.lblMinimum.Size = New System.Drawing.Size(51, 13)
         Me.lblMinimum.TabIndex = 1
@@ -204,7 +230,7 @@ Partial Class dlgStartofRains
         'chkDrySpell
         '
         Me.chkDrySpell.AutoSize = True
-        Me.chkDrySpell.Location = New System.Drawing.Point(6, 100)
+        Me.chkDrySpell.Location = New System.Drawing.Point(7, 71)
         Me.chkDrySpell.Name = "chkDrySpell"
         Me.chkDrySpell.Size = New System.Drawing.Size(68, 17)
         Me.chkDrySpell.TabIndex = 5
@@ -214,7 +240,7 @@ Partial Class dlgStartofRains
         'chkTotalRainfall
         '
         Me.chkTotalRainfall.AutoSize = True
-        Me.chkTotalRainfall.Location = New System.Drawing.Point(6, 60)
+        Me.chkTotalRainfall.Location = New System.Drawing.Point(7, 46)
         Me.chkTotalRainfall.Name = "chkTotalRainfall"
         Me.chkTotalRainfall.Size = New System.Drawing.Size(88, 17)
         Me.chkTotalRainfall.TabIndex = 1
@@ -236,14 +262,12 @@ Partial Class dlgStartofRains
         Me.grpRainParameters.Controls.Add(Me.nudFrom)
         Me.grpRainParameters.Controls.Add(Me.lblFrom)
         Me.grpRainParameters.Controls.Add(Me.nudThreshold)
-        Me.grpRainParameters.Controls.Add(Me.nudOverDays)
         Me.grpRainParameters.Controls.Add(Me.nudTo)
         Me.grpRainParameters.Controls.Add(Me.lblTo)
         Me.grpRainParameters.Controls.Add(Me.lblThreshold)
-        Me.grpRainParameters.Controls.Add(Me.lblOverDays)
-        Me.grpRainParameters.Location = New System.Drawing.Point(234, 88)
+        Me.grpRainParameters.Location = New System.Drawing.Point(234, 129)
         Me.grpRainParameters.Name = "grpRainParameters"
-        Me.grpRainParameters.Size = New System.Drawing.Size(144, 113)
+        Me.grpRainParameters.Size = New System.Drawing.Size(144, 85)
         Me.grpRainParameters.TabIndex = 5
         Me.grpRainParameters.TabStop = False
         '
@@ -272,16 +296,6 @@ Partial Class dlgStartofRains
         Me.nudThreshold.Size = New System.Drawing.Size(53, 20)
         Me.nudThreshold.TabIndex = 5
         Me.nudThreshold.Value = New Decimal(New Integer() {85, 0, 0, 131072})
-        '
-        'nudOverDays
-        '
-        Me.nudOverDays.Location = New System.Drawing.Point(81, 87)
-        Me.nudOverDays.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
-        Me.nudOverDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudOverDays.Name = "nudOverDays"
-        Me.nudOverDays.Size = New System.Drawing.Size(53, 20)
-        Me.nudOverDays.TabIndex = 7
-        Me.nudOverDays.Value = New Decimal(New Integer() {92, 0, 0, 0})
         '
         'nudTo
         '
@@ -312,21 +326,40 @@ Partial Class dlgStartofRains
         Me.lblThreshold.Tag = "Threshold"
         Me.lblThreshold.Text = "Threshold:"
         '
-        'lblOverDays
+        'lblDOY
         '
-        Me.lblOverDays.AutoSize = True
-        Me.lblOverDays.Location = New System.Drawing.Point(7, 91)
-        Me.lblOverDays.Name = "lblOverDays"
-        Me.lblOverDays.Size = New System.Drawing.Size(60, 13)
-        Me.lblOverDays.TabIndex = 6
-        Me.lblOverDays.Tag = ""
-        Me.lblOverDays.Text = "Over Days:"
+        Me.lblDOY.AutoSize = True
+        Me.lblDOY.Location = New System.Drawing.Point(234, 89)
+        Me.lblDOY.Name = "lblDOY"
+        Me.lblDOY.Size = New System.Drawing.Size(63, 13)
+        Me.lblDOY.TabIndex = 8
+        Me.lblDOY.Text = "Day of Year"
+        '
+        'ucrReceiverDOY
+        '
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(234, 106)
+        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
+        Me.ucrReceiverDOY.Selector = Nothing
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(144, 20)
+        Me.ucrReceiverDOY.TabIndex = 9
+        '
+        'lblWidth
+        '
+        Me.lblWidth.AutoSize = True
+        Me.lblWidth.Location = New System.Drawing.Point(256, 20)
+        Me.lblWidth.Name = "lblWidth"
+        Me.lblWidth.Size = New System.Drawing.Size(72, 13)
+        Me.lblWidth.TabIndex = 10
+        Me.lblWidth.Text = "Out of 5 Days"
         '
         'dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 431)
+        Me.ClientSize = New System.Drawing.Size(415, 385)
+        Me.Controls.Add(Me.ucrReceiverDOY)
+        Me.Controls.Add(Me.lblDOY)
         Me.Controls.Add(Me.grpRainParameters)
         Me.Controls.Add(Me.grpConditionsForSatrtofRains)
         Me.Controls.Add(Me.lblDate)
@@ -347,11 +380,11 @@ Partial Class dlgStartofRains
         Me.grpConditionsForSatrtofRains.PerformLayout()
         CType(Me.nudLengthofTime, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudMaximumDays, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudOverDays, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpRainParameters.ResumeLayout(False)
         Me.grpRainParameters.PerformLayout()
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudOverDays, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -385,4 +418,7 @@ Partial Class dlgStartofRains
     Friend WithEvents lblTo As Label
     Friend WithEvents lblThreshold As Label
     Friend WithEvents lblOverDays As Label
+    Friend WithEvents lblDOY As Label
+    Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
+    Friend WithEvents lblWidth As Label
 End Class
