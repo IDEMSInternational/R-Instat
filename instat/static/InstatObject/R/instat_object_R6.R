@@ -1037,7 +1037,7 @@ instat_object$set("public","split_date", function(data_name, col_name = "", year
 }
 )
 
-instat_object$set("public","make_inventory_plot", function(data_name,col_name = "", year , doy, add_to_data = FALSE, coord_flip = FALSE) {
-  self$get_data_objects(data_name)$make_inventory_plot(col_name = col_name , year = year, doy =doy,add_to_data = add_to_data, coord_flip = coord_flip)
+instat_object$set("public","make_inventory_plot", function(data_name,col_name = "", year , doy, add_to_data = FALSE, coord_flip = FALSE, threshold) {
+  self$get_data_objects(data_name)$make_inventory_plot(col_name = col_name , year = year, doy =doy,add_to_data = add_to_data, coord_flip = coord_flip, threshold = threshold)
 }
 )

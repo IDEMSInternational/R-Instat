@@ -21,6 +21,7 @@ Public Class dlgInventoryPlot
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
+            bFirstLoad = False
         End If
         autoTranslate(Me)
     End Sub
@@ -39,6 +40,8 @@ Public Class dlgInventoryPlot
         ucrDayOfYearReceiver.Selector = UcrInventoryPlotSelector
         ucrSaveInventoryPlot.strPrefix = "InventoryPlot"
         ucrSaveInventoryPlot.SetDataFrameSelector(UcrInventoryPlotSelector.ucrAvailableDataFrames)
+        nudThreshold.Minimum = 0.85
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -50,6 +53,12 @@ Public Class dlgInventoryPlot
     End Sub
     Private Sub SetDefaults()
         ucrYearReceiver.SetMeAsReceiver()
+        chkThreshold.Checked = False
+        nudThreshold.Visible = False
+        nudThreshold.Value = 0.85
+        nudThreshold.Increment = 0.01
+        nudThreshold.DecimalPlaces = 2
+        ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value)
         TestOkEnabled()
     End Sub
 
@@ -123,5 +132,30 @@ Public Class dlgInventoryPlot
         Else
             ucrBase.clsRsyntax.RemoveParameter("add_to_data")
         End If
+    End Sub
+
+    Private Sub SetThreshold()
+        If chkThreshold.Checked AndAlso nudThreshold.Value > 0.85 Then
+            ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("threshold")
+        End If
+    End Sub
+
+    Private Sub nudThreshold_ValueChanged(sender As Object, e As EventArgs) Handles nudThreshold.TextChanged
+        SetThreshold()
+    End Sub
+
+    Private Sub chkThreshold_CheckedChanged(sender As Object, e As EventArgs) Handles chkThreshold.CheckedChanged
+        If chkThreshold.Checked Then
+            nudThreshold.Visible = True
+        Else
+            nudThreshold.Visible = False
+            ucrBase.clsRsyntax.AddParameter("threshold",0.85)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class

@@ -29,12 +29,15 @@ Partial Class dlgInventoryPlot
         Me.lblDoY = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.chkAddRecodetoData = New System.Windows.Forms.CheckBox()
+        Me.chkThreshold = New System.Windows.Forms.CheckBox()
+        Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
         Me.ucrColourReceiver = New instat.ucrReceiverSingle()
         Me.ucrDayOfYearReceiver = New instat.ucrReceiverSingle()
         Me.ucrYearReceiver = New instat.ucrReceiverSingle()
         Me.ucrSaveInventoryPlot = New instat.ucrSaveGraph()
         Me.UcrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblYear
@@ -102,6 +105,23 @@ Partial Class dlgInventoryPlot
         Me.chkAddRecodetoData.Text = "Add Recode to Data"
         Me.chkAddRecodetoData.UseVisualStyleBackColor = True
         '
+        'chkThreshold
+        '
+        Me.chkThreshold.AutoSize = True
+        Me.chkThreshold.Location = New System.Drawing.Point(292, 252)
+        Me.chkThreshold.Name = "chkThreshold"
+        Me.chkThreshold.Size = New System.Drawing.Size(76, 17)
+        Me.chkThreshold.TabIndex = 25
+        Me.chkThreshold.Text = "Threshold "
+        Me.chkThreshold.UseVisualStyleBackColor = True
+        '
+        'nudThreshold
+        '
+        Me.nudThreshold.Location = New System.Drawing.Point(375, 252)
+        Me.nudThreshold.Name = "nudThreshold"
+        Me.nudThreshold.Size = New System.Drawing.Size(41, 20)
+        Me.nudThreshold.TabIndex = 26
+        '
         'ucrColourReceiver
         '
         Me.ucrColourReceiver.Location = New System.Drawing.Point(292, 168)
@@ -158,6 +178,8 @@ Partial Class dlgInventoryPlot
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(431, 337)
+        Me.Controls.Add(Me.nudThreshold)
+        Me.Controls.Add(Me.chkThreshold)
         Me.Controls.Add(Me.chkAddRecodetoData)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblDoY)
@@ -178,6 +200,7 @@ Partial Class dlgInventoryPlot
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Inventory_Plot"
         Me.Text = "Inventory Plot"
+        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -195,4 +218,6 @@ Partial Class dlgInventoryPlot
     Friend WithEvents lblDoY As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents chkAddRecodetoData As CheckBox
+    Friend WithEvents chkThreshold As CheckBox
+    Friend WithEvents nudThreshold As NumericUpDown
 End Class
