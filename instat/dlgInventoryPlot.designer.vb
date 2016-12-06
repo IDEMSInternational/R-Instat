@@ -28,6 +28,7 @@ Partial Class dlgInventoryPlot
         Me.chkFlipCoordinates = New System.Windows.Forms.CheckBox()
         Me.lblDoY = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.chkAddRecodetoData = New System.Windows.Forms.CheckBox()
         Me.ucrColourReceiver = New instat.ucrReceiverSingle()
         Me.ucrDayOfYearReceiver = New instat.ucrReceiverSingle()
         Me.ucrYearReceiver = New instat.ucrReceiverSingle()
@@ -58,9 +59,9 @@ Partial Class dlgInventoryPlot
         Me.lblColourBand.AutoSize = True
         Me.lblColourBand.Location = New System.Drawing.Point(289, 146)
         Me.lblColourBand.Name = "lblColourBand"
-        Me.lblColourBand.Size = New System.Drawing.Size(65, 13)
+        Me.lblColourBand.Size = New System.Drawing.Size(29, 13)
         Me.lblColourBand.TabIndex = 20
-        Me.lblColourBand.Text = "Colour Band"
+        Me.lblColourBand.Text = "Rain"
         '
         'chkFlipCoordinates
         '
@@ -83,12 +84,23 @@ Partial Class dlgInventoryPlot
         '
         'cmdOptions
         '
+        Me.cmdOptions.Enabled = False
         Me.cmdOptions.Location = New System.Drawing.Point(12, 204)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 23
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'chkAddRecodetoData
+        '
+        Me.chkAddRecodetoData.AutoSize = True
+        Me.chkAddRecodetoData.Location = New System.Drawing.Point(292, 228)
+        Me.chkAddRecodetoData.Name = "chkAddRecodetoData"
+        Me.chkAddRecodetoData.Size = New System.Drawing.Size(124, 17)
+        Me.chkAddRecodetoData.TabIndex = 24
+        Me.chkAddRecodetoData.Text = "Add Recode to Data"
+        Me.chkAddRecodetoData.UseVisualStyleBackColor = True
         '
         'ucrColourReceiver
         '
@@ -146,6 +158,7 @@ Partial Class dlgInventoryPlot
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(431, 337)
+        Me.Controls.Add(Me.chkAddRecodetoData)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblDoY)
         Me.Controls.Add(Me.chkFlipCoordinates)
@@ -181,4 +194,5 @@ Partial Class dlgInventoryPlot
     Friend WithEvents chkFlipCoordinates As CheckBox
     Friend WithEvents lblDoY As Label
     Friend WithEvents cmdOptions As Button
+    Friend WithEvents chkAddRecodetoData As CheckBox
 End Class

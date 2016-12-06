@@ -17,10 +17,6 @@
 Imports instat.Translations
 Public Class dlgInventoryPlot
     Private bFirstLoad As Boolean = True
-    Private clsRggplotFunction As New RFunction
-    Private clsRgeom_geompointFunction As New RFunction
-    Private clsRaesFunction As New RFunction
-
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -30,19 +26,13 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRgeom_geompointFunction.SetRCommand("geom_point")
-        clsRaesFunction.SetRCommand("aes")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_geompointFunction)
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 455
 
-        ucrYearReceiver.SetIncludedDataTypes({"numeric", "factor"})
-        ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric", "factor"})
-        ucrColourReceiver.SetIncludedDataTypes({"factor"})
+        ucrYearReceiver.SetIncludedDataTypes({"factor"})
+        ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric"})
+        ucrColourReceiver.SetIncludedDataTypes({"numeric"})
 
         ucrYearReceiver.Selector = UcrInventoryPlotSelector
         ucrColourReceiver.Selector = UcrInventoryPlotSelector
@@ -91,7 +81,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub UcrInventoryPlotSelector_DataFrameChanged() Handles UcrInventoryPlotSelector.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=UcrInventoryPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & UcrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
     Private Sub ucrSaveInventoryPlot_ContentsChanged() Handles ucrSaveInventoryPlot.ContentsChanged
@@ -100,9 +90,9 @@ Public Class dlgInventoryPlot
 
     Private Sub ucrDayOfYearReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrDayOfYearReceiver.SelectionChanged
         If Not ucrDayOfYearReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("y", ucrDayOfYearReceiver.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddParameter("doy", ucrDayOfYearReceiver.GetVariableNames())
         Else
-            clsRaesFunction.RemoveParameterByName("y")
+            ucrBase.clsRsyntax.RemoveParameter("doy")
         End If
 
         TestOkEnabled()
@@ -111,19 +101,27 @@ Public Class dlgInventoryPlot
 
     Private Sub ucrColourReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColourReceiver.SelectionChanged
         If Not ucrColourReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("colour", ucrColourReceiver.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddParameter("col_name", ucrColourReceiver.GetVariableNames())
         Else
-            clsRaesFunction.RemoveParameterByName("colour")
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
         TestOkEnabled()
     End Sub
 
     Private Sub ucrYearReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYearReceiver.SelectionChanged
         If Not ucrYearReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("x", ucrYearReceiver.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddParameter("year", ucrYearReceiver.GetVariableNames())
         Else
-            clsRaesFunction.RemoveParameterByName("x")
+            ucrBase.clsRsyntax.RemoveParameter("year")
         End If
         TestOkEnabled()
+    End Sub
+
+    Private Sub chkAddRecodetoData_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddRecodetoData.CheckedChanged
+        If chkAddRecodetoData.Checked Then
+            ucrBase.clsRsyntax.AddParameter("add_to_data", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("add_to_data")
+        End If
     End Sub
 End Class
