@@ -1290,4 +1290,8 @@ Public Class frmMain
     Private Sub mnuHelpLicence_Click(sender As Object, e As EventArgs) Handles mnuHelpLicence.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "323")
     End Sub
+
+    Private Sub mnuClimaticFileExportToCPT_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToCPT.Click
+        dlgExportToCPT.ShowDialog()
+    End Sub
 End Class

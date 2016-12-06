@@ -163,6 +163,7 @@ Partial Class frmMain
         Me.mnuClimatic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganiseEvents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganiseEventsStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
@@ -406,14 +407,14 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
@@ -428,7 +429,7 @@ Partial Class frmMain
         'mnuDescribeTwoVariablesSummarise
         '
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
@@ -436,14 +437,14 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesTabulate.Enabled = False
         Me.mnuDescribeTwoVariablesTabulate.Name = "mnuDescribeTwoVariablesTabulate"
-        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesTabulate.Tag = "Tabulate..."
         Me.mnuDescribeTwoVariablesTabulate.Text = "Tabulate..."
         '
         'mnuDescribeTwoVariablesGraph
         '
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
@@ -1356,7 +1357,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileExportToCPT})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         Me.mnuClimaticFile.Size = New System.Drawing.Size(171, 22)
         Me.mnuClimaticFile.Text = "File"
@@ -1364,8 +1365,15 @@ Partial Class frmMain
         'mnuClimaticFileOpensst
         '
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
-        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(155, 22)
         Me.mnuClimaticFileOpensst.Text = "Open SST..."
+        '
+        'mnuClimaticFileExportToCPT
+        '
+        Me.mnuClimaticFileExportToCPT.Name = "mnuClimaticFileExportToCPT"
+        Me.mnuClimaticFileExportToCPT.Size = New System.Drawing.Size(155, 22)
+        Me.mnuClimaticFileExportToCPT.Tag = "Export_to_CPT"
+        Me.mnuClimaticFileExportToCPT.Text = "Export to CPT..."
         '
         'mnuClimaticOrganise
         '
@@ -2903,7 +2911,7 @@ Partial Class frmMain
         '
         Me.mnuToolsRunRCode.Enabled = False
         Me.mnuToolsRunRCode.Name = "mnuToolsRunRCode"
-        Me.mnuToolsRunRCode.Size = New System.Drawing.Size(202, 22)
+        Me.mnuToolsRunRCode.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsRunRCode.Tag = "Run_R_Code..."
         Me.mnuToolsRunRCode.Text = "Run R Code..."
         '
@@ -2911,7 +2919,7 @@ Partial Class frmMain
         '
         Me.mnuToolsRestartR.Enabled = False
         Me.mnuToolsRestartR.Name = "mnuToolsRestartR"
-        Me.mnuToolsRestartR.Size = New System.Drawing.Size(202, 22)
+        Me.mnuToolsRestartR.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsRestartR.Tag = "Restart_R"
         Me.mnuToolsRestartR.Text = "Restart R"
         '
@@ -2919,27 +2927,27 @@ Partial Class frmMain
         '
         Me.mnuToolsCheckForUpdates.Enabled = False
         Me.mnuToolsCheckForUpdates.Name = "mnuToolsCheckForUpdates"
-        Me.mnuToolsCheckForUpdates.Size = New System.Drawing.Size(202, 22)
+        Me.mnuToolsCheckForUpdates.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsCheckForUpdates.Tag = "Check_for_Updates..."
         Me.mnuToolsCheckForUpdates.Text = "Check for Updates..."
         '
         'mnuToolsClearOutputWindow
         '
         Me.mnuToolsClearOutputWindow.Name = "mnuToolsClearOutputWindow"
-        Me.mnuToolsClearOutputWindow.Size = New System.Drawing.Size(202, 22)
+        Me.mnuToolsClearOutputWindow.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsClearOutputWindow.Tag = "Clear_Output_Window..."
         Me.mnuToolsClearOutputWindow.Text = "Clear Output Window..."
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(199, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(195, 6)
         '
         'mnuToolsSaveCurrentOptions
         '
         Me.mnuToolsSaveCurrentOptions.Enabled = False
         Me.mnuToolsSaveCurrentOptions.Name = "mnuToolsSaveCurrentOptions"
-        Me.mnuToolsSaveCurrentOptions.Size = New System.Drawing.Size(202, 22)
+        Me.mnuToolsSaveCurrentOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsSaveCurrentOptions.Tag = "Save_Current_Options..."
         Me.mnuToolsSaveCurrentOptions.Text = "Save Current Options..."
         '
@@ -2947,14 +2955,14 @@ Partial Class frmMain
         '
         Me.mnuToolsLoadOptions.Enabled = False
         Me.mnuToolsLoadOptions.Name = "mnuToolsLoadOptions"
-        Me.mnuToolsLoadOptions.Size = New System.Drawing.Size(202, 22)
+        Me.mnuToolsLoadOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsLoadOptions.Tag = "Load_Options..."
         Me.mnuToolsLoadOptions.Text = "Load Options..."
         '
         'mnuToolsOptions
         '
         Me.mnuToolsOptions.Name = "mnuToolsOptions"
-        Me.mnuToolsOptions.Size = New System.Drawing.Size(202, 22)
+        Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
@@ -3341,4 +3349,5 @@ Partial Class frmMain
     Friend WithEvents mnuHelpGuidesCaseStudy As ToolStripMenuItem
     Friend WithEvents mnuHelpGuideGlosary As ToolStripMenuItem
     Friend WithEvents mnuhelpGuidesMore As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileExportToCPT As ToolStripMenuItem
 End Class
