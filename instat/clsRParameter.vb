@@ -77,7 +77,7 @@ Public Class RParameter
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
         If clsArgument IsNot Nothing Then
-            clsTempRParam.clsArgument = clsArgument.Clone
+            clsTempRParam.SetArgument(clsArgument.Clone)
         End If
         Return clsTempRParam
     End Function

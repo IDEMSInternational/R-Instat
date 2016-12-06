@@ -208,10 +208,11 @@ Public Class RCodeStructure
 
     Public Overridable Sub AddParameter(clsParam As RParameter, Optional bSetFirst As Boolean = False)
         Dim i As Integer = -1
+        Dim strTempArgumentName As String = clsParam.strArgumentName
         If clsParameters IsNot Nothing Then
             If clsParam.strArgumentName IsNot Nothing Then
                 'Dim match As Predicate(Of RParameter) = Function(x) x.strArgumentName.Equals(clsParam.strArgumentName)
-                i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
+                i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(strTempArgumentName))
             End If
             If i = -1 Then
                 If bSetFirst AndAlso clsParameters.Count > 0 Then
