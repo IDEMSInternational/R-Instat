@@ -1786,7 +1786,7 @@ data_object$set("public","make_inventory_plot", function(year, doy, col_name, ad
     as.factor(self$get_columns_from_data(year))
   }
   
-   g <- ggplot(data = curr_data, mapping = aes_(x = as.name(year), y = as.name(doy), colour = recode)) + geom_point()+xlab("")+ylab("")  
+   g <- ggplot(data = curr_data, mapping = aes_(x = as.name(year), y = as.name(doy), colour = recode)) + geom_point()+xlab("")+ ylab("") + labs(color="Recode")  
   
   if(coord_flip){
     g <- g + coord_flip()
