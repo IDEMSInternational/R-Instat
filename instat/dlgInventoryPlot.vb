@@ -137,7 +137,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub SetThreshold()
-        If nudThreshold.Value > 0.85 Then
+        If nudThreshold.Value <> 0.85 Then
             ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value)
         Else
             ucrBase.clsRsyntax.RemoveParameter("threshold")
