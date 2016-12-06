@@ -39,7 +39,7 @@ Public Class dlgThreeVariableModelling
         ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("")
         ucrBaseThreeVariableModelling.iHelpTopicID = 369
         clsModel.SetOperation("~")
-        clsModel.AddParameter(bSetFirst:=False, clsROperatorParameter:=clsModel1)
+        clsModel.AddParameter(clsROperatorParameter:=clsModel1)
         clsModel1.bBrackets = False
         ucrResponse.Selector = ucrSelectorThreeVariableModelling
         ucrFirstExplanatory.Selector = ucrSelectorThreeVariableModelling
@@ -124,10 +124,10 @@ Public Class dlgThreeVariableModelling
             If chkConvertToVariate.Checked Then
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                clsModel.AddParameter(bSetFirst:=True, clsRFunctionParameter:=clsRConvert)
+                clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=clsRConvert)
                 ucrFamily.RecieverDatatype("numeric")
             Else
-                clsModel.AddParameter(bSetFirst:=True, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                clsModel.AddParameter(iPosition:=1, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
@@ -172,7 +172,7 @@ Public Class dlgThreeVariableModelling
                     sdgVariableTransformations.ModelFunction(True)
                 Else
                     sdgVariableTransformations.rdoIdentity.Checked = True
-                    clsModel1.AddParameter(bSetFirst:=True, strParameterValue:=currentReceiver.GetVariableNames(False))
+                    clsModel1.AddParameter(iPosition:=1, strParameterValue:=currentReceiver.GetVariableNames(False))
                 End If
             End If
             If currentReceiver.Name = "ucrSecondExplanatory" Then
@@ -181,7 +181,7 @@ Public Class dlgThreeVariableModelling
                     sdgVariableTransformations.ModelFunction(False)
                 Else
                     sdgVariableTransformations.rdoIdentity.Checked = True
-                    clsModel1.AddParameter(bSetFirst:=False, strParameterValue:=currentReceiver.GetVariableNames(False))
+                    clsModel1.AddParameter(iPosition:=1, strParameterValue:=currentReceiver.GetVariableNames(False))
                 End If
             End If
             'Applying function to response variable 

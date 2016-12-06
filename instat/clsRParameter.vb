@@ -15,13 +15,35 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class RParameter
+    'strArgumentName is, in the function case, the name of the parameter as in R. However, in general the name will not always be displayed in the script (depends on value of bIncludeParameterName below) and is merely used to distinguish different parameters.
     Public strArgumentName As String
+    'The parameter can either take a simple value in the form of a string, or take as value another RFunction or ROperator (then stored as an RCodeStructure).
     Public strArgumentValue As String
     Public clsArgument As RCodeStructure
+    'The three next booleans keep track of what type of value is stored.
     Public bIsFunction As Boolean = False
     Public bIsOperator As Boolean = False
     Public bIsString As Boolean = False
+    'iPosition determines the position this parameter should take among other parameters of an Operator or Function. If iPosition is 0, then it is part of the unordered parameters that are added after the ordered ones. 
+    'Note, it is allowed to have gaps in the positions: parameters with positions a 0, b 2, c 5, d 3, e 0 will be sorted as b d c (a e). See CompareParametersPosition in clsRCodeStructure.
+    Private iPosition As Integer = 0
+    'See strArgumentName
     Public bIncludeArgumentName As Boolean = True
+
+    ''Public Event PositionChanged()
+
+    Public Property Position As Integer
+        'Position is the property associated to the iPosition.
+        Get
+            Return iPosition
+        End Get
+        Set(ByVal Value As Integer)
+            If Value <> iPosition Then
+                iPosition = Value
+                ''RaiseEvent PositionChanged()
+            End If
+        End Set
+    End Property
 
     Public Sub SetArgumentName(strTemp As String)
         strArgumentName = strTemp
