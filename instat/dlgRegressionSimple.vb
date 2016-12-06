@@ -116,8 +116,8 @@ Public Class dlgRegressionSimple
             clsRTTest.AddParameter("y", clsRFunctionParameter:=ucrExplanatory.GetVariables())
         Else
             clsModel.SetOperation("~")
-            clsModel.AddParameter(bSetFirst:=True, clsRFunctionParameter:=ucrResponse.GetVariables())
-            clsModel.AddParameter(bSetFirst:=False, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+            clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrResponse.GetVariables())
+            clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
             clsRTTest.AddParameter("x", clsROperatorParameter:=clsModel)
         End If
         If chkPaired.Checked Then
@@ -147,8 +147,8 @@ Public Class dlgRegressionSimple
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
-        clsModel.AddParameter(bSetFirst:=True, clsRFunctionParameter:=ucrResponse.GetVariables())
-        clsModel.AddParameter(bSetFirst:=False, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrResponse.GetVariables())
+        clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
         clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
         clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
@@ -176,8 +176,8 @@ Public Class dlgRegressionSimple
         clsRLengthGrouped.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup.ToScript & "]")
         clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
         clsPoissonOperation.SetOperation("==")
-        clsPoissonOperation.AddParameter(bSetFirst:=True, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsPoissonOperation.AddParameter(bSetFirst:=False, strParameterValue:="1") 'in there we have the level, get column name???
+        clsPoissonOperation.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsPoissonOperation.AddParameter(strParameterValue:="1") 'in there we have the level, get column name???
 
 
         clsRLength2.SetRCommand("length")
@@ -185,8 +185,8 @@ Public Class dlgRegressionSimple
         clsRLengthGrouped2.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup2.ToScript & "]")
         clsRGroup2.AddParameter("x", clsROperatorParameter:=clsPoissonOperation2)
         clsPoissonOperation2.SetOperation("==")
-        clsPoissonOperation2.AddParameter(bSetFirst:=True, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsPoissonOperation2.AddParameter(bSetFirst:=False, strParameterValue:="2") 'in there we have the level, get column name???
+        clsPoissonOperation2.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsPoissonOperation2.AddParameter(strParameterValue:="2") 'in there we have the level, get column name???
 
 
         ' T = ...
@@ -278,13 +278,13 @@ Public Class dlgRegressionSimple
                 If chkConvertToVariate.Checked Then
                     clsRConvert.SetRCommand("as.numeric")
                     clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                    clsModel.AddParameter(bSetFirst:=True, clsRFunctionParameter:=clsRConvert)
-                    clsModel.AddParameter(bSetFirst:=False, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+                    clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=clsRConvert)
+                    clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
                     ucrFamily.RecieverDatatype("numeric")
                 Else
-                    clsModel.AddParameter(bSetFirst:=True, clsRFunctionParameter:=ucrResponse.GetVariables())
-                    clsModel.AddParameter(bSetFirst:=False, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-                    clsModel.AddParameter(bSetFirst:=True, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                    clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrResponse.GetVariables())
+                    clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
+                    clsModel.AddParameter(iPosition:=1, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                     ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 End If
             Else
@@ -347,7 +347,7 @@ Public Class dlgRegressionSimple
                 sdgVariableTransformations.ModelFunction(False)
             Else
                 sdgVariableTransformations.rdoIdentity.Checked = True
-                clsModel.AddParameter(bSetFirst:=False, strParameterValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+                clsModel.AddParameter(strParameterValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
             End If
         End If
     End Sub

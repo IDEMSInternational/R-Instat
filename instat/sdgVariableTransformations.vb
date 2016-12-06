@@ -59,8 +59,8 @@ Public Class sdgVariableTransformations
                 'clsRModel.AddParameter(False, strParameterValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetOperation("^")
                 clsModel0.bBrackets = False
-                clsModel0.AddParameter(bSetFirst:=True, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
-                clsModel0.AddParameter(bSetFirst:=False, strParameterValue:=strPower)
+                clsModel0.AddParameter(iPosition:=1, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
+                clsModel0.AddParameter(strParameterValue:=strPower)
                 clsRModel.AddParameter(bSetFirst:=choice, clsROperatorParameter:=clsModel0.Clone())
             End If
         Else

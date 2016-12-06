@@ -88,10 +88,10 @@ Public Class dlgFourVariableModelling
     Public Sub TestOKEnabled()
         If (Not ucrResponse.IsEmpty()) AndAlso (Not ucrFirstExplanatory.IsEmpty()) AndAlso (Not ucrSecondExplanatoryVariable.IsEmpty()) AndAlso (Not ucrThirdExplanatoryVariable.IsEmpty()) AndAlso (ucrInputModelOperators1.GetText <> "") Then
             clsModel2.bBrackets = False
-            clsModel1.AddParameter(bSetFirst:=False, strParameterValue:="(" & clsModel2.ToScript.ToString & ")")
+            clsModel1.AddParameter(strParameterValue:="(" & clsModel2.ToScript.ToString & ")")
             clsModel1.SetOperation(ucrInputModelOperators1.GetText)
             clsModel1.bBrackets = False
-            clsModel.AddParameter(bSetFirst:=False, clsROperatorParameter:=clsModel1)
+            clsModel.AddParameter(clsROperatorParameter:=clsModel1)
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBaseFourVariableModelling.OKEnabled(True)
             ucrModelPreview.SetName(clsModel.ToScript)
@@ -119,10 +119,10 @@ Public Class dlgFourVariableModelling
             If chkConvertToVariate.Checked Then
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                clsModel.AddParameter(bSetFirst:=True, clsRFunctionParameter:=clsRConvert)
+                clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=clsRConvert)
                 ucrFamily.RecieverDatatype("numeric")
             Else
-                clsModel.AddParameter(bSetFirst:=True, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                clsModel.AddParameter(iPosition:=1, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.RecieverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
@@ -176,11 +176,11 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub ucrFirstRandomEffect_SelectionChanged() Handles ucrSecondExplanatoryVariable.SelectionChanged
-        clsModel2.AddParameter(bSetFirst:=True, strParameterValue:=ucrSecondExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
+        clsModel2.AddParameter(iPosition:=1, strParameterValue:=ucrSecondExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
     Private Sub ucrSecondRandomEffect_SelectionChanged() Handles ucrThirdExplanatoryVariable.SelectionChanged
-        clsModel2.AddParameter(bSetFirst:=False, strParameterValue:=ucrThirdExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
+        clsModel2.AddParameter(strParameterValue:=ucrThirdExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 

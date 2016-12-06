@@ -53,12 +53,12 @@ Public Class dlgNon_ParametricOneWayANOVA
     End Sub
 
     Private Sub ucrReceiverYVariate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYVariate.SelectionChanged
-        clsModel.AddParameter(bSetFirst:=True, strParameterValue:=ucrReceiverYVariate.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(iPosition:=1, strParameterValue:=ucrReceiverYVariate.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
-        clsModel.AddParameter(bSetFirst:=False, strParameterValue:=ucrReceiverFactor.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(iPosition:=1, strParameterValue:=ucrReceiverFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 

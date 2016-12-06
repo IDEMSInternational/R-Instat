@@ -31,9 +31,8 @@ Public Class RFunction
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
         'Converting the RFunction into a string that when run in R gives the appropriate output
         Dim i As Integer
-
+        'For method with OrderedIndices, replace clsParameters.count by Mybase.OrderedIndices.count and i by Mybase.OrderedIndices(i)
         strTemp = strRCommand & "("
-
         For i = 0 To clsParameters.Count - 1
             If i > 0 Then
                 strTemp = strTemp & ", "
@@ -45,13 +44,11 @@ Public Class RFunction
         Return MyBase.ToScript(strScript, strTemp)
     End Function
 
-    Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional bSetFirst As Boolean = False)
-        bSetFirst = False
-        MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, clsParam, bSetFirst)
+    Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional iPosition As Integer = 0)
+        MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, clsParam, iPosition)
     End Sub
-    Public Overrides Sub AddParameter(clsParam As RParameter, Optional bSetFirst As Boolean = False)
-        MyBase.AddParameter(clsParam)
-        OnParametersChanged()
+    Public Overrides Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = 0)
+        MyBase.AddParameter(clsParam, iPosition)
     End Sub
 
     Public Overrides Function GetParameter(strName As String) As RParameter
@@ -67,12 +64,10 @@ Public Class RFunction
 
     Public Overrides Sub RemoveParameterByName(strArgName)
         MyBase.RemoveParameterByName(strArgName)
-        OnParametersChanged()
     End Sub
 
     Public Overrides Sub ClearParameters()
         MyBase.ClearParameters()
-        OnParametersChanged()
     End Sub
 
     Public Overrides Function Clone() As RCodeStructure

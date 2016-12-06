@@ -113,7 +113,7 @@ Public Class ucrFilter
         Dim strCondition As String
 
         clsCurrentConditionList.SetRCommand("list")
-        clsCurrentConditionView.AddParameter(bSetFirst:=True, strParameterValue:=ucrFilterByReceiver.GetVariableNames())
+        clsCurrentConditionView.AddParameter(iPosition:=1, strParameterValue:=ucrFilterByReceiver.GetVariableNames())
         clsCurrentConditionList.AddParameter("column", ucrFilterByReceiver.GetVariableNames())
         If ucrFilterByReceiver.strCurrDataType = "factor" Then
             clsCurrentConditionView.SetOperation("%in%")
@@ -128,15 +128,15 @@ Public Class ucrFilter
                 strCondition = ucrValueForFilter.GetText()
             End If
         End If
-        clsCurrentConditionView.AddParameter(bSetFirst:=False, strParameterValue:=strCondition)
+        clsCurrentConditionView.AddParameter(strParameterValue:=strCondition)
         clsCurrentConditionList.AddParameter("value", strCondition)
         clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
         lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentConditionView.strOperation & " " & strCondition})
         lstFilters.Items.Add(lviCondition)
         If clsFilterView.clsParameters(0).clsArgument Is Nothing Then
-            clsFilterView.AddParameter(bSetFirst:=True, clsROperatorParameter:=(clsCurrentConditionView))
+            clsFilterView.AddParameter(iPosition:=1, clsROperatorParameter:=(clsCurrentConditionView))
         Else
-            clsFilterView.AddParameter(bSetFirst:=False, strParameterName:="Condition" & clsFilterView.clsParameters.Count - 1, clsROperatorParameter:=(clsCurrentConditionView))
+            clsFilterView.AddParameter(strParameterName:="Condition" & clsFilterView.clsParameters.Count - 1, clsROperatorParameter:=(clsCurrentConditionView))
         End If
         lstFilters.Columns(0).Width = -2
         lstFilters.Columns(1).Width = -2

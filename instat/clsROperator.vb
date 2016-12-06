@@ -27,13 +27,23 @@ Public Class ROperator
     End Sub
 
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
-        'Dim bIncludeOperation As Boolean
 
-        'may not need this anymore I believe we can get rid of include operator entirely
-        'bIncludeOperation = bForceIncludeOperation OrElse (clsParameters.Count > 1)
-
+        Dim i As Integer
+        'Alternative method using OrderedIndices.
+        'If MyBase.OrderedIndices.Count > 0 Then
+        'clsParameters(MyBase.OrderedIndices(0)).bIncludeArgumentName = False
+        'If clsParameters(MyBase.OrderedIndices(0)).bIsOperator AndAlso bBrackets Then
+        'strTemp = strTemp & "(" & clsParameters(MyBase.OrderedIndices(0)).ToScript(strScript) & ")"
+        'Else
+        'strTemp = strTemp & clsParameters(MyBase.OrderedIndices(0)).ToScript(strScript)
+        'End If
+        'End If
+        'For i = 1 To MyBase.OrderedIndices.Count - 1
+        'strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+        'clsParameters(MyBase.OrderedIndices(i)).bIncludeArgumentName = False
+        'strTemp = strTemp & clsParameters(MyBase.OrderedIndices(i)).ToScript(strScript)
+        'Next
         If clsParameters(0) IsNot Nothing Then
-            'TODO Where should this be done?
             clsParameters(0).bIncludeArgumentName = False
             If clsParameters(0).bIsOperator AndAlso bBrackets Then
                 strTemp = strTemp & "(" & clsParameters(0).ToScript(strScript) & ")"
@@ -47,21 +57,18 @@ Public Class ROperator
         For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
             'If bIncludeOperation Then
             strTemp = strTemp & Chr(32) & strOperation & Chr(32)
-            'End If
-            'TODO Where should this be done?
             clsParam.bIncludeArgumentName = False
             strTemp = strTemp & clsParam.ToScript(strScript)
         Next
-
         Return MyBase.ToScript(strScript, strTemp)
     End Function
 
-    Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional bSetFirst As Boolean = False)
+    Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional iPosition As Integer = 0)
         bIncludeArgumentName = False
-        MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, clsParam, bSetFirst)
+        MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, clsParam, iPosition)
     End Sub
-    Public Overrides Sub AddParameter(clsParam As RParameter, Optional bSetFirst As Boolean = False)
-        MyBase.AddParameter(clsParam, bSetFirst)
+    Public Overrides Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = 0)
+        MyBase.AddParameter(clsParam, iPosition)
     End Sub
 
     Public Overrides Function GetParameter(strName As String) As RParameter
@@ -75,15 +82,11 @@ Public Class ROperator
         Return Nothing
     End Function
 
-    'Public Sub RemoveLeftParameter(bRemoveLeftNotRight As Boolean)
-    '    MyBase.clsParameters.Remove(MyBase.clsParameters(0))
-    '    bIsAssigned = False
-    'End Sub
-
-    Public Sub RemoveAllAdditionalParameters()
+    Public Sub RemoveAllAdditionalParameters() 'Needs to be changed if using OrderedIndices method.
         If clsParameters.Count > 1 Then
             clsParameters.RemoveRange(1, clsParameters.Count - 1)
         End If
+        OnParametersChanged()
     End Sub
 
     Public Overrides Function Clone() As RCodeStructure
