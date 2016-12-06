@@ -35,6 +35,8 @@ Public Class frmEditor
     Private clsRemoveFilter As New RFunction
     Private clsFreezeColumns As New RFunction
     Private clsUnfreezeColumns As New RFunction
+    Private clsViewDataFrame As New RFunction
+    Private clsGetDataFrame As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -74,6 +76,8 @@ Public Class frmEditor
         clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
         clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
         clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsViewDataFrame.SetRCommand("View")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -380,19 +384,19 @@ Public Class frmEditor
                     Else
                         MsgBox("Invalid value: " & strNewValue & vbNewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
-                    'Currently removed as this is the class for a blank column
-                    'Case "logical"
-                    '    'Should we accept 'true'/'false'/'True' etc. as logical values?
-                    '    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
-                    '        clsReplaceValue.AddParameter("new_value", e.NewData)
-                    '        bValid = True
-                    '    Else
-                    '        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
-                    '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-                    '    End If
-                    'Case "character"
-                    'clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
-                    'bValid = True
+                'Currently removed as this is the class for a blank column
+                'Case "logical"
+                '    'Should we accept 'true'/'false'/'True' etc. as logical values?
+                '    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
+                '        clsReplaceValue.AddParameter("new_value", e.NewData)
+                '        bValid = True
+                '    Else
+                '        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
+                '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                '    End If
+                'Case "character"
+                'clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                'bValid = True
                 Case Else
                     If Double.TryParse(strNewValue, dblValue) OrElse strNewValue = "TRUE" OrElse strNewValue = "FALSE" Then
                         clsReplaceValue.AddParameter("new_value", strNewValue)
@@ -537,6 +541,7 @@ Public Class frmEditor
             clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 
@@ -620,5 +625,10 @@ Public Class frmEditor
 
     Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
         grdData.CurrentWorksheet.Copy()
+    End Sub
+
+    Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
+        clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
+        frmMain.clsRLink.RunScript(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame")
     End Sub
 End Class
