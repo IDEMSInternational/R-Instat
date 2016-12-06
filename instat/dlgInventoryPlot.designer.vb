@@ -22,127 +22,133 @@ Partial Class dlgInventoryPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtPlotName = New System.Windows.Forms.TextBox()
-        Me.txtYlabel = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblYLabel = New System.Windows.Forms.Label()
-        Me.chkSort = New System.Windows.Forms.CheckBox()
-        Me.chkRemoveNA = New System.Windows.Forms.CheckBox()
-        Me.txtWetColour = New System.Windows.Forms.TextBox()
-        Me.txtDryColour = New System.Windows.Forms.TextBox()
-        Me.lblDry = New System.Windows.Forms.Label()
-        Me.lblWet = New System.Windows.Forms.Label()
-        Me.lblColour = New System.Windows.Forms.Label()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.lblDayOfyear = New System.Windows.Forms.Label()
+        Me.lblColourBand = New System.Windows.Forms.Label()
+        Me.chkFlipCoordinates = New System.Windows.Forms.CheckBox()
+        Me.lblDoY = New System.Windows.Forms.Label()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.chkAddRecodetoData = New System.Windows.Forms.CheckBox()
+        Me.ucrColourReceiver = New instat.ucrReceiverSingle()
+        Me.ucrDayOfYearReceiver = New instat.ucrReceiverSingle()
+        Me.ucrYearReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSaveInventoryPlot = New instat.ucrSaveGraph()
+        Me.UcrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'txtPlotName
+        'lblYear
         '
-        Me.txtPlotName.Location = New System.Drawing.Point(119, 12)
-        Me.txtPlotName.Name = "txtPlotName"
-        Me.txtPlotName.Size = New System.Drawing.Size(219, 20)
-        Me.txtPlotName.TabIndex = 0
-        Me.txtPlotName.Tag = "Plot_Name"
+        Me.lblYear.AutoSize = True
+        Me.lblYear.Location = New System.Drawing.Point(289, 31)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(29, 13)
+        Me.lblYear.TabIndex = 16
+        Me.lblYear.Text = "Year"
         '
-        'txtYlabel
+        'lblDayOfyear
         '
-        Me.txtYlabel.Location = New System.Drawing.Point(119, 38)
-        Me.txtYlabel.Name = "txtYlabel"
-        Me.txtYlabel.Size = New System.Drawing.Size(100, 20)
-        Me.txtYlabel.TabIndex = 1
-        Me.txtYlabel.Tag = "Ylabel"
+        Me.lblDayOfyear.AutoSize = True
+        Me.lblDayOfyear.Location = New System.Drawing.Point(289, 90)
+        Me.lblDayOfyear.Name = "lblDayOfyear"
+        Me.lblDayOfyear.Size = New System.Drawing.Size(0, 13)
+        Me.lblDayOfyear.TabIndex = 19
         '
-        'Label1
+        'lblColourBand
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(36, 15)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(27, 13)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Tag = "Title"
-        Me.Label1.Text = "Title"
+        Me.lblColourBand.AutoSize = True
+        Me.lblColourBand.Location = New System.Drawing.Point(289, 146)
+        Me.lblColourBand.Name = "lblColourBand"
+        Me.lblColourBand.Size = New System.Drawing.Size(29, 13)
+        Me.lblColourBand.TabIndex = 20
+        Me.lblColourBand.Text = "Rain"
         '
-        'lblYLabel
+        'chkFlipCoordinates
         '
-        Me.lblYLabel.AutoSize = True
-        Me.lblYLabel.Location = New System.Drawing.Point(36, 41)
-        Me.lblYLabel.Name = "lblYLabel"
-        Me.lblYLabel.Size = New System.Drawing.Size(39, 13)
-        Me.lblYLabel.TabIndex = 3
-        Me.lblYLabel.Tag = "Y_Label"
-        Me.lblYLabel.Text = "Label1"
+        Me.chkFlipCoordinates.AutoSize = True
+        Me.chkFlipCoordinates.Location = New System.Drawing.Point(292, 204)
+        Me.chkFlipCoordinates.Name = "chkFlipCoordinates"
+        Me.chkFlipCoordinates.Size = New System.Drawing.Size(101, 17)
+        Me.chkFlipCoordinates.TabIndex = 21
+        Me.chkFlipCoordinates.Text = "Flip Coordinates"
+        Me.chkFlipCoordinates.UseVisualStyleBackColor = True
         '
-        'chkSort
+        'lblDoY
         '
-        Me.chkSort.AutoSize = True
-        Me.chkSort.Location = New System.Drawing.Point(119, 157)
-        Me.chkSort.Name = "chkSort"
-        Me.chkSort.Size = New System.Drawing.Size(81, 17)
-        Me.chkSort.TabIndex = 4
-        Me.chkSort.Tag = "Sort"
-        Me.chkSort.Text = "CheckBox1"
-        Me.chkSort.UseVisualStyleBackColor = True
+        Me.lblDoY.AutoSize = True
+        Me.lblDoY.Location = New System.Drawing.Point(289, 90)
+        Me.lblDoY.Name = "lblDoY"
+        Me.lblDoY.Size = New System.Drawing.Size(81, 13)
+        Me.lblDoY.TabIndex = 22
+        Me.lblDoY.Text = "Day of the Year"
         '
-        'chkRemoveNA
+        'cmdOptions
         '
-        Me.chkRemoveNA.AutoSize = True
-        Me.chkRemoveNA.Location = New System.Drawing.Point(249, 157)
-        Me.chkRemoveNA.Name = "chkRemoveNA"
-        Me.chkRemoveNA.Size = New System.Drawing.Size(81, 17)
-        Me.chkRemoveNA.TabIndex = 5
-        Me.chkRemoveNA.Tag = "Remove_NA"
-        Me.chkRemoveNA.Text = "CheckBox2"
-        Me.chkRemoveNA.UseVisualStyleBackColor = True
+        Me.cmdOptions.Enabled = False
+        Me.cmdOptions.Location = New System.Drawing.Point(12, 204)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.TabIndex = 23
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'txtWetColour
+        'chkAddRecodetoData
         '
-        Me.txtWetColour.Location = New System.Drawing.Point(119, 87)
-        Me.txtWetColour.Name = "txtWetColour"
-        Me.txtWetColour.Size = New System.Drawing.Size(100, 20)
-        Me.txtWetColour.TabIndex = 7
-        Me.txtWetColour.Tag = "Wet"
+        Me.chkAddRecodetoData.AutoSize = True
+        Me.chkAddRecodetoData.Location = New System.Drawing.Point(292, 228)
+        Me.chkAddRecodetoData.Name = "chkAddRecodetoData"
+        Me.chkAddRecodetoData.Size = New System.Drawing.Size(124, 17)
+        Me.chkAddRecodetoData.TabIndex = 24
+        Me.chkAddRecodetoData.Text = "Add Recode to Data"
+        Me.chkAddRecodetoData.UseVisualStyleBackColor = True
         '
-        'txtDryColour
+        'ucrColourReceiver
         '
-        Me.txtDryColour.Location = New System.Drawing.Point(301, 87)
-        Me.txtDryColour.Name = "txtDryColour"
-        Me.txtDryColour.Size = New System.Drawing.Size(100, 20)
-        Me.txtDryColour.TabIndex = 8
-        Me.txtDryColour.Tag = "Dry"
+        Me.ucrColourReceiver.Location = New System.Drawing.Point(292, 168)
+        Me.ucrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrColourReceiver.Name = "ucrColourReceiver"
+        Me.ucrColourReceiver.Selector = Nothing
+        Me.ucrColourReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrColourReceiver.TabIndex = 18
         '
-        'lblDry
+        'ucrDayOfYearReceiver
         '
-        Me.lblDry.AutoSize = True
-        Me.lblDry.Location = New System.Drawing.Point(233, 90)
-        Me.lblDry.Name = "lblDry"
-        Me.lblDry.Size = New System.Drawing.Size(39, 13)
-        Me.lblDry.TabIndex = 9
-        Me.lblDry.Tag = "Dry"
-        Me.lblDry.Text = "Label2"
+        Me.ucrDayOfYearReceiver.Location = New System.Drawing.Point(292, 113)
+        Me.ucrDayOfYearReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDayOfYearReceiver.Name = "ucrDayOfYearReceiver"
+        Me.ucrDayOfYearReceiver.Selector = Nothing
+        Me.ucrDayOfYearReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrDayOfYearReceiver.TabIndex = 17
         '
-        'lblWet
+        'ucrYearReceiver
         '
-        Me.lblWet.AutoSize = True
-        Me.lblWet.Location = New System.Drawing.Point(52, 90)
-        Me.lblWet.Name = "lblWet"
-        Me.lblWet.Size = New System.Drawing.Size(39, 13)
-        Me.lblWet.TabIndex = 10
-        Me.lblWet.Tag = "Wet"
-        Me.lblWet.Text = "Label3"
+        Me.ucrYearReceiver.Location = New System.Drawing.Point(292, 53)
+        Me.ucrYearReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrYearReceiver.Name = "ucrYearReceiver"
+        Me.ucrYearReceiver.Selector = Nothing
+        Me.ucrYearReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrYearReceiver.TabIndex = 15
         '
-        'lblColour
+        'ucrSaveInventoryPlot
         '
-        Me.lblColour.AutoSize = True
-        Me.lblColour.Location = New System.Drawing.Point(66, 65)
-        Me.lblColour.Name = "lblColour"
-        Me.lblColour.Size = New System.Drawing.Size(37, 13)
-        Me.lblColour.TabIndex = 11
-        Me.lblColour.Tag = "Colour"
-        Me.lblColour.Text = "Colour"
+        Me.ucrSaveInventoryPlot.Location = New System.Drawing.Point(12, 238)
+        Me.ucrSaveInventoryPlot.Name = "ucrSaveInventoryPlot"
+        Me.ucrSaveInventoryPlot.Size = New System.Drawing.Size(265, 20)
+        Me.ucrSaveInventoryPlot.TabIndex = 14
+        '
+        'UcrInventoryPlotSelector
+        '
+        Me.UcrInventoryPlotSelector.bShowHiddenColumns = False
+        Me.UcrInventoryPlotSelector.bUseCurrentFilter = True
+        Me.UcrInventoryPlotSelector.Location = New System.Drawing.Point(9, 9)
+        Me.UcrInventoryPlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrInventoryPlotSelector.Name = "UcrInventoryPlotSelector"
+        Me.UcrInventoryPlotSelector.Size = New System.Drawing.Size(210, 180)
+        Me.UcrInventoryPlotSelector.TabIndex = 13
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(27, 217)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 283)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 12
@@ -151,19 +157,20 @@ Partial Class dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(481, 268)
+        Me.ClientSize = New System.Drawing.Size(431, 337)
+        Me.Controls.Add(Me.chkAddRecodetoData)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.lblDoY)
+        Me.Controls.Add(Me.chkFlipCoordinates)
+        Me.Controls.Add(Me.lblColourBand)
+        Me.Controls.Add(Me.lblDayOfyear)
+        Me.Controls.Add(Me.ucrColourReceiver)
+        Me.Controls.Add(Me.ucrDayOfYearReceiver)
+        Me.Controls.Add(Me.lblYear)
+        Me.Controls.Add(Me.ucrYearReceiver)
+        Me.Controls.Add(Me.ucrSaveInventoryPlot)
+        Me.Controls.Add(Me.UcrInventoryPlotSelector)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblColour)
-        Me.Controls.Add(Me.lblWet)
-        Me.Controls.Add(Me.lblDry)
-        Me.Controls.Add(Me.txtDryColour)
-        Me.Controls.Add(Me.txtWetColour)
-        Me.Controls.Add(Me.chkRemoveNA)
-        Me.Controls.Add(Me.chkSort)
-        Me.Controls.Add(Me.lblYLabel)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.txtYlabel)
-        Me.Controls.Add(Me.txtPlotName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -175,17 +182,17 @@ Partial Class dlgInventoryPlot
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtPlotName As TextBox
-    Friend WithEvents txtYlabel As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents lblYLabel As Label
-    Friend WithEvents chkSort As CheckBox
-    Friend WithEvents chkRemoveNA As CheckBox
-    Friend WithEvents txtWetColour As TextBox
-    Friend WithEvents txtDryColour As TextBox
-    Friend WithEvents lblDry As Label
-    Friend WithEvents lblWet As Label
-    Friend WithEvents lblColour As Label
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents UcrInventoryPlotSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSaveInventoryPlot As ucrSaveGraph
+    Friend WithEvents ucrYearReceiver As ucrReceiverSingle
+    Friend WithEvents lblYear As Label
+    Friend WithEvents ucrDayOfYearReceiver As ucrReceiverSingle
+    Friend WithEvents ucrColourReceiver As ucrReceiverSingle
+    Friend WithEvents lblDayOfyear As Label
+    Friend WithEvents lblColourBand As Label
+    Friend WithEvents chkFlipCoordinates As CheckBox
+    Friend WithEvents lblDoY As Label
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents chkAddRecodetoData As CheckBox
 End Class

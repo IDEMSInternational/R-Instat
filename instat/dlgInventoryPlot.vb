@@ -1,44 +1,127 @@
-﻿Imports instat.Translations
+﻿' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat.Translations
 Public Class dlgInventoryPlot
-    Private Sub ucrButtons_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strScript As String
-        strScript = "climate_obj$plot_inventory(data_list=list()"
-        strScript = strScript & ", col=c(" & Chr(34) & txtWetColour.Text.ToString() & Chr(34)
-        strScript = strScript & "," & Chr(34) & txtDryColour.Text.ToString() & Chr(34) & ")"
-        strScript = strScript & ", sort=" & chkSort.Checked.ToString().ToUpper
-        strScript = strScript & ", na.rm=" & chkSort.Checked.ToString().ToUpper
-        strScript = strScript & ", main_title=" & Chr(34) & txtPlotName.Text & Chr(34)
-        strScript = strScript & ")"
-
-        frmMain.clsRLink.RunScript(strScript, False)
-        'frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
-        'frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
-        Me.Hide()
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 454
-    End Sub
-
-    Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'UpdateVisible()
+    Private bFirstLoad As Boolean = True
+    Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+        End If
         autoTranslate(Me)
     End Sub
 
-    Private Sub UpdateVisible()
-        'lblDryLength.Visible = chkDrySpell.Checked
-        'lblWithin.Visible = chkDrySpell.Checked
-        'lblDays.Visible = chkDrySpell.Checked
-        'nudDryLength.Visible = chkDrySpell.Checked
-        'nudWithin.Visible = chkDrySpell.Checked
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.iHelpTopicID = 455
+
+        ucrYearReceiver.SetIncludedDataTypes({"factor"})
+        ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric"})
+        ucrColourReceiver.SetIncludedDataTypes({"numeric"})
+
+        ucrYearReceiver.Selector = UcrInventoryPlotSelector
+        ucrColourReceiver.Selector = UcrInventoryPlotSelector
+        ucrDayOfYearReceiver.Selector = UcrInventoryPlotSelector
+        ucrSaveInventoryPlot.strPrefix = "InventoryPlot"
+        ucrSaveInventoryPlot.SetDataFrameSelector(UcrInventoryPlotSelector.ucrAvailableDataFrames)
     End Sub
 
-    Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub TestOkEnabled()
+        If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not ucrColourReceiver.IsEmpty) OrElse (ucrSaveInventoryPlot.chkSaveGraph.Checked AndAlso Not ucrSaveInventoryPlot.ucrInputGraphName.IsEmpty) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+    Private Sub SetDefaults()
+        ucrYearReceiver.SetMeAsReceiver()
+        TestOkEnabled()
+    End Sub
+
+    Public Sub SetCoordFlip()
+        Dim clsTempRFunc As New RFunction
+        If chkFlipCoordinates.Checked Then
+            clsTempRFunc.SetRCommand("coord_flip")
+            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
+        Else
+            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
+        End If
+    End Sub
+
+    Private Sub ucrSaveInventoryPlot_GraphNameChanged() Handles ucrSaveInventoryPlot.GraphNameChanged, ucrSaveInventoryPlot.SaveGraphCheckedChanged
+        If ucrSaveInventoryPlot.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveInventoryPlot.strGraphName, strTempDataframe:=UcrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveInventoryPlot.strGraphName)
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=UcrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        End If
+    End Sub
+
+    Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
+        SetCoordFlip()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub UcrInventoryPlotSelector_DataFrameChanged() Handles UcrInventoryPlotSelector.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & UcrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrSaveInventoryPlot_ContentsChanged() Handles ucrSaveInventoryPlot.ContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrDayOfYearReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrDayOfYearReceiver.SelectionChanged
+        If Not ucrDayOfYearReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("doy", ucrDayOfYearReceiver.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("doy")
+        End If
+
+        TestOkEnabled()
 
     End Sub
 
+    Private Sub ucrColourReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColourReceiver.SelectionChanged
+        If Not ucrColourReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_name", ucrColourReceiver.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
+        TestOkEnabled()
+    End Sub
 
-    Private Sub txtPlotName_TextChanged(sender As Object, e As EventArgs) Handles txtPlotName.TextChanged
+    Private Sub ucrYearReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYearReceiver.SelectionChanged
+        If Not ucrYearReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("year", ucrYearReceiver.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("year")
+        End If
+        TestOkEnabled()
+    End Sub
 
+    Private Sub chkAddRecodetoData_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddRecodetoData.CheckedChanged
+        If chkAddRecodetoData.Checked Then
+            ucrBase.clsRsyntax.AddParameter("add_to_data", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("add_to_data")
+        End If
     End Sub
 End Class
