@@ -14,9 +14,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgStartofRains
+    Public clsAddKey, clsAfterFifty, clsRainfallOverThreshold, clsRollingSum, clsMinimumRainfall, clsRollingofThreshold, clsXdaysRain, clsFirstDOYPerYear, clsFirstInstance, clsNoRain, clsCumulativeRain, clsDryPeriodTen, clsWithinThirtyDays As New RFunction
     Public bFirstLoad As Boolean = True
-    Private Sub ucrBase_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-
+    Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -25,35 +25,15 @@ Public Class dlgStartofRains
         Else
             ReopenDialog()
         End If
-
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim strScript As String
 
-        strScript = "climate_obj$add_start_rain(data_list=list()"
-        strScript = strScript & ", earliest_day=" & nudEarliest.Value.ToString()
-        strScript = strScript & ", total_days=" & nudNumberofRainDays.Value.ToString()
-        strScript = strScript & ", rain_total=" & nudTotalRain.Value.ToString()
-        strScript = strScript & ", threshold=" & nudThreashold.Value.ToString()
-        strScript = strScript & ", dry_spell_condition=" & chkDrySpell.Checked.ToString().ToUpper()
-        If chkDrySpell.Checked Then
-            strScript = strScript & ", dry_days=" & nudDryLength.Value.ToString()
-            strScript = strScript & ", dry_length=" & nudWithin.Value.ToString()
-        End If
-        strScript = strScript & ", col_name=" & Chr(34) & ucrInputColumnName.Name & Chr(34)
-        strScript = strScript & ",replace=TRUE)"
-
-        frmMain.clsRLink.RunScript(strScript, False)
-        'TODO fix this to update grids instead of calling FillData which no longer exists
-        '        frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
-        '        frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
-        Me.Hide()
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.OKEnabled(False)
+
     End Sub
 
     Private Sub ReopenDialog()
@@ -61,7 +41,11 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -69,21 +53,19 @@ Public Class dlgStartofRains
         TestOKEnabled()
     End Sub
 
-    Private Sub chkDrySpell_CheckedChanged(sender As Object, e As EventArgs) Handles chkDrySpell.CheckedChanged
-        UpdateVisible()
+    Private Sub grpRainParameters_Enter(sender As Object, e As EventArgs) Handles nudFrom.TextChanged, nudTo.TextChanged, nudThreshold.TextChanged, nudOverDays.TextChanged
+        TestOKEnabled()
     End Sub
 
-    Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles Me.Load
-        UpdateVisible()
-        autoTranslate(Me)
+    Private Sub grpConditionsForSatrtofRains_Enter(sender As Object, e As EventArgs) Handles chkConsecutiveRainyDays.CheckedChanged, chkTotalRainfall.CheckedChanged, chkTotalRainfall.CheckedChanged, nudValue.TextChanged, nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverRainfall_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRainfall.SelectionChanged
 
     End Sub
 
-    Private Sub UpdateVisible()
-        lblDryLength.Visible = chkDrySpell.Checked
-        lblWithin.Visible = chkDrySpell.Checked
-        lblDays.Visible = chkDrySpell.Checked
-        nudDryLength.Visible = chkDrySpell.Checked
-        nudWithin.Visible = chkDrySpell.Checked
+    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
+
     End Sub
 End Class
