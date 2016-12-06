@@ -1776,3 +1776,68 @@ data_object$set("public","split_date", function(data_name, col_name = "", week =
   #Implement option for the day of the year
   }
 )
+
+#TODO These should go in a separate climatic file
+#************************************************
+# labels for climatic column types
+rain_label="rain"
+rain_day_label="rain_day"
+rain_day_lag_label="rain_day_lag"
+date_label="date"
+doy_label="doy"
+year_label="year"
+year_month_label="year_month"
+date_time_label="date_time"
+dos_label="dos" ##Day of Season
+season_label="season"
+month_label="month"
+day_label="day"
+dm_label="day_month"
+time_label="time"
+station_label="station"
+date_asstring_label="date_asstring"
+temp_min_label="temp_min"
+temp_max_label="temp_max"
+temp_air_label="temp_air"
+temp_range_label="temp_range"
+wet_buld_label="wet_bulb"
+dry_bulb_label="dry_buld"
+evaporation_label="evaporation"
+element_factor_label="element_type"
+identifier_label = "identifier"
+capacity_label = "capacity_max"
+wind_speed_label="wind_speed"
+wind_direction_label="wind_direction"
+lat_label="lat"
+lon_label="lon"
+alt_label="alt"
+season_station_label="season_station"
+date_station_label="date_station"
+sunshine_hours_label="sunshine_hours"
+radiation_label="radiation"
+cloud_cover_label="cloud_cover"
+
+all_climatic_column_types <- c(rain_label, rain_day_label, rain_day_lag_label, date_label, doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
+
+# Column metadata
+climatic_type_label = "Climatic_Type"
+
+# Data frame metadata
+is_climatic_label = "Is_Climatic"
+
+instat_object$set("public","define_as_climatic", function(data_name, types) {
+  self$append_to_dataframe_metadata(data_name, is_climatic_label, TRUE)
+  for(curr_data_name in self$get_data_names()) {
+    if(!self$get_data_objects(data_name)$is_metadata(is_climatic_label)) {
+      self$append_to_dataframe_metadata(curr_data_name, is_climatic_label, FALSE)
+    }
+  }
+  self$get_data_objects(data_name)$set_climatic_types(types)
+}
+)
+
+data_object$set("public","set_climatic_types", function(types) {
+  if(!all(names(types) %in% all_climatic_column_types)) stop("Cannot recognise the following climatic types: ", paste(names(types)[!names(types) %in% all_climatic_column_types], collapse = ", "))
+  invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], climatic_type_label, name)))
+}
+)
