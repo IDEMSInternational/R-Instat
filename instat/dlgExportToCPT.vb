@@ -39,6 +39,7 @@ Public Class dlgExportToCPT
         chkLong.Checked = True
         ucrReceiverYears.SetMeAsReceiver()
         ucrSSTDataframe.Reset()
+        ucrLocationDataFrame.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -47,7 +48,7 @@ Public Class dlgExportToCPT
         ucrReceiverDataColumn.Selector = ucrSSTDataframe
         ucrReceiverYears.Selector = ucrSSTDataframe
         ucrReceiverStations.Selector = ucrSSTDataframe
-        ucrLocationDataFrame.lblDataFrame.Text = "Location Dataframe:"
+        ucrLocationDataFrame.lblDataFrame.Text = "Location:"
     End Sub
 
     Private Sub TestOkEnabled()
@@ -81,6 +82,7 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub chkLong_CheckedChanged(sender As Object, e As EventArgs) Handles chkLong.CheckedChanged
+        ucrReceiverYears.Focus()
         If chkLong.Checked Then
             clsOutPut.AddParameter("long", "TRUE")
             lblStations.Visible = True
@@ -150,6 +152,10 @@ Public Class dlgExportToCPT
     Private Sub ucrLocationDataFrame_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrLocationDataFrame.DataFrameChanged
         clsOutPut.AddParameter("lat_lon_data", clsRFunctionParameter:=ucrLocationDataFrame.clsCurrDataFrame)
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverDataColumn_Load(sender As Object, e As EventArgs) Handles ucrReceiverDataColumn.Load
+
     End Sub
 
     Private Sub ucrReceiverYears_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYears.SelectionChanged
