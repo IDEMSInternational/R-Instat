@@ -28,6 +28,7 @@ Public Class DlgDefineClimaticData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
         ucrReceiverDate.Selector = ucrSelectorDefineClimaticData
         ucrReceiverCloudCover.Selector = ucrSelectorDefineClimaticData
         ucrReceiverStation.Selector = ucrSelectorDefineClimaticData
@@ -63,13 +64,33 @@ Public Class DlgDefineClimaticData
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
+    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged, ucrReceiverCloudCover.SelectionChanged, ucrReceiverDate.SelectionChanged, ucrReceiverDay.SelectionChanged, ucrReceiverMaxTemp.SelectionChanged, ucrReceiverMinTemp.SelectionChanged, ucrReceiverMonth.SelectionChanged, ucrReceiverRadiation.SelectionChanged, ucrReceiverRain.SelectionChanged, ucrReceiverStation.SelectionChanged, ucrReceiverSunshine.SelectionChanged, ucrReceiverWindDirection.SelectionChanged, ucrReceiverWindSpeed.SelectionChanged, ucrReceiverYear.SelectionChanged
+        FillClimaticTypes()
         TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorDefineClimaticData_DataFrameChanged() Handles ucrSelectorDefineClimaticData.DataFrameChanged
-
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
+    Private Sub FillClimaticTypes()
+        Dim strParameters As String = ""
+        Dim Receiver As ucrReceiverSingle
+        Dim counter As Integer = 0
+        Dim lstReceivers As New List(Of ucrReceiverSingle)
+        lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDate, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation, ucrReceiverRain, ucrReceiverStation, ucrReceiverSunshine, ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear})
+        strParameters = "c("
+        For Each Receiver In lstReceivers
+            If Not Receiver.IsEmpty Then
+                If counter > 1 Then
+                    strParameters = strParameters & ","
+                End If
+                strParameters = strParameters & Receiver.GetVariableNames()
+            End If
+            counter = counter + 1
+        Next
+        strParameters = strParameters & ")"
+        ucrBase.clsRsyntax.AddParameter("types", strParameters)
 
+    End Sub
 End Class
