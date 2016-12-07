@@ -1301,4 +1301,8 @@ Public Class frmMain
     Private Sub mnuClimaticSCFSupportOpenSST_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportOpenSST.Click
         dlgOpenSST.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticFileDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileDefineClimaticData.Click
+        DlgDefineClimaticData.ShowDialog()
+    End Sub
 End Class
