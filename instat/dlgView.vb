@@ -14,20 +14,19 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgViewSeparateWindow
+Public Class dlgView
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-        ucrBase.clsRsyntax.iCallType = 2
 
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
         End If
         'Checks if Ok can be enabled.
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetDefaults()
@@ -49,16 +48,17 @@ Public Class dlgViewSeparateWindow
         ucrReceiverView.Selector = ucrSelctorForView
         ucrReceiverView.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 32
+        ucrBase.clsRsyntax.iCallType = 2
 
     End Sub
 
     Private Sub TestOKEnabled()
-
-        If Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> "" Then
+        If (rdoViewOutputWindow.Checked AndAlso ((Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> ""))) OrElse ((rdoViewDataFrame.Checked) AndAlso Not (ucrReceiverView.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
-        End If
+            End If
+
     End Sub
 
     Private Sub grpDisplayFrom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
