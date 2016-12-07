@@ -54,6 +54,12 @@ Public Class sdgVariableTransformations
     End Sub
 
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
+        Dim i As Integer 'This is temporary, will need to change this method...
+        If choice Then
+            i = 1
+        Else
+            i = 0
+        End If
         If strFunctionName = "power" Then
             If strPower <> "1" Then
                 'clsRModel.AddParameter(False, strParameterValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
@@ -61,12 +67,14 @@ Public Class sdgVariableTransformations
                 clsModel0.bBrackets = False
                 clsModel0.AddParameter(iPosition:=1, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.AddParameter(strParameterValue:=strPower)
-                clsRModel.AddParameter(bSetFirst:=choice, clsROperatorParameter:=clsModel0.Clone())
+                clsRModel.AddParameter(iPosition:=i, clsROperatorParameter:=clsModel0.Clone())
+
+
             End If
         Else
             clsRToFunction.SetRCommand(strFunctionName)
             clsRToFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
-            clsRModel.AddParameter(bSetFirst:=choice, clsRFunctionParameter:=clsRToFunction.Clone())
+            clsRModel.AddParameter(iPosition:=i, clsRFunctionParameter:=clsRToFunction.Clone())
         End If
     End Sub
 
