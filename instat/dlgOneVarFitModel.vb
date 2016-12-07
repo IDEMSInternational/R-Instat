@@ -184,7 +184,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetTTest()
-        If ucrFamily.clsCurrDistribution.strNameTag = "Normal" AndAlso (UcrReceiver.strCurrDataType = "factor" Or UcrReceiver.strCurrDataType = "character") Then
+        If ucrFamily.clsCurrDistribution.strNameTag = "Normal" AndAlso (UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character") Then
             UcrReceiver.Clear()
         End If
         clsRTTest.SetRCommand("t.test")
@@ -197,7 +197,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetPoissonTest()
-        If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" AndAlso (UcrReceiver.strCurrDataType = "factor" Or UcrReceiver.strCurrDataType = "character") Then
+        If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" AndAlso (UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character") Then
             UcrReceiver.Clear()
         End If
         clsRPoissonTest.SetRCommand("poisson.test")
@@ -260,10 +260,12 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub AssignSaveModel()
-        If chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty Then
-            UcrBase.clsRsyntax.SetAssignTo(ucrSaveModel.GetText, strTempModel:=ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        Else
-            UcrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If rdoGeneral.Checked Then
+            If chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty Then
+                UcrBase.clsRsyntax.SetAssignTo(ucrSaveModel.GetText, strTempModel:=ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            Else
+                UcrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            End If
         End If
     End Sub
 
