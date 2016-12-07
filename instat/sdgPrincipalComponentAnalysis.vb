@@ -41,8 +41,6 @@ Public Class sdgPrincipalComponentAnalysis
         chkRotation.Checked = True
         chkPercentageScree.Checked = False
         rdoScreePlot.Checked = True
-        cboChoiceScree.SelectedItem = "variance"
-        cboLabel.SelectedItem = "all"
         rdoScreePlot.Checked = True
         nudDim1.Value = 1
         nudDim2.Value = 2
@@ -99,8 +97,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRScreePlot.SetOperatorParameter(False, clsRFunc:=clsRScreePlotTheme)
         If chkPercentageScree.Checked Then
             clsRScreePlotFunction.AddParameter("addlabels", "TRUE")
-        ElseIf Not chkPercentageScree.Checked Then
-            clsRScreePlotFunction.AddParameter("addlabels", "FALSE")
         Else
             clsRScreePlotFunction.RemoveParameterByName("addlabels")
         End If
@@ -242,8 +238,7 @@ Public Class sdgPrincipalComponentAnalysis
             nudDim1.Visible = False
             nudDim2.Visible = False
             lblDim.Visible = False
-            cboChoiceScree.Visible = False
-            cboLabel.Visible = False
+            ucrLabel.Visible = False
             'rdoBoth.Checked = False
             ucrSelectorFactor.Visible = True
             ucrReceiverFactor.Visible = True
@@ -255,6 +250,7 @@ Public Class sdgPrincipalComponentAnalysis
             ucrSelectorFactor.Visible = False
             ucrReceiverFactor.Visible = False
             lblFactorVariable.Visible = False
+            ucrLabel.Visible = True
             If rdoScreePlot.Checked Then
                 grpGeom.Visible = True
                 lblChoiceScree.Text = "Choice:"
@@ -264,17 +260,17 @@ Public Class sdgPrincipalComponentAnalysis
                 nudDim1.Visible = False
                 nudDim2.Visible = False
                 lblDim.Visible = False
-                cboChoiceScree.Visible = True
-                cboLabel.Visible = False
+                ucrLabel.SetItems({"variance", "eigenvalue"})
+                ucrLabel.SetName("variance")
             Else
+                ucrLabel.SetName("all")
+                ucrLabel.SetItems({"all", "ind.sup", "quali", "quanti.sup", "var", "ind", "none"})
                 nudDim1.Visible = True
                 nudDim2.Visible = True
                 lblDim.Visible = True
                 chkPercentageScree.Visible = False
                 lblChoiceScree.Text = "Label:"
                 rdoTwo.Text = "Text"
-                cboChoiceScree.Visible = False
-                cboLabel.Visible = True
                 If rdoVariablesPlot.Checked Then
                     rdoOne.Text = "Arrow"
                 Else
@@ -337,24 +333,28 @@ Public Class sdgPrincipalComponentAnalysis
         End If
     End Sub
 
-    Private Sub cboChoiceScree_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboChoiceScree.SelectedIndexChanged
-        clsRScreePlotFunction.AddParameter("choice", Chr(34) & cboChoiceScree.SelectedItem.ToString & Chr(34))
+    Private Sub cboLabelVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ucrLabel.TextChanged
+        ComboBoxOptions()
     End Sub
 
-    Private Sub cboLabelVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLabel.SelectedIndexChanged
+    Private Sub ComboBoxOptions()
+        If rdoScreePlot.Checked Then
+            clsRScreePlotFunction.AddParameter("choice", Chr(34) & ucrLabel.GetText & Chr(34))
+        End If
         If rdoVariablesPlot.Checked Then
-            clsRVariablesPlotFunction.AddParameter("label", Chr(34) & cboLabel.SelectedItem.ToString & Chr(34))
+            clsRVariablesPlotFunction.AddParameter("label", Chr(34) & ucrLabel.GetText & Chr(34))
         End If
         If rdoIndividualsPlot.Checked Then
-            clsRIndividualsPlotFunction.AddParameter("label", Chr(34) & cboLabel.SelectedItem.ToString & Chr(34))
+            clsRIndividualsPlotFunction.AddParameter("label", Chr(34) & ucrLabel.GetText & Chr(34))
         End If
         If rdoBiplot.Checked Then
-            clsRBiplotFunction.AddParameter("label", Chr(34) & cboLabel.SelectedItem.ToString & Chr(34))
+            clsRBiplotFunction.AddParameter("label", Chr(34) & ucrLabel.GetText & Chr(34))
         End If
     End Sub
 
     Private Sub rdoPlots_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScreePlot.CheckedChanged, rdoBarPlot.CheckedChanged, rdoBiplot.CheckedChanged, rdoVariablesPlot.CheckedChanged, rdoIndividualsPlot.CheckedChanged
         DisplayOptions()
         GeomChecked()
+        ComboBoxOptions()
     End Sub
 End Class

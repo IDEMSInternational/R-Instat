@@ -32,15 +32,16 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoBarPlot = New System.Windows.Forms.RadioButton()
         Me.rdoIndividualsPlot = New System.Windows.Forms.RadioButton()
         Me.grpScree = New System.Windows.Forms.GroupBox()
+        Me.ucrLabel = New instat.ucrInputComboBox()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
-        Me.cboChoiceScree = New System.Windows.Forms.ComboBox()
+        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblChoiceScree = New System.Windows.Forms.Label()
         Me.chkPercentageScree = New System.Windows.Forms.CheckBox()
         Me.grpGeom = New System.Windows.Forms.GroupBox()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoTwo = New System.Windows.Forms.RadioButton()
         Me.rdoOne = New System.Windows.Forms.RadioButton()
-        Me.cboLabel = New System.Windows.Forms.ComboBox()
         Me.lblDim = New System.Windows.Forms.Label()
         Me.nudDim1 = New System.Windows.Forms.NumericUpDown()
         Me.nudDim2 = New System.Windows.Forms.NumericUpDown()
@@ -48,9 +49,8 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoVariablesPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
         Me.tbSave = New System.Windows.Forms.TabPage()
-        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
-        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.cboLabel = New System.Windows.Forms.ComboBox()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -125,6 +125,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Controls.Add(Me.grpScree)
         Me.tbGraphics.Controls.Add(Me.rdoBiplot)
         Me.tbGraphics.Controls.Add(Me.rdoVariablesPlot)
+        Me.tbGraphics.Controls.Add(Me.cboLabel)
         Me.tbGraphics.Controls.Add(Me.rdoScreePlot)
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
@@ -159,14 +160,13 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'grpScree
         '
+        Me.grpScree.Controls.Add(Me.ucrLabel)
         Me.grpScree.Controls.Add(Me.ucrReceiverFactor)
         Me.grpScree.Controls.Add(Me.lblFactorVariable)
-        Me.grpScree.Controls.Add(Me.cboChoiceScree)
         Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
         Me.grpScree.Controls.Add(Me.lblChoiceScree)
         Me.grpScree.Controls.Add(Me.chkPercentageScree)
         Me.grpScree.Controls.Add(Me.grpGeom)
-        Me.grpScree.Controls.Add(Me.cboLabel)
         Me.grpScree.Controls.Add(Me.lblDim)
         Me.grpScree.Controls.Add(Me.nudDim1)
         Me.grpScree.Controls.Add(Me.nudDim2)
@@ -176,6 +176,23 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.TabIndex = 34
         Me.grpScree.TabStop = False
         Me.grpScree.Text = "Plot Options"
+        '
+        'ucrLabel
+        '
+        Me.ucrLabel.IsReadOnly = False
+        Me.ucrLabel.Location = New System.Drawing.Point(55, 101)
+        Me.ucrLabel.Name = "ucrLabel"
+        Me.ucrLabel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrLabel.TabIndex = 18
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(228, 50)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.TabIndex = 5
         '
         'lblFactorVariable
         '
@@ -187,14 +204,15 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.lblFactorVariable.Tag = "Factor_Variable"
         Me.lblFactorVariable.Text = "Factor Variable:"
         '
-        'cboChoiceScree
+        'ucrSelectorFactor
         '
-        Me.cboChoiceScree.FormattingEnabled = True
-        Me.cboChoiceScree.Items.AddRange(New Object() {"variance", "eigenvalue"})
-        Me.cboChoiceScree.Location = New System.Drawing.Point(55, 101)
-        Me.cboChoiceScree.Name = "cboChoiceScree"
-        Me.cboChoiceScree.Size = New System.Drawing.Size(150, 21)
-        Me.cboChoiceScree.TabIndex = 7
+        Me.ucrSelectorFactor.bShowHiddenColumns = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = True
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(10, 16)
+        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
+        Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorFactor.TabIndex = 3
         '
         'lblChoiceScree
         '
@@ -258,15 +276,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoOne.TabIndex = 0
         Me.rdoOne.TabStop = True
         Me.rdoOne.UseVisualStyleBackColor = True
-        '
-        'cboLabel
-        '
-        Me.cboLabel.FormattingEnabled = True
-        Me.cboLabel.Items.AddRange(New Object() {"all", "ind.sup", "quali", "quanti.sup", "var", "ind", "none"})
-        Me.cboLabel.Location = New System.Drawing.Point(55, 101)
-        Me.cboLabel.Name = "cboLabel"
-        Me.cboLabel.Size = New System.Drawing.Size(150, 21)
-        Me.cboLabel.TabIndex = 29
         '
         'lblDim
         '
@@ -337,31 +346,22 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
         '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(228, 50)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFactor.TabIndex = 5
-        '
-        'ucrSelectorFactor
-        '
-        Me.ucrSelectorFactor.bShowHiddenColumns = False
-        Me.ucrSelectorFactor.bUseCurrentFilter = True
-        Me.ucrSelectorFactor.Location = New System.Drawing.Point(9, 15)
-        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
-        Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorFactor.TabIndex = 3
-        '
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.Location = New System.Drawing.Point(116, 385)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 1
+        '
+        'cboLabel
+        '
+        Me.cboLabel.FormattingEnabled = True
+        Me.cboLabel.Items.AddRange(New Object() {"all", "ind.sup", "quali", "quanti.sup", "var", "ind", "none"})
+        Me.cboLabel.Location = New System.Drawing.Point(225, 79)
+        Me.cboLabel.Name = "cboLabel"
+        Me.cboLabel.Size = New System.Drawing.Size(150, 21)
+        Me.cboLabel.TabIndex = 29
+        Me.cboLabel.Text = "55101"
         '
         'sdgPrincipalComponentAnalysis
         '
@@ -408,7 +408,6 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrSelectorFactor As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactorVariable As Label
     Friend WithEvents lblChoiceScree As Label
-    Friend WithEvents cboChoiceScree As ComboBox
     Friend WithEvents grpGeom As GroupBox
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents rdoTwo As RadioButton
@@ -417,7 +416,8 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents nudDim1 As NumericUpDown
     Friend WithEvents lblDim As Label
     Friend WithEvents chkPercentageScree As CheckBox
-    Friend WithEvents cboLabel As ComboBox
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents grpScree As GroupBox
+    Friend WithEvents ucrLabel As ucrInputComboBox
+    Friend WithEvents cboLabel As ComboBox
 End Class
