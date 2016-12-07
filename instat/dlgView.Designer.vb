@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgViewSeparateWindow
+Partial Class dlgView
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -149,7 +149,7 @@ Partial Class dlgViewSeparateWindow
         Me.rdoViewDataFrame.Text = "View in Separate Window"
         Me.rdoViewDataFrame.UseVisualStyleBackColor = True
         '
-        'dlgViewSeparateWindow
+        'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -166,7 +166,7 @@ Partial Class dlgViewSeparateWindow
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgViewSeparateWindow"
+        Me.Name = "dlgView"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "View Data"
         Me.Text = "View Data"
