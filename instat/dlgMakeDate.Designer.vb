@@ -348,7 +348,7 @@ Partial Class dlgMakeDate
         'chkMore
         '
         Me.chkMore.AutoSize = True
-        Me.chkMore.Location = New System.Drawing.Point(162, 34)
+        Me.chkMore.Location = New System.Drawing.Point(162, 35)
         Me.chkMore.Name = "chkMore"
         Me.chkMore.Size = New System.Drawing.Size(50, 17)
         Me.chkMore.TabIndex = 4
@@ -462,7 +462,7 @@ Partial Class dlgMakeDate
         'rdoSpecifyOrigin
         '
         Me.rdoSpecifyOrigin.AutoSize = True
-        Me.rdoSpecifyOrigin.Location = New System.Drawing.Point(7, 85)
+        Me.rdoSpecifyOrigin.Location = New System.Drawing.Point(7, 87)
         Me.rdoSpecifyOrigin.Name = "rdoSpecifyOrigin"
         Me.rdoSpecifyOrigin.Size = New System.Drawing.Size(90, 17)
         Me.rdoSpecifyOrigin.TabIndex = 2
