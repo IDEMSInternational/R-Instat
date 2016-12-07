@@ -51,6 +51,7 @@ Public Class sdgPrincipalComponentAnalysis
         DisplayOptions()
     End Sub
 
+    ' Code for running Eigenvalues if it is selected in the "Display" tab
     Private Sub EigenValues()
         clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenValues.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
@@ -59,6 +60,7 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
     End Sub
 
+    ' Code for running Eigenvectors if it is selected in the "Display" tab
     Public Sub EigenVectors()
         clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenVectors.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
@@ -68,6 +70,7 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(clsREigenVectors.ToScript(), 2)
     End Sub
 
+    ' Code for running Rotation if it is selected in the "Display" tab
     Private Sub Rotation()
         clsRRotation.SetRCommand("sweep")
         clsRCoord.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
@@ -86,6 +89,7 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(clsRRotation.ToScript(), 2)
     End Sub
 
+    'Code for running Screeplot if it is selected in the "Graphics" tab
     Private Sub ScreePlot()
         clsRScreePlot.SetOperation("+")
         clsRScreePlotFunction.SetRCommand("fviz_screeplot")
@@ -103,7 +107,7 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 0)
     End Sub
 
-
+    'Code for running Variables Plot if it is selected in the "Graphics" tab
     Private Sub VariablesPlot()
         clsRVariablesPlot.SetOperation("+")
         clsRVariablesPlotFunction.SetRCommand("fviz_pca_var")
@@ -115,6 +119,7 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 0)
     End Sub
 
+    'Code for running Individuals Plot if it is selected in the "Graphics" tab
     Private Sub IndividualsPlot()
         clsRIndividualsPlot.SetOperation("+")
         clsRIndividualsPlotFunction.SetRCommand("fviz_pca_ind")
@@ -126,6 +131,7 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 0)
     End Sub
 
+    'Code for running Biplot if it is selected in the "Graphics" tab
     Private Sub Biplot()
         clsRBiplot.SetOperation("+")
         clsRBiplotFunction.SetRCommand("fviz_pca_biplot")
@@ -137,6 +143,7 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 0)
     End Sub
 
+    'Code for running Barplot if it is selected in the "Graphics" tab
     Private Sub Barplot()
         clsRBarPlot0.SetOperation("+")
         clsRBarPlot.SetOperation("+")
@@ -162,10 +169,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
     End Sub
 
-    Private Sub cmbChoice_SelectedIndexChanged(sender As Object, e As EventArgs)
-        clsRScreePlotFunction.AddParameter("choice", Chr(34) & cboChoiceScree.SelectedItem.ToString & Chr(34))
-    End Sub
-
+    'When to run the various options in the two subs
     Public Sub PCAOptions()
         If (chkEigenValues.Checked) Then
             EigenValues()
@@ -194,16 +198,18 @@ Public Class sdgPrincipalComponentAnalysis
         End If
     End Sub
 
-    Public Sub ucrReceiverFactor_SelectionChanged() Handles ucrReceiverFactor.SelectionChanged
-        Barplot()
-    End Sub
-
+    ' Here, the minimum and maximum dimensions selected rely on a few things
     Public Sub Dimensions()
+        ' Firstly, we need to state that the minimums for the two nuds is always one.
         nudDim1.Minimum = 1
         nudDim2.Minimum = 1
+        ' Now, if the receiver is empty or has one variable in it then the value for the second dimension is two
         If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.IsEmpty OrElse dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count = 1 Then
             nudDim2.Value = 2
+            ' If the receiver is has more than two variables, then the maximum dimension allowed depends on a few things
         ElseIf dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 Then
+            ' Firstly, if the row length is shorter than the number of columns, and then if the row length is shorter than the components value selected in the main dialog, the data frame length maximum can only be as much as the row length minus one
+            ' otherwise, if the row length is larger than the number of components, then the maximum dimensions can only be as much as the component value selected in the main dialog.
             If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count Then
                 If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.nudComponents.Value Then
                     nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength - 1
@@ -213,6 +219,8 @@ Public Class sdgPrincipalComponentAnalysis
                     nudDim2.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
                 End If
             Else
+                ' Firstly, if the column length is shorter than the number of rows, and then if the column length is shorter than the components value selected in the main dialog, the data frame length maximum can only be as much as the column length
+                ' otherwise, if the column length is larger than the number of components, then the maximum dimensions selected can only be as much as the component value selected in the main dialog.
                 If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count <= dlgPrincipalComponentAnalysis.nudComponents.Value Then
                     nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
                     nudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
@@ -222,12 +230,10 @@ Public Class sdgPrincipalComponentAnalysis
                 End If
             End If
         End If
-
-        ' This number must be the minimum between components selected and items in receiver.
-        ' However, if the rows are shorter than the columns then it must be the minimum between rows and components
-        ' Then if rows is shorter overall, it must be the number of rows minus one.
     End Sub
 
+    ' In the "Graphics" tab, the groupbox regarding plot options changes depending what graph is chosen.
+    ' Additionally, some label names change depending which is selected. This sub is about these changes.
     Private Sub DisplayOptions()
         If rdoBarPlot.Checked Then
             lblChoiceScree.Visible = False
@@ -286,6 +292,11 @@ Public Class sdgPrincipalComponentAnalysis
         GeomChecked()
     End Sub
 
+    Public Sub ucrReceiverFactor_SelectionChanged() Handles ucrReceiverFactor.SelectionChanged
+        Barplot()
+    End Sub
+
+    ' One of the options in the "Graphics" tab is what should be plotted on the graph. These options can change depending on which radio button is selected. This sub is about running the correct code for each graphic options
     Private Sub GeomChecked()
         If rdoScreePlot.Checked Then
             If rdoBoth.Checked Then
