@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgView
+Public Class dlgViewSeparateWindow
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -41,7 +41,7 @@ Public Class dlgView
         rdoTop.Checked = True
         grpDisplayFrom.ResetText()
         ' By default the dialogue is in preview mode rather than View mode. See SetCommands() for details.
-        rdoViewPreview.Checked = True
+        rdoViewOutputWindow.Checked = True
         rdoViewDataFrame.Checked = False
     End Sub
 
@@ -86,7 +86,7 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoViewPreview_CheckedChanged(sender As Object, e As EventArgs) Handles rdoViewPreview.CheckedChanged, rdoViewDataFrame.CheckedChanged
+    Private Sub rdoViewPreview_CheckedChanged(sender As Object, e As EventArgs) Handles rdoViewOutputWindow.CheckedChanged, rdoViewDataFrame.CheckedChanged
         SetCommands()
         TestOKEnabled()
     End Sub
@@ -102,7 +102,7 @@ Public Class dlgView
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
             ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelctorForView.strCurrentDataFrame & Chr(34))
 
-        ElseIf rdoViewPreview.Checked Then
+        ElseIf rdoViewOutputWindow.Checked Then
             'Setting head and tail commands to help in previewing the data with specified number of observations "n"
             lblNumberofRows.Enabled = True
             nudNumberRows.Enabled = True
