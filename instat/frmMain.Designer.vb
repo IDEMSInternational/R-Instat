@@ -151,6 +151,7 @@ Partial Class frmMain
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.mnuClimatic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateFileClimSoft = New System.Windows.Forms.ToolStripMenuItem()
@@ -180,12 +181,34 @@ Partial Class frmMain
         Me.mnuClimaticOrganiseUnstackDailyData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganiseStackDailyData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticOrganiseInterpolate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticOrganiseOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticQualityControl = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimdex = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator30 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeRainfall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeTemperatures = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeWindSpeedDirection = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeSunshineRadiation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticMoreGraphs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeMoreGraphsWindoRose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeMoreGraphsCummulaiveDistribution = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPICSACrops = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticSCF = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticMarkovModellingCountsTotals = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticMarkovModellingPrepare = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticMarkovModellingModelProbabilities = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ModelAmountsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InterpolateDailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SimulationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SpellLengthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TotalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -384,26 +407,17 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticDescribeRainfall = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticDescribeTemperatures = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticDescribeWindSpeedDirection = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPICSACrops = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticSCF = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticMarkovModellingCountsTotals = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticMarkovModellingPrepare = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticMarkovModellingModelProbabilities = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ModelAmountsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InterpolateDailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SimulationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SpellLengthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TotalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticSCFSupportExporttoCPT = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticSCFSupportOpenSST = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticModelExtremesAndClimaticClimatic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModelircular = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator32 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticSCFSupportCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticSCFSupportPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticSCFSupportCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1311,6 +1325,12 @@ Partial Class frmMain
         Me.mnuClimaticFile.Size = New System.Drawing.Size(165, 22)
         Me.mnuClimaticFile.Text = "File"
         '
+        'mnuClimaticFileDefineClimaticData
+        '
+        Me.mnuClimaticFileDefineClimaticData.Name = "mnuClimaticFileDefineClimaticData"
+        Me.mnuClimaticFileDefineClimaticData.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticFileDefineClimaticData.Text = "Define Climatic Data"
+        '
         'mnuClimaticFileOpensst
         '
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
@@ -1339,7 +1359,7 @@ Partial Class frmMain
         '
         'mnuClimaticOrganise
         '
-        Me.mnuClimaticOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticOrganiseTransform, Me.mnuClimaticInfill, Me.mnuClimaticOrganiseDates, Me.mnuClimaticOrganiseInventory, Me.mnuClimaticDescribeDescribeDaily, Me.mnuClimaticOrganiseEvents, Me.mnuClimaticOrganiseSummary, Me.mnuClimaticOrganiseNewWorksheet, Me.mnuClimaticOrganiseImportDailyData, Me.mnuClimaticOrganiseMakeFactor, Me.mnuClimaticOrganiseShiftDailyData, Me.mnuClimaticOrganiseUnstackDailyData, Me.mnuClimaticOrganiseStackDailyData, Me.ToolStripSeparator15, Me.mnuClimaticOrganiseInterpolate, Me.mnuClimaticOrganiseOptions})
+        Me.mnuClimaticOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticOrganiseTransform, Me.mnuClimaticInfill, Me.mnuClimaticOrganiseDates, Me.mnuClimaticOrganiseInventory, Me.mnuClimaticDescribeDescribeDaily, Me.mnuClimaticOrganiseEvents, Me.mnuClimaticOrganiseSummary, Me.mnuClimaticOrganiseNewWorksheet, Me.mnuClimaticOrganiseImportDailyData, Me.mnuClimaticOrganiseMakeFactor, Me.mnuClimaticOrganiseShiftDailyData, Me.mnuClimaticOrganiseUnstackDailyData, Me.mnuClimaticOrganiseStackDailyData, Me.ToolStripSeparator15})
         Me.mnuClimaticOrganise.Name = "mnuClimaticOrganise"
         Me.mnuClimaticOrganise.Size = New System.Drawing.Size(165, 22)
         Me.mnuClimaticOrganise.Tag = "Manage"
@@ -1412,7 +1432,7 @@ Partial Class frmMain
         Me.mnuClimaticOrganiseEvents.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticOrganiseEventsStartoftheRains, Me.mnuClimaticOrganiseEventsExtremes, Me.mnuClimaticOrganiseEventsSpells, Me.mnuClimaticOrganiseEventsWaterBalance, Me.mnuClimaticOrganiseEventsEndoftheRains})
         Me.mnuClimaticOrganiseEvents.Name = "mnuClimaticOrganiseEvents"
         Me.mnuClimaticOrganiseEvents.Size = New System.Drawing.Size(181, 22)
-        Me.mnuClimaticOrganiseEvents.Text = "Events..."
+        Me.mnuClimaticOrganiseEvents.Text = "Events"
         '
         'mnuClimaticOrganiseEventsStartoftheRains
         '
@@ -1515,22 +1535,6 @@ Partial Class frmMain
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
         Me.ToolStripSeparator15.Size = New System.Drawing.Size(178, 6)
         '
-        'mnuClimaticOrganiseInterpolate
-        '
-        Me.mnuClimaticOrganiseInterpolate.Enabled = False
-        Me.mnuClimaticOrganiseInterpolate.Name = "mnuClimaticOrganiseInterpolate"
-        Me.mnuClimaticOrganiseInterpolate.Size = New System.Drawing.Size(181, 22)
-        Me.mnuClimaticOrganiseInterpolate.Tag = "Interpolate"
-        Me.mnuClimaticOrganiseInterpolate.Text = "Interpolate..."
-        '
-        'mnuClimaticOrganiseOptions
-        '
-        Me.mnuClimaticOrganiseOptions.Enabled = False
-        Me.mnuClimaticOrganiseOptions.Name = "mnuClimaticOrganiseOptions"
-        Me.mnuClimaticOrganiseOptions.Size = New System.Drawing.Size(181, 22)
-        Me.mnuClimaticOrganiseOptions.Tag = "Options"
-        Me.mnuClimaticOrganiseOptions.Text = "Options..."
-        '
         'mnuClimaticQualityControl
         '
         Me.mnuClimaticQualityControl.Name = "mnuClimaticQualityControl"
@@ -1551,10 +1555,173 @@ Partial Class frmMain
         '
         'mnuClimaticDescribe
         '
-        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeRainfall, Me.mnuClimaticDescribeTemperatures, Me.mnuClimaticDescribeWindSpeedDirection})
+        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeRainfall, Me.mnuClimaticDescribeTemperatures, Me.mnuClimaticDescribeWindSpeedDirection, Me.mnuClimaticDescribeSunshineRadiation, Me.ToolStripSeparator17, Me.mnuClimaticDescribeGeneral, Me.ToolStripSeparator31, Me.mnuClimaticMoreGraphs})
         Me.mnuClimaticDescribe.Name = "mnuClimaticDescribe"
         Me.mnuClimaticDescribe.Size = New System.Drawing.Size(165, 22)
         Me.mnuClimaticDescribe.Text = "Describe"
+        '
+        'mnuClimaticDescribeRainfall
+        '
+        Me.mnuClimaticDescribeRainfall.Name = "mnuClimaticDescribeRainfall"
+        Me.mnuClimaticDescribeRainfall.Size = New System.Drawing.Size(199, 22)
+        Me.mnuClimaticDescribeRainfall.Text = "Rainfall..."
+        '
+        'mnuClimaticDescribeTemperatures
+        '
+        Me.mnuClimaticDescribeTemperatures.Name = "mnuClimaticDescribeTemperatures"
+        Me.mnuClimaticDescribeTemperatures.Size = New System.Drawing.Size(199, 22)
+        Me.mnuClimaticDescribeTemperatures.Text = "Temperature..."
+        '
+        'mnuClimaticDescribeWindSpeedDirection
+        '
+        Me.mnuClimaticDescribeWindSpeedDirection.Name = "mnuClimaticDescribeWindSpeedDirection"
+        Me.mnuClimaticDescribeWindSpeedDirection.Size = New System.Drawing.Size(199, 22)
+        Me.mnuClimaticDescribeWindSpeedDirection.Text = "Wind Speed/Direction..."
+        '
+        'mnuClimaticDescribeSunshineRadiation
+        '
+        Me.mnuClimaticDescribeSunshineRadiation.Name = "mnuClimaticDescribeSunshineRadiation"
+        Me.mnuClimaticDescribeSunshineRadiation.Size = New System.Drawing.Size(199, 22)
+        Me.mnuClimaticDescribeSunshineRadiation.Text = "Sunshine/Radiation..."
+        '
+        'mnuClimaticDescribeGeneral
+        '
+        Me.mnuClimaticDescribeGeneral.Name = "mnuClimaticDescribeGeneral"
+        Me.mnuClimaticDescribeGeneral.Size = New System.Drawing.Size(199, 22)
+        Me.mnuClimaticDescribeGeneral.Text = "General"
+        '
+        'mnuClimaticMoreGraphs
+        '
+        Me.mnuClimaticMoreGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeMoreGraphsWindoRose, Me.mnuClimaticDescribeMoreGraphsCummulaiveDistribution})
+        Me.mnuClimaticMoreGraphs.Name = "mnuClimaticMoreGraphs"
+        Me.mnuClimaticMoreGraphs.Size = New System.Drawing.Size(199, 22)
+        Me.mnuClimaticMoreGraphs.Text = "More Graphs"
+        '
+        'mnuClimaticDescribeMoreGraphsWindoRose
+        '
+        Me.mnuClimaticDescribeMoreGraphsWindoRose.AccessibleDescription = "mnuClimaticDescribeCummulativeDistribution"
+        Me.mnuClimaticDescribeMoreGraphsWindoRose.Name = "mnuClimaticDescribeMoreGraphsWindoRose"
+        Me.mnuClimaticDescribeMoreGraphsWindoRose.Size = New System.Drawing.Size(209, 22)
+        Me.mnuClimaticDescribeMoreGraphsWindoRose.Tag = "WindRose..."
+        Me.mnuClimaticDescribeMoreGraphsWindoRose.Text = "WindRose..."
+        '
+        'mnuClimaticDescribeMoreGraphsCummulaiveDistribution
+        '
+        Me.mnuClimaticDescribeMoreGraphsCummulaiveDistribution.Name = "mnuClimaticDescribeMoreGraphsCummulaiveDistribution"
+        Me.mnuClimaticDescribeMoreGraphsCummulaiveDistribution.Size = New System.Drawing.Size(209, 22)
+        Me.mnuClimaticDescribeMoreGraphsCummulaiveDistribution.Tag = "Cumulative_Distribution..."
+        Me.mnuClimaticDescribeMoreGraphsCummulaiveDistribution.Text = "Cumulative Distribution..."
+        '
+        'mnuClimaticPICSA
+        '
+        Me.mnuClimaticPICSA.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPICSARainfall, Me.mnuClimaticPICSATemperature, Me.mnuClimaticPICSACrops})
+        Me.mnuClimaticPICSA.Name = "mnuClimaticPICSA"
+        Me.mnuClimaticPICSA.Size = New System.Drawing.Size(165, 22)
+        Me.mnuClimaticPICSA.Text = "PICSA"
+        '
+        'mnuClimaticPICSARainfall
+        '
+        Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
+        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSARainfall.Text = "Rainfall..."
+        '
+        'mnuClimaticPICSATemperature
+        '
+        Me.mnuClimaticPICSATemperature.Name = "mnuClimaticPICSATemperature"
+        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSATemperature.Text = "Temperature..."
+        '
+        'mnuClimaticPICSACrops
+        '
+        Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"
+        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSACrops.Text = "Crops..."
+        '
+        'mnuClimaticSCF
+        '
+        Me.mnuClimaticSCF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticSCFSupportExporttoCPT, Me.mnuClimaticSCFSupportOpenSST, Me.ToolStripSeparator32, Me.mnuClimaticSCFSupportCorrelations, Me.mnuClimaticSCFSupportPrincipalComponents, Me.mnuClimaticSCFSupportCanonicalCorrelations})
+        Me.mnuClimaticSCF.Name = "mnuClimaticSCF"
+        Me.mnuClimaticSCF.Size = New System.Drawing.Size(165, 22)
+        Me.mnuClimaticSCF.Text = "SCF Support"
+        '
+        'mnuClimaticModels
+        '
+        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMarkovModelling, Me.mnuClimaticModelExtremesAndClimaticClimatic})
+        Me.mnuClimaticModels.Name = "mnuClimaticModels"
+        Me.mnuClimaticModels.Size = New System.Drawing.Size(165, 22)
+        Me.mnuClimaticModels.Text = "Model"
+        '
+        'mnuClimaticMarkovModelling
+        '
+        Me.mnuClimaticMarkovModelling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMarkovModellingCountsTotals, Me.mnuClimaticMarkovModellingPrepare, Me.ToolStripSeparator18, Me.mnuClimaticMarkovModellingModelProbabilities, Me.ModelAmountsToolStripMenuItem, Me.InterpolateDailyToolStripMenuItem, Me.SimulationsToolStripMenuItem, Me.SpellLengthToolStripMenuItem, Me.TotalsToolStripMenuItem})
+        Me.mnuClimaticMarkovModelling.Name = "mnuClimaticMarkovModelling"
+        Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(191, 22)
+        Me.mnuClimaticMarkovModelling.Tag = "Markov_Modelling"
+        Me.mnuClimaticMarkovModelling.Text = "Markov Modelling"
+        '
+        'mnuClimaticMarkovModellingCountsTotals
+        '
+        Me.mnuClimaticMarkovModellingCountsTotals.Enabled = False
+        Me.mnuClimaticMarkovModellingCountsTotals.Name = "mnuClimaticMarkovModellingCountsTotals"
+        Me.mnuClimaticMarkovModellingCountsTotals.Size = New System.Drawing.Size(185, 22)
+        Me.mnuClimaticMarkovModellingCountsTotals.Tag = "Counts_Totals"
+        Me.mnuClimaticMarkovModellingCountsTotals.Text = "Counts/Totals..."
+        '
+        'mnuClimaticMarkovModellingPrepare
+        '
+        Me.mnuClimaticMarkovModellingPrepare.Enabled = False
+        Me.mnuClimaticMarkovModellingPrepare.Name = "mnuClimaticMarkovModellingPrepare"
+        Me.mnuClimaticMarkovModellingPrepare.Size = New System.Drawing.Size(185, 22)
+        Me.mnuClimaticMarkovModellingPrepare.Tag = "Prepare"
+        Me.mnuClimaticMarkovModellingPrepare.Text = "Prepare..."
+        '
+        'ToolStripSeparator18
+        '
+        Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
+        Me.ToolStripSeparator18.Size = New System.Drawing.Size(182, 6)
+        '
+        'mnuClimaticMarkovModellingModelProbabilities
+        '
+        Me.mnuClimaticMarkovModellingModelProbabilities.Enabled = False
+        Me.mnuClimaticMarkovModellingModelProbabilities.Name = "mnuClimaticMarkovModellingModelProbabilities"
+        Me.mnuClimaticMarkovModellingModelProbabilities.Size = New System.Drawing.Size(185, 22)
+        Me.mnuClimaticMarkovModellingModelProbabilities.Tag = "Model_Probabilities"
+        Me.mnuClimaticMarkovModellingModelProbabilities.Text = "Model Probabilities..."
+        '
+        'ModelAmountsToolStripMenuItem
+        '
+        Me.ModelAmountsToolStripMenuItem.Enabled = False
+        Me.ModelAmountsToolStripMenuItem.Name = "ModelAmountsToolStripMenuItem"
+        Me.ModelAmountsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.ModelAmountsToolStripMenuItem.Text = "Model Amounts..."
+        '
+        'InterpolateDailyToolStripMenuItem
+        '
+        Me.InterpolateDailyToolStripMenuItem.Enabled = False
+        Me.InterpolateDailyToolStripMenuItem.Name = "InterpolateDailyToolStripMenuItem"
+        Me.InterpolateDailyToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.InterpolateDailyToolStripMenuItem.Text = "Interpolate Daily..."
+        '
+        'SimulationsToolStripMenuItem
+        '
+        Me.SimulationsToolStripMenuItem.Enabled = False
+        Me.SimulationsToolStripMenuItem.Name = "SimulationsToolStripMenuItem"
+        Me.SimulationsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.SimulationsToolStripMenuItem.Text = "Simulations..."
+        '
+        'SpellLengthToolStripMenuItem
+        '
+        Me.SpellLengthToolStripMenuItem.Enabled = False
+        Me.SpellLengthToolStripMenuItem.Name = "SpellLengthToolStripMenuItem"
+        Me.SpellLengthToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.SpellLengthToolStripMenuItem.Text = "Spell Length..."
+        '
+        'TotalsToolStripMenuItem
+        '
+        Me.TotalsToolStripMenuItem.Enabled = False
+        Me.TotalsToolStripMenuItem.Name = "TotalsToolStripMenuItem"
+        Me.TotalsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.TotalsToolStripMenuItem.Text = "Totals..."
         '
         'ToolStripSeparator23
         '
@@ -2996,139 +3163,71 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
-        'mnuClimaticDescribeRainfall
+        'mnuClimaticSCFSupportExporttoCPT
         '
-        Me.mnuClimaticDescribeRainfall.Name = "mnuClimaticDescribeRainfall"
-        Me.mnuClimaticDescribeRainfall.Size = New System.Drawing.Size(199, 22)
-        Me.mnuClimaticDescribeRainfall.Text = "Rainfall..."
+        Me.mnuClimaticSCFSupportExporttoCPT.Name = "mnuClimaticSCFSupportExporttoCPT"
+        Me.mnuClimaticSCFSupportExporttoCPT.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportExporttoCPT.Tag = "Export_to_CPT"
+        Me.mnuClimaticSCFSupportExporttoCPT.Text = "Export to CPT..."
         '
-        'mnuClimaticDescribeTemperatures
+        'mnuClimaticSCFSupportOpenSST
         '
-        Me.mnuClimaticDescribeTemperatures.Name = "mnuClimaticDescribeTemperatures"
-        Me.mnuClimaticDescribeTemperatures.Size = New System.Drawing.Size(199, 22)
-        Me.mnuClimaticDescribeTemperatures.Text = "Temperatures..."
+        Me.mnuClimaticSCFSupportOpenSST.Name = "mnuClimaticSCFSupportOpenSST"
+        Me.mnuClimaticSCFSupportOpenSST.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportOpenSST.Text = "Open SST..."
         '
-        'mnuClimaticDescribeWindSpeedDirection
+        'ToolStripSeparator17
         '
-        Me.mnuClimaticDescribeWindSpeedDirection.Name = "mnuClimaticDescribeWindSpeedDirection"
-        Me.mnuClimaticDescribeWindSpeedDirection.Size = New System.Drawing.Size(199, 22)
-        Me.mnuClimaticDescribeWindSpeedDirection.Text = "Wind Speed/Direction..."
+        Me.ToolStripSeparator17.Name = "ToolStripSeparator17"
+        Me.ToolStripSeparator17.Size = New System.Drawing.Size(196, 6)
         '
-        'mnuClimaticPICSA
+        'ToolStripSeparator31
         '
-        Me.mnuClimaticPICSA.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPICSARainfall, Me.mnuClimaticPICSATemperature, Me.mnuClimaticPICSACrops})
-        Me.mnuClimaticPICSA.Name = "mnuClimaticPICSA"
-        Me.mnuClimaticPICSA.Size = New System.Drawing.Size(165, 22)
-        Me.mnuClimaticPICSA.Text = "PICSA"
+        Me.ToolStripSeparator31.Name = "ToolStripSeparator31"
+        Me.ToolStripSeparator31.Size = New System.Drawing.Size(196, 6)
         '
-        'mnuClimaticPICSARainfall
+        'mnuClimaticModelExtremesAndClimaticClimatic
         '
-        Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
-        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(152, 22)
-        Me.mnuClimaticPICSARainfall.Text = "Rainfall..."
+        Me.mnuClimaticModelExtremesAndClimaticClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticModelExtremesAndClimaticClimaticModel})
+        Me.mnuClimaticModelExtremesAndClimaticClimatic.Name = "mnuClimaticModelExtremesAndClimaticClimatic"
+        Me.mnuClimaticModelExtremesAndClimaticClimatic.Size = New System.Drawing.Size(191, 22)
+        Me.mnuClimaticModelExtremesAndClimaticClimatic.Text = "Extremes and Climatic"
         '
-        'mnuClimaticPICSATemperature
+        'mnuClimaticModelExtremesAndClimaticClimaticModel
         '
-        Me.mnuClimaticPICSATemperature.Name = "mnuClimaticPICSATemperature"
-        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(152, 22)
-        Me.mnuClimaticPICSATemperature.Text = "Temperature..."
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticModelExtremesAndClimaticClimaticModelircular})
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModel.Name = "mnuClimaticModelExtremesAndClimaticClimaticModel"
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModel.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModel.Text = "Model "
         '
-        'mnuClimaticPICSACrops
+        'mnuClimaticModelExtremesAndClimaticClimaticModelircular
         '
-        Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"
-        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(152, 22)
-        Me.mnuClimaticPICSACrops.Text = "Crops..."
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModelircular.Name = "mnuClimaticModelExtremesAndClimaticClimaticModelircular"
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModelircular.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticModelExtremesAndClimaticClimaticModelircular.Text = "Circular"
         '
-        'mnuClimaticSCF
+        'ToolStripSeparator32
         '
-        Me.mnuClimaticSCF.Name = "mnuClimaticSCF"
-        Me.mnuClimaticSCF.Size = New System.Drawing.Size(165, 22)
-        Me.mnuClimaticSCF.Text = "SCF..."
+        Me.ToolStripSeparator32.Name = "ToolStripSeparator32"
+        Me.ToolStripSeparator32.Size = New System.Drawing.Size(200, 6)
         '
-        'mnuClimaticModels
+        'mnuClimaticSCFSupportCorrelations
         '
-        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMarkovModelling})
-        Me.mnuClimaticModels.Name = "mnuClimaticModels"
-        Me.mnuClimaticModels.Size = New System.Drawing.Size(165, 22)
-        Me.mnuClimaticModels.Text = "Models"
+        Me.mnuClimaticSCFSupportCorrelations.Name = "mnuClimaticSCFSupportCorrelations"
+        Me.mnuClimaticSCFSupportCorrelations.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportCorrelations.Text = "Correlations..."
         '
-        'mnuClimaticMarkovModelling
+        'mnuClimaticSCFSupportPrincipalComponents
         '
-        Me.mnuClimaticMarkovModelling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMarkovModellingCountsTotals, Me.mnuClimaticMarkovModellingPrepare, Me.ToolStripSeparator18, Me.mnuClimaticMarkovModellingModelProbabilities, Me.ModelAmountsToolStripMenuItem, Me.InterpolateDailyToolStripMenuItem, Me.SimulationsToolStripMenuItem, Me.SpellLengthToolStripMenuItem, Me.TotalsToolStripMenuItem})
-        Me.mnuClimaticMarkovModelling.Name = "mnuClimaticMarkovModelling"
-        Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(171, 22)
-        Me.mnuClimaticMarkovModelling.Tag = "Markov_Modelling"
-        Me.mnuClimaticMarkovModelling.Text = "Markov Modelling"
+        Me.mnuClimaticSCFSupportPrincipalComponents.Name = "mnuClimaticSCFSupportPrincipalComponents"
+        Me.mnuClimaticSCFSupportPrincipalComponents.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportPrincipalComponents.Text = "Principal Components..."
         '
-        'mnuClimaticMarkovModellingCountsTotals
+        'mnuClimaticSCFSupportCanonicalCorrelations
         '
-        Me.mnuClimaticMarkovModellingCountsTotals.Enabled = False
-        Me.mnuClimaticMarkovModellingCountsTotals.Name = "mnuClimaticMarkovModellingCountsTotals"
-        Me.mnuClimaticMarkovModellingCountsTotals.Size = New System.Drawing.Size(185, 22)
-        Me.mnuClimaticMarkovModellingCountsTotals.Tag = "Counts_Totals"
-        Me.mnuClimaticMarkovModellingCountsTotals.Text = "Counts/Totals..."
-        '
-        'mnuClimaticMarkovModellingPrepare
-        '
-        Me.mnuClimaticMarkovModellingPrepare.Enabled = False
-        Me.mnuClimaticMarkovModellingPrepare.Name = "mnuClimaticMarkovModellingPrepare"
-        Me.mnuClimaticMarkovModellingPrepare.Size = New System.Drawing.Size(185, 22)
-        Me.mnuClimaticMarkovModellingPrepare.Tag = "Prepare"
-        Me.mnuClimaticMarkovModellingPrepare.Text = "Prepare..."
-        '
-        'ToolStripSeparator18
-        '
-        Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
-        Me.ToolStripSeparator18.Size = New System.Drawing.Size(182, 6)
-        '
-        'mnuClimaticMarkovModellingModelProbabilities
-        '
-        Me.mnuClimaticMarkovModellingModelProbabilities.Enabled = False
-        Me.mnuClimaticMarkovModellingModelProbabilities.Name = "mnuClimaticMarkovModellingModelProbabilities"
-        Me.mnuClimaticMarkovModellingModelProbabilities.Size = New System.Drawing.Size(185, 22)
-        Me.mnuClimaticMarkovModellingModelProbabilities.Tag = "Model_Probabilities"
-        Me.mnuClimaticMarkovModellingModelProbabilities.Text = "Model Probabilities..."
-        '
-        'ModelAmountsToolStripMenuItem
-        '
-        Me.ModelAmountsToolStripMenuItem.Enabled = False
-        Me.ModelAmountsToolStripMenuItem.Name = "ModelAmountsToolStripMenuItem"
-        Me.ModelAmountsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.ModelAmountsToolStripMenuItem.Text = "Model Amounts..."
-        '
-        'InterpolateDailyToolStripMenuItem
-        '
-        Me.InterpolateDailyToolStripMenuItem.Enabled = False
-        Me.InterpolateDailyToolStripMenuItem.Name = "InterpolateDailyToolStripMenuItem"
-        Me.InterpolateDailyToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.InterpolateDailyToolStripMenuItem.Text = "Interpolate Daily..."
-        '
-        'SimulationsToolStripMenuItem
-        '
-        Me.SimulationsToolStripMenuItem.Enabled = False
-        Me.SimulationsToolStripMenuItem.Name = "SimulationsToolStripMenuItem"
-        Me.SimulationsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.SimulationsToolStripMenuItem.Text = "Simulations..."
-        '
-        'SpellLengthToolStripMenuItem
-        '
-        Me.SpellLengthToolStripMenuItem.Enabled = False
-        Me.SpellLengthToolStripMenuItem.Name = "SpellLengthToolStripMenuItem"
-        Me.SpellLengthToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.SpellLengthToolStripMenuItem.Text = "Spell Length..."
-        '
-        'TotalsToolStripMenuItem
-        '
-        Me.TotalsToolStripMenuItem.Enabled = False
-        Me.TotalsToolStripMenuItem.Name = "TotalsToolStripMenuItem"
-        Me.TotalsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.TotalsToolStripMenuItem.Text = "Totals..."
-        '
-        'mnuClimaticFileDefineClimaticData
-        '
-        Me.mnuClimaticFileDefineClimaticData.Name = "mnuClimaticFileDefineClimaticData"
-        Me.mnuClimaticFileDefineClimaticData.Size = New System.Drawing.Size(182, 22)
-        Me.mnuClimaticFileDefineClimaticData.Text = "Define Climatic Data"
+        Me.mnuClimaticSCFSupportCanonicalCorrelations.Name = "mnuClimaticSCFSupportCanonicalCorrelations"
+        Me.mnuClimaticSCFSupportCanonicalCorrelations.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportCanonicalCorrelations.Text = "Canonical Correlations..."
         '
         'frmMain
         '
@@ -3179,8 +3278,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticOrganiseUnstackDailyData As ToolStripMenuItem
     Friend WithEvents mnuClimaticOrganiseStackDailyData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
-    Friend WithEvents mnuClimaticOrganiseInterpolate As ToolStripMenuItem
-    Friend WithEvents mnuClimaticOrganiseOptions As ToolStripMenuItem
     Friend WithEvents mnuFileSave As ToolStripMenuItem
     Friend WithEvents mnuFileSaveAs As ToolStripMenuItem
     Friend WithEvents mnuFilePrint As ToolStripMenuItem
@@ -3535,4 +3632,20 @@ Partial Class frmMain
     Friend WithEvents SpellLengthToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TotalsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileDefineClimaticData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDescribeSunshineRadiation As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDescribeGeneral As ToolStripMenuItem
+    Friend WithEvents mnuClimaticMoreGraphs As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDescribeMoreGraphsWindoRose As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDescribeMoreGraphsCummulaiveDistribution As ToolStripMenuItem
+    Friend WithEvents mnuClimaticSCFSupportExporttoCPT As ToolStripMenuItem
+    Friend WithEvents mnuClimaticSCFSupportOpenSST As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator17 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator31 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator32 As ToolStripSeparator
+    Friend WithEvents mnuClimaticModelExtremesAndClimaticClimatic As ToolStripMenuItem
+    Friend WithEvents mnuClimaticModelExtremesAndClimaticClimaticModel As ToolStripMenuItem
+    Friend WithEvents mnuClimaticModelExtremesAndClimaticClimaticModelircular As ToolStripMenuItem
+    Friend WithEvents mnuClimaticSCFSupportCorrelations As ToolStripMenuItem
+    Friend WithEvents mnuClimaticSCFSupportPrincipalComponents As ToolStripMenuItem
+    Friend WithEvents mnuClimaticSCFSupportCanonicalCorrelations As ToolStripMenuItem
 End Class

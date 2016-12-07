@@ -355,15 +355,6 @@ Public Class frmMain
     Private Sub StackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseStackDailyData.Click
         dlgStackDailyData.ShowDialog()
     End Sub
-
-    Private Sub InterpolateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseInterpolate.Click
-        dlgInterpolate.ShowDialog()
-    End Sub
-
-    Private Sub OptionsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseOptions.Click
-        dlgOptions.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticExamine_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamine.Click
         dlgExamine.ShowDialog()
     End Sub
@@ -1293,5 +1284,21 @@ Public Class frmMain
 
     Private Sub InterpolateDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterpolateDailyToolStripMenuItem.Click
         dlgInterpolateDaily.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeMoreGraphsWindoRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeMoreGraphsWindoRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeMoreGraphsCummulaiveDistribution_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeMoreGraphsCummulaiveDistribution.Click
+        dlgCumulativeDistribution.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSCFSupportExporttoCPT_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportExporttoCPT.Click
+        dlgExportToCPT.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSCFSupportOpenSST_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportOpenSST.Click
+        dlgOpenSST.ShowDialog()
     End Sub
 End Class
