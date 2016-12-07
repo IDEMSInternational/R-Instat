@@ -43,6 +43,9 @@ Public Class ROperator
         'clsParameters(MyBase.OrderedIndices(i)).bIncludeArgumentName = False
         'strTemp = strTemp & clsParameters(MyBase.OrderedIndices(i)).ToScript(strScript)
         'Next
+
+        'Parameters are sorted in the appropriate order and then the script is built.
+        SortParameters()
         If clsParameters(0) IsNot Nothing Then
             clsParameters(0).bIncludeArgumentName = False
             If clsParameters(0).bIsOperator AndAlso bBrackets Then
@@ -83,6 +86,7 @@ Public Class ROperator
     End Function
 
     Public Sub RemoveAllAdditionalParameters() 'Needs to be changed if using OrderedIndices method.
+        SortParameters() 'This is used to bring the parameter with position 1 to the front, then clear all the others using range.
         If clsParameters.Count > 1 Then
             clsParameters.RemoveRange(1, clsParameters.Count - 1)
         End If
