@@ -17,6 +17,9 @@
 Imports instat.Translations
 Public Class DlgDefineClimaticData
     Public bFirstLoad As Boolean = True
+    Dim clsTypesFunction As New RFunction
+    Dim lstReceivers As New List(Of ucrReceiverSingle)
+
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -28,20 +31,36 @@ Public Class DlgDefineClimaticData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
+        clsTypesFunction.SetRCommand("c")
+        ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
         ucrReceiverDate.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverDate.Tag = "date"
         ucrReceiverCloudCover.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverCloudCover.Tag = "cloud_cover"
         ucrReceiverStation.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverStation.Tag = "station"
         ucrReceiverMaxTemp.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverMaxTemp.Tag = "temp_max"
         ucrReceiverMinTemp.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverMinTemp.Tag = "temp_min"
         ucrReceiverRadiation.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverRadiation.Tag = "radiation"
         ucrReceiverRain.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverRain.Tag = "rain"
         ucrReceiverSunshine.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverSunshine.Tag = "sunshine_hours"
         ucrReceiverWindDirection.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverWindDirection.Tag = "wind_direction"
         ucrReceiverWindSpeed.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverWindSpeed.Tag = "wind_speed"
         ucrReceiverYear.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverYear.Tag = "year"
         ucrReceiverMonth.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverMonth.Tag = "month"
         ucrReceiverDay.Selector = ucrSelectorDefineClimaticData
-
+        ucrReceiverDay.Tag = "day"
+        lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDate, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation, ucrReceiverRain, ucrReceiverStation, ucrReceiverSunshine, ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear})
     End Sub
 
     Private Sub SetDefaults()
@@ -63,13 +82,23 @@ Public Class DlgDefineClimaticData
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
+    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged, ucrReceiverCloudCover.SelectionChanged, ucrReceiverDate.SelectionChanged, ucrReceiverDay.SelectionChanged, ucrReceiverMaxTemp.SelectionChanged, ucrReceiverMinTemp.SelectionChanged, ucrReceiverMonth.SelectionChanged, ucrReceiverRadiation.SelectionChanged, ucrReceiverRain.SelectionChanged, ucrReceiverStation.SelectionChanged, ucrReceiverSunshine.SelectionChanged, ucrReceiverWindDirection.SelectionChanged, ucrReceiverWindSpeed.SelectionChanged, ucrReceiverYear.SelectionChanged
+        FillClimaticTypes()
         TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorDefineClimaticData_DataFrameChanged() Handles ucrSelectorDefineClimaticData.DataFrameChanged
-
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-
+    Private Sub FillClimaticTypes()
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            If Not ucrTempReceiver.IsEmpty Then
+                clsTypesFunction.AddParameter(ucrTempReceiver.Tag, ucrTempReceiver.GetVariableNames)
+            Else
+                clsTypesFunction.RemoveParameterByName(ucrTempReceiver.Tag)
+            End If
+        Next
+    End Sub
 End Class
