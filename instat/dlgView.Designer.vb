@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgView
+Partial Class dlgViewSeparateWindow
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -31,7 +31,7 @@ Partial Class dlgView
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelctorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoViewPreview = New System.Windows.Forms.RadioButton()
+        Me.rdoViewOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoViewDataFrame = New System.Windows.Forms.RadioButton()
         Me.grpDisplayFrom.SuspendLayout()
         CType(Me.nudNumberRows, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -127,35 +127,35 @@ Partial Class dlgView
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 1
         '
-        'rdoViewPreview
+        'rdoViewOutputWindow
         '
-        Me.rdoViewPreview.AutoSize = True
-        Me.rdoViewPreview.Location = New System.Drawing.Point(255, 130)
-        Me.rdoViewPreview.Name = "rdoViewPreview"
-        Me.rdoViewPreview.Size = New System.Drawing.Size(89, 17)
-        Me.rdoViewPreview.TabIndex = 10
-        Me.rdoViewPreview.TabStop = True
-        Me.rdoViewPreview.Text = "Data Preview"
-        Me.rdoViewPreview.UseVisualStyleBackColor = True
+        Me.rdoViewOutputWindow.AutoSize = True
+        Me.rdoViewOutputWindow.Location = New System.Drawing.Point(255, 130)
+        Me.rdoViewOutputWindow.Name = "rdoViewOutputWindow"
+        Me.rdoViewOutputWindow.Size = New System.Drawing.Size(136, 17)
+        Me.rdoViewOutputWindow.TabIndex = 10
+        Me.rdoViewOutputWindow.TabStop = True
+        Me.rdoViewOutputWindow.Text = "View in Output Window"
+        Me.rdoViewOutputWindow.UseVisualStyleBackColor = True
         '
         'rdoViewDataFrame
         '
         Me.rdoViewDataFrame.AutoSize = True
         Me.rdoViewDataFrame.Location = New System.Drawing.Point(255, 237)
         Me.rdoViewDataFrame.Name = "rdoViewDataFrame"
-        Me.rdoViewDataFrame.Size = New System.Drawing.Size(86, 17)
+        Me.rdoViewDataFrame.Size = New System.Drawing.Size(147, 17)
         Me.rdoViewDataFrame.TabIndex = 11
         Me.rdoViewDataFrame.TabStop = True
-        Me.rdoViewDataFrame.Text = "Data  Viewer"
+        Me.rdoViewDataFrame.Text = "View in Separate Window"
         Me.rdoViewDataFrame.UseVisualStyleBackColor = True
         '
-        'dlgView
+        'dlgViewSeparateWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 326)
         Me.Controls.Add(Me.rdoViewDataFrame)
-        Me.Controls.Add(Me.rdoViewPreview)
+        Me.Controls.Add(Me.rdoViewOutputWindow)
         Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.nudNumberRows)
@@ -166,7 +166,7 @@ Partial Class dlgView
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgView"
+        Me.Name = "dlgViewSeparateWindow"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "View Data"
         Me.Text = "View Data"
@@ -186,6 +186,6 @@ Partial Class dlgView
     Friend WithEvents lblSelected As Label
     Friend WithEvents nudNumberRows As NumericUpDown
     Friend WithEvents lblNumberofRows As Label
-    Friend WithEvents rdoViewPreview As RadioButton
+    Friend WithEvents rdoViewOutputWindow As RadioButton
     Friend WithEvents rdoViewDataFrame As RadioButton
 End Class
