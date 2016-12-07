@@ -14,7 +14,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgStartofRains
-    Public clsAddKey, clsDayFromAndTo, clsRainyDays, clsRollingSum, clsMinimumRainfall, clsRollingRainDays, clsXdaysRain, clsFirstDOYPerYear, clsFirstInstance, clsNoRain, clsCumulativeRain, clsDryPeriodTen, clsWithinThirtyDays As New RFunction
+    Public clsAddKey, clsDayFromAndTo, clsRainyDays, clsRollingSum, clsMinimumRainfall, clsRollingRainDays, clsXdaysRain, clsFirstDOYPerYear, clsFirstInstance, clsNoRain, clsCumulativeRain, clsDryPeriodTen, clsWithinThirtyDays, clsDrySpell, clsYearGroupDaily As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -39,6 +39,7 @@ Public Class dlgStartofRains
     Private Sub InitialiseDialog()
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
+        clsYearGroupDaily.SetRCommand("instat_calculation$new")
         clsRainyDays.SetRCommand("instat_calculation$new")
         clsRollingSum.SetRCommand("instat_calculation$new")
         clsMinimumRainfall.SetRCommand("instat_calculation$new")
@@ -51,13 +52,14 @@ Public Class dlgStartofRains
         clsDryPeriodTen.SetRCommand("instat_calculation$new")
         clsWithinThirtyDays.SetRCommand("instat_calculation$new")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
+
+    End Sub
+
+    Private Sub SetDefaults()
         ucrReceiverRainfall.Selector = ucrSelectorForStartofRains
         ucrReceiverRainfall.SetMeAsReceiver()
         ucrReceiverDate.SetMeAsReceiver()
         ucrReceiverDOY.SetMeAsReceiver()
-    End Sub
-
-    Private Sub SetDefaults()
         TestOKEnabled()
     End Sub
 
@@ -66,35 +68,40 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty Then
+        If Not (ucrReceiverRainfall.IsEmpty AndAlso ucrReceiverDate.IsEmpty AndAlso ucrReceiverDOY.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
 
-    Private Sub grpRainParameters_Enter(sender As Object, e As EventArgs) Handles nudFrom.TextChanged, nudTo.TextChanged, nudThreshold.TextChanged, nudOverDays.TextChanged
+    Private Sub grpRainParameters_Enter(sender As Object, e As EventArgs) Handles nudFrom.TextChanged, nudTo.TextChanged, nudThreshold.TextChanged
+        DayFromAndToMethod()
         TestOKEnabled()
     End Sub
 
-    Private Sub grpConditionsForSatrtofRains_Enter(sender As Object, e As EventArgs) Handles chkConsecutiveRainyDays.CheckedChanged, chkTotalRainfall.CheckedChanged, chkTotalRainfall.CheckedChanged, nudValue.TextChanged, nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged
-        DayFromAndToMethod()
+    Private Sub grpConditionsForSatrtofRains_Enter(sender As Object, e As EventArgs) Handles nudValue.TextChanged, nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged, nudOverDays.TextChanged
         RainyDaysMethod()
         MinimumRainfallMethod()
         XDaysRainMethod()
         TestOKEnabled()
     End Sub
 
+    Private Sub grpConditionsForSatrtofRains1_Enter(sender As Object, e As EventArgs) Handles chkConsecutiveRainyDays.CheckedChanged, chkTotalRainfall.CheckedChanged, chkTotalRainfall.CheckedChanged
+        MinimumRainfallMethod
+    End Sub
     Private Sub ucrReceiverRainfall_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRainfall.SelectionChanged
         RainyDaysMethod()
         RollingSumMethod()
     End Sub
 
     Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
+        YearGroupDaily()
         AddKeyMethod()
     End Sub
     Private Sub AddKeyMethod()
@@ -107,7 +114,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub DayFromAndToMethod()
-        If nudFrom.Text <> "" AndAlso nudTo.TextAlign <> "" AndAlso Not ucrReceiverDOY.IsEmpty Then
+        If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso (Not ucrReceiverDOY.IsEmpty) Then
             clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">" & nudFrom.Value & ucrReceiverDOY.GetVariableNames(False) & "<" & nudTo.Value & Chr(34))
             clsDayFromAndTo.AddParameter("calculated_from", Chr(34) & "list(Daily =" & ucrReceiverDOY.GetVariableNames(False) & ")" & Chr(34))
         Else
@@ -117,7 +124,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub RainyDaysMethod()
-        If Not ucrReceiverRainfall.IsEmpty AndAlso nudThreshold.Text <> "" Then
+        If ((Not ucrReceiverRainfall.IsEmpty) AndAlso (nudThreshold.Text <> "")) Then
             clsRainyDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
             clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & nudThreshold.Value & "," & "1, nomatch = 0" & Chr(34))
             clsRainyDays.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34))
@@ -185,5 +192,42 @@ Public Class dlgStartofRains
             clsXdaysRain.RemoveParameterByName("function_exp")
             clsXdaysRain.RemoveParameterByName("sub_calculations")
         End If
+    End Sub
+
+    Private Sub DrySpell()
+        clsDrySpell.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsDrySpell.AddParameter("function_exp", Chr(34) & "cumsum(rain_day==0)-cummax((rain_day)*cumsum(rain_day==0))" & Chr(34))
+        clsDrySpell.AddParameter("result_name", Chr(34) & "Rolling_Rain_Days" & Chr(34))
+        clsDrySpell.AddParameter("calculated_from", "list(Daily =" & " rain_day" & Chr(34) & ")")
+        clsDrySpell.AddParameter("save", 1)
+    End Sub
+
+    Private Sub NoTenInThirty()
+        clsDryPeriodTen.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsDryPeriodTen.AddParameter("function_exp", Chr(34) & "rollapply(data = Dry_Spell, width=" & nudMaximumDays.Value & ", FUN=max, align='right', fill=NA)")
+        clsDryPeriodTen.AddParameter("result_name", Chr(34) & "Dry_Period" & Chr(34))
+        clsDryPeriodTen.AddParameter("sub_calculations", "list(Dry_Spell)")
+        clsDryPeriodTen.AddParameter("save", 2)
+    End Sub
+
+    Private Sub PeriodWithinThirtyDays()
+        clsWithinThirtyDays.AddParameter("type", Chr(34) & "filter" & Chr(34))
+        clsWithinThirtyDays.AddParameter("function_exp", Chr(34) & "Dry_Period <" & nudLengthofTime.Value & Chr(34))
+        clsWithinThirtyDays.AddParameter("calculated_from", "list(Daily = " & Chr(34) & "Dry_Period" & Chr(34) & ")")
+    End Sub
+
+    Private Sub FirstDOYPerYear()
+        clsFirstDOYPerYear.AddParameter("type", Chr(34) & "summary" & Chr(34))
+        clsFirstDOYPerYear.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & "[" & 1 & "]" & Chr(34))
+        clsFirstDOYPerYear.AddParameter("calculated_from", "list(Daily =" & ucrReceiverDOY.GetVariableNames & ")")
+        clsFirstDOYPerYear.AddParameter("manipulations", "list(" & clsDayFromAndTo.ToScript & "," & clsMinimumRainfall.ToScript & "," & clsXdaysRain.ToScript & "," & clsDryPeriodTen.ToScript & "," & clsYearGroupDaily.ToScript & ")")
+        firstDayofTheYear()
+    End Sub
+    Private Sub YearGroupDaily()
+        clsYearGroupDaily.AddParameter("type", Chr(34) & "by" & Chr(34))
+        clsYearGroupDaily.AddParameter("calculated_from", "list(Daily = " & ucrReceiverDate.GetVariableNames & ")")
+    End Sub
+    Private Sub firstDayofTheYear()
+        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsFirstDOYPerYear)
     End Sub
 End Class
