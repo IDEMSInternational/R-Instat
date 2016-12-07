@@ -62,7 +62,7 @@ Partial Class DlgDefineClimaticData
         Me.grpClimaticType.Location = New System.Drawing.Point(237, 9)
         Me.grpClimaticType.Name = "grpClimaticType"
         Me.grpClimaticType.Size = New System.Drawing.Size(187, 306)
-        Me.grpClimaticType.TabIndex = 39
+        Me.grpClimaticType.TabIndex = 1
         Me.grpClimaticType.TabStop = False
         Me.grpClimaticType.Text = "Climatic Type"
         '
@@ -97,8 +97,8 @@ Partial Class DlgDefineClimaticData
         Me.panClimateType.Controls.Add(Me.lblDate)
         Me.panClimateType.Location = New System.Drawing.Point(8, 13)
         Me.panClimateType.Name = "panClimateType"
-        Me.panClimateType.Size = New System.Drawing.Size(172, 272)
-        Me.panClimateType.TabIndex = 39
+        Me.panClimateType.Size = New System.Drawing.Size(172, 287)
+        Me.panClimateType.TabIndex = 0
         '
         'ucrReceiverDay
         '
@@ -107,7 +107,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverDay.Name = "ucrReceiverDay"
         Me.ucrReceiverDay.Selector = Nothing
         Me.ucrReceiverDay.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDay.TabIndex = 58
+        Me.ucrReceiverDay.TabIndex = 25
         '
         'lblDay
         '
@@ -115,7 +115,7 @@ Partial Class DlgDefineClimaticData
         Me.lblDay.Location = New System.Drawing.Point(14, 525)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
-        Me.lblDay.TabIndex = 57
+        Me.lblDay.TabIndex = 24
         Me.lblDay.Text = "Day:"
         '
         'ucrReceiverMonth
@@ -125,7 +125,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
         Me.ucrReceiverMonth.Selector = Nothing
         Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMonth.TabIndex = 56
+        Me.ucrReceiverMonth.TabIndex = 23
         '
         'lblMonth
         '
@@ -133,7 +133,7 @@ Partial Class DlgDefineClimaticData
         Me.lblMonth.Location = New System.Drawing.Point(14, 482)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
-        Me.lblMonth.TabIndex = 55
+        Me.lblMonth.TabIndex = 22
         Me.lblMonth.Text = "Month:"
         '
         'ucrReceiverYear
@@ -143,7 +143,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverYear.TabIndex = 54
+        Me.ucrReceiverYear.TabIndex = 21
         '
         'lblYear
         '
@@ -151,7 +151,7 @@ Partial Class DlgDefineClimaticData
         Me.lblYear.Location = New System.Drawing.Point(14, 439)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 53
+        Me.lblYear.TabIndex = 20
         Me.lblYear.Text = "Year:"
         '
         'ucrReceiverStation
@@ -161,7 +161,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.TabIndex = 52
+        Me.ucrReceiverStation.TabIndex = 3
         '
         'lblStation
         '
@@ -169,7 +169,7 @@ Partial Class DlgDefineClimaticData
         Me.lblStation.Location = New System.Drawing.Point(14, 52)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 51
+        Me.lblStation.TabIndex = 2
         Me.lblStation.Text = "Station:"
         '
         'ucrReceiverDate
@@ -179,7 +179,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDate.TabIndex = 50
+        Me.ucrReceiverDate.TabIndex = 1
         '
         'ucrReceiverRain
         '
@@ -188,7 +188,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverRain.Name = "ucrReceiverRain"
         Me.ucrReceiverRain.Selector = Nothing
         Me.ucrReceiverRain.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRain.TabIndex = 50
+        Me.ucrReceiverRain.TabIndex = 5
         '
         'ucrReceiverMaxTemp
         '
@@ -197,7 +197,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverMaxTemp.Name = "ucrReceiverMaxTemp"
         Me.ucrReceiverMaxTemp.Selector = Nothing
         Me.ucrReceiverMaxTemp.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMaxTemp.TabIndex = 49
+        Me.ucrReceiverMaxTemp.TabIndex = 9
         '
         'ucrReceiverWindDirection
         '
@@ -206,7 +206,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
         Me.ucrReceiverWindDirection.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWindDirection.TabIndex = 48
+        Me.ucrReceiverWindDirection.TabIndex = 13
         '
         'ucrReceiverSunshine
         '
@@ -215,7 +215,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverSunshine.Name = "ucrReceiverSunshine"
         Me.ucrReceiverSunshine.Selector = Nothing
         Me.ucrReceiverSunshine.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSunshine.TabIndex = 48
+        Me.ucrReceiverSunshine.TabIndex = 15
         '
         'ucrReceiverRadiation
         '
@@ -224,7 +224,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverRadiation.Name = "ucrReceiverRadiation"
         Me.ucrReceiverRadiation.Selector = Nothing
         Me.ucrReceiverRadiation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRadiation.TabIndex = 48
+        Me.ucrReceiverRadiation.TabIndex = 17
         '
         'ucrReceiverCloudCover
         '
@@ -233,7 +233,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverCloudCover.Name = "ucrReceiverCloudCover"
         Me.ucrReceiverCloudCover.Selector = Nothing
         Me.ucrReceiverCloudCover.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCloudCover.TabIndex = 48
+        Me.ucrReceiverCloudCover.TabIndex = 19
         '
         'lblCloudCover
         '
@@ -241,7 +241,7 @@ Partial Class DlgDefineClimaticData
         Me.lblCloudCover.Location = New System.Drawing.Point(14, 396)
         Me.lblCloudCover.Name = "lblCloudCover"
         Me.lblCloudCover.Size = New System.Drawing.Size(68, 13)
-        Me.lblCloudCover.TabIndex = 47
+        Me.lblCloudCover.TabIndex = 18
         Me.lblCloudCover.Text = "Cloud Cover:"
         '
         'lblRadiation
@@ -250,7 +250,7 @@ Partial Class DlgDefineClimaticData
         Me.lblRadiation.Location = New System.Drawing.Point(14, 353)
         Me.lblRadiation.Name = "lblRadiation"
         Me.lblRadiation.Size = New System.Drawing.Size(55, 13)
-        Me.lblRadiation.TabIndex = 45
+        Me.lblRadiation.TabIndex = 16
         Me.lblRadiation.Text = "Radiation:"
         '
         'lblWindDirection
@@ -259,7 +259,7 @@ Partial Class DlgDefineClimaticData
         Me.lblWindDirection.Location = New System.Drawing.Point(14, 267)
         Me.lblWindDirection.Name = "lblWindDirection"
         Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
-        Me.lblWindDirection.TabIndex = 43
+        Me.lblWindDirection.TabIndex = 12
         Me.lblWindDirection.Text = "Wind Direction:"
         '
         'lblSunshine
@@ -268,7 +268,7 @@ Partial Class DlgDefineClimaticData
         Me.lblSunshine.Location = New System.Drawing.Point(14, 310)
         Me.lblSunshine.Name = "lblSunshine"
         Me.lblSunshine.Size = New System.Drawing.Size(85, 13)
-        Me.lblSunshine.TabIndex = 41
+        Me.lblSunshine.TabIndex = 14
         Me.lblSunshine.Text = "Sunshine Hours:"
         '
         'lblWindSpeed
@@ -277,7 +277,7 @@ Partial Class DlgDefineClimaticData
         Me.lblWindSpeed.Location = New System.Drawing.Point(14, 224)
         Me.lblWindSpeed.Name = "lblWindSpeed"
         Me.lblWindSpeed.Size = New System.Drawing.Size(69, 13)
-        Me.lblWindSpeed.TabIndex = 39
+        Me.lblWindSpeed.TabIndex = 10
         Me.lblWindSpeed.Text = "Wind Speed:"
         '
         'ucrReceiverMinTemp
@@ -287,7 +287,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverMinTemp.Name = "ucrReceiverMinTemp"
         Me.ucrReceiverMinTemp.Selector = Nothing
         Me.ucrReceiverMinTemp.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMinTemp.TabIndex = 38
+        Me.ucrReceiverMinTemp.TabIndex = 7
         '
         'ucrReceiverWindSpeed
         '
@@ -296,7 +296,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
         Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWindSpeed.TabIndex = 38
+        Me.ucrReceiverWindSpeed.TabIndex = 11
         '
         'lblRain
         '
@@ -304,7 +304,7 @@ Partial Class DlgDefineClimaticData
         Me.lblRain.Location = New System.Drawing.Point(14, 95)
         Me.lblRain.Name = "lblRain"
         Me.lblRain.Size = New System.Drawing.Size(32, 13)
-        Me.lblRain.TabIndex = 36
+        Me.lblRain.TabIndex = 4
         Me.lblRain.Text = "Rain:"
         '
         'lblMinTemp
@@ -313,7 +313,7 @@ Partial Class DlgDefineClimaticData
         Me.lblMinTemp.Location = New System.Drawing.Point(14, 138)
         Me.lblMinTemp.Name = "lblMinTemp"
         Me.lblMinTemp.Size = New System.Drawing.Size(111, 13)
-        Me.lblMinTemp.TabIndex = 35
+        Me.lblMinTemp.TabIndex = 6
         Me.lblMinTemp.Text = "Minimum Temperature"
         '
         'lblMaxTemp
@@ -322,7 +322,7 @@ Partial Class DlgDefineClimaticData
         Me.lblMaxTemp.Location = New System.Drawing.Point(14, 181)
         Me.lblMaxTemp.Name = "lblMaxTemp"
         Me.lblMaxTemp.Size = New System.Drawing.Size(117, 13)
-        Me.lblMaxTemp.TabIndex = 34
+        Me.lblMaxTemp.TabIndex = 8
         Me.lblMaxTemp.Text = "Maximum Temperature:"
         '
         'lblDate
@@ -331,7 +331,7 @@ Partial Class DlgDefineClimaticData
         Me.lblDate.Location = New System.Drawing.Point(14, 9)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 33
+        Me.lblDate.TabIndex = 0
         Me.lblDate.Text = "Date:"
         '
         'ucrSelectorDefineClimaticData
@@ -346,10 +346,10 @@ Partial Class DlgDefineClimaticData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 337)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 323)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(423, 52)
-        Me.ucrBase.TabIndex = 13
+        Me.ucrBase.TabIndex = 2
         '
         'DlgDefineClimaticData
         '

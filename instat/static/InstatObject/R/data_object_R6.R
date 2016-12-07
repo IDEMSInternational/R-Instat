@@ -1841,27 +1841,3 @@ data_object$set("public","set_climatic_types", function(types) {
   invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], climatic_type_label, name)))
 }
 )
-
-#Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(year, doy, col_name, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
-  curr_data <- self$get_data_frame()
-  col_data <- self$get_columns_from_data(col_name)
-  if(!is.numeric(col_data)) stop("The rainfall column should be numeric")
-  recode <- ifelse(is.na(col_data), "missing", ifelse(col_data>threshold, "rain", "dry"))
-  recode <- as.factor(recode)
-  new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
-  curr_data[[new_col]] <- recode
-  if(add_to_data) {
-    self$add_columns_to_data(col_name = new_col, col_data = recode)
-  }
-  
-  g <- ggplot(data = curr_data, mapping = aes_(x = as.name(year), y = as.name(doy), colour = as.name(new_col), group = as.name(year))) + geom_point() + xlab(year) + ylab(col_name) + labs(color="Recode")
-  if(!missing(facets)) {
-    g <- g + facet_wrap(as.name(facets))
-  }
-  if(coord_flip) {
-    g <- g + coord_flip()
-  }
-  return(g)
-}
-)

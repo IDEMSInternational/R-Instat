@@ -1046,7 +1046,3 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
   self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
 )
-instat_object$set("public","make_inventory_plot", function(data_name,col_name = "", year , doy, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
-  self$get_data_objects(data_name)$make_inventory_plot(col_name = col_name , year = year, doy =doy,add_to_data = add_to_data, coord_flip = coord_flip, threshold = threshold, facets = facets)
-}
-)
