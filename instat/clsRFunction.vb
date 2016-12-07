@@ -32,6 +32,9 @@ Public Class RFunction
         'Converting the RFunction into a string that when run in R gives the appropriate output
         Dim i As Integer
         'For method with OrderedIndices, replace clsParameters.count by Mybase.OrderedIndices.count and i by Mybase.OrderedIndices(i)
+
+        'Parameters are sorted in the appropriate order and then the script is built.
+        SortParameters()
         strTemp = strRCommand & "("
         For i = 0 To clsParameters.Count - 1
             If i > 0 Then

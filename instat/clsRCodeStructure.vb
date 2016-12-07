@@ -237,7 +237,7 @@ Public Class RCodeStructure
             End If
             If i = -1 Then
                 clsParameters.Add(clsParam)
-                SortParameters()
+                'SortParameters() 'Not needed, can do this only when necessary...
             Else
                 If clsParam.bIsString AndAlso clsParam.strArgumentValue IsNot Nothing Then
                     clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
@@ -248,7 +248,7 @@ Public Class RCodeStructure
                 End If
                 If clsParameters(i).Position <> clsParam.Position Then
                     clsParameters(i).Position = clsParam.Position
-                    SortParameters()
+                    'SortParameters() 'Not needed, can do this only when necessary...
                 End If
             End If
         Else
@@ -261,7 +261,7 @@ Public Class RCodeStructure
 
     Public Sub SortParameters()
         'This sub is used to reorder the parameters according to their Position property.
-        'For the moment it needs to be called by hand each time the position property of parameters in the clsParameters has been changed.
+        'It will be called only in places where it is necessary ie before ToScript or RemoveAdditionalParameters in ROperator.
         clsParameters.Sort(AddressOf CompareParametersPosition)
     End Sub
     Private Function CompareParametersPosition(ByVal x As RParameter, ByVal y As RParameter) As Integer
