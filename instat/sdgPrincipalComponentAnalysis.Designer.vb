@@ -50,7 +50,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.cboLabel = New System.Windows.Forms.ComboBox()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -125,7 +124,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Controls.Add(Me.grpScree)
         Me.tbGraphics.Controls.Add(Me.rdoBiplot)
         Me.tbGraphics.Controls.Add(Me.rdoVariablesPlot)
-        Me.tbGraphics.Controls.Add(Me.cboLabel)
         Me.tbGraphics.Controls.Add(Me.rdoScreePlot)
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
@@ -353,16 +351,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 1
         '
-        'cboLabel
-        '
-        Me.cboLabel.FormattingEnabled = True
-        Me.cboLabel.Items.AddRange(New Object() {"all", "ind.sup", "quali", "quanti.sup", "var", "ind", "none"})
-        Me.cboLabel.Location = New System.Drawing.Point(225, 79)
-        Me.cboLabel.Name = "cboLabel"
-        Me.cboLabel.Size = New System.Drawing.Size(150, 21)
-        Me.cboLabel.TabIndex = 29
-        Me.cboLabel.Text = "55101"
-        '
         'sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -419,5 +407,4 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents grpScree As GroupBox
     Friend WithEvents ucrLabel As ucrInputComboBox
-    Friend WithEvents cboLabel As ComboBox
 End Class

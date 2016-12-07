@@ -165,7 +165,8 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBarPlot.SetParameter(False, clsRFunc:=clsRBarPlotFacet)
     End Sub
 
-    'When to run the various options in the two subs
+    'When to run the various options in the "Display" tab and "Graphics" tab
+
     Public Sub PCAOptions()
         If (chkEigenValues.Checked) Then
             EigenValues()
