@@ -100,6 +100,8 @@ Public Class dlgView
             ucrBase.clsRsyntax.RemoveParameter("n")
             ucrBase.clsRsyntax.SetFunction("View")
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelctorForView.strCurrentDataFrame & Chr(34))
+
         ElseIf rdoViewPreview.Checked Then
             'Setting head and tail commands to help in previewing the data with specified number of observations "n"
             lblNumberofRows.Enabled = True
