@@ -1705,7 +1705,7 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
 )
 
 data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, defined_contr_matrix) {
-  if(!col_name %in% names(self$get_data_frame())) stop(col_name, " not found in the data")
+   if(!col_name %in% names(self$get_data_frame())) stop(col_name, " not found in the data")
   if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
   factor_col <- self$get_columns_from_data(col_name)
   contr_col <- nlevels(factor_col) - 1
@@ -1724,69 +1724,87 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   }
 )
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE) {
+  data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-  if(!is.Date(col_data)) stop("This column must be a date or time!")
-  if(day) {
-    day_vector <- day(col_data)
-	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day_vector)
-  }
-  if(week) {
-    week_vector <- as.integer(week(col_data))
-	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = week_vector)
-  }
-   if(weekday_val) {
-    weekday_val_vector <- as.integer(wday(col_data))
-	  col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = weekday_val_vector)
-  }
-   if(weekday_abbr) {
-     weekday_abbr_vector <- wday(col_data, label = TRUE)
-	  col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = weekday_abbr_vector)
-  }
-   if(weekday_name) {
-     weekday_name_vector <- wday(col_data, label = TRUE, abbr = FALSE)
-	  col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
-  }
-  if(month_val) {
-    month_val_vector <- as.integer(month(col_data))
-	  col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
-  }
-   if(month_abbr) {
-    month_abbr_vector <- month(col_data, label = TRUE)
-	  col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
-  }
-   if(month_name) {
-    month_name_vector <- month(col_data, label = TRUE, abbr = FALSE)
-	  col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
-  }
-  if(year) {
-    year_vector <- year(col_data)
-	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = year_vector)
-  }
-  if(day_in_month) {
-    day_in_month_vector <- as.integer(mday(col_data))
-	  col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
+    if(!is.Date(col_data)) stop("This column must be a date or time!")
+	    if(day) {
+		day_vector <- day(col_data)
+		col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = day_vector)
+    }
+	
+	if(week) {
+		week_vector <- as.integer(week(col_data))
+		col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = week_vector)
+    }
+	
+    if(weekday_val) {
+		weekday_val_vector <- as.integer(wday(col_data))
+		col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = weekday_val_vector)
+    }
+	
+    if(weekday_abbr) {
+		weekday_abbr_vector <- wday(col_data, label = TRUE)
+		col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = weekday_abbr_vector)
 	}
-	 if(day_in_year) {
-    day_in_year_vector <- as.integer(yday(col_data))
-	  col_name <- next_default_item(prefix = "day_in_year", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
+	
+	if(weekday_name) {
+		weekday_name_vector <- wday(col_data, label = TRUE, abbr = FALSE)
+		col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
 	}
-	 if(leap_year) {
-    leap_year_vector <- leap_year(col_data)
-	  col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
+	
+	if(month_val) {
+		month_val_vector <- as.integer(month(col_data))
+		col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
 	}
+	
+	if(month_abbr) {
+		month_abbr_vector <- month(col_data, label = TRUE)
+		col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
+	}
+	
+	if(month_name) {
+		month_name_vector <- month(col_data, label = TRUE, abbr = FALSE)
+		col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
+    }
+	
+    if(year) {
+		year_vector <- year(col_data)
+		col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = year_vector)
+    }
+	
+    if(day_in_month) {
+		day_in_month_vector <- as.integer(mday(col_data))
+		col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
+	}
+	
+	if(day_in_year) {
+		day_in_year_vector <- as.integer(yday(col_data))
+		col_name <- next_default_item(prefix = "day_in_year", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
+	}
+
+    if(day_in_year_366) {
+		day_in_year_366_vector <- as.integer(yday_366(col_data))
+		col_name <- next_default_item(prefix = "doy_366", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = day_in_year_366_vector)
+    }
+	
+	if(leap_year) {
+		leap_year_vector <- leap_year(col_data)
+		col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
+		self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
+	}
+	
   #TO Do
   #Implement option for the day of the year
   }
