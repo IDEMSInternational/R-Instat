@@ -226,8 +226,8 @@ Public Class RCodeStructure
             Else
                 If clsParam.bIsString AndAlso clsParam.strArgumentValue IsNot Nothing Then
                     clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
-                ElseIf (clsParam.bIsString OrElse clsParam.bIsFunction) AndAlso clsParam.clsArgument IsNot Nothing Then
-                    clsParameters(i).SetArgument(clsParam.clsArgument)
+                ElseIf (clsParam.bIsString OrElse clsParam.bIsFunction) AndAlso clsParam.clsArgumentCodeStructure IsNot Nothing Then
+                    clsParameters(i).SetArgument(clsParam.clsArgumentCodeStructure)
                 Else
                     'message
                 End If

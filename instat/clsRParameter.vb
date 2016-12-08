@@ -19,7 +19,7 @@ Public Class RParameter
     Public strArgumentName As String
     'The parameter can either take a simple value in the form of a string, or take as value another RFunction or ROperator (then stored as an RCodeStructure).
     Public strArgumentValue As String
-    Public clsArgument As RCodeStructure
+    Public clsArgumentCodeStructure As RCodeStructure
     'The three next booleans keep track of what type of value is stored.
     Public bIsFunction As Boolean = False
     Public bIsOperator As Boolean = False
@@ -57,7 +57,7 @@ Public Class RParameter
     End Sub
 
     Public Sub SetArgument(clsArg As RCodeStructure)
-        clsArgument = clsArg
+        clsArgumentCodeStructure = clsArg
         bIsString = False
         If TypeOf (clsArg) Is RFunction Then
             bIsFunction = True
@@ -79,11 +79,11 @@ Public Class RParameter
             strRet = strArgumentName & "="
         End If
         If bIsFunction OrElse bIsOperator Then
-            strRet = strRet & clsArgument.ToScript(strScript)
+            strRet = strRet & clsArgumentCodeStructure.ToScript(strScript)
         ElseIf bIsString Then
             strRet = strRet & strArgumentValue
-        ElseIf clsArgument IsNot Nothing Then
-            strRet = strRet & clsArgument.ToScript(strScript)
+        ElseIf clsArgumentCodeStructure IsNot Nothing Then
+            strRet = strRet & clsArgumentCodeStructure.ToScript(strScript)
             'message
         Else
             'message
@@ -99,8 +99,8 @@ Public Class RParameter
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
         clsTempRParam.bIsString = bIsString
-        If clsArgument IsNot Nothing Then
-            clsTempRParam.clsArgument = clsArgument.Clone
+        If clsArgumentCodeStructure IsNot Nothing Then
+            clsTempRParam.clsArgumentCodeStructure = clsArgumentCodeStructure.Clone
         End If
         Return clsTempRParam
     End Function
