@@ -13,13 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVariableGraph
-    Private clsRggplotFunction As New RFunction
-    Private clsRaesFunction As New RFunction
-    Private clsRgeom_Function As New RFunction
     Private bFirstLoad As Boolean = True
+    Private clsDefaultRFunction As New RFunction
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -34,47 +33,66 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub SetDefaults()
+        ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+        ' Link the base function to the sub dialog
+        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        ' Update the main dialog controls from base function
+        UpdateControls(Me, ucrBase.clsRsyntax.clsBaseFunction)
+        ' Controls may have changed values before InitialiseDialog was run so need to correctly update RCode too
+        UpdateRCode(Me, ucrBase.clsRsyntax.clsBaseFunction)
         ucrSelectorOneVarGraph.Reset()
         ucrSelectorOneVarGraph.Focus()
         ucrOneVarGraphSave.Reset()
-        rdoFacets.Checked = True
+        'rdoFacets.Checked = True
         ucrOneVarGraphSave.Reset()
-        sdgOneVarGraph.SetDefaults()
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
-        chkFlipCoordinates.Checked = False
+
+        'Will be removed when we have new radio button user control
+        rdoFacets.Checked = True
+
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        'Define the default RFunction
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "violin_jitter" & Chr(34))
+        clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        'This currently has no effect on controls as there is no radio button user control yet
+        clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
+
         rdoSingleGraphs.Enabled = False
+
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
+
+        ucrSelectorOneVarGraph.SetParameterName("data")
+        ucrSelectorOneVarGraph.SetParameterIsString()
+
+        ucrChkFlip.SetText("Flip Coordinates")
+        ucrChkFlip.SetParameterName("coord_flip")
+        'When checked add coord_flip = TRUE, when unchecked remove coord_flip parameter
+        ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "")
+
         ucrBase.iHelpTopicID = 412
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'this sets the main function to be used in the dialog
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        sdgOneVarGraph.SetRSyntax(ucrBase.clsRsyntax)
-        sdgOneVarGraph.InitialiseDialog()
-
     End Sub
+
     Private Sub ReopenDialog()
         CheckDataType()
     End Sub
 
     Private Sub TestOkEnabled()
+        'Question: What should TestOK do in the new implementation? Still check controls or check the code?
         'this test when to enable okay button. Should be enabled only when the receiver is not empty or when the save graph is schecked and the save graph is not empty
         If ucrReceiverOneVarGraph.IsEmpty() OrElse (ucrOneVarGraphSave.chkSaveGraph.Checked AndAlso ucrOneVarGraphSave.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
-    End Sub
-
-    Private Sub ucrSelectorOneVarGraph_DataFrameChanged() Handles ucrSelectorOneVarGraph.DataFrameChanged
-        'this adds the parameter data_name to the syntax
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 
     Private Sub ucrReceiverOneVarGraph_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOneVarGraph.SelectionChanged
@@ -98,6 +116,7 @@ Public Class dlgOneVariableGraph
         End If
         TestOkEnabled()
     End Sub
+
     Private Sub cmdGraph_Click(sender As Object, e As EventArgs) Handles cmdGraphOptions.Click
         sdgOneVarGraph.ShowDialog()
     End Sub
@@ -135,12 +154,11 @@ Public Class dlgOneVariableGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
-        'adds flip crdinates when the chkFlipCoordinates is checked
-        If chkFlipCoordinates.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("coord_flip", "TRUE")
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("coord_flip")
-        End If
+    'When any of the ucrCore controls have been changed we update the R Code to match the contents
+    Private Sub ucrSelectorOneVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged, ucrChkFlip.ControlValueChanged
+        'The control that has changed updates the R code
+        ucrChangedControl.UpdateRCode(ucrBase.clsRsyntax.clsBaseFunction)
+        'This line may be needed if there are linked controls that need to be updated after other controls have changed
+        UpdateControls(Me, ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 End Class
