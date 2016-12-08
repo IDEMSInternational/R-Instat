@@ -113,7 +113,7 @@ Partial Class dlgStartofRains
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.nudValue)
         Me.grpConditionsForSatrtofRains.Location = New System.Drawing.Point(12, 220)
         Me.grpConditionsForSatrtofRains.Name = "grpConditionsForSatrtofRains"
-        Me.grpConditionsForSatrtofRains.Size = New System.Drawing.Size(395, 105)
+        Me.grpConditionsForSatrtofRains.Size = New System.Drawing.Size(395, 95)
         Me.grpConditionsForSatrtofRains.TabIndex = 7
         Me.grpConditionsForSatrtofRains.TabStop = False
         Me.grpConditionsForSatrtofRains.Text = "Conditions for Start of Rains"
@@ -283,6 +283,8 @@ Partial Class dlgStartofRains
         Me.nudFrom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.nudFrom.Size = New System.Drawing.Size(55, 20)
         Me.nudFrom.TabIndex = 1
+        Me.nudFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudFrom.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left
         Me.nudFrom.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblFrom
@@ -371,7 +373,7 @@ Partial Class dlgStartofRains
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 331)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 321)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
@@ -380,7 +382,7 @@ Partial Class dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 385)
+        Me.ClientSize = New System.Drawing.Size(413, 378)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverDOY)
