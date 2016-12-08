@@ -25,7 +25,6 @@ Partial Class dlgStartofRains
         Me.nudValue = New System.Windows.Forms.NumericUpDown()
         Me.nudMinimum = New System.Windows.Forms.NumericUpDown()
         Me.lblRainfall = New System.Windows.Forms.Label()
-        Me.lblDate = New System.Windows.Forms.Label()
         Me.grpConditionsForSatrtofRains = New System.Windows.Forms.GroupBox()
         Me.nudOutOfDays = New System.Windows.Forms.NumericUpDown()
         Me.lblWidth = New System.Windows.Forms.Label()
@@ -49,10 +48,11 @@ Partial Class dlgStartofRains
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         CType(Me.nudValue, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMinimum, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpConditionsForSatrtofRains.SuspendLayout()
@@ -70,6 +70,7 @@ Partial Class dlgStartofRains
         '
         Me.nudValue.Location = New System.Drawing.Point(201, 42)
         Me.nudValue.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.nudValue.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudValue.Name = "nudValue"
         Me.nudValue.Size = New System.Drawing.Size(41, 20)
         Me.nudValue.TabIndex = 4
@@ -78,6 +79,7 @@ Partial Class dlgStartofRains
         'nudMinimum
         '
         Me.nudMinimum.Location = New System.Drawing.Point(201, 18)
+        Me.nudMinimum.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMinimum.Name = "nudMinimum"
         Me.nudMinimum.Size = New System.Drawing.Size(41, 20)
         Me.nudMinimum.TabIndex = 2
@@ -86,20 +88,11 @@ Partial Class dlgStartofRains
         'lblRainfall
         '
         Me.lblRainfall.AutoSize = True
-        Me.lblRainfall.Location = New System.Drawing.Point(231, 9)
+        Me.lblRainfall.Location = New System.Drawing.Point(232, 50)
         Me.lblRainfall.Name = "lblRainfall"
-        Me.lblRainfall.Size = New System.Drawing.Size(45, 13)
+        Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
         Me.lblRainfall.TabIndex = 1
-        Me.lblRainfall.Text = "Rainfall:"
-        '
-        'lblDate
-        '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(234, 49)
-        Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 3
-        Me.lblDate.Text = "Date:"
+        Me.lblRainfall.Text = "Rain Column:"
         '
         'grpConditionsForSatrtofRains
         '
@@ -128,9 +121,11 @@ Partial Class dlgStartofRains
         'nudOutOfDays
         '
         Me.nudOutOfDays.Location = New System.Drawing.Point(332, 20)
+        Me.nudOutOfDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudOutOfDays.Name = "nudOutOfDays"
         Me.nudOutOfDays.Size = New System.Drawing.Size(53, 20)
         Me.nudOutOfDays.TabIndex = 11
+        Me.nudOutOfDays.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblWidth
         '
@@ -144,16 +139,20 @@ Partial Class dlgStartofRains
         'nudLengthofTime
         '
         Me.nudLengthofTime.Location = New System.Drawing.Point(332, 72)
+        Me.nudLengthofTime.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudLengthofTime.Name = "nudLengthofTime"
         Me.nudLengthofTime.Size = New System.Drawing.Size(53, 20)
         Me.nudLengthofTime.TabIndex = 9
+        Me.nudLengthofTime.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'nudMaximumDays
         '
         Me.nudMaximumDays.Location = New System.Drawing.Point(201, 68)
+        Me.nudMaximumDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMaximumDays.Name = "nudMaximumDays"
         Me.nudMaximumDays.Size = New System.Drawing.Size(41, 20)
         Me.nudMaximumDays.TabIndex = 7
+        Me.nudMaximumDays.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'nudOverDays
         '
@@ -278,9 +277,13 @@ Partial Class dlgStartofRains
         'nudFrom
         '
         Me.nudFrom.Location = New System.Drawing.Point(81, 35)
+        Me.nudFrom.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
+        Me.nudFrom.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudFrom.Name = "nudFrom"
+        Me.nudFrom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.nudFrom.Size = New System.Drawing.Size(55, 20)
         Me.nudFrom.TabIndex = 1
+        Me.nudFrom.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblFrom
         '
@@ -294,11 +297,12 @@ Partial Class dlgStartofRains
         'nudTo
         '
         Me.nudTo.Location = New System.Drawing.Point(81, 61)
-        Me.nudTo.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.nudTo.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
+        Me.nudTo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudTo.Name = "nudTo"
         Me.nudTo.Size = New System.Drawing.Size(53, 20)
         Me.nudTo.TabIndex = 3
-        Me.nudTo.Value = New Decimal(New Integer() {20, 0, 0, 0})
+        Me.nudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblTo
         '
@@ -313,7 +317,7 @@ Partial Class dlgStartofRains
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(234, 89)
+        Me.lblDOY.Location = New System.Drawing.Point(232, 91)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(63, 13)
         Me.lblDOY.TabIndex = 8
@@ -321,25 +325,16 @@ Partial Class dlgStartofRains
         '
         'ucrReceiverDOY
         '
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(234, 106)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(234, 104)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(144, 20)
         Me.ucrReceiverDOY.TabIndex = 9
         '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(234, 65)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(144, 20)
-        Me.ucrReceiverDate.TabIndex = 4
-        '
         'ucrReceiverRainfall
         '
-        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(234, 26)
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(235, 67)
         Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
@@ -350,7 +345,7 @@ Partial Class dlgStartofRains
         '
         Me.ucrSelectorForStartofRains.bShowHiddenColumns = False
         Me.ucrSelectorForStartofRains.bUseCurrentFilter = True
-        Me.ucrSelectorForStartofRains.Location = New System.Drawing.Point(18, 9)
+        Me.ucrSelectorForStartofRains.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectorForStartofRains.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForStartofRains.Name = "ucrSelectorForStartofRains"
         Me.ucrSelectorForStartofRains.Size = New System.Drawing.Size(210, 180)
@@ -363,18 +358,36 @@ Partial Class dlgStartofRains
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
+        'lblDate
+        '
+        Me.lblDate.AutoSize = True
+        Me.lblDate.Location = New System.Drawing.Point(232, 12)
+        Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.TabIndex = 10
+        Me.lblDate.Text = "Date:"
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(234, 25)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(144, 20)
+        Me.ucrReceiverDate.TabIndex = 11
+        '
         'dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 385)
+        Me.ClientSize = New System.Drawing.Size(413, 385)
+        Me.Controls.Add(Me.lblDate)
+        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverDOY)
         Me.Controls.Add(Me.lblDOY)
         Me.Controls.Add(Me.grpRainParameters)
         Me.Controls.Add(Me.grpConditionsForSatrtofRains)
-        Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblRainfall)
-        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverRainfall)
         Me.Controls.Add(Me.ucrSelectorForStartofRains)
         Me.Controls.Add(Me.ucrBase)
@@ -407,9 +420,7 @@ Partial Class dlgStartofRains
     Friend WithEvents nudMinimum As NumericUpDown
     Friend WithEvents ucrSelectorForStartofRains As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRainfall As ucrReceiverSingle
-    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblRainfall As Label
-    Friend WithEvents lblDate As Label
     Friend WithEvents grpConditionsForSatrtofRains As GroupBox
     Friend WithEvents nudLengthofTime As NumericUpDown
     Friend WithEvents nudMaximumDays As NumericUpDown
@@ -433,4 +444,6 @@ Partial Class dlgStartofRains
     Friend WithEvents nudOutOfDays As NumericUpDown
     Friend WithEvents nudThreshold As NumericUpDown
     Friend WithEvents lblThreshold As Label
+    Friend WithEvents lblDate As Label
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
 End Class
