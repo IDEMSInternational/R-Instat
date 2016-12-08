@@ -13,126 +13,73 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class sdgOneVarGraph
     Public bFirstLoad As Boolean = True
-    Public clsRsyntax As New RSyntax
-    Public strNumericGeomFunction As String
-    Public strCategoriacalGeomFunction As String
-    Public clsCoordPolarFunction As New RFunction
+    Public clsGraphOneVariable As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
         autoTranslate(Me)
+        UpdateControls(Me, clsGraphOneVariable)
     End Sub
 
-    Public Sub SetDefaults()
-        lblNumberofColumns.Visible = False
-        nudNumberofColumns.Visible = False
-        chkSpecifyLayout.Checked = False
-        chkFreeScaleAxisforFacets.Checked = False
-        nudNumberofColumns.Value = 3
-        ucrInputNumeric.Reset()
-        ucrInputCategorical.Reset()
-        ucrInputNumeric.SetName("Boxplot")
-        ucrInputCategorical.SetName("Bar Chart")
-    End Sub
 
     Public Sub InitialiseDialog()
-        clsCoordPolarFunction.SetRCommand("coord_polar")
-        ucrInputNumeric.SetItems({"Boxplot", "Dot Plot", "Histogram", "Point Plot", "Density Plot", "Frequency Polygon"})
-        ucrInputCategorical.SetItems({"Bar Chart", "Pie Chart", "Dot Plot"})
-        nudNumberofColumns.Maximum = 10
-        nudNumberofColumns.Minimum = 1
+        Dim lstNumericPairs As New List(Of KeyValuePair(Of String, String))
+        Dim lstCategoricalPairs As New List(Of KeyValuePair(Of String, String))
 
-    End Sub
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Boxplot", Chr(34) & "geom_boxplot" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Histogram", Chr(34) & "geom_histogram" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Dotplot", Chr(34) & "geom_dotplot" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Point Plot", Chr(34) & "geom_point" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Density Plot", Chr(34) & "geom_density" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Frequency Polygon", Chr(34) & "geom_freqpoly" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Violin Plot", Chr(34) & "geom_violin" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Jitter Plot", Chr(34) & "geom_jitter" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Boxplot + Jitter", Chr(34) & "box_jitter" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Violin + Jitter", Chr(34) & "violin_jitter" & Chr(34)))
+        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Violin + Boxplot", Chr(34) & "violin_box" & Chr(34)))
+        ucrInputNumeric.SetItems(lstNumericPairs)
 
-    Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
-        clsRsyntax = clsNewRSyntax
-    End Sub
-    Private Sub SpecifyLayoutControl()
-        If chkSpecifyLayout.Checked Then
-            lblNumberofColumns.Visible = True
-            nudNumberofColumns.Visible = True
-        Else
-            lblNumberofColumns.Visible = False
-            nudNumberofColumns.Visible = False
-        End If
-    End Sub
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Bar Chart", Chr(34) & "geom_bar" & Chr(34)))
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Pie Chart", Chr(34) & "pie_chart" & Chr(34)))
+        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
+        ucrInputCategorical.SetItems(lstCategoricalPairs)
 
-    Public Sub SetNumericGeomFunction()
-        Select Case ucrInputNumeric.GetText
-            Case "Boxplot"
-                strNumericGeomFunction = "geom_boxplot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
-            Case "Histogram"
-                strNumericGeomFunction = "geom_histogram"
-                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
-            Case "Dot Plot"
-                strNumericGeomFunction = "geom_dotplot"
-                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
-            Case "Point Plot"
-                strNumericGeomFunction = "geom_point"
-                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
-            Case "Density Plot"
-                strNumericGeomFunction = "geom_density"
-                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
-            Case "Frequency Polygon"
-                strNumericGeomFunction = "geom_freqpoly"
-                clsRsyntax.AddParameter("numeric", Chr(34) & strNumericGeomFunction & Chr(34))
-            Case Else
-                clsRsyntax.RemoveParameter("numeric")
-        End Select
+        ucrInputNumeric.SetParameterName("numeric")
+        ucrInputCategorical.SetParameterName("categorical")
+
+        'TODO See if we can get the Text property on the Properties tab in design view to avoid this
+        ucrChkSpecifyLayout.SetParameterName("ncol")
+        ucrChkSpecifyLayout.SetText("Specify Layout")
+        ucrChkSpecifyLayout.SetLinkedControl(ucrNudNumberofColumns)
+        ucrChkSpecifyLayout.SetIsParameterPresent()
+
+        ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
+
+        ucrNudNumberofColumns.SetParameterName("ncol")
+        ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
+        ucrNudNumberofColumns.bAddIfParameterNotPresent = False
+        'This needs to be done last as it changes the Value because default value is 0.
+        'If not done last then R code may be updated worngly because its happening before all properties of the control are set
+        'This line is needed if there already a value for the nud in the RFunction, otherwise setting min/max may override the RFunction's value
+        ucrNudNumberofColumns.UpdateControl(clsGraphOneVariable)
+        ucrNudNumberofColumns.SetMinMax(1, 10)
     End Sub
 
-    Private Sub ucrInputNumeric_NameChanged() Handles ucrInputNumeric.NameChanged
-        SetNumericGeomFunction()
-        dlgOneVariableGraph.OneOrMoreVariables()
-
+    Public Sub SetRFunction(clsNewRFunction As RFunction)
+        clsGraphOneVariable = clsNewRFunction
     End Sub
 
-    Public Sub SetCategoricalGeomFunction()
-        Select Case ucrInputCategorical.GetText
-            Case "Bar Chart"
-                strCategoriacalGeomFunction = "geom_bar"
-                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
-                clsRsyntax.RemoveParameter("polar")
-            Case "Dot Plot"
-                strCategoriacalGeomFunction = "geom_dotplot"
-                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
-                clsRsyntax.RemoveParameter("polar")
-            Case "Pie Chart"
-                strCategoriacalGeomFunction = "geom_bar"
-                clsRsyntax.AddParameter("categorical", Chr(34) & strCategoriacalGeomFunction & Chr(34))
-                clsRsyntax.AddParameter("polar", "TRUE")
-            Case Else
-                clsRsyntax.RemoveParameter("categorical")
-                clsRsyntax.RemoveParameter("polar")
-        End Select
-    End Sub
-    Private Sub ucrInputCategorical_NameChanged() Handles ucrInputCategorical.NameChanged
-        SetCategoricalGeomFunction()
-        dlgOneVariableGraph.OneOrMoreVariables()
-    End Sub
-    
-    Private Sub chkFreeScaleAxisforFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScaleAxisforFacets.CheckedChanged
-        If chkFreeScaleAxisforFacets.Checked Then
-            clsRsyntax.AddParameter("free_scale_axis", "TRUE")
-        Else
-            clsRsyntax.RemoveParameter("free_scale_axis")
-        End If
-    End Sub
-
-    Private Sub nudNumberofColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged, chkSpecifyLayout.CheckedChanged
-        SpecifyLayoutControl()
-        If nudNumberofColumns.Text <> "" AndAlso chkSpecifyLayout.Checked Then
-            clsRsyntax.AddParameter("ncol", nudNumberofColumns.Value)
-        Else
-            clsRsyntax.RemoveParameter("ncol")
-        End If
+    Private Sub CoreControlsValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScaleAxisforFacets.ControlValueChanged, ucrChkSpecifyLayout.ControlContentsChanged, ucrInputCategorical.ControlContentsChanged, ucrInputNumeric.ControlContentsChanged, ucrNudNumberofColumns.ControlContentsChanged
+        ucrChangedControl.UpdateRCode(clsGraphOneVariable)
+        'After one control has edited the code, other controls may need to be updated
+        'Could make more efficient by only updating controls "linked" to ucrChangedControl, but for this this seems a simple solution.
+        UpdateControls(Me, clsGraphOneVariable)
     End Sub
 End Class

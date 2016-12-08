@@ -56,13 +56,18 @@ Public Class dlgEnter
         ucrDataFrameEnter.Reset()
         chkSaveEnterResultInto.Checked = True
         ucrSaveEnterResultInto.SetPrefix("Enter")
+        ucrReceiverForEnterCalculation.Clear()
     End Sub
     Private Sub ReopenDialog()
         SaveResults()
     End Sub
     Private Sub TestOKEnabled()
         If Not ucrReceiverForEnterCalculation.IsEmpty Then
-            ucrBase.OKEnabled(True)
+            If chkSaveEnterResultInto.Checked AndAlso Not ucrSaveEnterResultInto.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -265,6 +270,9 @@ Public Class dlgEnter
 
     Private Sub ucrSaveEnterResultInto_NameChanged() Handles ucrSaveEnterResultInto.NameChanged
         SaveResults()
+    End Sub
+
+    Private Sub ucrSaveEnterResultInto_ContentsChanged() Handles ucrSaveEnterResultInto.ContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -295,8 +303,8 @@ Public Class dlgEnter
         bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
         bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
         strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
-        strAssignToColumn = ucrBase.clsRsyntax.strAssignToColumn
-        strAssignToDataFrame = ucrBase.clsRsyntax.strAssignToDataframe
+        strAssignToColumn = ucrBase.clsRsyntax.GetstrAssignToColumn()
+        strAssignToDataFrame = ucrBase.clsRsyntax.GetstrAssignToDataFrame()
 
         Try
             If ucrReceiverForEnterCalculation.IsEmpty Then
@@ -330,8 +338,8 @@ Public Class dlgEnter
             ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
             ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
             ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
-            ucrBase.clsRsyntax.strAssignToColumn = strAssignToColumn
-            ucrBase.clsRsyntax.strAssignToDataframe = strAssignToDataFrame
+            ucrBase.clsRsyntax.SetstrAssignToColumn(strAssignToColumn)
+            ucrBase.clsRsyntax.SetstrAssignToDataFrame(strAssignToDataFrame)
         End Try
     End Sub
 
