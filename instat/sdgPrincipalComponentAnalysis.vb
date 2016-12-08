@@ -23,11 +23,16 @@ Public Class sdgPrincipalComponentAnalysis
     Dim clsRBarPlot, clsRBarPlot0 As New ROperator
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
+    End Sub
+
+    Private Sub InitialiseDialog()
+        nudDim1.Minimum = 1
+        nudDim2.Minimum = 1
     End Sub
 
     Public Sub SetDefaults()
@@ -197,9 +202,6 @@ Public Class sdgPrincipalComponentAnalysis
 
     ' Here, the minimum and maximum dimensions selected rely on a few things
     Public Sub Dimensions()
-        ' Firstly, we need to state that the minimums for the two nuds is always one.
-        nudDim1.Minimum = 1
-        nudDim2.Minimum = 1
         ' Now, if the receiver is empty or has one variable in it then the value for the second dimension is two
         If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.IsEmpty OrElse dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count = 1 Then
             nudDim2.Value = 2
@@ -279,10 +281,6 @@ Public Class sdgPrincipalComponentAnalysis
                 End If
             End If
         End If
-    End Sub
-
-    Private Sub lblNames_TextChanged(sender As Object, e As EventArgs) Handles lblChoiceScree.TextChanged, rdoOne.TextChanged, rdoTwo.TextChanged
-        DisplayOptions()
     End Sub
 
     Private Sub rdoPlotItems_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoth.CheckedChanged, rdoOne.CheckedChanged, rdoTwo.CheckedChanged
