@@ -181,3 +181,34 @@ lat_lon_dataframe <- function(datafile){
   }
   return(cbind(lat_lon,station))
 }
+
+output_for_CPT = function(data_name, lat_lon_data, long = TRUE, year_col, sst_cols, station_col = ""){
+  if(missing(data_name) || missing(data_name)) stop("data_name and lat_lon_data should be provided.")
+  if(missing(year_col) || missing(sst_cols)) stop("year_col and sst_cols must be provided.")
+  if(!is.character(year_col) || !is.character(sst_cols)) stop("year_col and sst_cols must be of type character.")
+  if(!all(c(year_col, sst_cols) %in% names(data_name))) stop("Some column(s) are missing in data")
+  my_lat_lon_data <- lat_lon_data
+  row.names(my_lat_lon_data) <- lat_lon_data$station
+  if (long){
+    if(length(sst_cols) != 1)stop("Only one SST column should be provided for long data format.")
+    if(missing(station_col)) stop("station_col must be provided for long data format.")
+    if(!is.character(station_col)) stop("station must be of type character.")
+    if(!all(station_col %in% names(data_name))) stop(station_col,  " is missing in data.")
+    ssT_col_names = as.character(levels(data_name[,station_col]))
+    Year = c("LAT","LON")
+    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
+    selected_lat_lon = cbind(Year, selected_lat_lon)
+    my_data <- as.matrix(dcast(data = data_name, formula = as.formula(paste(year_col, "~station",sep = "")), value.var = sst_cols))
+    my_data = as.data.frame(rbind(selected_lat_lon, my_data))
+  }
+  else{
+    ssT_col_names = sst_cols
+    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
+    my_data = data_name[,c(ssT_col_names)]
+    my_data = rbind(selected_lat_lon, my_data)
+    Year = c("LAT","LON", as.vector(data_name[,c(year_col)]))
+    my_data = as.data.frame(cbind(Year, my_data))
+  }
+  data.table::setnames(my_data, "Year", "STN")
+  return(my_data)
+}
