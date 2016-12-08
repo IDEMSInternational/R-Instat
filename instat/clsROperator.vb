@@ -30,7 +30,6 @@ Public Class ROperator
         'Parameters are sorted in the appropriate order and then the script is built.
         SortParameters()
         If clsParameters(0) IsNot Nothing Then
-            clsParameters(0).bIncludeArgumentName = False
             If clsParameters(0).bIsOperator AndAlso bBrackets Then
                 strTemp = strTemp & "(" & clsParameters(0).ToScript(strScript) & ")"
             Else
@@ -43,17 +42,19 @@ Public Class ROperator
         For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
             'If bIncludeOperation Then
             strTemp = strTemp & Chr(32) & strOperation & Chr(32)
-            clsParam.bIncludeArgumentName = False
             strTemp = strTemp & clsParam.ToScript(strScript)
         Next
         Return MyBase.ToScript(strScript, strTemp)
     End Function
 
     Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional iPosition As Integer = -1)
-        bIncludeArgumentName = False
         MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, clsParam, iPosition)
     End Sub
     Public Overrides Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = -1)
+        If clsParam.bIncludeArgumentName Then
+            MsgBox("Developer warning: a parameter has been added to an Operator with bIncludeArgumentName = True. The value has been changed to False as Operators are not supposed to take arguments with names included.", MsgBoxStyle.OkOnly)
+            clsParam.bIncludeArgumentName = False 'Temporary fix, we don't want to allow names in operator parameters...
+        End If
         MyBase.AddParameter(clsParam, iPosition)
     End Sub
 

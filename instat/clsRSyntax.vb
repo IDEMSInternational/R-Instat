@@ -115,6 +115,7 @@ Public Class RSyntax
         Return Nothing
     End Function
 
+    'The two next methods need to be changed... all the corresponding files as well...
     Public Sub SetOperatorParameter(iPos As Boolean, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
         'This is temporary, just don't want to change all the files in one pull request... Will have to change the first argument to an integer...
         Dim iPosition As Integer
