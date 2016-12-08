@@ -113,9 +113,11 @@ Public Class dlgStartofRains
 
     Private Sub grpConditionsForSatrtofRains_Enter(sender As Object, e As EventArgs) Handles nudValue.TextChanged, nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged, nudOverDays.TextChanged
         RainyDaysMethod()
+        DayFromAndToMethod()
         MinimumRainfallMethod()
         XDaysRainMethod()
         PeriodWithinThirtyDays()
+        RollingOfRainDays()
         TestOKEnabled()
     End Sub
 
@@ -128,7 +130,7 @@ Public Class dlgStartofRains
         RollingSumMethod()
     End Sub
 
-    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs)
+    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
         YearGroupDaily()
         AddKeyMethod()
     End Sub
@@ -173,11 +175,9 @@ Public Class dlgStartofRains
 
     Private Sub AddKeyMethod()
         If Not ucrReceiverDate.IsEmpty Then
-            clsAddKey.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             clsAddKey.AddParameter("col_name", ucrReceiverDate.GetVariableNames)
         Else
             clsAddKey.RemoveParameterByName("col_name")
-            clsAddKey.RemoveParameterByName("data_name")
         End If
     End Sub
 
@@ -274,7 +274,7 @@ Public Class dlgStartofRains
     Private Sub NoTenInThirty()
         clsSubCalcNoTenInThirty.AddParameter("sub1", clsRFunctionParameter:=clsDrySpell, bIncludeArgumentName:=False)
         clsDryPeriodTen.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsDryPeriodTen.AddParameter("function_exp", Chr(34) & "rollapply(data = Dry_Spell, width=" & nudMaximumDays.Value & ", FUN=max, align='right', fill=NA)" & Chr(34))
+        clsDryPeriodTen.AddParameter("function_exp", Chr(34) & "rollapply(data = Dry_Spell, width=" & nudLengthofTime.Value & ", FUN=max, align='right', fill=NA)" & Chr(34))
         clsDryPeriodTen.AddParameter("result_name", Chr(34) & "Dry_Period" & Chr(34))
         clsDryPeriodTen.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcNoTenInThirty)
         clsDryPeriodTen.AddParameter("save", 2)

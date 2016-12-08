@@ -47,12 +47,12 @@ Partial Class dlgStartofRains
         Me.nudTo = New System.Windows.Forms.NumericUpDown()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblDate = New System.Windows.Forms.Label()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         CType(Me.nudValue, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMinimum, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpConditionsForSatrtofRains.SuspendLayout()
@@ -132,9 +132,9 @@ Partial Class dlgStartofRains
         Me.lblWidth.AutoSize = True
         Me.lblWidth.Location = New System.Drawing.Point(256, 20)
         Me.lblWidth.Name = "lblWidth"
-        Me.lblWidth.Size = New System.Drawing.Size(75, 13)
+        Me.lblWidth.Size = New System.Drawing.Size(66, 13)
         Me.lblWidth.TabIndex = 10
-        Me.lblWidth.Text = "Out of 5 Days:"
+        Me.lblWidth.Text = "Out of Days:"
         '
         'nudLengthofTime
         '
@@ -323,6 +323,24 @@ Partial Class dlgStartofRains
         Me.lblDOY.TabIndex = 8
         Me.lblDOY.Text = "Day of Year"
         '
+        'lblDate
+        '
+        Me.lblDate.AutoSize = True
+        Me.lblDate.Location = New System.Drawing.Point(232, 12)
+        Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.TabIndex = 10
+        Me.lblDate.Text = "Date:"
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(234, 25)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(144, 20)
+        Me.ucrReceiverDate.TabIndex = 11
+        '
         'ucrReceiverDOY
         '
         Me.ucrReceiverDOY.Location = New System.Drawing.Point(234, 104)
@@ -357,24 +375,6 @@ Partial Class dlgStartofRains
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'lblDate
-        '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(232, 12)
-        Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 10
-        Me.lblDate.Text = "Date:"
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(234, 25)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(144, 20)
-        Me.ucrReceiverDate.TabIndex = 11
         '
         'dlgStartofRains
         '
