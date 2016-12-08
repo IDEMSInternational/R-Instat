@@ -1073,22 +1073,6 @@ Public Class ucrGeom
         'clsgeom_tile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_tile)
 
-        'clsgeom_violin.strGeomName = "geom_violin"
-        ''mandatory
-        'clsgeom_violin.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_violin.AddAesParameter("y", bIsMandatory:=True)
-        ''optional
-        'clsgeom_violin.AddAesParameter("alpha")
-        'clsgeom_violin.AddAesParameter("colour")
-        'clsgeom_violin.AddAesParameter("fill")
-        'clsgeom_violin.AddAesParameter("linetype")
-        'clsgeom_violin.AddAesParameter("size")
-        'clsgeom_violin.AddAesParameter("weight")
-        ''add layer parameter
-        'clsgeom_violin.AddLayerParameter("stat", "list", Chr(34) & "ydensity" & Chr(34))
-        'clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_violin)
-
         clsgeom_violin.strGeomName = "geom_violin"
         'Mandatory Aesthetics
         clsgeom_violin.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
@@ -1117,10 +1101,10 @@ Public Class ucrGeom
         'Global Layer parameters
         'clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
         clsgeom_violin.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34)})
-        'Warning: "Stacked density plots: if you want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
-        'Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
-        'See global comments about position.
+        clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34)})
+        ''Warning: "Stacked density plots: if you want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
+        ''Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
+        ''See global comments about position.
 
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_violin.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
