@@ -644,24 +644,35 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_histogram)
 
 
+        clsgeom_jitter.SetGeomName("geom_jitter")
+        'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=True in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
+        clsgeom_jitter.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_jitter.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+        'optional
+        clsgeom_jitter.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_jitter.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_jitter.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
+        clsgeom_jitter.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_jitter.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_jitter.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_jitter Parameters
+        'Amount of vertical and horizontal jitter. The jitter is added in both positive and negative directions, so the total spread is twice the value specified here. If omitted, defaults to 40% of the resolution of the data: this means the jitter values will occupy 80% of the implied bins. Categorical data is aligned on the integers, so a width or height of 0.5 will spread the data so it's not possible to see the distinction between the categories.
+        clsgeom_jitter.AddLayerParameter("height", "numeric", "0", lstParameterStrings:={1})
+        clsgeom_jitter.AddLayerParameter("width", "numeric", "0", lstParameterStrings:={1})
+        'Global Layer parameters
+        'clsgeom_jitter.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_jitterdodge()"})
+        clsgeom_jitter.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "desnity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
+        clsgeom_jitter.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_jitter.AddLayerParameter("shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Note: 16 and 19 seem to have exact same behaviour.
+        clsgeom_jitter.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_jitter.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
+        clsgeom_jitter.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
+        clsgeom_jitter.AddLayerParameter("stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Use the stroke aes to change the width of the outline of the shapes. When no outline stroke overrides size. 'Warning: sometimes negative values give errors...
+        clsgeom_jitter.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
 
-
-        'clsgeom_jitter.strGeomName = "geom_jitter"
-        ''mandatory
-        'clsgeom_jitter.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_jitter.AddAesParameter("y", bIsMandatory:=True)
-        ''optional
-        'clsgeom_jitter.AddAesParameter("alpha")
-        'clsgeom_jitter.AddAesParameter("colour")
-        'clsgeom_jitter.AddAesParameter("fill")
-        'clsgeom_jitter.AddAesParameter("shape")
-        'clsgeom_jitter.AddAesParameter("size")
-        'clsgeom_jitter.AddAesParameter("stroke")
-
-        ''add layer parameter 
-        'clsgeom_jitter.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_jitter.AddLayerParameter("position", "list", Chr(34) & "jitter" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_jitter)
+        lstAllGeoms.Add(clsgeom_jitter)
 
         clsgeom_label.SetGeomName("geom_label") 'Note: can also add text on the graph via annotate (to be added on sdgplots).
         'Adding aesthetics parameters
