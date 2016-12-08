@@ -192,7 +192,7 @@ Partial Class sdgClimdexIndices
         Me.panIndices.Controls.Add(Me.chkIcingDays)
         Me.panIndices.Controls.Add(Me.chkSummerDays)
         Me.panIndices.Controls.Add(Me.chkTropicalNights)
-        Me.panIndices.Location = New System.Drawing.Point(5, 21)
+        Me.panIndices.Location = New System.Drawing.Point(6, 19)
         Me.panIndices.Name = "panIndices"
         Me.panIndices.Size = New System.Drawing.Size(372, 130)
         Me.panIndices.TabIndex = 0
