@@ -180,8 +180,6 @@ Public Class dlgContrasts
                 e.EndReason = EndEditReason.Cancel
             End If
         End If
-        SetMatrixFunction()
-        TestOKEnabled()
     End Sub
 
     Public Function IsEmptyCells() As Boolean
@@ -195,13 +193,19 @@ Public Class dlgContrasts
         Return False
     End Function
 
+    Private Sub grdLayoutForContrasts_AfterCellKeyDown(sender As Object, e As EventArgs) Handles grdCurrSheet.AfterCellKeyDown
+        SetMatrixFunction()
+        TestOKEnabled()
+    End Sub
+
     Private Sub grdLayoutForContrasts_Leave(sender As Object, e As EventArgs) Handles grdLayoutForContrasts.Leave
         If grdCurrSheet.IsEditing Then
             grdCurrSheet.EndEdit(EndEditReason.NormalFinish)
         End If
     End Sub
 
-    Private Sub grdCurrSheet_CellKeyUp(sender As Object, e As EventArgs) Handles grdCurrSheet.CellDataChanged
+
+    Private Sub grdCurrSheet_CellDataChanged(sender As Object, e As EventArgs) Handles grdCurrSheet.CellDataChanged
         SetMatrixFunction()
         TestOKEnabled()
     End Sub
