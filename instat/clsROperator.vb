@@ -51,10 +51,7 @@ Public Class ROperator
         MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, clsParam, iPosition)
     End Sub
     Public Overrides Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = -1)
-        If clsParam.bIncludeArgumentName Then
-            MsgBox("Developer warning: a parameter has been added to an Operator with bIncludeArgumentName = True. The value has been changed to False as Operators are not supposed to take arguments with names included.", MsgBoxStyle.OkOnly)
-            clsParam.bIncludeArgumentName = False 'Temporary fix, we don't want to allow names in operator parameters...
-        End If
+        clsParam.bIncludeArgumentName = False 'Temporary fix, we don't want to allow names in operator parameters...
         MyBase.AddParameter(clsParam, iPosition)
     End Sub
 
@@ -71,8 +68,10 @@ Public Class ROperator
 
     Public Sub RemoveAllAdditionalParameters() 'Needs to be edited once first things merged...
         SortParameters() 'This is used to bring the parameter with position 0 to the front if it exists, then clear all the others using range.
-        If clsParameters.Count > 1 AndAlso clsParameters(0).Position = 0 Then
-            clsParameters.RemoveRange(1, clsParameters.Count - 1)
+        If clsParameters(0).Position = 0 Then
+            If clsParameters.Count > 1 Then
+                clsParameters.RemoveRange(1, clsParameters.Count - 1)
+            End If
         Else
             clsParameters.Clear()
         End If
