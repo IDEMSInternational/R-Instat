@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class ucrReceiver
     Public WithEvents Selector As ucrSelector
@@ -132,6 +133,8 @@ Public Class ucrReceiver
 
     Public Sub OnValueChanged(ByVal sender As Object, ByVal e As EventArgs)
         RaiseEvent ValueChanged(sender, e)
+        OnControlContentsChanged()
+        OnControlValueChanged()
     End Sub
 
     'TODO remove this method and replace with SetIncludedDataTypes
@@ -289,5 +292,15 @@ Public Class ucrReceiver
         Dim sender As New Object
         Dim e As New EventArgs
         RaiseEvent SelectionChanged(sender, e)
+        OnControlContentsChanged()
+        OnControlValueChanged()
+    End Sub
+
+    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
+        MyBase.UpdateControl(clsRCodeObject)
+    End Sub
+
+    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+        MyBase.UpdateRCode(clsRFunction, clsROperator)
     End Sub
 End Class
