@@ -39,9 +39,6 @@ Public Class RCodeStructure
     Public clsParameters As New List(Of RParameter)
     Private iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
 
-    ''lstOrderedIndices provides a way to identify in which order the parameters should be understood in the list of parameters, depending on the Position property of the Parameter. We could instead reorder the parameters according to the same information...
-    'Private lstOrderedIndices As New List(Of Integer)
-
     Public Event ParametersChanged()
 
     'Public ReadOnly Property OrderedIndices As List(Of Integer)
@@ -54,19 +51,6 @@ Public Class RCodeStructure
     Protected Sub OnParametersChanged()
         RaiseEvent ParametersChanged()
     End Sub
-
-    'Protected Sub UpdateListOfOrderedIndices() Handles Me.ParametersChanged
-    '    'When parameters are changed, their order in the list needs to be updated. The order is determined by the Position property of each parameter.
-    '    'If this is inefficient, might change the AddParameter method for it to add parameters at the right position.
-    'lstOrderedIndices.Clear()
-    'For i As Integer = 0 To clsParameters.Count - 1
-    '    If clsParameters(i).Position > 0 AndAlso lstOrderedIndices.Count > 0 Then
-    '    lstOrderedIndices.Insert(lstOrderedIndices.FindIndex(Function(x) (x = 0 OrElse x > clsParameters(i).Position)), i)
-    '    Else
-    '    lstOrderedIndices.Add(i)
-    '    End If
-    'Next
-    'End Sub
 
     'Most methods from RFunction/ROperator have been moved here
     Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
@@ -205,7 +189,7 @@ Public Class RCodeStructure
         Return New RParameter
     End Function
 
-    Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional iPosition As Integer = 0)
+    Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional iPosition As Integer = -1)
         If clsParam Is Nothing Then
             clsParam = New RParameter
             If strParameterName = "" Then
@@ -226,7 +210,7 @@ Public Class RCodeStructure
         AddParameter(clsParam, iPosition)
     End Sub
 
-    Public Overridable Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = 0)
+    Public Overridable Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = -1)
         Dim i As Integer = -1
         Dim strTempArgumentName As String = clsParam.strArgumentName
         clsParam.Position = iPosition
@@ -268,27 +252,40 @@ Public Class RCodeStructure
         'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
         If clsMain.Position = clsRelative.Position Then
             Return 0
-        ElseIf clsMain.Position = 0 Then
-            Return 1
-        ElseIf clsRelative.Position = 0 Then
+        ElseIf clsRelative.Position = -1 Then
             Return -1
+        ElseIf clsMain.Position = -1 Then
+            Return 1
         Else
             Return clsMain.Position.CompareTo(clsRelative.Position)
         End If
     End Function
 
-    'Private Sub InsertParameter(ByRef clsParam As RParameter)
-    '   Dim iPosition As Integer = clsParam.Position
-    '   If clsParameters.Count > 0 AndAlso clsParameters.FindIndex(Function(x) x.Position = 0 OrElse x.Position > iPosition) <> -1 Then
-    '           clsParameters.Insert(clsParameters.FindIndex(Function(x) x.Position = 0 OrElse x.Position > iPosition), clsParam)
-    '   Else
-    '           clsParameters.Add(clsParam)
-    '   End If
-    'End Sub
-    Public Overridable Sub RemoveParameterByName(strArgName)
-        Dim clsParam
+    Public Sub RemoveUnorderedParameters()
+        'Removes all parameters that are of position -1 i e unordered.
+        Dim clsParam As RParameter
+        If Not clsParameters Is Nothing Then
+            clsParam = clsParameters.Find(Function(x) x.Position = -1)
+            clsParameters.Remove(clsParam)
+        End If
+        bIsAssigned = False
+        OnParametersChanged()
+    End Sub
+
+    Public Overridable Sub RemoveParameterByName(strArgName As String)
+        Dim clsParam As RParameter
         If Not clsParameters Is Nothing Then
             clsParam = clsParameters.Find(Function(x) x.strArgumentName = strArgName)
+            clsParameters.Remove(clsParam)
+        End If
+        bIsAssigned = False
+        OnParametersChanged()
+    End Sub
+
+    Public Overridable Sub RemoveParameterByPosition(iPosition As Integer)
+        Dim clsParam As RParameter
+        If Not clsParameters Is Nothing Then
+            clsParam = clsParameters.Find(Function(x) x.Position = iPosition)
             clsParameters.Remove(clsParam)
         End If
         bIsAssigned = False

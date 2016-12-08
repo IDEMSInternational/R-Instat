@@ -56,16 +56,16 @@ Public Class sdgVariableTransformations
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
         Dim i As Integer 'This is temporary, will need to change this method...
         If choice Then
-            i = 1
-        Else
             i = 0
+        Else
+            i = -1
         End If
         If strFunctionName = "power" Then
             If strPower <> "1" Then
                 'clsRModel.AddParameter(False, strParameterValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetOperation("^")
                 clsModel0.bBrackets = False
-                clsModel0.AddParameter(iPosition:=1, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
+                clsModel0.AddParameter(iPosition:=0, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.AddParameter(strParameterValue:=strPower)
                 clsRModel.AddParameter(iPosition:=i, clsROperatorParameter:=clsModel0.Clone())
 

@@ -119,10 +119,10 @@ Public Class dlgFourVariableModelling
             If chkConvertToVariate.Checked Then
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=clsRConvert)
+                clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRConvert)
                 ucrFamily.RecieverDatatype("numeric")
             Else
-                clsModel.AddParameter(iPosition:=1, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.RecieverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
@@ -176,7 +176,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub ucrFirstRandomEffect_SelectionChanged() Handles ucrSecondExplanatoryVariable.SelectionChanged
-        clsModel2.AddParameter(iPosition:=1, strParameterValue:=ucrSecondExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
+        clsModel2.AddParameter(iPosition:=0, strParameterValue:=ucrSecondExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
     Private Sub ucrSecondRandomEffect_SelectionChanged() Handles ucrThirdExplanatoryVariable.SelectionChanged

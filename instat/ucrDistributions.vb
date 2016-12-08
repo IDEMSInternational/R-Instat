@@ -59,7 +59,7 @@ Public Class ucrDistributions
         clsTempOp.SetOperation("/")
 
         If clsCurrDistribution.strNameTag = "Exponential" AndAlso strArgumentName = "mean" Then
-            clsTempOp.AddParameter(iPosition:=1, strParameterValue:=1)
+            clsTempOp.AddParameter(iPosition:=0, strParameterValue:=1)
             clsTempOp.AddParameter(strParameterValue:=strArgumentValue)
             clsCurrRFunction.AddParameter("rate", clsROperatorParameter:=clsTempOp)
         ElseIf clsCurrDistribution.strNameTag = "Gamma_With_Shape_and_Mean" AndAlso (strArgumentName = "shape" OrElse strArgumentName = "mean") Then
@@ -67,7 +67,7 @@ Public Class ucrDistributions
                 clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
                 i = clsCurrRFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "mean")
                 If i <> -1 Then
-                    clsTempOp.AddParameter(iPosition:=1, strParameterValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
+                    clsTempOp.AddParameter(iPosition:=0, strParameterValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
                     clsTempOp.AddParameter(strParameterValue:=strArgumentValue)
                     clsCurrRFunction.AddParameter("scale", clsROperatorParameter:=clsTempOp)
                     clsCurrRFunction.RemoveParameterByName("mean")
@@ -77,7 +77,7 @@ Public Class ucrDistributions
                 If i = -1 Then
                     clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
                 Else
-                    clsTempOp.AddParameter(iPosition:=1, strParameterValue:=strArgumentValue)
+                    clsTempOp.AddParameter(iPosition:=0, strParameterValue:=strArgumentValue)
                     clsTempOp.AddParameter(strParameterValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
                     clsCurrRFunction.AddParameter("scale", clsROperatorParameter:=clsTempOp)
                 End If

@@ -119,9 +119,9 @@ Public Class RSyntax
         'This is temporary, just don't want to change all the files in one pull request... Will have to change the first argument to an integer...
         Dim iPosition As Integer
         If iPos Then
-            iPosition = 1
-        Else
             iPosition = 0
+        Else
+            iPosition = -1
         End If
         clsBaseOperator.AddParameter(strParameterName, strValue, clsRFunc, clsOp, bIncludeArgumentName, clsParam, iPosition)
     End Sub

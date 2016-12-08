@@ -224,12 +224,12 @@ Public Class dlgOneVarFitModel
             If UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character" Then
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
                 clsFactorOperator.SetOperation("==")
-                clsFactorOperator.AddParameter(iPosition:=1, clsRFunctionParameter:=UcrReceiver.GetVariables())
+                clsFactorOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=UcrReceiver.GetVariables())
                 clsFactorOperator.AddParameter(strParameterValue:=cboVariables.GetText())
             Else
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
                 clsFunctionOperator.SetOperation(ucrOperator.GetText())
-                clsFunctionOperator.AddParameter(iPosition:=1, clsRFunctionParameter:=UcrReceiver.GetVariables())
+                clsFunctionOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=UcrReceiver.GetVariables())
                 clsFunctionOperator.AddParameter(strParameterValue:=nudBinomialConditions.Value.ToString())
             End If
         Else
