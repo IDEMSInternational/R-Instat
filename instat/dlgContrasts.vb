@@ -204,7 +204,6 @@ Public Class dlgContrasts
         End If
     End Sub
 
-
     Private Sub grdCurrSheet_CellDataChanged(sender As Object, e As EventArgs) Handles grdCurrSheet.CellDataChanged
         SetMatrixFunction()
         TestOKEnabled()
