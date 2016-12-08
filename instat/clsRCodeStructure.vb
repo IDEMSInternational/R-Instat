@@ -264,16 +264,16 @@ Public Class RCodeStructure
         'It will be called only in places where it is necessary ie before ToScript or RemoveAdditionalParameters in ROperator.
         clsParameters.Sort(AddressOf CompareParametersPosition)
     End Sub
-    Private Function CompareParametersPosition(ByVal x As RParameter, ByVal y As RParameter) As Integer
+    Private Function CompareParametersPosition(ByVal clsMain As RParameter, ByVal clsRelative As RParameter) As Integer
         'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
-        If x.Position = y.Position Then
+        If clsMain.Position = clsRelative.Position Then
             Return 0
-        ElseIf x.Position = 0 Then
+        ElseIf clsMain.Position = 0 Then
             Return 1
-        ElseIf y.Position = 0 Then
+        ElseIf clsRelative.Position = 0 Then
             Return -1
         Else
-            Return x.Position.CompareTo(y.Position)
+            Return clsMain.Position.CompareTo(clsRelative.Position)
         End If
     End Function
 
