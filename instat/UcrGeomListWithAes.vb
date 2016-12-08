@@ -77,9 +77,9 @@ Public Class UcrGeomListWithParameters
         Dim iIndexOfData_nameParameter As Integer
 
         strDataFrameName = strGlobalDataFrame
-        If clsGeomFunction.GetParameter("data") IsNot Nothing AndAlso clsGeomFunction.GetParameter("data").clsArgument.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name") <> -1 Then
-            iIndexOfData_nameParameter = clsGeomFunction.GetParameter("data").clsArgument.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name")
-            strDataFrameName = clsGeomFunction.GetParameter("data").clsArgument.clsParameters(iIndexOfData_nameParameter).strArgumentValue
+        If clsGeomFunction.GetParameter("data") IsNot Nothing AndAlso clsGeomFunction.GetParameter("data").clsArgumentCodeStructure.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name") <> -1 Then
+            iIndexOfData_nameParameter = clsGeomFunction.GetParameter("data").clsArgumentCodeStructure.clsParameters.FindIndex(Function(x) x.strArgumentName = "data_name")
+            strDataFrameName = clsGeomFunction.GetParameter("data").clsArgumentCodeStructure.clsParameters(iIndexOfData_nameParameter).strArgumentValue
             strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2) 'The value of the parameter "data_name" has quotes around it that need to be erased as we merely want the name of the data_frame.
             ucrGeomWithAesSelector.SetDataframe(strDataFrameName)
         Else

@@ -132,7 +132,7 @@ Public Class sdgLayerOptions
             'Warning: in some cases, this is sources of errors in R: is a continuous variable is mapped to y (for instance plot1 <- ggplot(diamonds,aes(y=price,x="") + geom_boxplot()), and in some layer where global aes are ignored, "" is mapped to y (e.g. plot1 + geom_point(inherit.aes = FALSE, mapping = aes(x="",y="")) ), then an error occurs as a discrete vriable cannot be mapped to a continuous scale.
             'Warning: again coming from specific plots, If ApplyOnAllLayers is unticked, the linking will make this mehtod fail.
         ElseIf clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "mapping") <> -1 Then
-            PartiallyMandatoryAesFillingMethod(clsGeomFunction.clsParameters.Find(Function(x) x.strArgumentName = "mapping").clsArgument)
+            PartiallyMandatoryAesFillingMethod(clsGeomFunction.clsParameters.Find(Function(x) x.strArgumentName = "mapping").clsArgumentCodeStructure)
         Else
             clsRelevantAesFunction.SetRCommand("aes")
             PartiallyMandatoryAesFillingMethod(clsRelevantAesFunction)
