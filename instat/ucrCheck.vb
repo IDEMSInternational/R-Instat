@@ -27,53 +27,49 @@ Public Class ucrCheck
     'If = False then the opposite.
     Public bParameterIncludedWhenChecked As Boolean = True
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        Dim clsTempParam As RParameter
+    Public Overrides Sub UpdateControl(Optional clsRCodeObject As RCodeStructure = Nothing)
 
         MyBase.UpdateControl(clsRCodeObject)
 
         'TODO Add methods in RFunction/base class for RFunction/ROperator to do these checks better
-        If clsParameter.strArgumentName <> "" Then
-            clsTempParam = clsRCodeObject.GetParameter(clsParameter.strArgumentName)
+        If clsParameter IsNot Nothing Then
             If bIsParameterValue Then
-                If clsTempParam IsNot Nothing Then
-                    If clsTempParam.strArgumentValue = strValueIfChecked OrElse clsTempParam.strArgumentValue = strValueIfUnchecked Then
-                        chkCheck.Checked = (clsTempParam.strArgumentValue = strValueIfChecked)
-                    Else
-                        MsgBox("Developer error: The value of parameter " & clsTempParam.strArgumentName & ": " & clsTempParam.strArgumentValue & " does not match strValueIfChecked or strValueIfUnchecked so cannot determine state for the checkbox. Defaulting to unchecked.")
-                        chkCheck.Checked = False
-                    End If
+                If clsParameter.strArgumentValue = strValueIfChecked OrElse clsParameter.strArgumentValue = strValueIfUnchecked Then
+                    chkCheck.Checked = (clsParameter.strArgumentValue = strValueIfChecked)
                 Else
-                    If strValueIfChecked = "" Then
-                        chkCheck.Checked = True
-                    ElseIf strValueIfUnchecked = "" Then
-                        chkCheck.Checked = False
-                    Else
-                        'If parameter is missing with no information about what that means, then uncheck by default
-                        chkCheck.Checked = False
-                    End If
+                    MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " does not match strValueIfChecked or strValueIfUnchecked so cannot determine state for the checkbox. Setting as the default.")
+                    chkCheck.Checked = False
                 End If
-            ElseIf bIsParameterPresent Then
-                If clsTempParam IsNot Nothing Then
-                    chkCheck.Checked = bParameterIncludedWhenChecked
+            Else
+                If strValueIfChecked = "" Then
+                    chkCheck.Checked = True
+                ElseIf strValueIfUnchecked = "" Then
+                    chkCheck.Checked = False
                 Else
-                    chkCheck.Checked = Not bParameterIncludedWhenChecked
+                    'If parameter is missing with no information about what that means, then uncheck by default
+                    chkCheck.Checked = False
                 End If
             End If
+        ElseIf bIsParameterPresent Then
+            'Need clsParameters in clsRCodeStructure before completing this
+            'If clsRCodeObject.clsParameters.Contain(clsParameter) Then
+            'chkCheck.Checked = bParameterIncludedWhenChecked
+            'Else
+            'chkCheck.Checked = Not bParameterIncludedWhenChecked
+            'End If
         End If
     End Sub
 
-    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
         Dim bCurrentAddValue As Boolean
 
-        If strParameterName <> "" Then
+        If clsParameter IsNot Nothing Then
             If bIsParameterValue Then
                 If chkCheck.Checked Then
-                    If clsRFunction IsNot Nothing Then
-                        If strValueIfChecked <> "" Then
-                            clsRFunction.AddParameter(strParameterName, strValueIfChecked)
-                        Else
-                            clsRFunction.RemoveParameterByName(strParameterName)
+                    If strValueIfChecked <> "" Then
+                        clsRFunction.AddParameter(strParameterName, strValueIfChecked)
+                    Else
+                        clsRFunction.RemoveParameterByName(strParameterName)
                         End If
                     ElseIf clsROperator IsNot Nothing Then
                         'TODO
@@ -139,6 +135,13 @@ Public Class ucrCheck
     End Sub
 
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
+        If bIsParameterValue Then
+            If chkCheck.Checked AndAlso strValueIfChecked <> "" Then
+                clsParameter.strArgumentValue = strValueIfChecked
+            ElseIf Not chkCheck.Checked AndAlso strValueIfUnchecked <> "" Then
+                clsParameter.strArgumentValue = strValueIfUnchecked
+            End If
+        End If
         OnControlContentsChanged()
         OnControlValueChanged()
     End Sub

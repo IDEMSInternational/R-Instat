@@ -78,32 +78,34 @@ Public Class ucrCore
     End Function
 
     'Update the control based on the the code in RCodeStructure
-    Public Overridable Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        If strLinkedParameterName <> "" Then
-            If clsRCodeObject.GetParameter(strLinkedParameterName) Is Nothing Then
-                If bHideIfLinkedParameterMissing Then
-                    Visible = False
+    Public Overridable Sub UpdateControl(Optional clsRCodeObject As RCodeStructure = Nothing)
+        If clsRCodeObject IsNot Nothing Then
+            If strLinkedParameterName <> "" Then
+                If clsRCodeObject.GetParameter(strLinkedParameterName) Is Nothing Then
+                    If bHideIfLinkedParameterMissing Then
+                        Visible = False
+                    Else
+                        Visible = True
+                    End If
+                    If bDisabledIfLinkedParameterMissing Then
+                        Enabled = False
+                    Else
+                        Enabled = True
+                    End If
                 Else
-                    Visible = True
-                End If
-                If bDisabledIfLinkedParameterMissing Then
-                    Enabled = False
-                Else
-                    Enabled = True
-                End If
-            Else
-                If bHideIfLinkedParameterMissing Then
-                    Visible = True
-                End If
-                If bDisabledIfLinkedParameterMissing Then
-                    Enabled = True
+                    If bHideIfLinkedParameterMissing Then
+                        Visible = True
+                    End If
+                    If bDisabledIfLinkedParameterMissing Then
+                        Enabled = True
+                    End If
                 End If
             End If
         End If
     End Sub
 
     'Update the RCode based on the contents of the control (reverse of above)
-    Public Overridable Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+    Public Overridable Sub UpdateRCode(clsRCodeObject As RCodeStructure)
     End Sub
 
     'Set a linked paramter name and what the control should do when the parameter is not in the R code
