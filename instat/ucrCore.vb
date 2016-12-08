@@ -17,8 +17,10 @@
 Imports instat
 
 Public Class ucrCore
-    'Name of parameter control sets
-    Protected strParameterName As String
+    'Parameter that is this control manages
+    Protected clsParameter As New RParameter
+    'Default value of the control
+    Protected objDefault As Object
     'A control it's linked to i.e. dependant on/depends on 
     Protected ucrLinkedControl As ucrCore
     'The name of a parameter linked to the control which determines if the control is visible/enabled
@@ -40,12 +42,32 @@ Public Class ucrCore
     Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
 
     Public Sub SetParameterName(strParamName As String)
-        strParameterName = strParamName
+        clsParameter.strArgumentName = strParamName
     End Sub
 
     Public Function GetParameterName() As String
-        Return strParameterName
+        Return clsParameter.strArgumentName
     End Function
+
+    Public Sub SetParameter(clsNewParam As RParameter)
+        clsParameter = clsNewParam
+    End Sub
+
+    Public Function GetParameter() As RParameter
+        Return clsParameter
+    End Function
+
+    Public Sub SetDefault(objNewDefault As Object)
+        objDefault = objNewDefault
+    End Sub
+
+    Public Function GetDefault() As Object
+        Return objDefault
+    End Function
+
+    Public Overridable Sub SetToDefault()
+
+    End Sub
 
     Public Overridable Sub SetLinkedControl(ucrNewLinkedControl As ucrCore)
         ucrLinkedControl = ucrNewLinkedControl

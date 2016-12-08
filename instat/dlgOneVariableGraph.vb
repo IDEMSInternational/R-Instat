@@ -57,7 +57,7 @@ Public Class dlgOneVariableGraph
     Private Sub InitialiseDialog()
         'Define the default RFunction
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "violin_jitter" & Chr(34))
+        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
         clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
         'This currently has no effect on controls as there is no radio button user control yet
         clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))

@@ -17,38 +17,37 @@
 Public Class ucrNud
     Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
         Dim iNewValue As Integer
-        Dim clsTempParam As RParameter
 
         MyBase.UpdateControl(clsRCodeObject)
 
-        clsTempParam = clsRCodeObject.GetParameter(strParameterName)
-        If strParameterName <> "" Then
-            If clsTempParam IsNot Nothing Then
-                If Integer.TryParse(clsTempParam.strArgumentValue, iNewValue) AndAlso iNewValue >= nudUpDown.Minimum AndAlso iNewValue <= nudUpDown.Maximum Then
-                    nudUpDown.Value = iNewValue
-                Else
-                    MsgBox("Developer error: The value of parameter " & clsTempParam.strArgumentName & ": " & clsTempParam.strArgumentValue & " cannot be converted to an integer or is outside the range of the control. Defaulting to the minimum value.")
-                    nudUpDown.Value = nudUpDown.Minimum
-                End If
+        If Integer.TryParse(clsParameter.strArgumentValue, iNewValue) AndAlso iNewValue >= nudUpDown.Minimum AndAlso iNewValue <= nudUpDown.Maximum Then
+            nudUpDown.Value = iNewValue
+        Else
+            MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " cannot be converted to an integer or is outside the range of the control. Setting to the default value.")
+            If Integer.TryParse(objDefault, iNewValue) Then
+                nudUpDown.Value = iNewValue
+            Else
+                MsgBox("Developer error: The default value of the control cannot be converted to integer. Setting to the minimum of the control.")
+                nudUpDown.Value = Minimum
             End If
         End If
+
+        'clsTempParam = clsRCodeObject.GetParameter(strParameterName)
+        'If strParameterName <> "" Then
+        '    If clsTempParam IsNot Nothing Then
+        '        If Integer.TryParse(clsTempParam.strArgumentValue, iNewValue) AndAlso iNewValue >= nudUpDown.Minimum AndAlso iNewValue <= nudUpDown.Maximum Then
+        '            nudUpDown.Value = iNewValue
+        '        Else
+        '            MsgBox("Developer error: The value of parameter " & clsTempParam.strArgumentName & ": " & clsTempParam.strArgumentValue & " cannot be converted to an integer or is outside the range of the control. Defaulting to the minimum value.")
+        '            nudUpDown.Value = nudUpDown.Minimum
+        '        End If
+        '    End If
+        'End If
     End Sub
 
     Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        Dim clsTempParam As RParameter
-
-        If clsRFunction IsNot Nothing Then
-            clsTempParam = clsRFunction.GetParameter(strParameterName)
-            If strParameterName <> "" Then
-                If clsTempParam IsNot Nothing OrElse bAddIfParameterNotPresent Then
-                    clsRFunction.AddParameter(strParameterName, nudUpDown.Value)
-                End If
-            Else
-                clsRFunction.RemoveParameterByName(strParameterName)
-            End If
-        ElseIf clsROperator IsNot Nothing Then
-            clsTempParam = clsROperator.GetParameter(strParameterName)
-            'TODO
+        If clsParameter IsNot Nothing Then
+            clsParameter.strArgumentValue = nudUpDown.Value
         End If
     End Sub
 
@@ -88,4 +87,16 @@ Public Class ucrNud
             nudUpDown.Value = dcNewMax
         End Set
     End Property
+
+    Public Overrides Sub SetToDefault()
+        Dim iNewValue As Integer
+
+        MyBase.SetToDefault()
+        If Integer.TryParse(objDefault, iNewValue) AndAlso iNewValue >= nudUpDown.Minimum AndAlso iNewValue <= nudUpDown.Maximum Then
+            nudUpDown.Value = iNewValue
+        Else
+            MsgBox("Developer error: The default value of the control either cannot be converted to an integer or is outside the range of the control. Setting to the minimum value.")
+            nudUpDown.Value = Minimum
+        End If
+    End Sub
 End Class
