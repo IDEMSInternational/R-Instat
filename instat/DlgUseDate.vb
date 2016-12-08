@@ -54,7 +54,6 @@ Public Class dlgUseDate
         chkWeekDayVal.Checked = False
         chkYear.Checked = False
         'Remains Disabled until implemented
-        chkDayYear.Enabled = False
         chkPentade.Enabled = False
         chkDecade.Enabled = False
         TestOKEnabled()
@@ -143,12 +142,12 @@ Public Class dlgUseDate
         Else
             ucrBase.clsRsyntax.RemoveParameter("leap_year")
         End If
-        'Not sure of the command to use when one needs day of the year for a leap year (366 days case)
-        'If chkDayYear.Checked Then
-        '    ucrBase.clsRsyntax.AddParameter("", "TRUE")
-        'Else
-        '    ucrBase.clsRsyntax.AddParameter("", "TRUE")
-        'End If
+
+        If chkDayYear.Checked Then
+            ucrBase.clsRsyntax.AddParameter("day_in_year_366", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("day_in_year_366")
+        End If
 
     End Sub
 

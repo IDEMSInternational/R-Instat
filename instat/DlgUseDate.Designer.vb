@@ -179,20 +179,20 @@ Partial Class dlgUseDate
         'chkDayInYear
         '
         Me.chkDayInYear.AutoSize = True
-        Me.chkDayInYear.Location = New System.Drawing.Point(286, 19)
+        Me.chkDayInYear.Location = New System.Drawing.Point(286, 42)
         Me.chkDayInYear.Name = "chkDayInYear"
         Me.chkDayInYear.Size = New System.Drawing.Size(79, 17)
-        Me.chkDayInYear.TabIndex = 2
+        Me.chkDayInYear.TabIndex = 5
         Me.chkDayInYear.Text = "Day in year"
         Me.chkDayInYear.UseVisualStyleBackColor = True
         '
         'chkDayInMonth
         '
         Me.chkDayInMonth.AutoSize = True
-        Me.chkDayInMonth.Location = New System.Drawing.Point(286, 42)
+        Me.chkDayInMonth.Location = New System.Drawing.Point(286, 19)
         Me.chkDayInMonth.Name = "chkDayInMonth"
         Me.chkDayInMonth.Size = New System.Drawing.Size(89, 17)
-        Me.chkDayInMonth.TabIndex = 5
+        Me.chkDayInMonth.TabIndex = 2
         Me.chkDayInMonth.Text = "Day in Month"
         Me.chkDayInMonth.UseVisualStyleBackColor = True
         '
