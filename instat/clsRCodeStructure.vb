@@ -190,6 +190,7 @@ Public Class RCodeStructure
     End Function
 
     Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional iPosition As Integer = -1)
+        'Task, in next version, we want to erase clsParam as a possible argument, but RSyntax will have to be edited first...
         If clsParam Is Nothing Then
             clsParam = New RParameter
             If strParameterName = "" Then
