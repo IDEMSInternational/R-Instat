@@ -116,7 +116,7 @@ Public Class dlgRegressionSimple
             clsRTTest.AddParameter("y", clsRFunctionParameter:=ucrExplanatory.GetVariables())
         Else
             clsModel.SetOperation("~")
-            clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrResponse.GetVariables())
+            clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
             clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
             clsRTTest.AddParameter("x", clsROperatorParameter:=clsModel)
         End If
@@ -147,7 +147,7 @@ Public Class dlgRegressionSimple
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
-        clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrResponse.GetVariables())
+        clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
         clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
         clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
         clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -176,7 +176,7 @@ Public Class dlgRegressionSimple
         clsRLengthGrouped.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup.ToScript & "]")
         clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
         clsPoissonOperation.SetOperation("==")
-        clsPoissonOperation.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsPoissonOperation.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
         clsPoissonOperation.AddParameter(strParameterValue:="1") 'in there we have the level, get column name???
 
 
@@ -185,7 +185,7 @@ Public Class dlgRegressionSimple
         clsRLengthGrouped2.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup2.ToScript & "]")
         clsRGroup2.AddParameter("x", clsROperatorParameter:=clsPoissonOperation2)
         clsPoissonOperation2.SetOperation("==")
-        clsPoissonOperation2.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsPoissonOperation2.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
         clsPoissonOperation2.AddParameter(strParameterValue:="2") 'in there we have the level, get column name???
 
 
@@ -278,13 +278,13 @@ Public Class dlgRegressionSimple
                 If chkConvertToVariate.Checked Then
                     clsRConvert.SetRCommand("as.numeric")
                     clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                    clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=clsRConvert)
+                    clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRConvert)
                     clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
                     ucrFamily.RecieverDatatype("numeric")
                 Else
-                    clsModel.AddParameter(iPosition:=1, clsRFunctionParameter:=ucrResponse.GetVariables())
+                    clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
                     clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
-                    clsModel.AddParameter(iPosition:=1, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                    clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                     ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 End If
             Else
