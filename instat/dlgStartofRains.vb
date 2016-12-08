@@ -33,6 +33,7 @@ Public Class dlgStartofRains
         firstDayofTheYear()
         DayFromAndToMethod()
         FirstDOYPerYear()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorForStartofRains_DataFrameChanged() Handles ucrSelectorForStartofRains.DataFrameChanged
@@ -86,6 +87,9 @@ Public Class dlgStartofRains
         chkTotalRainfall.Checked = False
         CheckBoxesSetting()
         TestOKEnabled()
+        nudValue.Value = 20
+        nudOverDays.Value = 2
+        nudOutOfDays.Value = 2
     End Sub
 
     Private Sub ReopenDialog()
@@ -108,7 +112,6 @@ Public Class dlgStartofRains
     Private Sub grpRainParameters_Enter(sender As Object, e As EventArgs) Handles nudFrom.TextChanged, nudTo.TextChanged, nudThreshold.TextChanged
         DayFromAndToMethod()
         RainyDaysMethod()
-        TestOKEnabled()
     End Sub
 
     Private Sub grpConditionsForSatrtofRains_Enter(sender As Object, e As EventArgs) Handles nudValue.TextChanged, nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged, nudOverDays.TextChanged
@@ -118,7 +121,6 @@ Public Class dlgStartofRains
         XDaysRainMethod()
         PeriodWithinThirtyDays()
         RollingOfRainDays()
-        TestOKEnabled()
     End Sub
 
     Private Sub grpConditionsForSatrtofRains1_Enter(sender As Object, e As EventArgs) Handles chkConsecutiveRainyDays.CheckedChanged, chkTotalRainfall.CheckedChanged, chkDrySpell.CheckedChanged
@@ -128,11 +130,13 @@ Public Class dlgStartofRains
     Private Sub ucrReceiverRainfall_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRainfall.SelectionChanged
         RainyDaysMethod()
         RollingSumMethod()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
         YearGroupDaily()
         AddKeyMethod()
+        TestOKEnabled()
     End Sub
 
     Private Sub CheckBoxesSetting()
