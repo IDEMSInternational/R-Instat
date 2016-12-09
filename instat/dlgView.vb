@@ -18,18 +18,15 @@ Public Class dlgView
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-        ucrBase.clsRsyntax.iCallType = 2
 
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         'Checks if Ok can be enabled.
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetDefaults()
@@ -42,54 +39,40 @@ Public Class dlgView
         ucrSelctorForView.Focus()
         rdoTop.Checked = True
         grpDisplayFrom.ResetText()
+        ' By default the dialogue is in preview mode rather than View mode. See SetCommands() for details.
+        rdoViewOutputWindow.Checked = True
+        rdoViewDataFrame.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
         ucrReceiverView.Selector = ucrSelctorForView
         ucrReceiverView.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 32
-
-    End Sub
-
-    Private Sub ReopenDialog()
+        ucrBase.clsRsyntax.iCallType = 2
 
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverView.IsEmpty() = False And nudNumberRows.Text <> "" Then
+        If (rdoViewOutputWindow.Checked AndAlso ((Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> ""))) OrElse ((rdoViewDataFrame.Checked) AndAlso Not (ucrReceiverView.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
-        End If
+            End If
+
     End Sub
 
     Private Sub grpDisplayFrom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
-        grpRowsToBeSelected()
-    End Sub
-
-    Private Sub grpRowsToBeSelected()
-        If rdoTop.Checked Then
-            ucrBase.clsRsyntax.SetFunction("head")
-        Else
-            ucrBase.clsRsyntax.SetFunction("tail")
-        End If
+        SetCommands()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverView_SelctionChanged() Handles ucrReceiverView.SelectionChanged
-        If Not ucrReceiverView.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
+        SetCommands()
         TestOKEnabled()
     End Sub
 
     Private Sub nudNumberRows_TextChanged(sender As Object, e As EventArgs) Handles nudNumberRows.TextChanged
-        If Not nudNumberRows.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("n")
-        End If
+        SetCommands()
         TestOKEnabled()
     End Sub
 
@@ -100,5 +83,42 @@ Public Class dlgView
 
     Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelctorForView.DataFrameChanged
         nudNumberRows.Maximum = ucrSelctorForView.ucrAvailableDataFrames.iDataFrameLength
+        TestOKEnabled()
     End Sub
+
+    Private Sub rdoViewPreview_CheckedChanged(sender As Object, e As EventArgs) Handles rdoViewOutputWindow.CheckedChanged, rdoViewDataFrame.CheckedChanged
+        SetCommands()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetCommands()
+        'Adding Separate Viewer window for the selected variables in the selector.
+        If rdoViewDataFrame.Checked Then
+            lblNumberofRows.Enabled = False
+            nudNumberRows.Enabled = False
+            grpDisplayFrom.Enabled = False
+            ucrBase.clsRsyntax.RemoveParameter("n")
+            ucrBase.clsRsyntax.SetFunction("View")
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelctorForView.strCurrentDataFrame & Chr(34))
+
+        ElseIf rdoViewOutputWindow.Checked Then
+            'Setting head and tail commands to help in previewing the data with specified number of observations "n"
+            lblNumberofRows.Enabled = True
+            nudNumberRows.Enabled = True
+            grpDisplayFrom.Enabled = True
+            If Not ucrReceiverView.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+                If rdoTop.Checked Then
+                    ucrBase.clsRsyntax.SetFunction("head")
+                Else
+                    ucrBase.clsRsyntax.SetFunction("tail")
+                End If
+                If Not nudNumberRows.Text = "" Then
+                    ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
+                End If
+            End If
+        End If
+    End Sub
+
 End Class
