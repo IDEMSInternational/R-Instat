@@ -149,22 +149,7 @@ Public Class ucrDistributions
                 Case "DFunctions"
                     bUse = (Dist.strDFunctionName <> "")
                 Case "ExactSolution"
-                    If (Dist.strExactName <> "") Then
-                        Select Case strDataType
-                            Case "numeric"
-                                If Dist.bIntAndNumeric Then
-                                    bUse = True
-                                End If
-                            Case "positive integer" ' or integer
-                                If Dist.bPositiveInt Then
-                                    bUse = True
-                                End If
-                            Case "factor" ' or character
-                                If Dist.bTwoLevelFactor Then
-                                    bUse = True
-                                End If
-                        End Select
-                    End If
+                    bUse = (Dist.strExactName <> "")
                 Case "GLMFunctions"
                     If (Dist.strGLMFunctionName <> "") Then
                         Select Case strDataType
@@ -226,6 +211,7 @@ Public Class ucrDistributions
         Dim clsFDist As New Distribution
         Dim clsHyperGeoDist As New Distribution
         Dim clsLogNormDist As New Distribution
+        Dim clsNoDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -237,7 +223,6 @@ Public Class ucrDistributions
         clsNormalDist.strGLMFunctionName = "gaussian"
         clsNormalDist.bNumeric = True
         clsNormalDist.bIsContinuous = True
-        clsNormalDist.bIntAndNumeric = True
         clsNormalDist.bIsExact = True
         clsNormalDist.strExactName = "norm"
         clsNormalDist.lstExact = {"mean", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
@@ -342,7 +327,6 @@ Public Class ucrDistributions
         clsPoissonDist.strDFunctionName = "dpois"
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
-        clsPoissonDist.bIntAndNumeric = True
         clsPoissonDist.bIsContinuous = False
         clsPoissonDist.bIsExact = True
         clsPoissonDist.strExactName = "pois"
@@ -555,6 +539,14 @@ Public Class ucrDistributions
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)
         bDistributionsSet = True
+
+        ' No Distribution
+        clsNoDist.strNameTag = "No_Distribution" ' TODO: Add in this name
+        clsNoDist.strRName = ""
+        clsNoDist.bIsExact = True
+        clsNoDist.strExactName = "none"
+        clsNoDist.lstExact = {"", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
+        lstAllDistributions.Add(clsNoDist)
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
