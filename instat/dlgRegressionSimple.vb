@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2 As New ROperator
-    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRBinomial, clsRLength, clsRMean, clsRMean2, clsRLength2, clsRGroup, clsRGroup2, clsRLengthGrouped, clsRLengthGrouped2 As New RFunction
+    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRFTest, clsRBinomial, clsRWilcoxTest, clsRLength, clsRMean, clsRMean2, clsRLength2, clsRGroup, clsRGroup2, clsRLengthGrouped, clsRLengthGrouped2 As New RFunction
     Public clsRLmOrGLM As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -57,6 +57,8 @@ Public Class dlgRegressionSimple
         nudCI.Maximum = 1
         nudCI.DecimalPlaces = 2
         nudHypothesis.DecimalPlaces = 2
+        rdoCompareMeans.Checked = True
+        chkPaired.Enabled = False 'for the time being
     End Sub
 
     Private Sub ReopenDialog()
@@ -125,7 +127,28 @@ Public Class dlgRegressionSimple
         Else
             clsRTTest.RemoveParameterByName("paired")
         End If
+    End Sub
 
+    Private Sub SetFTest()
+        clsRFTest.SetRCommand("var.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRFTest)
+        clsRFTest.AddParameter("conf.level", nudCI.Value.ToString())
+        clsRFTest.AddParameter("mu", nudHypothesis.Value.ToString())
+        clsModel.SetOperation("~")
+        clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+        clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+        clsRFTest.AddParameter("", clsROperatorParameter:=clsModel)
+    End Sub
+
+    Private Sub SetWilcoxTest()
+        clsRWilcoxTest.SetRCommand("wilcox.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
+        clsRWilcoxTest.AddParameter("conf.level", nudCI.Value.ToString())
+        clsRWilcoxTest.AddParameter("mu", nudHypothesis.Value.ToString())
+        clsModel.SetOperation("~")
+        clsModel.SetParameter(True, clsRFunc:=ucrResponse.GetVariables())
+        clsModel.SetParameter(False, clsRFunc:=ucrExplanatory.GetVariables())
+        clsRWilcoxTest.AddParameter("", clsROperatorParameter:=clsModel)
     End Sub
 
     Public Sub DataTypeAccepted()
@@ -176,7 +199,7 @@ Public Class dlgRegressionSimple
         clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
         clsPoissonOperation.SetOperation("==")
         clsPoissonOperation.SetParameter(True, clsRFunc:=ucrExplanatory.GetVariables())
-        clsPoissonOperation.SetParameter(False, strValue:="1") 'in there we have the level, get column name???
+        clsPoissonOperation.SetParameter(False, strValue:="1") 'in there we have the level, get column name?
 
 
         clsRLength2.SetRCommand("length")
@@ -185,7 +208,7 @@ Public Class dlgRegressionSimple
         clsRGroup2.AddParameter("x", clsROperatorParameter:=clsPoissonOperation2)
         clsPoissonOperation2.SetOperation("==")
         clsPoissonOperation2.SetParameter(True, clsRFunc:=ucrExplanatory.GetVariables())
-        clsPoissonOperation2.SetParameter(False, strValue:="2") 'in there we have the level, get column name???
+        clsPoissonOperation2.SetParameter(False, strValue:="2") 'in there we have the level, get column name?
 
 
         ' T = ...
@@ -230,11 +253,17 @@ Public Class dlgRegressionSimple
             End If
         ElseIf rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
-                SetTTest()
+                If rdoCompareMeans.Checked Then
+                    SetTTest()
+                ElseIf rdoCompareVar.Checked Then
+                    SetFTest()
+                End If
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 SetPoissonTest()
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 SetBinomTest()
+            Else
+                SetWilcoxTest()
             End If
         End If
         TestOKEnabled()
@@ -341,6 +370,14 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
+    End Sub
+
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
         ExplanatoryFunctionSelect()
         SetRCode()
@@ -375,7 +412,7 @@ Public Class dlgRegressionSimple
 
     Private Sub AssignModelName()
         If chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrModelName.GetText, strTempModel:=ucrModelName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            'ucrBase.clsRsyntax.SetAssignTo(ucrModelName.GetText, strTempModel:=ucrModelName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             If rdoGeneral.Checked Then
                 ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             Else
@@ -442,11 +479,22 @@ Public Class dlgRegressionSimple
                 nudHypothesis.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
                 nudHypothesis.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
                 nudHypothesis.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
-            End If
-            If ucrFamily.clsCurrDistribution.strRName = "Normal" Then
-                chkPaired.Visible = True
-            Else
-                chkPaired.Visible = False
+                If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+                    rdoCompareMeans.Visible = True
+                    rdoCompareVar.Visible = True
+                    If rdoCompareMeans.Checked Then
+                        chkPaired.Visible = True
+                        nudHypothesis.Enabled = True
+                    ElseIf rdoCompareVar.Checked Then
+                        nudHypothesis.Enabled = False
+                        chkPaired.Visible = False
+                    End If
+                Else
+                    chkPaired.Visible = False
+                    rdoCompareMeans.Visible = False
+                    rdoCompareVar.Visible = False
+                    nudHypothesis.Enabled = True
+                End If
             End If
         End If
     End Sub
@@ -459,7 +507,7 @@ Public Class dlgRegressionSimple
         SetRCode()
     End Sub
 
-    Private Sub chkboxes_VisibleChanged(sender As Object, e As EventArgs) Handles chkFunction.VisibleChanged, chkPaired.VisibleChanged
+    Private Sub chkboxes_VisibleChanged(sender As Object, e As EventArgs) Handles chkFunction.VisibleChanged
         Display()
         ExplanatoryFunctionSelect()
         ConvertToVariate()
@@ -484,5 +532,10 @@ Public Class dlgRegressionSimple
         DataTypeAccepted()
         TestOKEnabled()
         SetEnableDists()
+    End Sub
+
+    Private Sub rdoCompareMeans_VisibleChanged(sender As Object, e As EventArgs) Handles rdoCompareMeans.VisibleChanged, rdoCompareVar.VisibleChanged, chkPaired.VisibleChanged, rdoCompareMeans.CheckedChanged, rdoCompareVar.CheckedChanged, chkPaired.CheckedChanged
+        Display()
+        SetRCode()
     End Sub
 End Class

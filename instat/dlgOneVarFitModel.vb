@@ -16,7 +16,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
-    Public clsRConvert, clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart As New RFunction
+    Public clsRConvert, clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart As New RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Public bfirstload As Boolean = True
 
@@ -55,6 +55,7 @@ Public Class dlgOneVarFitModel
         nudCI.Minimum = 0
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
         cboVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
+        rdoMeanWilcox.Checked = True
     End Sub
 
     Private Sub SetDefaults()
@@ -157,9 +158,19 @@ Public Class dlgOneVarFitModel
             If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 SetPoissonTest()
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
-                SetTTest()
+                If rdoMeanWilcox.Checked Then
+                    SetTTest()
+                ElseIf rdoVarSign.Checked Then
+                    SetVarTest()
+                ElseIf rdoEnorm.Checked Then
+                    SetEnormTest()
+                End If
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 SetBinomialTest()
+            Else
+                If rdoMeanWilcox.Checked Then
+                    SetWilcoxTest()
+                End If
             End If
         End If
     End Sub
@@ -170,6 +181,9 @@ Public Class dlgOneVarFitModel
         ElseIf rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Or ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 UcrReceiver.SetIncludedDataTypes({"integer", "numeric"})
+                If (UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character") Then
+                    UcrReceiver.Clear()
+                End If
             Else
                 UcrReceiver.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
             End If
@@ -184,9 +198,6 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetTTest()
-        If ucrFamily.clsCurrDistribution.strNameTag = "Normal" AndAlso (UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character") Then
-            UcrReceiver.Clear()
-        End If
         clsRTTest.SetRCommand("t.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRConvert.SetRCommand("as.vector")
@@ -194,6 +205,37 @@ Public Class dlgOneVarFitModel
         clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
         clsRTTest.AddParameter("mu", nudHyp.Value.ToString)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString)
+    End Sub
+
+    Private Sub SetVarTest()
+        clsVarTest.SetRCommand("EnvStats::varTest")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsVarTest)
+        clsRConvert.SetRCommand("as.vector")
+        clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
+        clsVarTest.AddParameter("sigma.squared", nudHyp.Value.ToString)
+        clsVarTest.AddParameter("conf.level", nudCI.Value.ToString)
+    End Sub
+
+    Private Sub SetEnormTest()
+        clsREnormTest.SetRCommand("EnvStats::enorm")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsREnormTest)
+        clsRConvert.SetRCommand("as.vector")
+        clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
+        clsREnormTest.AddParameter("conf.level", nudCI.Value.ToString)
+        ' what is the hyp nud?
+    End Sub
+
+    Private Sub SetWilcoxTest()
+        clsRWilcoxTest.SetRCommand("wilcox.test")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
+        'clsRConvert.SetRCommand("as.vector")
+        'clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        'clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
+        clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsRWilcoxTest.AddParameter("conf.level", nudCI.Value.ToString)
+        clsRWilcoxTest.AddParameter("mu", nudHyp.Value.ToString)
     End Sub
 
     Private Sub SetPoissonTest()
@@ -334,23 +376,46 @@ Public Class dlgOneVarFitModel
         If rdoGeneral.Checked Then
             cmdFittingOptions.Visible = True
             cmdDisplayOptions.Visible = True
-            nudCI.Visible = False
-            nudHyp.Visible = False
-            lblHyp.Visible = False
-            lblConfidenceLimit.Visible = False
+            grpConditions.Visible = False
+            rdoMeanWilcox.Visible = False
+            rdoVarSign.Visible = False
+            rdoEnorm.Visible = False
         ElseIf rdoSpecific.Checked Then
             cmdFittingOptions.Visible = False
             cmdDisplayOptions.Visible = False
             chkConvertToVariate.Visible = False
-            nudCI.Visible = True
-            nudHyp.Visible = True
-            lblHyp.Visible = True
-            lblConfidenceLimit.Visible = True
+            grpConditions.Visible = True
             If ucrFamily.clsCurrDistribution.bIsExact = True Then
-                nudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+                    rdoMeanWilcox.Visible = True
+                    rdoVarSign.Visible = True
+                    rdoEnorm.Visible = True
+                    rdoMeanWilcox.Text = "Compare Mean"
+                    rdoVarSign.Text = "Compare Variance"
+                    If rdoVarSign.Checked Then
+                        nudHyp.Minimum = 0.01
+                        nudHyp.Value = 1
+                    Else
+                        nudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+                        nudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                    End If
+                ElseIf ucrFamily.clsCurrDistribution.strNameTag = "No_Distribution" Then
+                    rdoMeanWilcox.Visible = True
+                    rdoVarSign.Visible = True
+                    rdoEnorm.Visible = False
+                    rdoMeanWilcox.Text = "None-Wilcoxon"
+                    rdoVarSign.Text = "None-Sign"
+                    nudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+                    nudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                Else
+                    nudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+                    nudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                    rdoMeanWilcox.Visible = False
+                    rdoVarSign.Visible = False
+                    rdoEnorm.Visible = False
+                End If
                 nudHyp.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
                 nudHyp.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
-                nudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
                 nudHyp.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
             End If
         End If
@@ -400,7 +465,6 @@ Public Class dlgOneVarFitModel
                     ucrOperator.Visible = True
                     cboVariables.Visible = False
                 End If
-
             Else
                 lblSuccessIf.Visible = False
                 lblEquals.Visible = False
@@ -430,5 +494,10 @@ Public Class dlgOneVarFitModel
     Private Sub cboVariables_TextChanged(sender As Object, e As EventArgs) Handles cboVariables.TextChanged
         BinomialConditions()
         SetBinomialTest()
+    End Sub
+
+    Private Sub rdoMean_VisibleChanged(sender As Object, e As EventArgs) Handles rdoMeanWilcox.VisibleChanged, rdoVarSign.VisibleChanged, rdoEnorm.VisibleChanged, rdoMeanWilcox.CheckedChanged, rdoVarSign.CheckedChanged, rdoEnorm.CheckedChanged
+        Display()
+        SetBaseFunction()
     End Sub
 End Class

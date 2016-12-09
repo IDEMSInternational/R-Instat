@@ -211,6 +211,7 @@ Public Class ucrDistributions
         Dim clsFDist As New Distribution
         Dim clsHyperGeoDist As New Distribution
         Dim clsLogNormDist As New Distribution
+        Dim clsNoDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -538,6 +539,14 @@ Public Class ucrDistributions
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)
         bDistributionsSet = True
+
+        ' No Distribution
+        clsNoDist.strNameTag = "No_Distribution" ' TODO: Add in this name
+        clsNoDist.strRName = ""
+        clsNoDist.bIsExact = True
+        clsNoDist.strExactName = "none"
+        clsNoDist.lstExact = {"", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
+        lstAllDistributions.Add(clsNoDist)
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
