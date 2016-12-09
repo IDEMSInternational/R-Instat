@@ -1531,7 +1531,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, polar = FALSE, ...) {
+data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
   if(!all(columns %in% self$get_column_names())) {
     stop("Not all columns found in the data")
   }
@@ -1544,7 +1544,12 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
   else {
     numeric_geom <- numeric
   }
-  cat_geom <- match.fun(categorical)
+  if(categorical %in% c("pie_chart")) {
+    cat_geom <- categorical
+  }
+  else {
+    cat_geom <- match.fun(categorical)
+  }
   curr_data <- self$get_data_frame()
   column_types <- c()
   for(col in columns) {
@@ -1558,11 +1563,11 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
   }
   if(output == "facets") {
-    column_types <- unique(column_types)
     if(length(column_types) > 1) {
       warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
       output <- "combine"
     }
+    else column_types <- unique(column_types)
   }
   if(output == "facets") {
     if(column_types == "numeric") {
@@ -1582,15 +1587,22 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
     else {
       g <- ggplot(data = curr_data, mapping = aes(x = value)) + ylab("")
-      if(curr_geom_name == "box_jitter") {
-        g <- g + geom_boxplot() + geom_jitter() 
-      }
-      else if(curr_geom_name == "violin_jitter") {
-        g <- g + geom_violin() + geom_jitter() 
-      }
-      else if(curr_geom_name == "violin_box") {
-        g <- g + geom_violin() + geom_boxplot() 
-      }
+    }
+    
+    if(curr_geom_name == "box_jitter") {
+      g <- g + geom_boxplot() + geom_jitter() 
+    }
+    else if(curr_geom_name == "violin_jitter") {
+      g <- g + geom_violin() + geom_jitter() 
+    }
+    else if(curr_geom_name == "violin_box") {
+      g <- g + geom_violin() + geom_boxplot() 
+    }
+    else if(curr_geom_name == "pie_chart") {
+      g <- g + geom_bar() + coord_polar(theta = "x")
+    }
+    else {
+      g <- g + curr_geom()
     }
 
     if(free_scale_axis) {
@@ -1600,9 +1612,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + facet_wrap(facets = ~ variable, scales = "free_x", ncol = ncol)
     }
     
-    if(polar) {
-      g <- g + coord_polar(theta = "x")
-    }
     return(g)    
   }
   else {
@@ -1637,9 +1646,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       }
       else {
         g <- g + curr_geom()
-      }
-      if(polar && column_types[i] == "cat") {
-        g <- g + coord_polar(theta = "x")
       }
       graphs[[i]] <- g
       i = i + 1
@@ -1717,30 +1723,145 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
        contrasts(private$data[[col_name]]) <- new_contrasts
   }
 )
-data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month = FALSE, year = FALSE, day = FALSE) {
+#This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
+data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
+  if(day) {
+    day <- day(col_data)
+	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day)
+  }
   if(week) {
     week <- week(col_data)
 	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = week)
   }
-  if(month) {
-    month <- month(col_data)
-	  col_name <- next_default_item(prefix = "month", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month)
+   if(weekday_val) {
+    weekday_val <- wday(col_data)
+	  col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_val)
+  }
+   if(weekday_abbr) {
+     weekday_abbr <- wday(col_data, label = TRUE)
+	  col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_abbr)
+  }
+   if(weekday_name) {
+     weekday_name <- wday(col_data, label = TRUE, abbr = FALSE)
+	  col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_name)
+  }
+  if(month_val) {
+    month_val <- month(col_data)
+	  col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_val)
+  }
+   if(month_abbr) {
+    month_abbr <- month(col_data, label = TRUE)
+	  col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_abbr)
+  }
+   if(month_name) {
+    month_name <- month(col_data, label = TRUE, abbr = FALSE)
+	  col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_name)
   }
   if(year) {
     year <- year(col_data)
 	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = year)
   }
-  if(day) {
-    day <- day(col_data)
-	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day)
-  }
   #TO Do
   #Implement option for the day of the year
   }
+)
+
+#TODO These should go in a separate climatic file
+#************************************************
+# labels for climatic column types
+rain_label="rain"
+rain_day_label="rain_day"
+rain_day_lag_label="rain_day_lag"
+date_label="date"
+doy_label="doy"
+year_label="year"
+year_month_label="year_month"
+date_time_label="date_time"
+dos_label="dos" ##Day of Season
+season_label="season"
+month_label="month"
+day_label="day"
+dm_label="day_month"
+time_label="time"
+station_label="station"
+date_asstring_label="date_asstring"
+temp_min_label="temp_min"
+temp_max_label="temp_max"
+temp_air_label="temp_air"
+temp_range_label="temp_range"
+wet_buld_label="wet_bulb"
+dry_bulb_label="dry_buld"
+evaporation_label="evaporation"
+element_factor_label="element_type"
+identifier_label = "identifier"
+capacity_label = "capacity_max"
+wind_speed_label="wind_speed"
+wind_direction_label="wind_direction"
+lat_label="lat"
+lon_label="lon"
+alt_label="alt"
+season_station_label="season_station"
+date_station_label="date_station"
+sunshine_hours_label="sunshine_hours"
+radiation_label="radiation"
+cloud_cover_label="cloud_cover"
+
+all_climatic_column_types <- c(rain_label, rain_day_label, rain_day_lag_label, date_label, doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
+
+# Column metadata
+climatic_type_label = "Climatic_Type"
+
+# Data frame metadata
+is_climatic_label = "Is_Climatic"
+
+instat_object$set("public","define_as_climatic", function(data_name, types) {
+  self$append_to_dataframe_metadata(data_name, is_climatic_label, TRUE)
+  for(curr_data_name in self$get_data_names()) {
+    if(!self$get_data_objects(data_name)$is_metadata(is_climatic_label)) {
+      self$append_to_dataframe_metadata(curr_data_name, is_climatic_label, FALSE)
+    }
+  }
+  self$get_data_objects(data_name)$set_climatic_types(types)
+}
+)
+
+data_object$set("public","set_climatic_types", function(types) {
+  if(!all(names(types) %in% all_climatic_column_types)) stop("Cannot recognise the following climatic types: ", paste(names(types)[!names(types) %in% all_climatic_column_types], collapse = ", "))
+  invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], climatic_type_label, name)))
+}
+)
+
+#Method for creating inventory plot
+data_object$set("public","make_inventory_plot", function(year, doy, col_name, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
+  curr_data <- self$get_data_frame()
+  col_data <- self$get_columns_from_data(col_name)
+  if(!is.numeric(col_data)) stop("The rainfall column should be numeric")
+  recode <- ifelse(is.na(col_data), "missing", ifelse(col_data>threshold, "rain", "dry"))
+  recode <- as.factor(recode)
+  new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
+  curr_data[[new_col]] <- recode
+  if(add_to_data) {
+    self$add_columns_to_data(col_name = new_col, col_data = recode)
+  }
+  
+  g <- ggplot(data = curr_data, mapping = aes_(x = as.name(year), y = as.name(doy), colour = as.name(new_col), group = as.name(year))) + geom_point() + xlab(year) + ylab(col_name) + labs(color="Recode")
+  if(!missing(facets)) {
+    g <- g + facet_wrap(as.name(facets))
+  }
+  if(coord_flip) {
+    g <- g + coord_flip()
+  }
+  return(g)
+}
 )
