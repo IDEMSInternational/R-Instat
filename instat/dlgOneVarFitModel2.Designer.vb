@@ -213,7 +213,7 @@ Partial Class dlgOneVarFitModel
         'ucrSaveModel
         '
         Me.ucrSaveModel.IsReadOnly = False
-        Me.ucrSaveModel.Location = New System.Drawing.Point(99, 239)
+        Me.ucrSaveModel.Location = New System.Drawing.Point(92, 239)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
         Me.ucrSaveModel.TabIndex = 3
@@ -249,6 +249,7 @@ Partial Class dlgOneVarFitModel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 322)
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.lblEquals)
         Me.Controls.Add(Me.cboVariables)
         Me.Controls.Add(Me.nudBinomialConditions)
@@ -267,7 +268,6 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.cmdFittingOptions)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.chkConvertToVariate)
-        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.UcrReceiver)
         Me.Controls.Add(Me.ucrSelectorOneVarFitMod)
         Me.Controls.Add(Me.UcrBase)
