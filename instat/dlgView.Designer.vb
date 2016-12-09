@@ -76,7 +76,7 @@ Partial Class dlgView
         'nudNumberRows
         '
         Me.nudNumberRows.Location = New System.Drawing.Point(360, 155)
-        Me.nudNumberRows.Maximum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudNumberRows.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudNumberRows.Name = "nudNumberRows"
         Me.nudNumberRows.Size = New System.Drawing.Size(47, 20)
         Me.nudNumberRows.TabIndex = 4
