@@ -23,8 +23,8 @@ Public Class RLink
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
-    Dim rtbOutput As New ucrWPFRichTextBox 'TEST temporary...
-    Dim txtLog As New TextBox
+    Public rtbOutput As New ucrWPFRichTextBox 'TEST temporary...
+    Public txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
     Public bClimateObjectExists As Boolean = False
