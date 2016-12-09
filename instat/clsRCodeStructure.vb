@@ -194,7 +194,7 @@ Public Class RCodeStructure
         If clsParam Is Nothing Then
             clsParam = New RParameter
             If strParameterName = "" Then
-                MsgBox("Developer Error: some parameter has been added without specifying a name. We want all parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
+                'MsgBox("Developer Error: some parameter has been added without specifying a name. We want all parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
                 bIncludeArgumentName = False
                 strParameterName = "Parameter." & iNumberOfAddedParameters
             End If
