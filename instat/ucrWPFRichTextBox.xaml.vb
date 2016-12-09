@@ -54,17 +54,17 @@ Public Class ucrWPFRichTextBox
         rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
 
         'TESTING TO BE REMOVED
-        Dim strStargazer As String = "<table style=" & Chr(34) & "text-align:center" & Chr(34) & "><tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>
-<tr><td colspan = " & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">rating</td><td>30</td><td>64.633</td><td>12.173</td><td>40</td><td>85</td></tr>
-<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">complaints</td><td>30</td><td>66.600</td><td>13.315</td><td>37</td><td>90</td></tr>
-<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">privileges</td><td>30</td><td>53.133</td><td>12.235</td><td>30</td><td>83</td></tr>
-<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">learning</td><td>30</td><td>56.367</td><td>11.737</td><td>34</td><td>75</td></tr>
-<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">raises</td><td>30</td><td>64.633</td><td>10.397</td><td>43</td><td>88</td></tr>
-<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">critical</td><td>30</td><td>74.767</td><td>9.895</td><td>49</td><td>92</td></tr>
-<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">advance</td><td>30</td><td>42.933</td><td>10.289</td><td>25</td><td>72</td></tr>
-<tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom: 1px solid black" & Chr(34) & "></td></tr></table>"
-        AddIntoWebBrowser(strFilePath:="file:///C:/Users/Fran%C3%A7ois/Documents/Administratif/jobs/ADI/R_HTML_Files/firstggplotgrphinhtml.html")
-        AddIntoWebBrowser(strHtmlCode:=strStargazer)
+        'Dim strStargazer As String = "<table style=" & Chr(34) & "text-align:center" & Chr(34) & "><tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>
+        '<tr><td colspan = " & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">rating</td><td>30</td><td>64.633</td><td>12.173</td><td>40</td><td>85</td></tr>
+        '<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">complaints</td><td>30</td><td>66.600</td><td>13.315</td><td>37</td><td>90</td></tr>
+        '<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">privileges</td><td>30</td><td>53.133</td><td>12.235</td><td>30</td><td>83</td></tr>
+        '<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">learning</td><td>30</td><td>56.367</td><td>11.737</td><td>34</td><td>75</td></tr>
+        '<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">raises</td><td>30</td><td>64.633</td><td>10.397</td><td>43</td><td>88</td></tr>
+        '<tr><td style=" & Chr(34) & "text-align: Left" & Chr(34) & ">critical</td><td>30</td><td>74.767</td><td>9.895</td><td>49</td><td>92</td></tr>
+        '<tr><td style = " & Chr(34) & "text-align: Left" & Chr(34) & ">advance</td><td>30</td><td>42.933</td><td>10.289</td><td>25</td><td>72</td></tr>
+        '<tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom: 1px solid black" & Chr(34) & "></td></tr></table>"
+        '        AddIntoWebBrowser(strFilePath:="file:///C:/Users/Fran%C3%A7ois/Documents/Administratif/jobs/ADI/R_HTML_Files/firstggplotgrphinhtml.html")
+        '       AddIntoWebBrowser(strHtmlCode:=strStargazer)
     End Sub
 
     Public Sub AddIntoWebBrowser(Optional strHtmlCode As String = Nothing, Optional strFilePath As String = Nothing)
