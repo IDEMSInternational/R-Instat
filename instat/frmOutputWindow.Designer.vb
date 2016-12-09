@@ -32,6 +32,7 @@ Partial Class frmOutputWindow
         '
         'ucrWPFrtfElementHost
         '
+        Me.ucrWPFrtfElementHost.ContextMenuStrip = Me.mnuContextRTB
         Me.ucrWPFrtfElementHost.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrWPFrtfElementHost.Location = New System.Drawing.Point(0, 0)
         Me.ucrWPFrtfElementHost.Name = "ucrWPFrtfElementHost"
@@ -44,12 +45,12 @@ Partial Class frmOutputWindow
         '
         Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB})
         Me.mnuContextRTB.Name = "mnuContextRTB"
-        Me.mnuContextRTB.Size = New System.Drawing.Size(103, 26)
+        Me.mnuContextRTB.Size = New System.Drawing.Size(153, 48)
         '
         'CopyRTB
         '
         Me.CopyRTB.Name = "CopyRTB"
-        Me.CopyRTB.Size = New System.Drawing.Size(102, 22)
+        Me.CopyRTB.Size = New System.Drawing.Size(152, 22)
         Me.CopyRTB.Text = "Copy"
         '
         'frmOutputWindow
