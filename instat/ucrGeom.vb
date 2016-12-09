@@ -146,6 +146,7 @@ Public Class ucrGeom
         'Warning/Task: need a new type of parameter: units, or perhaps function, in order to be able to specify units(value, unit) or for the position: position_dodge(width = value)... !!!
         'Warning: some parameters are incompatible such as position and nudge_x/nudge_y in geom_text, geom_label... need to introduce method for these...
         'Question/Task: Using or let the user use aes mapping such as ..count.., ..prop.. or ..density.. in bar and histogram for instance when the appropriate stat is in use. To be investigated...
+        'Warning/Task: draw_quantiles takes as argument an array of numeric values, eg c(0.25, 0.5, 0.75). For the moment set as a list, but needs to give more flexibility to the type of values for these arguments.
 
         clsgeom_abline.SetGeomName("geom_abline") 'Warning: this geom never inherits global aesthetics ! It also doesn't affect the x and y scales. Can specify yintercept either with aes, or with parameter (second one overwrites). If want to vary with facets, need to mention as aes.
         'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
@@ -1087,7 +1088,7 @@ Public Class ucrGeom
 
         'adding layer parameters
         'Geom_density layer parameters
-        clsgeom_violin.AddLayerParameter("draw_quantiles", "list", Chr(34) & "not(NULL)" & Chr(34), lstParameterStrings:={Chr(34) & "not(NULL)" & Chr(34)}) 'If not(NULL) (default), draw horizontal lines at the given quantiles of the density estimate.
+        clsgeom_violin.AddLayerParameter("draw_quantiles", "list", Chr(34) & "not(NULL)" & Chr(34), lstParameterStrings:={Chr(34) & "not(NULL)" & Chr(34), "0.25", "0.5", "0.75", "c(0.25, 0.5)", "c(0.25, 0.75)", "c(0.5,0.75)", "c(0.25,0.5,0.75)"}) 'If not(NULL) (default), draw horizontal lines at the given quantiles of the density estimate.
         clsgeom_violin.AddLayerParameter("trim", "boolean", "TRUE") 'If TRUE (default), trim the tails of the violins to the range of the data. If FALSE, don't trim the tails.
         clsgeom_violin.AddLayerParameter("trim", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "width" & Chr(34)}) 'if "area" (default), all violins have the same area (before trimming the tails). If "count", areas are scaled proportionally to the number of observations. If "width", all violins have the same maximum width.
         clsgeom_violin.AddLayerParameter("bw", "list", Chr(34) & "nrd0" & Chr(34), lstParameterStrings:={Chr(34) & "nrd0" & Chr(34), Chr(34) & "SJ" & Chr(34), Chr(34) & "nrd" & Chr(34), Chr(34) & "ucv" & Chr(34), Chr(34) & "bcv" & Chr(34)}) 'Bandwidth.
