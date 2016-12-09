@@ -1309,4 +1309,14 @@ Public Class frmMain
     Private Sub mnuClimaticFileDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileDefineClimaticData.Click
         DlgDefineClimaticData.ShowDialog()
     End Sub
+
+    Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
+        'TEST temporary 
+        'TESTING TO BE ERASED !!!!!!!
+        Dim clsTestStargizer As New RFunction
+        clsTestStargizer.SetRCommand("stargazer::stargazer")
+        clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
+        clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
+        clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
+    End Sub
 End Class

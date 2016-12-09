@@ -29,7 +29,7 @@ Public Class ucrWPFRichTextBox
         rtbOutput.Document.Blocks.Add(Paragraph)
     End Sub
 
-    Public Sub DisplayGraphInOutput(strImageLocation As String)
+    Public Sub DisplayGraph(strImageLocation As String)
         'Task: migrate the sub to the ucrWPFRichTextBox class ?
         'TEST temporary
         Dim conImage As Windows.Documents.BlockUIContainer
