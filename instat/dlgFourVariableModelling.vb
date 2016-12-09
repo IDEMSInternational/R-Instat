@@ -88,10 +88,10 @@ Public Class dlgFourVariableModelling
     Public Sub TestOKEnabled()
         If (Not ucrResponse.IsEmpty()) AndAlso (Not ucrFirstExplanatory.IsEmpty()) AndAlso (Not ucrSecondExplanatoryVariable.IsEmpty()) AndAlso (Not ucrThirdExplanatoryVariable.IsEmpty()) AndAlso (ucrInputModelOperators1.GetText <> "") Then
             clsModel2.bBrackets = False
-            clsModel1.SetParameter(False, strValue:="(" & clsModel2.ToScript.ToString & ")")
+            clsModel1.AddParameter(strParameterValue:="(" & clsModel2.ToScript.ToString & ")")
             clsModel1.SetOperation(ucrInputModelOperators1.GetText)
             clsModel1.bBrackets = False
-            clsModel.SetParameter(False, clsOp:=clsModel1)
+            clsModel.AddParameter(clsROperatorParameter:=clsModel1)
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBaseFourVariableModelling.OKEnabled(True)
             ucrModelPreview.SetName(clsModel.ToScript)
@@ -119,10 +119,10 @@ Public Class dlgFourVariableModelling
             If chkConvertToVariate.Checked Then
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+                clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRConvert)
                 ucrFamily.RecieverDatatype("numeric")
             Else
-                clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.RecieverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
@@ -169,18 +169,18 @@ Public Class dlgFourVariableModelling
                     sdgVariableTransformations.ModelFunction(True)
                 Else
                     sdgVariableTransformations.rdoIdentity.Checked = True
-                    clsModel1.SetParameter(True, strValue:=currentReceiver.GetVariableNames(bWithQuotes:=False))
+                    clsModel1.AddParameter(True, strParameterValue:=currentReceiver.GetVariableNames(bWithQuotes:=False))
                 End If
             End If
         End If
     End Sub
 
     Private Sub ucrFirstRandomEffect_SelectionChanged() Handles ucrSecondExplanatoryVariable.SelectionChanged
-        clsModel2.SetParameter(True, strValue:=ucrSecondExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
+        clsModel2.AddParameter(iPosition:=0, strParameterValue:=ucrSecondExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
     Private Sub ucrSecondRandomEffect_SelectionChanged() Handles ucrThirdExplanatoryVariable.SelectionChanged
-        clsModel2.SetParameter(False, strValue:=ucrThirdExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
+        clsModel2.AddParameter(strParameterValue:=ucrThirdExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
