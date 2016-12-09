@@ -24,6 +24,9 @@ Public Class frmOutputWindow
 
     Public Sub CopyContent()
         Dim lstImages As New List(Of Windows.UIElement)
+        Dim range As Windows.Documents.TextRange
+
+
         For Each block As Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
             If TypeOf (block) Is Windows.Documents.BlockUIContainer AndAlso ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) Then
                 'There are two cases now: consider webbrowser case ...
@@ -31,7 +34,17 @@ Public Class frmOutputWindow
                 'lstImages.Add(conImage.Child)
             End If
         Next
-        ucrRichTextBox.rtbOutput.Copy()
+        ucrRichTextBox.rtbOutput.Copy() 'Warning: Copy is a text method, only copies text...
+
+
+
+        '       Using stream As New IO.MemoryStream
+        '      range = New Windows.Documents.TextRange(ucrRichTextBox.rtbOutput.Document.ContentStart, ucrRichTextBox.rtbOutput.Document.ContentEnd)
+        '     range.Save(stream, Windows.DataFormats.XamlPackage)
+        '    Clipboard.SetData(DataFormats.Rtf, System.Text.Encoding.UTF8.GetString(stream.ToArray()))
+        '    stream.Close()
+        '    End Using
+
     End Sub
 
     Public Sub selectAllText()
