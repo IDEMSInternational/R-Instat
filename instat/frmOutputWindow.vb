@@ -19,10 +19,10 @@ Public Class frmOutputWindow
     End Sub
 
     Private Sub CopyRTB_Click(sender As Object, e As EventArgs) Handles CopyRTB.Click
-        copyText()
+        CopyContent()
     End Sub
 
-    Public Sub copyText()
+    Public Sub CopyContent()
         Dim lstImages As New List(Of Windows.UIElement)
         For Each block As Windows.Documents.BlockUIContainer In ucrRichTextBox.rtbOutput.Document.Blocks
             If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) Then
@@ -31,7 +31,6 @@ Public Class frmOutputWindow
                 'lstImages.Add(conImage.Child)
             End If
         Next
-
         ucrRichTextBox.rtbOutput.Copy()
     End Sub
 

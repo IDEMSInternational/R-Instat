@@ -44,10 +44,9 @@ Public Class frmMain
 
     Private Sub InitialiseWPFOutputWindow()
         'TEST temporary
-        'Task: If keep, Still need to add on all the places where frmCommand is
         frmOutputWindow.MdiParent = Me
         frmOutputWindow.Show()
-        clsRLink.SetOutput2(frmOutputWindow.ucrRichTextBox)
+        clsRLink.SetOutput(frmOutputWindow.ucrRichTextBox)
     End Sub
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'temp removed
@@ -55,7 +54,6 @@ Public Class frmMain
 
         mnuHelpAboutRInstat.Visible = False
         frmEditor.MdiParent = Me
-        frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
@@ -69,14 +67,12 @@ Public Class frmMain
         clsRLink.SetEngine()
         LoadInstatOptions()
 
-        frmCommand.Show()
         frmEditor.Show()
 
         Me.LayoutMdi(MdiLayout.TileVertical)
 
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
-        clsRLink.SetOutput(frmCommand.txtCommand)
         'Sets up R source files
         clsRLink.RSetup()
 
@@ -764,8 +760,8 @@ Public Class frmMain
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
         If ActiveMdiChild Is frmLog Then
             frmLog.selectAllText()
-        ElseIf ActiveMdiChild Is frmCommand Then
-            frmCommand.selectAllText()
+        ElseIf ActiveMdiChild Is frmOutputWindow Then
+            frmOutputWindow.selectAllText() 'to be edited
         ElseIf ActiveMdiChild Is frmScript Then
             frmScript.selectAllText()
         ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
@@ -776,8 +772,8 @@ Public Class frmMain
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
         If ActiveMdiChild Is frmLog Then
             frmLog.copyText()
-        ElseIf ActiveMdiChild Is frmCommand Then
-            frmCommand.copyText()
+        ElseIf ActiveMdiChild Is frmOutputWindow Then
+            frmOutputWindow.CopyContent() 'To be edited
         ElseIf ActiveMdiChild Is frmScript Then
             frmScript.copyText()
         ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
@@ -870,11 +866,11 @@ Public Class frmMain
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
-        If frmCommand.Visible Then
-            frmCommand.Visible = False
+        If frmOutputWindow.Visible Then
+            frmOutputWindow.Visible = False
         Else
-            frmCommand.Visible = True
-            frmCommand.BringToFront()
+            frmOutputWindow.Visible = True
+            frmOutputWindow.BringToFront()
         End If
     End Sub
 
@@ -884,11 +880,9 @@ Public Class frmMain
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
         Dim dlgResponse As DialogResult
-        If frmCommand.txtCommand.Text <> "" Then
-            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & frmCommand.Text, "Clear " & frmCommand.Text, MessageBoxButtons.YesNo)
-            If dlgResponse = DialogResult.Yes Then
-                frmCommand.txtCommand.Clear()
-            End If
+        dlgResponse = MessageBox.Show("Are you sure you want to clear the " & frmOutputWindow.Text, "Clear " & frmOutputWindow.Text, MessageBoxButtons.YesNo)
+        If dlgResponse = DialogResult.Yes Then
+            frmOutputWindow.ucrRichTextBox.rtbOutput.Document.Blocks.Clear() 'To b checked
         End If
     End Sub
 
@@ -1002,7 +996,8 @@ Public Class frmMain
             dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    frmCommand.txtCommand.SaveFile(dlgSaveFile.FileName, RichTextBoxStreamType.RichText)
+                    ' Send file name string specifying the location to save the XAML in.
+                    frmOutputWindow.ucrRichTextBox.SaveXamlPackage(dlgSaveFile.FileName)
                 Catch
                     MsgBox("Could not save the output window." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
