@@ -1737,18 +1737,18 @@ data_object$set("public","split_date", function(data_name, col_name = "", week =
 	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = week_vector)
   }
-   if(weekday_val) {
+  if(weekday_val) {
     weekday_val_vector <- as.integer(wday(col_data))
 	  col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = weekday_val_vector)
   }
-   if(weekday_abbr) {
-     weekday_abbr_vector <- wday(col_data, label = TRUE)
+  if(weekday_abbr) {
+    weekday_abbr_vector <- wday(col_data, label = TRUE)
 	  col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = weekday_abbr_vector)
   }
-   if(weekday_name) {
-     weekday_name_vector <- wday(col_data, label = TRUE, abbr = FALSE)
+  if(weekday_name) {
+    weekday_name_vector <- wday(col_data, label = TRUE, abbr = FALSE)
 	  col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
   }
@@ -1757,12 +1757,12 @@ data_object$set("public","split_date", function(data_name, col_name = "", week =
 	  col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
   }
-   if(month_abbr) {
+  if(month_abbr) {
     month_abbr_vector <- month(col_data, label = TRUE)
 	  col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
   }
-   if(month_name) {
+  if(month_name) {
     month_name_vector <- month(col_data, label = TRUE, abbr = FALSE)
 	  col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
@@ -1777,7 +1777,7 @@ data_object$set("public","split_date", function(data_name, col_name = "", week =
 	  col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
 	}
-	 if(day_in_year) {
+	if(day_in_year) {
     day_in_year_vector <- as.integer(yday(col_data))
 	  col_name <- next_default_item(prefix = "day_in_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
@@ -1787,14 +1787,12 @@ data_object$set("public","split_date", function(data_name, col_name = "", week =
 	  col_name <- next_default_item(prefix = "doy_366", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_366_vector)
 	}
-	 if(leap_year) {
+	if(leap_year) {
     leap_year_vector <- leap_year(col_data)
 	  col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
 	}
-  #TO Do
-  #Implement option for the day of the year
-  }
+}
 )
 
 
