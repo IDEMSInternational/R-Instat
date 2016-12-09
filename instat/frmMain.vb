@@ -42,8 +42,17 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
+    Private Sub InitialiseWPFOutputWindow()
+        'TEST temporary
+        'Task: If keep, Still need to add on all the places where frmCommand is
+        frmOutputWindow.MdiParent = Me
+        frmOutputWindow.Show()
+        clsRLink.SetOutput2(frmOutputWindow.ucrRichTextBox)
+    End Sub
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'temp removed
+        InitialiseWPFOutputWindow() 'TEST temporary
+
         mnuHelpAboutRInstat.Visible = False
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
