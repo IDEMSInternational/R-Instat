@@ -31,6 +31,8 @@ Partial Class dlgView
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelctorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoViewOutputWindow = New System.Windows.Forms.RadioButton()
+        Me.rdoViewDataFrame = New System.Windows.Forms.RadioButton()
         Me.grpDisplayFrom.SuspendLayout()
         CType(Me.nudNumberRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -39,7 +41,7 @@ Partial Class dlgView
         '
         Me.grpDisplayFrom.Controls.Add(Me.rdoBottom)
         Me.grpDisplayFrom.Controls.Add(Me.rdoTop)
-        Me.grpDisplayFrom.Location = New System.Drawing.Point(255, 176)
+        Me.grpDisplayFrom.Location = New System.Drawing.Point(255, 182)
         Me.grpDisplayFrom.Name = "grpDisplayFrom"
         Me.grpDisplayFrom.Size = New System.Drawing.Size(152, 43)
         Me.grpDisplayFrom.TabIndex = 4
@@ -73,7 +75,7 @@ Partial Class dlgView
         '
         'nudNumberRows
         '
-        Me.nudNumberRows.Location = New System.Drawing.Point(360, 149)
+        Me.nudNumberRows.Location = New System.Drawing.Point(360, 155)
         Me.nudNumberRows.Maximum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.nudNumberRows.Name = "nudNumberRows"
         Me.nudNumberRows.Size = New System.Drawing.Size(47, 20)
@@ -82,7 +84,7 @@ Partial Class dlgView
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(255, 30)
+        Me.lblSelected.Location = New System.Drawing.Point(255, 14)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(104, 13)
         Me.lblSelected.TabIndex = 7
@@ -92,7 +94,7 @@ Partial Class dlgView
         'lblNumberofRows
         '
         Me.lblNumberofRows.AutoSize = True
-        Me.lblNumberofRows.Location = New System.Drawing.Point(255, 152)
+        Me.lblNumberofRows.Location = New System.Drawing.Point(255, 158)
         Me.lblNumberofRows.Name = "lblNumberofRows"
         Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
         Me.lblNumberofRows.TabIndex = 8
@@ -101,7 +103,7 @@ Partial Class dlgView
         '
         'ucrReceiverView
         '
-        Me.ucrReceiverView.Location = New System.Drawing.Point(255, 48)
+        Me.ucrReceiverView.Location = New System.Drawing.Point(255, 32)
         Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverView.Name = "ucrReceiverView"
         Me.ucrReceiverView.Selector = Nothing
@@ -120,16 +122,40 @@ Partial Class dlgView
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 225)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 267)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 1
+        '
+        'rdoViewOutputWindow
+        '
+        Me.rdoViewOutputWindow.AutoSize = True
+        Me.rdoViewOutputWindow.Location = New System.Drawing.Point(255, 130)
+        Me.rdoViewOutputWindow.Name = "rdoViewOutputWindow"
+        Me.rdoViewOutputWindow.Size = New System.Drawing.Size(136, 17)
+        Me.rdoViewOutputWindow.TabIndex = 10
+        Me.rdoViewOutputWindow.TabStop = True
+        Me.rdoViewOutputWindow.Text = "View in Output Window"
+        Me.rdoViewOutputWindow.UseVisualStyleBackColor = True
+        '
+        'rdoViewDataFrame
+        '
+        Me.rdoViewDataFrame.AutoSize = True
+        Me.rdoViewDataFrame.Location = New System.Drawing.Point(255, 237)
+        Me.rdoViewDataFrame.Name = "rdoViewDataFrame"
+        Me.rdoViewDataFrame.Size = New System.Drawing.Size(147, 17)
+        Me.rdoViewDataFrame.TabIndex = 11
+        Me.rdoViewDataFrame.TabStop = True
+        Me.rdoViewDataFrame.Text = "View in Separate Window"
+        Me.rdoViewDataFrame.UseVisualStyleBackColor = True
         '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 281)
+        Me.ClientSize = New System.Drawing.Size(419, 326)
+        Me.Controls.Add(Me.rdoViewDataFrame)
+        Me.Controls.Add(Me.rdoViewOutputWindow)
         Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.nudNumberRows)
@@ -160,4 +186,6 @@ Partial Class dlgView
     Friend WithEvents lblSelected As Label
     Friend WithEvents nudNumberRows As NumericUpDown
     Friend WithEvents lblNumberofRows As Label
+    Friend WithEvents rdoViewOutputWindow As RadioButton
+    Friend WithEvents rdoViewDataFrame As RadioButton
 End Class
