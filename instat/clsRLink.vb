@@ -23,7 +23,7 @@ Public Class RLink
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
-    Dim txtOutput As New RichTextBox
+    Dim rtbOutput As New ucrWPFRichTextBox 'TEST temporary...
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -75,8 +75,9 @@ Public Class RLink
         clrComments = tempColor
     End Sub
 
-    Public Sub SetOutput(tempOutput As RichTextBox)
-        txtOutput = tempOutput
+    Public Sub SetOutput(tempOutput As ucrWPFRichTextBox)
+        'TEST temporary
+        rtbOutput = tempOutput
         bOutput = True
     End Sub
 
@@ -216,7 +217,7 @@ Public Class RLink
         Return strNextDefault
     End Function
 
-    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
+    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "", Optional bHtmlOutput As Boolean = False)
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
@@ -236,9 +237,10 @@ Public Class RLink
         End If
         If bOutput Then
             If strComment <> "" Then
-                AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
+                rtbOutput.AppendText(clrComments, fComments, strComment & vbCrLf, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+            Else
+                rtbOutput.AppendText(clrScript, fScript, strScript & vbCrLf) 'TEST temporary
             End If
-            AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
         End If
 
         'If strScript.Length > 2000 Then
@@ -280,30 +282,14 @@ Public Class RLink
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         End If
-        If bOutput Then
-            AppendText(txtOutput, clrOutput, fOutput, strOutput)
+        If bOutput AndAlso strOutput <> "" Then
+            If bHtmlOutput Then 'TEST temporary
+                rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput) 'TEST temporary
+            Else
+                rtbOutput.AppendText(clrOutput, fOutput, strOutput) 'TEST temporary
+            End If
         End If
         frmMain.clsGrids.UpdateGrids()
-    End Sub
-
-    Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
-        Dim iStart As Integer
-        Dim iEnd As Integer
-
-        iStart = box.TextLength
-        box.AppendText(text)
-        iEnd = box.TextLength
-
-
-        ' Textbox may transform chars, so (end-start) != text.Length
-        box.[Select](iStart, iEnd - iStart)
-        box.SelectionColor = color
-        box.SelectionFont = font
-        'TClears selection
-        box.SelectionLength = 0
-        ' clear
-        box.SelectionStart = box.Text.Length
-        box.ScrollToCaret()
     End Sub
 
     Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False) As SymbolicExpression
