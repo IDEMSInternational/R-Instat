@@ -523,13 +523,13 @@
     <value>236, 62</value>
   </data>
   <data name="lblNumeric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
+    <value>43, 13</value>
   </data>
   <data name="lblNumeric.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
   <data name="lblNumeric.Text" xml:space="preserve">
-    <value>First Variable:</value>
+    <value>Variate:</value>
   </data>
   <data name="&gt;&gt;lblNumeric.Name" xml:space="preserve">
     <value>lblNumeric</value>
@@ -553,13 +553,13 @@
     <value>236, 139</value>
   </data>
   <data name="lblFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>40, 13</value>
   </data>
   <data name="lblFactor.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
   <data name="lblFactor.Text" xml:space="preserve">
-    <value>Second Variable:</value>
+    <value>Factor:</value>
   </data>
   <data name="&gt;&gt;lblFactor.Name" xml:space="preserve">
     <value>lblFactor</value>
@@ -860,9 +860,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>433, 383</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
