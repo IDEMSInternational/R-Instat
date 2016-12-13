@@ -225,6 +225,7 @@ Public Class dlgRegressionSimple
         clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
 
 
+        ' For two numeric variables:
         '        clsRPoisson.SetRCommand("poisson.test")
         '        ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
         '        clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
