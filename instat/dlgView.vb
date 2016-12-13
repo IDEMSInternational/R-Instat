@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgView
+    Public clsHead, clsTail As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -38,7 +39,6 @@ Public Class dlgView
         ucrSelctorForView.Reset()
         ucrSelctorForView.Focus()
         rdoTop.Checked = True
-        grpDisplayFrom.ResetText()
         ' By default:Display of the dataset is on a separate window. See SetCommands() for details.
         rdoDispSepOutputWindow.Checked = True
         rdoDispOutputWindow.Checked = False
@@ -48,12 +48,13 @@ Public Class dlgView
         ucrReceiverView.Selector = ucrSelctorForView
         ucrReceiverView.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 32
-        ucrBase.clsRsyntax.iCallType = 2
-
+        clsHead.SetRCommand("head")
+        clsTail.SetRCommand("tail")
     End Sub
 
     Private Sub TestOKEnabled()
-        If (rdoDispOutputWindow.Checked AndAlso ((Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> ""))) OrElse ((rdoDispSepOutputWindow.Checked) AndAlso Not (ucrReceiverView.IsEmpty)) Then
+        'OK is enabled when the ucrReceiverView and nudNumberRows are both non-empty in both cases of Window display
+        If (Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> "") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -66,7 +67,7 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverView_SelctionChanged() Handles ucrReceiverView.SelectionChanged
+    Private Sub ucrReceiverView_SelctionChanged(ender As Object, e As EventArgs) Handles ucrReceiverView.SelectionChanged
         SetCommands()
         TestOKEnabled()
     End Sub
@@ -86,27 +87,31 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoViewPreview_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDispOutputWindow.CheckedChanged, rdoDispSepOutputWindow.CheckedChanged
+    Private Sub grpDisplay_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDispOutputWindow.CheckedChanged, rdoDispSepOutputWindow.CheckedChanged
         SetCommands()
         TestOKEnabled()
     End Sub
 
     Private Sub SetCommands()
-        'Adding Separate Viewer window for the selected variables in the selector.
+        'Setting the head and tail functions as parameters of View Function
         If rdoDispSepOutputWindow.Checked Then
-            lblNumberofRows.Enabled = False
-            nudNumberRows.Enabled = False
-            grpDisplayFrom.Enabled = False
-            ucrBase.clsRsyntax.RemoveParameter("n")
             ucrBase.clsRsyntax.SetFunction("View")
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+            ucrBase.clsRsyntax.RemoveParameter("n")
+            If rdoBottom.Checked Then
+                clsTail.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
+                clsTail.AddParameter("n", nudNumberRows.Value)
+                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsTail, bIncludeArgumentName:=False)
+            ElseIf rdoTop.Checked Then
+                clsHead.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
+                clsHead.AddParameter("n", nudNumberRows.Value)
+                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsHead, bIncludeArgumentName:=False)
+            End If
             ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelctorForView.strCurrentDataFrame & Chr(34))
 
         ElseIf rdoDispOutputWindow.Checked Then
-            'Setting head and tail commands to help in previewing the data with specified number of observations "n"
-            lblNumberofRows.Enabled = True
-            nudNumberRows.Enabled = True
-            grpDisplayFrom.Enabled = True
+            'remove the title parameter of the View command then setting head and tail functions for previewing the dataset in the output window.
+            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.RemoveParameter("title")
             If Not ucrReceiverView.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
                 If rdoTop.Checked Then
@@ -121,7 +126,4 @@ Public Class dlgView
         End If
     End Sub
 
-    Private Sub ucrReceiverView_SelctionChanged(sender As Object, e As EventArgs) Handles ucrReceiverView.SelectionChanged
-
-    End Sub
 End Class
