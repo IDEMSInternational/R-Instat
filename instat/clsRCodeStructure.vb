@@ -197,7 +197,7 @@ Public Class RCodeStructure
                 'MsgBox("Developer Error: some parameter has been added without specifying a name. We want all parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
                 bIncludeArgumentName = False
                 If iPosition = 0 Then
-                    strParameterName = "Left"
+                    strParameterName = "First"
                 Else
                     strParameterName = "Unnamed"
                 End If
