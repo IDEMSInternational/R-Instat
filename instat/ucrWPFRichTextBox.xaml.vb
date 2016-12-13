@@ -4,9 +4,7 @@ Imports System.IO
 Public Class ucrWPFRichTextBox
     Private Class NewWebBrowser
         'This class enables to keep some control over these NewWebbrowsers that are added while the software is running. 
-        'It enables to create subs that 
         Public WithEvents NewWebBrowser As Controls.WebBrowser
-
         Public Sub New()
             NewWebBrowser = New Controls.WebBrowser()
         End Sub
@@ -15,24 +13,24 @@ Public Class ucrWPFRichTextBox
         End Sub
     End Class
     Public Sub AppendText(color As Color, font As Font, text As String, Optional color2 As Color = Nothing, Optional font2 As Font = Nothing, Optional text2 As String = Nothing)
-        'Task: migrate the sub to the ucrWPFRichTextBox...
+        'Adds a block (paragraph) of text to the output window in the required font and color. Can add up to two "lines" of distinct text for now (e.g. one line comment other line RCommand). 
         Dim run1 As New Documents.Run(text)
         run1.FontFamily = New Media.FontFamily(font.FontFamily.Name)
         run1.Foreground = New Media.BrushConverter().ConvertFromString(color.Name)
-        Dim Paragraph As New Documents.Paragraph(run1)
+        Dim blkParagraph As New Documents.Paragraph(run1)
         If font2 IsNot Nothing AndAlso text2 IsNot Nothing AndAlso color2 <> Nothing Then 'Note: IsNot only works for reference types...
             Dim run2 As New Documents.Run(text2)
             run2.FontFamily = New Media.FontFamily(font2.FontFamily.Name)
             run2.Foreground = New Media.BrushConverter().ConvertFromString(color2.Name)
-            Paragraph.Inlines.Add(run2)
+            blkParagraph.Inlines.Add(run2)
         End If
-        rtbOutput.Document.Blocks.Add(Paragraph)
+        rtbOutput.Document.Blocks.Add(blkParagraph)
     End Sub
 
     Public Sub DisplayGraph(strImageLocation As String)
-        'Task: migrate the sub to the ucrWPFRichTextBox class ?
-        'TEST temporary
-        Dim conImage As Windows.Documents.BlockUIContainer
+        'Adds a graph to the output window.
+        Dim blkParagraph As Documents.Paragraph
+        Dim conImage As Windows.Documents.InlineUIContainer
         Dim UIEimage As New Windows.Controls.Image()
         Dim bimg As New Windows.Media.Imaging.BitmapImage()
         Dim thickness As New Windows.Thickness(1)
@@ -46,12 +44,13 @@ Public Class ucrWPFRichTextBox
         UIEimage.Source = bimg
         UIEimage.Stretch = Windows.Media.Stretch.Uniform
         UIEimage.StretchDirection = Windows.Controls.StretchDirection.DownOnly
-        conImage = New Windows.Documents.BlockUIContainer(UIEimage)
-        conImage.BorderThickness = thickness
-        conImage.BorderBrush = Windows.Media.Brushes.Black
-        conImage.Padding = thickness
-        rtbOutput.Document.Blocks.Add(conImage)
-        rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
+        conImage = New Windows.Documents.InlineUIContainer(UIEimage)
+        blkParagraph = New Documents.Paragraph(conImage)
+        blkParagraph.BorderThickness = thickness
+        blkParagraph.BorderBrush = Windows.Media.Brushes.Black
+        blkParagraph.Padding = thickness
+        rtbOutput.Document.Blocks.Add(blkParagraph)
+        'rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
 
         'TESTING TO BE REMOVED
         'Dim strStargazer As String = "<table style=" & Chr(34) & "text-align:center" & Chr(34) & "><tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>

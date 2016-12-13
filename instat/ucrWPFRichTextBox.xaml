@@ -7,12 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <RichTextBox x:Name="rtbOutput" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
+        <RichTextBox x:Name="rtbOutput" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsDocumentEnabled="True" ContextMenu="{x:Null}">
             <FlowDocument PagePadding="0">
                 <FlowDocument.Resources>
-                    <!-- This style is used to set the margins for all paragraphs in the FlowDocument to 0. -->
+                    <!-- This style is used to set the margins for all paragraphs in the FlowDocument to 0, and disable focus on paragraphs. -->
                     <Style TargetType="{x:Type Paragraph}">
                         <Setter Property="Margin" Value="0"/>
+                        <Setter Property = "Focusable" Value="False"/>
                     </Style>
                 </FlowDocument.Resources>
             </FlowDocument>
