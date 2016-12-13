@@ -212,3 +212,10 @@ output_for_CPT = function(data_name, lat_lon_data, long = TRUE, year_col, sst_co
   data.table::setnames(my_data, "Year", "STN")
   return(my_data)
 }
+
+yday_366 <- function(date) {
+  temp_doy <- yday(date)
+  temp_leap <- leap_year(date)
+  temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)] <- 1 + temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)]
+  return(temp_doy)
+}

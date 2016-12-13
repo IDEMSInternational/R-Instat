@@ -192,34 +192,30 @@ Public Class sdgPlots
             'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
             If rdoHorizontal.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
                 clsRFacetFunction.SetRCommand("facet_wrap")
-                clsTempOp.SetParameter(True, strValue:="")
-                clsTempOp.SetParameter(False, strValue:=strSingleFactor)
+                clsTempOp.AddParameter(iPosition:=0, strParameterValue:="")
+                clsTempOp.AddParameter(strParameterValue:=strSingleFactor)
                 clsRFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
                 SetFixRowColumnParameter()
                 'As there are only a left and a right parameter for clsTempOp, no need to specify a parameter name, the default "right" will be used.
                 'The boolean argument "false" is there to indicate we don't want quotes.
-
-
             ElseIf rdoVertical.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
                 clsRFacetFunction.SetRCommand("facet_wrap")
-                clsTempOp.SetParameter(True, strValue:="")
-                clsTempOp.SetParameter(False, strValue:=strSingleFactor)
+                clsTempOp.AddParameter(iPosition:=0, strParameterValue:="")
+                clsTempOp.AddParameter(strParameterValue:=strSingleFactor)
                 clsRFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
                 SetFixRowColumnParameter()
-
             Else
                 'Warning: could be refined a little...
                 RemoveWrapParameters()
                 clsRFacetFunction.SetRCommand("facet_grid")
-                clsTempOp.SetParameter(False, strValue:=".")
-                clsTempOp.SetParameter(True, strValue:=strSingleFactor)
-
+                clsTempOp.AddParameter(strParameterValue:=".")
+                clsTempOp.AddParameter(iPosition:=0, strParameterValue:=strSingleFactor)
                 If rdoHorizontal.Checked Then
-                    clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                    clsTempOp.SetParameter(True, strValue:=".")
+                    clsTempOp.AddParameter(strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                    clsTempOp.AddParameter(iPosition:=0, strParameterValue:=".")
                 ElseIf rdoVertical.Checked Then
-                    clsTempOp.SetParameter(True, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                    clsTempOp.SetParameter(False, strValue:=".")
+                    clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                    clsTempOp.AddParameter(strParameterValue:=".")
                 End If
             End If
             clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
@@ -228,11 +224,11 @@ Public Class sdgPlots
             clsRFacetFunction.SetRCommand("facet_grid")
             RemoveWrapParameters()
             If rdoHorizontal.Checked Then
-                clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                clsTempOp.SetParameter(True, strValue:=ucr2ndFactorReceiver.GetVariableNames(False))
+                clsTempOp.AddParameter(strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr2ndFactorReceiver.GetVariableNames(False))
             ElseIf rdoVertical.Checked Then
-                clsTempOp.SetParameter(True, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                clsTempOp.SetParameter(False, strValue:=ucr2ndFactorReceiver.GetVariableNames(False))
+                clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                clsTempOp.AddParameter(strParameterValue:=ucr2ndFactorReceiver.GetVariableNames(False))
             End If
             clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
         Else
