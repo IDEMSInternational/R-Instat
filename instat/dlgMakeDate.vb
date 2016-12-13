@@ -44,6 +44,9 @@ Public Class dlgMakeDate
         ucrInputComboBoxMonthTwo.SetItems({"365/366", "366"})
         ucrInputFormat.SetItems({"%Y-%m-%d", "%Y/%m/%d", "%d%m%Y"})
         ucrInputOrigin.SetItems({"30-12-1899 (Excel)", "01-03-1600 (Gregorian)"})
+        ucrInputDayOption.SetItems({"%d"})
+        ucrInputMonthOption.SetItems({"%m", "%b", "%B"})
+        ucrInputYearOption.SetItems({"%Y", "%y"})
         ucrReceiverForDate.Selector = ucrSelectorMakeDate
         ucrReceiverYearTwo.Selector = ucrSelectorMakeDate
         ucrReceiverDayTwo.Selector = ucrSelectorMakeDate
@@ -65,6 +68,9 @@ Public Class dlgMakeDate
         ucrInputNewColumnName.Reset()
         ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
+        ucrInputYearOption.SetName("%Y")
+        ucrInputMonthOption.SetName("%m")
+        ucrInputDayOption.SetName("%d")
         ucrInputFormat.SetName("%d/%m/%Y")
         ucrInputSeparator.SetName("/")
         ucrInputYear.SetName("%Y (4 digits)")
@@ -78,15 +84,10 @@ Public Class dlgMakeDate
         rdoSingleColumn.Checked = True
         rdoSpecifyFormat.Checked = False
         rdoDefaultFormat.Checked = True
-        chkTwoDigitYearThree.Checked = False
         chkTwoDigitYearTwo.Checked = False
-        lblCutOffThree.Visible = False
         lblCutOffTwo.Visible = False
-        chkTwoDigitYearThree.Visible = True
         chkTwoDigitYearTwo.Visible = True
-        nudCutOffThree.Visible = False
         nudCutOffTwo.Visible = False
-        nudCutOffThree.Value = 0
         nudCutOffTwo.Value = 0
         chkMore.Checked = False
         chkMore.Visible = True
@@ -169,7 +170,7 @@ Public Class dlgMakeDate
         TestOKEnabled()
     End Sub
 
-    ' When the three radio buttons have a change occur
+    ' When the three radio buttons are checked or unchecked
     Private Sub rdoSingleColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSingleColumn.CheckedChanged, rdoYearandDayofYear.CheckedChanged, rdoYearMonthDay.CheckedChanged, rdoSpecifyOrigin.CheckedChanged, rdoSpecifyFormat.CheckedChanged, rdoDefaultFormat.CheckedChanged
         Formats()
         If rdoSpecifyOrigin.Checked Then
@@ -180,7 +181,7 @@ Public Class dlgMakeDate
         TestOKEnabled()
     End Sub
 
-    Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged, chkTwoDigitYearThree.CheckedChanged, chkTwoDigitYearTwo.CheckedChanged
+    Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged, chkTwoDigitYearTwo.CheckedChanged
         Formats()
         If chkTwoDigitYearTwo.Checked Then
             lblCutOffTwo.Visible = True
@@ -189,16 +190,9 @@ Public Class dlgMakeDate
             lblCutOffTwo.Visible = False
             nudCutOffTwo.Visible = False
         End If
-        If chkTwoDigitYearThree.Checked Then
-            lblCutOffThree.Visible = True
-            nudCutOffThree.Visible = True
-        Else
-            lblCutOffThree.Visible = False
-            nudCutOffThree.Visible = False
-        End If
     End Sub
 
-    Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged
+    Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged, ucrInputDayOption.NameChanged, ucrInputMonthOption.NameChanged, ucrInputYearOption.NameChanged
         Formats()
     End Sub
 
@@ -211,6 +205,9 @@ Public Class dlgMakeDate
         ' If Single Column is checked
         If rdoSingleColumn.Checked Then
             ' Sorting Display Options for rdoSingleColumn
+            ucrBase.clsRsyntax.RemoveParameter("month_format")
+            ucrBase.clsRsyntax.RemoveParameter("day_format")
+            ucrBase.clsRsyntax.RemoveParameter("day_format")
             ucrReceiverForDate.SetMeAsReceiver()
             grpSingleColumn.Visible = True
             grpTwoColumns.Visible = False
@@ -221,6 +218,12 @@ Public Class dlgMakeDate
             Else
                 grpFormatField.Visible = False
             End If
+            If Not ucrReceiverForDate.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("x")
+            End If
+
             If rdoSpecifyOrigin.Checked Then
                 ucrInputFormat.Visible = False
                 ucrInputOrigin.Visible = True
@@ -231,10 +234,12 @@ Public Class dlgMakeDate
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("origin")
                 End If
+
             ElseIf rdoSpecifyFormat.Checked Then
                 ucrBase.clsRsyntax.RemoveParameter("origin")
                 ucrInputFormat.Visible = True
                 ucrInputOrigin.Visible = False
+
                 If Not ucrInputFormat.IsEmpty Then
                     ucrBase.clsRsyntax.AddParameter("format", Chr(34) & ucrInputFormat.GetText & Chr(34))
                     ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
@@ -288,6 +293,9 @@ Public Class dlgMakeDate
             End If
             ucrBase.clsRsyntax.RemoveParameter("month")
             ucrBase.clsRsyntax.RemoveParameter("day")
+            ucrBase.clsRsyntax.RemoveParameter("month_format")
+            ucrBase.clsRsyntax.RemoveParameter("day_format")
+            ucrBase.clsRsyntax.RemoveParameter("day_format")
 
             'If Year Date Month is selected
         Else
@@ -301,6 +309,9 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.RemoveParameter("doy")
             ucrBase.clsRsyntax.RemoveParameter("year")
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
+            ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & ucrInputMonthOption.GetText & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("day_format", Chr(34) & ucrInputDayOption.GetText & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & ucrInputYearOption.GetText & Chr(34))
             If Not ucrReceiverYearThree.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearThree.GetVariableNames())
             Else
@@ -323,6 +334,6 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrInputNewColumnName_ContentsChanged() Handles ucrInputNewColumnName.ContentsChanged
-        TestOKEnabled
+        TestOKEnabled()
     End Sub
 End Class
