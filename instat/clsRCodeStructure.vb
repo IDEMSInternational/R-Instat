@@ -196,7 +196,11 @@ Public Class RCodeStructure
             If strParameterName = "" Then
                 'MsgBox("Developer Error: some parameter has been added without specifying a name. We want all parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
                 bIncludeArgumentName = False
-                strParameterName = "Parameter." & iNumberOfAddedParameters
+                If iPosition = 0 Then
+                    strParameterName = "Left"
+                Else
+                    strParameterName = "Unnamed"
+                End If
             End If
             clsParam.SetArgumentName(strParameterName)
             If Not strParameterValue = "" Then
