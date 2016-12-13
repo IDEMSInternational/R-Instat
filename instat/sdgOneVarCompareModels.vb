@@ -66,8 +66,8 @@ Public Class sdgOneVarCompareModels
         If chkSaveChi.Checked Then
             ucrDisplayChiData.Visible = True
             clsOperatorforTable.SetOperation("$")
-            clsOperatorforTable.SetParameter(True, clsRFunc:=clsModel)
-            clsOperatorforTable.SetParameter(False, strValue:="chisqtable")
+            clsOperatorforTable.AddParameter(iPosition:=0, clsRFunctionParameter:=clsModel)
+            clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
             clsRAsDataFrame.SetRCommand("as.data.frame")
             clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
         Else
@@ -133,8 +133,8 @@ Public Class sdgOneVarCompareModels
     Public Sub DisplayChiBreaks()
         If chkInputBreakpoints.Checked Then
             clsOperatorForBreaks.SetOperation("$")
-            clsOperatorForBreaks.SetParameter(True, clsRFunc:=clsModel)
-            clsOperatorForBreaks.SetParameter(False, strValue:="chisqbreaks")
+            clsOperatorForBreaks.AddParameter(iPosition:=0, clsRFunctionParameter:=clsModel)
+            clsOperatorForBreaks.AddParameter(strParameterValue:="chisqbreaks")
         End If
     End Sub
 

@@ -24,7 +24,8 @@ Public Class BlockReader
     '[17:20:11] François Renaud: aiaa, yes, that's true. Ok, I m thinking, maybe the easiest is to have different layers, runscript blocks and dialogue blocks. Output's can be padded with another type of symbol as vbcrlf or we could even imagine to have signatures provided by each dialogue... this would facilitate the repopulation of the dialogue when clicking on a block.
 
     Private strComment As String 'The comment that is part of the block. 'Warning: only one comment per bloc for now... will need to go over this when secondary R-commands are taken in the same block.
-    Private lstRCommands As List(Of RParameter) 'The list of RParameters that store the information about the RCommands. Still contains bIsFunction and bIsOperator.
+    Private lstRCommands As List(Of RParameter) 'The list of RParameters that store the information about the RCommands.
+    'The two previous fields are accessed as properties (see below)
     Public Property Comment() As String
         Get
             Return strComment
@@ -49,6 +50,7 @@ Public Class BlockReader
     '    strBlockText = strTempBlockText
     'End Sub
     Public Sub ReadBlock(strBlockText As String)
+        'This sub reads the block of text coming from the output window. 'need more commenting
         Dim lstLines As String()
         lstLines = strBlockText.Split(vbCrLf)
         If lstRCommands Is Nothing Then
@@ -66,22 +68,22 @@ Public Class BlockReader
     End Sub
 
     Public Function ReadRCommand(strRCommand As String) As RParameter
+        'ReadRCommand is called to transform a single RCommand into an RParameter that would produce the corresponding script. Some data in the RParameter will be recovered in the ReadBlock, for instance concerning the AssignTo methods...
         Dim clsReturnRParameter As New RParameter
-        Dim chrSeparator As Char
-        Dim bFirstOpParam As Boolean = False
-        Dim lstAssignToCheck As New List(Of String)
-        Dim lstParameterStrings As List(Of String)
-        Dim strAssignTo As String
-        Dim lstToDeleteIndices As New List(Of Integer)
+        Dim chrSeparator As Char 'This is the symbol that separates the parameters in the strRCommand ( "," in the function case and the operator in the operator case).
+        Dim lstAssignToCheck As New List(Of String) 'This lst is used to save the output of SplitSmart(strRCommand, "<-") checking whether the main RCommand is assigned to something.
+        Dim lstParameterStrings As List(Of String) 'This is used to store each string describing each parameter of the main RCommand. Note it is impossible to decide the Position value of these parameters at this stage. 'Task, maybe use information on the dialogue once it has been linked to it ?
+        Dim strAssignTo As String 'Storing the value of the AssignTo field in the RParameter. Might be "".
 
-        If strRCommand Is Nothing Then
+        If String.IsNullOrEmpty(strRCommand) Then
+            'message
             Return Nothing
         End If
 
-        'First the string is formatted, removing spaces, if string is (...), eleminate external brackets.
+        'First the string is formatted, removing spaces, if string is (...), eleminate external brackets...
         RemoveExtremitySpaces(strRCommand)
         RemoveExtremityBrackets(strRCommand)
-        'Also the command is split in case there is something being assigned. Unnecessary spaces are eliminated.
+        'Also the command is split in case there is something being assigned. Spaces are eliminated again.
         lstAssignToCheck = SplitSmart(strRCommand, "<-")
         If lstAssignToCheck.Count = 2 Then
             strAssignTo = lstAssignToCheck(0)
@@ -92,36 +94,37 @@ Public Class BlockReader
         Else
             'message
         End If
+        'reFormatting of strRCommand will be done in subsequent functions.
 
-
-        'This identifies if the RCommand is an RFunction or ROperator, set's the RCommand, edits strRCommand if RFunction case, and returns the relevant separator for arguments
+        'This identifies if the RCommand is an RFunction or ROperator or just a string value. It will then set the argument of clsReturnRParameter, edit strRCommand for it to be ready to extract the RParameters to add to the Argument of clsReturnRParameter. Finally it returns the relevant separator for arguments.
         chrSeparator = IdentifyCommand(strRCommand, clsReturnRParameter)
-        'Each argument is isolated adn then all of them are assimilated by the RCodeStructure.
-        lstParameterStrings = SplitSmart(strRCommand, chrSeparator)
-        For Each strString As String In lstParameterStrings
-            'AssimilateParameter(clsReturnRParameter.clsArgument) 'for when RParameters has merely a clsCodeStructure as field. Would then delete the following If statement
-            If clsReturnRParameter.bIsFunction Then
-                AssimilateParameter(strString, clsReturnRParameter.clsArgumentFunction)
-            Else
-                AssimilateParameter(strString, clsReturnRParameter.clsArgumentOperator)
+        If chrSeparator <> "" Then 'If the chrSeparator is "", then we are in the string case, there should be no strAssignTo and clsReturnRParameter is ready to be returned.
+            'Each argument is isolated and then all of them are assimilated by the RCodeStructure.
+            lstParameterStrings = SplitSmart(strRCommand, chrSeparator)
+            For Each strString As String In lstParameterStrings
+                'AssimilateParameter(strString, clsReturnRParameter.clsArgument) 'for when RParameters has merely a clsCodeStructure as field.
+            Next
+            'Finally SetAssignTo is called if needed, done here to have clsArgument nonempty.
+            If Not String.IsNullOrEmpty(strAssignTo) Then
+                'clsReturnRParameter.clsArgument.SetAssignTo(strAssignTo) 'need to use ReadBlock to fuly SetAssignTo as it requires reading different RCommands and use the ToScript reverse to deduce settings of SetAssignTo. This at least enables to store the relevant value of AssignTo.
             End If
-        Next
-        If strAssignTo IsNot Nothing Then
-            'clsReturnRParameter.clsArgument.SetAssignTo(strAssignTo) 'need to use ReadBlock to fuly SetAssignTo as it requires reading different RCommands and use the ToScript reverse to deduce settings of SetAssignTo. This at least enables to store the relevant value of AssignTo.
         End If
         Return clsReturnRParameter
     End Function
 
     Private Sub RemoveExtremitySpaces(ByRef strToTrim As String)
+        'Used to remove spaces at the beginning and at the end of the string.
         While strToTrim.StartsWith(" ")
             strToTrim.Remove(0, 1)
         End While
         While strToTrim.EndsWith(" ")
             strToTrim.Remove(strToTrim.Length - 1)
         End While
+        'Could use Trim() but how do I make sure I don't lose the linking ?
     End Sub
 
     Private Sub RemoveExtremityBrackets(ByRef strToTrim As String)
+        'Used to eliminate matching brackets around a string.
         While (strToTrim.StartsWith("(") AndAlso (FindMatchingBracket(strToTrim, 0) = strToTrim.Length - 1))
             strToTrim.Remove(0, 1)
             strToTrim.Remove(strToTrim.Length - 1)
@@ -129,16 +132,24 @@ Public Class BlockReader
     End Sub
 
     Private Function SplitSmart(strToSplit As String, strSeparator As String) As List(Of String)
-        'This function takes a string containing an RCommand, and a separator. It then acts as the function Split, but ignoring instances of the separator that occur within closed brackets.
+        'This function takes a string containing an RCommand, and a separator. It then acts as the function Split, but ignoring instances of the separator that occur within closed brackets or inbetween two instances of Chr(34).
         Dim strRead As String
         Dim lstIndices As New List(Of Integer)
         Dim lstReturn As New List(Of String)
 
-        'Getting the list of indices at which the separator starts, skipping potential occurences of the separator inside a closed bracket.
+        'Getting the list of indices at which the separator starts, skipping potential occurences of the separator inside a closed bracket or inbetween two instances of Chr(34).
         For iIndex As Integer = 0 To strToSplit.Count - strSeparator.Length
             strRead = strToSplit.Substring(iIndex, iIndex + strSeparator.Length - 1)
             If strRead.First = "(" Then
                 iIndex = FindMatchingBracket(strToSplit, iIndex)
+                If iIndex <> -1 Then
+                    Continue For
+                Else
+                    'message
+                    Exit For
+                End If
+            ElseIf strRead.First = Chr(34) Then
+                iIndex = FindNextChr34(strToSplit, iIndex)
                 If iIndex <> -1 Then
                     Continue For
                 Else
@@ -175,16 +186,35 @@ Public Class BlockReader
 
         Return lstReturn
     End Function
+
+    Private Function FindNextChr34(strToRead As String, iIndex As Integer) As Integer
+        Dim i As Integer
+        i = strToRead.Substring(iIndex + 1).IndexOf(Chr(34))
+        If i = -1 Then
+            Return -1
+        Else
+            Return iIndex + 1 + i 'Gets the index of the next occurence of " in the string. We want to continue reading from the character there after which will be the case as we do continue while. Note this is at most the last index of the string.
+        End If
+    End Function
     Private Function FindMatchingBracket(strToRead As String, iIndex As Integer) As Integer
         'This function takes as input a string and the index of an open bracket. It returns the index of the matching bracket if it exists, otherwise -1.
         Dim iNumberOfUnclosedBrackets As Integer
         Dim chrSymbol As Char
 
+
         iNumberOfUnclosedBrackets = 1
         While (iNumberOfUnclosedBrackets > 0 AndAlso iIndex + 1 < strToRead.Count)
             iIndex = iIndex + 1
             chrSymbol = strToRead(iIndex)
-            If chrSymbol = "(" Then
+            If chrSymbol = Chr(34) Then 'If the string contains a string value, the content of that string value should be ignored.
+                iIndex = FindNextChr34(strToRead, iIndex)
+                If iIndex = -1 Then
+                    'message
+                    Return iIndex
+                Else
+                    Continue While
+                End If
+            ElseIf chrSymbol = "(" Then
                 iNumberOfUnclosedBrackets = iNumberOfUnclosedBrackets + 1
             ElseIf chrSymbol = ")" Then
                 iNumberOfUnclosedBrackets = iNumberOfUnclosedBrackets - 1
@@ -198,46 +228,82 @@ Public Class BlockReader
     End Function
 
     Private Function IdentifyCommand(ByRef strRCommand As String, ByRef clsRParameter As RParameter) As Char
-        Dim clsRFunction As New RFunction
-        Dim clsROperator As New ROperator
-        Dim iIndexOfIdentifier As Integer
-        Dim chrCandidateOperator As Char
-        Dim iIndexOfMatchingBracket As Integer
-        Dim lstListOfIdentifiers As Char() = {"(", "+", ":", "-", "*", "/", "|"} 'Might need to deal with "$" one day...
+        'This identifies if the RCommand is an RFunction or ROperator or just a string value. It will then set the argument of clsReturnRParameter, edit strRCommand for it to be ready to extract the RParameters to add to the Argument of clsReturnRParameter. Finally it returns the relevant separator for arguments.
 
-        'First make sure string is in right format.
+        Dim clsRFunction As New RFunction 'potential RCodeStructures
+        Dim clsROperator As New ROperator
+        Dim strRString As String 'potential string value.
+        Dim iIndexOfIdentifier As Integer 'Index of first instance of one of the key symbols listed below.
+        Dim iIndexOfMatchingBracket As Integer 'used in case the "chrIdentifier" is "(".
+        Dim lstListOfIdentifiers As Char() = {"(", "+", ":", "-", "*", "/", "|", Chr(34)} 'Might need to deal with "$" one day...
+        Dim i As Integer = 1 ' used to read through string.
+        Dim iIndexOfNextChr34 As Integer 'used when Chr(34) is read.
+
+        'First make sure the string is in right format. 'Warning/question: in the string case could that be a problem ?
         RemoveExtremitySpaces(strRCommand)
         RemoveExtremityBrackets(strRCommand)
         RemoveExtremitySpaces(strRCommand)
 
         iIndexOfIdentifier = strRCommand.IndexOfAny(lstListOfIdentifiers)
-        If iIndexOfIdentifier <> -1 Then
-            If strRCommand(iIndexOfIdentifier) = "(" Then
+        While iIndexOfIdentifier <> -1 OrElse iIndexOfIdentifier < strRCommand.Length
+            If strRCommand(iIndexOfIdentifier) = Chr(34) Then
+                iIndexOfNextChr34 = FindNextChr34(strRCommand, iIndexOfIdentifier)
+                If iIndexOfNextChr34 = -1 Then
+                    'message
+                ElseIf iIndexOfNextChr34 = strRCommand.Length - 1 Then
+                End If
+                If strRCommand.Substring(iIndexOfNextChr34 + 1).IndexOfAny(lstListOfIdentifiers) <> -1 Then
+                    iIndexOfIdentifier = iIndexOfNextChr34 + 1 + strRCommand.Substring(iIndexOfNextChr34 + 1).IndexOfAny(lstListOfIdentifiers)
+                Else
+                    iIndexOfIdentifier = -1
+                End If
+                Continue While
+            ElseIf strRCommand(iIndexOfIdentifier) = "(" Then 'potentially means we are in the function case if the matching bracket is at the end. Note that strRCommand = "(...)" has been evacuated. Similarly blank spaces at extremities have been removed.
                 iIndexOfMatchingBracket = FindMatchingBracket(strRCommand, iIndexOfIdentifier)
-                chrCandidateOperator = strRCommand(iIndexOfIdentifier + 1)
+
                 If iIndexOfMatchingBracket = strRCommand.Length - 1 Then
                     clsRFunction.SetRCommand(strRCommand.Substring(0, iIndexOfIdentifier - 1))
                     'The whole strRCommand is replaced by the string giving the parameters of the RFunction.
                     strRCommand = strRCommand.Substring(iIndexOfIdentifier + 1, strRCommand.Length - 2)
                     RemoveExtremitySpaces(strRCommand)
-                    clsRParameter.SetArgumentFunction(clsRFunction) 'later SetArgument(clsRFunction, bIsFunction = TRUE) or something like that.
+                    clsRParameter.SetArgument(clsRFunction)
                     Return ","
-                ElseIf Not lstListOfIdentifiers.Contains(chrCandidateOperator) Then
-                    'message
+                Else 'If the bracket closed before the end of the string, this means that the next symbol that will be found is supposed to be the operator. 
+                    If strRCommand.Substring(iIndexOfMatchingBracket + 1).IndexOfAny(lstListOfIdentifiers) <> -1 Then
+                        iIndexOfIdentifier = iIndexOfMatchingBracket + 1 + strRCommand.Substring(iIndexOfMatchingBracket + 1).IndexOfAny(lstListOfIdentifiers)
+                    Else
+                        'message, something might be wrong here.
+                        iIndexOfIdentifier = -1
+                    End If
+                    Continue While
                 End If
-            Else
-                chrCandidateOperator = strRCommand(iIndexOfIdentifier)
+            Else 'If it was not " or (, then it is an operator:
+                clsROperator.SetOperation(strRCommand(iIndexOfIdentifier))
+                clsRParameter.SetArgument(clsROperator) 'later SetArgument(clsRFunction)
+                Return strRCommand(iIndexOfIdentifier)
             End If
-            clsROperator.SetOperation(chrCandidateOperator)
-            clsRParameter.SetArgumentOperator(clsROperator) 'later SetArgument(clsRFunction, bIsOperator = TRUE) or something like that.
-            Return chrCandidateOperator
-        Else
-            'message
-            Return Nothing
-        End If
-    End Function
-    Private Sub AssimilateParameter(strRParameter As String, ByRef clsMotherCodeStructure As RCodeStructure)
+        End While
 
+        'In case the while was exited, the remaining possibility is for the RCommand to be a string value. Then instances of " need to be replaced by Chr(34).
+        strRString = strRCommand
+        Replace(strRString, Chr(34), "Chr(34)")
+        strRCommand = "" 'No parameters...
+        clsRParameter.SetArgumentValue(strRString)
+        Return ""
+    End Function
+
+    Private Sub Replace(ByRef strToChange As String, chrToReplace As Char, strToInsert As String)
+        Dim iIndex As Integer
+        iIndex = strToChange.IndexOf(chrToReplace)
+        While iIndex <> -1
+            strToChange.Remove(iIndex)
+            strToChange.Insert(iIndex, strToInsert)
+            iIndex = strToChange.IndexOf(chrToReplace)
+        End While
+    End Sub
+
+    Private Sub AssimilateParameter(strRParameter As String, ByRef clsMotherCodeStructure As RCodeStructure)
+        'This method is used to add a parameter stored in a string to a given clsRCodeStructure.
         Dim lstRPNameAndValue As List(Of String)
         Dim clsNewRParameter As RParameter
 
