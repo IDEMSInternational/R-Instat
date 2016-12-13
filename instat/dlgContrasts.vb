@@ -80,9 +80,11 @@ Public Class dlgContrasts
 
     Private Sub ucrReceiverForContrasts_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForContrasts.SelectionChanged
         If Not ucrReceiverForContrasts.IsEmpty Then
+            grdLayoutForContrasts.Enabled = True
             ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames)
         Else
             grdCurrSheet.Reset()
+            grdLayoutForContrasts.Enabled = False
             ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
         TestOKEnabled()
