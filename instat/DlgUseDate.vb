@@ -151,11 +151,10 @@ Public Class dlgUseDate
 
     End Sub
 
-    Private Sub chkYear_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDecade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonthValue.CheckedChanged, chkPentade.CheckedChanged, chkWeekDayVal.CheckedChanged, chkWeek.CheckedChanged, chkMonthNam.CheckedChanged, chkAbbrMonthName.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkWeekdayName.CheckedChanged
+    Private Sub grpDateFunctions_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDecade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonthValue.CheckedChanged, chkPentade.CheckedChanged, chkWeekDayVal.CheckedChanged, chkWeek.CheckedChanged, chkMonthNam.CheckedChanged, chkAbbrMonthName.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkWeekdayName.CheckedChanged
         SetParameters()
         TestOKEnabled()
     End Sub
-
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
