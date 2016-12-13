@@ -16,7 +16,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
-    Public clsRConvert, clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart As New RFunction
+    Public clsRConvert, clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart As New RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Public bfirstload As Boolean = True
 
@@ -170,6 +170,8 @@ Public Class dlgOneVarFitModel
             Else
                 If rdoMeanWilcox.Checked Then
                     SetWilcoxTest()
+                ElseIf rdoVarSign.Checked Then
+                    SetNonSignTest()
                 End If
             End If
         End If
@@ -236,6 +238,14 @@ Public Class dlgOneVarFitModel
         clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsRWilcoxTest.AddParameter("conf.level", nudCI.Value.ToString)
         clsRWilcoxTest.AddParameter("mu", nudHyp.Value.ToString)
+    End Sub
+
+    Private Sub SetNonSignTest()
+        clsRNonSignTest.SetRCommand("signmedian.test:: signmedian.test")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsRNonSignTest)
+        clsRNonSignTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsRNonSignTest.AddParameter("conf.level", nudCI.Value.ToString)
+        clsRNonSignTest.AddParameter("mu", nudHyp.Value.ToString)
     End Sub
 
     Private Sub SetPoissonTest()
