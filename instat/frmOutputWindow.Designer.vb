@@ -27,6 +27,7 @@ Partial Class frmOutputWindow
         Me.ucrRichTextBox = New instat.ucrWPFRichTextBox()
         Me.mnuContextRTB = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyRTB = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopyImageRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextRTB.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -43,15 +44,22 @@ Partial Class frmOutputWindow
         '
         'mnuContextRTB
         '
-        Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB})
+        Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB})
         Me.mnuContextRTB.Name = "mnuContextRTB"
-        Me.mnuContextRTB.Size = New System.Drawing.Size(153, 48)
+        Me.mnuContextRTB.Size = New System.Drawing.Size(151, 48)
         '
         'CopyRTB
         '
         Me.CopyRTB.Name = "CopyRTB"
-        Me.CopyRTB.Size = New System.Drawing.Size(152, 22)
-        Me.CopyRTB.Text = "Copy"
+        Me.CopyRTB.Size = New System.Drawing.Size(150, 22)
+        Me.CopyRTB.Text = "Copy RichText"
+        '
+        'CopyImageRTB
+        '
+        Me.CopyImageRTB.Enabled = False
+        Me.CopyImageRTB.Name = "CopyImageRTB"
+        Me.CopyImageRTB.Size = New System.Drawing.Size(150, 22)
+        Me.CopyImageRTB.Text = "Copy Image"
         '
         'frmOutputWindow
         '
@@ -71,4 +79,5 @@ Partial Class frmOutputWindow
     Friend ucrRichTextBox As ucrWPFRichTextBox
     Friend WithEvents mnuContextRTB As ContextMenuStrip
     Friend WithEvents CopyRTB As ToolStripMenuItem
+    Friend WithEvents CopyImageRTB As ToolStripMenuItem
 End Class

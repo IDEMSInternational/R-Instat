@@ -990,13 +990,14 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click
+        'Saves the content of the output window in RichTextFormat.
         Using dlgSaveFile As New SaveFileDialog
             dlgSaveFile.Title = "Save Output Window"
             dlgSaveFile.Filter = "Rich Text Format (*.rtf)|*.rtf"
             dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    ' Send file name string specifying the location to save the XAML in.
+                    'Send file name string specifying the location to save the XAML in.
                     frmOutputWindow.ucrRichTextBox.SaveXamlPackage(dlgSaveFile.FileName)
                 Catch
                     MsgBox("Could not save the output window." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
