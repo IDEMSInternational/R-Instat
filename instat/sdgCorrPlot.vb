@@ -22,7 +22,6 @@ Public Class sdgCorrPlot
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
@@ -67,7 +66,7 @@ Public Class sdgCorrPlot
         cmbgeom.SelectedItem = "tile"
         chkColour.Checked = False
         ucrReceiveFactor.Selector = ucrSelectFactor
-        ucrReceiveFactor.SetDataType("-factor")
+        ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
         CorrOptions()
     End Sub
