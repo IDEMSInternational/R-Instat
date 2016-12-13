@@ -114,12 +114,12 @@ Public Class ucrWPFRichTextBox
     End Sub
 
     ' Save XAML in RichTextBox to a file specified by strFileName
-    Public Sub SaveXamlPackage(ByVal strFileName As String)
+    Public Sub SaveRtf(ByVal strFileName As String)
         Dim range As Documents.TextRange
         Dim fStream As FileStream
         range = New Documents.TextRange(rtbOutput.Document.ContentStart, rtbOutput.Document.ContentEnd)
         fStream = New FileStream(strFileName, FileMode.Create)
-        range.Save(fStream, DataFormats.XamlPackage)
+        range.Save(fStream, DataFormats.Rtf)
         fStream.Close()
     End Sub
 

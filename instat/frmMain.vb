@@ -997,8 +997,8 @@ Public Class frmMain
             dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    'Send file name string specifying the location to save the XAML in.
-                    frmOutputWindow.ucrRichTextBox.SaveXamlPackage(dlgSaveFile.FileName)
+                    'Send file name string specifying the location to save the rtf in.
+                    frmOutputWindow.ucrRichTextBox.SaveRtf(dlgSaveFile.FileName)
                 Catch
                     MsgBox("Could not save the output window." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
