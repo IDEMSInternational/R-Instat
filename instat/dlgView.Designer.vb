@@ -32,7 +32,7 @@ Partial Class dlgView
         Me.rdoDispSepOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoDispOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
-        Me.ucrSelctorForView = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpDisplayFrom.SuspendLayout()
         CType(Me.nudNumberRows, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -145,15 +145,15 @@ Partial Class dlgView
         Me.ucrReceiverView.Size = New System.Drawing.Size(120, 86)
         Me.ucrReceiverView.TabIndex = 2
         '
-        'ucrSelctorForView
+        'ucrSelectorForView
         '
-        Me.ucrSelctorForView.bShowHiddenColumns = False
-        Me.ucrSelctorForView.bUseCurrentFilter = True
-        Me.ucrSelctorForView.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelctorForView.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelctorForView.Name = "ucrSelctorForView"
-        Me.ucrSelctorForView.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelctorForView.TabIndex = 0
+        Me.ucrSelectorForView.bShowHiddenColumns = False
+        Me.ucrSelectorForView.bUseCurrentFilter = True
+        Me.ucrSelectorForView.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForView.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForView.Name = "ucrSelectorForView"
+        Me.ucrSelectorForView.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForView.TabIndex = 0
         '
         'ucrBase
         '
@@ -172,7 +172,7 @@ Partial Class dlgView
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.nudNumberRows)
         Me.Controls.Add(Me.ucrReceiverView)
-        Me.Controls.Add(Me.ucrSelctorForView)
+        Me.Controls.Add(Me.ucrSelectorForView)
         Me.Controls.Add(Me.grpDisplayFrom)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -195,7 +195,7 @@ Partial Class dlgView
     Friend WithEvents grpDisplayFrom As GroupBox
     Friend WithEvents rdoBottom As RadioButton
     Friend WithEvents rdoTop As RadioButton
-    Friend WithEvents ucrSelctorForView As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorForView As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverView As ucrReceiverMultiple
     Friend WithEvents lblSelected As Label
     Friend WithEvents nudNumberRows As NumericUpDown

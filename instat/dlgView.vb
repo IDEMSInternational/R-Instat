@@ -36,8 +36,8 @@ Public Class dlgView
         Else
             nudNumberRows.Value = nudNumberRows.Maximum
         End If
-        ucrSelctorForView.Reset()
-        ucrSelctorForView.Focus()
+        ucrSelectorForView.Reset()
+        ucrSelectorForView.Focus()
         rdoTop.Checked = True
         ' By default:Display of the dataset is on a separate window. See SetCommands() for details.
         rdoDispSepOutputWindow.Checked = True
@@ -45,8 +45,9 @@ Public Class dlgView
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverView.Selector = ucrSelctorForView
+        ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
+        DataFrameLength()
         ucrBase.iHelpTopicID = 32
         clsHead.SetRCommand("head")
         clsTail.SetRCommand("tail")
@@ -64,10 +65,9 @@ Public Class dlgView
 
     Private Sub grpDisplayFrom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
         SetCommands()
-        TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverView_SelctionChanged(ender As Object, e As EventArgs) Handles ucrReceiverView.SelectionChanged
+    Private Sub ucrReceiverView_SelctionChanged(sender As Object, e As EventArgs) Handles ucrReceiverView.SelectionChanged
         SetCommands()
         TestOKEnabled()
     End Sub
@@ -82,9 +82,12 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelctorForView.DataFrameChanged
-        nudNumberRows.Maximum = ucrSelctorForView.ucrAvailableDataFrames.iDataFrameLength
-        TestOKEnabled()
+    Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
+        DataFrameLength()
+    End Sub
+
+    Private Sub DataFrameLength()
+        nudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
     Private Sub grpDisplay_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDispOutputWindow.CheckedChanged, rdoDispSepOutputWindow.CheckedChanged
@@ -106,7 +109,7 @@ Public Class dlgView
                 clsHead.AddParameter("n", nudNumberRows.Value)
                 ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsHead, bIncludeArgumentName:=False)
             End If
-            ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelctorForView.strCurrentDataFrame & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelectorForView.strCurrentDataFrame & Chr(34))
 
         ElseIf rdoDispOutputWindow.Checked Then
             'remove the title parameter of the View command then setting head and tail functions for previewing the dataset in the output window.
