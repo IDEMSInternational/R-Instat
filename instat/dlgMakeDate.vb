@@ -45,8 +45,8 @@ Public Class dlgMakeDate
         ucrInputFormat.SetItems({"%Y-%m-%d", "%Y/%m/%d", "%d%m%Y"})
         ucrInputOrigin.SetItems({"30-12-1899 (Excel)", "01-03-1600 (Gregorian)"})
         ucrInputDayOption.SetItems({"%d"})
-        ucrInputMonthOption.SetItems({"%m", "%b", "B"})
-        ucrInputYearOption.SetItems({"%Y", "y"})
+        ucrInputMonthOption.SetItems({"%m", "%b", "%B"})
+        ucrInputYearOption.SetItems({"%Y", "%y"})
         ucrReceiverForDate.Selector = ucrSeclectorMakeDate
         ucrReceiverYearTwo.Selector = ucrSeclectorMakeDate
         ucrReceiverDayTwo.Selector = ucrSeclectorMakeDate
