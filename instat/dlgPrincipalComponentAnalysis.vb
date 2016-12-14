@@ -35,7 +35,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBasePCA.clsRsyntax.SetFunction("PCA")
         ucrBasePCA.clsRsyntax.iCallType = 0
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
-        ucrReceiverMultiplePCA.SetDataType("numeric") ' this isn't working
+        ucrReceiverMultiplePCA.SetIncludedDataTypes({"numeric"})
         ucrResultName.SetDefaultTypeAsModel()
         ucrResultName.SetItemsTypeAsModels()
         ucrResultName.SetValidationTypeAsRVariable()
