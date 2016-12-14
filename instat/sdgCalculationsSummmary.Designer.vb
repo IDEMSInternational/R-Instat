@@ -22,27 +22,31 @@ Partial Class sdgCalculationsSummmary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
+        Me.ucrBaseSummmaryCalcSubdialog = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
-        'UcrButtonsSubdialogue1
+        'ucrBaseSummmaryCalcSubdialog
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(13, 219)
-        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
-        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
-        Me.UcrButtonsSubdialogue1.TabIndex = 0
+        Me.ucrBaseSummmaryCalcSubdialog.Location = New System.Drawing.Point(13, 219)
+        Me.ucrBaseSummmaryCalcSubdialog.Name = "ucrBaseSummmaryCalcSubdialog"
+        Me.ucrBaseSummmaryCalcSubdialog.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSummmaryCalcSubdialog.TabIndex = 0
         '
         'sdgCalculationsSummmary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(358, 261)
-        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.Controls.Add(Me.ucrBaseSummmaryCalcSubdialog)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgCalculationsSummmary"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Summary Calculations"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
+    Friend WithEvents ucrBaseSummmaryCalcSubdialog As ucrButtonsSubdialogue
 End Class
