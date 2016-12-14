@@ -42,6 +42,7 @@ Partial Class dlgCorrelation
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.chkCorrelationMatrix = New System.Windows.Forms.CheckBox()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         CType(Me.nudConfidenceInterval, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -205,10 +206,10 @@ Partial Class dlgCorrelation
         '
         'ucrSaveModel
         '
-        Me.ucrSaveModel.Location = New System.Drawing.Point(15, 285)
+        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 285)
         Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveModel.TabIndex = 15
+        Me.ucrSaveModel.Size = New System.Drawing.Size(267, 20)
+        Me.ucrSaveModel.TabIndex = 12
         '
         'ucrReceiverMultipleColumns
         '
@@ -249,16 +250,28 @@ Partial Class dlgCorrelation
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 320)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 317)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 12
+        Me.ucrBase.TabIndex = 14
+        '
+        'chkCorrelationMatrix
+        '
+        Me.chkCorrelationMatrix.AutoSize = True
+        Me.chkCorrelationMatrix.Location = New System.Drawing.Point(297, 287)
+        Me.chkCorrelationMatrix.Name = "chkCorrelationMatrix"
+        Me.chkCorrelationMatrix.Size = New System.Drawing.Size(107, 17)
+        Me.chkCorrelationMatrix.TabIndex = 13
+        Me.chkCorrelationMatrix.Tag = "Correlation_Matrix"
+        Me.chkCorrelationMatrix.Text = "Correlation Matrix"
+        Me.chkCorrelationMatrix.UseVisualStyleBackColor = True
         '
         'dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 377)
+        Me.ClientSize = New System.Drawing.Size(420, 377)
+        Me.Controls.Add(Me.chkCorrelationMatrix)
         Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.grpMethod)
         Me.Controls.Add(Me.nudConfidenceInterval)
@@ -310,4 +323,5 @@ Partial Class dlgCorrelation
     Friend WithEvents ucrReceiverMultipleColumns As ucrReceiverMultiple
     Friend WithEvents nudConfidenceInterval As NumericUpDown
     Friend WithEvents ucrSaveModel As ucrSaveModel
+    Friend WithEvents chkCorrelationMatrix As CheckBox
 End Class
