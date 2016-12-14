@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgView
-    Public clsHead, clsTail As New RFunction
+    Public clsHead, clsTail, clsView As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -49,8 +49,7 @@ Public Class dlgView
         ucrReceiverView.SetMeAsReceiver()
         DataFrameLength()
         ucrBase.iHelpTopicID = 32
-        clsHead.SetRCommand("head")
-        clsTail.SetRCommand("tail")
+        clsView.SetRCommand("View")
     End Sub
 
     Private Sub TestOKEnabled()
@@ -98,33 +97,48 @@ Public Class dlgView
     Private Sub SetCommands()
         'Setting the head and tail functions as parameters of View Function
         If rdoDispSepOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetFunction("View")
-            ucrBase.clsRsyntax.RemoveParameter("n")
+            XandNParameters()
             If rdoBottom.Checked Then
-                clsTail.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
-                clsTail.AddParameter("n", nudNumberRows.Value)
-                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsTail, bIncludeArgumentName:=False)
+                clsView.AddParameter("x", clsRFunctionParameter:=clsTail)
             ElseIf rdoTop.Checked Then
-                clsHead.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
-                clsHead.AddParameter("n", nudNumberRows.Value)
-                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsHead, bIncludeArgumentName:=False)
+                clsView.AddParameter("x", clsRFunctionParameter:=clsHead)
             End If
+            ucrBase.clsRsyntax.SetBaseRFunction(clsView)
             ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelectorForView.strCurrentDataFrame & Chr(34))
-
         ElseIf rdoDispOutputWindow.Checked Then
             'remove the title parameter of the View command then setting head and tail functions for previewing the dataset in the output window.
             ucrBase.clsRsyntax.iCallType = 2
-            ucrBase.clsRsyntax.RemoveParameter("title")
+            clsView.RemoveParameterByName("title")
+            XandNParameters()
+        End If
+    End Sub
+
+    Private Sub XandNParameters()
+        If rdoTop.Checked Then
+            clsHead.SetRCommand("head")
             If Not ucrReceiverView.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
-                If rdoTop.Checked Then
-                    ucrBase.clsRsyntax.SetFunction("head")
-                Else
-                    ucrBase.clsRsyntax.SetFunction("tail")
-                End If
-                If Not nudNumberRows.Text = "" Then
-                    ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
-                End If
+                clsHead.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+            Else
+                clsHead.RemoveParameterByName("x")
+            End If
+            If Not nudNumberRows.Text = "" Then
+                clsHead.AddParameter("n", nudNumberRows.Value)
+            Else
+                clsHead.RemoveParameterByName("n")
+            End If
+            ucrBase.clsRsyntax.SetBaseRFunction(clsHead)
+        Else
+            clsTail.SetRCommand("tail")
+            If Not ucrReceiverView.IsEmpty Then
+                clsTail.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+            Else
+                clsTail.RemoveParameterByName("x")
+            End If
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTail)
+            If Not nudNumberRows.Text = "" Then
+                clsTail.AddParameter("n", nudNumberRows.Value)
+            Else
+                clsTail.RemoveParameterByName("n")
             End If
         End If
     End Sub
