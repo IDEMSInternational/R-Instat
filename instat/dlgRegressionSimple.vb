@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2 As New ROperator
-    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRFTest, clsRBinomial, clsRWilcoxTest, clsRLength, clsRMean, clsRMean2, clsRLength2, clsRGroup, clsRGroup2, clsRLengthGrouped, clsRLengthGrouped2 As New RFunction
+    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsRLength, clsRMean, clsRMean2, clsRLength2, clsRGroup, clsRGroup2, clsRLengthGrouped, clsRLengthGrouped2 As New RFunction
     Public clsRLmOrGLM As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -151,6 +151,15 @@ Public Class dlgRegressionSimple
         clsRWilcoxTest.AddParameter("", clsROperatorParameter:=clsModel)
     End Sub
 
+    Private Sub SetKruskalTest()
+        clsRKruskalTest.SetRCommand("kruskal.test")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRKruskalTest)
+        clsModel.SetOperation("~")
+        clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
+        clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsRKruskalTest.AddParameter("", clsROperatorParameter:=clsModel)
+    End Sub
+
     Public Sub DataTypeAccepted()
         If rdoSpecific.Checked Then
             ucrResponse.SetIncludedDataTypes({"integer", "numeric"})
@@ -264,7 +273,11 @@ Public Class dlgRegressionSimple
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
                 SetBinomTest()
             Else
-                SetWilcoxTest()
+                If rdoCompareMeans.Checked Then
+                    SetWilcoxTest()
+                ElseIf rdoCompareVar.Checked Then
+                    SetKruskalTest()
+                End If
             End If
         End If
         TestOKEnabled()
@@ -326,8 +339,6 @@ Public Class dlgRegressionSimple
         Else
             If Not ucrResponse.IsEmpty Then
                 ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-                ' this needs work still. Nothing is being shown once any of the "Exact"'s are selected
-                ' Additionally, we need to have that we can switch between rdos and the cbo's to change appropriately. 
             End If
         End If
         TestOKEnabled()
@@ -475,18 +486,36 @@ Public Class dlgRegressionSimple
                 If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
                     rdoCompareMeans.Visible = True
                     rdoCompareVar.Visible = True
+                    rdoCompareMeans.Text = "Compare Means"
+                    rdoCompareVar.Text = "Compare Variances"
+                    nudCI.Enabled = True
                     If rdoCompareMeans.Checked Then
                         chkPaired.Visible = True
                         nudHypothesis.Enabled = True
                     ElseIf rdoCompareVar.Checked Then
-                        nudHypothesis.Enabled = False
                         chkPaired.Visible = False
+                        nudHypothesis.Enabled = False
+                    End If
+                ElseIf ucrFamily.clsCurrDistribution.strNameTag = "No_Distribution" Then
+                    rdoCompareMeans.Visible = True
+                    rdoCompareVar.Visible = True
+                    rdoCompareMeans.Text = "Wilcoxon Test"
+                    rdoCompareVar.Text = "Kruskal Test"
+                    If rdoCompareMeans.Checked Then
+                        chkPaired.Visible = True
+                        nudHypothesis.Enabled = True
+                        nudCI.Enabled = True
+                    ElseIf rdoCompareVar.Checked Then
+                        chkPaired.Visible = False
+                        nudHypothesis.Enabled = False
+                        nudCI.Enabled = False
                     End If
                 Else
                     chkPaired.Visible = False
                     rdoCompareMeans.Visible = False
                     rdoCompareVar.Visible = False
                     nudHypothesis.Enabled = True
+                    nudCI.Enabled = True
                 End If
             End If
         End If
