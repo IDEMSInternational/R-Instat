@@ -378,6 +378,7 @@ Public Class RLink
     Private Sub TestForGraphics()
         Dim strGraphsFilePath As String = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs/"
         Using fstream As New IO.FileStream(strGraphsFilePath, IO.FileMode.Open)
+            'read in the file, find the names of the files in the file and perform DisplayGraph on these paths + unlink on these paths...
         End Using
     End Sub
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
