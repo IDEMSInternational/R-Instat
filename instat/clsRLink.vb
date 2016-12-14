@@ -228,18 +228,18 @@ Public Class RLink
 
         If strComment <> "" Then
             strComment = "# " & strComment
-            strScriptWithComment = strComment & vbCrLf & strScript
+            strScriptWithComment = strComment & Environment.NewLine & strScript
         Else
             strScriptWithComment = strScript
         End If
         If bLog Then
-            txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
+            txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
         End If
         If bOutput Then
             If strComment <> "" Then
-                rtbOutput.AppendText(clrComments, fComments, strComment & vbCrLf, clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+                rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript, fScript, strScript & Environment.NewLine) 'TEST temporary
             Else
-                rtbOutput.AppendText(clrScript, fScript, strScript & vbCrLf) 'TEST temporary
+                rtbOutput.AppendText(clrScript, fScript, strScript & Environment.NewLine) 'TEST temporary
             End If
         End If
 
@@ -254,16 +254,16 @@ Public Class RLink
         ElseIf bReturnOutput = 1 Then
             Try
                 temp = clsEngine.Evaluate(strScript)
-                strTemp = String.Join(vbCrLf, temp.AsCharacter())
-                strOutput = strOutput & strTemp & vbCrLf
+                strTemp = String.Join(Environment.NewLine, temp.AsCharacter())
+                strOutput = strOutput & strTemp & Environment.NewLine
             Catch e As Exception
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         Else
-            If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
+            If strScript.Trim(Environment.NewLine).LastIndexOf(Environment.NewLine) = -1 Then
                 strCapturedScript = "capture.output(" & strScript & ")"
             Else
-                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine).LastIndexOf(Environment.NewLine))
                 If strSplitScript <> "" Then
                     Try
                         clsEngine.Evaluate(strSplitScript)
@@ -271,13 +271,13 @@ Public Class RLink
                         MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
                 End If
-                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(Environment.NewLine).LastIndexOf(Environment.NewLine) - 2)
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
                 temp = clsEngine.Evaluate(strCapturedScript)
-                strTemp = String.Join(vbCrLf, temp.AsCharacter())
-                strOutput = strOutput & strTemp & vbCrLf
+                strTemp = String.Join(Environment.NewLine, temp.AsCharacter())
+                strOutput = strOutput & strTemp & Environment.NewLine
             Catch e As Exception
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try

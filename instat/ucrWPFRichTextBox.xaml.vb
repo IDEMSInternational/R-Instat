@@ -18,6 +18,7 @@ Public Class ucrWPFRichTextBox
         run1.FontFamily = New Media.FontFamily(font.FontFamily.Name)
         run1.Foreground = New Media.BrushConverter().ConvertFromString(color.Name)
         Dim blkParagraph As New Documents.Paragraph(run1)
+        'blkParagraph.Inlines.Add(New Documents.LineBreak)
         If font2 IsNot Nothing AndAlso text2 IsNot Nothing AndAlso color2 <> Nothing Then 'Note: IsNot only works for reference types...
             Dim run2 As New Documents.Run(text2)
             run2.FontFamily = New Media.FontFamily(font2.FontFamily.Name)
