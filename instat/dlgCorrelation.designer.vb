@@ -36,6 +36,7 @@ Partial Class dlgCorrelation
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.nudConfidenceInterval = New System.Windows.Forms.NumericUpDown()
+        Me.ucrSaveModel = New instat.ucrSaveModel()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
@@ -202,6 +203,13 @@ Partial Class dlgCorrelation
         Me.nudConfidenceInterval.TabIndex = 8
         Me.nudConfidenceInterval.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.Location = New System.Drawing.Point(15, 285)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(265, 20)
+        Me.ucrSaveModel.TabIndex = 15
+        '
         'ucrReceiverMultipleColumns
         '
         Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(255, 55)
@@ -241,7 +249,7 @@ Partial Class dlgCorrelation
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 285)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 320)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 12
@@ -250,7 +258,8 @@ Partial Class dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 339)
+        Me.ClientSize = New System.Drawing.Size(419, 377)
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.grpMethod)
         Me.Controls.Add(Me.nudConfidenceInterval)
         Me.Controls.Add(Me.ucrReceiverMultipleColumns)
@@ -300,4 +309,5 @@ Partial Class dlgCorrelation
     Friend WithEvents lblConfInterval As Label
     Friend WithEvents ucrReceiverMultipleColumns As ucrReceiverMultiple
     Friend WithEvents nudConfidenceInterval As NumericUpDown
+    Friend WithEvents ucrSaveModel As ucrSaveModel
 End Class

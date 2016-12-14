@@ -29,13 +29,21 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub CorrelationMatrix()
-        dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        If dlgCorrelation.rdoMultipleColumns.Checked AndAlso chkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterplotMatrix.Checked Then
+        'dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
+        dlgCorrelation.SaveModel()
+        If dlgCorrelation.rdoMultipleColumns.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterplotMatrix.Checked Then
+            If dlgCorrelation.ucrSaveModel.chkSaveModel.Checked Then
+                dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
+            Else
+                dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
+            End If
             dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRCorrelation)
         End If
+        dlgCorrelation.AssignModelName()
     End Sub
 
     Public Sub GGPairs()
+        dlgCorrelation.TempData()
         clsRGraphics.SetRCommand("ggpairs")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGraphics)
@@ -51,6 +59,7 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub GGscatmatrix()
+        dlgCorrelation.TempData()
         clsRGGscatmatrix.SetRCommand("ggscatmat")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)
@@ -111,6 +120,7 @@ Public Class sdgCorrPlot
             ucrSaveGraph.chkSaveGraph.Checked = False
             ucrSaveGraph.Visible = False
             tbSaveGraphs.Visible = False
+            dlgCorrelation.SaveModel()
             dlgCorrelation.ucrBase.clsRsyntax.RemoveAssignTo()
         Else
             AssignName()
@@ -202,6 +212,11 @@ Public Class sdgCorrPlot
             clsRGGcorrGraphics.RemoveParameterByName("max_size")
         End If
         clsRGGcorrGraphics.AddParameter("geom", Chr(34) & cmbgeom.SelectedItem.ToString & Chr(34))
+    End Sub
+
+    Private Sub rdoNone_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNone.CheckedChanged
+        dlgCorrelation.SaveModel()
+        dlgCorrelation.AssignModelName()
     End Sub
 
     Private Sub nudAlpha_ValueChanged(sender As Object, e As EventArgs) Handles nudAlphaScatter.ValueChanged
