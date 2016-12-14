@@ -193,7 +193,9 @@ Public Class dlgGeneralForGraphics
         Dim clsDeleteFunction As New RFunction
         Dim strImageLocation As String
         clsSaveFunction.SetRCommand("ggsave")
-        'strFileName = ucrSaveGraph.strGraphName & ".png"
+        'If file R_Instat_Temp__Graphs is not there, create it... Where do we do this ? In setup method ?
+        'Need to add ggsave as a Secondary RCommand on every grph dialogue.
+        'Need to edit RMethods producing ggplots to always ggsave in that file as well... Need to find a smart way to name things.
         strImageLocation = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs/" & ucrSaveGraph.strGraphName & ".jpg"
         clsSaveFunction.AddParameter("filename", Chr(34) & strImageLocation.Replace("\", "/") & Chr(34))
         'frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saving graph as png file in the working directory.")
