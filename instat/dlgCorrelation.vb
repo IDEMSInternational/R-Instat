@@ -20,7 +20,6 @@ Public Class dlgCorrelation
     Public bIsTwoColumnFunction As Boolean
     Public clsRCorrelation As New RFunction
     Dim clsTempFunc As RFunction
-    Public strModelName As String = ""
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -227,11 +226,9 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'If rdoMultipleColumns.Checked AndAlso sdgCorrPlot.chkCorrelationMatrix.Checked AndAlso ((sdgCorrPlot.rdoPairwisePlot.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked) OrElse (ucrSaveModel.chkSaveModel.Checked)) Then
-        '    frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
-
-        'End If
-        frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
+        If rdoMultipleColumns.Checked AndAlso sdgCorrPlot.chkCorrelationMatrix.Checked AndAlso ((sdgCorrPlot.rdoPairwisePlot.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked) OrElse (ucrSaveModel.chkSaveModel.Checked)) Then
+            frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
+        End If
     End Sub
 
     'Private Sub ucrResultName_NameChanged() Handles ucrResultName.NameChanged
@@ -242,14 +239,9 @@ Public Class dlgCorrelation
         If ucrSaveModel.chkSaveModel.Checked AndAlso ucrSaveModel.ucrInputModelName.GetText() <> "" AndAlso rdoMultipleColumns.Checked AndAlso sdgCorrPlot.rdoNone.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveModel.ucrInputModelName.GetText(), strTempModel:=ucrSaveModel.ucrInputModelName.GetText(), strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            ' strModelName = ucrResultName.GetText()
         Else
             ucrBase.clsRsyntax.RemoveAssignTo()
-            ucrBase.clsRsyntax.iCallType = 2
-            'ucrBase.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-            'ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            'ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            'strModelName = "last_PCA"
+            'ucrBase.clsRsyntax.iCallType = 2
         End If
         TestOKEnabled()
     End Sub
