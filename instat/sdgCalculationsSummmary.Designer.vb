@@ -43,7 +43,7 @@ Partial Class sdgCalculationsSummmary
         Me.MinimizeBox = False
         Me.Name = "sdgCalculationsSummmary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Summary Calculations"
+        Me.Text = "Summary/Calculations"
         Me.ResumeLayout(False)
 
     End Sub
