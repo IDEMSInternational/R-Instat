@@ -51,7 +51,7 @@ Public Class ucrWPFRichTextBox
         blkParagraph.BorderBrush = Windows.Media.Brushes.Black
         blkParagraph.Padding = thickness
         rtbOutput.Document.Blocks.Add(blkParagraph)
-        'rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
+        rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
 
         'TESTING TO BE REMOVED
         'Dim strStargazer As String = "<table style=" & Chr(34) & "text-align:center" & Chr(34) & "><tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>
