@@ -11,11 +11,10 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
 Public Class dlgUseDate
     Public bFirstLoad As Boolean = True
     Private Sub dlgUseDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -24,43 +23,144 @@ Public Class dlgUseDate
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 462
-
-    End Sub
-
-    Private Sub ReopenDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$split_date")
+        ucrReceiverUseDate.Selector = ucrSelectorUseDate
+        ucrReceiverUseDate.SetMeAsReceiver()
+        ucrReceiverUseDate.bUseFilteredData = False
+        'Restricting the datatypes that the date-time functions take to avoid errors in execution
+        ucrReceiverUseDate.SetIncludedDataTypes({"Date"})
 
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorUseDate.Reset()
+        chkAbbrMonthName.Checked = False
+        chkAbbrWeekDay.Checked = False
         chkDayInMonth.Checked = False
         chkDayInYear.Checked = False
         chkDayYear.Checked = False
         chkDecade.Checked = False
         chkLeapYear.Checked = False
-        chkMonth.Checked = False
+        chkMonthNam.Checked = False
+        chkMonthValue.Checked = False
         chkPentade.Checked = False
         chkWeek.Checked = False
-        chkWeekDay.Checked = False
+        chkWeekdayName.Checked = False
+        chkWeekDayVal.Checked = False
         chkYear.Checked = False
-
-
+        'Remains Disabled until implemented
+        chkPentade.Enabled = False
+        chkDecade.Enabled = False
+        TestOKEnabled()
     End Sub
-    'Disabling TesOKEnabled by Ensuring in all cases its disabled
+
     Private Sub TestOKEnabled()
-        If Not ucrReceiverUseDate.IsEmpty Then
-            ucrBase.OKEnabled(False)
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (chkYear.Checked OrElse chkDayInMonth.Checked OrElse chkDayInYear.Checked OrElse chkDayYear.Checked OrElse chkDecade.Checked OrElse chkLeapYear.Checked OrElse chkMonthValue.Checked OrElse chkPentade.Checked OrElse chkWeekDayVal.Checked OrElse chkWeek.Checked OrElse chkAbbrMonthName.Checked OrElse chkMonthNam.Checked OrElse chkWeekdayName.Checked OrElse chkAbbrWeekDay.Checked)) Then
+            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverUseDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverUseDate.SelectionChanged
+        If Not ucrReceiverUseDate.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverUseDate.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetParameters()
+        If chkYear.Checked Then
+            ucrBase.clsRsyntax.AddParameter("year", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("year")
+        End If
+
+        If chkMonthValue.Checked Then
+            ucrBase.clsRsyntax.AddParameter("month_val", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("month_val")
+        End If
+
+        If chkMonthNam.Checked Then
+            ucrBase.clsRsyntax.AddParameter("month_name", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("month_name")
+        End If
+
+        If chkAbbrMonthName.Checked Then
+            ucrBase.clsRsyntax.AddParameter("month_abbr", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("month_abbr")
+        End If
+
+        If chkWeekDayVal.Checked Then
+            ucrBase.clsRsyntax.AddParameter("weekday_val", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("weekday_val")
+        End If
+
+        If chkAbbrWeekDay.Checked Then
+            ucrBase.clsRsyntax.AddParameter("weekday_abbr", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("weekday_abbr")
+        End If
+
+        If chkWeekdayName.Checked Then
+            ucrBase.clsRsyntax.AddParameter("weekday_name", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("weekday_name")
+        End If
+
+        If chkWeek.Checked Then
+            ucrBase.clsRsyntax.AddParameter("week", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("week")
+        End If
+
+        If chkDayInMonth.Checked Then
+            ucrBase.clsRsyntax.AddParameter("day_in_month", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("day_in_month")
+        End If
+
+        If chkDayInYear.Checked Then
+            ucrBase.clsRsyntax.AddParameter("day_in_year", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("day_in_year")
+        End If
+
+        If chkLeapYear.Checked Then
+            ucrBase.clsRsyntax.AddParameter("leap_year", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("leap_year")
+        End If
+
+        If chkDayYear.Checked Then
+            ucrBase.clsRsyntax.AddParameter("day_in_year_366", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("day_in_year_366")
         End If
 
     End Sub
 
+    Private Sub grpDateFunctions_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDecade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonthValue.CheckedChanged, chkPentade.CheckedChanged, chkWeekDayVal.CheckedChanged, chkWeek.CheckedChanged, chkMonthNam.CheckedChanged, chkAbbrMonthName.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkWeekdayName.CheckedChanged
+        SetParameters()
+        TestOKEnabled()
+    End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub ucrSelectorUseDate_DataFrameChanged() Handles ucrSelectorUseDate.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorUseDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
 End Class
