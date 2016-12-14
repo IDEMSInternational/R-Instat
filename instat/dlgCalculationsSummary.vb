@@ -14,7 +14,32 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class dlgCalculationsSummary
+    Public bFirstLoad As Boolean = True
     Private Sub dlgCalculationsSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            SetDefaults()
+            InitialiseDialog()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        'Checks if Ok can be enabled.
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub InitialiseDialog()
 
     End Sub
 End Class
