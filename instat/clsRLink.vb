@@ -289,6 +289,7 @@ Public Class RLink
                 rtbOutput.AppendText(clrOutput, fOutput, strOutput) 'TEST temporary
             End If
         End If
+        TestForGraphics()
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
@@ -374,6 +375,11 @@ Public Class RLink
         End If
     End Function
 
+    Private Sub TestForGraphics()
+        Dim strGraphsFilePath As String = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs/"
+        Using fstream As New IO.FileStream(strGraphsFilePath, IO.FileMode.Open)
+        End Using
+    End Sub
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
         Dim clsGetNextDataName As New RFunction

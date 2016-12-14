@@ -190,15 +190,17 @@ Public Class dlgGeneralForGraphics
 
     Private Sub DisplayGraphInOutputWindow_When_ClickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim clsSaveFunction As New RFunction
-        Dim strFileName As String
+        Dim clsDeleteFunction As New RFunction
         Dim strImageLocation As String
         clsSaveFunction.SetRCommand("ggsave")
         'strFileName = ucrSaveGraph.strGraphName & ".png"
-        strFileName = ucrSaveGraph.strGraphName & ".jpg"
-        clsSaveFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34))
+        strImageLocation = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs/" & ucrSaveGraph.strGraphName & ".jpg"
+        clsSaveFunction.AddParameter("filename", Chr(34) & strImageLocation.Replace("\", "/") & Chr(34))
         'frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saving graph as png file in the working directory.")
-        frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saving graph as jpg file in the working directory.")
-        strImageLocation = IO.Path.GetFullPath(".\" & strFileName)
+        frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saving graph as jpg file in the temp file.")
         frmMain.clsRLink.rtbOutput.DisplayGraph(strImageLocation)
+        clsDeleteFunction.SetRCommand("unlink")
+        clsDeleteFunction.AddParameter(strParameterName:="FileName", strParameterValue:=Chr(34) & strImageLocation.Replace("\", "/") & Chr(34), bIncludeArgumentName:=False)
+        frmMain.clsRLink.RunScript(clsDeleteFunction.ToScript(), strComment:="Deleting graph file from the temp file.")
     End Sub
 End Class
