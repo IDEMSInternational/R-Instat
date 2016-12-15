@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgView
@@ -39,7 +39,6 @@ Public Class dlgView
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
         rdoTop.Checked = True
-        ' By default:Display of the dataset is on a separate window. See SetCommands() for details.
         rdoDispSepOutputWindow.Checked = True
         rdoDispOutputWindow.Checked = False
     End Sub
@@ -95,7 +94,6 @@ Public Class dlgView
     End Sub
 
     Private Sub SetCommands()
-        'Setting the head and tail functions as parameters of View Function
         If rdoDispSepOutputWindow.Checked Then
             XandNParameters()
             If rdoBottom.Checked Then
@@ -106,7 +104,6 @@ Public Class dlgView
             ucrBase.clsRsyntax.SetBaseRFunction(clsView)
             ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelectorForView.strCurrentDataFrame & Chr(34))
         ElseIf rdoDispOutputWindow.Checked Then
-            'remove the title parameter of the View command then setting head and tail functions for previewing the dataset in the output window.
             ucrBase.clsRsyntax.iCallType = 2
             clsView.RemoveParameterByName("title")
             XandNParameters()
@@ -142,5 +139,4 @@ Public Class dlgView
             End If
         End If
     End Sub
-
 End Class
