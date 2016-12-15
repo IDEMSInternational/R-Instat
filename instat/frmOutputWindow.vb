@@ -25,14 +25,12 @@ Public Class frmOutputWindow
     Public Sub CopyContent()
         'copies the content of the selection in rich text format.
         ucrRichTextBox.rtbOutput.Copy() 'Warning: Copy is a text method, only copies text...
-
         'Using stream As New IO.MemoryStream
         'Range = New Windows.Documents.TextRange(ucrRichTextBox.rtbOutput.Document.ContentStart, ucrRichTextBox.rtbOutput.Document.ContentEnd)
         'Range.Save(stream, Windows.DataFormats.XamlPackage)
         'Clipboard.SetData(DataFormats.Rtf, System.Text.Encoding.UTF8.GetString(stream.ToArray()))
         'stream.Close()
         'End Using
-
     End Sub
 
     Public Sub selectAllText()
@@ -65,21 +63,6 @@ Public Class frmOutputWindow
     'System.Diagnostics.Process.Start(“RTF2Image.jpg)
     'End Function
 
-    Private Sub CopyUIElementToClipboard(element As Windows.FrameworkElement)
-        'This sub is used to copy the image in a UIElement to the clipboard.
-        Dim width As Double = element.ActualWidth
-        Dim Height As Double = element.ActualHeight
-        Dim bmpCopied As Windows.Media.Imaging.RenderTargetBitmap = New Windows.Media.Imaging.RenderTargetBitmap(Convert.ToInt32(width), Convert.ToInt32(Height), 96, 96, Windows.Media.PixelFormats.Default)
-        Dim drawingVisual As Windows.Media.DrawingVisual = New Windows.Media.DrawingVisual()
-
-        Using drawingContext As Windows.Media.DrawingContext = drawingVisual.RenderOpen()
-            Dim visualBrush As New Windows.Media.VisualBrush(element)
-            drawingContext.DrawRectangle(visualBrush, Nothing, New Windows.Rect(New Windows.Point(), New Windows.Size(width, Height)))
-        End Using
-        bmpCopied.Render(drawingVisual)
-        Windows.Clipboard.SetImage(bmpCopied)
-    End Sub
-
     Private Sub CopyImageRTB_Click(sender As Object, e As EventArgs) Handles CopyImageRTB.Click
         'Copies the first selected image into the clipboard.
         Dim prphTemp As Windows.Documents.Paragraph
@@ -89,7 +72,7 @@ Public Class frmOutputWindow
                 prphTemp = block
                 If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso prphTemp.Inlines.Count = 1 AndAlso TypeOf (prphTemp.Inlines.FirstInline) Is Windows.Documents.InlineUIContainer Then
                     conImage = prphTemp.Inlines.FirstInline
-                    CopyUIElementToClipboard(conImage.Child)
+                    ucrRichTextBox.CopyUIElementToClipboard(conImage.Child)
                     Exit Sub
                 End If
             End If

@@ -190,19 +190,20 @@ Public Class dlgGeneralForGraphics
 
     Private Sub DisplayGraphInOutputWindow_When_ClickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim clsSaveFunction As New RFunction
-        Dim clsDeleteFunction As New RFunction
+        'Dim clsDeleteFunction As New RFunction
         Dim strImageLocation As String
         clsSaveFunction.SetRCommand("ggsave")
-        'If file R_Instat_Temp__Graphs is not there, create it... Where do we do this ? In setup method ?
+        'If file R_Instat_Temp__Graphs is not there, create it... Where do we do this ? In setup method ? For the moment it's on frmMain Load
+        'frmMain.clsRLink.rtbOutput.CreateTempDirectory()
         'Need to add ggsave as a Secondary RCommand on every grph dialogue.
         'Need to edit RMethods producing ggplots to always ggsave in that file as well... Need to find a smart way to name things.
         strImageLocation = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs/" & ucrSaveGraph.strGraphName & ".jpg"
         clsSaveFunction.AddParameter("filename", Chr(34) & strImageLocation.Replace("\", "/") & Chr(34))
         'frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saving graph as png file in the working directory.")
-        frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Saving graph as jpg file in the temp file.")
-        frmMain.clsRLink.rtbOutput.DisplayGraph(strImageLocation)
-        clsDeleteFunction.SetRCommand("unlink")
-        clsDeleteFunction.AddParameter(strParameterName:="FileName", strParameterValue:=Chr(34) & strImageLocation.Replace("\", "/") & Chr(34), bIncludeArgumentName:=False)
-        frmMain.clsRLink.RunScript(clsDeleteFunction.ToScript(), strComment:="Deleting graph file from the temp file.")
+        frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Temporarily saving the image of the last ggplot grph in the temp directory R_Instat_Temp_Graphs.")
+        'frmMain.clsRLink.rtbOutput.DisplayGraph(strImageLocation)
+        'clsDeleteFunction.SetRCommand("unlink")
+        'clsDeleteFunction.AddParameter(strParameterName:="FileName", strParameterValue:=Chr(34) & strImageLocation.Replace("\", "/") & Chr(34), bIncludeArgumentName:=False)
+        'frmMain.clsRLink.RunScript(clsDeleteFunction.ToScript(), strComment:="Deleting graph file from the temp file.")
     End Sub
 End Class
