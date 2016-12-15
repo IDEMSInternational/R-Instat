@@ -23,7 +23,7 @@ Public Class RLink
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
-    Public rtbOutput As New ucrWPFRichTextBox 'TEST temporary...
+    Public rtbOutput As New ucrWPFRichTextBox
     Public txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -217,13 +217,15 @@ Public Class RLink
         Return strNextDefault
     End Function
 
-    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "", Optional bHtmlOutput As Boolean = False)
+    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bHtmlOutput As Boolean = False)
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
         Dim strOutput As String
         Dim strScriptWithComment As String
         Dim strSplitScript As String
+        Dim strTempGraphsDirectory As String
+        strTempGraphsDirectory = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs\"
         strOutput = ""
 
         If strComment <> "" Then
@@ -245,13 +247,22 @@ Public Class RLink
 
         'If strScript.Length > 2000 Then
         '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-        If bReturnOutput = 0 Then
+        If iCallType = 0 OrElse iCallType = 3 Then
             Try
+                If iCallType = 3 Then
+                    clsEngine.Evaluate(("jpeg('" & strTempGraphsDirectory & "Graph.jpg')").Replace("\", "/"))
+                End If
                 clsEngine.Evaluate(strScript)
+                If iCallType = 3 Then
+                    clsEngine.Evaluate("dev.off()")
+                    'This sub is used to display graphics in the output window when necessary.
+                    rtbOutput.TestForGraphics()
+                End If
             Catch e As Exception
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
-        ElseIf bReturnOutput = 1 Then
+
+        ElseIf iCallType = 1 Then
             Try
                 temp = clsEngine.Evaluate(strScript)
                 strTemp = String.Join(Environment.NewLine, temp.AsCharacter())
@@ -289,8 +300,6 @@ Public Class RLink
                 rtbOutput.AppendText(clrOutput, fOutput, strOutput) 'TEST temporary
             End If
         End If
-        'This sub is used to display graphics in the output window when necessary.
-        rtbOutput.TestForGraphics()
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
