@@ -71,6 +71,7 @@ Public Class dlgContrasts
         SelectContrast()
         grdCurrSheet.Reset()
         TestOKEnabled()
+        ' grdCurrSheet.Rows.Equals(Nothing)
         ' ucrInputContrastName.SetEditable(True)
     End Sub
 
@@ -83,7 +84,7 @@ Public Class dlgContrasts
             grdLayoutForContrasts.Enabled = True
             ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames)
         Else
-            grdCurrSheet.Reset()
+            'grdCurrSheet.Rows.Equals(Nothing)
             grdLayoutForContrasts.Enabled = False
             ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
@@ -139,6 +140,7 @@ Public Class dlgContrasts
                 ucrBase.clsRsyntax.RemoveParameter("defined_contr_matrix")
             Case "User Defined"
                 SetGridDimensions()
+                SetMatrixFunction()
                 Me.Size = New System.Drawing.Size(440 + grdLayoutForContrasts.Width, 294)
                 ucrBase.clsRsyntax.AddParameter("new_contrasts", Chr(34) & "user_defined" & Chr(34))
         End Select
