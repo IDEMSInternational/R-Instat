@@ -28,6 +28,56 @@ Public Class ucrWPFRichTextBox
         rtbOutput.Document.Blocks.Add(blkParagraph)
     End Sub
 
+    Public Sub CreateTempDirectory()
+        'This sub should be called during the setup, maybe write it as R code within the setup method ? For the moment it is called on load of frmMain in the OutputWindow setup.
+        Dim strDirectoryPath As String
+        strDirectoryPath = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs\"
+        Console.WriteLine("Creating the directory: " & strDirectoryPath)
+        'Specify the directories you want to manipulate.
+        Dim diDirectoryInfo As IO.DirectoryInfo = New IO.DirectoryInfo(strDirectoryPath)
+        Try
+            ' Determine whether the directory exists.
+            If diDirectoryInfo.Exists Then
+                ' Indicate that it already exists.
+                Console.WriteLine("The directory: " & strDirectoryPath & " already exists.")
+                Return
+            End If
+            ' Try to create the directory.
+            diDirectoryInfo.Create()
+            Console.WriteLine("The directory: " & strDirectoryPath & " was created successfully.")
+        Catch e As Exception
+            Console.WriteLine("The process failed: {0}", e.ToString())
+            'Temporarily adding a vb message box for debug purposes.
+            MsgBox(e.Message & vbNewLine & "A problem occured in attempting to create the directory: " & strDirectoryPath, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Public Sub TestForGraphics()
+        'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
+        'It is called from RLink at the end of RunScript.
+        Dim strTempGraphsDirectory As String
+        Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
+        Dim iNumberOfFiles As Integer = -1
+        strTempGraphsDirectory = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs\"
+        Try
+            lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
+        Catch e As Exception
+            MsgBox(e.Message & vbNewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
+        End Try
+        If lstTempGraphFiles IsNot Nothing Then
+            iNumberOfFiles = CStr(lstTempGraphFiles.Count)
+        End If
+        If iNumberOfFiles > 0 Then
+            For Each strFileName As String In lstTempGraphFiles
+                DisplayGraph(strFileName)
+                Try
+                    My.Computer.FileSystem.DeleteFile(strFileName)
+                Catch e As Exception
+                    MsgBox(e.Message & vbNewLine & "A problem occured in attempting to delete the temporary file: " & strFileName & " The possible exceptions are described here: https://msdn.microsoft.com/en-us/library/tdx72k4b.aspx", MsgBoxStyle.Critical)
+                End Try
+            Next
+        End If
+    End Sub
     Public Sub DisplayGraph(strImageLocation As String)
         'Adds a graph to the output window.
         Dim blkParagraph As Documents.Paragraph
@@ -68,6 +118,8 @@ Public Class ucrWPFRichTextBox
     End Sub
 
     Public Sub AddIntoWebBrowser(Optional strHtmlCode As String = Nothing, Optional strFilePath As String = Nothing)
+        'This sub is used to add HTML content to the output window. It can take as arguments a string of Html code or a path to an Html file. In both cases, it will create a small webbrowser within the output window and display the html content there.
+        'Note that a class has been created for these temp webbrowsers in case one would want to add common features or introduce a dispose method if necessary.
         Dim conWebBrowser As Documents.BlockUIContainer
         Dim clsNewWebBrowser As New NewWebBrowser()
         Dim thickness As New Thickness(1)
@@ -86,18 +138,10 @@ Public Class ucrWPFRichTextBox
         conWebBrowser.Padding = thickness
         rtbOutput.Document.Blocks.Add(conWebBrowser)
         rtbOutput.Document.Blocks.Add(New Documents.Paragraph)
-        'Warning: Maybe find a way to keep track of these webbrowsers... Set this as a function ?
-    End Sub
-
-    Public Sub CleanWebBrowsers()
-        For Each block As Documents.BlockUIContainer In rtbOutput.Document.Blocks
-            If TypeOf (block.Child) Is Controls.WebBrowser Then
-                ' block.Child.ClearValue(Controls.WebBrowser.)
-            End If
-        Next
     End Sub
 
     Private Sub rtbOutput_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles rtbOutput.MouseDoubleClick
+        'On double click, the content of the Paragraph under the mouse is selected. This will be used to repopulate dialogues from RCommands displayed in the output window.
         Dim pos As Point = e.GetPosition(rtbOutput)
         Dim pointer As Documents.TextPointer = rtbOutput.GetPositionFromPoint(pos, False)
         If pointer IsNot Nothing Then
@@ -114,18 +158,33 @@ Public Class ucrWPFRichTextBox
         End If
     End Sub
 
-    ' Save XAML in RichTextBox to a file specified by strFileName
-    Public Sub SaveRtf(ByVal strFileName As String)
-        Dim range As Documents.TextRange
-        Dim fStream As FileStream
-        range = New Documents.TextRange(rtbOutput.Document.ContentStart, rtbOutput.Document.ContentEnd)
-        fStream = New FileStream(strFileName, FileMode.Create)
-        range.Save(fStream, DataFormats.Rtf)
-        fStream.Close()
+    Public Sub CopyUIElementToClipboard(element As Windows.FrameworkElement)
+        'This sub is used to copy the image in a UIElement to the clipboard. It is called within the CopyImage sub on the frmOutputWindow.
+        Dim width As Double = element.ActualWidth
+        Dim Height As Double = element.ActualHeight
+        Dim bmpCopied As Windows.Media.Imaging.RenderTargetBitmap = New Windows.Media.Imaging.RenderTargetBitmap(Convert.ToInt32(width), Convert.ToInt32(Height), 96, 96, Windows.Media.PixelFormats.Default)
+        Dim drawingVisual As Windows.Media.DrawingVisual = New Windows.Media.DrawingVisual()
+
+        Using drawingContext As Windows.Media.DrawingContext = drawingVisual.RenderOpen()
+            Dim visualBrush As New Windows.Media.VisualBrush(element)
+            drawingContext.DrawRectangle(visualBrush, Nothing, New Windows.Rect(New Windows.Point(), New Windows.Size(width, Height)))
+        End Using
+        bmpCopied.Render(drawingVisual)
+        Windows.Clipboard.SetImage(bmpCopied)
     End Sub
 
-    ' Print RichTextBox content
+    Public Sub SaveRtf(ByVal strFileName As String)
+        'Save rtf content of RichTextBox to a file specified by strFileName. This is called on the frmMain to save the content of the OutputWindow.
+        Dim range As Documents.TextRange
+        range = New Documents.TextRange(rtbOutput.Document.ContentStart, rtbOutput.Document.ContentEnd)
+        Using fStream As New FileStream(strFileName, FileMode.Create)
+            range.Save(fStream, DataFormats.Rtf)
+        End Using
+    End Sub
+
     Public Sub PrintCommand() 'Warning !!! using a controls PrintDialog :(
+        'Question: Where should this be used ?
+        'Print RichTextBox content
         Dim pd As New Controls.PrintDialog()
         If (pd.ShowDialog() = True) Then
             'use either one of the below      

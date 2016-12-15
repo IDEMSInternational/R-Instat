@@ -289,7 +289,8 @@ Public Class RLink
                 rtbOutput.AppendText(clrOutput, fOutput, strOutput) 'TEST temporary
             End If
         End If
-        TestForGraphics()
+        'This sub is used to display graphics in the output window when necessary.
+        rtbOutput.TestForGraphics()
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
@@ -375,12 +376,7 @@ Public Class RLink
         End If
     End Function
 
-    Private Sub TestForGraphics()
-        Dim strGraphsFilePath As String = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs/"
-        Using fstream As New IO.FileStream(strGraphsFilePath, IO.FileMode.Open)
-            'read in the file, find the names of the files in the file and perform DisplayGraph on these paths + unlink on these paths...
-        End Using
-    End Sub
+
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
         Dim clsGetNextDataName As New RFunction

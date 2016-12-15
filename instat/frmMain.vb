@@ -42,15 +42,15 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
-    Private Sub InitialiseWPFOutputWindow()
-        'TEST temporary
+    Private Sub InitialiseOutputWindow()
         frmOutputWindow.MdiParent = Me
         frmOutputWindow.Show()
         clsRLink.SetOutput(frmOutputWindow.ucrRichTextBox)
+        'TEST temporary : creating the temporary graphs 
+        clsRLink.rtbOutput.CreateTempDirectory()
     End Sub
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'temp removed
-        InitialiseWPFOutputWindow() 'TEST temporary
+        InitialiseOutputWindow()
 
         mnuHelpAboutRInstat.Visible = False
         frmEditor.MdiParent = Me
@@ -80,7 +80,6 @@ Public Class frmMain
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
-
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -761,7 +760,7 @@ Public Class frmMain
         If ActiveMdiChild Is frmLog Then
             frmLog.selectAllText()
         ElseIf ActiveMdiChild Is frmOutputWindow Then
-            frmOutputWindow.selectAllText() 'to be edited
+            frmOutputWindow.selectAllText() 'To be tested
         ElseIf ActiveMdiChild Is frmScript Then
             frmScript.selectAllText()
         ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
@@ -773,7 +772,7 @@ Public Class frmMain
         If ActiveMdiChild Is frmLog Then
             frmLog.copyText()
         ElseIf ActiveMdiChild Is frmOutputWindow Then
-            frmOutputWindow.CopyContent() 'To be edited
+            frmOutputWindow.CopyContent() 'Question: should this be copying the whole content or just the selected content ? 
         ElseIf ActiveMdiChild Is frmScript Then
             frmScript.copyText()
         ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
