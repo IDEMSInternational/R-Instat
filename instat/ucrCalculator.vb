@@ -13,34 +13,16 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat.Translations
-Imports RDotNet
 Public Class ucrCalculator
-    Dim strCalcHistory As List(Of String)
-    Dim dataset As DataFrame
-    Dim clsAttach As New RFunction
-    Dim clsDetach As New RFunction
-    Public bFirstLoad As Boolean = True
-    Public iHelpCalcID As Integer
-
-    Private Sub SetCalculationHistory()
+    Public Event NameChanged()
+    Public Event SelectionChanged()
+    Public Event SaveNameChanged()
+    Public Event DataFrameChanged()
+    Public Event SaveResultsCheckedChanged()
+    Public Event HelpCommandClick()
+    Public Event TryCommadClick()
+    Public Sub SetCalculationHistory()
         ucrReceiverForCalculation.AddtoCombobox(ucrReceiverForCalculation.GetText)
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
-        ucrReceiverForCalculation.SetMeAsReceiver()
-        clsAttach.SetRCommand("attach")
-        clsDetach.SetRCommand("detach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsDetach.AddParameter("unload", "TRUE")
-        ucrSaveResultInto.SetItemsTypeAsColumns()
-        ucrSaveResultInto.SetDefaultTypeAsColumn()
-        ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
-        ucrSelectorForCalculations.Reset()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates", "Rows"}) ' "Rows" is a temp. name
-        ucrSaveResultInto.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -124,8 +106,21 @@ Public Class ucrCalculator
 
     End Sub
 
+    Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi")
+    End Sub
+
+    Private Sub cmdCeiling_Click(sender As Object, e As EventArgs) Handles cmdCeiling.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ceiling(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ceiling()", 1)
+        End If
+    End Sub
+
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrInputCalOptions.NameChanged
         CalculationsOptions()
+        RaiseEvent NameChanged()
     End Sub
 
     Private Sub CalculationsOptions()
@@ -138,7 +133,6 @@ Public Class ucrCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
-                iHelpCalcID = 126
                 Me.Size = New System.Drawing.Size(659, 377)
             Case "Logical and Symbols"
                 grpDates.Visible = False
@@ -150,9 +144,6 @@ Public Class ucrCalculator
                 Me.Size = New System.Drawing.Size(617, 377)
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
-                iHelpCalcID = 127
-
-
             Case "Statistics"
                 grpDates.Visible = False
                 grpStatistics.Visible = True
@@ -163,7 +154,6 @@ Public Class ucrCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
-                iHelpCalcID = 128
             Case "Strings (Character Columns)"
                 grpDates.Visible = False
                 grpStrings.Visible = True
@@ -174,7 +164,6 @@ Public Class ucrCalculator
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
                 Me.Size = New System.Drawing.Size(610, 377)
-                iHelpCalcID = 338
             Case "Probability"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
@@ -185,7 +174,6 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpRows.Visible = False
                 Me.Size = New System.Drawing.Size(779, 377)
-                iHelpCalcID = 120
             Case "Dates"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
@@ -196,7 +184,6 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpRows.Visible = False
                 Me.Size = New System.Drawing.Size(639, 377)
-                iHelpCalcID = 130
             Case "Rows"
                 grpProbabilty.Visible = False
                 grpStatistics.Visible = False
@@ -204,7 +191,6 @@ Public Class ucrCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpRows.Visible = False
-                iHelpCalcID =
                 grpStrings.Visible = False
                 grpRows.Visible = True
                 Me.Size = New System.Drawing.Size(595, 377)
@@ -217,21 +203,8 @@ Public Class ucrCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpRows.Visible = False
-                iHelpCalcID = 14
                 grpStrings.Visible = False
         End Select
-    End Sub
-
-    Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi")
-    End Sub
-
-    Private Sub cmdCeiling_Click(sender As Object, e As EventArgs) Handles cmdCeiling.Click
-        If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ceiling(x= )", 1)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ceiling()", 1)
-        End If
     End Sub
 
     Private Sub cmdRound_Click(sender As Object, e As EventArgs) Handles cmdRound.Click
@@ -739,19 +712,12 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
-        ShowControl()
+        RaiseEvent SaveResultsCheckedChanged()
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
         ucrInputTryMessage.SetName("")
-    End Sub
-
-    Private Sub ShowControl()
-        If chkSaveResultInto.Checked Then
-            ucrSaveResultInto.Visible = True
-        Else
-            ucrSaveResultInto.Visible = False
-        End If
+        RaiseEvent DataFrameChanged()
     End Sub
 
     Private Sub cmdCombine_Click(sender As Object, e As EventArgs) Handles cmdCombine.Click
@@ -881,18 +847,6 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(":")
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        HelpContent()
-    End Sub
-
-    Private Sub HelpContent()
-        If iHelpCalcID > 0 Then
-            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-        Else
-            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-        End If
-    End Sub
-
     Private Sub cmdLag_Click(sender As Object, e As EventArgs) Handles cmdLag.Click
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lag(x= )", 1)
@@ -955,5 +909,21 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("percent_rank()", 1)
         End If
+    End Sub
+
+    Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
+        RaiseEvent SelectionChanged()
+    End Sub
+
+    Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
+        RaiseEvent SaveNameChanged()
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        RaiseEvent HelpCommandClick()
+    End Sub
+
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
+        RaiseEvent TryCommadClick()
     End Sub
 End Class
