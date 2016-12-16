@@ -88,6 +88,7 @@ Public Class dlgContrasts
             grdLayoutForContrasts.Enabled = False
             ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
+        SelectContrast()
         TestOKEnabled()
     End Sub
 
