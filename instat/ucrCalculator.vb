@@ -14,12 +14,12 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class ucrCalculator
+    Public iHelpCalcID As Integer
     Public Event NameChanged()
     Public Event SelectionChanged()
     Public Event SaveNameChanged()
     Public Event DataFrameChanged()
     Public Event SaveResultsCheckedChanged()
-    Public Event HelpCommandClick()
     Public Event TryCommadClick()
     Public Sub SetCalculationHistory()
         ucrReceiverForCalculation.AddtoCombobox(ucrReceiverForCalculation.GetText)
@@ -133,6 +133,7 @@ Public Class ucrCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
+                iHelpCalcID = 126
                 Me.Size = New System.Drawing.Size(659, 377)
             Case "Logical and Symbols"
                 grpDates.Visible = False
@@ -141,6 +142,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpStrings.Visible = False
+                iHelpCalcID = 127
                 Me.Size = New System.Drawing.Size(617, 377)
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
@@ -150,6 +152,7 @@ Public Class ucrCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
+                iHelpCalcID = 128
                 Me.Size = New System.Drawing.Size(568, 377)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
@@ -163,6 +166,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
+                iHelpCalcID = 129
                 Me.Size = New System.Drawing.Size(610, 377)
             Case "Probability"
                 grpDates.Visible = False
@@ -173,6 +177,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpRows.Visible = False
+                iHelpCalcID = 120
                 Me.Size = New System.Drawing.Size(779, 377)
             Case "Dates"
                 grpDates.Visible = True
@@ -183,6 +188,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpRows.Visible = False
+                iHelpCalcID = 130
                 Me.Size = New System.Drawing.Size(639, 377)
             Case "Rows"
                 grpProbabilty.Visible = False
@@ -204,6 +210,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpRows.Visible = False
                 grpStrings.Visible = False
+                iHelpCalcID = 14
         End Select
     End Sub
 
@@ -920,10 +927,18 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        RaiseEvent HelpCommandClick()
+        HelpContent()
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
         RaiseEvent TryCommadClick()
+    End Sub
+
+    Private Sub HelpContent()
+        If iHelpCalcID > 0 Then
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+        Else
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+        End If
     End Sub
 End Class
