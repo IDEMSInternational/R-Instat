@@ -53,7 +53,6 @@
     value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
-
     mimetype: application/x-microsoft.net.object.bytearray.base64
     value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
@@ -199,7 +198,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 62</value>
+    <value>236, 40</value>
   </data>
   <data name="lblResponse.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
@@ -229,7 +228,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblExplanatory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 139</value>
+    <value>236, 117</value>
   </data>
   <data name="lblExplanatory.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 13</value>
@@ -340,7 +339,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 180</value>
+    <value>239, 158</value>
   </data>
   <data name="chkFunction.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 17</value>
@@ -370,7 +369,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkConvertToVariate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 99</value>
+    <value>239, 77</value>
   </data>
   <data name="chkConvertToVariate.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 17</value>
@@ -430,7 +429,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkPaired.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 69</value>
+    <value>123, 65</value>
   </data>
   <data name="chkPaired.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 17</value>
@@ -451,7 +450,7 @@
     <value>grpParameters</value>
   </data>
   <data name="&gt;&gt;chkPaired.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="rdoGeneral.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -520,7 +519,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 62</value>
+    <value>236, 40</value>
   </data>
   <data name="lblNumeric.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
@@ -550,7 +549,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 139</value>
+    <value>236, 117</value>
   </data>
   <data name="lblFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -574,7 +573,7 @@
     <value>1</value>
   </data>
   <data name="nudCI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 14</value>
+    <value>123, 15</value>
   </data>
   <data name="nudCI.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -592,10 +591,10 @@
     <value>grpParameters</value>
   </data>
   <data name="&gt;&gt;nudCI.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="nudHypothesis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 39</value>
+    <value>123, 41</value>
   </data>
   <data name="nudHypothesis.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -613,7 +612,7 @@
     <value>grpParameters</value>
   </data>
   <data name="&gt;&gt;nudHypothesis.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblCI.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -643,7 +642,7 @@
     <value>grpParameters</value>
   </data>
   <data name="&gt;&gt;lblCI.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="lblHyp1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -670,13 +669,55 @@
     <value>grpParameters</value>
   </data>
   <data name="&gt;&gt;lblHyp1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <data name="rdoCompareMeans.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 60</value>
+  </data>
+  <data name="rdoCompareMeans.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 24</value>
+  </data>
+  <data name="rdoCompareMeans.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdoCompareMeans.Name" xml:space="preserve">
+    <value>rdoCompareMeans</value>
+  </data>
+  <data name="&gt;&gt;rdoCompareMeans.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCompareMeans.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;rdoCompareMeans.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoCompareVar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 81</value>
+  </data>
+  <data name="rdoCompareVar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 24</value>
+  </data>
+  <data name="rdoCompareVar.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdoCompareVar.Name" xml:space="preserve">
+    <value>rdoCompareVar</value>
+  </data>
+  <data name="&gt;&gt;rdoCompareVar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCompareVar.Parent" xml:space="preserve">
+    <value>grpParameters</value>
+  </data>
+  <data name="&gt;&gt;rdoCompareVar.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="grpParameters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 200</value>
+    <value>225, 181</value>
   </data>
   <data name="grpParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 90</value>
+    <value>187, 109</value>
   </data>
   <data name="grpParameters.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -718,7 +759,7 @@
     <value>5</value>
   </data>
   <data name="ucrExplanatory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 153</value>
+    <value>239, 131</value>
   </data>
   <data name="ucrExplanatory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -742,7 +783,7 @@
     <value>6</value>
   </data>
   <data name="ucrResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 76</value>
+    <value>239, 54</value>
   </data>
   <data name="ucrResponse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -859,10 +900,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>433, 383</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>424, 383</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

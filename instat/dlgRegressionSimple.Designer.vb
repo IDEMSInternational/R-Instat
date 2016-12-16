@@ -45,6 +45,8 @@ Partial Class dlgRegressionSimple
         Me.lblCI = New System.Windows.Forms.Label()
         Me.lblHyp1 = New System.Windows.Forms.Label()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.rdoCompareVar = New System.Windows.Forms.RadioButton()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
@@ -182,6 +184,8 @@ Partial Class dlgRegressionSimple
         '
         'grpParameters
         '
+        Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
+        Me.grpParameters.Controls.Add(Me.rdoCompareVar)
         Me.grpParameters.Controls.Add(Me.lblCI)
         Me.grpParameters.Controls.Add(Me.nudCI)
         Me.grpParameters.Controls.Add(Me.nudHypothesis)
@@ -190,6 +194,20 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.grpParameters, "grpParameters")
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False
+        '
+        'rdoCompareMeans
+        '
+        resources.ApplyResources(Me.rdoCompareMeans, "rdoCompareMeans")
+        Me.rdoCompareMeans.Name = "rdoCompareMeans"
+        Me.rdoCompareMeans.TabStop = True
+        Me.rdoCompareMeans.UseVisualStyleBackColor = True
+        '
+        'rdoCompareVar
+        '
+        resources.ApplyResources(Me.rdoCompareVar, "rdoCompareVar")
+        Me.rdoCompareVar.Name = "rdoCompareVar"
+        Me.rdoCompareVar.TabStop = True
+        Me.rdoCompareVar.UseVisualStyleBackColor = True
         '
         'ucrModelPreview
         '
@@ -302,4 +320,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblCI As Label
     Friend WithEvents lblHyp1 As Label
     Friend WithEvents grpParameters As GroupBox
+    Friend WithEvents rdoCompareMeans As RadioButton
+    Friend WithEvents rdoCompareVar As RadioButton
 End Class
