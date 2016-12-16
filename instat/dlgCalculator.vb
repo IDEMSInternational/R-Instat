@@ -138,28 +138,21 @@ Public Class dlgCalculator
     Private Sub CalculationsOptions()
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
-                iHelpCalcID = 126
                 Me.Size = New System.Drawing.Size(669, 435)
             Case "Logical and Symbols"
                 Me.Size = New System.Drawing.Size(627, 435)
-                iHelpCalcID = 127
             Case "Statistics"
                 Me.Size = New System.Drawing.Size(588, 435)
-                iHelpCalcID = 128
             Case "Strings (Character Columns)"
                 Me.Size = New System.Drawing.Size(630, 435)
-                iHelpCalcID = 338
             Case "Probability"
                 Me.Size = New System.Drawing.Size(779, 435)
-                iHelpCalcID = 120
             Case "Dates"
                 Me.Size = New System.Drawing.Size(649, 435)
-                iHelpCalcID = 130
             Case "Rows"
                 Me.Size = New System.Drawing.Size(615, 435)
             Case Else
                 Me.Size = New System.Drawing.Size(485, 435)
-                iHelpCalcID = 14
         End Select
     End Sub
 
@@ -237,17 +230,5 @@ Public Class dlgCalculator
 
     Private Sub cmdTry_Click() Handles ucrCalc.TryCommadClick
         TryScript()
-    End Sub
-
-    Private Sub cmdHelp_Click() Handles ucrCalc.HelpCommandClick
-        HelpContent()
-    End Sub
-
-    Private Sub HelpContent()
-        If iHelpCalcID > 0 Then
-            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-        Else
-            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-        End If
     End Sub
 End Class
