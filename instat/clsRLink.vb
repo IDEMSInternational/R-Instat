@@ -250,11 +250,14 @@ Public Class RLink
         If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
-                    clsEngine.Evaluate(("jpeg('" & strTempGraphsDirectory & "Graph.jpg')").Replace("\", "/"))
+                    clsEngine.Evaluate(("png('" & strTempGraphsDirectory & "Graph.png')").Replace("\", "/"))
+                    'need to boost resolution of the devices, it's not as good as with ggsave.
                 End If
                 clsEngine.Evaluate(strScript)
                 If iCallType = 3 Then
-                    clsEngine.Evaluate("dev.off()")
+                    'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
+                    clsEngine.Evaluate("graphics.off()") 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
+                    'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
                     'This sub is used to display graphics in the output window when necessary.
                     rtbOutput.TestForGraphics()
                 End If
