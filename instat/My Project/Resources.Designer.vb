@@ -2452,6 +2452,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to No Distribution.
+        '''</summary>
+        Friend ReadOnly Property No_Distribution() As String
+            Get
+                Return ResourceManager.GetString("No_Distribution", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Non-Parametric.
         '''</summary>
         Friend ReadOnly Property Non_Parametric() As String
