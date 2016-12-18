@@ -1001,11 +1001,15 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
     message("Factor data frame already exists.")
     if(replace) {
       message("Current factor data frame will be replaced.")
-      #TODO replacing not implemented yet
-      # This line should be removed when implemented
+      factor_named <- factor
+      names(factor_named) <- factor
+      curr_factor_df_name <- self$get_linked_to_data_name(data_name, factor_named)
+      self$delete_dataframe(curr_factor_df_name)
+    }
+    else {
+      warning("replace = FALSE so no action will be taken.")
       create <- FALSE
     }
-    else create <- FALSE
   }
   if(create) {
     data_frame_list <- list()
