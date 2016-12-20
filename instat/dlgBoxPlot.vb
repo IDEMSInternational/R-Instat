@@ -236,9 +236,9 @@ Public Class dlgBoxplot
     Private Sub DisableVarWidth()
         'Both vilon plot and Jitter plot can not have a varible width. User should not be able to check varible width
         If rdoViolin.Checked OrElse rdoJitter.Checked Then
-            chkVarwidth.Enabled = False
+            chkVarwidth.Visible = False
         Else
-            chkVarwidth.Enabled = True
+            chkVarwidth.Visible = True
         End If
     End Sub
     Private Sub FillColourAes()
