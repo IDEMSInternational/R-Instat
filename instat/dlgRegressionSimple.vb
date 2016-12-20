@@ -208,7 +208,7 @@ Public Class dlgRegressionSimple
         clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
         clsPoissonOperation.SetOperation("==")
         clsPoissonOperation.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsPoissonOperation.AddParameter(strParameterValue:=2)
+        clsPoissonOperation.AddParameter(strParameterValue:=ucrLevel1.GetText())
 
         clsRLength2.SetRCommand("length")
         clsRLength2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
@@ -216,7 +216,7 @@ Public Class dlgRegressionSimple
         clsRGroup2.AddParameter("x", clsROperatorParameter:=clsPoissonOperation2)
         clsPoissonOperation2.SetOperation("==")
         clsPoissonOperation2.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsPoissonOperation2.AddParameter(strParameterValue:=1)
+        clsPoissonOperation2.AddParameter(strParameterValue:=ucrLevel2.GetText())
 
         ' T = ...
         ' T =c(mean(Calls[Group == 1]), mean(Calls[Group == 2])))
@@ -230,9 +230,6 @@ Public Class dlgRegressionSimple
 
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
-
-        ' ' ' ' ' Doesn't recognise which dataframe it is from
-
 
         ' For two numeric variables:
         '        clsRPoisson.SetRCommand("poisson.test")
@@ -360,10 +357,6 @@ Public Class dlgRegressionSimple
         If Not ucrExplanatory.IsEmpty Then
             '            ucrLevel1.SetItems({ucrExplanatory.GetItemType("Levels")})
         End If
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged, chkConvertToVariate.VisibleChanged
@@ -583,7 +576,7 @@ Public Class dlgRegressionSimple
         SetPoissonTest()
     End Sub
 
-    Private Sub ucrLevel2_TextChanged(sender As Object, e As EventArgs) Handles ucrLevel2.TextChanged
+    Private Sub ucrLevel2_TextChanged(sender As Object, e As EventArgs)
         SetPoissonTest()
     End Sub
 End Class
