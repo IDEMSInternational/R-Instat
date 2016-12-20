@@ -182,6 +182,12 @@ Public Class dlgRegressionSimple
         'clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
         'clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
         clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+
+
+        ' if the Success button is selected
+        ' prop.test(c(length(x=Count[(x=Group == 1)&(x=Count ==1)]), length(x=Count[(x=Group == 1)&(x=Count ==1)])), c(length(x=Count[(x=Group == 1)]), length(x=Count[(x=Group == 2)])))
+
+
     End Sub
 
     Private Sub SetPoissonTest()
@@ -230,6 +236,8 @@ Public Class dlgRegressionSimple
 
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
+
+        ' Note this is currently not running adding the dataset but everything else is.
 
         ' For two numeric variables:
         '        clsRPoisson.SetRCommand("poisson.test")
@@ -572,11 +580,7 @@ Public Class dlgRegressionSimple
         SetRCode()
     End Sub
 
-    Private Sub ucrLevel_TextChanged(sender As Object, e As EventArgs) Handles ucrLevel1.TextChanged
-        SetPoissonTest()
-    End Sub
-
-    Private Sub ucrLevel2_TextChanged(sender As Object, e As EventArgs)
+    Private Sub ucrLevel1_NameChanged() Handles ucrLevel1.NameChanged, ucrLevel2.NameChanged
         SetPoissonTest()
     End Sub
 End Class
