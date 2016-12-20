@@ -208,7 +208,7 @@ Public Class dlgRegressionSimple
         clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
         clsPoissonOperation.SetOperation("==")
         clsPoissonOperation.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsPoissonOperation.AddParameter(strParameterValue:=ucrLevel1.GetText())
+        clsPoissonOperation.AddParameter(strParameterValue:=2)
 
         clsRLength2.SetRCommand("length")
         clsRLength2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
@@ -216,7 +216,7 @@ Public Class dlgRegressionSimple
         clsRGroup2.AddParameter("x", clsROperatorParameter:=clsPoissonOperation2)
         clsPoissonOperation2.SetOperation("==")
         clsPoissonOperation2.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsPoissonOperation2.AddParameter(strParameterValue:=ucrLevel2.GetText())
+        clsPoissonOperation2.AddParameter(strParameterValue:=1)
 
         ' T = ...
         ' T =c(mean(Calls[Group == 1]), mean(Calls[Group == 2])))
