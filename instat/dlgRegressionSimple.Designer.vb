@@ -45,9 +45,9 @@ Partial Class dlgRegressionSimple
         Me.lblCI = New System.Windows.Forms.Label()
         Me.lblHyp1 = New System.Windows.Forms.Label()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrLevel2 = New instat.ucrInputComboBox()
         Me.lblLevel1 = New System.Windows.Forms.Label()
         Me.lblLevel2 = New System.Windows.Forms.Label()
-        Me.ucrLevel2 = New instat.ucrInputComboBox()
         Me.ucrLevel1 = New instat.ucrInputComboBox()
         Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
         Me.rdoCompareVar = New System.Windows.Forms.RadioButton()
@@ -188,9 +188,9 @@ Partial Class dlgRegressionSimple
         '
         'grpParameters
         '
+        Me.grpParameters.Controls.Add(Me.ucrLevel2)
         Me.grpParameters.Controls.Add(Me.lblLevel1)
         Me.grpParameters.Controls.Add(Me.lblLevel2)
-        Me.grpParameters.Controls.Add(Me.ucrLevel2)
         Me.grpParameters.Controls.Add(Me.ucrLevel1)
         Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
         Me.grpParameters.Controls.Add(Me.rdoCompareVar)
@@ -203,6 +203,12 @@ Partial Class dlgRegressionSimple
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False
         '
+        'ucrLevel2
+        '
+        Me.ucrLevel2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLevel2, "ucrLevel2")
+        Me.ucrLevel2.Name = "ucrLevel2"
+        '
         'lblLevel1
         '
         resources.ApplyResources(Me.lblLevel1, "lblLevel1")
@@ -212,12 +218,6 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me.lblLevel2, "lblLevel2")
         Me.lblLevel2.Name = "lblLevel2"
-        '
-        'ucrLevel2
-        '
-        Me.ucrLevel2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrLevel2, "ucrLevel2")
-        Me.ucrLevel2.Name = "ucrLevel2"
         '
         'ucrLevel1
         '
@@ -354,6 +354,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents rdoCompareVar As RadioButton
     Friend WithEvents lblLevel1 As Label
     Friend WithEvents lblLevel2 As Label
-    Friend WithEvents ucrLevel2 As ucrInputComboBox
     Friend WithEvents ucrLevel1 As ucrInputComboBox
+    Friend WithEvents ucrLevel2 As ucrInputComboBox
 End Class
