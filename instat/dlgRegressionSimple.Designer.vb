@@ -45,12 +45,14 @@ Partial Class dlgRegressionSimple
         Me.lblCI = New System.Windows.Forms.Label()
         Me.lblHyp1 = New System.Windows.Forms.Label()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.ucrLevel2 = New instat.ucrInputComboBox()
         Me.lblLevel1 = New System.Windows.Forms.Label()
         Me.lblLevel2 = New System.Windows.Forms.Label()
-        Me.ucrLevel1 = New instat.ucrInputComboBox()
         Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
         Me.rdoCompareVar = New System.Windows.Forms.RadioButton()
+        Me.lblSuccessIf = New System.Windows.Forms.Label()
+        Me.ucrNud = New instat.ucrNud()
+        Me.ucrLevel2 = New instat.ucrInputComboBox()
+        Me.ucrLevel1 = New instat.ucrInputComboBox()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
@@ -188,6 +190,8 @@ Partial Class dlgRegressionSimple
         '
         'grpParameters
         '
+        Me.grpParameters.Controls.Add(Me.ucrNud)
+        Me.grpParameters.Controls.Add(Me.lblSuccessIf)
         Me.grpParameters.Controls.Add(Me.ucrLevel2)
         Me.grpParameters.Controls.Add(Me.lblLevel1)
         Me.grpParameters.Controls.Add(Me.lblLevel2)
@@ -203,12 +207,6 @@ Partial Class dlgRegressionSimple
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False
         '
-        'ucrLevel2
-        '
-        Me.ucrLevel2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrLevel2, "ucrLevel2")
-        Me.ucrLevel2.Name = "ucrLevel2"
-        '
         'lblLevel1
         '
         resources.ApplyResources(Me.lblLevel1, "lblLevel1")
@@ -218,12 +216,6 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me.lblLevel2, "lblLevel2")
         Me.lblLevel2.Name = "lblLevel2"
-        '
-        'ucrLevel1
-        '
-        Me.ucrLevel1.IsReadOnly = False
-        resources.ApplyResources(Me.ucrLevel1, "ucrLevel1")
-        Me.ucrLevel1.Name = "ucrLevel1"
         '
         'rdoCompareMeans
         '
@@ -238,6 +230,31 @@ Partial Class dlgRegressionSimple
         Me.rdoCompareVar.Name = "rdoCompareVar"
         Me.rdoCompareVar.TabStop = True
         Me.rdoCompareVar.UseVisualStyleBackColor = True
+        '
+        'lblSuccessIf
+        '
+        resources.ApplyResources(Me.lblSuccessIf, "lblSuccessIf")
+        Me.lblSuccessIf.Name = "lblSuccessIf"
+        '
+        'ucrNud
+        '
+        resources.ApplyResources(Me.ucrNud, "ucrNud")
+        Me.ucrNud.Maximum = 100
+        Me.ucrNud.Minimum = 0
+        Me.ucrNud.Name = "ucrNud"
+        Me.ucrNud.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrLevel2
+        '
+        Me.ucrLevel2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLevel2, "ucrLevel2")
+        Me.ucrLevel2.Name = "ucrLevel2"
+        '
+        'ucrLevel1
+        '
+        Me.ucrLevel1.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLevel1, "ucrLevel1")
+        Me.ucrLevel1.Name = "ucrLevel1"
         '
         'ucrModelPreview
         '
@@ -356,4 +373,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblLevel2 As Label
     Friend WithEvents ucrLevel1 As ucrInputComboBox
     Friend WithEvents ucrLevel2 As ucrInputComboBox
+    Friend WithEvents lblSuccessIf As Label
+    Friend WithEvents ucrNud As ucrNud
 End Class

@@ -17,8 +17,10 @@
 Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
-    Public clsModel, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2 As New ROperator
-    Public clsRConvert, clsRCIFunction, clsRPoisson, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsRLength, clsRMean, clsRMean2, clsRLength2, clsRGroup, clsRGroup2, clsRLengthGrouped, clsRLengthGrouped2 As New RFunction
+    Public clsModel, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
+    Public clsRPoisson, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest As New RFunction
+    Public clsRConvert, clsRCIFunction, clsRFactor, clsRFactor2, clsRNumeric As New RFunction
+    Public clsRLength, clsRLength2, clsRLengthGrouped, clsRLengthGrouped2, clsRLength3, clsRLengthGrouped3, clsRLength4, clsRLengthGrouped4, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsRLength5, clsRLengthGrouped5, clsRLength6, clsRLengthGrouped6 As New RFunction
     Public clsRLmOrGLM As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -151,6 +153,14 @@ Public Class dlgRegressionSimple
         clsRWilcoxTest.AddParameter("", clsROperatorParameter:=clsModel)
     End Sub
 
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
+    End Sub
+
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
     Private Sub SetKruskalTest()
         clsRKruskalTest.SetRCommand("kruskal.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRKruskalTest)
@@ -174,20 +184,75 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetBinomTest()
+        Dim clsyFunc, clsnFunc As New RFunction
+
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
+        clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsRBinomial.AddParameter("x", clsRFunctionParameter:=clsyFunc)
+        clsRBinomial.AddParameter("n", clsRFunctionParameter:=clsnFunc)
+
+        ' y = ...
+        clsyFunc.SetRCommand("c")
+        clsyFunc.AddParameter("l1", clsRFunctionParameter:=clsRLength, bIncludeArgumentName:=False)
+        clsyFunc.AddParameter("l2", clsRFunctionParameter:=clsRLength2, bIncludeArgumentName:=False)
+
+        ' n = ...
+        clsnFunc.SetRCommand("c")
+        clsnFunc.AddParameter("l3", clsRFunctionParameter:=clsRLength3, bIncludeArgumentName:=False)
+        clsnFunc.AddParameter("l4", clsRFunctionParameter:=clsRLength4, bIncludeArgumentName:=False)
+
+
+        ' Success if LABEL = ...
+        'c(length(x=ucrResponse[LevelOne]&SuccessIf]), length(x=ucrResponse[LevelTwo&SuccessIf]))
+        '  LengthOne
+        clsRLength.SetRCommand("length")
+        clsRLength.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped)
+        clsRLengthGrouped.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRFactor.ToScript & "&" & clsRNumeric.ToScript & "]")
+
+        ' LengthTwo
+        ' length(x=ucrResponse[(x=ucrExplanatory == 2)&(x=ucrResponse ==1)]))
+        clsRLength2.SetRCommand("length")
+        clsRLength2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
+        clsRLengthGrouped2.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRFactor2.ToScript & "&" & clsRNumeric.ToScript & "]")
+
+
+        ' Total counts for each level:
+        ' c(length(x=ucrResponse[LevelOne]), length(ucrResponse[LevelTwo]))
+
+        clsRLength3.SetRCommand("length")
+        clsRLength3.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped3)
+        clsRLengthGrouped3.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRFactor.ToScript & "]")
+
+        clsRLength4.SetRCommand("length")
+        clsRLength4.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped4)
+        clsRLengthGrouped4.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRFactor2.ToScript & "]")
+
+
+        ' The three groups of interest:
+        '' x=ucrExplanatory == Level1
+        clsRFactor.AddParameter("x", clsROperatorParameter:=clsRBinomialOperation)
+        clsRBinomialOperation.SetOperation("==")
+        clsRBinomialOperation.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsRBinomialOperation.AddParameter(strParameterValue:=ucrLevel1.GetText())
+
+        '' x=ucrExplanatory == Level2
+        clsRFactor2.AddParameter("x", clsROperatorParameter:=clsRBinomialOperation2)
+        clsRBinomialOperation2.SetOperation("==")
+        clsRBinomialOperation2.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
+        clsRBinomialOperation2.AddParameter(strParameterValue:=ucrLevel2.GetText())
+
+        '' x=ucrResponse == SuccessIf
+        clsRNumeric.AddParameter("x", clsROperatorParameter:=clsRBinomialOperation3)
+        clsRBinomialOperation3.SetOperation("==")
+        clsRBinomialOperation3.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
+        clsRBinomialOperation3.AddParameter(strParameterValue:=ucrNud.Value)
+
         ' If two factors:
         ' clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
         'clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
         'clsRBinomial.AddParameter("x", clsROperatorParameter:=clsModel)
-        clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
-
-        ' if the Success button is selected
-        ' prop.test(c(length(x=Count[(x=Group == 1)&(x=Count ==1)]), length(x=Count[(x=Group == 1)&(x=Count ==1)])), c(length(x=Count[(x=Group == 1)]), length(x=Count[(x=Group == 2)])))
-
-
     End Sub
 
     Private Sub SetPoissonTest()
@@ -202,23 +267,23 @@ Public Class dlgRegressionSimple
         ' x = ...
 
         clsxFunc.SetRCommand("c")
-        clsxFunc.AddParameter("l1", clsRFunctionParameter:=clsRLength, bIncludeArgumentName:=False)
-        clsxFunc.AddParameter("l2", clsRFunctionParameter:=clsRLength2, bIncludeArgumentName:=False)
+        clsxFunc.AddParameter("l1", clsRFunctionParameter:=clsRLength5, bIncludeArgumentName:=False)
+        clsxFunc.AddParameter("l2", clsRFunctionParameter:=clsRLength6, bIncludeArgumentName:=False)
         clsRPoisson.AddParameter("x", clsRFunctionParameter:=clsxFunc)
 
         ' poisson.test(x = c(length(x=Calls[Group == 1]), length(x=Calls[Group == 2])), T =c(mean(Calls[Group == 1]), mean(Calls[Group == 2])))
 
-        clsRLength.SetRCommand("length")
-        clsRLength.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped)
-        clsRLengthGrouped.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup.ToScript & "]")
+        clsRLength5.SetRCommand("length")
+        clsRLength5.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped5)
+        clsRLengthGrouped5.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup.ToScript & "]")
         clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
         clsPoissonOperation.SetOperation("==")
         clsPoissonOperation.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
         clsPoissonOperation.AddParameter(strParameterValue:=ucrLevel1.GetText())
 
-        clsRLength2.SetRCommand("length")
-        clsRLength2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
-        clsRLengthGrouped2.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup2.ToScript & "]")
+        clsRLength6.SetRCommand("length")
+        clsRLength6.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped6)
+        clsRLengthGrouped6.AddParameter("x", ucrResponse.GetVariables().ToScript & "[" & clsRGroup2.ToScript & "]")
         clsRGroup2.AddParameter("x", clsROperatorParameter:=clsPoissonOperation2)
         clsPoissonOperation2.SetOperation("==")
         clsPoissonOperation2.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
@@ -232,10 +297,10 @@ Public Class dlgRegressionSimple
         clsRPoisson.AddParameter("T", clsRFunctionParameter:=clsTFunc)
 
         clsRMean.SetRCommand("mean")
-        clsRMean.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped)
+        clsRMean.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped5)
 
         clsRMean2.SetRCommand("mean")
-        clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
+        clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped6)
 
         ' Note this is currently not running adding the dataset but everything else is.
 
@@ -258,7 +323,6 @@ Public Class dlgRegressionSimple
         clsRPoisson.ClearParameters()
         clsRBinomial.ClearParameters()
         clsRTTest.ClearParameters()
-        clsRLength.ClearParameters()
         clsRLmOrGLM.ClearParameters()
         If rdoGeneral.Checked Then
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
@@ -290,8 +354,12 @@ Public Class dlgRegressionSimple
 
     Private Sub TestOKEnabled()
         If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso ucrFamily.cboDistributions.Text <> "" AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
-            ucrBase.OKEnabled(True)
             ucrModelPreview.SetName(clsModel.ToScript)
+            '            If rdoSpecific.Checked AndAlso (ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Binomial") AndAlso Not (ucrLevel1.IsEmpty OrElse ucrLevel2.IsEmpty) Then
+            ucrBase.OKEnabled(True)
+            '            Else
+            '           ucrBase.OKEnabled(False)
+            '      End If
             If rdoGeneral.Checked Then
                 ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             End If
@@ -494,28 +562,9 @@ Public Class dlgRegressionSimple
                 nudHypothesis.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
                 nudHypothesis.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
                 nudHypothesis.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
-                If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+                If ucrFamily.clsCurrDistribution.strNameTag = "Normal" OrElse ucrFamily.clsCurrDistribution.strNameTag = "No_Distribution" Then
                     rdoCompareMeans.Visible = True
                     rdoCompareVar.Visible = True
-                    rdoCompareMeans.Text = "Compare Means"
-                    rdoCompareVar.Text = "Compare Variances"
-                    nudCI.Enabled = True
-                    lblLevel1.Visible = False
-                    lblLevel2.Visible = False
-                    ucrLevel1.Visible = False
-                    ucrLevel2.Visible = False
-                    If rdoCompareMeans.Checked Then
-                        chkPaired.Visible = True
-                        nudHypothesis.Enabled = True
-                    ElseIf rdoCompareVar.Checked Then
-                        chkPaired.Visible = False
-                        nudHypothesis.Enabled = False
-                    End If
-                ElseIf ucrFamily.clsCurrDistribution.strNameTag = "No_Distribution" Then
-                    rdoCompareMeans.Visible = True
-                    rdoCompareVar.Visible = True
-                    rdoCompareMeans.Text = "Wilcoxon Test"
-                    rdoCompareVar.Text = "Kruskal Test"
                     lblLevel1.Visible = False
                     lblLevel2.Visible = False
                     ucrLevel1.Visible = False
@@ -527,7 +576,7 @@ Public Class dlgRegressionSimple
                     ElseIf rdoCompareVar.Checked Then
                         chkPaired.Visible = False
                         nudHypothesis.Enabled = False
-                        nudCI.Enabled = False
+                        nudCI.Enabled = True ' poss want this false for No_Dist here
                     End If
                 Else
                     chkPaired.Visible = False
@@ -539,6 +588,21 @@ Public Class dlgRegressionSimple
                     lblLevel2.Visible = True
                     ucrLevel1.Visible = True
                     ucrLevel2.Visible = True
+                End If
+                If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+                    rdoCompareMeans.Text = "Compare Means"
+                    rdoCompareVar.Text = "Compare Variances"
+                End If
+                If ucrFamily.clsCurrDistribution.strNameTag = "No_Distribution" Then
+                    rdoCompareMeans.Text = "Wilcoxon Test"
+                    rdoCompareVar.Text = "Kruskal Test"
+                End If
+                If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+                    lblSuccessIf.Visible = True
+                    ucrNud.Visible = True
+                Else
+                    lblSuccessIf.Visible = False
+                    ucrNud.Visible = False
                 End If
             End If
         End If
@@ -581,6 +645,10 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrLevel1_NameChanged() Handles ucrLevel1.NameChanged, ucrLevel2.NameChanged
-        SetPoissonTest()
+        SetRCode()
+    End Sub
+
+    Private Sub ucrNud_TextChanged(sender As Object, e As EventArgs) Handles ucrNud.TextChanged
+        SetRCode()
     End Sub
 End Class
