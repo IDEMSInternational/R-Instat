@@ -501,7 +501,7 @@ Public Class dlgOneVarFitModel
         SetBinomialTest()
     End Sub
 
-    Private Sub cboVariables_TextChanged(sender As Object, e As EventArgs) Handles cboVariables.TextChanged
+    Private Sub cboVariables_TextChanged() Handles cboVariables.NameChanged
         BinomialConditions()
         SetBinomialTest()
     End Sub
