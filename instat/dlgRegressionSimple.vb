@@ -57,7 +57,6 @@ Public Class dlgRegressionSimple
         nudCI.Maximum = 1
         nudCI.DecimalPlaces = 2
         nudHypothesis.DecimalPlaces = 2
-        rdoCompareMeans.Checked = True
         chkPaired.Enabled = False 'for the time being
     End Sub
 
@@ -86,6 +85,7 @@ Public Class dlgRegressionSimple
         sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
         sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        rdoCompareMeans.Checked = True
         SetEnableDists()
         TestOKEnabled()
     End Sub
@@ -208,8 +208,7 @@ Public Class dlgRegressionSimple
         clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
         clsPoissonOperation.SetOperation("==")
         clsPoissonOperation.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsPoissonOperation.AddParameter(strParameterValue:="1") 'in there we have the level, get column name???
-
+        clsPoissonOperation.AddParameter(strParameterValue:=ucrLevel1.GetText())
 
         clsRLength2.SetRCommand("length")
         clsRLength2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
@@ -217,8 +216,7 @@ Public Class dlgRegressionSimple
         clsRGroup2.AddParameter("x", clsROperatorParameter:=clsPoissonOperation2)
         clsPoissonOperation2.SetOperation("==")
         clsPoissonOperation2.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsPoissonOperation2.AddParameter(strParameterValue:="2") 'in there we have the level, get column name???
-
+        clsPoissonOperation2.AddParameter(strParameterValue:=ucrLevel2.GetText())
 
         ' T = ...
         ' T =c(mean(Calls[Group == 1]), mean(Calls[Group == 2])))
@@ -232,6 +230,8 @@ Public Class dlgRegressionSimple
 
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRLengthGrouped2)
+
+        ' ' ' ' ' Doesn't recognise which dataframe it is from
 
 
         ' For two numeric variables:
@@ -354,6 +354,16 @@ Public Class dlgRegressionSimple
 
     Public Sub SetEnableDists()
         ucrFamily.Enabled = Not ucrResponse.IsEmpty
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+        If Not ucrExplanatory.IsEmpty Then
+            '            ucrLevel1.SetItems({ucrExplanatory.GetItemType("Levels")})
+        End If
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged, chkConvertToVariate.VisibleChanged
@@ -489,6 +499,10 @@ Public Class dlgRegressionSimple
                     rdoCompareMeans.Text = "Compare Means"
                     rdoCompareVar.Text = "Compare Variances"
                     nudCI.Enabled = True
+                    lblLevel1.Visible = False
+                    lblLevel2.Visible = False
+                    ucrLevel1.Visible = False
+                    ucrLevel2.Visible = False
                     If rdoCompareMeans.Checked Then
                         chkPaired.Visible = True
                         nudHypothesis.Enabled = True
@@ -501,6 +515,10 @@ Public Class dlgRegressionSimple
                     rdoCompareVar.Visible = True
                     rdoCompareMeans.Text = "Wilcoxon Test"
                     rdoCompareVar.Text = "Kruskal Test"
+                    lblLevel1.Visible = False
+                    lblLevel2.Visible = False
+                    ucrLevel1.Visible = False
+                    ucrLevel2.Visible = False
                     If rdoCompareMeans.Checked Then
                         chkPaired.Visible = True
                         nudHypothesis.Enabled = True
@@ -516,13 +534,13 @@ Public Class dlgRegressionSimple
                     rdoCompareVar.Visible = False
                     nudHypothesis.Enabled = True
                     nudCI.Enabled = True
+                    lblLevel1.Visible = True
+                    lblLevel2.Visible = True
+                    ucrLevel1.Visible = True
+                    ucrLevel2.Visible = True
                 End If
             End If
         End If
-    End Sub
-
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblCI.VisibleChanged, lblHyp1.VisibleChanged, lblExplanatory.VisibleChanged, lblResponse.VisibleChanged, lblModelPreview.VisibleChanged, lblFactor.VisibleChanged, lblNumeric.VisibleChanged
-        Display()
     End Sub
 
     Private Sub nuds_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHypothesis.TextChanged
@@ -559,5 +577,13 @@ Public Class dlgRegressionSimple
     Private Sub rdoCompareMeans_VisibleChanged(sender As Object, e As EventArgs) Handles rdoCompareMeans.VisibleChanged, rdoCompareVar.VisibleChanged, chkPaired.VisibleChanged, rdoCompareMeans.CheckedChanged, rdoCompareVar.CheckedChanged, chkPaired.CheckedChanged
         Display()
         SetRCode()
+    End Sub
+
+    Private Sub ucrLevel_TextChanged(sender As Object, e As EventArgs) Handles ucrLevel1.TextChanged
+        SetPoissonTest()
+    End Sub
+
+    Private Sub ucrLevel2_TextChanged(sender As Object, e As EventArgs) Handles ucrLevel2.TextChanged
+        SetPoissonTest()
     End Sub
 End Class
