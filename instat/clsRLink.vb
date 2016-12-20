@@ -250,7 +250,7 @@ Public Class RLink
         If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
-                    clsEngine.Evaluate(("png('" & strTempGraphsDirectory & "Graph.png')").Replace("\", "/"))
+                    clsEngine.Evaluate(("png('" & strTempGraphsDirectory & "Graph.png', width = 4000, height = 4000, res = 500)").Replace("\", "/"))
                     'need to boost resolution of the devices, it's not as good as with ggsave.
                 End If
                 clsEngine.Evaluate(strScript)
