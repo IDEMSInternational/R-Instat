@@ -45,6 +45,10 @@ Partial Class dlgRegressionSimple
         Me.lblCI = New System.Windows.Forms.Label()
         Me.lblHyp1 = New System.Windows.Forms.Label()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.lblLevel1 = New System.Windows.Forms.Label()
+        Me.lblLevel2 = New System.Windows.Forms.Label()
+        Me.ucrLevel2 = New instat.ucrInputComboBox()
+        Me.ucrLevel1 = New instat.ucrInputComboBox()
         Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
         Me.rdoCompareVar = New System.Windows.Forms.RadioButton()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
@@ -54,10 +58,6 @@ Partial Class dlgRegressionSimple
         Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblLevel1 = New System.Windows.Forms.Label()
-        Me.lblLevel2 = New System.Windows.Forms.Label()
-        Me.ucrLevel2 = New instat.ucrInputComboBox()
-        Me.ucrLevel1 = New instat.ucrInputComboBox()
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpParameters.SuspendLayout()
@@ -203,6 +203,28 @@ Partial Class dlgRegressionSimple
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False
         '
+        'lblLevel1
+        '
+        resources.ApplyResources(Me.lblLevel1, "lblLevel1")
+        Me.lblLevel1.Name = "lblLevel1"
+        '
+        'lblLevel2
+        '
+        resources.ApplyResources(Me.lblLevel2, "lblLevel2")
+        Me.lblLevel2.Name = "lblLevel2"
+        '
+        'ucrLevel2
+        '
+        Me.ucrLevel2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLevel2, "ucrLevel2")
+        Me.ucrLevel2.Name = "ucrLevel2"
+        '
+        'ucrLevel1
+        '
+        Me.ucrLevel1.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLevel1, "ucrLevel1")
+        Me.ucrLevel1.Name = "ucrLevel1"
+        '
         'rdoCompareMeans
         '
         resources.ApplyResources(Me.rdoCompareMeans, "rdoCompareMeans")
@@ -257,28 +279,6 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'lblLevel1
-        '
-        resources.ApplyResources(Me.lblLevel1, "lblLevel1")
-        Me.lblLevel1.Name = "lblLevel1"
-        '
-        'lblLevel2
-        '
-        resources.ApplyResources(Me.lblLevel2, "lblLevel2")
-        Me.lblLevel2.Name = "lblLevel2"
-        '
-        'ucrLevel2
-        '
-        Me.ucrLevel2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrLevel2, "ucrLevel2")
-        Me.ucrLevel2.Name = "ucrLevel2"
-        '
-        'ucrLevel1
-        '
-        Me.ucrLevel1.IsReadOnly = False
-        resources.ApplyResources(Me.ucrLevel1, "ucrLevel1")
-        Me.ucrLevel1.Name = "ucrLevel1"
         '
         'dlgRegressionSimple
         '
