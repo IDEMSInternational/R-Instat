@@ -61,7 +61,7 @@ Partial Class dlgReplace
         Me.grpOld.Location = New System.Drawing.Point(10, 194)
         Me.grpOld.Name = "grpOld"
         Me.grpOld.Size = New System.Drawing.Size(229, 132)
-        Me.grpOld.TabIndex = 11
+        Me.grpOld.TabIndex = 3
         Me.grpOld.TabStop = False
         Me.grpOld.Tag = "Old"
         Me.grpOld.Text = "Old"
@@ -72,7 +72,7 @@ Partial Class dlgReplace
         Me.chkIncludingMaximum.Location = New System.Drawing.Point(155, 103)
         Me.chkIncludingMaximum.Name = "chkIncludingMaximum"
         Me.chkIncludingMaximum.Size = New System.Drawing.Size(69, 17)
-        Me.chkIncludingMaximum.TabIndex = 7
+        Me.chkIncludingMaximum.TabIndex = 9
         Me.chkIncludingMaximum.Tag = "Including"
         Me.chkIncludingMaximum.Text = "Including"
         Me.chkIncludingMaximum.UseVisualStyleBackColor = True
@@ -83,7 +83,7 @@ Partial Class dlgReplace
         Me.lblMaximum.Location = New System.Drawing.Point(23, 104)
         Me.lblMaximum.Name = "lblMaximum"
         Me.lblMaximum.Size = New System.Drawing.Size(54, 13)
-        Me.lblMaximum.TabIndex = 8
+        Me.lblMaximum.TabIndex = 7
         Me.lblMaximum.Tag = "Maximum"
         Me.lblMaximum.Text = "Maximum:"
         '
@@ -93,7 +93,7 @@ Partial Class dlgReplace
         Me.lblRangeMin.Location = New System.Drawing.Point(23, 80)
         Me.lblRangeMin.Name = "lblRangeMin"
         Me.lblRangeMin.Size = New System.Drawing.Size(51, 13)
-        Me.lblRangeMin.TabIndex = 7
+        Me.lblRangeMin.TabIndex = 4
         Me.lblRangeMin.Tag = "Minimum"
         Me.lblRangeMin.Text = "Minimum:"
         '
@@ -114,7 +114,7 @@ Partial Class dlgReplace
         Me.rdoRange.Location = New System.Drawing.Point(5, 60)
         Me.rdoRange.Name = "rdoRange"
         Me.rdoRange.Size = New System.Drawing.Size(57, 17)
-        Me.rdoRange.TabIndex = 2
+        Me.rdoRange.TabIndex = 3
         Me.rdoRange.TabStop = True
         Me.rdoRange.Tag = "Range"
         Me.rdoRange.Text = "Range"
@@ -126,7 +126,7 @@ Partial Class dlgReplace
         Me.rdoOldMissing.Location = New System.Drawing.Point(5, 40)
         Me.rdoOldMissing.Name = "rdoOldMissing"
         Me.rdoOldMissing.Size = New System.Drawing.Size(60, 17)
-        Me.rdoOldMissing.TabIndex = 1
+        Me.rdoOldMissing.TabIndex = 2
         Me.rdoOldMissing.TabStop = True
         Me.rdoOldMissing.Tag = "Missing"
         Me.rdoOldMissing.Text = "Missing"
@@ -153,7 +153,7 @@ Partial Class dlgReplace
         Me.grpNew.Location = New System.Drawing.Point(240, 194)
         Me.grpNew.Name = "grpNew"
         Me.grpNew.Size = New System.Drawing.Size(168, 132)
-        Me.grpNew.TabIndex = 12
+        Me.grpNew.TabIndex = 4
         Me.grpNew.TabStop = False
         Me.grpNew.Tag = "New"
         Me.grpNew.Text = "New"
@@ -164,7 +164,7 @@ Partial Class dlgReplace
         Me.rdoNewMissing.Location = New System.Drawing.Point(5, 40)
         Me.rdoNewMissing.Name = "rdoNewMissing"
         Me.rdoNewMissing.Size = New System.Drawing.Size(60, 17)
-        Me.rdoNewMissing.TabIndex = 5
+        Me.rdoNewMissing.TabIndex = 2
         Me.rdoNewMissing.TabStop = True
         Me.rdoNewMissing.Tag = "Missing"
         Me.rdoNewMissing.Text = "Missing"
@@ -176,7 +176,7 @@ Partial Class dlgReplace
         Me.rdoNewValue.Location = New System.Drawing.Point(5, 20)
         Me.rdoNewValue.Name = "rdoNewValue"
         Me.rdoNewValue.Size = New System.Drawing.Size(52, 17)
-        Me.rdoNewValue.TabIndex = 4
+        Me.rdoNewValue.TabIndex = 0
         Me.rdoNewValue.TabStop = True
         Me.rdoNewValue.Tag = "Value"
         Me.rdoNewValue.Text = "Value"
@@ -200,7 +200,7 @@ Partial Class dlgReplace
         Me.lblSelectedColumns.Location = New System.Drawing.Point(249, 46)
         Me.lblSelectedColumns.Name = "lblSelectedColumns"
         Me.lblSelectedColumns.Size = New System.Drawing.Size(101, 13)
-        Me.lblSelectedColumns.TabIndex = 13
+        Me.lblSelectedColumns.TabIndex = 1
         Me.lblSelectedColumns.Tag = "Selected_Column(s)"
         Me.lblSelectedColumns.Text = "Selected Column(s):"
         '
@@ -210,7 +210,7 @@ Partial Class dlgReplace
         Me.ucrInputNewValue.Location = New System.Drawing.Point(63, 19)
         Me.ucrInputNewValue.Name = "ucrInputNewValue"
         Me.ucrInputNewValue.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputNewValue.TabIndex = 6
+        Me.ucrInputNewValue.TabIndex = 1
         '
         'ucrInputRangeTo
         '
@@ -218,7 +218,7 @@ Partial Class dlgReplace
         Me.ucrInputRangeTo.Location = New System.Drawing.Point(80, 102)
         Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
         Me.ucrInputRangeTo.Size = New System.Drawing.Size(69, 21)
-        Me.ucrInputRangeTo.TabIndex = 5
+        Me.ucrInputRangeTo.TabIndex = 8
         '
         'ucrInputRangeFrom
         '
@@ -226,7 +226,7 @@ Partial Class dlgReplace
         Me.ucrInputRangeFrom.Location = New System.Drawing.Point(80, 76)
         Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
         Me.ucrInputRangeFrom.Size = New System.Drawing.Size(69, 21)
-        Me.ucrInputRangeFrom.TabIndex = 4
+        Me.ucrInputRangeFrom.TabIndex = 5
         '
         'ucrInputOldValue
         '
@@ -234,7 +234,7 @@ Partial Class dlgReplace
         Me.ucrInputOldValue.Location = New System.Drawing.Point(58, 19)
         Me.ucrInputOldValue.Name = "ucrInputOldValue"
         Me.ucrInputOldValue.Size = New System.Drawing.Size(95, 21)
-        Me.ucrInputOldValue.TabIndex = 3
+        Me.ucrInputOldValue.TabIndex = 1
         '
         'ucrReceiverReplace
         '
@@ -243,7 +243,7 @@ Partial Class dlgReplace
         Me.ucrReceiverReplace.Name = "ucrReceiverReplace"
         Me.ucrReceiverReplace.Selector = Nothing
         Me.ucrReceiverReplace.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverReplace.TabIndex = 10
+        Me.ucrReceiverReplace.TabIndex = 2
         '
         'ucrSelectorReplace
         '
@@ -253,14 +253,14 @@ Partial Class dlgReplace
         Me.ucrSelectorReplace.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorReplace.Name = "ucrSelectorReplace"
         Me.ucrSelectorReplace.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorReplace.TabIndex = 9
+        Me.ucrSelectorReplace.TabIndex = 0
         '
         'ucrBaseReplace
         '
         Me.ucrBaseReplace.Location = New System.Drawing.Point(10, 333)
         Me.ucrBaseReplace.Name = "ucrBaseReplace"
         Me.ucrBaseReplace.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseReplace.TabIndex = 8
+        Me.ucrBaseReplace.TabIndex = 5
         '
         'dlgReplace
         '
