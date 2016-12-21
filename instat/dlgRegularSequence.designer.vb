@@ -62,7 +62,7 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.Location = New System.Drawing.Point(11, 58)
         Me.grpSequenceType.Name = "grpSequenceType"
         Me.grpSequenceType.Size = New System.Drawing.Size(204, 47)
-        Me.grpSequenceType.TabIndex = 3
+        Me.grpSequenceType.TabIndex = 1
         Me.grpSequenceType.TabStop = False
         Me.grpSequenceType.Tag = "Sequence_type"
         Me.grpSequenceType.Text = "Sequence Type"
@@ -115,7 +115,7 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Location = New System.Drawing.Point(10, 111)
         Me.grpSequenceDefinition.Name = "grpSequenceDefinition"
         Me.grpSequenceDefinition.Size = New System.Drawing.Size(205, 204)
-        Me.grpSequenceDefinition.TabIndex = 4
+        Me.grpSequenceDefinition.TabIndex = 2
         Me.grpSequenceDefinition.TabStop = False
         Me.grpSequenceDefinition.Tag = "Sequence_definition"
         Me.grpSequenceDefinition.Text = "Sequence Definition"
@@ -128,7 +128,7 @@ Partial Class dlgRegularSequence
         Me.nudNumberOfDecimalPlaces.Minimum = 0
         Me.nudNumberOfDecimalPlaces.Name = "nudNumberOfDecimalPlaces"
         Me.nudNumberOfDecimalPlaces.Size = New System.Drawing.Size(50, 20)
-        Me.nudNumberOfDecimalPlaces.TabIndex = 20
+        Me.nudNumberOfDecimalPlaces.TabIndex = 15
         Me.nudNumberOfDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'nudRepeatValues
@@ -138,7 +138,7 @@ Partial Class dlgRegularSequence
         Me.nudRepeatValues.Minimum = 0
         Me.nudRepeatValues.Name = "nudRepeatValues"
         Me.nudRepeatValues.Size = New System.Drawing.Size(50, 20)
-        Me.nudRepeatValues.TabIndex = 19
+        Me.nudRepeatValues.TabIndex = 9
         Me.nudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'nudTo
@@ -148,7 +148,7 @@ Partial Class dlgRegularSequence
         Me.nudTo.Minimum = 0
         Me.nudTo.Name = "nudTo"
         Me.nudTo.Size = New System.Drawing.Size(51, 22)
-        Me.nudTo.TabIndex = 15
+        Me.nudTo.TabIndex = 4
         Me.nudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'nudFrom
@@ -158,7 +158,7 @@ Partial Class dlgRegularSequence
         Me.nudFrom.Minimum = 0
         Me.nudFrom.Name = "nudFrom"
         Me.nudFrom.Size = New System.Drawing.Size(51, 20)
-        Me.nudFrom.TabIndex = 18
+        Me.nudFrom.TabIndex = 1
         Me.nudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'nudInStepsOf
@@ -168,7 +168,7 @@ Partial Class dlgRegularSequence
         Me.nudInStepsOf.Minimum = 0
         Me.nudInStepsOf.Name = "nudInStepsOf"
         Me.nudInStepsOf.Size = New System.Drawing.Size(50, 20)
-        Me.nudInStepsOf.TabIndex = 17
+        Me.nudInStepsOf.TabIndex = 7
         Me.nudInStepsOf.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblNumberDecimalPlaces
@@ -177,7 +177,7 @@ Partial Class dlgRegularSequence
         Me.lblNumberDecimalPlaces.Location = New System.Drawing.Point(12, 183)
         Me.lblNumberDecimalPlaces.Name = "lblNumberDecimalPlaces"
         Me.lblNumberDecimalPlaces.Size = New System.Drawing.Size(135, 13)
-        Me.lblNumberDecimalPlaces.TabIndex = 16
+        Me.lblNumberDecimalPlaces.TabIndex = 14
         Me.lblNumberDecimalPlaces.Text = "Number of Decimal Places:"
         '
         'ucrDataFrameLengthForRegularSequence
@@ -186,7 +186,7 @@ Partial Class dlgRegularSequence
         Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 130)
         Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
         Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(51, 23)
-        Me.ucrDataFrameLengthForRegularSequence.TabIndex = 10
+        Me.ucrDataFrameLengthForRegularSequence.TabIndex = 12
         '
         'dtpSelectorB
         '
@@ -208,7 +208,7 @@ Partial Class dlgRegularSequence
         Me.lblLength.Location = New System.Drawing.Point(12, 133)
         Me.lblLength.Name = "lblLength"
         Me.lblLength.Size = New System.Drawing.Size(43, 13)
-        Me.lblLength.TabIndex = 1
+        Me.lblLength.TabIndex = 11
         Me.lblLength.Tag = "Length:"
         Me.lblLength.Text = "Length:"
         '
@@ -220,7 +220,7 @@ Partial Class dlgRegularSequence
         Me.chkDefineAsFactor.Location = New System.Drawing.Point(15, 159)
         Me.chkDefineAsFactor.Name = "chkDefineAsFactor"
         Me.chkDefineAsFactor.Size = New System.Drawing.Size(104, 17)
-        Me.chkDefineAsFactor.TabIndex = 11
+        Me.chkDefineAsFactor.TabIndex = 13
         Me.chkDefineAsFactor.Tag = "Define_as_factor"
         Me.chkDefineAsFactor.Text = "Define as Factor"
         Me.chkDefineAsFactor.UseVisualStyleBackColor = True
@@ -284,7 +284,7 @@ Partial Class dlgRegularSequence
         Me.lblPreview.Location = New System.Drawing.Point(239, 28)
         Me.lblPreview.Name = "lblPreview"
         Me.lblPreview.Size = New System.Drawing.Size(100, 13)
-        Me.lblPreview.TabIndex = 7
+        Me.lblPreview.TabIndex = 3
         Me.lblPreview.Tag = "Sequence_Preview:"
         Me.lblPreview.Text = "Sequence Preview:"
         '
@@ -293,7 +293,7 @@ Partial Class dlgRegularSequence
         Me.txtGetPreview.Location = New System.Drawing.Point(238, 44)
         Me.txtGetPreview.Name = "txtGetPreview"
         Me.txtGetPreview.Size = New System.Drawing.Size(171, 172)
-        Me.txtGetPreview.TabIndex = 8
+        Me.txtGetPreview.TabIndex = 4
         Me.txtGetPreview.Text = ""
         '
         'lblNewColumnName
@@ -302,7 +302,7 @@ Partial Class dlgRegularSequence
         Me.lblNewColumnName.Location = New System.Drawing.Point(10, 325)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 12
+        Me.lblNewColumnName.TabIndex = 6
         Me.lblNewColumnName.Tag = "New_Column_Name:"
         Me.lblNewColumnName.Text = "New Column Name:"
         '
@@ -314,7 +314,7 @@ Partial Class dlgRegularSequence
         Me.txtMessage.Name = "txtMessage"
         Me.txtMessage.ReadOnly = True
         Me.txtMessage.Size = New System.Drawing.Size(171, 58)
-        Me.txtMessage.TabIndex = 14
+        Me.txtMessage.TabIndex = 5
         '
         'ucrNewColumnName
         '
@@ -322,7 +322,7 @@ Partial Class dlgRegularSequence
         Me.ucrNewColumnName.Location = New System.Drawing.Point(113, 321)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(141, 21)
-        Me.ucrNewColumnName.TabIndex = 11
+        Me.ucrNewColumnName.TabIndex = 7
         '
         'ucrSelectDataFrameRegularSequence
         '
@@ -338,7 +338,7 @@ Partial Class dlgRegularSequence
         Me.ucrBase.Location = New System.Drawing.Point(10, 348)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 8
         '
         'dlgRegularSequence
         '
