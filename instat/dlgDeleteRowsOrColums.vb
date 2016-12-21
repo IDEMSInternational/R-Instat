@@ -33,7 +33,7 @@ Public Class dlgDeleteRowsOrColums
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoRows.Checked Then
-            If Not nudRowNames.Value = "0" Then
+            If nudRowNames.nudUpDown.Text <> "0" Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
