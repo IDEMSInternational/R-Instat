@@ -22,21 +22,75 @@ Partial Class dlgContrasts
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorForContrast = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForContrasts = New instat.ucrReceiverSingle()
         Me.lblFactorReceiver = New System.Windows.Forms.Label()
-        Me.chkOverwriteExistContrast = New System.Windows.Forms.CheckBox()
-        Me.ucrInputContrast = New instat.ucrInputComboBox()
-        Me.lblSelectContrast = New System.Windows.Forms.Label()
+        Me.lblSelectContrastName = New System.Windows.Forms.Label()
+        Me.lblDefineContrast = New System.Windows.Forms.Label()
+        Me.grdLayoutForContrasts = New unvell.ReoGrid.ReoGridControl()
+        Me.ucrInputContrastName = New instat.ucrInputComboBox()
+        Me.ucrReceiverForContrasts = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForContrast = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblFactorReceiver
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 200)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
-        Me.ucrBase.TabIndex = 0
+        Me.lblFactorReceiver.AutoSize = True
+        Me.lblFactorReceiver.Location = New System.Drawing.Point(243, 20)
+        Me.lblFactorReceiver.Name = "lblFactorReceiver"
+        Me.lblFactorReceiver.Size = New System.Drawing.Size(93, 13)
+        Me.lblFactorReceiver.TabIndex = 3
+        Me.lblFactorReceiver.Text = "Selected Variable:"
+        '
+        'lblSelectContrastName
+        '
+        Me.lblSelectContrastName.AutoSize = True
+        Me.lblSelectContrastName.Location = New System.Drawing.Point(244, 78)
+        Me.lblSelectContrastName.Name = "lblSelectContrastName"
+        Me.lblSelectContrastName.Size = New System.Drawing.Size(113, 13)
+        Me.lblSelectContrastName.TabIndex = 14
+        Me.lblSelectContrastName.Text = "Select Contrast Name:"
+        '
+        'lblDefineContrast
+        '
+        Me.lblDefineContrast.AutoSize = True
+        Me.lblDefineContrast.Location = New System.Drawing.Point(442, 13)
+        Me.lblDefineContrast.Name = "lblDefineContrast"
+        Me.lblDefineContrast.Size = New System.Drawing.Size(92, 13)
+        Me.lblDefineContrast.TabIndex = 16
+        Me.lblDefineContrast.Text = "Define a Contrast:"
+        '
+        'grdLayoutForContrasts
+        '
+        Me.grdLayoutForContrasts.BackColor = System.Drawing.Color.White
+        Me.grdLayoutForContrasts.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdLayoutForContrasts.LeadHeaderContextMenuStrip = Nothing
+        Me.grdLayoutForContrasts.Location = New System.Drawing.Point(445, 36)
+        Me.grdLayoutForContrasts.Name = "grdLayoutForContrasts"
+        Me.grdLayoutForContrasts.RowHeaderContextMenuStrip = Nothing
+        Me.grdLayoutForContrasts.Script = Nothing
+        Me.grdLayoutForContrasts.SheetTabContextMenuStrip = Nothing
+        Me.grdLayoutForContrasts.SheetTabNewButtonVisible = True
+        Me.grdLayoutForContrasts.SheetTabVisible = True
+        Me.grdLayoutForContrasts.SheetTabWidth = 60
+        Me.grdLayoutForContrasts.Size = New System.Drawing.Size(333, 207)
+        Me.grdLayoutForContrasts.TabIndex = 19
+        '
+        'ucrInputContrastName
+        '
+        Me.ucrInputContrastName.IsReadOnly = False
+        Me.ucrInputContrastName.Location = New System.Drawing.Point(244, 93)
+        Me.ucrInputContrastName.Name = "ucrInputContrastName"
+        Me.ucrInputContrastName.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputContrastName.TabIndex = 13
+        '
+        'ucrReceiverForContrasts
+        '
+        Me.ucrReceiverForContrasts.Location = New System.Drawing.Point(244, 36)
+        Me.ucrReceiverForContrasts.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForContrasts.Name = "ucrReceiverForContrasts"
+        Me.ucrReceiverForContrasts.Selector = Nothing
+        Me.ucrReceiverForContrasts.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverForContrasts.TabIndex = 2
         '
         'ucrSelectorForContrast
         '
@@ -48,59 +102,22 @@ Partial Class dlgContrasts
         Me.ucrSelectorForContrast.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForContrast.TabIndex = 1
         '
-        'ucrReceiverForContrasts
+        'ucrBase
         '
-        Me.ucrReceiverForContrasts.Location = New System.Drawing.Point(244, 48)
-        Me.ucrReceiverForContrasts.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverForContrasts.Name = "ucrReceiverForContrasts"
-        Me.ucrReceiverForContrasts.Selector = Nothing
-        Me.ucrReceiverForContrasts.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverForContrasts.TabIndex = 2
-        '
-        'lblFactorReceiver
-        '
-        Me.lblFactorReceiver.AutoSize = True
-        Me.lblFactorReceiver.Location = New System.Drawing.Point(243, 33)
-        Me.lblFactorReceiver.Name = "lblFactorReceiver"
-        Me.lblFactorReceiver.Size = New System.Drawing.Size(93, 13)
-        Me.lblFactorReceiver.TabIndex = 3
-        Me.lblFactorReceiver.Text = "Selected Variable:"
-        '
-        'chkOverwriteExistContrast
-        '
-        Me.chkOverwriteExistContrast.AutoSize = True
-        Me.chkOverwriteExistContrast.Location = New System.Drawing.Point(244, 131)
-        Me.chkOverwriteExistContrast.Name = "chkOverwriteExistContrast"
-        Me.chkOverwriteExistContrast.Size = New System.Drawing.Size(195, 17)
-        Me.chkOverwriteExistContrast.TabIndex = 11
-        Me.chkOverwriteExistContrast.Text = "Overwrite Existing Contrast Columns"
-        Me.chkOverwriteExistContrast.UseVisualStyleBackColor = True
-        '
-        'ucrInputContrast
-        '
-        Me.ucrInputContrast.IsReadOnly = False
-        Me.ucrInputContrast.Location = New System.Drawing.Point(244, 93)
-        Me.ucrInputContrast.Name = "ucrInputContrast"
-        Me.ucrInputContrast.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputContrast.TabIndex = 13
-        '
-        'lblSelectContrast
-        '
-        Me.lblSelectContrast.AutoSize = True
-        Me.lblSelectContrast.Location = New System.Drawing.Point(244, 78)
-        Me.lblSelectContrast.Name = "lblSelectContrast"
-        Me.lblSelectContrast.Size = New System.Drawing.Size(82, 13)
-        Me.lblSelectContrast.TabIndex = 14
-        Me.lblSelectContrast.Text = "Select Contrast:"
+        Me.ucrBase.Location = New System.Drawing.Point(13, 200)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgContrasts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(444, 255)
-        Me.Controls.Add(Me.lblSelectContrast)
-        Me.Controls.Add(Me.ucrInputContrast)
-        Me.Controls.Add(Me.chkOverwriteExistContrast)
+        Me.ClientSize = New System.Drawing.Size(792, 255)
+        Me.Controls.Add(Me.grdLayoutForContrasts)
+        Me.Controls.Add(Me.lblDefineContrast)
+        Me.Controls.Add(Me.lblSelectContrastName)
+        Me.Controls.Add(Me.ucrInputContrastName)
         Me.Controls.Add(Me.lblFactorReceiver)
         Me.Controls.Add(Me.ucrReceiverForContrasts)
         Me.Controls.Add(Me.ucrSelectorForContrast)
@@ -121,7 +138,8 @@ Partial Class dlgContrasts
     Friend WithEvents ucrSelectorForContrast As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverForContrasts As ucrReceiverSingle
     Friend WithEvents lblFactorReceiver As Label
-    Friend WithEvents chkOverwriteExistContrast As CheckBox
-    Friend WithEvents ucrInputContrast As ucrInputComboBox
-    Friend WithEvents lblSelectContrast As Label
+    Friend WithEvents ucrInputContrastName As ucrInputComboBox
+    Friend WithEvents lblSelectContrastName As Label
+    Friend WithEvents lblDefineContrast As Label
+    Friend WithEvents grdLayoutForContrasts As unvell.ReoGrid.ReoGridControl
 End Class
