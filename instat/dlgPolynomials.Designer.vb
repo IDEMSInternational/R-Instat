@@ -28,14 +28,13 @@ Partial Class dlgPolynomials
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoCentered = New System.Windows.Forms.RadioButton()
         Me.lblSelected = New System.Windows.Forms.Label()
-        Me.nudDegree = New System.Windows.Forms.NumericUpDown()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.ucrInputPolynomial = New instat.ucrInputComboBox()
         Me.ucrSelectorForPolynomial = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverPolynomial = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.nudDegree = New instat.ucrNud()
         Me.grpType.SuspendLayout()
-        CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'rdoSimple
@@ -110,18 +109,6 @@ Partial Class dlgPolynomials
         Me.lblSelected.Tag = "Selected"
         Me.lblSelected.Text = "Selected Variable:"
         '
-        'nudDegree
-        '
-        Me.nudDegree.AllowDrop = True
-        Me.nudDegree.AutoSize = True
-        Me.nudDegree.Location = New System.Drawing.Point(309, 75)
-        Me.nudDegree.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudDegree.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudDegree.Name = "nudDegree"
-        Me.nudDegree.Size = New System.Drawing.Size(44, 20)
-        Me.nudDegree.TabIndex = 18
-        Me.nudDegree.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
@@ -166,15 +153,25 @@ Partial Class dlgPolynomials
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 11
         '
+        'nudDegree
+        '
+        Me.nudDegree.Location = New System.Drawing.Point(309, 76)
+        Me.nudDegree.Maximum = 100
+        Me.nudDegree.Minimum = 0
+        Me.nudDegree.Name = "nudDegree"
+        Me.nudDegree.Size = New System.Drawing.Size(50, 20)
+        Me.nudDegree.TabIndex = 0
+        Me.nudDegree.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgPolynomials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 289)
+        Me.Controls.Add(Me.nudDegree)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputPolynomial)
         Me.Controls.Add(Me.ucrSelectorForPolynomial)
-        Me.Controls.Add(Me.nudDegree)
         Me.Controls.Add(Me.ucrReceiverPolynomial)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrBase)
@@ -189,7 +186,6 @@ Partial Class dlgPolynomials
         Me.Text = "Polynomial "
         Me.grpType.ResumeLayout(False)
         Me.grpType.PerformLayout()
-        CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -202,8 +198,8 @@ Partial Class dlgPolynomials
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrReceiverPolynomial As ucrReceiverSingle
-    Friend WithEvents nudDegree As NumericUpDown
     Friend WithEvents ucrSelectorForPolynomial As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrInputPolynomial As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents nudDegree As ucrNud
 End Class

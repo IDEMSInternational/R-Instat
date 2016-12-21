@@ -11,6 +11,7 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
+Imports instat
 Imports instat.Translations
 
 Public Class dlgPolynomials
@@ -35,7 +36,7 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverPolynomial.IsEmpty() AndAlso nudDegree.Text <> "" AndAlso Not ucrInputPolynomial.IsEmpty Then
+        If Not ucrReceiverPolynomial.IsEmpty() AndAlso nudDegree.nudUpDown.Text <> "" AndAlso Not ucrInputPolynomial.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -46,9 +47,9 @@ Public Class dlgPolynomials
         ucrInputPolynomial.SetName("Poly")
         rdoSimple.Checked = True
         XParameter()
-        nudDegree.Value = 2
         ucrSelectorForPolynomial.Reset()
         ucrSelectorForPolynomial.Focus()
+        nudDegree.Value = "2"
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -109,7 +110,7 @@ Public Class dlgPolynomials
         End If
     End Sub
 
-    Private Sub nudDegree_TextChanged(sender As Object, e As EventArgs) Handles nudDegree.TextChanged
+    Private Sub nudDegree_ControlContentsChanged(ucrChangedControl As ucrCore) Handles nudDegree.ControlContentsChanged
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
         TestOKEnabled()
     End Sub
