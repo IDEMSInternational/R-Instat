@@ -36,7 +36,6 @@ Public Class dlgCorrelation
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverFirstColumn.SetDataType("numeric")
         ucrReceiverSecondColumn.SetDataType("numeric")
-        ucrSelectorCorrelation.Reset()
         ucrSelectorCorrelation.Focus()
         ucrReceiverMultipleColumns.SetDataType("numeric")
         ucrSaveModel.chkSaveModel.Text = "Result Name"
@@ -64,6 +63,7 @@ Public Class dlgCorrelation
         ucrSaveModel.ucrInputModelName.SetName("Cor")
         ucrSaveModel.chkSaveModel.Checked = False
         ucrSaveModel.ucrInputModelName.Visible = False
+        chkCorrelationMatrix.Checked = True
         TestOKEnabled()
     End Sub
 
@@ -198,17 +198,17 @@ Public Class dlgCorrelation
             Else
                 ucrBase.OKEnabled(False)
             End If
-        ElseIf (rdoMultipleColumns.Checked = True) AndAlso (ucrSaveModel.chkSaveModel.Checked OrElse chkCorrelationMatrix.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked OrElse sdgCorrPlot.rdoPairwisePlot.Checked) Then
+        ElseIf (rdoMultipleColumns.Checked = True) AndAlso ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 AndAlso (rdoCompleteRowsOnly.Checked = True Or rdoPairwise.Checked = True) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+        If (rdoMultipleColumns.Checked = True) AndAlso (ucrSaveModel.chkSaveModel.Checked OrElse chkCorrelationMatrix.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked OrElse sdgCorrPlot.rdoPairwisePlot.Checked) Then
             If (Not ucrReceiverMultipleColumns.IsEmpty()) AndAlso ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 AndAlso (rdoCompleteRowsOnly.Checked = True Or rdoPairwise.Checked = True) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
                 SaveModel()
                 TempData()
                 AssignModelName()
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
             End If
-        Else
-            ucrBase.OKEnabled(False)
         End If
     End Sub
 

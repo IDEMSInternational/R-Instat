@@ -73,8 +73,11 @@ Public Class sdgCorrPlot
         rdoNone.Checked = True
         tbSaveGraphs.Visible = False
         nudAlphaScatter.Value = 1
+        nudAlphaCorr.Value = 1
+        ucrSelectFactor.Reset()
         cmbgeom.SelectedItem = "tile"
         chkColour.Checked = False
+        chkLabel.Checked = False
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
