@@ -59,16 +59,16 @@ Public Class ucrDistributions
         clsTempOp.SetOperation("/")
 
         If clsCurrDistribution.strNameTag = "Exponential" AndAlso strArgumentName = "mean" Then
-            clsTempOp.SetParameter(True, strValue:=1)
-            clsTempOp.SetParameter(False, strValue:=strArgumentValue)
+            clsTempOp.AddParameter(iPosition:=0, strParameterValue:=1)
+            clsTempOp.AddParameter(strParameterValue:=strArgumentValue)
             clsCurrRFunction.AddParameter("rate", clsROperatorParameter:=clsTempOp)
         ElseIf clsCurrDistribution.strNameTag = "Gamma_With_Shape_and_Mean" AndAlso (strArgumentName = "shape" OrElse strArgumentName = "mean") Then
             If strArgumentName = "shape" Then
                 clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
                 i = clsCurrRFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "mean")
                 If i <> -1 Then
-                    clsTempOp.SetParameter(True, strValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
-                    clsTempOp.SetParameter(False, strValue:=strArgumentValue)
+                    clsTempOp.AddParameter(iPosition:=0, strParameterValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
+                    clsTempOp.AddParameter(strParameterValue:=strArgumentValue)
                     clsCurrRFunction.AddParameter("scale", clsROperatorParameter:=clsTempOp)
                     clsCurrRFunction.RemoveParameterByName("mean")
                 End If
@@ -77,8 +77,8 @@ Public Class ucrDistributions
                 If i = -1 Then
                     clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
                 Else
-                    clsTempOp.SetParameter(True, strValue:=strArgumentValue)
-                    clsTempOp.SetParameter(False, strValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
+                    clsTempOp.AddParameter(iPosition:=0, strParameterValue:=strArgumentValue)
+                    clsTempOp.AddParameter(strParameterValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
                     clsCurrRFunction.AddParameter("scale", clsROperatorParameter:=clsTempOp)
                 End If
             End If
@@ -133,10 +133,8 @@ Public Class ucrDistributions
         SetDistributions()
     End Sub
 
-    Private Sub SetDistributions()
-
+    Public Sub SetDistributions()
         Dim bUse As Boolean
-
         lstCurrentDistributions.Clear()
         cboDistributions.Items.Clear()
         For Each Dist In lstAllDistributions
@@ -213,6 +211,7 @@ Public Class ucrDistributions
         Dim clsFDist As New Distribution
         Dim clsHyperGeoDist As New Distribution
         Dim clsLogNormDist As New Distribution
+        Dim clsNoDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -298,9 +297,10 @@ Public Class ucrDistributions
         clsBernouliDist.strQFunctionName = "qbinom"
         clsBernouliDist.strDFunctionName = "dbinom"
         clsBernouliDist.bIsContinuous = False
-        '        clsBernouliDist.bIsExact = True
-        '        clsBernouliDist.strExactName = "binom"
-        '        clsBernouliDist.lstExact = {"prob", "Difference in Proportions:", 0.5, 0.1, 2, 0, 1}
+        clsBernouliDist.bIsExact = True
+        clsBernouliDist.bTwoLevelFactor = True
+        clsBernouliDist.strExactName = "binom"
+        clsBernouliDist.lstExact = {"prob", "Probability:", 0.5, 0.1, 2, 0, 1}
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBernouliDist)
 
@@ -328,9 +328,9 @@ Public Class ucrDistributions
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
         clsPoissonDist.bIsContinuous = False
-        '        clsPoissonDist.bIsExact = True
-        '        clsPoissonDist.strExactName = "pois"
-        '        clsPoissonDist.lstExact = {"r", "Rate Ratio:", 1, 1, 2, 0, Integer.MaxValue}
+        clsPoissonDist.bIsExact = True
+        clsPoissonDist.strExactName = "pois"
+        clsPoissonDist.lstExact = {"r", "Rate Ratio:", 1, 1, 2, 0, Integer.MaxValue}
         clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 
@@ -538,9 +538,15 @@ Public Class ucrDistributions
         'clsQuasipoissonDist.bIsContinuous = 
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)
-
-
         bDistributionsSet = True
+
+        ' No Distribution
+        clsNoDist.strNameTag = "No_Distribution" ' TODO: Add in this name
+        clsNoDist.strRName = ""
+        clsNoDist.bIsExact = True
+        clsNoDist.strExactName = "none"
+        clsNoDist.lstExact = {"", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
+        lstAllDistributions.Add(clsNoDist)
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
@@ -557,6 +563,8 @@ Public Class ucrDistributions
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strQFunctionName)
                 Case "GLMFunctions"
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strGLMFunctionName)
+                Case "ExactSolution"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strExactName)
             End Select
         Else
             clsCurrRFunction = New RFunction

@@ -121,52 +121,101 @@ get_odk_form_names = function(username, password, platform) {
   return(form_names)
 }
 
-import_CPT <- function(dataset, data_from = 5){
-  start_year <-min(get_years_from_data(dataset))
-  end_year <-max(get_years_from_data(dataset))
-  duration =length(get_years_from_data(dataset))
-
-  lon = get_lon_from_data(dataset)
-  lat = get_lat_from_data(dataset)
+convert_SST <- function(datafile, data_from = 5){
+  start_year <- get_years_from_data(datafile)[1]
+  end_year <- get_years_from_data(datafile)[length(get_years_from_data(datafile))]
+  duration <- get_years_from_data(datafile)
+  lon <- get_lon_from_data(datafile)
+  lat <- get_lat_from_data(datafile)
+  lat_lon_df <- lat_lon_dataframe(datafile)
+  period <- rep(get_years_from_data(datafile), each = (length(lat)*length(lon)))
+  SST_value <- c()
   
-  column_names<-c()
-  for (i in 1:length(lat)){
-    for (j in 1:length(lon)){
-      column_names = append(column_names, paste(paste("lat", lat[i], sep = ""), paste("lon", lon[j], sep = ""), sep = "_"))
-    }
-  }
-  my_data = as.data.frame(matrix(NA, nrow = duration, ncol = (length(lat)*length(lon)+1)))
-  my_data[,1] = get_years_from_data(dataset)
-  names(my_data) <- c("year",column_names)
-  for (k in 1:duration){
-    nam <- paste("year", start_year + k-1, sep = "_")
-    year <-matrix(NA, nrow = length(lat), ncol = length(lon))
+  for (k in duration){
+    year <- matrix(NA, nrow = length(lat), ncol = length(lon))
     for (i in 1:length(lat)){
       for (j in 1:length(lon)){
-        dat = as.numeric(as.character(dataset[data_from+i, j+1]))
-        year[i,j] = dat
-        j=j+1
+        dat <- as.numeric(as.character(datafile[data_from+i, j+1]))
+        year[i,j] <- dat
+        j = j+1
       }
-      i=i+1
+      i = i+1
     }
-    year=as.data.frame(t(year))
-    year=stack(year)
-    data_from = data_from+length(lat)+2
-    g=as.numeric(year$values)
-    my_data[k,2:ncol(my_data)] = g
-    k=k+1
+    year = as.data.frame(t(year))
+    year = stack(year)
+    data_from = data_from + length(lat) + 2
+    g <- as.numeric(year$values)
+    SST_value = append(SST_value, g)
   }
+  my_data = cbind(period, lat_lon_df, SST_value)
+  return(list(my_data, lat_lon_df))
+}
+
+get_years_from_data <- function(datafile){
+  return(na.omit(t(unique(datafile[3,2:ncol(datafile)]))))
+}
+
+get_lat_from_data <- function(datafile){
+  return(unique(na.omit(as.numeric(as.character(datafile[5:nrow(datafile),1])))))
+}
+
+get_lon_from_data <- function(datafile){
+  return(na.omit(as.numeric(unique(t(datafile[5,2:ncol(datafile)])))))
+}
+
+lat_lon_dataframe <- function(datafile){
+  latitude  <- get_lat_from_data(datafile)
+  longitude <- get_lon_from_data(datafile)
+  lat <- rep(latitude, each = length(longitude))
+  lon <- rep(longitude, length(latitude))
+  lat_lon <- as.data.frame(cbind(lat, lon))
+  station <- c()
+  for (j in 1:nrow(lat_lon)){
+    if(lat_lon[j,1]>=0){
+      station = append(station, paste(paste("latN", lat_lon[j,1], sep = ""), paste("lon", lat_lon[j,2], sep = ""), sep = "_"))
+    }
+    else{
+      station = append(station, paste(paste("latS", abs(lat_lon[j,1]), sep = ""), paste("lon", lat_lon[j,2], sep = ""), sep = "_"))
+    }
+    
+  }
+  return(cbind(lat_lon,station))
+}
+
+output_for_CPT = function(data_name, lat_lon_data, long = TRUE, year_col, sst_cols, station_col = ""){
+  if(missing(data_name) || missing(data_name)) stop("data_name and lat_lon_data should be provided.")
+  if(missing(year_col) || missing(sst_cols)) stop("year_col and sst_cols must be provided.")
+  if(!is.character(year_col) || !is.character(sst_cols)) stop("year_col and sst_cols must be of type character.")
+  if(!all(c(year_col, sst_cols) %in% names(data_name))) stop("Some column(s) are missing in data")
+  my_lat_lon_data <- lat_lon_data
+  row.names(my_lat_lon_data) <- lat_lon_data$station
+  if (long){
+    if(length(sst_cols) != 1)stop("Only one SST column should be provided for long data format.")
+    if(missing(station_col)) stop("station_col must be provided for long data format.")
+    if(!is.character(station_col)) stop("station must be of type character.")
+    if(!all(station_col %in% names(data_name))) stop(station_col,  " is missing in data.")
+    ssT_col_names = as.character(levels(data_name[,station_col]))
+    Year = c("LAT","LON")
+    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
+    selected_lat_lon = cbind(Year, selected_lat_lon)
+    my_data <- as.matrix(dcast(data = data_name, formula = as.formula(paste(year_col, "~station",sep = "")), value.var = sst_cols))
+    my_data = as.data.frame(rbind(selected_lat_lon, my_data))
+  }
+  else{
+    ssT_col_names = sst_cols
+    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
+    my_data = data_name[,c(ssT_col_names)]
+    my_data = rbind(selected_lat_lon, my_data)
+    Year = c("LAT","LON", as.vector(data_name[,c(year_col)]))
+    my_data = as.data.frame(cbind(Year, my_data))
+  }
+  data.table::setnames(my_data, "Year", "STN")
   return(my_data)
 }
 
-get_years_from_data <- function(dataset){
-  return(as.numeric(format(as.Date(na.omit(t(unique(dataset[3,2:ncol(dataset)])))), '%Y')))
-}
-
-get_lat_from_data <- function(dataset){
-  return(unique(na.omit(as.numeric(as.character(dataset[5:nrow(dataset),1])))))
-}
-
-get_lon_from_data <- function(dataset){
-  return(as.numeric(na.omit(t(unique(dataset[5,2:ncol(dataset)])))))
+yday_366 <- function(date) {
+  temp_doy <- yday(date)
+  temp_leap <- leap_year(date)
+  temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)] <- 1 + temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)]
+  return(temp_doy)
 }
