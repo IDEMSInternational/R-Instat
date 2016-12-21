@@ -355,15 +355,6 @@ Public Class frmMain
     Private Sub StackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseStackDailyData.Click
         dlgStackDailyData.ShowDialog()
     End Sub
-
-    Private Sub InterpolateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseInterpolate.Click
-        dlgInterpolate.ShowDialog()
-    End Sub
-
-    Private Sub OptionsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseOptions.Click
-        dlgOptions.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticExamine_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamine.Click
         dlgExamine.ShowDialog()
     End Sub
@@ -392,35 +383,12 @@ Public Class frmMain
         dlgHeatSum.ShowDialog()
     End Sub
 
-    Private Sub CountsTotalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingCountsTotals.Click
-        dlgCountsTotals.ShowDialog()
-    End Sub
 
-    Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingPrepare.Click
-        dlgPrepare.ShowDialog()
-    End Sub
 
-    Private Sub ModelProbabilitiesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingModelProbabilities.Click
-        dlgModelProbabilities.ShowDialog()
-    End Sub
 
-    Private Sub ModelAmountsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelAmountsToolStripMenuItem.Click
-        dlgModelAmounts.ShowDialog()
-    End Sub
 
-    Private Sub InterpolateDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterpolateDailyToolStripMenuItem.Click
-        dlgInterpolateDaily.ShowDialog()
-    End Sub
 
-    Private Sub SimulationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimulationsToolStripMenuItem.Click
-
-    End Sub
-
-    Private Sub SpellLengthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpellLengthToolStripMenuItem.Click
-        'dlgSpellLength.ShowDialog()
-    End Sub
-
-    Private Sub TotalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TotalsToolStripMenuItem.Click
+    Private Sub TotalsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgTotals.ShowDialog()
     End Sub
 
@@ -1130,11 +1098,6 @@ Public Class frmMain
     Private Sub mnuDescribeMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateCanonicalCorrelations.Click
         dlgCanonicalCorrelationAnalysis.ShowDialog()
     End Sub
-
-    Private Sub mnuClimaticDescribeDescribeDaily_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeDescribeDaily.Click
-        dlgDisplayDaily.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticOrganiseSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseSummary.Click
         dlgSummary.ShowDialog()
     End Sub
@@ -1289,5 +1252,57 @@ Public Class frmMain
 
     Private Sub mnuHelpLicence_Click(sender As Object, e As EventArgs) Handles mnuHelpLicence.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "323")
+    End Sub
+
+    Private Sub mnuClimaticFileExportToCPT_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToCPT.Click
+        dlgExportToCPT.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeDescribeDaily_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeDescribeDaily.Click
+        dlgDisplayDaily.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseInventory_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseInventory.Click
+        dlgInventoryPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMarkovModellingCountsTotals_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingCountsTotals.Click
+        dlgCountsTotals.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMarkovModellingPrepare_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingPrepare.Click
+        dlgPrepare.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMarkovModellingModelProbabilities_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingModelProbabilities.Click
+        dlgModelProbabilities.ShowDialog()
+    End Sub
+
+    Private Sub ModelAmountsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelAmountsToolStripMenuItem.Click
+        dlgModelAmounts.ShowDialog()
+    End Sub
+
+    Private Sub InterpolateDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterpolateDailyToolStripMenuItem.Click
+        dlgInterpolateDaily.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeMoreGraphsWindoRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeMoreGraphsWindoRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeMoreGraphsCummulaiveDistribution_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeMoreGraphsCummulaiveDistribution.Click
+        dlgCumulativeDistribution.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSCFSupportExporttoCPT_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportExporttoCPT.Click
+        dlgExportToCPT.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSCFSupportOpenSST_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportOpenSST.Click
+        dlgOpenSST.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileDefineClimaticData.Click
+        DlgDefineClimaticData.ShowDialog()
     End Sub
 End Class

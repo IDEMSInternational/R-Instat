@@ -140,6 +140,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsBlockReader.vb" />
+    <Compile Include="clsRCodeStructure.vb" />
+    <Compile Include="dlgCalculationsSummary.Designer.vb">
+      <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCalculationsSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgAppend.Designer.vb">
       <DependentUpon>dlgAppend.vb</DependentUpon>
     </Compile>
@@ -164,6 +172,12 @@
     <Compile Include="dlgCountinFactor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DlgDefineClimaticData.Designer.vb">
+      <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DlgDefineClimaticData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -180,6 +194,12 @@
       <DependentUpon>dlgEnter.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgEnter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportToCPT.Designer.vb">
+      <DependentUpon>dlgExportToCPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToCPT.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportToOpenRefine.Designer.vb">
@@ -272,6 +292,7 @@
     <Compile Include="DlgUseDate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="mdlCoreControl.vb" />
     <Compile Include="sdgAddNewDistribution.Designer.vb">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </Compile>
@@ -342,6 +363,12 @@
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOneVarUseModFit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgCalculationsSummmary.Designer.vb">
+      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCalculationsSummmary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -924,6 +951,12 @@
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrAdditionalLayers.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrCalculator.Designer.vb">
+      <DependentUpon>ucrCalculator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrCalculator.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrCheck.Designer.vb">
@@ -1840,6 +1873,12 @@
     <Compile Include="ucrNewColumnName.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrNud.Designer.vb">
+      <DependentUpon>ucrNud.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNud.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrRadio.Designer.vb">
       <DependentUpon>ucrRadio.vb</DependentUpon>
     </Compile>
@@ -1932,6 +1971,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgCalculationsSummary.fr-FR.resx">
+      <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculationsSummary.resx">
+      <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculationsSummary.sw-KE.resx">
+      <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAddStartRain.fr-FR.resx">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
     </EmbeddedResource>
@@ -2160,6 +2208,9 @@
     <EmbeddedResource Include="dlgCumulativeDistribution.sw-KE.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DlgDefineClimaticData.resx">
+      <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -2243,6 +2294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToCPT.resx">
+      <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToOpenRefine.resx">
       <DependentUpon>dlgExportToOpenRefine.vb</DependentUpon>
@@ -2819,6 +2873,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAddNewDistribution.sw-KE.resx">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCalculationsSummmary.fr-FR.resx">
+      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCalculationsSummmary.resx">
+      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCalculationsSummmary.sw-KE.resx">
+      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
@@ -4081,6 +4144,15 @@
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrCalculator.fr-FR.resx">
+      <DependentUpon>ucrCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrCalculator.resx">
+      <DependentUpon>ucrCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrCalculator.sw-KE.resx">
+      <DependentUpon>ucrCalculator.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrCheck.resx">
       <DependentUpon>ucrCheck.vb</DependentUpon>
     </EmbeddedResource>
@@ -4254,6 +4326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.sw-KE.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNud.resx">
+      <DependentUpon>ucrNud.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrRadio.resx">
       <DependentUpon>ucrRadio.vb</DependentUpon>

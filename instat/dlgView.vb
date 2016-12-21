@@ -11,25 +11,23 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgView
+    Public clsHead, clsTail, clsView As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-        ucrBase.clsRsyntax.iCallType = 2
 
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         'Checks if Ok can be enabled.
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetDefaults()
@@ -38,58 +36,42 @@ Public Class dlgView
         Else
             nudNumberRows.Value = nudNumberRows.Maximum
         End If
-        ucrSelctorForView.Reset()
-        ucrSelctorForView.Focus()
+        ucrSelectorForView.Reset()
+        ucrSelectorForView.Focus()
         rdoTop.Checked = True
-        grpDisplayFrom.ResetText()
+        rdoDispSepOutputWindow.Checked = True
+        rdoDispOutputWindow.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverView.Selector = ucrSelctorForView
+        ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
+        DataFrameLength()
         ucrBase.iHelpTopicID = 32
-
-    End Sub
-
-    Private Sub ReopenDialog()
-
+        clsView.SetRCommand("View")
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverView.IsEmpty() = False And nudNumberRows.Text <> "" Then
+        'OK is enabled when the ucrReceiverView and nudNumberRows are both non-empty in both cases of Window display
+        If (Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> "") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+
     End Sub
 
     Private Sub grpDisplayFrom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
-        grpRowsToBeSelected()
+        SetCommands()
     End Sub
 
-    Private Sub grpRowsToBeSelected()
-        If rdoTop.Checked Then
-            ucrBase.clsRsyntax.SetFunction("head")
-        Else
-            ucrBase.clsRsyntax.SetFunction("tail")
-        End If
-    End Sub
-
-    Private Sub ucrReceiverView_SelctionChanged() Handles ucrReceiverView.SelectionChanged
-        If Not ucrReceiverView.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
+    Private Sub ucrReceiverView_SelctionChanged(sender As Object, e As EventArgs) Handles ucrReceiverView.SelectionChanged
+        SetCommands()
         TestOKEnabled()
     End Sub
 
     Private Sub nudNumberRows_TextChanged(sender As Object, e As EventArgs) Handles nudNumberRows.TextChanged
-        If Not nudNumberRows.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("n")
-        End If
+        SetCommands()
         TestOKEnabled()
     End Sub
 
@@ -98,7 +80,63 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelctorForView.DataFrameChanged
-        nudNumberRows.Maximum = ucrSelctorForView.ucrAvailableDataFrames.iDataFrameLength
+    Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
+        DataFrameLength()
+    End Sub
+
+    Private Sub DataFrameLength()
+        nudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
+    End Sub
+
+    Private Sub grpDisplay_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDispOutputWindow.CheckedChanged, rdoDispSepOutputWindow.CheckedChanged
+        SetCommands()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetCommands()
+        If rdoDispSepOutputWindow.Checked Then
+            XandNParameters()
+            If rdoBottom.Checked Then
+                clsView.AddParameter("x", clsRFunctionParameter:=clsTail)
+            ElseIf rdoTop.Checked Then
+                clsView.AddParameter("x", clsRFunctionParameter:=clsHead)
+            End If
+            ucrBase.clsRsyntax.SetBaseRFunction(clsView)
+            ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelectorForView.strCurrentDataFrame & Chr(34))
+        ElseIf rdoDispOutputWindow.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
+            clsView.RemoveParameterByName("title")
+            XandNParameters()
+        End If
+    End Sub
+
+    Private Sub XandNParameters()
+        If rdoTop.Checked Then
+            clsHead.SetRCommand("head")
+            If Not ucrReceiverView.IsEmpty Then
+                clsHead.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+            Else
+                clsHead.RemoveParameterByName("x")
+            End If
+            If Not nudNumberRows.Text = "" Then
+                clsHead.AddParameter("n", nudNumberRows.Value)
+            Else
+                clsHead.RemoveParameterByName("n")
+            End If
+            ucrBase.clsRsyntax.SetBaseRFunction(clsHead)
+        Else
+            clsTail.SetRCommand("tail")
+            If Not ucrReceiverView.IsEmpty Then
+                clsTail.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+            Else
+                clsTail.RemoveParameterByName("x")
+            End If
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTail)
+            If Not nudNumberRows.Text = "" Then
+                clsTail.AddParameter("n", nudNumberRows.Value)
+            Else
+                clsTail.RemoveParameterByName("n")
+            End If
+        End If
     End Sub
 End Class

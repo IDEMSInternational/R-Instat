@@ -138,9 +138,9 @@ Public Class ucrAdditionalLayers
         'bIgnoreGlobalAes is used in Setup(Layer) to determine whether the chkIgnoreGlobalAes should be ticked in the sdgLayerOptions. It's value is determined below. The following RParameter will be used in this procedure.
 
         'The selected geom is found as the RFunction of the appropriate RParameter of RSyntax. The name of that Parameter is the name of the selected item in the lstLayers. That one is fetched using .SelectedItems(0) as there can only be one selected item at a time when the edit button is clicked.
-        clsSelectedGeom = clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentFunction
+        clsSelectedGeom = clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentCodeStructure
         If clsSelectedGeom.GetParameter("mapping") IsNot Nothing Then
-            clsLocalAes = clsSelectedGeom.GetParameter("mapping").clsArgumentFunction
+            clsLocalAes = clsSelectedGeom.GetParameter("mapping").clsArgumentCodeStructure
         Else
             clsLocalAes = Nothing
         End If

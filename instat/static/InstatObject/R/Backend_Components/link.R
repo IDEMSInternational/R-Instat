@@ -30,7 +30,9 @@ link$set("public", "data_clone", function() {
 instat_object$set("public", "add_link", function(from_data_frame, to_data_frame, link_pairs, type) {
   if(length(names(link_pairs)) != length(link_pairs)) stop("link_pairs must be a named vector or list.")
   if(!self$link_exists_between(from_data_frame, to_data_frame)) {
-    if(!self$is_key(to_data_frame, link_pairs)) {
+    # This means when creating a link to single value data frame, there will be no key in to_data_frame
+    # Will this cause any issues?
+    if(length(link_pairs) > 0 && !self$is_key(to_data_frame, link_pairs)) {
       message("link columns must be a key in the to_data_frame\nAttempting to create key...")
       self$add_key(to_data_frame, as.character(link_pairs))
       message("New key created")
@@ -189,6 +191,40 @@ instat_object$set("public", "get_possible_linked_to_defintion", function(from_da
 }
 )
 
+instat_object$set("public", "get_equivalent_columns", function(from_data_name, columns, to_data_name) {
+  if(from_data_name == to_data_name) equivalent_columns <- columns
+  else equivalent_columns <- self$link_between_containing(from_data_name, columns, to_data_name)
+  if(length(equivalent_columns) != 0) return(equivalent_columns)
+  else {
+    prev_data_links <- list(list(from_data_name, columns))
+    continue <- TRUE
+    while(continue) {
+      curr_data_links <- prev_data_links
+      curr_data_names <- sapply(curr_data_links, function(x) x[[1]])
+      for(temp_data_name in self$get_data_names()) {
+        i = 1
+        for(curr_from_data_frame in curr_data_names) {
+          if(curr_from_data_frame == temp_data_name) curr_link_cols <- curr_data_links[[i]][[2]]
+          curr_link_cols <- self$link_between_containing(curr_from_data_frame, curr_data_links[[i]][[2]], temp_data_name)
+          if(length(curr_link_cols) != 0) {
+            if(temp_data_name == to_data_name) {
+              return(curr_link_cols)
+            }
+            else if(!(temp_data_name %in% sapply(curr_data_links, function(x) x[[1]]))) {
+              curr_data_links[[length(curr_data_links) + 1]] <- list(temp_data_name, curr_link_cols)
+            }
+          }
+          i = i + 1
+        }
+      }
+      if(length(prev_data_links) == length(curr_data_links)) continue <- FALSE
+      else prev_data_links <- curr_data_links
+    }
+    return(c())
+  }
+}
+)
+
 instat_object$set("public", "link_exists_between", function(from_data_frame, to_data_frame) {
   return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame))
          || any(sapply(private$.links, function(link) link$from_data_frame == to_data_frame && link$to_data_frame == from_data_frame)))
@@ -201,14 +237,22 @@ instat_object$set("public", "link_between_containing", function(from_data_frame,
     for(curr_link_pairs in curr_link$link_columns) {
       if(curr_link$from_data_frame == from_data_frame) {
         if(all(containing_columns %in% names(curr_link_pairs))) {
-          ind <- which(names(curr_link_pairs) %in% containing_columns)
-          return(as.vector(curr_link_pairs[ind]))
+          out <- c()
+          for(col in containing_columns) {
+            ind <- which(names(curr_link_pairs) == col)
+            out <- c(out, curr_link_pairs[[ind]])
+          }
+          return(out)
         }
       }
       else {
         if(all(containing_columns %in% curr_link_pairs)) {
-          ind <- which(curr_link_pairs %in% containing_columns)
-          return(names(curr_link_pairs)[ind])
+          out <- c()
+          for(col in containing_columns) {
+            ind <- which(curr_link_pairs == col)
+            out <- c(out, names(curr_link_pairs)[ind])
+          }
+          return(out)
         }
       }
     }
