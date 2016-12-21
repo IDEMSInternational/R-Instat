@@ -44,6 +44,7 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub SetDefaults()
+        nudRowNames.Value = "0"
         ColumnsRows()
         rdoColumns.Checked = True
         ucrSelectorForDeleteColumns.Reset()

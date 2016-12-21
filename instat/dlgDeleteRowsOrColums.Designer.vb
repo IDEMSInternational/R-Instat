@@ -41,7 +41,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.lblNumberofRows.Location = New System.Drawing.Point(10, 91)
         Me.lblNumberofRows.Name = "lblNumberofRows"
         Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
-        Me.lblNumberofRows.TabIndex = 3
+        Me.lblNumberofRows.TabIndex = 5
         Me.lblNumberofRows.Tag = "Number_of_Rows:"
         Me.lblNumberofRows.Text = "Number of Rows:"
         '
@@ -51,7 +51,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.rdoColumns.Location = New System.Drawing.Point(13, 10)
         Me.rdoColumns.Name = "rdoColumns"
         Me.rdoColumns.Size = New System.Drawing.Size(65, 17)
-        Me.rdoColumns.TabIndex = 7
+        Me.rdoColumns.TabIndex = 0
         Me.rdoColumns.TabStop = True
         Me.rdoColumns.Tag = "Columns"
         Me.rdoColumns.Text = "Columns"
@@ -63,7 +63,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.rdoRows.Location = New System.Drawing.Point(249, 10)
         Me.rdoRows.Name = "rdoRows"
         Me.rdoRows.Size = New System.Drawing.Size(52, 17)
-        Me.rdoRows.TabIndex = 8
+        Me.rdoRows.TabIndex = 1
         Me.rdoRows.TabStop = True
         Me.rdoRows.Tag = "Rows"
         Me.rdoRows.Text = "Rows"
@@ -75,7 +75,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.lblColumnsToDelete.Location = New System.Drawing.Point(252, 73)
         Me.lblColumnsToDelete.Name = "lblColumnsToDelete"
         Me.lblColumnsToDelete.Size = New System.Drawing.Size(96, 13)
-        Me.lblColumnsToDelete.TabIndex = 14
+        Me.lblColumnsToDelete.TabIndex = 3
         Me.lblColumnsToDelete.Tag = "Columns_to_Delete"
         Me.lblColumnsToDelete.Text = "Columns to Delete:"
         '
@@ -86,7 +86,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrReceiverForColumnsToDelete.Name = "ucrReceiverForColumnsToDelete"
         Me.ucrReceiverForColumnsToDelete.Selector = Nothing
         Me.ucrReceiverForColumnsToDelete.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverForColumnsToDelete.TabIndex = 13
+        Me.ucrReceiverForColumnsToDelete.TabIndex = 4
         '
         'ucrSelectorForDeleteColumns
         '
@@ -96,7 +96,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrSelectorForDeleteColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleteColumns.Name = "ucrSelectorForDeleteColumns"
         Me.ucrSelectorForDeleteColumns.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForDeleteColumns.TabIndex = 12
+        Me.ucrSelectorForDeleteColumns.TabIndex = 2
         '
         'ucrDataFrameLengthForDeleteRows
         '
@@ -104,7 +104,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrDataFrameLengthForDeleteRows.Location = New System.Drawing.Point(103, 88)
         Me.ucrDataFrameLengthForDeleteRows.Name = "ucrDataFrameLengthForDeleteRows"
         Me.ucrDataFrameLengthForDeleteRows.Size = New System.Drawing.Size(55, 24)
-        Me.ucrDataFrameLengthForDeleteRows.TabIndex = 9
+        Me.ucrDataFrameLengthForDeleteRows.TabIndex = 6
         '
         'ucrSelectorForDeleteRows
         '
@@ -120,7 +120,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrBase.Location = New System.Drawing.Point(10, 231)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 5
+        Me.ucrBase.TabIndex = 9
         '
         'lblRowNames
         '
@@ -128,7 +128,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.lblRowNames.Location = New System.Drawing.Point(10, 116)
         Me.lblRowNames.Name = "lblRowNames"
         Me.lblRowNames.Size = New System.Drawing.Size(78, 13)
-        Me.lblRowNames.TabIndex = 16
+        Me.lblRowNames.TabIndex = 7
         Me.lblRowNames.Tag = ""
         Me.lblRowNames.Text = "Row to Delete:"
         '
@@ -139,7 +139,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.nudRowNames.Minimum = 0
         Me.nudRowNames.Name = "nudRowNames"
         Me.nudRowNames.Size = New System.Drawing.Size(50, 20)
-        Me.nudRowNames.TabIndex = 17
+        Me.nudRowNames.TabIndex = 8
         Me.nudRowNames.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgDeleteRowsOrColums
