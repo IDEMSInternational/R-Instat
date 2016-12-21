@@ -23,6 +23,7 @@ Partial Class dlgView
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrSpecifyRows = New instat.ucrCheck()
         Me.lblDisplayFrom = New System.Windows.Forms.Label()
         Me.rdoBottom = New System.Windows.Forms.RadioButton()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
@@ -35,7 +36,6 @@ Partial Class dlgView
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSpecifyRows = New instat.ucrCheck()
         Me.grpDisplayOptions.SuspendLayout()
         CType(Me.nudNumberRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpDisplay.SuspendLayout()
@@ -52,10 +52,18 @@ Partial Class dlgView
         Me.grpDisplayOptions.Location = New System.Drawing.Point(186, 200)
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
         Me.grpDisplayOptions.Size = New System.Drawing.Size(191, 113)
-        Me.grpDisplayOptions.TabIndex = 6
+        Me.grpDisplayOptions.TabIndex = 4
         Me.grpDisplayOptions.TabStop = False
         Me.grpDisplayOptions.Tag = "Display_Options"
         Me.grpDisplayOptions.Text = "Display Options"
+        '
+        'ucrSpecifyRows
+        '
+        Me.ucrSpecifyRows.Checked = False
+        Me.ucrSpecifyRows.Location = New System.Drawing.Point(15, 19)
+        Me.ucrSpecifyRows.Name = "ucrSpecifyRows"
+        Me.ucrSpecifyRows.Size = New System.Drawing.Size(100, 20)
+        Me.ucrSpecifyRows.TabIndex = 0
         '
         'lblDisplayFrom
         '
@@ -63,7 +71,7 @@ Partial Class dlgView
         Me.lblDisplayFrom.Location = New System.Drawing.Point(12, 68)
         Me.lblDisplayFrom.Name = "lblDisplayFrom"
         Me.lblDisplayFrom.Size = New System.Drawing.Size(70, 13)
-        Me.lblDisplayFrom.TabIndex = 8
+        Me.lblDisplayFrom.TabIndex = 3
         Me.lblDisplayFrom.Tag = ""
         Me.lblDisplayFrom.Text = "Display From:"
         '
@@ -73,7 +81,7 @@ Partial Class dlgView
         Me.rdoBottom.Location = New System.Drawing.Point(107, 88)
         Me.rdoBottom.Name = "rdoBottom"
         Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
-        Me.rdoBottom.TabIndex = 1
+        Me.rdoBottom.TabIndex = 5
         Me.rdoBottom.TabStop = True
         Me.rdoBottom.Tag = "Bottom"
         Me.rdoBottom.Text = "Bottom"
@@ -85,7 +93,7 @@ Partial Class dlgView
         Me.lblNumberofRows.Location = New System.Drawing.Point(12, 45)
         Me.lblNumberofRows.Name = "lblNumberofRows"
         Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
-        Me.lblNumberofRows.TabIndex = 4
+        Me.lblNumberofRows.TabIndex = 1
         Me.lblNumberofRows.Tag = "Number_of_rows"
         Me.lblNumberofRows.Text = "Number of Rows:"
         '
@@ -95,7 +103,7 @@ Partial Class dlgView
         Me.rdoTop.Location = New System.Drawing.Point(107, 67)
         Me.rdoTop.Name = "rdoTop"
         Me.rdoTop.Size = New System.Drawing.Size(44, 17)
-        Me.rdoTop.TabIndex = 0
+        Me.rdoTop.TabIndex = 4
         Me.rdoTop.TabStop = True
         Me.rdoTop.Tag = "Top"
         Me.rdoTop.Text = "Top"
@@ -107,7 +115,7 @@ Partial Class dlgView
         Me.nudNumberRows.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudNumberRows.Name = "nudNumberRows"
         Me.nudNumberRows.Size = New System.Drawing.Size(47, 20)
-        Me.nudNumberRows.TabIndex = 5
+        Me.nudNumberRows.TabIndex = 2
         '
         'lblSelected
         '
@@ -176,21 +184,13 @@ Partial Class dlgView
         Me.ucrBase.Location = New System.Drawing.Point(10, 319)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 7
-        '
-        'ucrSpecifyRows
-        '
-        Me.ucrSpecifyRows.Checked = False
-        Me.ucrSpecifyRows.Location = New System.Drawing.Point(15, 19)
-        Me.ucrSpecifyRows.Name = "ucrSpecifyRows"
-        Me.ucrSpecifyRows.Size = New System.Drawing.Size(100, 20)
-        Me.ucrSpecifyRows.TabIndex = 9
+        Me.ucrBase.TabIndex = 5
         '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 407)
+        Me.ClientSize = New System.Drawing.Size(422, 374)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverView)
