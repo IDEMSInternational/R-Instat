@@ -184,8 +184,8 @@ Partial Class dlgRecodeNumeric
         Me.MinimizeBox = False
         Me.Name = "dlgRecodeNumeric"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Recode"
-        Me.Text = "Recode"
+        Me.Tag = "Recode_Numeric"
+        Me.Text = "Recode Numeric"
         Me.grpClosedOn.ResumeLayout(False)
         Me.grpClosedOn.PerformLayout()
         Me.ResumeLayout(False)
