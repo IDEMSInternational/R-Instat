@@ -49,6 +49,14 @@ Public Class ucrAxes
         nudLowerLimit.Value = 0
         nudUpperLimit.Value = 0
         nudScalesNoOfDecimalPlaces.Value = 0
+        lblFrom.Visible = False
+        lblTo.Visible = False
+        lblInStepsOf.Visible = False
+        lblTickMarkersNoOfDecimalPlaces.Visible = False
+        nudFrom.Visible = False
+        nudTo.Visible = False
+        nudInStepsOf.Visible = False
+        nudTickMarkersNoOfDecimalPlaces.Visible = False
     End Sub
 
     Public Sub Reset()

@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class sdgPlots
     'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
@@ -57,7 +58,7 @@ Public Class sdgPlots
         TitleDefaults()
         chkIncludeFacets.Checked = False
         IncludeFacets()
-        nudNoOfRowsOrColumns.Value = 1
+        nudNumberOfRowsOrColumns.Value = "1"
         ucrFacetSelector.Reset()
 
         ucr1stFactorReceiver.SetMeAsReceiver()
@@ -94,7 +95,7 @@ Public Class sdgPlots
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
         'This is necessary to make sure the minimum number of fixed rows or columns is 1.
-        nudNoOfRowsOrColumns.Minimum = 1
+        nudNumberOfRowsOrColumns.Minimum = "1"
 
         'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
         'Also carry the RSyntax through to these ucr's .
@@ -141,7 +142,7 @@ Public Class sdgPlots
             rdoHorizontal.Checked = True
             rdoVertical.Visible = True
             chkNoOfRowsOrColumns.Checked = False
-            nudNoOfRowsOrColumns.Visible = True
+            nudNumberOfRowsOrColumns.Visible = True
             chkMargin.Checked = False
             chkFreeScalesX.Checked = False
             chkFreeScalesY.Checked = False
@@ -153,6 +154,7 @@ Public Class sdgPlots
             'In case IncludeFacets is checked, the facets need to be set. Still might not be included as RSyntax parameter if no no variable has been set for faceting, but this is then decided in the IncludeFacetsParameter below.
             SetFacets()
             SecondFactorReceiverEnabled()
+            chkNoOfRowsOrColumns.Visible = True
         Else
             ucrFacetSelector.Visible = False
             ucr1stFactorReceiver.Visible = False
@@ -165,7 +167,7 @@ Public Class sdgPlots
             chkFreeScalesX.Visible = False
             chkFreeScalesY.Visible = False
             chkNoOfRowsOrColumns.Visible = False
-            nudNoOfRowsOrColumns.Visible = False
+            nudNumberOfRowsOrColumns.Visible = False
             chkFreeSpace.Visible = False
         End If
         'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
@@ -247,11 +249,11 @@ Public Class sdgPlots
         'This sub is called in the wrap case to set up the parameter fixing the number of rows or columns when working in the horizontal or vertical case.
         If chkNoOfRowsOrColumns.Checked Then
             If rdoHorizontal.Checked Then
-                clsRFacetFunction.AddParameter("nrow", nudNoOfRowsOrColumns.Value)
+                clsRFacetFunction.AddParameter("nrow", nudNumberOfRowsOrColumns.Value.ToString)
                 clsRFacetFunction.RemoveParameterByName("ncol")
             Else
                 clsRFacetFunction.RemoveParameterByName("nrow")
-                clsRFacetFunction.AddParameter("ncol", nudNoOfRowsOrColumns.Value)
+                clsRFacetFunction.AddParameter("ncol", nudNumberOfRowsOrColumns.Value.ToString)
             End If
         Else
             clsRFacetFunction.RemoveParameterByName("ncol")
@@ -266,6 +268,7 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("facet")
         End If
     End Sub
+
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
         IncludeFacets()
         FacetsNumberOfRowsOrColumns()
@@ -293,13 +296,15 @@ Public Class sdgPlots
     Private Sub FacetsNumberOfRowsOrColumns()
         'This sub decides whether the option to fix the number of rows or columns should be available or not.
         'When chkMargin is checked, or when both receivers are used (i.e. the second optional is filled), facet_grid is used, and thus the number of rows or columns can't be fixed.
-        If (chkMargin.Checked OrElse chkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
-            chkNoOfRowsOrColumns.Checked = False
-            chkNoOfRowsOrColumns.Visible = False
-            nudNoOfRowsOrColumns.Visible = False
-        Else
-            chkNoOfRowsOrColumns.Visible = True
-            nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+        If chkIncludeFacets.Checked Then
+            If (chkMargin.Checked OrElse chkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
+                chkNoOfRowsOrColumns.Checked = False
+                chkNoOfRowsOrColumns.Visible = False
+                nudNumberOfRowsOrColumns.Visible = False
+            Else
+                chkNoOfRowsOrColumns.Visible = True
+                nudNumberOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+            End If
         End If
     End Sub
 
@@ -331,11 +336,11 @@ Public Class sdgPlots
     End Sub
 
     Private Sub chkNoOfRowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoOfRowsOrColumns.CheckedChanged
-        nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+        nudNumberOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
         SetFacets()
     End Sub
 
-    Private Sub nudNoOfRowsOrColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNoOfRowsOrColumns.TextChanged
+    Private Sub nudNumberOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles nudNumberOfRowsOrColumns.ControlValueChanged
         SetFacets()
     End Sub
 
@@ -465,6 +470,8 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub
+
+
 
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
