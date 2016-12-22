@@ -360,8 +360,8 @@ Partial Class dlgRegularSequence
         Me.Name = "dlgRegularSequence"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Entry_of_Regular_Sequence"
-        Me.Text = "Entry of Regular Sequence"
+        Me.Tag = "Regular_Sequence"
+        Me.Text = "Regular Sequence"
         Me.grpSequenceType.ResumeLayout(False)
         Me.grpSequenceType.PerformLayout()
         Me.grpSequenceDefinition.ResumeLayout(False)
