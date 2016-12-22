@@ -1305,4 +1305,12 @@ Public Class frmMain
     Private Sub mnuClimaticFileDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileDefineClimaticData.Click
         DlgDefineClimaticData.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticOrganiseDatesMakeDate_CheckedChanged(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseDatesMakeDate.CheckedChanged
+        dlgMakeDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseDatesUseDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseDatesUseDate.Click
+        dlgUseDate.ShowDialog()
+    End Sub
 End Class
