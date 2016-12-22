@@ -182,8 +182,8 @@ Partial Class dlgPolynomials
         Me.MinimizeBox = False
         Me.Name = "dlgPolynomials"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Polynomial"
-        Me.Text = "Polynomial "
+        Me.Tag = "Polynomials"
+        Me.Text = "Polynomials"
         Me.grpType.ResumeLayout(False)
         Me.grpType.PerformLayout()
         Me.ResumeLayout(False)
