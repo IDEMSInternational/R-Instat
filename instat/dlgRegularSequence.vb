@@ -61,15 +61,15 @@ Public Class dlgRegularSequence
         rdoDates.Checked = False
         ucrSelectDataFrameRegularSequence.Reset()
         ucrSelectDataFrameRegularSequence.Focus()
-        nudFrom.nudUpDown.Value = 1
+        nudFrom.Value = "1"
         If ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
-            nudTo.nudUpDown.Value = ucrSelectDataFrameRegularSequence.iDataFrameLength
+            nudTo.Value = ucrSelectDataFrameRegularSequence.iDataFrameLength
         End If
-        nudInStepsOf.nudUpDown.Value = 1
-        nudRepeatValues.nudUpDown.Value = 1
+        nudInStepsOf.Value = "1"
+        nudRepeatValues.Value = "1"
         SetNumericOrDatesParameters()
         CheckSequenceLength()
-        nudNumberOfDecimalPlaces.Value = 2
+        nudNumberOfDecimalPlaces.Value = "2"
         ucrNewColumnName.SetPrefix("Regular")
     End Sub
 
@@ -107,7 +107,7 @@ Public Class dlgRegularSequence
     Private Sub SetNumericOrDatesParameters()
         If rdoNumeric.Checked Then
             nudFrom.Visible = True
-            nudTo.nudUpDown.Visible = True
+            nudTo.Visible = True
             dtpSelectorA.Visible = False
             dtpSelectorB.Visible = False
             chkDefineAsFactor.Visible = False
@@ -115,7 +115,7 @@ Public Class dlgRegularSequence
             dtpSelectorA.Visible = True
             dtpSelectorB.Visible = True
             nudFrom.Visible = False
-            nudTo.nudUpDown.Visible = False
+            nudTo.Visible = False
             chkDefineAsFactor.Visible = True
         End If
         SetFromParameter()
@@ -135,8 +135,8 @@ Public Class dlgRegularSequence
     Private Sub SetInStepsOfParameter()
         If rdoNumeric.Checked Then
             If nudInStepsOf.nudUpDown.Text <> "" Then
-                If (nudInStepsOf.nudUpDown.Value = 1 AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters) OrElse nudInStepsOf.nudUpDown.Value <> 1 Then
-                    If nudTo.nudUpDown.Value >= nudFrom.nudUpDown.Value Then
+                If (nudInStepsOf.Value = "1" AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters) OrElse nudInStepsOf.nudUpDown.Value <> 1 Then
+                    If nudTo.Value.ToString >= nudFrom.Value.ToString Then
                         clsSeqFunction.AddParameter("by", nudInStepsOf.nudUpDown.Value)
                     Else
                         clsSeqFunction.AddParameter("by", -nudInStepsOf.nudUpDown.Value)
@@ -183,7 +183,7 @@ Public Class dlgRegularSequence
     Private Sub SetFromParameter()
         If rdoNumeric.Checked Then
             If nudFrom.nudUpDown.Text <> "" Then
-                clsSeqFunction.AddParameter("from", nudFrom.nudUpDown.Value)
+                clsSeqFunction.AddParameter("from", nudFrom.Value.ToString)
             Else
                 clsSeqFunction.RemoveParameterByName("from")
             End If
@@ -201,7 +201,7 @@ Public Class dlgRegularSequence
     Private Sub SetToParameter()
         If rdoNumeric.Checked Then
             If nudTo.nudUpDown.Text <> "" Then
-                clsSeqFunction.AddParameter("to", nudTo.nudUpDown.Value)
+                clsSeqFunction.AddParameter("to", nudTo.Value.ToString)
             Else
                 clsSeqFunction.RemoveParameterByName("to")
             End If
@@ -229,9 +229,8 @@ Public Class dlgRegularSequence
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
     End Sub
     Private Sub ucrSelectDataFrameRegularSequence_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectDataFrameRegularSequence.DataFrameChanged
-        nudTo.nudUpDown.Value = ucrSelectDataFrameRegularSequence.iDataFrameLength
-        nudFrom.nudUpDown.Value = 1
-        nudTo.nudUpDown.Value = ucrSelectDataFrameRegularSequence.iDataFrameLength
+        nudTo.Value = ucrSelectDataFrameRegularSequence.iDataFrameLength
+        nudFrom.Value = "1"
         SetNumericOrDatesParameters()
         CheckSequenceLength()
         TestOKEnabled()
@@ -282,12 +281,13 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub nudNumberOfDecimalPlaces_ControlContentsChanged(ucrChangedControl As ucrCore) Handles nudNumberOfDecimalPlaces.ControlContentsChanged
-        nudFrom.nudUpDown.DecimalPlaces = nudNumberOfDecimalPlaces.nudUpDown.Value
-        nudTo.nudUpDown.DecimalPlaces = nudNumberOfDecimalPlaces.nudUpDown.Value
-        nudInStepsOf.nudUpDown.DecimalPlaces = nudNumberOfDecimalPlaces.nudUpDown.Value
-        nudFrom.nudUpDown.Increment = 10 ^ -(nudNumberOfDecimalPlaces.nudUpDown.Value)
-        nudTo.nudUpDown.Increment = 10 ^ -(nudNumberOfDecimalPlaces.nudUpDown.Value)
-        nudInStepsOf.nudUpDown.Increment = 10 ^ -(nudNumberOfDecimalPlaces.nudUpDown.Value)
+        nudFrom.nudUpDown.DecimalPlaces = nudNumberOfDecimalPlaces.Value.ToString
+        nudTo.nudUpDown.DecimalPlaces = nudNumberOfDecimalPlaces.Value.ToString
+        nudInStepsOf.nudUpDown.DecimalPlaces = nudNumberOfDecimalPlaces.Value.ToString
+        nudFrom.nudUpDown.Increment = 10 ^ -(nudNumberOfDecimalPlaces.Value.ToString)
+        nudTo.nudUpDown.Increment = 10 ^ -(nudNumberOfDecimalPlaces.Value.ToString)
+        nudInStepsOf.nudUpDown.Increment = 10 ^ -(nudNumberOfDecimalPlaces.Value.ToString)
+        CheckSequenceLength()
     End Sub
 
 End Class
