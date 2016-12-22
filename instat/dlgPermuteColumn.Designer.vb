@@ -116,7 +116,7 @@ Partial Class dlgPermuteColumn
         Me.nudSetSeed.Minimum = 0
         Me.nudSetSeed.Name = "nudSetSeed"
         Me.nudSetSeed.Size = New System.Drawing.Size(50, 20)
-        Me.nudSetSeed.TabIndex = 10
+        Me.nudSetSeed.TabIndex = 4
         Me.nudSetSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'nudNumberOfColumns
@@ -126,7 +126,7 @@ Partial Class dlgPermuteColumn
         Me.nudNumberOfColumns.Minimum = 0
         Me.nudNumberOfColumns.Name = "nudNumberOfColumns"
         Me.nudNumberOfColumns.Size = New System.Drawing.Size(50, 20)
-        Me.nudNumberOfColumns.TabIndex = 11
+        Me.nudNumberOfColumns.TabIndex = 6
         Me.nudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgPermuteColumn
