@@ -207,8 +207,8 @@ Partial Class dlgSummaryBarOrPieChart
         Me.MinimizeBox = False
         Me.Name = "dlgSummaryBarOrPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Summary_Bar_Pie_Chart"
-        Me.Text = "Summary Bar or Pie Chart"
+        Me.Tag = "Bar_or_Pie_Chart_From_Summary"
+        Me.Text = "Bar or Pie Chart From Summary"
         Me.grpChartOptions.ResumeLayout(False)
         Me.grpChartOptions.PerformLayout()
         Me.ResumeLayout(False)
