@@ -110,7 +110,7 @@ Public Class dlgPolynomials
         End If
     End Sub
 
-    Private Sub nudDegree_ValueChanged(sender As Object, e As EventArgs) Handles nudDegree.ValueChanged
+    Private Sub nudDegree_TextChanged(sender As Object, e As EventArgs) Handles nudDegree.TextChanged
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
         TestOKEnabled()
     End Sub
