@@ -2727,40 +2727,40 @@ Partial Class frmMain
         'mnuOrganiseColumnGenerateRegularSequence
         '
         Me.mnuOrganiseColumnGenerateRegularSequence.Name = "mnuOrganiseColumnGenerateRegularSequence"
-        Me.mnuOrganiseColumnGenerateRegularSequence.Size = New System.Drawing.Size(179, 22)
+        Me.mnuOrganiseColumnGenerateRegularSequence.Size = New System.Drawing.Size(177, 22)
         Me.mnuOrganiseColumnGenerateRegularSequence.Tag = "Regular_Sequence..."
         Me.mnuOrganiseColumnGenerateRegularSequence.Text = "Regular Sequence..."
         '
         'mnuOrganiseColumnGenerateCountInFactor
         '
         Me.mnuOrganiseColumnGenerateCountInFactor.Name = "mnuOrganiseColumnGenerateCountInFactor"
-        Me.mnuOrganiseColumnGenerateCountInFactor.Size = New System.Drawing.Size(179, 22)
+        Me.mnuOrganiseColumnGenerateCountInFactor.Size = New System.Drawing.Size(177, 22)
         Me.mnuOrganiseColumnGenerateCountInFactor.Text = "Count in Factor..."
         '
         'ToolStripSeparator25
         '
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
-        Me.ToolStripSeparator25.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator25.Size = New System.Drawing.Size(174, 6)
         '
         'mnuOrganiseColumnGenerateEnter
         '
         Me.mnuOrganiseColumnGenerateEnter.Name = "mnuOrganiseColumnGenerateEnter"
-        Me.mnuOrganiseColumnGenerateEnter.Size = New System.Drawing.Size(179, 22)
+        Me.mnuOrganiseColumnGenerateEnter.Size = New System.Drawing.Size(177, 22)
         Me.mnuOrganiseColumnGenerateEnter.Text = "Enter..."
         '
         'mnuOrganiseColumnGenerateRandomSamples
         '
         Me.mnuOrganiseColumnGenerateRandomSamples.Name = "mnuOrganiseColumnGenerateRandomSamples"
-        Me.mnuOrganiseColumnGenerateRandomSamples.Size = New System.Drawing.Size(179, 22)
+        Me.mnuOrganiseColumnGenerateRandomSamples.Size = New System.Drawing.Size(177, 22)
         Me.mnuOrganiseColumnGenerateRandomSamples.Tag = "Random_Samples..."
         Me.mnuOrganiseColumnGenerateRandomSamples.Text = "Random Samples..."
         '
         'mnuOrganiseColumnGeneratePermuteRows
         '
         Me.mnuOrganiseColumnGeneratePermuteRows.Name = "mnuOrganiseColumnGeneratePermuteRows"
-        Me.mnuOrganiseColumnGeneratePermuteRows.Size = New System.Drawing.Size(179, 22)
+        Me.mnuOrganiseColumnGeneratePermuteRows.Size = New System.Drawing.Size(177, 22)
         Me.mnuOrganiseColumnGeneratePermuteRows.Tag = "Permute_Rows..."
-        Me.mnuOrganiseColumnGeneratePermuteRows.Text = "Permute Columns..."
+        Me.mnuOrganiseColumnGeneratePermuteRows.Text = "Permute Column..."
         '
         'mnuOrganiseColumnFactor
         '
