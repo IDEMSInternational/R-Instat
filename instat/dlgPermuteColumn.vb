@@ -97,7 +97,7 @@ Public Class dlgPermuteColumn
         clsSetSeedFunc.AddParameter("seed", nudSetSeed.Value)
     End Sub
 
-    Private Sub nudNumberOfColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.ValueChanged
+    Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged
         ucrBase.clsRsyntax.AddParameter("n", nudNumberofColumns.Value)
     End Sub
 
