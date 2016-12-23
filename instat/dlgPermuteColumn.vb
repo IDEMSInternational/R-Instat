@@ -93,7 +93,7 @@ Public Class dlgPermuteColumn
         End If
     End Sub
 
-    Private Sub nudSetSeed_ValueChanged(sender As Object, e As EventArgs) Handles nudSetSeed.ValueChanged
+    Private Sub nudSetSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
         clsSetSeedFunc.AddParameter("seed", nudSetSeed.Value)
     End Sub
 
