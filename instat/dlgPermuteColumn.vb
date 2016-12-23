@@ -38,7 +38,6 @@ Public Class dlgPermuteColumn
         ucrPermuteRowsSelector.Reset()
         nudNumberofColumns.Value = 1
         nudSetSeed.Value = 5
-        ucrInputPermuteRows.SetPrefix("Permute")
         chkSetSeed.Checked = False
         nudSetSeed.Visible = False
         TestOkEnabled()
@@ -65,6 +64,7 @@ Public Class dlgPermuteColumn
         ucrInputPermuteRows.SetValidationTypeAsRVariable()
         nudSetSeed.Minimum = Integer.MinValue
         nudSetSeed.Maximum = Integer.MaxValue
+        nudNumberofColumns.Minimum = 1
         SetSize()
     End Sub
 
@@ -99,6 +99,19 @@ Public Class dlgPermuteColumn
 
     Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged
         ucrBase.clsRsyntax.AddParameter("n", nudNumberofColumns.Value)
+        If nudNumberofColumns.Value = 1 Then
+            lblNewColumnName.Text = "New Column Name:"
+            If Not ucrInputPermuteRows.bUserTyped Then
+                ucrInputPermuteRows.SetPrefix("Permute")
+            End If
+        Else
+            lblNewColumnName.Text = "Prefix for New Columns:"
+            If Not ucrInputPermuteRows.bUserTyped Then
+                ucrInputPermuteRows.SetPrefix("")
+                ucrInputPermuteRows.SetName("Permute")
+            End If
+        End If
+        SetAssignTo()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -106,8 +119,15 @@ Public Class dlgPermuteColumn
     End Sub
 
     Private Sub ucrInputPermuteRows_nameChanged() Handles ucrInputPermuteRows.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPermuteRows.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPermuteRows.GetText, bAssignToIsPrefix:=True)
+        SetAssignTo()
         TestOkEnabled()
+    End Sub
+
+    Private Sub SetAssignTo()
+        Dim bIsPrefix As Boolean
+
+        bIsPrefix = (nudNumberofColumns.Value > 1)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPermuteRows.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPermuteRows.GetText, bAssignToIsPrefix:=bIsPrefix)
     End Sub
 
     Private Sub ucrPermuteRowsSelector_DataFrameChanged() Handles ucrPermuteRowsSelector.DataFrameChanged
