@@ -40,8 +40,8 @@ Public Class dlgMakeDate
         ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
 
         Dim lstYearItems As New List(Of KeyValuePair(Of String, String))
-        lstYearItems.Add(New KeyValuePair(Of String, String)("YYYY", Chr(34) & "%Y" & Chr(34)))
-        lstYearItems.Add(New KeyValuePair(Of String, String)("YY", Chr(34) & "%y" & Chr(34)))
+        lstYearItems.Add(New KeyValuePair(Of String, String)("4 Digit", Chr(34) & "%Y" & Chr(34)))
+        lstYearItems.Add(New KeyValuePair(Of String, String)("2 Digit", Chr(34) & "%y" & Chr(34)))
         ucrInputYear.SetItems(lstYearItems)
         ucrInputYearOption.SetItems(lstYearItems)
 
@@ -54,9 +54,12 @@ Public Class dlgMakeDate
 
         Dim lstDayItems As New List(Of KeyValuePair(Of String, String))
         lstDayItems.Add(New KeyValuePair(Of String, String)("By Month", Chr(34) & "%d" & Chr(34)))
-        lstDayItems.Add(New KeyValuePair(Of String, String)("By Year", Chr(34) & "%j" & Chr(34)))
-        ucrInputDay.SetItems(lstDayItems)
         ucrInputDayOption.SetItems(lstDayItems)
+
+        Dim lstDayItemsDOY As New List(Of KeyValuePair(Of String, String))
+        lstDayItemsDOY.Add(New KeyValuePair(Of String, String)("By Month", Chr(34) & "%d" & Chr(34)))
+        lstDayItemsDOY.Add(New KeyValuePair(Of String, String)("By Year", Chr(34) & "%j" & Chr(34)))
+        ucrInputDay.SetItems(lstDayItemsDOY)
 
         Dim lstMonthTwoItems As New List(Of KeyValuePair(Of String, String))
         lstMonthTwoItems.Add(New KeyValuePair(Of String, String)("365/366", Chr(34) & "365/366" & Chr(34)))
