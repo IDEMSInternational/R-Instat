@@ -24,7 +24,6 @@ Partial Class sdgPlots
     Private Sub InitializeComponent()
         Me.tabctrlBoxSubdialog = New System.Windows.Forms.TabControl()
         Me.tabFacet = New System.Windows.Forms.TabPage()
-        Me.nudNumberOfRowsOrColumns = New instat.ucrNud()
         Me.chkFreeSpace = New System.Windows.Forms.CheckBox()
         Me.ucrFacetSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.chkNoOfRowsOrColumns = New System.Windows.Forms.CheckBox()
@@ -62,6 +61,7 @@ Partial Class sdgPlots
         Me.tabCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.nudNumberofRows = New System.Windows.Forms.NumericUpDown()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabFacet.SuspendLayout()
         Me.tabLayers.SuspendLayout()
@@ -71,6 +71,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.SuspendLayout()
         Me.tabTheme.SuspendLayout()
         Me.tabCoordinates.SuspendLayout()
+        CType(Me.nudNumberofRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabctrlBoxSubdialog
@@ -90,7 +91,7 @@ Partial Class sdgPlots
         '
         'tabFacet
         '
-        Me.tabFacet.Controls.Add(Me.nudNumberOfRowsOrColumns)
+        Me.tabFacet.Controls.Add(Me.nudNumberofRows)
         Me.tabFacet.Controls.Add(Me.chkFreeSpace)
         Me.tabFacet.Controls.Add(Me.ucrFacetSelector)
         Me.tabFacet.Controls.Add(Me.chkNoOfRowsOrColumns)
@@ -112,16 +113,6 @@ Partial Class sdgPlots
         Me.tabFacet.Tag = "Facet"
         Me.tabFacet.Text = "Facets"
         Me.tabFacet.UseVisualStyleBackColor = True
-        '
-        'nudNumberOfRowsOrColumns
-        '
-        Me.nudNumberOfRowsOrColumns.Location = New System.Drawing.Point(144, 255)
-        Me.nudNumberOfRowsOrColumns.Maximum = 100
-        Me.nudNumberOfRowsOrColumns.Minimum = 0
-        Me.nudNumberOfRowsOrColumns.Name = "nudNumberOfRowsOrColumns"
-        Me.nudNumberOfRowsOrColumns.Size = New System.Drawing.Size(51, 20)
-        Me.nudNumberOfRowsOrColumns.TabIndex = 22
-        Me.nudNumberOfRowsOrColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'chkFreeSpace
         '
@@ -495,6 +486,13 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'nudNumberofRows
+        '
+        Me.nudNumberofRows.Location = New System.Drawing.Point(146, 254)
+        Me.nudNumberofRows.Name = "nudNumberofRows"
+        Me.nudNumberofRows.Size = New System.Drawing.Size(51, 20)
+        Me.nudNumberofRows.TabIndex = 23
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -524,6 +522,7 @@ Partial Class sdgPlots
         Me.tabTheme.PerformLayout()
         Me.tabCoordinates.ResumeLayout(False)
         Me.tabCoordinates.PerformLayout()
+        CType(Me.nudNumberofRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -567,7 +566,7 @@ Partial Class sdgPlots
     Friend WithEvents chkFreeSpace As CheckBox
     Friend WithEvents tabCoordinates As TabPage
     Friend WithEvents lblWarning As Label
-    Friend WithEvents nudNumberOfRowsOrColumns As ucrNud
+    Friend WithEvents nudNumberofRows As NumericUpDown
 End Class
 
 
