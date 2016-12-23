@@ -85,7 +85,7 @@ Partial Class sdgCombineGraphOptions
         Me.txtLayoutMessage.Name = "txtLayoutMessage"
         Me.txtLayoutMessage.ReadOnly = True
         Me.txtLayoutMessage.Size = New System.Drawing.Size(342, 20)
-        Me.txtLayoutMessage.TabIndex = 7
+        Me.txtLayoutMessage.TabIndex = 6
         '
         'chkSpecifyOrder
         '
@@ -93,7 +93,7 @@ Partial Class sdgCombineGraphOptions
         Me.chkSpecifyOrder.Location = New System.Drawing.Point(13, 151)
         Me.chkSpecifyOrder.Name = "chkSpecifyOrder"
         Me.chkSpecifyOrder.Size = New System.Drawing.Size(88, 17)
-        Me.chkSpecifyOrder.TabIndex = 6
+        Me.chkSpecifyOrder.TabIndex = 4
         Me.chkSpecifyOrder.Text = "Specify order"
         Me.chkSpecifyOrder.UseVisualStyleBackColor = True
         '
@@ -120,7 +120,7 @@ Partial Class sdgCombineGraphOptions
         Me.lblSelectedgrpahs.Location = New System.Drawing.Point(232, 19)
         Me.lblSelectedgrpahs.Name = "lblSelectedgrpahs"
         Me.lblSelectedgrpahs.Size = New System.Drawing.Size(89, 13)
-        Me.lblSelectedgrpahs.TabIndex = 3
+        Me.lblSelectedgrpahs.TabIndex = 2
         Me.lblSelectedgrpahs.Text = "Selected Graphs:"
         '
         'lstGraphs
@@ -129,7 +129,7 @@ Partial Class sdgCombineGraphOptions
         Me.lstGraphs.Location = New System.Drawing.Point(233, 34)
         Me.lstGraphs.Name = "lstGraphs"
         Me.lstGraphs.Size = New System.Drawing.Size(120, 134)
-        Me.lstGraphs.TabIndex = 2
+        Me.lstGraphs.TabIndex = 3
         '
         'lblNumberofColumns
         '
@@ -154,7 +154,7 @@ Partial Class sdgCombineGraphOptions
         Me.nudColumns.Location = New System.Drawing.Point(111, 47)
         Me.nudColumns.Name = "nudColumns"
         Me.nudColumns.Size = New System.Drawing.Size(42, 20)
-        Me.nudColumns.TabIndex = 0
+        Me.nudColumns.TabIndex = 1
         Me.nudColumns.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'nudRows
@@ -189,7 +189,7 @@ Partial Class sdgCombineGraphOptions
         Me.ucrInputLeft.Location = New System.Drawing.Point(60, 100)
         Me.ucrInputLeft.Name = "ucrInputLeft"
         Me.ucrInputLeft.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLeft.TabIndex = 1
+        Me.ucrInputLeft.TabIndex = 7
         '
         'ucrInputRight
         '
@@ -197,7 +197,7 @@ Partial Class sdgCombineGraphOptions
         Me.ucrInputRight.Location = New System.Drawing.Point(60, 70)
         Me.ucrInputRight.Name = "ucrInputRight"
         Me.ucrInputRight.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRight.TabIndex = 1
+        Me.ucrInputRight.TabIndex = 5
         '
         'ucrInputBottom
         '
@@ -205,7 +205,7 @@ Partial Class sdgCombineGraphOptions
         Me.ucrInputBottom.Location = New System.Drawing.Point(60, 42)
         Me.ucrInputBottom.Name = "ucrInputBottom"
         Me.ucrInputBottom.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputBottom.TabIndex = 1
+        Me.ucrInputBottom.TabIndex = 3
         '
         'ucrInputTop
         '
@@ -221,7 +221,7 @@ Partial Class sdgCombineGraphOptions
         Me.lblLeft.Location = New System.Drawing.Point(15, 104)
         Me.lblLeft.Name = "lblLeft"
         Me.lblLeft.Size = New System.Drawing.Size(28, 13)
-        Me.lblLeft.TabIndex = 0
+        Me.lblLeft.TabIndex = 6
         Me.lblLeft.Text = "Left:"
         '
         'LblRight
@@ -230,7 +230,7 @@ Partial Class sdgCombineGraphOptions
         Me.LblRight.Location = New System.Drawing.Point(15, 73)
         Me.LblRight.Name = "LblRight"
         Me.LblRight.Size = New System.Drawing.Size(35, 13)
-        Me.LblRight.TabIndex = 0
+        Me.LblRight.TabIndex = 4
         Me.LblRight.Text = "Right:"
         '
         'lblBottom
@@ -239,7 +239,7 @@ Partial Class sdgCombineGraphOptions
         Me.lblBottom.Location = New System.Drawing.Point(15, 46)
         Me.lblBottom.Name = "lblBottom"
         Me.lblBottom.Size = New System.Drawing.Size(43, 13)
-        Me.lblBottom.TabIndex = 0
+        Me.lblBottom.TabIndex = 2
         Me.lblBottom.Text = "Bottom:"
         '
         'lblTop
