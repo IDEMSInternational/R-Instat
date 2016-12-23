@@ -77,8 +77,8 @@ Partial Class dlgReoderDescriptives
         Me.MinimizeBox = False
         Me.Name = "dlgReoderDescriptives"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Reoder_Objects"
-        Me.Text = "Reoder Objects"
+        Me.Tag = "Reorder_Objects"
+        Me.Text = "Reorder Objects"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
