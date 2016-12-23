@@ -191,12 +191,12 @@ Public Class ucrCalculator
                 iHelpCalcID = 130
                 Me.Size = New System.Drawing.Size(639, 377)
             Case "Rows"
+                grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpStatistics.Visible = False
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
-                grpRows.Visible = False
                 grpStrings.Visible = False
                 grpRows.Visible = True
                 Me.Size = New System.Drawing.Size(595, 377)

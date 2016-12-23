@@ -138,7 +138,7 @@ Public Class dlgCalculator
     Private Sub CalculationsOptions()
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
-                Me.Size = New System.Drawing.Size(669, 435)
+                Me.Size = New System.Drawing.Size(680, 435)
             Case "Logical and Symbols"
                 Me.Size = New System.Drawing.Size(627, 435)
             Case "Statistics"
@@ -146,13 +146,13 @@ Public Class dlgCalculator
             Case "Strings (Character Columns)"
                 Me.Size = New System.Drawing.Size(630, 435)
             Case "Probability"
-                Me.Size = New System.Drawing.Size(779, 435)
+                Me.Size = New System.Drawing.Size(810, 435)
             Case "Dates"
-                Me.Size = New System.Drawing.Size(649, 435)
+                Me.Size = New System.Drawing.Size(660, 435)
             Case "Rows"
                 Me.Size = New System.Drawing.Size(615, 435)
             Case Else
-                Me.Size = New System.Drawing.Size(485, 435)
+                Me.Size = New System.Drawing.Size(510, 435)
         End Select
     End Sub
 
