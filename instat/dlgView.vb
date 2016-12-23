@@ -40,7 +40,7 @@ Public Class dlgView
         ucrSelectorForView.Focus()
         rdoTop.Checked = True
         rdoDispSepOutputWindow.Checked = True
-        rdoDispOutputWindow.Checked = False
+        ucrSpecifyRows.Checked = True
     End Sub
 
     Private Sub InitialiseDialog()
@@ -49,16 +49,20 @@ Public Class dlgView
         DataFrameLength()
         ucrBase.iHelpTopicID = 32
         clsView.SetRCommand("View")
+        ucrSpecifyRows.SetText("Specify Rows")
     End Sub
 
     Private Sub TestOKEnabled()
         'OK is enabled when the ucrReceiverView and nudNumberRows are both non-empty in both cases of Window display
-        If (Not (ucrReceiverView.IsEmpty) AndAlso nudNumberRows.Text <> "") Then
-            ucrBase.OKEnabled(True)
+        If Not ucrReceiverView.IsEmpty Then
+            If rdoDispOutputWindow.Checked AndAlso ucrSpecifyRows.Checked AndAlso Not nudNumberRows.Text <> "" Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(True)
         End If
-
     End Sub
 
     Private Sub grpDisplayFrom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
@@ -80,7 +84,7 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
+    Private Sub ucrSelectorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
         DataFrameLength()
     End Sub
 
@@ -95,18 +99,20 @@ Public Class dlgView
 
     Private Sub SetCommands()
         If rdoDispSepOutputWindow.Checked Then
-            XandNParameters()
-            If rdoBottom.Checked Then
-                clsView.AddParameter("x", clsRFunctionParameter:=clsTail)
-            ElseIf rdoTop.Checked Then
-                clsView.AddParameter("x", clsRFunctionParameter:=clsHead)
-            End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsView)
-            ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrSelectorForView.strCurrentDataFrame & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("", ucrSelectorForView.strCurrentDataFrame)
         ElseIf rdoDispOutputWindow.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
-            clsView.RemoveParameterByName("title")
-            XandNParameters()
+            If ucrSpecifyRows.Checked Then
+                clsHead.RemoveParameterByName("x")
+                clsHead.RemoveParameterByName("n")
+                XandNParameters()
+            Else
+                clsHead.SetRCommand("head")
+                clsHead.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
+                clsHead.AddParameter("n", ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsHead)
+            End If
         End If
     End Sub
 
@@ -138,5 +144,37 @@ Public Class dlgView
                 clsTail.RemoveParameterByName("n")
             End If
         End If
+    End Sub
+
+    Private Sub rdoDisplayOptions_CheckedChanged() Handles rdoDispOutputWindow.CheckedChanged, rdoDispSepOutputWindow.CheckedChanged
+        SetCommands()
+        DisplayOptions()
+    End Sub
+
+    Private Sub DisplayOptions()
+        If rdoDispOutputWindow.Checked Then
+            grpDisplayOptions.Visible = True
+        Else
+            grpDisplayOptions.Visible = False
+        End If
+        If ucrSpecifyRows.Checked = False Then
+            lblDisplayFrom.Visible = False
+            lblNumberofRows.Visible = False
+            nudNumberRows.Visible = False
+            rdoBottom.Visible = False
+            rdoTop.Visible = False
+        Else
+            lblDisplayFrom.Visible = True
+            lblNumberofRows.Visible = True
+            nudNumberRows.Visible = True
+            rdoBottom.Visible = True
+            rdoTop.Visible = True
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSpecifyRows_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSpecifyRows.ControlContentsChanged
+        DisplayOptions()
+        SetCommands()
     End Sub
 End Class
