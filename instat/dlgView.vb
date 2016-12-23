@@ -86,6 +86,7 @@ Public Class dlgView
 
     Private Sub ucrSelectorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
         DataFrameLength()
+        clsView.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 
     Private Sub DataFrameLength()
@@ -100,7 +101,7 @@ Public Class dlgView
     Private Sub SetCommands()
         If rdoDispSepOutputWindow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsView)
-            ucrBase.clsRsyntax.AddParameter("x", ucrSelectorForView.strCurrentDataFrame)
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
         ElseIf rdoDispOutputWindow.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
             If ucrSpecifyRows.Checked Then
