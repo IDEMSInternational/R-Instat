@@ -33,7 +33,7 @@ Public Class dlgDeleteRowsOrColums
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoRows.Checked Then
-            If nudRowNames.nudUpDown.Text <> "0" Then
+            If nudRowNames.Text <> "0" Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -44,7 +44,7 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub SetDefaults()
-        nudRowNames.Value = "0"
+        nudRowNames.Value = 0
         ColumnsRows()
         rdoColumns.Checked = True
         ucrSelectorForDeleteColumns.Reset()
@@ -117,8 +117,8 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub RowNamesParam()
         If rdoRows.Checked = True Then
-            If Not nudRowNames.Value = "0" Then
-                ucrBase.clsRsyntax.AddParameter("row_names", nudRowNames.Value.ToString())
+            If Not nudRowNames.Value = 0 Then
+                ucrBase.clsRsyntax.AddParameter("row_names", nudRowNames.Value)
             Else
                 ucrBase.clsRsyntax.RemoveParameter("row_names")
             End If
@@ -127,7 +127,7 @@ Public Class dlgDeleteRowsOrColums
         End If
     End Sub
 
-    Private Sub nudRowNames_ControlValueChanged(ucrChangedControl As ucrCore) Handles nudRowNames.ControlValueChanged
+    Private Sub nudRowNames_ValueChanged(sender As Object, e As EventArgs) Handles nudRowNames.ValueChanged
         TestOKEnabled()
         ColumnsRows()
     End Sub
