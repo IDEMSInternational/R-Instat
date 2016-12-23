@@ -32,7 +32,8 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrSelectorForDeleteRows = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblRowNames = New System.Windows.Forms.Label()
-        Me.nudRowNames = New instat.ucrNud()
+        Me.nudRowNames = New System.Windows.Forms.NumericUpDown()
+        CType(Me.nudRowNames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblNumberofRows
@@ -134,13 +135,10 @@ Partial Class dlgDeleteRowsOrColums
         '
         'nudRowNames
         '
-        Me.nudRowNames.Location = New System.Drawing.Point(103, 114)
-        Me.nudRowNames.Maximum = 100
-        Me.nudRowNames.Minimum = 0
+        Me.nudRowNames.Location = New System.Drawing.Point(103, 115)
         Me.nudRowNames.Name = "nudRowNames"
         Me.nudRowNames.Size = New System.Drawing.Size(50, 20)
-        Me.nudRowNames.TabIndex = 8
-        Me.nudRowNames.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudRowNames.TabIndex = 10
         '
         'dlgDeleteRowsOrColums
         '
@@ -148,7 +146,6 @@ Partial Class dlgDeleteRowsOrColums
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 287)
         Me.Controls.Add(Me.ucrSelectorForDeleteColumns)
-        Me.Controls.Add(Me.nudRowNames)
         Me.Controls.Add(Me.lblRowNames)
         Me.Controls.Add(Me.lblColumnsToDelete)
         Me.Controls.Add(Me.ucrReceiverForColumnsToDelete)
@@ -158,6 +155,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.Controls.Add(Me.ucrSelectorForDeleteRows)
         Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.nudRowNames)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -165,6 +163,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Delete_Rows_Columns"
         Me.Text = "Delete Rows/Columns"
+        CType(Me.nudRowNames, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -180,5 +179,5 @@ Partial Class dlgDeleteRowsOrColums
     Friend WithEvents ucrReceiverForColumnsToDelete As ucrReceiverMultiple
     Friend WithEvents lblColumnsToDelete As Label
     Friend WithEvents lblRowNames As Label
-    Friend WithEvents nudRowNames As ucrNud
+    Friend WithEvents nudRowNames As NumericUpDown
 End Class
