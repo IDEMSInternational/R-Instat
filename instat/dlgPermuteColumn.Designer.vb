@@ -80,7 +80,7 @@ Partial Class dlgPermuteColumn
         'ucrInputPermuteRows
         '
         Me.ucrInputPermuteRows.IsReadOnly = False
-        Me.ucrInputPermuteRows.Location = New System.Drawing.Point(117, 202)
+        Me.ucrInputPermuteRows.Location = New System.Drawing.Point(130, 202)
         Me.ucrInputPermuteRows.Name = "ucrInputPermuteRows"
         Me.ucrInputPermuteRows.Size = New System.Drawing.Size(145, 21)
         Me.ucrInputPermuteRows.TabIndex = 8
