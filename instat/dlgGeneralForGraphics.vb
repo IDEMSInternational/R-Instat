@@ -54,7 +54,8 @@ Public Class dlgGeneralForGraphics
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
         'For example, when a graph is saved, it is assigned to it's place in an R-instat object. If we had set bExcludeAssignedFunctionOutput to True, then we would never print the graph when running the script.
-
+        ucrBase.clsRsyntax.iCallType = 3
+        'iCalltype 3 corresponds to single graphics display in output window.
     End Sub
 
     Private Sub SetDefaults()
@@ -164,6 +165,7 @@ Public Class dlgGeneralForGraphics
     'End Sub
 
     Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
+        'Warning/Task: this method seems weird to me, why do we get the dataframe from sdgLayerOptions ???!
         If ucrSaveGraph.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
         Else
@@ -186,4 +188,22 @@ Public Class dlgGeneralForGraphics
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         TestOKEnabled()
     End Sub
+
+    'Private Sub DisplayGraphInOutputWindow_When_ClickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    'Dim clsSaveFunction As New RFunction
+    'Dim clsDeleteFunction As New RFunction
+    'Dim strImageLocation As String
+    'clsSaveFunction.SetRCommand("ggsave")
+    'If file R_Instat_Temp__Graphs is not there, create it... Where do we do this ? In setup method ? For the moment it's on frmMain Load
+    'frmMain.clsRLink.rtbOutput.CreateTempDirectory()
+    'Need to add ggsave as a Secondary RCommand on every grph dialogue.
+    'Need to edit RMethods producing ggplots to always ggsave in that file as well... Need to find a smart way to name things.
+    'strImageLocation = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs/" & ucrSaveGraph.strGraphName & ".jpg"
+    'clsSaveFunction.AddParameter("filename", Chr(34) & strImageLocation.Replace("\", "/") & Chr(34))
+    'frmMain.clsRLink.RunScript(clsSaveFunction.ToScript(), strComment:="Temporarily saving the image of the last ggplot grph in the temp directory R_Instat_Temp_Graphs.")
+    'frmMain.clsRLink.rtbOutput.DisplayGraph(strImageLocation)
+    'clsDeleteFunction.SetRCommand("unlink")
+    'clsDeleteFunction.AddParameter(strParameterName:="FileName", strParameterValue:=Chr(34) & strImageLocation.Replace("\", "/") & Chr(34), bIncludeArgumentName:=False)
+    'frmMain.clsRLink.RunScript(clsDeleteFunction.ToScript(), strComment:="Deleting graph file from the temp file.")
+    'End Sub
 End Class
