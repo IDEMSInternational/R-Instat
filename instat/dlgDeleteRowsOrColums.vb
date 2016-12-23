@@ -132,12 +132,4 @@ Public Class dlgDeleteRowsOrColums
         TestOKEnabled()
         ColumnsRows()
     End Sub
-
-    Private Sub ucrReceiveForColumnsToDelete_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForColumnsToDelete.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrSelectorForDeleteRows_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorForDeleteRows.DataFrameChanged
-
-    End Sub
 End Class
