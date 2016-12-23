@@ -1675,7 +1675,7 @@ data_object$set("public","make_date_yearmonthday", function(year, month, day, ye
     }
   }
   if(missing(month_format)) {
-  if(all(month %in% month.name)) month_format = "%B"
+    if(all(month %in% month.name)) month_format = "%B"
     else if(all(month %in% month.abb)) month_format = "%b"
     else if(all(month %in% 1:12)) month_format = "%m"
     else stop("Cannot detect month format")
