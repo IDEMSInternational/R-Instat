@@ -137,6 +137,7 @@ Public Class RCodeStructure
                 clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
                 clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 clsAddModels.AddParameter("model", strAssignTo)
+                clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 If Not strAssignToDataFrame = "" Then
                     clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                     clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
