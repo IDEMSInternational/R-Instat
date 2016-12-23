@@ -137,6 +137,7 @@ Public Class RCodeStructure
                 clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
                 clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 clsAddModels.AddParameter("model", strAssignTo)
+                clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 If Not strAssignToDataFrame = "" Then
                     clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                     clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -196,7 +197,11 @@ Public Class RCodeStructure
             If strParameterName = "" Then
                 'MsgBox("Developer Error: some parameter has been added without specifying a name. We want all parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
                 bIncludeArgumentName = False
-                strParameterName = "Parameter." & iNumberOfAddedParameters
+                If iPosition = 0 Then
+                    strParameterName = "First"
+                Else
+                    strParameterName = "Unnamed"
+                End If
             End If
             clsParam.SetArgumentName(strParameterName)
             If Not strParameterValue = "" Then
@@ -221,8 +226,8 @@ Public Class RCodeStructure
                 i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(strTempArgumentName))
             End If
             If i = -1 Then
+                ShiftParametersPositions(iPosition) 'Checking if there is room in the parameter's positions to add a parameter with position = iPosition
                 clsParameters.Add(clsParam)
-                'SortParameters() 'Not needed, can do this only when necessary...
             Else
                 If clsParam.bIsString AndAlso clsParam.strArgumentValue IsNot Nothing Then
                     clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
@@ -231,9 +236,14 @@ Public Class RCodeStructure
                 Else
                     'message
                 End If
-                If clsParameters(i).Position <> clsParam.Position Then
-                    clsParameters(i).Position = clsParam.Position
-                    'SortParameters() 'Not needed, can do this only when necessary...
+                If clsParameters(i).Position <> iPosition Then
+                    'In case the position needs to be changed, there might exist another parameter with the new position in the list
+                    'The parameter i is then temporarily set to unordered until the Shift in positions has been operated within the clsParameters (if necessary).
+                    clsParameters(i).Position = -1
+                    If iPosition <> -1 Then
+                        ShiftParametersPositions(iPosition)
+                        clsParameters(i).Position = clsParam.Position
+                    End If
                 End If
             End If
         Else
@@ -242,6 +252,29 @@ Public Class RCodeStructure
         bIsAssigned = False
         iNumberOfAddedParameters = iNumberOfAddedParameters + 1
         OnParametersChanged()
+    End Sub
+
+    Private Sub ShiftParametersPositions(iPosition As Integer)
+        'Assuming that there are no repetitions in the positions of ordered parameters, this sub will shift all positions starting from iPosition until there are no repititions of positions even if a parameter with position iposition was added.
+        'In particular it won't do anything if there is no parameter with position iPosition in clsParameters.
+        Dim bReady As Boolean = False 'indicates when incrementing will solve all repetitions among positions of ordered parameters.
+        Dim lstIndices As New List(Of Integer) 'The list of indices of the parameters of which the position need to be incremented.
+        'Only Shift if iPosition is > -1
+        If iPosition > -1 Then
+            While Not bReady
+                bReady = True 'the list is ready unless there is a parameter that has position iPosition. In which case, this parameter's position will be incremented. Now need to check that there is no other parameter with position iposition + 1.
+                For i As Integer = 0 To clsParameters.Count - 1
+                    If clsParameters(i).Position = iPosition Then
+                        iPosition = iPosition + 1
+                        lstIndices.Add(i)
+                        bReady = False
+                    End If
+                Next
+            End While
+            For Each iIndex As Integer In lstIndices
+                clsParameters(iIndex).Position = clsParameters(iIndex).Position + 1
+            Next
+        End If
     End Sub
 
     Public Sub SortParameters()
