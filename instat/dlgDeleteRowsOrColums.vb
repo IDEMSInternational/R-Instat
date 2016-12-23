@@ -19,6 +19,7 @@ Public Class dlgDeleteRowsOrColums
         ucrReceiverForColumnsToDelete.Selector = ucrSelectorForDeleteColumns
         ucrReceiverForColumnsToDelete.SetMeAsReceiver()
         ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteRows)
+        nudRowNames.Minimum = 1
     End Sub
 
     Private Sub ReopenDialog()
@@ -33,7 +34,7 @@ Public Class dlgDeleteRowsOrColums
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoRows.Checked Then
-            If nudRowNames.Text <> "0" Then
+            If nudRowNames.Text <> "" Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -44,10 +45,10 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub SetDefaults()
-        nudRowNames.Value = 1
+        ucrSelectorForDeleteColumns.Reset()
         ColumnsRows()
         rdoColumns.Checked = True
-        ucrSelectorForDeleteColumns.Reset()
+        nudRowNames.Value = 1
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -61,7 +62,7 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub ucrSelectorForDeleteRows_DataFrameChanged() Handles ucrSelectorForDeleteRows.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForDeleteRows.cboAvailableDataFrames.SelectedItem & Chr(34))
-        nudRowNames.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
+        ColumnsRows()
     End Sub
 
     Private Sub ucrReceiveForColumnsToDelete_SelectionChanged() Handles ucrReceiverForColumnsToDelete.SelectionChanged
@@ -130,5 +131,13 @@ Public Class dlgDeleteRowsOrColums
     Private Sub nudRowNames_ValueChanged(sender As Object, e As EventArgs) Handles nudRowNames.ValueChanged
         TestOKEnabled()
         ColumnsRows()
+    End Sub
+
+    Private Sub ucrReceiveForColumnsToDelete_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForColumnsToDelete.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrSelectorForDeleteRows_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorForDeleteRows.DataFrameChanged
+
     End Sub
 End Class
