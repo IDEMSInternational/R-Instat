@@ -30,8 +30,10 @@ Partial Class dlgPermuteColumn
         Me.ucrReceiverPermuteRows = New instat.ucrReceiverSingle()
         Me.ucrPermuteRowsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.nudSetSeed = New instat.ucrNud()
-        Me.nudNumberOfColumns = New instat.ucrNud()
+        Me.nudSetSeed = New System.Windows.Forms.NumericUpDown()
+        Me.nudNumberofColumns = New System.Windows.Forms.NumericUpDown()
+        CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudNumberofColumns, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -111,30 +113,24 @@ Partial Class dlgPermuteColumn
         '
         'nudSetSeed
         '
-        Me.nudSetSeed.Location = New System.Drawing.Point(323, 94)
-        Me.nudSetSeed.Maximum = 100
-        Me.nudSetSeed.Minimum = 0
+        Me.nudSetSeed.Location = New System.Drawing.Point(323, 95)
         Me.nudSetSeed.Name = "nudSetSeed"
-        Me.nudSetSeed.Size = New System.Drawing.Size(50, 20)
-        Me.nudSetSeed.TabIndex = 4
-        Me.nudSetSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudSetSeed.Size = New System.Drawing.Size(44, 20)
+        Me.nudSetSeed.TabIndex = 10
         '
-        'nudNumberOfColumns
+        'nudNumberofColumns
         '
-        Me.nudNumberOfColumns.Location = New System.Drawing.Point(352, 122)
-        Me.nudNumberOfColumns.Maximum = 100
-        Me.nudNumberOfColumns.Minimum = 0
-        Me.nudNumberOfColumns.Name = "nudNumberOfColumns"
-        Me.nudNumberOfColumns.Size = New System.Drawing.Size(50, 20)
-        Me.nudNumberOfColumns.TabIndex = 6
-        Me.nudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudNumberofColumns.Location = New System.Drawing.Point(353, 123)
+        Me.nudNumberofColumns.Name = "nudNumberofColumns"
+        Me.nudNumberofColumns.Size = New System.Drawing.Size(44, 20)
+        Me.nudNumberofColumns.TabIndex = 11
         '
         'dlgPermuteColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 289)
-        Me.Controls.Add(Me.nudNumberOfColumns)
+        Me.Controls.Add(Me.nudNumberofColumns)
         Me.Controls.Add(Me.nudSetSeed)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputPermuteRows)
@@ -151,6 +147,8 @@ Partial Class dlgPermuteColumn
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Permute_Column"
         Me.Text = "Permute Column"
+        CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudNumberofColumns, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -164,6 +162,6 @@ Partial Class dlgPermuteColumn
     Friend WithEvents lblNumberOfColumns As Label
     Friend WithEvents ucrInputPermuteRows As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents nudSetSeed As ucrNud
-    Friend WithEvents nudNumberOfColumns As ucrNud
+    Friend WithEvents nudSetSeed As NumericUpDown
+    Friend WithEvents nudNumberofColumns As NumericUpDown
 End Class
