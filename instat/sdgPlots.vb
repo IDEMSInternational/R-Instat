@@ -58,7 +58,7 @@ Public Class sdgPlots
         TitleDefaults()
         chkIncludeFacets.Checked = False
         IncludeFacets()
-        nudNumberOfRowsOrColumns.Value = "1"
+        nudNumberofRows.Value = 1
         ucrFacetSelector.Reset()
 
         ucr1stFactorReceiver.SetMeAsReceiver()
@@ -95,7 +95,7 @@ Public Class sdgPlots
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
         'This is necessary to make sure the minimum number of fixed rows or columns is 1.
-        nudNumberOfRowsOrColumns.Minimum = "1"
+        nudNumberofRows.Minimum = 1
 
         'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
         'Also carry the RSyntax through to these ucr's .
@@ -142,7 +142,7 @@ Public Class sdgPlots
             rdoHorizontal.Checked = True
             rdoVertical.Visible = True
             chkNoOfRowsOrColumns.Checked = False
-            nudNumberOfRowsOrColumns.Visible = True
+            nudNumberofRows.Visible = True
             chkMargin.Checked = False
             chkFreeScalesX.Checked = False
             chkFreeScalesY.Checked = False
@@ -167,7 +167,7 @@ Public Class sdgPlots
             chkFreeScalesX.Visible = False
             chkFreeScalesY.Visible = False
             chkNoOfRowsOrColumns.Visible = False
-            nudNumberOfRowsOrColumns.Visible = False
+            nudNumberofRows.Visible = False
             chkFreeSpace.Visible = False
         End If
         'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
@@ -249,11 +249,11 @@ Public Class sdgPlots
         'This sub is called in the wrap case to set up the parameter fixing the number of rows or columns when working in the horizontal or vertical case.
         If chkNoOfRowsOrColumns.Checked Then
             If rdoHorizontal.Checked Then
-                clsRFacetFunction.AddParameter("nrow", nudNumberOfRowsOrColumns.Value.ToString)
+                clsRFacetFunction.AddParameter("nrow", nudNumberofRows.Value)
                 clsRFacetFunction.RemoveParameterByName("ncol")
             Else
                 clsRFacetFunction.RemoveParameterByName("nrow")
-                clsRFacetFunction.AddParameter("ncol", nudNumberOfRowsOrColumns.Value.ToString)
+                clsRFacetFunction.AddParameter("ncol", nudNumberofRows.Value)
             End If
         Else
             clsRFacetFunction.RemoveParameterByName("ncol")
@@ -300,10 +300,10 @@ Public Class sdgPlots
             If (chkMargin.Checked OrElse chkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
                 chkNoOfRowsOrColumns.Checked = False
                 chkNoOfRowsOrColumns.Visible = False
-                nudNumberOfRowsOrColumns.Visible = False
+                nudNumberofRows.Visible = False
             Else
                 chkNoOfRowsOrColumns.Visible = True
-                nudNumberOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+                nudNumberofRows.Visible = chkNoOfRowsOrColumns.Checked
             End If
         End If
     End Sub
@@ -336,11 +336,11 @@ Public Class sdgPlots
     End Sub
 
     Private Sub chkNoOfRowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoOfRowsOrColumns.CheckedChanged
-        nudNumberOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+        nudNumberofRows.Visible = chkNoOfRowsOrColumns.Checked
         SetFacets()
     End Sub
 
-    Private Sub nudNumberOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles nudNumberOfRowsOrColumns.ControlValueChanged
+    Private Sub nudNumberofRows_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberofRows.ValueChanged
         SetFacets()
     End Sub
 
