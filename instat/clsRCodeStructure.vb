@@ -139,7 +139,7 @@ Public Class RCodeStructure
                 clsAddModels.AddParameter("model", strAssignTo)
                 clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 If Not strAssignToDataFrame = "" Then
-                    clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                     clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 End If
                 strScript = strScript & clsAddModels.ToScript() & vbCrLf
