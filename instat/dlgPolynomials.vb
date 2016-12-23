@@ -36,7 +36,7 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverPolynomial.IsEmpty() AndAlso nudDegree.nudUpDown.Text <> "" AndAlso Not ucrInputPolynomial.IsEmpty Then
+        If Not ucrReceiverPolynomial.IsEmpty() AndAlso nudDegree.Text <> "" AndAlso Not ucrInputPolynomial.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -49,7 +49,7 @@ Public Class dlgPolynomials
         XParameter()
         ucrSelectorForPolynomial.Reset()
         ucrSelectorForPolynomial.Focus()
-        nudDegree.Value = "2"
+        nudDegree.Value = 2
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -110,7 +110,7 @@ Public Class dlgPolynomials
         End If
     End Sub
 
-    Private Sub nudDegree_ControlContentsChanged(ucrChangedControl As ucrCore) Handles nudDegree.ControlContentsChanged
+    Private Sub nudDegree_ValueChanged(sender As Object, e As EventArgs) Handles nudDegree.ValueChanged
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
         TestOKEnabled()
     End Sub
