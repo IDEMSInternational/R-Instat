@@ -39,7 +39,6 @@ Public Class dlgOneVarFitModel
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-        ucrSaveModel.SetPrefix("dist")
         ucrSaveModel.SetItemsTypeAsModels()
         ucrSaveModel.SetDefaultTypeAsModel()
         ucrSaveModel.SetValidationTypeAsRVariable()
@@ -62,6 +61,7 @@ Public Class dlgOneVarFitModel
         ucrSelectorOneVarFitMod.Reset()
         ucrSelectorOneVarFitMod.Focus()
         ucrOperator.SetName("==")
+        ucrSaveModel.SetPrefix("dist")
         nudCI.Value = 0.95
         BinomialConditions()
         chkSaveModel.Checked = True
