@@ -100,7 +100,7 @@ Public Class dlgView
     Private Sub SetCommands()
         If rdoDispSepOutputWindow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsView)
-            ucrBase.clsRsyntax.AddParameter("", ucrSelectorForView.strCurrentDataFrame)
+            ucrBase.clsRsyntax.AddParameter("x", ucrSelectorForView.strCurrentDataFrame)
         ElseIf rdoDispOutputWindow.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
             If ucrSpecifyRows.Checked Then
