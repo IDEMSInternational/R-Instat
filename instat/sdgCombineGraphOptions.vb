@@ -54,8 +54,6 @@ Public Class sdgCombineGraphOptions
         SetDefaultRowAndColumns()
         chkSpecifyOrder.Checked = False
         grdLayout.Visible = False
-        nudRows.Value = 2
-        nudColumns.Value = 2
     End Sub
 
     Private Sub InitialiseDialog()
