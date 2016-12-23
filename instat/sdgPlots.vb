@@ -340,7 +340,7 @@ Public Class sdgPlots
         SetFacets()
     End Sub
 
-    Private Sub nudNumberofRows_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberofRows.ValueChanged
+    Private Sub nudNumberofRows_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofRows.TextChanged
         SetFacets()
     End Sub
 
