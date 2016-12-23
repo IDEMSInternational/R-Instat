@@ -47,17 +47,17 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'cmdPCAOptions
         '
-        Me.cmdPCAOptions.Location = New System.Drawing.Point(301, 201)
+        Me.cmdPCAOptions.Location = New System.Drawing.Point(302, 204)
         Me.cmdPCAOptions.Name = "cmdPCAOptions"
         Me.cmdPCAOptions.Size = New System.Drawing.Size(106, 23)
-        Me.cmdPCAOptions.TabIndex = 8
+        Me.cmdPCAOptions.TabIndex = 6
         Me.cmdPCAOptions.Tag = "PCA_Options..."
         Me.cmdPCAOptions.Text = "PCA Options..."
         Me.cmdPCAOptions.UseVisualStyleBackColor = True
         '
         'nudComponents
         '
-        Me.nudComponents.Location = New System.Drawing.Point(372, 144)
+        Me.nudComponents.Location = New System.Drawing.Point(372, 145)
         Me.nudComponents.Name = "nudComponents"
         Me.nudComponents.Size = New System.Drawing.Size(42, 20)
         Me.nudComponents.TabIndex = 4
@@ -89,7 +89,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.chkSaveResult.Location = New System.Drawing.Point(10, 204)
         Me.chkSaveResult.Name = "chkSaveResult"
         Me.chkSaveResult.Size = New System.Drawing.Size(87, 24)
-        Me.chkSaveResult.TabIndex = 6
+        Me.chkSaveResult.TabIndex = 7
         Me.chkSaveResult.Tag = "Save_Result"
         Me.chkSaveResult.Text = "Save Result"
         Me.chkSaveResult.UseVisualStyleBackColor = True
@@ -97,14 +97,14 @@ Partial Class dlgPrincipalComponentAnalysis
         'ucrResultName
         '
         Me.ucrResultName.IsReadOnly = False
-        Me.ucrResultName.Location = New System.Drawing.Point(103, 205)
+        Me.ucrResultName.Location = New System.Drawing.Point(92, 205)
         Me.ucrResultName.Name = "ucrResultName"
         Me.ucrResultName.Size = New System.Drawing.Size(145, 21)
-        Me.ucrResultName.TabIndex = 11
+        Me.ucrResultName.TabIndex = 8
         '
         'ucrReceiverMultiplePCA
         '
-        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(250, 33)
+        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(250, 34)
         Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
         Me.ucrReceiverMultiplePCA.Selector = Nothing
@@ -114,7 +114,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'ucrSelectorPCA
         '
         Me.ucrSelectorPCA.bShowHiddenColumns = False
-        Me.ucrSelectorPCA.bUseCurrentFilter = False
+        Me.ucrSelectorPCA.bUseCurrentFilter = True
         Me.ucrSelectorPCA.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorPCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPCA.Name = "ucrSelectorPCA"
