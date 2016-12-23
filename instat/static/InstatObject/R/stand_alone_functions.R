@@ -194,6 +194,8 @@ output_for_CPT = function(data_name, lat_lon_data, long = TRUE, year_col, sst_co
     if(missing(station_col)) stop("station_col must be provided for long data format.")
     if(!is.character(station_col)) stop("station must be of type character.")
     if(!all(station_col %in% names(data_name))) stop(station_col,  " is missing in data.")
+    row.names(data_name) = NULL
+    data_name <- droplevels(data_name)
     ssT_col_names = as.character(levels(data_name[,station_col]))
     Year = c("LAT","LON")
     selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
@@ -218,4 +220,46 @@ yday_366 <- function(date) {
   temp_leap <- leap_year(date)
   temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)] <- 1 + temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)]
   return(temp_doy)
+}
+
+open_NetCDF <- function(nc_data){
+  #my_nc_data <- read.nc(nc_data)
+  #names(my_nc_data) #This might be necessary if the list objects may be named differently
+  dataset <- var.get.nc(nc_data, "ccd")
+  lat <- var.get.nc(nc_data, "lat")
+  lon <- var.get.nc(nc_data, "lon")
+  time <- var.get.nc(nc_data, "time")
+  period <- rep(time, each = (length(lat)*length(lon)))
+  nc_value <- c()
+  
+  lat_rep <- rep(lat, each = length(lon))
+  lon_rep <- rep(lon, length(lat))
+  lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
+  names(lat_lon) = c("lat","lon")
+  station <- c()
+  for (j in 1:nrow(lat_lon)){
+    if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
+      station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+    }
+    if(lat_lon[j,1] < 0 && lat_lon[j,2] >= 0){
+      station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+    }
+    if(lat_lon[j,1] >= 0 && lat_lon[j,2] < 0){
+      station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+    }
+    if(lat_lon[j,1] < 0 && lat_lon[j,2] < 0){
+      station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+    }
+  }
+  lat_lon_df <- cbind(lat_lon,station)
+  
+  for (k in 1:length(time)){
+    year <- dataset[1:length(lat), 1:length(lon), k]
+    year = as.data.frame(t(year))
+    year = stack(year)
+    g <- as.numeric(year$values)
+    nc_value = append(nc_value, g)
+  }
+  my_data <- cbind(period, lat_lon_df, nc_value)
+  return(list(my_data, lat_lon_df))
 }
