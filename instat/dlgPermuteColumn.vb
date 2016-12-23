@@ -36,8 +36,8 @@ Public Class dlgPermuteColumn
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
         ucrReceiverPermuteRows.SetMeAsReceiver()
         ucrPermuteRowsSelector.Reset()
-        nudNumberOfColumns.Value = "1"
-        nudSetSeed.Value = "5"
+        nudNumberofColumns.Value = 1
+        nudSetSeed.Value = 5
         ucrInputPermuteRows.SetPrefix("Permute")
         chkSetSeed.Checked = False
         nudSetSeed.Visible = False
@@ -92,12 +92,12 @@ Public Class dlgPermuteColumn
         End If
     End Sub
 
-    Private Sub nudSetSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles nudSetSeed.ControlValueChanged
-        clsSetSeedFunc.AddParameter("seed", nudSetSeed.nudUpDown.Value)
+    Private Sub nudSetSeed_ValueChanged(sender As Object, e As EventArgs) Handles nudSetSeed.ValueChanged
+        clsSetSeedFunc.AddParameter("seed", nudSetSeed.Value)
     End Sub
 
-    Private Sub nudNumberOfColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles nudNumberOfColumns.ControlValueChanged
-        ucrBase.clsRsyntax.AddParameter("n", nudNumberOfColumns.nudUpDown.Value)
+    Private Sub nudNumberOfColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("n", nudNumberofColumns.Value)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
