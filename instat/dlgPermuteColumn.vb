@@ -65,6 +65,7 @@ Public Class dlgPermuteColumn
         ucrInputPermuteRows.SetValidationTypeAsRVariable()
         nudSetSeed.Minimum = Integer.MinValue
         nudSetSeed.Maximum = Integer.MaxValue
+        SetSize()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -110,6 +111,11 @@ Public Class dlgPermuteColumn
     End Sub
 
     Private Sub ucrPermuteRowsSelector_DataFrameChanged() Handles ucrPermuteRowsSelector.DataFrameChanged
+        SetSize()
+    End Sub
+
+    Private Sub SetSize()
         clsSetSampleFunc.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
     End Sub
+
 End Class
