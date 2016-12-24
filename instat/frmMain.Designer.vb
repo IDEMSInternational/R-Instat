@@ -178,6 +178,7 @@ Partial Class frmMain
         Me.mnuClimaticOrganiseImportDailyData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganiseMakeFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganiseShiftDailyData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticOrganiseUnstackDailyData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganiseStackDailyData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticQualityControl = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimdex = New System.Windows.Forms.ToolStripMenuItem()
@@ -416,7 +417,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticOrganiseUnstackDailyData = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -552,13 +552,13 @@ Partial Class frmMain
         Me.mnuDescribeSpecificDotPlot.Name = "mnuDescribeSpecificDotPlot"
         Me.mnuDescribeSpecificDotPlot.Size = New System.Drawing.Size(217, 22)
         Me.mnuDescribeSpecificDotPlot.Tag = "Dotplot..."
-        Me.mnuDescribeSpecificDotPlot.Text = "Dotplot..."
+        Me.mnuDescribeSpecificDotPlot.Text = "Dot Plot..."
         '
         'mnuDescribeSpecificRugPlot
         '
         Me.mnuDescribeSpecificRugPlot.Name = "mnuDescribeSpecificRugPlot"
         Me.mnuDescribeSpecificRugPlot.Size = New System.Drawing.Size(217, 22)
-        Me.mnuDescribeSpecificRugPlot.Text = "Rug Plot"
+        Me.mnuDescribeSpecificRugPlot.Text = "Rug Plot..."
         '
         'mnuDescribeSpecificBarChart
         '
@@ -646,7 +646,7 @@ Partial Class frmMain
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Name = "mnuDescribeOtherGraphicsDialogsWindRose"
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Tag = "WindRose..."
-        Me.mnuDescribeOtherGraphicsDialogsWindRose.Text = "WindRose..."
+        Me.mnuDescribeOtherGraphicsDialogsWindRose.Text = "Wind Rose..."
         '
         'mnuDescribeOtherGraphicsDialogsCumulativeDistribution
         '
@@ -1327,33 +1327,33 @@ Partial Class frmMain
         'mnuClimaticFileDefineClimaticData
         '
         Me.mnuClimaticFileDefineClimaticData.Name = "mnuClimaticFileDefineClimaticData"
-        Me.mnuClimaticFileDefineClimaticData.Size = New System.Drawing.Size(182, 22)
-        Me.mnuClimaticFileDefineClimaticData.Text = "Define Climatic Data"
+        Me.mnuClimaticFileDefineClimaticData.Size = New System.Drawing.Size(191, 22)
+        Me.mnuClimaticFileDefineClimaticData.Text = "Define Climatic Data..."
         '
         'mnuClimaticFileOpensst
         '
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
-        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticFileOpensst.Text = "Open SST..."
         '
         'mnuClimaticFileExportToCPT
         '
         Me.mnuClimaticFileExportToCPT.Name = "mnuClimaticFileExportToCPT"
-        Me.mnuClimaticFileExportToCPT.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticFileExportToCPT.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticFileExportToCPT.Tag = "Export_to_CPT"
         Me.mnuClimaticFileExportToCPT.Text = "Export to CPT..."
         '
         'mnuClimateFileClimSoft
         '
         Me.mnuClimateFileClimSoft.Name = "mnuClimateFileClimSoft"
-        Me.mnuClimateFileClimSoft.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimateFileClimSoft.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimateFileClimSoft.Text = "ClimSoft..."
         '
         'mnuClimaticFileCliData
         '
         Me.mnuClimaticFileCliData.Enabled = False
         Me.mnuClimaticFileCliData.Name = "mnuClimaticFileCliData"
-        Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticFileCliData.Text = "CliData..."
         '
         'mnuClimaticOrganise
@@ -1510,6 +1510,15 @@ Partial Class frmMain
         Me.mnuClimaticOrganiseShiftDailyData.Tag = "Shift_Daily_data"
         Me.mnuClimaticOrganiseShiftDailyData.Text = "Shift Daily Data..."
         Me.mnuClimaticOrganiseShiftDailyData.Visible = False
+        '
+        'mnuClimaticOrganiseUnstackDailyData
+        '
+        Me.mnuClimaticOrganiseUnstackDailyData.Enabled = False
+        Me.mnuClimaticOrganiseUnstackDailyData.Name = "mnuClimaticOrganiseUnstackDailyData"
+        Me.mnuClimaticOrganiseUnstackDailyData.Size = New System.Drawing.Size(181, 22)
+        Me.mnuClimaticOrganiseUnstackDailyData.Tag = "Unstack_Daily_data"
+        Me.mnuClimaticOrganiseUnstackDailyData.Text = "Unstack Daily Data..."
+        Me.mnuClimaticOrganiseUnstackDailyData.Visible = False
         '
         'mnuClimaticOrganiseStackDailyData
         '
@@ -2751,7 +2760,7 @@ Partial Class frmMain
         Me.mnuOrganiseColumnGeneratePermuteRows.Name = "mnuOrganiseColumnGeneratePermuteRows"
         Me.mnuOrganiseColumnGeneratePermuteRows.Size = New System.Drawing.Size(177, 22)
         Me.mnuOrganiseColumnGeneratePermuteRows.Tag = "Permute_Rows..."
-        Me.mnuOrganiseColumnGeneratePermuteRows.Text = "Permute Rows..."
+        Me.mnuOrganiseColumnGeneratePermuteRows.Text = "Permute Column..."
         '
         'mnuOrganiseColumnFactor
         '
@@ -2811,7 +2820,7 @@ Partial Class frmMain
         Me.mnuOrganiseColumnFactorLevelsLabels.Name = "mnuOrganiseColumnFactorLevelsLabels"
         Me.mnuOrganiseColumnFactorLevelsLabels.Size = New System.Drawing.Size(179, 22)
         Me.mnuOrganiseColumnFactorLevelsLabels.Tag = "Levels/Labels..."
-        Me.mnuOrganiseColumnFactorLevelsLabels.Text = "Levels/Labels..."
+        Me.mnuOrganiseColumnFactorLevelsLabels.Text = "Labels/Levels..."
         '
         'mnuOrganiseColumnFactorReorderLevels
         '
@@ -3213,15 +3222,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuClimaticOrganiseUnstackDailyData
-        '
-        Me.mnuClimaticOrganiseUnstackDailyData.Enabled = False
-        Me.mnuClimaticOrganiseUnstackDailyData.Name = "mnuClimaticOrganiseUnstackDailyData"
-        Me.mnuClimaticOrganiseUnstackDailyData.Size = New System.Drawing.Size(181, 22)
-        Me.mnuClimaticOrganiseUnstackDailyData.Tag = "Unstack_Daily_data"
-        Me.mnuClimaticOrganiseUnstackDailyData.Text = "Unstack Daily Data..."
-        Me.mnuClimaticOrganiseUnstackDailyData.Visible = False
         '
         'frmMain
         '
