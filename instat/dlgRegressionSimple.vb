@@ -157,10 +157,6 @@ Public Class dlgRegressionSimple
 
     End Sub
 
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub SetKruskalTest()
         clsRKruskalTest.SetRCommand("kruskal.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRKruskalTest)
@@ -180,6 +176,9 @@ Public Class dlgRegressionSimple
             If ucrExplanatory.strCurrDataType = "integer" OrElse ucrExplanatory.strCurrDataType = "numeric" OrElse ucrResponse.strCurrDataType = "positive integer" Then
                 ucrExplanatory.Clear()
             End If
+        ElseIf rdoGeneral.Checked Then
+            ucrResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+            ucrExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
         End If
     End Sub
 
