@@ -25,7 +25,7 @@ Partial Class dlgJitter
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForJitter = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverJitter = New instat.ucrReceiverSingle()
-        Me.lblSeletedVariable = New System.Windows.Forms.Label()
+        Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.grpMaximumAndMinimumValues = New System.Windows.Forms.GroupBox()
         Me.ucrInputMaximum = New instat.ucrInputTextBox()
         Me.ucrInputMinimum = New instat.ucrInputTextBox()
@@ -39,38 +39,38 @@ Partial Class dlgJitter
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 249)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 246)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 6
         '
         'ucrSelectorForJitter
         '
         Me.ucrSelectorForJitter.bShowHiddenColumns = False
-        Me.ucrSelectorForJitter.bUseCurrentFilter = False
-        Me.ucrSelectorForJitter.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForJitter.bUseCurrentFilter = True
+        Me.ucrSelectorForJitter.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForJitter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForJitter.Name = "ucrSelectorForJitter"
         Me.ucrSelectorForJitter.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForJitter.TabIndex = 1
+        Me.ucrSelectorForJitter.TabIndex = 0
         '
         'ucrReceiverJitter
         '
-        Me.ucrReceiverJitter.Location = New System.Drawing.Point(242, 39)
+        Me.ucrReceiverJitter.Location = New System.Drawing.Point(249, 43)
         Me.ucrReceiverJitter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverJitter.Name = "ucrReceiverJitter"
         Me.ucrReceiverJitter.Selector = Nothing
         Me.ucrReceiverJitter.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverJitter.TabIndex = 2
         '
-        'lblSeletedVariable
+        'lblSelectedVariable
         '
-        Me.lblSeletedVariable.AutoSize = True
-        Me.lblSeletedVariable.Location = New System.Drawing.Point(239, 18)
-        Me.lblSeletedVariable.Name = "lblSeletedVariable"
-        Me.lblSeletedVariable.Size = New System.Drawing.Size(90, 13)
-        Me.lblSeletedVariable.TabIndex = 3
-        Me.lblSeletedVariable.Text = "Selected Variable"
+        Me.lblSelectedVariable.AutoSize = True
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(249, 28)
+        Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
+        Me.lblSelectedVariable.TabIndex = 1
+        Me.lblSelectedVariable.Text = "Selected Variable:"
         '
         'grpMaximumAndMinimumValues
         '
@@ -81,17 +81,17 @@ Partial Class dlgJitter
         Me.grpMaximumAndMinimumValues.Controls.Add(Me.rdoMaximumDistanceFromZero)
         Me.grpMaximumAndMinimumValues.Location = New System.Drawing.Point(242, 66)
         Me.grpMaximumAndMinimumValues.Name = "grpMaximumAndMinimumValues"
-        Me.grpMaximumAndMinimumValues.Size = New System.Drawing.Size(179, 147)
-        Me.grpMaximumAndMinimumValues.TabIndex = 4
+        Me.grpMaximumAndMinimumValues.Size = New System.Drawing.Size(167, 147)
+        Me.grpMaximumAndMinimumValues.TabIndex = 3
         Me.grpMaximumAndMinimumValues.TabStop = False
         '
         'ucrInputMaximum
         '
         Me.ucrInputMaximum.IsReadOnly = False
-        Me.ucrInputMaximum.Location = New System.Drawing.Point(7, 121)
+        Me.ucrInputMaximum.Location = New System.Drawing.Point(7, 120)
         Me.ucrInputMaximum.Name = "ucrInputMaximum"
         Me.ucrInputMaximum.Size = New System.Drawing.Size(59, 21)
-        Me.ucrInputMaximum.TabIndex = 9
+        Me.ucrInputMaximum.TabIndex = 4
         '
         'ucrInputMinimum
         '
@@ -99,23 +99,23 @@ Partial Class dlgJitter
         Me.ucrInputMinimum.Location = New System.Drawing.Point(7, 94)
         Me.ucrInputMinimum.Name = "ucrInputMinimum"
         Me.ucrInputMinimum.Size = New System.Drawing.Size(59, 21)
-        Me.ucrInputMinimum.TabIndex = 8
+        Me.ucrInputMinimum.TabIndex = 3
         '
         'ucrInputMaximumDistanceFromZero
         '
         Me.ucrInputMaximumDistanceFromZero.IsReadOnly = False
-        Me.ucrInputMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 44)
+        Me.ucrInputMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 43)
         Me.ucrInputMaximumDistanceFromZero.Name = "ucrInputMaximumDistanceFromZero"
         Me.ucrInputMaximumDistanceFromZero.Size = New System.Drawing.Size(59, 21)
-        Me.ucrInputMaximumDistanceFromZero.TabIndex = 7
+        Me.ucrInputMaximumDistanceFromZero.TabIndex = 1
         '
         'rdoMinimumAndMaximum
         '
         Me.rdoMinimumAndMaximum.AutoSize = True
-        Me.rdoMinimumAndMaximum.Location = New System.Drawing.Point(7, 70)
+        Me.rdoMinimumAndMaximum.Location = New System.Drawing.Point(7, 71)
         Me.rdoMinimumAndMaximum.Name = "rdoMinimumAndMaximum"
         Me.rdoMinimumAndMaximum.Size = New System.Drawing.Size(134, 17)
-        Me.rdoMinimumAndMaximum.TabIndex = 1
+        Me.rdoMinimumAndMaximum.TabIndex = 2
         Me.rdoMinimumAndMaximum.TabStop = True
         Me.rdoMinimumAndMaximum.Text = "Minimum and Maximum"
         Me.rdoMinimumAndMaximum.UseVisualStyleBackColor = True
@@ -123,7 +123,7 @@ Partial Class dlgJitter
         'rdoMaximumDistanceFromZero
         '
         Me.rdoMaximumDistanceFromZero.AutoSize = True
-        Me.rdoMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 20)
+        Me.rdoMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 19)
         Me.rdoMaximumDistanceFromZero.Name = "rdoMaximumDistanceFromZero"
         Me.rdoMaximumDistanceFromZero.Size = New System.Drawing.Size(146, 17)
         Me.rdoMaximumDistanceFromZero.TabIndex = 0
@@ -134,29 +134,29 @@ Partial Class dlgJitter
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 224)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(8, 223)
         Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
-        Me.lblNewColumnName.TabIndex = 5
-        Me.lblNewColumnName.Text = "New Column Name"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColumnName.TabIndex = 4
+        Me.lblNewColumnName.Text = "New Column Name:"
         '
         'ucrInputNewColumnName
         '
         Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(114, 222)
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(115, 219)
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
-        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(191, 21)
-        Me.ucrInputNewColumnName.TabIndex = 6
+        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(193, 21)
+        Me.ucrInputNewColumnName.TabIndex = 5
         '
         'dlgJitter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 313)
+        Me.ClientSize = New System.Drawing.Size(419, 302)
         Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.grpMaximumAndMinimumValues)
-        Me.Controls.Add(Me.lblSeletedVariable)
+        Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrReceiverJitter)
         Me.Controls.Add(Me.ucrSelectorForJitter)
         Me.Controls.Add(Me.ucrBase)
@@ -177,7 +177,7 @@ Partial Class dlgJitter
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorForJitter As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverJitter As ucrReceiverSingle
-    Friend WithEvents lblSeletedVariable As Label
+    Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents grpMaximumAndMinimumValues As GroupBox
     Friend WithEvents rdoMinimumAndMaximum As RadioButton
     Friend WithEvents rdoMaximumDistanceFromZero As RadioButton
