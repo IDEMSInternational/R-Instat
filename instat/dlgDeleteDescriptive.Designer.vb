@@ -49,7 +49,7 @@ Partial Class dlgDeleteDescriptive
         'ucrSelectorDeleteObject
         '
         Me.ucrSelectorDeleteObject.bShowHiddenColumns = False
-        Me.ucrSelectorDeleteObject.bUseCurrentFilter = False
+        Me.ucrSelectorDeleteObject.bUseCurrentFilter = True
         Me.ucrSelectorDeleteObject.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDeleteObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDeleteObject.Name = "ucrSelectorDeleteObject"
@@ -77,8 +77,8 @@ Partial Class dlgDeleteDescriptive
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteDescriptive"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Delete_Object"
-        Me.Text = "Delete Object"
+        Me.Tag = "Delete_Objects"
+        Me.Text = "Delete Objects"
         Me.ResumeLayout(False)
 
     End Sub
