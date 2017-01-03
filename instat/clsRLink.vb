@@ -225,7 +225,7 @@ Public Class RLink
         Dim strScriptWithComment As String
         Dim strSplitScript As String
         Dim strTempGraphsDirectory As String
-        strTempGraphsDirectory = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs\"
+        strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
 
         If strComment <> "" Then
