@@ -169,7 +169,7 @@ Partial Class dlgStack
         Me.Name = "dlgStack"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Stack_join_columns"
-        Me.Text = "Stack (melt) columns"
+        Me.Text = "Stack (melt) Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
