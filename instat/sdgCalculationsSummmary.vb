@@ -16,7 +16,7 @@
 Imports instat.Translations
 Public Class sdgCalculationsSummmary
     Public bFirstLoad As Boolean = True
-    Public clsRType, clsRFilter, clsRCalculation As New RSyntax
+    Public clsRType, clsRFilter, clsRCalculation, clsRSummary As New RSyntax
     Dim lstType As New List(Of KeyValuePair(Of String, String))
     Private Sub sdgCalculationsSummmary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -40,6 +40,7 @@ Public Class sdgCalculationsSummmary
         ucrSelectorBy.Focus()
         ucrType.SetName("calculation")
         DisplayOptions()
+        rdoDoNotSave.Checked = True
     End Sub
 
     Private Sub DisplayOptions()
@@ -68,7 +69,6 @@ Public Class sdgCalculationsSummmary
             lblFactor.Visible = False
             lblColumnName.Visible = False
             ucrColumnName.Visible = False
-            rdoDoNotSave.Checked = True
             rdoSaveCalcAndResult.Visible = False
             ucrCalcSummary.Visible = False
             If rdoSaveCalcAndResult.Checked Then
@@ -87,7 +87,7 @@ Public Class sdgCalculationsSummmary
         If ucrType.GetText = "calculation" Then
             TypeCalculate()
         ElseIf ucrType.GetText = "summary" Then
-
+            TypeSummary()
         ElseIf ucrType.GetText = "by" Then
             TypeBy()
         ElseIf ucrType.GetText = "filter" Then
@@ -126,6 +126,8 @@ Public Class sdgCalculationsSummmary
     Private Sub TypeCalculate()
         clsRCalculation.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsRCalculation.AddParameter("result_name", Chr(34) & ucrCalculationName.ToString & Chr(34))
+        clsRCalculation.AddParameter("calculated_from", "list(" & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "=" & ucrCalcSummary.ucrReceiverForCalculation.GetVariableNames() & ")")
+        clsRCalculation.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.ToString() & Chr(34))
 
         If rdoSaveCalculation.Checked Then
             clsRCalculation.AddParameter("save", "1")
@@ -136,7 +138,35 @@ Public Class sdgCalculationsSummmary
         End If
     End Sub
 
+    Private Sub TypeSummary()
+        clsRSummary.AddParameter("type", Chr(34) & "summary" & Chr(34))
+        clsRSummary.AddParameter("result_name", Chr(34) & ucrCalculationName.ToString & Chr(34))
+        clsRSummary.AddParameter("calculated_from", "list(" & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "=" & ucrCalcSummary.ucrReceiverForCalculation.GetVariableNames() & ")")
+        clsRSummary.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.ToString() & Chr(34))
+
+        If rdoSaveCalculation.Checked Then
+            clsRSummary.AddParameter("save", "1")
+        ElseIf rdoSaveCalcAndResult.Checked Then
+            clsRSummary.AddParameter("save", "2")
+        Else
+            clsRSummary.AddParameter("save", "0")
+        End If
+    End Sub
+
     Private Sub rdoSaveOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDoNotSave.CheckedChanged, rdoSaveCalculation.CheckedChanged, rdoSaveCalcAndResult.CheckedChanged
         RunType()
     End Sub
+
+    ' Looking at Manipulations Tab
+    Private Sub cmdManipAdd_Click(sender As Object, e As EventArgs) Handles cmdManipAdd.Click
+
+    End Sub
+    ' We want to have that this opens a dialog which only shows filter and by as options in type
+
+    ' Sub Calculations Tab
+    Private Sub cmdSubAdd_Click(sender As Object, e As EventArgs) Handles cmdSubAdd.Click
+
+    End Sub
+    ' We want to have that this opens a dialog which only shows calculations and summary (and combine) as options in type
+
 End Class
