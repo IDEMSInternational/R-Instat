@@ -21,44 +21,57 @@ Public Class dlgDuplicateColumns
         autoTranslate(Me)
         If bFirstLoad Then
             initialiseDialog()
+            SetDefaults()
             bFirstLoad = False
         End If
         'checks OkEnabled
         TestOKEnabled()
     End Sub
 
+    Private Sub SetDefaults()
+        ucrSelectorForDuplicateColumn.Reset()
+        ucrInputColumnName.Reset()
+        ucrInputColumnName.SetPrefix("OldColumnName")
+    End Sub
     Private Sub initialiseDialog()
         'sets the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$copy_columns")
-        ucrReceiveColumns.Selector = ucrSelectColumnstoCopy
-        ucrReceiveColumns.SetMeAsReceiver()
-        'ucrBase.iHelpTopicID = 
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        ucrReceiverForCopyColumns.Selector = ucrSelectorForDuplicateColumn
+        ucrReceiverForCopyColumns.SetMeAsReceiver()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        ucrSelectColumnstoCopy.Reset()
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiveColumns.IsEmpty() = False Then
+        If Not ucrReceiverForCopyColumns.IsEmpty AndAlso Not ucrInputColumnName.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiveColumns_SelectionChanged() Handles ucrReceiveColumns.SelectionChanged
-        If Not ucrReceiveColumns.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiveColumns.GetVariableNames())
+    Private Sub ucrReceiverForCopyColumns_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCopyColumns.SelectionChanged
+        ucrInputColumnName.SetName(ucrReceiverForCopyColumns.GetVariableNames)
+        If Not ucrReceiverForCopyColumns.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_data", clsRFunctionParameter:=ucrReceiverForCopyColumns.GetVariables)
         Else
-            ucrBase.clsRsyntax.RemoveParameter("col_names")
+            ucrBase.clsRsyntax.RemoveParameter("col_data")
         End If
-        'Test ok enabled
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectColumnstoCopy_DataFrameChanged() Handles ucrSelectColumnstoCopy.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectColumnstoCopy.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    Private Sub ucrSelectorForDuplicateColumn_DataFrameChanged() Handles ucrSelectorForDuplicateColumn.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrInputColumnName_NameChanged() Handles ucrInputColumnName.NameChanged
+        If Not ucrInputColumnName.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & ucrInputColumnName.GetText & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
+        TestOKEnabled()
     End Sub
 End Class
