@@ -31,7 +31,7 @@ Public Class ucrWPFRichTextBox
     Public Sub CreateTempDirectory()
         'This sub should be called during the setup, maybe write it as R code within the setup method ? For the moment it is called on load of frmMain in the OutputWindow setup.
         Dim strDirectoryPath As String
-        strDirectoryPath = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs\"
+        strDirectoryPath = Path.Combine(IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         Console.WriteLine("Creating the directory: " & strDirectoryPath)
         'Specify the directories you want to manipulate.
         Dim diDirectoryInfo As IO.DirectoryInfo = New IO.DirectoryInfo(strDirectoryPath)
@@ -46,7 +46,7 @@ Public Class ucrWPFRichTextBox
             diDirectoryInfo.Create()
             Console.WriteLine("The directory: " & strDirectoryPath & " was created successfully.")
         Catch e As Exception
-            Console.WriteLine("The process failed: {0}", e.ToString())
+            Console.WriteLine("The process failed: {0}", e.Message)
             'Temporarily adding a vb message box for debug purposes.
             MsgBox(e.Message & vbNewLine & "A problem occured in attempting to create the directory: " & strDirectoryPath, MsgBoxStyle.Critical)
         End Try
@@ -58,10 +58,11 @@ Public Class ucrWPFRichTextBox
         Dim strTempGraphsDirectory As String
         Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
         Dim iNumberOfFiles As Integer = -1
-        strTempGraphsDirectory = IO.Path.GetTempPath() & "R_Instat_Temp_Graphs\"
+        strTempGraphsDirectory = Path.Combine(IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
         Try
             lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
         Catch e As Exception
+            lstTempGraphFiles = Nothing
             MsgBox(e.Message & vbNewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
         End Try
         If lstTempGraphFiles IsNot Nothing Then
@@ -186,7 +187,7 @@ Public Class ucrWPFRichTextBox
         'Question: Where should this be used ?
         'Print RichTextBox content
         Dim pd As New Controls.PrintDialog()
-        If (pd.ShowDialog() = True) Then
+        If (pd.ShowDialog()) Then
             'use either one of the below      
             pd.PrintVisual(TryCast(rtbOutput, Media.Visual), "printing as visual")
             pd.PrintDocument(((CType(rtbOutput.Document, Documents.IDocumentPaginatorSource)).DocumentPaginator), "printing as paginator")
