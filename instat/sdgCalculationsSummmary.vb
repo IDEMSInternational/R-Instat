@@ -42,6 +42,7 @@ Public Class sdgCalculationsSummmary
         ucrType.SetItems(lstType)
         ucrType.SetParameterName("type")
 
+        clsRFunction.SetAssignTo(ucrCalculationName.ToString())
     End Sub
 
     Private Sub SetDefaults()
