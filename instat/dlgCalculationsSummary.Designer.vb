@@ -87,7 +87,7 @@ Partial Class dlgCalculationsSummary
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 228)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 191)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -96,7 +96,7 @@ Partial Class dlgCalculationsSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 284)
+        Me.ClientSize = New System.Drawing.Size(420, 247)
         Me.Controls.Add(Me.cmdDuplicate)
         Me.Controls.Add(Me.cmdDelete)
         Me.Controls.Add(Me.cmdEdit)
