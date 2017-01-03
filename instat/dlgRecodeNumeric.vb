@@ -30,13 +30,13 @@ Public Class dlgRecodeNumeric
         TestOKEnabled()
         ucrBase.iHelpTopicID = 43
     End Sub
+
     Private Sub InitialiseDialog()
         ucrReceiverRecode.Selector = ucrSelectorForRecode
         ucrReceiverRecode.SetMeAsReceiver()
         ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-        ucrInputRecode.SetPrefix("Recode")
         ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
@@ -49,6 +49,7 @@ Public Class dlgRecodeNumeric
         chkAddLabels.Checked = False
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
+        ucrInputRecode.SetPrefix("Recode")
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.Reset()
@@ -146,7 +147,6 @@ Public Class dlgRecodeNumeric
 
     Private Sub grpClosedOn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeft.CheckedChanged, rdoRight.CheckedChanged
         SetClosedOn()
-
     End Sub
 
     Private Sub SetClosedOn()

@@ -266,7 +266,7 @@ Public Class BlockReader
                     'The whole strRCommand is replaced by the string giving the parameters of the RFunction.
                     strRCommand = strRCommand.Substring(iIndexOfIdentifier + 1, strRCommand.Length - 2)
                     RemoveExtremitySpaces(strRCommand)
-                    clsRParameter.SetArgumentFunction(clsRFunction) 'later .SetArgument(clsRFunction)
+                    clsRParameter.SetArgument(clsRFunction)
                     Return ","
                 Else 'If the bracket closed before the end of the string, this means that the next symbol that will be found is supposed to be the operator. 
                     If strRCommand.Substring(iIndexOfMatchingBracket + 1).IndexOfAny(lstListOfIdentifiers) <> -1 Then
@@ -279,7 +279,7 @@ Public Class BlockReader
                 End If
             Else 'If it was not " or (, then it is an operator:
                 clsROperator.SetOperation(strRCommand(iIndexOfIdentifier))
-                clsRParameter.SetArgumentOperator(clsROperator) 'later SetArgument(clsRFunction)
+                clsRParameter.SetArgument(clsROperator) 'later SetArgument(clsRFunction)
                 Return strRCommand(iIndexOfIdentifier)
             End If
         End While

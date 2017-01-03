@@ -29,7 +29,6 @@ Public Class Distribution
     Public bTwoLevelFactor As Boolean = False
     Public bPositiveInt As Boolean = False
     Public bIsContinuous As Boolean = True
-    Public bIntAndNumeric As Boolean = False
     Public bIsExact As Boolean = False
     Public lstExact As String() ' Seven values in the string, {R-Code, Label, nudValue, nudIncrements, nudDecimalPlace, nudMin, nudMax}
     Public clsParameters As New List(Of DistributionParameter)

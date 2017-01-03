@@ -234,31 +234,33 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ucrTickMarkers_NameChanged() Handles ucrTickMarkers.NameChanged
-        If ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
-            clsSeqFunction.SetRCommand("seq")
-            clsScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
+        If rdoTickMarkersCustom.Checked Then
+            If ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
+                clsSeqFunction.SetRCommand("seq")
+                clsScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
 
-            ucrSpecificValues.Visible = False
-            lblFrom.Visible = True
-            nudFrom.Visible = True
-            lblTo.Visible = True
-            nudTo.Visible = True
-            lblInStepsOf.Visible = True
-            nudInStepsOf.Visible = True
-            lblTickMarkersNoOfDecimalPlaces.Visible = True
-            nudTickMarkersNoOfDecimalPlaces.Visible = True
+                ucrSpecificValues.Visible = False
+                lblFrom.Visible = True
+                nudFrom.Visible = True
+                lblTo.Visible = True
+                nudTo.Visible = True
+                lblInStepsOf.Visible = True
+                nudInStepsOf.Visible = True
+                lblTickMarkersNoOfDecimalPlaces.Visible = True
+                nudTickMarkersNoOfDecimalPlaces.Visible = True
 
-        ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
-            clsScalecontinuousFunction.RemoveParameterByName("breaks")
-            ucrSpecificValues.Visible = True
-            lblFrom.Visible = False
-            nudFrom.Visible = False
-            lblTo.Visible = False
-            nudTo.Visible = False
-            lblInStepsOf.Visible = False
-            nudInStepsOf.Visible = False
-            lblTickMarkersNoOfDecimalPlaces.Visible = False
-            nudTickMarkersNoOfDecimalPlaces.Visible = False
+            ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
+                clsScalecontinuousFunction.RemoveParameterByName("breaks")
+                ucrSpecificValues.Visible = True
+                lblFrom.Visible = False
+                nudFrom.Visible = False
+                lblTo.Visible = False
+                nudTo.Visible = False
+                lblInStepsOf.Visible = False
+                nudInStepsOf.Visible = False
+                lblTickMarkersNoOfDecimalPlaces.Visible = False
+                nudTickMarkersNoOfDecimalPlaces.Visible = False
+            End If
         End If
     End Sub
 

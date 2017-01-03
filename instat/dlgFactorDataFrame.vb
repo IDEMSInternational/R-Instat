@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
+
     Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -27,8 +28,8 @@ Public Class dlgFactorDataFrame
         End If
         TestOKEnabled()
         autoTranslate(Me)
-
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 162
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
@@ -37,10 +38,11 @@ Public Class dlgFactorDataFrame
         ucrReceiverFactorDataFrame.SetIncludedDataTypes({"factor"})
         SetDefaults()
     End Sub
+
     Private Sub SetDefaults()
         chkAddCurrentContrast.Checked = True
         IncludeContrast()
-        chkReplaceFactorSheet.Checked = False
+        chkReplaceFactorSheet.Checked = True
         Replace()
         ucrSelectorFactorDataFrame.Reset()
         ucrInputFactorNames.ResetText()
@@ -69,6 +71,7 @@ Public Class dlgFactorDataFrame
     Private Sub chkAddCurrentContrast_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddCurrentContrast.CheckedChanged
         IncludeContrast()
     End Sub
+
     Private Sub IncludeContrast()
         If chkAddCurrentContrast.Checked Then
             ucrBase.clsRsyntax.AddParameter("include_contrasts", "TRUE")
@@ -83,9 +86,9 @@ Public Class dlgFactorDataFrame
 
     Private Sub Replace()
         If chkReplaceFactorSheet.Checked Then
-            ucrBase.clsRsyntax.AddParameter("replace", "FALSE")
-        Else
             ucrBase.clsRsyntax.AddParameter("replace", "TRUE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("replace", "FALSE")
         End If
     End Sub
 
@@ -97,6 +100,9 @@ Public Class dlgFactorDataFrame
     Private Sub FactorVariable()
         If Not ucrReceiverFactorDataFrame.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("factor", ucrReceiverFactorDataFrame.GetVariableNames)
+            If Not ucrInputFactorNames.bUserTyped Then
+                ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False))
+            End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("factor")
         End If

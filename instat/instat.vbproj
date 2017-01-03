@@ -142,6 +142,12 @@
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsRCodeStructure.vb" />
+    <Compile Include="dlgCalculationsSummary.Designer.vb">
+      <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCalculationsSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgAppend.Designer.vb">
       <DependentUpon>dlgAppend.vb</DependentUpon>
     </Compile>
@@ -357,6 +363,12 @@
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOneVarUseModFit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgCalculationsSummmary.Designer.vb">
+      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCalculationsSummmary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -939,6 +951,12 @@
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrAdditionalLayers.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrCalculator.Designer.vb">
+      <DependentUpon>ucrCalculator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrCalculator.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrCheck.Designer.vb">
@@ -1953,6 +1971,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgCalculationsSummary.fr-FR.resx">
+      <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculationsSummary.resx">
+      <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculationsSummary.sw-KE.resx">
+      <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAddStartRain.fr-FR.resx">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
     </EmbeddedResource>
@@ -2846,6 +2873,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAddNewDistribution.sw-KE.resx">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCalculationsSummmary.fr-FR.resx">
+      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCalculationsSummmary.resx">
+      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCalculationsSummmary.sw-KE.resx">
+      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
@@ -4107,6 +4143,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrCalculator.fr-FR.resx">
+      <DependentUpon>ucrCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrCalculator.resx">
+      <DependentUpon>ucrCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrCalculator.sw-KE.resx">
+      <DependentUpon>ucrCalculator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrCheck.resx">
       <DependentUpon>ucrCheck.vb</DependentUpon>
