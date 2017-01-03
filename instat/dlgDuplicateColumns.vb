@@ -31,7 +31,6 @@ Public Class dlgDuplicateColumns
     Private Sub SetDefaults()
         ucrSelectorForDuplicateColumn.Reset()
         ucrInputColumnName.Reset()
-        ucrInputColumnName.SetPrefix("OldColumnName")
     End Sub
     Private Sub initialiseDialog()
         'sets the function
@@ -52,8 +51,20 @@ Public Class dlgDuplicateColumns
         End If
     End Sub
 
+    Private Sub SetDefaultName()
+        Dim laschar As String = ucrReceiverForCopyColumns.GetVariableNames(False)
+        If Not IsNumeric(laschar.Substring(laschar.Length - 1)) Then
+            ucrInputColumnName.SetName(Chr(34) & laschar & 1 & Chr(34))
+
+        Else
+            Dim laschar1 As String = laschar.Remove(laschar.Substring(laschar.Length - 1))
+            ucrInputColumnName.SetName(Chr(34) & laschar1 & Convert.ToInt32(laschar.Substring(laschar.Length - 1)) + 1 & Chr(34))
+        End If
+    End Sub
+
     Private Sub ucrReceiverForCopyColumns_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCopyColumns.SelectionChanged
-        ucrInputColumnName.SetName(ucrReceiverForCopyColumns.GetVariableNames)
+        SetDefaultName()
+
         If Not ucrReceiverForCopyColumns.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("col_data", clsRFunctionParameter:=ucrReceiverForCopyColumns.GetVariables)
         Else
@@ -68,7 +79,7 @@ Public Class dlgDuplicateColumns
 
     Private Sub ucrInputColumnName_NameChanged() Handles ucrInputColumnName.NameChanged
         If Not ucrInputColumnName.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & ucrInputColumnName.GetText & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("col_name", ucrInputColumnName.GetText)
         Else
             ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
