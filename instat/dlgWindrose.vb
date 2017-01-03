@@ -61,16 +61,18 @@ Public Class dlgWindrose
         ucrWindRoseSelector.Reset()
         ucrXReceiver.SetMeAsReceiver()
         TestOkEnabled()
+        ucrSaveWindRose.chkSaveGraph.Checked = False
     End Sub
 
     Private Sub ReopenDialog()
 
     End Sub
+
     Private Sub TestOkEnabled()
-        If (ucrXReceiver.IsEmpty AndAlso ucrYReceiver.IsEmpty) OrElse (ucrSaveWindRose.chkSaveGraph.Checked AndAlso ucrSaveWindRose.ucrInputGraphName.IsEmpty) Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrXReceiver.IsEmpty AndAlso Not ucrYReceiver.IsEmpty AndAlso ((ucrSaveWindRose.chkSaveGraph.Checked AndAlso Not ucrSaveWindRose.ucrInputGraphName.IsEmpty) OrElse Not ucrSaveWindRose.chkSaveGraph.Checked) Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -89,7 +91,6 @@ Public Class dlgWindrose
     Private Sub ucrYReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYReceiver.SelectionChanged
         If Not ucrYReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("y", ucrYReceiver.GetVariableNames(False))
-
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If

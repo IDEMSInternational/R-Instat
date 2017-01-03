@@ -51,6 +51,7 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.strPrefix = "Boxplot"
         chkHorizontalBoxplot.Checked = False
         chkVarwidth.Checked = False
+        rdoBoxplot.Checked = True
         'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
@@ -62,7 +63,7 @@ Public Class dlgBoxplot
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
-        clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
+        'clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
@@ -122,12 +123,12 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucrSecondFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
-
-        If Not ucrSecondFactorReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("fill")
-        End If
+        FillColourAes()
+        'If Not ucrSecondFactorReceiver.IsEmpty Then
+        '    clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+        'Else
+        '    clsRaesFunction.RemoveParameterByName("fill")
+        'End If
     End Sub
 
     Private Sub ReopenDialog()
@@ -213,6 +214,43 @@ Public Class dlgBoxplot
         If chkVarwidth.Checked = True Then
             clsRgeom_boxplotFunction.AddParameter("varwidth", "TRUE")
         Else clsRgeom_boxplotFunction.RemoveParameterByName("varwidth")
+        End If
+    End Sub
+
+    Private Sub rdoBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoxplot.CheckedChanged, rdoJitter.CheckedChanged, rdoViolin.CheckedChanged
+        'Sets appropriate geom function depending with selection 
+        If rdoBoxplot.Checked Then
+            clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
+            chkHorizontalBoxplot.Text = "Horizontal Boxplot"
+        ElseIf rdoJitter.Checked
+            clsRgeom_boxplotFunction.SetRCommand("geom_jitter")
+            chkHorizontalBoxplot.Text = "Horizontal Jitter Plot"
+        Else
+            clsRgeom_boxplotFunction.SetRCommand("geom_violin")
+            chkHorizontalBoxplot.Text = "Horizontal Violin Plot"
+        End If
+        DisableVarWidth()
+        FillColourAes()
+    End Sub
+
+    Private Sub DisableVarWidth()
+        'Both vilon plot and Jitter plot can not have a varible width. User should not be able to check varible width
+        If rdoViolin.Checked OrElse rdoJitter.Checked Then
+            chkVarwidth.Visible = False
+        Else
+            chkVarwidth.Visible = True
+        End If
+    End Sub
+    Private Sub FillColourAes()
+        If (rdoBoxplot.Checked AndAlso Not ucrSecondFactorReceiver.IsEmpty) OrElse (rdoViolin.Checked AndAlso Not ucrSecondFactorReceiver.IsEmpty) Then
+
+            clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+        ElseIf rdoJitter.Checked AndAlso Not ucrSecondFactorReceiver.IsEmpty Then
+
+            clsRaesFunction.AddParameter("colour", ucrSecondFactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+            clsRaesFunction.RemoveParameterByName("colour")
         End If
     End Sub
 End Class
