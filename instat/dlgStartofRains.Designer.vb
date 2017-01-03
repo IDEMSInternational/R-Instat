@@ -53,6 +53,8 @@ Partial Class dlgStartofRains
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.lblYear = New System.Windows.Forms.Label()
         CType(Me.nudValue, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMinimum, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpConditionsForSatrtofRains.SuspendLayout()
@@ -68,7 +70,7 @@ Partial Class dlgStartofRains
         '
         'nudValue
         '
-        Me.nudValue.Location = New System.Drawing.Point(201, 42)
+        Me.nudValue.Location = New System.Drawing.Point(201, 43)
         Me.nudValue.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.nudValue.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudValue.Name = "nudValue"
@@ -78,7 +80,7 @@ Partial Class dlgStartofRains
         '
         'nudMinimum
         '
-        Me.nudMinimum.Location = New System.Drawing.Point(201, 18)
+        Me.nudMinimum.Location = New System.Drawing.Point(201, 19)
         Me.nudMinimum.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMinimum.Name = "nudMinimum"
         Me.nudMinimum.Size = New System.Drawing.Size(41, 20)
@@ -88,7 +90,7 @@ Partial Class dlgStartofRains
         'lblRainfall
         '
         Me.lblRainfall.AutoSize = True
-        Me.lblRainfall.Location = New System.Drawing.Point(232, 55)
+        Me.lblRainfall.Location = New System.Drawing.Point(250, 83)
         Me.lblRainfall.Name = "lblRainfall"
         Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
         Me.lblRainfall.TabIndex = 3
@@ -111,7 +113,7 @@ Partial Class dlgStartofRains
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkConsecutiveRainyDays)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.nudMinimum)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.nudValue)
-        Me.grpConditionsForSatrtofRains.Location = New System.Drawing.Point(12, 220)
+        Me.grpConditionsForSatrtofRains.Location = New System.Drawing.Point(9, 285)
         Me.grpConditionsForSatrtofRains.Name = "grpConditionsForSatrtofRains"
         Me.grpConditionsForSatrtofRains.Size = New System.Drawing.Size(395, 95)
         Me.grpConditionsForSatrtofRains.TabIndex = 8
@@ -130,7 +132,7 @@ Partial Class dlgStartofRains
         'lblWidth
         '
         Me.lblWidth.AutoSize = True
-        Me.lblWidth.Location = New System.Drawing.Point(256, 20)
+        Me.lblWidth.Location = New System.Drawing.Point(264, 23)
         Me.lblWidth.Name = "lblWidth"
         Me.lblWidth.Size = New System.Drawing.Size(66, 13)
         Me.lblWidth.TabIndex = 3
@@ -138,7 +140,7 @@ Partial Class dlgStartofRains
         '
         'nudLengthofTime
         '
-        Me.nudLengthofTime.Location = New System.Drawing.Point(332, 72)
+        Me.nudLengthofTime.Location = New System.Drawing.Point(332, 68)
         Me.nudLengthofTime.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudLengthofTime.Name = "nudLengthofTime"
         Me.nudLengthofTime.Size = New System.Drawing.Size(53, 20)
@@ -156,7 +158,7 @@ Partial Class dlgStartofRains
         '
         'nudOverDays
         '
-        Me.nudOverDays.Location = New System.Drawing.Point(332, 46)
+        Me.nudOverDays.Location = New System.Drawing.Point(332, 43)
         Me.nudOverDays.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
         Me.nudOverDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudOverDays.Name = "nudOverDays"
@@ -167,7 +169,7 @@ Partial Class dlgStartofRains
         'lblLengthofTime
         '
         Me.lblLengthofTime.AutoSize = True
-        Me.lblLengthofTime.Location = New System.Drawing.Point(246, 74)
+        Me.lblLengthofTime.Location = New System.Drawing.Point(249, 71)
         Me.lblLengthofTime.Name = "lblLengthofTime"
         Me.lblLengthofTime.Size = New System.Drawing.Size(81, 13)
         Me.lblLengthofTime.TabIndex = 13
@@ -176,7 +178,7 @@ Partial Class dlgStartofRains
         'lblMaximumDays
         '
         Me.lblMaximumDays.AutoSize = True
-        Me.lblMaximumDays.Location = New System.Drawing.Point(114, 72)
+        Me.lblMaximumDays.Location = New System.Drawing.Point(118, 71)
         Me.lblMaximumDays.Name = "lblMaximumDays"
         Me.lblMaximumDays.Size = New System.Drawing.Size(81, 13)
         Me.lblMaximumDays.TabIndex = 11
@@ -185,7 +187,7 @@ Partial Class dlgStartofRains
         'lblVal
         '
         Me.lblVal.AutoSize = True
-        Me.lblVal.Location = New System.Drawing.Point(163, 44)
+        Me.lblVal.Location = New System.Drawing.Point(162, 47)
         Me.lblVal.Name = "lblVal"
         Me.lblVal.Size = New System.Drawing.Size(37, 13)
         Me.lblVal.TabIndex = 6
@@ -194,7 +196,7 @@ Partial Class dlgStartofRains
         'lblOverDays
         '
         Me.lblOverDays.AutoSize = True
-        Me.lblOverDays.Location = New System.Drawing.Point(268, 49)
+        Me.lblOverDays.Location = New System.Drawing.Point(270, 46)
         Me.lblOverDays.Name = "lblOverDays"
         Me.lblOverDays.Size = New System.Drawing.Size(60, 13)
         Me.lblOverDays.TabIndex = 8
@@ -204,7 +206,7 @@ Partial Class dlgStartofRains
         'lblMinimum
         '
         Me.lblMinimum.AutoSize = True
-        Me.lblMinimum.Location = New System.Drawing.Point(149, 21)
+        Me.lblMinimum.Location = New System.Drawing.Point(149, 22)
         Me.lblMinimum.Name = "lblMinimum"
         Me.lblMinimum.Size = New System.Drawing.Size(51, 13)
         Me.lblMinimum.TabIndex = 1
@@ -223,7 +225,7 @@ Partial Class dlgStartofRains
         'chkTotalRainfall
         '
         Me.chkTotalRainfall.AutoSize = True
-        Me.chkTotalRainfall.Location = New System.Drawing.Point(7, 46)
+        Me.chkTotalRainfall.Location = New System.Drawing.Point(7, 44)
         Me.chkTotalRainfall.Name = "chkTotalRainfall"
         Me.chkTotalRainfall.Size = New System.Drawing.Size(88, 17)
         Me.chkTotalRainfall.TabIndex = 5
@@ -248,7 +250,7 @@ Partial Class dlgStartofRains
         Me.grpRainParameters.Controls.Add(Me.lblFrom)
         Me.grpRainParameters.Controls.Add(Me.nudTo)
         Me.grpRainParameters.Controls.Add(Me.lblTo)
-        Me.grpRainParameters.Location = New System.Drawing.Point(234, 129)
+        Me.grpRainParameters.Location = New System.Drawing.Point(9, 192)
         Me.grpRainParameters.Name = "grpRainParameters"
         Me.grpRainParameters.Size = New System.Drawing.Size(144, 87)
         Me.grpRainParameters.TabIndex = 7
@@ -319,7 +321,7 @@ Partial Class dlgStartofRains
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(232, 94)
+        Me.lblDOY.Location = New System.Drawing.Point(251, 167)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 5
@@ -328,7 +330,7 @@ Partial Class dlgStartofRains
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(232, 14)
+        Me.lblDate.Location = New System.Drawing.Point(251, 41)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 1
@@ -336,25 +338,25 @@ Partial Class dlgStartofRains
         '
         'ucrReceiverDate
         '
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(234, 29)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(250, 56)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(144, 20)
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDate.TabIndex = 2
         '
         'ucrReceiverDOY
         '
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(234, 109)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(250, 182)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
-        Me.ucrReceiverDOY.Size = New System.Drawing.Size(144, 20)
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDOY.TabIndex = 6
         '
         'ucrReceiverRainfall
         '
-        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(235, 70)
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(250, 98)
         Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
@@ -373,16 +375,36 @@ Partial Class dlgStartofRains
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 321)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 386)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 9
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(250, 140)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverYear.TabIndex = 11
+        '
+        'lblYear
+        '
+        Me.lblYear.AutoSize = True
+        Me.lblYear.Location = New System.Drawing.Point(251, 125)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.TabIndex = 10
+        Me.lblYear.Text = "Year:"
         '
         'dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 378)
+        Me.ClientSize = New System.Drawing.Size(414, 445)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverDOY)
@@ -449,4 +471,6 @@ Partial Class dlgStartofRains
     Friend WithEvents lblThreshold As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents lblYear As Label
 End Class
