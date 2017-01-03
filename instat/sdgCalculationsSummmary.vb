@@ -16,7 +16,7 @@
 Imports instat.Translations
 Public Class sdgCalculationsSummmary
     Public bFirstLoad As Boolean = True
-    Public clsRType, clsRFilter, clsRCalculation, clsRSummary As New RSyntax
+    Public clsRFunction As New RFunction
     Dim lstType As New List(Of KeyValuePair(Of String, String))
     Private Sub sdgCalculationsSummmary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -33,6 +33,15 @@ Public Class sdgCalculationsSummmary
         ucrReceiverBy.Selector = ucrSelectorBy
         ucrReceiverBy.SetMeAsReceiver()
         ucrReceiverBy.SetDataType("factor")
+
+        lstType.Add(New KeyValuePair(Of String, String)("Calculation", Chr(34) & "calculation" & Chr(34)))
+        lstType.Add(New KeyValuePair(Of String, String)("Summary", Chr(34) & "summary" & Chr(34)))
+        lstType.Add(New KeyValuePair(Of String, String)("By", Chr(34) & "by" & Chr(34)))
+        lstType.Add(New KeyValuePair(Of String, String)("Filter", Chr(34) & "filter" & Chr(34)))
+        '        lstType.Add(New KeyValuePair(Of String, String)("Combine", Chr(34) & "combination" & Chr(34)))
+        ucrType.SetItems(lstType)
+        ucrType.SetParameterName("type")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -98,63 +107,34 @@ Public Class sdgCalculationsSummmary
     End Sub
 
     Private Sub TypeBy()
-        clsRType.AddParameter("type", Chr(34) & "by" & Chr(34))
-        clsRType.AddParameter("calculated_from", "list(" & ucrSelectorBy.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "=" & ucrReceiverBy.GetVariableNames() & ")")
+        '        clsRType.AddParameter("calculated_from", "list(" & ucrSelectorBy.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "=" & ucrReceiverBy.GetVariableNames() & ")")
         ' I believe that the variable names automatically have chr(34) around them
-
         ' not sure about calculation name - this is what is displayed in the item box in the dlg.
-
-        If rdoSaveCalculation.Checked Then
-            clsRType.AddParameter("save", "1")
-        Else
-            clsRType.AddParameter("save", "0")
-        End If
-
     End Sub
 
     Private Sub TypeFilter()
-        clsRFilter.AddParameter("type", Chr(34) & "filter" & Chr(34))
-        clsRFilter.AddParameter("calculated_from", )
-
-        If rdoSaveCalculation.Checked Then
-            clsRFilter.AddParameter("save", "1")
-        Else
-            clsRFilter.AddParameter("save", "0")
-        End If
     End Sub
 
     Private Sub TypeCalculate()
-        clsRCalculation.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsRCalculation.AddParameter("result_name", Chr(34) & ucrCalculationName.ToString & Chr(34))
-        clsRCalculation.AddParameter("calculated_from", "list(" & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "=" & ucrCalcSummary.ucrReceiverForCalculation.GetVariableNames() & ")")
-        clsRCalculation.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.ToString() & Chr(34))
-
-        If rdoSaveCalculation.Checked Then
-            clsRCalculation.AddParameter("save", "1")
-        ElseIf rdoSaveCalcAndResult.Checked Then
-            clsRCalculation.AddParameter("save", "2")
-        Else
-            clsRCalculation.AddParameter("save", "0")
-        End If
+        '        clsRCalculation.AddParameter("result_name", Chr(34) & ucrCalculationName.ToString & Chr(34))
+        '        clsRCalculation.AddParameter("calculated_from", "list(" & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "=" & ucrCalcSummary.ucrReceiverForCalculation.GetVariableNames() & ")")
+        '        clsRCalculation.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.ToString() & Chr(34))
     End Sub
 
     Private Sub TypeSummary()
-        clsRSummary.AddParameter("type", Chr(34) & "summary" & Chr(34))
-        clsRSummary.AddParameter("result_name", Chr(34) & ucrCalculationName.ToString & Chr(34))
-        clsRSummary.AddParameter("calculated_from", "list(" & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "=" & ucrCalcSummary.ucrReceiverForCalculation.GetVariableNames() & ")")
-        clsRSummary.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.ToString() & Chr(34))
-
-        If rdoSaveCalculation.Checked Then
-            clsRSummary.AddParameter("save", "1")
-        ElseIf rdoSaveCalcAndResult.Checked Then
-            clsRSummary.AddParameter("save", "2")
-        Else
-            clsRSummary.AddParameter("save", "0")
-        End If
+        '        clsRSummary.AddParameter("result_name", Chr(34) & ucrCalculationName.ToString & Chr(34))
+        '        clsRSummary.AddParameter("calculated_from", "list(" & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "=" & ucrCalcSummary.ucrReceiverForCalculation.GetVariableNames() & ")")
+        '        clsRSummary.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.ToString() & Chr(34))
     End Sub
 
     Private Sub rdoSaveOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDoNotSave.CheckedChanged, rdoSaveCalculation.CheckedChanged, rdoSaveCalcAndResult.CheckedChanged
-        RunType()
+        If rdoSaveCalculation.Checked Then
+            clsRFunction.AddParameter("save", "1")
+        ElseIf rdoSaveCalcAndResult.Checked Then
+            clsRFunction.AddParameter("save", "2")
+        Else
+            clsRFunction.AddParameter("save", "0")
+        End If
     End Sub
 
     ' Looking at Manipulations Tab
