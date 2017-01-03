@@ -22,6 +22,7 @@ Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
     Public strWorkingDirectory As String
+    Private strGrpahDisplayOption As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
     'Define the Fonts dialog (only one)
@@ -55,6 +56,11 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
+
+        UcrrdoDisplayinOutputWindow.SetText("Display in Output Window")
+        ucrrdoDisplayinRViewer.SetText("Display in R viewer")
+        ucrrdoDisplayinSeparateWindows.SetText("Display in separate windows")
+
     End Sub
 
     Private Sub LoadInstatOptions()
