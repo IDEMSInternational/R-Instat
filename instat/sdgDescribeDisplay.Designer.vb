@@ -60,7 +60,7 @@ Partial Class sdgDescribeDisplay
         Me.chkTranspose.Location = New System.Drawing.Point(99, 18)
         Me.chkTranspose.Name = "chkTranspose"
         Me.chkTranspose.Size = New System.Drawing.Size(76, 17)
-        Me.chkTranspose.TabIndex = 5
+        Me.chkTranspose.TabIndex = 1
         Me.chkTranspose.Tag = "Transpose"
         Me.chkTranspose.Text = "Transpose"
         Me.chkTranspose.UseVisualStyleBackColor = True
@@ -82,7 +82,7 @@ Partial Class sdgDescribeDisplay
         Me.chkAddMargins.Location = New System.Drawing.Point(8, 18)
         Me.chkAddMargins.Name = "chkAddMargins"
         Me.chkAddMargins.Size = New System.Drawing.Size(85, 17)
-        Me.chkAddMargins.TabIndex = 3
+        Me.chkAddMargins.TabIndex = 0
         Me.chkAddMargins.Tag = "Add_Margins"
         Me.chkAddMargins.Text = "Add Margins"
         Me.chkAddMargins.UseVisualStyleBackColor = True
@@ -96,7 +96,7 @@ Partial Class sdgDescribeDisplay
         Me.grpFrequenciesOptions.Location = New System.Drawing.Point(12, 12)
         Me.grpFrequenciesOptions.Name = "grpFrequenciesOptions"
         Me.grpFrequenciesOptions.Size = New System.Drawing.Size(190, 64)
-        Me.grpFrequenciesOptions.TabIndex = 112
+        Me.grpFrequenciesOptions.TabIndex = 0
         Me.grpFrequenciesOptions.TabStop = False
         Me.grpFrequenciesOptions.Tag = "Frequencies_Options"
         Me.grpFrequenciesOptions.Text = "Frequencies Options"
@@ -107,7 +107,7 @@ Partial Class sdgDescribeDisplay
         Me.chkPercentages.Location = New System.Drawing.Point(99, 40)
         Me.chkPercentages.Name = "chkPercentages"
         Me.chkPercentages.Size = New System.Drawing.Size(86, 17)
-        Me.chkPercentages.TabIndex = 4
+        Me.chkPercentages.TabIndex = 3
         Me.chkPercentages.Tag = "Percentages"
         Me.chkPercentages.Text = "Percentages"
         Me.chkPercentages.UseVisualStyleBackColor = True
@@ -120,7 +120,7 @@ Partial Class sdgDescribeDisplay
         Me.grpAnovaOptions.Location = New System.Drawing.Point(12, 86)
         Me.grpAnovaOptions.Name = "grpAnovaOptions"
         Me.grpAnovaOptions.Size = New System.Drawing.Size(190, 86)
-        Me.grpAnovaOptions.TabIndex = 111
+        Me.grpAnovaOptions.TabIndex = 1
         Me.grpAnovaOptions.TabStop = False
         Me.grpAnovaOptions.Tag = "Anova_Options"
         Me.grpAnovaOptions.Text = "Anova Options"
@@ -141,10 +141,10 @@ Partial Class sdgDescribeDisplay
         Me.chkSignifStars.AutoSize = True
         Me.chkSignifStars.Location = New System.Drawing.Point(8, 19)
         Me.chkSignifStars.Name = "chkSignifStars"
-        Me.chkSignifStars.Size = New System.Drawing.Size(111, 17)
+        Me.chkSignifStars.Size = New System.Drawing.Size(129, 17)
         Me.chkSignifStars.TabIndex = 0
         Me.chkSignifStars.Tag = "Significance_Stars"
-        Me.chkSignifStars.Text = "Significance Stars"
+        Me.chkSignifStars.Text = "Significance Statistics"
         Me.chkSignifStars.UseVisualStyleBackColor = True
         '
         'sdgDescribeDisplay

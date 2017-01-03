@@ -1001,11 +1001,15 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
     message("Factor data frame already exists.")
     if(replace) {
       message("Current factor data frame will be replaced.")
-      #TODO replacing not implemented yet
-      # This line should be removed when implemented
+      factor_named <- factor
+      names(factor_named) <- factor
+      curr_factor_df_name <- self$get_linked_to_data_name(data_name, factor_named)
+      self$delete_dataframe(curr_factor_df_name)
+    }
+    else {
+      warning("replace = FALSE so no action will be taken.")
       create <- FALSE
     }
-    else create <- FALSE
   }
   if(create) {
     data_frame_list <- list()
@@ -1046,7 +1050,18 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
   self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
 )
+
 instat_object$set("public","make_inventory_plot", function(data_name,col_name = "", year , doy, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
   self$get_data_objects(data_name)$make_inventory_plot(col_name = col_name , year = year, doy =doy,add_to_data = add_to_data, coord_flip = coord_flip, threshold = threshold, facets = facets)
+}
+)
+
+instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c()) {
+  data_list <- open_NetCDF(nc_data)
+  if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
+  names(data_list) = data_names
+  self$import_data(data_tables = data_list)
+  self$add_key(data_names[2], c("lat", "lon"))
+  self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
 )
