@@ -197,7 +197,7 @@ Public Class dlgStartofRains
     Private Sub DayFromAndToMethod()
         If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso (Not ucrReceiverDOY.IsEmpty) Then
             clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">" & nudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<" & nudTo.Value & Chr(34))
-            clsDayFromAndTo.AddParameter(" calculated_from", " list(" & strCurrDataName & "=" & Chr(34) & ucrReceiverDOY.GetVariableNames() & Chr(34) & ")")
+            clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
             clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34))
         Else
             clsDayFromAndTo.RemoveParameterByName("function_exp")
