@@ -225,6 +225,8 @@ Public Class RLink
         Dim strScriptWithComment As String
         Dim strSplitScript As String
         Dim strTempGraphsDirectory As String
+        Dim clsPNGFunction As New RFunction
+
         strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
 
@@ -250,7 +252,12 @@ Public Class RLink
         If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
-                    clsEngine.Evaluate(("png('" & strTempGraphsDirectory & "Graph.png', width = 4000, height = 4000, res = 500)").Replace("\", "/"))
+                    clsPNGFunction.SetRCommand("png")
+                    clsPNGFunction.AddParameter("filename", Chr(34) & IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
+                    clsPNGFunction.AddParameter("width", 4000)
+                    clsPNGFunction.AddParameter("height", 4000)
+                    clsPNGFunction.AddParameter("res", 500)
+                    clsEngine.Evaluate(clsPNGFunction.ToScript())
                     'need to boost resolution of the devices, it's not as good as with ggsave.
                 End If
                 clsEngine.Evaluate(strScript)
