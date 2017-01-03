@@ -88,7 +88,7 @@ Partial Class dlgStartofRains
         'lblRainfall
         '
         Me.lblRainfall.AutoSize = True
-        Me.lblRainfall.Location = New System.Drawing.Point(232, 50)
+        Me.lblRainfall.Location = New System.Drawing.Point(232, 55)
         Me.lblRainfall.Name = "lblRainfall"
         Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
         Me.lblRainfall.TabIndex = 3
@@ -250,7 +250,7 @@ Partial Class dlgStartofRains
         Me.grpRainParameters.Controls.Add(Me.lblTo)
         Me.grpRainParameters.Location = New System.Drawing.Point(234, 129)
         Me.grpRainParameters.Name = "grpRainParameters"
-        Me.grpRainParameters.Size = New System.Drawing.Size(150, 87)
+        Me.grpRainParameters.Size = New System.Drawing.Size(144, 87)
         Me.grpRainParameters.TabIndex = 7
         Me.grpRainParameters.TabStop = False
         '
@@ -267,7 +267,7 @@ Partial Class dlgStartofRains
         'lblThreshold
         '
         Me.lblThreshold.AutoSize = True
-        Me.lblThreshold.Location = New System.Drawing.Point(7, 13)
+        Me.lblThreshold.Location = New System.Drawing.Point(6, 13)
         Me.lblThreshold.Name = "lblThreshold"
         Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
         Me.lblThreshold.TabIndex = 0
@@ -281,7 +281,7 @@ Partial Class dlgStartofRains
         Me.nudFrom.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudFrom.Name = "nudFrom"
         Me.nudFrom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.nudFrom.Size = New System.Drawing.Size(55, 20)
+        Me.nudFrom.Size = New System.Drawing.Size(53, 20)
         Me.nudFrom.TabIndex = 3
         Me.nudFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.nudFrom.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left
@@ -290,7 +290,7 @@ Partial Class dlgStartofRains
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(31, 37)
+        Me.lblFrom.Location = New System.Drawing.Point(7, 37)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 2
@@ -309,7 +309,7 @@ Partial Class dlgStartofRains
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(41, 63)
+        Me.lblTo.Location = New System.Drawing.Point(8, 63)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 4
@@ -319,7 +319,7 @@ Partial Class dlgStartofRains
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(232, 91)
+        Me.lblDOY.Location = New System.Drawing.Point(232, 94)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 5
@@ -328,7 +328,7 @@ Partial Class dlgStartofRains
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(232, 12)
+        Me.lblDate.Location = New System.Drawing.Point(232, 14)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 1
@@ -336,7 +336,7 @@ Partial Class dlgStartofRains
         '
         'ucrReceiverDate
         '
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(234, 25)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(234, 29)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -345,7 +345,7 @@ Partial Class dlgStartofRains
         '
         'ucrReceiverDOY
         '
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(234, 104)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(234, 109)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
@@ -354,11 +354,11 @@ Partial Class dlgStartofRains
         '
         'ucrReceiverRainfall
         '
-        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(235, 67)
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(235, 70)
         Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
-        Me.ucrReceiverRainfall.Size = New System.Drawing.Size(144, 20)
+        Me.ucrReceiverRainfall.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverRainfall.TabIndex = 4
         '
         'ucrSelectorForStartofRains
@@ -393,6 +393,7 @@ Partial Class dlgStartofRains
         Me.Controls.Add(Me.ucrReceiverRainfall)
         Me.Controls.Add(Me.ucrSelectorForStartofRains)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgStartofRains"
