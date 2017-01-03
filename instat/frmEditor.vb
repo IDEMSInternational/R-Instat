@@ -37,6 +37,9 @@ Public Class frmEditor
     Private clsUnfreezeColumns As New RFunction
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
+    Private clsDate As New RFunction
+    Private clsConvertOrderedFactor As New RFunction
+    Private clsDuplicate As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -77,7 +80,10 @@ Public Class frmEditor
         clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
         clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsConvertOrderedFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsDuplicate.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsViewDataFrame.SetRCommand("View")
+        clsDate.SetRCommand("as.Date")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -542,6 +548,9 @@ Public Class frmEditor
             clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsDuplicate.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+
         End If
     End Sub
 
@@ -634,14 +643,19 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
-        dlgMakeDate.ShowDialog()
+        clsDate.AddParameter("x", SelectedColumns())
+        frmMain.clsRLink.RunScript(clsDate.ToScript, strComment:="Right Click Menu: Convert to Date")
     End Sub
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
-        dlgConvertColumns.ShowDialog()
+        clsConvertOrderedFactor.AddParameter("col_names", )
+        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
+        frmMain.clsRLink.RunScript(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
-
+        clsDuplicate.AddParameter("col_data", SelectedColumns())
+        clsDuplicate.AddParameter("col_name")
+        frmMain.clsRLink.RunScript(clsDuplicate.ToScript, strComment:="Right Click Menu: Duplicate column(s)")
     End Sub
 End Class
