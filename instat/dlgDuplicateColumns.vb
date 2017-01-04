@@ -20,7 +20,7 @@ Public Class dlgDuplicateColumns
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            initialiseDialog()
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
@@ -32,7 +32,7 @@ Public Class dlgDuplicateColumns
         ucrSelectorForDuplicateColumn.Reset()
         ucrInputColumnName.Reset()
     End Sub
-    Private Sub initialiseDialog()
+    Private Sub InitialiseDialog()
         'sets the function
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         ucrReceiverForCopyColumns.Selector = ucrSelectorForDuplicateColumn
