@@ -63,7 +63,7 @@ Public Class dlgDuplicateColumns
         Else
             ucrBase.clsRsyntax.RemoveParameter("col_data")
         End If
-        If ucrInputColumnName.IsEmpty Then
+        If Not ucrInputColumnName.bUserTyped Then
             ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
         End If
         TestOKEnabled()
