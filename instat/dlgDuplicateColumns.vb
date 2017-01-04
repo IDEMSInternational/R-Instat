@@ -58,11 +58,13 @@ Public Class dlgDuplicateColumns
     End Sub
 
     Private Sub ucrReceiverForCopyColumns_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCopyColumns.SelectionChanged
-        ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
         If Not ucrReceiverForCopyColumns.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("col_data", clsRFunctionParameter:=ucrReceiverForCopyColumns.GetVariables)
         Else
             ucrBase.clsRsyntax.RemoveParameter("col_data")
+        End If
+        If ucrInputColumnName.IsEmpty Then
+            ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
         End If
         TestOKEnabled()
     End Sub
@@ -72,11 +74,15 @@ Public Class dlgDuplicateColumns
     End Sub
 
     Private Sub ucrInputColumnName_NameChanged() Handles ucrInputColumnName.NameChanged
+        ColName()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ColName()
         If Not ucrInputColumnName.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & ucrInputColumnName.GetText & Chr(34))
         Else
             ucrBase.clsRsyntax.RemoveParameter("col_name")
         End If
-        TestOKEnabled()
     End Sub
 End Class
