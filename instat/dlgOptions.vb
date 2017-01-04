@@ -57,10 +57,6 @@ Public Class dlgOptions
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
 
-        UcrrdoDisplayinOutputWindow.SetText("Display in Output Window")
-        ucrrdoDisplayinRViewer.SetText("Display in R viewer")
-        ucrrdoDisplayinSeparateWindows.SetText("Display in separate windows")
-
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -100,6 +96,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
+        frmMain.clsInstatOptions.SetGraphDisplayOption(strGrpahDisplayOption)
 
     End Sub
 
@@ -274,6 +271,18 @@ Public Class dlgOptions
     End Sub
 
     Private Sub nudMaxRows_TextChanged(sender As Object, e As EventArgs) Handles nudMaxRows.TextChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub rdoDisplayinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDisplayinOutputWindow.CheckedChanged, rdoDisplayinSeparateWindows.CheckedChanged, rdoDisplayinRViewer.CheckedChanged
+        If rdoDisplayinOutputWindow.Checked Then
+            strGrpahDisplayOption = ""
+        ElseIf rdoDisplayinSeparateWindows.Checked Then
+            strGrpahDisplayOption = ""
+        ElseIf rdoDisplayinRViewer.Checked Then
+            strGrpahDisplayOption = ""
+        End If
+
         ApplyEnabled(True)
     End Sub
 
