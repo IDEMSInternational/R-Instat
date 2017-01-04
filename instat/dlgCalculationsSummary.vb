@@ -16,17 +16,19 @@
 Public Class dlgCalculationsSummary
     Public bFirstLoad As Boolean = True
     Private lstCalculations As New List(Of KeyValuePair(Of String, RFunction))
+    Private clsApplyCalculation As New RFunction
 
     Private Sub dlgCalculationsSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
         End If
         'Checks if Ok can be enabled.
         TestOKEnabled()
+        SetEnabledStatusButtons()
     End Sub
 
     Private Sub ReopenDialog()
@@ -47,6 +49,9 @@ Public Class dlgCalculationsSummary
     Private Sub InitialiseDialog()
         cmdEdit.Enabled = False
         cmdDuplicate.Enabled = False
+        clsApplyCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        'TODO Shoudl be option on the dialog/sub dialog
+        clsApplyCalculation.AddParameter("display", "TRUE")
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
@@ -55,7 +60,7 @@ Public Class dlgCalculationsSummary
         clsCalcFunction.SetRCommand("instat_calculation$new")
         sdgCalculationsSummmary.SetCalculationFunction(clsCalcFunction)
         sdgCalculationsSummmary.ShowDialog()
-        If clsCalcFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "name") Then
+        If clsCalcFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "name") <> -1 Then
             lstLayers.Items.Add(clsCalcFunction.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue)
         Else
             lstLayers.Items.Add("calc" & lstLayers.Items.Count + 1)
@@ -65,8 +70,39 @@ Public Class dlgCalculationsSummary
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        For i = 0 To lstCalculations.Count
-            frmMain.clsRLink.RunScript(lstCalculations(i).Value.ToScript())
+        Dim strScript As String
+        Dim strComment As String = ""
+        Dim strTemp As String = ""
+
+        For i = 0 To lstCalculations.Count - 1
+            strScript = ""
+            If i = 0 Then
+                strComment = ucrBase.strComment
+            Else
+                strComment = ""
+            End If
+            clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=lstCalculations(i).Value.Clone())
+            strTemp = clsApplyCalculation.ToScript(strScript)
+            frmMain.clsRLink.RunScript(strScript & strTemp, iCallType:=2)
         Next
+    End Sub
+
+    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+        For Each iTemp As Integer In lstLayers.SelectedIndices
+            lstLayers.Items.RemoveAt(iTemp)
+            lstCalculations.RemoveAt(iTemp)
+        Next
+    End Sub
+
+    Private Sub lstLayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstLayers.SelectedIndexChanged
+        SetEnabledStatusButtons()
+    End Sub
+
+    Private Sub SetEnabledStatusButtons()
+        If lstLayers.SelectedItems.Count > 0 Then
+            cmdDelete.Enabled = True
+        Else
+            cmdDelete.Enabled = False
+        End If
     End Sub
 End Class

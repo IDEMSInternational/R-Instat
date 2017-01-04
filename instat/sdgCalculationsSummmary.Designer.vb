@@ -73,7 +73,6 @@ Partial Class sdgCalculationsSummmary
         '
         Me.tbMain.Controls.Add(Me.ucrReceiverBy)
         Me.tbMain.Controls.Add(Me.lblFactor)
-        Me.tbMain.Controls.Add(Me.ucrCalcSummary)
         Me.tbMain.Controls.Add(Me.ucrColumnName)
         Me.tbMain.Controls.Add(Me.ucrCalculationName)
         Me.tbMain.Controls.Add(Me.lblColumnName)
@@ -84,6 +83,7 @@ Partial Class sdgCalculationsSummmary
         Me.tbMain.Controls.Add(Me.lblType)
         Me.tbMain.Controls.Add(Me.ucrType)
         Me.tbMain.Controls.Add(Me.ucrSelectorBy)
+        Me.tbMain.Controls.Add(Me.ucrCalcSummary)
         Me.tbMain.Location = New System.Drawing.Point(4, 22)
         Me.tbMain.Name = "tbMain"
         Me.tbMain.Padding = New System.Windows.Forms.Padding(3)

@@ -17,7 +17,6 @@ Imports instat.Translations
 Public Class sdgCalculationsSummmary
     Public bFirstLoad As Boolean = True
     Private clsCalculationFunction As New RFunction
-    Private clsCalcFromList As New RFunction
     Dim lstType As New List(Of KeyValuePair(Of String, String))
 
     Private Sub sdgCalculationsSummmary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -26,6 +25,9 @@ Public Class sdgCalculationsSummmary
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            'temporary solution to subdialog linking issues
+            SetDefaults()
         End If
     End Sub
 
@@ -37,7 +39,6 @@ Public Class sdgCalculationsSummmary
         ucrReceiverBy.SetMeAsReceiver()
         ucrReceiverBy.SetDataType("factor")
 
-        clsCalcFromList.SetRCommand("list")
         ' This is the new way of using this control. Not needed yet
         'lstType.Add(New KeyValuePair(Of String, String)("Calculation", Chr(34) & "calculation" & Chr(34)))
         'lstType.Add(New KeyValuePair(Of String, String)("Summary", Chr(34) & "summary" & Chr(34)))
@@ -47,15 +48,24 @@ Public Class sdgCalculationsSummmary
         'ucrType.SetItems(lstType)
         'ucrType.SetParameterName("type")
 
-        clsCalculationFunction.SetAssignTo(ucrCalculationName.ToString())
+        ucrCalcSummary.ucrReceiverForCalculation.SetMeAsReceiver()
+        ucrCalcSummary.chkSaveResultInto.Visible = False
+        ucrCalcSummary.ucrSaveResultInto.Visible = False
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorBy.Reset()
         ucrSelectorBy.Focus()
+
         ucrType.SetName("calculation")
-        DisplayOptions()
+        SetType()
+
         rdoDoNotSave.Checked = True
+        SetSaveOption()
+
+        ucrCalcSummary.ucrSelectorForCalculations.Reset()
+        ucrCalculationName.SetName("")
+        ucrColumnName.SetName("")
     End Sub
 
     Public Sub SetCalculationFunction(clsNewCalcFunction As RFunction)
@@ -68,37 +78,37 @@ Public Class sdgCalculationsSummmary
             ucrReceiverBy.Visible = False
             lblFactor.Visible = False
             ucrCalcSummary.Visible = True
-            lblColumnName.Visible = True
-            ucrColumnName.Visible = True
-            rdoSaveCalcAndResult.Visible = True
+            If ucrType.GetText = "calculation" Then
+                ucrCalcSummary.ucrInputCalOptions.SetName("Basic")
+            Else
+                ucrCalcSummary.ucrInputCalOptions.SetName("Statistics")
+            End If
         ElseIf ucrType.GetText = "by" Then
-            lblColumnName.Visible = False
-            ucrColumnName.Visible = False
             ucrSelectorBy.Visible = True
             ucrReceiverBy.Visible = True
             lblFactor.Visible = True
-            rdoSaveCalcAndResult.Visible = False
             ucrCalcSummary.Visible = False
-            If rdoSaveCalcAndResult.Checked Then
-                rdoDoNotSave.Checked = True
-            End If
         ElseIf ucrType.GetText = "filter" Then
             ucrSelectorBy.Visible = False
             ucrReceiverBy.Visible = False
             lblFactor.Visible = False
-            lblColumnName.Visible = False
-            ucrColumnName.Visible = False
-            rdoSaveCalcAndResult.Visible = False
             ucrCalcSummary.Visible = False
-            If rdoSaveCalcAndResult.Checked Then
-                rdoDoNotSave.Checked = True
-            End If
         Else
             ' combine options
         End If
     End Sub
 
     Private Sub rdoSaveOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDoNotSave.CheckedChanged, rdoSaveCalculation.CheckedChanged, rdoSaveCalcAndResult.CheckedChanged
+        If rdoSaveCalculation.Checked Then
+            clsCalculationFunction.AddParameter("save", "1")
+        ElseIf rdoSaveCalcAndResult.Checked Then
+            clsCalculationFunction.AddParameter("save", "2")
+        Else
+            clsCalculationFunction.AddParameter("save", "0")
+        End If
+    End Sub
+
+    Private Sub SetSaveOption()
         If rdoSaveCalculation.Checked Then
             clsCalculationFunction.AddParameter("save", "1")
         ElseIf rdoSaveCalcAndResult.Checked Then
@@ -121,6 +131,10 @@ Public Class sdgCalculationsSummmary
     End Sub
 
     Private Sub ucrType_NameChanged() Handles ucrType.NameChanged
+        SetType()
+    End Sub
+
+    Private Sub SetType()
         DisplayOptions()
         If ucrType.IsEmpty Then
             clsCalculationFunction.RemoveParameterByName("type")
@@ -134,7 +148,7 @@ Public Class sdgCalculationsSummmary
         Dim strColumn As String
 
         If Not ucrCalcSummary.ucrReceiverForCalculation.IsEmpty Then
-            clsCalculationFunction.AddParameter("function_exp", ucrCalcSummary.ucrReceiverForCalculation.GetText())
+            clsCalculationFunction.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.GetText() & Chr(34))
         Else
             clsCalculationFunction.RemoveParameterByName("function_exp")
         End If
@@ -147,20 +161,22 @@ Public Class sdgCalculationsSummmary
                 If i > 0 Then
                     strCalcFromList = ", " & strCalcFromList
                 End If
-                strCalcFromList = strCalcFromList & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " = " & strColumn
+                strCalcFromList = strCalcFromList & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " = " & Chr(34) & strColumn & Chr(34)
             Next
             strCalcFromList = strCalcFromList & ")"
-            clsCalcFromList.AddParameter("calculated_from", strCalcFromList)
+            clsCalculationFunction.AddParameter("calculated_from", strCalcFromList)
         Else
-            clsCalcFromList.RemoveParameterByName("calculated_from")
+            clsCalculationFunction.RemoveParameterByName("calculated_from")
         End If
     End Sub
 
     Private Sub ucrCalculationName_NameChanged() Handles ucrCalculationName.NameChanged
         If ucrCalculationName.IsEmpty Then
             clsCalculationFunction.RemoveParameterByName("name")
+            clsCalculationFunction.RemoveAssignTo()
         Else
-            clsCalculationFunction.AddParameter("name", ucrCalculationName.GetText())
+            clsCalculationFunction.AddParameter("name", Chr(34) & ucrCalculationName.GetText() & Chr(34))
+            clsCalculationFunction.SetAssignTo(ucrCalculationName.GetText())
         End If
     End Sub
 
@@ -168,7 +184,7 @@ Public Class sdgCalculationsSummmary
         If ucrColumnName.IsEmpty Then
             clsCalculationFunction.RemoveParameterByName("result_name")
         Else
-            clsCalculationFunction.AddParameter("result_name", ucrColumnName.GetText())
+            clsCalculationFunction.AddParameter("result_name", Chr(34) & ucrColumnName.GetText() & Chr(34))
         End If
     End Sub
 End Class
