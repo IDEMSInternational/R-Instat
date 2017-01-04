@@ -42,11 +42,18 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
+    Private Sub InitialiseOutputWindow()
+        frmOutputWindow.MdiParent = Me
+        frmOutputWindow.Show()
+        clsRLink.SetOutput(frmOutputWindow.ucrRichTextBox)
+        'TEST temporary : creating the temporary graphs 
+        clsRLink.rtbOutput.CreateTempDirectory()
+    End Sub
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'temp removed
+        InitialiseOutputWindow()
+
         mnuHelpAboutRInstat.Visible = False
         frmEditor.MdiParent = Me
-        frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
@@ -60,14 +67,12 @@ Public Class frmMain
         clsRLink.SetEngine()
         LoadInstatOptions()
 
-        frmCommand.Show()
         frmEditor.Show()
 
         Me.LayoutMdi(MdiLayout.TileVertical)
 
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
-        clsRLink.SetOutput(frmCommand.txtCommand)
         'Sets up R source files
         clsRLink.RSetup()
 
@@ -75,7 +80,6 @@ Public Class frmMain
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
-
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -755,8 +759,8 @@ Public Class frmMain
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
         If ActiveMdiChild Is frmLog Then
             frmLog.selectAllText()
-        ElseIf ActiveMdiChild Is frmCommand Then
-            frmCommand.selectAllText()
+        ElseIf ActiveMdiChild Is frmOutputWindow Then
+            frmOutputWindow.selectAllText() 'To be tested
         ElseIf ActiveMdiChild Is frmScript Then
             frmScript.selectAllText()
         ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
@@ -767,8 +771,8 @@ Public Class frmMain
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
         If ActiveMdiChild Is frmLog Then
             frmLog.copyText()
-        ElseIf ActiveMdiChild Is frmCommand Then
-            frmCommand.copyText()
+        ElseIf ActiveMdiChild Is frmOutputWindow Then
+            frmOutputWindow.CopyContent() 'Question: should this be copying the whole content or just the selected content ? 
         ElseIf ActiveMdiChild Is frmScript Then
             frmScript.copyText()
         ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
@@ -861,11 +865,11 @@ Public Class frmMain
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
-        If frmCommand.Visible Then
-            frmCommand.Visible = False
+        If frmOutputWindow.Visible Then
+            frmOutputWindow.Visible = False
         Else
-            frmCommand.Visible = True
-            frmCommand.BringToFront()
+            frmOutputWindow.Visible = True
+            frmOutputWindow.BringToFront()
         End If
     End Sub
 
@@ -875,11 +879,9 @@ Public Class frmMain
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
         Dim dlgResponse As DialogResult
-        If frmCommand.txtCommand.Text <> "" Then
-            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & frmCommand.Text, "Clear " & frmCommand.Text, MessageBoxButtons.YesNo)
-            If dlgResponse = DialogResult.Yes Then
-                frmCommand.txtCommand.Clear()
-            End If
+        dlgResponse = MessageBox.Show("Are you sure you want to clear the " & frmOutputWindow.Text, "Clear " & frmOutputWindow.Text, MessageBoxButtons.YesNo)
+        If dlgResponse = DialogResult.Yes Then
+            frmOutputWindow.ucrRichTextBox.rtbOutput.Document.Blocks.Clear() 'To b checked
         End If
     End Sub
 
@@ -987,13 +989,15 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click
+        'Saves the content of the output window in RichTextFormat.
         Using dlgSaveFile As New SaveFileDialog
             dlgSaveFile.Title = "Save Output Window"
             dlgSaveFile.Filter = "Rich Text Format (*.rtf)|*.rtf"
             dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    frmCommand.txtCommand.SaveFile(dlgSaveFile.FileName, RichTextBoxStreamType.RichText)
+                    'Send file name string specifying the location to save the rtf in.
+                    frmOutputWindow.ucrRichTextBox.SaveRtf(dlgSaveFile.FileName)
                 Catch
                     MsgBox("Could not save the output window." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -1304,5 +1308,15 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileDefineClimaticData.Click
         DlgDefineClimaticData.ShowDialog()
+    End Sub
+
+    Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
+        'TEST temporary 
+        'TESTING TO BE ERASED !!!!!!!
+        Dim clsTestStargizer As New RFunction
+        clsTestStargizer.SetRCommand("stargazer::stargazer")
+        clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
+        clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
+        clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
     End Sub
 End Class
