@@ -112,8 +112,8 @@ Public Class ucrSelector
 
     Public Sub AddAll()
         If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
+            SelectAll()
             Add()
-            CurrentReceiver.Focus()
         End If
     End Sub
 
@@ -297,7 +297,6 @@ Public Class ucrSelector
     End Function
 
     Private Sub AddAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAllToolStripMenuItem.Click
-        SelectAll()
         AddAll()
     End Sub
 
