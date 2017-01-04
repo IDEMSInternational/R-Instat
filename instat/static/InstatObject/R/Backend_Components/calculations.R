@@ -455,6 +455,13 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
 }
 )
 
+# Call this to run a calculation and display the data
+instat_object$set("public", "run_instat_calculation", function(calc, display = TRUE) {
+  out <- self$apply_instat_calculation(calc)
+  if(display) return(out$data)
+}
+)
+
 # given a set of columns in one data frame, this will return named list with corresponding columns in second data frame, where a link exists
 # TODO: Needs to update to not just look at direct links
 instat_object$set("public", "get_corresponding_link_columns", function(first_data_frame_name, first_data_frame_columns, second_data_frame_name) {
