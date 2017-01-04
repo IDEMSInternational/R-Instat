@@ -22,7 +22,7 @@ Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
     Public strWorkingDirectory As String
-    Private strGrpahDisplayOption As String
+    Private strGraphDisplayOption As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
     'Define the Fonts dialog (only one)
@@ -73,13 +73,13 @@ Public Class dlgOptions
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-                ' temp disabled as not functioning
-                'Case "fr-FR"
-                '    rdoFrench.Checked = True
-                'Case "sw-KE"
-                '    rdoKiswahili.Checked = True
-                'Case "es-ES"
-                '    rdoSpanish.Checked = True
+            ' temp disabled as not functioning
+            'Case "fr-FR"
+            '    rdoFrench.Checked = True
+            'Case "sw-KE"
+            '    rdoKiswahili.Checked = True
+            'Case "es-ES"
+            '    rdoSpanish.Checked = True
             Case Else
                 rdoEnglish.Checked = True
         End Select
@@ -96,7 +96,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
-        frmMain.clsInstatOptions.SetGraphDisplayOption(strGrpahDisplayOption)
+        frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
 
     End Sub
 
@@ -276,11 +276,11 @@ Public Class dlgOptions
 
     Private Sub rdoDisplayinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDisplayinOutputWindow.CheckedChanged, rdoDisplayinSeparateWindows.CheckedChanged, rdoDisplayinRViewer.CheckedChanged
         If rdoDisplayinOutputWindow.Checked Then
-            strGrpahDisplayOption = ""
+            strGraphDisplayOption = "view_output_window"
         ElseIf rdoDisplayinSeparateWindows.Checked Then
-            strGrpahDisplayOption = ""
+            strGraphDisplayOption = "view_separate_window"
         ElseIf rdoDisplayinRViewer.Checked Then
-            strGrpahDisplayOption = ""
+            strGraphDisplayOption = "view_R_viewer"
         End If
 
         ApplyEnabled(True)

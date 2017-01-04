@@ -11,7 +11,7 @@ Imports unvell.ReoGrid
     Public iPreviewRows As Integer
     Public iMaxRows As Integer
     Public lstColourPalette As List(Of Color)
-    Public strGrpahDisplayOption As String
+    Public strGraphDisplayOption As String
 
     Public Sub New()
         'TODO Is this sensible to do in constructor?
@@ -100,7 +100,7 @@ Imports unvell.ReoGrid
     End Sub
 
     Public Sub SetGraphDisplayOption(strGraphOption As String)
-        strGrpahDisplayOption = strGraphOption
+        strGraphDisplayOption = strGraphOption
         'setting the string for graphs display
 
     End Sub
