@@ -36,12 +36,11 @@ Public Class dlgCalculationsSummary
     End Sub
 
     Private Sub SetDefaults()
-        cmdEdit.Enabled = False
-        cmdDuplicate.Enabled = False
     End Sub
 
     Private Sub InitialiseDialog()
-
+        cmdEdit.Enabled = False
+        cmdDuplicate.Enabled = False
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
