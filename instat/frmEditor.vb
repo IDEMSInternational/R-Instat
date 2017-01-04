@@ -303,6 +303,9 @@ Public Class frmEditor
     Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
         If grdData.Worksheets.Count < 1 Then
             grdData.Hide()
+        ElseIf grdCurrSheet.Equals(e.Worksheet) Then
+            UpdateCurrentWorksheet()
+            grdData.Refresh()
         End If
     End Sub
 
@@ -312,6 +315,10 @@ Public Class frmEditor
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
+        UpdateCurrentWorksheet()
+    End Sub
+
+    Private Sub UpdateCurrentWorksheet()
         grdCurrSheet = grdData.CurrentWorksheet
         frmMain.strCurrentDataFrame = grdCurrSheet.Name
         frmMain.tstatus.Text = grdCurrSheet.Name
