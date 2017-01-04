@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class dlgCalculationsSummary
     Public bFirstLoad As Boolean = True
+    Private lstCalculations As New List(Of KeyValuePair(Of String, RFunction))
+
     Private Sub dlgCalculationsSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDefaults()
@@ -32,7 +34,11 @@ Public Class dlgCalculationsSummary
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If lstLayers.Items.Count > 0 Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub SetDefaults()
@@ -44,6 +50,23 @@ Public Class dlgCalculationsSummary
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+        Dim clsCalcFunction As New RFunction
+
+        clsCalcFunction.SetRCommand("instat_calculation$new")
+        sdgCalculationsSummmary.SetCalculationFunction(clsCalcFunction)
         sdgCalculationsSummmary.ShowDialog()
+        If clsCalcFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "name") Then
+            lstLayers.Items.Add(clsCalcFunction.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue)
+        Else
+            lstLayers.Items.Add("calc" & lstLayers.Items.Count + 1)
+        End If
+        lstCalculations.Add(New KeyValuePair(Of String, RFunction)(lstLayers.Items(lstLayers.Items.Count - 1).Text, clsCalcFunction.Clone()))
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        For i = 0 To lstCalculations.Count
+            frmMain.clsRLink.RunScript(lstCalculations(i).Value.ToScript())
+        Next
     End Sub
 End Class
