@@ -160,6 +160,10 @@ Public Class ucrSelector
         If e.KeyChar = vbCr Then
             Add()
         End If
+        If Keys.ControlKey AndAlso Keys.A Then
+            SelectAll()
+        End If
+
     End Sub
 
     Private Sub ucrSelector_ResetAll() Handles Me.ResetAll
