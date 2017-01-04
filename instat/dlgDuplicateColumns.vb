@@ -31,7 +31,6 @@ Public Class dlgDuplicateColumns
     Private Sub SetDefaults()
         ucrSelectorForDuplicateColumn.Reset()
         ucrInputColumnName.Reset()
-        ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
     End Sub
     Private Sub initialiseDialog()
         'sets the function
@@ -46,6 +45,7 @@ Public Class dlgDuplicateColumns
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
         TestOKEnabled()
     End Sub
 
