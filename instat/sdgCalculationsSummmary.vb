@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class sdgCalculationsSummmary
     Public bFirstLoad As Boolean = True
     Private clsCalculationFunction As New RFunction
+    Private clsCalcFromList As New RFunction
     Dim lstType As New List(Of KeyValuePair(Of String, String))
 
     Private Sub sdgCalculationsSummmary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -36,6 +37,7 @@ Public Class sdgCalculationsSummmary
         ucrReceiverBy.SetMeAsReceiver()
         ucrReceiverBy.SetDataType("factor")
 
+        clsCalcFromList.SetRCommand("list")
         ' This is the new way of using this control. Not needed yet
         'lstType.Add(New KeyValuePair(Of String, String)("Calculation", Chr(34) & "calculation" & Chr(34)))
         'lstType.Add(New KeyValuePair(Of String, String)("Summary", Chr(34) & "summary" & Chr(34)))
@@ -124,6 +126,49 @@ Public Class sdgCalculationsSummmary
             clsCalculationFunction.RemoveParameterByName("type")
         Else
             clsCalculationFunction.AddParameter("type", Chr(34) & ucrType.GetText() & Chr(34))
+        End If
+    End Sub
+
+    Private Sub ucrCalcSummary_SelectionChanged() Handles ucrCalcSummary.SelectionChanged
+        Dim strCalcFromList As String
+        Dim strColumn As String
+
+        If Not ucrCalcSummary.ucrReceiverForCalculation.IsEmpty Then
+            clsCalculationFunction.AddParameter("function_exp", ucrCalcSummary.ucrReceiverForCalculation.GetText())
+        Else
+            clsCalculationFunction.RemoveParameterByName("function_exp")
+        End If
+
+        'Need to do this instead of with RFunctions because the calculated_from list can have multiple items with the same label
+        If ucrCalcSummary.ucrSelectorForCalculations.lstVariablesInReceivers.Count > 0 Then
+            strCalcFromList = "list("
+            For i = 0 To ucrCalcSummary.ucrSelectorForCalculations.lstVariablesInReceivers.Count - 1
+                strColumn = ucrCalcSummary.ucrSelectorForCalculations.lstVariablesInReceivers(i)
+                If i > 0 Then
+                    strCalcFromList = ", " & strCalcFromList
+                End If
+                strCalcFromList = strCalcFromList & ucrCalcSummary.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " = " & strColumn
+            Next
+            strCalcFromList = strCalcFromList & ")"
+            clsCalcFromList.AddParameter("calculated_from", strCalcFromList)
+        Else
+            clsCalcFromList.RemoveParameterByName("calculated_from")
+        End If
+    End Sub
+
+    Private Sub ucrCalculationName_NameChanged() Handles ucrCalculationName.NameChanged
+        If ucrCalculationName.IsEmpty Then
+            clsCalculationFunction.RemoveParameterByName("name")
+        Else
+            clsCalculationFunction.AddParameter("name", ucrCalculationName.GetText())
+        End If
+    End Sub
+
+    Private Sub ucrColumnName_NameChanged() Handles ucrColumnName.NameChanged
+        If ucrColumnName.IsEmpty Then
+            clsCalculationFunction.RemoveParameterByName("result_name")
+        Else
+            clsCalculationFunction.AddParameter("result_name", ucrColumnName.GetText())
         End If
     End Sub
 End Class
