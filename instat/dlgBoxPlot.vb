@@ -89,7 +89,7 @@ Public Class dlgBoxplot
 
 
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
-
+        ucrBase.clsRsyntax.iCallType = 3
     End Sub
 
     Private Sub TestOkEnabled()

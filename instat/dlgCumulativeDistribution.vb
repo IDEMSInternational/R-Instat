@@ -54,6 +54,7 @@ Public Class dlgCumulativeDistribution
 
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
     End Sub
 
     Private Sub SetDefaults()
