@@ -54,6 +54,7 @@ Public Class dlgWindrose
         ucrFillReceiver.Selector = ucrWindRoseSelector
 
         ucrSaveWindRose.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
+        ucrBase.clsRsyntax.iCallType = 3
     End Sub
 
     Private Sub SetDefaults()
