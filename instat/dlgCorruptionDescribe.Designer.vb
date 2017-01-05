@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgCorruptionModel
+Partial Class dlgCorruptionDescribe
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -27,23 +27,23 @@ Partial Class dlgCorruptionModel
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 212)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 200)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 1
         '
-        'dlgCorruptionModel
+        'dlgCorruptionDescribe
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 261)
+        Me.ClientSize = New System.Drawing.Size(419, 256)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgCorruptionModel"
+        Me.Name = "dlgCorruptionDescribe"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Model"
+        Me.Text = "Describe"
         Me.ResumeLayout(False)
 
     End Sub

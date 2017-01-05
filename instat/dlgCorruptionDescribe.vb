@@ -32,7 +32,7 @@ Public Class dlgCorruptionDescribe
     End Sub
 
     Private Sub TestOKEnabled()
-
+        TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
