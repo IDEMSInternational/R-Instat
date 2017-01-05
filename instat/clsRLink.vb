@@ -637,9 +637,11 @@ Public Class RLink
         Dim clsGetFilterNames As New RFunction
 
         clsGetFilterNames.SetRCommand(strInstatDataObject & "$get_filter_names")
-        clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        If strDataFrameName <> "" Then
+            clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
         expFilterNames = RunInternalScriptGetValue(clsGetFilterNames.ToScript(), bSilent:=True)
-        If Not expFilterNames.Type = Internals.SymbolicExpressionType.Null Then
+        If expFilterNames IsNot Nothing AndAlso Not expFilterNames.Type = Internals.SymbolicExpressionType.Null Then
             chrFilterNames = expFilterNames.AsCharacter()
             If chrFilterNames.Length > 0 Then
                 lstFilterNames.AddRange(chrFilterNames)
