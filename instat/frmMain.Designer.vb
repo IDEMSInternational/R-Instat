@@ -408,6 +408,7 @@ Partial Class frmMain
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCliDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrgCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2590,7 +2591,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnCalculate
         '
-        Me.mnuOrganiseColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnCalculateCalculations, Me.ToolStripSeparator24, Me.mnuOrganiseColumnCalculateTransform, Me.mnuOrganiseColumnCalculateRank, Me.mnuOrganiseColumnCalculatePolynomials, Me.mnuOrganiseColumnCalculateRowSummary})
+        Me.mnuOrganiseColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnCalculateCalculations, Me.ToolStripSeparator24, Me.mnuOrgCalculateDuplicateColumn, Me.mnuOrganiseColumnCalculateTransform, Me.mnuOrganiseColumnCalculateRank, Me.mnuOrganiseColumnCalculatePolynomials, Me.mnuOrganiseColumnCalculateRowSummary})
         Me.mnuOrganiseColumnCalculate.Name = "mnuOrganiseColumnCalculate"
         Me.mnuOrganiseColumnCalculate.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseColumnCalculate.Tag = "Column:_Calculate"
@@ -2599,41 +2600,41 @@ Partial Class frmMain
         'mnuOrganiseColumnCalculateCalculations
         '
         Me.mnuOrganiseColumnCalculateCalculations.Name = "mnuOrganiseColumnCalculateCalculations"
-        Me.mnuOrganiseColumnCalculateCalculations.Size = New System.Drawing.Size(160, 22)
+        Me.mnuOrganiseColumnCalculateCalculations.Size = New System.Drawing.Size(179, 22)
         Me.mnuOrganiseColumnCalculateCalculations.Tag = "Calculations..."
         Me.mnuOrganiseColumnCalculateCalculations.Text = "Calculations..."
         '
         'ToolStripSeparator24
         '
         Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
-        Me.ToolStripSeparator24.Size = New System.Drawing.Size(157, 6)
+        Me.ToolStripSeparator24.Size = New System.Drawing.Size(176, 6)
         '
         'mnuOrganiseColumnCalculateTransform
         '
         Me.mnuOrganiseColumnCalculateTransform.Enabled = False
         Me.mnuOrganiseColumnCalculateTransform.Name = "mnuOrganiseColumnCalculateTransform"
-        Me.mnuOrganiseColumnCalculateTransform.Size = New System.Drawing.Size(160, 22)
+        Me.mnuOrganiseColumnCalculateTransform.Size = New System.Drawing.Size(179, 22)
         Me.mnuOrganiseColumnCalculateTransform.Tag = "..."
         Me.mnuOrganiseColumnCalculateTransform.Text = "Transform..."
         '
         'mnuOrganiseColumnCalculateRank
         '
         Me.mnuOrganiseColumnCalculateRank.Name = "mnuOrganiseColumnCalculateRank"
-        Me.mnuOrganiseColumnCalculateRank.Size = New System.Drawing.Size(160, 22)
+        Me.mnuOrganiseColumnCalculateRank.Size = New System.Drawing.Size(179, 22)
         Me.mnuOrganiseColumnCalculateRank.Tag = "Rank..."
         Me.mnuOrganiseColumnCalculateRank.Text = "Rank..."
         '
         'mnuOrganiseColumnCalculatePolynomials
         '
         Me.mnuOrganiseColumnCalculatePolynomials.Name = "mnuOrganiseColumnCalculatePolynomials"
-        Me.mnuOrganiseColumnCalculatePolynomials.Size = New System.Drawing.Size(160, 22)
+        Me.mnuOrganiseColumnCalculatePolynomials.Size = New System.Drawing.Size(179, 22)
         Me.mnuOrganiseColumnCalculatePolynomials.Tag = "Polynomials..."
         Me.mnuOrganiseColumnCalculatePolynomials.Text = "Polynomials..."
         '
         'mnuOrganiseColumnCalculateRowSummary
         '
         Me.mnuOrganiseColumnCalculateRowSummary.Name = "mnuOrganiseColumnCalculateRowSummary"
-        Me.mnuOrganiseColumnCalculateRowSummary.Size = New System.Drawing.Size(160, 22)
+        Me.mnuOrganiseColumnCalculateRowSummary.Size = New System.Drawing.Size(179, 22)
         Me.mnuOrganiseColumnCalculateRowSummary.Tag = "Row_Summary..."
         Me.mnuOrganiseColumnCalculateRowSummary.Text = "Row Summary..."
         '
@@ -3150,6 +3151,12 @@ Partial Class frmMain
         Me.mnuCliDefineClimaticData.Size = New System.Drawing.Size(191, 22)
         Me.mnuCliDefineClimaticData.Text = "Define Climatic Data..."
         '
+        'mnuOrgCalculateDuplicateColumn
+        '
+        Me.mnuOrgCalculateDuplicateColumn.Name = "mnuOrgCalculateDuplicateColumn"
+        Me.mnuOrgCalculateDuplicateColumn.Size = New System.Drawing.Size(179, 22)
+        Me.mnuOrgCalculateDuplicateColumn.Text = "Duplicate Column..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3559,4 +3566,5 @@ Partial Class frmMain
     Friend WithEvents mnuCliModelCircular As ToolStripMenuItem
     Friend WithEvents mnuCliModelMarkovFitModel As ToolStripMenuItem
     Friend WithEvents mnuCliDefineClimaticData As ToolStripMenuItem
+    Friend WithEvents mnuOrgCalculateDuplicateColumn As ToolStripMenuItem
 End Class
