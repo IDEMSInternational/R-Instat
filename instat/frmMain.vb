@@ -1331,6 +1331,10 @@ Public Class frmMain
         dlgCorruptionModel.ShowDialog()
     End Sub
 
+    Private Sub GeneralSummariesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeGeneralSummaries.Click
+        dlgCalculationsSummary.ShowDialog()
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
