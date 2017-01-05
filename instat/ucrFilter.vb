@@ -30,7 +30,7 @@ Public Class ucrFilter
         bFirstLoad = True
         bFilterDefined = False
         clsFilterView = New ROperator
-        clsFilterView.strOperation = "&&"
+        clsFilterView.strOperation = "&"
         clsFilterFunction = New RFunction
         clsFilterFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_filter")
         clsConditionsList = New RFunction
@@ -113,7 +113,7 @@ Public Class ucrFilter
         Dim strCondition As String
 
         clsCurrentConditionList.SetRCommand("list")
-        clsCurrentConditionView.AddParameter(iPosition:=0, strParameterValue:=ucrFilterByReceiver.GetVariableNames())
+        clsCurrentConditionView.AddParameter(iPosition:=0, strParameterValue:=ucrFilterByReceiver.GetVariableNames(False))
         clsCurrentConditionList.AddParameter("column", ucrFilterByReceiver.GetVariableNames())
         If ucrFilterByReceiver.strCurrDataType = "factor" Then
             clsCurrentConditionView.SetOperation("%in%")
@@ -128,7 +128,7 @@ Public Class ucrFilter
                 strCondition = ucrValueForFilter.GetText()
             End If
         End If
-        clsCurrentConditionView.AddParameter(strParameterValue:=strCondition)
+        clsCurrentConditionView.AddParameter(strParameterValue:=strCondition.Replace(Chr(34), Chr(39)))
         clsCurrentConditionList.AddParameter("value", strCondition)
         clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
         lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentConditionView.strOperation & " " & strCondition})
@@ -205,4 +205,17 @@ Public Class ucrFilter
     Private Sub ucrValueForFilter_ContentsChanged() Handles ucrValueForFilter.ContentsChanged
         CheckAddEnabled()
     End Sub
+
+    Public Function GetFilteredVariables(Optional bWithQuotes As Boolean = True) As List(Of String)
+        Dim lstVariables As New List(Of String)
+
+        For Each itmTemp As ListViewItem In lstFilters.Items
+            If bWithQuotes Then
+                lstVariables.Add(itmTemp.Text)
+            Else
+                lstVariables.Add(itmTemp.Text.Replace(Chr(34), ""))
+            End If
+        Next
+        Return lstVariables
+    End Function
 End Class
