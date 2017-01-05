@@ -1315,6 +1315,47 @@ Public Class frmMain
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
+    Private Sub mnuCorruptionFile_Click(sender As Object, e As EventArgs) Handles mnuCorruptionFile.Click
+        dlgCorruptionFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuCorruptionOrganise_Click(sender As Object, e As EventArgs) Handles mnuCorruptionOrganise.Click
+        dlgCorruptionOrganise.ShowDialog()
+    End Sub
+
+    Private Sub mnuCorruptionDescribe_Click(sender As Object, e As EventArgs) Handles mnuCorruptionDescribe.Click
+        dlgCorruptionDescribe.ShowDialog()
+    End Sub
+
+    Private Sub mnuCorruptionModel_Click(sender As Object, e As EventArgs) Handles mnuCorruptionModel.Click
+        dlgCorruptionModel.ShowDialog()
+    End Sub
+
+    Private Sub GeneralSummariesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeGeneralSummaries.Click
+        dlgCalculationsSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseKeysAndLinksViewAndRemoveKey_Click(sender As Object, e As EventArgs) Handles mnuOrganiseKeysAndLinksViewAndRemoveKey.Click
+        dlgViewAndRemoveKeys.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseKeysAndLinksAddLink_Click(sender As Object, e As EventArgs) Handles mnuOrganiseKeysAndLinksAddLink.Click
+        dlgAddLink.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseKeysAndLinksViewAndRemoveKeys_Click(sender As Object, e As EventArgs) Handles mnuOrganiseKeysAndLinksViewAndRemoveKeys.Click
+        dlgViewAndRemoveLinks.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseKeysAndLinksAddComment_Click(sender As Object, e As EventArgs) Handles mnuOrganiseKeysAndLinksAddComment.Click
+        dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMarkovModelling_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModelling.Click
+        dlgNewMarkovChains.ShowDialog()
+    End Sub
+
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
