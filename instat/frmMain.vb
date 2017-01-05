@@ -1351,6 +1351,11 @@ Public Class frmMain
         dlgAddComment.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticMarkovModelling_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModelling.Click
+        dlgNewMarkovChains.ShowDialog()
+    End Sub
+
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
