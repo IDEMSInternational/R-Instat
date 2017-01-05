@@ -28,6 +28,12 @@ Partial Class dlgDuplicateColumns
         Me.ucrReceiverForCopyColumns = New instat.ucrReceiverSingle()
         Me.ucrSelectorForDuplicateColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.grpDuplicatedColumn = New System.Windows.Forms.GroupBox()
+        Me.rdoBeginning = New System.Windows.Forms.RadioButton()
+        Me.rdoAfter = New System.Windows.Forms.RadioButton()
+        Me.rdoEnd = New System.Windows.Forms.RadioButton()
+        Me.rdoBefore = New System.Windows.Forms.RadioButton()
+        Me.grpDuplicatedColumn.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumns
@@ -84,11 +90,69 @@ Partial Class dlgDuplicateColumns
         Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 6
         '
+        'grpDuplicatedColumn
+        '
+        Me.grpDuplicatedColumn.Controls.Add(Me.rdoBefore)
+        Me.grpDuplicatedColumn.Controls.Add(Me.rdoEnd)
+        Me.grpDuplicatedColumn.Controls.Add(Me.rdoAfter)
+        Me.grpDuplicatedColumn.Controls.Add(Me.rdoBeginning)
+        Me.grpDuplicatedColumn.Location = New System.Drawing.Point(227, 54)
+        Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
+        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(174, 115)
+        Me.grpDuplicatedColumn.TabIndex = 12
+        Me.grpDuplicatedColumn.TabStop = False
+        Me.grpDuplicatedColumn.Text = "Position of Duplicated Column"
+        '
+        'rdoBeginning
+        '
+        Me.rdoBeginning.AutoSize = True
+        Me.rdoBeginning.Location = New System.Drawing.Point(6, 19)
+        Me.rdoBeginning.Name = "rdoBeginning"
+        Me.rdoBeginning.Size = New System.Drawing.Size(72, 17)
+        Me.rdoBeginning.TabIndex = 0
+        Me.rdoBeginning.TabStop = True
+        Me.rdoBeginning.Text = "Beginning"
+        Me.rdoBeginning.UseVisualStyleBackColor = True
+        '
+        'rdoAfter
+        '
+        Me.rdoAfter.AutoSize = True
+        Me.rdoAfter.Location = New System.Drawing.Point(6, 65)
+        Me.rdoAfter.Name = "rdoAfter"
+        Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
+        Me.rdoAfter.TabIndex = 1
+        Me.rdoAfter.TabStop = True
+        Me.rdoAfter.Text = "After"
+        Me.rdoAfter.UseVisualStyleBackColor = True
+        '
+        'rdoEnd
+        '
+        Me.rdoEnd.AutoSize = True
+        Me.rdoEnd.Location = New System.Drawing.Point(6, 88)
+        Me.rdoEnd.Name = "rdoEnd"
+        Me.rdoEnd.Size = New System.Drawing.Size(44, 17)
+        Me.rdoEnd.TabIndex = 2
+        Me.rdoEnd.TabStop = True
+        Me.rdoEnd.Text = "End"
+        Me.rdoEnd.UseVisualStyleBackColor = True
+        '
+        'rdoBefore
+        '
+        Me.rdoBefore.AutoSize = True
+        Me.rdoBefore.Location = New System.Drawing.Point(6, 42)
+        Me.rdoBefore.Name = "rdoBefore"
+        Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
+        Me.rdoBefore.TabIndex = 3
+        Me.rdoBefore.TabStop = True
+        Me.rdoBefore.Text = "Before"
+        Me.rdoBefore.UseVisualStyleBackColor = True
+        '
         'dlgDuplicateColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(413, 309)
+        Me.Controls.Add(Me.grpDuplicatedColumn)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputColumnName)
         Me.Controls.Add(Me.ucrReceiverForCopyColumns)
@@ -102,6 +166,8 @@ Partial Class dlgDuplicateColumns
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = ""
         Me.Text = "Duplicate Column"
+        Me.grpDuplicatedColumn.ResumeLayout(False)
+        Me.grpDuplicatedColumn.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -112,4 +178,9 @@ Partial Class dlgDuplicateColumns
     Friend WithEvents ucrReceiverForCopyColumns As ucrReceiverSingle
     Friend WithEvents ucrInputColumnName As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents grpDuplicatedColumn As GroupBox
+    Friend WithEvents rdoBefore As RadioButton
+    Friend WithEvents rdoEnd As RadioButton
+    Friend WithEvents rdoAfter As RadioButton
+    Friend WithEvents rdoBeginning As RadioButton
 End Class
