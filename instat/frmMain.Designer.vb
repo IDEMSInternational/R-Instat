@@ -373,6 +373,7 @@ Partial Class frmMain
         Me.mnuOrganiseColumnUseTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnReshapeGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganiseColumnReshapeStack = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeUnstack = New System.Windows.Forms.ToolStripMenuItem()
@@ -383,6 +384,12 @@ Partial Class frmMain
         Me.mnuOrganiseColumnReshapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeTranspose = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOrganiseKeysAndLinks = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksAddKey = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksAddLink = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObject = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectRenameDataFrame = New System.Windows.Forms.ToolStripMenuItem()
@@ -414,13 +421,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnReshapeGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseKeysAndLinks = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseKeysAndLinksAddKey = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseKeysAndLinksAddLink = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseKeysAndLinksAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2916,6 +2916,12 @@ Partial Class frmMain
         Me.mnuOrganiseColumnReshapeColumnSummaries.Tag = "Column_Summaries..."
         Me.mnuOrganiseColumnReshapeColumnSummaries.Text = "Column Summaries..."
         '
+        'mnuOrganiseColumnReshapeGeneralSummaries
+        '
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Name = "mnuOrganiseColumnReshapeGeneralSummaries"
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Size = New System.Drawing.Size(193, 22)
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Text = "General Summaries..."
+        '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
@@ -2978,6 +2984,43 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(169, 6)
+        '
+        'mnuOrganiseKeysAndLinks
+        '
+        Me.mnuOrganiseKeysAndLinks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseKeysAndLinksAddKey, Me.mnuOrganiseKeysAndLinksViewAndRemoveKey, Me.mnuOrganiseKeysAndLinksAddLink, Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys, Me.mnuOrganiseKeysAndLinksAddComment})
+        Me.mnuOrganiseKeysAndLinks.Name = "mnuOrganiseKeysAndLinks"
+        Me.mnuOrganiseKeysAndLinks.Size = New System.Drawing.Size(172, 22)
+        Me.mnuOrganiseKeysAndLinks.Text = "Keys and Links"
+        '
+        'mnuOrganiseKeysAndLinksAddKey
+        '
+        Me.mnuOrganiseKeysAndLinksAddKey.Name = "mnuOrganiseKeysAndLinksAddKey"
+        Me.mnuOrganiseKeysAndLinksAddKey.Size = New System.Drawing.Size(204, 22)
+        Me.mnuOrganiseKeysAndLinksAddKey.Text = "Add Key..."
+        '
+        'mnuOrganiseKeysAndLinksViewAndRemoveKey
+        '
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Name = "mnuOrganiseKeysAndLinksViewAndRemoveKey"
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Size = New System.Drawing.Size(204, 22)
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Text = "View and Remove Keys..."
+        '
+        'mnuOrganiseKeysAndLinksAddLink
+        '
+        Me.mnuOrganiseKeysAndLinksAddLink.Name = "mnuOrganiseKeysAndLinksAddLink"
+        Me.mnuOrganiseKeysAndLinksAddLink.Size = New System.Drawing.Size(204, 22)
+        Me.mnuOrganiseKeysAndLinksAddLink.Text = "Add Link..."
+        '
+        'mnuOrganiseKeysAndLinksViewAndRemoveKeys
+        '
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Name = "mnuOrganiseKeysAndLinksViewAndRemoveKeys"
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Size = New System.Drawing.Size(207, 22)
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Text = "View and Remove Links..."
+        '
+        'mnuOrganiseKeysAndLinksAddComment
+        '
+        Me.mnuOrganiseKeysAndLinksAddComment.Name = "mnuOrganiseKeysAndLinksAddComment"
+        Me.mnuOrganiseKeysAndLinksAddComment.Size = New System.Drawing.Size(207, 22)
+        Me.mnuOrganiseKeysAndLinksAddComment.Text = "Add comment..."
         '
         'mnuOrganiseDataObject
         '
@@ -3113,25 +3156,25 @@ Partial Class frmMain
         'mnuCorruptionFile
         '
         Me.mnuCorruptionFile.Name = "mnuCorruptionFile"
-        Me.mnuCorruptionFile.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionFile.Size = New System.Drawing.Size(130, 22)
         Me.mnuCorruptionFile.Text = "File..."
         '
         'mnuCorruptionOrganise
         '
         Me.mnuCorruptionOrganise.Name = "mnuCorruptionOrganise"
-        Me.mnuCorruptionOrganise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionOrganise.Size = New System.Drawing.Size(130, 22)
         Me.mnuCorruptionOrganise.Text = "Organise..."
         '
         'mnuCorruptionDescribe
         '
         Me.mnuCorruptionDescribe.Name = "mnuCorruptionDescribe"
-        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(130, 22)
         Me.mnuCorruptionDescribe.Text = "Describe..."
         '
         'mnuCorruptionModel
         '
         Me.mnuCorruptionModel.Name = "mnuCorruptionModel"
-        Me.mnuCorruptionModel.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionModel.Size = New System.Drawing.Size(130, 22)
         Me.mnuCorruptionModel.Text = "Model..."
         '
         'mnuTools
@@ -3199,49 +3242,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuOrganiseColumnReshapeGeneralSummaries
-        '
-        Me.mnuOrganiseColumnReshapeGeneralSummaries.Name = "mnuOrganiseColumnReshapeGeneralSummaries"
-        Me.mnuOrganiseColumnReshapeGeneralSummaries.Size = New System.Drawing.Size(193, 22)
-        Me.mnuOrganiseColumnReshapeGeneralSummaries.Text = "General Summaries..."
-        '
-        'mnuOrganiseKeysAndLinks
-        '
-        Me.mnuOrganiseKeysAndLinks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseKeysAndLinksAddKey, Me.mnuOrganiseKeysAndLinksViewAndRemoveKey, Me.mnuOrganiseKeysAndLinksAddLink, Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys, Me.mnuOrganiseKeysAndLinksAddComment})
-        Me.mnuOrganiseKeysAndLinks.Name = "mnuOrganiseKeysAndLinks"
-        Me.mnuOrganiseKeysAndLinks.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseKeysAndLinks.Text = "Keys and Links"
-        '
-        'mnuOrganiseKeysAndLinksAddKey
-        '
-        Me.mnuOrganiseKeysAndLinksAddKey.Name = "mnuOrganiseKeysAndLinksAddKey"
-        Me.mnuOrganiseKeysAndLinksAddKey.Size = New System.Drawing.Size(204, 22)
-        Me.mnuOrganiseKeysAndLinksAddKey.Text = "Add Key..."
-        '
-        'mnuOrganiseKeysAndLinksViewAndRemoveKey
-        '
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Name = "mnuOrganiseKeysAndLinksViewAndRemoveKey"
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Size = New System.Drawing.Size(204, 22)
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Text = "View and Remove Keys..."
-        '
-        'mnuOrganiseKeysAndLinksAddLink
-        '
-        Me.mnuOrganiseKeysAndLinksAddLink.Name = "mnuOrganiseKeysAndLinksAddLink"
-        Me.mnuOrganiseKeysAndLinksAddLink.Size = New System.Drawing.Size(204, 22)
-        Me.mnuOrganiseKeysAndLinksAddLink.Text = "Add Link..."
-        '
-        'mnuOrganiseKeysAndLinksViewAndRemoveKeys
-        '
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Name = "mnuOrganiseKeysAndLinksViewAndRemoveKeys"
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Size = New System.Drawing.Size(204, 22)
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Text = "View and Remove Keys..."
-        '
-        'mnuOrganiseKeysAndLinksAddComment
-        '
-        Me.mnuOrganiseKeysAndLinksAddComment.Name = "mnuOrganiseKeysAndLinksAddComment"
-        Me.mnuOrganiseKeysAndLinksAddComment.Size = New System.Drawing.Size(204, 22)
-        Me.mnuOrganiseKeysAndLinksAddComment.Text = "Add comment..."
         '
         'frmMain
         '
