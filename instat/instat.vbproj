@@ -298,6 +298,12 @@
     <Compile Include="DlgUseDate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmGraphDisplay.Designer.vb">
+      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGraphDisplay.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmOutputWindow.Designer.vb">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </Compile>
@@ -2861,6 +2867,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGraphDisplay.resx">
+      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>

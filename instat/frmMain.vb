@@ -58,6 +58,7 @@ Public Class frmMain
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
         frmMetaData.MdiParent = Me
+        frmGraphDisplay.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
@@ -1310,13 +1311,13 @@ Public Class frmMain
         DlgDefineClimaticData.ShowDialog()
     End Sub
 
-    Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
-        'TEST temporary 
-        'TESTING TO BE ERASED !!!!!!!
-        Dim clsTestStargizer As New RFunction
-        clsTestStargizer.SetRCommand("stargazer::stargazer")
-        clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
-        clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
-        clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
-    End Sub
+    'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
+    '    'TEST temporary 
+    '    'TESTING TO BE ERASED !!!!!!!
+    '    Dim clsTestStargizer As New RFunction
+    '    clsTestStargizer.SetRCommand("stargazer::stargazer")
+    '    clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
+    '    clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
+    '    clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
+    'End Sub
 End Class

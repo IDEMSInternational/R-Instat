@@ -48,6 +48,8 @@ Public Class dlgUseGraph
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrGraphReceiver.strSelectorHeading = "Graphs"
+
+        ucrBase.clsRsyntax.iCallType = 3
     End Sub
     Private Sub ReOpenDialog()
 

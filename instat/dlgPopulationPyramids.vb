@@ -57,6 +57,7 @@ Public Class dlgPopulationPyramids
         ucrXVariableReceiver.Selector = ucrPopulationPyramidselector
         ucrYVariableReceiver.Selector = ucrPopulationPyramidselector
         ucrSecondFactorReceiver.Selector = ucrPopulationPyramidselector
+        ucrBase.clsRsyntax.iCallType = 3
 
     End Sub
 
