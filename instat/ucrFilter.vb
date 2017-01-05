@@ -81,7 +81,7 @@ Public Class ucrFilter
             cmdToggleSelectAll.Visible = False
             ucrFilterOperation.Visible = False
         Else
-            bIsFactor = ucrFilterByReceiver.strCurrDataType = "factor"
+            bIsFactor = ucrFilterByReceiver.strCurrDataType.Contains("factor")
             lblSelectLevels.Visible = bIsFactor
             ucrFactorLevels.Visible = bIsFactor
             cmdToggleSelectAll.Visible = bIsFactor
@@ -94,7 +94,7 @@ Public Class ucrFilter
 
     Private Sub CheckAddEnabled()
         If Not ucrFilterByReceiver.IsEmpty() Then
-            If ucrFilterByReceiver.strCurrDataType = "factor" AndAlso ucrFactorLevels.GetSelectedLevels() <> "" Then
+            If ucrFilterByReceiver.strCurrDataType.Contains("factor") AndAlso ucrFactorLevels.GetSelectedLevels() <> "" Then
                 cmdAddCondition.Enabled = True
             ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso (Not ucrValueForFilter.IsEmpty) Then
                 cmdAddCondition.Enabled = True
@@ -115,7 +115,7 @@ Public Class ucrFilter
         clsCurrentConditionList.SetRCommand("list")
         clsCurrentConditionView.AddParameter(iPosition:=0, strParameterValue:=ucrFilterByReceiver.GetVariableNames(False))
         clsCurrentConditionList.AddParameter("column", ucrFilterByReceiver.GetVariableNames())
-        If ucrFilterByReceiver.strCurrDataType = "factor" Then
+        If ucrFilterByReceiver.strCurrDataType.Contains("factor") Then
             clsCurrentConditionView.SetOperation("%in%")
             clsCurrentConditionList.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
             strCondition = ucrFactorLevels.GetSelectedLevels()
