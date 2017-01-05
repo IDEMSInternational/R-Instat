@@ -15,7 +15,7 @@
 Imports instat.Translations
 Public Class dlgStartofRains
     Public clsAddKey, clsDayFromAndTo, clsRainyDays, clsRollingSum, clsMinimumRainfall, clsRollingRainDays, clsXdaysRain, clsFirstDOYPerYear, clsDryPeriodTen, clsWithinThirtyDays, clsDrySpell, clsYearGroupDaily, clsSubCalcMinSum, clsSubCalcXDaysRain, clsSubCalcNoTenInThirty, clsManipulationFirstDOYPerYear, clsApplyRainDays, clsRainDayOnly As New RFunction
-    Public clsMinimumRainfallList, clsDryPeriodTenList As New RFunction
+    Public clsMinimumRainfallList, clsDryPeriodTenList, clsSubRainDays, clsSubDryPeriodTen As New RFunction
     Private strCurrDataName As String = ""
     Public bFirstLoad As Boolean = True
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -66,12 +66,17 @@ Public Class dlgStartofRains
         clsDrySpell.SetRCommand("instat_calculation$new")
         clsDrySpell.SetAssignTo("Dry_Spell")
         clsWithinThirtyDays.SetRCommand("instat_calculation$new")
-        clsWithinThirtyDays.SetAssignTo("dry_spell_no_10_in_30")
+        clsWithinThirtyDays.SetAssignTo("dry_spell_10")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
+        clsApplyRainDays.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
+        clsApplyRainDays.AddParameter("calc", clsRFunctionParameter:=clsRainyDays)
         clsSubCalcMinSum.SetRCommand("list")
         clsSubCalcXDaysRain.SetRCommand("list")
+        clsSubRainDays.SetRCommand("list")
+        clsSubDryPeriodTen.SetRCommand("list")
         clsSubCalcNoTenInThirty.SetRCommand("list")
         clsManipulationFirstDOYPerYear.SetRCommand("list")
+        clsDryPeriodTenList.SetRCommand("list")
         ucrReceiverRainfall.Selector = ucrSelectorForStartofRains
         ucrReceiverYear.Selector = ucrSelectorForStartofRains
         ucrReceiverDate.Selector = ucrSelectorForStartofRains
@@ -189,7 +194,6 @@ Public Class dlgStartofRains
         End If
     End Sub
 
-
     Private Sub AddKeyMethod()
         If Not ucrReceiverDate.IsEmpty Then
             clsAddKey.AddParameter("col_name", ucrReceiverDate.GetVariableNames)
@@ -215,7 +219,7 @@ Public Class dlgStartofRains
             clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & nudThreshold.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
             clsRainyDays.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34))
             clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & Chr(34) & "Rain" & Chr(34) & ")")
-            clsRainyDays.AddParameter("save", 0)
+            clsRainyDays.AddParameter("save", 2)
         Else
             clsRainyDays.RemoveParameterByName("type")
             clsRainyDays.RemoveParameterByName("function_exp")
@@ -258,7 +262,7 @@ Public Class dlgStartofRains
 
     Private Sub RollingOfRainDays()
         clsRollingRainDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsRollingRainDays.AddParameter("function_exp", Chr(34) & "rollapply(data=rain_day, Width = " & nudOutOfDays.Value & ", FUN = sum, align = 'right', fill=NA)" & Chr(34))
+        clsRollingRainDays.AddParameter("function_exp", Chr(34) & "rollapply(data=rain_day, width = " & nudOutOfDays.Value & ", FUN = sum, align = 'right', fill=NA)" & Chr(34))
         clsRollingRainDays.AddParameter("result_name", Chr(34) & "Rolling_Rain_Days" & Chr(34))
         clsRollingRainDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & Chr(34) & "rain_day" & Chr(34) & ")")
         clsRollingRainDays.AddParameter("save", 1)
@@ -289,12 +293,11 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub NoTenInThirty()
-        clsSubCalcNoTenInThirty.AddParameter("sub1", clsRFunctionParameter:=clsDrySpell, bIncludeArgumentName:=False)
         clsDryPeriodTen.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsDryPeriodTen.AddParameter("function_exp", Chr(34) & "rollapply(data = Dry_Spell, width=" & nudLengthofTime.Value & ", FUN=max, align='right', fill=NA)" & Chr(34))
         clsDryPeriodTen.AddParameter("result_name", Chr(34) & "Dry_Period" & Chr(34))
         clsDryPeriodTen.AddParameter("sub_calculations", clsRFunctionParameter:=clsDryPeriodTenList)
-        clsDryPeriodTenList.AddParameter("sub1", clsRFunctionParameter:=clsSubCalcNoTenInThirty, bIncludeArgumentName:=False)
+        clsDryPeriodTenList.AddParameter("sub1", clsRFunctionParameter:=clsDrySpell, bIncludeArgumentName:=False)
         clsDryPeriodTen.AddParameter("save", 2)
         PeriodWithinThirtyDays()
     End Sub
@@ -302,7 +305,8 @@ Public Class dlgStartofRains
     Private Sub PeriodWithinThirtyDays()
         clsWithinThirtyDays.AddParameter("type", Chr(34) & "filter" & Chr(34))
         clsWithinThirtyDays.AddParameter("function_exp", Chr(34) & "Dry_Period <" & nudLengthofTime.Value & Chr(34))
-        clsWithinThirtyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & Chr(34) & "Dry_period" & ")" & Chr(34))
+        clsWithinThirtyDays.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubDryPeriodTen)
+        clsSubDryPeriodTen.AddParameter("sub1", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub FirstDOYPerYear()
@@ -330,7 +334,7 @@ Public Class dlgStartofRains
             End If
 
             If chkDrySpell.Checked Then
-                clsManipulationFirstDOYPerYear.AddParameter("sub2", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
+                clsManipulationFirstDOYPerYear.AddParameter("sub2", clsRFunctionParameter:=clsWithinThirtyDays, bIncludeArgumentName:=False)
             Else
                 clsManipulationFirstDOYPerYear.RemoveParameterByName("sub2")
             End If
@@ -354,5 +358,10 @@ Public Class dlgStartofRains
 
     Private Sub firstDayofTheYear()
         ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsFirstDOYPerYear)
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Start of Rains: Defining Date column as key")
+        'frmMain.clsRLink.RunScript(clsApplyRainDays.ToScript, strComment:="Start of Rains: Creating rain_day column")
     End Sub
 End Class
