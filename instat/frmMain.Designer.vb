@@ -155,6 +155,7 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateFileClimSoft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileCliData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCliDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticOrganiseTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticInfill = New System.Windows.Forms.ToolStripMenuItem()
@@ -205,10 +206,7 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelExtremes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelMarkovFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -330,6 +328,7 @@ Partial Class frmMain
         Me.mnuOrganiseColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOrgCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateRank = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculatePolynomials = New System.Windows.Forms.ToolStripMenuItem()
@@ -371,6 +370,7 @@ Partial Class frmMain
         Me.mnuOrganiseColumnUseTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnReshapeGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganiseColumnReshapeStack = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeUnstack = New System.Windows.Forms.ToolStripMenuItem()
@@ -381,6 +381,12 @@ Partial Class frmMain
         Me.mnuOrganiseColumnReshapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnReshapeTranspose = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOrganiseKeysAndLinks = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksAddKey = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksAddLink = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseKeysAndLinksAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObject = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectRenameDataFrame = New System.Windows.Forms.ToolStripMenuItem()
@@ -398,6 +404,11 @@ Partial Class frmMain
         Me.mnuOrganiseRObjectsRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruption = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionOrganise = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -407,8 +418,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrgCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1342,6 +1351,12 @@ Partial Class frmMain
         Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(155, 22)
         Me.mnuClimaticFileCliData.Text = "CliData..."
         '
+        'mnuCliDefineClimaticData
+        '
+        Me.mnuCliDefineClimaticData.Name = "mnuCliDefineClimaticData"
+        Me.mnuCliDefineClimaticData.Size = New System.Drawing.Size(191, 22)
+        Me.mnuCliDefineClimaticData.Text = "Define Climatic Data..."
+        '
         'mnuClimaticOrganise
         '
         Me.mnuClimaticOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticOrganiseTransform, Me.mnuClimaticInfill, Me.mnuClimaticOrganiseDates, Me.mnuClimaticOrganiseInventory, Me.mnuClimaticDescribeDescribeDaily, Me.mnuClimaticOrganiseEvents, Me.mnuClimaticOrganiseSummary, Me.mnuClimaticOrganiseNewWorksheet, Me.mnuClimaticOrganiseImportDailyData, Me.mnuClimaticOrganiseMakeFactor, Me.mnuClimaticOrganiseShiftDailyData, Me.mnuClimaticOrganiseUnstackDailyData, Me.mnuClimaticOrganiseStackDailyData})
@@ -1672,38 +1687,17 @@ Partial Class frmMain
         '
         'mnuClimaticModels
         '
-        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCliModelExtremes, Me.mnuCliModelCircular, Me.mnuClimaticMarkovModelling})
+        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMarkovModelling})
         Me.mnuClimaticModels.Name = "mnuClimaticModels"
         Me.mnuClimaticModels.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticModels.Text = "Model"
         '
-        'mnuCliModelExtremes
-        '
-        Me.mnuCliModelExtremes.Enabled = False
-        Me.mnuCliModelExtremes.Name = "mnuCliModelExtremes"
-        Me.mnuCliModelExtremes.Size = New System.Drawing.Size(171, 22)
-        Me.mnuCliModelExtremes.Text = "Extremes..."
-        '
-        'mnuCliModelCircular
-        '
-        Me.mnuCliModelCircular.Enabled = False
-        Me.mnuCliModelCircular.Name = "mnuCliModelCircular"
-        Me.mnuCliModelCircular.Size = New System.Drawing.Size(171, 22)
-        Me.mnuCliModelCircular.Text = "Circular..."
-        '
         'mnuClimaticMarkovModelling
         '
-        Me.mnuClimaticMarkovModelling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCliModelMarkovFitModel})
         Me.mnuClimaticMarkovModelling.Name = "mnuClimaticMarkovModelling"
-        Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(171, 22)
+        Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticMarkovModelling.Tag = "Markov_Modelling"
-        Me.mnuClimaticMarkovModelling.Text = "Markov Modelling"
-        '
-        'mnuCliModelMarkovFitModel
-        '
-        Me.mnuCliModelMarkovFitModel.Name = "mnuCliModelMarkovFitModel"
-        Me.mnuCliModelMarkovFitModel.Size = New System.Drawing.Size(138, 22)
-        Me.mnuCliModelMarkovFitModel.Text = "Fit Models..."
+        Me.mnuClimaticMarkovModelling.Text = "Markov Modelling..."
         '
         'ToolStripSeparator23
         '
@@ -2326,7 +2320,7 @@ Partial Class frmMain
         '
         Me.mnuBar.AllowMerge = False
         Me.mnuBar.ImeMode = System.Windows.Forms.ImeMode.[On]
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuOrganise, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuTools, Me.mnuView, Me.mnuHelp})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuOrganise, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuCorruption, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
@@ -2408,7 +2402,7 @@ Partial Class frmMain
         '
         'mnuOrganise
         '
-        Me.mnuOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrame, Me.mnuOrganiseCheckData, Me.ToolStripSeparator6, Me.mnuOrganiseColumnCalculate, Me.mnuOrganiseColumnGenerate, Me.mnuOrganiseColumnFactor, Me.mnuOrganiseColumnText, Me.mnuOrganiseColumnDate, Me.mnuOrganiseColumnReshape, Me.ToolStripSeparator7, Me.mnuOrganiseDataObject, Me.mnuOrganiseRObjects})
+        Me.mnuOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrame, Me.mnuOrganiseCheckData, Me.ToolStripSeparator6, Me.mnuOrganiseColumnCalculate, Me.mnuOrganiseColumnGenerate, Me.mnuOrganiseColumnFactor, Me.mnuOrganiseColumnText, Me.mnuOrganiseColumnDate, Me.mnuOrganiseColumnReshape, Me.ToolStripSeparator7, Me.mnuOrganiseKeysAndLinks, Me.mnuOrganiseDataObject, Me.mnuOrganiseRObjects})
         Me.mnuOrganise.Name = "mnuOrganise"
         Me.mnuOrganise.Size = New System.Drawing.Size(66, 20)
         Me.mnuOrganise.Tag = "Organise"
@@ -2608,6 +2602,12 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
         Me.ToolStripSeparator24.Size = New System.Drawing.Size(176, 6)
+        '
+        'mnuOrgCalculateDuplicateColumn
+        '
+        Me.mnuOrgCalculateDuplicateColumn.Name = "mnuOrgCalculateDuplicateColumn"
+        Me.mnuOrgCalculateDuplicateColumn.Size = New System.Drawing.Size(179, 22)
+        Me.mnuOrgCalculateDuplicateColumn.Text = "Duplicate Column..."
         '
         'mnuOrganiseColumnCalculateTransform
         '
@@ -2879,7 +2879,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnReshape
         '
-        Me.mnuOrganiseColumnReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnReshapeColumnSummaries, Me.ToolStripSeparator10, Me.mnuOrganiseColumnReshapeStack, Me.mnuOrganiseColumnReshapeUnstack, Me.mnuOrganiseColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuAppendDataFrame, Me.mnuOrganiseColumnReshapeSubset, Me.mnuOrganiseColumnReshapeRandomSubset, Me.mnuOrganiseColumnReshapeTranspose})
+        Me.mnuOrganiseColumnReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnReshapeColumnSummaries, Me.mnuOrganiseColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuOrganiseColumnReshapeStack, Me.mnuOrganiseColumnReshapeUnstack, Me.mnuOrganiseColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuAppendDataFrame, Me.mnuOrganiseColumnReshapeSubset, Me.mnuOrganiseColumnReshapeRandomSubset, Me.mnuOrganiseColumnReshapeTranspose})
         Me.mnuOrganiseColumnReshape.Name = "mnuOrganiseColumnReshape"
         Me.mnuOrganiseColumnReshape.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseColumnReshape.Tag = "Column:_Reshape"
@@ -2891,6 +2891,12 @@ Partial Class frmMain
         Me.mnuOrganiseColumnReshapeColumnSummaries.Size = New System.Drawing.Size(193, 22)
         Me.mnuOrganiseColumnReshapeColumnSummaries.Tag = "Column_Summaries..."
         Me.mnuOrganiseColumnReshapeColumnSummaries.Text = "Column Summaries..."
+        '
+        'mnuOrganiseColumnReshapeGeneralSummaries
+        '
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Name = "mnuOrganiseColumnReshapeGeneralSummaries"
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Size = New System.Drawing.Size(193, 22)
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Text = "General Summaries..."
         '
         'ToolStripSeparator10
         '
@@ -2954,6 +2960,43 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(169, 6)
+        '
+        'mnuOrganiseKeysAndLinks
+        '
+        Me.mnuOrganiseKeysAndLinks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseKeysAndLinksAddKey, Me.mnuOrganiseKeysAndLinksViewAndRemoveKey, Me.mnuOrganiseKeysAndLinksAddLink, Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys, Me.mnuOrganiseKeysAndLinksAddComment})
+        Me.mnuOrganiseKeysAndLinks.Name = "mnuOrganiseKeysAndLinks"
+        Me.mnuOrganiseKeysAndLinks.Size = New System.Drawing.Size(172, 22)
+        Me.mnuOrganiseKeysAndLinks.Text = "Keys and Links"
+        '
+        'mnuOrganiseKeysAndLinksAddKey
+        '
+        Me.mnuOrganiseKeysAndLinksAddKey.Name = "mnuOrganiseKeysAndLinksAddKey"
+        Me.mnuOrganiseKeysAndLinksAddKey.Size = New System.Drawing.Size(207, 22)
+        Me.mnuOrganiseKeysAndLinksAddKey.Text = "Add Key..."
+        '
+        'mnuOrganiseKeysAndLinksViewAndRemoveKey
+        '
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Name = "mnuOrganiseKeysAndLinksViewAndRemoveKey"
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Size = New System.Drawing.Size(207, 22)
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Text = "View and Remove Keys..."
+        '
+        'mnuOrganiseKeysAndLinksAddLink
+        '
+        Me.mnuOrganiseKeysAndLinksAddLink.Name = "mnuOrganiseKeysAndLinksAddLink"
+        Me.mnuOrganiseKeysAndLinksAddLink.Size = New System.Drawing.Size(207, 22)
+        Me.mnuOrganiseKeysAndLinksAddLink.Text = "Add Link..."
+        '
+        'mnuOrganiseKeysAndLinksViewAndRemoveKeys
+        '
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Name = "mnuOrganiseKeysAndLinksViewAndRemoveKeys"
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Size = New System.Drawing.Size(207, 22)
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKeys.Text = "View and Remove Links..."
+        '
+        'mnuOrganiseKeysAndLinksAddComment
+        '
+        Me.mnuOrganiseKeysAndLinksAddComment.Name = "mnuOrganiseKeysAndLinksAddComment"
+        Me.mnuOrganiseKeysAndLinksAddComment.Size = New System.Drawing.Size(207, 22)
+        Me.mnuOrganiseKeysAndLinksAddComment.Text = "Add comment..."
         '
         'mnuOrganiseDataObject
         '
@@ -3079,6 +3122,37 @@ Partial Class frmMain
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '
+        'mnuCorruption
+        '
+        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionOrganise, Me.mnuCorruptionDescribe, Me.mnuCorruptionModel})
+        Me.mnuCorruption.Name = "mnuCorruption"
+        Me.mnuCorruption.Size = New System.Drawing.Size(77, 20)
+        Me.mnuCorruption.Text = "Corruption"
+        '
+        'mnuCorruptionFile
+        '
+        Me.mnuCorruptionFile.Name = "mnuCorruptionFile"
+        Me.mnuCorruptionFile.Size = New System.Drawing.Size(130, 22)
+        Me.mnuCorruptionFile.Text = "File..."
+        '
+        'mnuCorruptionOrganise
+        '
+        Me.mnuCorruptionOrganise.Name = "mnuCorruptionOrganise"
+        Me.mnuCorruptionOrganise.Size = New System.Drawing.Size(130, 22)
+        Me.mnuCorruptionOrganise.Text = "Organise..."
+        '
+        'mnuCorruptionDescribe
+        '
+        Me.mnuCorruptionDescribe.Name = "mnuCorruptionDescribe"
+        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(130, 22)
+        Me.mnuCorruptionDescribe.Text = "Describe..."
+        '
+        'mnuCorruptionModel
+        '
+        Me.mnuCorruptionModel.Name = "mnuCorruptionModel"
+        Me.mnuCorruptionModel.Size = New System.Drawing.Size(130, 22)
+        Me.mnuCorruptionModel.Text = "Model..."
+        '
         'mnuTools
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRunRCode, Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsSaveCurrentOptions, Me.mnuToolsLoadOptions, Me.mnuToolsOptions})
@@ -3144,18 +3218,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuCliDefineClimaticData
-        '
-        Me.mnuCliDefineClimaticData.Name = "mnuCliDefineClimaticData"
-        Me.mnuCliDefineClimaticData.Size = New System.Drawing.Size(191, 22)
-        Me.mnuCliDefineClimaticData.Text = "Define Climatic Data..."
-        '
-        'mnuOrgCalculateDuplicateColumn
-        '
-        Me.mnuOrgCalculateDuplicateColumn.Name = "mnuOrgCalculateDuplicateColumn"
-        Me.mnuOrgCalculateDuplicateColumn.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrgCalculateDuplicateColumn.Text = "Duplicate Column..."
         '
         'frmMain
         '
@@ -3562,9 +3624,18 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticSCFSupportPrincipalComponents As ToolStripMenuItem
     Friend WithEvents mnuClimaticSCFSupportCanonicalCorrelations As ToolStripMenuItem
     Friend WithEvents mnuClimaticOrganiseUnstackDailyData As ToolStripMenuItem
-    Friend WithEvents mnuCliModelExtremes As ToolStripMenuItem
-    Friend WithEvents mnuCliModelCircular As ToolStripMenuItem
-    Friend WithEvents mnuCliModelMarkovFitModel As ToolStripMenuItem
     Friend WithEvents mnuCliDefineClimaticData As ToolStripMenuItem
     Friend WithEvents mnuOrgCalculateDuplicateColumn As ToolStripMenuItem
+    Friend WithEvents mnuCorruption As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionFile As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionOrganise As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionDescribe As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionModel As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnReshapeGeneralSummaries As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseKeysAndLinks As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseKeysAndLinksAddKey As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseKeysAndLinksViewAndRemoveKey As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseKeysAndLinksAddLink As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseKeysAndLinksViewAndRemoveKeys As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseKeysAndLinksAddComment As ToolStripMenuItem
 End Class
