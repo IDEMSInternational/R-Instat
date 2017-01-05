@@ -35,6 +35,6 @@ Public Class dlgCorruptionOrganise
     End Sub
 
     Private Sub SetDefaults()
-
+        TestOKEnabled()
     End Sub
 End Class
