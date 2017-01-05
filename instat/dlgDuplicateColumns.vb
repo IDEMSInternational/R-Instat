@@ -31,6 +31,8 @@ Public Class dlgDuplicateColumns
     Private Sub SetDefaults()
         ucrSelectorForDuplicateColumn.Reset()
         ucrInputColumnName.Reset()
+        rdoAfter.Checked = True
+        PositionOfDuplicatedCols()
     End Sub
     Private Sub InitialiseDialog()
         'sets the function
@@ -66,6 +68,7 @@ Public Class dlgDuplicateColumns
         If Not ucrInputColumnName.bUserTyped Then
             ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
         End If
+        PositionOfDuplicatedCols()
         TestOKEnabled()
     End Sub
 
@@ -83,6 +86,34 @@ Public Class dlgDuplicateColumns
             ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & ucrInputColumnName.GetText & Chr(34))
         Else
             ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
+    End Sub
+
+    Private Sub grpDuplicatedColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAfter.CheckedChanged, rdoBefore.CheckedChanged, rdoBeginning.CheckedChanged, rdoEnd.CheckedChanged
+        PositionOfDuplicatedCols()
+    End Sub
+
+    Private Sub PositionOfDuplicatedCols()
+        If rdoAfter.Checked Then
+            If Not ucrReceiverForCopyColumns.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverForCopyColumns.GetVariableNames)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            End If
+            ucrBase.clsRsyntax.AddParameter("before", "FALSE")
+            ElseIf rdoBeginning.Checked Then
+                ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            ElseIf rdoBefore.Checked Then
+            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+            If Not ucrReceiverForCopyColumns.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverForCopyColumns.GetVariableNames)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            End If
+        Else
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            ucrBase.clsRsyntax.AddParameter("before", "FALSE")
         End If
     End Sub
 End Class
