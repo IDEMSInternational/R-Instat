@@ -1605,7 +1605,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + curr_geom()
     }
 
-    if (coord_flip){
+    if (coord_flip) {
       g <- g + coord_flip()
     }   
     if(free_scale_axis) {
@@ -1638,7 +1638,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       else {
         g <- ggplot(data = curr_data, mapping = aes_(x = as.name(column))) + ylab("")
       }
-      if (coord_flip){
+      if (coord_flip) {
         g <- g + coord_flip()
       } 
       if(curr_geom_name == "box_jitter") {
