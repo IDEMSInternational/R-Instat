@@ -250,6 +250,12 @@
     <Compile Include="dlgMakeDate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgModel.Designer.vb">
+      <DependentUpon>dlgModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVarCompareModels.Designer.vb">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
     </Compile>
