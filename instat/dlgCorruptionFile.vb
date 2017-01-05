@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgCorruptionOrganise
+Public Class dlgCorruptionFile
     Public bFirstLoad As Boolean = True
-    Private Sub dlgOrganise_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgCorruptionFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -26,8 +26,9 @@ Public Class dlgCorruptionOrganise
         End If
         TestOKEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 500
+        ucrBase.iHelpTopicID = 499
     End Sub
 
     Private Sub TestOKEnabled()
@@ -37,4 +38,5 @@ Public Class dlgCorruptionOrganise
     Private Sub SetDefaults()
 
     End Sub
+
 End Class
