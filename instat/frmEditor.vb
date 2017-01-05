@@ -318,13 +318,19 @@ Public Class frmEditor
         UpdateCurrentWorksheet()
     End Sub
 
-    Private Sub UpdateCurrentWorksheet()
+    Public Sub UpdateCurrentWorksheet()
         grdCurrSheet = grdData.CurrentWorksheet
-        frmMain.strCurrentDataFrame = grdCurrSheet.Name
-        frmMain.tstatus.Text = grdCurrSheet.Name
-        grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-        UpdateRFunctionDataFrameParameters()
+        If frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
+            frmMain.strCurrentDataFrame = grdCurrSheet.Name
+            frmMain.tstatus.Text = grdCurrSheet.Name
+            grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+            grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " rows of " & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name)
+            UpdateRFunctionDataFrameParameters()
+        Else
+            frmMain.tstatus.Text = "No data loaded"
+            lblRowDisplay.Text = ""
+        End If
     End Sub
 
     'TODO discuss validation for cell editing
