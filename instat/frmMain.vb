@@ -1315,6 +1315,22 @@ Public Class frmMain
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
+    Private Sub mnuCorruptionFile_Click(sender As Object, e As EventArgs) Handles mnuCorruptionFile.Click
+        dlgFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuCorruptionOrganise_Click(sender As Object, e As EventArgs) Handles mnuCorruptionOrganise.Click
+        dlgOrganise.ShowDialog()
+    End Sub
+
+    Private Sub mnuCorruptionDescribe_Click(sender As Object, e As EventArgs) Handles mnuCorruptionDescribe.Click
+        dlgDescribe.ShowDialog()
+    End Sub
+
+    Private Sub mnuCorruptionModel_Click(sender As Object, e As EventArgs) Handles mnuCorruptionModel.Click
+        dlgModel.ShowDialog()
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
