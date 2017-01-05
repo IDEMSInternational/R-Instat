@@ -92,9 +92,11 @@ Public Class RLink
         Dim clsGetDataNames As New RFunction
 
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
-        chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
-        If chrDataFrameNames IsNot Nothing Then
-            lstDataFrameNames.AddRange(chrDataFrameNames)
+        If bInstatObjectExists Then
+            chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
+            If chrDataFrameNames IsNot Nothing Then
+                lstDataFrameNames.AddRange(chrDataFrameNames)
+            End If
         End If
         Return lstDataFrameNames
     End Function
