@@ -1335,6 +1335,22 @@ Public Class frmMain
         dlgCalculationsSummary.ShowDialog()
     End Sub
 
+    Private Sub mnuOrganiseKeysAndLinksViewAndRemoveKey_Click(sender As Object, e As EventArgs) Handles mnuOrganiseKeysAndLinksViewAndRemoveKey.Click
+        dlgViewAndRemoveKeys.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseKeysAndLinksAddLink_Click(sender As Object, e As EventArgs) Handles mnuOrganiseKeysAndLinksAddLink.Click
+        dlgAddLink.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseKeysAndLinksViewAndRemoveKeys_Click(sender As Object, e As EventArgs) Handles mnuOrganiseKeysAndLinksViewAndRemoveKeys.Click
+        dlgViewAndRemoveLinks.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseKeysAndLinksAddComment_Click(sender As Object, e As EventArgs) Handles mnuOrganiseKeysAndLinksAddComment.Click
+        dlgAddComment.ShowDialog()
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
