@@ -1271,23 +1271,23 @@ Public Class frmMain
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMarkovModellingCountsTotals_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingCountsTotals.Click
+    Private Sub mnuClimaticMarkovModellingCountsTotals_Click(sender As Object, e As EventArgs)
         dlgCountsTotals.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMarkovModellingPrepare_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingPrepare.Click
+    Private Sub mnuClimaticMarkovModellingPrepare_Click(sender As Object, e As EventArgs)
         dlgPrepare.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMarkovModellingModelProbabilities_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModellingModelProbabilities.Click
+    Private Sub mnuClimaticMarkovModellingModelProbabilities_Click(sender As Object, e As EventArgs)
         dlgModelProbabilities.ShowDialog()
     End Sub
 
-    Private Sub ModelAmountsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelAmountsToolStripMenuItem.Click
+    Private Sub ModelAmountsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgModelAmounts.ShowDialog()
     End Sub
 
-    Private Sub InterpolateDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterpolateDailyToolStripMenuItem.Click
+    Private Sub InterpolateDailyToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgInterpolateDaily.ShowDialog()
     End Sub
 
@@ -1307,17 +1307,21 @@ Public Class frmMain
         dlgOpenSST.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileDefineClimaticData.Click
+    Private Sub mnuClimaticFileDefineClimaticData_Click(sender As Object, e As EventArgs)
         DlgDefineClimaticData.ShowDialog()
     End Sub
 
-    Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
-        'TEST temporary 
-        'TESTING TO BE ERASED !!!!!!!
-        Dim clsTestStargizer As New RFunction
-        clsTestStargizer.SetRCommand("stargazer::stargazer")
-        clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
-        clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
-        clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
+    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuOrgCalculateDuplicateColumn.Click
+        dlgDuplicateColumns.ShowDialog()
     End Sub
+
+    'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
+    '    'TEST temporary 
+    '    'TESTING TO BE ERASED !!!!!!!
+    '    Dim clsTestStargizer As New RFunction
+    '    clsTestStargizer.SetRCommand("stargazer::stargazer")
+    '    clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
+    '    clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
+    '    clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
+    'End Sub
 End Class
