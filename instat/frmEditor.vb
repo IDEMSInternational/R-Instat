@@ -644,6 +644,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
+        dlgMakeDate.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgMakeDate.ShowDialog()
     End Sub
 
@@ -654,6 +655,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
+        dlgDuplicateColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgDuplicateColumns.ShowDialog()
     End Sub
 End Class
