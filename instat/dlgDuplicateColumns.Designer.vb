@@ -29,10 +29,10 @@ Partial Class dlgDuplicateColumns
         Me.ucrSelectorForDuplicateColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpDuplicatedColumn = New System.Windows.Forms.GroupBox()
-        Me.rdoBeginning = New System.Windows.Forms.RadioButton()
-        Me.rdoAfter = New System.Windows.Forms.RadioButton()
-        Me.rdoEnd = New System.Windows.Forms.RadioButton()
         Me.rdoBefore = New System.Windows.Forms.RadioButton()
+        Me.rdoEnd = New System.Windows.Forms.RadioButton()
+        Me.rdoAfter = New System.Windows.Forms.RadioButton()
+        Me.rdoBeginning = New System.Windows.Forms.RadioButton()
         Me.grpDuplicatedColumn.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,18 +41,18 @@ Partial Class dlgDuplicateColumns
         Me.lblColumns.AutoSize = True
         Me.lblColumns.Location = New System.Drawing.Point(226, 13)
         Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(104, 13)
+        Me.lblColumns.Size = New System.Drawing.Size(107, 13)
         Me.lblColumns.TabIndex = 7
-        Me.lblColumns.Text = "Column to be copied"
+        Me.lblColumns.Text = "Column to be copied:"
         '
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
         Me.lblNewColumnName.Location = New System.Drawing.Point(12, 221)
         Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 11
-        Me.lblNewColumnName.Text = "New Column Name"
+        Me.lblNewColumnName.Text = "New Column Name:"
         '
         'ucrInputColumnName
         '
@@ -103,27 +103,16 @@ Partial Class dlgDuplicateColumns
         Me.grpDuplicatedColumn.TabStop = False
         Me.grpDuplicatedColumn.Text = "Position of Duplicated Column"
         '
-        'rdoBeginning
+        'rdoBefore
         '
-        Me.rdoBeginning.AutoSize = True
-        Me.rdoBeginning.Location = New System.Drawing.Point(6, 19)
-        Me.rdoBeginning.Name = "rdoBeginning"
-        Me.rdoBeginning.Size = New System.Drawing.Size(72, 17)
-        Me.rdoBeginning.TabIndex = 0
-        Me.rdoBeginning.TabStop = True
-        Me.rdoBeginning.Text = "Beginning"
-        Me.rdoBeginning.UseVisualStyleBackColor = True
-        '
-        'rdoAfter
-        '
-        Me.rdoAfter.AutoSize = True
-        Me.rdoAfter.Location = New System.Drawing.Point(6, 65)
-        Me.rdoAfter.Name = "rdoAfter"
-        Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
-        Me.rdoAfter.TabIndex = 1
-        Me.rdoAfter.TabStop = True
-        Me.rdoAfter.Text = "After"
-        Me.rdoAfter.UseVisualStyleBackColor = True
+        Me.rdoBefore.AutoSize = True
+        Me.rdoBefore.Location = New System.Drawing.Point(6, 42)
+        Me.rdoBefore.Name = "rdoBefore"
+        Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
+        Me.rdoBefore.TabIndex = 3
+        Me.rdoBefore.TabStop = True
+        Me.rdoBefore.Text = "Before"
+        Me.rdoBefore.UseVisualStyleBackColor = True
         '
         'rdoEnd
         '
@@ -136,16 +125,27 @@ Partial Class dlgDuplicateColumns
         Me.rdoEnd.Text = "End"
         Me.rdoEnd.UseVisualStyleBackColor = True
         '
-        'rdoBefore
+        'rdoAfter
         '
-        Me.rdoBefore.AutoSize = True
-        Me.rdoBefore.Location = New System.Drawing.Point(6, 42)
-        Me.rdoBefore.Name = "rdoBefore"
-        Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
-        Me.rdoBefore.TabIndex = 3
-        Me.rdoBefore.TabStop = True
-        Me.rdoBefore.Text = "Before"
-        Me.rdoBefore.UseVisualStyleBackColor = True
+        Me.rdoAfter.AutoSize = True
+        Me.rdoAfter.Location = New System.Drawing.Point(6, 65)
+        Me.rdoAfter.Name = "rdoAfter"
+        Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
+        Me.rdoAfter.TabIndex = 1
+        Me.rdoAfter.TabStop = True
+        Me.rdoAfter.Text = "After"
+        Me.rdoAfter.UseVisualStyleBackColor = True
+        '
+        'rdoBeginning
+        '
+        Me.rdoBeginning.AutoSize = True
+        Me.rdoBeginning.Location = New System.Drawing.Point(6, 19)
+        Me.rdoBeginning.Name = "rdoBeginning"
+        Me.rdoBeginning.Size = New System.Drawing.Size(72, 17)
+        Me.rdoBeginning.TabIndex = 0
+        Me.rdoBeginning.TabStop = True
+        Me.rdoBeginning.Text = "Beginning"
+        Me.rdoBeginning.UseVisualStyleBackColor = True
         '
         'dlgDuplicateColumns
         '

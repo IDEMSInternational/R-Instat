@@ -30,9 +30,9 @@ Public Class dlgDuplicateColumns
 
     Private Sub SetDefaults()
         ucrSelectorForDuplicateColumn.Reset()
-        ucrInputColumnName.Reset()
         rdoAfter.Checked = True
         PositionOfDuplicatedCols()
+        ucrInputColumnName.ResetText()
     End Sub
     Private Sub InitialiseDialog()
         'sets the function
