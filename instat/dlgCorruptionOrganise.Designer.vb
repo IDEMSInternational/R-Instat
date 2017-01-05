@@ -23,7 +23,6 @@ Partial Class dlgCorruptionOrganise
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -33,21 +32,11 @@ Partial Class dlgCorruptionOrganise
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 1
         '
-        'UcrReceiverSingle1
-        '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(9, 34)
-        Me.UcrReceiverSingle1.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Selector = Nothing
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle1.TabIndex = 3
-        '
         'dlgCorruptionOrganise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(416, 256)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -60,5 +49,4 @@ Partial Class dlgCorruptionOrganise
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
 End Class
