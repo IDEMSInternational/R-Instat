@@ -69,7 +69,7 @@ Public Class dlgOptions
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
-
+        rdoDisplayinOutputWindow.Checked = frmMain.clsInstatOptions.bGraphinOutputWindow
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
@@ -275,6 +275,7 @@ Public Class dlgOptions
     End Sub
 
     Private Sub rdoDisplayinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDisplayinOutputWindow.CheckedChanged, rdoDisplayinSeparateWindows.CheckedChanged, rdoDisplayinRViewer.CheckedChanged
+        frmMain.clsInstatOptions.bGraphinOutputWindow = rdoDisplayinOutputWindow.Checked
         If rdoDisplayinOutputWindow.Checked Then
             strGraphDisplayOption = "view_output_window"
         ElseIf rdoDisplayinSeparateWindows.Checked Then
