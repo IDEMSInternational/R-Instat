@@ -268,6 +268,12 @@
     <Compile Include="dlgCorruptionModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgNewMarkovChains.Designer.vb">
+      <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgNewMarkovChains.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVarCompareModels.Designer.vb">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
     </Compile>
@@ -2544,6 +2550,9 @@
     <EmbeddedResource Include="dlgMultipleResponse.sw-KE.resx">
       <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgNewMarkovChains.resx">
+      <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSampleSummaryData.fr-FR.resx">
       <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
     </EmbeddedResource>
@@ -4145,6 +4154,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.sw-KE.resx">
       <DependentUpon>frmMain.vb</DependentUpon>

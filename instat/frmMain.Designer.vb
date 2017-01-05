@@ -206,10 +206,7 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelExtremes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelMarkovFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -1690,38 +1687,17 @@ Partial Class frmMain
         '
         'mnuClimaticModels
         '
-        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCliModelExtremes, Me.mnuCliModelCircular, Me.mnuClimaticMarkovModelling})
+        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMarkovModelling})
         Me.mnuClimaticModels.Name = "mnuClimaticModels"
         Me.mnuClimaticModels.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticModels.Text = "Model"
         '
-        'mnuCliModelExtremes
-        '
-        Me.mnuCliModelExtremes.Enabled = False
-        Me.mnuCliModelExtremes.Name = "mnuCliModelExtremes"
-        Me.mnuCliModelExtremes.Size = New System.Drawing.Size(171, 22)
-        Me.mnuCliModelExtremes.Text = "Extremes..."
-        '
-        'mnuCliModelCircular
-        '
-        Me.mnuCliModelCircular.Enabled = False
-        Me.mnuCliModelCircular.Name = "mnuCliModelCircular"
-        Me.mnuCliModelCircular.Size = New System.Drawing.Size(171, 22)
-        Me.mnuCliModelCircular.Text = "Circular..."
-        '
         'mnuClimaticMarkovModelling
         '
-        Me.mnuClimaticMarkovModelling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCliModelMarkovFitModel})
         Me.mnuClimaticMarkovModelling.Name = "mnuClimaticMarkovModelling"
-        Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(171, 22)
+        Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticMarkovModelling.Tag = "Markov_Modelling"
-        Me.mnuClimaticMarkovModelling.Text = "Markov Modelling"
-        '
-        'mnuCliModelMarkovFitModel
-        '
-        Me.mnuCliModelMarkovFitModel.Name = "mnuCliModelMarkovFitModel"
-        Me.mnuCliModelMarkovFitModel.Size = New System.Drawing.Size(138, 22)
-        Me.mnuCliModelMarkovFitModel.Text = "Fit Models..."
+        Me.mnuClimaticMarkovModelling.Text = "Markov Modelling..."
         '
         'ToolStripSeparator23
         '
@@ -2995,19 +2971,19 @@ Partial Class frmMain
         'mnuOrganiseKeysAndLinksAddKey
         '
         Me.mnuOrganiseKeysAndLinksAddKey.Name = "mnuOrganiseKeysAndLinksAddKey"
-        Me.mnuOrganiseKeysAndLinksAddKey.Size = New System.Drawing.Size(204, 22)
+        Me.mnuOrganiseKeysAndLinksAddKey.Size = New System.Drawing.Size(207, 22)
         Me.mnuOrganiseKeysAndLinksAddKey.Text = "Add Key..."
         '
         'mnuOrganiseKeysAndLinksViewAndRemoveKey
         '
         Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Name = "mnuOrganiseKeysAndLinksViewAndRemoveKey"
-        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Size = New System.Drawing.Size(204, 22)
+        Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Size = New System.Drawing.Size(207, 22)
         Me.mnuOrganiseKeysAndLinksViewAndRemoveKey.Text = "View and Remove Keys..."
         '
         'mnuOrganiseKeysAndLinksAddLink
         '
         Me.mnuOrganiseKeysAndLinksAddLink.Name = "mnuOrganiseKeysAndLinksAddLink"
-        Me.mnuOrganiseKeysAndLinksAddLink.Size = New System.Drawing.Size(204, 22)
+        Me.mnuOrganiseKeysAndLinksAddLink.Size = New System.Drawing.Size(207, 22)
         Me.mnuOrganiseKeysAndLinksAddLink.Text = "Add Link..."
         '
         'mnuOrganiseKeysAndLinksViewAndRemoveKeys
@@ -3648,9 +3624,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticSCFSupportPrincipalComponents As ToolStripMenuItem
     Friend WithEvents mnuClimaticSCFSupportCanonicalCorrelations As ToolStripMenuItem
     Friend WithEvents mnuClimaticOrganiseUnstackDailyData As ToolStripMenuItem
-    Friend WithEvents mnuCliModelExtremes As ToolStripMenuItem
-    Friend WithEvents mnuCliModelCircular As ToolStripMenuItem
-    Friend WithEvents mnuCliModelMarkovFitModel As ToolStripMenuItem
     Friend WithEvents mnuCliDefineClimaticData As ToolStripMenuItem
     Friend WithEvents mnuOrgCalculateDuplicateColumn As ToolStripMenuItem
     Friend WithEvents mnuCorruption As ToolStripMenuItem
