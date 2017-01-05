@@ -17,6 +17,7 @@ Public Class dlgCalculationsSummary
     Public bFirstLoad As Boolean = True
     Private lstCalculations As New List(Of KeyValuePair(Of String, RFunction))
     Private clsApplyCalculation As New RFunction
+    Private iCalcCount As Integer = 1
 
     Private Sub dlgCalculationsSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,13 +57,15 @@ Public Class dlgCalculationsSummary
         Dim clsCalcFunction As New RFunction
 
         clsCalcFunction.SetRCommand("instat_calculation$new")
+        sdgCalculationsSummmary.SetAsCalculation()
         sdgCalculationsSummmary.SetCalculationFunction(clsCalcFunction)
         sdgCalculationsSummmary.ShowDialog()
-        If clsCalcFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "name") <> -1 Then
-            lstLayers.Items.Add(clsCalcFunction.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue)
-        Else
-            lstLayers.Items.Add("calc" & lstLayers.Items.Count + 1)
+        If clsCalcFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "name") = -1 Then
+            clsCalcFunction.AddParameter("name", Chr(34) & "calc" & iCalcCount & Chr(34))
+            clsCalcFunction.SetAssignTo("calc" & iCalcCount)
+            iCalcCount = iCalcCount + 1
         End If
+        lstLayers.Items.Add(clsCalcFunction.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue.Trim(Chr(34)))
         lstCalculations.Add(New KeyValuePair(Of String, RFunction)(lstLayers.Items(lstLayers.Items.Count - 1).Text, clsCalcFunction.Clone()))
         TestOKEnabled()
     End Sub

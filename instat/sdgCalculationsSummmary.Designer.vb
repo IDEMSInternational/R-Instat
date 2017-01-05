@@ -24,10 +24,9 @@ Partial Class sdgCalculationsSummmary
     Private Sub InitializeComponent()
         Me.tbSummaryCalcs = New System.Windows.Forms.TabControl()
         Me.tbMain = New System.Windows.Forms.TabPage()
-        Me.ucrBaseSummmaryCalcSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrReceiverBy = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverByOrSort = New instat.ucrReceiverMultiple()
         Me.ucrCalculationName = New instat.ucrInputComboBox()
-        Me.lblFactors = New System.Windows.Forms.Label()
+        Me.lblReceiverLabel = New System.Windows.Forms.Label()
         Me.ucrResultName = New instat.ucrInputComboBox()
         Me.lblResultName = New System.Windows.Forms.Label()
         Me.lblCalcName = New System.Windows.Forms.Label()
@@ -53,6 +52,7 @@ Partial Class sdgCalculationsSummmary
         Me.cmdSubCalcAdd = New System.Windows.Forms.Button()
         Me.lblSubCalcs = New System.Windows.Forms.Label()
         Me.cmdSubCalcEdit = New System.Windows.Forms.Button()
+        Me.ucrBaseSummmaryCalcSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbSummaryCalcs.SuspendLayout()
         Me.tbMain.SuspendLayout()
         Me.tbManipulations.SuspendLayout()
@@ -67,15 +67,14 @@ Partial Class sdgCalculationsSummmary
         Me.tbSummaryCalcs.Location = New System.Drawing.Point(0, 0)
         Me.tbSummaryCalcs.Name = "tbSummaryCalcs"
         Me.tbSummaryCalcs.SelectedIndex = 0
-        Me.tbSummaryCalcs.Size = New System.Drawing.Size(803, 553)
+        Me.tbSummaryCalcs.Size = New System.Drawing.Size(803, 533)
         Me.tbSummaryCalcs.TabIndex = 1
         '
         'tbMain
         '
-        Me.tbMain.Controls.Add(Me.ucrBaseSummmaryCalcSubdialog)
-        Me.tbMain.Controls.Add(Me.ucrReceiverBy)
+        Me.tbMain.Controls.Add(Me.ucrReceiverByOrSort)
         Me.tbMain.Controls.Add(Me.ucrCalculationName)
-        Me.tbMain.Controls.Add(Me.lblFactors)
+        Me.tbMain.Controls.Add(Me.lblReceiverLabel)
         Me.tbMain.Controls.Add(Me.ucrResultName)
         Me.tbMain.Controls.Add(Me.lblResultName)
         Me.tbMain.Controls.Add(Me.lblCalcName)
@@ -90,26 +89,19 @@ Partial Class sdgCalculationsSummmary
         Me.tbMain.Location = New System.Drawing.Point(4, 22)
         Me.tbMain.Name = "tbMain"
         Me.tbMain.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMain.Size = New System.Drawing.Size(795, 527)
+        Me.tbMain.Size = New System.Drawing.Size(795, 507)
         Me.tbMain.TabIndex = 0
         Me.tbMain.Text = "Main"
         Me.tbMain.UseVisualStyleBackColor = True
         '
-        'ucrBaseSummmaryCalcSubdialog
+        'ucrReceiverByOrSort
         '
-        Me.ucrBaseSummmaryCalcSubdialog.Location = New System.Drawing.Point(286, 494)
-        Me.ucrBaseSummmaryCalcSubdialog.Name = "ucrBaseSummmaryCalcSubdialog"
-        Me.ucrBaseSummmaryCalcSubdialog.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSummmaryCalcSubdialog.TabIndex = 0
-        '
-        'ucrReceiverBy
-        '
-        Me.ucrReceiverBy.Location = New System.Drawing.Point(239, 143)
-        Me.ucrReceiverBy.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverBy.Name = "ucrReceiverBy"
-        Me.ucrReceiverBy.Selector = Nothing
-        Me.ucrReceiverBy.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverBy.TabIndex = 18
+        Me.ucrReceiverByOrSort.Location = New System.Drawing.Point(239, 143)
+        Me.ucrReceiverByOrSort.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverByOrSort.Name = "ucrReceiverByOrSort"
+        Me.ucrReceiverByOrSort.Selector = Nothing
+        Me.ucrReceiverByOrSort.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverByOrSort.TabIndex = 18
         '
         'ucrCalculationName
         '
@@ -119,14 +111,14 @@ Partial Class sdgCalculationsSummmary
         Me.ucrCalculationName.Size = New System.Drawing.Size(137, 21)
         Me.ucrCalculationName.TabIndex = 12
         '
-        'lblFactors
+        'lblReceiverLabel
         '
-        Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(236, 126)
-        Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Size = New System.Drawing.Size(45, 13)
-        Me.lblFactors.TabIndex = 15
-        Me.lblFactors.Text = "Factors:"
+        Me.lblReceiverLabel.AutoSize = True
+        Me.lblReceiverLabel.Location = New System.Drawing.Point(236, 126)
+        Me.lblReceiverLabel.Name = "lblReceiverLabel"
+        Me.lblReceiverLabel.Size = New System.Drawing.Size(45, 13)
+        Me.lblReceiverLabel.TabIndex = 15
+        Me.lblReceiverLabel.Text = "Factors:"
         '
         'ucrResultName
         '
@@ -239,7 +231,7 @@ Partial Class sdgCalculationsSummmary
         Me.tbManipulations.Location = New System.Drawing.Point(4, 22)
         Me.tbManipulations.Name = "tbManipulations"
         Me.tbManipulations.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbManipulations.Size = New System.Drawing.Size(795, 527)
+        Me.tbManipulations.Size = New System.Drawing.Size(795, 507)
         Me.tbManipulations.TabIndex = 1
         Me.tbManipulations.Text = "Manipulations"
         Me.tbManipulations.UseVisualStyleBackColor = True
@@ -309,9 +301,9 @@ Partial Class sdgCalculationsSummmary
         Me.tbSubCalcs.Location = New System.Drawing.Point(4, 22)
         Me.tbSubCalcs.Name = "tbSubCalcs"
         Me.tbSubCalcs.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSubCalcs.Size = New System.Drawing.Size(795, 527)
+        Me.tbSubCalcs.Size = New System.Drawing.Size(795, 507)
         Me.tbSubCalcs.TabIndex = 2
-        Me.tbSubCalcs.Text = "Sub-Calculations"
+        Me.tbSubCalcs.Text = "Sub Calculations"
         Me.tbSubCalcs.UseVisualStyleBackColor = True
         '
         'lstSubCalcs
@@ -368,11 +360,19 @@ Partial Class sdgCalculationsSummmary
         Me.cmdSubCalcEdit.Text = "Edit"
         Me.cmdSubCalcEdit.UseVisualStyleBackColor = True
         '
+        'ucrBaseSummmaryCalcSubdialog
+        '
+        Me.ucrBaseSummmaryCalcSubdialog.Location = New System.Drawing.Point(312, 533)
+        Me.ucrBaseSummmaryCalcSubdialog.Name = "ucrBaseSummmaryCalcSubdialog"
+        Me.ucrBaseSummmaryCalcSubdialog.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSummmaryCalcSubdialog.TabIndex = 0
+        '
         'sdgCalculationsSummmary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(806, 565)
+        Me.Controls.Add(Me.ucrBaseSummmaryCalcSubdialog)
         Me.Controls.Add(Me.tbSummaryCalcs)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -405,7 +405,7 @@ Partial Class sdgCalculationsSummmary
     Friend WithEvents tbSubCalcs As TabPage
     Friend WithEvents ucrResultName As ucrInputComboBox
     Friend WithEvents ucrCalculationName As ucrInputComboBox
-    Friend WithEvents lblFactors As Label
+    Friend WithEvents lblReceiverLabel As Label
     Friend WithEvents ucrSelectorBy As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrCalcSummary As ucrCalculator
     Friend WithEvents cmdManipDuplicate As Button
@@ -420,6 +420,6 @@ Partial Class sdgCalculationsSummmary
     Friend WithEvents cmdSubCalcAdd As Button
     Friend WithEvents lblSubCalcs As Label
     Friend WithEvents cmdSubCalcEdit As Button
-    Friend WithEvents ucrReceiverBy As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverByOrSort As ucrReceiverMultiple
     Friend WithEvents ucrDefineFilter As ucrFilter
 End Class
