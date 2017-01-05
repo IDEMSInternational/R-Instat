@@ -886,8 +886,8 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
 }
 )
 
-data_object$set("public", "get_data_frame_length", function() {
-  return(nrow(self$get_data_frame(use_current_filter = FALSE)))
+data_object$set("public", "get_data_frame_length", function(use_current_filter = FALSE) {
+  return(nrow(self$get_data_frame(use_current_filter = use_current_filter)))
 }
 )
 
