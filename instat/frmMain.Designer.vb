@@ -400,6 +400,11 @@ Partial Class frmMain
         Me.mnuOrganiseRObjectsRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruption = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionOrganise = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -409,11 +414,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruption = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruptionFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruptionOrganise = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruptionDescribe = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruptionModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3096,6 +3096,37 @@ Partial Class frmMain
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '
+        'mnuCorruption
+        '
+        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionOrganise, Me.mnuCorruptionDescribe, Me.mnuCorruptionModel})
+        Me.mnuCorruption.Name = "mnuCorruption"
+        Me.mnuCorruption.Size = New System.Drawing.Size(77, 20)
+        Me.mnuCorruption.Text = "Corruption"
+        '
+        'mnuCorruptionFile
+        '
+        Me.mnuCorruptionFile.Name = "mnuCorruptionFile"
+        Me.mnuCorruptionFile.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionFile.Text = "File..."
+        '
+        'mnuCorruptionOrganise
+        '
+        Me.mnuCorruptionOrganise.Name = "mnuCorruptionOrganise"
+        Me.mnuCorruptionOrganise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionOrganise.Text = "Organise..."
+        '
+        'mnuCorruptionDescribe
+        '
+        Me.mnuCorruptionDescribe.Name = "mnuCorruptionDescribe"
+        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionDescribe.Text = "Describe..."
+        '
+        'mnuCorruptionModel
+        '
+        Me.mnuCorruptionModel.Name = "mnuCorruptionModel"
+        Me.mnuCorruptionModel.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionModel.Text = "Model..."
+        '
         'mnuTools
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRunRCode, Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsSaveCurrentOptions, Me.mnuToolsLoadOptions, Me.mnuToolsOptions})
@@ -3161,37 +3192,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuCorruption
-        '
-        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionOrganise, Me.mnuCorruptionDescribe, Me.mnuCorruptionModel})
-        Me.mnuCorruption.Name = "mnuCorruption"
-        Me.mnuCorruption.Size = New System.Drawing.Size(77, 20)
-        Me.mnuCorruption.Text = "Corruption"
-        '
-        'mnuCorruptionFile
-        '
-        Me.mnuCorruptionFile.Name = "mnuCorruptionFile"
-        Me.mnuCorruptionFile.Size = New System.Drawing.Size(152, 22)
-        Me.mnuCorruptionFile.Text = "File..."
-        '
-        'mnuCorruptionOrganise
-        '
-        Me.mnuCorruptionOrganise.Name = "mnuCorruptionOrganise"
-        Me.mnuCorruptionOrganise.Size = New System.Drawing.Size(152, 22)
-        Me.mnuCorruptionOrganise.Text = "Organise..."
-        '
-        'mnuCorruptionDescribe
-        '
-        Me.mnuCorruptionDescribe.Name = "mnuCorruptionDescribe"
-        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(152, 22)
-        Me.mnuCorruptionDescribe.Text = "Describe..."
-        '
-        'mnuCorruptionModel
-        '
-        Me.mnuCorruptionModel.Name = "mnuCorruptionModel"
-        Me.mnuCorruptionModel.Size = New System.Drawing.Size(152, 22)
-        Me.mnuCorruptionModel.Text = "Model..."
         '
         'frmMain
         '

@@ -2301,6 +2301,9 @@
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribe.resx">
+      <DependentUpon>dlgDescribe.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDescribeTwoVarGraph.fr-FR.resx">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </EmbeddedResource>
@@ -2495,6 +2498,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMetadata.sw-KE.resx">
       <DependentUpon>dlgMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgModel.resx">
+      <DependentUpon>dlgModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleResponse.fr-FR.resx">
       <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
