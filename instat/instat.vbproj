@@ -184,6 +184,12 @@
     <Compile Include="DlgDefineClimaticData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDescribe.Designer.vb">
+      <DependentUpon>dlgDescribe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribe.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
