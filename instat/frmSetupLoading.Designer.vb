@@ -79,8 +79,10 @@ Partial Class frmSetupLoading
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Location = New System.Drawing.Point(540, 50)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmSetupLoading"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Setup Loading"
         Me.TopMost = True
         Me.UseWaitCursor = True
