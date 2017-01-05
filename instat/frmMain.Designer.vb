@@ -414,6 +414,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOrganiseColumnReshapeGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2896,7 +2897,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnReshape
         '
-        Me.mnuOrganiseColumnReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnReshapeColumnSummaries, Me.ToolStripSeparator10, Me.mnuOrganiseColumnReshapeStack, Me.mnuOrganiseColumnReshapeUnstack, Me.mnuOrganiseColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuAppendDataFrame, Me.mnuOrganiseColumnReshapeSubset, Me.mnuOrganiseColumnReshapeRandomSubset, Me.mnuOrganiseColumnReshapeTranspose})
+        Me.mnuOrganiseColumnReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnReshapeColumnSummaries, Me.mnuOrganiseColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuOrganiseColumnReshapeStack, Me.mnuOrganiseColumnReshapeUnstack, Me.mnuOrganiseColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuAppendDataFrame, Me.mnuOrganiseColumnReshapeSubset, Me.mnuOrganiseColumnReshapeRandomSubset, Me.mnuOrganiseColumnReshapeTranspose})
         Me.mnuOrganiseColumnReshape.Name = "mnuOrganiseColumnReshape"
         Me.mnuOrganiseColumnReshape.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseColumnReshape.Tag = "Column:_Reshape"
@@ -3192,6 +3193,12 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
+        '
+        'mnuOrganiseColumnReshapeGeneralSummaries
+        '
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Name = "mnuOrganiseColumnReshapeGeneralSummaries"
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Size = New System.Drawing.Size(193, 22)
+        Me.mnuOrganiseColumnReshapeGeneralSummaries.Text = "General Summaries..."
         '
         'frmMain
         '
@@ -3608,4 +3615,5 @@ Partial Class frmMain
     Friend WithEvents mnuCorruptionOrganise As ToolStripMenuItem
     Friend WithEvents mnuCorruptionDescribe As ToolStripMenuItem
     Friend WithEvents mnuCorruptionModel As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseColumnReshapeGeneralSummaries As ToolStripMenuItem
 End Class
