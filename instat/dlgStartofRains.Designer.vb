@@ -74,7 +74,7 @@ Partial Class dlgStartofRains
         Me.nudValue.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.nudValue.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudValue.Name = "nudValue"
-        Me.nudValue.Size = New System.Drawing.Size(41, 20)
+        Me.nudValue.Size = New System.Drawing.Size(47, 20)
         Me.nudValue.TabIndex = 7
         Me.nudValue.Value = New Decimal(New Integer() {30, 0, 0, 0})
         '
@@ -83,7 +83,7 @@ Partial Class dlgStartofRains
         Me.nudMinimum.Location = New System.Drawing.Point(201, 19)
         Me.nudMinimum.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMinimum.Name = "nudMinimum"
-        Me.nudMinimum.Size = New System.Drawing.Size(41, 20)
+        Me.nudMinimum.Size = New System.Drawing.Size(47, 20)
         Me.nudMinimum.TabIndex = 2
         Me.nudMinimum.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
@@ -122,17 +122,17 @@ Partial Class dlgStartofRains
         '
         'nudOutOfDays
         '
-        Me.nudOutOfDays.Location = New System.Drawing.Point(332, 20)
+        Me.nudOutOfDays.Location = New System.Drawing.Point(337, 20)
         Me.nudOutOfDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudOutOfDays.Name = "nudOutOfDays"
-        Me.nudOutOfDays.Size = New System.Drawing.Size(53, 20)
+        Me.nudOutOfDays.Size = New System.Drawing.Size(52, 20)
         Me.nudOutOfDays.TabIndex = 4
         Me.nudOutOfDays.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblWidth
         '
         Me.lblWidth.AutoSize = True
-        Me.lblWidth.Location = New System.Drawing.Point(264, 23)
+        Me.lblWidth.Location = New System.Drawing.Point(269, 23)
         Me.lblWidth.Name = "lblWidth"
         Me.lblWidth.Size = New System.Drawing.Size(66, 13)
         Me.lblWidth.TabIndex = 3
@@ -140,10 +140,10 @@ Partial Class dlgStartofRains
         '
         'nudLengthofTime
         '
-        Me.nudLengthofTime.Location = New System.Drawing.Point(332, 68)
+        Me.nudLengthofTime.Location = New System.Drawing.Point(337, 68)
         Me.nudLengthofTime.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudLengthofTime.Name = "nudLengthofTime"
-        Me.nudLengthofTime.Size = New System.Drawing.Size(53, 20)
+        Me.nudLengthofTime.Size = New System.Drawing.Size(52, 20)
         Me.nudLengthofTime.TabIndex = 14
         Me.nudLengthofTime.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
@@ -152,24 +152,24 @@ Partial Class dlgStartofRains
         Me.nudMaximumDays.Location = New System.Drawing.Point(201, 68)
         Me.nudMaximumDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMaximumDays.Name = "nudMaximumDays"
-        Me.nudMaximumDays.Size = New System.Drawing.Size(41, 20)
+        Me.nudMaximumDays.Size = New System.Drawing.Size(47, 20)
         Me.nudMaximumDays.TabIndex = 12
         Me.nudMaximumDays.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'nudOverDays
         '
-        Me.nudOverDays.Location = New System.Drawing.Point(332, 43)
+        Me.nudOverDays.Location = New System.Drawing.Point(337, 45)
         Me.nudOverDays.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
         Me.nudOverDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudOverDays.Name = "nudOverDays"
-        Me.nudOverDays.Size = New System.Drawing.Size(53, 20)
+        Me.nudOverDays.Size = New System.Drawing.Size(52, 20)
         Me.nudOverDays.TabIndex = 9
         Me.nudOverDays.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblLengthofTime
         '
         Me.lblLengthofTime.AutoSize = True
-        Me.lblLengthofTime.Location = New System.Drawing.Point(249, 71)
+        Me.lblLengthofTime.Location = New System.Drawing.Point(254, 71)
         Me.lblLengthofTime.Name = "lblLengthofTime"
         Me.lblLengthofTime.Size = New System.Drawing.Size(81, 13)
         Me.lblLengthofTime.TabIndex = 13
@@ -178,7 +178,7 @@ Partial Class dlgStartofRains
         'lblMaximumDays
         '
         Me.lblMaximumDays.AutoSize = True
-        Me.lblMaximumDays.Location = New System.Drawing.Point(118, 71)
+        Me.lblMaximumDays.Location = New System.Drawing.Point(118, 70)
         Me.lblMaximumDays.Name = "lblMaximumDays"
         Me.lblMaximumDays.Size = New System.Drawing.Size(81, 13)
         Me.lblMaximumDays.TabIndex = 11
@@ -187,7 +187,7 @@ Partial Class dlgStartofRains
         'lblVal
         '
         Me.lblVal.AutoSize = True
-        Me.lblVal.Location = New System.Drawing.Point(162, 47)
+        Me.lblVal.Location = New System.Drawing.Point(162, 46)
         Me.lblVal.Name = "lblVal"
         Me.lblVal.Size = New System.Drawing.Size(37, 13)
         Me.lblVal.TabIndex = 6
@@ -196,7 +196,7 @@ Partial Class dlgStartofRains
         'lblOverDays
         '
         Me.lblOverDays.AutoSize = True
-        Me.lblOverDays.Location = New System.Drawing.Point(270, 46)
+        Me.lblOverDays.Location = New System.Drawing.Point(275, 47)
         Me.lblOverDays.Name = "lblOverDays"
         Me.lblOverDays.Size = New System.Drawing.Size(60, 13)
         Me.lblOverDays.TabIndex = 8
