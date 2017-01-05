@@ -139,11 +139,12 @@ Public Class dlgMakeDate
         bUseSelectedColumn = True
     End Sub
 
-
     Private Sub SetDefaultColumn()
+        rdoSingleColumn.Checked = True
         ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
-        ucrReceiverForDate.Add(strSelectedColumn, strSelectedDataFrame)
-        bUseSelectedColumn = False
+            ucrReceiverForDate.Add(strSelectedColumn, strSelectedDataFrame)
+            bUseSelectedColumn = False
+
     End Sub
 
     Private Sub TestOKEnabled()
