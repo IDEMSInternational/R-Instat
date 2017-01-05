@@ -50,8 +50,6 @@ Public Class dlgCalculationsSummary
         cmdEdit.Enabled = False
         cmdDuplicate.Enabled = False
         clsApplyCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        'TODO Shoudl be option on the dialog/sub dialog
-        clsApplyCalculation.AddParameter("display", "TRUE")
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
@@ -71,19 +69,21 @@ Public Class dlgCalculationsSummary
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strScript As String
-        Dim strComment As String = ""
         Dim strTemp As String = ""
+        Dim iCallType As Integer
 
         For i = 0 To lstCalculations.Count - 1
             strScript = ""
-            If i = 0 Then
-                strComment = ucrBase.strComment
-            Else
-                strComment = ""
-            End If
             clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=lstCalculations(i).Value.Clone())
+            If lstCalculations(i).Value.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso lstCalculations(i).Value.clsParameters.Find(Function(x) x.strArgumentName = "save").strArgumentValue = "2" Then
+                iCallType = 0
+                clsApplyCalculation.AddParameter("display", "FALSE")
+            Else
+                iCallType = 2
+                clsApplyCalculation.AddParameter("display", "TRUE")
+            End If
             strTemp = clsApplyCalculation.ToScript(strScript)
-            frmMain.clsRLink.RunScript(strScript & strTemp, iCallType:=2)
+            frmMain.clsRLink.RunScript(strScript & strTemp, iCallType:=iCallType)
         Next
     End Sub
 
