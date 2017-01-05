@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgFile
+Public Class dlgCorruptionFile
     Public bFirstLoad As Boolean = True
     Private Sub dlgFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
