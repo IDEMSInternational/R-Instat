@@ -22,17 +22,15 @@ Public Class dlgShowModel
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverExpressionForTablePlus.IsEmpty) OrElse (Not ucrInputProbabilities.IsEmpty)) Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrReceiverExpressionForTablePlus.IsEmpty OrElse ucrInputProbabilities.IsEmpty Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
 
     End Sub
@@ -54,6 +52,7 @@ Public Class dlgShowModel
         ucrInputProbabilities.Reset()
         ucrInputNewColNameforTablePlus.Reset()
         rdoQuantiles.Checked = True
+        setname()
         chkSingleValues.Checked = True
         chkGraphResults.Checked = True
         DisplayGraphResults()
@@ -61,11 +60,6 @@ Public Class dlgShowModel
         ReceiverLabels()
         SaveResults()
         setItems()
-        setname()
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub setItems()
@@ -98,13 +92,13 @@ Public Class dlgShowModel
     Private Sub pqParameters()
         If rdoProbabilities.Checked Then
             If chkSingleValues.Checked Then
-                If ucrInputProbabilities.IsEmpty = False Then
+                If Not ucrInputProbabilities.IsEmpty Then
                     ucrBase.clsRsyntax.AddParameter("q", "c(" & ucrInputProbabilities.GetText & ")")
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("q")
                 End If
-            ElseIf chkSingleValues.Checked = False Then
-                If ucrReceiverExpressionForTablePlus.IsEmpty = False Then
+            ElseIf Not chkSingleValues.Checked Then
+                If Not ucrReceiverExpressionForTablePlus.IsEmpty Then
                     ucrBase.clsRsyntax.AddParameter("q", clsRFunctionParameter:=ucrReceiverExpressionForTablePlus.GetVariables)
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("q")
@@ -118,8 +112,8 @@ Public Class dlgShowModel
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("p")
                 End If
-            ElseIf chkSingleValues.Checked = False Then
-                If ucrReceiverExpressionForTablePlus.IsEmpty = False Then
+            ElseIf Not chkSingleValues.Checked Then
+                If Not ucrReceiverExpressionForTablePlus.IsEmpty Then
                     ucrBase.clsRsyntax.AddParameter("p", clsRFunctionParameter:=ucrReceiverExpressionForTablePlus.GetVariables)
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("p")
@@ -163,9 +157,9 @@ Public Class dlgShowModel
                 ucrInputNewColNameforTablePlus.SetPrefix("Prob")
             End If
             lblQuantValues.Visible = True
-                lblProbValues.Visible = False
-                ucrBase.clsRsyntax.SetFunction("mosaic:: pdist")
-            Else
+            lblProbValues.Visible = False
+            ucrBase.clsRsyntax.SetFunction("mosaic:: pdist")
+        Else
             If Not ucrInputNewColNameforTablePlus.bUserTyped Then
                 ucrInputNewColNameforTablePlus.SetPrefix("Quant")
             End If
@@ -196,6 +190,7 @@ Public Class dlgShowModel
     Private Sub chkSIngleValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkSingleValues.CheckedChanged
         results()
         pqParameters()
+        TestOKEnabled()
     End Sub
 
     Private Sub results()
@@ -206,8 +201,8 @@ Public Class dlgShowModel
             ucrInputProbabilities.Visible = True
         Else
             chkSaveResults.Visible = True
-            ucrReceiverExpressionForTablePlus.Visible = False
-            ucrInputNewColNameforTablePlus.Visible = True
+            ucrReceiverExpressionForTablePlus.Visible = True
+            ucrInputNewColNameforTablePlus.Visible = False
             ucrInputProbabilities.Visible = False
             ucrReceiverExpressionForTablePlus.Visible = True
         End If
