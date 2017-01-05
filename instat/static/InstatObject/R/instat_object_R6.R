@@ -692,8 +692,8 @@ instat_object$set("public", "insert_row_in_data", function(data_name, start_row,
 }
 )
 
-instat_object$set("public", "get_data_frame_length", function(data_name) {
-  self$get_data_objects(data_name)$get_data_frame_length()
+instat_object$set("public", "get_data_frame_length", function(data_name, use_current_filter = FALSE) {
+  self$get_data_objects(data_name)$get_data_frame_length(use_current_filter)
 }
 )
 

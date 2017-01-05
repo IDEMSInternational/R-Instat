@@ -592,12 +592,17 @@ Public Class RLink
         Return bExists
     End Function
 
-    Public Function GetDataFrameLength(strDataFrameName As String) As Integer
+    Public Function GetDataFrameLength(strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
         Dim intLength As Integer
         Dim clsDataFrameLength As New RFunction
 
         clsDataFrameLength.SetRCommand(strInstatDataObject & "$get_data_frame_length")
         clsDataFrameLength.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        If bUseCurrentFilter Then
+            clsDataFrameLength.AddParameter("use_current_filter", "TRUE")
+        Else
+            clsDataFrameLength.AddParameter("use_current_filter", "FALSE")
+        End If
         intLength = RunInternalScriptGetValue(clsDataFrameLength.ToScript()).AsInteger(0)
         Return intLength
     End Function
