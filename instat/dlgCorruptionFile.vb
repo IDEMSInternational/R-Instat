@@ -36,7 +36,7 @@ Public Class dlgCorruptionFile
     End Sub
 
     Private Sub SetDefaults()
-
+        TestOKEnabled()
     End Sub
 
 End Class
