@@ -17,12 +17,18 @@
 Imports instat.Translations
 Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
+    Dim bUseSelectedColumn As Boolean = False
+    Dim strSelectedColumn As String = ""
+    Dim strSelectedDataFrame As String = ""
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        End If
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
         End If
         'checks OkEnabled
         TestOKEnabled()
@@ -42,6 +48,19 @@ Public Class dlgDuplicateColumns
         ucrReceiverForCopyColumns.bUseFilteredData = False
         ucrInputColumnName.SetDataFrameSelector(ucrSelectorForDuplicateColumn.ucrAvailableDataFrames)
         ucrInputColumnName.SetValidationTypeAsRVariable()
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+
+    Private Sub SetDefaultColumn()
+        ucrSelectorForDuplicateColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverForCopyColumns.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

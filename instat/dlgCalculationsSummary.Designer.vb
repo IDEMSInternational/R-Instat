@@ -69,6 +69,7 @@ Partial Class dlgCalculationsSummary
         '
         'lstLayers
         '
+        Me.lstLayers.FullRowSelect = True
         Me.lstLayers.Location = New System.Drawing.Point(12, 36)
         Me.lstLayers.Name = "lstLayers"
         Me.lstLayers.Size = New System.Drawing.Size(125, 149)
