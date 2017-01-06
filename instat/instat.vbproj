@@ -178,6 +178,12 @@
     <Compile Include="dlgAppend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCliData.Designer.vb">
+      <DependentUpon>dlgCliData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCliData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimdex.Designer.vb">
       <DependentUpon>dlgClimdex.vb</DependentUpon>
     </Compile>
@@ -2219,6 +2225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliBoxplot.sw-KE.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCliData.resx">
+      <DependentUpon>dlgCliData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimdex.resx">
       <DependentUpon>dlgClimdex.vb</DependentUpon>
