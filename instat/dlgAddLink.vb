@@ -28,7 +28,7 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 505
+        ucrBase.iHelpTopicID = 506
     End Sub
 
     Private Sub TestOKEnabled()
