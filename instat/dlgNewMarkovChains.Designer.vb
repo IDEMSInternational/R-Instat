@@ -52,6 +52,9 @@ Partial Class dlgNewMarkovChains
         Me.ucrReceiverAdditionalVariables = New instat.ucrReceiverMultiple()
         Me.ucrInputOptions = New instat.ucrInputComboBox()
         Me.lblOptions = New System.Windows.Forms.Label()
+        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
+        Me.chkGraph = New System.Windows.Forms.CheckBox()
+        Me.ucrInputSaveModel = New instat.ucrInputComboBox()
         Me.grpSeasonalityHarmonics.SuspendLayout()
         Me.grpOrder.SuspendLayout()
         CType(Me.nudSeasonalityFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -62,7 +65,7 @@ Partial Class dlgNewMarkovChains
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 451)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 437)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -323,15 +326,46 @@ Partial Class dlgNewMarkovChains
         Me.lblOptions.AutoSize = True
         Me.lblOptions.Location = New System.Drawing.Point(300, 299)
         Me.lblOptions.Name = "lblOptions"
-        Me.lblOptions.Size = New System.Drawing.Size(43, 13)
+        Me.lblOptions.Size = New System.Drawing.Size(46, 13)
         Me.lblOptions.TabIndex = 19
-        Me.lblOptions.Text = "Options"
+        Me.lblOptions.Text = "Options:"
+        '
+        'chkSaveModel
+        '
+        Me.chkSaveModel.AutoSize = True
+        Me.chkSaveModel.Location = New System.Drawing.Point(13, 391)
+        Me.chkSaveModel.Name = "chkSaveModel"
+        Me.chkSaveModel.Size = New System.Drawing.Size(83, 17)
+        Me.chkSaveModel.TabIndex = 20
+        Me.chkSaveModel.Text = "Save Model"
+        Me.chkSaveModel.UseVisualStyleBackColor = True
+        '
+        'chkGraph
+        '
+        Me.chkGraph.AutoSize = True
+        Me.chkGraph.Location = New System.Drawing.Point(13, 414)
+        Me.chkGraph.Name = "chkGraph"
+        Me.chkGraph.Size = New System.Drawing.Size(93, 17)
+        Me.chkGraph.TabIndex = 21
+        Me.chkGraph.Text = "Include Graph"
+        Me.chkGraph.UseVisualStyleBackColor = True
+        '
+        'ucrInputSaveModel
+        '
+        Me.ucrInputSaveModel.IsReadOnly = False
+        Me.ucrInputSaveModel.Location = New System.Drawing.Point(103, 391)
+        Me.ucrInputSaveModel.Name = "ucrInputSaveModel"
+        Me.ucrInputSaveModel.Size = New System.Drawing.Size(184, 21)
+        Me.ucrInputSaveModel.TabIndex = 22
         '
         'dlgNewMarkovChains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(467, 515)
+        Me.ClientSize = New System.Drawing.Size(467, 492)
+        Me.Controls.Add(Me.ucrInputSaveModel)
+        Me.Controls.Add(Me.chkGraph)
+        Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.lblOptions)
         Me.Controls.Add(Me.ucrInputOptions)
         Me.Controls.Add(Me.ucrReceiverAdditionalVariables)
@@ -401,4 +435,7 @@ Partial Class dlgNewMarkovChains
     Friend WithEvents ucrReceiverAdditionalVariables As ucrReceiverMultiple
     Friend WithEvents ucrInputOptions As ucrInputComboBox
     Friend WithEvents lblOptions As Label
+    Friend WithEvents chkSaveModel As CheckBox
+    Friend WithEvents chkGraph As CheckBox
+    Friend WithEvents ucrInputSaveModel As ucrInputComboBox
 End Class
