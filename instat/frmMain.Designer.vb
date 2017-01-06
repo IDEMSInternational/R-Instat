@@ -155,6 +155,7 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateFileClimSoft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileCliData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCliDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticOrganise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticOrganiseTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticInfill = New System.Windows.Forms.ToolStripMenuItem()
@@ -205,10 +206,7 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelExtremes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelCircular = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliModelMarkovFitModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelsMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -300,8 +298,8 @@ Partial Class frmMain
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOrganise = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepare = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameViewData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameRenameColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameRowNumbersNames = New System.Windows.Forms.ToolStripMenuItem()
@@ -321,83 +319,96 @@ Partial Class frmMain
         Me.mnuOrganiseDataFrameHideColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameFreezeColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseCheckData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganisePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseCheckDataExportOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseCheckDataImportOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOrganiseColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOrgCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateRank = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculatePolynomials = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnCalculateRowSummary = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnGenerate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnGenerate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerateRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerateCountInFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator25 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganiseColumnGenerateEnter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGenerateRandomSamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseColumnGeneratePermuteRows = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactorConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactorRecodeNumeric = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorRecodeNumeric = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOrganiseColumnFactorRecodeFactor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactorCombineFactors = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactorDummyVariables = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorRecodeFactor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorCombineFactors = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorDummyVariables = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOrganiseColumnFactorLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactorReorderLevels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactorReferenceLevel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactorUnusedLevels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnFactorContrasts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorReorderLevels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorReferenceLevel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorUnusedLevels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorContrasts = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator19 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOrganiseColumnFactorFactorDataFrame = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnText = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnTextFindReplace = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnTextTransform = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnTextSplit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnTextCombine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnTextMatch = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnTextDistance = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnGenerateDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnUseDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnMakeTime = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnUseTime = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnReshapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorFactorDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnTextFindReplace = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnTextTransform = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnTextSplit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnTextCombine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnTextMatch = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnTextDistance = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnGenerateDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnUseDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnMakeTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnUseTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshapeGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOrganiseColumnReshapeStack = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnReshapeUnstack = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnReshapeMerge = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshapeStack = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshapeUnstack = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshapeMerge = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuAppendDataFrame = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnReshapeSubset = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnReshapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseColumnReshapeTranspose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareAppendDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshapeSubset = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnReshapeTranspose = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOrganiseDataObject = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectRenameDataFrame = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectReorderDataFrames = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectCopyDataFrame = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectDeleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareKeysAndLinks = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareKeysAndLinksAddKey = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareKeysAndLinksViewAndRemoveKey = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareKeysAndLinksAddLink = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareKeysAndLinksViewAndRemoveKeys = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareKeysAndLinksAddComment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObject = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectRenameDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectReorderDataFrames = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectCopyDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectDeleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator21 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOrganiseDataObjectHideDataframes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectRenameMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectReorderMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseDataObjectDeleteMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseRObjects = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseRObjectsView = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseRObjectsRename = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrganiseRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectHideDataframes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectRenameMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectReorderMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataObjectDeleteMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareRObjects = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareRObjectsView = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareRObjectsRename = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruption = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionOrganise = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -407,8 +418,8 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCliDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOrgCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelsExtremes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelsCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1342,6 +1353,12 @@ Partial Class frmMain
         Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(155, 22)
         Me.mnuClimaticFileCliData.Text = "CliData..."
         '
+        'mnuCliDefineClimaticData
+        '
+        Me.mnuCliDefineClimaticData.Name = "mnuCliDefineClimaticData"
+        Me.mnuCliDefineClimaticData.Size = New System.Drawing.Size(191, 22)
+        Me.mnuCliDefineClimaticData.Text = "Define Climatic Data..."
+        '
         'mnuClimaticOrganise
         '
         Me.mnuClimaticOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticOrganiseTransform, Me.mnuClimaticInfill, Me.mnuClimaticOrganiseDates, Me.mnuClimaticOrganiseInventory, Me.mnuClimaticDescribeDescribeDaily, Me.mnuClimaticOrganiseEvents, Me.mnuClimaticOrganiseSummary, Me.mnuClimaticOrganiseNewWorksheet, Me.mnuClimaticOrganiseImportDailyData, Me.mnuClimaticOrganiseMakeFactor, Me.mnuClimaticOrganiseShiftDailyData, Me.mnuClimaticOrganiseUnstackDailyData, Me.mnuClimaticOrganiseStackDailyData})
@@ -1672,38 +1689,17 @@ Partial Class frmMain
         '
         'mnuClimaticModels
         '
-        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCliModelExtremes, Me.mnuCliModelCircular, Me.mnuClimaticMarkovModelling})
+        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticModelsExtremes, Me.mnuClimaticModelsCircular, Me.mnuClimaticModelsMarkovModelling})
         Me.mnuClimaticModels.Name = "mnuClimaticModels"
         Me.mnuClimaticModels.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticModels.Text = "Model"
         '
-        'mnuCliModelExtremes
+        'mnuClimaticModelsMarkovModelling
         '
-        Me.mnuCliModelExtremes.Enabled = False
-        Me.mnuCliModelExtremes.Name = "mnuCliModelExtremes"
-        Me.mnuCliModelExtremes.Size = New System.Drawing.Size(171, 22)
-        Me.mnuCliModelExtremes.Text = "Extremes..."
-        '
-        'mnuCliModelCircular
-        '
-        Me.mnuCliModelCircular.Enabled = False
-        Me.mnuCliModelCircular.Name = "mnuCliModelCircular"
-        Me.mnuCliModelCircular.Size = New System.Drawing.Size(171, 22)
-        Me.mnuCliModelCircular.Text = "Circular..."
-        '
-        'mnuClimaticMarkovModelling
-        '
-        Me.mnuClimaticMarkovModelling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCliModelMarkovFitModel})
-        Me.mnuClimaticMarkovModelling.Name = "mnuClimaticMarkovModelling"
-        Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(171, 22)
-        Me.mnuClimaticMarkovModelling.Tag = "Markov_Modelling"
-        Me.mnuClimaticMarkovModelling.Text = "Markov Modelling"
-        '
-        'mnuCliModelMarkovFitModel
-        '
-        Me.mnuCliModelMarkovFitModel.Name = "mnuCliModelMarkovFitModel"
-        Me.mnuCliModelMarkovFitModel.Size = New System.Drawing.Size(138, 22)
-        Me.mnuCliModelMarkovFitModel.Text = "Fit Models..."
+        Me.mnuClimaticModelsMarkovModelling.Name = "mnuClimaticModelsMarkovModelling"
+        Me.mnuClimaticModelsMarkovModelling.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClimaticModelsMarkovModelling.Tag = "Markov_Modelling"
+        Me.mnuClimaticModelsMarkovModelling.Text = "Markov Modelling..."
         '
         'ToolStripSeparator23
         '
@@ -2326,11 +2322,12 @@ Partial Class frmMain
         '
         Me.mnuBar.AllowMerge = False
         Me.mnuBar.ImeMode = System.Windows.Forms.ImeMode.[On]
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuOrganise, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuTools, Me.mnuView, Me.mnuHelp})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuCorruption, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.mnuBar.ShowItemToolTips = True
         Me.mnuBar.Size = New System.Drawing.Size(769, 24)
         Me.mnuBar.TabIndex = 6
         Me.mnuBar.Text = "Menu_strip"
@@ -2406,21 +2403,21 @@ Partial Class frmMain
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         Me.ToolStripSeparator8.Size = New System.Drawing.Size(201, 6)
         '
-        'mnuOrganise
+        'mnuPrepare
         '
-        Me.mnuOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrame, Me.mnuOrganiseCheckData, Me.ToolStripSeparator6, Me.mnuOrganiseColumnCalculate, Me.mnuOrganiseColumnGenerate, Me.mnuOrganiseColumnFactor, Me.mnuOrganiseColumnText, Me.mnuOrganiseColumnDate, Me.mnuOrganiseColumnReshape, Me.ToolStripSeparator7, Me.mnuOrganiseDataObject, Me.mnuOrganiseRObjects})
-        Me.mnuOrganise.Name = "mnuOrganise"
-        Me.mnuOrganise.Size = New System.Drawing.Size(66, 20)
-        Me.mnuOrganise.Tag = "Organise"
-        Me.mnuOrganise.Text = "Organise"
+        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnGenerate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
+        Me.mnuPrepare.Name = "mnuPrepare"
+        Me.mnuPrepare.Size = New System.Drawing.Size(59, 20)
+        Me.mnuPrepare.Tag = "Prepare"
+        Me.mnuPrepare.Text = "Prepare"
         '
-        'mnuOrganiseDataFrame
+        'mnuPrepareDataFrame
         '
-        Me.mnuOrganiseDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrameViewData, Me.mnuOrganiseDataFrameRenameColumn, Me.mnuOrganiseDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuOrganiseDataFrameSort, Me.mnuOrganiseDataFrameFilter, Me.mnuOrganiseDataFrameReplaceValues, Me.ToolStripSeparator2, Me.mnuOrganiseDataFrameConvertColumns, Me.mnuOrganiseDataFrameColumnMetadata, Me.mnuOrganiseDataFrameColumnStructure, Me.ToolStripSeparator20, Me.mnuOrganiseDataFrameReorderColumns, Me.mnuOrganiseDataFrameInsertColumnsRows, Me.mnuOrganiseDataFrameDeleteColumnsRows, Me.mnuOrganiseDataFrameProtectColumn, Me.mnuOrganiseDataFrameHideColumns, Me.mnuOrganiseDataFrameFreezeColumns, Me.ColourByPropertyToolStripMenuItem})
-        Me.mnuOrganiseDataFrame.Name = "mnuOrganiseDataFrame"
-        Me.mnuOrganiseDataFrame.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseDataFrame.Tag = "Data_Frame"
-        Me.mnuOrganiseDataFrame.Text = "Data Frame"
+        Me.mnuPrepareDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrameViewData, Me.mnuOrganiseDataFrameRenameColumn, Me.mnuOrganiseDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuOrganiseDataFrameSort, Me.mnuOrganiseDataFrameFilter, Me.mnuOrganiseDataFrameReplaceValues, Me.ToolStripSeparator2, Me.mnuOrganiseDataFrameConvertColumns, Me.mnuOrganiseDataFrameColumnMetadata, Me.mnuOrganiseDataFrameColumnStructure, Me.ToolStripSeparator20, Me.mnuOrganiseDataFrameReorderColumns, Me.mnuOrganiseDataFrameInsertColumnsRows, Me.mnuOrganiseDataFrameDeleteColumnsRows, Me.mnuOrganiseDataFrameProtectColumn, Me.mnuOrganiseDataFrameHideColumns, Me.mnuOrganiseDataFrameFreezeColumns, Me.ColourByPropertyToolStripMenuItem})
+        Me.mnuPrepareDataFrame.Name = "mnuPrepareDataFrame"
+        Me.mnuPrepareDataFrame.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareDataFrame.Tag = "Data_Frame"
+        Me.mnuPrepareDataFrame.Text = "Data Frame"
         '
         'mnuOrganiseDataFrameViewData
         '
@@ -2550,13 +2547,13 @@ Partial Class frmMain
         Me.ColourByPropertyToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.ColourByPropertyToolStripMenuItem.Text = "Colour by Property..."
         '
-        'mnuOrganiseCheckData
+        'mnuPrepareCheckData
         '
-        Me.mnuOrganiseCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuOrganiseCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganisePrepareToShareJitter, Me.mnuOrganiseCheckDataExportOpenRefine, Me.mnuOrganiseCheckDataImportOpenRefine, Me.mnuCheckDataPrePareToShareSdcPackage})
-        Me.mnuOrganiseCheckData.Name = "mnuOrganiseCheckData"
-        Me.mnuOrganiseCheckData.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseCheckData.Text = "Check Data"
+        Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganisePrepareToShareJitter, Me.mnuOrganiseCheckDataExportOpenRefine, Me.mnuOrganiseCheckDataImportOpenRefine, Me.mnuCheckDataPrePareToShareSdcPackage})
+        Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
+        Me.mnuPrepareCheckData.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareCheckData.Text = "Check Data"
         '
         'mnuOrganisePrepareToShareJitter
         '
@@ -2589,13 +2586,13 @@ Partial Class frmMain
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(169, 6)
         '
-        'mnuOrganiseColumnCalculate
+        'mnuPrepareColumnCalculate
         '
-        Me.mnuOrganiseColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnCalculateCalculations, Me.ToolStripSeparator24, Me.mnuOrgCalculateDuplicateColumn, Me.mnuOrganiseColumnCalculateTransform, Me.mnuOrganiseColumnCalculateRank, Me.mnuOrganiseColumnCalculatePolynomials, Me.mnuOrganiseColumnCalculateRowSummary})
-        Me.mnuOrganiseColumnCalculate.Name = "mnuOrganiseColumnCalculate"
-        Me.mnuOrganiseColumnCalculate.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseColumnCalculate.Tag = "Column:_Calculate"
-        Me.mnuOrganiseColumnCalculate.Text = "Column: Calculate"
+        Me.mnuPrepareColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnCalculateCalculations, Me.ToolStripSeparator24, Me.mnuOrgCalculateDuplicateColumn, Me.mnuOrganiseColumnCalculateTransform, Me.mnuOrganiseColumnCalculateRank, Me.mnuOrganiseColumnCalculatePolynomials, Me.mnuOrganiseColumnCalculateRowSummary})
+        Me.mnuPrepareColumnCalculate.Name = "mnuPrepareColumnCalculate"
+        Me.mnuPrepareColumnCalculate.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareColumnCalculate.Tag = "Column:_Calculate"
+        Me.mnuPrepareColumnCalculate.Text = "Column: Calculate"
         '
         'mnuOrganiseColumnCalculateCalculations
         '
@@ -2608,6 +2605,12 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
         Me.ToolStripSeparator24.Size = New System.Drawing.Size(176, 6)
+        '
+        'mnuOrgCalculateDuplicateColumn
+        '
+        Me.mnuOrgCalculateDuplicateColumn.Name = "mnuOrgCalculateDuplicateColumn"
+        Me.mnuOrgCalculateDuplicateColumn.Size = New System.Drawing.Size(179, 22)
+        Me.mnuOrgCalculateDuplicateColumn.Text = "Duplicate Column..."
         '
         'mnuOrganiseColumnCalculateTransform
         '
@@ -2638,13 +2641,13 @@ Partial Class frmMain
         Me.mnuOrganiseColumnCalculateRowSummary.Tag = "Row_Summary..."
         Me.mnuOrganiseColumnCalculateRowSummary.Text = "Row Summary..."
         '
-        'mnuOrganiseColumnGenerate
+        'mnuPrepareColumnGenerate
         '
-        Me.mnuOrganiseColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnGenerateRegularSequence, Me.mnuOrganiseColumnGenerateCountInFactor, Me.ToolStripSeparator25, Me.mnuOrganiseColumnGenerateEnter, Me.mnuOrganiseColumnGenerateRandomSamples, Me.mnuOrganiseColumnGeneratePermuteRows})
-        Me.mnuOrganiseColumnGenerate.Name = "mnuOrganiseColumnGenerate"
-        Me.mnuOrganiseColumnGenerate.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseColumnGenerate.Tag = "Column:_Generate"
-        Me.mnuOrganiseColumnGenerate.Text = "Column: Generate"
+        Me.mnuPrepareColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnGenerateRegularSequence, Me.mnuOrganiseColumnGenerateCountInFactor, Me.ToolStripSeparator25, Me.mnuOrganiseColumnGenerateEnter, Me.mnuOrganiseColumnGenerateRandomSamples, Me.mnuOrganiseColumnGeneratePermuteRows})
+        Me.mnuPrepareColumnGenerate.Name = "mnuPrepareColumnGenerate"
+        Me.mnuPrepareColumnGenerate.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareColumnGenerate.Tag = "Column:_Generate"
+        Me.mnuPrepareColumnGenerate.Text = "Column: Generate"
         '
         'mnuOrganiseColumnGenerateRegularSequence
         '
@@ -2684,400 +2687,474 @@ Partial Class frmMain
         Me.mnuOrganiseColumnGeneratePermuteRows.Tag = "Permute_Rows..."
         Me.mnuOrganiseColumnGeneratePermuteRows.Text = "Permute Rows..."
         '
-        'mnuOrganiseColumnFactor
+        'mnuPrepareColumnFactor
         '
-        Me.mnuOrganiseColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnFactorConvertToFactor, Me.mnuOrganiseColumnFactorRecodeNumeric, Me.ToolStripSeparator12, Me.mnuOrganiseColumnFactorRecodeFactor, Me.mnuOrganiseColumnFactorCombineFactors, Me.mnuOrganiseColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuOrganiseColumnFactorLevelsLabels, Me.mnuOrganiseColumnFactorReorderLevels, Me.mnuOrganiseColumnFactorReferenceLevel, Me.mnuOrganiseColumnFactorUnusedLevels, Me.mnuOrganiseColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuOrganiseColumnFactorFactorDataFrame})
-        Me.mnuOrganiseColumnFactor.Name = "mnuOrganiseColumnFactor"
-        Me.mnuOrganiseColumnFactor.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseColumnFactor.Tag = "Column:_Factor"
-        Me.mnuOrganiseColumnFactor.Text = "Column: Factor"
+        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
+        Me.mnuPrepareColumnFactor.Name = "mnuPrepareColumnFactor"
+        Me.mnuPrepareColumnFactor.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareColumnFactor.Tag = "Column:_Factor"
+        Me.mnuPrepareColumnFactor.Text = "Column: Factor"
         '
-        'mnuOrganiseColumnFactorConvertToFactor
+        'mnuPrepareColumnFactorConvertToFactor
         '
-        Me.mnuOrganiseColumnFactorConvertToFactor.Name = "mnuOrganiseColumnFactorConvertToFactor"
-        Me.mnuOrganiseColumnFactorConvertToFactor.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorConvertToFactor.Tag = "Convert_To_Factor"
-        Me.mnuOrganiseColumnFactorConvertToFactor.Text = "Convert To Factor..."
+        Me.mnuPrepareColumnFactorConvertToFactor.Name = "mnuPrepareColumnFactorConvertToFactor"
+        Me.mnuPrepareColumnFactorConvertToFactor.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorConvertToFactor.Tag = "Convert_To_Factor"
+        Me.mnuPrepareColumnFactorConvertToFactor.Text = "Convert To Factor..."
         '
-        'mnuOrganiseColumnFactorRecodeNumeric
+        'mnuPrepareColumnFactorRecodeNumeric
         '
-        Me.mnuOrganiseColumnFactorRecodeNumeric.Name = "mnuOrganiseColumnFactorRecodeNumeric"
-        Me.mnuOrganiseColumnFactorRecodeNumeric.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorRecodeNumeric.Tag = "Recode_Numeric..."
-        Me.mnuOrganiseColumnFactorRecodeNumeric.Text = "Recode Numeric..."
+        Me.mnuPrepareColumnFactorRecodeNumeric.Name = "mnuPrepareColumnFactorRecodeNumeric"
+        Me.mnuPrepareColumnFactorRecodeNumeric.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorRecodeNumeric.Tag = "Recode_Numeric..."
+        Me.mnuPrepareColumnFactorRecodeNumeric.Text = "Recode Numeric..."
         '
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
         Me.ToolStripSeparator12.Size = New System.Drawing.Size(176, 6)
         '
-        'mnuOrganiseColumnFactorRecodeFactor
+        'mnuPrepareColumnFactorRecodeFactor
         '
-        Me.mnuOrganiseColumnFactorRecodeFactor.Name = "mnuOrganiseColumnFactorRecodeFactor"
-        Me.mnuOrganiseColumnFactorRecodeFactor.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorRecodeFactor.Tag = "Recode_Factor..."
-        Me.mnuOrganiseColumnFactorRecodeFactor.Text = "Recode Factor..."
+        Me.mnuPrepareColumnFactorRecodeFactor.Name = "mnuPrepareColumnFactorRecodeFactor"
+        Me.mnuPrepareColumnFactorRecodeFactor.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorRecodeFactor.Tag = "Recode_Factor..."
+        Me.mnuPrepareColumnFactorRecodeFactor.Text = "Recode Factor..."
         '
-        'mnuOrganiseColumnFactorCombineFactors
+        'mnuPrepareColumnFactorCombineFactors
         '
-        Me.mnuOrganiseColumnFactorCombineFactors.Name = "mnuOrganiseColumnFactorCombineFactors"
-        Me.mnuOrganiseColumnFactorCombineFactors.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorCombineFactors.Tag = "Combine_Factors..."
-        Me.mnuOrganiseColumnFactorCombineFactors.Text = "Combine Factors..."
+        Me.mnuPrepareColumnFactorCombineFactors.Name = "mnuPrepareColumnFactorCombineFactors"
+        Me.mnuPrepareColumnFactorCombineFactors.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorCombineFactors.Tag = "Combine_Factors..."
+        Me.mnuPrepareColumnFactorCombineFactors.Text = "Combine Factors..."
         '
-        'mnuOrganiseColumnFactorDummyVariables
+        'mnuPrepareColumnFactorDummyVariables
         '
-        Me.mnuOrganiseColumnFactorDummyVariables.Name = "mnuOrganiseColumnFactorDummyVariables"
-        Me.mnuOrganiseColumnFactorDummyVariables.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorDummyVariables.Tag = "Dummy_Variables..."
-        Me.mnuOrganiseColumnFactorDummyVariables.Text = "Dummy Variables..."
+        Me.mnuPrepareColumnFactorDummyVariables.Name = "mnuPrepareColumnFactorDummyVariables"
+        Me.mnuPrepareColumnFactorDummyVariables.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorDummyVariables.Tag = "Dummy_Variables..."
+        Me.mnuPrepareColumnFactorDummyVariables.Text = "Dummy Variables..."
         '
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
         Me.ToolStripSeparator14.Size = New System.Drawing.Size(176, 6)
         '
-        'mnuOrganiseColumnFactorLevelsLabels
+        'mnuPrepareColumnFactorLevelsLabels
         '
-        Me.mnuOrganiseColumnFactorLevelsLabels.Name = "mnuOrganiseColumnFactorLevelsLabels"
-        Me.mnuOrganiseColumnFactorLevelsLabels.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorLevelsLabels.Tag = "Levels/Labels..."
-        Me.mnuOrganiseColumnFactorLevelsLabels.Text = "Levels/Labels..."
+        Me.mnuPrepareColumnFactorLevelsLabels.Name = "mnuPrepareColumnFactorLevelsLabels"
+        Me.mnuPrepareColumnFactorLevelsLabels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorLevelsLabels.Tag = "Levels/Labels..."
+        Me.mnuPrepareColumnFactorLevelsLabels.Text = "Levels/Labels..."
         '
-        'mnuOrganiseColumnFactorReorderLevels
+        'mnuPrepareColumnFactorReorderLevels
         '
-        Me.mnuOrganiseColumnFactorReorderLevels.Name = "mnuOrganiseColumnFactorReorderLevels"
-        Me.mnuOrganiseColumnFactorReorderLevels.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorReorderLevels.Tag = "Reorder_Levels..."
-        Me.mnuOrganiseColumnFactorReorderLevels.Text = "Reorder Levels..."
+        Me.mnuPrepareColumnFactorReorderLevels.Name = "mnuPrepareColumnFactorReorderLevels"
+        Me.mnuPrepareColumnFactorReorderLevels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorReorderLevels.Tag = "Reorder_Levels..."
+        Me.mnuPrepareColumnFactorReorderLevels.Text = "Reorder Levels..."
         '
-        'mnuOrganiseColumnFactorReferenceLevel
+        'mnuPrepareColumnFactorReferenceLevel
         '
-        Me.mnuOrganiseColumnFactorReferenceLevel.Name = "mnuOrganiseColumnFactorReferenceLevel"
-        Me.mnuOrganiseColumnFactorReferenceLevel.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorReferenceLevel.Tag = "Reference_Level..."
-        Me.mnuOrganiseColumnFactorReferenceLevel.Text = "Reference Level..."
+        Me.mnuPrepareColumnFactorReferenceLevel.Name = "mnuPrepareColumnFactorReferenceLevel"
+        Me.mnuPrepareColumnFactorReferenceLevel.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorReferenceLevel.Tag = "Reference_Level..."
+        Me.mnuPrepareColumnFactorReferenceLevel.Text = "Reference Level..."
         '
-        'mnuOrganiseColumnFactorUnusedLevels
+        'mnuPrepareColumnFactorUnusedLevels
         '
-        Me.mnuOrganiseColumnFactorUnusedLevels.Name = "mnuOrganiseColumnFactorUnusedLevels"
-        Me.mnuOrganiseColumnFactorUnusedLevels.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorUnusedLevels.Tag = "Unused_Levels..."
-        Me.mnuOrganiseColumnFactorUnusedLevels.Text = "Unused Levels..."
+        Me.mnuPrepareColumnFactorUnusedLevels.Name = "mnuPrepareColumnFactorUnusedLevels"
+        Me.mnuPrepareColumnFactorUnusedLevels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorUnusedLevels.Tag = "Unused_Levels..."
+        Me.mnuPrepareColumnFactorUnusedLevels.Text = "Unused Levels..."
         '
-        'mnuOrganiseColumnFactorContrasts
+        'mnuPrepareColumnFactorContrasts
         '
-        Me.mnuOrganiseColumnFactorContrasts.Name = "mnuOrganiseColumnFactorContrasts"
-        Me.mnuOrganiseColumnFactorContrasts.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorContrasts.Tag = "Contrasts..."
-        Me.mnuOrganiseColumnFactorContrasts.Text = "Contrasts..."
+        Me.mnuPrepareColumnFactorContrasts.Name = "mnuPrepareColumnFactorContrasts"
+        Me.mnuPrepareColumnFactorContrasts.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorContrasts.Tag = "Contrasts..."
+        Me.mnuPrepareColumnFactorContrasts.Text = "Contrasts..."
         '
         'ToolStripSeparator19
         '
         Me.ToolStripSeparator19.Name = "ToolStripSeparator19"
         Me.ToolStripSeparator19.Size = New System.Drawing.Size(176, 6)
         '
-        'mnuOrganiseColumnFactorFactorDataFrame
+        'mnuPrepareColumnFactorFactorDataFrame
         '
-        Me.mnuOrganiseColumnFactorFactorDataFrame.Name = "mnuOrganiseColumnFactorFactorDataFrame"
-        Me.mnuOrganiseColumnFactorFactorDataFrame.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrganiseColumnFactorFactorDataFrame.Tag = "Factor_Data_Frame"
-        Me.mnuOrganiseColumnFactorFactorDataFrame.Text = "Factor Data Frame..."
+        Me.mnuPrepareColumnFactorFactorDataFrame.Name = "mnuPrepareColumnFactorFactorDataFrame"
+        Me.mnuPrepareColumnFactorFactorDataFrame.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnFactorFactorDataFrame.Tag = "Factor_Data_Frame"
+        Me.mnuPrepareColumnFactorFactorDataFrame.Text = "Factor Data Frame..."
         '
-        'mnuOrganiseColumnText
+        'mnuPrepareColumnText
         '
-        Me.mnuOrganiseColumnText.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnTextFindReplace, Me.mnuOrganiseColumnTextTransform, Me.mnuOrganiseColumnTextSplit, Me.mnuOrganiseColumnTextCombine, Me.mnuOrganiseColumnTextMatch, Me.mnuOrganiseColumnTextDistance})
-        Me.mnuOrganiseColumnText.Name = "mnuOrganiseColumnText"
-        Me.mnuOrganiseColumnText.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseColumnText.Tag = "Column:_Text"
-        Me.mnuOrganiseColumnText.Text = "Column: Text"
+        Me.mnuPrepareColumnText.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnTextFindReplace, Me.mnuPrepareColumnTextTransform, Me.mnuPrepareColumnTextSplit, Me.mnuPrepareColumnTextCombine, Me.mnuPrepareColumnTextMatch, Me.mnuPrepareColumnTextDistance})
+        Me.mnuPrepareColumnText.Name = "mnuPrepareColumnText"
+        Me.mnuPrepareColumnText.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareColumnText.Tag = "Column:_Text"
+        Me.mnuPrepareColumnText.Text = "Column: Text"
         '
-        'mnuOrganiseColumnTextFindReplace
+        'mnuPrepareColumnTextFindReplace
         '
-        Me.mnuOrganiseColumnTextFindReplace.Enabled = False
-        Me.mnuOrganiseColumnTextFindReplace.Name = "mnuOrganiseColumnTextFindReplace"
-        Me.mnuOrganiseColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnTextFindReplace.Tag = "Find/Replace..."
-        Me.mnuOrganiseColumnTextFindReplace.Text = "Find/Replace..."
+        Me.mnuPrepareColumnTextFindReplace.Enabled = False
+        Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
+        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
+        Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace..."
         '
-        'mnuOrganiseColumnTextTransform
+        'mnuPrepareColumnTextTransform
         '
-        Me.mnuOrganiseColumnTextTransform.Name = "mnuOrganiseColumnTextTransform"
-        Me.mnuOrganiseColumnTextTransform.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnTextTransform.Tag = "Transform..."
-        Me.mnuOrganiseColumnTextTransform.Text = "Transform..."
+        Me.mnuPrepareColumnTextTransform.Name = "mnuPrepareColumnTextTransform"
+        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextTransform.Tag = "Transform..."
+        Me.mnuPrepareColumnTextTransform.Text = "Transform..."
         '
-        'mnuOrganiseColumnTextSplit
+        'mnuPrepareColumnTextSplit
         '
-        Me.mnuOrganiseColumnTextSplit.Name = "mnuOrganiseColumnTextSplit"
-        Me.mnuOrganiseColumnTextSplit.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnTextSplit.Tag = "Split..."
-        Me.mnuOrganiseColumnTextSplit.Text = "Split..."
+        Me.mnuPrepareColumnTextSplit.Name = "mnuPrepareColumnTextSplit"
+        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextSplit.Tag = "Split..."
+        Me.mnuPrepareColumnTextSplit.Text = "Split..."
         '
-        'mnuOrganiseColumnTextCombine
+        'mnuPrepareColumnTextCombine
         '
-        Me.mnuOrganiseColumnTextCombine.Name = "mnuOrganiseColumnTextCombine"
-        Me.mnuOrganiseColumnTextCombine.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnTextCombine.Tag = "Combine..."
-        Me.mnuOrganiseColumnTextCombine.Text = "Combine..."
+        Me.mnuPrepareColumnTextCombine.Name = "mnuPrepareColumnTextCombine"
+        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextCombine.Tag = "Combine..."
+        Me.mnuPrepareColumnTextCombine.Text = "Combine..."
         '
-        'mnuOrganiseColumnTextMatch
+        'mnuPrepareColumnTextMatch
         '
-        Me.mnuOrganiseColumnTextMatch.Enabled = False
-        Me.mnuOrganiseColumnTextMatch.Name = "mnuOrganiseColumnTextMatch"
-        Me.mnuOrganiseColumnTextMatch.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnTextMatch.Tag = "Match..."
-        Me.mnuOrganiseColumnTextMatch.Text = "Match..."
+        Me.mnuPrepareColumnTextMatch.Enabled = False
+        Me.mnuPrepareColumnTextMatch.Name = "mnuPrepareColumnTextMatch"
+        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextMatch.Tag = "Match..."
+        Me.mnuPrepareColumnTextMatch.Text = "Match..."
         '
-        'mnuOrganiseColumnTextDistance
+        'mnuPrepareColumnTextDistance
         '
-        Me.mnuOrganiseColumnTextDistance.Enabled = False
-        Me.mnuOrganiseColumnTextDistance.Name = "mnuOrganiseColumnTextDistance"
-        Me.mnuOrganiseColumnTextDistance.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOrganiseColumnTextDistance.Tag = "Distance..."
-        Me.mnuOrganiseColumnTextDistance.Text = "Distance..."
+        Me.mnuPrepareColumnTextDistance.Enabled = False
+        Me.mnuPrepareColumnTextDistance.Name = "mnuPrepareColumnTextDistance"
+        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextDistance.Tag = "Distance..."
+        Me.mnuPrepareColumnTextDistance.Text = "Distance..."
         '
-        'mnuOrganiseColumnDate
+        'mnuPrepareColumnDate
         '
-        Me.mnuOrganiseColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnGenerateDate, Me.mnuOrganiseColumnMakeDate, Me.mnuOrganiseColumnUseDate, Me.mnuOrganiseColumnMakeTime, Me.mnuOrganiseColumnUseTime})
-        Me.mnuOrganiseColumnDate.Name = "mnuOrganiseColumnDate"
-        Me.mnuOrganiseColumnDate.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseColumnDate.Text = "Column: Date"
+        Me.mnuPrepareColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateDate, Me.mnuPrepareColumnMakeDate, Me.mnuPrepareColumnUseDate, Me.mnuPrepareColumnMakeTime, Me.mnuPrepareColumnUseTime})
+        Me.mnuPrepareColumnDate.Name = "mnuPrepareColumnDate"
+        Me.mnuPrepareColumnDate.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareColumnDate.Text = "Column: Date"
         '
-        'mnuOrganiseColumnGenerateDate
+        'mnuPrepareColumnGenerateDate
         '
-        Me.mnuOrganiseColumnGenerateDate.Enabled = False
-        Me.mnuOrganiseColumnGenerateDate.Name = "mnuOrganiseColumnGenerateDate"
-        Me.mnuOrganiseColumnGenerateDate.Size = New System.Drawing.Size(162, 22)
-        Me.mnuOrganiseColumnGenerateDate.Text = "Generate Dates..."
+        Me.mnuPrepareColumnGenerateDate.Enabled = False
+        Me.mnuPrepareColumnGenerateDate.Name = "mnuPrepareColumnGenerateDate"
+        Me.mnuPrepareColumnGenerateDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnGenerateDate.Text = "Generate Dates..."
         '
-        'mnuOrganiseColumnMakeDate
+        'mnuPrepareColumnMakeDate
         '
-        Me.mnuOrganiseColumnMakeDate.Name = "mnuOrganiseColumnMakeDate"
-        Me.mnuOrganiseColumnMakeDate.Size = New System.Drawing.Size(162, 22)
-        Me.mnuOrganiseColumnMakeDate.Text = "Make Date..."
+        Me.mnuPrepareColumnMakeDate.Name = "mnuPrepareColumnMakeDate"
+        Me.mnuPrepareColumnMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnMakeDate.Text = "Make Date..."
         '
-        'mnuOrganiseColumnUseDate
+        'mnuPrepareColumnUseDate
         '
-        Me.mnuOrganiseColumnUseDate.Name = "mnuOrganiseColumnUseDate"
-        Me.mnuOrganiseColumnUseDate.Size = New System.Drawing.Size(162, 22)
-        Me.mnuOrganiseColumnUseDate.Text = "Use Date..."
+        Me.mnuPrepareColumnUseDate.Name = "mnuPrepareColumnUseDate"
+        Me.mnuPrepareColumnUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnUseDate.Text = "Use Date..."
         '
-        'mnuOrganiseColumnMakeTime
+        'mnuPrepareColumnMakeTime
         '
-        Me.mnuOrganiseColumnMakeTime.Enabled = False
-        Me.mnuOrganiseColumnMakeTime.Name = "mnuOrganiseColumnMakeTime"
-        Me.mnuOrganiseColumnMakeTime.Size = New System.Drawing.Size(162, 22)
-        Me.mnuOrganiseColumnMakeTime.Text = "Make Time..."
+        Me.mnuPrepareColumnMakeTime.Enabled = False
+        Me.mnuPrepareColumnMakeTime.Name = "mnuPrepareColumnMakeTime"
+        Me.mnuPrepareColumnMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnMakeTime.Text = "Make Time..."
         '
-        'mnuOrganiseColumnUseTime
+        'mnuPrepareColumnUseTime
         '
-        Me.mnuOrganiseColumnUseTime.Enabled = False
-        Me.mnuOrganiseColumnUseTime.Name = "mnuOrganiseColumnUseTime"
-        Me.mnuOrganiseColumnUseTime.Size = New System.Drawing.Size(162, 22)
-        Me.mnuOrganiseColumnUseTime.Text = "Use Time..."
+        Me.mnuPrepareColumnUseTime.Enabled = False
+        Me.mnuPrepareColumnUseTime.Name = "mnuPrepareColumnUseTime"
+        Me.mnuPrepareColumnUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnUseTime.Text = "Use Time..."
         '
-        'mnuOrganiseColumnReshape
+        'mnuPrepareColumnReshape
         '
-        Me.mnuOrganiseColumnReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseColumnReshapeColumnSummaries, Me.ToolStripSeparator10, Me.mnuOrganiseColumnReshapeStack, Me.mnuOrganiseColumnReshapeUnstack, Me.mnuOrganiseColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuAppendDataFrame, Me.mnuOrganiseColumnReshapeSubset, Me.mnuOrganiseColumnReshapeRandomSubset, Me.mnuOrganiseColumnReshapeTranspose})
-        Me.mnuOrganiseColumnReshape.Name = "mnuOrganiseColumnReshape"
-        Me.mnuOrganiseColumnReshape.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseColumnReshape.Tag = "Column:_Reshape"
-        Me.mnuOrganiseColumnReshape.Text = "Column: Reshape"
+        Me.mnuPrepareColumnReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose})
+        Me.mnuPrepareColumnReshape.Name = "mnuPrepareColumnReshape"
+        Me.mnuPrepareColumnReshape.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareColumnReshape.Tag = "Column:_Reshape"
+        Me.mnuPrepareColumnReshape.Text = "Column: Reshape"
         '
-        'mnuOrganiseColumnReshapeColumnSummaries
+        'mnuPrepareColumnReshapeColumnSummaries
         '
-        Me.mnuOrganiseColumnReshapeColumnSummaries.Name = "mnuOrganiseColumnReshapeColumnSummaries"
-        Me.mnuOrganiseColumnReshapeColumnSummaries.Size = New System.Drawing.Size(193, 22)
-        Me.mnuOrganiseColumnReshapeColumnSummaries.Tag = "Column_Summaries..."
-        Me.mnuOrganiseColumnReshapeColumnSummaries.Text = "Column Summaries..."
+        Me.mnuPrepareColumnReshapeColumnSummaries.Name = "mnuPrepareColumnReshapeColumnSummaries"
+        Me.mnuPrepareColumnReshapeColumnSummaries.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareColumnReshapeColumnSummaries.Tag = "Column_Summaries..."
+        Me.mnuPrepareColumnReshapeColumnSummaries.Text = "Column Summaries..."
+        '
+        'mnuPrepareColumnReshapeGeneralSummaries
+        '
+        Me.mnuPrepareColumnReshapeGeneralSummaries.Name = "mnuPrepareColumnReshapeGeneralSummaries"
+        Me.mnuPrepareColumnReshapeGeneralSummaries.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareColumnReshapeGeneralSummaries.Text = "General Summaries..."
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
         Me.ToolStripSeparator10.Size = New System.Drawing.Size(190, 6)
         '
-        'mnuOrganiseColumnReshapeStack
+        'mnuPrepareColumnReshapeStack
         '
-        Me.mnuOrganiseColumnReshapeStack.Name = "mnuOrganiseColumnReshapeStack"
-        Me.mnuOrganiseColumnReshapeStack.Size = New System.Drawing.Size(193, 22)
-        Me.mnuOrganiseColumnReshapeStack.Tag = "Stack..."
-        Me.mnuOrganiseColumnReshapeStack.Text = "Stack..."
+        Me.mnuPrepareColumnReshapeStack.Name = "mnuPrepareColumnReshapeStack"
+        Me.mnuPrepareColumnReshapeStack.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareColumnReshapeStack.Tag = "Stack..."
+        Me.mnuPrepareColumnReshapeStack.Text = "Stack..."
         '
-        'mnuOrganiseColumnReshapeUnstack
+        'mnuPrepareColumnReshapeUnstack
         '
-        Me.mnuOrganiseColumnReshapeUnstack.Name = "mnuOrganiseColumnReshapeUnstack"
-        Me.mnuOrganiseColumnReshapeUnstack.Size = New System.Drawing.Size(193, 22)
-        Me.mnuOrganiseColumnReshapeUnstack.Tag = "Unstack..."
-        Me.mnuOrganiseColumnReshapeUnstack.Text = "Unstack..."
+        Me.mnuPrepareColumnReshapeUnstack.Name = "mnuPrepareColumnReshapeUnstack"
+        Me.mnuPrepareColumnReshapeUnstack.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareColumnReshapeUnstack.Tag = "Unstack..."
+        Me.mnuPrepareColumnReshapeUnstack.Text = "Unstack..."
         '
-        'mnuOrganiseColumnReshapeMerge
+        'mnuPrepareColumnReshapeMerge
         '
-        Me.mnuOrganiseColumnReshapeMerge.Name = "mnuOrganiseColumnReshapeMerge"
-        Me.mnuOrganiseColumnReshapeMerge.Size = New System.Drawing.Size(193, 22)
-        Me.mnuOrganiseColumnReshapeMerge.Tag = "Merge..."
-        Me.mnuOrganiseColumnReshapeMerge.Text = "Merge..."
+        Me.mnuPrepareColumnReshapeMerge.Name = "mnuPrepareColumnReshapeMerge"
+        Me.mnuPrepareColumnReshapeMerge.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareColumnReshapeMerge.Tag = "Merge..."
+        Me.mnuPrepareColumnReshapeMerge.Text = "Merge..."
         '
         'ToolStripSeparator11
         '
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
         Me.ToolStripSeparator11.Size = New System.Drawing.Size(190, 6)
         '
-        'mnuAppendDataFrame
+        'mnuPrepareAppendDataFrame
         '
-        Me.mnuAppendDataFrame.Name = "mnuAppendDataFrame"
-        Me.mnuAppendDataFrame.Size = New System.Drawing.Size(193, 22)
-        Me.mnuAppendDataFrame.Text = "Append Data Frames..."
+        Me.mnuPrepareAppendDataFrame.Name = "mnuPrepareAppendDataFrame"
+        Me.mnuPrepareAppendDataFrame.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareAppendDataFrame.Text = "Append Data Frames..."
         '
-        'mnuOrganiseColumnReshapeSubset
+        'mnuPrepareColumnReshapeSubset
         '
-        Me.mnuOrganiseColumnReshapeSubset.Name = "mnuOrganiseColumnReshapeSubset"
-        Me.mnuOrganiseColumnReshapeSubset.Size = New System.Drawing.Size(193, 22)
-        Me.mnuOrganiseColumnReshapeSubset.Tag = "Subset..."
-        Me.mnuOrganiseColumnReshapeSubset.Text = "Subset..."
+        Me.mnuPrepareColumnReshapeSubset.Name = "mnuPrepareColumnReshapeSubset"
+        Me.mnuPrepareColumnReshapeSubset.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareColumnReshapeSubset.Tag = "Subset..."
+        Me.mnuPrepareColumnReshapeSubset.Text = "Subset..."
         '
-        'mnuOrganiseColumnReshapeRandomSubset
+        'mnuPrepareColumnReshapeRandomSubset
         '
-        Me.mnuOrganiseColumnReshapeRandomSubset.Name = "mnuOrganiseColumnReshapeRandomSubset"
-        Me.mnuOrganiseColumnReshapeRandomSubset.Size = New System.Drawing.Size(193, 22)
-        Me.mnuOrganiseColumnReshapeRandomSubset.Tag = "Random_Subset..."
-        Me.mnuOrganiseColumnReshapeRandomSubset.Text = "Random Subset..."
+        Me.mnuPrepareColumnReshapeRandomSubset.Name = "mnuPrepareColumnReshapeRandomSubset"
+        Me.mnuPrepareColumnReshapeRandomSubset.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareColumnReshapeRandomSubset.Tag = "Random_Subset..."
+        Me.mnuPrepareColumnReshapeRandomSubset.Text = "Random Subset..."
         '
-        'mnuOrganiseColumnReshapeTranspose
+        'mnuPrepareColumnReshapeTranspose
         '
-        Me.mnuOrganiseColumnReshapeTranspose.Name = "mnuOrganiseColumnReshapeTranspose"
-        Me.mnuOrganiseColumnReshapeTranspose.Size = New System.Drawing.Size(193, 22)
-        Me.mnuOrganiseColumnReshapeTranspose.Tag = "Transpose..."
-        Me.mnuOrganiseColumnReshapeTranspose.Text = "Transpose..."
+        Me.mnuPrepareColumnReshapeTranspose.Name = "mnuPrepareColumnReshapeTranspose"
+        Me.mnuPrepareColumnReshapeTranspose.Size = New System.Drawing.Size(193, 22)
+        Me.mnuPrepareColumnReshapeTranspose.Tag = "Transpose..."
+        Me.mnuPrepareColumnReshapeTranspose.Text = "Transpose..."
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(169, 6)
         '
-        'mnuOrganiseDataObject
+        'mnuPrepareKeysAndLinks
         '
-        Me.mnuOrganiseDataObject.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataObjectDataFrameMetadata, Me.mnuOrganiseDataObjectRenameDataFrame, Me.mnuOrganiseDataObjectReorderDataFrames, Me.mnuOrganiseDataObjectCopyDataFrame, Me.mnuOrganiseDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuOrganiseDataObjectHideDataframes, Me.mnuOrganiseDataObjectMetadata, Me.mnuOrganiseDataObjectRenameMetadata, Me.mnuOrganiseDataObjectReorderMetadata, Me.mnuOrganiseDataObjectDeleteMetadata})
-        Me.mnuOrganiseDataObject.Name = "mnuOrganiseDataObject"
-        Me.mnuOrganiseDataObject.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseDataObject.Tag = "Data_Object"
-        Me.mnuOrganiseDataObject.Text = "Data Object"
+        Me.mnuPrepareKeysAndLinks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareKeysAndLinksAddKey, Me.mnuPrepareKeysAndLinksViewAndRemoveKey, Me.mnuPrepareKeysAndLinksAddLink, Me.mnuPrepareKeysAndLinksViewAndRemoveKeys, Me.mnuPrepareKeysAndLinksAddComment})
+        Me.mnuPrepareKeysAndLinks.Name = "mnuPrepareKeysAndLinks"
+        Me.mnuPrepareKeysAndLinks.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareKeysAndLinks.Text = "Keys and Links"
         '
-        'mnuOrganiseDataObjectDataFrameMetadata
+        'mnuPrepareKeysAndLinksAddKey
         '
-        Me.mnuOrganiseDataObjectDataFrameMetadata.Enabled = False
-        Me.mnuOrganiseDataObjectDataFrameMetadata.Name = "mnuOrganiseDataObjectDataFrameMetadata"
-        Me.mnuOrganiseDataObjectDataFrameMetadata.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectDataFrameMetadata.Tag = "Data_Frame_Metadata..."
-        Me.mnuOrganiseDataObjectDataFrameMetadata.Text = "Data Frame Metadata..."
+        Me.mnuPrepareKeysAndLinksAddKey.Name = "mnuPrepareKeysAndLinksAddKey"
+        Me.mnuPrepareKeysAndLinksAddKey.Size = New System.Drawing.Size(207, 22)
+        Me.mnuPrepareKeysAndLinksAddKey.Text = "Add Key..."
         '
-        'mnuOrganiseDataObjectRenameDataFrame
+        'mnuPrepareKeysAndLinksViewAndRemoveKey
         '
-        Me.mnuOrganiseDataObjectRenameDataFrame.Name = "mnuOrganiseDataObjectRenameDataFrame"
-        Me.mnuOrganiseDataObjectRenameDataFrame.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectRenameDataFrame.Tag = "ReName_Data_Frame..."
-        Me.mnuOrganiseDataObjectRenameDataFrame.Text = "Rename Data Frame..."
+        Me.mnuPrepareKeysAndLinksViewAndRemoveKey.Name = "mnuPrepareKeysAndLinksViewAndRemoveKey"
+        Me.mnuPrepareKeysAndLinksViewAndRemoveKey.Size = New System.Drawing.Size(207, 22)
+        Me.mnuPrepareKeysAndLinksViewAndRemoveKey.Text = "View and Remove Keys..."
         '
-        'mnuOrganiseDataObjectReorderDataFrames
+        'mnuPrepareKeysAndLinksAddLink
         '
-        Me.mnuOrganiseDataObjectReorderDataFrames.Enabled = False
-        Me.mnuOrganiseDataObjectReorderDataFrames.Name = "mnuOrganiseDataObjectReorderDataFrames"
-        Me.mnuOrganiseDataObjectReorderDataFrames.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectReorderDataFrames.Tag = "Reorder_Data_Frames..."
-        Me.mnuOrganiseDataObjectReorderDataFrames.Text = "Reorder Data Frames..."
+        Me.mnuPrepareKeysAndLinksAddLink.Name = "mnuPrepareKeysAndLinksAddLink"
+        Me.mnuPrepareKeysAndLinksAddLink.Size = New System.Drawing.Size(207, 22)
+        Me.mnuPrepareKeysAndLinksAddLink.Text = "Add Link..."
         '
-        'mnuOrganiseDataObjectCopyDataFrame
+        'mnuPrepareKeysAndLinksViewAndRemoveKeys
         '
-        Me.mnuOrganiseDataObjectCopyDataFrame.Name = "mnuOrganiseDataObjectCopyDataFrame"
-        Me.mnuOrganiseDataObjectCopyDataFrame.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectCopyDataFrame.Tag = "Copy_Data_Frame..."
-        Me.mnuOrganiseDataObjectCopyDataFrame.Text = "Copy Data Frame..."
+        Me.mnuPrepareKeysAndLinksViewAndRemoveKeys.Name = "mnuPrepareKeysAndLinksViewAndRemoveKeys"
+        Me.mnuPrepareKeysAndLinksViewAndRemoveKeys.Size = New System.Drawing.Size(207, 22)
+        Me.mnuPrepareKeysAndLinksViewAndRemoveKeys.Text = "View and Remove Links..."
         '
-        'mnuOrganiseDataObjectDeleteDataFrame
+        'mnuPrepareKeysAndLinksAddComment
         '
-        Me.mnuOrganiseDataObjectDeleteDataFrame.Name = "mnuOrganiseDataObjectDeleteDataFrame"
-        Me.mnuOrganiseDataObjectDeleteDataFrame.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectDeleteDataFrame.Tag = "Delete_Data_Frame..."
-        Me.mnuOrganiseDataObjectDeleteDataFrame.Text = "Delete Data Frame..."
+        Me.mnuPrepareKeysAndLinksAddComment.Name = "mnuPrepareKeysAndLinksAddComment"
+        Me.mnuPrepareKeysAndLinksAddComment.Size = New System.Drawing.Size(207, 22)
+        Me.mnuPrepareKeysAndLinksAddComment.Text = "Add comment..."
+        '
+        'mnuPrepareDataObject
+        '
+        Me.mnuPrepareDataObject.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataObjectDataFrameMetadata, Me.mnuPrepareDataObjectRenameDataFrame, Me.mnuPrepareDataObjectReorderDataFrames, Me.mnuPrepareDataObjectCopyDataFrame, Me.mnuPrepareDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuPrepareDataObjectHideDataframes, Me.mnuPrepareDataObjectMetadata, Me.mnuPrepareDataObjectRenameMetadata, Me.mnuPrepareDataObjectReorderMetadata, Me.mnuPrepareDataObjectDeleteMetadata})
+        Me.mnuPrepareDataObject.Name = "mnuPrepareDataObject"
+        Me.mnuPrepareDataObject.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareDataObject.Tag = "Data_Object"
+        Me.mnuPrepareDataObject.Text = "Data Object"
+        '
+        'mnuPrepareDataObjectDataFrameMetadata
+        '
+        Me.mnuPrepareDataObjectDataFrameMetadata.Enabled = False
+        Me.mnuPrepareDataObjectDataFrameMetadata.Name = "mnuPrepareDataObjectDataFrameMetadata"
+        Me.mnuPrepareDataObjectDataFrameMetadata.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectDataFrameMetadata.Tag = "Data_Frame_Metadata..."
+        Me.mnuPrepareDataObjectDataFrameMetadata.Text = "Data Frame Metadata..."
+        '
+        'mnuPrepareDataObjectRenameDataFrame
+        '
+        Me.mnuPrepareDataObjectRenameDataFrame.Name = "mnuPrepareDataObjectRenameDataFrame"
+        Me.mnuPrepareDataObjectRenameDataFrame.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectRenameDataFrame.Tag = "ReName_Data_Frame..."
+        Me.mnuPrepareDataObjectRenameDataFrame.Text = "Rename Data Frame..."
+        '
+        'mnuPrepareDataObjectReorderDataFrames
+        '
+        Me.mnuPrepareDataObjectReorderDataFrames.Enabled = False
+        Me.mnuPrepareDataObjectReorderDataFrames.Name = "mnuPrepareDataObjectReorderDataFrames"
+        Me.mnuPrepareDataObjectReorderDataFrames.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectReorderDataFrames.Tag = "Reorder_Data_Frames..."
+        Me.mnuPrepareDataObjectReorderDataFrames.Text = "Reorder Data Frames..."
+        '
+        'mnuPrepareDataObjectCopyDataFrame
+        '
+        Me.mnuPrepareDataObjectCopyDataFrame.Name = "mnuPrepareDataObjectCopyDataFrame"
+        Me.mnuPrepareDataObjectCopyDataFrame.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectCopyDataFrame.Tag = "Copy_Data_Frame..."
+        Me.mnuPrepareDataObjectCopyDataFrame.Text = "Copy Data Frame..."
+        '
+        'mnuPrepareDataObjectDeleteDataFrame
+        '
+        Me.mnuPrepareDataObjectDeleteDataFrame.Name = "mnuPrepareDataObjectDeleteDataFrame"
+        Me.mnuPrepareDataObjectDeleteDataFrame.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectDeleteDataFrame.Tag = "Delete_Data_Frame..."
+        Me.mnuPrepareDataObjectDeleteDataFrame.Text = "Delete Data Frame..."
         '
         'ToolStripSeparator21
         '
         Me.ToolStripSeparator21.Name = "ToolStripSeparator21"
         Me.ToolStripSeparator21.Size = New System.Drawing.Size(193, 6)
         '
-        'mnuOrganiseDataObjectHideDataframes
+        'mnuPrepareDataObjectHideDataframes
         '
-        Me.mnuOrganiseDataObjectHideDataframes.Enabled = False
-        Me.mnuOrganiseDataObjectHideDataframes.Name = "mnuOrganiseDataObjectHideDataframes"
-        Me.mnuOrganiseDataObjectHideDataframes.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectHideDataframes.Text = "Hide Dataframes..."
+        Me.mnuPrepareDataObjectHideDataframes.Enabled = False
+        Me.mnuPrepareDataObjectHideDataframes.Name = "mnuPrepareDataObjectHideDataframes"
+        Me.mnuPrepareDataObjectHideDataframes.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectHideDataframes.Text = "Hide Dataframes..."
         '
-        'mnuOrganiseDataObjectMetadata
+        'mnuPrepareDataObjectMetadata
         '
-        Me.mnuOrganiseDataObjectMetadata.Name = "mnuOrganiseDataObjectMetadata"
-        Me.mnuOrganiseDataObjectMetadata.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectMetadata.Tag = "Metadata..."
-        Me.mnuOrganiseDataObjectMetadata.Text = "Metadata..."
+        Me.mnuPrepareDataObjectMetadata.Name = "mnuPrepareDataObjectMetadata"
+        Me.mnuPrepareDataObjectMetadata.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectMetadata.Tag = "Metadata..."
+        Me.mnuPrepareDataObjectMetadata.Text = "Metadata..."
         '
-        'mnuOrganiseDataObjectRenameMetadata
+        'mnuPrepareDataObjectRenameMetadata
         '
-        Me.mnuOrganiseDataObjectRenameMetadata.Enabled = False
-        Me.mnuOrganiseDataObjectRenameMetadata.Name = "mnuOrganiseDataObjectRenameMetadata"
-        Me.mnuOrganiseDataObjectRenameMetadata.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectRenameMetadata.Tag = "Rename_Metadata..."
-        Me.mnuOrganiseDataObjectRenameMetadata.Text = "Rename Metadata..."
+        Me.mnuPrepareDataObjectRenameMetadata.Enabled = False
+        Me.mnuPrepareDataObjectRenameMetadata.Name = "mnuPrepareDataObjectRenameMetadata"
+        Me.mnuPrepareDataObjectRenameMetadata.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectRenameMetadata.Tag = "Rename_Metadata..."
+        Me.mnuPrepareDataObjectRenameMetadata.Text = "Rename Metadata..."
         '
-        'mnuOrganiseDataObjectReorderMetadata
+        'mnuPrepareDataObjectReorderMetadata
         '
-        Me.mnuOrganiseDataObjectReorderMetadata.Enabled = False
-        Me.mnuOrganiseDataObjectReorderMetadata.Name = "mnuOrganiseDataObjectReorderMetadata"
-        Me.mnuOrganiseDataObjectReorderMetadata.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectReorderMetadata.Tag = "Reorder_Metadata..."
-        Me.mnuOrganiseDataObjectReorderMetadata.Text = "Reorder Metadata..."
+        Me.mnuPrepareDataObjectReorderMetadata.Enabled = False
+        Me.mnuPrepareDataObjectReorderMetadata.Name = "mnuPrepareDataObjectReorderMetadata"
+        Me.mnuPrepareDataObjectReorderMetadata.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectReorderMetadata.Tag = "Reorder_Metadata..."
+        Me.mnuPrepareDataObjectReorderMetadata.Text = "Reorder Metadata..."
         '
-        'mnuOrganiseDataObjectDeleteMetadata
+        'mnuPrepareDataObjectDeleteMetadata
         '
-        Me.mnuOrganiseDataObjectDeleteMetadata.Enabled = False
-        Me.mnuOrganiseDataObjectDeleteMetadata.Name = "mnuOrganiseDataObjectDeleteMetadata"
-        Me.mnuOrganiseDataObjectDeleteMetadata.Size = New System.Drawing.Size(196, 22)
-        Me.mnuOrganiseDataObjectDeleteMetadata.Tag = "Delete_Metadata..."
-        Me.mnuOrganiseDataObjectDeleteMetadata.Text = "Delete Metadata..."
+        Me.mnuPrepareDataObjectDeleteMetadata.Enabled = False
+        Me.mnuPrepareDataObjectDeleteMetadata.Name = "mnuPrepareDataObjectDeleteMetadata"
+        Me.mnuPrepareDataObjectDeleteMetadata.Size = New System.Drawing.Size(196, 22)
+        Me.mnuPrepareDataObjectDeleteMetadata.Tag = "Delete_Metadata..."
+        Me.mnuPrepareDataObjectDeleteMetadata.Text = "Delete Metadata..."
         '
-        'mnuOrganiseRObjects
+        'mnuPrepareRObjects
         '
-        Me.mnuOrganiseRObjects.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseRObjectsView, Me.mnuOrganiseRObjectsRename, Me.mnuOrganiseRObjectsReorder, Me.mnuOrganiseRObjectsDelete})
-        Me.mnuOrganiseRObjects.Name = "mnuOrganiseRObjects"
-        Me.mnuOrganiseRObjects.Size = New System.Drawing.Size(172, 22)
-        Me.mnuOrganiseRObjects.Tag = "R_Objects"
-        Me.mnuOrganiseRObjects.Text = "R Objects"
+        Me.mnuPrepareRObjects.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareRObjectsView, Me.mnuPrepareRObjectsRename, Me.mnuPrepareRObjectsReorder, Me.mnuPrepareRObjectsDelete})
+        Me.mnuPrepareRObjects.Name = "mnuPrepareRObjects"
+        Me.mnuPrepareRObjects.Size = New System.Drawing.Size(172, 22)
+        Me.mnuPrepareRObjects.Tag = "R_Objects"
+        Me.mnuPrepareRObjects.Text = "R Objects"
         '
-        'mnuOrganiseRObjectsView
+        'mnuPrepareRObjectsView
         '
-        Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
-        Me.mnuOrganiseRObjectsView.Tag = "View..."
-        Me.mnuOrganiseRObjectsView.Text = "View..."
+        Me.mnuPrepareRObjectsView.Name = "mnuPrepareRObjectsView"
+        Me.mnuPrepareRObjectsView.Size = New System.Drawing.Size(126, 22)
+        Me.mnuPrepareRObjectsView.Tag = "View..."
+        Me.mnuPrepareRObjectsView.Text = "View..."
         '
-        'mnuOrganiseRObjectsRename
+        'mnuPrepareRObjectsRename
         '
-        Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
-        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
-        Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
-        Me.mnuOrganiseRObjectsRename.Text = "Rename..."
+        Me.mnuPrepareRObjectsRename.Name = "mnuPrepareRObjectsRename"
+        Me.mnuPrepareRObjectsRename.Size = New System.Drawing.Size(126, 22)
+        Me.mnuPrepareRObjectsRename.Tag = "Rename..."
+        Me.mnuPrepareRObjectsRename.Text = "Rename..."
         '
-        'mnuOrganiseRObjectsReorder
+        'mnuPrepareRObjectsReorder
         '
-        Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
-        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
-        Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
-        Me.mnuOrganiseRObjectsReorder.Text = "Reorder..."
+        Me.mnuPrepareRObjectsReorder.Name = "mnuPrepareRObjectsReorder"
+        Me.mnuPrepareRObjectsReorder.Size = New System.Drawing.Size(126, 22)
+        Me.mnuPrepareRObjectsReorder.Tag = "Reorder"
+        Me.mnuPrepareRObjectsReorder.Text = "Reorder..."
         '
-        'mnuOrganiseRObjectsDelete
+        'mnuPrepareRObjectsDelete
         '
-        Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
-        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
-        Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
-        Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
+        Me.mnuPrepareRObjectsDelete.Name = "mnuPrepareRObjectsDelete"
+        Me.mnuPrepareRObjectsDelete.Size = New System.Drawing.Size(126, 22)
+        Me.mnuPrepareRObjectsDelete.Tag = "Delete..."
+        Me.mnuPrepareRObjectsDelete.Text = "Delete..."
+        '
+        'mnuCorruption
+        '
+        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionOrganise, Me.mnuCorruptionDescribe, Me.mnuCorruptionModel})
+        Me.mnuCorruption.Name = "mnuCorruption"
+        Me.mnuCorruption.Size = New System.Drawing.Size(77, 20)
+        Me.mnuCorruption.Text = "Corruption"
+        '
+        'mnuCorruptionFile
+        '
+        Me.mnuCorruptionFile.Name = "mnuCorruptionFile"
+        Me.mnuCorruptionFile.Size = New System.Drawing.Size(130, 22)
+        Me.mnuCorruptionFile.Text = "File..."
+        '
+        'mnuCorruptionOrganise
+        '
+        Me.mnuCorruptionOrganise.Name = "mnuCorruptionOrganise"
+        Me.mnuCorruptionOrganise.Size = New System.Drawing.Size(130, 22)
+        Me.mnuCorruptionOrganise.Text = "Organise..."
+        '
+        'mnuCorruptionDescribe
+        '
+        Me.mnuCorruptionDescribe.Name = "mnuCorruptionDescribe"
+        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(130, 22)
+        Me.mnuCorruptionDescribe.Text = "Describe..."
+        '
+        'mnuCorruptionModel
+        '
+        Me.mnuCorruptionModel.Name = "mnuCorruptionModel"
+        Me.mnuCorruptionModel.Size = New System.Drawing.Size(130, 22)
+        Me.mnuCorruptionModel.Text = "Model..."
         '
         'mnuTools
         '
@@ -3145,17 +3222,17 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
-        'mnuCliDefineClimaticData
+        'mnuClimaticModelsExtremes
         '
-        Me.mnuCliDefineClimaticData.Name = "mnuCliDefineClimaticData"
-        Me.mnuCliDefineClimaticData.Size = New System.Drawing.Size(191, 22)
-        Me.mnuCliDefineClimaticData.Text = "Define Climatic Data..."
+        Me.mnuClimaticModelsExtremes.Name = "mnuClimaticModelsExtremes"
+        Me.mnuClimaticModelsExtremes.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClimaticModelsExtremes.Text = "Extremes..."
         '
-        'mnuOrgCalculateDuplicateColumn
+        'mnuClimaticModelsCircular
         '
-        Me.mnuOrgCalculateDuplicateColumn.Name = "mnuOrgCalculateDuplicateColumn"
-        Me.mnuOrgCalculateDuplicateColumn.Size = New System.Drawing.Size(179, 22)
-        Me.mnuOrgCalculateDuplicateColumn.Text = "Duplicate Column..."
+        Me.mnuClimaticModelsCircular.Name = "mnuClimaticModelsCircular"
+        Me.mnuClimaticModelsCircular.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClimaticModelsCircular.Text = "Circular..."
         '
         'frmMain
         '
@@ -3241,66 +3318,66 @@ Partial Class frmMain
     Friend WithEvents mnuFileOpenFromFile As ToolStripMenuItem
     Friend WithEvents mnuFileOpenFromLibrary As ToolStripMenuItem
     Friend WithEvents tlSeparatorFile As ToolStripSeparator
-    Friend WithEvents mnuOrganise As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataFrame As ToolStripMenuItem
+    Friend WithEvents mnuPrepare As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataFrame As ToolStripMenuItem
     Friend WithEvents mnuOrganiseDataFrameViewData As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnReshape As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnReshapeStack As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnReshapeUnstack As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnReshapeSubset As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactor As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshape As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshapeStack As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshapeUnstack As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshapeSubset As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactor As ToolStripMenuItem
     Friend WithEvents mnuOrganiseDataFrameRenameColumn As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnReshapeMerge As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshapeMerge As ToolStripMenuItem
     Friend WithEvents mnuViewColumnMetadata As ToolStripMenuItem
     Friend WithEvents mnuViewDataFrameMetadata As ToolStripMenuItem
     Friend WithEvents mnuViewLog As ToolStripMenuItem
     Friend WithEvents mnuViewScriptWindow As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObject As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectDeleteDataFrame As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectRenameDataFrame As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectReorderDataFrames As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObject As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectDeleteDataFrame As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectRenameDataFrame As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectReorderDataFrames As ToolStripMenuItem
     Friend WithEvents mnuViewDataView As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorConvertToFactor As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorLevelsLabels As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorReorderLevels As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorRecodeFactor As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorReferenceLevel As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorUnusedLevels As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnGenerate As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorConvertToFactor As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorLevelsLabels As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorReorderLevels As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorRecodeFactor As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorReferenceLevel As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorUnusedLevels As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnGenerate As ToolStripMenuItem
     Friend WithEvents mnuOrganiseDataFrameConvertColumns As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnGeneratePermuteRows As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnReshapeColumnSummaries As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnReshapeRandomSubset As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshapeColumnSummaries As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshapeRandomSubset As ToolStripMenuItem
     Friend WithEvents mnuExport As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectDataFrameMetadata As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectCopyDataFrame As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectDataFrameMetadata As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectCopyDataFrame As ToolStripMenuItem
     Friend WithEvents mnuTbShowLast10 As ToolStripDropDownButton
     Friend WithEvents sepEnd As ToolStripSeparator
     Friend WithEvents sepStart As ToolStripSeparator
     Friend WithEvents mnuOrganiseDataFrameSort As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseRObjects As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseRObjectsView As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseRObjectsReorder As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseRObjectsRename As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseRObjectsDelete As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorContrasts As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorFactorDataFrame As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnText As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnTextSplit As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnTextCombine As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnTextMatch As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnTextDistance As ToolStripMenuItem
+    Friend WithEvents mnuPrepareRObjects As ToolStripMenuItem
+    Friend WithEvents mnuPrepareRObjectsView As ToolStripMenuItem
+    Friend WithEvents mnuPrepareRObjectsReorder As ToolStripMenuItem
+    Friend WithEvents mnuPrepareRObjectsRename As ToolStripMenuItem
+    Friend WithEvents mnuPrepareRObjectsDelete As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorContrasts As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorFactorDataFrame As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnText As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnTextSplit As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnTextCombine As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnTextMatch As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnTextDistance As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents mnuOrganiseDataFrameFilter As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
-    Friend WithEvents mnuOrganiseColumnReshapeTranspose As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshapeTranspose As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
-    Friend WithEvents mnuOrganiseColumnFactorCombineFactors As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorDummyVariables As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorCombineFactors As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorDummyVariables As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator19 As ToolStripSeparator
-    Friend WithEvents mnuOrganiseColumnTextTransform As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnTextTransform As ToolStripMenuItem
     Friend WithEvents mnuTools As ToolStripMenuItem
     Friend WithEvents mnuToolsOptions As ToolStripMenuItem
     Friend WithEvents mnuEditFindNext As ToolStripMenuItem
@@ -3317,7 +3394,7 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseDataFrameProtectColumn As ToolStripMenuItem
     Friend WithEvents mnuOrganiseDataFrameHideColumns As ToolStripMenuItem
     Friend WithEvents mnuOrganiseDataFrameFreezeColumns As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnCalculate As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnCalculate As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnCalculateTransform As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnCalculateRank As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnCalculatePolynomials As ToolStripMenuItem
@@ -3325,14 +3402,14 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseColumnCalculateRowSummary As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnGenerateRegularSequence As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnGenerateRandomSamples As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnFactorRecodeNumeric As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnTextFindReplace As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorRecodeNumeric As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnTextFindReplace As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator21 As ToolStripSeparator
-    Friend WithEvents mnuOrganiseDataObjectMetadata As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectRenameMetadata As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectReorderMetadata As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectDeleteMetadata As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectMetadata As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectRenameMetadata As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectReorderMetadata As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectDeleteMetadata As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariable As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableSummarise As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableGraph As ToolStripMenuItem
@@ -3406,15 +3483,15 @@ Partial Class frmMain
     Friend WithEvents mnuToolsCheckForUpdates As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator13 As ToolStripSeparator
-    Friend WithEvents mnuOrganiseCheckData As ToolStripMenuItem
+    Friend WithEvents mnuPrepareCheckData As ToolStripMenuItem
     Friend WithEvents mnuOrganisePrepareToShareJitter As ToolStripMenuItem
     Friend WithEvents mnuCheckDataPrePareToShareSdcPackage As ToolStripMenuItem
     Friend WithEvents ColourByPropertyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuViewCascade As ToolStripMenuItem
     Friend WithEvents mnuViewTileVertically As ToolStripMenuItem
     Friend WithEvents mnuViewTileHorizontally As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseDataObjectHideDataframes As ToolStripMenuItem
-    Friend WithEvents mnuAppendDataFrame As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataObjectHideDataframes As ToolStripMenuItem
+    Friend WithEvents mnuPrepareAppendDataFrame As ToolStripMenuItem
     Friend WithEvents mnuFileSaveAsDataAs As ToolStripMenuItem
     Friend WithEvents mnuFileSaveAsOutputAs As ToolStripMenuItem
     Friend WithEvents mnuFileSaveAsLogAs As ToolStripMenuItem
@@ -3467,9 +3544,9 @@ Partial Class frmMain
     Friend WithEvents mnuImportFromODK As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnGenerateCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator25 As ToolStripSeparator
-    Friend WithEvents mnuOrganiseColumnDate As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnGenerateDate As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnUseDate As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnDate As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnGenerateDate As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnUseDate As ToolStripMenuItem
     Friend WithEvents mnuFileConvert As ToolStripMenuItem
     Friend WithEvents mnuModelProbabilityDistributionsShowModel As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariate As ToolStripMenuItem
@@ -3501,9 +3578,9 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeOtherGraphicsDialogsCumulativeDistribution As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsInventoryPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsPopulationPyramid As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnMakeDate As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnMakeTime As ToolStripMenuItem
-    Friend WithEvents mnuOrganiseColumnUseTime As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnMakeDate As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnMakeTime As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnUseTime As ToolStripMenuItem
     Friend WithEvents mnuClimdex As ToolStripMenuItem
     Friend WithEvents mnuOrganiseCheckDataExportOpenRefine As ToolStripMenuItem
     Friend WithEvents mnuOrganiseCheckDataImportOpenRefine As ToolStripMenuItem
@@ -3547,7 +3624,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPICSACrops As ToolStripMenuItem
     Friend WithEvents mnuClimaticSCF As ToolStripMenuItem
     Friend WithEvents mnuClimaticModels As ToolStripMenuItem
-    Friend WithEvents mnuClimaticMarkovModelling As ToolStripMenuItem
+    Friend WithEvents mnuClimaticModelsMarkovModelling As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeSunshineRadiation As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeGeneral As ToolStripMenuItem
     Friend WithEvents mnuClimaticMoreGraphs As ToolStripMenuItem
@@ -3562,9 +3639,20 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticSCFSupportPrincipalComponents As ToolStripMenuItem
     Friend WithEvents mnuClimaticSCFSupportCanonicalCorrelations As ToolStripMenuItem
     Friend WithEvents mnuClimaticOrganiseUnstackDailyData As ToolStripMenuItem
-    Friend WithEvents mnuCliModelExtremes As ToolStripMenuItem
-    Friend WithEvents mnuCliModelCircular As ToolStripMenuItem
-    Friend WithEvents mnuCliModelMarkovFitModel As ToolStripMenuItem
     Friend WithEvents mnuCliDefineClimaticData As ToolStripMenuItem
     Friend WithEvents mnuOrgCalculateDuplicateColumn As ToolStripMenuItem
+    Friend WithEvents mnuCorruption As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionFile As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionOrganise As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionDescribe As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionModel As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnReshapeGeneralSummaries As ToolStripMenuItem
+    Friend WithEvents mnuPrepareKeysAndLinks As ToolStripMenuItem
+    Friend WithEvents mnuPrepareKeysAndLinksAddKey As ToolStripMenuItem
+    Friend WithEvents mnuPrepareKeysAndLinksViewAndRemoveKey As ToolStripMenuItem
+    Friend WithEvents mnuPrepareKeysAndLinksAddLink As ToolStripMenuItem
+    Friend WithEvents mnuPrepareKeysAndLinksViewAndRemoveKeys As ToolStripMenuItem
+    Friend WithEvents mnuPrepareKeysAndLinksAddComment As ToolStripMenuItem
+    Friend WithEvents mnuClimaticModelsExtremes As ToolStripMenuItem
+    Friend WithEvents mnuClimaticModelsCircular As ToolStripMenuItem
 End Class
