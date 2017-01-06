@@ -1319,7 +1319,7 @@ Public Class frmMain
         dlgCorruptionFile.ShowDialog()
     End Sub
 
-    Private Sub mnuCorruptionOrganise_Click(sender As Object, e As EventArgs) Handles mnuCorruptionOrganise.Click
+    Private Sub mnuCorruptionOrganise_Click(sender As Object, e As EventArgs) Handles mnuCorruptionPrepare.Click
         dlgCorruptionOrganise.ShowDialog()
     End Sub
 
