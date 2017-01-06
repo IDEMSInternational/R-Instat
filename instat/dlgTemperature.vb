@@ -27,7 +27,7 @@ Public Class dlgTemperature
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 511
+        ucrBase.iHelpTopicID = 424
     End Sub
 
     Private Sub TestOKEnabled()
