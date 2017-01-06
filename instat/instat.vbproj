@@ -400,6 +400,12 @@
     <Compile Include="dlgViewAndRemoveLinks.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgWindSpeed.Designer.vb">
+      <DependentUpon>dlgWindSpeed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWindSpeed.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </Compile>
@@ -3017,6 +3023,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindSpeed.resx">
+      <DependentUpon>dlgWindSpeed.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGraphDisplay.resx">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
