@@ -35,6 +35,13 @@ Public Class dlgNewMarkovChains
         ucrInputOptions.SetItems({"No interactions", "Interactions", "Both"})
     End Sub
 
+    Private Sub ChkSaveModelEnabled()
+        If nudSeasonalityTo.Value > nudSeasonalityFrom.Value AndAlso nudOrderTo.Value > nudOrderFrom.Value AndAlso ucrInputMarkovType.GetText <> "Both" AndAlso ucrInputInteractions.GetText <> "Both" AndAlso ucrInputOptions.GetText <> "Both" Then
+            chkSaveModel.Enabled = True
+        Else
+            chkSaveModel.Enabled = False
+        End If
+    End Sub
     Private Sub SetDefaults()
         ucrReceiverStation.SetMeAsReceiver()
         ucrReceiverRainfall.SetMeAsReceiver()
@@ -57,7 +64,7 @@ Public Class dlgNewMarkovChains
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty Then
+        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso nudSeasonalityTo.Value >= nudSeasonalityFrom.Value Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -71,5 +78,21 @@ Public Class dlgNewMarkovChains
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputExcludeSep_NameChanged() Handles ucrInputExcludeSep.NameChanged, ucrInputInteractions.NameChanged, ucrInputMarkovType.NameChanged, ucrInputOptions.NameChanged, ucrInputSaveModel.NameChanged
+        ChkSaveModelEnabled()
+    End Sub
+
+    Private Sub grpSeasonalityHarmonics_TextChanged(sender As Object, e As EventArgs) Handles nudSeasonalityFrom.TextChanged, nudSeasonalityTo.TextChanged
+
+    End Sub
+
+    Private Sub grpOrder_TextChanged(sender As Object, e As EventArgs) Handles nudOrderFrom.TextChanged, nudOrderTo.TextChanged
+
+    End Sub
+
+    Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged, chkGraph.CheckedChanged
+        ChkSaveModelEnabled()
     End Sub
 End Class
