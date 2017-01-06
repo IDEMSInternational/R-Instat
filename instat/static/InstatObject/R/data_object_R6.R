@@ -1893,3 +1893,56 @@ data_object$set("public","make_inventory_plot", function(year, doy, col_name, ad
   return(g)
 }
 )
+
+data_object$set("public","infill_missing_dates", function(date_name, factors) {
+  date_col <- self$get_columns_from_data(date_name)
+  if(!is.Date(date_col)) stop(date_name, " is not a Date column.")
+  if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
+  if(missing(factors)) {
+    if(anyDuplicated(date_col) > 0) stop("Cannot do infilling as date column has duplicate values.")
+    min <- min(date_col)
+    max <- max(date_col)
+    full_dates <- seq(min, max, by = "day")
+    if(length(full_dates) > length(date_col)) {
+      message("Attempting to infill ", (length(full_dates) - length(date_col)), " missing dates...")
+      full_dates <- data.frame(full_dates)
+      names(full_dates) <- date_name
+      self$merge_data(full_dates, by = date_name, type = "full")
+      message("Missing dates infilled.")
+      self$sort_dataframe(col_names = date_name)
+    }
+  }
+  else {
+    merge_required <- FALSE
+    col_names_exp <- c()
+    for(i in seq_along(factors)) {
+      col_name <- factors[i]
+      col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+    }
+    grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% group_by_(.dots = col_names_exp)
+    date_ranges <- grouped_data %>% summarise_(.dots = setNames(list(interp(~ min(var), var = as.name(date_name)), interp(~ max(var), var = as.name(date_name))), c("Min", "Max")))
+    date_lengths <- grouped_data %>% summarise(Count = n())
+    print(date_lengths)
+    full_dates_list <- list()
+    for(j in 1:nrow(date_ranges)) {
+      full_dates <- seq(date_ranges$Min[j], date_ranges$Max[j], by = "day")
+      if(length(full_dates) > date_lengths[[2]][j]) {
+        message("Attempting to infill ", (length(full_dates) - date_lengths[[2]][j]), " missing dates for ", paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"))
+        merge_required <- TRUE
+      }
+      full_dates <- data.frame(full_dates)
+      names(full_dates) <- date_name
+      for(k in seq_along(factors)) {
+        full_dates[[factors[k]]] <- date_ranges[[k]][j]
+      }
+      full_dates_list[[j]] <- full_dates
+    }
+    if(merge_required) {
+      all_dates_factors <- rbind.fill(full_dates_list)
+      View(all_dates_factors)
+      self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
+      self$sort_dataframe(col_names = c(date_name, factors))
+    }
+  }
+}
+)
