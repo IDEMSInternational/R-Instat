@@ -340,6 +340,12 @@
     <Compile Include="dlgCorruptionOrganise.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgQCProcedures.Designer.vb">
+      <DependentUpon>dlgQCProcedures.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgQCProcedures.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </Compile>
@@ -2690,6 +2696,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.sw-KE.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgQCProcedures.resx">
+      <DependentUpon>dlgQCProcedures.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
