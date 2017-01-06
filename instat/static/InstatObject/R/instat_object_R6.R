@@ -914,8 +914,8 @@ instat_object$set("public","data_frame_exists", function(data_name) {
 } 
 )
 
-instat_object$set("public","add_key", function(data_name, col_names) {
-  self$get_data_objects(data_name)$add_key(col_names)
+instat_object$set("public","add_key", function(data_name, col_names, key_name) {
+  self$get_data_objects(data_name)$add_key(col_names, key_name)
   names(col_names) <- col_names
   self$add_link(data_name, data_name, col_names, keyed_link_label)
   invisible(sapply(self$get_data_objects(), function(x) if(!x$is_metadata(is_linkable)) x$append_to_metadata(is_linkable, FALSE)))
