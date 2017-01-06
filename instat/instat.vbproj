@@ -154,6 +154,12 @@
     <Compile Include="dlgAddComment.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgAddKey.Designer.vb">
+      <DependentUpon>dlgAddKey.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAddKey.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgAddLink.Designer.vb">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
     </Compile>
