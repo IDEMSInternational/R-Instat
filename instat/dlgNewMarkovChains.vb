@@ -1,3 +1,4 @@
-﻿Public Class dlgNewMarkovChains
+﻿
+Public Class dlgNewMarkovChains
 
 End Class
