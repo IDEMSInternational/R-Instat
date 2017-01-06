@@ -337,27 +337,27 @@ Public Class frmMain
         dlgNon_ParametricTwoWayAnova.ShowDialog()
     End Sub
 
-    Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseNewWorksheet.Click
+    Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareNewWorksheet.Click
         dlgNewWorksheet.ShowDialog()
     End Sub
 
-    Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseImportDailyData.Click
+    Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareImportDailyData.Click
 
     End Sub
 
-    Private Sub MakeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseMakeFactor.Click
+    Private Sub MakeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareMakeFactor.Click
         dlgMakeFactor.ShowDialog()
     End Sub
 
-    Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseShiftDailyData.Click
+    Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareShiftDailyData.Click
         dlgShiftDailyData.ShowDialog()
     End Sub
 
-    Private Sub UnstackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseUnstackDailyData.Click
+    Private Sub UnstackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareUnstackDailyData.Click
         dlgUnstackDailyData.ShowDialog()
     End Sub
 
-    Private Sub StackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseStackDailyData.Click
+    Private Sub StackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareStackDailyData.Click
         dlgStackDailyData.ShowDialog()
     End Sub
     Private Sub mnuClimaticExamine_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamine.Click
@@ -1103,7 +1103,7 @@ Public Class frmMain
     Private Sub mnuDescribeMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateCanonicalCorrelations.Click
         dlgCanonicalCorrelationAnalysis.ShowDialog()
     End Sub
-    Private Sub mnuClimaticOrganiseSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseSummary.Click
+    Private Sub mnuClimaticOrganiseSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSummary.Click
         dlgSummary.ShowDialog()
     End Sub
 
@@ -1267,7 +1267,7 @@ Public Class frmMain
         dlgDisplayDaily.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseInventory_Click(sender As Object, e As EventArgs) Handles mnuClimaticOrganiseInventory.Click
+    Private Sub mnuClimaticOrganiseInventory_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareInventory.Click
         dlgInventoryPlot.ShowDialog()
     End Sub
 
