@@ -92,9 +92,11 @@ Public Class RLink
         Dim clsGetDataNames As New RFunction
 
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
-        chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
-        If chrDataFrameNames IsNot Nothing Then
-            lstDataFrameNames.AddRange(chrDataFrameNames)
+        If bInstatObjectExists Then
+            chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
+            If chrDataFrameNames IsNot Nothing Then
+                lstDataFrameNames.AddRange(chrDataFrameNames)
+            End If
         End If
         Return lstDataFrameNames
     End Function
@@ -590,12 +592,17 @@ Public Class RLink
         Return bExists
     End Function
 
-    Public Function GetDataFrameLength(strDataFrameName As String) As Integer
+    Public Function GetDataFrameLength(strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
         Dim intLength As Integer
         Dim clsDataFrameLength As New RFunction
 
         clsDataFrameLength.SetRCommand(strInstatDataObject & "$get_data_frame_length")
         clsDataFrameLength.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        If bUseCurrentFilter Then
+            clsDataFrameLength.AddParameter("use_current_filter", "TRUE")
+        Else
+            clsDataFrameLength.AddParameter("use_current_filter", "FALSE")
+        End If
         intLength = RunInternalScriptGetValue(clsDataFrameLength.ToScript()).AsInteger(0)
         Return intLength
     End Function
@@ -637,9 +644,11 @@ Public Class RLink
         Dim clsGetFilterNames As New RFunction
 
         clsGetFilterNames.SetRCommand(strInstatDataObject & "$get_filter_names")
-        clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        If strDataFrameName <> "" Then
+            clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
         expFilterNames = RunInternalScriptGetValue(clsGetFilterNames.ToScript(), bSilent:=True)
-        If Not expFilterNames.Type = Internals.SymbolicExpressionType.Null Then
+        If expFilterNames IsNot Nothing AndAlso Not expFilterNames.Type = Internals.SymbolicExpressionType.Null Then
             chrFilterNames = expFilterNames.AsCharacter()
             If chrFilterNames.Length > 0 Then
                 lstFilterNames.AddRange(chrFilterNames)
