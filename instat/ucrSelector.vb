@@ -110,6 +110,13 @@ Public Class ucrSelector
         End If
     End Sub
 
+    Public Sub AddAll()
+        If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
+            SelectAll()
+            Add()
+        End If
+    End Sub
+
     Public Sub Add()
         If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
@@ -153,6 +160,11 @@ Public Class ucrSelector
         If e.KeyChar = vbCr Then
             Add()
         End If
+        If lstAvailableVariable.SelectedItems.Count > 0 Then
+            If Keys.ControlKey AndAlso Keys.A Then
+                SelectAll()
+            End If
+        End If
     End Sub
 
     Private Sub ucrSelector_ResetAll() Handles Me.ResetAll
@@ -168,14 +180,7 @@ Public Class ucrSelector
     End Sub
 
     Private Sub SelectAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectAllToolStripMenuItem.Click
-        Dim lviTemp As ListViewItem
-
-        lstAvailableVariable.BeginUpdate()
-        For Each lviTemp In lstAvailableVariable.Items
-            lviTemp.Selected = True
-        Next
-        lstAvailableVariable.EndUpdate()
-
+        SelectAll()
     End Sub
 
     Public Sub AddToVariablesList(strVariable As String)
@@ -295,4 +300,17 @@ Public Class ucrSelector
         Next
         Return False
     End Function
+
+    Private Sub AddAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAllToolStripMenuItem.Click
+        AddAll()
+    End Sub
+
+    Private Sub SelectAll()
+        Dim lviTemp As ListViewItem
+        lstAvailableVariable.BeginUpdate()
+        For Each lviTemp In lstAvailableVariable.Items
+            lviTemp.Selected = True
+        Next
+        lstAvailableVariable.EndUpdate()
+    End Sub
 End Class

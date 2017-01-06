@@ -886,8 +886,8 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
 }
 )
 
-data_object$set("public", "get_data_frame_length", function() {
-  return(nrow(self$get_data_frame(use_current_filter = FALSE)))
+data_object$set("public", "get_data_frame_length", function(use_current_filter = FALSE) {
+  return(nrow(self$get_data_frame(use_current_filter = use_current_filter)))
 }
 )
 
@@ -1531,7 +1531,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
+data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, coord_flip = FALSE, ...) {
   if(!all(columns %in% self$get_column_names())) {
     stop("Not all columns found in the data")
   }
@@ -1605,6 +1605,9 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + curr_geom()
     }
 
+    if (coord_flip) {
+      g <- g + coord_flip()
+    }   
     if(free_scale_axis) {
       g <- g + facet_wrap(facets = ~ variable, scales = "free", ncol = ncol)
     }
@@ -1635,6 +1638,9 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       else {
         g <- ggplot(data = curr_data, mapping = aes_(x = as.name(column))) + ylab("")
       }
+      if (coord_flip) {
+        g <- g + coord_flip()
+      } 
       if(curr_geom_name == "box_jitter") {
         g <- g + geom_boxplot() + geom_jitter()
       }
