@@ -268,6 +268,12 @@
     <Compile Include="dlgFitModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgGeneral.Designer.vb">
+      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGeneral.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromODK.Designer.vb">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
     </Compile>
@@ -2486,6 +2492,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneral.resx">
+      <DependentUpon>dlgGeneral.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGeneralForGraphics.fr-FR.resx">
       <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
