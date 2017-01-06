@@ -154,6 +154,12 @@
     <Compile Include="dlgAddComment.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgAddKey.Designer.vb">
+      <DependentUpon>dlgAddKey.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAddKey.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgAddLink.Designer.vb">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
     </Compile>
@@ -254,6 +260,12 @@
       <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgImportOpenRefine.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgInfill.Designer.vb">
+      <DependentUpon>dlgInfill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInfill.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMakeDate.Designer.vb">
@@ -2486,6 +2498,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportOpenRefine.resx">
       <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInfill.resx">
+      <DependentUpon>dlgInfill.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
