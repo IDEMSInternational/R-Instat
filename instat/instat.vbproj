@@ -364,6 +364,12 @@
     <Compile Include="dlgShowModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSunshine.Designer.vb">
+      <DependentUpon>dlgSunshine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSunshine.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTemperature.Designer.vb">
       <DependentUpon>dlgTemperature.vb</DependentUpon>
     </Compile>
@@ -2888,6 +2894,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgShowModel.sw-KE.resx">
       <DependentUpon>dlgShowModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSunshine.resx">
+      <DependentUpon>dlgSunshine.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTemperature.resx">
       <DependentUpon>dlgTemperature.vb</DependentUpon>
