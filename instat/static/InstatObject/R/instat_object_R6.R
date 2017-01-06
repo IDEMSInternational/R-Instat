@@ -1065,3 +1065,8 @@ instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c())
   self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
 )
+
+instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
+  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)
+}
+)
