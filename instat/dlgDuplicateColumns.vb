@@ -17,6 +17,9 @@
 Imports instat.Translations
 Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
+    Dim bUseSelectedColumn As Boolean = False
+    Dim strSelectedColumn As String = ""
+    Dim strSelectedDataFrame As String = ""
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -24,13 +27,18 @@ Public Class dlgDuplicateColumns
             SetDefaults()
             bFirstLoad = False
         End If
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
+        End If
         'checks OkEnabled
         TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorForDuplicateColumn.Reset()
-        ucrInputColumnName.Reset()
+        rdoAfter.Checked = True
+        PositionOfDuplicatedCols()
+        ucrInputColumnName.ResetText()
     End Sub
     Private Sub InitialiseDialog()
         'sets the function
@@ -42,6 +50,19 @@ Public Class dlgDuplicateColumns
         ucrReceiverForCopyColumns.bUseFilteredData = False
         ucrInputColumnName.SetDataFrameSelector(ucrSelectorForDuplicateColumn.ucrAvailableDataFrames)
         ucrInputColumnName.SetValidationTypeAsRVariable()
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+
+    Private Sub SetDefaultColumn()
+        ucrSelectorForDuplicateColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverForCopyColumns.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -66,6 +87,7 @@ Public Class dlgDuplicateColumns
         If Not ucrInputColumnName.bUserTyped Then
             ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
         End If
+        PositionOfDuplicatedCols()
         TestOKEnabled()
     End Sub
 
@@ -83,6 +105,34 @@ Public Class dlgDuplicateColumns
             ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & ucrInputColumnName.GetText & Chr(34))
         Else
             ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
+    End Sub
+
+    Private Sub grpDuplicatedColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAfter.CheckedChanged, rdoBefore.CheckedChanged, rdoBeginning.CheckedChanged, rdoEnd.CheckedChanged
+        PositionOfDuplicatedCols()
+    End Sub
+
+    Private Sub PositionOfDuplicatedCols()
+        If rdoAfter.Checked Then
+            If Not ucrReceiverForCopyColumns.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverForCopyColumns.GetVariableNames)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            End If
+            ucrBase.clsRsyntax.AddParameter("before", "FALSE")
+            ElseIf rdoBeginning.Checked Then
+                ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            ElseIf rdoBefore.Checked Then
+            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+            If Not ucrReceiverForCopyColumns.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverForCopyColumns.GetVariableNames)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            End If
+        Else
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            ucrBase.clsRsyntax.AddParameter("before", "FALSE")
         End If
     End Sub
 End Class
