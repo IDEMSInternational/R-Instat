@@ -181,6 +181,10 @@ Public Class clsGridLink
             grdVariablesMetadata.Visible = True
             grdMetadata.Visible = True
         End If
+        'TODO TEMPORARY THIS MUST BE REMOVED
+        'Cannot refer to frmEditor directly
+        'Could fix by having user control for grid and here raising event handled in frmEditor
+        frmEditor.UpdateCurrentWorksheet()
     End Sub
 
     Public Sub SetMetadata(tmpStrMetadata As String)
