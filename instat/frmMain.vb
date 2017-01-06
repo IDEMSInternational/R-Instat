@@ -1351,7 +1351,7 @@ Public Class frmMain
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMarkovModelling_Click(sender As Object, e As EventArgs) Handles mnuClimaticMarkovModelling.Click
+    Private Sub mnuClimaticMarkovModelling_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelsMarkovModelling.Click
         dlgNewMarkovChains.ShowDialog()
     End Sub
 

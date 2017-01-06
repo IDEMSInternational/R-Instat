@@ -206,7 +206,7 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelsMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -418,6 +418,8 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelsExtremes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelsCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1687,17 +1689,17 @@ Partial Class frmMain
         '
         'mnuClimaticModels
         '
-        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMarkovModelling})
+        Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticModelsExtremes, Me.mnuClimaticModelsCircular, Me.mnuClimaticModelsMarkovModelling})
         Me.mnuClimaticModels.Name = "mnuClimaticModels"
         Me.mnuClimaticModels.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticModels.Text = "Model"
         '
-        'mnuClimaticMarkovModelling
+        'mnuClimaticModelsMarkovModelling
         '
-        Me.mnuClimaticMarkovModelling.Name = "mnuClimaticMarkovModelling"
-        Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(180, 22)
-        Me.mnuClimaticMarkovModelling.Tag = "Markov_Modelling"
-        Me.mnuClimaticMarkovModelling.Text = "Markov Modelling..."
+        Me.mnuClimaticModelsMarkovModelling.Name = "mnuClimaticModelsMarkovModelling"
+        Me.mnuClimaticModelsMarkovModelling.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClimaticModelsMarkovModelling.Tag = "Markov_Modelling"
+        Me.mnuClimaticModelsMarkovModelling.Text = "Markov Modelling..."
         '
         'ToolStripSeparator23
         '
@@ -2325,6 +2327,7 @@ Partial Class frmMain
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.mnuBar.ShowItemToolTips = True
         Me.mnuBar.Size = New System.Drawing.Size(769, 24)
         Me.mnuBar.TabIndex = 6
         Me.mnuBar.Text = "Menu_strip"
@@ -3219,6 +3222,18 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
+        'mnuClimaticModelsExtremes
+        '
+        Me.mnuClimaticModelsExtremes.Name = "mnuClimaticModelsExtremes"
+        Me.mnuClimaticModelsExtremes.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClimaticModelsExtremes.Text = "Extremes..."
+        '
+        'mnuClimaticModelsCircular
+        '
+        Me.mnuClimaticModelsCircular.Name = "mnuClimaticModelsCircular"
+        Me.mnuClimaticModelsCircular.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClimaticModelsCircular.Text = "Circular..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3609,7 +3624,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPICSACrops As ToolStripMenuItem
     Friend WithEvents mnuClimaticSCF As ToolStripMenuItem
     Friend WithEvents mnuClimaticModels As ToolStripMenuItem
-    Friend WithEvents mnuClimaticMarkovModelling As ToolStripMenuItem
+    Friend WithEvents mnuClimaticModelsMarkovModelling As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeSunshineRadiation As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeGeneral As ToolStripMenuItem
     Friend WithEvents mnuClimaticMoreGraphs As ToolStripMenuItem
@@ -3638,4 +3653,6 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseKeysAndLinksAddLink As ToolStripMenuItem
     Friend WithEvents mnuOrganiseKeysAndLinksViewAndRemoveKeys As ToolStripMenuItem
     Friend WithEvents mnuOrganiseKeysAndLinksAddComment As ToolStripMenuItem
+    Friend WithEvents mnuClimaticModelsExtremes As ToolStripMenuItem
+    Friend WithEvents mnuClimaticModelsCircular As ToolStripMenuItem
 End Class
