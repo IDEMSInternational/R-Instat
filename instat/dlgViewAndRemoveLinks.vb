@@ -28,7 +28,7 @@ Public Class dlgViewAndRemoveLinks
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 508
+        ucrBase.iHelpTopicID = 507
     End Sub
 
     Private Sub TestOKEnabled()
