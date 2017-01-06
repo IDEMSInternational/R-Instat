@@ -914,8 +914,8 @@ instat_object$set("public","data_frame_exists", function(data_name) {
 } 
 )
 
-instat_object$set("public","add_key", function(data_name, col_names) {
-  self$get_data_objects(data_name)$add_key(col_names)
+instat_object$set("public","add_key", function(data_name, col_names, key_name) {
+  self$get_data_objects(data_name)$add_key(col_names, key_name)
   names(col_names) <- col_names
   self$add_link(data_name, data_name, col_names, keyed_link_label)
   invisible(sapply(self$get_data_objects(), function(x) if(!x$is_metadata(is_linkable)) x$append_to_metadata(is_linkable, FALSE)))
@@ -1063,5 +1063,10 @@ instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c())
   self$import_data(data_tables = data_list)
   self$add_key(data_names[2], c("lat", "lon"))
   self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
+}
+)
+
+instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
+  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)
 }
 )
