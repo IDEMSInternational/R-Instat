@@ -35,17 +35,17 @@ Partial Class dlgNewMarkovChains
         Me.ucrInputExcludeSep = New instat.ucrInputComboBox()
         Me.lblExcludeSep = New System.Windows.Forms.Label()
         Me.grpSeasonalityHarmonics = New System.Windows.Forms.GroupBox()
-        Me.grpOrder = New System.Windows.Forms.GroupBox()
-        Me.nudSeasonalityFrom = New System.Windows.Forms.NumericUpDown()
-        Me.nudSeasonalityTo = New System.Windows.Forms.NumericUpDown()
-        Me.nudOrderFrom = New System.Windows.Forms.NumericUpDown()
-        Me.nudOrderTo = New System.Windows.Forms.NumericUpDown()
-        Me.lblSeasonalityFrom = New System.Windows.Forms.Label()
         Me.lblSeasonalityTo = New System.Windows.Forms.Label()
-        Me.lblOrderFrom = New System.Windows.Forms.Label()
-        Me.lblOrderTo = New System.Windows.Forms.Label()
-        Me.lblMarkovType = New System.Windows.Forms.Label()
+        Me.lblSeasonalityFrom = New System.Windows.Forms.Label()
+        Me.nudSeasonalityTo = New System.Windows.Forms.NumericUpDown()
+        Me.nudSeasonalityFrom = New System.Windows.Forms.NumericUpDown()
+        Me.grpOrder = New System.Windows.Forms.GroupBox()
         Me.ucrInputMarkovType = New instat.ucrInputComboBox()
+        Me.lblMarkovType = New System.Windows.Forms.Label()
+        Me.lblOrderTo = New System.Windows.Forms.Label()
+        Me.lblOrderFrom = New System.Windows.Forms.Label()
+        Me.nudOrderTo = New System.Windows.Forms.NumericUpDown()
+        Me.nudOrderFrom = New System.Windows.Forms.NumericUpDown()
         Me.ucrInputInteractions = New instat.ucrInputComboBox()
         Me.lblInteractions = New System.Windows.Forms.Label()
         Me.lblAdditionalVariables = New System.Windows.Forms.Label()
@@ -56,11 +56,11 @@ Partial Class dlgNewMarkovChains
         Me.chkGraph = New System.Windows.Forms.CheckBox()
         Me.ucrInputSaveModel = New instat.ucrInputComboBox()
         Me.grpSeasonalityHarmonics.SuspendLayout()
-        Me.grpOrder.SuspendLayout()
-        CType(Me.nudSeasonalityFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSeasonalityTo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudOrderFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSeasonalityFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpOrder.SuspendLayout()
         CType(Me.nudOrderTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudOrderFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -182,6 +182,38 @@ Partial Class dlgNewMarkovChains
         Me.grpSeasonalityHarmonics.TabStop = False
         Me.grpSeasonalityHarmonics.Text = "Seasonality (Harmonics)"
         '
+        'lblSeasonalityTo
+        '
+        Me.lblSeasonalityTo.AutoSize = True
+        Me.lblSeasonalityTo.Location = New System.Drawing.Point(7, 52)
+        Me.lblSeasonalityTo.Name = "lblSeasonalityTo"
+        Me.lblSeasonalityTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblSeasonalityTo.TabIndex = 3
+        Me.lblSeasonalityTo.Text = "To:"
+        '
+        'lblSeasonalityFrom
+        '
+        Me.lblSeasonalityFrom.AutoSize = True
+        Me.lblSeasonalityFrom.Location = New System.Drawing.Point(7, 25)
+        Me.lblSeasonalityFrom.Name = "lblSeasonalityFrom"
+        Me.lblSeasonalityFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblSeasonalityFrom.TabIndex = 2
+        Me.lblSeasonalityFrom.Text = "From:"
+        '
+        'nudSeasonalityTo
+        '
+        Me.nudSeasonalityTo.Location = New System.Drawing.Point(115, 45)
+        Me.nudSeasonalityTo.Name = "nudSeasonalityTo"
+        Me.nudSeasonalityTo.Size = New System.Drawing.Size(48, 20)
+        Me.nudSeasonalityTo.TabIndex = 1
+        '
+        'nudSeasonalityFrom
+        '
+        Me.nudSeasonalityFrom.Location = New System.Drawing.Point(115, 19)
+        Me.nudSeasonalityFrom.Name = "nudSeasonalityFrom"
+        Me.nudSeasonalityFrom.Size = New System.Drawing.Size(48, 20)
+        Me.nudSeasonalityFrom.TabIndex = 0
+        '
         'grpOrder
         '
         Me.grpOrder.Controls.Add(Me.ucrInputMarkovType)
@@ -197,69 +229,13 @@ Partial Class dlgNewMarkovChains
         Me.grpOrder.TabStop = False
         Me.grpOrder.Text = "Order"
         '
-        'nudSeasonalityFrom
+        'ucrInputMarkovType
         '
-        Me.nudSeasonalityFrom.Location = New System.Drawing.Point(115, 19)
-        Me.nudSeasonalityFrom.Name = "nudSeasonalityFrom"
-        Me.nudSeasonalityFrom.Size = New System.Drawing.Size(48, 20)
-        Me.nudSeasonalityFrom.TabIndex = 0
-        '
-        'nudSeasonalityTo
-        '
-        Me.nudSeasonalityTo.Location = New System.Drawing.Point(115, 45)
-        Me.nudSeasonalityTo.Name = "nudSeasonalityTo"
-        Me.nudSeasonalityTo.Size = New System.Drawing.Size(48, 20)
-        Me.nudSeasonalityTo.TabIndex = 1
-        '
-        'nudOrderFrom
-        '
-        Me.nudOrderFrom.Location = New System.Drawing.Point(132, 19)
-        Me.nudOrderFrom.Name = "nudOrderFrom"
-        Me.nudOrderFrom.Size = New System.Drawing.Size(48, 20)
-        Me.nudOrderFrom.TabIndex = 1
-        '
-        'nudOrderTo
-        '
-        Me.nudOrderTo.Location = New System.Drawing.Point(132, 45)
-        Me.nudOrderTo.Name = "nudOrderTo"
-        Me.nudOrderTo.Size = New System.Drawing.Size(48, 20)
-        Me.nudOrderTo.TabIndex = 2
-        '
-        'lblSeasonalityFrom
-        '
-        Me.lblSeasonalityFrom.AutoSize = True
-        Me.lblSeasonalityFrom.Location = New System.Drawing.Point(7, 25)
-        Me.lblSeasonalityFrom.Name = "lblSeasonalityFrom"
-        Me.lblSeasonalityFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblSeasonalityFrom.TabIndex = 2
-        Me.lblSeasonalityFrom.Text = "From:"
-        '
-        'lblSeasonalityTo
-        '
-        Me.lblSeasonalityTo.AutoSize = True
-        Me.lblSeasonalityTo.Location = New System.Drawing.Point(7, 52)
-        Me.lblSeasonalityTo.Name = "lblSeasonalityTo"
-        Me.lblSeasonalityTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblSeasonalityTo.TabIndex = 3
-        Me.lblSeasonalityTo.Text = "To:"
-        '
-        'lblOrderFrom
-        '
-        Me.lblOrderFrom.AutoSize = True
-        Me.lblOrderFrom.Location = New System.Drawing.Point(7, 26)
-        Me.lblOrderFrom.Name = "lblOrderFrom"
-        Me.lblOrderFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblOrderFrom.TabIndex = 3
-        Me.lblOrderFrom.Text = "From:"
-        '
-        'lblOrderTo
-        '
-        Me.lblOrderTo.AutoSize = True
-        Me.lblOrderTo.Location = New System.Drawing.Point(5, 47)
-        Me.lblOrderTo.Name = "lblOrderTo"
-        Me.lblOrderTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblOrderTo.TabIndex = 4
-        Me.lblOrderTo.Text = "To:"
+        Me.ucrInputMarkovType.IsReadOnly = False
+        Me.ucrInputMarkovType.Location = New System.Drawing.Point(84, 71)
+        Me.ucrInputMarkovType.Name = "ucrInputMarkovType"
+        Me.ucrInputMarkovType.Size = New System.Drawing.Size(96, 21)
+        Me.ucrInputMarkovType.TabIndex = 6
         '
         'lblMarkovType
         '
@@ -270,13 +246,37 @@ Partial Class dlgNewMarkovChains
         Me.lblMarkovType.TabIndex = 5
         Me.lblMarkovType.Text = "Markov Type:"
         '
-        'ucrInputMarkovType
+        'lblOrderTo
         '
-        Me.ucrInputMarkovType.IsReadOnly = False
-        Me.ucrInputMarkovType.Location = New System.Drawing.Point(84, 71)
-        Me.ucrInputMarkovType.Name = "ucrInputMarkovType"
-        Me.ucrInputMarkovType.Size = New System.Drawing.Size(96, 21)
-        Me.ucrInputMarkovType.TabIndex = 6
+        Me.lblOrderTo.AutoSize = True
+        Me.lblOrderTo.Location = New System.Drawing.Point(5, 47)
+        Me.lblOrderTo.Name = "lblOrderTo"
+        Me.lblOrderTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblOrderTo.TabIndex = 4
+        Me.lblOrderTo.Text = "To:"
+        '
+        'lblOrderFrom
+        '
+        Me.lblOrderFrom.AutoSize = True
+        Me.lblOrderFrom.Location = New System.Drawing.Point(7, 26)
+        Me.lblOrderFrom.Name = "lblOrderFrom"
+        Me.lblOrderFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblOrderFrom.TabIndex = 3
+        Me.lblOrderFrom.Text = "From:"
+        '
+        'nudOrderTo
+        '
+        Me.nudOrderTo.Location = New System.Drawing.Point(132, 45)
+        Me.nudOrderTo.Name = "nudOrderTo"
+        Me.nudOrderTo.Size = New System.Drawing.Size(48, 20)
+        Me.nudOrderTo.TabIndex = 2
+        '
+        'nudOrderFrom
+        '
+        Me.nudOrderFrom.Location = New System.Drawing.Point(132, 19)
+        Me.nudOrderFrom.Name = "nudOrderFrom"
+        Me.nudOrderFrom.Size = New System.Drawing.Size(48, 20)
+        Me.nudOrderFrom.TabIndex = 1
         '
         'ucrInputInteractions
         '
@@ -394,12 +394,12 @@ Partial Class dlgNewMarkovChains
         Me.Text = "Markov Chains"
         Me.grpSeasonalityHarmonics.ResumeLayout(False)
         Me.grpSeasonalityHarmonics.PerformLayout()
+        CType(Me.nudSeasonalityTo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSeasonalityFrom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpOrder.ResumeLayout(False)
         Me.grpOrder.PerformLayout()
-        CType(Me.nudSeasonalityFrom, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudSeasonalityTo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudOrderFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudOrderTo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudOrderFrom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
