@@ -346,6 +346,12 @@
     <Compile Include="dlgCorruptionOrganise.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPCSARainfall.Designer.vb">
+      <DependentUpon>dlgPCSARainfall.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPCSARainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgQCProcedures.Designer.vb">
       <DependentUpon>dlgQCProcedures.vb</DependentUpon>
     </Compile>
@@ -2681,6 +2687,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionOrganise.resx">
       <DependentUpon>dlgCorruptionOrganise.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPCSARainfall.resx">
+      <DependentUpon>dlgPCSARainfall.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteColumn.fr-FR.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
