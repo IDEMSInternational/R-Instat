@@ -352,6 +352,12 @@
     <Compile Include="dlgPCSARainfall.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPICSATemperature.Designer.vb">
+      <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPICSATemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgQCProcedures.Designer.vb">
       <DependentUpon>dlgQCProcedures.vb</DependentUpon>
     </Compile>
@@ -2699,6 +2705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSATemperature.resx">
+      <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPopulationPyramids.fr-FR.resx">
       <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
