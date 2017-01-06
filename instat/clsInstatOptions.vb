@@ -4,7 +4,6 @@ Imports unvell.ReoGrid
 
 <Serializable()> Public Class InstatOptions
     Public bIncludeRDefaultParameters As Boolean
-    Public bGraphinOutputWindow As Boolean
     Public fntOutput, fntScript, fntComment, fntEditor As Font
     Public clrOutput, clrScript, clrComment, clrEditor As Color
     Public strComment, strLanguageCultureCode As String
@@ -17,7 +16,6 @@ Imports unvell.ReoGrid
     Public Sub New()
         'TODO Is this sensible to do in constructor?
         bIncludeRDefaultParameters = False
-        bGraphinOutputWindow = True
         SetFormatOutput(New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular), Color.Blue)
         SetFormatComment(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Green)
         SetFormatCommand(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Black)
