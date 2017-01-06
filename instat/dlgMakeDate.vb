@@ -18,6 +18,9 @@ Imports instat.Translations
 Public Class dlgMakeDate
     Public clsPaste As New RFunction
     Public bFirstLoad As Boolean = True
+    Dim bUseSelectedColumn As Boolean = False
+    Dim strSelectedColumn As String = ""
+    Dim strSelectedDataFrame As String = ""
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -25,6 +28,9 @@ Public Class dlgMakeDate
             bFirstLoad = False
         Else
             ReopenDialog()
+        End If
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
         End If
         TestOKEnabled()
         autoTranslate(Me)
@@ -125,6 +131,20 @@ Public Class dlgMakeDate
         nudCutOffTwo.Value = 0
         chkMore.Checked = False
         chkMore.Visible = True
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        rdoSingleColumn.Checked = True
+        ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+            ucrReceiverForDate.Add(strSelectedColumn, strSelectedDataFrame)
+            bUseSelectedColumn = False
+
     End Sub
 
     Private Sub TestOKEnabled()

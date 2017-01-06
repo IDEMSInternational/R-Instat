@@ -692,8 +692,8 @@ instat_object$set("public", "insert_row_in_data", function(data_name, start_row,
 }
 )
 
-instat_object$set("public", "get_data_frame_length", function(data_name) {
-  self$get_data_objects(data_name)$get_data_frame_length()
+instat_object$set("public", "get_data_frame_length", function(data_name, use_current_filter = FALSE) {
+  self$get_data_objects(data_name)$get_data_frame_length(use_current_filter)
 }
 )
 
@@ -972,8 +972,8 @@ instat_object$set("public","set_column_colours_by_metadata", function(data_name,
 }
 )
 
-instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
-  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, ncol = ncol, ... = ...)
+instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, coord_flip  = FALSE, ...) {
+  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, ncol = ncol, coord_flip = coord_flip, ... = ...)
 }
 )
 
