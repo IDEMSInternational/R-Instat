@@ -1355,6 +1355,10 @@ Public Class frmMain
         dlgNewMarkovChains.ShowDialog()
     End Sub
 
+    Private Sub mnuCliDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuCliDefineClimaticData.Click
+        DlgDefineClimaticData.ShowDialog()
+    End Sub
+
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
