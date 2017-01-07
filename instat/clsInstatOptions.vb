@@ -13,12 +13,12 @@ Imports unvell.ReoGrid
     Public lstColourPalette As List(Of Color)
     Public strGraphDisplayOption As String
     Public bCommandsinOutput As Boolean
-    Public bDefaultOutput As Boolean 'sets the default for comments on the dialog
+    Public bDefaultforComments As Boolean 'sets the default for comments on the dialog
 
     Public Sub New()
         'TODO Is this sensible to do in constructor?
         bIncludeRDefaultParameters = False
-        bDefaultOutput = True
+        bDefaultforComments = True
         bCommandsinOutput = False
         SetFormatOutput(New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular), Color.Blue)
         SetFormatComment(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Green)
