@@ -178,6 +178,12 @@
     <Compile Include="dlgAppend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCircular.Designer.vb">
+      <DependentUpon>dlgCircular.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircular.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCliData.Designer.vb">
       <DependentUpon>dlgCliData.vb</DependentUpon>
     </Compile>
@@ -2276,6 +2282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChiSquareTest.sw-KE.resx">
       <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircular.resx">
+      <DependentUpon>dlgCircular.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliBoxplot.fr-FR.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
