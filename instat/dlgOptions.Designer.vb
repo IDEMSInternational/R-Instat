@@ -72,13 +72,15 @@ Partial Class dlgOptions
         Me.tbpWorkingDirectory = New System.Windows.Forms.TabPage()
         Me.cmdWorkingDirectory = New System.Windows.Forms.Button()
         Me.lblWorkingDirectory = New System.Windows.Forms.Label()
+        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
         Me.tbpGraphDisplay = New System.Windows.Forms.TabPage()
+        Me.rdoDisplayinSeparateWindows = New System.Windows.Forms.RadioButton()
+        Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
+        Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
-        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
-        Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
-        Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
-        Me.rdoDisplayinSeparateWindows = New System.Windows.Forms.RadioButton()
+        Me.chkDefault = New System.Windows.Forms.CheckBox()
+        Me.chkShowRCommandsinOutputWindow = New System.Windows.Forms.CheckBox()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
@@ -321,6 +323,8 @@ Partial Class dlgOptions
         '
         'tbpOutputWindow
         '
+        Me.tbpOutputWindow.Controls.Add(Me.chkShowRCommandsinOutputWindow)
+        Me.tbpOutputWindow.Controls.Add(Me.chkDefault)
         Me.tbpOutputWindow.Controls.Add(Me.pnFormatOptions)
         Me.tbpOutputWindow.Location = New System.Drawing.Point(4, 22)
         Me.tbpOutputWindow.Name = "tbpOutputWindow"
@@ -564,6 +568,14 @@ Partial Class dlgOptions
         Me.lblWorkingDirectory.TabIndex = 0
         Me.lblWorkingDirectory.Text = "Working Directory:"
         '
+        'ucrWorkingDirectory
+        '
+        Me.ucrWorkingDirectory.IsReadOnly = False
+        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
+        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
+        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
+        Me.ucrWorkingDirectory.TabIndex = 1
+        '
         'tbpGraphDisplay
         '
         Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinSeparateWindows)
@@ -576,6 +588,39 @@ Partial Class dlgOptions
         Me.tbpGraphDisplay.TabIndex = 12
         Me.tbpGraphDisplay.Text = "Graph Display"
         Me.tbpGraphDisplay.UseVisualStyleBackColor = True
+        '
+        'rdoDisplayinSeparateWindows
+        '
+        Me.rdoDisplayinSeparateWindows.AutoSize = True
+        Me.rdoDisplayinSeparateWindows.Location = New System.Drawing.Point(6, 52)
+        Me.rdoDisplayinSeparateWindows.Name = "rdoDisplayinSeparateWindows"
+        Me.rdoDisplayinSeparateWindows.Size = New System.Drawing.Size(163, 17)
+        Me.rdoDisplayinSeparateWindows.TabIndex = 1
+        Me.rdoDisplayinSeparateWindows.TabStop = True
+        Me.rdoDisplayinSeparateWindows.Text = "Display in Separate Windows"
+        Me.rdoDisplayinSeparateWindows.UseVisualStyleBackColor = True
+        '
+        'rdoDisplayinRViewer
+        '
+        Me.rdoDisplayinRViewer.AutoSize = True
+        Me.rdoDisplayinRViewer.Location = New System.Drawing.Point(6, 29)
+        Me.rdoDisplayinRViewer.Name = "rdoDisplayinRViewer"
+        Me.rdoDisplayinRViewer.Size = New System.Drawing.Size(116, 17)
+        Me.rdoDisplayinRViewer.TabIndex = 1
+        Me.rdoDisplayinRViewer.TabStop = True
+        Me.rdoDisplayinRViewer.Text = "Display in R Viewer"
+        Me.rdoDisplayinRViewer.UseVisualStyleBackColor = True
+        '
+        'rdoDisplayinOutputWindow
+        '
+        Me.rdoDisplayinOutputWindow.AutoSize = True
+        Me.rdoDisplayinOutputWindow.Location = New System.Drawing.Point(6, 6)
+        Me.rdoDisplayinOutputWindow.Name = "rdoDisplayinOutputWindow"
+        Me.rdoDisplayinOutputWindow.Size = New System.Drawing.Size(147, 17)
+        Me.rdoDisplayinOutputWindow.TabIndex = 1
+        Me.rdoDisplayinOutputWindow.TabStop = True
+        Me.rdoDisplayinOutputWindow.Text = "Display in Output Window"
+        Me.rdoDisplayinOutputWindow.UseVisualStyleBackColor = True
         '
         'trOptions
         '
@@ -624,46 +669,25 @@ Partial Class dlgOptions
         Me.spltControls.SplitterDistance = 184
         Me.spltControls.TabIndex = 8
         '
-        'ucrWorkingDirectory
+        'chkDefault
         '
-        Me.ucrWorkingDirectory.IsReadOnly = False
-        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
-        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
-        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
-        Me.ucrWorkingDirectory.TabIndex = 1
+        Me.chkDefault.AutoSize = True
+        Me.chkDefault.Location = New System.Drawing.Point(10, 145)
+        Me.chkDefault.Name = "chkDefault"
+        Me.chkDefault.Size = New System.Drawing.Size(60, 17)
+        Me.chkDefault.TabIndex = 24
+        Me.chkDefault.Text = "Default"
+        Me.chkDefault.UseVisualStyleBackColor = True
         '
-        'rdoDisplayinOutputWindow
+        'chkShowRCommandsinOutputWindow
         '
-        Me.rdoDisplayinOutputWindow.AutoSize = True
-        Me.rdoDisplayinOutputWindow.Location = New System.Drawing.Point(6, 6)
-        Me.rdoDisplayinOutputWindow.Name = "rdoDisplayinOutputWindow"
-        Me.rdoDisplayinOutputWindow.Size = New System.Drawing.Size(147, 17)
-        Me.rdoDisplayinOutputWindow.TabIndex = 1
-        Me.rdoDisplayinOutputWindow.TabStop = True
-        Me.rdoDisplayinOutputWindow.Text = "Display in Output Window"
-        Me.rdoDisplayinOutputWindow.UseVisualStyleBackColor = True
-        '
-        'rdoDisplayinRViewer
-        '
-        Me.rdoDisplayinRViewer.AutoSize = True
-        Me.rdoDisplayinRViewer.Location = New System.Drawing.Point(6, 29)
-        Me.rdoDisplayinRViewer.Name = "rdoDisplayinRViewer"
-        Me.rdoDisplayinRViewer.Size = New System.Drawing.Size(116, 17)
-        Me.rdoDisplayinRViewer.TabIndex = 1
-        Me.rdoDisplayinRViewer.TabStop = True
-        Me.rdoDisplayinRViewer.Text = "Display in R Viewer"
-        Me.rdoDisplayinRViewer.UseVisualStyleBackColor = True
-        '
-        'rdoDisplayinSeparateWindows
-        '
-        Me.rdoDisplayinSeparateWindows.AutoSize = True
-        Me.rdoDisplayinSeparateWindows.Location = New System.Drawing.Point(6, 52)
-        Me.rdoDisplayinSeparateWindows.Name = "rdoDisplayinSeparateWindows"
-        Me.rdoDisplayinSeparateWindows.Size = New System.Drawing.Size(163, 17)
-        Me.rdoDisplayinSeparateWindows.TabIndex = 1
-        Me.rdoDisplayinSeparateWindows.TabStop = True
-        Me.rdoDisplayinSeparateWindows.Text = "Display in Separate Windows"
-        Me.rdoDisplayinSeparateWindows.UseVisualStyleBackColor = True
+        Me.chkShowRCommandsinOutputWindow.AutoSize = True
+        Me.chkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
+        Me.chkShowRCommandsinOutputWindow.Name = "chkShowRCommandsinOutputWindow"
+        Me.chkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(207, 17)
+        Me.chkShowRCommandsinOutputWindow.TabIndex = 24
+        Me.chkShowRCommandsinOutputWindow.Text = "Show R Commands in Output Window"
+        Me.chkShowRCommandsinOutputWindow.UseVisualStyleBackColor = True
         '
         'dlgOptions
         '
@@ -774,4 +798,6 @@ Partial Class dlgOptions
     Friend WithEvents rdoDisplayinSeparateWindows As RadioButton
     Friend WithEvents rdoDisplayinRViewer As RadioButton
     Friend WithEvents rdoDisplayinOutputWindow As RadioButton
+    Friend WithEvents chkShowRCommandsinOutputWindow As CheckBox
+    Friend WithEvents chkDefault As CheckBox
 End Class
