@@ -36,6 +36,7 @@ Public Class dlgExtremes
         autoTranslate(Me)
         ucrReceiverDataToFit.Selector = ucrAddRemove
         ucrReceiverDataToFit.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 488
     End Sub
 
     Private Sub SetDefaults()
