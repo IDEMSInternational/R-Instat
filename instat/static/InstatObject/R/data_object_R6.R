@@ -1431,15 +1431,20 @@ data_object$set("public", "unfreeze_columns", function() {
 
 #TODO maybe get ride of this method as that you can't create a key without
 #     the instat object also creating a self link
-data_object$set("public", "add_key", function(col_names) {
+data_object$set("public", "add_key", function(col_names, key_name) {
   if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
     stop("key columns must have unique combinations")
+  }
+  if(sum(is.na(self$get_columns_from_data(col_names, use_current_filter = FALSE))) > 0) {
+    stop("key columns cannot have missing values")
   }
   if(self$is_key(col_names)) {
     message("A key with these columns already exists. No action will be taken.")
   }
   else {
-    private$keys[[length(private$keys) + 1]] <- col_names
+    if(missing(key_name)) key_name <- next_default_item("key", names(private$keys))
+    if(key_name %in% names(private$keys)) warning("A key called ", key_name, " already exists. It wil be replaced.")
+    private$keys[[key_name]] <- col_names
     self$append_to_variables_metadata(col_names, is_key_label, TRUE)
     if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
     self$append_to_metadata(is_linkable, TRUE)
@@ -1939,7 +1944,6 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
     }
     if(merge_required) {
       all_dates_factors <- rbind.fill(full_dates_list)
-      View(all_dates_factors)
       self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
       self$sort_dataframe(col_names = c(date_name, factors))
     }

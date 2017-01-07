@@ -28,15 +28,29 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrSelectorKeys = ucrReceiverSelectedKey.Selector
+        ucrReceiverSelectedKey.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 505
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If ucrReceiverSelectedKey.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub SetDefaults()
-
+        chkRemoveKey.Checked = False
     End Sub
 
+    Private Sub ucrReceiverSelectedKey_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelectedKey.SelectionChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
 End Class
