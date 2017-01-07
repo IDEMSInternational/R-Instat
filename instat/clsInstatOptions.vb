@@ -13,7 +13,7 @@ Imports unvell.ReoGrid
     Public lstColourPalette As List(Of Color)
     Public strGraphDisplayOption As String
     Public bCommandsinOutput As Boolean
-    Public bDefaultOutput As Boolean
+    Public bDefaultOutput As Boolean 'sets the default for comments on the dialog
 
     Public Sub New()
         'TODO Is this sensible to do in constructor?
