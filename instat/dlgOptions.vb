@@ -21,6 +21,7 @@ Imports instat.Translations
 Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
+    Public strOutputWindowDisplay As String
     Public strWorkingDirectory As String
     Private strGraphDisplayOption As String
     Private Panels As New List(Of Panel)()
@@ -56,7 +57,8 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
-
+        ucrDisplayOptions.SetItems({"Output only", "Output + Comments", "Output + Comments + R command(s)"})
+        ucrDisplayOptions.SetName("Output + Comments + R command(s)")
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -91,6 +93,14 @@ Public Class dlgOptions
         ElseIf frmMain.clsInstatOptions.strGraphDisplayOption = "view_R_viewer" Then
             rdoDisplayinRViewer.Checked = True
         End If
+
+        If frmMain.clsInstatOptions.strOutputWindowDisplay = "Output + Comments + R command(s)" Then
+            ucrDisplayOptions.SetName("Output + Comments + R command(s)")
+        ElseIf frmMain.clsInstatOptions.strOutputWindowDisplay = "Output + Comments" Then
+            ucrDisplayOptions.SetName("Output + Comments")
+        ElseIf frmMain.clsInstatOptions.strOutputWindowDisplay = "Output only" Then
+            ucrDisplayOptions.SetName("Output only")
+        End If
     End Sub
 
     Private Sub SetInstatOptions()
@@ -105,6 +115,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
+        frmMain.clsInstatOptions.SetOutputWindowDisplay(strOutputWindowDisplay)
 
     End Sub
 
@@ -338,5 +349,16 @@ Public Class dlgOptions
             ucrWorkingDirectory.SetName(strWorkingDirectory)
             ApplyEnabled(True)
         End If
+    End Sub
+
+    Private Sub ucrDisplayOptions_NameChanged() Handles ucrDisplayOptions.NameChanged
+        Select Case ucrDisplayOptions.GetText
+            Case "Output only"
+                strOutputWindowDisplay = "Output only"
+            Case "Output + Comments"
+                strOutputWindowDisplay = "Output only"
+            Case "Output + Comments + R command(s)"
+                strOutputWindowDisplay = "Output + Comments + R command(s)"
+        End Select
     End Sub
 End Class
