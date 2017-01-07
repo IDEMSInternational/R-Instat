@@ -300,14 +300,6 @@ Public Class dlgOptions
         ApplyEnabled(True)
     End Sub
 
-    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowRCommandsinOutputWindow.CheckedChanged
-        frmMain.clsInstatOptions.bCommandsinOutput = chkShowRCommandsinOutputWindow.Checked
-    End Sub
-
-    Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkDefault.CheckedChanged
-        frmMain.clsInstatOptions.bDefaultforComments = chkDefault.Checked
-    End Sub
-
     Private Sub ApplyEnabled(bEnable As Boolean)
         cmdApply.Enabled = bEnable
         cmdOk.Enabled = bEnable
