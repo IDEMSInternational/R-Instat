@@ -69,7 +69,7 @@ Public Class dlgOptions
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
-        chkDefault.Checked = frmMain.clsInstatOptions.bDefaultOutput
+        chkDefault.Checked = frmMain.clsInstatOptions.bDefaultforComments
         chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
@@ -109,7 +109,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
         frmMain.clsInstatOptions.SetOutputWindowDisplay(strOutputWindowDisplay)
         frmMain.clsInstatOptions.bCommandsinOutput = chkShowRCommandsinOutputWindow.Checked
-        frmMain.clsInstatOptions.bDefaultOutput = chkDefault.Checked
+        frmMain.clsInstatOptions.bDefaultforComments = chkDefault.Checked
 
 
     End Sub
@@ -305,7 +305,7 @@ Public Class dlgOptions
     End Sub
 
     Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkDefault.CheckedChanged
-        frmMain.clsInstatOptions.bDefaultOutput = chkDefault.Checked
+        frmMain.clsInstatOptions.bDefaultforComments = chkDefault.Checked
     End Sub
 
     Private Sub ApplyEnabled(bEnable As Boolean)
