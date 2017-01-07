@@ -1944,7 +1944,6 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
     }
     if(merge_required) {
       all_dates_factors <- rbind.fill(full_dates_list)
-      View(all_dates_factors)
       self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
       self$sort_dataframe(col_names = c(date_name, factors))
     }

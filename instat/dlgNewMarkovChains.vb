@@ -28,6 +28,7 @@ Public Class dlgNewMarkovChains
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 491
         ucrSelectorMarkovChains = ucrReceiverStation.Selector
         ucrInputExcludeSep.SetItems({"Exclude", "Separate"})
         ucrInputMarkovType.SetItems({"Full", "Dry", "Both"})

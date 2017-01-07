@@ -15,36 +15,26 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgDisplayDaily
+Public Class dlgQCProcedures
     Public bFirstLoad As Boolean = True
-    Private Sub dlgDisplayDaily_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgQCProcedures_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
         TestOKEnabled()
-
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 361
-        ucrBase.clsRsyntax.SetFunction("climate_obj$display_daily_rain()")
+        ucrBase.iHelpTopicID = 511
     End Sub
-    Private Sub SetDefaults()
-        ucrBase.OKEnabled(False)
-    End Sub
-    Private Sub ReopenDialog()
 
-    End Sub
     Private Sub TestOKEnabled()
 
     End Sub
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
+
+    Private Sub SetDefaults()
         TestOKEnabled()
     End Sub
 End Class
