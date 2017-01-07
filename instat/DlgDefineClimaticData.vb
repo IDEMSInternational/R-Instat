@@ -31,6 +31,7 @@ Public Class DlgDefineClimaticData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 328
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
         clsTypesFunction.SetRCommand("c")
         ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)

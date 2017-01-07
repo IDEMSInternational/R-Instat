@@ -148,6 +148,24 @@
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsRCodeStructure.vb" />
+    <Compile Include="dlgAddComment.Designer.vb">
+      <DependentUpon>dlgAddComment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAddComment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgAddKey.Designer.vb">
+      <DependentUpon>dlgAddKey.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAddKey.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgAddLink.Designer.vb">
+      <DependentUpon>dlgAddLink.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAddLink.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCalculationsSummary.Designer.vb">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
     </Compile>
@@ -160,10 +178,28 @@
     <Compile Include="dlgAppend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCliData.Designer.vb">
+      <DependentUpon>dlgCliData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCliData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticSummaries.Designer.vb">
+      <DependentUpon>dlgClimaticSummaries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticSummaries.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimdex.Designer.vb">
       <DependentUpon>dlgClimdex.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClimdex.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimSoft.Designer.vb">
+      <DependentUpon>dlgClimSoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimSoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCompareModels.Designer.vb">
@@ -182,6 +218,12 @@
       <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
     </Compile>
     <Compile Include="DlgDefineClimaticData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCorruptionDescribe.Designer.vb">
+      <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCorruptionDescribe.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
@@ -214,10 +256,22 @@
     <Compile Include="dlgExportToOpenRefine.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCorruptionFile.Designer.vb">
+      <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCorruptionFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFitModel.Designer.vb">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFitModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGeneral.Designer.vb">
+      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGeneral.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgImportFromODK.Designer.vb">
@@ -232,10 +286,28 @@
     <Compile Include="dlgImportOpenRefine.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgInfill.Designer.vb">
+      <DependentUpon>dlgInfill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInfill.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMakeDate.Designer.vb">
       <DependentUpon>dlgMakeDate.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgMakeDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCorruptionModel.Designer.vb">
+      <DependentUpon>dlgCorruptionModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCorruptionModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgNewMarkovChains.Designer.vb">
+      <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgNewMarkovChains.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneVarCompareModels.Designer.vb">
@@ -268,6 +340,36 @@
     <Compile Include="dlgOpenSST.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCorruptionOrganise.Designer.vb">
+      <DependentUpon>dlgCorruptionOrganise.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCorruptionOrganise.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPCSARainfall.Designer.vb">
+      <DependentUpon>dlgPCSARainfall.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPCSARainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPICSATemperature.Designer.vb">
+      <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPICSATemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgQCProcedures.Designer.vb">
+      <DependentUpon>dlgQCProcedures.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgQCProcedures.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRainfall.Designer.vb">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </Compile>
@@ -278,6 +380,18 @@
       <DependentUpon>dlgShowModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgShowModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSunshine.Designer.vb">
+      <DependentUpon>dlgSunshine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSunshine.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTemperature.Designer.vb">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTemperature.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariabletabulate.Designer.vb">
@@ -296,6 +410,30 @@
       <DependentUpon>DlgUseDate.vb</DependentUpon>
     </Compile>
     <Compile Include="DlgUseDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgViewAndRemoveKeys.Designer.vb">
+      <DependentUpon>dlgViewAndRemoveKeys.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewAndRemoveKeys.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgViewAndRemoveLinks.Designer.vb">
+      <DependentUpon>dlgViewAndRemoveLinks.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewAndRemoveLinks.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWindSpeed.Designer.vb">
+      <DependentUpon>dlgWindSpeed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWindSpeed.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGraphDisplay.Designer.vb">
+      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGraphDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmOutputWindow.Designer.vb">
@@ -1986,6 +2124,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgAddComment.resx">
+      <DependentUpon>dlgAddComment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAddLink.resx">
+      <DependentUpon>dlgAddLink.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculationsSummary.fr-FR.resx">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2136,8 +2280,17 @@
     <EmbeddedResource Include="dlgCliBoxplot.sw-KE.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCliData.resx">
+      <DependentUpon>dlgCliData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticSummaries.resx">
+      <DependentUpon>dlgClimaticSummaries.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimdex.resx">
       <DependentUpon>dlgClimdex.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimSoft.resx">
+      <DependentUpon>dlgClimSoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.fr-FR.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
@@ -2271,6 +2424,9 @@
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCorruptionDescribe.resx">
+      <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDescribeTwoVarGraph.fr-FR.resx">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </EmbeddedResource>
@@ -2316,6 +2472,9 @@
     <EmbeddedResource Include="dlgExportToOpenRefine.resx">
       <DependentUpon>dlgExportToOpenRefine.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCorruptionFile.resx">
+      <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFitModel.fr-FR.resx">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -2345,6 +2504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneral.resx">
+      <DependentUpon>dlgGeneral.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGeneralForGraphics.fr-FR.resx">
       <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
@@ -2415,6 +2577,9 @@
     <EmbeddedResource Include="dlgImportOpenRefine.resx">
       <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgInfill.resx">
+      <DependentUpon>dlgInfill.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -2466,6 +2631,9 @@
     <EmbeddedResource Include="dlgMetadata.sw-KE.resx">
       <DependentUpon>dlgMetadata.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCorruptionModel.resx">
+      <DependentUpon>dlgCorruptionModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleResponse.fr-FR.resx">
       <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
     </EmbeddedResource>
@@ -2474,6 +2642,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleResponse.sw-KE.resx">
       <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNewMarkovChains.resx">
+      <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSampleSummaryData.fr-FR.resx">
       <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
@@ -2520,6 +2691,12 @@
     <EmbeddedResource Include="dlgOpenSST.sw-KE.resx">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCorruptionOrganise.resx">
+      <DependentUpon>dlgCorruptionOrganise.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPCSARainfall.resx">
+      <DependentUpon>dlgPCSARainfall.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteColumn.fr-FR.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -2528,6 +2705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSATemperature.resx">
+      <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPopulationPyramids.fr-FR.resx">
       <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
@@ -2567,6 +2747,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.sw-KE.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgQCProcedures.resx">
+      <DependentUpon>dlgQCProcedures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainfall.resx">
+      <DependentUpon>dlgRainfall.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
@@ -2736,6 +2922,12 @@
     <EmbeddedResource Include="dlgShowModel.sw-KE.resx">
       <DependentUpon>dlgShowModel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSunshine.resx">
+      <DependentUpon>dlgSunshine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTemperature.resx">
+      <DependentUpon>dlgTemperature.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.fr-FR.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
     </EmbeddedResource>
@@ -2817,6 +3009,12 @@
     <EmbeddedResource Include="dlgUseGraph.sw-KE.resx">
       <DependentUpon>dlgUseGraph.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewAndRemoveKeys.resx">
+      <DependentUpon>dlgViewAndRemoveKeys.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewAndRemoveLinks.resx">
+      <DependentUpon>dlgViewAndRemoveLinks.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgViewDescriptives.fr-FR.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </EmbeddedResource>
@@ -2861,6 +3059,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindSpeed.resx">
+      <DependentUpon>dlgWindSpeed.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGraphDisplay.resx">
+      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
@@ -4064,6 +4268,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.sw-KE.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
