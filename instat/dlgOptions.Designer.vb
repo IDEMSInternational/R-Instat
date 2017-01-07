@@ -79,8 +79,8 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
-        Me.ucrDisplayOptions = New instat.ucrInputComboBox()
-        Me.lblDisplayOptions = New System.Windows.Forms.Label()
+        Me.chkDefault = New System.Windows.Forms.CheckBox()
+        Me.chkShowRCommandsinOutputWindow = New System.Windows.Forms.CheckBox()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
@@ -323,8 +323,8 @@ Partial Class dlgOptions
         '
         'tbpOutputWindow
         '
-        Me.tbpOutputWindow.Controls.Add(Me.lblDisplayOptions)
-        Me.tbpOutputWindow.Controls.Add(Me.ucrDisplayOptions)
+        Me.tbpOutputWindow.Controls.Add(Me.chkShowRCommandsinOutputWindow)
+        Me.tbpOutputWindow.Controls.Add(Me.chkDefault)
         Me.tbpOutputWindow.Controls.Add(Me.pnFormatOptions)
         Me.tbpOutputWindow.Location = New System.Drawing.Point(4, 22)
         Me.tbpOutputWindow.Name = "tbpOutputWindow"
@@ -669,22 +669,25 @@ Partial Class dlgOptions
         Me.spltControls.SplitterDistance = 184
         Me.spltControls.TabIndex = 8
         '
-        'ucrDisplayOptions
+        'chkDefault
         '
-        Me.ucrDisplayOptions.IsReadOnly = False
-        Me.ucrDisplayOptions.Location = New System.Drawing.Point(118, 154)
-        Me.ucrDisplayOptions.Name = "ucrDisplayOptions"
-        Me.ucrDisplayOptions.Size = New System.Drawing.Size(163, 21)
-        Me.ucrDisplayOptions.TabIndex = 22
+        Me.chkDefault.AutoSize = True
+        Me.chkDefault.Location = New System.Drawing.Point(10, 145)
+        Me.chkDefault.Name = "chkDefault"
+        Me.chkDefault.Size = New System.Drawing.Size(60, 17)
+        Me.chkDefault.TabIndex = 24
+        Me.chkDefault.Text = "Default"
+        Me.chkDefault.UseVisualStyleBackColor = True
         '
-        'lblDisplayOptions
+        'chkShowRCommandsinOutputWindow
         '
-        Me.lblDisplayOptions.AutoSize = True
-        Me.lblDisplayOptions.Location = New System.Drawing.Point(14, 154)
-        Me.lblDisplayOptions.Name = "lblDisplayOptions"
-        Me.lblDisplayOptions.Size = New System.Drawing.Size(80, 13)
-        Me.lblDisplayOptions.TabIndex = 23
-        Me.lblDisplayOptions.Text = "Display Options"
+        Me.chkShowRCommandsinOutputWindow.AutoSize = True
+        Me.chkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
+        Me.chkShowRCommandsinOutputWindow.Name = "chkShowRCommandsinOutputWindow"
+        Me.chkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(207, 17)
+        Me.chkShowRCommandsinOutputWindow.TabIndex = 24
+        Me.chkShowRCommandsinOutputWindow.Text = "Show R Commands in Output Window"
+        Me.chkShowRCommandsinOutputWindow.UseVisualStyleBackColor = True
         '
         'dlgOptions
         '
@@ -795,6 +798,6 @@ Partial Class dlgOptions
     Friend WithEvents rdoDisplayinSeparateWindows As RadioButton
     Friend WithEvents rdoDisplayinRViewer As RadioButton
     Friend WithEvents rdoDisplayinOutputWindow As RadioButton
-    Friend WithEvents ucrDisplayOptions As ucrInputComboBox
-    Friend WithEvents lblDisplayOptions As Label
+    Friend WithEvents chkShowRCommandsinOutputWindow As CheckBox
+    Friend WithEvents chkDefault As CheckBox
 End Class

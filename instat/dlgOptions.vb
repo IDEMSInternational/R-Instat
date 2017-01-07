@@ -57,8 +57,6 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
-        ucrDisplayOptions.SetItems({"Output only", "Output + Comments", "Output + Comments + R command(s)"})
-        ucrDisplayOptions.SetName("Output + Comments + R command(s)")
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -92,14 +90,6 @@ Public Class dlgOptions
             rdoDisplayinSeparateWindows.Checked = True
         ElseIf frmMain.clsInstatOptions.strGraphDisplayOption = "view_R_viewer" Then
             rdoDisplayinRViewer.Checked = True
-        End If
-
-        If frmMain.clsInstatOptions.strOutputWindowDisplay = "Output + Comments + R command(s)" Then
-            ucrDisplayOptions.SetName("Output + Comments + R command(s)")
-        ElseIf frmMain.clsInstatOptions.strOutputWindowDisplay = "Output + Comments" Then
-            ucrDisplayOptions.SetName("Output + Comments")
-        ElseIf frmMain.clsInstatOptions.strOutputWindowDisplay = "Output only" Then
-            ucrDisplayOptions.SetName("Output only")
         End If
     End Sub
 
@@ -349,16 +339,5 @@ Public Class dlgOptions
             ucrWorkingDirectory.SetName(strWorkingDirectory)
             ApplyEnabled(True)
         End If
-    End Sub
-
-    Private Sub ucrDisplayOptions_NameChanged() Handles ucrDisplayOptions.NameChanged
-        Select Case ucrDisplayOptions.GetText
-            Case "Output only"
-                strOutputWindowDisplay = "Output only"
-            Case "Output + Comments"
-                strOutputWindowDisplay = "Output only"
-            Case "Output + Comments + R command(s)"
-                strOutputWindowDisplay = "Output + Comments + R command(s)"
-        End Select
     End Sub
 End Class
