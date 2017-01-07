@@ -69,6 +69,8 @@ Public Class dlgOptions
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
+        chkDefault.Checked = frmMain.clsInstatOptions.bDefaultOutput
+        chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -106,6 +108,9 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
         frmMain.clsInstatOptions.SetOutputWindowDisplay(strOutputWindowDisplay)
+        frmMain.clsInstatOptions.bCommandsinOutput = chkShowRCommandsinOutputWindow.Checked
+        frmMain.clsInstatOptions.bDefaultOutput = chkDefault.Checked
+
 
     End Sub
 
@@ -293,6 +298,14 @@ Public Class dlgOptions
         End If
 
         ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowRCommandsinOutputWindow.CheckedChanged
+        frmMain.clsInstatOptions.bCommandsinOutput = chkShowRCommandsinOutputWindow.Checked
+    End Sub
+
+    Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkDefault.CheckedChanged
+        frmMain.clsInstatOptions.bDefaultOutput = chkDefault.Checked
     End Sub
 
     Private Sub ApplyEnabled(bEnable As Boolean)

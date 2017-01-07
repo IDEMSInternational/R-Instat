@@ -12,11 +12,14 @@ Imports unvell.ReoGrid
     Public iMaxRows As Integer
     Public lstColourPalette As List(Of Color)
     Public strGraphDisplayOption As String
-    Public strOutputWindowDisplay As String
+    Public bCommandsinOutput As Boolean
+    Public bDefaultOutput As Boolean
 
     Public Sub New()
         'TODO Is this sensible to do in constructor?
         bIncludeRDefaultParameters = False
+        bDefaultOutput = True
+        bCommandsinOutput = False
         SetFormatOutput(New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular), Color.Blue)
         SetFormatComment(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Green)
         SetFormatCommand(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Black)
@@ -108,7 +111,6 @@ Imports unvell.ReoGrid
     End Sub
 
     Public Sub SetOutputWindowDisplay(strOutput As String)
-        strOutputWindowDisplay = strOutput
         'set the options for the display 
     End Sub
 End Class
