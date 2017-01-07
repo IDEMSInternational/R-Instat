@@ -48,6 +48,7 @@ Public Class dlgCalculationsSummary
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 513
         cmdEdit.Enabled = False
         cmdDuplicate.Enabled = False
         clsApplyCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
