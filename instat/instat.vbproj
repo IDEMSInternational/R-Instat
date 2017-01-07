@@ -352,6 +352,12 @@
     <Compile Include="dlgPCSARainfall.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPICSACrops.Designer.vb">
+      <DependentUpon>dlgPICSACrops.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPICSACrops.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPICSATemperature.Designer.vb">
       <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
     </Compile>
@@ -2705,6 +2711,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSACrops.resx">
+      <DependentUpon>dlgPICSACrops.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPICSATemperature.resx">
       <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
