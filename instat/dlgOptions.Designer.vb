@@ -49,6 +49,8 @@ Partial Class dlgOptions
         Me.lblPreviewRows = New System.Windows.Forms.Label()
         Me.nudPreviewRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
+        Me.chkShowRCommandsinOutputWindow = New System.Windows.Forms.CheckBox()
+        Me.chkIncludeCommentsbyDefault = New System.Windows.Forms.CheckBox()
         Me.pnFormatOptions = New System.Windows.Forms.Panel()
         Me.rtbCommentPreview = New System.Windows.Forms.RichTextBox()
         Me.rtbOutputPreview = New System.Windows.Forms.RichTextBox()
@@ -72,15 +74,13 @@ Partial Class dlgOptions
         Me.tbpWorkingDirectory = New System.Windows.Forms.TabPage()
         Me.cmdWorkingDirectory = New System.Windows.Forms.Button()
         Me.lblWorkingDirectory = New System.Windows.Forms.Label()
-        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
         Me.tbpGraphDisplay = New System.Windows.Forms.TabPage()
         Me.rdoDisplayinSeparateWindows = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
-        Me.chkDefault = New System.Windows.Forms.CheckBox()
-        Me.chkShowRCommandsinOutputWindow = New System.Windows.Forms.CheckBox()
+        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
@@ -324,7 +324,7 @@ Partial Class dlgOptions
         'tbpOutputWindow
         '
         Me.tbpOutputWindow.Controls.Add(Me.chkShowRCommandsinOutputWindow)
-        Me.tbpOutputWindow.Controls.Add(Me.chkDefault)
+        Me.tbpOutputWindow.Controls.Add(Me.chkIncludeCommentsbyDefault)
         Me.tbpOutputWindow.Controls.Add(Me.pnFormatOptions)
         Me.tbpOutputWindow.Location = New System.Drawing.Point(4, 22)
         Me.tbpOutputWindow.Name = "tbpOutputWindow"
@@ -333,6 +333,26 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.TabIndex = 2
         Me.tbpOutputWindow.Text = "Output Window"
         Me.tbpOutputWindow.UseVisualStyleBackColor = True
+        '
+        'chkShowRCommandsinOutputWindow
+        '
+        Me.chkShowRCommandsinOutputWindow.AutoSize = True
+        Me.chkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
+        Me.chkShowRCommandsinOutputWindow.Name = "chkShowRCommandsinOutputWindow"
+        Me.chkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(207, 17)
+        Me.chkShowRCommandsinOutputWindow.TabIndex = 24
+        Me.chkShowRCommandsinOutputWindow.Text = "Show R Commands in Output Window"
+        Me.chkShowRCommandsinOutputWindow.UseVisualStyleBackColor = True
+        '
+        'chkIncludeCommentsbyDefault
+        '
+        Me.chkIncludeCommentsbyDefault.AutoSize = True
+        Me.chkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 145)
+        Me.chkIncludeCommentsbyDefault.Name = "chkIncludeCommentsbyDefault"
+        Me.chkIncludeCommentsbyDefault.Size = New System.Drawing.Size(164, 17)
+        Me.chkIncludeCommentsbyDefault.TabIndex = 24
+        Me.chkIncludeCommentsbyDefault.Text = "Include Comments by Default"
+        Me.chkIncludeCommentsbyDefault.UseVisualStyleBackColor = True
         '
         'pnFormatOptions
         '
@@ -568,14 +588,6 @@ Partial Class dlgOptions
         Me.lblWorkingDirectory.TabIndex = 0
         Me.lblWorkingDirectory.Text = "Working Directory:"
         '
-        'ucrWorkingDirectory
-        '
-        Me.ucrWorkingDirectory.IsReadOnly = False
-        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
-        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
-        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
-        Me.ucrWorkingDirectory.TabIndex = 1
-        '
         'tbpGraphDisplay
         '
         Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinSeparateWindows)
@@ -669,25 +681,13 @@ Partial Class dlgOptions
         Me.spltControls.SplitterDistance = 184
         Me.spltControls.TabIndex = 8
         '
-        'chkDefault
+        'ucrWorkingDirectory
         '
-        Me.chkDefault.AutoSize = True
-        Me.chkDefault.Location = New System.Drawing.Point(10, 145)
-        Me.chkDefault.Name = "chkDefault"
-        Me.chkDefault.Size = New System.Drawing.Size(60, 17)
-        Me.chkDefault.TabIndex = 24
-        Me.chkDefault.Text = "Default"
-        Me.chkDefault.UseVisualStyleBackColor = True
-        '
-        'chkShowRCommandsinOutputWindow
-        '
-        Me.chkShowRCommandsinOutputWindow.AutoSize = True
-        Me.chkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
-        Me.chkShowRCommandsinOutputWindow.Name = "chkShowRCommandsinOutputWindow"
-        Me.chkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(207, 17)
-        Me.chkShowRCommandsinOutputWindow.TabIndex = 24
-        Me.chkShowRCommandsinOutputWindow.Text = "Show R Commands in Output Window"
-        Me.chkShowRCommandsinOutputWindow.UseVisualStyleBackColor = True
+        Me.ucrWorkingDirectory.IsReadOnly = False
+        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
+        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
+        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
+        Me.ucrWorkingDirectory.TabIndex = 1
         '
         'dlgOptions
         '
@@ -799,5 +799,5 @@ Partial Class dlgOptions
     Friend WithEvents rdoDisplayinRViewer As RadioButton
     Friend WithEvents rdoDisplayinOutputWindow As RadioButton
     Friend WithEvents chkShowRCommandsinOutputWindow As CheckBox
-    Friend WithEvents chkDefault As CheckBox
+    Friend WithEvents chkIncludeCommentsbyDefault As CheckBox
 End Class

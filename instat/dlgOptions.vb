@@ -57,6 +57,7 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
+        rdoDisplayinSeparateWindows.Enabled = False
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -69,7 +70,7 @@ Public Class dlgOptions
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
-        chkDefault.Checked = frmMain.clsInstatOptions.bDefaultforComments
+        chkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
         chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
@@ -107,9 +108,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
-        frmMain.clsInstatOptions.SetOutputWindowDisplay(strOutputWindowDisplay)
-        frmMain.clsInstatOptions.bCommandsinOutput = chkShowRCommandsinOutputWindow.Checked
-        frmMain.clsInstatOptions.bDefaultforComments = chkDefault.Checked
+        frmMain.clsInstatOptions.bIncludeCommentDefault = chkIncludeCommentsbyDefault.Checked
+        frmMain.clsInstatOptions.SetCommandInOutpt(chkShowRCommandsinOutputWindow.Checked)
 
 
     End Sub
@@ -281,7 +281,7 @@ Public Class dlgOptions
     End Sub
 
     Private Sub chkIncludeDefaultParams_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeDefaultParams.CheckedChanged
-        frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
+        ApplyEnabled(True)
     End Sub
 
     Private Sub nudMaxRows_TextChanged(sender As Object, e As EventArgs) Handles nudMaxRows.TextChanged
@@ -297,6 +297,14 @@ Public Class dlgOptions
             strGraphDisplayOption = "view_R_viewer"
         End If
 
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeCommentsbyDefault.CheckedChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowRCommandsinOutputWindow.CheckedChanged
         ApplyEnabled(True)
     End Sub
 
