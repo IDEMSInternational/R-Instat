@@ -107,7 +107,6 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
-        frmMain.clsInstatOptions.SetOutputWindowDisplay(strOutputWindowDisplay)
         frmMain.clsInstatOptions.bCommandsinOutput = chkShowRCommandsinOutputWindow.Checked
         frmMain.clsInstatOptions.bDefaultforComments = chkDefault.Checked
 
@@ -297,6 +296,16 @@ Public Class dlgOptions
             strGraphDisplayOption = "view_R_viewer"
         End If
 
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkDefault.CheckedChanged
+        frmMain.clsInstatOptions.bDefaultforComments = chkDefault.Checked
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowRCommandsinOutputWindow.CheckedChanged
+        frmMain.clsInstatOptions.bCommandsinOutput = chkShowRCommandsinOutputWindow.Checked
         ApplyEnabled(True)
     End Sub
 
