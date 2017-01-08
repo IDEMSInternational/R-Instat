@@ -21,7 +21,7 @@ Public Class ucrButtons
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
     Public strComment As String
-    Public bIncludeCommentDefault As Boolean = True
+
 
     Public Sub New()
         ' This call is required by the designer.
@@ -113,7 +113,7 @@ Public Class ucrButtons
     End Sub
 
     Private Sub SetDefaults()
-        chkComment.Checked = bIncludeCommentDefault
+        chkComment.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
         SetCommentEditable()
         'TODO default text should be translatable
         'This is needed only so that the designer displays correctly in VS
