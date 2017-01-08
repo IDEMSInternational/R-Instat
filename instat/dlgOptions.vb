@@ -57,6 +57,7 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
+        rdoDisplayinSeparateWindows.Enabled = False
     End Sub
 
     Private Sub LoadInstatOptions()
