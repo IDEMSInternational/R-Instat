@@ -22,6 +22,7 @@ Public Class ucrButtons
     Public bFirstLoad As Boolean
     Public strComment As String
 
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -112,7 +113,8 @@ Public Class ucrButtons
     End Sub
 
     Private Sub SetDefaults()
-        chkComment.Checked = True
+        chkComment.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        SetCommentEditable()
         'TODO default text should be translatable
         'This is needed only so that the designer displays correctly in VS
         If frmMain.clsInstatOptions IsNot Nothing Then
@@ -131,6 +133,10 @@ Public Class ucrButtons
     End Sub
 
     Private Sub chkComment_CheckedChanged(sender As Object, e As EventArgs) Handles chkComment.CheckedChanged
+        SetCommentEditable()
+    End Sub
+
+    Private Sub SetCommentEditable()
         txtComment.Enabled = chkComment.Checked
     End Sub
 

@@ -48,6 +48,7 @@ Public Class dlgCalculationsSummary
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 513
         cmdEdit.Enabled = False
         cmdDuplicate.Enabled = False
         clsApplyCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
@@ -91,9 +92,12 @@ Public Class dlgCalculationsSummary
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        For Each iTemp As Integer In lstLayers.SelectedIndices
-            lstLayers.Items.RemoveAt(iTemp)
-            lstCalculations.RemoveAt(iTemp)
+        Dim iIndex As Integer
+
+        For Each lviTemp As ListViewItem In lstLayers.SelectedItems
+            iIndex = lstLayers.Items.IndexOf(lviTemp)
+            lstLayers.Items.Remove(lviTemp)
+            lstCalculations.RemoveAt(iIndex)
         Next
     End Sub
 
