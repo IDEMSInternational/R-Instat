@@ -138,7 +138,6 @@ Public Class dlgStartofRains
         RainyDaysMethod()
         MinimumRainfallMethod()
         FirstDOYPerYear()
-        ApplyRainyDays()
         TestOKEnabled()
     End Sub
 
@@ -361,14 +360,9 @@ Public Class dlgStartofRains
         ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsFirstDOYPerYear)
     End Sub
 
-    Private Sub ApplyRainyDays()
-        If chkConsecutiveRainyDays.Checked Or chkDrySpell.Checked Then ' Does 'or' do or/and or just or?
-            clsApplyRainDays.AddParameter("calc", clsRFunctionParameter:=clsRainyDays)
-            frmMain.clsRLink.RunScript(clsApplyRainDays.ToScript, strComment:="Start of Rains: Creating rain_day column")
-        End If
-    End Sub
-
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Start of Rains: Defining Date column as key")
+        clsApplyRainDays.AddParameter("calc", clsRFunctionParameter:=clsRainyDays)
+        frmMain.clsRLink.RunScript(clsApplyRainDays.ToScript, strComment:="Start of Rains: Creating rain_day column")
     End Sub
 End Class
