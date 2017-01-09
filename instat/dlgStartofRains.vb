@@ -50,7 +50,7 @@ Public Class dlgStartofRains
         clsYearGroupDaily.SetRCommand("instat_calculation$new")
         clsYearGroupDaily.SetAssignTo("Year_Group_Daily")
         clsRainyDays.SetRCommand("instat_calculation$new")
-        clsRainyDays.SetAssignTo("Rainy_Days")
+        clsApplyRainDays.SetRCommand("InstatDataObject$apply_instat_calculation")
         clsRollingSum.SetRCommand("instat_calculation$new")
         clsRollingSum.SetAssignTo("rolling_sum")
         clsMinimumRainfall.SetRCommand("instat_calculation$new")
@@ -68,8 +68,6 @@ Public Class dlgStartofRains
         clsWithinThirtyDays.SetRCommand("instat_calculation$new")
         clsWithinThirtyDays.SetAssignTo("dry_spell_10")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
-        clsApplyRainDays.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
-        clsApplyRainDays.AddParameter("calc", clsRFunctionParameter:=clsRainyDays)
         clsSubCalcMinSum.SetRCommand("list")
         clsSubCalcXDaysRain.SetRCommand("list")
         clsSubRainDays.SetRCommand("list")
@@ -137,10 +135,13 @@ Public Class dlgStartofRains
 
     Private Sub grpConditionsForSatrtofRains1_Enter(sender As Object, e As EventArgs) Handles chkConsecutiveRainyDays.CheckedChanged, chkTotalRainfall.CheckedChanged, chkDrySpell.CheckedChanged
         CheckBoxesSetting()
+        RainyDaysMethod()
         MinimumRainfallMethod()
         FirstDOYPerYear()
+        ApplyRainyDays()
         TestOKEnabled()
     End Sub
+
     Private Sub ucrReceiverRainfall_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRainfall.SelectionChanged
         RainyDaysMethod()
         RollingSumMethod()
@@ -218,7 +219,7 @@ Public Class dlgStartofRains
             clsRainyDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
             clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & nudThreshold.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
             clsRainyDays.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34))
-            clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & Chr(34) & "Rain" & Chr(34) & ")")
+            clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames(True) & ")")
             clsRainyDays.AddParameter("save", 2)
         Else
             clsRainyDays.RemoveParameterByName("type")
@@ -360,8 +361,14 @@ Public Class dlgStartofRains
         ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsFirstDOYPerYear)
     End Sub
 
+    Private Sub ApplyRainyDays()
+        If chkConsecutiveRainyDays.Checked Or chkDrySpell.Checked Then ' Does 'or' do or/and or just or?
+            clsApplyRainDays.AddParameter("calc", clsRFunctionParameter:=clsRainyDays)
+            frmMain.clsRLink.RunScript(clsApplyRainDays.ToScript, strComment:="Start of Rains: Creating rain_day column")
+        End If
+    End Sub
+
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Start of Rains: Defining Date column as key")
-        'frmMain.clsRLink.RunScript(clsApplyRainDays.ToScript, strComment:="Start of Rains: Creating rain_day column")
     End Sub
 End Class
