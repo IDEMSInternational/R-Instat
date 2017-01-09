@@ -43,6 +43,7 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBaseExportToCPT.iHelpTopicID = 355
         clsOutPut.SetRCommand("output_for_CPT")
         ucrReceiverMultipleDataColumns.Selector = ucrSSTDataframe
         ucrReceiverDataColumn.Selector = ucrSSTDataframe
