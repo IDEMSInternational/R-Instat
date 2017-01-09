@@ -53,7 +53,7 @@ Public Class dlgOneVarFitModel
         nudCI.Maximum = 1
         nudCI.Minimum = 0
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
-        cboVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
+        ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
         rdoMeanWilcox.Checked = True
     End Sub
 
@@ -277,7 +277,7 @@ Public Class dlgOneVarFitModel
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
                 clsFactorOperator.SetOperation("==")
                 clsFactorOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=UcrReceiver.GetVariables())
-                clsFactorOperator.AddParameter(strParameterValue:=cboVariables.GetText())
+                clsFactorOperator.AddParameter(strParameterValue:=ucrVariables.GetText())
             Else
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
                 clsFunctionOperator.SetOperation(ucrOperator.GetText())
@@ -467,20 +467,20 @@ Public Class dlgOneVarFitModel
             If chkBinModify.Checked Then
                 lblSuccessIf.Visible = True
                 If UcrReceiver.strCurrDataType = "factor" Then
-                    cboVariables.Visible = True
+                    ucrVariables.Visible = True
                     lblEquals.Visible = True
                 Else
                     lblEquals.Visible = False
                     nudBinomialConditions.Visible = True
                     ucrOperator.Visible = True
-                    cboVariables.Visible = False
+                    ucrVariables.Visible = False
                 End If
             Else
                 lblSuccessIf.Visible = False
                 lblEquals.Visible = False
                 nudBinomialConditions.Visible = False
                 ucrOperator.Visible = False
-                cboVariables.Visible = False
+                ucrVariables.Visible = False
             End If
         Else
             chkBinModify.Visible = False
@@ -489,7 +489,7 @@ Public Class dlgOneVarFitModel
             lblEquals.Visible = False
             nudBinomialConditions.Visible = False
             ucrOperator.Visible = False
-            cboVariables.Visible = False
+            ucrVariables.Visible = False
         End If
         nudBinomialConditions.Value = 1
         nudBinomialConditions.Maximum = Integer.MaxValue
@@ -501,7 +501,7 @@ Public Class dlgOneVarFitModel
         SetBinomialTest()
     End Sub
 
-    Private Sub cboVariables_TextChanged() Handles cboVariables.NameChanged
+    Private Sub cboVariables_TextChanged() Handles ucrVariables.NameChanged
         BinomialConditions()
         SetBinomialTest()
     End Sub

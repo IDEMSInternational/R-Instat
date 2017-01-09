@@ -37,7 +37,7 @@ Partial Class dlgOneVarFitModel
         Me.nudHyp = New System.Windows.Forms.NumericUpDown()
         Me.nudBinomialConditions = New System.Windows.Forms.NumericUpDown()
         Me.lblEquals = New System.Windows.Forms.Label()
-        Me.cboVariables = New instat.ucrInputComboBox()
+        Me.ucrVariables = New instat.ucrInputComboBox()
         Me.ucrOperator = New instat.ucrInputComboBox()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrSaveModel = New instat.ucrInputComboBox()
@@ -192,13 +192,13 @@ Partial Class dlgOneVarFitModel
         Me.lblEquals.TabIndex = 33
         Me.lblEquals.Text = "="
         '
-        'cboVariables
+        'ucrVariables
         '
-        Me.cboVariables.IsReadOnly = False
-        Me.cboVariables.Location = New System.Drawing.Point(91, 104)
-        Me.cboVariables.Name = "cboVariables"
-        Me.cboVariables.Size = New System.Drawing.Size(88, 21)
-        Me.cboVariables.TabIndex = 32
+        Me.ucrVariables.IsReadOnly = False
+        Me.ucrVariables.Location = New System.Drawing.Point(91, 104)
+        Me.ucrVariables.Name = "ucrVariables"
+        Me.ucrVariables.Size = New System.Drawing.Size(88, 21)
+        Me.ucrVariables.TabIndex = 32
         '
         'ucrOperator
         '
@@ -258,7 +258,7 @@ Partial Class dlgOneVarFitModel
         Me.grpConditions.Controls.Add(Me.rdoMeanWilcox)
         Me.grpConditions.Controls.Add(Me.lblEquals)
         Me.grpConditions.Controls.Add(Me.lblHyp)
-        Me.grpConditions.Controls.Add(Me.cboVariables)
+        Me.grpConditions.Controls.Add(Me.ucrVariables)
         Me.grpConditions.Controls.Add(Me.nudHyp)
         Me.grpConditions.Controls.Add(Me.nudBinomialConditions)
         Me.grpConditions.Controls.Add(Me.chkBinModify)
@@ -359,7 +359,7 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents rdoSpecific As RadioButton
     Friend WithEvents nudHyp As NumericUpDown
     Friend WithEvents nudBinomialConditions As NumericUpDown
-    Friend WithEvents cboVariables As ucrInputComboBox
+    Friend WithEvents ucrVariables As ucrInputComboBox
     Friend WithEvents lblEquals As Label
     Friend WithEvents grpConditions As GroupBox
     Friend WithEvents rdoEnorm As RadioButton
