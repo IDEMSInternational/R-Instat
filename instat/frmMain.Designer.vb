@@ -171,6 +171,7 @@ Partial Class frmMain
         Me.mnuClimaticPrepareSpecificEvents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareEventsStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareEventsSpells = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Extremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareEventsWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareEventsEndoftheRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSummary = New System.Windows.Forms.ToolStripMenuItem()
@@ -423,7 +424,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Extremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1345,7 +1345,6 @@ Partial Class frmMain
         '
         'mnuClimaticFileCliData
         '
-        Me.mnuClimaticFileCliData.Enabled = False
         Me.mnuClimaticFileCliData.Name = "mnuClimaticFileCliData"
         Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(155, 22)
         Me.mnuClimaticFileCliData.Text = "CliData..."
@@ -1457,6 +1456,12 @@ Partial Class frmMain
         Me.mnuClimaticPrepareEventsSpells.Name = "mnuClimaticPrepareEventsSpells"
         Me.mnuClimaticPrepareEventsSpells.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticPrepareEventsSpells.Text = "Spells..."
+        '
+        'Extremes
+        '
+        Me.Extremes.Name = "Extremes"
+        Me.Extremes.Size = New System.Drawing.Size(172, 22)
+        Me.Extremes.Text = "Extremes..."
         '
         'mnuClimaticPrepareEventsWaterBalance
         '
@@ -1650,19 +1655,19 @@ Partial Class frmMain
         'mnuClimaticPICSARainfall
         '
         Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
-        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSARainfall.Text = "Rainfall..."
         '
         'mnuClimaticPICSATemperature
         '
         Me.mnuClimaticPICSATemperature.Name = "mnuClimaticPICSATemperature"
-        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSATemperature.Text = "Temperature..."
         '
         'mnuClimaticPICSACrops
         '
         Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"
-        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSACrops.Text = "Crops..."
         '
         'mnuClimaticModels
@@ -2686,31 +2691,31 @@ Partial Class frmMain
         'mnuPrepareColumnGenerateRegularSequence
         '
         Me.mnuPrepareColumnGenerateRegularSequence.Name = "mnuPrepareColumnGenerateRegularSequence"
-        Me.mnuPrepareColumnGenerateRegularSequence.Size = New System.Drawing.Size(177, 22)
+        Me.mnuPrepareColumnGenerateRegularSequence.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnGenerateRegularSequence.Tag = "Regular_Sequence..."
         Me.mnuPrepareColumnGenerateRegularSequence.Text = "Regular Sequence..."
         '
         'mnuPrepareColumnGenerateCountInFactor
         '
         Me.mnuPrepareColumnGenerateCountInFactor.Name = "mnuPrepareColumnGenerateCountInFactor"
-        Me.mnuPrepareColumnGenerateCountInFactor.Size = New System.Drawing.Size(177, 22)
+        Me.mnuPrepareColumnGenerateCountInFactor.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnGenerateCountInFactor.Text = "Count in Factor..."
         '
         'ToolStripSeparator25
         '
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
-        Me.ToolStripSeparator25.Size = New System.Drawing.Size(174, 6)
+        Me.ToolStripSeparator25.Size = New System.Drawing.Size(176, 6)
         '
         'mnuPrepareColumnGenerateEnter
         '
         Me.mnuPrepareColumnGenerateEnter.Name = "mnuPrepareColumnGenerateEnter"
-        Me.mnuPrepareColumnGenerateEnter.Size = New System.Drawing.Size(177, 22)
+        Me.mnuPrepareColumnGenerateEnter.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnGenerateEnter.Text = "Enter..."
         '
         'mnuPrepareColumnGenerateRandomSamples
         '
         Me.mnuPrepareColumnGenerateRandomSamples.Name = "mnuPrepareColumnGenerateRandomSamples"
-        Me.mnuPrepareColumnGenerateRandomSamples.Size = New System.Drawing.Size(177, 22)
+        Me.mnuPrepareColumnGenerateRandomSamples.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnGenerateRandomSamples.Tag = "Random_Samples..."
         Me.mnuPrepareColumnGenerateRandomSamples.Text = "Random Samples..."
         '
@@ -3134,28 +3139,28 @@ Partial Class frmMain
         'mnuPrepareRObjectsView
         '
         Me.mnuPrepareRObjectsView.Name = "mnuPrepareRObjectsView"
-        Me.mnuPrepareRObjectsView.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareRObjectsView.Size = New System.Drawing.Size(126, 22)
         Me.mnuPrepareRObjectsView.Tag = "View..."
         Me.mnuPrepareRObjectsView.Text = "View..."
         '
         'mnuPrepareRObjectsRename
         '
         Me.mnuPrepareRObjectsRename.Name = "mnuPrepareRObjectsRename"
-        Me.mnuPrepareRObjectsRename.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareRObjectsRename.Size = New System.Drawing.Size(126, 22)
         Me.mnuPrepareRObjectsRename.Tag = "Rename..."
         Me.mnuPrepareRObjectsRename.Text = "Rename..."
         '
         'mnuPrepareRObjectsReorder
         '
         Me.mnuPrepareRObjectsReorder.Name = "mnuPrepareRObjectsReorder"
-        Me.mnuPrepareRObjectsReorder.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareRObjectsReorder.Size = New System.Drawing.Size(126, 22)
         Me.mnuPrepareRObjectsReorder.Tag = "Reorder"
         Me.mnuPrepareRObjectsReorder.Text = "Reorder..."
         '
         'mnuPrepareRObjectsDelete
         '
         Me.mnuPrepareRObjectsDelete.Name = "mnuPrepareRObjectsDelete"
-        Me.mnuPrepareRObjectsDelete.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareRObjectsDelete.Size = New System.Drawing.Size(126, 22)
         Me.mnuPrepareRObjectsDelete.Tag = "Delete..."
         Me.mnuPrepareRObjectsDelete.Text = "Delete..."
         '
@@ -3169,25 +3174,25 @@ Partial Class frmMain
         'mnuCorruptionFile
         '
         Me.mnuCorruptionFile.Name = "mnuCorruptionFile"
-        Me.mnuCorruptionFile.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionFile.Size = New System.Drawing.Size(128, 22)
         Me.mnuCorruptionFile.Text = "File..."
         '
         'mnuCorruptionPrepare
         '
         Me.mnuCorruptionPrepare.Name = "mnuCorruptionPrepare"
-        Me.mnuCorruptionPrepare.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionPrepare.Size = New System.Drawing.Size(128, 22)
         Me.mnuCorruptionPrepare.Text = "Prepare..."
         '
         'mnuCorruptionDescribe
         '
         Me.mnuCorruptionDescribe.Name = "mnuCorruptionDescribe"
-        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(128, 22)
         Me.mnuCorruptionDescribe.Text = "Describe..."
         '
         'mnuCorruptionModel
         '
         Me.mnuCorruptionModel.Name = "mnuCorruptionModel"
-        Me.mnuCorruptionModel.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCorruptionModel.Size = New System.Drawing.Size(128, 22)
         Me.mnuCorruptionModel.Text = "Model..."
         '
         'mnuTools
@@ -3255,12 +3260,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'Extremes
-        '
-        Me.Extremes.Name = "Extremes"
-        Me.Extremes.Size = New System.Drawing.Size(172, 22)
-        Me.Extremes.Text = "Extremes..."
         '
         'frmMain
         '
