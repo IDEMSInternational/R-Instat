@@ -559,13 +559,13 @@ Partial Class frmMain
         Me.mnuDescribeSpecificDotPlot.Name = "mnuDescribeSpecificDotPlot"
         Me.mnuDescribeSpecificDotPlot.Size = New System.Drawing.Size(217, 22)
         Me.mnuDescribeSpecificDotPlot.Tag = "Dotplot..."
-        Me.mnuDescribeSpecificDotPlot.Text = "Dotplot..."
+        Me.mnuDescribeSpecificDotPlot.Text = "Dot Plot..."
         '
         'mnuDescribeSpecificRugPlot
         '
         Me.mnuDescribeSpecificRugPlot.Name = "mnuDescribeSpecificRugPlot"
         Me.mnuDescribeSpecificRugPlot.Size = New System.Drawing.Size(217, 22)
-        Me.mnuDescribeSpecificRugPlot.Text = "Rug Plot"
+        Me.mnuDescribeSpecificRugPlot.Text = "Rug Plot..."
         '
         'mnuDescribeSpecificBarChart
         '
@@ -653,7 +653,7 @@ Partial Class frmMain
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Name = "mnuDescribeOtherGraphicsDialogsWindRose"
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeOtherGraphicsDialogsWindRose.Tag = "WindRose..."
-        Me.mnuDescribeOtherGraphicsDialogsWindRose.Text = "WindRose..."
+        Me.mnuDescribeOtherGraphicsDialogsWindRose.Text = "Wind Rose..."
         '
         'mnuDescribeOtherGraphicsDialogsCumulativeDistribution
         '
@@ -2717,9 +2717,9 @@ Partial Class frmMain
         'mnuPrepareColumnGeneratePermuteRows
         '
         Me.mnuPrepareColumnGeneratePermuteRows.Name = "mnuPrepareColumnGeneratePermuteRows"
-        Me.mnuPrepareColumnGeneratePermuteRows.Size = New System.Drawing.Size(177, 22)
+        Me.mnuPrepareColumnGeneratePermuteRows.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnGeneratePermuteRows.Tag = "Permute_Rows..."
-        Me.mnuPrepareColumnGeneratePermuteRows.Text = "Permute Rows..."
+        Me.mnuPrepareColumnGeneratePermuteRows.Text = "Permute Columns..."
         '
         'mnuPrepareColumnFactor
         '
