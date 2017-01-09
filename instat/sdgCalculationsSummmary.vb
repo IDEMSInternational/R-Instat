@@ -353,16 +353,22 @@ Public Class sdgCalculationsSummmary
     End Sub
 
     Private Sub cmdManipDelete_Click(sender As Object, e As EventArgs) Handles cmdManipDelete.Click
-        For Each iTemp As Integer In ucrManipulations.lstAvailableData.SelectedIndices
-            ucrManipulations.lstAvailableData.Items.RemoveAt(iTemp)
-            lstManipulationFunctions.RemoveAt(iTemp)
+        Dim iIndex As Integer
+
+        For Each lviTemp As ListViewItem In ucrManipulations.lstAvailableData.SelectedItems
+            iIndex = ucrManipulations.lstAvailableData.Items.IndexOf(lviTemp)
+            ucrManipulations.lstAvailableData.Items.Remove(lviTemp)
+            lstManipulationFunctions.RemoveAt(iIndex)
         Next
     End Sub
 
     Private Sub cmdSubCalcDelete_Click(sender As Object, e As EventArgs) Handles cmdSubCalcDelete.Click
-        For Each iTemp As Integer In lstSubCalcs.SelectedIndices
-            lstSubCalcs.Items.RemoveAt(iTemp)
-            lstSubCalcFunctions.RemoveAt(iTemp)
+        Dim iIndex As Integer
+
+        For Each lviTemp As ListViewItem In lstSubCalcs.SelectedItems
+            iIndex = lstSubCalcs.Items.IndexOf(lviTemp)
+            lstSubCalcs.Items.Remove(lviTemp)
+            lstSubCalcFunctions.RemoveAt(iIndex)
         Next
     End Sub
 End Class

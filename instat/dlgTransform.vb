@@ -27,7 +27,7 @@ Public Class dlgTransform
         autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 42
+        ucrBase.iHelpTopicID = 358
     End Sub
     Private Sub SetDefaults()
         'CommonTransformation()

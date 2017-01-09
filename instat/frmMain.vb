@@ -1359,6 +1359,13 @@ Public Class frmMain
         dlgDisplayDaily.ShowDialog()
     End Sub
 
+    Private Sub mnuClimateFileClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileClimSoft.Click
+        dlgClimSoft.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileCliData.Click
+        dlgCliData.ShowDialog()
+    End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
