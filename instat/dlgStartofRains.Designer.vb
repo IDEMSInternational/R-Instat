@@ -116,7 +116,7 @@ Partial Class dlgStartofRains
         Me.grpConditionsForSatrtofRains.Location = New System.Drawing.Point(9, 285)
         Me.grpConditionsForSatrtofRains.Name = "grpConditionsForSatrtofRains"
         Me.grpConditionsForSatrtofRains.Size = New System.Drawing.Size(395, 95)
-        Me.grpConditionsForSatrtofRains.TabIndex = 8
+        Me.grpConditionsForSatrtofRains.TabIndex = 10
         Me.grpConditionsForSatrtofRains.TabStop = False
         Me.grpConditionsForSatrtofRains.Text = "Conditions for Start of Rains"
         '
@@ -253,7 +253,7 @@ Partial Class dlgStartofRains
         Me.grpRainParameters.Location = New System.Drawing.Point(9, 192)
         Me.grpRainParameters.Name = "grpRainParameters"
         Me.grpRainParameters.Size = New System.Drawing.Size(144, 87)
-        Me.grpRainParameters.TabIndex = 7
+        Me.grpRainParameters.TabIndex = 9
         Me.grpRainParameters.TabStop = False
         '
         'nudThreshold
@@ -324,7 +324,7 @@ Partial Class dlgStartofRains
         Me.lblDOY.Location = New System.Drawing.Point(251, 167)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOY.TabIndex = 5
+        Me.lblDOY.TabIndex = 7
         Me.lblDOY.Text = "Day of Year:"
         '
         'lblDate
@@ -352,7 +352,7 @@ Partial Class dlgStartofRains
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverDOY.TabIndex = 6
+        Me.ucrReceiverDOY.TabIndex = 8
         '
         'ucrReceiverRainfall
         '
@@ -378,7 +378,7 @@ Partial Class dlgStartofRains
         Me.ucrBase.Location = New System.Drawing.Point(9, 386)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 11
         '
         'ucrReceiverYear
         '
@@ -387,7 +387,7 @@ Partial Class dlgStartofRains
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverYear.TabIndex = 11
+        Me.ucrReceiverYear.TabIndex = 6
         '
         'lblYear
         '
@@ -395,7 +395,7 @@ Partial Class dlgStartofRains
         Me.lblYear.Location = New System.Drawing.Point(251, 125)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 10
+        Me.lblYear.TabIndex = 5
         Me.lblYear.Text = "Year:"
         '
         'dlgStartofRains
