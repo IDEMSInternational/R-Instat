@@ -113,7 +113,7 @@ Public Class ucrAdditionalLayers
             lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Red
         End If
 
-        clsRSyntax.SetOperatorParameter(False, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone())
+        clsRSyntax.SetOperatorParameter(iPosition:=iLayerIndex, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone())
         'Note: as the GeomFunction on sdgLayerOptions will be edited for different layers, it cannot be linked like clsGgplotFunction would, it needs to be cloned.
 
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.

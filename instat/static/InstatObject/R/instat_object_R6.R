@@ -692,8 +692,8 @@ instat_object$set("public", "insert_row_in_data", function(data_name, start_row,
 }
 )
 
-instat_object$set("public", "get_data_frame_length", function(data_name) {
-  self$get_data_objects(data_name)$get_data_frame_length()
+instat_object$set("public", "get_data_frame_length", function(data_name, use_current_filter = FALSE) {
+  self$get_data_objects(data_name)$get_data_frame_length(use_current_filter)
 }
 )
 
@@ -914,8 +914,8 @@ instat_object$set("public","data_frame_exists", function(data_name) {
 } 
 )
 
-instat_object$set("public","add_key", function(data_name, col_names) {
-  self$get_data_objects(data_name)$add_key(col_names)
+instat_object$set("public","add_key", function(data_name, col_names, key_name) {
+  self$get_data_objects(data_name)$add_key(col_names, key_name)
   names(col_names) <- col_names
   self$add_link(data_name, data_name, col_names, keyed_link_label)
   invisible(sapply(self$get_data_objects(), function(x) if(!x$is_metadata(is_linkable)) x$append_to_metadata(is_linkable, FALSE)))
@@ -972,8 +972,8 @@ instat_object$set("public","set_column_colours_by_metadata", function(data_name,
 }
 )
 
-instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
-  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, ncol = ncol, ... = ...)
+instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, coord_flip  = FALSE, ...) {
+  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, ncol = ncol, coord_flip = coord_flip, ... = ...)
 }
 )
 
@@ -1050,7 +1050,23 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
   self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
 )
+
 instat_object$set("public","make_inventory_plot", function(data_name,col_name = "", year , doy, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
   self$get_data_objects(data_name)$make_inventory_plot(col_name = col_name , year = year, doy =doy,add_to_data = add_to_data, coord_flip = coord_flip, threshold = threshold, facets = facets)
+}
+)
+
+instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c()) {
+  data_list <- open_NetCDF(nc_data)
+  if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
+  names(data_list) = data_names
+  self$import_data(data_tables = data_list)
+  self$add_key(data_names[2], c("lat", "lon"))
+  self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
+}
+)
+
+instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
+  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)
 }
 )

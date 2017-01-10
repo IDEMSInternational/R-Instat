@@ -19,7 +19,7 @@ Imports System.IO
 Public Class dlgOpenSST
     'Private intLines As Integer
     Private clsReadFile As RFunction
-    Private clsRBaseFunc As New RFunction
+    Private clsRBaseCPT, clsBaseNetCDF, clsRCDF As New RFunction
     Private strTempWorkbookName As String
     Dim bFirstLoad As Boolean
     Dim strFileType As String
@@ -34,8 +34,11 @@ Public Class dlgOpenSST
         ' Add any initialization after the InitializeComponent() call.
         'intLines = 10
         clsReadFile = New RFunction
-        ucrBaseOpenSST.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$import_SST")
-        ucrBaseOpenSST.clsRsyntax.AddParameter("dataset", clsRFunctionParameter:=clsReadFile)
+        clsRBaseCPT.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_SST")
+        clsRBaseCPT.AddParameter("dataset", clsRFunctionParameter:=clsReadFile)
+        clsBaseNetCDF.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
+        clsBaseNetCDF.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
+
         bFirstLoad = True
         bCanImport = True
         bComponentsInitialised = True
@@ -104,7 +107,7 @@ Public Class dlgOpenSST
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
         Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "All Data files|*.csv;*.tsv;*.txt|Comma separated files|*.csv|Tab separated files|*.tsv|Text Separated files|*.txt"
+            dlgOpen.Filter = "All Data files|*.csv;*.tsv;*.txt;*.nc|Comma separated files|*.csv|Tab separated files|*.tsv|Text Separated files|*.txt|NetCDF files|*.nc"
             dlgOpen.Title = "Open Data from file"
             If Not ucrInputFilePath.IsEmpty() Then
                 dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputFilePath.GetText(), "/", "\"))
@@ -123,6 +126,11 @@ Public Class dlgOpenSST
                     ucrInputFilePath.SetName(strFilePath)
                     ucrInputName.Show()
                     lblSSTName.Show()
+                    If strFileExt = ".csv" OrElse strFileExt = ".tsv" OrElse strFileExt = ".txt" Then
+                        ucrBaseOpenSST.clsRsyntax.SetBaseRFunction(clsRBaseCPT)
+                    ElseIf strFileExt = ".nc"
+                        ucrBaseOpenSST.clsRsyntax.SetBaseRFunction(clsBaseNetCDF)
+                    End If
                     If strFileExt = ".csv" Then
                         clsReadFile.SetRCommand("rio::import")
                         clsReadFile.AddParameter("file", Chr(34) & strFilePath & Chr(34))
@@ -153,6 +161,15 @@ Public Class dlgOpenSST
                         ucrInputName.Focus()
                         clsReadFile.AddParameter("fread", "FALSE")
                         clsReadFile.AddParameter("fill", "TRUE")
+                    End If
+
+                    If strFileExt = ".nc" Then
+                        clsRCDF.SetRCommand("open.nc")
+                        clsRCDF.AddParameter("con", Chr(34) & strFilePath & Chr(34))
+                        grpCSV.Show()
+                        strFileType = "nc"
+                        ucrInputName.SetName(strFileName, bSilent:=True)
+                        ucrInputName.Focus()
                     End If
                 End If
             Else
@@ -224,9 +241,9 @@ Public Class dlgOpenSST
 
     Private Sub nudDataFrom_ValueChanged(sender As Object, e As EventArgs) Handles nudDataFrom.ValueChanged
         If nudDataFrom.Value = 5 Then
-            ucrBaseOpenSST.clsRsyntax.RemoveParameter("data_from")
+            clsRBaseCPT.RemoveParameterByName("data_from")
         Else
-            ucrBaseOpenSST.clsRsyntax.AddParameter("data_from", nudDataFrom.Value)
+            clsRBaseCPT.AddParameter("data_from", nudDataFrom.Value)
         End If
     End Sub
 

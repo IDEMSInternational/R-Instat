@@ -31,7 +31,7 @@ Public Class dlgCombineText
     End Sub
 
     Private Sub ReopenDialog()
-
+        ColumnOrder()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -52,7 +52,6 @@ Public Class dlgCombineText
         ucrInputColumnInto.SetItemsTypeAsColumns()
         ucrInputColumnInto.SetDefaultTypeAsColumn()
         ucrInputColumnInto.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
-        ucrInputColumnInto.SetPrefix("Combine")
         iColumnsUsed = 0
         ucrInputSeparator.SetItems({"Space", "-", "_", "."})
         ucrBase.iHelpTopicID = 345
@@ -62,6 +61,7 @@ Public Class dlgCombineText
     Private Sub SetDefaults()
         ucrSelectorForCombineText.Reset()
         ucrSelectorForCombineText.Focus()
+        ucrInputColumnInto.SetPrefix("Combine")
         ucrInputSeparator.SetName("")
     End Sub
 
@@ -99,6 +99,11 @@ Public Class dlgCombineText
     End Sub
 
     Private Sub ucrReceiverCombineText_SelectionChanged() Handles ucrReceiverCombineText.SelectionChanged
+        ColumnOrder()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ColumnOrder()
         Dim lstColumnFunction As List(Of RFunction)
 
         For i = 1 To iColumnsUsed
@@ -112,7 +117,5 @@ Public Class dlgCombineText
                 ucrBase.clsRsyntax.AddParameter("X" & i + 1, clsRFunctionParameter:=lstColumnFunction(i))
             Next
         End If
-        TestOKEnabled()
     End Sub
-
 End Class

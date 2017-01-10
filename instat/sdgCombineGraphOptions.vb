@@ -115,7 +115,6 @@ Public Class sdgCombineGraphOptions
         Else
             clsRsyntax.RemoveParameter("ncol")
         End If
-
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.Columns = nudColumns.Value
         End If
@@ -135,10 +134,10 @@ Public Class sdgCombineGraphOptions
 
         If e.NewData.ToString() <> "" Then
             If Not IsNumeric(e.NewData) Then
-                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric character. Please enter a numeric character withinthe range of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
+                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric character. Please enter a numeric character within the range of available graphs", MsgBoxStyle.Exclamation, "Invalid Value")
                 e.EndReason = EndEditReason.Cancel
             ElseIf e.NewData > lstGraphs.Items.Count Or e.NewData < 1 Then
-                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
+                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of available graphs", MsgBoxStyle.Exclamation, "Invalid Value")
                 e.EndReason = EndEditReason.Cancel
             End If
         End If
