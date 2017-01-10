@@ -89,7 +89,7 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    Private Sub UcrInputNewName_NameChanged() Handles ucrInputNewName.NameChanged
+    Private Sub UcrInputNewName_NameChanged() Handles ucrInputNewName.NameChanged, ucrInputNewName.ContentsChanged
         If Not ucrInputNewName.IsEmpty AndAlso Not ucrReceiverName.GetVariableNames(False) = ucrInputNewName.GetText Then
             ucrBase.clsRsyntax.AddParameter("new_val", Chr(34) & ucrInputNewName.GetText & Chr(34))
         Else
