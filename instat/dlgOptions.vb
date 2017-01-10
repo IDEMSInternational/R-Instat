@@ -58,6 +58,8 @@ Public Class dlgOptions
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
         rdoDisplayinSeparateWindows.Enabled = False
+        nudDigits.Minimum = 0
+        nudDigits.Maximum = 22
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -72,6 +74,8 @@ Public Class dlgOptions
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
         chkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
         chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
+        nudDigits.Value = frmMain.clsInstatOptions.iDigits
+        chkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -110,8 +114,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
         frmMain.clsInstatOptions.bIncludeCommentDefault = chkIncludeCommentsbyDefault.Checked
         frmMain.clsInstatOptions.SetCommandInOutpt(chkShowRCommandsinOutputWindow.Checked)
-
-
+        frmMain.clsInstatOptions.SetDigits(nudDigits.Value)
+        frmMain.clsInstatOptions.SetSignifStars(chkShowSignifStars.Checked)
     End Sub
 
     Private Sub SetView()
@@ -322,6 +326,13 @@ Public Class dlgOptions
         rtbOutputPreview.SelectionLength = 0
     End Sub
 
+    Private Sub cmdFactoryReset_Click(sender As Object, e As EventArgs) Handles cmdFactoryReset.Click
+        If MsgBox("Are you sure you want to reset to factory defaults?", MessageBoxButtons.YesNo, "Factory Reset") Then
+            frmMain.clsInstatOptions = New InstatOptions(False)
+            LoadInstatOptions()
+        End If
+    End Sub
+
     Private Sub SetCommandFont(fntNew As Font, clrNew As Color)
         fntCommand = fntNew
         clrCommand = clrNew
@@ -352,5 +363,13 @@ Public Class dlgOptions
             ucrWorkingDirectory.SetName(strWorkingDirectory)
             ApplyEnabled(True)
         End If
+    End Sub
+
+    Private Sub nudDigits_ValueChanged(sender As Object, e As EventArgs) Handles nudDigits.ValueChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkShowSignifStars_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSignifStars.CheckedChanged
+        ApplyEnabled(True)
     End Sub
 End Class
