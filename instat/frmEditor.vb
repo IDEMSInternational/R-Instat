@@ -674,4 +674,8 @@ Public Class frmEditor
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
         dlgAddComment.ShowDialog()
     End Sub
+
+    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
+        dlgAddComment.ShowDialog()
+    End Sub
 End Class
