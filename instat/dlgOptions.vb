@@ -32,7 +32,6 @@ Public Class dlgOptions
     Dim fntOutput, fntCommand, fntComment, fntEditor As Font
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
 
-
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -104,8 +103,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
-        frmMain.clsInstatOptions.SetFormatCommand(fntCommand, clrCommand)
-        frmMain.clsInstatOptions.SetEditorFormat(fntEditor, clrEditor)
+        frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
+        frmMain.clsInstatOptions.SetFormatEditor(fntEditor, clrEditor)
         frmMain.clsInstatOptions.SetComment(txtComment.Text)
         frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)

@@ -71,12 +71,15 @@ Public Class frmMain
 
         Me.LayoutMdi(MdiLayout.TileVertical)
 
+
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
+
+        'Do this before setting up R Link becuase setup edits Output window which is changed by Options
+        LoadInstatOptions()
+
         'Sets up R source files
         clsRLink.RSetup()
-
-        LoadInstatOptions()
 
         'Sets up the Recent items
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
