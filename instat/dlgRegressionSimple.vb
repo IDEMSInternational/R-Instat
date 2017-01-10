@@ -153,10 +153,6 @@ Public Class dlgRegressionSimple
         clsRWilcoxTest.AddParameter("", clsROperatorParameter:=clsModel)
     End Sub
 
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
-    End Sub
-
     Private Sub SetKruskalTest()
         clsRKruskalTest.SetRCommand("kruskal.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRKruskalTest)
@@ -624,6 +620,7 @@ Public Class dlgRegressionSimple
         Else
             ucrFamily.SetExactDistributions()
         End If
+        ucrFamily.cboDistributions.ResetText()
         Display()
         SetRCode()
         TestOKEnabled()
