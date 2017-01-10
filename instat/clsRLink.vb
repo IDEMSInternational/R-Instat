@@ -447,15 +447,15 @@ Public Class RLink
         'run script to load libraries
         frmMain.Cursor = Cursors.WaitCursor
         frmSetupLoading.Show()
-        RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
-        RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
+        RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')", strComment:="Setting the working directory") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+        RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")", strComment:="Sourcing the Instat Object R code")
         CreateNewInstatObject()
         frmSetupLoading.Close()
         frmMain.Cursor = Cursors.Default
     End Sub
 
     Public Sub CreateNewInstatObject()
-        RunScript(strInstatDataObject & " <- instat_object$new()")
+        RunScript(strInstatDataObject & " <- instat_object$new()", strComment:="Defining new Instat Object")
         bInstatObjectExists = True
     End Sub
 
