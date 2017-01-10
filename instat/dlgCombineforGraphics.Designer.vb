@@ -35,7 +35,7 @@ Partial Class dlgCombineforGraphics
         Me.ucrBase.Location = New System.Drawing.Point(10, 254)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 5
         '
         'ucrCombineGraphSelector
         '
@@ -45,7 +45,7 @@ Partial Class dlgCombineforGraphics
         Me.ucrCombineGraphSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphSelector.Name = "ucrCombineGraphSelector"
         Me.ucrCombineGraphSelector.Size = New System.Drawing.Size(210, 195)
-        Me.ucrCombineGraphSelector.TabIndex = 1
+        Me.ucrCombineGraphSelector.TabIndex = 0
         '
         'ucrCombineGraphReceiver
         '
@@ -62,7 +62,7 @@ Partial Class dlgCombineforGraphics
         Me.Label1.Location = New System.Drawing.Point(252, 43)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
-        Me.Label1.TabIndex = 3
+        Me.Label1.TabIndex = 1
         Me.Label1.Text = "Graphs To Combine:"
         '
         'cmdOptions
@@ -70,7 +70,7 @@ Partial Class dlgCombineforGraphics
         Me.cmdOptions.Location = New System.Drawing.Point(10, 199)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 4
+        Me.cmdOptions.TabIndex = 3
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
@@ -79,7 +79,7 @@ Partial Class dlgCombineforGraphics
         Me.ucrSaveCombinedGraph.Location = New System.Drawing.Point(10, 228)
         Me.ucrSaveCombinedGraph.Name = "ucrSaveCombinedGraph"
         Me.ucrSaveCombinedGraph.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveCombinedGraph.TabIndex = 5
+        Me.ucrSaveCombinedGraph.TabIndex = 4
         '
         'dlgCombineforGraphics
         '
@@ -97,8 +97,8 @@ Partial Class dlgCombineforGraphics
         Me.MinimizeBox = False
         Me.Name = "dlgCombineforGraphics"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Combine"
-        Me.Text = "Combine"
+        Me.Tag = "Combine_Graphs"
+        Me.Text = "Combine Graphs"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

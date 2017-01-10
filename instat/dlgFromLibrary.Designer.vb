@@ -157,7 +157,7 @@ Partial Class dlgFromLibrary
         Me.MinimizeBox = False
         Me.Name = "dlgFromLibrary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Open dataset from library"
+        Me.Text = "Open Dataset from Library"
         Me.grpCollection.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

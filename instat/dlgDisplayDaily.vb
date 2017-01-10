@@ -31,6 +31,7 @@ Public Class dlgDisplayDaily
 
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 361
         ucrBase.clsRsyntax.SetFunction("climate_obj$display_daily_rain()")
     End Sub
     Private Sub SetDefaults()

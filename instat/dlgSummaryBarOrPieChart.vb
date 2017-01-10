@@ -63,6 +63,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSaveSummaryBar.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveSummaryBar.ucrInputGraphName.SetDefaultTypeAsGraph()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
 
     End Sub
 

@@ -141,8 +141,8 @@ Partial Class dlgAppend
         Me.MinimizeBox = False
         Me.Name = "dlgAppend"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Append_to_Dataframe"
-        Me.Text = "Append to Dataframe"
+        Me.Tag = "Append_Data_Frames"
+        Me.Text = "Append Data Frames"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
