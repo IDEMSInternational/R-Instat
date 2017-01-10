@@ -21,6 +21,20 @@ Public Class ucrCalculator
     Public Event DataFrameChanged()
     Public Event SaveResultsCheckedChanged()
     Public Event TryCommadClick()
+    Public bFirstLoad As Boolean = True
+
+    Private Sub ucrCalculator_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            InitialiseControl()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Public Sub InitialiseControl()
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates", "Rows"}) ' "Rows" is a temp. name
+        ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+    End Sub
+
     Public Sub SetCalculationHistory()
         ucrReceiverForCalculation.AddtoCombobox(ucrReceiverForCalculation.GetText)
     End Sub
