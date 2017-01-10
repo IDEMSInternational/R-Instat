@@ -66,7 +66,6 @@ Public Class frmMain
         strSaveFilePath = ""
 
         clsRLink.SetEngine()
-        LoadInstatOptions()
 
         frmEditor.Show()
 
@@ -77,6 +76,8 @@ Public Class frmMain
         'Sets up R source files
         clsRLink.RSetup()
 
+        LoadInstatOptions()
+
         'Sets up the Recent items
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
@@ -84,8 +85,8 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadInstatOptions()
-        If File.Exists(strInstatOptionsFile) Then
-            LoadInstatOptionsFromFile(strInstatOptionsFile)
+        If File.Exists(Path.Combine(strAppDataPath, strInstatOptionsFile)) Then
+            LoadInstatOptionsFromFile(Path.Combine(strAppDataPath, strInstatOptionsFile))
         Else
             clsInstatOptions = New InstatOptions
             'TODO Should these be here or in the constructor (New) of InstatOptions?
@@ -104,6 +105,7 @@ Public Class frmMain
             Try
                 Using FileStream As Stream = File.OpenRead(strFilePath)
                     clsInstatOptions = CType(deserializer.Deserialize(FileStream), InstatOptions)
+                    clsInstatOptions.SetOptions()
                     'TODO Check whether this is needed or not. Using should do it automatically.
                     '     Also check general structure of this code.
                     'FileStream.Close()
