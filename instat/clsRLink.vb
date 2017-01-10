@@ -31,6 +31,8 @@ Public Class RLink
     Public bInstatObjectExists As Boolean = False
     Public bClimsoftLinkExists As Boolean = False
     'sets the default fonts and colors
+
+    Public bShowCommands As Boolean = True
     Public fScript As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrScript As Color = Color.Black
     '
@@ -39,6 +41,8 @@ Public Class RLink
     '
     Public fComments As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrComments As Color = Color.Green
+
+    Public strGraphDisplayOption As String = "view_output_window"
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
 
@@ -92,9 +96,11 @@ Public Class RLink
         Dim clsGetDataNames As New RFunction
 
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
-        chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
-        If chrDataFrameNames IsNot Nothing Then
-            lstDataFrameNames.AddRange(chrDataFrameNames)
+        If bInstatObjectExists Then
+            chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
+            If chrDataFrameNames IsNot Nothing Then
+                lstDataFrameNames.AddRange(chrDataFrameNames)
+            End If
         End If
         Return lstDataFrameNames
     End Function
@@ -240,33 +246,42 @@ Public Class RLink
             txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
         End If
         If bOutput Then
-            If strComment <> "" Then
-                rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript, fScript, strScript & Environment.NewLine) 'TEST temporary
+            If strComment <> "" AndAlso bShowCommands Then
+                rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript, fScript, strScript & Environment.NewLine)
             Else
-                rtbOutput.AppendText(clrScript, fScript, strScript & Environment.NewLine) 'TEST temporary
+                If strComment <> "" Then
+                    rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript)
+                End If
+                If bShowCommands Then
+                    rtbOutput.AppendText(clrScript, fScript, strScript & Environment.NewLine)
+                End If
             End If
         End If
 
-        'If strScript.Length > 2000 Then
-        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-        If iCallType = 0 OrElse iCallType = 3 Then
+            'If strScript.Length > 2000 Then
+            '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+            If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
-                    clsPNGFunction.SetRCommand("png")
-                    clsPNGFunction.AddParameter("filename", Chr(34) & IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
-                    clsPNGFunction.AddParameter("width", 4000)
-                    clsPNGFunction.AddParameter("height", 4000)
-                    clsPNGFunction.AddParameter("res", 500)
-                    clsEngine.Evaluate(clsPNGFunction.ToScript())
-                    'need to boost resolution of the devices, it's not as good as with ggsave.
+                    If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
+                        clsPNGFunction.SetRCommand("png")
+                        clsPNGFunction.AddParameter("filename", Chr(34) & IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
+                        clsPNGFunction.AddParameter("width", 4000)
+                        clsPNGFunction.AddParameter("height", 4000)
+                        clsPNGFunction.AddParameter("res", 500)
+                        clsEngine.Evaluate(clsPNGFunction.ToScript())
+                        'need to boost resolution of the devices, it's not as good as with ggsave.
+                    End If
                 End If
-                clsEngine.Evaluate(strScript)
+                    clsEngine.Evaluate(strScript)
                 If iCallType = 3 Then
-                    'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
-                    clsEngine.Evaluate("graphics.off()") 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
-                    'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
-                    'This sub is used to display graphics in the output window when necessary.
-                    rtbOutput.TestForGraphics()
+                    If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
+                        'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
+                        clsEngine.Evaluate("graphics.off()") 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
+                        'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
+                        'This sub is used to display graphics in the output window when necessary.
+                        rtbOutput.TestForGraphics()
+                    End If
                 End If
             Catch e As Exception
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -590,12 +605,17 @@ Public Class RLink
         Return bExists
     End Function
 
-    Public Function GetDataFrameLength(strDataFrameName As String) As Integer
+    Public Function GetDataFrameLength(strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
         Dim intLength As Integer
         Dim clsDataFrameLength As New RFunction
 
         clsDataFrameLength.SetRCommand(strInstatDataObject & "$get_data_frame_length")
         clsDataFrameLength.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        If bUseCurrentFilter Then
+            clsDataFrameLength.AddParameter("use_current_filter", "TRUE")
+        Else
+            clsDataFrameLength.AddParameter("use_current_filter", "FALSE")
+        End If
         intLength = RunInternalScriptGetValue(clsDataFrameLength.ToScript()).AsInteger(0)
         Return intLength
     End Function
@@ -637,9 +657,11 @@ Public Class RLink
         Dim clsGetFilterNames As New RFunction
 
         clsGetFilterNames.SetRCommand(strInstatDataObject & "$get_filter_names")
-        clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        If strDataFrameName <> "" Then
+            clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
         expFilterNames = RunInternalScriptGetValue(clsGetFilterNames.ToScript(), bSilent:=True)
-        If Not expFilterNames.Type = Internals.SymbolicExpressionType.Null Then
+        If expFilterNames IsNot Nothing AndAlso Not expFilterNames.Type = Internals.SymbolicExpressionType.Null Then
             chrFilterNames = expFilterNames.AsCharacter()
             If chrFilterNames.Length > 0 Then
                 lstFilterNames.AddRange(chrFilterNames)
