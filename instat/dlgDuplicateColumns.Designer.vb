@@ -48,7 +48,7 @@ Partial Class dlgDuplicateColumns
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(11, 204)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 204)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 11
@@ -57,7 +57,7 @@ Partial Class dlgDuplicateColumns
         'ucrInputColumnName
         '
         Me.ucrInputColumnName.IsReadOnly = False
-        Me.ucrInputColumnName.Location = New System.Drawing.Point(114, 201)
+        Me.ucrInputColumnName.Location = New System.Drawing.Point(113, 201)
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
         Me.ucrInputColumnName.Size = New System.Drawing.Size(200, 21)
         Me.ucrInputColumnName.TabIndex = 10
