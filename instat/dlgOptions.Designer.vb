@@ -22,12 +22,12 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode14 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode15 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
-        Dim TreeNode16 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
-        Dim TreeNode17 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
-        Dim TreeNode18 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -49,6 +49,10 @@ Partial Class dlgOptions
         Me.lblPreviewRows = New System.Windows.Forms.Label()
         Me.nudPreviewRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
+        Me.grpROptions = New System.Windows.Forms.GroupBox()
+        Me.chkShowSignifStars = New System.Windows.Forms.CheckBox()
+        Me.lblNoDigits = New System.Windows.Forms.Label()
+        Me.nudDigits = New System.Windows.Forms.NumericUpDown()
         Me.chkShowRCommandsinOutputWindow = New System.Windows.Forms.CheckBox()
         Me.chkIncludeCommentsbyDefault = New System.Windows.Forms.CheckBox()
         Me.pnFormatOptions = New System.Windows.Forms.Panel()
@@ -80,6 +84,7 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
+        Me.cmdFactoryReset = New System.Windows.Forms.Button()
         Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
@@ -91,6 +96,8 @@ Partial Class dlgOptions
         Me.pnImportData.SuspendLayout()
         CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpOutputWindow.SuspendLayout()
+        Me.grpROptions.SuspendLayout()
+        CType(Me.nudDigits, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnFormatOptions.SuspendLayout()
         Me.tbpEditor.SuspendLayout()
         Me.pnFormatEditor.SuspendLayout()
@@ -323,6 +330,7 @@ Partial Class dlgOptions
         '
         'tbpOutputWindow
         '
+        Me.tbpOutputWindow.Controls.Add(Me.grpROptions)
         Me.tbpOutputWindow.Controls.Add(Me.chkShowRCommandsinOutputWindow)
         Me.tbpOutputWindow.Controls.Add(Me.chkIncludeCommentsbyDefault)
         Me.tbpOutputWindow.Controls.Add(Me.pnFormatOptions)
@@ -333,6 +341,44 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.TabIndex = 2
         Me.tbpOutputWindow.Text = "Output Window"
         Me.tbpOutputWindow.UseVisualStyleBackColor = True
+        '
+        'grpROptions
+        '
+        Me.grpROptions.Controls.Add(Me.chkShowSignifStars)
+        Me.grpROptions.Controls.Add(Me.lblNoDigits)
+        Me.grpROptions.Controls.Add(Me.nudDigits)
+        Me.grpROptions.Location = New System.Drawing.Point(10, 192)
+        Me.grpROptions.Name = "grpROptions"
+        Me.grpROptions.Size = New System.Drawing.Size(271, 93)
+        Me.grpROptions.TabIndex = 25
+        Me.grpROptions.TabStop = False
+        Me.grpROptions.Text = "R Options"
+        '
+        'chkShowSignifStars
+        '
+        Me.chkShowSignifStars.AutoSize = True
+        Me.chkShowSignifStars.Location = New System.Drawing.Point(7, 49)
+        Me.chkShowSignifStars.Name = "chkShowSignifStars"
+        Me.chkShowSignifStars.Size = New System.Drawing.Size(240, 17)
+        Me.chkShowSignifStars.TabIndex = 26
+        Me.chkShowSignifStars.Text = "Show stars on summary tables for coefficients"
+        Me.chkShowSignifStars.UseVisualStyleBackColor = True
+        '
+        'lblNoDigits
+        '
+        Me.lblNoDigits.AutoSize = True
+        Me.lblNoDigits.Location = New System.Drawing.Point(6, 23)
+        Me.lblNoDigits.Name = "lblNoDigits"
+        Me.lblNoDigits.Size = New System.Drawing.Size(137, 13)
+        Me.lblNoDigits.TabIndex = 1
+        Me.lblNoDigits.Text = "Number of Digits to Display:"
+        '
+        'nudDigits
+        '
+        Me.nudDigits.Location = New System.Drawing.Point(152, 21)
+        Me.nudDigits.Name = "nudDigits"
+        Me.nudDigits.Size = New System.Drawing.Size(39, 20)
+        Me.nudDigits.TabIndex = 0
         '
         'chkShowRCommandsinOutputWindow
         '
@@ -639,29 +685,29 @@ Partial Class dlgOptions
         Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.trOptions.Location = New System.Drawing.Point(0, 0)
         Me.trOptions.Name = "trOptions"
-        TreeNode13.Name = "ndLanguages"
-        TreeNode13.Tag = "1"
-        TreeNode13.Text = "Languages"
-        TreeNode13.ToolTipText = "Choose different languages"
-        TreeNode14.Name = "ndComments"
-        TreeNode14.Tag = "2"
-        TreeNode14.Text = "Comments"
-        TreeNode14.ToolTipText = "Comments for the dialogs"
-        TreeNode15.Name = "ndImport"
-        TreeNode15.Tag = "3"
-        TreeNode15.Text = "Import"
-        TreeNode15.ToolTipText = "Import Data Settings"
-        TreeNode16.Name = "ndOutputWindow"
-        TreeNode16.Tag = "4"
-        TreeNode16.Text = "Output Window"
-        TreeNode16.ToolTipText = "Output Window Formatting Options"
-        TreeNode17.Name = "ndCommands"
-        TreeNode17.Tag = "8"
-        TreeNode17.Text = "Commands"
-        TreeNode17.ToolTipText = "Commands Options"
-        TreeNode18.Name = "ndDataView"
-        TreeNode18.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode13, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18})
+        TreeNode7.Name = "ndLanguages"
+        TreeNode7.Tag = "1"
+        TreeNode7.Text = "Languages"
+        TreeNode7.ToolTipText = "Choose different languages"
+        TreeNode8.Name = "ndComments"
+        TreeNode8.Tag = "2"
+        TreeNode8.Text = "Comments"
+        TreeNode8.ToolTipText = "Comments for the dialogs"
+        TreeNode9.Name = "ndImport"
+        TreeNode9.Tag = "3"
+        TreeNode9.Text = "Import"
+        TreeNode9.ToolTipText = "Import Data Settings"
+        TreeNode10.Name = "ndOutputWindow"
+        TreeNode10.Tag = "4"
+        TreeNode10.Text = "Output Window"
+        TreeNode10.ToolTipText = "Output Window Formatting Options"
+        TreeNode11.Name = "ndCommands"
+        TreeNode11.Tag = "8"
+        TreeNode11.Text = "Commands"
+        TreeNode11.ToolTipText = "Commands Options"
+        TreeNode12.Name = "ndDataView"
+        TreeNode12.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
         Me.trOptions.Size = New System.Drawing.Size(184, 317)
         Me.trOptions.TabIndex = 0
         '
@@ -672,6 +718,7 @@ Partial Class dlgOptions
         '
         'spltControls.Panel1
         '
+        Me.spltControls.Panel1.Controls.Add(Me.cmdFactoryReset)
         Me.spltControls.Panel1.Controls.Add(Me.trOptions)
         '
         'spltControls.Panel2
@@ -680,6 +727,16 @@ Partial Class dlgOptions
         Me.spltControls.Size = New System.Drawing.Size(760, 317)
         Me.spltControls.SplitterDistance = 184
         Me.spltControls.TabIndex = 8
+        '
+        'cmdFactoryReset
+        '
+        Me.cmdFactoryReset.Location = New System.Drawing.Point(13, 287)
+        Me.cmdFactoryReset.Name = "cmdFactoryReset"
+        Me.cmdFactoryReset.Size = New System.Drawing.Size(100, 23)
+        Me.cmdFactoryReset.TabIndex = 13
+        Me.cmdFactoryReset.Tag = "Help"
+        Me.cmdFactoryReset.Text = "Factory Reset"
+        Me.cmdFactoryReset.UseVisualStyleBackColor = True
         '
         'ucrWorkingDirectory
         '
@@ -723,6 +780,9 @@ Partial Class dlgOptions
         CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpOutputWindow.ResumeLayout(False)
         Me.tbpOutputWindow.PerformLayout()
+        Me.grpROptions.ResumeLayout(False)
+        Me.grpROptions.PerformLayout()
+        CType(Me.nudDigits, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnFormatOptions.ResumeLayout(False)
         Me.pnFormatOptions.PerformLayout()
         Me.tbpEditor.ResumeLayout(False)
@@ -800,4 +860,9 @@ Partial Class dlgOptions
     Friend WithEvents rdoDisplayinOutputWindow As RadioButton
     Friend WithEvents chkShowRCommandsinOutputWindow As CheckBox
     Friend WithEvents chkIncludeCommentsbyDefault As CheckBox
+    Friend WithEvents grpROptions As GroupBox
+    Friend WithEvents lblNoDigits As Label
+    Friend WithEvents nudDigits As NumericUpDown
+    Friend WithEvents chkShowSignifStars As CheckBox
+    Friend WithEvents cmdFactoryReset As Button
 End Class
