@@ -66,8 +66,6 @@ Public Class ucrInputComboBox
     End Sub
 
     Private Sub FillItemTypes()
-        Dim strItems As String()
-
         Select Case strItemsType
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
@@ -88,10 +86,7 @@ Public Class ucrInputComboBox
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
-                    strItems = frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray()
-                    If strItems.Count > 0 Then
-                        cboInput.Items.AddRange(strItems)
-                    End If
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
         End Select
     End Sub
@@ -151,6 +146,14 @@ Public Class ucrInputComboBox
         bUserTyped = True
     End Sub
 
+    'Public Sub SetEditable(bEditable As Boolean)
+
+    '    If bEditable Then
+    '        cboInput.DropDownStyle = ComboBoxStyle.DropDownList
+    '    Else
+    '        cboInput.DropDownStyle = ComboBoxStyle.DropDown
+    '    End If
+    'End Sub
     Public Overrides Function IsEmpty() As Boolean
         If cboInput.Text = "" Then
             Return True

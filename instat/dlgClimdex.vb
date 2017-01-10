@@ -48,6 +48,7 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBaseClimdex.iHelpTopicID = 190
         clsRClimdexInput.SetRCommand("climdexInput.raw")
         clsRMaxMisingDays.SetRCommand("c")
         clsRTmax.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")

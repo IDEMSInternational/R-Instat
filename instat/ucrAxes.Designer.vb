@@ -25,12 +25,15 @@ Partial Class ucrAxes
         Me.grpAxisTitle = New System.Windows.Forms.GroupBox()
         Me.rdoTitleCustom = New System.Windows.Forms.RadioButton()
         Me.rdoTitleAuto = New System.Windows.Forms.RadioButton()
+        Me.ucrOverwriteTitle = New instat.ucrInputTextBox()
         Me.chkOverwriteTitle = New System.Windows.Forms.CheckBox()
         Me.chkDisplayTitle = New System.Windows.Forms.CheckBox()
         Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
+        Me.ucrTickMarkers = New instat.ucrInputComboBox()
         Me.lblTickMarkersNoOfDecimalPlaces = New System.Windows.Forms.Label()
         Me.nudTickMarkersNoOfDecimalPlaces = New System.Windows.Forms.NumericUpDown()
         Me.rdoTickMarkersAuto = New System.Windows.Forms.RadioButton()
+        Me.ucrSpecificValues = New instat.ucrInputTextBox()
         Me.rdoTickMarkersCustom = New System.Windows.Forms.RadioButton()
         Me.nudInStepsOf = New System.Windows.Forms.NumericUpDown()
         Me.lblInStepsOf = New System.Windows.Forms.Label()
@@ -47,9 +50,6 @@ Partial Class ucrAxes
         Me.lblLowerLimit = New System.Windows.Forms.Label()
         Me.rdoScalesCustom = New System.Windows.Forms.RadioButton()
         Me.rdoScalesAuto = New System.Windows.Forms.RadioButton()
-        Me.ucrTickMarkers = New instat.ucrInputComboBox()
-        Me.ucrSpecificValues = New instat.ucrInputTextBox()
-        Me.ucrOverwriteTitle = New instat.ucrInputTextBox()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpTickMarkers.SuspendLayout()
         CType(Me.nudTickMarkersNoOfDecimalPlaces, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,7 +71,7 @@ Partial Class ucrAxes
         Me.grpAxisTitle.Controls.Add(Me.chkDisplayTitle)
         Me.grpAxisTitle.Location = New System.Drawing.Point(3, 18)
         Me.grpAxisTitle.Name = "grpAxisTitle"
-        Me.grpAxisTitle.Size = New System.Drawing.Size(251, 116)
+        Me.grpAxisTitle.Size = New System.Drawing.Size(251, 109)
         Me.grpAxisTitle.TabIndex = 0
         Me.grpAxisTitle.TabStop = False
         Me.grpAxisTitle.Text = "Axis Title"
@@ -98,10 +98,18 @@ Partial Class ucrAxes
         Me.rdoTitleAuto.Text = "Auto"
         Me.rdoTitleAuto.UseVisualStyleBackColor = True
         '
+        'ucrOverwriteTitle
+        '
+        Me.ucrOverwriteTitle.IsReadOnly = False
+        Me.ucrOverwriteTitle.Location = New System.Drawing.Point(106, 70)
+        Me.ucrOverwriteTitle.Name = "ucrOverwriteTitle"
+        Me.ucrOverwriteTitle.Size = New System.Drawing.Size(131, 21)
+        Me.ucrOverwriteTitle.TabIndex = 1
+        '
         'chkOverwriteTitle
         '
         Me.chkOverwriteTitle.AutoSize = True
-        Me.chkOverwriteTitle.Location = New System.Drawing.Point(6, 80)
+        Me.chkOverwriteTitle.Location = New System.Drawing.Point(6, 74)
         Me.chkOverwriteTitle.Name = "chkOverwriteTitle"
         Me.chkOverwriteTitle.Size = New System.Drawing.Size(94, 17)
         Me.chkOverwriteTitle.TabIndex = 1
@@ -134,15 +142,23 @@ Partial Class ucrAxes
         Me.grpTickMarkers.Controls.Add(Me.lblTo)
         Me.grpTickMarkers.Location = New System.Drawing.Point(269, 18)
         Me.grpTickMarkers.Name = "grpTickMarkers"
-        Me.grpTickMarkers.Size = New System.Drawing.Size(194, 254)
+        Me.grpTickMarkers.Size = New System.Drawing.Size(194, 241)
         Me.grpTickMarkers.TabIndex = 1
         Me.grpTickMarkers.TabStop = False
         Me.grpTickMarkers.Text = "Tick Marks"
         '
+        'ucrTickMarkers
+        '
+        Me.ucrTickMarkers.IsReadOnly = False
+        Me.ucrTickMarkers.Location = New System.Drawing.Point(6, 44)
+        Me.ucrTickMarkers.Name = "ucrTickMarkers"
+        Me.ucrTickMarkers.Size = New System.Drawing.Size(137, 21)
+        Me.ucrTickMarkers.TabIndex = 16
+        '
         'lblTickMarkersNoOfDecimalPlaces
         '
         Me.lblTickMarkersNoOfDecimalPlaces.AutoSize = True
-        Me.lblTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(3, 118)
+        Me.lblTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(3, 102)
         Me.lblTickMarkersNoOfDecimalPlaces.Name = "lblTickMarkersNoOfDecimalPlaces"
         Me.lblTickMarkersNoOfDecimalPlaces.Size = New System.Drawing.Size(135, 13)
         Me.lblTickMarkersNoOfDecimalPlaces.TabIndex = 10
@@ -150,7 +166,7 @@ Partial Class ucrAxes
         '
         'nudTickMarkersNoOfDecimalPlaces
         '
-        Me.nudTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(141, 115)
+        Me.nudTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(141, 99)
         Me.nudTickMarkersNoOfDecimalPlaces.Name = "nudTickMarkersNoOfDecimalPlaces"
         Me.nudTickMarkersNoOfDecimalPlaces.Size = New System.Drawing.Size(38, 20)
         Me.nudTickMarkersNoOfDecimalPlaces.TabIndex = 11
@@ -166,6 +182,14 @@ Partial Class ucrAxes
         Me.rdoTickMarkersAuto.Text = "Auto"
         Me.rdoTickMarkersAuto.UseVisualStyleBackColor = True
         '
+        'ucrSpecificValues
+        '
+        Me.ucrSpecificValues.IsReadOnly = False
+        Me.ucrSpecificValues.Location = New System.Drawing.Point(6, 70)
+        Me.ucrSpecificValues.Name = "ucrSpecificValues"
+        Me.ucrSpecificValues.Size = New System.Drawing.Size(173, 21)
+        Me.ucrSpecificValues.TabIndex = 15
+        '
         'rdoTickMarkersCustom
         '
         Me.rdoTickMarkersCustom.AutoSize = True
@@ -179,7 +203,7 @@ Partial Class ucrAxes
         '
         'nudInStepsOf
         '
-        Me.nudInStepsOf.Location = New System.Drawing.Point(68, 219)
+        Me.nudInStepsOf.Location = New System.Drawing.Point(68, 182)
         Me.nudInStepsOf.Name = "nudInStepsOf"
         Me.nudInStepsOf.Size = New System.Drawing.Size(46, 20)
         Me.nudInStepsOf.TabIndex = 8
@@ -187,7 +211,7 @@ Partial Class ucrAxes
         'lblInStepsOf
         '
         Me.lblInStepsOf.AutoSize = True
-        Me.lblInStepsOf.Location = New System.Drawing.Point(6, 221)
+        Me.lblInStepsOf.Location = New System.Drawing.Point(3, 185)
         Me.lblInStepsOf.Name = "lblInStepsOf"
         Me.lblInStepsOf.Size = New System.Drawing.Size(61, 13)
         Me.lblInStepsOf.TabIndex = 9
@@ -196,7 +220,7 @@ Partial Class ucrAxes
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(6, 149)
+        Me.lblFrom.Location = New System.Drawing.Point(3, 133)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 5
@@ -204,14 +228,14 @@ Partial Class ucrAxes
         '
         'nudFrom
         '
-        Me.nudFrom.Location = New System.Drawing.Point(68, 146)
+        Me.nudFrom.Location = New System.Drawing.Point(68, 130)
         Me.nudFrom.Name = "nudFrom"
         Me.nudFrom.Size = New System.Drawing.Size(46, 20)
         Me.nudFrom.TabIndex = 4
         '
         'nudTo
         '
-        Me.nudTo.Location = New System.Drawing.Point(68, 183)
+        Me.nudTo.Location = New System.Drawing.Point(68, 156)
         Me.nudTo.Name = "nudTo"
         Me.nudTo.Size = New System.Drawing.Size(46, 20)
         Me.nudTo.TabIndex = 7
@@ -219,7 +243,7 @@ Partial Class ucrAxes
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(6, 186)
+        Me.lblTo.Location = New System.Drawing.Point(3, 159)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 6
@@ -235,16 +259,16 @@ Partial Class ucrAxes
         Me.grpScales.Controls.Add(Me.lblLowerLimit)
         Me.grpScales.Controls.Add(Me.rdoScalesCustom)
         Me.grpScales.Controls.Add(Me.rdoScalesAuto)
-        Me.grpScales.Location = New System.Drawing.Point(3, 147)
+        Me.grpScales.Location = New System.Drawing.Point(3, 127)
         Me.grpScales.Name = "grpScales"
-        Me.grpScales.Size = New System.Drawing.Size(251, 145)
+        Me.grpScales.Size = New System.Drawing.Size(251, 132)
         Me.grpScales.TabIndex = 2
         Me.grpScales.TabStop = False
         Me.grpScales.Text = "Scales"
         '
         'nudScalesNoOfDecimalPlaces
         '
-        Me.nudScalesNoOfDecimalPlaces.Location = New System.Drawing.Point(140, 118)
+        Me.nudScalesNoOfDecimalPlaces.Location = New System.Drawing.Point(141, 99)
         Me.nudScalesNoOfDecimalPlaces.Name = "nudScalesNoOfDecimalPlaces"
         Me.nudScalesNoOfDecimalPlaces.Size = New System.Drawing.Size(39, 20)
         Me.nudScalesNoOfDecimalPlaces.TabIndex = 7
@@ -252,7 +276,7 @@ Partial Class ucrAxes
         'lblScalesNoDecimalPlaces
         '
         Me.lblScalesNoDecimalPlaces.AutoSize = True
-        Me.lblScalesNoDecimalPlaces.Location = New System.Drawing.Point(3, 121)
+        Me.lblScalesNoDecimalPlaces.Location = New System.Drawing.Point(3, 102)
         Me.lblScalesNoDecimalPlaces.Name = "lblScalesNoDecimalPlaces"
         Me.lblScalesNoDecimalPlaces.Size = New System.Drawing.Size(135, 13)
         Me.lblScalesNoDecimalPlaces.TabIndex = 6
@@ -260,14 +284,14 @@ Partial Class ucrAxes
         '
         'nudUpperLimit
         '
-        Me.nudUpperLimit.Location = New System.Drawing.Point(69, 85)
+        Me.nudUpperLimit.Location = New System.Drawing.Point(69, 72)
         Me.nudUpperLimit.Name = "nudUpperLimit"
         Me.nudUpperLimit.Size = New System.Drawing.Size(46, 20)
         Me.nudUpperLimit.TabIndex = 3
         '
         'nudLowerLimit
         '
-        Me.nudLowerLimit.Location = New System.Drawing.Point(69, 52)
+        Me.nudLowerLimit.Location = New System.Drawing.Point(69, 46)
         Me.nudLowerLimit.Name = "nudLowerLimit"
         Me.nudLowerLimit.Size = New System.Drawing.Size(46, 20)
         Me.nudLowerLimit.TabIndex = 3
@@ -275,7 +299,7 @@ Partial Class ucrAxes
         'lblUpperLimit
         '
         Me.lblUpperLimit.AutoSize = True
-        Me.lblUpperLimit.Location = New System.Drawing.Point(3, 87)
+        Me.lblUpperLimit.Location = New System.Drawing.Point(3, 75)
         Me.lblUpperLimit.Name = "lblUpperLimit"
         Me.lblUpperLimit.Size = New System.Drawing.Size(66, 13)
         Me.lblUpperLimit.TabIndex = 5
@@ -284,7 +308,7 @@ Partial Class ucrAxes
         'lblLowerLimit
         '
         Me.lblLowerLimit.AutoSize = True
-        Me.lblLowerLimit.Location = New System.Drawing.Point(3, 54)
+        Me.lblLowerLimit.Location = New System.Drawing.Point(3, 48)
         Me.lblLowerLimit.Name = "lblLowerLimit"
         Me.lblLowerLimit.Size = New System.Drawing.Size(66, 13)
         Me.lblLowerLimit.TabIndex = 3
@@ -312,30 +336,6 @@ Partial Class ucrAxes
         Me.rdoScalesAuto.Text = "Auto"
         Me.rdoScalesAuto.UseVisualStyleBackColor = True
         '
-        'ucrTickMarkers
-        '
-        Me.ucrTickMarkers.IsReadOnly = False
-        Me.ucrTickMarkers.Location = New System.Drawing.Point(6, 51)
-        Me.ucrTickMarkers.Name = "ucrTickMarkers"
-        Me.ucrTickMarkers.Size = New System.Drawing.Size(137, 21)
-        Me.ucrTickMarkers.TabIndex = 16
-        '
-        'ucrSpecificValues
-        '
-        Me.ucrSpecificValues.IsReadOnly = False
-        Me.ucrSpecificValues.Location = New System.Drawing.Point(6, 78)
-        Me.ucrSpecificValues.Name = "ucrSpecificValues"
-        Me.ucrSpecificValues.Size = New System.Drawing.Size(173, 21)
-        Me.ucrSpecificValues.TabIndex = 15
-        '
-        'ucrOverwriteTitle
-        '
-        Me.ucrOverwriteTitle.IsReadOnly = False
-        Me.ucrOverwriteTitle.Location = New System.Drawing.Point(106, 78)
-        Me.ucrOverwriteTitle.Name = "ucrOverwriteTitle"
-        Me.ucrOverwriteTitle.Size = New System.Drawing.Size(131, 21)
-        Me.ucrOverwriteTitle.TabIndex = 1
-        '
         'ucrAxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -344,7 +344,7 @@ Partial Class ucrAxes
         Me.Controls.Add(Me.grpTickMarkers)
         Me.Controls.Add(Me.grpAxisTitle)
         Me.Name = "ucrAxes"
-        Me.Size = New System.Drawing.Size(470, 300)
+        Me.Size = New System.Drawing.Size(470, 269)
         Me.grpAxisTitle.ResumeLayout(False)
         Me.grpAxisTitle.PerformLayout()
         Me.grpTickMarkers.ResumeLayout(False)

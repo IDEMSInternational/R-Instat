@@ -38,6 +38,7 @@ Public Class dlgCombineforGraphics
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.SetFunction("gridExtra::grid.arrange")
         ucrCombineGraphReceiver.strSelectorHeading = "Graphs"
+        ucrBase.clsRsyntax.iCallType = 3
     End Sub
 
     Private Sub SetDefaults()

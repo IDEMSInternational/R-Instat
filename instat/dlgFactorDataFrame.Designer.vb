@@ -39,7 +39,7 @@ Partial Class dlgFactorDataFrame
         Me.chkReplaceFactorSheet.Name = "chkReplaceFactorSheet"
         Me.chkReplaceFactorSheet.Size = New System.Drawing.Size(167, 17)
         Me.chkReplaceFactorSheet.TabIndex = 2
-        Me.chkReplaceFactorSheet.Text = "Replace Current Factor Sheet"
+        Me.chkReplaceFactorSheet.Text = "Replace if already exists"
         Me.chkReplaceFactorSheet.UseVisualStyleBackColor = True
         '
         'chkAddCurrentContrast
@@ -94,7 +94,7 @@ Partial Class dlgFactorDataFrame
         Me.lblFactorNames.Name = "lblFactorNames"
         Me.lblFactorNames.Size = New System.Drawing.Size(76, 13)
         Me.lblFactorNames.TabIndex = 6
-        Me.lblFactorNames.Text = "Factor Names:"
+        Me.lblFactorNames.Text = "New Data Frame Name:"
         '
         'ucrInputFactorNames
         '

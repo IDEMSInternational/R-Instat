@@ -21,7 +21,9 @@ Imports instat.Translations
 Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
+    Public strOutputWindowDisplay As String
     Public strWorkingDirectory As String
+    Private strGraphDisplayOption As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
     'Define the Fonts dialog (only one)
@@ -55,6 +57,7 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
+        rdoDisplayinSeparateWindows.Enabled = False
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -67,20 +70,30 @@ Public Class dlgOptions
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
+        chkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-                ' temp disabled as not functioning
-                'Case "fr-FR"
-                '    rdoFrench.Checked = True
-                'Case "sw-KE"
-                '    rdoKiswahili.Checked = True
-                'Case "es-ES"
-                '    rdoSpanish.Checked = True
+            ' temp disabled as not functioning
+            'Case "fr-FR"
+            '    rdoFrench.Checked = True
+            'Case "sw-KE"
+            '    rdoKiswahili.Checked = True
+            'Case "es-ES"
+            '    rdoSpanish.Checked = True
             Case Else
                 rdoEnglish.Checked = True
         End Select
+
+        If frmMain.clsInstatOptions.strGraphDisplayOption = "view_output_window" Then
+            rdoDisplayinOutputWindow.Checked = True
+        ElseIf frmMain.clsInstatOptions.strGraphDisplayOption = "view_separate_window" Then
+            rdoDisplayinSeparateWindows.Checked = True
+        ElseIf frmMain.clsInstatOptions.strGraphDisplayOption = "view_R_viewer" Then
+            rdoDisplayinRViewer.Checked = True
+        End If
     End Sub
 
     Private Sub SetInstatOptions()
@@ -94,6 +107,10 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
+        frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
+        frmMain.clsInstatOptions.bIncludeCommentDefault = chkIncludeCommentsbyDefault.Checked
+        frmMain.clsInstatOptions.SetCommandInOutpt(chkShowRCommandsinOutputWindow.Checked)
+
 
     End Sub
 
@@ -264,10 +281,30 @@ Public Class dlgOptions
     End Sub
 
     Private Sub chkIncludeDefaultParams_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeDefaultParams.CheckedChanged
-        frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
+        ApplyEnabled(True)
     End Sub
 
     Private Sub nudMaxRows_TextChanged(sender As Object, e As EventArgs) Handles nudMaxRows.TextChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub rdoDisplayinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDisplayinOutputWindow.CheckedChanged, rdoDisplayinSeparateWindows.CheckedChanged, rdoDisplayinRViewer.CheckedChanged
+        If rdoDisplayinOutputWindow.Checked Then
+            strGraphDisplayOption = "view_output_window"
+        ElseIf rdoDisplayinSeparateWindows.Checked Then
+            strGraphDisplayOption = "view_separate_window"
+        ElseIf rdoDisplayinRViewer.Checked Then
+            strGraphDisplayOption = "view_R_viewer"
+        End If
+
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeCommentsbyDefault.CheckedChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowRCommandsinOutputWindow.CheckedChanged
         ApplyEnabled(True)
     End Sub
 

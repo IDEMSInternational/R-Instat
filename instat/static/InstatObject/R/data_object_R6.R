@@ -886,8 +886,8 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
 }
 )
 
-data_object$set("public", "get_data_frame_length", function() {
-  return(nrow(self$get_data_frame(use_current_filter = FALSE)))
+data_object$set("public", "get_data_frame_length", function(use_current_filter = FALSE) {
+  return(nrow(self$get_data_frame(use_current_filter = use_current_filter)))
 }
 )
 
@@ -1431,15 +1431,20 @@ data_object$set("public", "unfreeze_columns", function() {
 
 #TODO maybe get ride of this method as that you can't create a key without
 #     the instat object also creating a self link
-data_object$set("public", "add_key", function(col_names) {
+data_object$set("public", "add_key", function(col_names, key_name) {
   if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
     stop("key columns must have unique combinations")
+  }
+  if(sum(is.na(self$get_columns_from_data(col_names, use_current_filter = FALSE))) > 0) {
+    stop("key columns cannot have missing values")
   }
   if(self$is_key(col_names)) {
     message("A key with these columns already exists. No action will be taken.")
   }
   else {
-    private$keys[[length(private$keys) + 1]] <- col_names
+    if(missing(key_name)) key_name <- next_default_item("key", names(private$keys))
+    if(key_name %in% names(private$keys)) warning("A key called ", key_name, " already exists. It wil be replaced.")
+    private$keys[[key_name]] <- col_names
     self$append_to_variables_metadata(col_names, is_key_label, TRUE)
     if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
     self$append_to_metadata(is_linkable, TRUE)
@@ -1531,7 +1536,7 @@ data_object$set("public", "remove_column_colours", function() {
 }
 )
 
-data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
+data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, coord_flip = FALSE, ...) {
   if(!all(columns %in% self$get_column_names())) {
     stop("Not all columns found in the data")
   }
@@ -1605,6 +1610,9 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + curr_geom()
     }
 
+    if (coord_flip) {
+      g <- g + coord_flip()
+    }   
     if(free_scale_axis) {
       g <- g + facet_wrap(facets = ~ variable, scales = "free", ncol = ncol)
     }
@@ -1635,6 +1643,9 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       else {
         g <- ggplot(data = curr_data, mapping = aes_(x = as.name(column))) + ylab("")
       }
+      if (coord_flip) {
+        g <- g + coord_flip()
+      } 
       if(curr_geom_name == "box_jitter") {
         g <- g + geom_boxplot() + geom_jitter()
       }
@@ -1643,6 +1654,9 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       }
       else if(curr_geom_name == "violin_box") {
         g <- g + geom_violin() + geom_boxplot()
+      }
+      else if(curr_geom_name == "pie_chart") {
+        g <- g + geom_bar() + coord_polar(theta = "x")
       }
       else {
         g <- g + curr_geom()
@@ -1675,7 +1689,10 @@ data_object$set("public","make_date_yearmonthday", function(year, month, day, ye
     }
   }
   if(missing(month_format)) {
-    #TODO
+    if(all(month %in% month.name)) month_format = "%B"
+    else if(all(month %in% month.abb)) month_format = "%b"
+    else if(all(month %in% 1:12)) month_format = "%m"
+    else stop("Cannot detect month format")
   }
   if(missing(day_format)) {
     #TODO
@@ -1882,5 +1899,57 @@ data_object$set("public","make_inventory_plot", function(year, doy, col_name, ad
     g <- g + coord_flip()
   }
   return(g)
+}
+)
+
+data_object$set("public","infill_missing_dates", function(date_name, factors) {
+  date_col <- self$get_columns_from_data(date_name)
+  if(!is.Date(date_col)) stop(date_name, " is not a Date column.")
+  if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
+  if(missing(factors)) {
+    if(anyDuplicated(date_col) > 0) stop("Cannot do infilling as date column has duplicate values.")
+    min <- min(date_col)
+    max <- max(date_col)
+    full_dates <- seq(min, max, by = "day")
+    if(length(full_dates) > length(date_col)) {
+      message("Attempting to infill ", (length(full_dates) - length(date_col)), " missing dates...")
+      full_dates <- data.frame(full_dates)
+      names(full_dates) <- date_name
+      self$merge_data(full_dates, by = date_name, type = "full")
+      message("Missing dates infilled.")
+      self$sort_dataframe(col_names = date_name)
+    }
+  }
+  else {
+    merge_required <- FALSE
+    col_names_exp <- c()
+    for(i in seq_along(factors)) {
+      col_name <- factors[i]
+      col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+    }
+    grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% group_by_(.dots = col_names_exp)
+    date_ranges <- grouped_data %>% summarise_(.dots = setNames(list(interp(~ min(var), var = as.name(date_name)), interp(~ max(var), var = as.name(date_name))), c("Min", "Max")))
+    date_lengths <- grouped_data %>% summarise(Count = n())
+    print(date_lengths)
+    full_dates_list <- list()
+    for(j in 1:nrow(date_ranges)) {
+      full_dates <- seq(date_ranges$Min[j], date_ranges$Max[j], by = "day")
+      if(length(full_dates) > date_lengths[[2]][j]) {
+        message("Attempting to infill ", (length(full_dates) - date_lengths[[2]][j]), " missing dates for ", paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"))
+        merge_required <- TRUE
+      }
+      full_dates <- data.frame(full_dates)
+      names(full_dates) <- date_name
+      for(k in seq_along(factors)) {
+        full_dates[[factors[k]]] <- date_ranges[[k]][j]
+      }
+      full_dates_list[[j]] <- full_dates
+    }
+    if(merge_required) {
+      all_dates_factors <- rbind.fill(full_dates_list)
+      self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
+      self$sort_dataframe(col_names = c(date_name, factors))
+    }
+  }
 }
 )

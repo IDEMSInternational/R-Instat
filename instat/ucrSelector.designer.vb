@@ -28,6 +28,7 @@ Partial Class ucrSelector
         Me.AddSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectionMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -49,9 +50,9 @@ Partial Class ucrSelector
         '
         'SelectionMenuStrip
         '
-        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem})
+        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem, Me.AddAllToolStripMenuItem})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 70)
+        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 114)
         '
         'AddSelectedToolStripMenuItem
         '
@@ -74,6 +75,12 @@ Partial Class ucrSelector
         Me.ClearSelectionToolStripMenuItem.Tag = "Clear_Selection"
         Me.ClearSelectionToolStripMenuItem.Text = "Clear Selection"
         '
+        'AddAllToolStripMenuItem
+        '
+        Me.AddAllToolStripMenuItem.Name = "AddAllToolStripMenuItem"
+        Me.AddAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AddAllToolStripMenuItem.Text = "Add All"
+        '
         'ucrSelector
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -91,4 +98,5 @@ Partial Class ucrSelector
     Friend WithEvents AddSelectedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearSelectionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AddAllToolStripMenuItem As ToolStripMenuItem
 End Class
