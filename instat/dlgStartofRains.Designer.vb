@@ -149,7 +149,7 @@ Partial Class dlgStartofRains
         '
         'nudMaximumDays
         '
-        Me.nudMaximumDays.Location = New System.Drawing.Point(201, 68)
+        Me.nudMaximumDays.Location = New System.Drawing.Point(201, 67)
         Me.nudMaximumDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMaximumDays.Name = "nudMaximumDays"
         Me.nudMaximumDays.Size = New System.Drawing.Size(47, 20)
@@ -158,7 +158,7 @@ Partial Class dlgStartofRains
         '
         'nudOverDays
         '
-        Me.nudOverDays.Location = New System.Drawing.Point(337, 45)
+        Me.nudOverDays.Location = New System.Drawing.Point(337, 44)
         Me.nudOverDays.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
         Me.nudOverDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudOverDays.Name = "nudOverDays"
@@ -215,7 +215,7 @@ Partial Class dlgStartofRains
         'chkDrySpell
         '
         Me.chkDrySpell.AutoSize = True
-        Me.chkDrySpell.Location = New System.Drawing.Point(7, 71)
+        Me.chkDrySpell.Location = New System.Drawing.Point(7, 70)
         Me.chkDrySpell.Name = "chkDrySpell"
         Me.chkDrySpell.Size = New System.Drawing.Size(68, 17)
         Me.chkDrySpell.TabIndex = 10
@@ -225,7 +225,7 @@ Partial Class dlgStartofRains
         'chkTotalRainfall
         '
         Me.chkTotalRainfall.AutoSize = True
-        Me.chkTotalRainfall.Location = New System.Drawing.Point(7, 44)
+        Me.chkTotalRainfall.Location = New System.Drawing.Point(7, 45)
         Me.chkTotalRainfall.Name = "chkTotalRainfall"
         Me.chkTotalRainfall.Size = New System.Drawing.Size(88, 17)
         Me.chkTotalRainfall.TabIndex = 5
