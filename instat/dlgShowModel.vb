@@ -27,12 +27,11 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverExpressionForTablePlus.IsEmpty OrElse ucrInputProbabilities.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
+        If (Not ucrReceiverExpressionForTablePlus.IsEmpty) OrElse (Not ucrInputProbabilities.IsEmpty) Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -55,11 +54,11 @@ Public Class dlgShowModel
         SetName()
         chkSingleValues.Checked = True
         chkGraphResults.Checked = True
-        DisplayGraphResults()
-        Results()
         ReceiverLabels()
+        Results()
         SaveResults()
         SetItems()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetItems()
@@ -72,7 +71,6 @@ Public Class dlgShowModel
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 
     Private Sub SetName()
@@ -82,11 +80,11 @@ Public Class dlgShowModel
             ucrInputProbabilities.SetName("0.5")
         End If
     End Sub
-    Private Sub chkGraphResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphResults.CheckedChanged, chkSaveResults.CheckedChanged
+
+    Private Sub chkSaveResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphResults.CheckedChanged, chkSaveResults.CheckedChanged
         ucrInputProbabilities.Reset()
-        DisplayGraphResults()
+        ReceiverLabels()
         SaveResults()
-        TestOKEnabled()
     End Sub
 
     Private Sub PqParameters()
@@ -105,7 +103,6 @@ Public Class dlgShowModel
                 End If
             End If
         Else
-
             If chkSingleValues.Checked Then
                 If ucrInputProbabilities.IsEmpty = False Then
                     ucrBase.clsRsyntax.AddParameter("p", "c(" & ucrInputProbabilities.GetText & ")")
@@ -120,7 +117,6 @@ Public Class dlgShowModel
                 End If
             End If
         End If
-
     End Sub
 
     Private Sub SaveResults()
@@ -152,6 +148,7 @@ Public Class dlgShowModel
         ucrBase.clsRsyntax.ClearParameters()
         ucrBase.clsRsyntax.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34))
         PqParameters()
+        DisplayGraphResults()
         If rdoProbabilities.Checked Then
             If Not ucrInputNewColNameforTablePlus.bUserTyped Then
                 ucrInputNewColNameforTablePlus.SetPrefix("Prob")
@@ -167,7 +164,6 @@ Public Class dlgShowModel
             lblProbValues.Visible = True
             ucrBase.clsRsyntax.SetFunction("mosaic::qdist")
         End If
-
         For Each clstempparam In ucrDistributionsFOrTablePlus.clsCurrRFunction.clsParameters
             ucrBase.clsRsyntax.AddParameter(clstempparam.Clone())
         Next
@@ -175,6 +171,7 @@ Public Class dlgShowModel
 
     Private Sub ucrReceiverExpressionForTablePlus_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionForTablePlus.SelectionChanged
         ReceiverLabels()
+        DisplayGraphResults()
         TestOKEnabled()
     End Sub
 
@@ -189,8 +186,7 @@ Public Class dlgShowModel
 
     Private Sub chkSIngleValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkSingleValues.CheckedChanged
         Results()
-        PqParameters()
-        TestOKEnabled()
+        ReceiverLabels()
     End Sub
 
     Private Sub Results()
@@ -198,9 +194,11 @@ Public Class dlgShowModel
             chkSaveResults.Visible = False
             ucrInputNewColNameforTablePlus.Visible = False
             ucrReceiverExpressionForTablePlus.Visible = False
+            ucrSelectorForDataFrame.Reset()
             ucrInputProbabilities.Visible = True
         Else
             chkSaveResults.Visible = True
+            ucrInputProbabilities.Reset()
             ucrReceiverExpressionForTablePlus.Visible = True
             ucrInputNewColNameforTablePlus.Visible = False
             ucrInputProbabilities.Visible = False
