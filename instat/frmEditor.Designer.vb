@@ -72,6 +72,7 @@ Partial Class frmEditor
         Me.lblRowDisplay = New System.Windows.Forms.Label()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -241,35 +242,35 @@ Partial Class frmEditor
         '
         'cellContextMenuStrip
         '
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddComment, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(103, 70)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(163, 114)
         '
         'cutRangeToolStripMenuItem
         '
         Me.cutRangeToolStripMenuItem.Enabled = False
         Me.cutRangeToolStripMenuItem.Name = "cutRangeToolStripMenuItem"
-        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
+        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.cutRangeToolStripMenuItem.Text = "Cut"
         '
         'copyRangeToolStripMenuItem
         '
         Me.copyRangeToolStripMenuItem.Name = "copyRangeToolStripMenuItem"
-        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
+        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.copyRangeToolStripMenuItem.Text = "Copy"
         '
         'pasteRangeToolStripMenuItem
         '
         Me.pasteRangeToolStripMenuItem.Enabled = False
         Me.pasteRangeToolStripMenuItem.Name = "pasteRangeToolStripMenuItem"
-        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
+        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.pasteRangeToolStripMenuItem.Text = "Paste"
         '
         'rowContextMenuStrip
         '
         Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows, Me.ToolStripSeparator2, Me.mnuAddComment, Me.ToolStripSeparator4, Me.mnuFilter, Me.mnuRemoveCurrentFilter})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(190, 170)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(190, 148)
         '
         'mnuInsertRowsBefore
         '
@@ -399,6 +400,12 @@ Partial Class frmEditor
         Me.mnuAddComment.Size = New System.Drawing.Size(189, 22)
         Me.mnuAddComment.Text = "Add Comment..."
         '
+        'AddComment
+        '
+        Me.AddComment.Name = "AddComment"
+        Me.AddComment.Size = New System.Drawing.Size(162, 22)
+        Me.AddComment.Text = "Add Comment..."
+        '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -469,4 +476,5 @@ Partial Class frmEditor
     Friend WithEvents lblRowDisplay As Label
     Friend WithEvents mnuAddComment As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents AddComment As ToolStripMenuItem
 End Class
