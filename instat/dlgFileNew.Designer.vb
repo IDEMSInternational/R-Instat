@@ -112,7 +112,7 @@ Partial Class dlgFileNew
         Me.MinimizeBox = False
         Me.Name = "dlgFileNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "New file"
+        Me.Text = "New File"
         CType(Me.nudRows, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

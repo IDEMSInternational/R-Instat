@@ -1725,7 +1725,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
         Me.Name = "ucrCalculator"
-        Me.Size = New System.Drawing.Size(776, 322)
+        Me.Size = New System.Drawing.Size(555, 322)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
         Me.grpRows.ResumeLayout(False)

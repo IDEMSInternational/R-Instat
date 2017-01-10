@@ -88,6 +88,7 @@ data_object$set("public", "save_calculation", function(calc) {
 # type             : string - one of "by", "calculation", "filter", "summary", "combination" to determine the type of calculation to do
 #                             each corresponds directly to one of dplyr's functions (except combination).
 #                             "by" - for dplyr's "group_by", to group the data by column(s) (usually factors) in preparation for doing summaries, for example.
+#                             "sort" - for dplyr's "arrange", to sort the data by column(s)
 #                             "calculation" - for dplyr's "mutate", a simple calculation to produce a column within the same data frame
 #                             "filter" - for dplyr's "filter", to filter the rows of a data frame by any logical expression
 #                             "summary" - for dplyr's "summarise", to produce summaries. Produces a singple value unless the data is already grouped, 
@@ -424,6 +425,12 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
     # link unchanged
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(.dots = col_names_exp, add = TRUE)
   }
+  # This type is sorting the data
+  # The rows are now in a different order so a merge is required
+  else if(calc$type == "sort") {
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% arrange_(.dots = col_names_exp)
+    curr_data_list[[c_has_filter_label]] <- TRUE
+  }
   # This type is filtering the data
   # The data is at the same "level" so the link is unchanged
   # The rows are now different so a merge is required
@@ -452,6 +459,13 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   else if(calc$save == 1) self$save_calculation(data_names, calc)
   # list is returned so it can be used recursively for manipulations, sub_calculations etc.
   return(curr_data_list)
+}
+)
+
+# Call this to run a calculation and display the data
+instat_object$set("public", "run_instat_calculation", function(calc, display = TRUE) {
+  out <- self$apply_instat_calculation(calc)
+  if(display) return(out$data)
 }
 )
 

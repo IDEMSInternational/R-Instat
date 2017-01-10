@@ -127,6 +127,11 @@ Public Class RSyntax
         clsBaseOperator.AddParameter(strParameterName, strValue, clsRFunc, clsOp, bIncludeArgumentName, clsParam, iPosition)
     End Sub
 
+    Public Sub SetOperatorParameter(iPosition As Integer, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
+        'This will replace the above
+        clsBaseOperator.AddParameter(strParameterName, strValue, clsRFunc, clsOp, bIncludeArgumentName, clsParam, iPosition)
+    End Sub
+
     Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True)
         clsBaseOperator.AddParameter(strParameterName, strParameterValue, clsRFunc, clsOp, bIncludeArgumentName)
     End Sub
