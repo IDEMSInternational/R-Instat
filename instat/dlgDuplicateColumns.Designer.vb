@@ -42,7 +42,7 @@ Partial Class dlgDuplicateColumns
         Me.lblColumns.Location = New System.Drawing.Point(225, 37)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(105, 13)
-        Me.lblColumns.TabIndex = 7
+        Me.lblColumns.TabIndex = 1
         Me.lblColumns.Text = "Column to Duplicate:"
         '
         'lblNewColumnName
@@ -51,7 +51,7 @@ Partial Class dlgDuplicateColumns
         Me.lblNewColumnName.Location = New System.Drawing.Point(9, 204)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 11
+        Me.lblNewColumnName.TabIndex = 4
         Me.lblNewColumnName.Text = "New Column Name:"
         '
         'ucrInputColumnName
@@ -60,7 +60,7 @@ Partial Class dlgDuplicateColumns
         Me.ucrInputColumnName.Location = New System.Drawing.Point(113, 201)
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
         Me.ucrInputColumnName.Size = New System.Drawing.Size(200, 21)
-        Me.ucrInputColumnName.TabIndex = 10
+        Me.ucrInputColumnName.TabIndex = 5
         '
         'ucrReceiverForCopyColumns
         '
@@ -69,7 +69,7 @@ Partial Class dlgDuplicateColumns
         Me.ucrReceiverForCopyColumns.Name = "ucrReceiverForCopyColumns"
         Me.ucrReceiverForCopyColumns.Selector = Nothing
         Me.ucrReceiverForCopyColumns.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverForCopyColumns.TabIndex = 9
+        Me.ucrReceiverForCopyColumns.TabIndex = 2
         '
         'ucrSelectorForDuplicateColumn
         '
@@ -79,7 +79,7 @@ Partial Class dlgDuplicateColumns
         Me.ucrSelectorForDuplicateColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDuplicateColumn.Name = "ucrSelectorForDuplicateColumn"
         Me.ucrSelectorForDuplicateColumn.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForDuplicateColumn.TabIndex = 8
+        Me.ucrSelectorForDuplicateColumn.TabIndex = 0
         '
         'grpDuplicatedColumn
         '
@@ -90,7 +90,7 @@ Partial Class dlgDuplicateColumns
         Me.grpDuplicatedColumn.Location = New System.Drawing.Point(225, 80)
         Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
         Me.grpDuplicatedColumn.Size = New System.Drawing.Size(185, 110)
-        Me.grpDuplicatedColumn.TabIndex = 12
+        Me.grpDuplicatedColumn.TabIndex = 3
         Me.grpDuplicatedColumn.TabStop = False
         Me.grpDuplicatedColumn.Text = "Position of Duplicated Column"
         '
@@ -100,7 +100,7 @@ Partial Class dlgDuplicateColumns
         Me.rdoBefore.Location = New System.Drawing.Point(6, 42)
         Me.rdoBefore.Name = "rdoBefore"
         Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
-        Me.rdoBefore.TabIndex = 3
+        Me.rdoBefore.TabIndex = 1
         Me.rdoBefore.TabStop = True
         Me.rdoBefore.Text = "Before"
         Me.rdoBefore.UseVisualStyleBackColor = True
@@ -111,7 +111,7 @@ Partial Class dlgDuplicateColumns
         Me.rdoEnd.Location = New System.Drawing.Point(6, 88)
         Me.rdoEnd.Name = "rdoEnd"
         Me.rdoEnd.Size = New System.Drawing.Size(44, 17)
-        Me.rdoEnd.TabIndex = 2
+        Me.rdoEnd.TabIndex = 3
         Me.rdoEnd.TabStop = True
         Me.rdoEnd.Text = "End"
         Me.rdoEnd.UseVisualStyleBackColor = True
@@ -122,7 +122,7 @@ Partial Class dlgDuplicateColumns
         Me.rdoAfter.Location = New System.Drawing.Point(6, 65)
         Me.rdoAfter.Name = "rdoAfter"
         Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
-        Me.rdoAfter.TabIndex = 1
+        Me.rdoAfter.TabIndex = 2
         Me.rdoAfter.TabStop = True
         Me.rdoAfter.Text = "After"
         Me.rdoAfter.UseVisualStyleBackColor = True
