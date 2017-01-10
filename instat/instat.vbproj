@@ -5443,6 +5443,7 @@
     <Content Include="static\Help\Statistics Glossary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\Help\LICENSE" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
