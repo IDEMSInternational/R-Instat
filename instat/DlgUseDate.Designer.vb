@@ -25,6 +25,7 @@ Partial Class dlgUseDate
         Me.lblDateVariable = New System.Windows.Forms.Label()
         Me.grpDateFunctions = New System.Windows.Forms.GroupBox()
         Me.grpOthers = New System.Windows.Forms.GroupBox()
+        Me.chkDekades = New System.Windows.Forms.CheckBox()
         Me.chkPentade = New System.Windows.Forms.CheckBox()
         Me.chkLeapYear = New System.Windows.Forms.CheckBox()
         Me.chkDecade = New System.Windows.Forms.CheckBox()
@@ -69,22 +70,33 @@ Partial Class dlgUseDate
         Me.grpDateFunctions.Controls.Add(Me.grpValues)
         Me.grpDateFunctions.Location = New System.Drawing.Point(14, 196)
         Me.grpDateFunctions.Name = "grpDateFunctions"
-        Me.grpDateFunctions.Size = New System.Drawing.Size(445, 186)
+        Me.grpDateFunctions.Size = New System.Drawing.Size(445, 212)
         Me.grpDateFunctions.TabIndex = 3
         Me.grpDateFunctions.TabStop = False
         Me.grpDateFunctions.Text = "Date Functions"
         '
         'grpOthers
         '
+        Me.grpOthers.Controls.Add(Me.chkDekades)
         Me.grpOthers.Controls.Add(Me.chkPentade)
         Me.grpOthers.Controls.Add(Me.chkLeapYear)
         Me.grpOthers.Controls.Add(Me.chkDecade)
         Me.grpOthers.Location = New System.Drawing.Point(6, 136)
         Me.grpOthers.Name = "grpOthers"
-        Me.grpOthers.Size = New System.Drawing.Size(429, 40)
+        Me.grpOthers.Size = New System.Drawing.Size(429, 70)
         Me.grpOthers.TabIndex = 3
         Me.grpOthers.TabStop = False
         Me.grpOthers.Text = "Other Functions"
+        '
+        'chkDekades
+        '
+        Me.chkDekades.AutoSize = True
+        Me.chkDekades.Location = New System.Drawing.Point(6, 40)
+        Me.chkDekades.Name = "chkDekades"
+        Me.chkDekades.Size = New System.Drawing.Size(64, 17)
+        Me.chkDekades.TabIndex = 4
+        Me.chkDekades.Text = "Dekade"
+        Me.chkDekades.UseVisualStyleBackColor = True
         '
         'chkPentade
         '
@@ -275,7 +287,7 @@ Partial Class dlgUseDate
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 391)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 414)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
         Me.ucrBase.TabIndex = 4
@@ -294,7 +306,7 @@ Partial Class dlgUseDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(468, 448)
+        Me.ClientSize = New System.Drawing.Size(468, 473)
         Me.Controls.Add(Me.grpDateFunctions)
         Me.Controls.Add(Me.ucrReceiverUseDate)
         Me.Controls.Add(Me.lblDateVariable)
@@ -343,4 +355,5 @@ Partial Class dlgUseDate
     Friend WithEvents grpFullName As GroupBox
     Friend WithEvents grpAbbreviation As GroupBox
     Friend WithEvents grpValues As GroupBox
+    Friend WithEvents chkDekades As CheckBox
 End Class
