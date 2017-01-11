@@ -32,7 +32,6 @@ Public Class dlgMakeDate
         End If
         TestOKEnabled()
         autoTranslate(Me)
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -42,44 +41,47 @@ Public Class dlgMakeDate
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
         ucrInputNewColumnName.SetValidationTypeAsRVariable()
         ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
+        ucrInputYearOption.SetItems({"4 Digit", "2 Digit"})
+        ucrInputYear.SetItems({"4 Digit", "2 Digit"})
+        ucrInputMonth.SetItems({"Numerical", "Partial Word", "Full Word"})
+        ucrInputMonthOption.SetItems({"Numerical", "Partial Word", "Full Word"})
+        'Dim lstYearItems As New List(Of KeyValuePair(Of String, String))
+        'lstYearItems.Add(New KeyValuePair(Of String, String)("4 Digit", Chr(34) & "%Y" & Chr(34)))
+        'lstYearItems.Add(New KeyValuePair(Of String, String)("2 Digit", Chr(34) & "%y" & Chr(34)))
+        'ucrInputYear.SetItems(lstYearItems)
+        'ucrInputYearOption.SetItems(lstYearItems)
 
-        Dim lstYearItems As New List(Of KeyValuePair(Of String, String))
-        lstYearItems.Add(New KeyValuePair(Of String, String)("4 Digit", Chr(34) & "%Y" & Chr(34)))
-        lstYearItems.Add(New KeyValuePair(Of String, String)("2 Digit", Chr(34) & "%y" & Chr(34)))
-        ucrInputYear.SetItems(lstYearItems)
-        ucrInputYearOption.SetItems(lstYearItems)
-
-        Dim lstMonthItems As New List(Of KeyValuePair(Of String, String))
-        lstMonthItems.Add(New KeyValuePair(Of String, String)("Numerical", Chr(34) & "%m" & Chr(34)))
-        lstMonthItems.Add(New KeyValuePair(Of String, String)("Partial Word", Chr(34) & "%b" & Chr(34)))
-        lstMonthItems.Add(New KeyValuePair(Of String, String)("Full Word", Chr(34) & "%B" & Chr(34)))
-        ucrInputMonth.SetItems(lstMonthItems)
-        ucrInputMonthOption.SetItems(lstMonthItems)
-
-        Dim lstDayItems As New List(Of KeyValuePair(Of String, String))
-        lstDayItems.Add(New KeyValuePair(Of String, String)("By Month", Chr(34) & "%d" & Chr(34)))
-        ucrInputDayOption.SetItems(lstDayItems)
-
-        Dim lstDayItemsDOY As New List(Of KeyValuePair(Of String, String))
-        lstDayItemsDOY.Add(New KeyValuePair(Of String, String)("By Month", Chr(34) & "%d" & Chr(34)))
-        lstDayItemsDOY.Add(New KeyValuePair(Of String, String)("By Year", Chr(34) & "%j" & Chr(34)))
-        ucrInputDay.SetItems(lstDayItemsDOY)
-
-        Dim lstMonthTwoItems As New List(Of KeyValuePair(Of String, String))
-        lstMonthTwoItems.Add(New KeyValuePair(Of String, String)("365/366", Chr(34) & "365/366" & Chr(34)))
-        lstMonthTwoItems.Add(New KeyValuePair(Of String, String)("366", Chr(34) & "366" & Chr(34)))
-        ucrInputComboBoxMonthTwo.SetItems(lstMonthTwoItems)
-
-        Dim lstDateFormat As New List(Of KeyValuePair(Of String, String))
-        lstDateFormat.Add(New KeyValuePair(Of String, String)("Year-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34)))
-        lstDateFormat.Add(New KeyValuePair(Of String, String)("Year/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34)))
-        lstDateFormat.Add(New KeyValuePair(Of String, String)("Day-Month-Year", Chr(34) & "%d%m%Y" & Chr(34)))
-        ucrInputFormat.SetItems(lstDateFormat)
-
-        Dim lstDateOrigin As New List(Of KeyValuePair(Of String, String))
-        lstDateOrigin.Add(New KeyValuePair(Of String, String)("Excel", Chr(34) & "30-12-1899" & Chr(34)))
-        lstDateOrigin.Add(New KeyValuePair(Of String, String)("Gregorian", Chr(34) & "01-03-1600" & Chr(34)))
-        ucrInputOrigin.SetItems(lstDateOrigin)
+        'Dim lstMonthItems As New List(Of KeyValuePair(Of String, String))
+        'lstMonthItems.Add(New KeyValuePair(Of String, String)("Numerical", Chr(34) & "%m" & Chr(34)))
+        'lstMonthItems.Add(New KeyValuePair(Of String, String)("Partial Word", Chr(34) & "%b" & Chr(34)))
+        'lstMonthItems.Add(New KeyValuePair(Of String, String)("Full Word", Chr(34) & "%B" & Chr(34)))
+        'ucrInputMonth.SetItems(lstMonthItems)
+        'ucrInputMonthOption.SetItems(lstMonthItems)
+        ucrInputDayOption.SetItems({"By Month"})
+        'Dim lstDayItems As New List(Of KeyValuePair(Of String, String))
+        'lstDayItems.Add(New KeyValuePair(Of String, String)("By Month", Chr(34) & "%d" & Chr(34)))
+        'ucrInputDayOption.SetItems(lstDayItems)
+        ucrInputDay.SetItems({"By Month", "By Year"})
+        'Dim lstDayItemsDOY As New List(Of KeyValuePair(Of String, String))
+        'lstDayItemsDOY.Add(New KeyValuePair(Of String, String)("By Month", Chr(34) & "%d" & Chr(34)))
+        'lstDayItemsDOY.Add(New KeyValuePair(Of String, String)("By Year", Chr(34) & "%j" & Chr(34)))
+        'ucrInputDay.SetItems(lstDayItemsDOY)
+        ucrInputComboBoxMonthTwo.SetItems({"365/366", "366"})
+        'Dim lstMonthTwoItems As New List(Of KeyValuePair(Of String, String))
+        'lstMonthTwoItems.Add(New KeyValuePair(Of String, String)("365/366", Chr(34) & "365/366" & Chr(34)))
+        'lstMonthTwoItems.Add(New KeyValuePair(Of String, String)("366", Chr(34) & "366" & Chr(34)))
+        'ucrInputComboBoxMonthTwo.SetItems(lstMonthTwoItems)
+        ucrInputFormat.SetItems({"Year-Month-Day", "Year/Month/Day", "Day-Month-Year"})
+        'Dim lstDateFormat As New List(Of KeyValuePair(Of String, String))
+        'lstDateFormat.Add(New KeyValuePair(Of String, String)("Year-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34)))
+        'lstDateFormat.Add(New KeyValuePair(Of String, String)("Year/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34)))
+        'lstDateFormat.Add(New KeyValuePair(Of String, String)("Day-Month-Year", Chr(34) & "%d%m%Y" & Chr(34)))
+        'ucrInputFormat.SetItems(lstDateFormat)
+        ucrInputOrigin.SetItems({"Excel", "Gregorian"})
+        'Dim lstDateOrigin As New List(Of KeyValuePair(Of String, String))
+        'lstDateOrigin.Add(New KeyValuePair(Of String, String)("Excel", Chr(34) & "30-12-1899" & Chr(34)))
+        'lstDateOrigin.Add(New KeyValuePair(Of String, String)("Gregorian", Chr(34) & "01-03-1600" & Chr(34)))
+        'ucrInputOrigin.SetItems(lstDateOrigin)
 
         ucrReceiverForDate.Selector = ucrSelectorMakeDate
         ucrReceiverYearTwo.Selector = ucrSelectorMakeDate
@@ -95,11 +97,6 @@ Public Class dlgMakeDate
         ucrReceiverMonthThree.bUseFilteredData = False
         ucrReceiverDayThree.bUseFilteredData = False
 
-    End Sub
-
-    Private Sub CoreControlsValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYearOption.ControlContentsChanged, ucrInputYear.ControlContentsChanged, ucrInputMonth.ControlContentsChanged, ucrInputMonthOption.ControlContentsChanged, ucrInputDay.ControlContentsChanged, ucrInputDayOption.ControlContentsChanged, ucrInputFormat.ControlContentsChanged, ucrInputComboBoxMonthTwo.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged
-        ucrChangedControl.UpdateRCode(ucrBase.clsRsyntax.clsBaseFunction)
-        Formats()
     End Sub
 
     Private Sub SetDefaults()
@@ -263,30 +260,48 @@ Public Class dlgMakeDate
             End If
 
             If rdoSpecifyOrigin.Checked Then
-                ucrInputOrigin.SetParameterName("origin")
                 ucrInputFormat.Visible = False
                 ucrInputOrigin.Visible = True
-                ucrBase.clsRsyntax.RemoveParameter("format")
+                    ucrBase.clsRsyntax.RemoveParameter("format")
                 If Not ucrInputOrigin.IsEmpty Then
                     ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
-                End If
-                If Not ucrReceiverForDate.IsEmpty Then
-                    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+                    If ucrInputOrigin.GetText = "Excel" Then
+                        ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "30-12-1899" & Chr(34))
+                    ElseIf ucrInputOrigin.GetText = "Gregorian"
+                        ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "01-03-1600" & Chr(34))
+                    Else
+                        ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & ucrInputOrigin.GetText & Chr(34))
+                    End If
                 Else
-                    ucrBase.clsRsyntax.RemoveParameter("x")
+                    ucrBase.clsRsyntax.RemoveParameter("origin")
                 End If
+                    If Not ucrReceiverForDate.IsEmpty Then
+                        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+                    Else
+                        ucrBase.clsRsyntax.RemoveParameter("x")
+                    End If
 
-            ElseIf rdoSpecifyFormat.Checked Then
-                ucrInputFormat.Visible = True
-                ucrInputOrigin.Visible = False
-                ucrBase.clsRsyntax.RemoveParameter("origin")
-                ucrInputFormat.SetParameterName("format")
+                ElseIf rdoSpecifyFormat.Checked Then
+                    ucrInputFormat.Visible = True
+                    ucrInputOrigin.Visible = False
+                    ucrBase.clsRsyntax.RemoveParameter("origin")
                 If Not ucrInputFormat.IsEmpty Then
                     ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
+                    If ucrInputFormat.GetText = "Year/Month/Day" Then
+                        ucrBase.clsRsyntax.AddParameter("format", Chr(34) & "%Y/%m/%d" & Chr(34))
+                    ElseIf ucrInputFormat.GetText = "Year-Month-Day" Then
+                        ucrBase.clsRsyntax.AddParameter("fromat", (34) & "%Y-%m-%d" & Chr(34))
+                    ElseIf ucrInputFormat.GetText = "Day - Month - Year"
+                        ucrBase.clsRsyntax.AddParameter("format", Chr(34) & "%d-%m-%Y" & Chr(34))
+                    Else
+                        ucrBase.clsRsyntax.AddParameter("format", Chr(34) & ucrInputFormat.GetText & Chr(34))
+                    End If
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("format")
                 End If
             Else
-                ucrInputOrigin.Visible = False
-                ucrInputFormat.Visible = False
+                    ucrInputOrigin.Visible = False
+                    ucrInputFormat.Visible = False
                 ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
                 ucrBase.clsRsyntax.RemoveParameter("format")
                 ucrBase.clsRsyntax.RemoveParameter("origin")
@@ -345,28 +360,55 @@ Public Class dlgMakeDate
             ' Coding options
             ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
-            ucrInputDayOption.SetParameterName("day_format")
-            ucrInputMonthOption.SetParameterName("month_format")
-            ucrInputYearOption.SetParameterName("year_format")
-
+            If Not ucrInputDayOption.IsEmpty Then
+                If ucrInputDayOption.GetText = "By Month" Then
+                    ucrBase.clsRsyntax.AddParameter("day_format", Chr(34) & "%d" & Chr(34))
+                Else
+                    ucrBase.clsRsyntax.AddParameter("day_format", Chr(34) & ucrInputDayOption.GetText & Chr(34))
+                End If
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("day_format")
+            End If
+            If Not ucrInputYearOption.IsEmpty Then
+                If ucrInputYearOption.GetText = "4 Digit" Then
+                    ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
+                Else
+                    ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%y" & Chr(34))
+                End If
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("year_formart")
+            End If
+            If Not ucrInputMonthOption.IsEmpty Then
+                If ucrInputMonthOption.GetText = "Numerical" Then
+                    ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%m" & Chr(34))
+                ElseIf ucrInputMonthOption.GetText = "Full Word" Then
+                    ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%B" & Chr(34))
+                ElseIf ucrInputMonthOption.GetText = "Partial Word" Then
+                    ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%b" & Chr(34))
+                Else
+                    ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & ucrInputMonthOption.GetText & Chr(34))
+                End If
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("month_format")
+            End If
             'Receivers
             ucrReceiverYearThree.SetMeAsReceiver()
-            If Not ucrReceiverYearThree.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearThree.GetVariableNames())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("year")
+                If Not ucrReceiverYearThree.IsEmpty Then
+                    ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearThree.GetVariableNames())
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("year")
+                End If
+                If ucrReceiverMonthThree.IsEmpty = False Then
+                    ucrBase.clsRsyntax.AddParameter("month", ucrReceiverMonthThree.GetVariableNames())
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("month")
+                End If
+                If ucrReceiverDayThree.IsEmpty = False Then
+                    ucrBase.clsRsyntax.AddParameter("day", ucrReceiverDayThree.GetVariableNames())
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("day")
+                End If
             End If
-            If ucrReceiverMonthThree.IsEmpty = False Then
-                ucrBase.clsRsyntax.AddParameter("month", ucrReceiverMonthThree.GetVariableNames())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("month")
-            End If
-            If ucrReceiverDayThree.IsEmpty = False Then
-                ucrBase.clsRsyntax.AddParameter("day", ucrReceiverDayThree.GetVariableNames())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("day")
-            End If
-        End If
     End Sub
 
     Private Sub ucrInputNewColumnName_ContentsChanged() Handles ucrInputNewColumnName.ContentsChanged
