@@ -136,7 +136,7 @@ Public Class ucrDistributions
     Public Sub SetDistributions()
         Dim bUse As Boolean
         lstCurrentDistributions.Clear()
-        cboDistributions.Items.Clear()
+        ucrInputDistributions.Reset()
         For Each Dist In lstAllDistributions
             bUse = False
             Select Case strDistributionType
@@ -174,11 +174,11 @@ Public Class ucrDistributions
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
-                cboDistributions.Items.Add(translate(Dist.strNameTag))
+                ucrInputDistributions.cboInput.Items.Add(translate(Dist.strNameTag))
             End If
         Next
-        If cboDistributions.Items.Count > 0 Then
-            cboDistributions.SelectedIndex = 0
+        If ucrInputDistributions.cboInput.Items.Count > 0 Then
+            ucrInputDistributions.cboInput.SelectedIndex = 0
         End If
     End Sub
 
@@ -548,10 +548,10 @@ Public Class ucrDistributions
         clsNoDist.lstExact = {"", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
         lstAllDistributions.Add(clsNoDist)
     End Sub
-    Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
-    Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
-        If cboDistributions.SelectedIndex <> -1 Then
-            clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
+    Public Event ucrInputDistributionTextChangedchanged(sender As Object, e As EventArgs)
+    Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ucrInputDistributions.TextChanged
+        If ucrInputDistributions.cboInput.SelectedIndex <> -1 Then
+            clsCurrDistribution = lstCurrentDistributions(ucrInputDistributions.cboInput.SelectedIndex)
             Select Case strDistributionType
                 Case "RFunctions"
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
@@ -569,7 +569,7 @@ Public Class ucrDistributions
         Else
             clsCurrRFunction = New RFunction
         End If
-        RaiseEvent cboDistributionsIndexChanged(sender, e)
+        RaiseEvent ucrInputDistributionTextChangedchanged(sender, e)
     End Sub
 
     Public Sub RecieverDatatype(DataFrame As String, Column As String)

@@ -363,7 +363,7 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    Private Sub ucrDistributions_ucrInputDistributionsTextChanged(sender As Object, e As EventArgs) Handles ucrFamily.ucrInputDistributionTextChangedchanged
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()

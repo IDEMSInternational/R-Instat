@@ -23,7 +23,7 @@ Partial Class ucrDistributions
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblDistributionType = New System.Windows.Forms.Label()
-        Me.cboDistributions = New System.Windows.Forms.ComboBox()
+        Me.ucrInputDistributions = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblDistributionType
@@ -36,27 +36,27 @@ Partial Class ucrDistributions
         Me.lblDistributionType.Tag = "distribution:"
         Me.lblDistributionType.Text = "Distribution:"
         '
-        'cboDistributions
+        'ucrInputDistributions
         '
-        Me.cboDistributions.FormattingEnabled = True
-        Me.cboDistributions.Location = New System.Drawing.Point(62, 13)
-        Me.cboDistributions.Name = "cboDistributions"
-        Me.cboDistributions.Size = New System.Drawing.Size(121, 21)
-        Me.cboDistributions.TabIndex = 1
+        Me.ucrInputDistributions.IsReadOnly = False
+        Me.ucrInputDistributions.Location = New System.Drawing.Point(65, 14)
+        Me.ucrInputDistributions.Name = "ucrInputDistributions"
+        Me.ucrInputDistributions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDistributions.TabIndex = 2
         '
         'ucrDistributions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.cboDistributions)
+        Me.Controls.Add(Me.ucrInputDistributions)
         Me.Controls.Add(Me.lblDistributionType)
         Me.Name = "ucrDistributions"
-        Me.Size = New System.Drawing.Size(225, 43)
+        Me.Size = New System.Drawing.Size(206, 40)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents lblDistributionType As Label
-    Friend WithEvents cboDistributions As ComboBox
+    Friend WithEvents ucrInputDistributions As ucrInputComboBox
 End Class

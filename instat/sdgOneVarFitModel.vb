@@ -89,7 +89,7 @@ Public Class sdgOneVarFitModel
         SetPlotOptions()
     End Sub
 
-    Private Sub ucrDists_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDists.cboDistributionsIndexChanged
+    Private Sub ucrDists_ucrInputDistributionTextChangedchanged(sender As Object, e As EventArgs) Handles ucrDists.ucrInputDistributionTextChangedchanged
         SetPlotOptions()
     End Sub
 
@@ -103,5 +103,4 @@ Public Class sdgOneVarFitModel
             rdoMge.Enabled = True
         End If
     End Sub
-
 End Class
