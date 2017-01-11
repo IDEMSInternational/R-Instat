@@ -81,6 +81,9 @@ Public Class DlgDefineClimaticData
         ucrReceiverDay.Selector = ucrSelectorDefineClimaticData
         ucrReceiverDay.Tag = "day"
         lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDate, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation, ucrReceiverRain, ucrReceiverStation, ucrReceiverSunshine, ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear})
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            ucrTempReceiver.bExcludeFromSelector = True
+        Next
     End Sub
 
     Private Sub SetDefaults()
