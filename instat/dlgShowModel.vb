@@ -22,8 +22,6 @@ Public Class dlgShowModel
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         TestOKEnabled()
     End Sub
@@ -53,6 +51,7 @@ Public Class dlgShowModel
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
         ucrInputNewColNameforTablePlus.Reset()
+        ucrDistributionsFOrTablePlus.ResetDistribution()
         rdoQuantiles.Checked = True
         chkSingleValues.Checked = True
         chkGraphResults.Checked = True
@@ -62,10 +61,6 @@ Public Class dlgShowModel
         SaveResults()
         setItems()
         setname()
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub setItems()
