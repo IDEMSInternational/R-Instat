@@ -55,7 +55,6 @@ Public Class dlgUseDate
         chkYear.Checked = False
         'Remains Disabled until implemented
         chkPentade.Enabled = False
-        chkDecade.Enabled = False
         TestOKEnabled()
     End Sub
 
@@ -148,6 +147,14 @@ Public Class dlgUseDate
         Else
             ucrBase.clsRsyntax.RemoveParameter("day_in_year_366")
         End If
+
+
+        If chkDecade.Checked Then
+            ucrBase.clsRsyntax.AddParameter("decade", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("decade")
+        End If
+
 
     End Sub
 
