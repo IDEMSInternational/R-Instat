@@ -18,14 +18,14 @@ Imports instat.Translations
 
 Public Class ucrDistributionsWithParameters
     Public lstParameterLabels As New List(Of Label)
-    Public lstParameterTextBoxes As New List(Of TextBox)
+    Public lstParameterInput As New List(Of ucrInputTextBox)
     Public lstCurrArguments As New List(Of String)
     Public bParametersFilled As Boolean = False
 
     Private Sub ucrDistributionsWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetParameters()
         'temp disabled
-        txtParameter4.Visible = False
+        ucrInputParameter4.Visible = False
         lblParameter4.Visible = False
     End Sub
 
@@ -36,30 +36,30 @@ Public Class ucrDistributionsWithParameters
         If lstParameterLabels.Count = 0 Then
             lstParameterLabels.AddRange({lblParameter1, lblParameter2, lblParameter3})
         End If
-        If lstParameterTextBoxes.Count = 0 Then
-            lstParameterTextBoxes.AddRange({txtParameter1, txtParameter2, txtParameter3})
+        If lstParameterInput.Count = 0 Then
+            lstParameterInput.AddRange({ucrInputParameter1, ucrInputParameter2, ucrInputParameter3})
         End If
 
         If clsCurrDistribution.clsParameters.Count < 3 Then
             lblParameter3.Visible = False
-            txtParameter3.Visible = False
+            ucrInputParameter3.Visible = False
         Else
             lblParameter3.Visible = True
-            txtParameter3.Visible = True
+            ucrInputParameter3.Visible = True
         End If
         If clsCurrDistribution.clsParameters.Count < 2 Then
             lblParameter2.Visible = False
-            txtParameter2.Visible = False
+            ucrInputParameter2.Visible = False
         Else
             lblParameter2.Visible = True
-            txtParameter2.Visible = True
+            ucrInputParameter2.Visible = True
         End If
         If clsCurrDistribution.clsParameters.Count < 1 Then
             lblParameter1.Visible = False
-            txtParameter1.Visible = False
+            ucrInputParameter1.Visible = False
         Else
             lblParameter1.Visible = True
-            txtParameter1.Visible = True
+            ucrInputParameter1.Visible = True
         End If
 
         If clsCurrDistribution IsNot Nothing Then
@@ -76,10 +76,10 @@ Public Class ucrDistributionsWithParameters
                 lstParameterLabels(i).Text = translate(clsCurrDistribution.clsParameters(i).strNameTag)
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
-                    lstParameterTextBoxes(i).Text = clsCurrDistribution.clsParameters(i).strDefaultValue
+                    lstParameterInput(i).Text = clsCurrDistribution.clsParameters(i).strDefaultValue
                     AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
                 Else
-                    lstParameterTextBoxes(i).Clear()
+                    lstParameterInput(i).Reset()
                 End If
                 RaiseEvent ParameterChanged()
             Next
@@ -92,7 +92,7 @@ Public Class ucrDistributionsWithParameters
     End Sub
 
     Public Sub CheckParametersFilled()
-        If (Not txtParameter1.Visible Or txtParameter1.Text <> "") And (Not txtParameter2.Visible Or txtParameter2.Text <> "") And (Not txtParameter3.Visible Or txtParameter3.Text <> "") Then
+        If (Not ucrInputParameter1.Visible Or ucrInputParameter1.Text <> "") And (Not ucrInputParameter2.Visible Or ucrInputParameter2.Text <> "") And (Not ucrInputParameter3.Visible Or ucrInputParameter3.Text <> "") Then
             bParametersFilled = True
         Else
             bParametersFilled = False
@@ -105,24 +105,25 @@ Public Class ucrDistributionsWithParameters
 
     Public Event ParameterChanged()
 
-    Private Sub txtParameter1_Leave(sender As Object, e As EventArgs) Handles txtParameter1.Leave
-        AddParameter(lstCurrArguments(0), txtParameter1.Text)
+    Private Sub ucrInputParameter1_NameChanged() Handles ucrInputParameter1.NameChanged
+        AddParameter(lstCurrArguments(0), ucrInputParameter1.GetText)
         CheckParametersFilled()
         RaiseEvent ParameterChanged()
     End Sub
 
-    Private Sub txtParameter2_Leave(sender As Object, e As EventArgs) Handles txtParameter2.Leave
-        AddParameter(lstCurrArguments(1), txtParameter2.Text)
+    Private Sub ucrInputParameter2_NameChanged() Handles ucrInputParameter2.NameChanged
+        AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
         CheckParametersFilled()
         RaiseEvent ParameterChanged()
     End Sub
 
-    Private Sub txtParameter3_Leave(sender As Object, e As EventArgs) Handles txtParameter3.Leave
-        AddParameter(lstCurrArguments(2), txtParameter3.Text)
+    Private Sub ucrInputParameter3_NameChanged() Handles ucrInputParameter3.NameChanged
+        AddParameter(lstCurrArguments(2), ucrInputParameter3.Text)
         RaiseEvent ParameterChanged()
     End Sub
 
     Private Sub ucrDistributionsWithParameters_ParameterChanged() Handles Me.ParameterChanged
         CheckParametersFilled()
     End Sub
+
 End Class
