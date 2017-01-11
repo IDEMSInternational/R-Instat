@@ -44,7 +44,7 @@ Public Class dlgUseDate
         chkDayInMonth.Checked = False
         chkDayInYear.Checked = False
         chkDayYear.Checked = False
-        chkDecade.Checked = False
+        chkDekade.Checked = False
         chkLeapYear.Checked = False
         chkMonthNam.Checked = False
         chkMonthValue.Checked = False
@@ -53,13 +53,12 @@ Public Class dlgUseDate
         chkWeekdayName.Checked = False
         chkWeekDayVal.Checked = False
         chkYear.Checked = False
-        'Remains Disabled until implemented
-        chkPentade.Enabled = False
+        chkdecade.checked = False
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (chkYear.Checked OrElse chkDayInMonth.Checked OrElse chkDayInYear.Checked OrElse chkDayYear.Checked OrElse chkDecade.Checked OrElse chkLeapYear.Checked OrElse chkMonthValue.Checked OrElse chkPentade.Checked OrElse chkWeekDayVal.Checked OrElse chkWeek.Checked OrElse chkAbbrMonthName.Checked OrElse chkMonthNam.Checked OrElse chkWeekdayName.Checked OrElse chkAbbrWeekDay.Checked)) Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (chkYear.Checked OrElse chkDayInMonth.Checked OrElse chkDayInYear.Checked OrElse chkDayYear.Checked OrElse chkDekade.Checked OrElse chkLeapYear.Checked OrElse chkMonthValue.Checked OrElse chkPentade.Checked OrElse chkWeekDayVal.Checked OrElse chkWeek.Checked OrElse chkAbbrMonthName.Checked OrElse chkMonthNam.Checked OrElse chkWeekdayName.Checked OrElse chkAbbrWeekDay.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -149,16 +148,16 @@ Public Class dlgUseDate
         End If
 
 
-        If chkDecade.Checked Then
-            ucrBase.clsRsyntax.AddParameter("decade", "TRUE")
+        If chkDekade.Checked Then
+            ucrBase.clsRsyntax.AddParameter("dekade", "TRUE")
         Else
-            ucrBase.clsRsyntax.RemoveParameter("decade")
+            ucrBase.clsRsyntax.RemoveParameter("dekade")
         End If
 
 
     End Sub
 
-    Private Sub grpDateFunctions_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDecade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonthValue.CheckedChanged, chkPentade.CheckedChanged, chkWeekDayVal.CheckedChanged, chkWeek.CheckedChanged, chkMonthNam.CheckedChanged, chkAbbrMonthName.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkWeekdayName.CheckedChanged
+    Private Sub grpDateFunctions_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDekade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonthValue.CheckedChanged, chkPentade.CheckedChanged, chkWeekDayVal.CheckedChanged, chkWeek.CheckedChanged, chkMonthNam.CheckedChanged, chkAbbrMonthName.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkWeekdayName.CheckedChanged
         SetParameters()
         TestOKEnabled()
     End Sub
@@ -170,4 +169,5 @@ Public Class dlgUseDate
     Private Sub ucrSelectorUseDate_DataFrameChanged() Handles ucrSelectorUseDate.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorUseDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
+
 End Class

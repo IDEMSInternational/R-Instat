@@ -222,9 +222,9 @@ yday_366 <- function(date) {
   return(temp_doy)
 }
 
-decade <- function(date) {
-  temp_decade <- 3 * (month(date) - 1) + (mday(date) > 10) + (mday(date) > 20)
-  return(temp_decade)
+dekade <- function(date) {
+  temp_dekade <- 3 * (month(date) - 1) + (mday(date) > 10) + (mday(date) > 20)
+  return(temp_dekade)
   }
 
 open_NetCDF <- function(nc_data){
