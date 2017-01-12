@@ -107,7 +107,7 @@ Partial Class DlgDefineClimaticData
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(16, 571)
+        Me.lblDOY.Location = New System.Drawing.Point(15, 570)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 26
@@ -115,7 +115,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverDOY
         '
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(14, 592)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(14, 590)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
@@ -124,7 +124,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrReceiverDay
         '
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(14, 548)
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(13, 545)
         Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDay.Name = "ucrReceiverDay"
         Me.ucrReceiverDay.Selector = Nothing
