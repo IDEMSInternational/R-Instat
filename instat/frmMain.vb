@@ -66,14 +66,18 @@ Public Class frmMain
         strSaveFilePath = ""
 
         clsRLink.SetEngine()
-        LoadInstatOptions()
 
         frmEditor.Show()
 
         Me.LayoutMdi(MdiLayout.TileVertical)
 
+
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
+
+        'Do this before setting up R Link becuase setup edits Output window which is changed by Options
+        LoadInstatOptions()
+
         'Sets up R source files
         clsRLink.RSetup()
 
@@ -84,8 +88,8 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadInstatOptions()
-        If File.Exists(strInstatOptionsFile) Then
-            LoadInstatOptionsFromFile(strInstatOptionsFile)
+        If File.Exists(Path.Combine(strAppDataPath, strInstatOptionsFile)) Then
+            LoadInstatOptionsFromFile(Path.Combine(strAppDataPath, strInstatOptionsFile))
         Else
             clsInstatOptions = New InstatOptions
             'TODO Should these be here or in the constructor (New) of InstatOptions?
@@ -104,6 +108,7 @@ Public Class frmMain
             Try
                 Using FileStream As Stream = File.OpenRead(strFilePath)
                     clsInstatOptions = CType(deserializer.Deserialize(FileStream), InstatOptions)
+                    clsInstatOptions.SetOptions()
                     'TODO Check whether this is needed or not. Using should do it automatically.
                     '     Also check general structure of this code.
                     'FileStream.Close()
