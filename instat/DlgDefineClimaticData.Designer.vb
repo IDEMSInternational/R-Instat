@@ -24,6 +24,8 @@ Partial Class DlgDefineClimaticData
     Private Sub InitializeComponent()
         Me.grpClimaticType = New System.Windows.Forms.GroupBox()
         Me.panClimateType = New System.Windows.Forms.Panel()
+        Me.lblDOY = New System.Windows.Forms.Label()
+        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverDay = New instat.ucrReceiverSingle()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
@@ -61,7 +63,7 @@ Partial Class DlgDefineClimaticData
         Me.grpClimaticType.Controls.Add(Me.panClimateType)
         Me.grpClimaticType.Location = New System.Drawing.Point(237, 9)
         Me.grpClimaticType.Name = "grpClimaticType"
-        Me.grpClimaticType.Size = New System.Drawing.Size(187, 306)
+        Me.grpClimaticType.Size = New System.Drawing.Size(187, 310)
         Me.grpClimaticType.TabIndex = 1
         Me.grpClimaticType.TabStop = False
         Me.grpClimaticType.Text = "Climatic Type"
@@ -69,6 +71,8 @@ Partial Class DlgDefineClimaticData
         'panClimateType
         '
         Me.panClimateType.AutoScroll = True
+        Me.panClimateType.Controls.Add(Me.lblDOY)
+        Me.panClimateType.Controls.Add(Me.ucrReceiverDOY)
         Me.panClimateType.Controls.Add(Me.ucrReceiverDay)
         Me.panClimateType.Controls.Add(Me.lblDay)
         Me.panClimateType.Controls.Add(Me.ucrReceiverMonth)
@@ -97,12 +101,30 @@ Partial Class DlgDefineClimaticData
         Me.panClimateType.Controls.Add(Me.lblDate)
         Me.panClimateType.Location = New System.Drawing.Point(8, 13)
         Me.panClimateType.Name = "panClimateType"
-        Me.panClimateType.Size = New System.Drawing.Size(172, 272)
+        Me.panClimateType.Size = New System.Drawing.Size(172, 280)
         Me.panClimateType.TabIndex = 0
+        '
+        'lblDOY
+        '
+        Me.lblDOY.AutoSize = True
+        Me.lblDOY.Location = New System.Drawing.Point(15, 570)
+        Me.lblDOY.Name = "lblDOY"
+        Me.lblDOY.Size = New System.Drawing.Size(66, 13)
+        Me.lblDOY.TabIndex = 26
+        Me.lblDOY.Text = "Day of Year:"
+        '
+        'ucrReceiverDOY
+        '
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(14, 590)
+        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
+        Me.ucrReceiverDOY.Selector = Nothing
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDOY.TabIndex = 27
         '
         'ucrReceiverDay
         '
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(14, 543)
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(13, 545)
         Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDay.Name = "ucrReceiverDay"
         Me.ucrReceiverDay.Selector = Nothing
@@ -346,7 +368,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 337)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 331)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(423, 52)
         Me.ucrBase.TabIndex = 2
@@ -355,7 +377,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(434, 398)
+        Me.ClientSize = New System.Drawing.Size(434, 389)
         Me.Controls.Add(Me.grpClimaticType)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDefineClimaticData)
@@ -402,4 +424,6 @@ Partial Class DlgDefineClimaticData
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents lblStation As Label
+    Friend WithEvents lblDOY As Label
+    Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
 End Class
