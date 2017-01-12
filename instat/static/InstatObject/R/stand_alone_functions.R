@@ -223,12 +223,12 @@ yday_366 <- function(date) {
 }
 
 dekade <- function(date) {
-  temp_dekade <- 3 * (month(date) - 1) + (mday(date) > 10) + (mday(date) > 20)
+  temp_dekade <- 3 * (month(date)) - 2 + (mday(date) > 10) + (mday(date) > 20)
   return(temp_dekade)
   }
 
   pentad <- function(date) {
-  temp_pentad <- 6 * (month(date) - 1) + (mday(date) > 5) + (mday(date) > 10) + (mday(date) > 15) + (mday(date) > 20) + (mday(date) > 25)
+  temp_pentad <- 6 * (month(date)) - 5 + (mday(date) > 5) + (mday(date) > 10) + (mday(date) > 15) + (mday(date) > 20) + (mday(date) > 25)
   return(temp_pentad)
   }
 
