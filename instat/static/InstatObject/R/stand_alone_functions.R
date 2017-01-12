@@ -228,7 +228,7 @@ dekade <- function(date) {
   }
 
   pentad <- function(date) {
-  temp_pentad <- 3 * (month(date) - 1) + (mday(date) > 5) + (mday(date) > 10) + (mday(date) > 15) + (mday(date) > 20) + (mday(date) > 25)
+  temp_pentad <- 6 * (month(date) - 1) + (mday(date) > 5) + (mday(date) > 10) + (mday(date) > 15) + (mday(date) > 20) + (mday(date) > 25)
   return(temp_pentad)
   }
 
