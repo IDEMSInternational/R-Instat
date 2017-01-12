@@ -153,6 +153,12 @@ Public Class dlgUseDate
             ucrBase.clsRsyntax.RemoveParameter("dekade")
         End If
 
+        If chkPentade.Checked Then
+            ucrBase.clsRsyntax.AddParameter("pentad", "TRUE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("pentad")
+        End If
+
 
     End Sub
 
