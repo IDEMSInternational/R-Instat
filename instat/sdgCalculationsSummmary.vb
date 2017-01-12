@@ -41,7 +41,7 @@ Public Class sdgCalculationsSummmary
 
     Private Sub InitialiseDialog()
         ' Set Items in ucrType
-
+        ucrBaseSummmaryCalcSubdialog.iHelpTopicID = 514
         ucrReceiverByOrSort.Selector = ucrSelectorBy
         ucrReceiverByOrSort.SetMeAsReceiver()
 
