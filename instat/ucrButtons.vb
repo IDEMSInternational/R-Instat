@@ -113,7 +113,11 @@ Public Class ucrButtons
     End Sub
 
     Private Sub SetDefaults()
-        chkComment.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            chkComment.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        Else
+            chkComment.Checked = True
+        End If
         SetCommentEditable()
         'TODO default text should be translatable
         'This is needed only so that the designer displays correctly in VS
