@@ -53,7 +53,6 @@ Public Class dlgUseDate
         chkWeekdayName.Checked = False
         chkWeekDayVal.Checked = False
         chkYear.Checked = False
-        chkdecade.checked = False
         TestOKEnabled()
     End Sub
 
