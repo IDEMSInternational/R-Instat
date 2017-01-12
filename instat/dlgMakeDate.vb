@@ -291,7 +291,7 @@ Public Class dlgMakeDate
                         ucrBase.clsRsyntax.AddParameter("format", Chr(34) & "%Y/%m/%d" & Chr(34))
                     ElseIf ucrInputFormat.GetText = "Year-Month-Day" Then
                         ucrBase.clsRsyntax.AddParameter("fromat", (34) & "%Y-%m-%d" & Chr(34))
-                    ElseIf ucrInputFormat.GetText = "Day - Month - Year"
+                    ElseIf ucrInputFormat.GetText = "Day-Month-Year"
                         ucrBase.clsRsyntax.AddParameter("format", Chr(34) & "%d-%m-%Y" & Chr(34))
                     Else
                         ucrBase.clsRsyntax.AddParameter("format", Chr(34) & ucrInputFormat.GetText & Chr(34))
