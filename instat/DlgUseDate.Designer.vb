@@ -111,9 +111,9 @@ Partial Class dlgUseDate
         Me.chkDekade.AutoSize = True
         Me.chkDekade.Location = New System.Drawing.Point(298, 17)
         Me.chkDekade.Name = "chkDekade"
-        Me.chkDekade.Size = New System.Drawing.Size(64, 17)
+        Me.chkDekade.Size = New System.Drawing.Size(58, 17)
         Me.chkDekade.TabIndex = 2
-        Me.chkDekade.Text = "Dekade"
+        Me.chkDekade.Text = "Dekad"
         Me.chkDekade.UseVisualStyleBackColor = True
         '
         'grpFullName
