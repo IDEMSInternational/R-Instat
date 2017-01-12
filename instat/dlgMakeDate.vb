@@ -216,7 +216,7 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged, ucrInputDayOption.NameChanged, ucrInputMonthOption.NameChanged, ucrInputYearOption.NameChanged, ucrInputOrigin.NameChanged
+    Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged, ucrInputDayOption.NameChanged, ucrInputMonthOption.NameChanged, ucrInputYearOption.NameChanged, ucrInputOrigin.NameChanged, ucrInputComboBoxMonthTwo.NameChanged
         Formats()
     End Sub
 
@@ -243,6 +243,7 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.RemoveParameter("day")
             ucrBase.clsRsyntax.RemoveParameter("data_name")
             ucrBase.clsRsyntax.RemoveParameter("year_format")
+            ucrBase.clsRsyntax.RemoveParameter("doy_typical_length")
             'Receivers
             ucrReceiverForDate.SetMeAsReceiver()
             ucrBase.clsRsyntax.SetFunction("as.Date")
@@ -290,7 +291,7 @@ Public Class dlgMakeDate
                     If ucrInputFormat.GetText = "Year/Month/Day" Then
                         ucrBase.clsRsyntax.AddParameter("format", Chr(34) & "%Y/%m/%d" & Chr(34))
                     ElseIf ucrInputFormat.GetText = "Year-Month-Day" Then
-                        ucrBase.clsRsyntax.AddParameter("fromat", (34) & "%Y-%m-%d" & Chr(34))
+                        ucrBase.clsRsyntax.AddParameter("format", (34) & "%Y-%m-%d" & Chr(34))
                     ElseIf ucrInputFormat.GetText = "Day-Month-Year"
                         ucrBase.clsRsyntax.AddParameter("format", Chr(34) & "%d-%m-%Y" & Chr(34))
                     Else
@@ -342,11 +343,21 @@ Public Class dlgMakeDate
             Else
                 ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
             End If
-
+            If Not ucrInputComboBoxMonthTwo.IsEmpty Then
+                If ucrInputComboBoxMonthTwo.GetText = "365/366" Then
+                    ucrBase.clsRsyntax.AddParameter("doy_typical_length", Chr(34) & "365" & Chr(34))
+                ElseIf ucrInputComboBoxMonthTwo.GetText = "366" Then
+                    ucrBase.clsRsyntax.AddParameter("doy_typical_length", Chr(34) & "366" & Chr(34))
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("doy_typical_length")
+                End If
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("doy_typical_length")
+            End If
             'If Year Date Month is selected
         Else
-            ' Sort display options
-            grpThreeColumns.Visible = True
+                ' Sort display options
+                grpThreeColumns.Visible = True
             grpTwoColumns.Visible = False
             grpSingleColumn.Visible = False
 
@@ -356,6 +367,7 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.RemoveParameter("origin")
             ucrBase.clsRsyntax.RemoveParameter("doy")
             ucrBase.clsRsyntax.RemoveParameter("year")
+            ucrBase.clsRsyntax.RemoveParameter("doy_typical_length")
 
             ' Coding options
             ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
