@@ -198,12 +198,12 @@ Public Class dlgMakeDate
 
     ' When the three radio buttons are checked or unchecked
     Private Sub rdoSingleColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSingleColumn.CheckedChanged, rdoYearandDayofYear.CheckedChanged, rdoYearMonthDay.CheckedChanged
+        SetReceivers()
         Formats()
         TestOKEnabled()
     End Sub
 
     Private Sub rdoSpecifyOrigin_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultFormat.CheckedChanged, rdoSpecifyFormat.CheckedChanged, rdoSpecifyOrigin.CheckedChanged
-        SetReceivers()
         Formats()
     End Sub
     Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged, chkTwoDigitYearTwo.CheckedChanged
