@@ -66,14 +66,18 @@ Public Class frmMain
         strSaveFilePath = ""
 
         clsRLink.SetEngine()
-        LoadInstatOptions()
 
         frmEditor.Show()
 
         Me.LayoutMdi(MdiLayout.TileVertical)
 
+
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
+
+        'Do this before setting up R Link becuase setup edits Output window which is changed by Options
+        LoadInstatOptions()
+
         'Sets up R source files
         clsRLink.RSetup()
 
@@ -84,8 +88,8 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadInstatOptions()
-        If File.Exists(strInstatOptionsFile) Then
-            LoadInstatOptionsFromFile(strInstatOptionsFile)
+        If File.Exists(Path.Combine(strAppDataPath, strInstatOptionsFile)) Then
+            LoadInstatOptionsFromFile(Path.Combine(strAppDataPath, strInstatOptionsFile))
         Else
             clsInstatOptions = New InstatOptions
             'TODO Should these be here or in the constructor (New) of InstatOptions?
@@ -104,6 +108,7 @@ Public Class frmMain
             Try
                 Using FileStream As Stream = File.OpenRead(strFilePath)
                     clsInstatOptions = CType(deserializer.Deserialize(FileStream), InstatOptions)
+                    clsInstatOptions.SetOptions()
                     'TODO Check whether this is needed or not. Using should do it automatically.
                     '     Also check general structure of this code.
                     'FileStream.Close()
@@ -1366,6 +1371,83 @@ Public Class frmMain
     Private Sub mnuClimaticFileCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileCliData.Click
         dlgCliData.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareKeysAndLinksAddKey_Click(sender As Object, e As EventArgs) Handles mnuPrepareKeysAndLinksAddKey.Click
+        dlgAddKey.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareDatesMakeDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareDatesMakeDate.Click
+        dlgMakeDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareDatesUseDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareDatesUseDate.Click
+        dlgUseDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareInfillMissingDates.Click
+        dlgInfill.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeRainfall.Click
+        dlgRainfall.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTemperatures.Click
+        dlgTemperature.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeWindSpeedDirection_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirection.Click
+        dlgWindSpeed.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeSunshineRadiation_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSunshineRadiation.Click
+        dlgSunshine.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeGeneral_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeGeneral.Click
+        dlgGeneral.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfall.Click
+        dlgPCSARainfall.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperature.Click
+        dlgPICSATemperature.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPICSACrops_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACrops.Click
+        dlgPICSACrops.ShowDialog()
+    End Sub
+
+    Private Sub QCProceduresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QCProceduresToolStripMenuItem.Click
+        dlgQCProcedures.ShowDialog()
+    End Sub
+
+    Private Sub mnuCimaticPrepareTransform_Click(sender As Object, e As EventArgs) Handles mnuCimaticPrepareTransform.Click
+        dlgTransform.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
+        dlgClimaticSummaries.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticModelsExtremes_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelsExtremes.Click
+        dlgExtremes.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSCFSupportCorrelations_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCorrelations.Click
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSCFSupportPrincipalComponents_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportPrincipalComponents.Click
+        dlgPrincipalComponentAnalysis.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSCFSupportCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCanonicalCorrelations.Click
+        dlgCanonicalCorrelationAnalysis.ShowDialog()
+    End Sub
+
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
