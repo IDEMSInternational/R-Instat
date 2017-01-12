@@ -1716,8 +1716,13 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
       else stop("Cannot detect year format with ", year_length, " digits.")
     }
   }
-  #TODO this will be more complex to make into account of doy_typical_length
-  return(as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
+  if(doy_typical_length == "366") {
+    if(is.factor(year_col)) {
+      year_col <- as.numeric(levels(year_col))[year_col]
+    }
+    doy_col[(!leap_year(year_col)) & doy_col > 60] <- doy_col[(!leap_year(year_col)) & doy_col > 60] - 1
+  }
+  return(temp_date <- as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
 }
 )
 
