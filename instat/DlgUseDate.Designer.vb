@@ -25,7 +25,7 @@ Partial Class dlgUseDate
         Me.lblDateVariable = New System.Windows.Forms.Label()
         Me.grpDateFunctions = New System.Windows.Forms.GroupBox()
         Me.grpOthers = New System.Windows.Forms.GroupBox()
-        Me.chkPentade = New System.Windows.Forms.CheckBox()
+        Me.chkPentad = New System.Windows.Forms.CheckBox()
         Me.chkLeapYear = New System.Windows.Forms.CheckBox()
         Me.chkDekade = New System.Windows.Forms.CheckBox()
         Me.grpFullName = New System.Windows.Forms.GroupBox()
@@ -76,7 +76,7 @@ Partial Class dlgUseDate
         '
         'grpOthers
         '
-        Me.grpOthers.Controls.Add(Me.chkPentade)
+        Me.grpOthers.Controls.Add(Me.chkPentad)
         Me.grpOthers.Controls.Add(Me.chkLeapYear)
         Me.grpOthers.Controls.Add(Me.chkDekade)
         Me.grpOthers.Location = New System.Drawing.Point(6, 136)
@@ -86,15 +86,15 @@ Partial Class dlgUseDate
         Me.grpOthers.TabStop = False
         Me.grpOthers.Text = "Other Functions"
         '
-        'chkPentade
+        'chkPentad
         '
-        Me.chkPentade.AutoSize = True
-        Me.chkPentade.Location = New System.Drawing.Point(140, 17)
-        Me.chkPentade.Name = "chkPentade"
-        Me.chkPentade.Size = New System.Drawing.Size(66, 17)
-        Me.chkPentade.TabIndex = 1
-        Me.chkPentade.Text = "Pentade"
-        Me.chkPentade.UseVisualStyleBackColor = True
+        Me.chkPentad.AutoSize = True
+        Me.chkPentad.Location = New System.Drawing.Point(140, 17)
+        Me.chkPentad.Name = "chkPentad"
+        Me.chkPentad.Size = New System.Drawing.Size(60, 17)
+        Me.chkPentad.TabIndex = 1
+        Me.chkPentad.Text = "Pentad"
+        Me.chkPentad.UseVisualStyleBackColor = True
         '
         'chkLeapYear
         '
@@ -111,9 +111,9 @@ Partial Class dlgUseDate
         Me.chkDekade.AutoSize = True
         Me.chkDekade.Location = New System.Drawing.Point(298, 17)
         Me.chkDekade.Name = "chkDekade"
-        Me.chkDekade.Size = New System.Drawing.Size(64, 17)
+        Me.chkDekade.Size = New System.Drawing.Size(58, 17)
         Me.chkDekade.TabIndex = 2
-        Me.chkDekade.Text = "Dekade"
+        Me.chkDekade.Text = "Dekad"
         Me.chkDekade.UseVisualStyleBackColor = True
         '
         'grpFullName
@@ -327,7 +327,7 @@ Partial Class dlgUseDate
     Friend WithEvents grpDateFunctions As GroupBox
     Friend WithEvents chkLeapYear As CheckBox
     Friend WithEvents chkDekade As CheckBox
-    Friend WithEvents chkPentade As CheckBox
+    Friend WithEvents chkPentad As CheckBox
     Friend WithEvents chkDayYear As CheckBox
     Friend WithEvents chkMonthValue As CheckBox
     Friend WithEvents chkWeek As CheckBox
