@@ -21,12 +21,14 @@ Public Class ucrReceiver
     Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public bFirstLoad As Boolean
+    Public bFirstShown As Boolean
     Public strSelectorHeading As String
     Public bUseFilteredData As Boolean = True
     Public bTypeSet As Boolean
     Protected strType As String
     Public bExcludeFromSelector As Boolean = False
     Public Event SelectionChanged(sender As Object, e As EventArgs)
+    Public WithEvents frmParent As Form
 
     Public Sub New()
         ' This call is required by the designer.
@@ -36,6 +38,7 @@ Public Class ucrReceiver
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         bFirstLoad = True
+        bFirstShown = True
         bTypeSet = False
         strSelectorHeading = "Variables"
         strType = "column"
@@ -94,6 +97,10 @@ Public Class ucrReceiver
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
+        If bFirstLoad Then
+            frmParent = ParentForm
+            bFirstLoad = False
+        End If
     End Sub
 
     'TODO make this function available throughout project
@@ -250,7 +257,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
+    Protected Overridable Sub Selector_ResetAll() Handles Selector.ResetReceivers
         Clear()
     End Sub
 
