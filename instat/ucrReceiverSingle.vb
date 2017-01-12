@@ -240,4 +240,35 @@ Public Class ucrReceiverSingle
     Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
         Throw New NotImplementedException()
     End Sub
+
+    Private Sub Selector_DataFrameChanged() Handles Selector.DataFrameChanged
+        CheckAutoFill()
+    End Sub
+
+    Public Sub CheckAutoFill()
+        Dim ucrCurrentReceiver As ucrReceiver
+
+        If Selector IsNot Nothing Then
+            'ucrCurrentReceiver = Selector.CurrentReceiver
+            If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
+                SetMeAsReceiver()
+                If Selector.lstAvailableVariable.Items.Count = 1 Then
+                    Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
+                End If
+            End If
+            'ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub frmParent_Shown() Handles frmParent.Shown
+        If bFirstShown Then
+            CheckAutoFill()
+            bFirstShown = False
+        End If
+    End Sub
+
+    Protected Overrides Sub Selector_ResetAll()
+        MyBase.Selector_ResetAll()
+        CheckAutoFill()
+    End Sub
 End Class
