@@ -340,7 +340,7 @@ Public Class dlgMakeDate
             If chkTwoDigitYearTwo.Checked Then
                 ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%y" & Chr(34))
             Else
-                ucrBase.clsRsyntax.RemoveParameter("year_format")
+                ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
             End If
 
             'If Year Date Month is selected
