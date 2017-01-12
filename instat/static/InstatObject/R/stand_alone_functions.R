@@ -226,6 +226,11 @@ yday_366 <- function(date) {
   return(temp_doy)
 }
 
+dekade <- function(date) {
+  temp_dekade <- 3 * (month(date) - 1) + (mday(date) > 10) + (mday(date) > 20)
+  return(temp_dekade)
+  }
+
 open_NetCDF <- function(nc_data){
   #my_nc_data <- read.nc(nc_data)
   #names(my_nc_data) #This might be necessary if the list objects may be named differently
