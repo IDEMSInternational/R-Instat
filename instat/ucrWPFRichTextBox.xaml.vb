@@ -52,33 +52,6 @@ Public Class ucrWPFRichTextBox
         End Try
     End Sub
 
-    Public Sub TestForGraphics()
-        'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
-        'It is called from RLink at the end of RunScript.
-        Dim strTempGraphsDirectory As String
-        Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
-        Dim iNumberOfFiles As Integer = -1
-        strTempGraphsDirectory = Path.Combine(IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
-        Try
-            lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
-        Catch e As Exception
-            lstTempGraphFiles = Nothing
-            MsgBox(e.Message & vbNewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
-        End Try
-        If lstTempGraphFiles IsNot Nothing Then
-            iNumberOfFiles = CStr(lstTempGraphFiles.Count)
-        End If
-        If iNumberOfFiles > 0 Then
-            For Each strFileName As String In lstTempGraphFiles
-                DisplayGraph(strFileName)
-                Try
-                    My.Computer.FileSystem.DeleteFile(strFileName)
-                Catch e As Exception
-                    MsgBox(e.Message & vbNewLine & "A problem occured in attempting to delete the temporary file: " & strFileName & " The possible exceptions are described here: https://msdn.microsoft.com/en-us/library/tdx72k4b.aspx", MsgBoxStyle.Critical)
-                End Try
-            Next
-        End If
-    End Sub
     Public Sub DisplayGraph(strImageLocation As String)
         'Adds a graph to the output window.
         Dim blkParagraph As Documents.Paragraph
