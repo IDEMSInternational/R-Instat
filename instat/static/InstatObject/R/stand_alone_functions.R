@@ -207,6 +207,10 @@ output_for_CPT = function(data_name, lat_lon_data, long = TRUE, year_col, sst_co
     ssT_col_names = sst_cols
     selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
     my_data = data_name[,c(ssT_col_names)]
+    if(length(ssT_col_names)==1){
+      my_data = as.data.frame(my_data)
+      names(my_data) = ssT_col_names
+    }
     my_data = rbind(selected_lat_lon, my_data)
     Year = c("LAT","LON", as.vector(data_name[,c(year_col)]))
     my_data = as.data.frame(cbind(Year, my_data))
@@ -221,6 +225,11 @@ yday_366 <- function(date) {
   temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)] <- 1 + temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)]
   return(temp_doy)
 }
+
+dekade <- function(date) {
+  temp_dekade <- 3 * (month(date) - 1) + (mday(date) > 10) + (mday(date) > 20)
+  return(temp_dekade)
+  }
 
 open_NetCDF <- function(nc_data){
   #my_nc_data <- read.nc(nc_data)

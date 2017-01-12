@@ -21,12 +21,13 @@ Public Class ucrSelector
     Public Event ResetAll()
     Public Event ResetReceivers()
     Public Event VariablesInReceiversChanged()
+    Public Event DataFrameChanged()
     Public lstVariablesInReceivers As List(Of String)
     Public bFirstLoad As Boolean
     Public bIncludeOverall As Boolean
     Public strCurrentDataFrame As String
-    Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
-    Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private strType As String
     Private bShowHiddenCols As Boolean = False
 
@@ -57,6 +58,10 @@ Public Class ucrSelector
 
     Protected Sub OnResetReceivers()
         RaiseEvent ResetReceivers()
+    End Sub
+
+    Protected Sub OnDataFrameChanged()
+        RaiseEvent DataFrameChanged()
     End Sub
 
     Public Overridable Sub LoadList()
