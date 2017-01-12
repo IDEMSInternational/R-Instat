@@ -103,6 +103,9 @@ Public Class dlgMakeDate
         ucrInputNewColumnName.Reset()
         ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
+        rdoSingleColumn.Checked = True
+        rdoSpecifyFormat.Checked = False
+        rdoDefaultFormat.Checked = True
         ucrInputYearOption.SetName("4 Digit")
         ucrInputMonthOption.SetName("Numerical")
         ucrInputDayOption.SetName("By Month")
@@ -115,9 +118,6 @@ Public Class dlgMakeDate
         ucrInputOrigin.Visible = False
         ucrInputOrigin.SetName("Excel")
         ucrInputNewColumnName.SetPrefix("Date")
-        rdoSingleColumn.Checked = True
-        rdoSpecifyFormat.Checked = False
-        rdoDefaultFormat.Checked = True
         chkTwoDigitYearTwo.Checked = False
         lblCutOffTwo.Visible = False
         chkTwoDigitYearTwo.Visible = True
@@ -203,6 +203,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub rdoSpecifyOrigin_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultFormat.CheckedChanged, rdoSpecifyFormat.CheckedChanged, rdoSpecifyOrigin.CheckedChanged
+        SetReceivers()
         Formats()
     End Sub
     Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged, chkTwoDigitYearTwo.CheckedChanged
@@ -222,6 +223,16 @@ Public Class dlgMakeDate
 
     Private Sub ucrSeclectorMakeDate_DataFrameChanged() Handles ucrSelectorMakeDate.DataFrameChanged
         Formats()
+    End Sub
+
+    Private Sub SetReceivers()
+        If rdoSingleColumn.Checked Then
+            ucrReceiverForDate.SetMeAsReceiver()
+        ElseIf rdoYearandDayofYear.Checked Then
+            ucrReceiverYearTwo.SetMeAsReceiver()
+        Else
+            ucrReceiverYearThree.SetMeAsReceiver()
+        End If
     End Sub
 
     Private Sub Formats()
@@ -245,7 +256,6 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.RemoveParameter("year_format")
             ucrBase.clsRsyntax.RemoveParameter("doy_typical_length")
             'Receivers
-            ucrReceiverForDate.SetMeAsReceiver()
             ucrBase.clsRsyntax.SetFunction("as.Date")
             If Not ucrReceiverForDate.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
@@ -310,7 +320,6 @@ Public Class dlgMakeDate
             'If Year and DOY is checked
         ElseIf rdoYearandDayofYear.Checked Then
             ' Display Options
-            ucrReceiverYearTwo.SetMeAsReceiver()
             grpTwoColumns.Visible = True
             grpThreeColumns.Visible = False
             grpSingleColumn.Visible = False
@@ -404,11 +413,10 @@ Public Class dlgMakeDate
                 ucrBase.clsRsyntax.RemoveParameter("month_format")
             End If
             'Receivers
-            ucrReceiverYearThree.SetMeAsReceiver()
-                If Not ucrReceiverYearThree.IsEmpty Then
-                    ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearThree.GetVariableNames())
-                Else
-                    ucrBase.clsRsyntax.RemoveParameter("year")
+            If Not ucrReceiverYearThree.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearThree.GetVariableNames())
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("year")
                 End If
                 If ucrReceiverMonthThree.IsEmpty = False Then
                     ucrBase.clsRsyntax.AddParameter("month", ucrReceiverMonthThree.GetVariableNames())
