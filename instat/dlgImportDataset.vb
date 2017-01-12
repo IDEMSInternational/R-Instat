@@ -88,9 +88,6 @@ Public Class dlgImportDataset
         'disabled until issue is resolved: http://stackoverflow.com/questions/37635541/rio-r-package-can-i-import-a-csv-file-with-non-comma-separator
         ucrInputSeparator.Enabled = False
 
-        'temp disabled since read.xlsx does not have skip rows parameter
-        nudxlRowsToSkip.Enabled = False
-
         'hide since no longer using openxlsx package
         ucrInputNamedRegions.Hide()
         lblNamedRegion.Hide()
