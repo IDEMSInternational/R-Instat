@@ -24,6 +24,8 @@ Partial Class DlgDefineClimaticData
     Private Sub InitializeComponent()
         Me.grpClimaticType = New System.Windows.Forms.GroupBox()
         Me.panClimateType = New System.Windows.Forms.Panel()
+        Me.lblDOY = New System.Windows.Forms.Label()
+        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverDay = New instat.ucrReceiverSingle()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
@@ -52,8 +54,6 @@ Partial Class DlgDefineClimaticData
         Me.lblDate = New System.Windows.Forms.Label()
         Me.ucrSelectorDefineClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
-        Me.lblDOY = New System.Windows.Forms.Label()
         Me.grpClimaticType.SuspendLayout()
         Me.panClimateType.SuspendLayout()
         Me.SuspendLayout()
@@ -63,7 +63,7 @@ Partial Class DlgDefineClimaticData
         Me.grpClimaticType.Controls.Add(Me.panClimateType)
         Me.grpClimaticType.Location = New System.Drawing.Point(237, 9)
         Me.grpClimaticType.Name = "grpClimaticType"
-        Me.grpClimaticType.Size = New System.Drawing.Size(187, 643)
+        Me.grpClimaticType.Size = New System.Drawing.Size(187, 310)
         Me.grpClimaticType.TabIndex = 1
         Me.grpClimaticType.TabStop = False
         Me.grpClimaticType.Text = "Climatic Type"
@@ -101,8 +101,26 @@ Partial Class DlgDefineClimaticData
         Me.panClimateType.Controls.Add(Me.lblDate)
         Me.panClimateType.Location = New System.Drawing.Point(8, 13)
         Me.panClimateType.Name = "panClimateType"
-        Me.panClimateType.Size = New System.Drawing.Size(172, 620)
+        Me.panClimateType.Size = New System.Drawing.Size(172, 280)
         Me.panClimateType.TabIndex = 0
+        '
+        'lblDOY
+        '
+        Me.lblDOY.AutoSize = True
+        Me.lblDOY.Location = New System.Drawing.Point(16, 571)
+        Me.lblDOY.Name = "lblDOY"
+        Me.lblDOY.Size = New System.Drawing.Size(66, 13)
+        Me.lblDOY.TabIndex = 26
+        Me.lblDOY.Text = "Day of Year:"
+        '
+        'ucrReceiverDOY
+        '
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(14, 592)
+        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
+        Me.ucrReceiverDOY.Selector = Nothing
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDOY.TabIndex = 27
         '
         'ucrReceiverDay
         '
@@ -350,34 +368,16 @@ Partial Class DlgDefineClimaticData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 669)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 331)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(423, 52)
         Me.ucrBase.TabIndex = 2
-        '
-        'ucrReceiverDOY
-        '
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(14, 592)
-        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
-        Me.ucrReceiverDOY.Selector = Nothing
-        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDOY.TabIndex = 27
-        '
-        'lblDOY
-        '
-        Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(16, 571)
-        Me.lblDOY.Name = "lblDOY"
-        Me.lblDOY.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOY.TabIndex = 26
-        Me.lblDOY.Text = "Day of Year:"
         '
         'DlgDefineClimaticData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(434, 733)
+        Me.ClientSize = New System.Drawing.Size(434, 389)
         Me.Controls.Add(Me.grpClimaticType)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDefineClimaticData)
