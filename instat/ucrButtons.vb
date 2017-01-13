@@ -113,7 +113,7 @@ Public Class ucrButtons
     End Sub
 
     Private Sub SetDefaults()
-        If frmMain.clsInstatOptions IsNot Nothing Then
+        If frmMain.clsInstatOptions Is Nothing Then
             chkComment.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
         Else
             chkComment.Checked = True
