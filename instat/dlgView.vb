@@ -30,14 +30,22 @@ Public Class dlgView
     End Sub
 
     Private Sub SetDefaults()
-        nudNumberRows.Value = 6
+        NumberOfRows()
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
         rdoTop.Checked = True
         rdoDispSepOutputWindow.Checked = True
         ucrSpecifyRows.Checked = True
+        SetCommands()
     End Sub
 
+    Private Sub NumberOfRows()
+        If nudNumberRows.Maximum >= 6 Then
+            nudNumberRows.Value = 6
+        Else
+            nudNumberRows.Value = nudNumberRows.Maximum
+        End If
+    End Sub
     Private Sub InitialiseDialog()
         ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
