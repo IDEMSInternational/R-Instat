@@ -59,27 +59,27 @@ Public Class sdgOneVarFitModDisplay
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("plot")
             clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoPPPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("ppcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoCDFPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("cdfcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoQQPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("qqcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoDensityPlot.Checked Then
             clsRplotFunction.ClearParameters()
             clsRplotFunction.SetRCommand("denscomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         End If
     End Sub
 
@@ -113,7 +113,7 @@ Public Class sdgOneVarFitModDisplay
     End Sub
 
     Public Sub RunLikelihoods()
-        frmMain.clsRLink.RunScript(clsRLogLikFunction.ToScript(), 2)
+        frmMain.clsRLink.RunScript(clsRLogLikFunction.ToScript(), 3)
     End Sub
 
 

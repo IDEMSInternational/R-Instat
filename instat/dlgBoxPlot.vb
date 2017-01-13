@@ -71,7 +71,6 @@ Public Class dlgBoxplot
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrBase.iHelpTopicID = 436
-        ucrBase.clsRsyntax.iCallType = 0
 
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
         ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
