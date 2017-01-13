@@ -175,8 +175,8 @@ Partial Class dlgTransform
         'cmbCycleLength
         '
         Me.cmbCycleLength.FormattingEnabled = True
-        Me.cmbCycleLength.Items.AddRange(New Object() {resources.GetString("cmbCycleLength.Items"), resources.GetString("cmbCycleLength.Items1"), resources.GetString("cmbCycleLength.Items2"), resources.GetString("cmbCycleLength.Items3")})
-        resources.ApplyResources(Me.cmbCycleLength, "cmbCycleLength")
+        'Me.cmbCycleLength.Items.AddRange(New Object() {resources.GetString("cmbCycleLength.Items"), resources.GetString("cmbCycleLength.Items1"), resources.GetString("cmbCycleLength.Items2"), resources.GetString("cmbCycleLength.Items3")})
+        'resources.ApplyResources(Me.cmbCycleLength, "cmbCycleLength")
         Me.cmbCycleLength.Name = "cmbCycleLength"
         '
         'lblHarmonic

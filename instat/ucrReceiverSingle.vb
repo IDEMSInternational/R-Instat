@@ -20,6 +20,7 @@ Public Class ucrReceiverSingle
     Dim strDataFrameName As String
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
+    Public bAutoFill As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -239,5 +240,40 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
         Throw New NotImplementedException()
+    End Sub
+
+    Private Sub Selector_DataFrameChanged() Handles Selector.DataFrameChanged
+        CheckAutoFill()
+    End Sub
+
+    Public Sub CheckAutoFill()
+        If bAutoFill Then
+            If Selector IsNot Nothing Then
+                If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
+                    SetMeAsReceiver()
+                    If Selector.lstAvailableVariable.Items.Count = 1 Then
+                        Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub frmParent_Shown() Handles frmParent.Shown
+        If bFirstShown Then
+            CheckAutoFill()
+            bFirstShown = False
+        End If
+    End Sub
+
+    Protected Overrides Sub Selector_ResetAll()
+        MyBase.Selector_ResetAll()
+        CheckAutoFill()
+    End Sub
+
+    Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            bFirstLoad = False
+        End If
     End Sub
 End Class
