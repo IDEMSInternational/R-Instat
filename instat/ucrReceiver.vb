@@ -99,7 +99,9 @@ Public Class ucrReceiver
         translateEach(Controls)
         If bFirstLoad Then
             frmParent = ParentForm
-            bFirstLoad = False
+            'Remove this line so that single/multiple code can run things on first load as well
+            'We never have a receiver not as a single or multiple
+            'bFirstLoad = False
         End If
     End Sub
 

@@ -20,6 +20,7 @@ Public Class ucrReceiverSingle
     Dim strDataFrameName As String
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
+    Public bAutoFill As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -246,17 +247,15 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub CheckAutoFill()
-        Dim ucrCurrentReceiver As ucrReceiver
-
-        If Selector IsNot Nothing Then
-            'ucrCurrentReceiver = Selector.CurrentReceiver
-            If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
-                SetMeAsReceiver()
-                If Selector.lstAvailableVariable.Items.Count = 1 Then
-                    Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
+        If bAutoFill Then
+            If Selector IsNot Nothing Then
+                If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
+                    SetMeAsReceiver()
+                    If Selector.lstAvailableVariable.Items.Count = 1 Then
+                        Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
+                    End If
                 End If
             End If
-            'ucrCurrentReceiver.SetMeAsReceiver()
         End If
     End Sub
 
@@ -270,5 +269,11 @@ Public Class ucrReceiverSingle
     Protected Overrides Sub Selector_ResetAll()
         MyBase.Selector_ResetAll()
         CheckAutoFill()
+    End Sub
+
+    Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            bFirstLoad = False
+        End If
     End Sub
 End Class
