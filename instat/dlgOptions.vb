@@ -56,7 +56,6 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
-        rdoDisplayinSeparateWindows.Enabled = False
         nudDigits.Minimum = 0
         nudDigits.Maximum = 22
     End Sub
