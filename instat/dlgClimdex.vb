@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgClimdex
-    Public clsRClimdexInput, clsRMaxMisingDays, clsRTmax, clsRTmin, clsRPrec As New RFunction
+    Public clsRClimdexInput, clsRMaxMisingDays, clsRTmax, clsRTmin, clsRPrec, clsRDate, clsRPCIct, clsRChar As New RFunction
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgClimdex_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -32,7 +32,7 @@ Public Class dlgClimdex
     Private Sub SetDefaults()
         ucrSelectorClimdex.Reset()
         ucrSelectorClimdex.Focus()
-        ucrReceiverTmax.SetMeAsReceiver()
+        ucrReceiverDate.SetMeAsReceiver()
         sdgClimdexIndices.SetDefaults()
         chkNHemisphere.Checked = True
         nudYearFrom.Value = 1961
@@ -54,10 +54,14 @@ Public Class dlgClimdex
         clsRTmax.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRTmin.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRPrec.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsRDate.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsRPCIct.SetRCommand("as.PCICt")
+        clsRChar.SetRCommand("as.character")
+        clsRPCIct.AddParameter("cal", Chr(34) & "gregorian" & Chr(34))
+        ucrReceiverDate.SetDataType("Date")
         ucrMultipleInputTempQtiles.bIsNumericInput = True
         ucrMultipleInputPrecQtiles.bIsNumericInput = True
-        'ucrBase.iHelpTopicID = 436
-        'ucrBaseClimdex.clsRsyntax.iCallType = 0
+        ucrReceiverDate.Selector = ucrSelectorClimdex
         ucrReceiverTmax.Selector = ucrSelectorClimdex
         ucrReceiverTmin.Selector = ucrSelectorClimdex
         ucrReceiverPrec.Selector = ucrSelectorClimdex
@@ -66,11 +70,10 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverTmax.IsEmpty AndAlso ucrReceiverTmin.IsEmpty AndAlso ucrReceiverPrec.IsEmpty Then
-            ucrBaseClimdex.OKEnabled(False)
-        Else
-            'This should be turned on once the climate object is ready
+        If Not ucrReceiverDate.IsEmpty AndAlso (Not ucrReceiverTmax.IsEmpty OrElse Not ucrReceiverTmin.IsEmpty OrElse Not ucrReceiverPrec.IsEmpty) Then
             ucrBaseClimdex.OKEnabled(True)
+        Else
+            ucrBaseClimdex.OKEnabled(False)
         End If
     End Sub
 
@@ -81,12 +84,24 @@ Public Class dlgClimdex
         SetDefaults()
     End Sub
 
+    Private Sub ucrSelectorClimdex_DataFrameChanged() Handles ucrSelectorClimdex.DataFrameChanged
+        clsRDate.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
+        clsRDate.AddParameter("col_name", ucrReceiverDate.GetVariableNames())
+        clsRChar.AddParameter("x", clsRFunctionParameter:=clsRDate)
+        clsRPCIct.AddParameter("x", clsRFunctionParameter:=clsRChar)
+        TestOkEnabled()
+    End Sub
+
     Private Sub ucrReceiverTmax_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverTmax.SelectionChanged
         clsRTmax.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
         If Not ucrReceiverTmax.IsEmpty Then
             clsRTmax.AddParameter("col_name", ucrReceiverTmax.GetVariableNames())
             clsRClimdexInput.AddParameter("tmax", clsRFunctionParameter:=clsRTmax)
-            clsRClimdexInput.AddParameter("tmax.dates", "as.PCICt(do.call(paste, climdex_data[,c(" & Chr(34) & "year" & Chr(34) & "," & Chr(34) & "jday" & Chr(34) & ")]), format=" & Chr(34) & "%Y %j" & Chr(34) & ", cal=" & Chr(34) & "gregorian" & Chr(34) & ")")
+            clsRClimdexInput.AddParameter("tmax.dates", clsRFunctionParameter:=clsRPCIct)
         Else
             clsRClimdexInput.RemoveParameterByName("tmax")
             clsRClimdexInput.RemoveParameterByName("tmax.dates")
@@ -99,7 +114,7 @@ Public Class dlgClimdex
         If Not ucrReceiverTmin.IsEmpty Then
             clsRTmin.AddParameter("col_name", ucrReceiverTmin.GetVariableNames())
             clsRClimdexInput.AddParameter("tmin", clsRFunctionParameter:=clsRTmin)
-            clsRClimdexInput.AddParameter("tmin.dates", "as.PCICt(do.call(paste, climdex_data[,c(" & Chr(34) & "year" & Chr(34) & "," & Chr(34) & "jday" & Chr(34) & ")]), format=" & Chr(34) & "%Y %j" & Chr(34) & ", cal=" & Chr(34) & "gregorian" & Chr(34) & ")")
+            clsRClimdexInput.AddParameter("tmin.dates", clsRFunctionParameter:=clsRPCIct)
         Else
             clsRClimdexInput.RemoveParameterByName("tmin")
             clsRClimdexInput.RemoveParameterByName("tmin.dates")
@@ -112,7 +127,7 @@ Public Class dlgClimdex
         If Not ucrReceiverPrec.IsEmpty Then
             clsRPrec.AddParameter("col_name", ucrReceiverPrec.GetVariableNames())
             clsRClimdexInput.AddParameter("prec", clsRFunctionParameter:=clsRPrec)
-            clsRClimdexInput.AddParameter("prec.dates", "as.PCICt(do.call(paste, climdex_data[,c(" & Chr(34) & "year" & Chr(34) & "," & Chr(34) & "jday" & Chr(34) & ")]), format=" & Chr(34) & "%Y %j" & Chr(34) & ", cal=" & Chr(34) & "gregorian" & Chr(34) & ")")
+            clsRClimdexInput.AddParameter("prec.dates", clsRFunctionParameter:=clsRPCIct)
         Else
             clsRClimdexInput.RemoveParameterByName("prec")
             clsRClimdexInput.RemoveParameterByName("prec.dates")
