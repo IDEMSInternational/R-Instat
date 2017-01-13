@@ -19,7 +19,6 @@ Public Class dlgView
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -31,12 +30,12 @@ Public Class dlgView
     End Sub
 
     Private Sub SetDefaults()
+        nudNumberRows.Value = 6
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
         rdoTop.Checked = True
         rdoDispSepOutputWindow.Checked = True
         ucrSpecifyRows.Checked = True
-        nudNumberRows.Value = 6
     End Sub
 
     Private Sub InitialiseDialog()
