@@ -1716,8 +1716,13 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
       else stop("Cannot detect year format with ", year_length, " digits.")
     }
   }
-  #TODO this will be more complex to make into account of doy_typical_length
-  return(as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
+  if(doy_typical_length == "366") {
+    if(is.factor(year_col)) {
+      year_col <- as.numeric(levels(year_col))[year_col]
+    }
+    doy_col[(!leap_year(year_col)) & doy_col > 60] <- doy_col[(!leap_year(year_col)) & doy_col > 60] - 1
+  }
+  return(temp_date <- as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
 }
 )
 
@@ -1741,7 +1746,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   }
 )
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE) {
+data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
@@ -1808,6 +1813,11 @@ data_object$set("public","split_date", function(data_name, col_name = "", week =
     dekade_vector <- as.integer(dekade(col_data))
     col_name <- next_default_item(prefix = "dekade", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekade_vector)
+  }
+  if(pentad) {
+    pentad_vector <- as.integer(pentad(col_data))
+    col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = pentad_vector)
   }
 	if(leap_year) {
     leap_year_vector <- leap_year(col_data)
