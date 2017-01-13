@@ -17,7 +17,6 @@
 Imports instat
 
 Public Class ucrSelectorByDataFrame
-    Public Event DataFrameChanged()
     'These are defined here because ucrSelector is not a ucrCore but ucrDataFrame is
     'Since only the data frame controls a parameter, ucrSelector is not a ucrCore
     'So these are just ways to pass through events from ucrDataFrame
@@ -37,7 +36,7 @@ Public Class ucrSelectorByDataFrame
         LoadList()
         If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
             OnResetReceivers()
-            RaiseEvent DataFrameChanged()
+            OnDataFrameChanged()
         End If
     End Sub
 
