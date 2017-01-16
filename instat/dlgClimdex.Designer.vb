@@ -44,6 +44,8 @@ Partial Class dlgClimdex
         Me.lblTempQuantiles = New System.Windows.Forms.Label()
         Me.lblPrecQuantiles = New System.Windows.Forms.Label()
         Me.lblFreq = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrInputFreq = New instat.ucrInputComboBox()
         Me.ucrMultipleInputTempQtiles = New instat.ucrMultipleInput()
         Me.ucrMultipleInputPrecQtiles = New instat.ucrMultipleInput()
@@ -52,7 +54,6 @@ Partial Class dlgClimdex
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimdex = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseClimdex = New instat.ucrButtons()
-        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         CType(Me.nudYearFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudYearTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,30 +67,30 @@ Partial Class dlgClimdex
         'lblTmax
         '
         Me.lblTmax.AutoSize = True
-        Me.lblTmax.Location = New System.Drawing.Point(332, 6)
+        Me.lblTmax.Location = New System.Drawing.Point(332, 46)
         Me.lblTmax.Name = "lblTmax"
         Me.lblTmax.Size = New System.Drawing.Size(33, 13)
-        Me.lblTmax.TabIndex = 1
+        Me.lblTmax.TabIndex = 3
         Me.lblTmax.Tag = "Tmax"
         Me.lblTmax.Text = "Tmax"
         '
         'lblTmin
         '
         Me.lblTmin.AutoSize = True
-        Me.lblTmin.Location = New System.Drawing.Point(333, 53)
+        Me.lblTmin.Location = New System.Drawing.Point(333, 83)
         Me.lblTmin.Name = "lblTmin"
         Me.lblTmin.Size = New System.Drawing.Size(30, 13)
-        Me.lblTmin.TabIndex = 3
+        Me.lblTmin.TabIndex = 5
         Me.lblTmin.Tag = "Tmin"
         Me.lblTmin.Text = "Tmin"
         '
         'lblPrec
         '
         Me.lblPrec.AutoSize = True
-        Me.lblPrec.Location = New System.Drawing.Point(334, 97)
+        Me.lblPrec.Location = New System.Drawing.Point(334, 122)
         Me.lblPrec.Name = "lblPrec"
         Me.lblPrec.Size = New System.Drawing.Size(29, 13)
-        Me.lblPrec.TabIndex = 5
+        Me.lblPrec.TabIndex = 8
         Me.lblPrec.Tag = "Prec"
         Me.lblPrec.Text = "Prec"
         '
@@ -98,7 +99,7 @@ Partial Class dlgClimdex
         Me.cmdIndices.Location = New System.Drawing.Point(316, 321)
         Me.cmdIndices.Name = "cmdIndices"
         Me.cmdIndices.Size = New System.Drawing.Size(62, 23)
-        Me.cmdIndices.TabIndex = 20
+        Me.cmdIndices.TabIndex = 23
         Me.cmdIndices.Tag = "Indices..."
         Me.cmdIndices.Text = "Indices..."
         Me.cmdIndices.UseVisualStyleBackColor = True
@@ -146,29 +147,29 @@ Partial Class dlgClimdex
         'lblN
         '
         Me.lblN.AutoSize = True
-        Me.lblN.Location = New System.Drawing.Point(278, 197)
+        Me.lblN.Location = New System.Drawing.Point(278, 204)
         Me.lblN.Name = "lblN"
         Me.lblN.Size = New System.Drawing.Size(93, 13)
-        Me.lblN.TabIndex = 10
+        Me.lblN.TabIndex = 13
         Me.lblN.Tag = "Days_for_Quantiles"
         Me.lblN.Text = "Days for Quantiles"
         '
         'nudN
         '
-        Me.nudN.Location = New System.Drawing.Point(381, 194)
+        Me.nudN.Location = New System.Drawing.Point(381, 201)
         Me.nudN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudN.Name = "nudN"
         Me.nudN.Size = New System.Drawing.Size(36, 20)
-        Me.nudN.TabIndex = 11
+        Me.nudN.TabIndex = 14
         Me.nudN.Value = New Decimal(New Integer() {5, 0, 0, 0})
         '
         'chkNHemisphere
         '
         Me.chkNHemisphere.AutoSize = True
-        Me.chkNHemisphere.Location = New System.Drawing.Point(10, 301)
+        Me.chkNHemisphere.Location = New System.Drawing.Point(10, 297)
         Me.chkNHemisphere.Name = "chkNHemisphere"
         Me.chkNHemisphere.Size = New System.Drawing.Size(126, 17)
-        Me.chkNHemisphere.TabIndex = 16
+        Me.chkNHemisphere.TabIndex = 18
         Me.chkNHemisphere.Tag = "Northern_Hemisphere"
         Me.chkNHemisphere.Text = "Northern Hemisphere"
         Me.chkNHemisphere.UseVisualStyleBackColor = True
@@ -219,10 +220,10 @@ Partial Class dlgClimdex
         Me.grpBaseRange.Controls.Add(Me.nudYearTo)
         Me.grpBaseRange.Controls.Add(Me.lblBaseRangeTo)
         Me.grpBaseRange.Controls.Add(Me.lblBaseRangeFrom)
-        Me.grpBaseRange.Location = New System.Drawing.Point(10, 196)
+        Me.grpBaseRange.Location = New System.Drawing.Point(10, 194)
         Me.grpBaseRange.Name = "grpBaseRange"
         Me.grpBaseRange.Size = New System.Drawing.Size(174, 46)
-        Me.grpBaseRange.TabIndex = 9
+        Me.grpBaseRange.TabIndex = 12
         Me.grpBaseRange.TabStop = False
         Me.grpBaseRange.Tag = "Base_Range"
         Me.grpBaseRange.Text = "Base Range"
@@ -233,10 +234,10 @@ Partial Class dlgClimdex
         Me.grpMaxMissingDays.Controls.Add(Me.lblMonthly)
         Me.grpMaxMissingDays.Controls.Add(Me.lblAnnual)
         Me.grpMaxMissingDays.Controls.Add(Me.nudAnnualMissingDays)
-        Me.grpMaxMissingDays.Location = New System.Drawing.Point(10, 247)
+        Me.grpMaxMissingDays.Location = New System.Drawing.Point(10, 245)
         Me.grpMaxMissingDays.Name = "grpMaxMissingDays"
         Me.grpMaxMissingDays.Size = New System.Drawing.Size(216, 46)
-        Me.grpMaxMissingDays.TabIndex = 13
+        Me.grpMaxMissingDays.TabIndex = 16
         Me.grpMaxMissingDays.TabStop = False
         Me.grpMaxMissingDays.Tag = "Maximum_Missing_Days"
         Me.grpMaxMissingDays.Text = "Maximum Missing Days"
@@ -247,7 +248,7 @@ Partial Class dlgClimdex
         Me.lblMinBaseData.Location = New System.Drawing.Point(10, 326)
         Me.lblMinBaseData.Name = "lblMinBaseData"
         Me.lblMinBaseData.Size = New System.Drawing.Size(193, 13)
-        Me.lblMinBaseData.TabIndex = 18
+        Me.lblMinBaseData.TabIndex = 21
         Me.lblMinBaseData.Tag = "Minimum_Fraction_of_Base_Data_ Present"
         Me.lblMinBaseData.Text = "Minimum Fraction of Base Data Present"
         '
@@ -259,93 +260,116 @@ Partial Class dlgClimdex
         Me.nudMinBaseData.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMinBaseData.Name = "nudMinBaseData"
         Me.nudMinBaseData.Size = New System.Drawing.Size(36, 20)
-        Me.nudMinBaseData.TabIndex = 19
+        Me.nudMinBaseData.TabIndex = 22
         Me.nudMinBaseData.Value = New Decimal(New Integer() {1, 0, 0, 65536})
         '
         'lblTempQuantiles
         '
         Me.lblTempQuantiles.AutoSize = True
-        Me.lblTempQuantiles.Location = New System.Drawing.Point(291, 221)
+        Me.lblTempQuantiles.Location = New System.Drawing.Point(291, 228)
         Me.lblTempQuantiles.Name = "lblTempQuantiles"
         Me.lblTempQuantiles.Size = New System.Drawing.Size(114, 13)
-        Me.lblTempQuantiles.TabIndex = 12
+        Me.lblTempQuantiles.TabIndex = 15
         Me.lblTempQuantiles.Tag = "Temperature_Quantiles"
         Me.lblTempQuantiles.Text = "Temperature Quantiles"
         '
         'lblPrecQuantiles
         '
         Me.lblPrecQuantiles.AutoSize = True
-        Me.lblPrecQuantiles.Location = New System.Drawing.Point(292, 269)
+        Me.lblPrecQuantiles.Location = New System.Drawing.Point(292, 276)
         Me.lblPrecQuantiles.Name = "lblPrecQuantiles"
         Me.lblPrecQuantiles.Size = New System.Drawing.Size(112, 13)
-        Me.lblPrecQuantiles.TabIndex = 15
+        Me.lblPrecQuantiles.TabIndex = 19
         Me.lblPrecQuantiles.Tag = "Precipitation_Quantiles"
         Me.lblPrecQuantiles.Text = "Precipitation Quantiles"
         '
         'lblFreq
         '
         Me.lblFreq.AutoSize = True
-        Me.lblFreq.Location = New System.Drawing.Point(320, 143)
+        Me.lblFreq.Location = New System.Drawing.Point(320, 160)
         Me.lblFreq.Name = "lblFreq"
         Me.lblFreq.Size = New System.Drawing.Size(57, 13)
-        Me.lblFreq.TabIndex = 7
+        Me.lblFreq.TabIndex = 10
         Me.lblFreq.Tag = "Frequency"
         Me.lblFreq.Text = "Frequency"
+        '
+        'lblDate
+        '
+        Me.lblDate.AutoSize = True
+        Me.lblDate.Location = New System.Drawing.Point(333, 3)
+        Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(30, 13)
+        Me.lblDate.TabIndex = 1
+        Me.lblDate.Tag = "Date"
+        Me.lblDate.Text = "Date"
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(289, 22)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.TabIndex = 2
         '
         'ucrInputFreq
         '
         Me.ucrInputFreq.IsReadOnly = False
-        Me.ucrInputFreq.Location = New System.Drawing.Point(280, 164)
+        Me.ucrInputFreq.Location = New System.Drawing.Point(280, 176)
         Me.ucrInputFreq.Name = "ucrInputFreq"
         Me.ucrInputFreq.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFreq.TabIndex = 8
+        Me.ucrInputFreq.TabIndex = 11
         '
         'ucrMultipleInputTempQtiles
         '
-        Me.ucrMultipleInputTempQtiles.Location = New System.Drawing.Point(273, 239)
+        Me.ucrMultipleInputTempQtiles.Location = New System.Drawing.Point(273, 246)
         Me.ucrMultipleInputTempQtiles.Name = "ucrMultipleInputTempQtiles"
         Me.ucrMultipleInputTempQtiles.Size = New System.Drawing.Size(150, 29)
-        Me.ucrMultipleInputTempQtiles.TabIndex = 14
+        Me.ucrMultipleInputTempQtiles.TabIndex = 17
         '
         'ucrMultipleInputPrecQtiles
         '
-        Me.ucrMultipleInputPrecQtiles.Location = New System.Drawing.Point(273, 286)
+        Me.ucrMultipleInputPrecQtiles.Location = New System.Drawing.Point(273, 293)
         Me.ucrMultipleInputPrecQtiles.Name = "ucrMultipleInputPrecQtiles"
         Me.ucrMultipleInputPrecQtiles.Size = New System.Drawing.Size(150, 29)
-        Me.ucrMultipleInputPrecQtiles.TabIndex = 17
+        Me.ucrMultipleInputPrecQtiles.TabIndex = 20
         '
         'ucrReceiverPrec
         '
-        Me.ucrReceiverPrec.Location = New System.Drawing.Point(288, 114)
+        Me.ucrReceiverPrec.frmParent = Me
+        Me.ucrReceiverPrec.Location = New System.Drawing.Point(288, 139)
         Me.ucrReceiverPrec.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPrec.Name = "ucrReceiverPrec"
         Me.ucrReceiverPrec.Selector = Nothing
         Me.ucrReceiverPrec.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPrec.TabIndex = 6
+        Me.ucrReceiverPrec.TabIndex = 9
         '
         'ucrReceiverTmin
         '
-        Me.ucrReceiverTmin.Location = New System.Drawing.Point(288, 71)
+        Me.ucrReceiverTmin.frmParent = Me
+        Me.ucrReceiverTmin.Location = New System.Drawing.Point(288, 99)
         Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmin.Name = "ucrReceiverTmin"
         Me.ucrReceiverTmin.Selector = Nothing
         Me.ucrReceiverTmin.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTmin.TabIndex = 4
+        Me.ucrReceiverTmin.TabIndex = 6
         '
         'ucrReceiverTmax
         '
-        Me.ucrReceiverTmax.Location = New System.Drawing.Point(288, 24)
+        Me.ucrReceiverTmax.frmParent = Me
+        Me.ucrReceiverTmax.Location = New System.Drawing.Point(288, 62)
         Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmax.Name = "ucrReceiverTmax"
         Me.ucrReceiverTmax.Selector = Nothing
         Me.ucrReceiverTmax.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTmax.TabIndex = 2
+        Me.ucrReceiverTmax.TabIndex = 4
         '
         'ucrSelectorClimdex
         '
         Me.ucrSelectorClimdex.bShowHiddenColumns = False
         Me.ucrSelectorClimdex.bUseCurrentFilter = True
-        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 9)
+        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 5)
         Me.ucrSelectorClimdex.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimdex.Name = "ucrSelectorClimdex"
         Me.ucrSelectorClimdex.Size = New System.Drawing.Size(210, 180)
@@ -356,22 +380,15 @@ Partial Class dlgClimdex
         Me.ucrBaseClimdex.Location = New System.Drawing.Point(10, 346)
         Me.ucrBaseClimdex.Name = "ucrBaseClimdex"
         Me.ucrBaseClimdex.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseClimdex.TabIndex = 21
-        '
-        'UcrDialogDisabled1
-        '
-        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(74, 114)
-        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
-        Me.UcrDialogDisabled1.TabIndex = 22
+        Me.ucrBaseClimdex.TabIndex = 0
         '
         'dlgClimdex
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(424, 402)
-        Me.Controls.Add(Me.UcrDialogDisabled1)
+        Me.Controls.Add(Me.lblDate)
+        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrInputFreq)
         Me.Controls.Add(Me.lblFreq)
         Me.Controls.Add(Me.ucrMultipleInputTempQtiles)
@@ -447,5 +464,6 @@ Partial Class dlgClimdex
     Friend WithEvents ucrMultipleInputTempQtiles As ucrMultipleInput
     Friend WithEvents lblFreq As Label
     Friend WithEvents ucrInputFreq As ucrInputComboBox
-    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
+    Friend WithEvents lblDate As Label
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
 End Class
