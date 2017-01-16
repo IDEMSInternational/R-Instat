@@ -323,7 +323,7 @@ Public Class dlgOneVarFitModel
         ElseIf rdoSpecific.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
                 PlotResiduals()
-                frmMain.clsRLink.RunScript(clsRplot.ToScript(), 2)
+                frmMain.clsRLink.RunScript(clsRplot.ToScript(), 3)
             End If
         End If
     End Sub
