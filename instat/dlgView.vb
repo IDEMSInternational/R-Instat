@@ -60,7 +60,7 @@ Public Class dlgView
         If Not ucrReceiverView.IsEmpty AndAlso rdoDispSepOutputWindow.Checked Then
             ucrBase.OKEnabled(True)
         ElseIf (rdoDispOutputWindow.Checked AndAlso ucrSpecifyRows.Checked) Then
-            If nudNumberRows.TextAlign <> "" Then
+            If nudNumberRows.Text <> "" Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
