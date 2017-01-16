@@ -48,8 +48,10 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBaseClimdex.clsRsyntax.iCallType = 0
         ucrBaseClimdex.iHelpTopicID = 190
         clsRClimdexInput.SetRCommand("climdexInput.raw")
+        ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsRClimdexInput)
         clsRMaxMisingDays.SetRCommand("c")
         clsRTmax.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRTmin.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
@@ -66,7 +68,7 @@ Public Class dlgClimdex
         ucrReceiverTmin.Selector = ucrSelectorClimdex
         ucrReceiverPrec.Selector = ucrSelectorClimdex
         ucrInputFreq.SetItems({"monthly", "annual"})
-
+        AssignName()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -86,6 +88,7 @@ Public Class dlgClimdex
 
     Private Sub ucrSelectorClimdex_DataFrameChanged() Handles ucrSelectorClimdex.DataFrameChanged
         clsRDate.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        AssignName()
     End Sub
 
     Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
@@ -219,5 +222,10 @@ Public Class dlgClimdex
                 sdgClimdexIndices.clsRTwoArg1.AddParameter("freq", Chr(34) & "monthly" & Chr(34))
                 sdgClimdexIndices.clsRThreeArg.AddParameter("freq", Chr(34) & "monthly" & Chr(34))
         End Select
+    End Sub
+
+    Private Sub AssignName()
+        ucrBaseClimdex.clsRsyntax.SetAssignTo("climdex.raw")
+        ucrBaseClimdex.clsRsyntax.bExcludeAssignedFunctionOutput = True
     End Sub
 End Class
