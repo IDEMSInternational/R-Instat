@@ -59,14 +59,14 @@ Public Class sdgClimdexIndices
         ttClimdexIndices.SetToolTip(chkPrecExceed95Percent, "Computes the annual sum of precipitation in days where daily precipitation exceeds the 95th percentile of daily precipitation in the base period ")
         ttClimdexIndices.SetToolTip(chkPrecExceed99Percent, "Computes the annual sum of precipitation in days where daily precipitation exceeds the 99th percentile of daily precipitation in the base period ")
         ttClimdexIndices.SetToolTip(chkTotalDailyPrec, "Computes the annual sum of precipitation in wet days (days where precipitation is at least 1mm). ")
-        clsROneArg.AddParameter("ci", "climdex.raw")
-        clsRTwoArg1.AddParameter("ci", "climdex.raw")
-        clsRTwoArg2.AddParameter("ci", "climdex.raw")
+        clsROneArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        clsRTwoArg1.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        clsRTwoArg2.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
         clsRTwoArg2.AddParameter("gsl.mode", Chr(34) & "GSL" & Chr(34))
-        clsRTwoArg3.AddParameter("ci", "climdex.raw")
-        clsRTwoArg4.AddParameter("ci", "climdex.raw")
-        clsRTwoArg5.AddParameter("ci", "climdex.raw")
-        clsRThreeArg.AddParameter("ci", "climdex.raw")
+        clsRTwoArg3.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
     End Sub
 
     Private Sub nudThreshold_ValueChanged(sender As Object, e As EventArgs) Handles nudThreshold.ValueChanged
