@@ -185,17 +185,13 @@ Public Class ucrDataFrame
         End If
     End Sub
 
-    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        MyBase.UpdateRCode(clsRFunction, clsROperator)
+    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
+        MyBase.UpdateRCode(clsRCodeObject)
         If cboAvailableDataFrames.Text <> "" Then
-            If clsRFunction IsNot Nothing Then
-                If bParameterIsString Then
-                    clsRFunction.AddParameter(strParameterName, Chr(34) & cboAvailableDataFrames.Text & Chr(34))
-                ElseIf bParameterIsRFunction Then
-                    clsRFunction.AddParameter(strParameterName, clsRFunctionParameter:=clsCurrDataFrame)
-                End If
-            ElseIf clsROperator IsNot Nothing Then
-                'TODO
+            If bParameterIsString Then
+                clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=Chr(34) & cboAvailableDataFrames.Text & Chr(34))
+            ElseIf bParameterIsRFunction Then
+                clsRCodeObject.AddParameter(strParameterValue:=strParameterName, clsRFunctionParameter:=clsCurrDataFrame)
             End If
         End If
     End Sub
