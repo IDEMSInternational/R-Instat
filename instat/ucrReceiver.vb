@@ -309,7 +309,7 @@ Public Class ucrReceiver
         MyBase.UpdateControl(clsRCodeObject)
     End Sub
 
-    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        MyBase.UpdateRCode(clsRFunction, clsROperator)
+    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
+        MyBase.UpdateRCode(clsRCodeObject)
     End Sub
 End Class

@@ -398,16 +398,16 @@ Public Class ucrInput
         End If
     End Sub
 
-    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
         If strParameterName <> "" Then
             If Not IsEmpty() Then
                 If GetAllRecognisedItems.Contains(GetText()) Then
-                    clsRFunction.AddParameter(strParameterName, lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value)
+                    clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value)
                 Else
-                    clsRFunction.AddParameter(strParameterName, GetText())
+                    clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=GetText())
                 End If
             Else
-                clsRFunction.RemoveParameterByName(strParameterName)
+                clsRCodeObject.RemoveParameterByName(strArgName:=strParameterName)
             End If
         End If
     End Sub

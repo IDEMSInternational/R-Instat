@@ -81,8 +81,8 @@ Public Class ucrSelectorByDataFrame
         ucrAvailableDataFrames.UpdateControl(clsRCodeObject)
     End Sub
 
-    Public Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        ucrAvailableDataFrames.UpdateRCode(clsRFunction, clsROperator)
+    Public Sub UpdateRCode(clsRCodeObject As RCodeStructure)
+        ucrAvailableDataFrames.UpdateRCode(clsRCodeObject)
     End Sub
 
     Public Sub SetParameterIsString()
@@ -94,7 +94,7 @@ Public Class ucrSelectorByDataFrame
     End Sub
 
     Public Sub SetParameterName(strParamName As String)
-        ucrAvailableDataFrames.SetParameterName(strParamName)
+        ucrAvailableDataFrames.strParameterName = strParamName
     End Sub
 
     Private Sub ucrAvailableDataFrames_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrAvailableDataFrames.ControlContentsChanged
