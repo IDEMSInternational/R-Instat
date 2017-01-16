@@ -105,7 +105,7 @@ Public Class sdgPrincipalComponentAnalysis
         Else
             clsRScreePlotFunction.RemoveParameterByName("addlabels")
         End If
-        frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 0)
+        frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 3)
     End Sub
 
     'Code for running Variables Plot if it is selected in the "Graphics" tab
@@ -117,7 +117,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
         clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
         clsRVariablesPlotFunction.AddParameter("axes", "c(" & nudDim1.Value & "," & nudDim2.Value & ")")
-        frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 0)
+        frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 3)
     End Sub
 
     'Code for running Individuals Plot if it is selected in the "Graphics" tab
@@ -129,7 +129,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
         clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
         clsRIndividualsPlotFunction.AddParameter("axes", "c(" & nudDim1.Value & "," & nudDim2.Value & ")")
-        frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 0)
+        frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 3)
     End Sub
 
     'Code for running Biplot if it is selected in the "Graphics" tab
@@ -141,7 +141,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
         clsRBiplotFunction.AddParameter("axes", "c(" & nudDim1.Value & "," & nudDim2.Value & ")")
-        frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 0)
+        frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 3)
     End Sub
 
     'Code for running Barplot if it is selected in the "Graphics" tab
@@ -196,7 +196,7 @@ Public Class sdgPrincipalComponentAnalysis
         End If
         If rdoBarPlot.Checked Then
             Barplot()
-            frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 0)
+            frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 3)
         End If
     End Sub
 
