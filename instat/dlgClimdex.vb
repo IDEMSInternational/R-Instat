@@ -225,7 +225,6 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub AssignName()
-        ucrBaseClimdex.clsRsyntax.SetAssignTo("climdex.raw")
-        ucrBaseClimdex.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        ucrBaseClimdex.clsRsyntax.SetAssignTo("climdex_input")
     End Sub
 End Class

@@ -130,9 +130,6 @@ Public Class RCodeStructure
                 clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 clsGetColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
                 strAssignTo = clsGetColumns.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
             ElseIf Not strAssignToModel = "" Then
                 clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
                 clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
@@ -147,9 +144,6 @@ Public Class RCodeStructure
                 clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                 clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 strAssignTo = clsGetModels.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
             ElseIf Not strAssignToGraph = "" Then
                 clsAddGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_graph")
                 clsAddGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
@@ -163,9 +157,6 @@ Public Class RCodeStructure
                 clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                 clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
                 strAssignTo = clsGetGraphs.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
             ElseIf Not strAssignToDataFrame = "" Then
                 clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
                 clsDataList.SetRCommand("list")
@@ -176,10 +167,9 @@ Public Class RCodeStructure
                 clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                 clsGetData.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 strAssignTo = clsGetData.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
             End If
+            bIsAssigned = True
+            bToBeAssigned = False
             Return strAssignTo
         Else
             Return strTemp
