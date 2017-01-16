@@ -56,14 +56,19 @@ Public Class dlgView
     End Sub
 
     Private Sub TestOKEnabled()
-        'OK is enabled when the ucrReceiverView and nudNumberRows are both non-empty in both cases of Window display
-        If Not ucrReceiverView.IsEmpty AndAlso rdoDispSepOutputWindow.Checked Then
-            ucrBase.OKEnabled(True)
-        ElseIf (rdoDispOutputWindow.Checked AndAlso ucrSpecifyRows.Checked) Then
-            If nudNumberRows.Text <> "" Then
+        If Not ucrReceiverView.IsEmpty Then
+            If rdoDispSepOutputWindow.Checked Then
                 ucrBase.OKEnabled(True)
             Else
-                ucrBase.OKEnabled(False)
+                If ucrSpecifyRows.Checked Then
+                    If nudNumberRows.Text <> "" Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
             End If
         Else
             ucrBase.OKEnabled(False)
