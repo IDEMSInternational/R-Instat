@@ -47,6 +47,7 @@ Public Class DlgDefineClimaticData
         Dim kvpYear As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("year", {"year"}.ToList())
         Dim kvpMonth As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("month", {"month"}.ToList())
         Dim kvpDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("day", {"day"}.ToList())
+        Dim kvpDOY As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("doy", {"doy"}.ToList())
 
         lstRecognisedTypes.AddRange({kvpRain, kvpDate, kvpStation, kvpCloudCover, kvpTempMax, kvpTempMin, kvpRadiation, kvpSunshineHours, kvpWindDirection, kvpWindSpeed, kvpYear, kvpMonth, kvpDay})
 
@@ -80,7 +81,9 @@ Public Class DlgDefineClimaticData
         ucrReceiverMonth.Tag = "month"
         ucrReceiverDay.Selector = ucrSelectorDefineClimaticData
         ucrReceiverDay.Tag = "day"
-        lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDate, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation, ucrReceiverRain, ucrReceiverStation, ucrReceiverSunshine, ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear})
+        ucrReceiverDOY.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverDOY.Tag = "doy"
+        lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDate, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation, ucrReceiverRain, ucrReceiverStation, ucrReceiverSunshine, ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear, ucrReceiverDOY})
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
             ucrTempReceiver.bExcludeFromSelector = True
         Next

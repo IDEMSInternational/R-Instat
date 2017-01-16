@@ -280,7 +280,34 @@ Public Class RLink
                         clsEngine.Evaluate("graphics.off()") 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
                         'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
                         'This sub is used to display graphics in the output window when necessary.
-                        rtbOutput.TestForGraphics()
+                        'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
+                        'It is called from RLink at the end of RunScript.
+                        Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
+                        Dim iNumberOfFiles As Integer = -1
+                        strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
+                        Try
+                            lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
+                        Catch e As Exception
+                            lstTempGraphFiles = Nothing
+                            MsgBox(e.Message & vbNewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
+                        End Try
+                        If lstTempGraphFiles IsNot Nothing Then
+                            iNumberOfFiles = CStr(lstTempGraphFiles.Count)
+                        End If
+                        If iNumberOfFiles > 0 Then
+                            For Each strFileName As String In lstTempGraphFiles
+                                If strGraphDisplayOption = "view_output_window" Then
+                                    rtbOutput.DisplayGraph(strFileName)
+                                ElseIf strGraphDisplayOption = "view_separate_window" Then
+                                    frmMain.AddGraphForm(strFileName)
+                                End If
+                                Try
+                                    My.Computer.FileSystem.DeleteFile(strFileName)
+                                Catch e As Exception
+                                    MsgBox(e.Message & vbNewLine & "A problem occured in attempting to delete the temporary file: " & strFileName & " The possible exceptions are described here: https://msdn.microsoft.com/en-us/library/tdx72k4b.aspx", MsgBoxStyle.Critical)
+                                End Try
+                            Next
+                        End If
                     End If
                 End If
             Catch e As Exception
