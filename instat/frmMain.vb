@@ -138,6 +138,15 @@ Public Class frmMain
         End Try
     End Sub
 
+    Public Sub AddGraphForm(strFilePath As String)
+        Dim frmNewGraph As New frmGraphDisplay
+
+        frmNewGraph.SetImageFromFile(strFilePath)
+        frmNewGraph.MdiParent = Me
+        frmNewGraph.Show()
+        frmNewGraph.BringToFront()
+    End Sub
+
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
         dlgFileNew.ShowDialog()
     End Sub
