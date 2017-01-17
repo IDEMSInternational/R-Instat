@@ -15,20 +15,31 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrNud
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        objValueToRemoveParameter = ""
+    End Sub
+
     Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        Dim iNewValue As Integer
+        Dim dNewValue As Decimal
 
         MyBase.UpdateControl(clsRCodeObject)
 
-        If Integer.TryParse(clsParameter.strArgumentValue, iNewValue) AndAlso iNewValue >= nudUpDown.Minimum AndAlso iNewValue <= nudUpDown.Maximum Then
-            nudUpDown.Value = iNewValue
-        Else
-            MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " cannot be converted to an integer or is outside the range of the control. Setting to the default value.")
-            If Integer.TryParse(objDefault, iNewValue) Then
-                nudUpDown.Value = iNewValue
+        If bChangeParameterValue Then
+            If Decimal.TryParse(clsParameter.strArgumentValue, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
+                nudUpDown.Value = dNewValue
             Else
-                MsgBox("Developer error: The default value of the control cannot be converted to integer. Setting to the minimum of the control.")
-                nudUpDown.Value = Minimum
+                MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " cannot be converted to a decimal or is outside the range of the control. Setting to the default value.")
+                If Decimal.TryParse(objDefault, dNewValue) Then
+                    nudUpDown.Value = dNewValue
+                Else
+                    MsgBox("Developer error: The default value of the control cannot be converted to a decimal. Setting to the minimum of the control.")
+                    nudUpDown.Value = Minimum
+                End If
             End If
         End If
     End Sub
@@ -36,13 +47,12 @@ Public Class ucrNud
     Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
         MyBase.UpdateRCode(clsRCodeObject)
         If clsParameter IsNot Nothing Then
-            If nudUpDown.Text <> "" Then
-                clsParameter.strArgumentValue = nudUpDown.Value
-            Else
-                clsParameter.strArgumentValue = ""
-                'Or should it be this?
-                'But then would need to add above
-                'clsRCodeObject.RemoveParameter(clsParameter)
+            If bAddRemoveParameter Then
+                If clsParameter.strArgumentValue = objValueToRemoveParameter.ToString() Then
+                    clsRCodeObject.RemoveParameter(clsParameter)
+                Else
+                    clsRCodeObject.AddParameter(clsParameter)
+                End If
             End If
         End If
     End Sub
@@ -53,25 +63,31 @@ Public Class ucrNud
     End Sub
 
     Private Sub nudUpDown_TextChanged(sender As Object, e As EventArgs) Handles nudUpDown.TextChanged
-        OnControlContentsChanged()
+        If bChangeParameterValue Then
+            If nudUpDown.Text <> "" Then
+                clsParameter.strArgumentValue = nudUpDown.Value
+            Else
+                clsParameter.strArgumentValue = ""
+            End If
+        End If
         OnControlValueChanged()
     End Sub
 
-    Public Property Minimum As Integer
+    Public Property Minimum As Decimal
         Get
             Return nudUpDown.Minimum
         End Get
-        Set(iNewMin As Integer)
-            nudUpDown.Minimum = iNewMin
+        Set(dNewMin As Decimal)
+            nudUpDown.Minimum = dNewMin
         End Set
     End Property
 
-    Public Property Maximum As Integer
+    Public Property Maximum As Decimal
         Get
             Return nudUpDown.Maximum
         End Get
-        Set(iNewMax As Integer)
-            nudUpDown.Maximum = iNewMax
+        Set(dNewMax As Decimal)
+            nudUpDown.Maximum = dNewMax
         End Set
     End Property
 
@@ -85,14 +101,34 @@ Public Class ucrNud
     End Property
 
     Public Overrides Sub SetToDefault()
-        Dim iNewValue As Integer
+        Dim dNewValue As Decimal
 
         MyBase.SetToDefault()
-        If Integer.TryParse(objDefault, iNewValue) AndAlso iNewValue >= nudUpDown.Minimum AndAlso iNewValue <= nudUpDown.Maximum Then
-            nudUpDown.Value = iNewValue
+        If objDefault IsNot Nothing AndAlso Integer.TryParse(objDefault, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
+            nudUpDown.Value = dNewValue
         Else
-            MsgBox("Developer error: The default value of the control either cannot be converted to an integer or is outside the range of the control. Setting to the minimum value.")
+            MsgBox("Developer error: The default value of the control is either Nothing, cannot be converted to an integer or is outside the range of the numeric up/down. Setting to the minimum value instead.")
             nudUpDown.Value = Minimum
+        End If
+    End Sub
+
+    Public Overrides Sub SetDefault(objNewDefault As Object)
+        Dim dTemp As Decimal
+
+        MyBase.SetDefault(objNewDefault)
+        If Not Decimal.TryParse(objNewDefault, dTemp) Then
+            MsgBox("Developer error: Cannot set the default value of the control because it cannot be converted to an integer.")
+            MyBase.SetValueToRemoveParameter(Nothing)
+        End If
+    End Sub
+
+    Public Overrides Sub SetValueToRemoveParameter(objNewValue As Object)
+        Dim dTemp As Decimal
+
+        MyBase.SetValueToRemoveParameter(objNewValue)
+        If Not Decimal.TryParse(objNewValue, dTemp) Then
+            MsgBox("Developer error: Cannot set the value to remove of the control because it cannot be converted to an integer.")
+            MyBase.SetValueToRemoveParameter(Nothing)
         End If
     End Sub
 End Class

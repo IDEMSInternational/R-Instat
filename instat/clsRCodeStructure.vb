@@ -335,6 +335,10 @@ Public Class RCodeStructure
         Return clsParameters.Contains(clsParam)
     End Function
 
+    Public Overridable Function ContainsParameter(strParameterName As String) As Boolean
+        Return (clsParameters.FindIndex(Function(x) x.strArgumentName = strParameterName) <> -1)
+    End Function
+
     Public Overridable Sub ClearParameters()
         clsParameters.Clear()
         bIsAssigned = False
