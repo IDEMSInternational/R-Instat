@@ -51,7 +51,6 @@ Public Class dlgShowModel
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
         ucrInputNewColNameforTablePlus.Reset()
-        ucrDistributionsFOrTablePlus.ResetDistribution()
         rdoQuantiles.Checked = True
         chkSingleValues.Checked = True
         chkGraphResults.Checked = True

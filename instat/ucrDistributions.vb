@@ -136,7 +136,7 @@ Public Class ucrDistributions
     Public Sub SetDistributions()
         Dim bUse As Boolean
         lstCurrentDistributions.Clear()
-        ucrInputDistributions.ResetCombo()
+        ucrInputDistributions.Reset()
         For Each Dist In lstAllDistributions
             bUse = False
             Select Case strDistributionType
