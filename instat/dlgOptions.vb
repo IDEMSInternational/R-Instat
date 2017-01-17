@@ -329,7 +329,7 @@ Public Class dlgOptions
         If msgFactoryReset = DialogResult.Yes Then
             frmMain.clsInstatOptions = New InstatOptions(False)
             LoadInstatOptions()
-            SetInstatOptions()
+            ApplyEnabled(True)
         End If
     End Sub
 
