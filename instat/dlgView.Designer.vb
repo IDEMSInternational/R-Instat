@@ -116,6 +116,7 @@ Partial Class dlgView
         Me.nudNumberRows.Name = "nudNumberRows"
         Me.nudNumberRows.Size = New System.Drawing.Size(47, 20)
         Me.nudNumberRows.TabIndex = 2
+        Me.nudNumberRows.Value = New Decimal(New Integer() {6, 0, 0, 0})
         '
         'lblSelected
         '
@@ -162,6 +163,7 @@ Partial Class dlgView
         '
         'ucrReceiverView
         '
+        Me.ucrReceiverView.frmParent = Me
         Me.ucrReceiverView.Location = New System.Drawing.Point(257, 48)
         Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverView.Name = "ucrReceiverView"
