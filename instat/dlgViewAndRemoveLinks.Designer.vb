@@ -26,17 +26,17 @@ Partial Class dlgViewAndRemoveLinks
         Me.lblLinks = New System.Windows.Forms.Label()
         Me.lblLink = New System.Windows.Forms.Label()
         Me.ucrReceiverLink = New instat.ucrReceiverSingle()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.ucrInputFrom = New instat.ucrInputTextBox()
         Me.ucrInputTo = New instat.ucrInputTextBox()
         Me.chkDeleteLink = New System.Windows.Forms.CheckBox()
+        Me.ucrSlelectorLinks = New instat.ucrSelector()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 178)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 134)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 1
@@ -53,7 +53,7 @@ Partial Class dlgViewAndRemoveLinks
         'lblLink
         '
         Me.lblLink.AutoSize = True
-        Me.lblLink.Location = New System.Drawing.Point(206, 13)
+        Me.lblLink.Location = New System.Drawing.Point(160, 9)
         Me.lblLink.Name = "lblLink"
         Me.lblLink.Size = New System.Drawing.Size(30, 13)
         Me.lblLink.TabIndex = 4
@@ -61,26 +61,18 @@ Partial Class dlgViewAndRemoveLinks
         '
         'ucrReceiverLink
         '
-        Me.ucrReceiverLink.Location = New System.Drawing.Point(210, 28)
+        Me.ucrReceiverLink.frmParent = Me
+        Me.ucrReceiverLink.Location = New System.Drawing.Point(163, 26)
         Me.ucrReceiverLink.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLink.Name = "ucrReceiverLink"
         Me.ucrReceiverLink.Selector = Nothing
-        Me.ucrReceiverLink.Size = New System.Drawing.Size(180, 20)
+        Me.ucrReceiverLink.Size = New System.Drawing.Size(130, 20)
         Me.ucrReceiverLink.TabIndex = 5
-        '
-        'UcrSelectorAddRemove1
-        '
-        Me.UcrSelectorAddRemove1.bShowHiddenColumns = False
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(9, 28)
-        Me.UcrSelectorAddRemove1.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(201, 147)
-        Me.UcrSelectorAddRemove1.TabIndex = 6
         '
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(208, 57)
+        Me.lblFrom.Location = New System.Drawing.Point(160, 57)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 7
@@ -89,7 +81,7 @@ Partial Class dlgViewAndRemoveLinks
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(208, 88)
+        Me.lblTo.Location = New System.Drawing.Point(299, 56)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 8
@@ -98,40 +90,49 @@ Partial Class dlgViewAndRemoveLinks
         'ucrInputFrom
         '
         Me.ucrInputFrom.IsReadOnly = False
-        Me.ucrInputFrom.Location = New System.Drawing.Point(254, 57)
+        Me.ucrInputFrom.Location = New System.Drawing.Point(199, 51)
         Me.ucrInputFrom.Name = "ucrInputFrom"
-        Me.ucrInputFrom.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFrom.Size = New System.Drawing.Size(94, 21)
         Me.ucrInputFrom.TabIndex = 9
         '
         'ucrInputTo
         '
         Me.ucrInputTo.IsReadOnly = False
-        Me.ucrInputTo.Location = New System.Drawing.Point(254, 84)
+        Me.ucrInputTo.Location = New System.Drawing.Point(328, 51)
         Me.ucrInputTo.Name = "ucrInputTo"
-        Me.ucrInputTo.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTo.Size = New System.Drawing.Size(94, 21)
         Me.ucrInputTo.TabIndex = 10
         '
         'chkDeleteLink
         '
         Me.chkDeleteLink.AutoSize = True
-        Me.chkDeleteLink.Location = New System.Drawing.Point(213, 111)
+        Me.chkDeleteLink.Location = New System.Drawing.Point(163, 89)
         Me.chkDeleteLink.Name = "chkDeleteLink"
         Me.chkDeleteLink.Size = New System.Drawing.Size(80, 17)
         Me.chkDeleteLink.TabIndex = 11
         Me.chkDeleteLink.Text = "Delete Link"
         Me.chkDeleteLink.UseVisualStyleBackColor = True
         '
+        'ucrSlelectorLinks
+        '
+        Me.ucrSlelectorLinks.bShowHiddenColumns = False
+        Me.ucrSlelectorLinks.Location = New System.Drawing.Point(16, 30)
+        Me.ucrSlelectorLinks.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSlelectorLinks.Name = "ucrSlelectorLinks"
+        Me.ucrSlelectorLinks.Size = New System.Drawing.Size(120, 98)
+        Me.ucrSlelectorLinks.TabIndex = 12
+        '
         'dlgViewAndRemoveLinks
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(430, 231)
+        Me.ClientSize = New System.Drawing.Size(428, 193)
+        Me.Controls.Add(Me.ucrSlelectorLinks)
         Me.Controls.Add(Me.chkDeleteLink)
         Me.Controls.Add(Me.ucrInputTo)
         Me.Controls.Add(Me.ucrInputFrom)
         Me.Controls.Add(Me.lblTo)
         Me.Controls.Add(Me.lblFrom)
-        Me.Controls.Add(Me.UcrSelectorAddRemove1)
         Me.Controls.Add(Me.ucrReceiverLink)
         Me.Controls.Add(Me.lblLink)
         Me.Controls.Add(Me.lblLinks)
@@ -151,10 +152,10 @@ Partial Class dlgViewAndRemoveLinks
     Friend WithEvents lblLinks As Label
     Friend WithEvents lblLink As Label
     Friend WithEvents ucrReceiverLink As ucrReceiverSingle
-    Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
     Friend WithEvents lblFrom As Label
     Friend WithEvents lblTo As Label
     Friend WithEvents ucrInputFrom As ucrInputTextBox
     Friend WithEvents ucrInputTo As ucrInputTextBox
     Friend WithEvents chkDeleteLink As CheckBox
+    Friend WithEvents ucrSlelectorLinks As ucrSelector
 End Class
