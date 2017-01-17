@@ -146,6 +146,9 @@ Public Class ucrInputComboBox
         bUserTyped = True
     End Sub
 
+    Public Sub ResetCombo()
+        cboInput.Items.Clear()
+    End Sub
     'Public Sub SetEditable(bEditable As Boolean)
 
     '    If bEditable Then
