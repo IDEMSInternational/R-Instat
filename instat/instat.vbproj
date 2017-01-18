@@ -455,6 +455,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="mdlCoreControl.vb" />
+    <Compile Include="sdgAddLink.Designer.vb">
+      <DependentUpon>sdgAddLink.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgAddLink.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgAddNewDistribution.Designer.vb">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </Compile>
@@ -3104,6 +3110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAddLink.resx">
+      <DependentUpon>sdgAddLink.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAddNewDistribution.fr-FR.resx">
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
