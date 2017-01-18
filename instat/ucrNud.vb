@@ -132,8 +132,24 @@ Public Class ucrNud
 
         MyBase.SetValueToRemoveParameter(objNewValue)
         If Not Decimal.TryParse(objNewValue, dTemp) Then
-            MsgBox("Developer error: Cannot set the value to remove of the control because it cannot be converted to an integer.")
+            MsgBox("Developer error: Cannot set the value to remove of the control because it cannot be converted to a decimal.")
             MyBase.SetValueToRemoveParameter(Nothing)
         End If
     End Sub
+
+    Public Overrides Function ValueContainedIn(lstTemp As Object()) As Boolean
+        Dim dTemp As Decimal
+        Dim bTemp As Boolean = False
+
+        For Each objVal In lstTemp
+            If Decimal.TryParse(objVal, dTemp) Then
+                If dTemp = nudUpDown.Value Then
+                    bTemp = True
+                End If
+            Else
+                MsgBox("Developer error: Cannot convert value to decimal for linked control.")
+            End If
+        Next
+        Return bTemp
+    End Function
 End Class

@@ -38,7 +38,7 @@ Public Class dlgOneVariableGraph
         ' Link the base function to the sub dialog
         sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction)
         ' Update the main dialog controls from base function
-        UpdateControls(Me, ucrBase.clsRsyntax.clsBaseFunction)
+        UpdateControls(Me)
         ' Controls may have changed values before InitialiseDialog was run so need to correctly update RCode too
         UpdateRCode(Me, ucrBase.clsRsyntax.clsBaseFunction)
         ucrSelectorOneVarGraph.Reset()
@@ -71,7 +71,7 @@ Public Class dlgOneVariableGraph
         ucrSelectorOneVarGraph.SetParameterIsString()
 
         ucrChkFlip.SetText("Flip Coordinates")
-        ucrChkFlip.SetParameterName("coord_flip")
+        ucrChkFlip.strParameterName = "coord_flip"
         'When checked add coord_flip = TRUE, when unchecked remove coord_flip parameter
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "")
 
@@ -160,6 +160,6 @@ Public Class dlgOneVariableGraph
         'The control that has changed updates the R code
         ucrChangedControl.UpdateRCode(ucrBase.clsRsyntax.clsBaseFunction)
         'This line may be needed if there are linked controls that need to be updated after other controls have changed
-        UpdateControls(Me, ucrBase.clsRsyntax.clsBaseFunction)
+        UpdateControls(Me)
     End Sub
 End Class

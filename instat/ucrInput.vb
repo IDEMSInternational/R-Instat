@@ -378,13 +378,13 @@ Public Class ucrInput
         End Set
     End Property
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
+    Public Overrides Sub UpdateControl()
         Dim clsTempParam As RParameter
 
-        MyBase.UpdateControl(clsRCodeObject)
+        MyBase.UpdateControl()
 
         'TODO Add methods in RFunction/base class for RFunction/ROperator to do these checks better
-        clsTempParam = clsRCodeObject.GetParameter(strParameterName)
+        clsTempParam = clsRCode.GetParameter(strParameterName)
         If strParameterName <> "" Then
             If clsTempParam IsNot Nothing Then
                 If GetAllRecognisedParameterValues.Contains(clsTempParam.strArgumentValue) Then

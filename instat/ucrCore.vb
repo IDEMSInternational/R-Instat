@@ -62,7 +62,7 @@ Public Class ucrCore
     'e.g. add/remove the parameter of other controls
     '     set the visible/enabled property of other controls
     'e.g. a checkbox that shows/hides set of controls
-    Protected lstValuesAndControl As List(Of KeyValuePair(Of Object, ucrCore))
+    Protected lstValuesAndControl As List(Of KeyValuePair(Of Object(), ucrCore))
 
     'If this control is in another controls lstLinkedControls
     'These values specifiy how that control can modify this control
@@ -71,32 +71,6 @@ Public Class ucrCore
     Public bLinkedDisabledIfParameterMissing As Boolean = False
     Public bLinkedHideIfParameterMissing As Boolean = False
     Public bLinkedChangeParameterToDefault As Boolean = False
-
-    Public Overridable Sub SetDefault(objNewDefault As Object)
-        objDefault = objNewDefault
-    End Sub
-
-    Public Overridable Sub SetValueToRemoveParameter(objNewValue As Object)
-        objValueToRemoveParameter = objNewValue
-    End Sub
-
-    Public Overridable Sub SetToDefault()
-    End Sub
-
-    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure)
-        If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
-            clsRCode = clsNewCodeStructure
-            UpdateControl()
-        End If
-    End Sub
-
-    'Public Overridable Sub SetLinkedControl(ucrNewLinkedControl As ucrCore)
-    '    ucrLinkedControl = ucrNewLinkedControl
-    'End Sub
-
-    'Public Function GetLinkedControl() As ucrCore
-    '    Return ucrLinkedControl
-    'End Function
 
     'Update the control based on the the code in RCodeStructure
     Public Overridable Sub UpdateControl()
@@ -113,13 +87,13 @@ Public Class ucrCore
 
     Public Overridable Sub UpdateLinkedControls()
         Dim ucrControl As ucrCore
-        Dim objValues As Object
+        Dim lstValues As Object()
         Dim bTemp As Boolean
 
-        For Each kvpTemp As KeyValuePair(Of Object, ucrCore) In lstValuesAndControl
-            objValues = kvpTemp.Key
+        For Each kvpTemp As KeyValuePair(Of Object(), ucrCore) In lstValuesAndControl
+            lstValues = kvpTemp.Key
             ucrControl = kvpTemp.Value
-            bTemp = ValueContains(objValues)
+            bTemp = ValueContainedIn(lstValues)
             If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
                 ucrControl.UpdateRCode(clsRCode)
             End If
@@ -140,6 +114,24 @@ Public Class ucrCore
 
     'Update the RCode based on the contents of the control (reverse of above)
     Public Overridable Sub UpdateRCode(clsRCodeObject As RCodeStructure)
+    End Sub
+
+    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure)
+        If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
+            clsRCode = clsNewCodeStructure
+            UpdateControl()
+        End If
+    End Sub
+
+    Public Overridable Sub SetDefault(objNewDefault As Object)
+        objDefault = objNewDefault
+    End Sub
+
+    Public Overridable Sub SetValueToRemoveParameter(objNewValue As Object)
+        objValueToRemoveParameter = objNewValue
+    End Sub
+
+    Public Overridable Sub SetToDefault()
     End Sub
 
     ''Set a linked paramter name and what the control should do when the parameter is not in the R code
@@ -189,7 +181,7 @@ Public Class ucrCore
         Return objDefault
     End Function
 
-    Public Overridable Function ValueContains(objTemp As Object) As Boolean
+    Public Overridable Function ValueContainedIn(lstTemp As Object()) As Boolean
         Return False
     End Function
 
@@ -209,21 +201,21 @@ Public Class ucrCore
         Next
     End Sub
 
-    Public Sub AddToLinkedControls(ucrLinked As ucrCore, objValues As Object, Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeParameterToDefault As Boolean = False)
+    Public Sub AddToLinkedControls(ucrLinked As ucrCore, objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeParameterToDefault As Boolean = False)
         If Not IsLinkedTo(ucrLinked) Then
             ucrLinked.bLinkedAddRemoveParameter = bNewLinkedAddRemoveParameter
             ucrLinked.bLinkedChangeParameterToDefault = bNewLinkedChangeParameterToDefault
             ucrLinked.bLinkedDisabledIfParameterMissing = bNewLinkedDisabledIfParameterMissing
             ucrLinked.bLinkedHideIfParameterMissing = bNewLinkedHideIfParameterMissing
             ucrLinked.bLinkedUpdateFunction = bNewLinkedUpdateFunction
-            lstValuesAndControl.Add(New KeyValuePair(Of Object, ucrCore)(objValues, ucrLinked))
+            lstValuesAndControl.Add(New KeyValuePair(Of Object(), ucrCore)(objValues, ucrLinked))
         End If
     End Sub
 
     Public Function IsLinkedTo(ucrControl) As Boolean
         Dim bTemp As Boolean = False
 
-        For Each kvpTemp As KeyValuePair(Of Object, ucrCore) In lstValuesAndControl
+        For Each kvpTemp As KeyValuePair(Of Object(), ucrCore) In lstValuesAndControl
             If kvpTemp.Value.Equals(ucrControl) Then
                 bTemp = True
                 Exit For

@@ -158,14 +158,14 @@ Public Class ucrDataFrame
         Clipboard.SetText(cboAvailableDataFrames.SelectedText)
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
+    Public Overrides Sub UpdateControl()
         Dim clsTempParam As RParameter
         Dim clsTempDataParameter As RParameter
         Dim strDataFrameName As String = ""
 
-        MyBase.UpdateControl(clsRCodeObject)
+        MyBase.UpdateControl()
 
-        clsTempParam = clsRCodeObject.GetParameter(strParameterName)
+        clsTempParam = clsRCode.GetParameter(strParameterName)
         If clsTempParam IsNot Nothing AndAlso strParameterName <> "" Then
             If bParameterIsString Then
                 strDataFrameName = clsTempParam.strArgumentValue
