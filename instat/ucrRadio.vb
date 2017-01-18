@@ -1,8 +1,8 @@
 ﻿Imports instat
 
 Public Class ucrRadio
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateControl(clsRCodeObject)
+    Public Overrides Sub UpdateControl()
+        MyBase.UpdateControl()
     End Sub
 
     Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)

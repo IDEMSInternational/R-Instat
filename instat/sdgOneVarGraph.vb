@@ -25,9 +25,8 @@ Public Class sdgOneVarGraph
             bFirstLoad = False
         End If
         autoTranslate(Me)
-        UpdateControls(Me, clsGraphOneVariable)
+        UpdateControls(Me)
     End Sub
-
 
     Public Sub InitialiseDialog()
         Dim lstNumericPairs As New List(Of KeyValuePair(Of String, String))
@@ -51,24 +50,24 @@ Public Class sdgOneVarGraph
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
         ucrInputCategorical.SetItems(lstCategoricalPairs)
 
-        ucrInputNumeric.SetParameterName("numeric")
-        ucrInputCategorical.SetParameterName("categorical")
+        ucrInputNumeric.strParameterName = "numeric"
+        ucrInputCategorical.strParameterName = "categorical"
 
         'TODO See if we can get the Text property on the Properties tab in design view to avoid this
-        ucrChkSpecifyLayout.SetParameterName("ncol")
+        ucrChkSpecifyLayout.strParameterName = "ncol"
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkSpecifyLayout.SetLinkedControl(ucrNudNumberofColumns)
         ucrChkSpecifyLayout.SetIsParameterPresent()
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
 
-        ucrNudNumberofColumns.SetParameterName("ncol")
+        ucrNudNumberofColumns.strParameterName = "ncol"
         ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
         ucrNudNumberofColumns.bAddIfParameterNotPresent = False
         'This needs to be done last as it changes the Value because default value is 0.
         'If not done last then R code may be updated worngly because its happening before all properties of the control are set
         'This line is needed if there already a value for the nud in the RFunction, otherwise setting min/max may override the RFunction's value
-        ucrNudNumberofColumns.UpdateControl(clsGraphOneVariable)
+        ucrNudNumberofColumns.UpdateControl()
         ucrNudNumberofColumns.SetMinMax(1, 10)
     End Sub
 
@@ -80,6 +79,6 @@ Public Class sdgOneVarGraph
         ucrChangedControl.UpdateRCode(clsGraphOneVariable)
         'After one control has edited the code, other controls may need to be updated
         'Could make more efficient by only updating controls "linked" to ucrChangedControl, but for this this seems a simple solution.
-        UpdateControls(Me, clsGraphOneVariable)
+        UpdateControls(Me)
     End Sub
 End Class

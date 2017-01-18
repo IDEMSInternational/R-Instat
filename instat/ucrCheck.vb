@@ -28,9 +28,9 @@ Public Class ucrCheck
     ''If = False then the opposite.
     'Private bParameterIncludedWhenChecked As Boolean = True
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
+    Public Overrides Sub UpdateControl()
 
-        MyBase.UpdateControl(clsRCodeObject)
+        MyBase.UpdateControl()
 
         If clsParameter IsNot Nothing Then
             If bChangeParameterValue Then
@@ -43,7 +43,7 @@ Public Class ucrCheck
             ElseIf bAddRemoveParameter Then
                 'Commented out as not currently needed. Can be included if needed.
                 'If bParameterIncludedWhenChecked Then
-                chkCheck.Checked = clsRCodeObject.clsParameters.Contains(clsParameter)
+                chkCheck.Checked = clsRCode.clsParameters.Contains(clsParameter)
                 'Else
                 'chkCheck.Checked = Not clsRCodeObject.clsParameters.Contains(clsParameter)
                 'End If
@@ -57,13 +57,13 @@ Public Class ucrCheck
         If clsParameter IsNot Nothing Then
             If bIsParameterValue Then
                 If chkCheck.Checked Then
-                    If strValueIfChecked <> strRDefaultValue Then
+                    If strValueIfChecked <> objValueToRemoveParameter.ToString() Then
                         AddParameterToStructure(clsRCodeObject)
                         'clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=strValueIfChecked)
                     Else
                         clsRCodeObject.RemoveParameterByName(strArgName:=strParameterName)
                     End If
-                    If strValueIfUnchecked <> strRDefaultValue Then
+                    If strValueIfUnchecked <> objValueToRemoveParameter.ToString() Then
                         'clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=strValueIfUnchecked)
                     Else
                         clsRCodeObject.RemoveParameterByName(strArgName:=strParameterName)
