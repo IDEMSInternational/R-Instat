@@ -24,10 +24,10 @@ Public Class ucrNud
         objValueToRemoveParameter = ""
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
+    Public Overrides Sub UpdateControl()
         Dim dNewValue As Decimal
 
-        MyBase.UpdateControl(clsRCodeObject)
+        MyBase.UpdateControl()
 
         If bChangeParameterValue Then
             If Decimal.TryParse(clsParameter.strArgumentValue, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
@@ -41,7 +41,12 @@ Public Class ucrNud
                     nudUpDown.Value = Minimum
                 End If
             End If
+            UpdateLinkedControls()
         End If
+    End Sub
+
+    Public Overrides Sub UpdateLinkedControls()
+        MyBase.UpdateLinkedControls()
     End Sub
 
     Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
