@@ -23,7 +23,7 @@ Public Class ucrCore
     Protected iParameterPosition As Integer = -1
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
-    Protected clsParameter As New RParameter
+    Protected clsParameter As RParameter
 
     'Default value of the control
     'No specific type since it can be interpreted different by each control type
@@ -62,7 +62,7 @@ Public Class ucrCore
     'e.g. add/remove the parameter of other controls
     '     set the visible/enabled property of other controls
     'e.g. a checkbox that shows/hides set of controls
-    Protected lstValuesAndControl As List(Of KeyValuePair(Of Object(), ucrCore))
+    Protected lstValuesAndControl As List(Of KeyValuePair(Of ucrCore, Object()))
 
     'If this control is in another controls lstLinkedControls
     'These values specifiy how that control can modify this control
@@ -72,13 +72,20 @@ Public Class ucrCore
     Public bLinkedHideIfParameterMissing As Boolean = False
     Public bLinkedChangeParameterToDefault As Boolean = False
 
-    'Update the control based on the the code in RCodeStructure
-    Public Overridable Sub UpdateControl()
+    'Update the control based on the code in RCodeStructure
+    'bReset : should the control reset to the default value if the parameter is not present in the code
+    Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
         If clsRCode IsNot Nothing Then
-            If Not clsRCode.ContainsParameter(clsParameter) Then
-                If clsRCode.ContainsParameter(clsParameter.strArgumentName) Then
-                    clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
+            If clsParameter IsNot Nothing Then
+                If Not clsRCode.ContainsParameter(clsParameter) Then
+                    If clsRCode.ContainsParameter(clsParameter.strArgumentName) Then
+                        clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
+                    ElseIf bReset Then
+                        SetToDefault()
+                    Else
+                    End If
                 End If
+            Else
             End If
         Else
             clsRCode = New RCodeStructure
@@ -90,12 +97,12 @@ Public Class ucrCore
         Dim lstValues As Object()
         Dim bTemp As Boolean
 
-        For Each kvpTemp As KeyValuePair(Of Object(), ucrCore) In lstValuesAndControl
-            lstValues = kvpTemp.Key
-            ucrControl = kvpTemp.Value
+        For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
+            lstValues = kvpTemp.Value
+            ucrControl = kvpTemp.Key
             bTemp = ValueContainedIn(lstValues)
             If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
-                ucrControl.UpdateRCode(clsRCode)
+                ucrControl.SetRCode(clsRCode)
             End If
             If ucrControl.bLinkedAddRemoveParameter Then
                 ucrControl.AddOrRemoveParameter(bTemp)
@@ -113,13 +120,15 @@ Public Class ucrCore
     End Sub
 
     'Update the RCode based on the contents of the control (reverse of above)
-    Public Overridable Sub UpdateRCode(clsRCodeObject As RCodeStructure)
+    Public Overridable Sub UpdateRCode()
+        AddOrRemoveParameter(IsDefault())
+        UpdateLinkedControls()
     End Sub
 
-    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure)
+    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            UpdateControl()
+            UpdateControl(bReset)
         End If
     End Sub
 
@@ -132,6 +141,10 @@ Public Class ucrCore
     End Sub
 
     Public Overridable Sub SetToDefault()
+        If clsParameter IsNot Nothing Then
+            clsParameter.strArgumentValue = objDefault.ToString()
+        End If
+        UpdateControl()
     End Sub
 
     ''Set a linked paramter name and what the control should do when the parameter is not in the R code
@@ -166,16 +179,12 @@ Public Class ucrCore
             End If
         End Get
         Set(bNewName As String)
+            If clsParameter Is Nothing Then
+                clsParameter = New RParameter
+            End If
             clsParameter.strArgumentName = bNewName
         End Set
     End Property
-
-    Public Sub AddParameterToStructure(clsRCodeObject As RCodeStructure, Optional clsParm As RParameter = Nothing)
-        If clsParm Is Nothing Then
-            clsParm = clsParameter
-        End If
-        clsRCodeObject.AddParameterWithCodeStructure(strParameterName:=clsParm.strArgumentName, strParameterValue:=clsParm.strArgumentValue, clsRCodeObject:=clsParm.clsArgumentCodeStructure)
-    End Sub
 
     Public Overridable Function GetDefault() As Object
         Return objDefault
@@ -208,15 +217,31 @@ Public Class ucrCore
             ucrLinked.bLinkedDisabledIfParameterMissing = bNewLinkedDisabledIfParameterMissing
             ucrLinked.bLinkedHideIfParameterMissing = bNewLinkedHideIfParameterMissing
             ucrLinked.bLinkedUpdateFunction = bNewLinkedUpdateFunction
-            lstValuesAndControl.Add(New KeyValuePair(Of Object(), ucrCore)(objValues, ucrLinked))
+            lstValuesAndControl.Add(New KeyValuePair(Of ucrCore, Object())(ucrLinked, objValues))
         End If
     End Sub
 
     Public Function IsLinkedTo(ucrControl) As Boolean
         Dim bTemp As Boolean = False
 
-        For Each kvpTemp As KeyValuePair(Of Object(), ucrCore) In lstValuesAndControl
-            If kvpTemp.Value.Equals(ucrControl) Then
+        For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
+            If kvpTemp.Key.Equals(ucrControl) Then
+                bTemp = True
+                Exit For
+            End If
+        Next
+        Return bTemp
+    End Function
+
+    Public Overridable Function IsDefault() As Boolean
+        Return clsParameter IsNot Nothing AndAlso objDefault IsNot Nothing AndAlso objDefault.Equals(clsParameter.strArgumentValue)
+    End Function
+
+    Public Function LinkedControlsParametersPresent() As Boolean
+        Dim bTemp As Boolean = False
+
+        For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
+            If kvpTemp.Key.clsRCode IsNot Nothing AndAlso kvpTemp.Key.clsParameter IsNot Nothing AndAlso kvpTemp.Key.clsRCode.ContainsParameter(kvpTemp.Key.clsParameter) Then
                 bTemp = True
                 Exit For
             End If

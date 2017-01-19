@@ -56,14 +56,14 @@ Public Class sdgOneVarGraph
         'TODO See if we can get the Text property on the Properties tab in design view to avoid this
         ucrChkSpecifyLayout.strParameterName = "ncol"
         ucrChkSpecifyLayout.SetText("Specify Layout")
-        ucrChkSpecifyLayout.SetLinkedControl(ucrNudNumberofColumns)
-        ucrChkSpecifyLayout.SetIsParameterPresent()
+        'ucrChkSpecifyLayout.SetLinkedControl(ucrNudNumberofColumns)
+        'ucrChkSpecifyLayout.SetIsParameterPresent()
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
 
         ucrNudNumberofColumns.strParameterName = "ncol"
-        ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
-        ucrNudNumberofColumns.bAddIfParameterNotPresent = False
+        'ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
+        'ucrNudNumberofColumns.bAddIfParameterNotPresent = False
         'This needs to be done last as it changes the Value because default value is 0.
         'If not done last then R code may be updated worngly because its happening before all properties of the control are set
         'This line is needed if there already a value for the nud in the RFunction, otherwise setting min/max may override the RFunction's value
@@ -76,9 +76,9 @@ Public Class sdgOneVarGraph
     End Sub
 
     Private Sub CoreControlsValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScaleAxisforFacets.ControlValueChanged, ucrChkSpecifyLayout.ControlContentsChanged, ucrInputCategorical.ControlContentsChanged, ucrInputNumeric.ControlContentsChanged, ucrNudNumberofColumns.ControlContentsChanged
-        ucrChangedControl.UpdateRCode(clsGraphOneVariable)
+        ucrChangedControl.UpdateRCode()
         'After one control has edited the code, other controls may need to be updated
         'Could make more efficient by only updating controls "linked" to ucrChangedControl, but for this this seems a simple solution.
-        UpdateControls(Me)
+        'UpdateControls(Me)
     End Sub
 End Class

@@ -19,12 +19,15 @@ Module mdlCoreControl
     'This needs testing to see if the ByVal works
     'If not, it could be modified to work as ByRef
     'Recursive method to get all core controls on a given form/control
-    Public Function GetAllCoreControls(ByVal lstAllControls As List(Of Control), ByVal ctrParent As Control) As List(Of Control)
+    Public Function GetAllCoreControls(ByVal lstAllControls As List(Of ucrCore), ByVal ctrParent As Control) As List(Of ucrCore)
+        Dim ucrTemp As ucrCore
+
         If ctrParent Is Nothing Then
             Return lstAllControls
         End If
 
         If TypeOf ctrParent Is ucrCore Then
+            ucrTemp = DirectCast(ctrParent, ucrCore)
             lstAllControls.Add(ctrParent)
         End If
 
@@ -38,7 +41,7 @@ Module mdlCoreControl
     Public Sub UpdateControls(frmCurrentForm As Form)
         Dim ctrTemp As Control
         Dim ucrTemp As ucrCore
-        Dim lstAllControls As New List(Of Control)
+        Dim lstAllControls As New List(Of ucrCore)
 
         lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
         For Each ctrTemp In lstAllControls
@@ -54,15 +57,28 @@ Module mdlCoreControl
     Public Sub UpdateRCode(frmCurrentForm As Form, clsRCodeStructure As RCodeStructure)
         Dim ctrTemp As Control
         Dim ucrTemp As ucrCore
-        Dim lstAllControls As New List(Of Control)
+        Dim lstAllControls As New List(Of ucrCore)
 
         lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
         For Each ctrTemp In lstAllControls
             ucrTemp = DirectCast(ctrTemp, ucrCore)
             'Check shouldn't be needed because of GetAllCoreControls method but not harm to leave in
             If ucrTemp IsNot Nothing Then
-                ucrTemp.UpdateRCode(clsRCodeStructure)
+                ucrTemp.UpdateRCode()
             End If
+        Next
+    End Sub
+
+    Public Sub SetRCode(frmCurrentForm As Form, clsRCodeStructure As RCodeStructure)
+        Dim lstAllControls As New List(Of ucrCore)
+
+        lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
+        SetRCode(lstAllControls, clsRCodeStructure)
+    End Sub
+
+    Public Sub SetRCode(lstControls As List(Of ucrCore), clsRCodeStructure As RCodeStructure)
+        For Each ctrTemp In lstControls
+            ctrTemp.SetRCode(clsRCodeStructure)
         Next
     End Sub
 End Module

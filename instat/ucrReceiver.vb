@@ -305,11 +305,11 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl()
-        MyBase.UpdateControl()
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
     End Sub
 
-    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateRCode(clsRCodeObject)
+    Public Overrides Sub UpdateRCode()
+        MyBase.UpdateRCode()
     End Sub
 End Class

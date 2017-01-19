@@ -1,12 +1,12 @@
 ﻿Imports instat
 
 Public Class ucrRadio
-    Public Overrides Sub UpdateControl()
-        MyBase.UpdateControl()
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
     End Sub
 
-    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateRCode(clsRCodeObject)
+    Public Overrides Sub UpdateRCode()
+        MyBase.UpdateRCode()
     End Sub
 
     Private Sub rdoRadio_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRadio.CheckedChanged

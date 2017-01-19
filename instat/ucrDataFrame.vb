@@ -158,7 +158,7 @@ Public Class ucrDataFrame
         Clipboard.SetText(cboAvailableDataFrames.SelectedText)
     End Sub
 
-    Public Overrides Sub UpdateControl()
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
         Dim clsTempDataParameter As RParameter
         Dim strDataFrameName As String = ""
@@ -185,13 +185,13 @@ Public Class ucrDataFrame
         End If
     End Sub
 
-    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateRCode(clsRCodeObject)
+    Public Overrides Sub UpdateRCode()
+        MyBase.UpdateRCode()
         If cboAvailableDataFrames.Text <> "" Then
             If bParameterIsString Then
-                clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=Chr(34) & cboAvailableDataFrames.Text & Chr(34))
+                clsRCode.AddParameter(strParameterName:=strParameterName, strParameterValue:=Chr(34) & cboAvailableDataFrames.Text & Chr(34))
             ElseIf bParameterIsRFunction Then
-                clsRCodeObject.AddParameter(strParameterValue:=strParameterName, clsRFunctionParameter:=clsCurrDataFrame)
+                clsRCode.AddParameter(strParameterValue:=strParameterName, clsRFunctionParameter:=clsCurrDataFrame)
             End If
         End If
     End Sub
