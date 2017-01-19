@@ -72,6 +72,16 @@ Public Class ucrInputTextBox
         OnContentsChanged()
     End Sub
 
+    Public Overrides Property IsMultiline As Boolean
+        Get
+            Return MyBase.IsMultiline
+        End Get
+        Set(bMultiline As Boolean)
+            MyBase.IsMultiline = bMultiline
+            txtInput.Multiline = True
+        End Set
+    End Property
+
     Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
         txtInput.Copy()
     End Sub
