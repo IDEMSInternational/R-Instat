@@ -33,13 +33,13 @@ Public Class RLink
     'sets the default fonts and colors
 
     Public bShowCommands As Boolean = True
-    Public fScript As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
+    Public fScript As Font = New Font("Microsoft Sans Serif", 11, FontStyle.Regular)
     Public clrScript As Color = Color.Black
     '
-    Public fOutput As Font = New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular)
+    Public fOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
     Public clrOutput As Color = Color.Blue
     '
-    Public fComments As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
+    Public fComments As Font = New Font("Microsoft Sans Serif", 11, FontStyle.Regular)
     Public clrComments As Color = Color.Green
 
     Public strGraphDisplayOption As String = "view_output_window"
