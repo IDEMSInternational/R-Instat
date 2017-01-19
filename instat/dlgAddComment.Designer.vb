@@ -31,11 +31,13 @@ Partial Class dlgAddComment
         Me.lblRow = New System.Windows.Forms.Label()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.lblColumn = New System.Windows.Forms.Label()
+        Me.txtComment = New System.Windows.Forms.TextBox()
+        Me.lblComment = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 240)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 260)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 1
@@ -54,7 +56,7 @@ Partial Class dlgAddComment
         'rdoCell
         '
         Me.rdoCell.AutoSize = True
-        Me.rdoCell.Location = New System.Drawing.Point(177, 15)
+        Me.rdoCell.Location = New System.Drawing.Point(161, 15)
         Me.rdoCell.Name = "rdoCell"
         Me.rdoCell.Size = New System.Drawing.Size(42, 17)
         Me.rdoCell.TabIndex = 6
@@ -119,11 +121,30 @@ Partial Class dlgAddComment
         Me.lblColumn.TabIndex = 12
         Me.lblColumn.Text = "Column:"
         '
+        'txtComment
+        '
+        Me.txtComment.Location = New System.Drawing.Point(266, 193)
+        Me.txtComment.Multiline = True
+        Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(100, 20)
+        Me.txtComment.TabIndex = 13
+        '
+        'lblComment
+        '
+        Me.lblComment.AutoSize = True
+        Me.lblComment.Location = New System.Drawing.Point(266, 172)
+        Me.lblComment.Name = "lblComment"
+        Me.lblComment.Size = New System.Drawing.Size(54, 13)
+        Me.lblComment.TabIndex = 14
+        Me.lblComment.Text = "Comment:"
+        '
         'dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(437, 304)
+        Me.ClientSize = New System.Drawing.Size(437, 320)
+        Me.Controls.Add(Me.lblComment)
+        Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.lblRow)
@@ -153,4 +174,6 @@ Partial Class dlgAddComment
     Friend WithEvents lblRow As Label
     Friend WithEvents lblColumn As Label
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
+    Friend WithEvents lblComment As Label
+    Friend WithEvents txtComment As TextBox
 End Class
