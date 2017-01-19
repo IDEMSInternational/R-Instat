@@ -28,6 +28,7 @@ Partial Class dlgAddComment
         Me.ucrDataFrame = New instat.ucrDataFrame()
         Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverKeyColumn = New instat.ucrReceiverSingle()
+        Me.lblRow = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -88,11 +89,21 @@ Partial Class dlgAddComment
         Me.ucrReceiverKeyColumn.Size = New System.Drawing.Size(129, 20)
         Me.ucrReceiverKeyColumn.TabIndex = 9
         '
+        'lblRow
+        '
+        Me.lblRow.AutoSize = True
+        Me.lblRow.Location = New System.Drawing.Point(266, 49)
+        Me.lblRow.Name = "lblRow"
+        Me.lblRow.Size = New System.Drawing.Size(32, 13)
+        Me.lblRow.TabIndex = 10
+        Me.lblRow.Text = "Row:"
+        '
         'dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 304)
+        Me.Controls.Add(Me.lblRow)
         Me.Controls.Add(Me.ucrReceiverKeyColumn)
         Me.Controls.Add(Me.ucrSelectorAddComment)
         Me.Controls.Add(Me.ucrDataFrame)
@@ -116,4 +127,5 @@ Partial Class dlgAddComment
     Friend WithEvents ucrDataFrame As ucrDataFrame
     Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverKeyColumn As ucrReceiverSingle
+    Friend WithEvents lblRow As Label
 End Class
