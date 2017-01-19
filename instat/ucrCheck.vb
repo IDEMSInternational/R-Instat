@@ -28,9 +28,9 @@ Public Class ucrCheck
     ''If = False then the opposite.
     'Private bParameterIncludedWhenChecked As Boolean = True
 
-    Public Overrides Sub UpdateControl()
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
 
-        MyBase.UpdateControl()
+        MyBase.UpdateControl(bReset)
 
         If clsParameter IsNot Nothing Then
             If bChangeParameterValue Then
@@ -43,57 +43,23 @@ Public Class ucrCheck
             ElseIf bAddRemoveParameter Then
                 'Commented out as not currently needed. Can be included if needed.
                 'If bParameterIncludedWhenChecked Then
-                chkCheck.Checked = clsRCode.clsParameters.Contains(clsParameter)
+                chkCheck.Checked = clsRCode.ContainsParameter(clsParameter)
                 'Else
                 'chkCheck.Checked = Not clsRCodeObject.clsParameters.Contains(clsParameter)
                 'End If
             End If
+        Else
+            chkCheck.Checked = LinkedControlsParametersPresent()
         End If
-    End Sub
-
-    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
-        Dim bCurrentAddValue As Boolean
-
-        If clsParameter IsNot Nothing Then
-            If bIsParameterValue Then
-                If chkCheck.Checked Then
-                    If strValueIfChecked <> objValueToRemoveParameter.ToString() Then
-                        AddParameterToStructure(clsRCodeObject)
-                        'clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=strValueIfChecked)
-                    Else
-                        clsRCodeObject.RemoveParameterByName(strArgName:=strParameterName)
-                    End If
-                    If strValueIfUnchecked <> objValueToRemoveParameter.ToString() Then
-                        'clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=strValueIfUnchecked)
-                    Else
-                        clsRCodeObject.RemoveParameterByName(strArgName:=strParameterName)
-                    End If
-                End If
-            ElseIf bIsParameterPresent Then
-                If (chkCheck.Checked AndAlso bParameterIncludedWhenChecked) OrElse ((Not chkCheck.Checked) AndAlso (Not bParameterIncludedWhenChecked)) Then
-                    If ucrLinkedControl IsNot Nothing Then
-                        bCurrentAddValue = ucrLinkedControl.bAddIfParameterNotPresent
-                        ucrLinkedControl.bAddIfParameterNotPresent = True
-                        ucrLinkedControl.UpdateRCode(clsRCodeObject)
-                        ucrLinkedControl.bAddIfParameterNotPresent = bCurrentAddValue
-                    End If
-                Else
-                    clsRCodeObject.RemoveParameterByName(strArgName:=strParameterName)
-                End If
-            End If
-        End If
+        UpdateLinkedControls()
     End Sub
 
     Public Sub SetValueIfChecked(strNewValueIfChecked As String)
         strValueIfChecked = strNewValueIfChecked
-        bIsParameterValue = True
-        bIsParameterPresent = False
     End Sub
 
     Public Sub SetValueIfUnchecked(strNewValueIfUnchecked As String)
         strValueIfUnchecked = strNewValueIfUnchecked
-        bIsParameterValue = True
-        bIsParameterPresent = False
     End Sub
 
     Public Sub SetValuesCheckedAndUnchecked(strNewValueIfChecked As String, strNewValueIfUnchecked As String)
@@ -101,17 +67,15 @@ Public Class ucrCheck
         SetValueIfUnchecked(strNewValueIfUnchecked)
     End Sub
 
-    Public Sub SetIsParameterPresent()
-        bIsParameterPresent = True
-        bIsParameterValue = False
-    End Sub
-
-    Public Sub SetIsParameterValue()
-        bIsParameterValue = True
-        bIsParameterPresent = False
-    End Sub
-
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
+        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
+            If chkCheck.Checked Then
+                clsParameter.strArgumentValue = strValueIfChecked
+            Else
+                clsParameter.strArgumentValue = strValueIfUnchecked
+            End If
+        End If
+        UpdateRCode()
         OnControlValueChanged()
     End Sub
 

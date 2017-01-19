@@ -158,8 +158,9 @@ Public Class dlgOneVariableGraph
     'When any of the ucrCore controls have been changed we update the R Code to match the contents
     Private Sub ucrSelectorOneVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged, ucrChkFlip.ControlValueChanged
         'The control that has changed updates the R code
-        ucrChangedControl.UpdateRCode(ucrBase.clsRsyntax.clsBaseFunction)
+        ucrChangedControl.UpdateRCode()
         'This line may be needed if there are linked controls that need to be updated after other controls have changed
-        UpdateControls(Me)
+        'Could be very slow. Should only update linked controls
+        'UpdateControls(Me)
     End Sub
 End Class

@@ -77,12 +77,12 @@ Public Class ucrSelectorByDataFrame
     End Property
 
     'These are just wrappers for accessing ucrAvailableDataFrames's methods from the selector
-    Public Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        ucrAvailableDataFrames.UpdateControl(clsRCodeObject)
+    Public Sub UpdateControl()
+        ucrAvailableDataFrames.UpdateControl()
     End Sub
 
-    Public Sub UpdateRCode(clsRCodeObject As RCodeStructure)
-        ucrAvailableDataFrames.UpdateRCode(clsRCodeObject)
+    Public Sub UpdateRCode()
+        ucrAvailableDataFrames.UpdateRCode()
     End Sub
 
     Public Sub SetParameterIsString()

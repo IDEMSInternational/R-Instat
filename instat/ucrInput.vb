@@ -48,6 +48,14 @@ Public Class ucrInput
 
     Public Sub OnNameChanged()
         Me.Text = Me.GetText()
+        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
+            If GetAllRecognisedItems.Contains(GetText()) Then
+                clsParameter.strArgumentValue = lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value
+            Else
+                clsParameter.strArgumentValue = GetText()
+            End If
+        End If
+        UpdateRCode()
         RaiseEvent NameChanged()
         OnControlValueChanged()
     End Sub
@@ -378,36 +386,16 @@ Public Class ucrInput
         End Set
     End Property
 
-    Public Overrides Sub UpdateControl()
-        Dim clsTempParam As RParameter
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
 
-        MyBase.UpdateControl()
-
-        'TODO Add methods in RFunction/base class for RFunction/ROperator to do these checks better
-        clsTempParam = clsRCode.GetParameter(strParameterName)
-        If strParameterName <> "" Then
-            If clsTempParam IsNot Nothing Then
-                If GetAllRecognisedParameterValues.Contains(clsTempParam.strArgumentValue) Then
-                    SetName(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Value = clsTempParam.strArgumentValue).Key)
+        If clsParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If GetAllRecognisedParameterValues.Contains(clsParameter.strArgumentValue) Then
+                    SetName(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Value = clsParameter.strArgumentValue).Key)
                 Else
-                    SetName(clsTempParam.strArgumentValue)
+                    SetName(clsParameter.strArgumentValue)
                 End If
-            Else
-                SetName("")
-            End If
-        End If
-    End Sub
-
-    Public Overrides Sub UpdateRCode(clsRCodeObject As RCodeStructure)
-        If strParameterName <> "" Then
-            If Not IsEmpty() Then
-                If GetAllRecognisedItems.Contains(GetText()) Then
-                    clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value)
-                Else
-                    clsRCodeObject.AddParameter(strParameterName:=strParameterName, strParameterValue:=GetText())
-                End If
-            Else
-                clsRCodeObject.RemoveParameterByName(strArgName:=strParameterName)
             End If
         End If
     End Sub
