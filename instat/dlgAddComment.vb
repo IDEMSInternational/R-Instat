@@ -36,8 +36,29 @@ Public Class dlgAddComment
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorAddComment.Reset()
 
     End Sub
 
+    Private Sub rdoRow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRow.CheckedChanged, rdoCell.CheckedChanged
+        If rdoRow.Checked Then
+            ucrDataFrame.Visible = True
+            ucrSelectorAddComment.Visible = False
+            ucrReceiverKeyColumn.Visible = False
+        Else
+            ucrSelectorAddComment.Visible = True
+            ucrReceiverKeyColumn.SetMeAsReceiver()
+            ucrReceiverKeyColumn.Visible = True
+            ucrDataFrame.Visible = False
+        End If
+    End Sub
 
+    Private Sub ucrSelectorAddComment_DataFrameChanged() Handles ucrSelectorAddComment.DataFrameChanged
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
 End Class
