@@ -19,7 +19,6 @@ Public Class dlgView
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -31,18 +30,22 @@ Public Class dlgView
     End Sub
 
     Private Sub SetDefaults()
-        If nudNumberRows.Maximum >= 6 Then
-            nudNumberRows.Value = 6
-        Else
-            nudNumberRows.Value = nudNumberRows.Maximum
-        End If
+        NumberOfRows()
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
         rdoTop.Checked = True
         rdoDispSepOutputWindow.Checked = True
         ucrSpecifyRows.Checked = True
+        SetCommands()
     End Sub
 
+    Private Sub NumberOfRows()
+        If nudNumberRows.Maximum >= 6 Then
+            nudNumberRows.Value = 6
+        Else
+            nudNumberRows.Value = nudNumberRows.Maximum
+        End If
+    End Sub
     Private Sub InitialiseDialog()
         ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
@@ -53,15 +56,22 @@ Public Class dlgView
     End Sub
 
     Private Sub TestOKEnabled()
-        'OK is enabled when the ucrReceiverView and nudNumberRows are both non-empty in both cases of Window display
         If Not ucrReceiverView.IsEmpty Then
-            If rdoDispOutputWindow.Checked AndAlso ucrSpecifyRows.Checked AndAlso Not nudNumberRows.Text <> "" Then
-                ucrBase.OKEnabled(False)
-            Else
+            If rdoDispSepOutputWindow.Checked Then
                 ucrBase.OKEnabled(True)
+            Else
+                If ucrSpecifyRows.Checked Then
+                    If nudNumberRows.Text <> "" Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
             End If
         Else
-            ucrBase.OKEnabled(True)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -94,6 +104,7 @@ Public Class dlgView
     End Sub
 
     Private Sub grpDisplay_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDispOutputWindow.CheckedChanged, rdoDispSepOutputWindow.CheckedChanged
+        DisplayOptions()
         SetCommands()
         TestOKEnabled()
     End Sub
@@ -145,11 +156,6 @@ Public Class dlgView
                 clsTail.RemoveParameterByName("n")
             End If
         End If
-    End Sub
-
-    Private Sub rdoDisplayOptions_CheckedChanged() Handles rdoDispOutputWindow.CheckedChanged, rdoDispSepOutputWindow.CheckedChanged
-        SetCommands()
-        DisplayOptions()
     End Sub
 
     Private Sub DisplayOptions()
