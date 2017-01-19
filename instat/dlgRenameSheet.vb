@@ -59,8 +59,11 @@ Public Class dlgRenameSheet
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ContentsChanged
+        TestOKEnabled()
+    End Sub
     Private Sub TestOKEnabled()
-        If Not ucrInputNewName.IsEmpty Then
+        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
