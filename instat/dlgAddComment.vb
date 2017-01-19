@@ -38,4 +38,6 @@ Public Class dlgAddComment
     Private Sub SetDefaults()
 
     End Sub
+
+
 End Class
