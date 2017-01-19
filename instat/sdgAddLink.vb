@@ -13,29 +13,23 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgViewAndRemoveLinks
+Public Class sdgAddLink
     Public bFirstLoad As Boolean = True
-    Private Sub dlgViewAndRemoveLinks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub sdgAddLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
     End Sub
-
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 507
-    End Sub
-
-    Private Sub TestOKEnabled()
 
     End Sub
 
     Private Sub SetDefaults()
 
     End Sub
+
 End Class
