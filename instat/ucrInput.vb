@@ -398,6 +398,7 @@ Public Class ucrInput
                 End If
             End If
         End If
+        UpdateLinkedControls()
     End Sub
 
     ' key = parameter value

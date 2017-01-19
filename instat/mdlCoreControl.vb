@@ -37,35 +37,13 @@ Module mdlCoreControl
         Return lstAllControls
     End Function
 
-    'Update all ucrCore controls on a given form with values in clsRCodeStructure
-    Public Sub UpdateControls(frmCurrentForm As Form)
-        Dim ctrTemp As Control
-        Dim ucrTemp As ucrCore
-        Dim lstAllControls As New List(Of ucrCore)
-
-        lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
-        For Each ctrTemp In lstAllControls
-            ucrTemp = DirectCast(ctrTemp, ucrCore)
-            'Check shouldn't be needed because of GetAllCoreControls method but not harm to leave in
-            If ucrTemp IsNot Nothing Then
-                ucrTemp.UpdateControl()
-            End If
-        Next
-    End Sub
-
     'Update RCode with values in all controls on a given form
     Public Sub UpdateRCode(frmCurrentForm As Form, clsRCodeStructure As RCodeStructure)
-        Dim ctrTemp As Control
-        Dim ucrTemp As ucrCore
         Dim lstAllControls As New List(Of ucrCore)
 
         lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
-        For Each ctrTemp In lstAllControls
-            ucrTemp = DirectCast(ctrTemp, ucrCore)
-            'Check shouldn't be needed because of GetAllCoreControls method but not harm to leave in
-            If ucrTemp IsNot Nothing Then
-                ucrTemp.UpdateRCode()
-            End If
+        For Each ucrTemp As ucrCore In lstAllControls
+            ucrTemp.UpdateRCode()
         Next
     End Sub
 
