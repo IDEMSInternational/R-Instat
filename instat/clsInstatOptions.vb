@@ -25,11 +25,11 @@ Imports RDotNet
     Private DEFAULTbIncludeRDefaultParameters As Boolean = False
     Private DEFAULTbCommandsinOutput As Boolean = True
     Private DEFAULTbIncludeCommentDefault As Boolean = True
-    Private DEFAULTfntOutput As Font = New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular)
+    Private DEFAULTfntOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
     Private DEFAULTclrOutput As Color = Color.Blue
-    Private DEFAULTfntComment As Font = New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular)
+    Private DEFAULTfntComment As Font = New Font(FontFamily.GenericSansSerif, 11, FontStyle.Regular)
     Private DEFAULTclrComment As Color = Color.Green
-    Private DEFAULTfntScript As Font = New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular)
+    Private DEFAULTfntScript As Font = New Font(FontFamily.GenericSansSerif, 11, FontStyle.Regular)
     Private DEFAULTclrScript As Color = Color.Black
     Private DEFAULTfntEditor As Font = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular)
     Private DEFAULTclrEditor As Color = Color.Black
@@ -153,8 +153,10 @@ Imports RDotNet
     End Sub
 
     Public Sub SetMaxRows(iRows As Integer)
-        iMaxRows = iRows
-        frmMain.clsGrids.SetMaxRows(iMaxRows)
+        If iRows <> iMaxRows Then
+            iMaxRows = iRows
+            frmMain.clsGrids.SetMaxRows(iMaxRows)
+        End If
     End Sub
 
     Public Sub SetFormatOutput(fntNew As Font, clrNew As Color)
