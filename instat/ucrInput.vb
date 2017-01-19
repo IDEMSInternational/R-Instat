@@ -30,7 +30,6 @@ Public Class ucrInput
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
     Protected bIsReadOnly As Boolean = False
-    Protected bIsMultiline As Boolean = False
     Public bAutoChangeOnLeave As Boolean = False
     Private bLastSilent As Boolean = False
     Protected lstRecognisedItemParameterValuePairs As New List(Of KeyValuePair(Of String, String))
@@ -369,15 +368,6 @@ Public Class ucrInput
     Private Sub ucrInput_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
         SetName(Me.Text, bLastSilent)
     End Sub
-
-    Public Overridable Property IsMultiline() As Boolean
-        Get
-            Return bIsMultiline
-        End Get
-        Set(bMultiline As Boolean)
-            bIsMultiline = bMultiline
-        End Set
-    End Property
 
     Public Overridable Property IsReadOnly() As Boolean
         Get

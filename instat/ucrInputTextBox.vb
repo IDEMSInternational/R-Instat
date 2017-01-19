@@ -72,13 +72,12 @@ Public Class ucrInputTextBox
         OnContentsChanged()
     End Sub
 
-    Public Overrides Property IsMultiline As Boolean
+    Public Property IsMultiline As Boolean
         Get
-            Return MyBase.IsMultiline
+            Return txtInput.Multiline
         End Get
         Set(bMultiline As Boolean)
-            MyBase.IsMultiline = bMultiline
-            txtInput.Multiline = True
+            txtInput.Multiline = bMultiline
         End Set
     End Property
 
