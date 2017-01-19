@@ -27,8 +27,10 @@ Partial Class dlgAddComment
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.ucrDataFrame = New instat.ucrDataFrame()
         Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverKeyColumn = New instat.ucrReceiverSingle()
+        Me.ucrReceiverRow = New instat.ucrReceiverSingle()
         Me.lblRow = New System.Windows.Forms.Label()
+        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
+        Me.lblColumn = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -79,15 +81,15 @@ Partial Class dlgAddComment
         Me.ucrSelectorAddComment.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorAddComment.TabIndex = 8
         '
-        'ucrReceiverKeyColumn
+        'ucrReceiverRow
         '
-        Me.ucrReceiverKeyColumn.frmParent = Me
-        Me.ucrReceiverKeyColumn.Location = New System.Drawing.Point(266, 69)
-        Me.ucrReceiverKeyColumn.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverKeyColumn.Name = "ucrReceiverKeyColumn"
-        Me.ucrReceiverKeyColumn.Selector = Nothing
-        Me.ucrReceiverKeyColumn.Size = New System.Drawing.Size(129, 20)
-        Me.ucrReceiverKeyColumn.TabIndex = 9
+        Me.ucrReceiverRow.frmParent = Me
+        Me.ucrReceiverRow.Location = New System.Drawing.Point(266, 69)
+        Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverRow.Name = "ucrReceiverRow"
+        Me.ucrReceiverRow.Selector = Nothing
+        Me.ucrReceiverRow.Size = New System.Drawing.Size(129, 20)
+        Me.ucrReceiverRow.TabIndex = 9
         '
         'lblRow
         '
@@ -98,13 +100,34 @@ Partial Class dlgAddComment
         Me.lblRow.TabIndex = 10
         Me.lblRow.Text = "Row:"
         '
+        'ucrReceiverColumn
+        '
+        Me.ucrReceiverColumn.frmParent = Me
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 134)
+        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
+        Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(129, 20)
+        Me.ucrReceiverColumn.TabIndex = 11
+        '
+        'lblColumn
+        '
+        Me.lblColumn.AutoSize = True
+        Me.lblColumn.Location = New System.Drawing.Point(266, 113)
+        Me.lblColumn.Name = "lblColumn"
+        Me.lblColumn.Size = New System.Drawing.Size(45, 13)
+        Me.lblColumn.TabIndex = 12
+        Me.lblColumn.Text = "Column:"
+        '
         'dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 304)
+        Me.Controls.Add(Me.lblColumn)
+        Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.lblRow)
-        Me.Controls.Add(Me.ucrReceiverKeyColumn)
+        Me.Controls.Add(Me.ucrReceiverRow)
         Me.Controls.Add(Me.ucrSelectorAddComment)
         Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.rdoCell)
@@ -126,6 +149,8 @@ Partial Class dlgAddComment
     Friend WithEvents rdoCell As RadioButton
     Friend WithEvents ucrDataFrame As ucrDataFrame
     Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverKeyColumn As ucrReceiverSingle
+    Friend WithEvents ucrReceiverRow As ucrReceiverSingle
     Friend WithEvents lblRow As Label
+    Friend WithEvents lblColumn As Label
+    Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
 End Class
