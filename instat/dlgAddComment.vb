@@ -29,6 +29,7 @@ Public Class dlgAddComment
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 508
+        ucrReceiverRow.Selector = ucrSelectorAddComment
     End Sub
 
     Private Sub TestOKEnabled()
@@ -36,21 +37,17 @@ Public Class dlgAddComment
     End Sub
 
     Private Sub SetDefaults()
+        rdoRow.Checked = True
+        rdoCell.Checked = False
+        ucrReceiverRow.Visible = False
+        ucrReceiverColumn.Visible = False
+        lblColumn.Visible = False
+        lblRow.Visible = False
         ucrSelectorAddComment.Reset()
-
     End Sub
 
     Private Sub rdoRow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRow.CheckedChanged, rdoCell.CheckedChanged
-        If rdoRow.Checked Then
-            ucrDataFrame.Visible = True
-            ucrSelectorAddComment.Visible = False
-            ucrReceiverKeyColumn.Visible = False
-        Else
-            ucrSelectorAddComment.Visible = True
-            ucrReceiverKeyColumn.SetMeAsReceiver()
-            ucrReceiverKeyColumn.Visible = True
-            ucrDataFrame.Visible = False
-        End If
+        SetRadioButtons()
     End Sub
 
     Private Sub ucrSelectorAddComment_DataFrameChanged() Handles ucrSelectorAddComment.DataFrameChanged
@@ -60,5 +57,27 @@ Public Class dlgAddComment
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetRadioButtons()
+        If rdoRow.Checked Then
+            ucrDataFrame.Visible = True
+            ucrSelectorAddComment.Visible = False
+            ucrReceiverRow.Visible = False
+            lblColumn.Visible = False
+            lblRow.Visible = False
+        Else
+            ucrReceiverRow.SetMeAsReceiver()
+            ucrSelectorAddComment.Visible = True
+            ucrReceiverRow.Visible = True
+            ucrReceiverColumn.Visible = True
+            ucrReceiverRow.Visible = True
+            lblColumn.Visible = True
+            lblRow.Visible = True
+            ucrDataFrame.Visible = False
+        End If
+    End Sub
+    Private Sub ucrReceiverKeyColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRow.SelectionChanged
+        SetRadioButtons()
     End Sub
 End Class
