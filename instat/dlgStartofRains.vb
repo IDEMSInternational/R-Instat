@@ -117,7 +117,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso nudThreshold.Text <> "" AndAlso nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso ((chkConsecutiveRainyDays.Checked AndAlso nudMinimum.Text <> "" AndAlso nudOutOfDays.Text <> "") OrElse Not chkConsecutiveRainyDays.Checked) AndAlso ((chkTotalRainfall.Checked AndAlso nudValue.Text <> "" AndAlso nudOverDays.Text <> "") OrElse Not chkTotalRainfall.Checked) AndAlso ((chkDrySpell.Checked AndAlso nudMaximumDays.Text <> "" AndAlso nudLengthofTime.Text <> "") OrElse Not chkDrySpell.Checked) Then
+        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso nudThreshold.Text <> "" AndAlso nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso ((chkConsecutiveRainyDays.Checked AndAlso nudMinimum.Text <> "" AndAlso nudOutOfDays.Text <> "") OrElse Not chkConsecutiveRainyDays.Checked) AndAlso (((chkTotalRainfall.Checked AndAlso nudOverDays.Text <> "") AndAlso ((rdoAmount.Checked AndAlso nudValue.Text <> "") OrElse (rdoPercentile.Checked AndAlso nudPercentile.Text <> ""))) OrElse Not chkTotalRainfall.Checked) AndAlso ((chkDrySpell.Checked AndAlso nudMaximumDays.Text <> "" AndAlso nudLengthofTime.Text <> "") OrElse Not chkDrySpell.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
