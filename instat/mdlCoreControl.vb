@@ -41,7 +41,7 @@ Module mdlCoreControl
     ' Defines ordering where selectors come before other controls
     ' Needed so that selectors are updated with RCode before receivers
     Private Function CompareCoreControls(ucrFirst As ucrCore, ucrSecond As ucrCore)
-        If TryCast(ucrFirst, ucrSelector) IsNot Nothing Then
+        If TryCast(ucrFirst, ucrDataFrame) IsNot Nothing Then
             Return -1
         Else
             Return 1
@@ -58,16 +58,22 @@ Module mdlCoreControl
         Next
     End Sub
 
-    Public Sub SetRCode(frmCurrentForm As Form, clsRCodeStructure As RCodeStructure)
+    Public Sub SetRCode(frmCurrentForm As Form, clsRCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         Dim lstAllControls As New List(Of ucrCore)
 
         lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
-        SetRCode(lstAllControls, clsRCodeStructure)
+        SetRCode(lstAllControls, clsRCodeStructure, bReset)
     End Sub
 
-    Public Sub SetRCode(lstControls As List(Of ucrCore), clsRCodeStructure As RCodeStructure)
+    Public Sub SetRCode(lstControls As List(Of ucrCore), clsRCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         For Each ctrTemp In lstControls
-            ctrTemp.SetRCode(clsRCodeStructure)
+            ctrTemp.SetRCode(clsRCodeStructure, bReset)
+        Next
+    End Sub
+
+    Public Sub SetParameterName(lstControls As ucrCore(), strParameterName As String)
+        For Each ucrTemp As ucrCore In lstControls
+            ucrTemp.strParameterName = strParameterName
         Next
     End Sub
 End Module
