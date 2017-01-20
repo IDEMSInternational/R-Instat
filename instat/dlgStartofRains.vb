@@ -117,7 +117,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso nudThreshold.Text <> "" AndAlso nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso ((chkConsecutiveRainyDays.Checked AndAlso nudMinimum.Text <> "" AndAlso nudOutOfDays.Text <> "") OrElse Not chkConsecutiveRainyDays.Checked) AndAlso (((chkTotalRainfall.Checked AndAlso nudOverDays.Text <> "") AndAlso ((rdoAmount.Checked AndAlso nudValue.Text <> "") OrElse (rdoPercentile.Checked AndAlso nudPercentile.Text <> ""))) OrElse Not chkTotalRainfall.Checked) AndAlso ((chkDrySpell.Checked AndAlso nudMaximumDays.Text <> "" AndAlso nudLengthofTime.Text <> "") OrElse Not chkDrySpell.Checked) Then
+        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso nudThreshold.Text <> "" AndAlso nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso ((chkConsecutiveRainyDays.Checked AndAlso nudMinimum.Text <> "" AndAlso nudOutOfDays.Text <> "") OrElse Not chkConsecutiveRainyDays.Checked) AndAlso (((chkTotalRainfall.Checked AndAlso nudOverDays.Text <> "") AndAlso ((rdoAmount.Checked AndAlso nudValue.Text <> "") OrElse (rdoPercentile.Checked AndAlso nudPercentile.Text <> ""))) OrElse Not chkTotalRainfall.Checked) AndAlso ((chkDrySpell.Checked AndAlso nudMaximumDays.Text <> "" AndAlso nudLengthofTime.Text <> "") OrElse Not chkDrySpell.Checked) AndAlso ((chkDryPeriod.Checked AndAlso nudDryPeriodRainPeriod.Text <> "" AndAlso nudDryPeriodMaxRain.Text <> "" AndAlso nudDryPeriodOverallInterval.Text <> "") OrElse Not chkDryPeriod.Checked) Then 
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -131,6 +131,13 @@ Public Class dlgStartofRains
     Private Sub grpRainParameters_Enter(sender As Object, e As EventArgs) Handles nudFrom.TextChanged, nudTo.TextChanged, nudThreshold.TextChanged
         DayFromAndToMethod()
         RainyDaysMethod()
+        TestOKEnabled()
+    End Sub
+    
+    Private Sub DryPeriod(sender As Object, e As EventArgs) Handles nudDryPeriodRainPeriod.TextChanged, nudDryPeriodInterval.TextChanged, nudDryPeriodMaxRain.TextChanged
+        DryPeriodRainPeriod()
+        DryPeriodAboveThreshold()
+        DryPeriodOverallInterval()
         TestOKEnabled()
     End Sub
 
@@ -165,6 +172,9 @@ Public Class dlgStartofRains
     Private Sub ucrReceiverRainfall_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRainfall.SelectionChanged
         RainyDaysMethod()
         RollingSumMethod()
+        DryPeriodRainPeriod()
+        DryPeriodAboveThreshold()
+        DryPeriodOverallInterval()
         TestOKEnabled()
     End Sub
 
@@ -279,14 +289,14 @@ Public Class dlgStartofRains
     ' If we have 'Percentile' checked
     Private Sub WetSpell()
         If rdoPercentile.checked Then
-            clsWetSpell.AddParameter("type", chr(34) & "type" & chr(34))
+            clsWetSpell.AddParameter("type", chr(34) & "calculation" & chr(34))
             clsWetSpell.AddParameter("function_exp", chr(34) & "quantile(roll_rain_7_days, c(" nudPercentile.Value "), na.rm=T"
                 clsWetSpell.AddParameter("result_name", chr(34) & "wet_spell" & chr(34))
                 clsWetSpell.AddParameter("sub_calculations", clsRFunctionParameter := clsWetSpellList)
                 clsWetSpellList.AddParameter("sub1", clsRFunctionParameter := clsRollingSum, bIncludeArgumentName = False)
                 clsWetSpell.AddParameter("save", "0")
             Else
-                clsWetSpell.AddParameter("type")
+                clsWetSpell.RemoveParameterByName("type")
                 clsWetSpell.RemoveParameterByName("function_exp")
                 clsWetSpell.RemoveParameterByName("result_name")
                 clsWetSpell.RemoveParameterByName("sub_calculations")
@@ -333,8 +343,65 @@ Public Class dlgStartofRains
             clsDryPeriodTen.RemoveParameterByName("save")
             clsDryPeriodTenList.RemoveParameterByName("sub1")
         End If
-
     End Sub
+        
+        
+    Private Sub DryPeriodRainPeriod()
+        If Not ucrReceiverRainfall.IsEmpty Then
+            clsDPRainInDays.AddParameter("type", chr(34) & "calculation" & chr(34))
+                clsDPRainInDays.AddParameter("function_exp", Chr(34) & "rollapply(data = " & ucrReceiverRainfall.GetVariableNames(False) & " ,width = " & nud.DryPeriodRainPeriod & ", FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
+                clsDPRainInDays.AddParameter("result_name", chr(34) & "Rain_in_Days" & chr(34))
+                clsDPRainInDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")")
+                clsDPRainInDays.AddParameter("save", "0")
+            Else
+                clsDPRainInDays.RemoveParameterByName("type")
+                clsDPRainInDays.RemoveParameterByName("function_exp")
+                clsDPRainInDays.RemoveParameterByName("result_name")
+                clsDPRainInDays.RemoveParameterByName("calculated_from")
+                clsDPRainInDays.RemoveParameterByName("save")
+         End If
+     End Sub
+
+        
+        Private Sub DryPeriodAboveThreshold()
+            ' If this value is above 40mm, then give it a 0. Otherwise, give it a 1. (i.e., if there is a 20 day period of under 40mm of rain, it is "1")
+            
+            If ((Not ucrReceiverRainfall.IsEmpty) AndAlso (nudDryPeriodMaxRain <> "")) Then
+                clsDPRain.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+                clsDPRain.AddParameter("function_exp", Chr(34) & "match( Rain_in_Days <=" & nudDryPeriodMaxRain.Value & ", 1, nomatch = 0)" & Chr(34))
+                clsDPRain.AddParameter("result_name", Chr(34) & "Above_Threshold" & Chr(34))
+                clsDPRain.AddParameter("sub_calculations", clsRFunctionParameter:=clsDPRainList)
+                clsDPRainList.AddParameter("sub1", clsRFunctionParameter:=clsDPRainInDays, bIncludeArgumentName:=False)
+                clsDPRain.AddParameter("save", 2)
+            '            clsSubRainDays.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
+              Else
+                clsDPRain.RemoveParameterByName("type")
+                clsDPRain.RemoveParameterByName("function_exp")
+                clsDPRain.RemoveParameterByName("result_name")
+                clsDPRain.RemoveParameterByName("sub_calculations")
+                clsDPRainList.RemoveParameterByName("sub1")
+                clsDPRain.RemoveParameterByName("save")
+            End If
+        End Sub
+
+        Private Sub DryPeriodOverallInterval()
+            ' # Rolling sum of that ^ of a 45 day period (i.e., for the next 45 days, how many times does rainfall over 20 days not reach 40mm?)
+        If Not ucrReceiverRainfall.IsEmpty Then
+            DPOverallInterval.AddParameter("type", chr(34) & "calculation" & chr(34))
+                DPOverallIntervalAddParameter("function_exp", Chr(34) & "rollapply(data = Above_Threshold ,width = (" & nud.DryPeriodInterval.Value & "-" & nudDryPeriodRainPeriod.Value & "+ 1), FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
+                DPOverallInterval.AddParameter("result_name", chr(34) & "DP_Overall_Interval_Rain" & chr(34))
+                DPOverallInterval.AddParameter("sub_calculations", clsRFunctionParameter:=clsDPOverallIntervalList)
+                DPOverallIntervalList.AddParameter("sub1", clsRFunctionParameter:=clsDPRain, bIncludeArgumentName:=False)
+                DPOverallInterval.AddParameter("save", "2")
+            Else
+                DPOverallInterval.RemoveParameterByName("type")
+                DPOverallInterval.RemoveParameterByName("function_exp")
+                DPOverallInterval.RemoveParameterByName("result_name")
+                DPOverallInterval.RemoveParameterByName("sub_calculations")
+                DPOverallIntervalList.RemoveParameterByName("sub1")
+                DPOverallInterval.RemoveParameterByName("save")
+         End If
+        End Sub        
 
     Private Sub CombinedFilter()
         clsCombinedFilter.AddParameter("type", Chr(34) & "filter" & Chr(34))
@@ -471,6 +538,5 @@ Public Class dlgStartofRains
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Start of Rains: Defining Date column as key")
     End Sub
-            
-            Private Sub 
-End Class
+   
+    End Class
