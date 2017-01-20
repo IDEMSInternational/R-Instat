@@ -52,21 +52,14 @@ Public Class sdgOneVarGraph
         ucrInputNumeric.strParameterName = "numeric"
         ucrInputCategorical.strParameterName = "categorical"
 
-        'TODO See if we can get the Text property on the Properties tab in design view to avoid this
         ucrChkSpecifyLayout.strParameterName = "ncol"
         ucrChkSpecifyLayout.SetText("Specify Layout")
-        'ucrChkSpecifyLayout.SetLinkedControl(ucrNudNumberofColumns)
-        'ucrChkSpecifyLayout.SetIsParameterPresent()
+        ucrChkSpecifyLayout.bChangeParameterValue = False
+        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={}, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeParameterToDefault:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
 
         ucrNudNumberofColumns.strParameterName = "ncol"
-        'ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
-        'ucrNudNumberofColumns.bAddIfParameterNotPresent = False
-        'This needs to be done last as it changes the Value because default value is 0.
-        'If not done last then R code may be updated worngly because its happening before all properties of the control are set
-        'This line is needed if there already a value for the nud in the RFunction, otherwise setting min/max may override the RFunction's value
-        ucrNudNumberofColumns.UpdateControl()
         ucrNudNumberofColumns.SetMinMax(1, 10)
     End Sub
 

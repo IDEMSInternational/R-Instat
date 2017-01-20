@@ -17,7 +17,7 @@
 Imports instat
 
 Public Class ucrRadio
-    Private strValueIfChecked As String = "TRUE"
+    Public strValueIfChecked As String = "TRUE"
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
         MyBase.UpdateControl(bReset)
@@ -47,4 +47,13 @@ Public Class ucrRadio
         UpdateRCode()
         OnControlValueChanged()
     End Sub
+
+    Public Property Checked As Boolean
+        Get
+            Return rdoRadio.Checked
+        End Get
+        Set(bChecked As Boolean)
+            rdoRadio.Checked = bChecked
+        End Set
+    End Property
 End Class

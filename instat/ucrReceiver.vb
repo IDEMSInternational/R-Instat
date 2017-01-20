@@ -337,7 +337,7 @@ Public Class ucrReceiver
                     For Each strTemp As String In lstCurrentVariables
                         'TODO This only works if the selector is updated before receivers!
                         '     Needs to change eventually.
-                        If Selector IsNot Nothing Then
+                        If Selector IsNot Nothing AndAlso strTemp <> "" Then
                             Add(strTemp, Selector.strCurrentDataFrame)
                         End If
                     Next
@@ -375,12 +375,12 @@ Public Class ucrReceiver
 
     Public Function ExtractVariableNames(strTemp As String) As String()
         Dim lstVariables As String()
-        If strTemp.IndexOf(")") <> -1 Then
-            strTemp.Substring(strTemp.IndexOf(")"))
+        If strTemp.StartsWith("c(") Then
+            strTemp = strTemp.Substring(2)
         End If
         lstVariables = strTemp.Split(",")
         For i As Integer = 0 To lstVariables.Count - 1
-            lstVariables(i) = lstVariables(i).Trim(Chr(34))
+            lstVariables(i) = lstVariables(i).Trim(Chr(34), " ", Chr(39), ")")
         Next
         Return lstVariables
     End Function

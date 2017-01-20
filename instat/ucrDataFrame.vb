@@ -85,7 +85,6 @@ Public Class ucrDataFrame
             RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
             strCurrDataFrame = cboAvailableDataFrames.Text
             SetDataFrameProperties()
-            OnControlContentsChanged()
             OnControlValueChanged()
         End If
     End Sub
@@ -95,10 +94,11 @@ Public Class ucrDataFrame
             clsParameter = New RParameter
         End If
         If bParameterIsString Then
-            clsParameter.SetArgumentValue(cboAvailableDataFrames.Text)
+            clsParameter.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
         ElseIf bParameterIsRFunction Then
             clsParameter.SetArgument(clsCurrDataFrame)
         End If
+        UpdateRCode()
     End Sub
 
     Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
