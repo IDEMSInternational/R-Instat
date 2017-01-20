@@ -31,7 +31,6 @@ Public Class dlgAddComment
         ucrBase.iHelpTopicID = 508
         ucrReceiverRow.Selector = ucrSelectorAddComment
     End Sub
-
     Private Sub TestOKEnabled()
 
     End Sub
