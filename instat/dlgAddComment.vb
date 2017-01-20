@@ -47,6 +47,7 @@ Public Class dlgAddComment
         ucrReceiverColumn.Enabled = False
         lblColumn.Enabled = False
         lblRow.Enabled = False
+        ucrInputComment.IsMultiline = True
     End Sub
 
     Private Sub rdoRow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRow.CheckedChanged, rdoCell.CheckedChanged
