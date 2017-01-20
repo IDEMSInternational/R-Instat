@@ -15,7 +15,7 @@
 Imports instat.Translations
 Public Class dlgStartofRains
     Public clsAddKey, clsDayFromAndTo, clsRainyDays, clsRollingSum, clsMinimumRainfall, clsRollingRainDays, clsXdaysRain, clsFirstDOYPerYear, clsDryPeriodTen, clsWithinThirtyDays, clsDrySpell, clsYearGroupDaily, clsManipulationFirstDOYPerYear As New RFunction
-    Public clsDryPeriodTenList, clsSubRainDays1, clsSubRainDays2, clsCombinedFilter, clsCombinedList As New RFunction
+    Public clsDryPeriodTenList, clsSubRainDays1, clsSubRainDays2, clsCombinedFilter, clsCombinedList, clsWetSpell, clsWetSpellList As New RFunction
     Private strCurrDataName As String = ""
     Public bFirstLoad As Boolean = True
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -72,6 +72,10 @@ Public Class dlgStartofRains
         clsCombinedList.SetRCommand("list")
         clsManipulationFirstDOYPerYear.SetRCommand("list")
         clsDryPeriodTenList.SetRCommand("list")
+        clsWetSpellList.SetRFunction("list")
+        clsWetSpell.SetRFunction("instat_calculation$new")
+        clsWetSpell.SetAssignTo("Wet_Spell")
+
 
         clsCombinedFilter.SetRCommand("instat_calculation$new")
         clsCombinedFilter.SetAssignTo("combined_filter")
@@ -81,6 +85,11 @@ Public Class dlgStartofRains
         ucrReceiverDate.Selector = ucrSelectorForStartofRains
         ucrReceiverDOY.Selector = ucrSelectorForStartofRains
         ucrReceiverDate.SetMeAsReceiver()
+        
+        nudPercentile.Minimum = 0
+        nudPercentile.Maximum = 1
+        nudPercentile.DecimalPlaces = 2
+        nudPercentile.Increments = 0.1
     End Sub
 
     Private Sub SetDefaults()
@@ -91,6 +100,7 @@ Public Class dlgStartofRains
         CheckBoxesSetting()
         TestOKEnabled()
         nudValue.Value = 20
+        nudPercentile.Value = 0.8
         nudMinimum.Value = 1
         nudMaximumDays.Value = 10
         nudLengthofTime.Value = 30
@@ -99,6 +109,7 @@ Public Class dlgStartofRains
         nudThreshold.Value = 0.85
         nudFrom.Value = 1
         nudTo.Value = 366
+        rdoAmount.Checked = True
     End Sub
 
     Private Sub ReopenDialog()
@@ -123,17 +134,26 @@ Public Class dlgStartofRains
         TestOKEnabled()
     End Sub
 
-    Private Sub grpConditionsForSatrtofRains_Enter(sender As Object, e As EventArgs) Handles nudValue.TextChanged, nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged, nudOverDays.TextChanged, nudOutOfDays.TextChanged
+    Private Sub grpConditionsForStartofRains_Enter(sender As Object, e As EventArgs) Handles nudValue.TextChanged, nudPercentile.TextChanged nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged, nudOverDays.TextChanged, nudOutOfDays.TextChanged
         RainyDaysMethod()
         DayFromAndToMethod()
         CombinedFilter()
         RollingOfRainDays()
         DrySpell()
         RollingSumMethod()
+        WetSpell()
+        TestOKEnabled()
+    End Sub
+    
+    Private rdoAmountAndPercentile_Changed (sender As Object, e As EventArgs) Handles rdoAmount.CheckedChanged, rdoPercentile.CheckedChanged
+    CheckBoxesSetting()
+    CombinedFilter()
+        RollingSumMethod()
+        WetSpell()
         TestOKEnabled()
     End Sub
 
-    Private Sub grpConditionsForSatrtofRains1_Enter(sender As Object, e As EventArgs) Handles chkConsecutiveRainyDays.CheckedChanged, chkTotalRainfall.CheckedChanged, chkDrySpell.CheckedChanged
+    Private Sub grpConditionsForStartofRains1_Enter(sender As Object, e As EventArgs) Handles chkConsecutiveRainyDays.CheckedChanged, chkTotalRainfall.CheckedChanged, chkDrySpell.CheckedChanged
         CheckBoxesSetting()
         DrySpell()
         RainyDaysMethod()
@@ -160,12 +180,21 @@ Public Class dlgStartofRains
 
     Private Sub CheckBoxesSetting()
         If chkTotalRainfall.Checked Then
-            nudValue.Visible = True
             nudOverDays.Visible = True
-            lblVal.Visible = True
+            lblVal.Visible = True ' need to move this around, change the text of it too.
             lblOverDays.Visible = True
+            If rdoAmount.Checked Then
+                nudValue.Visible = True
+                nudPercentile.Visible = False   
+            ElseIf rdoPercentile.Checked Then
+                nudValue.Visible = False
+                nudPercentile.Visible = True 
+            Else
+                nudValue.Visible = False
+                nudPercentile.Visible = False 
         Else
             nudValue.Visible = False
+            nudPercentile.Visible = False 
             nudOverDays.Visible = False
             lblVal.Visible = False
             lblOverDays.Visible = False
@@ -247,6 +276,25 @@ Public Class dlgStartofRains
         End If
     End Sub
 
+    ' If we have 'Percentile' checked
+    Private Sub WetSpell()
+        If rdoPercentile.checked Then
+            clsWetSpell.AddParameter("type", chr(34) & "type" & chr(34))
+            clsWetSpell.AddParameter("function_exp", chr(34) & "quantile(roll_rain_7_days, c(" nudPercentile.Value "), na.rm=T"
+                clsWetSpell.AddParameter("result_name", chr(34) & "wet_spell" & chr(34))
+                clsWetSpell.AddParameter("sub_calculations", clsRFunctionParameter := clsWetSpellList)
+                clsWetSpellList.AddParameter("sub1", clsRFunctionParameter := clsRollingSum, bIncludeArgumentName = False)
+                clsWetSpell.AddParameter("save", "0")
+            Else
+                clsWetSpell.AddParameter("type")
+                clsWetSpell.RemoveParameterByName("function_exp")
+                clsWetSpell.RemoveParameterByName("result_name")
+                clsWetSpell.RemoveParameterByName("sub_calculations")
+                clsWetSpellList.RemoveParameterByName("sub1")
+                clsWetSpell.RemoveParameterByName("save")
+            End If
+        End Sub
+        
     Private Sub RollingOfRainDays()
         '  If rolling of rain days one is checked Then
         clsRollingRainDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
@@ -295,48 +343,93 @@ Public Class dlgStartofRains
         ' Run with all first, then sort out to separate bits.
         ' do six if statements for now
 
-        If chkConsecutiveRainyDays.Checked Then
-            clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Rolling_Rain_Days >= 1 & Rain>0.85" & Chr(34))
-            clsCombinedList.AddParameter("sub2", clsRFunctionParameter:=clsRollingRainDays, bIncludeArgumentName:=False)
-            clsCombinedList.RemoveParameterByName("sub1")
-            clsCombinedList.RemoveParameterByName("sub3")
+        If chkConsecutiveRainyDays.Checked AndAlso chkTotalRainfall.Checked AndAlso chkDrySpell.Checked Then
+                clsCombinedFilter.RemoveParameterByName("function_exp")
+                If rdoAmount.Checked Then            
+                    clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & Rolling_Rain_Days >= 1 & roll_sum_Rain >20 & Rain>0.85" & Chr(34))
+                    clsCombinedList.RemoveParameterByName("sub4")              
+                ElseIf rdoPercentile.Checked Then
+                    clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & Rolling_Rain_Days >= 1 & roll_sum_Rain > wet_spell & Rain>0.85" & Chr(34))
+                    clsCombinedList.AddParameter("sub4", clsRFunctionParameter := clsWetSpell, bIncludeArgumentName := False)
+                End If         
+                clsCombinedList.AddParameter("sub1", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
+                clsCombinedList.AddParameter("sub3", clsRFunctionParameter:=clsRollingSum, bIncludeArgumentName:=False)
+                clsCombinedList.AddParameter("sub2", clsRFunctionParameter := clsRollingRainDays, bIncludeArgumentName := False)
+            
+            
+            ElseIf chkTotalRainfall.Checked AndAlso chkDrySpell.Checked Then
+                clsCombinedFilter.RemoveParameterByName("function_exp")            
+                
+                If rdoAmount.Checked then
+                    clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & roll_sum_Rain >20 & Rain>0.85" & Chr(34))
+                    clsCombinedList.RemoveParameterByName("sub4")
+                ElseIf rdoPercentile.Checked Then
+                    clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & roll_sum_Rain >wet_spell & Rain>0.85" & Chr(34))clsCombinedList.AddParameter(“sub4”, clsRFunctionParameter := clsWetSpell, bIncludeArgumentName := False)
+                    clsCombinedList.AddParameter("sub4", clsRFunctionParameter := clsWetSpell, bIncludeArgumentName := False)
+                End If
+                clsCombinedList.AddParameter("sub1", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
+                clsCombinedList.AddParameter("sub3", clsRFunctionParameter:=clsRollingSum, bIncludeArgumentName:=False)
+                clsCombinedList.RemoveParameterByName("sub2")
+            
+            
+            
+            ElseIf chkConsecutiveRainyDays.Checked AndAlso chkDrySpell.Checked Then
+                clsCombinedFilter.RemoveParameterByName("function_exp")           
+                clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & Rolling_Rain_Days >= 1 & Rain>0.85" & Chr(34))
+                clsCombinedList.AddParameter("sub1", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
+                clsCombinedList.RemoveParameterByName("sub3")
+                clsCombinedList.AddParameter("sub2", clsRFunctionParameter := clsRollingRainDays, bIncludeArgumentName := False)
+            
+            
+            ElseIf chkConsecutiveRainyDays.Checked AndAlso chkTotalRainfall.Checked Then
+                clsCombinedFilter.RemoveParameterByName("function_exp")     
+                If rdoAmount.checked then
+                    clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Rolling_Rain_Days >= 1 & roll_sum_Rain >20 & Rain>0.85" & Chr(34))
+                    clsCombinedList.RemoveParameterByName("sub4")
+                ElseIf rdoPercentile.Checked Then
+                    clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Rolling_Rain_Days >= 1 & roll_sum_Rain > wet_spell & Rain>0.85" & Chr(34))
+                    clsCombinedList.AddParameter("sub4", clsRFunctionParameter := clsWetSpell, bIncludeArgumentName := False)
+                End If
+                clsCombinedList.RemoveParameterByName("sub1")
+                clsCombinedList.AddParameter("sub3", clsRFunctionParameter:=clsRollingSum, bIncludeArgumentName:=False)
+                clsCombinedList.AddParameter("sub2", clsRFunctionParameter := clsRollingRainDays, bIncludeArgumentName := False)
+            
+            ElseIf chkConsecutiveRainyDays.Checked Then
+                clsCombinedFilter.RemoveParameterByName("function_exp")            
+                clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Rolling_Rain_Days >= 1 & Rain>0.85" & Chr(34))
+                clsCombinedList.RemoveParameterByName("sub1")
+                clsCombinedList.RemoveParameterByName("sub3")
+                clsCombinedList.AddParameter("sub2", clsRFunctionParameter := clsRollingRainDays, bIncludeArgumentName := False)
+            
+            ElseIf chkTotalRainfall.Checked Then
+                clsCombinedFilter.RemoveParameterByName("function_exp")       
+                If rdoAmount.Checked then
+                    clsCombinedFilter.AddParameter("function_exp", Chr(34) & " roll_sum_Rain >20 & Rain>0.85" & Chr(34))
+                    clsCombinedList.RemoveParameterByName("sub4")
+                ElseIf rdoPercentile.Checked Then
+                    clsCombinedFilter.AddParameter("function_exp", Chr(34) & " roll_sum_Rain > wet_spell & Rain>0.85" & Chr(34))
+                    clsCombinedList.AddParameter("sub4", clsRFunctionParameter := clsWetSpell, bIncludeArgumentName := False)
+                End If
+                
+                clsCombinedList.RemoveParameterByName("sub1")
+                clsCombinedList.AddParameter("sub3", clsRFunctionParameter:=clsRollingSum, bIncludeArgumentName:=False)
+                clsCombinedList.RemoveParameterByName("sub2")
+            
+            ElseIf chkDrySpell.Checked Then
+                clsCombinedFilter.RemoveParameterByName("function_exp")            
+                clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & Rain>0.85" & Chr(34))
+                clsCombinedList.AddParameter("sub1", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
+                clsCombinedList. RemoveParameterByName("sub3")
+                clsCombinedList. RemoveParameterByName("sub2")
 
-        ElseIf chkTotalRainfall.Checked Then
-            clsCombinedFilter.AddParameter("function_exp", Chr(34) & "roll_sum_Rain >20 & Rain>0.85" & Chr(34))
-            clsCombinedList.AddParameter("sub3", clsRFunctionParameter:=clsRollingSum, bIncludeArgumentName:=False)
-            clsCombinedList.RemoveParameterByName("sub2")
-            clsCombinedList.RemoveParameterByName("sub1")
-
-        ElseIf chkDrySpell.Checked Then
-            clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & Rain>0.85" & Chr(34))
-            clsCombinedList.AddParameter("sub1", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
-            clsCombinedList.RemoveParameterByName("sub2")
-            clsCombinedList.RemoveParameterByName("sub3")
-
-        ElseIf chkConsecutiveRainyDays.Checked AndAlso chkTotalRainfall.Checked Then
-            clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Rolling_Rain_Days >= 1 & roll_sum_Rain >20 & Rain>0.85" & Chr(34))
-            clsCombinedList.AddParameter("sub2", clsRFunctionParameter:=clsRollingRainDays, bIncludeArgumentName:=False)
-            clsCombinedList.AddParameter("sub3", clsRFunctionParameter:=clsRollingSum, bIncludeArgumentName:=False)
-            clsCombinedList.RemoveParameterByName("sub1")
-
-        ElseIf chkConsecutiveRainyDays.Checked AndAlso chkDrySpell.Checked Then
-            clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & Rolling_Rain_Days >= 1 & Rain>0.85" & Chr(34))
-            clsCombinedList.AddParameter("sub2", clsRFunctionParameter:=clsRollingRainDays, bIncludeArgumentName:=False)
-            clsCombinedList.AddParameter("sub1", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
-            clsCombinedList.RemoveParameterByName("sub3")
-
-        ElseIf chkConsecutiveRainyDays.Checked AndAlso chkTotalRainfall.Checked Then
-            clsCombinedFilter.AddParameter("function_exp", Chr(34) & "Dry_Period <30 & roll_sum_Rain >20 & Rain>0.85" & Chr(34))
-            clsCombinedList.AddParameter("sub1", clsRFunctionParameter:=clsDryPeriodTen, bIncludeArgumentName:=False)
-            clsCombinedList.AddParameter("sub3", clsRFunctionParameter:=clsRollingSum, bIncludeArgumentName:=False)
-            clsCombinedList.RemoveParameterByName("sub2")
-        Else
+            Else
             clsCombinedFilter.RemoveParameterByName("function_exp")
             clsCombinedFilter.RemoveParameterByName("type")
             clsCombinedFilter.RemoveParameterByName("sub_calculations")
             clsCombinedList.RemoveParameterByName("sub1")
             clsCombinedList.RemoveParameterByName("sub2")
             clsCombinedList.RemoveParameterByName("sub3")
+            clsCombinedList.RemoveParameterByName("sub4")
         End If
     End Sub
 
@@ -378,4 +471,6 @@ Public Class dlgStartofRains
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Start of Rains: Defining Date column as key")
     End Sub
+            
+            Private Sub 
 End Class
