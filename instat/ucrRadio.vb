@@ -1,16 +1,50 @@
-﻿Imports instat
+﻿' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat
 
 Public Class ucrRadio
+    Private strValueIfChecked As String = "TRUE"
+
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
         MyBase.UpdateControl(bReset)
-    End Sub
-
-    Public Overrides Sub UpdateRCode()
-        MyBase.UpdateRCode()
+        If clsParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                rdoRadio.Checked = (clsParameter.strArgumentValue = strValueIfChecked)
+            ElseIf bAddRemoveParameter Then
+                'Commented out as not currently needed. Can be included if needed.
+                'If bParameterIncludedWhenChecked Then
+                rdoRadio.Checked = clsRCode.ContainsParameter(clsParameter)
+                'Else
+                'chkCheck.Checked = Not clsRCodeObject.clsParameters.Contains(clsParameter)
+                'End If
+            End If
+        Else
+            rdoRadio.Checked = LinkedControlsParametersPresent()
+        End If
+        UpdateLinkedControls()
     End Sub
 
     Private Sub rdoRadio_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRadio.CheckedChanged
-        OnControlContentsChanged()
+        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
+            If rdoRadio.Checked Then
+                clsParameter.strArgumentValue = strValueIfChecked
+            End If
+        End If
+        UpdateRCode()
         OnControlValueChanged()
     End Sub
 End Class
