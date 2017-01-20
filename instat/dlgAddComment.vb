@@ -16,6 +16,9 @@
 
 Imports instat.Translations
 Public Class dlgAddComment
+    Dim bUseSelectedColumn As Boolean = False
+    Dim strSelectedColumn As String = ""
+    Dim strSelectedDataFrame As String = ""
     Public bFirstLoad As Boolean = True
     Private Sub dlgAddComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -24,12 +27,28 @@ Public Class dlgAddComment
             SetDefaults()
             bFirstLoad = False
         End If
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
+        End If
         TestOKEnabled()
     End Sub
 
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        ucrSelectorAddComment.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
+    End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 508
-        ucrReceiverRow.Selector = ucrSelectorAddComment
+        ucrReceiverColumn.Selector = ucrSelectorAddComment
+        ucrReceiverColumn.SetMeAsReceiver()
     End Sub
     Private Sub TestOKEnabled()
 
