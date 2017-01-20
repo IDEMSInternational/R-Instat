@@ -676,6 +676,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
+        dlgAddComment.ucrReceiverColumn.txtReceiverSingle.Text = SelectedColumnsAsArray()(0)
         dlgAddComment.ShowDialog()
     End Sub
 End Class
