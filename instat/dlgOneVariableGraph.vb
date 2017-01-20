@@ -35,16 +35,15 @@ Public Class dlgOneVariableGraph
     Private Sub SetDefaults()
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+
         ' Link the base function to the sub dialog
         sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction)
-        ' Update the main dialog controls from base function
-        UpdateControls(Me)
+
         ' Controls may have changed values before InitialiseDialog was run so need to correctly update RCode too
         UpdateRCode(Me, ucrBase.clsRsyntax.clsBaseFunction)
         ucrSelectorOneVarGraph.Reset()
         ucrSelectorOneVarGraph.Focus()
         ucrOneVarGraphSave.Reset()
-        'rdoFacets.Checked = True
         ucrOneVarGraphSave.Reset()
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
 

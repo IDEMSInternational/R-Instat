@@ -30,6 +30,19 @@ Public Class ucrReceiver
     Public Event SelectionChanged(sender As Object, e As EventArgs)
     Public WithEvents frmParent As Form
 
+    'If the control is used to set a parameter that is a string i.e. column = "ID"
+    Private bParameterIsString As Boolean = False
+    'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
+    Private bParameterIsRFunction As Boolean = False
+    'The name of the data parameter in the get columns instat object method (should always be the same)
+    Private strColumnsParameterNameInRFunction As String = "col_names"
+
+    'Should quotes be used when bParameterIsString = False
+    Public bWithQuotes As Boolean = True
+
+    'Should columns be forced as a data frame object when bParameterIsRFunction = True
+    Public bForceAsDataFrame As Boolean = False
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -301,15 +314,74 @@ Public Class ucrReceiver
         Dim sender As New Object
         Dim e As New EventArgs
         RaiseEvent SelectionChanged(sender, e)
-        OnControlContentsChanged()
         OnControlValueChanged()
     End Sub
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        Dim clsTempDataParameter As RParameter
+        Dim lstCurrentVariables As String() = Nothing
+
         MyBase.UpdateControl(bReset)
+        If clsParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If bParameterIsString AndAlso clsParameter.bIsString Then
+                    lstCurrentVariables = ExtractVariableNames(clsParameter.strArgumentValue)
+                ElseIf bParameterIsRFunction AndAlso clsParameter.bIsFunction Then
+                    clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                    If clsTempDataParameter IsNot Nothing Then
+                        lstCurrentVariables = ExtractVariableNames(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                    End If
+                End If
+                Clear()
+                If lstCurrentVariables IsNot Nothing Then
+                    For Each strTemp As String In lstCurrentVariables
+                        'TODO This only works if the selector is updated before receivers!
+                        '     Needs to change eventually.
+                        If Selector IsNot Nothing Then
+                            Add(strTemp, Selector.strCurrentDataFrame)
+                        End If
+                    Next
+                End If
+            End If
+        End If
     End Sub
 
-    Public Overrides Sub UpdateRCode()
-        MyBase.UpdateRCode()
+    Private Sub ucrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
+        UpdateParameter()
     End Sub
+
+    Public Sub UpdateParameter()
+        If clsParameter Is Nothing Then
+            clsParameter = New RParameter
+        End If
+        If bParameterIsString Then
+            clsParameter.SetArgumentValue(GetVariableNames(bWithQuotes))
+        ElseIf bParameterIsRFunction Then
+            clsParameter.SetArgument(GetVariables(bForceAsDataFrame))
+        End If
+    End Sub
+
+    Public Sub SetParameterIsString()
+        bParameterIsString = True
+        bParameterIsRFunction = False
+        UpdateParameter()
+    End Sub
+
+    Public Sub SetParameterIsRFunction()
+        bParameterIsRFunction = True
+        bParameterIsString = False
+        UpdateParameter()
+    End Sub
+
+    Public Function ExtractVariableNames(strTemp As String) As String()
+        Dim lstVariables As String()
+        If strTemp.IndexOf(")") <> -1 Then
+            strTemp.Substring(strTemp.IndexOf(")"))
+        End If
+        lstVariables = strTemp.Split(",")
+        For i As Integer = 0 To lstVariables.Count - 1
+            lstVariables(i) = lstVariables(i).Trim(Chr(34))
+        Next
+        Return lstVariables
+    End Function
 End Class

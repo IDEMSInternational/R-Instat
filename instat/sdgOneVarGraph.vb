@@ -25,7 +25,6 @@ Public Class sdgOneVarGraph
             bFirstLoad = False
         End If
         autoTranslate(Me)
-        UpdateControls(Me)
     End Sub
 
     Public Sub InitialiseDialog()

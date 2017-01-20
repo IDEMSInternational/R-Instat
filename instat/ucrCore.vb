@@ -142,7 +142,7 @@ Public Class ucrCore
 
     Public Overridable Sub SetToDefault()
         If clsParameter IsNot Nothing Then
-            clsParameter.strArgumentValue = objDefault.ToString()
+            clsParameter.SetArgumentValue(objDefault.ToString())
         End If
         UpdateControl()
     End Sub

@@ -35,6 +35,17 @@ Module mdlCoreControl
             lstAllControls = GetAllCoreControls(lstAllControls, ctrChild)
         Next
         Return lstAllControls
+        lstAllControls.Sort(AddressOf CompareCoreControls)
+    End Function
+
+    ' Defines ordering where selectors come before other controls
+    ' Needed so that selectors are updated with RCode before receivers
+    Private Function CompareCoreControls(ucrFirst As ucrCore, ucrSecond As ucrCore)
+        If TryCast(ucrFirst, ucrSelector) IsNot Nothing Then
+            Return -1
+        Else
+            Return 1
+        End If
     End Function
 
     'Update RCode with values in all controls on a given form
