@@ -28,6 +28,32 @@ Public Class sdgClimdexIndices
 
     Public Sub SetDefaults()
         chkFrostDays.Checked = True
+        chkSummerDays.Checked = False
+        chkIcingDays.Checked = False
+        chkTropicalNights.Checked = False
+        chkGrowingSeasonLength.Checked = False
+        chkMonthlyMaxDailyTMax.Checked = False
+        chkMonthlyMaxDailyTMin.Checked = False
+        chkMonthlyMinDailyTMax.Checked = False
+        chkMonthlyMinDailyTMin.Checked = False
+        chkTminBelow10Percent.Checked = False
+        chkTmaxBelow10Percent.Checked = False
+        chkTminAbove90Percent.Checked = False
+        chkTmaxAbove90Percent.Checked = False
+        chkWarmSpellDI.Checked = False
+        chkColdSpellDI.Checked = False
+        chkMeanDiurnalTempRange.Checked = False
+        chkMonthlyMax1dayPrec.Checked = False
+        chkMonthlyMax5dayPrec.Checked = False
+        chkSimplePrecII.Checked = False
+        chkPrecExceed10mm.Checked = False
+        chkPrecExceed20mm.Checked = False
+        chkPrecExceedSpecifiedA.Checked = False
+        chkMaxDrySpell.Checked = False
+        chkMaxWetSpell.Checked = False
+        chkPrecExceed95Percent.Checked = False
+        chkPrecExceed99Percent.Checked = False
+        chkTotalDailyPrec.Checked = False
         chkCenterMean.Checked = False
         chkMaxSpellSpanYears.Checked = True
         chkSpellDISpanYear.Checked = False

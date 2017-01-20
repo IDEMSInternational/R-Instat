@@ -29,6 +29,7 @@ Public Class dlgAddComment
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 508
+        ucrReceiverRow.Selector = ucrSelectorAddComment
     End Sub
 
     Private Sub TestOKEnabled()
@@ -36,6 +37,42 @@ Public Class dlgAddComment
     End Sub
 
     Private Sub SetDefaults()
+        'Setting Defaults
+        ucrDataFrame.Visible = True
+        ucrSelectorAddComment.Reset()
+        ucrSelectorAddComment.Visible = False
+        rdoRow.Checked = True
+        rdoCell.Checked = False
+        ucrReceiverRow.Enabled = False
+        ucrReceiverColumn.Enabled = False
+        lblColumn.Enabled = False
+        lblRow.Enabled = False
+    End Sub
+
+    Private Sub rdoRow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRow.CheckedChanged, rdoCell.CheckedChanged
+        'Setting radio buttons events
+        If rdoRow.Checked Then
+            ucrDataFrame.Visible = True
+            ucrSelectorAddComment.Visible = False
+            ucrReceiverRow.Enabled = False
+            lblColumn.Enabled = False
+            lblRow.Enabled = False
+        Else
+            ucrReceiverRow.SetMeAsReceiver()
+            ucrSelectorAddComment.Visible = True
+            ucrReceiverRow.Enabled = True
+            ucrReceiverColumn.Enabled = True
+            ucrReceiverRow.Enabled = True
+            lblColumn.Enabled = True
+            lblRow.Enabled = True
+            ucrDataFrame.Visible = False
+        End If
 
     End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
+
 End Class
