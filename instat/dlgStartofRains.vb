@@ -15,7 +15,7 @@
 Imports instat.Translations
 Public Class dlgStartofRains
     Public clsAddKey, clsDayFromAndTo, clsRainyDays, clsRollingSum, clsMinimumRainfall, clsRollingRainDays, clsXdaysRain, clsFirstDOYPerYear, clsDryPeriodTen, clsWithinThirtyDays, clsDrySpell, clsYearGroupDaily, clsManipulationFirstDOYPerYear As New RFunction
-    Public clsDryPeriodTenList, clsSubRainDays1, clsSubRainDays2, clsCombinedFilter, clsCombinedList, clsWetSpell, clsWetSpellList As New RFunction
+    Public clsDryPeriodTenList, clsSubRainDays1, clsSubRainDays2, clsCombinedFilter, clsCombinedList, clsWetSpell, clsWetSpellList, clsDPOverallInterval, clsDPOverallIntervalList, clsDPRain, clsDPRainList, clsDPRainInDays As New RFunction
     Private strCurrDataName As String = ""
     Public bFirstLoad As Boolean = True
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -90,6 +90,16 @@ Public Class dlgStartofRains
         nudPercentile.Maximum = 1
         nudPercentile.DecimalPlaces = 2
         nudPercentile.Increments = 0.1
+        
+        clsDPOverallInterval.SetRCommand("instat_calculation$new")
+        clsDPOverallInterval.SetAssignTo("Overall_Interval")
+        clsDPRain.SetRCommand("instat_calculation$new")
+        clsDPRain.SetAssignTo("Above_Threshold")
+        clsDPRainInDays.SetRCommand("instat_calculation$new")
+        clsDPRainInDays.SetAssignTo("Rain_Period_Length")
+        
+        clsDPOverallIntervalList.SetRCommand("list")
+        clsDPRainList.SetRCommand("list")
     End Sub
 
     Private Sub SetDefaults()
@@ -361,7 +371,6 @@ Public Class dlgStartofRains
                 clsDPRainInDays.RemoveParameterByName("save")
          End If
      End Sub
-
         
         Private Sub DryPeriodAboveThreshold()
             ' If this value is above 40mm, then give it a 0. Otherwise, give it a 1. (i.e., if there is a 20 day period of under 40mm of rain, it is "1")
@@ -372,7 +381,7 @@ Public Class dlgStartofRains
                 clsDPRain.AddParameter("result_name", Chr(34) & "Above_Threshold" & Chr(34))
                 clsDPRain.AddParameter("sub_calculations", clsRFunctionParameter:=clsDPRainList)
                 clsDPRainList.AddParameter("sub1", clsRFunctionParameter:=clsDPRainInDays, bIncludeArgumentName:=False)
-                clsDPRain.AddParameter("save", 2)
+                clsDPRain.AddParameter("save", 0)
             '            clsSubRainDays.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
               Else
                 clsDPRain.RemoveParameterByName("type")
@@ -387,19 +396,19 @@ Public Class dlgStartofRains
         Private Sub DryPeriodOverallInterval()
             ' # Rolling sum of that ^ of a 45 day period (i.e., for the next 45 days, how many times does rainfall over 20 days not reach 40mm?)
         If Not ucrReceiverRainfall.IsEmpty Then
-            DPOverallInterval.AddParameter("type", chr(34) & "calculation" & chr(34))
-                DPOverallIntervalAddParameter("function_exp", Chr(34) & "rollapply(data = Above_Threshold ,width = (" & nud.DryPeriodInterval.Value & "-" & nudDryPeriodRainPeriod.Value & "+ 1), FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
-                DPOverallInterval.AddParameter("result_name", chr(34) & "DP_Overall_Interval_Rain" & chr(34))
-                DPOverallInterval.AddParameter("sub_calculations", clsRFunctionParameter:=clsDPOverallIntervalList)
-                DPOverallIntervalList.AddParameter("sub1", clsRFunctionParameter:=clsDPRain, bIncludeArgumentName:=False)
-                DPOverallInterval.AddParameter("save", "2")
+            clsDPOverallInterval.AddParameter("type", chr(34) & "calculation" & chr(34))
+                clsDPOverallInterval("function_exp", Chr(34) & "rollapply(data = Above_Threshold ,width = (" & nud.DryPeriodInterval.Value & "-" & nudDryPeriodRainPeriod.Value & "+ 1), FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
+                clsDPOverallInterval.AddParameter("result_name", chr(34) & "DP_Overall_Interval_Rain" & chr(34))
+                clsDPOverallInterval.AddParameter("sub_calculations", clsRFunctionParameter:=clsDPOverallIntervalList)
+                clsDPOverallIntervalList.AddParameter("sub1", clsRFunctionParameter:=clsDPRain, bIncludeArgumentName:=False)
+                clsDPOverallInterval.AddParameter("save", "2")
             Else
-                DPOverallInterval.RemoveParameterByName("type")
-                DPOverallInterval.RemoveParameterByName("function_exp")
-                DPOverallInterval.RemoveParameterByName("result_name")
-                DPOverallInterval.RemoveParameterByName("sub_calculations")
-                DPOverallIntervalList.RemoveParameterByName("sub1")
-                DPOverallInterval.RemoveParameterByName("save")
+                clsDPOverallInterval.RemoveParameterByName("type")
+                clsDPOverallInterval.RemoveParameterByName("function_exp")
+                clsDPOverallInterval.RemoveParameterByName("result_name")
+                clsDPOverallInterval.RemoveParameterByName("sub_calculations")
+                clsDPOverallInterval.RemoveParameterByName("sub1")
+                clsDPOverallInterval.RemoveParameterByName("save")
          End If
         End Sub        
 
