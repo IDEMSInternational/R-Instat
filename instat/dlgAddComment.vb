@@ -41,7 +41,7 @@ Public Class dlgAddComment
     End Sub
 
     Private Sub SetDefaultColumn()
-        ucrSelectorAddComment.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
         ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
     End Sub
