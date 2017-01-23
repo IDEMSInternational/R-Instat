@@ -62,7 +62,7 @@ Public Class ucrCore
     'e.g. add/remove the parameter of other controls
     '     set the visible/enabled property of other controls
     'e.g. a checkbox that shows/hides set of controls
-    Protected lstValuesAndControl As List(Of KeyValuePair(Of ucrCore, Object()))
+    Protected lstValuesAndControl As New List(Of KeyValuePair(Of ucrCore, Object()))
 
     'If this control is in another controls lstLinkedControls
     'These values specifiy how that control can modify this control
@@ -71,6 +71,8 @@ Public Class ucrCore
     Public bLinkedDisabledIfParameterMissing As Boolean = False
     Public bLinkedHideIfParameterMissing As Boolean = False
     Public bLinkedChangeParameterToDefault As Boolean = False
+
+    Protected lblLinkedLabel As Label
 
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
@@ -97,28 +99,26 @@ Public Class ucrCore
         Dim lstValues As Object()
         Dim bTemp As Boolean
 
-        If lstValuesAndControl IsNot Nothing Then
-            For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
-                lstValues = kvpTemp.Value
-                ucrControl = kvpTemp.Key
-                bTemp = lstValues.Count = 0 OrElse ValueContainedIn(lstValues)
-                If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
-                    ucrControl.SetRCode(clsRCode)
-                End If
-                If ucrControl.bLinkedAddRemoveParameter Then
-                    ucrControl.AddOrRemoveParameter(bTemp)
-                End If
-                If ucrControl.bLinkedChangeParameterToDefault AndAlso bTemp Then
-                    ucrControl.SetToDefault()
-                End If
-                If ucrControl.bLinkedHideIfParameterMissing Then
-                    ucrControl.Visible = bTemp
-                End If
-                If ucrControl.bLinkedDisabledIfParameterMissing Then
-                    ucrControl.Enabled = bTemp
-                End If
-            Next
-        End If
+        For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
+            lstValues = kvpTemp.Value
+            ucrControl = kvpTemp.Key
+            bTemp = ValueContainedIn(lstValues)
+            If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
+                ucrControl.SetRCode(clsRCode)
+            End If
+            If ucrControl.bLinkedAddRemoveParameter Then
+                ucrControl.AddOrRemoveParameter(bTemp)
+            End If
+            If ucrControl.bLinkedChangeParameterToDefault AndAlso bTemp Then
+                ucrControl.SetToDefault()
+            End If
+            If ucrControl.bLinkedHideIfParameterMissing Then
+                ucrControl.Visible = bTemp
+            End If
+            If ucrControl.bLinkedDisabledIfParameterMissing Then
+                ucrControl.Enabled = bTemp
+            End If
+        Next
     End Sub
 
     'Update the RCode based on the contents of the control (reverse of above)
@@ -254,4 +254,19 @@ Public Class ucrCore
     Public Overridable Function GetParameter() As RParameter
         Return clsParameter
     End Function
+
+    Public Sub SetLabel(lblNewLabel As Label)
+        lblLinkedLabel = lblNewLabel
+        SetLinkedLabelVisibility()
+    End Sub
+
+    Private Sub ucrCore_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        SetLinkedLabelVisibility()
+    End Sub
+
+    Private Sub SetLinkedLabelVisibility()
+        If lblLinkedLabel IsNot Nothing Then
+            lblLinkedLabel.Visible = Visible
+        End If
+    End Sub
 End Class

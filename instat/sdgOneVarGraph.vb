@@ -17,17 +17,17 @@ Imports instat
 Imports instat.Translations
 Public Class sdgOneVarGraph
     Public bFirstLoad As Boolean = True
+    Public bControlsInitialised As Boolean = False
     Public clsGraphOneVariable As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            InitialiseDialog()
             bFirstLoad = False
         End If
         autoTranslate(Me)
     End Sub
 
-    Public Sub InitialiseDialog()
+    Public Sub InitialiseControls()
         Dim lstNumericPairs As New List(Of KeyValuePair(Of String, String))
         Dim lstCategoricalPairs As New List(Of KeyValuePair(Of String, String))
 
@@ -52,25 +52,25 @@ Public Class sdgOneVarGraph
         ucrInputNumeric.strParameterName = "numeric"
         ucrInputCategorical.strParameterName = "categorical"
 
-        ucrChkSpecifyLayout.strParameterName = "ncol"
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkSpecifyLayout.bChangeParameterValue = False
-        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={}, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeParameterToDefault:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
+        ucrChkFreeScaleAxisforFacets.strParameterName = "free_scale_axis"
+        ucrChkFreeScaleAxisforFacets.SetDefault("FALSE")
 
         ucrNudNumberofColumns.strParameterName = "ncol"
         ucrNudNumberofColumns.SetMinMax(1, 10)
+        ucrNudNumberofColumns.SetLabel(lblNumberofColumns)
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, bReset As Boolean)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
         clsGraphOneVariable = clsNewRFunction
-    End Sub
-
-    Private Sub CoreControlsValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScaleAxisforFacets.ControlValueChanged, ucrChkSpecifyLayout.ControlContentsChanged, ucrInputCategorical.ControlContentsChanged, ucrInputNumeric.ControlContentsChanged, ucrNudNumberofColumns.ControlContentsChanged
-        ucrChangedControl.UpdateRCode()
-        'After one control has edited the code, other controls may need to be updated
-        'Could make more efficient by only updating controls "linked" to ucrChangedControl, but for this this seems a simple solution.
-        'UpdateControls(Me)
+        SetRCode(Me, clsGraphOneVariable, bReset)
     End Sub
 End Class
