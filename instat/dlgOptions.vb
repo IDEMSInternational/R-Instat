@@ -325,9 +325,11 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdFactoryReset_Click(sender As Object, e As EventArgs) Handles cmdFactoryReset.Click
-        If MsgBox("Are you sure you want to reset to factory defaults?", MessageBoxButtons.YesNo, "Factory Reset") Then
+        Dim msgFactoryReset = MsgBox("Are you sure you want to reset to factory defaults?", MessageBoxButtons.YesNo, "Factory Reset")
+        If msgFactoryReset = DialogResult.Yes Then
             frmMain.clsInstatOptions = New InstatOptions(False)
             LoadInstatOptions()
+            ApplyEnabled(True)
         End If
     End Sub
 
