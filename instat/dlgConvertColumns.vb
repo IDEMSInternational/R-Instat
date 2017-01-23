@@ -51,6 +51,7 @@ Public Class dlgConvertColumns
         ucrSelectorDataFrameColumns.Focus()
         rdoConvertLevels.Checked = True
         rdoFactor.Checked = True
+        ConvertTo()
         SetToFactorStatus(bToFactorOnly)
         TestOKEnabled()
     End Sub
@@ -83,28 +84,45 @@ Public Class dlgConvertColumns
     End Sub
 
     Private Sub grpForConvertToType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFactor.CheckedChanged, rdoNumeric.CheckedChanged, rdoCharacter.CheckedChanged, rdoInteger.CheckedChanged
+        ConvertTo()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ConvertTo()
         If rdoFactor.Checked Then
             grpFactorToNumericOptions.Visible = False
+            chkNumberOfDigits.Visible = True
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
         ElseIf rdoNumeric.Checked Then
+            chkNumberOfDigits.Visible = False
             grpFactorToNumericOptions.Visible = True
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
         ElseIf rdoCharacter.Checked Then
+            chkNumberOfDigits.Visible = False
             grpFactorToNumericOptions.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "character" & Chr(34))
         ElseIf rdoInteger.Checked Then
+            chkNumberOfDigits.Visible = False
             grpFactorToNumericOptions.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "integer" & Chr(34))
         ElseIf rdoOrderedFactor.Checked Then
+            chkNumberOfDigits.Visible = True
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
         Else
+            chkNumberOfDigits.Visible = False
             'the else case should never happen but is there just in case
             ucrBase.clsRsyntax.RemoveParameter("to_type")
             grpFactorToNumericOptions.Visible = False
         End If
-        TestOKEnabled()
     End Sub
 
+    Private Sub NumberOfDigits()
+        If chkNumberOfDigits.Checked Then
+            ucrBase.clsRsyntax.AddParameter("set_digits", "TRUE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("set_digits", "FALSE")
+        End If
+    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
@@ -132,4 +150,7 @@ Public Class dlgConvertColumns
         End If
     End Sub
 
+    Private Sub chkNumberOfDigits_CheckedChanged(sender As Object, e As EventArgs) Handles chkNumberOfDigits.CheckedChanged
+        NumberOfDigits()
+    End Sub
 End Class

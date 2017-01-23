@@ -948,7 +948,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels") {
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels", set_digits = TRUE) {
   for(col_name in col_names){
     if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
       stop(col_name, " is not a column in ", get_metadata(data_name_label))
@@ -974,21 +974,30 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     if(to_type=="factor") {
       # Warning: this is different from expected R behaviour
       # Any ordered columns would become unordered factors
-      self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
+     if(!set_digits){
+	 self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits=4), ordered = FALSE))
+	}
+     else{ self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))}
     }
-    else if(to_type=="ordered_factor") {
-      self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
-    }
-    else if(to_type=="integer") {
+    else if(to_type =="i nteger") {
       self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
     }
-    else if(to_type=="numeric") {
+    else if(to_type == "ordered_factor") {
+	if(!set_digits){
+	 self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits=4), ordered = TRUE))
+	}
+     else{ self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))}
+    }
+    else if(to_type == "integer") {
+      self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
+    }
+    else if(to_type == "numeric") {
       if(is.factor(curr_col) && (factor_numeric == "by_levels")) {
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(curr_col))[curr_col])
       }
       else self$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col))
     }
-    else if(to_type=="character") {
+    else if(to_type == "character") {
       self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))
     }
     self$append_to_variables_metadata(property = display_decimal_label, col_names = col_name, new_val = get_default_decimal_places(curr_col))

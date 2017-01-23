@@ -35,6 +35,7 @@ Partial Class dlgConvertColumns
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.chkNumberOfDigits = New System.Windows.Forms.CheckBox()
         Me.grpTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -56,7 +57,7 @@ Partial Class dlgConvertColumns
         Me.grpTo.Controls.Add(Me.rdoFactor)
         Me.grpTo.Controls.Add(Me.rdoCharacter)
         Me.grpTo.Controls.Add(Me.rdoNumeric)
-        Me.grpTo.Location = New System.Drawing.Point(12, 193)
+        Me.grpTo.Location = New System.Drawing.Point(12, 195)
         Me.grpTo.Name = "grpTo"
         Me.grpTo.Size = New System.Drawing.Size(355, 66)
         Me.grpTo.TabIndex = 3
@@ -171,6 +172,7 @@ Partial Class dlgConvertColumns
         '
         'ucrReceiverColumnsToConvert
         '
+        Me.ucrReceiverColumnsToConvert.frmParent = Me
         Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(247, 61)
         Me.ucrReceiverColumnsToConvert.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
@@ -185,11 +187,22 @@ Partial Class dlgConvertColumns
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
         '
+        'chkNumberOfDigits
+        '
+        Me.chkNumberOfDigits.AutoSize = True
+        Me.chkNumberOfDigits.Location = New System.Drawing.Point(247, 170)
+        Me.chkNumberOfDigits.Name = "chkNumberOfDigits"
+        Me.chkNumberOfDigits.Size = New System.Drawing.Size(106, 17)
+        Me.chkNumberOfDigits.TabIndex = 6
+        Me.chkNumberOfDigits.Text = "Number Of Digits"
+        Me.chkNumberOfDigits.UseVisualStyleBackColor = True
+        '
         'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 377)
+        Me.ClientSize = New System.Drawing.Size(413, 377)
+        Me.Controls.Add(Me.chkNumberOfDigits)
         Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDataFrameColumns)
@@ -225,4 +238,5 @@ Partial Class dlgConvertColumns
     Friend WithEvents rdoConvertOrdinals As RadioButton
     Friend WithEvents rdoConvertLevels As RadioButton
     Friend WithEvents rdoOrderedFactor As RadioButton
+    Friend WithEvents chkNumberOfDigits As CheckBox
 End Class
