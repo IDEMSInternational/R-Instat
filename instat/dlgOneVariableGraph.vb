@@ -36,9 +36,6 @@ Public Class dlgOneVariableGraph
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
 
-        ' Link the base function to the sub dialog
-        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction)
-
         ucrSelectorOneVarGraph.Reset()
         ucrOneVarGraphSave.Reset()
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
@@ -116,6 +113,8 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub cmdGraph_Click(sender As Object, e As EventArgs) Handles cmdGraphOptions.Click
+        ' Link the base function to the sub dialog
+        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, True)
         sdgOneVarGraph.ShowDialog()
     End Sub
 

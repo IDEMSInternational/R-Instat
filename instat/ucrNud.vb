@@ -29,16 +29,18 @@ Public Class ucrNud
 
         MyBase.UpdateControl(bReset)
 
-        If bChangeParameterValue Then
-            If Decimal.TryParse(clsParameter.strArgumentValue, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
-                nudUpDown.Value = dNewValue
-            Else
-                MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " cannot be converted to a decimal or is outside the range of the control. Setting to the default value.")
-                If Decimal.TryParse(objDefault, dNewValue) Then
+        If clsParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If Decimal.TryParse(clsParameter.strArgumentValue, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
                     nudUpDown.Value = dNewValue
                 Else
-                    MsgBox("Developer error: The default value of the control cannot be converted to a decimal. Setting to the minimum of the control.")
-                    nudUpDown.Value = Minimum
+                    MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " cannot be converted to a decimal or is outside the range of the control. Setting to the default value.")
+                    If Decimal.TryParse(objDefault, dNewValue) Then
+                        nudUpDown.Value = dNewValue
+                    Else
+                        MsgBox("Developer error: The default value of the control cannot be converted to a decimal. Setting to the minimum of the control.")
+                        nudUpDown.Value = Minimum
+                    End If
                 End If
             End If
             UpdateLinkedControls()
@@ -68,9 +70,9 @@ Public Class ucrNud
     Private Sub nudUpDown_TextChanged(sender As Object, e As EventArgs) Handles nudUpDown.TextChanged
         If bChangeParameterValue Then
             If nudUpDown.Text <> "" Then
-                clsParameter.strArgumentValue = nudUpDown.Value
+                clsParameter.SetArgumentValue(nudUpDown.Value)
             Else
-                clsParameter.strArgumentValue = ""
+                clsParameter.SetArgumentValue("")
             End If
         End If
         OnControlValueChanged()
@@ -103,17 +105,17 @@ Public Class ucrNud
         End Set
     End Property
 
-    Public Overrides Sub SetToDefault()
-        Dim dNewValue As Decimal
+    'Public Overrides Sub SetToDefault()
+    '    Dim dNewValue As Decimal
 
-        MyBase.SetToDefault()
-        If objDefault IsNot Nothing AndAlso Integer.TryParse(objDefault, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
-            nudUpDown.Value = dNewValue
-        Else
-            MsgBox("Developer error: The default value of the control is either Nothing, cannot be converted to an integer or is outside the range of the numeric up/down. Setting to the minimum value instead.")
-            nudUpDown.Value = Minimum
-        End If
-    End Sub
+    '    MyBase.SetToDefault()
+    '    If objDefault IsNot Nothing AndAlso Decimal.TryParse(objDefault, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
+    '        nudUpDown.Value = dNewValue
+    '    Else
+    '        MsgBox("Developer error: The default value of the control is either Nothing, cannot be converted to a decimal or is outside the range of the numeric up/down. Setting to the minimum value instead.")
+    '        nudUpDown.Value = Minimum
+    '    End If
+    'End Sub
 
     Public Overrides Sub SetDefault(objNewDefault As Object)
         Dim dTemp As Decimal

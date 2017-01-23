@@ -70,9 +70,9 @@ Public Class ucrCheck
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
         If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
             If chkCheck.Checked Then
-                clsParameter.strArgumentValue = strValueIfChecked
+                clsParameter.SetArgumentValue(strValueIfChecked)
             Else
-                clsParameter.strArgumentValue = strValueIfUnchecked
+                clsParameter.SetArgumentValue(strValueIfUnchecked)
             End If
         End If
         UpdateRCode()
@@ -87,4 +87,20 @@ Public Class ucrCheck
             chkCheck.Checked = bChecked
         End Set
     End Property
+
+    Public Overrides Function ValueContainedIn(lstTemp As Object()) As Boolean
+        Dim bTempValue As Boolean
+        Dim bContainedIn As Boolean = False
+
+        For Each objVal In lstTemp
+            If Boolean.TryParse(objVal, bTempValue) Then
+                If bTempValue = chkCheck.Checked Then
+                    bContainedIn = True
+                End If
+            Else
+                MsgBox("Developer error: Cannot convert value to decimal for linked control.")
+            End If
+        Next
+        Return bContainedIn
+    End Function
 End Class
