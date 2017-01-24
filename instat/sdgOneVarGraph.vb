@@ -49,18 +49,20 @@ Public Class sdgOneVarGraph
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
         ucrInputCategorical.SetItems(lstCategoricalPairs)
 
-        ucrInputNumeric.strParameterName = "numeric"
-        ucrInputCategorical.strParameterName = "categorical"
+        ucrInputNumeric.SetParameterName("numeric")
+        ucrInputCategorical.SetParameterName("categorical")
 
         ucrChkSpecifyLayout.SetText("Specify Layout")
+        'Should this be included?
+        ucrChkSpecifyLayout.SetParameterName("ncol")
         ucrChkSpecifyLayout.bChangeParameterValue = False
         ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
-        ucrChkFreeScaleAxisforFacets.strParameterName = "free_scale_axis"
+        ucrChkFreeScaleAxisforFacets.SetParameterName("free_scale_axis")
         ucrChkFreeScaleAxisforFacets.SetDefault("FALSE")
 
-        ucrNudNumberofColumns.strParameterName = "ncol"
+        ucrNudNumberofColumns.SetParameterName("ncol")
         ucrNudNumberofColumns.SetMinMax(1, 10)
         ucrNudNumberofColumns.SetLabel(lblNumberofColumns)
         bControlsInitialised = True

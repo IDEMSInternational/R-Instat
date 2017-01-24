@@ -172,21 +172,20 @@ Public Class ucrCore
         RaiseEvent ControlValueChanged(Me)
     End Sub
 
-    Public Overridable Property strParameterName As String
-        Get
-            If clsParameter IsNot Nothing Then
-                Return clsParameter.strArgumentName
-            Else
-                Return ""
-            End If
-        End Get
-        Set(bNewName As String)
-            If clsParameter Is Nothing Then
-                clsParameter = New RParameter
-            End If
-            clsParameter.strArgumentName = bNewName
-        End Set
-    End Property
+    Public Sub SetParameterName(strNewParameterName As String)
+        If clsParameter Is Nothing Then
+            clsParameter = New RParameter
+        End If
+        clsParameter.strArgumentName = strNewParameterName
+    End Sub
+
+    Public Function GetParameterName() As String
+        If clsParameter IsNot Nothing Then
+            Return clsParameter.strArgumentName
+        Else
+            Return ""
+        End If
+    End Function
 
     Public Overridable Function GetDefault() As Object
         Return objDefault
