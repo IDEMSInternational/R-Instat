@@ -210,7 +210,7 @@ Public Class ucrInputComboBox
         cboCurrent.DropDownWidth = iWidth
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateControl(clsRCodeObject)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
     End Sub
 End Class
