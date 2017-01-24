@@ -31,6 +31,7 @@ Public Class sdgOneVarGraph
         Dim lstNumericPairs As New List(Of KeyValuePair(Of String, String))
         Dim lstCategoricalPairs As New List(Of KeyValuePair(Of String, String))
 
+        ucrInputNumeric.SetParameter(New RParameter("numeric"))
         lstNumericPairs.Add(New KeyValuePair(Of String, String)("Boxplot", Chr(34) & "geom_boxplot" & Chr(34)))
         lstNumericPairs.Add(New KeyValuePair(Of String, String)("Histogram", Chr(34) & "geom_histogram" & Chr(34)))
         lstNumericPairs.Add(New KeyValuePair(Of String, String)("Dotplot", Chr(34) & "geom_dotplot" & Chr(34)))
@@ -44,25 +45,24 @@ Public Class sdgOneVarGraph
         lstNumericPairs.Add(New KeyValuePair(Of String, String)("Violin + Boxplot", Chr(34) & "violin_box" & Chr(34)))
         ucrInputNumeric.SetItems(lstNumericPairs)
 
+        ucrInputCategorical.SetParameter(New RParameter("categorical"))
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Bar Chart", Chr(34) & "geom_bar" & Chr(34)))
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Pie Chart", Chr(34) & "pie_chart" & Chr(34)))
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
         ucrInputCategorical.SetItems(lstCategoricalPairs)
 
-        ucrInputNumeric.strParameterName = "numeric"
-        ucrInputCategorical.strParameterName = "categorical"
 
+        SetParameter({ucrChkSpecifyLayout, ucrNudNumberofColumns}, New RParameter("ncol"))
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkSpecifyLayout.bChangeParameterValue = False
         ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
-        ucrChkFreeScaleAxisforFacets.strParameterName = "free_scale_axis"
-        ucrChkFreeScaleAxisforFacets.SetDefault("FALSE")
-
-        ucrNudNumberofColumns.strParameterName = "ncol"
         ucrNudNumberofColumns.SetMinMax(1, 10)
         ucrNudNumberofColumns.SetLabel(lblNumberofColumns)
+
+        ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
+        ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis"))
+        ucrChkFreeScaleAxisforFacets.SetDefault("FALSE")
+
         bControlsInitialised = True
     End Sub
 
