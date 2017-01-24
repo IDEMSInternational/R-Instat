@@ -51,7 +51,7 @@ Public Class dlgOneVariableGraph
         clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
         'clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
         clsDefaultRFunction.AddParameter("coord_flip", "TRUE")
-        clsDefaultRFunction.AddParameter("columns", "c(" & Chr(34) & "Yield" & Chr(34) & ", " & Chr(34) & "Size" & Chr(34) & ")")
+        'clsDefaultRFunction.AddParameter("ncol", "2")
 
         ucrRdoFacets.SetText("Facets")
         ucrRdoFacets.strValueIfChecked = Chr(34) & "facets" & Chr(34)
@@ -64,7 +64,7 @@ Public Class dlgOneVariableGraph
 
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
-        ucrReceiverOneVarGraph.strParameterName = "columns"
+        ucrReceiverOneVarGraph.SetParameterName("columns")
         ucrReceiverOneVarGraph.SetParameterIsString()
 
         ucrSelectorOneVarGraph.strParameterName = "data_name"
@@ -72,7 +72,7 @@ Public Class dlgOneVariableGraph
         clsDefaultRFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
 
         ucrChkFlip.SetText("Flip Coordinates")
-        ucrChkFlip.strParameterName = "coord_flip"
+        ucrChkFlip.SetParameterName("coord_flip")
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetDefault("FALSE")
 
