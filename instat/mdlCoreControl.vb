@@ -19,12 +19,15 @@ Module mdlCoreControl
     'This needs testing to see if the ByVal works
     'If not, it could be modified to work as ByRef
     'Recursive method to get all core controls on a given form/control
-    Public Function GetAllCoreControls(ByVal lstAllControls As List(Of Control), ByVal ctrParent As Control) As List(Of Control)
+    Public Function GetAllCoreControls(ByVal lstAllControls As List(Of ucrCore), ByVal ctrParent As Control) As List(Of ucrCore)
+        Dim ucrTemp As ucrCore
+
         If ctrParent Is Nothing Then
             Return lstAllControls
         End If
 
         If TypeOf ctrParent Is ucrCore Then
+            ucrTemp = DirectCast(ctrParent, ucrCore)
             lstAllControls.Add(ctrParent)
         End If
 
@@ -32,37 +35,45 @@ Module mdlCoreControl
             lstAllControls = GetAllCoreControls(lstAllControls, ctrChild)
         Next
         Return lstAllControls
+        lstAllControls.Sort(AddressOf CompareCoreControls)
     End Function
 
-    'Update all ucrCore controls on a given form with values in clsRCodeStructure
-    Public Sub UpdateControls(frmCurrentForm As Form, clsRCodeStructure As RCodeStructure)
-        Dim ctrTemp As Control
-        Dim ucrTemp As ucrCore
-        Dim lstAllControls As New List(Of Control)
-
-        lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
-        For Each ctrTemp In lstAllControls
-            ucrTemp = DirectCast(ctrTemp, ucrCore)
-            'Check shouldn't be needed because of GetAllCoreControls method but not harm to leave in
-            If ucrTemp IsNot Nothing Then
-                ucrTemp.UpdateControl(clsRCodeStructure)
-            End If
-        Next
-    End Sub
+    ' Defines ordering where selectors come before other controls
+    ' Needed so that selectors are updated with RCode before receivers
+    Private Function CompareCoreControls(ucrFirst As ucrCore, ucrSecond As ucrCore)
+        If TryCast(ucrFirst, ucrDataFrame) IsNot Nothing Then
+            Return -1
+        Else
+            Return 1
+        End If
+    End Function
 
     'Update RCode with values in all controls on a given form
     Public Sub UpdateRCode(frmCurrentForm As Form, clsRCodeStructure As RCodeStructure)
-        Dim ctrTemp As Control
-        Dim ucrTemp As ucrCore
-        Dim lstAllControls As New List(Of Control)
+        Dim lstAllControls As New List(Of ucrCore)
 
         lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
-        For Each ctrTemp In lstAllControls
-            ucrTemp = DirectCast(ctrTemp, ucrCore)
-            'Check shouldn't be needed because of GetAllCoreControls method but not harm to leave in
-            If ucrTemp IsNot Nothing Then
-                ucrTemp.UpdateRCode(clsRCodeStructure)
-            End If
+        For Each ucrTemp As ucrCore In lstAllControls
+            ucrTemp.UpdateRCode()
+        Next
+    End Sub
+
+    Public Sub SetRCode(frmCurrentForm As Form, clsRCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+        Dim lstAllControls As New List(Of ucrCore)
+
+        lstAllControls = GetAllCoreControls(lstAllControls, frmCurrentForm)
+        SetRCode(lstAllControls, clsRCodeStructure, bReset)
+    End Sub
+
+    Public Sub SetRCode(lstControls As List(Of ucrCore), clsRCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+        For Each ctrTemp In lstControls
+            ctrTemp.SetRCode(clsRCodeStructure, bReset)
+        Next
+    End Sub
+
+    Public Sub SetParameterName(lstControls As ucrCore(), strParameterName As String)
+        For Each ucrTemp As ucrCore In lstControls
+            ucrTemp.strParameterName = strParameterName
         Next
     End Sub
 End Module

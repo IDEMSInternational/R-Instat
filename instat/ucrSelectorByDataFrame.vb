@@ -17,11 +17,6 @@
 Imports instat
 
 Public Class ucrSelectorByDataFrame
-    'These are defined here because ucrSelector is not a ucrCore but ucrDataFrame is
-    'Since only the data frame controls a parameter, ucrSelector is not a ucrCore
-    'So these are just ways to pass through events from ucrDataFrame
-    Public Event ControlValueChanged(ucrChangedControl As ucrCore)
-    Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
 
     Public Overrides Sub LoadList()
         If ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
@@ -76,15 +71,6 @@ Public Class ucrSelectorByDataFrame
         End Set
     End Property
 
-    'These are just wrappers for accessing ucrAvailableDataFrames's methods from the selector
-    Public Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        ucrAvailableDataFrames.UpdateControl(clsRCodeObject)
-    End Sub
-
-    Public Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        ucrAvailableDataFrames.UpdateRCode(clsRFunction, clsROperator)
-    End Sub
-
     Public Sub SetParameterIsString()
         ucrAvailableDataFrames.SetParameterIsString()
     End Sub
@@ -94,14 +80,59 @@ Public Class ucrSelectorByDataFrame
     End Sub
 
     Public Sub SetParameterName(strParamName As String)
-        ucrAvailableDataFrames.SetParameterName(strParamName)
+        ucrAvailableDataFrames.strParameterName = strParamName
     End Sub
 
     Private Sub ucrAvailableDataFrames_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrAvailableDataFrames.ControlContentsChanged
-        RaiseEvent ControlContentsChanged(ucrChangedControl)
+        OnControlContentsChanged()
     End Sub
 
     Private Sub ucrAvailableDataFrames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrAvailableDataFrames.ControlValueChanged
-        RaiseEvent ControlValueChanged(ucrChangedControl)
+        OnControlValueChanged()
     End Sub
+
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
+        ucrAvailableDataFrames.UpdateControl(bReset)
+    End Sub
+
+    Public Overrides Property strParameterName As String
+        Get
+            If bHasOwnParameter Then
+                Return MyBase.strParameterName
+            Else
+                Return ucrAvailableDataFrames.strParameterName
+            End If
+        End Get
+        Set(bNewName As String)
+            If bHasOwnParameter Then
+                MyBase.strParameterName = bNewName
+            End If
+            ucrAvailableDataFrames.strParameterName = bNewName
+        End Set
+    End Property
+
+    Public Overrides Function IsDefault() As Boolean
+        If bHasOwnParameter Then
+            Return MyBase.IsDefault()
+        Else
+            Return ucrAvailableDataFrames.IsDefault()
+        End If
+    End Function
+
+    Public Overrides Sub AddOrRemoveParameter(bAdd As Boolean)
+        If bHasOwnParameter Then
+            AddOrRemoveParameter(bAdd)
+        Else
+            ucrAvailableDataFrames.AddOrRemoveParameter(bAdd)
+        End If
+    End Sub
+
+    Public Overrides Function GetParameter() As RParameter
+        If bHasOwnParameter Then
+            Return MyBase.GetParameter()
+        Else
+            Return ucrAvailableDataFrames.GetParameter()
+        End If
+    End Function
 End Class

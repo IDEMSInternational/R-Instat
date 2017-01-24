@@ -299,7 +299,6 @@ Public Class ucrReceiverMultiple
         Dim grpCurr As New ListViewGroup
 
         For Each kvpTempItem In lstItems
-
             If Not GetCurrItemNames().Contains(kvpTempItem.Value) Then
                 If Not GetCurrGroupNames().Contains(kvpTempItem.Key) Then
                     grpCurr = New ListViewGroup(key:=kvpTempItem.Key, headerText:=kvpTempItem.Key)
