@@ -35,15 +35,17 @@ Partial Class dlgConvertColumns
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkNumberOfDigits = New System.Windows.Forms.CheckBox()
+        Me.lblSelectNumberOfDecimals = New System.Windows.Forms.Label()
+        Me.nudDisplayDecimals = New System.Windows.Forms.NumericUpDown()
         Me.grpTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
+        CType(Me.nudDisplayDecimals, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblColumnsToConvert
         '
         Me.lblColumnsToConvert.AutoSize = True
-        Me.lblColumnsToConvert.Location = New System.Drawing.Point(249, 46)
+        Me.lblColumnsToConvert.Location = New System.Drawing.Point(249, 17)
         Me.lblColumnsToConvert.Name = "lblColumnsToConvert"
         Me.lblColumnsToConvert.Size = New System.Drawing.Size(102, 13)
         Me.lblColumnsToConvert.TabIndex = 1
@@ -173,7 +175,7 @@ Partial Class dlgConvertColumns
         'ucrReceiverColumnsToConvert
         '
         Me.ucrReceiverColumnsToConvert.frmParent = Me
-        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(247, 61)
+        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(247, 32)
         Me.ucrReceiverColumnsToConvert.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
         Me.ucrReceiverColumnsToConvert.Selector = Nothing
@@ -187,22 +189,29 @@ Partial Class dlgConvertColumns
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
         '
-        'chkNumberOfDigits
+        'lblSelectNumberOfDecimals
         '
-        Me.chkNumberOfDigits.AutoSize = True
-        Me.chkNumberOfDigits.Location = New System.Drawing.Point(247, 170)
-        Me.chkNumberOfDigits.Name = "chkNumberOfDigits"
-        Me.chkNumberOfDigits.Size = New System.Drawing.Size(106, 17)
-        Me.chkNumberOfDigits.TabIndex = 6
-        Me.chkNumberOfDigits.Text = "Number Of Digits"
-        Me.chkNumberOfDigits.UseVisualStyleBackColor = True
+        Me.lblSelectNumberOfDecimals.AutoSize = True
+        Me.lblSelectNumberOfDecimals.Location = New System.Drawing.Point(244, 142)
+        Me.lblSelectNumberOfDecimals.Name = "lblSelectNumberOfDecimals"
+        Me.lblSelectNumberOfDecimals.Size = New System.Drawing.Size(154, 13)
+        Me.lblSelectNumberOfDecimals.TabIndex = 6
+        Me.lblSelectNumberOfDecimals.Text = "Number of Decimals to Display:"
+        '
+        'nudDisplayDecimals
+        '
+        Me.nudDisplayDecimals.Location = New System.Drawing.Point(247, 159)
+        Me.nudDisplayDecimals.Name = "nudDisplayDecimals"
+        Me.nudDisplayDecimals.Size = New System.Drawing.Size(49, 20)
+        Me.nudDisplayDecimals.TabIndex = 7
         '
         'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(413, 377)
-        Me.Controls.Add(Me.chkNumberOfDigits)
+        Me.Controls.Add(Me.nudDisplayDecimals)
+        Me.Controls.Add(Me.lblSelectNumberOfDecimals)
         Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDataFrameColumns)
@@ -220,6 +229,7 @@ Partial Class dlgConvertColumns
         Me.grpTo.PerformLayout()
         Me.grpFactorToNumericOptions.ResumeLayout(False)
         Me.grpFactorToNumericOptions.PerformLayout()
+        CType(Me.nudDisplayDecimals, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -238,5 +248,6 @@ Partial Class dlgConvertColumns
     Friend WithEvents rdoConvertOrdinals As RadioButton
     Friend WithEvents rdoConvertLevels As RadioButton
     Friend WithEvents rdoOrderedFactor As RadioButton
-    Friend WithEvents chkNumberOfDigits As CheckBox
+    Friend WithEvents nudDisplayDecimals As NumericUpDown
+    Friend WithEvents lblSelectNumberOfDecimals As Label
 End Class
