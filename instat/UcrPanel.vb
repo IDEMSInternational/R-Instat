@@ -13,8 +13,13 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Public Class UcrPanel
-    Private Sub UcrPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
+        MyBase.UpdateControl(clsRCodeObject)
+    End Sub
 
+    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+        MyBase.UpdateRCode(clsRFunction, clsROperator)
     End Sub
 End Class
