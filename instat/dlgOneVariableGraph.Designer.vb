@@ -24,20 +24,22 @@ Partial Class dlgOneVariableGraph
     Private Sub InitializeComponent()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.cmdGraphOptions = New System.Windows.Forms.Button()
-        Me.rdoCombineGraph = New System.Windows.Forms.RadioButton()
-        Me.rdoSingleGraphs = New System.Windows.Forms.RadioButton()
-        Me.rdoFacets = New System.Windows.Forms.RadioButton()
+        Me.grpOutput = New System.Windows.Forms.GroupBox()
+        Me.ucrRdoFacets = New instat.ucrRadio()
+        Me.ucrRdoSingleGraphs = New instat.ucrRadio()
+        Me.ucrRdoCombine = New instat.ucrRadio()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrOneVarGraphSave = New instat.ucrSaveGraph()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverOneVarGraph = New instat.ucrReceiverMultiple()
         Me.ucrSelectorOneVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(238, 40)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(238, 33)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
         Me.lblSelectedVariables.TabIndex = 1
@@ -52,68 +54,77 @@ Partial Class dlgOneVariableGraph
         Me.cmdGraphOptions.Text = "Graph Options"
         Me.cmdGraphOptions.UseVisualStyleBackColor = True
         '
-        'rdoCombineGraph
+        'grpOutput
         '
-        Me.rdoCombineGraph.AutoSize = True
-        Me.rdoCombineGraph.Location = New System.Drawing.Point(237, 194)
-        Me.rdoCombineGraph.Name = "rdoCombineGraph"
-        Me.rdoCombineGraph.Size = New System.Drawing.Size(98, 17)
-        Me.rdoCombineGraph.TabIndex = 5
-        Me.rdoCombineGraph.TabStop = True
-        Me.rdoCombineGraph.Text = "Combine Graph"
-        Me.rdoCombineGraph.UseVisualStyleBackColor = True
+        Me.grpOutput.Controls.Add(Me.ucrRdoFacets)
+        Me.grpOutput.Controls.Add(Me.ucrRdoSingleGraphs)
+        Me.grpOutput.Controls.Add(Me.ucrRdoCombine)
+        Me.grpOutput.Location = New System.Drawing.Point(237, 160)
+        Me.grpOutput.Name = "grpOutput"
+        Me.grpOutput.Size = New System.Drawing.Size(123, 91)
+        Me.grpOutput.TabIndex = 13
+        Me.grpOutput.TabStop = False
+        Me.grpOutput.Text = "Output"
         '
-        'rdoSingleGraphs
+        'ucrRdoFacets
         '
-        Me.rdoSingleGraphs.AutoSize = True
-        Me.rdoSingleGraphs.Location = New System.Drawing.Point(237, 216)
-        Me.rdoSingleGraphs.Name = "rdoSingleGraphs"
-        Me.rdoSingleGraphs.Size = New System.Drawing.Size(91, 17)
-        Me.rdoSingleGraphs.TabIndex = 6
-        Me.rdoSingleGraphs.TabStop = True
-        Me.rdoSingleGraphs.Text = "Single Graphs"
-        Me.rdoSingleGraphs.UseVisualStyleBackColor = True
+        Me.ucrRdoFacets.Checked = False
+        Me.ucrRdoFacets.Location = New System.Drawing.Point(6, 19)
+        Me.ucrRdoFacets.Name = "ucrRdoFacets"
+        Me.ucrRdoFacets.Size = New System.Drawing.Size(100, 20)
+        Me.ucrRdoFacets.strParameterName = ""
+        Me.ucrRdoFacets.TabIndex = 10
         '
-        'rdoFacets
+        'ucrRdoSingleGraphs
         '
-        Me.rdoFacets.AutoSize = True
-        Me.rdoFacets.Location = New System.Drawing.Point(237, 171)
-        Me.rdoFacets.Name = "rdoFacets"
-        Me.rdoFacets.Size = New System.Drawing.Size(57, 17)
-        Me.rdoFacets.TabIndex = 4
-        Me.rdoFacets.TabStop = True
-        Me.rdoFacets.Text = "Facets"
-        Me.rdoFacets.UseVisualStyleBackColor = True
+        Me.ucrRdoSingleGraphs.Checked = False
+        Me.ucrRdoSingleGraphs.Location = New System.Drawing.Point(6, 67)
+        Me.ucrRdoSingleGraphs.Name = "ucrRdoSingleGraphs"
+        Me.ucrRdoSingleGraphs.Size = New System.Drawing.Size(100, 20)
+        Me.ucrRdoSingleGraphs.strParameterName = ""
+        Me.ucrRdoSingleGraphs.TabIndex = 12
+        '
+        'ucrRdoCombine
+        '
+        Me.ucrRdoCombine.Checked = False
+        Me.ucrRdoCombine.Location = New System.Drawing.Point(6, 43)
+        Me.ucrRdoCombine.Name = "ucrRdoCombine"
+        Me.ucrRdoCombine.Size = New System.Drawing.Size(100, 20)
+        Me.ucrRdoCombine.strParameterName = ""
+        Me.ucrRdoCombine.TabIndex = 11
         '
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(235, 244)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(243, 257)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkFlip.strParameterName = ""
         Me.ucrChkFlip.TabIndex = 9
         '
         'ucrOneVarGraphSave
         '
-        Me.ucrOneVarGraphSave.Location = New System.Drawing.Point(10, 244)
+        Me.ucrOneVarGraphSave.Location = New System.Drawing.Point(10, 257)
         Me.ucrOneVarGraphSave.Name = "ucrOneVarGraphSave"
         Me.ucrOneVarGraphSave.Size = New System.Drawing.Size(265, 20)
         Me.ucrOneVarGraphSave.TabIndex = 8
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 270)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 283)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrReceiverOneVarGraph
         '
-        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(237, 55)
+        Me.ucrReceiverOneVarGraph.frmParent = Me
+        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(237, 48)
         Me.ucrReceiverOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
         Me.ucrReceiverOneVarGraph.Selector = Nothing
         Me.ucrReceiverOneVarGraph.Size = New System.Drawing.Size(123, 110)
+        Me.ucrReceiverOneVarGraph.strParameterName = ""
         Me.ucrReceiverOneVarGraph.TabIndex = 2
         '
         'ucrSelectorOneVarGraph
@@ -124,17 +135,16 @@ Partial Class dlgOneVariableGraph
         Me.ucrSelectorOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarGraph.Name = "ucrSelectorOneVarGraph"
         Me.ucrSelectorOneVarGraph.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOneVarGraph.strParameterName = ""
         Me.ucrSelectorOneVarGraph.TabIndex = 0
         '
         'dlgOneVariableGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 333)
+        Me.ClientSize = New System.Drawing.Size(418, 337)
+        Me.Controls.Add(Me.grpOutput)
         Me.Controls.Add(Me.ucrChkFlip)
-        Me.Controls.Add(Me.rdoFacets)
-        Me.Controls.Add(Me.rdoSingleGraphs)
-        Me.Controls.Add(Me.rdoCombineGraph)
         Me.Controls.Add(Me.ucrOneVarGraphSave)
         Me.Controls.Add(Me.cmdGraphOptions)
         Me.Controls.Add(Me.ucrBase)
@@ -147,6 +157,7 @@ Partial Class dlgOneVariableGraph
         Me.Name = "dlgOneVariableGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "One Variable Graph"
+        Me.grpOutput.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -158,8 +169,9 @@ Partial Class dlgOneVariableGraph
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents cmdGraphOptions As Button
     Friend WithEvents ucrOneVarGraphSave As ucrSaveGraph
-    Friend WithEvents rdoCombineGraph As RadioButton
-    Friend WithEvents rdoSingleGraphs As RadioButton
-    Friend WithEvents rdoFacets As RadioButton
     Friend WithEvents ucrChkFlip As ucrCheck
+    Friend WithEvents ucrRdoSingleGraphs As ucrRadio
+    Friend WithEvents ucrRdoCombine As ucrRadio
+    Friend WithEvents ucrRdoFacets As ucrRadio
+    Friend WithEvents grpOutput As GroupBox
 End Class
