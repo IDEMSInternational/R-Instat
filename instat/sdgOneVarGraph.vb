@@ -17,19 +17,17 @@ Imports instat
 Imports instat.Translations
 Public Class sdgOneVarGraph
     Public bFirstLoad As Boolean = True
+    Public bControlsInitialised As Boolean = False
     Public clsGraphOneVariable As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            InitialiseDialog()
             bFirstLoad = False
         End If
         autoTranslate(Me)
-        UpdateControls(Me, clsGraphOneVariable)
     End Sub
 
-
-    Public Sub InitialiseDialog()
+    Public Sub InitialiseControls()
         Dim lstNumericPairs As New List(Of KeyValuePair(Of String, String))
         Dim lstCategoricalPairs As New List(Of KeyValuePair(Of String, String))
 
@@ -51,35 +49,28 @@ Public Class sdgOneVarGraph
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
         ucrInputCategorical.SetItems(lstCategoricalPairs)
 
-        ucrInputNumeric.SetParameterName("numeric")
-        ucrInputCategorical.SetParameterName("categorical")
+        ucrInputNumeric.strParameterName = "numeric"
+        ucrInputCategorical.strParameterName = "categorical"
 
-        'TODO See if we can get the Text property on the Properties tab in design view to avoid this
-        ucrChkSpecifyLayout.SetParameterName("ncol")
         ucrChkSpecifyLayout.SetText("Specify Layout")
-        ucrChkSpecifyLayout.SetLinkedControl(ucrNudNumberofColumns)
-        ucrChkSpecifyLayout.SetIsParameterPresent()
+        ucrChkSpecifyLayout.bChangeParameterValue = False
+        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
+        ucrChkFreeScaleAxisforFacets.strParameterName = "free_scale_axis"
+        ucrChkFreeScaleAxisforFacets.SetDefault("FALSE")
 
-        ucrNudNumberofColumns.SetParameterName("ncol")
-        ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
-        ucrNudNumberofColumns.bAddIfParameterNotPresent = False
-        'This needs to be done last as it changes the Value because default value is 0.
-        'If not done last then R code may be updated worngly because its happening before all properties of the control are set
-        'This line is needed if there already a value for the nud in the RFunction, otherwise setting min/max may override the RFunction's value
-        ucrNudNumberofColumns.UpdateControl(clsGraphOneVariable)
+        ucrNudNumberofColumns.strParameterName = "ncol"
         ucrNudNumberofColumns.SetMinMax(1, 10)
+        ucrNudNumberofColumns.SetLabel(lblNumberofColumns)
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, bReset As Boolean)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
         clsGraphOneVariable = clsNewRFunction
-    End Sub
-
-    Private Sub CoreControlsValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScaleAxisforFacets.ControlValueChanged, ucrChkSpecifyLayout.ControlContentsChanged, ucrInputCategorical.ControlContentsChanged, ucrInputNumeric.ControlContentsChanged, ucrNudNumberofColumns.ControlContentsChanged
-        ucrChangedControl.UpdateRCode(clsGraphOneVariable)
-        'After one control has edited the code, other controls may need to be updated
-        'Could make more efficient by only updating controls "linked" to ucrChangedControl, but for this this seems a simple solution.
-        UpdateControls(Me, clsGraphOneVariable)
+        SetRCode(Me, clsGraphOneVariable, bReset)
     End Sub
 End Class

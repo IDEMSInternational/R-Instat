@@ -238,8 +238,8 @@ Public Class ucrReceiverSingle
         RemoveSelected()
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        Throw New NotImplementedException()
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
     End Sub
 
     Private Sub Selector_DataFrameChanged() Handles Selector.DataFrameChanged
