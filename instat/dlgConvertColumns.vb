@@ -94,23 +94,32 @@ Public Class dlgConvertColumns
         If rdoFactor.Checked Then
             grpFactorToNumericOptions.Visible = False
             chkNumberOfDigits.Visible = True
+            chkNumberOfDigits.Checked = True
+            NumberOfDigits()
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
         ElseIf rdoNumeric.Checked Then
             chkNumberOfDigits.Visible = False
             grpFactorToNumericOptions.Visible = True
+            ucrBase.clsRsyntax.RemoveParameter("set_digits")
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
         ElseIf rdoCharacter.Checked Then
+            ucrBase.clsRsyntax.RemoveParameter("set_digits")
             chkNumberOfDigits.Visible = False
             grpFactorToNumericOptions.Visible = False
+            ucrBase.clsRsyntax.RemoveParameter("set_digits")
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "character" & Chr(34))
         ElseIf rdoInteger.Checked Then
+            ucrBase.clsRsyntax.RemoveParameter("set_digits")
             chkNumberOfDigits.Visible = False
             grpFactorToNumericOptions.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "integer" & Chr(34))
         ElseIf rdoOrderedFactor.Checked Then
             chkNumberOfDigits.Visible = True
+            chkNumberOfDigits.Checked = True
+            NumberOfDigits()
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
         Else
+            ucrBase.clsRsyntax.RemoveParameter("set_digits")
             chkNumberOfDigits.Visible = False
             'the else case should never happen but is there just in case
             ucrBase.clsRsyntax.RemoveParameter("to_type")
