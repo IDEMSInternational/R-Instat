@@ -38,7 +38,6 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub SetDefaults()
-        ucrDataFrameCopySheets.Reset()
         If ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "" Then
             ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
         Else
@@ -47,7 +46,8 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub ReopenDialog()
-        SetDefaults()
+        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
+        ucrDataFrameCopySheets.Reset()
     End Sub
 
     Private Sub InitialiseDialog()

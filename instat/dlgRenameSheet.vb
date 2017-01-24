@@ -31,7 +31,8 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub ReopenDialog()
-        SetDefaults()
+        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
+        ucrDataFrameToRename.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -40,7 +41,6 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub SetDefaults()
-        ucrDataFrameToRename.Reset()
         ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
         ucrInputNewName.Focus()
         ucrInputNewName.SetValidationTypeAsRVariable()
