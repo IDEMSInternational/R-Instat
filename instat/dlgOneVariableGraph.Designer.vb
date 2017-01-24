@@ -72,7 +72,6 @@ Partial Class dlgOneVariableGraph
         Me.ucrRdoFacets.Location = New System.Drawing.Point(6, 19)
         Me.ucrRdoFacets.Name = "ucrRdoFacets"
         Me.ucrRdoFacets.Size = New System.Drawing.Size(100, 20)
-        Me.ucrRdoFacets.strParameterName = ""
         Me.ucrRdoFacets.TabIndex = 10
         '
         'ucrRdoSingleGraphs
@@ -81,7 +80,6 @@ Partial Class dlgOneVariableGraph
         Me.ucrRdoSingleGraphs.Location = New System.Drawing.Point(6, 67)
         Me.ucrRdoSingleGraphs.Name = "ucrRdoSingleGraphs"
         Me.ucrRdoSingleGraphs.Size = New System.Drawing.Size(100, 20)
-        Me.ucrRdoSingleGraphs.strParameterName = ""
         Me.ucrRdoSingleGraphs.TabIndex = 12
         '
         'ucrRdoCombine
@@ -90,7 +88,6 @@ Partial Class dlgOneVariableGraph
         Me.ucrRdoCombine.Location = New System.Drawing.Point(6, 43)
         Me.ucrRdoCombine.Name = "ucrRdoCombine"
         Me.ucrRdoCombine.Size = New System.Drawing.Size(100, 20)
-        Me.ucrRdoCombine.strParameterName = ""
         Me.ucrRdoCombine.TabIndex = 11
         '
         'ucrChkFlip
@@ -99,7 +96,6 @@ Partial Class dlgOneVariableGraph
         Me.ucrChkFlip.Location = New System.Drawing.Point(243, 257)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkFlip.strParameterName = ""
         Me.ucrChkFlip.TabIndex = 9
         '
         'ucrOneVarGraphSave
@@ -124,7 +120,6 @@ Partial Class dlgOneVariableGraph
         Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
         Me.ucrReceiverOneVarGraph.Selector = Nothing
         Me.ucrReceiverOneVarGraph.Size = New System.Drawing.Size(123, 110)
-        Me.ucrReceiverOneVarGraph.strParameterName = ""
         Me.ucrReceiverOneVarGraph.TabIndex = 2
         '
         'ucrSelectorOneVarGraph
@@ -135,7 +130,6 @@ Partial Class dlgOneVariableGraph
         Me.ucrSelectorOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarGraph.Name = "ucrSelectorOneVarGraph"
         Me.ucrSelectorOneVarGraph.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorOneVarGraph.strParameterName = ""
         Me.ucrSelectorOneVarGraph.TabIndex = 0
         '
         'dlgOneVariableGraph

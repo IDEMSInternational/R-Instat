@@ -67,7 +67,7 @@ Public Class dlgOneVariableGraph
         ucrReceiverOneVarGraph.SetParameterName("columns")
         ucrReceiverOneVarGraph.SetParameterIsString()
 
-        ucrSelectorOneVarGraph.strParameterName = "data_name"
+        ucrSelectorOneVarGraph.SetParameterName("data_name")
         ucrSelectorOneVarGraph.SetParameterIsString()
         clsDefaultRFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
 
