@@ -31,7 +31,7 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub ReopenDialog()
-
+        SetDefaults()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -40,6 +40,7 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub SetDefaults()
+        ucrDataFrameToRename.Reset()
         ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
         ucrInputNewName.Focus()
         ucrInputNewName.SetValidationTypeAsRVariable()
