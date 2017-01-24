@@ -160,6 +160,12 @@ Public Class ucrReceiverMultiple
                 Case "dataframe"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                     clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
+                Case "key"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+                    clsGetVariablesFunc.AddParameter("key_name", GetVariableNames())
+                Case "link"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_links")
+                    clsGetVariablesFunc.AddParameter("link_name", GetVariableNames())
             End Select
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)

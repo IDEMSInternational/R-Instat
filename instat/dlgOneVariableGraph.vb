@@ -45,12 +45,6 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub InitialiseDialog()
-        'Define the default RFunction
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
-        clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-        clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultRFunction.AddParameter("coord_flip", "TRUE")
 
         ucrPnlOutput.SetParameter(New RParameter("output"))
         ucrPnlOutput.AddRadioButton(rdoFacets, Chr(34) & "facets" & Chr(34))
@@ -64,7 +58,6 @@ Public Class dlgOneVariableGraph
 
         ucrSelectorOneVarGraph.SetParameter(New RParameter("data_name"))
         ucrSelectorOneVarGraph.SetParameterIsString()
-        clsDefaultRFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
 
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameter(New RParameter("coord_flip"))
@@ -76,6 +69,13 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
+
+        'Define the default RFunction
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsDefaultRFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
     End Sub
 
     Private Sub ReopenDialog()
@@ -134,9 +134,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     'When any of the ucrCore controls have been changed we update the R Code to match the contents
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged, ucrChkFlip.ControlValueChanged, ucrReceiverOneVarGraph.ControlValueChanged, ucrSelectorOneVarGraph.ControlValueChanged
-        'The control that has changed updates the R code
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarGraph.ControlValueChanged
         CheckDataType()
-        ucrChangedControl.UpdateRCode()
     End Sub
 End Class
