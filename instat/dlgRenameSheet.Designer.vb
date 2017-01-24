@@ -33,33 +33,34 @@ Partial Class dlgRenameSheet
         Me.lblNewName.Location = New System.Drawing.Point(194, 10)
         Me.lblNewName.Name = "lblNewName"
         Me.lblNewName.Size = New System.Drawing.Size(100, 23)
-        Me.lblNewName.TabIndex = 2
+        Me.lblNewName.TabIndex = 1
         Me.lblNewName.Tag = "New_Name"
         Me.lblNewName.Text = "New Name:"
         '
         'ucrInputNewName
         '
+        Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
         Me.ucrInputNewName.Location = New System.Drawing.Point(194, 28)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(131, 22)
-        Me.ucrInputNewName.TabIndex = 0
+        Me.ucrInputNewName.TabIndex = 2
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 74)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 3
         '
         'ucrDataFrameToRename
         '
-        Me.ucrDataFrameToRename.bUseCurrentFilter = False
+        Me.ucrDataFrameToRename.bUseCurrentFilter = True
         Me.ucrDataFrameToRename.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameToRename.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameToRename.Name = "ucrDataFrameToRename"
         Me.ucrDataFrameToRename.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameToRename.TabIndex = 3
+        Me.ucrDataFrameToRename.TabIndex = 0
         '
         'dlgRenameSheet
         '
