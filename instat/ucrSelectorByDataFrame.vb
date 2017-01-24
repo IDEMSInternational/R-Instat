@@ -92,11 +92,11 @@ Public Class ucrSelectorByDataFrame
         ucrAvailableDataFrames.UpdateControl(bReset)
     End Sub
 
-    Public Overrides Sub SetParameterName(strNewParameterName As String)
+    Public Overrides Sub SetParameter(clsNewParameter As RParameter)
         If bHasOwnParameter Then
-            MyBase.SetParameterName(strNewParameterName)
+            MyBase.SetParameter(clsNewParameter)
         Else
-            ucrAvailableDataFrames.SetParameterName(strNewParameterName)
+            ucrAvailableDataFrames.SetParameter(clsNewParameter)
         End If
     End Sub
 

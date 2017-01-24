@@ -172,11 +172,8 @@ Public Class ucrCore
         RaiseEvent ControlValueChanged(Me)
     End Sub
 
-    Public Overridable Sub SetParameterName(strNewParameterName As String)
-        If clsParameter Is Nothing Then
-            clsParameter = New RParameter
-        End If
-        clsParameter.strArgumentName = strNewParameterName
+    Public Overridable Sub SetParameter(clsNewParameter As RParameter)
+        clsParameter = clsNewParameter
     End Sub
 
     Public Overridable Function GetParameterName() As String
