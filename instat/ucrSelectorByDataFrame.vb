@@ -79,10 +79,6 @@ Public Class ucrSelectorByDataFrame
         ucrAvailableDataFrames.SetParameterIsRFunction()
     End Sub
 
-    Public Sub SetParameterName(strParamName As String)
-        ucrAvailableDataFrames.strParameterName = strParamName
-    End Sub
-
     Private Sub ucrAvailableDataFrames_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrAvailableDataFrames.ControlContentsChanged
         OnControlContentsChanged()
     End Sub
@@ -96,21 +92,21 @@ Public Class ucrSelectorByDataFrame
         ucrAvailableDataFrames.UpdateControl(bReset)
     End Sub
 
-    Public Overrides Property strParameterName As String
-        Get
-            If bHasOwnParameter Then
-                Return MyBase.strParameterName
-            Else
-                Return ucrAvailableDataFrames.strParameterName
-            End If
-        End Get
-        Set(bNewName As String)
-            If bHasOwnParameter Then
-                MyBase.strParameterName = bNewName
-            End If
-            ucrAvailableDataFrames.strParameterName = bNewName
-        End Set
-    End Property
+    Public Overrides Sub SetParameterName(strNewParameterName As String)
+        If bHasOwnParameter Then
+            MyBase.SetParameterName(strNewParameterName)
+        Else
+            ucrAvailableDataFrames.SetParameterName(strNewParameterName)
+        End If
+    End Sub
+
+    Public Overrides Function GetParameterName() As String
+        If bHasOwnParameter Then
+            Return MyBase.GetParameterName()
+        Else
+            Return ucrAvailableDataFrames.GetParameterName()
+        End If
+    End Function
 
     Public Overrides Function IsDefault() As Boolean
         If bHasOwnParameter Then

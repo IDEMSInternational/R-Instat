@@ -73,7 +73,7 @@ Module mdlCoreControl
 
     Public Sub SetParameterName(lstControls As ucrCore(), strParameterName As String)
         For Each ucrTemp As ucrCore In lstControls
-            ucrTemp.strParameterName = strParameterName
+            ucrTemp.SetParameterName(strParameterName)
         Next
     End Sub
 End Module
