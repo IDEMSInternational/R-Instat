@@ -2140,6 +2140,12 @@
     <Compile Include="ucrWPFRichTextBox.xaml.vb">
       <DependentUpon>ucrWPFRichTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UcrPanel.Designer.vb">
+      <DependentUpon>UcrPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UcrPanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgAddComment.resx">
@@ -4700,6 +4706,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablesAsFactor.sw-KE.resx">
       <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrPanel.resx">
+      <DependentUpon>UcrPanel.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
