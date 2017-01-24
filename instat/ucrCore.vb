@@ -17,8 +17,10 @@
 Imports instat
 
 Public Class ucrCore
-    'Name of parameter control sets
-    Protected strParameterName As String
+    'Parameter that is this control manages
+    Protected clsParameter As New RParameter
+    'Default value of the control
+    Protected objDefault As Object
     'A control it's linked to i.e. dependant on/depends on 
     Protected ucrLinkedControl As ucrCore
     'The name of a parameter linked to the control which determines if the control is visible/enabled
@@ -40,12 +42,32 @@ Public Class ucrCore
     Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
 
     Public Sub SetParameterName(strParamName As String)
-        strParameterName = strParamName
+        clsParameter.strArgumentName = strParamName
     End Sub
 
     Public Function GetParameterName() As String
-        Return strParameterName
+        Return clsParameter.strArgumentName
     End Function
+
+    Public Sub SetParameter(clsNewParam As RParameter)
+        clsParameter = clsNewParam
+    End Sub
+
+    Public Function GetParameter() As RParameter
+        Return clsParameter
+    End Function
+
+    Public Sub SetDefault(objNewDefault As Object)
+        objDefault = objNewDefault
+    End Sub
+
+    Public Function GetDefault() As Object
+        Return objDefault
+    End Function
+
+    Public Overridable Sub SetToDefault()
+
+    End Sub
 
     Public Overridable Sub SetLinkedControl(ucrNewLinkedControl As ucrCore)
         ucrLinkedControl = ucrNewLinkedControl
@@ -56,32 +78,34 @@ Public Class ucrCore
     End Function
 
     'Update the control based on the the code in RCodeStructure
-    Public Overridable Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        If strLinkedParameterName <> "" Then
-            If clsRCodeObject.GetParameter(strLinkedParameterName) Is Nothing Then
-                If bHideIfLinkedParameterMissing Then
-                    Visible = False
+    Public Overridable Sub UpdateControl(Optional clsRCodeObject As RCodeStructure = Nothing)
+        If clsRCodeObject IsNot Nothing Then
+            If strLinkedParameterName <> "" Then
+                If clsRCodeObject.GetParameter(strLinkedParameterName) Is Nothing Then
+                    If bHideIfLinkedParameterMissing Then
+                        Visible = False
+                    Else
+                        Visible = True
+                    End If
+                    If bDisabledIfLinkedParameterMissing Then
+                        Enabled = False
+                    Else
+                        Enabled = True
+                    End If
                 Else
-                    Visible = True
-                End If
-                If bDisabledIfLinkedParameterMissing Then
-                    Enabled = False
-                Else
-                    Enabled = True
-                End If
-            Else
-                If bHideIfLinkedParameterMissing Then
-                    Visible = True
-                End If
-                If bDisabledIfLinkedParameterMissing Then
-                    Enabled = True
+                    If bHideIfLinkedParameterMissing Then
+                        Visible = True
+                    End If
+                    If bDisabledIfLinkedParameterMissing Then
+                        Enabled = True
+                    End If
                 End If
             End If
         End If
     End Sub
 
     'Update the RCode based on the contents of the control (reverse of above)
-    Public Overridable Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
+    Public Overridable Sub UpdateRCode(clsRCodeObject As RCodeStructure)
     End Sub
 
     'Set a linked paramter name and what the control should do when the parameter is not in the R code
