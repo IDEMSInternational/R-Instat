@@ -1463,8 +1463,18 @@ data_object$set("public", "has_key", function() {
 }
 )
 
-data_object$set("public", "get_keys", function() {
-  return(private$keys)
+data_object$set("public", "get_keys", function(key_name) {
+  if(!missing(key_name)) {
+    if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
+    return(private$keys[[key_name]])
+  }
+  else return(private$keys)
+}
+)
+
+data_object$set("public", "remove_key", function(key_name) {
+  if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
+  private$keys[[key_name]] <- NULL
 }
 )
 
@@ -1966,5 +1976,16 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
       self$sort_dataframe(col_names = c(date_name, factors))
     }
   }
+}
+)
+
+data_object$set("public","get_key_names", function(include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  key_names <- names(private$keys)
+  if(as_list) {
+    out <- list()
+    out[[self$get_metadata(data_name_label)]] <- key_names
+  }
+  else out <- key_names
+  return(out)
 }
 )
