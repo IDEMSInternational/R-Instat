@@ -15,11 +15,5 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Public Class UcrPanel
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateControl(clsRCodeObject)
-    End Sub
 
-    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        MyBase.UpdateRCode(clsRFunction, clsROperator)
-    End Sub
 End Class
