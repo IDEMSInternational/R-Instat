@@ -706,18 +706,24 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
-  ind <- c()
+  link_name <- ""
   for(i in seq_along(private$.links)) {
     if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
-      ind <- c(ind, i)
+      link_name <- names(private$.links)[i]
+      break
     }
   }
-  #TODO Should this be delete or disable?
-  if(length(ind) > 0) {
-    private$.links[ind] <- NULL
-    message(length(ind), " links removed")
+  if(link_name != "") {
+    #TODO Should this be delete or disable?
+    self$remove_link(link_name)
   }
 } 
+)
+
+instat_object$set("public", "remove_link", function(link_name) {
+  if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
+  private$.links[[link_name]] <- NULL
+}
 )
 
 instat_object$set("public", "get_column_factor_levels", function(data_name,col_name = "") {
