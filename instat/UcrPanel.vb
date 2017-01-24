@@ -15,5 +15,17 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Public Class UcrPanel
+    Public Sub AddRadioButtons(lstRadioButtons As RadioButton(), Optional bRepositionControls As Boolean = True)
+        pnlRadios.Controls.AddRange(lstRadioButtons)
+        For Each rdoTemp As RadioButton In lstRadioButtons
+            AddHandler rdoTemp.CheckedChanged, AddressOf OnControlValueChanged
+            If bRepositionControls Then
+                If rdoTemp.Location.X - Me.Location.X < 0 OrElse rdoTemp.Location.Y - Me.Location.Y < 0 Then
+                    MsgBox("Developer error: Radio button is not within the bounds of the panel. Reposition the radio button in the designer.")
+                End If
+                rdoTemp.Location = New System.Drawing.Point(Math.Max(rdoTemp.Location.X - Me.Location.X, 0), Math.Max(rdoTemp.Location.Y - Me.Location.Y, 0))
+            End If
+        Next
+    End Sub
 
 End Class
