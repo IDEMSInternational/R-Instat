@@ -25,14 +25,15 @@ Partial Class dlgOneVariableGraph
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.cmdGraphOptions = New System.Windows.Forms.Button()
         Me.grpOutput = New System.Windows.Forms.GroupBox()
-        Me.ucrRdoFacets = New instat.ucrRadio()
-        Me.ucrRdoSingleGraphs = New instat.ucrRadio()
-        Me.ucrRdoCombine = New instat.ucrRadio()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrOneVarGraphSave = New instat.ucrSaveGraph()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverOneVarGraph = New instat.ucrReceiverMultiple()
         Me.ucrSelectorOneVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrPnlOutput = New instat.UcrPanel()
+        Me.rdoFacets = New System.Windows.Forms.RadioButton()
+        Me.rdoCombine = New System.Windows.Forms.RadioButton()
+        Me.rdoSingleGraphs = New System.Windows.Forms.RadioButton()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -56,39 +57,16 @@ Partial Class dlgOneVariableGraph
         '
         'grpOutput
         '
-        Me.grpOutput.Controls.Add(Me.ucrRdoFacets)
-        Me.grpOutput.Controls.Add(Me.ucrRdoSingleGraphs)
-        Me.grpOutput.Controls.Add(Me.ucrRdoCombine)
+        Me.grpOutput.Controls.Add(Me.rdoSingleGraphs)
+        Me.grpOutput.Controls.Add(Me.rdoCombine)
+        Me.grpOutput.Controls.Add(Me.rdoFacets)
+        Me.grpOutput.Controls.Add(Me.ucrPnlOutput)
         Me.grpOutput.Location = New System.Drawing.Point(237, 160)
         Me.grpOutput.Name = "grpOutput"
         Me.grpOutput.Size = New System.Drawing.Size(123, 91)
         Me.grpOutput.TabIndex = 13
         Me.grpOutput.TabStop = False
         Me.grpOutput.Text = "Output"
-        '
-        'ucrRdoFacets
-        '
-        Me.ucrRdoFacets.Checked = False
-        Me.ucrRdoFacets.Location = New System.Drawing.Point(6, 19)
-        Me.ucrRdoFacets.Name = "ucrRdoFacets"
-        Me.ucrRdoFacets.Size = New System.Drawing.Size(100, 20)
-        Me.ucrRdoFacets.TabIndex = 10
-        '
-        'ucrRdoSingleGraphs
-        '
-        Me.ucrRdoSingleGraphs.Checked = False
-        Me.ucrRdoSingleGraphs.Location = New System.Drawing.Point(6, 67)
-        Me.ucrRdoSingleGraphs.Name = "ucrRdoSingleGraphs"
-        Me.ucrRdoSingleGraphs.Size = New System.Drawing.Size(100, 20)
-        Me.ucrRdoSingleGraphs.TabIndex = 12
-        '
-        'ucrRdoCombine
-        '
-        Me.ucrRdoCombine.Checked = False
-        Me.ucrRdoCombine.Location = New System.Drawing.Point(6, 43)
-        Me.ucrRdoCombine.Name = "ucrRdoCombine"
-        Me.ucrRdoCombine.Size = New System.Drawing.Size(100, 20)
-        Me.ucrRdoCombine.TabIndex = 11
         '
         'ucrChkFlip
         '
@@ -132,6 +110,46 @@ Partial Class dlgOneVariableGraph
         Me.ucrSelectorOneVarGraph.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorOneVarGraph.TabIndex = 0
         '
+        'ucrPnlOutput
+        '
+        Me.ucrPnlOutput.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        Me.ucrPnlOutput.Size = New System.Drawing.Size(114, 69)
+        Me.ucrPnlOutput.TabIndex = 0
+        '
+        'rdoFacets
+        '
+        Me.rdoFacets.AutoSize = True
+        Me.rdoFacets.Location = New System.Drawing.Point(10, 21)
+        Me.rdoFacets.Name = "rdoFacets"
+        Me.rdoFacets.Size = New System.Drawing.Size(57, 17)
+        Me.rdoFacets.TabIndex = 1
+        Me.rdoFacets.TabStop = True
+        Me.rdoFacets.Text = "Facets"
+        Me.rdoFacets.UseVisualStyleBackColor = True
+        '
+        'rdoCombine
+        '
+        Me.rdoCombine.AutoSize = True
+        Me.rdoCombine.Location = New System.Drawing.Point(10, 43)
+        Me.rdoCombine.Name = "rdoCombine"
+        Me.rdoCombine.Size = New System.Drawing.Size(104, 17)
+        Me.rdoCombine.TabIndex = 2
+        Me.rdoCombine.TabStop = True
+        Me.rdoCombine.Text = "Combined Graph"
+        Me.rdoCombine.UseVisualStyleBackColor = True
+        '
+        'rdoSingleGraphs
+        '
+        Me.rdoSingleGraphs.AutoSize = True
+        Me.rdoSingleGraphs.Location = New System.Drawing.Point(10, 65)
+        Me.rdoSingleGraphs.Name = "rdoSingleGraphs"
+        Me.rdoSingleGraphs.Size = New System.Drawing.Size(91, 17)
+        Me.rdoSingleGraphs.TabIndex = 3
+        Me.rdoSingleGraphs.TabStop = True
+        Me.rdoSingleGraphs.Text = "Single Graphs"
+        Me.rdoSingleGraphs.UseVisualStyleBackColor = True
+        '
         'dlgOneVariableGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -152,6 +170,7 @@ Partial Class dlgOneVariableGraph
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "One Variable Graph"
         Me.grpOutput.ResumeLayout(False)
+        Me.grpOutput.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -164,8 +183,9 @@ Partial Class dlgOneVariableGraph
     Friend WithEvents cmdGraphOptions As Button
     Friend WithEvents ucrOneVarGraphSave As ucrSaveGraph
     Friend WithEvents ucrChkFlip As ucrCheck
-    Friend WithEvents ucrRdoSingleGraphs As ucrRadio
-    Friend WithEvents ucrRdoCombine As ucrRadio
-    Friend WithEvents ucrRdoFacets As ucrRadio
     Friend WithEvents grpOutput As GroupBox
+    Friend WithEvents rdoSingleGraphs As RadioButton
+    Friend WithEvents rdoCombine As RadioButton
+    Friend WithEvents rdoFacets As RadioButton
+    Friend WithEvents ucrPnlOutput As UcrPanel
 End Class

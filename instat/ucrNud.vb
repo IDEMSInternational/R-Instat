@@ -68,7 +68,7 @@ Public Class ucrNud
     End Sub
 
     Private Sub nudUpDown_TextChanged(sender As Object, e As EventArgs) Handles nudUpDown.TextChanged
-        If bChangeParameterValue Then
+        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
             If nudUpDown.Text <> "" Then
                 clsParameter.SetArgumentValue(nudUpDown.Value)
             Else

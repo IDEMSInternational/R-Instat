@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Public Class UcrPanel
-    Private lstRadioButtonValues As List(Of KeyValuePair(Of RadioButton, String))
+    Private lstRadioButtonValues As New List(Of KeyValuePair(Of RadioButton, String))
 
-    Public Sub AddRadioButtons(lstRadioButtons As RadioButton(), Optional bRepositionControls As Boolean = True)
+    Public Sub AddRadioButtonRange(lstRadioButtons As RadioButton(), Optional bRepositionControls As Boolean = True)
         pnlRadios.Controls.AddRange(lstRadioButtons)
         For Each rdoTemp As RadioButton In lstRadioButtons
             AddHandler rdoTemp.CheckedChanged, AddressOf RadioButtons_CheckedChanged
@@ -30,17 +30,23 @@ Public Class UcrPanel
         Next
     End Sub
 
-    Public Sub AddRadioButtons(lstNewRadioButtonValues As KeyValuePair(Of RadioButton, String)(), Optional bRepositionControls As Boolean = True)
+    Public Sub AddRadioButtonRange(lstNewRadioButtonValues As List(Of KeyValuePair(Of RadioButton, String)), Optional bRepositionControls As Boolean = True)
         Dim lstRadioButtons As New List(Of RadioButton)
 
         For Each kvpTemp As KeyValuePair(Of RadioButton, String) In lstNewRadioButtonValues
             lstRadioButtons.Add(kvpTemp.Key)
         Next
-        AddRadioButtons(lstRadioButtons.ToArray(), bRepositionControls)
+        AddRadioButtonRange(lstRadioButtons.ToArray(), bRepositionControls)
         lstRadioButtonValues.AddRange(lstNewRadioButtonValues)
     End Sub
 
-    Public Sub SetParameterValue(rdoTemp As RadioButton, strValue As String)
+    Public Sub AddRadioButton(rdoTemp As RadioButton, Optional strValue As String = "")
+        Dim kvpTemp As New KeyValuePair(Of RadioButton, String)(rdoTemp, strValue)
+
+        AddRadioButtonRange({rdoTemp})
+        If strValue <> "" Then
+            lstRadioButtonValues.Add(kvpTemp)
+        End If
     End Sub
 
     Public Sub RadioButtons_CheckedChanged()
