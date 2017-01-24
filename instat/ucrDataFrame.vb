@@ -90,15 +90,14 @@ Public Class ucrDataFrame
     End Sub
 
     Public Sub UpdateParameter()
-        If clsParameter Is Nothing Then
-            clsParameter = New RParameter
+        If clsParameter IsNot Nothing Then
+            If bParameterIsString Then
+                clsParameter.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
+            ElseIf bParameterIsRFunction Then
+                clsParameter.SetArgument(clsCurrDataFrame)
+            End If
+            UpdateRCode()
         End If
-        If bParameterIsString Then
-            clsParameter.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
-        ElseIf bParameterIsRFunction Then
-            clsParameter.SetArgument(clsCurrDataFrame)
-        End If
-        UpdateRCode()
     End Sub
 
     Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
