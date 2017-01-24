@@ -52,6 +52,8 @@ Public Class dlgConvertColumns
         rdoConvertLevels.Checked = True
         rdoFactor.Checked = True
         ConvertTo()
+        chkNumberOfDigits.Checked = True
+        NumberOfDigits()
         SetToFactorStatus(bToFactorOnly)
         TestOKEnabled()
     End Sub
