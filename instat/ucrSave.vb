@@ -33,7 +33,7 @@ Public Class ucrSave
         bShowLabel = False
         bIsComboBox = True
         LabelOrCheckboxSettings()
-        SetIsComboBox(bIsComboBox)
+        SetIsComboBox()
         UpdateRCode()
     End Sub
 
@@ -51,13 +51,23 @@ Public Class ucrSave
         LabelOrCheckboxSettings()
     End Sub
 
-    Public Sub SetIsComboBox(bIsCombo As Boolean)
-        bIsComboBox = bIsCombo
+    Public Sub SetIsComboBox()
+        bIsComboBox = True
         If bShowCheckBox Then
             CheckedChanged()
         Else
-            ucrInputComboSave.Visible = bIsCombo
-            ucrInputTextSave.Visible = Not bIsCombo
+            ucrInputComboSave.Visible = True
+            ucrInputTextSave.Visible = False
+        End If
+    End Sub
+
+    Public Sub SetIsTextBox()
+        bIsComboBox = False
+        If bShowCheckBox Then
+            CheckedChanged()
+        Else
+            ucrInputComboSave.Visible = False
+            ucrInputTextSave.Visible = True
         End If
     End Sub
 
@@ -85,6 +95,11 @@ Public Class ucrSave
             ucrInputTextSave.Enabled = True
             lblSaveText.Visible = True
             ucrChkSave.Visible = False
+            If bIsComboBox Then
+                ucrInputComboSave.Visible = True
+            Else
+                ucrInputTextSave.Visible = True
+            End If
         ElseIf bShowCheckBox Then
             lblSaveText.Visible = False
             ucrChkSave.Visible = True
@@ -97,7 +112,7 @@ Public Class ucrSave
         End If
     End Sub
 
-    Public Sub SetSaveType(strType As String)
+    Private Sub SetSaveType(strType As String)
         strSaveType = strType
         Select Case strSaveType
             Case "column"
@@ -119,6 +134,22 @@ Public Class ucrSave
             Case Else
                 MsgBox("Developer error: unrecognised save type: " & strType)
         End Select
+    End Sub
+
+    Public Sub SetSaveTypeAsColumn()
+        SetSaveType("column")
+    End Sub
+
+    Public Sub SetSaveTypeAsDataFrame()
+        SetSaveType("dataframe")
+    End Sub
+
+    Public Sub SetSaveTypeAsGraph()
+        SetSaveType("graph")
+    End Sub
+
+    Public Sub SetSaveTypeAsModel()
+        SetSaveType("model")
     End Sub
 
     Public Sub Reset()
