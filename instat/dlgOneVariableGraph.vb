@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
     Private clsDefaultRFunction As New RFunction
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -41,11 +42,11 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
 
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        bResetSubdialog = True
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrPnlOutput.SetParameter(New RParameter("output"))
         ucrPnlOutput.AddRadioButton(rdoFacets, Chr(34) & "facets" & Chr(34))
         ucrPnlOutput.AddRadioButton(rdoCombine, Chr(34) & "combine" & Chr(34))
@@ -109,7 +110,8 @@ Public Class dlgOneVariableGraph
 
     Private Sub cmdGraph_Click(sender As Object, e As EventArgs) Handles cmdGraphOptions.Click
         ' Link the base function to the sub dialog
-        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, True)
+        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        bResetSubdialog = False
         sdgOneVarGraph.ShowDialog()
     End Sub
 
