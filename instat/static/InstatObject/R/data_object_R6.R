@@ -948,7 +948,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels", set_digits) {
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
   for(col_name in col_names){
     if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
       stop(col_name, " is not a column in ", get_metadata(data_name_label))
@@ -974,13 +974,21 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     if(to_type=="factor") {
       # Warning: this is different from expected R behaviour
       # Any ordered columns would become unordered factors
-    	 self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = FALSE))
+	  if(set_decimals){
+	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
+	  } 
+	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = FALSE))
+      }
     }
     else if(to_type =="integer") {
       self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
     }
     else if(to_type == "ordered_factor") {
-		 self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = TRUE))
+	   if(set_decimals){
+	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
+	  } 
+	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = TRUE))
+	  }
     }
     else if(to_type == "integer") {
       self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
