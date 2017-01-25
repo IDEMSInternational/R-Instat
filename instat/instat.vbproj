@@ -2089,6 +2089,12 @@
     <Compile Include="ucrReorder.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSave.Designer.vb">
+      <DependentUpon>ucrSave.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSave.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSaveGraph.Designer.vb">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </Compile>
