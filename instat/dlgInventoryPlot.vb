@@ -70,6 +70,8 @@ Public Class dlgInventoryPlot
         ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAddRecodetoData.SetDefault("FALSE")
 
+        ucrNudThreashold.SetParameter(New RParameter("threshold"))
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 359
         ucrBase.clsRsyntax.iCallType = 3
@@ -91,9 +93,10 @@ Public Class dlgInventoryPlot
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
 
         ucrNudThreashold.Value = 0.85
-        ucrNudThreashold.nudUpDown.Increment = 0.01
-        ucrNudThreashold.nudUpDown.DecimalPlaces = 2
-        ucrNudThreashold.nudUpDown.Minimum = 0.85
+        ucrNudThreashold.Minimum = 0.85
+        'ucrNudThreashold.nudUpDown.Increment = 0.01
+        'ucrNudThreashold.nudUpDown.DecimalPlaces = 2
+        'ucrNudThreashold.nudUpDown.Minimum = 0.85
 
         clsDefaultRFunction.AddParameter("threshold", ucrNudThreashold.Value)
         ucrChkAddRecodetoData.Checked = False
@@ -128,8 +131,8 @@ Public Class dlgInventoryPlot
         SetDefaults()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInventoryPlotSelector.ControlContentsChanged, ucrChkFlipCoordinates.ControlContentsChanged, ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrFacetsReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrChkAddRecodetoData.ControlContentsChanged, ucrNudThreashold.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInventoryPlotSelector.ControlContentsChanged, ucrChkFlipCoordinates.ControlContentsChanged, ucrChkAddRecodetoData.ControlContentsChanged, ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrFacetsReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrNudThreashold.ControlContentsChanged
         TestOkEnabled()
+        UpdateRCode(Me, clsDefaultRFunction)
     End Sub
-
 End Class
