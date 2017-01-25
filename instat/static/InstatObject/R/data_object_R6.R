@@ -974,7 +974,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     if(to_type=="factor") {
       # Warning: this is different from expected R behaviour
       # Any ordered columns would become unordered factors
-	  if(set_decimals){
+	  if(!set_decimals){
 	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
 	  } 
 	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = FALSE))
@@ -984,7 +984,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
     }
     else if(to_type == "ordered_factor") {
-	   if(set_decimals){
+	   if(!set_decimals){
 	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
 	  } 
 	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = TRUE))

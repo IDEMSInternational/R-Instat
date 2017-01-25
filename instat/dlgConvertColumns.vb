@@ -18,10 +18,8 @@ Imports instat.Translations
 Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
     Public bToFactorOnly As Boolean = False
-
     Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -29,14 +27,12 @@ Public Class dlgConvertColumns
         Else
             ReopenDialog()
         End If
-
         TestOKEnabled()
-
-
     End Sub
 
     Private Sub ReopenDialog()
         SetToFactorStatus(bToFactorOnly)
+        ucrSelectorDataFrameColumns.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -90,18 +86,21 @@ Public Class dlgConvertColumns
 
     Private Sub ConvertTo()
         If rdoFactor.Checked Then
+            ucrReceiverColumnsToConvert.SetExcludedDataTypes({"factor"})
             grpFactorToNumericOptions.Visible = False
             chkSpecifyDecimalsToDisplay.Visible = True
             chkSpecifyDecimalsToDisplay.Checked = False
             NumberOfDigits()
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
         ElseIf rdoNumeric.Checked Then
+            ucrReceiverColumnsToConvert.SetExcludedDataTypes({"numeric"})
             chkSpecifyDecimalsToDisplay.Visible = False
             nudDisplayDecimals.Visible = False
             grpFactorToNumericOptions.Visible = True
             ucrBase.clsRsyntax.RemoveParameter("set_digits")
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
         ElseIf rdoCharacter.Checked Then
+            ucrReceiverColumnsToConvert.SetExcludedDataTypes({"character"})
             ucrBase.clsRsyntax.RemoveParameter("set_digits")
             chkSpecifyDecimalsToDisplay.Visible = False
             nudDisplayDecimals.Visible = False
@@ -109,12 +108,14 @@ Public Class dlgConvertColumns
             ucrBase.clsRsyntax.RemoveParameter("set_digits")
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "character" & Chr(34))
         ElseIf rdoInteger.Checked Then
+            ucrReceiverColumnsToConvert.SetExcludedDataTypes({"integer"})
             ucrBase.clsRsyntax.RemoveParameter("set_digits")
             chkSpecifyDecimalsToDisplay.Visible = False
             nudDisplayDecimals.Visible = False
             grpFactorToNumericOptions.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "integer" & Chr(34))
         ElseIf rdoOrderedFactor.Checked Then
+            ucrReceiverColumnsToConvert.SetExcludedDataTypes({"factor"})
             chkSpecifyDecimalsToDisplay.Visible = True
             chkSpecifyDecimalsToDisplay.Checked = False
             NumberOfDigits()
