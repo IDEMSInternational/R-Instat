@@ -66,7 +66,7 @@ Public Class sdgOneVarGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, bReset As Boolean)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
