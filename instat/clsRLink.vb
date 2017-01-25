@@ -513,6 +513,10 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_graph_names")
                 Case "dataframe"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
+                Case "link"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_link_names")
+                Case "key"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_key_names")
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             lstView.Clear()

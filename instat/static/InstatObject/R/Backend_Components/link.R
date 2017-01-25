@@ -27,7 +27,7 @@ link$set("public", "data_clone", function() {
 }
 )
 
-instat_object$set("public", "add_link", function(from_data_frame, to_data_frame, link_pairs, type) {
+instat_object$set("public", "add_link", function(from_data_frame, to_data_frame, link_pairs, type, link_name) {
   if(length(names(link_pairs)) != length(link_pairs)) stop("link_pairs must be a named vector or list.")
   if(!self$link_exists_between(from_data_frame, to_data_frame)) {
     # This means when creating a link to single value data frame, there will be no key in to_data_frame
@@ -38,7 +38,9 @@ instat_object$set("public", "add_link", function(from_data_frame, to_data_frame,
       message("New key created")
     }
     new_link <- link$new(from_data_frame = from_data_frame, to_data_frame = to_data_frame, link_columns = list(link_pairs), type = type)
-    private$.links[[length(private$.links) + 1]] <- new_link
+    if(missing(link_name)) link_name <- next_default_item("link", names(private$.links))
+    if(link_name %in% names(private$.links)) warning("A link called ", link_name, " already exists. It wil be replaced.")
+    private$.links[[link_name]] <- new_link
   }
   else {
     index <- integer(0)
