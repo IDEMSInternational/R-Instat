@@ -237,18 +237,11 @@ dekade <- function(date) {
   }
 
 open_NetCDF <- function(nc_data){
-  #my_nc_data <- read.nc(nc_data)
-  #names(my_nc_data) #This might be necessary if the list objects may be named differently
   variables = names(nc_data$var)
   lat <- as.numeric(ncvar_get(nc_data, "lat"))
   lon <- as.numeric(ncvar_get(nc_data, "lon"))
   time <- as.numeric(ncvar_get(nc_data, "time"))
-  #lat <- var.get.nc(nc_data, "lat")
-  #lon <- var.get.nc(nc_data, "lon")
-  #time <- var.get.nc(nc_data, "time")
   period <- rep(time, each = (length(lat)*length(lon)))
- 
-  
   lat_rep <- rep(lat, each = length(lon))
   lon_rep <- rep(lon, length(lat))
   lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
@@ -271,28 +264,32 @@ open_NetCDF <- function(nc_data){
   lat_lon_df <- cbind(lat_lon, station)
   my_data <- cbind(period, lat_lon_df)
   for (current_var in variables){
-    print(current_var)
     nc_value <- c()
     dataset <- ncvar_get(nc_data, current_var)
-    # print(dataset)
-    # #var.get.nc(nc_data, current_var)
-    # for (k in 1:length(time)){
-    #   year <- dataset[1:length(lat), 1:length(lon), k]
-    #   year = as.data.frame(t(year))
-    #   year = stack(year)
-    #   g <- as.numeric(year$values)
-    #   nc_value = append(nc_value, g)
-    # }
-    
-    assign(x = current_var, value = as.data.frame(dataset))
-    names(as.name(current_var))
-    #names(as.name(current_var)) = current_var
-    #nc_value = dataset
-    
-    my_data = cbind(my_data, dataset)
+    if (length(dim(dataset))==1){
+      nc_value = dataset
+    }
+    else if (length(dim(dataset))==2){
+      year <- dataset[1:length(lat), 1:length(lon)]
+      year = as.data.frame(t(year))
+      year = stack(year)
+      g <- as.numeric(year$values)
+      nc_value = append(nc_value, g)
+    }
+    else if (length(dim(dataset))==3){
+      for (k in 1:length(time)){
+        year <- dataset[1:length(lat), 1:length(lon), k]
+        year = as.data.frame(t(year))
+        year = stack(year)
+        g <- as.numeric(year$values)
+        nc_value = append(nc_value, g)
+      }
+    }
+    else{
+      stop("The format of the data cannot be recognised")
+    }
+    my_data = cbind(my_data, nc_value)
     names(my_data)[length(names(my_data))]<-current_var
-    #print(names(my_data))
-    #data.table::setnames(my_data, "dataset", current_var)
   }
   return(list(my_data, lat_lon_df))
 }
