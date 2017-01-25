@@ -18,7 +18,7 @@ Imports instat.Translations
 
 Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
-    Private clsDefaultRFunction As New RFunction
+    Private clsDefaultFunction As New RFunction
     Private bResetSubdialog As Boolean = False
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -35,7 +35,7 @@ Public Class dlgOneVariableGraph
 
     Private Sub SetDefaults()
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
 
         ucrSelectorOneVarGraph.Reset()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
@@ -67,19 +67,19 @@ Public Class dlgOneVariableGraph
         ucrChkFlip.SetDefault("FALSE")
 
         ucrSaveGraph.SetPrefix("OneVariableGraph")
-        ucrSaveGraph.SetSaveType("graph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox(True)
+        ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         'Define the default RFunction
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
-        clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-        clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultRFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
-        clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsDefaultFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
+        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
     End Sub
 
     Private Sub ReopenDialog()
