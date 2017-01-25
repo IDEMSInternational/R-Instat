@@ -217,6 +217,9 @@ Public Class RCodeStructure
         Dim i As Integer = -1
         Dim strTempArgumentName As String = clsNewParam.strArgumentName
         clsNewParam.Position = iPosition
+        If clsNewParam.strArgumentName Is Nothing Then
+            Dim x = 1
+        End If
         If clsParameters IsNot Nothing Then
             If clsNewParam.strArgumentName IsNot Nothing Then
                 'Dim match As Predicate(Of RParameter) = Function(x) x.strArgumentName.Equals(clsParam.strArgumentName)

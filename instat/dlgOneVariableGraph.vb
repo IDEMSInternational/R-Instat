@@ -45,34 +45,22 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub InitialiseDialog()
-        'Define the default RFunction
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
-        clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-        'clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultRFunction.AddParameter("coord_flip", "TRUE")
-        clsDefaultRFunction.AddParameter("columns", "c(" & Chr(34) & "Yield" & Chr(34) & ", " & Chr(34) & "Size" & Chr(34) & ")")
 
-        ucrRdoFacets.SetText("Facets")
-        ucrRdoFacets.strValueIfChecked = Chr(34) & "facets" & Chr(34)
-        ucrRdoFacets.SetDefault(Chr(34) & "facets" & Chr(34))
-        ucrRdoSingleGraphs.SetText("Single Graphs")
-        ucrRdoSingleGraphs.strValueIfChecked = Chr(34) & "single" & Chr(34)
-        ucrRdoCombine.SetText("Combine Graphs")
-        ucrRdoCombine.strValueIfChecked = Chr(34) & "combine" & Chr(34)
-        SetParameterName({ucrRdoFacets, ucrRdoSingleGraphs, ucrRdoCombine}, "output")
+        ucrPnlOutput.SetParameter(New RParameter("output"))
+        ucrPnlOutput.AddRadioButton(rdoFacets, Chr(34) & "facets" & Chr(34))
+        ucrPnlOutput.AddRadioButton(rdoCombine, Chr(34) & "combine" & Chr(34))
+        ucrPnlOutput.AddRadioButton(rdoSingleGraphs, Chr(34) & "single" & Chr(34))
 
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
-        ucrReceiverOneVarGraph.strParameterName = "columns"
+        ucrReceiverOneVarGraph.SetParameter(New RParameter("columns"))
         ucrReceiverOneVarGraph.SetParameterIsString()
 
-        ucrSelectorOneVarGraph.strParameterName = "data_name"
+        ucrSelectorOneVarGraph.SetParameter(New RParameter("data_name"))
         ucrSelectorOneVarGraph.SetParameterIsString()
-        clsDefaultRFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
 
         ucrChkFlip.SetText("Flip Coordinates")
-        ucrChkFlip.strParameterName = "coord_flip"
+        ucrChkFlip.SetParameter(New RParameter("coord_flip"))
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetDefault("FALSE")
 
@@ -81,6 +69,13 @@ Public Class dlgOneVariableGraph
         ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
+
+        'Define the default RFunction
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsDefaultRFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
     End Sub
 
     Private Sub ReopenDialog()
@@ -121,11 +116,11 @@ Public Class dlgOneVariableGraph
     Private Sub CheckDataType()
         'this checks for data types and if all the selected variable are of same type, enables facets 
         If ucrReceiverOneVarGraph.IsAllNumeric() OrElse ucrReceiverOneVarGraph.IsAllCategorical() Then
-            ucrRdoFacets.Enabled = True
+            rdoFacets.Enabled = True
         Else
-            ucrRdoFacets.Enabled = False
-            If ucrRdoFacets.Checked Then
-                ucrRdoCombine.Checked = True
+            rdoFacets.Enabled = False
+            If rdoFacets.Checked Then
+                rdoCombine.Checked = True
             End If
         End If
     End Sub
@@ -134,13 +129,12 @@ Public Class dlgOneVariableGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlContentsChanged, ucrChkFlip.ControlContentsChanged, ucrRdoCombine.ControlContentsChanged, ucrRdoFacets.ControlContentsChanged, ucrRdoSingleGraphs.ControlContentsChanged, ucrReceiverOneVarGraph.ControlContentsChanged, ucrSelectorOneVarGraph.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlContentsChanged, ucrChkFlip.ControlContentsChanged, ucrReceiverOneVarGraph.ControlContentsChanged, ucrSelectorOneVarGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     'When any of the ucrCore controls have been changed we update the R Code to match the contents
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged, ucrChkFlip.ControlValueChanged, ucrRdoCombine.ControlValueChanged, ucrRdoFacets.ControlValueChanged, ucrRdoSingleGraphs.ControlValueChanged, ucrReceiverOneVarGraph.ControlValueChanged, ucrSelectorOneVarGraph.ControlValueChanged
-        'The control that has changed updates the R code
-        ucrChangedControl.UpdateRCode()
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarGraph.ControlValueChanged
+        CheckDataType()
     End Sub
 End Class
