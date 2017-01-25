@@ -4641,6 +4641,9 @@
     <EmbeddedResource Include="ucrReorder.sw-KE.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSave.resx">
+      <DependentUpon>ucrSave.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveGraph.fr-FR.resx">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </EmbeddedResource>
