@@ -28,7 +28,7 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_key")
         ucrSelectorKeys.SetItemType("key")
         ucrReceiverSelectedKey.Selector = ucrSelectorKeys
         ucrReceiverSelectedKey.SetMeAsReceiver()
@@ -63,11 +63,7 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub chkRemoveKey_CheckedChanged(sender As Object, e As EventArgs) Handles chkRemoveKey.CheckedChanged
-        If chkRemoveKey.Checked Then
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_key")
-        Else
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_keys")
-        End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorKeys_DataFrameChanged() Handles ucrSelectorKeys.DataFrameChanged
