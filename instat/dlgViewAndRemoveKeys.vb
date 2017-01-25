@@ -36,7 +36,7 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSelectedKey.IsEmpty AndAlso chkRemoveKey.Checked Then
+        If Not ucrReceiverSelectedKey.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
