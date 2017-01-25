@@ -153,7 +153,7 @@ Public Class dlgStartofRains
         TestOKEnabled()
     End Sub
 
-    Private Sub grpConditionsForStartofRains_Enter(sender As Object, e As EventArgs) Handles nudValue.TextChanged, nudPercentile.TextChanged nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged, nudOverDays.TextChanged, nudOutOfDays.TextChanged
+    Private Sub grpConditionsForStartofRains_Enter(sender As Object, e As EventArgs) Handles nudValue.TextChanged, nudPercentile.TextChanged, nudMinimum.TextChanged, nudMaximumDays.TextChanged, nudLengthofTime.TextChanged, nudOverDays.TextChanged, nudOutOfDays.TextChanged
         RainyDaysMethod()
         DayFromAndToMethod()
         CombinedFilter()
@@ -163,7 +163,7 @@ Public Class dlgStartofRains
         WetSpell()
         TestOKEnabled()
     End Sub
-    
+
     Private rdoAmountAndPercentile_Changed (sender As Object, e As EventArgs) Handles rdoAmount.CheckedChanged, rdoPercentile.CheckedChanged
     CheckBoxesSetting()
     CombinedFilter()
@@ -207,13 +207,14 @@ Public Class dlgStartofRains
             lblOverDays.Visible = True
             If rdoAmount.Checked Then
                 nudValue.Visible = True
-                nudPercentile.Visible = False   
+                nudPercentile.Visible = False
             ElseIf rdoPercentile.Checked Then
                 nudValue.Visible = False
-                nudPercentile.Visible = True 
+                nudPercentile.Visible = True
             Else
                 nudValue.Visible = False
-                nudPercentile.Visible = False 
+                nudPercentile.Visible = False
+            End If
         Else
             nudValue.Visible = False
             nudPercentile.Visible = False 
@@ -232,31 +233,33 @@ Public Class dlgStartofRains
             lblLengthofTime.Visible = False
             lblMaximumDays.Visible = False
         End If
-        If chkConsecutiveRainyDays.Checked Then
-            nudMinimum.Visible = True
-            nudOutOfDays.Visible = True
-            lblMinimum.Visible = True
-            lblWidth.Visible = True
-        Else
-            nudMinimum.Visible = False
-            nudOutOfDays.Visible = False
-            lblMinimum.Visible = False
-            lblWidth.Visible = False
-        End If
-        If chkDrySpell.Checked then
-            nudDryPeriodRainPeriod.Visible = True
-            nudDryPeriodMaxRain.Visible = True
-            nudDryPeriodOverallInterval.Visible = True
-            lblDryPeriodRainPeriod.Visible = True
-            lblDryPeriodMaxRain.Visible = True
-            lblDryPeriodOverallInterval.Visible = True
-        Else
-            nudDryPeriodRainPeriod.Visible = False
-            nudDryPeriodMaxRain.Visible = False
-            nudDryPeriodOverallInterval.Visible = False
-            lblDryPeriodRainPeriod.Visible = False
-            lblDryPeriodMaxRain.Visible = False
-            lblDryPeriodOverallInterval.Visible = False
+            If chkConsecutiveRainyDays.Checked Then
+                nudMinimum.Visible = True
+                nudOutOfDays.Visible = True
+                lblMinimum.Visible = True
+                lblWidth.Visible = True
+            Else
+                nudMinimum.Visible = False
+                nudOutOfDays.Visible = False
+                lblMinimum.Visible = False
+                lblWidth.Visible = False
+            End If
+            If chkDrySpell.Checked Then
+                nudDryPeriodRainPeriod.Visible = True
+                nudDryPeriodMaxRain.Visible = True
+                nudDryPeriodOverallInterval.Visible = True
+                lblDryPeriodRainPeriod.Visible = True
+                lblDryPeriodMaxRain.Visible = True
+                lblDryPeriodOverallInterval.Visible = True
+            Else
+                nudDryPeriodRainPeriod.Visible = False
+                nudDryPeriodMaxRain.Visible = False
+                nudDryPeriodOverallInterval.Visible = False
+                lblDryPeriodRainPeriod.Visible = False
+                lblDryPeriodMaxRain.Visible = False
+                lblDryPeriodOverallInterval.Visible = False
+            End If
+
     End Sub
         
         ' nud max and mins.
