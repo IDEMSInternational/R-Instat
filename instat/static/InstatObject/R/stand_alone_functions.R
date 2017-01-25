@@ -269,9 +269,9 @@ open_NetCDF <- function(nc_data){
   }
   lat_lon_df <- cbind(lat_lon,station)
   my_data <- cbind(period, lat_lon_df)
-  for (vars in variables){
+  for (current_var in variables){
     nc_value <- c()
-    dataset <- var.get.nc(nc_data, vars)
+    dataset <- var.get.nc(nc_data, current_var)
     for (k in 1:length(time)){
       year <- dataset[1:length(lat), 1:length(lon), k]
       year = as.data.frame(t(year))
@@ -280,7 +280,7 @@ open_NetCDF <- function(nc_data){
       nc_value = append(nc_value, g)
     }
     my_data = cbind(my_data, nc_value)
-    data.table::setnames(my_data, "nc_value", vars)
+    data.table::setnames(my_data, "nc_value", current_var)
   }
   return(list(my_data, lat_lon_df))
 }
