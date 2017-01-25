@@ -31,6 +31,10 @@ Public Class ucrSelector
     Private strType As String
     Private bShowHiddenCols As Boolean = False
 
+    'Does the selector have its own parameter
+    'Usually False as the parameter comes from the data frame selector
+    Public bHasOwnParameter As Boolean = False
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -317,5 +321,11 @@ Public Class ucrSelector
             lviTemp.Selected = True
         Next
         lstAvailableVariable.EndUpdate()
+    End Sub
+
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        If bHasOwnParameter Then
+            MyBase.UpdateControl(bReset)
+        End If
     End Sub
 End Class

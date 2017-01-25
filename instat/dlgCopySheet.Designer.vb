@@ -37,12 +37,12 @@ Partial Class dlgCopySheet
         '
         'ucrDataFrameCopySheets
         '
-        Me.ucrDataFrameCopySheets.bUseCurrentFilter = False
+        Me.ucrDataFrameCopySheets.bUseCurrentFilter = True
         Me.ucrDataFrameCopySheets.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameCopySheets.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
         Me.ucrDataFrameCopySheets.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameCopySheets.TabIndex = 2
+        Me.ucrDataFrameCopySheets.TabIndex = 0
         '
         'lblNewSheetName
         '
@@ -55,11 +55,12 @@ Partial Class dlgCopySheet
         '
         'ucrNewDataFrameName
         '
+        Me.ucrNewDataFrameName.IsMultiline = False
         Me.ucrNewDataFrameName.IsReadOnly = False
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(194, 28)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewDataFrameName.TabIndex = 0
+        Me.ucrNewDataFrameName.TabIndex = 2
         '
         'dlgCopySheet
         '
