@@ -92,7 +92,6 @@ Public Class dlgConvertColumns
         If rdoFactor.Checked Then
             grpFactorToNumericOptions.Visible = False
             chkSpecifyDecimalsToDisplay.Visible = True
-            nudDisplayDecimals.Visible = True
             chkSpecifyDecimalsToDisplay.Checked = False
             NumberOfDigits()
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
@@ -117,7 +116,7 @@ Public Class dlgConvertColumns
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "integer" & Chr(34))
         ElseIf rdoOrderedFactor.Checked Then
             chkSpecifyDecimalsToDisplay.Visible = True
-            nudDisplayDecimals.Visible = True
+            chkSpecifyDecimalsToDisplay.Checked = False
             NumberOfDigits()
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
         Else
@@ -132,6 +131,7 @@ Public Class dlgConvertColumns
 
     Private Sub NumberOfDigits()
         If chkSpecifyDecimalsToDisplay.Checked Then
+            nudDisplayDecimals.Visible = True
             ucrBase.clsRsyntax.AddParameter("set_decimals", "TRUE")
             If nudDisplayDecimals.Text <> "" Then
                 ucrBase.clsRsyntax.AddParameter("set_digits", nudDisplayDecimals.Value)
@@ -139,6 +139,7 @@ Public Class dlgConvertColumns
                 ucrBase.clsRsyntax.RemoveParameter("set_digits")
             End If
         Else
+            nudDisplayDecimals.Visible = False
             ucrBase.clsRsyntax.AddParameter("set_decimals", "FALSE")
             ucrBase.clsRsyntax.RemoveParameter("set_digits")
         End If
