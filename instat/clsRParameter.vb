@@ -30,6 +30,13 @@ Public Class RParameter
     'See strArgumentName
     Public bIncludeArgumentName As Boolean = True
 
+    Public Sub New()
+    End Sub
+
+    Public Sub New(strParameterName As String)
+        SetArgumentName(strParameterName)
+    End Sub
+
     ''Public Event PositionChanged()
 
     Public Property Position As Integer
