@@ -169,6 +169,7 @@ Public Class ucrCore
 
     Public Sub OnControlValueChanged()
         OnControlContentsChanged()
+        UpdateRCode()
         RaiseEvent ControlValueChanged(Me)
     End Sub
 
