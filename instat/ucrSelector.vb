@@ -21,14 +21,19 @@ Public Class ucrSelector
     Public Event ResetAll()
     Public Event ResetReceivers()
     Public Event VariablesInReceiversChanged()
+    Public Event DataFrameChanged()
     Public lstVariablesInReceivers As List(Of String)
     Public bFirstLoad As Boolean
     Public bIncludeOverall As Boolean
     Public strCurrentDataFrame As String
-    Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
-    Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private strType As String
     Private bShowHiddenCols As Boolean = False
+
+    'Does the selector have its own parameter
+    'Usually False as the parameter comes from the data frame selector
+    Public bHasOwnParameter As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -57,6 +62,10 @@ Public Class ucrSelector
 
     Protected Sub OnResetReceivers()
         RaiseEvent ResetReceivers()
+    End Sub
+
+    Protected Sub OnDataFrameChanged()
+        RaiseEvent DataFrameChanged()
     End Sub
 
     Public Overridable Sub LoadList()
@@ -110,6 +119,13 @@ Public Class ucrSelector
         End If
     End Sub
 
+    Public Sub AddAll()
+        If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
+            SelectAll()
+            Add()
+        End If
+    End Sub
+
     Public Sub Add()
         If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
@@ -153,6 +169,11 @@ Public Class ucrSelector
         If e.KeyChar = vbCr Then
             Add()
         End If
+        If lstAvailableVariable.SelectedItems.Count > 0 Then
+            If Keys.ControlKey AndAlso Keys.A Then
+                SelectAll()
+            End If
+        End If
     End Sub
 
     Private Sub ucrSelector_ResetAll() Handles Me.ResetAll
@@ -168,14 +189,7 @@ Public Class ucrSelector
     End Sub
 
     Private Sub SelectAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectAllToolStripMenuItem.Click
-        Dim lviTemp As ListViewItem
-
-        lstAvailableVariable.BeginUpdate()
-        For Each lviTemp In lstAvailableVariable.Items
-            lviTemp.Selected = True
-        Next
-        lstAvailableVariable.EndUpdate()
-
+        SelectAll()
     End Sub
 
     Public Sub AddToVariablesList(strVariable As String)
@@ -295,4 +309,23 @@ Public Class ucrSelector
         Next
         Return False
     End Function
+
+    Private Sub AddAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAllToolStripMenuItem.Click
+        AddAll()
+    End Sub
+
+    Private Sub SelectAll()
+        Dim lviTemp As ListViewItem
+        lstAvailableVariable.BeginUpdate()
+        For Each lviTemp In lstAvailableVariable.Items
+            lviTemp.Selected = True
+        Next
+        lstAvailableVariable.EndUpdate()
+    End Sub
+
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        If bHasOwnParameter Then
+            MyBase.UpdateControl(bReset)
+        End If
+    End Sub
 End Class

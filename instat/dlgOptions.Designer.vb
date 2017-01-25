@@ -22,12 +22,12 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
-        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
-        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -49,6 +49,12 @@ Partial Class dlgOptions
         Me.lblPreviewRows = New System.Windows.Forms.Label()
         Me.nudPreviewRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
+        Me.grpROptions = New System.Windows.Forms.GroupBox()
+        Me.chkShowSignifStars = New System.Windows.Forms.CheckBox()
+        Me.lblNoDigits = New System.Windows.Forms.Label()
+        Me.nudDigits = New System.Windows.Forms.NumericUpDown()
+        Me.chkShowRCommandsinOutputWindow = New System.Windows.Forms.CheckBox()
+        Me.chkIncludeCommentsbyDefault = New System.Windows.Forms.CheckBox()
         Me.pnFormatOptions = New System.Windows.Forms.Panel()
         Me.rtbCommentPreview = New System.Windows.Forms.RichTextBox()
         Me.rtbOutputPreview = New System.Windows.Forms.RichTextBox()
@@ -71,10 +77,15 @@ Partial Class dlgOptions
         Me.nudMaxRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpWorkingDirectory = New System.Windows.Forms.TabPage()
         Me.cmdWorkingDirectory = New System.Windows.Forms.Button()
-        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
         Me.lblWorkingDirectory = New System.Windows.Forms.Label()
+        Me.tbpGraphDisplay = New System.Windows.Forms.TabPage()
+        Me.rdoDisplayinSeparateWindows = New System.Windows.Forms.RadioButton()
+        Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
+        Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
+        Me.cmdFactoryReset = New System.Windows.Forms.Button()
+        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
@@ -85,6 +96,8 @@ Partial Class dlgOptions
         Me.pnImportData.SuspendLayout()
         CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpOutputWindow.SuspendLayout()
+        Me.grpROptions.SuspendLayout()
+        CType(Me.nudDigits, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnFormatOptions.SuspendLayout()
         Me.tbpEditor.SuspendLayout()
         Me.pnFormatEditor.SuspendLayout()
@@ -93,6 +106,7 @@ Partial Class dlgOptions
         Me.tbpDataView.SuspendLayout()
         CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpWorkingDirectory.SuspendLayout()
+        Me.tbpGraphDisplay.SuspendLayout()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -149,6 +163,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpCommands)
         Me.tbcOptions.Controls.Add(Me.tbpDataView)
         Me.tbcOptions.Controls.Add(Me.tbpWorkingDirectory)
+        Me.tbcOptions.Controls.Add(Me.tbpGraphDisplay)
         Me.tbcOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbcOptions.Location = New System.Drawing.Point(0, 0)
         Me.tbcOptions.Name = "tbcOptions"
@@ -315,6 +330,9 @@ Partial Class dlgOptions
         '
         'tbpOutputWindow
         '
+        Me.tbpOutputWindow.Controls.Add(Me.grpROptions)
+        Me.tbpOutputWindow.Controls.Add(Me.chkShowRCommandsinOutputWindow)
+        Me.tbpOutputWindow.Controls.Add(Me.chkIncludeCommentsbyDefault)
         Me.tbpOutputWindow.Controls.Add(Me.pnFormatOptions)
         Me.tbpOutputWindow.Location = New System.Drawing.Point(4, 22)
         Me.tbpOutputWindow.Name = "tbpOutputWindow"
@@ -323,6 +341,64 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.TabIndex = 2
         Me.tbpOutputWindow.Text = "Output Window"
         Me.tbpOutputWindow.UseVisualStyleBackColor = True
+        '
+        'grpROptions
+        '
+        Me.grpROptions.Controls.Add(Me.chkShowSignifStars)
+        Me.grpROptions.Controls.Add(Me.lblNoDigits)
+        Me.grpROptions.Controls.Add(Me.nudDigits)
+        Me.grpROptions.Location = New System.Drawing.Point(10, 192)
+        Me.grpROptions.Name = "grpROptions"
+        Me.grpROptions.Size = New System.Drawing.Size(271, 93)
+        Me.grpROptions.TabIndex = 25
+        Me.grpROptions.TabStop = False
+        Me.grpROptions.Text = "R Options"
+        '
+        'chkShowSignifStars
+        '
+        Me.chkShowSignifStars.AutoSize = True
+        Me.chkShowSignifStars.Location = New System.Drawing.Point(7, 49)
+        Me.chkShowSignifStars.Name = "chkShowSignifStars"
+        Me.chkShowSignifStars.Size = New System.Drawing.Size(240, 17)
+        Me.chkShowSignifStars.TabIndex = 26
+        Me.chkShowSignifStars.Text = "Show stars on summary tables for coefficients"
+        Me.chkShowSignifStars.UseVisualStyleBackColor = True
+        '
+        'lblNoDigits
+        '
+        Me.lblNoDigits.AutoSize = True
+        Me.lblNoDigits.Location = New System.Drawing.Point(6, 23)
+        Me.lblNoDigits.Name = "lblNoDigits"
+        Me.lblNoDigits.Size = New System.Drawing.Size(137, 13)
+        Me.lblNoDigits.TabIndex = 1
+        Me.lblNoDigits.Text = "Number of Digits to Display:"
+        '
+        'nudDigits
+        '
+        Me.nudDigits.Location = New System.Drawing.Point(152, 21)
+        Me.nudDigits.Name = "nudDigits"
+        Me.nudDigits.Size = New System.Drawing.Size(39, 20)
+        Me.nudDigits.TabIndex = 0
+        '
+        'chkShowRCommandsinOutputWindow
+        '
+        Me.chkShowRCommandsinOutputWindow.AutoSize = True
+        Me.chkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
+        Me.chkShowRCommandsinOutputWindow.Name = "chkShowRCommandsinOutputWindow"
+        Me.chkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(207, 17)
+        Me.chkShowRCommandsinOutputWindow.TabIndex = 24
+        Me.chkShowRCommandsinOutputWindow.Text = "Show R Commands in Output Window"
+        Me.chkShowRCommandsinOutputWindow.UseVisualStyleBackColor = True
+        '
+        'chkIncludeCommentsbyDefault
+        '
+        Me.chkIncludeCommentsbyDefault.AutoSize = True
+        Me.chkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 145)
+        Me.chkIncludeCommentsbyDefault.Name = "chkIncludeCommentsbyDefault"
+        Me.chkIncludeCommentsbyDefault.Size = New System.Drawing.Size(164, 17)
+        Me.chkIncludeCommentsbyDefault.TabIndex = 24
+        Me.chkIncludeCommentsbyDefault.Text = "Include Comments by Default"
+        Me.chkIncludeCommentsbyDefault.UseVisualStyleBackColor = True
         '
         'pnFormatOptions
         '
@@ -530,8 +606,8 @@ Partial Class dlgOptions
         'tbpWorkingDirectory
         '
         Me.tbpWorkingDirectory.Controls.Add(Me.cmdWorkingDirectory)
-        Me.tbpWorkingDirectory.Controls.Add(Me.ucrWorkingDirectory)
         Me.tbpWorkingDirectory.Controls.Add(Me.lblWorkingDirectory)
+        Me.tbpWorkingDirectory.Controls.Add(Me.ucrWorkingDirectory)
         Me.tbpWorkingDirectory.Location = New System.Drawing.Point(4, 22)
         Me.tbpWorkingDirectory.Name = "tbpWorkingDirectory"
         Me.tbpWorkingDirectory.Padding = New System.Windows.Forms.Padding(3)
@@ -549,14 +625,6 @@ Partial Class dlgOptions
         Me.cmdWorkingDirectory.Text = "..."
         Me.cmdWorkingDirectory.UseVisualStyleBackColor = True
         '
-        'ucrWorkingDirectory
-        '
-        Me.ucrWorkingDirectory.IsReadOnly = False
-        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
-        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
-        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
-        Me.ucrWorkingDirectory.TabIndex = 1
-        '
         'lblWorkingDirectory
         '
         Me.lblWorkingDirectory.AutoSize = True
@@ -566,34 +634,80 @@ Partial Class dlgOptions
         Me.lblWorkingDirectory.TabIndex = 0
         Me.lblWorkingDirectory.Text = "Working Directory:"
         '
+        'tbpGraphDisplay
+        '
+        Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinSeparateWindows)
+        Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinRViewer)
+        Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinOutputWindow)
+        Me.tbpGraphDisplay.Location = New System.Drawing.Point(4, 22)
+        Me.tbpGraphDisplay.Name = "tbpGraphDisplay"
+        Me.tbpGraphDisplay.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpGraphDisplay.Size = New System.Drawing.Size(564, 291)
+        Me.tbpGraphDisplay.TabIndex = 12
+        Me.tbpGraphDisplay.Text = "Graph Display"
+        Me.tbpGraphDisplay.UseVisualStyleBackColor = True
+        '
+        'rdoDisplayinSeparateWindows
+        '
+        Me.rdoDisplayinSeparateWindows.AutoSize = True
+        Me.rdoDisplayinSeparateWindows.Location = New System.Drawing.Point(6, 52)
+        Me.rdoDisplayinSeparateWindows.Name = "rdoDisplayinSeparateWindows"
+        Me.rdoDisplayinSeparateWindows.Size = New System.Drawing.Size(163, 17)
+        Me.rdoDisplayinSeparateWindows.TabIndex = 1
+        Me.rdoDisplayinSeparateWindows.TabStop = True
+        Me.rdoDisplayinSeparateWindows.Text = "Display in Separate Windows"
+        Me.rdoDisplayinSeparateWindows.UseVisualStyleBackColor = True
+        '
+        'rdoDisplayinRViewer
+        '
+        Me.rdoDisplayinRViewer.AutoSize = True
+        Me.rdoDisplayinRViewer.Location = New System.Drawing.Point(6, 29)
+        Me.rdoDisplayinRViewer.Name = "rdoDisplayinRViewer"
+        Me.rdoDisplayinRViewer.Size = New System.Drawing.Size(116, 17)
+        Me.rdoDisplayinRViewer.TabIndex = 1
+        Me.rdoDisplayinRViewer.TabStop = True
+        Me.rdoDisplayinRViewer.Text = "Display in R Viewer"
+        Me.rdoDisplayinRViewer.UseVisualStyleBackColor = True
+        '
+        'rdoDisplayinOutputWindow
+        '
+        Me.rdoDisplayinOutputWindow.AutoSize = True
+        Me.rdoDisplayinOutputWindow.Location = New System.Drawing.Point(6, 6)
+        Me.rdoDisplayinOutputWindow.Name = "rdoDisplayinOutputWindow"
+        Me.rdoDisplayinOutputWindow.Size = New System.Drawing.Size(147, 17)
+        Me.rdoDisplayinOutputWindow.TabIndex = 1
+        Me.rdoDisplayinOutputWindow.TabStop = True
+        Me.rdoDisplayinOutputWindow.Text = "Display in Output Window"
+        Me.rdoDisplayinOutputWindow.UseVisualStyleBackColor = True
+        '
         'trOptions
         '
         Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.trOptions.Location = New System.Drawing.Point(0, 0)
         Me.trOptions.Name = "trOptions"
-        TreeNode1.Name = "ndLanguages"
-        TreeNode1.Tag = "1"
-        TreeNode1.Text = "Languages"
-        TreeNode1.ToolTipText = "Choose different languages"
-        TreeNode2.Name = "ndComments"
-        TreeNode2.Tag = "2"
-        TreeNode2.Text = "Comments"
-        TreeNode2.ToolTipText = "Comments for the dialogs"
-        TreeNode3.Name = "ndImport"
-        TreeNode3.Tag = "3"
-        TreeNode3.Text = "Import"
-        TreeNode3.ToolTipText = "Import Data Settings"
-        TreeNode4.Name = "ndOutputWindow"
-        TreeNode4.Tag = "4"
-        TreeNode4.Text = "Output Window"
-        TreeNode4.ToolTipText = "Output Window Formatting Options"
-        TreeNode5.Name = "ndCommands"
-        TreeNode5.Tag = "8"
-        TreeNode5.Text = "Commands"
-        TreeNode5.ToolTipText = "Commands Options"
-        TreeNode6.Name = "ndDataView"
-        TreeNode6.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        TreeNode7.Name = "ndLanguages"
+        TreeNode7.Tag = "1"
+        TreeNode7.Text = "Languages"
+        TreeNode7.ToolTipText = "Choose different languages"
+        TreeNode8.Name = "ndComments"
+        TreeNode8.Tag = "2"
+        TreeNode8.Text = "Comments"
+        TreeNode8.ToolTipText = "Comments for the dialogs"
+        TreeNode9.Name = "ndImport"
+        TreeNode9.Tag = "3"
+        TreeNode9.Text = "Import"
+        TreeNode9.ToolTipText = "Import Data Settings"
+        TreeNode10.Name = "ndOutputWindow"
+        TreeNode10.Tag = "4"
+        TreeNode10.Text = "Output Window"
+        TreeNode10.ToolTipText = "Output Window Formatting Options"
+        TreeNode11.Name = "ndCommands"
+        TreeNode11.Tag = "8"
+        TreeNode11.Text = "Commands"
+        TreeNode11.ToolTipText = "Commands Options"
+        TreeNode12.Name = "ndDataView"
+        TreeNode12.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
         Me.trOptions.Size = New System.Drawing.Size(184, 317)
         Me.trOptions.TabIndex = 0
         '
@@ -604,6 +718,7 @@ Partial Class dlgOptions
         '
         'spltControls.Panel1
         '
+        Me.spltControls.Panel1.Controls.Add(Me.cmdFactoryReset)
         Me.spltControls.Panel1.Controls.Add(Me.trOptions)
         '
         'spltControls.Panel2
@@ -612,6 +727,24 @@ Partial Class dlgOptions
         Me.spltControls.Size = New System.Drawing.Size(760, 317)
         Me.spltControls.SplitterDistance = 184
         Me.spltControls.TabIndex = 8
+        '
+        'cmdFactoryReset
+        '
+        Me.cmdFactoryReset.Location = New System.Drawing.Point(13, 287)
+        Me.cmdFactoryReset.Name = "cmdFactoryReset"
+        Me.cmdFactoryReset.Size = New System.Drawing.Size(100, 23)
+        Me.cmdFactoryReset.TabIndex = 13
+        Me.cmdFactoryReset.Tag = "Help"
+        Me.cmdFactoryReset.Text = "Factory Reset"
+        Me.cmdFactoryReset.UseVisualStyleBackColor = True
+        '
+        'ucrWorkingDirectory
+        '
+        Me.ucrWorkingDirectory.IsReadOnly = False
+        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
+        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
+        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
+        Me.ucrWorkingDirectory.TabIndex = 1
         '
         'dlgOptions
         '
@@ -647,6 +780,9 @@ Partial Class dlgOptions
         CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpOutputWindow.ResumeLayout(False)
         Me.tbpOutputWindow.PerformLayout()
+        Me.grpROptions.ResumeLayout(False)
+        Me.grpROptions.PerformLayout()
+        CType(Me.nudDigits, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnFormatOptions.ResumeLayout(False)
         Me.pnFormatOptions.PerformLayout()
         Me.tbpEditor.ResumeLayout(False)
@@ -662,6 +798,8 @@ Partial Class dlgOptions
         CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpWorkingDirectory.ResumeLayout(False)
         Me.tbpWorkingDirectory.PerformLayout()
+        Me.tbpGraphDisplay.ResumeLayout(False)
+        Me.tbpGraphDisplay.PerformLayout()
         Me.spltControls.Panel1.ResumeLayout(False)
         Me.spltControls.Panel2.ResumeLayout(False)
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).EndInit()
@@ -716,4 +854,15 @@ Partial Class dlgOptions
     Friend WithEvents lblWorkingDirectory As Label
     Friend WithEvents trOptions As TreeView
     Friend WithEvents spltControls As SplitContainer
+    Friend WithEvents tbpGraphDisplay As TabPage
+    Friend WithEvents rdoDisplayinSeparateWindows As RadioButton
+    Friend WithEvents rdoDisplayinRViewer As RadioButton
+    Friend WithEvents rdoDisplayinOutputWindow As RadioButton
+    Friend WithEvents chkShowRCommandsinOutputWindow As CheckBox
+    Friend WithEvents chkIncludeCommentsbyDefault As CheckBox
+    Friend WithEvents grpROptions As GroupBox
+    Friend WithEvents lblNoDigits As Label
+    Friend WithEvents nudDigits As NumericUpDown
+    Friend WithEvents chkShowSignifStars As CheckBox
+    Friend WithEvents cmdFactoryReset As Button
 End Class

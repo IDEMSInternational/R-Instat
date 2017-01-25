@@ -21,12 +21,27 @@ Public Class ucrReceiver
     Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public bFirstLoad As Boolean
+    Public bFirstShown As Boolean
     Public strSelectorHeading As String
     Public bUseFilteredData As Boolean = True
     Public bTypeSet As Boolean
     Protected strType As String
     Public bExcludeFromSelector As Boolean = False
     Public Event SelectionChanged(sender As Object, e As EventArgs)
+    Public WithEvents frmParent As Form
+
+    'If the control is used to set a parameter that is a string i.e. column = "ID"
+    Private bParameterIsString As Boolean = False
+    'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
+    Private bParameterIsRFunction As Boolean = False
+    'The name of the data parameter in the get columns instat object method (should always be the same)
+    Private strColumnsParameterNameInRFunction As String = "col_names"
+
+    'Should quotes be used when bParameterIsString = False
+    Public bWithQuotes As Boolean = True
+
+    'Should columns be forced as a data frame object when bParameterIsRFunction = True
+    Public bForceAsDataFrame As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -36,6 +51,7 @@ Public Class ucrReceiver
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         bFirstLoad = True
+        bFirstShown = True
         bTypeSet = False
         strSelectorHeading = "Variables"
         strType = "column"
@@ -94,6 +110,12 @@ Public Class ucrReceiver
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
+        If bFirstLoad Then
+            frmParent = ParentForm
+            'Remove this line so that single/multiple code can run things on first load as well
+            'We never have a receiver not as a single or multiple
+            'bFirstLoad = False
+        End If
     End Sub
 
     'TODO make this function available throughout project
@@ -250,7 +272,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
+    Protected Overridable Sub Selector_ResetAll() Handles Selector.ResetReceivers
         Clear()
     End Sub
 
@@ -292,15 +314,74 @@ Public Class ucrReceiver
         Dim sender As New Object
         Dim e As New EventArgs
         RaiseEvent SelectionChanged(sender, e)
-        OnControlContentsChanged()
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateControl(clsRCodeObject)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        Dim clsTempDataParameter As RParameter
+        Dim lstCurrentVariables As String() = Nothing
+
+        MyBase.UpdateControl(bReset)
+        If clsParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If bParameterIsString AndAlso clsParameter.bIsString Then
+                    lstCurrentVariables = ExtractVariableNames(clsParameter.strArgumentValue)
+                ElseIf bParameterIsRFunction AndAlso clsParameter.bIsFunction Then
+                    clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                    If clsTempDataParameter IsNot Nothing Then
+                        lstCurrentVariables = ExtractVariableNames(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                    End If
+                End If
+                Clear()
+                If lstCurrentVariables IsNot Nothing Then
+                    For Each strTemp As String In lstCurrentVariables
+                        'TODO This only works if the selector is updated before receivers!
+                        '     Needs to change eventually.
+                        If Selector IsNot Nothing AndAlso strTemp <> "" Then
+                            Add(strTemp, Selector.strCurrentDataFrame)
+                        End If
+                    Next
+                End If
+            End If
+        End If
     End Sub
 
-    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        MyBase.UpdateRCode(clsRFunction, clsROperator)
+    Private Sub ucrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
+        UpdateParameter()
     End Sub
+
+    Public Sub UpdateParameter()
+        If clsParameter Is Nothing Then
+            clsParameter = New RParameter
+        End If
+        If bParameterIsString Then
+            clsParameter.SetArgumentValue(GetVariableNames(bWithQuotes))
+        ElseIf bParameterIsRFunction Then
+            clsParameter.SetArgument(GetVariables(bForceAsDataFrame))
+        End If
+    End Sub
+
+    Public Sub SetParameterIsString()
+        bParameterIsString = True
+        bParameterIsRFunction = False
+        UpdateParameter()
+    End Sub
+
+    Public Sub SetParameterIsRFunction()
+        bParameterIsRFunction = True
+        bParameterIsString = False
+        UpdateParameter()
+    End Sub
+
+    Public Function ExtractVariableNames(strTemp As String) As String()
+        Dim lstVariables As String()
+        If strTemp.StartsWith("c(") Then
+            strTemp = strTemp.Substring(2)
+        End If
+        lstVariables = strTemp.Split(",")
+        For i As Integer = 0 To lstVariables.Count - 1
+            lstVariables(i) = lstVariables(i).Trim(Chr(34), " ", Chr(39), ")")
+        Next
+        Return lstVariables
+    End Function
 End Class

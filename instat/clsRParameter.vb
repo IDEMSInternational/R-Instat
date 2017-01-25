@@ -30,6 +30,13 @@ Public Class RParameter
     'See strArgumentName
     Public bIncludeArgumentName As Boolean = True
 
+    Public Sub New()
+    End Sub
+
+    Public Sub New(strParameterName As String)
+        SetArgumentName(strParameterName)
+    End Sub
+
     ''Public Event PositionChanged()
 
     Public Property Position As Integer
@@ -99,6 +106,7 @@ Public Class RParameter
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
         clsTempRParam.bIsString = bIsString
+        clsTempRParam.bIncludeArgumentName = bIncludeArgumentName
         If clsArgumentCodeStructure IsNot Nothing Then
             clsTempRParam.clsArgumentCodeStructure = clsArgumentCodeStructure.Clone
         End If

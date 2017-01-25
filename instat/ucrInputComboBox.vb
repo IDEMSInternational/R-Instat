@@ -66,8 +66,6 @@ Public Class ucrInputComboBox
     End Sub
 
     Private Sub FillItemTypes()
-        Dim strItems As String()
-
         Select Case strItemsType
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
@@ -88,10 +86,7 @@ Public Class ucrInputComboBox
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
-                    strItems = frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray()
-                    If strItems.Count > 0 Then
-                        cboInput.Items.AddRange(strItems)
-                    End If
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
         End Select
     End Sub
@@ -215,7 +210,7 @@ Public Class ucrInputComboBox
         cboCurrent.DropDownWidth = iWidth
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateControl(clsRCodeObject)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
     End Sub
 End Class

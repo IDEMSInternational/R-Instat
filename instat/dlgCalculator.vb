@@ -52,7 +52,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
         ucrCalc.ucrSaveResultInto.Reset()
         ucrCalc.ucrInputCalOptions.Reset()
-        ucrCalc.ucrReceiverForCalculation.Clear()
+        ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrInputCalOptions.SetName("Basic")
         ucrCalc.chkShowArguments.Checked = False
         ucrCalc.chkSaveResultInto.Checked = True
@@ -69,7 +69,6 @@ Public Class dlgCalculator
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 14
-        ucrCalc.ucrReceiverForCalculation.Selector = ucrCalc.ucrSelectorForCalculations
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
@@ -81,9 +80,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
-        ucrCalc.ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates", "Rows"}) ' "Rows" is a temp. name
         ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
-
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
