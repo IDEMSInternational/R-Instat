@@ -239,12 +239,14 @@ dekade <- function(date) {
 open_NetCDF <- function(nc_data){
   #my_nc_data <- read.nc(nc_data)
   #names(my_nc_data) #This might be necessary if the list objects may be named differently
-  dataset <- var.get.nc(nc_data, "ccd")
+  variables = names(nc_data$var)
+  
+  
   lat <- var.get.nc(nc_data, "lat")
   lon <- var.get.nc(nc_data, "lon")
   time <- var.get.nc(nc_data, "time")
   period <- rep(time, each = (length(lat)*length(lon)))
-  nc_value <- c()
+ 
   
   lat_rep <- rep(lat, each = length(lon))
   lon_rep <- rep(lon, length(lat))
@@ -266,14 +268,19 @@ open_NetCDF <- function(nc_data){
     }
   }
   lat_lon_df <- cbind(lat_lon,station)
-  
-  for (k in 1:length(time)){
-    year <- dataset[1:length(lat), 1:length(lon), k]
-    year = as.data.frame(t(year))
-    year = stack(year)
-    g <- as.numeric(year$values)
-    nc_value = append(nc_value, g)
+  my_data <- cbind(period, lat_lon_df)
+  for (vars in variables){
+    nc_value <- c()
+    dataset <- var.get.nc(nc_data, vars)
+    for (k in 1:length(time)){
+      year <- dataset[1:length(lat), 1:length(lon), k]
+      year = as.data.frame(t(year))
+      year = stack(year)
+      g <- as.numeric(year$values)
+      nc_value = append(nc_value, g)
+    }
+    my_data = cbind(my_data, nc_value)
+    data.table::setnames(my_data, "nc_value", vars)
   }
-  my_data <- cbind(period, lat_lon_df, nc_value)
   return(list(my_data, lat_lon_df))
 }
