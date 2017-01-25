@@ -49,6 +49,7 @@ Partial Class frmEditor
         Me.columnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.clearColumnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.cutRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.copyRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pasteRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,6 +58,8 @@ Partial Class frmEditor
         Me.mnuInsertRowsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -70,9 +73,6 @@ Partial Class frmEditor
         Me.ViewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
         Me.lblRowDisplay = New System.Windows.Forms.Label()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -244,7 +244,13 @@ Partial Class frmEditor
         '
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddComment, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(163, 114)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(163, 92)
+        '
+        'AddComment
+        '
+        Me.AddComment.Name = "AddComment"
+        Me.AddComment.Size = New System.Drawing.Size(162, 22)
+        Me.AddComment.Text = "Add Comment..."
         '
         'cutRangeToolStripMenuItem
         '
@@ -295,6 +301,17 @@ Partial Class frmEditor
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(186, 6)
         '
+        'mnuAddComment
+        '
+        Me.mnuAddComment.Name = "mnuAddComment"
+        Me.mnuAddComment.Size = New System.Drawing.Size(189, 22)
+        Me.mnuAddComment.Text = "Add Comment..."
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(186, 6)
+        '
         'mnuFilter
         '
         Me.mnuFilter.Name = "mnuFilter"
@@ -342,7 +359,6 @@ Partial Class frmEditor
         '
         'CopySheet
         '
-        Me.CopySheet.Enabled = False
         Me.CopySheet.Name = "CopySheet"
         Me.CopySheet.Size = New System.Drawing.Size(162, 22)
         Me.CopySheet.Text = "Copy..."
@@ -388,23 +404,6 @@ Partial Class frmEditor
         Me.lblRowDisplay.TabIndex = 4
         Me.lblRowDisplay.Text = "Label1"
         Me.lblRowDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(186, 6)
-        '
-        'mnuAddComment
-        '
-        Me.mnuAddComment.Name = "mnuAddComment"
-        Me.mnuAddComment.Size = New System.Drawing.Size(189, 22)
-        Me.mnuAddComment.Text = "Add Comment..."
-        '
-        'AddComment
-        '
-        Me.AddComment.Name = "AddComment"
-        Me.AddComment.Size = New System.Drawing.Size(162, 22)
-        Me.AddComment.Text = "Add Comment..."
         '
         'frmEditor
         '

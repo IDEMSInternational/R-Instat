@@ -2089,6 +2089,12 @@
     <Compile Include="ucrReorder.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSave.Designer.vb">
+      <DependentUpon>ucrSave.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSave.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSaveGraph.Designer.vb">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </Compile>
@@ -2139,6 +2145,12 @@
     </Compile>
     <Compile Include="ucrWPFRichTextBox.xaml.vb">
       <DependentUpon>ucrWPFRichTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UcrPanel.Designer.vb">
+      <DependentUpon>UcrPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UcrPanel.vb">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -4629,6 +4641,9 @@
     <EmbeddedResource Include="ucrReorder.sw-KE.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSave.resx">
+      <DependentUpon>ucrSave.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveGraph.fr-FR.resx">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </EmbeddedResource>
@@ -4700,6 +4715,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablesAsFactor.sw-KE.resx">
       <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrPanel.resx">
+      <DependentUpon>UcrPanel.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
