@@ -706,18 +706,24 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
-  ind <- c()
+  link_name <- ""
   for(i in seq_along(private$.links)) {
     if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
-      ind <- c(ind, i)
+      link_name <- names(private$.links)[i]
+      break
     }
   }
-  #TODO Should this be delete or disable?
-  if(length(ind) > 0) {
-    private$.links[ind] <- NULL
-    message(length(ind), " links removed")
+  if(link_name != "") {
+    #TODO Should this be delete or disable?
+    self$remove_link(link_name)
   }
 } 
+)
+
+instat_object$set("public", "remove_link", function(link_name) {
+  if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
+  private$.links[[link_name]] <- NULL
+}
 )
 
 instat_object$set("public", "get_column_factor_levels", function(data_name,col_name = "") {
@@ -932,13 +938,17 @@ instat_object$set("public","has_key", function(data_name) {
 }
 )
 
-instat_object$set("public","get_keys", function(data_name) {
-  self$get_data_objects(data_name)$get_keys()
+instat_object$set("public","get_keys", function(data_name, key_name) {
+  self$get_data_objects(data_name)$get_keys(key_name)
 }
 )
 
-instat_object$set("public","get_links", function() {
-  return(private$.links)
+instat_object$set("public","get_links", function(link_name) {
+  if(!missing(link_name)) {
+    if(!link_name %in% names(private$keys)) stop(link_name, " not found.")
+    return(private$.links[[link_name]])
+  }
+  else return(private$.links)
 }
 )
 
@@ -1068,5 +1078,34 @@ instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c())
 
 instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
   self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)
+}
+)
+
+instat_object$set("public", "get_key_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_data_objects(data_name)$get_key_names(include_overall = include_overall, include, exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
+
+instat_object$set("public", "get_link_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), exclude_self_links = TRUE) {
+  if(exclude_self_links) {
+    out <- c()
+    i <- 1
+    for(link in private$.links) {
+      if(link$from_data_frame != link$to_data_frame) out <- c(out, names(private$.links)[i])
+      i <- i + 1
+    }
+  }
+  else out <- names(private$.links)
+  if(as_list) {
+    lst <- list()
+    lst[[overall_label]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
+instat_object$set("public", "remove_key", function(data_name, key_name) {
+  self$get_data_objects(data_name)$remove_key(key_name)
 }
 )

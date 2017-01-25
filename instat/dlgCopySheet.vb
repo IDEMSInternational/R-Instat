@@ -46,7 +46,8 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub ReopenDialog()
-
+        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
+        ucrDataFrameCopySheets.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
