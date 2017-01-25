@@ -25,21 +25,20 @@ Partial Class dlgInventoryPlot
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfyear = New System.Windows.Forms.Label()
         Me.lblColourBand = New System.Windows.Forms.Label()
-        Me.chkFlipCoordinates = New System.Windows.Forms.CheckBox()
         Me.lblDoY = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.chkAddRecodetoData = New System.Windows.Forms.CheckBox()
-        Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
         Me.ucrColourReceiver = New instat.ucrReceiverSingle()
         Me.ucrDayOfYearReceiver = New instat.ucrReceiverSingle()
         Me.ucrYearReceiver = New instat.ucrReceiverSingle()
         Me.ucrSaveInventoryPlot = New instat.ucrSaveGraph()
-        Me.UcrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.ucrFacetsReceiver = New instat.ucrReceiverSingle()
         Me.lblFacet = New System.Windows.Forms.Label()
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudThreashold = New instat.ucrNud()
+        Me.ucrChkAddRecodetoData = New instat.ucrCheck()
+        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblYear
@@ -68,16 +67,6 @@ Partial Class dlgInventoryPlot
         Me.lblColourBand.TabIndex = 20
         Me.lblColourBand.Text = "Rain"
         '
-        'chkFlipCoordinates
-        '
-        Me.chkFlipCoordinates.AutoSize = True
-        Me.chkFlipCoordinates.Location = New System.Drawing.Point(292, 257)
-        Me.chkFlipCoordinates.Name = "chkFlipCoordinates"
-        Me.chkFlipCoordinates.Size = New System.Drawing.Size(101, 17)
-        Me.chkFlipCoordinates.TabIndex = 21
-        Me.chkFlipCoordinates.Text = "Flip Coordinates"
-        Me.chkFlipCoordinates.UseVisualStyleBackColor = True
-        '
         'lblDoY
         '
         Me.lblDoY.AutoSize = True
@@ -97,25 +86,9 @@ Partial Class dlgInventoryPlot
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'chkAddRecodetoData
-        '
-        Me.chkAddRecodetoData.AutoSize = True
-        Me.chkAddRecodetoData.Location = New System.Drawing.Point(292, 234)
-        Me.chkAddRecodetoData.Name = "chkAddRecodetoData"
-        Me.chkAddRecodetoData.Size = New System.Drawing.Size(124, 17)
-        Me.chkAddRecodetoData.TabIndex = 24
-        Me.chkAddRecodetoData.Text = "Add Recode to Data"
-        Me.chkAddRecodetoData.UseVisualStyleBackColor = True
-        '
-        'nudThreshold
-        '
-        Me.nudThreshold.Location = New System.Drawing.Point(371, 160)
-        Me.nudThreshold.Name = "nudThreshold"
-        Me.nudThreshold.Size = New System.Drawing.Size(41, 20)
-        Me.nudThreshold.TabIndex = 26
-        '
         'ucrColourReceiver
         '
+        Me.ucrColourReceiver.frmParent = Me
         Me.ucrColourReceiver.Location = New System.Drawing.Point(292, 135)
         Me.ucrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrColourReceiver.Name = "ucrColourReceiver"
@@ -125,6 +98,7 @@ Partial Class dlgInventoryPlot
         '
         'ucrDayOfYearReceiver
         '
+        Me.ucrDayOfYearReceiver.frmParent = Me
         Me.ucrDayOfYearReceiver.Location = New System.Drawing.Point(292, 82)
         Me.ucrDayOfYearReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDayOfYearReceiver.Name = "ucrDayOfYearReceiver"
@@ -134,6 +108,7 @@ Partial Class dlgInventoryPlot
         '
         'ucrYearReceiver
         '
+        Me.ucrYearReceiver.frmParent = Me
         Me.ucrYearReceiver.Location = New System.Drawing.Point(292, 32)
         Me.ucrYearReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYearReceiver.Name = "ucrYearReceiver"
@@ -148,15 +123,15 @@ Partial Class dlgInventoryPlot
         Me.ucrSaveInventoryPlot.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveInventoryPlot.TabIndex = 14
         '
-        'UcrInventoryPlotSelector
+        'ucrInventoryPlotSelector
         '
-        Me.UcrInventoryPlotSelector.bShowHiddenColumns = False
-        Me.UcrInventoryPlotSelector.bUseCurrentFilter = True
-        Me.UcrInventoryPlotSelector.Location = New System.Drawing.Point(9, 9)
-        Me.UcrInventoryPlotSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrInventoryPlotSelector.Name = "UcrInventoryPlotSelector"
-        Me.UcrInventoryPlotSelector.Size = New System.Drawing.Size(210, 180)
-        Me.UcrInventoryPlotSelector.TabIndex = 13
+        Me.ucrInventoryPlotSelector.bShowHiddenColumns = False
+        Me.ucrInventoryPlotSelector.bUseCurrentFilter = True
+        Me.ucrInventoryPlotSelector.Location = New System.Drawing.Point(9, 9)
+        Me.ucrInventoryPlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrInventoryPlotSelector.Name = "ucrInventoryPlotSelector"
+        Me.ucrInventoryPlotSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrInventoryPlotSelector.TabIndex = 13
         '
         'ucrBase
         '
@@ -176,6 +151,7 @@ Partial Class dlgInventoryPlot
         '
         'ucrFacetsReceiver
         '
+        Me.ucrFacetsReceiver.frmParent = Me
         Me.ucrFacetsReceiver.Location = New System.Drawing.Point(292, 204)
         Me.ucrFacetsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFacetsReceiver.Name = "ucrFacetsReceiver"
@@ -192,19 +168,45 @@ Partial Class dlgInventoryPlot
         Me.lblFacet.TabIndex = 29
         Me.lblFacet.Text = "Facet By"
         '
+        'ucrNudThreashold
+        '
+        Me.ucrNudThreashold.Location = New System.Drawing.Point(362, 165)
+        Me.ucrNudThreashold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThreashold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreashold.Name = "ucrNudThreashold"
+        Me.ucrNudThreashold.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudThreashold.TabIndex = 30
+        Me.ucrNudThreashold.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkAddRecodetoData
+        '
+        Me.ucrChkAddRecodetoData.Checked = False
+        Me.ucrChkAddRecodetoData.Location = New System.Drawing.Point(292, 237)
+        Me.ucrChkAddRecodetoData.Name = "ucrChkAddRecodetoData"
+        Me.ucrChkAddRecodetoData.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAddRecodetoData.TabIndex = 31
+        '
+        'ucrChkFlipCoordinates
+        '
+        Me.ucrChkFlipCoordinates.Checked = False
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(292, 263)
+        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFlipCoordinates.TabIndex = 32
+        '
         'dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(431, 337)
+        Me.Controls.Add(Me.ucrChkFlipCoordinates)
+        Me.Controls.Add(Me.ucrChkAddRecodetoData)
+        Me.Controls.Add(Me.ucrNudThreashold)
         Me.Controls.Add(Me.lblFacet)
         Me.Controls.Add(Me.ucrFacetsReceiver)
         Me.Controls.Add(Me.lblThreshold)
-        Me.Controls.Add(Me.nudThreshold)
-        Me.Controls.Add(Me.chkAddRecodetoData)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblDoY)
-        Me.Controls.Add(Me.chkFlipCoordinates)
         Me.Controls.Add(Me.lblColourBand)
         Me.Controls.Add(Me.lblDayOfyear)
         Me.Controls.Add(Me.ucrColourReceiver)
@@ -212,7 +214,7 @@ Partial Class dlgInventoryPlot
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.ucrYearReceiver)
         Me.Controls.Add(Me.ucrSaveInventoryPlot)
-        Me.Controls.Add(Me.UcrInventoryPlotSelector)
+        Me.Controls.Add(Me.ucrInventoryPlotSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -221,13 +223,12 @@ Partial Class dlgInventoryPlot
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Inventory_Plot"
         Me.Text = "Inventory Plot"
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents UcrInventoryPlotSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrInventoryPlotSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveInventoryPlot As ucrSaveGraph
     Friend WithEvents ucrYearReceiver As ucrReceiverSingle
     Friend WithEvents lblYear As Label
@@ -235,12 +236,12 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrColourReceiver As ucrReceiverSingle
     Friend WithEvents lblDayOfyear As Label
     Friend WithEvents lblColourBand As Label
-    Friend WithEvents chkFlipCoordinates As CheckBox
     Friend WithEvents lblDoY As Label
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents chkAddRecodetoData As CheckBox
-    Friend WithEvents nudThreshold As NumericUpDown
     Friend WithEvents lblThreshold As Label
     Friend WithEvents ucrFacetsReceiver As ucrReceiverSingle
     Friend WithEvents lblFacet As Label
+    Friend WithEvents ucrChkFlipCoordinates As ucrCheck
+    Friend WithEvents ucrChkAddRecodetoData As ucrCheck
+    Friend WithEvents ucrNudThreashold As ucrNud
 End Class
