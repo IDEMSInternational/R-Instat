@@ -171,10 +171,6 @@ Public Class dlgConvertColumns
         End If
     End Sub
 
-    Private Sub chkNumberOfDigits_CheckedChanged(sender As Object, e As EventArgs)
-        NumberOfDigits()
-    End Sub
-
     Private Sub nudDisplayDecimals_TextChanged(sender As Object, e As EventArgs) Handles nudDisplayDecimals.TextChanged
         NumberOfDigits()
     End Sub
