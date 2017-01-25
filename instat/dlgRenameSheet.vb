@@ -31,7 +31,8 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub ReopenDialog()
-
+        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
+        ucrDataFrameToRename.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -59,8 +60,11 @@ Public Class dlgRenameSheet
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ContentsChanged
+        TestOKEnabled()
+    End Sub
     Private Sub TestOKEnabled()
-        If Not ucrInputNewName.IsEmpty Then
+        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

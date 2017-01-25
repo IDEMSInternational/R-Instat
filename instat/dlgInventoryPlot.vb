@@ -29,7 +29,8 @@ Public Class dlgInventoryPlot
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.iHelpTopicID = 455
+        ucrBase.iHelpTopicID = 359
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric"})
         ucrColourReceiver.SetIncludedDataTypes({"numeric"})

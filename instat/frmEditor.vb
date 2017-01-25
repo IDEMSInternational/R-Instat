@@ -37,6 +37,8 @@ Public Class frmEditor
     Private clsUnfreezeColumns As New RFunction
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
+    Private clsConvertOrderedFactor As New RFunction
+    Private clsFilterApplied As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -77,6 +79,8 @@ Public Class frmEditor
         clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
         clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsConvertOrderedFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsFilterApplied.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_applied")
         clsViewDataFrame.SetRCommand("View")
         UpdateRFunctionDataFrameParameters()
     End Sub
@@ -301,6 +305,9 @@ Public Class frmEditor
     Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
         If grdData.Worksheets.Count < 1 Then
             grdData.Hide()
+        ElseIf grdCurrSheet.Equals(e.Worksheet) Then
+            UpdateCurrentWorksheet()
+            grdData.Refresh()
         End If
     End Sub
 
@@ -310,12 +317,25 @@ Public Class frmEditor
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
+        UpdateCurrentWorksheet()
+    End Sub
+
+    Public Sub UpdateCurrentWorksheet()
         grdCurrSheet = grdData.CurrentWorksheet
-        frmMain.strCurrentDataFrame = grdCurrSheet.Name
-        frmMain.tstatus.Text = grdCurrSheet.Name
-        grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-        UpdateRFunctionDataFrameParameters()
+        If grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
+            UpdateRFunctionDataFrameParameters()
+            frmMain.strCurrentDataFrame = grdCurrSheet.Name
+            frmMain.tstatus.Text = grdCurrSheet.Name
+            grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+            grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " rows of " & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
+            If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
+                lblRowDisplay.Text = lblRowDisplay.Text & " (" & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False) & ")"
+            End If
+        Else
+            frmMain.tstatus.Text = "No data loaded"
+            lblRowDisplay.Text = ""
+        End If
     End Sub
 
     'TODO discuss validation for cell editing
@@ -384,19 +404,19 @@ Public Class frmEditor
                     Else
                         MsgBox("Invalid value: " & strNewValue & vbNewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
-                    'Currently removed as this is the class for a blank column
-                    'Case "logical"
-                    '    'Should we accept 'true'/'false'/'True' etc. as logical values?
-                    '    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
-                    '        clsReplaceValue.AddParameter("new_value", e.NewData)
-                    '        bValid = True
-                    '    Else
-                    '        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
-                    '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-                    '    End If
-                    'Case "character"
-                    'clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
-                    'bValid = True
+                'Currently removed as this is the class for a blank column
+                'Case "logical"
+                '    'Should we accept 'true'/'false'/'True' etc. as logical values?
+                '    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
+                '        clsReplaceValue.AddParameter("new_value", e.NewData)
+                '        bValid = True
+                '    Else
+                '        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
+                '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                '    End If
+                'Case "character"
+                'clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                'bValid = True
                 Case Else
                     If Double.TryParse(strNewValue, dblValue) OrElse strNewValue = "TRUE" OrElse strNewValue = "FALSE" Then
                         clsReplaceValue.AddParameter("new_value", strNewValue)
@@ -542,6 +562,8 @@ Public Class frmEditor
             clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsFilterApplied.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 
@@ -631,5 +653,29 @@ Public Class frmEditor
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
         clsViewDataFrame.AddParameter("title", Chr(34) & grdCurrSheet.Name & Chr(34))
         frmMain.clsRLink.RunScript(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame")
+    End Sub
+
+    Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
+        dlgMakeDate.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgMakeDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
+        clsConvertOrderedFactor.AddParameter("col_names", SelectedColumns())
+        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
+        frmMain.clsRLink.RunScript(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
+    End Sub
+
+    Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
+        dlgDuplicateColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgDuplicateColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
+        dlgAddComment.ShowDialog()
     End Sub
 End Class

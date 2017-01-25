@@ -181,6 +181,10 @@ Public Class clsGridLink
             grdVariablesMetadata.Visible = True
             grdMetadata.Visible = True
         End If
+        'TODO TEMPORARY THIS MUST BE REMOVED
+        'Cannot refer to frmEditor directly
+        'Could fix by having user control for grid and here raising event handled in frmEditor
+        frmEditor.UpdateCurrentWorksheet()
     End Sub
 
     Public Sub SetMetadata(tmpStrMetadata As String)
@@ -419,6 +423,8 @@ Public Class clsGridLink
         bGrdDataChanged = True
         bGrdMetadataChanged = True
         bGrdVariablesMetadataChanged = True
+        'TODO This causes the last sheet to be current sheet after running this.
+        '     Need to change how this is done so that the current sheet is remembered before changing.
         If frmMain.clsRLink.bInstatObjectExists Then
             frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- TRUE")
         End If

@@ -692,8 +692,8 @@ instat_object$set("public", "insert_row_in_data", function(data_name, start_row,
 }
 )
 
-instat_object$set("public", "get_data_frame_length", function(data_name) {
-  self$get_data_objects(data_name)$get_data_frame_length()
+instat_object$set("public", "get_data_frame_length", function(data_name, use_current_filter = FALSE) {
+  self$get_data_objects(data_name)$get_data_frame_length(use_current_filter)
 }
 )
 
@@ -706,18 +706,24 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
-  ind <- c()
+  link_name <- ""
   for(i in seq_along(private$.links)) {
     if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
-      ind <- c(ind, i)
+      link_name <- names(private$.links)[i]
+      break
     }
   }
-  #TODO Should this be delete or disable?
-  if(length(ind) > 0) {
-    private$.links[ind] <- NULL
-    message(length(ind), " links removed")
+  if(link_name != "") {
+    #TODO Should this be delete or disable?
+    self$remove_link(link_name)
   }
 } 
+)
+
+instat_object$set("public", "remove_link", function(link_name) {
+  if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
+  private$.links[[link_name]] <- NULL
+}
 )
 
 instat_object$set("public", "get_column_factor_levels", function(data_name,col_name = "") {
@@ -914,8 +920,8 @@ instat_object$set("public","data_frame_exists", function(data_name) {
 } 
 )
 
-instat_object$set("public","add_key", function(data_name, col_names) {
-  self$get_data_objects(data_name)$add_key(col_names)
+instat_object$set("public","add_key", function(data_name, col_names, key_name) {
+  self$get_data_objects(data_name)$add_key(col_names, key_name)
   names(col_names) <- col_names
   self$add_link(data_name, data_name, col_names, keyed_link_label)
   invisible(sapply(self$get_data_objects(), function(x) if(!x$is_metadata(is_linkable)) x$append_to_metadata(is_linkable, FALSE)))
@@ -932,13 +938,17 @@ instat_object$set("public","has_key", function(data_name) {
 }
 )
 
-instat_object$set("public","get_keys", function(data_name) {
-  self$get_data_objects(data_name)$get_keys()
+instat_object$set("public","get_keys", function(data_name, key_name) {
+  self$get_data_objects(data_name)$get_keys(key_name)
 }
 )
 
-instat_object$set("public","get_links", function() {
-  return(private$.links)
+instat_object$set("public","get_links", function(link_name) {
+  if(!missing(link_name)) {
+    if(!link_name %in% names(private$keys)) stop(link_name, " not found.")
+    return(private$.links[[link_name]])
+  }
+  else return(private$.links)
 }
 )
 
@@ -972,8 +982,8 @@ instat_object$set("public","set_column_colours_by_metadata", function(data_name,
 }
 )
 
-instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, ...) {
-  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, ncol = ncol, ... = ...)
+instat_object$set("public","graph_one_variable", function(data_name, columns, numeric = "geom_boxplot", categorical = "geom_bar", character = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, coord_flip  = FALSE, ...) {
+  self$get_data_objects(data_name)$graph_one_variable(columns = columns, numeric = numeric, categorical = categorical, output = output, free_scale_axis = free_scale_axis, ncol = ncol, coord_flip = coord_flip, ... = ...)
 }
 )
 
@@ -1036,8 +1046,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
 }
 )
 
-instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE) {
-  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366)
+instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE ) {
+  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad)
 }
 )
 
@@ -1063,5 +1073,39 @@ instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c())
   self$import_data(data_tables = data_list)
   self$add_key(data_names[2], c("lat", "lon"))
   self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
+}
+)
+
+instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
+  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)
+}
+)
+
+instat_object$set("public", "get_key_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_data_objects(data_name)$get_key_names(include_overall = include_overall, include, exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
+
+instat_object$set("public", "get_link_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), exclude_self_links = TRUE) {
+  if(exclude_self_links) {
+    out <- c()
+    i <- 1
+    for(link in private$.links) {
+      if(link$from_data_frame != link$to_data_frame) out <- c(out, names(private$.links)[i])
+      i <- i + 1
+    }
+  }
+  else out <- names(private$.links)
+  if(as_list) {
+    lst <- list()
+    lst[[overall_label]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
+instat_object$set("public", "remove_key", function(data_name, key_name) {
+  self$get_data_objects(data_name)$remove_key(key_name)
 }
 )
