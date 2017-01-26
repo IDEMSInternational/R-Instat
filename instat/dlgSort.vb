@@ -26,8 +26,6 @@ Public Class dlgSort
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
 
         TestOKEnabled()
@@ -41,21 +39,18 @@ Public Class dlgSort
         ucrSelectForSort.Reset()
     End Sub
 
-    'Setting OKEnabled for the dialogue
+    'Setting OKEnabled
     Private Sub TestOKEnabled()
-        If ucrReceiverSort.IsEmpty() = False Then
+        If Not ucrReceiverSort.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 339
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
 
         'Setting Parameters
         ucrReceiverSort.Selector = ucrSelectForSort
@@ -69,26 +64,26 @@ Public Class dlgSort
         ucrPanelOrder.SetParameter(New RParameter("decreasing"))
         ucrPanelOrder.AddRadioButton(rdoAscending, "FALSE")
         ucrPanelOrder.AddRadioButton(rdoDescending, "TRUE")
+        ucrPanelOrder.SetRDefault("FALSE")
 
         ucrPanelMissingValues.SetParameter(New RParameter("na.last"))
         ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
         ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
+        ucrPanelMissingValues.SetRDefault("TRUE")
 
-        'Set Default Rfunction
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+        'Set Default Rfunction & Parameters
         clsDefaultFunction.AddParameter("decreasing", "FALSE")
         clsDefaultFunction.AddParameter("na.last", "FALSE")
         clsDefaultFunction.AddParameter(ucrSelectForSort.GetParameter(), 0)
-
-
     End Sub
-    'When the reset button is clicked, set the defaults again
+
+    'Setting Defaults on Reset 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged, ucrSelectForSort.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
