@@ -237,15 +237,11 @@ dekade <- function(date) {
   }
 
 open_NetCDF <- function(nc_data){
-  #my_nc_data <- read.nc(nc_data)
-  #names(my_nc_data) #This might be necessary if the list objects may be named differently
-  dataset <- var.get.nc(nc_data, "ccd")
-  lat <- var.get.nc(nc_data, "lat")
-  lon <- var.get.nc(nc_data, "lon")
-  time <- var.get.nc(nc_data, "time")
+  variables = names(nc_data$var)
+  lat <- as.numeric(ncvar_get(nc_data, "lat"))
+  lon <- as.numeric(ncvar_get(nc_data, "lon"))
+  time <- as.numeric(ncvar_get(nc_data, "time"))
   period <- rep(time, each = (length(lat)*length(lon)))
-  nc_value <- c()
-  
   lat_rep <- rep(lat, each = length(lon))
   lon_rep <- rep(lon, length(lat))
   lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
@@ -265,15 +261,35 @@ open_NetCDF <- function(nc_data){
       station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
     }
   }
-  lat_lon_df <- cbind(lat_lon,station)
-  
-  for (k in 1:length(time)){
-    year <- dataset[1:length(lat), 1:length(lon), k]
-    year = as.data.frame(t(year))
-    year = stack(year)
-    g <- as.numeric(year$values)
-    nc_value = append(nc_value, g)
+  lat_lon_df <- cbind(lat_lon, station)
+  my_data <- cbind(period, lat_lon_df)
+  for (current_var in variables){
+    nc_value <- c()
+    dataset <- ncvar_get(nc_data, current_var)
+    if (length(dim(dataset))==1){
+      nc_value = dataset
+    }
+    else if (length(dim(dataset))==2){
+      year <- dataset[1:length(lat), 1:length(lon)]
+      year = as.data.frame(t(year))
+      year = stack(year)
+      g <- as.numeric(year$values)
+      nc_value = append(nc_value, g)
+    }
+    else if (length(dim(dataset))==3){
+      for (k in 1:length(time)){
+        year <- dataset[1:length(lat), 1:length(lon), k]
+        year = as.data.frame(t(year))
+        year = stack(year)
+        g <- as.numeric(year$values)
+        nc_value = append(nc_value, g)
+      }
+    }
+    else{
+      stop("The format of the data cannot be recognised")
+    }
+    my_data = cbind(my_data, nc_value)
+    names(my_data)[length(names(my_data))]<-current_var
   }
-  my_data <- cbind(period, lat_lon_df, nc_value)
   return(list(my_data, lat_lon_df))
 }
