@@ -51,12 +51,12 @@ Public Class sdgOneVarGraph
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
         ucrInputCategorical.SetItems(lstCategoricalPairs)
 
-
         SetParameter({ucrChkSpecifyLayout, ucrNudNumberofColumns}, New RParameter("ncol"))
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkSpecifyLayout.bChangeParameterValue = False
         ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudNumberofColumns.SetMinMax(1, 10)
+        ucrNudNumberofColumns.bAddRemoveParameter = False
         ucrNudNumberofColumns.SetLabel(lblNumberofColumns)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
@@ -66,7 +66,7 @@ Public Class sdgOneVarGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, bReset As Boolean)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
