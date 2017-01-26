@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class dlgRenameSheet
     Public bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgRenameSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
 
@@ -36,14 +37,21 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
         ucrBase.iHelpTopicID = 61
+
+        ucrInputNewName.SetParameter(New RParameter("new_value"))
+        ucrInputNewName.SetValidationTypeAsRVariable()
+        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
+
+        ucrDataFrameToRename.SetParameter(New RParameter("data_name"))
+        ucrDataFrameToRename.SetParameterIsString()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
     End Sub
 
     Private Sub SetDefaults()
-        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
-        ucrInputNewName.Focus()
-        ucrInputNewName.SetValidationTypeAsRVariable()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -51,30 +59,15 @@ Public Class dlgRenameSheet
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputNewName_NameChanged() Handles ucrInputNewName.NameChanged
-        If ucrInputNewName.txtInput.Text <> "" Then
-            ucrBase.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewName.GetText & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("new_value")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ContentsChanged
-        TestOKEnabled()
-    End Sub
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText)) Then
+        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrDataFrameToRename_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameToRename.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem & Chr(34))
-        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
-        ucrInputNewName.Focus()
+    Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrDataFrameToRename.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
