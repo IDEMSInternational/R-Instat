@@ -18,7 +18,8 @@ Imports instat.Translations
 
 Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
-    Private clsDefaultRFunction As New RFunction
+    Private clsDefaultFunction As New RFunction
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -34,17 +35,18 @@ Public Class dlgOneVariableGraph
 
     Private Sub SetDefaults()
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
 
         ucrSelectorOneVarGraph.Reset()
-        ucrOneVarGraphSave.Reset()
-        ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
-
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        bResetSubdialog = True
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 412
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrPnlOutput.SetParameter(New RParameter("output"))
         ucrPnlOutput.AddRadioButton(rdoFacets, Chr(34) & "facets" & Chr(34))
@@ -64,18 +66,20 @@ Public Class dlgOneVariableGraph
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetDefault("FALSE")
 
-        ucrBase.iHelpTopicID = 412
-        ucrOneVarGraphSave.strPrefix = "OneVariableGraph"
-        ucrOneVarGraphSave.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
+        ucrSaveGraph.SetPrefix("OneVariableGraph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         'Define the default RFunction
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultRFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
-        clsDefaultRFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-        clsDefaultRFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultRFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsDefaultFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
+        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
     End Sub
 
     Private Sub ReopenDialog()
@@ -83,12 +87,10 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub TestOkEnabled()
-        'Question: What should TestOK do in the new implementation? Still check controls or check the code?
-        'this test when to enable okay button. Should be enabled only when the receiver is not empty or when the save graph is schecked and the save graph is not empty
-        If ucrReceiverOneVarGraph.IsEmpty() OrElse (ucrOneVarGraphSave.chkSaveGraph.Checked AndAlso ucrOneVarGraphSave.ucrInputGraphName.IsEmpty) Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverOneVarGraph.IsEmpty() AndAlso ucrSaveGraph.IsComplete() Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -97,19 +99,10 @@ Public Class dlgOneVariableGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrOneVarGraphSave_GraphNameChanged() Handles ucrOneVarGraphSave.GraphNameChanged, ucrOneVarGraphSave.SaveGraphCheckedChanged
-        'this sub saves graphs 
-        If ucrOneVarGraphSave.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrOneVarGraphSave.strGraphName, strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrOneVarGraphSave.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
-        TestOkEnabled()
-    End Sub
-
     Private Sub cmdGraph_Click(sender As Object, e As EventArgs) Handles cmdGraphOptions.Click
         ' Link the base function to the sub dialog
-        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, True)
+        sdgOneVarGraph.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        bResetSubdialog = False
         sdgOneVarGraph.ShowDialog()
     End Sub
 
@@ -125,15 +118,10 @@ Public Class dlgOneVariableGraph
         End If
     End Sub
 
-    Private Sub ucrOneVarGraphSave_ContentsChanged() Handles ucrOneVarGraphSave.ContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlContentsChanged, ucrReceiverOneVarGraph.ControlContentsChanged, ucrSelectorOneVarGraph.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlContentsChanged, ucrChkFlip.ControlContentsChanged, ucrReceiverOneVarGraph.ControlContentsChanged, ucrSelectorOneVarGraph.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
-    'When any of the ucrCore controls have been changed we update the R Code to match the contents
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarGraph.ControlValueChanged
         CheckDataType()
     End Sub

@@ -2089,6 +2089,12 @@
     <Compile Include="ucrReorder.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSave.Designer.vb">
+      <DependentUpon>ucrSave.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSave.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSaveGraph.Designer.vb">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </Compile>
@@ -4634,6 +4640,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReorder.sw-KE.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSave.resx">
+      <DependentUpon>ucrSave.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveGraph.fr-FR.resx">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
