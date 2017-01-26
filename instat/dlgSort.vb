@@ -22,11 +22,6 @@ Public Class dlgSort
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Set the things that will always be constant for the dialog
-        ' e.g. function name, selectors and receivers
-        'If this is the first load, set the defaults and then change bFirstLoad to False
-        ' On future loads the dialog will keep previous values used
-        ' and not reset to defaults.
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
