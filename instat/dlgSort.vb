@@ -73,7 +73,7 @@ Public Class dlgSort
 
         'Set Default Rfunction & Parameters
         clsDefaultFunction.AddParameter("decreasing", "FALSE")
-        clsDefaultFunction.AddParameter("na.last", "FALSE")
+        clsDefaultFunction.AddParameter("na.last", "TRUE")
         clsDefaultFunction.AddParameter(ucrSelectForSort.GetParameter(), 0)
     End Sub
 
