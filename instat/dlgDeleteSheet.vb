@@ -13,13 +13,13 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgDeleteSheet
     Public bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrBase.iHelpTopicID = 63
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -43,26 +43,25 @@ Public Class dlgDeleteSheet
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
         ucrBase.iHelpTopicID = 63
+        ucrDataFrameToDelete.SetParameter(New RParameter("data_name"))
+        ucrDataFrameToDelete.SetParameterIsString()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
+        clsDefaultFunction.AddParameter(ucrDataFrameToDelete.GetParameter(), 0)
     End Sub
 
     Private Sub SetDefaults()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrDataFrameToDelete.Reset()
-        ucrDataFrameToDelete.Focus()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 
-    Private Sub ucrDataFrameToDelete_DataFrameChanged() Handles ucrDataFrameToDelete.DataFrameChanged
-        If (ucrDataFrameToDelete.cboAvailableDataFrames.Text <> "") Then
-            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToDelete.cboAvailableDataFrames.SelectedItem & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("data_name")
-        End If
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToDelete.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
