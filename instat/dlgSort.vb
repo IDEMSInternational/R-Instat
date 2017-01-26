@@ -34,10 +34,7 @@ Public Class dlgSort
         Else
             ReopenDialog()
         End If
-        grpMissingValues.Enabled = False
-        'Checks if Ok can be enabled.
-        'Define this method for each dialog 
-        'depending on what parameters are neccessary for the function to run.
+
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -49,10 +46,6 @@ Public Class dlgSort
         ucrSelectForSort.Reset()
     End Sub
 
-    Private Sub ReopenDialog()
-        'SetOrderValue()
-        SetMissingValue()
-    End Sub
     'Setting OKEnabled for the dialogue
     Private Sub TestOKEnabled()
         If ucrReceiverSort.IsEmpty() = False Then
@@ -62,10 +55,14 @@ Public Class dlgSort
         End If
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 339
 
-        'Setting Parameter to the variable's Receiver(ucrReceiverSort)
+        'Setting Parameters
         ucrReceiverSort.Selector = ucrSelectForSort
         ucrReceiverSort.SetMeAsReceiver()
         ucrReceiverSort.SetParameter(New RParameter("col_names"))
@@ -96,7 +93,7 @@ Public Class dlgSort
         TestOKEnabled()
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged, ucrSelectForSort.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged, ucrSelectForSort.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
