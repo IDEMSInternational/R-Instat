@@ -70,12 +70,12 @@ Public Class dlgInventoryPlot
         ucrChkFlipCoordinates.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlipCoordinates.SetDefault("FALSE")
 
-        ucrSave.SetPrefix("Inventory")
-        ucrSave.SetSaveTypeAsGraph()
-        ucrSave.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
-        ucrSave.SetCheckBoxText("Save Graph")
-        ucrSave.SetIsComboBox()
-        ucrSave.SetAssignToIfUncheckedValue("last_graph")
+        ucrSaveGraph.SetPrefix("Inventory")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ucrNudThreashold.SetParameter(New RParameter("threshold"))
         clsDefaultRFunction.AddParameter("threshold", "0.85")
@@ -85,7 +85,7 @@ Public Class dlgInventoryPlot
         ucrBase.iHelpTopicID = 359
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrSave.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
+        ucrSaveGraph.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
         clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)
 
 
@@ -97,7 +97,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not ucrColourReceiver.IsEmpty) AndAlso ucrSave.IsComplete() Then
+        If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not ucrColourReceiver.IsEmpty) AndAlso ucrSaveGraph.IsComplete() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -120,7 +120,7 @@ Public Class dlgInventoryPlot
         SetDefaults()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
