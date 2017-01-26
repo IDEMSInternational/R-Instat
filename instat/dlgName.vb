@@ -36,7 +36,7 @@ Public Class dlgName
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverName.IsEmpty()) AndAlso (Not ucrInputNewName.IsEmpty()) AndAlso Not (ucrReceiverName.GetVariableNames(False) = ucrInputNewName.GetText)) Then
+        If Not ucrReceiverName.IsEmpty() AndAlso Not ucrInputNewName.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -78,14 +78,13 @@ Public Class dlgName
     End Sub
 
     Private Sub Setdefaultcolumn()
-        ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrSelectVariables.SetDataframe(strSelectedDataFrame)
         ucrReceiverName.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         setdefaults()
-        testokenabled()
     End Sub
 
     Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged
