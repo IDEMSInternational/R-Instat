@@ -29,12 +29,14 @@ Public Class dlgInventoryPlot
 
     Private Sub InitialiseDialog()
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.iHelpTopicID = 359
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrYearReceiver.Selector = ucrInventoryPlotSelector
         ucrColourReceiver.Selector = ucrInventoryPlotSelector
         ucrDayOfYearReceiver.Selector = ucrInventoryPlotSelector
         ucrFacetsReceiver.Selector = ucrInventoryPlotSelector
-
 
         ucrYearReceiver.Selector = ucrInventoryPlotSelector
         ucrYearReceiver.SetMeAsReceiver()
@@ -55,7 +57,6 @@ Public Class dlgInventoryPlot
         ucrFacetsReceiver.SetParameter(New RParameter("facets"))
         ucrFacetsReceiver.SetParameterIsString()
 
-
         ucrInventoryPlotSelector.SetParameter(New RParameter("data_name"))
         ucrInventoryPlotSelector.SetParameterIsString()
 
@@ -63,7 +64,6 @@ Public Class dlgInventoryPlot
         ucrChkAddRecodetoData.SetParameter(New RParameter("add_to_data"))
         ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAddRecodetoData.SetDefault("FALSE")
-
 
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip"))
@@ -78,22 +78,13 @@ Public Class dlgInventoryPlot
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ucrNudThreashold.SetParameter(New RParameter("threshold"))
-        clsDefaultRFunction.AddParameter("threshold", "0.85")
-        ucrNudThreashold.bAddRemoveParameter = False
-
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.iHelpTopicID = 359
-        ucrBase.clsRsyntax.iCallType = 3
-
-        ucrSaveGraph.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
-        clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)
-
-
         ucrNudThreashold.Minimum = 0.85
         ucrNudThreashold.Increment = 0.01
         ucrNudThreashold.DecimalPlaces = 2
+        ucrNudThreashold.bAddRemoveParameter = False
 
-
+        clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)
+        clsDefaultRFunction.AddParameter("threshold", "0.85")
     End Sub
 
     Private Sub TestOkEnabled()
@@ -105,8 +96,8 @@ Public Class dlgInventoryPlot
     End Sub
     Private Sub SetDefaults()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrInventoryPlotSelector.Reset()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrYearReceiver.SetMeAsReceiver()
         TestOkEnabled()
     End Sub
