@@ -114,6 +114,15 @@ Public Class ucrNud
         End Set
     End Property
 
+    Public Property DecimalPlaces As Decimal
+        Get
+            Return nudUpDown.DecimalPlaces
+        End Get
+        Set(dDecimalPlaces As Decimal)
+            nudUpDown.DecimalPlaces = dDecimalPlaces
+        End Set
+    End Property
+
 
 
 
