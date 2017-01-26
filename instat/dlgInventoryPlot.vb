@@ -62,13 +62,13 @@ Public Class dlgInventoryPlot
         ucrChkAddRecodetoData.SetText("Add Recode to Data")
         ucrChkAddRecodetoData.SetParameter(New RParameter("add_to_data"))
         ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAddRecodetoData.SetDefault("FALSE")
+        ucrChkAddRecodetoData.SetRDefault("FALSE")
 
 
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkAddRecodetoData.SetParameter(New RParameter("coord_flip"))
         ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAddRecodetoData.SetDefault("FALSE")
+        ucrChkAddRecodetoData.SetRDefault("FALSE")
 
         ucrNudThreashold.SetParameter(New RParameter("threshold"))
 
