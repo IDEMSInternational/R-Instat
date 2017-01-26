@@ -49,6 +49,7 @@ Public Class dlgConvertColumns
         rdoFactor.Checked = True
         ConvertTo()
         SetToFactorStatus(bToFactorOnly)
+        nudDisplayDecimals.Value = 4
         TestOKEnabled()
     End Sub
 
@@ -151,10 +152,24 @@ Public Class dlgConvertColumns
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverColumnsToConvert.IsEmpty() AndAlso (rdoFactor.Checked OrElse rdoNumeric.Checked OrElse rdoCharacter.Checked OrElse rdoInteger.Checked OrElse rdoOrderedFactor.Checked) Then
-            ucrBase.OKEnabled(True)
+        If Not ucrReceiverColumnsToConvert.IsEmpty() Then
+            If rdoNumeric.Checked OrElse rdoCharacter.Checked OrElse rdoInteger.Checked Then
+                ucrBase.OKEnabled(True)
+            ElseIf rdoFactor.Checked OrElse rdoOrderedFactor.Checked Then
+                If chkSpecifyDecimalsToDisplay.Checked Then
+                    If nudDisplayDecimals.Text <> "" Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+                ucrBase.OKEnabled(False)
         End If
     End Sub
     Private Sub rdoByLevelsAndrdoByOrdinals_CheckedChanged(sender As Object, e As EventArgs) Handles rdoConvertLevels.CheckedChanged, rdoConvertOrdinals.CheckedChanged
@@ -174,9 +189,11 @@ Public Class dlgConvertColumns
 
     Private Sub nudDisplayDecimals_TextChanged(sender As Object, e As EventArgs) Handles nudDisplayDecimals.TextChanged
         NumberOfDigits()
+        TestOKEnabled()
     End Sub
 
     Private Sub chkSpecifyDecimalsToDisplay_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpecifyDecimalsToDisplay.CheckedChanged
         NumberOfDigits()
+        TestOKEnabled()
     End Sub
 End Class

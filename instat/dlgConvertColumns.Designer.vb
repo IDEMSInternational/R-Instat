@@ -130,7 +130,7 @@ Partial Class dlgConvertColumns
         '
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertOrdinals)
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertLevels)
-        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(12, 267)
+        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(12, 290)
         Me.grpFactorToNumericOptions.Name = "grpFactorToNumericOptions"
         Me.grpFactorToNumericOptions.Size = New System.Drawing.Size(355, 46)
         Me.grpFactorToNumericOptions.TabIndex = 4
@@ -184,14 +184,14 @@ Partial Class dlgConvertColumns
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 319)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 342)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
         '
         'nudDisplayDecimals
         '
-        Me.nudDisplayDecimals.Location = New System.Drawing.Point(247, 159)
+        Me.nudDisplayDecimals.Location = New System.Drawing.Point(194, 266)
         Me.nudDisplayDecimals.Name = "nudDisplayDecimals"
         Me.nudDisplayDecimals.Size = New System.Drawing.Size(49, 20)
         Me.nudDisplayDecimals.TabIndex = 7
@@ -199,18 +199,18 @@ Partial Class dlgConvertColumns
         'chkSpecifyDecimalsToDisplay
         '
         Me.chkSpecifyDecimalsToDisplay.AutoSize = True
-        Me.chkSpecifyDecimalsToDisplay.Location = New System.Drawing.Point(247, 136)
+        Me.chkSpecifyDecimalsToDisplay.Location = New System.Drawing.Point(18, 267)
         Me.chkSpecifyDecimalsToDisplay.Name = "chkSpecifyDecimalsToDisplay"
-        Me.chkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(173, 17)
+        Me.chkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(170, 17)
         Me.chkSpecifyDecimalsToDisplay.TabIndex = 8
-        Me.chkSpecifyDecimalsToDisplay.Text = "Number of Decimals to Display:"
+        Me.chkSpecifyDecimalsToDisplay.Text = "Number of Decimals to Display"
         Me.chkSpecifyDecimalsToDisplay.UseVisualStyleBackColor = True
         '
         'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 377)
+        Me.ClientSize = New System.Drawing.Size(413, 396)
         Me.Controls.Add(Me.chkSpecifyDecimalsToDisplay)
         Me.Controls.Add(Me.nudDisplayDecimals)
         Me.Controls.Add(Me.grpFactorToNumericOptions)
