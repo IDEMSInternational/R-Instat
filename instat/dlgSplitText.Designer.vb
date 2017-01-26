@@ -24,15 +24,13 @@ Partial Class dlgSplitText
     Private Sub InitializeComponent()
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.lblSplitBy = New System.Windows.Forms.Label()
-        Me.lblNewColumnNames = New System.Windows.Forms.Label()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
-        Me.nudN = New System.Windows.Forms.NumericUpDown()
         Me.ucrInputPattern = New instat.ucrInputComboBox()
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
-        Me.ucrInputColumnsIntoText = New instat.ucrInputComboBox()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudPieces = New instat.ucrNud()
+        Me.ucrSaveColumn = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
@@ -53,15 +51,6 @@ Partial Class dlgSplitText
         Me.lblSplitBy.Tag = ""
         Me.lblSplitBy.Text = "Split by:"
         '
-        'lblNewColumnNames
-        '
-        Me.lblNewColumnNames.Location = New System.Drawing.Point(10, 203)
-        Me.lblNewColumnNames.Name = "lblNewColumnNames"
-        Me.lblNewColumnNames.Size = New System.Drawing.Size(161, 23)
-        Me.lblNewColumnNames.TabIndex = 7
-        Me.lblNewColumnNames.Tag = ""
-        Me.lblNewColumnNames.Text = "Prefix for New Columns:"
-        '
         'lblNumberofPiecesToReturn
         '
         Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(269, 131)
@@ -70,15 +59,6 @@ Partial Class dlgSplitText
         Me.lblNumberofPiecesToReturn.TabIndex = 5
         Me.lblNumberofPiecesToReturn.Tag = "Number_of_Pieces_to_Return"
         Me.lblNumberofPiecesToReturn.Text = "Number of Pieces to Return:"
-        '
-        'nudN
-        '
-        Me.nudN.Location = New System.Drawing.Point(272, 148)
-        Me.nudN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudN.Name = "nudN"
-        Me.nudN.Size = New System.Drawing.Size(37, 20)
-        Me.nudN.TabIndex = 6
-        Me.nudN.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrInputPattern
         '
@@ -90,20 +70,13 @@ Partial Class dlgSplitText
         '
         'ucrReceiverSplitTextColumn
         '
+        Me.ucrReceiverSplitTextColumn.frmParent = Me
         Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(272, 53)
         Me.ucrReceiverSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
         Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverSplitTextColumn.TabIndex = 2
-        '
-        'ucrInputColumnsIntoText
-        '
-        Me.ucrInputColumnsIntoText.IsReadOnly = False
-        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(131, 200)
-        Me.ucrInputColumnsIntoText.Name = "ucrInputColumnsIntoText"
-        Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColumnsIntoText.TabIndex = 8
         '
         'ucrSelectorSplitTextColumn
         '
@@ -122,17 +95,33 @@ Partial Class dlgSplitText
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
         '
+        'ucrNudPieces
+        '
+        Me.ucrNudPieces.Location = New System.Drawing.Point(274, 153)
+        Me.ucrNudPieces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPieces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPieces.Name = "ucrNudPieces"
+        Me.ucrNudPieces.Size = New System.Drawing.Size(41, 20)
+        Me.ucrNudPieces.TabIndex = 10
+        Me.ucrNudPieces.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrSaveColumn
+        '
+        Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 200)
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        Me.ucrSaveColumn.Size = New System.Drawing.Size(305, 24)
+        Me.ucrSaveColumn.TabIndex = 11
+        '
         'dlgSplitText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 288)
+        Me.Controls.Add(Me.ucrSaveColumn)
+        Me.Controls.Add(Me.ucrNudPieces)
         Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrReceiverSplitTextColumn)
-        Me.Controls.Add(Me.ucrInputColumnsIntoText)
-        Me.Controls.Add(Me.nudN)
         Me.Controls.Add(Me.lblNumberofPiecesToReturn)
-        Me.Controls.Add(Me.lblNewColumnNames)
         Me.Controls.Add(Me.lblSplitBy)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
@@ -144,7 +133,6 @@ Partial Class dlgSplitText
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Split_Text_Column"
         Me.Text = "Split Text Column"
-        CType(Me.nudN, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -153,10 +141,9 @@ Partial Class dlgSplitText
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSelectedFactor As Label
     Friend WithEvents lblSplitBy As Label
-    Friend WithEvents lblNewColumnNames As Label
     Friend WithEvents lblNumberofPiecesToReturn As Label
-    Friend WithEvents nudN As NumericUpDown
-    Friend WithEvents ucrInputColumnsIntoText As ucrInputComboBox
     Friend WithEvents ucrReceiverSplitTextColumn As ucrReceiverSingle
     Friend WithEvents ucrInputPattern As ucrInputComboBox
+    Friend WithEvents ucrSaveColumn As ucrSave
+    Friend WithEvents ucrNudPieces As ucrNud
 End Class

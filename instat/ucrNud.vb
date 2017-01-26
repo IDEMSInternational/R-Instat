@@ -165,4 +165,8 @@ Public Class ucrNud
         Next
         Return bTemp
     End Function
+
+    Public Function GetText() As String
+        Return nudUpDown.Text
+    End Function
 End Class
