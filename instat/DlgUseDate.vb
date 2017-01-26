@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgUseDate
+    Private clsDefaultFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgUseDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -28,12 +29,32 @@ Public Class dlgUseDate
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 462
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$split_date")
+
+        ' Selector
+        ucrSelectorUseDate.SetParameter(New RParameter("data_name"))
+        '        ucrSelectorUseDate.SetParameterIsString()
+
+        ' Receiver
+        ucrReceiverUseDate.SetParameter(New RParameter("col_name"))
         ucrReceiverUseDate.Selector = ucrSelectorUseDate
         ucrReceiverUseDate.SetMeAsReceiver()
         ucrReceiverUseDate.bUseFilteredData = False
-        'Restricting the datatypes that the date-time functions take to avoid errors in execution
         ucrReceiverUseDate.SetIncludedDataTypes({"Date"})
+        ucrReceiverUseDate.SetParameterIsString()
+
+        ' Default R Function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+
+
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$split_date")
+
+        'Restricting the datatypes that the date-time functions take to avoid errors in execution
+
+
+
+
+
+
 
     End Sub
 
