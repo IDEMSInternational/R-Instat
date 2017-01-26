@@ -27,7 +27,7 @@ Public Class ucrCore
 
     'Default value of the control
     'No specific type since it can be interpreted different by each control type
-    Protected objDefault As Object = Nothing
+    Protected objRDefault As Object = Nothing
 
     'Protected typControlType As Type = Object
 
@@ -73,6 +73,8 @@ Public Class ucrCore
     Public bLinkedChangeParameterToDefault As Boolean = False
 
     Protected lblLinkedLabel As Label
+
+    Public bIsActiveRControl As Boolean = True
 
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
@@ -134,8 +136,8 @@ Public Class ucrCore
         End If
     End Sub
 
-    Public Overridable Sub SetDefault(objNewDefault As Object)
-        objDefault = objNewDefault
+    Public Overridable Sub SetRDefault(objNewDefault As Object)
+        objRDefault = objNewDefault
     End Sub
 
     Public Overridable Sub SetValueToRemoveParameter(objNewValue As Object)
@@ -143,8 +145,8 @@ Public Class ucrCore
     End Sub
 
     Public Overridable Sub SetToDefault()
-        If clsParameter IsNot Nothing AndAlso objDefault IsNot Nothing Then
-            clsParameter.SetArgumentValue(objDefault.ToString())
+        If clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing Then
+            clsParameter.SetArgumentValue(objRDefault.ToString())
         End If
         UpdateControl()
     End Sub
@@ -169,6 +171,7 @@ Public Class ucrCore
 
     Public Sub OnControlValueChanged()
         OnControlContentsChanged()
+        UpdateRCode()
         RaiseEvent ControlValueChanged(Me)
     End Sub
 
@@ -185,7 +188,7 @@ Public Class ucrCore
     End Function
 
     Public Overridable Function GetDefault() As Object
-        Return objDefault
+        Return objRDefault
     End Function
 
     Public Overridable Function ValueContainedIn(lstTemp As Object()) As Boolean
@@ -232,7 +235,7 @@ Public Class ucrCore
     End Function
 
     Public Overridable Function IsDefault() As Boolean
-        Return clsParameter IsNot Nothing AndAlso objDefault IsNot Nothing AndAlso objDefault.Equals(clsParameter.strArgumentValue)
+        Return clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
     End Function
 
     Public Function LinkedControlsParametersPresent() As Boolean
