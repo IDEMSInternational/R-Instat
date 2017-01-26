@@ -79,6 +79,12 @@ Public Class dlgInventoryPlot
         ucrSaveInventoryPlot.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
         clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)
 
+
+        ucrNudThreashold.Minimum = 0.85
+        ucrNudThreashold.Increment = 0.01
+        ucrNudThreashold.DecimalPlaces = 2
+        ucrNudThreashold.Minimum = 0.85
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -91,16 +97,7 @@ Public Class dlgInventoryPlot
     Private Sub SetDefaults()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-
-        ucrNudThreashold.Value = 0.85
-        ucrNudThreashold.Minimum = 0.85
-        'ucrNudThreashold.nudUpDown.Increment = 0.01
-        'ucrNudThreashold.nudUpDown.DecimalPlaces = 2
-        'ucrNudThreashold.nudUpDown.Minimum = 0.85
-
-        clsDefaultRFunction.AddParameter("threshold", ucrNudThreashold.Value)
-        ucrChkAddRecodetoData.Checked = False
-        ucrChkFlipCoordinates.Checked = False
+        clsDefaultRFunction.AddParameter("threshold", "0.85")
 
         ucrSaveInventoryPlot.Reset()
         ucrInventoryPlotSelector.Reset()
@@ -133,6 +130,5 @@ Public Class dlgInventoryPlot
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInventoryPlotSelector.ControlContentsChanged, ucrChkFlipCoordinates.ControlContentsChanged, ucrChkAddRecodetoData.ControlContentsChanged, ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrFacetsReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrNudThreashold.ControlContentsChanged
         TestOkEnabled()
-        UpdateRCode(Me, clsDefaultRFunction)
     End Sub
 End Class
