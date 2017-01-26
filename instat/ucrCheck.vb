@@ -49,7 +49,9 @@ Public Class ucrCheck
                 'End If
             End If
         Else
-            chkCheck.Checked = LinkedControlsParametersPresent()
+            If lstValuesAndControl.Count > 0 Then
+                chkCheck.Checked = LinkedControlsParametersPresent()
+            End If
         End If
         UpdateLinkedControls()
     End Sub
