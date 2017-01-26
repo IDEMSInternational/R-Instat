@@ -164,8 +164,8 @@ Public Class dlgOpenSST
                     End If
 
                     If strFileExt = ".nc" Then
-                        clsRCDF.SetRCommand("open.nc")
-                        clsRCDF.AddParameter("con", Chr(34) & strFilePath & Chr(34))
+                        clsRCDF.SetRCommand("nc_open")
+                        clsRCDF.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
                         grpCSV.Show()
                         strFileType = "nc"
                         ucrInputName.SetName(strFileName, bSilent:=True)
