@@ -105,6 +105,19 @@ Public Class ucrNud
         End Set
     End Property
 
+    Public Property Increment As Decimal
+        Get
+            Return nudUpDown.Increment
+        End Get
+        Set(dIncrement As Decimal)
+            nudUpDown.Increment = dIncrement
+        End Set
+    End Property
+
+
+
+
+
     'Public Overrides Sub SetToDefault()
     '    Dim dNewValue As Decimal
 
@@ -151,5 +164,9 @@ Public Class ucrNud
             End If
         Next
         Return bTemp
+    End Function
+
+    Public Function GetText() As String
+        Return nudUpDown.Text
     End Function
 End Class
