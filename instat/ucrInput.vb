@@ -35,6 +35,15 @@ Public Class ucrInput
     Protected lstRecognisedItemParameterValuePairs As New List(Of KeyValuePair(Of String, String))
     Public bAddQuotesIfUnrecognised As Boolean = True
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bUpdateRCodeFromControl = True
+    End Sub
+
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
         bLastSilent = bSilent
     End Sub
