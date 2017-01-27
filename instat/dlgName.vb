@@ -43,32 +43,28 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub initialisedialog()
+    Private Sub Initialisedialog()
         ucrReceiverName.Selector = ucrSelectVariables
         ucrReceiverName.SetMeAsReceiver()
         ucrReceiverName.SetParameter(New RParameter("column_name"))
         ucrReceiverName.SetParameterIsString()
-
         ucrSelectVariables.SetParameter(New RParameter("data_name"))
         ucrSelectVariables.SetParameterIsString()
-
         ucrBase.iHelpTopicID = 33
         ucrInputNewName.SetParameter(New RParameter("new_val"))
-        ucrInputNewName.SetDataFrameSelector(ucrSelectVariables.ucrAvailableDataFrames)
-
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
-        clsDefaultRFunction.AddParameter("new_val", Chr(34) & "new_name" & Chr(34))
+        clsDefaultRFunction.AddParameter("new_val", ucrReceiverName.GetVariableNames)
+        ucrInputNewName.SetValidationTypeAsRVariable()
+        ucrInputNewName.SetName(ucrReceiverName.GetVariableNames)
         clsDefaultRFunction.AddParameter(ucrSelectVariables.GetParameter(), 0)
-
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
     End Sub
 
     Public Sub Setdefaults()
         ' Set default RFunction as the base function
+        ucrSelectVariables.Reset()
+        ucrInputNewName.Reset()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        ucrSelectVariables.Reset()
-        ucrInputNewName.ResetText()
-        TestOKEnabled()
     End Sub
 
     Public Sub Setcurrentcolumn(strcolumn As String, strdataframe As String)
@@ -84,10 +80,11 @@ Public Class dlgName
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        setdefaults()
+        Setdefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged
-        Testokenabled()
+        TestOKEnabled()
     End Sub
 End Class
