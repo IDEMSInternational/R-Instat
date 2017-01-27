@@ -77,13 +77,12 @@ Public Class dlgFileNew
         TestOKEnabled()
     End Sub
 
-
     Private Sub TestOKEnabled()
-        '        If Not ucrInputDataFrameName.IsEmpty AndAlso ucrNudCols.Text <> "" AndAlso ucrNudRows.Text <> "" Then
-        '        ucrBase.OKEnabled(True)
-        '        Else
-        '        ucrBase.OKEnabled(False)
-        '        End If
+        If Not ucrInputDataFrameName.IsEmpty AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -93,4 +92,7 @@ Public Class dlgFileNew
     Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataFrameName.ControlContentsChanged, ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+
+
 End Class
