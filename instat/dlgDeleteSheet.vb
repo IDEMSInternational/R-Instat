@@ -47,7 +47,6 @@ Public Class dlgDeleteSheet
         ucrDataFrameToDelete.SetParameter(New RParameter("data_name"))
         ucrDataFrameToDelete.SetParameterIsString()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
-        clsDefaultFunction.AddParameter(ucrDataFrameToDelete.GetParameter(), 0)
     End Sub
 
     Private Sub SetDefaults()
