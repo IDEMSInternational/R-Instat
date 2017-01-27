@@ -31,6 +31,11 @@ Public Class dlgRank
         TestOKEnabled()
 
     End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 25
         ucrBase.clsRsyntax.SetFunction("rank")
@@ -66,6 +71,12 @@ Public Class dlgRank
         ucrSaveRank.SetCheckBoxText("Save Rank")
         ucrSaveRank.SetIsComboBox()
 
+
+        'Define the default RFunction
+        clsDefaultFunction.SetRCommand("rank")
+        clsDefaultFunction.AddParameter("ties.method", Chr(34) & "average" & Chr(34))
+        clsDefaultFunction.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
+        clsDefaultFunction.SetAssignTo("last_rank", strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_rank")
     End Sub
 
     'Testing when to Enable the OK button
@@ -75,10 +86,6 @@ Public Class dlgRank
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     ' Sub that runs only the first time the dialog loads it sets default RFunction as the base function
@@ -94,6 +101,8 @@ Public Class dlgRank
         TestOKEnabled()
     End Sub
 
+
+    'When the reset button is clicked, set the defaults again
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
