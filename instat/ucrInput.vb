@@ -60,12 +60,12 @@ Public Class ucrInput
         Me.Text = Me.GetText()
         If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
             If GetAllRecognisedItems.Contains(GetText()) Then
-                clsParameter.strArgumentValue = lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value
+                clsParameter.SetArgumentValue(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value)
             Else
                 If bAddQuotesIfUnrecognised Then
-                    clsParameter.strArgumentValue = Chr(34) & GetText() & Chr(34)
+                    clsParameter.SetArgumentValue(Chr(34) & GetText() & Chr(34))
                 Else
-                    clsParameter.strArgumentValue = GetText()
+                    clsParameter.SetArgumentValue(GetText())
                 End If
             End If
         End If
