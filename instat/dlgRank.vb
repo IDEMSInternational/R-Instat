@@ -38,7 +38,7 @@ Public Class dlgRank
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 25
-        ucrBase.clsRsyntax.SetFunction("rank")
+        clsDefaultFunction.SetRCommand("rank")
 
         'Setting Parameters and Data types allowed
         ucrReceiverRank.Selector = ucrSelectorForRank
