@@ -41,7 +41,6 @@ Public Class dlgRenameSheet
 
         ucrInputNewName.SetParameter(New RParameter("new_value"))
         ucrInputNewName.SetValidationTypeAsRVariable()
-        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
 
         ucrDataFrameToRename.SetParameter(New RParameter("data_name"))
         ucrDataFrameToRename.SetParameterIsString()
