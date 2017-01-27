@@ -37,6 +37,7 @@ Public Class dlgOneVariableGraph
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorOneVarGraph.Reset()
+        ucrSaveGraph.Reset()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         bResetSubdialog = True
         TestOkEnabled()
