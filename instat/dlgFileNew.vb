@@ -49,9 +49,8 @@ Public Class dlgFileNew
 
         ' ucrNewSheetName
         ucrNewDFName.SetIsTextBox()
-        ucrNewDFName.SetSaveTypeAsColumn()
+        ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-        'ucrNewDFName.Set(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
         ucrNewDFName.SetLabelText("New Data Frame Name:")
 
         ' Default R
@@ -68,12 +67,10 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub ReopenDialog()
-        'ucrName.SetName(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
     End Sub
 
     Private Sub SetDefaults()
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction.Clone())
-
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction.Clone())
         clsMatrixFunction = clsMatrixDefaultFunction.Clone()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         SetRCode(Me, clsMatrixFunction, True)
