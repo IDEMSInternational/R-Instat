@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgUseDate
     Private clsDefaultFunction As New RFunction
@@ -100,40 +101,29 @@ Public Class dlgUseDate
         ucrChkAbbrMonth.SetDefault("FALSE")
 
         ' Default R Function
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-
-
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$split_date")
-
-        'Restricting the datatypes that the date-time functions take to avoid errors in execution
-
-
-
-
-
-
-
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
     End Sub
 
     Private Sub SetDefaults()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorUseDate.Reset()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (chkYear.Checked OrElse chkDayInMonth.Checked OrElse chkDayInYear.Checked OrElse chkDayYear366.Checked OrElse chkDekade.Checked OrElse chkLeapYear.Checked OrElse chkMonthValue.Checked OrElse chkPentad.Checked OrElse chkWeekDayVal.Checked OrElse chkWeek.Checked OrElse chkAbbrMonthName.Checked OrElse chkMonthNam.Checked OrElse chkWeekdayName.Checked OrElse chkAbbrWeekDay.Checked)) Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub grpDateFunctions_CheckedChanged(sender As Object, e As EventArgs) Handles chkAbbrWeekDay.CheckedChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
 
+    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class
