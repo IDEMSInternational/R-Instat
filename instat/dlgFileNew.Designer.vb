@@ -27,8 +27,7 @@ Partial Class dlgFileNew
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrNudCols = New instat.ucrNud()
-        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
-        Me.ucrInputDataFrameName = New instat.ucrInputTextBox()
+        Me.ucrNewDFName = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblRows
@@ -78,31 +77,19 @@ Partial Class dlgFileNew
         Me.ucrNudCols.TabIndex = 11
         Me.ucrNudCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblNewDataFrameName
+        'ucrNewDFName
         '
-        Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(10, 73)
-        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
-        Me.lblNewDataFrameName.Size = New System.Drawing.Size(121, 13)
-        Me.lblNewDataFrameName.TabIndex = 13
-        Me.lblNewDataFrameName.Text = "New Data Frame Name:"
-        '
-        'ucrInputDataFrameName
-        '
-        Me.ucrInputDataFrameName.IsMultiline = False
-        Me.ucrInputDataFrameName.IsReadOnly = False
-        Me.ucrInputDataFrameName.Location = New System.Drawing.Point(137, 70)
-        Me.ucrInputDataFrameName.Name = "ucrInputDataFrameName"
-        Me.ucrInputDataFrameName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDataFrameName.TabIndex = 14
+        Me.ucrNewDFName.Location = New System.Drawing.Point(10, 73)
+        Me.ucrNewDFName.Name = "ucrNewDFName"
+        Me.ucrNewDFName.Size = New System.Drawing.Size(300, 24)
+        Me.ucrNewDFName.TabIndex = 12
         '
         'dlgFileNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 162)
-        Me.Controls.Add(Me.ucrInputDataFrameName)
-        Me.Controls.Add(Me.lblNewDataFrameName)
+        Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrNudCols)
         Me.Controls.Add(Me.ucrNudRows)
         Me.Controls.Add(Me.lblColumns)
@@ -124,6 +111,5 @@ Partial Class dlgFileNew
     Friend WithEvents lblRows As Label
     Friend WithEvents ucrNudRows As ucrNud
     Friend WithEvents ucrNudCols As ucrNud
-    Friend WithEvents lblNewDataFrameName As Label
-    Friend WithEvents ucrInputDataFrameName As ucrInputTextBox
+    Friend WithEvents ucrNewDFName As ucrSave
 End Class

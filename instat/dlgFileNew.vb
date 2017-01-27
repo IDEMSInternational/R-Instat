@@ -48,14 +48,16 @@ Public Class dlgFileNew
         ucrNudCols.SetMinMax(1, Integer.MaxValue)
 
         ' ucrNewSheetName
-        ucrInputDataFrameName.SetValidationTypeAsRVariable()
-        ucrInputDataFrameName.SetDefaultTypeAsDataFrame()
-        ucrInputDataFrameName.SetName(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
+        ucrNewDFName.SetIsTextBox()
+        ucrNewDFName.SetSaveTypeAsColumn()
+        ucrNewDFName.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        'ucrNewDFName.Set(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
+        ucrNewDFName.SetLabelText("New Data Frame Name:")
 
         ' Default R
         clsOverallFunction.SetRCommand("data.frame")
         clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
-        clsOverallFunction.SetAssignTo(ucrInputDataFrameName.GetText(), strTempDataframe:=ucrInputDataFrameName.GetText())
+        clsOverallFunction.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
 
         'matrix(nrow = 10, ncol = 2, Data = NA)
         clsMatrixDefaultFunction.SetRCommand("matrix")
@@ -70,29 +72,27 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub SetDefaults()
-        ucrInputDataFrameName.SetName(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        '        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction.Clone())
+
         clsMatrixFunction = clsMatrixDefaultFunction.Clone()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        SetRCode(Me, clsMatrixFunction, True)
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputDataFrameName.IsEmpty AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        '      If ucrNewDFName.IsComplete AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
+        '     ucrBase.OKEnabled(True)
+        '    Else
+        '   ucrBase.OKEnabled(False)
+        '  End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
 
-    Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataFrameName.ControlContentsChanged, ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged
+    Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-
-
 End Class
