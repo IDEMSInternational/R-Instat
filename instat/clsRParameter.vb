@@ -98,6 +98,16 @@ Public Class RParameter
         Return strRet
     End Function
 
+    Public Function HasValue() As Boolean
+        If bIsString Then
+            Return strArgumentValue IsNot Nothing
+        ElseIf bIsFunction OrElse bIsOperator Then
+            Return clsArgumentCodeStructure IsNot Nothing
+        Else
+            Return False
+        End If
+    End Function
+
     Public Function Clone() As RParameter
         Dim clsTempRParam As New RParameter
 

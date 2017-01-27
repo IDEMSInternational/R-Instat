@@ -33,6 +33,16 @@ Public Class ucrInput
     Public bAutoChangeOnLeave As Boolean = False
     Private bLastSilent As Boolean = False
     Protected lstRecognisedItemParameterValuePairs As New List(Of KeyValuePair(Of String, String))
+    Public bAddQuotesIfUnrecognised As Boolean = True
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bUpdateRCodeFromControl = True
+    End Sub
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
         bLastSilent = bSilent
@@ -52,7 +62,11 @@ Public Class ucrInput
             If GetAllRecognisedItems.Contains(GetText()) Then
                 clsParameter.strArgumentValue = lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value
             Else
-                clsParameter.strArgumentValue = GetText()
+                If bAddQuotesIfUnrecognised Then
+                    clsParameter.strArgumentValue = Chr(34) & GetText() & Chr(34)
+                Else
+                    clsParameter.strArgumentValue = GetText()
+                End If
             End If
         End If
         UpdateRCode()
@@ -393,7 +407,11 @@ Public Class ucrInput
                 If GetAllRecognisedParameterValues.Contains(clsParameter.strArgumentValue) Then
                     SetName(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Value = clsParameter.strArgumentValue).Key)
                 Else
-                    SetName(clsParameter.strArgumentValue)
+                    If bAddQuotesIfUnrecognised Then
+                        SetName(clsParameter.strArgumentValue.Trim(Chr(34)))
+                    Else
+                        SetName(clsParameter.strArgumentValue)
+                    End If
                 End If
             End If
         End If
