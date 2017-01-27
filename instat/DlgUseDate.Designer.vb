@@ -29,22 +29,22 @@ Partial Class dlgUseDate
         Me.chkLeapYear = New System.Windows.Forms.CheckBox()
         Me.chkDekade = New System.Windows.Forms.CheckBox()
         Me.grpFullName = New System.Windows.Forms.GroupBox()
-        Me.chkWeekdayName = New System.Windows.Forms.CheckBox()
-        Me.chkMonthNam = New System.Windows.Forms.CheckBox()
         Me.grpAbbreviation = New System.Windows.Forms.GroupBox()
-        Me.chkAbbrWeekDay = New System.Windows.Forms.CheckBox()
-        Me.chkAbbrMonthName = New System.Windows.Forms.CheckBox()
         Me.grpValues = New System.Windows.Forms.GroupBox()
-        Me.chkYear = New System.Windows.Forms.CheckBox()
-        Me.chkMonthValue = New System.Windows.Forms.CheckBox()
-        Me.chkDayInMonth = New System.Windows.Forms.CheckBox()
-        Me.chkDayInYear = New System.Windows.Forms.CheckBox()
-        Me.chkDayYear = New System.Windows.Forms.CheckBox()
-        Me.chkWeek = New System.Windows.Forms.CheckBox()
-        Me.chkWeekDayVal = New System.Windows.Forms.CheckBox()
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkYear = New instat.ucrCheck()
+        Me.ucrChkMonth = New instat.ucrCheck()
+        Me.ucrChkDay = New instat.ucrCheck()
+        Me.ucrChkWeek = New instat.ucrCheck()
+        Me.ucrChkWeekday = New instat.ucrCheck()
+        Me.ucrChkDayInYear = New instat.ucrCheck()
+        Me.ucrChkDayYear366 = New instat.ucrCheck()
+        Me.ucrChkAbbrWeekday = New instat.ucrCheck()
+        Me.ucrChkAbbrMonth = New instat.ucrCheck()
+        Me.ucrChkFullWeekday = New instat.ucrCheck()
+        Me.ucrChkFullMonth = New instat.ucrCheck()
         Me.grpDateFunctions.SuspendLayout()
         Me.grpOthers.SuspendLayout()
         Me.grpFullName.SuspendLayout()
@@ -69,7 +69,7 @@ Partial Class dlgUseDate
         Me.grpDateFunctions.Controls.Add(Me.grpValues)
         Me.grpDateFunctions.Location = New System.Drawing.Point(14, 196)
         Me.grpDateFunctions.Name = "grpDateFunctions"
-        Me.grpDateFunctions.Size = New System.Drawing.Size(445, 191)
+        Me.grpDateFunctions.Size = New System.Drawing.Size(445, 204)
         Me.grpDateFunctions.TabIndex = 3
         Me.grpDateFunctions.TabStop = False
         Me.grpDateFunctions.Text = "Date Functions"
@@ -79,7 +79,7 @@ Partial Class dlgUseDate
         Me.grpOthers.Controls.Add(Me.chkPentad)
         Me.grpOthers.Controls.Add(Me.chkLeapYear)
         Me.grpOthers.Controls.Add(Me.chkDekade)
-        Me.grpOthers.Location = New System.Drawing.Point(6, 136)
+        Me.grpOthers.Location = New System.Drawing.Point(6, 150)
         Me.grpOthers.Name = "grpOthers"
         Me.grpOthers.Size = New System.Drawing.Size(429, 48)
         Me.grpOthers.TabIndex = 3
@@ -118,154 +118,45 @@ Partial Class dlgUseDate
         '
         'grpFullName
         '
-        Me.grpFullName.Controls.Add(Me.chkWeekdayName)
-        Me.grpFullName.Controls.Add(Me.chkMonthNam)
+        Me.grpFullName.Controls.Add(Me.ucrChkFullWeekday)
+        Me.grpFullName.Controls.Add(Me.ucrChkFullMonth)
         Me.grpFullName.Location = New System.Drawing.Point(329, 19)
         Me.grpFullName.Name = "grpFullName"
-        Me.grpFullName.Size = New System.Drawing.Size(106, 111)
+        Me.grpFullName.Size = New System.Drawing.Size(106, 125)
         Me.grpFullName.TabIndex = 2
         Me.grpFullName.TabStop = False
         Me.grpFullName.Text = "Full Name"
         '
-        'chkWeekdayName
-        '
-        Me.chkWeekdayName.AutoSize = True
-        Me.chkWeekdayName.Location = New System.Drawing.Point(9, 23)
-        Me.chkWeekdayName.Name = "chkWeekdayName"
-        Me.chkWeekdayName.Size = New System.Drawing.Size(78, 17)
-        Me.chkWeekdayName.TabIndex = 0
-        Me.chkWeekdayName.Text = " Weekday "
-        Me.chkWeekdayName.UseVisualStyleBackColor = True
-        '
-        'chkMonthNam
-        '
-        Me.chkMonthNam.AutoSize = True
-        Me.chkMonthNam.Location = New System.Drawing.Point(9, 52)
-        Me.chkMonthNam.Name = "chkMonthNam"
-        Me.chkMonthNam.Size = New System.Drawing.Size(56, 17)
-        Me.chkMonthNam.TabIndex = 1
-        Me.chkMonthNam.Text = "Month"
-        Me.chkMonthNam.UseVisualStyleBackColor = True
-        '
         'grpAbbreviation
         '
-        Me.grpAbbreviation.Controls.Add(Me.chkAbbrWeekDay)
-        Me.grpAbbreviation.Controls.Add(Me.chkAbbrMonthName)
-        Me.grpAbbreviation.Location = New System.Drawing.Point(218, 19)
+        Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrMonth)
+        Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrWeekday)
+        Me.grpAbbreviation.Location = New System.Drawing.Point(222, 19)
         Me.grpAbbreviation.Name = "grpAbbreviation"
-        Me.grpAbbreviation.Size = New System.Drawing.Size(105, 111)
+        Me.grpAbbreviation.Size = New System.Drawing.Size(105, 125)
         Me.grpAbbreviation.TabIndex = 1
         Me.grpAbbreviation.TabStop = False
         Me.grpAbbreviation.Text = "Abbreviation"
         '
-        'chkAbbrWeekDay
-        '
-        Me.chkAbbrWeekDay.AutoSize = True
-        Me.chkAbbrWeekDay.Location = New System.Drawing.Point(6, 25)
-        Me.chkAbbrWeekDay.Name = "chkAbbrWeekDay"
-        Me.chkAbbrWeekDay.Size = New System.Drawing.Size(75, 17)
-        Me.chkAbbrWeekDay.TabIndex = 0
-        Me.chkAbbrWeekDay.Text = " Weekday"
-        Me.chkAbbrWeekDay.UseVisualStyleBackColor = True
-        '
-        'chkAbbrMonthName
-        '
-        Me.chkAbbrMonthName.AutoSize = True
-        Me.chkAbbrMonthName.Location = New System.Drawing.Point(6, 53)
-        Me.chkAbbrMonthName.Name = "chkAbbrMonthName"
-        Me.chkAbbrMonthName.Size = New System.Drawing.Size(56, 17)
-        Me.chkAbbrMonthName.TabIndex = 1
-        Me.chkAbbrMonthName.Text = "Month"
-        Me.chkAbbrMonthName.UseVisualStyleBackColor = True
-        '
         'grpValues
         '
-        Me.grpValues.Controls.Add(Me.chkYear)
-        Me.grpValues.Controls.Add(Me.chkMonthValue)
-        Me.grpValues.Controls.Add(Me.chkDayInMonth)
-        Me.grpValues.Controls.Add(Me.chkDayInYear)
-        Me.grpValues.Controls.Add(Me.chkDayYear)
-        Me.grpValues.Controls.Add(Me.chkWeek)
-        Me.grpValues.Controls.Add(Me.chkWeekDayVal)
+        Me.grpValues.Controls.Add(Me.ucrChkDayYear366)
+        Me.grpValues.Controls.Add(Me.ucrChkYear)
+        Me.grpValues.Controls.Add(Me.ucrChkDayInYear)
+        Me.grpValues.Controls.Add(Me.ucrChkMonth)
+        Me.grpValues.Controls.Add(Me.ucrChkDay)
+        Me.grpValues.Controls.Add(Me.ucrChkWeekday)
+        Me.grpValues.Controls.Add(Me.ucrChkWeek)
         Me.grpValues.Location = New System.Drawing.Point(6, 19)
         Me.grpValues.Name = "grpValues"
-        Me.grpValues.Size = New System.Drawing.Size(206, 111)
+        Me.grpValues.Size = New System.Drawing.Size(212, 125)
         Me.grpValues.TabIndex = 0
         Me.grpValues.TabStop = False
         Me.grpValues.Text = "Values"
         '
-        'chkYear
-        '
-        Me.chkYear.AutoSize = True
-        Me.chkYear.Location = New System.Drawing.Point(6, 19)
-        Me.chkYear.Name = "chkYear"
-        Me.chkYear.Size = New System.Drawing.Size(48, 17)
-        Me.chkYear.TabIndex = 0
-        Me.chkYear.Text = "Year"
-        Me.chkYear.UseVisualStyleBackColor = True
-        '
-        'chkMonthValue
-        '
-        Me.chkMonthValue.AutoSize = True
-        Me.chkMonthValue.Location = New System.Drawing.Point(6, 42)
-        Me.chkMonthValue.Name = "chkMonthValue"
-        Me.chkMonthValue.Size = New System.Drawing.Size(59, 17)
-        Me.chkMonthValue.TabIndex = 2
-        Me.chkMonthValue.Text = "Month "
-        Me.chkMonthValue.UseVisualStyleBackColor = True
-        '
-        'chkDayInMonth
-        '
-        Me.chkDayInMonth.AutoSize = True
-        Me.chkDayInMonth.Location = New System.Drawing.Point(6, 65)
-        Me.chkDayInMonth.Name = "chkDayInMonth"
-        Me.chkDayInMonth.Size = New System.Drawing.Size(48, 17)
-        Me.chkDayInMonth.TabIndex = 4
-        Me.chkDayInMonth.Text = "Day "
-        Me.chkDayInMonth.UseVisualStyleBackColor = True
-        '
-        'chkDayInYear
-        '
-        Me.chkDayInYear.AutoSize = True
-        Me.chkDayInYear.Location = New System.Drawing.Point(96, 42)
-        Me.chkDayInYear.Name = "chkDayInYear"
-        Me.chkDayInYear.Size = New System.Drawing.Size(79, 17)
-        Me.chkDayInYear.TabIndex = 3
-        Me.chkDayInYear.Text = "Day in year"
-        Me.chkDayInYear.UseVisualStyleBackColor = True
-        '
-        'chkDayYear
-        '
-        Me.chkDayYear.AutoSize = True
-        Me.chkDayYear.Location = New System.Drawing.Point(96, 65)
-        Me.chkDayYear.Name = "chkDayYear"
-        Me.chkDayYear.Size = New System.Drawing.Size(108, 17)
-        Me.chkDayYear.TabIndex = 5
-        Me.chkDayYear.Text = "Day in Year (366)"
-        Me.chkDayYear.UseVisualStyleBackColor = True
-        '
-        'chkWeek
-        '
-        Me.chkWeek.AutoSize = True
-        Me.chkWeek.Location = New System.Drawing.Point(6, 88)
-        Me.chkWeek.Name = "chkWeek"
-        Me.chkWeek.Size = New System.Drawing.Size(55, 17)
-        Me.chkWeek.TabIndex = 6
-        Me.chkWeek.Text = "Week"
-        Me.chkWeek.UseVisualStyleBackColor = True
-        '
-        'chkWeekDayVal
-        '
-        Me.chkWeekDayVal.AutoSize = True
-        Me.chkWeekDayVal.Location = New System.Drawing.Point(96, 19)
-        Me.chkWeekDayVal.Name = "chkWeekDayVal"
-        Me.chkWeekDayVal.Size = New System.Drawing.Size(75, 17)
-        Me.chkWeekDayVal.TabIndex = 1
-        Me.chkWeekDayVal.Text = "Weekday "
-        Me.chkWeekDayVal.UseVisualStyleBackColor = True
-        '
         'ucrReceiverUseDate
         '
+        Me.ucrReceiverUseDate.frmParent = Me
         Me.ucrReceiverUseDate.Location = New System.Drawing.Point(254, 39)
         Me.ucrReceiverUseDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverUseDate.Name = "ucrReceiverUseDate"
@@ -290,6 +181,94 @@ Partial Class dlgUseDate
         Me.ucrSelectorUseDate.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorUseDate.TabIndex = 0
         '
+        'ucrChkYear
+        '
+        Me.ucrChkYear.Checked = False
+        Me.ucrChkYear.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkYear.Name = "ucrChkYear"
+        Me.ucrChkYear.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkYear.TabIndex = 7
+        '
+        'ucrChkMonth
+        '
+        Me.ucrChkMonth.Checked = False
+        Me.ucrChkMonth.Location = New System.Drawing.Point(6, 43)
+        Me.ucrChkMonth.Name = "ucrChkMonth"
+        Me.ucrChkMonth.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMonth.TabIndex = 8
+        '
+        'ucrChkDay
+        '
+        Me.ucrChkDay.Checked = False
+        Me.ucrChkDay.Location = New System.Drawing.Point(6, 69)
+        Me.ucrChkDay.Name = "ucrChkDay"
+        Me.ucrChkDay.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkDay.TabIndex = 9
+        '
+        'ucrChkWeek
+        '
+        Me.ucrChkWeek.Checked = False
+        Me.ucrChkWeek.Location = New System.Drawing.Point(6, 95)
+        Me.ucrChkWeek.Name = "ucrChkWeek"
+        Me.ucrChkWeek.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkWeek.TabIndex = 10
+        '
+        'ucrChkWeekday
+        '
+        Me.ucrChkWeekday.Checked = False
+        Me.ucrChkWeekday.Location = New System.Drawing.Point(112, 17)
+        Me.ucrChkWeekday.Name = "ucrChkWeekday"
+        Me.ucrChkWeekday.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkWeekday.TabIndex = 11
+        '
+        'ucrChkDayInYear
+        '
+        Me.ucrChkDayInYear.Checked = False
+        Me.ucrChkDayInYear.Location = New System.Drawing.Point(112, 43)
+        Me.ucrChkDayInYear.Name = "ucrChkDayInYear"
+        Me.ucrChkDayInYear.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkDayInYear.TabIndex = 12
+        '
+        'ucrChkDayYear366
+        '
+        Me.ucrChkDayYear366.Checked = False
+        Me.ucrChkDayYear366.Location = New System.Drawing.Point(112, 69)
+        Me.ucrChkDayYear366.Name = "ucrChkDayYear366"
+        Me.ucrChkDayYear366.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkDayYear366.TabIndex = 13
+        '
+        'ucrChkAbbrWeekday
+        '
+        Me.ucrChkAbbrWeekday.Checked = False
+        Me.ucrChkAbbrWeekday.Location = New System.Drawing.Point(5, 17)
+        Me.ucrChkAbbrWeekday.Name = "ucrChkAbbrWeekday"
+        Me.ucrChkAbbrWeekday.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkAbbrWeekday.TabIndex = 5
+        '
+        'ucrChkAbbrMonth
+        '
+        Me.ucrChkAbbrMonth.Checked = False
+        Me.ucrChkAbbrMonth.Location = New System.Drawing.Point(5, 43)
+        Me.ucrChkAbbrMonth.Name = "ucrChkAbbrMonth"
+        Me.ucrChkAbbrMonth.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkAbbrMonth.TabIndex = 6
+        '
+        'ucrChkFullWeekday
+        '
+        Me.ucrChkFullWeekday.Checked = False
+        Me.ucrChkFullWeekday.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkFullWeekday.Name = "ucrChkFullWeekday"
+        Me.ucrChkFullWeekday.Size = New System.Drawing.Size(90, 20)
+        Me.ucrChkFullWeekday.TabIndex = 2
+        '
+        'ucrChkFullMonth
+        '
+        Me.ucrChkFullMonth.Checked = False
+        Me.ucrChkFullMonth.Location = New System.Drawing.Point(6, 43)
+        Me.ucrChkFullMonth.Name = "ucrChkFullMonth"
+        Me.ucrChkFullMonth.Size = New System.Drawing.Size(90, 20)
+        Me.ucrChkFullMonth.TabIndex = 3
+        '
         'dlgUseDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -310,11 +289,8 @@ Partial Class dlgUseDate
         Me.grpOthers.ResumeLayout(False)
         Me.grpOthers.PerformLayout()
         Me.grpFullName.ResumeLayout(False)
-        Me.grpFullName.PerformLayout()
         Me.grpAbbreviation.ResumeLayout(False)
-        Me.grpAbbreviation.PerformLayout()
         Me.grpValues.ResumeLayout(False)
-        Me.grpValues.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -328,19 +304,19 @@ Partial Class dlgUseDate
     Friend WithEvents chkLeapYear As CheckBox
     Friend WithEvents chkDekade As CheckBox
     Friend WithEvents chkPentad As CheckBox
-    Friend WithEvents chkDayYear As CheckBox
-    Friend WithEvents chkMonthValue As CheckBox
-    Friend WithEvents chkWeek As CheckBox
-    Friend WithEvents chkDayInYear As CheckBox
-    Friend WithEvents chkDayInMonth As CheckBox
-    Friend WithEvents chkWeekDayVal As CheckBox
-    Friend WithEvents chkYear As CheckBox
-    Friend WithEvents chkMonthNam As CheckBox
-    Friend WithEvents chkAbbrMonthName As CheckBox
-    Friend WithEvents chkWeekdayName As CheckBox
-    Friend WithEvents chkAbbrWeekDay As CheckBox
     Friend WithEvents grpOthers As GroupBox
     Friend WithEvents grpFullName As GroupBox
     Friend WithEvents grpAbbreviation As GroupBox
     Friend WithEvents grpValues As GroupBox
+    Friend WithEvents ucrChkDayYear366 As ucrCheck
+    Friend WithEvents ucrChkDayInYear As ucrCheck
+    Friend WithEvents ucrChkWeekday As ucrCheck
+    Friend WithEvents ucrChkWeek As ucrCheck
+    Friend WithEvents ucrChkDay As ucrCheck
+    Friend WithEvents ucrChkMonth As ucrCheck
+    Friend WithEvents ucrChkYear As ucrCheck
+    Friend WithEvents ucrChkFullWeekday As ucrCheck
+    Friend WithEvents ucrChkFullMonth As ucrCheck
+    Friend WithEvents ucrChkAbbrMonth As ucrCheck
+    Friend WithEvents ucrChkAbbrWeekday As ucrCheck
 End Class

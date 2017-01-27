@@ -64,7 +64,7 @@ Public Class dlgUseDate
         chkAbbrWeekDay.Checked = False
         chkDayInMonth.Checked = False
         chkDayInYear.Checked = False
-        chkDayYear.Checked = False
+        chkDayYear366.Checked = False
         chkDekade.Checked = False
         chkLeapYear.Checked = False
         chkMonthNam.Checked = False
@@ -78,7 +78,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (chkYear.Checked OrElse chkDayInMonth.Checked OrElse chkDayInYear.Checked OrElse chkDayYear.Checked OrElse chkDekade.Checked OrElse chkLeapYear.Checked OrElse chkMonthValue.Checked OrElse chkPentad.Checked OrElse chkWeekDayVal.Checked OrElse chkWeek.Checked OrElse chkAbbrMonthName.Checked OrElse chkMonthNam.Checked OrElse chkWeekdayName.Checked OrElse chkAbbrWeekDay.Checked)) Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (chkYear.Checked OrElse chkDayInMonth.Checked OrElse chkDayInYear.Checked OrElse chkDayYear366.Checked OrElse chkDekade.Checked OrElse chkLeapYear.Checked OrElse chkMonthValue.Checked OrElse chkPentad.Checked OrElse chkWeekDayVal.Checked OrElse chkWeek.Checked OrElse chkAbbrMonthName.Checked OrElse chkMonthNam.Checked OrElse chkWeekdayName.Checked OrElse chkAbbrWeekDay.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -161,7 +161,7 @@ Public Class dlgUseDate
             ucrBase.clsRsyntax.RemoveParameter("leap_year")
         End If
 
-        If chkDayYear.Checked Then
+        If chkDayYear366.Checked Then
             ucrBase.clsRsyntax.AddParameter("day_in_year_366", "TRUE")
         Else
             ucrBase.clsRsyntax.RemoveParameter("day_in_year_366")
@@ -183,7 +183,7 @@ Public Class dlgUseDate
 
     End Sub
 
-    Private Sub grpDateFunctions_CheckedChanged(sender As Object, e As EventArgs) Handles chkYear.CheckedChanged, chkDayInMonth.CheckedChanged, chkDayInYear.CheckedChanged, chkDayYear.CheckedChanged, chkDekade.CheckedChanged, chkLeapYear.CheckedChanged, chkMonthValue.CheckedChanged, chkPentad.CheckedChanged, chkWeekDayVal.CheckedChanged, chkWeek.CheckedChanged, chkMonthNam.CheckedChanged, chkAbbrMonthName.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkAbbrWeekDay.CheckedChanged, chkWeekdayName.CheckedChanged
+    Private Sub grpDateFunctions_CheckedChanged(sender As Object, e As EventArgs) Handles chkDekade.CheckedChanged, chkLeapYear.CheckedChanged, chkPentad.CheckedChanged, chkAbbrWeekDay.CheckedChanged
         SetParameters()
         TestOKEnabled()
     End Sub
