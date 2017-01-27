@@ -46,59 +46,59 @@ Public Class dlgUseDate
         'Check boxes
         ucrChkYear.SetParameter(New RParameter("year"))
         ucrChkYear.SetText("Year")
-        ucrChkYear.SetDefault("FALSE")
+        ucrChkYear.SetRDefault("FALSE")
 
         ucrChkWeekday.SetParameter(New RParameter("weekday_val"))
         ucrChkWeekday.SetText("Weekday")
-        ucrChkWeekday.SetDefault("FALSE")
+        ucrChkWeekday.SetRDefault("FALSE")
 
         ucrChkWeek.SetParameter(New RParameter("week"))
         ucrChkWeek.SetText("Week")
-        ucrChkWeek.SetDefault("FALSE")
+        ucrChkWeek.SetRDefault("FALSE")
 
         ucrChkMonth.SetParameter(New RParameter("month_val"))
         ucrChkMonth.SetText("Month")
-        ucrChkMonth.SetDefault("FALSE")
+        ucrChkMonth.SetRDefault("FALSE")
 
         ucrChkDayYear366.SetParameter(New RParameter("day_in_year_366"))
         ucrChkDayYear366.SetText("Day in Year (366)")
-        ucrChkDayYear366.SetDefault("FALSE")
+        ucrChkDayYear366.SetRDefault("FALSE")
 
         ucrChkDayInYear.SetParameter(New RParameter("day_in_year"))
         ucrChkDayInYear.SetText("Day in Year")
-        ucrChkDayInYear.SetDefault("FALSE")
+        ucrChkDayInYear.SetRDefault("FALSE")
 
         ucrChkDay.SetParameter(New RParameter("day_in_month"))
         ucrChkDay.SetText("Day")
-        ucrChkDay.SetDefault("FALSE")
+        ucrChkDay.SetRDefault("FALSE")
 
         ucrChkFullWeekday.SetParameter(New RParameter("weekday_name"))
         ucrChkFullWeekday.SetText("Weekday")
-        ucrChkFullWeekday.SetDefault("FALSE")
+        ucrChkFullWeekday.SetRDefault("FALSE")
 
         ucrChkFullMonth.SetParameter(New RParameter("month_name"))
         ucrChkFullMonth.SetText("Month")
-        ucrChkFullMonth.SetDefault("FALSE")
+        ucrChkFullMonth.SetRDefault("FALSE")
 
         ucrChkDekad.SetParameter(New RParameter("dekade"))
         ucrChkDekad.SetText("Dekad")
-        ucrChkDekad.SetDefault("FALSE")
+        ucrChkDekad.SetRDefault("FALSE")
 
         ucrChkPentad.SetParameter(New RParameter("pentad"))
         ucrChkPentad.SetText("Pentad")
-        ucrChkPentad.SetDefault("FALSE")
+        ucrChkPentad.SetRDefault("FALSE")
 
         ucrChkLeapYear.SetParameter(New RParameter("leap_year"))
         ucrChkLeapYear.SetText("Leap Year")
-        ucrChkLeapYear.SetDefault("FALSE")
+        ucrChkLeapYear.SetRDefault("FALSE")
 
         ucrChkAbbrWeekday.SetParameter(New RParameter("weekday_abbr"))
         ucrChkAbbrWeekday.SetText("Weekday")
-        ucrChkAbbrWeekday.SetDefault("FALSE")
+        ucrChkAbbrWeekday.SetRDefault("FALSE")
 
         ucrChkAbbrMonth.SetParameter(New RParameter("month_abbr"))
         ucrChkAbbrMonth.SetText("Month")
-        ucrChkAbbrMonth.SetDefault("FALSE")
+        ucrChkAbbrMonth.SetRDefault("FALSE")
 
         ' Default R Function
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
