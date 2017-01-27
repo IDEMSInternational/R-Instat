@@ -28,17 +28,11 @@ Public Class dlgName
             Initialisedialog()
             Setdefaults()
             bFirstLoad = False
-        Else
-
         End If
         If bUseSelectedColumn Then
             Setdefaultcolumn()
         End If
         TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -61,23 +55,23 @@ Public Class dlgName
         ucrSelectVariables.SetParameter(New RParameter("data_name"))
         ucrSelectVariables.SetParameterIsString()
         ucrBase.iHelpTopicID = 33
+
+        DefaultNewName()
         ucrInputNewName.SetParameter(New RParameter("new_val"))
         ucrInputNewName.SetValidationTypeAsRVariable()
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
     End Sub
     Private Sub DefaultNewName()
         If Not ucrInputNewName.bUserTyped Then
-            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames())
+            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
         End If
     End Sub
 
     Public Sub Setdefaults()
-        ' Set default RFunction as the base function
         ucrSelectVariables.Reset()
-        ucrInputNewName.Reset()
+        ucrInputNewName.ResetText()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        DefaultNewName()
     End Sub
 
     Public Sub Setcurrentcolumn(strcolumn As String, strdataframe As String)
@@ -97,11 +91,11 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged
+    Private Sub ucrInputNewName_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNewName.ControlValueChanged
+    Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
         DefaultNewName()
     End Sub
 End Class
