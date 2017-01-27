@@ -25,10 +25,10 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.chkOmitMissing = New System.Windows.Forms.CheckBox()
-        Me.chkdropUnusedLevels = New System.Windows.Forms.CheckBox()
-        Me.chkStoreResults = New System.Windows.Forms.CheckBox()
-        Me.chkPrintOutput = New System.Windows.Forms.CheckBox()
+        Me.ucrChkStoreResults = New instat.ucrCheck()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
+        Me.ucrChkPrintOutput = New instat.ucrCheck()
+        Me.ucrChkdropUnusedLevels = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
@@ -57,54 +57,48 @@ Partial Class dlgColumnStats
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.chkOmitMissing)
-        Me.grpOptions.Controls.Add(Me.chkdropUnusedLevels)
-        Me.grpOptions.Controls.Add(Me.chkStoreResults)
-        Me.grpOptions.Controls.Add(Me.chkPrintOutput)
-        Me.grpOptions.Location = New System.Drawing.Point(9, 197)
+        Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
+        Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
+        Me.grpOptions.Controls.Add(Me.ucrChkdropUnusedLevels)
+        Me.grpOptions.Location = New System.Drawing.Point(9, 190)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(184, 112)
+        Me.grpOptions.Size = New System.Drawing.Size(120, 121)
         Me.grpOptions.TabIndex = 9
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
-        'chkOmitMissing
+        'ucrChkStoreResults
         '
-        Me.chkOmitMissing.Location = New System.Drawing.Point(7, 85)
-        Me.chkOmitMissing.Name = "chkOmitMissing"
-        Me.chkOmitMissing.Size = New System.Drawing.Size(126, 25)
-        Me.chkOmitMissing.TabIndex = 11
-        Me.chkOmitMissing.Text = "Omit Missing Values"
-        Me.chkOmitMissing.UseVisualStyleBackColor = True
+        Me.ucrChkStoreResults.Checked = False
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkStoreResults.TabIndex = 11
         '
-        'chkdropUnusedLevels
+        'ucrChkOmitMissing
         '
-        Me.chkdropUnusedLevels.Location = New System.Drawing.Point(7, 61)
-        Me.chkdropUnusedLevels.Name = "chkdropUnusedLevels"
-        Me.chkdropUnusedLevels.Size = New System.Drawing.Size(126, 25)
-        Me.chkdropUnusedLevels.TabIndex = 1
-        Me.chkdropUnusedLevels.Text = "Drop Unused Levels"
-        Me.chkdropUnusedLevels.UseVisualStyleBackColor = True
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 94)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkOmitMissing.TabIndex = 11
         '
-        'chkStoreResults
+        'ucrChkPrintOutput
         '
-        Me.chkStoreResults.AutoSize = True
-        Me.chkStoreResults.Location = New System.Drawing.Point(7, 18)
-        Me.chkStoreResults.Name = "chkStoreResults"
-        Me.chkStoreResults.Size = New System.Drawing.Size(158, 17)
-        Me.chkStoreResults.TabIndex = 10
-        Me.chkStoreResults.Text = "Store Results in Data Frame"
-        Me.chkStoreResults.UseVisualStyleBackColor = True
+        Me.ucrChkPrintOutput.Checked = False
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 43)
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPrintOutput.TabIndex = 11
         '
-        'chkPrintOutput
+        'ucrChkdropUnusedLevels
         '
-        Me.chkPrintOutput.AutoSize = True
-        Me.chkPrintOutput.Location = New System.Drawing.Point(7, 41)
-        Me.chkPrintOutput.Name = "chkPrintOutput"
-        Me.chkPrintOutput.Size = New System.Drawing.Size(174, 17)
-        Me.chkPrintOutput.TabIndex = 0
-        Me.chkPrintOutput.Text = "Print Results to Output Window"
-        Me.chkPrintOutput.UseVisualStyleBackColor = True
+        Me.ucrChkdropUnusedLevels.Checked = False
+        Me.ucrChkdropUnusedLevels.Location = New System.Drawing.Point(6, 69)
+        Me.ucrChkdropUnusedLevels.Name = "ucrChkdropUnusedLevels"
+        Me.ucrChkdropUnusedLevels.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkdropUnusedLevels.TabIndex = 11
         '
         'cmdSummaries
         '
@@ -118,6 +112,7 @@ Partial Class dlgColumnStats
         '
         'ucrReceiverByFactor
         '
+        Me.ucrReceiverByFactor.frmParent = Me
         Me.ucrReceiverByFactor.Location = New System.Drawing.Point(267, 172)
         Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
@@ -127,6 +122,7 @@ Partial Class dlgColumnStats
         '
         'ucrReceiverSelectedVariables
         '
+        Me.ucrReceiverSelectedVariables.frmParent = Me
         Me.ucrReceiverSelectedVariables.Location = New System.Drawing.Point(267, 46)
         Me.ucrReceiverSelectedVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedVariables.Name = "ucrReceiverSelectedVariables"
@@ -155,7 +151,7 @@ Partial Class dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 374)
+        Me.ClientSize = New System.Drawing.Size(429, 381)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverByFactor)
@@ -172,7 +168,6 @@ Partial Class dlgColumnStats
         Me.Tag = "Column_Statistics"
         Me.Text = "Column Statistics"
         Me.grpOptions.ResumeLayout(False)
-        Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -185,9 +180,9 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrReceiverSelectedVariables As ucrReceiverMultiple
     Friend WithEvents ucrReceiverByFactor As ucrReceiverMultiple
     Friend WithEvents grpOptions As GroupBox
-    Friend WithEvents chkdropUnusedLevels As CheckBox
-    Friend WithEvents chkPrintOutput As CheckBox
-    Friend WithEvents chkStoreResults As CheckBox
     Friend WithEvents cmdSummaries As Button
-    Friend WithEvents chkOmitMissing As CheckBox
+    Friend WithEvents ucrChkStoreResults As ucrCheck
+    Friend WithEvents ucrChkOmitMissing As ucrCheck
+    Friend WithEvents ucrChkPrintOutput As ucrCheck
+    Friend WithEvents ucrChkdropUnusedLevels As ucrCheck
 End Class
