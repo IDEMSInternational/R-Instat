@@ -28,7 +28,6 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub InitialiseDialog()
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 359
         ucrBase.clsRsyntax.iCallType = 3
@@ -83,6 +82,7 @@ Public Class dlgInventoryPlot
         ucrNudThreashold.DecimalPlaces = 2
         ucrNudThreashold.bAddRemoveParameter = False
 
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)
         clsDefaultRFunction.AddParameter("threshold", "0.85")
     End Sub
