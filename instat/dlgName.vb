@@ -25,12 +25,12 @@ Public Class dlgName
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            InitialiseDialog()
-            SetDefaults()
+            Initialisedialog()
+            Setdefaults()
             bFirstLoad = False
         End If
         If bUseSelectedColumn Then
-            SetDefaultColumn()
+            Setdefaultcolumn()
         End If
         TestOKEnabled()
     End Sub
@@ -52,11 +52,10 @@ Public Class dlgName
         ucrSelectVariables.SetParameterIsString()
         ucrBase.iHelpTopicID = 33
         ucrInputNewName.SetParameter(New RParameter("new_val"))
-        clsDefaultRFunction.AddParameter("new_val", ucrReceiverName.GetVariableNames)
+        ucrInputNewName.SetName("new_column_name")
         ucrInputNewName.SetValidationTypeAsRVariable()
-        ucrInputNewName.SetName(ucrReceiverName.GetVariableNames)
-        clsDefaultRFunction.AddParameter(ucrSelectVariables.GetParameter(), 0)
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
+        clsDefaultRFunction.AddParameter("new_val", Chr(34) & "new_column_name" & Chr(34))
     End Sub
 
     Public Sub Setdefaults()
