@@ -402,7 +402,7 @@ Public Class ucrInput
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
         MyBase.UpdateControl(bReset)
-        If clsParameter IsNot Nothing Then
+        If clsParameter IsNot Nothing AndAlso clsParameter.strArgumentValue IsNot Nothing Then
             If bChangeParameterValue Then
                 If GetAllRecognisedParameterValues.Contains(clsParameter.strArgumentValue) Then
                     SetName(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Value = clsParameter.strArgumentValue).Key)
