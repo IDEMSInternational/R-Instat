@@ -45,7 +45,7 @@ Public Class ucrDataFrame
     Private Sub InitialiseControl()
         bUseCurrentFilter = True
         SetRDefault("")
-        bUpdateRCodeFromControl = True
+        bUpdateWhenRCodeSet = True
     End Sub
 
     Public Sub Reset()
