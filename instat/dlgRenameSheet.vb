@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgRenameSheet
     Public bFirstLoad As Boolean = True
@@ -53,8 +54,9 @@ Public Class dlgRenameSheet
     Private Sub SetDefaults()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
+        ucrInputNewName.Reset()
         ucrDataFrameToRename.Reset()
+        CheckAutoName()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -72,5 +74,15 @@ Public Class dlgRenameSheet
 
     Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrDataFrameToRename.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDataFrameToRename_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToRename.ControlValueChanged
+        CheckAutoName()
+    End Sub
+
+    Private Sub CheckAutoName()
+        If Not ucrInputNewName.bUserTyped Then
+            ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
+        End If
     End Sub
 End Class
