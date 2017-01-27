@@ -29,7 +29,6 @@ Public Class ucrReceiverSingle
         ' Add any initialization after the InitializeComponent() call.
         strDataFrameName = ""
         strCurrDataType = ""
-        AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
     End Sub
 
     Public Overrides Sub AddSelected()
@@ -280,6 +279,7 @@ Public Class ucrReceiverSingle
 
     Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
             bFirstLoad = False
         End If
     End Sub
