@@ -55,7 +55,7 @@ Public Class dlgRank
         ucrPanelTies.AddRadioButton(rdoFirst, Chr(34) & "first" & Chr(34))
         ucrPanelTies.AddRadioButton(rdoRandom, Chr(34) & "random" & Chr(34))
         ucrPanelTies.SetRDefault(Chr(34) & "average" & Chr(34))
-        ucrPanelMissingValues.SetRDefault("FALSE")
+
 
         ucrPanelMissingValues.SetParameter(New RParameter("na.last"))
         ucrPanelMissingValues.AddRadioButton(rdoKeptAsMissing, Chr(34) & "keep" & Chr(34))
@@ -67,8 +67,7 @@ Public Class dlgRank
         ucrSaveRank.SetPrefix("rank")
         ucrSaveRank.SetSaveTypeAsColumn()
         ucrSaveRank.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
-        ucrSaveRank.SetAssignToIfUncheckedValue("last_rank")
-        ucrSaveRank.SetCheckBoxText("Save Rank")
+        ucrSaveRank.SetLabelText("Save Rank")
         ucrSaveRank.SetIsComboBox()
 
 
@@ -76,7 +75,7 @@ Public Class dlgRank
         clsDefaultFunction.SetRCommand("rank")
         clsDefaultFunction.AddParameter("ties.method", Chr(34) & "average" & Chr(34))
         clsDefaultFunction.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
-        clsDefaultFunction.SetAssignTo("last_rank", strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_rank")
+        clsDefaultFunction.SetAssignTo("rank", strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="rank")
     End Sub
 
     'Testing when to Enable the OK button
