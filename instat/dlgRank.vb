@@ -16,8 +16,8 @@
 Imports instat.Translations
 
 Public Class dlgRank
-    'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -32,11 +32,16 @@ Public Class dlgRank
 
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 25
         ucrBase.clsRsyntax.SetFunction("rank")
+
+        'Setting Parameters and Data types allowed
         ucrReceiverRank.Selector = ucrSelectorForRank
         ucrReceiverRank.bUseFilteredData = False
         ucrReceiverRank.SetIncludedDataTypes({"numeric"})
-        ucrBase.iHelpTopicID = 25
+        ucrReceiverRank.SetParameter(New RParameter("x"))
+        ucrReceiverRank.SetParameterIsString()
+
 
         ucrInputColName.SetPrefix("Rank")
         ucrInputColName.SetItemsTypeAsColumns()
@@ -71,7 +76,7 @@ Public Class dlgRank
 
     End Sub
 
-    Private Sub grpTies_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAverage.CheckedChanged, rdoMinimum.CheckedChanged, rdoMaximum.CheckedChanged, rdoFirst.CheckedChanged, rdoRandom.CheckedChanged
+    Private Sub grpTies_CheckedChanged(sender As Object, e As EventArgs)
         SetTiesValues()
     End Sub
     Private Sub SetTiesValues()
@@ -100,18 +105,7 @@ Public Class dlgRank
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
-
-    'Use this event to see when something has changed in a receiver
-    Private Sub ucrReceiverRank_SelectionChanged() Handles ucrReceiverRank.SelectionChanged
-        If Not ucrReceiverRank.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub rdoKeptAsMissing_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKeptAsMissing.CheckedChanged, rdoFirstMissingValues.CheckedChanged, rdoLast.CheckedChanged
+    Private Sub rdoKeptAsMissing_CheckedChanged(sender As Object, e As EventArgs)
         setMissingValue()
     End Sub
 
