@@ -50,8 +50,9 @@ Public Class RFunction
     Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, iPosition)
     End Sub
-    Public Overrides Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = -1)
-        MyBase.AddParameter(clsParam, iPosition)
+
+    Public Overrides Sub AddParameter(clsParam As RParameter)
+        MyBase.AddParameter(clsParam)
     End Sub
 
     Public Overrides Function GetParameter(strName As String) As RParameter
