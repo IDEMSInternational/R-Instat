@@ -77,7 +77,7 @@ Public Class dlgInventoryPlot
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSaveInventoryPlot.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
-        clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)
+        clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter())
 
     End Sub
 
