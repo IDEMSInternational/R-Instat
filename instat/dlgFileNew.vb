@@ -55,7 +55,7 @@ Public Class dlgFileNew
 
         ' Default R
         clsOverallFunction.SetRCommand("data.frame")
-        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
+        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixDefaultFunction)
         clsOverallFunction.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
 
         'matrix(nrow = 10, ncol = 2, Data = NA)
@@ -64,6 +64,7 @@ Public Class dlgFileNew
         clsMatrixDefaultFunction.AddParameter("ncol", 2)
         clsMatrixDefaultFunction.AddParameter("nrow", 10)
 
+        'data.frame(data=())
     End Sub
 
     Private Sub ReopenDialog()
