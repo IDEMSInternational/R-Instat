@@ -55,6 +55,7 @@ Public Class ucrReceiver
         bTypeSet = False
         strSelectorHeading = "Variables"
         strType = "column"
+        bUpdateRCodeFromControl = True
     End Sub
 
     Public Overridable Sub AddSelected()
@@ -383,5 +384,9 @@ Public Class ucrReceiver
             lstVariables(i) = lstVariables(i).Trim(Chr(34), " ", Chr(39), ")")
         Next
         Return lstVariables
+    End Function
+
+    Public Overrides Function IsDefault() As Boolean
+        Return IsEmpty()
     End Function
 End Class
