@@ -51,7 +51,6 @@ Public Class dlgSort
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 339
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
 
         'Setting Parameters
         ucrReceiverSort.Selector = ucrSelectForSort
@@ -68,15 +67,13 @@ Public Class dlgSort
         ucrPanelOrder.SetRDefault("FALSE")
 
         'Currently Disabled
-
         'ucrPanelMissingValues.SetParameter(New RParameter("na.last"))
         'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
         'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
         'ucrPanelMissingValues.SetRDefault("TRUE")
 
         'Set Default Rfunction & Parameters
-        clsDefaultFunction.AddParameter("decreasing", "FALSE")
-        'clsDefaultFunction.AddParameter("na.last", "TRUE")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
         clsDefaultFunction.AddParameter(ucrSelectForSort.GetParameter(), 0)
     End Sub
 
