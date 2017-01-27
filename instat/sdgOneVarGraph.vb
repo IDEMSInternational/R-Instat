@@ -16,14 +16,10 @@
 Imports instat
 Imports instat.Translations
 Public Class sdgOneVarGraph
-    Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsGraphOneVariable As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            bFirstLoad = False
-        End If
         autoTranslate(Me)
     End Sub
 
@@ -51,17 +47,18 @@ Public Class sdgOneVarGraph
         lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
         ucrInputCategorical.SetItems(lstCategoricalPairs)
 
-
         SetParameter({ucrChkSpecifyLayout, ucrNudNumberofColumns}, New RParameter("ncol"))
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkSpecifyLayout.bChangeParameterValue = False
         ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudNumberofColumns.SetMinMax(1, 10)
+        ucrNudNumberofColumns.bAddRemoveParameter = False
         ucrNudNumberofColumns.SetLabel(lblNumberofColumns)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
         ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis"))
-        ucrChkFreeScaleAxisforFacets.SetDefault("FALSE")
+        ucrChkFreeScaleAxisforFacets.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFreeScaleAxisforFacets.SetRDefault("FALSE")
 
         bControlsInitialised = True
     End Sub

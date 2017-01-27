@@ -33,7 +33,9 @@ Public Class ucrRadio
                 'End If
             End If
         Else
-            rdoRadio.Checked = LinkedControlsParametersPresent()
+            If lstValuesAndControl.Count > 0 Then
+                rdoRadio.Checked = LinkedControlsParametersPresent()
+            End If
         End If
         UpdateLinkedControls()
     End Sub
