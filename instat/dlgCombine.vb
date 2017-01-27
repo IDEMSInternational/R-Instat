@@ -11,9 +11,11 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgCombine_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -27,25 +29,40 @@ Public Class dlgCombine
         TestOkEnabled()
     End Sub
 
-    Private Sub SetDefaults()
-        ucrSelectorCombineFactors.Reset()
-        ucrSelectorCombineFactors.Focus()
-        ucrInputColName.Reset()
-        chkDropUnusedLevels.Checked = False
-        ucrInputColName.SetPrefix("Interact")
-    End Sub
-
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 39
+
+        'ucrReceiver
+        ucrFactorsReceiver.SetParameter(New RParameter("x"))
+        ucrFactorsReceiver.SetParameterIsRFunction()
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
-        ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
         ucrFactorsReceiver.bUseFilteredData = False
-        ucrBase.clsRsyntax.SetFunction("interaction")
-        ucrInputColName.SetItemsTypeAsColumns()
-        ucrInputColName.SetDefaultTypeAsColumn()
-        ucrInputColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
-        ucrBase.iHelpTopicID = 39
-        ucrInputColName.SetValidationTypeAsRVariable()
+        ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
+
+        ' Input Column Name
+        ucrNewColName.SetIsTextBox()
+        ucrNewColName.SetSaveTypeAsColumn()
+        ucrNewColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
+        ucrNewColName.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrNewColName.SetLabelText("New Column Name:")
+
+        'chkbox
+        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop"))
+        ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
+        ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDropUnusedLevels.SetRDefault("FALSE")
+
+        ' Default Function
+        clsDefaultFunction.SetRCommand("interaction")
+        clsDefaultFunction.SetAssignTo(strTemp:="Interact", strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Interact", bAssignToIsPrefix:=True)
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrSelectorCombineFactors.Reset()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        TestOkEnabled()
     End Sub
 
     Private Sub ReOpenDialog()
@@ -53,46 +70,18 @@ Public Class dlgCombine
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrFactorsReceiver.lstSelectedVariables.Items.Count > 1) AndAlso (Not ucrInputColName.IsEmpty()) Then
+        If (ucrFactorsReceiver.lstSelectedVariables.Items.Count > 1) AndAlso ucrNewColName.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrFactorsReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFactorsReceiver.ControlContentsChanged, ucrNewColName.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrFactorsReceiver_SelectionChanged() Handles ucrFactorsReceiver.SelectionChanged
-        If ucrFactorsReceiver.lstSelectedVariables.Items.Count > 1 Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrFactorsReceiver.GetVariables())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputColName_NameChanged() Handles ucrInputColName.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
-        TestOkEnabled()
-    End Sub
-
-    Private Sub chkDropUnusedLevels_CheckedChanged(sender As Object, e As EventArgs) Handles chkDropUnusedLevels.CheckedChanged
-        If chkDropUnusedLevels.Checked Then
-            ucrBase.clsRsyntax.AddParameter("drop", "TRUE")
-        Else
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("drop", "FALSE")
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("drop")
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrSelectorCombineFactors_DataFrameChanged() Handles ucrSelectorCombineFactors.DataFrameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
     End Sub
 End Class
