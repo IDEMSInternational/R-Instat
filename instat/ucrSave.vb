@@ -178,6 +178,25 @@ Public Class ucrSave
         ucrInputComboSave.Enabled = ucrChkSave.Checked
         ucrInputTextSave.Visible = False
         ucrInputComboSave.Visible = False
+        If strAssignToIfUnchecked <> "" Then
+            If ucrChkSave.Checked Then
+                If bIsComboBox Then
+                    If Not ucrInputComboSave.bUserTyped Then
+                        ucrInputComboSave.SetDefaultName()
+                    End If
+                Else
+                    If Not ucrInputTextSave.bUserTyped Then
+                        ucrInputTextSave.SetDefaultName()
+                    End If
+                End If
+            Else
+                If bIsComboBox Then
+                    ucrInputComboSave.SetName(strAssignToIfUnchecked)
+                Else
+                    ucrInputTextSave.SetName(strAssignToIfUnchecked)
+                End If
+            End If
+        End If
         If bHideIfUnchecked Then
             If bIsComboBox Then
                 ucrInputComboSave.Visible = ucrChkSave.Checked
