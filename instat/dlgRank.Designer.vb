@@ -23,23 +23,22 @@ Partial Class dlgRank
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
-        Me.lblNewColumName = New System.Windows.Forms.Label()
-        Me.ucrInputColName = New instat.ucrInputComboBox()
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverRank = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpTies = New System.Windows.Forms.GroupBox()
-        Me.ucrPanelTies = New instat.UcrPanel()
         Me.rdoRandom = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoAverage = New System.Windows.Forms.RadioButton()
+        Me.ucrPanelTies = New instat.UcrPanel()
         Me.grpMissingValues = New System.Windows.Forms.GroupBox()
-        Me.ucrPanelMissingValues = New instat.UcrPanel()
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
+        Me.ucrPanelMissingValues = New instat.UcrPanel()
+        Me.ucrSaveRank = New instat.ucrSave()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.SuspendLayout()
@@ -53,24 +52,6 @@ Partial Class dlgRank
         Me.lblSelectedVariable.TabIndex = 1
         Me.lblSelectedVariable.Tag = "Selected_Variable"
         Me.lblSelectedVariable.Text = "Selected Variable:"
-        '
-        'lblNewColumName
-        '
-        Me.lblNewColumName.AutoSize = True
-        Me.lblNewColumName.Location = New System.Drawing.Point(7, 307)
-        Me.lblNewColumName.Name = "lblNewColumName"
-        Me.lblNewColumName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumName.TabIndex = 5
-        Me.lblNewColumName.Tag = "New_Column_Name"
-        Me.lblNewColumName.Text = "New Column Name:"
-        '
-        'ucrInputColName
-        '
-        Me.ucrInputColName.IsReadOnly = False
-        Me.ucrInputColName.Location = New System.Drawing.Point(114, 303)
-        Me.ucrInputColName.Name = "ucrInputColName"
-        Me.ucrInputColName.Size = New System.Drawing.Size(145, 21)
-        Me.ucrInputColName.TabIndex = 6
         '
         'ucrSelectorForRank
         '
@@ -114,13 +95,6 @@ Partial Class dlgRank
         Me.grpTies.TabStop = False
         Me.grpTies.Tag = "Ties"
         Me.grpTies.Text = "Ties"
-        '
-        'ucrPanelTies
-        '
-        Me.ucrPanelTies.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPanelTies.Name = "ucrPanelTies"
-        Me.ucrPanelTies.Size = New System.Drawing.Size(114, 126)
-        Me.ucrPanelTies.TabIndex = 0
         '
         'rdoRandom
         '
@@ -182,6 +156,13 @@ Partial Class dlgRank
         Me.rdoAverage.Text = "Average"
         Me.rdoAverage.UseVisualStyleBackColor = True
         '
+        'ucrPanelTies
+        '
+        Me.ucrPanelTies.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPanelTies.Name = "ucrPanelTies"
+        Me.ucrPanelTies.Size = New System.Drawing.Size(114, 126)
+        Me.ucrPanelTies.TabIndex = 0
+        '
         'grpMissingValues
         '
         Me.grpMissingValues.Controls.Add(Me.rdoKeptAsMissing)
@@ -195,13 +176,6 @@ Partial Class dlgRank
         Me.grpMissingValues.TabStop = False
         Me.grpMissingValues.Tag = "Misssing_Values"
         Me.grpMissingValues.Text = "Missing Values"
-        '
-        'ucrPanelMissingValues
-        '
-        Me.ucrPanelMissingValues.Location = New System.Drawing.Point(6, 17)
-        Me.ucrPanelMissingValues.Name = "ucrPanelMissingValues"
-        Me.ucrPanelMissingValues.Size = New System.Drawing.Size(345, 34)
-        Me.ucrPanelMissingValues.TabIndex = 0
         '
         'rdoKeptAsMissing
         '
@@ -239,15 +213,28 @@ Partial Class dlgRank
         Me.rdoFirstMissingValues.Text = "First"
         Me.rdoFirstMissingValues.UseVisualStyleBackColor = True
         '
+        'ucrPanelMissingValues
+        '
+        Me.ucrPanelMissingValues.Location = New System.Drawing.Point(6, 17)
+        Me.ucrPanelMissingValues.Name = "ucrPanelMissingValues"
+        Me.ucrPanelMissingValues.Size = New System.Drawing.Size(345, 34)
+        Me.ucrPanelMissingValues.TabIndex = 0
+        '
+        'ucrSaveRank
+        '
+        Me.ucrSaveRank.Location = New System.Drawing.Point(10, 300)
+        Me.ucrSaveRank.Name = "ucrSaveRank"
+        Me.ucrSaveRank.Size = New System.Drawing.Size(277, 24)
+        Me.ucrSaveRank.TabIndex = 0
+        '
         'dlgRank
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(427, 390)
+        Me.Controls.Add(Me.ucrSaveRank)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.grpTies)
-        Me.Controls.Add(Me.lblNewColumName)
-        Me.Controls.Add(Me.ucrInputColName)
         Me.Controls.Add(Me.ucrSelectorForRank)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrReceiverRank)
@@ -276,8 +263,6 @@ Partial Class dlgRank
     Friend WithEvents rdoLast As RadioButton
     Friend WithEvents rdoFirstMissingValues As RadioButton
     Friend WithEvents ucrSelectorForRank As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrInputColName As ucrInputComboBox
-    Friend WithEvents lblNewColumName As Label
     Friend WithEvents grpTies As GroupBox
     Friend WithEvents rdoRandom As RadioButton
     Friend WithEvents rdoFirst As RadioButton
@@ -286,4 +271,5 @@ Partial Class dlgRank
     Friend WithEvents rdoAverage As RadioButton
     Friend WithEvents ucrPanelTies As UcrPanel
     Friend WithEvents ucrPanelMissingValues As UcrPanel
+    Friend WithEvents ucrSaveRank As ucrSave
 End Class

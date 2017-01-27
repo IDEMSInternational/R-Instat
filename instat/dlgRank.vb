@@ -37,7 +37,7 @@ Public Class dlgRank
 
         'Setting Parameters and Data types allowed
         ucrReceiverRank.Selector = ucrSelectorForRank
-        ucrReceiverRank.bUseFilteredData = False
+        ucrReceiverRank.SetMeAsReceiver()
         ucrReceiverRank.SetIncludedDataTypes({"numeric"})
         ucrReceiverRank.SetParameter(New RParameter("x"))
         ucrReceiverRank.SetParameterIsString()
@@ -50,6 +50,7 @@ Public Class dlgRank
         ucrPanelTies.AddRadioButton(rdoFirst, Chr(34) & "first" & Chr(34))
         ucrPanelTies.AddRadioButton(rdoRandom, Chr(34) & "random" & Chr(34))
         ucrPanelTies.SetRDefault(Chr(34) & "average" & Chr(34))
+        ucrPanelMissingValues.SetRDefault("FALSE")
 
         ucrPanelMissingValues.SetParameter(New RParameter("na.last"))
         ucrPanelMissingValues.AddRadioButton(rdoKeptAsMissing, Chr(34) & "keep" & Chr(34))
@@ -57,32 +58,31 @@ Public Class dlgRank
         ucrPanelMissingValues.AddRadioButton(rdoLast, Chr(34) & "TRUE" & Chr(34))
         ucrPanelMissingValues.SetRDefault("TRUE")
 
-        ucrInputColName.SetPrefix("Rank")
-        ucrInputColName.SetItemsTypeAsColumns()
-        ucrInputColName.SetDefaultTypeAsColumn()
-        ucrInputColName.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
-        ucrInputColName.SetValidationTypeAsRVariable()
+
+        ucrSaveRank.SetPrefix("rank")
+        ucrSaveRank.SetSaveTypeAsColumn()
+        ucrSaveRank.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
+        ucrSaveRank.SetAssignToIfUncheckedValue("last_rank")
+        ucrSaveRank.SetCheckBoxText("Save Rank")
+        ucrSaveRank.SetIsComboBox()
+
     End Sub
 
-    'This runs on load and after anything is changed on the dialog.
+    'Testing when to Enable the OK button
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRank.IsEmpty() AndAlso Not ucrInputColName.IsEmpty() Then
+        If Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveRank.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    ' Sub that runs only the first time the dialog loads
+    ' Sub that runs only the first time the dialog loads it sets default RFunction as the base function
     Private Sub SetDefaults()
-        ucrReceiverRank.Selector = ucrSelectorForRank
-        ucrReceiverRank.SetMeAsReceiver()
-        rdoKeptAsMissing.Checked = True
-        rdoAverage.Checked = True
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorForRank.Reset()
-        ucrInputColName.SetPrefix("Rank")
-        rdoAverage.Checked = True
-        rdoKeptAsMissing.Checked = True
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        ucrSelectorForRank.Reset()
         TestOKEnabled()
     End Sub
 
@@ -90,57 +90,51 @@ Public Class dlgRank
 
     End Sub
 
-    Private Sub grpTies_CheckedChanged(sender As Object, e As EventArgs)
-        SetTiesValues()
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForRank.ControlContentsChanged, ucrReceiverRank.ControlContentsChanged, ucrSaveRank.ControlContentsChanged
+        TestOKEnabled()
     End Sub
-    Private Sub SetTiesValues()
 
-        If rdoAverage.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "average" & Chr(34))
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("ties.method")
-            End If
-        ElseIf rdoMinimum.Checked Then
-            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "min" & Chr(34))
-        ElseIf rdoMaximum.Checked Then
-            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "max" & Chr(34))
-        ElseIf rdoFirst.Checked Then
-            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "first" & Chr(34))
-        ElseIf rdoRandom.Checked Then
-            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "random" & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("ties.method")
-        End If
+    'Private Sub SetTiesValues()
 
-    End Sub
+    '    If rdoAverage.Checked Then
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "average" & Chr(34))
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveParameter("ties.method")
+    '        End If
+    '    ElseIf rdoMinimum.Checked Then
+    '        ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "min" & Chr(34))
+    '    ElseIf rdoMaximum.Checked Then
+    '        ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "max" & Chr(34))
+    '    ElseIf rdoFirst.Checked Then
+    '        ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "first" & Chr(34))
+    '    ElseIf rdoRandom.Checked Then
+    '        ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "random" & Chr(34))
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveParameter("ties.method")
+    '    End If
+
+    'End Sub
 
     'When the reset button is clicked, set the defaults again
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
-    Private Sub rdoKeptAsMissing_CheckedChanged(sender As Object, e As EventArgs)
-        setMissingValue()
-    End Sub
 
-    Private Sub setMissingValue()
-        If rdoKeptAsMissing.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("na.last")
-            End If
-        ElseIf rdoFirstMissingValues.Checked Then
-            ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
-        ElseIf rdoLast.Checked Then
-            ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("na.last")
-        End If
-    End Sub
+    'Private Sub setMissingValue()
+    '    If rdoKeptAsMissing.Checked Then
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            ucrBase.clsRsyntax.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveParameter("na.last")
+    '        End If
+    '    ElseIf rdoFirstMissingValues.Checked Then
+    '        ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
+    '    ElseIf rdoLast.Checked Then
+    '        ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveParameter("na.last")
+    '    End If
+    'End Sub
 
-    Private Sub ucrInputColName_NameChnahed() Handles ucrInputColName.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
-        TestOKEnabled()
-    End Sub
 End Class
