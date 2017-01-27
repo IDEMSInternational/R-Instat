@@ -51,6 +51,7 @@ Public Class dlgSort
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 339
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
 
         'Setting Parameters
         ucrReceiverSort.Selector = ucrSelectForSort
@@ -58,9 +59,11 @@ Public Class dlgSort
         ucrReceiverSort.SetParameter(New RParameter("col_names"))
         ucrReceiverSort.SetParameterIsString()
 
+        'Add dataframe paramater
         ucrSelectForSort.SetParameter(New RParameter("data_name"))
         ucrSelectForSort.SetParameterIsString()
 
+        'Set radiobutton parameters
         ucrPanelOrder.SetParameter(New RParameter("decreasing"))
         ucrPanelOrder.AddRadioButton(rdoAscending, "FALSE")
         ucrPanelOrder.AddRadioButton(rdoDescending, "TRUE")
@@ -72,9 +75,7 @@ Public Class dlgSort
         'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
         'ucrPanelMissingValues.SetRDefault("TRUE")
 
-        'Set Default Rfunction & Parameters
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
-        clsDefaultFunction.AddParameter(ucrSelectForSort.GetParameter(), 0)
+
     End Sub
 
     'Setting Defaults on Reset 
