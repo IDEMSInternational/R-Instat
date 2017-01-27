@@ -28,14 +28,16 @@ Module mdlCoreControl
 
         If TypeOf ctrParent Is ucrCore Then
             ucrTemp = DirectCast(ctrParent, ucrCore)
-            lstAllControls.Add(ctrParent)
+            If ucrTemp.bIsActiveRControl Then
+                lstAllControls.Add(ctrParent)
+            End If
         End If
 
         For Each ctrChild As Control In ctrParent.Controls
             lstAllControls = GetAllCoreControls(lstAllControls, ctrChild)
         Next
-        Return lstAllControls
         lstAllControls.Sort(AddressOf CompareCoreControls)
+        Return lstAllControls
     End Function
 
     ' Defines ordering where selectors come before other controls

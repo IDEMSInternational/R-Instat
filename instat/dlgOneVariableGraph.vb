@@ -36,7 +36,6 @@ Public Class dlgOneVariableGraph
     Private Sub SetDefaults()
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-
         ucrSelectorOneVarGraph.Reset()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         bResetSubdialog = True
@@ -52,6 +51,7 @@ Public Class dlgOneVariableGraph
         ucrPnlOutput.AddRadioButton(rdoFacets, Chr(34) & "facets" & Chr(34))
         ucrPnlOutput.AddRadioButton(rdoCombine, Chr(34) & "combine" & Chr(34))
         ucrPnlOutput.AddRadioButton(rdoSingleGraphs, Chr(34) & "single" & Chr(34))
+        ucrPnlOutput.SetRDefault(Chr(34) & "facets" & Chr(34))
 
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
@@ -64,9 +64,9 @@ Public Class dlgOneVariableGraph
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameter(New RParameter("coord_flip"))
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkFlip.SetDefault("FALSE")
+        ucrChkFlip.SetRDefault("FALSE")
 
-        ucrSaveGraph.SetPrefix("OneVariableGraph")
+        ucrSaveGraph.SetPrefix("one_var")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
@@ -78,7 +78,6 @@ Public Class dlgOneVariableGraph
         clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
         clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
         clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
         clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
     End Sub
 
@@ -118,7 +117,7 @@ Public Class dlgOneVariableGraph
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlContentsChanged, ucrReceiverOneVarGraph.ControlContentsChanged, ucrSelectorOneVarGraph.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlContentsChanged, ucrReceiverOneVarGraph.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 

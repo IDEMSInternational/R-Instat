@@ -14,8 +14,9 @@ Public Class ucrSave
     Private bInsertColumnBefore As Boolean = False
     Private strAssignToIfUnchecked As String = ""
 
-    Private Sub ucrSaveGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ucrSave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            InitialiseControl()
             SetDefaults()
             bFirstLoad = False
         End If
@@ -24,6 +25,9 @@ Public Class ucrSave
     Private Sub InitialiseControl()
         ucrInputComboSave.SetValidationTypeAsRVariable()
         ucrInputTextSave.SetValidationTypeAsRVariable()
+        ucrChkSave.bIsActiveRControl = False
+        ucrInputComboSave.bIsActiveRControl = False
+        ucrInputTextSave.bIsActiveRControl = False
     End Sub
 
     Private Sub SetDefaults()
@@ -45,7 +49,7 @@ Public Class ucrSave
     End Sub
 
     Public Sub SetCheckBoxText(strText As String)
-        ucrChkSave.chkCheck.Text = strText
+        ucrChkSave.SetText(strText)
         bShowLabel = False
         bShowCheckBox = True
         LabelOrCheckboxSettings()
