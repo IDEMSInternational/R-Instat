@@ -114,7 +114,7 @@ Partial Class dlgUseDate
         '
         Me.grpFullName.Controls.Add(Me.ucrChkFullWeekday)
         Me.grpFullName.Controls.Add(Me.ucrChkFullMonth)
-        Me.grpFullName.Location = New System.Drawing.Point(329, 19)
+        Me.grpFullName.Location = New System.Drawing.Point(333, 19)
         Me.grpFullName.Name = "grpFullName"
         Me.grpFullName.Size = New System.Drawing.Size(106, 125)
         Me.grpFullName.TabIndex = 2
@@ -141,7 +141,7 @@ Partial Class dlgUseDate
         '
         Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrMonth)
         Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrWeekday)
-        Me.grpAbbreviation.Location = New System.Drawing.Point(222, 19)
+        Me.grpAbbreviation.Location = New System.Drawing.Point(227, 19)
         Me.grpAbbreviation.Name = "grpAbbreviation"
         Me.grpAbbreviation.Size = New System.Drawing.Size(105, 125)
         Me.grpAbbreviation.TabIndex = 1
@@ -175,7 +175,7 @@ Partial Class dlgUseDate
         Me.grpValues.Controls.Add(Me.ucrChkWeek)
         Me.grpValues.Location = New System.Drawing.Point(6, 19)
         Me.grpValues.Name = "grpValues"
-        Me.grpValues.Size = New System.Drawing.Size(212, 125)
+        Me.grpValues.Size = New System.Drawing.Size(220, 125)
         Me.grpValues.TabIndex = 0
         Me.grpValues.TabStop = False
         Me.grpValues.Text = "Values"
@@ -183,9 +183,9 @@ Partial Class dlgUseDate
         'ucrChkDayYear366
         '
         Me.ucrChkDayYear366.Checked = False
-        Me.ucrChkDayYear366.Location = New System.Drawing.Point(112, 69)
+        Me.ucrChkDayYear366.Location = New System.Drawing.Point(108, 69)
         Me.ucrChkDayYear366.Name = "ucrChkDayYear366"
-        Me.ucrChkDayYear366.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkDayYear366.Size = New System.Drawing.Size(109, 20)
         Me.ucrChkDayYear366.TabIndex = 13
         '
         'ucrChkYear
@@ -199,7 +199,7 @@ Partial Class dlgUseDate
         'ucrChkDayInYear
         '
         Me.ucrChkDayInYear.Checked = False
-        Me.ucrChkDayInYear.Location = New System.Drawing.Point(112, 43)
+        Me.ucrChkDayInYear.Location = New System.Drawing.Point(108, 43)
         Me.ucrChkDayInYear.Name = "ucrChkDayInYear"
         Me.ucrChkDayInYear.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkDayInYear.TabIndex = 12
@@ -223,7 +223,7 @@ Partial Class dlgUseDate
         'ucrChkWeekday
         '
         Me.ucrChkWeekday.Checked = False
-        Me.ucrChkWeekday.Location = New System.Drawing.Point(112, 17)
+        Me.ucrChkWeekday.Location = New System.Drawing.Point(108, 17)
         Me.ucrChkWeekday.Name = "ucrChkWeekday"
         Me.ucrChkWeekday.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkWeekday.TabIndex = 11
