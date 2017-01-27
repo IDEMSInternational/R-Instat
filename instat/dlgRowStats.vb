@@ -15,7 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgRowStats
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -31,17 +32,18 @@ Public Class dlgRowStats
     End Sub
 
     Private Sub SetDefaults()
+        ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorForRowStats.Reset()
-        ucrSelectorForRowStats.Focus()
-        ucrInputcboRowSummary.SetPrefix("RowSummary")
-        rdoMean.Checked = True
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        ' ucrSelectorForRowStats.Focus()
     End Sub
 
     Private Sub ReopenDialog()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForRowStatistics.IsEmpty AndAlso Not ucrInputcboRowSummary.IsEmpty Then
+        If Not ucrReceiverForRowStatistics.IsEmpty AndAlso ucrSaveResults.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -50,53 +52,41 @@ Public Class dlgRowStats
 
     'this is only temporary and needs to be worked on later
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("apply")
-        ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
-        ucrReceiverForRowStatistics.bUseFilteredData = False
-        ucrReceiverForRowStatistics.SetMeAsReceiver()
-        ucrReceiverForRowStatistics.SetDataType("numeric")
-        ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
-
-        ucrInputcboRowSummary.SetPrefix("RowSummary")
-        ucrInputcboRowSummary.SetItemsTypeAsColumns()
-        ucrInputcboRowSummary.SetDefaultTypeAsColumn()
-        ucrInputcboRowSummary.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
-
         ucrBase.iHelpTopicID = 45
         cmdUserDefined.Enabled = False
-        ucrInputcboRowSummary.SetValidationTypeAsRVariable()
-    End Sub
+        ' ucrBase.clsRsyntax.SetFunction("apply")
+
+        'Setting receiver Data rypes, parameters and making it as a receiver
+        ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
+        ucrReceiverForRowStatistics.SetMeAsReceiver()
+        ucrReceiverForRowStatistics.SetDataType("numeric")
+        ucrReceiverForRowStatistics.SetParameter(New RParameter("X"))
+        ucrReceiverForRowStatistics.SetParameterIsString()
 
 
-    Private Sub ucrReceiverForRowStatistics_SelectionChanged() Handles ucrReceiverForRowStatistics.SelectionChanged
-        If Not ucrReceiverForRowStatistics.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverForRowStatistics.GetVariables(True))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
-        TestOKEnabled()
-    End Sub
+        ucrPanelStatistics.SetParameter(New RParameter("FUN"))
+        ucrPanelStatistics.AddRadioButton(rdoMean, "mean")
+        ucrPanelStatistics.AddRadioButton(rdoMinimum, "min")
+        ucrPanelStatistics.AddRadioButton(rdoSum, "sum")
+        ucrPanelStatistics.AddRadioButton(rdoMedian, "median")
+        ucrPanelStatistics.AddRadioButton(rdoNumberofMissing, "function(z) sum(is.na(z))")
+        ucrPanelStatistics.AddRadioButton(rdoStandardDeviation, "sd")
+        ucrPanelStatistics.AddRadioButton(rdoMaximum, "max")
+        ucrPanelStatistics.AddRadioButton(rdoCount, "function(z) sum(!is.na(z))")
+        ucrPanelStatistics.SetRDefault("mean")
 
-    Private Sub Statistic_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMean.CheckedChanged, rdoCount.CheckedChanged, rdoMaximum.CheckedChanged, rdoMinimum.CheckedChanged, rdoSum.CheckedChanged, rdoStandardDeviation.CheckedChanged, rdoNumberofMissing.CheckedChanged, rdoMedian.CheckedChanged, rdoMedian.CheckedChanged, rdoNumberofMissing.CheckedChanged
-        If rdoMean.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "mean")
-        ElseIf rdoCount.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "function(z) sum(!is.na(z))")
-        ElseIf rdoMaximum.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "max")
-        ElseIf rdoMinimum.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "min")
-        ElseIf rdoSum.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "sum")
-        ElseIf rdoStandardDeviation.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "sd")
-        ElseIf rdoMedian.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "median")
-        ElseIf rdoNumberofMissing.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "function(z) sum(is.na(z))")
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("FUN")
-        End If
+        ucrSaveResults.SetPrefix("row_summary")
+        ucrSaveResults.SetSaveTypeAsColumn()
+        ucrSaveResults.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
+        ucrSaveResults.SetLabelText("Row Summary")
+        ucrSaveResults.SetIsComboBox()
+
+        'Defining the default RFunction
+        clsDefaultFunction.SetRCommand("apply")
+        clsDefaultFunction.AddParameter("FUN", "mean")
+        clsDefaultFunction.AddParameter("MARGIN", 1)
+        clsDefaultFunction.SetAssignTo("row_summary", strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="row_summary")
+
 
     End Sub
 
@@ -104,8 +94,8 @@ Public Class dlgRowStats
         SetDefaults()
     End Sub
 
-    Private Sub ucrInputcboRowSummary_NameChanged() Handles ucrInputcboRowSummary.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputcboRowSummary.GetText, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputcboRowSummary.GetText)
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForRowStats.ControlContentsChanged, ucrReceiverForRowStatistics.ControlContentsChanged, ucrSaveResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
