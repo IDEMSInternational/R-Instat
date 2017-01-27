@@ -23,7 +23,14 @@ Partial Class dlgRowStats
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblSelected = New System.Windows.Forms.Label()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.cmdUserDefined = New System.Windows.Forms.Button()
+        Me.ucrInputcboRowSummary = New instat.ucrInputComboBox()
+        Me.ucrSelectorForRowStats = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForRowStatistics = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistic = New System.Windows.Forms.GroupBox()
+        Me.ucrPanelStatistics = New instat.UcrPanel()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
@@ -32,12 +39,6 @@ Partial Class dlgRowStats
         Me.rdoNumberofMissing = New System.Windows.Forms.RadioButton()
         Me.rdoMedian = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.cmdUserDefined = New System.Windows.Forms.Button()
-        Me.ucrInputcboRowSummary = New instat.ucrInputComboBox()
-        Me.ucrSelectorForRowStats = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForRowStatistics = New instat.ucrReceiverMultiple()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -51,124 +52,10 @@ Partial Class dlgRowStats
         Me.lblSelected.Tag = "Selected_Variable(s):"
         Me.lblSelected.Text = "Selected Variable(s):"
         '
-        'grpStatistic
-        '
-        Me.grpStatistic.Controls.Add(Me.rdoMinimum)
-        Me.grpStatistic.Controls.Add(Me.rdoMaximum)
-        Me.grpStatistic.Controls.Add(Me.rdoCount)
-        Me.grpStatistic.Controls.Add(Me.rdoMean)
-        Me.grpStatistic.Controls.Add(Me.rdoStandardDeviation)
-        Me.grpStatistic.Controls.Add(Me.rdoNumberofMissing)
-        Me.grpStatistic.Controls.Add(Me.rdoMedian)
-        Me.grpStatistic.Controls.Add(Me.rdoSum)
-        Me.grpStatistic.Location = New System.Drawing.Point(10, 198)
-        Me.grpStatistic.Name = "grpStatistic"
-        Me.grpStatistic.Size = New System.Drawing.Size(397, 71)
-        Me.grpStatistic.TabIndex = 3
-        Me.grpStatistic.TabStop = False
-        Me.grpStatistic.Tag = "Statistic"
-        Me.grpStatistic.Text = "Statistic"
-        '
-        'rdoMinimum
-        '
-        Me.rdoMinimum.AutoSize = True
-        Me.rdoMinimum.Location = New System.Drawing.Point(125, 19)
-        Me.rdoMinimum.Name = "rdoMinimum"
-        Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
-        Me.rdoMinimum.TabIndex = 2
-        Me.rdoMinimum.TabStop = True
-        Me.rdoMinimum.Tag = "Minimum"
-        Me.rdoMinimum.Text = "Minimum"
-        Me.rdoMinimum.UseVisualStyleBackColor = True
-        '
-        'rdoMaximum
-        '
-        Me.rdoMaximum.AutoSize = True
-        Me.rdoMaximum.Location = New System.Drawing.Point(248, 42)
-        Me.rdoMaximum.Name = "rdoMaximum"
-        Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
-        Me.rdoMaximum.TabIndex = 5
-        Me.rdoMaximum.TabStop = True
-        Me.rdoMaximum.Tag = "Maximum"
-        Me.rdoMaximum.Text = "Maximum"
-        Me.rdoMaximum.UseVisualStyleBackColor = True
-        '
-        'rdoCount
-        '
-        Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(326, 42)
-        Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
-        Me.rdoCount.TabIndex = 7
-        Me.rdoCount.TabStop = True
-        Me.rdoCount.Tag = "Count"
-        Me.rdoCount.Text = "Count"
-        Me.rdoCount.UseVisualStyleBackColor = True
-        '
-        'rdoMean
-        '
-        Me.rdoMean.AutoSize = True
-        Me.rdoMean.Location = New System.Drawing.Point(4, 19)
-        Me.rdoMean.Name = "rdoMean"
-        Me.rdoMean.Size = New System.Drawing.Size(52, 17)
-        Me.rdoMean.TabIndex = 0
-        Me.rdoMean.TabStop = True
-        Me.rdoMean.Tag = "Mean"
-        Me.rdoMean.Text = "Mean"
-        Me.rdoMean.UseVisualStyleBackColor = True
-        '
-        'rdoStandardDeviation
-        '
-        Me.rdoStandardDeviation.AutoSize = True
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(125, 42)
-        Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
-        Me.rdoStandardDeviation.Size = New System.Drawing.Size(116, 17)
-        Me.rdoStandardDeviation.TabIndex = 3
-        Me.rdoStandardDeviation.TabStop = True
-        Me.rdoStandardDeviation.Tag = "Standard_Deviation"
-        Me.rdoStandardDeviation.Text = "Standard Deviation"
-        Me.rdoStandardDeviation.UseVisualStyleBackColor = True
-        '
-        'rdoNumberofMissing
-        '
-        Me.rdoNumberofMissing.AutoSize = True
-        Me.rdoNumberofMissing.Location = New System.Drawing.Point(4, 42)
-        Me.rdoNumberofMissing.Name = "rdoNumberofMissing"
-        Me.rdoNumberofMissing.Size = New System.Drawing.Size(112, 17)
-        Me.rdoNumberofMissing.TabIndex = 1
-        Me.rdoNumberofMissing.TabStop = True
-        Me.rdoNumberofMissing.Tag = "Number_of_Missing"
-        Me.rdoNumberofMissing.Text = "Number of Missing"
-        Me.rdoNumberofMissing.UseVisualStyleBackColor = True
-        '
-        'rdoMedian
-        '
-        Me.rdoMedian.AutoSize = True
-        Me.rdoMedian.Location = New System.Drawing.Point(326, 19)
-        Me.rdoMedian.Name = "rdoMedian"
-        Me.rdoMedian.Size = New System.Drawing.Size(60, 17)
-        Me.rdoMedian.TabIndex = 6
-        Me.rdoMedian.TabStop = True
-        Me.rdoMedian.Tag = "Median"
-        Me.rdoMedian.Text = "Median"
-        Me.rdoMedian.UseVisualStyleBackColor = True
-        '
-        'rdoSum
-        '
-        Me.rdoSum.AutoSize = True
-        Me.rdoSum.Location = New System.Drawing.Point(248, 19)
-        Me.rdoSum.Name = "rdoSum"
-        Me.rdoSum.Size = New System.Drawing.Size(46, 17)
-        Me.rdoSum.TabIndex = 4
-        Me.rdoSum.TabStop = True
-        Me.rdoSum.Tag = "Sum"
-        Me.rdoSum.Text = "Sum"
-        Me.rdoSum.UseVisualStyleBackColor = True
-        '
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(11, 278)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(11, 331)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 4
@@ -177,7 +64,7 @@ Partial Class dlgRowStats
         '
         'cmdUserDefined
         '
-        Me.cmdUserDefined.Location = New System.Drawing.Point(307, 274)
+        Me.cmdUserDefined.Location = New System.Drawing.Point(307, 327)
         Me.cmdUserDefined.Name = "cmdUserDefined"
         Me.cmdUserDefined.Size = New System.Drawing.Size(100, 23)
         Me.cmdUserDefined.TabIndex = 6
@@ -188,7 +75,7 @@ Partial Class dlgRowStats
         'ucrInputcboRowSummary
         '
         Me.ucrInputcboRowSummary.IsReadOnly = False
-        Me.ucrInputcboRowSummary.Location = New System.Drawing.Point(114, 274)
+        Me.ucrInputcboRowSummary.Location = New System.Drawing.Point(114, 327)
         Me.ucrInputcboRowSummary.Name = "ucrInputcboRowSummary"
         Me.ucrInputcboRowSummary.Size = New System.Drawing.Size(141, 25)
         Me.ucrInputcboRowSummary.TabIndex = 5
@@ -205,6 +92,7 @@ Partial Class dlgRowStats
         '
         'ucrReceiverForRowStatistics
         '
+        Me.ucrReceiverForRowStatistics.frmParent = Me
         Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(247, 61)
         Me.ucrReceiverForRowStatistics.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForRowStatistics.Name = "ucrReceiverForRowStatistics"
@@ -214,21 +102,143 @@ Partial Class dlgRowStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 303)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 347)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 7
+        '
+        'grpStatistic
+        '
+        Me.grpStatistic.Controls.Add(Me.rdoMinimum)
+        Me.grpStatistic.Controls.Add(Me.rdoMaximum)
+        Me.grpStatistic.Controls.Add(Me.rdoCount)
+        Me.grpStatistic.Controls.Add(Me.rdoMean)
+        Me.grpStatistic.Controls.Add(Me.rdoStandardDeviation)
+        Me.grpStatistic.Controls.Add(Me.rdoNumberofMissing)
+        Me.grpStatistic.Controls.Add(Me.rdoMedian)
+        Me.grpStatistic.Controls.Add(Me.rdoSum)
+        Me.grpStatistic.Controls.Add(Me.ucrPanelStatistics)
+        Me.grpStatistic.Location = New System.Drawing.Point(9, 204)
+        Me.grpStatistic.Name = "grpStatistic"
+        Me.grpStatistic.Size = New System.Drawing.Size(411, 91)
+        Me.grpStatistic.TabIndex = 14
+        Me.grpStatistic.TabStop = False
+        Me.grpStatistic.Tag = "Statistic"
+        Me.grpStatistic.Text = "Statistic"
+        '
+        'ucrPanelStatistics
+        '
+        Me.ucrPanelStatistics.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPanelStatistics.Name = "ucrPanelStatistics"
+        Me.ucrPanelStatistics.Size = New System.Drawing.Size(402, 69)
+        Me.ucrPanelStatistics.TabIndex = 0
+        '
+        'rdoMinimum
+        '
+        Me.rdoMinimum.AutoSize = True
+        Me.rdoMinimum.Location = New System.Drawing.Point(126, 25)
+        Me.rdoMinimum.Name = "rdoMinimum"
+        Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
+        Me.rdoMinimum.TabIndex = 10
+        Me.rdoMinimum.TabStop = True
+        Me.rdoMinimum.Tag = "Minimum"
+        Me.rdoMinimum.Text = "Minimum"
+        Me.rdoMinimum.UseVisualStyleBackColor = True
+        '
+        'rdoMaximum
+        '
+        Me.rdoMaximum.AutoSize = True
+        Me.rdoMaximum.Location = New System.Drawing.Point(249, 48)
+        Me.rdoMaximum.Name = "rdoMaximum"
+        Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
+        Me.rdoMaximum.TabIndex = 13
+        Me.rdoMaximum.TabStop = True
+        Me.rdoMaximum.Tag = "Maximum"
+        Me.rdoMaximum.Text = "Maximum"
+        Me.rdoMaximum.UseVisualStyleBackColor = True
+        '
+        'rdoCount
+        '
+        Me.rdoCount.AutoSize = True
+        Me.rdoCount.Location = New System.Drawing.Point(327, 48)
+        Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
+        Me.rdoCount.TabIndex = 15
+        Me.rdoCount.TabStop = True
+        Me.rdoCount.Tag = "Count"
+        Me.rdoCount.Text = "Count"
+        Me.rdoCount.UseVisualStyleBackColor = True
+        '
+        'rdoMean
+        '
+        Me.rdoMean.AutoSize = True
+        Me.rdoMean.Location = New System.Drawing.Point(5, 25)
+        Me.rdoMean.Name = "rdoMean"
+        Me.rdoMean.Size = New System.Drawing.Size(52, 17)
+        Me.rdoMean.TabIndex = 8
+        Me.rdoMean.TabStop = True
+        Me.rdoMean.Tag = "Mean"
+        Me.rdoMean.Text = "Mean"
+        Me.rdoMean.UseVisualStyleBackColor = True
+        '
+        'rdoStandardDeviation
+        '
+        Me.rdoStandardDeviation.AutoSize = True
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(126, 48)
+        Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
+        Me.rdoStandardDeviation.Size = New System.Drawing.Size(116, 17)
+        Me.rdoStandardDeviation.TabIndex = 11
+        Me.rdoStandardDeviation.TabStop = True
+        Me.rdoStandardDeviation.Tag = "Standard_Deviation"
+        Me.rdoStandardDeviation.Text = "Standard Deviation"
+        Me.rdoStandardDeviation.UseVisualStyleBackColor = True
+        '
+        'rdoNumberofMissing
+        '
+        Me.rdoNumberofMissing.AutoSize = True
+        Me.rdoNumberofMissing.Location = New System.Drawing.Point(5, 48)
+        Me.rdoNumberofMissing.Name = "rdoNumberofMissing"
+        Me.rdoNumberofMissing.Size = New System.Drawing.Size(112, 17)
+        Me.rdoNumberofMissing.TabIndex = 9
+        Me.rdoNumberofMissing.TabStop = True
+        Me.rdoNumberofMissing.Tag = "Number_of_Missing"
+        Me.rdoNumberofMissing.Text = "Number of Missing"
+        Me.rdoNumberofMissing.UseVisualStyleBackColor = True
+        '
+        'rdoMedian
+        '
+        Me.rdoMedian.AutoSize = True
+        Me.rdoMedian.Location = New System.Drawing.Point(327, 25)
+        Me.rdoMedian.Name = "rdoMedian"
+        Me.rdoMedian.Size = New System.Drawing.Size(60, 17)
+        Me.rdoMedian.TabIndex = 14
+        Me.rdoMedian.TabStop = True
+        Me.rdoMedian.Tag = "Median"
+        Me.rdoMedian.Text = "Median"
+        Me.rdoMedian.UseVisualStyleBackColor = True
+        '
+        'rdoSum
+        '
+        Me.rdoSum.AutoSize = True
+        Me.rdoSum.Location = New System.Drawing.Point(249, 25)
+        Me.rdoSum.Name = "rdoSum"
+        Me.rdoSum.Size = New System.Drawing.Size(46, 17)
+        Me.rdoSum.TabIndex = 12
+        Me.rdoSum.TabStop = True
+        Me.rdoSum.Tag = "Sum"
+        Me.rdoSum.Text = "Sum"
+        Me.rdoSum.UseVisualStyleBackColor = True
         '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 362)
+        Me.ClientSize = New System.Drawing.Size(872, 432)
+        Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.cmdUserDefined)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputcboRowSummary)
         Me.Controls.Add(Me.ucrSelectorForRowStats)
-        Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverForRowStatistics)
         Me.Controls.Add(Me.ucrBase)
@@ -249,17 +259,18 @@ Partial Class dlgRowStats
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverForRowStatistics As ucrReceiverMultiple
     Friend WithEvents lblSelected As Label
+    Friend WithEvents ucrSelectorForRowStats As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrInputcboRowSummary As ucrInputComboBox
+    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents cmdUserDefined As Button
     Friend WithEvents grpStatistic As GroupBox
     Friend WithEvents rdoMinimum As RadioButton
     Friend WithEvents rdoMaximum As RadioButton
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents rdoMean As RadioButton
     Friend WithEvents rdoStandardDeviation As RadioButton
-    Friend WithEvents rdoSum As RadioButton
-    Friend WithEvents ucrSelectorForRowStats As ucrSelectorByDataFrameAddRemove
     Friend WithEvents rdoNumberofMissing As RadioButton
     Friend WithEvents rdoMedian As RadioButton
-    Friend WithEvents ucrInputcboRowSummary As ucrInputComboBox
-    Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents cmdUserDefined As Button
+    Friend WithEvents rdoSum As RadioButton
+    Friend WithEvents ucrPanelStatistics As UcrPanel
 End Class
