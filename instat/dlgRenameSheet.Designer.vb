@@ -30,9 +30,9 @@ Partial Class dlgRenameSheet
         '
         'lblNewName
         '
-        Me.lblNewName.Location = New System.Drawing.Point(194, 10)
+        Me.lblNewName.Location = New System.Drawing.Point(196, 13)
         Me.lblNewName.Name = "lblNewName"
-        Me.lblNewName.Size = New System.Drawing.Size(100, 23)
+        Me.lblNewName.Size = New System.Drawing.Size(100, 15)
         Me.lblNewName.TabIndex = 1
         Me.lblNewName.Tag = "New_Name"
         Me.lblNewName.Text = "New Name:"
