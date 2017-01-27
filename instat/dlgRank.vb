@@ -42,6 +42,20 @@ Public Class dlgRank
         ucrReceiverRank.SetParameter(New RParameter("x"))
         ucrReceiverRank.SetParameterIsString()
 
+        'Setting Parameters for the respective radio buttons
+        ucrPanelTies.SetParameter(New RParameter("ties.method"))
+        ucrPanelTies.AddRadioButton(rdoAverage, Chr(34) & "average" & Chr(34))
+        ucrPanelTies.AddRadioButton(rdoMinimum, Chr(34) & "min" & Chr(34))
+        ucrPanelTies.AddRadioButton(rdoMaximum, Chr(34) & "max" & Chr(34))
+        ucrPanelTies.AddRadioButton(rdoFirst, Chr(34) & "first" & Chr(34))
+        ucrPanelTies.AddRadioButton(rdoRandom, Chr(34) & "random" & Chr(34))
+        ucrPanelTies.SetRDefault(Chr(34) & "average" & Chr(34))
+
+        ucrPanelMissingValues.SetParameter(New RParameter("na.last"))
+        ucrPanelMissingValues.AddRadioButton(rdoKeptAsMissing, Chr(34) & "keep" & Chr(34))
+        ucrPanelMissingValues.AddRadioButton(rdoFirstMissingValues, Chr(34) & "FALSE" & Chr(34))
+        ucrPanelMissingValues.AddRadioButton(rdoLast, Chr(34) & "TRUE" & Chr(34))
+        ucrPanelMissingValues.SetRDefault("TRUE")
 
         ucrInputColName.SetPrefix("Rank")
         ucrInputColName.SetItemsTypeAsColumns()
