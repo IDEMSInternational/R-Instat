@@ -80,7 +80,7 @@ Public Class dlgInventoryPlot
         ucrNudThreashold.Minimum = 0.85
         ucrNudThreashold.Increment = 0.01
         ucrNudThreashold.DecimalPlaces = 2
-        ucrNudThreashold.bAddRemoveParameter = False
+        ucrNudThreashold.SetDefault("0.85")
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)
