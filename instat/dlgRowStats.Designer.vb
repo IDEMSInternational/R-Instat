@@ -53,7 +53,7 @@ Partial Class dlgRowStats
         '
         'cmdUserDefined
         '
-        Me.cmdUserDefined.Location = New System.Drawing.Point(315, 306)
+        Me.cmdUserDefined.Location = New System.Drawing.Point(310, 311)
         Me.cmdUserDefined.Name = "cmdUserDefined"
         Me.cmdUserDefined.Size = New System.Drawing.Size(100, 23)
         Me.cmdUserDefined.TabIndex = 6
@@ -83,7 +83,7 @@ Partial Class dlgRowStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 347)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 346)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 7
@@ -99,9 +99,9 @@ Partial Class dlgRowStats
         Me.grpStatistic.Controls.Add(Me.rdoMedian)
         Me.grpStatistic.Controls.Add(Me.rdoSum)
         Me.grpStatistic.Controls.Add(Me.ucrPanelStatistics)
-        Me.grpStatistic.Location = New System.Drawing.Point(9, 204)
+        Me.grpStatistic.Location = New System.Drawing.Point(9, 205)
         Me.grpStatistic.Name = "grpStatistic"
-        Me.grpStatistic.Size = New System.Drawing.Size(411, 91)
+        Me.grpStatistic.Size = New System.Drawing.Size(401, 91)
         Me.grpStatistic.TabIndex = 14
         Me.grpStatistic.TabStop = False
         Me.grpStatistic.Tag = "Statistic"
@@ -122,7 +122,7 @@ Partial Class dlgRowStats
         'rdoMaximum
         '
         Me.rdoMaximum.AutoSize = True
-        Me.rdoMaximum.Location = New System.Drawing.Point(249, 48)
+        Me.rdoMaximum.Location = New System.Drawing.Point(249, 56)
         Me.rdoMaximum.Name = "rdoMaximum"
         Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
         Me.rdoMaximum.TabIndex = 13
@@ -134,7 +134,7 @@ Partial Class dlgRowStats
         'rdoCount
         '
         Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(327, 48)
+        Me.rdoCount.Location = New System.Drawing.Point(327, 56)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(53, 17)
         Me.rdoCount.TabIndex = 15
@@ -158,7 +158,7 @@ Partial Class dlgRowStats
         'rdoStandardDeviation
         '
         Me.rdoStandardDeviation.AutoSize = True
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(126, 48)
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(126, 56)
         Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
         Me.rdoStandardDeviation.Size = New System.Drawing.Size(116, 17)
         Me.rdoStandardDeviation.TabIndex = 11
@@ -170,7 +170,7 @@ Partial Class dlgRowStats
         'rdoNumberofMissing
         '
         Me.rdoNumberofMissing.AutoSize = True
-        Me.rdoNumberofMissing.Location = New System.Drawing.Point(5, 48)
+        Me.rdoNumberofMissing.Location = New System.Drawing.Point(5, 56)
         Me.rdoNumberofMissing.Name = "rdoNumberofMissing"
         Me.rdoNumberofMissing.Size = New System.Drawing.Size(112, 17)
         Me.rdoNumberofMissing.TabIndex = 9
@@ -205,14 +205,14 @@ Partial Class dlgRowStats
         '
         'ucrPanelStatistics
         '
-        Me.ucrPanelStatistics.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPanelStatistics.Location = New System.Drawing.Point(3, 12)
         Me.ucrPanelStatistics.Name = "ucrPanelStatistics"
-        Me.ucrPanelStatistics.Size = New System.Drawing.Size(402, 69)
+        Me.ucrPanelStatistics.Size = New System.Drawing.Size(384, 69)
         Me.ucrPanelStatistics.TabIndex = 0
         '
         'ucrSaveResults
         '
-        Me.ucrSaveResults.Location = New System.Drawing.Point(12, 304)
+        Me.ucrSaveResults.Location = New System.Drawing.Point(12, 309)
         Me.ucrSaveResults.Name = "ucrSaveResults"
         Me.ucrSaveResults.Size = New System.Drawing.Size(294, 24)
         Me.ucrSaveResults.TabIndex = 15
@@ -221,7 +221,7 @@ Partial Class dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(872, 432)
+        Me.ClientSize = New System.Drawing.Size(418, 406)
         Me.Controls.Add(Me.ucrSaveResults)
         Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.cmdUserDefined)
