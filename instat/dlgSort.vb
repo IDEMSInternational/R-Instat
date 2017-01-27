@@ -37,6 +37,7 @@ Public Class dlgSort
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrSelectForSort.Reset()
+        grpMissingValues.Enabled = False
     End Sub
 
     'Setting OKEnabled
@@ -66,14 +67,16 @@ Public Class dlgSort
         ucrPanelOrder.AddRadioButton(rdoDescending, "TRUE")
         ucrPanelOrder.SetRDefault("FALSE")
 
-        ucrPanelMissingValues.SetParameter(New RParameter("na.last"))
-        ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
-        ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
-        ucrPanelMissingValues.SetRDefault("TRUE")
+        'Currently Disabled
+
+        'ucrPanelMissingValues.SetParameter(New RParameter("na.last"))
+        'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
+        'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
+        'ucrPanelMissingValues.SetRDefault("TRUE")
 
         'Set Default Rfunction & Parameters
         clsDefaultFunction.AddParameter("decreasing", "FALSE")
-        clsDefaultFunction.AddParameter("na.last", "TRUE")
+        'clsDefaultFunction.AddParameter("na.last", "TRUE")
         clsDefaultFunction.AddParameter(ucrSelectForSort.GetParameter(), 0)
     End Sub
 
