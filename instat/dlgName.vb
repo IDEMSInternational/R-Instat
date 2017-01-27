@@ -28,11 +28,17 @@ Public Class dlgName
             Initialisedialog()
             Setdefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bUseSelectedColumn Then
             Setdefaultcolumn()
         End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrSelectVariables.Reset()
     End Sub
 
     Private Sub TestOKEnabled()
