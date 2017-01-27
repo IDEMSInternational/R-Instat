@@ -49,9 +49,13 @@ Public Class dlgRenameSheet
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
     End Sub
 
+    ' check how changing dataframes affects it
+
     Private Sub SetDefaults()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
+        ucrDataFrameToRename.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
