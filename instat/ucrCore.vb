@@ -20,7 +20,6 @@ Public Class ucrCore
 
     'Function or Operator that this control's parameter is added/removed from
     Protected clsRCode As New RCodeStructure
-    Protected iParameterPosition As Integer = -1
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
     Protected clsParameter As RParameter
@@ -203,7 +202,7 @@ Public Class ucrCore
     Public Overridable Sub AddOrRemoveParameter(bAdd As Boolean)
         If clsRCode IsNot Nothing AndAlso clsParameter IsNot Nothing Then
             If bAdd Then
-                clsRCode.AddParameter(clsParameter, iParameterPosition)
+                clsRCode.AddParameter(clsParameter)
             Else
                 clsRCode.RemoveParameter(clsParameter)
             End If
