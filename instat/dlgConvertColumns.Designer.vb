@@ -35,14 +35,17 @@ Partial Class dlgConvertColumns
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.nudDisplayDecimals = New System.Windows.Forms.NumericUpDown()
+        Me.chkSpecifyDecimalsToDisplay = New System.Windows.Forms.CheckBox()
         Me.grpTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
+        CType(Me.nudDisplayDecimals, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblColumnsToConvert
         '
         Me.lblColumnsToConvert.AutoSize = True
-        Me.lblColumnsToConvert.Location = New System.Drawing.Point(249, 46)
+        Me.lblColumnsToConvert.Location = New System.Drawing.Point(249, 17)
         Me.lblColumnsToConvert.Name = "lblColumnsToConvert"
         Me.lblColumnsToConvert.Size = New System.Drawing.Size(102, 13)
         Me.lblColumnsToConvert.TabIndex = 1
@@ -56,7 +59,7 @@ Partial Class dlgConvertColumns
         Me.grpTo.Controls.Add(Me.rdoFactor)
         Me.grpTo.Controls.Add(Me.rdoCharacter)
         Me.grpTo.Controls.Add(Me.rdoNumeric)
-        Me.grpTo.Location = New System.Drawing.Point(12, 193)
+        Me.grpTo.Location = New System.Drawing.Point(12, 195)
         Me.grpTo.Name = "grpTo"
         Me.grpTo.Size = New System.Drawing.Size(355, 66)
         Me.grpTo.TabIndex = 3
@@ -127,7 +130,7 @@ Partial Class dlgConvertColumns
         '
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertOrdinals)
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertLevels)
-        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(12, 267)
+        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(12, 290)
         Me.grpFactorToNumericOptions.Name = "grpFactorToNumericOptions"
         Me.grpFactorToNumericOptions.Size = New System.Drawing.Size(355, 46)
         Me.grpFactorToNumericOptions.TabIndex = 4
@@ -171,7 +174,8 @@ Partial Class dlgConvertColumns
         '
         'ucrReceiverColumnsToConvert
         '
-        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(247, 61)
+        Me.ucrReceiverColumnsToConvert.frmParent = Me
+        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(247, 32)
         Me.ucrReceiverColumnsToConvert.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
         Me.ucrReceiverColumnsToConvert.Selector = Nothing
@@ -180,16 +184,35 @@ Partial Class dlgConvertColumns
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 319)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 342)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
+        '
+        'nudDisplayDecimals
+        '
+        Me.nudDisplayDecimals.Location = New System.Drawing.Point(194, 266)
+        Me.nudDisplayDecimals.Name = "nudDisplayDecimals"
+        Me.nudDisplayDecimals.Size = New System.Drawing.Size(49, 20)
+        Me.nudDisplayDecimals.TabIndex = 7
+        '
+        'chkSpecifyDecimalsToDisplay
+        '
+        Me.chkSpecifyDecimalsToDisplay.AutoSize = True
+        Me.chkSpecifyDecimalsToDisplay.Location = New System.Drawing.Point(18, 267)
+        Me.chkSpecifyDecimalsToDisplay.Name = "chkSpecifyDecimalsToDisplay"
+        Me.chkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(170, 17)
+        Me.chkSpecifyDecimalsToDisplay.TabIndex = 8
+        Me.chkSpecifyDecimalsToDisplay.Text = "Number of Decimals to Display"
+        Me.chkSpecifyDecimalsToDisplay.UseVisualStyleBackColor = True
         '
         'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 377)
+        Me.ClientSize = New System.Drawing.Size(413, 396)
+        Me.Controls.Add(Me.chkSpecifyDecimalsToDisplay)
+        Me.Controls.Add(Me.nudDisplayDecimals)
         Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDataFrameColumns)
@@ -207,6 +230,7 @@ Partial Class dlgConvertColumns
         Me.grpTo.PerformLayout()
         Me.grpFactorToNumericOptions.ResumeLayout(False)
         Me.grpFactorToNumericOptions.PerformLayout()
+        CType(Me.nudDisplayDecimals, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -225,4 +249,6 @@ Partial Class dlgConvertColumns
     Friend WithEvents rdoConvertOrdinals As RadioButton
     Friend WithEvents rdoConvertLevels As RadioButton
     Friend WithEvents rdoOrderedFactor As RadioButton
+    Friend WithEvents nudDisplayDecimals As NumericUpDown
+    Friend WithEvents chkSpecifyDecimalsToDisplay As CheckBox
 End Class
