@@ -18,7 +18,6 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgFileNew
-    Public strDefaultSheetPrefix As String = "Sheet"
     Private clsOverallFunction, clsMatrixDefaultFunction, clsMatrixFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
@@ -65,8 +64,10 @@ Public Class dlgFileNew
         clsMatrixDefaultFunction.AddParameter("nrow", 10)
     End Sub
 
-    Private Sub ReopenDialog()
+    ' updating controls doesn't update the function
+    ' Sheet name is not on the dialog.
 
+    Private Sub ReopenDialog()
     End Sub
 
     Private Sub SetDefaults()
@@ -78,18 +79,18 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub TestOKEnabled()
-        '      If ucrNewDFName.IsComplete AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
-        '     ucrBase.OKEnabled(True)
-        '    Else
-        '   ucrBase.OKEnabled(False)
-        '  End If
+        If ucrNewDFName.IsComplete AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
 
-    Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged
+    Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged, ucrNewDFName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
