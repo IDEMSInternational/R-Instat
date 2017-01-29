@@ -53,7 +53,7 @@ Partial Class dlgFileNew
         Me.ucrBase.Location = New System.Drawing.Point(10, 103)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(399, 48)
-        Me.ucrBase.TabIndex = 6
+        Me.ucrBase.TabIndex = 5
         '
         'ucrNudRows
         '
@@ -63,7 +63,7 @@ Partial Class dlgFileNew
         Me.ucrNudRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRows.Name = "ucrNudRows"
         Me.ucrNudRows.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRows.TabIndex = 10
+        Me.ucrNudRows.TabIndex = 1
         Me.ucrNudRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudCols
@@ -74,7 +74,7 @@ Partial Class dlgFileNew
         Me.ucrNudCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCols.Name = "ucrNudCols"
         Me.ucrNudCols.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCols.TabIndex = 11
+        Me.ucrNudCols.TabIndex = 3
         Me.ucrNudCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNewDFName
@@ -82,7 +82,7 @@ Partial Class dlgFileNew
         Me.ucrNewDFName.Location = New System.Drawing.Point(10, 73)
         Me.ucrNewDFName.Name = "ucrNewDFName"
         Me.ucrNewDFName.Size = New System.Drawing.Size(300, 24)
-        Me.ucrNewDFName.TabIndex = 12
+        Me.ucrNewDFName.TabIndex = 4
         '
         'dlgFileNew
         '
