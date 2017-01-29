@@ -38,7 +38,7 @@ Partial Class dlgViewDescriptives
         Me.ucrBase.Location = New System.Drawing.Point(10, 244)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 8
         '
         'ucrSelectorForViewObject
         '
@@ -48,14 +48,14 @@ Partial Class dlgViewDescriptives
         Me.ucrSelectorForViewObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForViewObject.Name = "ucrSelectorForViewObject"
         Me.ucrSelectorForViewObject.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForViewObject.TabIndex = 6
+        Me.ucrSelectorForViewObject.TabIndex = 0
         '
         'lblSelectedObject
         '
         Me.lblSelectedObject.Location = New System.Drawing.Point(249, 43)
         Me.lblSelectedObject.Name = "lblSelectedObject"
         Me.lblSelectedObject.Size = New System.Drawing.Size(100, 23)
-        Me.lblSelectedObject.TabIndex = 5
+        Me.lblSelectedObject.TabIndex = 1
         Me.lblSelectedObject.Text = "Selected Object:"
         '
         'ucrReceiverSelectedObject
@@ -66,14 +66,14 @@ Partial Class dlgViewDescriptives
         Me.ucrReceiverSelectedObject.Name = "ucrReceiverSelectedObject"
         Me.ucrReceiverSelectedObject.Selector = Nothing
         Me.ucrReceiverSelectedObject.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSelectedObject.TabIndex = 4
+        Me.ucrReceiverSelectedObject.TabIndex = 2
         '
         'rdoStructure
         '
         Me.rdoStructure.Location = New System.Drawing.Point(12, 206)
         Me.rdoStructure.Name = "rdoStructure"
         Me.rdoStructure.Size = New System.Drawing.Size(88, 24)
-        Me.rdoStructure.TabIndex = 3
+        Me.rdoStructure.TabIndex = 4
         Me.rdoStructure.TabStop = True
         Me.rdoStructure.Tag = "Structure"
         Me.rdoStructure.Text = "Structure"
@@ -84,7 +84,7 @@ Partial Class dlgViewDescriptives
         Me.rdoAllContents.Location = New System.Drawing.Point(117, 206)
         Me.rdoAllContents.Name = "rdoAllContents"
         Me.rdoAllContents.Size = New System.Drawing.Size(100, 24)
-        Me.rdoAllContents.TabIndex = 2
+        Me.rdoAllContents.TabIndex = 5
         Me.rdoAllContents.TabStop = True
         Me.rdoAllContents.Tag = "All_Contents"
         Me.rdoAllContents.Text = "All Contents"
@@ -95,7 +95,7 @@ Partial Class dlgViewDescriptives
         Me.rdoComponent.Location = New System.Drawing.Point(223, 206)
         Me.rdoComponent.Name = "rdoComponent"
         Me.rdoComponent.Size = New System.Drawing.Size(87, 24)
-        Me.rdoComponent.TabIndex = 1
+        Me.rdoComponent.TabIndex = 6
         Me.rdoComponent.TabStop = True
         Me.rdoComponent.Tag = "Component"
         Me.rdoComponent.Text = "Component"
@@ -106,7 +106,7 @@ Partial Class dlgViewDescriptives
         Me.rdoViewGraph.Location = New System.Drawing.Point(316, 206)
         Me.rdoViewGraph.Name = "rdoViewGraph"
         Me.rdoViewGraph.Size = New System.Drawing.Size(80, 24)
-        Me.rdoViewGraph.TabIndex = 0
+        Me.rdoViewGraph.TabIndex = 7
         Me.rdoViewGraph.TabStop = True
         Me.rdoViewGraph.Text = "View Graph"
         Me.rdoViewGraph.UseVisualStyleBackColor = True
@@ -116,7 +116,7 @@ Partial Class dlgViewDescriptives
         Me.ucrPnl.Location = New System.Drawing.Point(4, 193)
         Me.ucrPnl.Name = "ucrPnl"
         Me.ucrPnl.Size = New System.Drawing.Size(416, 45)
-        Me.ucrPnl.TabIndex = 8
+        Me.ucrPnl.TabIndex = 3
         '
         'dlgViewDescriptives
         '
