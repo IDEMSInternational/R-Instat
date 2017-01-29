@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgReoderDescriptives
     Public bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgReoderDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -30,10 +31,18 @@ Public Class dlgReoderDescriptives
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
-        ucrReorderObjects.setDataType("object")
-        ucrReorderObjects.setDataframes(ucrDataFrameReoder)
         ucrBase.iHelpTopicID = 351
+
+        ' ucrSelector DataFrame
+        ucrDataFrameReorder.SetParameter(New RParameter("data_name", 0))
+        ucrDataFrameReorder.SetParameterIsString()
+
+        ' ucrReorderObjects
+        '        ucrReorderObjects.SetParameter(New RParameter("new_order", 1))
+        ucrReorderObjects.setDataType("object")
+        ucrReorderObjects.setDataframes(ucrDataFrameReorder)
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
     End Sub
     Private Sub ReopenDialog()
 
@@ -46,7 +55,9 @@ Public Class dlgReoderDescriptives
         End If
     End Sub
     Private Sub SetDefaults()
-        ucrDataFrameReoder.Reset()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        ucrDataFrameReorder.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -54,16 +65,12 @@ Public Class dlgReoderDescriptives
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReorderObjects_OrderChanged() Handles ucrReorderObjects.OrderChanged
-        If Not ucrReorderObjects.isEmpty Then
-            ucrBase.clsRsyntax.AddParameter("new_order", ucrReorderObjects.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("new_order")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrDataFrameReoder_DataFrameChanged() Handles ucrDataFrameReoder.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameReoder.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
+    '    Private Sub ucrReorderObjects_OrderChanged() Handles ucrReorderObjects.OrderChanged
+    '   If Not ucrReorderObjects.isEmpty Then
+    '          ucrBase.clsRsyntax.AddParameter("new_order", ucrReorderObjects.GetVariableNames)
+    ' Else
+    '        ucrBase.clsRsyntax.RemoveParameter("new_order")
+    'End If
+    '   TestOKEnabled()
+    'End Sub
 End Class
