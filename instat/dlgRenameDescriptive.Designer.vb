@@ -45,7 +45,7 @@ Partial Class dlgRenameDescriptive
         Me.ucrSelectorForRenameObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRenameObject.Name = "ucrSelectorForRenameObject"
         Me.ucrSelectorForRenameObject.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForRenameObject.TabIndex = 4
+        Me.ucrSelectorForRenameObject.TabIndex = 0
         '
         'ucrReceiverCurrentName
         '
@@ -55,14 +55,14 @@ Partial Class dlgRenameDescriptive
         Me.ucrReceiverCurrentName.Name = "ucrReceiverCurrentName"
         Me.ucrReceiverCurrentName.Selector = Nothing
         Me.ucrReceiverCurrentName.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCurrentName.TabIndex = 3
+        Me.ucrReceiverCurrentName.TabIndex = 2
         '
         'lblCurrentName
         '
         Me.lblCurrentName.Location = New System.Drawing.Point(263, 31)
         Me.lblCurrentName.Name = "lblCurrentName"
         Me.lblCurrentName.Size = New System.Drawing.Size(100, 23)
-        Me.lblCurrentName.TabIndex = 2
+        Me.lblCurrentName.TabIndex = 1
         Me.lblCurrentName.Tag = "Current_Name"
         Me.lblCurrentName.Text = "Current Name:"
         '
@@ -71,7 +71,7 @@ Partial Class dlgRenameDescriptive
         Me.lblNewName.Location = New System.Drawing.Point(263, 95)
         Me.lblNewName.Name = "lblNewName"
         Me.lblNewName.Size = New System.Drawing.Size(100, 13)
-        Me.lblNewName.TabIndex = 1
+        Me.lblNewName.TabIndex = 3
         Me.lblNewName.Tag = "New_Name"
         Me.lblNewName.Text = "New Name:"
         '
@@ -82,7 +82,7 @@ Partial Class dlgRenameDescriptive
         Me.ucrInputNewName.Location = New System.Drawing.Point(265, 111)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputNewName.TabIndex = 0
+        Me.ucrInputNewName.TabIndex = 4
         '
         'dlgRenameDescriptive
         '
