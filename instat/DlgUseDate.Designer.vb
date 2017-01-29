@@ -92,7 +92,7 @@ Partial Class dlgUseDate
         Me.ucrChkLeapYear.Location = New System.Drawing.Point(6, 19)
         Me.ucrChkLeapYear.Name = "ucrChkLeapYear"
         Me.ucrChkLeapYear.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkLeapYear.TabIndex = 14
+        Me.ucrChkLeapYear.TabIndex = 0
         '
         'ucrChkDekad
         '
@@ -100,7 +100,7 @@ Partial Class dlgUseDate
         Me.ucrChkDekad.Location = New System.Drawing.Point(221, 19)
         Me.ucrChkDekad.Name = "ucrChkDekad"
         Me.ucrChkDekad.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkDekad.TabIndex = 16
+        Me.ucrChkDekad.TabIndex = 2
         '
         'ucrChkPentad
         '
@@ -108,7 +108,7 @@ Partial Class dlgUseDate
         Me.ucrChkPentad.Location = New System.Drawing.Point(112, 19)
         Me.ucrChkPentad.Name = "ucrChkPentad"
         Me.ucrChkPentad.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPentad.TabIndex = 15
+        Me.ucrChkPentad.TabIndex = 1
         '
         'grpFullName
         '
@@ -127,7 +127,7 @@ Partial Class dlgUseDate
         Me.ucrChkFullWeekday.Location = New System.Drawing.Point(6, 17)
         Me.ucrChkFullWeekday.Name = "ucrChkFullWeekday"
         Me.ucrChkFullWeekday.Size = New System.Drawing.Size(90, 20)
-        Me.ucrChkFullWeekday.TabIndex = 2
+        Me.ucrChkFullWeekday.TabIndex = 0
         '
         'ucrChkFullMonth
         '
@@ -135,7 +135,7 @@ Partial Class dlgUseDate
         Me.ucrChkFullMonth.Location = New System.Drawing.Point(6, 43)
         Me.ucrChkFullMonth.Name = "ucrChkFullMonth"
         Me.ucrChkFullMonth.Size = New System.Drawing.Size(90, 20)
-        Me.ucrChkFullMonth.TabIndex = 3
+        Me.ucrChkFullMonth.TabIndex = 1
         '
         'grpAbbreviation
         '
@@ -154,7 +154,7 @@ Partial Class dlgUseDate
         Me.ucrChkAbbrMonth.Location = New System.Drawing.Point(5, 43)
         Me.ucrChkAbbrMonth.Name = "ucrChkAbbrMonth"
         Me.ucrChkAbbrMonth.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkAbbrMonth.TabIndex = 6
+        Me.ucrChkAbbrMonth.TabIndex = 1
         '
         'ucrChkAbbrWeekday
         '
@@ -162,7 +162,7 @@ Partial Class dlgUseDate
         Me.ucrChkAbbrWeekday.Location = New System.Drawing.Point(5, 17)
         Me.ucrChkAbbrWeekday.Name = "ucrChkAbbrWeekday"
         Me.ucrChkAbbrWeekday.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkAbbrWeekday.TabIndex = 5
+        Me.ucrChkAbbrWeekday.TabIndex = 0
         '
         'grpValues
         '
@@ -186,7 +186,7 @@ Partial Class dlgUseDate
         Me.ucrChkDayYear366.Location = New System.Drawing.Point(108, 69)
         Me.ucrChkDayYear366.Name = "ucrChkDayYear366"
         Me.ucrChkDayYear366.Size = New System.Drawing.Size(109, 20)
-        Me.ucrChkDayYear366.TabIndex = 13
+        Me.ucrChkDayYear366.TabIndex = 6
         '
         'ucrChkYear
         '
@@ -194,7 +194,7 @@ Partial Class dlgUseDate
         Me.ucrChkYear.Location = New System.Drawing.Point(6, 17)
         Me.ucrChkYear.Name = "ucrChkYear"
         Me.ucrChkYear.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkYear.TabIndex = 7
+        Me.ucrChkYear.TabIndex = 0
         '
         'ucrChkDayInYear
         '
@@ -202,7 +202,7 @@ Partial Class dlgUseDate
         Me.ucrChkDayInYear.Location = New System.Drawing.Point(108, 43)
         Me.ucrChkDayInYear.Name = "ucrChkDayInYear"
         Me.ucrChkDayInYear.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkDayInYear.TabIndex = 12
+        Me.ucrChkDayInYear.TabIndex = 5
         '
         'ucrChkMonth
         '
@@ -210,7 +210,7 @@ Partial Class dlgUseDate
         Me.ucrChkMonth.Location = New System.Drawing.Point(6, 43)
         Me.ucrChkMonth.Name = "ucrChkMonth"
         Me.ucrChkMonth.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMonth.TabIndex = 8
+        Me.ucrChkMonth.TabIndex = 1
         '
         'ucrChkDay
         '
@@ -218,7 +218,7 @@ Partial Class dlgUseDate
         Me.ucrChkDay.Location = New System.Drawing.Point(6, 69)
         Me.ucrChkDay.Name = "ucrChkDay"
         Me.ucrChkDay.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkDay.TabIndex = 9
+        Me.ucrChkDay.TabIndex = 2
         '
         'ucrChkWeekday
         '
@@ -226,7 +226,7 @@ Partial Class dlgUseDate
         Me.ucrChkWeekday.Location = New System.Drawing.Point(108, 17)
         Me.ucrChkWeekday.Name = "ucrChkWeekday"
         Me.ucrChkWeekday.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkWeekday.TabIndex = 11
+        Me.ucrChkWeekday.TabIndex = 4
         '
         'ucrChkWeek
         '
@@ -234,7 +234,7 @@ Partial Class dlgUseDate
         Me.ucrChkWeek.Location = New System.Drawing.Point(6, 95)
         Me.ucrChkWeek.Name = "ucrChkWeek"
         Me.ucrChkWeek.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkWeek.TabIndex = 10
+        Me.ucrChkWeek.TabIndex = 3
         '
         'ucrReceiverUseDate
         '
