@@ -25,7 +25,7 @@ Partial Class dlgReoderDescriptives
         Me.ucrBase = New instat.ucrButtons()
         Me.lblObjectsToReoder = New System.Windows.Forms.Label()
         Me.ucrReorderObjects = New instat.ucrReorder()
-        Me.ucrDataFrameReoder = New instat.ucrDataFrame()
+        Me.ucrDataFrameReorder = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -33,44 +33,44 @@ Partial Class dlgReoderDescriptives
         Me.ucrBase.Location = New System.Drawing.Point(12, 176)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 3
         '
         'lblObjectsToReoder
         '
         Me.lblObjectsToReoder.AutoSize = True
-        Me.lblObjectsToReoder.Location = New System.Drawing.Point(187, 15)
+        Me.lblObjectsToReoder.Location = New System.Drawing.Point(193, 18)
         Me.lblObjectsToReoder.Name = "lblObjectsToReoder"
-        Me.lblObjectsToReoder.Size = New System.Drawing.Size(93, 13)
-        Me.lblObjectsToReoder.TabIndex = 2
+        Me.lblObjectsToReoder.Size = New System.Drawing.Size(99, 13)
+        Me.lblObjectsToReoder.TabIndex = 1
         Me.lblObjectsToReoder.Tag = "Objects_to_Reorder"
-        Me.lblObjectsToReoder.Text = "Objects to Reoder"
+        Me.lblObjectsToReoder.Text = "Objects to Reorder:"
         '
         'ucrReorderObjects
         '
         Me.ucrReorderObjects.Location = New System.Drawing.Point(190, 31)
         Me.ucrReorderObjects.Name = "ucrReorderObjects"
         Me.ucrReorderObjects.Size = New System.Drawing.Size(154, 139)
-        Me.ucrReorderObjects.TabIndex = 3
+        Me.ucrReorderObjects.TabIndex = 2
         Me.ucrReorderObjects.ucrDataFrameList = Nothing
         Me.ucrReorderObjects.ucrReceiver = Nothing
         '
-        'ucrDataFrameReoder
+        'ucrDataFrameReorder
         '
-        Me.ucrDataFrameReoder.bUseCurrentFilter = True
-        Me.ucrDataFrameReoder.Location = New System.Drawing.Point(13, 13)
-        Me.ucrDataFrameReoder.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameReoder.Name = "ucrDataFrameReoder"
-        Me.ucrDataFrameReoder.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameReoder.TabIndex = 1
+        Me.ucrDataFrameReorder.bUseCurrentFilter = True
+        Me.ucrDataFrameReorder.Location = New System.Drawing.Point(13, 13)
+        Me.ucrDataFrameReorder.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameReorder.Name = "ucrDataFrameReorder"
+        Me.ucrDataFrameReorder.Size = New System.Drawing.Size(120, 40)
+        Me.ucrDataFrameReorder.TabIndex = 0
         '
         'dlgReoderDescriptives
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 242)
+        Me.ClientSize = New System.Drawing.Size(422, 235)
         Me.Controls.Add(Me.ucrReorderObjects)
         Me.Controls.Add(Me.lblObjectsToReoder)
-        Me.Controls.Add(Me.ucrDataFrameReoder)
+        Me.Controls.Add(Me.ucrDataFrameReorder)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -87,5 +87,5 @@ Partial Class dlgReoderDescriptives
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblObjectsToReoder As Label
     Friend WithEvents ucrReorderObjects As ucrReorder
-    Friend WithEvents ucrDataFrameReoder As ucrDataFrame
+    Friend WithEvents ucrDataFrameReorder As ucrDataFrame
 End Class
