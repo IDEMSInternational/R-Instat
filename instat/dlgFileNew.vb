@@ -74,7 +74,7 @@ Public Class dlgFileNew
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         clsMatrixFunction = clsMatrixDefaultFunction.Clone()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        SetRCode(Me, clsMatrixFunction, True)
+        SetRCode(Me, clsMatrixDefaultFunction, True)
         TestOKEnabled()
     End Sub
 
