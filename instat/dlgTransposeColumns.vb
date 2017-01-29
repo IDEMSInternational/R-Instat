@@ -30,6 +30,10 @@ Public Class dlgTransposeColumns
     End Sub
 
     Private Sub InitialiseDialog()
+        ' Sheet1_transposed <- (as.data.frame(x=t(x=InstatDataObject$get_columns_from_data(data_name="Sheet1", col_names="dlgAddComment"))))
+        'InstatDataObject$import_data(data_tables = List(Sheet1_transposed = Sheet1_transposed))
+        ' found a bug - checkbox doesn't do anything
+
         ucrBaseTransposeColumns.clsRsyntax.SetFunction("")
         clsTranspose.SetRCommand("t")
         clsRToDataFrame.SetRCommand("as.data.frame") 'transposed data is in matrix form. We need to convert to dataframe inorder to write back
