@@ -40,7 +40,7 @@ Partial Class dlgRenameDescriptive
         'ucrSelectorForRenameObject
         '
         Me.ucrSelectorForRenameObject.bShowHiddenColumns = False
-        Me.ucrSelectorForRenameObject.bUseCurrentFilter = False
+        Me.ucrSelectorForRenameObject.bUseCurrentFilter = True
         Me.ucrSelectorForRenameObject.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRenameObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRenameObject.Name = "ucrSelectorForRenameObject"
@@ -49,7 +49,8 @@ Partial Class dlgRenameDescriptive
         '
         'ucrReceiverCurrentName
         '
-        Me.ucrReceiverCurrentName.Location = New System.Drawing.Point(265, 33)
+        Me.ucrReceiverCurrentName.frmParent = Me
+        Me.ucrReceiverCurrentName.Location = New System.Drawing.Point(265, 49)
         Me.ucrReceiverCurrentName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCurrentName.Name = "ucrReceiverCurrentName"
         Me.ucrReceiverCurrentName.Selector = Nothing
@@ -58,7 +59,7 @@ Partial Class dlgRenameDescriptive
         '
         'lblCurrentName
         '
-        Me.lblCurrentName.Location = New System.Drawing.Point(263, 15)
+        Me.lblCurrentName.Location = New System.Drawing.Point(263, 31)
         Me.lblCurrentName.Name = "lblCurrentName"
         Me.lblCurrentName.Size = New System.Drawing.Size(100, 23)
         Me.lblCurrentName.TabIndex = 2
@@ -67,17 +68,18 @@ Partial Class dlgRenameDescriptive
         '
         'lblNewName
         '
-        Me.lblNewName.Location = New System.Drawing.Point(263, 79)
+        Me.lblNewName.Location = New System.Drawing.Point(263, 95)
         Me.lblNewName.Name = "lblNewName"
-        Me.lblNewName.Size = New System.Drawing.Size(100, 23)
+        Me.lblNewName.Size = New System.Drawing.Size(100, 13)
         Me.lblNewName.TabIndex = 1
         Me.lblNewName.Tag = "New_Name"
         Me.lblNewName.Text = "New Name:"
         '
         'ucrInputNewName
         '
+        Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(265, 95)
+        Me.ucrInputNewName.Location = New System.Drawing.Point(265, 111)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputNewName.TabIndex = 0
