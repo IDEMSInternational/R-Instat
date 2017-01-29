@@ -23,41 +23,46 @@ Partial Class dlgReplace
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpOld = New System.Windows.Forms.GroupBox()
-        Me.chkIncludingMaximum = New System.Windows.Forms.CheckBox()
-        Me.lblMaximum = New System.Windows.Forms.Label()
+        Me.ucrChkMaximum = New instat.ucrCheck()
+        Me.ucrChkMinimum = New instat.ucrCheck()
+        Me.lblRangeMax = New System.Windows.Forms.Label()
         Me.lblRangeMin = New System.Windows.Forms.Label()
-        Me.chkIncludeMinimum = New System.Windows.Forms.CheckBox()
-        Me.rdoRange = New System.Windows.Forms.RadioButton()
-        Me.rdoOldMissing = New System.Windows.Forms.RadioButton()
-        Me.rdoOldValue = New System.Windows.Forms.RadioButton()
-        Me.grpNew = New System.Windows.Forms.GroupBox()
-        Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
-        Me.rdoNewValue = New System.Windows.Forms.RadioButton()
-        Me.rdoFromAbove = New System.Windows.Forms.RadioButton()
-        Me.lblSelectedColumns = New System.Windows.Forms.Label()
-        Me.ucrInputNewValue = New instat.ucrInputTextBox()
         Me.ucrInputRangeTo = New instat.ucrInputTextBox()
         Me.ucrInputRangeFrom = New instat.ucrInputTextBox()
         Me.ucrInputOldValue = New instat.ucrInputTextBox()
+        Me.rdoRange = New System.Windows.Forms.RadioButton()
+        Me.rdoOldMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoOldValue = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOld = New instat.UcrPanel()
+        Me.ucrPnlRange = New instat.UcrPanel()
+        Me.grpNew = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNewValue = New instat.ucrInputTextBox()
+        Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoNewValue = New System.Windows.Forms.RadioButton()
+        Me.rdoFromAbove = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlNew = New instat.UcrPanel()
+        Me.lblSelectedColumns = New System.Windows.Forms.Label()
         Me.ucrReceiverReplace = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorReplace = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBaseReplace = New instat.ucrButtons()
         Me.grpOld.SuspendLayout()
         Me.grpNew.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpOld
         '
-        Me.grpOld.Controls.Add(Me.chkIncludingMaximum)
-        Me.grpOld.Controls.Add(Me.lblMaximum)
+        Me.grpOld.Controls.Add(Me.ucrChkMaximum)
+        Me.grpOld.Controls.Add(Me.ucrChkMinimum)
+        Me.grpOld.Controls.Add(Me.lblRangeMax)
         Me.grpOld.Controls.Add(Me.lblRangeMin)
-        Me.grpOld.Controls.Add(Me.chkIncludeMinimum)
         Me.grpOld.Controls.Add(Me.ucrInputRangeTo)
         Me.grpOld.Controls.Add(Me.ucrInputRangeFrom)
         Me.grpOld.Controls.Add(Me.ucrInputOldValue)
         Me.grpOld.Controls.Add(Me.rdoRange)
         Me.grpOld.Controls.Add(Me.rdoOldMissing)
         Me.grpOld.Controls.Add(Me.rdoOldValue)
+        Me.grpOld.Controls.Add(Me.ucrPnlOld)
+        Me.grpOld.Controls.Add(Me.ucrPnlRange)
         Me.grpOld.Location = New System.Drawing.Point(10, 194)
         Me.grpOld.Name = "grpOld"
         Me.grpOld.Size = New System.Drawing.Size(229, 132)
@@ -66,26 +71,31 @@ Partial Class dlgReplace
         Me.grpOld.Tag = "Old"
         Me.grpOld.Text = "Old"
         '
-        'chkIncludingMaximum
+        'ucrChkMaximum
         '
-        Me.chkIncludingMaximum.AutoSize = True
-        Me.chkIncludingMaximum.Location = New System.Drawing.Point(155, 103)
-        Me.chkIncludingMaximum.Name = "chkIncludingMaximum"
-        Me.chkIncludingMaximum.Size = New System.Drawing.Size(69, 17)
-        Me.chkIncludingMaximum.TabIndex = 9
-        Me.chkIncludingMaximum.Tag = "Including"
-        Me.chkIncludingMaximum.Text = "Including"
-        Me.chkIncludingMaximum.UseVisualStyleBackColor = True
+        Me.ucrChkMaximum.Checked = False
+        Me.ucrChkMaximum.Location = New System.Drawing.Point(155, 104)
+        Me.ucrChkMaximum.Name = "ucrChkMaximum"
+        Me.ucrChkMaximum.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMaximum.TabIndex = 11
         '
-        'lblMaximum
+        'ucrChkMinimum
         '
-        Me.lblMaximum.AutoSize = True
-        Me.lblMaximum.Location = New System.Drawing.Point(23, 104)
-        Me.lblMaximum.Name = "lblMaximum"
-        Me.lblMaximum.Size = New System.Drawing.Size(54, 13)
-        Me.lblMaximum.TabIndex = 7
-        Me.lblMaximum.Tag = "Maximum"
-        Me.lblMaximum.Text = "Maximum:"
+        Me.ucrChkMinimum.Checked = False
+        Me.ucrChkMinimum.Location = New System.Drawing.Point(155, 76)
+        Me.ucrChkMinimum.Name = "ucrChkMinimum"
+        Me.ucrChkMinimum.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMinimum.TabIndex = 8
+        '
+        'lblRangeMax
+        '
+        Me.lblRangeMax.AutoSize = True
+        Me.lblRangeMax.Location = New System.Drawing.Point(23, 104)
+        Me.lblRangeMax.Name = "lblRangeMax"
+        Me.lblRangeMax.Size = New System.Drawing.Size(54, 13)
+        Me.lblRangeMax.TabIndex = 9
+        Me.lblRangeMax.Tag = "Maximum"
+        Me.lblRangeMax.Text = "Maximum:"
         '
         'lblRangeMin
         '
@@ -93,20 +103,36 @@ Partial Class dlgReplace
         Me.lblRangeMin.Location = New System.Drawing.Point(23, 80)
         Me.lblRangeMin.Name = "lblRangeMin"
         Me.lblRangeMin.Size = New System.Drawing.Size(51, 13)
-        Me.lblRangeMin.TabIndex = 4
+        Me.lblRangeMin.TabIndex = 6
         Me.lblRangeMin.Tag = "Minimum"
         Me.lblRangeMin.Text = "Minimum:"
         '
-        'chkIncludeMinimum
+        'ucrInputRangeTo
         '
-        Me.chkIncludeMinimum.AutoSize = True
-        Me.chkIncludeMinimum.Location = New System.Drawing.Point(155, 79)
-        Me.chkIncludeMinimum.Name = "chkIncludeMinimum"
-        Me.chkIncludeMinimum.Size = New System.Drawing.Size(69, 17)
-        Me.chkIncludeMinimum.TabIndex = 6
-        Me.chkIncludeMinimum.Tag = "Including"
-        Me.chkIncludeMinimum.Text = "Including"
-        Me.chkIncludeMinimum.UseVisualStyleBackColor = True
+        Me.ucrInputRangeTo.IsMultiline = False
+        Me.ucrInputRangeTo.IsReadOnly = False
+        Me.ucrInputRangeTo.Location = New System.Drawing.Point(80, 102)
+        Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
+        Me.ucrInputRangeTo.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputRangeTo.TabIndex = 10
+        '
+        'ucrInputRangeFrom
+        '
+        Me.ucrInputRangeFrom.IsMultiline = False
+        Me.ucrInputRangeFrom.IsReadOnly = False
+        Me.ucrInputRangeFrom.Location = New System.Drawing.Point(80, 76)
+        Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
+        Me.ucrInputRangeFrom.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputRangeFrom.TabIndex = 7
+        '
+        'ucrInputOldValue
+        '
+        Me.ucrInputOldValue.IsMultiline = False
+        Me.ucrInputOldValue.IsReadOnly = False
+        Me.ucrInputOldValue.Location = New System.Drawing.Point(58, 19)
+        Me.ucrInputOldValue.Name = "ucrInputOldValue"
+        Me.ucrInputOldValue.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputOldValue.TabIndex = 2
         '
         'rdoRange
         '
@@ -114,7 +140,7 @@ Partial Class dlgReplace
         Me.rdoRange.Location = New System.Drawing.Point(5, 60)
         Me.rdoRange.Name = "rdoRange"
         Me.rdoRange.Size = New System.Drawing.Size(57, 17)
-        Me.rdoRange.TabIndex = 3
+        Me.rdoRange.TabIndex = 4
         Me.rdoRange.TabStop = True
         Me.rdoRange.Tag = "Range"
         Me.rdoRange.Text = "Range"
@@ -126,7 +152,7 @@ Partial Class dlgReplace
         Me.rdoOldMissing.Location = New System.Drawing.Point(5, 40)
         Me.rdoOldMissing.Name = "rdoOldMissing"
         Me.rdoOldMissing.Size = New System.Drawing.Size(60, 17)
-        Me.rdoOldMissing.TabIndex = 2
+        Me.rdoOldMissing.TabIndex = 3
         Me.rdoOldMissing.TabStop = True
         Me.rdoOldMissing.Tag = "Missing"
         Me.rdoOldMissing.Text = "Missing"
@@ -138,11 +164,25 @@ Partial Class dlgReplace
         Me.rdoOldValue.Location = New System.Drawing.Point(5, 20)
         Me.rdoOldValue.Name = "rdoOldValue"
         Me.rdoOldValue.Size = New System.Drawing.Size(52, 17)
-        Me.rdoOldValue.TabIndex = 0
+        Me.rdoOldValue.TabIndex = 1
         Me.rdoOldValue.TabStop = True
         Me.rdoOldValue.Tag = "Value"
         Me.rdoOldValue.Text = "Value"
         Me.rdoOldValue.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOld
+        '
+        Me.ucrPnlOld.Location = New System.Drawing.Point(4, 14)
+        Me.ucrPnlOld.Name = "ucrPnlOld"
+        Me.ucrPnlOld.Size = New System.Drawing.Size(93, 56)
+        Me.ucrPnlOld.TabIndex = 0
+        '
+        'ucrPnlRange
+        '
+        Me.ucrPnlRange.Location = New System.Drawing.Point(4, 60)
+        Me.ucrPnlRange.Name = "ucrPnlRange"
+        Me.ucrPnlRange.Size = New System.Drawing.Size(93, 66)
+        Me.ucrPnlRange.TabIndex = 5
         '
         'grpNew
         '
@@ -150,6 +190,7 @@ Partial Class dlgReplace
         Me.grpNew.Controls.Add(Me.rdoNewMissing)
         Me.grpNew.Controls.Add(Me.rdoNewValue)
         Me.grpNew.Controls.Add(Me.rdoFromAbove)
+        Me.grpNew.Controls.Add(Me.ucrPnlNew)
         Me.grpNew.Location = New System.Drawing.Point(240, 194)
         Me.grpNew.Name = "grpNew"
         Me.grpNew.Size = New System.Drawing.Size(168, 132)
@@ -157,6 +198,15 @@ Partial Class dlgReplace
         Me.grpNew.TabStop = False
         Me.grpNew.Tag = "New"
         Me.grpNew.Text = "New"
+        '
+        'ucrInputNewValue
+        '
+        Me.ucrInputNewValue.IsMultiline = False
+        Me.ucrInputNewValue.IsReadOnly = False
+        Me.ucrInputNewValue.Location = New System.Drawing.Point(63, 19)
+        Me.ucrInputNewValue.Name = "ucrInputNewValue"
+        Me.ucrInputNewValue.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputNewValue.TabIndex = 1
         '
         'rdoNewMissing
         '
@@ -194,6 +244,13 @@ Partial Class dlgReplace
         Me.rdoFromAbove.Text = "From Above"
         Me.rdoFromAbove.UseVisualStyleBackColor = True
         '
+        'ucrPnlNew
+        '
+        Me.ucrPnlNew.Location = New System.Drawing.Point(3, 17)
+        Me.ucrPnlNew.Name = "ucrPnlNew"
+        Me.ucrPnlNew.Size = New System.Drawing.Size(110, 76)
+        Me.ucrPnlNew.TabIndex = 7
+        '
         'lblSelectedColumns
         '
         Me.lblSelectedColumns.AutoSize = True
@@ -204,46 +261,22 @@ Partial Class dlgReplace
         Me.lblSelectedColumns.Tag = "Selected_Column(s)"
         Me.lblSelectedColumns.Text = "Selected Column(s):"
         '
-        'ucrInputNewValue
-        '
-        Me.ucrInputNewValue.IsReadOnly = False
-        Me.ucrInputNewValue.Location = New System.Drawing.Point(63, 19)
-        Me.ucrInputNewValue.Name = "ucrInputNewValue"
-        Me.ucrInputNewValue.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputNewValue.TabIndex = 1
-        '
-        'ucrInputRangeTo
-        '
-        Me.ucrInputRangeTo.IsReadOnly = False
-        Me.ucrInputRangeTo.Location = New System.Drawing.Point(80, 102)
-        Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
-        Me.ucrInputRangeTo.Size = New System.Drawing.Size(69, 21)
-        Me.ucrInputRangeTo.TabIndex = 8
-        '
-        'ucrInputRangeFrom
-        '
-        Me.ucrInputRangeFrom.IsReadOnly = False
-        Me.ucrInputRangeFrom.Location = New System.Drawing.Point(80, 76)
-        Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
-        Me.ucrInputRangeFrom.Size = New System.Drawing.Size(69, 21)
-        Me.ucrInputRangeFrom.TabIndex = 5
-        '
-        'ucrInputOldValue
-        '
-        Me.ucrInputOldValue.IsReadOnly = False
-        Me.ucrInputOldValue.Location = New System.Drawing.Point(58, 19)
-        Me.ucrInputOldValue.Name = "ucrInputOldValue"
-        Me.ucrInputOldValue.Size = New System.Drawing.Size(95, 21)
-        Me.ucrInputOldValue.TabIndex = 1
-        '
         'ucrReceiverReplace
         '
+        Me.ucrReceiverReplace.frmParent = Me
         Me.ucrReceiverReplace.Location = New System.Drawing.Point(247, 61)
         Me.ucrReceiverReplace.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverReplace.Name = "ucrReceiverReplace"
         Me.ucrReceiverReplace.Selector = Nothing
         Me.ucrReceiverReplace.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverReplace.TabIndex = 2
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 333)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 5
         '
         'ucrSelectorReplace
         '
@@ -255,13 +288,6 @@ Partial Class dlgReplace
         Me.ucrSelectorReplace.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorReplace.TabIndex = 0
         '
-        'ucrBaseReplace
-        '
-        Me.ucrBaseReplace.Location = New System.Drawing.Point(10, 333)
-        Me.ucrBaseReplace.Name = "ucrBaseReplace"
-        Me.ucrBaseReplace.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseReplace.TabIndex = 5
-        '
         'dlgReplace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -272,7 +298,7 @@ Partial Class dlgReplace
         Me.Controls.Add(Me.grpOld)
         Me.Controls.Add(Me.ucrReceiverReplace)
         Me.Controls.Add(Me.ucrSelectorReplace)
-        Me.Controls.Add(Me.ucrBaseReplace)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -288,7 +314,7 @@ Partial Class dlgReplace
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrBaseReplace As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorReplace As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverReplace As ucrReceiverMultiple
     Friend WithEvents grpOld As GroupBox
@@ -304,8 +330,11 @@ Partial Class dlgReplace
     Friend WithEvents rdoNewValue As RadioButton
     Friend WithEvents rdoFromAbove As RadioButton
     Friend WithEvents lblSelectedColumns As Label
-    Friend WithEvents chkIncludeMinimum As CheckBox
-    Friend WithEvents chkIncludingMaximum As CheckBox
-    Friend WithEvents lblMaximum As Label
+    Friend WithEvents lblRangeMax As Label
     Friend WithEvents lblRangeMin As Label
+    Friend WithEvents ucrPnlOld As UcrPanel
+    Friend WithEvents ucrPnlNew As UcrPanel
+    Friend WithEvents ucrChkMinimum As ucrCheck
+    Friend WithEvents ucrChkMaximum As ucrCheck
+    Friend WithEvents ucrPnlRange As UcrPanel
 End Class
