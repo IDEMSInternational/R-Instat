@@ -34,8 +34,6 @@ Public Class dlgViewDescriptives
 
     End Sub
 
-    ' InstatDataObject$get_objects(object_name="one_var1", data_name="Damango")
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 349
 
