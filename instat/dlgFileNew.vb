@@ -56,10 +56,7 @@ Public Class dlgFileNew
         ' Default R
         clsOverallFunction.SetRCommand("data.frame")
         clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixDefaultFunction)
-        'clsOverallFunction.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         clsOverallFunction.SetAssignTo(strTemp:="Sheet", strTempDataframe:="Sheet", bAssignToIsPrefix:=True)
-        'clsDefaultFunction.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
-
 
         'matrix(nrow = 10, ncol = 2, Data = NA)
         clsMatrixDefaultFunction.SetRCommand("matrix")
@@ -67,9 +64,6 @@ Public Class dlgFileNew
         clsMatrixDefaultFunction.AddParameter("ncol", 2)
         clsMatrixDefaultFunction.AddParameter("nrow", 10)
     End Sub
-
-
-    'data.frame(data=matrix(nrow=10, ncol=2, data=NA))
 
     Private Sub ReopenDialog()
 
