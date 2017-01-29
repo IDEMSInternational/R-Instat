@@ -30,6 +30,7 @@ Partial Class dlgViewDescriptives
         Me.rdoAllContents = New System.Windows.Forms.RadioButton()
         Me.rdoComponent = New System.Windows.Forms.RadioButton()
         Me.rdoViewGraph = New System.Windows.Forms.RadioButton()
+        Me.ucrPnl = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -42,7 +43,7 @@ Partial Class dlgViewDescriptives
         'ucrSelectorForViewObject
         '
         Me.ucrSelectorForViewObject.bShowHiddenColumns = False
-        Me.ucrSelectorForViewObject.bUseCurrentFilter = False
+        Me.ucrSelectorForViewObject.bUseCurrentFilter = True
         Me.ucrSelectorForViewObject.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForViewObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForViewObject.Name = "ucrSelectorForViewObject"
@@ -59,6 +60,7 @@ Partial Class dlgViewDescriptives
         '
         'ucrReceiverSelectedObject
         '
+        Me.ucrReceiverSelectedObject.frmParent = Me
         Me.ucrReceiverSelectedObject.Location = New System.Drawing.Point(250, 60)
         Me.ucrReceiverSelectedObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedObject.Name = "ucrReceiverSelectedObject"
@@ -68,9 +70,9 @@ Partial Class dlgViewDescriptives
         '
         'rdoStructure
         '
-        Me.rdoStructure.Location = New System.Drawing.Point(11, 206)
+        Me.rdoStructure.Location = New System.Drawing.Point(12, 206)
         Me.rdoStructure.Name = "rdoStructure"
-        Me.rdoStructure.Size = New System.Drawing.Size(104, 24)
+        Me.rdoStructure.Size = New System.Drawing.Size(88, 24)
         Me.rdoStructure.TabIndex = 3
         Me.rdoStructure.TabStop = True
         Me.rdoStructure.Tag = "Structure"
@@ -81,7 +83,7 @@ Partial Class dlgViewDescriptives
         '
         Me.rdoAllContents.Location = New System.Drawing.Point(117, 206)
         Me.rdoAllContents.Name = "rdoAllContents"
-        Me.rdoAllContents.Size = New System.Drawing.Size(104, 24)
+        Me.rdoAllContents.Size = New System.Drawing.Size(100, 24)
         Me.rdoAllContents.TabIndex = 2
         Me.rdoAllContents.TabStop = True
         Me.rdoAllContents.Tag = "All_Contents"
@@ -92,7 +94,7 @@ Partial Class dlgViewDescriptives
         '
         Me.rdoComponent.Location = New System.Drawing.Point(223, 206)
         Me.rdoComponent.Name = "rdoComponent"
-        Me.rdoComponent.Size = New System.Drawing.Size(104, 24)
+        Me.rdoComponent.Size = New System.Drawing.Size(87, 24)
         Me.rdoComponent.TabIndex = 1
         Me.rdoComponent.TabStop = True
         Me.rdoComponent.Tag = "Component"
@@ -101,19 +103,26 @@ Partial Class dlgViewDescriptives
         '
         'rdoViewGraph
         '
-        Me.rdoViewGraph.Location = New System.Drawing.Point(329, 206)
+        Me.rdoViewGraph.Location = New System.Drawing.Point(316, 206)
         Me.rdoViewGraph.Name = "rdoViewGraph"
-        Me.rdoViewGraph.Size = New System.Drawing.Size(104, 24)
+        Me.rdoViewGraph.Size = New System.Drawing.Size(80, 24)
         Me.rdoViewGraph.TabIndex = 0
         Me.rdoViewGraph.TabStop = True
         Me.rdoViewGraph.Text = "View Graph"
         Me.rdoViewGraph.UseVisualStyleBackColor = True
         '
+        'ucrPnl
+        '
+        Me.ucrPnl.Location = New System.Drawing.Point(4, 193)
+        Me.ucrPnl.Name = "ucrPnl"
+        Me.ucrPnl.Size = New System.Drawing.Size(416, 45)
+        Me.ucrPnl.TabIndex = 8
+        '
         'dlgViewDescriptives
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 306)
+        Me.ClientSize = New System.Drawing.Size(418, 301)
         Me.Controls.Add(Me.rdoViewGraph)
         Me.Controls.Add(Me.rdoComponent)
         Me.Controls.Add(Me.rdoAllContents)
@@ -122,6 +131,7 @@ Partial Class dlgViewDescriptives
         Me.Controls.Add(Me.lblSelectedObject)
         Me.Controls.Add(Me.ucrSelectorForViewObject)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnl)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -141,4 +151,5 @@ Partial Class dlgViewDescriptives
     Friend WithEvents rdoAllContents As RadioButton
     Friend WithEvents rdoComponent As RadioButton
     Friend WithEvents rdoViewGraph As RadioButton
+    Friend WithEvents ucrPnl As UcrPanel
 End Class
