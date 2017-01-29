@@ -42,15 +42,15 @@ Public Class dlgColourbyProperty
     Private Sub SetDefaults()
         ucrSelectorColourByMetadata.Reset()
         SetOrRemoveColours()
-        chkRemoveColours.Checked = False
+        'chkRemoveColours.Checked = False
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverMetadataProperty.IsEmpty OrElse chkRemoveColours.Checked Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If Not ucrReceiverMetadataProperty.IsEmpty OrElse chkRemoveColours.Checked Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -72,21 +72,21 @@ Public Class dlgColourbyProperty
         TestOKEnabled()
     End Sub
 
-    Private Sub chkRemoveColours_CheckedChanged(sender As Object, e As EventArgs) Handles chkRemoveColours.CheckedChanged
+    Private Sub chkRemoveColours_CheckedChanged(sender As Object, e As EventArgs) 'Handles chkRemoveColours.CheckedChanged
         SetOrRemoveColours()
     End Sub
 
     Private Sub SetOrRemoveColours()
-        If chkRemoveColours.Checked Then
-            ucrSelectorColourByMetadata.Reset()
-            ucrSelectorColourByMetadata.SetCurrentReceiver(Nothing)
-            ucrReceiverMetadataProperty.Enabled = False
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveColoursFunction)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSetColoursFunction)
-            ucrReceiverMetadataProperty.Enabled = True
-            ucrReceiverMetadataProperty.SetMeAsReceiver()
-        End If
-        TestOKEnabled()
+        'If chkRemoveColours.Checked Then
+        '    ucrSelectorColourByMetadata.Reset()
+        '    ucrSelectorColourByMetadata.SetCurrentReceiver(Nothing)
+        '    ucrReceiverMetadataProperty.Enabled = False
+        '    ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveColoursFunction)
+        'Else
+        '    ucrBase.clsRsyntax.SetBaseRFunction(clsSetColoursFunction)
+        '    ucrReceiverMetadataProperty.Enabled = True
+        '    ucrReceiverMetadataProperty.SetMeAsReceiver()
+        'End If
+        'TestOKEnabled()
     End Sub
 End Class
