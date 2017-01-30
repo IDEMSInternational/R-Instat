@@ -37,6 +37,7 @@ Public Class dlgOneVariableGraph
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorOneVarGraph.Reset()
+        ucrSaveGraph.Reset()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         bResetSubdialog = True
         TestOkEnabled()
@@ -55,10 +56,10 @@ Public Class dlgOneVariableGraph
 
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
-        ucrReceiverOneVarGraph.SetParameter(New RParameter("columns"))
+        ucrReceiverOneVarGraph.SetParameter(New RParameter("columns", 1))
         ucrReceiverOneVarGraph.SetParameterIsString()
 
-        ucrSelectorOneVarGraph.SetParameter(New RParameter("data_name"))
+        ucrSelectorOneVarGraph.SetParameter(New RParameter("data_name", 0))
         ucrSelectorOneVarGraph.SetParameterIsString()
 
         ucrChkFlip.SetText("Flip Coordinates")
@@ -75,10 +76,9 @@ Public Class dlgOneVariableGraph
 
         'Define the default RFunction
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_point" & Chr(34))
+        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
         clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
         clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultFunction.AddParameter(ucrSelectorOneVarGraph.GetParameter(), 0)
         clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
     End Sub
 
