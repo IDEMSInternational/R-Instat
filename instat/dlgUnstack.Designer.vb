@@ -24,10 +24,9 @@ Partial Class dlgUnstack
     Private Sub InitializeComponent()
         Me.lblFactorToUnstackBy = New System.Windows.Forms.Label()
         Me.lblColumnToUnstack = New System.Windows.Forms.Label()
-        Me.chkDropMissingCombinations = New System.Windows.Forms.CheckBox()
-        Me.lblDataFrameForUnstack = New System.Windows.Forms.Label()
         Me.lblIDColumns = New System.Windows.Forms.Label()
-        Me.ucrNewDataName = New instat.ucrInputTextBox()
+        Me.ucrNewDFName = New instat.ucrSave()
+        Me.ucrChkDropMissingCombinations = New instat.ucrCheck()
         Me.ucrIDColumns = New instat.ucrReceiverMultiple()
         Me.ucrColumnToUnstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorToUnstackReceiver = New instat.ucrReceiverSingle()
@@ -40,7 +39,7 @@ Partial Class dlgUnstack
         Me.lblFactorToUnstackBy.Location = New System.Drawing.Point(277, 31)
         Me.lblFactorToUnstackBy.Name = "lblFactorToUnstackBy"
         Me.lblFactorToUnstackBy.Size = New System.Drawing.Size(121, 16)
-        Me.lblFactorToUnstackBy.TabIndex = 8
+        Me.lblFactorToUnstackBy.TabIndex = 1
         Me.lblFactorToUnstackBy.Tag = "Factor_to_Unstack_By"
         Me.lblFactorToUnstackBy.Text = "Factor to Unstack by:"
         '
@@ -49,57 +48,47 @@ Partial Class dlgUnstack
         Me.lblColumnToUnstack.Location = New System.Drawing.Point(278, 79)
         Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
         Me.lblColumnToUnstack.Size = New System.Drawing.Size(119, 23)
-        Me.lblColumnToUnstack.TabIndex = 7
+        Me.lblColumnToUnstack.TabIndex = 3
         Me.lblColumnToUnstack.Tag = "Column_to_Unstack"
         Me.lblColumnToUnstack.Text = "Column to Unstack by:"
-        '
-        'chkDropMissingCombinations
-        '
-        Me.chkDropMissingCombinations.Location = New System.Drawing.Point(10, 199)
-        Me.chkDropMissingCombinations.Name = "chkDropMissingCombinations"
-        Me.chkDropMissingCombinations.Size = New System.Drawing.Size(210, 24)
-        Me.chkDropMissingCombinations.TabIndex = 6
-        Me.chkDropMissingCombinations.Tag = "Drop_Missing_Combinations"
-        Me.chkDropMissingCombinations.Text = "Drop Missing Combinations"
-        Me.chkDropMissingCombinations.UseVisualStyleBackColor = True
-        '
-        'lblDataFrameForUnstack
-        '
-        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(8, 232)
-        Me.lblDataFrameForUnstack.Name = "lblDataFrameForUnstack"
-        Me.lblDataFrameForUnstack.Size = New System.Drawing.Size(125, 23)
-        Me.lblDataFrameForUnstack.TabIndex = 3
-        Me.lblDataFrameForUnstack.Tag = "New_Data_Frame_Name"
-        Me.lblDataFrameForUnstack.Text = "New Data Frame Name:"
         '
         'lblIDColumns
         '
         Me.lblIDColumns.Location = New System.Drawing.Point(282, 124)
         Me.lblIDColumns.Name = "lblIDColumns"
         Me.lblIDColumns.Size = New System.Drawing.Size(100, 23)
-        Me.lblIDColumns.TabIndex = 1
+        Me.lblIDColumns.TabIndex = 6
         Me.lblIDColumns.Tag = "ID_Columns"
         Me.lblIDColumns.Text = "ID Columns:"
         '
-        'ucrNewDataName
+        'ucrNewDFName
         '
-        Me.ucrNewDataName.IsReadOnly = False
-        Me.ucrNewDataName.Location = New System.Drawing.Point(131, 229)
-        Me.ucrNewDataName.Name = "ucrNewDataName"
-        Me.ucrNewDataName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewDataName.TabIndex = 0
+        Me.ucrNewDFName.Location = New System.Drawing.Point(10, 229)
+        Me.ucrNewDFName.Name = "ucrNewDFName"
+        Me.ucrNewDFName.Size = New System.Drawing.Size(268, 24)
+        Me.ucrNewDFName.TabIndex = 8
+        '
+        'ucrChkDropMissingCombinations
+        '
+        Me.ucrChkDropMissingCombinations.Checked = False
+        Me.ucrChkDropMissingCombinations.Location = New System.Drawing.Point(10, 203)
+        Me.ucrChkDropMissingCombinations.Name = "ucrChkDropMissingCombinations"
+        Me.ucrChkDropMissingCombinations.Size = New System.Drawing.Size(159, 20)
+        Me.ucrChkDropMissingCombinations.TabIndex = 7
         '
         'ucrIDColumns
         '
+        Me.ucrIDColumns.frmParent = Me
         Me.ucrIDColumns.Location = New System.Drawing.Point(281, 140)
         Me.ucrIDColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrIDColumns.Name = "ucrIDColumns"
         Me.ucrIDColumns.Selector = Nothing
         Me.ucrIDColumns.Size = New System.Drawing.Size(120, 110)
-        Me.ucrIDColumns.TabIndex = 2
+        Me.ucrIDColumns.TabIndex = 5
         '
         'ucrColumnToUnstackReceiver
         '
+        Me.ucrColumnToUnstackReceiver.frmParent = Me
         Me.ucrColumnToUnstackReceiver.Location = New System.Drawing.Point(279, 96)
         Me.ucrColumnToUnstackReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrColumnToUnstackReceiver.Name = "ucrColumnToUnstackReceiver"
@@ -109,12 +98,13 @@ Partial Class dlgUnstack
         '
         'ucrFactorToUnstackReceiver
         '
+        Me.ucrFactorToUnstackReceiver.frmParent = Me
         Me.ucrFactorToUnstackReceiver.Location = New System.Drawing.Point(279, 48)
         Me.ucrFactorToUnstackReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorToUnstackReceiver.Name = "ucrFactorToUnstackReceiver"
         Me.ucrFactorToUnstackReceiver.Selector = Nothing
         Me.ucrFactorToUnstackReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFactorToUnstackReceiver.TabIndex = 5
+        Me.ucrFactorToUnstackReceiver.TabIndex = 2
         '
         'ucrSelectorForunstack
         '
@@ -124,26 +114,25 @@ Partial Class dlgUnstack
         Me.ucrSelectorForunstack.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForunstack.Name = "ucrSelectorForunstack"
         Me.ucrSelectorForunstack.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForunstack.TabIndex = 9
+        Me.ucrSelectorForunstack.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 256)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 9
         '
         'dlgUnstack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 318)
-        Me.Controls.Add(Me.ucrNewDataName)
+        Me.Controls.Add(Me.ucrNewDFName)
+        Me.Controls.Add(Me.ucrChkDropMissingCombinations)
         Me.Controls.Add(Me.ucrIDColumns)
-        Me.Controls.Add(Me.lblDataFrameForUnstack)
         Me.Controls.Add(Me.ucrColumnToUnstackReceiver)
         Me.Controls.Add(Me.ucrFactorToUnstackReceiver)
-        Me.Controls.Add(Me.chkDropMissingCombinations)
         Me.Controls.Add(Me.lblColumnToUnstack)
         Me.Controls.Add(Me.lblFactorToUnstackBy)
         Me.Controls.Add(Me.ucrSelectorForunstack)
@@ -163,11 +152,10 @@ Partial Class dlgUnstack
     Friend WithEvents ucrSelectorForunstack As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactorToUnstackBy As Label
     Friend WithEvents lblColumnToUnstack As Label
-    Friend WithEvents chkDropMissingCombinations As CheckBox
     Friend WithEvents ucrFactorToUnstackReceiver As ucrReceiverSingle
     Friend WithEvents ucrColumnToUnstackReceiver As ucrReceiverSingle
-    Friend WithEvents lblDataFrameForUnstack As Label
     Friend WithEvents ucrIDColumns As ucrReceiverMultiple
     Friend WithEvents lblIDColumns As Label
-    Friend WithEvents ucrNewDataName As ucrInputTextBox
+    Friend WithEvents ucrNewDFName As ucrSave
+    Friend WithEvents ucrChkDropMissingCombinations As ucrCheck
 End Class
