@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="clsCondition.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
