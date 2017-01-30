@@ -34,6 +34,9 @@ Public Class dlgRenameDescriptive
     End Sub
 
     Private Sub ReopenDialog()
+        ' temp. fix, the receivers should clear only if the name of the object in it has changed
+        ucrSelectorForRenameObject.Reset()
+        ucrInputNewName.ResetText()
     End Sub
 
     Private Sub InitialiseDialog()
