@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
 
     Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
@@ -32,27 +33,52 @@ Public Class dlgFactorDataFrame
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 162
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
+
+        'ucrselector
+        ucrSelectorFactorDataFrame.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorFactorDataFrame.SetParameterIsString()
+
+        ' ucrreceiver
+        ucrReceiverFactorDataFrame.SetParameter(New RParameter("factor", 1))
+        ucrReceiverFactorDataFrame.SetParameterIsString()
         ucrReceiverFactorDataFrame.Selector = ucrSelectorFactorDataFrame
         ucrReceiverFactorDataFrame.SetMeAsReceiver()
         ucrReceiverFactorDataFrame.SetIncludedDataTypes({"factor"})
-        SetDefaults()
+
+        'ucrnewname
+        ucrInputFactorNames.SetParameter(New RParameter("factor_data_frame_name", 2))
+        ucrInputFactorNames.SetValidationTypeAsRVariable()
+
+        'chk boxes
+        ucrChkAddCurrentContrasts.SetText("Add Current Contrasts")
+        ucrChkAddCurrentContrasts.SetParameter(New RParameter("include_contrasts", 3))
+        ucrChkAddCurrentContrasts.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkAddCurrentContrasts.SetRDefault("TRUE")
+
+        ucrChkReplaceIfAlreadyExists.SetText("Replace if Already Exists")
+        ucrChkReplaceIfAlreadyExists.SetParameter(New RParameter("replace", 4))
+        ucrChkReplaceIfAlreadyExists.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkReplaceIfAlreadyExists.SetRDefault("TRUE")
+
+        ' Defaults
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
     End Sub
 
     Private Sub SetDefaults()
-        chkAddCurrentContrast.Checked = True
-        IncludeContrast()
-        chkReplaceFactorSheet.Checked = True
-        Replace()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
         ucrInputFactorNames.ResetText()
+        CheckAutoName()
+        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty Then
+        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty AndAlso (ucrReceiverFactorDataFrame.GetVariableNames(bWithQuotes:=False) <> ucrInputFactorNames.GetText) Then ' and also receiver dataframe is empty
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -61,66 +87,19 @@ Public Class dlgFactorDataFrame
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged, ucrSelectorFactorDataFrame.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorFactorDataFrame_DataFrameChanged() Handles ucrSelectorFactorDataFrame.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorFactorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    Private Sub ucrDataFrameToRename_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorDataFrame.ControlValueChanged
+        CheckAutoName()
     End Sub
 
-    Private Sub chkAddCurrentContrast_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddCurrentContrast.CheckedChanged
-        IncludeContrast()
-    End Sub
-
-    Private Sub IncludeContrast()
-        If chkAddCurrentContrast.Checked Then
-            ucrBase.clsRsyntax.AddParameter("include_contrasts", "TRUE")
-        Else
-            ucrBase.clsRsyntax.AddParameter("include_contrasts", "FALSE")
+    Private Sub CheckAutoName()
+        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.bUserTyped Then
+            ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False) & "1")
         End If
-    End Sub
-
-    Private Sub chkReplaceFactorSheet_CheckedChanged(sender As Object, e As EventArgs) Handles chkReplaceFactorSheet.CheckedChanged
-        Replace()
-    End Sub
-
-    Private Sub Replace()
-        If chkReplaceFactorSheet.Checked Then
-            ucrBase.clsRsyntax.AddParameter("replace", "TRUE")
-        Else
-            ucrBase.clsRsyntax.AddParameter("replace", "FALSE")
-        End If
-    End Sub
-
-    Private Sub ucrReceiverFactorDataFrame_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactorDataFrame.SelectionChanged
-        FactorVariable()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub FactorVariable()
-        If Not ucrReceiverFactorDataFrame.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("factor", ucrReceiverFactorDataFrame.GetVariableNames)
-            If Not ucrInputFactorNames.bUserTyped Then
-                ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False))
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("factor")
-        End If
-    End Sub
-
-    Private Sub FactorDataFrameName()
-        If Not ucrInputFactorNames.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("factor_data_frame_name", Chr(34) & ucrInputFactorNames.GetText & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("factor_data_frame_name")
-        End If
-    End Sub
-
-    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ContentsChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputFactorNames_NameChanged() Handles ucrInputFactorNames.NameChanged
-        FactorDataFrameName()
     End Sub
 End Class
