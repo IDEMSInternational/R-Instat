@@ -39,6 +39,8 @@ Public Class dlgName
 
     Private Sub ReopenDialog()
         ucrSelectVariables.Reset()
+        ucrInputNewName.ResetText()
+        DefaultNewName()
     End Sub
 
     Private Sub TestOKEnabled()
