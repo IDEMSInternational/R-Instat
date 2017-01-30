@@ -55,7 +55,6 @@ Public Class dlgFileNew
 
         ' Default R
         clsOverallFunction.SetRCommand("data.frame")
-        '        clsOverallFunction.SetAssignTo(strTemp:="Sheet", strTempDataframe:="Sheet", bAssignToIsPrefix:=True)
 
         'matrix(nrow = 10, ncol = 2, Data = NA)
         clsMatrixDefaultFunction.SetRCommand("matrix")
@@ -77,6 +76,7 @@ Public Class dlgFileNew
         ucrNudCols.SetRCode(clsMatrixFunction)
         ucrNudRows.SetRCode(clsMatrixFunction)
         ucrNewDFName.SetRCode(clsOverallFunction)
+        ucrNewDFName.Reset()
         TestOKEnabled()
     End Sub
 
