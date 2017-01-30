@@ -70,7 +70,7 @@ Public Class dlgSort
         ucrPanelOrder.SetRDefault("FALSE")
 
         'Currently Disabled
-        'ucrPanelMissingValues.SetParameter(New RParameter("na.last",4))
+        'ucrPanelMissingValues.SetParameter(New RParameter("na.last", 3))
         'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
         'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
         'ucrPanelMissingValues.SetRDefault("TRUE")
