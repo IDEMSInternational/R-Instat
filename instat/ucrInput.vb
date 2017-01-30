@@ -41,7 +41,7 @@ Public Class ucrInput
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        bUpdateRCodeFromControl = True
+        bUpdateWhenRCodeSet = True
     End Sub
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
@@ -140,6 +140,7 @@ Public Class ucrInput
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
                 End If
             ElseIf strDefaultType = "Data Frame" Then
+                SetName(frmMain.clsRLink.GetDefaultDataFrameName(strDefaultPrefix))
             ElseIf strDefaultType = "Graph" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))

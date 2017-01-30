@@ -55,7 +55,7 @@ Public Class ucrReceiver
         bTypeSet = False
         strSelectorHeading = "Variables"
         strType = "column"
-        bUpdateRCodeFromControl = True
+        bUpdateWhenRCodeSet = True
     End Sub
 
     Public Overridable Sub AddSelected()

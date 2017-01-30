@@ -28,6 +28,7 @@ Public Class ucrSave
         ucrChkSave.bIsActiveRControl = False
         ucrInputComboSave.bIsActiveRControl = False
         ucrInputTextSave.bIsActiveRControl = False
+        bUpdateWhenRCodeSet = True
     End Sub
 
     Private Sub SetDefaults()

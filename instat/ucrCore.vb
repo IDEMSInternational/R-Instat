@@ -75,7 +75,9 @@ Public Class ucrCore
 
     Public bIsActiveRControl As Boolean = True
 
-    Public bUpdateRCodeFromControl As Boolean = False
+    'When the R Code is set, if there is no parameter in the R Code with the same name
+    'as this control's parameter, should the control be inspected for a value to update the new R Code?
+    Public bUpdateWhenRCodeSet As Boolean = False
 
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
@@ -133,7 +135,7 @@ Public Class ucrCore
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            If bUpdateRCodeFromControl AndAlso clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue() Then
+            If bUpdateWhenRCodeSet AndAlso clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue() Then
                 UpdateRCode()
             End If
             UpdateControl(bReset)
