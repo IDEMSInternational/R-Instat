@@ -24,15 +24,8 @@ Public Class dlgRank
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        'Checks if Ok can be enabled.
         TestOKEnabled()
-
-    End Sub
-
-    Private Sub ReopenDialog()
 
     End Sub
 
