@@ -97,6 +97,7 @@ Public Class dlgInventoryPlot
     Private Sub SetDefaults()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
         ucrInventoryPlotSelector.Reset()
+        ucrSaveGraph.Reset()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrYearReceiver.SetMeAsReceiver()
         TestOkEnabled()
