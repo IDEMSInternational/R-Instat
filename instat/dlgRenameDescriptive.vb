@@ -34,8 +34,6 @@ Public Class dlgRenameDescriptive
     End Sub
 
     Private Sub ReopenDialog()
-        ucrSelectorForRenameObject.Reset()
-        ucrInputNewName.txtInput.Clear()
     End Sub
 
     Private Sub InitialiseDialog()
