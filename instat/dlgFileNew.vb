@@ -49,7 +49,6 @@ Public Class dlgFileNew
         ' ucrNewSheetName
         ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
-        ucrNewDFName.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrNewDFName.SetLabelText("New Data Frame Name:")
         ucrNewDFName.SetPrefix("data")
 
