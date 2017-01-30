@@ -70,9 +70,7 @@ Public Class dlgName
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
     End Sub
     Private Sub DefaultNewName()
-        If Not ucrInputNewName.bUserTyped Then
-            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
-        End If
+        ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
     End Sub
 
     Public Sub Setdefaults()
