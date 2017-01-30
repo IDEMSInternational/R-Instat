@@ -17,7 +17,8 @@ Imports instat.Translations
 
 Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
-    Public bToFactorOnly As Boolean = False
+    Private clsDefaultFunction As New RFunction
+
     Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -31,169 +32,90 @@ Public Class dlgConvertColumns
     End Sub
 
     Private Sub ReopenDialog()
-        SetToFactorStatus(bToFactorOnly)
-        ucrSelectorDataFrameColumns.Reset()
+
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+
+        ucrBase.iHelpTopicID = 67
+
+        ucrPnlConvertTo.SetParameter(New RParameter("to_type"))
+        ucrPnlConvertTo.AddRadioButton(rdoFactor, Chr(34) & "factor" & Chr(34))
+        ucrPnlConvertTo.AddRadioButton(rdoOrderedFactor, Chr(34) & "ordered_factor" & Chr(34))
+        ucrPnlConvertTo.AddRadioButton(rdoNumeric, Chr(34) & "numeric" & Chr(34))
+        ucrPnlConvertTo.AddRadioButton(rdoCharacter, Chr(34) & "character" & Chr(34))
+        ucrPnlConvertTo.AddRadioButton(rdoInteger, Chr(34) & "integer" & Chr(34))
+        ucrPnlConvertTo.SetRDefault(Chr(34) & "factor" & Chr(34))
+
+        ucrPnlFactorToNumericOptions.SetParameter(New RParameter("factor_numeric"))
+        ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertLevels, Chr(34) & "by_levels" & Chr(34))
+        ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertOrdinals, Chr(34) & "by_ordinals" & Chr(34))
+        ucrPnlFactorToNumericOptions.SetRDefault(Chr(34) & "by_levels" & Chr(34))
+
+
+        ucrSelectorDataFrameColumns.SetParameter(New RParameter("data_name"))
+        ucrSelectorDataFrameColumns.SetParameterIsString()
+
         ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
         ucrReceiverColumnsToConvert.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 67
+        ucrReceiverColumnsToConvert.SetParameter(New RParameter("col_names"))
+        ucrReceiverColumnsToConvert.SetParameterIsString()
+
+        ucrChkSpecifyDecimalsToDisplay.SetText("SpecifyDecimalsToDisplay")
+        ucrChkSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits"))
+        ucrChkSpecifyDecimalsToDisplay.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkSpecifyDecimalsToDisplay.SetRDefault("FALSE")
+        ucrChkSpecifyDecimalsToDisplay.AddToLinkedControls(ucrLinked:=ucrNudDisplayDecimals, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudDisplayDecimals.SetParameter(New RParameter("set_decimals"))
+        ucrNudDisplayDecimals.Minimum = 1
+        ucrNudDisplayDecimals.Increment = 1
+        ucrNudDisplayDecimals.SetRDefault("4")
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsDefaultFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
+        clsDefaultFunction.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
     End Sub
 
     Private Sub SetDefaults()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorDataFrameColumns.Reset()
         ucrSelectorDataFrameColumns.Focus()
-        rdoConvertLevels.Checked = True
-        rdoFactor.Checked = True
-        ConvertTo()
-        SetToFactorStatus(bToFactorOnly)
-        nudDisplayDecimals.Value = 4
-        TestOKEnabled()
-    End Sub
-
-    Private Sub SetToFactorStatus(bToFactorOnly As Boolean)
-        If bToFactorOnly Then
-            rdoFactor.Checked = True
-            rdoCharacter.Enabled = False
-            rdoInteger.Enabled = False
-            rdoNumeric.Enabled = False
-        Else
-            rdoCharacter.Enabled = True
-            rdoInteger.Enabled = True
-            rdoNumeric.Enabled = True
-        End If
-
-    End Sub
-    Private Sub ucrSelectorDataFrameolumns_DataFrameChanged() Handles ucrSelectorDataFrameColumns.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDataFrameColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-
-    End Sub
-
-    Private Sub ucrReceiverColumnsToConvert_SelectionChanged() Handles ucrReceiverColumnsToConvert.SelectionChanged
-        If Not ucrReceiverColumnsToConvert.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverColumnsToConvert.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_names")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub grpForConvertToType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFactor.CheckedChanged, rdoNumeric.CheckedChanged, rdoCharacter.CheckedChanged, rdoInteger.CheckedChanged
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ConvertTo()
         TestOKEnabled()
+    End Sub
+    Private Sub ucrPnlConvertTo_RdosCheckedChanged() Handles ucrPnlConvertTo.ControlContentsChanged
+        ConvertTo()
     End Sub
 
     Private Sub ConvertTo()
         If rdoFactor.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"factor"})
-            grpFactorToNumericOptions.Visible = False
-            chkSpecifyDecimalsToDisplay.Visible = True
-            chkSpecifyDecimalsToDisplay.Checked = False
-            NumberOfDigits()
-            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
         ElseIf rdoNumeric.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"numeric"})
-            chkSpecifyDecimalsToDisplay.Visible = False
-            nudDisplayDecimals.Visible = False
-            grpFactorToNumericOptions.Visible = True
-            ucrBase.clsRsyntax.RemoveParameter("set_digits")
-            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
         ElseIf rdoCharacter.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"character"})
-            ucrBase.clsRsyntax.RemoveParameter("set_digits")
-            chkSpecifyDecimalsToDisplay.Visible = False
-            nudDisplayDecimals.Visible = False
-            grpFactorToNumericOptions.Visible = False
-            ucrBase.clsRsyntax.RemoveParameter("set_digits")
-            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "character" & Chr(34))
         ElseIf rdoInteger.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"integer"})
-            ucrBase.clsRsyntax.RemoveParameter("set_digits")
-            chkSpecifyDecimalsToDisplay.Visible = False
-            nudDisplayDecimals.Visible = False
-            grpFactorToNumericOptions.Visible = False
-            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "integer" & Chr(34))
         ElseIf rdoOrderedFactor.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"factor"})
-            chkSpecifyDecimalsToDisplay.Visible = True
-            chkSpecifyDecimalsToDisplay.Checked = False
-            NumberOfDigits()
-            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("set_digits")
-            chkSpecifyDecimalsToDisplay.Visible = False
-            nudDisplayDecimals.Visible = False
-            'the else case should never happen but is there just in case
-            ucrBase.clsRsyntax.RemoveParameter("to_type")
-            grpFactorToNumericOptions.Visible = False
         End If
     End Sub
 
-    Private Sub NumberOfDigits()
-        If chkSpecifyDecimalsToDisplay.Checked Then
-            nudDisplayDecimals.Visible = True
-            ucrBase.clsRsyntax.AddParameter("set_decimals", "TRUE")
-            If nudDisplayDecimals.Text <> "" Then
-                ucrBase.clsRsyntax.AddParameter("set_digits", nudDisplayDecimals.Value)
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("set_digits")
-            End If
-        Else
-            nudDisplayDecimals.Visible = False
-            ucrBase.clsRsyntax.AddParameter("set_decimals", "FALSE")
-            ucrBase.clsRsyntax.RemoveParameter("set_digits")
-        End If
-    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
         If Not ucrReceiverColumnsToConvert.IsEmpty() Then
-            If rdoNumeric.Checked OrElse rdoCharacter.Checked OrElse rdoInteger.Checked Then
-                ucrBase.OKEnabled(True)
-            ElseIf rdoFactor.Checked OrElse rdoOrderedFactor.Checked Then
-                If chkSpecifyDecimalsToDisplay.Checked Then
-                    If nudDisplayDecimals.Text <> "" Then
-                        ucrBase.OKEnabled(True)
-                    Else
-                        ucrBase.OKEnabled(False)
-                    End If
-                Else
-                    ucrBase.OKEnabled(True)
-                End If
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(True)
         Else
-                ucrBase.OKEnabled(False)
-        End If
-    End Sub
-    Private Sub rdoByLevelsAndrdoByOrdinals_CheckedChanged(sender As Object, e As EventArgs) Handles rdoConvertLevels.CheckedChanged, rdoConvertOrdinals.CheckedChanged
-        If rdoConvertLevels.Checked = True Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("factor_numeric")
-            End If
-
-        ElseIf rdoConvertOrdinals.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_ordinals" & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("factor_numeric")
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub nudDisplayDecimals_TextChanged(sender As Object, e As EventArgs) Handles nudDisplayDecimals.TextChanged
-        NumberOfDigits()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub chkSpecifyDecimalsToDisplay_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpecifyDecimalsToDisplay.CheckedChanged
-        NumberOfDigits()
+    Private Sub Controls_ControlContentsChanged() Handles ucrSelectorDataFrameColumns.ControlContentsChanged, ucrReceiverColumnsToConvert.ControlContentsChanged, ucrChkSpecifyDecimalsToDisplay.ControlContentsChanged, ucrNudDisplayDecimals.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
