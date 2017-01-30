@@ -89,7 +89,7 @@ Public Class dlgRank
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForRank.ControlContentsChanged, ucrReceiverRank.ControlContentsChanged, ucrSaveRank.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveRank.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
