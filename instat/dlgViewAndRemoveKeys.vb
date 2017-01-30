@@ -17,7 +17,8 @@
 Imports instat.Translations
 Public Class dlgViewAndRemoveKeys
     Public bFirstLoad As Boolean = True
-    Private Sub dlgViewAndRemoveKeys_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private clsDefaultFunction As New RFunction
+    Private Sub dlgViewAndRemoveKeys_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -28,13 +29,26 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrSelectorKeys = ucrReceiverSelectedKey.Selector
-        ucrReceiverSelectedKey.SetMeAsReceiver()
+
         ucrBase.iHelpTopicID = 505
+
+        'Setting Receiver
+        ucrReceiverSelectedKey.Selector = ucrSelectorKeys
+        ucrReceiverSelectedKey.SetMeAsReceiver()
+        ucrReceiverSelectedKey.SetItemType("key")
+        ucrReceiverSelectedKey.SetParameter(New RParameter("key_name", 1))
+        ucrReceiverSelectedKey.SetParameterIsString()
+
+        ucrSelectorKeys.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorKeys.SetParameterIsString()
+
+        ucrRemoveKey.SetText("Remove Key")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_key")
+
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverSelectedKey.IsEmpty Then
+        If Not ucrReceiverSelectedKey.IsEmpty AndAlso ucrRemoveKey.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -42,15 +56,19 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub SetDefaults()
-        chkRemoveKey.Checked = False
+        ' Set default RFunction as the base function
+        ucrRemoveKey.Checked = False
+        ucrSelectorKeys.Reset()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverSelectedKey_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelectedKey.SelectionChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorKeys.ControlContentsChanged, ucrReceiverSelectedKey.ControlContentsChanged, ucrRemoveKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 End Class

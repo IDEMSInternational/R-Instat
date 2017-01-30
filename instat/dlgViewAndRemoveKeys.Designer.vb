@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgViewAndRemoveKeys
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,13 +20,13 @@ Partial Class dlgViewAndRemoveKeys
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorKeys = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSelectedKey = New instat.ucrReceiverSingle()
         Me.lblSelectedKey = New System.Windows.Forms.Label()
-        Me.chkRemoveKey = New System.Windows.Forms.CheckBox()
+        Me.ucrRemoveKey = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -48,6 +48,7 @@ Partial Class dlgViewAndRemoveKeys
         '
         'ucrReceiverSelectedKey
         '
+        Me.ucrReceiverSelectedKey.frmParent = Me
         Me.ucrReceiverSelectedKey.Location = New System.Drawing.Point(223, 26)
         Me.ucrReceiverSelectedKey.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedKey.Name = "ucrReceiverSelectedKey"
@@ -64,22 +65,20 @@ Partial Class dlgViewAndRemoveKeys
         Me.lblSelectedKey.TabIndex = 3
         Me.lblSelectedKey.Text = "Selected Key:"
         '
-        'chkRemoveKey
+        'ucrRemoveKey
         '
-        Me.chkRemoveKey.AutoSize = True
-        Me.chkRemoveKey.Location = New System.Drawing.Point(227, 50)
-        Me.chkRemoveKey.Name = "chkRemoveKey"
-        Me.chkRemoveKey.Size = New System.Drawing.Size(87, 17)
-        Me.chkRemoveKey.TabIndex = 4
-        Me.chkRemoveKey.Text = "Remove Key"
-        Me.chkRemoveKey.UseVisualStyleBackColor = True
+        Me.ucrRemoveKey.Checked = False
+        Me.ucrRemoveKey.Location = New System.Drawing.Point(223, 49)
+        Me.ucrRemoveKey.Name = "ucrRemoveKey"
+        Me.ucrRemoveKey.Size = New System.Drawing.Size(145, 20)
+        Me.ucrRemoveKey.TabIndex = 10
         '
         'dlgViewAndRemoveKeys
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 256)
-        Me.Controls.Add(Me.chkRemoveKey)
+        Me.Controls.Add(Me.ucrRemoveKey)
         Me.Controls.Add(Me.lblSelectedKey)
         Me.Controls.Add(Me.ucrReceiverSelectedKey)
         Me.Controls.Add(Me.ucrSelectorKeys)
@@ -99,5 +98,5 @@ Partial Class dlgViewAndRemoveKeys
     Friend WithEvents ucrSelectorKeys As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverSelectedKey As ucrReceiverSingle
     Friend WithEvents lblSelectedKey As Label
-    Friend WithEvents chkRemoveKey As CheckBox
+    Friend WithEvents ucrRemoveKey As ucrCheck
 End Class
