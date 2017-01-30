@@ -21,7 +21,7 @@ Public Class dlgUnusedLevels
     Private Sub dlgUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaultSettings()
+            SetDefault()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -33,14 +33,14 @@ Public Class dlgUnusedLevels
     Private Sub ReopenDialog()
 
     End Sub
-    Private Sub SetDefaultSettings()
+    Private Sub SetDefault()
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorFactorColumn.Reset()
         ucrSelectorFactorColumn.Focus()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        TestOKEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 40
 
@@ -62,9 +62,10 @@ Public Class dlgUnusedLevels
     End Sub
 
     Private Sub ucrBase_clickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaultSettings()
+        SetDefault()
         TestOKEnabled()
     End Sub
+
     Private Sub TestOKEnabled()
         If ucrReceiverFactorColumn.IsEmpty() Then
             ucrBase.OKEnabled(False)
@@ -73,20 +74,8 @@ Public Class dlgUnusedLevels
         End If
     End Sub
 
-    'Private Sub ucrReceiverFactorColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactorColumn.SelectionChanged
-    '    If Not ucrReceiverFactorColumn.IsEmpty Then
-    '        ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverFactorColumn.GetVariableNames())
-    '    Else
-    '        ucrBase.clsRsyntax.RemoveParameter("col_name")
-    '    End If
-    '    TestOKEnabled()
-    'End Sub
-
-    'Private Sub ucrSelectorFactorColumn_DataFrameChanged() Handles ucrSelectorFactorColumn.DataFrameChanged
-    '    ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorFactorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-    'End Sub
-
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFactorColumn.ControlContentsChanged, ucrReceiverFactorColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
