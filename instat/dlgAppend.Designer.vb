@@ -24,14 +24,13 @@ Partial Class dlgAppend
     Private Sub InitializeComponent()
         Me.lblAppendToDataframe = New System.Windows.Forms.Label()
         Me.lblDataframes = New System.Windows.Forms.Label()
-        Me.lblIDColNAme = New System.Windows.Forms.Label()
-        Me.chkIncludeIDColumn = New System.Windows.Forms.CheckBox()
-        Me.lblNewDataframeName = New System.Windows.Forms.Label()
-        Me.ucrInputNewDataframeName = New instat.ucrInputTextBox()
+        Me.lblIDColName = New System.Windows.Forms.Label()
         Me.ucrInputIDColName = New instat.ucrInputTextBox()
         Me.ucrReceiverAppendDataframe = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDataframes = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrChkIncludeIDColumn = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblAppendToDataframe
@@ -52,52 +51,27 @@ Partial Class dlgAppend
         Me.lblDataframes.TabIndex = 4
         Me.lblDataframes.Text = "Data Frames:"
         '
-        'lblIDColNAme
+        'lblIDColName
         '
-        Me.lblIDColNAme.AutoSize = True
-        Me.lblIDColNAme.Location = New System.Drawing.Point(128, 266)
-        Me.lblIDColNAme.Name = "lblIDColNAme"
-        Me.lblIDColNAme.Size = New System.Drawing.Size(90, 13)
-        Me.lblIDColNAme.TabIndex = 3
-        Me.lblIDColNAme.Text = "ID Column Name:"
-        '
-        'chkIncludeIDColumn
-        '
-        Me.chkIncludeIDColumn.AutoSize = True
-        Me.chkIncludeIDColumn.Location = New System.Drawing.Point(10, 265)
-        Me.chkIncludeIDColumn.Name = "chkIncludeIDColumn"
-        Me.chkIncludeIDColumn.Size = New System.Drawing.Size(113, 17)
-        Me.chkIncludeIDColumn.TabIndex = 5
-        Me.chkIncludeIDColumn.Text = "Include ID Column"
-        Me.chkIncludeIDColumn.UseVisualStyleBackColor = True
-        '
-        'lblNewDataframeName
-        '
-        Me.lblNewDataframeName.AutoSize = True
-        Me.lblNewDataframeName.Location = New System.Drawing.Point(8, 236)
-        Me.lblNewDataframeName.Name = "lblNewDataframeName"
-        Me.lblNewDataframeName.Size = New System.Drawing.Size(121, 13)
-        Me.lblNewDataframeName.TabIndex = 7
-        Me.lblNewDataframeName.Text = "New Data Frame Name:"
-        '
-        'ucrInputNewDataframeName
-        '
-        Me.ucrInputNewDataframeName.IsReadOnly = False
-        Me.ucrInputNewDataframeName.Location = New System.Drawing.Point(132, 233)
-        Me.ucrInputNewDataframeName.Name = "ucrInputNewDataframeName"
-        Me.ucrInputNewDataframeName.Size = New System.Drawing.Size(234, 21)
-        Me.ucrInputNewDataframeName.TabIndex = 8
+        Me.lblIDColName.AutoSize = True
+        Me.lblIDColName.Location = New System.Drawing.Point(132, 246)
+        Me.lblIDColName.Name = "lblIDColName"
+        Me.lblIDColName.Size = New System.Drawing.Size(90, 13)
+        Me.lblIDColName.TabIndex = 3
+        Me.lblIDColName.Text = "ID Column Name:"
         '
         'ucrInputIDColName
         '
+        Me.ucrInputIDColName.IsMultiline = False
         Me.ucrInputIDColName.IsReadOnly = False
-        Me.ucrInputIDColName.Location = New System.Drawing.Point(219, 263)
+        Me.ucrInputIDColName.Location = New System.Drawing.Point(221, 243)
         Me.ucrInputIDColName.Name = "ucrInputIDColName"
         Me.ucrInputIDColName.Size = New System.Drawing.Size(147, 21)
         Me.ucrInputIDColName.TabIndex = 6
         '
         'ucrReceiverAppendDataframe
         '
+        Me.ucrReceiverAppendDataframe.frmParent = Me
         Me.ucrReceiverAppendDataframe.Location = New System.Drawing.Point(246, 53)
         Me.ucrReceiverAppendDataframe.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAppendDataframe.Name = "ucrReceiverAppendDataframe"
@@ -116,22 +90,36 @@ Partial Class dlgAppend
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 290)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 269)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(400, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 217)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(305, 24)
+        Me.ucrSaveGraph.TabIndex = 12
+        '
+        'ucrChkIncludeIDColumn
+        '
+        Me.ucrChkIncludeIDColumn.Checked = False
+        Me.ucrChkIncludeIDColumn.Location = New System.Drawing.Point(10, 243)
+        Me.ucrChkIncludeIDColumn.Name = "ucrChkIncludeIDColumn"
+        Me.ucrChkIncludeIDColumn.Size = New System.Drawing.Size(116, 20)
+        Me.ucrChkIncludeIDColumn.TabIndex = 13
         '
         'dlgAppend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 346)
-        Me.Controls.Add(Me.ucrInputNewDataframeName)
-        Me.Controls.Add(Me.lblNewDataframeName)
+        Me.ClientSize = New System.Drawing.Size(415, 328)
+        Me.Controls.Add(Me.ucrChkIncludeIDColumn)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputIDColName)
-        Me.Controls.Add(Me.chkIncludeIDColumn)
         Me.Controls.Add(Me.lblDataframes)
-        Me.Controls.Add(Me.lblIDColNAme)
+        Me.Controls.Add(Me.lblIDColName)
         Me.Controls.Add(Me.lblAppendToDataframe)
         Me.Controls.Add(Me.ucrReceiverAppendDataframe)
         Me.Controls.Add(Me.ucrSelectorDataframes)
@@ -153,9 +141,8 @@ Partial Class dlgAppend
     Friend WithEvents ucrReceiverAppendDataframe As ucrReceiverMultiple
     Friend WithEvents lblAppendToDataframe As Label
     Friend WithEvents lblDataframes As Label
-    Friend WithEvents lblIDColNAme As Label
-    Friend WithEvents chkIncludeIDColumn As CheckBox
+    Friend WithEvents lblIDColName As Label
     Friend WithEvents ucrInputIDColName As ucrInputTextBox
-    Friend WithEvents lblNewDataframeName As Label
-    Friend WithEvents ucrInputNewDataframeName As ucrInputTextBox
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrChkIncludeIDColumn As ucrCheck
 End Class
