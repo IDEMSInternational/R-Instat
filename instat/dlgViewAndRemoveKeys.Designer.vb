@@ -34,7 +34,7 @@ Partial Class dlgViewAndRemoveKeys
         Me.ucrBase.Location = New System.Drawing.Point(12, 196)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 4
         '
         'ucrSelectorKeys
         '
@@ -44,7 +44,7 @@ Partial Class dlgViewAndRemoveKeys
         Me.ucrSelectorKeys.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorKeys.Name = "ucrSelectorKeys"
         Me.ucrSelectorKeys.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorKeys.TabIndex = 1
+        Me.ucrSelectorKeys.TabIndex = 0
         '
         'ucrReceiverSelectedKey
         '
@@ -62,7 +62,7 @@ Partial Class dlgViewAndRemoveKeys
         Me.lblSelectedKey.Location = New System.Drawing.Point(220, 13)
         Me.lblSelectedKey.Name = "lblSelectedKey"
         Me.lblSelectedKey.Size = New System.Drawing.Size(73, 13)
-        Me.lblSelectedKey.TabIndex = 3
+        Me.lblSelectedKey.TabIndex = 1
         Me.lblSelectedKey.Text = "Selected Key:"
         '
         'ucrRemoveKey
@@ -71,7 +71,7 @@ Partial Class dlgViewAndRemoveKeys
         Me.ucrRemoveKey.Location = New System.Drawing.Point(223, 49)
         Me.ucrRemoveKey.Name = "ucrRemoveKey"
         Me.ucrRemoveKey.Size = New System.Drawing.Size(145, 20)
-        Me.ucrRemoveKey.TabIndex = 10
+        Me.ucrRemoveKey.TabIndex = 3
         '
         'dlgViewAndRemoveKeys
         '
