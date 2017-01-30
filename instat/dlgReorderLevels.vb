@@ -35,7 +35,7 @@ Public Class dlgReorderLevels
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
-        ucrReceiverFactor.SetParameter(New RParameter("col_name"))
+        ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
         ucrReceiverFactor.SetParameterIsString()
 
         'Set reorder scroll list view
@@ -47,7 +47,7 @@ Public Class dlgReorderLevels
         ucrSelectorFactorLevelsToReorder.SetParameterIsString()
 
         'Set column Parameter
-        ucrReorderFactor.SetParameter(New RParameter("new_level_names"))
+        ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
         ' ucrReorderFactor.SetParameterIsString()
         ' ucrReorderFactor.SetParameterIsString()
 
