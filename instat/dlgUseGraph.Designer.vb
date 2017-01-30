@@ -22,30 +22,38 @@ Partial Class dlgUseGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrGraphsSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrGraphReceiver = New instat.ucrReceiverSingle()
         Me.lblGraphtoUse = New System.Windows.Forms.Label()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrGraphReceiver = New instat.ucrReceiverSingle()
+        Me.ucrGraphsSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblGraphtoUse
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.lblGraphtoUse.AutoSize = True
+        Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 44)
+        Me.lblGraphtoUse.Name = "lblGraphtoUse"
+        Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
+        Me.lblGraphtoUse.TabIndex = 1
+        Me.lblGraphtoUse.Text = "Graph to Use:"
         '
-        'ucrGraphsSelector
+        'cmdPlotOptions
         '
-        Me.ucrGraphsSelector.bShowHiddenColumns = False
-        Me.ucrGraphsSelector.bUseCurrentFilter = True
-        Me.ucrGraphsSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrGraphsSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrGraphsSelector.Name = "ucrGraphsSelector"
-        Me.ucrGraphsSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrGraphsSelector.TabIndex = 1
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(252, 94)
+        Me.cmdPlotOptions.Name = "cmdPlotOptions"
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPlotOptions.TabIndex = 3
+        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.UseVisualStyleBackColor = True
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 200)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
+        Me.ucrSaveGraph.TabIndex = 4
         '
         'ucrGraphReceiver
         '
@@ -57,30 +65,22 @@ Partial Class dlgUseGraph
         Me.ucrGraphReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrGraphReceiver.TabIndex = 2
         '
-        'lblGraphtoUse
+        'ucrGraphsSelector
         '
-        Me.lblGraphtoUse.AutoSize = True
-        Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 44)
-        Me.lblGraphtoUse.Name = "lblGraphtoUse"
-        Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
-        Me.lblGraphtoUse.TabIndex = 3
-        Me.lblGraphtoUse.Text = "Graph to Use:"
+        Me.ucrGraphsSelector.bShowHiddenColumns = False
+        Me.ucrGraphsSelector.bUseCurrentFilter = True
+        Me.ucrGraphsSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrGraphsSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrGraphsSelector.Name = "ucrGraphsSelector"
+        Me.ucrGraphsSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrGraphsSelector.TabIndex = 0
         '
-        'cmdPlotOptions
+        'ucrBase
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(252, 94)
-        Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPlotOptions.TabIndex = 4
-        Me.cmdPlotOptions.Text = "Plot Options"
-        Me.cmdPlotOptions.UseVisualStyleBackColor = True
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 200)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(386, 24)
-        Me.ucrSaveGraph.TabIndex = 5
+        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 5
         '
         'dlgUseGraph
         '
