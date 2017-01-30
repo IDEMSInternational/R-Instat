@@ -27,7 +27,7 @@ Partial Class dlgUseGraph
         Me.ucrGraphReceiver = New instat.ucrReceiverSingle()
         Me.lblGraphtoUse = New System.Windows.Forms.Label()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrSaveGraphForUseGraph = New instat.ucrSaveGraph()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -49,6 +49,7 @@ Partial Class dlgUseGraph
         '
         'ucrGraphReceiver
         '
+        Me.ucrGraphReceiver.frmParent = Me
         Me.ucrGraphReceiver.Location = New System.Drawing.Point(252, 60)
         Me.ucrGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphReceiver.Name = "ucrGraphReceiver"
@@ -74,19 +75,19 @@ Partial Class dlgUseGraph
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
-        'ucrSaveGraphForUseGraph
+        'ucrSaveGraph
         '
-        Me.ucrSaveGraphForUseGraph.Location = New System.Drawing.Point(10, 202)
-        Me.ucrSaveGraphForUseGraph.Name = "ucrSaveGraphForUseGraph"
-        Me.ucrSaveGraphForUseGraph.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveGraphForUseGraph.TabIndex = 5
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 200)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(386, 24)
+        Me.ucrSaveGraph.TabIndex = 5
         '
         'dlgUseGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 287)
-        Me.Controls.Add(Me.ucrSaveGraphForUseGraph)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.lblGraphtoUse)
         Me.Controls.Add(Me.ucrGraphReceiver)
@@ -109,5 +110,5 @@ Partial Class dlgUseGraph
     Friend WithEvents ucrGraphReceiver As ucrReceiverSingle
     Friend WithEvents lblGraphtoUse As Label
     Friend WithEvents cmdPlotOptions As Button
-    Friend WithEvents ucrSaveGraphForUseGraph As ucrSaveGraph
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
