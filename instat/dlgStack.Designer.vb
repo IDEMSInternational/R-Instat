@@ -25,8 +25,8 @@ Partial Class dlgStack
         Me.lblColumnsTostack = New System.Windows.Forms.Label()
         Me.lblStackDataInto = New System.Windows.Forms.Label()
         Me.lblFactorInto = New System.Windows.Forms.Label()
-        Me.chkColumnsToCarry = New System.Windows.Forms.CheckBox()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
+        Me.ucrChkCarryColumns = New instat.ucrCheck()
         Me.ucrNewDataName = New instat.ucrInputTextBox()
         Me.ucrStackDataInto = New instat.ucrInputTextBox()
         Me.ucrFactorInto = New instat.ucrInputTextBox()
@@ -66,17 +66,6 @@ Partial Class dlgStack
         Me.lblFactorInto.Tag = "Factor_Into"
         Me.lblFactorInto.Text = "Factor Into:"
         '
-        'chkColumnsToCarry
-        '
-        Me.chkColumnsToCarry.AutoSize = True
-        Me.chkColumnsToCarry.Location = New System.Drawing.Point(288, 154)
-        Me.chkColumnsToCarry.Name = "chkColumnsToCarry"
-        Me.chkColumnsToCarry.Size = New System.Drawing.Size(93, 17)
-        Me.chkColumnsToCarry.TabIndex = 3
-        Me.chkColumnsToCarry.Tag = "Carry_Columns"
-        Me.chkColumnsToCarry.Text = "Carry Columns"
-        Me.chkColumnsToCarry.UseVisualStyleBackColor = True
-        '
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
@@ -87,8 +76,17 @@ Partial Class dlgStack
         Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name:"
         Me.lblNewDataFrameName.Text = "New Data Frame Name:"
         '
+        'ucrChkCarryColumns
+        '
+        Me.ucrChkCarryColumns.Checked = False
+        Me.ucrChkCarryColumns.Location = New System.Drawing.Point(285, 150)
+        Me.ucrChkCarryColumns.Name = "ucrChkCarryColumns"
+        Me.ucrChkCarryColumns.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCarryColumns.TabIndex = 15
+        '
         'ucrNewDataName
         '
+        Me.ucrNewDataName.IsMultiline = False
         Me.ucrNewDataName.IsReadOnly = False
         Me.ucrNewDataName.Location = New System.Drawing.Point(131, 203)
         Me.ucrNewDataName.Name = "ucrNewDataName"
@@ -97,6 +95,7 @@ Partial Class dlgStack
         '
         'ucrStackDataInto
         '
+        Me.ucrStackDataInto.IsMultiline = False
         Me.ucrStackDataInto.IsReadOnly = False
         Me.ucrStackDataInto.Location = New System.Drawing.Point(131, 253)
         Me.ucrStackDataInto.Name = "ucrStackDataInto"
@@ -105,6 +104,7 @@ Partial Class dlgStack
         '
         'ucrFactorInto
         '
+        Me.ucrFactorInto.IsMultiline = False
         Me.ucrFactorInto.IsReadOnly = False
         Me.ucrFactorInto.Location = New System.Drawing.Point(131, 228)
         Me.ucrFactorInto.Name = "ucrFactorInto"
@@ -113,6 +113,7 @@ Partial Class dlgStack
         '
         'ucrColumnsToCarryReceiver
         '
+        Me.ucrColumnsToCarryReceiver.frmParent = Me
         Me.ucrColumnsToCarryReceiver.Location = New System.Drawing.Point(285, 173)
         Me.ucrColumnsToCarryReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrColumnsToCarryReceiver.Name = "ucrColumnsToCarryReceiver"
@@ -139,6 +140,7 @@ Partial Class dlgStack
         '
         'ucrReceiverColumnsToBeStack
         '
+        Me.ucrReceiverColumnsToBeStack.frmParent = Me
         Me.ucrReceiverColumnsToBeStack.Location = New System.Drawing.Point(285, 41)
         Me.ucrReceiverColumnsToBeStack.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnsToBeStack.Name = "ucrReceiverColumnsToBeStack"
@@ -151,12 +153,12 @@ Partial Class dlgStack
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 339)
+        Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrNewDataName)
         Me.Controls.Add(Me.ucrStackDataInto)
         Me.Controls.Add(Me.ucrFactorInto)
         Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.ucrColumnsToCarryReceiver)
-        Me.Controls.Add(Me.chkColumnsToCarry)
         Me.Controls.Add(Me.ucrSelectorStack)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactorInto)
@@ -180,10 +182,10 @@ Partial Class dlgStack
     Friend WithEvents lblFactorInto As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorStack As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents chkColumnsToCarry As CheckBox
     Friend WithEvents ucrColumnsToCarryReceiver As ucrReceiverMultiple
     Friend WithEvents lblNewDataFrameName As Label
     Friend WithEvents ucrFactorInto As ucrInputTextBox
     Friend WithEvents ucrStackDataInto As ucrInputTextBox
     Friend WithEvents ucrNewDataName As ucrInputTextBox
+    Friend WithEvents ucrChkCarryColumns As ucrCheck
 End Class
