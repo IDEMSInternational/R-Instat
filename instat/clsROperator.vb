@@ -48,9 +48,9 @@ Public Class ROperator
     End Function
 
 
-    Public Overrides Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = -1)
+    Public Overrides Sub AddParameter(clsParam As RParameter)
         clsParam.bIncludeArgumentName = False 'We don't want to allow names in operator parameters...
-        MyBase.AddParameter(clsParam, iPosition)
+        MyBase.AddParameter(clsParam)
     End Sub
 
     Public Overrides Function GetParameter(strName As String) As RParameter

@@ -265,7 +265,7 @@ Public Class ucrReceiverSingle
         End If
     End Sub
 
-    Private Sub frmParent_Shown() Handles frmParent.Shown
+    Private Sub ParentForm_Shown()
         If bFirstShown Then
             CheckAutoFill()
             bFirstShown = False
@@ -279,6 +279,7 @@ Public Class ucrReceiverSingle
 
     Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
             bFirstLoad = False
         End If
     End Sub
