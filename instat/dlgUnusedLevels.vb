@@ -74,7 +74,7 @@ Public Class dlgUnusedLevels
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFactorColumn.ControlContentsChanged, ucrReceiverFactorColumn.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
