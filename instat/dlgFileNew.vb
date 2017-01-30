@@ -51,11 +51,11 @@ Public Class dlgFileNew
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrNewDFName.SetLabelText("New Data Frame Name:")
+        ucrNewDFName.SetPrefix("data")
 
         ' Default R
         clsOverallFunction.SetRCommand("data.frame")
-        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixDefaultFunction)
-        clsOverallFunction.SetAssignTo(strTemp:="Sheet", strTempDataframe:="Sheet", bAssignToIsPrefix:=True)
+        '        clsOverallFunction.SetAssignTo(strTemp:="Sheet", strTempDataframe:="Sheet", bAssignToIsPrefix:=True)
 
         'matrix(nrow = 10, ncol = 2, Data = NA)
         clsMatrixDefaultFunction.SetRCommand("matrix")
@@ -73,8 +73,10 @@ Public Class dlgFileNew
     Private Sub SetDefaults()
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         clsMatrixFunction = clsMatrixDefaultFunction.Clone()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        SetRCode(Me, clsMatrixDefaultFunction, True)
+        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
+        ucrNudCols.SetRCode(clsMatrixFunction)
+        ucrNudRows.SetRCode(clsMatrixFunction)
+        ucrNewDFName.SetRCode(clsOverallFunction)
         TestOKEnabled()
     End Sub
 
