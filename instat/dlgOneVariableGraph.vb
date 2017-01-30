@@ -37,6 +37,7 @@ Public Class dlgOneVariableGraph
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorOneVarGraph.Reset()
+        ucrSaveGraph.Reset()
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         bResetSubdialog = True
         TestOkEnabled()
@@ -55,10 +56,10 @@ Public Class dlgOneVariableGraph
 
         ucrReceiverOneVarGraph.Selector = ucrSelectorOneVarGraph
         ucrReceiverOneVarGraph.SetMeAsReceiver()
-        ucrReceiverOneVarGraph.SetParameter(New RParameter("columns"))
+        ucrReceiverOneVarGraph.SetParameter(New RParameter("columns", 1))
         ucrReceiverOneVarGraph.SetParameterIsString()
 
-        ucrSelectorOneVarGraph.SetParameter(New RParameter("data_name"))
+        ucrSelectorOneVarGraph.SetParameter(New RParameter("data_name", 0))
         ucrSelectorOneVarGraph.SetParameterIsString()
 
         ucrChkFlip.SetText("Flip Coordinates")

@@ -2,9 +2,9 @@
 
 Public Class ucrSave
     Public bFirstLoad As Boolean = True
-    Private bShowCheckBox As Boolean
-    Private bShowLabel As Boolean
-    Private strSaveType As String
+    Private bShowCheckBox As Boolean = True
+    Private bShowLabel As Boolean = False
+    Private strSaveType As String = "column"
     Private strPrefix As String
     Private bIsComboBox As Boolean = True
     Private bHideIfUnchecked As Boolean = True
@@ -31,13 +31,10 @@ Public Class ucrSave
     End Sub
 
     Private Sub SetDefaults()
-        strSaveType = "column"
+        ucrInputTextSave.Reset()
+        ucrInputComboSave.Reset()
         SetSaveType(strSaveType)
-        bShowCheckBox = True
-        bShowLabel = False
-        bIsComboBox = True
         LabelOrCheckboxSettings()
-        SetIsComboBox()
         UpdateRCode()
     End Sub
 
@@ -178,6 +175,19 @@ Public Class ucrSave
         ucrInputComboSave.Enabled = ucrChkSave.Checked
         ucrInputTextSave.Visible = False
         ucrInputComboSave.Visible = False
+        If strAssignToIfUnchecked <> "" Then
+            If ucrChkSave.Checked Then
+                If bIsComboBox Then
+                    If Not ucrInputComboSave.bUserTyped Then
+                        ucrInputComboSave.SetDefaultName()
+                    End If
+                Else
+                    If Not ucrInputTextSave.bUserTyped Then
+                        ucrInputTextSave.SetDefaultName()
+                    End If
+                End If
+            End If
+        End If
         If bHideIfUnchecked Then
             If bIsComboBox Then
                 ucrInputComboSave.Visible = ucrChkSave.Checked
@@ -202,19 +212,15 @@ Public Class ucrSave
         MyBase.UpdateRCode()
 
         If clsRCode IsNot Nothing Then
-            strSaveName = GetText()
             If ucrDataFrameSelector IsNot Nothing Then
                 strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
             End If
-            If GetText() <> "" Then
-                strSaveName = GetText()
-            ElseIf strAssignToIfUnchecked <> "" Then
+            If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
                 strSaveName = strAssignToIfUnchecked
+            Else
+                strSaveName = GetText()
             End If
-            If bShowCheckBox Then
-                bAddAssignTo = bAddAssignTo AndAlso strSaveName <> ""
-            End If
-            If bAddAssignTo Then
+            If strSaveName <> "" Then
                 Select Case strSaveType
                     Case "column"
                         clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
