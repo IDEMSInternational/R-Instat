@@ -56,21 +56,21 @@ Public Class dlgSort
         'Setting Parameters
         ucrReceiverSort.Selector = ucrSelectForSort
         ucrReceiverSort.SetMeAsReceiver()
-        ucrReceiverSort.SetParameter(New RParameter("col_names"))
+        ucrReceiverSort.SetParameter(New RParameter("col_names", 1))
         ucrReceiverSort.SetParameterIsString()
 
         'Add dataframe paramater
-        ucrSelectForSort.SetParameter(New RParameter("data_name"))
+        ucrSelectForSort.SetParameter(New RParameter("data_name", 0))
         ucrSelectForSort.SetParameterIsString()
 
         'Set radiobutton parameters
-        ucrPanelOrder.SetParameter(New RParameter("decreasing"))
+        ucrPanelOrder.SetParameter(New RParameter("decreasing", 2))
         ucrPanelOrder.AddRadioButton(rdoAscending, "FALSE")
         ucrPanelOrder.AddRadioButton(rdoDescending, "TRUE")
         ucrPanelOrder.SetRDefault("FALSE")
 
         'Currently Disabled
-        'ucrPanelMissingValues.SetParameter(New RParameter("na.last"))
+        'ucrPanelMissingValues.SetParameter(New RParameter("na.last",4))
         'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
         'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
         'ucrPanelMissingValues.SetRDefault("TRUE")
