@@ -35,6 +35,7 @@ Public Class dlgInfill
         'Set receiver
         ucrReceiverDate.Selector = ucrInfillSelector
         ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverDate.SetDataType("Date")
         ucrReceiverDate.SetParameter(New RParameter("date_name", 1))
         ucrReceiverDate.SetParameterIsString()
 
