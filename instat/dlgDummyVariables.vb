@@ -55,7 +55,7 @@ Public Class dlgDummyVariables
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverFactor.SetParameter(New RParameter("x"))
 
-        'Set RadioBattons
+        'Set RadioBattons : Parameters yet to be set up
         ucrPnlLevelOmitted.SetParameter(New RParameter(""))
         ucrPnlLevelOmitted.AddRadioButton(rdoNone, "")
         ucrPnlLevelOmitted.AddRadioButton(rdoFirst, "")
