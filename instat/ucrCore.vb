@@ -133,12 +133,16 @@ Public Class ucrCore
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            If bUpdateRCodeFromControl AndAlso clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue() Then
+            If bUpdateRCodeFromControl AndAlso CanUpdate() Then
                 UpdateRCode()
             End If
             UpdateControl(bReset)
         End If
     End Sub
+
+    Protected Overridable Function CanUpdate()
+        Return (clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue())
+    End Function
 
     Public Overridable Sub SetRDefault(objNewDefault As Object)
         objRDefault = objNewDefault
