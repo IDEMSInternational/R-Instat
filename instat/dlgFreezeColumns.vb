@@ -41,7 +41,7 @@ Public Class dlgFreezeColumns
         'Setting up the multiple receiver
         ucrReceiverMultipleforFreezeColumns.Selector = ucrSelectorByDataFrameAddRemoveforFreezeColumns
         ucrReceiverMultipleforFreezeColumns.SetMeAsReceiver()
-        ucrReceiverMultipleforFreezeColumns.SetParameter(New RParameter("col_names"))
+        ucrReceiverMultipleforFreezeColumns.SetParameter(New RParameter("col_names", 1))
         ucrReceiverMultipleforFreezeColumns.SetParameterIsString()
 
         'Set data frame parameter
