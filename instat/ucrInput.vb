@@ -140,6 +140,7 @@ Public Class ucrInput
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
                 End If
             ElseIf strDefaultType = "Data Frame" Then
+                SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetDataFrameNames()))
             ElseIf strDefaultType = "Graph" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
