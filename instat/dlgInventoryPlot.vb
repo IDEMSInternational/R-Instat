@@ -62,12 +62,13 @@ Public Class dlgInventoryPlot
         ucrChkAddRecodetoData.SetText("Add Recode to Data")
         ucrChkAddRecodetoData.SetParameter(New RParameter("add_to_data"))
         ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAddRecodetoData.SetDefault("FALSE")
+        ucrChkAddRecodetoData.SetRDefault("FALSE")
 
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
-        ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip"))
-        ucrChkFlipCoordinates.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkFlipCoordinates.SetDefault("FALSE")
+
+        ucrChkAddRecodetoData.SetParameter(New RParameter("coord_flip"))
+        ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkAddRecodetoData.SetRDefault("FALSE")
 
         ucrSaveGraph.SetPrefix("Inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -80,7 +81,7 @@ Public Class dlgInventoryPlot
         ucrNudThreashold.Minimum = 0.85
         ucrNudThreashold.Increment = 0.01
         ucrNudThreashold.DecimalPlaces = 2
-        ucrNudThreashold.SetDefault("0.85")
+        ucrNudThreashold.SetRDefault("0.85")
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)

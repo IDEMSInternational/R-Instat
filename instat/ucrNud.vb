@@ -35,7 +35,7 @@ Public Class ucrNud
                     nudUpDown.Value = dNewValue
                 Else
                     MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " cannot be converted to a decimal or is outside the range of the control. Setting to the default value.")
-                    If Decimal.TryParse(objDefault, dNewValue) Then
+                    If Decimal.TryParse(objRDefault, dNewValue) Then
                         nudUpDown.Value = dNewValue
                     Else
                         MsgBox("Developer error: The default value of the control cannot be converted to a decimal. Setting to the minimum of the control.")
@@ -139,10 +139,10 @@ Public Class ucrNud
     '    End If
     'End Sub
 
-    Public Overrides Sub SetDefault(objNewDefault As Object)
+    Public Overrides Sub SetRDefault(objNewDefault As Object)
         Dim dTemp As Decimal
 
-        MyBase.SetDefault(objNewDefault)
+        MyBase.SetRDefault(objNewDefault)
         If Not Decimal.TryParse(objNewDefault, dTemp) Then
             MsgBox("Developer error: Cannot set the default value of the control because it cannot be converted to an integer.")
             MyBase.SetValueToRemoveParameter(Nothing)
