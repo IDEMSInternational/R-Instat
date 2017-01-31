@@ -282,4 +282,22 @@ Public Class ucrSave
             Return ucrInputTextSave.GetText()
         End If
     End Function
+
+    Public ReadOnly Property bUserTyped As Boolean
+        Get
+            If bIsComboBox Then
+                Return ucrInputComboSave.bUserTyped
+            Else
+                Return ucrInputTextSave.bUserTyped
+            End If
+        End Get
+    End Property
+
+    Public Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        If bIsComboBox Then
+            ucrInputComboSave.SetName(strName, bSilent)
+        Else
+            ucrInputTextSave.SetName(strName, bSilent)
+        End If
+    End Sub
 End Class
