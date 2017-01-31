@@ -43,8 +43,6 @@ Public Class dlgAppend
         ucrReceiverAppendDataframe.SetMeAsReceiver()
         ucrReceiverAppendDataframe.SetItemType("dataframe")
 
-        'clsRFunctionParameter:=ucrReceiverAppendDataframe.GetVariables, bIncludeArgumentName:=False) 
-
         ' ucrSave
         ucrSaveGraph.SetIsTextBox()
         ucrSaveGraph.SetSaveTypeAsDataFrame()
@@ -58,17 +56,20 @@ Public Class dlgAppend
         ucrChkIncludeIDColumn.AddToLinkedControls(ucrLinked:=ucrInputIDColName, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputIDColName.bAddRemoveParameter = False
         ucrInputIDColName.SetLabel(lblIDColName)
+
+
     End Sub
 
     Private Sub SetDefaults()
-        clsBindRows = clsDefaultBindRows.Clone()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsBindRows)
         ucrSelectorDataframes.Reset()
         ucrSaveGraph.Reset()
 
         clsDefaultBindRows.SetRCommand("bind_rows")
         clsDefaultBindRows.AddParameter(".id", Chr(34) & "id" & Chr(34))
         clsDefaultBindRows.SetAssignTo(strTemp:="Append", strTempDataframe:="Append")
+
+        clsBindRows = clsDefaultBindRows.Clone()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBindRows)
 
         TestOKEnabled()
     End Sub
