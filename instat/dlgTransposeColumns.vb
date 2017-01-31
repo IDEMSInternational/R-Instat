@@ -17,18 +17,19 @@ Imports instat
 Imports instat.Translations
 Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
-    Public clsRToDataFrame, clsTranspose As New RFunction
+    Private bReset As Boolean = True
     Private clsOverallFunction, clsTFunction, clsTDefaultFunction As New RFunction
     Private Sub dlgTransposeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-            SetDefaults()
-        Else
-            ReOpenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
-        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -58,26 +59,27 @@ Public Class dlgTransposeColumns
         ucrChkNameNewColumns.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkNameNewColumns.SetRDefault("FALSE")
         ucrChkNameNewColumns.Enabled = False
-
-
-        ' Default R
-        clsOverallFunction.SetRCommand("as.data.frame")
-        clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
-
-        clsTDefaultFunction.SetRCommand("t")
     End Sub
 
 
     Private Sub SetDefaults()
+        clsOverallFunction.SetRCommand("as.data.frame")
+        clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
+        clsTDefaultFunction.SetRCommand("t")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         clsTFunction = clsTDefaultFunction.Clone()
         clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTFunction)
-        ucrReceiverColumsToTranspose.SetRCode(clsTFunction)
-        ucrNewDataframe.SetRCode(clsOverallFunction)
+
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataframe.Reset()
         TestOkEnabled()
         NewDefaultName()
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrReceiverColumsToTranspose.SetRCode(clsTFunction, bReset)
+        ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
     End Sub
 
     Private Sub ReOpenDialog()
@@ -93,6 +95,7 @@ Public Class dlgTransposeColumns
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
     End Sub
 
     Private Sub ucrs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTransposeColumns.ControlValueChanged
