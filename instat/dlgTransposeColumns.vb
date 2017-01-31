@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
@@ -37,27 +38,13 @@ Public Class dlgTransposeColumns
         ' Sheet1_transposed <- as.data.frame(x=t(x=InstatDataObject$get_columns_from_data(data_name="Sheet1", col_names="dlgAddComment")))
         'InstatDataObject$import_data(data_tables = List(Sheet1_transposed = Sheet1_transposed))
 
-        'GOT:
-        'Hi <- as.data.frame(InstatDataObject$get_columns_from_data(col_names="dlgAddComment", data_name="Sheet1"), x=t())
-        'InstatDataObject$import_data(data_tables = List(Hi = Hi))
-
-
-        ' hi <- as.data.frame(x=InstatDataObject$get_columns_from_data(col_names="dlgAddComment", data_name="Sheet1"))
-        'InstatDataObject$import_data(data_tables = List(hi = hi))
-
-        ' Main thing to do is feed as.data.frame into x=t()
-        ' Then sort the name.
-
         ' checkbox doesn't do anything - not yet implemented.
-
-        ' ucrSelector
 
         ' ucrReceiver
         ucrReceiverColumsToTranspose.SetParameter(New RParameter("x"))
         ucrReceiverColumsToTranspose.SetParameterIsRFunction()
         ucrReceiverColumsToTranspose.Selector = ucrSelectorTransposeColumns
         ucrReceiverColumsToTranspose.SetMeAsReceiver()
-        '        clsTranspose.AddParameter("x", clsRFunctionParameter:=ucrReceiverColumsToTranspose.GetVariables())
 
         'ucrNewDF
         ucrNewDataframe.SetIsTextBox()
@@ -66,15 +53,18 @@ Public Class dlgTransposeColumns
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
 
         'chkbox
-        'disable
+        ucrChkNameNewColumns.SetParameter(New RParameter(""))
+        ucrChkNameNewColumns.SetText("Name New Columns")
+        ucrChkNameNewColumns.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkNameNewColumns.SetRDefault("FALSE")
+        ucrChkNameNewColumns.Enabled = False
 
 
         ' Default R
         clsOverallFunction.SetRCommand("as.data.frame")
+        clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
 
-        '
         clsTDefaultFunction.SetRCommand("t")
-        ' have t(x = getcolsfromdatabit())
     End Sub
 
 
@@ -87,55 +77,35 @@ Public Class dlgTransposeColumns
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataframe.Reset()
         TestOkEnabled()
-
-        '     If (ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
-        '    ucrNewDataFrameName.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
-        '   Else
-        '  ucrNewDataFrameName.SetName("")
-        ' End If
-
+        NewDefaultName()
     End Sub
 
     Private Sub ReOpenDialog()
-
     End Sub
 
     Private Sub TestOkEnabled()
-        '     If Not ucrReceiverColumsToTranspose.IsEmpty AndAlso Not ucrNewDataFrameName.IsEmpty Then
-        '    ucrBase.OKEnabled(True)
-        '   Else
-        '  ucrBase.OKEnabled(False)
-        ' End If
-    End Sub
-
-    Public Sub ucrReceiverColumsToTranspose_SelectionChanged() Handles ucrReceiverColumsToTranspose.SelectionChanged
-        ' DONE       clsTranspose.AddParameter("x", clsRFunctionParameter:=ucrReceiverColumsToTranspose.GetVariables())
-        ' DONE       clsRToDataFrame.AddParameter("x", clsRFunctionParameter:=clsTranspose)
-        '        ucrBase.clsRsyntax.AddParameter("", clsRFunctionParameter:=clsRToDataFrame)
-        '        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSelectorTransposeColumns_DataFrameChanged() Handles ucrSelectorTransposeColumns.DataFrameChanged
-        '       If (Not ucrNewDataFrameName.UserTyped()) AndAlso ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-        '      ucrNewDataFrameName.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
-        '     End If
-        TestOkEnabled()
-    End Sub
-
-    Public Sub ucrNewDataFrameName_NameChanged()
-        '      If Not ucrNewDataFrameName.IsEmpty Then
-        '     ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
-        '    Else
-        '   ucrBase.clsRsyntax.RemoveAssignTo()
-        '  End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub chkNameNewColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNameNewColumns.CheckedChanged
-        'this is not yet implemented.
+        If Not ucrReceiverColumsToTranspose.IsEmpty AndAlso ucrNewDataframe.IsComplete() Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTransposeColumns.ControlValueChanged
+        NewDefaultName()
+    End Sub
+
+    Private Sub NewDefaultName()
+        If (Not ucrNewDataframe.bUserTyped) AndAlso ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrNewDataframe.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverColumsToTranspose_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumsToTranspose.ControlContentsChanged, ucrNewDataframe.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
