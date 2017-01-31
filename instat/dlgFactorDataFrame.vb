@@ -17,17 +17,19 @@
 Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
 
     Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
 
@@ -59,22 +61,26 @@ Public Class dlgFactorDataFrame
         ucrChkReplaceIfAlreadyExists.SetParameter(New RParameter("replace", 4))
         ucrChkReplaceIfAlreadyExists.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkReplaceIfAlreadyExists.SetRDefault("TRUE")
-
-        ' Defaults
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
         ucrInputFactorNames.ResetText()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
         CheckAutoName()
         TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -87,6 +93,7 @@ Public Class dlgFactorDataFrame
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(bReset)
     End Sub
 
     Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged, ucrSelectorFactorDataFrame.ControlContentsChanged
