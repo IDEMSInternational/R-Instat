@@ -20,19 +20,19 @@ Imports RDotNet
 Public Class dlgFileNew
     Private clsOverallFunction, clsMatrixDefaultFunction, clsMatrixFunction As New RFunction
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
 
     Private Sub dlgFileNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-        'TODO What should these defaults be?
-        '     Defaults should be stored in Options dialog 
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -51,15 +51,6 @@ Public Class dlgFileNew
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
         ucrNewDFName.SetPrefix("data")
-
-        ' Default R
-        clsOverallFunction.SetRCommand("data.frame")
-
-        'matrix(nrow = 10, ncol = 2, Data = NA)
-        clsMatrixDefaultFunction.SetRCommand("matrix")
-        clsMatrixDefaultFunction.AddParameter("data", "NA")
-        clsMatrixDefaultFunction.AddParameter("ncol", 2)
-        clsMatrixDefaultFunction.AddParameter("nrow", 10)
     End Sub
 
     ' updating controls doesn't update the function
@@ -69,13 +60,21 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub SetDefaults()
+        ucrNewDFName.Reset()
+
+        ' Default R
+        clsOverallFunction.SetRCommand("data.frame")
+
+        'matrix(nrow = 10, ncol = 2, Data = NA)
+        clsMatrixDefaultFunction.SetRCommand("matrix")
+        clsMatrixDefaultFunction.AddParameter("data", "NA")
+        clsMatrixDefaultFunction.AddParameter("ncol", 2)
+        clsMatrixDefaultFunction.AddParameter("nrow", 10)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         clsMatrixFunction = clsMatrixDefaultFunction.Clone()
         clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
-        ucrNudCols.SetRCode(clsMatrixFunction)
-        ucrNudRows.SetRCode(clsMatrixFunction)
-        ucrNewDFName.SetRCode(clsOverallFunction)
-        ucrNewDFName.Reset()
+
         TestOKEnabled()
     End Sub
 
@@ -87,8 +86,15 @@ Public Class dlgFileNew
         End If
     End Sub
 
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrNudCols.SetRCode(clsMatrixFunction, bReset)
+        ucrNudRows.SetRCode(clsMatrixFunction, bReset)
+        ucrNewDFName.SetRCode(clsOverallFunction, bReset)
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(bReset)
     End Sub
 
     Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged, ucrNewDFName.ControlContentsChanged
