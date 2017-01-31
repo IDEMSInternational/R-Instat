@@ -44,6 +44,8 @@ Public Class ucrDataFrame
 
     Private Sub InitialiseControl()
         bUseCurrentFilter = True
+        SetRDefault("")
+        bUpdateRCodeFromControl = True
     End Sub
 
     Public Sub Reset()
@@ -203,4 +205,8 @@ Public Class ucrDataFrame
         bParameterIsString = False
         UpdateParameter()
     End Sub
+
+    Public Overrides Function IsDefault() As Boolean
+        Return clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(cboAvailableDataFrames.Text)
+    End Function
 End Class
