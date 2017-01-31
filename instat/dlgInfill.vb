@@ -27,11 +27,26 @@ Public Class dlgInfill
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
+        'Task: Help ID for this dialogue need to be added.
+        ' ucrBase.iHelpTopicID=
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
+
+        'Set receiver
         ucrReceiverDate.Selector = ucrInfillSelector
-        ucrReceiverFactors.Selector = ucrInfillSelector
+        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverDate.SetParameter(New RParameter("date_name", 1))
+        ucrReceiverDate.SetParameterIsString()
+
+        'Set ucrreceiver factors
         ucrReceiverFactors.SetIncludedDataTypes({"factor"})
-        'ucrBase.iHelpTopicID
+        ucrReceiverFactors.Selector = ucrInfillSelector
+        ucrReceiverFactors.SetParameter(New RParameter("factors", 2))
+        ucrReceiverFactors.SetParameterIsString()
+
+        'Set data frame parameter
+        ucrInfillSelector.SetParameter(New RParameter("data_name", 0))
+        ucrInfillSelector.SetParameterIsString()
+
     End Sub
 
     Private Sub SetDefaults()
