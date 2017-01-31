@@ -30,18 +30,20 @@ Partial Class dlgDummyVariables
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpLevelOmitted = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.rdoLevelNumber = New System.Windows.Forms.RadioButton()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlLevelOmitted = New instat.UcrPanel()
+        Me.ucrChkWithXVariable = New instat.ucrCheck()
+        Me.ucrSaveDummy = New instat.ucrSave()
         Me.grpLevelOmitted.SuspendLayout()
         Me.SuspendLayout()
         '
         'chkXvariable
         '
         Me.chkXvariable.AutoSize = True
-        Me.chkXvariable.Location = New System.Drawing.Point(10, 251)
+        Me.chkXvariable.Location = New System.Drawing.Point(10, 245)
         Me.chkXvariable.Name = "chkXvariable"
         Me.chkXvariable.Size = New System.Drawing.Size(114, 17)
         Me.chkXvariable.TabIndex = 4
@@ -62,7 +64,7 @@ Partial Class dlgDummyVariables
         'lblVariate
         '
         Me.lblVariate.AutoSize = True
-        Me.lblVariate.Location = New System.Drawing.Point(133, 252)
+        Me.lblVariate.Location = New System.Drawing.Point(133, 246)
         Me.lblVariate.Name = "lblVariate"
         Me.lblVariate.Size = New System.Drawing.Size(40, 13)
         Me.lblVariate.TabIndex = 5
@@ -82,7 +84,7 @@ Partial Class dlgDummyVariables
         'ucrVariateReceiver
         '
         Me.ucrVariateReceiver.frmParent = Me
-        Me.ucrVariateReceiver.Location = New System.Drawing.Point(179, 251)
+        Me.ucrVariateReceiver.Location = New System.Drawing.Point(179, 245)
         Me.ucrVariateReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrVariateReceiver.Name = "ucrVariateReceiver"
         Me.ucrVariateReceiver.Selector = Nothing
@@ -101,7 +103,7 @@ Partial Class dlgDummyVariables
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 306)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 317)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -112,7 +114,7 @@ Partial Class dlgDummyVariables
         Me.grpLevelOmitted.Controls.Add(Me.rdoLast)
         Me.grpLevelOmitted.Controls.Add(Me.rdoFirst)
         Me.grpLevelOmitted.Controls.Add(Me.rdoNone)
-        Me.grpLevelOmitted.Controls.Add(Me.ucrPnlOutput)
+        Me.grpLevelOmitted.Controls.Add(Me.ucrPnlLevelOmitted)
         Me.grpLevelOmitted.Location = New System.Drawing.Point(255, 72)
         Me.grpLevelOmitted.Name = "grpLevelOmitted"
         Me.grpLevelOmitted.Size = New System.Drawing.Size(102, 151)
@@ -120,13 +122,6 @@ Partial Class dlgDummyVariables
         Me.grpLevelOmitted.TabStop = False
         Me.grpLevelOmitted.Tag = "Level Omitted"
         Me.grpLevelOmitted.Text = "Level Omitted"
-        '
-        'ucrPnlOutput
-        '
-        Me.ucrPnlOutput.Location = New System.Drawing.Point(6, 16)
-        Me.ucrPnlOutput.Name = "ucrPnlOutput"
-        Me.ucrPnlOutput.Size = New System.Drawing.Size(85, 129)
-        Me.ucrPnlOutput.TabIndex = 0
         '
         'rdoLevelNumber
         '
@@ -176,11 +171,35 @@ Partial Class dlgDummyVariables
         Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
+        'ucrPnlLevelOmitted
+        '
+        Me.ucrPnlLevelOmitted.Location = New System.Drawing.Point(6, 16)
+        Me.ucrPnlLevelOmitted.Name = "ucrPnlLevelOmitted"
+        Me.ucrPnlLevelOmitted.Size = New System.Drawing.Size(85, 129)
+        Me.ucrPnlLevelOmitted.TabIndex = 0
+        '
+        'ucrChkWithXVariable
+        '
+        Me.ucrChkWithXVariable.Checked = False
+        Me.ucrChkWithXVariable.Location = New System.Drawing.Point(10, 223)
+        Me.ucrChkWithXVariable.Name = "ucrChkWithXVariable"
+        Me.ucrChkWithXVariable.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkWithXVariable.TabIndex = 15
+        '
+        'ucrSaveDummy
+        '
+        Me.ucrSaveDummy.Location = New System.Drawing.Point(10, 281)
+        Me.ucrSaveDummy.Name = "ucrSaveDummy"
+        Me.ucrSaveDummy.Size = New System.Drawing.Size(294, 24)
+        Me.ucrSaveDummy.TabIndex = 16
+        '
         'dlgDummyVariables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(597, 370)
+        Me.ClientSize = New System.Drawing.Size(419, 381)
+        Me.Controls.Add(Me.ucrSaveDummy)
+        Me.Controls.Add(Me.ucrChkWithXVariable)
         Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)
         Me.Controls.Add(Me.ucrVariateReceiver)
@@ -216,5 +235,7 @@ Partial Class dlgDummyVariables
     Friend WithEvents rdoLast As RadioButton
     Friend WithEvents rdoFirst As RadioButton
     Friend WithEvents rdoNone As RadioButton
-    Friend WithEvents ucrPnlOutput As UcrPanel
+    Friend WithEvents ucrPnlLevelOmitted As UcrPanel
+    Friend WithEvents ucrChkWithXVariable As ucrCheck
+    Friend WithEvents ucrSaveDummy As ucrSave
 End Class
