@@ -40,19 +40,20 @@ Partial Class dlgFreezeColumns
         '
         'ucrReceiverMultipleforFreezeColumns
         '
+        Me.ucrReceiverMultipleforFreezeColumns.frmParent = Me
         Me.ucrReceiverMultipleforFreezeColumns.Location = New System.Drawing.Point(240, 28)
         Me.ucrReceiverMultipleforFreezeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleforFreezeColumns.Name = "ucrReceiverMultipleforFreezeColumns"
         Me.ucrReceiverMultipleforFreezeColumns.Selector = Nothing
         Me.ucrReceiverMultipleforFreezeColumns.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultipleforFreezeColumns.TabIndex = 1
+        Me.ucrReceiverMultipleforFreezeColumns.TabIndex = 2
         '
         'ucrBaseforFreezeColumns
         '
         Me.ucrBaseforFreezeColumns.Location = New System.Drawing.Point(12, 198)
         Me.ucrBaseforFreezeColumns.Name = "ucrBaseforFreezeColumns"
         Me.ucrBaseforFreezeColumns.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseforFreezeColumns.TabIndex = 2
+        Me.ucrBaseforFreezeColumns.TabIndex = 3
         '
         'lblFreezeColumns
         '
@@ -60,7 +61,7 @@ Partial Class dlgFreezeColumns
         Me.lblFreezeColumns.Location = New System.Drawing.Point(237, 9)
         Me.lblFreezeColumns.Name = "lblFreezeColumns"
         Me.lblFreezeColumns.Size = New System.Drawing.Size(82, 13)
-        Me.lblFreezeColumns.TabIndex = 3
+        Me.lblFreezeColumns.TabIndex = 1
         Me.lblFreezeColumns.Text = "Freeze Columns"
         '
         'dlgFreezeColumns
