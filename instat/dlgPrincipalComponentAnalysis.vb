@@ -16,21 +16,24 @@
 Imports instat.Translations
 Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Public ExplanatoryVariables
     Public strModelName As String = ""
     Private clsDefaultFunction As New RFunction
 
-    Private Sub dlgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgPrincipalComponentAnalysis_oad(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
+
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 422
@@ -72,9 +75,6 @@ Public Class dlgPrincipalComponentAnalysis
 
 
         ' Default
-        clsDefaultFunction.SetRCommand("PCA")
-        clsDefaultFunction.AddParameter("graph", "FALSE") ' not sure what this does?
-        clsDefaultFunction.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
 
         sdgPrincipalComponentAnalysis.ucrSelectorFactor.SetDataframe(ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
@@ -89,6 +89,12 @@ Public Class dlgPrincipalComponentAnalysis
         sdgPrincipalComponentAnalysis.SetDefaults()
         ComponentsMinimum()
         TestOKEnabled()
+
+        clsDefaultFunction.SetRCommand("PCA")
+        clsDefaultFunction.AddParameter("graph", "FALSE") ' not sure what this does?
+        clsDefaultFunction.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        'clone etc
     End Sub
 
     Private Sub TestOKEnabled()
@@ -112,6 +118,11 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub ucrBasePCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(bReset)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub ucrReceiverMultiplePCA_SelectionChanged() Handles ucrReceiverMultiplePCA.SelectionChanged
