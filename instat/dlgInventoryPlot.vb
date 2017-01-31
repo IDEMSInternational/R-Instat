@@ -85,6 +85,7 @@ Public Class dlgInventoryPlot
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter(), 0)
         clsDefaultRFunction.AddParameter("threshold", "0.85")
+        clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
     End Sub
 
     Private Sub TestOkEnabled()
