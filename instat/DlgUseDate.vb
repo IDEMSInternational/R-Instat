@@ -18,16 +18,25 @@ Imports instat
 Imports instat.Translations
 Public Class dlgUseDate
     Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
     Public bFirstLoad As Boolean = True
     Private Sub dlgUseDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 462
 
@@ -99,15 +108,12 @@ Public Class dlgUseDate
         ucrChkAbbrMonth.SetParameter(New RParameter("month_abbr"))
         ucrChkAbbrMonth.SetText("Month")
         ucrChkAbbrMonth.SetRDefault("FALSE")
-
-        ' Default R Function
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
     End Sub
 
     Private Sub SetDefaults()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorUseDate.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         TestOKEnabled()
     End Sub
 
@@ -121,6 +127,7 @@ Public Class dlgUseDate
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(bReset)
     End Sub
 
     Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged
