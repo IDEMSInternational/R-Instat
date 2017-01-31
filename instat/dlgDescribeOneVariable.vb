@@ -33,7 +33,6 @@ Public Class dlgDescribeOneVariable
     End Sub
 
     Private Sub SetDefaults()
-        ' Set default RFunction as the base function
         ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorDescribeOneVar.Reset()
         ucrReceiverDescribeOneVar.Clear()
@@ -58,27 +57,17 @@ Public Class dlgDescribeOneVariable
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
-
-        'SetParameter({ucrChkSpecifyLayout, ucrNudNumberofColumns}, New RParameter("ncol"))
-        'ucrChkSpecifyLayout.SetText("Specify Layout")
-        'ucrChkSpecifyLayout.bChangeParameterValue = False
-        'ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        SetParameter({ucrChkCustomise, ucrChkSaveResult}, New RParameter("store_results"))
+        'this should enable the command button leading to the subdialog
         ucrChkCustomise.SetText("Customise")
         ucrChkCustomise.bChangeParameterValue = False
-        ucrChkCustomise.AddToLinkedControls(ucrLinked:=ucrChkSaveResult, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'Choose Function() should be called here
 
-        ucrChkSaveResult.SetText("Save Result")
-        ucrChkSaveResult.SetParameter(New RParameter("store_results"))
-        ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkSaveResult.SetRDefault("FALSE")
+        ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
+        'ucrChkSaveResult.SetParameter(New RParameter("store_results"))
+        'ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkSaveResult.SetRDefault("FALSE")
 
-        'default for the custom function
-        clsRCustomFunction.AddParameter("return_output", "TRUE")
-
+        'setting controls to appropriate functions
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, True)
         ucrChkOmitMissing.SetRCode(clsRCustomFunction, True)
         ucrChkSaveResult.SetRCode(clsRCustomFunction, True)
@@ -86,8 +75,8 @@ Public Class dlgDescribeOneVariable
         ucrReceiverDescribeOneVar.SetRCode(clsDefaultFunction, True)
         ucrSelectorDescribeOneVar.SetRCode(clsRCustomFunction, True)
 
-        'Define the default RFunction
         clsDefaultFunction.SetRCommand("summary")
+        clsRCustomFunction.AddParameter("return_output", "TRUE")
     End Sub
 
     Public Sub TestOKEnabled()
@@ -114,14 +103,12 @@ Public Class dlgDescribeOneVariable
             ucrSelectorDescribeOneVar.SetParameter(New RParameter("data_name"))
             ucrSelectorDescribeOneVar.SetParameterIsString()
             cmdSummaries.Enabled = True
-            ucrChkSaveResult.Enabled = True
         Else
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
             ucrReceiverDescribeOneVar.SetParameter(New RParameter("object"))
             ucrReceiverDescribeOneVar.SetParameterIsRFunction()
             clsDefaultFunction.RemoveParameterByName("data_name")
             cmdSummaries.Enabled = False
-            ucrChkSaveResult.Enabled = False
         End If
         SetRCode(Me, ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, True)
     End Sub
