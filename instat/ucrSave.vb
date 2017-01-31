@@ -225,7 +225,7 @@ Public Class ucrSave
                     Case "column"
                         clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
                     Case "dataframe"
-                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                     Case "graph"
                         clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                     Case "model"
