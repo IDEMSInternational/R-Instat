@@ -27,9 +27,9 @@ Partial Class dlgDescribeOneVariable
         Me.ucrBaseDescribeOneVar = New instat.ucrButtons()
         Me.ucrReceiverDescribeOneVar = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeOneVar = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.chkCustomise = New System.Windows.Forms.CheckBox()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkSaveResult = New instat.ucrCheck()
+        Me.ucrChkCustomise = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdSummaries
@@ -78,16 +78,6 @@ Partial Class dlgDescribeOneVariable
         Me.ucrSelectorDescribeOneVar.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDescribeOneVar.TabIndex = 0
         '
-        'chkCustomise
-        '
-        Me.chkCustomise.Location = New System.Drawing.Point(306, 145)
-        Me.chkCustomise.Name = "chkCustomise"
-        Me.chkCustomise.Size = New System.Drawing.Size(75, 24)
-        Me.chkCustomise.TabIndex = 3
-        Me.chkCustomise.Tag = "Customise"
-        Me.chkCustomise.Text = "Customise"
-        Me.chkCustomise.UseVisualStyleBackColor = True
-        '
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
@@ -104,14 +94,22 @@ Partial Class dlgDescribeOneVariable
         Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSaveResult.TabIndex = 9
         '
+        'ucrChkCustomise
+        '
+        Me.ucrChkCustomise.Checked = False
+        Me.ucrChkCustomise.Location = New System.Drawing.Point(281, 149)
+        Me.ucrChkCustomise.Name = "ucrChkCustomise"
+        Me.ucrChkCustomise.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCustomise.TabIndex = 10
+        '
         'dlgDescribeOneVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 290)
+        Me.Controls.Add(Me.ucrChkCustomise)
         Me.Controls.Add(Me.ucrChkSaveResult)
         Me.Controls.Add(Me.ucrChkOmitMissing)
-        Me.Controls.Add(Me.chkCustomise)
         Me.Controls.Add(Me.ucrSelectorDescribeOneVar)
         Me.Controls.Add(Me.ucrReceiverDescribeOneVar)
         Me.Controls.Add(Me.ucrBaseDescribeOneVar)
@@ -133,7 +131,7 @@ Partial Class dlgDescribeOneVariable
     Friend WithEvents ucrBaseDescribeOneVar As ucrButtons
     Friend WithEvents ucrReceiverDescribeOneVar As ucrReceiverMultiple
     Friend WithEvents ucrSelectorDescribeOneVar As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents chkCustomise As CheckBox
     Friend WithEvents ucrChkSaveResult As ucrCheck
     Friend WithEvents ucrChkOmitMissing As ucrCheck
+    Friend WithEvents ucrChkCustomise As ucrCheck
 End Class
