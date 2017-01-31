@@ -60,9 +60,9 @@ Partial Class dlgFreezeColumns
         Me.lblFreezeColumns.AutoSize = True
         Me.lblFreezeColumns.Location = New System.Drawing.Point(237, 9)
         Me.lblFreezeColumns.Name = "lblFreezeColumns"
-        Me.lblFreezeColumns.Size = New System.Drawing.Size(82, 13)
+        Me.lblFreezeColumns.Size = New System.Drawing.Size(85, 13)
         Me.lblFreezeColumns.TabIndex = 1
-        Me.lblFreezeColumns.Text = "Freeze Columns"
+        Me.lblFreezeColumns.Text = "Freeze Columns:"
         '
         'dlgFreezeColumns
         '
