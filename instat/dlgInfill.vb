@@ -58,10 +58,10 @@ Public Class dlgInfill
         TestOkEnabled()
     End Sub
     Private Sub TestOkEnabled()
-        If ucrReceiverDate.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not (ucrReceiverDate.IsEmpty) OrElse Not (ucrReceiverFactors.IsEmpty) Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
