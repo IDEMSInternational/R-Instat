@@ -25,7 +25,7 @@ Partial Class dlgReorderColumns
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.ucrReorderColumns = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameSelect = New instat.ucrDataFrame()
+        Me.ucrDataFrameSelector = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'lblColumns
@@ -55,21 +55,22 @@ Partial Class dlgReorderColumns
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
-        'ucrDataFrameSelect
+        'ucrDataFrameSelector
         '
-        Me.ucrDataFrameSelect.bUseCurrentFilter = True
-        Me.ucrDataFrameSelect.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDataFrameSelect.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameSelect.Name = "ucrDataFrameSelect"
-        Me.ucrDataFrameSelect.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameSelect.TabIndex = 14
+        Me.ucrDataFrameSelector.AccessibleDescription = "iu8y7t6y7uik,"
+        Me.ucrDataFrameSelector.bUseCurrentFilter = True
+        Me.ucrDataFrameSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataFrameSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
+        Me.ucrDataFrameSelector.Size = New System.Drawing.Size(120, 40)
+        Me.ucrDataFrameSelector.TabIndex = 14
         '
         'dlgReorderColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 245)
-        Me.Controls.Add(Me.ucrDataFrameSelect)
+        Me.Controls.Add(Me.ucrDataFrameSelector)
         Me.Controls.Add(Me.ucrReorderColumns)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrBase)
@@ -87,5 +88,5 @@ Partial Class dlgReorderColumns
     Friend WithEvents lblColumns As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReorderColumns As ucrReorder
-    Friend WithEvents ucrDataFrameSelect As ucrDataFrame
+    Friend WithEvents ucrDataFrameSelector As ucrDataFrame
 End Class
