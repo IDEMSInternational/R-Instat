@@ -50,6 +50,7 @@ Partial Class dlgReorderLevels
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.frmParent = Me
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(259, 42)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
