@@ -19,20 +19,23 @@ Imports RDotNet
 
 Public Class dlgReplace
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Public clsDefaultFunction As New RFunction
     Dim clsGetDataType As New RFunction
 
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
+
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 47
@@ -152,18 +155,21 @@ Public Class dlgReplace
 
 
 
-        'Defaults
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        '        clsDefaultFunction.AddParameter("old_value", Chr(34) & "" & Chr(34)) ' don't always have this, say if interval option is checked
-        clsDefaultFunction.AddParameter("new_value", Chr(34) & "" & Chr(34))
+
 
     End Sub
 
     Private Sub SetDefaults()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
+        '        clsDefaultFunction.AddParameter("old_value", Chr(34) & "" & Chr(34)) ' don't always have this, say if interval option is checked
+        clsDefaultFunction.AddParameter("new_value", Chr(34) & "" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorReplace.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ReopenDialog()
@@ -184,6 +190,7 @@ Public Class dlgReplace
 
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(bReset)
         TestOKEnabled()
     End Sub
 
