@@ -17,20 +17,23 @@ Imports instat.Translations
 Public Class dlgRenameDescriptive
     Public bFirstLoad As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
     Dim bUseSelectedObject As Boolean = False
     Dim strSelectedOject As String = ""
     Dim strSelectedDataFrame As String = ""
     Private Sub dlgRenameDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         Else
-            ReopenDialog()
+            ReopenDialog() ' reopen dialog here for temp. fix in ReopenDialog() sub
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()
@@ -57,16 +60,20 @@ Public Class dlgRenameDescriptive
         ucrInputNewName.SetParameter(New RParameter("new_name", 2))
         ucrInputNewName.SetValidationTypeAsRVariable()
 
-        ' Default
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrSelectorForRenameObject.Reset()
         ucrInputNewName.ResetText()
         NewDefaultName()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -83,6 +90,7 @@ Public Class dlgRenameDescriptive
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(bReset)
     End Sub
 
     Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
