@@ -72,18 +72,18 @@ Partial Class dlgInfill
         Me.lblDate.AutoSize = True
         Me.lblDate.Location = New System.Drawing.Point(275, 13)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(30, 13)
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 1
-        Me.lblDate.Text = "Date"
+        Me.lblDate.Text = "Date:"
         '
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
         Me.lblFactors.Location = New System.Drawing.Point(278, 73)
         Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Size = New System.Drawing.Size(42, 13)
+        Me.lblFactors.Size = New System.Drawing.Size(45, 13)
         Me.lblFactors.TabIndex = 3
-        Me.lblFactors.Text = "Factors"
+        Me.lblFactors.Text = "Factors:"
         '
         'dlgInfill
         '
