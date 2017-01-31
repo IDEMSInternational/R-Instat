@@ -16,19 +16,21 @@
 Imports instat.Translations
 Public Class dlgReoderDescriptives
     Public bFirstLoad As Boolean = True
+    Public bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
     Private Sub dlgReoderDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        'Checks if Ok can be enabled.
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
+
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 351
@@ -41,8 +43,6 @@ Public Class dlgReoderDescriptives
         '        ucrReorderObjects.SetParameter(New RParameter("new_order", 1))
         ucrReorderObjects.setDataType("object")
         ucrReorderObjects.setDataframes(ucrDataFrameReorder)
-
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
     End Sub
     Private Sub ReopenDialog()
 
@@ -54,16 +54,23 @@ Public Class dlgReoderDescriptives
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     Private Sub SetDefaults()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrDataFrameReorder.Reset()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
+        SetRCodeforControls(bReset)
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
 
     '    Private Sub ucrReorderObjects_OrderChanged() Handles ucrReorderObjects.OrderChanged
     '   If Not ucrReorderObjects.isEmpty Then
