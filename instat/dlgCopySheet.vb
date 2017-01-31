@@ -16,18 +16,20 @@
 Imports instat.Translations
 Public Class dlgCopySheet
     Private clsDefaultFunction As New RFunction
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
