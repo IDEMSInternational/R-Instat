@@ -25,11 +25,11 @@ Partial Class dlgDescribeOneVariable
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.ucrBaseDescribeOneVar = New instat.ucrButtons()
-        Me.chkSaveResult = New System.Windows.Forms.CheckBox()
         Me.ucrReceiverDescribeOneVar = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeOneVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.chkCustomise = New System.Windows.Forms.CheckBox()
-        Me.chkOmitMissing = New System.Windows.Forms.CheckBox()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
+        Me.ucrChkSaveResult = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdSummaries
@@ -58,18 +58,9 @@ Partial Class dlgDescribeOneVariable
         Me.ucrBaseDescribeOneVar.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseDescribeOneVar.TabIndex = 7
         '
-        'chkSaveResult
-        '
-        Me.chkSaveResult.Location = New System.Drawing.Point(10, 198)
-        Me.chkSaveResult.Name = "chkSaveResult"
-        Me.chkSaveResult.Size = New System.Drawing.Size(104, 24)
-        Me.chkSaveResult.TabIndex = 4
-        Me.chkSaveResult.Tag = "Save_Result"
-        Me.chkSaveResult.Text = "Save Result"
-        Me.chkSaveResult.UseVisualStyleBackColor = True
-        '
         'ucrReceiverDescribeOneVar
         '
+        Me.ucrReceiverDescribeOneVar.frmParent = Me
         Me.ucrReceiverDescribeOneVar.Location = New System.Drawing.Point(261, 42)
         Me.ucrReceiverDescribeOneVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDescribeOneVar.Name = "ucrReceiverDescribeOneVar"
@@ -97,22 +88,29 @@ Partial Class dlgDescribeOneVariable
         Me.chkCustomise.Text = "Customise"
         Me.chkCustomise.UseVisualStyleBackColor = True
         '
-        'chkOmitMissing
+        'ucrChkOmitMissing
         '
-        Me.chkOmitMissing.Location = New System.Drawing.Point(144, 198)
-        Me.chkOmitMissing.Name = "chkOmitMissing"
-        Me.chkOmitMissing.Size = New System.Drawing.Size(126, 25)
-        Me.chkOmitMissing.TabIndex = 5
-        Me.chkOmitMissing.Text = "Omit Missing Values"
-        Me.chkOmitMissing.UseVisualStyleBackColor = True
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(172, 203)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkOmitMissing.TabIndex = 8
+        '
+        'ucrChkSaveResult
+        '
+        Me.ucrChkSaveResult.Checked = False
+        Me.ucrChkSaveResult.Location = New System.Drawing.Point(12, 203)
+        Me.ucrChkSaveResult.Name = "ucrChkSaveResult"
+        Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSaveResult.TabIndex = 9
         '
         'dlgDescribeOneVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 290)
-        Me.Controls.Add(Me.chkOmitMissing)
-        Me.Controls.Add(Me.chkSaveResult)
+        Me.Controls.Add(Me.ucrChkSaveResult)
+        Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.chkCustomise)
         Me.Controls.Add(Me.ucrSelectorDescribeOneVar)
         Me.Controls.Add(Me.ucrReceiverDescribeOneVar)
@@ -133,9 +131,9 @@ Partial Class dlgDescribeOneVariable
     Friend WithEvents cmdSummaries As Button
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents ucrBaseDescribeOneVar As ucrButtons
-    Friend WithEvents chkSaveResult As CheckBox
     Friend WithEvents ucrReceiverDescribeOneVar As ucrReceiverMultiple
     Friend WithEvents ucrSelectorDescribeOneVar As ucrSelectorByDataFrameAddRemove
     Friend WithEvents chkCustomise As CheckBox
-    Friend WithEvents chkOmitMissing As CheckBox
+    Friend WithEvents ucrChkSaveResult As ucrCheck
+    Friend WithEvents ucrChkOmitMissing As ucrCheck
 End Class
