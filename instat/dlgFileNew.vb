@@ -13,12 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgFileNew
-    Public clsMatrix As New RFunction
-    Public strDefaultSheetPrefix As String = "Sheet"
+    Private clsOverallFunction, clsMatrixDefaultFunction, clsMatrixFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgFileNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -37,40 +37,50 @@ Public Class dlgFileNew
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 6
-        clsMatrix.SetRCommand("matrix")
-        clsMatrix.AddParameter("data", "NA")
-        ucrBase.clsRsyntax.SetFunction("data.frame")
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsMatrix)
-        nudRows.Maximum = Integer.MaxValue
-        nudRows.Minimum = 1
-        nudColumns.Maximum = Integer.MaxValue
-        nudColumns.Minimum = 1
-        'ucrName.SetDefaultTypeAsDataFrame()  This can be added in when the code is written
-        ucrName.SetValidationTypeAsRVariable()
+
+        'nudRows
+        ucrNudRows.SetParameter(New RParameter("nrow"))
+        ucrNudRows.SetMinMax(1, Integer.MaxValue)
+
+        'nudCols
+        ucrNudCols.SetParameter(New RParameter("ncol"))
+        ucrNudCols.SetMinMax(1, Integer.MaxValue)
+
+        ' ucrNewSheetName
+        ucrNewDFName.SetIsTextBox()
+        ucrNewDFName.SetSaveTypeAsDataFrame()
+        ucrNewDFName.SetLabelText("New Data Frame Name:")
+        ucrNewDFName.SetPrefix("data")
+
+        ' Default R
+        clsOverallFunction.SetRCommand("data.frame")
+
+        'matrix(nrow = 10, ncol = 2, Data = NA)
+        clsMatrixDefaultFunction.SetRCommand("matrix")
+        clsMatrixDefaultFunction.AddParameter("data", "NA")
+        clsMatrixDefaultFunction.AddParameter("ncol", 2)
+        clsMatrixDefaultFunction.AddParameter("nrow", 10)
     End Sub
 
+    ' updating controls doesn't update the function
+    ' Sheet name is not on the dialog.
+
     Private Sub ReopenDialog()
-        ucrName.SetName(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
     End Sub
 
     Private Sub SetDefaults()
-        nudRows.Value = 10
-        nudColumns.Value = 2
-        ucrName.SetName(strName:=frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix))
-    End Sub
-
-    Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
-        clsMatrix.AddParameter("ncol", nudColumns.Value.ToString())
-        TestOKEnabled()
-    End Sub
-
-    Private Sub nudRows_TextChanged(sender As Object, e As EventArgs) Handles nudRows.TextChanged
-        clsMatrix.AddParameter("nrow", nudRows.Value.ToString())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
+        clsMatrixFunction = clsMatrixDefaultFunction.Clone()
+        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
+        ucrNudCols.SetRCode(clsMatrixFunction)
+        ucrNudRows.SetRCode(clsMatrixFunction)
+        ucrNewDFName.SetRCode(clsOverallFunction)
+        ucrNewDFName.Reset()
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrName.IsEmpty AndAlso nudColumns.Text <> "" AndAlso nudRows.Text <> "" Then
+        If ucrNewDFName.IsComplete AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -81,8 +91,7 @@ Public Class dlgFileNew
         SetDefaults()
     End Sub
 
-    Private Sub ucrName_NameChanged() Handles ucrName.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(ucrName.GetText(), strTempDataframe:=ucrName.GetText())
+    Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged, ucrNewDFName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

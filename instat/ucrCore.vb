@@ -20,7 +20,6 @@ Public Class ucrCore
 
     'Function or Operator that this control's parameter is added/removed from
     Protected clsRCode As New RCodeStructure
-    Protected iParameterPosition As Integer = -1
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
     Protected clsParameter As RParameter
@@ -78,6 +77,8 @@ Public Class ucrCore
 
     Public bUpdateRCodeFromControl As Boolean = False
 
+    Protected lstConditions As New List(Of KeyValuePair(Of Object, List(Of Condition)))
+
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
@@ -134,12 +135,16 @@ Public Class ucrCore
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            If bUpdateRCodeFromControl AndAlso clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue() Then
+            If bUpdateRCodeFromControl AndAlso CanUpdate() Then
                 UpdateRCode()
             End If
             UpdateControl(bReset)
         End If
     End Sub
+
+    Protected Overridable Function CanUpdate()
+        Return (clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue())
+    End Function
 
     Public Overridable Sub SetRDefault(objNewDefault As Object)
         objRDefault = objNewDefault
@@ -203,7 +208,7 @@ Public Class ucrCore
     Public Overridable Sub AddOrRemoveParameter(bAdd As Boolean)
         If clsRCode IsNot Nothing AndAlso clsParameter IsNot Nothing Then
             If bAdd Then
-                clsRCode.AddParameter(clsParameter, iParameterPosition)
+                clsRCode.AddParameter(clsParameter)
             Else
                 clsRCode.RemoveParameter(clsParameter)
             End If
