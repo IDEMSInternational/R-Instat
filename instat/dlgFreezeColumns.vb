@@ -51,6 +51,14 @@ Public Class dlgFreezeColumns
 
     End Sub
 
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverMultipleforFreezeColumns.IsEmpty Then
+            ucrBaseforFreezeColumns.OKEnabled(True)
+        Else
+            ucrBaseforFreezeColumns.OKEnabled(False)
+        End If
+    End Sub
+
     'Private Sub ucrSelectorByDataframeAddRemoveforFreezeColumns_DataFrameChanged() Handles ucrSelectorByDataFrameAddRemoveforFreezeColumns.DataFrameChanged
     '    ucrBaseforFreezeColumns.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemoveforFreezeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     'End Sub
@@ -62,5 +70,7 @@ Public Class dlgFreezeColumns
     '        ucrBaseforFreezeColumns.clsRsyntax.AddParameter("col_names", "c()")
     '    End If
     'End Sub
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleforFreezeColumns.ControlContentsChanged
 
+    End Sub
 End Class
