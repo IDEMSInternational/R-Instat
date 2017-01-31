@@ -17,11 +17,12 @@ Imports instat.Translations
 Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
     Public clsRToDataFrame, clsTranspose As New RFunction
+    Private clsOverallFunction, clsTFunction, clsTDefaultFunction As New RFunction
     Private Sub dlgTransposeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
+            SetDefaults()
         Else
             ReOpenDialog()
         End If
@@ -30,14 +31,29 @@ Public Class dlgTransposeColumns
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 277
+
+        'WANT:
         ' Sheet1_transposed <- as.data.frame(x=t(x=InstatDataObject$get_columns_from_data(data_name="Sheet1", col_names="dlgAddComment")))
         'InstatDataObject$import_data(data_tables = List(Sheet1_transposed = Sheet1_transposed))
-        ' found a bug - checkbox doesn't do anything
+
+        'GOT:
+        'Hi <- as.data.frame(InstatDataObject$get_columns_from_data(col_names="dlgAddComment", data_name="Sheet1"), x=t())
+        'InstatDataObject$import_data(data_tables = List(Hi = Hi))
+
+
+        ' hi <- as.data.frame(x=InstatDataObject$get_columns_from_data(col_names="dlgAddComment", data_name="Sheet1"))
+        'InstatDataObject$import_data(data_tables = List(hi = hi))
+
+        ' Main thing to do is feed as.data.frame into x=t()
+        ' Then sort the name.
+
+        ' checkbox doesn't do anything - not yet implemented.
 
         ' ucrSelector
 
         ' ucrReceiver
-        '        ucrReceiverColumsToTranspose.SetParameter(New RParameter("x", 0))
+        ucrReceiverColumsToTranspose.SetParameter(New RParameter("x"))
         ucrReceiverColumsToTranspose.SetParameterIsRFunction()
         ucrReceiverColumsToTranspose.Selector = ucrSelectorTransposeColumns
         ucrReceiverColumsToTranspose.SetMeAsReceiver()
@@ -45,29 +61,39 @@ Public Class dlgTransposeColumns
 
         'ucrNewDF
         ucrNewDataframe.SetIsTextBox()
-        ucrNewDataframe.SetSaveTypeAsColumn()
+        ucrNewDataframe.SetSaveTypeAsDataFrame()
         ucrNewDataframe.SetDataFrameSelector(ucrSelectorTransposeColumns.ucrAvailableDataFrames)
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
 
+        'chkbox
+        'disable
 
-        ucrBase.clsRsyntax.SetFunction("")
-        clsRToDataFrame.SetRCommand("as.data.frame") 'transposed data is in matrix form. We need to convert to dataframe inorder to write back
 
+        ' Default R
+        clsOverallFunction.SetRCommand("as.data.frame")
 
-        clsTranspose.SetRCommand("t")
-        ucrBase.iHelpTopicID = 277
+        '
+        clsTDefaultFunction.SetRCommand("t")
+        ' have t(x = getcolsfromdatabit())
     End Sub
 
+
     Private Sub SetDefaults()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
+        clsTFunction = clsTDefaultFunction.Clone()
+        clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTFunction)
+        ucrReceiverColumsToTranspose.SetRCode(clsTFunction)
+        ucrNewDataframe.SetRCode(clsOverallFunction)
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataframe.Reset()
-        chkNameNewColumns.Checked = False
+        TestOkEnabled()
+
         '     If (ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
         '    ucrNewDataFrameName.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
         '   Else
         '  ucrNewDataFrameName.SetName("")
         ' End If
-        TestOkEnabled()
+
     End Sub
 
     Private Sub ReOpenDialog()
@@ -83,10 +109,10 @@ Public Class dlgTransposeColumns
     End Sub
 
     Public Sub ucrReceiverColumsToTranspose_SelectionChanged() Handles ucrReceiverColumsToTranspose.SelectionChanged
-        clsTranspose.AddParameter("x", clsRFunctionParameter:=ucrReceiverColumsToTranspose.GetVariables())
-        clsRToDataFrame.AddParameter("x", clsRFunctionParameter:=clsTranspose)
-        ucrBase.clsRsyntax.AddParameter("", clsRFunctionParameter:=clsRToDataFrame)
-        TestOkEnabled()
+        ' DONE       clsTranspose.AddParameter("x", clsRFunctionParameter:=ucrReceiverColumsToTranspose.GetVariables())
+        ' DONE       clsRToDataFrame.AddParameter("x", clsRFunctionParameter:=clsTranspose)
+        '        ucrBase.clsRsyntax.AddParameter("", clsRFunctionParameter:=clsRToDataFrame)
+        '        TestOkEnabled()
     End Sub
 
     Private Sub ucrSelectorTransposeColumns_DataFrameChanged() Handles ucrSelectorTransposeColumns.DataFrameChanged
