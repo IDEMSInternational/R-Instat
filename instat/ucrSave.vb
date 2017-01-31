@@ -23,6 +23,7 @@ Public Class ucrSave
     End Sub
 
     Private Sub InitialiseControl()
+        bUpdateRCodeFromControl = True
         ucrInputComboSave.SetValidationTypeAsRVariable()
         ucrInputTextSave.SetValidationTypeAsRVariable()
         ucrChkSave.bIsActiveRControl = False
@@ -281,5 +282,9 @@ Public Class ucrSave
         Else
             Return ucrInputTextSave.GetText()
         End If
+    End Function
+
+    Protected Overrides Function CanUpdate() As Object
+        Return ((Not clsRCode.bIsAssigned AndAlso Not clsRCode.bToBeAssigned) AndAlso strSaveType <> "")
     End Function
 End Class
