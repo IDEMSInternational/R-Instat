@@ -15,10 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgLabels
+    Private clsSetFactorLevels As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -37,20 +37,29 @@ Public Class dlgLabels
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.iHelpTopicID = 35
         ucrReceiverLabels.Selector = ucrSelectorForLabels
         ucrReceiverLabels.SetMeAsReceiver()
-
         ucrReceiverLabels.SetIncludedDataTypes({"factor"})
         ucrFactorLabels.SetReceiver(ucrReceiverLabels)
         ucrFactorLabels.SetAsViewerOnly()
         ucrFactorLabels.AddEditableColumns({"Levels"})
+        ucrReceiverLabels.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverLabels.SetParameterIsString()
+
+        ucrSelectorForLabels.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForLabels.SetParameterIsString()
+
+        ucrFactorLabels.SetParameter(New RParameter("new_levels", 2))
+
+        clsSetFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSetFactorLevels.Clone())
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -58,28 +67,14 @@ Public Class dlgLabels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrFactorLabels_GridContentChanged() Handles ucrFactorLabels.GridContentChanged
-        If ucrFactorLabels.IsColumnComplete(0) Then
-            ucrBase.clsRsyntax.AddParameter("new_levels", ucrFactorLabels.GetColumnInFactorSheet(iColumn:=0))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("new_levels")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverLabels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLabels.SelectionChanged
-        If Not ucrReceiverLabels.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverLabels.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_name")
-        End If
-        TestOKEnabled()
-    End Sub
-
-
-    Private Sub ucrSelectorForLabels_DataFrameChanged() Handles ucrSelectorForLabels.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForLabels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-    End Sub
+    'Private Sub ucrFactorLabels_GridContentChanged() Handles ucrFactorLabels.GridContentChanged
+    '    If ucrFactorLabels.IsColumnComplete(0) Then
+    '        ucrBase.clsRsyntax.AddParameter("new_levels", ucrFactorLabels.GetColumnInFactorSheet(iColumn:=0))
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveParameter("new_levels")
+    '    End If
+    '    TestOKEnabled()
+    'End Sub
 
     Private Sub cmdAddLevel_Click(sender As Object, e As EventArgs) Handles cmdAddLevel.Click
         ucrFactorLabels.AddLevel()
@@ -88,6 +83,9 @@ Public Class dlgLabels
 
     Private Sub ucrFactorLabels_GridVisibleChanged() Handles ucrFactorLabels.GridVisibleChanged
         cmdAddLevel.Enabled = ucrFactorLabels.grdFactorData.Visible
+    End Sub
+
+    Private Sub ucrFactorLabels_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrFactorLabels.ControlContentsChanged, ucrReceiverLabels.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
