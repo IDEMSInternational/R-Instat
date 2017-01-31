@@ -22,12 +22,8 @@ Partial Class dlgRecodeNumeric
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.chkAddLabels = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.lblBreakPoints = New System.Windows.Forms.Label()
-        Me.grpClosedOn = New System.Windows.Forms.GroupBox()
-        Me.rdoLeft = New System.Windows.Forms.RadioButton()
-        Me.rdoRight = New System.Windows.Forms.RadioButton()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.ucrInputRecode = New instat.ucrInputComboBox()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
@@ -35,24 +31,16 @@ Partial Class dlgRecodeNumeric
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrMultipleLabels = New instat.ucrInputTextBox()
         Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
-        Me.grpClosedOn.SuspendLayout()
+        Me.ucrpnlClosedOn = New instat.UcrPanel()
+        Me.rdoRight = New System.Windows.Forms.RadioButton()
+        Me.rdoLeft = New System.Windows.Forms.RadioButton()
+        Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.SuspendLayout()
-        '
-        'chkAddLabels
-        '
-        Me.chkAddLabels.AutoSize = True
-        Me.chkAddLabels.Location = New System.Drawing.Point(10, 206)
-        Me.chkAddLabels.Name = "chkAddLabels"
-        Me.chkAddLabels.Size = New System.Drawing.Size(79, 17)
-        Me.chkAddLabels.TabIndex = 6
-        Me.chkAddLabels.Tag = "Add_Labels"
-        Me.chkAddLabels.Text = "Add Labels"
-        Me.chkAddLabels.UseVisualStyleBackColor = True
         '
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(249, 46)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(244, 14)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
         Me.lblSelectedVariable.TabIndex = 1
@@ -62,46 +50,12 @@ Partial Class dlgRecodeNumeric
         'lblBreakPoints
         '
         Me.lblBreakPoints.AutoSize = True
-        Me.lblBreakPoints.Location = New System.Drawing.Point(249, 92)
+        Me.lblBreakPoints.Location = New System.Drawing.Point(249, 65)
         Me.lblBreakPoints.Name = "lblBreakPoints"
         Me.lblBreakPoints.Size = New System.Drawing.Size(70, 13)
         Me.lblBreakPoints.TabIndex = 3
         Me.lblBreakPoints.Tag = "Break_Points"
         Me.lblBreakPoints.Text = "Break Points:"
-        '
-        'grpClosedOn
-        '
-        Me.grpClosedOn.Controls.Add(Me.rdoLeft)
-        Me.grpClosedOn.Controls.Add(Me.rdoRight)
-        Me.grpClosedOn.Location = New System.Drawing.Point(247, 134)
-        Me.grpClosedOn.Name = "grpClosedOn"
-        Me.grpClosedOn.Size = New System.Drawing.Size(120, 66)
-        Me.grpClosedOn.TabIndex = 5
-        Me.grpClosedOn.TabStop = False
-        Me.grpClosedOn.Tag = "Closed_On"
-        Me.grpClosedOn.Text = "Closed On"
-        '
-        'rdoLeft
-        '
-        Me.rdoLeft.AutoSize = True
-        Me.rdoLeft.Location = New System.Drawing.Point(7, 20)
-        Me.rdoLeft.Name = "rdoLeft"
-        Me.rdoLeft.Size = New System.Drawing.Size(43, 17)
-        Me.rdoLeft.TabIndex = 0
-        Me.rdoLeft.Tag = "Left"
-        Me.rdoLeft.Text = "Left"
-        Me.rdoLeft.UseVisualStyleBackColor = True
-        '
-        'rdoRight
-        '
-        Me.rdoRight.AutoSize = True
-        Me.rdoRight.Location = New System.Drawing.Point(7, 43)
-        Me.rdoRight.Name = "rdoRight"
-        Me.rdoRight.Size = New System.Drawing.Size(50, 17)
-        Me.rdoRight.TabIndex = 1
-        Me.rdoRight.Tag = "Right"
-        Me.rdoRight.Text = "Right"
-        Me.rdoRight.UseVisualStyleBackColor = True
         '
         'lblNewColumnName
         '
@@ -123,7 +77,8 @@ Partial Class dlgRecodeNumeric
         '
         'ucrReceiverRecode
         '
-        Me.ucrReceiverRecode.Location = New System.Drawing.Point(247, 61)
+        Me.ucrReceiverRecode.frmParent = Me
+        Me.ucrReceiverRecode.Location = New System.Drawing.Point(247, 34)
         Me.ucrReceiverRecode.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
         Me.ucrReceiverRecode.Selector = Nothing
@@ -149,6 +104,7 @@ Partial Class dlgRecodeNumeric
         '
         'ucrMultipleLabels
         '
+        Me.ucrMultipleLabels.IsMultiline = False
         Me.ucrMultipleLabels.IsReadOnly = False
         Me.ucrMultipleLabels.Location = New System.Drawing.Point(114, 206)
         Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
@@ -157,27 +113,67 @@ Partial Class dlgRecodeNumeric
         '
         'ucrMultipleNumericRecode
         '
+        Me.ucrMultipleNumericRecode.IsMultiline = False
         Me.ucrMultipleNumericRecode.IsReadOnly = False
-        Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(247, 107)
+        Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(247, 80)
         Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
         Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(120, 21)
         Me.ucrMultipleNumericRecode.TabIndex = 4
+        '
+        'ucrpnlClosedOn
+        '
+        Me.ucrpnlClosedOn.Location = New System.Drawing.Point(252, 107)
+        Me.ucrpnlClosedOn.Name = "ucrpnlClosedOn"
+        Me.ucrpnlClosedOn.Size = New System.Drawing.Size(73, 46)
+        Me.ucrpnlClosedOn.TabIndex = 11
+        '
+        'rdoRight
+        '
+        Me.rdoRight.AutoSize = True
+        Me.rdoRight.Location = New System.Drawing.Point(251, 134)
+        Me.rdoRight.Name = "rdoRight"
+        Me.rdoRight.Size = New System.Drawing.Size(50, 17)
+        Me.rdoRight.TabIndex = 13
+        Me.rdoRight.Tag = "Right"
+        Me.rdoRight.Text = "Right"
+        Me.rdoRight.UseVisualStyleBackColor = True
+        '
+        'rdoLeft
+        '
+        Me.rdoLeft.AutoSize = True
+        Me.rdoLeft.Location = New System.Drawing.Point(251, 111)
+        Me.rdoLeft.Name = "rdoLeft"
+        Me.rdoLeft.Size = New System.Drawing.Size(43, 17)
+        Me.rdoLeft.TabIndex = 12
+        Me.rdoLeft.Tag = "Left"
+        Me.rdoLeft.Text = "Left"
+        Me.rdoLeft.UseVisualStyleBackColor = True
+        '
+        'ucrChkAddLabels
+        '
+        Me.ucrChkAddLabels.Checked = False
+        Me.ucrChkAddLabels.Location = New System.Drawing.Point(10, 208)
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
+        Me.ucrChkAddLabels.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAddLabels.TabIndex = 14
         '
         'dlgRecodeNumeric
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 316)
+        Me.ClientSize = New System.Drawing.Size(413, 316)
+        Me.Controls.Add(Me.ucrChkAddLabels)
+        Me.Controls.Add(Me.rdoRight)
+        Me.Controls.Add(Me.rdoLeft)
+        Me.Controls.Add(Me.ucrpnlClosedOn)
         Me.Controls.Add(Me.ucrMultipleNumericRecode)
         Me.Controls.Add(Me.ucrMultipleLabels)
         Me.Controls.Add(Me.ucrInputRecode)
         Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
         Me.Controls.Add(Me.ucrReceiverRecode)
         Me.Controls.Add(Me.ucrSelectorForRecode)
         Me.Controls.Add(Me.lblSelectedVariable)
-        Me.Controls.Add(Me.chkAddLabels)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -186,23 +182,21 @@ Partial Class dlgRecodeNumeric
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Recode_Numeric"
         Me.Text = "Recode Numeric"
-        Me.grpClosedOn.ResumeLayout(False)
-        Me.grpClosedOn.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents chkAddLabels As CheckBox
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents ucrSelectorForRecode As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRecode As ucrReceiverSingle
     Friend WithEvents lblBreakPoints As Label
-    Friend WithEvents grpClosedOn As GroupBox
-    Friend WithEvents rdoLeft As RadioButton
-    Friend WithEvents rdoRight As RadioButton
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents ucrInputRecode As ucrInputComboBox
     Friend WithEvents ucrMultipleLabels As ucrInputTextBox
     Friend WithEvents ucrMultipleNumericRecode As ucrInputTextBox
+    Friend WithEvents ucrChkAddLabels As ucrCheck
+    Friend WithEvents rdoRight As RadioButton
+    Friend WithEvents rdoLeft As RadioButton
+    Friend WithEvents ucrpnlClosedOn As UcrPanel
 End Class

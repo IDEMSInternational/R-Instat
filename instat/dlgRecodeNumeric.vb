@@ -17,6 +17,7 @@
 
 Imports instat.Translations
 Public Class dlgRecodeNumeric
+    Private clsRecodeNumeric As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -28,35 +29,51 @@ Public Class dlgRecodeNumeric
             ReopenDialog()
         End If
         TestOKEnabled()
-        ucrBase.iHelpTopicID = 43
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 43
         ucrReceiverRecode.Selector = ucrSelectorForRecode
         ucrReceiverRecode.SetMeAsReceiver()
         ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
-        ucrBase.clsRsyntax.SetFunction("cut")
-        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
         ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
-        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrInputRecode.SetValidationTypeAsRVariable()
         ucrMultipleLabels.SetValidationTypeAsList()
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList()
+        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+
+        ucrpnlClosedOn.SetText("Closed on")
+        ucrChkAddLabels.SetText("Add Labels")
+        ucrMultipleNumericRecode.SetName("")
+        ucrMultipleLabels.SetName("")
+        ucrInputRecode.SetPrefix("Recode")
+
+        ucrReceiverRecode.SetParameter(New RParameter("X", 0))
+        ucrReceiverRecode.SetParameterIsRFunction()
+
+        ucrMultipleNumericRecode.SetParameter(New RParameter("breaks", 1))
+        ucrMultipleLabels.SetParameter(New RParameter("labels", 2))
+
+        ucrpnlClosedOn.SetParameter(New RParameter("right", 3))
+        ucrpnlClosedOn.AddRadioButton(rdoRight, "TRUE")
+        ucrpnlClosedOn.AddRadioButton(rdoLeft, "FALSE")
+
+        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+        clsRecodeNumeric.SetRCommand("cut")
     End Sub
 
     Private Sub SetDefaults()
-        chkAddLabels.Checked = False
+        ucrChkAddLabels.Checked = False
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
-        ucrInputRecode.SetPrefix("Recode")
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.Reset()
-        ucrMultipleNumericRecode.SetName("")
         ucrMultipleLabels.Reset()
-        ucrMultipleLabels.SetName("")
-        TestOKEnabled()
+        BreaksCheck()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRecodeNumeric.Clone())
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
     End Sub
 
     Private Sub ReopenDialog()
@@ -65,9 +82,8 @@ Public Class dlgRecodeNumeric
 
     Private Sub TestOKEnabled()
         Dim iTemp As Integer
-
         If Not ucrReceiverRecode.IsEmpty() AndAlso Not ucrMultipleNumericRecode.IsEmpty AndAlso Not ucrInputRecode.IsEmpty Then
-            If chkAddLabels.Checked AndAlso Not ucrMultipleLabels.IsEmpty Then
+            If ucrChkAddLabels.Checked AndAlso Not ucrMultipleLabels.IsEmpty Then
                 If (ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 AndAlso (Not ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1)) OrElse (ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 AndAlso Integer.TryParse(ucrMultipleNumericRecode.clsRList.clsParameters(0).strArgumentValue, iTemp) AndAlso iTemp = ucrMultipleLabels.clsRList.clsParameters.Count) Then
                     ucrBase.OKEnabled(True)
                 Else
@@ -81,50 +97,16 @@ Public Class dlgRecodeNumeric
         End If
     End Sub
 
-    Private Sub ucrReceiverRecode_SelectionChanged() Handles ucrReceiverRecode.SelectionChanged
-        If Not ucrReceiverRecode.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
-
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrMultipleNumericRecode_NameChanged() Handles ucrMultipleNumericRecode.NameChanged
-        'Warning: Apparently the event is raised twice, such that the message is sent twice...
-        'This sub is sending validation errors to the user for him/her to fill in the settingsof the dialogue in an appropriate way.
-        'In case he/she enters only one number in ucrMultipleNumericRecode, this number has to be greater than one, as it is the number of intervals for cut.
-        'Otherwise, if the user enters the list of break points, the resulting number of intervals should be smaller than the number of labels (see
+    Private Sub BreaksCheck()
         If ucrMultipleNumericRecode.GetText <> "" AndAlso ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 Then
             MsgBox("If the input of break points is a single number, it is understood as the number of intervals. It has to be > 1, otherwise an error will occur.", vbOKOnly, "Validation Error")
         Else
             ValidateBreakPointLabelCount()
         End If
-        ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrMultipleLabels_NameChanged() Handles ucrMultipleLabels.NameChanged
-        AddLabelsParameter()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrMultipleNumericRecode_Validated(sender As Object, e As EventArgs) Handles ucrMultipleNumericRecode.Validated, ucrMultipleLabels.Validated
-        ValidateBreakPointLabelCount()
-    End Sub
-
-    Private Sub AddLabelsParameter()
-        If Not ucrMultipleLabels.IsEmpty() Then
-            ucrBase.clsRsyntax.AddParameter("labels", clsRFunctionParameter:=ucrMultipleLabels.clsRList)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("labels")
-        End If
     End Sub
 
     Private Sub ValidateBreakPointLabelCount()
         Dim iTemp As Integer
-
         If Not ucrMultipleNumericRecode.IsEmpty() AndAlso (Not ucrMultipleLabels.IsEmpty()) Then
             If ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 AndAlso ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1 Then
                 MsgBox("There must be one less label than the number of break points. Ok will not be enabled until this is resolved.", vbOKOnly, "Validation Error")
@@ -134,43 +116,21 @@ Public Class dlgRecodeNumeric
         End If
     End Sub
 
-    Private Sub chkAddLabels_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddLabels.CheckedChanged
-        If chkAddLabels.Checked Then
+    Private Sub LablesVissible()
+        If ucrChkAddLabels.Checked Then
             ucrMultipleLabels.Visible = True
-            AddLabelsParameter()
         Else
             ucrMultipleLabels.Visible = False
-            ucrBase.clsRsyntax.RemoveParameter("labels")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub grpClosedOn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeft.CheckedChanged, rdoRight.CheckedChanged
-        SetClosedOn()
-    End Sub
-
-    Private Sub SetClosedOn()
-        If rdoRight.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("right", "TRUE")
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("right")
-            End If
-        Else
-            ucrBase.clsRsyntax.AddParameter("right", "FALSE")
         End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrInputRecode_Namechanged() Handles ucrInputRecode.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverRecode_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRecode.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
+    Private Sub ucrReceiverRecode_ControlContenetsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRecode.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrMultipleLabels.ControlContentsChanged, ucrMultipleNumericRecode.ControlContentsChanged
+        LablesVissible()
+        TestOKEnabled()
     End Sub
 End Class
