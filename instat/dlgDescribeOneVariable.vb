@@ -36,15 +36,8 @@ Public Class dlgDescribeOneVariable
         ' Set default RFunction as the base function
         ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorDescribeOneVar.Reset()
-        'next line should go to the sub
-        'SetRCode(Me, ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, True)
-        'ChooseFunction() 'this might go to the 
-        ucrChkOmitMissing.SetRCode(clsDefaultFunction, True)
-        ucrChkOmitMissing.SetRCode(clsRCustomFunction, True)
-        ucrChkSaveResult.SetRCode(clsRCustomFunction, True)
-        ucrReceiverDescribeOneVar.SetRCode(clsRCustomFunction, True)
-        ucrReceiverDescribeOneVar.SetRCode(clsDefaultFunction, True)
-        ucrSelectorDescribeOneVar.SetRCode(clsRCustomFunction, True)
+        ucrReceiverDescribeOneVar.Clear()
+        SetRCode(Me, ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, True)
         bResetSubdialog = True
         TestOKEnabled()
     End Sub
@@ -52,26 +45,29 @@ Public Class dlgDescribeOneVariable
     Private Sub InitialiseDialog()
         ucrBaseDescribeOneVar.iHelpTopicID = 410
         ucrBaseDescribeOneVar.clsRsyntax.iCallType = 2
+
         ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
         ucrReceiverDescribeOneVar.SetMeAsReceiver()
         clsRCustomFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
 
-
         ucrReceiverDescribeOneVar.SetParameter(New RParameter("columns_to_summarise"))
         ucrReceiverDescribeOneVar.SetParameterIsString()
-
-        'ucrSelectorDescribeOneVar.SetParameter(New RParameter("data_name"))
-        'ucrSelectorDescribeOneVar.SetParameterIsString()
 
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm"))
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
-        'SetParameter({ucrChkCustomise, ucrReceiverDescribeOneVar}, New RParameter("data_name"))
-        'ucrChkCustomise.SetText("Customise")
-        'ucrChkCustomise.bChangeParameterValue = False
-        'ucrChkCustomise.AddToLinkedControls(ucrLinked:=ucrReceiverDescribeOneVar, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'SetParameter({ucrChkSpecifyLayout, ucrNudNumberofColumns}, New RParameter("ncol"))
+        'ucrChkSpecifyLayout.SetText("Specify Layout")
+        'ucrChkSpecifyLayout.bChangeParameterValue = False
+        'ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        SetParameter({ucrChkCustomise, ucrChkSaveResult}, New RParameter("store_results"))
+        ucrChkCustomise.SetText("Customise")
+        ucrChkCustomise.bChangeParameterValue = False
+        ucrChkCustomise.AddToLinkedControls(ucrLinked:=ucrChkSaveResult, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'Choose Function() should be called here
 
@@ -83,145 +79,63 @@ Public Class dlgDescribeOneVariable
         'default for the custom function
         clsRCustomFunction.AddParameter("return_output", "TRUE")
 
+        ucrChkOmitMissing.SetRCode(clsDefaultFunction, True)
+        ucrChkOmitMissing.SetRCode(clsRCustomFunction, True)
+        ucrChkSaveResult.SetRCode(clsRCustomFunction, True)
+        ucrReceiverDescribeOneVar.SetRCode(clsRCustomFunction, True)
+        ucrReceiverDescribeOneVar.SetRCode(clsDefaultFunction, True)
+        ucrSelectorDescribeOneVar.SetRCode(clsRCustomFunction, True)
+
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("summary")
-
     End Sub
 
     Public Sub TestOKEnabled()
-        If ucrReceiverDescribeOneVar.IsEmpty() OrElse (chkCustomise.Checked AndAlso sdgSummaries.strSummariesParameter = "c()") Then
+        If ucrReceiverDescribeOneVar.IsEmpty() OrElse (ucrChkCustomise.Checked AndAlso sdgSummaries.strSummariesParameter = "c()") Then
             ucrBaseDescribeOneVar.OKEnabled(False)
         Else
             ucrBaseDescribeOneVar.OKEnabled(True)
         End If
-        'ChooseFunction()
     End Sub
 
     Private Sub ReopenDialog()
-
+        TestOKEnabled()
     End Sub
-
-    'Private Sub SetDefaults()
-    '    chkSaveResult.Checked = False
-    '    sdgSummaries.SetMyRFunction(clsRCustomFunction)
-    '    sdgSummaries.SetDefaults()
-    '    ucrSelectorDescribeOneVar.Reset()
-    '    chkSaveResult.Checked = False
-    '    chkSaveResult.Enabled = False
-    '    chkCustomise.Checked = False
-    '    chkOmitMissing.Checked = False
-    '    ChooseFunction()
-    '    StoreResultsParamenter()
-    '    OutputOption()
-    '    TestOKEnabled()
-    'End Sub
-
-
 
     Private Sub ucrBaseDescribeOneVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeOneVar.ClickReset
         SetDefaults()
     End Sub
 
     Private Sub ChooseFunction()
-        If chkCustomise.Checked Then
+        If ucrChkCustomise.Checked Then
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsRCustomFunction)
             ucrReceiverDescribeOneVar.SetParameter(New RParameter("columns_to_summarise"))
             ucrReceiverDescribeOneVar.SetParameterIsString()
             ucrSelectorDescribeOneVar.SetParameter(New RParameter("data_name"))
             ucrSelectorDescribeOneVar.SetParameterIsString()
-            'cmdSummaries.Enabled = True
+            cmdSummaries.Enabled = True
+            ucrChkSaveResult.Enabled = True
         Else
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
             ucrReceiverDescribeOneVar.SetParameter(New RParameter("object"))
             ucrReceiverDescribeOneVar.SetParameterIsRFunction()
             clsDefaultFunction.RemoveParameterByName("data_name")
-            'cmdSummaries.Enabled = False
+            cmdSummaries.Enabled = False
+            ucrChkSaveResult.Enabled = False
         End If
         SetRCode(Me, ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, True)
     End Sub
 
-    'Private Sub OutputOption()
-    '    clsRCustomFunction.AddParameter("return_output", "TRUE")
-    'End Sub
-
-    'Private Sub ucrSelectorForColumnStatistics_DataFrameChanged() Handles ucrSelectorDescribeOneVar.DataFrameChanged
-    '    clsRCustomFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeOneVar.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    'End Sub
-
-    'Private Sub ucrReceiverSelectedVariables_SelectionChanged() Handles ucrReceiverDescribeOneVar.SelectionChanged
-    '    If Not ucrReceiverDescribeOneVar.IsEmpty Then
-    '        clsRCustomFunction.AddParameter("columns_to_summarise", ucrReceiverDescribeOneVar.GetVariableNames())
-    '        clsRBaseFunction.AddParameter("object", clsRFunctionParameter:=ucrReceiverDescribeOneVar.GetVariables())
-    '    Else
-    '        clsRCustomFunction.RemoveParameterByName("columns_to_summarise")
-    '    End If
-    '    TestOKEnabled()
-    'End Sub
-
-    'Private Sub chkSaveResult_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResult.CheckedChanged
-    '    StoreResultsParamenter()
-    '    OutputOption()
-    'End Sub
-
-    'Private Sub chkDisplayResults_CheckedChanged(sender As Object, e As EventArgs)
-    '    StoreResultsParamenter()
-    '    OutputOption()
-    'End Sub
-
-    'Private Sub chkCustomise_CheckedChanged(sender As Object, e As EventArgs)
-    '    ChooseFunction()
-    '    TestOKEnabled()
-    'End Sub
-
-    'Private Sub StoreResultsParamenter()
-    '    If chkSaveResult.Checked Then
-    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-    '            clsRCustomFunction.AddParameter("store_results", "TRUE")
-    '        Else
-    '            clsRCustomFunction.RemoveParameterByName("store_results")
-    '        End If
-    '        clsRCustomFunction.AddParameter("store_results", "FALSE")
-    '    End If
-    '    clsRCustomFunction.AddParameter("drop", "TRUE")
-    'End Sub
 
     Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        'sdgSummaries.ShowDialog()
-        'sdgSummaries.TestSummaries()
-        'TestOKEnabled()
-        ' sdgSummaries.SetMyRFunction(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bResetSubdialog)
         sdgSummaries.SetRFunction(clsRCustomFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
     End Sub
 
-    'Private Sub chkExcludeMissing_CheckedChanged(sender As Object, e As EventArgs) Handles chkOmitMissing.CheckedChanged
-    '    If chkOmitMissing.Checked Then
-    '        clsRCustomFunction.AddParameter("na.rm", "TRUE")
-    '        clsRBaseFunction.AddParameter("na.rm", "TRUE")
-    '    Else
-    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-    '            clsRCustomFunction.AddParameter("na.rm", "FALSE")
-    '            clsRBaseFunction.AddParameter("na.rm", "FALSE")
-    '        Else
-    '            clsRCustomFunction.RemoveParameterByName("na.rm")
-    '            clsRBaseFunction.RemoveParameterByName("na.rm")
-    '        End If
-    '    End If
-    'End Sub
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeOneVar.ControlContentsChanged, ucrReceiverDescribeOneVar.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeOneVar.ControlContentsChanged, ucrReceiverDescribeOneVar.ControlContentsChanged, ucrChkCustomise.ControlContentsChanged
+        ChooseFunction()
         TestOKEnabled()
-        ChooseFunction()
-    End Sub
-
-    Private Sub chkCustomise_CheckedChanged(sender As Object, e As EventArgs) Handles chkCustomise.CheckedChanged
-        ChooseFunction()
-    End Sub
-
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore)
-        TestOKEnabled()
-        ChooseFunction()
     End Sub
 End Class
