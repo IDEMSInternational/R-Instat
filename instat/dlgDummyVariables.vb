@@ -17,14 +17,12 @@
 Imports instat.Translations
 Public Class dlgDummyVariables
     Private bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
-
         End If
         autoTranslate(Me)
     End Sub
@@ -55,23 +53,20 @@ Public Class dlgDummyVariables
         'ucrInputColumns.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
 
         ucrBase.iHelpTopicID = 41
+
+
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
         ucrVariateReceiver.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
-
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
 
         chkXvariable.Checked = False
         ucrVariateReceiver.Visible = False
         lblVariate.Visible = False
-        grpLevelOmitted.Enabled = False
+        grpLevelOmitted1.Enabled = False
 
         ucrBase.clsRsyntax.SetFunction("dummy")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub chkXvariable_CheckedChanged(sender As Object, e As EventArgs) Handles chkXvariable.CheckedChanged
