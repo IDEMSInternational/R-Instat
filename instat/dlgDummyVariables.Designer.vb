@@ -36,7 +36,6 @@ Partial Class dlgDummyVariables
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLevelOmitted = New instat.UcrPanel()
         Me.ucrChkWithXVariable = New instat.ucrCheck()
-        Me.ucrSaveDummy = New instat.ucrSave()
         Me.grpLevelOmitted.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -103,7 +102,7 @@ Partial Class dlgDummyVariables
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 317)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 280)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -186,19 +185,11 @@ Partial Class dlgDummyVariables
         Me.ucrChkWithXVariable.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkWithXVariable.TabIndex = 15
         '
-        'ucrSaveDummy
-        '
-        Me.ucrSaveDummy.Location = New System.Drawing.Point(10, 281)
-        Me.ucrSaveDummy.Name = "ucrSaveDummy"
-        Me.ucrSaveDummy.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSaveDummy.TabIndex = 16
-        '
         'dlgDummyVariables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 381)
-        Me.Controls.Add(Me.ucrSaveDummy)
+        Me.ClientSize = New System.Drawing.Size(419, 344)
         Me.Controls.Add(Me.ucrChkWithXVariable)
         Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)
@@ -237,5 +228,4 @@ Partial Class dlgDummyVariables
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents ucrPnlLevelOmitted As UcrPanel
     Friend WithEvents ucrChkWithXVariable As ucrCheck
-    Friend WithEvents ucrSaveDummy As ucrSave
 End Class

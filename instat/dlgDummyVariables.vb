@@ -45,7 +45,7 @@ Public Class dlgDummyVariables
     End Sub
 
     Public Sub InitialiseDialog()
-                ucrBase.iHelpTopicID = 41
+        ucrBase.iHelpTopicID = 41
         clsDefaultFunction.SetRCommand("dummy")
 
         'Set Receiver
@@ -61,6 +61,8 @@ Public Class dlgDummyVariables
         ucrPnlLevelOmitted.AddRadioButton(rdoFirst, "")
         ucrPnlLevelOmitted.AddRadioButton(rdoLast, "")
         ucrPnlLevelOmitted.AddRadioButton(rdoLevelNumber, "")
+
+
 
 
         ucrChkWithXVariable.SetText("With X Variable")
