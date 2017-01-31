@@ -19,7 +19,6 @@ Public Class sdgSummaries
     Public clsRSummaries As New RFunction
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
-    'Public clsGraphOneVariable As New RFunction
     Public strSummariesParameter
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -55,25 +54,10 @@ Public Class sdgSummaries
         ucrChkVariance.SetText("Variance")
         ucrChkQuartiles.SetText("Quartiles")
 
+        'these are the default summaries which should be checked on load
         ucrChkNonMissing.Checked = True
         ucrChkNTotal.Checked = True
         ucrChkSum.Checked = True
-
-        'To add quartiles, variance etc
-        'ucrChkMean.Checked = False
-        'chkStdDev.Checked = False
-        'chkMode.Checked = False
-        'chkMinimum.Checked = False
-        'chkMaximum.Checked = False
-        'chkNMissing.Checked = False
-        'chkNonMissing.Checked = True
-        'chkNTotal.Checked = True
-        'chkMedian.Checked = False
-        'chkRange.Checked = False
-        'chkSum.Checked = True
-        'ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
-        'clsGraphOneVariable.AddParameter(SetParameter(New RParameter("free_scale_axis"))
-        'ucrChkFreeScaleAxisforFacets.SetDefault("FALSE")
 
         bControlsInitialised = True
         SummariesParameters()
@@ -111,10 +95,6 @@ Public Class sdgSummaries
         'clsRSummaries = clsRNewSummaries
     End Sub
 
-    'Private Sub grpsummaries_CheckedChanged(sender As Object, e As EventArgs)
-    '    SummariesParameters()
-    'End Sub
-
     Public Sub TestSummaries()
         SummariesParameters()
         If strSummariesParameter = "c()" Then
@@ -130,6 +110,7 @@ Public Class sdgSummaries
         SetRCode(Me, clsRSummaries, bReset)
     End Sub
 
+    'control value changed should be called appropriately
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNonMissing.ControlValueChanged, ucrChkNMissing.ControlValueChanged, ucrChkNTotal.ControlValueChanged, ucrChkNonMissing.ControlValueChanged, ucrChkMaximum.ControlValueChanged, ucrChkMean.ControlValueChanged, ucrChkMinimum.ControlValueChanged, ucrChkMode.ControlValueChanged, ucrChkMedian.ControlValueChanged, ucrChkStdDev.ControlValueChanged, ucrChkRange.ControlValueChanged, ucrChkVariance.ControlValueChanged, ucrChkQuartiles.ControlValueChanged
         TestSummaries()
     End Sub
