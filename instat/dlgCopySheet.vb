@@ -17,9 +17,9 @@ Imports instat.Translations
 Public Class dlgCopySheet
     Private clsDefaultFunction As New RFunction
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 62
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -42,15 +42,18 @@ Public Class dlgCopySheet
         ucrDataFrameCopySheets.SetParameterIsString()
 
         'Default Function
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrNewDataFrameName.Reset()
         ucrDataFrameCopySheets.Reset()
         CheckAutoName()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
+        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -60,7 +63,11 @@ Public Class dlgCopySheet
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
+        SetRCodeForControls(True)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
