@@ -67,29 +67,8 @@ Public Class dlgInfill
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOkEnabled()
     End Sub
 
-    'Private Sub ucrInfillSelector_DataFrameChanged() Handles ucrInfillSelector.DataFrameChanged
-    '    ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    'End Sub
-
-    'Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
-    '    If Not ucrReceiverDate.IsEmpty Then
-    '        ucrBase.clsRsyntax.AddParameter("date_name", ucrReceiverDate.GetVariableNames())
-    '    Else
-    '        ucrBase.clsRsyntax.RemoveParameter("date_name")
-    '    End If
-    '    TestOkEnabled()
-    'End Sub
-
-    'Private Sub ucrReceiverFactors_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactors.SelectionChanged
-    '    If Not ucrReceiverDate.IsEmpty Then
-    '        ucrBase.clsRsyntax.AddParameter("factors", ucrReceiverFactors.GetVariableNames())
-    '    Else
-    '        ucrBase.clsRsyntax.RemoveParameter("factors")
-    '    End If
-    'End Sub
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
     End Sub
