@@ -20,7 +20,6 @@ Imports RDotNet
 Public Class dlgReplace
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public clsDefaultFunction As New RFunction
     Dim clsGetDataType As New RFunction
 
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,7 +30,7 @@ Public Class dlgReplace
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -160,12 +159,13 @@ Public Class dlgReplace
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        ucrSelectorReplace.Reset()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         '        clsDefaultFunction.AddParameter("old_value", Chr(34) & "" & Chr(34)) ' don't always have this, say if interval option is checked
         clsDefaultFunction.AddParameter("new_value", Chr(34) & "" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrSelectorReplace.Reset()
-        TestOKEnabled()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -190,7 +190,7 @@ Public Class dlgReplace
 
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
