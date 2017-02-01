@@ -56,6 +56,7 @@ Partial Class dlgSaveAs
         '
         'ucrInputFilePath
         '
+        Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(91, 12)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
