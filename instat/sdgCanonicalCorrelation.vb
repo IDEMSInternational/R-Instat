@@ -18,7 +18,7 @@ Public Class sdgCanonicalCorrelation
     Public bControlsInitialised As Boolean = False
     Public clsRCanCor, clsRCoef As New RFunction
     Public clsGraphFunction As New RFunction
-    Public clsRGraphics As New RSyntax
+    '    Public clsRGraphics As New RSyntax
 
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
