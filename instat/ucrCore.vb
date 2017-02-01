@@ -77,6 +77,8 @@ Public Class ucrCore
 
     Public bUpdateRCodeFromControl As Boolean = False
 
+    Protected lstConditions As New List(Of KeyValuePair(Of Object, List(Of Condition)))
+
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
