@@ -86,10 +86,7 @@ Public Class dlgDuplicateColumns
         ucrSelectorForDuplicateColumn.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsDefaultFunction.AddParameter(ucrInputColumnName.GetParameter)
         clsDefaultFunction.AddParameter("before", "FALSE")
-        clsDefaultFunction.AddParameter("col_data", Chr(34) & "Size" & Chr(34))
-        clsDefaultFunction.AddParameter("adjacent_column", Chr(34) & "Size" & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
@@ -125,7 +122,6 @@ Public Class dlgDuplicateColumns
     End Sub
 
     Private Sub PositionOfDuplicatedCols()
-        ucrReceiverForCopyColumns.UpdateControl()
         If rdoAfter.Checked Then
             If Not ucrReceiverForCopyColumns.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverForCopyColumns.GetVariableNames)
@@ -133,23 +129,24 @@ Public Class dlgDuplicateColumns
                 ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             End If
             ucrBase.clsRsyntax.AddParameter("before", "FALSE")
-            ElseIf rdoBeginning.Checked Then
-                ucrBase.clsRsyntax.AddParameter("before", "TRUE")
-                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
-            ElseIf rdoBefore.Checked Then
-                ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+        ElseIf rdoBeginning.Checked Then
+            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+            ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+        ElseIf rdoBefore.Checked Then
+            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
             If Not ucrReceiverForCopyColumns.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverForCopyColumns.GetVariableNames)
             Else
                 ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             End If
-        Else
+        ElseIf rdoEnd.Checked Then
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrBase.clsRsyntax.AddParameter("before", "FALSE")
         End If
     End Sub
 
     Private Sub ucrPnlColPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColPosition.ControlValueChanged
+        ucrReceiverForCopyColumns.UpdateControl()
         PositionOfDuplicatedCols()
     End Sub
 
