@@ -83,11 +83,10 @@ Public Class dlgDuplicateColumns
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
-        ucrSelectorForDuplicateColumn.Reset()
 
+        ucrSelectorForDuplicateColumn.Reset()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDefaultFunction.AddParameter("before", "FALSE")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
