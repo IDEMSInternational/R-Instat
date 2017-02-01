@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOverallFunction, clsTFunction, clsTDefaultFunction As New RFunction
+    Private clsOverallFunction, clsTFunction As New RFunction
 
     Private Sub dlgTransposeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -36,11 +36,7 @@ Public Class dlgTransposeColumns
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 277
 
-        'WANT:
-        ' Sheet1_transposed <- as.data.frame(x=t(x=InstatDataObject$get_columns_from_data(data_name="Sheet1", col_names="dlgAddComment")))
-        'InstatDataObject$import_data(data_tables = List(Sheet1_transposed = Sheet1_transposed))
-
-        ' checkbox doesn't do anything - not yet implemented.
+        'checkbox not implemented as it wasn't on the old version
 
         ' ucrReceiver
         ucrReceiverColumsToTranspose.SetParameter(New RParameter("x"))
@@ -64,6 +60,8 @@ Public Class dlgTransposeColumns
 
 
     Private Sub SetDefaults()
+        Dim clsTDefaultFunction As New RFunction
+
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataframe.Reset()
 
@@ -75,8 +73,6 @@ Public Class dlgTransposeColumns
         clsTFunction = clsTDefaultFunction.Clone()
         clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTFunction)
 
-
-        TestOkEnabled()
         NewDefaultName()
     End Sub
 
@@ -99,6 +95,7 @@ Public Class dlgTransposeColumns
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTransposeColumns.ControlValueChanged
