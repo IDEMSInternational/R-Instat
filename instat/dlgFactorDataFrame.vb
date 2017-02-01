@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
 
     Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
@@ -28,7 +27,7 @@ Public Class dlgFactorDataFrame
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -64,6 +63,8 @@ Public Class dlgFactorDataFrame
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
         ucrInputFactorNames.ResetText()
@@ -73,7 +74,6 @@ Public Class dlgFactorDataFrame
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
 
         CheckAutoName()
-        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -93,7 +93,8 @@ Public Class dlgFactorDataFrame
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged, ucrSelectorFactorDataFrame.ControlContentsChanged
