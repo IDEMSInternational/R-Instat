@@ -87,24 +87,16 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub SetDefaults()
         ucrSelectorPCA.Reset()
         sdgPrincipalComponentAnalysis.SetDefaults()
-        ComponentsMinimum()
-        TestOKEnabled()
 
         clsDefaultFunction.SetRCommand("PCA")
         clsDefaultFunction.AddParameter("graph", "FALSE") ' not sure what this does?
         clsDefaultFunction.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
+        ComponentsMinimum()
         'clone etc
     End Sub
 
     Private Sub TestOKEnabled()
-        'If (Not ucrReceiverMultiplePCA.IsEmpty()) And ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 Then
-        'If Not ucrReceiverMultiplePCA.IsEmpty() AndAlso ((chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "") OrElse Not chkSaveResult.Checked) Then
-        'ucrBasePCA.OKEnabled(True)
-        'Else
-        ' ucrBasePCA.OKEnabled(False)
-        'End If
-
         If ucrSaveResult.IsComplete AndAlso Not ucrReceiverMultiplePCA.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
@@ -118,7 +110,8 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub ucrBasePCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
