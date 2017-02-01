@@ -30,15 +30,15 @@ Public Class dlgName
         Else
             ReopenDialog()
         End If
-        If bUseSelectedColumn Then
-            Setdefaultcolumn()
-        End If
         If bReset Then
             Setdefaults()
         End If
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        If bUseSelectedColumn Then
+            Setdefaultcolumn()
+        End If
     End Sub
 
     Private Sub ReopenDialog()
