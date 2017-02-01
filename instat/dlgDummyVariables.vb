@@ -45,13 +45,14 @@ Public Class dlgDummyVariables
         Dim clsDefaultFunction As New RFunction
         clsDefaultFunction.SetRCommand("dummy")
         clsDefaultFunction.SetAssignTo(strTemp:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-        'clsDefaultFunction.SetAssignTo("dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy")
+        clsDefaultFunction.SetAssignTo("dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy")
 
 
         ucrSelectorDummyVariable.Focus()
         ucrSelectorDummyVariable.Reset()
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
@@ -68,8 +69,7 @@ Public Class dlgDummyVariables
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverFactor.SetParameter(New RParameter("x"))
-        ucrReceiverFactor.SetParameterIsString()
-
+        ucrReceiverFactor.SetParameterIsRFunction()
 
         'Set RadioBattons : Parameters yet to be set up
         'ucrPnlLevelOmitted.SetParameter(New RParameter(""))
@@ -96,7 +96,6 @@ Public Class dlgDummyVariables
         ucrVariateReceiver.Visible = False
         lblVariate.Visible = False
         grpLevelOmitted.Enabled = False
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
 
     Private Sub VariateVisible()
