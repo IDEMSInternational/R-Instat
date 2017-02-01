@@ -208,10 +208,6 @@ Public Class frmMain
         dlgThreeVariableModelling.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsRegressionLogLinear_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralLogLinear.Click
-        dlglogLinearModels.ShowDialog()
-    End Sub
-
     Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Click
         dlgNon_ParametricTwoWayAnova.ShowDialog()
     End Sub
@@ -241,18 +237,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticEvaporationSite_Click(sender As Object, e As EventArgs) Handles mnuClimaticEvaporationSite.Click
         dlgSite.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticEvaporationPenman_Click(sender As Object, e As EventArgs) Handles mnuClimaticEvaporationPenman.Click
-        dlgPenman.ShowDialog()
-    End Sub
-
-    Private Sub CropCoefficientsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CropCoefficientsToolStripMenuItem.Click
-        dlgCropCoefficients.ShowDialog()
-    End Sub
-
-    Private Sub HeatSumToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticHeatSum.Click
-        dlgHeatSum.ShowDialog()
     End Sub
 
     Private Sub mnuFIleExit_Click(sender As Object, e As EventArgs) Handles mnuFIleExit.Click
@@ -502,14 +486,6 @@ Public Class frmMain
         dlgCombineText.ShowDialog()
     End Sub
 
-    Private Sub mnuManageTextMatch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextMatch.Click
-        dlgMatchText.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageTextDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextDistance.Click
-        dlgDistanceText.ShowDialog()
-    End Sub
-
     Private Sub mnuManageDataFilter_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameFilter.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = ""
@@ -535,14 +511,6 @@ Public Class frmMain
 
     Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
         dlgGeneralANOVA.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsTablesMultipleResponse_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMultipleResponse.Click
-        dlgMultipleResponse.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsSimpleModelsOneSampleSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableSampleSummaryData.Click
-        dlgOneSampleSummaryData.ShowDialog()
     End Sub
 
     Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
@@ -605,10 +573,6 @@ Public Class frmMain
         dlgOneSample.ShowDialog()
     End Sub
 
-    Private Sub mnuModelOtherOneVariableSampleSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableSampleSummaryData.Click
-        dlgOneSampleSummaryData.ShowDialog()
-    End Sub
-
     Private Sub mnuModelOtherOneVariableNonParametric_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableNonParametric.Click
         dlgNon_ParametricOneSampleTests.ShowDialog()
     End Sub
@@ -651,10 +615,6 @@ Public Class frmMain
 
     Private Sub mnuModelOtherGeneralRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
         dlgGeneralRegression.ShowDialog()
-    End Sub
-
-    Private Sub mnuModelOtherGeneralLogLinear_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralLogLinear.Click
-        dlglogLinearModels.ShowDialog()
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
@@ -1151,10 +1111,6 @@ Public Class frmMain
         dlgSunshine.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDescribeGeneral_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeGeneral.Click
-        dlgGeneral.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfall.Click
         dlgPCSARainfall.ShowDialog()
     End Sub
@@ -1169,10 +1125,6 @@ Public Class frmMain
 
     Private Sub mnuCimaticPrepareTransform_Click(sender As Object, e As EventArgs) Handles mnuCimaticPrepareTransform.Click
         dlgTransform.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
-        dlgClimaticSummaries.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticModelsExtremes_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelsExtremes.Click
