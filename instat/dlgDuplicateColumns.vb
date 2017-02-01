@@ -51,7 +51,7 @@ Public Class dlgDuplicateColumns
 
         ' For ucrSelector
         ucrSelectorForDuplicateColumn.SetParameter(New RParameter("data_name"))
-        .ucrSelectorForDuplicateColumnSetParameterIsString()
+        ucrSelectorForDuplicateColumn.SetParameterIsString()
 
         ' For ucrReceiver
         ucrReceiverForCopyColumns.SetParameter(New RParameter("col_data"))
