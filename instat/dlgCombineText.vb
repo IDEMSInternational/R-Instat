@@ -54,8 +54,8 @@ Public Class dlgCombineText
         ucrInputSeparator.SetItems(lstSeparator)
 
         ' ucrReceiver
-        '     ucrReceiverCombineText.SetParameter(New RParameter("columns"))
-        '     ucrReceiverCombineText.SetParameterIs
+        ucrReceiverCombineText.SetParameter(New RParameter("columns"))
+        ucrReceiverCombineText.SetParameterIsRFunction()
         ucrReceiverCombineText.Selector = ucrSelectorForCombineText
         ucrReceiverCombineText.SetMeAsReceiver()
         ucrReceiverCombineText.bUseFilteredData = False
@@ -70,12 +70,17 @@ Public Class dlgCombineText
         iColumnsUsed = 0
     End Sub
 
+    ' got
+    'Combine <- stringr::str_c(X1=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="variable", data_name="data1_stackedNoCarry"), X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value", data_name="data1_stackedNoCarry"), sep=" ", columns=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names=c("variable","value"), data_name="data1_stackedNoCarry"))
+    'InstatDataObject$add_columns_to_data(col_data = Combine, use_col_name_as_prefix = True, data_name = "data1_stackedNoCarry", col_name = "Combine")
+
+
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrSelectorForCombineText.Reset()
 
         clsDefaultFunction.SetRCommand("stringr::str_c")
-        clsDefaultFunction.AddParameter("sep", Chr(34) & "" & Chr(34))
+        clsDefaultFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
         clsDefaultFunction.SetAssignTo(strTemp:="Combine", strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Combine", bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
