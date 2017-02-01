@@ -79,8 +79,7 @@ Public Class dlgOneVariableGraph
         ucrSelectorOneVarGraph.SetParameterIsString()
 
         ucrChkFlip.SetText("Flip Coordinates")
-        ucrChkFlip.SetParameter(New RParameter("coord_flip"))
-        ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFlip.SetParameter(New RParameter("coord_flip"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkFlip.SetRDefault("FALSE")
 
         ucrSaveGraph.SetPrefix("one_var")

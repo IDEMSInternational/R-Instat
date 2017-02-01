@@ -21,7 +21,7 @@
     End Sub
 
     Public Sub SetParameterValues(strParamName As String, strParamValues As String)
-        SetParameterValues(strParameterName, New List(Of String)({strParamValues}))
+        SetParameterValues(strParamName, New List(Of String)({strParamValues}))
     End Sub
 
     Public Sub SetFunctionName(strFuncName As String)
