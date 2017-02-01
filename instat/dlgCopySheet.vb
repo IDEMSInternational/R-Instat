@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgCopySheet
-    Private clsDefaultFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -47,6 +46,8 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrNewDataFrameName.Reset()
         ucrDataFrameCopySheets.Reset()
         CheckAutoName()
@@ -54,8 +55,6 @@ Public Class dlgCopySheet
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-
-        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -66,6 +65,7 @@ Public Class dlgCopySheet
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
