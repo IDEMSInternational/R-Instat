@@ -17,20 +17,22 @@ Imports instat
 Imports instat.Translations
 Public Class dlgAppend
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private clsBindRows, clsDefaultBindRows As New RFunction
 
     Private Sub dlgAppend_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 465
 
@@ -41,8 +43,6 @@ Public Class dlgAppend
         ucrReceiverAppendDataframe.Selector = ucrSelectorDataframes
         ucrReceiverAppendDataframe.SetMeAsReceiver()
         ucrReceiverAppendDataframe.SetItemType("dataframe")
-
-        'clsRFunctionParameter:=ucrReceiverAppendDataframe.GetVariables, bIncludeArgumentName:=False) 
 
         ' ucrSave
         ucrSaveGraph.SetIsTextBox()
@@ -59,19 +59,24 @@ Public Class dlgAppend
         ucrInputIDColName.SetLabel(lblIDColName)
 
 
-        'Default Function
-        clsDefaultBindRows.SetRCommand("bind_rows")
-        clsDefaultBindRows.AddParameter(".id", Chr(34) & "id" & Chr(34))
-        clsDefaultBindRows.SetAssignTo(strTemp:="Append", strTempDataframe:="Append")
     End Sub
 
     Private Sub SetDefaults()
-        clsBindRows = clsDefaultBindRows.Clone()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsBindRows)
         ucrSelectorDataframes.Reset()
         ucrSaveGraph.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+
+        clsDefaultBindRows.SetRCommand("bind_rows")
+        clsDefaultBindRows.AddParameter(".id", Chr(34) & "id" & Chr(34))
+        clsDefaultBindRows.SetAssignTo(strTemp:="Append", strTempDataframe:="Append")
+
+        clsBindRows = clsDefaultBindRows.Clone()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBindRows)
+
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -91,6 +96,7 @@ Public Class dlgAppend
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub ucrReceiverAppendDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAppendDataframe.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkIncludeIDColumn.ControlContentsChanged, ucrInputIDColName.ControlContentsChanged
