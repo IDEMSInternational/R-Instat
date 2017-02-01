@@ -19,6 +19,7 @@ Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsOverallFunction, clsTFunction, clsTDefaultFunction As New RFunction
+
     Private Sub dlgTransposeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -63,6 +64,9 @@ Public Class dlgTransposeColumns
 
 
     Private Sub SetDefaults()
+        ucrSelectorTransposeColumns.Reset()
+        ucrNewDataframe.Reset()
+
         clsOverallFunction.SetRCommand("as.data.frame")
         clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
         clsTDefaultFunction.SetRCommand("t")
@@ -71,8 +75,7 @@ Public Class dlgTransposeColumns
         clsTFunction = clsTDefaultFunction.Clone()
         clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTFunction)
 
-        ucrSelectorTransposeColumns.Reset()
-        ucrNewDataframe.Reset()
+
         TestOkEnabled()
         NewDefaultName()
     End Sub
