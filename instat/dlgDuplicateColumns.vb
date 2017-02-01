@@ -18,23 +18,27 @@ Imports instat
 Imports instat.Translations
 Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        If bUseSelectedColumn Then
-            SetDefaultColumn()
+        If bReset Then
+            SetDefaults()
         End If
-        'checks OkEnabled
-        TestOKEnabled()
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
 
     'Month <- InstatDataObject$get_columns_from_data(use_current_filter=FALSE,
     ''''' 'col_name="Month", data_name="Damango")
@@ -77,17 +81,17 @@ Public Class dlgDuplicateColumns
         ucrInputColumnName.SetDefaultTypeAsColumn()
         ucrInputColumnName.SetValidationTypeAsRVariable()
 
-        'default RFunction
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsDefaultFunction.AddParameter(ucrInputColumnName.GetParameter)
-        clsDefaultFunction.AddParameter("before", "FALSE")
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorForDuplicateColumn.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        TestOKEnabled()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsDefaultFunction.AddParameter(ucrInputColumnName.GetParameter)
+        clsDefaultFunction.AddParameter("before", "FALSE")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -104,6 +108,7 @@ Public Class dlgDuplicateColumns
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
