@@ -39,6 +39,13 @@ Public Class dlgUnstack
     End Sub
 
 
+
+    ' for factor = month, other col = dayy
+    'Damango_temp <- InstatDataObject$get_data_frame(data_name="Damango")
+    'Unstack <- dcast(value.var="Day", , data=Damango_temp, "Month")
+    'InstatDataObject$import_data(data_tables = List(Unstack = Unstack))
+
+
     Private Sub InitialiseDialog()
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForunstack
         ucrBase.iHelpTopicID = 58
