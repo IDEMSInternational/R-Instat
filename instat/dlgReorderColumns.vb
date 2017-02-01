@@ -39,11 +39,6 @@ Public Class dlgReorderColumns
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        TestOkEnabled()
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub initialiseDialog()
@@ -59,8 +54,12 @@ Public Class dlgReorderColumns
         'ucrReorderColumns.SetParameterIsString()
     End Sub
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub ReopenDialog()
-        TestOkEnabled()
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
