@@ -16,19 +16,24 @@
 Imports instat.Translations
 Public Class dlgCombineText
     Private bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
     Private iColumnsUsed As Integer
 
     Private Sub dlgCombineText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ReopenDialog()
@@ -63,18 +68,17 @@ Public Class dlgCombineText
         ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
         iColumnsUsed = 0
-
-        ' default functions
-        clsDefaultFunction.SetRCommand("stringr::str_c")
-        clsDefaultFunction.AddParameter("sep", Chr(34) & "" & Chr(34))
-        clsDefaultFunction.SetAssignTo(strTemp:="Combine", strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Combine", bAssignToIsPrefix:=True)
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorForCombineText.Reset()
+
+        clsDefaultFunction.SetRCommand("stringr::str_c")
+        clsDefaultFunction.AddParameter("sep", Chr(34) & "" & Chr(34))
+        clsDefaultFunction.SetAssignTo(strTemp:="Combine", strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Combine", bAssignToIsPrefix:=True)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -87,6 +91,7 @@ Public Class dlgCombineText
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
