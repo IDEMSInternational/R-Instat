@@ -45,17 +45,37 @@ Public Class dlgUnstack
     'Unstack <- dcast(value.var="Day", , data=Damango_temp, "Month")
     'InstatDataObject$import_data(data_tables = List(Unstack = Unstack))
 
+    'wnat
+    'DamangoShort_temp <- InstatDataObject$get_data_frame(data_name="DamangoShort")
+    'DamangoShort_unstacked <- dcast(value.var="Day", formula=Year ~ Month, data=DamangoShort_temp)
+    'InstatDataObject$import_data(data_tables = List(DamangoShort_unstacked = DamangoShort_unstacked))
+
+    ' run formula line!
+    ' formula = FACTOR ~ COLUMN
 
     Private Sub InitialiseDialog()
-        ucrColumnToUnstackReceiver.Selector = ucrSelectorForunstack
         ucrBase.iHelpTopicID = 58
-        ucrIDColumns.Selector = ucrSelectorForunstack
-        clsFormula.SetOperation("~")
-        clsFormula.bBrackets = False
+
         clsIDColumns.SetOperation("+")
         clsIDColumns.bForceIncludeOperation = False
-        clsFormula.AddParameter(iPosition:=0, clsROperatorParameter:=clsIDColumns)
 
+        ' 
+        ' formula = FACTOR ~ COLUMN + ...
+        ' ucrbase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsFormula)
+        clsFormula.SetParameter(New RParameter("formula"))
+        clsFormula.SetOperation("~")
+        clsFormula.bBrackets = False
+        clsFormula.AddParameter(0, strParameterValue:=ucrFactorToUnstackReceiver.GetVariableNames(False))
+        clsFormula.AddParameter(1, clsROperatorParameter:=clsIDColumns)
+
+        clsIDColumns.SetOperation("+")
+
+
+        'ucrID
+        ucrIDColumns.Selector = ucrSelectorForunstack
+
+        'ucrColumn
+        ucrColumnToUnstackReceiver.Selector = ucrSelectorForunstack
 
         'ucrFactor
         ucrFactorToUnstackReceiver.SetParameter(New RParameter(""))
@@ -64,13 +84,12 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrFactorToUnstackReceiver.SetDataType("factor")
         'clsFormula = ~
-        'clsFormula.AddParameter(strParameterValue:=ucrFactorToUnstackReceiver.GetVariableNames(False))
 
         'ucrSelector
+        ' I did ucrBase.clsRsyntax("data", dataname)
+        ' now I set the parameter for ucrSelectorForUnstack here
         ucrSelectorForunstack.SetParameter(New RParameter("data", 0))
         ucrSelectorForunstack.SetParameterIsString()
-
-
 
         'ucrSave
         ucrNewDFName.SetIsTextBox()
@@ -80,7 +99,6 @@ Public Class dlgUnstack
         ' is the below line correct? Shouldn't have this and my assign to line, right?
         ucrNewDFName.SetPrefix(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
 
-
         'chkbox
         ucrChkDropMissingCombinations.SetText("Drop Missing Combinations")
         ucrChkDropMissingCombinations.SetParameter(New RParameter("drop"))
@@ -88,8 +106,6 @@ Public Class dlgUnstack
         ucrChkDropMissingCombinations.SetRDefault("TRUE")
 
 
-        ' Defaults
-        '''' ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsFormula)
     End Sub
 
     Private Sub SetDefaults()
