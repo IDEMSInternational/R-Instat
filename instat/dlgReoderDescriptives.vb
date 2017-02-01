@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class dlgReoderDescriptives
     Public bFirstLoad As Boolean = True
     Public bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+
     Private Sub dlgReoderDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -26,7 +26,7 @@ Public Class dlgReoderDescriptives
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -44,9 +44,11 @@ Public Class dlgReoderDescriptives
         ucrReorderObjects.setDataType("object")
         ucrReorderObjects.setDataframes(ucrDataFrameReorder)
     End Sub
+
     Private Sub ReopenDialog()
 
     End Sub
+
     Private Sub TestOKEnabled()
         If Not ucrReorderObjects.isEmpty Then
             ucrBase.OKEnabled(True)
@@ -56,15 +58,17 @@ Public Class dlgReoderDescriptives
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        ucrDataFrameReorder.Reset()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrDataFrameReorder.Reset()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeforControls(bReset)
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
