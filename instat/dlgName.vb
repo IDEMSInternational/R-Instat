@@ -24,10 +24,8 @@ Public Class dlgName
     Dim strSelectedDataFrame As String = ""
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             Initialisedialog()
-            Setdefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -35,7 +33,12 @@ Public Class dlgName
         If bUseSelectedColumn Then
             Setdefaultcolumn()
         End If
-        TestOKEnabled()
+        If bReset Then
+            Setdefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()
@@ -80,7 +83,6 @@ Public Class dlgName
         ucrInputNewName.Reset()
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
-        SetRCodeForControls(True)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
