@@ -22,34 +22,21 @@ Partial Class dlgPolynomials
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.rdoSimple = New System.Windows.Forms.RadioButton()
         Me.lblDegree = New System.Windows.Forms.Label()
-        Me.grpType = New System.Windows.Forms.GroupBox()
-        Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
-        Me.rdoCentered = New System.Windows.Forms.RadioButton()
         Me.lblSelected = New System.Windows.Forms.Label()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.ucrInputPolynomial = New instat.ucrInputComboBox()
         Me.ucrSelectorForPolynomial = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverPolynomial = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.nudDegree = New System.Windows.Forms.NumericUpDown()
-        Me.grpType.SuspendLayout()
+        Me.grpType = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlOutput = New instat.UcrPanel()
+        Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
+        Me.rdoSimple = New System.Windows.Forms.RadioButton()
+        Me.rdoCentered = New System.Windows.Forms.RadioButton()
+        Me.ucrSavePoly = New instat.ucrSave()
         CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpType.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'rdoSimple
-        '
-        Me.rdoSimple.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdoSimple.AutoSize = True
-        Me.rdoSimple.Location = New System.Drawing.Point(11, 19)
-        Me.rdoSimple.Name = "rdoSimple"
-        Me.rdoSimple.Size = New System.Drawing.Size(56, 17)
-        Me.rdoSimple.TabIndex = 0
-        Me.rdoSimple.Tag = "Simple"
-        Me.rdoSimple.Text = "Simple"
-        Me.rdoSimple.UseVisualStyleBackColor = True
         '
         'lblDegree
         '
@@ -61,45 +48,6 @@ Partial Class dlgPolynomials
         Me.lblDegree.Tag = "Degree"
         Me.lblDegree.Text = "Degree:"
         '
-        'grpType
-        '
-        Me.grpType.Controls.Add(Me.rdoOrthogonal)
-        Me.grpType.Controls.Add(Me.rdoSimple)
-        Me.grpType.Controls.Add(Me.rdoCentered)
-        Me.grpType.Location = New System.Drawing.Point(258, 100)
-        Me.grpType.Name = "grpType"
-        Me.grpType.Size = New System.Drawing.Size(120, 92)
-        Me.grpType.TabIndex = 5
-        Me.grpType.TabStop = False
-        Me.grpType.Tag = "Type"
-        Me.grpType.Text = "Type"
-        '
-        'rdoOrthogonal
-        '
-        Me.rdoOrthogonal.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdoOrthogonal.AutoSize = True
-        Me.rdoOrthogonal.Location = New System.Drawing.Point(11, 69)
-        Me.rdoOrthogonal.Name = "rdoOrthogonal"
-        Me.rdoOrthogonal.Size = New System.Drawing.Size(77, 17)
-        Me.rdoOrthogonal.TabIndex = 2
-        Me.rdoOrthogonal.Tag = "Orthogonal"
-        Me.rdoOrthogonal.Text = "Orthogonal"
-        Me.rdoOrthogonal.UseVisualStyleBackColor = True
-        '
-        'rdoCentered
-        '
-        Me.rdoCentered.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdoCentered.AutoSize = True
-        Me.rdoCentered.Location = New System.Drawing.Point(11, 44)
-        Me.rdoCentered.Name = "rdoCentered"
-        Me.rdoCentered.Size = New System.Drawing.Size(68, 17)
-        Me.rdoCentered.TabIndex = 1
-        Me.rdoCentered.Tag = "Centered"
-        Me.rdoCentered.Text = "Centered"
-        Me.rdoCentered.UseVisualStyleBackColor = True
-        '
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
@@ -109,24 +57,6 @@ Partial Class dlgPolynomials
         Me.lblSelected.TabIndex = 1
         Me.lblSelected.Tag = "Selected"
         Me.lblSelected.Text = "Selected Variable:"
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 207)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 6
-        Me.lblNewColumnName.Tag = "New_Column_Name:"
-        Me.lblNewColumnName.Text = "New Column Name:"
-        '
-        'ucrInputPolynomial
-        '
-        Me.ucrInputPolynomial.IsReadOnly = False
-        Me.ucrInputPolynomial.Location = New System.Drawing.Point(113, 204)
-        Me.ucrInputPolynomial.Name = "ucrInputPolynomial"
-        Me.ucrInputPolynomial.Size = New System.Drawing.Size(145, 21)
-        Me.ucrInputPolynomial.TabIndex = 7
         '
         'ucrSelectorForPolynomial
         '
@@ -140,6 +70,7 @@ Partial Class dlgPolynomials
         '
         'ucrReceiverPolynomial
         '
+        Me.ucrReceiverPolynomial.frmParent = Me
         Me.ucrReceiverPolynomial.Location = New System.Drawing.Point(258, 49)
         Me.ucrReceiverPolynomial.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPolynomial.Name = "ucrReceiverPolynomial"
@@ -149,7 +80,7 @@ Partial Class dlgPolynomials
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
@@ -161,19 +92,84 @@ Partial Class dlgPolynomials
         Me.nudDegree.Size = New System.Drawing.Size(49, 20)
         Me.nudDegree.TabIndex = 9
         '
+        'grpType
+        '
+        Me.grpType.Controls.Add(Me.rdoOrthogonal)
+        Me.grpType.Controls.Add(Me.rdoSimple)
+        Me.grpType.Controls.Add(Me.rdoCentered)
+        Me.grpType.Controls.Add(Me.ucrPnlOutput)
+        Me.grpType.Location = New System.Drawing.Point(255, 109)
+        Me.grpType.Name = "grpType"
+        Me.grpType.Size = New System.Drawing.Size(123, 106)
+        Me.grpType.TabIndex = 14
+        Me.grpType.TabStop = False
+        Me.grpType.Text = "Type"
+        '
+        'ucrPnlOutput
+        '
+        Me.ucrPnlOutput.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        Me.ucrPnlOutput.Size = New System.Drawing.Size(114, 84)
+        Me.ucrPnlOutput.TabIndex = 0
+        '
+        'rdoOrthogonal
+        '
+        Me.rdoOrthogonal.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdoOrthogonal.AutoSize = True
+        Me.rdoOrthogonal.Location = New System.Drawing.Point(19, 73)
+        Me.rdoOrthogonal.Name = "rdoOrthogonal"
+        Me.rdoOrthogonal.Size = New System.Drawing.Size(77, 17)
+        Me.rdoOrthogonal.TabIndex = 5
+        Me.rdoOrthogonal.Tag = "Orthogonal"
+        Me.rdoOrthogonal.Text = "Orthogonal"
+        Me.rdoOrthogonal.UseVisualStyleBackColor = True
+        '
+        'rdoSimple
+        '
+        Me.rdoSimple.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdoSimple.AutoSize = True
+        Me.rdoSimple.Location = New System.Drawing.Point(19, 23)
+        Me.rdoSimple.Name = "rdoSimple"
+        Me.rdoSimple.Size = New System.Drawing.Size(56, 17)
+        Me.rdoSimple.TabIndex = 3
+        Me.rdoSimple.Tag = "Simple"
+        Me.rdoSimple.Text = "Simple"
+        Me.rdoSimple.UseVisualStyleBackColor = True
+        '
+        'rdoCentered
+        '
+        Me.rdoCentered.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdoCentered.AutoSize = True
+        Me.rdoCentered.Location = New System.Drawing.Point(19, 48)
+        Me.rdoCentered.Name = "rdoCentered"
+        Me.rdoCentered.Size = New System.Drawing.Size(68, 17)
+        Me.rdoCentered.TabIndex = 4
+        Me.rdoCentered.Tag = "Centered"
+        Me.rdoCentered.Text = "Centered"
+        Me.rdoCentered.UseVisualStyleBackColor = True
+        '
+        'ucrSavePoly
+        '
+        Me.ucrSavePoly.Location = New System.Drawing.Point(9, 228)
+        Me.ucrSavePoly.Name = "ucrSavePoly"
+        Me.ucrSavePoly.Size = New System.Drawing.Size(294, 24)
+        Me.ucrSavePoly.TabIndex = 15
+        '
         'dlgPolynomials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 289)
+        Me.ClientSize = New System.Drawing.Size(433, 331)
+        Me.Controls.Add(Me.ucrSavePoly)
+        Me.Controls.Add(Me.grpType)
         Me.Controls.Add(Me.nudDegree)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputPolynomial)
         Me.Controls.Add(Me.ucrSelectorForPolynomial)
         Me.Controls.Add(Me.ucrReceiverPolynomial)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpType)
         Me.Controls.Add(Me.lblDegree)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -182,23 +178,23 @@ Partial Class dlgPolynomials
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Polynomials"
         Me.Text = "Polynomials"
+        CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpType.ResumeLayout(False)
         Me.grpType.PerformLayout()
-        CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents rdoSimple As RadioButton
     Friend WithEvents lblDegree As Label
-    Friend WithEvents grpType As GroupBox
-    Friend WithEvents rdoOrthogonal As RadioButton
-    Friend WithEvents rdoCentered As RadioButton
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrReceiverPolynomial As ucrReceiverSingle
     Friend WithEvents ucrSelectorForPolynomial As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrInputPolynomial As ucrInputComboBox
-    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents nudDegree As NumericUpDown
+    Friend WithEvents grpType As GroupBox
+    Friend WithEvents rdoOrthogonal As RadioButton
+    Friend WithEvents rdoSimple As RadioButton
+    Friend WithEvents rdoCentered As RadioButton
+    Friend WithEvents ucrPnlOutput As UcrPanel
+    Friend WithEvents ucrSavePoly As ucrSave
 End Class

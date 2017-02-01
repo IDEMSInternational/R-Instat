@@ -48,7 +48,8 @@ Public Class dlgPolynomials
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrSelectorForPolynomial.Reset()
         ucrSelectorForPolynomial.Focus()
-
+        clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsCentredOptionFunc)
+        ucrReceiverPolynomial.SetRCode(clsCentredOptionFunc)
 
         ucrInputPolynomial.SetName("Poly")
         rdoSimple.Checked = True
@@ -79,14 +80,14 @@ Public Class dlgPolynomials
         ucrReceiverPolynomial.bUseFilteredData = False
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
-        ucrReceiverPolynomial.SetParameter(New RParameter("x"))
-        ucrReceiverPolynomial.SetParameterIsString()
+        'ucrReceiverPolynomial.SetParameter(New RParameter("x"))
+        'ucrReceiverPolynomial.SetParameterIsString()
 
 
         ucrInputPolynomial.SetValidationTypeAsRVariable()
     End Sub
 
-    Private Sub ucrInputPolynomial_NameChanged() Handles ucrInputPolynomial.NameChanged
+    Private Sub ucrInputPolynomial_NameChanged()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPolynomial.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPolynomial.GetText, bAssignToIsPrefix:=True)
         TestOKEnabled()
     End Sub
@@ -101,7 +102,7 @@ Public Class dlgPolynomials
         TestOKEnabled()
     End Sub
 
-    Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSimple.CheckedChanged, rdoCentered.CheckedChanged, rdoOrthogonal.CheckedChanged
+    Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs)
         XParameter()
     End Sub
 
