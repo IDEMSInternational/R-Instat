@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class dlgName
     Dim bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private clsDefaultRFunction As New RFunction
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
@@ -39,7 +40,7 @@ Public Class dlgName
 
     Private Sub ReopenDialog()
         ucrSelectVariables.Reset()
-        ucrInputNewName.ResetText()
+        ucrInputNewName.Reset()
         DefaultNewName()
     End Sub
 
@@ -63,21 +64,28 @@ Public Class dlgName
         ucrSelectVariables.SetParameter(New RParameter("data_name"))
         ucrSelectVariables.SetParameterIsString()
         ucrBase.iHelpTopicID = 33
-
         DefaultNewName()
         ucrInputNewName.SetParameter(New RParameter("new_val"))
         ucrInputNewName.SetValidationTypeAsRVariable()
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
     End Sub
+
     Private Sub DefaultNewName()
-        ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+        If Not ucrInputNewName.bUserTyped Then
+            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+        End If
     End Sub
 
     Public Sub Setdefaults()
         ucrSelectVariables.Reset()
         ucrInputNewName.ResetText()
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        SetRCodeForControls(True)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
     End Sub
 
     Public Sub Setcurrentcolumn(strcolumn As String, strdataframe As String)
@@ -94,7 +102,7 @@ Public Class dlgName
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         Setdefaults()
-        TestOKEnabled()
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub ucrInputNewName_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged
