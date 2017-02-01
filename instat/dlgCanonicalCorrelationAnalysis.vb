@@ -13,33 +13,72 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgCanonicalCorrelationAnalysis
     Public strModelName As String = ""
     Public bFirstLoad As Boolean = True
+    Private bResetSubdialog As Boolean = False
+    Private bReset As Boolean = True
+
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
 
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    ' want - CCA1 <- cancor(x=InstatDataObject$get_columns_from_data(col_names=c("Day","Rain"), data_name="DamangoShort"), y=InstatDataObject$get_columns_from_data(col_names=c("Year","Month"), data_name="DamangoShort"))
+    'InstatDataObject$add_model(data_name = "DamangoShort", model = CCA1, model_name = "CCA1")
+    'InstatDataObject$get_models(model_name = "CCA1", data_name = "DamangoShort")
+
+    'InstatDataObject$get_from_model(value1 = "cancor", model_name = "CCA1", data_name = "DamangoShort")
+
+    'InstatDataObject$get_from_model(value1 = "coef", model_name = "CCA1", data_name = "DamangoShort")
+
+
+    ' got - last_CCA <- cancor(y=InstatDataObject$get_columns_from_data(col_names=c("Year","Month"), data_name="Damango"), x=InstatDataObject$get_columns_from_data(col_names=c("Day","Rain"), data_name="Damango"))
+    'InstatDataObject$add_model(data_name = "Damango", model = last_CCA, model_name = "last_CCA")
+    'InstatDataObject$get_models(model_name = "last_CCA", data_name = "Damango")
+
     Private Sub InitialiseDialog()
-        ucrBaseCCA.clsRsyntax.SetFunction("cancor")
-        ucrBaseCCA.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.iHelpTopicID = 423
+
+        ' Y Variable Selector
+        ucrReceiverYvariables.SetParameter(New RParameter("y", 0))
+        ucrReceiverYvariables.SetParameterIsRFunction()
         ucrReceiverYvariables.Selector = ucrSelectorCCA
-        ucrReceiverXvariables.Selector = ucrSelectorCCA
-        ucrBaseCCA.iHelpTopicID = 423
+        ucrReceiverYvariables.SetMeAsReceiver() ' is this still the receiver after resetting?
         ucrReceiverYvariables.SetDataType("numeric")
+
+        ' X Variable Selector
+        ucrReceiverXvariables.SetParameter(New RParameter("x", 1))
+        ucrReceiverXvariables.SetParameterIsRFunction()
+        ucrReceiverXvariables.Selector = ucrSelectorCCA
+        ucrReceiverXvariables.SetMeAsReceiver() ' I want the Y var selector to be the default setting uponreset
         ucrReceiverXvariables.SetDataType("numeric")
-        ucrResultName.SetDefaultTypeAsModel()
-        ucrResultName.SetPrefix("CCA")
-        ucrResultName.SetValidationTypeAsRVariable()
+
+        'ucrSaveResult
+        ucrSaveResult.SetCheckBoxText("Save Result")
+        ucrSaveResult.SetSaveTypeAsModel()
+        ucrSaveResult.SetPrefix("CCA")
+        ucrSaveResult.SetIsComboBox()
+        ucrSaveResult.SetDataFrameSelector(ucrSelectorCCA.ucrAvailableDataFrames)
+        ucrSaveResult.SetAssignToIfUncheckedValue("last_CCA")
+
+        'ucrBase.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText(), strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
     End Sub
 
@@ -48,77 +87,42 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorCCA.Reset()
-        ucrReceiverYvariables.SetMeAsReceiver()
-        ucrSelectorCCA.Focus()
-        chkSaveResult.Checked = True
-        ucrResultName.Visible = True
-        sdgCanonicalCorrelation.SetDefaults()
-        TestOKEnabled()
+        ucrSaveResult.Reset()
+
+        'Define the default RFunction
+        clsDefaultFunction.SetRCommand("cancor")
+        clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        bResetSubdialog = True
     End Sub
 
     Private Sub TestOKEnabled()
-        If chkSaveResult.Checked AndAlso ucrResultName.IsEmpty Then
-            ucrBaseCCA.OKEnabled(False)
-        ElseIf (Not ucrReceiverYvariables.IsEmpty()) And (Not ucrReceiverXvariables.IsEmpty()) Then
-            ucrBaseCCA.OKEnabled(True)
-            AssignName()
+        If ucrSaveResult.IsComplete() AndAlso (Not ucrReceiverYvariables.IsEmpty()) And (Not ucrReceiverXvariables.IsEmpty()) Then
+            ucrBase.OKEnabled(True)
         Else
-            ucrBaseCCA.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrSelectorCCA_DataFrameChanged() Handles ucrSelectorCCA.DataFrameChanged
-        AssignName()
-    End Sub
-
-    Private Sub ucrBaseCCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseCCA.ClickReset
+    Private Sub ucrBaseCCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Public Sub ucrreceiverxvariables_selectionchanged() Handles ucrReceiverXvariables.SelectionChanged
+        SetRCodeforControls(True)
         TestOKEnabled()
-        ucrBaseCCA.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverXvariables.GetVariables())
-    End Sub
-
-    Public Sub ucrReceiverYvariables_SelectionChanged() Handles ucrReceiverYvariables.SelectionChanged
-        TestOKEnabled()
-        ucrBaseCCA.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverYvariables.GetVariables())
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
         sdgCanonicalCorrelation.ShowDialog()
     End Sub
 
-    Private Sub ucrResultName_NameChanged() Handles ucrResultName.NameChanged
-        AssignName()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub chkSaveResult_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResult.CheckedChanged
-        If chkSaveResult.Checked Then
-            ucrResultName.Visible = True
-        Else
-            ucrResultName.Visible = False
-        End If
-        AssignName()
-        TestOKEnabled()
-    End Sub
-
-    Public Sub AssignName()
-        If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
-            ucrBaseCCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText(), strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-            ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            strModelName = ucrResultName.GetText()
-        Else
-            ucrBaseCCA.clsRsyntax.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-            ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            strModelName = "last_CCA"
-        End If
-    End Sub
-
-    Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBaseCCA.ClickOk
+    Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         sdgCanonicalCorrelation.CCAOptions()
     End Sub
 
+    Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class
