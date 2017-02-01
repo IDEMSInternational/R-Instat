@@ -17,29 +17,43 @@
 Imports instat.Translations
 Public Class dlgUseGraph
     Private bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
-    Public clsLeftCommand As New RFunction
+    Private bReset As Boolean = True
+    'Public clsLeftCommand As New RFunction
+
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReOpenDialog()
         End If
+
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+
         TestOkEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(breset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, breset)
+    End Sub
+
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
+
         ucrGraphReceiver.SetMeAsReceiver()
         ucrGraphsSelector.Reset()
         ucrSaveGraph.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
 
         'Disabling this button temporarily before we get to subdialog for graphics sorted 
         cmdPlotOptions.Enabled = False
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
@@ -66,13 +80,7 @@ Public Class dlgUseGraph
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
     End Sub
-    Private Sub ReOpenDialog()
-
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
