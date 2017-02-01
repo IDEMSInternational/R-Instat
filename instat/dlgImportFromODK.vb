@@ -16,24 +16,44 @@ Imports RDotNet
 
 Public Class dlgImportFromODK
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private clsGetFormsFunction As New RFunction
 
     Private Sub dlgImportFromODK_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        TestOKEnabled()
+
+        If bReset Then
+            SetDefaults()
+        End If
+
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 468
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
         clsGetFormsFunction.SetRCommand("get_odk_form_names")
+
+
+        ucrPnlPlatform.SetParameter(New RParameter("platform"))
+        ucrPnlPlatform.AddRadioButton(rdoKobo, Chr(34) & "kobo" & Chr(34))
+        ucrPnlPlatform.AddRadioButton(rdoOna, Chr(34) & "ona" & Chr(34))
+        ucrPnlPlatform.SetRDefault(Chr(34) & "kobo" & Chr(34))
+
+        ucrInputChooseForm.SetParameter(New RParameter("form_name"))
+        ucrInputUsername.SetParameter(New RParameter("username"))
+        ucrInputPassword.SetParameter(New RParameter("password"))
+        ucrChkViewPassword.SetText("View Password")
+
     End Sub
 
     Private Sub TestOKEnabled()
@@ -45,69 +65,57 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub SetDefaults()
-        rdoKobo.Checked = True
+        Dim clsDefaultRFunction As New RFunction
+
         ucrInputUsername.SetName("")
         ucrInputPassword.SetName("")
         ucrInputChooseForm.Reset()
-        chkViewPassword.Checked = False
         EnableCommandButton()
         ucrInputPassword.txtInput.UseSystemPasswordChar = True
-    End Sub
 
-    Private Sub ReopenDialog()
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+        TestOKEnabled()
 
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub rdoKobo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKobo.CheckedChanged, rdoOna.CheckedChanged
-        If rdoOna.Checked Then
-            ucrBase.clsRsyntax.AddParameter("platform", Chr(34) & "ona" & Chr(34))
-            clsGetFormsFunction.AddParameter("platform", Chr(34) & "ona" & Chr(34))
-        ElseIf rdoKobo.Checked Then
-            ucrBase.clsRsyntax.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
-            clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("platform")
-            clsGetFormsFunction.RemoveParameterByName("platform")
-        End If
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputUsername_NameChanged() Handles ucrInputUsername.NameChanged
-        If ucrInputUsername.IsEmpty() Then
-            ucrBase.clsRsyntax.RemoveParameter("username")
-            clsGetFormsFunction.RemoveParameterByName("username")
-        Else
-            ucrBase.clsRsyntax.AddParameter("username", Chr(34) & ucrInputUsername.GetText & Chr(34))
-            clsGetFormsFunction.AddParameter("username", Chr(34) & ucrInputUsername.GetText & Chr(34))
-        End If
+        'If ucrInputUsername.IsEmpty() Then
+        '    ucrBase.clsRsyntax.RemoveParameter("username")
+        '    clsGetFormsFunction.RemoveParameterByName("username")
+        'Else
+        '    ucrBase.clsRsyntax.AddParameter("username", Chr(34) & ucrInputUsername.GetText & Chr(34))
+        '    clsGetFormsFunction.AddParameter("username", Chr(34) & ucrInputUsername.GetText & Chr(34))
+        'End If
+        'TestOKEnabled()
+    End Sub
+    Private Sub AllControls_ContentsChnaged() Handles ucrChkViewPassword.ControlContentsChanged, ucrInputChooseForm.ControlContentsChanged, ucrInputPassword.ControlContentsChanged, ucrPnlPlatform.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputPassword_NameChanged() Handles ucrInputPassword.NameChanged
+    Private Sub ucrInputPassword_NameChanged() Handles ucrInputPassword.ControlContentsChanged
         useSystemePassword()
-        If ucrInputPassword.IsEmpty() Then
-            ucrBase.clsRsyntax.RemoveParameter("password")
-            clsGetFormsFunction.RemoveParameterByName("password")
-        Else
-            ucrBase.clsRsyntax.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
-            clsGetFormsFunction.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
-        End If
+        'If ucrInputPassword.IsEmpty() Then
+        '    ucrBase.clsRsyntax.RemoveParameter("password")
+        '    clsGetFormsFunction.RemoveParameterByName("password")
+        'Else
+        '    ucrBase.clsRsyntax.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
+        '    clsGetFormsFunction.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
+        'End If
 
-        TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputChooseForm_NameChanged() Handles ucrInputChooseForm.NameChanged
-        If ucrInputChooseForm.IsEmpty() Then
-            ucrBase.clsRsyntax.RemoveParameter("form_name")
-        Else
-            ucrBase.clsRsyntax.AddParameter("form_name", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
-        End If
-        TestOKEnabled()
+    Private Sub ucrInputChooseForm_NameChanged() Handles ucrInputChooseForm.ControlContentsChanged
+        'If ucrInputChooseForm.IsEmpty() Then
+        '    ucrBase.clsRsyntax.RemoveParameter("form_name")
+        'Else
+        '    ucrBase.clsRsyntax.AddParameter("form_name", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
+        'End If
+        'TestOKEnabled()
     End Sub
 
     Private Sub cmdFindForms_click(sender As Object, e As EventArgs) Handles cmdFindForms.Click
@@ -144,12 +152,12 @@ Public Class dlgImportFromODK
         EnableCommandButton()
     End Sub
 
-    Private Sub chkViewPassword_CheckedChanged(sender As Object, e As EventArgs) Handles chkViewPassword.CheckedChanged
+    Private Sub chkViewPassword_CheckedChanged() Handles ucrChkViewPassword.ControlContentsChanged
         useSystemePassword()
     End Sub
 
     Private Sub useSystemePassword()
-        If chkViewPassword.Checked Then
+        If ucrChkViewPassword.Checked Then
             ucrInputPassword.txtInput.UseSystemPasswordChar = False
         Else
             ucrInputPassword.txtInput.UseSystemPasswordChar = True
