@@ -52,7 +52,7 @@ Public Class dlgName
                 ucrBase.OKEnabled(False)
             End If
         Else
-                ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -77,7 +77,7 @@ Public Class dlgName
 
     Public Sub Setdefaults()
         ucrSelectVariables.Reset()
-        ucrInputNewName.ResetText()
+        ucrInputNewName.Reset()
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
         SetRCodeForControls(True)
