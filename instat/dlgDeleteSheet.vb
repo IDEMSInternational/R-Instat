@@ -42,7 +42,7 @@ Public Class dlgDeleteSheet
     End Sub
 
     Private Sub ReopenDialog()
-        SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
