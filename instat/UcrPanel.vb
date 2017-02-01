@@ -64,40 +64,6 @@ Public Class UcrPanel
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        Dim strCurrentValue As String
-        Dim bFound As Boolean = False
-
-        MyBase.UpdateControl(bReset)
-
-        'If clsParameter IsNot Nothing Then
-        '    If bChangeParameterValue Then
-        '        strCurrentValue = clsParameter.strArgumentValue
-
-        '        For Each kvpTemp As KeyValuePair(Of RadioButton, String) In dctRadioButtonValues
-        '            If kvpTemp.Value = strCurrentValue Then
-        '                kvpTemp.Key.Checked = True
-        '                bFound = True
-        '                Exit For
-        '            End If
-        '        Next
-        '        If Not bFound Then
-        '            MsgBox("Parameter as value: " & strCurrentValue & " which is not associated to any radio button in this control. Cannot update radio buttons.")
-        '        End If
-        '    ElseIf bAddRemoveParameter Then
-        '        'Commented out as not currently needed. Can be included if needed.
-        '        'If bParameterIncludedWhenChecked Then
-        '        'chkCheck.Checked = clsRCode.ContainsParameter(clsParameter)
-        '        'Else
-        '        'chkCheck.Checked = Not clsRCodeObject.clsParameters.Contains(clsParameter)
-        '        'End If
-        '    End If
-        'Else
-        '    'chkCheck.Checked = LinkedControlsParametersPresent()
-        'End If
-        'UpdateLinkedControls()
-    End Sub
-
     Protected Overrides Sub SetControlValue(objTemp As Object)
         Dim rdoTemp As RadioButton
 
