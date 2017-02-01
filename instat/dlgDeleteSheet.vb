@@ -57,7 +57,6 @@ Public Class dlgDeleteSheet
         ucrDataFrameToDelete.Reset()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        TestOKEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
