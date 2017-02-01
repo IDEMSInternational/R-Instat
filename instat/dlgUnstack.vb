@@ -17,23 +17,27 @@ Imports instat.Translations
 
 Public Class dlgUnstack
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private clsFormula As New ROperator
     Private clsIDColumns As New ROperator
-    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgunstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        'Checks if Ok can be enabled.
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
 
     Private Sub InitialiseDialog()
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForunstack
@@ -78,20 +82,17 @@ Public Class dlgUnstack
 
 
         ' Defaults
-        clsDefaultFunction.SetRCommand("dcast")
         '''' ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsFormula)
-
-        clsDefaultFunction.SetAssignTo(strTemp:="Unstack", strTempDataframe:="Unstack")
-
-
-
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorForunstack.Reset()
         ucrNewDFName.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+
+        clsDefaultFunction.SetRCommand("dcast")
+        clsDefaultFunction.SetAssignTo(strTemp:="Unstack", strTempDataframe:="Unstack")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
 
         TestOKEnabled()
     End Sub
@@ -155,6 +156,7 @@ Public Class dlgUnstack
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
@@ -186,16 +188,5 @@ Public Class dlgUnstack
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrIDColumns_SelectionChanged(sender As Object, e As EventArgs) Handles ucrIDColumns.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrColumnToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrFactorToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorToUnstackReceiver.SelectionChanged
-
-    End Sub
 End Class
 
