@@ -17,24 +17,30 @@
 Imports instat.Translations
 Public Class dlgInventoryPlot
     Private bFirstLoad As Boolean = True
-    Private clsDefaultRFunction As New RFunction
+    Private bReset As Boolean = True
+
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.iHelpTopicID = 359
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrYearReceiver.Selector = ucrInventoryPlotSelector
         ucrColourReceiver.Selector = ucrInventoryPlotSelector
         ucrDayOfYearReceiver.Selector = ucrInventoryPlotSelector
         ucrFacetsReceiver.Selector = ucrInventoryPlotSelector
-
 
         ucrYearReceiver.Selector = ucrInventoryPlotSelector
         ucrYearReceiver.SetMeAsReceiver()
@@ -55,8 +61,7 @@ Public Class dlgInventoryPlot
         ucrFacetsReceiver.SetParameter(New RParameter("facets"))
         ucrFacetsReceiver.SetParameterIsString()
 
-
-        ucrInventoryPlotSelector.SetParameter(New RParameter("data_name"))
+        ucrInventoryPlotSelector.SetParameter(New RParameter("data_name", 0))
         ucrInventoryPlotSelector.SetParameterIsString()
 
         ucrChkAddRecodetoData.SetText("Add Recode to Data")
@@ -64,75 +69,64 @@ Public Class dlgInventoryPlot
         ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAddRecodetoData.SetRDefault("FALSE")
 
-
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
+
         ucrChkAddRecodetoData.SetParameter(New RParameter("coord_flip"))
         ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAddRecodetoData.SetRDefault("FALSE")
 
+        ucrSaveGraph.SetPrefix("Inventory")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
         ucrNudThreashold.SetParameter(New RParameter("threshold"))
-
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.iHelpTopicID = 359
-        ucrBase.clsRsyntax.iCallType = 3
-
-        ucrSaveInventoryPlot.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
-        clsDefaultRFunction.AddParameter(ucrInventoryPlotSelector.GetParameter())
-
+        ucrNudThreashold.Minimum = 0.85
+        ucrNudThreashold.Increment = 0.01
+        ucrNudThreashold.DecimalPlaces = 2
+        ucrNudThreashold.SetRDefault("0.85")
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not ucrColourReceiver.IsEmpty) OrElse (ucrSaveInventoryPlot.chkSaveGraph.Checked AndAlso Not ucrSaveInventoryPlot.ucrInputGraphName.IsEmpty) Then
+        If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not ucrColourReceiver.IsEmpty) AndAlso ucrSaveGraph.IsComplete() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        Dim clsDefaultRFunction As New RFunction
 
-        ucrNudThreashold.Value = 0.85
-        ucrNudThreashold.Minimum = 0.85
-        'ucrNudThreashold.nudUpDown.Increment = 0.01
-        'ucrNudThreashold.nudUpDown.DecimalPlaces = 2
-        'ucrNudThreashold.nudUpDown.Minimum = 0.85
-
-        clsDefaultRFunction.AddParameter("threshold", ucrNudThreashold.Value)
-        ucrChkAddRecodetoData.Checked = False
-        ucrChkFlipCoordinates.Checked = False
-
-        ucrSaveInventoryPlot.Reset()
         ucrInventoryPlotSelector.Reset()
+        ucrSaveGraph.Reset()
         ucrYearReceiver.SetMeAsReceiver()
-        ucrSaveInventoryPlot.strPrefix = "InventoryPlot"
 
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
+        clsDefaultRFunction.AddParameter("threshold", "0.85")
+        clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSaveInventoryPlot_GraphNameChanged() Handles ucrSaveInventoryPlot.GraphNameChanged, ucrSaveInventoryPlot.SaveGraphCheckedChanged
-        If ucrSaveInventoryPlot.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveInventoryPlot.strGraphName, strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveInventoryPlot.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgPlots.ShowDialog()
-    End Sub
-
-    Private Sub ucrSaveInventoryPlot_ContentsChanged() Handles ucrSaveInventoryPlot.ContentsChanged
-        TestOkEnabled()
+        'there needs to be work on sdgplots before this could be linked 
+        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        'sdgPlots.ShowDialog()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInventoryPlotSelector.ControlContentsChanged, ucrChkFlipCoordinates.ControlContentsChanged, ucrChkAddRecodetoData.ControlContentsChanged, ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrFacetsReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrNudThreashold.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
-        UpdateRCode(Me, clsDefaultRFunction)
     End Sub
 End Class
