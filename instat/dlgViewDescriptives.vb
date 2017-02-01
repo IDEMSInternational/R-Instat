@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgViewDescriptives
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
     Private Sub dlgViewDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -71,12 +70,13 @@ Public Class dlgViewDescriptives
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        ucrSelectorForViewObject.Reset()
+        rdoStructure.Checked = True
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrSelectorForViewObject.Reset()
 
-        TestOKEnabled()
-        rdoStructure.Checked = True
         TestOKEnabled()
     End Sub
 
