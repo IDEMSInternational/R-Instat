@@ -18,12 +18,13 @@ Imports instat.Translations
 Public Class dlgDeleteDescriptive
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgDeleteDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -53,7 +54,10 @@ Public Class dlgDeleteDescriptive
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorDeleteObject.Reset()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
@@ -72,7 +76,8 @@ Public Class dlgDeleteDescriptive
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverObjectsToDelete_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObjectsToDelete.ControlContentsChanged
