@@ -17,7 +17,6 @@
 Imports instat
 Imports instat.Translations
 Public Class dlgUseDate
-    Private clsDefaultFunction As New RFunction
     Private bReset As Boolean = True
     Public bFirstLoad As Boolean = True
     Private Sub dlgUseDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -111,9 +110,12 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        ucrSelectorUseDate.Reset()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrSelectorUseDate.Reset()
+
         TestOKEnabled()
     End Sub
 
@@ -127,7 +129,7 @@ Public Class dlgUseDate
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeforControls(bReset)
+        SetRCodeforControls(True)
     End Sub
 
     Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged
