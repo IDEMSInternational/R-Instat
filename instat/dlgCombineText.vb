@@ -55,7 +55,7 @@ Public Class dlgCombineText
 
         ' ucrReceiver
         ucrReceiverCombineText.SetParameter(New RParameter("columns"))
-        ucrReceiverCombineText.SetParameterIsRFunction()
+        ucrReceiverCombineText.SetParameterIsString()
         ucrReceiverCombineText.Selector = ucrSelectorForCombineText
         ucrReceiverCombineText.SetMeAsReceiver()
         ucrReceiverCombineText.bUseFilteredData = False
@@ -65,15 +65,23 @@ Public Class dlgCombineText
         ucrSaveColumn.SetIsTextBox()
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
-        ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-        ucrSaveColumn.SetLabelText("Prefix for New Columns:")
+        ucrSaveColumn.SetLabelText("Prefix for New Column:")
         iColumnsUsed = 0
     End Sub
 
     ' got
-    'Combine <- stringr::str_c(X1=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="variable", data_name="data1_stackedNoCarry"), X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value", data_name="data1_stackedNoCarry"), sep=" ", columns=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names=c("variable","value"), data_name="data1_stackedNoCarry"))
-    'InstatDataObject$add_columns_to_data(col_data = Combine, use_col_name_as_prefix = True, data_name = "data1_stackedNoCarry", col_name = "Combine")
+    'Combine <- stringr::str_c(X1=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="variable",
+    'data_name="data1_stackedNoCarry"),
+    'X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value",
+    'data_name="data1_stackedNoCarry"), 
+    'columns=c("variable","value"),
+    ''sep=" ")
 
+    ' want
+    'Combine1 <- stringr::str_c(X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value",
+    'data_name="data1_stackedNoCarry"),
+    'X1=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="variable", data_name="data1_stackedNoCarry"),
+    ''sep=" ")
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
