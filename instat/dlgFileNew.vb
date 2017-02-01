@@ -18,7 +18,7 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgFileNew
-    Private clsOverallFunction, clsMatrixDefaultFunction, clsMatrixFunction As New RFunction
+    Private clsOverallFunction, clsMatrixFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
@@ -30,7 +30,7 @@ Public Class dlgFileNew
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -60,6 +60,7 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsMatrixDefaultFunction As New RFunction
         ucrNewDFName.Reset()
 
         ' Default R
@@ -74,8 +75,6 @@ Public Class dlgFileNew
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         clsMatrixFunction = clsMatrixDefaultFunction.Clone()
         clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
-
-        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -94,7 +93,8 @@ Public Class dlgFileNew
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged, ucrNewDFName.ControlContentsChanged
