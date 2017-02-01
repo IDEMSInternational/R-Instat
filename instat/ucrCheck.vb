@@ -57,11 +57,23 @@ Public Class ucrCheck
     End Sub
 
     Public Sub SetValueIfChecked(strNewValueIfChecked As String)
+        Dim clsTempCond As New Condition
+
         strValueIfChecked = strNewValueIfChecked
+        If clsParameter Is Nothing Then
+            MsgBox("Developer error: Parameter must be set before SetValueIfChecked can be run! Control will not update correctly.")
+        Else
+            AddParameterValuesCondition(True, clsParameter.strArgumentName, strValueIfChecked)
+        End If
     End Sub
 
     Public Sub SetValueIfUnchecked(strNewValueIfUnchecked As String)
         strValueIfUnchecked = strNewValueIfUnchecked
+        If clsParameter Is Nothing OrElse clsParameter.strArgumentName Is Nothing Then
+            MsgBox("Developer error: Parameter must be set with a parameter name before SetValueIfUnchecked can be run! Control will not update correctly.")
+        Else
+            AddParameterValuesCondition(False, clsParameter.strArgumentName, strValueIfUnchecked)
+        End If
     End Sub
 
     Public Sub SetValuesCheckedAndUnchecked(strNewValueIfChecked As String, strNewValueIfUnchecked As String)
@@ -100,9 +112,29 @@ Public Class ucrCheck
                     bContainedIn = True
                 End If
             Else
-                MsgBox("Developer error: Cannot convert value to decimal for linked control.")
+                MsgBox("Developer error: Cannot convert value to boolean for linked control.")
             End If
         Next
         Return bContainedIn
     End Function
+
+    Protected Overrides Sub SetControlValue(objTemp As Object)
+        Dim bTempValue As Boolean
+
+        If Boolean.TryParse(objTemp, bTempValue) Then
+            Checked = bTempValue
+        Else
+            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
+        End If
+    End Sub
+
+    Public Overrides Property bAddRemoveParameter As Object
+        Get
+            Return MyBase.bAddRemoveParameter
+        End Get
+        Set(bValue As Object)
+            MyBase.bAddRemoveParameter = bValue
+
+        End Set
+    End Property
 End Class
