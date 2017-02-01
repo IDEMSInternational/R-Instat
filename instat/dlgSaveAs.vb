@@ -16,7 +16,6 @@
 
 Imports System.IO
 Imports instat.Translations
-
 Public Class dlgSaveAs
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -35,7 +34,6 @@ Public Class dlgSaveAs
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 332
         ucrInputFilePath.IsReadOnly = True
-        SelectFileToSave()
         txtConfirm.Text = "Click Ok to confirm the save"
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
     End Sub
@@ -50,6 +48,7 @@ Public Class dlgSaveAs
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
         clsSaveAS.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveAS.Clone())
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
