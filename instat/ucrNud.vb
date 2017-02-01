@@ -178,4 +178,12 @@ Public Class ucrNud
     Public Function GetText() As String
         Return nudUpDown.Text
     End Function
+
+    Public Function IsEmpty() As Boolean
+        If nudUpDown.Text <> "" Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
 End Class
