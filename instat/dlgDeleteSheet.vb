@@ -42,7 +42,7 @@ Public Class dlgDeleteSheet
     End Sub
 
     Private Sub ReopenDialog()
-        TestOKEnabled()
+        ucrDataFrameToDelete.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
