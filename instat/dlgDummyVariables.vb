@@ -17,14 +17,19 @@
 Imports instat.Translations
 Public Class dlgDummyVariables
     Private bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
     Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        autoTranslate(Me)
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -37,16 +42,25 @@ Public Class dlgDummyVariables
 
     Private Sub SetDefaults()
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction.SetRCommand("dummy")
+        clsDefaultFunction.SetAssignTo(strTemp:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
+        'clsDefaultFunction.SetAssignTo("dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy")
+
+
         ucrSelectorDummyVariable.Focus()
         ucrSelectorDummyVariable.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         TestOkEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 41
-        clsDefaultFunction.SetRCommand("dummy")
 
         'Set Receiver
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
@@ -75,7 +89,6 @@ Public Class dlgDummyVariables
         'ucrSaveDummy.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
         'ucrSaveDummy.SetCheckBoxText("Save Dummy")
         'ucrSaveDummy.SetIsComboBox()
-        'clsDefaultFunction.SetAssignTo("dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy")
 
         'chkXvariable.Checked = False
         ucrVariateReceiver.Visible = False
@@ -98,6 +111,7 @@ Public Class dlgDummyVariables
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
     End Sub
     Private Sub ucrreceiverfactor_selectionchanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables)
