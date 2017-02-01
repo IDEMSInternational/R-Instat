@@ -61,7 +61,6 @@ Public Class dlgRenameSheet
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
 
         CheckAutoName()
-        TestOKEnabled()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -71,6 +70,7 @@ Public Class dlgRenameSheet
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
