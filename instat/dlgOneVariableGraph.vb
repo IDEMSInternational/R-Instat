@@ -18,29 +18,45 @@ Imports instat.Translations
 
 Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
         TestOkEnabled()
     End Sub
 
     Private Sub SetDefaults()
-        ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorOneVarGraph.Reset()
         ucrSaveGraph.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+
+        'Define the default RFunction
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+
+        ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         bResetSubdialog = True
         TestOkEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -73,13 +89,6 @@ Public Class dlgOneVariableGraph
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-
-        'Define the default RFunction
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
-        clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-        clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
     End Sub
 
     Private Sub ReopenDialog()
@@ -96,6 +105,7 @@ Public Class dlgOneVariableGraph
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
