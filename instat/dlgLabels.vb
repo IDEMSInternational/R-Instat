@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class dlgLabels
     Private clsSetFactorLevels As New RFunction
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -25,6 +26,10 @@ Public Class dlgLabels
             bFirstLoad = False
         End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -51,19 +56,18 @@ Public Class dlgLabels
         ucrSelectorForLabels.SetParameterIsString()
 
         ucrFactorLabels.SetParameter(New RParameter("new_levels", 2))
-
-        clsSetFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
+        clsSetFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetFactorLevels.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
