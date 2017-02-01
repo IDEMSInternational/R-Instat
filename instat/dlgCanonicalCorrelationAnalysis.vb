@@ -93,6 +93,10 @@ Public Class dlgCanonicalCorrelationAnalysis
 
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("cancor")
+
+        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+
         clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         ' Set default RFunction as the base function
@@ -115,11 +119,13 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
+        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        bResetSubdialog = False
         sdgCanonicalCorrelation.ShowDialog()
     End Sub
 
     Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgCanonicalCorrelation.CCAOptions()
+        '     sdgCanonicalCorrelation.CCAOptions()
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
