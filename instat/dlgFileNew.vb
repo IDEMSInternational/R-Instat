@@ -61,6 +61,8 @@ Public Class dlgFileNew
 
     Private Sub SetDefaults()
         Dim clsMatrixDefaultFunction As New RFunction
+        clsOverallFunction = New RFunction
+
         ucrNewDFName.Reset()
 
         ' Default R
