@@ -159,143 +159,8 @@ Public Class frmMain
         dlgCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs)
-        dlgInventoryPlot.ShowDialog()
-    End Sub
-
-
-
-    Private Sub mnuClimateMethodsGraphicsCliplot_Click(sender As Object, e As EventArgs)
-        dlgCliPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsMissingValues_Click(sender As Object, e As EventArgs)
-        dlgMissingValuesplot.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsHistogram_Click(sender As Object, e As EventArgs)
-        dlgHistogramMethod.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsCumExceedance_Click(sender As Object, e As EventArgs)
-        dlgCumulativeExceedance.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsBoxplot_Click(sender As Object, e As EventArgs)
-        dlgBoxplotMethod.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsInventory_Click(sender As Object, e As EventArgs)
-        dlgInventoryMethod.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsAnnualRainfall_Click(sender As Object, e As EventArgs)
-        dlgAnnualRaintotal.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsTimeseries_Click(sender As Object, e As EventArgs)
-        dlgTimeseriesPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsWindrose_Click(sender As Object, e As EventArgs)
-        dlgWindrosePlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsMultipleLines_Click(sender As Object, e As EventArgs)
-        dlgLines.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsGraphicsRainCount_Click(sender As Object, e As EventArgs)
-        dlgYearRaincount.ShowDialog()
-    End Sub
-
-    Private Sub mnuClmateMethodThreeSummaries_Click(sender As Object, e As EventArgs)
-        dlgThreeSummaries.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationStartOfRain_Click(sender As Object, e As EventArgs)
-        dlgAddStartRain.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationEndOfRain_Click(sender As Object, e As EventArgs)
-        dlgEndRain.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationChangeFormatDayMonth_Click(sender As Object, e As EventArgs)
-        dlgChangeFormatDayMonth.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationExportCPTToTabular_Click(sender As Object, e As EventArgs)
-        dlgCPTtoTabularData.ShowDialog()
-    End Sub
-
-    Private Sub nuClimateMethodsDataManipulationDayMonth_Click(sender As Object, e As EventArgs)
-        dlgDayMonth.ShowDialog()
-
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationDisplayDaily_Click(sender As Object, e As EventArgs)
-        dlgDisplayDaily.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationDisplayDOYOfYear_Click(sender As Object, e As EventArgs)
-        dlgDisplayDOYofYear.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationDisplayRainRunningTotal_Click(sender As Object, e As EventArgs)
-        dlgDisplayRainRunningTotal.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationDisplaySpellLength_Click(sender As Object, e As EventArgs)
-        dlgDisplaySpellLength.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationExportForPICSA_Click(sender As Object, e As EventArgs)
-        dlgExportforPICSA.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationExtremeEvents_Click(sender As Object, e As EventArgs)
-        dlgExtremeEvents.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationMissingData_Click(sender As Object, e As EventArgs)
-        dlgMissingData.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationMissingDataTable_Click(sender As Object, e As EventArgs)
-        dlgMissingDataTable.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationMonthlySummaries_Click(sender As Object, e As EventArgs)
-        dlgMonthlySummaries.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsDataManipulationOutputForCD_Click(sender As Object, e As EventArgs)
-        dlgOutputforCDT.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsAdditionalOutputForCPT_Click(sender As Object, e As EventArgs)
-        dlgOutputforCPT.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsAdditionalRainsStatistics_Click(sender As Object, e As EventArgs)
-        dlgRainStats.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsAdditionalSeasonalSummary_Click(sender As Object, e As EventArgs)
-        dlgSeasonalSummary.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateMethodsAdditionalSeasonalSummaryRain_Click(sender As Object, e As EventArgs)
-        dlgSeasonalSummaryRain.ShowDialog()
-    End Sub
-
     Private Sub mnuManageAddColumnRowSummary_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateRowSummary.Click
         dlgRowStats.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs)
-        dlgRegressionSimple.ShowDialog()
     End Sub
 
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
@@ -367,10 +232,6 @@ Public Class frmMain
         dlgShiftDailyData.ShowDialog()
     End Sub
 
-    Private Sub UnstackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareUnstackDailyData.Click
-        dlgUnstackDailyData.ShowDialog()
-    End Sub
-
     Private Sub StackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareStackDailyData.Click
         dlgStackDailyData.ShowDialog()
     End Sub
@@ -394,25 +255,8 @@ Public Class frmMain
         dlgCropCoefficients.ShowDialog()
     End Sub
 
-    Private Sub WaterSatisfactionIndexToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WaterSatisfactionIndexToolStripMenuItem.Click
-        dlgWaterSatisfactionIndex.ShowDialog()
-    End Sub
-
     Private Sub HeatSumToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticHeatSum.Click
         dlgHeatSum.ShowDialog()
-    End Sub
-
-
-
-
-
-
-    Private Sub TotalsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgTotals.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsSimpleModelsTwoSample_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesTwoSamples.Click
-        dlgTwoSamples.ShowDialog()
     End Sub
 
     Private Sub mnuFIleExit_Click(sender As Object, e As EventArgs) Handles mnuFIleExit.Click
@@ -524,11 +368,6 @@ Public Class frmMain
     Private Sub mnuManageAddColumnPermuteRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGeneratePermuteRows.Click
         dlgPermuteColumn.ShowDialog()
     End Sub
-
-    Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs)
-        dlgCorrelation.ShowDialog()
-    End Sub
-
     Private Sub mnuManageDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectDeleteDataFrame.Click
         dlgDeleteSheet.ShowDialog()
     End Sub
@@ -587,22 +426,6 @@ Public Class frmMain
         mnuHelpHelp_Click(sender, e)
     End Sub
 
-    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs)
-        dlgSummaryBarOrPieChart.ShowDialog()
-    End Sub
-
-    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs)
-        dlgScatterPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatistcsMultivariatePrincipalComponents_Click(sender As Object, e As EventArgs)
-        dlgPrincipalComponentAnalysis.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatistcsMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs)
-        dlgCanonicalCorrelationAnalysis.ShowDialog()
-    End Sub
-
     Private Sub mnuManageFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
         dlgRecodeFactor.ShowDialog()
     End Sub
@@ -636,7 +459,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorConvertToFactor.Click
-        dlgConvertColumns.bToFactorOnly = True
+        'dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
     End Sub
 
@@ -680,10 +503,6 @@ Public Class frmMain
         dlgFactorDataFrame.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsUseGraph_Click(sender As Object, e As EventArgs)
-        dlgUseGraph.ShowDialog()
-    End Sub
-
     Private Sub mnuManageTextSplit_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSplit.Click
         dlgSplitText.ShowDialog()
     End Sub
@@ -707,7 +526,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameConvertColumns.Click
-        dlgConvertColumns.bToFactorOnly = False
+        'dlgConvertColumns.bToFactorOnly = False
         dlgConvertColumns.ShowDialog()
     End Sub
 
@@ -735,28 +554,8 @@ Public Class frmMain
         dlgOneSampleSummaryData.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsSimpleModelsTwoSamplesSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSummaryData.Click
-        dlgTwoSampleSummaryData.ShowDialog()
-    End Sub
-
     Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
         dlgGeneralRegression.ShowDialog()
-    End Sub
-
-    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgWindrose.ShowDialog()
-    End Sub
-
-    Private Sub ThemesToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgThemes.ShowDialog()
-    End Sub
-
-    Private Sub CombineToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgCombineforGraphics.ShowDialog()
-    End Sub
-
-    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgPopulationPyramids.ShowDialog()
     End Sub
 
     Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeGeneralGraphics.Click
@@ -827,14 +626,6 @@ Public Class frmMain
         dlgGoodnessofFit.ShowDialog()
     End Sub
 
-    Private Sub mnuModelOtherTwoVariablesTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesTwoSamples.Click
-        dlgTwoSamples.ShowDialog()
-    End Sub
-
-    Private Sub mnuModelOtherTwoVariablesSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSummaryData.Click
-        dlgTwoSampleSummaryData.ShowDialog()
-    End Sub
-
     Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
         dlgRegressionSimple.ShowDialog()
     End Sub
@@ -873,10 +664,6 @@ Public Class frmMain
 
     Private Sub mnuModelOtherGeneralLogLinear_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralLogLinear.Click
         dlglogLinearModels.ShowDialog()
-    End Sub
-
-    Private Sub DescribeGeneralCorrelations_Click(sender As Object, e As EventArgs)
-        dlgCorrelation.ShowDialog()
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
@@ -1125,10 +912,6 @@ Public Class frmMain
         dlgStartofRains.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseEventsExtremes_Click(sender As Object, e As EventArgs)
-        dlgExtremes.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticOrganiseEventsSpells_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsSpells.Click
         dlgSpells.ShowDialog()
     End Sub
@@ -1143,10 +926,6 @@ Public Class frmMain
 
     Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
         dlgCountinFactor.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeTwoVariablesTabulate_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesTabulate.Click
-        dlgTwoVariableTabulate.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificScatterPlot.Click
@@ -1277,26 +1056,6 @@ Public Class frmMain
         dlgExportToCPT.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMarkovModellingCountsTotals_Click(sender As Object, e As EventArgs)
-        dlgCountsTotals.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticMarkovModellingPrepare_Click(sender As Object, e As EventArgs)
-        dlgPrepare.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticMarkovModellingModelProbabilities_Click(sender As Object, e As EventArgs)
-        dlgModelProbabilities.ShowDialog()
-    End Sub
-
-    Private Sub ModelAmountsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgModelAmounts.ShowDialog()
-    End Sub
-
-    Private Sub InterpolateDailyToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgInterpolateDaily.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticDescribeMoreGraphsWindoRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeMoreGraphsWindoRose.Click
         dlgWindrose.ShowDialog()
     End Sub
@@ -1311,10 +1070,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticSCFSupportOpenSST_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportOpenSST.Click
         dlgOpenSST.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticFileDefineClimaticData_Click(sender As Object, e As EventArgs)
-        DlgDefineClimaticData.ShowDialog()
     End Sub
 
     Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculateDuplicateColumn.Click
@@ -1403,10 +1158,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticDescribeTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTemperatures.Click
         dlgTemperature.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDescribeWindSpeedDirection_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirection.Click
-        dlgWindSpeed.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeSunshineRadiation_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSunshineRadiation.Click
