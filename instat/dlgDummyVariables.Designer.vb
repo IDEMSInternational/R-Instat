@@ -22,7 +22,6 @@ Partial Class dlgDummyVariables
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.chkXvariable = New System.Windows.Forms.CheckBox()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.lblVariate = New System.Windows.Forms.Label()
         Me.ucrSelectorDummyVariable = New instat.ucrSelectorByDataFrameAddRemove()
@@ -39,17 +38,6 @@ Partial Class dlgDummyVariables
         Me.grpLevelOmitted.SuspendLayout()
         Me.SuspendLayout()
         '
-        'chkXvariable
-        '
-        Me.chkXvariable.AutoSize = True
-        Me.chkXvariable.Location = New System.Drawing.Point(10, 245)
-        Me.chkXvariable.Name = "chkXvariable"
-        Me.chkXvariable.Size = New System.Drawing.Size(114, 17)
-        Me.chkXvariable.TabIndex = 4
-        Me.chkXvariable.Tag = "Withan_X_Variable"
-        Me.chkXvariable.Text = "With an X Variable"
-        Me.chkXvariable.UseVisualStyleBackColor = True
-        '
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
@@ -63,7 +51,7 @@ Partial Class dlgDummyVariables
         'lblVariate
         '
         Me.lblVariate.AutoSize = True
-        Me.lblVariate.Location = New System.Drawing.Point(133, 246)
+        Me.lblVariate.Location = New System.Drawing.Point(204, 246)
         Me.lblVariate.Name = "lblVariate"
         Me.lblVariate.Size = New System.Drawing.Size(40, 13)
         Me.lblVariate.TabIndex = 5
@@ -83,7 +71,7 @@ Partial Class dlgDummyVariables
         'ucrVariateReceiver
         '
         Me.ucrVariateReceiver.frmParent = Me
-        Me.ucrVariateReceiver.Location = New System.Drawing.Point(179, 245)
+        Me.ucrVariateReceiver.Location = New System.Drawing.Point(250, 245)
         Me.ucrVariateReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrVariateReceiver.Name = "ucrVariateReceiver"
         Me.ucrVariateReceiver.Selector = Nothing
@@ -102,7 +90,7 @@ Partial Class dlgDummyVariables
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 280)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 279)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -180,16 +168,16 @@ Partial Class dlgDummyVariables
         'ucrChkWithXVariable
         '
         Me.ucrChkWithXVariable.Checked = False
-        Me.ucrChkWithXVariable.Location = New System.Drawing.Point(10, 223)
+        Me.ucrChkWithXVariable.Location = New System.Drawing.Point(10, 244)
         Me.ucrChkWithXVariable.Name = "ucrChkWithXVariable"
-        Me.ucrChkWithXVariable.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkWithXVariable.Size = New System.Drawing.Size(128, 20)
         Me.ucrChkWithXVariable.TabIndex = 15
         '
         'dlgDummyVariables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 344)
+        Me.ClientSize = New System.Drawing.Size(419, 340)
         Me.Controls.Add(Me.ucrChkWithXVariable)
         Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)
@@ -197,7 +185,6 @@ Partial Class dlgDummyVariables
         Me.Controls.Add(Me.lblVariate)
         Me.Controls.Add(Me.ucrReceiverFactor)
         Me.Controls.Add(Me.lblSelected)
-        Me.Controls.Add(Me.chkXvariable)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -215,7 +202,6 @@ Partial Class dlgDummyVariables
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents chkXvariable As CheckBox
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents ucrSelectorDummyVariable As ucrSelectorByDataFrameAddRemove
