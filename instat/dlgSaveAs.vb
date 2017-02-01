@@ -35,8 +35,8 @@ Public Class dlgSaveAs
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 332
         ucrInputFilePath.IsReadOnly = True
+        SelectFileToSave()
         txtConfirm.Text = "Click Ok to confirm the save"
-        ucrInputFilePath.SetName("")
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
     End Sub
 
@@ -45,10 +45,12 @@ Public Class dlgSaveAs
     End Sub
 
     Private Sub SetDefaults()
+        ucrInputFilePath.ResetText()
         clsSaveAS.SetRCommand("saveRDS")
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
         clsSaveAS.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveAS.Clone())
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -84,7 +86,6 @@ Public Class dlgSaveAs
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
