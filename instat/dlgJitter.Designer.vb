@@ -24,17 +24,16 @@ Partial Class dlgJitter
     Private Sub InitializeComponent()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.grpMaximumAndMinimumValues = New System.Windows.Forms.GroupBox()
-        Me.rdoMinimumAndMaximum = New System.Windows.Forms.RadioButton()
-        Me.rdoMaximumDistanceFromZero = New System.Windows.Forms.RadioButton()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.ucrInputNewColumnName = New instat.ucrInputComboBox()
         Me.ucrInputMaximum = New instat.ucrInputTextBox()
         Me.ucrInputMinimum = New instat.ucrInputTextBox()
         Me.ucrInputMaximumDistanceFromZero = New instat.ucrInputTextBox()
+        Me.rdoMinimumAndMaximum = New System.Windows.Forms.RadioButton()
+        Me.rdoMaximumDistanceFromZero = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlDistance = New instat.UcrPanel()
         Me.ucrReceiverJitter = New instat.ucrReceiverSingle()
         Me.ucrSelectorForJitter = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlDistance = New instat.UcrPanel()
+        Me.ucrInputNewColName = New instat.ucrSave()
         Me.grpMaximumAndMinimumValues.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,45 +59,6 @@ Partial Class dlgJitter
         Me.grpMaximumAndMinimumValues.Size = New System.Drawing.Size(167, 147)
         Me.grpMaximumAndMinimumValues.TabIndex = 3
         Me.grpMaximumAndMinimumValues.TabStop = False
-        '
-        'rdoMinimumAndMaximum
-        '
-        Me.rdoMinimumAndMaximum.AutoSize = True
-        Me.rdoMinimumAndMaximum.Location = New System.Drawing.Point(7, 71)
-        Me.rdoMinimumAndMaximum.Name = "rdoMinimumAndMaximum"
-        Me.rdoMinimumAndMaximum.Size = New System.Drawing.Size(134, 17)
-        Me.rdoMinimumAndMaximum.TabIndex = 2
-        Me.rdoMinimumAndMaximum.TabStop = True
-        Me.rdoMinimumAndMaximum.Text = "Minimum and Maximum"
-        Me.rdoMinimumAndMaximum.UseVisualStyleBackColor = True
-        '
-        'rdoMaximumDistanceFromZero
-        '
-        Me.rdoMaximumDistanceFromZero.AutoSize = True
-        Me.rdoMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 19)
-        Me.rdoMaximumDistanceFromZero.Name = "rdoMaximumDistanceFromZero"
-        Me.rdoMaximumDistanceFromZero.Size = New System.Drawing.Size(146, 17)
-        Me.rdoMaximumDistanceFromZero.TabIndex = 0
-        Me.rdoMaximumDistanceFromZero.TabStop = True
-        Me.rdoMaximumDistanceFromZero.Text = "Maximum Distance from 0"
-        Me.rdoMaximumDistanceFromZero.UseVisualStyleBackColor = True
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(8, 223)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 4
-        Me.lblNewColumnName.Text = "New Column Name:"
-        '
-        'ucrInputNewColumnName
-        '
-        Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(115, 219)
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
-        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(193, 21)
-        Me.ucrInputNewColumnName.TabIndex = 5
         '
         'ucrInputMaximum
         '
@@ -127,6 +87,35 @@ Partial Class dlgJitter
         Me.ucrInputMaximumDistanceFromZero.Size = New System.Drawing.Size(59, 21)
         Me.ucrInputMaximumDistanceFromZero.TabIndex = 1
         '
+        'rdoMinimumAndMaximum
+        '
+        Me.rdoMinimumAndMaximum.AutoSize = True
+        Me.rdoMinimumAndMaximum.Location = New System.Drawing.Point(7, 71)
+        Me.rdoMinimumAndMaximum.Name = "rdoMinimumAndMaximum"
+        Me.rdoMinimumAndMaximum.Size = New System.Drawing.Size(134, 17)
+        Me.rdoMinimumAndMaximum.TabIndex = 2
+        Me.rdoMinimumAndMaximum.TabStop = True
+        Me.rdoMinimumAndMaximum.Text = "Minimum and Maximum"
+        Me.rdoMinimumAndMaximum.UseVisualStyleBackColor = True
+        '
+        'rdoMaximumDistanceFromZero
+        '
+        Me.rdoMaximumDistanceFromZero.AutoSize = True
+        Me.rdoMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 19)
+        Me.rdoMaximumDistanceFromZero.Name = "rdoMaximumDistanceFromZero"
+        Me.rdoMaximumDistanceFromZero.Size = New System.Drawing.Size(146, 17)
+        Me.rdoMaximumDistanceFromZero.TabIndex = 0
+        Me.rdoMaximumDistanceFromZero.TabStop = True
+        Me.rdoMaximumDistanceFromZero.Text = "Maximum Distance from 0"
+        Me.rdoMaximumDistanceFromZero.UseVisualStyleBackColor = True
+        '
+        'ucrPnlDistance
+        '
+        Me.ucrPnlDistance.Location = New System.Drawing.Point(6, 19)
+        Me.ucrPnlDistance.Name = "ucrPnlDistance"
+        Me.ucrPnlDistance.Size = New System.Drawing.Size(155, 122)
+        Me.ucrPnlDistance.TabIndex = 7
+        '
         'ucrReceiverJitter
         '
         Me.ucrReceiverJitter.frmParent = Me
@@ -154,20 +143,19 @@ Partial Class dlgJitter
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 6
         '
-        'ucrPnlDistance
+        'ucrInputNewColName
         '
-        Me.ucrPnlDistance.Location = New System.Drawing.Point(6, 19)
-        Me.ucrPnlDistance.Name = "ucrPnlDistance"
-        Me.ucrPnlDistance.Size = New System.Drawing.Size(155, 122)
-        Me.ucrPnlDistance.TabIndex = 7
+        Me.ucrInputNewColName.Location = New System.Drawing.Point(10, 219)
+        Me.ucrInputNewColName.Name = "ucrInputNewColName"
+        Me.ucrInputNewColName.Size = New System.Drawing.Size(332, 24)
+        Me.ucrInputNewColName.TabIndex = 8
         '
         'dlgJitter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 302)
-        Me.Controls.Add(Me.ucrInputNewColumnName)
-        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.ucrInputNewColName)
         Me.Controls.Add(Me.grpMaximumAndMinimumValues)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrReceiverJitter)
@@ -194,10 +182,9 @@ Partial Class dlgJitter
     Friend WithEvents grpMaximumAndMinimumValues As GroupBox
     Friend WithEvents rdoMinimumAndMaximum As RadioButton
     Friend WithEvents rdoMaximumDistanceFromZero As RadioButton
-    Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents ucrInputNewColumnName As ucrInputComboBox
     Friend WithEvents ucrInputMaximumDistanceFromZero As ucrInputTextBox
     Friend WithEvents ucrInputMinimum As ucrInputTextBox
     Friend WithEvents ucrInputMaximum As ucrInputTextBox
     Friend WithEvents ucrPnlDistance As UcrPanel
+    Friend WithEvents ucrInputNewColName As ucrSave
 End Class
