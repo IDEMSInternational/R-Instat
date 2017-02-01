@@ -13,9 +13,9 @@
 '
 Imports instat
 Imports instat.Translations
-
 Public Class dlgPolynomials
     Public bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Public clsCentredOptionFunc As New RFunction
 
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -44,11 +44,16 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub SetDefaults()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        ucrSelectorForPolynomial.Reset()
+        ucrSelectorForPolynomial.Focus()
+
+
         ucrInputPolynomial.SetName("Poly")
         rdoSimple.Checked = True
         XParameter()
-        ucrSelectorForPolynomial.Reset()
-        ucrSelectorForPolynomial.Focus()
+
         nudDegree.Value = 2
     End Sub
 
@@ -58,18 +63,26 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("poly")
         ucrBase.iHelpTopicID = 46
+        clsDefaultFunction.SetRCommand("poly")
+
         ucrInputPolynomial.SetItemsTypeAsColumns()
         ucrInputPolynomial.SetDefaultTypeAsColumn()
         ucrInputPolynomial.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
+
         clsCentredOptionFunc.AddParameter("center", "TRUE")
         clsCentredOptionFunc.AddParameter("scale", "FALSE")
         clsCentredOptionFunc.SetRCommand("scale")
+
+
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.bUseFilteredData = False
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
+        ucrReceiverPolynomial.SetParameter(New RParameter("x"))
+        ucrReceiverPolynomial.SetParameterIsString()
+
+
         ucrInputPolynomial.SetValidationTypeAsRVariable()
     End Sub
 
