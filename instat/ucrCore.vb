@@ -117,6 +117,7 @@ Public Class ucrCore
                 End If
             End If
         Next
+        UpdateLinkedControls()
     End Sub
 
     Public Overridable Sub UpdateLinkedControls()
@@ -328,38 +329,38 @@ Public Class ucrCore
         End If
     End Sub
 
-    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, strParamValue As String)
+    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, strParamValue As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterValues(strParamName, strParamValue)
+        clsTempCond.SetParameterValues(strParamName, strParamValue, bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, lstParamValues As String())
+    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, lstParamValues As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterValues(strParamName, lstParamValues.ToList())
+        clsTempCond.SetParameterValues(strParamName, lstParamValues.ToList(), bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String)
+    Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterPresentName(strParamName)
+        clsTempCond.SetParameterPresentName(strParamName, bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddFunctionNamesCondition(objControlState As Object, strFunctionName As String)
+    Public Sub AddFunctionNamesCondition(objControlState As Object, strFunctionName As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetFunctionName(strFunctionName)
+        clsTempCond.SetFunctionName(strFunctionName, bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddFunctionNamesCondition(objControlState As Object, lstFunctionNames As String())
+    Public Sub AddFunctionNamesCondition(objControlState As Object, lstFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetFunctionNamesMultiple(lstFunctionNames.ToList())
+        clsTempCond.SetFunctionNamesMultiple(lstFunctionNames.ToList(), bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 End Class

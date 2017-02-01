@@ -53,7 +53,6 @@ Public Class ucrCheck
         '        chkCheck.Checked = LinkedControlsParametersPresent()
         '    End If
         'End If
-        UpdateLinkedControls()
     End Sub
 
     Public Sub SetValueIfChecked(strNewValueIfChecked As String)
@@ -84,6 +83,7 @@ Public Class ucrCheck
             SetValuesCheckedAndUnchecked(strNewValueIfChecked, strNewValueIfUnchecked)
         ElseIf bAddRemoveParameter Then
             AddParameterPresentCondition(True, clsParameter.strArgumentName)
+            AddParameterPresentCondition(False, clsParameter.strArgumentName, False)
         End If
     End Sub
 
