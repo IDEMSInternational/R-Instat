@@ -16,7 +16,6 @@
 Imports instat.Translations
 Public Class dlgRenameDescriptive
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
     Private bReset As Boolean = True
     Dim bUseSelectedObject As Boolean = False
     Dim strSelectedOject As String = ""
@@ -63,13 +62,14 @@ Public Class dlgRenameDescriptive
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorForRenameObject.Reset()
         ucrInputNewName.ResetText()
-        NewDefaultName()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        TestOKEnabled()
+        NewDefaultName()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -90,7 +90,8 @@ Public Class dlgRenameDescriptive
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeforControls(bReset)
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
