@@ -66,13 +66,10 @@ Public Class dlgDuplicateColumns
         ucrPnlColPosition.AddRadioButton(rdoAfter, "FALSE")
         ucrPnlColPosition.AddRadioButton(rdoBeginning, "TRUE")
         ucrPnlColPosition.AddRadioButton(rdoEnd, "FALSE")
-
-        ' linked columns with radio buttons, After and Before have an extra parameter
-        SetParameter({ucrPnlColPosition, ucrReceiverForCopyColumns}, New RParameter("adjacent_column"))
-        ucrPnlColPosition.AddToLinkedControls(ucrLinked:=ucrReceiverForCopyColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True)
-        ucrReceiverForCopyColumns.bAddRemoveParameter = False
-        ' haven't said adjacent column = COLUMN NAME
-        ' haven't specified which radio buttons this applies for.
+        ucrPnlColPosition.AddParameterPresentCondition(rdoBefore, "adjacent_column", True)
+        ucrPnlColPosition.AddParameterPresentCondition(rdoAfter, "adjacent_column", True)
+        ucrPnlColPosition.AddParameterPresentCondition(rdoBeginning, "adjacent_column", False)
+        ucrPnlColPosition.AddParameterPresentCondition(rdoEnd, "adjacent_column", False)
 
         ' For ucrSaveColumn
         ucrInputColumnName.SetParameter(New RParameter("col_name"))
@@ -91,6 +88,8 @@ Public Class dlgDuplicateColumns
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDefaultFunction.AddParameter(ucrInputColumnName.GetParameter)
         clsDefaultFunction.AddParameter("before", "FALSE")
+        clsDefaultFunction.AddParameter("col_data", Chr(34) & "Size" & Chr(34))
+        clsDefaultFunction.AddParameter("adjacent_column", Chr(34) & "Size" & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
@@ -121,51 +120,12 @@ Public Class dlgDuplicateColumns
         End If
     End Sub
 
-    Private Sub ucrReceiverForCopyColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForCopyColumns.ControlContentsChanged, ucrInputColumnName.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForCopyColumns.ControlContentsChanged, ucrInputColumnName.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-
-
-
-
-
-
-    Private Sub ucrReceiverForCopyColumns_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCopyColumns.SelectionChanged
-        If Not ucrReceiverForCopyColumns.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_data", clsRFunctionParameter:=ucrReceiverForCopyColumns.GetVariables)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_data")
-        End If
-        If Not ucrInputColumnName.bUserTyped Then
-            ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
-        End If
-        PositionOfDuplicatedCols()
-        TestOKEnabled()
-    End Sub
-
-    '   Private Sub ucrSelectorForDuplicateColumn_DataFrameChanged() Handles ucrSelectorForDuplicateColumn.DataFrameChanged
-    '      ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    ' End Sub
-
-    Private Sub ucrInputColumnName_NameChanged() Handles ucrInputColumnName.NameChanged
-        ColName()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ColName()
-        If Not ucrInputColumnName.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & ucrInputColumnName.GetText & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_name")
-        End If
-    End Sub
-
-    Private Sub grpDuplicatedColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAfter.CheckedChanged, rdoBefore.CheckedChanged, rdoBeginning.CheckedChanged, rdoEnd.CheckedChanged
-        PositionOfDuplicatedCols()
     End Sub
 
     Private Sub PositionOfDuplicatedCols()
+        ucrReceiverForCopyColumns.UpdateControl()
         If rdoAfter.Checked Then
             If Not ucrReceiverForCopyColumns.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverForCopyColumns.GetVariableNames)
@@ -173,11 +133,11 @@ Public Class dlgDuplicateColumns
                 ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             End If
             ucrBase.clsRsyntax.AddParameter("before", "FALSE")
-        ElseIf rdoBeginning.Checked Then
-            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
-            ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
-        ElseIf rdoBefore.Checked Then
-            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+            ElseIf rdoBeginning.Checked Then
+                ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+            ElseIf rdoBefore.Checked Then
+                ucrBase.clsRsyntax.AddParameter("before", "TRUE")
             If Not ucrReceiverForCopyColumns.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverForCopyColumns.GetVariableNames)
             Else
@@ -187,5 +147,16 @@ Public Class dlgDuplicateColumns
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrBase.clsRsyntax.AddParameter("before", "FALSE")
         End If
+    End Sub
+
+    Private Sub ucrPnlColPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColPosition.ControlValueChanged
+        PositionOfDuplicatedCols()
+    End Sub
+
+    Private Sub ucrReceiverForCopyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForCopyColumns.ControlValueChanged
+        If Not ucrInputColumnName.bUserTyped Then
+            ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
+        End If
+        PositionOfDuplicatedCols()
     End Sub
 End Class

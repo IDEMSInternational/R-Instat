@@ -47,6 +47,7 @@ Public Class dlgOneVariableGraph
         clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
         clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
         clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsDefaultFunction.AddParameter("ncol", 2)
         clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ' Set default RFunction as the base function
