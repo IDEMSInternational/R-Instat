@@ -28,10 +28,10 @@ Partial Class dlgPolynomials
         Me.ucrReceiverPolynomial = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpType = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoSimple = New System.Windows.Forms.RadioButton()
         Me.rdoCentered = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSavePoly = New instat.ucrSave()
         Me.ucrNudDegree = New instat.ucrNud()
         Me.grpType.SuspendLayout()
@@ -89,20 +89,13 @@ Partial Class dlgPolynomials
         Me.grpType.Controls.Add(Me.rdoOrthogonal)
         Me.grpType.Controls.Add(Me.rdoSimple)
         Me.grpType.Controls.Add(Me.rdoCentered)
-        Me.grpType.Controls.Add(Me.ucrPnlOutput)
+        Me.grpType.Controls.Add(Me.ucrPnlType)
         Me.grpType.Location = New System.Drawing.Point(255, 109)
         Me.grpType.Name = "grpType"
         Me.grpType.Size = New System.Drawing.Size(123, 106)
         Me.grpType.TabIndex = 14
         Me.grpType.TabStop = False
         Me.grpType.Text = "Type"
-        '
-        'ucrPnlOutput
-        '
-        Me.ucrPnlOutput.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlOutput.Name = "ucrPnlOutput"
-        Me.ucrPnlOutput.Size = New System.Drawing.Size(114, 84)
-        Me.ucrPnlOutput.TabIndex = 0
         '
         'rdoOrthogonal
         '
@@ -142,6 +135,13 @@ Partial Class dlgPolynomials
         Me.rdoCentered.Tag = "Centered"
         Me.rdoCentered.Text = "Centered"
         Me.rdoCentered.UseVisualStyleBackColor = True
+        '
+        'ucrPnlType
+        '
+        Me.ucrPnlType.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlType.Name = "ucrPnlType"
+        Me.ucrPnlType.Size = New System.Drawing.Size(114, 84)
+        Me.ucrPnlType.TabIndex = 0
         '
         'ucrSavePoly
         '
@@ -197,7 +197,7 @@ Partial Class dlgPolynomials
     Friend WithEvents rdoOrthogonal As RadioButton
     Friend WithEvents rdoSimple As RadioButton
     Friend WithEvents rdoCentered As RadioButton
-    Friend WithEvents ucrPnlOutput As UcrPanel
+    Friend WithEvents ucrPnlType As UcrPanel
     Friend WithEvents ucrSavePoly As ucrSave
     Friend WithEvents ucrNudDegree As ucrNud
 End Class
