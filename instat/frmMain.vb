@@ -239,10 +239,6 @@ Public Class frmMain
         dlgExamine.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticProcess_Click(sender As Object, e As EventArgs) Handles mnuClimaticProcess.Click
-        dlgProcess.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticEvaporationSite_Click(sender As Object, e As EventArgs) Handles mnuClimaticEvaporationSite.Click
         dlgSite.ShowDialog()
     End Sub
@@ -470,11 +466,6 @@ Public Class frmMain
     Private Sub mnuManageFactorUnusedLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorUnusedLevels.Click
         dlgUnusedLevels.ShowDialog()
     End Sub
-
-    Private Sub mnuManageSheetProtect_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameProtectColumn.Click
-        dlgProtect.ShowDialog()
-    End Sub
-
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSort.Click
         dlgSort.ShowDialog()
     End Sub
@@ -1152,10 +1143,6 @@ Public Class frmMain
         dlgInfill.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDescribeRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeRainfall.Click
-        dlgRainfall.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticDescribeTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTemperatures.Click
         dlgTemperature.ShowDialog()
     End Sub
@@ -1178,10 +1165,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticPICSACrops_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACrops.Click
         dlgPICSACrops.ShowDialog()
-    End Sub
-
-    Private Sub QCProceduresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QCProceduresToolStripMenuItem.Click
-        dlgQCProcedures.ShowDialog()
     End Sub
 
     Private Sub mnuCimaticPrepareTransform_Click(sender As Object, e As EventArgs) Handles mnuCimaticPrepareTransform.Click
