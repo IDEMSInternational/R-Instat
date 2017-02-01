@@ -22,6 +22,7 @@ Public Class dlgDuplicateColumns
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
+
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -50,7 +51,7 @@ Public Class dlgDuplicateColumns
 
         ' For ucrSelector
         ucrSelectorForDuplicateColumn.SetParameter(New RParameter("data_name"))
-        ucrSelectorForDuplicateColumn.SetParameterIsString()
+        .ucrSelectorForDuplicateColumnSetParameterIsString()
 
         ' For ucrReceiver
         ucrReceiverForCopyColumns.SetParameter(New RParameter("col_data"))
