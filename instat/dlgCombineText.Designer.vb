@@ -55,7 +55,7 @@ Partial Class dlgCombineText
         Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 209)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
         Me.ucrSaveColumn.Size = New System.Drawing.Size(305, 24)
-        Me.ucrSaveColumn.TabIndex = 8
+        Me.ucrSaveColumn.TabIndex = 5
         '
         'ucrInputSeparator
         '
@@ -90,7 +90,7 @@ Partial Class dlgCombineText
         Me.ucrBase.Location = New System.Drawing.Point(10, 236)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 6
         '
         'dlgCombineText
         '

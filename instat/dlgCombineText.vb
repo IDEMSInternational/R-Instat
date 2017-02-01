@@ -55,7 +55,7 @@ Public Class dlgCombineText
 
         ' ucrReceiver
         ucrReceiverCombineText.SetParameter(New RParameter("columns"))
-        ucrReceiverCombineText.SetParameterIsString()
+        ' ucrReceiverCombineText.SetParameterIsString() ' reached problem: GetVariableNamesAsList()
         ucrReceiverCombineText.Selector = ucrSelectorForCombineText
         ucrReceiverCombineText.SetMeAsReceiver()
         ucrReceiverCombineText.bUseFilteredData = False
@@ -74,7 +74,7 @@ Public Class dlgCombineText
     'data_name="data1_stackedNoCarry"),
     'X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value",
     'data_name="data1_stackedNoCarry"), 
-    'columns=c("variable","value"),
+    '###columns=c("variable","value"),###
     ''sep=" ")
 
     ' want
