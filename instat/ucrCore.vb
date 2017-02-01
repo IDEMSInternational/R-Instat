@@ -106,11 +106,14 @@ Public Class ucrCore
         End If
 
         For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
-            If AllConditionsSatisfied(kvpTemp.Value, clsRCode) Then
-                If bConditionsMet Then
-                    MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
-                Else
-                    SetControlValue(kvpTemp.Key)
+            If kvpTemp.Value.Count > 0 Then
+                If AllConditionsSatisfied(kvpTemp.Value, clsRCode) Then
+                    If bConditionsMet Then
+                        MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
+                    Else
+                        SetControlValue(kvpTemp.Key)
+                        bConditionsMet = True
+                    End If
                 End If
             End If
         Next

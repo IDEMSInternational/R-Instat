@@ -32,27 +32,27 @@ Public Class ucrCheck
 
         MyBase.UpdateControl(bReset)
 
-        If clsParameter IsNot Nothing Then
-            If bChangeParameterValue Then
-                If clsParameter.strArgumentValue = strValueIfChecked OrElse clsParameter.strArgumentValue = strValueIfUnchecked Then
-                    chkCheck.Checked = (clsParameter.strArgumentValue = strValueIfChecked)
-                Else
-                    MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " does not match strValueIfChecked or strValueIfUnchecked so cannot determine state for the checkbox. Setting as the default instead.")
-                    chkCheck.Checked = False
-                End If
-            ElseIf bAddRemoveParameter Then
-                'Commented out as not currently needed. Can be included if needed.
-                'If bParameterIncludedWhenChecked Then
-                chkCheck.Checked = clsRCode.ContainsParameter(clsParameter)
-                'Else
-                'chkCheck.Checked = Not clsRCodeObject.clsParameters.Contains(clsParameter)
-                'End If
-            End If
-        Else
-            If lstValuesAndControl.Count > 0 Then
-                chkCheck.Checked = LinkedControlsParametersPresent()
-            End If
-        End If
+        'If clsParameter IsNot Nothing Then
+        '    If bChangeParameterValue Then
+        '        If clsParameter.strArgumentValue = strValueIfChecked OrElse clsParameter.strArgumentValue = strValueIfUnchecked Then
+        '            chkCheck.Checked = (clsParameter.strArgumentValue = strValueIfChecked)
+        '        Else
+        '            MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " does not match strValueIfChecked or strValueIfUnchecked so cannot determine state for the checkbox. Setting as the default instead.")
+        '            chkCheck.Checked = False
+        '        End If
+        '    ElseIf bAddRemoveParameter Then
+        '        'Commented out as not currently needed. Can be included if needed.
+        '        'If bParameterIncludedWhenChecked Then
+        '        chkCheck.Checked = clsRCode.ContainsParameter(clsParameter)
+        '        'Else
+        '        'chkCheck.Checked = Not clsRCodeObject.clsParameters.Contains(clsParameter)
+        '        'End If
+        '    End If
+        'Else
+        '    If lstValuesAndControl.Count > 0 Then
+        '        chkCheck.Checked = LinkedControlsParametersPresent()
+        '    End If
+        'End If
         UpdateLinkedControls()
     End Sub
 
@@ -73,6 +73,17 @@ Public Class ucrCheck
             MsgBox("Developer error: Parameter must be set with a parameter name before SetValueIfUnchecked can be run! Control will not update correctly.")
         Else
             AddParameterValuesCondition(False, clsParameter.strArgumentName, strValueIfUnchecked)
+        End If
+    End Sub
+
+    Public Overloads Sub SetParameter(clsNewParameter As RParameter, bNewChangeParameterValue As Boolean, Optional bNewAddRemoveParameter As Boolean = True, Optional strNewValueIfChecked As String = "TRUE", Optional strNewValueIfUnchecked As String = "FALSE")
+        MyBase.SetParameter(clsNewParameter)
+        bChangeParameterValue = bNewChangeParameterValue
+        bAddRemoveParameter = bNewAddRemoveParameter
+        If bChangeParameterValue Then
+            SetValuesCheckedAndUnchecked(strNewValueIfChecked, strNewValueIfUnchecked)
+        ElseIf bAddRemoveParameter Then
+            AddParameterPresentCondition(True, clsParameter.strArgumentName)
         End If
     End Sub
 
@@ -127,14 +138,4 @@ Public Class ucrCheck
             MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
         End If
     End Sub
-
-    Public Overrides Property bAddRemoveParameter As Object
-        Get
-            Return MyBase.bAddRemoveParameter
-        End Get
-        Set(bValue As Object)
-            MyBase.bAddRemoveParameter = bValue
-
-        End Set
-    End Property
 End Class
