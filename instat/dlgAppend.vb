@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgAppend
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsBindRows, clsDefaultBindRows As New RFunction
 
     Private Sub dlgAppend_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -62,6 +61,8 @@ Public Class dlgAppend
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsBindRows, clsDefaultBindRows As New RFunction
+
         ucrSelectorDataframes.Reset()
         ucrSaveGraph.Reset()
 
