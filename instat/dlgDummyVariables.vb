@@ -92,7 +92,6 @@ Public Class dlgDummyVariables
         'ucrSaveDummy.SetCheckBoxText("Save Dummy")
         'ucrSaveDummy.SetIsComboBox()
 
-        'chkXvariable.Checked = False
         ucrVariateReceiver.Visible = False
         lblVariate.Visible = False
         grpLevelOmitted.Enabled = False
@@ -114,14 +113,6 @@ Public Class dlgDummyVariables
         SetDefaults()
         SetRCodeForControls(True)
     End Sub
-    'Private Sub ucrreceiverfactor_selectionchanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
-    '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables)
-    '    TestOkEnabled()
-    'End Sub
-
-    'Private Sub ucrSelectorDummyVariable_DataFrameChanged() Handles ucrSelectorDummyVariable.DataFrameChanged
-    '    ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-    'End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
         TestOkEnabled()
