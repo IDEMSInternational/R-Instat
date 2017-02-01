@@ -27,14 +27,13 @@ Partial Class dlgPolynomials
         Me.ucrSelectorForPolynomial = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverPolynomial = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.nudDegree = New System.Windows.Forms.NumericUpDown()
         Me.grpType = New System.Windows.Forms.GroupBox()
         Me.ucrPnlOutput = New instat.UcrPanel()
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoSimple = New System.Windows.Forms.RadioButton()
         Me.rdoCentered = New System.Windows.Forms.RadioButton()
         Me.ucrSavePoly = New instat.ucrSave()
-        CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudDegree = New instat.ucrNud()
         Me.grpType.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -80,17 +79,10 @@ Partial Class dlgPolynomials
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 256)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
-        '
-        'nudDegree
-        '
-        Me.nudDegree.Location = New System.Drawing.Point(306, 76)
-        Me.nudDegree.Name = "nudDegree"
-        Me.nudDegree.Size = New System.Drawing.Size(49, 20)
-        Me.nudDegree.TabIndex = 9
         '
         'grpType
         '
@@ -153,19 +145,31 @@ Partial Class dlgPolynomials
         '
         'ucrSavePoly
         '
-        Me.ucrSavePoly.Location = New System.Drawing.Point(9, 228)
+        Me.ucrSavePoly.Location = New System.Drawing.Point(9, 223)
         Me.ucrSavePoly.Name = "ucrSavePoly"
         Me.ucrSavePoly.Size = New System.Drawing.Size(294, 24)
         Me.ucrSavePoly.TabIndex = 15
+        '
+        'ucrNudDegree
+        '
+        Me.ucrNudDegree.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDegree.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDegree.Location = New System.Drawing.Point(308, 77)
+        Me.ucrNudDegree.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDegree.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDegree.Name = "ucrNudDegree"
+        Me.ucrNudDegree.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDegree.TabIndex = 16
+        Me.ucrNudDegree.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgPolynomials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 331)
+        Me.ClientSize = New System.Drawing.Size(427, 314)
+        Me.Controls.Add(Me.ucrNudDegree)
         Me.Controls.Add(Me.ucrSavePoly)
         Me.Controls.Add(Me.grpType)
-        Me.Controls.Add(Me.nudDegree)
         Me.Controls.Add(Me.ucrSelectorForPolynomial)
         Me.Controls.Add(Me.ucrReceiverPolynomial)
         Me.Controls.Add(Me.lblSelected)
@@ -178,7 +182,6 @@ Partial Class dlgPolynomials
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Polynomials"
         Me.Text = "Polynomials"
-        CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpType.ResumeLayout(False)
         Me.grpType.PerformLayout()
         Me.ResumeLayout(False)
@@ -190,11 +193,11 @@ Partial Class dlgPolynomials
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrReceiverPolynomial As ucrReceiverSingle
     Friend WithEvents ucrSelectorForPolynomial As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents nudDegree As NumericUpDown
     Friend WithEvents grpType As GroupBox
     Friend WithEvents rdoOrthogonal As RadioButton
     Friend WithEvents rdoSimple As RadioButton
     Friend WithEvents rdoCentered As RadioButton
     Friend WithEvents ucrPnlOutput As UcrPanel
     Friend WithEvents ucrSavePoly As ucrSave
+    Friend WithEvents ucrNudDegree As ucrNud
 End Class
