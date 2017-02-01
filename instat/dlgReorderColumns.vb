@@ -59,7 +59,10 @@ Public Class dlgReorderColumns
     End Sub
 
     Private Sub ReopenDialog()
-
+        ucrDataFrameSelector.Reset()
+        If ucrDataFrameSelector.cboAvailableDataFrames.Text = "" Then
+            ucrReorderColumns.Reset()
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
