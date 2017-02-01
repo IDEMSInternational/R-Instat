@@ -48,7 +48,6 @@ Public Class dlgDeleteSheet
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 63
         ucrBase.clsRsyntax.iCallType = 0
-
         ucrDataFrameToDelete.SetParameter(New RParameter("data_name"))
         ucrDataFrameToDelete.SetParameterIsString()
     End Sub
@@ -56,11 +55,8 @@ Public Class dlgDeleteSheet
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrDataFrameToDelete.Reset()
-
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         TestOKEnabled()
     End Sub
 
