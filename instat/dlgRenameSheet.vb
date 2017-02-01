@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class dlgRenameSheet
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
     Private Sub dlgRenameSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -30,7 +29,7 @@ Public Class dlgRenameSheet
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -54,10 +53,13 @@ Public Class dlgRenameSheet
     ' check how changing dataframes affects it
 
     Private Sub SetDefaults()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
         ucrInputNewName.Reset()
         ucrDataFrameToRename.Reset()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
         CheckAutoName()
         TestOKEnabled()
     End Sub
@@ -68,7 +70,7 @@ Public Class dlgRenameSheet
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(True)
     End Sub
 
     Private Sub TestOKEnabled()
