@@ -371,18 +371,6 @@
     <Compile Include="dlgPICSATemperature.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgQCProcedures.Designer.vb">
-      <DependentUpon>dlgQCProcedures.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgQCProcedures.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgRainfall.Designer.vb">
-      <DependentUpon>dlgRainfall.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRainfall.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </Compile>
@@ -834,18 +822,6 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgProbabilityModels.Designer.vb">
-      <DependentUpon>dlgProbabilityModels.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgProbabilityModels.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgProtect.Designer.vb">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgProtect.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRandomSubsets.Designer.vb">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
     </Compile>
@@ -870,12 +846,6 @@
     <Compile Include="dlgRenameMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRenameModels.Designer.vb">
-      <DependentUpon>dlgRenameModels.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRenameModels.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRenameSheet.Designer.vb">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </Compile>
@@ -892,12 +862,6 @@
       <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgReoderMetadata.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgReoderModels.Designer.vb">
-      <DependentUpon>dlgReoderModels.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgReoderModels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReorderColumns.Designer.vb">
@@ -1578,12 +1542,6 @@
     <Compile Include="dlgProbabilityPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgProcess.Designer.vb">
-      <DependentUpon>dlgProcess.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgProcess.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRainStats.designer.vb">
       <DependentUpon>dlgRainStats.vb</DependentUpon>
     </Compile>
@@ -1624,12 +1582,6 @@
       <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRemoveUnusedLabels.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgReorder.Designer.vb">
-      <DependentUpon>dlgReorder.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgReorder.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReplace.Designer.vb">
@@ -2689,24 +2641,6 @@
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgProbabilityModels.resx">
-      <DependentUpon>dlgProbabilityModels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.fr-FR.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.sw-KE.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgQCProcedures.resx">
-      <DependentUpon>dlgQCProcedures.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRainfall.resx">
-      <DependentUpon>dlgRainfall.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
     </EmbeddedResource>
@@ -2743,15 +2677,6 @@
     <EmbeddedResource Include="dlgRenameMetadata.sw-KE.resx">
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameModels.fr-FR.resx">
-      <DependentUpon>dlgRenameModels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameModels.resx">
-      <DependentUpon>dlgRenameModels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameModels.sw-KE.resx">
-      <DependentUpon>dlgRenameModels.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.fr-FR.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -2778,15 +2703,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderMetadata.sw-KE.resx">
       <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderModels.fr-FR.resx">
-      <DependentUpon>dlgReoderModels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderModels.resx">
-      <DependentUpon>dlgReoderModels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderModels.sw-KE.resx">
-      <DependentUpon>dlgReoderModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderColumns.fr-FR.resx">
       <DependentUpon>dlgReorderColumns.vb</DependentUpon>
@@ -3810,15 +3726,6 @@
     <EmbeddedResource Include="dlgProbabilityPlot.sw-KE.resx">
       <DependentUpon>dlgProbabilityPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgProcess.fr-FR.resx">
-      <DependentUpon>dlgProcess.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProcess.resx">
-      <DependentUpon>dlgProcess.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProcess.sw-KE.resx">
-      <DependentUpon>dlgProcess.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgRainStats.fr-FR.resx">
       <DependentUpon>dlgRainStats.vb</DependentUpon>
     </EmbeddedResource>
@@ -3883,15 +3790,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRemoveUnusedLabels.sw-KE.resx">
       <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorder.fr-FR.resx">
-      <DependentUpon>dlgReorder.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorder.resx">
-      <DependentUpon>dlgReorder.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorder.sw-KE.resx">
-      <DependentUpon>dlgReorder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReplace.fr-FR.resx">
       <DependentUpon>dlgReplace.vb</DependentUpon>
