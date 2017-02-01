@@ -52,8 +52,7 @@ Public Class dlgDummyVariables
         ucrSelectorDummyVariable.Reset()
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCodeForControls(True)
-        TestOkEnabled()
+              TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
