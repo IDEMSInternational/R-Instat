@@ -17,39 +17,75 @@
 Imports instat.Translations
 Public Class dlgCliBoxplot
     Public bFirstLoad As Boolean = True
+    Public bReset As Boolean = True
     Private Sub dlgCliBoxplot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
 
     Private Sub TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$cliboxplot")
-    End Sub
-    Private Sub SetDefaults()
+
+        ucrInputDataPeriod.SetParameter(New RParameter("data_period_label", 1))
+        ucrInputDataPeriod.SetValidationTypeAsRVariable()
+
+        ucrInputFactorLab.SetParameter(New RParameter("factor", 2))
+        ucrInputFactorLab.SetValidationTypeAsRVariable()
+
+        ucrInputWidth.SetParameter(New RParameter("width", 3))
+        ucrInputWidth.SetValidationTypeAsRVariable()
+
+        ucrInputLog.SetParameter(New RParameter("log", 4))
+        ucrInputLog.SetValidationTypeAsRVariable()
+
+        ucrInputAt.SetParameter(New RParameter("at", 5))
+        ucrInputAt.SetValidationTypeAsRVariable()
+
+
+        ucrInputBorder.SetParameter(New RParameter("border", 6))
+        ucrInputBorder.SetValidationTypeAsRVariable()
+
+        '  ucrInputColour.SetParameter(New RParameter("pars", 7))
+        ' ucrInputColour.SetValidationTypeAsRVariable()
+
+        ucrInputColour.SetParameter(New RParameter("col", 8))
+        ucrInputColour.SetValidationTypeAsRVariable()
+
+        ucrInputTitle.SetParameter(New RParameter("title", 9))
+        ucrInputTitle.SetValidationTypeAsRVariable()
+
+        ucrInputVariable.SetParameter(New RParameter("var", 10))
+        ucrInputVariable.SetValidationTypeAsRVariable()
+
+        ucrInputYLabel.SetParameter(New RParameter("ylab", 11))
+        ucrInputYLabel.SetValidationTypeAsRVariable()
+
+        ucrInputXLabel.SetParameter(New RParameter("xlab", 0))
+        ucrInputXLabel.SetValidationTypeAsRVariable()
+
+
+        ucrchkHorizontal.SetText("Horizaontal")
+        ucrchkHorizontal.SetParameter(New RParameter("horizontal"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrchkHorizontal.SetRDefault("FALSE")
+
 
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-
-    End Sub
-
-
-    Private Sub chkHorizontal_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontal.CheckedChanged
-        If chkHorizontal.Checked Then
-            ucrBase.clsRsyntax.AddParameter("horizontal", chkHorizontal.Checked.ToString().ToUpper())
-        End If
-    End Sub
 
     Private Sub chkMonthAbbreviations_CheckedChanged(sender As Object, e As EventArgs) Handles chkMonthAbbreviations.CheckedChanged
         If chkHorizontal.Checked Then
@@ -108,63 +144,21 @@ Public Class dlgCliBoxplot
 
     End Sub
 
-    Private Sub ucrInputColour_TextChanged(sender As Object, e As EventArgs) Handles ucrInputColour.TextChanged
-        ucrBase.clsRsyntax.AddParameter("col", Chr(34) & ucrInputColour.Text.ToString() & Chr(34))
 
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        'reset
+
+        'Define the default RFunction
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strClimateObject & "$cliboxplot")
+
+        ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
-    Private Sub ucrInputTitle_TextChanged(sender As Object, e As EventArgs) Handles ucrInputTitle.TextChanged
-        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrInputTitle.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputVariable_TextChanged(sender As Object, e As EventArgs) Handles ucrInputVariable.TextChanged
-        ucrBase.clsRsyntax.AddParameter("var", Chr(34) & ucrInputVariable.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputYLabel_TextChanged(sender As Object, e As EventArgs) Handles ucrInputYLabel.TextChanged
-        ucrBase.clsRsyntax.AddParameter("ylab", Chr(34) & ucrInputYLabel.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputXLabel_TextChanged(sender As Object, e As EventArgs) Handles ucrInputXLabel.TextChanged
-        ucrBase.clsRsyntax.AddParameter("xlab", Chr(34) & ucrInputXLabel.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputDataPeriod_TextChanged(sender As Object, e As EventArgs) Handles ucrInputDataPeriod.TextChanged
-        ucrBase.clsRsyntax.AddParameter("data_period_label", Chr(34) & ucrInputDataPeriod.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputFactorLab_TextChanged(sender As Object, e As EventArgs) Handles ucrInputFactorLab.TextChanged
-        ucrBase.clsRsyntax.AddParameter("factor", Chr(34) & ucrInputFactorLab.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputWidth_TextChanged(sender As Object, e As EventArgs) Handles ucrInputWidth.TextChanged
-        ucrBase.clsRsyntax.AddParameter("width", Chr(34) & ucrInputWidth.Text.ToString() & Chr(34)) ' is a vector
-
-    End Sub
-
-    Private Sub ucrInputLog_TextChanged(sender As Object, e As EventArgs) Handles ucrInputLog.TextChanged
-        ucrBase.clsRsyntax.AddParameter("log", Chr(34) & ucrInputLog.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputAT_TextChanged(sender As Object, e As EventArgs) Handles ucrInputAt.TextChanged
-        ucrBase.clsRsyntax.AddParameter("at", Chr(34) & ucrInputAt.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputBorder_TextChanged(sender As Object, e As EventArgs) Handles ucrInputBorder.TextChanged
-        ucrBase.clsRsyntax.AddParameter("border", Chr(34) & ucrInputBorder.Text.ToString() & Chr(34)) ' is a par("fg")
-
-    End Sub
-
-    Private Sub ucrInputPars_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPars.TextChanged
-        ucrBase.clsRsyntax.AddParameter("pars", Chr(34) & ucrInputColour.Text.ToString() & Chr(34)) ' is a vector
-
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 End Class
