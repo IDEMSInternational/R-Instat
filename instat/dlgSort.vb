@@ -19,25 +19,39 @@ Imports instat.Translations
 Public Class dlgSort
     'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
 
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOKEnabled()
-        autoTranslate(Me)
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
         'Setting default Rfunction as the base function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+
+        'Reset
+        ucrSelectForSort.Reset()
+
+        ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        ucrSelectForSort.Reset()
+
         grpMissingValues.Enabled = False
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     'Setting OKEnabled
@@ -51,7 +65,7 @@ Public Class dlgSort
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 339
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+
 
         'Setting Parameters
         ucrReceiverSort.Selector = ucrSelectForSort
