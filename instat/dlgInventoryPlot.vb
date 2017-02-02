@@ -17,13 +17,18 @@
 Imports instat.Translations
 Public Class dlgInventoryPlot
     Private bFirstLoad As Boolean = True
-    Private clsDefaultRFunction As New RFunction
+    Private bReset As Boolean = True
+
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
 
@@ -82,10 +87,6 @@ Public Class dlgInventoryPlot
         ucrNudThreashold.Increment = 0.01
         ucrNudThreashold.DecimalPlaces = 2
         ucrNudThreashold.SetRDefault("0.85")
-
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
-        clsDefaultRFunction.AddParameter("threshold", "0.85")
-        clsDefaultRFunction.SetAssignTo("last_graph", strTempGraph:="last_graph")
     End Sub
 
     Private Sub TestOkEnabled()
@@ -95,14 +96,25 @@ Public Class dlgInventoryPlot
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
+        Dim clsDefaultRFunction As New RFunction
+
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrYearReceiver.SetMeAsReceiver()
+
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
+        clsDefaultRFunction.AddParameter("threshold", "0.85")
+        clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
         TestOkEnabled()
     End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         'there needs to be work on sdgplots before this could be linked 
         'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
@@ -111,6 +123,7 @@ Public Class dlgInventoryPlot
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
