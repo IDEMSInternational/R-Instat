@@ -69,6 +69,7 @@ Public Class DlgDefineClimaticData
 
         ucrReceiverDate.Selector = ucrSelectorDefineClimaticData
         ucrReceiverDate.Tag = "date"
+        ucrReceiverDate.bLinkedUpdateFunction = False
         ucrReceiverCloudCover.Selector = ucrSelectorDefineClimaticData
         ucrReceiverCloudCover.Tag = "cloud_cover"
         ucrReceiverStation.Selector = ucrSelectorDefineClimaticData
