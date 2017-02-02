@@ -63,40 +63,53 @@ Public Class DlgDefineClimaticData
         Dim kvpDOY As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("doy", {"doy", "DOY"}.ToList())
 
         lstRecognisedTypes.AddRange({kvpRain, kvpDate, kvpStation, kvpCloudCover, kvpTempMax, kvpTempMin, kvpRadiation, kvpSunshineHours, kvpWindDirection, kvpWindSpeed, kvpYear, kvpMonth, kvpDay})
+        lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDate, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation, ucrReceiverRain, ucrReceiverStationName, ucrReceiverSunshine, ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear, ucrReceiverDOY})
 
         ucrSelectorDefineClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineClimaticData.SetParameterIsString()
 
-        ucrReceiverDate.Selector = ucrSelectorDefineClimaticData
+        ucrReceiverDate.SetParameter(New RParameter("date"))
         ucrReceiverDate.Tag = "date"
-        ucrReceiverDate.bLinkedUpdateFunction = False
-        ucrReceiverCloudCover.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverCloudCover.SetParameter(New RParameter("cloud_cover"))
         ucrReceiverCloudCover.Tag = "cloud_cover"
-        ucrReceiverStation.Selector = ucrSelectorDefineClimaticData
-        ucrReceiverStation.Tag = "station"
-        ucrReceiverMaxTemp.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverStationName.SetParameter(New RParameter("station"))
+        ucrReceiverStationName.Tag = "station"
+        ucrReceiverMaxTemp.SetParameter(New RParameter("temp_max"))
         ucrReceiverMaxTemp.Tag = "temp_max"
-        ucrReceiverMinTemp.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverMinTemp.SetParameter(New RParameter("temp_min"))
         ucrReceiverMinTemp.Tag = "temp_min"
-        ucrReceiverRadiation.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverRadiation.SetParameter(New RParameter("radiation"))
         ucrReceiverRadiation.Tag = "radiation"
-        ucrReceiverRain.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverRain.SetParameter(New RParameter("rain"))
         ucrReceiverRain.Tag = "rain"
-        ucrReceiverSunshine.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverSunshine.SetParameter(New RParameter("sunshine_hours"))
         ucrReceiverSunshine.Tag = "sunshine_hours"
-        ucrReceiverWindDirection.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverWindDirection.SetParameter(New RParameter("wind_direction"))
         ucrReceiverWindDirection.Tag = "wind_direction"
-        ucrReceiverWindSpeed.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverWindSpeed.SetParameter(New RParameter("wind_speed"))
         ucrReceiverWindSpeed.Tag = "wind_speed"
-        ucrReceiverYear.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverYear.SetParameter(New RParameter("year"))
         ucrReceiverYear.Tag = "year"
-        ucrReceiverMonth.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverMonth.SetParameter(New RParameter("month"))
         ucrReceiverMonth.Tag = "month"
-        ucrReceiverDay.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverDay.SetParameter(New RParameter("day"))
         ucrReceiverDay.Tag = "day"
-        ucrReceiverDOY.Selector = ucrSelectorDefineClimaticData
+
+        ucrReceiverDOY.SetParameter(New RParameter("doy"))
         ucrReceiverDOY.Tag = "doy"
-        lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDate, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation, ucrReceiverRain, ucrReceiverStation, ucrReceiverSunshine, ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear, ucrReceiverDOY})
+
+        SetRSelector()
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
             ucrTempReceiver.bExcludeFromSelector = True
         Next
@@ -104,18 +117,36 @@ Public Class DlgDefineClimaticData
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
+
         ucrSelectorDefineClimaticData.Reset()
         ucrReceiverDate.SetMeAsReceiver()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
         clsTypesFunction.SetRCommand("c")
-        clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
-        'TestOKEnabled()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+
         AutoFillReceivers()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRcodesforReceivers(bReset)
+        ucrSelectorDefineClimaticData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub SetRcodesforReceivers(bReset As Boolean)
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
+        Next
+    End Sub
+
+    Private Sub SetRSelector()
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.Selector = ucrSelectorDefineClimaticData
+            ucrTempReceiver.SetParameterIsString()
+            ucrTempReceiver.bChangeParameterValue = False
+        Next
     End Sub
 
     Private Sub TestOKEnabled()
@@ -132,26 +163,23 @@ Public Class DlgDefineClimaticData
         TestOKEnabled()
     End Sub
 
-    'Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged, ucrReceiverCloudCover.SelectionChanged, ucrReceiverDate.SelectionChanged, ucrReceiverDay.SelectionChanged, ucrReceiverMaxTemp.SelectionChanged, ucrReceiverMinTemp.SelectionChanged, ucrReceiverMonth.SelectionChanged, ucrReceiverRadiation.SelectionChanged, ucrReceiverRain.SelectionChanged, ucrReceiverStation.SelectionChanged, ucrReceiverSunshine.SelectionChanged, ucrReceiverWindDirection.SelectionChanged, ucrReceiverWindSpeed.SelectionChanged, ucrReceiverYear.SelectionChanged
-    '    FillClimaticTypes()
-    '    TestOKEnabled()
-    'End Sub
+    'Private Sub FillClimaticTypes()
+    '    Dim ucrTempReceiver As ucrReceiver
+    '    For Each ucrTempReceiver In lstReceivers
+    '        ucrTempReceiver.bChangeParameterValue = False
+    '        If Not ucrTempReceiver.IsEmpty Then
+    '            clsTypesFunction.AddParameter(ucrTempReceiver.Tag, ucrTempReceiver.GetVariableNames)
 
-    'Private Sub ucrSelectorDefineClimaticData_DataFrameChanged() Handles ucrSelectorDefineClimaticData.DataFrameChanged
-    '    ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    '    AutoFillReceivers()
+    '            'ucrTempReceiver.bChangeParameterValue = False
+    '            'ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag, 1))
+    '            'ucrTempReceiver.SetParameterIsString()
+    '            'ucrTempReceiver.SetRCode(clsTypesFunction, True)
+    '        Else
+    '            clsTypesFunction.RemoveParameterByName(ucrTempReceiver.Tag)
+    '        End If
+    '        ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+    '    Next
     'End Sub
-
-    Private Sub FillClimaticTypes()
-        Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstReceivers
-            If Not ucrTempReceiver.IsEmpty Then
-                clsTypesFunction.AddParameter(ucrTempReceiver.Tag, ucrTempReceiver.GetVariableNames)
-            Else
-                clsTypesFunction.RemoveParameterByName(ucrTempReceiver.Tag)
-            End If
-        Next
-    End Sub
 
     Private Sub AutoFillReceivers()
         Dim lstRecognisedValues As List(Of String)
@@ -198,8 +226,9 @@ Public Class DlgDefineClimaticData
         Return lstValues
     End Function
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverCloudCover.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrReceiverSunshine.ControlContentsChanged, ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrSelectorDefineClimaticData.ControlContentsChanged
-        FillClimaticTypes()
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverCloudCover.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverStationName.ControlContentsChanged, ucrReceiverSunshine.ControlContentsChanged, ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrSelectorDefineClimaticData.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged
+        'FillClimaticTypes()
+        'AutoFillReceivers()
         TestOKEnabled()
     End Sub
 End Class
