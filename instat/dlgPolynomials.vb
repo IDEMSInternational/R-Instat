@@ -28,7 +28,6 @@ Public Class dlgPolynomials
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -105,7 +104,4 @@ Public Class dlgPolynomials
         TestOKEnabled()
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudDegree.ControlValueChanged
-        TestOKEnabled()
-    End Sub
 End Class
