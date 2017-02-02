@@ -42,19 +42,20 @@ Public Class dlgPolynomials
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
 
+        'Reset the selector
         ucrSelectorForPolynomial.Reset()
-        ucrSelectorForPolynomial.Focus()
 
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("poly")
+        clsDefaultFunction.AddParameter("degree", 2)
         clsDefaultFunction.SetAssignTo("poly", strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="poly")
 
         ' Set default RFunction as the base function
+        ' Warning: Centred radio button not fully impemented yet - Awaiting implementation ofpassing function within a function
+        '  ABE <- InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_name="ABE", data_name="ghana_data")
+        'Poly <- poly(x=scale(x=ABE, scale=FALSE, center=TRUE), raw=TRUE, degree=2)
+        'clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsCentredOptionFunc)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone)
-
-        ' clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsCentredOptionFunc)
-        ' ucrReceiverPolynomial.SetRCode(clsCentredOptionFunc)
-        ucrNudDegree.Value = 2
 
     End Sub
 
@@ -71,10 +72,10 @@ Public Class dlgPolynomials
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 46
 
+        'Second function to be set inside
+        'clsCentredOptionFunc.SetRCommand("scale")
         'clsCentredOptionFunc.AddParameter("center", "TRUE")
         'clsCentredOptionFunc.AddParameter("scale", "FALSE")
-        'clsCentredOptionFunc.SetRCommand("scale")
-
 
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.bUseFilteredData = False
@@ -88,11 +89,8 @@ Public Class dlgPolynomials
         ucrPnlType.AddRadioButton(rdoSimple, "TRUE")
         ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
-        ucrPnlType.SetRDefault("FALSE")
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
-
-
 
         'Set ucrSave 
         ucrSavePoly.SetPrefix("poly")
@@ -103,47 +101,6 @@ Public Class dlgPolynomials
 
     End Sub
 
-    'Private Sub ucrInputPolynomial_NameChanged()
-    '    'ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPolynomial.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPolynomial.GetText, bAssignToIsPrefix:=True)
-    '    'TestOKEnabled()
-    'End Sub
-
-    'Private Sub ucrReceiverPolynomial_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverPolynomial.SelectionChanged
-    '    If Not ucrReceiverPolynomial.IsEmpty Then
-    '        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
-    '        clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
-    '    Else
-    '        ucrBase.clsRsyntax.RemoveParameter("x")
-    '    End If
-    '    TestOKEnabled()
-    'End Sub
-
-    'Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs)
-    '    XParameter()
-    'End Sub
-
-    'Private Sub XParameter()
-    'If rdoSimple.Checked Then
-    '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
-    '    ucrBase.clsRsyntax.AddParameter("raw", "TRUE")
-
-    'ElseIf rdoOrthogonal.Checked = True Then
-    '    ucrBase.clsRsyntax.AddParameter("raw", "FALSE")
-    '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
-
-    'ElseIf rdoCentered.Checked = True Then
-    '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsCentredOptionFunc)
-    '    ucrBase.clsRsyntax.AddParameter("raw", "TRUE")
-
-    'Else
-    '    ucrBase.clsRsyntax.RemoveParameter("raw")
-    'End If
-    ' End Sub
-
-    'Private Sub nudDegree_TextChanged(sender As Object, e As EventArgs)
-    '    ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
-    '    TestOKEnabled()
-    'End Sub
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPolynomial.ControlContentsChanged, ucrNudDegree.ControlContentsChanged
         TestOKEnabled()
     End Sub
