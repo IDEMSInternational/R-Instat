@@ -19,16 +19,19 @@ Imports instat.Translations
 Public Class dlgSaveAs
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSaveAS As New RFunction
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -40,16 +43,15 @@ Public Class dlgSaveAs
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
         ucrInputFilePath.ResetText()
-        clsSaveAS.SetRCommand("saveRDS")
+        clsDefaultFunction.SetRCommand("saveRDS")
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-        clsSaveAS.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveAS.Clone())
-        SetRCodeForControls(True)
-        TestOKEnabled()
+        clsDefaultFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub TestOKEnabled()
