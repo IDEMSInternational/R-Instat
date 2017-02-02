@@ -53,10 +53,8 @@ Public Class dlgReplace
 
 
         ' PROBLEMS:
-        ' start value and end value are in there even if they're not checked
-        ' old/new value are never coming up
-        ' the ucrInput isn't showing up when old/new value is checked
         ' on OLD, value and missing are on a different panel to start/end value
+        ' The inputs should have chr(34)'s if it is a factor, else no chr(34)
 
         rdoFromAbove.Enabled = False
 
@@ -73,85 +71,79 @@ Public Class dlgReplace
         ucrReceiverReplace.SetParameterIsString()
 
 
-        ' For the link between the rdoOldValue and ucrOldValue
-        SetParameter({ucrPnlNew, ucrInputNewValue}, New RParameter("old_value", 2))
-        ucrPnlOld.AddRadioButton(rdoOldValue, Chr(34) & "" & Chr(34)) ' this is the old value input.
+
+
+        ' OLD PANEL:
+        SetParameter({ucrPnlOld, ucrInputOldValue}, New RParameter("old_value", 1))
+        ucrPnlOld.AddRadioButton(rdoOldValue, ucrInputOldValue.GetText)
         ucrPnlOld.AddRadioButton(rdoOldMissing, Chr(34) & "NA" & Chr(34))
-        ucrPnlOld.AddToLinkedControls(ucrLinked:=ucrInputOldValue, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlOld.bChangeParameterValue = False ' currently this line means old_value does not run and is not selected
+        '        ucrPnlOld.AddToLinkedControls(ucrLinked:=ucrInputOldValue, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ''ucrPnlOld.bChangeParameterValue = False ' currently this line means old_value does not run and is not selected
         ucrInputOldValue.bAddRemoveParameter = False
-        ucrInputOldValue.SetValidationTypeAsRVariable()
+        'ucrInputOldValue.SetValidationTypeAsRVariable()
         ucrInputOldValue.SetName("")
-        ucrPnlOld.SetRDefault(Chr(34) & "" & Chr(34)) ' rdoOldValue
-
-        ' atm this does not come up. is this because it wants both rdos in the panel to be checked in order for it to?
-
-
-        ' how do I do that? do  I do it for the whole of pnlOld and specify somewhere the link is only for one rdo.
+        'ucrPnlOld.SetRDefault(Chr(34) & "0" & Chr(34)) ' rdoOldValue to be default, but it varies
 
 
 
-        ' ucrInput should only show only if rdoPnlOld is selected.
-        ' how do I do that? do  I do it for the whole of pnlOld and specify somewhere the link is only for one rdo.
+        ' RANGE:
+        '' If the third rdo is selected, then we run two parameters - both different to the first two
+        ' this is not right, since I have created a panel for the new, separate one.
 
-        ' the user might not select an 'old value' one if they select and start and end one.
-
-        ' have three rdos to link together that not more than one of these can be selected - is this 'decided' by the group box?
-        ' then two rdos have one code, the other another
-        ' then the first rdo (which shares a code with another rdo) has the option for ucrInput
-
-        ' Start Values
-        SetParameter({ucrPnlRange, ucrInputRangeFrom}, New RParameter("start_value", 3))
-        ucrPnlRange.AddToLinkedControls(ucrLinked:=ucrInputRangeFrom, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ' What I am trying to do:
+        ' We have two functions associated with this parameter: start_value and end_value
+        ' These two functions also have four linkings associated with them + two labels
+        SetParameter({ucrPnlRange, ucrInputRangeFrom, ucrInputRangeTo}, New RParameter("start_value", 3))
+        ucrPnlRange.AddRadioButton(rdoRange, "0")
         ucrPnlRange.bChangeParameterValue = False
-        ucrInputRangeFrom.SetName("")
-        ucrInputRangeFrom.bAddRemoveParameter = False
-        ucrInputRangeFrom.SetLabel(lblRangeMin)
-        ' want: ucrBase.clsRsyntax.AddParameter("start_value", ucrInputRangeFrom.GetText)
-        ' start_value = FROM VALUE, closed_start_value = TRUE/FALSE
 
-        'have to specify when this is visible. It is not part of the code (i.e., it's not start_value = CHKMINIMUM,
-        'its an extra which is visible when that rdo button is checked.
+        ucrPnlRange.AddToLinkedControls(ucrLinked:=ucrInputRangeFrom, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputRangeFrom.SetName("0")
+        ucrInputRangeFrom.bChangeParameterValue = False
+        ucrInputRangeFrom.SetLabel(lblRangeMin)
+
+        ucrPnlRange.AddToLinkedControls(ucrLinked:=ucrChkMinimum, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkMinimum.SetParameter(New RParameter("closed_start_value"))
         ucrChkMinimum.SetText("Including")
-        ucrChkMinimum.SetParameter(New RParameter("closed_start_value", 4))
         ucrChkMinimum.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMinimum.bAddRemoveParameter = False
         ucrChkMinimum.SetRDefault("FALSE")
 
+        ' Would I want
+        '         SetParameter({ucrPnlRange, ucrInputRangeTo}, New RParameter("end_value", 3))
+        ' Or:
 
-        ' End Value
-        SetParameter({ucrPnlRange, ucrInputRangeTo}, New RParameter("end_value", 5))
+        ucrPnlRange.AddParameterPresentCondition(rdoRange, "end_value", "1")
         ucrPnlRange.AddToLinkedControls(ucrLinked:=ucrInputRangeTo, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRange.bChangeParameterValue = False
-        ucrInputRangeTo.SetName("")
-        ucrInputRangeTo.bAddRemoveParameter = False
-        ucrInputRangeTo.SetLabel(lblRangeMax)
-        ' want: ucrBase.clsRsyntax.AddParameter("end_value", ucrInputRangeTo.GetText)
 
-        'have to specify when this is visible. It is not part of the code (i.e., it's not end_value = CHKMAX,
-        'its an extra which is visible when that rdo button is checked.
+        ucrInputRangeTo.SetName("1")
+        ucrInputRangeTo.bChangeParameterValue = False
+        ucrInputRangeTo.SetLabel(lblRangeMax)
+
+        ucrPnlRange.AddToLinkedControls(ucrLinked:=ucrChkMaximum, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkMaximum.SetParameter(New RParameter("closed_end_value"))
         ucrChkMaximum.SetText("Including")
-        ucrChkMaximum.SetParameter(New RParameter("closed_end_value", 6))
         ucrChkMaximum.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMaximum.bAddRemoveParameter = False
         ucrChkMaximum.SetRDefault("FALSE")
 
 
-        ' For the link between the rdoNewValue and ucrNewValue
+
+        '' NEW VALUES:
         SetParameter({ucrPnlNew, ucrInputNewValue}, New RParameter("new_value", 7))
-        ucrPnlNew.AddRadioButton(rdoNewValue, Chr(34) & "" & Chr(34)) ' value in input
-        ucrPnlNew.AddRadioButton(rdoNewMissing, Chr(34) & "NA" & Chr(34))
-        ' ucrInputNewValue should only show if rdoNewValue is selected
-        ' how do I do that? do  I do it for the whole of pnlOld and specify somewhere the link is only for one rdo.
-        ucrPnlNew.AddToLinkedControls(ucrLinked:=ucrInputNewValue, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNew.AddRadioButton(rdoNewValue, ucrInputNewValue.GetText()) ' value in input
+        ucrPnlNew.AddRadioButton(rdoNewMissing, "NA")
+        'ucrPnlNew.SetRDefault() R default is ucrInputNewValue, however, we can't put that in as it varies
+
+        ' linked for just rdoNewValue
+        'ucrPnlNew.AddToLinkedControls(ucrLinked:=ucrInputNewValue, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlNew.bChangeParameterValue = False ' currently this line means new_value does not run and is not selected
         ucrInputNewValue.bAddRemoveParameter = False
-        ucrInputNewValue.SetValidationTypeAsRVariable()
+        'ucrInputNewValue.SetValidationTypeAsRVariable()
         ucrInputNewValue.SetName("")
-        ucrPnlNew.SetRDefault(Chr(34) & "" & Chr(34)) ' rdoOldValue
-
-
-
-
-
     End Sub
 
     Private Sub SetDefaults()
@@ -159,7 +151,7 @@ Public Class dlgReplace
         ucrSelectorReplace.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        '        clsDefaultFunction.AddParameter("old_value", Chr(34) & "" & Chr(34)) ' don't always have this, say if interval option is checked
+        clsDefaultFunction.AddParameter("old_value", Chr(34) & "" & Chr(34)) 'default this is checked, however, this value varies so I don't know how to do this
         clsDefaultFunction.AddParameter("new_value", Chr(34) & "" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
@@ -189,22 +181,6 @@ Public Class dlgReplace
         SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
-
-    '   Private Sub ucrReceiverReplace_SelectionChanged() Handles ucrReceiverReplace.SelectionChanged
-    '   If rdoOldValue.Checked Then
-    '          rdoOldValue.Checked = False
-    '          rdoOldValue.Checked = True
-    '  End If
-    '  If rdoNewValue.Checked Then
-    '          rdoNewValue.Checked = False
-    '          rdoNewValue.Checked = True
-    '  End If
-    '      RangeEnable()
-    '      ucrBaseReplace.clsRsyntax.AddParameter("col_names", ucrReceiverReplace.GetVariableNames())
-    '      TestOKEnabled()
-    '  End Sub
-    '
-
 
     Private Sub InputOldValue()
         Dim strVarType As String
