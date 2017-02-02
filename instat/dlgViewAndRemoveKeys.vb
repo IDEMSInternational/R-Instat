@@ -17,15 +17,34 @@
 Imports instat.Translations
 Public Class dlgViewAndRemoveKeys
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
     Private Sub dlgViewAndRemoveKeys_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+    End Sub
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        ucrRemoveKey.Checked = False
+        ucrSelectorKeys.Reset()
+
+        ' Set default RFunction as the base function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_key")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -43,7 +62,7 @@ Public Class dlgViewAndRemoveKeys
         ucrSelectorKeys.SetParameterIsString()
 
         ucrRemoveKey.SetText("Remove Key")
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_key")
+
 
     End Sub
 
@@ -55,20 +74,13 @@ Public Class dlgViewAndRemoveKeys
         End If
     End Sub
 
-    Private Sub SetDefaults()
-        ' Set default RFunction as the base function
-        ucrRemoveKey.Checked = False
-        ucrSelectorKeys.Reset()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        TestOKEnabled()
-    End Sub
-
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorKeys.ControlContentsChanged, ucrReceiverSelectedKey.ControlContentsChanged, ucrRemoveKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 End Class
