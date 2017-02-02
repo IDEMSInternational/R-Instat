@@ -87,8 +87,6 @@ Public Class ucrCore
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
-        Dim bConditionsMet As Boolean = False
-
         If clsRCode IsNot Nothing Then
             If clsParameter IsNot Nothing Then
                 If Not clsRCode.ContainsParameter(clsParameter) Then
@@ -104,6 +102,12 @@ Public Class ucrCore
         Else
             clsRCode = New RCodeStructure
         End If
+        SetControlValue()
+        UpdateLinkedControls()
+    End Sub
+
+    Protected Overridable Sub SetControlValue()
+        Dim bConditionsMet As Boolean = False
 
         For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
             If kvpTemp.Value.Count > 0 Then
@@ -111,13 +115,12 @@ Public Class ucrCore
                     If bConditionsMet Then
                         MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
                     Else
-                        SetControlValue(kvpTemp.Key)
+                        SetToValue(kvpTemp.Key)
                         bConditionsMet = True
                     End If
                 End If
             End If
         Next
-        UpdateLinkedControls()
     End Sub
 
     Public Overridable Sub UpdateLinkedControls()
@@ -300,7 +303,7 @@ Public Class ucrCore
         End If
     End Sub
 
-    Protected Overridable Sub SetControlValue(objTemp As Object)
+    Protected Overridable Sub SetToValue(objTemp As Object)
     End Sub
 
     Public Overridable Property bAddRemoveParameter
