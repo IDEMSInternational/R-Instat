@@ -77,7 +77,6 @@ Public Class dlgPrincipalComponentAnalysis
         Dim clsDefaultFunction As New RFunction
 
         ucrSelectorPCA.Reset()
-        sdgPrincipalComponentAnalysis.SetDefaults()
 
         clsDefaultFunction.SetRCommand("PCA")
         clsDefaultFunction.AddParameter("ncp", 2)
