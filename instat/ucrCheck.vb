@@ -95,7 +95,7 @@ Public Class ucrCheck
         Return bContainedIn
     End Function
 
-    Protected Overrides Sub SetControlValue(objTemp As Object)
+    Protected Overrides Sub SetToValue(objTemp As Object)
         Dim bTempValue As Boolean
 
         If Boolean.TryParse(objTemp, bTempValue) Then

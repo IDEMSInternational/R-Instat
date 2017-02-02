@@ -64,7 +64,7 @@ Public Class UcrPanel
         OnControlValueChanged()
     End Sub
 
-    Protected Overrides Sub SetControlValue(objTemp As Object)
+    Protected Overrides Sub SetToValue(objTemp As Object)
         Dim rdoTemp As RadioButton
 
         If TypeOf objTemp Is RadioButton Then
