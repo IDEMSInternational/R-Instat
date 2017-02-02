@@ -210,22 +210,22 @@ Public Class sdgPrincipalComponentAnalysis
             ' Firstly, if the row length is shorter than the number of columns, and then if the row length is shorter than the components value selected in the main dialog, the data frame length maximum can only be as much as the row length minus one
             ' otherwise, if the row length is larger than the number of components, then the maximum dimensions can only be as much as the component value selected in the main dialog.
             If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count Then
-                If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.nudComponents.Value Then
+                If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value Then
                     nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength - 1
                     nudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength - 1
                 Else
-                    nudDim1.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
-                    nudDim2.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
+                    nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
+                    nudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
                 End If
             Else
                 ' Firstly, if the column length is shorter than the number of rows, and then if the column length is shorter than the components value selected in the main dialog, the data frame length maximum can only be as much as the column length
                 ' otherwise, if the column length is larger than the number of components, then the maximum dimensions selected can only be as much as the component value selected in the main dialog.
-                If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count <= dlgPrincipalComponentAnalysis.nudComponents.Value Then
+                If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count <= dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value Then
                     nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
                     nudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
                 Else
-                    nudDim1.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
-                    nudDim2.Maximum = dlgPrincipalComponentAnalysis.nudComponents.Value
+                    nudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
+                    nudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
                 End If
             End If
         End If

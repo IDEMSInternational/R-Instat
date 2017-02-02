@@ -65,6 +65,8 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrReceiverMultiplePCA
         '
+        Me.ucrReceiverMultiplePCA.bAddRemoveParameter = True
+        Me.ucrReceiverMultiplePCA.bChangeParameterValue = True
         Me.ucrReceiverMultiplePCA.frmParent = Me
         Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(250, 34)
         Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
@@ -75,6 +77,8 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrSelectorPCA
         '
+        Me.ucrSelectorPCA.bAddRemoveParameter = True
+        Me.ucrSelectorPCA.bChangeParameterValue = True
         Me.ucrSelectorPCA.bShowHiddenColumns = False
         Me.ucrSelectorPCA.bUseCurrentFilter = True
         Me.ucrSelectorPCA.Location = New System.Drawing.Point(10, 10)
@@ -88,34 +92,40 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrBase.Location = New System.Drawing.Point(10, 233)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 8
         '
         'ucrNudNumberOfComp
         '
+        Me.ucrNudNumberOfComp.bAddRemoveParameter = True
+        Me.ucrNudNumberOfComp.bChangeParameterValue = True
         Me.ucrNudNumberOfComp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfComp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfComp.Location = New System.Drawing.Point(368, 146)
+        Me.ucrNudNumberOfComp.Location = New System.Drawing.Point(368, 145)
         Me.ucrNudNumberOfComp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfComp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfComp.Name = "ucrNudNumberOfComp"
         Me.ucrNudNumberOfComp.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberOfComp.TabIndex = 10
+        Me.ucrNudNumberOfComp.TabIndex = 4
         Me.ucrNudNumberOfComp.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSaveResult
         '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 201)
+        Me.ucrSaveResult.bAddRemoveParameter = True
+        Me.ucrSaveResult.bChangeParameterValue = True
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 204)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveResult.TabIndex = 11
+        Me.ucrSaveResult.TabIndex = 7
         '
         'ucrChkScaleData
         '
+        Me.ucrChkScaleData.bAddRemoveParameter = True
+        Me.ucrChkScaleData.bChangeParameterValue = True
         Me.ucrChkScaleData.Checked = False
         Me.ucrChkScaleData.Location = New System.Drawing.Point(250, 175)
         Me.ucrChkScaleData.Name = "ucrChkScaleData"
         Me.ucrChkScaleData.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkScaleData.TabIndex = 12
+        Me.ucrChkScaleData.TabIndex = 5
         '
         'dlgPrincipalComponentAnalysis
         '

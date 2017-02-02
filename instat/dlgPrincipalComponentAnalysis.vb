@@ -13,13 +13,14 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Public ExplanatoryVariables
     Public strModelName As String = ""
-    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgPrincipalComponentAnalysis_oad(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -29,20 +30,17 @@ Public Class dlgPrincipalComponentAnalysis
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
-
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 422
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
-        ' PCA <- PCA(scale.unit=TRUE, graph=FALSE, X=InstatDataObject$get_columns_from_data(col_names="data.2", data_name="data1"), ncp=2)
-        'InstatDataObject$add_model(data_name = "data1", model = PCA, model_name = "PCA")
-        'InstatDataObject$get_models(model_name = "PCA", data_name = "data1")
+        ComponentsMinimum()
 
         'ucrReceiver
         ucrReceiverMultiplePCA.SetParameter(New RParameter("X", 1))
@@ -50,16 +48,14 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrReceiverMultiplePCA.SetMeAsReceiver()
-        'ucrBasePCA.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverMultiplePCA.GetVariables())
 
         'ucrSaveResult
-        ucrSaveResult.SetName("PCA") ' this is possible once dlgtranspose is merged in
+        ucrSaveResult.SetPrefix("PCA")
         ucrSaveResult.SetSaveTypeAsModel()
         ucrSaveResult.SetDataFrameSelector(ucrSelectorPCA.ucrAvailableDataFrames)
         ucrSaveResult.SetCheckBoxText("Save Result")
         ucrSaveResult.SetIsComboBox()
-        ucrSaveResult.SetAssignToIfUncheckedValue("last_graph")
-        ' where do I say this is default checked?
+        ucrSaveResult.SetAssignToIfUncheckedValue("last_PCA")
 
         'ucrNud
         ucrNudNumberOfComp.SetParameter(New RParameter("ncp"))
@@ -70,13 +66,6 @@ Public Class dlgPrincipalComponentAnalysis
         ucrChkScaleData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkScaleData.SetRDefault("TRUE")
 
-
-        ' nudComponents.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
-
-
-        ' Default
-
-
         sdgPrincipalComponentAnalysis.ucrSelectorFactor.SetDataframe(ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
     End Sub
 
@@ -85,15 +74,18 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorPCA.Reset()
         sdgPrincipalComponentAnalysis.SetDefaults()
 
         clsDefaultFunction.SetRCommand("PCA")
-        clsDefaultFunction.AddParameter("graph", "FALSE") ' not sure what this does?
+        clsDefaultFunction.AddParameter("ncp", 2)
+        clsDefaultFunction.AddParameter("graph", "FALSE") ' I don't know what this is for, but it's in there?
         clsDefaultFunction.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
-        ComponentsMinimum()
-        'clone etc
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        bResetSubdialog = True
     End Sub
 
     Private Sub TestOKEnabled()
@@ -102,10 +94,6 @@ Public Class dlgPrincipalComponentAnalysis
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub ucrSelectorPCA_DataFrameChanged() Handles ucrSelectorPCA.DataFrameChanged
-        AssignName()
     End Sub
 
     Private Sub ucrBasePCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -118,50 +106,11 @@ Public Class dlgPrincipalComponentAnalysis
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    Public Sub ucrReceiverMultiplePCA_SelectionChanged() Handles ucrReceiverMultiplePCA.SelectionChanged
-        If ucrReceiverMultiplePCA.IsEmpty Then
-            AssignName()
-        End If
-        ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverMultiplePCA.GetVariables())
-        '     ucrBasePCA.clsRsyntax.AddParameter("ncp", ucrNudNumberOfComp.Value)
-        sdgPrincipalComponentAnalysis.Dimensions()
-        TestOKEnabled()
-        ComponentsMinimum()
-    End Sub
-
-    Private Sub nudComponents_TextChanged(sender As Object, e As EventArgs)
-        '    ucrBasePCA.clsRsyntax.AddParameter("ncp", ucrNudNumberOfComp.Value)
-        sdgPrincipalComponentAnalysis.Dimensions()
-    End Sub
-
-    Private Sub chkScaleData_CheckedChanged(sender As Object, e As EventArgs)
-        '        If chkScaleData.Checked Then
-        '       ucrBasePCA.clsRsyntax.AddParameter("scale.unit", "TRUE")
-        '      Else
-        '     ucrBasePCA.clsRsyntax.AddParameter("scale.unit", "FALSE")
-        '    End If
-    End Sub
-
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
+        '        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        '        bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
-
-    Private Sub ucrResultName_NameChanged()
-        AssignName()
-    End Sub
-
-    Private Sub AssignName()
-        '       If ucrSaveResult.IsComplete() Then
-        ' i think this is done already now: '      ucrBase.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText(), strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-        '     strModelName = ucrResultName.GetText()
-        '    Else
-        '   ucrBase.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-        '  strModelName = "last_PCA"
-        ' End If
-        'TestOKEnabled()
-    End Sub
-
-
 
     Private Sub ucrBasePCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         sdgPrincipalComponentAnalysis.PCAOptions()
@@ -181,5 +130,18 @@ Public Class dlgPrincipalComponentAnalysis
                 ucrNudNumberOfComp.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
             End If
         End If
+    End Sub
+
+    Private Sub ucrReceiverMultiplePCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiplePCA.ControlValueChanged, ucrNudNumberOfComp.ControlValueChanged
+        ComponentsMinimum()
+        '        sdgPrincipalComponentAnalysis.Dimensions()
+    End Sub
+
+    '  Private Sub nudComponents_TextChanged(sender As Object, e As EventArgs)
+    '     sdgPrincipalComponentAnalysis.Dimensions()
+    '  End Sub
+
+    Private Sub ucr_for_Test_OK(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
