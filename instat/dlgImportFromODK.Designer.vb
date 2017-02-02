@@ -26,15 +26,15 @@ Partial Class dlgImportFromODK
         Me.lblPassword = New System.Windows.Forms.Label()
         Me.lblChooseForm = New System.Windows.Forms.Label()
         Me.cmdFindForms = New System.Windows.Forms.Button()
-        Me.ucrInputChooseForm = New instat.ucrInputComboBox()
-        Me.ucrInputUsername = New instat.ucrInputTextBox()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputPassword = New instat.ucrInputTextBox()
         Me.grpPlatform = New System.Windows.Forms.GroupBox()
         Me.rdoOna = New System.Windows.Forms.RadioButton()
         Me.rdoKobo = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlatform = New instat.UcrPanel()
         Me.ucrChkViewPassword = New instat.ucrCheck()
+        Me.ucrInputPassword = New instat.ucrInputTextBox()
+        Me.ucrInputChooseForm = New instat.ucrInputComboBox()
+        Me.ucrInputUsername = New instat.ucrInputTextBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpPlatform.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,39 +74,6 @@ Partial Class dlgImportFromODK
         Me.cmdFindForms.Text = "Find Forms"
         Me.cmdFindForms.UseVisualStyleBackColor = True
         '
-        'ucrInputChooseForm
-        '
-        Me.ucrInputChooseForm.IsReadOnly = False
-        Me.ucrInputChooseForm.Location = New System.Drawing.Point(98, 167)
-        Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
-        Me.ucrInputChooseForm.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputChooseForm.TabIndex = 13
-        '
-        'ucrInputUsername
-        '
-        Me.ucrInputUsername.IsMultiline = False
-        Me.ucrInputUsername.IsReadOnly = False
-        Me.ucrInputUsername.Location = New System.Drawing.Point(92, 74)
-        Me.ucrInputUsername.Name = "ucrInputUsername"
-        Me.ucrInputUsername.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputUsername.TabIndex = 11
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 194)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(420, 52)
-        Me.ucrBase.TabIndex = 10
-        '
-        'ucrInputPassword
-        '
-        Me.ucrInputPassword.IsMultiline = False
-        Me.ucrInputPassword.IsReadOnly = False
-        Me.ucrInputPassword.Location = New System.Drawing.Point(92, 106)
-        Me.ucrInputPassword.Name = "ucrInputPassword"
-        Me.ucrInputPassword.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPassword.TabIndex = 16
-        '
         'grpPlatform
         '
         Me.grpPlatform.Controls.Add(Me.rdoOna)
@@ -122,7 +89,7 @@ Partial Class dlgImportFromODK
         'rdoOna
         '
         Me.rdoOna.AutoSize = True
-        Me.rdoOna.Location = New System.Drawing.Point(238, 17)
+        Me.rdoOna.Location = New System.Drawing.Point(80, 18)
         Me.rdoOna.Name = "rdoOna"
         Me.rdoOna.Size = New System.Drawing.Size(45, 17)
         Me.rdoOna.TabIndex = 2
@@ -143,18 +110,61 @@ Partial Class dlgImportFromODK
         '
         'ucrPnlPlatform
         '
+        Me.ucrPnlPlatform.bAddRemoveParameter = True
+        Me.ucrPnlPlatform.bChangeParameterValue = True
         Me.ucrPnlPlatform.Location = New System.Drawing.Point(3, 16)
         Me.ucrPnlPlatform.Name = "ucrPnlPlatform"
-        Me.ucrPnlPlatform.Size = New System.Drawing.Size(188, 18)
+        Me.ucrPnlPlatform.Size = New System.Drawing.Size(188, 24)
         Me.ucrPnlPlatform.TabIndex = 0
         '
         'ucrChkViewPassword
         '
+        Me.ucrChkViewPassword.bAddRemoveParameter = True
+        Me.ucrChkViewPassword.bChangeParameterValue = True
         Me.ucrChkViewPassword.Checked = False
         Me.ucrChkViewPassword.Location = New System.Drawing.Point(250, 106)
         Me.ucrChkViewPassword.Name = "ucrChkViewPassword"
         Me.ucrChkViewPassword.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkViewPassword.TabIndex = 18
+        '
+        'ucrInputPassword
+        '
+        Me.ucrInputPassword.bAddRemoveParameter = True
+        Me.ucrInputPassword.bChangeParameterValue = True
+        Me.ucrInputPassword.IsMultiline = False
+        Me.ucrInputPassword.IsReadOnly = False
+        Me.ucrInputPassword.Location = New System.Drawing.Point(92, 106)
+        Me.ucrInputPassword.Name = "ucrInputPassword"
+        Me.ucrInputPassword.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPassword.TabIndex = 16
+        '
+        'ucrInputChooseForm
+        '
+        Me.ucrInputChooseForm.bAddRemoveParameter = True
+        Me.ucrInputChooseForm.bChangeParameterValue = True
+        Me.ucrInputChooseForm.IsReadOnly = False
+        Me.ucrInputChooseForm.Location = New System.Drawing.Point(98, 167)
+        Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
+        Me.ucrInputChooseForm.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputChooseForm.TabIndex = 13
+        '
+        'ucrInputUsername
+        '
+        Me.ucrInputUsername.bAddRemoveParameter = True
+        Me.ucrInputUsername.bChangeParameterValue = True
+        Me.ucrInputUsername.IsMultiline = False
+        Me.ucrInputUsername.IsReadOnly = False
+        Me.ucrInputUsername.Location = New System.Drawing.Point(92, 74)
+        Me.ucrInputUsername.Name = "ucrInputUsername"
+        Me.ucrInputUsername.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputUsername.TabIndex = 11
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 194)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(420, 52)
+        Me.ucrBase.TabIndex = 10
         '
         'dlgImportFromODK
         '
