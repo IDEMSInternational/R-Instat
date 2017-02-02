@@ -86,7 +86,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSaveResult.IsComplete() AndAlso (Not ucrReceiverYvariables.IsEmpty()) And (Not ucrReceiverXvariables.IsEmpty()) Then
+        If ucrSaveResult.IsComplete() AndAlso (Not ucrReceiverYvariables.IsEmpty()) AndAlso (Not ucrReceiverXvariables.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
