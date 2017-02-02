@@ -37,12 +37,11 @@ Public Class dlgImportFromODK
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 468
-        clsGetFormsFunction.SetRCommand("get_odk_form_names")
-
 
         ucrPnlPlatform.SetParameter(New RParameter("platform"))
         ucrPnlPlatform.AddRadioButton(rdoKobo, Chr(34) & "kobo" & Chr(34))
@@ -67,20 +66,24 @@ Public Class dlgImportFromODK
     Private Sub SetDefaults()
         Dim clsDefaultRFunction As New RFunction
 
-        ucrInputUsername.SetName("")
-        ucrInputPassword.SetName("")
         ucrInputChooseForm.Reset()
+        ucrInputPassword.Reset()
+        ucrInputUsername.Reset()
         EnableCommandButton()
         ucrInputPassword.txtInput.UseSystemPasswordChar = True
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
-        TestOKEnabled()
+        clsDefaultRFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
 
+        clsGetFormsFunction.SetRCommand("get_odk_form_names")
+        clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub ucrInputUsername_NameChanged() Handles ucrInputUsername.NameChanged
@@ -121,6 +124,7 @@ Public Class dlgImportFromODK
     Private Sub cmdFindForms_click(sender As Object, e As EventArgs) Handles cmdFindForms.Click
         Dim strFormNames() As String
         Dim expTemp As SymbolicExpression
+        SetRCodeForControls(True)
 
         Cursor = Cursors.WaitCursor
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFormsFunction.ToScript())
@@ -147,8 +151,8 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub UsernamePassword_ContentsChanged() Handles ucrInputUsername.ContentsChanged, ucrInputPassword.ContentsChanged
-        ucrInputChooseForm.cboInput.Items.Clear()
-        ucrInputChooseForm.SetName("")
+        'ucrInputChooseForm.cboInput.Items.Clear()
+        'ucrInputChooseForm.SetName("")
         EnableCommandButton()
     End Sub
 
@@ -163,4 +167,5 @@ Public Class dlgImportFromODK
             ucrInputPassword.txtInput.UseSystemPasswordChar = True
         End If
     End Sub
+
 End Class
