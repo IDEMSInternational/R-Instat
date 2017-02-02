@@ -62,13 +62,16 @@ Public Class dlgJitter
         'operator parameter
         clsOperatorParameter.SetOperation("+")
         '       clsOperatorParameter.SetOperation(New ROperator("+"))
-        clsOperatorParameter.AddParameter(True, clsRFunctionParameter:=ucrReceiverJitter.GetVariables)
-        clsOperatorParameter.AddParameter(False, clsRFunctionParameter:=clsRunif)
+        clsOperatorParameter.AddParameter(1, clsRFunctionParameter:=ucrReceiverJitter.GetVariables)
+        clsOperatorParameter.AddParameter(0, clsRFunctionParameter:=clsRunif)
 
 
 
         'rdo Buttons
-        ' have two radio buttons - each with two parameters which are the same name but different select
+        ' have two radio buttons - each with two parameters which are the same name but different selector
+
+
+
 
         '        'SetParameter({ucrPnlDistance, ucrInputMaximumDistanceFromZero}, New RParameter("min", "max"))
 
