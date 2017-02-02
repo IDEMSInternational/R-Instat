@@ -88,7 +88,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSaveResult.IsComplete AndAlso Not ucrReceiverMultiplePCA.IsEmpty() Then
+        If ucrSaveResult.IsComplete AndAlso Not ucrReceiverMultiplePCA.IsEmpty() AndAlso ucrNudNumberOfComp.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -140,7 +140,7 @@ Public Class dlgPrincipalComponentAnalysis
     '     sdgPrincipalComponentAnalysis.Dimensions()
     '  End Sub
 
-    Private Sub ucr_for_Test_OK(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged
+    Private Sub ucr_for_Test_OK(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
