@@ -15,10 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgJitter
-    Public clsRunif As New RFunction
     Public bReset As Boolean = True
     Public bFirstLoad As Boolean = True
     Private clsOperatorParameter As New ROperator
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgJitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,42 +56,66 @@ Public Class dlgJitter
         ucrReceiverJitter.SetIncludedDataTypes({"numeric"})
         ucrReceiverJitter.SetParameterIsRFunction()
 
-        'Length of Dataset
-        clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
 
         'operator parameter
         clsOperatorParameter.SetOperation("+")
         '       clsOperatorParameter.SetOperation(New ROperator("+"))
         clsOperatorParameter.AddParameter(1, clsRFunctionParameter:=ucrReceiverJitter.GetVariables)
-        clsOperatorParameter.AddParameter(0, clsRFunctionParameter:=clsRunif)
+        clsOperatorParameter.AddParameter(0, clsRFunctionParameter:=clsDefaultFunction)
 
 
 
         'rdo Buttons
         ' have two radio buttons - each with two parameters which are the same name but different selector
+        ' radio buttons
 
 
 
+        ucrPnlDistance.SetParameter(New RParameter("min"))
+        ucrPnlDistance.AddRadioButton(rdoMaximumDistanceFromZero, -(ucrInputMaximumDistanceFromZero.GetText))
+        ucrPnlDistance.AddRadioButton(rdoMinimumAndMaximum, ucrInputMinimum.GetText)
+        ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "max", ucrInputMaximumDistanceFromZero.GetText)
+        ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "max", ucrInputMaximum.GetText)
 
-        '        'SetParameter({ucrPnlDistance, ucrInputMaximumDistanceFromZero}, New RParameter("min", "max"))
-
-        ' for if first rdo checked...
-        'FIRSTRDO.AddToLinkedControls(ucrLinked:=ucrInputMaximumDistanceFromZero, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlDistance.AddRadioButton(rdoMaximumDistanceFromZero, -(ucrInputMaximumDistanceFromZero.GetText))
-        'ucrPnlDistance.AddRadioButton(rdoMaximumDistanceFromZero, (ucrInputMaximumDistanceFromZero.GetText))
+        ' now we have two radio buttons with two parameters - done
+        ' two radio buttons with linking - TODO
 
 
-        ' similarly for if second rdo checked
-        '        'SetParameter({ucrPnlDistance, ucrInputMaximum, ucrInputMinimum}, New RParameter("min", "max"))
-        ' for two ucr's not one
-        'SECONDRDO.AddToLinkedControls(ucrLinked:=ucrInputMaximum, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ' ucrPnlDistance.AddRadioButton(rdoMinimumAndMaximum, ucrInputMinimum.GetText)
-        'SECONDRDO.AddToLinkedControls(ucrLinked:=ucrInputMinimum, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlDistance.AddRadioButton(rdoMinimumAndMaximum, ucrInputMaximum.GetText)
+        ucrPnlDistance.SetParameter(New RParameter("min"))
+        ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "max", ucrInputMaximumDistanceFromZero.GetText)
+        ucrInputMaximumDistanceFromZero.SetParameter(ucrPnlDistance.GetParameter())
+        ucrInputMaximumDistanceFromZero.SetName(1)
 
-        'ucrInputMaximum.SetValidationTypeAsNumeric()
-        'ucrInputMinimum.SetValidationTypeAsNumeric()
-        'ucrInputMaximumDistanceFromZero.SetValidationTypeAsNumeric
+
+
+        ucrPnlDistance.SetParameter(New RParameter("min"))
+        ucrInputMinimum.SetParameter(ucrPnlDistance.GetParameter())
+        ucrInputMinimum.SetName(0)
+        'ucrPnlDistance.AddParameterPresentCondition("max")
+        ucrInputMaximum.SetParameter(ucrPnlDistance.GetParameter())
+        ucrInputMaximum.SetName(1)
+
+
+        ucrInputMaximum.SetName(1)
+        ucrInputMinimum.SetName(0)
+
+        ' not sure yet how to do radio buttons with an input
+
+        '        ucrPnlDistance.AddRadioButton(rdoMaximumDistanceFromZero, "-1")
+        '        ucrPnlDistance.AddRadioButton(rdoMinimumAndMaximum, "0")
+        '       ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "max", "1")
+        '       ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "max", "1")
+
+        '        rank1 <- InstatDataObject$get_columns_from_data(col_name="rank1", data_name="data1")
+        'Jitter_values1 <- runif(rank1, rank1, min=-1)
+        'InstatDataObject$add_columns_to_data(col_data = Jitter_values1, col_name = "Jitter_values1", data_name = "data1")
+
+        'link with ucrs
+
+
+        ucrInputMaximum.SetValidationTypeAsNumeric()
+        ucrInputMinimum.SetValidationTypeAsNumeric()
+        ucrInputMaximumDistanceFromZero.SetValidationTypeAsNumeric()
 
         'ucrInputNewColName
         ucrInputNewColName.SetIsComboBox()
@@ -103,16 +127,12 @@ Public Class dlgJitter
     End Sub
 
     Private Sub SetDefaults()
-        ucrInputMaximumDistanceFromZero.SetName(1)
-        ucrInputMaximum.SetName(1)
-        ucrInputMinimum.SetName(0)
         ucrSelectorForJitter.Reset()
 
-        clsRunif.SetRCommand("runif")
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRunif.Clone())
-
-        LengthOfDataset()
+        clsDefaultFunction.SetRCommand("runif")
+        clsDefaultFunction.AddParameter("min", ucrInputMaximumDistanceFromZero.GetText)
+        '        clsDefaultFunction.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub ReopenDialog()
@@ -152,15 +172,5 @@ Public Class dlgJitter
 
     Private Sub ucrInputNewColumnName_NameChanged()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
-    End Sub
-
-
-
-    Private Sub LengthOfDataset()
-        clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
-    End Sub
-
-    Private Sub ucrSelectorForJitter_DataFrameChanged() Handles ucrSelectorForJitter.DataFrameChanged
-        LengthOfDataset()
     End Sub
 End Class
