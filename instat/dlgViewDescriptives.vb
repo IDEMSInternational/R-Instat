@@ -55,12 +55,12 @@ Public Class dlgViewDescriptives
         ucrReceiverSelectedObject.SetMeAsReceiver()
 
         ' rdo's
-        'ucrPnl.SetParameter(New RParameter("", 2))
-        '        ucrPnl.AddRadioButton(rdoStructure, Chr(34) & "" & Chr(34))
-        '        ucrPnl.AddRadioButton(rdoAllContents, Chr(34) & "" & Chr(34))
-        '        ucrPnl.AddRadioButton(rdoComponent, Chr(34) & "" & Chr(34))
-        '        ucrPnl.AddRadioButton(rdoViewGraph, Chr(34) & "" & Chr(34))
-        '        ucrPnl.SetRDefault(Chr(34) & "" & Chr(34)) ' rdoViewGraph
+        ucrPnl.SetParameter(New RParameter("", 2))
+        ucrPnl.AddRadioButton(rdoStructure, Chr(34) & "" & Chr(34))
+        ucrPnl.AddRadioButton(rdoAllContents, Chr(34) & " " & Chr(34))
+        ucrPnl.AddRadioButton(rdoComponent, Chr(34) & " " & Chr(34))
+        ucrPnl.AddRadioButton(rdoViewGraph, Chr(34) & " " & Chr(34))
+        ucrPnl.SetRDefault(Chr(34) & "" & Chr(34)) ' rdoViewGraph
 
         ucrBase.clsRsyntax.iCallType = 2
         rdoAllContents.Enabled = False
@@ -73,7 +73,6 @@ Public Class dlgViewDescriptives
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrSelectorForViewObject.Reset()
-        rdoStructure.Checked = True
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
