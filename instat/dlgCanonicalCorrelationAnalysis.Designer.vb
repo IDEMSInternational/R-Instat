@@ -107,9 +107,9 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         Me.ucrSaveResult.bAddRemoveParameter = True
         Me.ucrSaveResult.bChangeParameterValue = True
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 269)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 274)
         Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(247, 24)
+        Me.ucrSaveResult.Size = New System.Drawing.Size(275, 24)
         Me.ucrSaveResult.TabIndex = 6
         '
         'dlgCanonicalCorrelationAnalysis
