@@ -16,7 +16,7 @@ Imports instat.Translations
 Public Class dlgPolynomials
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public clsCentredOptionFunc As New RFunction
+    Public clsCentredOptionFunc, clsScale, clsRaw As New RFunction
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -47,6 +47,12 @@ Public Class dlgPolynomials
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("poly")
         clsDefaultFunction.AddParameter("degree", 2)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsScale = clsCentredOptionFunc.Clone()
+        clsDefaultFunction.AddParameter("y", clsRFunctionParameter:=clsCentredOptionFunc)
+        clsDefaultFunction.AddParameter("raw", "TRUE")
+        ucrRadioCentered.SetRCode(clsScale)
+        ucrReceiverPolynomial.SetRCode(clsDefaultFunction)
         clsDefaultFunction.SetAssignTo("poly", strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="poly")
 
         ' Set default RFunction as the base function
@@ -54,7 +60,7 @@ Public Class dlgPolynomials
         '  ABE <- InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_name="ABE", data_name="ghana_data")
         'Poly <- poly(x=scale(x=ABE, scale=FALSE, center=TRUE), raw=TRUE, degree=2)
         'clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsCentredOptionFunc)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone)
+
 
     End Sub
 
@@ -71,23 +77,28 @@ Public Class dlgPolynomials
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 46
 
+        rdoOrthogonal.Enabled = False
+        rdoSimple.Enabled = False
         'Second function to be set inside
-        'clsCentredOptionFunc.SetRCommand("scale")
-        'clsCentredOptionFunc.AddParameter("center", "TRUE")
-        'clsCentredOptionFunc.AddParameter("scale", "FALSE")
+        clsCentredOptionFunc.SetRCommand("scale")
+        clsCentredOptionFunc.AddParameter("center", "TRUE")
+        clsCentredOptionFunc.AddParameter("scale", "FALSE")
+        clsCentredOptionFunc.AddParameter("x", ucrReceiverPolynomial.GetVariableNames(False))
+        ' clsRaw.AddParameter("raw", "TRUE")
 
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.bUseFilteredData = False
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
-        ucrReceiverPolynomial.SetParameter(New RParameter("x", 0))
+        ' ucrReceiverPolynomial.SetParameter(New RParameter("x", 0))
 
         ucrReceiverPolynomial.SetParameterIsRFunction()
 
         ucrPnlType.SetParameter(New RParameter("raw", 1))
         ucrPnlType.AddRadioButton(rdoSimple, "TRUE")
-        ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
+        ucrPnlType.SetRDefault("FALSE")
+
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
 

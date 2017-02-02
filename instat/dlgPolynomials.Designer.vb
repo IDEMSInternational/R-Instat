@@ -30,10 +30,10 @@ Partial Class dlgPolynomials
         Me.grpType = New System.Windows.Forms.GroupBox()
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoSimple = New System.Windows.Forms.RadioButton()
-        Me.rdoCentered = New System.Windows.Forms.RadioButton()
         Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSavePoly = New instat.ucrSave()
         Me.ucrNudDegree = New instat.ucrNud()
+        Me.ucrRadioCentered = New instat.ucrRadio()
         Me.grpType.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -86,9 +86,9 @@ Partial Class dlgPolynomials
         '
         'grpType
         '
+        Me.grpType.Controls.Add(Me.ucrRadioCentered)
         Me.grpType.Controls.Add(Me.rdoOrthogonal)
         Me.grpType.Controls.Add(Me.rdoSimple)
-        Me.grpType.Controls.Add(Me.rdoCentered)
         Me.grpType.Controls.Add(Me.ucrPnlType)
         Me.grpType.Location = New System.Drawing.Point(255, 109)
         Me.grpType.Name = "grpType"
@@ -123,19 +123,6 @@ Partial Class dlgPolynomials
         Me.rdoSimple.Text = "Simple"
         Me.rdoSimple.UseVisualStyleBackColor = True
         '
-        'rdoCentered
-        '
-        Me.rdoCentered.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdoCentered.AutoSize = True
-        Me.rdoCentered.Location = New System.Drawing.Point(19, 48)
-        Me.rdoCentered.Name = "rdoCentered"
-        Me.rdoCentered.Size = New System.Drawing.Size(68, 17)
-        Me.rdoCentered.TabIndex = 4
-        Me.rdoCentered.Tag = "Centered"
-        Me.rdoCentered.Text = "Centered"
-        Me.rdoCentered.UseVisualStyleBackColor = True
-        '
         'ucrPnlType
         '
         Me.ucrPnlType.Location = New System.Drawing.Point(3, 16)
@@ -161,6 +148,14 @@ Partial Class dlgPolynomials
         Me.ucrNudDegree.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudDegree.TabIndex = 16
         Me.ucrNudDegree.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrRadioCentered
+        '
+        Me.ucrRadioCentered.Checked = False
+        Me.ucrRadioCentered.Location = New System.Drawing.Point(19, 46)
+        Me.ucrRadioCentered.Name = "ucrRadioCentered"
+        Me.ucrRadioCentered.Size = New System.Drawing.Size(100, 20)
+        Me.ucrRadioCentered.TabIndex = 6
         '
         'dlgPolynomials
         '
@@ -196,8 +191,8 @@ Partial Class dlgPolynomials
     Friend WithEvents grpType As GroupBox
     Friend WithEvents rdoOrthogonal As RadioButton
     Friend WithEvents rdoSimple As RadioButton
-    Friend WithEvents rdoCentered As RadioButton
     Friend WithEvents ucrPnlType As UcrPanel
     Friend WithEvents ucrSavePoly As ucrSave
     Friend WithEvents ucrNudDegree As ucrNud
+    Friend WithEvents ucrRadioCentered As ucrRadio
 End Class
