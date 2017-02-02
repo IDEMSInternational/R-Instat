@@ -28,6 +28,7 @@ Partial Class dlgDuplicateColumns
         Me.ucrReceiverForCopyColumns = New instat.ucrReceiverSingle()
         Me.ucrSelectorForDuplicateColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpDuplicatedColumn = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlColPosition = New instat.UcrPanel()
         Me.rdoBefore = New System.Windows.Forms.RadioButton()
         Me.rdoEnd = New System.Windows.Forms.RadioButton()
         Me.rdoAfter = New System.Windows.Forms.RadioButton()
@@ -64,6 +65,7 @@ Partial Class dlgDuplicateColumns
         '
         'ucrReceiverForCopyColumns
         '
+        Me.ucrReceiverForCopyColumns.frmParent = Me
         Me.ucrReceiverForCopyColumns.Location = New System.Drawing.Point(225, 53)
         Me.ucrReceiverForCopyColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForCopyColumns.Name = "ucrReceiverForCopyColumns"
@@ -87,12 +89,20 @@ Partial Class dlgDuplicateColumns
         Me.grpDuplicatedColumn.Controls.Add(Me.rdoEnd)
         Me.grpDuplicatedColumn.Controls.Add(Me.rdoAfter)
         Me.grpDuplicatedColumn.Controls.Add(Me.rdoBeginning)
+        Me.grpDuplicatedColumn.Controls.Add(Me.ucrPnlColPosition)
         Me.grpDuplicatedColumn.Location = New System.Drawing.Point(225, 80)
         Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
         Me.grpDuplicatedColumn.Size = New System.Drawing.Size(185, 110)
         Me.grpDuplicatedColumn.TabIndex = 3
         Me.grpDuplicatedColumn.TabStop = False
         Me.grpDuplicatedColumn.Text = "Position of Duplicated Column"
+        '
+        'ucrPnlColPosition
+        '
+        Me.ucrPnlColPosition.Location = New System.Drawing.Point(6, 19)
+        Me.ucrPnlColPosition.Name = "ucrPnlColPosition"
+        Me.ucrPnlColPosition.Size = New System.Drawing.Size(99, 85)
+        Me.ucrPnlColPosition.TabIndex = 7
         '
         'rdoBefore
         '
@@ -152,13 +162,13 @@ Partial Class dlgDuplicateColumns
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 284)
-        Me.Controls.Add(Me.grpDuplicatedColumn)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputColumnName)
         Me.Controls.Add(Me.ucrReceiverForCopyColumns)
         Me.Controls.Add(Me.ucrSelectorForDuplicateColumn)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpDuplicatedColumn)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -183,4 +193,5 @@ Partial Class dlgDuplicateColumns
     Friend WithEvents rdoAfter As RadioButton
     Friend WithEvents rdoBeginning As RadioButton
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrPnlColPosition As UcrPanel
 End Class
