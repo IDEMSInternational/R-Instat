@@ -2,7 +2,24 @@
 Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
-    Private clsWriteCSV, clsWriteXLSX, clsWriteOthers As New RFunction
+    Private bReset As Boolean = True
+    Private clsDefaultFunction, clsWriteCSV, clsWriteXLSX, clsWriteOthers As New RFunction
+
+    Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
+        autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+        grpOptions.Visible = False
+        ucrChkOptions.Enabled = False
+    End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Dim dlgSave As New SaveFileDialog
@@ -11,54 +28,62 @@ Public Class dlgExportDataset
         dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
-                txtExportFile.Text = Path.GetFileName(dlgSave.FileName)
+                ucrInputExportFile.SetName(Path.GetFileName(dlgSave.FileName))
                 SaveFileType(dlgSave.FileName.Replace("\", "/"))
             End If
         End If
     End Sub
 
-    Private Sub txtExportFile_Click(sender As Object, e As EventArgs) Handles txtExportFile.Click
+    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
         cmdBrowse_Click(sender, e)
     End Sub
 
-    Private Sub setDefaultValues()
-        txtExportFile.Text = ""
-        chkOptions.Checked = False
-        ucrAvailableSheets.Reset()
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        setDefaultValues()
+        SetDefaults()
+        SetRCodeForControls(True)
     End Sub
 
-    Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
-        If bFirstLoad Then
-            setDefaultValues()
-            bFirstLoad = False
-        End If
+    Private Sub SetDefaults()
+        ucrAvailableSheets.Reset()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrChkOptions.SetText("Additional Options")
+        ucrChkUseColumnNames.SetText("Use Column Names")
+        ucrChkUseRowNames.SetText("Use Row Names")
+        ucrInputExportFile.SetName("")
+        ucrChkOptions.Checked = False
+
+        ucrInputAuthor.SetParameter(New RParameter("creator", 0))
+        ucrInputSheetName.SetParameter(New RParameter("sheetName", 1))
+        ucrInputRows.SetParameter(New RParameter("startRow", 2))
+        ucrInputCols.SetParameter(New RParameter("startCol", 3))
+        ucrChkUseRowNames.SetParameter(New RParameter("rowNames", 4))
+        ucrChkUseRowNames.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkUseColumnNames.SetParameter(New RParameter("colNames", 5))
+        ucrChkUseColumnNames.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         TestOkEnabled()
-        grpOptions.Visible = False
-        chkOptions.Enabled = False
     End Sub
 
     Private Sub TestOkEnabled()
-        If txtExportFile.Text <> "" Then
+        If Not ucrInputExportFile.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub txtExportFile_TextChanged(sender As Object, e As EventArgs) Handles txtExportFile.TextChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub SaveFileType(strFilePath As String)
         Select Case Path.GetExtension(strFilePath)
             Case ".csv"
                 clsWriteCSV.SetRCommand("rio::export")
-                chkOptions.Enabled = False
+                ucrChkOptions.Enabled = False
                 grpOptions.Enabled = False
                 clsWriteCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                 clsWriteCSV.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
@@ -82,46 +107,15 @@ Public Class dlgExportDataset
         End Select
     End Sub
 
-    Private Sub chkOptions_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOptions.CheckStateChanged
-        If chkOptions.Checked Then
+    Private Sub chkOptions_CheckStateChanged(ucrchangedControl As ucrCore) Handles ucrChkOptions.ControlContentsChanged
+        If ucrChkOptions.Checked Then
             grpOptions.Enabled = True
         Else
             grpOptions.Enabled = False
         End If
     End Sub
 
-    Private Sub txtAuthor_Leave(sender As Object, e As EventArgs) Handles txtAuthor.Leave
-        If txtAuthor.Text <> "" Then
-            clsWriteXLSX.AddParameter("creator", Chr(34) & txtAuthor.Text & Chr(34))
-        End If
-    End Sub
-
-    Private Sub txtSheetName_Leave(sender As Object, e As EventArgs) Handles txtSheetName.Leave
-        If txtSheetName.Text <> "" Then
-            clsWriteXLSX.AddParameter("sheetName", Chr(34) & txtSheetName.Text & Chr(34))
-        End If
-    End Sub
-
-    Private Sub txtRows_Leave(sender As Object, e As EventArgs) Handles txtRows.Leave
-        If txtRows.Text <> "" Then
-            clsWriteXLSX.AddParameter("startRow", txtRows.Text)
-        End If
-    End Sub
-
-    Private Sub txtCols_Leave(sender As Object, e As EventArgs) Handles txtCols.Leave
-        If txtRows.Text <> "" Then
-            clsWriteXLSX.AddParameter("startCol", txtCols.Text)
-        End If
-    End Sub
-
-    Private Sub chkRowNames_CheckStateChanged(sender As Object, e As EventArgs) Handles chkRowNames.CheckStateChanged, chkColNames.CheckStateChanged
-        If chkRowNames.Checked Then
-            ucrBase.clsRsyntax.AddParameter("rowNames", "TRUE")
-        ElseIf chkColNames.Checked Then
-            ucrBase.clsRsyntax.AddParameter("colNames", "TRUE")
-        Else
-            ucrBase.clsRsyntax.AddParameter("rowNames", "FALSE")
-            ucrBase.clsRsyntax.AddParameter("colNames", "FALSE")
-        End If
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
