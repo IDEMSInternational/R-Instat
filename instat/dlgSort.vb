@@ -32,7 +32,6 @@ Public Class dlgSort
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
@@ -88,13 +87,12 @@ Public Class dlgSort
         'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
         'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
         'ucrPanelMissingValues.SetRDefault("TRUE")
-
-
     End Sub
 
     'Setting Defaults on Reset 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
