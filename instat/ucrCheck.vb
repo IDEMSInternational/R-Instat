@@ -95,7 +95,29 @@ Public Class ucrCheck
         Return bContainedIn
     End Function
 
-    Protected Overrides Sub SetControlValue(objTemp As Object)
+    Public Overrides Function GetValueToSet() As Object
+        If clsParameter IsNot Nothing Then
+            If clsParameter.bIsString Then
+                If bChangeParameterValue Then
+                    If clsParameter.strArgumentValue = strValueIfChecked OrElse clsParameter.strArgumentValue = strValueIfUnchecked Then
+                        Return (clsParameter.strArgumentValue = strValueIfChecked)
+                    Else
+                        Return clsParameter.strArgumentValue
+                    End If
+                ElseIf bAddRemoveParameter Then
+                    Return clsRCode.ContainsParameter(clsParameter)
+                End If
+            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
+                Return clsParameter.clsArgumentCodeStructure
+            Else
+                Return Nothing
+            End If
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Protected Overrides Sub SetToValue(objTemp As Object)
         Dim bTempValue As Boolean
 
         If Boolean.TryParse(objTemp, bTempValue) Then
