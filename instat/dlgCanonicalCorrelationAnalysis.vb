@@ -43,7 +43,9 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 423
 
-        '        cmdCCAOptions.Enabled = False
+        cmdCCAOptions.Enabled = False
+
+        ' note: canne have the same variables in both receivers.
 
         ' Y Variable Selector
         ucrReceiverYvariables.SetParameter(New RParameter("y", 0))
@@ -88,7 +90,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSaveResult.IsComplete() AndAlso (Not ucrReceiverYvariables.IsEmpty()) AndAlso (Not ucrReceiverXvariables.IsEmpty()) Then
+        If ucrSaveResult.IsComplete() AndAlso ucrReceiverYvariables.lstSelectedVariables.Items.Count > 1 AndAlso ucrReceiverXvariables.lstSelectedVariables.Items.Count > 1 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
