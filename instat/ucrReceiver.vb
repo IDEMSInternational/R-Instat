@@ -55,6 +55,7 @@ Public Class ucrReceiver
         bTypeSet = False
         strSelectorHeading = "Variables"
         strType = "column"
+        bUpdateRCodeFromControl = True
     End Sub
 
     Public Overridable Sub AddSelected()
@@ -317,11 +318,10 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Protected Overrides Sub SetControlValue()
         Dim clsTempDataParameter As RParameter
         Dim lstCurrentVariables As String() = Nothing
 
-        MyBase.UpdateControl(bReset)
         If clsParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsParameter.bIsString Then
@@ -383,5 +383,9 @@ Public Class ucrReceiver
             lstVariables(i) = lstVariables(i).Trim(Chr(34), " ", Chr(39), ")")
         Next
         Return lstVariables
+    End Function
+
+    Public Overrides Function IsDefault() As Boolean
+        Return IsEmpty()
     End Function
 End Class

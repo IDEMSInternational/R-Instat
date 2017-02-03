@@ -2,9 +2,9 @@
 
 Public Class ucrSave
     Public bFirstLoad As Boolean = True
-    Private bShowCheckBox As Boolean
-    Private bShowLabel As Boolean
-    Private strSaveType As String
+    Private bShowCheckBox As Boolean = True
+    Private bShowLabel As Boolean = False
+    Private strSaveType As String = "column"
     Private strPrefix As String
     Private bIsComboBox As Boolean = True
     Private bHideIfUnchecked As Boolean = True
@@ -14,26 +14,28 @@ Public Class ucrSave
     Private bInsertColumnBefore As Boolean = False
     Private strAssignToIfUnchecked As String = ""
 
-    Private Sub ucrSaveGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ucrSave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            InitialiseControl()
             SetDefaults()
             bFirstLoad = False
         End If
     End Sub
 
     Private Sub InitialiseControl()
+        bUpdateRCodeFromControl = True
         ucrInputComboSave.SetValidationTypeAsRVariable()
         ucrInputTextSave.SetValidationTypeAsRVariable()
+        ucrChkSave.bIsActiveRControl = False
+        ucrInputComboSave.bIsActiveRControl = False
+        ucrInputTextSave.bIsActiveRControl = False
     End Sub
 
     Private Sub SetDefaults()
-        strSaveType = "column"
+        ucrInputTextSave.Reset()
+        ucrInputComboSave.Reset()
         SetSaveType(strSaveType)
-        bShowCheckBox = True
-        bShowLabel = False
-        bIsComboBox = True
         LabelOrCheckboxSettings()
-        SetIsComboBox()
         UpdateRCode()
     End Sub
 
@@ -45,7 +47,7 @@ Public Class ucrSave
     End Sub
 
     Public Sub SetCheckBoxText(strText As String)
-        ucrChkSave.chkCheck.Text = strText
+        ucrChkSave.SetText(strText)
         bShowLabel = False
         bShowCheckBox = True
         LabelOrCheckboxSettings()
@@ -174,6 +176,19 @@ Public Class ucrSave
         ucrInputComboSave.Enabled = ucrChkSave.Checked
         ucrInputTextSave.Visible = False
         ucrInputComboSave.Visible = False
+        If strAssignToIfUnchecked <> "" Then
+            If ucrChkSave.Checked Then
+                If bIsComboBox Then
+                    If Not ucrInputComboSave.bUserTyped Then
+                        ucrInputComboSave.SetDefaultName()
+                    End If
+                Else
+                    If Not ucrInputTextSave.bUserTyped Then
+                        ucrInputTextSave.SetDefaultName()
+                    End If
+                End If
+            End If
+        End If
         If bHideIfUnchecked Then
             If bIsComboBox Then
                 ucrInputComboSave.Visible = ucrChkSave.Checked
@@ -198,24 +213,20 @@ Public Class ucrSave
         MyBase.UpdateRCode()
 
         If clsRCode IsNot Nothing Then
-            strSaveName = GetText()
             If ucrDataFrameSelector IsNot Nothing Then
                 strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
             End If
-            If GetText() <> "" Then
-                strSaveName = GetText()
-            ElseIf strAssignToIfUnchecked <> "" Then
+            If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
                 strSaveName = strAssignToIfUnchecked
+            Else
+                strSaveName = GetText()
             End If
-            If bShowCheckBox Then
-                bAddAssignTo = bAddAssignTo AndAlso strSaveName <> ""
-            End If
-            If bAddAssignTo Then
+            If strSaveName <> "" Then
                 Select Case strSaveType
                     Case "column"
                         clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
                     Case "dataframe"
-                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                     Case "graph"
                         clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                     Case "model"
@@ -271,5 +282,27 @@ Public Class ucrSave
         Else
             Return ucrInputTextSave.GetText()
         End If
+    End Function
+
+    Public ReadOnly Property bUserTyped As Boolean
+        Get
+            If bIsComboBox Then
+                Return ucrInputComboSave.bUserTyped
+            Else
+                Return ucrInputTextSave.bUserTyped
+            End If
+        End Get
+    End Property
+
+    Public Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        If bIsComboBox Then
+            ucrInputComboSave.SetName(strName, bSilent)
+        Else
+            ucrInputTextSave.SetName(strName, bSilent)
+        End If
+    End Sub
+
+    Protected Overrides Function CanUpdate() As Object
+        Return ((Not clsRCode.bIsAssigned AndAlso Not clsRCode.bToBeAssigned) AndAlso strSaveType <> "")
     End Function
 End Class

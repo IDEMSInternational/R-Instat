@@ -32,8 +32,17 @@ Public Class ucrInput
     Protected bIsReadOnly As Boolean = False
     Public bAutoChangeOnLeave As Boolean = False
     Private bLastSilent As Boolean = False
-    Protected lstRecognisedItemParameterValuePairs As New List(Of KeyValuePair(Of String, String))
     Public bAddQuotesIfUnrecognised As Boolean = True
+    Protected dctDisplayParameterValues As New Dictionary(Of String, String)
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bUpdateRCodeFromControl = True
+    End Sub
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
         bLastSilent = bSilent
@@ -50,13 +59,13 @@ Public Class ucrInput
     Public Sub OnNameChanged()
         Me.Text = Me.GetText()
         If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
-            If GetAllRecognisedItems.Contains(GetText()) Then
-                clsParameter.strArgumentValue = lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value
+            If dctDisplayParameterValues.ContainsKey(GetText()) Then
+                clsParameter.SetArgumentValue(dctDisplayParameterValues(GetText()))
             Else
                 If bAddQuotesIfUnrecognised Then
-                    clsParameter.strArgumentValue = Chr(34) & GetText() & Chr(34)
+                    clsParameter.SetArgumentValue(Chr(34) & GetText() & Chr(34))
                 Else
-                    clsParameter.strArgumentValue = GetText()
+                    clsParameter.SetArgumentValue(GetText())
                 End If
             End If
         End If
@@ -131,6 +140,7 @@ Public Class ucrInput
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
                 End If
             ElseIf strDefaultType = "Data Frame" Then
+                SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetDataFrameNames()))
             ElseIf strDefaultType = "Graph" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
@@ -391,51 +401,43 @@ Public Class ucrInput
         End Set
     End Property
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
+    Protected Overrides Sub SetToValue(objTemp As Object)
+        SetName(objTemp.ToString())
+    End Sub
+
+    Public Overrides Function GetValueToSet() As Object
         If clsParameter IsNot Nothing Then
-            If bChangeParameterValue Then
-                If GetAllRecognisedParameterValues.Contains(clsParameter.strArgumentValue) Then
-                    SetName(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Value = clsParameter.strArgumentValue).Key)
+            If clsParameter.bIsString Then
+                If dctDisplayParameterValues.ContainsKey(clsParameter.strArgumentValue) Then
+                    Return clsParameter.strArgumentValue
                 Else
                     If bAddQuotesIfUnrecognised Then
-                        SetName(clsParameter.strArgumentValue.Trim(Chr(34)))
+                        Return clsParameter.strArgumentValue.Trim(Chr(34))
                     Else
-                        SetName(clsParameter.strArgumentValue)
+                        Return clsParameter.strArgumentValue
                     End If
                 End If
+            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
+                Return clsParameter.clsArgumentCodeStructure
+                Else
+                    Return Nothing
             End If
+        Else
+            Return Nothing
         End If
-        UpdateLinkedControls()
-    End Sub
+    End Function
 
     ' key = parameter value
     ' value = item text
-    Public Sub SetParameterValueItemsPairs(lstNewParameterValueItemsPairs As List(Of KeyValuePair(Of String, String)))
-        lstRecognisedItemParameterValuePairs = lstNewParameterValueItemsPairs
+    Public Sub SetParameterValueItemsPairs(dctNewDisplayParameterValues As Dictionary(Of String, String))
+        dctDisplayParameterValues = dctNewDisplayParameterValues
     End Sub
 
     Public Sub AddToParameterValueItemsPairs(kvpNewPair As KeyValuePair(Of String, String))
-        lstRecognisedItemParameterValuePairs.Add(kvpNewPair)
+        AddToParameterValueItemsPairs(kvpNewPair.Key, kvpNewPair.Value)
     End Sub
 
-    Public Function GetAllRecognisedParameterValues() As List(Of String)
-        Dim lstParamValues As New List(Of String)
-        Dim kvpTemp As KeyValuePair(Of String, String)
-
-        For Each kvpTemp In lstRecognisedItemParameterValuePairs
-            lstParamValues.Add(kvpTemp.Value)
-        Next
-        Return lstParamValues
-    End Function
-
-    Public Function GetAllRecognisedItems() As List(Of String)
-        Dim lstItems As New List(Of String)
-        Dim kvpTemp As KeyValuePair(Of String, String)
-
-        For Each kvpTemp In lstRecognisedItemParameterValuePairs
-            lstItems.Add(kvpTemp.Key)
-        Next
-        Return lstItems
-    End Function
+    Public Sub AddToParameterValueItemsPairs(strDisplayValue As String, strParameterValue As String)
+        dctDisplayParameterValues.Add(strDisplayValue, strParameterValue)
+    End Sub
 End Class

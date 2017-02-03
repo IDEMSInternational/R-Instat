@@ -28,14 +28,16 @@ Module mdlCoreControl
 
         If TypeOf ctrParent Is ucrCore Then
             ucrTemp = DirectCast(ctrParent, ucrCore)
-            lstAllControls.Add(ctrParent)
+            If ucrTemp.bIsActiveRControl Then
+                lstAllControls.Add(ctrParent)
+            End If
         End If
 
         For Each ctrChild As Control In ctrParent.Controls
             lstAllControls = GetAllCoreControls(lstAllControls, ctrChild)
         Next
-        Return lstAllControls
         lstAllControls.Sort(AddressOf CompareCoreControls)
+        Return lstAllControls
     End Function
 
     ' Defines ordering where selectors come before other controls
@@ -76,4 +78,16 @@ Module mdlCoreControl
             ucrTemp.SetParameter(clsNewParameter)
         Next
     End Sub
+
+    Public Function AllConditionsSatisfied(lstConditions As List(Of Condition), clsRCode As RCodeStructure)
+        Dim bTemp As Boolean = True
+
+        For Each clsTempCond In lstConditions
+            If Not clsTempCond.IsSatisfied(clsRCode) Then
+                bTemp = False
+                Exit For
+            End If
+        Next
+        Return bTemp
+    End Function
 End Module
