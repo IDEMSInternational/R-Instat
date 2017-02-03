@@ -20,14 +20,13 @@ Public Class ucrCore
 
     'Function or Operator that this control's parameter is added/removed from
     Protected clsRCode As New RCodeStructure
-    Protected iParameterPosition As Integer = -1
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
     Protected clsParameter As RParameter
 
     'Default value of the control
     'No specific type since it can be interpreted different by each control type
-    Protected objDefault As Object = Nothing
+    Protected objRDefault As Object = Nothing
 
     'Protected typControlType As Type = Object
 
@@ -40,8 +39,8 @@ Public Class ucrCore
     'e.g. check box may not change parameter value, only add/remove it
     '     For this bAddRemoveParameter = True and bChangeParameterValue = False
     'e.g. nud may not add/remove parameter, only change its value
-    Public bAddRemoveParameter As Boolean = True
-    Public bChangeParameterValue As Boolean = True
+    Private bPrivateAddRemoveParameter As Boolean = True
+    Private bPrivateChangeParameterValue As Boolean = True
 
     'Optional value
     'If parameter has this value then it will be removed from RCodeStructure 
@@ -74,6 +73,19 @@ Public Class ucrCore
 
     Protected lblLinkedLabel As Label
 
+    Public bIsActiveRControl As Boolean = True
+
+    Public bUpdateRCodeFromControl As Boolean = False
+
+    Protected dctConditions As New Dictionary(Of Object, List(Of Condition))
+
+    Public bAllowNonConditionValues As Boolean = True
+
+    Private Sub ucrCore_Load(sender As Object, e As EventArgs) Handles Me.Load
+        bAddRemoveParameter = True
+        bChangeParameterValue = True
+    End Sub
+
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
@@ -84,6 +96,7 @@ Public Class ucrCore
                         clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
                     ElseIf bReset Then
                         SetToDefault()
+                        Exit Sub
                     Else
                     End If
                 End If
@@ -92,7 +105,47 @@ Public Class ucrCore
         Else
             clsRCode = New RCodeStructure
         End If
+        SetControlValue()
+        UpdateLinkedControls()
     End Sub
+
+    Protected Overridable Sub SetControlValue()
+        Dim bConditionsMet As Boolean = False
+
+        For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
+            If kvpTemp.Value.Count > 0 Then
+                If AllConditionsSatisfied(kvpTemp.Value, clsRCode) Then
+                    If bConditionsMet Then
+                        MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
+                    Else
+                        SetToValue(kvpTemp.Key)
+                        bConditionsMet = True
+                    End If
+                End If
+            End If
+        Next
+        If Not bConditionsMet Then
+            If bAllowNonConditionValues Then
+                SetToValue(GetValueToSet())
+            Else
+                MsgBox("Developer error: no state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.")
+            End If
+        End If
+    End Sub
+
+    Public Overridable Function GetValueToSet() As Object
+        If clsParameter IsNot Nothing Then
+            If clsParameter.bIsString Then
+                Return clsParameter.strArgumentValue
+            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
+                Return clsParameter.clsArgumentCodeStructure
+            Else
+                Return Nothing
+            End If
+        Else
+            Return Nothing
+        End If
+    End Function
 
     Public Overridable Sub UpdateLinkedControls()
         Dim ucrControl As ucrCore
@@ -130,12 +183,19 @@ Public Class ucrCore
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
+            If bUpdateRCodeFromControl AndAlso CanUpdate() Then
+                UpdateRCode()
+            End If
             UpdateControl(bReset)
         End If
     End Sub
 
-    Public Overridable Sub SetDefault(objNewDefault As Object)
-        objDefault = objNewDefault
+    Protected Overridable Function CanUpdate()
+        Return (clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue())
+    End Function
+
+    Public Overridable Sub SetRDefault(objNewDefault As Object)
+        objRDefault = objNewDefault
     End Sub
 
     Public Overridable Sub SetValueToRemoveParameter(objNewValue As Object)
@@ -143,8 +203,8 @@ Public Class ucrCore
     End Sub
 
     Public Overridable Sub SetToDefault()
-        If clsParameter IsNot Nothing AndAlso objDefault IsNot Nothing Then
-            clsParameter.SetArgumentValue(objDefault.ToString())
+        If clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing Then
+            clsParameter.SetArgumentValue(objRDefault.ToString())
         End If
         UpdateControl()
     End Sub
@@ -186,7 +246,7 @@ Public Class ucrCore
     End Function
 
     Public Overridable Function GetDefault() As Object
-        Return objDefault
+        Return objRDefault
     End Function
 
     Public Overridable Function ValueContainedIn(lstTemp As Object()) As Boolean
@@ -196,7 +256,7 @@ Public Class ucrCore
     Public Overridable Sub AddOrRemoveParameter(bAdd As Boolean)
         If clsRCode IsNot Nothing AndAlso clsParameter IsNot Nothing Then
             If bAdd Then
-                clsRCode.AddParameter(clsParameter, iParameterPosition)
+                clsRCode.AddParameter(clsParameter)
             Else
                 clsRCode.RemoveParameter(clsParameter)
             End If
@@ -233,7 +293,7 @@ Public Class ucrCore
     End Function
 
     Public Overridable Function IsDefault() As Boolean
-        Return clsParameter IsNot Nothing AndAlso objDefault IsNot Nothing AndAlso objDefault.Equals(clsParameter.strArgumentValue)
+        Return clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
     End Function
 
     Public Function LinkedControlsParametersPresent() As Boolean
@@ -265,5 +325,69 @@ Public Class ucrCore
         If lblLinkedLabel IsNot Nothing Then
             lblLinkedLabel.Visible = Visible
         End If
+    End Sub
+
+    Protected Overridable Sub SetToValue(objTemp As Object)
+    End Sub
+
+    Public Overridable Property bAddRemoveParameter
+        Get
+            Return bPrivateAddRemoveParameter
+        End Get
+        Set(bValue)
+            bPrivateAddRemoveParameter = bValue
+        End Set
+    End Property
+
+    Public Overridable Property bChangeParameterValue
+        Get
+            Return bPrivateChangeParameterValue
+        End Get
+        Set(bValue)
+            bPrivateChangeParameterValue = bValue
+        End Set
+    End Property
+
+    Public Sub AddCondition(objControlState As Object, clsCond As Condition)
+        If dctConditions.ContainsKey(objControlState) Then
+            dctConditions(objControlState).Add(clsCond)
+        Else
+            dctConditions.Add(objControlState, {clsCond}.ToList())
+        End If
+    End Sub
+
+    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, strParamValue As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterValues(strParamName, strParamValue, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, lstParamValues As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterValues(strParamName, lstParamValues.ToList(), bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterPresentName(strParamName, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddFunctionNamesCondition(objControlState As Object, strFunctionName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetFunctionName(strFunctionName, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddFunctionNamesCondition(objControlState As Object, lstFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetFunctionNamesMultiple(lstFunctionNames.ToList(), bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
     End Sub
 End Class
