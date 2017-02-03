@@ -30,7 +30,8 @@ Partial Class dlgStemAndLeaf
         '
         'ucrReceiverStemAndLeaf
         '
-        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(274, 33)
+        Me.ucrReceiverStemAndLeaf.frmParent = Me
+        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(258, 60)
         Me.ucrReceiverStemAndLeaf.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
         Me.ucrReceiverStemAndLeaf.Selector = Nothing
@@ -47,12 +48,12 @@ Partial Class dlgStemAndLeaf
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(271, 10)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(256, 45)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
         Me.lblSelectedVariable.TabIndex = 3
-        Me.lblSelectedVariable.Tag = "Selected_Variable"
-        Me.lblSelectedVariable.Text = "Selected Variable"
+        Me.lblSelectedVariable.Tag = "Selected_Variable:"
+        Me.lblSelectedVariable.Text = "Selected Variable:"
         '
         'ucrStemLeafSelector
         '
