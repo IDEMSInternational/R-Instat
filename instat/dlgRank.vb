@@ -38,7 +38,7 @@ Public Class dlgRank
         ucrReceiverRank.SetMeAsReceiver()
         ucrReceiverRank.SetIncludedDataTypes({"numeric"})
         ucrReceiverRank.SetParameter(New RParameter("x"))
-        ucrReceiverRank.SetParameterIsString()
+        ucrReceiverRank.SetParameterIsRFunction()
 
         'Setting Parameters for the respective radio buttons
         ucrPanelTies.SetParameter(New RParameter("ties.method"))
@@ -60,7 +60,7 @@ Public Class dlgRank
         ucrSaveRank.SetPrefix("rank")
         ucrSaveRank.SetSaveTypeAsColumn()
         ucrSaveRank.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
-        ucrSaveRank.SetLabelText("Save Rank")
+        ucrSaveRank.SetLabelText("Save Rank:")
         ucrSaveRank.SetIsComboBox()
 
 
