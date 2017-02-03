@@ -79,6 +79,8 @@ Public Class ucrCore
 
     Protected dctConditions As New Dictionary(Of Object, List(Of Condition))
 
+    Public bAllowNonConditionValues As Boolean = True
+
     Private Sub ucrCore_Load(sender As Object, e As EventArgs) Handles Me.Load
         bAddRemoveParameter = True
         bChangeParameterValue = True
@@ -94,6 +96,7 @@ Public Class ucrCore
                         clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
                     ElseIf bReset Then
                         SetToDefault()
+                        Exit Sub
                     Else
                     End If
                 End If
@@ -121,7 +124,28 @@ Public Class ucrCore
                 End If
             End If
         Next
+        If Not bConditionsMet Then
+            If bAllowNonConditionValues Then
+                SetToValue(GetValueToSet())
+            Else
+                MsgBox("Developer error: no state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.")
+            End If
+        End If
     End Sub
+
+    Public Overridable Function GetValueToSet() As Object
+        If clsParameter IsNot Nothing Then
+            If clsParameter.bIsString Then
+                Return clsParameter.strArgumentValue
+            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
+                Return clsParameter.clsArgumentCodeStructure
+            Else
+                Return Nothing
+            End If
+        Else
+            Return Nothing
+        End If
+    End Function
 
     Public Overridable Sub UpdateLinkedControls()
         Dim ucrControl As ucrCore
