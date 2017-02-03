@@ -84,7 +84,7 @@ Public Class dlgFactorDataFrame
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty AndAlso (ucrReceiverFactorDataFrame.GetVariableNames(bWithQuotes:=False) <> ucrInputFactorNames.GetText) Then ' and also receiver dataframe is empty
+        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -107,7 +107,7 @@ Public Class dlgFactorDataFrame
 
     Private Sub CheckAutoName()
         If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.bUserTyped Then
-            ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False) & "1")
+            ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False))
         End If
     End Sub
 End Class
