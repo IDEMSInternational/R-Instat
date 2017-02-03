@@ -79,6 +79,8 @@ Public Class ucrCore
 
     Protected dctConditions As New Dictionary(Of Object, List(Of Condition))
 
+    Public bAllowNonConditionValues As Boolean = True
+
     Private Sub ucrCore_Load(sender As Object, e As EventArgs) Handles Me.Load
         bAddRemoveParameter = True
         bChangeParameterValue = True
@@ -87,8 +89,6 @@ Public Class ucrCore
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
-        Dim bConditionsMet As Boolean = False
-
         If clsRCode IsNot Nothing Then
             If clsParameter IsNot Nothing Then
                 If Not clsRCode.ContainsParameter(clsParameter) Then
@@ -96,6 +96,7 @@ Public Class ucrCore
                         clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
                     ElseIf bReset Then
                         SetToDefault()
+                        Exit Sub
                     Else
                     End If
                 End If
@@ -104,6 +105,12 @@ Public Class ucrCore
         Else
             clsRCode = New RCodeStructure
         End If
+        SetControlValue()
+        UpdateLinkedControls()
+    End Sub
+
+    Protected Overridable Sub SetControlValue()
+        Dim bConditionsMet As Boolean = False
 
         For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
             If kvpTemp.Value.Count > 0 Then
@@ -111,13 +118,34 @@ Public Class ucrCore
                     If bConditionsMet Then
                         MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
                     Else
-                        SetControlValue(kvpTemp.Key)
+                        SetToValue(kvpTemp.Key)
                         bConditionsMet = True
                     End If
                 End If
             End If
         Next
+        If Not bConditionsMet Then
+            If bAllowNonConditionValues Then
+                SetToValue(GetValueToSet())
+            Else
+                MsgBox("Developer error: no state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.")
+            End If
+        End If
     End Sub
+
+    Public Overridable Function GetValueToSet() As Object
+        If clsParameter IsNot Nothing Then
+            If clsParameter.bIsString Then
+                Return clsParameter.strArgumentValue
+            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
+                Return clsParameter.clsArgumentCodeStructure
+            Else
+                Return Nothing
+            End If
+        Else
+            Return Nothing
+        End If
+    End Function
 
     Public Overridable Sub UpdateLinkedControls()
         Dim ucrControl As ucrCore
@@ -299,7 +327,7 @@ Public Class ucrCore
         End If
     End Sub
 
-    Protected Overridable Sub SetControlValue(objTemp As Object)
+    Protected Overridable Sub SetToValue(objTemp As Object)
     End Sub
 
     Public Overridable Property bAddRemoveParameter
@@ -328,38 +356,38 @@ Public Class ucrCore
         End If
     End Sub
 
-    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, strParamValue As String)
+    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, strParamValue As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterValues(strParamName, strParamValue)
+        clsTempCond.SetParameterValues(strParamName, strParamValue, bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, lstParamValues As String())
+    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, lstParamValues As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterValues(strParamName, lstParamValues.ToList())
+        clsTempCond.SetParameterValues(strParamName, lstParamValues.ToList(), bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String)
+    Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterPresentName(strParamName)
+        clsTempCond.SetParameterPresentName(strParamName, bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddFunctionNamesCondition(objControlState As Object, strFunctionName As String)
+    Public Sub AddFunctionNamesCondition(objControlState As Object, strFunctionName As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetFunctionName(strFunctionName)
+        clsTempCond.SetFunctionName(strFunctionName, bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddFunctionNamesCondition(objControlState As Object, lstFunctionNames As String())
+    Public Sub AddFunctionNamesCondition(objControlState As Object, lstFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetFunctionNamesMultiple(lstFunctionNames.ToList())
+        clsTempCond.SetFunctionNamesMultiple(lstFunctionNames.ToList(), bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 End Class
