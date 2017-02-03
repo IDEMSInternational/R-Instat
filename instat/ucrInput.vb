@@ -60,12 +60,12 @@ Public Class ucrInput
         Me.Text = Me.GetText()
         If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
             If GetAllRecognisedItems.Contains(GetText()) Then
-                clsParameter.strArgumentValue = lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value
+                clsParameter.SetArgumentValue(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Key = GetText()).Value)
             Else
                 If bAddQuotesIfUnrecognised Then
-                    clsParameter.strArgumentValue = Chr(34) & GetText() & Chr(34)
+                    clsParameter.SetArgumentValue(Chr(34) & GetText() & Chr(34))
                 Else
-                    clsParameter.strArgumentValue = GetText()
+                    clsParameter.SetArgumentValue(GetText())
                 End If
             End If
         End If
@@ -140,6 +140,7 @@ Public Class ucrInput
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
                 End If
             ElseIf strDefaultType = "Data Frame" Then
+                SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetDataFrameNames()))
             ElseIf strDefaultType = "Graph" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
@@ -402,7 +403,7 @@ Public Class ucrInput
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
         MyBase.UpdateControl(bReset)
-        If clsParameter IsNot Nothing Then
+        If clsParameter IsNot Nothing AndAlso clsParameter.strArgumentValue IsNot Nothing Then
             If bChangeParameterValue Then
                 If GetAllRecognisedParameterValues.Contains(clsParameter.strArgumentValue) Then
                     SetName(lstRecognisedItemParameterValuePairs.Find(Function(x) x.Value = clsParameter.strArgumentValue).Key)

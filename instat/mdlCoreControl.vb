@@ -78,4 +78,16 @@ Module mdlCoreControl
             ucrTemp.SetParameter(clsNewParameter)
         Next
     End Sub
+
+    Public Function AllConditionsSatisfied(lstConditions As List(Of Condition), clsRCode As RCodeStructure)
+        Dim bTemp As Boolean = True
+
+        For Each clsTempCond In lstConditions
+            If Not clsTempCond.IsSatisfied(clsRCode) Then
+                bTemp = False
+                Exit For
+            End If
+        Next
+        Return bTemp
+    End Function
 End Module
