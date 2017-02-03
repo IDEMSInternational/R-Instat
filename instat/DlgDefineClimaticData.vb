@@ -68,45 +68,45 @@ Public Class DlgDefineClimaticData
         ucrSelectorDefineClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineClimaticData.SetParameterIsString()
 
-        ucrReceiverDate.SetParameter(New RParameter("date"))
+        ' ucrReceiverDate.SetParameter(New RParameter("date"))
         ucrReceiverDate.Tag = "date"
 
-        ucrReceiverCloudCover.SetParameter(New RParameter("cloud_cover"))
+        'ucrReceiverCloudCover.SetParameter(New RParameter("cloud_cover"))
         ucrReceiverCloudCover.Tag = "cloud_cover"
 
-        ucrReceiverStationName.SetParameter(New RParameter("station"))
+        'ucrReceiverStationName.SetParameter(New RParameter("station"))
         ucrReceiverStationName.Tag = "station"
-        ucrReceiverMaxTemp.SetParameter(New RParameter("temp_max"))
+        'ucrReceiverMaxTemp.SetParameter(New RParameter("temp_max"))
         ucrReceiverMaxTemp.Tag = "temp_max"
 
-        ucrReceiverMinTemp.SetParameter(New RParameter("temp_min"))
+        'ucrReceiverMinTemp.SetParameter(New RParameter("temp_min"))
         ucrReceiverMinTemp.Tag = "temp_min"
 
-        ucrReceiverRadiation.SetParameter(New RParameter("radiation"))
+        'ucrReceiverRadiation.SetParameter(New RParameter("radiation"))
         ucrReceiverRadiation.Tag = "radiation"
 
-        ucrReceiverRain.SetParameter(New RParameter("rain"))
+        'ucrReceiverRain.SetParameter(New RParameter("rain"))
         ucrReceiverRain.Tag = "rain"
 
-        ucrReceiverSunshine.SetParameter(New RParameter("sunshine_hours"))
+        'ucrReceiverSunshine.SetParameter(New RParameter("sunshine_hours"))
         ucrReceiverSunshine.Tag = "sunshine_hours"
 
-        ucrReceiverWindDirection.SetParameter(New RParameter("wind_direction"))
+        'ucrReceiverWindDirection.SetParameter(New RParameter("wind_direction"))
         ucrReceiverWindDirection.Tag = "wind_direction"
 
-        ucrReceiverWindSpeed.SetParameter(New RParameter("wind_speed"))
+        'ucrReceiverWindSpeed.SetParameter(New RParameter("wind_speed"))
         ucrReceiverWindSpeed.Tag = "wind_speed"
 
-        ucrReceiverYear.SetParameter(New RParameter("year"))
+        'ucrReceiverYear.SetParameter(New RParameter("year"))
         ucrReceiverYear.Tag = "year"
 
-        ucrReceiverMonth.SetParameter(New RParameter("month"))
+        'ucrReceiverMonth.SetParameter(New RParameter("month"))
         ucrReceiverMonth.Tag = "month"
 
-        ucrReceiverDay.SetParameter(New RParameter("day"))
+        'ucrReceiverDay.SetParameter(New RParameter("day"))
         ucrReceiverDay.Tag = "day"
 
-        ucrReceiverDOY.SetParameter(New RParameter("doy"))
+        'ucrReceiverDOY.SetParameter(New RParameter("doy"))
         ucrReceiverDOY.Tag = "doy"
 
         SetRSelector()
@@ -143,6 +143,7 @@ Public Class DlgDefineClimaticData
     Private Sub SetRSelector()
         Dim ucrTempReceiver As ucrReceiver
         For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
             ucrTempReceiver.Selector = ucrSelectorDefineClimaticData
             ucrTempReceiver.SetParameterIsString()
             ucrTempReceiver.bChangeParameterValue = False
