@@ -26,7 +26,6 @@ Public Class dlgConvertColumns
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -59,7 +58,7 @@ Public Class dlgConvertColumns
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 67
 
-        ucrPnlConvertTo.SetParameter(New RParameter("to_type"))
+        ucrPnlConvertTo.SetParameter(New RParameter("to_type", 2))
         ucrPnlConvertTo.AddRadioButton(rdoFactor, Chr(34) & "factor" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoOrderedFactor, Chr(34) & "ordered_factor" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoNumeric, Chr(34) & "numeric" & Chr(34))
@@ -68,7 +67,7 @@ Public Class dlgConvertColumns
 
         ucrPnlConvertTo.AddToLinkedControls(ucrChkSpecifyDecimalsToDisplay, {rdoFactor, rdoOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlFactorToNumericOptions.SetParameter(New RParameter("factor_numeric"))
+        ucrPnlFactorToNumericOptions.SetParameter(New RParameter("factor_numeric", 3))
         ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertLevels, Chr(34) & "by_levels" & Chr(34))
         ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertOrdinals, Chr(34) & "by_ordinals" & Chr(34))
         ucrPnlFactorToNumericOptions.SetRDefault(Chr(34) & "by_levels" & Chr(34))
@@ -76,21 +75,21 @@ Public Class dlgConvertColumns
 
         ucrPnlConvertTo.AddToLinkedControls(ucrPnlFactorToNumericOptions, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSelectorDataFrameColumns.SetParameter(New RParameter("data_name"))
+        ucrSelectorDataFrameColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDataFrameColumns.SetParameterIsString()
 
         ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
         ucrReceiverColumnsToConvert.SetMeAsReceiver()
-        ucrReceiverColumnsToConvert.SetParameter(New RParameter("col_names"))
+        ucrReceiverColumnsToConvert.SetParameter(New RParameter("col_names", 1))
         ucrReceiverColumnsToConvert.SetParameterIsString()
 
         ucrChkSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
-        ucrChkSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits"))
+        ucrChkSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits", 4))
         ucrChkSpecifyDecimalsToDisplay.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkSpecifyDecimalsToDisplay.SetRDefault("FALSE")
         ucrChkSpecifyDecimalsToDisplay.AddToLinkedControls(ucrLinked:=ucrNudDisplayDecimals, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrNudDisplayDecimals.SetParameter(New RParameter("set_decimals"))
+        ucrNudDisplayDecimals.SetParameter(New RParameter("set_decimals", 5))
         ucrNudDisplayDecimals.Minimum = 1
         ucrNudDisplayDecimals.Increment = 1
         ucrNudDisplayDecimals.SetRDefault("4")
