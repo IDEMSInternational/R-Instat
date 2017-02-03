@@ -45,7 +45,7 @@ Public Class dlgExportDataset
 
     Private Sub SetDefaults()
         ucrAvailableSheets.Reset()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
+        clsDefaultFunction.SetRCommand("rio::export")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
@@ -81,24 +81,7 @@ Public Class dlgExportDataset
 
     Private Sub SaveFileType(strFilePath As String)
         Select Case Path.GetExtension(strFilePath)
-            Case ".csv"
-                clsWriteCSV.SetRCommand("rio::export")
-                ucrChkOptions.Enabled = False
-                grpOptions.Enabled = False
-                clsWriteCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteCSV.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteCSV)
-            Case ".xlsx"
-                clsWriteXLSX.SetRCommand("rio::export")
-                'temp disabled
-                'chkOptions.Enabled = True
-                clsWriteXLSX.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteXLSX.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteXLSX)
-            'TAB-separated data (.tsv), using write.table with row.names = FALSE.
-
             Case ".tsv", ".psv", ".feather", ".fwf", ".rds", ".RData", ".json", ".yml", ".dta", ".sav", ".dbf", ".arff", ".R", ".xml", ".html"
-                clsWriteOthers.SetRCommand("rio::export")
                 'temp disabled
                 'chkOptions.Enabled = True
                 clsWriteOthers.AddParameter("file", Chr(34) & strFilePath & Chr(34))
