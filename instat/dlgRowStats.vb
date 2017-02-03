@@ -61,7 +61,7 @@ Public Class dlgRowStats
         ucrReceiverForRowStatistics.SetMeAsReceiver()
         ucrReceiverForRowStatistics.SetDataType("numeric")
         ucrReceiverForRowStatistics.SetParameter(New RParameter("X"))
-        ucrReceiverForRowStatistics.SetParameterIsString()
+        ucrReceiverForRowStatistics.SetParameterIsRFunction()
 
 
         ucrPanelStatistics.SetParameter(New RParameter("FUN"))
