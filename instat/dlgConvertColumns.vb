@@ -17,23 +17,46 @@ Imports instat.Translations
 
 Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Public bToFactorOnly As Boolean = False
+    Private bReset As Boolean = True
 
     Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        ReopenDialog()
         TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
-
+        ucrSelectorDataFrameColumns.Reset()
+        SetToFactorStatus(bToFactorOnly)
     End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub SetToFactorStatus(bToFactorOnly As Boolean)
+        If bToFactorOnly Then
+            rdoFactor.Checked = True
+            rdoCharacter.Enabled = False
+            rdoInteger.Enabled = False
+            rdoNumeric.Enabled = False
+        Else
+            rdoCharacter.Enabled = True
+            rdoInteger.Enabled = True
+            rdoNumeric.Enabled = True
+        End If
+    End Sub
+
 
     Private Sub InitialiseDialog()
 
@@ -72,17 +95,19 @@ Public Class dlgConvertColumns
         ucrNudDisplayDecimals.Increment = 1
         ucrNudDisplayDecimals.SetRDefault("4")
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        clsDefaultFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
-        clsDefaultFunction.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorDataFrameColumns.Reset()
         ucrSelectorDataFrameColumns.Focus()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        SetToFactorStatus(bToFactorOnly)
         ConvertTo()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsDefaultFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
+        clsDefaultFunction.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         TestOKEnabled()
     End Sub
     Private Sub ucrPnlConvertTo_RdosCheckedChanged() Handles ucrPnlConvertTo.ControlContentsChanged
@@ -92,19 +117,34 @@ Public Class dlgConvertColumns
     Private Sub ConvertTo()
         If rdoFactor.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"factor"})
+            grpFactorToNumericOptions.Visible = False
+            ucrChkSpecifyDecimalsToDisplay.Visible = True
+            ucrChkSpecifyDecimalsToDisplay.Checked = False
         ElseIf rdoNumeric.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"numeric"})
+            ucrChkSpecifyDecimalsToDisplay.Visible = False
+            ucrNudDisplayDecimals.Visible = False
+            grpFactorToNumericOptions.Visible = True
         ElseIf rdoCharacter.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"character"})
+            ucrChkSpecifyDecimalsToDisplay.Visible = False
+            ucrNudDisplayDecimals.Visible = False
+            grpFactorToNumericOptions.Visible = False
         ElseIf rdoInteger.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"integer"})
+            ucrChkSpecifyDecimalsToDisplay.Visible = False
+            ucrNudDisplayDecimals.Visible = False
+            grpFactorToNumericOptions.Visible = False
         ElseIf rdoOrderedFactor.Checked Then
             ucrReceiverColumnsToConvert.SetExcludedDataTypes({"factor"})
+            ucrChkSpecifyDecimalsToDisplay.Visible = True
+            grpFactorToNumericOptions.Visible = False
         End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub TestOKEnabled()
