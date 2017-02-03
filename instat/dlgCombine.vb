@@ -48,9 +48,9 @@ Public Class dlgCombine
 
         ' Input Column Name
         ucrNewColName.SetIsTextBox()
+        ucrNewColName.SetPrefix("Interact")
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
-        ucrNewColName.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrNewColName.SetLabelText("New Column Name:")
 
         'chkbox
@@ -65,7 +65,7 @@ Public Class dlgCombine
         ucrSelectorCombineFactors.Reset()
 
         clsDefaultFunction.SetRCommand("interaction")
-        clsDefaultFunction.SetAssignTo(strTemp:="Interact", strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Interact", bAssignToIsPrefix:=True)
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
