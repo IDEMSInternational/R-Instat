@@ -79,11 +79,11 @@ Module mdlCoreControl
         Next
     End Sub
 
-    Public Function AllConditionsSatisfied(lstConditions As List(Of Condition), clsRCode As RCodeStructure)
+    Public Function AllConditionsSatisfied(lstConditions As List(Of Condition), clsRCode As RCodeStructure, Optional clsParameter As RParameter = Nothing)
         Dim bTemp As Boolean = True
 
         For Each clsTempCond In lstConditions
-            If Not clsTempCond.IsSatisfied(clsRCode) Then
+            If Not clsTempCond.IsSatisfied(clsRCode, clsParameter) Then
                 bTemp = False
                 Exit For
             End If

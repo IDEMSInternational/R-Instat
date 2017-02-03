@@ -39,13 +39,17 @@
         bIsPositive = bNewIsPositive
     End Sub
 
-    Public Function IsSatisfied(clsRCode As RCodeStructure) As Boolean
+    Public Function IsSatisfied(clsRCode As RCodeStructure, Optional clsParameter As RParameter = Nothing) As Boolean
         Dim clsTempParam As RParameter
         Dim clsTempFunc As RFunction
 
         If bIsParameterValues Then
-            clsTempParam = clsRCode.GetParameter(strParameterName)
-            Return (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso (bIsPositive = lstValues.Contains(clsRCode.GetParameter(strParameterName).strArgumentValue)))
+            If clsParameter IsNot Nothing Then
+                clsTempParam = clsParameter
+            Else
+                clsTempParam = clsRCode.GetParameter(strParameterName)
+            End If
+            Return (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso (bIsPositive = lstValues.Contains(clsTempParam.strArgumentValue)))
         ElseIf bIsParameterPresenet Then
             Return (bIsPositive = clsRCode.ContainsParameter(strParameterName))
         ElseIf bIsFunctionNames Then
