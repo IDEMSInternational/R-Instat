@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgName
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultRFunction As New RFunction
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
@@ -43,7 +42,6 @@ Public Class dlgName
 
     Private Sub ReopenDialog()
         ucrSelectVariables.Reset()
-        ucrInputNewName.Reset()
         DefaultNewName()
     End Sub
 
@@ -73,12 +71,13 @@ Public Class dlgName
     End Sub
 
     Private Sub DefaultNewName()
-        If Not ucrInputNewName.bUserTyped Then
-            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+        If ((Not ucrInputNewName.bUserTyped) AndAlso (Not ucrReceiverName.IsEmpty)) Then
+            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False) & "1")
         End If
     End Sub
 
     Public Sub Setdefaults()
+        Dim clsDefaultRFunction As New RFunction
         ucrSelectVariables.Reset()
         ucrInputNewName.Reset()
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
