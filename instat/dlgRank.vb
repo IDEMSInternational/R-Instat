@@ -82,13 +82,13 @@ Public Class dlgRank
         Dim clsDefaultFunction As New RFunction
 
         ucrSelectorForRank.Reset()
-        ucrSelectorForRank.Reset()
+        ucrSaveRank.Reset()
 
         'Setting default Rfunction as the base function
         clsDefaultFunction.SetRCommand("rank")
         clsDefaultFunction.AddParameter("ties.method", Chr(34) & "average" & Chr(34))
         clsDefaultFunction.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
-        clsDefaultFunction.SetAssignTo("rank", strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="rank")
+        clsDefaultFunction.SetAssignTo(ucrSaveRank.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
