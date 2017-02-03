@@ -2,17 +2,22 @@
 Imports instat.Translations
 Public Class dlgDeleteRowsOrColums
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
 
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
+
         TestOKEnabled()
     End Sub
 
@@ -42,6 +47,11 @@ Public Class dlgDeleteRowsOrColums
         ColumnsRows()
     End Sub
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+
     Private Sub ReopenDialog()
         ucrReceiverForColumnsToDelete.lstSelectedVariables.Clear()
     End Sub
@@ -70,13 +80,13 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorForDeleteColumns.Reset()
         ucrSelectorForDeleteRows.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrNudRowsToDelete.Value = 1
         rdoColumns.Checked = True
         ColumnsRows()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         TestOKEnabled()
     End Sub
 
@@ -87,7 +97,8 @@ Public Class dlgDeleteRowsOrColums
     Private Sub ColumnsRows()
         If rdoRows.Checked Then
             ucrSelectorForDeleteRows.Reset()
-            clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+            ' This will have to change
+            ' clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
             ucrNudRowsToDelete.Visible = True
             ucrSelectorForDeleteRows.Visible = True
             ucrDataFrameLengthForDeleteRows.Visible = True
@@ -97,7 +108,8 @@ Public Class dlgDeleteRowsOrColums
             ucrReceiverForColumnsToDelete.Visible = False
         ElseIf rdoColumns.Checked Then
             ucrSelectorForDeleteRows.Reset()
-            clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+            'this will have to change 
+            'clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
             ucrNudRowsToDelete.Visible = False
             ucrSelectorForDeleteRows.Visible = False
             ucrDataFrameLengthForDeleteRows.Visible = False
