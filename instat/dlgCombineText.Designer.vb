@@ -23,10 +23,9 @@ Partial Class dlgCombineText
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblSeparator = New System.Windows.Forms.Label()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.lblColumnsToCobine = New System.Windows.Forms.Label()
+        Me.ucrSaveColumn = New instat.ucrSave()
         Me.ucrInputSeparator = New instat.ucrInputComboBox()
-        Me.ucrInputColumnInto = New instat.ucrInputComboBox()
         Me.ucrReceiverCombineText = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForCombineText = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -41,16 +40,6 @@ Partial Class dlgCombineText
         Me.lblSeparator.TabIndex = 3
         Me.lblSeparator.Text = "Separator:"
         '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 213)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 5
-        Me.lblNewColumnName.Tag = "New_Column_Name:"
-        Me.lblNewColumnName.Text = "New Column Name:"
-        '
         'lblColumnsToCobine
         '
         Me.lblColumnsToCobine.AutoSize = True
@@ -61,6 +50,13 @@ Partial Class dlgCombineText
         Me.lblColumnsToCobine.Tag = "Columns_to_Combine:"
         Me.lblColumnsToCobine.Text = "Columns to Combine:"
         '
+        'ucrSaveColumn
+        '
+        Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 209)
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        Me.ucrSaveColumn.Size = New System.Drawing.Size(305, 24)
+        Me.ucrSaveColumn.TabIndex = 5
+        '
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.IsReadOnly = False
@@ -69,16 +65,9 @@ Partial Class dlgCombineText
         Me.ucrInputSeparator.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputSeparator.TabIndex = 4
         '
-        'ucrInputColumnInto
-        '
-        Me.ucrInputColumnInto.IsReadOnly = False
-        Me.ucrInputColumnInto.Location = New System.Drawing.Point(116, 209)
-        Me.ucrInputColumnInto.Name = "ucrInputColumnInto"
-        Me.ucrInputColumnInto.Size = New System.Drawing.Size(145, 21)
-        Me.ucrInputColumnInto.TabIndex = 6
-        '
         'ucrReceiverCombineText
         '
+        Me.ucrReceiverCombineText.frmParent = Me
         Me.ucrReceiverCombineText.Location = New System.Drawing.Point(247, 61)
         Me.ucrReceiverCombineText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCombineText.Name = "ucrReceiverCombineText"
@@ -101,17 +90,16 @@ Partial Class dlgCombineText
         Me.ucrBase.Location = New System.Drawing.Point(10, 236)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 6
         '
         'dlgCombineText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(415, 297)
+        Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrInputSeparator)
-        Me.Controls.Add(Me.ucrInputColumnInto)
         Me.Controls.Add(Me.lblColumnsToCobine)
-        Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.lblSeparator)
         Me.Controls.Add(Me.ucrReceiverCombineText)
         Me.Controls.Add(Me.ucrSelectorForCombineText)
@@ -132,8 +120,7 @@ Partial Class dlgCombineText
     Friend WithEvents ucrSelectorForCombineText As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverCombineText As ucrReceiverMultiple
     Friend WithEvents lblSeparator As Label
-    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents lblColumnsToCobine As Label
-    Friend WithEvents ucrInputColumnInto As ucrInputComboBox
     Friend WithEvents ucrInputSeparator As ucrInputComboBox
+    Friend WithEvents ucrSaveColumn As ucrSave
 End Class
