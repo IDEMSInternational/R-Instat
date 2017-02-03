@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class dlgSaveAs
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -47,7 +46,8 @@ Public Class dlgSaveAs
     End Sub
 
     Private Sub SetDefaults()
-        ucrInputFilePath.ResetText()
+        Dim clsDefaultFunction As New RFunction
+        ucrInputFilePath.Reset()
         clsDefaultFunction.SetRCommand("saveRDS")
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
         clsDefaultFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
