@@ -64,7 +64,7 @@ Public Class UcrPanel
         OnControlValueChanged()
     End Sub
 
-    Protected Overrides Sub SetControlValue(objTemp As Object)
+    Protected Overrides Sub SetToValue(objTemp As Object)
         Dim rdoTemp As RadioButton
 
         If TypeOf objTemp Is RadioButton Then
@@ -73,5 +73,9 @@ Public Class UcrPanel
         Else
             MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
         End If
+    End Sub
+
+    Private Sub UcrPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
+        bAllowNonConditionValues = False
     End Sub
 End Class
