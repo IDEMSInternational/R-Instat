@@ -17,16 +17,19 @@ Imports instat
 Imports instat.Translations
 Public Class dlgDeleteSheet
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
     Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
         TestOKEnabled()
     End Sub
 
@@ -39,25 +42,31 @@ Public Class dlgDeleteSheet
     End Sub
 
     Private Sub ReopenDialog()
-        TestOKEnabled()
+        ucrDataFrameToDelete.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 63
+        ucrBase.clsRsyntax.iCallType = 0
         ucrDataFrameToDelete.SetParameter(New RParameter("data_name"))
         ucrDataFrameToDelete.SetParameterIsString()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
     End Sub
 
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
         ucrDataFrameToDelete.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        TestOKEnabled()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToDelete.ControlContentsChanged
