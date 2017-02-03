@@ -114,6 +114,7 @@ Partial Class dlgMovingAverage
         '
         'ucrReceiverDataToAverage
         '
+        Me.ucrReceiverDataToAverage.frmParent = Me
         Me.ucrReceiverDataToAverage.Location = New System.Drawing.Point(236, 38)
         Me.ucrReceiverDataToAverage.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataToAverage.Name = "ucrReceiverDataToAverage"
@@ -125,7 +126,7 @@ Partial Class dlgMovingAverage
         '
         Me.ucrBase.Location = New System.Drawing.Point(13, 186)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 1
         '
         'ucrAddRemove
@@ -142,7 +143,7 @@ Partial Class dlgMovingAverage
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(427, 221)
+        Me.ClientSize = New System.Drawing.Size(442, 249)
         Me.Controls.Add(Me.txtLag)
         Me.Controls.Add(Me.lblLag)
         Me.Controls.Add(Me.chkPlot)
