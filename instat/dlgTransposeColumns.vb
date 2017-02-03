@@ -60,19 +60,21 @@ Public Class dlgTransposeColumns
 
     Private Sub SetDefaults()
         Dim clsTDefaultFunction As New RFunction
+        Dim clsOverallDefaultFunction As New RFunction
 
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataframe.Reset()
+        NewDefaultName()
 
-        clsOverallFunction.SetRCommand("as.data.frame")
-        clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
+        clsOverallDefaultFunction.SetRCommand("as.data.frame")
+        clsOverallDefaultFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
         clsTDefaultFunction.SetRCommand("t")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         clsTFunction = clsTDefaultFunction.Clone()
-        clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTFunction)
+        clsOverallFunction = clsOverallDefaultFunction.Clone()
 
-        NewDefaultName()
+        clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
