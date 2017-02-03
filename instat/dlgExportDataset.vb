@@ -44,6 +44,7 @@ Public Class dlgExportDataset
         grpOptions.Visible = False
         ucrChkOptions.Enabled = False
         ucrInputExportFile.IsReadOnly = True
+        ucrAvailableSheets.IsReadOnly = True
         ucrInputExportFile.Reset()
         ucrAvailableSheets.Reset()
         clsDefaultFunction.SetRCommand("rio::export")
@@ -68,7 +69,7 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputExportFile.IsEmpty Then
+        If Not ucrInputExportFile.IsEmpty AndAlso ucrAvailableSheets.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -83,7 +84,7 @@ Public Class dlgExportDataset
         End If
     End Sub
 
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrAvailableSheets.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
