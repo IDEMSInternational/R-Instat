@@ -131,4 +131,9 @@ Public Class ucrSelectorByDataFrame
             Return ucrAvailableDataFrames.GetParameter()
         End If
     End Function
+
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+        MyBase.SetRCode(clsNewCodeStructure, bReset)
+        ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
+    End Sub
 End Class
