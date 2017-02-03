@@ -44,9 +44,6 @@ Public Class dlgSort
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-
-        grpMissingValues.Enabled = False
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -64,7 +61,7 @@ Public Class dlgSort
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 339
-
+        grpMissingValues.Enabled = False
 
         'Setting Parameters
         ucrReceiverSort.Selector = ucrSelectForSort
