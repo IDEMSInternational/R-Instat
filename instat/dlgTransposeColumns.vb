@@ -36,8 +36,6 @@ Public Class dlgTransposeColumns
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 277
 
-        'checkbox not implemented as it wasn't on the old version
-
         ' ucrReceiver
         ucrReceiverColumsToTranspose.SetParameter(New RParameter("x"))
         ucrReceiverColumsToTranspose.SetParameterIsRFunction()
@@ -51,7 +49,8 @@ Public Class dlgTransposeColumns
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
 
         'chkbox
-        ucrChkNameNewColumns.SetParameter(New RParameter(""))
+        'checkbox not implemented as it wasn't on the old version
+        'ucrChkNameNewColumns.SetParameter(New RParameter(""))
         ucrChkNameNewColumns.SetText("Name New Columns")
         ucrChkNameNewColumns.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkNameNewColumns.SetRDefault("FALSE")
