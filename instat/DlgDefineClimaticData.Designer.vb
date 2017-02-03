@@ -135,7 +135,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverRadiation.bAddRemoveParameter = True
         Me.ucrReceiverRadiation.bChangeParameterValue = True
         Me.ucrReceiverRadiation.frmParent = Me
-        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(14, 307)
+        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(14, 309)
         Me.ucrReceiverRadiation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRadiation.Name = "ucrReceiverRadiation"
         Me.ucrReceiverRadiation.Selector = Nothing
@@ -159,7 +159,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverCloudCover.bAddRemoveParameter = True
         Me.ucrReceiverCloudCover.bChangeParameterValue = True
         Me.ucrReceiverCloudCover.frmParent = Me
-        Me.ucrReceiverCloudCover.Location = New System.Drawing.Point(14, 352)
+        Me.ucrReceiverCloudCover.Location = New System.Drawing.Point(14, 351)
         Me.ucrReceiverCloudCover.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCloudCover.Name = "ucrReceiverCloudCover"
         Me.ucrReceiverCloudCover.Selector = Nothing
