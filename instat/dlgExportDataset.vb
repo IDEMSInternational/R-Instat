@@ -3,7 +3,7 @@ Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction, clsWriteCSV, clsWriteXLSX, clsWriteOthers As New RFunction
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -17,8 +17,6 @@ Public Class dlgExportDataset
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        grpOptions.Visible = False
-        ucrChkOptions.Enabled = False
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -28,8 +26,7 @@ Public Class dlgExportDataset
         dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
-                ucrInputExportFile.SetName(Path.GetFileName(dlgSave.FileName))
-                SaveFileType(dlgSave.FileName.Replace("\", "/"))
+                ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
             End If
         End If
     End Sub
@@ -44,10 +41,15 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub SetDefaults()
+        grpOptions.Visible = False
+        ucrChkOptions.Enabled = False
+        ucrInputExportFile.IsReadOnly = True
+        ucrInputExportFile.Reset()
         ucrAvailableSheets.Reset()
         clsDefaultFunction.SetRCommand("rio::export")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
+
 
     Private Sub InitialiseDialog()
         ucrChkOptions.SetText("Additional Options")
@@ -55,15 +57,9 @@ Public Class dlgExportDataset
         ucrChkUseRowNames.SetText("Use Row Names")
         ucrInputExportFile.SetName("")
         ucrChkOptions.Checked = False
-
-        ucrInputAuthor.SetParameter(New RParameter("creator", 0))
-        ucrInputSheetName.SetParameter(New RParameter("sheetName", 1))
-        ucrInputRows.SetParameter(New RParameter("startRow", 2))
-        ucrInputCols.SetParameter(New RParameter("startCol", 3))
-        ucrChkUseRowNames.SetParameter(New RParameter("rowNames", 4))
-        ucrChkUseRowNames.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkUseColumnNames.SetParameter(New RParameter("colNames", 5))
-        ucrChkUseColumnNames.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrInputExportFile.SetParameter(New RParameter("file", 1))
+        ucrAvailableSheets.SetParameter(New RParameter("x", 0))
+        ucrAvailableSheets.SetParameterIsRFunction()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -77,17 +73,6 @@ Public Class dlgExportDataset
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub SaveFileType(strFilePath As String)
-        Select Case Path.GetExtension(strFilePath)
-            Case ".tsv", ".psv", ".feather", ".fwf", ".rds", ".RData", ".json", ".yml", ".dta", ".sav", ".dbf", ".arff", ".R", ".xml", ".html"
-                'temp disabled
-                'chkOptions.Enabled = True
-                clsWriteOthers.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteOthers.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteOthers)
-        End Select
     End Sub
 
     Private Sub chkOptions_CheckStateChanged(ucrchangedControl As ucrCore) Handles ucrChkOptions.ControlContentsChanged

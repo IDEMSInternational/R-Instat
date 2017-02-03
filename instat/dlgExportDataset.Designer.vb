@@ -24,8 +24,13 @@ Partial Class dlgExportDataset
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSaveOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrChkOptions = New instat.ucrCheck()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputCols = New instat.ucrInputTextBox()
+        Me.ucrInputRows = New instat.ucrInputTextBox()
+        Me.ucrInputSheetName = New instat.ucrInputTextBox()
+        Me.ucrInputAuthor = New instat.ucrInputTextBox()
         Me.ucrChkUseRowNames = New instat.ucrCheck()
         Me.ucrChkUseColumnNames = New instat.ucrCheck()
         Me.lblCols = New System.Windows.Forms.Label()
@@ -36,11 +41,6 @@ Partial Class dlgExportDataset
         Me.lblExport = New System.Windows.Forms.Label()
         Me.grpSheetSelection = New System.Windows.Forms.GroupBox()
         Me.ucrAvailableSheets = New instat.ucrDataFrame()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
-        Me.ucrInputAuthor = New instat.ucrInputTextBox()
-        Me.ucrInputSheetName = New instat.ucrInputTextBox()
-        Me.ucrInputRows = New instat.ucrInputTextBox()
-        Me.ucrInputCols = New instat.ucrInputTextBox()
         Me.grpSaveOptions.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpSheetSelection.SuspendLayout()
@@ -50,7 +50,7 @@ Partial Class dlgExportDataset
         '
         Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(11, 264)
+        Me.ucrBase.Location = New System.Drawing.Point(11, 267)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(409, 53)
         Me.ucrBase.TabIndex = 0
@@ -67,6 +67,15 @@ Partial Class dlgExportDataset
         Me.grpSaveOptions.Size = New System.Drawing.Size(398, 171)
         Me.grpSaveOptions.TabIndex = 1
         Me.grpSaveOptions.TabStop = False
+        '
+        'ucrInputExportFile
+        '
+        Me.ucrInputExportFile.IsMultiline = False
+        Me.ucrInputExportFile.IsReadOnly = False
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(69, 24)
+        Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        Me.ucrInputExportFile.Size = New System.Drawing.Size(251, 21)
+        Me.ucrInputExportFile.TabIndex = 8
         '
         'ucrChkOptions
         '
@@ -93,6 +102,42 @@ Partial Class dlgExportDataset
         Me.grpOptions.Size = New System.Drawing.Size(386, 93)
         Me.grpOptions.TabIndex = 6
         Me.grpOptions.TabStop = False
+        '
+        'ucrInputCols
+        '
+        Me.ucrInputCols.IsMultiline = False
+        Me.ucrInputCols.IsReadOnly = False
+        Me.ucrInputCols.Location = New System.Drawing.Point(269, 35)
+        Me.ucrInputCols.Name = "ucrInputCols"
+        Me.ucrInputCols.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputCols.TabIndex = 15
+        '
+        'ucrInputRows
+        '
+        Me.ucrInputRows.IsMultiline = False
+        Me.ucrInputRows.IsReadOnly = False
+        Me.ucrInputRows.Location = New System.Drawing.Point(269, 9)
+        Me.ucrInputRows.Name = "ucrInputRows"
+        Me.ucrInputRows.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputRows.TabIndex = 14
+        '
+        'ucrInputSheetName
+        '
+        Me.ucrInputSheetName.IsMultiline = False
+        Me.ucrInputSheetName.IsReadOnly = False
+        Me.ucrInputSheetName.Location = New System.Drawing.Point(74, 35)
+        Me.ucrInputSheetName.Name = "ucrInputSheetName"
+        Me.ucrInputSheetName.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputSheetName.TabIndex = 13
+        '
+        'ucrInputAuthor
+        '
+        Me.ucrInputAuthor.IsMultiline = False
+        Me.ucrInputAuthor.IsReadOnly = False
+        Me.ucrInputAuthor.Location = New System.Drawing.Point(74, 9)
+        Me.ucrInputAuthor.Name = "ucrInputAuthor"
+        Me.ucrInputAuthor.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputAuthor.TabIndex = 12
         '
         'ucrChkUseRowNames
         '
@@ -167,7 +212,7 @@ Partial Class dlgExportDataset
         'grpSheetSelection
         '
         Me.grpSheetSelection.Controls.Add(Me.ucrAvailableSheets)
-        Me.grpSheetSelection.Location = New System.Drawing.Point(10, 10)
+        Me.grpSheetSelection.Location = New System.Drawing.Point(8, 4)
         Me.grpSheetSelection.Name = "grpSheetSelection"
         Me.grpSheetSelection.Size = New System.Drawing.Size(398, 69)
         Me.grpSheetSelection.TabIndex = 0
@@ -177,62 +222,17 @@ Partial Class dlgExportDataset
         'ucrAvailableSheets
         '
         Me.ucrAvailableSheets.bUseCurrentFilter = True
-        Me.ucrAvailableSheets.Location = New System.Drawing.Point(6, 19)
+        Me.ucrAvailableSheets.Location = New System.Drawing.Point(3, 16)
         Me.ucrAvailableSheets.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAvailableSheets.Name = "ucrAvailableSheets"
         Me.ucrAvailableSheets.Size = New System.Drawing.Size(127, 41)
         Me.ucrAvailableSheets.TabIndex = 0
         '
-        'ucrInputExportFile
-        '
-        Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(69, 24)
-        Me.ucrInputExportFile.Name = "ucrInputExportFile"
-        Me.ucrInputExportFile.Size = New System.Drawing.Size(251, 21)
-        Me.ucrInputExportFile.TabIndex = 8
-        '
-        'ucrInputAuthor
-        '
-        Me.ucrInputAuthor.IsMultiline = False
-        Me.ucrInputAuthor.IsReadOnly = False
-        Me.ucrInputAuthor.Location = New System.Drawing.Point(74, 9)
-        Me.ucrInputAuthor.Name = "ucrInputAuthor"
-        Me.ucrInputAuthor.Size = New System.Drawing.Size(100, 21)
-        Me.ucrInputAuthor.TabIndex = 12
-        '
-        'ucrInputSheetName
-        '
-        Me.ucrInputSheetName.IsMultiline = False
-        Me.ucrInputSheetName.IsReadOnly = False
-        Me.ucrInputSheetName.Location = New System.Drawing.Point(74, 35)
-        Me.ucrInputSheetName.Name = "ucrInputSheetName"
-        Me.ucrInputSheetName.Size = New System.Drawing.Size(100, 21)
-        Me.ucrInputSheetName.TabIndex = 13
-        '
-        'ucrInputRows
-        '
-        Me.ucrInputRows.IsMultiline = False
-        Me.ucrInputRows.IsReadOnly = False
-        Me.ucrInputRows.Location = New System.Drawing.Point(269, 9)
-        Me.ucrInputRows.Name = "ucrInputRows"
-        Me.ucrInputRows.Size = New System.Drawing.Size(100, 21)
-        Me.ucrInputRows.TabIndex = 14
-        '
-        'ucrInputCols
-        '
-        Me.ucrInputCols.IsMultiline = False
-        Me.ucrInputCols.IsReadOnly = False
-        Me.ucrInputCols.Location = New System.Drawing.Point(269, 35)
-        Me.ucrInputCols.Name = "ucrInputCols"
-        Me.ucrInputCols.Size = New System.Drawing.Size(100, 21)
-        Me.ucrInputCols.TabIndex = 15
-        '
         'dlgExportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 329)
+        Me.ClientSize = New System.Drawing.Size(418, 332)
         Me.Controls.Add(Me.grpSheetSelection)
         Me.Controls.Add(Me.grpSaveOptions)
         Me.Controls.Add(Me.ucrBase)
