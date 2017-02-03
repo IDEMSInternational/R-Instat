@@ -17,21 +17,24 @@ Imports instat.Translations
 
 Public Class dlgRank
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
+
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
 
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 25
-        clsDefaultFunction.SetRCommand("rank")
 
         'Setting Parameters and Data types allowed
         ucrReceiverRank.Selector = ucrSelectorForRank
@@ -63,12 +66,6 @@ Public Class dlgRank
         ucrSaveRank.SetLabelText("Save Rank:")
         ucrSaveRank.SetIsComboBox()
 
-
-        'Define the default RFunction
-        clsDefaultFunction.SetRCommand("rank")
-        clsDefaultFunction.AddParameter("ties.method", Chr(34) & "average" & Chr(34))
-        clsDefaultFunction.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
-        clsDefaultFunction.SetAssignTo("rank", strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="rank")
     End Sub
 
     'Testing when to Enable the OK button
@@ -82,11 +79,23 @@ Public Class dlgRank
 
     ' Sub that runs only the first time the dialog loads it sets default RFunction as the base function
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        'Setting default Rfunction as the base function
+        clsDefaultFunction.SetRCommand("rank")
+        clsDefaultFunction.AddParameter("ties.method", Chr(34) & "average" & Chr(34))
+        clsDefaultFunction.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
+        clsDefaultFunction.SetAssignTo("rank", strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="rank")
+
+
+        ucrSelectorForRank.Reset()
+        ucrSelectorForRank.Reset()
+
+        ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrSelectorForRank.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        ucrSelectorForRank.Reset()
-        TestOKEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveRank.ControlContentsChanged
@@ -97,6 +106,8 @@ Public Class dlgRank
     'When the reset button is clicked, set the defaults again
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
 End Class
