@@ -44,6 +44,7 @@ Public Class dlgDeleteRowsOrColums
         ucrPnlRows.AddRadioButton(rdoRows)
         ucrPnlRows.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
         ucrPnlRows.AddFunctionNamesCondition(rdoRows, frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+
         ucrPnlRows.AddToLinkedControls(ucrSelectorForDeleteColumns, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRows.AddToLinkedControls(ucrReceiverForColumnsToDelete, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRows.AddToLinkedControls(ucrSelectorForDeleteRows, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -59,18 +60,19 @@ Public Class dlgDeleteRowsOrColums
         ucrReceiverForColumnsToDelete.SetMeAsReceiver()
         ucrReceiverForColumnsToDelete.SetParameter(New RParameter("cols"))
         ucrReceiverForColumnsToDelete.SetParameterIsString()
+        ucrReceiverForColumnsToDelete.SetLinkedDisplayControl(lblColumnsToDelete)
 
         ucrNudRowsToDelete.SetParameter(New RParameter("row_names"))
         ucrNudRowsToDelete.Minimum = 1
+        ucrNudRowsToDelete.SetLinkedDisplayControl(lblNumberofRows)
+        ucrNudRowsToDelete.SetRDefault(1)
 
         ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteRows)
-        ColumnsRows()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
-
 
     Private Sub ReopenDialog()
         ucrReceiverForColumnsToDelete.lstSelectedVariables.Clear()
@@ -94,8 +96,7 @@ Public Class dlgDeleteRowsOrColums
         End If
     End Sub
 
-    Private Sub plnRows() Handles ucrPnlRows.ControlContentsChanged, ucrReceiverForColumnsToDelete.ControlContentsChanged
-        ColumnsRows()
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrPnlRows.ControlContentsChanged, ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrNudRowsToDelete.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -104,43 +105,25 @@ Public Class dlgDeleteRowsOrColums
 
         ucrSelectorForDeleteColumns.Reset()
         ucrSelectorForDeleteRows.Reset()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
-        ColumnsRows()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ColumnsRows()
-        'If rdoRows.Checked Then
-        '    ucrSelectorForDeleteRows.Reset()
-        '    ' This will have to change
-        '    ' clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
-        '    ucrNudRowsToDelete.Visible = True
-        '    ucrSelectorForDeleteRows.Visible = True
-        '    ucrDataFrameLengthForDeleteRows.Visible = True
-        '    lblRowNames.Visible = True
-        '    ucrSelectorForDeleteColumns.Visible = False
-        '    lblColumnsToDelete.Visible = False
-        '    ucrReceiverForColumnsToDelete.Visible = False
-        'ElseIf rdoColumns.Checked Then
-        '    ucrSelectorForDeleteRows.Reset()
-        '    'this will have to change 
-        '    'clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
-        '    ucrNudRowsToDelete.Visible = False
-        '    ucrSelectorForDeleteRows.Visible = False
-        '    ucrDataFrameLengthForDeleteRows.Visible = False
-        '    lblRowNames.Visible = False
-        '    ucrSelectorForDeleteColumns.Visible = True
-        '    lblColumnsToDelete.Visible = True
-        '    ucrReceiverForColumnsToDelete.Visible = True
-        'End If
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorForDeleteRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDeleteRows.ControlValueChanged
         ucrNudRowsToDelete.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
+    End Sub
+
+    Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRows.ControlValueChanged
+        If rdoColumns.Checked Then
+            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+        ElseIf rdoRows.Checked Then
+            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+        End If
     End Sub
 End Class
