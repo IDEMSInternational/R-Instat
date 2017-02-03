@@ -23,6 +23,7 @@ Public Class ucrSave
     End Sub
 
     Private Sub InitialiseControl()
+        bUpdateRCodeFromControl = True
         ucrInputComboSave.SetValidationTypeAsRVariable()
         ucrInputTextSave.SetValidationTypeAsRVariable()
         ucrChkSave.bIsActiveRControl = False
@@ -225,7 +226,7 @@ Public Class ucrSave
                     Case "column"
                         clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
                     Case "dataframe"
-                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                     Case "graph"
                         clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                     Case "model"
@@ -281,5 +282,27 @@ Public Class ucrSave
         Else
             Return ucrInputTextSave.GetText()
         End If
+    End Function
+
+    Public ReadOnly Property bUserTyped As Boolean
+        Get
+            If bIsComboBox Then
+                Return ucrInputComboSave.bUserTyped
+            Else
+                Return ucrInputTextSave.bUserTyped
+            End If
+        End Get
+    End Property
+
+    Public Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        If bIsComboBox Then
+            ucrInputComboSave.SetName(strName, bSilent)
+        Else
+            ucrInputTextSave.SetName(strName, bSilent)
+        End If
+    End Sub
+
+    Protected Overrides Function CanUpdate() As Object
+        Return ((Not clsRCode.bIsAssigned AndAlso Not clsRCode.bToBeAssigned) AndAlso strSaveType <> "")
     End Function
 End Class
