@@ -45,7 +45,7 @@ Public Class UcrPanel
         If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
             For Each ctrTemp As Control In pnlRadios.Controls
                 If TypeOf ctrTemp Is RadioButton Then
-                    rdoTemp = DirectCast(ctrTemp, RadioButton)
+                    rdoTemp = CType(ctrTemp, RadioButton)
                     If rdoTemp.Checked Then
                         If dctRadioButtonValues.ContainsKey(rdoTemp) Then
                             strNewValue = dctRadioButtonValues(rdoTemp)
@@ -78,4 +78,21 @@ Public Class UcrPanel
     Private Sub UcrPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
         bAllowNonConditionValues = False
     End Sub
+
+    Public Overrides Function ControlValueContainedIn(lstTemp() As Object) As Boolean
+        Dim rdoTemp As RadioButton
+        Dim bTemp As Boolean = False
+
+        For Each objVal In lstTemp
+            If TypeOf objVal Is RadioButton Then
+                rdoTemp = DirectCast(objVal, RadioButton)
+                If rdoTemp.Checked Then
+                    bTemp = True
+                End If
+            Else
+                MsgBox("Developer error: Cannot convert object to radio button for linked control.")
+            End If
+        Next
+        Return bTemp
+    End Function
 End Class
