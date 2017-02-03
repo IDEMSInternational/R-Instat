@@ -19,8 +19,8 @@ Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Public ExplanatoryVariables
-    Public strModelName As String = ""
+    'Public ExplanatoryVariables
+    'Public strModelName As String = ""
 
     Private Sub dlgPrincipalComponentAnalysis_oad(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
