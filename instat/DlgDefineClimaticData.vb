@@ -46,7 +46,6 @@ Public Class DlgDefineClimaticData
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 328
-        ucrBase.clsRsyntax.iCallType = 0
         Dim kvpRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("rain", {"rain", "prec", "rr", "prcp"}.ToList())
         Dim kvpDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("date", {"date", "record"}.ToList())
         Dim kvpStation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
@@ -135,11 +134,6 @@ Public Class DlgDefineClimaticData
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
-
-    'Private Sub ucrSelectorDefineClimaticData_DataFrameChanged() Handles ucrSelectorDefineClimaticData.DataFrameChanged
-    '    ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    '    'AutoFillReceivers()
-    'End Sub
 
     Private Sub AutoFillReceivers()
         Dim lstRecognisedValues As List(Of String)
