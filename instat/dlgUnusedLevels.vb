@@ -16,30 +16,39 @@
 
 Imports instat.Translations
 Public Class dlgUnusedLevels
-    Private clsDefaultFunction As New RFunction
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub dlgUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefault()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
     Private Sub ReopenDialog()
 
     End Sub
-    Private Sub SetDefault()
-        ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorFactorColumn.Reset()
-        ucrSelectorFactorColumn.Focus()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+
+        ' Set default RFunction as the base function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 40
@@ -56,13 +65,11 @@ Public Class dlgUnusedLevels
         ucrSelectorFactorColumn.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFactorColumn.SetParameterIsString()
 
-        'Set function
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
-
     End Sub
 
     Private Sub ucrBase_clickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefault()
+        SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
