@@ -35,7 +35,7 @@ Public Class dlgDeleteDescriptive
     End Sub
 
     Private Sub ReopenDialog()
-        ucrReceiverObjectsToDelete.lstSelectedVariables.Clear()
+        ucrReceiverObjectsToDelete.lstSelectedVariables.Clear() ' temporary fix
     End Sub
 
     Private Sub InitialiseDialog()
