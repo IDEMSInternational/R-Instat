@@ -44,7 +44,6 @@ Public Class dlgExportDataset
         grpOptions.Visible = False
         ucrChkOptions.Enabled = False
         ucrInputExportFile.IsReadOnly = True
-        ucrAvailableSheets.IsReadOnly = True
         ucrInputExportFile.Reset()
         ucrAvailableSheets.Reset()
         clsDefaultFunction.SetRCommand("rio::export")
