@@ -69,7 +69,6 @@ Public Class dlgImportFromODK
         ucrInputChooseForm.Reset()
         ucrInputPassword.Reset()
         ucrInputUsername.Reset()
-        EnableCommandButton()
         ucrInputPassword.txtInput.UseSystemPasswordChar = True
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
@@ -86,45 +85,14 @@ Public Class dlgImportFromODK
         SetRCodeForControls(True)
     End Sub
 
-    Private Sub ucrInputUsername_NameChanged() Handles ucrInputUsername.NameChanged
-        'If ucrInputUsername.IsEmpty() Then
-        '    ucrBase.clsRsyntax.RemoveParameter("username")
-        '    clsGetFormsFunction.RemoveParameterByName("username")
-        'Else
-        '    ucrBase.clsRsyntax.AddParameter("username", Chr(34) & ucrInputUsername.GetText & Chr(34))
-        '    clsGetFormsFunction.AddParameter("username", Chr(34) & ucrInputUsername.GetText & Chr(34))
-        'End If
-        'TestOKEnabled()
-    End Sub
+
     Private Sub AllControls_ContentsChnaged() Handles ucrChkViewPassword.ControlContentsChanged, ucrInputChooseForm.ControlContentsChanged, ucrInputPassword.ControlContentsChanged, ucrPnlPlatform.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputPassword_NameChanged() Handles ucrInputPassword.ControlContentsChanged
-        useSystemePassword()
-        'If ucrInputPassword.IsEmpty() Then
-        '    ucrBase.clsRsyntax.RemoveParameter("password")
-        '    clsGetFormsFunction.RemoveParameterByName("password")
-        'Else
-        '    ucrBase.clsRsyntax.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
-        '    clsGetFormsFunction.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
-        'End If
-
-    End Sub
-
-    Private Sub ucrInputChooseForm_NameChanged() Handles ucrInputChooseForm.ControlContentsChanged
-        'If ucrInputChooseForm.IsEmpty() Then
-        '    ucrBase.clsRsyntax.RemoveParameter("form_name")
-        'Else
-        '    ucrBase.clsRsyntax.AddParameter("form_name", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
-        'End If
-        'TestOKEnabled()
     End Sub
 
     Private Sub cmdFindForms_click(sender As Object, e As EventArgs) Handles cmdFindForms.Click
         Dim strFormNames() As String
         Dim expTemp As SymbolicExpression
-        SetRCodeForControls(True)
 
         Cursor = Cursors.WaitCursor
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFormsFunction.ToScript())
@@ -150,9 +118,7 @@ Public Class dlgImportFromODK
         End If
     End Sub
 
-    Private Sub UsernamePassword_ContentsChanged() Handles ucrInputUsername.ContentsChanged, ucrInputPassword.ContentsChanged
-        'ucrInputChooseForm.cboInput.Items.Clear()
-        'ucrInputChooseForm.SetName("")
+    Private Sub UsernamePassword_ContentsChanged() Handles ucrInputUsername.ControlContentsChanged, ucrInputPassword.ControlContentsChanged
         EnableCommandButton()
     End Sub
 
@@ -167,5 +133,4 @@ Public Class dlgImportFromODK
             ucrInputPassword.txtInput.UseSystemPasswordChar = True
         End If
     End Sub
-
 End Class
