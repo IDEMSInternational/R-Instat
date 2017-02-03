@@ -89,7 +89,7 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub CheckAutoName()
-        If Not ucrNewDataFrameName.bUserTyped Then
+        If Not ucrNewDataFrameName.bUserTyped AndAlso Not ucrNewDataFrameName.IsEmpty Then
             ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
         End If
     End Sub
