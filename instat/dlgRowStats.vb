@@ -16,30 +16,37 @@
 Imports instat.Translations
 Public Class dlgRowStats
     Private bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
+
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        'Checks if Ok can be enabled.
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
 
     End Sub
 
     Private Sub SetDefaults()
-        ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorForRowStats.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        ' ucrSelectorForRowStats.Focus()
+
+        'Defining the default RFunction
+        clsDefaultFunction.SetRCommand("apply")
+        clsDefaultFunction.AddParameter("FUN", "mean")
+        clsDefaultFunction.AddParameter("MARGIN", 1)
+        clsDefaultFunction.SetAssignTo("row_summary", strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="row_summary")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
-    Private Sub ReopenDialog()
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -54,17 +61,18 @@ Public Class dlgRowStats
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 45
         cmdUserDefined.Enabled = False
-        ' ucrBase.clsRsyntax.SetFunction("apply")
 
         'Setting receiver Data rypes, parameters and making it as a receiver
         ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
         ucrReceiverForRowStatistics.SetMeAsReceiver()
         ucrReceiverForRowStatistics.SetDataType("numeric")
-        ucrReceiverForRowStatistics.SetParameter(New RParameter("X"))
+        ucrReceiverForRowStatistics.bUseFilteredData = False
+        ucrReceiverForRowStatistics.bForceAsDataFrame = True
+        ucrReceiverForRowStatistics.SetParameter(New RParameter("X", 0))
         ucrReceiverForRowStatistics.SetParameterIsRFunction()
 
 
-        ucrPanelStatistics.SetParameter(New RParameter("FUN"))
+        ucrPanelStatistics.SetParameter(New RParameter("FUN", 2))
         ucrPanelStatistics.AddRadioButton(rdoMean, "mean")
         ucrPanelStatistics.AddRadioButton(rdoMinimum, "min")
         ucrPanelStatistics.AddRadioButton(rdoSum, "sum")
@@ -73,25 +81,18 @@ Public Class dlgRowStats
         ucrPanelStatistics.AddRadioButton(rdoStandardDeviation, "sd")
         ucrPanelStatistics.AddRadioButton(rdoMaximum, "max")
         ucrPanelStatistics.AddRadioButton(rdoCount, "function(z) sum(!is.na(z))")
-        ucrPanelStatistics.SetRDefault("mean")
 
         ucrSaveResults.SetPrefix("row_summary")
         ucrSaveResults.SetSaveTypeAsColumn()
         ucrSaveResults.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
         ucrSaveResults.SetLabelText("Row Summary")
         ucrSaveResults.SetIsComboBox()
-
-        'Defining the default RFunction
-        clsDefaultFunction.SetRCommand("apply")
-        clsDefaultFunction.AddParameter("FUN", "mean")
-        clsDefaultFunction.AddParameter("MARGIN", 1)
-        clsDefaultFunction.SetAssignTo("row_summary", strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="row_summary")
-
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForRowStats.ControlContentsChanged, ucrReceiverForRowStatistics.ControlContentsChanged, ucrSaveResults.ControlContentsChanged
