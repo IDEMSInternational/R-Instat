@@ -201,7 +201,8 @@ Public Class RCodeStructure
             clsParam.SetArgument(clsROperatorParameter)
         End If
         clsParam.bIncludeArgumentName = bIncludeArgumentName
-        AddParameter(clsParam, iPosition)
+        clsParam.Position = iPosition
+        AddParameter(clsParam)
     End Sub
 
     'TODO This should be call AddParameter but need to make it unambiguous with above
@@ -213,20 +214,16 @@ Public Class RCodeStructure
         End If
     End Sub
 
-    Public Overridable Sub AddParameter(clsNewParam As RParameter, Optional iPosition As Integer = -1)
+    Public Overridable Sub AddParameter(clsNewParam As RParameter)
         Dim i As Integer = -1
         Dim strTempArgumentName As String = clsNewParam.strArgumentName
-        clsNewParam.Position = iPosition
-        If clsNewParam.strArgumentName Is Nothing Then
-            Dim x = 1
-        End If
         If clsParameters IsNot Nothing Then
             If clsNewParam.strArgumentName IsNot Nothing Then
                 'Dim match As Predicate(Of RParameter) = Function(x) x.strArgumentName.Equals(clsParam.strArgumentName)
                 i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(strTempArgumentName))
             End If
             If i = -1 Then
-                ShiftParametersPositions(iPosition) 'Checking if there is room in the parameter's positions to add a parameter with position = iPosition
+                ShiftParametersPositions(clsNewParam.Position) 'Checking if there is room in the parameter's positions to add a parameter with position = iPosition
                 clsParameters.Add(clsNewParam)
             Else
                 If clsNewParam.bIsString AndAlso clsNewParam.strArgumentValue IsNot Nothing Then
@@ -236,12 +233,12 @@ Public Class RCodeStructure
                 Else
                     'message
                 End If
-                If clsParameters(i).Position <> iPosition Then
+                If clsParameters(i).Position <> clsNewParam.Position Then
                     'In case the position needs to be changed, there might exist another parameter with the new position in the list
                     'The parameter i is then temporarily set to unordered until the Shift in positions has been operated within the clsParameters (if necessary).
                     clsParameters(i).Position = -1
-                    If iPosition <> -1 Then
-                        ShiftParametersPositions(iPosition)
+                    If clsNewParam.Position <> -1 Then
+                        ShiftParametersPositions(clsNewParam.Position)
                         clsParameters(i).Position = clsNewParam.Position
                     End If
                 End If
