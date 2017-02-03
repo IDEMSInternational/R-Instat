@@ -17,19 +17,23 @@
 Imports instat.Translations
 Public Class dlgReorderLevels
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
+
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaultSettings()
             bFirstLoad = False
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 36
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+
 
         'Set Receivers and column parameter
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
@@ -48,16 +52,23 @@ Public Class dlgReorderLevels
 
         'Set column Parameter
         ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
-        ' ucrReorderFactor.SetParameterIsString()
-        ' ucrReorderFactor.SetParameterIsString()
+        'ucrReorderFactor.setparameterisstring()
+
 
     End Sub
-    Private Sub SetDefaultSettings()
-        ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorFactorLevelsToReorder.Reset()
         ucrSelectorFactorLevelsToReorder.Focus()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        ' Set default RFunction as the base function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     'Private Sub ucrReorderFactor_Leave(sender As Object, e As EventArgs) Handles ucrReorderFactor.Leave
@@ -73,7 +84,8 @@ Public Class dlgReorderLevels
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaultSettings()
+        SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
