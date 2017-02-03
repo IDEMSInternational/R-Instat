@@ -43,6 +43,8 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 423
 
+        '        cmdCCAOptions.Enabled = False
+
         ' Y Variable Selector
         ucrReceiverYvariables.SetParameter(New RParameter("y", 0))
         ucrReceiverYvariables.SetParameterIsRFunction()
@@ -102,7 +104,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
         '        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
         '        bResetSubdialog = False
-        '        sdgCanonicalCorrelation.ShowDialog()
+        '  sdgCanonicalCorrelation.ShowDialog()
     End Sub
 
     Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
