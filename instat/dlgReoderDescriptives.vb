@@ -41,6 +41,10 @@ Public Class dlgReoderDescriptives
 
         ' ucrReorderObjects
         '        ucrReorderObjects.SetParameter(New RParameter("new_order", 1))
+        ' ucrReorderObjects.SetParameterIsString()
+
+        'clsDefaultFunction.AddParameter("new_order", ucrReorderObjects.GetVariableNames)
+
         ucrReorderObjects.setDataType("object")
         ucrReorderObjects.setDataframes(ucrDataFrameReorder)
     End Sub
@@ -74,14 +78,4 @@ Public Class dlgReoderDescriptives
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
-
-
-    '    Private Sub ucrReorderObjects_OrderChanged() Handles ucrReorderObjects.OrderChanged
-    '   If Not ucrReorderObjects.isEmpty Then
-    '          ucrBase.clsRsyntax.AddParameter("new_order", ucrReorderObjects.GetVariableNames)
-    ' Else
-    '        ucrBase.clsRsyntax.RemoveParameter("new_order")
-    'End If
-    '   TestOKEnabled()
-    'End Sub
 End Class
