@@ -44,14 +44,13 @@ Public Class dlgCombineText
         ucrBase.iHelpTopicID = 345
 
         ' Sort items in ucrInputSeparator
-        Dim lstSeparator As New List(Of KeyValuePair(Of String, String))
-
+        Dim dctSeparator As New Dictionary(Of String, String)
         ucrInputSeparator.SetParameter(New RParameter("sep"))
-        lstSeparator.Add(New KeyValuePair(Of String, String)("Space ( )", Chr(34) & " " & Chr(34)))
-        lstSeparator.Add(New KeyValuePair(Of String, String)("Period .", Chr(34) & "." & Chr(34) & ")"))
-        lstSeparator.Add(New KeyValuePair(Of String, String)("Hyphen -", Chr(34) & "-" & Chr(34)))
-        lstSeparator.Add(New KeyValuePair(Of String, String)("Underscore _", Chr(34) & "_" & Chr(34)))
-        ucrInputSeparator.SetItems(lstSeparator)
+        dctSeparator.Add("Space ( )", Chr(34) & " " & Chr(34))
+        dctSeparator.Add("Period .", Chr(34) & "." & Chr(34) & ")")
+        dctSeparator.Add("Hyphen -", Chr(34) & "-" & Chr(34))
+        dctSeparator.Add("Underscore _", Chr(34) & "_" & Chr(34))
+        ucrInputSeparator.SetItems(dctSeparator)
 
         ' ucrReceiver
         ucrReceiverCombineText.SetParameter(New RParameter("columns"))
