@@ -62,8 +62,8 @@ Public Class dlgCombineText
 
         ' ucrSaveColumn
         ucrSaveColumn.SetIsTextBox()
+        ucrSaveColumn.SetPrefix("")
         ucrSaveColumn.SetSaveTypeAsColumn()
-        ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
         ucrSaveColumn.SetLabelText("Prefix for New Column:")
         iColumnsUsed = 0
@@ -89,7 +89,7 @@ Public Class dlgCombineText
 
         clsDefaultFunction.SetRCommand("stringr::str_c")
         clsDefaultFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
-        clsDefaultFunction.SetAssignTo(strTemp:="Combine", strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Combine", bAssignToIsPrefix:=True)
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
