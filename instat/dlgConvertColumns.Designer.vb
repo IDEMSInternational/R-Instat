@@ -160,7 +160,7 @@ Partial Class dlgConvertColumns
         'ucrNudDisplayDecimals
         '
         Me.ucrNudDisplayDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDisplayDecimals.Location = New System.Drawing.Point(230, 264)
+        Me.ucrNudDisplayDecimals.Location = New System.Drawing.Point(205, 264)
         Me.ucrNudDisplayDecimals.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDisplayDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDisplayDecimals.Name = "ucrNudDisplayDecimals"
@@ -173,7 +173,7 @@ Partial Class dlgConvertColumns
         Me.ucrChkSpecifyDecimalsToDisplay.Checked = False
         Me.ucrChkSpecifyDecimalsToDisplay.Location = New System.Drawing.Point(10, 265)
         Me.ucrChkSpecifyDecimalsToDisplay.Name = "ucrChkSpecifyDecimalsToDisplay"
-        Me.ucrChkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(190, 20)
         Me.ucrChkSpecifyDecimalsToDisplay.TabIndex = 18
         '
         'ucrPnlConvertTo

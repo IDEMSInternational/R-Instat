@@ -52,7 +52,7 @@ Public Class sdgOneVarGraph
 
         ucrNudNumberofColumns.SetMinMax(1, 10)
         ucrNudNumberofColumns.bAddRemoveParameter = False
-        ucrNudNumberofColumns.SetLabel(lblNumberofColumns)
+        ucrNudNumberofColumns.SetLinkedDisplayControl(lblNumberofColumns)
 
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkSpecifyLayout.bChangeParameterValue = False

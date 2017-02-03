@@ -71,7 +71,7 @@ Public Class ucrCore
     Public bLinkedHideIfParameterMissing As Boolean = False
     Public bLinkedChangeParameterToDefault As Boolean = False
 
-    Protected lblLinkedLabel As Label
+    Protected ctrLinkedDisaplyControl As Control
 
     Public bIsActiveRControl As Boolean = True
 
@@ -114,7 +114,7 @@ Public Class ucrCore
 
         For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
             If kvpTemp.Value.Count > 0 Then
-                If AllConditionsSatisfied(kvpTemp.Value, clsRCode) Then
+                If AllConditionsSatisfied(kvpTemp.Value, clsRCode, clsParameter) Then
                     If bConditionsMet Then
                         MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
                     Else
@@ -155,7 +155,7 @@ Public Class ucrCore
         For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
             lstValues = kvpTemp.Value
             ucrControl = kvpTemp.Key
-            bTemp = ValueContainedIn(lstValues)
+            bTemp = ControlValueContainedIn(lstValues) AndAlso Visible
             If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
                 ucrControl.SetRCode(clsRCode)
             End If
@@ -166,11 +166,12 @@ Public Class ucrCore
                 ucrControl.SetToDefault()
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
-                ucrControl.Visible = bTemp
+                ucrControl.SetVisible(bTemp)
             End If
             If ucrControl.bLinkedDisabledIfParameterMissing Then
                 ucrControl.Enabled = bTemp
             End If
+            ucrControl.UpdateLinkedControls()
         Next
     End Sub
 
@@ -249,7 +250,7 @@ Public Class ucrCore
         Return objRDefault
     End Function
 
-    Public Overridable Function ValueContainedIn(lstTemp As Object()) As Boolean
+    Public Overridable Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Return False
     End Function
 
@@ -312,8 +313,8 @@ Public Class ucrCore
         Return clsParameter
     End Function
 
-    Public Sub SetLabel(lblNewLabel As Label)
-        lblLinkedLabel = lblNewLabel
+    Public Sub SetLinkedDisplayControl(ctrNewControl As Control)
+        ctrLinkedDisaplyControl = ctrNewControl
         SetLinkedLabelVisibility()
     End Sub
 
@@ -322,8 +323,8 @@ Public Class ucrCore
     End Sub
 
     Private Sub SetLinkedLabelVisibility()
-        If lblLinkedLabel IsNot Nothing Then
-            lblLinkedLabel.Visible = Visible
+        If ctrLinkedDisaplyControl IsNot Nothing Then
+            ctrLinkedDisaplyControl.Visible = Visible
         End If
     End Sub
 
@@ -389,5 +390,13 @@ Public Class ucrCore
 
         clsTempCond.SetFunctionNamesMultiple(lstFunctionNames.ToList(), bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub SetVisible(bVisible As Boolean)
+        If ctrLinkedDisaplyControl IsNot Nothing AndAlso TypeOf ctrLinkedDisaplyControl Is GroupBox Then
+            ctrLinkedDisaplyControl.Visible = bVisible
+        Else
+            Visible = bVisible
+        End If
     End Sub
 End Class
