@@ -146,6 +146,7 @@ Public Class dlgRowNamesOrNumbers
                 ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
             End If
         End If
+        SetAssignment()
     End Sub
 
 
