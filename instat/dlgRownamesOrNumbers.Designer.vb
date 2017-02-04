@@ -56,7 +56,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.grpboxOptionsforRowNamesorNumbercols.Location = New System.Drawing.Point(222, 10)
         Me.grpboxOptionsforRowNamesorNumbercols.Name = "grpboxOptionsforRowNamesorNumbercols"
         Me.grpboxOptionsforRowNamesorNumbercols.Size = New System.Drawing.Size(236, 256)
-        Me.grpboxOptionsforRowNamesorNumbercols.TabIndex = 11
+        Me.grpboxOptionsforRowNamesorNumbercols.TabIndex = 1
         Me.grpboxOptionsforRowNamesorNumbercols.TabStop = False
         Me.grpboxOptionsforRowNamesorNumbercols.Text = "Options"
         '
@@ -68,7 +68,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrChkAsNumeric.Location = New System.Drawing.Point(24, 213)
         Me.ucrChkAsNumeric.Name = "ucrChkAsNumeric"
         Me.ucrChkAsNumeric.Size = New System.Drawing.Size(201, 20)
-        Me.ucrChkAsNumeric.TabIndex = 14
+        Me.ucrChkAsNumeric.TabIndex = 9
         '
         'ucrNewColumnName
         '
@@ -77,7 +77,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrNewColumnName.Location = New System.Drawing.Point(11, 42)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(217, 24)
-        Me.ucrNewColumnName.TabIndex = 14
+        Me.ucrNewColumnName.TabIndex = 1
         '
         'rdoSortAscending
         '
@@ -85,7 +85,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoSortAscending.Location = New System.Drawing.Point(11, 186)
         Me.rdoSortAscending.Name = "rdoSortAscending"
         Me.rdoSortAscending.Size = New System.Drawing.Size(75, 17)
-        Me.rdoSortAscending.TabIndex = 13
+        Me.rdoSortAscending.TabIndex = 7
         Me.rdoSortAscending.TabStop = True
         Me.rdoSortAscending.Text = "Ascending"
         Me.rdoSortAscending.UseVisualStyleBackColor = True
@@ -96,7 +96,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoSortDescending.Location = New System.Drawing.Point(113, 186)
         Me.rdoSortDescending.Name = "rdoSortDescending"
         Me.rdoSortDescending.Size = New System.Drawing.Size(82, 17)
-        Me.rdoSortDescending.TabIndex = 14
+        Me.rdoSortDescending.TabIndex = 8
         Me.rdoSortDescending.TabStop = True
         Me.rdoSortDescending.Text = "Descending"
         Me.rdoSortDescending.UseVisualStyleBackColor = True
@@ -108,7 +108,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.UcrPanel1.Location = New System.Drawing.Point(5, 178)
         Me.UcrPanel1.Name = "UcrPanel1"
         Me.UcrPanel1.Size = New System.Drawing.Size(225, 67)
-        Me.UcrPanel1.TabIndex = 10
+        Me.UcrPanel1.TabIndex = 6
         '
         'rdoSortbyRowNames
         '
@@ -116,7 +116,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoSortbyRowNames.Location = New System.Drawing.Point(5, 144)
         Me.rdoSortbyRowNames.Name = "rdoSortbyRowNames"
         Me.rdoSortbyRowNames.Size = New System.Drawing.Size(119, 17)
-        Me.rdoSortbyRowNames.TabIndex = 7
+        Me.rdoSortbyRowNames.TabIndex = 5
         Me.rdoSortbyRowNames.TabStop = True
         Me.rdoSortbyRowNames.Text = "Sort by Row Names"
         Me.rdoSortbyRowNames.UseVisualStyleBackColor = True
@@ -127,7 +127,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoResetintoPositiveIntegers.Location = New System.Drawing.Point(5, 121)
         Me.rdoResetintoPositiveIntegers.Name = "rdoResetintoPositiveIntegers"
         Me.rdoResetintoPositiveIntegers.Size = New System.Drawing.Size(207, 17)
-        Me.rdoResetintoPositiveIntegers.TabIndex = 6
+        Me.rdoResetintoPositiveIntegers.TabIndex = 4
         Me.rdoResetintoPositiveIntegers.TabStop = True
         Me.rdoResetintoPositiveIntegers.Text = "Reset Row Names to Positive Integers"
         Me.rdoResetintoPositiveIntegers.UseVisualStyleBackColor = True
@@ -138,7 +138,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoCopyfromColumn.Location = New System.Drawing.Point(5, 77)
         Me.rdoCopyfromColumn.Name = "rdoCopyfromColumn"
         Me.rdoCopyfromColumn.Size = New System.Drawing.Size(163, 17)
-        Me.rdoCopyfromColumn.TabIndex = 5
+        Me.rdoCopyfromColumn.TabIndex = 2
         Me.rdoCopyfromColumn.TabStop = True
         Me.rdoCopyfromColumn.Text = "Set Row Names from Column"
         Me.rdoCopyfromColumn.UseVisualStyleBackColor = True
@@ -149,7 +149,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoCopytoFirstColumn.Location = New System.Drawing.Point(5, 19)
         Me.rdoCopytoFirstColumn.Name = "rdoCopytoFirstColumn"
         Me.rdoCopytoFirstColumn.Size = New System.Drawing.Size(190, 17)
-        Me.rdoCopytoFirstColumn.TabIndex = 4
+        Me.rdoCopytoFirstColumn.TabIndex = 0
         Me.rdoCopytoFirstColumn.TabStop = True
         Me.rdoCopytoFirstColumn.Text = "Copy Row Names into First Column"
         Me.rdoCopytoFirstColumn.UseVisualStyleBackColor = True
@@ -185,14 +185,14 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrSelectorRowNames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRowNames.Name = "ucrSelectorRowNames"
         Me.ucrSelectorRowNames.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorRowNames.TabIndex = 8
+        Me.ucrSelectorRowNames.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 274)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 2
         '
         'ucrPnlSortOptions
         '
