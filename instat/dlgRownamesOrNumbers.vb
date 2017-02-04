@@ -62,6 +62,8 @@ Public Class dlgRowNamesOrNumbers
         ucrPnlOverallOptions.AddToLinkedControls(ucrReceiverRowNames, {rdoCopyfromColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrPnlSortOptions, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrChkAsNumeric, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlOverallOptions.SetRDefault(frmMain.clsRLink.strInstatDataObject & "$get_row_names") ' check
         ' i need to code these ucrs still
 
         ' selector
@@ -133,15 +135,15 @@ Public Class dlgRowNamesOrNumbers
     '       TestOKEnabled()
     '   End Sub
 
-    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOverallOptions.ControlValueChanged
         If rdoCopyfromColumn.Checked Then
             'ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "  ")
             ucrSelectorRowNames.SetVariablesEnabled(True)
         Else
-            ucrSelectorRowNames.SetVariablesVisible(False)
+            ucrSelectorRowNames.SetVariablesEnabled(False)
         End If
     End Sub
-    ' SetVariablesEnabled(True)/(False) - depending which rod.
+    ' This doesn't do what we want it to do - firstly, it doesn't have it enabled
 
     Private Sub OptionSettings()
         If rdoCopytoFirstColumn.Checked Then
