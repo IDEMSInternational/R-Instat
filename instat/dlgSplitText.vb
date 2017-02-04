@@ -17,15 +17,19 @@ Imports instat
 Imports instat.Translations
 Public Class dlgSplitText
     Public bFirstLoad As Boolean = True
-    Public clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOKEnabled()
     End Sub
 
@@ -58,18 +62,18 @@ Public Class dlgSplitText
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
 
         ucrNudPieces.SetParameter(New RParameter("n"))
+    End Sub
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        ucrSelectorSplitTextColumn.Reset()
 
         clsDefaultFunction.SetRCommand("str_split_fixed")
         clsDefaultFunction.AddParameter("pattern", Chr(34) & "," & Chr(34))
         clsDefaultFunction.AddParameter("n", 2)
         clsDefaultFunction.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
-    End Sub
 
-    Private Sub SetDefaults()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrSelectorSplitTextColumn.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -82,6 +86,12 @@ Public Class dlgSplitText
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrSelectorSplitTextColumn.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged
