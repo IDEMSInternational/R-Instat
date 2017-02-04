@@ -170,7 +170,7 @@ Partial Class dlgRowNamesOrNumbers
         '
         Me.ucrPnlOverallOptions.bAddRemoveParameter = True
         Me.ucrPnlOverallOptions.bChangeParameterValue = True
-        Me.ucrPnlOverallOptions.Location = New System.Drawing.Point(4, 14)
+        Me.ucrPnlOverallOptions.Location = New System.Drawing.Point(3, 14)
         Me.ucrPnlOverallOptions.Name = "ucrPnlOverallOptions"
         Me.ucrPnlOverallOptions.Size = New System.Drawing.Size(227, 153)
         Me.ucrPnlOverallOptions.TabIndex = 9
