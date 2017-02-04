@@ -63,7 +63,6 @@ Public Class dlgRowNamesOrNumbers
         ucrPnlOverallOptions.AddToLinkedControls(ucrPnlSortOptions, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrChkAsNumeric, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlOverallOptions.SetRDefault(frmMain.clsRLink.strInstatDataObject & "$get_row_names") ' check
         ' i need to code these ucrs still
 
         ' selector
@@ -113,9 +112,9 @@ Public Class dlgRowNamesOrNumbers
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
 
-        rdoSortAscending.Checked = True
+        'rdoSortAscending.Checked = True
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
         ' where do I do set assign to? I want it for just the first RDO button
 
