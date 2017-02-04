@@ -23,12 +23,11 @@ Partial Class dlgTransposeColumns
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblColumnsToTranspose = New System.Windows.Forms.Label()
-        Me.chkNameNewColumns = New System.Windows.Forms.CheckBox()
-        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
-        Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
         Me.ucrReceiverColumsToTranspose = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorTransposeColumns = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBaseTransposeColumns = New instat.ucrButtons()
+        Me.ucrNewDataframe = New instat.ucrSave()
+        Me.ucrChkNameNewColumns = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblColumnsToTranspose
@@ -40,41 +39,22 @@ Partial Class dlgTransposeColumns
         Me.lblColumnsToTranspose.Tag = "Columns_to_Transpose"
         Me.lblColumnsToTranspose.Text = "Columns to Transpose:"
         '
-        'chkNameNewColumns
-        '
-        Me.chkNameNewColumns.Location = New System.Drawing.Point(272, 153)
-        Me.chkNameNewColumns.Name = "chkNameNewColumns"
-        Me.chkNameNewColumns.Size = New System.Drawing.Size(125, 24)
-        Me.chkNameNewColumns.TabIndex = 2
-        Me.chkNameNewColumns.Tag = "Name_New_Columns"
-        Me.chkNameNewColumns.Text = "Name New Columns"
-        Me.chkNameNewColumns.UseVisualStyleBackColor = True
-        '
-        'lblNewDataFrameName
-        '
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(9, 205)
-        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
-        Me.lblNewDataFrameName.Size = New System.Drawing.Size(126, 23)
-        Me.lblNewDataFrameName.TabIndex = 0
-        Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name"
-        Me.lblNewDataFrameName.Text = "New Data Frame Name:"
-        '
-        'ucrNewDataFrameName
-        '
-        Me.ucrNewDataFrameName.IsReadOnly = False
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(133, 203)
-        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewDataFrameName.TabIndex = 1
-        '
         'ucrReceiverColumsToTranspose
         '
+        Me.ucrReceiverColumsToTranspose.frmParent = Me
         Me.ucrReceiverColumsToTranspose.Location = New System.Drawing.Point(272, 47)
         Me.ucrReceiverColumsToTranspose.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumsToTranspose.Name = "ucrReceiverColumsToTranspose"
         Me.ucrReceiverColumsToTranspose.Selector = Nothing
         Me.ucrReceiverColumsToTranspose.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverColumsToTranspose.TabIndex = 4
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 235)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 6
         '
         'ucrSelectorTransposeColumns
         '
@@ -86,24 +66,31 @@ Partial Class dlgTransposeColumns
         Me.ucrSelectorTransposeColumns.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorTransposeColumns.TabIndex = 5
         '
-        'ucrBaseTransposeColumns
+        'ucrNewDataframe
         '
-        Me.ucrBaseTransposeColumns.Location = New System.Drawing.Point(10, 235)
-        Me.ucrBaseTransposeColumns.Name = "ucrBaseTransposeColumns"
-        Me.ucrBaseTransposeColumns.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseTransposeColumns.TabIndex = 6
+        Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 205)
+        Me.ucrNewDataframe.Name = "ucrNewDataframe"
+        Me.ucrNewDataframe.Size = New System.Drawing.Size(305, 24)
+        Me.ucrNewDataframe.TabIndex = 12
+        '
+        'ucrChkNameNewColumns
+        '
+        Me.ucrChkNameNewColumns.Checked = False
+        Me.ucrChkNameNewColumns.Location = New System.Drawing.Point(272, 154)
+        Me.ucrChkNameNewColumns.Name = "ucrChkNameNewColumns"
+        Me.ucrChkNameNewColumns.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkNameNewColumns.TabIndex = 13
         '
         'dlgTransposeColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 297)
-        Me.Controls.Add(Me.ucrNewDataFrameName)
-        Me.Controls.Add(Me.lblNewDataFrameName)
-        Me.Controls.Add(Me.chkNameNewColumns)
+        Me.Controls.Add(Me.ucrChkNameNewColumns)
+        Me.Controls.Add(Me.ucrNewDataframe)
         Me.Controls.Add(Me.ucrReceiverColumsToTranspose)
         Me.Controls.Add(Me.ucrSelectorTransposeColumns)
-        Me.Controls.Add(Me.ucrBaseTransposeColumns)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblColumnsToTranspose)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -116,11 +103,10 @@ Partial Class dlgTransposeColumns
 
     End Sub
 
-    Friend WithEvents ucrBaseTransposeColumns As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorTransposeColumns As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverColumsToTranspose As ucrReceiverMultiple
     Friend WithEvents lblColumnsToTranspose As Label
-    Friend WithEvents chkNameNewColumns As CheckBox
-    Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
-    Friend WithEvents lblNewDataFrameName As Label
+    Friend WithEvents ucrNewDataframe As ucrSave
+    Friend WithEvents ucrChkNameNewColumns As ucrCheck
 End Class
