@@ -23,12 +23,18 @@ Public Class dlgViewAndRemoveKeys
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
         bReset = False
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrSelectorKeys.Reset()
     End Sub
 
     Private Sub SetDefaults()
