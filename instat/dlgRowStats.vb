@@ -40,7 +40,7 @@ Public Class dlgRowStats
         clsDefaultFunction.SetRCommand("apply")
         clsDefaultFunction.AddParameter("FUN", "mean")
         clsDefaultFunction.AddParameter("MARGIN", 1)
-        clsDefaultFunction.SetAssignTo("row_summary", strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="row_summary")
+        clsDefaultFunction.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
