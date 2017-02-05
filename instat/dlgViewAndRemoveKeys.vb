@@ -40,7 +40,7 @@ Public Class dlgViewAndRemoveKeys
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
 
-        ucrRemoveKey.Checked = False
+
         ucrSelectorKeys.Reset()
 
         ' Set default RFunction as the base function
@@ -56,6 +56,7 @@ Public Class dlgViewAndRemoveKeys
     Private Sub InitialiseDialog()
 
         ucrBase.iHelpTopicID = 505
+        ucrRemoveKey.Checked = False
 
         'Setting Receiver
         ucrReceiverSelectedKey.Selector = ucrSelectorKeys
