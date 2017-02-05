@@ -60,20 +60,19 @@ Public Class dlgTransformText
         ucrPnlOperation.AddRadioButton(rdoWords)
         ucrPnlOperation.AddRadioButton(rdoSubstring)
 
-        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "??")
+        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "") ' this changes depending which rdo is checked
         ucrPnlOperation.AddFunctionNamesCondition(rdoLength, "stringr::str_length")
         ucrPnlOperation.AddFunctionNamesCondition(rdoPad, "stringr::str_pad")
         ucrPnlOperation.AddFunctionNamesCondition(rdoTrim, "stringr::str_trim")
         ucrPnlOperation.AddFunctionNamesCondition(rdoWords, "stringr::word")
         ucrPnlOperation.AddFunctionNamesCondition(rdoSubstring, "stringr::str_sub")
+        'to do: check for   .AddParameterPresentCondition
 
         'rdoConvertCase
         ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputTo
         ucrInputTo.SetLinkedDisplayControl(lblTo)
-
-
         ucrInputTo.cboInput.Items.Add("Lower")
         ucrInputTo.cboInput.Items.Add("Upper")
         ucrInputTo.cboInput.Items.Add("Title")
@@ -129,16 +128,27 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'if ucrChkFirstOrCol then         '    nudFirstWord.Enabled = False
-        lblFirstWord.Visible = True
-        ucrNudFirstWord.Visible = True
-        ucrBase.clsRsyntax.AddParameter("start", clsRFunctionParameter:=ucrReceiverFirstWord.GetVariables())
+        ucrReceiverFirstWord.SetParameter(New RParameter("start"))
+        ucrChkFirstOrColumn.SetParameter(ucrReceiverFirstWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrReceiverFirstWord.SetParameterIsRFunction() 'getvariables()
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
         ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
-        'nudfirstword stuff
-        'ucrBase.clsRsyntax.AddParameter("start", nudFirstWord.Value)
 
-        ' ucrChkOrColumn then nudLastWord.Enabled = False
+        ucrChkFirstOrColumn.SetText("Or Column")
+        ucrChkFirstOrColumn.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFirstOrColumn.bChangeParameterValue = False
+        ucrChkFirstOrColumn.SetRDefault("FALSE")
+        ucrChkFirstOrColumn.AddToLinkedControls(ucrLinked:=ucrReceiverFirstWord, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ' If this is checked, then we don't want to have nudFirst enabled or running
+
+        ucrNudFirstWord.SetParameter(New RParameter("start"))
+        ucrNudFirstWord.SetLinkedDisplayControl(lblFirstWord)
+        'default value is 1
+
+
         ucrBase.clsRsyntax.AddParameter("end", clsRFunctionParameter:=ucrReceiverLastWord.GetVariables())
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
         ucrReceiverLastWord.bUseFilteredData = False
@@ -148,6 +158,28 @@ Public Class dlgTransformText
         'lblLastWord.Visible = True
         'nudLastWord.Visible = True
         'value=1
+
+
+        'if ucrChkorCol then         '    nudLastWord.Enabled = False
+        ucrReceiverLastWord.SetParameter(New RParameter("end"))
+        ucrChkOrColumn.SetParameter(ucrReceiverLastWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrReceiverLastWord.SetParameterIsRFunction() 'getvariables()
+        ucrReceiverLastWord.Selector = ucrSelectorForTransformText
+        ucrReceiverLastWord.bUseFilteredData = False
+        ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
+
+        ucrChkOrColumn.SetText("Or Column")
+        ucrChkOrColumn.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOrColumn.bChangeParameterValue = False
+        ucrChkOrColumn.SetRDefault("FALSE")
+        ucrChkOrColumn.AddToLinkedControls(ucrLinked:=ucrReceiverLastWord, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ' If this is checked, then we don't want to have nudLast enabled or running
+
+        ucrNudLastWord.SetParameter(New RParameter("end"))
+        ucrNudLastWord.SetLinkedDisplayControl(lblFirstWord)
+        'default value is 1
 
         ' ucrInputSeparator
         Dim dctInputSeparator As New Dictionary(Of String, String)
@@ -159,7 +191,7 @@ Public Class dlgTransformText
         ' case of else: ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
         ucrInputPad.SetItems(dctInputSeparator)
         ucrInputPad.SetLinkedDisplayControl(lblSeparator)
-
+        ucrInputPad.cboInput.MaxLength = 1
 
         'rdoSubstring
         ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -180,14 +212,12 @@ Public Class dlgTransformText
         ucrNewColName.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
         ucrNewColName.SetPrefix("New_Text")
-
-
-        ucrInputPad.cboInput.MaxLength = 1
-
     End Sub
 
     Private Sub SetDefaults()
-        rdoConvertCase.Checked = True
+        ucrSelectorForTransformText.Reset()
+        'rdoConvertCase.Checked = True
+
         'ucrInputSeparator.ResetText()
         'ucrInputPad.ResetText()
         'ucrInputTo.ResetText()
@@ -236,11 +266,6 @@ Public Class dlgTransformText
         'End If
         'End If
         'End If
-    End Sub
-
-    Private Sub ucrInputTo_NameChanged() Handles ucrInputTo.NameChanged
-        ConvertcaseFunc()
-        TestOkEnabled()
     End Sub
 
     Private Sub ConvertcaseFunc()
@@ -316,10 +341,6 @@ Public Class dlgTransformText
     'End If
     'End If
     'End Sub
-
-    Private Sub TrimFunction_CheckedChanged(sender As Object, e As EventArgs)
-        TrimSideParameter()
-    End Sub
 
     Private Sub TrimSideParameter()
         '        If rdoTrim.Checked Then

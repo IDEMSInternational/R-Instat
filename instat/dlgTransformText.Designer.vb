@@ -67,7 +67,7 @@ Partial Class dlgTransformText
         'lblColumnToTransform
         '
         Me.lblColumnToTransform.AutoSize = True
-        Me.lblColumnToTransform.Location = New System.Drawing.Point(265, 31)
+        Me.lblColumnToTransform.Location = New System.Drawing.Point(252, 31)
         Me.lblColumnToTransform.Name = "lblColumnToTransform"
         Me.lblColumnToTransform.Size = New System.Drawing.Size(107, 13)
         Me.lblColumnToTransform.TabIndex = 3
@@ -185,7 +185,7 @@ Partial Class dlgTransformText
         'rdoBothPad
         '
         Me.rdoBothPad.AutoSize = True
-        Me.rdoBothPad.Location = New System.Drawing.Point(339, 164)
+        Me.rdoBothPad.Location = New System.Drawing.Point(128, 25)
         Me.rdoBothPad.Name = "rdoBothPad"
         Me.rdoBothPad.Size = New System.Drawing.Size(47, 17)
         Me.rdoBothPad.TabIndex = 40
@@ -196,7 +196,7 @@ Partial Class dlgTransformText
         'rdoLeftPad
         '
         Me.rdoLeftPad.AutoSize = True
-        Me.rdoLeftPad.Location = New System.Drawing.Point(232, 164)
+        Me.rdoLeftPad.Location = New System.Drawing.Point(21, 25)
         Me.rdoLeftPad.Name = "rdoLeftPad"
         Me.rdoLeftPad.Size = New System.Drawing.Size(43, 17)
         Me.rdoLeftPad.TabIndex = 38
@@ -207,7 +207,7 @@ Partial Class dlgTransformText
         'rdoRightPad
         '
         Me.rdoRightPad.AutoSize = True
-        Me.rdoRightPad.Location = New System.Drawing.Point(283, 164)
+        Me.rdoRightPad.Location = New System.Drawing.Point(72, 25)
         Me.rdoRightPad.Name = "rdoRightPad"
         Me.rdoRightPad.Size = New System.Drawing.Size(50, 17)
         Me.rdoRightPad.TabIndex = 39
@@ -229,11 +229,11 @@ Partial Class dlgTransformText
         Me.ucrReceiverTransformText.bAddRemoveParameter = True
         Me.ucrReceiverTransformText.bChangeParameterValue = True
         Me.ucrReceiverTransformText.frmParent = Me
-        Me.ucrReceiverTransformText.Location = New System.Drawing.Point(266, 46)
+        Me.ucrReceiverTransformText.Location = New System.Drawing.Point(252, 46)
         Me.ucrReceiverTransformText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTransformText.Name = "ucrReceiverTransformText"
         Me.ucrReceiverTransformText.Selector = Nothing
-        Me.ucrReceiverTransformText.Size = New System.Drawing.Size(119, 26)
+        Me.ucrReceiverTransformText.Size = New System.Drawing.Size(133, 26)
         Me.ucrReceiverTransformText.TabIndex = 2
         '
         'ucrSelectorForTransformText
@@ -272,7 +272,7 @@ Partial Class dlgTransformText
         Me.ucrInputSeparator.bAddRemoveParameter = True
         Me.ucrInputSeparator.bChangeParameterValue = True
         Me.ucrInputSeparator.IsReadOnly = False
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(108, 130)
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(92, 126)
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
         Me.ucrInputSeparator.Size = New System.Drawing.Size(107, 23)
         Me.ucrInputSeparator.TabIndex = 17
@@ -347,9 +347,13 @@ Partial Class dlgTransformText
         'grpParameters
         '
         Me.grpParameters.Controls.Add(Me.ucrNudTo)
+        Me.grpParameters.Controls.Add(Me.rdoLeftPad)
         Me.grpParameters.Controls.Add(Me.ucrNudFrom)
+        Me.grpParameters.Controls.Add(Me.rdoBothPad)
         Me.grpParameters.Controls.Add(Me.ucrNudFirstWord)
+        Me.grpParameters.Controls.Add(Me.rdoRightPad)
         Me.grpParameters.Controls.Add(Me.ucrChkFirstOrColumn)
+        Me.grpParameters.Controls.Add(Me.ucrPnlPad)
         Me.grpParameters.Controls.Add(Me.ucrNudLastWord)
         Me.grpParameters.Controls.Add(Me.ucrChkOrColumn)
         Me.grpParameters.Controls.Add(Me.ucrNudWidth)
@@ -477,9 +481,9 @@ Partial Class dlgTransformText
         '
         Me.ucrPnlPad.bAddRemoveParameter = True
         Me.ucrPnlPad.bChangeParameterValue = True
-        Me.ucrPnlPad.Location = New System.Drawing.Point(228, 158)
+        Me.ucrPnlPad.Location = New System.Drawing.Point(15, 15)
         Me.ucrPnlPad.Name = "ucrPnlPad"
-        Me.ucrPnlPad.Size = New System.Drawing.Size(161, 27)
+        Me.ucrPnlPad.Size = New System.Drawing.Size(169, 41)
         Me.ucrPnlPad.TabIndex = 41
         '
         'ucrNewColName
@@ -497,10 +501,6 @@ Partial Class dlgTransformText
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 457)
         Me.Controls.Add(Me.ucrNewColName)
-        Me.Controls.Add(Me.rdoLeftPad)
-        Me.Controls.Add(Me.rdoBothPad)
-        Me.Controls.Add(Me.rdoRightPad)
-        Me.Controls.Add(Me.ucrPnlPad)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.grpOperation)
         Me.Controls.Add(Me.lblColumnToTransform)
