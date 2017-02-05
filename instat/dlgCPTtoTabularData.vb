@@ -16,36 +16,52 @@
 Imports instat.Translations
 Public Class dlgCPTtoTabularData
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub dlgCPTtoTabularData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
         TestOKEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("climate_obj$SST_domain()")
+
+        ucrChkWestEast.SetText("West East")
+
     End Sub
+
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
 
+        clsDefaultFunction.SetRCommand("climate_obj$SST_domain()")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
+
     Private Sub ReopenDialog()
-
     End Sub
+
     Private Sub TestOKEnabled()
-
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
 
-
+    'ControlContentsChanged for testok
 End Class

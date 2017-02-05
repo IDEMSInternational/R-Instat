@@ -27,33 +27,29 @@ Partial Class dlgCPTtoTabularData
         Me.lblMinLon = New System.Windows.Forms.Label()
         Me.lblMaxLat = New System.Windows.Forms.Label()
         Me.lblMinLat = New System.Windows.Forms.Label()
-        Me.nudMaxLat = New System.Windows.Forms.NumericUpDown()
-        Me.nudMinLon = New System.Windows.Forms.NumericUpDown()
-        Me.nudMaxLongitude = New System.Windows.Forms.NumericUpDown()
-        Me.nudMinLat = New System.Windows.Forms.NumericUpDown()
         Me.lbl = New System.Windows.Forms.Label()
-        Me.chkWestEast = New System.Windows.Forms.CheckBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkWestEast = New instat.ucrCheck()
+        Me.ucrNudMaxLong = New instat.ucrNud()
+        Me.ucrNudMinLat = New instat.ucrNud()
+        Me.ucrNudMaxLat = New instat.ucrNud()
+        Me.ucrNudMinLong = New instat.ucrNud()
         Me.grpDomain.SuspendLayout()
-        CType(Me.nudMaxLat, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMinLon, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMaxLongitude, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMinLat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpDomain
         '
+        Me.grpDomain.Controls.Add(Me.ucrNudMinLong)
+        Me.grpDomain.Controls.Add(Me.ucrNudMaxLat)
+        Me.grpDomain.Controls.Add(Me.ucrNudMinLat)
+        Me.grpDomain.Controls.Add(Me.ucrNudMaxLong)
         Me.grpDomain.Controls.Add(Me.lblMaxLon)
         Me.grpDomain.Controls.Add(Me.lblMinLon)
         Me.grpDomain.Controls.Add(Me.lblMaxLat)
         Me.grpDomain.Controls.Add(Me.lblMinLat)
-        Me.grpDomain.Controls.Add(Me.nudMaxLat)
-        Me.grpDomain.Controls.Add(Me.nudMinLon)
-        Me.grpDomain.Controls.Add(Me.nudMaxLongitude)
-        Me.grpDomain.Controls.Add(Me.nudMinLat)
-        Me.grpDomain.Location = New System.Drawing.Point(37, 44)
+        Me.grpDomain.Location = New System.Drawing.Point(10, 34)
         Me.grpDomain.Name = "grpDomain"
-        Me.grpDomain.Size = New System.Drawing.Size(282, 155)
+        Me.grpDomain.Size = New System.Drawing.Size(203, 139)
         Me.grpDomain.TabIndex = 1
         Me.grpDomain.TabStop = False
         Me.grpDomain.Tag = "Domain"
@@ -62,108 +58,132 @@ Partial Class dlgCPTtoTabularData
         'lblMaxLon
         '
         Me.lblMaxLon.AutoSize = True
-        Me.lblMaxLon.Location = New System.Drawing.Point(8, 122)
+        Me.lblMaxLon.Location = New System.Drawing.Point(8, 109)
         Me.lblMaxLon.Name = "lblMaxLon"
-        Me.lblMaxLon.Size = New System.Drawing.Size(95, 13)
+        Me.lblMaxLon.Size = New System.Drawing.Size(104, 13)
         Me.lblMaxLon.TabIndex = 7
         Me.lblMaxLon.Tag = "Maximum_Logitude"
-        Me.lblMaxLon.Text = "Maximum Logitude"
+        Me.lblMaxLon.Text = "Maximum Longitude:"
         '
         'lblMinLon
         '
         Me.lblMinLon.AutoSize = True
-        Me.lblMinLon.Location = New System.Drawing.Point(8, 82)
+        Me.lblMinLon.Location = New System.Drawing.Point(8, 83)
         Me.lblMinLon.Name = "lblMinLon"
-        Me.lblMinLon.Size = New System.Drawing.Size(98, 13)
+        Me.lblMinLon.Size = New System.Drawing.Size(101, 13)
         Me.lblMinLon.TabIndex = 6
         Me.lblMinLon.Tag = "Minimum_Longitude"
-        Me.lblMinLon.Text = "Minimum Longitude"
+        Me.lblMinLon.Text = "Minimum Longitude:"
         '
         'lblMaxLat
         '
         Me.lblMaxLat.AutoSize = True
-        Me.lblMaxLat.Location = New System.Drawing.Point(8, 63)
+        Me.lblMaxLat.Location = New System.Drawing.Point(8, 57)
         Me.lblMaxLat.Name = "lblMaxLat"
-        Me.lblMaxLat.Size = New System.Drawing.Size(92, 13)
+        Me.lblMaxLat.Size = New System.Drawing.Size(95, 13)
         Me.lblMaxLat.TabIndex = 5
         Me.lblMaxLat.Tag = "Maximum_Latitude"
-        Me.lblMaxLat.Text = "Maximum Latitude"
+        Me.lblMaxLat.Text = "Maximum Latitude:"
         '
         'lblMinLat
         '
         Me.lblMinLat.AutoSize = True
-        Me.lblMinLat.Location = New System.Drawing.Point(8, 37)
+        Me.lblMinLat.Location = New System.Drawing.Point(8, 30)
         Me.lblMinLat.Name = "lblMinLat"
-        Me.lblMinLat.Size = New System.Drawing.Size(89, 13)
+        Me.lblMinLat.Size = New System.Drawing.Size(92, 13)
         Me.lblMinLat.TabIndex = 4
         Me.lblMinLat.Tag = "Minimum_Latitude"
-        Me.lblMinLat.Text = "Minimum Latitude"
-        '
-        'nudMaxLat
-        '
-        Me.nudMaxLat.Location = New System.Drawing.Point(115, 56)
-        Me.nudMaxLat.Name = "nudMaxLat"
-        Me.nudMaxLat.Size = New System.Drawing.Size(70, 20)
-        Me.nudMaxLat.TabIndex = 3
-        Me.nudMaxLat.Tag = ""
-        '
-        'nudMinLon
-        '
-        Me.nudMinLon.Location = New System.Drawing.Point(115, 82)
-        Me.nudMinLon.Name = "nudMinLon"
-        Me.nudMinLon.Size = New System.Drawing.Size(70, 20)
-        Me.nudMinLon.TabIndex = 2
-        '
-        'nudMaxLongitude
-        '
-        Me.nudMaxLongitude.Location = New System.Drawing.Point(115, 115)
-        Me.nudMaxLongitude.Name = "nudMaxLongitude"
-        Me.nudMaxLongitude.Size = New System.Drawing.Size(70, 20)
-        Me.nudMaxLongitude.TabIndex = 1
-        Me.nudMaxLongitude.Tag = ""
-        '
-        'nudMinLat
-        '
-        Me.nudMinLat.Location = New System.Drawing.Point(115, 30)
-        Me.nudMinLat.Name = "nudMinLat"
-        Me.nudMinLat.Size = New System.Drawing.Size(70, 20)
-        Me.nudMinLat.TabIndex = 0
-        Me.nudMinLat.Tag = ""
+        Me.lblMinLat.Text = "Minimum Latitude:"
         '
         'lbl
         '
         Me.lbl.AutoSize = True
-        Me.lbl.Location = New System.Drawing.Point(26, 9)
+        Me.lbl.Location = New System.Drawing.Point(249, 88)
         Me.lbl.Name = "lbl"
         Me.lbl.Size = New System.Drawing.Size(86, 13)
         Me.lbl.TabIndex = 8
         Me.lbl.Tag = ""
         Me.lbl.Text = "Not implemented"
         '
-        'chkWestEast
-        '
-        Me.chkWestEast.AutoSize = True
-        Me.chkWestEast.Location = New System.Drawing.Point(37, 205)
-        Me.chkWestEast.Name = "chkWestEast"
-        Me.chkWestEast.Size = New System.Drawing.Size(75, 17)
-        Me.chkWestEast.TabIndex = 8
-        Me.chkWestEast.Tag = "West_East"
-        Me.chkWestEast.Text = "West East"
-        Me.chkWestEast.UseVisualStyleBackColor = True
-        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 228)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 213)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrChkWestEast
+        '
+        Me.ucrChkWestEast.bAddRemoveParameter = True
+        Me.ucrChkWestEast.bChangeParameterValue = True
+        Me.ucrChkWestEast.Checked = False
+        Me.ucrChkWestEast.Location = New System.Drawing.Point(10, 187)
+        Me.ucrChkWestEast.Name = "ucrChkWestEast"
+        Me.ucrChkWestEast.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkWestEast.TabIndex = 9
+        '
+        'ucrNudMaxLong
+        '
+        Me.ucrNudMaxLong.bAddRemoveParameter = True
+        Me.ucrNudMaxLong.bChangeParameterValue = True
+        Me.ucrNudMaxLong.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLong.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxLong.Location = New System.Drawing.Point(118, 106)
+        Me.ucrNudMaxLong.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxLong.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLong.Name = "ucrNudMaxLong"
+        Me.ucrNudMaxLong.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxLong.TabIndex = 8
+        Me.ucrNudMaxLong.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudMinLat
+        '
+        Me.ucrNudMinLat.bAddRemoveParameter = True
+        Me.ucrNudMinLat.bChangeParameterValue = True
+        Me.ucrNudMinLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinLat.Location = New System.Drawing.Point(118, 28)
+        Me.ucrNudMinLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinLat.Name = "ucrNudMinLat"
+        Me.ucrNudMinLat.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinLat.TabIndex = 9
+        Me.ucrNudMinLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudMaxLat
+        '
+        Me.ucrNudMaxLat.bAddRemoveParameter = True
+        Me.ucrNudMaxLat.bChangeParameterValue = True
+        Me.ucrNudMaxLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxLat.Location = New System.Drawing.Point(118, 54)
+        Me.ucrNudMaxLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLat.Name = "ucrNudMaxLat"
+        Me.ucrNudMaxLat.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxLat.TabIndex = 10
+        Me.ucrNudMaxLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudMinLong
+        '
+        Me.ucrNudMinLong.bAddRemoveParameter = True
+        Me.ucrNudMinLong.bChangeParameterValue = True
+        Me.ucrNudMinLong.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinLong.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinLong.Location = New System.Drawing.Point(118, 80)
+        Me.ucrNudMinLong.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinLong.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinLong.Name = "ucrNudMinLong"
+        Me.ucrNudMinLong.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinLong.TabIndex = 11
+        Me.ucrNudMinLong.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgCPTtoTabularData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 290)
-        Me.Controls.Add(Me.chkWestEast)
+        Me.ClientSize = New System.Drawing.Size(424, 276)
+        Me.Controls.Add(Me.ucrChkWestEast)
         Me.Controls.Add(Me.lbl)
         Me.Controls.Add(Me.grpDomain)
         Me.Controls.Add(Me.ucrBase)
@@ -176,10 +196,6 @@ Partial Class dlgCPTtoTabularData
         Me.Text = "CPT to Tabular Data"
         Me.grpDomain.ResumeLayout(False)
         Me.grpDomain.PerformLayout()
-        CType(Me.nudMaxLat, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMinLon, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMaxLongitude, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMinLat, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -191,10 +207,10 @@ Partial Class dlgCPTtoTabularData
     Friend WithEvents lblMinLon As Label
     Friend WithEvents lblMaxLat As Label
     Friend WithEvents lblMinLat As Label
-    Friend WithEvents nudMaxLat As NumericUpDown
-    Friend WithEvents nudMinLon As NumericUpDown
-    Friend WithEvents nudMaxLongitude As NumericUpDown
-    Friend WithEvents nudMinLat As NumericUpDown
     Friend WithEvents lbl As Label
-    Friend WithEvents chkWestEast As CheckBox
+    Friend WithEvents ucrChkWestEast As ucrCheck
+    Friend WithEvents ucrNudMinLong As ucrNud
+    Friend WithEvents ucrNudMaxLat As ucrNud
+    Friend WithEvents ucrNudMinLat As ucrNud
+    Friend WithEvents ucrNudMaxLong As ucrNud
 End Class
