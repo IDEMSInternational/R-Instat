@@ -68,13 +68,21 @@ Partial Class dlgOutputforCDT
         '
         'ucrInputFileName
         '
-        Me.ucrInputFileName.Location = New System.Drawing.Point(133, 25)
+        Me.ucrInputFileName.bAddRemoveParameter = True
+        Me.ucrInputFileName.bChangeParameterValue = True
+        Me.ucrInputFileName.IsMultiline = False
+        Me.ucrInputFileName.IsReadOnly = False
+        Me.ucrInputFileName.Location = New System.Drawing.Point(133, 32)
         Me.ucrInputFileName.Name = "ucrInputFileName"
         Me.ucrInputFileName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputFileName.TabIndex = 6
         '
         'ucrInputInterestedVariables
         '
+        Me.ucrInputInterestedVariables.bAddRemoveParameter = True
+        Me.ucrInputInterestedVariables.bChangeParameterValue = True
+        Me.ucrInputInterestedVariables.IsMultiline = False
+        Me.ucrInputInterestedVariables.IsReadOnly = False
         Me.ucrInputInterestedVariables.Location = New System.Drawing.Point(133, 56)
         Me.ucrInputInterestedVariables.Name = "ucrInputInterestedVariables"
         Me.ucrInputInterestedVariables.Size = New System.Drawing.Size(142, 21)

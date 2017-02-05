@@ -14,49 +14,59 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-
-
 Public Class dlgOutputforCDT
     Public bFirstLoad As Boolean = True
-
-    Private Sub ucrInputFileName_Leave(sender As Object, e As EventArgs) Handles ucrInputFileName.Leave
-        ucrBase.clsRsyntax.AddParameter("Filename", Chr(34) & ucrInputFileName.Text & Chr(34))
-
-    End Sub
-
-
-    Private Sub ucrInputInterestedVariables_Leave(sender As Object, e As EventArgs) Handles ucrInputInterestedVariables.Leave
-        ucrBase.clsRsyntax.AddParameter("Interested_vaiables", Chr(34) & ucrInputInterestedVariables.Text & Chr(34))
-
-    End Sub
+    Private bReset As Boolean = True
 
     Private Sub dlgOutputforCDT_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
-
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
         TestOKEnabled()
+    End Sub
 
+    Private Sub InitialiseDialog()
+
+        ucrInputFileName.SetParameter(New RParameter("Filename", ))
+        'ucrInputFileName.SetValidationTypeAs
+
+        ucrInputInterestedVariables.SetParameter(New RParameter("Interested_variables", ))
+        'ucrInputInterestedVariables.SetValidationTypeAs
+
+    End Sub
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        clsDefaultFunction.SetRCommand("climate_obj$output_for_CDT()")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Private Sub ReopenDialog()
     End Sub
 
     Private Sub TestOKEnabled()
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("climate_obj$output_for_CDT")
-    End Sub
-    Private Sub SetDefaults()
-
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
-End Class
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    'ControlContentsChanged for testok
+End Class
 

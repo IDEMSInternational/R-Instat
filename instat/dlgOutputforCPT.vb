@@ -54,12 +54,12 @@ Public Class dlgOutputforCPT
 
     Private Sub txtFilename_Leave(sender As Object, e As EventArgs) Handles txtFilename.Leave
         ucrBase.clsRsyntax.AddParameter("Filename", Chr(34) & txtFilename.Text & Chr(34))
-        ' kept this the same for now as it's a txt and I'm not sure if we want it to be a ucrSave, ucrReceiver, or else
+        ' kept this the same for now as it's a txt and I'm not sure if we want it to be a ucrSave, ucrReceiver, or else in the future
     End Sub
 
     Private Sub txtInterestedVariable_Leave(sender As Object, e As EventArgs) Handles txtInterestedVariable.Leave
         ucrBase.clsRsyntax.AddParameter("Interested_vaiables", Chr(34) & txtInterestedVariable.Text & Chr(34))
-        ' kept this the same for now as it's a txt and I'm not sure if we want it to be a ucrSave, ucrReceiver, or else
+        ' kept this the same for now as it's a txt and I'm not sure if we want it to be a ucrSave, ucrReceiver, or else in the future
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
