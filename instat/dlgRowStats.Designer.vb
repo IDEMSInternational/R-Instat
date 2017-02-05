@@ -24,9 +24,6 @@ Partial Class dlgRowStats
     Private Sub InitializeComponent()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.cmdUserDefined = New System.Windows.Forms.Button()
-        Me.ucrSelectorForRowStats = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForRowStatistics = New instat.ucrReceiverMultiple()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistic = New System.Windows.Forms.GroupBox()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
@@ -36,8 +33,11 @@ Partial Class dlgRowStats
         Me.rdoNumberofMissing = New System.Windows.Forms.RadioButton()
         Me.rdoMedian = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
-        Me.ucrPanelStatistics = New instat.UcrPanel()
         Me.ucrSaveResults = New instat.ucrSave()
+        Me.ucrPanelStatistics = New instat.UcrPanel()
+        Me.ucrSelectorForRowStats = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForRowStatistics = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -53,44 +53,13 @@ Partial Class dlgRowStats
         '
         'cmdUserDefined
         '
-        Me.cmdUserDefined.Location = New System.Drawing.Point(310, 309)
+        Me.cmdUserDefined.Location = New System.Drawing.Point(277, 309)
         Me.cmdUserDefined.Name = "cmdUserDefined"
         Me.cmdUserDefined.Size = New System.Drawing.Size(100, 23)
         Me.cmdUserDefined.TabIndex = 6
         Me.cmdUserDefined.Tag = "User_Define"
         Me.cmdUserDefined.Text = "User Define"
         Me.cmdUserDefined.UseVisualStyleBackColor = True
-        '
-        'ucrSelectorForRowStats
-        '
-        Me.ucrSelectorForRowStats.bAddRemoveParameter = True
-        Me.ucrSelectorForRowStats.bChangeParameterValue = True
-        Me.ucrSelectorForRowStats.bShowHiddenColumns = False
-        Me.ucrSelectorForRowStats.bUseCurrentFilter = True
-        Me.ucrSelectorForRowStats.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForRowStats.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForRowStats.Name = "ucrSelectorForRowStats"
-        Me.ucrSelectorForRowStats.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForRowStats.TabIndex = 0
-        '
-        'ucrReceiverForRowStatistics
-        '
-        Me.ucrReceiverForRowStatistics.bAddRemoveParameter = True
-        Me.ucrReceiverForRowStatistics.bChangeParameterValue = True
-        Me.ucrReceiverForRowStatistics.frmParent = Me
-        Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(247, 61)
-        Me.ucrReceiverForRowStatistics.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverForRowStatistics.Name = "ucrReceiverForRowStatistics"
-        Me.ucrReceiverForRowStatistics.Selector = Nothing
-        Me.ucrReceiverForRowStatistics.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverForRowStatistics.TabIndex = 2
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 346)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
         '
         'grpStatistic
         '
@@ -207,6 +176,15 @@ Partial Class dlgRowStats
         Me.rdoSum.Text = "Sum"
         Me.rdoSum.UseVisualStyleBackColor = True
         '
+        'ucrSaveResults
+        '
+        Me.ucrSaveResults.bAddRemoveParameter = True
+        Me.ucrSaveResults.bChangeParameterValue = True
+        Me.ucrSaveResults.Location = New System.Drawing.Point(12, 309)
+        Me.ucrSaveResults.Name = "ucrSaveResults"
+        Me.ucrSaveResults.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveResults.TabIndex = 15
+        '
         'ucrPanelStatistics
         '
         Me.ucrPanelStatistics.bAddRemoveParameter = True
@@ -216,14 +194,36 @@ Partial Class dlgRowStats
         Me.ucrPanelStatistics.Size = New System.Drawing.Size(384, 69)
         Me.ucrPanelStatistics.TabIndex = 0
         '
-        'ucrSaveResults
+        'ucrSelectorForRowStats
         '
-        Me.ucrSaveResults.bAddRemoveParameter = True
-        Me.ucrSaveResults.bChangeParameterValue = True
-        Me.ucrSaveResults.Location = New System.Drawing.Point(12, 309)
-        Me.ucrSaveResults.Name = "ucrSaveResults"
-        Me.ucrSaveResults.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSaveResults.TabIndex = 15
+        Me.ucrSelectorForRowStats.bAddRemoveParameter = True
+        Me.ucrSelectorForRowStats.bChangeParameterValue = True
+        Me.ucrSelectorForRowStats.bShowHiddenColumns = False
+        Me.ucrSelectorForRowStats.bUseCurrentFilter = True
+        Me.ucrSelectorForRowStats.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForRowStats.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForRowStats.Name = "ucrSelectorForRowStats"
+        Me.ucrSelectorForRowStats.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForRowStats.TabIndex = 0
+        '
+        'ucrReceiverForRowStatistics
+        '
+        Me.ucrReceiverForRowStatistics.bAddRemoveParameter = True
+        Me.ucrReceiverForRowStatistics.bChangeParameterValue = True
+        Me.ucrReceiverForRowStatistics.frmParent = Me
+        Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(247, 61)
+        Me.ucrReceiverForRowStatistics.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForRowStatistics.Name = "ucrReceiverForRowStatistics"
+        Me.ucrReceiverForRowStatistics.Selector = Nothing
+        Me.ucrReceiverForRowStatistics.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverForRowStatistics.TabIndex = 2
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 346)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 7
         '
         'dlgRowStats
         '
