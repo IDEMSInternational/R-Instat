@@ -16,73 +16,96 @@
 
 Imports instat.Translations
 Public Class dlgSeasonalSummaryRain
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
 
     Private Sub dlgSeasonalSummaryRain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$seasonal_summary.rain()")
-        ucrBase.clsRsyntax.iCallType = 1
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 1
+
+        'ucrNuds
+        ucrNudStartMonth.SetParameter(New RParameter("month_start", ))
+        ucrNudNosOfMonths.SetParameter(New RParameter("number_month", ))
+        ucrNudThreshold.SetParameter(New RParameter("threshold", ))
+
+        'ucrChks
+        ucrChkCountLabel.SetParameter(New RParameter("summaries", ))
+        ucrChkCountLabel.SetText("Count Label")
+        'ucrChkCountLabel.SetRDefault(" ")
+
+        ucrChkSumLabel.SetParameter(New RParameter("summaries", ))
+        ucrChkSumLabel.SetText("Sum Label")
+        'ucrChkSumLabel.SetRDefault(" ")
+
+        ucrChkMean.SetParameter(New RParameter("summaries", ))
+        ucrChkMean.SetText("Mean")
+        'ucrChkMean.SetRDefault(" ")
+
+        ucrChkLongestDrySpellName.SetText("Longest Dry Spell Name")
+        ucrChkRemoveNA.SetText("Remove Missing Values")
+        ucrChkReplace.SetText("Replace")
+        ucrChkStrictThreshold.SetText("Strict Threshold")
+    End Sub
+
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        'resets
+        clsDefaultFunction.SetRCommand("climate_obj$seasonal_summary.rain()")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+
     End Sub
 
     Private Sub txtTotal_Leave(sender As Object, e As EventArgs) Handles txtTotal.Leave
-        ucrBase.clsRsyntax.AddParameter("summary_col_names", Chr(34) & txtTotal.Text & Chr(34))
+        'ucrBase.clsRsyntax.AddParameter("summary_col_names", Chr(34) & txtTotal.Text & Chr(34))
+        'Not sure what we want from this in the future - ucr/txt/save control/etc, so left it as it is
     End Sub
 
     Private Sub txtCount_Leave(sender As Object, e As EventArgs) Handles txtCount.Leave
-        ucrBase.clsRsyntax.AddParameter("summary_col_names", Chr(34) & txtCount.Text & Chr(34))
-
+        'ucrBase.clsRsyntax.AddParameter("summary_col_names", Chr(34) & txtCount.Text & Chr(34))
+        'Not sure what we want from this in the future - ucr/txt/save control/etc, so left it as it is
     End Sub
 
     Private Sub txtMean_Leave(sender As Object, e As EventArgs) Handles txtMean.Leave
-        ucrBase.clsRsyntax.AddParameter("summary_col_names", Chr(34) & txtMean.Text & Chr(34))
-
-    End Sub
-
-    Private Sub nudStartMonth_leave(sender As Object, e As EventArgs) Handles nudStartMonth.Leave
-
-        ucrBase.clsRsyntax.AddParameter("month_start", nudStartMonth.Value)
-
-    End Sub
-
-    Private Sub nudNosofMonth_Leave(sender As Object, e As EventArgs) Handles nudNosofMonth.Leave
-        ucrBase.clsRsyntax.AddParameter("number_month", nudNosofMonth.Value)
-
-    End Sub
-
-    Private Sub nudThreshold_ValueChanged(sender As Object, e As EventArgs) Handles nudThreshold.Leave
-        ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value)
-
+        'ucrBase.clsRsyntax.AddParameter("summary_col_names", Chr(34) & txtMean.Text & Chr(34))
+        'Not sure what we want from this in the future - ucr/txt/save control/etc, so left it as it is
     End Sub
 
     Private Sub txtLongDrySpellName_Leave(sender As Object, e As EventArgs) Handles txtLongDrySpellName.Leave
-        ucrBase.clsRsyntax.AddParameter("longest_dry_spell_name", Chr(34) & txtLongDrySpellName.Text & Chr(34))
-
+        'ucrBase.clsRsyntax.AddParameter("longest_dry_spell_name", Chr(34) & txtLongDrySpellName.Text & Chr(34))
+        'Not sure what we want from this in the future - ucr/txt/save control/etc, so left it as it is
     End Sub
 
     Private Sub txtSpellLengthName_Leave(sender As Object, e As EventArgs) Handles txtSpellLengthName.Leave
-        ucrBase.clsRsyntax.AddParameter("spell_length_name", Chr(34) & txtSpellLengthName.Text & Chr(34))
+        'ucrBase.clsRsyntax.AddParameter("spell_length_name", Chr(34) & txtSpellLengthName.Text & Chr(34))
+        'Not sure what we want from this in the future - ucr/txt/save control/etc, so left it as it is
     End Sub
 
-    Private Sub chkCountLabel_Leave(sender As Object, e As EventArgs) Handles chkCountLabel.Leave
-        If chkCountLabel.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", chkCountLabel.Checked.ToString().ToUpper())
-        End If
-
-
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
-    Private Sub chkSumLabel_Leave(sender As Object, e As EventArgs) Handles chkSumLabel.Leave
-        If chkSumLabel.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", chkSumLabel.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub chkMean_Leave(sender As Object, e As EventArgs) Handles chkMean.CheckedChanged
-        If chkCountLabel.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", chkMean.Checked.ToString().ToUpper())
-        End If
-    End Sub
+    'ControlContentsChanged for TestOKEnabled()
 End Class

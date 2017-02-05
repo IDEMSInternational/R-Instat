@@ -23,171 +23,61 @@ Partial Class dlgSeasonalSummaryRain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkRemoveNA = New System.Windows.Forms.CheckBox()
-        Me.chkSumLabel = New System.Windows.Forms.CheckBox()
-        Me.chkLongestDrySpellName = New System.Windows.Forms.CheckBox()
-        Me.chkReplace = New System.Windows.Forms.CheckBox()
-        Me.chkCountLabel = New System.Windows.Forms.CheckBox()
-        Me.chkStrictThreshold = New System.Windows.Forms.CheckBox()
-        Me.chkMean = New System.Windows.Forms.CheckBox()
-        Me.CheckBox8 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox9 = New System.Windows.Forms.CheckBox()
-        Me.chk = New System.Windows.Forms.CheckBox()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
         Me.lblMeanLabel = New System.Windows.Forms.Label()
         Me.lblCount = New System.Windows.Forms.Label()
         Me.lblTotals = New System.Windows.Forms.Label()
         Me.lblStartMonth = New System.Windows.Forms.Label()
-        Me.nudNosofMonth = New System.Windows.Forms.NumericUpDown()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.txtCount = New System.Windows.Forms.TextBox()
         Me.lblNumberofMonths = New System.Windows.Forms.Label()
         Me.txtMean = New System.Windows.Forms.TextBox()
-        Me.nudStartMonth = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
         Me.txtSpellLengthName = New System.Windows.Forms.TextBox()
         Me.txtLongDrySpellName = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblLongDrySpellLabel = New System.Windows.Forms.Label()
         Me.lblSpelllengthName = New System.Windows.Forms.Label()
+        Me.ucrNudStartMonth = New instat.ucrNud()
+        Me.ucrNudNosOfMonths = New instat.ucrNud()
+        Me.ucrNudThreshold = New instat.ucrNud()
+        Me.UcrCheck1 = New instat.ucrCheck()
+        Me.UcrCheck2 = New instat.ucrCheck()
+        Me.UcrCheck3 = New instat.ucrCheck()
+        Me.ucrChkStrictThreshold = New instat.ucrCheck()
+        Me.ucrChkCountLabel = New instat.ucrCheck()
+        Me.ucrChkSumLabel = New instat.ucrCheck()
+        Me.ucrChkReplace = New instat.ucrCheck()
+        Me.ucrChkLongestDrySpellName = New instat.ucrCheck()
+        Me.ucrChkMean = New instat.ucrCheck()
+        Me.ucrChkRemoveNA = New instat.ucrCheck()
         Me.grpSummaries.SuspendLayout()
-        CType(Me.nudNosofMonth, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudStartMonth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(98, 347)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 325)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 0
-        '
-        'chkRemoveNA
-        '
-        Me.chkRemoveNA.AutoSize = True
-        Me.chkRemoveNA.Location = New System.Drawing.Point(338, 293)
-        Me.chkRemoveNA.Name = "chkRemoveNA"
-        Me.chkRemoveNA.Size = New System.Drawing.Size(81, 17)
-        Me.chkRemoveNA.TabIndex = 1
-        Me.chkRemoveNA.Tag = "Remove_NA"
-        Me.chkRemoveNA.Text = "CheckBox1"
-        Me.chkRemoveNA.UseVisualStyleBackColor = True
-        '
-        'chkSumLabel
-        '
-        Me.chkSumLabel.AutoSize = True
-        Me.chkSumLabel.Location = New System.Drawing.Point(6, 16)
-        Me.chkSumLabel.Name = "chkSumLabel"
-        Me.chkSumLabel.Size = New System.Drawing.Size(81, 17)
-        Me.chkSumLabel.TabIndex = 2
-        Me.chkSumLabel.Tag = "Totals"
-        Me.chkSumLabel.Text = "CheckBox2"
-        Me.chkSumLabel.UseVisualStyleBackColor = True
-        '
-        'chkLongestDrySpellName
-        '
-        Me.chkLongestDrySpellName.AutoSize = True
-        Me.chkLongestDrySpellName.Location = New System.Drawing.Point(162, 293)
-        Me.chkLongestDrySpellName.Name = "chkLongestDrySpellName"
-        Me.chkLongestDrySpellName.Size = New System.Drawing.Size(81, 17)
-        Me.chkLongestDrySpellName.TabIndex = 3
-        Me.chkLongestDrySpellName.Tag = "Longest_Dry_Spell_Name"
-        Me.chkLongestDrySpellName.Text = "CheckBox3"
-        Me.chkLongestDrySpellName.UseVisualStyleBackColor = True
-        '
-        'chkReplace
-        '
-        Me.chkReplace.AutoSize = True
-        Me.chkReplace.Location = New System.Drawing.Point(499, 293)
-        Me.chkReplace.Name = "chkReplace"
-        Me.chkReplace.Size = New System.Drawing.Size(81, 17)
-        Me.chkReplace.TabIndex = 4
-        Me.chkReplace.Tag = "Replace"
-        Me.chkReplace.Text = "CheckBox4"
-        Me.chkReplace.UseVisualStyleBackColor = True
-        '
-        'chkCountLabel
-        '
-        Me.chkCountLabel.AutoSize = True
-        Me.chkCountLabel.Location = New System.Drawing.Point(108, 16)
-        Me.chkCountLabel.Name = "chkCountLabel"
-        Me.chkCountLabel.Size = New System.Drawing.Size(81, 17)
-        Me.chkCountLabel.TabIndex = 5
-        Me.chkCountLabel.Tag = "Counts"
-        Me.chkCountLabel.Text = "CheckBox5"
-        Me.chkCountLabel.UseVisualStyleBackColor = True
-        '
-        'chkStrictThreshold
-        '
-        Me.chkStrictThreshold.AutoSize = True
-        Me.chkStrictThreshold.Location = New System.Drawing.Point(18, 293)
-        Me.chkStrictThreshold.Name = "chkStrictThreshold"
-        Me.chkStrictThreshold.Size = New System.Drawing.Size(81, 17)
-        Me.chkStrictThreshold.TabIndex = 6
-        Me.chkStrictThreshold.Tag = "Strict_Threshold"
-        Me.chkStrictThreshold.Text = "CheckBox6"
-        Me.chkStrictThreshold.UseVisualStyleBackColor = True
-        '
-        'chkMean
-        '
-        Me.chkMean.AutoSize = True
-        Me.chkMean.Location = New System.Drawing.Point(6, 49)
-        Me.chkMean.Name = "chkMean"
-        Me.chkMean.Size = New System.Drawing.Size(81, 17)
-        Me.chkMean.TabIndex = 7
-        Me.chkMean.Tag = "Mean"
-        Me.chkMean.Text = "CheckBox7"
-        Me.chkMean.UseVisualStyleBackColor = True
-        '
-        'CheckBox8
-        '
-        Me.CheckBox8.AutoSize = True
-        Me.CheckBox8.Location = New System.Drawing.Point(17, 19)
-        Me.CheckBox8.Name = "CheckBox8"
-        Me.CheckBox8.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBox8.TabIndex = 8
-        Me.CheckBox8.Text = "CheckBox8"
-        Me.CheckBox8.UseVisualStyleBackColor = True
-        '
-        'CheckBox9
-        '
-        Me.CheckBox9.AutoSize = True
-        Me.CheckBox9.Location = New System.Drawing.Point(178, 19)
-        Me.CheckBox9.Name = "CheckBox9"
-        Me.CheckBox9.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBox9.TabIndex = 9
-        Me.CheckBox9.Text = "CheckBox9"
-        Me.CheckBox9.UseVisualStyleBackColor = True
-        '
-        'chk
-        '
-        Me.chk.AutoSize = True
-        Me.chk.Location = New System.Drawing.Point(17, 58)
-        Me.chk.Name = "chk"
-        Me.chk.Size = New System.Drawing.Size(87, 17)
-        Me.chk.TabIndex = 10
-        Me.chk.Text = "CheckBox10"
-        Me.chk.UseVisualStyleBackColor = True
         '
         'grpSummaries
         '
+        Me.grpSummaries.Controls.Add(Me.ucrChkMean)
+        Me.grpSummaries.Controls.Add(Me.ucrNudNosOfMonths)
+        Me.grpSummaries.Controls.Add(Me.ucrNudStartMonth)
         Me.grpSummaries.Controls.Add(Me.lblMeanLabel)
+        Me.grpSummaries.Controls.Add(Me.ucrChkCountLabel)
+        Me.grpSummaries.Controls.Add(Me.ucrChkSumLabel)
         Me.grpSummaries.Controls.Add(Me.lblCount)
         Me.grpSummaries.Controls.Add(Me.lblTotals)
         Me.grpSummaries.Controls.Add(Me.lblStartMonth)
-        Me.grpSummaries.Controls.Add(Me.nudNosofMonth)
         Me.grpSummaries.Controls.Add(Me.txtTotal)
         Me.grpSummaries.Controls.Add(Me.txtCount)
         Me.grpSummaries.Controls.Add(Me.lblNumberofMonths)
         Me.grpSummaries.Controls.Add(Me.txtMean)
-        Me.grpSummaries.Controls.Add(Me.chkMean)
-        Me.grpSummaries.Controls.Add(Me.chkCountLabel)
-        Me.grpSummaries.Controls.Add(Me.nudStartMonth)
-        Me.grpSummaries.Controls.Add(Me.chkSumLabel)
         Me.grpSummaries.Location = New System.Drawing.Point(12, 26)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(496, 134)
@@ -236,16 +126,6 @@ Partial Class dlgSeasonalSummaryRain
         Me.lblStartMonth.Tag = "Start_Month"
         Me.lblStartMonth.Text = "Label2"
         '
-        'nudNosofMonth
-        '
-        Me.nudNosofMonth.Location = New System.Drawing.Point(118, 110)
-        Me.nudNosofMonth.Maximum = New Decimal(New Integer() {12, 0, 0, 0})
-        Me.nudNosofMonth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudNosofMonth.Name = "nudNosofMonth"
-        Me.nudNosofMonth.Size = New System.Drawing.Size(55, 20)
-        Me.nudNosofMonth.TabIndex = 11
-        Me.nudNosofMonth.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'txtTotal
         '
         Me.txtTotal.Location = New System.Drawing.Point(301, 19)
@@ -277,23 +157,13 @@ Partial Class dlgSeasonalSummaryRain
         Me.txtMean.Size = New System.Drawing.Size(189, 20)
         Me.txtMean.TabIndex = 20
         '
-        'nudStartMonth
-        '
-        Me.nudStartMonth.Location = New System.Drawing.Point(118, 84)
-        Me.nudStartMonth.Maximum = New Decimal(New Integer() {12, 0, 0, 0})
-        Me.nudStartMonth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudStartMonth.Name = "nudStartMonth"
-        Me.nudStartMonth.Size = New System.Drawing.Size(55, 20)
-        Me.nudStartMonth.TabIndex = 12
-        Me.nudStartMonth.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.UcrCheck3)
+        Me.GroupBox2.Controls.Add(Me.UcrCheck2)
+        Me.GroupBox2.Controls.Add(Me.UcrCheck1)
+        Me.GroupBox2.Controls.Add(Me.ucrNudThreshold)
         Me.GroupBox2.Controls.Add(Me.lblThreshold)
-        Me.GroupBox2.Controls.Add(Me.nudThreshold)
-        Me.GroupBox2.Controls.Add(Me.chk)
-        Me.GroupBox2.Controls.Add(Me.CheckBox9)
-        Me.GroupBox2.Controls.Add(Me.CheckBox8)
         Me.GroupBox2.Location = New System.Drawing.Point(321, 192)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(271, 82)
@@ -310,17 +180,6 @@ Partial Class dlgSeasonalSummaryRain
         Me.lblThreshold.TabIndex = 25
         Me.lblThreshold.Tag = "Threshold"
         Me.lblThreshold.Text = "Label3"
-        '
-        'nudThreshold
-        '
-        Me.nudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudThreshold.Location = New System.Drawing.Point(205, 55)
-        Me.nudThreshold.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudThreshold.Name = "nudThreshold"
-        Me.nudThreshold.Size = New System.Drawing.Size(54, 20)
-        Me.nudThreshold.TabIndex = 24
-        Me.nudThreshold.Tag = ""
-        Me.nudThreshold.Value = New Decimal(New Integer() {85, 0, 0, 131072})
         '
         'txtSpellLengthName
         '
@@ -365,22 +224,164 @@ Partial Class dlgSeasonalSummaryRain
         Me.lblSpelllengthName.Tag = "Spell_Name"
         Me.lblSpelllengthName.Text = "Label8"
         '
+        'ucrNudStartMonth
+        '
+        Me.ucrNudStartMonth.bAddRemoveParameter = True
+        Me.ucrNudStartMonth.bChangeParameterValue = True
+        Me.ucrNudStartMonth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStartMonth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudStartMonth.Location = New System.Drawing.Point(118, 84)
+        Me.ucrNudStartMonth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudStartMonth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStartMonth.Name = "ucrNudStartMonth"
+        Me.ucrNudStartMonth.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudStartMonth.TabIndex = 24
+        Me.ucrNudStartMonth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudNosOfMonths
+        '
+        Me.ucrNudNosOfMonths.bAddRemoveParameter = True
+        Me.ucrNudNosOfMonths.bChangeParameterValue = True
+        Me.ucrNudNosOfMonths.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNosOfMonths.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNosOfMonths.Location = New System.Drawing.Point(118, 110)
+        Me.ucrNudNosOfMonths.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNosOfMonths.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNosOfMonths.Name = "ucrNudNosOfMonths"
+        Me.ucrNudNosOfMonths.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNosOfMonths.TabIndex = 25
+        Me.ucrNudNosOfMonths.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudThreshold
+        '
+        Me.ucrNudThreshold.bAddRemoveParameter = True
+        Me.ucrNudThreshold.bChangeParameterValue = True
+        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudThreshold.Location = New System.Drawing.Point(187, 56)
+        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Name = "ucrNudThreshold"
+        Me.ucrNudThreshold.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudThreshold.TabIndex = 26
+        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'UcrCheck1
+        '
+        Me.UcrCheck1.bAddRemoveParameter = True
+        Me.UcrCheck1.bChangeParameterValue = True
+        Me.UcrCheck1.Checked = False
+        Me.UcrCheck1.Location = New System.Drawing.Point(17, 56)
+        Me.UcrCheck1.Name = "UcrCheck1"
+        Me.UcrCheck1.Size = New System.Drawing.Size(100, 20)
+        Me.UcrCheck1.TabIndex = 27
+        '
+        'UcrCheck2
+        '
+        Me.UcrCheck2.bAddRemoveParameter = True
+        Me.UcrCheck2.bChangeParameterValue = True
+        Me.UcrCheck2.Checked = False
+        Me.UcrCheck2.Location = New System.Drawing.Point(17, 19)
+        Me.UcrCheck2.Name = "UcrCheck2"
+        Me.UcrCheck2.Size = New System.Drawing.Size(100, 20)
+        Me.UcrCheck2.TabIndex = 28
+        '
+        'UcrCheck3
+        '
+        Me.UcrCheck3.bAddRemoveParameter = True
+        Me.UcrCheck3.bChangeParameterValue = True
+        Me.UcrCheck3.Checked = False
+        Me.UcrCheck3.Location = New System.Drawing.Point(145, 19)
+        Me.UcrCheck3.Name = "UcrCheck3"
+        Me.UcrCheck3.Size = New System.Drawing.Size(100, 20)
+        Me.UcrCheck3.TabIndex = 29
+        '
+        'ucrChkStrictThreshold
+        '
+        Me.ucrChkStrictThreshold.bAddRemoveParameter = True
+        Me.ucrChkStrictThreshold.bChangeParameterValue = True
+        Me.ucrChkStrictThreshold.Checked = False
+        Me.ucrChkStrictThreshold.Location = New System.Drawing.Point(18, 299)
+        Me.ucrChkStrictThreshold.Name = "ucrChkStrictThreshold"
+        Me.ucrChkStrictThreshold.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkStrictThreshold.TabIndex = 30
+        '
+        'ucrChkCountLabel
+        '
+        Me.ucrChkCountLabel.bAddRemoveParameter = True
+        Me.ucrChkCountLabel.bChangeParameterValue = True
+        Me.ucrChkCountLabel.Checked = False
+        Me.ucrChkCountLabel.Location = New System.Drawing.Point(103, 16)
+        Me.ucrChkCountLabel.Name = "ucrChkCountLabel"
+        Me.ucrChkCountLabel.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCountLabel.TabIndex = 31
+        '
+        'ucrChkSumLabel
+        '
+        Me.ucrChkSumLabel.bAddRemoveParameter = True
+        Me.ucrChkSumLabel.bChangeParameterValue = True
+        Me.ucrChkSumLabel.Checked = False
+        Me.ucrChkSumLabel.Location = New System.Drawing.Point(6, 16)
+        Me.ucrChkSumLabel.Name = "ucrChkSumLabel"
+        Me.ucrChkSumLabel.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSumLabel.TabIndex = 32
+        '
+        'ucrChkReplace
+        '
+        Me.ucrChkReplace.bAddRemoveParameter = True
+        Me.ucrChkReplace.bChangeParameterValue = True
+        Me.ucrChkReplace.Checked = False
+        Me.ucrChkReplace.Location = New System.Drawing.Point(499, 299)
+        Me.ucrChkReplace.Name = "ucrChkReplace"
+        Me.ucrChkReplace.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkReplace.TabIndex = 33
+        '
+        'ucrChkLongestDrySpellName
+        '
+        Me.ucrChkLongestDrySpellName.bAddRemoveParameter = True
+        Me.ucrChkLongestDrySpellName.bChangeParameterValue = True
+        Me.ucrChkLongestDrySpellName.Checked = False
+        Me.ucrChkLongestDrySpellName.Location = New System.Drawing.Point(162, 299)
+        Me.ucrChkLongestDrySpellName.Name = "ucrChkLongestDrySpellName"
+        Me.ucrChkLongestDrySpellName.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLongestDrySpellName.TabIndex = 34
+        '
+        'ucrChkMean
+        '
+        Me.ucrChkMean.bAddRemoveParameter = True
+        Me.ucrChkMean.bChangeParameterValue = True
+        Me.ucrChkMean.Checked = False
+        Me.ucrChkMean.Location = New System.Drawing.Point(6, 42)
+        Me.ucrChkMean.Name = "ucrChkMean"
+        Me.ucrChkMean.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMean.TabIndex = 35
+        '
+        'ucrChkRemoveNA
+        '
+        Me.ucrChkRemoveNA.bAddRemoveParameter = True
+        Me.ucrChkRemoveNA.bChangeParameterValue = True
+        Me.ucrChkRemoveNA.Checked = False
+        Me.ucrChkRemoveNA.Location = New System.Drawing.Point(338, 299)
+        Me.ucrChkRemoveNA.Name = "ucrChkRemoveNA"
+        Me.ucrChkRemoveNA.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkRemoveNA.TabIndex = 36
+        '
         'dlgSeasonalSummaryRain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(604, 380)
+        Me.Controls.Add(Me.ucrChkReplace)
+        Me.Controls.Add(Me.ucrChkLongestDrySpellName)
+        Me.Controls.Add(Me.ucrChkStrictThreshold)
+        Me.Controls.Add(Me.ucrChkRemoveNA)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lblLongDrySpellLabel)
         Me.Controls.Add(Me.lblSpelllengthName)
         Me.Controls.Add(Me.txtSpellLengthName)
         Me.Controls.Add(Me.txtLongDrySpellName)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.chkStrictThreshold)
         Me.Controls.Add(Me.grpSummaries)
-        Me.Controls.Add(Me.chkRemoveNA)
-        Me.Controls.Add(Me.chkReplace)
-        Me.Controls.Add(Me.chkLongestDrySpellName)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -391,27 +392,14 @@ Partial Class dlgSeasonalSummaryRain
         Me.Text = "dlgSeasonalSummaryRain"
         Me.grpSummaries.ResumeLayout(False)
         Me.grpSummaries.PerformLayout()
-        CType(Me.nudNosofMonth, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudStartMonth, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents chkRemoveNA As CheckBox
-    Friend WithEvents chkSumLabel As CheckBox
-    Friend WithEvents chkLongestDrySpellName As CheckBox
-    Friend WithEvents chkReplace As CheckBox
-    Friend WithEvents chkCountLabel As CheckBox
-    Friend WithEvents chkStrictThreshold As CheckBox
-    Friend WithEvents chkMean As CheckBox
-    Friend WithEvents CheckBox8 As CheckBox
-    Friend WithEvents CheckBox9 As CheckBox
-    Friend WithEvents chk As CheckBox
     Friend WithEvents grpSummaries As GroupBox
     Friend WithEvents lblMeanLabel As Label
     Friend WithEvents lblCount As Label
@@ -420,8 +408,6 @@ Partial Class dlgSeasonalSummaryRain
     Friend WithEvents txtCount As TextBox
     Friend WithEvents txtMean As TextBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents nudNosofMonth As NumericUpDown
-    Friend WithEvents nudStartMonth As NumericUpDown
     Friend WithEvents lblNumberofMonths As Label
     Friend WithEvents lblStartMonth As Label
     Friend WithEvents txtSpellLengthName As TextBox
@@ -430,5 +416,17 @@ Partial Class dlgSeasonalSummaryRain
     Friend WithEvents lblLongDrySpellLabel As Label
     Friend WithEvents lblSpelllengthName As Label
     Friend WithEvents lblThreshold As Label
-    Friend WithEvents nudThreshold As NumericUpDown
+    Friend WithEvents ucrChkMean As ucrCheck
+    Friend WithEvents ucrNudNosOfMonths As ucrNud
+    Friend WithEvents ucrNudStartMonth As ucrNud
+    Friend WithEvents ucrChkCountLabel As ucrCheck
+    Friend WithEvents ucrChkSumLabel As ucrCheck
+    Friend WithEvents UcrCheck1 As ucrCheck
+    Friend WithEvents ucrNudThreshold As ucrNud
+    Friend WithEvents UcrCheck2 As ucrCheck
+    Friend WithEvents UcrCheck3 As ucrCheck
+    Friend WithEvents ucrChkStrictThreshold As ucrCheck
+    Friend WithEvents ucrChkReplace As ucrCheck
+    Friend WithEvents ucrChkLongestDrySpellName As ucrCheck
+    Friend WithEvents ucrChkRemoveNA As ucrCheck
 End Class
