@@ -33,7 +33,6 @@ Public Class dlgDeleteRowsOrColums
         SetRCodeForControls(bReset)
         bReset = False
         ReopenDialog()
-
         TestOKEnabled()
     End Sub
 
@@ -73,6 +72,8 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub ReopenDialog()
         ucrNudRowsToDelete.Maximum = ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength
+        'temp fix to receiver containing deleted column on reopen
+        ucrReceiverForColumnsToDelete.Clear()
     End Sub
 
     Private Sub TestOKEnabled()
