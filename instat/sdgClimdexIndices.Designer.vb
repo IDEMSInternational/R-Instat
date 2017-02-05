@@ -79,16 +79,49 @@ Partial Class sdgClimdexIndices
         Me.chkMonthlyMaxDailyTMin = New System.Windows.Forms.CheckBox()
         Me.chkGrowingSeasonLength = New System.Windows.Forms.CheckBox()
         Me.ttClimdexIndices = New System.Windows.Forms.ToolTip(Me.components)
-        Me.grpClimdexIndices = New System.Windows.Forms.GroupBox()
         Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
         Me.chkCenterMean = New System.Windows.Forms.CheckBox()
         Me.chkMaxSpellSpanYears = New System.Windows.Forms.CheckBox()
         Me.chkSpellDISpanYear = New System.Windows.Forms.CheckBox()
+        Me.tbClimdex = New System.Windows.Forms.TabControl()
+        Me.TbSettings = New System.Windows.Forms.TabPage()
+        Me.tbIndices = New System.Windows.Forms.TabPage()
+        Me.ucrInputFreq = New instat.ucrInputComboBox()
+        Me.ucrMultipleInputTempQtiles = New instat.ucrMultipleInput()
+        Me.ucrMultipleInputPrecQtiles = New instat.ucrMultipleInput()
+        Me.lblPrecQuantiles = New System.Windows.Forms.Label()
+        Me.lblTempQuantiles = New System.Windows.Forms.Label()
+        Me.grpMaxMissingDays = New System.Windows.Forms.GroupBox()
+        Me.nudMothlyMissingDays = New System.Windows.Forms.NumericUpDown()
+        Me.lblMonthly = New System.Windows.Forms.Label()
+        Me.lblAnnual = New System.Windows.Forms.Label()
+        Me.nudAnnualMissingDays = New System.Windows.Forms.NumericUpDown()
+        Me.grpBaseRange = New System.Windows.Forms.GroupBox()
+        Me.nudYearFrom = New System.Windows.Forms.NumericUpDown()
+        Me.nudYearTo = New System.Windows.Forms.NumericUpDown()
+        Me.lblBaseRangeTo = New System.Windows.Forms.Label()
+        Me.lblBaseRangeFrom = New System.Windows.Forms.Label()
+        Me.chkNHemisphere = New System.Windows.Forms.CheckBox()
+        Me.lblN = New System.Windows.Forms.Label()
+        Me.nudN = New System.Windows.Forms.NumericUpDown()
+        Me.lblMinBaseData = New System.Windows.Forms.Label()
+        Me.nudMinBaseData = New System.Windows.Forms.NumericUpDown()
+        Me.lblFreq = New System.Windows.Forms.Label()
         Me.panIndices.SuspendLayout()
-        Me.grpClimdexIndices.SuspendLayout()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbClimdex.SuspendLayout()
+        Me.TbSettings.SuspendLayout()
+        Me.tbIndices.SuspendLayout()
+        Me.grpMaxMissingDays.SuspendLayout()
+        CType(Me.nudMothlyMissingDays, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudAnnualMissingDays, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpBaseRange.SuspendLayout()
+        CType(Me.nudYearFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudYearTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMinBaseData, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'chkFrostDays
@@ -192,9 +225,9 @@ Partial Class sdgClimdexIndices
         Me.panIndices.Controls.Add(Me.chkIcingDays)
         Me.panIndices.Controls.Add(Me.chkSummerDays)
         Me.panIndices.Controls.Add(Me.chkTropicalNights)
-        Me.panIndices.Location = New System.Drawing.Point(6, 19)
+        Me.panIndices.Location = New System.Drawing.Point(3, 3)
         Me.panIndices.Name = "panIndices"
-        Me.panIndices.Size = New System.Drawing.Size(372, 130)
+        Me.panIndices.Size = New System.Drawing.Size(375, 183)
         Me.panIndices.TabIndex = 0
         '
         'lbl26
@@ -720,20 +753,9 @@ Partial Class sdgClimdexIndices
         Me.chkGrowingSeasonLength.Text = "Growing Season Length"
         Me.chkGrowingSeasonLength.UseVisualStyleBackColor = True
         '
-        'grpClimdexIndices
-        '
-        Me.grpClimdexIndices.Controls.Add(Me.panIndices)
-        Me.grpClimdexIndices.Location = New System.Drawing.Point(10, 11)
-        Me.grpClimdexIndices.Name = "grpClimdexIndices"
-        Me.grpClimdexIndices.Size = New System.Drawing.Size(388, 165)
-        Me.grpClimdexIndices.TabIndex = 0
-        Me.grpClimdexIndices.TabStop = False
-        Me.grpClimdexIndices.Tag = "Climdex_Indices"
-        Me.grpClimdexIndices.Text = "Climdex Indices"
-        '
         'ucrButtonsClimdexIndices
         '
-        Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(119, 243)
+        Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(114, 300)
         Me.ucrButtonsClimdexIndices.Name = "ucrButtonsClimdexIndices"
         Me.ucrButtonsClimdexIndices.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsClimdexIndices.TabIndex = 6
@@ -741,7 +763,7 @@ Partial Class sdgClimdexIndices
         'lblThreshold
         '
         Me.lblThreshold.AutoSize = True
-        Me.lblThreshold.Location = New System.Drawing.Point(10, 187)
+        Me.lblThreshold.Location = New System.Drawing.Point(33, 195)
         Me.lblThreshold.Name = "lblThreshold"
         Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
         Me.lblThreshold.TabIndex = 1
@@ -752,7 +774,7 @@ Partial Class sdgClimdexIndices
         '
         Me.nudThreshold.DecimalPlaces = 2
         Me.nudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudThreshold.Location = New System.Drawing.Point(80, 184)
+        Me.nudThreshold.Location = New System.Drawing.Point(103, 192)
         Me.nudThreshold.Name = "nudThreshold"
         Me.nudThreshold.Size = New System.Drawing.Size(42, 20)
         Me.nudThreshold.TabIndex = 2
@@ -761,7 +783,7 @@ Partial Class sdgClimdexIndices
         'chkCenterMean
         '
         Me.chkCenterMean.AutoSize = True
-        Me.chkCenterMean.Location = New System.Drawing.Point(10, 216)
+        Me.chkCenterMean.Location = New System.Drawing.Point(33, 233)
         Me.chkCenterMean.Name = "chkCenterMean"
         Me.chkCenterMean.Size = New System.Drawing.Size(147, 17)
         Me.chkCenterMean.TabIndex = 4
@@ -772,7 +794,7 @@ Partial Class sdgClimdexIndices
         'chkMaxSpellSpanYears
         '
         Me.chkMaxSpellSpanYears.AutoSize = True
-        Me.chkMaxSpellSpanYears.Location = New System.Drawing.Point(199, 185)
+        Me.chkMaxSpellSpanYears.Location = New System.Drawing.Point(195, 202)
         Me.chkMaxSpellSpanYears.Name = "chkMaxSpellSpanYears"
         Me.chkMaxSpellSpanYears.Size = New System.Drawing.Size(190, 17)
         Me.chkMaxSpellSpanYears.TabIndex = 3
@@ -783,7 +805,7 @@ Partial Class sdgClimdexIndices
         'chkSpellDISpanYear
         '
         Me.chkSpellDISpanYear.AutoSize = True
-        Me.chkSpellDISpanYear.Location = New System.Drawing.Point(199, 216)
+        Me.chkSpellDISpanYear.Location = New System.Drawing.Point(195, 233)
         Me.chkSpellDISpanYear.Name = "chkSpellDISpanYear"
         Me.chkSpellDISpanYear.Size = New System.Drawing.Size(179, 17)
         Me.chkSpellDISpanYear.TabIndex = 5
@@ -791,17 +813,275 @@ Partial Class sdgClimdexIndices
         Me.chkSpellDISpanYear.Text = "Spell Duration Index Span Years"
         Me.chkSpellDISpanYear.UseVisualStyleBackColor = True
         '
+        'tbClimdex
+        '
+        Me.tbClimdex.Controls.Add(Me.TbSettings)
+        Me.tbClimdex.Controls.Add(Me.tbIndices)
+        Me.tbClimdex.Location = New System.Drawing.Point(7, 0)
+        Me.tbClimdex.Name = "tbClimdex"
+        Me.tbClimdex.SelectedIndex = 0
+        Me.tbClimdex.Size = New System.Drawing.Size(476, 294)
+        Me.tbClimdex.TabIndex = 7
+        '
+        'TbSettings
+        '
+        Me.TbSettings.Controls.Add(Me.lblFreq)
+        Me.TbSettings.Controls.Add(Me.lblMinBaseData)
+        Me.TbSettings.Controls.Add(Me.nudMinBaseData)
+        Me.TbSettings.Controls.Add(Me.ucrInputFreq)
+        Me.TbSettings.Controls.Add(Me.ucrMultipleInputTempQtiles)
+        Me.TbSettings.Controls.Add(Me.ucrMultipleInputPrecQtiles)
+        Me.TbSettings.Controls.Add(Me.lblPrecQuantiles)
+        Me.TbSettings.Controls.Add(Me.lblTempQuantiles)
+        Me.TbSettings.Controls.Add(Me.grpMaxMissingDays)
+        Me.TbSettings.Controls.Add(Me.grpBaseRange)
+        Me.TbSettings.Controls.Add(Me.chkNHemisphere)
+        Me.TbSettings.Controls.Add(Me.lblN)
+        Me.TbSettings.Controls.Add(Me.nudN)
+        Me.TbSettings.Controls.Add(Me.lblThreshold)
+        Me.TbSettings.Controls.Add(Me.chkSpellDISpanYear)
+        Me.TbSettings.Controls.Add(Me.nudThreshold)
+        Me.TbSettings.Controls.Add(Me.chkMaxSpellSpanYears)
+        Me.TbSettings.Controls.Add(Me.chkCenterMean)
+        Me.TbSettings.Location = New System.Drawing.Point(4, 22)
+        Me.TbSettings.Name = "TbSettings"
+        Me.TbSettings.Padding = New System.Windows.Forms.Padding(3)
+        Me.TbSettings.Size = New System.Drawing.Size(468, 268)
+        Me.TbSettings.TabIndex = 0
+        Me.TbSettings.Tag = ""
+        Me.TbSettings.Text = "Settings"
+        Me.TbSettings.UseVisualStyleBackColor = True
+        '
+        'tbIndices
+        '
+        Me.tbIndices.Controls.Add(Me.panIndices)
+        Me.tbIndices.Location = New System.Drawing.Point(4, 22)
+        Me.tbIndices.Name = "tbIndices"
+        Me.tbIndices.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbIndices.Size = New System.Drawing.Size(468, 256)
+        Me.tbIndices.TabIndex = 1
+        Me.tbIndices.Text = "Indices"
+        Me.tbIndices.UseVisualStyleBackColor = True
+        '
+        'ucrInputFreq
+        '
+        Me.ucrInputFreq.bAddRemoveParameter = True
+        Me.ucrInputFreq.bChangeParameterValue = True
+        Me.ucrInputFreq.IsReadOnly = False
+        Me.ucrInputFreq.Location = New System.Drawing.Point(275, 22)
+        Me.ucrInputFreq.Name = "ucrInputFreq"
+        Me.ucrInputFreq.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFreq.TabIndex = 24
+        '
+        'ucrMultipleInputTempQtiles
+        '
+        Me.ucrMultipleInputTempQtiles.Location = New System.Drawing.Point(268, 92)
+        Me.ucrMultipleInputTempQtiles.Name = "ucrMultipleInputTempQtiles"
+        Me.ucrMultipleInputTempQtiles.Size = New System.Drawing.Size(150, 29)
+        Me.ucrMultipleInputTempQtiles.TabIndex = 30
+        '
+        'ucrMultipleInputPrecQtiles
+        '
+        Me.ucrMultipleInputPrecQtiles.Location = New System.Drawing.Point(268, 139)
+        Me.ucrMultipleInputPrecQtiles.Name = "ucrMultipleInputPrecQtiles"
+        Me.ucrMultipleInputPrecQtiles.Size = New System.Drawing.Size(150, 29)
+        Me.ucrMultipleInputPrecQtiles.TabIndex = 33
+        '
+        'lblPrecQuantiles
+        '
+        Me.lblPrecQuantiles.AutoSize = True
+        Me.lblPrecQuantiles.Location = New System.Drawing.Point(287, 122)
+        Me.lblPrecQuantiles.Name = "lblPrecQuantiles"
+        Me.lblPrecQuantiles.Size = New System.Drawing.Size(112, 13)
+        Me.lblPrecQuantiles.TabIndex = 32
+        Me.lblPrecQuantiles.Tag = "Precipitation_Quantiles"
+        Me.lblPrecQuantiles.Text = "Precipitation Quantiles"
+        '
+        'lblTempQuantiles
+        '
+        Me.lblTempQuantiles.AutoSize = True
+        Me.lblTempQuantiles.Location = New System.Drawing.Point(286, 74)
+        Me.lblTempQuantiles.Name = "lblTempQuantiles"
+        Me.lblTempQuantiles.Size = New System.Drawing.Size(114, 13)
+        Me.lblTempQuantiles.TabIndex = 28
+        Me.lblTempQuantiles.Tag = "Temperature_Quantiles"
+        Me.lblTempQuantiles.Text = "Temperature Quantiles"
+        '
+        'grpMaxMissingDays
+        '
+        Me.grpMaxMissingDays.Controls.Add(Me.nudMothlyMissingDays)
+        Me.grpMaxMissingDays.Controls.Add(Me.lblMonthly)
+        Me.grpMaxMissingDays.Controls.Add(Me.lblAnnual)
+        Me.grpMaxMissingDays.Controls.Add(Me.nudAnnualMissingDays)
+        Me.grpMaxMissingDays.Location = New System.Drawing.Point(5, 75)
+        Me.grpMaxMissingDays.Name = "grpMaxMissingDays"
+        Me.grpMaxMissingDays.Size = New System.Drawing.Size(216, 46)
+        Me.grpMaxMissingDays.TabIndex = 29
+        Me.grpMaxMissingDays.TabStop = False
+        Me.grpMaxMissingDays.Tag = "Maximum_Missing_Days"
+        Me.grpMaxMissingDays.Text = "Maximum Missing Days"
+        '
+        'nudMothlyMissingDays
+        '
+        Me.nudMothlyMissingDays.Location = New System.Drawing.Point(156, 17)
+        Me.nudMothlyMissingDays.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
+        Me.nudMothlyMissingDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudMothlyMissingDays.Name = "nudMothlyMissingDays"
+        Me.nudMothlyMissingDays.Size = New System.Drawing.Size(47, 20)
+        Me.nudMothlyMissingDays.TabIndex = 3
+        Me.nudMothlyMissingDays.Value = New Decimal(New Integer() {3, 0, 0, 0})
+        '
+        'lblMonthly
+        '
+        Me.lblMonthly.AutoSize = True
+        Me.lblMonthly.Location = New System.Drawing.Point(106, 19)
+        Me.lblMonthly.Name = "lblMonthly"
+        Me.lblMonthly.Size = New System.Drawing.Size(44, 13)
+        Me.lblMonthly.TabIndex = 2
+        Me.lblMonthly.Tag = "Monthly"
+        Me.lblMonthly.Text = "Monthly"
+        '
+        'lblAnnual
+        '
+        Me.lblAnnual.AutoSize = True
+        Me.lblAnnual.Location = New System.Drawing.Point(7, 19)
+        Me.lblAnnual.Name = "lblAnnual"
+        Me.lblAnnual.Size = New System.Drawing.Size(40, 13)
+        Me.lblAnnual.TabIndex = 0
+        Me.lblAnnual.Tag = "Annual"
+        Me.lblAnnual.Text = "Annual"
+        '
+        'nudAnnualMissingDays
+        '
+        Me.nudAnnualMissingDays.Location = New System.Drawing.Point(53, 17)
+        Me.nudAnnualMissingDays.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
+        Me.nudAnnualMissingDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudAnnualMissingDays.Name = "nudAnnualMissingDays"
+        Me.nudAnnualMissingDays.Size = New System.Drawing.Size(47, 20)
+        Me.nudAnnualMissingDays.TabIndex = 1
+        Me.nudAnnualMissingDays.Value = New Decimal(New Integer() {15, 0, 0, 0})
+        '
+        'grpBaseRange
+        '
+        Me.grpBaseRange.Controls.Add(Me.nudYearFrom)
+        Me.grpBaseRange.Controls.Add(Me.nudYearTo)
+        Me.grpBaseRange.Controls.Add(Me.lblBaseRangeTo)
+        Me.grpBaseRange.Controls.Add(Me.lblBaseRangeFrom)
+        Me.grpBaseRange.Location = New System.Drawing.Point(5, 24)
+        Me.grpBaseRange.Name = "grpBaseRange"
+        Me.grpBaseRange.Size = New System.Drawing.Size(174, 46)
+        Me.grpBaseRange.TabIndex = 25
+        Me.grpBaseRange.TabStop = False
+        Me.grpBaseRange.Tag = "Base_Range"
+        Me.grpBaseRange.Text = "Base Range"
+        '
+        'nudYearFrom
+        '
+        Me.nudYearFrom.Location = New System.Drawing.Point(43, 20)
+        Me.nudYearFrom.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.nudYearFrom.Minimum = New Decimal(New Integer() {1900, 0, 0, 0})
+        Me.nudYearFrom.Name = "nudYearFrom"
+        Me.nudYearFrom.Size = New System.Drawing.Size(47, 20)
+        Me.nudYearFrom.TabIndex = 1
+        Me.nudYearFrom.Value = New Decimal(New Integer() {1961, 0, 0, 0})
+        '
+        'nudYearTo
+        '
+        Me.nudYearTo.Location = New System.Drawing.Point(121, 19)
+        Me.nudYearTo.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.nudYearTo.Minimum = New Decimal(New Integer() {1900, 0, 0, 0})
+        Me.nudYearTo.Name = "nudYearTo"
+        Me.nudYearTo.Size = New System.Drawing.Size(47, 20)
+        Me.nudYearTo.TabIndex = 3
+        Me.nudYearTo.Value = New Decimal(New Integer() {1990, 0, 0, 0})
+        '
+        'lblBaseRangeTo
+        '
+        Me.lblBaseRangeTo.AutoSize = True
+        Me.lblBaseRangeTo.Location = New System.Drawing.Point(96, 22)
+        Me.lblBaseRangeTo.Name = "lblBaseRangeTo"
+        Me.lblBaseRangeTo.Size = New System.Drawing.Size(20, 13)
+        Me.lblBaseRangeTo.TabIndex = 2
+        Me.lblBaseRangeTo.Tag = "To"
+        Me.lblBaseRangeTo.Text = "To"
+        '
+        'lblBaseRangeFrom
+        '
+        Me.lblBaseRangeFrom.AutoSize = True
+        Me.lblBaseRangeFrom.Location = New System.Drawing.Point(7, 22)
+        Me.lblBaseRangeFrom.Name = "lblBaseRangeFrom"
+        Me.lblBaseRangeFrom.Size = New System.Drawing.Size(30, 13)
+        Me.lblBaseRangeFrom.TabIndex = 0
+        Me.lblBaseRangeFrom.Tag = "From"
+        Me.lblBaseRangeFrom.Text = "From"
+        '
+        'chkNHemisphere
+        '
+        Me.chkNHemisphere.AutoSize = True
+        Me.chkNHemisphere.Location = New System.Drawing.Point(5, 127)
+        Me.chkNHemisphere.Name = "chkNHemisphere"
+        Me.chkNHemisphere.Size = New System.Drawing.Size(126, 17)
+        Me.chkNHemisphere.TabIndex = 31
+        Me.chkNHemisphere.Tag = "Northern_Hemisphere"
+        Me.chkNHemisphere.Text = "Northern Hemisphere"
+        Me.chkNHemisphere.UseVisualStyleBackColor = True
+        '
+        'lblN
+        '
+        Me.lblN.AutoSize = True
+        Me.lblN.Location = New System.Drawing.Point(273, 50)
+        Me.lblN.Name = "lblN"
+        Me.lblN.Size = New System.Drawing.Size(93, 13)
+        Me.lblN.TabIndex = 26
+        Me.lblN.Tag = "Days_for_Quantiles"
+        Me.lblN.Text = "Days for Quantiles"
+        '
+        'nudN
+        '
+        Me.nudN.Location = New System.Drawing.Point(376, 47)
+        Me.nudN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudN.Name = "nudN"
+        Me.nudN.Size = New System.Drawing.Size(36, 20)
+        Me.nudN.TabIndex = 27
+        Me.nudN.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
+        'lblMinBaseData
+        '
+        Me.lblMinBaseData.AutoSize = True
+        Me.lblMinBaseData.Location = New System.Drawing.Point(11, 159)
+        Me.lblMinBaseData.Name = "lblMinBaseData"
+        Me.lblMinBaseData.Size = New System.Drawing.Size(193, 13)
+        Me.lblMinBaseData.TabIndex = 34
+        Me.lblMinBaseData.Tag = "Minimum_Fraction_of_Base_Data_ Present"
+        Me.lblMinBaseData.Text = "Minimum Fraction of Base Data Present"
+        '
+        'nudMinBaseData
+        '
+        Me.nudMinBaseData.DecimalPlaces = 1
+        Me.nudMinBaseData.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.nudMinBaseData.Location = New System.Drawing.Point(217, 155)
+        Me.nudMinBaseData.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudMinBaseData.Name = "nudMinBaseData"
+        Me.nudMinBaseData.Size = New System.Drawing.Size(36, 20)
+        Me.nudMinBaseData.TabIndex = 35
+        Me.nudMinBaseData.Value = New Decimal(New Integer() {1, 0, 0, 65536})
+        '
+        'lblFreq
+        '
+        Me.lblFreq.AutoSize = True
+        Me.lblFreq.Location = New System.Drawing.Point(309, 3)
+        Me.lblFreq.Name = "lblFreq"
+        Me.lblFreq.Size = New System.Drawing.Size(57, 13)
+        Me.lblFreq.TabIndex = 36
+        Me.lblFreq.Tag = "Frequency"
+        Me.lblFreq.Text = "Frequency"
+        '
         'sdgClimdexIndices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 274)
-        Me.Controls.Add(Me.chkSpellDISpanYear)
-        Me.Controls.Add(Me.chkMaxSpellSpanYears)
-        Me.Controls.Add(Me.chkCenterMean)
-        Me.Controls.Add(Me.nudThreshold)
-        Me.Controls.Add(Me.lblThreshold)
-        Me.Controls.Add(Me.grpClimdexIndices)
+        Me.ClientSize = New System.Drawing.Size(526, 342)
+        Me.Controls.Add(Me.tbClimdex)
         Me.Controls.Add(Me.ucrButtonsClimdexIndices)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -812,10 +1092,22 @@ Partial Class sdgClimdexIndices
         Me.Text = "Indices"
         Me.panIndices.ResumeLayout(False)
         Me.panIndices.PerformLayout()
-        Me.grpClimdexIndices.ResumeLayout(False)
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbClimdex.ResumeLayout(False)
+        Me.TbSettings.ResumeLayout(False)
+        Me.TbSettings.PerformLayout()
+        Me.tbIndices.ResumeLayout(False)
+        Me.grpMaxMissingDays.ResumeLayout(False)
+        Me.grpMaxMissingDays.PerformLayout()
+        CType(Me.nudMothlyMissingDays, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudAnnualMissingDays, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpBaseRange.ResumeLayout(False)
+        Me.grpBaseRange.PerformLayout()
+        CType(Me.nudYearFrom, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudYearTo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudN, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMinBaseData, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -849,7 +1141,6 @@ Partial Class sdgClimdexIndices
     Friend WithEvents chkPrecExceedSpecifiedA As CheckBox
     Friend WithEvents chkMaxWetSpell As CheckBox
     Friend WithEvents chkPrecExceed99Percent As CheckBox
-    Friend WithEvents grpClimdexIndices As GroupBox
     Friend WithEvents lblThreshold As Label
     Friend WithEvents nudThreshold As NumericUpDown
     Friend WithEvents chkCenterMean As CheckBox
@@ -882,4 +1173,28 @@ Partial Class sdgClimdexIndices
     Friend WithEvents lbl4 As Label
     Friend WithEvents lbl5 As Label
     Friend WithEvents lbl1 As Label
+    Friend WithEvents tbClimdex As TabControl
+    Friend WithEvents TbSettings As TabPage
+    Friend WithEvents tbIndices As TabPage
+    Friend WithEvents ucrInputFreq As ucrInputComboBox
+    Friend WithEvents ucrMultipleInputTempQtiles As ucrMultipleInput
+    Friend WithEvents ucrMultipleInputPrecQtiles As ucrMultipleInput
+    Friend WithEvents lblPrecQuantiles As Label
+    Friend WithEvents lblTempQuantiles As Label
+    Friend WithEvents grpMaxMissingDays As GroupBox
+    Friend WithEvents nudMothlyMissingDays As NumericUpDown
+    Friend WithEvents lblMonthly As Label
+    Friend WithEvents lblAnnual As Label
+    Friend WithEvents nudAnnualMissingDays As NumericUpDown
+    Friend WithEvents grpBaseRange As GroupBox
+    Friend WithEvents nudYearFrom As NumericUpDown
+    Friend WithEvents nudYearTo As NumericUpDown
+    Friend WithEvents lblBaseRangeTo As Label
+    Friend WithEvents lblBaseRangeFrom As Label
+    Friend WithEvents chkNHemisphere As CheckBox
+    Friend WithEvents lblN As Label
+    Friend WithEvents nudN As NumericUpDown
+    Friend WithEvents lblMinBaseData As Label
+    Friend WithEvents nudMinBaseData As NumericUpDown
+    Friend WithEvents lblFreq As Label
 End Class

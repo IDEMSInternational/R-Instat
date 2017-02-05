@@ -13,20 +13,34 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports instat
 Imports instat.Translations
 Public Class sdgClimdexIndices
-    Public clsROneArg, clsRTwoArg1, clsRTwoArg2, clsRTwoArg3, clsRTwoArg4, clsRTwoArg5, clsRThreeArg As New RFunction
-    Public bFirstLoad As Boolean = True
+    Public bControlsInitialised As Boolean = False
+    Public clsNewClimdexInput As New RFunction
+    Public clsRMaxMisingDays, clsROneArg, clsRTwoArg1, clsRTwoArg2, clsRTwoArg3, clsRTwoArg4, clsRTwoArg5, clsRThreeArg As New RFunction
+    'Public bFirstLoad As Boolean = True
+
     Private Sub sdgClimdexIndices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
     End Sub
 
-    Public Sub SetDefaults()
+    Public Sub InitialiseControls()
+        clsRMaxMisingDays.SetRCommand("c")
+
+        chkNHemisphere.Checked = True
+        nudYearFrom.Value = 1961
+        nudYearTo.Value = 1990
+        nudN.Value = 5
+        nudAnnualMissingDays.Value = 15
+        nudMothlyMissingDays.Value = 3
+        nudMinBaseData.Value = 0.1
+        ucrInputFreq.cboInput.SelectedItem = "annual"
+        ucrMultipleInputPrecQtiles.txtNumericItems.Text = "0.95, 0.99"
+        ucrMultipleInputTempQtiles.txtNumericItems.Text = "0.1, 0.9"
+        ucrMultipleInputTempQtiles.bIsNumericInput = True
+        ucrMultipleInputPrecQtiles.bIsNumericInput = True
+        ucrInputFreq.SetItems({"monthly", "annual"})
         chkFrostDays.Checked = True
         chkSummerDays.Checked = False
         chkIcingDays.Checked = False
@@ -85,14 +99,34 @@ Public Class sdgClimdexIndices
         ttClimdexIndices.SetToolTip(chkPrecExceed95Percent, "Computes the annual sum of precipitation in days where daily precipitation exceeds the 95th percentile of daily precipitation in the base period ")
         ttClimdexIndices.SetToolTip(chkPrecExceed99Percent, "Computes the annual sum of precipitation in days where daily precipitation exceeds the 99th percentile of daily precipitation in the base period ")
         ttClimdexIndices.SetToolTip(chkTotalDailyPrec, "Computes the annual sum of precipitation in wet days (days where precipitation is at least 1mm). ")
-        clsROneArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        clsRTwoArg1.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        clsRTwoArg2.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        'clsROneArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        'clsRTwoArg1.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        'clsRTwoArg2.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        'clsRTwoArg2.AddParameter("gsl.mode", Chr(34) & "GSL" & Chr(34))
+        'clsRTwoArg3.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        'clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        'clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        'clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+
+        clsROneArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+        clsRTwoArg1.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+        clsRTwoArg2.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRTwoArg2.AddParameter("gsl.mode", Chr(34) & "GSL" & Chr(34))
-        clsRTwoArg3.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
+        clsRTwoArg3.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+        clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+        clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+        clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+
+        bControlsInitialised = True
+    End Sub
+
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsNewClimdexInput = clsNewRFunction
+        SetRCode(Me, clsNewClimdexInput, bReset)
+        'include all the other rfunctions
     End Sub
 
     Private Sub nudThreshold_ValueChanged(sender As Object, e As EventArgs) Handles nudThreshold.ValueChanged
@@ -236,5 +270,79 @@ Public Class sdgClimdexIndices
             clsROneArg.SetRCommand("climdex.prcptot")
             frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
+    End Sub
+
+    Private Sub nudYearFromTo_ValueChanged(sender As Object, e As EventArgs) Handles nudYearFrom.ValueChanged, nudYearTo.ValueChanged
+        dlgClimdex.clsDefaultFunction.AddParameter("base.range", "c(" & nudYearFrom.Value & "," & nudYearTo.Value & ")")
+        If nudYearFrom.Value = 1961 AndAlso nudYearTo.Value = 1990 Then
+            dlgClimdex.clsDefaultFunction.RemoveParameterByName("base.range")
+        End If
+    End Sub
+
+    Private Sub nudN_ValueChanged(sender As Object, e As EventArgs) Handles nudN.ValueChanged
+        dlgClimdex.clsDefaultFunction.AddParameter("n", nudN.Value)
+        If nudN.Value = 5 Then
+            dlgClimdex.clsDefaultFunction.RemoveParameterByName("n")
+        End If
+    End Sub
+
+    Private Sub chkNHemisphere_CheckedChanged(sender As Object, e As EventArgs) Handles chkNHemisphere.CheckedChanged
+        If chkNHemisphere.Checked Then
+            dlgClimdex.clsDefaultFunction.RemoveParameterByName("northern.hemisphere")
+        Else
+            dlgClimdex.clsDefaultFunction.AddParameter("northern.hemisphere", "FALSE")
+        End If
+    End Sub
+
+    Private Sub nudAnnualMaxMissingDays_ValueChanged(sender As Object, e As EventArgs) Handles nudAnnualMissingDays.ValueChanged
+        clsRMaxMisingDays.AddParameter("annual", nudAnnualMissingDays.Value)
+        If nudAnnualMissingDays.Value = 15 AndAlso nudMothlyMissingDays.Value = 3 Then
+            dlgClimdex.clsDefaultFunction.RemoveParameterByName("max.missing.days")
+        Else
+            dlgClimdex.clsDefaultFunction.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
+        End If
+    End Sub
+
+    Private Sub nudMonthlyMaxMissingDays_ValueChanged(sender As Object, e As EventArgs) Handles nudMothlyMissingDays.ValueChanged
+        clsRMaxMisingDays.AddParameter("monthly", nudMothlyMissingDays.Value)
+        If nudAnnualMissingDays.Value = 15 AndAlso nudMothlyMissingDays.Value = 3 Then
+            dlgClimdex.clsDefaultFunction.RemoveParameterByName("max.missing.days")
+        Else
+            dlgClimdex.clsDefaultFunction.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
+        End If
+    End Sub
+
+    Private Sub nudMinBaseData_ValueChanged(sender As Object, e As EventArgs) Handles nudMinBaseData.ValueChanged
+        dlgClimdex.clsDefaultFunction.AddParameter("min.base.data.fraction.present ", nudMinBaseData.Value)
+        If nudMinBaseData.Value = 0.1 Then
+            dlgClimdex.clsDefaultFunction.RemoveParameterByName("min.base.data.fraction.present ")
+        End If
+    End Sub
+
+    Private Sub ucrMultipleInputPrecQtiles_Leave(sender As Object, e As EventArgs) Handles ucrMultipleInputPrecQtiles.Leave
+        If ucrMultipleInputPrecQtiles.txtNumericItems.Text <> "0.95, 0.99" Then
+            dlgClimdex.clsDefaultFunction.AddParameter("prec.qtiles", ucrMultipleInputPrecQtiles.clsNumericList.ToScript)
+        Else
+            dlgClimdex.clsDefaultFunction.RemoveParameterByName("prec.qtiles")
+        End If
+    End Sub
+
+    Private Sub ucrMultipleInputTempQtiles_Leave(sender As Object, e As EventArgs) Handles ucrMultipleInputTempQtiles.Leave
+        If ucrMultipleInputTempQtiles.txtNumericItems.Text <> "0.1, 0.9" Then
+            dlgClimdex.clsDefaultFunction.AddParameter("temp.qtiles", ucrMultipleInputTempQtiles.clsNumericList.ToScript)
+        Else
+            dlgClimdex.clsDefaultFunction.RemoveParameterByName("temp.qtiles")
+        End If
+    End Sub
+
+    Private Sub ucrInputFreq_Leave(sender As Object, e As EventArgs) Handles ucrInputFreq.Leave
+        Select Case ucrInputFreq.GetText
+            Case "annual"
+                clsRTwoArg1.AddParameter("freq", Chr(34) & "annual" & Chr(34))
+                clsRThreeArg.AddParameter("freq", Chr(34) & "annual" & Chr(34))
+            Case "monthly"
+                clsRTwoArg1.AddParameter("freq", Chr(34) & "monthly" & Chr(34))
+                clsRThreeArg.AddParameter("freq", Chr(34) & "monthly" & Chr(34))
+        End Select
     End Sub
 End Class
