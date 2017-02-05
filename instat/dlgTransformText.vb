@@ -42,6 +42,7 @@ Public Class dlgTransformText
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 343
+        ucrBase.clsRsyntax.bUseBaseFunction = True
 
         'ucrReceiver
         ucrReceiverTransformText.SetParameter(New RParameter("string", 0))
@@ -51,7 +52,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.SetMeAsReceiver()
         ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
 
-
+        'ucrRdoOptions
         ucrPnlOperation.AddRadioButton(rdoConvertCase)
         ucrPnlOperation.AddRadioButton(rdoLength)
         ucrPnlOperation.AddRadioButton(rdoPad)
@@ -66,16 +67,17 @@ Public Class dlgTransformText
         ucrPnlOperation.AddFunctionNamesCondition(rdoWords, "stringr::word")
         ucrPnlOperation.AddFunctionNamesCondition(rdoSubstring, "stringr::str_sub")
 
-
+        'rdoConvertCase
         ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputTo
         ucrInputTo.SetLinkedDisplayControl(lblTo)
+
+
         ucrInputTo.cboInput.Items.Add("Lower")
         ucrInputTo.cboInput.Items.Add("Upper")
         ucrInputTo.cboInput.Items.Add("Title")
         ucrInputTo.SetName("Lower")
-
 
         'Case "Lower"
         'ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
@@ -85,56 +87,41 @@ Public Class dlgTransformText
         'ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
         'End Select
 
+
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputPad
-        ucrInputPad.cboInput.Items.Add("Space")
-        ucrInputPad.cboInput.Items.Add("Hash")
-        ucrInputPad.cboInput.Items.Add("Hyphen")
-        ucrInputPad.cboInput.Items.Add("Period")
-        ucrInputPad.cboInput.Items.Add("Underscore")
-        ucrInputPad.cboInput.MaxLength = 1
-        ucrInputPad.SetName("Space")
-        If rdoPad.Checked Then
-            If rdoRightPad.Checked Or rdoLeftPad.Checked Or rdoBothPad.Checked Then
-                Select Case ucrInputPad.GetText
-                    Case "Space"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & " " & Chr(34))
-                    Case "Hash"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "#" & Chr(34))
-                    Case "Hyphen"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "-" & Chr(34))
-                    Case "Period"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "." & Chr(34))
-                    Case "Underscore"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "_" & Chr(34))
-                    Case Else
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
-                End Select
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("pad")
-        End If
+        Dim dctInputPad As New Dictionary(Of String, String)
+        ucrInputPad.SetParameter(New RParameter("pad", ))
+        dctInputPad.Add("Space", Chr(34) & " " & Chr(34))
+        dctInputPad.Add("Hash", Chr(34) & "#" & Chr(34))
+        dctInputPad.Add("Hyphen", Chr(34) & "-" & Chr(34))
+        dctInputPad.Add("Period", Chr(34) & "." & Chr(34))
+        dctInputPad.Add("Underscore", Chr(34) & "_" & Chr(34))
+        ' case of else: ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
+        ucrInputPad.SetItems(dctInputPad)
+        'space is default
+        ''("pad", Chr(34) & " " & Chr(34)) - do I do this for clsDefaultFunction or not? It's not always going to be in.
 
         'ucrPnlPad
         ucrPnlPad.SetParameter(New RParameter("side", ))
         ucrPnlPad.AddRadioButton(rdoLeftPad, Chr(34) & "left" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoRightPad, Chr(34) & "right" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoBothPad, Chr(34) & "both" & Chr(34))
-        ' default
+        '("side", Chr(34) & "left" & Chr(34)) - do I do this for clsDefaultFunction or not? It's not always going to be in.
+
 
         'ucrNudWidth
         ucrNudWidth.SetParameter(New RParameter("width", ))
         ucrNudWidth.SetLinkedDisplayControl(lblWidth)
-
+        '.addparameter("width", 1)
 
         'rdoTrim
         ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrPnlPad code from above
+        'uses ucrPnlPad code from above
 
         'rdoWords
         ucrPnlOperation.AddToLinkedControls(ucrChkFirstOrColumn, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -158,25 +145,20 @@ Public Class dlgTransformText
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
         ' nud last word stuff
         '            ucrBase.clsRsyntax.AddParameter("end", nudLastWord.Value)
-        lblLastWord.Visible = True
-        nudLastWord.Visible = True
+        'lblLastWord.Visible = True
+        'nudLastWord.Visible = True
+        'value=1
 
         ' ucrInputSeparator
-        Select Case ucrInputSeparator.GetText
-            Case "Space"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & " " & Chr(34))
-            Case "Period"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "." & Chr(34))
-            Case "Colon"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ":" & Chr(34))
-            Case "Underscore"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "_" & Chr(34))
-            Case Else
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
-        End Select
-
-        ucrInputSeparator.Visible = True
-        lblSeparator.Visible = True
+        Dim dctInputSeparator As New Dictionary(Of String, String)
+        ucrInputSeparator.SetParameter(New RParameter("sep"))
+        dctInputSeparator.Add("Space", Chr(34) & " " & Chr(34))
+        dctInputSeparator.Add("Colon", Chr(34) & ":" & Chr(34))
+        dctInputSeparator.Add("Period", Chr(34) & "." & Chr(34))
+        dctInputSeparator.Add("Underscore", Chr(34) & "_" & Chr(34))
+        ' case of else: ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
+        ucrInputPad.SetItems(dctInputSeparator)
+        ucrInputPad.SetLinkedDisplayControl(lblSeparator)
 
 
         'rdoSubstring
@@ -186,13 +168,11 @@ Public Class dlgTransformText
         'ucrNud
         ucrNudFrom.SetParameter(New RParameter("start", ))
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+        '.AddParameter("start", -1)
 
         ucrNudTo.SetParameter(New RParameter("end", ))
         ucrNudTo.SetLinkedDisplayControl(lblTo)
-
-
-
-        ucrBase.clsRsyntax.bUseBaseFunction = True
+        '.AddParameter("end", 1)
 
         'ucrNewColName
         ucrNewColName.SetIsTextBox()
@@ -208,28 +188,17 @@ Public Class dlgTransformText
 
     Private Sub SetDefaults()
         rdoConvertCase.Checked = True
+        'ucrInputSeparator.ResetText()
+        'ucrInputPad.ResetText()
+        'ucrInputTo.ResetText()
+
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorForTransformText.Reset()
-        ucrSelectorForTransformText.Focus()
-        ' ucrInputPrefixForNewColumn.ResetText()
-        ucrInputSeparator.ResetText()
-        ucrInputPad.ResetText()
-        ucrInputTo.ResetText()
-        rdoWords.Checked = False
-        'rdoLeftTrim.Checked = True
-        rdoLeftPad.Checked = True
-        rdoTrim.Checked = False
-        rdoPad.Checked = False
-        rdoLength.Checked = False
-        'nudFrom.Value = 1
-        'nudTo.Value = -1
-        'nudWidth.Value = 1
-        ucrInputSeparator.SetName("Space")
-        ucrInputPad.SetName("Space")
-        'If (ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
-        'ucrInputPrefixForNewColumn.SetName(ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Transformed")
-        'End If
-        'nudFirstWord.Value = 1
-        'nudLastWord.Value = 1
+
+        clsDefaultFunction.SetRCommand("") ' first check box, which changes
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -297,33 +266,6 @@ Public Class dlgTransformText
     'End If
     'End If
     'End Sub
-
-    Private Sub ucrInputPad_NameChanged() Handles ucrInputPad.NameChanged
-        SeperatorParameter()
-    End Sub
-
-    Private Sub SeperatorParameter()
-        If rdoPad.Checked Then
-            If rdoRightPad.Checked Or rdoLeftPad.Checked Or rdoBothPad.Checked Then
-                Select Case ucrInputPad.GetText
-                    Case "Space"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & " " & Chr(34))
-                    Case "Hash"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "#" & Chr(34))
-                    Case "Hyphen"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "-" & Chr(34))
-                    Case "Period"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "." & Chr(34))
-                    Case "Underscore"
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "_" & Chr(34))
-                    Case Else
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
-                End Select
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("pad")
-        End If
-    End Sub
 
     Private Sub nudFirstWord_TextChanged(sender As Object, e As EventArgs)
         '        If rdoWords.Checked Then
@@ -394,10 +336,6 @@ Public Class dlgTransformText
         'End If
     End Sub
 
-    Private Sub nudFrom_TextCanged(sender As Object, e As EventArgs)
-        NudFromParameter()
-    End Sub
-
     Private Sub NudFromParameter()
         '     If rdoSubstring.Checked Then
         '    ucrBase.clsRsyntax.AddParameter("start", nudFrom.Value)
@@ -412,11 +350,6 @@ Public Class dlgTransformText
         '      Else
         '     ucrBase.clsRsyntax.RemoveParameter("end")
         '    End If
-    End Sub
-
-    Private Sub ucrInputPrefixForNewColumn_NameChanged()
-        ' ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPrefixForNewColumn.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPrefixForNewColumn.GetText)
-        'TestOkEnabled()
     End Sub
 
     Private Sub LastWordParameter()
