@@ -13,49 +13,78 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports instat
 Imports instat.Translations
 Public Class dlgWaterBalance
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
 
-    Private Sub UcrButtons1_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+    Private Sub dlgWaterBalance_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$display_water_balance()")
-        ucrBase.clsRsyntax.iCallType = 1
-        'frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
-        'frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOKEnabled()
         Me.Hide()
     End Sub
-    Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'UpdateVisible()
-        autoTranslate(Me)
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 1
+
+        'ucrNud
+        ucrNudDecimalPlace.SetParameter(New RParameter("decimal_places", ))
+        ucrNudEvaporation.SetParameter(New RParameter("evaporation", ))
+        ucrNudMaxCapacity.SetParameter(New RParameter("capacity_max", ))
+
+        'ucrChk
+        'ucrChkMonthAbbreviations.SetParameter(New RParameter("", ))
+        ucrChkMonthAbbreviations.SetText("Month Abbreviations")
+
+        ucrChkPrintTables.SetParameter(New RParameter("print_tables", ))
+        ucrChkPrintTables.SetText("Print Tables")
+    End Sub
+
+    'frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
+    'frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        clsDefaultFunction.SetRCommand("climate_obj$display_water_balance()")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
     End Sub
 
     Private Sub txtColunmName_Leave(sender As Object, e As EventArgs) Handles txtColumnName.Leave
         ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & txtColumnName.Text & Chr(34))
+        ' kept this as this for now, not sure what we want from the code with this (i.e., ucrSave eventually? or ucrReceiver? etc)
     End Sub
 
-    Private Sub nudEvapration_Leave(sender As Object, e As EventArgs) Handles nudEvaporation.Leave
-        ucrBase.clsRsyntax.AddParameter("evaporation", nudEvaporation.Value)
-    End Sub
-
-    Private Sub nudDecimalPlace_Leave(sender As Object, e As EventArgs) Handles nudDecimalPlace.Leave
-
-        ucrBase.clsRsyntax.AddParameter("decimal_places", nudDecimalPlace.Value)
-    End Sub
     Private Sub txtDisplayDayName_Leave(sender As Object, e As EventArgs) Handles txtDisplayDayName.Leave
-
         ucrBase.clsRsyntax.AddParameter("day_display", txtDisplayDayName.Text)
+        ' kept this as this for now, not sure what we want from the code with this (i.e., ucrSave eventually? or ucrReceiver? etc)
     End Sub
 
-    Private Sub nudMaximumCapacity_Leave(sender As Object, e As EventArgs) Handles nudMaximumCapacity.Leave
-
-        ucrBase.clsRsyntax.AddParameter("capacity_max", nudMaximumCapacity.Value)
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
-    Private Sub chkPrintTable_Leave(sender As Object, e As EventArgs) Handles chkPrintTable.Leave
-        If chkPrintTable.Checked Then
-            ucrBase.clsRsyntax.AddParameter("print_tables", chkPrintTable.Checked.ToString.ToUpper())
 
-        End If
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
+
+    'ControlContentsChanged
 
 End Class

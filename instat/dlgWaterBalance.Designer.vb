@@ -23,9 +23,6 @@ Partial Class dlgWaterBalance
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.nudEvaporation = New System.Windows.Forms.NumericUpDown()
-        Me.nudMaximumCapacity = New System.Windows.Forms.NumericUpDown()
-        Me.nudDecimalPlace = New System.Windows.Forms.NumericUpDown()
         Me.txtDisplayDayName = New System.Windows.Forms.TextBox()
         Me.txtColumnName = New System.Windows.Forms.TextBox()
         Me.lblDisplayDayName = New System.Windows.Forms.Label()
@@ -33,43 +30,19 @@ Partial Class dlgWaterBalance
         Me.lblEvaporation = New System.Windows.Forms.Label()
         Me.lblMaximumCapacity = New System.Windows.Forms.Label()
         Me.lblColumnName = New System.Windows.Forms.Label()
-        Me.chkPrintTable = New System.Windows.Forms.CheckBox()
-        Me.chkMonthAbbreviations = New System.Windows.Forms.CheckBox()
-        CType(Me.nudEvaporation, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMaximumCapacity, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudDecimalPlace, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrChkMonthAbbreviations = New instat.ucrCheck()
+        Me.ucrChkPrintTables = New instat.ucrCheck()
+        Me.ucrNudMaxCapacity = New instat.ucrNud()
+        Me.ucrNudEvaporation = New instat.ucrNud()
+        Me.ucrNudDecimalPlace = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(55, 245)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 219)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 0
-        '
-        'nudEvaporation
-        '
-        Me.nudEvaporation.Location = New System.Drawing.Point(171, 104)
-        Me.nudEvaporation.Name = "nudEvaporation"
-        Me.nudEvaporation.Size = New System.Drawing.Size(60, 20)
-        Me.nudEvaporation.TabIndex = 1
-        Me.nudEvaporation.Tag = "Evaporation"
-        '
-        'nudMaximumCapacity
-        '
-        Me.nudMaximumCapacity.Location = New System.Drawing.Point(171, 78)
-        Me.nudMaximumCapacity.Name = "nudMaximumCapacity"
-        Me.nudMaximumCapacity.Size = New System.Drawing.Size(60, 20)
-        Me.nudMaximumCapacity.TabIndex = 2
-        Me.nudMaximumCapacity.Tag = "Maximum_Capacity"
-        '
-        'nudDecimalPlace
-        '
-        Me.nudDecimalPlace.Location = New System.Drawing.Point(171, 130)
-        Me.nudDecimalPlace.Maximum = New Decimal(New Integer() {3, 0, 0, 0})
-        Me.nudDecimalPlace.Name = "nudDecimalPlace"
-        Me.nudDecimalPlace.Size = New System.Drawing.Size(60, 20)
-        Me.nudDecimalPlace.TabIndex = 3
         '
         'txtDisplayDayName
         '
@@ -137,35 +110,78 @@ Partial Class dlgWaterBalance
         Me.lblColumnName.Tag = "Column_Name"
         Me.lblColumnName.Text = "Label7"
         '
-        'chkPrintTable
+        'ucrChkMonthAbbreviations
         '
-        Me.chkPrintTable.AutoSize = True
-        Me.chkPrintTable.Location = New System.Drawing.Point(324, 194)
-        Me.chkPrintTable.Name = "chkPrintTable"
-        Me.chkPrintTable.Size = New System.Drawing.Size(81, 17)
-        Me.chkPrintTable.TabIndex = 14
-        Me.chkPrintTable.Tag = "Print_Table"
-        Me.chkPrintTable.Text = "CheckBox1"
-        Me.chkPrintTable.UseVisualStyleBackColor = True
+        Me.ucrChkMonthAbbreviations.bAddRemoveParameter = True
+        Me.ucrChkMonthAbbreviations.bChangeParameterValue = True
+        Me.ucrChkMonthAbbreviations.Checked = False
+        Me.ucrChkMonthAbbreviations.Location = New System.Drawing.Point(12, 193)
+        Me.ucrChkMonthAbbreviations.Name = "ucrChkMonthAbbreviations"
+        Me.ucrChkMonthAbbreviations.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMonthAbbreviations.TabIndex = 16
         '
-        'chkMonthAbbreviations
+        'ucrChkPrintTables
         '
-        Me.chkMonthAbbreviations.AutoSize = True
-        Me.chkMonthAbbreviations.Location = New System.Drawing.Point(113, 194)
-        Me.chkMonthAbbreviations.Name = "chkMonthAbbreviations"
-        Me.chkMonthAbbreviations.Size = New System.Drawing.Size(81, 17)
-        Me.chkMonthAbbreviations.TabIndex = 15
-        Me.chkMonthAbbreviations.Tag = "Month_Abbreviations"
-        Me.chkMonthAbbreviations.Text = "CheckBox1"
-        Me.chkMonthAbbreviations.UseVisualStyleBackColor = True
+        Me.ucrChkPrintTables.bAddRemoveParameter = True
+        Me.ucrChkPrintTables.bChangeParameterValue = True
+        Me.ucrChkPrintTables.Checked = False
+        Me.ucrChkPrintTables.Location = New System.Drawing.Point(159, 193)
+        Me.ucrChkPrintTables.Name = "ucrChkPrintTables"
+        Me.ucrChkPrintTables.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPrintTables.TabIndex = 17
+        '
+        'ucrNudMaxCapacity
+        '
+        Me.ucrNudMaxCapacity.bAddRemoveParameter = True
+        Me.ucrNudMaxCapacity.bChangeParameterValue = True
+        Me.ucrNudMaxCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxCapacity.Location = New System.Drawing.Point(159, 84)
+        Me.ucrNudMaxCapacity.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxCapacity.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxCapacity.Name = "ucrNudMaxCapacity"
+        Me.ucrNudMaxCapacity.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxCapacity.TabIndex = 18
+        Me.ucrNudMaxCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudEvaporation
+        '
+        Me.ucrNudEvaporation.bAddRemoveParameter = True
+        Me.ucrNudEvaporation.bChangeParameterValue = True
+        Me.ucrNudEvaporation.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudEvaporation.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudEvaporation.Location = New System.Drawing.Point(159, 111)
+        Me.ucrNudEvaporation.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudEvaporation.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudEvaporation.Name = "ucrNudEvaporation"
+        Me.ucrNudEvaporation.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudEvaporation.TabIndex = 19
+        Me.ucrNudEvaporation.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudDecimalPlace
+        '
+        Me.ucrNudDecimalPlace.bAddRemoveParameter = True
+        Me.ucrNudDecimalPlace.bChangeParameterValue = True
+        Me.ucrNudDecimalPlace.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimalPlace.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDecimalPlace.Location = New System.Drawing.Point(159, 137)
+        Me.ucrNudDecimalPlace.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDecimalPlace.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimalPlace.Name = "ucrNudDecimalPlace"
+        Me.ucrNudDecimalPlace.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDecimalPlace.TabIndex = 20
+        Me.ucrNudDecimalPlace.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(464, 277)
-        Me.Controls.Add(Me.chkMonthAbbreviations)
-        Me.Controls.Add(Me.chkPrintTable)
+        Me.Controls.Add(Me.ucrNudDecimalPlace)
+        Me.Controls.Add(Me.ucrNudEvaporation)
+        Me.Controls.Add(Me.ucrNudMaxCapacity)
+        Me.Controls.Add(Me.ucrChkPrintTables)
+        Me.Controls.Add(Me.ucrChkMonthAbbreviations)
         Me.Controls.Add(Me.lblColumnName)
         Me.Controls.Add(Me.lblMaximumCapacity)
         Me.Controls.Add(Me.lblEvaporation)
@@ -173,9 +189,6 @@ Partial Class dlgWaterBalance
         Me.Controls.Add(Me.lblDisplayDayName)
         Me.Controls.Add(Me.txtColumnName)
         Me.Controls.Add(Me.txtDisplayDayName)
-        Me.Controls.Add(Me.nudDecimalPlace)
-        Me.Controls.Add(Me.nudMaximumCapacity)
-        Me.Controls.Add(Me.nudEvaporation)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -184,18 +197,12 @@ Partial Class dlgWaterBalance
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Water_Balance"
         Me.Text = "dlgWaterBalance"
-        CType(Me.nudEvaporation, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMaximumCapacity, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudDecimalPlace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents nudEvaporation As NumericUpDown
-    Friend WithEvents nudMaximumCapacity As NumericUpDown
-    Friend WithEvents nudDecimalPlace As NumericUpDown
     Friend WithEvents txtDisplayDayName As TextBox
     Friend WithEvents txtColumnName As TextBox
     Friend WithEvents lblDisplayDayName As Label
@@ -203,6 +210,9 @@ Partial Class dlgWaterBalance
     Friend WithEvents lblEvaporation As Label
     Friend WithEvents lblMaximumCapacity As Label
     Friend WithEvents lblColumnName As Label
-    Friend WithEvents chkPrintTable As CheckBox
-    Friend WithEvents chkMonthAbbreviations As CheckBox
+    Friend WithEvents ucrChkMonthAbbreviations As ucrCheck
+    Friend WithEvents ucrChkPrintTables As ucrCheck
+    Friend WithEvents ucrNudMaxCapacity As ucrNud
+    Friend WithEvents ucrNudEvaporation As ucrNud
+    Friend WithEvents ucrNudDecimalPlace As ucrNud
 End Class
