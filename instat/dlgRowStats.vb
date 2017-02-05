@@ -85,7 +85,7 @@ Public Class dlgRowStats
         ucrSaveResults.SetPrefix("row_summary")
         ucrSaveResults.SetSaveTypeAsColumn()
         ucrSaveResults.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
-        ucrSaveResults.SetLabelText("Row Summary")
+        ucrSaveResults.SetLabelText("Row Summary:")
         ucrSaveResults.SetIsComboBox()
     End Sub
 
@@ -95,7 +95,7 @@ Public Class dlgRowStats
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForRowStats.ControlContentsChanged, ucrReceiverForRowStatistics.ControlContentsChanged, ucrSaveResults.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowStatistics.ControlContentsChanged, ucrSaveResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
