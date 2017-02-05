@@ -79,7 +79,7 @@ Public Class ucrCheck
         End Set
     End Property
 
-    Public Overrides Function ValueContainedIn(lstTemp As Object()) As Boolean
+    Public Overrides Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Dim bTempValue As Boolean
         Dim bContainedIn As Boolean = False
 
