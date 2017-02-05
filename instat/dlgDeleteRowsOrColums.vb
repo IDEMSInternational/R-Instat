@@ -71,7 +71,12 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub ReopenDialog()
-        ucrNudRowsToDelete.Maximum = ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength
+        If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            Try
+                ucrNudRowsToDelete.Maximum = frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            Catch ex As Exception
+            End Try
+        End If
         'temp fix to receiver containing deleted column on reopen
         ucrReceiverForColumnsToDelete.Clear()
     End Sub
