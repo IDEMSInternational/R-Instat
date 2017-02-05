@@ -42,7 +42,7 @@ Public Class dlgClimdex
         ucrSelectorClimdex.Reset()
         ucrSelectorClimdex.Focus()
         ucrReceiverDate.SetMeAsReceiver()
-        sdgClimdexIndices.InitialiseControls()
+        'sdgClimdexIndices.InitialiseControls()
 
 
         'chkNHemisphere.Checked = True
@@ -75,9 +75,6 @@ Public Class dlgClimdex
 
         clsRChar.AddParameter("x", clsRFunctionParameter:=clsRDate)
         clsRPCIct.AddParameter("x", clsRFunctionParameter:=clsRChar)
-        'clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
-        'clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-        'clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
         clsDefaultFunction.SetAssignTo("climdex_input")
 
         ' Set default RFunction as the base function
@@ -90,7 +87,7 @@ Public Class dlgClimdex
         ucrBaseClimdex.clsRsyntax.AddParameter("prec", clsRFunctionParameter:=clsRPrec)
         ucrBaseClimdex.clsRsyntax.AddParameter("prec.dates", clsRFunctionParameter:=clsRPCIct)
         bResetSubdialog = True
-        TestOkEnabled()
+        'TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -126,9 +123,9 @@ Public Class dlgClimdex
         'ucrMultipleInputTempQtiles.bIsNumericInput = True
         'ucrMultipleInputPrecQtiles.bIsNumericInput = True
 
-        ucrReceiverTmax.Selector = ucrSelectorClimdex
-        ucrReceiverTmin.Selector = ucrSelectorClimdex
-        ucrReceiverPrec.Selector = ucrSelectorClimdex
+        'ucrReceiverTmax.Selector = ucrSelectorClimdex
+        'ucrReceiverTmin.Selector = ucrSelectorClimdex
+        'ucrReceiverPrec.Selector = ucrSelectorClimdex
         'ucrInputFreq.SetItems({"monthly", "annual"})
         AssignName()
     End Sub
@@ -143,17 +140,15 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub ReopenDialog()
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         'SetRCode(Me, ucrBaseClimdex.clsRsyntax.clsBaseFunction, bReset)
-
-        'ucrSelectorClimdex.SetRCode(clsRDate, bReset)
-
-        'The commented will be enabled once the controls can be set to more than one function
-        'ucrSelectorClimdex.SetRCode(clsRTmax, bReset)
-        'ucrSelectorClimdex.SetRCode(clsRTmin, bReset)
-        'ucrSelectorClimdex.SetRCode(clsRPrec, bReset)
+        ucrSelectorClimdex.SetRCode(clsRDate, bReset)
+        ucrSelectorClimdex.SetRCode(clsRTmax, bReset)
+        ucrSelectorClimdex.SetRCode(clsRTmin, bReset)
+        ucrSelectorClimdex.SetRCode(clsRPrec, bReset)
         ucrReceiverDate.SetRCode(clsRDate, bReset)
         ucrReceiverTmax.SetRCode(clsRTmax, bReset)
         ucrReceiverTmin.SetRCode(clsRTmin, bReset)
@@ -203,12 +198,12 @@ Public Class dlgClimdex
         End If
     End Sub
 
-    Private Sub AddDataFrameParameter()
-        clsRDate.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsRTmax.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsRTmin.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsRPrec.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
+    'Private Sub AddDataFrameParameter()
+    'clsRDate.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    'clsRTmax.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    'clsRTmin.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    'clsRPrec.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    'End Sub
 
 
     'Private Sub ucrReceiverTmax_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverTmax.SelectionChanged
@@ -344,7 +339,7 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimdex.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged
-        AddDataFrameParameter()
+        'AddDataFrameParameter()
         TestOkEnabled()
     End Sub
 End Class
