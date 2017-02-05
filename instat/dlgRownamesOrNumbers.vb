@@ -33,8 +33,6 @@ Public Class dlgRowNamesOrNumbers
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
-
         TestOKEnabled()
     End Sub
 
@@ -45,6 +43,7 @@ Public Class dlgRowNamesOrNumbers
             ucrBase.OKEnabled(True)
         End If
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 178
 
@@ -55,6 +54,7 @@ Public Class dlgRowNamesOrNumbers
 
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoCopytoFirstColumn, frmMain.clsRLink.strInstatDataObject & "$get_row_names")
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoCopyfromColumn, frmMain.clsRLink.strInstatDataObject & "$set_row_names")
+        ucrPnlOverallOptions.AddParameterPresentCondition(rdoCopyfromColumn, "row_names")
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoResetintoPositiveIntegers, frmMain.clsRLink.strInstatDataObject & "$set_row_names")
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoSortbyRowNames, frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
 
@@ -63,12 +63,15 @@ Public Class dlgRowNamesOrNumbers
         ucrPnlOverallOptions.AddToLinkedControls(ucrPnlSortOptions, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrChkAsNumeric, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ' i need to code these ucrs still
+        'ucrPnlSortOptions
+        ucrPnlSortOptions.SetParameter(New RParameter("decreasing", 3))
+        ucrPnlSortOptions.AddRadioButton(rdoSortAscending, "FALSE")
+        ucrPnlSortOptions.AddRadioButton(rdoSortDescending, "TRUE")
+        ucrPnlSortOptions.SetRDefault("TRUE")
 
         ' selector
         ucrSelectorRowNames.SetParameter(New RParameter("data_name", 0))
         ucrSelectorRowNames.SetParameterIsString()
-        '        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.strCurrentDataFrame & Chr(34))
 
         'ucrNewColumnName
         ucrNewColumnName.SetIsTextBox()
@@ -76,6 +79,7 @@ Public Class dlgRowNamesOrNumbers
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRowNames.ucrAvailableDataFrames)
         ucrNewColumnName.SetLabelText("Column Name:")
+        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
 
         'ucrReceiverSingle
         ucrReceiverRowNames.SetParameter(New RParameter("row_names", 1))
@@ -83,61 +87,29 @@ Public Class dlgRowNamesOrNumbers
         ucrReceiverRowNames.Selector = ucrSelectorRowNames
         ucrReceiverRowNames.SetMeAsReceiver()
 
-        'ucrPnlSortOptions
-        ucrPnlSortOptions.SetParameter(New RParameter("decreasing", 3))
-        ucrPnlSortOptions.AddRadioButton(rdoSortAscending, "FALSE")
-        ucrPnlSortOptions.AddRadioButton(rdoSortDescending, "TRUE")
-        ucrPnlSortOptions.SetRDefault(Chr(34) & "TRUE" & Chr(34)) ' check
-
         'ucrChkAsNumeric
         ucrChkAsNumeric.SetParameter(New RParameter("row_names_as_numeric"))
         ucrChkAsNumeric.SetText("Treat Row Names as Numeric")
         ucrChkAsNumeric.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAsNumeric.SetRDefault("TRUE")
-
-        'If chkAsNumeric.Checked Then
-        '  If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-        '      ucrBase.clsRsyntax.AddParameter("row_names_as_numeric", "TRUE")
-        '   Else
-        '      ucrBase.clsRsyntax.RemoveParameter("row_names_as_numeric")
-        '   End If
-        'Else
-        '  ucrBase.clsRsyntax.AddParameter("row_names_as_numeric", "FALSE")
-        'End If
     End Sub
-
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
 
-        'rdoSortAscending.Checked = True
-
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
-        'clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
-        ' where do I do set assign to? I want it for just the first RDO button
-
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
-
-    Private Sub ReopenDialog()
-        ' ToBeAssigned/IsAssigned values get reset after running script 
-        ' so need to be redone here
-        SetAssignment()
-    End Sub
-
-    '   Private Sub rdoOptionSettings_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCopytoFirstColumn.CheckedChanged, rdoCopyfromColumn.CheckedChanged, rdoResetintoPositiveIntegers.CheckedChanged, rdoSortbyRowNames.CheckedChanged
-    '       OptionSettings()
-    '       TestOKEnabled()
-    '   End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOverallOptions.ControlValueChanged
         If rdoCopyfromColumn.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
-            ucrSelectorRowNames.SetVariablesEnabled(True)
+            ucrSelectorRowNames.SetVariablesVisible(True)
         Else
-            ucrSelectorRowNames.SetVariablesEnabled(False)
+            ucrSelectorRowNames.SetVariablesVisible(False)
             If rdoCopytoFirstColumn.Checked Then
                 ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
             ElseIf rdoResetintoPositiveIntegers.Checked Then
@@ -145,48 +117,6 @@ Public Class dlgRowNamesOrNumbers
             ElseIf rdoSortbyRowNames.Checked Then
                 ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
             End If
-        End If
-        SetAssignment()
-    End Sub
-
-
-    '   Private Sub SetSortOrderParameter()
-    '  If rdoSortbyRowNames.Checked Then
-    ' If rdoSortAscending.Checked Then
-    'If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-    '               ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
-    'Else
-    '               ucrBase.clsRsyntax.RemoveParameter("decreasing")
-    'End If
-    'ElseIf rdoSortDescending.Checked Then
-    '           ucrBase.clsRsyntax.AddParameter("decreasing", "TRUE")
-    'End If
-    'Else
-    '       ucrBase.clsRsyntax.RemoveParameter("decreasing")
-    'End If
-    'End Sub
-
-    '   Private Sub SetAsNumericParameter()
-    '  If rdoSortbyRowNames.Checked Then
-    ' If chkAsNumeric.Checked Then
-    'If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-    '               ucrBase.clsRsyntax.AddParameter("row_names_as_numeric", "TRUE")
-    'Else
-    '               ucrBase.clsRsyntax.RemoveParameter("row_names_as_numeric")
-    'End If
-    'Else
-    '           ucrBase.clsRsyntax.AddParameter("row_names_as_numeric", "FALSE")
-    'End If
-    'Else
-    '       ucrBase.clsRsyntax.RemoveParameter("row_names_as_numeric")
-    'End If
-    'End Sub
-
-    Private Sub SetAssignment()
-        If rdoCopytoFirstColumn.Checked AndAlso ucrNewColumnName.IsComplete() Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
-        Else
-            ucrBase.clsRsyntax.RemoveAssignTo()
         End If
     End Sub
 

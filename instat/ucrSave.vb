@@ -40,10 +40,23 @@ Public Class ucrSave
     End Sub
 
     Public Sub SetLabelText(strText As String)
+        Dim iTemp As Integer
+
         lblSaveText.Text = strText
         bShowLabel = True
         bShowCheckBox = False
         LabelOrCheckboxSettings()
+        If bIsComboBox Then
+            iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
+            If iTemp > 0 Then
+                ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
+            End If
+        Else
+            iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputTextSave.Location.X
+            If iTemp > 0 Then
+                ucrInputTextSave.Width = ucrInputComboSave.Size.Width - iTemp
+            End If
+        End If
     End Sub
 
     Public Sub SetCheckBoxText(strText As String)
@@ -206,34 +219,40 @@ Public Class ucrSave
     End Sub
 
     Public Overrides Sub UpdateRCode()
+        UpdateAssignTo()
+        UpdateLinkedControls()
+    End Sub
+
+    Private Sub UpdateAssignTo(Optional bRemove As Boolean = False)
         Dim strSaveName As String
         Dim strDataName As String = ""
-        Dim bAddAssignTo As Boolean = True
-
-        MyBase.UpdateRCode()
 
         If clsRCode IsNot Nothing Then
-            If ucrDataFrameSelector IsNot Nothing Then
-                strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
-            End If
-            If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
-                strSaveName = strAssignToIfUnchecked
-            Else
-                strSaveName = GetText()
-            End If
-            If strSaveName <> "" Then
-                Select Case strSaveType
-                    Case "column"
-                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
-                    Case "dataframe"
-                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                    Case "graph"
-                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                    Case "model"
-                        clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                End Select
-            Else
+            If bRemove Then
                 clsRCode.RemoveAssignTo()
+            Else
+                If ucrDataFrameSelector IsNot Nothing Then
+                    strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
+                End If
+                If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
+                    strSaveName = strAssignToIfUnchecked
+                Else
+                    strSaveName = GetText()
+                End If
+                If strSaveName <> "" Then
+                    Select Case strSaveType
+                        Case "column"
+                            clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
+                        Case "dataframe"
+                            clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                        Case "graph"
+                            clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                        Case "model"
+                            clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                    End Select
+                Else
+                    clsRCode.RemoveAssignTo()
+                End If
             End If
         End If
     End Sub
@@ -243,7 +262,6 @@ Public Class ucrSave
     End Sub
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
         If clsRCode IsNot Nothing Then
             If clsRCode.bToBeAssigned OrElse clsRCode.bIsAssigned Then
                 If bIsComboBox Then
@@ -305,4 +323,8 @@ Public Class ucrSave
     Protected Overrides Function CanUpdate() As Object
         Return ((Not clsRCode.bIsAssigned AndAlso Not clsRCode.bToBeAssigned) AndAlso strSaveType <> "")
     End Function
+
+    Public Overrides Sub AddOrRemoveParameter(bAdd As Boolean)
+        UpdateAssignTo(Not bAdd)
+    End Sub
 End Class
