@@ -60,14 +60,12 @@ Public Class dlgTransformText
         ucrPnlOperation.AddRadioButton(rdoWords)
         ucrPnlOperation.AddRadioButton(rdoSubstring)
 
-        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "") ' this changes depending which rdo is checked
+        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, " ") ' this changes depending which rdo is checked
         ucrPnlOperation.AddFunctionNamesCondition(rdoLength, "stringr::str_length")
         ucrPnlOperation.AddFunctionNamesCondition(rdoPad, "stringr::str_pad")
         ucrPnlOperation.AddFunctionNamesCondition(rdoTrim, "stringr::str_trim")
         ucrPnlOperation.AddFunctionNamesCondition(rdoWords, "stringr::word")
         ucrPnlOperation.AddFunctionNamesCondition(rdoSubstring, "stringr::str_sub")
-        'to do: check for   .AddParameterPresentCondition
-        'to do: check that everything displays correctly.
 
         'rdoConvertCase
         ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -216,17 +214,12 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorForTransformText.Reset()
         'rdoConvertCase.Checked = True
 
-        'ucrInputSeparator.ResetText()
-        'ucrInputPad.ResetText()
-        'ucrInputTo.ResetText()
-
-        Dim clsDefaultFunction As New RFunction
-        ucrSelectorForTransformText.Reset()
-
-        ' clsDefaultFunction.SetRCommand("stringr::str_length") ' first check box, which changes
+        clsDefaultFunction.SetRCommand(" ") ' first check box, which changes
         clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
@@ -237,15 +230,6 @@ Public Class dlgTransformText
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-
-    '  Private Sub ucrReceiverTransformText_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverTransformText.SelectionChanged
-    '       If Not ucrReceiverTransformText.IsEmpty Then
-    '      ucrBase.clsRsyntax.AddParameter("string", clsRFunctionParameter:=ucrReceiverTransformText.GetVariables())
-    '     Else
-    '    ucrBase.clsRsyntax.RemoveParameter("string")
-    '   End If
-    '  TestOkEnabled()
-    'End Sub
 
     Private Sub FirstWordParameter()
         '        If rdoWords.Checked Then
@@ -267,111 +251,6 @@ Public Class dlgTransformText
         'End If
         'End If
         'End If
-    End Sub
-
-    Private Sub ConvertcaseFunc()
-        '       If rdoConvertCase.Checked Then
-        '      Select Case ucrInputTo.GetText
-        '     Case "Lower"
-        '    ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
-        '   Case "Upper"
-        '  ucrBase.clsRsyntax.SetFunction("stringr::str_to_upper")
-        ' Case "Title"
-        'ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
-        'End Select
-        '
-        'End If
-    End Sub
-
-    '   Private Sub WidthParameter()
-    '  If rdoPad.Checked Then
-    ' If rdoBothPad.Checked Or rdoLeftPad.Checked Or rdoRightPad.Checked Then
-    '            ucrBase.clsRsyntax.AddParameter("width", nudWidth.Value)
-    'Else
-    '           ucrBase.clsRsyntax.RemoveParameter("width")
-    'End If
-    'End If
-    'End Sub
-
-    Private Sub nudFirstWord_TextChanged(sender As Object, e As EventArgs)
-        '        If rdoWords.Checked Then
-        '       ucrBase.clsRsyntax.AddParameter("start", nudFirstWord.Value)
-        '      Else
-        '     ucrBase.clsRsyntax.RemoveParameter("start")
-        '    End If
-    End Sub
-
-    Private Sub nudLastWord_TextChanged(sender As Object, e As EventArgs)
-        '   If rdoWords.Checked Then
-        '  ucrBase.clsRsyntax.AddParameter("end", nudLastWord.Value)
-        ' Else
-        'ucrBase.clsRsyntax.RemoveParameter("end")
-        'End If
-    End Sub
-
-
-    '   Private Sub WordSepParameter()
-    '  If rdoWords.Checked Then
-    ' Select Case ucrInputSeparator.GetText
-    'Case "Space"
-    '               ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & " " & Chr(34))
-    'Case "Period"
-    '               ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "." & Chr(34))
-    'Case "Colon"
-    '               ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ":" & Chr(34))
-    'Case "Underscore"
-    '               ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "_" & Chr(34))
-    'Case Else
-    '               ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
-    'End Select
-    'Else
-    '       ucrBase.clsRsyntax.RemoveParameter("sep")
-    'End If
-    'End Sub
-
-    '   Private Sub PadSideParameter()
-    '  If rdoPad.Checked Then
-    ' If rdoLeftPad.Checked Then
-    '            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
-    'ElseIf rdoRightPad.Checked Then
-    '           ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "right" & Chr(34))
-    'ElseIf rdoBothPad.Checked Then
-    '           ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "both" & Chr(34))
-    'Else
-    '           ucrBase.clsRsyntax.RemoveParameter("side")
-    'End If
-    'End If
-    'End Sub
-
-    Private Sub TrimSideParameter()
-        '        If rdoTrim.Checked Then
-        '       ucrBase.clsRsyntax.SetFunction("stringr::str_trim")
-        '      If rdoLeftTrim.Checked Then
-        '     ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
-        '    ElseIf rdoRightTrim.Checked Then
-        '   ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "right" & Chr(34))
-        '  ElseIf rdoBothTrim.Checked Then
-        ' ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "both" & Chr(34))
-        'Else
-        'ucrBase.clsRsyntax.RemoveParameter("side")
-        'End If
-        'End If
-    End Sub
-
-    Private Sub NudFromParameter()
-        '     If rdoSubstring.Checked Then
-        '    ucrBase.clsRsyntax.AddParameter("start", nudFrom.Value)
-        '   Else
-        '  ucrBase.clsRsyntax.RemoveParameter("start")
-        ' End If
-    End Sub
-
-    Private Sub nudToParameter()
-        '        If rdoSubstring.Checked Then
-        '       ucrBase.clsRsyntax.AddParameter("end", nudTo.Value)
-        '      Else
-        '     ucrBase.clsRsyntax.RemoveParameter("end")
-        '    End If
     End Sub
 
     Private Sub LastWordParameter()
@@ -398,7 +277,7 @@ Public Class dlgTransformText
         'End If
     End Sub
 
-    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged
+    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
         If rdoLength.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_length")
         ElseIf rdoPad.Checked Then
@@ -409,8 +288,16 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.SetFunction("stringr::word")
         ElseIf rdoSubstring.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_sub")
+        ElseIf rdoConvertCase.Checked Then
+            Select Case ucrInputTo.GetText
+                Case "Lower"
+                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
+                Case "Upper"
+                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_upper")
+                Case "Title"
+                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
+            End Select
         End If
-        'Else if ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "") ' this changes depending which rdo is checked
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
