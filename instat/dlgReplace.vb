@@ -58,6 +58,20 @@ Public Class dlgReplace
 
         rdoFromAbove.Enabled = False
 
+        ucrPnlOld.AddRadioButton(rdoOldValue)
+        ucrPnlOld.AddRadioButton(rdoOldMissing)
+        ucrPnlOld.AddRadioButton(rdoRange)
+
+        ucrPnlOld.AddFunctionNamesCondition(rdoOldValue, frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+        ucrPnlOld.AddFunctionNamesCondition(rdoOldMissing, frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+        ucrPnlOld.AddFunctionNamesCondition(rdoRange, frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+
+        ucrPnlRows.AddToLinkedControls(ucrReceiverForColumnsToDelete, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRows.AddToLinkedControls(ucrNudRowsToDelete, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRows.AddToLinkedControls(ucrDataFrameLengthForDeleteRows, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
+
+
+
         'ucrSelector
         ucrSelectorReplace.SetParameter(New RParameter("data_name", 0))
         ucrSelectorReplace.SetParameterIsString()

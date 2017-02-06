@@ -23,25 +23,25 @@ Partial Class dlgReplace
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpOld = New System.Windows.Forms.GroupBox()
-        Me.lblRangeMax = New System.Windows.Forms.Label()
-        Me.lblRangeMin = New System.Windows.Forms.Label()
-        Me.rdoRange = New System.Windows.Forms.RadioButton()
-        Me.rdoOldMissing = New System.Windows.Forms.RadioButton()
-        Me.rdoOldValue = New System.Windows.Forms.RadioButton()
-        Me.grpNew = New System.Windows.Forms.GroupBox()
-        Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
-        Me.rdoNewValue = New System.Windows.Forms.RadioButton()
-        Me.rdoFromAbove = New System.Windows.Forms.RadioButton()
-        Me.lblSelectedColumns = New System.Windows.Forms.Label()
-        Me.ucrInputNewValue = New instat.ucrInputTextBox()
-        Me.ucrPnlNew = New instat.UcrPanel()
         Me.ucrChkMaximum = New instat.ucrCheck()
         Me.ucrChkMinimum = New instat.ucrCheck()
+        Me.lblRangeMax = New System.Windows.Forms.Label()
+        Me.lblRangeMin = New System.Windows.Forms.Label()
         Me.ucrInputRangeTo = New instat.ucrInputTextBox()
         Me.ucrInputRangeFrom = New instat.ucrInputTextBox()
         Me.ucrInputOldValue = New instat.ucrInputTextBox()
+        Me.rdoRange = New System.Windows.Forms.RadioButton()
+        Me.rdoOldMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoOldValue = New System.Windows.Forms.RadioButton()
         Me.ucrPnlOld = New instat.UcrPanel()
         Me.ucrPnlRange = New instat.UcrPanel()
+        Me.grpNew = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNewValue = New instat.ucrInputTextBox()
+        Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoNewValue = New System.Windows.Forms.RadioButton()
+        Me.rdoFromAbove = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlNew = New instat.UcrPanel()
+        Me.lblSelectedColumns = New System.Windows.Forms.Label()
         Me.ucrReceiverReplace = New instat.ucrReceiverMultiple()
         Me.ucrSelectorReplace = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -71,6 +71,26 @@ Partial Class dlgReplace
         Me.grpOld.Tag = "Old"
         Me.grpOld.Text = "Old"
         '
+        'ucrChkMaximum
+        '
+        Me.ucrChkMaximum.bAddRemoveParameter = True
+        Me.ucrChkMaximum.bChangeParameterValue = True
+        Me.ucrChkMaximum.Checked = False
+        Me.ucrChkMaximum.Location = New System.Drawing.Point(155, 104)
+        Me.ucrChkMaximum.Name = "ucrChkMaximum"
+        Me.ucrChkMaximum.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMaximum.TabIndex = 11
+        '
+        'ucrChkMinimum
+        '
+        Me.ucrChkMinimum.bAddRemoveParameter = True
+        Me.ucrChkMinimum.bChangeParameterValue = True
+        Me.ucrChkMinimum.Checked = False
+        Me.ucrChkMinimum.Location = New System.Drawing.Point(155, 76)
+        Me.ucrChkMinimum.Name = "ucrChkMinimum"
+        Me.ucrChkMinimum.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMinimum.TabIndex = 8
+        '
         'lblRangeMax
         '
         Me.lblRangeMax.AutoSize = True
@@ -90,6 +110,39 @@ Partial Class dlgReplace
         Me.lblRangeMin.TabIndex = 6
         Me.lblRangeMin.Tag = "Minimum"
         Me.lblRangeMin.Text = "Minimum:"
+        '
+        'ucrInputRangeTo
+        '
+        Me.ucrInputRangeTo.bAddRemoveParameter = True
+        Me.ucrInputRangeTo.bChangeParameterValue = True
+        Me.ucrInputRangeTo.IsMultiline = False
+        Me.ucrInputRangeTo.IsReadOnly = False
+        Me.ucrInputRangeTo.Location = New System.Drawing.Point(80, 102)
+        Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
+        Me.ucrInputRangeTo.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputRangeTo.TabIndex = 10
+        '
+        'ucrInputRangeFrom
+        '
+        Me.ucrInputRangeFrom.bAddRemoveParameter = True
+        Me.ucrInputRangeFrom.bChangeParameterValue = True
+        Me.ucrInputRangeFrom.IsMultiline = False
+        Me.ucrInputRangeFrom.IsReadOnly = False
+        Me.ucrInputRangeFrom.Location = New System.Drawing.Point(80, 76)
+        Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
+        Me.ucrInputRangeFrom.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputRangeFrom.TabIndex = 7
+        '
+        'ucrInputOldValue
+        '
+        Me.ucrInputOldValue.bAddRemoveParameter = True
+        Me.ucrInputOldValue.bChangeParameterValue = True
+        Me.ucrInputOldValue.IsMultiline = False
+        Me.ucrInputOldValue.IsReadOnly = False
+        Me.ucrInputOldValue.Location = New System.Drawing.Point(58, 19)
+        Me.ucrInputOldValue.Name = "ucrInputOldValue"
+        Me.ucrInputOldValue.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputOldValue.TabIndex = 2
         '
         'rdoRange
         '
@@ -127,6 +180,24 @@ Partial Class dlgReplace
         Me.rdoOldValue.Text = "Value"
         Me.rdoOldValue.UseVisualStyleBackColor = True
         '
+        'ucrPnlOld
+        '
+        Me.ucrPnlOld.bAddRemoveParameter = True
+        Me.ucrPnlOld.bChangeParameterValue = True
+        Me.ucrPnlOld.Location = New System.Drawing.Point(2, 14)
+        Me.ucrPnlOld.Name = "ucrPnlOld"
+        Me.ucrPnlOld.Size = New System.Drawing.Size(225, 110)
+        Me.ucrPnlOld.TabIndex = 0
+        '
+        'ucrPnlRange
+        '
+        Me.ucrPnlRange.bAddRemoveParameter = True
+        Me.ucrPnlRange.bChangeParameterValue = True
+        Me.ucrPnlRange.Location = New System.Drawing.Point(4, 60)
+        Me.ucrPnlRange.Name = "ucrPnlRange"
+        Me.ucrPnlRange.Size = New System.Drawing.Size(93, 66)
+        Me.ucrPnlRange.TabIndex = 5
+        '
         'grpNew
         '
         Me.grpNew.Controls.Add(Me.ucrInputNewValue)
@@ -141,6 +212,17 @@ Partial Class dlgReplace
         Me.grpNew.TabStop = False
         Me.grpNew.Tag = "New"
         Me.grpNew.Text = "New"
+        '
+        'ucrInputNewValue
+        '
+        Me.ucrInputNewValue.bAddRemoveParameter = True
+        Me.ucrInputNewValue.bChangeParameterValue = True
+        Me.ucrInputNewValue.IsMultiline = False
+        Me.ucrInputNewValue.IsReadOnly = False
+        Me.ucrInputNewValue.Location = New System.Drawing.Point(63, 19)
+        Me.ucrInputNewValue.Name = "ucrInputNewValue"
+        Me.ucrInputNewValue.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputNewValue.TabIndex = 1
         '
         'rdoNewMissing
         '
@@ -178,6 +260,15 @@ Partial Class dlgReplace
         Me.rdoFromAbove.Text = "From Above"
         Me.rdoFromAbove.UseVisualStyleBackColor = True
         '
+        'ucrPnlNew
+        '
+        Me.ucrPnlNew.bAddRemoveParameter = True
+        Me.ucrPnlNew.bChangeParameterValue = True
+        Me.ucrPnlNew.Location = New System.Drawing.Point(3, 17)
+        Me.ucrPnlNew.Name = "ucrPnlNew"
+        Me.ucrPnlNew.Size = New System.Drawing.Size(157, 109)
+        Me.ucrPnlNew.TabIndex = 7
+        '
         'lblSelectedColumns
         '
         Me.lblSelectedColumns.AutoSize = True
@@ -187,97 +278,6 @@ Partial Class dlgReplace
         Me.lblSelectedColumns.TabIndex = 1
         Me.lblSelectedColumns.Tag = "Selected_Column(s)"
         Me.lblSelectedColumns.Text = "Selected Column(s):"
-        '
-        'ucrInputNewValue
-        '
-        Me.ucrInputNewValue.bAddRemoveParameter = True
-        Me.ucrInputNewValue.bChangeParameterValue = True
-        Me.ucrInputNewValue.IsMultiline = False
-        Me.ucrInputNewValue.IsReadOnly = False
-        Me.ucrInputNewValue.Location = New System.Drawing.Point(63, 19)
-        Me.ucrInputNewValue.Name = "ucrInputNewValue"
-        Me.ucrInputNewValue.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputNewValue.TabIndex = 1
-        '
-        'ucrPnlNew
-        '
-        Me.ucrPnlNew.bAddRemoveParameter = True
-        Me.ucrPnlNew.bChangeParameterValue = True
-        Me.ucrPnlNew.Location = New System.Drawing.Point(3, 17)
-        Me.ucrPnlNew.Name = "ucrPnlNew"
-        Me.ucrPnlNew.Size = New System.Drawing.Size(110, 76)
-        Me.ucrPnlNew.TabIndex = 7
-        '
-        'ucrChkMaximum
-        '
-        Me.ucrChkMaximum.bAddRemoveParameter = True
-        Me.ucrChkMaximum.bChangeParameterValue = True
-        Me.ucrChkMaximum.Checked = False
-        Me.ucrChkMaximum.Location = New System.Drawing.Point(155, 104)
-        Me.ucrChkMaximum.Name = "ucrChkMaximum"
-        Me.ucrChkMaximum.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMaximum.TabIndex = 11
-        '
-        'ucrChkMinimum
-        '
-        Me.ucrChkMinimum.bAddRemoveParameter = True
-        Me.ucrChkMinimum.bChangeParameterValue = True
-        Me.ucrChkMinimum.Checked = False
-        Me.ucrChkMinimum.Location = New System.Drawing.Point(155, 76)
-        Me.ucrChkMinimum.Name = "ucrChkMinimum"
-        Me.ucrChkMinimum.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMinimum.TabIndex = 8
-        '
-        'ucrInputRangeTo
-        '
-        Me.ucrInputRangeTo.bAddRemoveParameter = True
-        Me.ucrInputRangeTo.bChangeParameterValue = True
-        Me.ucrInputRangeTo.IsMultiline = False
-        Me.ucrInputRangeTo.IsReadOnly = False
-        Me.ucrInputRangeTo.Location = New System.Drawing.Point(80, 102)
-        Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
-        Me.ucrInputRangeTo.Size = New System.Drawing.Size(69, 21)
-        Me.ucrInputRangeTo.TabIndex = 10
-        '
-        'ucrInputRangeFrom
-        '
-        Me.ucrInputRangeFrom.bAddRemoveParameter = True
-        Me.ucrInputRangeFrom.bChangeParameterValue = True
-        Me.ucrInputRangeFrom.IsMultiline = False
-        Me.ucrInputRangeFrom.IsReadOnly = False
-        Me.ucrInputRangeFrom.Location = New System.Drawing.Point(80, 76)
-        Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
-        Me.ucrInputRangeFrom.Size = New System.Drawing.Size(69, 21)
-        Me.ucrInputRangeFrom.TabIndex = 7
-        '
-        'ucrInputOldValue
-        '
-        Me.ucrInputOldValue.bAddRemoveParameter = True
-        Me.ucrInputOldValue.bChangeParameterValue = True
-        Me.ucrInputOldValue.IsMultiline = False
-        Me.ucrInputOldValue.IsReadOnly = False
-        Me.ucrInputOldValue.Location = New System.Drawing.Point(58, 19)
-        Me.ucrInputOldValue.Name = "ucrInputOldValue"
-        Me.ucrInputOldValue.Size = New System.Drawing.Size(95, 21)
-        Me.ucrInputOldValue.TabIndex = 2
-        '
-        'ucrPnlOld
-        '
-        Me.ucrPnlOld.bAddRemoveParameter = True
-        Me.ucrPnlOld.bChangeParameterValue = True
-        Me.ucrPnlOld.Location = New System.Drawing.Point(4, 14)
-        Me.ucrPnlOld.Name = "ucrPnlOld"
-        Me.ucrPnlOld.Size = New System.Drawing.Size(93, 79)
-        Me.ucrPnlOld.TabIndex = 0
-        '
-        'ucrPnlRange
-        '
-        Me.ucrPnlRange.bAddRemoveParameter = True
-        Me.ucrPnlRange.bChangeParameterValue = True
-        Me.ucrPnlRange.Location = New System.Drawing.Point(4, 60)
-        Me.ucrPnlRange.Name = "ucrPnlRange"
-        Me.ucrPnlRange.Size = New System.Drawing.Size(93, 66)
-        Me.ucrPnlRange.TabIndex = 5
         '
         'ucrReceiverReplace
         '
