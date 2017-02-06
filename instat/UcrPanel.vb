@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Public Class UcrPanel
-    Private lstRadioButtonValues As New List(Of KeyValuePair(Of RadioButton, String))
+    Private dctRadioButtonValues As New Dictionary(Of RadioButton, String)
 
-    Public Sub AddRadioButtonRange(lstRadioButtons As RadioButton(), Optional bRepositionControls As Boolean = True)
+    Private Sub AddRadioButtonRange(lstRadioButtons As RadioButton(), Optional bRepositionControls As Boolean = True)
         pnlRadios.Controls.AddRange(lstRadioButtons)
         For Each rdoTemp As RadioButton In lstRadioButtons
             AddHandler rdoTemp.CheckedChanged, AddressOf RadioButtons_CheckedChanged
@@ -30,38 +30,25 @@ Public Class UcrPanel
         Next
     End Sub
 
-    Public Sub AddRadioButtonRange(lstNewRadioButtonValues As List(Of KeyValuePair(Of RadioButton, String)), Optional bRepositionControls As Boolean = True)
-        Dim lstRadioButtons As New List(Of RadioButton)
-
-        For Each kvpTemp As KeyValuePair(Of RadioButton, String) In lstNewRadioButtonValues
-            lstRadioButtons.Add(kvpTemp.Key)
-        Next
-        AddRadioButtonRange(lstRadioButtons.ToArray(), bRepositionControls)
-        lstRadioButtonValues.AddRange(lstNewRadioButtonValues)
-    End Sub
-
     Public Sub AddRadioButton(rdoTemp As RadioButton, Optional strValue As String = "")
-        Dim kvpTemp As New KeyValuePair(Of RadioButton, String)(rdoTemp, strValue)
-
         AddRadioButtonRange({rdoTemp})
         If strValue <> "" Then
-            lstRadioButtonValues.Add(kvpTemp)
+            dctRadioButtonValues.Add(rdoTemp, strValue)
+            AddParameterValuesCondition(rdoTemp, clsParameter.strArgumentName, strValue)
         End If
     End Sub
 
     Public Sub RadioButtons_CheckedChanged()
         Dim strNewValue As String = ""
         Dim rdoTemp As RadioButton
-        Dim iIndex As Integer
 
         If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
             For Each ctrTemp As Control In pnlRadios.Controls
                 If TypeOf ctrTemp Is RadioButton Then
-                    rdoTemp = DirectCast(ctrTemp, RadioButton)
+                    rdoTemp = CType(ctrTemp, RadioButton)
                     If rdoTemp.Checked Then
-                        iIndex = lstRadioButtonValues.FindIndex(Function(x) x.Key.Equals(rdoTemp))
-                        If iIndex <> -1 Then
-                            strNewValue = lstRadioButtonValues(iIndex).Value
+                        If dctRadioButtonValues.ContainsKey(rdoTemp) Then
+                            strNewValue = dctRadioButtonValues(rdoTemp)
                             Exit For
                         End If
                     End If
@@ -77,37 +64,35 @@ Public Class UcrPanel
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        Dim strCurrentValue As String
-        Dim bFound As Boolean = False
+    Protected Overrides Sub SetToValue(objTemp As Object)
+        Dim rdoTemp As RadioButton
 
-        MyBase.UpdateControl(bReset)
-
-        If clsParameter IsNot Nothing Then
-            If bChangeParameterValue Then
-                strCurrentValue = clsParameter.strArgumentValue
-
-                For Each kvpTemp As KeyValuePair(Of RadioButton, String) In lstRadioButtonValues
-                    If kvpTemp.Value = strCurrentValue Then
-                        kvpTemp.Key.Checked = True
-                        bFound = True
-                        Exit For
-                    End If
-                Next
-                If Not bFound Then
-                    MsgBox("Parameter as value: " & strCurrentValue & " which is not associated to any radio button in this control. Cannot update radio buttons.")
-                End If
-            ElseIf bAddRemoveParameter Then
-                'Commented out as not currently needed. Can be included if needed.
-                'If bParameterIncludedWhenChecked Then
-                'chkCheck.Checked = clsRCode.ContainsParameter(clsParameter)
-                'Else
-                'chkCheck.Checked = Not clsRCodeObject.clsParameters.Contains(clsParameter)
-                'End If
-            End If
+        If TypeOf objTemp Is RadioButton Then
+            rdoTemp = DirectCast(objTemp, RadioButton)
+            rdoTemp.Checked = True
         Else
-            'chkCheck.Checked = LinkedControlsParametersPresent()
+            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
         End If
-        UpdateLinkedControls()
     End Sub
+
+    Private Sub UcrPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
+        bAllowNonConditionValues = False
+    End Sub
+
+    Public Overrides Function ControlValueContainedIn(lstTemp() As Object) As Boolean
+        Dim rdoTemp As RadioButton
+        Dim bTemp As Boolean = False
+
+        For Each objVal In lstTemp
+            If TypeOf objVal Is RadioButton Then
+                rdoTemp = DirectCast(objVal, RadioButton)
+                If rdoTemp.Checked Then
+                    bTemp = True
+                End If
+            Else
+                MsgBox("Developer error: Cannot convert object to radio button for linked control.")
+            End If
+        Next
+        Return bTemp
+    End Function
 End Class
