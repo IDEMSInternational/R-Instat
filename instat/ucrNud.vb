@@ -114,6 +114,15 @@ Public Class ucrNud
         End Set
     End Property
 
+    Public Property DecimalPlaces As Decimal
+        Get
+            Return nudUpDown.DecimalPlaces
+        End Get
+        Set(dDecimalPlaces As Decimal)
+            nudUpDown.DecimalPlaces = dDecimalPlaces
+        End Set
+    End Property
+
 
 
 
@@ -150,7 +159,7 @@ Public Class ucrNud
         End If
     End Sub
 
-    Public Overrides Function ValueContainedIn(lstTemp As Object()) As Boolean
+    Public Overrides Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Dim dTemp As Decimal
         Dim bTemp As Boolean = False
 
