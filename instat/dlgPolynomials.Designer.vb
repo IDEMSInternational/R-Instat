@@ -33,7 +33,7 @@ Partial Class dlgPolynomials
         Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSavePoly = New instat.ucrSave()
         Me.ucrNudDegree = New instat.ucrNud()
-        Me.ucrRadioCentered = New instat.ucrRadio()
+        Me.rdoCenterd = New System.Windows.Forms.RadioButton()
         Me.grpType.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -59,6 +59,8 @@ Partial Class dlgPolynomials
         '
         'ucrSelectorForPolynomial
         '
+        Me.ucrSelectorForPolynomial.bAddRemoveParameter = True
+        Me.ucrSelectorForPolynomial.bChangeParameterValue = True
         Me.ucrSelectorForPolynomial.bShowHiddenColumns = False
         Me.ucrSelectorForPolynomial.bUseCurrentFilter = True
         Me.ucrSelectorForPolynomial.Location = New System.Drawing.Point(10, 10)
@@ -69,6 +71,8 @@ Partial Class dlgPolynomials
         '
         'ucrReceiverPolynomial
         '
+        Me.ucrReceiverPolynomial.bAddRemoveParameter = True
+        Me.ucrReceiverPolynomial.bChangeParameterValue = True
         Me.ucrReceiverPolynomial.frmParent = Me
         Me.ucrReceiverPolynomial.Location = New System.Drawing.Point(258, 49)
         Me.ucrReceiverPolynomial.Margin = New System.Windows.Forms.Padding(0)
@@ -86,7 +90,7 @@ Partial Class dlgPolynomials
         '
         'grpType
         '
-        Me.grpType.Controls.Add(Me.ucrRadioCentered)
+        Me.grpType.Controls.Add(Me.rdoCenterd)
         Me.grpType.Controls.Add(Me.rdoOrthogonal)
         Me.grpType.Controls.Add(Me.rdoSimple)
         Me.grpType.Controls.Add(Me.ucrPnlType)
@@ -125,6 +129,8 @@ Partial Class dlgPolynomials
         '
         'ucrPnlType
         '
+        Me.ucrPnlType.bAddRemoveParameter = True
+        Me.ucrPnlType.bChangeParameterValue = True
         Me.ucrPnlType.Location = New System.Drawing.Point(3, 16)
         Me.ucrPnlType.Name = "ucrPnlType"
         Me.ucrPnlType.Size = New System.Drawing.Size(114, 84)
@@ -132,6 +138,8 @@ Partial Class dlgPolynomials
         '
         'ucrSavePoly
         '
+        Me.ucrSavePoly.bAddRemoveParameter = True
+        Me.ucrSavePoly.bChangeParameterValue = True
         Me.ucrSavePoly.Location = New System.Drawing.Point(9, 223)
         Me.ucrSavePoly.Name = "ucrSavePoly"
         Me.ucrSavePoly.Size = New System.Drawing.Size(294, 24)
@@ -139,6 +147,8 @@ Partial Class dlgPolynomials
         '
         'ucrNudDegree
         '
+        Me.ucrNudDegree.bAddRemoveParameter = True
+        Me.ucrNudDegree.bChangeParameterValue = True
         Me.ucrNudDegree.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDegree.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDegree.Location = New System.Drawing.Point(308, 77)
@@ -149,13 +159,18 @@ Partial Class dlgPolynomials
         Me.ucrNudDegree.TabIndex = 16
         Me.ucrNudDegree.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrRadioCentered
+        'rdoCenterd
         '
-        Me.ucrRadioCentered.Checked = False
-        Me.ucrRadioCentered.Location = New System.Drawing.Point(19, 46)
-        Me.ucrRadioCentered.Name = "ucrRadioCentered"
-        Me.ucrRadioCentered.Size = New System.Drawing.Size(100, 20)
-        Me.ucrRadioCentered.TabIndex = 6
+        Me.rdoCenterd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdoCenterd.AutoSize = True
+        Me.rdoCenterd.Location = New System.Drawing.Point(19, 50)
+        Me.rdoCenterd.Name = "rdoCenterd"
+        Me.rdoCenterd.Size = New System.Drawing.Size(68, 17)
+        Me.rdoCenterd.TabIndex = 6
+        Me.rdoCenterd.Tag = "Centered"
+        Me.rdoCenterd.Text = "Centered"
+        Me.rdoCenterd.UseVisualStyleBackColor = True
         '
         'dlgPolynomials
         '
@@ -194,5 +209,5 @@ Partial Class dlgPolynomials
     Friend WithEvents ucrPnlType As UcrPanel
     Friend WithEvents ucrSavePoly As ucrSave
     Friend WithEvents ucrNudDegree As ucrNud
-    Friend WithEvents ucrRadioCentered As ucrRadio
+    Friend WithEvents rdoCenterd As RadioButton
 End Class
