@@ -28,7 +28,7 @@ Partial Class dlgView
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPanelDisplayWindow = New instat.UcrPanel()
+        Me.ucrPnlDisplayWindow = New instat.UcrPanel()
         Me.ucrNudNumberRows = New instat.ucrNud()
         Me.rdoBottom = New System.Windows.Forms.RadioButton()
         Me.rdoTop = New System.Windows.Forms.RadioButton()
@@ -101,14 +101,14 @@ Partial Class dlgView
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 5
         '
-        'ucrPanelDisplayWindow
+        'ucrPnlDisplayWindow
         '
-        Me.ucrPanelDisplayWindow.bAddRemoveParameter = True
-        Me.ucrPanelDisplayWindow.bChangeParameterValue = True
-        Me.ucrPanelDisplayWindow.Location = New System.Drawing.Point(10, 200)
-        Me.ucrPanelDisplayWindow.Name = "ucrPanelDisplayWindow"
-        Me.ucrPanelDisplayWindow.Size = New System.Drawing.Size(170, 46)
-        Me.ucrPanelDisplayWindow.TabIndex = 6
+        Me.ucrPnlDisplayWindow.bAddRemoveParameter = True
+        Me.ucrPnlDisplayWindow.bChangeParameterValue = True
+        Me.ucrPnlDisplayWindow.Location = New System.Drawing.Point(10, 200)
+        Me.ucrPnlDisplayWindow.Name = "ucrPnlDisplayWindow"
+        Me.ucrPnlDisplayWindow.Size = New System.Drawing.Size(170, 46)
+        Me.ucrPnlDisplayWindow.TabIndex = 6
         '
         'ucrNudNumberRows
         '
@@ -199,7 +199,7 @@ Partial Class dlgView
         Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.rdoDispOutputWindow)
         Me.Controls.Add(Me.rdoDispSepOutputWindow)
-        Me.Controls.Add(Me.ucrPanelDisplayWindow)
+        Me.Controls.Add(Me.ucrPnlDisplayWindow)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverView)
         Me.Controls.Add(Me.ucrSelectorForView)
@@ -221,7 +221,7 @@ Partial Class dlgView
     Friend WithEvents lblSelected As Label
     Friend WithEvents rdoDispSepOutputWindow As RadioButton
     Friend WithEvents rdoDispOutputWindow As RadioButton
-    Friend WithEvents ucrPanelDisplayWindow As UcrPanel
+    Friend WithEvents ucrPnlDisplayWindow As UcrPanel
     Friend WithEvents ucrNudNumberRows As ucrNud
     Friend WithEvents rdoBottom As RadioButton
     Friend WithEvents rdoTop As RadioButton
