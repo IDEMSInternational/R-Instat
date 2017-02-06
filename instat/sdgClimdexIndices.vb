@@ -29,27 +29,11 @@ Public Class sdgClimdexIndices
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctInputFreqPairs As New Dictionary(Of String, String)
         clsRMaxMisingDays.SetRCommand("c")
-
-        'chkNHemisphere.Checked = True
-        'nudYearFrom.Value = 1961
-        'nudYearTo.Value = 1990
-        'nudN.Value = 5
-        'nudAnnualMissingDays.Value = 15
-        'nudMothlyMissingDays.Value = 3
-        'nudMinBaseData.Value = 0.1
-        'ucrInputFreq.cboInput.SelectedItem = "annual"
-        'ucrMultipleInputPrecQtiles.txtNumericItems.Text = "0.95, 0.99"
-        'ucrMultipleInputTempQtiles.txtNumericItems.Text = "0.1, 0.9"
-        'ucrMultipleInputTempQtiles.bIsNumericInput = True
-        'ucrMultipleInputPrecQtiles.bIsNumericInput = True
-        'ucrInputFreq.SetItems({"monthly", "annual"})
-        'nudThreshold.Value = 1.0
-        'indices checkboxes
         ucrChkFrostDays.Checked = True
         ucrChkFrostDays.SetText("Frost Days")
         ucrChkFrostDays.bChangeParameterValue = False
-
         ucrChkSummerDays.Checked = False
         ucrChkSummerDays.SetText("Summer Days")
         ucrChkSummerDays.bChangeParameterValue = False
@@ -128,21 +112,13 @@ Public Class sdgClimdexIndices
         ucrChkTotalDailyPrec.Checked = False
         ucrChkTotalDailyPrec.SetText("Total Daily Precipitation")
         ucrChkTotalDailyPrec.bChangeParameterValue = False
-        'chkCenterMean.Checked = False
-        'chkMaxSpellSpanYears.Checked = True
-        'chkSpellDISpanYear.Checked = False
 
-        'controls
         ucrNudThreshold.SetParameter(New RParameter("threshold"))
-        'ucrChkSpecifyLayout.SetParameter(ucrNudNumberofColumns.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudThreshold.SetRDefault(1)
         ucrNudThreshold.DecimalPlaces = 2
         ucrNudThreshold.SetMinMax(0, 1)
-        'ucrNudNumberofColumns.bAddRemoveParameter = False
-        'ucrNudNumberofColumns.SetLinkedDisplayControl(lblNumberofColumns)
         ucrNudN.SetParameter(New RParameter("n"))
         ucrNudN.SetRDefault(5)
-        'ucrNudN.Value = 5
         ucrNudN.SetMinMax(1, 100)
 
         ucrNudMinBaseData.SetParameter(New RParameter("min.base.data.fraction.present"))
@@ -160,8 +136,6 @@ Public Class sdgClimdexIndices
         ucrNudMothlyMissingDays.SetMinMax(1, 31)
 
         clsNewClimdexInput.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
-
-        Dim dctInputFreqPairs As New Dictionary(Of String, String)
         ucrInputFreq.SetParameter(New RParameter("freq"))
         dctInputFreqPairs.Add("annual", Chr(34) & "annual" & Chr(34))
         dctInputFreqPairs.Add("monthly", Chr(34) & "monthly" & Chr(34))
@@ -178,12 +152,10 @@ Public Class sdgClimdexIndices
         ucrMultipleInputPrecQtiles.txtNumericItems.Text = "0.95, 0.99"
         ucrMultipleInputPrecQtiles.SetRDefault("0.95, 0.99")
 
-
         ucrMultipleInputBaseRange.SetParameter(New RParameter("base.range"))
         ucrMultipleInputBaseRange.bIsNumericInput = True
         ucrMultipleInputBaseRange.txtNumericItems.Text = "1961, 1990"
         ucrMultipleInputBaseRange.SetRDefault("1961, 1990")
-        'ucrInputFreq.SetItems({"monthly", "annual"})
         ucrChkNHemisphere.SetText("Northern Hemisphere")
         ucrChkNHemisphere.SetParameter(New RParameter("northern.hemisphere"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkNHemisphere.SetRDefault("TRUE")
@@ -227,14 +199,6 @@ Public Class sdgClimdexIndices
         ttClimdexIndices.SetToolTip(ucrChkPrecExceed95Percent, "Computes the annual sum of precipitation in days where daily precipitation exceeds the 95th percentile of daily precipitation in the base period ")
         ttClimdexIndices.SetToolTip(ucrChkPrecExceed99Percent, "Computes the annual sum of precipitation in days where daily precipitation exceeds the 99th percentile of daily precipitation in the base period ")
         ttClimdexIndices.SetToolTip(ucrChkTotalDailyPrec, "Computes the annual sum of precipitation in wet days (days where precipitation is at least 1mm). ")
-        'clsROneArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        'clsRTwoArg1.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        'clsRTwoArg2.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        'clsRTwoArg2.AddParameter("gsl.mode", Chr(34) & "GSL" & Chr(34))
-        'clsRTwoArg3.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        'clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        'clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
-        'clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsRClimdexInput)
 
         clsROneArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRTwoArg1.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
@@ -247,40 +211,6 @@ Public Class sdgClimdexIndices
 
         bControlsInitialised = True
     End Sub
-
-
-
-    'Private Sub nudThreshold_ValueChanged(sender As Object, e As EventArgs) Handles nudThreshold.ValueChanged
-    '    If nudThreshold.Value = 1.0 Then
-    '        clsRTwoArg3.RemoveParameterByName("threshold")
-    '    Else
-    '        clsRTwoArg3.AddParameter("threshold", nudThreshold.Value)
-    '    End If
-    'End Sub
-
-    'Private Sub chkCenterMean_CheckedChanged(sender As Object, e As EventArgs) Handles chkCenterMean.CheckedChanged
-    '    If chkCenterMean.Checked Then
-    '        clsRThreeArg.AddParameter("center.mean.on.last.day", "TRUE")
-    '    Else
-    '        clsRThreeArg.RemoveParameterByName("center.mean.on.last.day")
-    '    End If
-    'End Sub
-
-    'Private Sub chkSpellDISpanYear_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpellDISpanYear.CheckedChanged
-    '    If chkSpellDISpanYear.Checked Then
-    '        clsRTwoArg5.AddParameter("spells.can.span.years", "TRUE")
-    '    Else
-    '        clsRTwoArg5.RemoveParameterByName("spells.can.span.years")
-    '    End If
-    'End Sub
-
-    'Private Sub chkMaxSpellSpanYears_CheckedChanged(sender As Object, e As EventArgs) Handles chkMaxSpellSpanYears.CheckedChanged
-    '    If chkMaxSpellSpanYears.Checked Then
-    '        clsRTwoArg4.RemoveParameterByName("spells.can.span.years")
-    '    Else
-    '        clsRTwoArg4.AddParameter("spells.can.span.years", "FALSE")
-    '    End If
-    'End Sub
 
     Public Sub IndicesOptions()
         If (ucrChkFrostDays.Checked = True) Then
@@ -400,46 +330,6 @@ Public Class sdgClimdexIndices
     '    End If
     'End Sub
 
-    'Private Sub nudN_ValueChanged(sender As Object, e As EventArgs) Handles nudN.ValueChanged
-    '    dlgClimdex.clsDefaultFunction.AddParameter("n", nudN.Value)
-    '    If nudN.Value = 5 Then
-    '        dlgClimdex.clsDefaultFunction.RemoveParameterByName("n")
-    '    End If
-    'End Sub
-
-    'Private Sub chkNHemisphere_CheckedChanged(sender As Object, e As EventArgs) Handles chkNHemisphere.CheckedChanged
-    '    If chkNHemisphere.Checked Then
-    '        dlgClimdex.clsDefaultFunction.RemoveParameterByName("northern.hemisphere")
-    '    Else
-    '        dlgClimdex.clsDefaultFunction.AddParameter("northern.hemisphere", "FALSE")
-    '    End If
-    'End Sub
-
-    'Private Sub nudAnnualMaxMissingDays_ValueChanged(sender As Object, e As EventArgs) Handles nudAnnualMissingDays.ValueChanged
-    '    clsRMaxMisingDays.AddParameter("annual", nudAnnualMissingDays.Value)
-    '    If nudAnnualMissingDays.Value = 15 AndAlso nudMothlyMissingDays.Value = 3 Then
-    '        dlgClimdex.clsDefaultFunction.RemoveParameterByName("max.missing.days")
-    '    Else
-    '        dlgClimdex.clsDefaultFunction.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
-    '    End If
-    'End Sub
-
-    'Private Sub nudMonthlyMaxMissingDays_ValueChanged(sender As Object, e As EventArgs) Handles nudMothlyMissingDays.ValueChanged
-    '    clsRMaxMisingDays.AddParameter("monthly", nudMothlyMissingDays.Value)
-    '    If nudAnnualMissingDays.Value = 15 AndAlso nudMothlyMissingDays.Value = 3 Then
-    '        dlgClimdex.clsDefaultFunction.RemoveParameterByName("max.missing.days")
-    '    Else
-    '        dlgClimdex.clsDefaultFunction.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
-    '    End If
-    'End Sub
-
-    'Private Sub nudMinBaseData_ValueChanged(sender As Object, e As EventArgs) Handles nudMinBaseData.ValueChanged
-    '    dlgClimdex.clsDefaultFunction.AddParameter("min.base.data.fraction.present ", nudMinBaseData.Value)
-    '    If nudMinBaseData.Value = 0.1 Then
-    '        dlgClimdex.clsDefaultFunction.RemoveParameterByName("min.base.data.fraction.present ")
-    '    End If
-    'End Sub
-
     'Private Sub ucrMultipleInputPrecQtiles_Leave(sender As Object, e As EventArgs) Handles ucrMultipleInputPrecQtiles.Leave
     '    If ucrMultipleInputPrecQtiles.txtNumericItems.Text <> "0.95, 0.99" Then
     '        dlgClimdex.clsDefaultFunction.AddParameter("prec.qtiles", ucrMultipleInputPrecQtiles.clsNumericList.ToScript)
@@ -486,6 +376,5 @@ Public Class sdgClimdexIndices
         ucrChkCenterMean.SetRCode(clsRThreeArg, bReset)
         ucrChkMaxSpellSpanYears.SetRCode(clsRTwoArg4, bReset)
         ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset)
-        'include all the other rfunctions
     End Sub
 End Class
