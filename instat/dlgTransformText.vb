@@ -121,24 +121,24 @@ Public Class dlgTransformText
         'uses ucrPnlPad code from above
 
         'rdoWords
-        ucrPnlOperation.AddToLinkedControls(ucrChkFirstOrColumn, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrChkOrColumn, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrChkFirstOr, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrChkLastOr, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'if ucrChkFirstOrCol then         '    nudFirstWord.Enabled = False
         ucrReceiverFirstWord.SetParameter(New RParameter("start"))
-        ucrChkFirstOrColumn.SetParameter(ucrReceiverFirstWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkFirstOr.SetParameter(ucrReceiverFirstWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrReceiverFirstWord.SetParameterIsRFunction() 'getvariables()
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
         ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
 
-        ucrChkFirstOrColumn.SetText("Or Column")
-        ucrChkFirstOrColumn.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkFirstOrColumn.bChangeParameterValue = False
-        ucrChkFirstOrColumn.SetRDefault("FALSE")
-        ucrChkFirstOrColumn.AddToLinkedControls(ucrLinked:=ucrReceiverFirstWord, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFirstOr.SetText("Or Column")
+        ucrChkFirstOr.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFirstOr.bChangeParameterValue = False
+        ucrChkFirstOr.SetRDefault("FALSE")
+        ucrChkFirstOr.AddToLinkedControls(ucrLinked:=ucrReceiverFirstWord, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ' If this is checked, then we don't want to have nudFirst enabled or running
 
@@ -160,18 +160,18 @@ Public Class dlgTransformText
 
         'if ucrChkorCol then         '    nudLastWord.Enabled = False
         ucrReceiverLastWord.SetParameter(New RParameter("end"))
-        ucrChkOrColumn.SetParameter(ucrReceiverLastWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkLastOr.SetParameter(ucrReceiverLastWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrReceiverLastWord.SetParameterIsRFunction() 'getvariables()
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
         ucrReceiverLastWord.bUseFilteredData = False
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
 
-        ucrChkOrColumn.SetText("Or Column")
-        ucrChkOrColumn.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOrColumn.bChangeParameterValue = False
-        ucrChkOrColumn.SetRDefault("FALSE")
-        ucrChkOrColumn.AddToLinkedControls(ucrLinked:=ucrReceiverLastWord, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLastOr.SetText("Or Column")
+        ucrChkLastOr.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkLastOr.bChangeParameterValue = False
+        ucrChkLastOr.SetRDefault("FALSE")
+        ucrChkLastOr.AddToLinkedControls(ucrLinked:=ucrReceiverLastWord, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ' If this is checked, then we don't want to have nudLast enabled or running
 
