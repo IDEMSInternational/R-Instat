@@ -58,13 +58,14 @@ Public Class dlgExportDataset
     Private Sub SetDefaults()
         grpOptions.Visible = False
         ucrChkOptions.Enabled = False
+        grpOptions.Enabled = False
+        ucrChkOptions.Enabled = False
         ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.Reset()
         ucrAvailableSheets.Reset()
         clsDefaultFunction.SetRCommand("rio::export")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
-
 
     Private Sub InitialiseDialog()
         ucrChkOptions.SetText("Additional Options")
@@ -87,14 +88,6 @@ Public Class dlgExportDataset
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub chkOptions_CheckStateChanged(ucrchangedControl As ucrCore) Handles ucrChkOptions.ControlContentsChanged
-        If ucrChkOptions.Checked Then
-            grpOptions.Enabled = True
-        Else
-            grpOptions.Enabled = False
         End If
     End Sub
 
