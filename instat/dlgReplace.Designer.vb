@@ -139,7 +139,7 @@ Partial Class dlgReplace
         Me.ucrInputOldValue.bChangeParameterValue = True
         Me.ucrInputOldValue.IsMultiline = False
         Me.ucrInputOldValue.IsReadOnly = False
-        Me.ucrInputOldValue.Location = New System.Drawing.Point(58, 19)
+        Me.ucrInputOldValue.Location = New System.Drawing.Point(67, 19)
         Me.ucrInputOldValue.Name = "ucrInputOldValue"
         Me.ucrInputOldValue.Size = New System.Drawing.Size(95, 21)
         Me.ucrInputOldValue.TabIndex = 2
@@ -147,7 +147,7 @@ Partial Class dlgReplace
         'rdoRange
         '
         Me.rdoRange.AutoSize = True
-        Me.rdoRange.Location = New System.Drawing.Point(5, 60)
+        Me.rdoRange.Location = New System.Drawing.Point(9, 60)
         Me.rdoRange.Name = "rdoRange"
         Me.rdoRange.Size = New System.Drawing.Size(57, 17)
         Me.rdoRange.TabIndex = 4
@@ -159,7 +159,7 @@ Partial Class dlgReplace
         'rdoOldMissing
         '
         Me.rdoOldMissing.AutoSize = True
-        Me.rdoOldMissing.Location = New System.Drawing.Point(5, 40)
+        Me.rdoOldMissing.Location = New System.Drawing.Point(9, 40)
         Me.rdoOldMissing.Name = "rdoOldMissing"
         Me.rdoOldMissing.Size = New System.Drawing.Size(60, 17)
         Me.rdoOldMissing.TabIndex = 3
@@ -171,7 +171,7 @@ Partial Class dlgReplace
         'rdoOldValue
         '
         Me.rdoOldValue.AutoSize = True
-        Me.rdoOldValue.Location = New System.Drawing.Point(5, 20)
+        Me.rdoOldValue.Location = New System.Drawing.Point(9, 20)
         Me.rdoOldValue.Name = "rdoOldValue"
         Me.rdoOldValue.Size = New System.Drawing.Size(52, 17)
         Me.rdoOldValue.TabIndex = 1
@@ -227,7 +227,7 @@ Partial Class dlgReplace
         'rdoNewMissing
         '
         Me.rdoNewMissing.AutoSize = True
-        Me.rdoNewMissing.Location = New System.Drawing.Point(5, 40)
+        Me.rdoNewMissing.Location = New System.Drawing.Point(9, 40)
         Me.rdoNewMissing.Name = "rdoNewMissing"
         Me.rdoNewMissing.Size = New System.Drawing.Size(60, 17)
         Me.rdoNewMissing.TabIndex = 2
@@ -239,7 +239,7 @@ Partial Class dlgReplace
         'rdoNewValue
         '
         Me.rdoNewValue.AutoSize = True
-        Me.rdoNewValue.Location = New System.Drawing.Point(5, 20)
+        Me.rdoNewValue.Location = New System.Drawing.Point(9, 20)
         Me.rdoNewValue.Name = "rdoNewValue"
         Me.rdoNewValue.Size = New System.Drawing.Size(52, 17)
         Me.rdoNewValue.TabIndex = 0
@@ -251,7 +251,7 @@ Partial Class dlgReplace
         'rdoFromAbove
         '
         Me.rdoFromAbove.AutoSize = True
-        Me.rdoFromAbove.Location = New System.Drawing.Point(5, 60)
+        Me.rdoFromAbove.Location = New System.Drawing.Point(9, 60)
         Me.rdoFromAbove.Name = "rdoFromAbove"
         Me.rdoFromAbove.Size = New System.Drawing.Size(82, 17)
         Me.rdoFromAbove.TabIndex = 3
