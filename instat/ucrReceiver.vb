@@ -318,11 +318,10 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Protected Overrides Sub SetControlValue()
         Dim clsTempDataParameter As RParameter
         Dim lstCurrentVariables As String() = Nothing
 
-        MyBase.UpdateControl(bReset)
         If clsParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsParameter.bIsString Then
