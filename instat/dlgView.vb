@@ -43,26 +43,19 @@ Public Class dlgView
     Private Sub SetDefaults()
         Dim clsOveralDefaultFunction As New RFunction
         Dim clsDefaultHeadOrTail As New RFunction
+
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
         rdoDispSepOutputWindow.Checked = True
         ucrSpecifyRows.Checked = True
         clsDefaultHeadOrTail.SetRCommand("head")
+        clsDefaultHeadOrTail.AddParameter("n", 6)
         clsOveralDefaultFunction.SetRCommand("View")
         clsHeadOrTail = clsDefaultHeadOrTail.Clone
         clsOverall = clsOveralDefaultFunction.Clone
         clsOveralDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsHeadOrTail)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOveralDefaultFunction)
     End Sub
-
-    'Public Sub SetDefaultHeadOrTail()
-    '    Dim clsDefaultHeadOrTail As New RFunction
-    '    If rdoTop.Checked Then
-    '        clsDefaultHeadOrTail.SetRCommand("head")
-    '    Else
-    '        clsDefaultHeadOrTail.SetRCommand("tail")
-    '    End If
-    'End Sub
 
     Private Sub NumberOfRows()
         If ucrNudNumberRows.Maximum >= 6 Then
@@ -71,9 +64,9 @@ Public Class dlgView
             ucrNudNumberRows.Value = ucrNudNumberRows.Maximum
         End If
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 32
-        NumberOfRows()
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
@@ -82,7 +75,7 @@ Public Class dlgView
         ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
         DataFrameLength()
-
+        NumberOfRows()
         ucrPnlDisplayWindow.AddToLinkedControls(ucrSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -92,6 +85,7 @@ Public Class dlgView
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
 
         SetIcallType()
+
         ucrSelectorForView.SetParameter(New RParameter("title"))
         ucrSelectorForView.SetParameterIsString()
 
@@ -101,9 +95,6 @@ Public Class dlgView
         ucrReceiverView.SetParameterIsRFunction()
         ucrSpecifyRows.SetText("Specify Rows")
     End Sub
-    'Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged
-    '    SetDefaultHeadOrTail()
-    'End Sub
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
         DataFrameLength()
@@ -148,8 +139,20 @@ Public Class dlgView
         End If
     End Sub
 
+    Private Sub HeadOrTal()
+        If rdoTop.Checked Then
+            clsHeadOrTail.SetRCommand("head")
+        Else
+            clsHeadOrTail.SetRCommand("tail")
+        End If
+    End Sub
+
     Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged
-        SetIcallType()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlDisplayFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlContentsChanged
+        HeadOrTal()
+        SetIcallType()
     End Sub
 End Class
