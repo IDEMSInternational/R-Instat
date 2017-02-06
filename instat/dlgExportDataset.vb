@@ -56,10 +56,6 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub SetDefaults()
-        grpOptions.Visible = False
-        ucrChkOptions.Enabled = False
-        grpOptions.Enabled = False
-        ucrChkOptions.Enabled = False
         ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.Reset()
         ucrAvailableSheets.Reset()
@@ -68,11 +64,6 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrChkOptions.SetText("Additional Options")
-        ucrChkUseColumnNames.SetText("Use Column Names")
-        ucrChkUseRowNames.SetText("Use Row Names")
-        ucrInputExportFile.SetName("")
-        ucrChkOptions.Checked = False
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
         ucrAvailableSheets.SetParameter(New RParameter("x", 0))
         ucrAvailableSheets.SetParameterIsRFunction()
