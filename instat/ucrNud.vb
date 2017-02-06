@@ -159,7 +159,7 @@ Public Class ucrNud
         End If
     End Sub
 
-    Public Overrides Function ValueContainedIn(lstTemp As Object()) As Boolean
+    Public Overrides Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Dim dTemp As Decimal
         Dim bTemp As Boolean = False
 
