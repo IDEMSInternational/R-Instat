@@ -53,30 +53,31 @@ Public Class dlgTransformText
         ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
 
         'ucrRdoOptions
-        'ucrPnlOperation.AddRadioButton(rdoConvertCase)
+        ucrPnlOperation.AddRadioButton(rdoConvertCase)
         ucrPnlOperation.AddRadioButton(rdoLength)
         ucrPnlOperation.AddRadioButton(rdoPad)
         ucrPnlOperation.AddRadioButton(rdoTrim)
         ucrPnlOperation.AddRadioButton(rdoWords)
         ucrPnlOperation.AddRadioButton(rdoSubstring)
 
-        'ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "") ' this changes depending which rdo is checked
+        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "") ' this changes depending which rdo is checked
         ucrPnlOperation.AddFunctionNamesCondition(rdoLength, "stringr::str_length")
         ucrPnlOperation.AddFunctionNamesCondition(rdoPad, "stringr::str_pad")
         ucrPnlOperation.AddFunctionNamesCondition(rdoTrim, "stringr::str_trim")
         ucrPnlOperation.AddFunctionNamesCondition(rdoWords, "stringr::word")
         ucrPnlOperation.AddFunctionNamesCondition(rdoSubstring, "stringr::str_sub")
         'to do: check for   .AddParameterPresentCondition
+        'to do: check that everything displays correctly.
 
         'rdoConvertCase
-        'ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputTo
-        'ucrInputTo.SetLinkedDisplayControl(lblTo)
-        'ucrInputTo.cboInput.Items.Add("Lower")
-        'ucrInputTo.cboInput.Items.Add("Upper")
-        'ucrInputTo.cboInput.Items.Add("Title")
-        'ucrInputTo.SetName("Lower")
+        ucrInputTo.SetLinkedDisplayControl(lblTo)
+        ucrInputTo.cboInput.Items.Add("Lower")
+        ucrInputTo.cboInput.Items.Add("Upper")
+        ucrInputTo.cboInput.Items.Add("Title")
+        ucrInputTo.SetName("Lower")
 
         'Case "Lower"
         'ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
@@ -89,22 +90,29 @@ Public Class dlgTransformText
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad, rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputPad
-        'Dim dctInputPad As New Dictionary(Of String, String)
-        'ucrInputPad.SetParameter(New RParameter("pad", ))
-        'dctInputPad.Add("Space", Chr(34) & " " & Chr(34))
-        'dctInputPad.Add("Hash", Chr(34) & "#" & Chr(34))
-        'dctInputPad.Add("Hyphen", Chr(34) & "-" & Chr(34))
-        'dctInputPad.Add("Period", Chr(34) & "." & Chr(34))
-        'dctInputPad.Add("Underscore", Chr(34) & "_" & Chr(34))
+        Dim dctInputPad As New Dictionary(Of String, String)
+        ucrInputPad.SetParameter(New RParameter("pad", ))
+        dctInputPad.Add("Space", Chr(34) & " " & Chr(34))
+        dctInputPad.Add("Hash", Chr(34) & "#" & Chr(34))
+        dctInputPad.Add("Hyphen", Chr(34) & "-" & Chr(34))
+        dctInputPad.Add("Period", Chr(34) & "." & Chr(34))
+        dctInputPad.Add("Underscore", Chr(34) & "_" & Chr(34))
         '' case of else: ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
-        'ucrInputPad.SetItems(dctInputPad)
+        ucrInputPad.SetItems(dctInputPad)
         'space is default
         ''("pad", Chr(34) & " " & Chr(34)) - do I do this for clsDefaultFunction or not? It's not always going to be in.
+        ucrInputPad.SetLinkedDisplayControl(lblPad)
 
+        'ucrNudWidth
+        ucrNudWidth.SetParameter(New RParameter("width"))
+        ucrNudWidth.SetLinkedDisplayControl(lblWidth)
+        '.addparameter("width", 1)
+
+        'rdoTrim and pnl
+        ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad, rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlPad
         ucrPnlPad.SetParameter(New RParameter("side"))
         ucrPnlPad.AddRadioButton(rdoLeftPad, Chr(34) & "left" & Chr(34))
@@ -112,17 +120,12 @@ Public Class dlgTransformText
         ucrPnlPad.AddRadioButton(rdoBothPad, Chr(34) & "both" & Chr(34))
         '("side", Chr(34) & "left" & Chr(34)) - do I do this for clsDefaultFunction or not? It's not always going to be in.
 
-        'ucrNudWidth
-        ucrNudWidth.SetParameter(New RParameter("width"))
-        ucrNudWidth.SetLinkedDisplayControl(lblWidth)
-        '.addparameter("width", 1)
-
-        'rdoTrim
-        'uses ucrPnlPad code from above
 
         'rdoWords
         ucrPnlOperation.AddToLinkedControls(ucrChkFirstOr, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrChkLastOr, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudFirstWord, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudLastWord, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'if ucrChkFirstOrCol then         '    nudFirstWord.Enabled = False
@@ -176,24 +179,24 @@ Public Class dlgTransformText
         ' If this is checked, then we don't want to have nudLast enabled or running
 
         ucrNudLastWord.SetParameter(New RParameter("end"))
-        ucrNudLastWord.SetLinkedDisplayControl(lblFirstWord)
+        ucrNudLastWord.SetLinkedDisplayControl(lblLastWord)
         'default value is 1
 
         ' ucrInputSeparator
-        'Dim dctInputSeparator As New Dictionary(Of String, String)
-        'ucrInputSeparator.SetParameter(New RParameter("sep"))
-        'dctInputSeparator.Add("Space", Chr(34) & " " & Chr(34))
-        'dctInputSeparator.Add("Colon", Chr(34) & ":" & Chr(34))
-        'dctInputSeparator.Add("Period", Chr(34) & "." & Chr(34))
-        'dctInputSeparator.Add("Underscore", Chr(34) & "_" & Chr(34))
-        '' case of else: ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
-        'ucrInputPad.SetItems(dctInputSeparator)
-        'ucrInputPad.SetLinkedDisplayControl(lblSeparator)
-        'ucrInputPad.cboInput.MaxLength = 1
+        Dim dctInputSeparator As New Dictionary(Of String, String)
+        ucrInputSeparator.SetParameter(New RParameter("sep"))
+        dctInputSeparator.Add("Space", Chr(34) & " " & Chr(34))
+        dctInputSeparator.Add("Colon", Chr(34) & ":" & Chr(34))
+        dctInputSeparator.Add("Period", Chr(34) & "." & Chr(34))
+        dctInputSeparator.Add("Underscore", Chr(34) & "_" & Chr(34))
+        ' case of else: ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
+        ucrInputSeparator.SetItems(dctInputSeparator)
+        ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
+        ucrInputSeparator.cboInput.MaxLength = 1
 
         'rdoSubstring
-        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNud
         ucrNudFrom.SetParameter(New RParameter("start"))
@@ -201,7 +204,7 @@ Public Class dlgTransformText
         '.AddParameter("start", -1)
 
         ucrNudTo.SetParameter(New RParameter("end"))
-        ucrNudTo.SetLinkedDisplayControl(lblTo)
+        ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
         '.AddParameter("end", 1)
 
         'ucrNewColName
