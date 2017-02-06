@@ -47,12 +47,15 @@ Public Class dlgPolynomials
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("poly")
         clsDefaultFunction.AddParameter("degree", 2)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-        clsScale = clsCentredOptionFunc.Clone()
-        clsDefaultFunction.AddParameter("y", clsRFunctionParameter:=clsCentredOptionFunc)
-        clsDefaultFunction.AddParameter("raw", "TRUE")
-        ucrRadioCentered.SetRCode(clsScale)
-        ucrReceiverPolynomial.SetRCode(clsDefaultFunction)
+        If rdoSimple.Checked OrElse rdoOrthogonal.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+            clsScale = clsCentredOptionFunc.Clone()
+            clsDefaultFunction.AddParameter("y", clsRFunctionParameter:=clsCentredOptionFunc)
+            clsDefaultFunction.AddParameter("raw", "TRUE")
+            ucrReceiverPolynomial.SetRCode(clsDefaultFunction)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        End If
         clsDefaultFunction.SetAssignTo("poly", strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="poly")
 
         ' Set default RFunction as the base function
@@ -83,14 +86,14 @@ Public Class dlgPolynomials
         clsCentredOptionFunc.SetRCommand("scale")
         clsCentredOptionFunc.AddParameter("center", "TRUE")
         clsCentredOptionFunc.AddParameter("scale", "FALSE")
-        clsCentredOptionFunc.AddParameter("x", ucrReceiverPolynomial.GetVariableNames(False))
+
         ' clsRaw.AddParameter("raw", "TRUE")
 
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.bUseFilteredData = False
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
-        ' ucrReceiverPolynomial.SetParameter(New RParameter("x", 0))
+
 
         ucrReceiverPolynomial.SetParameterIsRFunction()
 
@@ -110,6 +113,16 @@ Public Class dlgPolynomials
         ucrSavePoly.SetIsComboBox()
 
     End Sub
+
+    Private Sub ChooseRadioButton()
+
+        If rdoSimple.Checked OrElse rdoOrthogonal.Checked Then
+            ucrReceiverPolynomial.SetParameter(New RParameter("x", 0))
+        Else
+            clsCentredOptionFunc.AddParameter("x", ucrReceiverPolynomial.GetVariableNames(False))
+        End If
+    End Sub
+
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPolynomial.ControlContentsChanged, ucrNudDegree.ControlContentsChanged
         TestOKEnabled()

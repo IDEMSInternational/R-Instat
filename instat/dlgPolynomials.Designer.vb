@@ -28,12 +28,12 @@ Partial Class dlgPolynomials
         Me.ucrReceiverPolynomial = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpType = New System.Windows.Forms.GroupBox()
+        Me.rdoCenterd = New System.Windows.Forms.RadioButton()
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoSimple = New System.Windows.Forms.RadioButton()
         Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSavePoly = New instat.ucrSave()
         Me.ucrNudDegree = New instat.ucrNud()
-        Me.rdoCenterd = New System.Windows.Forms.RadioButton()
         Me.grpType.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -101,6 +101,19 @@ Partial Class dlgPolynomials
         Me.grpType.TabStop = False
         Me.grpType.Text = "Type"
         '
+        'rdoCenterd
+        '
+        Me.rdoCenterd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdoCenterd.AutoSize = True
+        Me.rdoCenterd.Location = New System.Drawing.Point(19, 48)
+        Me.rdoCenterd.Name = "rdoCenterd"
+        Me.rdoCenterd.Size = New System.Drawing.Size(68, 17)
+        Me.rdoCenterd.TabIndex = 6
+        Me.rdoCenterd.Tag = "Centered"
+        Me.rdoCenterd.Text = "Centered"
+        Me.rdoCenterd.UseVisualStyleBackColor = True
+        '
         'rdoOrthogonal
         '
         Me.rdoOrthogonal.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -158,19 +171,6 @@ Partial Class dlgPolynomials
         Me.ucrNudDegree.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudDegree.TabIndex = 16
         Me.ucrNudDegree.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'rdoCenterd
-        '
-        Me.rdoCenterd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdoCenterd.AutoSize = True
-        Me.rdoCenterd.Location = New System.Drawing.Point(19, 50)
-        Me.rdoCenterd.Name = "rdoCenterd"
-        Me.rdoCenterd.Size = New System.Drawing.Size(68, 17)
-        Me.rdoCenterd.TabIndex = 6
-        Me.rdoCenterd.Tag = "Centered"
-        Me.rdoCenterd.Text = "Centered"
-        Me.rdoCenterd.UseVisualStyleBackColor = True
         '
         'dlgPolynomials
         '
