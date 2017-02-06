@@ -14,16 +14,24 @@
 Imports instat.Translations
 Public Class dlgReoderMetadata
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgReoderMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            setDefaults()
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        If bReset Then
+            setDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
         TestOKEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ReopenDialog()
@@ -46,6 +54,7 @@ Public Class dlgReoderMetadata
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         setDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
