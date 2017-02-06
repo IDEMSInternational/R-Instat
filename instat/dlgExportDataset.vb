@@ -18,8 +18,6 @@ Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
-
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -56,6 +54,7 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
         ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.Reset()
         ucrAvailableSheets.Reset()
