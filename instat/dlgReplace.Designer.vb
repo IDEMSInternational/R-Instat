@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgReplace
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgReplace
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpOld = New System.Windows.Forms.GroupBox()
         Me.ucrChkMaximum = New instat.ucrCheck()
@@ -34,7 +34,6 @@ Partial Class dlgReplace
         Me.rdoOldMissing = New System.Windows.Forms.RadioButton()
         Me.rdoOldValue = New System.Windows.Forms.RadioButton()
         Me.ucrPnlOld = New instat.UcrPanel()
-        Me.ucrPnlRange = New instat.UcrPanel()
         Me.grpNew = New System.Windows.Forms.GroupBox()
         Me.ucrInputNewValue = New instat.ucrInputTextBox()
         Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
@@ -62,7 +61,6 @@ Partial Class dlgReplace
         Me.grpOld.Controls.Add(Me.rdoOldMissing)
         Me.grpOld.Controls.Add(Me.rdoOldValue)
         Me.grpOld.Controls.Add(Me.ucrPnlOld)
-        Me.grpOld.Controls.Add(Me.ucrPnlRange)
         Me.grpOld.Location = New System.Drawing.Point(10, 194)
         Me.grpOld.Name = "grpOld"
         Me.grpOld.Size = New System.Drawing.Size(229, 132)
@@ -188,15 +186,6 @@ Partial Class dlgReplace
         Me.ucrPnlOld.Name = "ucrPnlOld"
         Me.ucrPnlOld.Size = New System.Drawing.Size(225, 110)
         Me.ucrPnlOld.TabIndex = 0
-        '
-        'ucrPnlRange
-        '
-        Me.ucrPnlRange.bAddRemoveParameter = True
-        Me.ucrPnlRange.bChangeParameterValue = True
-        Me.ucrPnlRange.Location = New System.Drawing.Point(4, 60)
-        Me.ucrPnlRange.Name = "ucrPnlRange"
-        Me.ucrPnlRange.Size = New System.Drawing.Size(93, 66)
-        Me.ucrPnlRange.TabIndex = 5
         '
         'grpNew
         '
@@ -358,5 +347,4 @@ Partial Class dlgReplace
     Friend WithEvents ucrPnlNew As UcrPanel
     Friend WithEvents ucrChkMinimum As ucrCheck
     Friend WithEvents ucrChkMaximum As ucrCheck
-    Friend WithEvents ucrPnlRange As UcrPanel
 End Class
