@@ -190,7 +190,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkMaxDrySpell.bAddRemoveParameter = True
         Me.ucrChkMaxDrySpell.bChangeParameterValue = True
         Me.ucrChkMaxDrySpell.Checked = False
-        Me.ucrChkMaxDrySpell.Location = New System.Drawing.Point(27, 405)
+        Me.ucrChkMaxDrySpell.Location = New System.Drawing.Point(27, 404)
         Me.ucrChkMaxDrySpell.Name = "ucrChkMaxDrySpell"
         Me.ucrChkMaxDrySpell.Size = New System.Drawing.Size(253, 20)
         Me.ucrChkMaxDrySpell.TabIndex = 82
@@ -200,7 +200,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkPrecExceedSpecifiedA.bAddRemoveParameter = True
         Me.ucrChkPrecExceedSpecifiedA.bChangeParameterValue = True
         Me.ucrChkPrecExceedSpecifiedA.Checked = False
-        Me.ucrChkPrecExceedSpecifiedA.Location = New System.Drawing.Point(27, 386)
+        Me.ucrChkPrecExceedSpecifiedA.Location = New System.Drawing.Point(27, 385)
         Me.ucrChkPrecExceedSpecifiedA.Name = "ucrChkPrecExceedSpecifiedA"
         Me.ucrChkPrecExceedSpecifiedA.Size = New System.Drawing.Size(241, 20)
         Me.ucrChkPrecExceedSpecifiedA.TabIndex = 81
@@ -300,7 +300,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkMonthlyMax1dayPrec.bAddRemoveParameter = True
         Me.ucrChkMonthlyMax1dayPrec.bChangeParameterValue = True
         Me.ucrChkMonthlyMax1dayPrec.Checked = False
-        Me.ucrChkMonthlyMax1dayPrec.Location = New System.Drawing.Point(27, 296)
+        Me.ucrChkMonthlyMax1dayPrec.Location = New System.Drawing.Point(27, 294)
         Me.ucrChkMonthlyMax1dayPrec.Name = "ucrChkMonthlyMax1dayPrec"
         Me.ucrChkMonthlyMax1dayPrec.Size = New System.Drawing.Size(264, 20)
         Me.ucrChkMonthlyMax1dayPrec.TabIndex = 71
@@ -310,7 +310,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkMeanDiurnalTempRange.bAddRemoveParameter = True
         Me.ucrChkMeanDiurnalTempRange.bChangeParameterValue = True
         Me.ucrChkMeanDiurnalTempRange.Checked = False
-        Me.ucrChkMeanDiurnalTempRange.Location = New System.Drawing.Point(27, 277)
+        Me.ucrChkMeanDiurnalTempRange.Location = New System.Drawing.Point(27, 276)
         Me.ucrChkMeanDiurnalTempRange.Name = "ucrChkMeanDiurnalTempRange"
         Me.ucrChkMeanDiurnalTempRange.Size = New System.Drawing.Size(264, 20)
         Me.ucrChkMeanDiurnalTempRange.TabIndex = 70
@@ -320,7 +320,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkSummerDays.bAddRemoveParameter = True
         Me.ucrChkSummerDays.bChangeParameterValue = True
         Me.ucrChkSummerDays.Checked = False
-        Me.ucrChkSummerDays.Location = New System.Drawing.Point(27, 26)
+        Me.ucrChkSummerDays.Location = New System.Drawing.Point(27, 25)
         Me.ucrChkSummerDays.Name = "ucrChkSummerDays"
         Me.ucrChkSummerDays.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSummerDays.TabIndex = 69
@@ -330,7 +330,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkIcingDays.bAddRemoveParameter = True
         Me.ucrChkIcingDays.bChangeParameterValue = True
         Me.ucrChkIcingDays.Checked = False
-        Me.ucrChkIcingDays.Location = New System.Drawing.Point(27, 44)
+        Me.ucrChkIcingDays.Location = New System.Drawing.Point(27, 43)
         Me.ucrChkIcingDays.Name = "ucrChkIcingDays"
         Me.ucrChkIcingDays.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkIcingDays.TabIndex = 68
@@ -340,7 +340,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkTropicalNights.bAddRemoveParameter = True
         Me.ucrChkTropicalNights.bChangeParameterValue = True
         Me.ucrChkTropicalNights.Checked = False
-        Me.ucrChkTropicalNights.Location = New System.Drawing.Point(27, 62)
+        Me.ucrChkTropicalNights.Location = New System.Drawing.Point(27, 61)
         Me.ucrChkTropicalNights.Name = "ucrChkTropicalNights"
         Me.ucrChkTropicalNights.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkTropicalNights.TabIndex = 67
@@ -350,7 +350,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkGrowingSeasonLength.bAddRemoveParameter = True
         Me.ucrChkGrowingSeasonLength.bChangeParameterValue = True
         Me.ucrChkGrowingSeasonLength.Checked = False
-        Me.ucrChkGrowingSeasonLength.Location = New System.Drawing.Point(27, 80)
+        Me.ucrChkGrowingSeasonLength.Location = New System.Drawing.Point(27, 79)
         Me.ucrChkGrowingSeasonLength.Name = "ucrChkGrowingSeasonLength"
         Me.ucrChkGrowingSeasonLength.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkGrowingSeasonLength.TabIndex = 66
@@ -360,7 +360,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkMonthlyMaxDailyTMax.bAddRemoveParameter = True
         Me.ucrChkMonthlyMaxDailyTMax.bChangeParameterValue = True
         Me.ucrChkMonthlyMaxDailyTMax.Checked = False
-        Me.ucrChkMonthlyMaxDailyTMax.Location = New System.Drawing.Point(27, 99)
+        Me.ucrChkMonthlyMaxDailyTMax.Location = New System.Drawing.Point(27, 98)
         Me.ucrChkMonthlyMaxDailyTMax.Name = "ucrChkMonthlyMaxDailyTMax"
         Me.ucrChkMonthlyMaxDailyTMax.Size = New System.Drawing.Size(297, 20)
         Me.ucrChkMonthlyMaxDailyTMax.TabIndex = 65
@@ -400,7 +400,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkTminBelow10Percent.bAddRemoveParameter = True
         Me.ucrChkTminBelow10Percent.bChangeParameterValue = True
         Me.ucrChkTminBelow10Percent.Checked = False
-        Me.ucrChkTminBelow10Percent.Location = New System.Drawing.Point(27, 171)
+        Me.ucrChkTminBelow10Percent.Location = New System.Drawing.Point(27, 170)
         Me.ucrChkTminBelow10Percent.Name = "ucrChkTminBelow10Percent"
         Me.ucrChkTminBelow10Percent.Size = New System.Drawing.Size(302, 20)
         Me.ucrChkTminBelow10Percent.TabIndex = 61
@@ -430,7 +430,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkMonthlyMaxDailyTMin.bAddRemoveParameter = True
         Me.ucrChkMonthlyMaxDailyTMin.bChangeParameterValue = True
         Me.ucrChkMonthlyMaxDailyTMin.Checked = False
-        Me.ucrChkMonthlyMaxDailyTMin.Location = New System.Drawing.Point(27, 115)
+        Me.ucrChkMonthlyMaxDailyTMin.Location = New System.Drawing.Point(27, 116)
         Me.ucrChkMonthlyMaxDailyTMin.Name = "ucrChkMonthlyMaxDailyTMin"
         Me.ucrChkMonthlyMaxDailyTMin.Size = New System.Drawing.Size(255, 20)
         Me.ucrChkMonthlyMaxDailyTMin.TabIndex = 58
@@ -440,7 +440,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkFrostDays.bAddRemoveParameter = True
         Me.ucrChkFrostDays.bChangeParameterValue = True
         Me.ucrChkFrostDays.Checked = False
-        Me.ucrChkFrostDays.Location = New System.Drawing.Point(27, 9)
+        Me.ucrChkFrostDays.Location = New System.Drawing.Point(27, 8)
         Me.ucrChkFrostDays.Name = "ucrChkFrostDays"
         Me.ucrChkFrostDays.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkFrostDays.TabIndex = 54
