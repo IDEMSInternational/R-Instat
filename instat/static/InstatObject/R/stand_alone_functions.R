@@ -238,9 +238,11 @@ dekade <- function(date) {
 
 open_NetCDF <- function(nc_data){
   variables = names(nc_data$var)
-  lat <- as.numeric(ncvar_get(nc_data, "lat"))
-  lon <- as.numeric(ncvar_get(nc_data, "lon"))
-  time <- as.numeric(ncvar_get(nc_data, "time"))
+  lat <- as.numeric(ncvar_get(nc_data, lat_label))
+  lon <- as.numeric(ncvar_get(nc_data, lat_label))
+  time_label
+  time <- as.numeric(ncvar_get(nc_data,  time_label))
+  time = 1
   period <- rep(time, each = (length(lat)*length(lon)))
   lat_rep <- rep(lat, each = length(lon))
   lon_rep <- rep(lon, length(lat))
