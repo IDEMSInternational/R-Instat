@@ -17,37 +17,47 @@
 Imports instat.Translations
 Public Class dlgColumnStats
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
 
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        ' TestOKEnabled()
+
+        If bReset Then
+            SetDefaults()
+        End If
+
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+        TestOKEnabled()
+    End Sub
+
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
-        If (Not ucrReceiverSelectedVariables.IsEmpty() AndAlso Not sdgSummaries.strSummariesParameter = "c()") Then
+        If Not ucrReceiverSelectedVariables.IsEmpty() Then ' AndAlso Not sdgSummaries.strSummariesParameter = "c()") 
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
     Private Sub SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorForColumnStatistics.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         ucrReceiverSelectedVariables.SetMeAsReceiver()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
+        clsDefaultFunction.AddParameter("summaries", "c(" & Chr(34) & "summary_count" & Chr(34) & "," & Chr(34) & "summary_count_non_missing" & Chr(34) & "," & Chr(34) & "summary_sum" & Chr(34) & ")")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
         'TODO get the subdilog stuff working
         ' TestOKEnabled()
     End Sub
@@ -84,7 +94,7 @@ Public Class dlgColumnStats
         ucrChkdropUnusedLevels.SetText("Drop Unused Levels")
         ucrChkdropUnusedLevels.SetParameter(New RParameter("drop"))
         ucrChkdropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkPrintOutput.SetRDefault("FALSE")
+        ucrChkdropUnusedLevels.SetRDefault("FALSE")
 
 
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -92,23 +102,24 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
-
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
-
+        'disbling the cmdSummaries for the moment
+        cmdSummaries.Enabled = False
         'i leave the subdialog stuff for now
         'sdgSummaries.SetMyRFunction(clsDefaultFunction)
         'ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        'SetDefaults()
-        'TestOKEnabled()
+        SetRCodeForControls(True)
+        SetDefaults()
+        TestOKEnabled()
     End Sub
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         'sdgSummaries.ShowDialog()
         'sdgSummaries.TestSummaries()
         'TestOKEnabled()
     End Sub
-
-
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class

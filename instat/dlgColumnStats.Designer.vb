@@ -25,11 +25,11 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkdropUnusedLevels = New instat.ucrCheck()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -63,42 +63,10 @@ Partial Class dlgColumnStats
         Me.grpOptions.Controls.Add(Me.ucrChkdropUnusedLevels)
         Me.grpOptions.Location = New System.Drawing.Point(9, 190)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(120, 121)
+        Me.grpOptions.Size = New System.Drawing.Size(160, 121)
         Me.grpOptions.TabIndex = 9
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
-        '
-        'ucrChkStoreResults
-        '
-        Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
-        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkStoreResults.TabIndex = 11
-        '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 94)
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkOmitMissing.TabIndex = 11
-        '
-        'ucrChkPrintOutput
-        '
-        Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 43)
-        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPrintOutput.TabIndex = 11
-        '
-        'ucrChkdropUnusedLevels
-        '
-        Me.ucrChkdropUnusedLevels.Checked = False
-        Me.ucrChkdropUnusedLevels.Location = New System.Drawing.Point(6, 69)
-        Me.ucrChkdropUnusedLevels.Name = "ucrChkdropUnusedLevels"
-        Me.ucrChkdropUnusedLevels.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkdropUnusedLevels.TabIndex = 11
         '
         'cmdSummaries
         '
@@ -110,8 +78,50 @@ Partial Class dlgColumnStats
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
+        'ucrChkStoreResults
+        '
+        Me.ucrChkStoreResults.bAddRemoveParameter = True
+        Me.ucrChkStoreResults.bChangeParameterValue = True
+        Me.ucrChkStoreResults.Checked = False
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkStoreResults.TabIndex = 11
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.bAddRemoveParameter = True
+        Me.ucrChkOmitMissing.bChangeParameterValue = True
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 94)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkOmitMissing.TabIndex = 11
+        '
+        'ucrChkPrintOutput
+        '
+        Me.ucrChkPrintOutput.bAddRemoveParameter = True
+        Me.ucrChkPrintOutput.bChangeParameterValue = True
+        Me.ucrChkPrintOutput.Checked = False
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 43)
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkPrintOutput.TabIndex = 11
+        '
+        'ucrChkdropUnusedLevels
+        '
+        Me.ucrChkdropUnusedLevels.bAddRemoveParameter = True
+        Me.ucrChkdropUnusedLevels.bChangeParameterValue = True
+        Me.ucrChkdropUnusedLevels.Checked = False
+        Me.ucrChkdropUnusedLevels.Location = New System.Drawing.Point(6, 69)
+        Me.ucrChkdropUnusedLevels.Name = "ucrChkdropUnusedLevels"
+        Me.ucrChkdropUnusedLevels.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkdropUnusedLevels.TabIndex = 11
+        '
         'ucrReceiverByFactor
         '
+        Me.ucrReceiverByFactor.bAddRemoveParameter = True
+        Me.ucrReceiverByFactor.bChangeParameterValue = True
         Me.ucrReceiverByFactor.frmParent = Me
         Me.ucrReceiverByFactor.Location = New System.Drawing.Point(267, 172)
         Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
@@ -122,6 +132,8 @@ Partial Class dlgColumnStats
         '
         'ucrReceiverSelectedVariables
         '
+        Me.ucrReceiverSelectedVariables.bAddRemoveParameter = True
+        Me.ucrReceiverSelectedVariables.bChangeParameterValue = True
         Me.ucrReceiverSelectedVariables.frmParent = Me
         Me.ucrReceiverSelectedVariables.Location = New System.Drawing.Point(267, 46)
         Me.ucrReceiverSelectedVariables.Margin = New System.Windows.Forms.Padding(0)
@@ -132,6 +144,8 @@ Partial Class dlgColumnStats
         '
         'ucrSelectorForColumnStatistics
         '
+        Me.ucrSelectorForColumnStatistics.bAddRemoveParameter = True
+        Me.ucrSelectorForColumnStatistics.bChangeParameterValue = True
         Me.ucrSelectorForColumnStatistics.bShowHiddenColumns = False
         Me.ucrSelectorForColumnStatistics.bUseCurrentFilter = True
         Me.ucrSelectorForColumnStatistics.Location = New System.Drawing.Point(9, 7)
