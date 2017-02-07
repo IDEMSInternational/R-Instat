@@ -82,6 +82,7 @@ Partial Class sdgClimdexIndices
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.tbClimdex = New System.Windows.Forms.TabControl()
         Me.TbSettings = New System.Windows.Forms.TabPage()
+        Me.ucrChkSave = New instat.ucrCheck()
         Me.ucrChkCenterMean = New instat.ucrCheck()
         Me.ucrChkSpellDISpanYear = New instat.ucrCheck()
         Me.ucrChkNHemisphere = New instat.ucrCheck()
@@ -737,6 +738,7 @@ Partial Class sdgClimdexIndices
         '
         'TbSettings
         '
+        Me.TbSettings.Controls.Add(Me.ucrChkSave)
         Me.TbSettings.Controls.Add(Me.ucrChkCenterMean)
         Me.TbSettings.Controls.Add(Me.ucrChkSpellDISpanYear)
         Me.TbSettings.Controls.Add(Me.ucrChkNHemisphere)
@@ -764,6 +766,16 @@ Partial Class sdgClimdexIndices
         Me.TbSettings.Tag = ""
         Me.TbSettings.Text = "Settings"
         Me.TbSettings.UseVisualStyleBackColor = True
+        '
+        'ucrChkSave
+        '
+        Me.ucrChkSave.bAddRemoveParameter = True
+        Me.ucrChkSave.bChangeParameterValue = True
+        Me.ucrChkSave.Checked = False
+        Me.ucrChkSave.Location = New System.Drawing.Point(152, 213)
+        Me.ucrChkSave.Name = "ucrChkSave"
+        Me.ucrChkSave.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkSave.TabIndex = 50
         '
         'ucrChkCenterMean
         '
@@ -1133,4 +1145,5 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrChkMonthlyMinDailyTMax As ucrCheck
     Friend WithEvents ucrChkMonthlyMaxDailyTMin As ucrCheck
     Friend WithEvents ucrChkFrostDays As ucrCheck
+    Friend WithEvents ucrChkSave As ucrCheck
 End Class
