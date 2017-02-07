@@ -39,7 +39,7 @@ Partial Class dlgColumnStructure
         Me.lblMeasurement.Location = New System.Drawing.Point(250, 210)
         Me.lblMeasurement.Name = "lblMeasurement"
         Me.lblMeasurement.Size = New System.Drawing.Size(74, 13)
-        Me.lblMeasurement.TabIndex = 16
+        Me.lblMeasurement.TabIndex = 5
         Me.lblMeasurement.Text = "Measurement:"
         '
         'lblTreatment
@@ -48,7 +48,7 @@ Partial Class dlgColumnStructure
         Me.lblTreatment.Location = New System.Drawing.Point(250, 117)
         Me.lblTreatment.Name = "lblTreatment"
         Me.lblTreatment.Size = New System.Drawing.Size(58, 13)
-        Me.lblTreatment.TabIndex = 15
+        Me.lblTreatment.TabIndex = 3
         Me.lblTreatment.Text = "Treatment:"
         '
         'lblLayout
@@ -57,63 +57,73 @@ Partial Class dlgColumnStructure
         Me.lblLayout.Location = New System.Drawing.Point(250, 24)
         Me.lblLayout.Name = "lblLayout"
         Me.lblLayout.Size = New System.Drawing.Size(42, 13)
-        Me.lblLayout.TabIndex = 14
+        Me.lblLayout.TabIndex = 1
         Me.lblLayout.Text = "Layout:"
         '
         'ucrReceiverType3
         '
+        Me.ucrReceiverType3.bAddRemoveParameter = True
+        Me.ucrReceiverType3.bChangeParameterValue = True
         Me.ucrReceiverType3.frmParent = Me
         Me.ucrReceiverType3.Location = New System.Drawing.Point(247, 225)
         Me.ucrReceiverType3.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverType3.Name = "ucrReceiverType3"
         Me.ucrReceiverType3.Selector = Nothing
         Me.ucrReceiverType3.Size = New System.Drawing.Size(120, 76)
-        Me.ucrReceiverType3.TabIndex = 13
+        Me.ucrReceiverType3.TabIndex = 6
         '
         'ucrReceiverType2
         '
+        Me.ucrReceiverType2.bAddRemoveParameter = True
+        Me.ucrReceiverType2.bChangeParameterValue = True
         Me.ucrReceiverType2.frmParent = Me
         Me.ucrReceiverType2.Location = New System.Drawing.Point(247, 132)
         Me.ucrReceiverType2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverType2.Name = "ucrReceiverType2"
         Me.ucrReceiverType2.Selector = Nothing
         Me.ucrReceiverType2.Size = New System.Drawing.Size(120, 73)
-        Me.ucrReceiverType2.TabIndex = 12
+        Me.ucrReceiverType2.TabIndex = 4
         '
         'ucrReceiverType1
         '
+        Me.ucrReceiverType1.bAddRemoveParameter = True
+        Me.ucrReceiverType1.bChangeParameterValue = True
         Me.ucrReceiverType1.frmParent = Me
         Me.ucrReceiverType1.Location = New System.Drawing.Point(247, 39)
         Me.ucrReceiverType1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverType1.Name = "ucrReceiverType1"
         Me.ucrReceiverType1.Selector = Nothing
         Me.ucrReceiverType1.Size = New System.Drawing.Size(120, 74)
-        Me.ucrReceiverType1.TabIndex = 11
+        Me.ucrReceiverType1.TabIndex = 2
         '
         'ucrSelectorColumnStructure
         '
+        Me.ucrSelectorColumnStructure.bAddRemoveParameter = True
+        Me.ucrSelectorColumnStructure.bChangeParameterValue = True
         Me.ucrSelectorColumnStructure.bShowHiddenColumns = False
         Me.ucrSelectorColumnStructure.bUseCurrentFilter = True
         Me.ucrSelectorColumnStructure.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorColumnStructure.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorColumnStructure.Name = "ucrSelectorColumnStructure"
         Me.ucrSelectorColumnStructure.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorColumnStructure.TabIndex = 10
+        Me.ucrSelectorColumnStructure.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 309)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 8
         '
         'ucrColourColumnsByStr
         '
+        Me.ucrColourColumnsByStr.bAddRemoveParameter = True
+        Me.ucrColourColumnsByStr.bChangeParameterValue = True
         Me.ucrColourColumnsByStr.Checked = False
         Me.ucrColourColumnsByStr.Location = New System.Drawing.Point(10, 194)
         Me.ucrColourColumnsByStr.Name = "ucrColourColumnsByStr"
         Me.ucrColourColumnsByStr.Size = New System.Drawing.Size(100, 20)
-        Me.ucrColourColumnsByStr.TabIndex = 17
+        Me.ucrColourColumnsByStr.TabIndex = 7
         '
         'dlgColumnStructure
         '
