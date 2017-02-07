@@ -89,7 +89,7 @@ Partial Class dlgImportFromODK
         'rdoOna
         '
         Me.rdoOna.AutoSize = True
-        Me.rdoOna.Location = New System.Drawing.Point(80, 18)
+        Me.rdoOna.Location = New System.Drawing.Point(152, 17)
         Me.rdoOna.Name = "rdoOna"
         Me.rdoOna.Size = New System.Drawing.Size(45, 17)
         Me.rdoOna.TabIndex = 2
@@ -114,7 +114,7 @@ Partial Class dlgImportFromODK
         Me.ucrPnlPlatform.bChangeParameterValue = True
         Me.ucrPnlPlatform.Location = New System.Drawing.Point(3, 16)
         Me.ucrPnlPlatform.Name = "ucrPnlPlatform"
-        Me.ucrPnlPlatform.Size = New System.Drawing.Size(188, 24)
+        Me.ucrPnlPlatform.Size = New System.Drawing.Size(300, 24)
         Me.ucrPnlPlatform.TabIndex = 0
         '
         'ucrChkViewPassword

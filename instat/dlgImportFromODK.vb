@@ -13,7 +13,6 @@
 '
 Imports instat.Translations
 Imports RDotNet
-
 Public Class dlgImportFromODK
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -24,7 +23,6 @@ Public Class dlgImportFromODK
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -51,12 +49,12 @@ Public Class dlgImportFromODK
         ucrInputChooseForm.SetParameter(New RParameter("form_name"))
         ucrInputUsername.SetParameter(New RParameter("username"))
         ucrInputPassword.SetParameter(New RParameter("password"))
-        ucrChkViewPassword.SetText("View Password")
 
+        ucrChkViewPassword.SetText("View Password")
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputChooseForm.IsEmpty Then
+        If Not ucrInputChooseForm.IsEmpty AndAlso Not ucrInputPassword.IsEmpty AndAlso Not ucrInputUsername.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -69,14 +67,15 @@ Public Class dlgImportFromODK
         ucrInputChooseForm.Reset()
         ucrInputPassword.Reset()
         ucrInputUsername.Reset()
+        ucrInputUsername.SetName("")
+        ucrInputPassword.SetName("")
+        ucrInputChooseForm.SetName("")
+
         ucrInputPassword.txtInput.UseSystemPasswordChar = True
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
-        clsDefaultRFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
 
         clsGetFormsFunction.SetRCommand("get_odk_form_names")
-        clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
     End Sub
 
@@ -85,8 +84,34 @@ Public Class dlgImportFromODK
         SetRCodeForControls(True)
     End Sub
 
+    Private Sub pnlPlatform() Handles ucrPnlPlatform.ControlContentsChanged
+        If rdoOna.Checked Then
+            clsGetFormsFunction.AddParameter("platform", Chr(34) & "ona" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("platform", Chr(34) & "ona" & Chr(34))
+        ElseIf rdoKobo.Checked Then
+            clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
+        End If
+    End Sub
+    Private Sub ucrInputUsername_NameChanged() Handles ucrInputUsername.ControlValueChanged
+        If ucrInputUsername.IsEmpty() Then
+            clsGetFormsFunction.RemoveParameterByName("username")
+        Else
+            clsGetFormsFunction.AddParameter("username", Chr(34) & ucrInputUsername.GetText & Chr(34))
+        End If
+        TestOKEnabled()
+    End Sub
 
-    Private Sub AllControls_ContentsChnaged() Handles ucrChkViewPassword.ControlContentsChanged, ucrInputChooseForm.ControlContentsChanged, ucrInputPassword.ControlContentsChanged, ucrPnlPlatform.ControlContentsChanged
+    Private Sub ucrInputPassword_NameChanged() Handles ucrInputPassword.ControlValueChanged
+        useSystemePassword()
+        If ucrInputPassword.IsEmpty() Then
+            clsGetFormsFunction.RemoveParameterByName("password")
+        Else
+            clsGetFormsFunction.AddParameter("password", Chr(34) & ucrInputPassword.GetText & Chr(34))
+        End If
+    End Sub
+
+    Private Sub AllControls_ContentsChnaged() Handles ucrInputChooseForm.ControlContentsChanged, ucrInputPassword.ControlContentsChanged, ucrInputUsername.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
