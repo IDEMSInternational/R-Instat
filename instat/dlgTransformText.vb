@@ -75,8 +75,17 @@ Public Class dlgTransformText
         ucrInputTo.cboInput.Items.Add("Upper")
         ucrInputTo.cboInput.Items.Add("Title")
 
-        ucrInputTo.SetName("Lower")
-        ucrInputTo.SetLinkedDisplayControl(lblTo)
+        'Dim dctInputTo As New Dictionary(Of String, String)
+        ' ucrInputTo.SetFunction(New RFunction)
+        'dctInputTo.Add("Lower", )
+        'dctInputTo.Add("Upper", )
+        'dctInputTo.Add("Both", )
+        'ucrInputTo.SetItems(dctInputTo)
+        'ucrInputTo.SetLinkedDisplayControl(lblTo)
+        'Public Overridable Sub SetFunction(clsNewFunction As RFunction)
+        '   Dim clsFunction As RFunction
+        '  clsFunction = clsNewFunction
+        'End Sub??
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
