@@ -53,7 +53,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.bUseFilteredData = False
         ucrReceiverTransformText.SetMeAsReceiver()
-        ' set single status type
+        ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
 
         'ucrRdoOptions
         ucrPnlOperation.AddRadioButton(rdoConvertCase)
