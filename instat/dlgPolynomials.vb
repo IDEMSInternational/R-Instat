@@ -102,14 +102,16 @@ Public Class dlgPolynomials
 
         ucrPnlType.SetParameter(New RParameter("raw", 1))
         ucrPnlType.AddRadioButton(rdoSimple, "TRUE")
+        ucrPnlType.AddParameterPresentCondition(rdoSimple, "scale", False)
         ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
+        ucrPnlType.AddParameterPresentCondition(rdoCentered, "scale")
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
         ucrPnlType.SetRDefault("FALSE")
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
 
         'Set ucrSave 
-        ucrSavePoly.SetPrefix("poly")
+        ucrSavePoly.SetName("poly")
         ucrSavePoly.SetSaveTypeAsColumn()
         ucrSavePoly.SetLabelText("Save Poly")
         ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
@@ -121,9 +123,6 @@ Public Class dlgPolynomials
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged
-        TypeFunction()
-    End Sub
 
 
 End Class
