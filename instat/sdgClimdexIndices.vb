@@ -448,7 +448,7 @@ Public Class sdgClimdexIndices
         ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset)
     End Sub
 
-    Private Sub ucrChkSave_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlContentsChanged
+    Private Sub ucrChkSave_ControlContentsChanged(ucrChangedControl As ucrCore) 
         If ucrChkSave.Checked Then
             bSaveIndex = True
         Else

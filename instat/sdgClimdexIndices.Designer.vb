@@ -82,7 +82,6 @@ Partial Class sdgClimdexIndices
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.tbClimdex = New System.Windows.Forms.TabControl()
         Me.TbSettings = New System.Windows.Forms.TabPage()
-        Me.ucrChkSave = New instat.ucrCheck()
         Me.ucrChkCenterMean = New instat.ucrCheck()
         Me.ucrChkSpellDISpanYear = New instat.ucrCheck()
         Me.ucrChkNHemisphere = New instat.ucrCheck()
@@ -107,6 +106,7 @@ Partial Class sdgClimdexIndices
         Me.lblN = New System.Windows.Forms.Label()
         Me.tbIndices = New System.Windows.Forms.TabPage()
         Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkSave = New instat.ucrCheck()
         Me.panIndices.SuspendLayout()
         Me.tbClimdex.SuspendLayout()
         Me.TbSettings.SuspendLayout()
@@ -171,9 +171,9 @@ Partial Class sdgClimdexIndices
         Me.panIndices.Controls.Add(Me.lbl4)
         Me.panIndices.Controls.Add(Me.lbl5)
         Me.panIndices.Controls.Add(Me.lbl1)
-        Me.panIndices.Location = New System.Drawing.Point(3, 3)
+        Me.panIndices.Location = New System.Drawing.Point(3, 37)
         Me.panIndices.Name = "panIndices"
-        Me.panIndices.Size = New System.Drawing.Size(462, 242)
+        Me.panIndices.Size = New System.Drawing.Size(462, 239)
         Me.panIndices.TabIndex = 0
         '
         'ucrChkPrecExceed10mm
@@ -733,12 +733,11 @@ Partial Class sdgClimdexIndices
         Me.tbClimdex.Location = New System.Drawing.Point(7, 0)
         Me.tbClimdex.Name = "tbClimdex"
         Me.tbClimdex.SelectedIndex = 0
-        Me.tbClimdex.Size = New System.Drawing.Size(476, 274)
+        Me.tbClimdex.Size = New System.Drawing.Size(476, 305)
         Me.tbClimdex.TabIndex = 7
         '
         'TbSettings
         '
-        Me.TbSettings.Controls.Add(Me.ucrChkSave)
         Me.TbSettings.Controls.Add(Me.ucrChkCenterMean)
         Me.TbSettings.Controls.Add(Me.ucrChkSpellDISpanYear)
         Me.TbSettings.Controls.Add(Me.ucrChkNHemisphere)
@@ -761,21 +760,11 @@ Partial Class sdgClimdexIndices
         Me.TbSettings.Location = New System.Drawing.Point(4, 22)
         Me.TbSettings.Name = "TbSettings"
         Me.TbSettings.Padding = New System.Windows.Forms.Padding(3)
-        Me.TbSettings.Size = New System.Drawing.Size(468, 248)
+        Me.TbSettings.Size = New System.Drawing.Size(468, 279)
         Me.TbSettings.TabIndex = 0
         Me.TbSettings.Tag = ""
         Me.TbSettings.Text = "Settings"
         Me.TbSettings.UseVisualStyleBackColor = True
-        '
-        'ucrChkSave
-        '
-        Me.ucrChkSave.bAddRemoveParameter = True
-        Me.ucrChkSave.bChangeParameterValue = True
-        Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(152, 213)
-        Me.ucrChkSave.Name = "ucrChkSave"
-        Me.ucrChkSave.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkSave.TabIndex = 50
         '
         'ucrChkCenterMean
         '
@@ -1020,27 +1009,38 @@ Partial Class sdgClimdexIndices
         '
         'tbIndices
         '
+        Me.tbIndices.Controls.Add(Me.ucrChkSave)
         Me.tbIndices.Controls.Add(Me.panIndices)
         Me.tbIndices.Location = New System.Drawing.Point(4, 22)
         Me.tbIndices.Name = "tbIndices"
         Me.tbIndices.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbIndices.Size = New System.Drawing.Size(468, 248)
+        Me.tbIndices.Size = New System.Drawing.Size(468, 279)
         Me.tbIndices.TabIndex = 1
         Me.tbIndices.Text = "Indices"
         Me.tbIndices.UseVisualStyleBackColor = True
         '
         'ucrButtonsClimdexIndices
         '
-        Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(163, 280)
+        Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(163, 311)
         Me.ucrButtonsClimdexIndices.Name = "ucrButtonsClimdexIndices"
         Me.ucrButtonsClimdexIndices.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsClimdexIndices.TabIndex = 6
+        '
+        'ucrChkSave
+        '
+        Me.ucrChkSave.bAddRemoveParameter = True
+        Me.ucrChkSave.bChangeParameterValue = True
+        Me.ucrChkSave.Checked = False
+        Me.ucrChkSave.Location = New System.Drawing.Point(6, 11)
+        Me.ucrChkSave.Name = "ucrChkSave"
+        Me.ucrChkSave.Size = New System.Drawing.Size(95, 20)
+        Me.ucrChkSave.TabIndex = 51
         '
         'sdgClimdexIndices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(488, 314)
+        Me.ClientSize = New System.Drawing.Size(488, 348)
         Me.Controls.Add(Me.tbClimdex)
         Me.Controls.Add(Me.ucrButtonsClimdexIndices)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
