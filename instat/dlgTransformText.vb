@@ -40,9 +40,6 @@ Public Class dlgTransformText
 
     End Sub
 
-    'set defaults
-    'do any parameter changed thing for any extra parameters in functions. see dlgrownamesor
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 343
         ucrBase.clsRsyntax.bUseBaseFunction = True
@@ -74,10 +71,12 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputTo
-        ucrInputTo.SetLinkedDisplayControl(lblTo)
         ucrInputTo.cboInput.Items.Add("Lower")
         ucrInputTo.cboInput.Items.Add("Upper")
         ucrInputTo.cboInput.Items.Add("Title")
+
+        ucrInputTo.SetName("Lower")
+        ucrInputTo.SetLinkedDisplayControl(lblTo)
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -107,7 +106,7 @@ Public Class dlgTransformText
         ucrPnlPad.AddRadioButton(rdoLeftPad, Chr(34) & "left" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoRightPad, Chr(34) & "right" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoBothPad, Chr(34) & "both" & Chr(34))
-        ucrPnlPad.SetRDefault("left") ' left is the R default
+        ucrPnlPad.SetRDefault(Chr(34) & "left" & Chr(34)) ' left is the R default
 
         'rdoWords
         ucrPnlOperation.AddToLinkedControls(ucrChkFirstOr, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -120,7 +119,7 @@ Public Class dlgTransformText
         ucrReceiverFirstWord.SetParameter(New RParameter("start"))
         ucrChkFirstOr.SetParameter(ucrReceiverFirstWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrReceiverFirstWord.SetParameterIsRFunction() 'getvariables()
+        ucrReceiverFirstWord.SetParameterIsRFunction()
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
         ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
