@@ -53,7 +53,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.bUseFilteredData = False
         ucrReceiverTransformText.SetMeAsReceiver()
-        ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
+        ' set single status type
 
         'ucrRdoOptions
         ucrPnlOperation.AddRadioButton(rdoConvertCase)
@@ -94,14 +94,13 @@ Public Class dlgTransformText
         dctInputPad.Add("Underscore", Chr(34) & "_" & Chr(34))
         '' case of else: ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
         ucrInputPad.SetItems(dctInputPad)
-        'space is default
-        ''("pad", Chr(34) & " " & Chr(34)) - do I do this for clsDefaultFunction or not? It's not always going to be in.
+        'ucrInputPad.SetRDefault(" "), how tot do this?
         ucrInputPad.SetLinkedDisplayControl(lblPad)
 
         'ucrNudWidth
         ucrNudWidth.SetParameter(New RParameter("width"))
         ucrNudWidth.SetLinkedDisplayControl(lblWidth)
-        '.addparameter("width", 1)
+        ucrNudWidth.SetRDefault(1) ' this isn't the R default, I need to sort this
 
         'rdoTrim and pnl
         ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad, rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -110,8 +109,7 @@ Public Class dlgTransformText
         ucrPnlPad.AddRadioButton(rdoLeftPad, Chr(34) & "left" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoRightPad, Chr(34) & "right" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoBothPad, Chr(34) & "both" & Chr(34))
-        '("side", Chr(34) & "left" & Chr(34)) - do I do this for clsDefaultFunction or not? It's not always going to be in.
-
+        ucrPnlPad.SetRDefault("left") ' left is the R default
 
         'rdoWords
         ucrPnlOperation.AddToLinkedControls(ucrChkFirstOr, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -128,6 +126,7 @@ Public Class dlgTransformText
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
         ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
+        ' Defaults to first word
 
         ucrChkFirstOr.SetText("Or Column")
         ucrChkFirstOr.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -138,6 +137,7 @@ Public Class dlgTransformText
 
         ucrNudFirstWord.SetParameter(New RParameter("start"))
         ucrNudFirstWord.SetLinkedDisplayControl(lblFirstWord)
+        ucrNudFirstWord.SetRDefault(1)
         'default value is 1
 
 
@@ -145,12 +145,7 @@ Public Class dlgTransformText
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
         ucrReceiverLastWord.bUseFilteredData = False
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
-        ' nud last word stuff
-        '            ucrBase.clsRsyntax.AddParameter("end", nudLastWord.Value)
-        'lblLastWord.Visible = True
-        'nudLastWord.Visible = True
-        'value=1
-
+        ' Defaults to first word
 
         'if ucrChkorCol then         '    nudLastWord.Enabled = False
         ucrReceiverLastWord.SetParameter(New RParameter("end"))
@@ -171,6 +166,7 @@ Public Class dlgTransformText
 
         ucrNudLastWord.SetParameter(New RParameter("end"))
         ucrNudLastWord.SetLinkedDisplayControl(lblLastWord)
+        ucrNudLastWord.SetRDefault(1)
         'default value is 1
 
         ' ucrInputSeparator
@@ -183,7 +179,10 @@ Public Class dlgTransformText
         ' case of else: ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
         ucrInputSeparator.SetItems(dctInputSeparator)
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
-        ucrInputSeparator.cboInput.MaxLength = 1
+        'ucrInputSeparator.cboInput.MaxLength = 1
+        ' space is default
+
+        '        Developer error: no state of control ucrInputTo satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.
 
         'rdoSubstring
         ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -192,27 +191,29 @@ Public Class dlgTransformText
         'ucrNud
         ucrNudFrom.SetParameter(New RParameter("start"))
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+        ucrNudFrom.SetRDefault(1) ' this is not the R Default
         '.AddParameter("start", -1)
 
         ucrNudTo.SetParameter(New RParameter("end"))
         ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
+        ucrNudTo.SetRDefault(1)
         '.AddParameter("end", 1)
 
         'ucrNewColName
         ucrNewColName.SetIsTextBox()
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
-        ucrNewColName.SetLabelText("New Column Name:")
+        ucrNewColName.SetLabelText("Column Name:")
         ucrNewColName.SetPrefix("New_Text")
     End Sub
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
-
+        ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
         'rdoConvertCase.Checked = True
 
-        clsDefaultFunction.SetRCommand(" ") ' first check box, which changes
+        clsDefaultFunction.SetRCommand("stringr::str_to_lower")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
