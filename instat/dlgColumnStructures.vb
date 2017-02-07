@@ -14,23 +14,32 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgColumnStructure
-    Public clsdefaultCourByStructure As New RFunction
-    Private clsSetStructure As New RFunction
+    Private bReset As Boolean = True
+    Private clsDefaultcol As New RFunction
     'clsCourByStructure is here to construct the R-command that will colour columns according to their type in case it is required (see relevant tick box).
     Public bFirstLoad As Boolean = True
     Private Sub ucrSelectorColumnStructures_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
         SetColumnStructureInReceiver()
         TestOKEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -57,18 +66,17 @@ Public Class dlgColumnStructure
 
         ucrColourColumnsByStr.SetText("Color Columns by Structure")
 
-        ' clsdefaultCourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
-        ' clsSetStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
-
-        clsSetStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
+        ucrColourColumnsByStr.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsdefaultCourByStructure As New RFunction
         SetColumnStructureInReceiver()
         ucrReceiverType1.SetMeAsReceiver()
-        ucrColourColumnsByStr.Checked = False
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSetStructure.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        clsdefaultCourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
+        clsDefaultcol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        clsdefaultCourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsdefaultCourByStructure.Clone())
     End Sub
 
     Private Sub ReopenDialog()
@@ -98,5 +106,13 @@ Public Class dlgColumnStructure
 
     Private Sub ucrReceiverType1_ControlContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverType1.ControlContentsChanged, ucrReceiverType2.ControlContentsChanged, ucrReceiverType3.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrColourColumnsByStr_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrColourColumnsByStr.ControlValueChanged
+        If ucrColourColumnsByStr.Checked Then
+            'ucrBase.clsRsyntax.AddOperatorParameter(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        Else
+            ucrBase.clsRsyntax.AddOperatorParameter(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
+        End If
     End Sub
 End Class
