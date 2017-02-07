@@ -28,7 +28,7 @@ Partial Class dlgPolynomials
         Me.ucrReceiverPolynomial = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpType = New System.Windows.Forms.GroupBox()
-        Me.rdoCenterd = New System.Windows.Forms.RadioButton()
+        Me.rdoCentered = New System.Windows.Forms.RadioButton()
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoSimple = New System.Windows.Forms.RadioButton()
         Me.ucrPnlType = New instat.UcrPanel()
@@ -90,7 +90,7 @@ Partial Class dlgPolynomials
         '
         'grpType
         '
-        Me.grpType.Controls.Add(Me.rdoCenterd)
+        Me.grpType.Controls.Add(Me.rdoCentered)
         Me.grpType.Controls.Add(Me.rdoOrthogonal)
         Me.grpType.Controls.Add(Me.rdoSimple)
         Me.grpType.Controls.Add(Me.ucrPnlType)
@@ -101,18 +101,18 @@ Partial Class dlgPolynomials
         Me.grpType.TabStop = False
         Me.grpType.Text = "Type"
         '
-        'rdoCenterd
+        'rdoCentered
         '
-        Me.rdoCenterd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.rdoCentered.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdoCenterd.AutoSize = True
-        Me.rdoCenterd.Location = New System.Drawing.Point(19, 48)
-        Me.rdoCenterd.Name = "rdoCenterd"
-        Me.rdoCenterd.Size = New System.Drawing.Size(68, 17)
-        Me.rdoCenterd.TabIndex = 6
-        Me.rdoCenterd.Tag = "Centered"
-        Me.rdoCenterd.Text = "Centered"
-        Me.rdoCenterd.UseVisualStyleBackColor = True
+        Me.rdoCentered.AutoSize = True
+        Me.rdoCentered.Location = New System.Drawing.Point(19, 48)
+        Me.rdoCentered.Name = "rdoCentered"
+        Me.rdoCentered.Size = New System.Drawing.Size(68, 17)
+        Me.rdoCentered.TabIndex = 6
+        Me.rdoCentered.Tag = "Centered"
+        Me.rdoCentered.Text = "Centered"
+        Me.rdoCentered.UseVisualStyleBackColor = True
         '
         'rdoOrthogonal
         '
@@ -209,5 +209,5 @@ Partial Class dlgPolynomials
     Friend WithEvents ucrPnlType As UcrPanel
     Friend WithEvents ucrSavePoly As ucrSave
     Friend WithEvents ucrNudDegree As ucrNud
-    Friend WithEvents rdoCenterd As RadioButton
+    Friend WithEvents rdoCentered As RadioButton
 End Class

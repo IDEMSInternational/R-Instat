@@ -56,17 +56,24 @@ Public Class dlgPolynomials
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("poly")
         clsDefaultFunction.AddParameter("degree", 2)
+
+
         If rdoSimple.Checked OrElse rdoOrthogonal.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ElseIf rdoCenterd.Checked Then
+            SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ElseIf rdoCentered.Checked Then
             clsScale = clsCentredOptionFunc.Clone()
             clsOverallFuction = clsDefaultFunction.Clone()
+
             clsOverallFuction.AddParameter("x", clsRFunctionParameter:=clsScale)
             ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFuction)
+
             ucrReceiverPolynomial.SetRCode(clsScale, bReset)
+
         End If
 
-        ucrPnlType.SetRCode(clsDefaultFunction, bReset)
+
         clsDefaultFunction.SetAssignTo(strTemp:=ucrSavePoly.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePoly.GetText(), bAssignToIsPrefix:=True)
 
     End Sub
@@ -79,14 +86,6 @@ Public Class dlgPolynomials
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 46
-        rdoSimple.Checked = True
-
-        'Second function to be set inside
-        clsCentredOptionFunc.SetRCommand("scale")
-        clsCentredOptionFunc.AddParameter("center", "TRUE")
-        clsCentredOptionFunc.AddParameter("scale", "FALSE")
-
-
 
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.bUseFilteredData = False
@@ -95,13 +94,16 @@ Public Class dlgPolynomials
         ucrReceiverPolynomial.SetParameter(New RParameter("x"))
         ucrReceiverPolynomial.SetParameterIsRFunction()
 
-        ucrReceiverPolynomial.SetParameterIsRFunction()
+        'Second function to be set inside
+        clsCentredOptionFunc.SetRCommand("scale")
+        clsCentredOptionFunc.AddParameter("center", "TRUE")
+        clsCentredOptionFunc.AddParameter("scale", "FALSE")
 
         ucrPnlType.SetParameter(New RParameter("raw", 1))
         ucrPnlType.AddRadioButton(rdoSimple, "TRUE")
-        ucrPnlType.AddRadioButton(rdoCenterd, "TRUE")
+        ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
-
+        ucrPnlType.SetRDefault("FALSE")
 
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
