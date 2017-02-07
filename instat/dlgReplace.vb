@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Imports instat.Translations
-Imports RDotNet
+'Imports RDotNet
 
 Public Class dlgReplace
     Public bFirstLoad As Boolean = True
@@ -29,7 +29,7 @@ Public Class dlgReplace
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeforControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
     End Sub
@@ -52,23 +52,24 @@ Public Class dlgReplace
         ' Want:  InstatDataObject$replace_value_in_data(col_names= "Year", old_value=2, new_value = NA, data_name="Damango")
         ' Want:  InstatDataObject$replace_value_in_data(data_name= "Damango", col_names="Year", end_value="200", start_value="12", new_value="NA")
 
-        rdoFromAbove.Enabled = False
+        'rdoNewFromAbove.Enabled = False
 
         '' Old:
+        ucrPnlOld.SetParameter(New RParameter(""))
         ucrPnlOld.AddRadioButton(rdoOldValue)
         ucrPnlOld.AddRadioButton(rdoOldMissing)
-        ucrPnlOld.AddRadioButton(rdoRange)
+        ucrPnlOld.AddRadioButton(rdoOldInterval)
 
         ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_value")
         ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "old_value")
-        ucrPnlOld.AddParameterPresentCondition(rdoRange, "start_value")
-        ucrPnlOld.AddParameterPresentCondition(rdoRange, "end_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "start_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "end_value")
 
         ucrPnlOld.AddToLinkedControls(ucrInputOldValue, {rdoOldValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOld.AddToLinkedControls(ucrInputRangeFrom, {rdoRange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOld.AddToLinkedControls(ucrInputRangeTo, {rdoRange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOld.AddToLinkedControls(ucrChkMinimum, {rdoRange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOld.AddToLinkedControls(ucrChkMaximum, {rdoRange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOld.AddToLinkedControls(ucrInputRangeFrom, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOld.AddToLinkedControls(ucrInputRangeTo, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOld.AddToLinkedControls(ucrChkMin, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOld.AddToLinkedControls(ucrChkMax, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputOldValue
         ucrInputOldValue.SetParameter(New RParameter("old_value"))
@@ -83,11 +84,11 @@ Public Class dlgReplace
         ucrInputRangeFrom.bChangeParameterValue = False
         ucrInputRangeFrom.SetLinkedDisplayControl(lblRangeMin)
 
-        ucrChkMinimum.SetParameter(New RParameter("closed_start_value"))
-        ucrChkMinimum.SetText("Including")
-        ucrChkMinimum.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkMinimum.bAddRemoveParameter = False
-        ucrChkMinimum.SetRDefault("FALSE")
+        ucrChkMin.SetParameter(New RParameter("closed_start_value"))
+        ucrChkMin.SetText("Including")
+        ucrChkMin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMin.bAddRemoveParameter = False
+        ucrChkMin.SetRDefault("FALSE")
 
         'ucrInputRangeTo
         ucrInputRangeTo.SetParameter(New RParameter("end_value"))
@@ -96,21 +97,22 @@ Public Class dlgReplace
         ucrInputRangeTo.bChangeParameterValue = False
         ucrInputRangeTo.SetLinkedDisplayControl(lblRangeMax)
 
-        ucrChkMaximum.SetParameter(New RParameter("closed_end_value"))
-        ucrChkMaximum.SetText("Including")
-        ucrChkMaximum.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkMaximum.bAddRemoveParameter = False
-        ucrChkMaximum.SetRDefault("FALSE")
+        ucrChkMax.SetParameter(New RParameter("closed_end_value"))
+        ucrChkMax.SetText("Including")
+        ucrChkMax.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMax.bAddRemoveParameter = False
+        ucrChkMax.SetRDefault("FALSE")
 
 
         '' NEW VALUES:
+        ucrPnlNew.SetParameter(New RParameter(""))
         ucrPnlNew.AddRadioButton(rdoNewValue)
         ucrPnlNew.AddRadioButton(rdoNewMissing)
-        ucrPnlNew.AddRadioButton(rdoFromAbove)
+        ' ucrPnlNew.AddRadioButton(rdoNewFromAbove)
 
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
         ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "new_value")
-        ucrPnlNew.AddParameterPresentCondition(rdoFromAbove, " ")
+        'ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, " ")
 
         ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -301,7 +303,7 @@ Public Class dlgReplace
     'End Sub
     ' check up on this, it is always a factor because that's what we stated above.. Do I not want this to always be a factor?
 
-    Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNewValue.ControlContentsChanged, ucrReceiverReplace.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrPnlNew.ControlContentsChanged
+    Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
