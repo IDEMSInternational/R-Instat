@@ -80,8 +80,8 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
         SetRCodeForControls(True)
+        SetDefaults()
     End Sub
 
     Private Sub pnlPlatform() Handles ucrPnlPlatform.ControlContentsChanged
