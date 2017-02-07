@@ -44,7 +44,7 @@ Partial Class dlgImportFromODK
         Me.lblUsername.Location = New System.Drawing.Point(7, 74)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblUsername.TabIndex = 3
+        Me.lblUsername.TabIndex = 1
         Me.lblUsername.Text = "Username:"
         '
         'lblPassword
@@ -53,7 +53,7 @@ Partial Class dlgImportFromODK
         Me.lblPassword.Location = New System.Drawing.Point(9, 111)
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(56, 13)
-        Me.lblPassword.TabIndex = 4
+        Me.lblPassword.TabIndex = 3
         Me.lblPassword.Text = "Password:"
         '
         'lblChooseForm
@@ -62,7 +62,7 @@ Partial Class dlgImportFromODK
         Me.lblChooseForm.Location = New System.Drawing.Point(15, 170)
         Me.lblChooseForm.Name = "lblChooseForm"
         Me.lblChooseForm.Size = New System.Drawing.Size(72, 13)
-        Me.lblChooseForm.TabIndex = 6
+        Me.lblChooseForm.TabIndex = 7
         Me.lblChooseForm.Text = "Choose Form:"
         '
         'cmdFindForms
@@ -70,7 +70,7 @@ Partial Class dlgImportFromODK
         Me.cmdFindForms.Location = New System.Drawing.Point(13, 138)
         Me.cmdFindForms.Name = "cmdFindForms"
         Me.cmdFindForms.Size = New System.Drawing.Size(102, 23)
-        Me.cmdFindForms.TabIndex = 14
+        Me.cmdFindForms.TabIndex = 6
         Me.cmdFindForms.Text = "Find Forms"
         Me.cmdFindForms.UseVisualStyleBackColor = True
         '
@@ -82,7 +82,7 @@ Partial Class dlgImportFromODK
         Me.grpPlatform.Location = New System.Drawing.Point(12, 12)
         Me.grpPlatform.Name = "grpPlatform"
         Me.grpPlatform.Size = New System.Drawing.Size(406, 46)
-        Me.grpPlatform.TabIndex = 17
+        Me.grpPlatform.TabIndex = 0
         Me.grpPlatform.TabStop = False
         Me.grpPlatform.Text = "Choose Platform"
         '
@@ -92,7 +92,7 @@ Partial Class dlgImportFromODK
         Me.rdoOna.Location = New System.Drawing.Point(152, 17)
         Me.rdoOna.Name = "rdoOna"
         Me.rdoOna.Size = New System.Drawing.Size(45, 17)
-        Me.rdoOna.TabIndex = 2
+        Me.rdoOna.TabIndex = 1
         Me.rdoOna.TabStop = True
         Me.rdoOna.Text = "Ona"
         Me.rdoOna.UseVisualStyleBackColor = True
@@ -103,7 +103,7 @@ Partial Class dlgImportFromODK
         Me.rdoKobo.Location = New System.Drawing.Point(10, 17)
         Me.rdoKobo.Name = "rdoKobo"
         Me.rdoKobo.Size = New System.Drawing.Size(50, 17)
-        Me.rdoKobo.TabIndex = 1
+        Me.rdoKobo.TabIndex = 0
         Me.rdoKobo.TabStop = True
         Me.rdoKobo.Text = "Kobo"
         Me.rdoKobo.UseVisualStyleBackColor = True
@@ -125,7 +125,7 @@ Partial Class dlgImportFromODK
         Me.ucrChkViewPassword.Location = New System.Drawing.Point(250, 106)
         Me.ucrChkViewPassword.Name = "ucrChkViewPassword"
         Me.ucrChkViewPassword.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkViewPassword.TabIndex = 18
+        Me.ucrChkViewPassword.TabIndex = 5
         '
         'ucrInputPassword
         '
@@ -136,7 +136,7 @@ Partial Class dlgImportFromODK
         Me.ucrInputPassword.Location = New System.Drawing.Point(92, 106)
         Me.ucrInputPassword.Name = "ucrInputPassword"
         Me.ucrInputPassword.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPassword.TabIndex = 16
+        Me.ucrInputPassword.TabIndex = 4
         '
         'ucrInputChooseForm
         '
@@ -146,7 +146,7 @@ Partial Class dlgImportFromODK
         Me.ucrInputChooseForm.Location = New System.Drawing.Point(98, 167)
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
         Me.ucrInputChooseForm.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputChooseForm.TabIndex = 13
+        Me.ucrInputChooseForm.TabIndex = 8
         '
         'ucrInputUsername
         '
@@ -157,14 +157,14 @@ Partial Class dlgImportFromODK
         Me.ucrInputUsername.Location = New System.Drawing.Point(92, 74)
         Me.ucrInputUsername.Name = "ucrInputUsername"
         Me.ucrInputUsername.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputUsername.TabIndex = 11
+        Me.ucrInputUsername.TabIndex = 2
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 194)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(420, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 9
         '
         'dlgImportFromODK
         '
