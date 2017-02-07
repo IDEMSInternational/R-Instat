@@ -39,12 +39,14 @@ Partial Class dlgTransformText
         Me.grpParameters = New System.Windows.Forms.GroupBox()
         Me.pnlWords = New System.Windows.Forms.Panel()
         Me.rdoBothPad = New System.Windows.Forms.RadioButton()
+        Me.ucrInputTo = New instat.ucrInputComboBox()
         Me.rdoLeftPad = New System.Windows.Forms.RadioButton()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.rdoRightPad = New System.Windows.Forms.RadioButton()
         Me.ucrNudTo = New instat.ucrNud()
         Me.ucrPnlPad = New instat.UcrPanel()
         Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrInputPad = New instat.ucrInputComboBox()
         Me.lblPad = New System.Windows.Forms.Label()
         Me.ucrChkFirstOr = New instat.ucrCheck()
         Me.ucrNudWidth = New instat.ucrNud()
@@ -52,14 +54,12 @@ Partial Class dlgTransformText
         Me.ucrNudLastWord = New instat.ucrNud()
         Me.lblWidth = New System.Windows.Forms.Label()
         Me.ucrNudFirstWord = New instat.ucrNud()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
         Me.ucrReceiverLastWord = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstWord = New instat.ucrReceiverSingle()
         Me.ucrReceiverTransformText = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrNewColName = New instat.ucrSave()
-        Me.ucrInputTo = New instat.ucrInputComboBox()
-        Me.ucrInputPad = New instat.ucrInputComboBox()
-        Me.ucrInputSeparator = New instat.ucrInputComboBox()
         Me.ucrSelectorForTransformText = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpOperation.SuspendLayout()
         Me.grpParameters.SuspendLayout()
@@ -69,7 +69,7 @@ Partial Class dlgTransformText
         'lblColumnToTransform
         '
         Me.lblColumnToTransform.AutoSize = True
-        Me.lblColumnToTransform.Location = New System.Drawing.Point(266, 41)
+        Me.lblColumnToTransform.Location = New System.Drawing.Point(250, 43)
         Me.lblColumnToTransform.Name = "lblColumnToTransform"
         Me.lblColumnToTransform.Size = New System.Drawing.Size(107, 13)
         Me.lblColumnToTransform.TabIndex = 3
@@ -94,7 +94,7 @@ Partial Class dlgTransformText
         'rdoSubstring
         '
         Me.rdoSubstring.AutoSize = True
-        Me.rdoSubstring.Location = New System.Drawing.Point(16, 138)
+        Me.rdoSubstring.Location = New System.Drawing.Point(8, 138)
         Me.rdoSubstring.Name = "rdoSubstring"
         Me.rdoSubstring.Size = New System.Drawing.Size(69, 17)
         Me.rdoSubstring.TabIndex = 21
@@ -105,7 +105,7 @@ Partial Class dlgTransformText
         'rdoWords
         '
         Me.rdoWords.AutoSize = True
-        Me.rdoWords.Location = New System.Drawing.Point(16, 115)
+        Me.rdoWords.Location = New System.Drawing.Point(8, 115)
         Me.rdoWords.Name = "rdoWords"
         Me.rdoWords.Size = New System.Drawing.Size(56, 17)
         Me.rdoWords.TabIndex = 4
@@ -116,7 +116,7 @@ Partial Class dlgTransformText
         'rdoTrim
         '
         Me.rdoTrim.AutoSize = True
-        Me.rdoTrim.Location = New System.Drawing.Point(16, 92)
+        Me.rdoTrim.Location = New System.Drawing.Point(8, 92)
         Me.rdoTrim.Name = "rdoTrim"
         Me.rdoTrim.Size = New System.Drawing.Size(45, 17)
         Me.rdoTrim.TabIndex = 3
@@ -127,7 +127,7 @@ Partial Class dlgTransformText
         'rdoConvertCase
         '
         Me.rdoConvertCase.AutoSize = True
-        Me.rdoConvertCase.Location = New System.Drawing.Point(16, 23)
+        Me.rdoConvertCase.Location = New System.Drawing.Point(8, 23)
         Me.rdoConvertCase.Name = "rdoConvertCase"
         Me.rdoConvertCase.Size = New System.Drawing.Size(89, 17)
         Me.rdoConvertCase.TabIndex = 0
@@ -138,7 +138,7 @@ Partial Class dlgTransformText
         'rdoPad
         '
         Me.rdoPad.AutoSize = True
-        Me.rdoPad.Location = New System.Drawing.Point(16, 69)
+        Me.rdoPad.Location = New System.Drawing.Point(8, 69)
         Me.rdoPad.Name = "rdoPad"
         Me.rdoPad.Size = New System.Drawing.Size(44, 17)
         Me.rdoPad.TabIndex = 2
@@ -149,7 +149,7 @@ Partial Class dlgTransformText
         'rdoLength
         '
         Me.rdoLength.AutoSize = True
-        Me.rdoLength.Location = New System.Drawing.Point(16, 46)
+        Me.rdoLength.Location = New System.Drawing.Point(8, 46)
         Me.rdoLength.Name = "rdoLength"
         Me.rdoLength.Size = New System.Drawing.Size(58, 17)
         Me.rdoLength.TabIndex = 1
@@ -163,7 +163,7 @@ Partial Class dlgTransformText
         Me.ucrPnlOperation.bChangeParameterValue = True
         Me.ucrPnlOperation.Location = New System.Drawing.Point(4, 15)
         Me.ucrPnlOperation.Name = "ucrPnlOperation"
-        Me.ucrPnlOperation.Size = New System.Drawing.Size(101, 156)
+        Me.ucrPnlOperation.Size = New System.Drawing.Size(104, 156)
         Me.ucrPnlOperation.TabIndex = 9
         '
         'lblToSubstring
@@ -263,6 +263,16 @@ Partial Class dlgTransformText
         Me.rdoBothPad.Text = "Both"
         Me.rdoBothPad.UseVisualStyleBackColor = True
         '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.bAddRemoveParameter = True
+        Me.ucrInputTo.bChangeParameterValue = True
+        Me.ucrInputTo.IsReadOnly = False
+        Me.ucrInputTo.Location = New System.Drawing.Point(84, 10)
+        Me.ucrInputTo.Name = "ucrInputTo"
+        Me.ucrInputTo.Size = New System.Drawing.Size(107, 25)
+        Me.ucrInputTo.TabIndex = 8
+        '
         'rdoLeftPad
         '
         Me.rdoLeftPad.AutoSize = True
@@ -330,6 +340,16 @@ Partial Class dlgTransformText
         Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudFrom.TabIndex = 45
         Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputPad
+        '
+        Me.ucrInputPad.bAddRemoveParameter = True
+        Me.ucrInputPad.bChangeParameterValue = True
+        Me.ucrInputPad.IsReadOnly = False
+        Me.ucrInputPad.Location = New System.Drawing.Point(84, 125)
+        Me.ucrInputPad.Name = "ucrInputPad"
+        Me.ucrInputPad.Size = New System.Drawing.Size(107, 25)
+        Me.ucrInputPad.TabIndex = 13
         '
         'lblPad
         '
@@ -411,6 +431,16 @@ Partial Class dlgTransformText
         Me.ucrNudFirstWord.TabIndex = 44
         Me.ucrNudFirstWord.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.bAddRemoveParameter = True
+        Me.ucrInputSeparator.bChangeParameterValue = True
+        Me.ucrInputSeparator.IsReadOnly = False
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(84, 126)
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(107, 23)
+        Me.ucrInputSeparator.TabIndex = 17
+        '
         'ucrReceiverLastWord
         '
         Me.ucrReceiverLastWord.bAddRemoveParameter = True
@@ -440,7 +470,7 @@ Partial Class dlgTransformText
         Me.ucrReceiverTransformText.bAddRemoveParameter = True
         Me.ucrReceiverTransformText.bChangeParameterValue = True
         Me.ucrReceiverTransformText.frmParent = Me
-        Me.ucrReceiverTransformText.Location = New System.Drawing.Point(268, 56)
+        Me.ucrReceiverTransformText.Location = New System.Drawing.Point(252, 58)
         Me.ucrReceiverTransformText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTransformText.Name = "ucrReceiverTransformText"
         Me.ucrReceiverTransformText.Selector = Nothing
@@ -449,7 +479,7 @@ Partial Class dlgTransformText
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 429)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 429)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -458,40 +488,10 @@ Partial Class dlgTransformText
         '
         Me.ucrNewColName.bAddRemoveParameter = True
         Me.ucrNewColName.bChangeParameterValue = True
-        Me.ucrNewColName.Location = New System.Drawing.Point(10, 397)
+        Me.ucrNewColName.Location = New System.Drawing.Point(10, 399)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(272, 24)
         Me.ucrNewColName.TabIndex = 1
-        '
-        'ucrInputTo
-        '
-        Me.ucrInputTo.bAddRemoveParameter = True
-        Me.ucrInputTo.bChangeParameterValue = True
-        Me.ucrInputTo.IsReadOnly = False
-        Me.ucrInputTo.Location = New System.Drawing.Point(84, 10)
-        Me.ucrInputTo.Name = "ucrInputTo"
-        Me.ucrInputTo.Size = New System.Drawing.Size(107, 25)
-        Me.ucrInputTo.TabIndex = 8
-        '
-        'ucrInputPad
-        '
-        Me.ucrInputPad.bAddRemoveParameter = True
-        Me.ucrInputPad.bChangeParameterValue = True
-        Me.ucrInputPad.IsReadOnly = False
-        Me.ucrInputPad.Location = New System.Drawing.Point(84, 125)
-        Me.ucrInputPad.Name = "ucrInputPad"
-        Me.ucrInputPad.Size = New System.Drawing.Size(107, 25)
-        Me.ucrInputPad.TabIndex = 13
-        '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.bAddRemoveParameter = True
-        Me.ucrInputSeparator.bChangeParameterValue = True
-        Me.ucrInputSeparator.IsReadOnly = False
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(84, 126)
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        Me.ucrInputSeparator.Size = New System.Drawing.Size(107, 23)
-        Me.ucrInputSeparator.TabIndex = 17
         '
         'ucrSelectorForTransformText
         '
