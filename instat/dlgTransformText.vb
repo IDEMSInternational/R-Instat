@@ -40,6 +40,9 @@ Public Class dlgTransformText
 
     End Sub
 
+    'set defaults
+    'do any parameter changed thing for any extra parameters in functions. see dlgrownamesor
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 343
         ucrBase.clsRsyntax.bUseBaseFunction = True
@@ -60,7 +63,7 @@ Public Class dlgTransformText
         ucrPnlOperation.AddRadioButton(rdoWords)
         ucrPnlOperation.AddRadioButton(rdoSubstring)
 
-        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, " ") ' this changes depending which rdo is checked
+        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "stringr::str_to_lower") ' this changes depending which rdo is checked
         ucrPnlOperation.AddFunctionNamesCondition(rdoLength, "stringr::str_length")
         ucrPnlOperation.AddFunctionNamesCondition(rdoPad, "stringr::str_pad")
         ucrPnlOperation.AddFunctionNamesCondition(rdoTrim, "stringr::str_trim")
@@ -76,15 +79,6 @@ Public Class dlgTransformText
         ucrInputTo.cboInput.Items.Add("Upper")
         ucrInputTo.cboInput.Items.Add("Title")
         ucrInputTo.SetName("Lower")
-
-        'Case "Lower"
-        'ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
-        'Case "Upper"
-        'ucrBase.clsRsyntax.SetFunction("stringr::str_to_upper")
-        'Case "Title"
-        'ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
-        'End Select
-
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -126,7 +120,7 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrNudLastWord, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'if ucrChkFirstOrCol then         '    nudFirstWord.Enabled = False
+        'if ucrChkFirstOrCol
         ucrReceiverFirstWord.SetParameter(New RParameter("start"))
         ucrChkFirstOr.SetParameter(ucrReceiverFirstWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
@@ -141,7 +135,6 @@ Public Class dlgTransformText
         ucrChkFirstOr.SetRDefault("FALSE")
         ucrChkFirstOr.AddToLinkedControls(ucrLinked:=ucrReceiverFirstWord, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ' If this is checked, then we don't want to have nudFirst enabled or running
 
         ucrNudFirstWord.SetParameter(New RParameter("start"))
         ucrNudFirstWord.SetLinkedDisplayControl(lblFirstWord)
@@ -231,52 +224,6 @@ Public Class dlgTransformText
         TestOkEnabled()
     End Sub
 
-    Private Sub FirstWordParameter()
-        '        If rdoWords.Checked Then
-        '       If chkFirstWord.Checked Then
-        '      ucrReceiverFirstWord.SetMeAsReceiver()
-        '     ucrReceiverFirstWord.Visible = True
-        '    nudFirstWord.Enabled = False
-        '   If Not ucrReceiverFirstWord.IsEmpty Then
-        '  ucrBase.clsRsyntax.AddParameter("start", clsRFunctionParameter:=ucrReceiverFirstWord.GetVariables())
-        ' End If
-        'Else
-        'ucrReceiverFirstWord.Visible = False
-        'nudFirstWord.Enabled = True
-        'ucrBase.clsRsyntax.AddParameter("start", nudFirstWord.Value)
-        'If ucrReceiverLastWord.Visible Then
-        'ucrReceiverLastWord.SetMeAsReceiver()
-        'Else
-        'ucrReceiverTransformText.SetMeAsReceiver()
-        'End If
-        'End If
-        'End If
-    End Sub
-
-    Private Sub LastWordParameter()
-        '       If rdoWords.Checked Then
-        '      If chkLastWord.Checked Then
-        '     nudLastWord.Enabled = False
-        '    ucrReceiverLastWord.Visible = True
-        '   ucrReceiverLastWord.SetMeAsReceiver()
-        '  If Not ucrReceiverLastWord.IsEmpty Then
-        ' ucrBase.clsRsyntax.AddParameter("end", clsRFunctionParameter:=ucrReceiverFirstWord.GetVariables())
-        'Else
-        'ucrBase.clsRsyntax.AddParameter("end", nudLastWord.Value)
-        'End If
-        'Else
-        'ucrReceiverLastWord.Visible = False
-        'nudLastWord.Enabled = True
-        'ucrBase.clsRsyntax.AddParameter("end", nudLastWord.Value)
-        'If ucrReceiverFirstWord.Visible Then
-        'ucrReceiverFirstWord.SetMeAsReceiver()
-        'Else
-        'ucrReceiverTransformText.SetMeAsReceiver()
-        'End If
-        'End If
-        'End If
-    End Sub
-
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
         If rdoLength.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_length")
@@ -339,5 +286,14 @@ Public Class dlgTransformText
 
     Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputPad.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkFirstOr_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged
+        If ucrChkFirstOr.Checked Then
+            ucrNudFirstWord.Enabled = False
+        End If
+        If ucrChkLastOr.Checked Then
+            ucrNudLastWord.Enabled = False
+        End If ' don't want the nud to run either if this is checked
     End Sub
 End Class
