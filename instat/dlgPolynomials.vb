@@ -49,6 +49,7 @@ Public Class dlgPolynomials
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrPnlType.SetRCode(clsDefaultFunction, bReset)
         TypeFunction()
     End Sub
 
@@ -104,7 +105,6 @@ Public Class dlgPolynomials
         ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
         ucrPnlType.SetRDefault("FALSE")
-
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
 
