@@ -17,26 +17,49 @@
 Imports instat.Translations
 Public Class dlgPermuteColumn
     Public clsSetSampleFunc As New RFunction
+    Private clsOverallFunction As New RFunction
     Public clsSetSeedFunc As New RFunction
+    Private clsSample As New RFunction
     Public bFirstLoad As Boolean = True
+    Public bReset As Boolean = True
 
     Private Sub dlgPermuteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
-        End If
 
-        autoTranslate(Me)
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
+        TestOkEnabled()
 
     End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverPermuteRows.SetRCode(clsSample, bReset)
+    End Sub
+
     Private Sub SetDefaults()
-        ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
-        ucrReceiverPermuteRows.SetMeAsReceiver()
+        Dim clsDefaultFunction As New RFunction
+
+
+        clsDefaultFunction.SetRCommand("replicate")
+
+        clsSample = clsSetSampleFunc.Clone
+        clsOverallFunction = clsDefaultFunction.Clone()
+
+        clsOverallFunction.AddParameter("expr", clsRFunctionParameter:=clsSample)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
+
+
         ucrPermuteRowsSelector.Reset()
-        nudNumberofColumns.Value = 1
+        clsSetSampleFunc.AddParameter("n", 1)
         nudSetSeed.Value = 5
         chkSetSeed.Checked = False
         nudSetSeed.Visible = False
@@ -48,94 +71,112 @@ Public Class dlgPermuteColumn
     End Sub
 
     Private Sub InitialiseDialog()
+
+        ucrBase.iHelpTopicID = 66
+
+
+
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
         ucrReceiverPermuteRows.SetMeAsReceiver()
         ucrReceiverPermuteRows.bUseFilteredData = False
+        ucrReceiverPermuteRows.SetParameter(New RParameter("x", 1))
+        ucrReceiverPermuteRows.SetParameterIsRFunction()
+        ucrNudNumberofColumns.SetParameter(New RParameter("n", 2))
+
         clsSetSeedFunc.SetRCommand("set.seed")
-        ucrBase.clsRsyntax.SetFunction("replicate")
-        ucrBase.clsRsyntax.AddParameter("expr", clsRFunctionParameter:=clsSetSampleFunc)
         clsSetSampleFunc.SetRCommand("sample")
-        clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
+        '        clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
         clsSetSampleFunc.AddParameter("replace", "FALSE")
-        ucrBase.iHelpTopicID = 66
-        ucrInputPermuteRows.SetItemsTypeAsColumns()
-        ucrInputPermuteRows.SetDefaultTypeAsColumn()
-        ucrInputPermuteRows.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
-        ucrInputPermuteRows.SetValidationTypeAsRVariable()
+        clsSetSampleFunc.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
+
+
+        ucrSavePermute.SetPrefix("permute")
+        ucrSavePermute.SetSaveTypeAsColumn()
+        ucrSavePermute.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
+        ucrSavePermute.SetCheckBoxText("Save Permute:")
+        ucrSavePermute.SetIsComboBox()
+
         nudSetSeed.Minimum = Integer.MinValue
         nudSetSeed.Maximum = Integer.MaxValue
-        nudNumberofColumns.Minimum = 1
-        SetSize()
+        'nudNumberofColumns.Minimum = 1
+        'SetSize()
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverPermuteRows.IsEmpty AndAlso Not ucrInputPermuteRows.IsEmpty Then
+        If Not ucrReceiverPermuteRows.IsEmpty AndAlso ucrSavePermute.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverPermuteRows_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverPermuteRows.SelectionChanged
-        If Not ucrReceiverPermuteRows.IsEmpty Then
-            clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
-        Else
-            clsSetSampleFunc.RemoveParameterByName("x")
-        End If
+    'Private Sub ucrReceiverPermuteRows_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverPermuteRows.SelectionChanged
+    '    If Not ucrReceiverPermuteRows.IsEmpty Then
+    '        clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
+    '    Else
+    '        clsSetSampleFunc.RemoveParameterByName("x")
+    '    End If
+    '    TestOkEnabled()
+    'End Sub
+
+    'Private Sub chkSetSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
+    '    If chkSetSeed.Checked = True Then
+    '        nudSetSeed.Visible = True
+    '    Else
+    '        nudSetSeed.Visible = False
+    '    End If
+    'End Sub
+
+    'Private Sub nudSetSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
+    '    clsSetSeedFunc.AddParameter("seed", nudSetSeed.Value)
+    'End Sub
+
+    'Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged
+    'ucrBase.clsRsyntax.AddParameter("n", nudNumberofColumns.Value)
+    'If nudNumberofColumns.Value = 1 Then
+    '    lblNewColumnName.Text = "New Column Name:"
+    '    If Not ucrInputPermuteRows.bUserTyped Then
+    '        ucrInputPermuteRows.SetPrefix("Permute")
+    '    End If
+    'Else
+    '    lblNewColumnName.Text = "Prefix for New Columns:"
+    '    If Not ucrInputPermuteRows.bUserTyped Then
+    '        ucrInputPermuteRows.SetPrefix("")
+    '        ucrInputPermuteRows.SetName("Permute")
+    '    End If
+    'End If
+    'SetAssignTo()
+    'End Sub
+
+    'Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    '    SetDefaults()
+    'End Sub
+
+    'Private Sub ucrInputPermuteRows_nameChanged()
+    '    SetAssignTo()
+    '    TestOkEnabled()
+    'End Sub
+
+    'Private Sub SetAssignTo()
+    '    Dim bIsPrefix As Boolean
+
+    '    bIsPrefix = (nudNumberofColumns.Value > 1)
+    '    ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSavePermute.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePermute.GetText, bAssignToIsPrefix:=bIsPrefix)
+    'End Sub
+
+    'Private Sub ucrPermuteRowsSelector_DataFrameChanged() Handles ucrPermuteRowsSelector.DataFrameChanged
+    '    SetSize()
+    'End Sub
+
+    'Private Sub SetSize()
+    '    clsSetSampleFunc.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
+    'End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPermuteRows.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub chkSetSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
-        If chkSetSeed.Checked = True Then
-            nudSetSeed.Visible = True
-        Else
-            nudSetSeed.Visible = False
-        End If
-    End Sub
+    'Private Sub ucrPermuteRowsSelector_Load(sender As Object, e As EventArgs) Handles ucrPermuteRowsSelector.Load
 
-    Private Sub nudSetSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
-        clsSetSeedFunc.AddParameter("seed", nudSetSeed.Value)
-    End Sub
-
-    Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofColumns.TextChanged
-        ucrBase.clsRsyntax.AddParameter("n", nudNumberofColumns.Value)
-        If nudNumberofColumns.Value = 1 Then
-            lblNewColumnName.Text = "New Column Name:"
-            If Not ucrInputPermuteRows.bUserTyped Then
-                ucrInputPermuteRows.SetPrefix("Permute")
-            End If
-        Else
-            lblNewColumnName.Text = "Prefix for New Columns:"
-            If Not ucrInputPermuteRows.bUserTyped Then
-                ucrInputPermuteRows.SetPrefix("")
-                ucrInputPermuteRows.SetName("Permute")
-            End If
-        End If
-        SetAssignTo()
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-    End Sub
-
-    Private Sub ucrInputPermuteRows_nameChanged() Handles ucrInputPermuteRows.NameChanged
-        SetAssignTo()
-        TestOkEnabled()
-    End Sub
-
-    Private Sub SetAssignTo()
-        Dim bIsPrefix As Boolean
-
-        bIsPrefix = (nudNumberofColumns.Value > 1)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPermuteRows.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPermuteRows.GetText, bAssignToIsPrefix:=bIsPrefix)
-    End Sub
-
-    Private Sub ucrPermuteRowsSelector_DataFrameChanged() Handles ucrPermuteRowsSelector.DataFrameChanged
-        SetSize()
-    End Sub
-
-    Private Sub SetSize()
-        clsSetSampleFunc.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
-    End Sub
-
+    'End Sub
 End Class
