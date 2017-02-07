@@ -78,7 +78,6 @@ Public Class dlgTransformText
         ucrInputTo.cboInput.Items.Add("Lower")
         ucrInputTo.cboInput.Items.Add("Upper")
         ucrInputTo.cboInput.Items.Add("Title")
-        ucrInputTo.SetName("Lower")
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -94,13 +93,12 @@ Public Class dlgTransformText
         dctInputPad.Add("Underscore", Chr(34) & "_" & Chr(34))
         '' case of else: ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
         ucrInputPad.SetItems(dctInputPad)
-        'ucrInputPad.SetRDefault(" "), how tot do this?
         ucrInputPad.SetLinkedDisplayControl(lblPad)
 
         'ucrNudWidth
         ucrNudWidth.SetParameter(New RParameter("width"))
         ucrNudWidth.SetLinkedDisplayControl(lblWidth)
-        ucrNudWidth.SetRDefault(1) ' this isn't the R default, I need to sort this
+        ucrNudWidth.SetRDefault(1)
 
         'rdoTrim and pnl
         ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad, rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -138,8 +136,6 @@ Public Class dlgTransformText
         ucrNudFirstWord.SetParameter(New RParameter("start"))
         ucrNudFirstWord.SetLinkedDisplayControl(lblFirstWord)
         ucrNudFirstWord.SetRDefault(1)
-        'default value is 1
-
 
         ucrBase.clsRsyntax.AddParameter("end", clsRFunctionParameter:=ucrReceiverLastWord.GetVariables())
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
@@ -147,7 +143,7 @@ Public Class dlgTransformText
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
         ' Defaults to first word
 
-        'if ucrChkorCol then         '    nudLastWord.Enabled = False
+        'if ucrChkorCol
         ucrReceiverLastWord.SetParameter(New RParameter("end"))
         ucrChkLastOr.SetParameter(ucrReceiverLastWord.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
@@ -162,12 +158,9 @@ Public Class dlgTransformText
         ucrChkLastOr.SetRDefault("FALSE")
         ucrChkLastOr.AddToLinkedControls(ucrLinked:=ucrReceiverLastWord, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ' If this is checked, then we don't want to have nudLast enabled or running
-
         ucrNudLastWord.SetParameter(New RParameter("end"))
         ucrNudLastWord.SetLinkedDisplayControl(lblLastWord)
         ucrNudLastWord.SetRDefault(1)
-        'default value is 1
 
         ' ucrInputSeparator
         Dim dctInputSeparator As New Dictionary(Of String, String)
@@ -179,8 +172,6 @@ Public Class dlgTransformText
         ' case of else: ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
         ucrInputSeparator.SetItems(dctInputSeparator)
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
-        'ucrInputSeparator.cboInput.MaxLength = 1
-        ' space is default
 
         '        Developer error: no state of control ucrInputTo satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.
 
@@ -191,13 +182,11 @@ Public Class dlgTransformText
         'ucrNud
         ucrNudFrom.SetParameter(New RParameter("start"))
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
-        ucrNudFrom.SetRDefault(1) ' this is not the R Default
-        '.AddParameter("start", -1)
+        ucrNudFrom.SetRDefault(1)
 
         ucrNudTo.SetParameter(New RParameter("end"))
         ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
         ucrNudTo.SetRDefault(1)
-        '.AddParameter("end", 1)
 
         'ucrNewColName
         ucrNewColName.SetIsTextBox()
@@ -211,7 +200,9 @@ Public Class dlgTransformText
         Dim clsDefaultFunction As New RFunction
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
-        'rdoConvertCase.Checked = True
+        ucrInputTo.SetName("Lower")
+        ucrInputPad.SetName("Space")
+        ucrInputSeparator.SetName("Space")
 
         clsDefaultFunction.SetRCommand("stringr::str_to_lower")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
@@ -246,6 +237,7 @@ Public Class dlgTransformText
                     ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
             End Select
         End If
+        TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -263,38 +255,45 @@ Public Class dlgTransformText
             ElseIf rdoLength.Checked Then
                 ucrBase.OKEnabled(True)
             ElseIf rdoPad.Checked Then
-                If Not ucrInputPad.IsEmpty() Then
+                If Not ucrInputPad.IsEmpty() AndAlso ucrNudWidth.GetText <> "" Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
             ElseIf rdoTrim.Checked Then
                 ucrBase.OKEnabled(True)
-            ElseIf rdoSubstring.Checked Then
-                ucrBase.OKEnabled(True)
             ElseIf rdoWords.Checked Then
-                If Not ucrInputSeparator.IsEmpty() Then
+                If Not ucrInputSeparator.IsEmpty() AndAlso ((ucrNudFirstWord.GetText <> "" AndAlso Not ucrChkFirstOr.Checked) OrElse (ucrChkFirstOr.Checked AndAlso Not ucrReceiverFirstWord.IsEmpty)) AndAlso ((ucrNudLastWord.GetText <> "" AndAlso Not ucrChkLastOr.Checked) OrElse (ucrChkLastOr.Checked AndAlso Not ucrReceiverLastWord.IsEmpty)) Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
+            ElseIf rdoSubstring.Checked Then
+                If ucrNudTo.GetText <> "" AndAlso ucrNudFrom.GetText <> "" Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            Else
+                ucrBase.OKEnabled(False)
             End If
-        Else
-            ucrBase.OKEnabled(False)
         End If
     End Sub
-    'also if the nuds are empty
 
-    Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputPad.ControlContentsChanged
+    Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged, ucrNudFirstWord.ControlContentsChanged, ucrNudLastWord.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrReceiverLastWord.ControlContentsChanged, ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputPad.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrChkFirstOr_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged
         If ucrChkFirstOr.Checked Then
             ucrNudFirstWord.Enabled = False
+        Else
+            ucrNudFirstWord.Enabled = True
         End If
         If ucrChkLastOr.Checked Then
             ucrNudLastWord.Enabled = False
+        Else
+            ucrNudLastWord.Enabled = True
         End If ' don't want the nud to run either if this is checked
     End Sub
 End Class
