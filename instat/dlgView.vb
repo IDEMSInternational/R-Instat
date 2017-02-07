@@ -16,17 +16,14 @@
 Imports instat
 Imports instat.Translations
 Public Class dlgView
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public clsHeadOrTail, clsOverall As New RFunction
-
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -36,25 +33,18 @@ Public Class dlgView
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverView.SetRCode(clsHeadOrTail, bReset)
-        ucrSelectorForView.SetRCode(clsOverall, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsOveralDefaultFunction As New RFunction
-        Dim clsDefaultHeadOrTail As New RFunction
-
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
         rdoDispSepOutputWindow.Checked = True
         ucrSpecifyRows.Checked = True
-        clsDefaultHeadOrTail.SetRCommand("head")
-        clsDefaultHeadOrTail.AddParameter("n", 6)
-        clsOveralDefaultFunction.SetRCommand("View")
-        clsHeadOrTail = clsDefaultHeadOrTail.Clone
-        clsOverall = clsOveralDefaultFunction.Clone
-        clsOveralDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsHeadOrTail)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOveralDefaultFunction)
+        NumberOfRows()
+        clsDefaultFunction.SetRCommand("View")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub NumberOfRows()
@@ -75,16 +65,14 @@ Public Class dlgView
         ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
         DataFrameLength()
-        NumberOfRows()
         ucrPnlDisplayWindow.AddToLinkedControls(ucrSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
 
+        ucrSpecifyRows.SetText("Specify Rows")
         ucrSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
-
-        SetIcallType()
 
         ucrSelectorForView.SetParameter(New RParameter("title"))
         ucrSelectorForView.SetParameterIsString()
@@ -93,7 +81,6 @@ Public Class dlgView
 
         ucrReceiverView.SetParameter(New RParameter("x"))
         ucrReceiverView.SetParameterIsRFunction()
-        ucrSpecifyRows.SetText("Specify Rows")
     End Sub
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
@@ -134,16 +121,14 @@ Public Class dlgView
 
     Private Sub SetIcallType()
         If rdoDispOutputWindow.Checked Then
-            ucrBase.clsRsyntax.iCallType = 2
+            If rdoTop.Checked Then
+                ucrBase.clsRsyntax.iCallType = 2
+                ucrBase.clsRsyntax.SetFunction("head")
+            Else
+                ucrBase.clsRsyntax.SetFunction("tail")
+            End If
         Else
-        End If
-    End Sub
-
-    Private Sub HeadOrTal()
-        If rdoTop.Checked Then
-            clsHeadOrTail.SetRCommand("head")
-        Else
-            clsHeadOrTail.SetRCommand("tail")
+            ucrBase.clsRsyntax.SetFunction("View")
         End If
     End Sub
 
@@ -151,8 +136,7 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlDisplayFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlContentsChanged
-        HeadOrTal()
+    Private Sub ucrPnlDisplayFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
         SetIcallType()
     End Sub
 End Class
