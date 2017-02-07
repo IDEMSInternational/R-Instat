@@ -40,8 +40,6 @@ Public Class dlgView
         Dim clsDefaultFunction As New RFunction
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
-        rdoDispSepOutputWindow.Checked = True
-        ucrSpecifyRows.Checked = True
         NumberOfRows()
         clsDefaultFunction.SetRCommand("View")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
@@ -69,17 +67,18 @@ Public Class dlgView
 
         ucrSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
-
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
+        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
+        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
         ucrSpecifyRows.SetText("Specify Rows")
         ucrSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
-
-        ucrSelectorForView.SetParameter(New RParameter("title"))
+        ucrSelectorForView.SetParameter(New RParameter("title", 1))
         ucrSelectorForView.SetParameterIsString()
 
-        ucrNudNumberRows.SetParameter(New RParameter("n"))
+        ucrNudNumberRows.SetParameter(New RParameter("n", 1))
 
-        ucrReceiverView.SetParameter(New RParameter("x"))
+        ucrReceiverView.SetParameter(New RParameter("x", 0))
         ucrReceiverView.SetParameterIsRFunction()
     End Sub
 
@@ -121,8 +120,8 @@ Public Class dlgView
 
     Private Sub SetIcallType()
         If rdoDispOutputWindow.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
             If rdoTop.Checked Then
-                ucrBase.clsRsyntax.iCallType = 2
                 ucrBase.clsRsyntax.SetFunction("head")
             Else
                 ucrBase.clsRsyntax.SetFunction("tail")
