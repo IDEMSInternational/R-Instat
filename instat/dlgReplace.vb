@@ -52,10 +52,9 @@ Public Class dlgReplace
         ' Want:  InstatDataObject$replace_value_in_data(col_names= "Year", old_value=2, new_value = NA, data_name="Damango")
         ' Want:  InstatDataObject$replace_value_in_data(data_name= "Damango", col_names="Year", end_value="200", start_value="12", new_value="NA")
 
-        'rdoNewFromAbove.Enabled = False
+        rdoNewFromAbove.Enabled = False
 
         '' Old:
-        ucrPnlOld.SetParameter(New RParameter(""))
         ucrPnlOld.AddRadioButton(rdoOldValue)
         ucrPnlOld.AddRadioButton(rdoOldMissing)
         ucrPnlOld.AddRadioButton(rdoOldInterval)
@@ -73,14 +72,12 @@ Public Class dlgReplace
 
         'ucrInputOldValue
         ucrInputOldValue.SetParameter(New RParameter("old_value"))
-        'ucrInputOldValue.SetName("1")
+        ucrInputOldValue.SetName("1")
         ucrInputOldValue.bAddRemoveParameter = False
-        ''ucrInputOldValue.SetValidationTypeAsRVariable()
 
         'ucrInputRangeFrom
         ucrInputRangeFrom.SetParameter(New RParameter("start_value"))
-        'ucrInputRangeFrom.SetName("0")
-        'ucrInputRangeFrom.SetValidationTypeAsRVariable()
+        ucrInputRangeFrom.SetName("0")
         ucrInputRangeFrom.bChangeParameterValue = False
         ucrInputRangeFrom.SetLinkedDisplayControl(lblRangeMin)
 
@@ -92,7 +89,7 @@ Public Class dlgReplace
 
         'ucrInputRangeTo
         ucrInputRangeTo.SetParameter(New RParameter("end_value"))
-        'ucrInputRangeTo.SetName("1")
+        ucrInputRangeTo.SetName("1")
         ''ucrInputRangeTo.SetValidationTypeAsRVariable()
         ucrInputRangeTo.bChangeParameterValue = False
         ucrInputRangeTo.SetLinkedDisplayControl(lblRangeMax)
@@ -105,14 +102,13 @@ Public Class dlgReplace
 
 
         '' NEW VALUES:
-        ucrPnlNew.SetParameter(New RParameter(""))
         ucrPnlNew.AddRadioButton(rdoNewValue)
         ucrPnlNew.AddRadioButton(rdoNewMissing)
-        ' ucrPnlNew.AddRadioButton(rdoNewFromAbove)
+        ucrPnlNew.AddRadioButton(rdoNewFromAbove)
 
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
         ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "new_value")
-        'ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, " ")
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, " ")
 
         ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -120,7 +116,10 @@ Public Class dlgReplace
         ucrInputNewValue.SetParameter(New RParameter("new_value"))
         ucrInputNewValue.SetName("1")
         ucrInputNewValue.bAddRemoveParameter = False
-        ucrInputNewValue.SetValidationTypeAsRVariable()
+
+        ' new value = NA for one
+
+        ' what if it is not a factor.
     End Sub
 
     Private Sub SetDefaults()
@@ -132,7 +131,7 @@ Public Class dlgReplace
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset) ' this line causes a crash
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ReopenDialog()
