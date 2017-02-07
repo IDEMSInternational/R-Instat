@@ -38,7 +38,7 @@ Partial Class dlgMovingAverage
         'lblDataToAverage
         '
         Me.lblDataToAverage.AutoSize = True
-        Me.lblDataToAverage.Location = New System.Drawing.Point(233, 12)
+        Me.lblDataToAverage.Location = New System.Drawing.Point(233, 25)
         Me.lblDataToAverage.Name = "lblDataToAverage"
         Me.lblDataToAverage.Size = New System.Drawing.Size(105, 13)
         Me.lblDataToAverage.TabIndex = 3
@@ -114,6 +114,8 @@ Partial Class dlgMovingAverage
         '
         'ucrReceiverDataToAverage
         '
+        Me.ucrReceiverDataToAverage.bAddRemoveParameter = True
+        Me.ucrReceiverDataToAverage.bChangeParameterValue = True
         Me.ucrReceiverDataToAverage.frmParent = Me
         Me.ucrReceiverDataToAverage.Location = New System.Drawing.Point(236, 38)
         Me.ucrReceiverDataToAverage.Margin = New System.Windows.Forms.Padding(0)
@@ -131,6 +133,8 @@ Partial Class dlgMovingAverage
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bAddRemoveParameter = True
+        Me.ucrAddRemove.bChangeParameterValue = True
         Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
         Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
