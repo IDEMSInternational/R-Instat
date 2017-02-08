@@ -11,7 +11,6 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
-Imports instat
 Imports instat.Translations
 Public Class dlgPolynomials
     Public bFirstLoad As Boolean = True
@@ -40,42 +39,38 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub SetDefaults()
-
-        'Reset the selector
-        ucrSelectorForPolynomial.Reset()
-
-        TypeFunction()
-
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlType.SetRCode(clsDefaultFunction, bReset)
-        TypeFunction()
-    End Sub
-
-    Public Sub TypeFunction()
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("poly")
         clsDefaultFunction.AddParameter("degree", 2)
 
+        'Reset the selector
+        ucrSelectorForPolynomial.Reset()
+        ucrPanelType.SetRCode(clsDefaultFunction, bReset)
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrSavePoly.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePoly.GetText())
 
-        If rdoSimple.Checked OrElse rdoOrthogonal.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-            SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
 
-        ElseIf rdoCentered.Checked Then
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        TypeFunction()
+    End Sub
+
+    Public Sub TypeFunction()
+
+        If rdoCentered.Checked Then
             clsScale = clsCentredOptionFunc.Clone()
             clsOverallFuction = clsDefaultFunction.Clone()
 
             clsOverallFuction.AddParameter("x", clsRFunctionParameter:=clsScale)
             ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFuction)
-
+            ucrPanelType.SetRCode(clsOverallFuction, True)
             ucrReceiverPolynomial.SetRCode(clsScale, bReset)
+        Else
+
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+            SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+            ucrPanelType.SetRCode(clsDefaultFunction, True)
 
         End If
-
-
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrSavePoly.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePoly.GetText(), bAssignToIsPrefix:=True)
 
     End Sub
 
@@ -100,20 +95,20 @@ Public Class dlgPolynomials
         clsCentredOptionFunc.AddParameter("center", "TRUE")
         clsCentredOptionFunc.AddParameter("scale", "FALSE")
 
-        ucrPnlType.SetParameter(New RParameter("raw", 1))
-        ucrPnlType.AddRadioButton(rdoSimple, "TRUE")
-        ucrPnlType.AddParameterPresentCondition(rdoSimple, "scale", False)
-        ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
-        ucrPnlType.AddParameterPresentCondition(rdoCentered, "scale")
-        ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
-        ucrPnlType.SetRDefault("FALSE")
+        ucrPanelType.SetParameter(New RParameter("raw", 1))
+        ucrPanelType.AddRadioButton(rdoSimple, "T")
+        ' ucrPnlType.AddParameterPresentCondition(rdoSimple, "scale", False)
+        ucrPanelType.AddRadioButton(rdoCentered, "TRUE")
+        '  ucrPnlType.AddParameterPresentCondition(rdoCentered, "scale")
+        ucrPanelType.AddRadioButton(rdoOrthogonal, "FALSE")
+        ucrPanelType.SetRDefault("FALSE")
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
 
         'Set ucrSave 
         ucrSavePoly.SetName("poly")
         ucrSavePoly.SetSaveTypeAsColumn()
-        ucrSavePoly.SetLabelText("Save Poly")
+        ucrSavePoly.SetLabelText("Save Poly:")
         ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
         ucrSavePoly.SetIsComboBox()
 
@@ -123,6 +118,8 @@ Public Class dlgPolynomials
         TestOKEnabled()
     End Sub
 
-
-
+    Private Sub allcontrols_controlvaluechanged(ucrchangedcontrol As ucrCore) Handles ucrPanelType.ControlValueChanged
+        TypeFunction()
+    End Sub
 End Class
+
