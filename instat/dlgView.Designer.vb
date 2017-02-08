@@ -33,7 +33,7 @@ Partial Class dlgView
         Me.rdoBottom = New System.Windows.Forms.RadioButton()
         Me.rdoTop = New System.Windows.Forms.RadioButton()
         Me.ucrPnlDisplayFrom = New instat.UcrPanel()
-        Me.ucrSpecifyRows = New instat.ucrCheck()
+        Me.ucrChkSpecifyRows = New instat.ucrCheck()
         Me.lblDisplayFrom = New System.Windows.Forms.Label()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.SuspendLayout()
@@ -41,7 +41,7 @@ Partial Class dlgView
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(254, 10)
+        Me.lblSelected.Location = New System.Drawing.Point(254, 46)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(104, 13)
         Me.lblSelected.TabIndex = 2
@@ -75,11 +75,11 @@ Partial Class dlgView
         Me.ucrReceiverView.bAddRemoveParameter = True
         Me.ucrReceiverView.bChangeParameterValue = True
         Me.ucrReceiverView.frmParent = Me
-        Me.ucrReceiverView.Location = New System.Drawing.Point(248, 23)
+        Me.ucrReceiverView.Location = New System.Drawing.Point(248, 60)
         Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverView.Name = "ucrReceiverView"
         Me.ucrReceiverView.Selector = Nothing
-        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 142)
+        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 130)
         Me.ucrReceiverView.TabIndex = 3
         '
         'ucrSelectorForView
@@ -155,15 +155,15 @@ Partial Class dlgView
         Me.ucrPnlDisplayFrom.Size = New System.Drawing.Size(66, 40)
         Me.ucrPnlDisplayFrom.TabIndex = 16
         '
-        'ucrSpecifyRows
+        'ucrChkSpecifyRows
         '
-        Me.ucrSpecifyRows.bAddRemoveParameter = True
-        Me.ucrSpecifyRows.bChangeParameterValue = True
-        Me.ucrSpecifyRows.Checked = False
-        Me.ucrSpecifyRows.Location = New System.Drawing.Point(226, 195)
-        Me.ucrSpecifyRows.Name = "ucrSpecifyRows"
-        Me.ucrSpecifyRows.Size = New System.Drawing.Size(100, 20)
-        Me.ucrSpecifyRows.TabIndex = 6
+        Me.ucrChkSpecifyRows.bAddRemoveParameter = True
+        Me.ucrChkSpecifyRows.bChangeParameterValue = True
+        Me.ucrChkSpecifyRows.Checked = False
+        Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(226, 195)
+        Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
+        Me.ucrChkSpecifyRows.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSpecifyRows.TabIndex = 6
         '
         'lblDisplayFrom
         '
@@ -194,7 +194,7 @@ Partial Class dlgView
         Me.Controls.Add(Me.rdoBottom)
         Me.Controls.Add(Me.rdoTop)
         Me.Controls.Add(Me.ucrPnlDisplayFrom)
-        Me.Controls.Add(Me.ucrSpecifyRows)
+        Me.Controls.Add(Me.ucrChkSpecifyRows)
         Me.Controls.Add(Me.lblDisplayFrom)
         Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.rdoDispOutputWindow)
@@ -226,7 +226,7 @@ Partial Class dlgView
     Friend WithEvents rdoBottom As RadioButton
     Friend WithEvents rdoTop As RadioButton
     Friend WithEvents ucrPnlDisplayFrom As UcrPanel
-    Friend WithEvents ucrSpecifyRows As ucrCheck
+    Friend WithEvents ucrChkSpecifyRows As ucrCheck
     Friend WithEvents lblDisplayFrom As Label
     Friend WithEvents lblNumberofRows As Label
 End Class
