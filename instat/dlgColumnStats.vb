@@ -69,36 +69,36 @@ Public Class dlgColumnStats
         ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
         ' only allow numeric variables in the first receiver? 
         ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
-        ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise"))
+        ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSelectedVariables.SetParameterIsString()
 
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"}) 'This needs to change
-        ucrReceiverByFactor.SetParameter(New RParameter("factors"))
+        ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.SetParameterIsString()
 
-        ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name"))
+        ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnStatistics.SetParameterIsString()
 
         ucrChkStoreResults.SetText("Store Results in Data Frame")
-        ucrChkStoreResults.SetParameter(New RParameter("store_results"))
+        ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStoreResults.SetRDefault("TRUE")
 
 
         ucrChkPrintOutput.SetText("Print Results to Output Window")
-        ucrChkPrintOutput.SetParameter(New RParameter("return_output"))
+        ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
         ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkPrintOutput.SetRDefault("FALSE")
 
         ucrChkdropUnusedLevels.SetText("Drop Unused Levels")
-        ucrChkdropUnusedLevels.SetParameter(New RParameter("drop"))
+        ucrChkdropUnusedLevels.SetParameter(New RParameter("drop", 5))
         ucrChkdropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkdropUnusedLevels.SetRDefault("FALSE")
 
 
         ucrChkOmitMissing.SetText("Omit Missing Values")
-        ucrChkOmitMissing.SetParameter(New RParameter("na.rm"))
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
