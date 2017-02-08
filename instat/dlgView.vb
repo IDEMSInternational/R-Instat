@@ -63,15 +63,15 @@ Public Class dlgView
         ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
         DataFrameLength()
-        ucrPnlDisplayWindow.AddToLinkedControls(ucrSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
-        ucrSpecifyRows.SetText("Specify Rows")
-        ucrSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkSpecifyRows.SetText("Specify Rows")
+        ucrChkSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
         ucrSelectorForView.SetParameter(New RParameter("title", 1))
         ucrSelectorForView.SetParameterIsString()
@@ -91,7 +91,7 @@ Public Class dlgView
             If rdoDispSepOutputWindow.Checked Then
                 ucrBase.OKEnabled(True)
             Else
-                If ucrSpecifyRows.Checked Then
+                If ucrChkSpecifyRows.Checked Then
                     If ucrNudNumberRows.GetText <> "" Then
                         ucrBase.OKEnabled(True)
                     Else
@@ -131,7 +131,7 @@ Public Class dlgView
         End If
     End Sub
 
-    Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged
+    Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
