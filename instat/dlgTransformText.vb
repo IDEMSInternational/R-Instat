@@ -192,6 +192,9 @@ Public Class dlgTransformText
         Dim clsDefaultFunction As New RFunction
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
+        ucrChkFirstOr.Checked = False
+        ucrChkLastOr.Checked = False
+
         'reset receiver in words tab
         WordsTab()
 
