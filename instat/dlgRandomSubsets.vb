@@ -56,6 +56,7 @@ Public Class dlgRandomSubsets
         clsSampleFunc.SetRCommand("sample")
         clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
 
+        u
 
         ucrSaveRandoSubsets.SetPrefix("one_var")
         ucrSaveRandoSubsets.SetSaveTypeAsColumn()
@@ -88,11 +89,11 @@ Public Class dlgRandomSubsets
 
         chkWithReplacement.Checked = False
         chkSetSeed.Checked = False
-        NumberOfColumns.Value = 1
-        NumberOfColumns.Minimum = 1
-        NumberOfColumns.Maximum = Integer.MaxValue
+        ' NumberOfColumns.Value = 1
+        ' NumberOfColumns.Minimum = 1
+        ' NumberOfColumns.Maximum = Integer.MaxValue
         ReplaceParameters()
-        nudSampleSiz.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+        ' nudSampleSiz.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
         nudSetSeed.Value = 1
         nudSetSeed.Minimum = Integer.MinValue
         nudSetSeed.Maximum = Integer.MaxValue
@@ -141,12 +142,12 @@ Public Class dlgRandomSubsets
     Private Sub ReplaceParameters()
         If chkWithReplacement.Checked Then
             clsSampleFunc.AddParameter("replace", "TRUE")
-            nudSampleSiz.Minimum = 1
-            nudSampleSiz.Maximum = Integer.MaxValue
+            '   nudSampleSiz.Minimum = 1
+            '  nudSampleSiz.Maximum = Integer.MaxValue
         Else
             clsSampleFunc.AddParameter("replace", "FALSE")
-            nudSampleSiz.Minimum = 1
-            nudSampleSiz.Maximum = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+            ' nudSampleSiz.Minimum = 1
+            ' nudSampleSiz.Maximum = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
         End If
     End Sub
     Private Sub chkSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
