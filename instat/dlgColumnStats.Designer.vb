@@ -25,11 +25,11 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkdropUnusedLevels = New instat.ucrCheck()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -43,7 +43,7 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables.Location = New System.Drawing.Point(264, 27)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(123, 13)
-        Me.lblSelectedVariables.TabIndex = 4
+        Me.lblSelectedVariables.TabIndex = 1
         Me.lblSelectedVariables.Text = "Variables To Summarise:"
         '
         'lblByFactors
@@ -52,7 +52,7 @@ Partial Class dlgColumnStats
         Me.lblByFactors.Location = New System.Drawing.Point(264, 155)
         Me.lblByFactors.Name = "lblByFactors"
         Me.lblByFactors.Size = New System.Drawing.Size(66, 13)
-        Me.lblByFactors.TabIndex = 5
+        Me.lblByFactors.TabIndex = 3
         Me.lblByFactors.Text = "By Factor(s):"
         '
         'grpOptions
@@ -64,19 +64,9 @@ Partial Class dlgColumnStats
         Me.grpOptions.Location = New System.Drawing.Point(9, 190)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(160, 121)
-        Me.grpOptions.TabIndex = 9
+        Me.grpOptions.TabIndex = 5
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
-        '
-        'cmdSummaries
-        '
-        Me.cmdSummaries.Location = New System.Drawing.Point(330, 286)
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSummaries.TabIndex = 10
-        Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
-        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'ucrChkStoreResults
         '
@@ -86,7 +76,7 @@ Partial Class dlgColumnStats
         Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
         Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkStoreResults.TabIndex = 11
+        Me.ucrChkStoreResults.TabIndex = 0
         '
         'ucrChkOmitMissing
         '
@@ -96,7 +86,7 @@ Partial Class dlgColumnStats
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 94)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkOmitMissing.TabIndex = 11
+        Me.ucrChkOmitMissing.TabIndex = 3
         '
         'ucrChkPrintOutput
         '
@@ -106,7 +96,7 @@ Partial Class dlgColumnStats
         Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 43)
         Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
         Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkPrintOutput.TabIndex = 11
+        Me.ucrChkPrintOutput.TabIndex = 1
         '
         'ucrChkdropUnusedLevels
         '
@@ -116,7 +106,17 @@ Partial Class dlgColumnStats
         Me.ucrChkdropUnusedLevels.Location = New System.Drawing.Point(6, 69)
         Me.ucrChkdropUnusedLevels.Name = "ucrChkdropUnusedLevels"
         Me.ucrChkdropUnusedLevels.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkdropUnusedLevels.TabIndex = 11
+        Me.ucrChkdropUnusedLevels.TabIndex = 2
+        '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.Location = New System.Drawing.Point(330, 286)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSummaries.TabIndex = 6
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'ucrReceiverByFactor
         '
@@ -128,7 +128,7 @@ Partial Class dlgColumnStats
         Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
         Me.ucrReceiverByFactor.Selector = Nothing
         Me.ucrReceiverByFactor.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverByFactor.TabIndex = 7
+        Me.ucrReceiverByFactor.TabIndex = 4
         '
         'ucrReceiverSelectedVariables
         '
@@ -140,7 +140,7 @@ Partial Class dlgColumnStats
         Me.ucrReceiverSelectedVariables.Name = "ucrReceiverSelectedVariables"
         Me.ucrReceiverSelectedVariables.Selector = Nothing
         Me.ucrReceiverSelectedVariables.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverSelectedVariables.TabIndex = 6
+        Me.ucrReceiverSelectedVariables.TabIndex = 2
         '
         'ucrSelectorForColumnStatistics
         '
@@ -152,14 +152,14 @@ Partial Class dlgColumnStats
         Me.ucrSelectorForColumnStatistics.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForColumnStatistics.Name = "ucrSelectorForColumnStatistics"
         Me.ucrSelectorForColumnStatistics.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForColumnStatistics.TabIndex = 3
+        Me.ucrSelectorForColumnStatistics.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(9, 317)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 53)
-        Me.ucrBase.TabIndex = 2
+        Me.ucrBase.TabIndex = 7
         '
         'dlgColumnStats
         '

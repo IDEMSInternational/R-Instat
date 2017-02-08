@@ -110,8 +110,8 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetRCodeForControls(True)
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
