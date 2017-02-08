@@ -41,14 +41,14 @@ Public Class dlgImportFromODK
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 468
 
-        ucrPnlPlatform.SetParameter(New RParameter("platform"))
+        ucrPnlPlatform.SetParameter(New RParameter("platform", 0))
         ucrPnlPlatform.AddRadioButton(rdoKobo, Chr(34) & "kobo" & Chr(34))
         ucrPnlPlatform.AddRadioButton(rdoOna, Chr(34) & "ona" & Chr(34))
         ucrPnlPlatform.SetRDefault(Chr(34) & "kobo" & Chr(34))
 
-        ucrInputChooseForm.SetParameter(New RParameter("form_name"))
-        ucrInputUsername.SetParameter(New RParameter("username"))
-        ucrInputPassword.SetParameter(New RParameter("password"))
+        ucrInputChooseForm.SetParameter(New RParameter("form_name", 3))
+        ucrInputUsername.SetParameter(New RParameter("username", 1))
+        ucrInputPassword.SetParameter(New RParameter("password", 2))
 
         ucrChkViewPassword.SetText("View Password")
         ucrChkViewPassword.Checked = False
