@@ -236,61 +236,97 @@ dekade <- function(date) {
   return(temp_pentad)
   }
 
-open_NetCDF <- function(nc_data){
-  variables = names(nc_data$var)
-  lat <- as.numeric(ncvar_get(nc_data, lat_label))
-  lon <- as.numeric(ncvar_get(nc_data, lat_label))
-  #time <- as.numeric(ncvar_get(nc_data,  time_label))
-  time = 1
-  period <- rep(time, each = (length(lat)*length(lon)))
-  lat_rep <- rep(lat, each = length(lon))
-  lon_rep <- rep(lon, length(lat))
-  lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
-  names(lat_lon) = c("lat","lon")
-  station <- c()
-  for (j in 1:nrow(lat_lon)){
-    if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
-      station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+  open_NetCDF <- function(nc_data){
+    variables = names(nc_data$var)
+    lat_lon_names = names(nc_data$dim)
+    lat_names = c("lat", "latitude","LAT","Lat", "LATITUDE")
+    lon_names = c("lon", "longitude","LON","Lon", "LONGITUDE")
+    time_names = c("time", "TIME","Time","period", "Period", "PERIOD")
+    lat_found = FALSE
+    lon_found = FALSE
+    time_found = FALSE
+    if (!lat_found){
+      for (i in lat_lon_names){
+        if(!is.na(match(i, lat_names))){
+          lat <- as.numeric(ncvar_get(nc_data, i))
+          lat_found = TRUE
+        }
+      }
     }
-    if(lat_lon[j,1] < 0 && lat_lon[j,2] >= 0){
-      station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+    
+    if (!lon_found){
+      for (i in lat_lon_names){
+        if(!is.na(match(i, lon_names))){
+          lon <- as.numeric(ncvar_get(nc_data, i))
+          lon_found = TRUE
+        }
+      }
     }
-    if(lat_lon[j,1] >= 0 && lat_lon[j,2] < 0){
-      station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+    
+    if (!time_found){
+      for (i in lat_lon_names){
+        if(!is.na(match(i, time_names))){
+          time <- as.numeric(ncvar_get(nc_data, i))
+          time_found = TRUE
+        }
+      }
     }
-    if(lat_lon[j,1] < 0 && lat_lon[j,2] < 0){
-      station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+    
+    if(!lon_found || (!lat_found))stop("Latitude and longitude names could not be recognised.")
+    if(!time_found){
+      warning("Time variable could not be found/recognised. Time will be set to 1.")
+      time = 1
+    } 
+    period <- rep(time, each = (length(lat)*length(lon)))
+    lat_rep <- rep(lat, each = length(lon))
+    lon_rep <- rep(lon, length(lat))
+    lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
+    names(lat_lon) = c("lat","lon")
+    station <- c()
+    for (j in 1:nrow(lat_lon)){
+      if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
+        station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+      }
+      if(lat_lon[j,1] < 0 && lat_lon[j,2] >= 0){
+        station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+      }
+      if(lat_lon[j,1] >= 0 && lat_lon[j,2] < 0){
+        station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+      }
+      if(lat_lon[j,1] < 0 && lat_lon[j,2] < 0){
+        station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+      }
     }
-  }
-  lat_lon_df <- cbind(lat_lon, station)
-  my_data <- cbind(period, lat_lon_df)
-  for (current_var in variables){
-    nc_value <- c()
-    dataset <- ncvar_get(nc_data, current_var[lat_label])
-    if (length(dim(dataset))==1){
-      nc_value = dataset
-    }
-    else if (length(dim(dataset))==2){
-      year <- dataset[1:length(lat), 1:length(lon)]
-      year = as.data.frame(t(year))
-      year = stack(year)
-      g <- as.numeric(year$values)
-      nc_value = append(nc_value, g)
-    }
-    else if (length(dim(dataset))==3){
-      for (k in 1:length(time)){
-        year <- dataset[1:length(lat), 1:length(lon), k]
+    lat_lon_df <- cbind(lat_lon, station)
+    my_data <- cbind(period, lat_lon_df)
+    for (current_var in variables){
+      nc_value <- c()
+      dataset <- ncvar_get(nc_data, current_var)
+      
+      if (length(dim(dataset))==1){
+        nc_value = dataset
+      }
+      else if (length(dim(dataset))==2){
+        year <- dataset[1:length(lon), 1:length(lat)]
         year = as.data.frame(t(year))
         year = stack(year)
         g <- as.numeric(year$values)
         nc_value = append(nc_value, g)
       }
+      else if (length(dim(dataset))==3){
+        for (k in 1:length(time)){
+          year <- dataset[1:length(lon), 1:length(lat), k]
+          year = as.data.frame(t(year))
+          year = stack(year)
+          g <- as.numeric(year$values)
+          nc_value = append(nc_value, g)
+        }
+      }
+      else{
+        stop("The format of the data cannot be recognised")
+      }
+      my_data = cbind(my_data, nc_value)
+      names(my_data)[length(names(my_data))]<-current_var
     }
-    else{
-      stop("The format of the data cannot be recognised")
-    }
-    my_data = cbind(my_data, nc_value)
-    names(my_data)[length(names(my_data))]<-current_var
+    return(list(my_data, lat_lon_df))
   }
-  return(list(my_data, lat_lon_df))
-}
