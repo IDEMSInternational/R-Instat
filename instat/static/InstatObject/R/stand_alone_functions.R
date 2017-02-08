@@ -240,8 +240,7 @@ open_NetCDF <- function(nc_data){
   variables = names(nc_data$var)
   lat <- as.numeric(ncvar_get(nc_data, lat_label))
   lon <- as.numeric(ncvar_get(nc_data, lat_label))
-  time_label
-  time <- as.numeric(ncvar_get(nc_data,  time_label))
+  #time <- as.numeric(ncvar_get(nc_data,  time_label))
   time = 1
   period <- rep(time, each = (length(lat)*length(lon)))
   lat_rep <- rep(lat, each = length(lon))
@@ -267,7 +266,7 @@ open_NetCDF <- function(nc_data){
   my_data <- cbind(period, lat_lon_df)
   for (current_var in variables){
     nc_value <- c()
-    dataset <- ncvar_get(nc_data, current_var)
+    dataset <- ncvar_get(nc_data, current_var[lat_label])
     if (length(dim(dataset))==1){
       nc_value = dataset
     }
