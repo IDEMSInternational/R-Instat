@@ -59,7 +59,7 @@ Partial Class dlgImportFromODK
         'lblChooseForm
         '
         Me.lblChooseForm.AutoSize = True
-        Me.lblChooseForm.Location = New System.Drawing.Point(15, 170)
+        Me.lblChooseForm.Location = New System.Drawing.Point(7, 167)
         Me.lblChooseForm.Name = "lblChooseForm"
         Me.lblChooseForm.Size = New System.Drawing.Size(72, 13)
         Me.lblChooseForm.TabIndex = 7
@@ -67,7 +67,7 @@ Partial Class dlgImportFromODK
         '
         'cmdFindForms
         '
-        Me.cmdFindForms.Location = New System.Drawing.Point(13, 138)
+        Me.cmdFindForms.Location = New System.Drawing.Point(10, 138)
         Me.cmdFindForms.Name = "cmdFindForms"
         Me.cmdFindForms.Size = New System.Drawing.Size(102, 23)
         Me.cmdFindForms.TabIndex = 6
@@ -143,7 +143,7 @@ Partial Class dlgImportFromODK
         Me.ucrInputChooseForm.bAddRemoveParameter = True
         Me.ucrInputChooseForm.bChangeParameterValue = True
         Me.ucrInputChooseForm.IsReadOnly = False
-        Me.ucrInputChooseForm.Location = New System.Drawing.Point(98, 167)
+        Me.ucrInputChooseForm.Location = New System.Drawing.Point(92, 167)
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
         Me.ucrInputChooseForm.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputChooseForm.TabIndex = 8

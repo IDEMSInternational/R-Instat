@@ -51,6 +51,8 @@ Public Class dlgImportFromODK
         ucrInputPassword.SetParameter(New RParameter("password"))
 
         ucrChkViewPassword.SetText("View Password")
+        ucrChkViewPassword.Checked = False
+
     End Sub
 
     Private Sub TestOKEnabled()
@@ -84,7 +86,7 @@ Public Class dlgImportFromODK
         SetDefaults()
     End Sub
 
-    Private Sub pnlPlatform() Handles ucrPnlPlatform.ControlContentsChanged
+    Private Sub pnlPlatform_ControlContentsChanged() Handles ucrPnlPlatform.ControlContentsChanged
         If rdoOna.Checked Then
             clsGetFormsFunction.AddParameter("platform", Chr(34) & "ona" & Chr(34))
             ucrBase.clsRsyntax.AddParameter("platform", Chr(34) & "ona" & Chr(34))
@@ -135,16 +137,12 @@ Public Class dlgImportFromODK
         End If
     End Sub
 
-    Private Sub EnableCommandButton()
+    Private Sub UsernamePassword_ContentsChanged() Handles ucrInputUsername.ControlContentsChanged, ucrInputPassword.ControlContentsChanged
         If Not ucrInputPassword.IsEmpty AndAlso Not ucrInputUsername.IsEmpty Then
             cmdFindForms.Enabled = True
         Else
             cmdFindForms.Enabled = False
         End If
-    End Sub
-
-    Private Sub UsernamePassword_ContentsChanged() Handles ucrInputUsername.ControlContentsChanged, ucrInputPassword.ControlContentsChanged
-        EnableCommandButton()
     End Sub
 
     Private Sub chkViewPassword_CheckedChanged() Handles ucrChkViewPassword.ControlContentsChanged
