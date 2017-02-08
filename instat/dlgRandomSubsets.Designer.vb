@@ -28,13 +28,12 @@ Partial Class dlgRandomSubsets
         Me.nudSampleSize = New System.Windows.Forms.NumericUpDown()
         Me.nudNumberOfColumns = New System.Windows.Forms.NumericUpDown()
         Me.chkWithReplacement = New System.Windows.Forms.CheckBox()
-        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
         Me.nudSetSeed = New System.Windows.Forms.NumericUpDown()
         Me.chkSetSeed = New System.Windows.Forms.CheckBox()
-        Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
         Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveGraph = New instat.ucrSave()
         CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -43,7 +42,7 @@ Partial Class dlgRandomSubsets
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(258, 27)
+        Me.lblSelected.Location = New System.Drawing.Point(258, 30)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(93, 13)
         Me.lblSelected.TabIndex = 1
@@ -53,7 +52,7 @@ Partial Class dlgRandomSubsets
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(258, 71)
+        Me.lblSampleSize.Location = New System.Drawing.Point(258, 87)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
         Me.lblSampleSize.TabIndex = 6
@@ -63,7 +62,7 @@ Partial Class dlgRandomSubsets
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(258, 96)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(258, 131)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         Me.lblNumberOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberOfColumns.TabIndex = 8
@@ -72,14 +71,14 @@ Partial Class dlgRandomSubsets
         '
         'nudSampleSize
         '
-        Me.nudSampleSize.Location = New System.Drawing.Point(363, 68)
+        Me.nudSampleSize.Location = New System.Drawing.Point(363, 84)
         Me.nudSampleSize.Name = "nudSampleSize"
         Me.nudSampleSize.Size = New System.Drawing.Size(53, 20)
         Me.nudSampleSize.TabIndex = 11
         '
         'nudNumberOfColumns
         '
-        Me.nudNumberOfColumns.Location = New System.Drawing.Point(363, 94)
+        Me.nudNumberOfColumns.Location = New System.Drawing.Point(363, 129)
         Me.nudNumberOfColumns.Name = "nudNumberOfColumns"
         Me.nudNumberOfColumns.Size = New System.Drawing.Size(53, 20)
         Me.nudNumberOfColumns.TabIndex = 12
@@ -87,7 +86,7 @@ Partial Class dlgRandomSubsets
         'chkWithReplacement
         '
         Me.chkWithReplacement.AutoSize = True
-        Me.chkWithReplacement.Location = New System.Drawing.Point(257, 146)
+        Me.chkWithReplacement.Location = New System.Drawing.Point(257, 203)
         Me.chkWithReplacement.Name = "chkWithReplacement"
         Me.chkWithReplacement.Size = New System.Drawing.Size(114, 17)
         Me.chkWithReplacement.TabIndex = 13
@@ -95,19 +94,9 @@ Partial Class dlgRandomSubsets
         Me.chkWithReplacement.Text = "With Replacement"
         Me.chkWithReplacement.UseVisualStyleBackColor = True
         '
-        'lblNewDataFrameName
-        '
-        Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(10, 203)
-        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
-        Me.lblNewDataFrameName.Size = New System.Drawing.Size(121, 13)
-        Me.lblNewDataFrameName.TabIndex = 15
-        Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name:"
-        Me.lblNewDataFrameName.Text = "New Data Frame Name:"
-        '
         'nudSetSeed
         '
-        Me.nudSetSeed.Location = New System.Drawing.Point(363, 120)
+        Me.nudSetSeed.Location = New System.Drawing.Point(363, 172)
         Me.nudSetSeed.Name = "nudSetSeed"
         Me.nudSetSeed.Size = New System.Drawing.Size(53, 20)
         Me.nudSetSeed.TabIndex = 16
@@ -115,7 +104,7 @@ Partial Class dlgRandomSubsets
         'chkSetSeed
         '
         Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(257, 121)
+        Me.chkSetSeed.Location = New System.Drawing.Point(257, 173)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(51, 17)
         Me.chkSetSeed.TabIndex = 17
@@ -123,17 +112,12 @@ Partial Class dlgRandomSubsets
         Me.chkSetSeed.Text = "Seed"
         Me.chkSetSeed.UseVisualStyleBackColor = True
         '
-        'ucrNewDataFrameName
-        '
-        Me.ucrNewDataFrameName.IsReadOnly = False
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(131, 200)
-        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(145, 21)
-        Me.ucrNewDataFrameName.TabIndex = 18
-        '
         'ucrReceiverSelected
         '
-        Me.ucrReceiverSelected.Location = New System.Drawing.Point(257, 41)
+        Me.ucrReceiverSelected.bAddRemoveParameter = True
+        Me.ucrReceiverSelected.bChangeParameterValue = True
+        Me.ucrReceiverSelected.frmParent = Me
+        Me.ucrReceiverSelected.Location = New System.Drawing.Point(257, 44)
         Me.ucrReceiverSelected.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelected.Name = "ucrReceiverSelected"
         Me.ucrReceiverSelected.Selector = Nothing
@@ -142,6 +126,8 @@ Partial Class dlgRandomSubsets
         '
         'ucrSelectorRandomSubsets
         '
+        Me.ucrSelectorRandomSubsets.bAddRemoveParameter = True
+        Me.ucrSelectorRandomSubsets.bChangeParameterValue = True
         Me.ucrSelectorRandomSubsets.bShowHiddenColumns = False
         Me.ucrSelectorRandomSubsets.bUseCurrentFilter = True
         Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(10, 10)
@@ -152,20 +138,28 @@ Partial Class dlgRandomSubsets
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 227)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.bAddRemoveParameter = True
+        Me.ucrSaveGraph.bChangeParameterValue = True
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 226)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
+        Me.ucrSaveGraph.TabIndex = 18
         '
         'dlgRandomSubsets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 282)
-        Me.Controls.Add(Me.ucrNewDataFrameName)
+        Me.ClientSize = New System.Drawing.Size(445, 328)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.chkSetSeed)
         Me.Controls.Add(Me.nudSetSeed)
-        Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.chkWithReplacement)
         Me.Controls.Add(Me.nudNumberOfColumns)
         Me.Controls.Add(Me.nudSampleSize)
@@ -199,8 +193,7 @@ Partial Class dlgRandomSubsets
     Friend WithEvents nudSampleSize As NumericUpDown
     Friend WithEvents nudNumberOfColumns As NumericUpDown
     Friend WithEvents chkWithReplacement As CheckBox
-    Friend WithEvents lblNewDataFrameName As Label
     Friend WithEvents nudSetSeed As NumericUpDown
     Friend WithEvents chkSetSeed As CheckBox
-    Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

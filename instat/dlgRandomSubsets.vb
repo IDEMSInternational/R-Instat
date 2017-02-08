@@ -104,14 +104,14 @@ Public Class dlgRandomSubsets
             ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
     End Sub
-    Private Sub ucrNewDataFrameName_NameChanged() Handles ucrNewDataFrameName.NameChanged
-        If Not ucrNewDataFrameName.IsEmpty Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
-        Else
-            ucrBase.clsRsyntax.RemoveAssignTo()
-        End If
-        TestOkEnabled()
-    End Sub
+    'Private Sub ucrNewDataFrameName_NameChanged() Handles ucrNewDataFrameName.NameChanged
+    '    If Not ucrNewDataFrameName.IsEmpty Then
+    '        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveAssignTo()
+    '    End If
+    '    TestOkEnabled()
+    'End Sub
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If chkSetSeed.Checked Then
             frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
