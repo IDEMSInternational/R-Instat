@@ -57,6 +57,12 @@ Public Class dlgRandomSubsets
         clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
 
 
+        ucrSaveRandoSubsets.SetPrefix("one_var")
+        ucrSaveRandoSubsets.SetSaveTypeAsColumn()
+        ucrSaveRandoSubsets.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
+        ucrSaveRandoSubsets.SetLabelText("Save Graph")
+        ucrSaveRandoSubsets.SetIsComboBox()
+
 
     End Sub
 
