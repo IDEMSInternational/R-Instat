@@ -89,7 +89,6 @@ Public Class dlgTransformText
         dctInputPad.Add("Hyphen", Chr(34) & "-" & Chr(34))
         dctInputPad.Add("Period", Chr(34) & "." & Chr(34))
         dctInputPad.Add("Underscore", Chr(34) & "_" & Chr(34))
-        '' case of else: ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
         ucrInputPad.SetItems(dctInputPad)
         ucrInputPad.SetLinkedDisplayControl(lblPad)
         ucrInputPad.bAllowNonConditionValues = True
