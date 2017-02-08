@@ -46,7 +46,7 @@ Public Class dlgTransformText
 
         'ucrReceiver
         ucrReceiverTransformText.SetParameter(New RParameter("string", 0))
-        ucrReceiverTransformText.SetParameterIsRFunction() ' is r function for getvariables()
+        ucrReceiverTransformText.SetParameterIsRFunction()
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.bUseFilteredData = False
         ucrReceiverTransformText.SetMeAsReceiver()
@@ -60,7 +60,7 @@ Public Class dlgTransformText
         ucrPnlOperation.AddRadioButton(rdoWords)
         ucrPnlOperation.AddRadioButton(rdoSubstring)
 
-        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "stringr::str_to_lower") ' this changes depending which rdo is checked
+        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "stringr::str_to_lower") ' put in all three' this changes depending which rdo is checked
         ucrPnlOperation.AddFunctionNamesCondition(rdoLength, "stringr::str_length")
         ucrPnlOperation.AddFunctionNamesCondition(rdoPad, "stringr::str_pad")
         ucrPnlOperation.AddFunctionNamesCondition(rdoTrim, "stringr::str_trim")
@@ -71,21 +71,11 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputTo
-        ucrInputTo.cboInput.Items.Add("Lower")
-        ucrInputTo.cboInput.Items.Add("Upper")
-        ucrInputTo.cboInput.Items.Add("Title")
-
-        'Dim dctInputTo As New Dictionary(Of String, String)
-        ' ucrInputTo.SetFunction(New RFunction)
-        'dctInputTo.Add("Lower", )
-        'dctInputTo.Add("Upper", )
-        'dctInputTo.Add("Both", )
-        'ucrInputTo.SetItems(dctInputTo)
-        'ucrInputTo.SetLinkedDisplayControl(lblTo)
-        'Public Overridable Sub SetFunction(clsNewFunction As RFunction)
-        '   Dim clsFunction As RFunction
-        '  clsFunction = clsNewFunction
-        'End Sub??
+        ucrInputTo.SetItems({"Lower", "Upper", "Title"})
+        ucrInputTo.AddFunctionNamesCondition("Lower", "stringr::str_to_lower")
+        ucrInputTo.AddFunctionNamesCondition("Upper", "stringr::str_to_upper")
+        ucrInputTo.AddFunctionNamesCondition("Title", "stringr::str_to_title")
+        ucrInputTo.SetLinkedDisplayControl(lblTo)
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -302,6 +292,6 @@ Public Class dlgTransformText
             ucrNudLastWord.Enabled = False
         Else
             ucrNudLastWord.Enabled = True
-        End If ' don't want the nud to run either if this is checked
+        End If 'don't want the nud to run either if this is checked, does the nud currently run if this is checked?
     End Sub
 End Class
