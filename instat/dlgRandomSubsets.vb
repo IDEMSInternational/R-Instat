@@ -14,6 +14,7 @@
 Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True 'checks if dialog loads for first time
+    Private bReset As Boolean = True
     Private clsSetSeed As New RFunction
     Private clsSampleFunc As New RFunction
     Private clsReplicateFunc As New RFunction
@@ -21,30 +22,41 @@ Public Class dlgRandomSubsets
 
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReOpenDialog()
         End If
-        autoTranslate(Me)
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReOpenDialog()
+        TestOkEnabled()
 
     End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     'this contains things that initialise the dialog and run once
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 65
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunc)
-        clsDataFrameFunc.AddParameter("X", clsRFunctionParameter:=clsReplicateFunc)
-        clsDataFrameFunc.SetRCommand("data.frame")
         clsReplicateFunc.SetRCommand("replicate")
+
         ucrReceiverSelected.SetIncludedDataTypes({"numeric"})
         ucrReceiverSelected.Selector = ucrSelectorRandomSubsets
         ucrReceiverSelected.SetMeAsReceiver()
+
         clsSetSeed.SetRCommand("set.seed")
-        clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
+
         clsSampleFunc.SetRCommand("sample")
-        ucrBase.iHelpTopicID = 65
+        clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
+
+
 
     End Sub
 
@@ -59,11 +71,15 @@ Public Class dlgRandomSubsets
 
     'set defaults for the dialog
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        clsDefaultFunction.SetRCommand("data.frame")
+        clsDataFrameFunc.AddParameter("X", clsRFunctionParameter:=clsReplicateFunc)
+
 
         ucrSelectorRandomSubsets.Reset()
         ucrSelectorRandomSubsets.Focus()
-        ucrReceiverSelected.Selector = ucrSelectorRandomSubsets
-        ucrReceiverSelected.SetMeAsReceiver()
+
         chkWithReplacement.Checked = False
         chkSetSeed.Checked = False
         nudNumberOfColumns.Value = 1
@@ -79,7 +95,8 @@ Public Class dlgRandomSubsets
             ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
 
-        TestOkEnabled()
+        clsDefaultFunction.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+
     End Sub
     'set what happens when dialog is reopened
     Private Sub ReOpenDialog()
