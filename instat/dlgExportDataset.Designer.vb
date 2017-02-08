@@ -40,7 +40,7 @@ Partial Class dlgExportDataset
         Me.ucrBase.Location = New System.Drawing.Point(12, 141)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(409, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 2
         '
         'grpSaveOptions
         '
@@ -60,7 +60,7 @@ Partial Class dlgExportDataset
         Me.ucrInputExportFile.Location = New System.Drawing.Point(69, 24)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(251, 21)
-        Me.ucrInputExportFile.TabIndex = 8
+        Me.ucrInputExportFile.TabIndex = 1
         '
         'cmdBrowse
         '
@@ -77,7 +77,7 @@ Partial Class dlgExportDataset
         Me.lblExport.Location = New System.Drawing.Point(11, 27)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(56, 13)
-        Me.lblExport.TabIndex = 3
+        Me.lblExport.TabIndex = 0
         Me.lblExport.Text = "Export file:"
         '
         'grpSheetSelection
