@@ -60,7 +60,7 @@ Public Class dlgRandomSubsets
         ucrSaveRandoSubsets.SetPrefix("one_var")
         ucrSaveRandoSubsets.SetSaveTypeAsColumn()
         ucrSaveRandoSubsets.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
-        ucrSaveRandoSubsets.SetLabelText("Save Graph")
+        ucrSaveRandoSubsets.SetLabelText("New Data Frame Name:")
         ucrSaveRandoSubsets.SetIsComboBox()
 
 
@@ -88,36 +88,29 @@ Public Class dlgRandomSubsets
 
         chkWithReplacement.Checked = False
         chkSetSeed.Checked = False
-        nudNumberOfColumns.Value = 1
-        nudNumberOfColumns.Minimum = 1
-        nudNumberOfColumns.Maximum = Integer.MaxValue
+        NumberOfColumns.Value = 1
+        NumberOfColumns.Minimum = 1
+        NumberOfColumns.Maximum = Integer.MaxValue
         ReplaceParameters()
-        nudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+        nudSampleSiz.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
         nudSetSeed.Value = 1
         nudSetSeed.Minimum = Integer.MinValue
         nudSetSeed.Maximum = Integer.MaxValue
         nudSetSeed.Visible = False
         If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
+            ucrSaveRandoSubsets.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
 
-        clsDefaultFunction.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+        clsDefaultFunction.SetAssignTo(ucrSaveRandoSubsets.GetText(), strTempDataframe:=ucrSaveRandoSubsets.GetText())
 
     End Sub
     'set what happens when dialog is reopened
     Private Sub ReOpenDialog()
         If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
+            ucrSaveRandoSubsets.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
     End Sub
-    'Private Sub ucrNewDataFrameName_NameChanged() Handles ucrNewDataFrameName.NameChanged
-    '    If Not ucrNewDataFrameName.IsEmpty Then
-    '        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
-    '    Else
-    '        ucrBase.clsRsyntax.RemoveAssignTo()
-    '    End If
-    '    TestOkEnabled()
-    'End Sub
+
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If chkSetSeed.Checked Then
             frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
@@ -148,12 +141,12 @@ Public Class dlgRandomSubsets
     Private Sub ReplaceParameters()
         If chkWithReplacement.Checked Then
             clsSampleFunc.AddParameter("replace", "TRUE")
-            nudSampleSize.Minimum = 1
-            nudSampleSize.Maximum = Integer.MaxValue
+            nudSampleSiz.Minimum = 1
+            nudSampleSiz.Maximum = Integer.MaxValue
         Else
             clsSampleFunc.AddParameter("replace", "FALSE")
-            nudSampleSize.Minimum = 1
-            nudSampleSize.Maximum = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+            nudSampleSiz.Minimum = 1
+            nudSampleSiz.Maximum = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
         End If
     End Sub
     Private Sub chkSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
@@ -162,12 +155,12 @@ Public Class dlgRandomSubsets
     Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
         SetSeedParameters()
     End Sub
-    Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.TextChanged
-        clsReplicateFunc.AddParameter("n", nudNumberOfColumns.Value)
+    Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs)
+        clsReplicateFunc.AddParameter("n", NumberOfColumns.Value)
     End Sub
 
-    Private Sub nudSampleSize_TextChanged(sender As Object, e As EventArgs) Handles nudSampleSize.TextChanged
-        clsSampleFunc.AddParameter("size", nudSampleSize.Value)
+    Private Sub nudSampleSize_TextChanged(sender As Object, e As EventArgs)
+        clsSampleFunc.AddParameter("size", nudSampleSiz.Value)
     End Sub
     Private Sub chkWithReplacement_CheckedChanged(sender As Object, e As EventArgs) Handles chkWithReplacement.CheckedChanged
         ReplaceParameters()
