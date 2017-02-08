@@ -33,7 +33,7 @@ Partial Class dlgRandomSubsets
         Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrSaveRandoSubsets = New instat.ucrSave()
         CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -143,21 +143,21 @@ Partial Class dlgRandomSubsets
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
-        'ucrSaveGraph
+        'ucrSaveRandoSubsets
         '
-        Me.ucrSaveGraph.bAddRemoveParameter = True
-        Me.ucrSaveGraph.bChangeParameterValue = True
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 226)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSaveGraph.TabIndex = 18
+        Me.ucrSaveRandoSubsets.bAddRemoveParameter = True
+        Me.ucrSaveRandoSubsets.bChangeParameterValue = True
+        Me.ucrSaveRandoSubsets.Location = New System.Drawing.Point(10, 228)
+        Me.ucrSaveRandoSubsets.Name = "ucrSaveRandoSubsets"
+        Me.ucrSaveRandoSubsets.Size = New System.Drawing.Size(275, 24)
+        Me.ucrSaveRandoSubsets.TabIndex = 18
         '
         'dlgRandomSubsets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(445, 328)
-        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.ucrSaveRandoSubsets)
         Me.Controls.Add(Me.chkSetSeed)
         Me.Controls.Add(Me.nudSetSeed)
         Me.Controls.Add(Me.chkWithReplacement)
@@ -195,5 +195,5 @@ Partial Class dlgRandomSubsets
     Friend WithEvents chkWithReplacement As CheckBox
     Friend WithEvents nudSetSeed As NumericUpDown
     Friend WithEvents chkSetSeed As CheckBox
-    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrSaveRandoSubsets As ucrSave
 End Class
