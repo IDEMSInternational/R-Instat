@@ -23,9 +23,7 @@ Partial Class dlgExportToCPT
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.txtExportFile = New System.Windows.Forms.TextBox()
         Me.lblExport = New System.Windows.Forms.Label()
-        Me.chkLong = New System.Windows.Forms.CheckBox()
         Me.lblYears = New System.Windows.Forms.Label()
         Me.lblStations = New System.Windows.Forms.Label()
         Me.lblDataColumn = New System.Windows.Forms.Label()
@@ -37,6 +35,8 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverStations = New instat.ucrReceiverSingle()
         Me.ucrReceiverYears = New instat.ucrReceiverSingle()
         Me.ucrSSTDataframe = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputExportFile = New instat.ucrInputTextBox()
+        Me.ucrChkLong = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdBrowse
@@ -48,13 +48,6 @@ Partial Class dlgExportToCPT
         Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
-        'txtExportFile
-        '
-        Me.txtExportFile.Location = New System.Drawing.Point(84, 247)
-        Me.txtExportFile.Name = "txtExportFile"
-        Me.txtExportFile.Size = New System.Drawing.Size(257, 20)
-        Me.txtExportFile.TabIndex = 12
-        '
         'lblExport
         '
         Me.lblExport.AutoSize = True
@@ -63,17 +56,6 @@ Partial Class dlgExportToCPT
         Me.lblExport.Size = New System.Drawing.Size(56, 13)
         Me.lblExport.TabIndex = 11
         Me.lblExport.Text = "Export file:"
-        '
-        'chkLong
-        '
-        Me.chkLong.AutoSize = True
-        Me.chkLong.Location = New System.Drawing.Point(289, 16)
-        Me.chkLong.Name = "chkLong"
-        Me.chkLong.Size = New System.Drawing.Size(111, 17)
-        Me.chkLong.TabIndex = 0
-        Me.chkLong.Tag = "Long_Data_Format"
-        Me.chkLong.Text = "Long Data Format"
-        Me.chkLong.UseVisualStyleBackColor = True
         '
         'lblYears
         '
@@ -124,6 +106,8 @@ Partial Class dlgExportToCPT
         '
         'ucrLocationDataFrame
         '
+        Me.ucrLocationDataFrame.bAddRemoveParameter = True
+        Me.ucrLocationDataFrame.bChangeParameterValue = True
         Me.ucrLocationDataFrame.bUseCurrentFilter = True
         Me.ucrLocationDataFrame.Location = New System.Drawing.Point(15, 194)
         Me.ucrLocationDataFrame.Margin = New System.Windows.Forms.Padding(0)
@@ -133,6 +117,9 @@ Partial Class dlgExportToCPT
         '
         'ucrReceiverMultipleDataColumns
         '
+        Me.ucrReceiverMultipleDataColumns.bAddRemoveParameter = True
+        Me.ucrReceiverMultipleDataColumns.bChangeParameterValue = True
+        Me.ucrReceiverMultipleDataColumns.frmParent = Me
         Me.ucrReceiverMultipleDataColumns.Location = New System.Drawing.Point(289, 116)
         Me.ucrReceiverMultipleDataColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleDataColumns.Name = "ucrReceiverMultipleDataColumns"
@@ -142,6 +129,9 @@ Partial Class dlgExportToCPT
         '
         'ucrReceiverDataColumn
         '
+        Me.ucrReceiverDataColumn.bAddRemoveParameter = True
+        Me.ucrReceiverDataColumn.bChangeParameterValue = True
+        Me.ucrReceiverDataColumn.frmParent = Me
         Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(289, 169)
         Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
@@ -151,6 +141,9 @@ Partial Class dlgExportToCPT
         '
         'ucrReceiverStations
         '
+        Me.ucrReceiverStations.bAddRemoveParameter = True
+        Me.ucrReceiverStations.bChangeParameterValue = True
+        Me.ucrReceiverStations.frmParent = Me
         Me.ucrReceiverStations.Location = New System.Drawing.Point(289, 116)
         Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStations.Name = "ucrReceiverStations"
@@ -160,6 +153,9 @@ Partial Class dlgExportToCPT
         '
         'ucrReceiverYears
         '
+        Me.ucrReceiverYears.bAddRemoveParameter = True
+        Me.ucrReceiverYears.bChangeParameterValue = True
+        Me.ucrReceiverYears.frmParent = Me
         Me.ucrReceiverYears.Location = New System.Drawing.Point(289, 63)
         Me.ucrReceiverYears.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYears.Name = "ucrReceiverYears"
@@ -169,6 +165,8 @@ Partial Class dlgExportToCPT
         '
         'ucrSSTDataframe
         '
+        Me.ucrSSTDataframe.bAddRemoveParameter = True
+        Me.ucrSSTDataframe.bChangeParameterValue = True
         Me.ucrSSTDataframe.bShowHiddenColumns = False
         Me.ucrSSTDataframe.bUseCurrentFilter = True
         Me.ucrSSTDataframe.Location = New System.Drawing.Point(15, 5)
@@ -177,12 +175,34 @@ Partial Class dlgExportToCPT
         Me.ucrSSTDataframe.Size = New System.Drawing.Size(210, 180)
         Me.ucrSSTDataframe.TabIndex = 0
         '
+        'ucrInputExportFile
+        '
+        Me.ucrInputExportFile.bAddRemoveParameter = True
+        Me.ucrInputExportFile.bChangeParameterValue = True
+        Me.ucrInputExportFile.IsMultiline = False
+        Me.ucrInputExportFile.IsReadOnly = False
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(93, 246)
+        Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        Me.ucrInputExportFile.Size = New System.Drawing.Size(248, 21)
+        Me.ucrInputExportFile.TabIndex = 15
+        '
+        'ucrChkLong
+        '
+        Me.ucrChkLong.bAddRemoveParameter = True
+        Me.ucrChkLong.bChangeParameterValue = True
+        Me.ucrChkLong.Checked = False
+        Me.ucrChkLong.Location = New System.Drawing.Point(276, 17)
+        Me.ucrChkLong.Name = "ucrChkLong"
+        Me.ucrChkLong.Size = New System.Drawing.Size(133, 20)
+        Me.ucrChkLong.TabIndex = 16
+        '
         'dlgExportToCPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(429, 329)
-        Me.Controls.Add(Me.chkLong)
+        Me.Controls.Add(Me.ucrChkLong)
+        Me.Controls.Add(Me.ucrInputExportFile)
         Me.Controls.Add(Me.ucrBaseExportToCPT)
         Me.Controls.Add(Me.ucrLocationDataFrame)
         Me.Controls.Add(Me.lblDataColumns)
@@ -195,7 +215,6 @@ Partial Class dlgExportToCPT
         Me.Controls.Add(Me.ucrReceiverYears)
         Me.Controls.Add(Me.ucrSSTDataframe)
         Me.Controls.Add(Me.cmdBrowse)
-        Me.Controls.Add(Me.txtExportFile)
         Me.Controls.Add(Me.lblExport)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -209,10 +228,8 @@ Partial Class dlgExportToCPT
 
     End Sub
     Friend WithEvents cmdBrowse As Button
-    Friend WithEvents txtExportFile As TextBox
     Friend WithEvents lblExport As Label
     Friend WithEvents ucrSSTDataframe As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents chkLong As CheckBox
     Friend WithEvents ucrReceiverYears As ucrReceiverSingle
     Friend WithEvents ucrReceiverStations As ucrReceiverSingle
     Friend WithEvents ucrReceiverDataColumn As ucrReceiverSingle
@@ -223,5 +240,6 @@ Partial Class dlgExportToCPT
     Friend WithEvents lblDataColumns As Label
     Friend WithEvents ucrLocationDataFrame As ucrDataFrame
     Friend WithEvents ucrBaseExportToCPT As ucrButtons
-
+    Friend WithEvents ucrInputExportFile As ucrInputTextBox
+    Friend WithEvents ucrChkLong As ucrCheck
 End Class
