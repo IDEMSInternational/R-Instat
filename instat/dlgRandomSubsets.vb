@@ -56,9 +56,23 @@ Public Class dlgRandomSubsets
         clsSampleFunc.SetRCommand("sample")
         clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
 
-        u
+        ucrChkWithReplacement.SetParameter(New RParameter("replace"))
+        ucrChkWithReplacement.SetText("With Replacement:")
+        ucrChkWithReplacement.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrSaveRandoSubsets.SetPrefix("one_var")
+        ucrNudNumberOfColumns.SetParameter(New RParameter("n"))
+
+        ucrNudSampleSize.SetParameter(New RParameter("size"))
+
+        ucrNudSetSeed.SetParameter(New RParameter("seed"))
+        ' ucrChkSetSeed.AddToLinkedControls(ucrReceiverForColumnsToDele, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ' ucrChkSetSeed.SetValueIfChecked()
+
+
+
+
+        'ucrSaveRandoSubsets.SetPrefix("one_var")
         ucrSaveRandoSubsets.SetSaveTypeAsColumn()
         ucrSaveRandoSubsets.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
         ucrSaveRandoSubsets.SetLabelText("New Data Frame Name:")
@@ -87,8 +101,8 @@ Public Class dlgRandomSubsets
         ucrSelectorRandomSubsets.Reset()
         ucrSelectorRandomSubsets.Focus()
 
-        chkWithReplacement.Checked = False
-        chkSetSeed.Checked = False
+        ' chkWithReplacement.Checked = False
+        ' chkSetSeed.Checked = False
         ' NumberOfColumns.Value = 1
         ' NumberOfColumns.Minimum = 1
         ' NumberOfColumns.Maximum = Integer.MaxValue
@@ -113,9 +127,9 @@ Public Class dlgRandomSubsets
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If chkSetSeed.Checked Then
-            frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
-        End If
+        ' If chkSetSeed.Checked Then
+        frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
+        ' End If
         TestOkEnabled()
     End Sub
     Private Sub ucrReceiverSelected_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelected.SelectionChanged
@@ -127,50 +141,47 @@ Public Class dlgRandomSubsets
         TestOkEnabled()
     End Sub
     Private Sub SetSeedParameters()
-        If chkSetSeed.Checked Then
-            nudSetSeed.Visible = True
-            If nudSetSeed.Text <> "" Then
-                clsSetSeed.AddParameter("seed", nudSetSeed.Value)
-            Else
-                clsSetSeed.RemoveParameterByName("seed")
-            End If
-        Else
-            nudSetSeed.Visible = False
-            clsSetSeed.RemoveParameterByName("seed")
-        End If
+        'If chkSetSeed.Checked Then
+        '    nudSetSeed.Visible = True
+        '    If nudSetSeed.Text <> "" Then
+        '        clsSetSeed.AddParameter("seed", nudSetSeed.Value)
+        '    Else
+        '        clsSetSeed.RemoveParameterByName("seed")
+        '    End If
+        '  Else
+        'nudSetSeed.Visible = False
+        '    clsSetSeed.RemoveParameterByName("seed")
+        'End If
     End Sub
     Private Sub ReplaceParameters()
-        If chkWithReplacement.Checked Then
-            clsSampleFunc.AddParameter("replace", "TRUE")
-            '   nudSampleSiz.Minimum = 1
-            '  nudSampleSiz.Maximum = Integer.MaxValue
-        Else
-            clsSampleFunc.AddParameter("replace", "FALSE")
-            ' nudSampleSiz.Minimum = 1
-            ' nudSampleSiz.Maximum = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
-        End If
-    End Sub
-    Private Sub chkSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
-        SetSeedParameters()
-    End Sub
-    Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
-        SetSeedParameters()
-    End Sub
-    Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs)
-        clsReplicateFunc.AddParameter("n", NumberOfColumns.Value)
+        'If chkWithReplacement.Checked Then
+        '    clsSampleFunc.AddParameter("replace", "TRUE")
+        '    '   nudSampleSiz.Minimum = 1
+        '    '  nudSampleSiz.Maximum = Integer.MaxValue
+        'Else
+        '    clsSampleFunc.AddParameter("replace", "FALSE")
+        '    ' nudSampleSiz.Minimum = 1
+        '    ' nudSampleSiz.Maximum = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+        'End If
     End Sub
 
-    Private Sub nudSampleSize_TextChanged(sender As Object, e As EventArgs)
-        clsSampleFunc.AddParameter("size", nudSampleSiz.Value)
+    Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs)
+        SetSeedParameters()
     End Sub
-    Private Sub chkWithReplacement_CheckedChanged(sender As Object, e As EventArgs) Handles chkWithReplacement.CheckedChanged
-        ReplaceParameters()
-    End Sub
+    'Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs)
+    '    clsReplicateFunc.AddParameter("n", NumberOfColumns.Value)
+    'End Sub
+
+    'Private Sub nudSampleSize_TextChanged(sender As Object, e As EventArgs)
+    '    clsSampleFunc.AddParameter("size", nudSampleSiz.Value)
+    'End Sub
+    'Private Sub chkWithReplacement_CheckedChanged(sender As Object, e As EventArgs)
+    '    ReplaceParameters()
+    'End Sub
 
     'this is what happens when Reset button is clicked
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
-
 
 End Class

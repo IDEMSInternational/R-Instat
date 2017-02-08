@@ -25,16 +25,15 @@ Partial Class dlgRandomSubsets
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberOfColumns = New System.Windows.Forms.Label()
-        Me.chkWithReplacement = New System.Windows.Forms.CheckBox()
-        Me.nudSetSeed = New System.Windows.Forms.NumericUpDown()
-        Me.chkSetSeed = New System.Windows.Forms.CheckBox()
         Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveRandoSubsets = New instat.ucrSave()
         Me.ucrNudSampleSize = New instat.ucrNud()
         Me.ucrNudNumberOfColumns = New instat.ucrNud()
-        CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudSetSeed = New instat.ucrNud()
+        Me.ucrChkWithReplacement = New instat.ucrCheck()
+        Me.ucrChkSetSeed = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -67,35 +66,6 @@ Partial Class dlgRandomSubsets
         Me.lblNumberOfColumns.Tag = "Number_of_Columns:"
         Me.lblNumberOfColumns.Text = "Number of Columns:"
         '
-        'chkWithReplacement
-        '
-        Me.chkWithReplacement.AutoSize = True
-        Me.chkWithReplacement.Location = New System.Drawing.Point(257, 203)
-        Me.chkWithReplacement.Name = "chkWithReplacement"
-        Me.chkWithReplacement.Size = New System.Drawing.Size(114, 17)
-        Me.chkWithReplacement.TabIndex = 13
-        Me.chkWithReplacement.Tag = "With_Replacement"
-        Me.chkWithReplacement.Text = "With Replacement"
-        Me.chkWithReplacement.UseVisualStyleBackColor = True
-        '
-        'nudSetSeed
-        '
-        Me.nudSetSeed.Location = New System.Drawing.Point(363, 172)
-        Me.nudSetSeed.Name = "nudSetSeed"
-        Me.nudSetSeed.Size = New System.Drawing.Size(53, 20)
-        Me.nudSetSeed.TabIndex = 16
-        '
-        'chkSetSeed
-        '
-        Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(257, 173)
-        Me.chkSetSeed.Name = "chkSetSeed"
-        Me.chkSetSeed.Size = New System.Drawing.Size(51, 17)
-        Me.chkSetSeed.TabIndex = 17
-        Me.chkSetSeed.Tag = "Seed"
-        Me.chkSetSeed.Text = "Seed"
-        Me.chkSetSeed.UseVisualStyleBackColor = True
-        '
         'ucrReceiverSelected
         '
         Me.ucrReceiverSelected.bAddRemoveParameter = True
@@ -122,7 +92,7 @@ Partial Class dlgRandomSubsets
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 269)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -131,7 +101,7 @@ Partial Class dlgRandomSubsets
         '
         Me.ucrSaveRandoSubsets.bAddRemoveParameter = True
         Me.ucrSaveRandoSubsets.bChangeParameterValue = True
-        Me.ucrSaveRandoSubsets.Location = New System.Drawing.Point(10, 228)
+        Me.ucrSaveRandoSubsets.Location = New System.Drawing.Point(10, 236)
         Me.ucrSaveRandoSubsets.Name = "ucrSaveRandoSubsets"
         Me.ucrSaveRandoSubsets.Size = New System.Drawing.Size(275, 24)
         Me.ucrSaveRandoSubsets.TabIndex = 18
@@ -164,17 +134,51 @@ Partial Class dlgRandomSubsets
         Me.ucrNudNumberOfColumns.TabIndex = 20
         Me.ucrNudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrNudSetSeed
+        '
+        Me.ucrNudSetSeed.bAddRemoveParameter = True
+        Me.ucrNudSetSeed.bChangeParameterValue = True
+        Me.ucrNudSetSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSetSeed.Location = New System.Drawing.Point(363, 170)
+        Me.ucrNudSetSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSetSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Name = "ucrNudSetSeed"
+        Me.ucrNudSetSeed.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSetSeed.TabIndex = 21
+        Me.ucrNudSetSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkWithReplacement
+        '
+        Me.ucrChkWithReplacement.bAddRemoveParameter = True
+        Me.ucrChkWithReplacement.bChangeParameterValue = True
+        Me.ucrChkWithReplacement.Checked = False
+        Me.ucrChkWithReplacement.Location = New System.Drawing.Point(257, 210)
+        Me.ucrChkWithReplacement.Name = "ucrChkWithReplacement"
+        Me.ucrChkWithReplacement.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkWithReplacement.TabIndex = 22
+        '
+        'ucrChkSetSeed
+        '
+        Me.ucrChkSetSeed.bAddRemoveParameter = True
+        Me.ucrChkSetSeed.bChangeParameterValue = True
+        Me.ucrChkSetSeed.Checked = False
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(257, 170)
+        Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
+        Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSetSeed.TabIndex = 23
+        '
         'dlgRandomSubsets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(445, 328)
+        Me.Controls.Add(Me.ucrChkSetSeed)
+        Me.Controls.Add(Me.ucrChkWithReplacement)
+        Me.Controls.Add(Me.ucrNudSetSeed)
         Me.Controls.Add(Me.ucrNudNumberOfColumns)
         Me.Controls.Add(Me.ucrNudSampleSize)
         Me.Controls.Add(Me.ucrSaveRandoSubsets)
-        Me.Controls.Add(Me.chkSetSeed)
-        Me.Controls.Add(Me.nudSetSeed)
-        Me.Controls.Add(Me.chkWithReplacement)
         Me.Controls.Add(Me.lblNumberOfColumns)
         Me.Controls.Add(Me.lblSampleSize)
         Me.Controls.Add(Me.lblSelected)
@@ -188,7 +192,6 @@ Partial Class dlgRandomSubsets
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Random_Subsets"
         Me.Text = "Random Subsets"
-        CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -200,10 +203,11 @@ Partial Class dlgRandomSubsets
     Friend WithEvents lblSelected As Label
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberOfColumns As Label
-    Friend WithEvents chkWithReplacement As CheckBox
     Friend WithEvents nudSetSeed As NumericUpDown
-    Friend WithEvents chkSetSeed As CheckBox
     Friend WithEvents ucrSaveRandoSubsets As ucrSave
     Friend WithEvents ucrNudSampleSize As ucrNud
     Friend WithEvents ucrNudNumberOfColumns As ucrNud
+    Friend WithEvents ucrChkWithReplacement As ucrCheck
+    Friend WithEvents ucrNudSetSeed As ucrNud
+    Friend WithEvents ucrChkSetSeed As ucrCheck
 End Class
