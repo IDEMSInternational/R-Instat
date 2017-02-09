@@ -46,9 +46,10 @@ Public Class dlgRandomSubsets
         ucrNudSetSeed.Minimum = Integer.MinValue
         ucrNudSetSeed.Maximum = Integer.MaxValue
 
+        ucrChkSetSeed.AddFunctionNamesCondition("set.seed", True)
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.Minimum = 1
-        ucrNudSetSeed.SetRDefault(5)
+        ucrNudSetSeed.SetRDefault(1)
 
         ucrReceiverSelected.SetParameter(New RParameter("x", 2))
         ucrReceiverSelected.SetParameterIsRFunction()
@@ -65,8 +66,6 @@ Public Class dlgRandomSubsets
         ucrNudNumberOfColumns.SetRDefault(1)
 
         ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
-
-
 
         ucrChkSetSeed.SetText("Seed")
         ucrNudSetSeed.Minimum = 1
@@ -103,7 +102,7 @@ Public Class dlgRandomSubsets
         ucrSelectorRandomSubsets.Reset()
         ucrSelectorRandomSubsets.Focus()
 
-        Dim clsDefaultFunction, ClsDefaultSample, clsDefaultRepFunc As New RFunction
+        Dim clsDefaultFunction, ClsDefaultSample, clsDefaultSeed, clsDefaultRepFunc As New RFunction
 
         clsDefaultFunction.SetRCommand("data.frame")
         clsDefaultRepFunc.SetRCommand("replicate")
@@ -112,8 +111,9 @@ Public Class dlgRandomSubsets
         ClsDefaultSample.AddParameter("replace", "FALSE")
         ClsDefaultSample.AddParameter("size", ucrNudSampleSize.Value)
 
-        clsSetSeed.SetRCommand("set.seed")
-        clsSetSeed.AddParameter("seed", 1)
+        clsDefaultSeed.SetRCommand("set.seed")
+        clsDefaultSeed.AddParameter("seed", 1)
+        clsSetSeed = clsDefaultSeed.Clone
 
         clsReplicateFunc = clsDefaultRepFunc.Clone
         clsSampleFunc = ClsDefaultSample.Clone
@@ -135,7 +135,9 @@ Public Class dlgRandomSubsets
         ucrReceiverSelected.SetRCode(clsSampleFunc, bReset)
         ucrChkWithReplacement.SetRCode(clsSampleFunc, bReset)
         ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
+        ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
         ucrSaveRandoSubsets.SetRCode(clsOverallFunction, bReset)
+
     End Sub
 
     'set what happens when dialog is reopened
@@ -147,10 +149,9 @@ Public Class dlgRandomSubsets
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkSetSeed.Checked Then
+            clsSetSeed.SetRCommand("set.seed")
             frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
         End If
-        SetRCodeForControls(True)
-        TestOkEnabled()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged
