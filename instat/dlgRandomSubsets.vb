@@ -33,8 +33,6 @@ Public Class dlgRandomSubsets
 
     End Sub
 
-
-
     'this contains things that initialise the dialog and run once
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 65
@@ -43,12 +41,10 @@ Public Class dlgRandomSubsets
         ucrReceiverSelected.SetMeAsReceiver()
         ucrReceiverSelected.SetIncludedDataTypes({"numeric"})
 
-        ucrNudSetSeed.Minimum = Integer.MinValue
-        ucrNudSetSeed.Maximum = Integer.MaxValue
-
         ucrChkSetSeed.AddFunctionNamesCondition("set.seed", True)
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.Minimum = 1
+        ucrNudSetSeed.Maximum = Integer.MaxValue
         ucrNudSetSeed.SetRDefault(1)
 
         ucrReceiverSelected.SetParameter(New RParameter("x", 2))
@@ -61,7 +57,6 @@ Public Class dlgRandomSubsets
 
         ucrNudNumberOfColumns.SetParameter(New RParameter("n", 2))
         ucrNudNumberOfColumns.Value = 1
-        ucrNudNumberOfColumns.Minimum = 1
         ucrNudNumberOfColumns.Maximum = Integer.MaxValue
         ucrNudNumberOfColumns.SetRDefault(1)
 
@@ -73,23 +68,21 @@ Public Class dlgRandomSubsets
 
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrNewDataframe.SetIsTextBox()
+        ucrNewDataframe.SetSaveTypeAsDataFrame()
+        ucrNewDataframe.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
+        ucrNewDataframe.SetLabelText("New Data Frame Name:")
 
 
-
-
-
-        'ucrSaveRandoSubsets.SetPrefix("one_var")
-        ucrSaveRandoSubsets.SetSaveTypeAsDataFrame()
-        '   ucrSaveRandoSubsets.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
-        ucrSaveRandoSubsets.SetLabelText("New Data Frame Name:")
-        ucrSaveRandoSubsets.SetIsComboBox()
-
+        If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrNewDataframe.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
+        End If
 
     End Sub
 
     'checks when to enable ok button
     Private Sub TestOkEnabled()
-        If ucrReceiverSelected.IsEmpty Then
+        If ucrReceiverSelected.IsEmpty AndAlso ucrNewDataframe.IsComplete() Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -98,12 +91,9 @@ Public Class dlgRandomSubsets
 
     'set defaults for the dialog
     Private Sub SetDefaults()
-        'ucrReceiverSelected.SetRCode(clsRepFunction, bReset)
-        ucrSelectorRandomSubsets.Reset()
-        ucrSelectorRandomSubsets.Focus()
-
         Dim clsDefaultFunction, ClsDefaultSample, clsDefaultSeed, clsDefaultRepFunc As New RFunction
 
+        ucrSelectorRandomSubsets.Reset()
         clsDefaultFunction.SetRCommand("data.frame")
         clsDefaultRepFunc.SetRCommand("replicate")
         ClsDefaultSample.SetRCommand("sample")
@@ -123,11 +113,7 @@ Public Class dlgRandomSubsets
         clsOverallFunction.AddParameter("X", clsRFunctionParameter:=clsReplicateFunc)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
 
-        If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrSaveRandoSubsets.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
-        End If
-
-        clsOverallFunction.SetAssignTo(ucrSaveRandoSubsets.GetText(), strTempDataframe:=ucrSaveRandoSubsets.GetText())
+        clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
 
     End Sub
 
@@ -136,20 +122,20 @@ Public Class dlgRandomSubsets
         ucrChkWithReplacement.SetRCode(clsSampleFunc, bReset)
         ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
-        ucrSaveRandoSubsets.SetRCode(clsOverallFunction, bReset)
+        ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
 
     End Sub
 
     'set what happens when dialog is reopened
     Private Sub ReOpenDialog()
         If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrSaveRandoSubsets.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
+            ucrNewDataframe.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkSetSeed.Checked Then
-            clsSetSeed.SetRCommand("set.seed")
+            'clsSetSeed.SetRCommand("set.seed")
             frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
         End If
     End Sub
