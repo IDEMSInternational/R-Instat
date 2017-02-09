@@ -82,7 +82,7 @@ Public Class dlgRandomSubsets
 
     'checks when to enable ok button
     Private Sub TestOkEnabled()
-        If ucrReceiverSelected.IsEmpty AndAlso ucrNewDataframe.IsComplete() Then
+        If ucrReceiverSelected.IsEmpty AndAlso ucrNewDataframe.IsComplete() AndAlso ucrNudNumberOfColumns.GetText > 0 Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
