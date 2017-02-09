@@ -115,20 +115,19 @@ Public Class dlgRandomSubsets
         clsSetSeed.SetRCommand("set.seed")
         clsSetSeed.AddParameter("seed", 1)
 
-        clsSampleFunc = ClsDefaultSample.Clone
         clsReplicateFunc = clsDefaultRepFunc.Clone
-
+        clsSampleFunc = ClsDefaultSample.Clone
 
         clsOverallFunction = clsDefaultFunction.Clone
-        clsDefaultRepFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
-        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsReplicateFunc)
+        clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
+        clsOverallFunction.AddParameter("X", clsRFunctionParameter:=clsReplicateFunc)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
 
         If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrSaveRandoSubsets.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
 
-        clsDefaultFunction.SetAssignTo(ucrSaveRandoSubsets.GetText(), strTempDataframe:=ucrSaveRandoSubsets.GetText())
+        clsOverallFunction.SetAssignTo(ucrSaveRandoSubsets.GetText(), strTempDataframe:=ucrSaveRandoSubsets.GetText())
 
     End Sub
 
