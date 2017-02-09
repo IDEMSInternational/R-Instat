@@ -56,12 +56,11 @@ Public Class dlgCliBoxplot
         ucrInputAt.SetParameter(New RParameter("at", 5))
         ucrInputAt.SetValidationTypeAsRVariable()
 
-
         ucrInputBorder.SetParameter(New RParameter("border", 6))
         ucrInputBorder.SetValidationTypeAsRVariable()
 
-        '  ucrInputColour.SetParameter(New RParameter("pars", 7))
-        ' ucrInputColour.SetValidationTypeAsRVariable()
+        ucrInputPars.SetParameter(New RParameter("pars", 7))
+        ucrInputPars.SetValidationTypeAsRVariable()
 
         ucrInputColour.SetParameter(New RParameter("col", 8))
         ucrInputColour.SetValidationTypeAsRVariable()
@@ -78,8 +77,7 @@ Public Class dlgCliBoxplot
         ucrInputXLabel.SetParameter(New RParameter("xlab", 0))
         ucrInputXLabel.SetValidationTypeAsRVariable()
 
-
-        ucrchkHorizontal.SetText("Horizaontal")
+        ucrChkHorizontal.SetText("Horizaontal")
         ucrchkHorizontal.SetParameter(New RParameter("horizontal"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrchkHorizontal.SetRDefault("FALSE")
 
@@ -87,59 +85,59 @@ Public Class dlgCliBoxplot
     End Sub
 
 
-    Private Sub chkMonthAbbreviations_CheckedChanged(sender As Object, e As EventArgs) Handles chkMonthAbbreviations.CheckedChanged
+    Private Sub chkMonthAbbreviations_CheckedChanged(sender As Object, e As EventArgs)
         If chkHorizontal.Checked Then
             ucrBase.clsRsyntax.AddParameter("names", chkMonthAbbreviations.Checked.ToString().ToUpper())
         End If
 
     End Sub
 
-    Private Sub chkFactorLevel_CheckedChanged(sender As Object, e As EventArgs) Handles chkFactorLevel.CheckedChanged
+    Private Sub chkFactorLevel_CheckedChanged(sender As Object, e As EventArgs)
         If chkFactorLevel.Checked Then
             ucrBase.clsRsyntax.AddParameter("factor_level", chkFactorLevel.Checked.ToString().ToUpper())
         End If
 
     End Sub
 
-    Private Sub chkPlot_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlot.CheckedChanged
+    Private Sub chkPlot_CheckedChanged(sender As Object, e As EventArgs)
         If chkPlot.Checked Then
             ucrBase.clsRsyntax.AddParameter("plot", chkPlot.Checked.ToString().ToUpper())
         End If
 
     End Sub
 
-    Private Sub chkOutline_CheckedChanged(sender As Object, e As EventArgs) Handles chkOutline.CheckedChanged
+    Private Sub chkOutline_CheckedChanged(sender As Object, e As EventArgs)
         If chkOutline.Checked Then
             ucrBase.clsRsyntax.AddParameter("outline", chkOutline.Checked.ToString().ToUpper())
         End If
 
     End Sub
 
-    Private Sub chkAdd_CheckedChanged(sender As Object, e As EventArgs) Handles chkAdd.CheckedChanged
+    Private Sub chkAdd_CheckedChanged(sender As Object, e As EventArgs)
         If chkAdd.Checked Then
             ucrBase.clsRsyntax.AddParameter("add", chkAdd.Checked.ToString().ToUpper())
         End If
 
     End Sub
 
-    Private Sub chkVarwidth_CheckedChanged(sender As Object, e As EventArgs) Handles chkVarwidth.CheckedChanged
+    Private Sub chkVarwidth_CheckedChanged(sender As Object, e As EventArgs)
         If chkVarwidth.Checked Then
             ucrBase.clsRsyntax.AddParameter("varwidth", chkVarwidth.Checked.ToString().ToUpper())
         End If
 
     End Sub
 
-    Private Sub nudRange_ValueChanged(sender As Object, e As EventArgs) Handles nudRange.ValueChanged
+    Private Sub nudRange_ValueChanged(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("range", nudRange.Value.ToString())
 
     End Sub
 
-    Private Sub nudThreshold_ValueChanged(sender As Object, e As EventArgs) Handles nudThreshold.ValueChanged
+    Private Sub nudThreshold_ValueChanged(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value.ToString())
 
     End Sub
 
-    Private Sub nudWhisklty_ValueChanged(sender As Object, e As EventArgs) Handles nudWhisklty.ValueChanged
+    Private Sub nudWhisklty_ValueChanged(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("whisklty", nudWhisklty.Value.ToString())
 
     End Sub

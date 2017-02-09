@@ -23,18 +23,7 @@ Partial Class dlgCliBoxplot
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkVarwidth = New System.Windows.Forms.CheckBox()
-        Me.chkAdd = New System.Windows.Forms.CheckBox()
-        Me.chkNotch = New System.Windows.Forms.CheckBox()
-        Me.chkOutline = New System.Windows.Forms.CheckBox()
-        Me.chkPlot = New System.Windows.Forms.CheckBox()
-        Me.chkFactorLevel = New System.Windows.Forms.CheckBox()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.chkMonthAbbreviations = New System.Windows.Forms.CheckBox()
-        Me.chkHorizontal = New System.Windows.Forms.CheckBox()
-        Me.nudRange = New System.Windows.Forms.NumericUpDown()
-        Me.nudWhisklty = New System.Windows.Forms.NumericUpDown()
-        Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
         Me.lblRange = New System.Windows.Forms.Label()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.lblWhiskLineType = New System.Windows.Forms.Label()
@@ -63,10 +52,18 @@ Partial Class dlgCliBoxplot
         Me.ucrInputAt = New instat.ucrInputTextBox()
         Me.ucrInputBorder = New instat.ucrInputTextBox()
         Me.ucrInputPars = New instat.ucrInputTextBox()
+        Me.ucrNudWhiskLineType = New instat.ucrNud()
+        Me.ucrNudThreshold = New instat.ucrNud()
+        Me.ucrNudRange = New instat.ucrNud()
+        Me.ucrChkVariableWidth = New instat.ucrCheck()
+        Me.ucrChkPlot = New instat.ucrCheck()
+        Me.ucrChkNotch = New instat.ucrCheck()
+        Me.ucrChkOutline = New instat.ucrCheck()
+        Me.ucrChkMonthAbbreviations = New instat.ucrCheck()
+        Me.ucrChkHorizontal = New instat.ucrCheck()
+        Me.ucrChkFactorLevel = New instat.ucrCheck()
+        Me.ucrChkAdd = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
-        CType(Me.nudRange, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudWhisklty, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -78,131 +75,22 @@ Partial Class dlgCliBoxplot
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Data list not implemented"
         '
-        'chkVarwidth
-        '
-        Me.chkVarwidth.AutoSize = True
-        Me.chkVarwidth.Location = New System.Drawing.Point(6, 42)
-        Me.chkVarwidth.Name = "chkVarwidth"
-        Me.chkVarwidth.Size = New System.Drawing.Size(95, 17)
-        Me.chkVarwidth.TabIndex = 3
-        Me.chkVarwidth.Tag = "Variable_Width"
-        Me.chkVarwidth.Text = "Variable Width"
-        Me.chkVarwidth.UseVisualStyleBackColor = True
-        '
-        'chkAdd
-        '
-        Me.chkAdd.AutoSize = True
-        Me.chkAdd.Location = New System.Drawing.Point(6, 19)
-        Me.chkAdd.Name = "chkAdd"
-        Me.chkAdd.Size = New System.Drawing.Size(45, 17)
-        Me.chkAdd.TabIndex = 4
-        Me.chkAdd.Tag = "add"
-        Me.chkAdd.Text = "Add"
-        Me.chkAdd.UseVisualStyleBackColor = True
-        '
-        'chkNotch
-        '
-        Me.chkNotch.AutoSize = True
-        Me.chkNotch.Location = New System.Drawing.Point(6, 65)
-        Me.chkNotch.Name = "chkNotch"
-        Me.chkNotch.Size = New System.Drawing.Size(55, 17)
-        Me.chkNotch.TabIndex = 5
-        Me.chkNotch.Tag = "Notch"
-        Me.chkNotch.Text = "Notch"
-        Me.chkNotch.UseVisualStyleBackColor = True
-        '
-        'chkOutline
-        '
-        Me.chkOutline.AutoSize = True
-        Me.chkOutline.Location = New System.Drawing.Point(6, 88)
-        Me.chkOutline.Name = "chkOutline"
-        Me.chkOutline.Size = New System.Drawing.Size(59, 17)
-        Me.chkOutline.TabIndex = 6
-        Me.chkOutline.Tag = "Outline"
-        Me.chkOutline.Text = "Outline"
-        Me.chkOutline.UseVisualStyleBackColor = True
-        '
-        'chkPlot
-        '
-        Me.chkPlot.AutoSize = True
-        Me.chkPlot.Location = New System.Drawing.Point(61, 19)
-        Me.chkPlot.Name = "chkPlot"
-        Me.chkPlot.Size = New System.Drawing.Size(44, 17)
-        Me.chkPlot.TabIndex = 7
-        Me.chkPlot.Tag = "Plot"
-        Me.chkPlot.Text = "Plot"
-        Me.chkPlot.UseVisualStyleBackColor = True
-        '
-        'chkFactorLevel
-        '
-        Me.chkFactorLevel.AutoSize = True
-        Me.chkFactorLevel.Location = New System.Drawing.Point(132, 65)
-        Me.chkFactorLevel.Name = "chkFactorLevel"
-        Me.chkFactorLevel.Size = New System.Drawing.Size(85, 17)
-        Me.chkFactorLevel.TabIndex = 8
-        Me.chkFactorLevel.Tag = "Factor_Level"
-        Me.chkFactorLevel.Text = "Factor Level"
-        Me.chkFactorLevel.UseVisualStyleBackColor = True
-        '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.chkMonthAbbreviations)
-        Me.grpOptions.Controls.Add(Me.chkHorizontal)
-        Me.grpOptions.Controls.Add(Me.chkFactorLevel)
-        Me.grpOptions.Controls.Add(Me.chkVarwidth)
-        Me.grpOptions.Controls.Add(Me.chkAdd)
-        Me.grpOptions.Controls.Add(Me.chkNotch)
-        Me.grpOptions.Controls.Add(Me.chkOutline)
-        Me.grpOptions.Controls.Add(Me.chkPlot)
+        Me.grpOptions.Controls.Add(Me.ucrChkVariableWidth)
+        Me.grpOptions.Controls.Add(Me.ucrChkPlot)
+        Me.grpOptions.Controls.Add(Me.ucrChkNotch)
+        Me.grpOptions.Controls.Add(Me.ucrChkOutline)
+        Me.grpOptions.Controls.Add(Me.ucrChkMonthAbbreviations)
+        Me.grpOptions.Controls.Add(Me.ucrChkHorizontal)
+        Me.grpOptions.Controls.Add(Me.ucrChkFactorLevel)
+        Me.grpOptions.Controls.Add(Me.ucrChkAdd)
         Me.grpOptions.Location = New System.Drawing.Point(256, 148)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(251, 116)
+        Me.grpOptions.Size = New System.Drawing.Size(251, 124)
         Me.grpOptions.TabIndex = 9
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
-        '
-        'chkMonthAbbreviations
-        '
-        Me.chkMonthAbbreviations.AutoSize = True
-        Me.chkMonthAbbreviations.Location = New System.Drawing.Point(132, 19)
-        Me.chkMonthAbbreviations.Name = "chkMonthAbbreviations"
-        Me.chkMonthAbbreviations.Size = New System.Drawing.Size(123, 17)
-        Me.chkMonthAbbreviations.TabIndex = 10
-        Me.chkMonthAbbreviations.Tag = "Month_Abbreviations"
-        Me.chkMonthAbbreviations.Text = "Month Abbreviations"
-        Me.chkMonthAbbreviations.UseVisualStyleBackColor = True
-        '
-        'chkHorizontal
-        '
-        Me.chkHorizontal.AutoSize = True
-        Me.chkHorizontal.Location = New System.Drawing.Point(132, 42)
-        Me.chkHorizontal.Name = "chkHorizontal"
-        Me.chkHorizontal.Size = New System.Drawing.Size(73, 17)
-        Me.chkHorizontal.TabIndex = 9
-        Me.chkHorizontal.Tag = "Horizontal"
-        Me.chkHorizontal.Text = "Horizontal"
-        Me.chkHorizontal.UseVisualStyleBackColor = True
-        '
-        'nudRange
-        '
-        Me.nudRange.Location = New System.Drawing.Point(449, 273)
-        Me.nudRange.Name = "nudRange"
-        Me.nudRange.Size = New System.Drawing.Size(58, 20)
-        Me.nudRange.TabIndex = 11
-        '
-        'nudWhisklty
-        '
-        Me.nudWhisklty.Location = New System.Drawing.Point(132, 268)
-        Me.nudWhisklty.Name = "nudWhisklty"
-        Me.nudWhisklty.Size = New System.Drawing.Size(58, 20)
-        Me.nudWhisklty.TabIndex = 12
-        '
-        'nudThreshold
-        '
-        Me.nudThreshold.Location = New System.Drawing.Point(272, 270)
-        Me.nudThreshold.Name = "nudThreshold"
-        Me.nudThreshold.Size = New System.Drawing.Size(58, 20)
-        Me.nudThreshold.TabIndex = 13
         '
         'lblRange
         '
@@ -217,7 +105,7 @@ Partial Class dlgCliBoxplot
         'lblThreshold
         '
         Me.lblThreshold.AutoSize = True
-        Me.lblThreshold.Location = New System.Drawing.Point(212, 275)
+        Me.lblThreshold.Location = New System.Drawing.Point(206, 278)
         Me.lblThreshold.Name = "lblThreshold"
         Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
         Me.lblThreshold.TabIndex = 15
@@ -227,7 +115,7 @@ Partial Class dlgCliBoxplot
         'lblWhiskLineType
         '
         Me.lblWhiskLineType.AutoSize = True
-        Me.lblWhiskLineType.Location = New System.Drawing.Point(30, 272)
+        Me.lblWhiskLineType.Location = New System.Drawing.Point(25, 277)
         Me.lblWhiskLineType.Name = "lblWhiskLineType"
         Me.lblWhiskLineType.Size = New System.Drawing.Size(87, 13)
         Me.lblWhiskLineType.TabIndex = 16
@@ -356,13 +244,16 @@ Partial Class dlgCliBoxplot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(33, 296)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 301)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 62)
         Me.ucrBase.TabIndex = 0
         '
         'ucrInputTitle
         '
+        Me.ucrInputTitle.bAddRemoveParameter = True
+        Me.ucrInputTitle.bChangeParameterValue = True
+        Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
         Me.ucrInputTitle.Location = New System.Drawing.Point(128, 36)
         Me.ucrInputTitle.Name = "ucrInputTitle"
@@ -371,6 +262,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputDataPeriod
         '
+        Me.ucrInputDataPeriod.bAddRemoveParameter = True
+        Me.ucrInputDataPeriod.bChangeParameterValue = True
+        Me.ucrInputDataPeriod.IsMultiline = False
         Me.ucrInputDataPeriod.IsReadOnly = False
         Me.ucrInputDataPeriod.Location = New System.Drawing.Point(128, 140)
         Me.ucrInputDataPeriod.Name = "ucrInputDataPeriod"
@@ -379,6 +273,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputVariable
         '
+        Me.ucrInputVariable.bAddRemoveParameter = True
+        Me.ucrInputVariable.bChangeParameterValue = True
+        Me.ucrInputVariable.IsMultiline = False
         Me.ucrInputVariable.IsReadOnly = False
         Me.ucrInputVariable.Location = New System.Drawing.Point(128, 61)
         Me.ucrInputVariable.Name = "ucrInputVariable"
@@ -387,6 +284,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputXLabel
         '
+        Me.ucrInputXLabel.bAddRemoveParameter = True
+        Me.ucrInputXLabel.bChangeParameterValue = True
+        Me.ucrInputXLabel.IsMultiline = False
         Me.ucrInputXLabel.IsReadOnly = False
         Me.ucrInputXLabel.Location = New System.Drawing.Point(128, 113)
         Me.ucrInputXLabel.Name = "ucrInputXLabel"
@@ -395,6 +295,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputWidth
         '
+        Me.ucrInputWidth.bAddRemoveParameter = True
+        Me.ucrInputWidth.bChangeParameterValue = True
+        Me.ucrInputWidth.IsMultiline = False
         Me.ucrInputWidth.IsReadOnly = False
         Me.ucrInputWidth.Location = New System.Drawing.Point(128, 193)
         Me.ucrInputWidth.Name = "ucrInputWidth"
@@ -403,6 +306,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputYLabel
         '
+        Me.ucrInputYLabel.bAddRemoveParameter = True
+        Me.ucrInputYLabel.bChangeParameterValue = True
+        Me.ucrInputYLabel.IsMultiline = False
         Me.ucrInputYLabel.IsReadOnly = False
         Me.ucrInputYLabel.Location = New System.Drawing.Point(128, 87)
         Me.ucrInputYLabel.Name = "ucrInputYLabel"
@@ -411,6 +317,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputFactorLab
         '
+        Me.ucrInputFactorLab.bAddRemoveParameter = True
+        Me.ucrInputFactorLab.bChangeParameterValue = True
+        Me.ucrInputFactorLab.IsMultiline = False
         Me.ucrInputFactorLab.IsReadOnly = False
         Me.ucrInputFactorLab.Location = New System.Drawing.Point(128, 166)
         Me.ucrInputFactorLab.Name = "ucrInputFactorLab"
@@ -419,6 +328,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputColour
         '
+        Me.ucrInputColour.bAddRemoveParameter = True
+        Me.ucrInputColour.bChangeParameterValue = True
+        Me.ucrInputColour.IsMultiline = False
         Me.ucrInputColour.IsReadOnly = False
         Me.ucrInputColour.Location = New System.Drawing.Point(128, 221)
         Me.ucrInputColour.Name = "ucrInputColour"
@@ -427,6 +339,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputLog
         '
+        Me.ucrInputLog.bAddRemoveParameter = True
+        Me.ucrInputLog.bChangeParameterValue = True
+        Me.ucrInputLog.IsMultiline = False
         Me.ucrInputLog.IsReadOnly = False
         Me.ucrInputLog.Location = New System.Drawing.Point(282, 35)
         Me.ucrInputLog.Name = "ucrInputLog"
@@ -435,6 +350,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputAt
         '
+        Me.ucrInputAt.bAddRemoveParameter = True
+        Me.ucrInputAt.bChangeParameterValue = True
+        Me.ucrInputAt.IsMultiline = False
         Me.ucrInputAt.IsReadOnly = False
         Me.ucrInputAt.Location = New System.Drawing.Point(282, 63)
         Me.ucrInputAt.Name = "ucrInputAt"
@@ -443,6 +361,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputBorder
         '
+        Me.ucrInputBorder.bAddRemoveParameter = True
+        Me.ucrInputBorder.bChangeParameterValue = True
+        Me.ucrInputBorder.IsMultiline = False
         Me.ucrInputBorder.IsReadOnly = False
         Me.ucrInputBorder.Location = New System.Drawing.Point(282, 86)
         Me.ucrInputBorder.Name = "ucrInputBorder"
@@ -451,17 +372,145 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputPars
         '
+        Me.ucrInputPars.bAddRemoveParameter = True
+        Me.ucrInputPars.bChangeParameterValue = True
+        Me.ucrInputPars.IsMultiline = False
         Me.ucrInputPars.IsReadOnly = False
         Me.ucrInputPars.Location = New System.Drawing.Point(282, 112)
         Me.ucrInputPars.Name = "ucrInputPars"
         Me.ucrInputPars.Size = New System.Drawing.Size(91, 21)
         Me.ucrInputPars.TabIndex = 35
         '
+        'ucrNudWhiskLineType
+        '
+        Me.ucrNudWhiskLineType.bAddRemoveParameter = True
+        Me.ucrNudWhiskLineType.bChangeParameterValue = True
+        Me.ucrNudWhiskLineType.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWhiskLineType.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWhiskLineType.Location = New System.Drawing.Point(117, 275)
+        Me.ucrNudWhiskLineType.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWhiskLineType.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWhiskLineType.Name = "ucrNudWhiskLineType"
+        Me.ucrNudWhiskLineType.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWhiskLineType.TabIndex = 36
+        Me.ucrNudWhiskLineType.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudThreshold
+        '
+        Me.ucrNudThreshold.bAddRemoveParameter = True
+        Me.ucrNudThreshold.bChangeParameterValue = True
+        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudThreshold.Location = New System.Drawing.Point(262, 275)
+        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Name = "ucrNudThreshold"
+        Me.ucrNudThreshold.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudThreshold.TabIndex = 37
+        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudRange
+        '
+        Me.ucrNudRange.bAddRemoveParameter = True
+        Me.ucrNudRange.bChangeParameterValue = True
+        Me.ucrNudRange.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRange.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRange.Location = New System.Drawing.Point(400, 275)
+        Me.ucrNudRange.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRange.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRange.Name = "ucrNudRange"
+        Me.ucrNudRange.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRange.TabIndex = 38
+        Me.ucrNudRange.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkVariableWidth
+        '
+        Me.ucrChkVariableWidth.bAddRemoveParameter = True
+        Me.ucrChkVariableWidth.bChangeParameterValue = True
+        Me.ucrChkVariableWidth.Checked = False
+        Me.ucrChkVariableWidth.Location = New System.Drawing.Point(6, 68)
+        Me.ucrChkVariableWidth.Name = "ucrChkVariableWidth"
+        Me.ucrChkVariableWidth.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkVariableWidth.TabIndex = 40
+        '
+        'ucrChkPlot
+        '
+        Me.ucrChkPlot.bAddRemoveParameter = True
+        Me.ucrChkPlot.bChangeParameterValue = True
+        Me.ucrChkPlot.Checked = False
+        Me.ucrChkPlot.Location = New System.Drawing.Point(6, 42)
+        Me.ucrChkPlot.Name = "ucrChkPlot"
+        Me.ucrChkPlot.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPlot.TabIndex = 41
+        '
+        'ucrChkNotch
+        '
+        Me.ucrChkNotch.bAddRemoveParameter = True
+        Me.ucrChkNotch.bChangeParameterValue = True
+        Me.ucrChkNotch.Checked = False
+        Me.ucrChkNotch.Location = New System.Drawing.Point(6, 94)
+        Me.ucrChkNotch.Name = "ucrChkNotch"
+        Me.ucrChkNotch.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkNotch.TabIndex = 42
+        '
+        'ucrChkOutline
+        '
+        Me.ucrChkOutline.bAddRemoveParameter = True
+        Me.ucrChkOutline.bChangeParameterValue = True
+        Me.ucrChkOutline.Checked = False
+        Me.ucrChkOutline.Location = New System.Drawing.Point(131, 16)
+        Me.ucrChkOutline.Name = "ucrChkOutline"
+        Me.ucrChkOutline.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkOutline.TabIndex = 43
+        '
+        'ucrChkMonthAbbreviations
+        '
+        Me.ucrChkMonthAbbreviations.bAddRemoveParameter = True
+        Me.ucrChkMonthAbbreviations.bChangeParameterValue = True
+        Me.ucrChkMonthAbbreviations.Checked = False
+        Me.ucrChkMonthAbbreviations.Location = New System.Drawing.Point(131, 42)
+        Me.ucrChkMonthAbbreviations.Name = "ucrChkMonthAbbreviations"
+        Me.ucrChkMonthAbbreviations.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMonthAbbreviations.TabIndex = 44
+        '
+        'ucrChkHorizontal
+        '
+        Me.ucrChkHorizontal.bAddRemoveParameter = True
+        Me.ucrChkHorizontal.bChangeParameterValue = True
+        Me.ucrChkHorizontal.Checked = False
+        Me.ucrChkHorizontal.Location = New System.Drawing.Point(131, 68)
+        Me.ucrChkHorizontal.Name = "ucrChkHorizontal"
+        Me.ucrChkHorizontal.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkHorizontal.TabIndex = 45
+        '
+        'ucrChkFactorLevel
+        '
+        Me.ucrChkFactorLevel.bAddRemoveParameter = True
+        Me.ucrChkFactorLevel.bChangeParameterValue = True
+        Me.ucrChkFactorLevel.Checked = False
+        Me.ucrChkFactorLevel.Location = New System.Drawing.Point(131, 94)
+        Me.ucrChkFactorLevel.Name = "ucrChkFactorLevel"
+        Me.ucrChkFactorLevel.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFactorLevel.TabIndex = 46
+        '
+        'ucrChkAdd
+        '
+        Me.ucrChkAdd.bAddRemoveParameter = True
+        Me.ucrChkAdd.bChangeParameterValue = True
+        Me.ucrChkAdd.Checked = False
+        Me.ucrChkAdd.Location = New System.Drawing.Point(6, 16)
+        Me.ucrChkAdd.Name = "ucrChkAdd"
+        Me.ucrChkAdd.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAdd.TabIndex = 47
+        '
         'dlgCliBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(518, 359)
+        Me.Controls.Add(Me.ucrNudRange)
+        Me.Controls.Add(Me.ucrNudThreshold)
+        Me.Controls.Add(Me.ucrNudWhiskLineType)
         Me.Controls.Add(Me.ucrInputPars)
         Me.Controls.Add(Me.ucrInputBorder)
         Me.Controls.Add(Me.ucrInputAt)
@@ -489,9 +538,6 @@ Partial Class dlgCliBoxplot
         Me.Controls.Add(Me.lblWhiskLineType)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.lblRange)
-        Me.Controls.Add(Me.nudRange)
-        Me.Controls.Add(Me.nudWhisklty)
-        Me.Controls.Add(Me.nudThreshold)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
@@ -502,10 +548,6 @@ Partial Class dlgCliBoxplot
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cliboxplot"
         Me.grpOptions.ResumeLayout(False)
-        Me.grpOptions.PerformLayout()
-        CType(Me.nudRange, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudWhisklty, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -513,18 +555,7 @@ Partial Class dlgCliBoxplot
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents Label1 As Label
-    Friend WithEvents chkVarwidth As CheckBox
-    Friend WithEvents chkAdd As CheckBox
-    Friend WithEvents chkNotch As CheckBox
-    Friend WithEvents chkOutline As CheckBox
-    Friend WithEvents chkPlot As CheckBox
-    Friend WithEvents chkFactorLevel As CheckBox
     Friend WithEvents grpOptions As GroupBox
-    Friend WithEvents chkMonthAbbreviations As CheckBox
-    Friend WithEvents chkHorizontal As CheckBox
-    Friend WithEvents nudRange As NumericUpDown
-    Friend WithEvents nudWhisklty As NumericUpDown
-    Friend WithEvents nudThreshold As NumericUpDown
     Friend WithEvents lblRange As Label
     Friend WithEvents lblThreshold As Label
     Friend WithEvents lblWhiskLineType As Label
@@ -552,4 +583,15 @@ Partial Class dlgCliBoxplot
     Friend WithEvents ucrInputAt As ucrInputTextBox
     Friend WithEvents ucrInputBorder As ucrInputTextBox
     Friend WithEvents ucrInputPars As ucrInputTextBox
+    Friend WithEvents ucrChkVariableWidth As ucrCheck
+    Friend WithEvents ucrChkPlot As ucrCheck
+    Friend WithEvents ucrChkNotch As ucrCheck
+    Friend WithEvents ucrChkOutline As ucrCheck
+    Friend WithEvents ucrChkMonthAbbreviations As ucrCheck
+    Friend WithEvents ucrChkHorizontal As ucrCheck
+    Friend WithEvents ucrChkFactorLevel As ucrCheck
+    Friend WithEvents ucrChkAdd As ucrCheck
+    Friend WithEvents ucrNudWhiskLineType As ucrNud
+    Friend WithEvents ucrNudThreshold As ucrNud
+    Friend WithEvents ucrNudRange As ucrNud
 End Class
