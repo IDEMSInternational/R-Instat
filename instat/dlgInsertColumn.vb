@@ -56,15 +56,15 @@ Public Class dlgInsertColumn
         ucrPnlColRows.AddRadioButton(rdoColumns)
         ucrPnlColRows.AddRadioButton(rdoRows)
 
-        ucrPnlOptions.SetParameter(New RParameter(""))
-        ucrPnlOptions.AddRadioButton(rdoAfter)
-        ucrPnlOptions.AddRadioButton(rdoBefore)
+        ucrPnlOptions.SetParameter(New RParameter("before"))
+        ucrPnlOptions.AddRadioButton(rdoAfter, Chr(34) & "FALSE" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoBefore, Chr(34) & "TRUE" & Chr(34))
+        ucrPnlOptions.SetRDefault(Chr(34) & "TRUE" & Chr(34))
 
         ucrNudInsertColumns.SetParameter(New RParameter("num_cols"))
         ucrNudInsertColumns.SetLinkedDisplayControl(lblNumberOfColumnsToInsert)
         ucrNudInsertColumns.Minimum = 1
         ucrNudInsertColumns.SetRDefault(1)
-
 
         UcrNudNumCols.SetParameter(New RParameter("number_rows"))
         UcrNudNumCols.SetLinkedDisplayControl(lblNumberOfRowsToInsert)
@@ -81,18 +81,26 @@ Public Class dlgInsertColumn
         ucrPnlColRows.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         ucrPnlColRows.AddFunctionNamesCondition(rdoRows, frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
 
-        ucrPnlColRows.AddToLinkedControls(ucrDataFramesList, {rdoColumns}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColRows.AddToLinkedControls(ucrNudInsertColumns, {rdoColumns}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColRows.AddToLinkedControls(ucrInputDefaultValue, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColRows.AddToLinkedControls(ucrNudPos, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColRows.AddToLinkedControls(UcrNudNumCols, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
+        'what to be shown when rdocolumns is selected
+        ucrPnlColRows.AddToLinkedControls(ucrDataFramesList, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ' temporary fix to show groupboxes 
-        ucrPnlColRows.AddToLinkedControls(ucrPnlOptions, {rdoRows})
+        ucrPnlColRows.AddToLinkedControls(ucrNudInsertColumns, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudInsertColumns.SetLinkedDisplayControl(lblNumberOfColumnsToInsert)
+
+        ucrPnlColRows.AddToLinkedControls(ucrInputDefaultValue, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputDefaultValue.SetLinkedDisplayControl(lblDefaultValue)
+
+        ucrPnlColRows.AddToLinkedControls(ucrPnlInsert, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlInsert.SetLinkedDisplayControl(grpInsert)
+
+        ucrPnlInsert.AddToLinkedControls(ucrSelectorInseertColumns, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlInsert.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'what to be shown when rdocolumns is selected
+        ucrPnlColRows.AddToLinkedControls(ucrNudPos, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColRows.AddToLinkedControls(UcrNudNumCols, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColRows.AddToLinkedControls(ucrPnlOptions, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.SetLinkedDisplayControl(grpOptions)
-
-        ucrPnlInsert.AddToLinkedControls(ucrSelectorInseertColumns, {rdoAfter}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlInsert.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoAfter}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputBeforeAfter.SetItems({"Before", "After"})
         ucrInputPrefixForInsertedColumns.SetValidationTypeAsRVariable()
@@ -225,39 +233,39 @@ Public Class dlgInsertColumn
         If rdoColumns.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
             ucrBase.clsRsyntax.AddParameter("use_col_name_as_prefix", "TRUE")
-            BeforeAfterPara()
-            InsertParam()
-            ucrNudInsertColumns.Value = 1
-            NumberofColumnsOrRows()
-            dataFrameListMaxMinPos()
-            ColName()
+            'BeforeAfterPara()
+            'InsertParam()
+            'ucrNudInsertColumns.Value = 1
+            'NumberofColumnsOrRows()
+            'dataFrameListMaxMinPos()
+            'ColName()
 
-            ucrNudInsertColumns.Maximum = 100
+            'ucrNudInsertColumns.Maximum = 100
 
 
-            addColumData()
-            ColsToInsert()
-            OPtionstoInsert()
-            startpo()
-            BeforeParameter()
-            UcrNudNumCols.Focus()
-            ucrNudPos.Focus()
+            'addColumData()
+            'ColsToInsert()
+            'OPtionstoInsert()
+            'startpo()
+            'BeforeParameter()
+            'UcrNudNumCols.Focus()
+            'ucrNudPos.Focus()
         ElseIf rdoRows.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
-            ucrBase.clsRsyntax.RemoveParameter("num_cols")
-            ucrBase.clsRsyntax.RemoveParameter("use_col_name_as_prefix")
-            UcrNudNumCols.Value = 1
-            NumberofColumnsOrRows()
-            dataFrameListMaxMinPos()
-            startpo()
-            UcrNudNumCols.Maximum = 1000
-            addColumData()
-            InsertParam()
-            BeforeAfterPara()
-            OPtionstoInsert()
-            ColsToInsert()
-            ColName()
-            BeforeParameter()
+            'ucrBase.clsRsyntax.RemoveParameter("num_cols")
+            'ucrBase.clsRsyntax.RemoveParameter("use_col_name_as_prefix")
+            'UcrNudNumCols.Value = 1
+            'NumberofColumnsOrRows()
+            'dataFrameListMaxMinPos()
+            'startpo()
+            'UcrNudNumCols.Maximum = 1000
+            'addColumData()
+            'InsertParam()
+            'BeforeAfterPara()
+            'OPtionstoInsert()
+            'ColsToInsert()
+            'ColName()
+            'BeforeParameter()
         End If
 
     End Sub

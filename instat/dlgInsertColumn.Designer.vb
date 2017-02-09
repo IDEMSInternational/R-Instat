@@ -36,7 +36,7 @@ Partial Class dlgInsertColumn
         Me.rdoRows = New System.Windows.Forms.RadioButton()
         Me.rdoColumns = New System.Windows.Forms.RadioButton()
         Me.ucrPnlColRows = New instat.UcrPanel()
-        Me.grpinsert1 = New System.Windows.Forms.GroupBox()
+        Me.grpInsert = New System.Windows.Forms.GroupBox()
         Me.ucrInputBeforeAfter = New instat.ucrInputComboBox()
         Me.ucrReceiverColumnsToInsert = New instat.ucrReceiverSingle()
         Me.rdoBeforeAfter = New System.Windows.Forms.RadioButton()
@@ -51,7 +51,7 @@ Partial Class dlgInsertColumn
         Me.ucrNudPos = New instat.ucrNud()
         Me.ucrSelectorInseertColumns = New instat.ucrSelectorAddRemove()
         Me.grpColRows.SuspendLayout()
-        Me.grpinsert1.SuspendLayout()
+        Me.grpInsert.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -196,20 +196,20 @@ Partial Class dlgInsertColumn
         Me.ucrPnlColRows.Size = New System.Drawing.Size(280, 23)
         Me.ucrPnlColRows.TabIndex = 0
         '
-        'grpinsert1
+        'grpInsert
         '
-        Me.grpinsert1.Controls.Add(Me.ucrInputBeforeAfter)
-        Me.grpinsert1.Controls.Add(Me.ucrReceiverColumnsToInsert)
-        Me.grpinsert1.Controls.Add(Me.rdoBeforeAfter)
-        Me.grpinsert1.Controls.Add(Me.rdoAtStart)
-        Me.grpinsert1.Controls.Add(Me.rdoAtEnd)
-        Me.grpinsert1.Controls.Add(Me.ucrPnlInsert)
-        Me.grpinsert1.Location = New System.Drawing.Point(267, 48)
-        Me.grpinsert1.Name = "grpinsert1"
-        Me.grpinsert1.Size = New System.Drawing.Size(211, 103)
-        Me.grpinsert1.TabIndex = 30
-        Me.grpinsert1.TabStop = False
-        Me.grpinsert1.Text = "Insert"
+        Me.grpInsert.Controls.Add(Me.ucrInputBeforeAfter)
+        Me.grpInsert.Controls.Add(Me.ucrReceiverColumnsToInsert)
+        Me.grpInsert.Controls.Add(Me.rdoBeforeAfter)
+        Me.grpInsert.Controls.Add(Me.rdoAtStart)
+        Me.grpInsert.Controls.Add(Me.rdoAtEnd)
+        Me.grpInsert.Controls.Add(Me.ucrPnlInsert)
+        Me.grpInsert.Location = New System.Drawing.Point(267, 48)
+        Me.grpInsert.Name = "grpInsert"
+        Me.grpInsert.Size = New System.Drawing.Size(211, 103)
+        Me.grpInsert.TabIndex = 30
+        Me.grpInsert.TabStop = False
+        Me.grpInsert.Text = "Insert"
         '
         'ucrInputBeforeAfter
         '
@@ -323,7 +323,7 @@ Partial Class dlgInsertColumn
         Me.UcrNudNumCols.bChangeParameterValue = True
         Me.UcrNudNumCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.UcrNudNumCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudNumCols.Location = New System.Drawing.Point(148, 77)
+        Me.UcrNudNumCols.Location = New System.Drawing.Point(156, 81)
         Me.UcrNudNumCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.UcrNudNumCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.UcrNudNumCols.Name = "UcrNudNumCols"
@@ -337,7 +337,7 @@ Partial Class dlgInsertColumn
         Me.ucrNudPos.bChangeParameterValue = True
         Me.ucrNudPos.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPos.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPos.Location = New System.Drawing.Point(148, 116)
+        Me.ucrNudPos.Location = New System.Drawing.Point(156, 111)
         Me.ucrNudPos.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPos.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPos.Name = "ucrNudPos"
@@ -364,7 +364,7 @@ Partial Class dlgInsertColumn
         Me.Controls.Add(Me.ucrNudPos)
         Me.Controls.Add(Me.UcrNudNumCols)
         Me.Controls.Add(Me.grpOptions)
-        Me.Controls.Add(Me.grpinsert1)
+        Me.Controls.Add(Me.grpInsert)
         Me.Controls.Add(Me.grpColRows)
         Me.Controls.Add(Me.ucrSelectorInseertColumns)
         Me.Controls.Add(Me.ucrNudInsertColumns)
@@ -385,8 +385,8 @@ Partial Class dlgInsertColumn
         Me.Text = "Insert Columns/Rows"
         Me.grpColRows.ResumeLayout(False)
         Me.grpColRows.PerformLayout()
-        Me.grpinsert1.ResumeLayout(False)
-        Me.grpinsert1.PerformLayout()
+        Me.grpInsert.ResumeLayout(False)
+        Me.grpInsert.PerformLayout()
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
@@ -408,7 +408,7 @@ Partial Class dlgInsertColumn
     Friend WithEvents rdoRows As RadioButton
     Friend WithEvents rdoColumns As RadioButton
     Friend WithEvents ucrPnlColRows As UcrPanel
-    Friend WithEvents grpinsert1 As GroupBox
+    Friend WithEvents grpInsert As GroupBox
     Friend WithEvents rdoBeforeAfter As RadioButton
     Friend WithEvents rdoAtStart As RadioButton
     Friend WithEvents rdoAtEnd As RadioButton
