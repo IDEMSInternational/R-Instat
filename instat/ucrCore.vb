@@ -111,24 +111,27 @@ Public Class ucrCore
 
     Protected Overridable Sub SetControlValue()
         Dim bConditionsMet As Boolean = False
-
-        For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
-            If kvpTemp.Value.Count > 0 Then
-                If AllConditionsSatisfied(kvpTemp.Value, clsRCode, clsParameter) Then
-                    If bConditionsMet Then
-                        MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
-                    Else
-                        SetToValue(kvpTemp.Key)
-                        bConditionsMet = True
+        If clsRCode IsNot Nothing Then
+            For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
+                If kvpTemp.Value.Count > 0 Then
+                    If AllConditionsSatisfied(kvpTemp.Value, clsRCode, clsParameter) Then
+                        If bConditionsMet Then
+                            MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
+                        Else
+                            SetToValue(kvpTemp.Key)
+                            bConditionsMet = True
+                        End If
                     End If
                 End If
-            End If
-        Next
-        If Not bConditionsMet Then
-            If bAllowNonConditionValues Then
-                SetToValue(GetValueToSet())
-            Else
-                MsgBox("Developer error: no state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.")
+            Next
+            If Not bConditionsMet Then
+                If bAllowNonConditionValues Then
+                    If GetValueToSet() IsNot Nothing Then
+                        SetToValue(GetValueToSet())
+                    End If
+                Else
+                    MsgBox("Developer error: no state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.")
+                End If
             End If
         End If
     End Sub
