@@ -19,7 +19,7 @@ Imports instat
 Public Class ucrCore
 
     'Function or Operator that this control's parameter is added/removed from
-    Protected clsRCode As New RCodeStructure
+    Protected clsRCode As RCodeStructure
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
     Protected clsParameter As RParameter
@@ -71,7 +71,7 @@ Public Class ucrCore
     Public bLinkedUpdateFunction As Boolean = False
     Public bLinkedDisabledIfParameterMissing As Boolean = False
     Public bLinkedHideIfParameterMissing As Boolean = False
-    Public bLinkedChangeParameterToDefault As Boolean = False
+    Public bLinkedChangeToDefaultState As Boolean = False
 
     Protected ctrLinkedDisaplyControl As Control
 
@@ -82,6 +82,8 @@ Public Class ucrCore
     Protected dctConditions As New Dictionary(Of Object, List(Of Condition))
 
     Public bAllowNonConditionValues As Boolean = True
+
+    Public bIsVisible As Boolean = True
 
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
@@ -155,15 +157,17 @@ Public Class ucrCore
         For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
             lstValues = kvpTemp.Value
             ucrControl = kvpTemp.Key
-            bTemp = ControlValueContainedIn(lstValues) AndAlso Visible
+            bTemp = ControlValueContainedIn(lstValues) AndAlso bIsVisible
             If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
                 ucrControl.SetRCode(clsRCode)
             End If
             If ucrControl.bLinkedAddRemoveParameter Then
                 ucrControl.AddOrRemoveParameter(bTemp)
             End If
-            If ucrControl.bLinkedChangeParameterToDefault AndAlso bReset Then
-                ucrControl.SetToDefaultState()
+            If ucrControl.bLinkedChangeToDefaultState AndAlso bReset Then
+                If ucrControl.clsRCode Is Nothing OrElse ucrControl.clsParameter Is Nothing OrElse (ucrControl.clsRCode IsNot Nothing AndAlso ucrControl.clsParameter IsNot Nothing AndAlso ucrControl.clsParameter.strArgumentName IsNot Nothing AndAlso (Not ucrControl.clsRCode.ContainsParameter(ucrControl.clsParameter.strArgumentName))) Then
+                    ucrControl.SetToDefaultState()
+                End If
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
                 ucrControl.SetVisible(bTemp)
@@ -264,19 +268,20 @@ Public Class ucrCore
         End If
     End Sub
 
-    Public Sub AddToLinkedControls(lstLinked As ucrCore(), objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeParameterToDefault As Boolean = False)
+    Public Sub AddToLinkedControls(lstLinked As ucrCore(), objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeToDefaultState As Boolean = False, Optional objNewDefaultState As Object = Nothing)
         For Each ucrLinked As ucrCore In lstLinked
-            AddToLinkedControls(ucrLinked:=ucrLinked, objValues:=objValues, bNewLinkedAddRemoveParameter:=bNewLinkedAddRemoveParameter, bNewLinkedUpdateFunction:=bNewLinkedUpdateFunction, bNewLinkedDisabledIfParameterMissing:=bNewLinkedDisabledIfParameterMissing, bNewLinkedHideIfParameterMissing:=bNewLinkedHideIfParameterMissing, bNewLinkedChangeParameterToDefault:=bNewLinkedChangeParameterToDefault)
+            AddToLinkedControls(ucrLinked:=ucrLinked, objValues:=objValues, bNewLinkedAddRemoveParameter:=bNewLinkedAddRemoveParameter, bNewLinkedUpdateFunction:=bNewLinkedUpdateFunction, bNewLinkedDisabledIfParameterMissing:=bNewLinkedDisabledIfParameterMissing, bNewLinkedHideIfParameterMissing:=bNewLinkedHideIfParameterMissing, bNewLinkedChangeToDefaultState:=bNewLinkedChangeToDefaultState, objNewDefaultState:=objNewDefaultState)
         Next
     End Sub
 
-    Public Sub AddToLinkedControls(ucrLinked As ucrCore, objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeParameterToDefault As Boolean = False)
+    Public Sub AddToLinkedControls(ucrLinked As ucrCore, objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeToDefaultState As Boolean = False, Optional objNewDefaultState As Object = Nothing)
         If Not IsLinkedTo(ucrLinked) Then
             ucrLinked.bLinkedAddRemoveParameter = bNewLinkedAddRemoveParameter
-            ucrLinked.bLinkedChangeParameterToDefault = bNewLinkedChangeParameterToDefault
+            ucrLinked.bLinkedChangeToDefaultState = bNewLinkedChangeToDefaultState
             ucrLinked.bLinkedDisabledIfParameterMissing = bNewLinkedDisabledIfParameterMissing
             ucrLinked.bLinkedHideIfParameterMissing = bNewLinkedHideIfParameterMissing
             ucrLinked.bLinkedUpdateFunction = bNewLinkedUpdateFunction
+            ucrLinked.SetDefaultState(objNewDefaultState)
             lstValuesAndControl.Add(New KeyValuePair(Of ucrCore, Object())(ucrLinked, objValues))
         End If
     End Sub
@@ -385,6 +390,7 @@ Public Class ucrCore
             Visible = bVisible
         End If
         SetLinkedDisplayControlVisibility()
+        bIsVisible = bVisible
     End Sub
 
     Public Sub SetDefaultState(objState As Object)
@@ -392,5 +398,6 @@ Public Class ucrCore
     End Sub
 
     Protected Overridable Sub SetToDefaultState()
+        SetToValue(objDefaultState)
     End Sub
 End Class

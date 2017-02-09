@@ -171,10 +171,6 @@ Public Class ucrNud
         Return nudUpDown.Text
     End Function
 
-    Public Overrides Function GetValueToSet() As Object
-        Return nudUpDown.Value
-    End Function
-
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
 
@@ -183,9 +179,5 @@ Public Class ucrNud
         Else
             MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
         End If
-    End Sub
-
-    Protected Overrides Sub SetToDefaultState()
-        SetToValue(objDefaultState)
     End Sub
 End Class
