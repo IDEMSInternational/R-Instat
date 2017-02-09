@@ -40,11 +40,15 @@ Public Class dlgExportToCPT
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
+        'ucrInputExportFile.IsReadOnly = False
+        ucrInputExportFile.txtInput.Text = ""
+        'ucrInputExportFile.Reset()
         ucrInputExportFile.IsReadOnly = True
-        ucrInputExportFile.Reset()
+
         ucrSSTDataframe.Reset()
         ucrLocationDataFrame.Reset()
         ucrReceiverYears.SetMeAsReceiver()
+        ucrChkLong.Checked = True
         clsDefaultFunction.SetRCommand("rio::export")
         clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsOutPutLong)
         clsDefaultFunction.AddParameter("sep", Chr(34) & "\t" & Chr(34))
@@ -58,8 +62,6 @@ Public Class dlgExportToCPT
         ucrBaseExportToCPT.iHelpTopicID = 355
         clsOutPutWide.SetRCommand("output_for_CPT")
         clsOutPutLong.SetRCommand("output_for_CPT")
-        'clsOutPutWide = clsOutPut.Clone()
-        'clsOutPutLong = clsOutPut.Clone()
 
         ucrSSTDataframe.SetParameter(New RParameter("data_name", 0))
         ucrSSTDataframe.SetParameterIsrfunction()
@@ -89,7 +91,6 @@ Public Class dlgExportToCPT
         ucrChkLong.SetParameter(New RParameter("long"))
         ucrChkLong.SetText("Long Data Format")
         ucrChkLong.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkLong.SetRDefault("TRUE")
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -135,6 +136,7 @@ Public Class dlgExportToCPT
     Private Sub ucrBaseExportToCPT_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseExportToCPT.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub DataFormat()
@@ -158,7 +160,6 @@ Public Class dlgExportToCPT
             lblDataColumn.Visible = False
             ucrReceiverDataColumn.Visible = False
         End If
-        'TestOkEnabled()
     End Sub
 
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrSSTDataframe.ControlContentsChanged, ucrLocationDataFrame.ControlContentsChanged, ucrReceiverDataColumn.ControlContentsChanged, ucrReceiverMultipleDataColumns.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverYears.ControlContentsChanged
