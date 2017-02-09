@@ -70,7 +70,7 @@ Public Class dlgRandomSubsets
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNewDataframe
-        ucrNewDataframe.SetIsComboBox()
+        ucrNewDataframe.SetIsTextBox()
         ucrNewDataframe.SetSaveTypeAsDataFrame()
         ucrNewDataframe.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
@@ -82,7 +82,7 @@ Public Class dlgRandomSubsets
 
     'checks when to enable ok button
     Private Sub TestOkEnabled()
-        If Not ucrReceiverSelected.IsEmpty AndAlso ucrNudNumberOfColumns.GetText() <> "" AndAlso ucrNudSetSeed.GetText() <> "" AndAlso ucrNudSampleSize.GetText() <> "" AndAlso ucrNewDataframe.IsComplete() Then
+        If Not ucrReceiverSelected.IsEmpty AndAlso ucrNudNumberOfColumns.GetText() <> "" AndAlso ucrNudSetSeed.GetText() <> "" AndAlso ucrNudSampleSize.GetText() <> "" AndAlso ucrNewDataframe.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
