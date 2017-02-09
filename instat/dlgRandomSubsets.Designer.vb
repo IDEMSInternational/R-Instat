@@ -49,7 +49,7 @@ Partial Class dlgRandomSubsets
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(258, 87)
+        Me.lblSampleSize.Location = New System.Drawing.Point(254, 88)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
         Me.lblSampleSize.TabIndex = 3
@@ -59,7 +59,7 @@ Partial Class dlgRandomSubsets
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(258, 131)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(254, 133)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         Me.lblNumberOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberOfColumns.TabIndex = 5
@@ -103,7 +103,7 @@ Partial Class dlgRandomSubsets
         Me.ucrNewDataframe.bChangeParameterValue = True
         Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 236)
         Me.ucrNewDataframe.Name = "ucrNewDataframe"
-        Me.ucrNewDataframe.Size = New System.Drawing.Size(326, 24)
+        Me.ucrNewDataframe.Size = New System.Drawing.Size(285, 24)
         Me.ucrNewDataframe.TabIndex = 10
         '
         'ucrNudSampleSize
