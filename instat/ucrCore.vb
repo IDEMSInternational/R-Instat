@@ -20,7 +20,6 @@ Public Class ucrCore
 
     'Function or Operator that this control's parameter is added/removed from
     Protected clsRCode As New RCodeStructure
-    Protected iParameterPosition As Integer = -1
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
     Protected clsParameter As RParameter
@@ -40,8 +39,8 @@ Public Class ucrCore
     'e.g. check box may not change parameter value, only add/remove it
     '     For this bAddRemoveParameter = True and bChangeParameterValue = False
     'e.g. nud may not add/remove parameter, only change its value
-    Public bAddRemoveParameter As Boolean = True
-    Public bChangeParameterValue As Boolean = True
+    Private bPrivateAddRemoveParameter As Boolean = True
+    Private bPrivateChangeParameterValue As Boolean = True
 
     'Optional value
     'If parameter has this value then it will be removed from RCodeStructure 
@@ -72,11 +71,20 @@ Public Class ucrCore
     Public bLinkedHideIfParameterMissing As Boolean = False
     Public bLinkedChangeParameterToDefault As Boolean = False
 
-    Protected lblLinkedLabel As Label
+    Protected ctrLinkedDisaplyControl As Control
 
     Public bIsActiveRControl As Boolean = True
 
     Public bUpdateRCodeFromControl As Boolean = False
+
+    Protected dctConditions As New Dictionary(Of Object, List(Of Condition))
+
+    Public bAllowNonConditionValues As Boolean = True
+
+    Private Sub ucrCore_Load(sender As Object, e As EventArgs) Handles Me.Load
+        bAddRemoveParameter = True
+        bChangeParameterValue = True
+    End Sub
 
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
@@ -88,6 +96,7 @@ Public Class ucrCore
                         clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
                     ElseIf bReset Then
                         SetToDefault()
+                        Exit Sub
                     Else
                     End If
                 End If
@@ -96,7 +105,47 @@ Public Class ucrCore
         Else
             clsRCode = New RCodeStructure
         End If
+        SetControlValue()
+        UpdateLinkedControls()
     End Sub
+
+    Protected Overridable Sub SetControlValue()
+        Dim bConditionsMet As Boolean = False
+
+        For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
+            If kvpTemp.Value.Count > 0 Then
+                If AllConditionsSatisfied(kvpTemp.Value, clsRCode, clsParameter) Then
+                    If bConditionsMet Then
+                        MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
+                    Else
+                        SetToValue(kvpTemp.Key)
+                        bConditionsMet = True
+                    End If
+                End If
+            End If
+        Next
+        If Not bConditionsMet Then
+            If bAllowNonConditionValues Then
+                SetToValue(GetValueToSet())
+            Else
+                MsgBox("Developer error: no state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.")
+            End If
+        End If
+    End Sub
+
+    Public Overridable Function GetValueToSet() As Object
+        If clsParameter IsNot Nothing Then
+            If clsParameter.bIsString Then
+                Return clsParameter.strArgumentValue
+            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
+                Return clsParameter.clsArgumentCodeStructure
+            Else
+                Return Nothing
+            End If
+        Else
+            Return Nothing
+        End If
+    End Function
 
     Public Overridable Sub UpdateLinkedControls()
         Dim ucrControl As ucrCore
@@ -106,7 +155,7 @@ Public Class ucrCore
         For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
             lstValues = kvpTemp.Value
             ucrControl = kvpTemp.Key
-            bTemp = ValueContainedIn(lstValues)
+            bTemp = ControlValueContainedIn(lstValues) AndAlso Visible
             If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
                 ucrControl.SetRCode(clsRCode)
             End If
@@ -117,11 +166,12 @@ Public Class ucrCore
                 ucrControl.SetToDefault()
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
-                ucrControl.Visible = bTemp
+                ucrControl.SetVisible(bTemp)
             End If
             If ucrControl.bLinkedDisabledIfParameterMissing Then
                 ucrControl.Enabled = bTemp
             End If
+            ucrControl.UpdateLinkedControls()
         Next
     End Sub
 
@@ -134,12 +184,16 @@ Public Class ucrCore
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            If bUpdateRCodeFromControl AndAlso clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue() Then
+            If bUpdateRCodeFromControl AndAlso CanUpdate() Then
                 UpdateRCode()
             End If
             UpdateControl(bReset)
         End If
     End Sub
+
+    Protected Overridable Function CanUpdate()
+        Return (clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue())
+    End Function
 
     Public Overridable Sub SetRDefault(objNewDefault As Object)
         objRDefault = objNewDefault
@@ -196,14 +250,14 @@ Public Class ucrCore
         Return objRDefault
     End Function
 
-    Public Overridable Function ValueContainedIn(lstTemp As Object()) As Boolean
+    Public Overridable Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Return False
     End Function
 
     Public Overridable Sub AddOrRemoveParameter(bAdd As Boolean)
         If clsRCode IsNot Nothing AndAlso clsParameter IsNot Nothing Then
             If bAdd Then
-                clsRCode.AddParameter(clsParameter, iParameterPosition)
+                clsRCode.AddParameter(clsParameter)
             Else
                 clsRCode.RemoveParameter(clsParameter)
             End If
@@ -259,8 +313,8 @@ Public Class ucrCore
         Return clsParameter
     End Function
 
-    Public Sub SetLabel(lblNewLabel As Label)
-        lblLinkedLabel = lblNewLabel
+    Public Sub SetLinkedDisplayControl(ctrNewControl As Control)
+        ctrLinkedDisaplyControl = ctrNewControl
         SetLinkedLabelVisibility()
     End Sub
 
@@ -269,8 +323,80 @@ Public Class ucrCore
     End Sub
 
     Private Sub SetLinkedLabelVisibility()
-        If lblLinkedLabel IsNot Nothing Then
-            lblLinkedLabel.Visible = Visible
+        If ctrLinkedDisaplyControl IsNot Nothing Then
+            ctrLinkedDisaplyControl.Visible = Visible
+        End If
+    End Sub
+
+    Protected Overridable Sub SetToValue(objTemp As Object)
+    End Sub
+
+    Public Overridable Property bAddRemoveParameter
+        Get
+            Return bPrivateAddRemoveParameter
+        End Get
+        Set(bValue)
+            bPrivateAddRemoveParameter = bValue
+        End Set
+    End Property
+
+    Public Overridable Property bChangeParameterValue
+        Get
+            Return bPrivateChangeParameterValue
+        End Get
+        Set(bValue)
+            bPrivateChangeParameterValue = bValue
+        End Set
+    End Property
+
+    Public Sub AddCondition(objControlState As Object, clsCond As Condition)
+        If dctConditions.ContainsKey(objControlState) Then
+            dctConditions(objControlState).Add(clsCond)
+        Else
+            dctConditions.Add(objControlState, {clsCond}.ToList())
+        End If
+    End Sub
+
+    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, strParamValue As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterValues(strParamName, strParamValue, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, lstParamValues As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterValues(strParamName, lstParamValues.ToList(), bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterPresentName(strParamName, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddFunctionNamesCondition(objControlState As Object, strFunctionName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetFunctionName(strFunctionName, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddFunctionNamesCondition(objControlState As Object, lstFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetFunctionNamesMultiple(lstFunctionNames.ToList(), bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub SetVisible(bVisible As Boolean)
+        If ctrLinkedDisaplyControl IsNot Nothing AndAlso TypeOf ctrLinkedDisaplyControl Is GroupBox Then
+            ctrLinkedDisaplyControl.Visible = bVisible
+        Else
+            Visible = bVisible
         End If
     End Sub
 End Class
