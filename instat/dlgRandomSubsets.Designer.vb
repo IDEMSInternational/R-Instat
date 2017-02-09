@@ -25,15 +25,15 @@ Partial Class dlgRandomSubsets
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberOfColumns = New System.Windows.Forms.Label()
-        Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
-        Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrNewDataframe = New instat.ucrSave()
-        Me.ucrNudSampleSize = New instat.ucrNud()
-        Me.ucrNudNumberOfColumns = New instat.ucrNud()
-        Me.ucrNudSetSeed = New instat.ucrNud()
         Me.ucrChkWithReplacement = New instat.ucrCheck()
         Me.ucrChkSetSeed = New instat.ucrCheck()
+        Me.ucrNudSetSeed = New instat.ucrNud()
+        Me.ucrNudNumberOfColumns = New instat.ucrNud()
+        Me.ucrNudSampleSize = New instat.ucrNud()
+        Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
+        Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -66,6 +66,84 @@ Partial Class dlgRandomSubsets
         Me.lblNumberOfColumns.Tag = "Number_of_Columns:"
         Me.lblNumberOfColumns.Text = "Number of Columns:"
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 269)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 11
+        '
+        'ucrNewDataframe
+        '
+        Me.ucrNewDataframe.bAddRemoveParameter = True
+        Me.ucrNewDataframe.bChangeParameterValue = True
+        Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 236)
+        Me.ucrNewDataframe.Name = "ucrNewDataframe"
+        Me.ucrNewDataframe.Size = New System.Drawing.Size(285, 24)
+        Me.ucrNewDataframe.TabIndex = 10
+        '
+        'ucrChkWithReplacement
+        '
+        Me.ucrChkWithReplacement.bAddRemoveParameter = True
+        Me.ucrChkWithReplacement.bChangeParameterValue = True
+        Me.ucrChkWithReplacement.Checked = False
+        Me.ucrChkWithReplacement.Location = New System.Drawing.Point(257, 210)
+        Me.ucrChkWithReplacement.Name = "ucrChkWithReplacement"
+        Me.ucrChkWithReplacement.Size = New System.Drawing.Size(186, 20)
+        Me.ucrChkWithReplacement.TabIndex = 9
+        '
+        'ucrChkSetSeed
+        '
+        Me.ucrChkSetSeed.bAddRemoveParameter = True
+        Me.ucrChkSetSeed.bChangeParameterValue = True
+        Me.ucrChkSetSeed.Checked = False
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(257, 170)
+        Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
+        Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSetSeed.TabIndex = 7
+        '
+        'ucrNudSetSeed
+        '
+        Me.ucrNudSetSeed.bAddRemoveParameter = True
+        Me.ucrNudSetSeed.bChangeParameterValue = True
+        Me.ucrNudSetSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSetSeed.Location = New System.Drawing.Point(363, 170)
+        Me.ucrNudSetSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSetSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Name = "ucrNudSetSeed"
+        Me.ucrNudSetSeed.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSetSeed.TabIndex = 8
+        Me.ucrNudSetSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudNumberOfColumns
+        '
+        Me.ucrNudNumberOfColumns.bAddRemoveParameter = True
+        Me.ucrNudNumberOfColumns.bChangeParameterValue = True
+        Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(363, 130)
+        Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
+        Me.ucrNudNumberOfColumns.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfColumns.TabIndex = 6
+        Me.ucrNudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSampleSize
+        '
+        Me.ucrNudSampleSize.bAddRemoveParameter = True
+        Me.ucrNudSampleSize.bChangeParameterValue = True
+        Me.ucrNudSampleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSampleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSampleSize.Location = New System.Drawing.Point(363, 85)
+        Me.ucrNudSampleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSampleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSampleSize.Name = "ucrNudSampleSize"
+        Me.ucrNudSampleSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSampleSize.TabIndex = 4
+        Me.ucrNudSampleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrReceiverSelected
         '
         Me.ucrReceiverSelected.bAddRemoveParameter = True
@@ -90,89 +168,11 @@ Partial Class dlgRandomSubsets
         Me.ucrSelectorRandomSubsets.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorRandomSubsets.TabIndex = 0
         '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 269)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
-        '
-        'ucrNewDataframe
-        '
-        Me.ucrNewDataframe.bAddRemoveParameter = True
-        Me.ucrNewDataframe.bChangeParameterValue = True
-        Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 236)
-        Me.ucrNewDataframe.Name = "ucrNewDataframe"
-        Me.ucrNewDataframe.Size = New System.Drawing.Size(285, 24)
-        Me.ucrNewDataframe.TabIndex = 10
-        '
-        'ucrNudSampleSize
-        '
-        Me.ucrNudSampleSize.bAddRemoveParameter = True
-        Me.ucrNudSampleSize.bChangeParameterValue = True
-        Me.ucrNudSampleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSampleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSampleSize.Location = New System.Drawing.Point(363, 85)
-        Me.ucrNudSampleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSampleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSampleSize.Name = "ucrNudSampleSize"
-        Me.ucrNudSampleSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSampleSize.TabIndex = 4
-        Me.ucrNudSampleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudNumberOfColumns
-        '
-        Me.ucrNudNumberOfColumns.bAddRemoveParameter = True
-        Me.ucrNudNumberOfColumns.bChangeParameterValue = True
-        Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(363, 130)
-        Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
-        Me.ucrNudNumberOfColumns.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberOfColumns.TabIndex = 6
-        Me.ucrNudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudSetSeed
-        '
-        Me.ucrNudSetSeed.bAddRemoveParameter = True
-        Me.ucrNudSetSeed.bChangeParameterValue = True
-        Me.ucrNudSetSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSetSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSetSeed.Location = New System.Drawing.Point(363, 170)
-        Me.ucrNudSetSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSetSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSetSeed.Name = "ucrNudSetSeed"
-        Me.ucrNudSetSeed.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSetSeed.TabIndex = 8
-        Me.ucrNudSetSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkWithReplacement
-        '
-        Me.ucrChkWithReplacement.bAddRemoveParameter = True
-        Me.ucrChkWithReplacement.bChangeParameterValue = True
-        Me.ucrChkWithReplacement.Checked = False
-        Me.ucrChkWithReplacement.Location = New System.Drawing.Point(257, 210)
-        Me.ucrChkWithReplacement.Name = "ucrChkWithReplacement"
-        Me.ucrChkWithReplacement.Size = New System.Drawing.Size(186, 20)
-        Me.ucrChkWithReplacement.TabIndex = 9
-        '
-        'ucrChkSetSeed
-        '
-        Me.ucrChkSetSeed.bAddRemoveParameter = True
-        Me.ucrChkSetSeed.bChangeParameterValue = True
-        Me.ucrChkSetSeed.Checked = False
-        Me.ucrChkSetSeed.Location = New System.Drawing.Point(257, 170)
-        Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
-        Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSetSeed.TabIndex = 7
-        '
         'dlgRandomSubsets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(445, 328)
+        Me.ClientSize = New System.Drawing.Size(430, 328)
         Me.Controls.Add(Me.ucrChkSetSeed)
         Me.Controls.Add(Me.ucrChkWithReplacement)
         Me.Controls.Add(Me.ucrNudSetSeed)
