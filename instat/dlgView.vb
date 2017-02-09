@@ -15,9 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Imports instat.Translations
+
 Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -40,6 +42,7 @@ Public Class dlgView
         Dim clsDefaultFunction As New RFunction
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
+        DataFrameLength()
         NumberOfRows()
         clsDefaultFunction.SetRCommand("View")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
@@ -55,31 +58,32 @@ Public Class dlgView
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 32
+
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
+        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
+
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
         ucrPnlDisplayFrom.AddRadioButton(rdoTop)
+        ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
+        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
+        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
+        ucrPnlDisplayFrom.bAllowNonConditionValues = True
 
         ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
-        DataFrameLength()
-        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrReceiverView.SetParameter(New RParameter("x", 0))
+        ucrReceiverView.SetParameterIsRFunction()
 
-        ucrChkSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
-        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
-        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
         ucrChkSpecifyRows.SetText("Specify Rows")
+        ucrChkSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrChkSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
         ucrSelectorForView.SetParameter(New RParameter("title", 1))
         ucrSelectorForView.SetParameterIsString()
 
         ucrNudNumberRows.SetParameter(New RParameter("n", 1))
-
-        ucrReceiverView.SetParameter(New RParameter("x", 0))
-        ucrReceiverView.SetParameterIsRFunction()
+        ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
     End Sub
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged

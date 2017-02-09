@@ -28,6 +28,8 @@ Public Class ucrCore
     'No specific type since it can be interpreted different by each control type
     Protected objRDefault As Object = Nothing
 
+    Protected objDefaultState As Object = Nothing
+
     'Protected typControlType As Type = Object
 
     ''A control it's linked to i.e. dependant on/depends on 
@@ -39,8 +41,8 @@ Public Class ucrCore
     'e.g. check box may not change parameter value, only add/remove it
     '     For this bAddRemoveParameter = True and bChangeParameterValue = False
     'e.g. nud may not add/remove parameter, only change its value
-    Private bPrivateAddRemoveParameter As Boolean = True
-    Private bPrivateChangeParameterValue As Boolean = True
+    Public bAddRemoveParameter As Boolean = True
+    Public bChangeParameterValue As Boolean = True
 
     'Optional value
     'If parameter has this value then it will be removed from RCodeStructure 
@@ -81,11 +83,6 @@ Public Class ucrCore
 
     Public bAllowNonConditionValues As Boolean = True
 
-    Private Sub ucrCore_Load(sender As Object, e As EventArgs) Handles Me.Load
-        bAddRemoveParameter = True
-        bChangeParameterValue = True
-    End Sub
-
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
@@ -95,8 +92,8 @@ Public Class ucrCore
                     If clsRCode.ContainsParameter(clsParameter.strArgumentName) Then
                         clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
                     ElseIf bReset Then
-                        SetToDefault()
-                        Exit Sub
+                        SetToRDefault()
+                        'Exit Sub
                     Else
                     End If
                 End If
@@ -106,7 +103,7 @@ Public Class ucrCore
             clsRCode = New RCodeStructure
         End If
         SetControlValue()
-        UpdateLinkedControls()
+        UpdateLinkedControls(bReset)
     End Sub
 
     Protected Overridable Sub SetControlValue()
@@ -150,7 +147,7 @@ Public Class ucrCore
         End If
     End Function
 
-    Public Overridable Sub UpdateLinkedControls()
+    Public Overridable Sub UpdateLinkedControls(Optional bReset As Boolean = False)
         Dim ucrControl As ucrCore
         Dim lstValues As Object()
         Dim bTemp As Boolean
@@ -165,8 +162,8 @@ Public Class ucrCore
             If ucrControl.bLinkedAddRemoveParameter Then
                 ucrControl.AddOrRemoveParameter(bTemp)
             End If
-            If ucrControl.bLinkedChangeParameterToDefault AndAlso bTemp Then
-                ucrControl.SetToDefault()
+            If ucrControl.bLinkedChangeParameterToDefault AndAlso bReset Then
+                ucrControl.SetToDefaultState()
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
                 ucrControl.SetVisible(bTemp)
@@ -174,21 +171,21 @@ Public Class ucrCore
             If ucrControl.bLinkedDisabledIfParameterMissing Then
                 ucrControl.Enabled = bTemp
             End If
-            ucrControl.UpdateLinkedControls()
+            ucrControl.UpdateLinkedControls(bReset)
         Next
     End Sub
 
     'Update the RCode based on the contents of the control (reverse of above)
-    Public Overridable Sub UpdateRCode()
-        AddOrRemoveParameter(Not IsDefault())
-        UpdateLinkedControls()
+    Public Overridable Sub UpdateRCode(Optional bReset As Boolean = False)
+        AddOrRemoveParameter(CanAddParameter())
+        UpdateLinkedControls(bReset)
     End Sub
 
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
             If bUpdateRCodeFromControl AndAlso CanUpdate() Then
-                UpdateRCode()
+                UpdateRCode(bReset)
             End If
             UpdateControl(bReset)
         End If
@@ -206,7 +203,7 @@ Public Class ucrCore
         objValueToRemoveParameter = objNewValue
     End Sub
 
-    Public Overridable Sub SetToDefault()
+    Public Overridable Sub SetToRDefault()
         If clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing Then
             clsParameter.SetArgumentValue(objRDefault.ToString())
         End If
@@ -296,8 +293,12 @@ Public Class ucrCore
         Return bTemp
     End Function
 
-    Public Overridable Function IsDefault() As Boolean
+    Public Overridable Function IsRDefault() As Boolean
         Return clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
+    End Function
+
+    Public Overridable Function CanAddParameter() As Boolean
+        Return Not IsRDefault()
     End Function
 
     Public Function LinkedControlsParametersPresent() As Boolean
@@ -318,14 +319,14 @@ Public Class ucrCore
 
     Public Sub SetLinkedDisplayControl(ctrNewControl As Control)
         ctrLinkedDisaplyControl = ctrNewControl
-        SetLinkedLabelVisibility()
+        SetLinkedDisplayControlVisibility()
     End Sub
 
     Private Sub ucrCore_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
-        SetLinkedLabelVisibility()
+        SetLinkedDisplayControlVisibility()
     End Sub
 
-    Private Sub SetLinkedLabelVisibility()
+    Private Sub SetLinkedDisplayControlVisibility()
         If ctrLinkedDisaplyControl IsNot Nothing Then
             ctrLinkedDisaplyControl.Visible = Visible
         End If
@@ -333,24 +334,6 @@ Public Class ucrCore
 
     Protected Overridable Sub SetToValue(objTemp As Object)
     End Sub
-
-    Public Overridable Property bAddRemoveParameter
-        Get
-            Return bPrivateAddRemoveParameter
-        End Get
-        Set(bValue)
-            bPrivateAddRemoveParameter = bValue
-        End Set
-    End Property
-
-    Public Overridable Property bChangeParameterValue
-        Get
-            Return bPrivateChangeParameterValue
-        End Get
-        Set(bValue)
-            bPrivateChangeParameterValue = bValue
-        End Set
-    End Property
 
     Public Sub AddCondition(objControlState As Object, clsCond As Condition)
         If dctConditions.ContainsKey(objControlState) Then
@@ -401,5 +384,13 @@ Public Class ucrCore
         Else
             Visible = bVisible
         End If
+        SetLinkedDisplayControlVisibility()
+    End Sub
+
+    Public Sub SetDefaultState(objState As Object)
+        objDefaultState = objState
+    End Sub
+
+    Protected Overridable Sub SetToDefaultState()
     End Sub
 End Class

@@ -48,15 +48,14 @@ Public Class sdgOneVarGraph
         ucrInputCategorical.SetItems(dctCategoricalPairs)
 
         ucrNudNumberofColumns.SetParameter(New RParameter("ncol"))
-        ucrChkSpecifyLayout.SetParameter(ucrNudNumberofColumns.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
         ucrNudNumberofColumns.SetMinMax(1, 10)
         ucrNudNumberofColumns.bAddRemoveParameter = False
         ucrNudNumberofColumns.SetLinkedDisplayControl(lblNumberofColumns)
+        ucrNudNumberofColumns.SetDefaultState(1)
 
+        ucrChkSpecifyLayout.SetParameter(ucrNudNumberofColumns.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkSpecifyLayout.SetText("Specify Layout")
-        ucrChkSpecifyLayout.bChangeParameterValue = False
-        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeParameterToDefault:=True)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
         ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis"))

@@ -17,6 +17,15 @@ Imports instat
 Public Class UcrPanel
     Private dctRadioButtonValues As New Dictionary(Of RadioButton, String)
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bAllowNonConditionValues = False
+    End Sub
+
     Private Sub AddRadioButtonRange(lstRadioButtons As RadioButton(), Optional bRepositionControls As Boolean = True)
         pnlRadios.Controls.AddRange(lstRadioButtons)
         For Each rdoTemp As RadioButton In lstRadioButtons
@@ -75,9 +84,19 @@ Public Class UcrPanel
         End If
     End Sub
 
-    Private Sub UcrPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        bAllowNonConditionValues = False
-    End Sub
+    Public Overrides Function GetValueToSet() As Object
+        Dim rdoTemp As RadioButton
+
+        For Each ctrTemp As Control In pnlRadios.Controls
+            If TypeOf ctrTemp Is RadioButton Then
+                rdoTemp = CType(ctrTemp, RadioButton)
+                If rdoTemp.Checked Then
+                    Return rdoTemp
+                End If
+            End If
+        Next
+        Return Nothing
+    End Function
 
     Public Overrides Function ControlValueContainedIn(lstTemp() As Object) As Boolean
         Dim rdoTemp As RadioButton
@@ -95,4 +114,10 @@ Public Class UcrPanel
         Next
         Return bTemp
     End Function
+
+    Protected Overrides Sub SetToDefaultState()
+        If objDefaultState IsNot Nothing Then
+            SetToValue(objDefaultState)
+        End If
+    End Sub
 End Class
