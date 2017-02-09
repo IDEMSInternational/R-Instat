@@ -75,7 +75,7 @@ Partial Class dlgRank
         Me.rdoRandom.Location = New System.Drawing.Point(22, 115)
         Me.rdoRandom.Name = "rdoRandom"
         Me.rdoRandom.Size = New System.Drawing.Size(65, 17)
-        Me.rdoRandom.TabIndex = 5
+        Me.rdoRandom.TabIndex = 4
         Me.rdoRandom.TabStop = True
         Me.rdoRandom.Tag = "Random"
         Me.rdoRandom.Text = "Random"
@@ -87,7 +87,7 @@ Partial Class dlgRank
         Me.rdoFirst.Location = New System.Drawing.Point(22, 92)
         Me.rdoFirst.Name = "rdoFirst"
         Me.rdoFirst.Size = New System.Drawing.Size(44, 17)
-        Me.rdoFirst.TabIndex = 4
+        Me.rdoFirst.TabIndex = 3
         Me.rdoFirst.TabStop = True
         Me.rdoFirst.Tag = "First"
         Me.rdoFirst.Text = "First"
@@ -99,7 +99,7 @@ Partial Class dlgRank
         Me.rdoMaximum.Location = New System.Drawing.Point(22, 69)
         Me.rdoMaximum.Name = "rdoMaximum"
         Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
-        Me.rdoMaximum.TabIndex = 3
+        Me.rdoMaximum.TabIndex = 2
         Me.rdoMaximum.TabStop = True
         Me.rdoMaximum.Tag = "Maximum"
         Me.rdoMaximum.Text = "Maximum"
@@ -111,7 +111,7 @@ Partial Class dlgRank
         Me.rdoMinimum.Location = New System.Drawing.Point(22, 46)
         Me.rdoMinimum.Name = "rdoMinimum"
         Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
-        Me.rdoMinimum.TabIndex = 2
+        Me.rdoMinimum.TabIndex = 1
         Me.rdoMinimum.TabStop = True
         Me.rdoMinimum.Tag = "Minimum"
         Me.rdoMinimum.Text = "Minimum"
@@ -123,7 +123,7 @@ Partial Class dlgRank
         Me.rdoAverage.Location = New System.Drawing.Point(22, 23)
         Me.rdoAverage.Name = "rdoAverage"
         Me.rdoAverage.Size = New System.Drawing.Size(65, 17)
-        Me.rdoAverage.TabIndex = 1
+        Me.rdoAverage.TabIndex = 0
         Me.rdoAverage.TabStop = True
         Me.rdoAverage.Tag = "Average"
         Me.rdoAverage.Text = "Average"
@@ -131,6 +131,8 @@ Partial Class dlgRank
         '
         'ucrPanelTies
         '
+        Me.ucrPanelTies.bAddRemoveParameter = True
+        Me.ucrPanelTies.bChangeParameterValue = True
         Me.ucrPanelTies.Location = New System.Drawing.Point(3, 16)
         Me.ucrPanelTies.Name = "ucrPanelTies"
         Me.ucrPanelTies.Size = New System.Drawing.Size(114, 126)
@@ -156,7 +158,7 @@ Partial Class dlgRank
         Me.rdoKeptAsMissing.Location = New System.Drawing.Point(12, 23)
         Me.rdoKeptAsMissing.Name = "rdoKeptAsMissing"
         Me.rdoKeptAsMissing.Size = New System.Drawing.Size(102, 17)
-        Me.rdoKeptAsMissing.TabIndex = 1
+        Me.rdoKeptAsMissing.TabIndex = 0
         Me.rdoKeptAsMissing.TabStop = True
         Me.rdoKeptAsMissing.Tag = "Kept_as_missing"
         Me.rdoKeptAsMissing.Text = "Keep as Missing"
@@ -168,7 +170,7 @@ Partial Class dlgRank
         Me.rdoLast.Location = New System.Drawing.Point(292, 23)
         Me.rdoLast.Name = "rdoLast"
         Me.rdoLast.Size = New System.Drawing.Size(45, 17)
-        Me.rdoLast.TabIndex = 3
+        Me.rdoLast.TabIndex = 2
         Me.rdoLast.TabStop = True
         Me.rdoLast.Tag = "Last"
         Me.rdoLast.Text = "Last"
@@ -180,7 +182,7 @@ Partial Class dlgRank
         Me.rdoFirstMissingValues.Location = New System.Drawing.Point(165, 23)
         Me.rdoFirstMissingValues.Name = "rdoFirstMissingValues"
         Me.rdoFirstMissingValues.Size = New System.Drawing.Size(44, 17)
-        Me.rdoFirstMissingValues.TabIndex = 2
+        Me.rdoFirstMissingValues.TabIndex = 1
         Me.rdoFirstMissingValues.TabStop = True
         Me.rdoFirstMissingValues.Tag = "First"
         Me.rdoFirstMissingValues.Text = "First"
@@ -188,6 +190,8 @@ Partial Class dlgRank
         '
         'ucrPanelMissingValues
         '
+        Me.ucrPanelMissingValues.bAddRemoveParameter = True
+        Me.ucrPanelMissingValues.bChangeParameterValue = True
         Me.ucrPanelMissingValues.Location = New System.Drawing.Point(6, 17)
         Me.ucrPanelMissingValues.Name = "ucrPanelMissingValues"
         Me.ucrPanelMissingValues.Size = New System.Drawing.Size(345, 34)
@@ -195,6 +199,8 @@ Partial Class dlgRank
         '
         'ucrSaveRank
         '
+        Me.ucrSaveRank.bAddRemoveParameter = True
+        Me.ucrSaveRank.bChangeParameterValue = True
         Me.ucrSaveRank.Location = New System.Drawing.Point(10, 300)
         Me.ucrSaveRank.Name = "ucrSaveRank"
         Me.ucrSaveRank.Size = New System.Drawing.Size(271, 24)
@@ -202,6 +208,8 @@ Partial Class dlgRank
         '
         'ucrSelectorForRank
         '
+        Me.ucrSelectorForRank.bAddRemoveParameter = True
+        Me.ucrSelectorForRank.bChangeParameterValue = True
         Me.ucrSelectorForRank.bShowHiddenColumns = False
         Me.ucrSelectorForRank.bUseCurrentFilter = True
         Me.ucrSelectorForRank.Location = New System.Drawing.Point(10, 10)
@@ -212,6 +220,8 @@ Partial Class dlgRank
         '
         'ucrReceiverRank
         '
+        Me.ucrReceiverRank.bAddRemoveParameter = True
+        Me.ucrReceiverRank.bChangeParameterValue = True
         Me.ucrReceiverRank.frmParent = Me
         Me.ucrReceiverRank.Location = New System.Drawing.Point(247, 45)
         Me.ucrReceiverRank.Margin = New System.Windows.Forms.Padding(0)
