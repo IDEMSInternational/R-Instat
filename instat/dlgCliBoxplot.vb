@@ -41,107 +41,71 @@ Public Class dlgCliBoxplot
 
     Private Sub InitialiseDialog()
 
-        ucrInputDataPeriod.SetParameter(New RParameter("data_period_label", 1))
+        ucrInputDataPeriod.SetParameter(New RParameter("data_period_label", 0))
         ucrInputDataPeriod.SetValidationTypeAsRVariable()
 
-        ucrInputFactorLab.SetParameter(New RParameter("factor", 2))
+        ucrInputFactorLab.SetParameter(New RParameter("factor", 1))
         ucrInputFactorLab.SetValidationTypeAsRVariable()
 
-        ucrInputWidth.SetParameter(New RParameter("width", 3))
+        ucrInputWidth.SetParameter(New RParameter("width", 2))
         ucrInputWidth.SetValidationTypeAsRVariable()
 
-        ucrInputLog.SetParameter(New RParameter("log", 4))
+        ucrInputLog.SetParameter(New RParameter("log", 3))
         ucrInputLog.SetValidationTypeAsRVariable()
 
-        ucrInputAt.SetParameter(New RParameter("at", 5))
+        ucrInputAt.SetParameter(New RParameter("at", 4))
         ucrInputAt.SetValidationTypeAsRVariable()
 
-        ucrInputBorder.SetParameter(New RParameter("border", 6))
+        ucrInputBorder.SetParameter(New RParameter("border", 5))
         ucrInputBorder.SetValidationTypeAsRVariable()
 
-        ucrInputPars.SetParameter(New RParameter("pars", 7))
+        ucrInputPars.SetParameter(New RParameter("pars", 6))
         ucrInputPars.SetValidationTypeAsRVariable()
 
-        ucrInputColour.SetParameter(New RParameter("col", 8))
+        ucrInputColour.SetParameter(New RParameter("col", 7))
         ucrInputColour.SetValidationTypeAsRVariable()
+
+        ucrInputVariable.SetParameter(New RParameter("var", 8))
+        ucrInputVariable.SetValidationTypeAsRVariable()
 
         ucrInputTitle.SetParameter(New RParameter("title", 9))
         ucrInputTitle.SetValidationTypeAsRVariable()
 
-        ucrInputVariable.SetParameter(New RParameter("var", 10))
-        ucrInputVariable.SetValidationTypeAsRVariable()
-
-        ucrInputYLabel.SetParameter(New RParameter("ylab", 11))
+        ucrInputYLabel.SetParameter(New RParameter("ylab", 10))
         ucrInputYLabel.SetValidationTypeAsRVariable()
 
-        ucrInputXLabel.SetParameter(New RParameter("xlab", 0))
+        ucrInputXLabel.SetParameter(New RParameter("xlab", 11))
         ucrInputXLabel.SetValidationTypeAsRVariable()
 
-        ucrChkHorizontal.SetText("Horizaontal")
-        ucrchkHorizontal.SetParameter(New RParameter("horizontal"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrchkHorizontal.SetRDefault("FALSE")
+        ucrChkHorizontal.SetParameter(New RParameter("horizontal", 18), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkHorizontal.SetText("Horizontal")
+        ucrChkHorizontal.SetRDefault("FALSE")
 
+        ucrChkFactorLevel.SetText("Factor Level")
+        ucrChkFactorLevel.SetParameter(New RParameter("factor_level", 19))
 
+        ucrChkPlot.SetText("Plot")
+        ucrChkPlot.SetParameter(New RParameter("plot", 13))
+
+        ucrChkMonthAbbreviations.SetText("Month Abbreviations")
+        ucrChkMonthAbbreviations.SetParameter(New RParameter("names", 17))
+
+        ucrChkOutline.SetText("Outline")
+        ucrChkOutline.SetParameter(New RParameter("outline", 16))
+
+        ucrChkAdd.SetText("Add")
+        ucrChkAdd.SetParameter(New RParameter("add", 12))
+
+        ucrChkVariableWidth.SetText("Variable Width")
+        ucrChkVariableWidth.SetParameter(New RParameter("varwidth", 14))
+
+        ucrChkNotch.SetText("Notch")
+        ucrChkNotch.SetParameter(New RParameter("notch", 15))
+
+        ucrNudWhiskLineType.SetParameter(New RParameter("whisklty", 20))
+        ucrNudThreshold.SetParameter(New RParameter("threshold", 21))
+        ucrNudRange.SetParameter(New RParameter("range", 22))
     End Sub
-
-
-    Private Sub chkMonthAbbreviations_CheckedChanged(sender As Object, e As EventArgs)
-        If chkHorizontal.Checked Then
-            ucrBase.clsRsyntax.AddParameter("names", chkMonthAbbreviations.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub chkFactorLevel_CheckedChanged(sender As Object, e As EventArgs)
-        If chkFactorLevel.Checked Then
-            ucrBase.clsRsyntax.AddParameter("factor_level", chkFactorLevel.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub chkPlot_CheckedChanged(sender As Object, e As EventArgs)
-        If chkPlot.Checked Then
-            ucrBase.clsRsyntax.AddParameter("plot", chkPlot.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub chkOutline_CheckedChanged(sender As Object, e As EventArgs)
-        If chkOutline.Checked Then
-            ucrBase.clsRsyntax.AddParameter("outline", chkOutline.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub chkAdd_CheckedChanged(sender As Object, e As EventArgs)
-        If chkAdd.Checked Then
-            ucrBase.clsRsyntax.AddParameter("add", chkAdd.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub chkVarwidth_CheckedChanged(sender As Object, e As EventArgs)
-        If chkVarwidth.Checked Then
-            ucrBase.clsRsyntax.AddParameter("varwidth", chkVarwidth.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub nudRange_ValueChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("range", nudRange.Value.ToString())
-
-    End Sub
-
-    Private Sub nudThreshold_ValueChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value.ToString())
-
-    End Sub
-
-    Private Sub nudWhisklty_ValueChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("whisklty", nudWhisklty.Value.ToString())
-
-    End Sub
-
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
