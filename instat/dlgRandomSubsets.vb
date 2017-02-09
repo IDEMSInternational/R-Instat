@@ -13,7 +13,7 @@
 
 Imports instat.Translations
 Public Class dlgRandomSubsets
-    Public bFirstLoad As Boolean = True 'checks if dialog loads for first time
+    Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSetSeed, clsReplicateFunc, clsOverallFunction, clsSampleFunc As New RFunction
 
@@ -33,47 +33,47 @@ Public Class dlgRandomSubsets
 
     End Sub
 
-    'this contains things that initialise the dialog and run once
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 65
 
+        'ucrReceiver
         ucrReceiverSelected.Selector = ucrSelectorRandomSubsets
         ucrReceiverSelected.SetMeAsReceiver()
         ucrReceiverSelected.SetIncludedDataTypes({"numeric"})
-
-        ucrChkSetSeed.AddFunctionNamesCondition("set.seed", True)
-        ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
-        ucrNudSetSeed.Minimum = 1
-        ucrNudSetSeed.Maximum = Integer.MaxValue
-        ucrNudSetSeed.SetRDefault(1)
-
         ucrReceiverSelected.SetParameter(New RParameter("x", 2))
         ucrReceiverSelected.SetParameterIsRFunction()
 
+        'Set seed
+        ucrChkSetSeed.AddFunctionNamesCondition("set.seed", True)
+        ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
+        ucrNudSetSeed.Maximum = Integer.MaxValue
+        ucrNudSetSeed.SetRDefault(1)
+        ucrChkSetSeed.SetText("Seed")
+
+
+        'Replace checkbox
         ucrChkWithReplacement.SetParameter(New RParameter("replace", 1))
         ucrChkWithReplacement.SetText("With Replacement:")
         ucrChkWithReplacement.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWithReplacement.SetRDefault("FALSE")
 
+        'Number of columns
         ucrNudNumberOfColumns.SetParameter(New RParameter("n", 2))
         ucrNudNumberOfColumns.Value = 1
         ucrNudNumberOfColumns.Maximum = Integer.MaxValue
         ucrNudNumberOfColumns.SetRDefault(1)
 
+        'sample size
         ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
 
-        ucrChkSetSeed.SetText("Seed")
-        ucrNudSetSeed.Minimum = 1
-        ucrNudSetSeed.SetRDefault(1)
-
+        'Linking checkox and nud
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        'ucrNewDataframe
         ucrNewDataframe.SetIsTextBox()
         ucrNewDataframe.SetSaveTypeAsDataFrame()
         ucrNewDataframe.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
-
-
         If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrNewDataframe.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
