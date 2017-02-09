@@ -50,8 +50,6 @@ Public Class dlgRandomSubsets
         ucrNudSetSeed.Minimum = 1
         ucrNudSetSeed.SetRDefault(1)
         ucrChkSetSeed.SetText("Seed")
-        ucrNudSetSeed.Enabled = False
-
 
         'Replace checkbox
         ucrChkWithReplacement.SetParameter(New RParameter("replace", 1))
@@ -72,7 +70,7 @@ Public Class dlgRandomSubsets
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNewDataframe
-        ucrNewDataframe.SetIsTextBox()
+        ucrNewDataframe.SetIsComboBox()
         ucrNewDataframe.SetSaveTypeAsDataFrame()
         ucrNewDataframe.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
@@ -84,7 +82,7 @@ Public Class dlgRandomSubsets
 
     'checks when to enable ok button
     Private Sub TestOkEnabled()
-        If Not ucrReceiverSelected.IsEmpty AndAlso ucrNudNumberOfColumns.GetText() <> "" AndAlso ucrNudSetSeed.GetText() <> "" AndAlso ucrNudSampleSize.GetText() <> "" Then
+        If Not ucrReceiverSelected.IsEmpty AndAlso ucrNudNumberOfColumns.GetText() <> "" AndAlso ucrNudSetSeed.GetText() <> "" AndAlso ucrNudSampleSize.GetText() <> "" AndAlso ucrNewDataframe.IsComplete() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -98,6 +96,7 @@ Public Class dlgRandomSubsets
         ucrSelectorRandomSubsets.Reset()
         ucrNudNumberOfColumns.Value = 1
         ucrNudSetSeed.Value = 1
+        ucrNudSetSeed.Visible = False
         clsDefaultFunction.SetRCommand("data.frame")
         clsDefaultRepFunc.SetRCommand("replicate")
         ClsDefaultSample.SetRCommand("sample")
