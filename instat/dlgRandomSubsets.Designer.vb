@@ -28,7 +28,7 @@ Partial Class dlgRandomSubsets
         Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveRandoSubsets = New instat.ucrSave()
+        Me.ucrNewDataframe = New instat.ucrSave()
         Me.ucrNudSampleSize = New instat.ucrNud()
         Me.ucrNudNumberOfColumns = New instat.ucrNud()
         Me.ucrNudSetSeed = New instat.ucrNud()
@@ -97,14 +97,14 @@ Partial Class dlgRandomSubsets
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
-        'ucrSaveRandoSubsets
+        'ucrNewDataframe
         '
-        Me.ucrSaveRandoSubsets.bAddRemoveParameter = True
-        Me.ucrSaveRandoSubsets.bChangeParameterValue = True
-        Me.ucrSaveRandoSubsets.Location = New System.Drawing.Point(10, 236)
-        Me.ucrSaveRandoSubsets.Name = "ucrSaveRandoSubsets"
-        Me.ucrSaveRandoSubsets.Size = New System.Drawing.Size(326, 24)
-        Me.ucrSaveRandoSubsets.TabIndex = 18
+        Me.ucrNewDataframe.bAddRemoveParameter = True
+        Me.ucrNewDataframe.bChangeParameterValue = True
+        Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 236)
+        Me.ucrNewDataframe.Name = "ucrNewDataframe"
+        Me.ucrNewDataframe.Size = New System.Drawing.Size(326, 24)
+        Me.ucrNewDataframe.TabIndex = 18
         '
         'ucrNudSampleSize
         '
@@ -178,7 +178,7 @@ Partial Class dlgRandomSubsets
         Me.Controls.Add(Me.ucrNudSetSeed)
         Me.Controls.Add(Me.ucrNudNumberOfColumns)
         Me.Controls.Add(Me.ucrNudSampleSize)
-        Me.Controls.Add(Me.ucrSaveRandoSubsets)
+        Me.Controls.Add(Me.ucrNewDataframe)
         Me.Controls.Add(Me.lblNumberOfColumns)
         Me.Controls.Add(Me.lblSampleSize)
         Me.Controls.Add(Me.lblSelected)
@@ -204,7 +204,7 @@ Partial Class dlgRandomSubsets
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberOfColumns As Label
     Friend WithEvents nudSetSeed As NumericUpDown
-    Friend WithEvents ucrSaveRandoSubsets As ucrSave
+    Friend WithEvents ucrNewDataframe As ucrSave
     Friend WithEvents ucrNudSampleSize As ucrNud
     Friend WithEvents ucrNudNumberOfColumns As ucrNud
     Friend WithEvents ucrChkWithReplacement As ucrCheck
