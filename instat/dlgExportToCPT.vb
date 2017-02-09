@@ -31,7 +31,7 @@ Public Class dlgExportToCPT
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -40,11 +40,8 @@ Public Class dlgExportToCPT
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
-        'ucrInputExportFile.IsReadOnly = False
-        ucrInputExportFile.txtInput.Text = ""
-        'ucrInputExportFile.Reset()
         ucrInputExportFile.IsReadOnly = True
-
+        ucrInputExportFile.SetName("")
         ucrSSTDataframe.Reset()
         ucrLocationDataFrame.Reset()
         ucrReceiverYears.SetMeAsReceiver()
@@ -162,12 +159,7 @@ Public Class dlgExportToCPT
         End If
     End Sub
 
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrSSTDataframe.ControlContentsChanged, ucrLocationDataFrame.ControlContentsChanged, ucrReceiverDataColumn.ControlContentsChanged, ucrReceiverMultipleDataColumns.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverYears.ControlContentsChanged
-        DataFormat()
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrChkLong_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkLong.ControlContentsChanged ', ucrAvailableSheets.ControlContentsChanged
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrSSTDataframe.ControlContentsChanged, ucrLocationDataFrame.ControlContentsChanged, ucrReceiverDataColumn.ControlContentsChanged, ucrReceiverMultipleDataColumns.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverYears.ControlContentsChanged, ucrChkLong.ControlContentsChanged
         DataFormat()
         TestOkEnabled()
     End Sub
