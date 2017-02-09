@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgHideShowColumns
+    Private clsDefaultFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgHideShowColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -33,10 +34,18 @@ Public Class dlgHideShowColumns
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 167
+
         ucrReceiverHiddenColumns.Selector = ucrSelectorForHiddenColumns
         ucrReceiverHiddenColumns.SetMeAsReceiver()
+
+        ucrSelectorForHiddenColumns.SetParameter(New RParameter("data_name"))
+        ucrSelectorForHiddenColumns.SetParameterIsString()
+
+        ucrReceiverHiddenColumns.SetParameter(New RParameter("col_names"))
+        ucrReceiverHiddenColumns.SetParameterIsString()
+
         ucrReceiverHiddenColumns.bExcludeFromSelector = True
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
         ucrSelectorForHiddenColumns.bShowHiddenColumns = True
     End Sub
 
@@ -46,25 +55,16 @@ Public Class dlgHideShowColumns
 
     Private Sub SetDefaults()
         SetHiddenColumnsInReceiver()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetHiddenColumnsInReceiver()
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorForHiddenColumns_DataFrameChanged() Handles ucrSelectorForHiddenColumns.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        SetHiddenColumnsInReceiver()
-    End Sub
-
-    Private Sub ucrReceiverHiddenColumns_SelectionChanged() Handles ucrReceiverHiddenColumns.SelectionChanged
-        If Not ucrReceiverHiddenColumns.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverHiddenColumns.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.AddParameter("col_names", "c()")
-        End If
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForHiddenColumns.ControlContentsChanged, ucrReceiverHiddenColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
