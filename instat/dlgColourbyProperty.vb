@@ -63,7 +63,6 @@ Public Class dlgColourbyProperty
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -85,4 +84,5 @@ Public Class dlgColourbyProperty
     '    End If
     '    TestOKEnabled()
     'End Sub
+
 End Class
