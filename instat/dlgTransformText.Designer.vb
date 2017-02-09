@@ -367,7 +367,7 @@ Partial Class dlgTransformText
         Me.ucrChkFirstOr.Checked = False
         Me.ucrChkFirstOr.Location = New System.Drawing.Point(3, 38)
         Me.ucrChkFirstOr.Name = "ucrChkFirstOr"
-        Me.ucrChkFirstOr.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFirstOr.Size = New System.Drawing.Size(75, 20)
         Me.ucrChkFirstOr.TabIndex = 42
         '
         'ucrNudWidth
@@ -391,7 +391,7 @@ Partial Class dlgTransformText
         Me.ucrChkLastOr.Checked = False
         Me.ucrChkLastOr.Location = New System.Drawing.Point(3, 95)
         Me.ucrChkLastOr.Name = "ucrChkLastOr"
-        Me.ucrChkLastOr.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLastOr.Size = New System.Drawing.Size(75, 20)
         Me.ucrChkLastOr.TabIndex = 43
         '
         'ucrNudLastWord
