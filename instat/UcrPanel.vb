@@ -75,12 +75,13 @@ Public Class UcrPanel
 
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim rdoTemp As RadioButton
-
-        If TypeOf objTemp Is RadioButton Then
-            rdoTemp = DirectCast(objTemp, RadioButton)
-            rdoTemp.Checked = True
-        Else
-            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
+        If objTemp IsNot Nothing Then
+            If TypeOf objTemp Is RadioButton Then
+                rdoTemp = DirectCast(objTemp, RadioButton)
+                rdoTemp.Checked = True
+            Else
+                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
+            End If
         End If
     End Sub
 
@@ -114,10 +115,4 @@ Public Class UcrPanel
         Next
         Return bTemp
     End Function
-
-    Protected Overrides Sub SetToDefaultState()
-        If objDefaultState IsNot Nothing Then
-            SetToValue(objDefaultState)
-        End If
-    End Sub
 End Class
