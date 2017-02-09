@@ -49,7 +49,7 @@ Public Class dlgRandomSubsets
         ucrNudSetSeed.Maximum = Integer.MaxValue
         ucrNudSetSeed.Minimum = 1
         ucrNudSetSeed.SetRDefault(1)
-        ucrChkSetSeed.SetText("Seed")
+        ucrChkSetSeed.SetText("Seed:")
 
         'Replace checkbox
         ucrChkWithReplacement.SetParameter(New RParameter("replace", 1))
