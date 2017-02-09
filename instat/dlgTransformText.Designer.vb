@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgTransformText
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgTransformText
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblColumnToTransform = New System.Windows.Forms.Label()
         Me.grpOperation = New System.Windows.Forms.GroupBox()
@@ -367,7 +367,7 @@ Partial Class dlgTransformText
         Me.ucrChkFirstOr.Checked = False
         Me.ucrChkFirstOr.Location = New System.Drawing.Point(3, 38)
         Me.ucrChkFirstOr.Name = "ucrChkFirstOr"
-        Me.ucrChkFirstOr.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFirstOr.Size = New System.Drawing.Size(75, 20)
         Me.ucrChkFirstOr.TabIndex = 42
         '
         'ucrNudWidth
@@ -391,7 +391,7 @@ Partial Class dlgTransformText
         Me.ucrChkLastOr.Checked = False
         Me.ucrChkLastOr.Location = New System.Drawing.Point(3, 95)
         Me.ucrChkLastOr.Name = "ucrChkLastOr"
-        Me.ucrChkLastOr.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLastOr.Size = New System.Drawing.Size(75, 20)
         Me.ucrChkLastOr.TabIndex = 43
         '
         'ucrNudLastWord
