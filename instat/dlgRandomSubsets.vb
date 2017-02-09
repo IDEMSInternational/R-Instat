@@ -44,9 +44,10 @@ Public Class dlgRandomSubsets
         ucrReceiverSelected.SetParameterIsRFunction()
 
         'Set seed
-        ucrChkSetSeed.AddFunctionNamesCondition("set.seed", True)
+        ' ucrChkSetSeed.AddFunctionNamesCondition("set.seed", True)
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.Maximum = Integer.MaxValue
+        ucrNudSetSeed.Minimum = 1
         ucrNudSetSeed.SetRDefault(1)
         ucrChkSetSeed.SetText("Seed")
 
@@ -59,7 +60,7 @@ Public Class dlgRandomSubsets
 
         'Number of columns
         ucrNudNumberOfColumns.SetParameter(New RParameter("n", 2))
-        ucrNudNumberOfColumns.Value = 1
+        ucrNudNumberOfColumns.Minimum = 1
         ucrNudNumberOfColumns.Maximum = Integer.MaxValue
         ucrNudNumberOfColumns.SetRDefault(1)
 
@@ -82,10 +83,10 @@ Public Class dlgRandomSubsets
 
     'checks when to enable ok button
     Private Sub TestOkEnabled()
-        If ucrReceiverSelected.IsEmpty AndAlso ucrNewDataframe.IsComplete() AndAlso ucrNudNumberOfColumns.GetText > 0 Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverSelected.IsEmpty AndAlso ucrNudNumberOfColumns.GetText() <> "" AndAlso ucrNudSetSeed.GetText() <> "" AndAlso ucrNudSampleSize.GetText() <> "" Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -94,6 +95,8 @@ Public Class dlgRandomSubsets
         Dim clsDefaultFunction, ClsDefaultSample, clsDefaultSeed, clsDefaultRepFunc As New RFunction
 
         ucrSelectorRandomSubsets.Reset()
+        ucrNudNumberOfColumns.Value = 1
+        ucrNudSetSeed.Value = 1
         clsDefaultFunction.SetRCommand("data.frame")
         clsDefaultRepFunc.SetRCommand("replicate")
         ClsDefaultSample.SetRCommand("sample")
