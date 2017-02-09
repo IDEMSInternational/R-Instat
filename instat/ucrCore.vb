@@ -94,8 +94,10 @@ Public Class ucrCore
                     If clsRCode.ContainsParameter(clsParameter.strArgumentName) Then
                         clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
                     ElseIf bReset Then
-                        SetToRDefault()
-                        'Exit Sub
+                        If objDefaultState Is Nothing Then
+                            SetToRDefault()
+                            'Exit Sub
+                        End If
                     Else
                     End If
                 End If
