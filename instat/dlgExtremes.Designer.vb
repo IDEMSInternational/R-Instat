@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExtremes
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,63 +20,33 @@ Partial Class dlgExtremes
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiverDataToFit = New instat.ucrReceiverSingle()
         Me.lblDataToFit = New System.Windows.Forms.Label()
         Me.grpDistributions = New System.Windows.Forms.GroupBox()
         Me.rdoGEV = New System.Windows.Forms.RadioButton()
         Me.rdoGumbel = New System.Windows.Forms.RadioButton()
         Me.grpEstimationMethods = New System.Windows.Forms.GroupBox()
         Me.lblSaveInMOM = New System.Windows.Forms.Label()
-        Me.ucrChkMOM = New instat.ucrCheck()
-        Me.ucrChkMLE = New instat.ucrCheck()
         Me.lblSaveInMLE = New System.Windows.Forms.Label()
         Me.lblBetween = New System.Windows.Forms.Label()
         Me.lblAnd = New System.Windows.Forms.Label()
-        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
-        Me.ucrChkRestrictDataValues = New instat.ucrCheck()
-        Me.ucrChkProbPlot = New instat.ucrCheck()
-        Me.ucrInputFrom = New instat.ucrInputTextBox()
         Me.ucrInputTo = New instat.ucrInputTextBox()
+        Me.ucrInputFrom = New instat.ucrInputTextBox()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
+        Me.ucrChkProbPlot = New instat.ucrCheck()
+        Me.ucrChkRestrictDataValues = New instat.ucrCheck()
         Me.ucrInputMLE = New instat.ucrInputComboBox()
         Me.ucrInputMOM = New instat.ucrInputComboBox()
+        Me.ucrChkMOM = New instat.ucrCheck()
+        Me.ucrChkMLE = New instat.ucrCheck()
+        Me.ucrReceiverDataToFit = New instat.ucrReceiverSingle()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlDistributions = New instat.UcrPanel()
         Me.grpDistributions.SuspendLayout()
         Me.grpEstimationMethods.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 290)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 51)
-        Me.ucrBase.TabIndex = 12
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.bAddRemoveParameter = True
-        Me.ucrAddRemove.bChangeParameterValue = True
-        Me.ucrAddRemove.bShowHiddenColumns = False
-        Me.ucrAddRemove.Location = New System.Drawing.Point(9, 24)
-        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 135)
-        Me.ucrAddRemove.TabIndex = 0
-        '
-        'ucrReceiverDataToFit
-        '
-        Me.ucrReceiverDataToFit.bAddRemoveParameter = True
-        Me.ucrReceiverDataToFit.bChangeParameterValue = True
-        Me.ucrReceiverDataToFit.frmParent = Me
-        Me.ucrReceiverDataToFit.Location = New System.Drawing.Point(224, 39)
-        Me.ucrReceiverDataToFit.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDataToFit.Name = "ucrReceiverDataToFit"
-        Me.ucrReceiverDataToFit.Selector = Nothing
-        Me.ucrReceiverDataToFit.Size = New System.Drawing.Size(143, 26)
-        Me.ucrReceiverDataToFit.TabIndex = 2
         '
         'lblDataToFit
         '
@@ -115,7 +85,7 @@ Partial Class dlgExtremes
         'rdoGumbel
         '
         Me.rdoGumbel.AutoSize = True
-        Me.rdoGumbel.Location = New System.Drawing.Point(9, 26)
+        Me.rdoGumbel.Location = New System.Drawing.Point(30, 26)
         Me.rdoGumbel.Name = "rdoGumbel"
         Me.rdoGumbel.Size = New System.Drawing.Size(61, 17)
         Me.rdoGumbel.TabIndex = 0
@@ -150,26 +120,6 @@ Partial Class dlgExtremes
         Me.lblSaveInMOM.Tag = ""
         Me.lblSaveInMOM.Text = "Save in:"
         '
-        'ucrChkMOM
-        '
-        Me.ucrChkMOM.bAddRemoveParameter = True
-        Me.ucrChkMOM.bChangeParameterValue = True
-        Me.ucrChkMOM.Checked = False
-        Me.ucrChkMOM.Location = New System.Drawing.Point(6, 59)
-        Me.ucrChkMOM.Name = "ucrChkMOM"
-        Me.ucrChkMOM.Size = New System.Drawing.Size(121, 20)
-        Me.ucrChkMOM.TabIndex = 3
-        '
-        'ucrChkMLE
-        '
-        Me.ucrChkMLE.bAddRemoveParameter = True
-        Me.ucrChkMLE.bChangeParameterValue = True
-        Me.ucrChkMLE.Checked = False
-        Me.ucrChkMLE.Location = New System.Drawing.Point(6, 23)
-        Me.ucrChkMLE.Name = "ucrChkMLE"
-        Me.ucrChkMLE.Size = New System.Drawing.Size(121, 20)
-        Me.ucrChkMLE.TabIndex = 0
-        '
         'lblSaveInMLE
         '
         Me.lblSaveInMLE.AutoSize = True
@@ -201,33 +151,16 @@ Partial Class dlgExtremes
         Me.lblAnd.Tag = "and"
         Me.lblAnd.Text = "To:"
         '
-        'UcrDialogDisabled1
+        'ucrInputTo
         '
-        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(59, 117)
-        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 89)
-        Me.UcrDialogDisabled1.TabIndex = 14
-        '
-        'ucrChkRestrictDataValues
-        '
-        Me.ucrChkRestrictDataValues.bAddRemoveParameter = True
-        Me.ucrChkRestrictDataValues.bChangeParameterValue = True
-        Me.ucrChkRestrictDataValues.Checked = False
-        Me.ucrChkRestrictDataValues.Location = New System.Drawing.Point(224, 77)
-        Me.ucrChkRestrictDataValues.Name = "ucrChkRestrictDataValues"
-        Me.ucrChkRestrictDataValues.Size = New System.Drawing.Size(123, 20)
-        Me.ucrChkRestrictDataValues.TabIndex = 3
-        '
-        'ucrChkProbPlot
-        '
-        Me.ucrChkProbPlot.bAddRemoveParameter = True
-        Me.ucrChkProbPlot.bChangeParameterValue = True
-        Me.ucrChkProbPlot.Checked = False
-        Me.ucrChkProbPlot.Location = New System.Drawing.Point(15, 167)
-        Me.ucrChkProbPlot.Name = "ucrChkProbPlot"
-        Me.ucrChkProbPlot.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkProbPlot.TabIndex = 8
+        Me.ucrInputTo.bAddRemoveParameter = True
+        Me.ucrInputTo.bChangeParameterValue = True
+        Me.ucrInputTo.IsMultiline = False
+        Me.ucrInputTo.IsReadOnly = False
+        Me.ucrInputTo.Location = New System.Drawing.Point(311, 121)
+        Me.ucrInputTo.Name = "ucrInputTo"
+        Me.ucrInputTo.Size = New System.Drawing.Size(56, 21)
+        Me.ucrInputTo.TabIndex = 7
         '
         'ucrInputFrom
         '
@@ -240,23 +173,40 @@ Partial Class dlgExtremes
         Me.ucrInputFrom.Size = New System.Drawing.Size(56, 21)
         Me.ucrInputFrom.TabIndex = 5
         '
-        'ucrInputTo
+        'UcrDialogDisabled1
         '
-        Me.ucrInputTo.bAddRemoveParameter = True
-        Me.ucrInputTo.bChangeParameterValue = True
-        Me.ucrInputTo.IsMultiline = False
-        Me.ucrInputTo.IsReadOnly = False
-        Me.ucrInputTo.Location = New System.Drawing.Point(311, 121)
-        Me.ucrInputTo.Name = "ucrInputTo"
-        Me.ucrInputTo.Size = New System.Drawing.Size(56, 21)
-        Me.ucrInputTo.TabIndex = 7
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(59, 117)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 89)
+        Me.UcrDialogDisabled1.TabIndex = 14
+        '
+        'ucrChkProbPlot
+        '
+        Me.ucrChkProbPlot.bAddRemoveParameter = True
+        Me.ucrChkProbPlot.bChangeParameterValue = True
+        Me.ucrChkProbPlot.Checked = False
+        Me.ucrChkProbPlot.Location = New System.Drawing.Point(15, 167)
+        Me.ucrChkProbPlot.Name = "ucrChkProbPlot"
+        Me.ucrChkProbPlot.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkProbPlot.TabIndex = 8
+        '
+        'ucrChkRestrictDataValues
+        '
+        Me.ucrChkRestrictDataValues.bAddRemoveParameter = True
+        Me.ucrChkRestrictDataValues.bChangeParameterValue = True
+        Me.ucrChkRestrictDataValues.Checked = False
+        Me.ucrChkRestrictDataValues.Location = New System.Drawing.Point(224, 77)
+        Me.ucrChkRestrictDataValues.Name = "ucrChkRestrictDataValues"
+        Me.ucrChkRestrictDataValues.Size = New System.Drawing.Size(123, 20)
+        Me.ucrChkRestrictDataValues.TabIndex = 3
         '
         'ucrInputMLE
         '
         Me.ucrInputMLE.bAddRemoveParameter = True
         Me.ucrInputMLE.bChangeParameterValue = True
         Me.ucrInputMLE.IsReadOnly = False
-        Me.ucrInputMLE.Location = New System.Drawing.Point(184, 20)
+        Me.ucrInputMLE.Location = New System.Drawing.Point(204, 19)
         Me.ucrInputMLE.Name = "ucrInputMLE"
         Me.ucrInputMLE.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputMLE.TabIndex = 2
@@ -270,6 +220,56 @@ Partial Class dlgExtremes
         Me.ucrInputMOM.Name = "ucrInputMOM"
         Me.ucrInputMOM.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputMOM.TabIndex = 5
+        '
+        'ucrChkMOM
+        '
+        Me.ucrChkMOM.bAddRemoveParameter = True
+        Me.ucrChkMOM.bChangeParameterValue = True
+        Me.ucrChkMOM.Checked = False
+        Me.ucrChkMOM.Location = New System.Drawing.Point(6, 59)
+        Me.ucrChkMOM.Name = "ucrChkMOM"
+        Me.ucrChkMOM.Size = New System.Drawing.Size(121, 20)
+        Me.ucrChkMOM.TabIndex = 3
+        '
+        'ucrChkMLE
+        '
+        Me.ucrChkMLE.bAddRemoveParameter = True
+        Me.ucrChkMLE.bChangeParameterValue = True
+        Me.ucrChkMLE.Checked = False
+        Me.ucrChkMLE.Location = New System.Drawing.Point(6, 23)
+        Me.ucrChkMLE.Name = "ucrChkMLE"
+        Me.ucrChkMLE.Size = New System.Drawing.Size(121, 20)
+        Me.ucrChkMLE.TabIndex = 0
+        '
+        'ucrReceiverDataToFit
+        '
+        Me.ucrReceiverDataToFit.bAddRemoveParameter = True
+        Me.ucrReceiverDataToFit.bChangeParameterValue = True
+        Me.ucrReceiverDataToFit.frmParent = Me
+        Me.ucrReceiverDataToFit.Location = New System.Drawing.Point(224, 39)
+        Me.ucrReceiverDataToFit.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDataToFit.Name = "ucrReceiverDataToFit"
+        Me.ucrReceiverDataToFit.Selector = Nothing
+        Me.ucrReceiverDataToFit.Size = New System.Drawing.Size(143, 26)
+        Me.ucrReceiverDataToFit.TabIndex = 2
+        '
+        'ucrAddRemove
+        '
+        Me.ucrAddRemove.bAddRemoveParameter = True
+        Me.ucrAddRemove.bChangeParameterValue = True
+        Me.ucrAddRemove.bShowHiddenColumns = False
+        Me.ucrAddRemove.Location = New System.Drawing.Point(9, 24)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 135)
+        Me.ucrAddRemove.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 290)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 51)
+        Me.ucrBase.TabIndex = 12
         '
         'ucrPnlDistributions
         '

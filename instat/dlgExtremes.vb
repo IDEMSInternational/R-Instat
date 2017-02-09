@@ -84,7 +84,7 @@ Public Class dlgExtremes
         ucrChkMOM.SetParameter(ucrInputMOM.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkMOM.AddToLinkedControls(ucrLinked:=ucrInputMOM, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMOM.bAddRemoveParameter = False
-        ucrInputMOM.SetLinkedDisplayControl(lblSaveinMOM)
+        ucrInputMOM.SetLinkedDisplayControl(lblSaveInMOM)
 
         ' not sure if "Save in" for the cbos refers to where to display the output (i.e., output window, column) or something else.
         ' Kept it as cbo for the time being.
