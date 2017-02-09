@@ -49,6 +49,7 @@ Partial Class dlgName
         '
         'ucrInputNewName
         '
+        Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
         Me.ucrInputNewName.Location = New System.Drawing.Point(257, 83)
         Me.ucrInputNewName.Name = "ucrInputNewName"
@@ -58,7 +59,7 @@ Partial Class dlgName
         'ucrSelectVariables
         '
         Me.ucrSelectVariables.bShowHiddenColumns = False
-        Me.ucrSelectVariables.bUseCurrentFilter = False
+        Me.ucrSelectVariables.bUseCurrentFilter = True
         Me.ucrSelectVariables.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectVariables.Name = "ucrSelectVariables"
@@ -74,6 +75,7 @@ Partial Class dlgName
         '
         'ucrReceiverName
         '
+        Me.ucrReceiverName.frmParent = Me
         Me.ucrReceiverName.Location = New System.Drawing.Point(257, 33)
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
