@@ -50,6 +50,7 @@ Public Class dlgRandomSubsets
         ucrNudSetSeed.Minimum = 1
         ucrNudSetSeed.SetRDefault(1)
         ucrChkSetSeed.SetText("Seed")
+        ucrNudSetSeed.Enabled = False
 
 
         'Replace checkbox
