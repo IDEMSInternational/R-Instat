@@ -103,7 +103,7 @@ Partial Class dlgRandomSubsets
         Me.ucrSaveRandoSubsets.bChangeParameterValue = True
         Me.ucrSaveRandoSubsets.Location = New System.Drawing.Point(10, 236)
         Me.ucrSaveRandoSubsets.Name = "ucrSaveRandoSubsets"
-        Me.ucrSaveRandoSubsets.Size = New System.Drawing.Size(275, 24)
+        Me.ucrSaveRandoSubsets.Size = New System.Drawing.Size(326, 24)
         Me.ucrSaveRandoSubsets.TabIndex = 18
         '
         'ucrNudSampleSize
@@ -155,7 +155,7 @@ Partial Class dlgRandomSubsets
         Me.ucrChkWithReplacement.Checked = False
         Me.ucrChkWithReplacement.Location = New System.Drawing.Point(257, 210)
         Me.ucrChkWithReplacement.Name = "ucrChkWithReplacement"
-        Me.ucrChkWithReplacement.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkWithReplacement.Size = New System.Drawing.Size(186, 20)
         Me.ucrChkWithReplacement.TabIndex = 22
         '
         'ucrChkSetSeed
