@@ -218,9 +218,9 @@ Public Class ucrSave
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateRCode()
+    Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
         UpdateAssignTo()
-        UpdateLinkedControls()
+        UpdateLinkedControls(bReset)
     End Sub
 
     Private Sub UpdateAssignTo(Optional bRemove As Boolean = False)
