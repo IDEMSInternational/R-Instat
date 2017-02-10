@@ -32,7 +32,7 @@ Partial Class dlgFreezeColumns
         '
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bShowHiddenColumns = False
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bUseCurrentFilter = True
-        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Location = New System.Drawing.Point(12, 0)
+        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Name = "ucrSelectorByDataFrameAddRemoveforFreezeColumns"
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Size = New System.Drawing.Size(210, 180)
@@ -41,7 +41,7 @@ Partial Class dlgFreezeColumns
         'ucrReceiverMultipleforFreezeColumns
         '
         Me.ucrReceiverMultipleforFreezeColumns.frmParent = Me
-        Me.ucrReceiverMultipleforFreezeColumns.Location = New System.Drawing.Point(240, 28)
+        Me.ucrReceiverMultipleforFreezeColumns.Location = New System.Drawing.Point(240, 36)
         Me.ucrReceiverMultipleforFreezeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleforFreezeColumns.Name = "ucrReceiverMultipleforFreezeColumns"
         Me.ucrReceiverMultipleforFreezeColumns.Selector = Nothing
@@ -50,7 +50,7 @@ Partial Class dlgFreezeColumns
         '
         'ucrBaseforFreezeColumns
         '
-        Me.ucrBaseforFreezeColumns.Location = New System.Drawing.Point(12, 198)
+        Me.ucrBaseforFreezeColumns.Location = New System.Drawing.Point(10, 193)
         Me.ucrBaseforFreezeColumns.Name = "ucrBaseforFreezeColumns"
         Me.ucrBaseforFreezeColumns.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseforFreezeColumns.TabIndex = 3
@@ -58,7 +58,7 @@ Partial Class dlgFreezeColumns
         'lblFreezeColumns
         '
         Me.lblFreezeColumns.AutoSize = True
-        Me.lblFreezeColumns.Location = New System.Drawing.Point(237, 9)
+        Me.lblFreezeColumns.Location = New System.Drawing.Point(243, 17)
         Me.lblFreezeColumns.Name = "lblFreezeColumns"
         Me.lblFreezeColumns.Size = New System.Drawing.Size(85, 13)
         Me.lblFreezeColumns.TabIndex = 1
