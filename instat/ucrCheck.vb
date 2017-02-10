@@ -126,4 +126,14 @@ Public Class ucrCheck
             MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
         End If
     End Sub
+
+    Public Overrides Function CanAddParameter() As Boolean
+        If bChangeParameterValue Then
+            Return MyBase.CanAddParameter()
+        ElseIf bAddRemoveParameter Then
+            Return Checked
+        Else
+            Return False
+        End If
+    End Function
 End Class
