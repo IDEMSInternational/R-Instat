@@ -36,7 +36,6 @@ Public Class dlgOneVarCompareModels
         TestOKEnabled()
     End Sub
 
-    ' want: gofstat(f=InstatDataObject$get_models(model_name="dist1hjhj", data_name="Damango"))
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 174
         ucrBase.clsRsyntax.iCallType = 2
@@ -51,7 +50,7 @@ Public Class dlgOneVarCompareModels
         UcrReceiver.SetMeAsReceiver()
 
 
-        'sdgOneVarCompareModels.InitialiseDialog()
+        ' sdgOneVarCompareModels.InitialiseDialog()
         ' sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         ' sdgOneVarCompareModels.SetReceiver(UcrReceiver)
         ' sdgOneVarCompareModels.DisplayChiSquare()
