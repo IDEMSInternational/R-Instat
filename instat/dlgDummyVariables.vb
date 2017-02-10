@@ -43,16 +43,16 @@ Public Class dlgDummyVariables
     Private Sub SetDefaults()
         ' Set default RFunction as the base function
         Dim clsDefaultFunction As New RFunction
-        clsDefaultFunction.SetRCommand("dummy")
-        clsDefaultFunction.SetAssignTo(strTemp:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-        clsDefaultFunction.SetAssignTo("dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy")
-
 
         ucrSelectorDummyVariable.Focus()
         ucrSelectorDummyVariable.Reset()
 
+        clsDefaultFunction.SetRCommand("dummy")
+        clsDefaultFunction.SetAssignTo(strTemp:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
+        clsDefaultFunction.SetAssignTo("dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-              TestOkEnabled()
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -77,9 +77,7 @@ Public Class dlgDummyVariables
         'ucrPnlLevelOmitted.AddRadioButton(rdoLast, "")
         'ucrPnlLevelOmitted.AddRadioButton(rdoLevelNumber, "")
 
-
-
-
+        ucrChkWithXVariable.Enabled = False
         ucrChkWithXVariable.SetText("With X Variable")
         ' ucrChkWithXVariable.SetParameter(New RParameter(""))
 
@@ -88,7 +86,7 @@ Public Class dlgDummyVariables
         'ucrSaveDummy.SetPrefix("dummy")
         'ucrSaveDummy.SetSaveTypeAsColumn()
         'ucrSaveDummy.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
-        'ucrSaveDummy.SetCheckBoxText("Save Dummy")
+        'ucrSaveDummy.SetCheckBoxText("Save Dummy:")
         'ucrSaveDummy.SetIsComboBox()
 
         ucrVariateReceiver.Visible = False
@@ -111,6 +109,7 @@ Public Class dlgDummyVariables
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
