@@ -40,6 +40,7 @@ Public Class dlgRank
         ucrReceiverRank.Selector = ucrSelectorForRank
         ucrReceiverRank.SetMeAsReceiver()
         ucrReceiverRank.SetIncludedDataTypes({"numeric"})
+        ucrReceiverRank.bUseFilteredData = False
         ucrReceiverRank.SetParameter(New RParameter("x", 0))
         ucrReceiverRank.SetParameterIsRFunction()
 
