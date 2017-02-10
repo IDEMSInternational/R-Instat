@@ -17,6 +17,15 @@ Imports instat
 Public Class UcrPanel
     Private dctRadioButtonValues As New Dictionary(Of RadioButton, String)
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bAllowNonConditionValues = False
+    End Sub
+
     Private Sub AddRadioButtonRange(lstRadioButtons As RadioButton(), Optional bRepositionControls As Boolean = True)
         pnlRadios.Controls.AddRange(lstRadioButtons)
         For Each rdoTemp As RadioButton In lstRadioButtons
@@ -66,18 +75,29 @@ Public Class UcrPanel
 
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim rdoTemp As RadioButton
-
-        If TypeOf objTemp Is RadioButton Then
-            rdoTemp = DirectCast(objTemp, RadioButton)
-            rdoTemp.Checked = True
-        Else
-            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
+        If objTemp IsNot Nothing Then
+            If TypeOf objTemp Is RadioButton Then
+                rdoTemp = DirectCast(objTemp, RadioButton)
+                rdoTemp.Checked = True
+            Else
+                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
+            End If
         End If
     End Sub
 
-    Private Sub UcrPanel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        bAllowNonConditionValues = False
-    End Sub
+    Public Overrides Function GetValueToSet() As Object
+        Dim rdoTemp As RadioButton
+
+        For Each ctrTemp As Control In pnlRadios.Controls
+            If TypeOf ctrTemp Is RadioButton Then
+                rdoTemp = CType(ctrTemp, RadioButton)
+                If rdoTemp.Checked Then
+                    Return rdoTemp
+                End If
+            End If
+        Next
+        Return Nothing
+    End Function
 
     Public Overrides Function ControlValueContainedIn(lstTemp() As Object) As Boolean
         Dim rdoTemp As RadioButton
