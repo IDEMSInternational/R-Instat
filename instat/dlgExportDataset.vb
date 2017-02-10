@@ -29,6 +29,7 @@ Public Class dlgExportDataset
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        TestOkEnabled()
         autoTranslate(Me)
     End Sub
 
@@ -51,12 +52,13 @@ Public Class dlgExportDataset
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
+        ucrInputExportFile.SetName("")
         ucrInputExportFile.IsReadOnly = True
-        ucrInputExportFile.Reset()
         ucrAvailableSheets.Reset()
         clsDefaultFunction.SetRCommand("rio::export")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
@@ -70,7 +72,6 @@ Public Class dlgExportDataset
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
