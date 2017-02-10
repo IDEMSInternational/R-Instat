@@ -55,26 +55,26 @@ Public Class dlgTransformText
         ucrPnlOperation.AddRadioButton(rdoWords)
         ucrPnlOperation.AddRadioButton(rdoSubstring)
 
-        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "stringr::str_to_lower")
-        ucrPnlOperation.AddFunctionNamesCondition(rdoLength, "stringr::str_length")
-        ucrPnlOperation.AddFunctionNamesCondition(rdoPad, "stringr::str_pad")
-        ucrPnlOperation.AddFunctionNamesCondition(rdoTrim, "stringr::str_trim")
-        ucrPnlOperation.AddFunctionNamesCondition(rdoWords, "stringr::word")
-        ucrPnlOperation.AddFunctionNamesCondition(rdoSubstring, "stringr::str_sub")
+        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "str_to_lower")
+        ucrPnlOperation.AddFunctionNamesCondition(rdoLength, "str_length")
+        ucrPnlOperation.AddFunctionNamesCondition(rdoPad, "str_pad")
+        ucrPnlOperation.AddFunctionNamesCondition(rdoTrim, "str_trim")
+        ucrPnlOperation.AddFunctionNamesCondition(rdoWords, "word")
+        ucrPnlOperation.AddFunctionNamesCondition(rdoSubstring, "str_sub")
 
         'rdoConvertCase
-        ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrInputTo, {rdoConvertCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Lower")
 
         'ucrInputTo
         ucrInputTo.SetItems({"Lower", "Upper", "Title"})
-        ucrInputTo.AddFunctionNamesCondition("Lower", "stringr::str_to_lower")
-        ucrInputTo.AddFunctionNamesCondition("Upper", "stringr::str_to_upper")
-        ucrInputTo.AddFunctionNamesCondition("Title", "stringr::str_to_title")
+        ucrInputTo.AddFunctionNamesCondition("Lower", "str_to_lower")
+        ucrInputTo.AddFunctionNamesCondition("Upper", "str_to_upper")
+        ucrInputTo.AddFunctionNamesCondition("Title", "str_to_title")
         ucrInputTo.SetLinkedDisplayControl(lblTo)
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         'ucrInputPad
         Dim dctInputPad As New Dictionary(Of String, String)
@@ -92,7 +92,6 @@ Public Class dlgTransformText
         'ucrNudWidth
         ucrNudWidth.SetParameter(New RParameter("width"))
         ucrNudWidth.SetLinkedDisplayControl(lblWidth)
-        ucrNudWidth.SetRDefault(1)
 
         'rdoTrim and pnl
         ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad, rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -101,10 +100,12 @@ Public Class dlgTransformText
         ucrPnlPad.AddRadioButton(rdoLeftPad, Chr(34) & "left" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoRightPad, Chr(34) & "right" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoBothPad, Chr(34) & "both" & Chr(34))
-        ucrPnlPad.SetRDefault(Chr(34) & "left" & Chr(34)) ' left is the R default
+        ucrPnlPad.SetRDefault(Chr(34) & "left" & Chr(34))
 
         'rdoWords
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Space")
+        ' There is no default set here. However, if I use the above line then I get a developer error. Similarly so for ucrInputPad
 
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
@@ -128,22 +129,17 @@ Public Class dlgTransformText
         ucrInputSeparator.SetItems(dctInputSeparator)
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
         ucrInputSeparator.SetRDefault(Chr(34) & " " & Chr(34))
-        ' this does not default upon pressing reset, this is because this is not added as a parameter
-        ' not added as param. because of linking. Not necessarily a parameter
-        ' wait for Danny's updated code to do a set Default for this, nuds, etc - all things linked.
 
         'rdoSubstring
-        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         'ucrNud
         ucrNudFrom.SetParameter(New RParameter("start"))
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
-        ucrNudFrom.SetRDefault(1)
 
         ucrNudTo.SetParameter(New RParameter("end"))
         ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
-        ucrNudTo.SetRDefault(1)
 
         'ucrNewColName
         ucrNewColName.SetIsTextBox()
@@ -154,6 +150,7 @@ Public Class dlgTransformText
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
+        rdoConvertCase.Checked = True ' this should run WordsTab()?
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
         ucrChkFirstOr.Checked = False
@@ -164,7 +161,7 @@ Public Class dlgTransformText
         NewDefaultName()
         WordsTab()
 
-        clsDefaultFunction.SetRCommand("stringr::str_to_lower")
+        clsDefaultFunction.SetRCommand("str_to_lower")
         clsDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
