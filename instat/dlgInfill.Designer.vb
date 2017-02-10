@@ -39,6 +39,8 @@ Partial Class dlgInfill
         '
         'ucrInfillSelector
         '
+        Me.ucrInfillSelector.bAddRemoveParameter = True
+        Me.ucrInfillSelector.bChangeParameterValue = True
         Me.ucrInfillSelector.bShowHiddenColumns = False
         Me.ucrInfillSelector.bUseCurrentFilter = True
         Me.ucrInfillSelector.Location = New System.Drawing.Point(9, 9)
@@ -49,6 +51,8 @@ Partial Class dlgInfill
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.bAddRemoveParameter = True
+        Me.ucrReceiverDate.bChangeParameterValue = True
         Me.ucrReceiverDate.frmParent = Me
         Me.ucrReceiverDate.Location = New System.Drawing.Point(278, 37)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
@@ -59,6 +63,8 @@ Partial Class dlgInfill
         '
         'ucrReceiverFactors
         '
+        Me.ucrReceiverFactors.bAddRemoveParameter = True
+        Me.ucrReceiverFactors.bChangeParameterValue = True
         Me.ucrReceiverFactors.frmParent = Me
         Me.ucrReceiverFactors.Location = New System.Drawing.Point(278, 90)
         Me.ucrReceiverFactors.Margin = New System.Windows.Forms.Padding(0)
@@ -70,7 +76,7 @@ Partial Class dlgInfill
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(275, 13)
+        Me.lblDate.Location = New System.Drawing.Point(282, 18)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 1
