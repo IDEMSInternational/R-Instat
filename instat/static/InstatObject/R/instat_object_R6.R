@@ -844,7 +844,7 @@ instat_object$set("public","copy_data_frame", function(data_name, new_name) {
 } 
 )
 
-instat_object$set("public","set_hidden_columns", function(data_name, col_names) {
+instat_object$set("public","set_hidden_columns", function(data_name, col_names=c()) {
   self$get_data_objects(data_name)$set_hidden_columns(col_names = col_names)
 } 
 )
