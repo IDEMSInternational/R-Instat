@@ -1153,7 +1153,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
 }
 )
 
-data_object$set("public", "set_hidden_columns", function(col_names=c()) {
+data_object$set("public", "set_hidden_columns", function(col_names = c()) {
   if(length(col_names) == 0) self$unhide_all_columns()
   else {
     if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
