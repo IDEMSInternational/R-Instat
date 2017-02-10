@@ -13,50 +13,61 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports instat
 Imports instat.Translations
 Public Class dlgReorderLevels
     Public bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-
             InitialiseDialog()
-            'SetDefaultSettings()
-            SetDefaultSettings()
+            SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
-
         TestOKEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+        ucrBase.iHelpTopicID = 36
+        ucrBase.clsRsyntax.iCallType = 0
+
+        ucrSelectorFactorLevelsToReorder.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorFactorLevelsToReorder.SetParameterIsString()
+
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverFactor.SetParameterIsString()
+
         ucrReorderFactor.setReceiver(ucrReceiverFactor)
         ucrReorderFactor.setDataType("factor")
-        ucrBase.iHelpTopicID = 36
+        'ucrReorderFactor.SetParameter(New RParameter("new_level_names"))
+        'ucrReorderFactor.SetParameterIsString()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+
     End Sub
-    Private Sub SetDefaultSettings()
+
+    Private Sub SetDefaults()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrSelectorFactorLevelsToReorder.Reset()
-        ucrSelectorFactorLevelsToReorder.Focus()
-        ucrReorderFactor.Reset()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorFactorLevelsToReorder_DataFrameChanged() Handles ucrSelectorFactorLevelsToReorder.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverFactor.GetVariableNames)
+    Private Sub ReOpenDialog()
         TestOKEnabled()
     End Sub
 
+    'this should be removed once the control has inherited from ucrcore
     Private Sub ucrReorderFactor_Leave(sender As Object, e As EventArgs) Handles ucrReorderFactor.Leave
         ucrBase.clsRsyntax.AddParameter("new_level_names", ucrReorderFactor.GetVariableNames)
     End Sub
+
     Private Sub TestOKEnabled()
         If Not ucrReceiverFactor.IsEmpty Then
             ucrBase.OKEnabled(True)
@@ -66,6 +77,10 @@ Public Class dlgReorderLevels
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaultSettings()
+        SetDefaults()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFactorLevelsToReorder.ControlContentsChanged, ucrReceiverFactor.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
