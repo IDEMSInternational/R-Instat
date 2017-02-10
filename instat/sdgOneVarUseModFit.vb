@@ -101,7 +101,7 @@ Public Class sdgOneVarUseModFit
     End Sub
 
     Public Sub SetPlotOptions()
-        If Not dlgOneVarUseModel.chkProduceBootstrap.Checked Then
+        If Not dlgOneVarUseModel.ucrChkProduceBootstrap.Checked Then
             rdoCIcdf.Enabled = False
             If rdoCIcdf.Checked Then
                 rdoPlotAll.Checked = True
