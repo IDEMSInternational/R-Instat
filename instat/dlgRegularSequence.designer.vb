@@ -173,7 +173,7 @@ Partial Class dlgRegularSequence
         '
         'ucrDataFrameLengthForRegularSequence
         '
-        Me.ucrDataFrameLengthForRegularSequence.clsDataFrameSelector = Nothing
+        Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
         Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 130)
         Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
         Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(51, 23)

@@ -30,19 +30,19 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim lstPatternPairs As New List(Of KeyValuePair(Of String, String))
+        Dim dctPatternPairs As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 344
 
         ucrInputPattern.SetParameter(New RParameter("pattern"))
-        lstPatternPairs.Add(New KeyValuePair(Of String, String)("Space ( )", Chr(34) & " " & Chr(34)))
-        lstPatternPairs.Add(New KeyValuePair(Of String, String)("Period .", "fixed(" & Chr(34) & "." & Chr(34) & ")"))
-        lstPatternPairs.Add(New KeyValuePair(Of String, String)("Comma ,", Chr(34) & "," & Chr(34)))
-        lstPatternPairs.Add(New KeyValuePair(Of String, String)("Colon :", Chr(34) & ":" & Chr(34)))
-        lstPatternPairs.Add(New KeyValuePair(Of String, String)("Semicolon ;", Chr(34) & ";" & Chr(34)))
-        lstPatternPairs.Add(New KeyValuePair(Of String, String)("Hyphen -", Chr(34) & "-" & Chr(34)))
-        lstPatternPairs.Add(New KeyValuePair(Of String, String)("Underscore _", Chr(34) & "_" & Chr(34)))
-        ucrInputPattern.SetItems(lstPatternPairs)
+        dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
+        dctPatternPairs.Add("Period .", "fixed(" & Chr(34) & "." & Chr(34) & ")")
+        dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
+        dctPatternPairs.Add("Colon :", Chr(34) & ":" & Chr(34))
+        dctPatternPairs.Add("Semicolon ;", Chr(34) & ";" & Chr(34))
+        dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
+        dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
+        ucrInputPattern.SetItems(dctPatternPairs)
 
         ucrReceiverSplitTextColumn.SetParameter(New RParameter("string"))
         ucrReceiverSplitTextColumn.SetParameterIsRFunction()

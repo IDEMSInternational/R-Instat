@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgInfill
     Private bFirstLoad As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgInfill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -27,23 +28,41 @@ Public Class dlgInfill
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
+        'Task: Help ID for this dialogue need to be added.
+        ' ucrBase.iHelpTopicID=
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
+
+        'Set receiver
         ucrReceiverDate.Selector = ucrInfillSelector
-        ucrReceiverFactors.Selector = ucrInfillSelector
+        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverDate.SetDataType("Date")
+        ucrReceiverDate.SetParameter(New RParameter("date_name", 1))
+        ucrReceiverDate.SetParameterIsString()
+
+        'Set ucrreceiver factors
         ucrReceiverFactors.SetIncludedDataTypes({"factor"})
-        'ucrBase.iHelpTopicID
+        ucrReceiverFactors.Selector = ucrInfillSelector
+        ucrReceiverFactors.SetParameter(New RParameter("factors", 2))
+        ucrReceiverFactors.SetParameterIsString()
+
+        'Set data frame parameter
+        ucrInfillSelector.SetParameter(New RParameter("data_name", 0))
+        ucrInfillSelector.SetParameterIsString()
+
     End Sub
 
     Private Sub SetDefaults()
+        ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrInfillSelector.Reset()
-        ucrReceiverDate.SetMeAsReceiver()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
         TestOkEnabled()
     End Sub
     Private Sub TestOkEnabled()
-        If ucrReceiverDate.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not (ucrReceiverDate.IsEmpty) OrElse Not (ucrReceiverFactors.IsEmpty) Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -51,24 +70,7 @@ Public Class dlgInfill
         SetDefaults()
     End Sub
 
-    Private Sub ucrInfillSelector_DataFrameChanged() Handles ucrInfillSelector.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
-        If Not ucrReceiverDate.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("date_name", ucrReceiverDate.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("date_name")
-        End If
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverFactors_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactors.SelectionChanged
-        If Not ucrReceiverDate.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("factors", ucrReceiverFactors.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("factors")
-        End If
     End Sub
 End Class
