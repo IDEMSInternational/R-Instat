@@ -17,38 +17,54 @@
 Imports instat.Translations
 
 Public Class dlgOneVarCompareModels
-    Public bfirstload As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    'Private bResetSubdialog As Boolean = False
 
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bfirstload Then
-            InitialiseDialog()
-            SetDefaults()
-            bfirstload = False
-        Else
-            ReopenDialog()
-        End If
         autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
+        TestOKEnabled()
     End Sub
 
+    ' want: gofstat(f=InstatDataObject$get_models(model_name="dist1hjhj", data_name="Damango"))
     Private Sub InitialiseDialog()
-        sdgOneVarCompareModels.InitialiseDialog()
         ucrBase.iHelpTopicID = 174
         ucrBase.clsRsyntax.iCallType = 2
+
+        'ucrSelector
+        ucrSelectorOneVarCompModels.SetItemType("model")
+
+        'ucrReceiver
+        UcrReceiver.SetParameter(New RParameter("f", 0))
+        UcrReceiver.SetParameterIsRFunction()
         UcrReceiver.Selector = ucrSelectorOneVarCompModels
         UcrReceiver.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction("gofstat")
-        ucrSelectorOneVarCompModels.SetItemType("model")
-        sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
-        sdgOneVarCompareModels.SetReceiver(UcrReceiver)
-        sdgOneVarCompareModels.DisplayChiSquare()
-        sdgOneVarCompareModels.DisplayChiBreaks()
+
+
+        'sdgOneVarCompareModels.InitialiseDialog()
+        ' sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        ' sdgOneVarCompareModels.SetReceiver(UcrReceiver)
+        ' sdgOneVarCompareModels.DisplayChiSquare()
+        ' sdgOneVarCompareModels.DisplayChiBreaks()
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorOneVarCompModels.Reset()
-        ucrSelectorOneVarCompModels.Focus()
-        sdgOneVarCompareModels.SetDefaults()
-        TestOKEnabled()
+
+        clsDefaultFunction.SetRCommand("gofstat")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ' bResetSubdialog = True
     End Sub
 
     'Only distributions that can be accepted into the receiver have to be from the same variable
@@ -60,47 +76,46 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Public Sub TestOKEnabled()
-        If sdgOneVarCompareModels.TestOkEnabled() AndAlso Not UcrReceiver.IsEmpty Then
+        If Not UcrReceiver.IsEmpty Then 'sdgOneVarCompareModels.TestOkEnabled() AndAlso Not  Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorOneVarCompModels_DataFrameChanged() Handles ucrSelectorOneVarCompModels.DataFrameChanged
-        sdgOneVarCompareModels.DisplayChiSquare()
+        '    sdgOneVarCompareModels.DisplayChiSquare()
     End Sub
 
-    Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
+    Private Sub UcrReceiver_SelectionChanged(ucrChangedControl As ucrCore) Handles UcrReceiver.ControlContentsChanged
         If UcrReceiver.IsEmpty Then
             cmdDisplayObjects.Enabled = False
         Else
             cmdDisplayObjects.Enabled = True
         End If
-        ucrBase.clsRsyntax.AddParameter("f", clsRFunctionParameter:=UcrReceiver.GetVariables())
-        sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         TestOKEnabled()
+        '        sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
-        sdgOneVarCompareModels.ShowDialog()
-        EnableOptions()
-        TestOKEnabled()
-    End Sub
+        '        sdgOneVarCompareModels.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        'bResetSubdialog = False
+        'sdgOneVarCompareModels.ShowDialog()
 
-    Private Sub EnableOptions()
-        If Not UcrReceiver.IsEmpty Then
-            cmdDisplayObjects.Enabled = True
-        Else
-            cmdDisplayObjects.Enabled = False
-        End If
+        ''TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgOneVarCompareModels.CreateGraphs()
+        '    sdgOneVarCompareModels.CreateGraphs()
     End Sub
 End Class
