@@ -60,13 +60,13 @@ Public Class dlgName
     Private Sub Initialisedialog()
         ucrReceiverName.Selector = ucrSelectVariables
         ucrReceiverName.SetMeAsReceiver()
-        ucrReceiverName.SetParameter(New RParameter("column_name"))
+        ucrReceiverName.SetParameter(New RParameter("column_name", 1))
         ucrReceiverName.SetParameterIsString()
-        ucrSelectVariables.SetParameter(New RParameter("data_name"))
+        ucrSelectVariables.SetParameter(New RParameter("data_name", 0))
         ucrSelectVariables.SetParameterIsString()
         ucrBase.iHelpTopicID = 33
         DefaultNewName()
-        ucrInputNewName.SetParameter(New RParameter("new_val"))
+        ucrInputNewName.SetParameter(New RParameter("new_val", 2))
         ucrInputNewName.SetValidationTypeAsRVariable()
     End Sub
 
