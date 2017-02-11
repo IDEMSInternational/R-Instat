@@ -23,6 +23,10 @@ Public Class sdgOneVarGraph
         autoTranslate(Me)
     End Sub
 
+    Private Sub sdgOneVarGraph_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+    End Sub
+
     Public Sub InitialiseControls()
         Dim dctNumericPairs As New Dictionary(Of String, String)
         Dim dctCategoricalPairs As New Dictionary(Of String, String)
@@ -48,15 +52,13 @@ Public Class sdgOneVarGraph
         ucrInputCategorical.SetItems(dctCategoricalPairs)
 
         ucrNudNumberofColumns.SetParameter(New RParameter("ncol"))
-        ucrChkSpecifyLayout.SetParameter(ucrNudNumberofColumns.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
         ucrNudNumberofColumns.SetMinMax(1, 10)
         ucrNudNumberofColumns.bAddRemoveParameter = False
-        ucrNudNumberofColumns.SetLabel(lblNumberofColumns)
+        ucrNudNumberofColumns.SetLinkedDisplayControl(lblNumberofColumns)
 
+        ucrChkSpecifyLayout.SetParameter(ucrNudNumberofColumns.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkSpecifyLayout.SetText("Specify Layout")
-        ucrChkSpecifyLayout.bChangeParameterValue = False
-        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
         ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis"))

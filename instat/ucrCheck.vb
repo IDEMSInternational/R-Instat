@@ -79,7 +79,7 @@ Public Class ucrCheck
         End Set
     End Property
 
-    Public Overrides Function ValueContainedIn(lstTemp As Object()) As Boolean
+    Public Overrides Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Dim bTempValue As Boolean
         Dim bContainedIn As Boolean = False
 
@@ -126,4 +126,14 @@ Public Class ucrCheck
             MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
         End If
     End Sub
+
+    Public Overrides Function CanAddParameter() As Boolean
+        If bChangeParameterValue Then
+            Return MyBase.CanAddParameter()
+        ElseIf bAddRemoveParameter Then
+            Return Checked
+        Else
+            Return False
+        End If
+    End Function
 End Class

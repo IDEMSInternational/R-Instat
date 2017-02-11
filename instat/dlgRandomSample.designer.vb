@@ -124,7 +124,7 @@ Partial Class dlgRandomSample
         '
         'ucrSampleSize
         '
-        Me.ucrSampleSize.clsDataFrameSelector = Nothing
+        Me.ucrSampleSize.ucrDataFrameSelector = Nothing
         Me.ucrSampleSize.Location = New System.Drawing.Point(344, 120)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
