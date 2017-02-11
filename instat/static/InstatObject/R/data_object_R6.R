@@ -2000,3 +2000,27 @@ data_object$set("public","get_key_names", function(include_overall = TRUE, inclu
   return(out)
 }
 )
+
+all_corruption_column_types <- c() # i am not quite sure about all the corrupton column data types. Should that be the 18 that corresprond to the 18 receivers we have?
+
+# Column metadata for corruption colums
+corruption_type_label = "Corruption_Type"
+
+# Data frame metadata for corruption dataframes
+is_corruption_label = "Is_Corruption"
+
+instat_object$set("public","define_as_corruption", function(data_name, types) {
+  self$append_to_dataframe_metadata(data_name, is_corruption_label, TRUE)
+  for(curr_data_name in self$get_data_names()) {
+    if(!self$get_data_objects(data_name)$is_metadata(is_corruption_label)) {
+      self$append_to_dataframe_metadata(curr_data_name, is_corruption_label, FALSE)
+    }
+  }
+  self$get_data_objects(data_name)$set_corruption_types(types)
+}
+)
+data_object$set("public","set_corruption_types", function(types) {
+  if(!all(names(types) %in% all_corruption_column_types)) stop("Cannot recognise the following corruption data types: ", paste(names(types)[!names(types) %in% all_corruption_column_types], collapse = ", "))
+  invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], corruption_type_label, name)))
+}
+)
