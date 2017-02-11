@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgInsertColumn
@@ -61,6 +62,14 @@ Public Class dlgInsertColumn
         ucrPnlOptions.AddRadioButton(rdoBefore, Chr(34) & "TRUE" & Chr(34))
         ucrPnlOptions.SetRDefault(Chr(34) & "TRUE" & Chr(34))
 
+
+        ucrPnlInsert.SetParameter(New RParameter("before"))
+        ucrPnlInsert.AddRadioButton(rdoAtEnd, Chr(34) & "FALSE" & Chr(34))
+        ucrPnlInsert.AddRadioButton(rdoAtStart, Chr(34) & "TRUE" & Chr(34))
+        ucrPnlInsert.AddRadioButton(rdoBeforeAfter)
+        ucrPnlInsert.SetRDefault(Chr(34) & "TRUE" & Chr(34))
+
+
         ucrNudInsertColumns.SetParameter(New RParameter("num_cols"))
         ucrNudInsertColumns.SetLinkedDisplayControl(lblNumberOfColumnsToInsert)
         ucrNudInsertColumns.Minimum = 1
@@ -75,20 +84,23 @@ Public Class dlgInsertColumn
         ucrInputPrefixForInsertedColumns.SetParameter(New RParameter("col_name"))
         ucrInputDefaultValue.SetParameter(New RParameter("col_data"))
         ucrInputDefaultValue.SetLinkedDisplayControl(lblDefaultValue)
+
         ucrInputBeforeAfter.SetParameter(New RParameter("before"))
+        ucrInputBeforeAfter.SetRDefault(Chr(34) & "FALSE" & Chr(34))
 
 
         ucrPnlColRows.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         ucrPnlColRows.AddFunctionNamesCondition(rdoRows, frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
 
         'what to be shown when rdocolumns is selected
-        ucrPnlColRows.AddToLinkedControls(ucrDataFramesList, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrPnlColRows.AddToLinkedControls(ucrNudInsertColumns, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudInsertColumns.SetLinkedDisplayControl(lblNumberOfColumnsToInsert)
 
         ucrPnlColRows.AddToLinkedControls(ucrInputDefaultValue, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputDefaultValue.SetLinkedDisplayControl(lblDefaultValue)
+
+        ucrPnlColRows.AddToLinkedControls(ucrInputPrefixForInsertedColumns, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputPrefixForInsertedColumns.SetLinkedDisplayControl(lblPrefixforInsertedColumns)
 
         ucrPnlColRows.AddToLinkedControls(ucrPnlInsert, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlInsert.SetLinkedDisplayControl(grpInsert)
@@ -99,7 +111,7 @@ Public Class dlgInsertColumn
         'what to be shown when rdocolumns is selected
         ucrPnlColRows.AddToLinkedControls(ucrNudPos, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColRows.AddToLinkedControls(UcrNudNumCols, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColRows.AddToLinkedControls(ucrPnlOptions, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColRows.AddToLinkedControls(ucrPnlOptions, {rdoRows.Checked}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.SetLinkedDisplayControl(grpOptions)
 
         ucrInputBeforeAfter.SetItems({"Before", "After"})
@@ -155,10 +167,6 @@ Public Class dlgInsertColumn
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDefaultFunction.AddParameter("num_cols", 1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-    End Sub
-
-    Private Sub ucrNudPos_TextChanged(sender As Object, e As EventArgs)
-        startpo()
     End Sub
 
     Private Sub startpo()
@@ -308,8 +316,6 @@ Public Class dlgInsertColumn
                         ucrBase.clsRsyntax.AddParameter("before", "FALSE")
                 End Select
             End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("before")
         End If
     End Sub
 
@@ -399,5 +405,13 @@ Public Class dlgInsertColumn
 
     Private Sub ucrPnlInsert_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlInsert.ControlValueChanged, ucrPnlColRows.ControlValueChanged
         OPtionstoInsert()
+    End Sub
+
+    Private Sub ucrInputBeforeAfter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputBeforeAfter.ControlValueChanged
+        BeforeAfterPara()
+    End Sub
+
+    Private Sub ucrSelectorInseertColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorInseertColumns.Load
+
     End Sub
 End Class
