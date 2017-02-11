@@ -56,7 +56,7 @@ Public Class dlgAppend
         ucrChkIncludeIDColumn.bChangeParameterValue = False
         ucrChkIncludeIDColumn.AddToLinkedControls(ucrLinked:=ucrInputIDColName, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputIDColName.bAddRemoveParameter = False
-        ucrInputIDColName.SetLabel(lblIDColName)
+        ucrInputIDColName.SetLinkedDisplayControl(lblIDColName)
 
 
     End Sub
