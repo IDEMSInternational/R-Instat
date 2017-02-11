@@ -117,7 +117,7 @@ Public Class dlgDefineCorruption
         Dim ClsDefaultFunction As New RFunction
 
         ucrDefineCorruptionSelector.Reset()
-        ClsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "")
+        ClsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "define_as_corruption")
         ucrBase.clsRsyntax.SetBaseRFunction(ClsDefaultFunction.Clone)
         TestOkEnabled()
     End Sub
