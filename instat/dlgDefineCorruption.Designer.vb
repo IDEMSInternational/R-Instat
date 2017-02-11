@@ -25,13 +25,21 @@ Partial Class dlgDefineCorruption
         Me.ucrDefineCorruptionSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.panClimateType = New System.Windows.Forms.Panel()
+        Me.lblPPPConversionRate = New System.Windows.Forms.Label()
         Me.lblNoBids = New System.Windows.Forms.Label()
+        Me.ucrReceiverPPPConversionRate = New instat.ucrReceiverSingle()
         Me.ucrReceiverNoBids = New instat.ucrReceiverSingle()
+        Me.ucrReceiverForeignWinner = New instat.ucrReceiverSingle()
         Me.ucrReceiverProcedureType = New instat.ucrReceiverSingle()
+        Me.lblForeignWinner = New System.Windows.Forms.Label()
         Me.lblProcedureType = New System.Windows.Forms.Label()
+        Me.ucrReceiverCountryISO = New instat.ucrReceiverSingle()
         Me.ucrReceiverOriginalContractValue = New instat.ucrReceiverSingle()
+        Me.lblCountryISO = New System.Windows.Forms.Label()
         Me.lblOriginalContractValue = New System.Windows.Forms.Label()
+        Me.ucrReceiverNoConsideredBids = New instat.ucrReceiverSingle()
         Me.ucrReceiverWinnerCountry = New instat.ucrReceiverSingle()
+        Me.lblNoConsideredBids = New System.Windows.Forms.Label()
         Me.lblWinnerCountry = New System.Windows.Forms.Label()
         Me.ucrReceiverProcuringAuthority = New instat.ucrReceiverSingle()
         Me.lblProcuringAuthority = New System.Windows.Forms.Label()
@@ -53,14 +61,6 @@ Partial Class dlgDefineCorruption
         Me.lblAwardDate = New System.Windows.Forms.Label()
         Me.lblSignatureDate = New System.Windows.Forms.Label()
         Me.lblCountry = New System.Windows.Forms.Label()
-        Me.lblNoConsideredBids = New System.Windows.Forms.Label()
-        Me.ucrReceiverNoConsideredBids = New instat.ucrReceiverSingle()
-        Me.lblCountryISO = New System.Windows.Forms.Label()
-        Me.ucrReceiverCountryISO = New instat.ucrReceiverSingle()
-        Me.lblForeignWinner = New System.Windows.Forms.Label()
-        Me.ucrReceiverForeignWinner = New instat.ucrReceiverSingle()
-        Me.ucrReceiverPPPConversionRate = New instat.ucrReceiverSingle()
-        Me.lblPPPConversionRate = New System.Windows.Forms.Label()
         Me.panClimateType.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -120,82 +120,158 @@ Partial Class dlgDefineCorruption
         Me.panClimateType.Controls.Add(Me.lblAwardDate)
         Me.panClimateType.Controls.Add(Me.lblSignatureDate)
         Me.panClimateType.Controls.Add(Me.lblCountry)
-        Me.panClimateType.Location = New System.Drawing.Point(280, 10)
+        Me.panClimateType.Location = New System.Drawing.Point(238, 10)
         Me.panClimateType.Name = "panClimateType"
         Me.panClimateType.Size = New System.Drawing.Size(172, 265)
         Me.panClimateType.TabIndex = 2
         '
+        'lblPPPConversionRate
+        '
+        Me.lblPPPConversionRate.AutoSize = True
+        Me.lblPPPConversionRate.Location = New System.Drawing.Point(13, 740)
+        Me.lblPPPConversionRate.Name = "lblPPPConversionRate"
+        Me.lblPPPConversionRate.Size = New System.Drawing.Size(113, 13)
+        Me.lblPPPConversionRate.TabIndex = 26
+        Me.lblPPPConversionRate.Text = "PPP Conversion Rate:"
+        '
         'lblNoBids
         '
         Me.lblNoBids.AutoSize = True
-        Me.lblNoBids.Location = New System.Drawing.Point(15, 570)
+        Me.lblNoBids.Location = New System.Drawing.Point(13, 568)
         Me.lblNoBids.Name = "lblNoBids"
         Me.lblNoBids.Size = New System.Drawing.Size(50, 13)
         Me.lblNoBids.TabIndex = 26
         Me.lblNoBids.Text = "No. Bids:"
         '
+        'ucrReceiverPPPConversionRate
+        '
+        Me.ucrReceiverPPPConversionRate.frmParent = Me
+        Me.ucrReceiverPPPConversionRate.Location = New System.Drawing.Point(13, 758)
+        Me.ucrReceiverPPPConversionRate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPPPConversionRate.Name = "ucrReceiverPPPConversionRate"
+        Me.ucrReceiverPPPConversionRate.Selector = Nothing
+        Me.ucrReceiverPPPConversionRate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPPPConversionRate.TabIndex = 27
+        '
         'ucrReceiverNoBids
         '
         Me.ucrReceiverNoBids.frmParent = Me
-        Me.ucrReceiverNoBids.Location = New System.Drawing.Point(14, 590)
+        Me.ucrReceiverNoBids.Location = New System.Drawing.Point(13, 586)
         Me.ucrReceiverNoBids.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverNoBids.Name = "ucrReceiverNoBids"
         Me.ucrReceiverNoBids.Selector = Nothing
         Me.ucrReceiverNoBids.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverNoBids.TabIndex = 27
         '
+        'ucrReceiverForeignWinner
+        '
+        Me.ucrReceiverForeignWinner.frmParent = Me
+        Me.ucrReceiverForeignWinner.Location = New System.Drawing.Point(13, 715)
+        Me.ucrReceiverForeignWinner.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForeignWinner.Name = "ucrReceiverForeignWinner"
+        Me.ucrReceiverForeignWinner.Selector = Nothing
+        Me.ucrReceiverForeignWinner.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverForeignWinner.TabIndex = 25
+        '
         'ucrReceiverProcedureType
         '
         Me.ucrReceiverProcedureType.frmParent = Me
-        Me.ucrReceiverProcedureType.Location = New System.Drawing.Point(13, 545)
+        Me.ucrReceiverProcedureType.Location = New System.Drawing.Point(13, 543)
         Me.ucrReceiverProcedureType.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverProcedureType.Name = "ucrReceiverProcedureType"
         Me.ucrReceiverProcedureType.Selector = Nothing
         Me.ucrReceiverProcedureType.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverProcedureType.TabIndex = 25
         '
+        'lblForeignWinner
+        '
+        Me.lblForeignWinner.AutoSize = True
+        Me.lblForeignWinner.Location = New System.Drawing.Point(13, 697)
+        Me.lblForeignWinner.Name = "lblForeignWinner"
+        Me.lblForeignWinner.Size = New System.Drawing.Size(82, 13)
+        Me.lblForeignWinner.TabIndex = 24
+        Me.lblForeignWinner.Text = "Foreign Winner:"
+        '
         'lblProcedureType
         '
         Me.lblProcedureType.AutoSize = True
-        Me.lblProcedureType.Location = New System.Drawing.Point(14, 525)
+        Me.lblProcedureType.Location = New System.Drawing.Point(13, 525)
         Me.lblProcedureType.Name = "lblProcedureType"
         Me.lblProcedureType.Size = New System.Drawing.Size(86, 13)
         Me.lblProcedureType.TabIndex = 24
         Me.lblProcedureType.Text = "Procedure Type:"
         '
+        'ucrReceiverCountryISO
+        '
+        Me.ucrReceiverCountryISO.frmParent = Me
+        Me.ucrReceiverCountryISO.Location = New System.Drawing.Point(13, 672)
+        Me.ucrReceiverCountryISO.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverCountryISO.Name = "ucrReceiverCountryISO"
+        Me.ucrReceiverCountryISO.Selector = Nothing
+        Me.ucrReceiverCountryISO.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverCountryISO.TabIndex = 23
+        '
         'ucrReceiverOriginalContractValue
         '
         Me.ucrReceiverOriginalContractValue.frmParent = Me
-        Me.ucrReceiverOriginalContractValue.Location = New System.Drawing.Point(14, 500)
+        Me.ucrReceiverOriginalContractValue.Location = New System.Drawing.Point(13, 500)
         Me.ucrReceiverOriginalContractValue.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOriginalContractValue.Name = "ucrReceiverOriginalContractValue"
         Me.ucrReceiverOriginalContractValue.Selector = Nothing
         Me.ucrReceiverOriginalContractValue.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverOriginalContractValue.TabIndex = 23
         '
+        'lblCountryISO
+        '
+        Me.lblCountryISO.AutoSize = True
+        Me.lblCountryISO.Location = New System.Drawing.Point(13, 654)
+        Me.lblCountryISO.Name = "lblCountryISO"
+        Me.lblCountryISO.Size = New System.Drawing.Size(67, 13)
+        Me.lblCountryISO.TabIndex = 22
+        Me.lblCountryISO.Text = "Country ISO:"
+        '
         'lblOriginalContractValue
         '
         Me.lblOriginalContractValue.AutoSize = True
-        Me.lblOriginalContractValue.Location = New System.Drawing.Point(14, 482)
+        Me.lblOriginalContractValue.Location = New System.Drawing.Point(13, 482)
         Me.lblOriginalContractValue.Name = "lblOriginalContractValue"
         Me.lblOriginalContractValue.Size = New System.Drawing.Size(118, 13)
         Me.lblOriginalContractValue.TabIndex = 22
         Me.lblOriginalContractValue.Text = "Original Contract Value:"
         '
+        'ucrReceiverNoConsideredBids
+        '
+        Me.ucrReceiverNoConsideredBids.frmParent = Me
+        Me.ucrReceiverNoConsideredBids.Location = New System.Drawing.Point(13, 629)
+        Me.ucrReceiverNoConsideredBids.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverNoConsideredBids.Name = "ucrReceiverNoConsideredBids"
+        Me.ucrReceiverNoConsideredBids.Selector = Nothing
+        Me.ucrReceiverNoConsideredBids.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverNoConsideredBids.TabIndex = 21
+        '
         'ucrReceiverWinnerCountry
         '
         Me.ucrReceiverWinnerCountry.frmParent = Me
-        Me.ucrReceiverWinnerCountry.Location = New System.Drawing.Point(14, 457)
+        Me.ucrReceiverWinnerCountry.Location = New System.Drawing.Point(13, 457)
         Me.ucrReceiverWinnerCountry.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWinnerCountry.Name = "ucrReceiverWinnerCountry"
         Me.ucrReceiverWinnerCountry.Selector = Nothing
         Me.ucrReceiverWinnerCountry.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWinnerCountry.TabIndex = 21
         '
+        'lblNoConsideredBids
+        '
+        Me.lblNoConsideredBids.AutoSize = True
+        Me.lblNoConsideredBids.Location = New System.Drawing.Point(13, 611)
+        Me.lblNoConsideredBids.Name = "lblNoConsideredBids"
+        Me.lblNoConsideredBids.Size = New System.Drawing.Size(106, 13)
+        Me.lblNoConsideredBids.TabIndex = 20
+        Me.lblNoConsideredBids.Text = "No. Considered Bids:"
+        '
         'lblWinnerCountry
         '
         Me.lblWinnerCountry.AutoSize = True
-        Me.lblWinnerCountry.Location = New System.Drawing.Point(14, 439)
+        Me.lblWinnerCountry.Location = New System.Drawing.Point(13, 439)
         Me.lblWinnerCountry.Name = "lblWinnerCountry"
         Me.lblWinnerCountry.Size = New System.Drawing.Size(83, 13)
         Me.lblWinnerCountry.TabIndex = 20
@@ -204,7 +280,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverProcuringAuthority
         '
         Me.ucrReceiverProcuringAuthority.frmParent = Me
-        Me.ucrReceiverProcuringAuthority.Location = New System.Drawing.Point(14, 70)
+        Me.ucrReceiverProcuringAuthority.Location = New System.Drawing.Point(13, 70)
         Me.ucrReceiverProcuringAuthority.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverProcuringAuthority.Name = "ucrReceiverProcuringAuthority"
         Me.ucrReceiverProcuringAuthority.Selector = Nothing
@@ -214,7 +290,7 @@ Partial Class dlgDefineCorruption
         'lblProcuringAuthority
         '
         Me.lblProcuringAuthority.AutoSize = True
-        Me.lblProcuringAuthority.Location = New System.Drawing.Point(14, 52)
+        Me.lblProcuringAuthority.Location = New System.Drawing.Point(13, 52)
         Me.lblProcuringAuthority.Name = "lblProcuringAuthority"
         Me.lblProcuringAuthority.Size = New System.Drawing.Size(99, 13)
         Me.lblProcuringAuthority.TabIndex = 2
@@ -223,7 +299,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverCountry
         '
         Me.ucrReceiverCountry.frmParent = Me
-        Me.ucrReceiverCountry.Location = New System.Drawing.Point(14, 27)
+        Me.ucrReceiverCountry.Location = New System.Drawing.Point(13, 27)
         Me.ucrReceiverCountry.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
         Me.ucrReceiverCountry.Selector = Nothing
@@ -233,7 +309,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverProcuringAuthorityID
         '
         Me.ucrReceiverProcuringAuthorityID.frmParent = Me
-        Me.ucrReceiverProcuringAuthorityID.Location = New System.Drawing.Point(14, 113)
+        Me.ucrReceiverProcuringAuthorityID.Location = New System.Drawing.Point(13, 113)
         Me.ucrReceiverProcuringAuthorityID.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverProcuringAuthorityID.Name = "ucrReceiverProcuringAuthorityID"
         Me.ucrReceiverProcuringAuthorityID.Selector = Nothing
@@ -243,7 +319,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverSignatureDate
         '
         Me.ucrReceiverSignatureDate.frmParent = Me
-        Me.ucrReceiverSignatureDate.Location = New System.Drawing.Point(14, 199)
+        Me.ucrReceiverSignatureDate.Location = New System.Drawing.Point(13, 199)
         Me.ucrReceiverSignatureDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSignatureDate.Name = "ucrReceiverSignatureDate"
         Me.ucrReceiverSignatureDate.Selector = Nothing
@@ -253,7 +329,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverSector
         '
         Me.ucrReceiverSector.frmParent = Me
-        Me.ucrReceiverSector.Location = New System.Drawing.Point(14, 285)
+        Me.ucrReceiverSector.Location = New System.Drawing.Point(13, 285)
         Me.ucrReceiverSector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSector.Name = "ucrReceiverSector"
         Me.ucrReceiverSector.Selector = Nothing
@@ -263,7 +339,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverProcurementCategory
         '
         Me.ucrReceiverProcurementCategory.frmParent = Me
-        Me.ucrReceiverProcurementCategory.Location = New System.Drawing.Point(14, 328)
+        Me.ucrReceiverProcurementCategory.Location = New System.Drawing.Point(13, 328)
         Me.ucrReceiverProcurementCategory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverProcurementCategory.Name = "ucrReceiverProcurementCategory"
         Me.ucrReceiverProcurementCategory.Selector = Nothing
@@ -273,7 +349,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverWinnerName
         '
         Me.ucrReceiverWinnerName.frmParent = Me
-        Me.ucrReceiverWinnerName.Location = New System.Drawing.Point(14, 371)
+        Me.ucrReceiverWinnerName.Location = New System.Drawing.Point(13, 371)
         Me.ucrReceiverWinnerName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWinnerName.Name = "ucrReceiverWinnerName"
         Me.ucrReceiverWinnerName.Selector = Nothing
@@ -283,7 +359,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverWinnerID
         '
         Me.ucrReceiverWinnerID.frmParent = Me
-        Me.ucrReceiverWinnerID.Location = New System.Drawing.Point(14, 414)
+        Me.ucrReceiverWinnerID.Location = New System.Drawing.Point(13, 414)
         Me.ucrReceiverWinnerID.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWinnerID.Name = "ucrReceiverWinnerID"
         Me.ucrReceiverWinnerID.Selector = Nothing
@@ -293,7 +369,7 @@ Partial Class dlgDefineCorruption
         'lblWinnerID
         '
         Me.lblWinnerID.AutoSize = True
-        Me.lblWinnerID.Location = New System.Drawing.Point(14, 396)
+        Me.lblWinnerID.Location = New System.Drawing.Point(13, 396)
         Me.lblWinnerID.Name = "lblWinnerID"
         Me.lblWinnerID.Size = New System.Drawing.Size(58, 13)
         Me.lblWinnerID.TabIndex = 18
@@ -302,7 +378,7 @@ Partial Class dlgDefineCorruption
         'lblWinnerName
         '
         Me.lblWinnerName.AutoSize = True
-        Me.lblWinnerName.Location = New System.Drawing.Point(14, 353)
+        Me.lblWinnerName.Location = New System.Drawing.Point(13, 353)
         Me.lblWinnerName.Name = "lblWinnerName"
         Me.lblWinnerName.Size = New System.Drawing.Size(75, 13)
         Me.lblWinnerName.TabIndex = 16
@@ -311,7 +387,7 @@ Partial Class dlgDefineCorruption
         'lblSector
         '
         Me.lblSector.AutoSize = True
-        Me.lblSector.Location = New System.Drawing.Point(14, 267)
+        Me.lblSector.Location = New System.Drawing.Point(13, 267)
         Me.lblSector.Name = "lblSector"
         Me.lblSector.Size = New System.Drawing.Size(41, 13)
         Me.lblSector.TabIndex = 12
@@ -320,7 +396,7 @@ Partial Class dlgDefineCorruption
         'lblProcurementCategory
         '
         Me.lblProcurementCategory.AutoSize = True
-        Me.lblProcurementCategory.Location = New System.Drawing.Point(14, 310)
+        Me.lblProcurementCategory.Location = New System.Drawing.Point(13, 310)
         Me.lblProcurementCategory.Name = "lblProcurementCategory"
         Me.lblProcurementCategory.Size = New System.Drawing.Size(115, 13)
         Me.lblProcurementCategory.TabIndex = 14
@@ -329,7 +405,7 @@ Partial Class dlgDefineCorruption
         'lblContractName
         '
         Me.lblContractName.AutoSize = True
-        Me.lblContractName.Location = New System.Drawing.Point(14, 224)
+        Me.lblContractName.Location = New System.Drawing.Point(13, 224)
         Me.lblContractName.Name = "lblContractName"
         Me.lblContractName.Size = New System.Drawing.Size(81, 13)
         Me.lblContractName.TabIndex = 10
@@ -338,7 +414,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverAwardDate
         '
         Me.ucrReceiverAwardDate.frmParent = Me
-        Me.ucrReceiverAwardDate.Location = New System.Drawing.Point(14, 156)
+        Me.ucrReceiverAwardDate.Location = New System.Drawing.Point(13, 156)
         Me.ucrReceiverAwardDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAwardDate.Name = "ucrReceiverAwardDate"
         Me.ucrReceiverAwardDate.Selector = Nothing
@@ -348,7 +424,7 @@ Partial Class dlgDefineCorruption
         'ucrReceiverContractName
         '
         Me.ucrReceiverContractName.frmParent = Me
-        Me.ucrReceiverContractName.Location = New System.Drawing.Point(14, 242)
+        Me.ucrReceiverContractName.Location = New System.Drawing.Point(13, 242)
         Me.ucrReceiverContractName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContractName.Name = "ucrReceiverContractName"
         Me.ucrReceiverContractName.Selector = Nothing
@@ -358,7 +434,7 @@ Partial Class dlgDefineCorruption
         'lblProcuringAuthorityID
         '
         Me.lblProcuringAuthorityID.AutoSize = True
-        Me.lblProcuringAuthorityID.Location = New System.Drawing.Point(14, 95)
+        Me.lblProcuringAuthorityID.Location = New System.Drawing.Point(13, 95)
         Me.lblProcuringAuthorityID.Name = "lblProcuringAuthorityID"
         Me.lblProcuringAuthorityID.Size = New System.Drawing.Size(113, 13)
         Me.lblProcuringAuthorityID.TabIndex = 4
@@ -367,7 +443,7 @@ Partial Class dlgDefineCorruption
         'lblAwardDate
         '
         Me.lblAwardDate.AutoSize = True
-        Me.lblAwardDate.Location = New System.Drawing.Point(14, 138)
+        Me.lblAwardDate.Location = New System.Drawing.Point(13, 138)
         Me.lblAwardDate.Name = "lblAwardDate"
         Me.lblAwardDate.Size = New System.Drawing.Size(66, 13)
         Me.lblAwardDate.TabIndex = 6
@@ -376,7 +452,7 @@ Partial Class dlgDefineCorruption
         'lblSignatureDate
         '
         Me.lblSignatureDate.AutoSize = True
-        Me.lblSignatureDate.Location = New System.Drawing.Point(14, 181)
+        Me.lblSignatureDate.Location = New System.Drawing.Point(13, 181)
         Me.lblSignatureDate.Name = "lblSignatureDate"
         Me.lblSignatureDate.Size = New System.Drawing.Size(81, 13)
         Me.lblSignatureDate.TabIndex = 8
@@ -385,93 +461,17 @@ Partial Class dlgDefineCorruption
         'lblCountry
         '
         Me.lblCountry.AutoSize = True
-        Me.lblCountry.Location = New System.Drawing.Point(14, 9)
+        Me.lblCountry.Location = New System.Drawing.Point(13, 9)
         Me.lblCountry.Name = "lblCountry"
         Me.lblCountry.Size = New System.Drawing.Size(46, 13)
         Me.lblCountry.TabIndex = 0
         Me.lblCountry.Text = "Country:"
         '
-        'lblNoConsideredBids
-        '
-        Me.lblNoConsideredBids.AutoSize = True
-        Me.lblNoConsideredBids.Location = New System.Drawing.Point(15, 620)
-        Me.lblNoConsideredBids.Name = "lblNoConsideredBids"
-        Me.lblNoConsideredBids.Size = New System.Drawing.Size(106, 13)
-        Me.lblNoConsideredBids.TabIndex = 20
-        Me.lblNoConsideredBids.Text = "No. Considered Bids:"
-        '
-        'ucrReceiverNoConsideredBids
-        '
-        Me.ucrReceiverNoConsideredBids.frmParent = Me
-        Me.ucrReceiverNoConsideredBids.Location = New System.Drawing.Point(15, 638)
-        Me.ucrReceiverNoConsideredBids.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverNoConsideredBids.Name = "ucrReceiverNoConsideredBids"
-        Me.ucrReceiverNoConsideredBids.Selector = Nothing
-        Me.ucrReceiverNoConsideredBids.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverNoConsideredBids.TabIndex = 21
-        '
-        'lblCountryISO
-        '
-        Me.lblCountryISO.AutoSize = True
-        Me.lblCountryISO.Location = New System.Drawing.Point(15, 663)
-        Me.lblCountryISO.Name = "lblCountryISO"
-        Me.lblCountryISO.Size = New System.Drawing.Size(67, 13)
-        Me.lblCountryISO.TabIndex = 22
-        Me.lblCountryISO.Text = "Country ISO:"
-        '
-        'ucrReceiverCountryISO
-        '
-        Me.ucrReceiverCountryISO.frmParent = Me
-        Me.ucrReceiverCountryISO.Location = New System.Drawing.Point(15, 681)
-        Me.ucrReceiverCountryISO.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverCountryISO.Name = "ucrReceiverCountryISO"
-        Me.ucrReceiverCountryISO.Selector = Nothing
-        Me.ucrReceiverCountryISO.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCountryISO.TabIndex = 23
-        '
-        'lblForeignWinner
-        '
-        Me.lblForeignWinner.AutoSize = True
-        Me.lblForeignWinner.Location = New System.Drawing.Point(15, 706)
-        Me.lblForeignWinner.Name = "lblForeignWinner"
-        Me.lblForeignWinner.Size = New System.Drawing.Size(82, 13)
-        Me.lblForeignWinner.TabIndex = 24
-        Me.lblForeignWinner.Text = "Foreign Winner:"
-        '
-        'ucrReceiverForeignWinner
-        '
-        Me.ucrReceiverForeignWinner.frmParent = Me
-        Me.ucrReceiverForeignWinner.Location = New System.Drawing.Point(14, 726)
-        Me.ucrReceiverForeignWinner.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverForeignWinner.Name = "ucrReceiverForeignWinner"
-        Me.ucrReceiverForeignWinner.Selector = Nothing
-        Me.ucrReceiverForeignWinner.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverForeignWinner.TabIndex = 25
-        '
-        'ucrReceiverPPPConversionRate
-        '
-        Me.ucrReceiverPPPConversionRate.frmParent = Me
-        Me.ucrReceiverPPPConversionRate.Location = New System.Drawing.Point(15, 771)
-        Me.ucrReceiverPPPConversionRate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverPPPConversionRate.Name = "ucrReceiverPPPConversionRate"
-        Me.ucrReceiverPPPConversionRate.Selector = Nothing
-        Me.ucrReceiverPPPConversionRate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPPPConversionRate.TabIndex = 27
-        '
-        'lblPPPConversionRate
-        '
-        Me.lblPPPConversionRate.AutoSize = True
-        Me.lblPPPConversionRate.Location = New System.Drawing.Point(16, 751)
-        Me.lblPPPConversionRate.Name = "lblPPPConversionRate"
-        Me.lblPPPConversionRate.Size = New System.Drawing.Size(113, 13)
-        Me.lblPPPConversionRate.TabIndex = 26
-        Me.lblPPPConversionRate.Text = "PPP Conversion Rate:"
-        '
         'dlgDefineCorruption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(467, 344)
+        Me.ClientSize = New System.Drawing.Size(421, 338)
         Me.Controls.Add(Me.panClimateType)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDefineCorruptionSelector)
