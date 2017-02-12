@@ -221,6 +221,12 @@
     <Compile Include="dlgCorruptionDescribe.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineCorruption.Designer.vb">
+      <DependentUpon>dlgDefineCorruption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineCorruption.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -2136,6 +2142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DlgDefineClimaticData.resx">
       <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineCorruption.resx">
+      <DependentUpon>dlgDefineCorruption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
