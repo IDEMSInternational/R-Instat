@@ -157,3 +157,30 @@ Public Class sdgOneVarCompareModels
     End Function
 
 End Class
+
+
+' if in main dialog:
+
+'Private clsCDF As New RFunction
+
+'Public Sub SetRCodeForControls(bReset As Boolean)
+'    ucrreceiverinDLG.SetRCode(clsCDF, bReset)
+'End Sub
+
+'Private Sub SetDefaults()
+'Dim clsCDFDefault As New RFunction
+'ucrChkSetSeed.Checked = False
+'clsCDFDefault.SetRCommand("cdfcomp")
+
+'clsCDF = clsCDFDefault.Clone
+'End Sub
+
+'    Private Sub InitialiseDialog()
+'ucrReceiverinDLG.SetParameter(New RParameter ("ft"))
+'    End Sub
+
+'Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk'
+'If ucrChkCDF.Checked Then 
+'frmMain.clsRLink.RunScript(clsCDF.ToScript, strComment:="")
+'End If
+'End Sub
