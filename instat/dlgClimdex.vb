@@ -113,6 +113,7 @@ Public Class dlgClimdex
         ucrSelectorClimdex.SetRCode(clsRTmax, bReset)
         ucrSelectorClimdex.SetRCode(clsRTmin, bReset)
         ucrSelectorClimdex.SetRCode(clsRPrec, bReset)
+        ucrSelectorClimdex.SetRCode(sdgClimdexIndices.clsRWriteDf, bReset)
         ucrReceiverDate.SetRCode(clsRDate, bReset)
         ucrReceiverTmax.SetRCode(clsRTmax, bReset)
         ucrReceiverTmin.SetRCode(clsRTmin, bReset)
