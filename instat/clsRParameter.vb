@@ -26,9 +26,17 @@ Public Class RParameter
     Public bIsString As Boolean = False
     'iPosition determines the position this parameter should take among other parameters of an Operator or Function. If iPosition is 0, then it is part of the unordered parameters that are added after the ordered ones. 
     'Note, it is allowed to have gaps in the positions: parameters with positions a 0, b 2, c 5, d 3, e 0 will be sorted as b d c (a e). See CompareParametersPosition in clsRCodeStructure.
-    Private iPosition As Integer = 0
+    Private iPosition As Integer = -1
     'See strArgumentName
     Public bIncludeArgumentName As Boolean = True
+
+    Public Sub New()
+    End Sub
+
+    Public Sub New(strParameterName As String, Optional iNewPosition As Integer = -1)
+        SetArgumentName(strParameterName)
+        Position = iNewPosition
+    End Sub
 
     ''Public Event PositionChanged()
 
@@ -89,6 +97,16 @@ Public Class RParameter
             'message
         End If
         Return strRet
+    End Function
+
+    Public Function HasValue() As Boolean
+        If bIsString Then
+            Return strArgumentValue IsNot Nothing
+        ElseIf bIsFunction OrElse bIsOperator Then
+            Return clsArgumentCodeStructure IsNot Nothing
+        Else
+            Return False
+        End If
     End Function
 
     Public Function Clone() As RParameter

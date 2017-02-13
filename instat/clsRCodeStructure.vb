@@ -180,59 +180,66 @@ Public Class RCodeStructure
         Return New RParameter
     End Function
 
-    Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional clsParam As RParameter = Nothing, Optional iPosition As Integer = -1)
-        'Task, in next version, we want to erase clsParam as a possible argument, but RSyntax will have to be edited first...
-        If clsParam Is Nothing Then
-            clsParam = New RParameter
-            If strParameterName = "" Then
-                'MsgBox("Developer Error: some parameter has been added without specifying a name. We want all parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
-                bIncludeArgumentName = False
-                If iPosition = 0 Then
-                    strParameterName = "First"
-                Else
-                    strParameterName = "Unnamed"
-                End If
+    Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
+        Dim clsParam = New RParameter
+
+        If strParameterName = "" Then
+            'MsgBox("Developer Error: some parameter has been added without specifying a name. We want all parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
+            bIncludeArgumentName = False
+            If iPosition = 0 Then
+                strParameterName = "First"
+            Else
+                strParameterName = "Unnamed"
             End If
-            clsParam.SetArgumentName(strParameterName)
-            If Not strParameterValue = "" Then
-                clsParam.SetArgumentValue(strParameterValue)
-            ElseIf clsRFunctionParameter IsNot Nothing Then
-                clsParam.SetArgument(clsRFunctionParameter)
-            ElseIf clsROperatorParameter IsNot Nothing Then
-                clsParam.SetArgument(clsROperatorParameter)
-            End If
-            clsParam.bIncludeArgumentName = bIncludeArgumentName
         End If
-        AddParameter(clsParam, iPosition)
+        clsParam.SetArgumentName(strParameterName)
+        If Not strParameterValue = "" Then
+            clsParam.SetArgumentValue(strParameterValue)
+        ElseIf clsRFunctionParameter IsNot Nothing Then
+            clsParam.SetArgument(clsRFunctionParameter)
+        ElseIf clsROperatorParameter IsNot Nothing Then
+            clsParam.SetArgument(clsROperatorParameter)
+        End If
+        clsParam.bIncludeArgumentName = bIncludeArgumentName
+        clsParam.Position = iPosition
+        AddParameter(clsParam)
     End Sub
 
-    Public Overridable Sub AddParameter(clsParam As RParameter, Optional iPosition As Integer = -1)
+    'TODO This should be call AddParameter but need to make it unambiguous with above
+    Public Overridable Sub AddParameterWithCodeStructure(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRCodeObject As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
+        If TypeOf (clsRCodeObject) Is RFunction Then
+            AddParameter(strParameterName:=strParameterName, strParameterValue:=strParameterValue, clsRFunctionParameter:=clsRCodeObject, bIncludeArgumentName:=bIncludeArgumentName, iPosition:=iPosition)
+        ElseIf TypeOf (clsRCodeObject) Is ROperator Then
+            AddParameter(strParameterName:=strParameterName, strParameterValue:=strParameterValue, clsROperatorParameter:=clsRCodeObject, bIncludeArgumentName:=bIncludeArgumentName, iPosition:=iPosition)
+        End If
+    End Sub
+
+    Public Overridable Sub AddParameter(clsNewParam As RParameter)
         Dim i As Integer = -1
-        Dim strTempArgumentName As String = clsParam.strArgumentName
-        clsParam.Position = iPosition
+        Dim strTempArgumentName As String = clsNewParam.strArgumentName
         If clsParameters IsNot Nothing Then
-            If clsParam.strArgumentName IsNot Nothing Then
+            If clsNewParam.strArgumentName IsNot Nothing Then
                 'Dim match As Predicate(Of RParameter) = Function(x) x.strArgumentName.Equals(clsParam.strArgumentName)
                 i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(strTempArgumentName))
             End If
             If i = -1 Then
-                ShiftParametersPositions(iPosition) 'Checking if there is room in the parameter's positions to add a parameter with position = iPosition
-                clsParameters.Add(clsParam)
+                ShiftParametersPositions(clsNewParam.Position) 'Checking if there is room in the parameter's positions to add a parameter with position = iPosition
+                clsParameters.Add(clsNewParam)
             Else
-                If clsParam.bIsString AndAlso clsParam.strArgumentValue IsNot Nothing Then
-                    clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
-                ElseIf (clsParam.bIsString OrElse clsParam.bIsFunction) AndAlso clsParam.clsArgumentCodeStructure IsNot Nothing Then
-                    clsParameters(i).SetArgument(clsParam.clsArgumentCodeStructure)
+                If clsNewParam.bIsString AndAlso clsNewParam.strArgumentValue IsNot Nothing Then
+                    clsParameters(i).SetArgumentValue(clsNewParam.strArgumentValue)
+                ElseIf (clsNewParam.bIsString OrElse clsNewParam.bIsFunction) AndAlso clsNewParam.clsArgumentCodeStructure IsNot Nothing Then
+                    clsParameters(i).SetArgument(clsNewParam.clsArgumentCodeStructure)
                 Else
                     'message
                 End If
-                If clsParameters(i).Position <> iPosition Then
+                If clsParameters(i).Position <> clsNewParam.Position Then
                     'In case the position needs to be changed, there might exist another parameter with the new position in the list
                     'The parameter i is then temporarily set to unordered until the Shift in positions has been operated within the clsParameters (if necessary).
                     clsParameters(i).Position = -1
-                    If iPosition <> -1 Then
-                        ShiftParametersPositions(iPosition)
-                        clsParameters(i).Position = clsParam.Position
+                    If clsNewParam.Position <> -1 Then
+                        ShiftParametersPositions(clsNewParam.Position)
+                        clsParameters(i).Position = clsNewParam.Position
                     End If
                 End If
             End If
@@ -315,6 +322,22 @@ Public Class RCodeStructure
         bIsAssigned = False
         OnParametersChanged()
     End Sub
+
+    Public Overridable Sub RemoveParameter(clsParam As RParameter)
+        If Not clsParameters Is Nothing Then
+            clsParameters.Remove(clsParam)
+        End If
+        bIsAssigned = False
+        OnParametersChanged()
+    End Sub
+
+    Public Overridable Function ContainsParameter(clsParam As RParameter) As Boolean
+        Return clsParameters.Contains(clsParam)
+    End Function
+
+    Public Overridable Function ContainsParameter(strParameterName As String) As Boolean
+        Return (clsParameters.FindIndex(Function(x) x.strArgumentName = strParameterName) <> -1)
+    End Function
 
     Public Overridable Sub ClearParameters()
         clsParameters.Clear()

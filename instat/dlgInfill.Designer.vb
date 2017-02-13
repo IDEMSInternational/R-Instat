@@ -35,20 +35,25 @@ Partial Class dlgInfill
         Me.ucrBase.Location = New System.Drawing.Point(9, 209)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 5
         '
         'ucrInfillSelector
         '
+        Me.ucrInfillSelector.bAddRemoveParameter = True
+        Me.ucrInfillSelector.bChangeParameterValue = True
         Me.ucrInfillSelector.bShowHiddenColumns = False
         Me.ucrInfillSelector.bUseCurrentFilter = True
         Me.ucrInfillSelector.Location = New System.Drawing.Point(9, 9)
         Me.ucrInfillSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrInfillSelector.Name = "ucrInfillSelector"
         Me.ucrInfillSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrInfillSelector.TabIndex = 1
+        Me.ucrInfillSelector.TabIndex = 0
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.bAddRemoveParameter = True
+        Me.ucrReceiverDate.bChangeParameterValue = True
+        Me.ucrReceiverDate.frmParent = Me
         Me.ucrReceiverDate.Location = New System.Drawing.Point(278, 37)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
@@ -58,30 +63,33 @@ Partial Class dlgInfill
         '
         'ucrReceiverFactors
         '
+        Me.ucrReceiverFactors.bAddRemoveParameter = True
+        Me.ucrReceiverFactors.bChangeParameterValue = True
+        Me.ucrReceiverFactors.frmParent = Me
         Me.ucrReceiverFactors.Location = New System.Drawing.Point(278, 90)
         Me.ucrReceiverFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
         Me.ucrReceiverFactors.Selector = Nothing
         Me.ucrReceiverFactors.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactors.TabIndex = 3
+        Me.ucrReceiverFactors.TabIndex = 4
         '
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(275, 13)
+        Me.lblDate.Location = New System.Drawing.Point(282, 18)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(30, 13)
-        Me.lblDate.TabIndex = 4
-        Me.lblDate.Text = "Date"
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.TabIndex = 1
+        Me.lblDate.Text = "Date:"
         '
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
         Me.lblFactors.Location = New System.Drawing.Point(278, 73)
         Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Size = New System.Drawing.Size(42, 13)
-        Me.lblFactors.TabIndex = 5
-        Me.lblFactors.Text = "Factors"
+        Me.lblFactors.Size = New System.Drawing.Size(45, 13)
+        Me.lblFactors.TabIndex = 3
+        Me.lblFactors.Text = "Factors:"
         '
         'dlgInfill
         '
