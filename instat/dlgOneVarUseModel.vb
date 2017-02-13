@@ -183,11 +183,12 @@ Public Class dlgOneVarUseModel
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
+    Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlContentsChanged
         If Not ucrChkProduceBootstrap.Checked Then
             cmdBootstrapOptions.Visible = False
         Else
             cmdBootstrapOptions.Visible = True
         End If
+        SetFunctions()
     End Sub
 End Class
