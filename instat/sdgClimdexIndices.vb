@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgClimdexIndices
     Public bSaveIndex As Boolean = False
     Public bControlsInitialised As Boolean = False
-    Public clsNewClimdexInput As New RFunction
+    Public clsNewClimdexInput, clsRWriteDf As New RFunction
     Public clsRMaxMisingDays, clsROneArg, clsRTwoArg1, clsRTwoArg2, clsRTwoArg3, clsRTwoArg4, clsRTwoArg5, clsRThreeArg As New RFunction
 
     Private Sub sdgClimdexIndices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -142,6 +142,7 @@ Public Class sdgClimdexIndices
         ucrNudThreshold.SetRDefault(1)
         ucrNudThreshold.DecimalPlaces = 2
         ucrNudThreshold.SetMinMax(0, 1)
+        ucrNudThreshold.Increment = 0.01
         ucrNudN.SetParameter(New RParameter("n"))
         ucrNudN.SetRDefault(5)
         ucrNudN.SetMinMax(1, 100)
@@ -150,6 +151,7 @@ Public Class sdgClimdexIndices
         ucrNudMinBaseData.SetRDefault(0.1)
         ucrNudMinBaseData.DecimalPlaces = 2
         ucrNudMinBaseData.SetMinMax(0, 1)
+        ucrNudMinBaseData.Increment = 0.01
 
 
         ucrNudAnnualMissingDays.SetParameter(New RParameter("annual"))
@@ -201,6 +203,8 @@ Public Class sdgClimdexIndices
         ucrChkSave.SetText("Save indices")
         ucrChkSave.bChangeParameterValue = False
 
+        'dlgClimdex.ucrSelectorClimdex.SetRCode(clsRPrec, bReset)
+
         ttClimdexIndices.SetToolTip(ucrChkFrostDays.chkCheck, "The annual count of days where daily minimum temperature drops below 0 degrees Celsius")
         ttClimdexIndices.SetToolTip(ucrChkSummerDays.chkCheck, "The annual count of days where daily maximum temperature exceeds 25 degrees Celsius")
         ttClimdexIndices.SetToolTip(ucrChkIcingDays.chkCheck, "The annual count of days where daily maximum temperature is below 0 degrees Celsius")
@@ -241,13 +245,14 @@ Public Class sdgClimdexIndices
     End Sub
 
     Private Sub SaveIndices(ucrchkTemp As ucrCheck, clsIndex As RFunction, bSave As Boolean)
-        Dim clsRWriteDf, clsRListDF, clsRConvertDF As New RFunction
-        clsRWriteDf.SetRCommand("InstatDataObject$import_data")
+        Dim clsRListDF, clsRConvertDF As New RFunction
+        clsRWriteDf.SetRCommand("InstatDataObject$add_climdex_indices")
         clsRListDF.SetRCommand("list")
-        clsRConvertDF.SetRCommand("as.data.frame")
-        clsRWriteDf.AddParameter("data_tables", clsRFunctionParameter:=clsRListDF)
-        clsRConvertDF.AddParameter("x", clsRFunctionParameter:=clsIndex)
-        clsRListDF.AddParameter(ucrchkTemp.Tag, clsRFunctionParameter:=clsRConvertDF)
+        clsRListDF.AddParameter(ucrchkTemp.Tag, clsRFunctionParameter:=clsIndex)
+        'clsRWriteDf.AddParameter("data_name", clsRFunctionParameter:=clsRListDF)
+        clsRWriteDf.AddParameter("indices", clsRFunctionParameter:=clsRListDF)
+        'clsRConvertDF.AddParameter("x", clsRFunctionParameter:=clsIndex)
+        'clsRListDF.AddParameter(ucrchkTemp.Tag, clsRFunctionParameter:=clsRConvertDF)
         If bSave Then
             frmMain.clsRLink.RunScript(clsRWriteDf.ToScript(), 0)
         Else
@@ -439,6 +444,7 @@ Public Class sdgClimdexIndices
         ucrNudMinBaseData.SetRCode(clsNewClimdexInput, bReset)
         ucrInputFreq.SetRCode(clsRTwoArg1, bReset)
         ucrInputFreq.SetRCode(clsRThreeArg, bReset)
+        ucrInputFreq.SetRCode(clsRWriteDf, bReset)
         ucrMultipleInputTempQtiles.SetRCode(clsNewClimdexInput, bReset)
         ucrMultipleInputPrecQtiles.SetRCode(clsNewClimdexInput, bReset)
         ucrMultipleInputBaseRange.SetRCode(clsNewClimdexInput, bReset)
