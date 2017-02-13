@@ -52,7 +52,6 @@ Public Class dlgImportFromODK
 
         ucrChkViewPassword.SetText("View Password")
         ucrChkViewPassword.Checked = False
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -76,23 +75,22 @@ Public Class dlgImportFromODK
         ucrInputPassword.txtInput.UseSystemPasswordChar = True
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
+        clsDefaultRFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
 
         clsGetFormsFunction.SetRCommand("get_odk_form_names")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction.Clone())
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetRCodeForControls(True)
         SetDefaults()
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub pnlPlatform_ControlContentsChanged() Handles ucrPnlPlatform.ControlContentsChanged
         If rdoOna.Checked Then
             clsGetFormsFunction.AddParameter("platform", Chr(34) & "ona" & Chr(34))
-            ucrBase.clsRsyntax.AddParameter("platform", Chr(34) & "ona" & Chr(34))
         ElseIf rdoKobo.Checked Then
             clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
-            ucrBase.clsRsyntax.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
         End If
     End Sub
     Private Sub ucrInputUsername_NameChanged() Handles ucrInputUsername.ControlValueChanged
