@@ -16,7 +16,8 @@
 
 Imports instat.Translations
 Public Class dlgColumnStructure
-    Public clsCourByStructure As New RFunction
+    Public clsdefaultCourByStructure As New RFunction
+    Private clsSetStructure As New RFunction
     'clsCourByStructure is here to construct the R-command that will colour columns according to their type in case it is required (see relevant tick box).
     Public bFirstLoad As Boolean = True
     Private Sub ucrSelectorColumnStructures_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -34,21 +35,40 @@ Public Class dlgColumnStructure
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 51
-        clsCourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
-        clsCourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
+
         ucrReceiverType2.Selector = ucrSelectorColumnStructure
         ucrReceiverType1.Selector = ucrSelectorColumnStructure
         ucrReceiverType3.Selector = ucrSelectorColumnStructure
         ucrReceiverType1.bExcludeFromSelector = True
         ucrReceiverType3.bExcludeFromSelector = True
         ucrReceiverType2.bExcludeFromSelector = True
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
+
+        ucrReceiverType1.SetParameter(New RParameter("struc_type_1"))
+        ucrReceiverType1.SetParameterIsString()
+
+        ucrReceiverType2.SetParameter(New RParameter("struc_type_2"))
+        ucrReceiverType2.SetParameterIsString()
+
+        ucrReceiverType3.SetParameter(New RParameter("struc_type_3"))
+        ucrReceiverType3.SetParameterIsString()
+
+        ucrSelectorColumnStructure.SetParameter(New RParameter("data_name"))
+        ucrSelectorColumnStructure.SetParameterIsString()
+
+        ucrColourColumnsByStr.SetText("Color Columns by Structure")
+
+        ' clsdefaultCourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        ' clsSetStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
+
+        clsSetStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
     End Sub
 
     Private Sub SetDefaults()
         SetColumnStructureInReceiver()
         ucrReceiverType1.SetMeAsReceiver()
-        chkColourColumnsByStr.Checked = False
+        ucrColourColumnsByStr.Checked = False
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSetStructure.Clone())
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
     End Sub
 
     Private Sub ReopenDialog()
@@ -61,6 +81,7 @@ Public Class dlgColumnStructure
         ucrReceiverType3.AddItemsWithMetadataProperty(ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Structure", {"structure_type_3_label"})
         ucrReceiverType1.SetMeAsReceiver()
     End Sub
+
 
     Private Sub TestOKEnabled()
         If (Not ucrReceiverType1.IsEmpty) OrElse (Not ucrReceiverType2.IsEmpty) OrElse (Not ucrReceiverType3.IsEmpty) Then
@@ -75,40 +96,7 @@ Public Class dlgColumnStructure
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverForColumnStructure_SelectionChanged() Handles ucrReceiverType1.SelectionChanged, ucrReceiverType3.SelectionChanged, ucrReceiverType2.SelectionChanged
-        StructureParameters()
+    Private Sub ucrReceiverType1_ControlContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverType1.ControlContentsChanged, ucrReceiverType2.ControlContentsChanged, ucrReceiverType3.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub StructureParameters()
-        If Not ucrReceiverType1.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("struc_type_1", ucrReceiverType1.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("struc_type_1")
-        End If
-        If Not ucrReceiverType2.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("struc_type_2", ucrReceiverType2.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("struc_type_2")
-        End If
-        If Not ucrReceiverType3.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("struc_type_3", ucrReceiverType3.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("struc_type_3")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSelectorColumnStructure_DataFrameChanged() Handles ucrSelectorColumnStructure.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsCourByStructure.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        SetColumnStructureInReceiver()
-    End Sub
-
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If chkColourColumnsByStr.Checked Then
-            frmMain.clsRLink.RunScript(clsCourByStructure.ToScript())
-        End If
     End Sub
 End Class
