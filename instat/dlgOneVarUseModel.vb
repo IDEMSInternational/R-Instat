@@ -89,11 +89,11 @@ Public Class dlgOneVarUseModel
         'ucrSaveBootstrapObjects
         ucrSaveBootstrapObjects.SetCheckBoxText("Save Bootstrap:")
         ucrSaveBootstrapObjects.SetSaveTypeAsModel()
-        ucrSaveBootstrapObjects.SetName("Bootstrap")
+        ucrSaveBootstrapObjects.SetName("bootstrap")
         ucrSaveBootstrapObjects.SetIsComboBox()
         'ucrSaveBootstrapObjects.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
         ucrSaveBootstrapObjects.SetAssignToIfUncheckedValue("last_bootstrap")
-        ucrSaveBootstrapObjects.SetAssignToBooleans(bTempInsertColumnBefore:=True)
+        'ucrSaveBootstrapObjects.SetAssignToBooleans(bTempInsertColumnBefore:=True)
 
         'sdgOneVarUseModBootstrap.SetMyBootFunction(clsRbootFunction)
         'sdgOneVarUseModBootstrap.SetMyRSyntax(ucrBase.clsRsyntax)
@@ -113,7 +113,7 @@ Public Class dlgOneVarUseModel
         'clsDefaultFunction.SetR, .SetAssignTo
         clsDefaultFunction.SetRCommand("quantile")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveToDataframe.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveBootstrapObjects.GetText(), bInsertColumnBefore:=True)
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempModel:=ucrSaveBootstrapObjects.GetText(), strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ', bInsertColumnBefore:=True)
 
         clsProduceBootstrap = clsDefaultProduceBootstrap.Clone
         clsOverallFunction = clsDefaultFunction.Clone
