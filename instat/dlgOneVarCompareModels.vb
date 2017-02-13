@@ -44,10 +44,10 @@ Public Class dlgOneVarCompareModels
         ucrSelectorOneVarCompModels.SetItemType("model")
 
         'ucrReceiver
-        UcrReceiver.SetParameter(New RParameter("f", 0))
-        UcrReceiver.SetParameterIsRFunction()
-        UcrReceiver.Selector = ucrSelectorOneVarCompModels
-        UcrReceiver.SetMeAsReceiver()
+        UcrReceiverCompareModels.SetParameter(New RParameter("f", 0))
+        UcrReceiverCompareModels.SetParameterIsRFunction()
+        UcrReceiverCompareModels.Selector = ucrSelectorOneVarCompModels
+        UcrReceiverCompareModels.SetMeAsReceiver()
 
 
         ' sdgOneVarCompareModels.InitialiseDialog()
@@ -75,7 +75,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not UcrReceiver.IsEmpty Then 'sdgOneVarCompareModels.TestOkEnabled() AndAlso Not  Then
+        If Not UcrReceiverCompareModels.IsEmpty Then 'sdgOneVarCompareModels.TestOkEnabled() AndAlso Not  Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -96,8 +96,8 @@ Public Class dlgOneVarCompareModels
         '    sdgOneVarCompareModels.DisplayChiSquare()
     End Sub
 
-    Private Sub UcrReceiver_SelectionChanged(ucrChangedControl As ucrCore) Handles UcrReceiver.ControlContentsChanged
-        If UcrReceiver.IsEmpty Then
+    Private Sub UcrReceiver_SelectionChanged(ucrChangedControl As ucrCore) Handles UcrReceiverCompareModels.ControlContentsChanged
+        If UcrReceiverCompareModels.IsEmpty Then
             cmdDisplayObjects.Enabled = False
         Else
             cmdDisplayObjects.Enabled = True

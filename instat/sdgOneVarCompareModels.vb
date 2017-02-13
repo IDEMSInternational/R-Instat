@@ -101,19 +101,19 @@ Public Class sdgOneVarCompareModels
         Dim strTemp As String = ""
 
         If chkCDF.Checked Then
-            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiverCompareModels.GetVariables())
             frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
         End If
         If chkPP.Checked Then
-            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiverCompareModels.GetVariables())
             frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
         End If
         If chkQQ.Checked Then
-            clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiverCompareModels.GetVariables())
             frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
         End If
         If chkDensity.Checked Then
-            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
+            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiverCompareModels.GetVariables())
             frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
         End If
         If chkSaveChi.Checked Then
