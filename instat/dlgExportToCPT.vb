@@ -58,7 +58,7 @@ Public Class dlgExportToCPT
     Private Sub InitialiseDialog()
         ucrBaseExportToCPT.iHelpTopicID = 355
         clsOutPutWide.SetRCommand("output_for_CPT")
-        clsOutPutLong.SetRCommand("output_for_CPT")
+        clsOutPutLong = clsOutPutWide.Clone()
 
         ucrSSTDataframe.SetParameter(New RParameter("data_name", 0))
         ucrSSTDataframe.SetParameterIsrfunction()
@@ -99,7 +99,6 @@ Public Class dlgExportToCPT
         ucrSSTDataframe.SetRCode(clsOutPutLong, bReset)
         ucrLocationDataFrame.SetRCode(clsOutPutLong, bReset)
         ucrReceiverYears.SetRCode(clsOutPutLong, bReset)
-
         ucrReceiverMultipleDataColumns.SetRCode(clsOutPutWide, bReset)
         ucrReceiverDataColumn.SetRCode(clsOutPutLong, bReset)
         ucrReceiverStations.SetRCode(clsOutPutLong, bReset)
@@ -137,7 +136,6 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub DataFormat()
-        ucrReceiverYears.Focus()
         If ucrChkLong.Checked Then
             ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutPutLong)
             clsOutPutLong.AddParameter("long", "TRUE")
@@ -159,7 +157,13 @@ Public Class dlgExportToCPT
         End If
     End Sub
 
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrSSTDataframe.ControlContentsChanged, ucrLocationDataFrame.ControlContentsChanged, ucrReceiverDataColumn.ControlContentsChanged, ucrReceiverMultipleDataColumns.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverYears.ControlContentsChanged, ucrChkLong.ControlContentsChanged
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrSSTDataframe.ControlContentsChanged, ucrLocationDataFrame.ControlContentsChanged, ucrReceiverDataColumn.ControlContentsChanged, ucrReceiverMultipleDataColumns.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverYears.ControlContentsChanged
+        DataFormat()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkLong_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkLong.ControlContentsChanged
+        ucrReceiverYears.Focus()
         DataFormat()
         TestOkEnabled()
     End Sub
