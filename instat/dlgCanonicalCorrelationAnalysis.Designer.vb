@@ -34,7 +34,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'lblYVariables
         '
-        Me.lblYVariables.Location = New System.Drawing.Point(267, 25)
+        Me.lblYVariables.Location = New System.Drawing.Point(267, 168)
         Me.lblYVariables.Name = "lblYVariables"
         Me.lblYVariables.Size = New System.Drawing.Size(100, 19)
         Me.lblYVariables.TabIndex = 1
@@ -43,7 +43,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'lblXVariables
         '
-        Me.lblXVariables.Location = New System.Drawing.Point(269, 152)
+        Me.lblXVariables.Location = New System.Drawing.Point(269, 45)
         Me.lblXVariables.Name = "lblXVariables"
         Me.lblXVariables.Size = New System.Drawing.Size(100, 23)
         Me.lblXVariables.TabIndex = 3
@@ -52,9 +52,9 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'cmdCCAOptions
         '
-        Me.cmdCCAOptions.Location = New System.Drawing.Point(291, 270)
+        Me.cmdCCAOptions.Location = New System.Drawing.Point(10, 204)
         Me.cmdCCAOptions.Name = "cmdCCAOptions"
-        Me.cmdCCAOptions.Size = New System.Drawing.Size(95, 23)
+        Me.cmdCCAOptions.Size = New System.Drawing.Size(120, 23)
         Me.cmdCCAOptions.TabIndex = 5
         Me.cmdCCAOptions.Tag = "CCA_Options..."
         Me.cmdCCAOptions.Text = "CCA Options.."
@@ -62,10 +62,8 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrReceiverXvariables
         '
-        Me.ucrReceiverXvariables.bAddRemoveParameter = True
-        Me.ucrReceiverXvariables.bChangeParameterValue = True
         Me.ucrReceiverXvariables.frmParent = Me
-        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(266, 167)
+        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(266, 60)
         Me.ucrReceiverXvariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverXvariables.Name = "ucrReceiverXvariables"
         Me.ucrReceiverXvariables.Selector = Nothing
@@ -74,10 +72,8 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrReceiverYvariables
         '
-        Me.ucrReceiverYvariables.bAddRemoveParameter = True
-        Me.ucrReceiverYvariables.bChangeParameterValue = True
         Me.ucrReceiverYvariables.frmParent = Me
-        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(266, 40)
+        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(266, 183)
         Me.ucrReceiverYvariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYvariables.Name = "ucrReceiverYvariables"
         Me.ucrReceiverYvariables.Selector = Nothing
@@ -86,11 +82,9 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrSelectorCCA
         '
-        Me.ucrSelectorCCA.bAddRemoveParameter = True
-        Me.ucrSelectorCCA.bChangeParameterValue = True
         Me.ucrSelectorCCA.bShowHiddenColumns = False
         Me.ucrSelectorCCA.bUseCurrentFilter = True
-        Me.ucrSelectorCCA.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorCCA.Location = New System.Drawing.Point(10, 9)
         Me.ucrSelectorCCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCCA.Name = "ucrSelectorCCA"
         Me.ucrSelectorCCA.Size = New System.Drawing.Size(210, 180)
@@ -105,11 +99,9 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrSaveResult
         '
-        Me.ucrSaveResult.bAddRemoveParameter = True
-        Me.ucrSaveResult.bChangeParameterValue = True
         Me.ucrSaveResult.Location = New System.Drawing.Point(10, 274)
         Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(275, 24)
+        Me.ucrSaveResult.Size = New System.Drawing.Size(253, 24)
         Me.ucrSaveResult.TabIndex = 6
         '
         'dlgCanonicalCorrelationAnalysis
