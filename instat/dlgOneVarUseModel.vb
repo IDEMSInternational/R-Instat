@@ -37,13 +37,27 @@ Public Class dlgOneVarUseModel
         TestOKEnabled()
     End Sub
     'WANT:
-    'dsadsasa <- InstatDataObject$get_models(model_name="dsadsasa", data_name="data1")
+    'x1 <- InstatDataObject$get_models(model_name="x1", data_name="data1")
     '' if bootstrap isn't checked:
-    ' quantile(x=dsadsasa)
+    'UseModel1 <- quantile(x=x1)
+
+
+    'GOT:
+    'x1 <- InstatDataObject$get_models(model_name="x1", data_name="Blocking")
+    'UseModel1 <- quantile(x=x1)
+    'InstatDataObject$import_data(data_tables = List(Blocking = UseModel1)) ' don't want this
+    'InstatDataObject$get_data_frame(data_name = "Blocking") ' don't want this
 
     '' if bootstrap checked
-    ' bootdist(f=dsadsasa)
-    ' quantile(x=bootdist(f=dsadsasa))
+    'Want:
+    ' bootdist(f=x22)
+    ' quantile(x=bootdist(f=x22))
+
+    'got:
+    'bootdist(f=x22)
+    'Bootstrap <- quantile(x=bootdist(f=x22))
+    'InstatDataObject$add_model(data_name = "Blocking", model = Bootstrap, model_name = "Bootstrap")
+    'InstatDataObject$get_models(model_name = "Bootstrap", data_name = "Blocking")
 
     Private Sub InitialiseDialog()
         'sdgOneVarUseModBootstrap.InitialiseDialog()
@@ -57,7 +71,7 @@ Public Class dlgOneVarUseModel
         ucrReceiver.SetMeAsReceiver()
         'ucrReceiver.AddToLinkedControls(ucrLinked:=ucrChkProduceBootstrap, objValues:={True}, bNewLinkedDisabledIfParameterMissing:=True)
         ' how do I say that if this has a value in it then I want it to be visible
-
+        ' I know this will be an issue elsewhere, such as with ucrDistributions
         ucrSelector.SetItemType("model")
 
         ' ucrSave
@@ -70,11 +84,6 @@ Public Class dlgOneVarUseModel
 
         'ucrChkProduceBootstrap
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
-        ' this adds bootdist(f = ...) but that's an additional function I have done that in it's own sub
-        ' I need to do that we have f = ...
-        ' this also changes the item in the main "quantile" function
-        ' means classes are involved, like in FileNew
-        ' however, I'm not sure of an example where a class is added to the main functino through a check box
         ucrChkProduceBootstrap.AddToLinkedControls(ucrLinked:=ucrSaveBootstrapObjects, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrSaveBootstrapObjects
@@ -93,31 +102,24 @@ Public Class dlgOneVarUseModel
         'sdgOneVarUseModFit.SetMyRSyntax(ucrBase.clsRsyntax)
     End Sub
 
-
     Private Sub SetDefaults()
         Dim clsDefaultFunction, clsDefaultProduceBootstrap As New RFunction
-
         ucrSelector.Reset()
         ucrSaveBootstrapObjects.Reset()
         ucrSaveToDataframe.Reset()
         ucrChkProduceBootstrap.Checked = False
         cmdBootstrapOptions.Visible = False
 
+        'clsDefaultFunction.SetR, .SetAssignTo
         clsDefaultFunction.SetRCommand("quantile")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveToDataframe.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveBootstrapObjects.GetText(), bInsertColumnBefore:=True)
 
-        ' the main command is quantile
-        ' then this = one thing if the check box isn't checked 
-        ' this = something else if the check box is checked.
-
         clsProduceBootstrap = clsDefaultProduceBootstrap.Clone
         clsOverallFunction = clsDefaultFunction.Clone
 
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         'bResetSubdialog = True
-
 
         'sdgOneVarUseModBootstrap.SetDefaults()
         'sdgOneVarUseModFit.SetDefaults()

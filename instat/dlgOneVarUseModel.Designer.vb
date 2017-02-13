@@ -36,7 +36,7 @@ Partial Class dlgOneVarUseModel
         'lblReceiver
         '
         Me.lblReceiver.AutoSize = True
-        Me.lblReceiver.Location = New System.Drawing.Point(239, 42)
+        Me.lblReceiver.Location = New System.Drawing.Point(239, 45)
         Me.lblReceiver.Name = "lblReceiver"
         Me.lblReceiver.Size = New System.Drawing.Size(86, 13)
         Me.lblReceiver.TabIndex = 1
@@ -62,6 +62,8 @@ Partial Class dlgOneVarUseModel
         '
         'ucrChkProduceBootstrap
         '
+        Me.ucrChkProduceBootstrap.bAddRemoveParameter = True
+        Me.ucrChkProduceBootstrap.bChangeParameterValue = True
         Me.ucrChkProduceBootstrap.Checked = False
         Me.ucrChkProduceBootstrap.Location = New System.Drawing.Point(239, 88)
         Me.ucrChkProduceBootstrap.Name = "ucrChkProduceBootstrap"
@@ -70,6 +72,8 @@ Partial Class dlgOneVarUseModel
         '
         'ucrSaveToDataframe
         '
+        Me.ucrSaveToDataframe.bAddRemoveParameter = True
+        Me.ucrSaveToDataframe.bChangeParameterValue = True
         Me.ucrSaveToDataframe.Location = New System.Drawing.Point(10, 237)
         Me.ucrSaveToDataframe.Name = "ucrSaveToDataframe"
         Me.ucrSaveToDataframe.Size = New System.Drawing.Size(289, 24)
@@ -77,6 +81,8 @@ Partial Class dlgOneVarUseModel
         '
         'ucrSaveBootstrapObjects
         '
+        Me.ucrSaveBootstrapObjects.bAddRemoveParameter = True
+        Me.ucrSaveBootstrapObjects.bChangeParameterValue = True
         Me.ucrSaveBootstrapObjects.Location = New System.Drawing.Point(10, 207)
         Me.ucrSaveBootstrapObjects.Name = "ucrSaveBootstrapObjects"
         Me.ucrSaveBootstrapObjects.Size = New System.Drawing.Size(289, 24)
@@ -91,8 +97,10 @@ Partial Class dlgOneVarUseModel
         '
         'ucrReceiver
         '
+        Me.ucrReceiver.bAddRemoveParameter = True
+        Me.ucrReceiver.bChangeParameterValue = True
         Me.ucrReceiver.frmParent = Me
-        Me.ucrReceiver.Location = New System.Drawing.Point(239, 57)
+        Me.ucrReceiver.Location = New System.Drawing.Point(239, 60)
         Me.ucrReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiver.Name = "ucrReceiver"
         Me.ucrReceiver.Selector = Nothing
@@ -101,6 +109,8 @@ Partial Class dlgOneVarUseModel
         '
         'ucrSelector
         '
+        Me.ucrSelector.bAddRemoveParameter = True
+        Me.ucrSelector.bChangeParameterValue = True
         Me.ucrSelector.bShowHiddenColumns = False
         Me.ucrSelector.bUseCurrentFilter = True
         Me.ucrSelector.Location = New System.Drawing.Point(10, 10)
