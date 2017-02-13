@@ -47,9 +47,8 @@ Public Class dlgDummyVariables
         ucrSelectorDummyVariable.Reset()
 
         clsDefaultFunction.SetRCommand("dummy")
-        clsDefaultFunction.SetAssignTo(strTemp:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy_vars", bAssignToColumnWithoutNames:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
