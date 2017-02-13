@@ -51,12 +51,12 @@ Partial Class dlgDummyVariables
         'lblVariate
         '
         Me.lblVariate.AutoSize = True
-        Me.lblVariate.Location = New System.Drawing.Point(204, 246)
+        Me.lblVariate.Location = New System.Drawing.Point(252, 240)
         Me.lblVariate.Name = "lblVariate"
-        Me.lblVariate.Size = New System.Drawing.Size(40, 13)
+        Me.lblVariate.Size = New System.Drawing.Size(43, 13)
         Me.lblVariate.TabIndex = 5
         Me.lblVariate.Tag = "Variate"
-        Me.lblVariate.Text = "Variate"
+        Me.lblVariate.Text = "Variate:"
         '
         'ucrSelectorDummyVariable
         '
@@ -71,11 +71,11 @@ Partial Class dlgDummyVariables
         'ucrVariateReceiver
         '
         Me.ucrVariateReceiver.frmParent = Me
-        Me.ucrVariateReceiver.Location = New System.Drawing.Point(250, 245)
+        Me.ucrVariateReceiver.Location = New System.Drawing.Point(298, 236)
         Me.ucrVariateReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrVariateReceiver.Name = "ucrVariateReceiver"
         Me.ucrVariateReceiver.Selector = Nothing
-        Me.ucrVariateReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrVariateReceiver.Size = New System.Drawing.Size(101, 20)
         Me.ucrVariateReceiver.TabIndex = 6
         '
         'ucrReceiverFactor
@@ -168,7 +168,7 @@ Partial Class dlgDummyVariables
         'ucrChkWithXVariable
         '
         Me.ucrChkWithXVariable.Checked = False
-        Me.ucrChkWithXVariable.Location = New System.Drawing.Point(10, 244)
+        Me.ucrChkWithXVariable.Location = New System.Drawing.Point(10, 236)
         Me.ucrChkWithXVariable.Name = "ucrChkWithXVariable"
         Me.ucrChkWithXVariable.Size = New System.Drawing.Size(128, 20)
         Me.ucrChkWithXVariable.TabIndex = 15
@@ -177,7 +177,7 @@ Partial Class dlgDummyVariables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 340)
+        Me.ClientSize = New System.Drawing.Size(415, 340)
         Me.Controls.Add(Me.ucrChkWithXVariable)
         Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)
