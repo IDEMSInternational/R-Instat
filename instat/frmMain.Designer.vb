@@ -424,6 +424,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionDefineCorruptionData = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3166,7 +3167,7 @@ Partial Class frmMain
         '
         'mnuCorruption
         '
-        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionPrepare, Me.mnuCorruptionDescribe, Me.mnuCorruptionModel})
+        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionDefineCorruptionData, Me.mnuCorruptionPrepare, Me.mnuCorruptionDescribe, Me.mnuCorruptionModel})
         Me.mnuCorruption.Name = "mnuCorruption"
         Me.mnuCorruption.Size = New System.Drawing.Size(77, 20)
         Me.mnuCorruption.Text = "Corruption"
@@ -3174,25 +3175,25 @@ Partial Class frmMain
         'mnuCorruptionFile
         '
         Me.mnuCorruptionFile.Name = "mnuCorruptionFile"
-        Me.mnuCorruptionFile.Size = New System.Drawing.Size(128, 22)
+        Me.mnuCorruptionFile.Size = New System.Drawing.Size(205, 22)
         Me.mnuCorruptionFile.Text = "File..."
         '
         'mnuCorruptionPrepare
         '
         Me.mnuCorruptionPrepare.Name = "mnuCorruptionPrepare"
-        Me.mnuCorruptionPrepare.Size = New System.Drawing.Size(128, 22)
+        Me.mnuCorruptionPrepare.Size = New System.Drawing.Size(205, 22)
         Me.mnuCorruptionPrepare.Text = "Prepare..."
         '
         'mnuCorruptionDescribe
         '
         Me.mnuCorruptionDescribe.Name = "mnuCorruptionDescribe"
-        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(128, 22)
+        Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(205, 22)
         Me.mnuCorruptionDescribe.Text = "Describe..."
         '
         'mnuCorruptionModel
         '
         Me.mnuCorruptionModel.Name = "mnuCorruptionModel"
-        Me.mnuCorruptionModel.Size = New System.Drawing.Size(128, 22)
+        Me.mnuCorruptionModel.Size = New System.Drawing.Size(205, 22)
         Me.mnuCorruptionModel.Text = "Model..."
         '
         'mnuTools
@@ -3260,6 +3261,12 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
+        '
+        'mnuCorruptionDefineCorruptionData
+        '
+        Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
+        Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(205, 22)
+        Me.mnuCorruptionDefineCorruptionData.Text = "Define Corruption Data..."
         '
         'frmMain
         '
@@ -3686,4 +3693,5 @@ Partial Class frmMain
     Friend WithEvents QCProceduresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator18 As ToolStripSeparator
     Friend WithEvents Extremes As ToolStripMenuItem
+    Friend WithEvents mnuCorruptionDefineCorruptionData As ToolStripMenuItem
 End Class
