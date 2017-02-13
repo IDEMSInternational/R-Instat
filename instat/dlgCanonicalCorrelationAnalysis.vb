@@ -51,14 +51,12 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrReceiverYvariables.SetParameter(New RParameter("y", 0))
         ucrReceiverYvariables.SetParameterIsRFunction()
         ucrReceiverYvariables.Selector = ucrSelectorCCA
-        ucrReceiverYvariables.SetMeAsReceiver() ' is this still the receiver after resetting?
         ucrReceiverYvariables.SetDataType("numeric")
 
         ' X Variable Selector
         ucrReceiverXvariables.SetParameter(New RParameter("x", 1))
         ucrReceiverXvariables.SetParameterIsRFunction()
         ucrReceiverXvariables.Selector = ucrSelectorCCA
-        ucrReceiverXvariables.SetMeAsReceiver() ' I want the Y var selector to be the default setting uponreset
         ucrReceiverXvariables.SetDataType("numeric")
 
         'ucrSaveResult
@@ -79,6 +77,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         Dim clsDefaultFunction As New RFunction
         ucrSelectorCCA.Reset()
         ucrSaveResult.Reset()
+        ucrReceiverXvariables.SetMeAsReceiver()
 
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("cancor")
