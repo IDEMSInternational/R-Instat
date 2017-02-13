@@ -53,6 +53,13 @@ Public Class dlgReplace
         ' Want:  InstatDataObject$replace_value_in_data(col_names= "Year", old_value=2, new_value = NA, data_name="Damango")
         ' Want:  InstatDataObject$replace_value_in_data(data_name= "Damango", col_names="Year", end_value="200", start_value="12", new_value="NA")
 
+        'For interval:
+        ' Got:
+        ' InstatDataObject$replace_value_in_data(data_name = "Blocking", col_names = "x1", closed_end_value = True, end_value = "1", new_value = 2,start_value = "0", old_value = 3)
+        ' need to not have old_value in it
+        ' need to not have "" around end_value, start_value (the intervals)
+        ' want:
+        ' InstatDataObject$replace_value_in_data(data_name = "Blocking", col_names = "x1", closed_end_value = TRUE, end_value=1,      new_value=3, start_value=0)
         rdoNewFromAbove.Enabled = False
 
         '' Old:
@@ -80,7 +87,7 @@ Public Class dlgReplace
 
         'ucrInputRangeFrom
         ucrInputRangeFrom.SetParameter(New RParameter("start_value"))
-        ' no quotation marks for this
+        ' no quotation marks for this '
         ucrInputRangeFrom.SetName("0")
         ucrInputRangeFrom.bChangeParameterValue = False
         ucrInputRangeFrom.SetLinkedDisplayControl(lblRangeMin)
