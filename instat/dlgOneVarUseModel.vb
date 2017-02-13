@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat
 Imports instat.Translations
 
@@ -21,7 +20,7 @@ Public Class dlgOneVarUseModel
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     '  Private bResetSubdialog As Boolean = False
-    Public clsRbootFunction As New RFunction
+    Public clsProduceBootstrap, clsOverallFunction As New RFunction
 
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -45,19 +44,6 @@ Public Class dlgOneVarUseModel
     '' if bootstrap checked
     ' bootdist(f=dsadsasa)
     ' quantile(x=bootdist(f=dsadsasa))
-
-
-    'If ucrChkProduceBootstrap.Checked Then
-    'ucrReceiver.SetParameter(ucrChkProduceBootstrap.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-    'Else
-    'ucrReceiver.Setparameter() usually
-    'End If
-    ' not this because it's not in defaults
-
-    ' filenew: data.frame(matrix(nrow = 10, ncol = 2, Data = NA))
-    ' I have "quantile" like the data.frame
-    ' matrix is the bootdist
-    ' f = is the parameter
 
     Private Sub InitialiseDialog()
         'sdgOneVarUseModBootstrap.InitialiseDialog()
@@ -84,8 +70,8 @@ Public Class dlgOneVarUseModel
 
         'ucrChkProduceBootstrap
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
-        ' this adds bootdist(f = ...) but that's an additional function so I think this is defined later
-        ' in Alex's permute he deals with adding another function when Set Seed is selected
+        ' this adds bootdist(f = ...) but that's an additional function I have done that in it's own sub
+        ' I need to do that we have f = ...
         ' this also changes the item in the main "quantile" function
         ' means classes are involved, like in FileNew
         ' however, I'm not sure of an example where a class is added to the main functino through a check box
@@ -109,7 +95,7 @@ Public Class dlgOneVarUseModel
 
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        Dim clsDefaultFunction, clsDefaultProduceBootstrap As New RFunction
 
         ucrSelector.Reset()
         ucrSaveBootstrapObjects.Reset()
@@ -125,16 +111,17 @@ Public Class dlgOneVarUseModel
         ' then this = one thing if the check box isn't checked 
         ' this = something else if the check box is checked.
 
+        clsProduceBootstrap = clsDefaultProduceBootstrap.Clone
+        clsOverallFunction = clsDefaultFunction.Clone
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         'bResetSubdialog = True
 
 
-        ucrSelector.Focus()
         'sdgOneVarUseModBootstrap.SetDefaults()
         'sdgOneVarUseModFit.SetDefaults()
         SetFunctions()
-        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -148,15 +135,15 @@ Public Class dlgOneVarUseModel
         End If
     End Sub
 
+    ' Base Function parameters change depending if check box is checked
     Private Sub SetFunctions()
         If ucrChkProduceBootstrap.Checked Then
-            clsRbootFunction.SetRCommand("bootdist")
-            clsRbootFunction.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsRbootFunction)
+            clsProduceBootstrap.SetRCommand("bootdist")
+            clsProduceBootstrap.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsProduceBootstrap)
         Else
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiver.GetVariables())
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -183,12 +170,13 @@ Public Class dlgOneVarUseModel
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkProduceBootstrap.Checked Then
-            frmMain.clsRLink.RunScript(clsRbootFunction.ToScript(), iCallType:=2)
+            frmMain.clsRLink.RunScript(clsProduceBootstrap.ToScript(), iCallType:=2)
         End If
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucr....SetRCode(clsOverallFunction, bReset)
+        ucrChkProduceBootstrap.SetRCode(clsProduceBootstrap, bReset)
     End Sub
 
     Private Sub TestOK_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiver.ControlContentsChanged, ucrSaveToDataframe.ControlContentsChanged, ucrSaveBootstrapObjects.ControlContentsChanged, ucrChkProduceBootstrap.ControlContentsChanged
