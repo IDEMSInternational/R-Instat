@@ -44,7 +44,6 @@ Public Class dlgImportFromODK
         ucrPnlPlatform.SetParameter(New RParameter("platform", 0))
         ucrPnlPlatform.AddRadioButton(rdoKobo, Chr(34) & "kobo" & Chr(34))
         ucrPnlPlatform.AddRadioButton(rdoOna, Chr(34) & "ona" & Chr(34))
-        ucrPnlPlatform.SetRDefault(Chr(34) & "kobo" & Chr(34))
 
         ucrInputChooseForm.SetParameter(New RParameter("form_name", 3))
         ucrInputUsername.SetParameter(New RParameter("username", 1))
