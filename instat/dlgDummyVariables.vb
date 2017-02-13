@@ -44,12 +44,10 @@ Public Class dlgDummyVariables
         ' Set default RFunction as the base function
         Dim clsDefaultFunction As New RFunction
 
-        ucrSelectorDummyVariable.Focus()
         ucrSelectorDummyVariable.Reset()
 
         clsDefaultFunction.SetRCommand("dummy")
-        clsDefaultFunction.SetAssignTo(strTemp:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-        clsDefaultFunction.SetAssignTo("dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy")
+        clsDefaultFunction.SetAssignTo(strTemp:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="dummy_vars", bAssignToColumnWithoutNames:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
 
@@ -78,7 +76,7 @@ Public Class dlgDummyVariables
         'ucrPnlLevelOmitted.AddRadioButton(rdoLevelNumber, "")
 
         ucrChkWithXVariable.Enabled = False
-        ucrChkWithXVariable.SetText("With X Variable")
+        ucrChkWithXVariable.SetText("With X Variable:")
         ' ucrChkWithXVariable.SetParameter(New RParameter(""))
 
         'Note: This was not implemented (Additions of ucrInputColumns were added for appending new columns with prefix "dummy" ): Just added if incase it was to be added otherwise it can be deleted
