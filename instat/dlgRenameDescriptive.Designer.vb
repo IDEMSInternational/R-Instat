@@ -50,7 +50,7 @@ Partial Class dlgRenameDescriptive
         'ucrReceiverCurrentName
         '
         Me.ucrReceiverCurrentName.frmParent = Me
-        Me.ucrReceiverCurrentName.Location = New System.Drawing.Point(265, 49)
+        Me.ucrReceiverCurrentName.Location = New System.Drawing.Point(262, 60)
         Me.ucrReceiverCurrentName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCurrentName.Name = "ucrReceiverCurrentName"
         Me.ucrReceiverCurrentName.Selector = Nothing
@@ -59,16 +59,16 @@ Partial Class dlgRenameDescriptive
         '
         'lblCurrentName
         '
-        Me.lblCurrentName.Location = New System.Drawing.Point(263, 31)
+        Me.lblCurrentName.Location = New System.Drawing.Point(262, 45)
         Me.lblCurrentName.Name = "lblCurrentName"
-        Me.lblCurrentName.Size = New System.Drawing.Size(100, 23)
+        Me.lblCurrentName.Size = New System.Drawing.Size(100, 15)
         Me.lblCurrentName.TabIndex = 1
         Me.lblCurrentName.Tag = "Current_Name"
         Me.lblCurrentName.Text = "Current Name:"
         '
         'lblNewName
         '
-        Me.lblNewName.Location = New System.Drawing.Point(263, 95)
+        Me.lblNewName.Location = New System.Drawing.Point(262, 93)
         Me.lblNewName.Name = "lblNewName"
         Me.lblNewName.Size = New System.Drawing.Size(100, 13)
         Me.lblNewName.TabIndex = 3
@@ -79,7 +79,7 @@ Partial Class dlgRenameDescriptive
         '
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(265, 111)
+        Me.ucrInputNewName.Location = New System.Drawing.Point(262, 107)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputNewName.TabIndex = 4

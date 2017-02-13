@@ -17,9 +17,7 @@ Imports instat.Translations
 Public Class dlgRenameDescriptive
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Dim bUseSelectedObject As Boolean = False
-    Dim strSelectedOject As String = ""
-    Dim strSelectedDataFrame As String = ""
+
     Private Sub dlgRenameDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
