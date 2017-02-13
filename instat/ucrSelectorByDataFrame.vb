@@ -108,11 +108,11 @@ Public Class ucrSelectorByDataFrame
         End If
     End Function
 
-    Public Overrides Function IsDefault() As Boolean
+    Public Overrides Function IsRDefault() As Boolean
         If bHasOwnParameter Then
-            Return MyBase.IsDefault()
+            Return MyBase.IsRDefault()
         Else
-            Return ucrAvailableDataFrames.IsDefault()
+            Return ucrAvailableDataFrames.IsRDefault()
         End If
     End Function
 
@@ -131,4 +131,9 @@ Public Class ucrSelectorByDataFrame
             Return ucrAvailableDataFrames.GetParameter()
         End If
     End Function
+
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+        MyBase.SetRCode(clsNewCodeStructure, bReset)
+        ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
+    End Sub
 End Class

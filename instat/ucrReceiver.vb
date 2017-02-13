@@ -385,7 +385,7 @@ Public Class ucrReceiver
         Return lstVariables
     End Function
 
-    Public Overrides Function IsDefault() As Boolean
+    Public Overrides Function IsRDefault() As Boolean
         Return IsEmpty()
     End Function
 End Class
