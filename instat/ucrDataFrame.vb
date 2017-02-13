@@ -206,7 +206,7 @@ Public Class ucrDataFrame
         UpdateParameter()
     End Sub
 
-    Public Overrides Function IsDefault() As Boolean
+    Public Overrides Function IsRDefault() As Boolean
         Return clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(cboAvailableDataFrames.Text)
     End Function
 End Class
