@@ -13,103 +13,78 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgSplitText
     Public bFirstLoad As Boolean = True
+    Public clsDefaultFunction As New RFunction
+
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog
         End If
         TestOKEnabled()
     End Sub
 
-    Private Sub ReopenDialog()
+    Private Sub InitialiseDialog()
+        Dim dctPatternPairs As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 344
+
+        ucrInputPattern.SetParameter(New RParameter("pattern"))
+        dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
+        dctPatternPairs.Add("Period .", "fixed(" & Chr(34) & "." & Chr(34) & ")")
+        dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
+        dctPatternPairs.Add("Colon :", Chr(34) & ":" & Chr(34))
+        dctPatternPairs.Add("Semicolon ;", Chr(34) & ";" & Chr(34))
+        dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
+        dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
+        ucrInputPattern.SetItems(dctPatternPairs)
+
+        ucrReceiverSplitTextColumn.SetParameter(New RParameter("string"))
+        ucrReceiverSplitTextColumn.SetParameterIsRFunction()
+        ucrReceiverSplitTextColumn.Selector = ucrSelectorSplitTextColumn
+        ucrReceiverSplitTextColumn.SetMeAsReceiver()
+        ucrReceiverSplitTextColumn.bUseFilteredData = False
+        ucrReceiverSplitTextColumn.SetIncludedDataTypes({"factor", "character"})
+
+        ucrSaveColumn.SetIsTextBox()
+        ucrSaveColumn.SetSaveTypeAsColumn()
+        ucrSaveColumn.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
+        ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveColumn.SetLabelText("Prefix for New Columns:")
+
+        ucrNudPieces.SetParameter(New RParameter("n"))
+
+        clsDefaultFunction.SetRCommand("str_split_fixed")
+        clsDefaultFunction.AddParameter("pattern", Chr(34) & "," & Chr(34))
+        clsDefaultFunction.AddParameter("n", 2)
+        clsDefaultFunction.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
     End Sub
+
+    Private Sub SetDefaults()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrSelectorSplitTextColumn.Reset()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        TestOKEnabled()
+    End Sub
+
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso nudN.Text <> "" AndAlso Not ucrInputPattern.IsEmpty AndAlso Not ucrInputColumnsIntoText.IsEmpty Then
+        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso ucrNudPieces.GetText <> "" AndAlso Not ucrInputPattern.IsEmpty AndAlso ucrSaveColumn.IsComplete() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
-
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrReceiverSplitTextColumn.Selector = ucrSelectorSplitTextColumn
-        ucrReceiverSplitTextColumn.SetMeAsReceiver()
-        ucrReceiverSplitTextColumn.bUseFilteredData = False
-        ucrBase.clsRsyntax.SetFunction("stringr::str_split_fixed")
-        ucrReceiverSplitTextColumn.SetIncludedDataTypes({"factor", "character"})
-        ucrInputColumnsIntoText.SetItemsTypeAsColumns()
-        ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
-        ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
-        ucrInputPattern.SetItems({"Whitespace", ".", "-", "_"})
-        ucrBase.iHelpTopicID = 344
-        ucrInputColumnsIntoText.SetValidationTypeAsRVariable()
-
-    End Sub
-
-    Private Sub SetDefaults()
-        ucrSelectorSplitTextColumn.Reset()
-        ucrSelectorSplitTextColumn.Focus()
-        ucrInputColumnsIntoText.SetName("SplitText")
-        ucrInputPattern.ResetText()
-        nudN.Value = 2
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrSelectorSplitTextColumn.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-    Private Sub cboInputPattern_Namechanged() Handles ucrInputPattern.NameChanged
-        PatternParameter()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub PatternParameter()
-        Select Case ucrInputPattern.GetText
-            Case "Whitespace"
-                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & " " & Chr(34))
-            Case ""
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    ucrBase.clsRsyntax.AddParameter("pattern", "fixed (" & Chr(34) & "" & Chr(34) & ")")
-                Else
-                    ucrBase.clsRsyntax.RemoveParameter("pattern")
-                End If
-            Case Else
-                ucrBase.clsRsyntax.AddParameter("pattern", "fixed (" & Chr(34) & ucrInputPattern.GetText() & Chr(34) & ")")
-        End Select
-    End Sub
-
-    Private Sub ucrInputColumnIntText_NameChanged() Handles ucrInputColumnsIntoText.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumnsIntoText.GetText, strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnsIntoText.GetText, bAssignToIsPrefix:=True)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverSplitTextColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSplitTextColumn.SelectionChanged
-        If Not ucrReceiverSplitTextColumn.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("string", clsRFunctionParameter:=ucrReceiverSplitTextColumn.GetVariables())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("string")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub nudN_TextChanged(sender As Object, e As EventArgs) Handles nudN.TextChanged
-        If nudN.Text <> "" Then
-            ucrBase.clsRsyntax.AddParameter("n", nudN.Value)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("n")
-        End If
-        TestOKEnabled()
-    End Sub
-
 End Class

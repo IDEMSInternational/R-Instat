@@ -26,13 +26,12 @@ Public Class ucrDataFrame
     Public strCurrDataFrame As String = ""
     Public bDataFrameFixed As Boolean = False
     Private strFixedDataFrame As String
-    'If the control is used to set a parameter that is a string i.e. data = "survey"
+    'If the control is used to set a parameter that is a string i.e. data_name = "survey"
     Private bParameterIsString As Boolean = False
-    'If the control is used to set a parameter that is an RFunction i.e. x= InstatDataObject$get_data_frame(data_name = "survey")
+    'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_data_frame(data_name = "survey")
     Private bParameterIsRFunction As Boolean = False
-    'When bParameterIsRFunction = True what is the name of the parameter setting the data frame name inside that RFunction
+    'The name of the data parameter in the get data frame instat object method (should always be the same)
     Private strDataParameterNameInRFunction As String = "data_name"
-    'TODO need method to set this (but probably no dialog needs to change from default yet)
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillComboBox()
@@ -45,6 +44,8 @@ Public Class ucrDataFrame
 
     Private Sub InitialiseControl()
         bUseCurrentFilter = True
+        SetRDefault("")
+        bUpdateRCodeFromControl = True
     End Sub
 
     Public Sub Reset()
@@ -82,11 +83,22 @@ Public Class ucrDataFrame
             cboAvailableDataFrames.Text = ""
         End If
         If strCurrDataFrame <> cboAvailableDataFrames.Text Then
+            UpdateParameter()
             RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
             strCurrDataFrame = cboAvailableDataFrames.Text
             SetDataFrameProperties()
-            OnControlContentsChanged()
             OnControlValueChanged()
+        End If
+    End Sub
+
+    Public Sub UpdateParameter()
+        If clsParameter IsNot Nothing Then
+            If bParameterIsString Then
+                clsParameter.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
+            ElseIf bParameterIsRFunction Then
+                clsParameter.SetArgument(clsCurrDataFrame)
+            End If
+            UpdateRCode()
         End If
     End Sub
 
@@ -158,22 +170,19 @@ Public Class ucrDataFrame
         Clipboard.SetText(cboAvailableDataFrames.SelectedText)
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        Dim clsTempParam As RParameter
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
         Dim clsTempDataParameter As RParameter
         Dim strDataFrameName As String = ""
 
-        MyBase.UpdateControl(clsRCodeObject)
-
-        clsTempParam = clsRCodeObject.GetParameter(strParameterName)
-        If clsTempParam IsNot Nothing AndAlso strParameterName <> "" Then
-            If bParameterIsString Then
-                strDataFrameName = clsTempParam.strArgumentValue
-            ElseIf bParameterIsRFunction Then
-                If clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
-                    clsTempDataParameter = clsTempParam.clsArgumentCodeStructure.GetParameter(strDataParameterNameInRFunction)
+        MyBase.UpdateControl()
+        If clsParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If bParameterIsString AndAlso clsParameter.bIsString Then
+                    strDataFrameName = clsParameter.strArgumentValue
+                ElseIf bParameterIsRFunction AndAlso clsParameter.bIsFunction Then
+                    clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strDataParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        strDataFrameName = clsTempParam.clsArgumentCodeStructure.GetParameter(strDataParameterNameInRFunction).strArgumentValue
+                        strDataFrameName = clsParameter.clsArgumentCodeStructure.GetParameter(strDataParameterNameInRFunction).strArgumentValue
                     End If
                 End If
             End If
@@ -185,28 +194,19 @@ Public Class ucrDataFrame
         End If
     End Sub
 
-    Public Overrides Sub UpdateRCode(Optional clsRFunction As RFunction = Nothing, Optional clsROperator As ROperator = Nothing)
-        MyBase.UpdateRCode(clsRFunction, clsROperator)
-        If cboAvailableDataFrames.Text <> "" Then
-            If clsRFunction IsNot Nothing Then
-                If bParameterIsString Then
-                    clsRFunction.AddParameter(strParameterName, Chr(34) & cboAvailableDataFrames.Text & Chr(34))
-                ElseIf bParameterIsRFunction Then
-                    clsRFunction.AddParameter(strParameterName, clsRFunctionParameter:=clsCurrDataFrame)
-                End If
-            ElseIf clsROperator IsNot Nothing Then
-                'TODO
-            End If
-        End If
-    End Sub
-
     Public Sub SetParameterIsString()
         bParameterIsString = True
         bParameterIsRFunction = False
+        UpdateParameter()
     End Sub
 
     Public Sub SetParameterIsRFunction()
         bParameterIsRFunction = True
         bParameterIsString = False
+        UpdateParameter()
     End Sub
+
+    Public Overrides Function IsRDefault() As Boolean
+        Return clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(cboAvailableDataFrames.Text)
+    End Function
 End Class
