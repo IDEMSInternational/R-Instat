@@ -36,7 +36,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblExplanatoryVariables
         '
         Me.lblExplanatoryVariables.AutoSize = True
-        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(248, 18)
+        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(251, 45)
         Me.lblExplanatoryVariables.Name = "lblExplanatoryVariables"
         Me.lblExplanatoryVariables.Size = New System.Drawing.Size(111, 13)
         Me.lblExplanatoryVariables.TabIndex = 1
@@ -56,7 +56,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblComponents
         '
         Me.lblComponents.AutoSize = True
-        Me.lblComponents.Location = New System.Drawing.Point(247, 148)
+        Me.lblComponents.Location = New System.Drawing.Point(247, 154)
         Me.lblComponents.Name = "lblComponents"
         Me.lblComponents.Size = New System.Drawing.Size(121, 13)
         Me.lblComponents.TabIndex = 3
@@ -68,11 +68,11 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrReceiverMultiplePCA.bAddRemoveParameter = True
         Me.ucrReceiverMultiplePCA.bChangeParameterValue = True
         Me.ucrReceiverMultiplePCA.frmParent = Me
-        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(250, 34)
+        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(250, 60)
         Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
         Me.ucrReceiverMultiplePCA.Selector = Nothing
-        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(120, 88)
         Me.ucrReceiverMultiplePCA.TabIndex = 2
         '
         'ucrSelectorPCA
@@ -100,7 +100,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrNudNumberOfComp.bChangeParameterValue = True
         Me.ucrNudNumberOfComp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfComp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfComp.Location = New System.Drawing.Point(368, 145)
+        Me.ucrNudNumberOfComp.Location = New System.Drawing.Point(370, 151)
         Me.ucrNudNumberOfComp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfComp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfComp.Name = "ucrNudNumberOfComp"
