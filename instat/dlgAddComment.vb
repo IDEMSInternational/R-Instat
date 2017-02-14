@@ -16,6 +16,9 @@
 
 Imports instat.Translations
 Public Class dlgAddComment
+    Dim bUseSelectedColumn As Boolean = False
+    Dim strSelectedColumn As String = ""
+    Dim strSelectedDataFrame As String = ""
     Public bFirstLoad As Boolean = True
     Private Sub dlgAddComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -24,14 +27,29 @@ Public Class dlgAddComment
             SetDefaults()
             bFirstLoad = False
         End If
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
+        End If
         TestOKEnabled()
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 508
-        ucrReceiverRow.Selector = ucrSelectorAddComment
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
     End Sub
 
+    Private Sub SetDefaultColumn()
+        ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
+        ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 508
+        ucrReceiverColumn.Selector = ucrSelectorAddComment
+        ucrReceiverColumn.SetMeAsReceiver()
+    End Sub
     Private Sub TestOKEnabled()
 
     End Sub
@@ -47,6 +65,7 @@ Public Class dlgAddComment
         ucrReceiverColumn.Enabled = False
         lblColumn.Enabled = False
         lblRow.Enabled = False
+        ucrInputComment.IsMultiline = True
     End Sub
 
     Private Sub rdoRow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRow.CheckedChanged, rdoCell.CheckedChanged
