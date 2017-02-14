@@ -18,7 +18,6 @@ Public Class dlgExportToOpenRefine
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsWriteToCSV As New RFunction
-    Private clsRefine As New RFunction
     Private Sub dlgExportToOpenRefine_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -34,12 +33,11 @@ Public Class dlgExportToOpenRefine
 
     Private Sub SetDefaults()
         Dim clsDefaultRefine, clsDefaultWrite As New RFunction
-        'chkRefineBrowser.Checked = False
+
         ucrOpenRefineDataFrame.Reset()
         ucrInputDatasetName.Reset()
 
-
-
+        NewDefultName()
         clsDefaultWrite.SetRCommand("write.csv")
         clsDefaultWrite.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
         clsDefaultWrite.AddParameter("row.names", "FALSE")
@@ -51,21 +49,20 @@ Public Class dlgExportToOpenRefine
         clsDefaultRefine.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
         clsDefaultRefine.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
         clsDefaultRefine.AddParameter("open.browser", "FALSE")
-        ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
 
-        clsRefine = clsDefaultRefine.Clone
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRefine.Clone())
 
-        'ucrBase.OKEnabled(False)
+        ucrBase.OKEnabled(False)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrchkOpenBrowser.SetRCode(clsRefine, bReset)
-    End Sub
+            End Sub
     Private Sub NewDefultName()
-        If Not ucrInputDatasetName.bUserTyped Then
+        If ucrOpenRefineDataFrame.cboAvailableDataFrames.Text <> "" Then
             ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
+        Else
+            ucrInputDatasetName.Reset()
         End If
     End Sub
     Private Sub InitialiseDialog()
@@ -78,17 +75,17 @@ Public Class dlgExportToOpenRefine
         ucrInputDatasetName.SetValidationTypeAsRVariable()
 
         ucrchkOpenBrowser.SetParameter(New RParameter("open.browser", 2))
-        ucrchkOpenBrowser.SetValueIfChecked("TRUE")
-        ' ucrchkOpenBrowser.SetRDefault("FALSE")
+        ucrchkOpenBrowser.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrchkOpenBrowser.SetRDefault("FALSE")
         ucrchkOpenBrowser.SetText("Open Browser")
 
     End Sub
     Private Sub TestOKEnabled()
-        If ucrInputDatasetName.IsEmpty = True Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
+        'If ucrInputDatasetName.IsEmpty = True Then
+        '    ucrBase.OKEnabled(False)
+        'Else
+        '    ucrBase.OKEnabled(True)
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
