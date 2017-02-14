@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgMakeDate
     Public clsPaste As New RFunction
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
@@ -27,15 +28,37 @@ Public Class dlgMakeDate
             SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
-        TestOKEnabled()
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
+        'helpID
         ucrBase.iHelpTopicID = 461
+
+        'ucrReceiver
+        ucrReceiverForDate.Selector = ucrSelectorMakeDate
+        ucrReceiverYearTwo.Selector = ucrSelectorMakeDate
+        ucrReceiverDayTwo.Selector = ucrSelectorMakeDate
+        ucrReceiverYearThree.Selector = ucrSelectorMakeDate
+        ucrReceiverMonthThree.Selector = ucrSelectorMakeDate
+        ucrReceiverDayThree.Selector = ucrSelectorMakeDate
+
+        'Setting filters
+        ucrReceiverForDate.bUseFilteredData = False
+        ucrReceiverYearTwo.bUseFilteredData = False
+        ucrReceiverDayTwo.bUseFilteredData = False
+        ucrReceiverYearThree.bUseFilteredData = False
+        ucrReceiverMonthThree.bUseFilteredData = False
+        ucrReceiverDayThree.bUseFilteredData = False
+
         ucrInputNewColumnName.SetItemsTypeAsColumns()
         ucrInputNewColumnName.SetDefaultTypeAsColumn()
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
@@ -45,6 +68,7 @@ Public Class dlgMakeDate
         ucrInputYear.SetItems({"4 Digit", "2 Digit"})
         ucrInputMonth.SetItems({"Numerical", "Partial Word", "Full Word"})
         ucrInputMonthOption.SetItems({"Numerical", "Partial Word", "Full Word"})
+
         'Dim lstYearItems As New List(Of KeyValuePair(Of String, String))
         'lstYearItems.Add(New KeyValuePair(Of String, String)("4 Digit", Chr(34) & "%Y" & Chr(34)))
         'lstYearItems.Add(New KeyValuePair(Of String, String)("2 Digit", Chr(34) & "%y" & Chr(34)))
@@ -83,19 +107,7 @@ Public Class dlgMakeDate
         'lstDateOrigin.Add(New KeyValuePair(Of String, String)("Gregorian", Chr(34) & "01-03-1600" & Chr(34)))
         'ucrInputOrigin.SetItems(lstDateOrigin)
 
-        ucrReceiverForDate.Selector = ucrSelectorMakeDate
-        ucrReceiverYearTwo.Selector = ucrSelectorMakeDate
-        ucrReceiverDayTwo.Selector = ucrSelectorMakeDate
-        ucrReceiverYearThree.Selector = ucrSelectorMakeDate
-        ucrReceiverMonthThree.Selector = ucrSelectorMakeDate
-        ucrReceiverDayThree.Selector = ucrSelectorMakeDate
 
-        ucrReceiverForDate.bUseFilteredData = False
-        ucrReceiverYearTwo.bUseFilteredData = False
-        ucrReceiverDayTwo.bUseFilteredData = False
-        ucrReceiverYearThree.bUseFilteredData = False
-        ucrReceiverMonthThree.bUseFilteredData = False
-        ucrReceiverDayThree.bUseFilteredData = False
 
     End Sub
 
@@ -126,6 +138,10 @@ Public Class dlgMakeDate
         chkMore.Checked = False
         chkMore.Visible = True
         Formats()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
