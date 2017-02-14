@@ -46,6 +46,7 @@ Public Class dlgImportFromODK
         ucrPnlPlatform.AddRadioButton(rdoOna, Chr(34) & "ona" & Chr(34))
 
         ucrInputChooseForm.SetParameter(New RParameter("form_name", 3))
+        ucrInputChooseForm.bAllowNonConditionValues = True
         ucrInputUsername.SetParameter(New RParameter("username", 1))
         ucrInputPassword.SetParameter(New RParameter("password", 2))
 
@@ -86,7 +87,7 @@ Public Class dlgImportFromODK
         SetRCodeForControls(True)
     End Sub
 
-    Private Sub pnlPlatform_ControlContentsChanged() Handles ucrPnlPlatform.ControlContentsChanged
+    Private Sub pnlPlatform_ControlContentsChanged() Handles ucrPnlPlatform.ControlValueChanged
         If rdoOna.Checked Then
             clsGetFormsFunction.AddParameter("platform", Chr(34) & "ona" & Chr(34))
         ElseIf rdoKobo.Checked Then
@@ -103,7 +104,7 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub ucrInputPassword_NameChanged() Handles ucrInputPassword.ControlValueChanged
-        useSystemePassword()
+        UseSystemPassword()
         If ucrInputPassword.IsEmpty() Then
             clsGetFormsFunction.RemoveParameterByName("password")
         Else
@@ -144,10 +145,10 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub chkViewPassword_CheckedChanged() Handles ucrChkViewPassword.ControlContentsChanged
-        useSystemePassword()
+        UseSystemPassword()
     End Sub
 
-    Private Sub useSystemePassword()
+    Private Sub UseSystemPassword()
         If ucrChkViewPassword.Checked Then
             ucrInputPassword.txtInput.UseSystemPasswordChar = False
         Else
