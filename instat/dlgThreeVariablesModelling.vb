@@ -254,7 +254,7 @@ Public Class dlgThreeVariableModelling
         End If
     End Sub
 
-    Public Sub ucrFamily_ucrInputDistributionTextChangedchanged(sender As Object, e As EventArgs) Handles ucrFamily.ucrInputDistributionTextChangedchanged
+    Public Sub ucrFamily_ucrInputDistributionTextChangedchanged() Handles ucrFamily.ContentsChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()

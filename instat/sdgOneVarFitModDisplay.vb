@@ -83,7 +83,7 @@ Public Class sdgOneVarFitModDisplay
         End If
     End Sub
 
-    Private Sub ucrDists_ucrInputDistributionTextChangedchanged(sender As Object, e As EventArgs) Handles ucrDists.ucrInputDistributionTextChangedchanged
+    Private Sub ucrDists_ucrInputDistributionTextChangedchanged() Handles ucrDists.ContentsChanged
         SetPlotOptions()
     End Sub
 

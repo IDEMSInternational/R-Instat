@@ -184,7 +184,7 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrDistWithParameters_ucrInputDistributionsTextChanged(sender As Object, e As EventArgs) Handles ucrDistWithParameters.ucrInputDistributionTextChangedchanged
+    Private Sub ucrDistWithParameters_ucrInputDistributionsTextChanged() Handles ucrDistWithParameters.ContentsChanged
         SetDataFrameandDistributionParameters()
     End Sub
 End Class

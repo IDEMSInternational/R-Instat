@@ -275,7 +275,7 @@ Public Class dlgFitModel
         'End If
     End Sub
 
-    Public Sub ucrFamily_ucrInputDistributionTextChangedchanged(sender As Object, e As EventArgs) Handles ucrFamily.ucrInputDistributionTextChangedchanged
+    Public Sub ucrFamily_ucrInputDistributionTextChangedchanged() Handles ucrFamily.ContentsChanged
         ChooseRFunction()
     End Sub
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk

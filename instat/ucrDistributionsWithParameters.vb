@@ -99,7 +99,7 @@ Public Class ucrDistributionsWithParameters
         End If
     End Sub
 
-    Private Sub ucrDistributionsWithParameters_ucrDistributionsTextChanged(sender As Object, e As EventArgs) Handles Me.ucrInputDistributionTextChangedchanged
+    Private Sub ucrDistributionsWithParameters_ucrDistributionsTextChanged() Handles Me.ContentsChanged
         SetParameters()
     End Sub
 
