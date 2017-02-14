@@ -108,7 +108,6 @@ Public Class dlgClimdex
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-
         ucrSelectorClimdex.SetRCode(clsRDate, bReset)
         ucrSelectorClimdex.SetRCode(clsRTmax, bReset)
         ucrSelectorClimdex.SetRCode(clsRTmin, bReset)
