@@ -158,6 +158,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub TestOKEnabled()
+
         If Not ucrInputNewColumnName.IsEmpty Then
             ' we have three radio buttons, so need to define when OK can be enabled for each radio button.
             If rdoSingleColumn.Checked Then
@@ -196,7 +197,7 @@ Public Class dlgMakeDate
     End Sub
 
     'New Column Name
-    Private Sub UcrInputNewColumnName_NameChanged() Handles ucrInputNewColumnName.NameChanged
+    Private Sub UcrInputNewColumnName_NameChanged()
         SetAssignTo()
     End Sub
 
@@ -216,13 +217,13 @@ Public Class dlgMakeDate
     End Sub
 
     ' When the three radio buttons are checked or unchecked
-    Private Sub rdoSingleColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSingleColumn.CheckedChanged, rdoYearandDayofYear.CheckedChanged, rdoYearMonthDay.CheckedChanged
+    Private Sub rdoSingleColumn_CheckedChanged(sender As Object, e As EventArgs)
         SetReceivers()
         Formats()
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoSpecifyOrigin_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultFormat.CheckedChanged, rdoSpecifyFormat.CheckedChanged, rdoSpecifyOrigin.CheckedChanged
+    Private Sub rdoSpecifyOrigin_CheckedChanged(sender As Object, e As EventArgs)
         Formats()
     End Sub
 
@@ -438,21 +439,22 @@ Public Class dlgMakeDate
                 ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearThree.GetVariableNames())
             Else
                 ucrBase.clsRsyntax.RemoveParameter("year")
-                End If
-                If ucrReceiverMonthThree.IsEmpty = False Then
-                    ucrBase.clsRsyntax.AddParameter("month", ucrReceiverMonthThree.GetVariableNames())
-                Else
-                    ucrBase.clsRsyntax.RemoveParameter("month")
-                End If
-                If ucrReceiverDayThree.IsEmpty = False Then
-                    ucrBase.clsRsyntax.AddParameter("day", ucrReceiverDayThree.GetVariableNames())
-                Else
-                    ucrBase.clsRsyntax.RemoveParameter("day")
-                End If
             End If
+            If ucrReceiverMonthThree.IsEmpty = False Then
+                ucrBase.clsRsyntax.AddParameter("month", ucrReceiverMonthThree.GetVariableNames())
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("month")
+            End If
+            If ucrReceiverDayThree.IsEmpty = False Then
+                ucrBase.clsRsyntax.AddParameter("day", ucrReceiverDayThree.GetVariableNames())
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("day")
+            End If
+        End If
     End Sub
 
-    Private Sub ucrInputNewColumnName_ContentsChanged() Handles ucrInputNewColumnName.ContentsChanged
+    Private Sub ucrInputNewColumnName_ContentsChanged()
         TestOKEnabled()
     End Sub
+
 End Class

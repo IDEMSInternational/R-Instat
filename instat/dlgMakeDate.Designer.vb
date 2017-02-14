@@ -22,10 +22,6 @@ Partial Class dlgMakeDate
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.rdoSingleColumn = New System.Windows.Forms.RadioButton()
-        Me.rdoYearandDayofYear = New System.Windows.Forms.RadioButton()
-        Me.rdoYearMonthDay = New System.Windows.Forms.RadioButton()
         Me.grpTwoColumns = New System.Windows.Forms.GroupBox()
         Me.nudCutOffTwo = New System.Windows.Forms.NumericUpDown()
         Me.lblCutOffTwo = New System.Windows.Forms.Label()
@@ -49,6 +45,7 @@ Partial Class dlgMakeDate
         Me.ucrReceiverDayThree = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
+        Me.ucrPanelFormat = New instat.UcrPanel()
         Me.ucrInputFormat = New instat.ucrInputComboBox()
         Me.chkMore = New System.Windows.Forms.CheckBox()
         Me.ucrInputOrigin = New instat.ucrInputComboBox()
@@ -61,61 +58,23 @@ Partial Class dlgMakeDate
         Me.ucrInputDay = New instat.ucrInputComboBox()
         Me.ucrInputYear = New instat.ucrInputComboBox()
         Me.ucrInputSeparator = New instat.ucrInputComboBox()
-        Me.rdoSpecifyFormat = New System.Windows.Forms.RadioButton()
-        Me.rdoSpecifyOrigin = New System.Windows.Forms.RadioButton()
-        Me.rdoDefaultFormat = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverForDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputNewColumnName = New instat.ucrInputComboBox()
         Me.ucrSelectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveDate = New instat.ucrSave()
+        Me.ucrPanelDate = New instat.UcrPanel()
+        Me.rdoYearMonthDay = New System.Windows.Forms.RadioButton()
+        Me.rdoYearandDayofYear = New System.Windows.Forms.RadioButton()
+        Me.rdoSingleColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecifyOrigin = New System.Windows.Forms.RadioButton()
+        Me.rdoDefaultFormat = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecifyFormat = New System.Windows.Forms.RadioButton()
         Me.grpTwoColumns.SuspendLayout()
         CType(Me.nudCutOffTwo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpThreeColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
         Me.grpFormatField.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(8, 306)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 7
-        Me.lblNewColumnName.Text = "New Column Name:"
-        '
-        'rdoSingleColumn
-        '
-        Me.rdoSingleColumn.AutoSize = True
-        Me.rdoSingleColumn.Location = New System.Drawing.Point(18, 12)
-        Me.rdoSingleColumn.Name = "rdoSingleColumn"
-        Me.rdoSingleColumn.Size = New System.Drawing.Size(92, 17)
-        Me.rdoSingleColumn.TabIndex = 0
-        Me.rdoSingleColumn.TabStop = True
-        Me.rdoSingleColumn.Text = "Single Column"
-        Me.rdoSingleColumn.UseVisualStyleBackColor = True
-        '
-        'rdoYearandDayofYear
-        '
-        Me.rdoYearandDayofYear.AutoSize = True
-        Me.rdoYearandDayofYear.Location = New System.Drawing.Point(163, 12)
-        Me.rdoYearandDayofYear.Name = "rdoYearandDayofYear"
-        Me.rdoYearandDayofYear.Size = New System.Drawing.Size(127, 17)
-        Me.rdoYearandDayofYear.TabIndex = 1
-        Me.rdoYearandDayofYear.TabStop = True
-        Me.rdoYearandDayofYear.Text = "Year and Day of Year"
-        Me.rdoYearandDayofYear.UseVisualStyleBackColor = True
-        '
-        'rdoYearMonthDay
-        '
-        Me.rdoYearMonthDay.AutoSize = True
-        Me.rdoYearMonthDay.Location = New System.Drawing.Point(340, 12)
-        Me.rdoYearMonthDay.Name = "rdoYearMonthDay"
-        Me.rdoYearMonthDay.Size = New System.Drawing.Size(114, 17)
-        Me.rdoYearMonthDay.TabIndex = 2
-        Me.rdoYearMonthDay.TabStop = True
-        Me.rdoYearMonthDay.Text = "Year - Month - Day"
-        Me.rdoYearMonthDay.UseVisualStyleBackColor = True
         '
         'grpTwoColumns
         '
@@ -127,7 +86,7 @@ Partial Class dlgMakeDate
         Me.grpTwoColumns.Controls.Add(Me.ucrReceiverYearTwo)
         Me.grpTwoColumns.Controls.Add(Me.lblDayofYear)
         Me.grpTwoColumns.Controls.Add(Me.ucrReceiverDayTwo)
-        Me.grpTwoColumns.Location = New System.Drawing.Point(253, 35)
+        Me.grpTwoColumns.Location = New System.Drawing.Point(259, 51)
         Me.grpTwoColumns.Name = "grpTwoColumns"
         Me.grpTwoColumns.Size = New System.Drawing.Size(225, 134)
         Me.grpTwoColumns.TabIndex = 4
@@ -211,6 +170,7 @@ Partial Class dlgMakeDate
         Me.grpThreeColumns.Controls.Add(Me.lblDayOption)
         Me.grpThreeColumns.Controls.Add(Me.lblMonthOption)
         Me.grpThreeColumns.Controls.Add(Me.ucrInputDayOption)
+        Me.grpThreeColumns.Controls.Add(Me.grpSingleColumn)
         Me.grpThreeColumns.Controls.Add(Me.ucrInputMonthOption)
         Me.grpThreeColumns.Controls.Add(Me.ucrInputYearOption)
         Me.grpThreeColumns.Controls.Add(Me.lblDayofMonth)
@@ -219,7 +179,7 @@ Partial Class dlgMakeDate
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverYearThree)
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverDayThree)
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverMonthThree)
-        Me.grpThreeColumns.Location = New System.Drawing.Point(253, 35)
+        Me.grpThreeColumns.Location = New System.Drawing.Point(259, 53)
         Me.grpThreeColumns.Name = "grpThreeColumns"
         Me.grpThreeColumns.Size = New System.Drawing.Size(225, 157)
         Me.grpThreeColumns.TabIndex = 5
@@ -336,25 +296,33 @@ Partial Class dlgMakeDate
         '
         'grpSingleColumn
         '
+        Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyFormat)
+        Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyOrigin)
+        Me.grpSingleColumn.Controls.Add(Me.rdoDefaultFormat)
+        Me.grpSingleColumn.Controls.Add(Me.ucrPanelFormat)
         Me.grpSingleColumn.Controls.Add(Me.ucrInputFormat)
         Me.grpSingleColumn.Controls.Add(Me.chkMore)
         Me.grpSingleColumn.Controls.Add(Me.ucrInputOrigin)
         Me.grpSingleColumn.Controls.Add(Me.grpFormatField)
-        Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyFormat)
-        Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyOrigin)
-        Me.grpSingleColumn.Controls.Add(Me.rdoDefaultFormat)
         Me.grpSingleColumn.Controls.Add(Me.ucrReceiverForDate)
-        Me.grpSingleColumn.Location = New System.Drawing.Point(250, 35)
+        Me.grpSingleColumn.Location = New System.Drawing.Point(0, 0)
         Me.grpSingleColumn.Name = "grpSingleColumn"
-        Me.grpSingleColumn.Size = New System.Drawing.Size(228, 282)
+        Me.grpSingleColumn.Size = New System.Drawing.Size(245, 294)
         Me.grpSingleColumn.TabIndex = 6
         Me.grpSingleColumn.TabStop = False
         Me.grpSingleColumn.Text = "Single Column"
         '
+        'ucrPanelFormat
+        '
+        Me.ucrPanelFormat.Location = New System.Drawing.Point(10, 62)
+        Me.ucrPanelFormat.Name = "ucrPanelFormat"
+        Me.ucrPanelFormat.Size = New System.Drawing.Size(111, 80)
+        Me.ucrPanelFormat.TabIndex = 0
+        '
         'ucrInputFormat
         '
         Me.ucrInputFormat.IsReadOnly = False
-        Me.ucrInputFormat.Location = New System.Drawing.Point(117, 113)
+        Me.ucrInputFormat.Location = New System.Drawing.Point(127, 115)
         Me.ucrInputFormat.Name = "ucrInputFormat"
         Me.ucrInputFormat.Size = New System.Drawing.Size(103, 21)
         Me.ucrInputFormat.TabIndex = 6
@@ -362,7 +330,7 @@ Partial Class dlgMakeDate
         'chkMore
         '
         Me.chkMore.AutoSize = True
-        Me.chkMore.Location = New System.Drawing.Point(162, 35)
+        Me.chkMore.Location = New System.Drawing.Point(162, 29)
         Me.chkMore.Name = "chkMore"
         Me.chkMore.Size = New System.Drawing.Size(50, 17)
         Me.chkMore.TabIndex = 4
@@ -372,7 +340,7 @@ Partial Class dlgMakeDate
         'ucrInputOrigin
         '
         Me.ucrInputOrigin.IsReadOnly = False
-        Me.ucrInputOrigin.Location = New System.Drawing.Point(117, 86)
+        Me.ucrInputOrigin.Location = New System.Drawing.Point(127, 85)
         Me.ucrInputOrigin.Name = "ucrInputOrigin"
         Me.ucrInputOrigin.Size = New System.Drawing.Size(103, 21)
         Me.ucrInputOrigin.TabIndex = 5
@@ -387,7 +355,7 @@ Partial Class dlgMakeDate
         Me.grpFormatField.Controls.Add(Me.ucrInputDay)
         Me.grpFormatField.Controls.Add(Me.ucrInputYear)
         Me.grpFormatField.Controls.Add(Me.ucrInputSeparator)
-        Me.grpFormatField.Location = New System.Drawing.Point(5, 150)
+        Me.grpFormatField.Location = New System.Drawing.Point(5, 155)
         Me.grpFormatField.Name = "grpFormatField"
         Me.grpFormatField.Size = New System.Drawing.Size(219, 129)
         Me.grpFormatField.TabIndex = 7
@@ -462,43 +430,10 @@ Partial Class dlgMakeDate
         Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSeparator.TabIndex = 1
         '
-        'rdoSpecifyFormat
-        '
-        Me.rdoSpecifyFormat.AutoSize = True
-        Me.rdoSpecifyFormat.Location = New System.Drawing.Point(7, 108)
-        Me.rdoSpecifyFormat.Name = "rdoSpecifyFormat"
-        Me.rdoSpecifyFormat.Size = New System.Drawing.Size(100, 30)
-        Me.rdoSpecifyFormat.TabIndex = 3
-        Me.rdoSpecifyFormat.TabStop = True
-        Me.rdoSpecifyFormat.Text = "Specify Format" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Select or Type)"
-        Me.rdoSpecifyFormat.UseVisualStyleBackColor = True
-        '
-        'rdoSpecifyOrigin
-        '
-        Me.rdoSpecifyOrigin.AutoSize = True
-        Me.rdoSpecifyOrigin.Location = New System.Drawing.Point(7, 87)
-        Me.rdoSpecifyOrigin.Name = "rdoSpecifyOrigin"
-        Me.rdoSpecifyOrigin.Size = New System.Drawing.Size(90, 17)
-        Me.rdoSpecifyOrigin.TabIndex = 2
-        Me.rdoSpecifyOrigin.TabStop = True
-        Me.rdoSpecifyOrigin.Text = "Specify Origin"
-        Me.rdoSpecifyOrigin.UseVisualStyleBackColor = True
-        '
-        'rdoDefaultFormat
-        '
-        Me.rdoDefaultFormat.AutoSize = True
-        Me.rdoDefaultFormat.Location = New System.Drawing.Point(7, 62)
-        Me.rdoDefaultFormat.Name = "rdoDefaultFormat"
-        Me.rdoDefaultFormat.Size = New System.Drawing.Size(94, 17)
-        Me.rdoDefaultFormat.TabIndex = 1
-        Me.rdoDefaultFormat.TabStop = True
-        Me.rdoDefaultFormat.Text = "Default Format"
-        Me.rdoDefaultFormat.UseVisualStyleBackColor = True
-        '
         'ucrReceiverForDate
         '
         Me.ucrReceiverForDate.frmParent = Me
-        Me.ucrReceiverForDate.Location = New System.Drawing.Point(7, 33)
+        Me.ucrReceiverForDate.Location = New System.Drawing.Point(7, 26)
         Me.ucrReceiverForDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForDate.Name = "ucrReceiverForDate"
         Me.ucrReceiverForDate.Selector = Nothing
@@ -507,43 +442,114 @@ Partial Class dlgMakeDate
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 332)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 388)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(417, 54)
         Me.ucrBase.TabIndex = 9
-        '
-        'ucrInputNewColumnName
-        '
-        Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(112, 303)
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
-        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(133, 23)
-        Me.ucrInputNewColumnName.TabIndex = 8
         '
         'ucrSelectorMakeDate
         '
         Me.ucrSelectorMakeDate.bShowHiddenColumns = False
         Me.ucrSelectorMakeDate.bUseCurrentFilter = True
-        Me.ucrSelectorMakeDate.Location = New System.Drawing.Point(10, 45)
+        Me.ucrSelectorMakeDate.Location = New System.Drawing.Point(10, 51)
         Me.ucrSelectorMakeDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorMakeDate.Name = "ucrSelectorMakeDate"
         Me.ucrSelectorMakeDate.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorMakeDate.TabIndex = 3
         '
+        'ucrSaveDate
+        '
+        Me.ucrSaveDate.Location = New System.Drawing.Point(10, 358)
+        Me.ucrSaveDate.Name = "ucrSaveDate"
+        Me.ucrSaveDate.Size = New System.Drawing.Size(353, 24)
+        Me.ucrSaveDate.TabIndex = 10
+        '
+        'ucrPanelDate
+        '
+        Me.ucrPanelDate.Location = New System.Drawing.Point(10, 8)
+        Me.ucrPanelDate.Name = "ucrPanelDate"
+        Me.ucrPanelDate.Size = New System.Drawing.Size(474, 39)
+        Me.ucrPanelDate.TabIndex = 0
+        '
+        'rdoYearMonthDay
+        '
+        Me.rdoYearMonthDay.AutoSize = True
+        Me.rdoYearMonthDay.Location = New System.Drawing.Point(341, 15)
+        Me.rdoYearMonthDay.Name = "rdoYearMonthDay"
+        Me.rdoYearMonthDay.Size = New System.Drawing.Size(114, 17)
+        Me.rdoYearMonthDay.TabIndex = 17
+        Me.rdoYearMonthDay.TabStop = True
+        Me.rdoYearMonthDay.Text = "Year - Month - Day"
+        Me.rdoYearMonthDay.UseVisualStyleBackColor = True
+        '
+        'rdoYearandDayofYear
+        '
+        Me.rdoYearandDayofYear.AutoSize = True
+        Me.rdoYearandDayofYear.Location = New System.Drawing.Point(164, 15)
+        Me.rdoYearandDayofYear.Name = "rdoYearandDayofYear"
+        Me.rdoYearandDayofYear.Size = New System.Drawing.Size(127, 17)
+        Me.rdoYearandDayofYear.TabIndex = 16
+        Me.rdoYearandDayofYear.TabStop = True
+        Me.rdoYearandDayofYear.Text = "Year and Day of Year"
+        Me.rdoYearandDayofYear.UseVisualStyleBackColor = True
+        '
+        'rdoSingleColumn
+        '
+        Me.rdoSingleColumn.AutoSize = True
+        Me.rdoSingleColumn.Location = New System.Drawing.Point(19, 15)
+        Me.rdoSingleColumn.Name = "rdoSingleColumn"
+        Me.rdoSingleColumn.Size = New System.Drawing.Size(92, 17)
+        Me.rdoSingleColumn.TabIndex = 15
+        Me.rdoSingleColumn.TabStop = True
+        Me.rdoSingleColumn.Text = "Single Column"
+        Me.rdoSingleColumn.UseVisualStyleBackColor = True
+        '
+        'rdoSpecifyOrigin
+        '
+        Me.rdoSpecifyOrigin.AutoSize = True
+        Me.rdoSpecifyOrigin.Location = New System.Drawing.Point(14, 88)
+        Me.rdoSpecifyOrigin.Name = "rdoSpecifyOrigin"
+        Me.rdoSpecifyOrigin.Size = New System.Drawing.Size(90, 17)
+        Me.rdoSpecifyOrigin.TabIndex = 22
+        Me.rdoSpecifyOrigin.TabStop = True
+        Me.rdoSpecifyOrigin.Text = "Specify Origin"
+        Me.rdoSpecifyOrigin.UseVisualStyleBackColor = True
+        '
+        'rdoDefaultFormat
+        '
+        Me.rdoDefaultFormat.AutoSize = True
+        Me.rdoDefaultFormat.Location = New System.Drawing.Point(14, 58)
+        Me.rdoDefaultFormat.Name = "rdoDefaultFormat"
+        Me.rdoDefaultFormat.Size = New System.Drawing.Size(94, 17)
+        Me.rdoDefaultFormat.TabIndex = 21
+        Me.rdoDefaultFormat.TabStop = True
+        Me.rdoDefaultFormat.Text = "Default Format"
+        Me.rdoDefaultFormat.UseVisualStyleBackColor = True
+        '
+        'rdoSpecifyFormat
+        '
+        Me.rdoSpecifyFormat.AutoSize = True
+        Me.rdoSpecifyFormat.Location = New System.Drawing.Point(14, 118)
+        Me.rdoSpecifyFormat.Name = "rdoSpecifyFormat"
+        Me.rdoSpecifyFormat.Size = New System.Drawing.Size(95, 17)
+        Me.rdoSpecifyFormat.TabIndex = 23
+        Me.rdoSpecifyFormat.TabStop = True
+        Me.rdoSpecifyFormat.Text = "Specify Format"
+        Me.rdoSpecifyFormat.UseVisualStyleBackColor = True
+        '
         'dlgMakeDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(503, 389)
-        Me.Controls.Add(Me.grpSingleColumn)
-        Me.Controls.Add(Me.grpThreeColumns)
-        Me.Controls.Add(Me.grpTwoColumns)
+        Me.ClientSize = New System.Drawing.Size(513, 444)
         Me.Controls.Add(Me.rdoYearMonthDay)
         Me.Controls.Add(Me.rdoYearandDayofYear)
         Me.Controls.Add(Me.rdoSingleColumn)
+        Me.Controls.Add(Me.ucrSaveDate)
+        Me.Controls.Add(Me.ucrPanelDate)
+        Me.Controls.Add(Me.grpThreeColumns)
+        Me.Controls.Add(Me.grpTwoColumns)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.ucrSelectorMakeDate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -566,12 +572,7 @@ Partial Class dlgMakeDate
     End Sub
 
     Friend WithEvents ucrSelectorMakeDate As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrInputNewColumnName As ucrInputComboBox
-    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents rdoSingleColumn As RadioButton
-    Friend WithEvents rdoYearandDayofYear As RadioButton
-    Friend WithEvents rdoYearMonthDay As RadioButton
     Friend WithEvents ucrReceiverDayTwo As ucrReceiverSingle
     Friend WithEvents grpTwoColumns As GroupBox
     Friend WithEvents ucrReceiverForDate As ucrReceiverSingle
@@ -587,9 +588,6 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrReceiverYearTwo As ucrReceiverSingle
     Friend WithEvents ucrInputComboBoxMonthTwo As ucrInputComboBox
     Friend WithEvents grpSingleColumn As GroupBox
-    Friend WithEvents rdoSpecifyFormat As RadioButton
-    Friend WithEvents rdoSpecifyOrigin As RadioButton
-    Friend WithEvents rdoDefaultFormat As RadioButton
     Friend WithEvents grpFormatField As GroupBox
     Friend WithEvents lblDay As Label
     Friend WithEvents lblMonth As Label
@@ -611,4 +609,13 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrInputDayOption As ucrInputComboBox
     Friend WithEvents ucrInputMonthOption As ucrInputComboBox
     Friend WithEvents ucrInputYearOption As ucrInputComboBox
+    Friend WithEvents ucrSaveDate As ucrSave
+    Friend WithEvents rdoYearMonthDay As RadioButton
+    Friend WithEvents rdoYearandDayofYear As RadioButton
+    Friend WithEvents rdoSingleColumn As RadioButton
+    Friend WithEvents ucrPanelDate As UcrPanel
+    Friend WithEvents ucrPanelFormat As UcrPanel
+    Friend WithEvents rdoSpecifyFormat As RadioButton
+    Friend WithEvents rdoSpecifyOrigin As RadioButton
+    Friend WithEvents rdoDefaultFormat As RadioButton
 End Class
