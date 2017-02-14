@@ -57,5 +57,4 @@ Public Class dlgReoderMetadata
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
-
 End Class
