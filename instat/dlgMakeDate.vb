@@ -66,6 +66,14 @@ Public Class dlgMakeDate
         ucrSaveDate.SetLabelText("Save Date:")
         ucrSaveDate.SetIsComboBox()
 
+
+        ucrPanelDate.SetLinkedDisplayControl(grpSingleColumn)
+        ucrPanelDate.SetLinkedDisplayControl(grpTwoColumns)
+        ucrPanelDate.SetLinkedDisplayControl(grpThreeColumns)
+        ucrPanelDate.AddToLinkedControls(grpSingleColumn, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+
+
         ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
         ucrInputYearOption.SetItems({"4 Digit", "2 Digit"})
         ucrInputYear.SetItems({"4 Digit", "2 Digit"})
@@ -135,8 +143,8 @@ Public Class dlgMakeDate
         chkTwoDigitYearTwo.Checked = False
         lblCutOffTwo.Visible = False
         chkTwoDigitYearTwo.Visible = True
-        nudCutOffTwo.Visible = False
-        nudCutOffTwo.Value = 0
+        nu.Visible = False
+        nu.Value = 0
         chkMore.Checked = False
         chkMore.Visible = True
         Formats()
@@ -155,7 +163,7 @@ Public Class dlgMakeDate
     Private Sub SetDefaultColumn()
         rdoSingleColumn.Checked = True
         ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
-            ucrReceiverForDate.Add(strSelectedColumn, strSelectedDataFrame)
+        ucrReceiverForDate.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
     End Sub
 
@@ -213,7 +221,7 @@ Public Class dlgMakeDate
     End Sub
 
     ' When the ucrReceivers have a change occur
-    Private Sub ucrReceivers_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForDate.SelectionChanged, ucrReceiverDayThree.SelectionChanged, ucrReceiverDayTwo.SelectionChanged, ucrReceiverMonthThree.SelectionChanged, ucrReceiverYearThree.SelectionChanged, ucrReceiverYearTwo.SelectionChanged
+    Private Sub ucrReceivers_SelectionChanged(sender As Object, e As EventArgs)
         Formats()
         TestOKEnabled()
     End Sub
@@ -229,18 +237,18 @@ Public Class dlgMakeDate
         Formats()
     End Sub
 
-    Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs) Handles chkMore.CheckedChanged, chkTwoDigitYearTwo.CheckedChanged
+    Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs)
         Formats()
         If chkTwoDigitYearTwo.Checked Then
             lblCutOffTwo.Visible = True
-            nudCutOffTwo.Visible = True
+            nu.Visible = True
         Else
             lblCutOffTwo.Visible = False
-            nudCutOffTwo.Visible = False
+            nu.Visible = False
         End If
     End Sub
 
-    Private Sub ucrInputSpecifyDates_NameChanged() Handles ucrInputFormat.NameChanged, ucrInputDayOption.NameChanged, ucrInputMonthOption.NameChanged, ucrInputYearOption.NameChanged, ucrInputOrigin.NameChanged, ucrInputComboBoxMonthTwo.NameChanged
+    Private Sub ucrInputSpecifyDates_NameChanged()
         Formats()
     End Sub
 
