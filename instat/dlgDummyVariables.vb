@@ -74,7 +74,7 @@ Public Class dlgDummyVariables
         'ucrPnlLevelOmitted.AddRadioButton(rdoLevelNumber, "")
 
         ucrChkWithXVariable.Enabled = False
-        ucrChkWithXVariable.SetText("With X Variable:")
+        ucrChkWithXVariable.SetText("With X Variable")
         ' ucrChkWithXVariable.SetParameter(New RParameter(""))
 
         'Note: This was not implemented (Additions of ucrInputColumns were added for appending new columns with prefix "dummy" ): Just added if incase it was to be added otherwise it can be deleted
