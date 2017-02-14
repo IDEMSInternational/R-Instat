@@ -16,102 +16,90 @@
 Imports instat
 Imports instat.Translations
 Public Class sdgSummaries
-    Public clsRSummaries As New RFunction
+    Public clsListFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
-    Public strSummariesParameter
+    Public strSummariesParameter As String
+    Private lstCheckboxes As New List(Of ucrCheck)
+
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub SetDefaults()
-
-    End Sub
-
     Public Sub InitialiseControls()
         ucrChkNonMissing.SetText("N Non Missing")
+        ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkNMissing.SetText("N Missing")
+        ucrChkNMissing.SetParameter(New RParameter("summary_count_missing"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkNTotal.SetText("N Total")
-        ucrChkNTotal.Tag = "summary_count"
-        ucrChkNonMissing.Tag = "summary_count_non_missing"
-        ucrChkNMissing.Tag = "summary_count_missing"
+        ucrChkNTotal.SetParameter(New RParameter("summary_count"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkMean.SetText("Mean")
-        ucrChkMean.Tag = "summary_mean"
+        ucrChkMean.SetParameter(New RParameter("summary_mean"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkMinimum.SetText("Minimum")
-        ucrChkMinimum.Tag = "summary_min"
+        ucrChkMinimum.SetParameter(New RParameter("summary_min"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkMode.SetText("Mode")
-        ucrChkMode.Tag = "summary_mode"
+        ucrChkMode.SetParameter(New RParameter("summary_mode"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkMaximum.SetText("Maximum")
-        ucrChkMaximum.Tag = "summary_max"
+        ucrChkMaximum.SetParameter(New RParameter("summary_max"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkMedian.SetText("Median")
-        ucrChkMedian.Tag = "summary_median"
+        ucrChkMedian.SetParameter(New RParameter("summary_median"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkStdDev.SetText("Standard Deviation")
-        ucrChkStdDev.Tag = "summary_sd"
+        ucrChkStdDev.SetParameter(New RParameter("summary_sd"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkRange.SetText("Range")
-        ucrChkRange.Tag = "summary_range"
+        ucrChkRange.SetParameter(New RParameter("summary_range"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkSum.SetText("Sum")
-        ucrChkSum.Tag = "summary_sum"
+        ucrChkSum.SetParameter(New RParameter("summary_sum"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkVariance.SetText("Variance")
+        ucrChkVariance.SetParameter(New RParameter("summary_variance"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkQuartiles.SetText("Quartiles")
+        ucrChkQuartiles.SetParameter(New RParameter("summary_quartiles"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        'these are the default summaries which should be checked on load
-        ucrChkNonMissing.Checked = True
-        ucrChkNTotal.Checked = True
-        ucrChkSum.Checked = True
-
-        bControlsInitialised = True
-        SummariesParameters()
-    End Sub
-
-    Public Sub SummariesParameters()
-        Dim lstCheckboxes As New List(Of ucrCheck)
-        Dim chkSummary As ucrCheck
-        Dim i As Integer = 0
-        If lstCheckboxes.Count = 0 Then
-            lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkRange, ucrChkSum, ucrChkQuartiles})
-        End If
-
-        strSummariesParameter = "c("
-        For Each chkSummary In lstCheckboxes
-            If chkSummary.Checked Then
-                If i > 0 Then
-                    strSummariesParameter = strSummariesParameter & ","
-                End If
-                strSummariesParameter = strSummariesParameter & Chr(34) & chkSummary.Tag & Chr(34)
-                i = i + 1
-            End If
+        lstCheckboxes = New List(Of ucrCheck)
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkRange, ucrChkSum, ucrChkQuartiles})
+        For Each ctrTemp As ucrCheck In lstCheckboxes
+            ctrTemp.clsParameter.SetArgumentValue(Chr(34) & ctrTemp.clsParameter.strArgumentName & Chr(34))
+            ctrTemp.clsParameter.bIncludeArgumentName = False
         Next
-        strSummariesParameter = strSummariesParameter & ")"
-        If i > 0 Then
-
-            clsRSummaries.AddParameter("summaries", strSummariesParameter)
-        Else
-            clsRSummaries.RemoveParameterByName("summaries")
-        End If
-    End Sub
-
-    Public Sub SetMyRFunction(clsRNewSummaries As RFunction)
-        'this sub should be removed once new implementation has been done on all dialogs linking to this subdialog
-        'clsRSummaries = clsRNewSummaries
-    End Sub
-
-    Public Sub TestSummaries()
-        SummariesParameters()
-        If strSummariesParameter = "c()" Then
-            MsgBox("OK will be disabled until you check at least one summary.")
-        End If
+        bControlsInitialised = True
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsRSummaries = clsNewRFunction
-        SetRCode(Me, clsRSummaries, bReset)
+        clsListFunction = clsNewRFunction
+        SetRCode(Me, clsListFunction, bReset)
     End Sub
 
-    'control value changed should be called appropriately
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNonMissing.ControlValueChanged, ucrChkNMissing.ControlValueChanged, ucrChkNTotal.ControlValueChanged, ucrChkNonMissing.ControlValueChanged, ucrChkMaximum.ControlValueChanged, ucrChkMean.ControlValueChanged, ucrChkMinimum.ControlValueChanged, ucrChkMode.ControlValueChanged, ucrChkMedian.ControlValueChanged, ucrChkStdDev.ControlValueChanged, ucrChkRange.ControlValueChanged, ucrChkVariance.ControlValueChanged, ucrChkQuartiles.ControlValueChanged
-        TestSummaries()
+    Public ReadOnly Property SummaryCount As Integer
+        Get
+            Dim iCount As Integer = 0
+            For Each ucrTemp As ucrCheck In lstCheckboxes
+                If ucrTemp.Checked Then
+                    iCount = iCount + 1
+                End If
+            Next
+            Return iCount
+        End Get
+    End Property
+
+    Private Sub ucrButtonsSummaries_ClickReturn(sender As Object, e As EventArgs) Handles ucrButtonsSummaries.ClickReturn
+        'Temp solution to telling user why OK not enabled. Should be something on the main dialog to show this instead.
+        'Maybe, number of summaries selected.
+        If SummaryCount = 0 Then
+            MsgBox("No summaries selected. Ok will not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
+        End If
     End Sub
 End Class
