@@ -23,7 +23,7 @@ Partial Class sdgClimdexIndices
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.panIndices = New System.Windows.Forms.Panel()
+        Me.panAnnualIndices = New System.Windows.Forms.Panel()
         Me.ucrChkPrecExceed10mm = New instat.ucrCheck()
         Me.ucrChkMaxDrySpell = New instat.ucrCheck()
         Me.ucrChkPrecExceedSpecifiedA = New instat.ucrCheck()
@@ -35,34 +35,12 @@ Partial Class sdgClimdexIndices
         Me.ucrChkColdSpellDI = New instat.ucrCheck()
         Me.ucrChkSimplePrecII = New instat.ucrCheck()
         Me.ucrChkWarmSpellDI = New instat.ucrCheck()
-        Me.ucrChkMonthlyMax5dayPrec = New instat.ucrCheck()
-        Me.ucrChkMonthlyMax1dayPrec = New instat.ucrCheck()
-        Me.ucrChkMeanDiurnalTempRange = New instat.ucrCheck()
         Me.ucrChkSummerDays = New instat.ucrCheck()
         Me.ucrChkIcingDays = New instat.ucrCheck()
         Me.ucrChkTropicalNights = New instat.ucrCheck()
         Me.ucrChkGrowingSeasonLength = New instat.ucrCheck()
-        Me.ucrChkMonthlyMaxDailyTMax = New instat.ucrCheck()
-        Me.ucrChkTmaxAbove90Percent = New instat.ucrCheck()
-        Me.ucrChkTminAbove90Percent = New instat.ucrCheck()
-        Me.ucrChkTmaxBelow10Percent = New instat.ucrCheck()
-        Me.ucrChkTminBelow10Percent = New instat.ucrCheck()
-        Me.ucrChkMonthlyMinDailyTMin = New instat.ucrCheck()
-        Me.ucrChkMonthlyMinDailyTMax = New instat.ucrCheck()
-        Me.ucrChkMonthlyMaxDailyTMin = New instat.ucrCheck()
         Me.ucrChkFrostDays = New instat.ucrCheck()
-        Me.lbl26 = New System.Windows.Forms.Label()
-        Me.lbl27 = New System.Windows.Forms.Label()
-        Me.lbl24 = New System.Windows.Forms.Label()
-        Me.lbl25 = New System.Windows.Forms.Label()
-        Me.lbl21 = New System.Windows.Forms.Label()
-        Me.lbl22 = New System.Windows.Forms.Label()
-        Me.lbl23 = New System.Windows.Forms.Label()
-        Me.lbl20 = New System.Windows.Forms.Label()
         Me.lbl14 = New System.Windows.Forms.Label()
-        Me.lbl18 = New System.Windows.Forms.Label()
-        Me.lbl19 = New System.Windows.Forms.Label()
-        Me.lbl17 = New System.Windows.Forms.Label()
         Me.lbl16 = New System.Windows.Forms.Label()
         Me.lbl15 = New System.Windows.Forms.Label()
         Me.lbl6 = New System.Windows.Forms.Label()
@@ -104,222 +82,161 @@ Partial Class sdgClimdexIndices
         Me.ucrNudMothlyMissingDays = New instat.ucrNud()
         Me.ucrNudAnnualMissingDays = New instat.ucrNud()
         Me.lblN = New System.Windows.Forms.Label()
-        Me.tbIndices = New System.Windows.Forms.TabPage()
-        Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
+        Me.tbAnnualIndices = New System.Windows.Forms.TabPage()
         Me.ucrChkSave = New instat.ucrCheck()
-        Me.panIndices.SuspendLayout()
+        Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
+        Me.tbAnnualMonthly = New System.Windows.Forms.TabPage()
+        Me.panAnnualMonthlyIndices = New System.Windows.Forms.Panel()
+        Me.ucrChkMonthlyMaxDailyTMax = New instat.ucrCheck()
+        Me.ucrChkMonthlyMaxDailyTMin = New instat.ucrCheck()
+        Me.ucrChkMonthlyMinDailyTMin = New instat.ucrCheck()
+        Me.ucrChkMonthlyMinDailyTMax = New instat.ucrCheck()
+        Me.ucrChkTmaxAbove90Percent = New instat.ucrCheck()
+        Me.ucrChkTminAbove90Percent = New instat.ucrCheck()
+        Me.ucrChkTmaxBelow10Percent = New instat.ucrCheck()
+        Me.ucrChkTminBelow10Percent = New instat.ucrCheck()
+        Me.ucrChkMeanDiurnalTempRange = New instat.ucrCheck()
+        Me.ucrChkMonthlyMax5dayPrec = New instat.ucrCheck()
+        Me.ucrChkMonthlyMax1dayPrec = New instat.ucrCheck()
+        Me.panAnnualIndices.SuspendLayout()
         Me.tbClimdex.SuspendLayout()
         Me.TbSettings.SuspendLayout()
         Me.grpMaxMissingDays.SuspendLayout()
-        Me.tbIndices.SuspendLayout()
+        Me.tbAnnualIndices.SuspendLayout()
+        Me.tbAnnualMonthly.SuspendLayout()
+        Me.panAnnualMonthlyIndices.SuspendLayout()
         Me.SuspendLayout()
         '
-        'panIndices
+        'panAnnualIndices
         '
-        Me.panIndices.AutoScroll = True
-        Me.panIndices.Controls.Add(Me.ucrChkPrecExceed10mm)
-        Me.panIndices.Controls.Add(Me.ucrChkMaxDrySpell)
-        Me.panIndices.Controls.Add(Me.ucrChkPrecExceedSpecifiedA)
-        Me.panIndices.Controls.Add(Me.ucrChkPrecExceed20mm)
-        Me.panIndices.Controls.Add(Me.ucrChkTotalDailyPrec)
-        Me.panIndices.Controls.Add(Me.ucrChkPrecExceed99Percent)
-        Me.panIndices.Controls.Add(Me.ucrChkPrecExceed95Percent)
-        Me.panIndices.Controls.Add(Me.ucrChkMaxWetSpell)
-        Me.panIndices.Controls.Add(Me.ucrChkColdSpellDI)
-        Me.panIndices.Controls.Add(Me.ucrChkSimplePrecII)
-        Me.panIndices.Controls.Add(Me.ucrChkWarmSpellDI)
-        Me.panIndices.Controls.Add(Me.ucrChkMonthlyMax5dayPrec)
-        Me.panIndices.Controls.Add(Me.ucrChkMonthlyMax1dayPrec)
-        Me.panIndices.Controls.Add(Me.ucrChkMeanDiurnalTempRange)
-        Me.panIndices.Controls.Add(Me.ucrChkSummerDays)
-        Me.panIndices.Controls.Add(Me.ucrChkIcingDays)
-        Me.panIndices.Controls.Add(Me.ucrChkTropicalNights)
-        Me.panIndices.Controls.Add(Me.ucrChkGrowingSeasonLength)
-        Me.panIndices.Controls.Add(Me.ucrChkMonthlyMaxDailyTMax)
-        Me.panIndices.Controls.Add(Me.ucrChkTmaxAbove90Percent)
-        Me.panIndices.Controls.Add(Me.ucrChkTminAbove90Percent)
-        Me.panIndices.Controls.Add(Me.ucrChkTmaxBelow10Percent)
-        Me.panIndices.Controls.Add(Me.ucrChkTminBelow10Percent)
-        Me.panIndices.Controls.Add(Me.ucrChkMonthlyMinDailyTMin)
-        Me.panIndices.Controls.Add(Me.ucrChkMonthlyMinDailyTMax)
-        Me.panIndices.Controls.Add(Me.ucrChkMonthlyMaxDailyTMin)
-        Me.panIndices.Controls.Add(Me.ucrChkFrostDays)
-        Me.panIndices.Controls.Add(Me.lbl26)
-        Me.panIndices.Controls.Add(Me.lbl27)
-        Me.panIndices.Controls.Add(Me.lbl24)
-        Me.panIndices.Controls.Add(Me.lbl25)
-        Me.panIndices.Controls.Add(Me.lbl21)
-        Me.panIndices.Controls.Add(Me.lbl22)
-        Me.panIndices.Controls.Add(Me.lbl23)
-        Me.panIndices.Controls.Add(Me.lbl20)
-        Me.panIndices.Controls.Add(Me.lbl14)
-        Me.panIndices.Controls.Add(Me.lbl18)
-        Me.panIndices.Controls.Add(Me.lbl19)
-        Me.panIndices.Controls.Add(Me.lbl17)
-        Me.panIndices.Controls.Add(Me.lbl16)
-        Me.panIndices.Controls.Add(Me.lbl15)
-        Me.panIndices.Controls.Add(Me.lbl6)
-        Me.panIndices.Controls.Add(Me.lbl8)
-        Me.panIndices.Controls.Add(Me.lbl12)
-        Me.panIndices.Controls.Add(Me.lbl9)
-        Me.panIndices.Controls.Add(Me.lbl13)
-        Me.panIndices.Controls.Add(Me.lbl7)
-        Me.panIndices.Controls.Add(Me.lbl11)
-        Me.panIndices.Controls.Add(Me.lbl10)
-        Me.panIndices.Controls.Add(Me.lbl2)
-        Me.panIndices.Controls.Add(Me.lbl3)
-        Me.panIndices.Controls.Add(Me.lbl4)
-        Me.panIndices.Controls.Add(Me.lbl5)
-        Me.panIndices.Controls.Add(Me.lbl1)
-        Me.panIndices.Location = New System.Drawing.Point(3, 37)
-        Me.panIndices.Name = "panIndices"
-        Me.panIndices.Size = New System.Drawing.Size(462, 239)
-        Me.panIndices.TabIndex = 0
+        Me.panAnnualIndices.AutoScroll = True
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkPrecExceed10mm)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkMaxDrySpell)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkPrecExceedSpecifiedA)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkPrecExceed20mm)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkTotalDailyPrec)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkPrecExceed99Percent)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkPrecExceed95Percent)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkMaxWetSpell)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkColdSpellDI)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkSimplePrecII)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkWarmSpellDI)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkSummerDays)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkIcingDays)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkTropicalNights)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkGrowingSeasonLength)
+        Me.panAnnualIndices.Controls.Add(Me.ucrChkFrostDays)
+        Me.panAnnualIndices.Controls.Add(Me.lbl14)
+        Me.panAnnualIndices.Controls.Add(Me.lbl16)
+        Me.panAnnualIndices.Controls.Add(Me.lbl15)
+        Me.panAnnualIndices.Controls.Add(Me.lbl6)
+        Me.panAnnualIndices.Controls.Add(Me.lbl8)
+        Me.panAnnualIndices.Controls.Add(Me.lbl12)
+        Me.panAnnualIndices.Controls.Add(Me.lbl9)
+        Me.panAnnualIndices.Controls.Add(Me.lbl13)
+        Me.panAnnualIndices.Controls.Add(Me.lbl7)
+        Me.panAnnualIndices.Controls.Add(Me.lbl11)
+        Me.panAnnualIndices.Controls.Add(Me.lbl10)
+        Me.panAnnualIndices.Controls.Add(Me.lbl2)
+        Me.panAnnualIndices.Controls.Add(Me.lbl3)
+        Me.panAnnualIndices.Controls.Add(Me.lbl4)
+        Me.panAnnualIndices.Controls.Add(Me.lbl5)
+        Me.panAnnualIndices.Controls.Add(Me.lbl1)
+        Me.panAnnualIndices.Location = New System.Drawing.Point(6, 6)
+        Me.panAnnualIndices.Name = "panAnnualIndices"
+        Me.panAnnualIndices.Size = New System.Drawing.Size(462, 262)
+        Me.panAnnualIndices.TabIndex = 0
         '
         'ucrChkPrecExceed10mm
         '
-        Me.ucrChkPrecExceed10mm.bAddRemoveParameter = True
-        Me.ucrChkPrecExceed10mm.bChangeParameterValue = True
         Me.ucrChkPrecExceed10mm.Checked = False
-        Me.ucrChkPrecExceed10mm.Location = New System.Drawing.Point(27, 347)
+        Me.ucrChkPrecExceed10mm.Location = New System.Drawing.Point(27, 135)
         Me.ucrChkPrecExceed10mm.Name = "ucrChkPrecExceed10mm"
         Me.ucrChkPrecExceed10mm.Size = New System.Drawing.Size(264, 20)
         Me.ucrChkPrecExceed10mm.TabIndex = 83
         '
         'ucrChkMaxDrySpell
         '
-        Me.ucrChkMaxDrySpell.bAddRemoveParameter = True
-        Me.ucrChkMaxDrySpell.bChangeParameterValue = True
         Me.ucrChkMaxDrySpell.Checked = False
-        Me.ucrChkMaxDrySpell.Location = New System.Drawing.Point(27, 404)
+        Me.ucrChkMaxDrySpell.Location = New System.Drawing.Point(27, 242)
         Me.ucrChkMaxDrySpell.Name = "ucrChkMaxDrySpell"
         Me.ucrChkMaxDrySpell.Size = New System.Drawing.Size(253, 20)
         Me.ucrChkMaxDrySpell.TabIndex = 82
         '
         'ucrChkPrecExceedSpecifiedA
         '
-        Me.ucrChkPrecExceedSpecifiedA.bAddRemoveParameter = True
-        Me.ucrChkPrecExceedSpecifiedA.bChangeParameterValue = True
         Me.ucrChkPrecExceedSpecifiedA.Checked = False
-        Me.ucrChkPrecExceedSpecifiedA.Location = New System.Drawing.Point(27, 385)
+        Me.ucrChkPrecExceedSpecifiedA.Location = New System.Drawing.Point(27, 225)
         Me.ucrChkPrecExceedSpecifiedA.Name = "ucrChkPrecExceedSpecifiedA"
         Me.ucrChkPrecExceedSpecifiedA.Size = New System.Drawing.Size(241, 20)
         Me.ucrChkPrecExceedSpecifiedA.TabIndex = 81
         '
         'ucrChkPrecExceed20mm
         '
-        Me.ucrChkPrecExceed20mm.bAddRemoveParameter = True
-        Me.ucrChkPrecExceed20mm.bChangeParameterValue = True
         Me.ucrChkPrecExceed20mm.Checked = False
-        Me.ucrChkPrecExceed20mm.Location = New System.Drawing.Point(27, 366)
+        Me.ucrChkPrecExceed20mm.Location = New System.Drawing.Point(27, 210)
         Me.ucrChkPrecExceed20mm.Name = "ucrChkPrecExceed20mm"
         Me.ucrChkPrecExceed20mm.Size = New System.Drawing.Size(229, 20)
         Me.ucrChkPrecExceed20mm.TabIndex = 80
         '
         'ucrChkTotalDailyPrec
         '
-        Me.ucrChkTotalDailyPrec.bAddRemoveParameter = True
-        Me.ucrChkTotalDailyPrec.bChangeParameterValue = True
         Me.ucrChkTotalDailyPrec.Checked = False
-        Me.ucrChkTotalDailyPrec.Location = New System.Drawing.Point(27, 472)
+        Me.ucrChkTotalDailyPrec.Location = New System.Drawing.Point(27, 117)
         Me.ucrChkTotalDailyPrec.Name = "ucrChkTotalDailyPrec"
         Me.ucrChkTotalDailyPrec.Size = New System.Drawing.Size(140, 20)
         Me.ucrChkTotalDailyPrec.TabIndex = 79
         '
         'ucrChkPrecExceed99Percent
         '
-        Me.ucrChkPrecExceed99Percent.bAddRemoveParameter = True
-        Me.ucrChkPrecExceed99Percent.bChangeParameterValue = True
         Me.ucrChkPrecExceed99Percent.Checked = False
-        Me.ucrChkPrecExceed99Percent.Location = New System.Drawing.Point(27, 455)
+        Me.ucrChkPrecExceed99Percent.Location = New System.Drawing.Point(25, 96)
         Me.ucrChkPrecExceed99Percent.Name = "ucrChkPrecExceed99Percent"
         Me.ucrChkPrecExceed99Percent.Size = New System.Drawing.Size(241, 20)
         Me.ucrChkPrecExceed99Percent.TabIndex = 78
         '
         'ucrChkPrecExceed95Percent
         '
-        Me.ucrChkPrecExceed95Percent.bAddRemoveParameter = True
-        Me.ucrChkPrecExceed95Percent.bChangeParameterValue = True
         Me.ucrChkPrecExceed95Percent.Checked = False
-        Me.ucrChkPrecExceed95Percent.Location = New System.Drawing.Point(27, 439)
+        Me.ucrChkPrecExceed95Percent.Location = New System.Drawing.Point(27, 279)
         Me.ucrChkPrecExceed95Percent.Name = "ucrChkPrecExceed95Percent"
         Me.ucrChkPrecExceed95Percent.Size = New System.Drawing.Size(279, 20)
         Me.ucrChkPrecExceed95Percent.TabIndex = 77
         '
         'ucrChkMaxWetSpell
         '
-        Me.ucrChkMaxWetSpell.bAddRemoveParameter = True
-        Me.ucrChkMaxWetSpell.bChangeParameterValue = True
         Me.ucrChkMaxWetSpell.Checked = False
-        Me.ucrChkMaxWetSpell.Location = New System.Drawing.Point(27, 422)
+        Me.ucrChkMaxWetSpell.Location = New System.Drawing.Point(27, 261)
         Me.ucrChkMaxWetSpell.Name = "ucrChkMaxWetSpell"
         Me.ucrChkMaxWetSpell.Size = New System.Drawing.Size(241, 20)
         Me.ucrChkMaxWetSpell.TabIndex = 76
         '
         'ucrChkColdSpellDI
         '
-        Me.ucrChkColdSpellDI.bAddRemoveParameter = True
-        Me.ucrChkColdSpellDI.bChangeParameterValue = True
         Me.ucrChkColdSpellDI.Checked = False
-        Me.ucrChkColdSpellDI.Location = New System.Drawing.Point(27, 258)
+        Me.ucrChkColdSpellDI.Location = New System.Drawing.Point(27, 171)
         Me.ucrChkColdSpellDI.Name = "ucrChkColdSpellDI"
         Me.ucrChkColdSpellDI.Size = New System.Drawing.Size(241, 20)
         Me.ucrChkColdSpellDI.TabIndex = 75
         '
         'ucrChkSimplePrecII
         '
-        Me.ucrChkSimplePrecII.bAddRemoveParameter = True
-        Me.ucrChkSimplePrecII.bChangeParameterValue = True
         Me.ucrChkSimplePrecII.Checked = False
-        Me.ucrChkSimplePrecII.Location = New System.Drawing.Point(27, 330)
+        Me.ucrChkSimplePrecII.Location = New System.Drawing.Point(25, 188)
         Me.ucrChkSimplePrecII.Name = "ucrChkSimplePrecII"
         Me.ucrChkSimplePrecII.Size = New System.Drawing.Size(241, 20)
         Me.ucrChkSimplePrecII.TabIndex = 74
         '
         'ucrChkWarmSpellDI
         '
-        Me.ucrChkWarmSpellDI.bAddRemoveParameter = True
-        Me.ucrChkWarmSpellDI.bChangeParameterValue = True
         Me.ucrChkWarmSpellDI.Checked = False
-        Me.ucrChkWarmSpellDI.Location = New System.Drawing.Point(27, 241)
+        Me.ucrChkWarmSpellDI.Location = New System.Drawing.Point(25, 151)
         Me.ucrChkWarmSpellDI.Name = "ucrChkWarmSpellDI"
         Me.ucrChkWarmSpellDI.Size = New System.Drawing.Size(255, 20)
         Me.ucrChkWarmSpellDI.TabIndex = 73
         '
-        'ucrChkMonthlyMax5dayPrec
-        '
-        Me.ucrChkMonthlyMax5dayPrec.bAddRemoveParameter = True
-        Me.ucrChkMonthlyMax5dayPrec.bChangeParameterValue = True
-        Me.ucrChkMonthlyMax5dayPrec.Checked = False
-        Me.ucrChkMonthlyMax5dayPrec.Location = New System.Drawing.Point(27, 310)
-        Me.ucrChkMonthlyMax5dayPrec.Name = "ucrChkMonthlyMax5dayPrec"
-        Me.ucrChkMonthlyMax5dayPrec.Size = New System.Drawing.Size(241, 20)
-        Me.ucrChkMonthlyMax5dayPrec.TabIndex = 72
-        '
-        'ucrChkMonthlyMax1dayPrec
-        '
-        Me.ucrChkMonthlyMax1dayPrec.bAddRemoveParameter = True
-        Me.ucrChkMonthlyMax1dayPrec.bChangeParameterValue = True
-        Me.ucrChkMonthlyMax1dayPrec.Checked = False
-        Me.ucrChkMonthlyMax1dayPrec.Location = New System.Drawing.Point(27, 294)
-        Me.ucrChkMonthlyMax1dayPrec.Name = "ucrChkMonthlyMax1dayPrec"
-        Me.ucrChkMonthlyMax1dayPrec.Size = New System.Drawing.Size(264, 20)
-        Me.ucrChkMonthlyMax1dayPrec.TabIndex = 71
-        '
-        'ucrChkMeanDiurnalTempRange
-        '
-        Me.ucrChkMeanDiurnalTempRange.bAddRemoveParameter = True
-        Me.ucrChkMeanDiurnalTempRange.bChangeParameterValue = True
-        Me.ucrChkMeanDiurnalTempRange.Checked = False
-        Me.ucrChkMeanDiurnalTempRange.Location = New System.Drawing.Point(27, 276)
-        Me.ucrChkMeanDiurnalTempRange.Name = "ucrChkMeanDiurnalTempRange"
-        Me.ucrChkMeanDiurnalTempRange.Size = New System.Drawing.Size(264, 20)
-        Me.ucrChkMeanDiurnalTempRange.TabIndex = 70
-        '
         'ucrChkSummerDays
         '
-        Me.ucrChkSummerDays.bAddRemoveParameter = True
-        Me.ucrChkSummerDays.bChangeParameterValue = True
         Me.ucrChkSummerDays.Checked = False
         Me.ucrChkSummerDays.Location = New System.Drawing.Point(27, 25)
         Me.ucrChkSummerDays.Name = "ucrChkSummerDays"
@@ -328,8 +245,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrChkIcingDays
         '
-        Me.ucrChkIcingDays.bAddRemoveParameter = True
-        Me.ucrChkIcingDays.bChangeParameterValue = True
         Me.ucrChkIcingDays.Checked = False
         Me.ucrChkIcingDays.Location = New System.Drawing.Point(27, 43)
         Me.ucrChkIcingDays.Name = "ucrChkIcingDays"
@@ -338,8 +253,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrChkTropicalNights
         '
-        Me.ucrChkTropicalNights.bAddRemoveParameter = True
-        Me.ucrChkTropicalNights.bChangeParameterValue = True
         Me.ucrChkTropicalNights.Checked = False
         Me.ucrChkTropicalNights.Location = New System.Drawing.Point(27, 61)
         Me.ucrChkTropicalNights.Name = "ucrChkTropicalNights"
@@ -348,183 +261,19 @@ Partial Class sdgClimdexIndices
         '
         'ucrChkGrowingSeasonLength
         '
-        Me.ucrChkGrowingSeasonLength.bAddRemoveParameter = True
-        Me.ucrChkGrowingSeasonLength.bChangeParameterValue = True
         Me.ucrChkGrowingSeasonLength.Checked = False
         Me.ucrChkGrowingSeasonLength.Location = New System.Drawing.Point(27, 79)
         Me.ucrChkGrowingSeasonLength.Name = "ucrChkGrowingSeasonLength"
         Me.ucrChkGrowingSeasonLength.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkGrowingSeasonLength.TabIndex = 66
         '
-        'ucrChkMonthlyMaxDailyTMax
-        '
-        Me.ucrChkMonthlyMaxDailyTMax.bAddRemoveParameter = True
-        Me.ucrChkMonthlyMaxDailyTMax.bChangeParameterValue = True
-        Me.ucrChkMonthlyMaxDailyTMax.Checked = False
-        Me.ucrChkMonthlyMaxDailyTMax.Location = New System.Drawing.Point(27, 98)
-        Me.ucrChkMonthlyMaxDailyTMax.Name = "ucrChkMonthlyMaxDailyTMax"
-        Me.ucrChkMonthlyMaxDailyTMax.Size = New System.Drawing.Size(297, 20)
-        Me.ucrChkMonthlyMaxDailyTMax.TabIndex = 65
-        '
-        'ucrChkTmaxAbove90Percent
-        '
-        Me.ucrChkTmaxAbove90Percent.bAddRemoveParameter = True
-        Me.ucrChkTmaxAbove90Percent.bChangeParameterValue = True
-        Me.ucrChkTmaxAbove90Percent.Checked = False
-        Me.ucrChkTmaxAbove90Percent.Location = New System.Drawing.Point(27, 223)
-        Me.ucrChkTmaxAbove90Percent.Name = "ucrChkTmaxAbove90Percent"
-        Me.ucrChkTmaxAbove90Percent.Size = New System.Drawing.Size(255, 20)
-        Me.ucrChkTmaxAbove90Percent.TabIndex = 64
-        '
-        'ucrChkTminAbove90Percent
-        '
-        Me.ucrChkTminAbove90Percent.bAddRemoveParameter = True
-        Me.ucrChkTminAbove90Percent.bChangeParameterValue = True
-        Me.ucrChkTminAbove90Percent.Checked = False
-        Me.ucrChkTminAbove90Percent.Location = New System.Drawing.Point(27, 204)
-        Me.ucrChkTminAbove90Percent.Name = "ucrChkTminAbove90Percent"
-        Me.ucrChkTminAbove90Percent.Size = New System.Drawing.Size(297, 20)
-        Me.ucrChkTminAbove90Percent.TabIndex = 63
-        '
-        'ucrChkTmaxBelow10Percent
-        '
-        Me.ucrChkTmaxBelow10Percent.bAddRemoveParameter = True
-        Me.ucrChkTmaxBelow10Percent.bChangeParameterValue = True
-        Me.ucrChkTmaxBelow10Percent.Checked = False
-        Me.ucrChkTmaxBelow10Percent.Location = New System.Drawing.Point(27, 187)
-        Me.ucrChkTmaxBelow10Percent.Name = "ucrChkTmaxBelow10Percent"
-        Me.ucrChkTmaxBelow10Percent.Size = New System.Drawing.Size(300, 20)
-        Me.ucrChkTmaxBelow10Percent.TabIndex = 62
-        '
-        'ucrChkTminBelow10Percent
-        '
-        Me.ucrChkTminBelow10Percent.bAddRemoveParameter = True
-        Me.ucrChkTminBelow10Percent.bChangeParameterValue = True
-        Me.ucrChkTminBelow10Percent.Checked = False
-        Me.ucrChkTminBelow10Percent.Location = New System.Drawing.Point(27, 170)
-        Me.ucrChkTminBelow10Percent.Name = "ucrChkTminBelow10Percent"
-        Me.ucrChkTminBelow10Percent.Size = New System.Drawing.Size(302, 20)
-        Me.ucrChkTminBelow10Percent.TabIndex = 61
-        '
-        'ucrChkMonthlyMinDailyTMin
-        '
-        Me.ucrChkMonthlyMinDailyTMin.bAddRemoveParameter = True
-        Me.ucrChkMonthlyMinDailyTMin.bChangeParameterValue = True
-        Me.ucrChkMonthlyMinDailyTMin.Checked = False
-        Me.ucrChkMonthlyMinDailyTMin.Location = New System.Drawing.Point(27, 151)
-        Me.ucrChkMonthlyMinDailyTMin.Name = "ucrChkMonthlyMinDailyTMin"
-        Me.ucrChkMonthlyMinDailyTMin.Size = New System.Drawing.Size(276, 20)
-        Me.ucrChkMonthlyMinDailyTMin.TabIndex = 60
-        '
-        'ucrChkMonthlyMinDailyTMax
-        '
-        Me.ucrChkMonthlyMinDailyTMax.bAddRemoveParameter = True
-        Me.ucrChkMonthlyMinDailyTMax.bChangeParameterValue = True
-        Me.ucrChkMonthlyMinDailyTMax.Checked = False
-        Me.ucrChkMonthlyMinDailyTMax.Location = New System.Drawing.Point(27, 133)
-        Me.ucrChkMonthlyMinDailyTMax.Name = "ucrChkMonthlyMinDailyTMax"
-        Me.ucrChkMonthlyMinDailyTMax.Size = New System.Drawing.Size(255, 20)
-        Me.ucrChkMonthlyMinDailyTMax.TabIndex = 59
-        '
-        'ucrChkMonthlyMaxDailyTMin
-        '
-        Me.ucrChkMonthlyMaxDailyTMin.bAddRemoveParameter = True
-        Me.ucrChkMonthlyMaxDailyTMin.bChangeParameterValue = True
-        Me.ucrChkMonthlyMaxDailyTMin.Checked = False
-        Me.ucrChkMonthlyMaxDailyTMin.Location = New System.Drawing.Point(27, 116)
-        Me.ucrChkMonthlyMaxDailyTMin.Name = "ucrChkMonthlyMaxDailyTMin"
-        Me.ucrChkMonthlyMaxDailyTMin.Size = New System.Drawing.Size(255, 20)
-        Me.ucrChkMonthlyMaxDailyTMin.TabIndex = 58
-        '
         'ucrChkFrostDays
         '
-        Me.ucrChkFrostDays.bAddRemoveParameter = True
-        Me.ucrChkFrostDays.bChangeParameterValue = True
         Me.ucrChkFrostDays.Checked = False
         Me.ucrChkFrostDays.Location = New System.Drawing.Point(27, 8)
         Me.ucrChkFrostDays.Name = "ucrChkFrostDays"
         Me.ucrChkFrostDays.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkFrostDays.TabIndex = 54
-        '
-        'lbl26
-        '
-        Me.lbl26.AutoSize = True
-        Me.lbl26.Location = New System.Drawing.Point(5, 456)
-        Me.lbl26.Name = "lbl26"
-        Me.lbl26.Size = New System.Drawing.Size(22, 13)
-        Me.lbl26.TabIndex = 50
-        Me.lbl26.Tag = "26."
-        Me.lbl26.Text = "26."
-        '
-        'lbl27
-        '
-        Me.lbl27.AutoSize = True
-        Me.lbl27.Location = New System.Drawing.Point(5, 473)
-        Me.lbl27.Name = "lbl27"
-        Me.lbl27.Size = New System.Drawing.Size(22, 13)
-        Me.lbl27.TabIndex = 52
-        Me.lbl27.Tag = "27."
-        Me.lbl27.Text = "27."
-        '
-        'lbl24
-        '
-        Me.lbl24.AutoSize = True
-        Me.lbl24.Location = New System.Drawing.Point(5, 422)
-        Me.lbl24.Name = "lbl24"
-        Me.lbl24.Size = New System.Drawing.Size(22, 13)
-        Me.lbl24.TabIndex = 46
-        Me.lbl24.Tag = "24."
-        Me.lbl24.Text = "24."
-        '
-        'lbl25
-        '
-        Me.lbl25.AutoSize = True
-        Me.lbl25.Location = New System.Drawing.Point(5, 439)
-        Me.lbl25.Name = "lbl25"
-        Me.lbl25.Size = New System.Drawing.Size(22, 13)
-        Me.lbl25.TabIndex = 48
-        Me.lbl25.Tag = "25."
-        Me.lbl25.Text = "25."
-        '
-        'lbl21
-        '
-        Me.lbl21.AutoSize = True
-        Me.lbl21.Location = New System.Drawing.Point(5, 370)
-        Me.lbl21.Name = "lbl21"
-        Me.lbl21.Size = New System.Drawing.Size(22, 13)
-        Me.lbl21.TabIndex = 40
-        Me.lbl21.Tag = "21."
-        Me.lbl21.Text = "21."
-        '
-        'lbl22
-        '
-        Me.lbl22.AutoSize = True
-        Me.lbl22.Location = New System.Drawing.Point(5, 389)
-        Me.lbl22.Name = "lbl22"
-        Me.lbl22.Size = New System.Drawing.Size(22, 13)
-        Me.lbl22.TabIndex = 42
-        Me.lbl22.Tag = "22."
-        Me.lbl22.Text = "22."
-        '
-        'lbl23
-        '
-        Me.lbl23.AutoSize = True
-        Me.lbl23.Location = New System.Drawing.Point(5, 405)
-        Me.lbl23.Name = "lbl23"
-        Me.lbl23.Size = New System.Drawing.Size(22, 13)
-        Me.lbl23.TabIndex = 44
-        Me.lbl23.Tag = "23."
-        Me.lbl23.Text = "23."
-        '
-        'lbl20
-        '
-        Me.lbl20.AutoSize = True
-        Me.lbl20.Location = New System.Drawing.Point(5, 350)
-        Me.lbl20.Name = "lbl20"
-        Me.lbl20.Size = New System.Drawing.Size(22, 13)
-        Me.lbl20.TabIndex = 38
-        Me.lbl20.Tag = "20."
-        Me.lbl20.Text = "20."
         '
         'lbl14
         '
@@ -535,36 +284,6 @@ Partial Class sdgClimdexIndices
         Me.lbl14.TabIndex = 26
         Me.lbl14.Tag = "14."
         Me.lbl14.Text = "14."
-        '
-        'lbl18
-        '
-        Me.lbl18.AutoSize = True
-        Me.lbl18.Location = New System.Drawing.Point(5, 314)
-        Me.lbl18.Name = "lbl18"
-        Me.lbl18.Size = New System.Drawing.Size(22, 13)
-        Me.lbl18.TabIndex = 34
-        Me.lbl18.Tag = "18."
-        Me.lbl18.Text = "18."
-        '
-        'lbl19
-        '
-        Me.lbl19.AutoSize = True
-        Me.lbl19.Location = New System.Drawing.Point(5, 333)
-        Me.lbl19.Name = "lbl19"
-        Me.lbl19.Size = New System.Drawing.Size(22, 13)
-        Me.lbl19.TabIndex = 36
-        Me.lbl19.Tag = "19."
-        Me.lbl19.Text = "19."
-        '
-        'lbl17
-        '
-        Me.lbl17.AutoSize = True
-        Me.lbl17.Location = New System.Drawing.Point(5, 296)
-        Me.lbl17.Name = "lbl17"
-        Me.lbl17.Size = New System.Drawing.Size(22, 13)
-        Me.lbl17.TabIndex = 32
-        Me.lbl17.Tag = "17."
-        Me.lbl17.Text = "17."
         '
         'lbl16
         '
@@ -729,11 +448,12 @@ Partial Class sdgClimdexIndices
         'tbClimdex
         '
         Me.tbClimdex.Controls.Add(Me.TbSettings)
-        Me.tbClimdex.Controls.Add(Me.tbIndices)
-        Me.tbClimdex.Location = New System.Drawing.Point(7, 0)
+        Me.tbClimdex.Controls.Add(Me.tbAnnualIndices)
+        Me.tbClimdex.Controls.Add(Me.tbAnnualMonthly)
+        Me.tbClimdex.Location = New System.Drawing.Point(7, 6)
         Me.tbClimdex.Name = "tbClimdex"
         Me.tbClimdex.SelectedIndex = 0
-        Me.tbClimdex.Size = New System.Drawing.Size(476, 305)
+        Me.tbClimdex.Size = New System.Drawing.Size(476, 320)
         Me.tbClimdex.TabIndex = 7
         '
         'TbSettings
@@ -760,7 +480,7 @@ Partial Class sdgClimdexIndices
         Me.TbSettings.Location = New System.Drawing.Point(4, 22)
         Me.TbSettings.Name = "TbSettings"
         Me.TbSettings.Padding = New System.Windows.Forms.Padding(3)
-        Me.TbSettings.Size = New System.Drawing.Size(468, 279)
+        Me.TbSettings.Size = New System.Drawing.Size(468, 250)
         Me.TbSettings.TabIndex = 0
         Me.TbSettings.Tag = ""
         Me.TbSettings.Text = "Settings"
@@ -768,8 +488,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrChkCenterMean
         '
-        Me.ucrChkCenterMean.bAddRemoveParameter = True
-        Me.ucrChkCenterMean.bChangeParameterValue = True
         Me.ucrChkCenterMean.Checked = False
         Me.ucrChkCenterMean.Location = New System.Drawing.Point(284, 187)
         Me.ucrChkCenterMean.Name = "ucrChkCenterMean"
@@ -778,8 +496,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrChkSpellDISpanYear
         '
-        Me.ucrChkSpellDISpanYear.bAddRemoveParameter = True
-        Me.ucrChkSpellDISpanYear.bChangeParameterValue = True
         Me.ucrChkSpellDISpanYear.Checked = False
         Me.ucrChkSpellDISpanYear.Location = New System.Drawing.Point(13, 218)
         Me.ucrChkSpellDISpanYear.Name = "ucrChkSpellDISpanYear"
@@ -788,8 +504,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrChkNHemisphere
         '
-        Me.ucrChkNHemisphere.bAddRemoveParameter = True
-        Me.ucrChkNHemisphere.bChangeParameterValue = True
         Me.ucrChkNHemisphere.Checked = False
         Me.ucrChkNHemisphere.Location = New System.Drawing.Point(13, 107)
         Me.ucrChkNHemisphere.Name = "ucrChkNHemisphere"
@@ -798,8 +512,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrChkMaxSpellSpanYears
         '
-        Me.ucrChkMaxSpellSpanYears.bAddRemoveParameter = True
-        Me.ucrChkMaxSpellSpanYears.bChangeParameterValue = True
         Me.ucrChkMaxSpellSpanYears.Checked = False
         Me.ucrChkMaxSpellSpanYears.Location = New System.Drawing.Point(13, 187)
         Me.ucrChkMaxSpellSpanYears.Name = "ucrChkMaxSpellSpanYears"
@@ -818,8 +530,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrMultipleInputBaseRange
         '
-        Me.ucrMultipleInputBaseRange.bAddRemoveParameter = True
-        Me.ucrMultipleInputBaseRange.bChangeParameterValue = True
         Me.ucrMultipleInputBaseRange.Location = New System.Drawing.Point(13, 23)
         Me.ucrMultipleInputBaseRange.Name = "ucrMultipleInputBaseRange"
         Me.ucrMultipleInputBaseRange.Size = New System.Drawing.Size(150, 29)
@@ -827,8 +537,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrNudN
         '
-        Me.ucrNudN.bAddRemoveParameter = True
-        Me.ucrNudN.bChangeParameterValue = True
         Me.ucrNudN.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudN.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudN.Location = New System.Drawing.Point(379, 158)
@@ -841,8 +549,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrNudThreshold
         '
-        Me.ucrNudThreshold.bAddRemoveParameter = True
-        Me.ucrNudThreshold.bChangeParameterValue = True
         Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudThreshold.Location = New System.Drawing.Point(93, 132)
@@ -855,8 +561,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrNudMinBaseData
         '
-        Me.ucrNudMinBaseData.bAddRemoveParameter = True
-        Me.ucrNudMinBaseData.bChangeParameterValue = True
         Me.ucrNudMinBaseData.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinBaseData.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudMinBaseData.Location = New System.Drawing.Point(210, 158)
@@ -889,8 +593,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrInputFreq
         '
-        Me.ucrInputFreq.bAddRemoveParameter = True
-        Me.ucrInputFreq.bChangeParameterValue = True
         Me.ucrInputFreq.IsReadOnly = False
         Me.ucrInputFreq.Location = New System.Drawing.Point(284, 27)
         Me.ucrInputFreq.Name = "ucrInputFreq"
@@ -899,8 +601,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrMultipleInputTempQtiles
         '
-        Me.ucrMultipleInputTempQtiles.bAddRemoveParameter = True
-        Me.ucrMultipleInputTempQtiles.bChangeParameterValue = True
         Me.ucrMultipleInputTempQtiles.Location = New System.Drawing.Point(284, 73)
         Me.ucrMultipleInputTempQtiles.Name = "ucrMultipleInputTempQtiles"
         Me.ucrMultipleInputTempQtiles.Size = New System.Drawing.Size(150, 29)
@@ -908,8 +608,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrMultipleInputPrecQtiles
         '
-        Me.ucrMultipleInputPrecQtiles.bAddRemoveParameter = True
-        Me.ucrMultipleInputPrecQtiles.bChangeParameterValue = True
         Me.ucrMultipleInputPrecQtiles.Location = New System.Drawing.Point(284, 128)
         Me.ucrMultipleInputPrecQtiles.Name = "ucrMultipleInputPrecQtiles"
         Me.ucrMultipleInputPrecQtiles.Size = New System.Drawing.Size(150, 29)
@@ -971,8 +669,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrNudMothlyMissingDays
         '
-        Me.ucrNudMothlyMissingDays.bAddRemoveParameter = True
-        Me.ucrNudMothlyMissingDays.bChangeParameterValue = True
         Me.ucrNudMothlyMissingDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMothlyMissingDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudMothlyMissingDays.Location = New System.Drawing.Point(160, 15)
@@ -985,8 +681,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrNudAnnualMissingDays
         '
-        Me.ucrNudAnnualMissingDays.bAddRemoveParameter = True
-        Me.ucrNudAnnualMissingDays.bChangeParameterValue = True
         Me.ucrNudAnnualMissingDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAnnualMissingDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudAnnualMissingDays.Location = New System.Drawing.Point(53, 15)
@@ -1007,40 +701,156 @@ Partial Class sdgClimdexIndices
         Me.lblN.Tag = "Days_for_Quantiles"
         Me.lblN.Text = "Days for Quantiles"
         '
-        'tbIndices
+        'tbAnnualIndices
         '
-        Me.tbIndices.Controls.Add(Me.ucrChkSave)
-        Me.tbIndices.Controls.Add(Me.panIndices)
-        Me.tbIndices.Location = New System.Drawing.Point(4, 22)
-        Me.tbIndices.Name = "tbIndices"
-        Me.tbIndices.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbIndices.Size = New System.Drawing.Size(468, 279)
-        Me.tbIndices.TabIndex = 1
-        Me.tbIndices.Text = "Indices"
-        Me.tbIndices.UseVisualStyleBackColor = True
+        Me.tbAnnualIndices.Controls.Add(Me.panAnnualIndices)
+        Me.tbAnnualIndices.Location = New System.Drawing.Point(4, 22)
+        Me.tbAnnualIndices.Name = "tbAnnualIndices"
+        Me.tbAnnualIndices.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbAnnualIndices.Size = New System.Drawing.Size(468, 294)
+        Me.tbAnnualIndices.TabIndex = 1
+        Me.tbAnnualIndices.Text = "Annual Indices"
+        Me.tbAnnualIndices.UseVisualStyleBackColor = True
+        '
+        'ucrChkSave
+        '
+        Me.ucrChkSave.Checked = False
+        Me.ucrChkSave.Location = New System.Drawing.Point(39, 332)
+        Me.ucrChkSave.Name = "ucrChkSave"
+        Me.ucrChkSave.Size = New System.Drawing.Size(95, 20)
+        Me.ucrChkSave.TabIndex = 51
         '
         'ucrButtonsClimdexIndices
         '
-        Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(163, 311)
+        Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(178, 346)
         Me.ucrButtonsClimdexIndices.Name = "ucrButtonsClimdexIndices"
         Me.ucrButtonsClimdexIndices.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsClimdexIndices.TabIndex = 6
         '
-        'ucrChkSave
+        'tbAnnualMonthly
         '
-        Me.ucrChkSave.bAddRemoveParameter = True
-        Me.ucrChkSave.bChangeParameterValue = True
-        Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(6, 11)
-        Me.ucrChkSave.Name = "ucrChkSave"
-        Me.ucrChkSave.Size = New System.Drawing.Size(95, 20)
-        Me.ucrChkSave.TabIndex = 51
+        Me.tbAnnualMonthly.Controls.Add(Me.panAnnualMonthlyIndices)
+        Me.tbAnnualMonthly.Location = New System.Drawing.Point(4, 22)
+        Me.tbAnnualMonthly.Name = "tbAnnualMonthly"
+        Me.tbAnnualMonthly.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbAnnualMonthly.Size = New System.Drawing.Size(468, 271)
+        Me.tbAnnualMonthly.TabIndex = 2
+        Me.tbAnnualMonthly.Text = "Annual/Monthly indices"
+        Me.tbAnnualMonthly.UseVisualStyleBackColor = True
+        '
+        'panAnnualMonthlyIndices
+        '
+        Me.panAnnualMonthlyIndices.AutoScroll = True
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkMonthlyMax5dayPrec)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkMonthlyMax1dayPrec)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkMeanDiurnalTempRange)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkTmaxAbove90Percent)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkTminAbove90Percent)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkTmaxBelow10Percent)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkTminBelow10Percent)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkMonthlyMinDailyTMin)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkMonthlyMinDailyTMax)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkMonthlyMaxDailyTMin)
+        Me.panAnnualMonthlyIndices.Controls.Add(Me.ucrChkMonthlyMaxDailyTMax)
+        Me.panAnnualMonthlyIndices.Location = New System.Drawing.Point(3, 6)
+        Me.panAnnualMonthlyIndices.Name = "panAnnualMonthlyIndices"
+        Me.panAnnualMonthlyIndices.Size = New System.Drawing.Size(462, 239)
+        Me.panAnnualMonthlyIndices.TabIndex = 1
+        '
+        'ucrChkMonthlyMaxDailyTMax
+        '
+        Me.ucrChkMonthlyMaxDailyTMax.Checked = False
+        Me.ucrChkMonthlyMaxDailyTMax.Location = New System.Drawing.Point(27, 6)
+        Me.ucrChkMonthlyMaxDailyTMax.Name = "ucrChkMonthlyMaxDailyTMax"
+        Me.ucrChkMonthlyMaxDailyTMax.Size = New System.Drawing.Size(297, 20)
+        Me.ucrChkMonthlyMaxDailyTMax.TabIndex = 66
+        '
+        'ucrChkMonthlyMaxDailyTMin
+        '
+        Me.ucrChkMonthlyMaxDailyTMin.Checked = False
+        Me.ucrChkMonthlyMaxDailyTMin.Location = New System.Drawing.Point(27, 32)
+        Me.ucrChkMonthlyMaxDailyTMin.Name = "ucrChkMonthlyMaxDailyTMin"
+        Me.ucrChkMonthlyMaxDailyTMin.Size = New System.Drawing.Size(255, 20)
+        Me.ucrChkMonthlyMaxDailyTMin.TabIndex = 67
+        '
+        'ucrChkMonthlyMinDailyTMin
+        '
+        Me.ucrChkMonthlyMinDailyTMin.Checked = False
+        Me.ucrChkMonthlyMinDailyTMin.Location = New System.Drawing.Point(27, 75)
+        Me.ucrChkMonthlyMinDailyTMin.Name = "ucrChkMonthlyMinDailyTMin"
+        Me.ucrChkMonthlyMinDailyTMin.Size = New System.Drawing.Size(276, 20)
+        Me.ucrChkMonthlyMinDailyTMin.TabIndex = 69
+        '
+        'ucrChkMonthlyMinDailyTMax
+        '
+        Me.ucrChkMonthlyMinDailyTMax.Checked = False
+        Me.ucrChkMonthlyMinDailyTMax.Location = New System.Drawing.Point(27, 49)
+        Me.ucrChkMonthlyMinDailyTMax.Name = "ucrChkMonthlyMinDailyTMax"
+        Me.ucrChkMonthlyMinDailyTMax.Size = New System.Drawing.Size(255, 20)
+        Me.ucrChkMonthlyMinDailyTMax.TabIndex = 68
+        '
+        'ucrChkTmaxAbove90Percent
+        '
+        Me.ucrChkTmaxAbove90Percent.Checked = False
+        Me.ucrChkTmaxAbove90Percent.Location = New System.Drawing.Point(28, 161)
+        Me.ucrChkTmaxAbove90Percent.Name = "ucrChkTmaxAbove90Percent"
+        Me.ucrChkTmaxAbove90Percent.Size = New System.Drawing.Size(255, 20)
+        Me.ucrChkTmaxAbove90Percent.TabIndex = 73
+        '
+        'ucrChkTminAbove90Percent
+        '
+        Me.ucrChkTminAbove90Percent.Checked = False
+        Me.ucrChkTminAbove90Percent.Location = New System.Drawing.Point(28, 139)
+        Me.ucrChkTminAbove90Percent.Name = "ucrChkTminAbove90Percent"
+        Me.ucrChkTminAbove90Percent.Size = New System.Drawing.Size(297, 20)
+        Me.ucrChkTminAbove90Percent.TabIndex = 72
+        '
+        'ucrChkTmaxBelow10Percent
+        '
+        Me.ucrChkTmaxBelow10Percent.Checked = False
+        Me.ucrChkTmaxBelow10Percent.Location = New System.Drawing.Point(28, 120)
+        Me.ucrChkTmaxBelow10Percent.Name = "ucrChkTmaxBelow10Percent"
+        Me.ucrChkTmaxBelow10Percent.Size = New System.Drawing.Size(300, 20)
+        Me.ucrChkTmaxBelow10Percent.TabIndex = 71
+        '
+        'ucrChkTminBelow10Percent
+        '
+        Me.ucrChkTminBelow10Percent.Checked = False
+        Me.ucrChkTminBelow10Percent.Location = New System.Drawing.Point(28, 101)
+        Me.ucrChkTminBelow10Percent.Name = "ucrChkTminBelow10Percent"
+        Me.ucrChkTminBelow10Percent.Size = New System.Drawing.Size(302, 20)
+        Me.ucrChkTminBelow10Percent.TabIndex = 70
+        '
+        'ucrChkMeanDiurnalTempRange
+        '
+        Me.ucrChkMeanDiurnalTempRange.Checked = False
+        Me.ucrChkMeanDiurnalTempRange.Location = New System.Drawing.Point(29, 178)
+        Me.ucrChkMeanDiurnalTempRange.Name = "ucrChkMeanDiurnalTempRange"
+        Me.ucrChkMeanDiurnalTempRange.Size = New System.Drawing.Size(264, 20)
+        Me.ucrChkMeanDiurnalTempRange.TabIndex = 74
+        '
+        'ucrChkMonthlyMax5dayPrec
+        '
+        Me.ucrChkMonthlyMax5dayPrec.Checked = False
+        Me.ucrChkMonthlyMax5dayPrec.Location = New System.Drawing.Point(29, 216)
+        Me.ucrChkMonthlyMax5dayPrec.Name = "ucrChkMonthlyMax5dayPrec"
+        Me.ucrChkMonthlyMax5dayPrec.Size = New System.Drawing.Size(241, 20)
+        Me.ucrChkMonthlyMax5dayPrec.TabIndex = 76
+        '
+        'ucrChkMonthlyMax1dayPrec
+        '
+        Me.ucrChkMonthlyMax1dayPrec.Checked = False
+        Me.ucrChkMonthlyMax1dayPrec.Location = New System.Drawing.Point(29, 192)
+        Me.ucrChkMonthlyMax1dayPrec.Name = "ucrChkMonthlyMax1dayPrec"
+        Me.ucrChkMonthlyMax1dayPrec.Size = New System.Drawing.Size(264, 20)
+        Me.ucrChkMonthlyMax1dayPrec.TabIndex = 75
         '
         'sdgClimdexIndices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(488, 348)
+        Me.ClientSize = New System.Drawing.Size(488, 698)
+        Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.tbClimdex)
         Me.Controls.Add(Me.ucrButtonsClimdexIndices)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -1050,34 +860,25 @@ Partial Class sdgClimdexIndices
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Indices"
         Me.Text = "Indices"
-        Me.panIndices.ResumeLayout(False)
-        Me.panIndices.PerformLayout()
+        Me.panAnnualIndices.ResumeLayout(False)
+        Me.panAnnualIndices.PerformLayout()
         Me.tbClimdex.ResumeLayout(False)
         Me.TbSettings.ResumeLayout(False)
         Me.TbSettings.PerformLayout()
         Me.grpMaxMissingDays.ResumeLayout(False)
         Me.grpMaxMissingDays.PerformLayout()
-        Me.tbIndices.ResumeLayout(False)
+        Me.tbAnnualIndices.ResumeLayout(False)
+        Me.tbAnnualMonthly.ResumeLayout(False)
+        Me.panAnnualMonthlyIndices.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrButtonsClimdexIndices As ucrButtonsSubdialogue
-    Friend WithEvents panIndices As Panel
+    Friend WithEvents panAnnualIndices As Panel
     Friend WithEvents ttClimdexIndices As ToolTip
     Friend WithEvents lblThreshold As Label
-    Friend WithEvents lbl26 As Label
-    Friend WithEvents lbl27 As Label
-    Friend WithEvents lbl24 As Label
-    Friend WithEvents lbl25 As Label
-    Friend WithEvents lbl21 As Label
-    Friend WithEvents lbl22 As Label
-    Friend WithEvents lbl23 As Label
-    Friend WithEvents lbl20 As Label
     Friend WithEvents lbl14 As Label
-    Friend WithEvents lbl18 As Label
-    Friend WithEvents lbl19 As Label
-    Friend WithEvents lbl17 As Label
     Friend WithEvents lbl16 As Label
     Friend WithEvents lbl15 As Label
     Friend WithEvents lbl6 As Label
@@ -1095,7 +896,7 @@ Partial Class sdgClimdexIndices
     Friend WithEvents lbl1 As Label
     Friend WithEvents tbClimdex As TabControl
     Friend WithEvents TbSettings As TabPage
-    Friend WithEvents tbIndices As TabPage
+    Friend WithEvents tbAnnualIndices As TabPage
     Friend WithEvents ucrInputFreq As ucrInputComboBox
     Friend WithEvents ucrMultipleInputTempQtiles As ucrMultipleInput
     Friend WithEvents ucrMultipleInputPrecQtiles As ucrMultipleInput
@@ -1129,14 +930,22 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrChkColdSpellDI As ucrCheck
     Friend WithEvents ucrChkSimplePrecII As ucrCheck
     Friend WithEvents ucrChkWarmSpellDI As ucrCheck
-    Friend WithEvents ucrChkMonthlyMax5dayPrec As ucrCheck
-    Friend WithEvents ucrChkMonthlyMax1dayPrec As ucrCheck
-    Friend WithEvents ucrChkMeanDiurnalTempRange As ucrCheck
     Friend WithEvents ucrChkSummerDays As ucrCheck
     Friend WithEvents ucrChkIcingDays As ucrCheck
     Friend WithEvents ucrChkTropicalNights As ucrCheck
     Friend WithEvents ucrChkGrowingSeasonLength As ucrCheck
-    Friend WithEvents ucrChkMonthlyMaxDailyTMax As ucrCheck
+    Friend WithEvents ucrChkFrostDays As ucrCheck
+    Friend WithEvents ucrChkSave As ucrCheck
+    Friend WithEvents tbAnnualMonthly As TabPage
+
+    Private Sub ucrChkColdSpellDI_Load(sender As Object, e As EventArgs) Handles ucrChkColdSpellDI.Load
+
+    End Sub
+
+    Friend WithEvents panAnnualMonthlyIndices As Panel
+    Friend WithEvents ucrChkMonthlyMax5dayPrec As ucrCheck
+    Friend WithEvents ucrChkMonthlyMax1dayPrec As ucrCheck
+    Friend WithEvents ucrChkMeanDiurnalTempRange As ucrCheck
     Friend WithEvents ucrChkTmaxAbove90Percent As ucrCheck
     Friend WithEvents ucrChkTminAbove90Percent As ucrCheck
     Friend WithEvents ucrChkTmaxBelow10Percent As ucrCheck
@@ -1144,6 +953,5 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrChkMonthlyMinDailyTMin As ucrCheck
     Friend WithEvents ucrChkMonthlyMinDailyTMax As ucrCheck
     Friend WithEvents ucrChkMonthlyMaxDailyTMin As ucrCheck
-    Friend WithEvents ucrChkFrostDays As ucrCheck
-    Friend WithEvents ucrChkSave As ucrCheck
+    Friend WithEvents ucrChkMonthlyMaxDailyTMax As ucrCheck
 End Class

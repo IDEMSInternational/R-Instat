@@ -746,7 +746,7 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
   data_obj$set_data_changed(TRUE)
-} 
+ } 
 )
 
 instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
@@ -1110,72 +1110,78 @@ instat_object$set("public", "remove_key", function(data_name, key_name) {
 }
 )
 
-instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual", return_df = FALSE) {
-  #if(!self$is_climatic(data_name))stop("Define data as climatic.")
-  yearly_data <- paste(data_name, "yearly", sep = "_")
-  monthly_data <- paste(data_name, "monthly", sep = "_")
-  pure_annual = c("","Precipitation_Exceeding_20mm_Per_Day","Frost_Days","Summer_Days","Icing_Days","Tropical_Nights","Growing_Season_Length","Total_Daily_Precipitation","Precipitation_Exceeding_10mm_Per_Day")
-  pure_monthly = c("")
+instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual") {
+  if(!self$get_combined_metadata_value(data_name, is_climatic_label))stop("Define data as climatic.")
   mix_monthly_annual = c("Monthly_Minimum_of_Daily_Minimum_Temperature", "Percentage_of_Days_When_Tmax_is_Above_90th_Percentile","Percentage_of_Days_When_Tmin_is_Above_90th_Percentile","Percentage_of_Days_When_Tmax_is_Below_10th_Percentile","Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", "Monthly_Maximum_Consecutive_5day_Precipitation", "Monthly_Maximum_1day_Precipitation","Monthly_Maximum_of_Daily_Maximum_Temperature", "Monthly_Maximum_of_Daily_Minimum_Temperature","Monthly_Minimum_of_Daily_Maximum_Temperature", "Mean_Diurnal_Temperature_Range")
   
-  if((names(indices) %in% pure_monthly) || ((names(indices) %in% mix_monthly_annual) && freq=="monthly")){
-    if (!(paste(data_name, "monthly", sep = "_"))%in% self$get_data_names()){
+  if(((names(indices) %in% mix_monthly_annual) && freq=="monthly")){
+    yy = as.data.frame(indices[[1]],row.names = NULL)
+    yy1 <- cbind(Row.Names = rownames(yy), yy)
+    split_data = str_split_fixed(string=yy1[,1], n=2, pattern="-")
+    my_data = cbind(yy1, split_data)
+    names(my_data) = c("Year_month", names(indices), "Year", "Month")
+    my_data <- my_data[c(1,3,4,2)]
+    my_data$Year = as.integer(as.character(my_data$Year))
+    my_data$Month = as.integer(as.character(my_data$Month))
+    year_col = self$get_climatic_column_name(data_name, year_label)
+    month_col = self$get_climatic_column_name(data_name, month_label)
+    key_list = list("Year", "Month")
+    names(key_list) = c(as.name(year_col), as.name(month_col))
+    if(self$get_linked_to_data_name(data_name, c(Year="Year", Month = "Month"))==""){
       warning("monthly_data is missing, it will be created.")
-      year_col = self$get_climatic_column_name(data_name, year_label)
-      month_col = self$get_climatic_column_name(data_name, month_label)
-      yy = as.data.frame(indices[[1]],row.names = NULL)
-      yy1 <- cbind(Row.Names = rownames(yy), yy)
-      names(yy1) = c("Year_month", names(indices))
-      data_list = list(yy1)
+      data_list = list(my_data)
       names(data_list) = paste(data_name, "monthly", sep = "_")
       self$import_data(data_tables = data_list)
-      Year_month <- self$get_columns_from_data(use_current_filter=FALSE, col_name="Year_month", data_name=paste(data_name, "monthly", sep = "_"))
-      self$add_columns_to_data(col_data=str_split_fixed(string=Year_month, n=2, pattern="-"), use_col_name_as_prefix=FALSE, data_name=paste(data_name, "monthly", sep = "_"), col_name=c("Year","Month"), adjacent_column = "Year_month")
-      self$convert_column_to_type(data_name=paste(data_name, "monthly", sep = "_"), to_type="numeric", col_names=c("Year", "Month"))
-      key_list = list("Year", "Month")
-      names(key_list) = c(as.name(year_col), as.name(month_col))
       self$add_key(paste(data_name, "monthly", sep = "_"), c("Year", "Month"))
       self$add_link(from_data_frame = data_name, to_data_frame = paste(data_name, "monthly", sep = "_"), link_pairs = key_list, type = keyed_link_label)
     }
     else{
-      self$add_columns_to_data(col_name=names(indices), data_name=paste(data_name, "monthly", sep = "_"), col_data = as.vector(indices[[1]]))
+      self$merge_data(by=c("Year_month","Year", "Month"), data_name = self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
     } 
   }
   else{
-    if (!(paste(data_name, "yearly", sep = "_"))%in% self$get_data_names()){
+    yy = as.data.frame(indices[[1]],row.names = NULL)
+    my_data <- cbind(Row.Names = rownames(yy), yy)
+    names(my_data) = c("Year", names(indices))
+    my_data$Year = as.integer(as.character(my_data$Year))
+    year_col = self$get_climatic_column_name(data_name, year_label)
+    key_list = list("Year")
+    names(key_list) = c(as.name(year_col))
+    if(self$get_linked_to_data_name(data_name, key_list)==""){
       warning("Yearly_data is missing, it will be created.")
-      year_col = self$get_climatic_column_name(data_name, year_label)
-      yy = as.data.frame(indices[[1]],row.names = NULL)
-      yy1 <- cbind(Row.Names = rownames(yy), yy)
-      names(yy1) = c("Year", names(indices))
-      data_list = list(yy1)
+      data_list = list(my_data)
       names(data_list) = paste(data_name, "yearly", sep = "_")
       self$import_data(data_tables = data_list)
-      self$convert_column_to_type(data_name=paste(data_name, "yearly", sep = "_"), to_type="numeric", col_names=c("Year"))
-      key_list = list("Year")
-      names(key_list) = c(as.name(year_col))
       self$add_key(paste(data_name, "yearly", sep = "_"), c("Year"))
       self$add_link(from_data_frame = data_name, to_data_frame = paste(data_name, "yearly", sep = "_"), link_pairs = key_list, type = keyed_link_label)
     }
     else{
-      self$add_columns_to_data(col_name=names(indices), data_name=paste(data_name, "yearly", sep = "_"), col_data = as.vector(indices[[1]]))
+      self$merge_data(by=c("Year"), data_name=self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
     }
   }
-  
 }
 )
 
-# instat_object$set("public", "is_climatic", function(data_name) {
-#   new_data = self$get_combined_metadata()
-#   #return(subset(new_data, data_name == data_name, select = Is_Climatic))
-#   return(as.logical(subset(self$get_combined_metadata(), data_name == data_name, select = Is_Climatic)))
-# }
-# )
+ instat_object$set("public", "get_combined_metadata_value", function(data_name, property) {
+   if(!self$is_metadata(data_name, property))stop(paste(property, " is not a metadata column."))
+   #new_data = self$get_combined_metadata()
+   return(self$get_combined_metadata()[data_name, property])
+ }
+)
+ 
+instat_object$set("public", "is_metadata", function(data_name, str) {
+  self$get_data_objects(data_name)$is_metadata(str = str)
+}
+)
 
 instat_object$set("public", "get_climatic_column_name", function(data_name, col_name) {
   new_data = subset(InstatDataObject$get_variables_metadata(data_name), Climatic_Type==col_name, select = Name)
   if(!nrow(new_data==1))stop(paste(col_name, " column cannot be found in the data."))
-  #print(nrow(new_data))
   return(as.character(new_data))
+}
+)
+
+instat_object$set("public", "merge_data", function(data_name, new_data, by = NULL, type = "left", match = "all") {
+  self$get_data_objects(data_name)$merge_data(new_data = new_data, by = by, type = type, match = match)
 }
 )
