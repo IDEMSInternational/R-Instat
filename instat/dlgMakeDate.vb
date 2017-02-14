@@ -59,10 +59,13 @@ Public Class dlgMakeDate
         ucrReceiverMonthThree.bUseFilteredData = False
         ucrReceiverDayThree.bUseFilteredData = False
 
-        ucrInputNewColumnName.SetItemsTypeAsColumns()
-        ucrInputNewColumnName.SetDefaultTypeAsColumn()
-        ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
-        ucrInputNewColumnName.SetValidationTypeAsRVariable()
+        'ucrSave Date Column
+        ucrSaveDate.SetPrefix("Date")
+        ucrSaveDate.SetSaveTypeAsColumn()
+        ucrSaveDate.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
+        ucrSaveDate.SetLabelText("Save Date:")
+        ucrSaveDate.SetIsComboBox()
+
         ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
         ucrInputYearOption.SetItems({"4 Digit", "2 Digit"})
         ucrInputYear.SetItems({"4 Digit", "2 Digit"})
@@ -112,7 +115,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SetDefaults()
-        ucrInputNewColumnName.Reset()
+        ucrSaveDate.Reset()
         ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
         rdoSingleColumn.Checked = True
@@ -129,7 +132,6 @@ Public Class dlgMakeDate
         ucrInputComboBoxMonthTwo.SetName("365/366")
         ucrInputOrigin.Visible = False
         ucrInputOrigin.SetName("Excel")
-        ucrInputNewColumnName.SetPrefix("Date")
         chkTwoDigitYearTwo.Checked = False
         lblCutOffTwo.Visible = False
         chkTwoDigitYearTwo.Visible = True
@@ -159,7 +161,7 @@ Public Class dlgMakeDate
 
     Private Sub TestOKEnabled()
 
-        If Not ucrInputNewColumnName.IsEmpty Then
+        If ucrSaveDate.IsComplete Then
             ' we have three radio buttons, so need to define when OK can be enabled for each radio button.
             If rdoSingleColumn.Checked Then
                 If Not ucrReceiverForDate.IsEmpty Then
@@ -198,12 +200,12 @@ Public Class dlgMakeDate
 
     'New Column Name
     Private Sub UcrInputNewColumnName_NameChanged()
-        SetAssignTo()
+        'SetAssignTo()
     End Sub
 
-    Private Sub SetAssignTo()
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=False)
-    End Sub
+    'Private Sub SetAssignTo()
+    '    ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=False)
+    'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -244,7 +246,7 @@ Public Class dlgMakeDate
 
     Private Sub ucrSeclectorMakeDate_DataFrameChanged() Handles ucrSelectorMakeDate.DataFrameChanged
         Formats()
-        SetAssignTo()
+        '  SetAssignTo()
     End Sub
 
     Private Sub SetReceivers()

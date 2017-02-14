@@ -461,7 +461,7 @@ Partial Class dlgMakeDate
         '
         Me.ucrSaveDate.Location = New System.Drawing.Point(10, 358)
         Me.ucrSaveDate.Name = "ucrSaveDate"
-        Me.ucrSaveDate.Size = New System.Drawing.Size(353, 24)
+        Me.ucrSaveDate.Size = New System.Drawing.Size(280, 24)
         Me.ucrSaveDate.TabIndex = 10
         '
         'ucrPanelDate
