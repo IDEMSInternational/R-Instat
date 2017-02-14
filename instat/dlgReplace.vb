@@ -207,12 +207,4 @@ Public Class dlgReplace
         InputValue()
         EnableRange()
     End Sub
-
-    Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
-
-    Private Sub ucrPnlNew_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
 End Class
