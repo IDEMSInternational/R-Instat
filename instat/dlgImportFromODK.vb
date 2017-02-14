@@ -50,7 +50,6 @@ Public Class dlgImportFromODK
         ucrInputPassword.SetParameter(New RParameter("password", 2))
 
         ucrChkViewPassword.SetText("View Password")
-        ucrChkViewPassword.Checked = False
     End Sub
 
     Private Sub TestOKEnabled()
@@ -67,10 +66,12 @@ Public Class dlgImportFromODK
         ucrInputChooseForm.Reset()
         ucrInputPassword.Reset()
         ucrInputUsername.Reset()
+
         ucrInputUsername.SetName("")
         ucrInputPassword.SetName("")
         ucrInputChooseForm.SetName("")
 
+        ucrChkViewPassword.Checked = False
         ucrInputPassword.txtInput.UseSystemPasswordChar = True
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
