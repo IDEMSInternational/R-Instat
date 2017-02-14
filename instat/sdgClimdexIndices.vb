@@ -153,7 +153,6 @@ Public Class sdgClimdexIndices
         ucrNudMinBaseData.SetMinMax(0, 1)
         ucrNudMinBaseData.Increment = 0.01
 
-
         ucrNudAnnualMissingDays.SetParameter(New RParameter("annual"))
         ucrNudAnnualMissingDays.SetRDefault(15)
         ucrNudAnnualMissingDays.SetMinMax(1, 366)
@@ -203,8 +202,6 @@ Public Class sdgClimdexIndices
         ucrChkSave.SetText("Save indices")
         ucrChkSave.bChangeParameterValue = False
 
-        'dlgClimdex.ucrSelectorClimdex.SetRCode(clsRPrec, bReset)
-
         ttClimdexIndices.SetToolTip(ucrChkFrostDays.chkCheck, "The annual count of days where daily minimum temperature drops below 0 degrees Celsius")
         ttClimdexIndices.SetToolTip(ucrChkSummerDays.chkCheck, "The annual count of days where daily maximum temperature exceeds 25 degrees Celsius")
         ttClimdexIndices.SetToolTip(ucrChkIcingDays.chkCheck, "The annual count of days where daily maximum temperature is below 0 degrees Celsius")
@@ -249,10 +246,7 @@ Public Class sdgClimdexIndices
         clsRWriteDf.SetRCommand("InstatDataObject$add_climdex_indices")
         clsRListDF.SetRCommand("list")
         clsRListDF.AddParameter(ucrchkTemp.Tag, clsRFunctionParameter:=clsIndex)
-        'clsRWriteDf.AddParameter("data_name", clsRFunctionParameter:=clsRListDF)
         clsRWriteDf.AddParameter("indices", clsRFunctionParameter:=clsRListDF)
-        'clsRConvertDF.AddParameter("x", clsRFunctionParameter:=clsIndex)
-        'clsRListDF.AddParameter(ucrchkTemp.Tag, clsRFunctionParameter:=clsRConvertDF)
         If bSave Then
             frmMain.clsRLink.RunScript(clsRWriteDf.ToScript(), 0)
         Else
@@ -268,133 +262,106 @@ Public Class sdgClimdexIndices
         If (ucrChkSummerDays.Checked = True) Then
             clsROneArg.SetRCommand("climdex.su")
             SaveIndices(ucrChkSummerDays, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
         If (ucrChkIcingDays.Checked = True) Then
             clsROneArg.SetRCommand("climdex.id")
             SaveIndices(ucrChkIcingDays, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
         If (ucrChkTropicalNights.Checked = True) Then
             clsROneArg.SetRCommand("climdex.tr")
             SaveIndices(ucrChkTropicalNights, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
         If (ucrChkGrowingSeasonLength.Checked = True) Then
             clsRTwoArg2.SetRCommand("climdex.gsl")
             SaveIndices(ucrChkGrowingSeasonLength, clsRTwoArg2, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg2.ToScript(), 2)
         End If
         If (ucrChkMonthlyMaxDailyTMax.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.txx")
             SaveIndices(ucrChkMonthlyMaxDailyTMax, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkMonthlyMaxDailyTMin.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.tnx")
             SaveIndices(ucrChkMonthlyMaxDailyTMin, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkMonthlyMinDailyTMax.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.txn")
             SaveIndices(ucrChkMonthlyMinDailyTMax, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkMonthlyMinDailyTMin.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.tnn")
             SaveIndices(ucrChkMonthlyMinDailyTMin, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkTminBelow10Percent.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.tn10p")
             SaveIndices(ucrChkTminBelow10Percent, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkTmaxBelow10Percent.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.tx10p")
             SaveIndices(ucrChkTmaxBelow10Percent, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkTminAbove90Percent.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.tn90p")
             SaveIndices(ucrChkTminAbove90Percent, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkTmaxAbove90Percent.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.tx90p")
             SaveIndices(ucrChkTmaxAbove90Percent, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkWarmSpellDI.Checked = True) Then
             clsRTwoArg5.SetRCommand("climdex.wsdi")
             SaveIndices(ucrChkWarmSpellDI, clsRTwoArg5, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg5.ToScript(), 2)
         End If
         If (ucrChkColdSpellDI.Checked = True) Then
             clsRTwoArg5.SetRCommand("climdex.csdi")
             SaveIndices(ucrChkColdSpellDI, clsRTwoArg5, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg5.ToScript(), 2)
         End If
         If (ucrChkMeanDiurnalTempRange.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.dtr")
             SaveIndices(ucrChkMeanDiurnalTempRange, clsRTwoArg1, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkMonthlyMax1dayPrec.Checked = True) Then
             clsRTwoArg1.SetRCommand("climdex.rx1day")
             SaveIndices(ucrChkMonthlyMax1dayPrec, clsRTwoArg1, bSaveIndex)
-            ' frmMain.clsRLink.RunScript(clsRTwoArg1.ToScript(), 2)
         End If
         If (ucrChkMonthlyMax5dayPrec.Checked = True) Then
             clsRThreeArg.SetRCommand("climdex.rx5day")
             SaveIndices(ucrChkMonthlyMax5dayPrec, clsRThreeArg, bSaveIndex)
-            ' frmMain.clsRLink.RunScript(clsRThreeArg.ToScript(), 2)
         End If
         If (ucrChkSimplePrecII.Checked = True) Then
             clsROneArg.SetRCommand("climdex.sdii")
             SaveIndices(ucrChkSimplePrecII, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
         If (ucrChkPrecExceed10mm.Checked = True) Then
             clsROneArg.SetRCommand("climdex.r10mm")
             SaveIndices(ucrChkPrecExceed10mm, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
         If (ucrChkPrecExceed20mm.Checked = True) Then
             clsROneArg.SetRCommand("climdex.r20mm")
             SaveIndices(ucrChkPrecExceed20mm, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
         If (ucrChkPrecExceedSpecifiedA.Checked = True) Then
             clsRTwoArg3.SetRCommand("climdex.rnnmm")
             SaveIndices(ucrChkPrecExceedSpecifiedA, clsRTwoArg3, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg3.ToScript(), 2)
         End If
         If (ucrChkMaxDrySpell.Checked = True) Then
             clsRTwoArg4.SetRCommand("climdex.cdd")
             SaveIndices(ucrChkMaxDrySpell, clsRTwoArg4, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg4.ToScript(), 2)
         End If
         If (ucrChkMaxWetSpell.Checked = True) Then
             clsRTwoArg4.SetRCommand("climdex.cwd")
             SaveIndices(ucrChkMaxWetSpell, clsRTwoArg4, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsRTwoArg4.ToScript(), 2)
         End If
         If (ucrChkPrecExceed95Percent.Checked = True) Then
             clsROneArg.SetRCommand("climdex.r95ptot")
             SaveIndices(ucrChkPrecExceed95Percent, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
-
         End If
         If (ucrChkPrecExceed99Percent.Checked = True) Then
             clsROneArg.SetRCommand("climdex.r99ptot")
             SaveIndices(ucrChkPrecExceed99Percent, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
         If (ucrChkTotalDailyPrec.Checked = True) Then
             clsROneArg.SetRCommand("climdex.prcptot")
             SaveIndices(ucrChkTotalDailyPrec, clsROneArg, bSaveIndex)
-            'frmMain.clsRLink.RunScript(clsROneArg.ToScript(), 2)
         End If
     End Sub
 
