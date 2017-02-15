@@ -34,6 +34,7 @@ Public Class dlgColumnStructure
         SetRCodeForControls(bReset)
         bReset = False
         SetColumnStructureInReceiver()
+        TestOKEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -62,18 +63,26 @@ Public Class dlgColumnStructure
         ucrSelectorColumnStructure.SetParameter(New RParameter("data_name", 0))
         ucrSelectorColumnStructure.SetParameterIsString()
 
-        ucrChkColourColumnsByStructure.SetText("Color Columns by Structure")
+        ucrChkColourColumnsByStructure.SetText("Colour Columns by Structure")
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsdefaultCourByStructure, clsDefualtRFunction As New RFunction
+        Dim clsDefaultColourByStructure, clsDefualtRFunction As New RFunction
         ucrChkColourColumnsByStructure.Checked = False
         SetColumnStructureInReceiver()
         ucrReceiverType1.SetMeAsReceiver()
-        clsdefaultCourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
-        clsdefaultCourByStructure.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsColByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
-        clsColByMetadata = clsdefaultCourByStructure.Clone
+        clsdefaultColourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
+        clsdefaultColourByStructure.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsdefaultColourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        clsColByMetadata = clsdefaultColourByStructure.Clone
         clsDefualtRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefualtRFunction.Clone())
     End Sub
@@ -88,17 +97,20 @@ Public Class dlgColumnStructure
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
-    Private Sub SetCol()
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         If ucrChkColourColumnsByStructure.Checked Then
-            clsColByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
             frmMain.clsRLink.RunScript(clsColByMetadata.ToScript)
         End If
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        SetCol()
+    Private Sub ucrSelectorColumnStructure_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColumnStructure.ControlValueChanged
+        clsColByMetadata.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
+    Private Sub ucrSelectorColumnStructure_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColumnStructure.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class
