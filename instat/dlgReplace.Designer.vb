@@ -124,8 +124,6 @@ Partial Class dlgReplace
         '
         'ucrChkMax
         '
-        Me.ucrChkMax.bAddRemoveParameter = True
-        Me.ucrChkMax.bChangeParameterValue = True
         Me.ucrChkMax.Checked = False
         Me.ucrChkMax.Location = New System.Drawing.Point(151, 116)
         Me.ucrChkMax.Name = "ucrChkMax"
@@ -134,8 +132,7 @@ Partial Class dlgReplace
         '
         'ucrInputRangeTo
         '
-        Me.ucrInputRangeTo.bAddRemoveParameter = True
-        Me.ucrInputRangeTo.bChangeParameterValue = True
+        Me.ucrInputRangeTo.AddQuotesIfUnrecognised = True
         Me.ucrInputRangeTo.IsMultiline = False
         Me.ucrInputRangeTo.IsReadOnly = False
         Me.ucrInputRangeTo.Location = New System.Drawing.Point(71, 114)
@@ -145,8 +142,6 @@ Partial Class dlgReplace
         '
         'ucrChkMin
         '
-        Me.ucrChkMin.bAddRemoveParameter = True
-        Me.ucrChkMin.bChangeParameterValue = True
         Me.ucrChkMin.Checked = False
         Me.ucrChkMin.Location = New System.Drawing.Point(151, 93)
         Me.ucrChkMin.Name = "ucrChkMin"
@@ -155,8 +150,7 @@ Partial Class dlgReplace
         '
         'ucrInputRangeFrom
         '
-        Me.ucrInputRangeFrom.bAddRemoveParameter = True
-        Me.ucrInputRangeFrom.bChangeParameterValue = True
+        Me.ucrInputRangeFrom.AddQuotesIfUnrecognised = True
         Me.ucrInputRangeFrom.IsMultiline = False
         Me.ucrInputRangeFrom.IsReadOnly = False
         Me.ucrInputRangeFrom.Location = New System.Drawing.Point(71, 93)
@@ -166,8 +160,7 @@ Partial Class dlgReplace
         '
         'ucrInputOldValue
         '
-        Me.ucrInputOldValue.bAddRemoveParameter = True
-        Me.ucrInputOldValue.bChangeParameterValue = True
+        Me.ucrInputOldValue.AddQuotesIfUnrecognised = True
         Me.ucrInputOldValue.IsMultiline = False
         Me.ucrInputOldValue.IsReadOnly = False
         Me.ucrInputOldValue.Location = New System.Drawing.Point(70, 25)
@@ -177,8 +170,6 @@ Partial Class dlgReplace
         '
         'ucrPnlOld
         '
-        Me.ucrPnlOld.bAddRemoveParameter = True
-        Me.ucrPnlOld.bChangeParameterValue = True
         Me.ucrPnlOld.Location = New System.Drawing.Point(3, 17)
         Me.ucrPnlOld.Name = "ucrPnlOld"
         Me.ucrPnlOld.Size = New System.Drawing.Size(228, 131)
@@ -212,8 +203,7 @@ Partial Class dlgReplace
         '
         'ucrInputNewValue
         '
-        Me.ucrInputNewValue.bAddRemoveParameter = True
-        Me.ucrInputNewValue.bChangeParameterValue = True
+        Me.ucrInputNewValue.AddQuotesIfUnrecognised = True
         Me.ucrInputNewValue.IsMultiline = False
         Me.ucrInputNewValue.IsReadOnly = False
         Me.ucrInputNewValue.Location = New System.Drawing.Point(74, 28)
@@ -245,8 +235,6 @@ Partial Class dlgReplace
         '
         'ucrPnlNew
         '
-        Me.ucrPnlNew.bAddRemoveParameter = True
-        Me.ucrPnlNew.bChangeParameterValue = True
         Me.ucrPnlNew.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlNew.Name = "ucrPnlNew"
         Me.ucrPnlNew.Size = New System.Drawing.Size(164, 87)
@@ -255,7 +243,7 @@ Partial Class dlgReplace
         'lblSelectedColumns
         '
         Me.lblSelectedColumns.AutoSize = True
-        Me.lblSelectedColumns.Location = New System.Drawing.Point(247, 46)
+        Me.lblSelectedColumns.Location = New System.Drawing.Point(249, 46)
         Me.lblSelectedColumns.Name = "lblSelectedColumns"
         Me.lblSelectedColumns.Size = New System.Drawing.Size(101, 13)
         Me.lblSelectedColumns.TabIndex = 1
@@ -264,8 +252,6 @@ Partial Class dlgReplace
         '
         'ucrReceiverReplace
         '
-        Me.ucrReceiverReplace.bAddRemoveParameter = True
-        Me.ucrReceiverReplace.bChangeParameterValue = True
         Me.ucrReceiverReplace.frmParent = Me
         Me.ucrReceiverReplace.Location = New System.Drawing.Point(247, 61)
         Me.ucrReceiverReplace.Margin = New System.Windows.Forms.Padding(0)
@@ -276,8 +262,6 @@ Partial Class dlgReplace
         '
         'ucrSelectorReplace
         '
-        Me.ucrSelectorReplace.bAddRemoveParameter = True
-        Me.ucrSelectorReplace.bChangeParameterValue = True
         Me.ucrSelectorReplace.bShowHiddenColumns = False
         Me.ucrSelectorReplace.bUseCurrentFilter = True
         Me.ucrSelectorReplace.Location = New System.Drawing.Point(10, 10)
