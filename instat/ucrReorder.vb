@@ -23,6 +23,7 @@ Public Class ucrReorder
     Dim selectedListViewItem As ListViewItem
     Dim selectedIndex As Integer
     Dim itemsCount As Integer
+    Public bWithQuotes As Boolean = True
 
     Public Sub New()
 
@@ -204,6 +205,18 @@ Public Class ucrReorder
         End If
     End Sub
 
+    Private Sub FillListView(strItems As String())
+        If strItems IsNot Nothing Then
+            lstAvailableData.Items.Clear()
+            For i = 0 To strItems.Count - 1
+                lstAvailableData.Items.Add(strItems(i))
+            Next
+            RaiseEvent OrderChanged()
+        Else
+            lstAvailableData.Items.Clear()
+        End If
+    End Sub
+
     Private Sub ucrDataFrameList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameList.DataFrameChanged
         loadList()
     End Sub
@@ -223,5 +236,37 @@ Public Class ucrReorder
 
     Public Sub Reset()
         lstAvailableData.Items.Clear()
+    End Sub
+
+    Protected Overrides Sub SetControlValue()
+        Dim lstCurrentVariables As String()
+
+        If clsParameter IsNot Nothing AndAlso clsParameter.bIsString AndAlso clsParameter.strArgumentValue IsNot Nothing Then
+            lstCurrentVariables = ExtractItemsFromRList(clsParameter.strArgumentValue)
+            SetToValue(lstCurrentVariables)
+        End If
+    End Sub
+
+    Protected Overrides Sub SetToValue(objTemp As Object)
+        Dim strTemp As String()
+        Dim chrTemp As CharacterVector
+
+        If TypeOf objTemp Is String() Then
+            strTemp = CType(objTemp, String())
+            FillListView(strTemp)
+        ElseIf TypeOf objTemp Is CharacterVector Then
+            chrTemp = CType(objTemp, CharacterVector)
+            FillListView(chrTemp)
+        Else
+            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
+        End If
+    End Sub
+
+    Private Sub ucrReorder_OrderChanged() Handles Me.OrderChanged
+        If clsParameter Is Nothing Then
+            clsParameter = New RParameter
+        End If
+        clsParameter.SetArgumentValue(GetVariableNames(bWithQuotes))
+        OnControlValueChanged()
     End Sub
 End Class
