@@ -33,9 +33,7 @@ Public Class dlgColumnStructure
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
         SetColumnStructureInReceiver()
-        TestOKEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -51,7 +49,7 @@ Public Class dlgColumnStructure
         ucrReceiverType1.bExcludeFromSelector = True
         ucrReceiverType3.bExcludeFromSelector = True
         ucrReceiverType2.bExcludeFromSelector = True
-        ucrColourColumnsByStr.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        ucrChkColourColumnsByStructure.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         ucrReceiverType1.SetParameter(New RParameter("struc_type_1", 1))
         ucrReceiverType1.SetParameterIsString()
 
@@ -64,12 +62,12 @@ Public Class dlgColumnStructure
         ucrSelectorColumnStructure.SetParameter(New RParameter("data_name", 0))
         ucrSelectorColumnStructure.SetParameterIsString()
 
-        ucrColourColumnsByStr.SetText("Color Columns by Structure")
-
+        ucrChkColourColumnsByStructure.SetText("Color Columns by Structure")
     End Sub
 
     Private Sub SetDefaults()
         Dim clsdefaultCourByStructure, clsDefualtRFunction As New RFunction
+        ucrChkColourColumnsByStructure.Checked = False
         SetColumnStructureInReceiver()
         ucrReceiverType1.SetMeAsReceiver()
         clsdefaultCourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
@@ -78,11 +76,6 @@ Public Class dlgColumnStructure
         clsColByMetadata = clsdefaultCourByStructure.Clone
         clsDefualtRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefualtRFunction.Clone())
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsDefualtRFunction)
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub SetColumnStructureInReceiver()
@@ -92,27 +85,13 @@ Public Class dlgColumnStructure
         ucrReceiverType1.SetMeAsReceiver()
     End Sub
 
-
-    Private Sub TestOKEnabled()
-        If (Not ucrReceiverType1.IsEmpty) OrElse (Not ucrReceiverType2.IsEmpty) OrElse (Not ucrReceiverType3.IsEmpty) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(true)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverType1_ControlContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverType1.ControlContentsChanged, ucrReceiverType2.ControlContentsChanged, ucrReceiverType3.ControlContentsChanged
-        TestOKEnabled()
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub SetCol()
-        If ucrColourColumnsByStr.Checked Then
+        If ucrChkColourColumnsByStructure.Checked Then
             clsColByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
             frmMain.clsRLink.RunScript(clsColByMetadata.ToScript)
         End If
@@ -121,4 +100,5 @@ Public Class dlgColumnStructure
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         SetCol()
     End Sub
+
 End Class
