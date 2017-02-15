@@ -41,8 +41,6 @@ Partial Class dlgLockUnlock
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.bAddRemoveParameter = True
-        Me.ucrAddRemove.bChangeParameterValue = True
         Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(9, 39)
         Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
@@ -52,8 +50,6 @@ Partial Class dlgLockUnlock
         '
         'ucrReceiverLockUnlock
         '
-        Me.ucrReceiverLockUnlock.bAddRemoveParameter = True
-        Me.ucrReceiverLockUnlock.bChangeParameterValue = True
         Me.ucrReceiverLockUnlock.frmParent = Me
         Me.ucrReceiverLockUnlock.Location = New System.Drawing.Point(260, 39)
         Me.ucrReceiverLockUnlock.Margin = New System.Windows.Forms.Padding(0)
@@ -67,10 +63,10 @@ Partial Class dlgLockUnlock
         Me.lblSelectedColumns.AutoSize = True
         Me.lblSelectedColumns.Location = New System.Drawing.Point(260, 24)
         Me.lblSelectedColumns.Name = "lblSelectedColumns"
-        Me.lblSelectedColumns.Size = New System.Drawing.Size(95, 13)
+        Me.lblSelectedColumns.Size = New System.Drawing.Size(98, 13)
         Me.lblSelectedColumns.TabIndex = 3
-        Me.lblSelectedColumns.Tag = "Selected_variables"
-        Me.lblSelectedColumns.Text = "Selected Variables"
+        Me.lblSelectedColumns.Tag = "Selected_Variables:"
+        Me.lblSelectedColumns.Text = "Selected Variables:"
         '
         'rdoLock
         '
@@ -98,8 +94,6 @@ Partial Class dlgLockUnlock
         '
         'ucrPnlLock
         '
-        Me.ucrPnlLock.bAddRemoveParameter = True
-        Me.ucrPnlLock.bChangeParameterValue = True
         Me.ucrPnlLock.Location = New System.Drawing.Point(6, 189)
         Me.ucrPnlLock.Name = "ucrPnlLock"
         Me.ucrPnlLock.Size = New System.Drawing.Size(163, 33)
@@ -107,8 +101,6 @@ Partial Class dlgLockUnlock
         '
         'ucrChkReserveFreeSpace
         '
-        Me.ucrChkReserveFreeSpace.bAddRemoveParameter = True
-        Me.ucrChkReserveFreeSpace.bChangeParameterValue = True
         Me.ucrChkReserveFreeSpace.Checked = False
         Me.ucrChkReserveFreeSpace.Location = New System.Drawing.Point(188, 197)
         Me.ucrChkReserveFreeSpace.Name = "ucrChkReserveFreeSpace"
