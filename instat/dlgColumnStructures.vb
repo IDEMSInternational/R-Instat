@@ -79,7 +79,8 @@ Public Class dlgColumnStructure
         ucrChkColourColumnsByStructure.Checked = False
         SetColumnStructureInReceiver()
         ucrReceiverType1.SetMeAsReceiver()
-        clsdefaultColourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
+        clsDefaultColourByStructure.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsDefaultColourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
         clsDefaultColourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         clsColByMetadata = clsdefaultColourByStructure.Clone
         clsDefualtRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
