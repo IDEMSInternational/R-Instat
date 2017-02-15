@@ -55,11 +55,11 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.bUseFilteredData = False
         ucrReceiverSplitTextColumn.SetIncludedDataTypes({"factor", "character"})
 
-        ucrSaveColumn.SetIsTextBox()
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
-        ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
+        ucrSaveColumn.SetIsTextBox()
+        ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
         ucrNudPieces.SetParameter(New RParameter("n", 2))
         ucrNudPieces.SetMinMax(2, Integer.MaxValue)
