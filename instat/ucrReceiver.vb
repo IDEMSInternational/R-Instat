@@ -29,7 +29,7 @@ Public Class ucrReceiver
     Public bExcludeFromSelector As Boolean = False
     Public Event SelectionChanged(sender As Object, e As EventArgs)
     Public WithEvents frmParent As Form
-
+    Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
     Private bParameterIsString As Boolean = False
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
@@ -385,7 +385,11 @@ Public Class ucrReceiver
         Return lstVariables
     End Function
 
-    Public Overrides Function IsDefault() As Boolean
-        Return IsEmpty()
+    Public Overrides Function IsRDefault() As Boolean
+        If bAddParameterIfEmpty Then
+            Return False
+        Else
+            Return IsEmpty()
+        End If
     End Function
 End Class
