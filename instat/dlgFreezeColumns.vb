@@ -17,26 +17,37 @@ Imports instat.Translations
 
 Public Class dlgFreezeColumns
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
+
     Private Sub dlgFreezeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+
     End Sub
 
     Private Sub SetDefaults()
-        ' Set default RFunction as the base function
-        ucrBaseforFreezeColumns.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorByDataFrameAddRemoveforFreezeColumns.Reset()
-        SetRCode(Me, ucrBaseforFreezeColumns.clsRsyntax.clsBaseFunction, True)
+        ' Set default RFunction as the base function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_freeze_columns")
+        ucrBaseforFreezeColumns.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBaseforFreezeColumns.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBaseforFreezeColumns.iHelpTopicID = 444
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_freeze_columns")
 
         'Setting up the multiple receiver
         ucrReceiverMultipleforFreezeColumns.Selector = ucrSelectorByDataFrameAddRemoveforFreezeColumns
@@ -65,6 +76,7 @@ Public Class dlgFreezeColumns
 
     Private Sub ucrBaseforFreezeColumns_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseforFreezeColumns.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 End Class
