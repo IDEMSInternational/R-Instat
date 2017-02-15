@@ -67,11 +67,11 @@ Public Class dlgMakeDate
         ucrSaveDate.SetIsComboBox()
 
 
-        ucrPanelDate.SetLinkedDisplayControl(grpSingleColumn)
-        ucrPanelDate.SetLinkedDisplayControl(grpTwoColumns)
-        ucrPanelDate.SetLinkedDisplayControl(grpThreeColumns)
-        ucrPanelDate.AddToLinkedControls(grpSingleColumn, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrPanelDate.AddToLinkedControls(ucrReceiverForDate, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPanelDate.AddToLinkedControls(ucrPanelTwoColumns, {rdoYearandDayofYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPanelDate.AddToLinkedControls(ucrReceiverDayThree, {rdoYearMonthDay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPanelDate.AddToLinkedControls(ucrReceiverYearThree, {rdoYearMonthDay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPanelDate.AddToLinkedControls(ucrReceiverMonthThree, {rdoYearMonthDay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
 
         ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
