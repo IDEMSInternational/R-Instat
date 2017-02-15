@@ -35,6 +35,7 @@ Public Class dlgRowStats
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrSelectorForRowStats.Reset()
+        ucrSaveResults.Reset()
 
         'Defining the default RFunction
         clsDefaultFunction.SetRCommand("apply")
