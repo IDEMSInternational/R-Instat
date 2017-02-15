@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports instat
 Imports instat.Translations
 Public Class dlgDisplayDaily
     Public bFirstLoad As Boolean = True
@@ -62,6 +62,7 @@ Public Class dlgDisplayDaily
         ucrInputSummaryNames.Reset()
 
         clsDefaultFunction.SetRCommand("climate_obj$display_daily_rain()")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)

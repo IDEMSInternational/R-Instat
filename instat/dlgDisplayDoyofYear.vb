@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgDisplayDOYofYear
     Public bFirstLoad As Boolean = True
@@ -60,6 +61,7 @@ Public Class dlgDisplayDOYofYear
         Dim clsDefaultFunction As New RFunction
 
         clsDefaultFunction.SetRCommand("climate_obj$display_doy()")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub ReopenDialog()
