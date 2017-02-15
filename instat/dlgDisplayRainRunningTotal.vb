@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgDisplayRainRunningTotal
     Public bFirstLoad As Boolean = True
@@ -54,6 +55,7 @@ Public Class dlgDisplayRainRunningTotal
         Dim clsDefaultFunction As New RFunction
 
         clsDefaultFunction.SetRCommand("climate_obj$display_rain_running_total()")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub ReopenDialog()
