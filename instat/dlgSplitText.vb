@@ -38,7 +38,7 @@ Public Class dlgSplitText
 
         ucrBase.iHelpTopicID = 344
 
-        ucrInputPattern.SetParameter(New RParameter("pattern"))
+        ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
         dctPatternPairs.Add("Period .", "fixed(" & Chr(34) & "." & Chr(34) & ")")
         dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
@@ -48,7 +48,7 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputPattern.SetItems(dctPatternPairs)
 
-        ucrReceiverSplitTextColumn.SetParameter(New RParameter("string"))
+        ucrReceiverSplitTextColumn.SetParameter(New RParameter("string", 0))
         ucrReceiverSplitTextColumn.SetParameterIsRFunction()
         ucrReceiverSplitTextColumn.Selector = ucrSelectorSplitTextColumn
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
@@ -61,7 +61,8 @@ Public Class dlgSplitText
         ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
 
-        ucrNudPieces.SetParameter(New RParameter("n"))
+        ucrNudPieces.SetParameter(New RParameter("n", 2))
+        ucrNudPieces.SetMinMax(2, Integer.MaxValue)
     End Sub
 
     Private Sub SetDefaults()
@@ -90,11 +91,11 @@ Public Class dlgSplitText
         TestOKEnabled()
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrSelectorSplitTextColumn.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
