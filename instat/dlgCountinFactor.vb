@@ -30,7 +30,6 @@ Public Class dlgCountinFactor
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
         TestOkEnabled()
     End Sub
 
@@ -66,10 +65,6 @@ Public Class dlgCountinFactor
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
