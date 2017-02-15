@@ -25,7 +25,7 @@ Partial Class dlgColumnStructure
         Me.lblMeasurement = New System.Windows.Forms.Label()
         Me.lblTreatment = New System.Windows.Forms.Label()
         Me.lblLayout = New System.Windows.Forms.Label()
-        Me.ucrColourColumnsByStr = New instat.ucrCheck()
+        Me.ucrChkColourColumnsByStructure = New instat.ucrCheck()
         Me.ucrReceiverType3 = New instat.ucrReceiverMultiple()
         Me.ucrReceiverType2 = New instat.ucrReceiverMultiple()
         Me.ucrReceiverType1 = New instat.ucrReceiverMultiple()
@@ -60,20 +60,16 @@ Partial Class dlgColumnStructure
         Me.lblLayout.TabIndex = 1
         Me.lblLayout.Text = "Layout:"
         '
-        'ucrColourColumnsByStr
+        'ucrChkColourColumnsByStructure
         '
-        Me.ucrColourColumnsByStr.bAddRemoveParameter = True
-        Me.ucrColourColumnsByStr.bChangeParameterValue = True
-        Me.ucrColourColumnsByStr.Checked = False
-        Me.ucrColourColumnsByStr.Location = New System.Drawing.Point(10, 194)
-        Me.ucrColourColumnsByStr.Name = "ucrColourColumnsByStr"
-        Me.ucrColourColumnsByStr.Size = New System.Drawing.Size(100, 20)
-        Me.ucrColourColumnsByStr.TabIndex = 7
+        Me.ucrChkColourColumnsByStructure.Checked = False
+        Me.ucrChkColourColumnsByStructure.Location = New System.Drawing.Point(10, 194)
+        Me.ucrChkColourColumnsByStructure.Name = "ucrChkColourColumnsByStructure"
+        Me.ucrChkColourColumnsByStructure.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkColourColumnsByStructure.TabIndex = 7
         '
         'ucrReceiverType3
         '
-        Me.ucrReceiverType3.bAddRemoveParameter = True
-        Me.ucrReceiverType3.bChangeParameterValue = True
         Me.ucrReceiverType3.frmParent = Me
         Me.ucrReceiverType3.Location = New System.Drawing.Point(247, 212)
         Me.ucrReceiverType3.Margin = New System.Windows.Forms.Padding(0)
@@ -84,8 +80,6 @@ Partial Class dlgColumnStructure
         '
         'ucrReceiverType2
         '
-        Me.ucrReceiverType2.bAddRemoveParameter = True
-        Me.ucrReceiverType2.bChangeParameterValue = True
         Me.ucrReceiverType2.frmParent = Me
         Me.ucrReceiverType2.Location = New System.Drawing.Point(247, 119)
         Me.ucrReceiverType2.Margin = New System.Windows.Forms.Padding(0)
@@ -96,8 +90,6 @@ Partial Class dlgColumnStructure
         '
         'ucrReceiverType1
         '
-        Me.ucrReceiverType1.bAddRemoveParameter = True
-        Me.ucrReceiverType1.bChangeParameterValue = True
         Me.ucrReceiverType1.frmParent = Me
         Me.ucrReceiverType1.Location = New System.Drawing.Point(247, 26)
         Me.ucrReceiverType1.Margin = New System.Windows.Forms.Padding(0)
@@ -108,8 +100,6 @@ Partial Class dlgColumnStructure
         '
         'ucrSelectorColumnStructure
         '
-        Me.ucrSelectorColumnStructure.bAddRemoveParameter = True
-        Me.ucrSelectorColumnStructure.bChangeParameterValue = True
         Me.ucrSelectorColumnStructure.bShowHiddenColumns = False
         Me.ucrSelectorColumnStructure.bUseCurrentFilter = True
         Me.ucrSelectorColumnStructure.Location = New System.Drawing.Point(10, 10)
@@ -120,7 +110,7 @@ Partial Class dlgColumnStructure
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 309)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 291)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
@@ -129,8 +119,8 @@ Partial Class dlgColumnStructure
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 368)
-        Me.Controls.Add(Me.ucrColourColumnsByStr)
+        Me.ClientSize = New System.Drawing.Size(427, 345)
+        Me.Controls.Add(Me.ucrChkColourColumnsByStructure)
         Me.Controls.Add(Me.lblMeasurement)
         Me.Controls.Add(Me.lblTreatment)
         Me.Controls.Add(Me.lblLayout)
@@ -158,5 +148,5 @@ Partial Class dlgColumnStructure
     Friend WithEvents ucrReceiverType1 As ucrReceiverMultiple
     Friend WithEvents ucrSelectorColumnStructure As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrColourColumnsByStr As ucrCheck
+    Friend WithEvents ucrChkColourColumnsByStructure As ucrCheck
 End Class
