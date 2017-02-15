@@ -1,4 +1,4 @@
-﻿' Instat-R
+﻿'Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
 Imports instat.Translations
 Public Class dlgPermuteColumn
     Private clsSetSampleFunc, clsSetSeedFunc, clsOverallFunction As New RFunction
@@ -45,18 +45,14 @@ Public Class dlgPermuteColumn
     Public Sub SetDefaults()
         Dim clsDefaultFunction, clsDefaultSample, clsDefaultSetSeed As New RFunction
         ucrPermuteRowsSelector.Reset()
-        ucrNudSetSeed.SetRDefault(5)
         clsDefaultSample.SetRCommand("sample")
         clsDefaultSample.AddParameter("replace", "FALSE")
-
         clsDefaultSample.AddParameter("size", iLength)
-
         clsDefaultSetSeed.SetRCommand("set.seed")
         clsDefaultSetSeed.AddParameter("seed", 5)
-
-
         clsDefaultFunction.SetRCommand("replicate")
-
+        ucrNudSetSeed.Visible = False
+        ucrChkSetSeed.Checked = False
         clsSetSeedFunc = clsDefaultSetSeed.Clone
         clsSetSampleFunc = clsDefaultSample.Clone
         clsOverallFunction = clsDefaultFunction.Clone
@@ -75,29 +71,21 @@ Public Class dlgPermuteColumn
         SetNameForNewColumn()
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
         ucrReceiverPermuteRows.SetMeAsReceiver()
-
-        ucrPermuteRowsSelector.ucrAvailableDataFrames.SetParameter(New RParameter("size"))
+        ucrPermuteRowsSelector.ucrAvailableDataFrames.SetParameter(New RParameter("size", 1))
         ucrPermuteRowsSelector.SetParameterIsrfunction()
         ucrReceiverPermuteRows.bUseFilteredData = False
         ucrReceiverPermuteRows.SetParameter(New RParameter("x", 0))
         ucrReceiverPermuteRows.SetParameterIsRFunction()
+
         ucrNudNumberofColumns.SetParameter(New RParameter("n", 1))
-        ucrNudNumberofColumns.SetRDefault(1)
         ucrNudNumberofColumns.Maximum = Integer.MaxValue
         ucrNudNumberofColumns.Minimum = 1
 
-
-        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeParameterToDefault:=True)
-
-
-
+        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
         ucrChkSetSeed.SetText("Set Seed")
-
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.Maximum = Integer.MaxValue
         ucrNudSetSeed.Minimum = Integer.MinValue
-
-
 
         ucrSavePermute.SetName("permute")
         ucrSavePermute.SetSaveTypeAsColumn()
