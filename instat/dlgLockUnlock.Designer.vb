@@ -71,7 +71,7 @@ Partial Class dlgLockUnlock
         'rdoLock
         '
         Me.rdoLock.AutoSize = True
-        Me.rdoLock.Location = New System.Drawing.Point(12, 196)
+        Me.rdoLock.Location = New System.Drawing.Point(12, 197)
         Me.rdoLock.Name = "rdoLock"
         Me.rdoLock.Size = New System.Drawing.Size(49, 17)
         Me.rdoLock.TabIndex = 4
