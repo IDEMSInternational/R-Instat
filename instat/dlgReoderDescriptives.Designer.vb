@@ -38,7 +38,7 @@ Partial Class dlgReoderDescriptives
         'lblObjectsToReoder
         '
         Me.lblObjectsToReoder.AutoSize = True
-        Me.lblObjectsToReoder.Location = New System.Drawing.Point(193, 18)
+        Me.lblObjectsToReoder.Location = New System.Drawing.Point(213, 18)
         Me.lblObjectsToReoder.Name = "lblObjectsToReoder"
         Me.lblObjectsToReoder.Size = New System.Drawing.Size(99, 13)
         Me.lblObjectsToReoder.TabIndex = 1
@@ -47,7 +47,7 @@ Partial Class dlgReoderDescriptives
         '
         'ucrReorderObjects
         '
-        Me.ucrReorderObjects.Location = New System.Drawing.Point(190, 31)
+        Me.ucrReorderObjects.Location = New System.Drawing.Point(208, 31)
         Me.ucrReorderObjects.Name = "ucrReorderObjects"
         Me.ucrReorderObjects.Size = New System.Drawing.Size(154, 139)
         Me.ucrReorderObjects.TabIndex = 2
@@ -57,7 +57,7 @@ Partial Class dlgReoderDescriptives
         'ucrDataFrameReorder
         '
         Me.ucrDataFrameReorder.bUseCurrentFilter = True
-        Me.ucrDataFrameReorder.Location = New System.Drawing.Point(13, 13)
+        Me.ucrDataFrameReorder.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameReorder.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameReorder.Name = "ucrDataFrameReorder"
         Me.ucrDataFrameReorder.Size = New System.Drawing.Size(120, 40)
