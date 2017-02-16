@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgCombineText
     Private bFirstLoad As Boolean = True
@@ -53,12 +54,13 @@ Public Class dlgCombineText
         ucrInputSeparator.SetItems(dctSeparator)
 
         ' ucrReceiver
-        ucrReceiverCombineText.SetParameter(New RParameter("columns"))
+        ' ucrReceiverCombineText.SetParameter(New RParameter("columns"))
         ' ucrReceiverCombineText.SetParameterIsString() ' reached problem: GetVariableNamesAsList()
         ucrReceiverCombineText.Selector = ucrSelectorForCombineText
         ucrReceiverCombineText.SetMeAsReceiver()
         ucrReceiverCombineText.bUseFilteredData = False
         ucrReceiverCombineText.SetIncludedDataTypes({"factor", "character"})
+        ' why can't I combine numbers?
 
         ' ucrSaveColumn
         ucrSaveColumn.SetIsTextBox()
@@ -69,19 +71,7 @@ Public Class dlgCombineText
         iColumnsUsed = 0
     End Sub
 
-    ' got
-    'Combine <- stringr::str_c(X1=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="variable",
-    'data_name="data1_stackedNoCarry"),
-    'X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value",
-    'data_name="data1_stackedNoCarry"), 
-    '###columns=c("variable","value"),###
-    ''sep=" ")
-
-    ' want
-    'Combine1 <- stringr::str_c(X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value",
-    'data_name="data1_stackedNoCarry"),
-    'X1=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="variable", data_name="data1_stackedNoCarry"),
-    ''sep=" ")
+    ' getting "columns = " in the parameter as an extra
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
@@ -125,7 +115,11 @@ Public Class dlgCombineText
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlContentsChanged, ucrReceiverCombineText.ControlContentsChanged
-        ColumnOrder()
+        'ColumnOrder()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverCombineText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCombineText.ControlValueChanged
+        ColumnOrder()
     End Sub
 End Class
