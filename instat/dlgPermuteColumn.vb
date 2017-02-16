@@ -81,7 +81,7 @@ Public Class dlgPermuteColumn
         ucrNudNumberofColumns.Maximum = Integer.MaxValue
         ucrNudNumberofColumns.Minimum = 1
 
-        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSetSeed.SetText("Set Seed")
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.Maximum = Integer.MaxValue
