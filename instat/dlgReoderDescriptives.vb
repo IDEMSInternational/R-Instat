@@ -42,9 +42,6 @@ Public Class dlgReoderDescriptives
 
         ' ucrReorderObjects
         ucrReorderObjects.SetParameter(New RParameter("new_order", 1))
-        'ucrReorderObjects.SetParameterIsString()
-
-        'clsDefaultFunction.AddParameter("new_order", ucrReorderObjects.GetVariableNames)
 
         ucrReorderObjects.setDataType("object")
         ucrReorderObjects.setDataframes(ucrDataFrameReorder)
