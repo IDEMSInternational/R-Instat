@@ -47,10 +47,6 @@ Public Class dlgReoderDescriptives
         ucrReorderObjects.setDataframes(ucrDataFrameReorder)
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
     Private Sub TestOKEnabled()
         If Not ucrReorderObjects.isEmpty Then
             ucrBase.OKEnabled(True)
