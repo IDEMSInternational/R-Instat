@@ -36,43 +36,20 @@ Public Class dlgCliPlot
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 0
-    End Sub
 
-    Private Sub chkStationName_Leave(sender As Object, e As EventArgs)
-        If chkStationName.Checked Then
-            ucrBase.clsRsyntax.AddParameter("station_name", chkStationName.Checked.ToString().ToUpper())
-        End If
+        'ucrChks
+        ucrChkStationName.SetText("Station Name")
+        ucrChkStationName.SetParameter(New RParameter("station_name"))
+        ucrChkRemoveNA.SetText("Remove Missing Values")
+        ucrChkRemoveNA.SetParameter(New RParameter("na.rm"))
+        ucrChkInheritAES.SetText("Inherit AES")
+        ucrChkInheritAES.SetParameter(New RParameter("inherit.aes"))
+        ucrChkByFactor.SetText("By Factor")
+        ucrChkByFactor.SetParameter(New RParameter("by_factor"))
 
-    End Sub
-
-    Private Sub chkRemoveNA_Leave(sender As Object, e As EventArgs)
-        If chkRemoveNA.Checked Then
-            ucrBase.clsRsyntax.AddParameter("na.rm", chkRemoveNA.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub chkByfactor_Leave(sender As Object, e As EventArgs)
-        If chkByfactor.Checked Then
-            ucrBase.clsRsyntax.AddParameter("by_factor", chkByfactor.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub chkInheritAES_Leave(sender As Object, e As EventArgs)
-        If chkInheritAES.Checked Then
-            ucrBase.clsRsyntax.AddParameter("inherit.aes", chkInheritAES.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub nudSize_Leave(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("size", nudSize.Value.ToString())
-
-    End Sub
-
-    Private Sub nudLineType_Leave(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("linetype", nudLineType.Value.ToString())
+        'ucrNud
+        ucrNudLineType.SetParameter(New RParameter("linetype"))
+        ucrNudSize.SetParameter(New RParameter("size"))
 
     End Sub
 
@@ -82,8 +59,6 @@ Public Class dlgCliPlot
 
     Private Sub txtFactorVariable_Leave(sender As Object, e As EventArgs) Handles txtFactorVariable.Leave
         ucrBase.clsRsyntax.AddParameter("factor_var", Chr(34) & txtFactorVariable.Text.ToString() & Chr(34))
-
-
     End Sub
 
     Private Sub txtXAxis_Leave(sender As Object, e As EventArgs) Handles txtXAxis.Leave
@@ -137,7 +112,6 @@ Public Class dlgCliPlot
 
     Private Sub txtVariableName_TextTe(sender As Object, e As EventArgs) Handles txtVariableName.Leave
         ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtVariableName.Text.ToString() & Chr(34))
-
     End Sub
 
     Private Sub SetDefaults()
