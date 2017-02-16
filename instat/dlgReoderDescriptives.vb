@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgReoderDescriptives
     Public bFirstLoad As Boolean = True
@@ -40,8 +41,8 @@ Public Class dlgReoderDescriptives
         ucrDataFrameReorder.SetParameterIsString()
 
         ' ucrReorderObjects
-        '        ucrReorderObjects.SetParameter(New RParameter("new_order", 1))
-        ' ucrReorderObjects.SetParameterIsString()
+        ucrReorderObjects.SetParameter(New RParameter("new_order", 1))
+        'ucrReorderObjects.SetParameterIsString()
 
         'clsDefaultFunction.AddParameter("new_order", ucrReorderObjects.GetVariableNames)
 
@@ -77,5 +78,9 @@ Public Class dlgReoderDescriptives
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ucrReorderObjects_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReorderObjects.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
