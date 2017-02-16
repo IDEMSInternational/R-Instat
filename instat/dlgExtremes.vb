@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgExtremes
@@ -84,7 +83,7 @@ Public Class dlgExtremes
         ucrChkMOM.SetParameter(ucrInputMOM.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkMOM.AddToLinkedControls(ucrLinked:=ucrInputMOM, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMOM.bAddRemoveParameter = False
-        ucrInputMOM.SetLinkedDisplayControl(lblSaveinMOM)
+        ucrInputMOM.SetLinkedDisplayControl(lblSaveInMOM)
 
         ' not sure if "Save in" for the cbos refers to where to display the output (i.e., output window, column) or something else.
         ' Kept it as cbo for the time being.

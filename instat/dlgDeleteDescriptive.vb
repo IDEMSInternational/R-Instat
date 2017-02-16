@@ -13,33 +13,59 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgDeleteDescriptive
     Public bFirstLoad As Boolean = True
-    Private Sub dlgDeleteDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+    Private bReset As Boolean = True
 
+    Private Sub dlgDeleteDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()
-        ucrReceiverObjectsToDelete.lstSelectedVariables.Clear()
+        ucrSelectorDeleteObject.Reset() ' temporary fix
     End Sub
+
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
+        ucrBase.iHelpTopicID = 352
+
+        ' Selector
+        ucrSelectorDeleteObject.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorDeleteObject.SetParameterIsString()
+        ucrSelectorDeleteObject.SetItemType("object")
+
+        ' Receiver
+        ucrReceiverObjectsToDelete.SetParameter(New RParameter("object_names", 1))
+        ucrReceiverObjectsToDelete.SetParameterIsString()
         ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
         ucrReceiverObjectsToDelete.SetMeAsReceiver()
-        ucrSelectorDeleteObject.SetItemType("object")
-        ucrBase.iHelpTopicID = 352
-        TestOKEnabled()
     End Sub
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        ucrSelectorDeleteObject.Reset()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub TestOKEnabled()
         If Not ucrReceiverObjectsToDelete.IsEmpty Then
             ucrBase.OKEnabled(True)
@@ -47,21 +73,14 @@ Public Class dlgDeleteDescriptive
             ucrBase.OKEnabled(False)
         End If
     End Sub
-    Private Sub SetDefaults()
-        ucrSelectorDeleteObject.Focus()
-        ucrSelectorDeleteObject.Reset()
-    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
-    Private Sub ucrSelectorDeleteObject_DataFrameChanged() Handles ucrSelectorDeleteObject.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDeleteObject.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
 
-    Private Sub ucrReceiverObjectsToDelete_SelectionChanged() Handles ucrReceiverObjectsToDelete.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("object_names", ucrReceiverObjectsToDelete.GetVariableNames())
+    Private Sub ucrReceiverObjectsToDelete_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObjectsToDelete.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
