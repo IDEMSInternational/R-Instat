@@ -8,7 +8,7 @@
 'but WITHOUT ANY WARRANTY; without even the implied warranty of
 'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 'GNU General Public License for more details.
-'You should have received a copy of the GNU General Public License k
+'You should have received a copy of the GNU General Public License 
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports instat.Translations
@@ -77,10 +77,10 @@ Public Class dlgExportToOpenRefine
 
     End Sub
     Private Sub TestOKEnabled()
-        If ucrInputDatasetName.IsEmpty = True Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrInputDatasetName.IsEmpty Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
