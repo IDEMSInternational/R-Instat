@@ -37,7 +37,7 @@ Public Class dlgExportToOpenRefine
         ucrOpenRefineDataFrame.Reset()
         ucrInputDatasetName.Reset()
 
-        NewDefaultName()
+        NewDefultName()
         clsDefaultWrite.SetRCommand("write.csv")
         clsDefaultWrite.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
         clsDefaultWrite.AddParameter("row.names", "FALSE")
@@ -52,25 +52,27 @@ Public Class dlgExportToOpenRefine
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRefine.Clone())
 
-        'ucrBase.OKEnabled(False)
+        ' ucrBase.OKEnabled(False)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-            End Sub
-    Private Sub NewDefaultName()
-        If (Not ucrInputDatasetName.bUserTyped) AndAlso (ucrInputDatasetName.IsEmpty) Then
+    End Sub
+    Private Sub NewDefultName()
+        If ucrOpenRefineDataFrame.cboAvailableDataFrames.Text <> "" Then
             ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
+        Else
+            ucrInputDatasetName.Reset()
         End If
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 466
 
         ucrInputDatasetName.SetParameter(New RParameter("project.name", 1))
-        'ucrInputDatasetName.SetValidationTypeAsRVariable()
-
-        ucrInputDatasetName.SetParameter(New RParameter("file", 0))
         ucrInputDatasetName.SetValidationTypeAsRVariable()
+
+        'ucrInputDatasetName.SetParameter(New RParameter("file", 0))
+        'ucrInputDatasetName.SetValidationTypeAsRVariable()
 
         ucrchkOpenBrowser.SetParameter(New RParameter("open.browser", 2))
         ucrchkOpenBrowser.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -79,10 +81,10 @@ Public Class dlgExportToOpenRefine
 
     End Sub
     Private Sub TestOKEnabled()
-        If ((Not ucrInputDatasetName.IsEmpty) AndAlso (ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem <> ucrInputDatasetName.GetText) AndAlso (ucrOpenRefineDataFrame.cboAvailableDataFrames.Text <> "")) Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrInputDatasetName.IsEmpty = True Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -97,7 +99,7 @@ Public Class dlgExportToOpenRefine
     End Sub
 
     Private Sub ucrOpenRefineDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged
-        NewDefaultName()
+        NewDefultName()
     End Sub
 
     Private Sub ucrOpenRefineDataFrame_ContentsChanged() Handles ucrOpenRefineDataFrame.ControlContentsChanged, ucrInputDatasetName.ControlContentsChanged
