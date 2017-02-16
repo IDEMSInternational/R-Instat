@@ -449,7 +449,9 @@ Public Class ucrInput
         End Get
         Set(bValue As Boolean)
             bPrivateAddQuotesIfUnrecognised = bValue
-            OnNameChanged()
+            If GetText() IsNot Nothing Then
+                SetName(GetText().Trim(Chr(34)))
+            End If
         End Set
     End Property
 End Class
