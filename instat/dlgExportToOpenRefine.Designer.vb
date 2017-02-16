@@ -36,7 +36,7 @@ Partial Class dlgExportToOpenRefine
         Me.lblNameDataSet.Location = New System.Drawing.Point(218, 14)
         Me.lblNameDataSet.Name = "lblNameDataSet"
         Me.lblNameDataSet.Size = New System.Drawing.Size(78, 13)
-        Me.lblNameDataSet.TabIndex = 8
+        Me.lblNameDataSet.TabIndex = 1
         Me.lblNameDataSet.Text = "Dataset Name:"
         '
         'ucrchkOpenBrowser
@@ -45,14 +45,14 @@ Partial Class dlgExportToOpenRefine
         Me.ucrchkOpenBrowser.Location = New System.Drawing.Point(10, 73)
         Me.ucrchkOpenBrowser.Name = "ucrchkOpenBrowser"
         Me.ucrchkOpenBrowser.Size = New System.Drawing.Size(100, 20)
-        Me.ucrchkOpenBrowser.TabIndex = 9
+        Me.ucrchkOpenBrowser.TabIndex = 3
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 111)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 4
         '
         'ucrInputDatasetName
         '
@@ -61,7 +61,7 @@ Partial Class dlgExportToOpenRefine
         Me.ucrInputDatasetName.Location = New System.Drawing.Point(217, 29)
         Me.ucrInputDatasetName.Name = "ucrInputDatasetName"
         Me.ucrInputDatasetName.Size = New System.Drawing.Size(149, 21)
-        Me.ucrInputDatasetName.TabIndex = 5
+        Me.ucrInputDatasetName.TabIndex = 2
         '
         'ucrOpenRefineDataFrame
         '
@@ -75,10 +75,10 @@ Partial Class dlgExportToOpenRefine
         'UcrDialogDisabled1
         '
         Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(93, 56)
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(81, 55)
         Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
         Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
-        Me.UcrDialogDisabled1.TabIndex = 10
+        Me.UcrDialogDisabled1.TabIndex = 5
         '
         'dlgExportToOpenRefine
         '
