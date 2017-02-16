@@ -561,7 +561,7 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
 }
 )
 
-data_object$set("public", "replace_value_in_data", function(col_names, rows, old_value, start_value = NA, end_value = NA, new_value, closed_start_value = TRUE, closed_end_value = TRUE) {
+data_object$set("public", "replace_value_in_data", function(col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if(!all(is.character(col_names))) stop("Column name must be of type: character")
@@ -569,6 +569,14 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
   if(!missing(rows) && !all(rows %in% row.names(curr_data))) stop("Not all rows found in the data.")
   if(!is.na(start_value) && !is.numeric(start_value)) stop("start_value must be numeric")
   if(!is.na(end_value) && !is.numeric(end_value)) stop("start_value must be numeric")
+  if(old_is_missing) {
+    if(!missing(old_value)) stop("Specify only one of old_value and old_is_missing")
+    old_value <- NA
+  }
+  if(new_is_missing) {
+    if(!missing(new_value)) stop("Specify only one of new_value and new_is_missing")
+    new_value <- NA
+  }
   data_row_names <- row.names(curr_data)
   filter_applied <- self$filter_applied()
   if(filter_applied) curr_filter <- self$current_filter
@@ -586,7 +594,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
       else {
         if(filter_applied) stop("Cannot replace values in a factor column when a filter is applied. Remove the filter to do this replacement.")
         if(is.na(old_value)) {
-          if(!new_value %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(new_value, " is not a level of this factor. Add this as a level of the factor before using replace.")
+          if(!is.na(new_value) && !new_value %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(new_value, " is not a level of this factor. Add this as a level of the factor before using replace.")
           replace_rows <- (is.na(curr_column))
         }
         else {

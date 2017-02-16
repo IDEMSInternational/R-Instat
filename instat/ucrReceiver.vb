@@ -325,11 +325,11 @@ Public Class ucrReceiver
         If clsParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsParameter.bIsString Then
-                    lstCurrentVariables = ExtractVariableNames(clsParameter.strArgumentValue)
+                    lstCurrentVariables = ExtractItemsFromRList(clsParameter.strArgumentValue)
                 ElseIf bParameterIsRFunction AndAlso clsParameter.bIsFunction Then
                     clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractVariableNames(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
                 Clear()
@@ -372,18 +372,6 @@ Public Class ucrReceiver
         bParameterIsString = False
         UpdateParameter()
     End Sub
-
-    Public Function ExtractVariableNames(strTemp As String) As String()
-        Dim lstVariables As String()
-        If strTemp.StartsWith("c(") Then
-            strTemp = strTemp.Substring(2)
-        End If
-        lstVariables = strTemp.Split(",")
-        For i As Integer = 0 To lstVariables.Count - 1
-            lstVariables(i) = lstVariables(i).Trim(Chr(34), " ", Chr(39), ")")
-        Next
-        Return lstVariables
-    End Function
 
     Public Overrides Function IsRDefault() As Boolean
         If bAddParameterIfEmpty Then

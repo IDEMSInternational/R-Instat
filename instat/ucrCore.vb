@@ -22,7 +22,7 @@ Public Class ucrCore
     Protected clsRCode As RCodeStructure
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
-    Protected clsParameter As RParameter
+    Public clsParameter As RParameter
 
     'Default value of the control
     'No specific type since it can be interpreted different by each control type
@@ -163,13 +163,13 @@ Public Class ucrCore
             If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
                 ucrControl.SetRCode(clsRCode)
             End If
-            If ucrControl.bLinkedAddRemoveParameter Then
-                ucrControl.AddOrRemoveParameter(bTemp)
-            End If
             If ucrControl.bLinkedChangeToDefaultState AndAlso bReset Then
                 If ucrControl.clsRCode Is Nothing OrElse ucrControl.clsParameter Is Nothing OrElse (ucrControl.clsRCode IsNot Nothing AndAlso ucrControl.clsParameter IsNot Nothing AndAlso ucrControl.clsParameter.strArgumentName IsNot Nothing AndAlso (Not ucrControl.clsRCode.ContainsParameter(ucrControl.clsParameter.strArgumentName))) Then
                     ucrControl.SetToDefaultState()
                 End If
+            End If
+            If ucrControl.bLinkedAddRemoveParameter Then
+                ucrControl.AddOrRemoveParameter(bTemp)
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
                 ucrControl.SetVisible(bTemp)
@@ -183,7 +183,9 @@ Public Class ucrCore
 
     'Update the RCode based on the contents of the control (reverse of above)
     Public Overridable Sub UpdateRCode(Optional bReset As Boolean = False)
-        AddOrRemoveParameter(CanAddParameter())
+        If bAddRemoveParameter Then
+            AddOrRemoveParameter(CanAddParameter())
+        End If
         UpdateLinkedControls(bReset)
     End Sub
 
@@ -401,5 +403,22 @@ Public Class ucrCore
 
     Protected Overridable Sub SetToDefaultState()
         SetToValue(objDefaultState)
+    End Sub
+
+    'This should be used very cautiously, only if you want to change the parameter name and keep all other properties the same.
+    'Setting a new parameter is usually a much safer option.
+    Public Overridable Sub ChangeParameterName(strNewName As String, Optional bClearConditions As Boolean = True)
+        If clsParameter IsNot Nothing Then
+            clsParameter.SetArgumentName(strNewName)
+        End If
+        If bClearConditions Then
+            dctConditions.Clear()
+        End If
+    End Sub
+
+    Public Sub SetParameterValue(strNewValue As String)
+        If clsParameter IsNot Nothing Then
+            clsParameter.SetArgumentValue(strNewValue)
+        End If
     End Sub
 End Class
