@@ -136,4 +136,16 @@ Public Class ucrCheck
             Return False
         End If
     End Function
+
+    Public Overrides Sub ChangeParameterName(strNewName As String, Optional bClearConditions As Boolean = True)
+        MyBase.ChangeParameterName(strNewName, bClearConditions)
+        If bClearConditions Then
+            If bChangeParameterValue Then
+                SetValuesCheckedAndUnchecked(strValueIfChecked, strValueIfUnchecked)
+            ElseIf bAddRemoveParameter Then
+                AddParameterPresentCondition(True, clsParameter.strArgumentName)
+                AddParameterPresentCondition(False, clsParameter.strArgumentName, False)
+            End If
+        End If
+    End Sub
 End Class
