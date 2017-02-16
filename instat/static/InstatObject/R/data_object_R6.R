@@ -787,7 +787,7 @@ data_object$set("public", "add_defaults_meta", function() {
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
   invisible(sapply(colnames(self$get_data_frame(use_current_filter = FALSE)), function(x) self$append_to_variables_metadata(x, name_label, x)))
-  has_hidden <- self$is_variables_metadata(is_hidden_label) && self$get_variables_metadata(property = is_hidden_label)
+  has_hidden <- self$is_variables_metadata(is_hidden_label) && !is.na(self$get_variables_metadata(property = is_hidden_label)) && self$get_variables_metadata(property = is_hidden_label)
   if(has_hidden) {
     for(column in colnames(self$get_data_frame(use_current_filter = FALSE))) {
       if(!self$is_variables_metadata(is_hidden_label, column)) {
@@ -1153,7 +1153,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
 }
 )
 
-data_object$set("public", "set_hidden_columns", function(col_names) {
+data_object$set("public", "set_hidden_columns", function(col_names = c()) {
   if(length(col_names) == 0) self$unhide_all_columns()
   else {
     if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
@@ -1998,5 +1998,50 @@ data_object$set("public","get_key_names", function(include_overall = TRUE, inclu
   }
   else out <- key_names
   return(out)
+}
+)
+
+# labels for climatic column types
+corruption_country_label="country"
+corruption_procuring_authority_label="procuring_authority"
+corruption_procuring_authority_id_label="procuring_authority_id"
+corruption_award_date_label="award_date"
+corruption_signature_date_label="signature_date"
+corruption_contract_name_label="contract_name"
+corruption_sector_label="sector"
+corruption_procurement_category_label="procurement_category"
+corruption_winner_name_label="winner_name"
+corruption_winner_id_label="winner_id"
+corruption_winner_country_label="winner_country"
+corruption_original_contract_value_label="original_contract_value"
+corruption_procedure_type_label="procedure_type"
+corruption_no_bids_label="no_bids"
+corruption_no_considered_bids_label="no_considered_bids"
+corruption_country_iso_label="country_iso"
+corruption_foreign_winner_label="foreign_winner"
+corruption_ppp_conversion_rate_label="ppp_conversion_rate"
+
+all_corruption_column_types <- c(corruption_country_label, corruption_procuring_authority_label, corruption_procuring_authority_id_label, corruption_award_date_label, corruption_signature_date_label, corruption_contract_name_label, corruption_sector_label, corruption_procurement_category_label, corruption_winner_name_label, corruption_winner_id_label, corruption_winner_country_label, corruption_original_contract_value_label, corruption_procedure_type_label, corruption_no_bids_label, corruption_no_considered_bids_label, corruption_country_iso_label, corruption_foreign_winner_label, corruption_ppp_conversion_rate_label)
+
+# Column metadata for corruption colums
+corruption_type_label = "Corruption_Type"
+
+# Data frame metadata for corruption dataframes
+is_corruption_label = "Is_Corruption"
+
+instat_object$set("public","define_as_corruption", function(data_name, types) {
+  self$append_to_dataframe_metadata(data_name, is_corruption_label, TRUE)
+  for(curr_data_name in self$get_data_names()) {
+    if(!self$get_data_objects(data_name)$is_metadata(is_corruption_label)) {
+      self$append_to_dataframe_metadata(curr_data_name, is_corruption_label, FALSE)
+    }
+  }
+  self$get_data_objects(data_name)$set_corruption_types(types)
+}
+)
+
+data_object$set("public","set_corruption_types", function(types) {
+  if(!all(names(types) %in% all_corruption_column_types)) stop("Cannot recognise the following corruption data types: ", paste(names(types)[!names(types) %in% all_corruption_column_types], collapse = ", "))
+  invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], corruption_type_label, name)))
 }
 )
