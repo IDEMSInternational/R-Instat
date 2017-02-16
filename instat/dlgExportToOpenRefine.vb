@@ -51,17 +51,15 @@ Public Class dlgExportToOpenRefine
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRefine.Clone())
 
-        ' ucrBase.OKEnabled(False)
+        ucrBase.OKEnabled(False)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
     Private Sub NewDefultName()
-        If ucrOpenRefineDataFrame.cboAvailableDataFrames.Text <> "" Then
+        If (ucrOpenRefineDataFrame.cboAvailableDataFrames.Text <> "") AndAlso (Not ucrInputDatasetName.bUserTyped) Then
             ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
-        Else
-            ucrInputDatasetName.Reset()
         End If
     End Sub
     Private Sub InitialiseDialog()
@@ -94,12 +92,11 @@ Public Class dlgExportToOpenRefine
         frmMain.clsRLink.RunScript(clsWriteToCSV.ToScript(), strComment:="Convert the data set to csv")
     End Sub
 
-    Private Sub ucrOpenRefineDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged
+    Private Sub ucrOpenRefineDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged, ucrInputDatasetName.ControlContentsChanged
         NewDefultName()
     End Sub
 
     Private Sub ucrOpenRefineDataFrame_ContentsChanged() Handles ucrOpenRefineDataFrame.ControlContentsChanged, ucrInputDatasetName.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
