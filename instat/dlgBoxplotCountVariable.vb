@@ -35,53 +35,40 @@ Public Class dlgBoxplotCountVariable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("climate_obj$boxplot_method")
+        'ucrChk
+        ucrChkVariableWidth.SetText("Variable Width")
+        ucrChkVariableWidth.SetParameter(New RParameter("varwidth"))
+
+        'ucrNud
+        ucrNudWhiskLine.SetParameter(New RParameter("whiskerlty"))
+    End Sub
+
+    Private Sub ucrInputTitle_Leave(sender As Object, e As EventArgs) Handles ucrInputTitle.Leave
+        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrInputTitle.Text.ToString() & Chr(34))
+    End Sub
+
+    Private Sub ucrInputVariable_TextChanged(sender As Object, e As EventArgs) Handles ucrInputVariable.TextChanged
+        ucrBase.clsRsyntax.AddParameter("var_label", Chr(34) & ucrInputVariable.Text.ToString() & Chr(34))
+    End Sub
+
+    Private Sub ucrInputColour_TextChanged(sender As Object, e As EventArgs) Handles ucrInputColour.TextChanged
+        ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & ucrInputColour.Text.ToString() & Chr(34))
+    End Sub
+
+    Private Sub ucrInputWhiskerColour_TextChanged(sender As Object, e As EventArgs) Handles ucrInputWhiskerColour.TextChanged
+        ucrBase.clsRsyntax.AddParameter("whisker_col", Chr(34) & ucrInputWhiskerColour.Text.ToString() & Chr(34))
+    End Sub
+
+    Private Sub ucrInputTimeperiod_TextChanged(sender As Object, e As EventArgs) Handles ucrInputTimePeriod.TextChanged
+        ucrBase.clsRsyntax.AddParameter("time_period", Chr(34) & ucrInputTimePeriod.Text.ToString() & Chr(34))
     End Sub
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
 
-
-        'clsDefaultFunction.SetRCommand()
+        clsDefaultFunction.SetRCommand("climate_obj$boxplot_method")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-    End Sub
-
-    Private Sub chkVarwidth_ValueChanged(sender As Object, e As EventArgs) Handles chkVarwidth.CheckedChanged
-        If chkVarwidth.Checked Then
-            ucrBase.clsRsyntax.AddParameter("varwidth", chkVarwidth.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub ucrInputTitle_Leave(sender As Object, e As EventArgs) Handles ucrInputTitle.Leave
-        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrInputTitle.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputVariable_TextChanged(sender As Object, e As EventArgs) Handles ucrInputVariable.TextChanged
-        ucrBase.clsRsyntax.AddParameter("var_label", Chr(34) & ucrInputVariable.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputColour_TextChanged(sender As Object, e As EventArgs) Handles ucrInputColour.TextChanged
-        ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & ucrInputColour.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputWhiskerColour_TextChanged(sender As Object, e As EventArgs) Handles ucrInputWhiskerColour.TextChanged
-        ucrBase.clsRsyntax.AddParameter("whisker_col", Chr(34) & ucrInputWhiskerColour.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub ucrInputTimeperiod_TextChanged(sender As Object, e As EventArgs) Handles ucrInputTimePeriod.TextChanged
-        ucrBase.clsRsyntax.AddParameter("time_period", Chr(34) & ucrInputTimePeriod.Text.ToString() & Chr(34))
-
-    End Sub
-
-    Private Sub nudWhiskLineType_ValueChanged(sender As Object, e As EventArgs) Handles nudWhiskLineType.ValueChanged
-        ucrBase.clsRsyntax.AddParameter("whiskerlty", nudWhiskLineType.Value.ToString())
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
