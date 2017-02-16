@@ -11,7 +11,6 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
-Imports instat
 Imports instat.Translations
 Public Class dlgExportToOpenRefine
 
@@ -70,9 +69,6 @@ Public Class dlgExportToOpenRefine
 
         ucrInputDatasetName.SetParameter(New RParameter("project.name", 1))
         ucrInputDatasetName.SetValidationTypeAsRVariable()
-
-        'ucrInputDatasetName.SetParameter(New RParameter("file", 0))
-        'ucrInputDatasetName.SetValidationTypeAsRVariable()
 
         ucrchkOpenBrowser.SetParameter(New RParameter("open.browser", 2))
         ucrchkOpenBrowser.SetValuesCheckedAndUnchecked("TRUE", "FALSE")

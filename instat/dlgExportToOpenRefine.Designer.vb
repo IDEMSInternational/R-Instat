@@ -41,14 +41,14 @@ Partial Class dlgExportToOpenRefine
         'ucrchkOpenBrowser
         '
         Me.ucrchkOpenBrowser.Checked = False
-        Me.ucrchkOpenBrowser.Location = New System.Drawing.Point(13, 72)
+        Me.ucrchkOpenBrowser.Location = New System.Drawing.Point(10, 73)
         Me.ucrchkOpenBrowser.Name = "ucrchkOpenBrowser"
         Me.ucrchkOpenBrowser.Size = New System.Drawing.Size(100, 20)
         Me.ucrchkOpenBrowser.TabIndex = 9
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 99)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 111)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
         Me.ucrBase.TabIndex = 7
@@ -75,7 +75,7 @@ Partial Class dlgExportToOpenRefine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 162)
+        Me.ClientSize = New System.Drawing.Size(422, 173)
         Me.Controls.Add(Me.ucrchkOpenBrowser)
         Me.Controls.Add(Me.lblNameDataSet)
         Me.Controls.Add(Me.ucrBase)
