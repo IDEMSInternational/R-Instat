@@ -34,19 +34,15 @@ Public Class dlgAlignment
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrMultiple.Selector = ucrSelectorAlignment
+        ucrMultiple.SetMeAsReceiver()
 
+        ucrBase.OKEnabled(False)
     End Sub
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
-
-        ucrMultiple.Selector = ucrAddRemove
-        ucrMultiple.SetMeAsReceiver()
-        ucrBase.OKEnabled(False)
-
-        ucrAddRemove.lstAvailableVariable.ResetText()
-        ucrMultiple.lstSelectedVariables.Items.Clear()
-        lstAlignment.ResetText()
+        ucrSelectorAlignment.Reset()
         txtColumnWidth.Text = ""
 
         'clsDefaultFunction.SetRCommand()
