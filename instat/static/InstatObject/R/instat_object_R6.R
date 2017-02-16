@@ -615,8 +615,8 @@ instat_object$set("public", "filter_string", function(data_name, filter_name) {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_names, rows, old_value, start_value = NA, end_value = NA, new_value, closed_start_value = TRUE, closed_end_value = TRUE) {
-  self$get_data_objects(data_name)$replace_value_in_data(col_names, rows, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value)
+instat_object$set("public", "replace_value_in_data", function(data_name, col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE) {
+  self$get_data_objects(data_name)$replace_value_in_data(col_names, rows, old_value, old_is_missing, start_value, end_value, new_value, new_is_missing, closed_start_value, closed_end_value)
 } 
 )
 # instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
