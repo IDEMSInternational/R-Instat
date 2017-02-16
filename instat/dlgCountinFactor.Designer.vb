@@ -22,57 +22,13 @@ Partial Class dlgCountinFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrCountSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrCountReceiver = New instat.ucrReceiverSingle()
-        Me.ucrInputCountColumnName = New instat.ucrInputComboBox()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
+        Me.ucrNewColName = New instat.ucrSave()
         Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
+        Me.ucrCountReceiver = New instat.ucrReceiverSingle()
+        Me.ucrCountSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 240)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrCountSelector
-        '
-        Me.ucrCountSelector.bShowHiddenColumns = False
-        Me.ucrCountSelector.bUseCurrentFilter = True
-        Me.ucrCountSelector.Location = New System.Drawing.Point(9, 9)
-        Me.ucrCountSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrCountSelector.Name = "ucrCountSelector"
-        Me.ucrCountSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrCountSelector.TabIndex = 1
-        '
-        'ucrCountReceiver
-        '
-        Me.ucrCountReceiver.Location = New System.Drawing.Point(269, 60)
-        Me.ucrCountReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrCountReceiver.Name = "ucrCountReceiver"
-        Me.ucrCountReceiver.Selector = Nothing
-        Me.ucrCountReceiver.Size = New System.Drawing.Size(130, 20)
-        Me.ucrCountReceiver.TabIndex = 2
-        '
-        'ucrInputCountColumnName
-        '
-        Me.ucrInputCountColumnName.IsReadOnly = False
-        Me.ucrInputCountColumnName.Location = New System.Drawing.Point(144, 205)
-        Me.ucrInputCountColumnName.Name = "ucrInputCountColumnName"
-        Me.ucrInputCountColumnName.Size = New System.Drawing.Size(204, 21)
-        Me.ucrInputCountColumnName.TabIndex = 3
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(6, 205)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
-        Me.lblNewColumnName.TabIndex = 4
-        Me.lblNewColumnName.Text = "New Column Name"
         '
         'lblSelectedFactor
         '
@@ -83,23 +39,62 @@ Partial Class dlgCountinFactor
         Me.lblSelectedFactor.TabIndex = 5
         Me.lblSelectedFactor.Text = "Selected Factor"
         '
+        'ucrNewColName
+        '
+        Me.ucrNewColName.bAddRemoveParameter = True
+        Me.ucrNewColName.bChangeParameterValue = True
+        Me.ucrNewColName.Location = New System.Drawing.Point(9, 210)
+        Me.ucrNewColName.Name = "ucrNewColName"
+        Me.ucrNewColName.Size = New System.Drawing.Size(255, 24)
+        Me.ucrNewColName.TabIndex = 0
+        '
         'UcrDialogDisabled1
         '
         Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(92, 109)
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(126, 83)
         Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(150, 92)
         Me.UcrDialogDisabled1.TabIndex = 6
+        '
+        'ucrCountReceiver
+        '
+        Me.ucrCountReceiver.bAddRemoveParameter = True
+        Me.ucrCountReceiver.bChangeParameterValue = True
+        Me.ucrCountReceiver.frmParent = Me
+        Me.ucrCountReceiver.Location = New System.Drawing.Point(269, 60)
+        Me.ucrCountReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrCountReceiver.Name = "ucrCountReceiver"
+        Me.ucrCountReceiver.Selector = Nothing
+        Me.ucrCountReceiver.Size = New System.Drawing.Size(130, 20)
+        Me.ucrCountReceiver.TabIndex = 2
+        '
+        'ucrCountSelector
+        '
+        Me.ucrCountSelector.bAddRemoveParameter = True
+        Me.ucrCountSelector.bChangeParameterValue = True
+        Me.ucrCountSelector.bShowHiddenColumns = False
+        Me.ucrCountSelector.bUseCurrentFilter = True
+        Me.ucrCountSelector.Location = New System.Drawing.Point(9, 9)
+        Me.ucrCountSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrCountSelector.Name = "ucrCountSelector"
+        Me.ucrCountSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrCountSelector.TabIndex = 1
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 240)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgCountinFactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 297)
+        Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.lblSelectedFactor)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputCountColumnName)
         Me.Controls.Add(Me.ucrCountReceiver)
         Me.Controls.Add(Me.ucrCountSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -118,8 +113,7 @@ Partial Class dlgCountinFactor
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrCountSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrCountReceiver As ucrReceiverSingle
-    Friend WithEvents ucrInputCountColumnName As ucrInputComboBox
-    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents lblSelectedFactor As Label
     Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
+    Friend WithEvents ucrNewColName As ucrSave
 End Class
