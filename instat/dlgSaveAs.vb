@@ -48,6 +48,7 @@ Public Class dlgSaveAs
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrInputFilePath.Reset()
+        ucrInputFilePath.SetName("")
         clsDefaultFunction.SetRCommand("saveRDS")
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
         clsDefaultFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
