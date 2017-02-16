@@ -18,7 +18,7 @@ Imports System.IO
 Imports instat
 Imports instat.Translations
 Public Class dlgSaveAs
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -99,4 +99,9 @@ Public Class dlgSaveAs
     Private Sub ucrInputFilePath_ControContenetsChanged(ucrchangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+    End Sub
+
 End Class
