@@ -30,9 +30,6 @@ Partial Class dlgBoxplotMethod
         Me.txtYLabel = New System.Windows.Forms.TextBox()
         Me.txtFillColour = New System.Windows.Forms.TextBox()
         Me.txtTitle = New System.Windows.Forms.TextBox()
-        Me.chkConvert = New System.Windows.Forms.CheckBox()
-        Me.chkHorizontal = New System.Windows.Forms.CheckBox()
-        Me.nudWhisklty = New System.Windows.Forms.NumericUpDown()
         Me.lblFillColour = New System.Windows.Forms.Label()
         Me.lblYLabel = New System.Windows.Forms.Label()
         Me.lblXLabel = New System.Windows.Forms.Label()
@@ -42,7 +39,9 @@ Partial Class dlgBoxplotMethod
         Me.lblDataPeriodLabel = New System.Windows.Forms.Label()
         Me.txtDataPeriodLabel = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
-        CType(Me.nudWhisklty, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrChkConvert = New instat.ucrCheck()
+        Me.ucrChkHorizontal = New instat.ucrCheck()
+        Me.ucrNudWhiskerLty = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblDataList
@@ -106,35 +105,6 @@ Partial Class dlgBoxplotMethod
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(100, 20)
         Me.txtTitle.TabIndex = 8
-        '
-        'chkConvert
-        '
-        Me.chkConvert.AutoSize = True
-        Me.chkConvert.Location = New System.Drawing.Point(364, 187)
-        Me.chkConvert.Name = "chkConvert"
-        Me.chkConvert.Size = New System.Drawing.Size(63, 17)
-        Me.chkConvert.TabIndex = 9
-        Me.chkConvert.Tag = "Convert"
-        Me.chkConvert.Text = "Convert"
-        Me.chkConvert.UseVisualStyleBackColor = True
-        '
-        'chkHorizontal
-        '
-        Me.chkHorizontal.AutoSize = True
-        Me.chkHorizontal.Location = New System.Drawing.Point(364, 221)
-        Me.chkHorizontal.Name = "chkHorizontal"
-        Me.chkHorizontal.Size = New System.Drawing.Size(73, 17)
-        Me.chkHorizontal.TabIndex = 10
-        Me.chkHorizontal.Tag = "Horizontal"
-        Me.chkHorizontal.Text = "Horizontal"
-        Me.chkHorizontal.UseVisualStyleBackColor = True
-        '
-        'nudWhisklty
-        '
-        Me.nudWhisklty.Location = New System.Drawing.Point(137, 220)
-        Me.nudWhisklty.Name = "nudWhisklty"
-        Me.nudWhisklty.Size = New System.Drawing.Size(66, 20)
-        Me.nudWhisklty.TabIndex = 11
         '
         'lblFillColour
         '
@@ -215,16 +185,47 @@ Partial Class dlgBoxplotMethod
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(35, 282)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 247)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrChkConvert
+        '
+        Me.ucrChkConvert.Checked = False
+        Me.ucrChkConvert.Location = New System.Drawing.Point(274, 142)
+        Me.ucrChkConvert.Name = "ucrChkConvert"
+        Me.ucrChkConvert.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkConvert.TabIndex = 21
+        '
+        'ucrChkHorizontal
+        '
+        Me.ucrChkHorizontal.Checked = False
+        Me.ucrChkHorizontal.Location = New System.Drawing.Point(274, 168)
+        Me.ucrChkHorizontal.Name = "ucrChkHorizontal"
+        Me.ucrChkHorizontal.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkHorizontal.TabIndex = 22
+        '
+        'ucrNudWhiskerLty
+        '
+        Me.ucrNudWhiskerLty.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWhiskerLty.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWhiskerLty.Location = New System.Drawing.Point(137, 221)
+        Me.ucrNudWhiskerLty.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWhiskerLty.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWhiskerLty.Name = "ucrNudWhiskerLty"
+        Me.ucrNudWhiskerLty.Size = New System.Drawing.Size(66, 20)
+        Me.ucrNudWhiskerLty.TabIndex = 23
+        Me.ucrNudWhiskerLty.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgBoxplotMethod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(489, 336)
+        Me.ClientSize = New System.Drawing.Size(442, 308)
+        Me.Controls.Add(Me.ucrNudWhiskerLty)
+        Me.Controls.Add(Me.ucrChkHorizontal)
+        Me.Controls.Add(Me.ucrChkConvert)
         Me.Controls.Add(Me.txtDataPeriodLabel)
         Me.Controls.Add(Me.lblDataPeriodLabel)
         Me.Controls.Add(Me.lblWhisklty)
@@ -233,9 +234,6 @@ Partial Class dlgBoxplotMethod
         Me.Controls.Add(Me.lblXLabel)
         Me.Controls.Add(Me.lblYLabel)
         Me.Controls.Add(Me.lblFillColour)
-        Me.Controls.Add(Me.nudWhisklty)
-        Me.Controls.Add(Me.chkHorizontal)
-        Me.Controls.Add(Me.chkConvert)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.txtFillColour)
         Me.Controls.Add(Me.txtYLabel)
@@ -251,7 +249,6 @@ Partial Class dlgBoxplotMethod
         Me.Name = "dlgBoxplotMethod"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Boxplot Method"
-        CType(Me.nudWhisklty, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -266,9 +263,6 @@ Partial Class dlgBoxplotMethod
     Friend WithEvents txtYLabel As TextBox
     Friend WithEvents txtFillColour As TextBox
     Friend WithEvents txtTitle As TextBox
-    Friend WithEvents chkConvert As CheckBox
-    Friend WithEvents chkHorizontal As CheckBox
-    Friend WithEvents nudWhisklty As NumericUpDown
     Friend WithEvents lblFillColour As Label
     Friend WithEvents lblYLabel As Label
     Friend WithEvents lblXLabel As Label
@@ -277,4 +271,7 @@ Partial Class dlgBoxplotMethod
     Friend WithEvents lblWhisklty As Label
     Friend WithEvents lblDataPeriodLabel As Label
     Friend WithEvents txtDataPeriodLabel As TextBox
+    Friend WithEvents ucrChkConvert As ucrCheck
+    Friend WithEvents ucrChkHorizontal As ucrCheck
+    Friend WithEvents ucrNudWhiskerLty As ucrNud
 End Class

@@ -35,28 +35,24 @@ Public Class dlgBoxplotMethod
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$boxplot_method")
         ucrBase.clsRsyntax.iCallType = 0
+
+        'ucrChk
+        ucrChkConvert.SetText("Convert")
+        ucrChkConvert.SetParameter(New RParameter("convert"))
+        'ucrChk
+        ucrChkConvert.SetText("Horizontal")
+        ucrChkHorizontal.SetParameter(New RParameter("horizontal"))
+        'ucrNud
+        ucrNudWhiskerLty.SetParameter(New RParameter("whisklty"))
     End Sub
+
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
 
-
-        'clsDefaultFunction.SetRCommand()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strClimateObject & "$boxplot_method")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-    End Sub
-
-    Private Sub chkConvert_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvert.CheckedChanged
-        If chkConvert.Checked Then
-            ucrBase.clsRsyntax.AddParameter("convert", chkConvert.Checked.ToString().ToUpper())
-        End If
-    End Sub
-    Private Sub chkHorizontal_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontal.CheckedChanged
-        If chkHorizontal.Checked Then
-            ucrBase.clsRsyntax.AddParameter("horizontal", chkHorizontal.Checked.ToString().ToUpper())
-        End If
-
     End Sub
 
     Private Sub txtDataPeriodLabel_Leave(sender As Object, e As EventArgs) Handles txtDataPeriodLabel.Leave
@@ -81,10 +77,6 @@ Public Class dlgBoxplotMethod
 
     Private Sub txtFillColour_Leave(sender As Object, e As EventArgs) Handles txtFillColour.Leave
         ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & txtFillColour.Text.ToString() & Chr(34))
-    End Sub
-
-    Private Sub nudWhisklty_Leave(sender As Object, e As EventArgs) Handles nudWhisklty.Leave
-        ucrBase.clsRsyntax.AddParameter("whisklty", nudWhisklty.Value.ToString())
     End Sub
 
     Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
