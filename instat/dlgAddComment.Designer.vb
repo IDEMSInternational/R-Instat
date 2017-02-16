@@ -33,19 +33,20 @@ Partial Class dlgAddComment
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblComment = New System.Windows.Forms.Label()
         Me.ucrInputComment = New instat.ucrInputTextBox()
+        Me.ucrPnlCellOrRow = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(9, 260)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 1
         '
         'rdoRow
         '
         Me.rdoRow.AutoSize = True
-        Me.rdoRow.Location = New System.Drawing.Point(12, 15)
+        Me.rdoRow.Location = New System.Drawing.Point(266, 16)
         Me.rdoRow.Name = "rdoRow"
         Me.rdoRow.Size = New System.Drawing.Size(47, 17)
         Me.rdoRow.TabIndex = 5
@@ -56,7 +57,7 @@ Partial Class dlgAddComment
         'rdoCell
         '
         Me.rdoCell.AutoSize = True
-        Me.rdoCell.Location = New System.Drawing.Point(161, 15)
+        Me.rdoCell.Location = New System.Drawing.Point(31, 16)
         Me.rdoCell.Name = "rdoCell"
         Me.rdoCell.Size = New System.Drawing.Size(42, 17)
         Me.rdoCell.TabIndex = 6
@@ -86,17 +87,17 @@ Partial Class dlgAddComment
         'ucrReceiverRow
         '
         Me.ucrReceiverRow.frmParent = Me
-        Me.ucrReceiverRow.Location = New System.Drawing.Point(266, 69)
+        Me.ucrReceiverRow.Location = New System.Drawing.Point(266, 105)
         Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRow.Name = "ucrReceiverRow"
         Me.ucrReceiverRow.Selector = Nothing
-        Me.ucrReceiverRow.Size = New System.Drawing.Size(129, 20)
+        Me.ucrReceiverRow.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverRow.TabIndex = 9
         '
         'lblRow
         '
         Me.lblRow.AutoSize = True
-        Me.lblRow.Location = New System.Drawing.Point(266, 49)
+        Me.lblRow.Location = New System.Drawing.Point(266, 83)
         Me.lblRow.Name = "lblRow"
         Me.lblRow.Size = New System.Drawing.Size(32, 13)
         Me.lblRow.TabIndex = 10
@@ -105,17 +106,17 @@ Partial Class dlgAddComment
         'ucrReceiverColumn
         '
         Me.ucrReceiverColumn.frmParent = Me
-        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 134)
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 154)
         Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.Size = New System.Drawing.Size(129, 20)
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverColumn.TabIndex = 11
         '
         'lblColumn
         '
         Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(266, 113)
+        Me.lblColumn.Location = New System.Drawing.Point(266, 134)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
         Me.lblColumn.TabIndex = 12
@@ -124,7 +125,7 @@ Partial Class dlgAddComment
         'lblComment
         '
         Me.lblComment.AutoSize = True
-        Me.lblComment.Location = New System.Drawing.Point(266, 172)
+        Me.lblComment.Location = New System.Drawing.Point(266, 184)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(54, 13)
         Me.lblComment.TabIndex = 14
@@ -134,16 +135,23 @@ Partial Class dlgAddComment
         '
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
-        Me.ucrInputComment.Location = New System.Drawing.Point(266, 189)
+        Me.ucrInputComment.Location = New System.Drawing.Point(266, 200)
         Me.ucrInputComment.Name = "ucrInputComment"
         Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputComment.TabIndex = 15
+        '
+        'ucrPnlCellOrRow
+        '
+        Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(12, 12)
+        Me.ucrPnlCellOrRow.Name = "ucrPnlCellOrRow"
+        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(383, 32)
+        Me.ucrPnlCellOrRow.TabIndex = 16
         '
         'dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(437, 320)
+        Me.ClientSize = New System.Drawing.Size(410, 320)
         Me.Controls.Add(Me.ucrInputComment)
         Me.Controls.Add(Me.lblComment)
         Me.Controls.Add(Me.lblColumn)
@@ -155,6 +163,7 @@ Partial Class dlgAddComment
         Me.Controls.Add(Me.rdoCell)
         Me.Controls.Add(Me.rdoRow)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlCellOrRow)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -177,4 +186,5 @@ Partial Class dlgAddComment
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
     Friend WithEvents lblComment As Label
     Friend WithEvents ucrInputComment As ucrInputTextBox
+    Friend WithEvents ucrPnlCellOrRow As UcrPanel
 End Class
