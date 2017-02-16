@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgCliPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,14 +20,10 @@ Partial Class dlgCliPlot
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.chkByfactor = New System.Windows.Forms.CheckBox()
-        Me.chkInheritAES = New System.Windows.Forms.CheckBox()
-        Me.chkRemoveNA = New System.Windows.Forms.CheckBox()
-        Me.chkStationName = New System.Windows.Forms.CheckBox()
         Me.txtXLim = New System.Windows.Forms.TextBox()
         Me.txtPosition = New System.Windows.Forms.TextBox()
         Me.txtVariableY = New System.Windows.Forms.TextBox()
@@ -42,8 +38,6 @@ Partial Class dlgCliPlot
         Me.txtYAxis = New System.Windows.Forms.TextBox()
         Me.txtXAxis = New System.Windows.Forms.TextBox()
         Me.lblXAxis = New System.Windows.Forms.Label()
-        Me.nudLineType = New System.Windows.Forms.NumericUpDown()
-        Me.nudSize = New System.Windows.Forms.NumericUpDown()
         Me.lblLineType = New System.Windows.Forms.Label()
         Me.lblSize = New System.Windows.Forms.Label()
         Me.lblStat = New System.Windows.Forms.Label()
@@ -60,13 +54,17 @@ Partial Class dlgCliPlot
         Me.lblVariableName = New System.Windows.Forms.Label()
         Me.txtShowLegend = New System.Windows.Forms.TextBox()
         Me.lblShowLegend = New System.Windows.Forms.Label()
-        CType(Me.nudLineType, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.ucrNudLineType = New instat.ucrNud()
+        Me.ucrChkStationName = New instat.ucrCheck()
+        Me.ucrChkInheritAES = New instat.ucrCheck()
+        Me.ucrChkRemoveNA = New instat.ucrCheck()
+        Me.ucrChkByFactor = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(82, 323)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 323)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -80,60 +78,16 @@ Partial Class dlgCliPlot
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Data list not implemented"
         '
-        'chkByfactor
-        '
-        Me.chkByfactor.AutoSize = True
-        Me.chkByfactor.Location = New System.Drawing.Point(307, 241)
-        Me.chkByfactor.Name = "chkByfactor"
-        Me.chkByfactor.Size = New System.Drawing.Size(81, 17)
-        Me.chkByfactor.TabIndex = 3
-        Me.chkByfactor.Tag = "By_factor"
-        Me.chkByfactor.Text = "CheckBox1"
-        Me.chkByfactor.UseVisualStyleBackColor = True
-        '
-        'chkInheritAES
-        '
-        Me.chkInheritAES.AutoSize = True
-        Me.chkInheritAES.Location = New System.Drawing.Point(307, 264)
-        Me.chkInheritAES.Name = "chkInheritAES"
-        Me.chkInheritAES.Size = New System.Drawing.Size(81, 17)
-        Me.chkInheritAES.TabIndex = 4
-        Me.chkInheritAES.Tag = "Inherit_AES"
-        Me.chkInheritAES.Text = "CheckBox2"
-        Me.chkInheritAES.UseVisualStyleBackColor = True
-        '
-        'chkRemoveNA
-        '
-        Me.chkRemoveNA.AutoSize = True
-        Me.chkRemoveNA.Location = New System.Drawing.Point(433, 241)
-        Me.chkRemoveNA.Name = "chkRemoveNA"
-        Me.chkRemoveNA.Size = New System.Drawing.Size(81, 17)
-        Me.chkRemoveNA.TabIndex = 5
-        Me.chkRemoveNA.Tag = "Remove_NA"
-        Me.chkRemoveNA.Text = "CheckBox3"
-        Me.chkRemoveNA.UseVisualStyleBackColor = True
-        '
-        'chkStationName
-        '
-        Me.chkStationName.AutoSize = True
-        Me.chkStationName.Location = New System.Drawing.Point(433, 264)
-        Me.chkStationName.Name = "chkStationName"
-        Me.chkStationName.Size = New System.Drawing.Size(81, 17)
-        Me.chkStationName.TabIndex = 6
-        Me.chkStationName.Tag = "Station_Name"
-        Me.chkStationName.Text = "CheckBox4"
-        Me.chkStationName.UseVisualStyleBackColor = True
-        '
         'txtXLim
         '
-        Me.txtXLim.Location = New System.Drawing.Point(103, 128)
+        Me.txtXLim.Location = New System.Drawing.Point(112, 128)
         Me.txtXLim.Name = "txtXLim"
         Me.txtXLim.Size = New System.Drawing.Size(100, 20)
         Me.txtXLim.TabIndex = 7
         '
         'txtPosition
         '
-        Me.txtPosition.Location = New System.Drawing.Point(103, 99)
+        Me.txtPosition.Location = New System.Drawing.Point(112, 99)
         Me.txtPosition.Name = "txtPosition"
         Me.txtPosition.Size = New System.Drawing.Size(100, 20)
         Me.txtPosition.TabIndex = 8
@@ -147,14 +101,14 @@ Partial Class dlgCliPlot
         '
         'txtVariableX
         '
-        Me.txtVariableX.Location = New System.Drawing.Point(103, 63)
+        Me.txtVariableX.Location = New System.Drawing.Point(112, 63)
         Me.txtVariableX.Name = "txtVariableX"
         Me.txtVariableX.Size = New System.Drawing.Size(100, 20)
         Me.txtVariableX.TabIndex = 10
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(103, 37)
+        Me.txtTitle.Location = New System.Drawing.Point(112, 37)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(100, 20)
         Me.txtTitle.TabIndex = 11
@@ -164,50 +118,50 @@ Partial Class dlgCliPlot
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Location = New System.Drawing.Point(12, 37)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(39, 13)
+        Me.lblTitle.Size = New System.Drawing.Size(30, 13)
         Me.lblTitle.TabIndex = 12
-        Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Label2"
+        Me.lblTitle.Tag = "Title:"
+        Me.lblTitle.Text = "Title:"
         '
         'lblVariableX
         '
         Me.lblVariableX.AutoSize = True
         Me.lblVariableX.Location = New System.Drawing.Point(12, 70)
         Me.lblVariableX.Name = "lblVariableX"
-        Me.lblVariableX.Size = New System.Drawing.Size(39, 13)
+        Me.lblVariableX.Size = New System.Drawing.Size(58, 13)
         Me.lblVariableX.TabIndex = 13
-        Me.lblVariableX.Tag = "Variable_X"
-        Me.lblVariableX.Text = "Label3"
+        Me.lblVariableX.Tag = "Variable_X:"
+        Me.lblVariableX.Text = "Variable X:"
         '
         'lblVariableY
         '
         Me.lblVariableY.AutoSize = True
         Me.lblVariableY.Location = New System.Drawing.Point(304, 70)
         Me.lblVariableY.Name = "lblVariableY"
-        Me.lblVariableY.Size = New System.Drawing.Size(39, 13)
+        Me.lblVariableY.Size = New System.Drawing.Size(58, 13)
         Me.lblVariableY.TabIndex = 14
-        Me.lblVariableY.Tag = "Variable_Y"
-        Me.lblVariableY.Text = "Label4"
+        Me.lblVariableY.Tag = "Variable_Y:"
+        Me.lblVariableY.Text = "Variable Y:"
         '
         'lblPosition
         '
         Me.lblPosition.AutoSize = True
         Me.lblPosition.Location = New System.Drawing.Point(12, 102)
         Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(39, 13)
+        Me.lblPosition.Size = New System.Drawing.Size(47, 13)
         Me.lblPosition.TabIndex = 15
-        Me.lblPosition.Tag = "Position"
-        Me.lblPosition.Text = "Label5"
+        Me.lblPosition.Tag = "Position:"
+        Me.lblPosition.Text = "Position:"
         '
         'lblXLimits
         '
         Me.lblXLimits.AutoSize = True
         Me.lblXLimits.Location = New System.Drawing.Point(12, 135)
         Me.lblXLimits.Name = "lblXLimits"
-        Me.lblXLimits.Size = New System.Drawing.Size(39, 13)
+        Me.lblXLimits.Size = New System.Drawing.Size(49, 13)
         Me.lblXLimits.TabIndex = 16
-        Me.lblXLimits.Tag = "X_Limits"
-        Me.lblXLimits.Text = "Label6"
+        Me.lblXLimits.Tag = "X_Limits:"
+        Me.lblXLimits.Text = "X_Limits:"
         '
         'lblYAxis
         '
@@ -216,12 +170,12 @@ Partial Class dlgCliPlot
         Me.lblYAxis.Name = "lblYAxis"
         Me.lblYAxis.Size = New System.Drawing.Size(39, 13)
         Me.lblYAxis.TabIndex = 17
-        Me.lblYAxis.Tag = "Y_Axis"
-        Me.lblYAxis.Text = "Label7"
+        Me.lblYAxis.Tag = "Y_Axis:"
+        Me.lblYAxis.Text = "Y Axis:"
         '
         'txtYAxis
         '
-        Me.txtYAxis.Location = New System.Drawing.Point(103, 180)
+        Me.txtYAxis.Location = New System.Drawing.Point(112, 180)
         Me.txtYAxis.Name = "txtYAxis"
         Me.txtYAxis.Size = New System.Drawing.Size(100, 20)
         Me.txtYAxis.TabIndex = 18
@@ -242,51 +196,37 @@ Partial Class dlgCliPlot
         Me.lblXAxis.Size = New System.Drawing.Size(39, 13)
         Me.lblXAxis.TabIndex = 20
         Me.lblXAxis.Tag = "X_Axis"
-        Me.lblXAxis.Text = "Label8"
-        '
-        'nudLineType
-        '
-        Me.nudLineType.Location = New System.Drawing.Point(103, 241)
-        Me.nudLineType.Name = "nudLineType"
-        Me.nudLineType.Size = New System.Drawing.Size(46, 20)
-        Me.nudLineType.TabIndex = 22
-        '
-        'nudSize
-        '
-        Me.nudSize.Location = New System.Drawing.Point(103, 261)
-        Me.nudSize.Name = "nudSize"
-        Me.nudSize.Size = New System.Drawing.Size(46, 20)
-        Me.nudSize.TabIndex = 23
+        Me.lblXAxis.Text = "X Axis:"
         '
         'lblLineType
         '
         Me.lblLineType.AutoSize = True
         Me.lblLineType.Location = New System.Drawing.Point(12, 245)
         Me.lblLineType.Name = "lblLineType"
-        Me.lblLineType.Size = New System.Drawing.Size(45, 13)
+        Me.lblLineType.Size = New System.Drawing.Size(57, 13)
         Me.lblLineType.TabIndex = 25
-        Me.lblLineType.Tag = "Line_Type"
-        Me.lblLineType.Text = "Label10"
+        Me.lblLineType.Tag = "Line_Type:"
+        Me.lblLineType.Text = "Line Type:"
         '
         'lblSize
         '
         Me.lblSize.AutoSize = True
-        Me.lblSize.Location = New System.Drawing.Point(12, 268)
+        Me.lblSize.Location = New System.Drawing.Point(12, 278)
         Me.lblSize.Name = "lblSize"
-        Me.lblSize.Size = New System.Drawing.Size(45, 13)
+        Me.lblSize.Size = New System.Drawing.Size(30, 13)
         Me.lblSize.TabIndex = 26
-        Me.lblSize.Tag = "Size"
-        Me.lblSize.Text = "Label11"
+        Me.lblSize.Tag = "Size:"
+        Me.lblSize.Text = "Size:"
         '
         'lblStat
         '
         Me.lblStat.AutoSize = True
         Me.lblStat.Location = New System.Drawing.Point(304, 102)
         Me.lblStat.Name = "lblStat"
-        Me.lblStat.Size = New System.Drawing.Size(45, 13)
+        Me.lblStat.Size = New System.Drawing.Size(29, 13)
         Me.lblStat.TabIndex = 27
-        Me.lblStat.Tag = "Stat"
-        Me.lblStat.Text = "Label12"
+        Me.lblStat.Tag = "Stat:"
+        Me.lblStat.Text = "Stat:"
         '
         'txtStat
         '
@@ -311,7 +251,7 @@ Partial Class dlgCliPlot
         '
         'txtDataperiodLabel
         '
-        Me.txtDataperiodLabel.Location = New System.Drawing.Point(103, 154)
+        Me.txtDataperiodLabel.Location = New System.Drawing.Point(112, 154)
         Me.txtDataperiodLabel.Name = "txtDataperiodLabel"
         Me.txtDataperiodLabel.Size = New System.Drawing.Size(100, 20)
         Me.txtDataperiodLabel.TabIndex = 31
@@ -321,43 +261,43 @@ Partial Class dlgCliPlot
         Me.lblDataperiodLabel.AutoSize = True
         Me.lblDataperiodLabel.Location = New System.Drawing.Point(12, 161)
         Me.lblDataperiodLabel.Name = "lblDataperiodLabel"
-        Me.lblDataperiodLabel.Size = New System.Drawing.Size(45, 13)
+        Me.lblDataperiodLabel.Size = New System.Drawing.Size(95, 13)
         Me.lblDataperiodLabel.TabIndex = 32
-        Me.lblDataperiodLabel.Tag = "Data_period_Label"
-        Me.lblDataperiodLabel.Text = "Label13"
+        Me.lblDataperiodLabel.Tag = "Data_Period_Label:"
+        Me.lblDataperiodLabel.Text = "Data Period Label:"
         '
         'lblYLim
         '
         Me.lblYLim.AutoSize = True
         Me.lblYLim.Location = New System.Drawing.Point(304, 128)
         Me.lblYLim.Name = "lblYLim"
-        Me.lblYLim.Size = New System.Drawing.Size(45, 13)
+        Me.lblYLim.Size = New System.Drawing.Size(46, 13)
         Me.lblYLim.TabIndex = 33
         Me.lblYLim.Tag = "Y_Limits"
-        Me.lblYLim.Text = "Label14"
+        Me.lblYLim.Text = "Y Limits:"
         '
         'lblColour
         '
         Me.lblColour.AutoSize = True
         Me.lblColour.Location = New System.Drawing.Point(304, 154)
         Me.lblColour.Name = "lblColour"
-        Me.lblColour.Size = New System.Drawing.Size(45, 13)
+        Me.lblColour.Size = New System.Drawing.Size(40, 13)
         Me.lblColour.TabIndex = 34
-        Me.lblColour.Text = "Label15"
+        Me.lblColour.Text = "Colour:"
         '
         'lblFactorVariable
         '
         Me.lblFactorVariable.AutoSize = True
         Me.lblFactorVariable.Location = New System.Drawing.Point(12, 216)
         Me.lblFactorVariable.Name = "lblFactorVariable"
-        Me.lblFactorVariable.Size = New System.Drawing.Size(39, 13)
+        Me.lblFactorVariable.Size = New System.Drawing.Size(81, 13)
         Me.lblFactorVariable.TabIndex = 35
-        Me.lblFactorVariable.Tag = "Factor_Variable"
-        Me.lblFactorVariable.Text = "Label2"
+        Me.lblFactorVariable.Tag = "Factor_Variable:"
+        Me.lblFactorVariable.Text = "Factor Variable:"
         '
         'txtFactorVariable
         '
-        Me.txtFactorVariable.Location = New System.Drawing.Point(103, 209)
+        Me.txtFactorVariable.Location = New System.Drawing.Point(112, 209)
         Me.txtFactorVariable.Name = "txtFactorVariable"
         Me.txtFactorVariable.Size = New System.Drawing.Size(100, 20)
         Me.txtFactorVariable.TabIndex = 36
@@ -374,10 +314,10 @@ Partial Class dlgCliPlot
         Me.lblVariableName.AutoSize = True
         Me.lblVariableName.Location = New System.Drawing.Point(304, 40)
         Me.lblVariableName.Name = "lblVariableName"
-        Me.lblVariableName.Size = New System.Drawing.Size(39, 13)
+        Me.lblVariableName.Size = New System.Drawing.Size(79, 13)
         Me.lblVariableName.TabIndex = 38
-        Me.lblVariableName.Tag = "Variable_Name"
-        Me.lblVariableName.Text = "Label2"
+        Me.lblVariableName.Tag = "Variable_Name:"
+        Me.lblVariableName.Text = "Variable Name:"
         '
         'txtShowLegend
         '
@@ -391,16 +331,78 @@ Partial Class dlgCliPlot
         Me.lblShowLegend.AutoSize = True
         Me.lblShowLegend.Location = New System.Drawing.Point(12, 304)
         Me.lblShowLegend.Name = "lblShowLegend"
-        Me.lblShowLegend.Size = New System.Drawing.Size(39, 13)
+        Me.lblShowLegend.Size = New System.Drawing.Size(76, 13)
         Me.lblShowLegend.TabIndex = 40
-        Me.lblShowLegend.Tag = "Show_Legend"
-        Me.lblShowLegend.Text = "Label2"
+        Me.lblShowLegend.Tag = "Show_Legend:"
+        Me.lblShowLegend.Text = "Show Legend:"
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSize.Location = New System.Drawing.Point(103, 271)
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSize.TabIndex = 41
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudLineType
+        '
+        Me.ucrNudLineType.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineType.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineType.Location = New System.Drawing.Point(103, 245)
+        Me.ucrNudLineType.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLineType.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineType.Name = "ucrNudLineType"
+        Me.ucrNudLineType.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLineType.TabIndex = 42
+        Me.ucrNudLineType.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkStationName
+        '
+        Me.ucrChkStationName.Checked = False
+        Me.ucrChkStationName.Location = New System.Drawing.Point(433, 264)
+        Me.ucrChkStationName.Name = "ucrChkStationName"
+        Me.ucrChkStationName.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkStationName.TabIndex = 43
+        '
+        'ucrChkInheritAES
+        '
+        Me.ucrChkInheritAES.Checked = False
+        Me.ucrChkInheritAES.Location = New System.Drawing.Point(307, 264)
+        Me.ucrChkInheritAES.Name = "ucrChkInheritAES"
+        Me.ucrChkInheritAES.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkInheritAES.TabIndex = 44
+        '
+        'ucrChkRemoveNA
+        '
+        Me.ucrChkRemoveNA.Checked = False
+        Me.ucrChkRemoveNA.Location = New System.Drawing.Point(433, 238)
+        Me.ucrChkRemoveNA.Name = "ucrChkRemoveNA"
+        Me.ucrChkRemoveNA.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkRemoveNA.TabIndex = 45
+        '
+        'ucrChkByFactor
+        '
+        Me.ucrChkByFactor.Checked = False
+        Me.ucrChkByFactor.Location = New System.Drawing.Point(307, 238)
+        Me.ucrChkByFactor.Name = "ucrChkByFactor"
+        Me.ucrChkByFactor.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkByFactor.TabIndex = 46
         '
         'dlgCliPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(564, 378)
+        Me.ClientSize = New System.Drawing.Size(544, 378)
+        Me.Controls.Add(Me.ucrChkByFactor)
+        Me.Controls.Add(Me.ucrChkRemoveNA)
+        Me.Controls.Add(Me.ucrChkInheritAES)
+        Me.Controls.Add(Me.ucrChkStationName)
+        Me.Controls.Add(Me.ucrNudLineType)
+        Me.Controls.Add(Me.ucrNudSize)
         Me.Controls.Add(Me.lblShowLegend)
         Me.Controls.Add(Me.txtShowLegend)
         Me.Controls.Add(Me.lblVariableName)
@@ -417,8 +419,6 @@ Partial Class dlgCliPlot
         Me.Controls.Add(Me.lblStat)
         Me.Controls.Add(Me.lblSize)
         Me.Controls.Add(Me.lblLineType)
-        Me.Controls.Add(Me.nudSize)
-        Me.Controls.Add(Me.nudLineType)
         Me.Controls.Add(Me.lblXAxis)
         Me.Controls.Add(Me.txtXAxis)
         Me.Controls.Add(Me.txtYAxis)
@@ -433,10 +433,6 @@ Partial Class dlgCliPlot
         Me.Controls.Add(Me.txtVariableY)
         Me.Controls.Add(Me.txtPosition)
         Me.Controls.Add(Me.txtXLim)
-        Me.Controls.Add(Me.chkStationName)
-        Me.Controls.Add(Me.chkRemoveNA)
-        Me.Controls.Add(Me.chkInheritAES)
-        Me.Controls.Add(Me.chkByfactor)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -445,8 +441,6 @@ Partial Class dlgCliPlot
         Me.Name = "dlgCliPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CliPlot"
-        CType(Me.nudLineType, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -454,10 +448,6 @@ Partial Class dlgCliPlot
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents Label1 As Label
-    Friend WithEvents chkByfactor As CheckBox
-    Friend WithEvents chkInheritAES As CheckBox
-    Friend WithEvents chkRemoveNA As CheckBox
-    Friend WithEvents chkStationName As CheckBox
     Friend WithEvents txtXLim As TextBox
     Friend WithEvents txtPosition As TextBox
     Friend WithEvents txtVariableY As TextBox
@@ -472,8 +462,6 @@ Partial Class dlgCliPlot
     Friend WithEvents txtYAxis As TextBox
     Friend WithEvents txtXAxis As TextBox
     Friend WithEvents lblXAxis As Label
-    Friend WithEvents nudLineType As NumericUpDown
-    Friend WithEvents nudSize As NumericUpDown
     Friend WithEvents lblLineType As Label
     Friend WithEvents lblSize As Label
     Friend WithEvents lblStat As Label
@@ -490,4 +478,10 @@ Partial Class dlgCliPlot
     Friend WithEvents lblVariableName As Label
     Friend WithEvents txtShowLegend As TextBox
     Friend WithEvents lblShowLegend As Label
+    Friend WithEvents ucrNudSize As ucrNud
+    Friend WithEvents ucrNudLineType As ucrNud
+    Friend WithEvents ucrChkStationName As ucrCheck
+    Friend WithEvents ucrChkInheritAES As ucrCheck
+    Friend WithEvents ucrChkRemoveNA As ucrCheck
+    Friend WithEvents ucrChkByFactor As ucrCheck
 End Class
