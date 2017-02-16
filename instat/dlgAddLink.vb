@@ -37,10 +37,6 @@ Public Class dlgAddLink
         ucrBase.iHelpTopicID = 506
     End Sub
 
-    Private Sub TestOKEnabled()
-
-    End Sub
-
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
 
@@ -52,8 +48,10 @@ Public Class dlgAddLink
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    Private Sub ReopenDialog()
+    Private Sub TestOKEnabled()
+    End Sub
 
+    Private Sub ReopenDialog()
     End Sub
 
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
