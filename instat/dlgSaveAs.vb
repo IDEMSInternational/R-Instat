@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+Imports instat
 Imports instat.Translations
 Public Class dlgSaveAs
     Public bFirstLoad As Boolean = True
@@ -50,7 +51,6 @@ Public Class dlgSaveAs
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
         clsDefaultFunction.SetRCommand("saveRDS")
-        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
         clsDefaultFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
