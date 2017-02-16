@@ -40,6 +40,7 @@ Public Class dlgPermuteColumn
         ucrNudNumberofColumns.SetRCode(clsOverallFunction, bReset)
         ucrReceiverPermuteRows.SetRCode(clsSetSampleFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeedFunc, bReset)
+        ucrChkSetSeed.SetRCode(clsSetSeedFunc, bReset)
     End Sub
 
     Public Sub SetDefaults()
@@ -51,7 +52,6 @@ Public Class dlgPermuteColumn
         clsDefaultSetSeed.SetRCommand("set.seed")
         clsDefaultSetSeed.AddParameter("seed", 5)
         clsDefaultFunction.SetRCommand("replicate")
-        ucrNudSetSeed.Visible = False
         ucrChkSetSeed.Checked = False
         clsSetSeedFunc = clsDefaultSetSeed.Clone
         clsSetSampleFunc = clsDefaultSample.Clone
