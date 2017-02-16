@@ -66,7 +66,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrChkScaleData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkScaleData.SetRDefault("TRUE")
 
-        sdgPrincipalComponentAnalysis.ucrSelectorFactor.SetDataframe(ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
+        'sdgPrincipalComponentAnalysis.ucrSelectorFactor.SetDataframe(ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
     End Sub
 
     Private Sub ReopenDialog()
@@ -108,11 +108,11 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
         '        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
         '        bResetSubdialog = False
-        sdgPrincipalComponentAnalysis.ShowDialog()
+        'sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
     Private Sub ucrBasePCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgPrincipalComponentAnalysis.PCAOptions()
+        'sdgPrincipalComponentAnalysis.PCAOptions()
     End Sub
 
     Private Sub ComponentsMinimum()
