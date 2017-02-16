@@ -47,7 +47,7 @@ Public Class dlgDummyVariables
         ucrSelectorDummyVariable.Reset()
 
         clsDefaultFunction.SetRCommand("dummy")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
 
@@ -63,7 +63,7 @@ Public Class dlgDummyVariables
         ucrVariateReceiver.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
-        ucrReceiverFactor.SetParameter(New RParameter("x"))
+        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverFactor.SetParameterIsRFunction()
 
         'Set RadioBattons : Parameters yet to be set up
@@ -76,6 +76,8 @@ Public Class dlgDummyVariables
         ucrChkWithXVariable.Enabled = False
         ucrChkWithXVariable.SetText("With X Variable")
         ' ucrChkWithXVariable.SetParameter(New RParameter(""))
+        VariateVisible()
+        grpLevelOmitted.Enabled = False
 
         'Note: This was not implemented (Additions of ucrInputColumns were added for appending new columns with prefix "dummy" ): Just added if incase it was to be added otherwise it can be deleted
 
@@ -85,9 +87,7 @@ Public Class dlgDummyVariables
         'ucrSaveDummy.SetCheckBoxText("Save Dummy:")
         'ucrSaveDummy.SetIsComboBox()
 
-        ucrVariateReceiver.Visible = False
-        lblVariate.Visible = False
-        grpLevelOmitted.Enabled = False
+
     End Sub
 
     Private Sub VariateVisible()
@@ -110,10 +110,6 @@ Public Class dlgDummyVariables
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLevelOmitted.ControlValueChanged
-        VariateVisible()
     End Sub
 
 End Class
