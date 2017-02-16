@@ -91,8 +91,6 @@ Public Class dlgClimdex
         ucrReceiverPrec.Selector = ucrSelectorClimdex
         ucrReceiverPrec.SetParameter(New RParameter("col_name"))
         ucrReceiverPrec.SetParameterIsString()
-
-        'AssignName()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -136,7 +134,6 @@ Public Class dlgClimdex
         If Not ucrReceiverTmin.IsEmpty Then
             ucrBaseClimdex.clsRsyntax.AddParameter("tmin", clsRFunctionParameter:=clsRTmin)
             ucrBaseClimdex.clsRsyntax.AddParameter("tmin.dates", clsRFunctionParameter:=clsRPCIct)
-
         Else
             ucrBaseClimdex.clsRsyntax.RemoveParameter("tmin")
             ucrBaseClimdex.clsRsyntax.RemoveParameter("tmin.dates")
@@ -166,5 +163,6 @@ Public Class dlgClimdex
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimdex.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged
         TestOkEnabled()
+        sdgClimdexIndices.IndicesType() 'is this the right implementation?
     End Sub
 End Class

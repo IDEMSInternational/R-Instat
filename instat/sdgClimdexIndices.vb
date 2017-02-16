@@ -419,6 +419,7 @@ Public Class sdgClimdexIndices
         ucrChkCenterMean.SetRCode(clsRThreeArg, bReset)
         ucrChkMaxSpellSpanYears.SetRCode(clsRTwoArg4, bReset)
         ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset)
+        IndicesType()
     End Sub
 
     Private Sub ucrChkSave_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlContentsChanged
@@ -426,6 +427,78 @@ Public Class sdgClimdexIndices
             bSaveIndex = True
         Else
             bSaveIndex = False
+        End If
+    End Sub
+
+    Private Sub ucrInputFreq_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFreq.ControlContentsChanged
+        IndicesType()
+    End Sub
+
+    Private Sub GroupBoxControl(TempGroupBox As GroupBox)
+        For Each ChkBox As ucrCheck In TempGroupBox.Controls
+            ChkBox.Checked = False
+        Next
+    End Sub
+
+    Public Sub IndicesType()
+        If dlgClimdex.ucrReceiverPrec.IsEmpty Then
+            GroupBoxControl(grpPrecAnnual)
+            GroupBoxControl(grpPrecAnnualMonthly)
+            grpPrecAnnualMonthly.Enabled = False
+            grpPrecAnnual.Enabled = False
+        Else
+            If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
+                GroupBoxControl(grpPrecAnnual)
+                grpPrecAnnual.Enabled = False
+            ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
+                grpPrecAnnual.Enabled = True
+            End If
+            grpPrecAnnualMonthly.Enabled = True
+        End If
+
+        If dlgClimdex.ucrReceiverTmax.IsEmpty Then
+            GroupBoxControl(grpTmaxAnnual)
+            GroupBoxControl(grpTmaxAnnualMonthly)
+            grpTmaxAnnualMonthly.Enabled = False
+            grpTmaxAnnual.Enabled = False
+        Else
+            If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
+                GroupBoxControl(grpTmaxAnnual)
+                grpTmaxAnnual.Enabled = False
+            ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
+                grpTmaxAnnual.Enabled = True
+            End If
+            grpTmaxAnnualMonthly.Enabled = True
+        End If
+
+        If dlgClimdex.ucrReceiverTmin.IsEmpty Then
+            GroupBoxControl(grpTminAnnual)
+            GroupBoxControl(grpTminAnnualMonthly)
+            grpTminAnnualMonthly.Enabled = False
+            grpTminAnnual.Enabled = False
+        Else
+            If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
+                GroupBoxControl(grpTminAnnual)
+                grpTminAnnual.Enabled = False
+            ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
+                grpTminAnnual.Enabled = True
+            End If
+            grpTminAnnualMonthly.Enabled = True
+        End If
+
+        If dlgClimdex.ucrReceiverTmin.IsEmpty OrElse dlgClimdex.ucrReceiverTmax.IsEmpty Then
+            GroupBoxControl(grpTmaxTminAnnual)
+            GroupBoxControl(grpTmaxTminAnnualMonthly)
+            grpTmaxTminAnnualMonthly.Enabled = False
+            grpTmaxTminAnnual.Enabled = False
+        Else
+            If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
+                GroupBoxControl(grpTmaxTminAnnual)
+                grpTmaxTminAnnual.Enabled = False
+            ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
+                grpTmaxTminAnnual.Enabled = True
+            End If
+            grpTmaxTminAnnualMonthly.Enabled = True
         End If
     End Sub
 End Class
