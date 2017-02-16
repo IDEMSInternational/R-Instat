@@ -17,13 +17,19 @@
 Imports instat.Translations
 Public Class dlgAddLink
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub dlgAddLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOKEnabled()
     End Sub
 
@@ -36,7 +42,23 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        'clsDefaultFunction.SetRCommand()
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ReopenDialog()
 
     End Sub
 
+    Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
 End Class
