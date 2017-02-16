@@ -75,7 +75,7 @@ Partial Class dlgExportToOpenRefine
         'UcrDialogDisabled1
         '
         Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(81, 55)
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(92, 55)
         Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
         Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
         Me.UcrDialogDisabled1.TabIndex = 5
