@@ -17,31 +17,34 @@
 
 Imports instat.Translations
 Public Class dlgBoxplotCountVariable
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgBoxplotCountVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
         TestOKEnabled()
-
-    End Sub
-
-    Private Sub TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("climate_obj$boxplot_method")
     End Sub
+
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
 
-    End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
+        'clsDefaultFunction.SetRCommand()
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub chkVarwidth_ValueChanged(sender As Object, e As EventArgs) Handles chkVarwidth.CheckedChanged
@@ -79,5 +82,21 @@ Public Class dlgBoxplotCountVariable
     Private Sub nudWhiskLineType_ValueChanged(sender As Object, e As EventArgs) Handles nudWhiskLineType.ValueChanged
         ucrBase.clsRsyntax.AddParameter("whiskerlty", nudWhiskLineType.Value.ToString())
 
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+    End Sub
+
+    Private Sub ReOpenDialog()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 End Class

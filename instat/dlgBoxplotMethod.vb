@@ -16,10 +16,35 @@
 
 Imports instat.Translations
 Public Class dlgBoxplotMethod
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$boxplot_method")
         ucrBase.clsRsyntax.iCallType = 0
+    End Sub
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+
+        'clsDefaultFunction.SetRCommand()
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub chkConvert_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvert.CheckedChanged
@@ -64,5 +89,21 @@ Public Class dlgBoxplotMethod
 
     Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
         ucrBase.clsRsyntax.AddParameter("title", Chr(34) & txtTitle.Text.ToString() & Chr(34))
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+    End Sub
+
+    Private Sub ReOpenDialog()
     End Sub
 End Class
