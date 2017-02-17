@@ -90,6 +90,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkTropicalNights = New instat.ucrCheck()
         Me.ucrChkFrostDays = New instat.ucrCheck()
         Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.tbClimdex.SuspendLayout()
         Me.TbSettings.SuspendLayout()
         Me.grpMaxMissingDays.SuspendLayout()
@@ -754,11 +755,21 @@ Partial Class sdgClimdexIndices
         Me.ucrButtonsClimdexIndices.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsClimdexIndices.TabIndex = 1
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(22, 511)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
+        Me.cmdHelp.TabIndex = 18
+        Me.cmdHelp.Text = "Indices Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'sdgClimdexIndices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(488, 557)
+        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.tbClimdex)
         Me.Controls.Add(Me.ucrButtonsClimdexIndices)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -861,4 +872,5 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrChkColdSpellDI As ucrCheck
     Friend WithEvents ucrChkTropicalNights As ucrCheck
     Friend WithEvents ucrChkFrostDays As ucrCheck
+    Friend WithEvents cmdHelp As Button
 End Class
