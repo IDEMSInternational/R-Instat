@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports instat
 Imports instat.Translations
 Public Class dlgPermuteColumn
     Private clsSetSampleFunc, clsSetSeedFunc, clsOverallFunction As New RFunction
@@ -46,6 +47,7 @@ Public Class dlgPermuteColumn
     Public Sub SetDefaults()
         Dim clsDefaultFunction, clsDefaultSample, clsDefaultSetSeed As New RFunction
         ucrPermuteRowsSelector.Reset()
+        SetNewColumName()
         clsDefaultSample.SetRCommand("sample")
         clsDefaultSample.AddParameter("replace", "FALSE")
         clsDefaultSample.AddParameter("size", iLength)
@@ -57,18 +59,18 @@ Public Class dlgPermuteColumn
         clsSetSampleFunc = clsDefaultSample.Clone
         clsOverallFunction = clsDefaultFunction.Clone
         clsOverallFunction.AddParameter("expr", clsRFunctionParameter:=clsSetSampleFunc)
-        SetNameForNewColumn()
         clsOverallFunction.AddParameter("n", 1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
     End Sub
 
-    Private Sub SetNameForNewColumn()
-        clsOverallFunction.SetAssignTo(strTemp:=ucrSavePermute.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePermute.GetText, bAssignToIsPrefix:=True)
+    Private Sub SetAssignTo()
+        Dim blsPrefix As Boolean
+        blsPrefix = (ucrNudNumberofColumns.Value > 1)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSavePermute.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePermute.GetText, bAssignToIsPrefix:=blsPrefix)
     End Sub
     Private Sub InitialiseDialog()
 
         ucrBase.iHelpTopicID = 66
-        SetNameForNewColumn()
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
         ucrReceiverPermuteRows.SetMeAsReceiver()
         ucrPermuteRowsSelector.ucrAvailableDataFrames.SetParameter(New RParameter("size", 1))
@@ -81,7 +83,7 @@ Public Class dlgPermuteColumn
         ucrNudNumberofColumns.Maximum = Integer.MaxValue
         ucrNudNumberofColumns.Minimum = 1
 
-        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSetSeed.SetText("Set Seed")
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.Maximum = Integer.MaxValue
@@ -90,7 +92,6 @@ Public Class dlgPermuteColumn
         ucrSavePermute.SetName("permute")
         ucrSavePermute.SetSaveTypeAsColumn()
         ucrSavePermute.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
-        ucrSavePermute.SetLabelText("Save Permute:")
         ucrSavePermute.SetIsComboBox()
     End Sub
 
@@ -119,13 +120,33 @@ Public Class dlgPermuteColumn
 
     End Sub
 
+    Private Sub SetNewColumName()
+        If ucrNudNumberofColumns.Value = 1 Then
+            ucrSavePermute.SetLabelText("New Column Name:")
+            If Not ucrSavePermute.bUserTyped Then
+                ucrSavePermute.SetPrefix("permute")
+            End If
+        Else
+            ucrSavePermute.SetLabelText("Prefix for New Columns:")
+            If Not ucrSavePermute.bUserTyped Then
+                ucrSavePermute.SetPrefix("")
+                ucrSavePermute.SetName("Permute")
+            End If
+        End If
+        SetAssignTo()
+    End Sub
+
     Private Sub DataFrameLength()
         iLength = ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength
         clsSetSampleFunc.AddParameter("size", iLength)
     End Sub
 
     Private Sub ucrPermuteRowsSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPermuteRowsSelector.ControlValueChanged
-        SetNameForNewColumn()
+        SetNewColumName()
         DataFrameLength()
+    End Sub
+
+    Private Sub ucrNudNumberofColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberofColumns.ControlContentsChanged
+        SetNewColumName()
     End Sub
 End Class
