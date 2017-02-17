@@ -90,9 +90,8 @@ Public Class dlgRandomSubsets
 
         ucrSelectorRandomSubsets.Reset()
 
-        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+
         sizes()
-        ReplaceParameters()
         NewDefaultName()
 
         ucrNudSetSeed.Visible = False
@@ -101,7 +100,9 @@ Public Class dlgRandomSubsets
         ClsDefaultSample.SetRCommand("sample")
         clsDefaultRepFunc.AddParameter("n", 1)
         ClsDefaultSample.AddParameter("replace", "FALSE")
+        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
         ClsDefaultSample.AddParameter("size", ucrNudSampleSize.Value)
+        ReplaceParameters()
         clsReplicateFunc = clsDefaultRepFunc
 
         clsDefaultSeed.SetRCommand("set.seed")
@@ -138,7 +139,7 @@ Public Class dlgRandomSubsets
     End Sub
 
     Private Sub NewDefaultName()
-        If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+        If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrNewDataframe.bUserTyped) Then
             ucrNewDataframe.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
     End Sub
