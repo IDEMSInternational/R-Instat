@@ -62,16 +62,16 @@ Partial Class dlgClimdex
         Me.lblPrec.Location = New System.Drawing.Point(286, 139)
         Me.lblPrec.Name = "lblPrec"
         Me.lblPrec.Size = New System.Drawing.Size(29, 13)
-        Me.lblPrec.TabIndex = 8
+        Me.lblPrec.TabIndex = 7
         Me.lblPrec.Tag = "Prec"
         Me.lblPrec.Text = "Prec"
         '
         'cmdIndices
         '
-        Me.cmdIndices.Location = New System.Drawing.Point(314, 198)
+        Me.cmdIndices.Location = New System.Drawing.Point(286, 193)
         Me.cmdIndices.Name = "cmdIndices"
         Me.cmdIndices.Size = New System.Drawing.Size(62, 23)
-        Me.cmdIndices.TabIndex = 23
+        Me.cmdIndices.TabIndex = 10
         Me.cmdIndices.Tag = "Indices..."
         Me.cmdIndices.Text = "Indices..."
         Me.cmdIndices.UseVisualStyleBackColor = True
@@ -104,7 +104,7 @@ Partial Class dlgClimdex
         Me.ucrReceiverPrec.Name = "ucrReceiverPrec"
         Me.ucrReceiverPrec.Selector = Nothing
         Me.ucrReceiverPrec.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPrec.TabIndex = 9
+        Me.ucrReceiverPrec.TabIndex = 8
         '
         'ucrReceiverTmin
         '
@@ -138,24 +138,24 @@ Partial Class dlgClimdex
         '
         'ucrBaseClimdex
         '
-        Me.ucrBaseClimdex.Location = New System.Drawing.Point(10, 227)
+        Me.ucrBaseClimdex.Location = New System.Drawing.Point(10, 222)
         Me.ucrBaseClimdex.Name = "ucrBaseClimdex"
         Me.ucrBaseClimdex.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseClimdex.TabIndex = 0
+        Me.ucrBaseClimdex.TabIndex = 11
         '
         'ucrChkSave
         '
         Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(10, 201)
+        Me.ucrChkSave.Location = New System.Drawing.Point(10, 196)
         Me.ucrChkSave.Name = "ucrChkSave"
         Me.ucrChkSave.Size = New System.Drawing.Size(107, 20)
-        Me.ucrChkSave.TabIndex = 52
+        Me.ucrChkSave.TabIndex = 9
         '
         'dlgClimdex
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 288)
+        Me.ClientSize = New System.Drawing.Size(424, 278)
         Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
