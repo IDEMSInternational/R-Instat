@@ -11,11 +11,13 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSetSeed, clsReplicateFunc, clsOverallFunction, clsSampleFunc As New RFunction
+    Dim ilength As Integer
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -46,25 +48,22 @@ Public Class dlgRandomSubsets
         'Set seed
         ' ucrChkSetSeed.AddFunctionNamesCondition("set.seed", True)
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
-        ucrNudSetSeed.Maximum = Integer.MaxValue
-        ucrNudSetSeed.Minimum = 1
-        ucrNudSetSeed.SetRDefault(1)
-        ucrChkSetSeed.SetText("Seed:")
+        ucrNudSetSeed.SetMinMax(1, Integer.MaxValue)
+        ucrChkSetSeed.SetText("Seed")
+
+        ucrSelectorRandomSubsets.ucrAvailableDataFrames.SetParameter(New RParameter("size", 2))
+        ucrSelectorRandomSubsets.SetParameterIsrfunction()
 
         'Replace checkbox
         ucrChkWithReplacement.SetParameter(New RParameter("replace", 1))
-        ucrChkWithReplacement.SetText("With Replacement:")
+        ucrChkWithReplacement.SetText("With Replacement")
         ucrChkWithReplacement.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWithReplacement.SetRDefault("FALSE")
 
         'Number of columns
         ucrNudNumberOfColumns.SetParameter(New RParameter("n", 2))
-        ucrNudNumberOfColumns.Minimum = 1
-        ucrNudNumberOfColumns.Maximum = Integer.MaxValue
-        ucrNudNumberOfColumns.SetRDefault(1)
+        ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
-        'sample size
-        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
 
         'Linking checkox and nud
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -91,22 +90,24 @@ Public Class dlgRandomSubsets
 
     'set defaults for the dialog
     Private Sub SetDefaults()
-        Dim clsDefaultFunction, ClsDefaultSample, clsDefaultSeed, clsDefaultRepFunc As New RFunction
+        Dim clsDefaultFunction, clsDefaultSeed, ClsDefaultSample,clsDefaultRepFunc As New RFunction
 
         ucrSelectorRandomSubsets.Reset()
-        ucrNudNumberOfColumns.Value = 1
-        ucrNudSetSeed.Value = 1
+        'ucrNudNumberOfColumns.Value = 1
+        ' ucrNudSetSeed.Value = 1
+        sizes()
         ucrNudSetSeed.Visible = False
         clsDefaultFunction.SetRCommand("data.frame")
         clsDefaultRepFunc.SetRCommand("replicate")
         ClsDefaultSample.SetRCommand("sample")
         clsDefaultRepFunc.AddParameter("n", 1)
         ClsDefaultSample.AddParameter("replace", "FALSE")
-        ClsDefaultSample.AddParameter("size", ucrNudSampleSize.Value)
+        ClsDefaultSample.AddParameter("size", ilength)
 
         clsDefaultSeed.SetRCommand("set.seed")
         clsDefaultSeed.AddParameter("seed", 1)
         clsSetSeed = clsDefaultSeed.Clone
+
 
         clsReplicateFunc = clsDefaultRepFunc.Clone
         clsSampleFunc = ClsDefaultSample.Clone
@@ -124,6 +125,7 @@ Public Class dlgRandomSubsets
         ucrReceiverSelected.SetRCode(clsSampleFunc, bReset)
         ucrChkWithReplacement.SetRCode(clsSampleFunc, bReset)
         ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
+        ucrNudSampleSize.SetRCode(clsSampleFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
 
@@ -148,8 +150,18 @@ Public Class dlgRandomSubsets
         TestOkEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged
+    Private Sub sizes()
+        'sample size
+       ilength = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+        clsSampleFunc.AddParameter("size", ilength)
+    End Sub
+
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrSelectorRandomSubsets.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrSelectorRandomSubsets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSubsets.ControlValueChanged
+        sizes()
+    End Sub
 End Class
