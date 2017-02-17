@@ -89,7 +89,6 @@ Partial Class sdgClimdexIndices
         Me.ucrChkColdSpellDI = New instat.ucrCheck()
         Me.ucrChkTropicalNights = New instat.ucrCheck()
         Me.ucrChkFrostDays = New instat.ucrCheck()
-        Me.ucrChkSave = New instat.ucrCheck()
         Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
         Me.tbClimdex.SuspendLayout()
         Me.TbSettings.SuspendLayout()
@@ -267,7 +266,7 @@ Partial Class sdgClimdexIndices
         'lblBaseRange
         '
         Me.lblBaseRange.AutoSize = True
-        Me.lblBaseRange.Location = New System.Drawing.Point(13, 6)
+        Me.lblBaseRange.Location = New System.Drawing.Point(284, 3)
         Me.lblBaseRange.Name = "lblBaseRange"
         Me.lblBaseRange.Size = New System.Drawing.Size(66, 13)
         Me.lblBaseRange.TabIndex = 45
@@ -276,7 +275,7 @@ Partial Class sdgClimdexIndices
         '
         'ucrMultipleInputBaseRange
         '
-        Me.ucrMultipleInputBaseRange.Location = New System.Drawing.Point(13, 23)
+        Me.ucrMultipleInputBaseRange.Location = New System.Drawing.Point(284, 20)
         Me.ucrMultipleInputBaseRange.Name = "ucrMultipleInputBaseRange"
         Me.ucrMultipleInputBaseRange.Size = New System.Drawing.Size(150, 29)
         Me.ucrMultipleInputBaseRange.TabIndex = 44
@@ -320,7 +319,7 @@ Partial Class sdgClimdexIndices
         'lblFreq
         '
         Me.lblFreq.AutoSize = True
-        Me.lblFreq.Location = New System.Drawing.Point(284, 6)
+        Me.lblFreq.Location = New System.Drawing.Point(10, 3)
         Me.lblFreq.Name = "lblFreq"
         Me.lblFreq.Size = New System.Drawing.Size(57, 13)
         Me.lblFreq.TabIndex = 36
@@ -340,7 +339,7 @@ Partial Class sdgClimdexIndices
         'ucrInputFreq
         '
         Me.ucrInputFreq.IsReadOnly = False
-        Me.ucrInputFreq.Location = New System.Drawing.Point(284, 27)
+        Me.ucrInputFreq.Location = New System.Drawing.Point(10, 24)
         Me.ucrInputFreq.Name = "ucrInputFreq"
         Me.ucrInputFreq.Size = New System.Drawing.Size(145, 21)
         Me.ucrInputFreq.TabIndex = 24
@@ -748,14 +747,6 @@ Partial Class sdgClimdexIndices
         Me.ucrChkFrostDays.Size = New System.Drawing.Size(100, 18)
         Me.ucrChkFrostDays.TabIndex = 79
         '
-        'ucrChkSave
-        '
-        Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(8, 506)
-        Me.ucrChkSave.Name = "ucrChkSave"
-        Me.ucrChkSave.Size = New System.Drawing.Size(107, 20)
-        Me.ucrChkSave.TabIndex = 51
-        '
         'ucrButtonsClimdexIndices
         '
         Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(169, 519)
@@ -768,7 +759,6 @@ Partial Class sdgClimdexIndices
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(488, 557)
-        Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.tbClimdex)
         Me.Controls.Add(Me.ucrButtonsClimdexIndices)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -837,7 +827,6 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrChkPrecExceed95Percent As ucrCheck
     Friend WithEvents ucrChkMaxWetSpell As ucrCheck
     Friend WithEvents ucrChkSimplePrecII As ucrCheck
-    Friend WithEvents ucrChkSave As ucrCheck
     Friend WithEvents tbTemperature As TabPage
 
     Private Sub ucrChkColdSpellDI_Load(sender As Object, e As EventArgs) Handles ucrChkColdSpellDI.Load

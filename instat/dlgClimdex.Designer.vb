@@ -33,12 +33,13 @@ Partial Class dlgClimdex
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimdex = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseClimdex = New instat.ucrButtons()
+        Me.ucrChkSave = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblTmax
         '
         Me.lblTmax.AutoSize = True
-        Me.lblTmax.Location = New System.Drawing.Point(286, 46)
+        Me.lblTmax.Location = New System.Drawing.Point(286, 63)
         Me.lblTmax.Name = "lblTmax"
         Me.lblTmax.Size = New System.Drawing.Size(33, 13)
         Me.lblTmax.TabIndex = 3
@@ -48,7 +49,7 @@ Partial Class dlgClimdex
         'lblTmin
         '
         Me.lblTmin.AutoSize = True
-        Me.lblTmin.Location = New System.Drawing.Point(286, 83)
+        Me.lblTmin.Location = New System.Drawing.Point(286, 100)
         Me.lblTmin.Name = "lblTmin"
         Me.lblTmin.Size = New System.Drawing.Size(30, 13)
         Me.lblTmin.TabIndex = 5
@@ -58,7 +59,7 @@ Partial Class dlgClimdex
         'lblPrec
         '
         Me.lblPrec.AutoSize = True
-        Me.lblPrec.Location = New System.Drawing.Point(286, 122)
+        Me.lblPrec.Location = New System.Drawing.Point(286, 139)
         Me.lblPrec.Name = "lblPrec"
         Me.lblPrec.Size = New System.Drawing.Size(29, 13)
         Me.lblPrec.TabIndex = 8
@@ -67,7 +68,7 @@ Partial Class dlgClimdex
         '
         'cmdIndices
         '
-        Me.cmdIndices.Location = New System.Drawing.Point(323, 172)
+        Me.cmdIndices.Location = New System.Drawing.Point(314, 198)
         Me.cmdIndices.Name = "cmdIndices"
         Me.cmdIndices.Size = New System.Drawing.Size(62, 23)
         Me.cmdIndices.TabIndex = 23
@@ -78,7 +79,7 @@ Partial Class dlgClimdex
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(286, 3)
+        Me.lblDate.Location = New System.Drawing.Point(286, 20)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(30, 13)
         Me.lblDate.TabIndex = 1
@@ -87,10 +88,8 @@ Partial Class dlgClimdex
         '
         'ucrReceiverDate
         '
-        Me.ucrReceiverDate.bAddRemoveParameter = True
-        Me.ucrReceiverDate.bChangeParameterValue = True
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(286, 22)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(286, 39)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -99,10 +98,8 @@ Partial Class dlgClimdex
         '
         'ucrReceiverPrec
         '
-        Me.ucrReceiverPrec.bAddRemoveParameter = True
-        Me.ucrReceiverPrec.bChangeParameterValue = True
         Me.ucrReceiverPrec.frmParent = Me
-        Me.ucrReceiverPrec.Location = New System.Drawing.Point(286, 139)
+        Me.ucrReceiverPrec.Location = New System.Drawing.Point(286, 156)
         Me.ucrReceiverPrec.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPrec.Name = "ucrReceiverPrec"
         Me.ucrReceiverPrec.Selector = Nothing
@@ -111,10 +108,8 @@ Partial Class dlgClimdex
         '
         'ucrReceiverTmin
         '
-        Me.ucrReceiverTmin.bAddRemoveParameter = True
-        Me.ucrReceiverTmin.bChangeParameterValue = True
         Me.ucrReceiverTmin.frmParent = Me
-        Me.ucrReceiverTmin.Location = New System.Drawing.Point(286, 99)
+        Me.ucrReceiverTmin.Location = New System.Drawing.Point(286, 116)
         Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmin.Name = "ucrReceiverTmin"
         Me.ucrReceiverTmin.Selector = Nothing
@@ -123,10 +118,8 @@ Partial Class dlgClimdex
         '
         'ucrReceiverTmax
         '
-        Me.ucrReceiverTmax.bAddRemoveParameter = True
-        Me.ucrReceiverTmax.bChangeParameterValue = True
         Me.ucrReceiverTmax.frmParent = Me
-        Me.ucrReceiverTmax.Location = New System.Drawing.Point(286, 62)
+        Me.ucrReceiverTmax.Location = New System.Drawing.Point(286, 79)
         Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmax.Name = "ucrReceiverTmax"
         Me.ucrReceiverTmax.Selector = Nothing
@@ -135,11 +128,9 @@ Partial Class dlgClimdex
         '
         'ucrSelectorClimdex
         '
-        Me.ucrSelectorClimdex.bAddRemoveParameter = True
-        Me.ucrSelectorClimdex.bChangeParameterValue = True
         Me.ucrSelectorClimdex.bShowHiddenColumns = False
         Me.ucrSelectorClimdex.bUseCurrentFilter = True
-        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 5)
+        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 3)
         Me.ucrSelectorClimdex.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimdex.Name = "ucrSelectorClimdex"
         Me.ucrSelectorClimdex.Size = New System.Drawing.Size(210, 180)
@@ -147,16 +138,25 @@ Partial Class dlgClimdex
         '
         'ucrBaseClimdex
         '
-        Me.ucrBaseClimdex.Location = New System.Drawing.Point(10, 201)
+        Me.ucrBaseClimdex.Location = New System.Drawing.Point(10, 227)
         Me.ucrBaseClimdex.Name = "ucrBaseClimdex"
         Me.ucrBaseClimdex.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseClimdex.TabIndex = 0
+        '
+        'ucrChkSave
+        '
+        Me.ucrChkSave.Checked = False
+        Me.ucrChkSave.Location = New System.Drawing.Point(10, 201)
+        Me.ucrChkSave.Name = "ucrChkSave"
+        Me.ucrChkSave.Size = New System.Drawing.Size(107, 20)
+        Me.ucrChkSave.TabIndex = 52
         '
         'dlgClimdex
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 267)
+        Me.ClientSize = New System.Drawing.Size(424, 288)
+        Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.cmdIndices)
@@ -192,4 +192,5 @@ Partial Class dlgClimdex
     Friend WithEvents cmdIndices As Button
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents ucrChkSave As ucrCheck
 End Class

@@ -16,7 +16,6 @@
 Imports instat
 Imports instat.Translations
 Public Class sdgClimdexIndices
-    Public bSaveIndex As Boolean = False
     Public bControlsInitialised As Boolean = False
     Public clsNewClimdexInput, clsRWriteDf As New RFunction
     Public clsRMaxMisingDays, clsROneArg, clsRTwoArg1, clsRTwoArg2, clsRTwoArg3, clsRTwoArg4, clsRTwoArg5, clsRThreeArg As New RFunction
@@ -198,10 +197,6 @@ Public Class sdgClimdexIndices
         ucrChkSpellDISpanYear.SetParameter(New RParameter("spells.can.span.years"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkSpellDISpanYear.SetRDefault("FALSE")
 
-        ucrChkSave.Checked = False
-        ucrChkSave.SetText("Save indices")
-        ucrChkSave.bChangeParameterValue = False
-
         ttClimdexIndices.SetToolTip(ucrChkFrostDays.chkCheck, "The annual count of days where daily minimum temperature drops below 0 degrees Celsius")
         ttClimdexIndices.SetToolTip(ucrChkSummerDays.chkCheck, "The annual count of days where daily maximum temperature exceeds 25 degrees Celsius")
         ttClimdexIndices.SetToolTip(ucrChkIcingDays.chkCheck, "The annual count of days where daily maximum temperature is below 0 degrees Celsius")
@@ -254,7 +249,7 @@ Public Class sdgClimdexIndices
         End If
     End Sub
 
-    Public Sub IndicesOptions()
+    Public Sub IndicesOptions(bSaveIndex As Boolean)
         If (ucrChkFrostDays.Checked = True) Then
             clsROneArg.SetRCommand("climdex.fd")
             SaveIndices(ucrChkFrostDays, clsROneArg, bSaveIndex)
@@ -420,14 +415,6 @@ Public Class sdgClimdexIndices
         ucrChkMaxSpellSpanYears.SetRCode(clsRTwoArg4, bReset)
         ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset)
         IndicesType()
-    End Sub
-
-    Private Sub ucrChkSave_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlContentsChanged
-        If ucrChkSave.Checked Then
-            bSaveIndex = True
-        Else
-            bSaveIndex = False
-        End If
     End Sub
 
     Private Sub ucrInputFreq_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFreq.ControlContentsChanged
