@@ -106,19 +106,15 @@ Partial Class dlgExportToCPT
         '
         'ucrLocationDataFrame
         '
-        Me.ucrLocationDataFrame.bAddRemoveParameter = True
-        Me.ucrLocationDataFrame.bChangeParameterValue = True
         Me.ucrLocationDataFrame.bUseCurrentFilter = True
         Me.ucrLocationDataFrame.Location = New System.Drawing.Point(10, 193)
         Me.ucrLocationDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrLocationDataFrame.Name = "ucrLocationDataFrame"
-        Me.ucrLocationDataFrame.Size = New System.Drawing.Size(120, 50)
+        Me.ucrLocationDataFrame.Size = New System.Drawing.Size(127, 50)
         Me.ucrLocationDataFrame.TabIndex = 8
         '
         'ucrReceiverMultipleDataColumns
         '
-        Me.ucrReceiverMultipleDataColumns.bAddRemoveParameter = True
-        Me.ucrReceiverMultipleDataColumns.bChangeParameterValue = True
         Me.ucrReceiverMultipleDataColumns.frmParent = Me
         Me.ucrReceiverMultipleDataColumns.Location = New System.Drawing.Point(280, 111)
         Me.ucrReceiverMultipleDataColumns.Margin = New System.Windows.Forms.Padding(0)
@@ -129,8 +125,6 @@ Partial Class dlgExportToCPT
         '
         'ucrReceiverDataColumn
         '
-        Me.ucrReceiverDataColumn.bAddRemoveParameter = True
-        Me.ucrReceiverDataColumn.bChangeParameterValue = True
         Me.ucrReceiverDataColumn.frmParent = Me
         Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(280, 164)
         Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
@@ -141,8 +135,6 @@ Partial Class dlgExportToCPT
         '
         'ucrReceiverStations
         '
-        Me.ucrReceiverStations.bAddRemoveParameter = True
-        Me.ucrReceiverStations.bChangeParameterValue = True
         Me.ucrReceiverStations.frmParent = Me
         Me.ucrReceiverStations.Location = New System.Drawing.Point(280, 111)
         Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
@@ -153,8 +145,6 @@ Partial Class dlgExportToCPT
         '
         'ucrReceiverYears
         '
-        Me.ucrReceiverYears.bAddRemoveParameter = True
-        Me.ucrReceiverYears.bChangeParameterValue = True
         Me.ucrReceiverYears.frmParent = Me
         Me.ucrReceiverYears.Location = New System.Drawing.Point(280, 55)
         Me.ucrReceiverYears.Margin = New System.Windows.Forms.Padding(0)
@@ -165,8 +155,6 @@ Partial Class dlgExportToCPT
         '
         'ucrSSTDataframe
         '
-        Me.ucrSSTDataframe.bAddRemoveParameter = True
-        Me.ucrSSTDataframe.bChangeParameterValue = True
         Me.ucrSSTDataframe.bShowHiddenColumns = False
         Me.ucrSSTDataframe.bUseCurrentFilter = True
         Me.ucrSSTDataframe.Location = New System.Drawing.Point(10, 5)
@@ -177,8 +165,6 @@ Partial Class dlgExportToCPT
         '
         'ucrInputExportFile
         '
-        Me.ucrInputExportFile.bAddRemoveParameter = True
-        Me.ucrInputExportFile.bChangeParameterValue = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
         Me.ucrInputExportFile.Location = New System.Drawing.Point(72, 251)
@@ -188,8 +174,6 @@ Partial Class dlgExportToCPT
         '
         'ucrChkLong
         '
-        Me.ucrChkLong.bAddRemoveParameter = True
-        Me.ucrChkLong.bChangeParameterValue = True
         Me.ucrChkLong.Checked = False
         Me.ucrChkLong.Location = New System.Drawing.Point(280, 17)
         Me.ucrChkLong.Name = "ucrChkLong"
