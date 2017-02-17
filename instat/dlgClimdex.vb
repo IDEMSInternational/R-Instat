@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgClimdex
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Public bSaveIndex As Boolean = True
     Private bResetSubdialog As Boolean = False
     Public clsDefaultFunction As New RFunction
     Public clsRDataName, clsRTmax, clsRTmin, clsRPrec, clsRDate, clsRPCIct, clsRChar As New RFunction
@@ -41,6 +42,7 @@ Public Class dlgClimdex
         ucrSelectorClimdex.Reset()
         ucrSelectorClimdex.Focus()
         ucrReceiverDate.SetMeAsReceiver()
+        ucrChkSave.Checked = True
 
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("climdexInput.raw")
@@ -91,6 +93,9 @@ Public Class dlgClimdex
         ucrReceiverPrec.Selector = ucrSelectorClimdex
         ucrReceiverPrec.SetParameter(New RParameter("col_name"))
         ucrReceiverPrec.SetParameterIsString()
+
+        ucrChkSave.SetText("Save indices")
+        ucrChkSave.bChangeParameterValue = False
     End Sub
 
     Private Sub TestOkEnabled()
@@ -154,7 +159,7 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub ucrBaseClimdex_clickok(sender As Object, e As EventArgs) Handles ucrBaseClimdex.ClickOk
-        sdgClimdexIndices.IndicesOptions()
+        sdgClimdexIndices.IndicesOptions(bSaveIndex)
     End Sub
 
     Private Sub AssignName()
@@ -164,5 +169,13 @@ Public Class dlgClimdex
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimdex.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged
         TestOkEnabled()
         sdgClimdexIndices.IndicesType() 'is this the right implementation?
+    End Sub
+
+    Private Sub ucrChkSave_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlContentsChanged
+        If ucrChkSave.Checked Then
+            bSaveIndex = True
+        Else
+            bSaveIndex = False
+        End If
     End Sub
 End Class
