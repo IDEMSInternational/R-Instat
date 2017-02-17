@@ -90,9 +90,9 @@ Public Class dlgRandomSubsets
 
         ucrSelectorRandomSubsets.Reset()
 
-
-        sizes()
         NewDefaultName()
+        sizes()
+        ReplaceParameters()
 
         ucrNudSetSeed.Visible = False
         clsDefaultFunction.SetRCommand("data.frame")
@@ -102,7 +102,6 @@ Public Class dlgRandomSubsets
         ClsDefaultSample.AddParameter("replace", "FALSE")
         ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
         ClsDefaultSample.AddParameter("size", ucrNudSampleSize.Value)
-        ReplaceParameters()
         clsReplicateFunc = clsDefaultRepFunc
 
         clsDefaultSeed.SetRCommand("set.seed")
@@ -162,7 +161,7 @@ Public Class dlgRandomSubsets
             ucrNudSampleSize.SetMinMax(1, Integer.MaxValue)
         Else
             clsSampleFunc.AddParameter("replace", "FALSE")
-            ucrNudSampleSize.SetMinMax(1, ucrNudSampleSize.Value)
+            ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         End If
     End Sub
 
