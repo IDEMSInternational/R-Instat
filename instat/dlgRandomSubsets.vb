@@ -86,12 +86,11 @@ Public Class dlgRandomSubsets
 
     'set defaults for the dialog
     Private Sub SetDefaults()
-        Dim clsDefaultFunction, clsDefaultSeed, ClsDefaultSample,clsDefaultRepFunc As New RFunction
+        Dim clsDefaultFunction, clsDefaultSeed, ClsDefaultSample, clsDefaultRepFunc As New RFunction
 
         ucrSelectorRandomSubsets.Reset()
 
         NewDefaultName()
-        sizes()
         ReplaceParameters()
 
         ucrNudSetSeed.Visible = False
@@ -101,6 +100,7 @@ Public Class dlgRandomSubsets
         clsDefaultRepFunc.AddParameter("n", 1)
         ClsDefaultSample.AddParameter("replace", "FALSE")
         ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+        ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         ClsDefaultSample.AddParameter("size", ucrNudSampleSize.Value)
         clsReplicateFunc = clsDefaultRepFunc
 
@@ -123,8 +123,8 @@ Public Class dlgRandomSubsets
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSelected.SetRCode(clsSampleFunc, bReset)
         ucrChkWithReplacement.SetRCode(clsSampleFunc, bReset)
-        ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
         ucrNudSampleSize.SetRCode(clsSampleFunc, bReset)
+        ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
 
@@ -170,9 +170,17 @@ Public Class dlgRandomSubsets
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorRandomSubsets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSubsets.ControlValueChanged, ucrChkWithReplacement.ControlValueChanged, ucrNudSampleSize.ControlValueChanged
+    Private Sub ucrSelectorRandomSubsets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSubsets.ControlValueChanged
         NewDefaultName()
         ReplaceParameters()
         sizes()
+    End Sub
+
+    Private Sub ucrChkWithReplacement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithReplacement.ControlValueChanged
+        ReplaceParameters()
+    End Sub
+
+    Private Sub ucrNudSampleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSampleSize.ControlValueChanged
+        clsSampleFunc.AddParameter("size", ucrNudSampleSize.Value)
     End Sub
 End Class
