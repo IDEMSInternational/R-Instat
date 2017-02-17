@@ -80,6 +80,7 @@ Public Class dlgRandomSubsets
         ReplaceParameters()
 
         ucrNudSetSeed.Visible = False
+        ucrChkSetSeed.Checked = False
         clsDefaultFunction.SetRCommand("data.frame")
         clsDefaultRepFunc.SetRCommand("replicate")
         ClsDefaultSample.SetRCommand("sample")
@@ -106,8 +107,8 @@ Public Class dlgRandomSubsets
 
     End Sub
 
-    Private Sub TestOkEnabled()
-        If (Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.GetText <> "") OrElse (ucrNudSetSeed.GetText() <> "") Then
+    Private Sub TestOKEnabled()
+        If (Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.GetText <> "") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -158,8 +159,8 @@ Public Class dlgRandomSubsets
     End Sub
 
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrSelectorRandomSubsets.ControlContentsChanged
-        TestOkEnabled()
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrNewDataframe.ControlContentsChanged, ucrChkSetSeed.ControlValueChanged
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorRandomSubsets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSubsets.ControlValueChanged
