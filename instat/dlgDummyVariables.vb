@@ -33,7 +33,7 @@ Public Class dlgDummyVariables
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFactor.IsEmpty Then
+        If Not ucrReceiverFactor.IsEmpty AndAlso ucrChkWithXVariable.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
