@@ -17,7 +17,6 @@ Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSetSeed, clsReplicateFunc, clsOverallFunction, clsSampleFunc As New RFunction
-    ' Dim ilength As Integer
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -30,8 +29,6 @@ Public Class dlgRandomSubsets
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOkEnabled()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -45,7 +42,6 @@ Public Class dlgRandomSubsets
         ucrReceiverSelected.SetParameterIsRFunction()
 
         'Set seed
-        ' ucrChkSetSeed.AddFunctionNamesCondition("set.seed", True)
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.SetMinMax(1, Integer.MaxValue)
         ucrChkSetSeed.SetText("Seed")
@@ -72,23 +68,13 @@ Public Class dlgRandomSubsets
         ucrNewDataframe.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
 
-
     End Sub
 
-    'checks when to enable ok button
-    Private Sub TestOkEnabled()
-        If Not ucrReceiverSelected.IsEmpty AndAlso ucrNudNumberOfColumns.GetText() <> "" AndAlso ucrNudSetSeed.GetText() <> "" AndAlso ucrNudSampleSize.GetText() <> "" AndAlso ucrNewDataframe.GetText <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    'set defaults for the dialog
     Private Sub SetDefaults()
         Dim clsDefaultFunction, clsDefaultSeed, ClsDefaultSample, clsDefaultRepFunc As New RFunction
 
         ucrSelectorRandomSubsets.Reset()
+        ucrNewDataframe.Reset()
 
         NewDefaultName()
         ReplaceParameters()
@@ -106,7 +92,7 @@ Public Class dlgRandomSubsets
 
         clsDefaultSeed.SetRCommand("set.seed")
         clsDefaultSeed.AddParameter("seed", 1)
-        clsSetSeed = clsDefaultSeed.Clone
+        clsSetSeed = clsDefaultSeed
 
 
         clsSampleFunc = ClsDefaultSample
@@ -120,10 +106,17 @@ Public Class dlgRandomSubsets
 
     End Sub
 
+    Private Sub TestOkEnabled()
+        If (Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.GetText <> "") OrElse (ucrNudSetSeed.GetText() <> "") Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSelected.SetRCode(clsSampleFunc, bReset)
         ucrChkWithReplacement.SetRCode(clsSampleFunc, bReset)
-        ucrNudSampleSize.SetRCode(clsSampleFunc, bReset)
         ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
@@ -150,7 +143,6 @@ Public Class dlgRandomSubsets
     End Sub
 
     Private Sub sizes()
-        'sample size
         ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
         clsSampleFunc.AddParameter("size", ucrNudSampleSize.Value)
     End Sub
