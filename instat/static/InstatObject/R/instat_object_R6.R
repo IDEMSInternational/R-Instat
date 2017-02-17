@@ -1127,8 +1127,7 @@ instat_object$set("public", "add_climdex_indices", function(data_name, indices =
     month_col = self$get_climatic_column_name(data_name, month_label)
     key_list = list("Year", "Month")
     names(key_list) = c(as.name(year_col), as.name(month_col))
-    if(self$get_linked_to_data_name(data_name, c(Year="Year", Month = "Month"))==""){
-      warning("monthly_data is missing, it will be created.")
+    if(self$get_linked_to_data_name(data_name, key_list)==""){
       data_list = list(my_data)
       names(data_list) = paste(data_name, "monthly", sep = "_")
       self$import_data(data_tables = data_list)
@@ -1136,8 +1135,9 @@ instat_object$set("public", "add_climdex_indices", function(data_name, indices =
       self$add_link(from_data_frame = data_name, to_data_frame = paste(data_name, "monthly", sep = "_"), link_pairs = key_list, type = keyed_link_label)
     }
     else{
-      self$merge_data(by=c("Year_month","Year", "Month"), data_name = self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
-    } 
+      #self$merge_data(by=c("Year_month","Year", "Month"), data_name = self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
+      self$merge_data(data_name = self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
+    }
   }
   else{
     yy = as.data.frame(indices[[1]],row.names = NULL)
@@ -1156,9 +1156,11 @@ instat_object$set("public", "add_climdex_indices", function(data_name, indices =
       self$add_link(from_data_frame = data_name, to_data_frame = paste(data_name, "yearly", sep = "_"), link_pairs = key_list, type = keyed_link_label)
     }
     else{
-      self$merge_data(by=c("Year"), data_name=self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
+      #self$merge_data(by=c("Year"), data_name=self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
+      self$merge_data(data_name=self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
     }
   }
+  
 }
 )
 
