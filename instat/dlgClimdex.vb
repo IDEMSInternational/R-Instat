@@ -78,19 +78,27 @@ Public Class dlgClimdex
         ucrSelectorClimdex.SetParameterIsString()
 
         ucrReceiverDate.Selector = ucrSelectorClimdex
-        ucrReceiverDate.SetDataType("Date")
+        ucrReceiverDate.SetClimaticType("date")
+        'ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {"date"})
+        ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.SetParameter(New RParameter("col_name"))
         ucrReceiverDate.SetParameterIsString()
 
         ucrReceiverTmax.Selector = ucrSelectorClimdex
+        ucrReceiverTmax.SetClimaticType("temp_max")
+        ucrReceiverTmax.bAutoFill = True
         ucrReceiverTmax.SetParameter(New RParameter("col_name"))
         ucrReceiverTmax.SetParameterIsString()
 
         ucrReceiverTmin.Selector = ucrSelectorClimdex
+        ucrReceiverTmin.SetClimaticType("temp_min")
+        ucrReceiverTmin.bAutoFill = True
         ucrReceiverTmin.SetParameter(New RParameter("col_name"))
         ucrReceiverTmin.SetParameterIsString()
 
         ucrReceiverPrec.Selector = ucrSelectorClimdex
+        ucrReceiverPrec.SetClimaticType("rain")
+        ucrReceiverPrec.bAutoFill = True
         ucrReceiverPrec.SetParameter(New RParameter("col_name"))
         ucrReceiverPrec.SetParameterIsString()
 
@@ -108,6 +116,7 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub ReopenDialog()
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
