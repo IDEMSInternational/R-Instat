@@ -40,24 +40,21 @@ Public Class dlgDescribeOneVariable
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultSummaryFunc As New RFunction
-        Dim clsDefaultInstatSummaryFunc As New RFunction
-        Dim clsDefaultSummariesListFunc As New RFunction
 
         ucrSelectorDescribeOneVar.Reset()
 
-        clsDefaultSummariesListFunc.SetRCommand("c")
-        clsDefaultSummariesListFunc.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
-        clsDefaultSummariesListFunc.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
-        clsDefaultSummariesListFunc.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList = clsDefaultSummariesListFunc
+        clsSummariesList = New RFunction
+        clsSummariesList.SetRCommand("c")
+        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
-        clsDefaultSummaryFunc.SetRCommand("summary")
-        clsSummaryFunction = clsDefaultSummaryFunc
+        clsSummaryFunction = New RFunction
+        clsSummaryFunction.SetRCommand("summary")
 
-        clsDefaultInstatSummaryFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
-        clsDefaultInstatSummaryFunc.AddParameter("return_output", "TRUE")
-        clsInstatSummaryFunction = clsDefaultInstatSummaryFunc
+        clsInstatSummaryFunction = New RFunction
+        clsInstatSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
+        clsInstatSummaryFunction.AddParameter("return_output", "TRUE")
         clsInstatSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
 
         'These two controls go in both functions and their parameter name is different for each function
