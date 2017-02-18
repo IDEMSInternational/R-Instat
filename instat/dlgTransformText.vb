@@ -73,12 +73,13 @@ Public Class dlgTransformText
         ucrInputTo.SetLinkedDisplayControl(lblTo)
 
         'rdoPad
-        ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Space")
         ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrInputPad.bAllowNonConditionValues = True
 
         'ucrInputPad
         Dim dctInputPad As New Dictionary(Of String, String)
-        ucrInputPad.SetParameter(New RParameter("pad", ))
+        ucrInputPad.SetParameter(New RParameter("pad", 2))
         dctInputPad.Add("Space", Chr(34) & " " & Chr(34))
         dctInputPad.Add("Hash", Chr(34) & "#" & Chr(34))
         dctInputPad.Add("Hyphen", Chr(34) & "-" & Chr(34))
@@ -90,22 +91,25 @@ Public Class dlgTransformText
         ucrInputPad.bAllowNonConditionValues = True
 
         'ucrNudWidth
-        ucrNudWidth.SetParameter(New RParameter("width"))
+        ucrNudWidth.SetParameter(New RParameter("width", 3))
         ucrNudWidth.SetLinkedDisplayControl(lblWidth)
 
         'rdoTrim and pnl
         ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad, rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlPad
-        ucrPnlPad.SetParameter(New RParameter("side"))
+        ucrPnlPad.bAllowNonConditionValues = True
+        ucrPnlPad.SetParameter(New RParameter("side", 1))
         ucrPnlPad.AddRadioButton(rdoLeftPad, Chr(34) & "left" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoRightPad, Chr(34) & "right" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoBothPad, Chr(34) & "both" & Chr(34))
         ucrPnlPad.SetRDefault(Chr(34) & "left" & Chr(34))
 
         'rdoWords
-        ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Space")
-        ' There is no default set here. However, if I use the above line then I get a developer error. Similarly so for ucrInputPad
+        ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) 'bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Space")
+        ' ucrInputSeparator.bAllowNonConditionValues = True
+
+        'TODO change rdo buttons, can set it to that function with .AddParameter(...)
+        'TODO have different default functions, reset all in setdefaults. Switch between just change base function
 
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
@@ -121,7 +125,7 @@ Public Class dlgTransformText
 
         ' ucrInputSeparator
         Dim dctInputSeparator As New Dictionary(Of String, String)
-        ucrInputSeparator.SetParameter(New RParameter("sep"))
+        ucrInputSeparator.SetParameter(New RParameter("sep", 1))
         dctInputSeparator.Add("Space", Chr(34) & " " & Chr(34))
         dctInputSeparator.Add("Colon", Chr(34) & ":" & Chr(34))
         dctInputSeparator.Add("Period", Chr(34) & "." & Chr(34))
@@ -135,10 +139,10 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         'ucrNud
-        ucrNudFrom.SetParameter(New RParameter("start"))
+        ucrNudFrom.SetParameter(New RParameter("start", 1))
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
 
-        ucrNudTo.SetParameter(New RParameter("end"))
+        ucrNudTo.SetParameter(New RParameter("end", 2))
         ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
 
         'ucrNewColName
@@ -175,23 +179,23 @@ Public Class dlgTransformText
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
         If rdoLength.Checked Then
-            ucrBase.clsRsyntax.SetFunction("stringr::str_length")
+            ucrBase.clsRsyntax.SetFunction("str_length")
         ElseIf rdoPad.Checked Then
-            ucrBase.clsRsyntax.SetFunction("stringr::str_pad")
+            ucrBase.clsRsyntax.SetFunction("str_pad")
         ElseIf rdoTrim.Checked Then
-            ucrBase.clsRsyntax.SetFunction("stringr::str_trim")
+            ucrBase.clsRsyntax.SetFunction("str_trim")
         ElseIf rdoWords.Checked Then
-            ucrBase.clsRsyntax.SetFunction("stringr::word")
+            ucrBase.clsRsyntax.SetFunction("word")
         ElseIf rdoSubstring.Checked Then
-            ucrBase.clsRsyntax.SetFunction("stringr::str_sub")
+            ucrBase.clsRsyntax.SetFunction("str_sub")
         ElseIf rdoConvertCase.Checked Then
             Select Case ucrInputTo.GetText
                 Case "Lower"
-                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
+                    ucrBase.clsRsyntax.SetFunction("str_to_lower")
                 Case "Upper"
-                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_upper")
+                    ucrBase.clsRsyntax.SetFunction("str_to_upper")
                 Case "Title"
-                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
+                    ucrBase.clsRsyntax.SetFunction("str_to_title")
             End Select
         End If
         TestOkEnabled()
