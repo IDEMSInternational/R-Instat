@@ -16,23 +16,32 @@
 
 Imports instat.Translations
 Public Class dlgAddComment
-    Dim bUseSelectedColumn As Boolean = False
-    Dim strSelectedColumn As String = ""
-    Dim strSelectedDataFrame As String = ""
+    Public bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
+    Private strSelectedDataFrame As String = ""
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgAddComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
         TestOKEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
         strSelectedColumn = strColumn
@@ -49,48 +58,24 @@ Public Class dlgAddComment
         ucrBase.iHelpTopicID = 508
         ucrReceiverColumn.Selector = ucrSelectorAddComment
         ucrReceiverColumn.SetMeAsReceiver()
+        ucrPnlCellOrRow.AddRadioButton(rdoCell)
+        ucrPnlCellOrRow.AddRadioButton(rdoRow)
+        ucrPnlCellOrRow.AddToLinkedControls(ucrReceiverRow, {rdoRow}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
     End Sub
     Private Sub TestOKEnabled()
 
     End Sub
 
     Private Sub SetDefaults()
-        'Setting Defaults
-        ucrDataFrame.Visible = True
         ucrSelectorAddComment.Reset()
         ucrSelectorAddComment.Visible = False
-        rdoRow.Checked = True
-        rdoCell.Checked = False
-        ucrReceiverRow.Enabled = False
-        ucrReceiverColumn.Enabled = False
-        lblColumn.Enabled = False
-        lblRow.Enabled = False
         ucrInputComment.IsMultiline = True
-    End Sub
-
-    Private Sub rdoRow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRow.CheckedChanged, rdoCell.CheckedChanged
-        'Setting radio buttons events
-        If rdoRow.Checked Then
-            ucrDataFrame.Visible = True
-            ucrSelectorAddComment.Visible = False
-            ucrReceiverRow.Enabled = False
-            lblColumn.Enabled = False
-            lblRow.Enabled = False
-        Else
-            ucrReceiverRow.SetMeAsReceiver()
-            ucrSelectorAddComment.Visible = True
-            ucrReceiverRow.Enabled = True
-            ucrReceiverColumn.Enabled = True
-            ucrReceiverRow.Enabled = True
-            lblColumn.Enabled = True
-            lblRow.Enabled = True
-            ucrDataFrame.Visible = False
-        End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
