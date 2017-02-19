@@ -19,8 +19,7 @@ Imports instat.Translations
 Public Class dlgTransformText
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
-    Private clsConvertFunction, clsPadFunction, clsTrimFunction, clsWordsFunction, clsSubStringFunction As New RFunction
+    Private clsConvertFunction, clsLengthFunction, clsPadFunction, clsTrimFunction, clsWordsFunction, clsSubStringFunction As New RFunction
 
     Private Sub dlgTransformText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -155,8 +154,8 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsPadDefaultFunction As New RFunction
-        clsDefaultFunction = New RFunction
+        Dim clsConvertDefaultFunction As New RFunction
+        Dim clsPadDefaultFunction, clsLengthDefaultFunction As New RFunction
 
         rdoConvertCase.Checked = True
         ucrNewColName.Reset()
@@ -169,8 +168,12 @@ Public Class dlgTransformText
         NewDefaultName()
         WordsTab()
 
-        clsDefaultFunction.SetRCommand("str_to_lower")
-        clsDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+        clsConvertDefaultFunction.SetRCommand("str_to_lower")
+        clsConvertDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+
+
+        clsLengthDefaultFunction.SetRCommand("str_length")
+        clsLengthDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
         clsPadDefaultFunction.SetRCommand("str_pad")
         clsPadDefaultFunction.AddParameter("pad", Chr(34) & " " & Chr(34))
@@ -178,11 +181,13 @@ Public Class dlgTransformText
         clsPadDefaultFunction.AddParameter("width", 1)
         clsPadDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
+
         '        clsWordsFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsConvertDefaultFunction)
         clsPadFunction = clsPadDefaultFunction
-        ' cal 
+        clsLengthFunction = clsLengthDefaultFunction
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -192,8 +197,9 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
+
         If rdoLength.Checked Then
-            ucrBase.clsRsyntax.SetFunction("str_length")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
         ElseIf rdoPad.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
         ElseIf rdoTrim.Checked Then
@@ -203,6 +209,7 @@ Public Class dlgTransformText
         ElseIf rdoSubstring.Checked Then
             ucrBase.clsRsyntax.SetFunction("str_sub")
         ElseIf rdoConvertCase.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
             Select Case ucrInputTo.GetText
                 Case "Lower"
                     ucrBase.clsRsyntax.SetFunction("str_to_lower")
@@ -216,8 +223,10 @@ Public Class dlgTransformText
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)  ' how to call in the main rcode for all?
-        ucrReceiverTransformText.SetRCode(clsDefaultFunction, bReset)
+        ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
+        ucrInputTo.SetRCode(clsConvertFunction, bReset)
+
+        ucrReceiverTransformText.SetRCode(clsPadFunction, bReset) ' but also this is for all functions. How do I do that?
         ucrInputPad.SetRCode(clsPadFunction, bReset)
         ucrPnlPad.SetRCode(clsPadFunction, bReset)
         ucrNudWidth.SetRCode(clsPadFunction, bReset)
