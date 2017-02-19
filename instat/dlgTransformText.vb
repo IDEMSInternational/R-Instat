@@ -171,7 +171,6 @@ Public Class dlgTransformText
         clsConvertDefaultFunction.SetRCommand("str_to_lower")
         clsConvertDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
-
         clsLengthDefaultFunction.SetRCommand("str_length")
         clsLengthDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
@@ -220,16 +219,24 @@ Public Class dlgTransformText
             End Select
         End If
         TestOkEnabled()
+        ChangeRCode()
+    End Sub
+
+    Private Sub ChangeRCode()
+        If rdoConvertCase.Checked Then
+            ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
+            ucrInputTo.SetRCode(clsConvertFunction, bReset)
+        ElseIf rdoPad.Checked Then
+            ucrReceiverTransformText.SetRCode(clsPadFunction, bReset)
+            ucrInputPad.SetRCode(clsPadFunction, bReset)
+            ucrPnlPad.SetRCode(clsPadFunction, bReset)
+            ucrNudWidth.SetRCode(clsPadFunction, bReset)
+        Else
+        End If
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
-        ucrInputTo.SetRCode(clsConvertFunction, bReset)
-
-        ucrReceiverTransformText.SetRCode(clsPadFunction, bReset) ' but also this is for all functions. How do I do that?
-        ucrInputPad.SetRCode(clsPadFunction, bReset)
-        ucrPnlPad.SetRCode(clsPadFunction, bReset)
-        ucrNudWidth.SetRCode(clsPadFunction, bReset)
+        ChangeRCode()
     End Sub
 
     Private Sub TestOkEnabled()
