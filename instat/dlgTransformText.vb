@@ -19,6 +19,8 @@ Imports instat.Translations
 Public Class dlgTransformText
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
+    Private clsConvertFunction, clsPadFunction, clsTrimFunction, clsWordsFunction, clsSubStringFunction As New RFunction
 
     Private Sub dlgTransformText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -73,8 +75,8 @@ Public Class dlgTransformText
         ucrInputTo.SetLinkedDisplayControl(lblTo)
 
         'rdoPad
-        ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Space")
-        ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputPad.bAllowNonConditionValues = True
 
         'ucrInputPad
@@ -153,8 +155,10 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-        rdoConvertCase.Checked = True ' this should run WordsTab()?
+        Dim clsPadDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
+
+        rdoConvertCase.Checked = True
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
         ucrChkFirstOr.Checked = False
@@ -168,7 +172,17 @@ Public Class dlgTransformText
         clsDefaultFunction.SetRCommand("str_to_lower")
         clsDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
+        clsPadDefaultFunction.SetRCommand("str_pad")
+        clsPadDefaultFunction.AddParameter("pad", Chr(34) & " " & Chr(34))
+        clsPadDefaultFunction.AddParameter("side", Chr(34) & "left" & Chr(34))
+        clsPadDefaultFunction.AddParameter("width", 1)
+        clsPadDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+
+        '        clsWordsFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsPadFunction = clsPadDefaultFunction
+        ' cal 
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -181,7 +195,7 @@ Public Class dlgTransformText
         If rdoLength.Checked Then
             ucrBase.clsRsyntax.SetFunction("str_length")
         ElseIf rdoPad.Checked Then
-            ucrBase.clsRsyntax.SetFunction("str_pad")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
         ElseIf rdoTrim.Checked Then
             ucrBase.clsRsyntax.SetFunction("str_trim")
         ElseIf rdoWords.Checked Then
@@ -202,7 +216,11 @@ Public Class dlgTransformText
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)  ' how to call in the main rcode for all?
+        ucrReceiverTransformText.SetRCode(clsDefaultFunction, bReset)
+        ucrInputPad.SetRCode(clsPadFunction, bReset)
+        ucrPnlPad.SetRCode(clsPadFunction, bReset)
+        ucrNudWidth.SetRCode(clsPadFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
