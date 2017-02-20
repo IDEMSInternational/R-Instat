@@ -80,43 +80,55 @@ Public Class dlgMakeDate
         ucrInputMonth.SetItems({"Numerical", "Partial Word", "Full Word"})
         ucrInputMonthOption.SetItems({"Numerical", "Partial Word", "Full Word"})
 
-        'Dim lstYearItems As New List(Of KeyValuePair(Of String, String))
-        'lstYearItems.Add(New KeyValuePair(Of String, String)("4 Digit", Chr(34) & "%Y" & Chr(34)))
-        'lstYearItems.Add(New KeyValuePair(Of String, String)("2 Digit", Chr(34) & "%y" & Chr(34)))
-        'ucrInputYear.SetItems(lstYearItems)
-        'ucrInputYearOption.SetItems(lstYearItems)
 
-        'Dim lstMonthItems As New List(Of KeyValuePair(Of String, String))
-        'lstMonthItems.Add(New KeyValuePair(Of String, String)("Numerical", Chr(34) & "%m" & Chr(34)))
-        'lstMonthItems.Add(New KeyValuePair(Of String, String)("Partial Word", Chr(34) & "%b" & Chr(34)))
-        'lstMonthItems.Add(New KeyValuePair(Of String, String)("Full Word", Chr(34) & "%B" & Chr(34)))
-        'ucrInputMonth.SetItems(lstMonthItems)
-        'ucrInputMonthOption.SetItems(lstMonthItems)
+        'Dim dctYearItems As New Dictionary(Of String, String)
+        'dctYearItems.Add("4 Digit", Chr(34) & "%Y" & Chr(34))
+        'dctYearItems.Add("2 Digit", Chr(34) & "%y" & Chr(34))
+        'ucrInputYear.SetItems(dctYearItems)
+        'ucrInputYearOption.SetItems(dctYearItems)
+
+
+        'Dim dctMonthItems As New Dictionary(Of String, String)
+        'dctMonthItems.Add("Numerical", Chr(34) & "%m" & Chr(34))
+        'dctMonthItems.Add("Partial Word", Chr(34) & "%b" & Chr(34))
+        'dctMonthItems.Add("Full Word", Chr(34) & "%B" & Chr(34))
+        'ucrInputMonth.SetItems(dctMonthItems)
+        'ucrInputMonthOption.SetItems(dctMonthItems)
         ucrInputDayOption.SetItems({"By Month"})
-        'Dim lstDayItems As New List(Of KeyValuePair(Of String, String))
-        'lstDayItems.Add(New KeyValuePair(Of String, String)("By Month", Chr(34) & "%d" & Chr(34)))
-        'ucrInputDayOption.SetItems(lstDayItems)
+
+
+        'Dim dctDayItems As New Dictionary(Of String, String)
+        'dctDayItems.Add("By Month", Chr(34) & "%d" & Chr(34))
+        'ucrInputDayOption.SetItems(dctDayItems)
         ucrInputDay.SetItems({"By Month", "By Year"})
-        'Dim lstDayItemsDOY As New List(Of KeyValuePair(Of String, String))
-        'lstDayItemsDOY.Add(New KeyValuePair(Of String, String)("By Month", Chr(34) & "%d" & Chr(34)))
-        'lstDayItemsDOY.Add(New KeyValuePair(Of String, String)("By Year", Chr(34) & "%j" & Chr(34)))
-        'ucrInputDay.SetItems(lstDayItemsDOY)
+
+
+        'Dim dctDayItemsDOY As New Dictionary(Of String, String)
+        'dctDayItemsDOY.Add("By Month", Chr(34) & "%d" & Chr(34))
+        'dctDayItemsDOY.Add("By Year", Chr(34) & "%j" & Chr(34))
+        'ucrInputDay.SetItems(dctDayItemsDOY)
         ucrInputComboBoxMonthTwo.SetItems({"365/366", "366"})
-        'Dim lstMonthTwoItems As New List(Of KeyValuePair(Of String, String))
-        'lstMonthTwoItems.Add(New KeyValuePair(Of String, String)("365/366", Chr(34) & "365/366" & Chr(34)))
-        'lstMonthTwoItems.Add(New KeyValuePair(Of String, String)("366", Chr(34) & "366" & Chr(34)))
-        'ucrInputComboBoxMonthTwo.SetItems(lstMonthTwoItems)
+
+
+        'Dim dctMonthTwoItems As New Dictionary(Of String, String)
+        'dctMonthTwoItems.Add("365/366", Chr(34) & "365/366" & Chr(34))
+        'dctMonthTwoItems.Add("366", Chr(34) & "366" & Chr(34))
+        'ucrInputComboBoxMonthTwo.SetItems(dctMonthTwoItems)
         ucrInputFormat.SetItems({"Year-Month-Day", "Year/Month/Day", "Day-Month-Year"})
-        'Dim lstDateFormat As New List(Of KeyValuePair(Of String, String))
-        'lstDateFormat.Add(New KeyValuePair(Of String, String)("Year-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34)))
-        'lstDateFormat.Add(New KeyValuePair(Of String, String)("Year/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34)))
-        'lstDateFormat.Add(New KeyValuePair(Of String, String)("Day-Month-Year", Chr(34) & "%d%m%Y" & Chr(34)))
-        'ucrInputFormat.SetItems(lstDateFormat)
+
+
+        'Dim dctDateFormat As New Dictionary(Of String, String)
+        'dctDateFormat.Add("Year-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
+        'dctDateFormat.Add("Year/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
+        'dctDateFormat.Add("Day-Month-Year", Chr(34) & "%d%m%Y" & Chr(34))
+        'ucrInputFormat.SetItems(dctDateFormat)
+
+
         ucrInputOrigin.SetItems({"Excel", "Gregorian"})
-        'Dim lstDateOrigin As New List(Of KeyValuePair(Of String, String))
-        'lstDateOrigin.Add(New KeyValuePair(Of String, String)("Excel", Chr(34) & "30-12-1899" & Chr(34)))
-        'lstDateOrigin.Add(New KeyValuePair(Of String, String)("Gregorian", Chr(34) & "01-03-1600" & Chr(34)))
-        'ucrInputOrigin.SetItems(lstDateOrigin)
+        'Dim dctdateorigin As New Dictionary(Of String, String)
+        'dctdateorigin.Add("excel", Chr(34) & "30-12-1899" & Chr(34))
+        'dctdateorigin.Add("gregorian", Chr(34) & "01-03-1600" & Chr(34))
+        'ucrInputOrigin.SetItems(dctdateorigin)
 
 
 
