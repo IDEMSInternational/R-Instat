@@ -1111,7 +1111,7 @@ instat_object$set("public", "remove_key", function(data_name, key_name) {
 )
 
 instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual") {
-  if(!self$get_combined_metadata_value(data_name, is_climatic_label))stop("Define data as climatic.")
+  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label))stop("Define data as climatic.")
   mix_monthly_annual = c("Monthly_Minimum_of_Daily_Minimum_Temperature", "Percentage_of_Days_When_Tmax_is_Above_90th_Percentile","Percentage_of_Days_When_Tmin_is_Above_90th_Percentile","Percentage_of_Days_When_Tmax_is_Below_10th_Percentile","Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", "Monthly_Maximum_Consecutive_5day_Precipitation", "Monthly_Maximum_1day_Precipitation","Monthly_Maximum_of_Daily_Maximum_Temperature", "Monthly_Maximum_of_Daily_Minimum_Temperature","Monthly_Minimum_of_Daily_Maximum_Temperature", "Mean_Diurnal_Temperature_Range")
   
   if(((names(indices) %in% mix_monthly_annual) && freq=="monthly")){
@@ -1164,13 +1164,6 @@ instat_object$set("public", "add_climdex_indices", function(data_name, indices =
 }
 )
 
- instat_object$set("public", "get_combined_metadata_value", function(data_name, property) {
-   if(!self$is_metadata(data_name, property))stop(paste(property, " is not a metadata column."))
-   #new_data = self$get_combined_metadata()
-   return(self$get_combined_metadata()[data_name, property])
- }
-)
- 
 instat_object$set("public", "is_metadata", function(data_name, str) {
   self$get_data_objects(data_name)$is_metadata(str = str)
 }
