@@ -11,6 +11,7 @@
 'You should have received a copy of the GNU General Public License 
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
+Imports instat
 Imports instat.Translations
 Public Class dlgExportToOpenRefine
 
@@ -36,7 +37,7 @@ Public Class dlgExportToOpenRefine
         ucrOpenRefineDataFrame.Reset()
         ucrInputDatasetName.Reset()
 
-        NewDefultName()
+        NewDefaultName()
         clsDefaultWrite.SetRCommand("write.csv")
         clsDefaultWrite.AddParameter("x", ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem)
         clsDefaultWrite.AddParameter("row.names", "FALSE")
@@ -51,17 +52,19 @@ Public Class dlgExportToOpenRefine
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRefine.Clone())
 
-        ucrBase.OKEnabled(False)
+        'ucrBase.OKEnabled(False)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
-    Private Sub NewDefultName()
+
+    Private Sub NewDefaultName()
         If (ucrOpenRefineDataFrame.cboAvailableDataFrames.Text <> "") AndAlso (Not ucrInputDatasetName.bUserTyped) Then
             ucrInputDatasetName.SetName(ucrOpenRefineDataFrame.cboAvailableDataFrames.SelectedItem & "_clean_up")
         End If
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 466
 
@@ -75,11 +78,11 @@ Public Class dlgExportToOpenRefine
 
     End Sub
     Private Sub TestOKEnabled()
-        'If Not ucrInputDatasetName.IsEmpty Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
+        If Not ucrInputDatasetName.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -92,11 +95,15 @@ Public Class dlgExportToOpenRefine
         frmMain.clsRLink.RunScript(clsWriteToCSV.ToScript(), strComment:="Convert the data set to csv")
     End Sub
 
-    Private Sub ucrOpenRefineDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged, ucrInputDatasetName.ControlContentsChanged
-        NewDefultName()
+    Private Sub ucrOpenRefineDataFrame_ControlValueChaed(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged
+        NewDefaultName()
     End Sub
 
     Private Sub ucrOpenRefineDataFrame_ContentsChanged() Handles ucrOpenRefineDataFrame.ControlContentsChanged, ucrInputDatasetName.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputDatasetName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDatasetName.ControlValueChanged
+        NewDefaultName()
     End Sub
 End Class
