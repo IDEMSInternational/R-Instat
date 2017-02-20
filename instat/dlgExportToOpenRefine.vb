@@ -78,11 +78,11 @@ Public Class dlgExportToOpenRefine
 
     End Sub
     Private Sub TestOKEnabled()
-        If Not ucrInputDatasetName.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If Not ucrInputDatasetName.IsEmpty Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
