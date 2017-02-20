@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.Imports instat
-Imports instat
 Imports instat.Translations
 
 Public Class dlgMovingAverage
@@ -52,6 +51,9 @@ Public Class dlgMovingAverage
         'ucrSave
         ucrSaveResultsInto.SetCheckBoxText("Save Results into:")
         ucrSaveResultsInto.SetIsComboBox()
+
+        ucrBase.OKEnabled(False)
+        TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
