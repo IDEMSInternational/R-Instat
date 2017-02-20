@@ -131,18 +131,15 @@ Public Class dlgScatterPlot
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsOverallFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
 
-
-        '        clsDefaultFunction.SetRCommand( ) ' no main function on the base, several run and are connected by operations
-        ' which do I set SetAssignTo to? The first of the list? (ggplot)
         '        bResetSubdialog = True
     End Sub
 
     Private Sub TestOkEnabled()
         'tests when okay Is enable. Both x and y aesthetics are mandatory but can be set to x="" or(exclusive) y="" in case the other one is filled. 
-        If (Not ucrReceiverX.IsEmpty() OrElse Not ucrVariablesAsFactorForScatter.IsEmpty) AndAlso ucrSaveGraph.IsComplete AndAlso ucrVariablesAsFactorForScatter.IsEmpty Then
+        If (Not ucrReceiverX.IsEmpty() OrElse Not ucrVariablesAsFactorForScatter.IsEmpty) AndAlso ucrSaveGraph.IsComplete AndAlso Not ucrVariablesAsFactorForScatter.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(True)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
