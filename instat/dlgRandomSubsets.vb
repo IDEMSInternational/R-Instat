@@ -95,7 +95,6 @@ Public Class dlgRandomSubsets
         clsDefaultSeed.AddParameter("seed", 1)
         clsSetSeed = clsDefaultSeed
 
-
         clsSampleFunc = ClsDefaultSample
 
         clsOverallFunction = clsDefaultFunction.Clone
