@@ -402,7 +402,9 @@ Public Class ucrInput
     End Property
 
     Protected Overrides Sub SetToValue(objTemp As Object)
-        SetName(objTemp.ToString())
+        If objTemp IsNot Nothing Then
+            SetName(objTemp.ToString())
+        End If
     End Sub
 
     Public Overrides Function GetValueToSet() As Object
@@ -419,11 +421,11 @@ Public Class ucrInput
                 End If
             ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
                 Return clsParameter.clsArgumentCodeStructure
-                Else
-                    Return Nothing
+            Else
+                Return ""
             End If
         Else
-            Return Nothing
+            Return ""
         End If
     End Function
 
