@@ -59,6 +59,10 @@ Public Class dlgMakeDate
         ucrReceiverMonthThree.bUseFilteredData = False
         ucrReceiverDayThree.bUseFilteredData = False
 
+
+
+        ucrPanelDate.SetParameter(New RParameter(""))
+
         'ucrSave Date Column
         ucrSaveDate.SetPrefix("Date")
         ucrSaveDate.SetSaveTypeAsColumn()
@@ -135,9 +139,16 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        'reset
         ucrSaveDate.Reset()
         ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
+
+        clsDefaultFunction.SetRCommand("as.Date")
+        clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+
+
         rdoSingleColumn.Checked = True
         rdoSpecifyFormat.Checked = False
         rdoDefaultFormat.Checked = True
@@ -160,9 +171,11 @@ Public Class dlgMakeDate
         chkMore.Checked = False
         chkMore.Visible = True
         Formats()
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText, bAssignToIsPrefix:=False)
+
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -224,11 +237,11 @@ Public Class dlgMakeDate
     End Sub
 
     'Private Sub SetAssignTo()
-    '    ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText, bAssignToIsPrefix:=False)
     'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
@@ -300,12 +313,12 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.RemoveParameter("year_format")
             ucrBase.clsRsyntax.RemoveParameter("doy_typical_length")
             'Receivers
-            ucrBase.clsRsyntax.SetFunction("as.Date")
-            If Not ucrReceiverForDate.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("x")
-            End If
+            'ucrBase.clsRsyntax.SetFunction("as.Date")
+            'If Not ucrReceiverForDate.IsEmpty Then
+            '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+            'Else
+            '    ucrBase.clsRsyntax.RemoveParameter("x")
+            'End If
 
             ' Check Boxes/ Radio Buttons
             If chkMore.Checked Then
@@ -318,10 +331,12 @@ Public Class dlgMakeDate
                 ucrInputFormat.Visible = False
                 ucrInputOrigin.Visible = True
                 ucrBase.clsRsyntax.RemoveParameter("format")
+
                 If Not ucrInputOrigin.IsEmpty Then
                     ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
                     If ucrInputOrigin.GetText = "Excel" Then
-                        ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "30-12-1899" & Chr(34))
+                        ucrReceiverForDate.SetParameter(New RParameter("origin"))
+                        ucrPanelDate.AddRadioButton(rdoSpecifyOrigin, Chr(34) & "30-12-1899" & Chr(34))
                     ElseIf ucrInputOrigin.GetText = "Gregorian" Then
                         ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "01-03-1600" & Chr(34))
                     Else
@@ -475,7 +490,7 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Sub ucrInputNewColumnName_ContentsChanged()
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
