@@ -52,7 +52,7 @@ Public Class dlgExportToOpenRefine
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRefine.Clone())
 
-        'ucrBase.OKEnabled(False)
+        ' ucrBase.OKEnabled(False)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -77,12 +77,12 @@ Public Class dlgExportToOpenRefine
         ucrchkOpenBrowser.SetText("Open Browser")
 
     End Sub
-    Private Sub TestOKEnabled()
-        'If Not ucrInputDatasetName.IsEmpty Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
+    'Private Sub TestOKEnabled()
+    '    If Not ucrInputDatasetName.IsEmpty Then
+    '        ucrBase.OKEnabled(True)
+    '    Else
+    '        ucrBase.OKEnabled(False)
+    '    End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -95,7 +95,7 @@ Public Class dlgExportToOpenRefine
         frmMain.clsRLink.RunScript(clsWriteToCSV.ToScript(), strComment:="Convert the data set to csv")
     End Sub
 
-    Private Sub ucrOpenRefineDataFrame_ControlValueChaed(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged, ucrInputDatasetName.ControlValueChanged
+    Private Sub ucrOpenRefineDataFrame_ControlValueChaed(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged
         NewDefaultName()
     End Sub
 
