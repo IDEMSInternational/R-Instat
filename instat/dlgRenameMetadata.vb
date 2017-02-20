@@ -13,16 +13,14 @@
 '
 Imports instat.Translations
 Public Class dlgRenameMetadata
-    Public bFirstLoad As Boolean = True
+    private bFirstLoad As Boolean = True
     Private Sub dlgRenameMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            setDefaults()
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        setDefaults()
         TestOKEnabled()
     End Sub
 
