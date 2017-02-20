@@ -39,9 +39,9 @@ Public Class dlgViewAndRemoveKeys
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
-
-
+        'reset
         ucrSelectorKeys.Reset()
+        ucrChkRemoveKey.Checked = False
 
         ' Set default RFunction as the base function
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_key")
@@ -56,7 +56,7 @@ Public Class dlgViewAndRemoveKeys
     Private Sub InitialiseDialog()
 
         ucrBase.iHelpTopicID = 505
-        ucrRemoveKey.Checked = False
+        ucrChkRemoveKey.Checked = False
 
         'Setting Receiver
         ucrReceiverSelectedKey.Selector = ucrSelectorKeys
@@ -68,20 +68,18 @@ Public Class dlgViewAndRemoveKeys
         ucrSelectorKeys.SetParameter(New RParameter("data_name", 0))
         ucrSelectorKeys.SetParameterIsString()
 
-        ucrRemoveKey.SetText("Remove Key")
-
-
+        ucrChkRemoveKey.SetText("Remove Key")
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSelectedKey.IsEmpty AndAlso ucrRemoveKey.Checked Then
+        If Not ucrReceiverSelectedKey.IsEmpty AndAlso ucrChkRemoveKey.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorKeys.ControlContentsChanged, ucrReceiverSelectedKey.ControlContentsChanged, ucrRemoveKey.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedKey.ControlContentsChanged, ucrChkRemoveKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
