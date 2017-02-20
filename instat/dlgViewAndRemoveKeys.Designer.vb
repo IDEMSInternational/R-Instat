@@ -26,7 +26,7 @@ Partial Class dlgViewAndRemoveKeys
         Me.ucrSelectorKeys = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSelectedKey = New instat.ucrReceiverSingle()
         Me.lblSelectedKey = New System.Windows.Forms.Label()
-        Me.ucrRemoveKey = New instat.ucrCheck()
+        Me.ucrChkRemoveKey = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -38,8 +38,6 @@ Partial Class dlgViewAndRemoveKeys
         '
         'ucrSelectorKeys
         '
-        Me.ucrSelectorKeys.bAddRemoveParameter = True
-        Me.ucrSelectorKeys.bChangeParameterValue = True
         Me.ucrSelectorKeys.bShowHiddenColumns = False
         Me.ucrSelectorKeys.bUseCurrentFilter = True
         Me.ucrSelectorKeys.Location = New System.Drawing.Point(13, 13)
@@ -50,8 +48,6 @@ Partial Class dlgViewAndRemoveKeys
         '
         'ucrReceiverSelectedKey
         '
-        Me.ucrReceiverSelectedKey.bAddRemoveParameter = True
-        Me.ucrReceiverSelectedKey.bChangeParameterValue = True
         Me.ucrReceiverSelectedKey.frmParent = Me
         Me.ucrReceiverSelectedKey.Location = New System.Drawing.Point(269, 56)
         Me.ucrReceiverSelectedKey.Margin = New System.Windows.Forms.Padding(0)
@@ -63,28 +59,26 @@ Partial Class dlgViewAndRemoveKeys
         'lblSelectedKey
         '
         Me.lblSelectedKey.AutoSize = True
-        Me.lblSelectedKey.Location = New System.Drawing.Point(272, 37)
+        Me.lblSelectedKey.Location = New System.Drawing.Point(266, 41)
         Me.lblSelectedKey.Name = "lblSelectedKey"
         Me.lblSelectedKey.Size = New System.Drawing.Size(73, 13)
         Me.lblSelectedKey.TabIndex = 1
         Me.lblSelectedKey.Text = "Selected Key:"
         '
-        'ucrRemoveKey
+        'ucrChkRemoveKey
         '
-        Me.ucrRemoveKey.bAddRemoveParameter = True
-        Me.ucrRemoveKey.bChangeParameterValue = True
-        Me.ucrRemoveKey.Checked = False
-        Me.ucrRemoveKey.Location = New System.Drawing.Point(269, 84)
-        Me.ucrRemoveKey.Name = "ucrRemoveKey"
-        Me.ucrRemoveKey.Size = New System.Drawing.Size(145, 20)
-        Me.ucrRemoveKey.TabIndex = 3
+        Me.ucrChkRemoveKey.Checked = False
+        Me.ucrChkRemoveKey.Location = New System.Drawing.Point(269, 79)
+        Me.ucrChkRemoveKey.Name = "ucrChkRemoveKey"
+        Me.ucrChkRemoveKey.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkRemoveKey.TabIndex = 3
         '
         'dlgViewAndRemoveKeys
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 256)
-        Me.Controls.Add(Me.ucrRemoveKey)
+        Me.ClientSize = New System.Drawing.Size(423, 253)
+        Me.Controls.Add(Me.ucrChkRemoveKey)
         Me.Controls.Add(Me.lblSelectedKey)
         Me.Controls.Add(Me.ucrReceiverSelectedKey)
         Me.Controls.Add(Me.ucrSelectorKeys)
@@ -104,5 +98,5 @@ Partial Class dlgViewAndRemoveKeys
     Friend WithEvents ucrSelectorKeys As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverSelectedKey As ucrReceiverSingle
     Friend WithEvents lblSelectedKey As Label
-    Friend WithEvents ucrRemoveKey As ucrCheck
+    Friend WithEvents ucrChkRemoveKey As ucrCheck
 End Class
