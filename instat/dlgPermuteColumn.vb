@@ -87,9 +87,7 @@ Public Class dlgPermuteColumn
         ucrChkSetSeed.SetText("Set Seed")
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.Maximum = Integer.MaxValue
-        ucrNudSetSeed.Minimum = Integer.MinValue
 
-        ucrSavePermute.SetName("permute")
         ucrSavePermute.SetSaveTypeAsColumn()
         ucrSavePermute.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
         ucrSavePermute.SetIsComboBox()
@@ -130,7 +128,7 @@ Public Class dlgPermuteColumn
             ucrSavePermute.SetLabelText("Prefix for New Columns:")
             If Not ucrSavePermute.bUserTyped Then
                 ucrSavePermute.SetPrefix("")
-                ucrSavePermute.SetName("Permute")
+                ucrSavePermute.SetName("permute")
             End If
         End If
         SetAssignTo()
@@ -146,7 +144,7 @@ Public Class dlgPermuteColumn
         DataFrameLength()
     End Sub
 
-    Private Sub ucrNudNumberofColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberofColumns.ControlContentsChanged
+    Private Sub ucrNudNumberofColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberofColumns.ControlValueChanged
         SetNewColumName()
     End Sub
 End Class
