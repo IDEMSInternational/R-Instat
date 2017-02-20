@@ -95,7 +95,7 @@ Public Class dlgExportToOpenRefine
         frmMain.clsRLink.RunScript(clsWriteToCSV.ToScript(), strComment:="Convert the data set to csv")
     End Sub
 
-    Private Sub ucrOpenRefineDataFrame_ControlValueChaed(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged
+    Private Sub ucrOpenRefineDataFrame_ControlValueChaed(ucrChangedControl As ucrCore) Handles ucrOpenRefineDataFrame.ControlValueChanged, ucrInputDatasetName.ControlValueChanged
         NewDefaultName()
     End Sub
 
@@ -103,7 +103,4 @@ Public Class dlgExportToOpenRefine
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputDatasetName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDatasetName.ControlValueChanged
-        NewDefaultName()
-    End Sub
 End Class
