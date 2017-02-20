@@ -38,7 +38,7 @@ Public Class dlgPermuteColumn
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrNudNumberofColumns.SetRCode(clsOverallFunction, bReset)
+        ucrNudNumberOfColumns.SetRCode(clsOverallFunction, bReset)
         ucrReceiverPermuteRows.SetRCode(clsSetSampleFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeedFunc, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeedFunc, bReset)
@@ -47,6 +47,7 @@ Public Class dlgPermuteColumn
     Public Sub SetDefaults()
         Dim clsDefaultFunction, clsDefaultSample, clsDefaultSetSeed As New RFunction
         ucrPermuteRowsSelector.Reset()
+        ucrSavePermute.Reset()
         SetNewColumName()
         clsDefaultSample.SetRCommand("sample")
         clsDefaultSample.AddParameter("replace", "FALSE")
@@ -59,13 +60,15 @@ Public Class dlgPermuteColumn
         clsSetSampleFunc = clsDefaultSample.Clone
         clsOverallFunction = clsDefaultFunction.Clone
         clsOverallFunction.AddParameter("expr", clsRFunctionParameter:=clsSetSampleFunc)
-        clsOverallFunction.AddParameter("n", 1)
+        ucrNudNumberOfColumns.Value = 1
+        clsOverallFunction.AddParameter("n", ucrNudNumberOfColumns.Value)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
+        SetAssignTo()
     End Sub
 
     Private Sub SetAssignTo()
         Dim blsPrefix As Boolean
-        blsPrefix = (ucrNudNumberofColumns.Value > 1)
+        blsPrefix = (ucrNudNumberOfColumns.Value > 1)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSavePermute.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePermute.GetText, bAssignToIsPrefix:=blsPrefix)
     End Sub
     Private Sub InitialiseDialog()
@@ -79,9 +82,9 @@ Public Class dlgPermuteColumn
         ucrReceiverPermuteRows.SetParameter(New RParameter("x", 0))
         ucrReceiverPermuteRows.SetParameterIsRFunction()
 
-        ucrNudNumberofColumns.SetParameter(New RParameter("n", 1))
-        ucrNudNumberofColumns.Maximum = Integer.MaxValue
-        ucrNudNumberofColumns.Minimum = 1
+        ucrNudNumberOfColumns.SetParameter(New RParameter("n", 1))
+        ucrNudNumberOfColumns.Maximum = Integer.MaxValue
+        ucrNudNumberOfColumns.Minimum = 1
 
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSetSeed.SetText("Set Seed")
@@ -91,6 +94,7 @@ Public Class dlgPermuteColumn
         ucrSavePermute.SetSaveTypeAsColumn()
         ucrSavePermute.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
         ucrSavePermute.SetIsComboBox()
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -119,7 +123,7 @@ Public Class dlgPermuteColumn
     End Sub
 
     Private Sub SetNewColumName()
-        If ucrNudNumberofColumns.Value = 1 Then
+        If ucrNudNumberOfColumns.Value = 1 Then
             ucrSavePermute.SetLabelText("New Column Name:")
             If Not ucrSavePermute.bUserTyped Then
                 ucrSavePermute.SetPrefix("permute")
@@ -144,7 +148,10 @@ Public Class dlgPermuteColumn
         DataFrameLength()
     End Sub
 
-    Private Sub ucrNudNumberofColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberofColumns.ControlValueChanged
+    Private Sub ucrNudNumberofColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfColumns.ControlValueChanged
+        clsOverallFunction.AddParameter("n", ucrNudNumberOfColumns.Value)
         SetNewColumName()
+
     End Sub
+
 End Class
