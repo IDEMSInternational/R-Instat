@@ -627,7 +627,7 @@ Partial Class sdgClimdexIndices
         'ucrChkMonthlyMaxDailyTMax
         '
         Me.ucrChkMonthlyMaxDailyTMax.Checked = False
-        Me.ucrChkMonthlyMaxDailyTMax.Location = New System.Drawing.Point(8, 32)
+        Me.ucrChkMonthlyMaxDailyTMax.Location = New System.Drawing.Point(8, 14)
         Me.ucrChkMonthlyMaxDailyTMax.Name = "ucrChkMonthlyMaxDailyTMax"
         Me.ucrChkMonthlyMaxDailyTMax.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkMonthlyMaxDailyTMax.TabIndex = 1
@@ -635,7 +635,7 @@ Partial Class sdgClimdexIndices
         'ucrChkTmaxAbove90Percent
         '
         Me.ucrChkTmaxAbove90Percent.Checked = False
-        Me.ucrChkTmaxAbove90Percent.Location = New System.Drawing.Point(8, 51)
+        Me.ucrChkTmaxAbove90Percent.Location = New System.Drawing.Point(8, 69)
         Me.ucrChkTmaxAbove90Percent.Name = "ucrChkTmaxAbove90Percent"
         Me.ucrChkTmaxAbove90Percent.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkTmaxAbove90Percent.TabIndex = 2
@@ -643,7 +643,7 @@ Partial Class sdgClimdexIndices
         'ucrChkTmaxBelow10Percent
         '
         Me.ucrChkTmaxBelow10Percent.Checked = False
-        Me.ucrChkTmaxBelow10Percent.Location = New System.Drawing.Point(8, 70)
+        Me.ucrChkTmaxBelow10Percent.Location = New System.Drawing.Point(8, 50)
         Me.ucrChkTmaxBelow10Percent.Name = "ucrChkTmaxBelow10Percent"
         Me.ucrChkTmaxBelow10Percent.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkTmaxBelow10Percent.TabIndex = 3
@@ -651,7 +651,7 @@ Partial Class sdgClimdexIndices
         'ucrChkMonthlyMinDailyTMax
         '
         Me.ucrChkMonthlyMinDailyTMax.Checked = False
-        Me.ucrChkMonthlyMinDailyTMax.Location = New System.Drawing.Point(8, 15)
+        Me.ucrChkMonthlyMinDailyTMax.Location = New System.Drawing.Point(8, 33)
         Me.ucrChkMonthlyMinDailyTMax.Name = "ucrChkMonthlyMinDailyTMax"
         Me.ucrChkMonthlyMinDailyTMax.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkMonthlyMinDailyTMax.TabIndex = 0
@@ -683,7 +683,7 @@ Partial Class sdgClimdexIndices
         'ucrChkMonthlyMinDailyTMin
         '
         Me.ucrChkMonthlyMinDailyTMin.Checked = False
-        Me.ucrChkMonthlyMinDailyTMin.Location = New System.Drawing.Point(8, 52)
+        Me.ucrChkMonthlyMinDailyTMin.Location = New System.Drawing.Point(8, 35)
         Me.ucrChkMonthlyMinDailyTMin.Name = "ucrChkMonthlyMinDailyTMin"
         Me.ucrChkMonthlyMinDailyTMin.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkMonthlyMinDailyTMin.TabIndex = 2
@@ -699,7 +699,7 @@ Partial Class sdgClimdexIndices
         'ucrChkTminBelow10Percent
         '
         Me.ucrChkTminBelow10Percent.Checked = False
-        Me.ucrChkTminBelow10Percent.Location = New System.Drawing.Point(8, 35)
+        Me.ucrChkTminBelow10Percent.Location = New System.Drawing.Point(8, 53)
         Me.ucrChkTminBelow10Percent.Name = "ucrChkTminBelow10Percent"
         Me.ucrChkTminBelow10Percent.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkTminBelow10Percent.TabIndex = 1
@@ -739,7 +739,7 @@ Partial Class sdgClimdexIndices
         'ucrChkPrecExceedSpecifiedA
         '
         Me.ucrChkPrecExceedSpecifiedA.Checked = False
-        Me.ucrChkPrecExceedSpecifiedA.Location = New System.Drawing.Point(7, 204)
+        Me.ucrChkPrecExceedSpecifiedA.Location = New System.Drawing.Point(6, 88)
         Me.ucrChkPrecExceedSpecifiedA.Name = "ucrChkPrecExceedSpecifiedA"
         Me.ucrChkPrecExceedSpecifiedA.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkPrecExceedSpecifiedA.TabIndex = 8
@@ -747,7 +747,7 @@ Partial Class sdgClimdexIndices
         'ucrChkMaxDrySpell
         '
         Me.ucrChkMaxDrySpell.Checked = False
-        Me.ucrChkMaxDrySpell.Location = New System.Drawing.Point(7, 180)
+        Me.ucrChkMaxDrySpell.Location = New System.Drawing.Point(6, 111)
         Me.ucrChkMaxDrySpell.Name = "ucrChkMaxDrySpell"
         Me.ucrChkMaxDrySpell.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkMaxDrySpell.TabIndex = 7
@@ -755,7 +755,7 @@ Partial Class sdgClimdexIndices
         'ucrChkPrecExceed95Percent
         '
         Me.ucrChkPrecExceed95Percent.Checked = False
-        Me.ucrChkPrecExceed95Percent.Location = New System.Drawing.Point(7, 114)
+        Me.ucrChkPrecExceed95Percent.Location = New System.Drawing.Point(6, 157)
         Me.ucrChkPrecExceed95Percent.Name = "ucrChkPrecExceed95Percent"
         Me.ucrChkPrecExceed95Percent.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkPrecExceed95Percent.TabIndex = 4
@@ -763,7 +763,7 @@ Partial Class sdgClimdexIndices
         'ucrChkPrecExceed10mm
         '
         Me.ucrChkPrecExceed10mm.Checked = False
-        Me.ucrChkPrecExceed10mm.Location = New System.Drawing.Point(7, 156)
+        Me.ucrChkPrecExceed10mm.Location = New System.Drawing.Point(6, 42)
         Me.ucrChkPrecExceed10mm.Name = "ucrChkPrecExceed10mm"
         Me.ucrChkPrecExceed10mm.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkPrecExceed10mm.TabIndex = 6
@@ -771,7 +771,7 @@ Partial Class sdgClimdexIndices
         'ucrChkMaxWetSpell
         '
         Me.ucrChkMaxWetSpell.Checked = False
-        Me.ucrChkMaxWetSpell.Location = New System.Drawing.Point(7, 66)
+        Me.ucrChkMaxWetSpell.Location = New System.Drawing.Point(6, 134)
         Me.ucrChkMaxWetSpell.Name = "ucrChkMaxWetSpell"
         Me.ucrChkMaxWetSpell.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkMaxWetSpell.TabIndex = 2
@@ -779,7 +779,7 @@ Partial Class sdgClimdexIndices
         'ucrChkPrecExceed20mm
         '
         Me.ucrChkPrecExceed20mm.Checked = False
-        Me.ucrChkPrecExceed20mm.Location = New System.Drawing.Point(7, 43)
+        Me.ucrChkPrecExceed20mm.Location = New System.Drawing.Point(6, 65)
         Me.ucrChkPrecExceed20mm.Name = "ucrChkPrecExceed20mm"
         Me.ucrChkPrecExceed20mm.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkPrecExceed20mm.TabIndex = 1
@@ -787,7 +787,7 @@ Partial Class sdgClimdexIndices
         'ucrChkPrecExceed99Percent
         '
         Me.ucrChkPrecExceed99Percent.Checked = False
-        Me.ucrChkPrecExceed99Percent.Location = New System.Drawing.Point(7, 90)
+        Me.ucrChkPrecExceed99Percent.Location = New System.Drawing.Point(6, 180)
         Me.ucrChkPrecExceed99Percent.Name = "ucrChkPrecExceed99Percent"
         Me.ucrChkPrecExceed99Percent.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkPrecExceed99Percent.TabIndex = 3
@@ -795,7 +795,7 @@ Partial Class sdgClimdexIndices
         'ucrChkTotalDailyPrec
         '
         Me.ucrChkTotalDailyPrec.Checked = False
-        Me.ucrChkTotalDailyPrec.Location = New System.Drawing.Point(7, 132)
+        Me.ucrChkTotalDailyPrec.Location = New System.Drawing.Point(6, 203)
         Me.ucrChkTotalDailyPrec.Name = "ucrChkTotalDailyPrec"
         Me.ucrChkTotalDailyPrec.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkTotalDailyPrec.TabIndex = 5
@@ -803,7 +803,7 @@ Partial Class sdgClimdexIndices
         'ucrChkSimplePrecII
         '
         Me.ucrChkSimplePrecII.Checked = False
-        Me.ucrChkSimplePrecII.Location = New System.Drawing.Point(7, 19)
+        Me.ucrChkSimplePrecII.Location = New System.Drawing.Point(6, 19)
         Me.ucrChkSimplePrecII.Name = "ucrChkSimplePrecII"
         Me.ucrChkSimplePrecII.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkSimplePrecII.TabIndex = 0
