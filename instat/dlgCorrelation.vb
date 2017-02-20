@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgCorrelation
@@ -90,7 +91,7 @@ Public Class dlgCorrelation
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoForMethodsCheckedChanged(sender As Object, e As EventArgs) Handles rdoPearson.CheckedChanged, rdoKendall.CheckedChanged, rdoSpearman.CheckedChanged
+    Private Sub rdoForMethodsCheckedChanged(sender As Object, e As EventArgs) Handles rdoPearson.CheckedChanged, rdoKendall.CheckedChanged
         If rdoPearson.Checked Then
             clsRCorrelation.AddParameter("method", Chr(34) & "pearson" & Chr(34))
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
@@ -172,7 +173,7 @@ Public Class dlgCorrelation
         TestOKEnabled()
     End Sub
 
-    Private Sub ColumnTypeChanged(sender As Object, e As EventArgs) Handles rdoTwoColumns.CheckedChanged, rdoMultipleColumns.CheckedChanged
+    Private Sub ColumnTypeChanged(sender As Object, e As EventArgs) 
         If rdoTwoColumns.Checked Then
             SetTwoColumnAsFunction()
         ElseIf rdoMultipleColumns.Checked Then
@@ -227,7 +228,7 @@ Public Class dlgCorrelation
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         If rdoMultipleColumns.Checked AndAlso chkCorrelationMatrix.Checked AndAlso ((sdgCorrPlot.rdoPairwisePlot.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked)) Then
-            frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 3)
         End If
         If ucrSaveModel.chkSaveModel.Checked AndAlso sdgCorrPlot.rdoNone.Checked AndAlso (chkCorrelationMatrix.Checked) Then
             ucrBase.clsRsyntax.RemoveAssignTo()
