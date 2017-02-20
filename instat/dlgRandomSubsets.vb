@@ -108,11 +108,12 @@ Public Class dlgRandomSubsets
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.GetText <> "") Then
+        If (Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.IsComplete) AndAlso (ucrNudSetSeed.GetText <> "") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -121,8 +122,7 @@ Public Class dlgRandomSubsets
         ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
-
-    End Sub
+            End Sub
 
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -140,7 +140,7 @@ Public Class dlgRandomSubsets
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
+        TestOKEnabled()
     End Sub
 
     Private Sub sizes()
@@ -159,7 +159,7 @@ Public Class dlgRandomSubsets
     End Sub
 
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrNewDataframe.ControlContentsChanged, ucrChkSetSeed.ControlValueChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrNewDataframe.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
