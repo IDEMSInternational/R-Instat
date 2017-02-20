@@ -39,7 +39,7 @@ Partial Class dlgScatterPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 236)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 6
+        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -69,7 +69,7 @@ Partial Class dlgScatterPlot
         Me.cmdScatterPlotOptions.Location = New System.Drawing.Point(10, 205)
         Me.cmdScatterPlotOptions.Name = "cmdScatterPlotOptions"
         Me.cmdScatterPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdScatterPlotOptions.TabIndex = 7
+        Me.cmdScatterPlotOptions.TabIndex = 6
         Me.cmdScatterPlotOptions.Tag = "ScatterPlot_Options"
         Me.cmdScatterPlotOptions.Text = "Scatter Plot Options"
         Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
@@ -124,7 +124,7 @@ Partial Class dlgScatterPlot
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 269)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(335, 24)
-        Me.ucrSaveGraph.TabIndex = 10
+        Me.ucrSaveGraph.TabIndex = 8
         '
         'dlgScatterPlot
         '
