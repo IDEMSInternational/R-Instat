@@ -25,11 +25,11 @@ Partial Class dlgAddKey
         Me.cmdCheckUnique = New System.Windows.Forms.Button()
         Me.lblKeyColumns = New System.Windows.Forms.Label()
         Me.lblKeyName = New System.Windows.Forms.Label()
+        Me.ucrInputKeyName = New instat.ucrInputTextBox()
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorKeyColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverKeyColumns = New instat.ucrReceiverMultiple()
-        Me.ucrInputKeyName = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'cmdCheckUnique
@@ -44,10 +44,10 @@ Partial Class dlgAddKey
         'lblKeyColumns
         '
         Me.lblKeyColumns.AutoSize = True
-        Me.lblKeyColumns.Location = New System.Drawing.Point(270, 32)
+        Me.lblKeyColumns.Location = New System.Drawing.Point(255, 39)
         Me.lblKeyColumns.Name = "lblKeyColumns"
         Me.lblKeyColumns.Size = New System.Drawing.Size(71, 13)
-        Me.lblKeyColumns.TabIndex = 7
+        Me.lblKeyColumns.TabIndex = 1
         Me.lblKeyColumns.Text = "Key Columns:"
         '
         'lblKeyName
@@ -56,8 +56,17 @@ Partial Class dlgAddKey
         Me.lblKeyName.Location = New System.Drawing.Point(10, 215)
         Me.lblKeyName.Name = "lblKeyName"
         Me.lblKeyName.Size = New System.Drawing.Size(59, 13)
-        Me.lblKeyName.TabIndex = 4
+        Me.lblKeyName.TabIndex = 3
         Me.lblKeyName.Text = "Key Name:"
+        '
+        'ucrInputKeyName
+        '
+        Me.ucrInputKeyName.IsMultiline = False
+        Me.ucrInputKeyName.IsReadOnly = False
+        Me.ucrInputKeyName.Location = New System.Drawing.Point(114, 215)
+        Me.ucrInputKeyName.Name = "ucrInputKeyName"
+        Me.ucrInputKeyName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputKeyName.TabIndex = 4
         '
         'ucrInputCheckInput
         '
@@ -65,15 +74,15 @@ Partial Class dlgAddKey
         Me.ucrInputCheckInput.IsReadOnly = False
         Me.ucrInputCheckInput.Location = New System.Drawing.Point(114, 250)
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
-        Me.ucrInputCheckInput.Size = New System.Drawing.Size(288, 21)
+        Me.ucrInputCheckInput.Size = New System.Drawing.Size(294, 21)
         Me.ucrInputCheckInput.TabIndex = 6
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 285)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(438, 52)
-        Me.ucrBase.TabIndex = 2
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 7
         '
         'ucrSelectorKeyColumns
         '
@@ -83,26 +92,17 @@ Partial Class dlgAddKey
         Me.ucrSelectorKeyColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorKeyColumns.Name = "ucrSelectorKeyColumns"
         Me.ucrSelectorKeyColumns.Size = New System.Drawing.Size(241, 180)
-        Me.ucrSelectorKeyColumns.TabIndex = 1
+        Me.ucrSelectorKeyColumns.TabIndex = 0
         '
         'ucrReceiverKeyColumns
         '
         Me.ucrReceiverKeyColumns.frmParent = Me
-        Me.ucrReceiverKeyColumns.Location = New System.Drawing.Point(263, 56)
+        Me.ucrReceiverKeyColumns.Location = New System.Drawing.Point(255, 62)
         Me.ucrReceiverKeyColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverKeyColumns.Name = "ucrReceiverKeyColumns"
         Me.ucrReceiverKeyColumns.Selector = Nothing
         Me.ucrReceiverKeyColumns.Size = New System.Drawing.Size(132, 133)
-        Me.ucrReceiverKeyColumns.TabIndex = 0
-        '
-        'ucrInputKeyName
-        '
-        Me.ucrInputKeyName.IsMultiline = False
-        Me.ucrInputKeyName.IsReadOnly = False
-        Me.ucrInputKeyName.Location = New System.Drawing.Point(114, 215)
-        Me.ucrInputKeyName.Name = "ucrInputKeyName"
-        Me.ucrInputKeyName.Size = New System.Drawing.Size(156, 21)
-        Me.ucrInputKeyName.TabIndex = 9
+        Me.ucrReceiverKeyColumns.TabIndex = 2
         '
         'dlgAddKey
         '
