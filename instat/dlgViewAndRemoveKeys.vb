@@ -41,11 +41,10 @@ Public Class dlgViewAndRemoveKeys
         Dim clsDefaultFunction As New RFunction
         'reset
         ucrSelectorKeys.Reset()
-        ucrChkRemoveKey.Checked = False
+        '  ucrChkRemoveKey.Checked = False
 
         ' Set default RFunction as the base function
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_key")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
@@ -69,6 +68,7 @@ Public Class dlgViewAndRemoveKeys
         ucrSelectorKeys.SetParameterIsString()
 
         ucrChkRemoveKey.SetText("Remove Key")
+
     End Sub
 
     Private Sub TestOKEnabled()
