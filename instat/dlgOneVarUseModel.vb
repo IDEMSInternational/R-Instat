@@ -177,9 +177,9 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveToDataframe.SetRCode(clsOverallFunction, bReset)
+        '        ucrSaveToDataframe.SetRCode(clsOverallFunction, bReset)
         ucrChkProduceBootstrap.SetRCode(clsProduceBootstrap, bReset)
-        ucrSaveBootstrapObjects.SetRCode(clsProduceBootstrap, bReset)
+        '        ucrSaveBootstrapObjects.SetRCode(clsProduceBootstrap, bReset)
     End Sub
 
     Private Sub TestOK_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiver.ControlContentsChanged, ucrSaveToDataframe.ControlContentsChanged, ucrSaveBootstrapObjects.ControlContentsChanged, ucrChkProduceBootstrap.ControlContentsChanged
