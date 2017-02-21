@@ -137,4 +137,9 @@ Public Class dlgAddKey
     Private Sub AllControls_ControlContentsChanged() Handles ucrInputKeyName.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
 End Class
