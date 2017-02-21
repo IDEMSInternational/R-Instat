@@ -44,7 +44,7 @@ Partial Class dlgAddKey
         'lblKeyColumns
         '
         Me.lblKeyColumns.AutoSize = True
-        Me.lblKeyColumns.Location = New System.Drawing.Point(255, 39)
+        Me.lblKeyColumns.Location = New System.Drawing.Point(254, 47)
         Me.lblKeyColumns.Name = "lblKeyColumns"
         Me.lblKeyColumns.Size = New System.Drawing.Size(71, 13)
         Me.lblKeyColumns.TabIndex = 1
@@ -53,7 +53,7 @@ Partial Class dlgAddKey
         'lblKeyName
         '
         Me.lblKeyName.AutoSize = True
-        Me.lblKeyName.Location = New System.Drawing.Point(10, 215)
+        Me.lblKeyName.Location = New System.Drawing.Point(10, 218)
         Me.lblKeyName.Name = "lblKeyName"
         Me.lblKeyName.Size = New System.Drawing.Size(59, 13)
         Me.lblKeyName.TabIndex = 3
