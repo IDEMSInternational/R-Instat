@@ -18,35 +18,52 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgAddKey
-    Dim bFirstLoad As Boolean = True
-    Dim clsAnyDuplicatesFunction As New RFunction
-    Dim clsSumFunction As New RFunction
-    Dim clsIsNAFunction As New RFunction
-    Dim bUniqueChecked As Boolean = False
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsDefaultRFunction As New RFunction
+    Private clsAnyDuplicatesFunction As New RFunction
+    Private clsSumFunction As New RFunction
+    Private clsIsNAFunction As New RFunction
+    Private bUniqueChecked As Boolean = False
 
     Private Sub dlgAddKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.iHelpTopicID = 504
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         Else
             ReOpenDialog()
         End If
+
+        If bReset Then
+            SetDefaults()
+        End If
+
+        SetRCodeForControls(bReset)
+        bReset = False
         bUniqueChecked = False
         TestOKEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
+    End Sub
+
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 504
+
         ucrReceiverKeyColumns.Selector = ucrSelectorKeyColumns
         ucrReceiverKeyColumns.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_key")
+
+        ucrSelectorKeyColumns.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorKeyColumns.SetParameterIsString()
+
+        ucrReceiverKeyColumns.SetParameter(New RParameter("col_names", 1))
+        ucrReceiverKeyColumns.SetParameterIsString()
+
+        ucrInputKeyName.SetParameter(New RParameter("key_name", 2))
         ucrInputKeyName.SetValidationTypeAsRVariable()
-        clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
-        clsSumFunction.SetRCommand("sum")
-        clsIsNAFunction.SetRCommand("is.na")
-        clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsIsNAFunction)
     End Sub
 
     Private Sub SetDefaults()
@@ -54,6 +71,10 @@ Public Class dlgAddKey
         ucrInputKeyName.ResetText()
         ucrInputCheckInput.ResetText()
         bUniqueChecked = False
+
+        clsDefaultRFunction = New RFunction
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
     Private Sub ReOpenDialog()
@@ -67,36 +88,24 @@ Public Class dlgAddKey
         End If
     End Sub
 
-    Private Sub ucrReceiverKeyColumns_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverKeyColumns.SelectionChanged
+    Private Sub ucrReceiverKeyColumns_ControlValueChanged() Handles ucrReceiverKeyColumns.ControlValueChanged
         If ucrReceiverKeyColumns.IsEmpty Then
-            ucrBase.clsRsyntax.RemoveParameter("col_names")
             cmdCheckUnique.Enabled = False
         Else
-            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverKeyColumns.GetVariableNames())
             cmdCheckUnique.Enabled = True
         End If
         bUniqueChecked = False
-        TestOKEnabled()
         ucrInputCheckInput.SetName("")
         ucrInputCheckInput.txtInput.BackColor = SystemColors.Window
     End Sub
-
-    Private Sub ucrSelectorKeyColumns_DataFrameChanged() Handles ucrSelectorKeyColumns.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorKeyColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-    End Sub
-
-    Private Sub ucrInputKeyName_NameChanged() Handles ucrInputKeyName.NameChanged
-        If ucrInputKeyName.IsEmpty Then
-            ucrBase.clsRsyntax.RemoveParameter("key_name")
-        Else
-            ucrBase.clsRsyntax.AddParameter("key_name", Chr(34) & ucrInputKeyName.GetText() & Chr(34))
-        End If
-        TestOKEnabled()
-    End Sub
-
     Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
         Dim iAnyDuplicated As Integer
         Dim iSumNA As Integer
+
+        clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
+        clsSumFunction.SetRCommand("sum")
+        clsIsNAFunction.SetRCommand("is.na")
+        clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsIsNAFunction)
 
         clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverKeyColumns.GetVariables())
         clsIsNAFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverKeyColumns.GetVariables())
@@ -125,7 +134,7 @@ Public Class dlgAddKey
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputKeyName_ContentsChanged() Handles ucrInputKeyName.ContentsChanged
+    Private Sub AllControls_ControlContentsChanged() Handles ucrInputKeyName.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

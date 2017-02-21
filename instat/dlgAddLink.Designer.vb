@@ -70,7 +70,7 @@ Partial Class dlgAddLink
         '
         'ucrInputLinkName
         '
-        Me.ucrInputLinkName.AddQuotesIfUnrecognised = True
+        'Me.ucrInputLinkName.AddQuotesIfUnrecognised = True
         Me.ucrInputLinkName.IsMultiline = False
         Me.ucrInputLinkName.IsReadOnly = False
         Me.ucrInputLinkName.Location = New System.Drawing.Point(10, 154)
