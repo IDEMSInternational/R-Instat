@@ -78,7 +78,7 @@ Partial Class dlgCorrelation
         Me.grpMethod.Controls.Add(Me.ucrPnlMethod)
         Me.grpMethod.Location = New System.Drawing.Point(10, 223)
         Me.grpMethod.Name = "grpMethod"
-        Me.grpMethod.Size = New System.Drawing.Size(205, 56)
+        Me.grpMethod.Size = New System.Drawing.Size(228, 70)
         Me.grpMethod.TabIndex = 10
         Me.grpMethod.TabStop = False
         Me.grpMethod.Tag = "Method"
@@ -87,7 +87,7 @@ Partial Class dlgCorrelation
         'rdoSpearman
         '
         Me.rdoSpearman.AutoSize = True
-        Me.rdoSpearman.Location = New System.Drawing.Point(124, 19)
+        Me.rdoSpearman.Location = New System.Drawing.Point(145, 30)
         Me.rdoSpearman.Name = "rdoSpearman"
         Me.rdoSpearman.Size = New System.Drawing.Size(73, 17)
         Me.rdoSpearman.TabIndex = 19
@@ -98,7 +98,7 @@ Partial Class dlgCorrelation
         'rdoKendall
         '
         Me.rdoKendall.AutoSize = True
-        Me.rdoKendall.Location = New System.Drawing.Point(61, 25)
+        Me.rdoKendall.Location = New System.Drawing.Point(79, 30)
         Me.rdoKendall.Name = "rdoKendall"
         Me.rdoKendall.Size = New System.Drawing.Size(60, 17)
         Me.rdoKendall.TabIndex = 1
@@ -110,7 +110,7 @@ Partial Class dlgCorrelation
         '
         Me.rdoPearson.AutoSize = True
         Me.rdoPearson.Checked = True
-        Me.rdoPearson.Location = New System.Drawing.Point(5, 25)
+        Me.rdoPearson.Location = New System.Drawing.Point(10, 30)
         Me.rdoPearson.Name = "rdoPearson"
         Me.rdoPearson.Size = New System.Drawing.Size(64, 17)
         Me.rdoPearson.TabIndex = 0
@@ -121,9 +121,9 @@ Partial Class dlgCorrelation
         '
         'ucrPnlMethod
         '
-        Me.ucrPnlMethod.Location = New System.Drawing.Point(5, 13)
+        Me.ucrPnlMethod.Location = New System.Drawing.Point(6, 13)
         Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        Me.ucrPnlMethod.Size = New System.Drawing.Size(196, 37)
+        Me.ucrPnlMethod.Size = New System.Drawing.Size(217, 47)
         Me.ucrPnlMethod.TabIndex = 18
         '
         'cmdOptions
@@ -141,9 +141,9 @@ Partial Class dlgCorrelation
         Me.grpMissing.Controls.Add(Me.rdoCompleteRows)
         Me.grpMissing.Controls.Add(Me.rdoPairwise)
         Me.grpMissing.Controls.Add(Me.ucrPnlMissing)
-        Me.grpMissing.Location = New System.Drawing.Point(217, 230)
+        Me.grpMissing.Location = New System.Drawing.Point(243, 223)
         Me.grpMissing.Name = "grpMissing"
-        Me.grpMissing.Size = New System.Drawing.Size(190, 49)
+        Me.grpMissing.Size = New System.Drawing.Size(190, 70)
         Me.grpMissing.TabIndex = 11
         Me.grpMissing.TabStop = False
         Me.grpMissing.Tag = "Missing"
@@ -153,7 +153,7 @@ Partial Class dlgCorrelation
         '
         Me.rdoCompleteRows.AutoSize = True
         Me.rdoCompleteRows.Checked = True
-        Me.rdoCompleteRows.Location = New System.Drawing.Point(5, 19)
+        Me.rdoCompleteRows.Location = New System.Drawing.Point(13, 30)
         Me.rdoCompleteRows.Name = "rdoCompleteRows"
         Me.rdoCompleteRows.Size = New System.Drawing.Size(94, 17)
         Me.rdoCompleteRows.TabIndex = 0
@@ -165,7 +165,7 @@ Partial Class dlgCorrelation
         'rdoPairwise
         '
         Me.rdoPairwise.AutoSize = True
-        Me.rdoPairwise.Location = New System.Drawing.Point(102, 19)
+        Me.rdoPairwise.Location = New System.Drawing.Point(114, 30)
         Me.rdoPairwise.Name = "rdoPairwise"
         Me.rdoPairwise.Size = New System.Drawing.Size(64, 17)
         Me.rdoPairwise.TabIndex = 1
@@ -175,9 +175,9 @@ Partial Class dlgCorrelation
         '
         'ucrPnlMissing
         '
-        Me.ucrPnlMissing.Location = New System.Drawing.Point(6, 12)
+        Me.ucrPnlMissing.Location = New System.Drawing.Point(6, 17)
         Me.ucrPnlMissing.Name = "ucrPnlMissing"
-        Me.ucrPnlMissing.Size = New System.Drawing.Size(181, 31)
+        Me.ucrPnlMissing.Size = New System.Drawing.Size(178, 43)
         Me.ucrPnlMissing.TabIndex = 0
         '
         'lblConfInterval
@@ -246,10 +246,12 @@ Partial Class dlgCorrelation
         'rdoMultipleColumns
         '
         Me.rdoMultipleColumns.AutoSize = True
+        Me.rdoMultipleColumns.Checked = True
         Me.rdoMultipleColumns.Location = New System.Drawing.Point(259, 12)
         Me.rdoMultipleColumns.Name = "rdoMultipleColumns"
         Me.rdoMultipleColumns.Size = New System.Drawing.Size(103, 17)
         Me.rdoMultipleColumns.TabIndex = 16
+        Me.rdoMultipleColumns.TabStop = True
         Me.rdoMultipleColumns.Tag = "Multiple_columns"
         Me.rdoMultipleColumns.Text = "Multiple columns"
         Me.rdoMultipleColumns.UseVisualStyleBackColor = True
@@ -267,7 +269,7 @@ Partial Class dlgCorrelation
         '
         'ucrChkSaveModel
         '
-        Me.ucrChkSaveModel.Location = New System.Drawing.Point(16, 279)
+        Me.ucrChkSaveModel.Location = New System.Drawing.Point(16, 305)
         Me.ucrChkSaveModel.Name = "ucrChkSaveModel"
         Me.ucrChkSaveModel.Size = New System.Drawing.Size(294, 24)
         Me.ucrChkSaveModel.TabIndex = 18
@@ -287,7 +289,7 @@ Partial Class dlgCorrelation
         'ucrChkCorelationMatrix
         '
         Me.ucrChkCorelationMatrix.Checked = False
-        Me.ucrChkCorelationMatrix.Location = New System.Drawing.Point(292, 309)
+        Me.ucrChkCorelationMatrix.Location = New System.Drawing.Point(328, 309)
         Me.ucrChkCorelationMatrix.Name = "ucrChkCorelationMatrix"
         Me.ucrChkCorelationMatrix.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkCorelationMatrix.TabIndex = 20
@@ -296,7 +298,7 @@ Partial Class dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 427)
+        Me.ClientSize = New System.Drawing.Size(444, 427)
         Me.Controls.Add(Me.ucrChkCorelationMatrix)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
         Me.Controls.Add(Me.ucrChkSaveModel)
