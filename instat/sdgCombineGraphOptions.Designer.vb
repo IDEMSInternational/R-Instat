@@ -24,6 +24,8 @@ Partial Class sdgCombineGraphOptions
     Private Sub InitializeComponent()
         Me.tbcLayout = New System.Windows.Forms.TabControl()
         Me.tbpLayout = New System.Windows.Forms.TabPage()
+        Me.ucrNudColumns = New instat.ucrNud()
+        Me.ucrNudRows = New instat.ucrNud()
         Me.txtLayoutMessage = New System.Windows.Forms.TextBox()
         Me.chkSpecifyOrder = New System.Windows.Forms.CheckBox()
         Me.grdLayout = New unvell.ReoGrid.ReoGridControl()
@@ -31,8 +33,6 @@ Partial Class sdgCombineGraphOptions
         Me.lstGraphs = New System.Windows.Forms.ListBox()
         Me.lblNumberofColumns = New System.Windows.Forms.Label()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
-        Me.nudColumns = New System.Windows.Forms.NumericUpDown()
-        Me.nudRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpLabels = New System.Windows.Forms.TabPage()
         Me.ucrInputLeft = New instat.ucrInputTextBox()
         Me.ucrInputRight = New instat.ucrInputTextBox()
@@ -43,10 +43,9 @@ Partial Class sdgCombineGraphOptions
         Me.lblBottom = New System.Windows.Forms.Label()
         Me.lblTop = New System.Windows.Forms.Label()
         Me.ucrsdgLayoutBase = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkSpecifyOrder = New instat.ucrCheck()
         Me.tbcLayout.SuspendLayout()
         Me.tbpLayout.SuspendLayout()
-        CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpLabels.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,6 +61,9 @@ Partial Class sdgCombineGraphOptions
         '
         'tbpLayout
         '
+        Me.tbpLayout.Controls.Add(Me.ucrChkSpecifyOrder)
+        Me.tbpLayout.Controls.Add(Me.ucrNudColumns)
+        Me.tbpLayout.Controls.Add(Me.ucrNudRows)
         Me.tbpLayout.Controls.Add(Me.txtLayoutMessage)
         Me.tbpLayout.Controls.Add(Me.chkSpecifyOrder)
         Me.tbpLayout.Controls.Add(Me.grdLayout)
@@ -69,8 +71,6 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLayout.Controls.Add(Me.lstGraphs)
         Me.tbpLayout.Controls.Add(Me.lblNumberofColumns)
         Me.tbpLayout.Controls.Add(Me.lblNumberofRows)
-        Me.tbpLayout.Controls.Add(Me.nudColumns)
-        Me.tbpLayout.Controls.Add(Me.nudRows)
         Me.tbpLayout.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayout.Name = "tbpLayout"
         Me.tbpLayout.Padding = New System.Windows.Forms.Padding(3)
@@ -78,6 +78,30 @@ Partial Class sdgCombineGraphOptions
         Me.tbpLayout.TabIndex = 0
         Me.tbpLayout.Text = "Layout"
         Me.tbpLayout.UseVisualStyleBackColor = True
+        '
+        'ucrNudColumns
+        '
+        Me.ucrNudColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColumns.Location = New System.Drawing.Point(111, 47)
+        Me.ucrNudColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumns.Name = "ucrNudColumns"
+        Me.ucrNudColumns.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudColumns.TabIndex = 7
+        Me.ucrNudColumns.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        '
+        'ucrNudRows
+        '
+        Me.ucrNudRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRows.Location = New System.Drawing.Point(111, 20)
+        Me.ucrNudRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRows.Name = "ucrNudRows"
+        Me.ucrNudRows.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRows.TabIndex = 7
+        Me.ucrNudRows.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'txtLayoutMessage
         '
@@ -149,22 +173,6 @@ Partial Class sdgCombineGraphOptions
         Me.lblNumberofRows.TabIndex = 1
         Me.lblNumberofRows.Text = "Number of Rows:"
         '
-        'nudColumns
-        '
-        Me.nudColumns.Location = New System.Drawing.Point(111, 47)
-        Me.nudColumns.Name = "nudColumns"
-        Me.nudColumns.Size = New System.Drawing.Size(42, 20)
-        Me.nudColumns.TabIndex = 1
-        Me.nudColumns.Value = New Decimal(New Integer() {2, 0, 0, 0})
-        '
-        'nudRows
-        '
-        Me.nudRows.Location = New System.Drawing.Point(111, 20)
-        Me.nudRows.Name = "nudRows"
-        Me.nudRows.Size = New System.Drawing.Size(42, 20)
-        Me.nudRows.TabIndex = 0
-        Me.nudRows.Value = New Decimal(New Integer() {2, 0, 0, 0})
-        '
         'tbpLabels
         '
         Me.tbpLabels.Controls.Add(Me.ucrInputLeft)
@@ -185,6 +193,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputLeft
         '
+        Me.ucrInputLeft.IsMultiline = False
         Me.ucrInputLeft.IsReadOnly = False
         Me.ucrInputLeft.Location = New System.Drawing.Point(60, 100)
         Me.ucrInputLeft.Name = "ucrInputLeft"
@@ -193,6 +202,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputRight
         '
+        Me.ucrInputRight.IsMultiline = False
         Me.ucrInputRight.IsReadOnly = False
         Me.ucrInputRight.Location = New System.Drawing.Point(60, 70)
         Me.ucrInputRight.Name = "ucrInputRight"
@@ -201,6 +211,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputBottom
         '
+        Me.ucrInputBottom.IsMultiline = False
         Me.ucrInputBottom.IsReadOnly = False
         Me.ucrInputBottom.Location = New System.Drawing.Point(60, 42)
         Me.ucrInputBottom.Name = "ucrInputBottom"
@@ -209,6 +220,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputTop
         '
+        Me.ucrInputTop.IsMultiline = False
         Me.ucrInputTop.IsReadOnly = False
         Me.ucrInputTop.Location = New System.Drawing.Point(60, 15)
         Me.ucrInputTop.Name = "ucrInputTop"
@@ -258,6 +270,14 @@ Partial Class sdgCombineGraphOptions
         Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrsdgLayoutBase.TabIndex = 3
         '
+        'ucrChkSpecifyOrder
+        '
+        Me.ucrChkSpecifyOrder.Checked = False
+        Me.ucrChkSpecifyOrder.Location = New System.Drawing.Point(13, 125)
+        Me.ucrChkSpecifyOrder.Name = "ucrChkSpecifyOrder"
+        Me.ucrChkSpecifyOrder.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSpecifyOrder.TabIndex = 8
+        '
         'sdgCombineGraphOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -274,8 +294,6 @@ Partial Class sdgCombineGraphOptions
         Me.tbcLayout.ResumeLayout(False)
         Me.tbpLayout.ResumeLayout(False)
         Me.tbpLayout.PerformLayout()
-        CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpLabels.ResumeLayout(False)
         Me.tbpLabels.PerformLayout()
         Me.ResumeLayout(False)
@@ -286,8 +304,6 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents tbpLayout As TabPage
     Friend WithEvents lblNumberofColumns As Label
     Friend WithEvents lblNumberofRows As Label
-    Friend WithEvents nudColumns As NumericUpDown
-    Friend WithEvents nudRows As NumericUpDown
     Friend WithEvents tbpLabels As TabPage
     Friend WithEvents ucrInputLeft As ucrInputTextBox
     Friend WithEvents ucrInputRight As ucrInputTextBox
@@ -303,4 +319,7 @@ Partial Class sdgCombineGraphOptions
     Friend WithEvents chkSpecifyOrder As CheckBox
     Friend WithEvents grdLayout As unvell.ReoGrid.ReoGridControl
     Friend WithEvents txtLayoutMessage As TextBox
+    Friend WithEvents ucrNudColumns As ucrNud
+    Friend WithEvents ucrNudRows As ucrNud
+    Friend WithEvents ucrChkSpecifyOrder As ucrCheck
 End Class
