@@ -59,9 +59,10 @@ Public Class dlgMakeDate
         ucrReceiverMonthThree.bUseFilteredData = False
         ucrReceiverDayThree.bUseFilteredData = False
 
+        ucrChkTwoDigitYear.SetText("2-digit years")
 
 
-        ucrPanelDate.SetParameter(New RParameter(""))
+
 
         'ucrSave Date Column
         ucrSaveDate.SetPrefix("Date")
@@ -145,9 +146,6 @@ Public Class dlgMakeDate
         ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
 
-        clsDefaultFunction.SetRCommand("as.Date")
-        clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
-
 
         rdoSingleColumn.Checked = True
         rdoSpecifyFormat.Checked = False
@@ -163,11 +161,11 @@ Public Class dlgMakeDate
         ucrInputComboBoxMonthTwo.SetName("365/366")
         ucrInputOrigin.Visible = False
         ucrInputOrigin.SetName("Excel")
-        chkTwoDigitYearTwo.Checked = False
+        ' ucrChkTwoDigitYear.Checked = False
         lblCutOffTwo.Visible = False
-        chkTwoDigitYearTwo.Visible = True
-        nu.Visible = False
-        nu.Value = 0
+        ' ucrChkTwoDigitYear.Visible = True
+        ' ucrNudCutoff.Visible = False
+        ucrNudCutoff.Value = 0
         chkMore.Checked = False
         chkMore.Visible = True
         Formats()
@@ -264,12 +262,12 @@ Public Class dlgMakeDate
 
     Private Sub chkMore_CheckedChanged(sender As Object, e As EventArgs)
         Formats()
-        If chkTwoDigitYearTwo.Checked Then
+        If ucrChkTwoDigitYear.Checked Then
             lblCutOffTwo.Visible = True
-            nu.Visible = True
+            ucrNudCutoff.Visible = True
         Else
             lblCutOffTwo.Visible = False
-            nu.Visible = False
+            ucrNudCutoff.Visible = False
         End If
     End Sub
 
@@ -293,72 +291,77 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub Formats()
+
+        ucrBase.clsRsyntax.SetFunction("as.Date")
+        ucrReceiverForDate.SetParameter(New RParameter("x"))
+        ucrReceiverForDate.SetParameterIsRFunction()
+
         ' Three radio buttons to begin with can be checked.
 
-        ' If Single Column is checked
+        'If Single Then Column Is checked
         If rdoSingleColumn.Checked Then
-            'Display Options
-            grpSingleColumn.Visible = True
-            grpTwoColumns.Visible = False
-            grpThreeColumns.Visible = False
+                'Display Options
+                grpSingleColumn.Visible = True
+                grpTwoColumns.Visible = False
+                grpThreeColumns.Visible = False
 
-            'Remove Parameters
-            ucrBase.clsRsyntax.RemoveParameter("month_format")
-            ucrBase.clsRsyntax.RemoveParameter("day_format")
-            ucrBase.clsRsyntax.RemoveParameter("year")
-            ucrBase.clsRsyntax.RemoveParameter("doy")
-            ucrBase.clsRsyntax.RemoveParameter("month")
-            ucrBase.clsRsyntax.RemoveParameter("day")
-            ucrBase.clsRsyntax.RemoveParameter("data_name")
-            ucrBase.clsRsyntax.RemoveParameter("year_format")
-            ucrBase.clsRsyntax.RemoveParameter("doy_typical_length")
-            'Receivers
-            'ucrBase.clsRsyntax.SetFunction("as.Date")
-            'If Not ucrReceiverForDate.IsEmpty Then
-            '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
-            'Else
-            '    ucrBase.clsRsyntax.RemoveParameter("x")
-            'End If
+                'Receivers
+                'ucrBase.clsRsyntax.SetFunction("as.Date")
+                'If Not ucrReceiverForDate.IsEmpty Then
+                '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+                'Else
+                '    ucrBase.clsRsyntax.RemoveParameter("x")
+                'End If
 
-            ' Check Boxes/ Radio Buttons
-            If chkMore.Checked Then
-                grpFormatField.Visible = True
-            Else
-                grpFormatField.Visible = False
-            End If
+                ' Check Boxes/ Radio Buttons
+                If chkMore.Checked Then
+                    grpFormatField.Visible = True
+                Else
+                    grpFormatField.Visible = False
+                End If
 
-            If rdoSpecifyOrigin.Checked Then
-                ucrInputFormat.Visible = False
-                ucrInputOrigin.Visible = True
-                ucrBase.clsRsyntax.RemoveParameter("format")
+                If rdoSpecifyOrigin.Checked Then
 
-                If Not ucrInputOrigin.IsEmpty Then
+                    ucrPanelDate.SetParameter(New RParameter("origin"))
+                    ucrPanelDate.AddRadioButton(rdoSpecifyOrigin, ucrInputOrigin.GetText)
+                    ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "30-12-1899" & Chr(34))
                     ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
-                    If ucrInputOrigin.GetText = "Excel" Then
-                        ucrReceiverForDate.SetParameter(New RParameter("origin"))
-                        ucrPanelDate.AddRadioButton(rdoSpecifyOrigin, Chr(34) & "30-12-1899" & Chr(34))
-                    ElseIf ucrInputOrigin.GetText = "Gregorian" Then
-                        ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "01-03-1600" & Chr(34))
-                    Else
-                        ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & ucrInputOrigin.GetText & Chr(34))
-                    End If
-                Else
-                    ucrBase.clsRsyntax.RemoveParameter("origin")
-                End If
-                If Not ucrReceiverForDate.IsEmpty Then
-                    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
-                Else
-                    ucrBase.clsRsyntax.RemoveParameter("x")
-                End If
 
-            ElseIf rdoSpecifyFormat.Checked Then
-                ucrInputFormat.Visible = True
-                ucrInputOrigin.Visible = False
-                ucrBase.clsRsyntax.RemoveParameter("origin")
-                If Not ucrInputFormat.IsEmpty Then
+                    ' ucrInputFormat.Visible = False
+                    ' ucrInputOrigin.Visible = True
+                    'ucrBase.clsRsyntax.RemoveParameter("format")
+                    If Not ucrInputOrigin.IsEmpty Then
+                        ' ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
+                        If ucrInputOrigin.GetText = "Excel" Then
+                        ElseIf ucrInputOrigin.GetText = "Gregorian" Then
+                            ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & "01-03-1600" & Chr(34))
+                        Else
+                            ucrBase.clsRsyntax.AddParameter("origin", Chr(34) & ucrInputOrigin.GetText & Chr(34))
+                        End If
+                    Else
+                        ' ucrBase.clsRsyntax.RemoveParameter("origin")
+                    End If
+                    If Not ucrReceiverForDate.IsEmpty Then
+                        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+                    Else
+                        ' ucrBase.clsRsyntax.RemoveParameter("x")
+                    End If
+
+                ElseIf rdoSpecifyFormat.Checked Then
+
+                    ucrPanelDate.SetParameter(New RParameter("format"))
+                    ucrPanelDate.AddRadioButton(rdoSpecifyOrigin, ucrInputOrigin.GetText)
                     ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
+                    ucrBase.clsRsyntax.AddParameter("format", (34) & "%Y-%m-%d" & Chr(34))
+
+                    '   ucrInputFormat.Visible = True
+                    ' ucrInputOrigin.Visible = False
+                    ' ucrBase.clsRsyntax.RemoveParameter("origin")
+                    ' If Not ucrInputFormat.IsEmpty Then
+                    'ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
+
                     If ucrInputFormat.GetText = "Year/Month/Day" Then
-                        ucrBase.clsRsyntax.AddParameter("format", Chr(34) & "%Y/%m/%d" & Chr(34))
+                        ' ucrBase.clsRsyntax.AddParameter("format", Chr(34) & "%Y/%m/%d" & Chr(34))
                     ElseIf ucrInputFormat.GetText = "Year-Month-Day" Then
                         ucrBase.clsRsyntax.AddParameter("format", (34) & "%Y-%m-%d" & Chr(34))
                     ElseIf ucrInputFormat.GetText = "Day-Month-Year" Then
@@ -367,49 +370,57 @@ Public Class dlgMakeDate
                         ucrBase.clsRsyntax.AddParameter("format", Chr(34) & ucrInputFormat.GetText & Chr(34))
                     End If
                 Else
-                    ucrBase.clsRsyntax.RemoveParameter("format")
+                    ' ucrBase.clsRsyntax.RemoveParameter("format")
                 End If
             Else
-                ucrInputOrigin.Visible = False
-                ucrInputFormat.Visible = False
+
+                'ucrInputOrigin.Visible = False
+                'ucrInputFormat.Visible = False
                 ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
-                ucrBase.clsRsyntax.RemoveParameter("format")
-                ucrBase.clsRsyntax.RemoveParameter("origin")
-            End If
-            'If Year and DOY is checked
-        ElseIf rdoYearandDayofYear.Checked Then
-            ' Display Options
-            grpTwoColumns.Visible = True
-            grpThreeColumns.Visible = False
-            grpSingleColumn.Visible = False
 
-            ' Remove Parameters
-            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-            ucrBase.clsRsyntax.RemoveParameter("x")
-            ucrBase.clsRsyntax.RemoveParameter("format")
-            ucrBase.clsRsyntax.RemoveParameter("origin")
-            ucrBase.clsRsyntax.RemoveParameter("month")
-            ucrBase.clsRsyntax.RemoveParameter("day")
-            ucrBase.clsRsyntax.RemoveParameter("month_format")
-            ucrBase.clsRsyntax.RemoveParameter("day_format")
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
-
-            ' Receivers
-            If Not ucrReceiverYearTwo.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearTwo.GetVariableNames())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("year")
             End If
+        'If Year and DOY is checked
+
+        '  ElseIf rdoYearandDayofYear.Checked Then
+
+        ' Display Options
+        ' grpTwoColumns.Visible = True
+        'grpThreeColumns.Visible = False
+        'grpSingleColumn.Visible = False
+
+        ' Remove Parameters
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
+        ucrSelectorMakeDate.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorMakeDate.SetParameterIsString()
+
+        ucrReceiverYearTwo.SetParameter(New RParameter("year"))
+        ucrReceiverYearTwo.SetParameterIsString()
+
+        ucrReceiverDayTwo.SetParameter(New RParameter("doy"))
+        ucrReceiverDayTwo.SetParameterIsString()
+
+
+        ' ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        'ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
+
+        ' Receivers
+        If Not ucrReceiverYearTwo.IsEmpty Then
+            ' ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearTwo.GetVariableNames())
+            ' Else
+            'ucrBase.clsRsyntax.RemoveParameter("year")
+        End If
             If Not ucrReceiverDayTwo.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("doy", ucrReceiverDayTwo.GetVariableNames())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("doy")
-            End If
+            ' ucrBase.clsRsyntax.AddParameter("doy", ucrReceiverDayTwo.GetVariableNames())
+            'Else
+            'ucrBase.clsRsyntax.RemoveParameter("doy")
+        End If
 
-            If chkTwoDigitYearTwo.Checked Then
-                ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%y" & Chr(34))
-            Else
-                ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
+        ucrChkTwoDigitYear.SetParameter(New RParameter("year_format"))
+
+        If ucrChkTwoDigitYear.Checked Then
+            ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%y" & Chr(34))
+        Else
+            ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
             End If
             If Not ucrInputComboBoxMonthTwo.IsEmpty Then
                 If ucrInputComboBoxMonthTwo.GetText = "365/366" Then
@@ -424,23 +435,19 @@ Public Class dlgMakeDate
             End If
             'If Year Date Month is selected
         Else
-            ' Sort display options
-            grpThreeColumns.Visible = True
-            grpTwoColumns.Visible = False
-            grpSingleColumn.Visible = False
+        ' Sort display options
+        ' grpThreeColumns.Visible = True
+        'grpTwoColumns.Visible = False
+        'grpSingleColumn.Visible = False
 
-            'Remove Parameters
-            ucrBase.clsRsyntax.RemoveParameter("x")
-            ucrBase.clsRsyntax.RemoveParameter("format")
-            ucrBase.clsRsyntax.RemoveParameter("origin")
-            ucrBase.clsRsyntax.RemoveParameter("doy")
-            ucrBase.clsRsyntax.RemoveParameter("year")
-            ucrBase.clsRsyntax.RemoveParameter("doy_typical_length")
+        'Remove Parameters
+        ' Coding options
 
-            ' Coding options
-            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
-            If Not ucrInputDayOption.IsEmpty Then
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
+
+        ''  ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        'ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
+        If Not ucrInputDayOption.IsEmpty Then
                 If ucrInputDayOption.GetText = "By Month" Then
                     ucrBase.clsRsyntax.AddParameter("day_format", Chr(34) & "%d" & Chr(34))
                 Else
@@ -458,35 +465,45 @@ Public Class dlgMakeDate
             Else
                 ucrBase.clsRsyntax.RemoveParameter("year_formart")
             End If
-            If Not ucrInputMonthOption.IsEmpty Then
-                If ucrInputMonthOption.GetText = "Numerical" Then
-                    ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%m" & Chr(34))
-                ElseIf ucrInputMonthOption.GetText = "Full Word" Then
-                    ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%B" & Chr(34))
-                ElseIf ucrInputMonthOption.GetText = "Partial Word" Then
-                    ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%b" & Chr(34))
-                Else
-                    ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & ucrInputMonthOption.GetText & Chr(34))
-                End If
+        If Not ucrInputMonthOption.IsEmpty Then
+            If ucrInputMonthOption.GetText = "Numerical" Then
+                ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%m" & Chr(34))
+            ElseIf ucrInputMonthOption.GetText = "Full Word" Then
+                ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%B" & Chr(34))
+            ElseIf ucrInputMonthOption.GetText = "Partial Word" Then
+                ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & "%b" & Chr(34))
             Else
-                ucrBase.clsRsyntax.RemoveParameter("month_format")
+                ucrBase.clsRsyntax.AddParameter("month_format", Chr(34) & ucrInputMonthOption.GetText & Chr(34))
             End If
-            'Receivers
-            If Not ucrReceiverYearThree.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearThree.GetVariableNames())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("year")
-            End If
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("month_format")
+        End If
+
+        ucrReceiverYearThree.SetParameter(New RParameter("year"))
+        ucrReceiverYearThree.SetParameterIsString()
+
+        ucrReceiverMonthThree.SetParameter(New RParameter("month"))
+        ucrReceiverMonthThree.SetParameterIsString()
+
+        ucrReceiverDayThree.SetParameter(New RParameter("day"))
+        ucrReceiverDayThree.SetParameterIsString()
+
+        'Receivers
+        If Not ucrReceiverYearThree.IsEmpty Then
+            ' ucrBase.clsRsyntax.AddParameter("year", ucrReceiverYearThree.GetVariableNames())
+        Else
+            '  ucrBase.clsRsyntax.RemoveParameter("year")
+        End If
             If ucrReceiverMonthThree.IsEmpty = False Then
-                ucrBase.clsRsyntax.AddParameter("month", ucrReceiverMonthThree.GetVariableNames())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("month")
-            End If
+            '  ucrBase.clsRsyntax.AddParameter("month", ucrReceiverMonthThree.GetVariableNames())
+        Else
+            ' ucrBase.clsRsyntax.RemoveParameter("month")
+        End If
             If ucrReceiverDayThree.IsEmpty = False Then
-                ucrBase.clsRsyntax.AddParameter("day", ucrReceiverDayThree.GetVariableNames())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("day")
-            End If
+            ' ucrBase.clsRsyntax.AddParameter("day", ucrReceiverDayThree.GetVariableNames())
+        Else
+            ' ucrBase.clsRsyntax.RemoveParameter("day")
+        End If
         End If
     End Sub
 
