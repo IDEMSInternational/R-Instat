@@ -45,6 +45,7 @@ Public Class dlgRandomSubsets
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.SetMinMax(1, Integer.MaxValue)
         ucrChkSetSeed.SetText("Seed")
+        ucrChkSetSeed.bChangeParameterValue = False
 
         ucrSelectorRandomSubsets.ucrAvailableDataFrames.SetParameter(New RParameter("size", 2))
         ucrSelectorRandomSubsets.SetParameterIsrfunction()
@@ -60,7 +61,7 @@ Public Class dlgRandomSubsets
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
         'Linking checkox and nud
-        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSetSeed.AddToLinkedControls(ucrLinked:=ucrNudSetSeed, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNewDataframe
         ucrNewDataframe.SetIsTextBox()
@@ -75,11 +76,8 @@ Public Class dlgRandomSubsets
 
         ucrSelectorRandomSubsets.Reset()
         ucrNewDataframe.Reset()
-
         NewDefaultName()
         ReplaceParameters()
-
-        ucrNudSetSeed.Visible = False
         ucrChkSetSeed.Checked = False
         clsDefaultFunction.SetRCommand("data.frame")
         clsDefaultRepFunc.SetRCommand("replicate")
@@ -121,7 +119,7 @@ Public Class dlgRandomSubsets
         ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
-            End Sub
+    End Sub
 
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
