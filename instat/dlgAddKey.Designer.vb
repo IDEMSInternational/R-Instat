@@ -22,24 +22,15 @@ Partial Class dlgAddKey
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblKeyName = New System.Windows.Forms.Label()
         Me.cmdCheckUnique = New System.Windows.Forms.Button()
         Me.lblKeyColumns = New System.Windows.Forms.Label()
+        Me.lblKeyName = New System.Windows.Forms.Label()
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
-        Me.ucrInputKeyName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorKeyColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverKeyColumns = New instat.ucrReceiverMultiple()
+        Me.ucrInputKeyName = New instat.ucrInputTextBox()
         Me.SuspendLayout()
-        '
-        'lblKeyName
-        '
-        Me.lblKeyName.AutoSize = True
-        Me.lblKeyName.Location = New System.Drawing.Point(10, 215)
-        Me.lblKeyName.Name = "lblKeyName"
-        Me.lblKeyName.Size = New System.Drawing.Size(59, 13)
-        Me.lblKeyName.TabIndex = 4
-        Me.lblKeyName.Text = "Key Name:"
         '
         'cmdCheckUnique
         '
@@ -59,21 +50,23 @@ Partial Class dlgAddKey
         Me.lblKeyColumns.TabIndex = 7
         Me.lblKeyColumns.Text = "Key Columns:"
         '
+        'lblKeyName
+        '
+        Me.lblKeyName.AutoSize = True
+        Me.lblKeyName.Location = New System.Drawing.Point(10, 215)
+        Me.lblKeyName.Name = "lblKeyName"
+        Me.lblKeyName.Size = New System.Drawing.Size(59, 13)
+        Me.lblKeyName.TabIndex = 4
+        Me.lblKeyName.Text = "Key Name:"
+        '
         'ucrInputCheckInput
         '
+        Me.ucrInputCheckInput.IsMultiline = False
         Me.ucrInputCheckInput.IsReadOnly = False
         Me.ucrInputCheckInput.Location = New System.Drawing.Point(114, 250)
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
         Me.ucrInputCheckInput.Size = New System.Drawing.Size(288, 21)
         Me.ucrInputCheckInput.TabIndex = 6
-        '
-        'ucrInputKeyName
-        '
-        Me.ucrInputKeyName.IsReadOnly = False
-        Me.ucrInputKeyName.Location = New System.Drawing.Point(77, 214)
-        Me.ucrInputKeyName.Name = "ucrInputKeyName"
-        Me.ucrInputKeyName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputKeyName.TabIndex = 3
         '
         'ucrBase
         '
@@ -94,23 +87,33 @@ Partial Class dlgAddKey
         '
         'ucrReceiverKeyColumns
         '
-        Me.ucrReceiverKeyColumns.Location = New System.Drawing.Point(273, 56)
+        Me.ucrReceiverKeyColumns.frmParent = Me
+        Me.ucrReceiverKeyColumns.Location = New System.Drawing.Point(263, 56)
         Me.ucrReceiverKeyColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverKeyColumns.Name = "ucrReceiverKeyColumns"
         Me.ucrReceiverKeyColumns.Selector = Nothing
         Me.ucrReceiverKeyColumns.Size = New System.Drawing.Size(132, 133)
         Me.ucrReceiverKeyColumns.TabIndex = 0
         '
+        'ucrInputKeyName
+        '
+        Me.ucrInputKeyName.IsMultiline = False
+        Me.ucrInputKeyName.IsReadOnly = False
+        Me.ucrInputKeyName.Location = New System.Drawing.Point(114, 215)
+        Me.ucrInputKeyName.Name = "ucrInputKeyName"
+        Me.ucrInputKeyName.Size = New System.Drawing.Size(156, 21)
+        Me.ucrInputKeyName.TabIndex = 9
+        '
         'dlgAddKey
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(414, 340)
+        Me.Controls.Add(Me.ucrInputKeyName)
         Me.Controls.Add(Me.lblKeyColumns)
         Me.Controls.Add(Me.ucrInputCheckInput)
         Me.Controls.Add(Me.cmdCheckUnique)
         Me.Controls.Add(Me.lblKeyName)
-        Me.Controls.Add(Me.ucrInputKeyName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorKeyColumns)
         Me.Controls.Add(Me.ucrReceiverKeyColumns)
@@ -127,9 +130,9 @@ Partial Class dlgAddKey
     Friend WithEvents ucrReceiverKeyColumns As instat.ucrReceiverMultiple
     Friend WithEvents ucrSelectorKeyColumns As instat.ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As instat.ucrButtons
-    Friend WithEvents ucrInputKeyName As instat.ucrInputTextBox
-    Friend WithEvents lblKeyName As System.Windows.Forms.Label
     Friend WithEvents cmdCheckUnique As System.Windows.Forms.Button
     Friend WithEvents ucrInputCheckInput As instat.ucrInputTextBox
     Friend WithEvents lblKeyColumns As System.Windows.Forms.Label
+    Friend WithEvents lblKeyName As Label
+    Friend WithEvents ucrInputKeyName As ucrInputTextBox
 End Class
