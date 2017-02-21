@@ -33,7 +33,7 @@ Public Class dlgDummyVariables
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFactor.IsEmpty AndAlso ucrChkWithXVariable.Checked Then
+        If Not ucrReceiverFactor.IsEmpty OrElse (ucrChkWithXVariable.Checked AndAlso (Not ucrVariateReceiver.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -43,7 +43,7 @@ Public Class dlgDummyVariables
     Private Sub SetDefaults()
         ' Set default RFunction as the base function
         Dim clsDefaultFunction As New RFunction
-
+        'reset
         ucrSelectorDummyVariable.Reset()
 
         clsDefaultFunction.SetRCommand("dummy")
@@ -57,7 +57,6 @@ Public Class dlgDummyVariables
 
     Public Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 41
-
         'Set Receiver
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
         ucrVariateReceiver.Selector = ucrSelectorDummyVariable
@@ -86,7 +85,6 @@ Public Class dlgDummyVariables
         'ucrSaveDummy.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
         'ucrSaveDummy.SetCheckBoxText("Save Dummy:")
         'ucrSaveDummy.SetIsComboBox()
-
 
     End Sub
 
