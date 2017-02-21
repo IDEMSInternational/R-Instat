@@ -36,7 +36,7 @@ Partial Class dlgAddLink
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 202)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 191)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 1
@@ -44,7 +44,7 @@ Partial Class dlgAddLink
         'ucrDataSelectorFrom
         '
         Me.ucrDataSelectorFrom.bUseCurrentFilter = True
-        Me.ucrDataSelectorFrom.Location = New System.Drawing.Point(7, 23)
+        Me.ucrDataSelectorFrom.Location = New System.Drawing.Point(10, 23)
         Me.ucrDataSelectorFrom.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataSelectorFrom.Name = "ucrDataSelectorFrom"
         Me.ucrDataSelectorFrom.Size = New System.Drawing.Size(120, 50)
@@ -53,7 +53,7 @@ Partial Class dlgAddLink
         'ucrDataSelectorTo
         '
         Me.ucrDataSelectorTo.bUseCurrentFilter = True
-        Me.ucrDataSelectorTo.Location = New System.Drawing.Point(7, 84)
+        Me.ucrDataSelectorTo.Location = New System.Drawing.Point(10, 84)
         Me.ucrDataSelectorTo.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataSelectorTo.Name = "ucrDataSelectorTo"
         Me.ucrDataSelectorTo.Size = New System.Drawing.Size(120, 50)
@@ -61,25 +61,27 @@ Partial Class dlgAddLink
         '
         'cmdSpecifyLink
         '
-        Me.cmdSpecifyLink.Location = New System.Drawing.Point(257, 158)
+        Me.cmdSpecifyLink.Location = New System.Drawing.Point(257, 154)
         Me.cmdSpecifyLink.Name = "cmdSpecifyLink"
-        Me.cmdSpecifyLink.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSpecifyLink.Size = New System.Drawing.Size(121, 23)
         Me.cmdSpecifyLink.TabIndex = 4
         Me.cmdSpecifyLink.Text = "Specify Link"
         Me.cmdSpecifyLink.UseVisualStyleBackColor = True
         '
         'ucrInputLinkName
         '
+        Me.ucrInputLinkName.AddQuotesIfUnrecognised = True
+        Me.ucrInputLinkName.IsMultiline = False
         Me.ucrInputLinkName.IsReadOnly = False
-        Me.ucrInputLinkName.Location = New System.Drawing.Point(76, 158)
+        Me.ucrInputLinkName.Location = New System.Drawing.Point(10, 154)
         Me.ucrInputLinkName.Name = "ucrInputLinkName"
-        Me.ucrInputLinkName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLinkName.Size = New System.Drawing.Size(174, 21)
         Me.ucrInputLinkName.TabIndex = 6
         '
         'lblLinkName
         '
         Me.lblLinkName.AutoSize = True
-        Me.lblLinkName.Location = New System.Drawing.Point(9, 161)
+        Me.lblLinkName.Location = New System.Drawing.Point(12, 139)
         Me.lblLinkName.Name = "lblLinkName"
         Me.lblLinkName.Size = New System.Drawing.Size(61, 13)
         Me.lblLinkName.TabIndex = 7
@@ -88,7 +90,7 @@ Partial Class dlgAddLink
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(12, 10)
+        Me.lblFrom.Location = New System.Drawing.Point(7, 10)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 9
@@ -97,7 +99,7 @@ Partial Class dlgAddLink
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(12, 71)
+        Me.lblTo.Location = New System.Drawing.Point(7, 71)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 10
@@ -106,7 +108,7 @@ Partial Class dlgAddLink
         'lblKeys
         '
         Me.lblKeys.AutoSize = True
-        Me.lblKeys.Location = New System.Drawing.Point(244, 13)
+        Me.lblKeys.Location = New System.Drawing.Point(260, 27)
         Me.lblKeys.Name = "lblKeys"
         Me.lblKeys.Size = New System.Drawing.Size(33, 13)
         Me.lblKeys.TabIndex = 11
@@ -114,7 +116,7 @@ Partial Class dlgAddLink
         '
         'lvwLinkViewBox
         '
-        Me.lvwLinkViewBox.Location = New System.Drawing.Point(247, 32)
+        Me.lvwLinkViewBox.Location = New System.Drawing.Point(257, 42)
         Me.lvwLinkViewBox.Name = "lvwLinkViewBox"
         Me.lvwLinkViewBox.Size = New System.Drawing.Size(121, 97)
         Me.lvwLinkViewBox.TabIndex = 8
@@ -124,7 +126,7 @@ Partial Class dlgAddLink
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 259)
+        Me.ClientSize = New System.Drawing.Size(412, 249)
         Me.Controls.Add(Me.lblKeys)
         Me.Controls.Add(Me.lblTo)
         Me.Controls.Add(Me.lblFrom)
