@@ -17,6 +17,8 @@ Imports unvell.ReoGrid.Events
 
 Public Class sdgCombineGraphOptions
     Private bFirstLoad As Boolean = True
+    Private bInitialiseControls As Boolean = False
+
     Public clsRsyntax As New RSyntax
     Public WithEvents grdCurrSheet As Worksheet
     Public clsMatrixFunction As New RFunction
@@ -31,17 +33,12 @@ Public Class sdgCombineGraphOptions
         grdLayout.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
         grdLayout.SheetTabNewButtonVisible = False
         grdCurrSheet = grdLayout.CurrentWorksheet
-        nudRows.Minimum = 1
-        nudRows.Minimum = 1
+        ucrNudRows.Minimum = 1
+        ucrNudColumns.Minimum = 1
         grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
     End Sub
 
     Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            SetDefaults()
-            bFirstLoad = False
-        End If
         Me.BringToFront()
         LoadGraphs()
     End Sub
@@ -56,67 +53,36 @@ Public Class sdgCombineGraphOptions
         grdLayout.Visible = False
     End Sub
 
-    Private Sub InitialiseDialog()
-        grdCurrSheet.Rows = nudRows.Value
-        grdCurrSheet.Columns = nudColumns.Value
+    Private Sub InitialiseControls()
+        grdCurrSheet.Rows = ucrNudRows.Value
+        grdCurrSheet.Columns = ucrNudColumns.Value
+
+        ucrNudColumns.SetParameter(New RParameter("ncol"))
+        ucrNudRows.SetParameter(New RParameter("nrow"))
+
+        ucrInputBottom.SetParameter(New RParameter("bottom"))
+        ucrInputLeft.SetParameter(New RParameter("left"))
+        ucrInputRight.SetParameter(New RParameter("right"))
+        ucrInputTop.SetParameter(New RParameter("top"))
+
+        ucrChkSpecifyOrder.SetText("Specify Order")
+
+        bInitialiseControls = True
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
         clsRsyntax = clsNewRSyntax
     End Sub
 
-    Private Sub ucrInputTop_NameChanged() Handles ucrInputTop.NameChanged
-        If Not ucrInputTop.IsEmpty Then
-            clsRsyntax.AddParameter("top", Chr(34) & ucrInputTop.GetText & Chr(34))
-        Else
-            clsRsyntax.RemoveParameter("top")
-        End If
-    End Sub
-
-    Private Sub ucrInputBottom_NameChanged() Handles ucrInputBottom.NameChanged
-        If Not ucrInputBottom.IsEmpty Then
-            clsRsyntax.AddParameter("bottom", Chr(34) & ucrInputBottom.GetText & Chr(34))
-        Else
-            clsRsyntax.RemoveParameter("bottom")
-        End If
-    End Sub
-
-    Private Sub ucrInputRight_NameChanged() Handles ucrInputRight.NameChanged
-        If Not ucrInputRight.IsEmpty Then
-            clsRsyntax.AddParameter("right", Chr(34) & ucrInputRight.GetText & Chr(34))
-        Else
-            clsRsyntax.RemoveParameter("right")
-        End If
-    End Sub
-
-    Private Sub ucrInputLeft_NameChanged() Handles ucrInputLeft.NameChanged
-        If Not ucrInputLeft.IsEmpty Then
-            clsRsyntax.AddParameter("left", Chr(34) & ucrInputLeft.GetText & Chr(34))
-        Else
-            clsRsyntax.RemoveParameter("left")
-        End If
-
-    End Sub
-
-    Private Sub nudRows_TextChanged(sender As Object, e As EventArgs) Handles nudRows.TextChanged
-        If nudRows.Text <> "" Then
-            clsRsyntax.AddParameter("nrow", nudRows.Value)
-        Else
-            clsRsyntax.RemoveParameter("nrow")
-        End If
+    Private Sub nucrNudRows_ControlContentsChanged() Handles ucrNudRows.ControlContentsChanged
         If grdCurrSheet IsNot Nothing Then
-            grdCurrSheet.Rows = nudRows.Value
+            grdCurrSheet.Rows = ucrNudRows.Value
         End If
     End Sub
 
-    Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
-        If nudColumns.Text <> "" Then
-            clsRsyntax.AddParameter("ncol", nudColumns.Value)
-        Else
-            clsRsyntax.RemoveParameter("ncol")
-        End If
+    Private Sub ucrNudColumns_ControlContentsChanged() Handles ucrNudColumns.ControlContentsChanged
         If grdCurrSheet IsNot Nothing Then
-            grdCurrSheet.Columns = nudColumns.Value
+            grdCurrSheet.Columns = ucrNudColumns.Value
         End If
     End Sub
 
@@ -124,8 +90,8 @@ Public Class sdgCombineGraphOptions
         Dim NoOfgraphs As Integer
         If dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 0 Then
             NoOfgraphs = dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count
-            nudRows.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
-            nudColumns.Value = Math.Ceiling(NoOfgraphs / (Math.Ceiling(Math.Sqrt(NoOfgraphs))))
+            ucrNudRows.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
+            ucrNudColumns.Value = Math.Ceiling(NoOfgraphs / (Math.Ceiling(Math.Sqrt(NoOfgraphs))))
         End If
     End Sub
 
@@ -199,22 +165,27 @@ Public Class sdgCombineGraphOptions
     Public Sub SwitchNcolToMatrixFunc()
         clsRsyntax.RemoveParameter("ncol")
         clsRsyntax.RemoveParameter("nrow")
-        clsMatrixFunction.AddParameter("ncol", nudColumns.Value)
-        clsMatrixFunction.AddParameter("nrow", nudRows.Value)
+        clsMatrixFunction.AddParameter("ncol", ucrNudColumns.Value)
+        clsMatrixFunction.AddParameter("nrow", ucrNudRows.Value)
     End Sub
 
     Public Sub RemoveNcolFromMatrixfunc()
         clsMatrixFunction.RemoveParameterByName("ncol")
         clsMatrixFunction.RemoveParameterByName("nrow")
         clsRsyntax.RemoveParameter("layout_matrix")
-        clsRsyntax.AddParameter("nrow", nudRows.Value)
-        clsRsyntax.AddParameter("ncol", nudColumns.Value)
+        clsRsyntax.AddParameter("nrow", ucrNudRows.Value)
+        clsRsyntax.AddParameter("ncol", ucrNudColumns.Value)
     End Sub
 
     Private Sub grdLayout_Leave(sender As Object, e As EventArgs) Handles grdLayout.Leave
         If grdCurrSheet.IsEditing Then
             grdCurrSheet.EndEdit(EndEditReason.NormalFinish)
             SetMatrixFunction()
+        End If
+    End Sub
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bInitialiseControls Then
+            InitialiseControls()
         End If
     End Sub
 End Class
