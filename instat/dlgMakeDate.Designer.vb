@@ -23,9 +23,7 @@ Partial Class dlgMakeDate
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpTwoColumns = New System.Windows.Forms.GroupBox()
-        Me.nu = New System.Windows.Forms.NumericUpDown()
         Me.lblCutOffTwo = New System.Windows.Forms.Label()
-        Me.chkTwoDigitYearTwo = New System.Windows.Forms.CheckBox()
         Me.ucrInputComboBoxMonthTwo = New instat.ucrInputComboBox()
         Me.lblYearTwo = New System.Windows.Forms.Label()
         Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
@@ -70,8 +68,9 @@ Partial Class dlgMakeDate
         Me.rdoYearMonthDay = New System.Windows.Forms.RadioButton()
         Me.rdoYearandDayofYear = New System.Windows.Forms.RadioButton()
         Me.rdoSingleColumn = New System.Windows.Forms.RadioButton()
+        Me.ucrNudCutoff = New instat.ucrNud()
+        Me.ucrChkTwoDigitYear = New instat.ucrCheck()
         Me.grpTwoColumns.SuspendLayout()
-        CType(Me.nu, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpThreeColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
         Me.grpFormatField.SuspendLayout()
@@ -79,9 +78,9 @@ Partial Class dlgMakeDate
         '
         'grpTwoColumns
         '
-        Me.grpTwoColumns.Controls.Add(Me.nu)
+        Me.grpTwoColumns.Controls.Add(Me.ucrChkTwoDigitYear)
+        Me.grpTwoColumns.Controls.Add(Me.ucrNudCutoff)
         Me.grpTwoColumns.Controls.Add(Me.lblCutOffTwo)
-        Me.grpTwoColumns.Controls.Add(Me.chkTwoDigitYearTwo)
         Me.grpTwoColumns.Controls.Add(Me.ucrInputComboBoxMonthTwo)
         Me.grpTwoColumns.Controls.Add(Me.lblYearTwo)
         Me.grpTwoColumns.Controls.Add(Me.ucrReceiverYearTwo)
@@ -95,13 +94,6 @@ Partial Class dlgMakeDate
         Me.grpTwoColumns.TabStop = False
         Me.grpTwoColumns.Text = "Two Columns"
         '
-        'nu
-        '
-        Me.nu.Location = New System.Drawing.Point(130, 77)
-        Me.nu.Name = "nu"
-        Me.nu.Size = New System.Drawing.Size(47, 20)
-        Me.nu.TabIndex = 42
-        '
         'lblCutOffTwo
         '
         Me.lblCutOffTwo.Location = New System.Drawing.Point(127, 57)
@@ -109,16 +101,6 @@ Partial Class dlgMakeDate
         Me.lblCutOffTwo.Size = New System.Drawing.Size(92, 19)
         Me.lblCutOffTwo.TabIndex = 41
         Me.lblCutOffTwo.Text = "Cutoff for 2000 years:"
-        '
-        'chkTwoDigitYearTwo
-        '
-        Me.chkTwoDigitYearTwo.AutoSize = True
-        Me.chkTwoDigitYearTwo.Location = New System.Drawing.Point(130, 34)
-        Me.chkTwoDigitYearTwo.Name = "chkTwoDigitYearTwo"
-        Me.chkTwoDigitYearTwo.Size = New System.Drawing.Size(82, 17)
-        Me.chkTwoDigitYearTwo.TabIndex = 40
-        Me.chkTwoDigitYearTwo.Text = "2-digit years"
-        Me.chkTwoDigitYearTwo.UseVisualStyleBackColor = True
         '
         'ucrInputComboBoxMonthTwo
         '
@@ -187,7 +169,7 @@ Partial Class dlgMakeDate
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverYearThree)
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverDayThree)
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverMonthThree)
-        Me.grpThreeColumns.Location = New System.Drawing.Point(254, 53)
+        Me.grpThreeColumns.Location = New System.Drawing.Point(80, 74)
         Me.grpThreeColumns.Name = "grpThreeColumns"
         Me.grpThreeColumns.Size = New System.Drawing.Size(225, 157)
         Me.grpThreeColumns.TabIndex = 5
@@ -313,7 +295,7 @@ Partial Class dlgMakeDate
         Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyOrigin)
         Me.grpSingleColumn.Controls.Add(Me.rdoDefaultFormat)
         Me.grpSingleColumn.Controls.Add(Me.ucrPanelSingleColumn)
-        Me.grpSingleColumn.Location = New System.Drawing.Point(254, 55)
+        Me.grpSingleColumn.Location = New System.Drawing.Point(87, 145)
         Me.grpSingleColumn.Name = "grpSingleColumn"
         Me.grpSingleColumn.Size = New System.Drawing.Size(245, 297)
         Me.grpSingleColumn.TabIndex = 6
@@ -545,6 +527,26 @@ Partial Class dlgMakeDate
         Me.rdoSingleColumn.Text = "Single Column"
         Me.rdoSingleColumn.UseVisualStyleBackColor = True
         '
+        'ucrNudCutoff
+        '
+        Me.ucrNudCutoff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCutoff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCutoff.Location = New System.Drawing.Point(146, 77)
+        Me.ucrNudCutoff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCutoff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCutoff.Name = "ucrNudCutoff"
+        Me.ucrNudCutoff.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCutoff.TabIndex = 46
+        Me.ucrNudCutoff.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkTwoDigitYear
+        '
+        Me.ucrChkTwoDigitYear.Checked = False
+        Me.ucrChkTwoDigitYear.Location = New System.Drawing.Point(130, 34)
+        Me.ucrChkTwoDigitYear.Name = "ucrChkTwoDigitYear"
+        Me.ucrChkTwoDigitYear.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkTwoDigitYear.TabIndex = 47
+        '
         'dlgMakeDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -568,7 +570,6 @@ Partial Class dlgMakeDate
         Me.Text = "Make Date"
         Me.grpTwoColumns.ResumeLayout(False)
         Me.grpTwoColumns.PerformLayout()
-        CType(Me.nu, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpThreeColumns.ResumeLayout(False)
         Me.grpThreeColumns.PerformLayout()
         Me.grpSingleColumn.ResumeLayout(False)
@@ -607,9 +608,7 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrInputSeparator As ucrInputComboBox
     Friend WithEvents ucrInputFormat As ucrInputComboBox
     Friend WithEvents ucrInputOrigin As ucrInputComboBox
-    Friend WithEvents nu As NumericUpDown
     Friend WithEvents lblCutOffTwo As Label
-    Friend WithEvents chkTwoDigitYearTwo As CheckBox
     Friend WithEvents ucrInputComboBoxMonthTwo As ucrInputComboBox
     Friend WithEvents lblYearTwo As Label
     Friend WithEvents ucrReceiverYearTwo As ucrReceiverSingle
@@ -628,4 +627,6 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrReceiverYearThree As ucrReceiverSingle
     Friend WithEvents ucrReceiverDayThree As ucrReceiverSingle
     Friend WithEvents ucrReceiverMonthThree As ucrReceiverSingle
+    Friend WithEvents ucrChkTwoDigitYear As ucrCheck
+    Friend WithEvents ucrNudCutoff As ucrNud
 End Class
