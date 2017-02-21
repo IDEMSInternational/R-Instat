@@ -97,7 +97,7 @@ Public Class dlgCorrelation
         ucrChkCorelationMatrix.SetText("Correlation Matrix")
         ucrChkCorelationMatrix.bChangeParameterValue = False
         ucrChkCorelationMatrix.Checked = True
-
+        ucrChkCorelationMatrix.chkCheck.Checked = False
         'this should go somewhere else
         sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
 
