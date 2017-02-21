@@ -68,8 +68,8 @@ Public Class dlgAddKey
 
     Private Sub SetDefaults()
         ucrSelectorKeyColumns.Reset()
-        ucrInputKeyName.ResetText()
-        ucrInputCheckInput.ResetText()
+        ucrInputKeyName.Reset()
+        ucrInputCheckInput.Reset()
         bUniqueChecked = False
 
         clsDefaultRFunction = New RFunction
@@ -140,6 +140,7 @@ Public Class dlgAddKey
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 End Class
