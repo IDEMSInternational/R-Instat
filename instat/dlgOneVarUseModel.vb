@@ -88,10 +88,10 @@ Public Class dlgOneVarUseModel
 
         'ucrSaveBootstrapObjects
         ucrSaveBootstrapObjects.SetCheckBoxText("Save Bootstrap:")
-        ucrSaveBootstrapObjects.SetSaveTypeAsModel()
+        '        ucrSaveBootstrapObjects.SetSaveTypeAsModel()
         ucrSaveBootstrapObjects.SetName("bootstrap")
         ucrSaveBootstrapObjects.SetIsComboBox()
-        'ucrSaveBootstrapObjects.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
+        ucrSaveBootstrapObjects.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
         ucrSaveBootstrapObjects.SetAssignToIfUncheckedValue("last_bootstrap")
         'ucrSaveBootstrapObjects.SetAssignToBooleans(bTempInsertColumnBefore:=True)
 
@@ -113,7 +113,7 @@ Public Class dlgOneVarUseModel
         'clsDefaultFunction.SetR, .SetAssignTo
         clsDefaultFunction.SetRCommand("quantile")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveToDataframe.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempModel:=ucrSaveBootstrapObjects.GetText(), strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ', bInsertColumnBefore:=True)
+        clsDefaultProduceBootstrap.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempModel:=ucrSaveBootstrapObjects.GetText(), strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ', bInsertColumnBefore:=True)
 
         clsProduceBootstrap = clsDefaultProduceBootstrap.Clone
         clsOverallFunction = clsDefaultFunction.Clone
@@ -177,8 +177,9 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'ucr....SetRCode(clsOverallFunction, bReset)
+        ucrSaveToDataframe.SetRCode(clsOverallFunction, bReset)
         ucrChkProduceBootstrap.SetRCode(clsProduceBootstrap, bReset)
+        ucrSaveBootstrapObjects.SetRCode(clsProduceBootstrap, bReset)
     End Sub
 
     Private Sub TestOK_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiver.ControlContentsChanged, ucrSaveToDataframe.ControlContentsChanged, ucrSaveBootstrapObjects.ControlContentsChanged, ucrChkProduceBootstrap.ControlContentsChanged
