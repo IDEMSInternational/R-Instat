@@ -217,5 +217,8 @@ Public Class sdgCombineGraphOptions
             SetMatrixFunction()
         End If
     End Sub
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+
+    End Sub
 End Class
 
