@@ -33,7 +33,7 @@ Partial Class dlgCombineforGraphics
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(249, 27)
+        Me.Label1.Location = New System.Drawing.Point(254, 41)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
         Me.Label1.TabIndex = 1
@@ -53,12 +53,12 @@ Partial Class dlgCombineforGraphics
         Me.ucrSave.Location = New System.Drawing.Point(10, 228)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(276, 24)
-        Me.ucrSave.TabIndex = 6
+        Me.ucrSave.TabIndex = 4
         '
         'ucrCombineGraphReceiver
         '
         Me.ucrCombineGraphReceiver.frmParent = Me
-        Me.ucrCombineGraphReceiver.Location = New System.Drawing.Point(252, 40)
+        Me.ucrCombineGraphReceiver.Location = New System.Drawing.Point(255, 60)
         Me.ucrCombineGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphReceiver.Name = "ucrCombineGraphReceiver"
         Me.ucrCombineGraphReceiver.Selector = Nothing

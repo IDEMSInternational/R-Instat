@@ -23,8 +23,7 @@ Public Class dlgCombineforGraphics
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
+
         End If
 
         If bReset Then
@@ -44,7 +43,7 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 431
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        cmdOptions.Enabled = False
+        cmdOptions.Enabled = False 'this is a temporary solution as i am working on the subdialog
 
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
@@ -56,9 +55,10 @@ Public Class dlgCombineforGraphics
         ucrSave.SetPrefix("Combined_Graph")
         ucrSave.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
         ucrSave.SetSaveTypeAsGraph()
-        ucrSave.SetCheckBoxText("Save graph")
+        ucrSave.SetCheckBoxText("Save Graph")
         ucrSave.SetIsComboBox()
-        ucrSave.SetAssignToIfUncheckedValue("lastgraph")
+        ucrSave.SetAssignToIfUncheckedValue("last_graph")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -71,9 +71,6 @@ Public Class dlgCombineforGraphics
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
     Private Sub TestOkEnabled()
         If ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 1 Then
             ucrBase.OKEnabled(True)
@@ -83,6 +80,7 @@ Public Class dlgCombineforGraphics
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
@@ -94,9 +92,5 @@ Public Class dlgCombineforGraphics
         sdgCombineGraphOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
         bResetSubDialog = False
         sdgCombineGraphOptions.ShowDialog()
-    End Sub
-
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrCombineGraphReceiver.ControlContentsChanged
-
     End Sub
 End Class
