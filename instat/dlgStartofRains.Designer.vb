@@ -102,7 +102,7 @@ Partial Class dlgStartofRains
         '
         'nudMinimum
         '
-        Me.nudMinimum.Location = New System.Drawing.Point(56, 8)
+        Me.nudMinimum.Location = New System.Drawing.Point(64, 7)
         Me.nudMinimum.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMinimum.Name = "nudMinimum"
         Me.nudMinimum.Size = New System.Drawing.Size(47, 20)

@@ -351,7 +351,7 @@ Public Class dlgStartofRains
             clsSubRainDays2.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
             clsDrySpell.AddParameter("save", 0)
             clsDryPeriodTen.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-            clsDryPeriodTen.AddParameter("function_exp", Chr(34) & "rollapply(data = Dry_Spell, width=" & nudLengthofTime.Value & ", FUN=max, na.rm = FALSE, align='right', fill=NA)" & Chr(34))
+            clsDryPeriodTen.AddParameter("function_exp", Chr(34) & "rollapply(data = Dry_Spell, width=" & nudLengthofTime.Value & ", FUN=max, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
             clsDryPeriodTen.AddParameter("result_name", Chr(34) & "Dry_Spell" & Chr(34))
             clsDryPeriodTen.AddParameter("sub_calculations", clsRFunctionParameter:=clsDryPeriodTenList)
             clsDryPeriodTenList.AddParameter("sub1", clsRFunctionParameter:=clsDrySpell, bIncludeArgumentName:=False)

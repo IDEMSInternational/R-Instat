@@ -412,6 +412,7 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruption = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionDefineCorruptionData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -424,7 +425,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruptionDefineCorruptionData = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1446,7 +1446,6 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareEventsStartoftheRains
         '
-        Me.mnuClimaticPrepareEventsStartoftheRains.Enabled = False
         Me.mnuClimaticPrepareEventsStartoftheRains.Name = "mnuClimaticPrepareEventsStartoftheRains"
         Me.mnuClimaticPrepareEventsStartoftheRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticPrepareEventsStartoftheRains.Text = "Start of the Rains..."
@@ -3178,6 +3177,12 @@ Partial Class frmMain
         Me.mnuCorruptionFile.Size = New System.Drawing.Size(205, 22)
         Me.mnuCorruptionFile.Text = "File..."
         '
+        'mnuCorruptionDefineCorruptionData
+        '
+        Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
+        Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(205, 22)
+        Me.mnuCorruptionDefineCorruptionData.Text = "Define Corruption Data..."
+        '
         'mnuCorruptionPrepare
         '
         Me.mnuCorruptionPrepare.Name = "mnuCorruptionPrepare"
@@ -3261,12 +3266,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuCorruptionDefineCorruptionData
-        '
-        Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
-        Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(205, 22)
-        Me.mnuCorruptionDefineCorruptionData.Text = "Define Corruption Data..."
         '
         'frmMain
         '
