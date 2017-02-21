@@ -88,7 +88,7 @@ Public Class dlgOneVarUseModel
 
         'ucrSaveBootstrapObjects
         ucrSaveBootstrapObjects.SetCheckBoxText("Save Bootstrap:")
-        '        ucrSaveBootstrapObjects.SetSaveTypeAsModel()
+        ucrSaveBootstrapObjects.SetSaveTypeAsModel()
         ucrSaveBootstrapObjects.SetName("bootstrap")
         ucrSaveBootstrapObjects.SetIsComboBox()
         ucrSaveBootstrapObjects.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
