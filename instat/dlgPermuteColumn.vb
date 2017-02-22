@@ -14,13 +14,11 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgPermuteColumn
     Private clsSetSampleFunc, clsSetSeedFunc, clsOverallFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private iLength As Integer
 
     Private Sub dlgPermuteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -51,7 +49,7 @@ Public Class dlgPermuteColumn
         SetNewColumName()
         clsDefaultSample.SetRCommand("sample")
         clsDefaultSample.AddParameter("replace", "FALSE")
-        clsDefaultSample.AddParameter("size", iLength)
+        clsDefaultSample.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
         clsDefaultSetSeed.SetRCommand("set.seed")
         clsDefaultSetSeed.AddParameter("seed", 5)
         clsDefaultFunction.SetRCommand("replicate")
@@ -117,11 +115,13 @@ Public Class dlgPermuteColumn
 
     Private Sub SetNewColumName()
         If ucrNudNumberofColumns.Value = 1 Then
+            ucrSavePermute.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
             ucrSavePermute.SetLabelText("New Column Name:")
             If Not ucrSavePermute.bUserTyped Then
                 ucrSavePermute.SetPrefix("permute")
             End If
         Else
+            ucrSavePermute.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
             ucrSavePermute.SetLabelText("Prefix for New Columns:")
             If Not ucrSavePermute.bUserTyped Then
                 ucrSavePermute.SetPrefix("")
@@ -131,8 +131,7 @@ Public Class dlgPermuteColumn
     End Sub
 
     Private Sub DataFrameLength()
-        iLength = ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength
-        clsSetSampleFunc.AddParameter("size", iLength)
+        clsSetSampleFunc.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
     End Sub
 
     Private Sub ucrPermuteRowsSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPermuteRowsSelector.ControlValueChanged
