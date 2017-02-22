@@ -13,7 +13,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgStack
     Private clsMelt As New RFunction
@@ -62,6 +61,10 @@ Public Class dlgStack
     End Sub
 
     Private Sub ReopenDialog()
+        StackDataFrame()
+    End Sub
+
+    Private Sub StackDataFrame()
         'TODO this is a work around for AssignTo not clearing in RSyntax
         If ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrSaveNewDataName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
@@ -124,5 +127,9 @@ Public Class dlgStack
         Else
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         End If
+    End Sub
+
+    Private Sub ucrSelectorStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStack.ControlValueChanged
+        StackDataFrame()
     End Sub
 End Class
