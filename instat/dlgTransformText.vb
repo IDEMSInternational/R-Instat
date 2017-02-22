@@ -55,7 +55,7 @@ Public Class dlgTransformText
         ucrPnlOperation.AddRadioButton(rdoWords)
         ucrPnlOperation.AddRadioButton(rdoSubstring)
 
-        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, "str_to_lower")
+        ucrPnlOperation.AddFunctionNamesCondition(rdoConvertCase, {"str_to_lower", "str_to_upper", "str_to_title"})
         ucrPnlOperation.AddFunctionNamesCondition(rdoLength, "str_length")
         ucrPnlOperation.AddFunctionNamesCondition(rdoPad, "str_pad")
         ucrPnlOperation.AddFunctionNamesCondition(rdoTrim, "str_trim")
@@ -183,7 +183,6 @@ Public Class dlgTransformText
         clsSubStringFunction.AddParameter("end", 2)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
-        rdoConvertCase.Checked = True
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
