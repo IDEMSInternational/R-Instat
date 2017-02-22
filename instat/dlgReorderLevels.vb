@@ -16,8 +16,9 @@
 
 Imports instat.Translations
 Public Class dlgReorderLevels
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsReorder As New RFunction
 
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,8 +34,6 @@ Public Class dlgReorderLevels
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 36
-
-
         'Set Receivers and column parameter
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactor.SetMeAsReceiver()
@@ -51,29 +50,21 @@ Public Class dlgReorderLevels
         ucrSelectorFactorLevelsToReorder.SetParameterIsString()
 
         'Set column Parameter
-        ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
-        'ucrReorderFactor.setparameterisstring()
-
-
+        ' ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
+        ' ucrReorderFactor.setparameterisstring()
     End Sub
+
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-
+        'reset
         ucrSelectorFactorLevelsToReorder.Reset()
-        ucrSelectorFactorLevelsToReorder.Focus()
         ' Set default RFunction as the base function
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-
+        clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
-
-    'Private Sub ucrReorderFactor_Leave(sender As Object, e As EventArgs) Handles ucrReorderFactor.Leave
-    '    ucrBase.clsRsyntax.AddParameter("new_level_names", ucrReorderFactor.GetVariableNames)
-    'End Sub
 
     Private Sub TestOKEnabled()
         If Not ucrReceiverFactor.IsEmpty Then
