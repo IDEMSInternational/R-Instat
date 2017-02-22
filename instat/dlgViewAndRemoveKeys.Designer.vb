@@ -22,39 +22,12 @@ Partial Class dlgViewAndRemoveKeys
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorKeys = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverSelectedKey = New instat.ucrReceiverSingle()
         Me.lblSelectedKey = New System.Windows.Forms.Label()
         Me.ucrChkRemoveKey = New instat.ucrCheck()
+        Me.ucrReceiverSelectedKey = New instat.ucrReceiverSingle()
+        Me.ucrSelectorKeys = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 196)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 4
-        '
-        'ucrSelectorKeys
-        '
-        Me.ucrSelectorKeys.bShowHiddenColumns = False
-        Me.ucrSelectorKeys.bUseCurrentFilter = True
-        Me.ucrSelectorKeys.Location = New System.Drawing.Point(13, 13)
-        Me.ucrSelectorKeys.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorKeys.Name = "ucrSelectorKeys"
-        Me.ucrSelectorKeys.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorKeys.TabIndex = 0
-        '
-        'ucrReceiverSelectedKey
-        '
-        Me.ucrReceiverSelectedKey.frmParent = Me
-        Me.ucrReceiverSelectedKey.Location = New System.Drawing.Point(269, 56)
-        Me.ucrReceiverSelectedKey.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSelectedKey.Name = "ucrReceiverSelectedKey"
-        Me.ucrReceiverSelectedKey.Selector = Nothing
-        Me.ucrReceiverSelectedKey.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSelectedKey.TabIndex = 2
         '
         'lblSelectedKey
         '
@@ -68,10 +41,37 @@ Partial Class dlgViewAndRemoveKeys
         'ucrChkRemoveKey
         '
         Me.ucrChkRemoveKey.Checked = False
-        Me.ucrChkRemoveKey.Location = New System.Drawing.Point(269, 79)
+        Me.ucrChkRemoveKey.Location = New System.Drawing.Point(269, 82)
         Me.ucrChkRemoveKey.Name = "ucrChkRemoveKey"
         Me.ucrChkRemoveKey.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkRemoveKey.TabIndex = 3
+        Me.ucrChkRemoveKey.TabIndex = 4
+        '
+        'ucrReceiverSelectedKey
+        '
+        Me.ucrReceiverSelectedKey.frmParent = Me
+        Me.ucrReceiverSelectedKey.Location = New System.Drawing.Point(269, 56)
+        Me.ucrReceiverSelectedKey.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSelectedKey.Name = "ucrReceiverSelectedKey"
+        Me.ucrReceiverSelectedKey.Selector = Nothing
+        Me.ucrReceiverSelectedKey.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSelectedKey.TabIndex = 2
+        '
+        'ucrSelectorKeys
+        '
+        Me.ucrSelectorKeys.bShowHiddenColumns = False
+        Me.ucrSelectorKeys.bUseCurrentFilter = True
+        Me.ucrSelectorKeys.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorKeys.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorKeys.Name = "ucrSelectorKeys"
+        Me.ucrSelectorKeys.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorKeys.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 196)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 4
         '
         'dlgViewAndRemoveKeys
         '
