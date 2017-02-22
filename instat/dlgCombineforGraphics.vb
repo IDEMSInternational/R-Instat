@@ -43,7 +43,7 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 431
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        cmdOptions.Enabled = False 'this is a temporary solution as i am working on the subdialog
+
 
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
@@ -69,6 +69,7 @@ Public Class dlgCombineforGraphics
         clsDefaultRFunction = New RFunction
         clsDefaultRFunction.SetRCommand("gridExtra::grid.arrange")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+        bResetSubDialog = True
     End Sub
 
     Private Sub TestOkEnabled()
