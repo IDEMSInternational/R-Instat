@@ -17,50 +17,66 @@ Imports instat.Translations
 
 Public Class dlgFreezeColumns
     Public bFirstLoad As Boolean = True
-
+    Private bReset As Boolean = True
 
     Private Sub dlgFreezeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
 
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorByDataFrameAddRemoveforFreezeColumns.Reset()
+        ' Set default RFunction as the base function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_freeze_columns")
+        ucrBaseforFreezeColumns.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBaseforFreezeColumns.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBaseforFreezeColumns.iHelpTopicID = 444
+
+        'Setting up the multiple receiver
         ucrReceiverMultipleforFreezeColumns.Selector = ucrSelectorByDataFrameAddRemoveforFreezeColumns
         ucrReceiverMultipleforFreezeColumns.SetMeAsReceiver()
-        ucrBaseforFreezeColumns.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_freeze_columns")
+        ucrReceiverMultipleforFreezeColumns.SetParameter(New RParameter("col_names", 1))
+        ucrReceiverMultipleforFreezeColumns.SetParameterIsString()
 
+        'Set data frame parameter
+        ucrSelectorByDataFrameAddRemoveforFreezeColumns.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorByDataFrameAddRemoveforFreezeColumns.SetParameterIsString()
+
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverMultipleforFreezeColumns.IsEmpty Then
+            ucrBaseforFreezeColumns.OKEnabled(True)
+        Else
+            ucrBaseforFreezeColumns.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleforFreezeColumns.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBaseforFreezeColumns_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseforFreezeColumns.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
-
-    Private Sub ucrSelectorByDataframeAddRemoveforFreezeColumns_DataFrameChanged() Handles ucrSelectorByDataFrameAddRemoveforFreezeColumns.DataFrameChanged
-        ucrBaseforFreezeColumns.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemoveforFreezeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverHiddenColumns_SelectionChanged() Handles ucrReceiverMultipleforFreezeColumns.SelectionChanged
-        If Not ucrReceiverMultipleforFreezeColumns.IsEmpty Then
-            ucrBaseforFreezeColumns.clsRsyntax.AddParameter("col_names", ucrReceiverMultipleforFreezeColumns.GetVariableNames())
-        Else
-            ucrBaseforFreezeColumns.clsRsyntax.AddParameter("col_names", "c()")
-        End If
-    End Sub
-
-    Private Sub ucrSelectorByDataFrameAddRemoveforFreezeColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorByDataFrameAddRemoveforFreezeColumns.Load
-
-    End Sub
-
-
 End Class
