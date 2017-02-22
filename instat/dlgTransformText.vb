@@ -176,8 +176,6 @@ Public Class dlgTransformText
         clsTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34))
 
         clsWordsFunction.SetRCommand("word")
-        '       clsWordsFunction.AddParameter("", 1)
-        '       clsWordsFunction.AddParameter("", )
         clsWordsFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
 
         clsSubStringFunction.SetRCommand("str_sub")
