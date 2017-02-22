@@ -23,134 +23,129 @@ Partial Class dlgMovingAverage
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblDataToAverage = New System.Windows.Forms.Label()
-        Me.lblSaveResultsIn = New System.Windows.Forms.Label()
-        Me.cboSaveResultsIn = New System.Windows.Forms.ComboBox()
-        Me.chkSaveResiduals = New System.Windows.Forms.CheckBox()
-        Me.chkDisplayResults = New System.Windows.Forms.CheckBox()
-        Me.chkPlot = New System.Windows.Forms.CheckBox()
-        Me.lblLag = New System.Windows.Forms.Label()
-        Me.txtLag = New System.Windows.Forms.TextBox()
         Me.ucrReceiverDataToAverage = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrSaveResultsInto = New instat.ucrSave()
+        Me.ucrChkPlot = New instat.ucrCheck()
+        Me.ucrChkLag = New instat.ucrCheck()
+        Me.ucrChkSaveResiduals = New instat.ucrCheck()
+        Me.ucrChkDisplayResults = New instat.ucrCheck()
+        Me.ucrInputLag = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblDataToAverage
         '
         Me.lblDataToAverage.AutoSize = True
-        Me.lblDataToAverage.Location = New System.Drawing.Point(233, 12)
+        Me.lblDataToAverage.Location = New System.Drawing.Point(233, 26)
         Me.lblDataToAverage.Name = "lblDataToAverage"
-        Me.lblDataToAverage.Size = New System.Drawing.Size(105, 13)
+        Me.lblDataToAverage.Size = New System.Drawing.Size(109, 13)
         Me.lblDataToAverage.TabIndex = 3
-        Me.lblDataToAverage.Tag = "Data_to_be_averaged"
-        Me.lblDataToAverage.Text = "Data to be averaged"
-        '
-        'lblSaveResultsIn
-        '
-        Me.lblSaveResultsIn.AutoSize = True
-        Me.lblSaveResultsIn.Location = New System.Drawing.Point(224, 95)
-        Me.lblSaveResultsIn.Name = "lblSaveResultsIn"
-        Me.lblSaveResultsIn.Size = New System.Drawing.Size(85, 13)
-        Me.lblSaveResultsIn.TabIndex = 4
-        Me.lblSaveResultsIn.Tag = "Save_results_in"
-        Me.lblSaveResultsIn.Text = "Save results into"
-        '
-        'cboSaveResultsIn
-        '
-        Me.cboSaveResultsIn.FormattingEnabled = True
-        Me.cboSaveResultsIn.Location = New System.Drawing.Point(328, 92)
-        Me.cboSaveResultsIn.Name = "cboSaveResultsIn"
-        Me.cboSaveResultsIn.Size = New System.Drawing.Size(87, 21)
-        Me.cboSaveResultsIn.TabIndex = 5
-        '
-        'chkSaveResiduals
-        '
-        Me.chkSaveResiduals.AutoSize = True
-        Me.chkSaveResiduals.Location = New System.Drawing.Point(13, 145)
-        Me.chkSaveResiduals.Name = "chkSaveResiduals"
-        Me.chkSaveResiduals.Size = New System.Drawing.Size(95, 17)
-        Me.chkSaveResiduals.TabIndex = 6
-        Me.chkSaveResiduals.Tag = "Save_residuals"
-        Me.chkSaveResiduals.Text = "Save residuals"
-        Me.chkSaveResiduals.UseVisualStyleBackColor = True
-        '
-        'chkDisplayResults
-        '
-        Me.chkDisplayResults.AutoSize = True
-        Me.chkDisplayResults.Location = New System.Drawing.Point(112, 145)
-        Me.chkDisplayResults.Name = "chkDisplayResults"
-        Me.chkDisplayResults.Size = New System.Drawing.Size(93, 17)
-        Me.chkDisplayResults.TabIndex = 7
-        Me.chkDisplayResults.Tag = "Display_residuals"
-        Me.chkDisplayResults.Text = "Display results"
-        Me.chkDisplayResults.UseVisualStyleBackColor = True
-        '
-        'chkPlot
-        '
-        Me.chkPlot.AutoSize = True
-        Me.chkPlot.Location = New System.Drawing.Point(227, 142)
-        Me.chkPlot.Name = "chkPlot"
-        Me.chkPlot.Size = New System.Drawing.Size(44, 17)
-        Me.chkPlot.TabIndex = 8
-        Me.chkPlot.Text = "Plot"
-        Me.chkPlot.UseVisualStyleBackColor = True
-        '
-        'lblLag
-        '
-        Me.lblLag.AutoSize = True
-        Me.lblLag.Location = New System.Drawing.Point(304, 143)
-        Me.lblLag.Name = "lblLag"
-        Me.lblLag.Size = New System.Drawing.Size(25, 13)
-        Me.lblLag.TabIndex = 9
-        Me.lblLag.Tag = "Lag"
-        Me.lblLag.Text = "Lag"
-        '
-        'txtLag
-        '
-        Me.txtLag.Location = New System.Drawing.Point(344, 140)
-        Me.txtLag.Name = "txtLag"
-        Me.txtLag.Size = New System.Drawing.Size(55, 20)
-        Me.txtLag.TabIndex = 10
+        Me.lblDataToAverage.Tag = ""
+        Me.lblDataToAverage.Text = "Data to be Averaged:"
         '
         'ucrReceiverDataToAverage
         '
+        Me.ucrReceiverDataToAverage.bAddRemoveParameter = True
+        Me.ucrReceiverDataToAverage.bChangeParameterValue = True
         Me.ucrReceiverDataToAverage.frmParent = Me
-        Me.ucrReceiverDataToAverage.Location = New System.Drawing.Point(236, 38)
+        Me.ucrReceiverDataToAverage.Location = New System.Drawing.Point(236, 41)
         Me.ucrReceiverDataToAverage.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataToAverage.Name = "ucrReceiverDataToAverage"
         Me.ucrReceiverDataToAverage.Selector = Nothing
-        Me.ucrReceiverDataToAverage.Size = New System.Drawing.Size(102, 26)
+        Me.ucrReceiverDataToAverage.Size = New System.Drawing.Size(137, 26)
         Me.ucrReceiverDataToAverage.TabIndex = 2
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 186)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 281)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 1
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bAddRemoveParameter = True
+        Me.ucrAddRemove.bChangeParameterValue = True
         Me.ucrAddRemove.bShowHiddenColumns = False
-        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(9, 41)
         Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 155)
         Me.ucrAddRemove.TabIndex = 0
+        '
+        'ucrSaveResultsInto
+        '
+        Me.ucrSaveResultsInto.bAddRemoveParameter = True
+        Me.ucrSaveResultsInto.bChangeParameterValue = True
+        Me.ucrSaveResultsInto.Location = New System.Drawing.Point(10, 251)
+        Me.ucrSaveResultsInto.Name = "ucrSaveResultsInto"
+        Me.ucrSaveResultsInto.Size = New System.Drawing.Size(333, 24)
+        Me.ucrSaveResultsInto.TabIndex = 11
+        '
+        'ucrChkPlot
+        '
+        Me.ucrChkPlot.bAddRemoveParameter = True
+        Me.ucrChkPlot.bChangeParameterValue = True
+        Me.ucrChkPlot.Checked = False
+        Me.ucrChkPlot.Location = New System.Drawing.Point(140, 199)
+        Me.ucrChkPlot.Name = "ucrChkPlot"
+        Me.ucrChkPlot.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPlot.TabIndex = 13
+        '
+        'ucrChkLag
+        '
+        Me.ucrChkLag.bAddRemoveParameter = True
+        Me.ucrChkLag.bChangeParameterValue = True
+        Me.ucrChkLag.Checked = False
+        Me.ucrChkLag.Location = New System.Drawing.Point(140, 225)
+        Me.ucrChkLag.Name = "ucrChkLag"
+        Me.ucrChkLag.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLag.TabIndex = 14
+        '
+        'ucrChkSaveResiduals
+        '
+        Me.ucrChkSaveResiduals.bAddRemoveParameter = True
+        Me.ucrChkSaveResiduals.bChangeParameterValue = True
+        Me.ucrChkSaveResiduals.Checked = False
+        Me.ucrChkSaveResiduals.Location = New System.Drawing.Point(10, 199)
+        Me.ucrChkSaveResiduals.Name = "ucrChkSaveResiduals"
+        Me.ucrChkSaveResiduals.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSaveResiduals.TabIndex = 15
+        '
+        'ucrChkDisplayResults
+        '
+        Me.ucrChkDisplayResults.bAddRemoveParameter = True
+        Me.ucrChkDisplayResults.bChangeParameterValue = True
+        Me.ucrChkDisplayResults.Checked = False
+        Me.ucrChkDisplayResults.Location = New System.Drawing.Point(10, 225)
+        Me.ucrChkDisplayResults.Name = "ucrChkDisplayResults"
+        Me.ucrChkDisplayResults.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkDisplayResults.TabIndex = 16
+        '
+        'ucrInputLag
+        '
+        Me.ucrInputLag.bAddRemoveParameter = True
+        Me.ucrInputLag.bChangeParameterValue = True
+        Me.ucrInputLag.IsMultiline = False
+        Me.ucrInputLag.IsReadOnly = False
+        Me.ucrInputLag.Location = New System.Drawing.Point(241, 224)
+        Me.ucrInputLag.Name = "ucrInputLag"
+        Me.ucrInputLag.Size = New System.Drawing.Size(80, 21)
+        Me.ucrInputLag.TabIndex = 17
         '
         'dlgMovingAverage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(442, 249)
-        Me.Controls.Add(Me.txtLag)
-        Me.Controls.Add(Me.lblLag)
-        Me.Controls.Add(Me.chkPlot)
-        Me.Controls.Add(Me.chkDisplayResults)
-        Me.Controls.Add(Me.chkSaveResiduals)
-        Me.Controls.Add(Me.cboSaveResultsIn)
-        Me.Controls.Add(Me.lblSaveResultsIn)
+        Me.ClientSize = New System.Drawing.Size(442, 347)
+        Me.Controls.Add(Me.ucrInputLag)
+        Me.Controls.Add(Me.ucrChkDisplayResults)
+        Me.Controls.Add(Me.ucrChkSaveResiduals)
+        Me.Controls.Add(Me.ucrChkLag)
+        Me.Controls.Add(Me.ucrChkPlot)
+        Me.Controls.Add(Me.ucrSaveResultsInto)
         Me.Controls.Add(Me.lblDataToAverage)
         Me.Controls.Add(Me.ucrReceiverDataToAverage)
         Me.Controls.Add(Me.ucrBase)
@@ -171,11 +166,10 @@ Partial Class dlgMovingAverage
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverDataToAverage As ucrReceiverSingle
     Friend WithEvents lblDataToAverage As Label
-    Friend WithEvents lblSaveResultsIn As Label
-    Friend WithEvents cboSaveResultsIn As ComboBox
-    Friend WithEvents chkSaveResiduals As CheckBox
-    Friend WithEvents chkDisplayResults As CheckBox
-    Friend WithEvents chkPlot As CheckBox
-    Friend WithEvents lblLag As Label
-    Friend WithEvents txtLag As TextBox
+    Friend WithEvents ucrInputLag As ucrInputTextBox
+    Friend WithEvents ucrChkDisplayResults As ucrCheck
+    Friend WithEvents ucrChkSaveResiduals As ucrCheck
+    Friend WithEvents ucrChkLag As ucrCheck
+    Friend WithEvents ucrChkPlot As ucrCheck
+    Friend WithEvents ucrSaveResultsInto As ucrSave
 End Class

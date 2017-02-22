@@ -1143,6 +1143,14 @@ Public Class frmMain
         dlgCanonicalCorrelationAnalysis.ShowDialog()
     End Sub
 
+    Private Sub mnuCorruptionDefineCorruptionData_Click(sender As Object, e As EventArgs) Handles mnuCorruptionDefineCorruptionData.Click
+        dlgDefineCorruption.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraphs.Click
+        dlgCumulativeDistribution.ShowDialog()
+    End Sub
+
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
