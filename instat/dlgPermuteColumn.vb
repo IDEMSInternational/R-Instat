@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 Imports instat
 Imports instat.Translations
 Public Class dlgPermuteColumn
@@ -38,10 +37,11 @@ Public Class dlgPermuteColumn
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrNudNumberOfColumns.SetRCode(clsOverallFunction, bReset)
+        ucrNudNumberofColumns.SetRCode(clsOverallFunction, bReset)
         ucrReceiverPermuteRows.SetRCode(clsSetSampleFunc, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeedFunc, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeedFunc, bReset)
+        ucrSavePermute.SetRCode(clsOverallFunction, bReset)
     End Sub
 
     Public Sub SetDefaults()
@@ -60,17 +60,11 @@ Public Class dlgPermuteColumn
         clsSetSampleFunc = clsDefaultSample.Clone
         clsOverallFunction = clsDefaultFunction.Clone
         clsOverallFunction.AddParameter("expr", clsRFunctionParameter:=clsSetSampleFunc)
-        ucrNudNumberOfColumns.Value = 1
-        clsOverallFunction.AddParameter("n", ucrNudNumberOfColumns.Value)
+        clsOverallFunction.AddParameter("n", 1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
-        SetAssignTo()
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSavePermute.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePermute.GetText, bAssignToIsPrefix:=True)
     End Sub
 
-    Private Sub SetAssignTo()
-        Dim blsPrefix As Boolean
-        blsPrefix = (ucrNudNumberOfColumns.Value > 1)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSavePermute.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePermute.GetText, bAssignToIsPrefix:=blsPrefix)
-    End Sub
     Private Sub InitialiseDialog()
 
         ucrBase.iHelpTopicID = 66
@@ -82,9 +76,9 @@ Public Class dlgPermuteColumn
         ucrReceiverPermuteRows.SetParameter(New RParameter("x", 0))
         ucrReceiverPermuteRows.SetParameterIsRFunction()
 
-        ucrNudNumberOfColumns.SetParameter(New RParameter("n", 1))
-        ucrNudNumberOfColumns.Maximum = Integer.MaxValue
-        ucrNudNumberOfColumns.Minimum = 1
+        ucrNudNumberofColumns.SetParameter(New RParameter("n", 1))
+        ucrNudNumberofColumns.Maximum = Integer.MaxValue
+        ucrNudNumberofColumns.Minimum = 1
 
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSetSeed.SetText("Set Seed")
@@ -119,11 +113,10 @@ Public Class dlgPermuteColumn
         If ucrChkSetSeed.Checked Then
             frmMain.clsRLink.RunScript(clsSetSeedFunc.ToScript, strComment:="dlgPermuteColumn:Setting the seed for the random generator")
         End If
-
     End Sub
 
     Private Sub SetNewColumName()
-        If ucrNudNumberOfColumns.Value = 1 Then
+        If ucrNudNumberofColumns.Value = 1 Then
             ucrSavePermute.SetLabelText("New Column Name:")
             If Not ucrSavePermute.bUserTyped Then
                 ucrSavePermute.SetPrefix("permute")
@@ -135,7 +128,6 @@ Public Class dlgPermuteColumn
                 ucrSavePermute.SetName("permute")
             End If
         End If
-        SetAssignTo()
     End Sub
 
     Private Sub DataFrameLength()
@@ -144,14 +136,11 @@ Public Class dlgPermuteColumn
     End Sub
 
     Private Sub ucrPermuteRowsSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPermuteRowsSelector.ControlValueChanged
-        SetNewColumName()
         DataFrameLength()
     End Sub
 
-    Private Sub ucrNudNumberofColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfColumns.ControlValueChanged
-        clsOverallFunction.AddParameter("n", ucrNudNumberOfColumns.Value)
+    Private Sub ucrNudNumberofColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberofColumns.ControlValueChanged
         SetNewColumName()
-
     End Sub
 
 End Class
