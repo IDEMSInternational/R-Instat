@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgTransformText
@@ -76,7 +75,6 @@ Public Class dlgTransformText
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputPad.bAllowNonConditionValues = True
 
         'ucrInputPad
         Dim dctInputPad As New Dictionary(Of String, String)
@@ -89,16 +87,13 @@ Public Class dlgTransformText
         ucrInputPad.SetItems(dctInputPad)
         ucrInputPad.SetLinkedDisplayControl(lblPad)
         ucrInputPad.SetRDefault(Chr(34) & " " & Chr(34))
-        ucrInputPad.bAllowNonConditionValues = True
 
         'ucrNudWidth
         ucrNudWidth.SetParameter(New RParameter("width", 3))
         ucrNudWidth.SetLinkedDisplayControl(lblWidth)
 
-        'rdoTrim and pnl
+        'rdoTrim, rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad, rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlPad
-        ucrPnlPad.bAllowNonConditionValues = True
         ucrPnlPad.SetParameter(New RParameter("side", 1))
         ucrPnlPad.AddRadioButton(rdoLeftPad, Chr(34) & "left" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoRightPad, Chr(34) & "right" & Chr(34))
@@ -107,10 +102,6 @@ Public Class dlgTransformText
 
         'rdoWords
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) 'bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Space")
-        ' ucrInputSeparator.bAllowNonConditionValues = True
-
-        'TODO change rdo buttons, can set it to that function with .AddParameter(...)
-        'TODO have different default functions, reset all in setdefaults. Switch between just change base function
 
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
@@ -139,7 +130,7 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
-        'ucrNud
+        'ucrNuds
         ucrNudFrom.SetParameter(New RParameter("start", 1))
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
 
@@ -154,10 +145,13 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsConvertDefaultFunction As New RFunction
-        Dim clsPadDefaultFunction, clsLengthDefaultFunction As New RFunction
+        clsConvertFunction = New RFunction
+        clsLengthFunction = New RFunction
+        clsPadFunction = New RFunction
+        clsTrimFunction = New RFunction
+        clsWordsFunction = New RFunction
+        clsSubStringFunction = New RFunction
 
-        rdoConvertCase.Checked = True
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
         ucrChkFirstOr.Checked = False
@@ -168,25 +162,27 @@ Public Class dlgTransformText
         NewDefaultName()
         WordsTab()
 
-        clsConvertDefaultFunction.SetRCommand("str_to_lower")
-        clsConvertDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+        clsConvertFunction.SetRCommand("str_to_lower")
+        clsConvertFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
-        clsLengthDefaultFunction.SetRCommand("str_length")
-        clsLengthDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+        clsLengthFunction.SetRCommand("str_length")
 
-        clsPadDefaultFunction.SetRCommand("str_pad")
-        clsPadDefaultFunction.AddParameter("pad", Chr(34) & " " & Chr(34))
-        clsPadDefaultFunction.AddParameter("side", Chr(34) & "left" & Chr(34))
-        clsPadDefaultFunction.AddParameter("width", 1)
-        clsPadDefaultFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+        clsPadFunction.SetRCommand("str_pad")
+        clsPadFunction.AddParameter("pad", Chr(34) & " " & Chr(34))
+        clsPadFunction.AddParameter("side", Chr(34) & "left" & Chr(34))
+        clsPadFunction.AddParameter("width", 1)
 
+        clsTrimFunction.SetRCommand("str_trim")
+        clsTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34))
 
         '        clsWordsFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
 
+        clsSubStringFunction.SetRCommand("str_sub")
+        clsSubStringFunction.AddParameter("start", 1)
+        clsSubStringFunction.AddParameter("end", 2)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsConvertDefaultFunction)
-        clsPadFunction = clsPadDefaultFunction
-        clsLengthFunction = clsLengthDefaultFunction
+        ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+        rdoConvertCase.Checked = True
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -196,17 +192,16 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
-
         If rdoLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
         ElseIf rdoPad.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
         ElseIf rdoTrim.Checked Then
-            ucrBase.clsRsyntax.SetFunction("str_trim")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
         ElseIf rdoWords.Checked Then
-            ucrBase.clsRsyntax.SetFunction("word")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
         ElseIf rdoSubstring.Checked Then
-            ucrBase.clsRsyntax.SetFunction("str_sub")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSubStringFunction)
         ElseIf rdoConvertCase.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
             Select Case ucrInputTo.GetText
@@ -219,24 +214,27 @@ Public Class dlgTransformText
             End Select
         End If
         TestOkEnabled()
-        ChangeRCode()
-    End Sub
-
-    Private Sub ChangeRCode()
-        If rdoConvertCase.Checked Then
-            ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
-            ucrInputTo.SetRCode(clsConvertFunction, bReset)
-        ElseIf rdoPad.Checked Then
-            ucrReceiverTransformText.SetRCode(clsPadFunction, bReset)
-            ucrInputPad.SetRCode(clsPadFunction, bReset)
-            ucrPnlPad.SetRCode(clsPadFunction, bReset)
-            ucrNudWidth.SetRCode(clsPadFunction, bReset)
-        Else
-        End If
+        SetRCodeForControls(False)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ChangeRCode()
+        ucrReceiverTransformText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrNewColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ucrInputTo.SetRCode(clsConvertFunction, bReset)
+
+        ucrInputPad.SetRCode(clsPadFunction, bReset)
+        ucrPnlPad.SetRCode(clsPadFunction, bReset)
+        ucrNudWidth.SetRCode(clsPadFunction, bReset)
+
+        'Trim
+        ucrPnlPad.SetRCode(clsTrimFunction, bReset)
+
+        'Words
+
+        'SubString
+        ucrNudFrom.SetRCode(clsSubStringFunction, bReset)
+        ucrNudTo.SetRCode(clsSubStringFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
