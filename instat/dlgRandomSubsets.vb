@@ -11,7 +11,6 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True
@@ -61,7 +60,7 @@ Public Class dlgRandomSubsets
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
         'Linking checkox and nud
-        ucrChkSetSeed.AddToLinkedControls(ucrLinked:=ucrNudSetSeed, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSetSeed.AddToLinkedControls(ucrLinked:=ucrNudSetSeed, objValues:={True}, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNewDataframe
         ucrNewDataframe.SetIsTextBox()
@@ -88,18 +87,14 @@ Public Class dlgRandomSubsets
         ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         ClsDefaultSample.AddParameter("size", ucrNudSampleSize.Value)
         clsReplicateFunc = clsDefaultRepFunc
-
         clsDefaultSeed.SetRCommand("set.seed")
         clsDefaultSeed.AddParameter("seed", 1)
         clsSetSeed = clsDefaultSeed
-
         clsSampleFunc = ClsDefaultSample
-
         clsOverallFunction = clsDefaultFunction.Clone
         clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
         clsOverallFunction.AddParameter("X", clsRFunctionParameter:=clsReplicateFunc)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
-
         clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
 
     End Sub
@@ -117,7 +112,7 @@ Public Class dlgRandomSubsets
         ucrReceiverSelected.SetRCode(clsSampleFunc, bReset)
         ucrChkWithReplacement.SetRCode(clsSampleFunc, bReset)
         ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
-        ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
+        ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
     End Sub
 
@@ -154,7 +149,6 @@ Public Class dlgRandomSubsets
             ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         End If
     End Sub
-
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrNewDataframe.ControlContentsChanged
         TestOKEnabled()
