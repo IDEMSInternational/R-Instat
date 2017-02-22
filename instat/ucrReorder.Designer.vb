@@ -1,5 +1,7 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+
 Partial Class ucrReorder
+ master
     Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
