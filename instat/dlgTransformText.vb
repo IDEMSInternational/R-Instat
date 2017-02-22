@@ -175,7 +175,10 @@ Public Class dlgTransformText
         clsTrimFunction.SetRCommand("str_trim")
         clsTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34))
 
-        '        clsWordsFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
+        clsWordsFunction.SetRCommand("word")
+        '       clsWordsFunction.AddParameter("", 1)
+        '       clsWordsFunction.AddParameter("", )
+        clsWordsFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
 
         clsSubStringFunction.SetRCommand("str_sub")
         clsSubStringFunction.AddParameter("start", 1)
@@ -231,6 +234,7 @@ Public Class dlgTransformText
         ucrPnlPad.SetRCode(clsTrimFunction, bReset)
 
         'Words
+        ucrInputSeparator.SetRCode(clsWordsFunction, bReset)
 
         'SubString
         ucrNudFrom.SetRCode(clsSubStringFunction, bReset)
@@ -350,5 +354,4 @@ Public Class dlgTransformText
     Private Sub ucrSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForTransformText.ControlValueChanged
         NewDefaultName()
     End Sub
-
 End Class
