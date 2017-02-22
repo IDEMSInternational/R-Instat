@@ -115,13 +115,13 @@ Public Class dlgPermuteColumn
 
     Private Sub SetNewColumName()
         If ucrNudNumberofColumns.Value = 1 Then
-            ucrSavePermute.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            ucrSavePermute.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
             ucrSavePermute.SetLabelText("New Column Name:")
             If Not ucrSavePermute.bUserTyped Then
                 ucrSavePermute.SetPrefix("permute")
             End If
         Else
-            ucrSavePermute.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            ucrSavePermute.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
             ucrSavePermute.SetLabelText("Prefix for New Columns:")
             If Not ucrSavePermute.bUserTyped Then
                 ucrSavePermute.SetPrefix("")
