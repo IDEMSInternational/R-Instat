@@ -84,7 +84,7 @@ Partial Class dlgTransformText
         Me.grpOperation.Controls.Add(Me.rdoPad)
         Me.grpOperation.Controls.Add(Me.rdoLength)
         Me.grpOperation.Controls.Add(Me.ucrPnlOperation)
-        Me.grpOperation.Location = New System.Drawing.Point(10, 205)
+        Me.grpOperation.Location = New System.Drawing.Point(11, 205)
         Me.grpOperation.Name = "grpOperation"
         Me.grpOperation.Size = New System.Drawing.Size(108, 181)
         Me.grpOperation.TabIndex = 6
@@ -161,7 +161,7 @@ Partial Class dlgTransformText
         '
         Me.ucrPnlOperation.Location = New System.Drawing.Point(4, 15)
         Me.ucrPnlOperation.Name = "ucrPnlOperation"
-        Me.ucrPnlOperation.Size = New System.Drawing.Size(104, 156)
+        Me.ucrPnlOperation.Size = New System.Drawing.Size(98, 156)
         Me.ucrPnlOperation.TabIndex = 9
         '
         'lblToSubstring
@@ -212,7 +212,7 @@ Partial Class dlgTransformText
         'grpParameters
         '
         Me.grpParameters.Controls.Add(Me.pnlWords)
-        Me.grpParameters.Location = New System.Drawing.Point(118, 205)
+        Me.grpParameters.Location = New System.Drawing.Point(127, 205)
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.Size = New System.Drawing.Size(267, 181)
         Me.grpParameters.TabIndex = 8
