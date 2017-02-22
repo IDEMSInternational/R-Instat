@@ -70,10 +70,12 @@ Public Class dlgExportToCPT
         ucrReceiverMultipleDataColumns.Selector = ucrSSTDataframe
         ucrReceiverMultipleDataColumns.SetParameter(New RParameter("sst_cols"))
         ucrReceiverMultipleDataColumns.SetParameterIsString()
+        ucrReceiverMultipleDataColumns.SetLinkedDisplayControl(lblDataColumns)
 
         ucrReceiverDataColumn.Selector = ucrSSTDataframe
         ucrReceiverDataColumn.SetParameter(New RParameter("sst_cols"))
         ucrReceiverDataColumn.SetParameterIsString()
+        ucrReceiverDataColumn.SetLinkedDisplayControl(lblDataColumn)
 
         ucrReceiverYears.Selector = ucrSSTDataframe
         ucrReceiverYears.SetParameter(New RParameter("year_col"))
@@ -82,6 +84,7 @@ Public Class dlgExportToCPT
         ucrReceiverStations.Selector = ucrSSTDataframe
         ucrReceiverStations.SetParameter(New RParameter("station_col"))
         ucrReceiverStations.SetParameterIsString()
+        ucrReceiverStations.SetLinkedDisplayControl(lblStations)
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
 
@@ -137,31 +140,12 @@ Public Class dlgExportToCPT
         TestOkEnabled()
     End Sub
 
-    Private Sub DataFormat()
-        ucrReceiverYears.Focus()
-        If ucrChkLong.Checked Then
-            lblStations.Visible = True
-            ucrReceiverStations.Visible = True
-            lblDataColumn.Visible = True
-            ucrReceiverDataColumn.Visible = True
-            lblDataColumns.Visible = False
-            ucrReceiverMultipleDataColumns.Visible = False
-        Else
-            lblDataColumns.Visible = True
-            ucrReceiverMultipleDataColumns.Visible = True
-            lblStations.Visible = False
-            ucrReceiverStations.Visible = False
-            lblDataColumn.Visible = False
-            ucrReceiverDataColumn.Visible = False
-        End If
-    End Sub
-
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrSSTDataframe.ControlContentsChanged, ucrLocationDataFrame.ControlContentsChanged, ucrReceiverDataColumn.ControlContentsChanged, ucrReceiverMultipleDataColumns.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverYears.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrChkLong_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkLong.ControlContentsChanged
-        DataFormat()
+        ucrReceiverYears.Focus()
         ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutPut)
         TestOkEnabled()
     End Sub
