@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports System.Text.RegularExpressions
 
@@ -180,12 +179,11 @@ Public Class DlgDefineClimaticData
         Return lstValues
     End Function
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverCloudCover.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverStationName.ControlContentsChanged, ucrReceiverSunshine.ControlContentsChanged, ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlContentsChanged
         AutoFillReceivers()
-        TestOKEnabled()
     End Sub
 End Class
