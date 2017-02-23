@@ -16,17 +16,20 @@
 
 Imports instat.Translations
 Public Class dlgHideShowColumns
-    Private clsDefaultFunction As New RFunction
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgHideShowColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
-            TestOKEnabled()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
         SetHiddenColumnsInReceiver()
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -38,15 +41,15 @@ Public Class dlgHideShowColumns
         ucrReceiverHiddenColumns.Selector = ucrSelectorForHiddenColumns
         ucrReceiverHiddenColumns.SetMeAsReceiver()
 
-        ucrSelectorForHiddenColumns.SetParameter(New RParameter("data_name"))
+        ucrSelectorForHiddenColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForHiddenColumns.SetParameterIsString()
 
-        ucrReceiverHiddenColumns.SetParameter(New RParameter("col_names"))
-        ucrReceiverHiddenColumns.SetParameterIsString()
-
-        ucrReceiverHiddenColumns.bExcludeFromSelector = True
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
+        ucrReceiverHiddenColumns.SetParameter(New RParameter("col_names", 1))
         ucrSelectorForHiddenColumns.bShowHiddenColumns = True
+        ucrReceiverHiddenColumns.SetRDefault("c()")
+        ucrReceiverHiddenColumns.SetParameterIsString()
+        ucrReceiverHiddenColumns.bExcludeFromSelector = True
+
     End Sub
 
     Private Sub SetHiddenColumnsInReceiver()
@@ -54,18 +57,24 @@ Public Class dlgHideShowColumns
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
         SetHiddenColumnsInReceiver()
+        clsDefaultFunction.AddParameter("col_names", "c()")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForHiddenColumns.ControlContentsChanged, ucrReceiverHiddenColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
