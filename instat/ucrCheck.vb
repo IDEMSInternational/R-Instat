@@ -21,41 +21,6 @@ Public Class ucrCheck
     Private strValueIfChecked As String = "TRUE"
     Private strValueIfUnchecked As String = "FALSE"
 
-    ''Is the checkbox linked to a parameter only by whether the parameter is present or not, irrespective of the parameter value
-    'Private bIsParameterPresent As Boolean = False
-
-    ''When bIsParameterPresent should the control be checked when the parameter is present (and unchecked when not present)
-    ''If = False then the opposite.
-    'Private bParameterIncludedWhenChecked As Boolean = True
-
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-
-        MyBase.UpdateControl(bReset)
-
-        'If clsParameter IsNot Nothing Then
-        '    If bChangeParameterValue Then
-        '        If clsParameter.strArgumentValue = strValueIfChecked OrElse clsParameter.strArgumentValue = strValueIfUnchecked Then
-        '            chkCheck.Checked = (clsParameter.strArgumentValue = strValueIfChecked)
-        '        Else
-        '            MsgBox("Developer error: The value of parameter " & clsParameter.strArgumentName & ": " & clsParameter.strArgumentValue & " does not match strValueIfChecked or strValueIfUnchecked so cannot determine state for the checkbox. Setting as the default instead.")
-        '            chkCheck.Checked = False
-        '        End If
-        '    ElseIf bAddRemoveParameter Then
-        '        'Commented out as not currently needed. Can be included if needed.
-        '        'If bParameterIncludedWhenChecked Then
-        '        chkCheck.Checked = clsRCode.ContainsParameter(clsParameter)
-        '        'Else
-        '        'chkCheck.Checked = Not clsRCodeObject.clsParameters.Contains(clsParameter)
-        '        'End If
-        '    End If
-        'Else
-        '    If lstValuesAndControl.Count > 0 Then
-        '        chkCheck.Checked = LinkedControlsParametersPresent()
-        '    End If
-        'End If
-        UpdateLinkedControls()
-    End Sub
-
     Public Sub SetValueIfChecked(strNewValueIfChecked As String)
         Dim clsTempCond As New Condition
 
@@ -84,6 +49,7 @@ Public Class ucrCheck
             SetValuesCheckedAndUnchecked(strNewValueIfChecked, strNewValueIfUnchecked)
         ElseIf bAddRemoveParameter Then
             AddParameterPresentCondition(True, clsParameter.strArgumentName)
+            AddParameterPresentCondition(False, clsParameter.strArgumentName, False)
         End If
     End Sub
 
@@ -113,7 +79,7 @@ Public Class ucrCheck
         End Set
     End Property
 
-    Public Overrides Function ValueContainedIn(lstTemp As Object()) As Boolean
+    Public Overrides Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Dim bTempValue As Boolean
         Dim bContainedIn As Boolean = False
 
@@ -129,13 +95,57 @@ Public Class ucrCheck
         Return bContainedIn
     End Function
 
-    Protected Overrides Sub SetControlValue(objTemp As Object)
+    Public Overrides Function GetValueToSet() As Object
+        If clsParameter IsNot Nothing Then
+            If clsParameter.bIsString Then
+                If bChangeParameterValue Then
+                    If clsParameter.strArgumentValue = strValueIfChecked OrElse clsParameter.strArgumentValue = strValueIfUnchecked Then
+                        Return (clsParameter.strArgumentValue = strValueIfChecked)
+                    Else
+                        Return clsParameter.strArgumentValue
+                    End If
+                ElseIf bAddRemoveParameter Then
+                    Return clsRCode.ContainsParameter(clsParameter)
+                End If
+            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
+                Return clsParameter.clsArgumentCodeStructure
+            Else
+                Return Nothing
+            End If
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Protected Overrides Sub SetToValue(objTemp As Object)
         Dim bTempValue As Boolean
 
         If Boolean.TryParse(objTemp, bTempValue) Then
             Checked = bTempValue
         Else
             MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
+        End If
+    End Sub
+
+    Public Overrides Function CanAddParameter() As Boolean
+        If bChangeParameterValue Then
+            Return MyBase.CanAddParameter()
+        ElseIf bAddRemoveParameter Then
+            Return Checked
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Overrides Sub ChangeParameterName(strNewName As String, Optional bClearConditions As Boolean = True)
+        MyBase.ChangeParameterName(strNewName, bClearConditions)
+        If bClearConditions Then
+            If bChangeParameterValue Then
+                SetValuesCheckedAndUnchecked(strValueIfChecked, strValueIfUnchecked)
+            ElseIf bAddRemoveParameter Then
+                AddParameterPresentCondition(True, clsParameter.strArgumentName)
+                AddParameterPresentCondition(False, clsParameter.strArgumentName, False)
+            End If
         End If
     End Sub
 End Class

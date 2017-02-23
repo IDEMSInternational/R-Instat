@@ -79,15 +79,27 @@ Module mdlCoreControl
         Next
     End Sub
 
-    Public Function AllConditionsSatisfied(lstConditions As List(Of Condition), clsRCode As RCodeStructure)
+    Public Function AllConditionsSatisfied(lstConditions As List(Of Condition), clsRCode As RCodeStructure, Optional clsParameter As RParameter = Nothing)
         Dim bTemp As Boolean = True
 
         For Each clsTempCond In lstConditions
-            If Not clsTempCond.IsSatisfied(clsRCode) Then
+            If Not clsTempCond.IsSatisfied(clsRCode, clsParameter) Then
                 bTemp = False
                 Exit For
             End If
         Next
         Return bTemp
+    End Function
+
+    Public Function ExtractItemsFromRList(strTemp As String) As String()
+        Dim lstVariables As String()
+        If strTemp.StartsWith("c(") Then
+            strTemp = strTemp.Substring(2)
+        End If
+        lstVariables = strTemp.Split(",")
+        For i As Integer = 0 To lstVariables.Count - 1
+            lstVariables(i) = lstVariables(i).Trim(Chr(34), " ", Chr(39), ")")
+        Next
+        Return lstVariables
     End Function
 End Module
