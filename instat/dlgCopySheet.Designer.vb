@@ -46,12 +46,12 @@ Partial Class dlgCopySheet
         '
         'lblNewSheetName
         '
-        Me.lblNewSheetName.Location = New System.Drawing.Point(194, 10)
+        Me.lblNewSheetName.Location = New System.Drawing.Point(194, 12)
         Me.lblNewSheetName.Name = "lblNewSheetName"
-        Me.lblNewSheetName.Size = New System.Drawing.Size(156, 23)
+        Me.lblNewSheetName.Size = New System.Drawing.Size(70, 13)
         Me.lblNewSheetName.TabIndex = 1
         Me.lblNewSheetName.Tag = "New_Sheet_Name"
-        Me.lblNewSheetName.Text = "New Data Frame Name:"
+        Me.lblNewSheetName.Text = "New Name:"
         '
         'ucrNewDataFrameName
         '

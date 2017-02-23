@@ -79,7 +79,7 @@ Public Class ucrCheck
         End Set
     End Property
 
-    Public Overrides Function ValueContainedIn(lstTemp As Object()) As Boolean
+    Public Overrides Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Dim bTempValue As Boolean
         Dim bContainedIn As Boolean = False
 
@@ -95,13 +95,57 @@ Public Class ucrCheck
         Return bContainedIn
     End Function
 
-    Protected Overrides Sub SetControlValue(objTemp As Object)
+    Public Overrides Function GetValueToSet() As Object
+        If clsParameter IsNot Nothing Then
+            If clsParameter.bIsString Then
+                If bChangeParameterValue Then
+                    If clsParameter.strArgumentValue = strValueIfChecked OrElse clsParameter.strArgumentValue = strValueIfUnchecked Then
+                        Return (clsParameter.strArgumentValue = strValueIfChecked)
+                    Else
+                        Return clsParameter.strArgumentValue
+                    End If
+                ElseIf bAddRemoveParameter Then
+                    Return clsRCode.ContainsParameter(clsParameter)
+                End If
+            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
+                Return clsParameter.clsArgumentCodeStructure
+            Else
+                Return Nothing
+            End If
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Protected Overrides Sub SetToValue(objTemp As Object)
         Dim bTempValue As Boolean
 
         If Boolean.TryParse(objTemp, bTempValue) Then
             Checked = bTempValue
         Else
             MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
+        End If
+    End Sub
+
+    Public Overrides Function CanAddParameter() As Boolean
+        If bChangeParameterValue Then
+            Return MyBase.CanAddParameter()
+        ElseIf bAddRemoveParameter Then
+            Return Checked
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Overrides Sub ChangeParameterName(strNewName As String, Optional bClearConditions As Boolean = True)
+        MyBase.ChangeParameterName(strNewName, bClearConditions)
+        If bClearConditions Then
+            If bChangeParameterValue Then
+                SetValuesCheckedAndUnchecked(strValueIfChecked, strValueIfUnchecked)
+            ElseIf bAddRemoveParameter Then
+                AddParameterPresentCondition(True, clsParameter.strArgumentName)
+                AddParameterPresentCondition(False, clsParameter.strArgumentName, False)
+            End If
         End If
     End Sub
 End Class
