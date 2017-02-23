@@ -110,7 +110,7 @@ Public Class dlgOneVarUseModel
         clsOverallFunction.SetAssignTo(strTemp:=ucrSaveToDataframe.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         clsProduceBootstrap.SetRCommand("bootdist")
-        clsProduceBootstrap.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ', bInsertColumnBefore:=True)
+        clsProduceBootstrap.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempModel:=ucrSaveBootstrapObjects.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ', bInsertColumnBefore:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
 
