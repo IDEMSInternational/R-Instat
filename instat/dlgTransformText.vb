@@ -78,7 +78,7 @@ Public Class dlgTransformText
 
         'ucrInputPad
         Dim dctInputPad As New Dictionary(Of String, String)
-        ucrInputPad.SetParameter(New RParameter("pad", 2))
+        ucrInputPad.SetParameter(New RParameter("pad", 3))
         dctInputPad.Add("Space", Chr(34) & " " & Chr(34))
         dctInputPad.Add("Hash", Chr(34) & "#" & Chr(34))
         dctInputPad.Add("Hyphen", Chr(34) & "-" & Chr(34))
@@ -89,12 +89,12 @@ Public Class dlgTransformText
         ucrInputPad.SetRDefault(Chr(34) & " " & Chr(34))
 
         'ucrNudWidth
-        ucrNudWidth.SetParameter(New RParameter("width", 3))
+        ucrNudWidth.SetParameter(New RParameter("width", 1))
         ucrNudWidth.SetLinkedDisplayControl(lblWidth)
 
         'rdoTrim, rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrPnlPad, {rdoPad, rdoTrim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPad.SetParameter(New RParameter("side", 1))
+        ucrPnlPad.SetParameter(New RParameter("side", 2))
         ucrPnlPad.AddRadioButton(rdoLeftPad, Chr(34) & "left" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoRightPad, Chr(34) & "right" & Chr(34))
         ucrPnlPad.AddRadioButton(rdoBothPad, Chr(34) & "both" & Chr(34))
@@ -110,10 +110,10 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrChkFirstOr
-        ucrNudFirstWord.SetParameter(New RParameter("start"))
+        ucrNudFirstWord.SetParameter(New RParameter("start", 1))
         ucrNudFirstWord.SetLinkedDisplayControl(lblFirstWord)
 
-        ucrReceiverFirstWord.SetParameter(New RParameter("start"))
+        ucrReceiverFirstWord.SetParameter(New RParameter("start", 1))
         ucrReceiverFirstWord.SetParameterIsRFunction()
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
@@ -124,10 +124,10 @@ Public Class dlgTransformText
         ucrChkFirstOr.AddParameterIsRFunctionCondition(True, "start", True)
 
         'ucrChkLastOr
-        ucrNudLastWord.SetParameter(New RParameter("end"))
+        ucrNudLastWord.SetParameter(New RParameter("end", 2))
         ucrNudLastWord.SetLinkedDisplayControl(lblLastWord)
 
-        ucrReceiverLastWord.SetParameter(New RParameter("end"))
+        ucrReceiverLastWord.SetParameter(New RParameter("end", 2))
         ucrReceiverLastWord.SetParameterIsRFunction()
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
         ucrReceiverLastWord.bUseFilteredData = False
@@ -139,18 +139,18 @@ Public Class dlgTransformText
 
         ' ucrInputSeparator
         Dim dctInputSeparator As New Dictionary(Of String, String)
-        ucrInputSeparator.SetParameter(New RParameter("sep", 1))
-        dctInputSeparator.Add("Space", Chr(34) & " " & Chr(34))
+        ucrInputSeparator.SetParameter(New RParameter("sep", 3))
+        dctInputSeparator.Add("Space", "fixed(" & Chr(34) & " " & Chr(34) & ")")
         dctInputSeparator.Add("Colon", Chr(34) & ":" & Chr(34))
-        dctInputSeparator.Add("Period", Chr(34) & "." & Chr(34))
+        dctInputSeparator.Add("Period", "fixed(" & Chr(34) & "." & Chr(34) & ")")
         dctInputSeparator.Add("Underscore", Chr(34) & "_" & Chr(34))
         ucrInputSeparator.SetItems(dctInputSeparator)
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
-        ucrInputSeparator.SetRDefault(Chr(34) & " " & Chr(34))
+        ucrInputSeparator.SetRDefault("fixed(" & Chr(34) & " " & Chr(34) & ")")
 
         'rdoSubstring
-        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNuds
         ucrNudFrom.SetParameter(New RParameter("start", 1))
@@ -194,7 +194,7 @@ Public Class dlgTransformText
         clsWordsFunction.SetRCommand("word")
         clsWordsFunction.AddParameter("start", 1)
         clsWordsFunction.AddParameter("end", 2)
-        clsWordsFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
+        clsWordsFunction.AddParameter("sep", "fixed(" & Chr(34) & " " & Chr(34) & ")")
 
         clsSubStringFunction.SetRCommand("str_sub")
         clsSubStringFunction.AddParameter("start", 1)
@@ -294,7 +294,7 @@ Public Class dlgTransformText
         End If
     End Sub
 
-    Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged, ucrNudFirstWord.ControlContentsChanged, ucrNudLastWord.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrReceiverLastWord.ControlContentsChanged, ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputPad.ControlContentsChanged
+    Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged, ucrNudFirstWord.ControlContentsChanged, ucrNudLastWord.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrReceiverLastWord.ControlContentsChanged, ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrChkFirstOr.ControlContentsChanged, ucrChkLastOr.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
