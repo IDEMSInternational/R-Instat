@@ -1026,10 +1026,22 @@
     <Compile Include="ucrDialogDisabled.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrFactorGrid.Designer.vb">
+      <DependentUpon>ucrFactorGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFactorGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrFilter.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrGeneralGrid.Designer.vb">
+      <DependentUpon>ucrGeneralGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGeneralGrid.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrGeomListWithAes.designer.vb">
@@ -1042,6 +1054,12 @@
       <DependentUpon>ucrGeom.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrGeom.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrGrid.Designer.vb">
+      <DependentUpon>ucrGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGrid.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
@@ -3963,6 +3981,15 @@
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrFactorGrid.fr-FR.resx">
+      <DependentUpon>ucrFactorGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFactorGrid.resx">
+      <DependentUpon>ucrFactorGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFactorGrid.sw-KE.resx">
+      <DependentUpon>ucrFactorGrid.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrFilter.fr-FR.resx">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </EmbeddedResource>
@@ -3971,6 +3998,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFilter.sw-KE.resx">
       <DependentUpon>ucrFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeneralGrid.fr-FR.resx">
+      <DependentUpon>ucrGeneralGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeneralGrid.resx">
+      <DependentUpon>ucrGeneralGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeneralGrid.sw-KE.resx">
+      <DependentUpon>ucrGeneralGrid.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.fr-FR.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
@@ -3989,6 +4025,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeom.sw-KE.resx">
       <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGrid.fr-FR.resx">
+      <DependentUpon>ucrGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGrid.resx">
+      <DependentUpon>ucrGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGrid.sw-KE.resx">
+      <DependentUpon>ucrGrid.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
