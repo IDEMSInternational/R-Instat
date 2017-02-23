@@ -67,10 +67,13 @@ Public Class dlgOneVarUseModel
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         'ucrReceiver
+        ucrReceiver.SetParameter(New RParameter("x", 0)) ' by default the checkbox is unchecked, and hence this is x = ...
+        ucrReceiver.SetParameterIsRFunction()
         ucrReceiver.Selector = ucrSelector
         ucrReceiver.SetMeAsReceiver()
-        'ucrReceiver.AddToLinkedControls(ucrLinked:=ucrChkProduceBootstrap, objValues:={True}, bNewLinkedDisabledIfParameterMissing:=True)
-        ' how do I say that if this has a value in it then I want it to be visible
+        '        ucrReceiver.AddToLinkedControls(ucrLinked:=ucrChkProduceBootstrap, objValues:={Not vbEmpty}, bNewLinkedDisabledIfParameterMissing:=True)
+        ' obj value = true? Perhaps obj value is that it's full?
+
         ' I know this will be an issue elsewhere, such as with ucrDistributions
         ucrSelector.SetItemType("model")
 
@@ -177,9 +180,11 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        '        ucrSaveToDataframe.SetRCode(clsOverallFunction, bReset)
+        ucrReceiver.SetRCode(clsOverallFunction, bReset)
+        ucrReceiver.SetRCode(clsProduceBootstrap, bReset)
+        ucrSaveToDataframe.SetRCode(clsOverallFunction, bReset)
         ucrChkProduceBootstrap.SetRCode(clsProduceBootstrap, bReset)
-        '        ucrSaveBootstrapObjects.SetRCode(clsProduceBootstrap, bReset)
+        ucrSaveBootstrapObjects.SetRCode(clsProduceBootstrap, bReset)
     End Sub
 
     Private Sub TestOK_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiver.ControlContentsChanged, ucrSaveToDataframe.ControlContentsChanged, ucrSaveBootstrapObjects.ControlContentsChanged, ucrChkProduceBootstrap.ControlContentsChanged
