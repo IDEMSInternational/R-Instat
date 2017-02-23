@@ -15,7 +15,7 @@ Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSetSeed, clsReplicateFunc, clsOverallFunction, clsSampleFunc As New RFunction
+    Private clsDataFrame, clsSetSeed, ClsSample, clsReplicate As New RFunction
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -71,56 +71,58 @@ Public Class dlgRandomSubsets
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction, clsDefaultSeed, ClsDefaultSample, clsDefaultRepFunc As New RFunction
 
+        'reset
         ucrSelectorRandomSubsets.Reset()
         ucrNewDataframe.Reset()
+        ucrChkSetSeed.Checked = False
         NewDefaultName()
         ReplaceParameters()
-        ucrChkSetSeed.Checked = False
-        clsDefaultFunction.SetRCommand("data.frame")
-        clsDefaultRepFunc.SetRCommand("replicate")
-        ClsDefaultSample.SetRCommand("sample")
-        clsDefaultRepFunc.AddParameter("n", 1)
-        ClsDefaultSample.AddParameter("replace", "FALSE")
-        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+
+        'sample function
+        ClsSample = New RFunction
+        ClsSample.SetRCommand("sample")
+        ClsSample.AddParameter("replace", "FALSE")
         ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
-        ClsDefaultSample.AddParameter("size", ucrNudSampleSize.Value)
-        clsReplicateFunc = clsDefaultRepFunc
-        clsDefaultSeed.SetRCommand("set.seed")
-        clsDefaultSeed.AddParameter("seed", 1)
-        clsSetSeed = clsDefaultSeed
-        clsSampleFunc = ClsDefaultSample
-        clsOverallFunction = clsDefaultFunction.Clone
-        clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
-        clsOverallFunction.AddParameter("X", clsRFunctionParameter:=clsReplicateFunc)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
-        clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
+        ClsSample.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
+
+        'setseed fuction
+        clsSetSeed = New RFunction
+        clsSetSeed.SetRCommand("set.seed")
+        clsSetSeed.AddParameter("seed", 1)
+
+        'replicate func setting
+        clsReplicate = New RFunction
+        clsReplicate.SetRCommand("replicate")
+        clsReplicate.AddParameter("n", 1)
+        clsReplicate.AddParameter("expr", clsRFunctionParameter:=ClsSample)
+
+        'setting the main fuction
+        clsDataFrame = New RFunction
+        clsDataFrame.SetRCommand("data.frame")
+        clsDataFrame.AddParameter("X", clsRFunctionParameter:=clsReplicate)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrame)
+        clsDataFrame.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
 
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.IsComplete) Then
+        If ((Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.IsComplete) AndAlso ((ucrChkSetSeed.Checked AndAlso (ucrNudSetSeed.GetText <> "") OrElse Not ucrChkSetSeed.Checked))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
 
-        If (Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.IsComplete) AndAlso (ucrNudSetSeed.GetText <> "") Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
     End Sub
-
+    'updating rcode of the controls
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverSelected.SetRCode(clsSampleFunc, bReset)
-        ucrChkWithReplacement.SetRCode(clsSampleFunc, bReset)
-        ucrNudNumberOfColumns.SetRCode(clsReplicateFunc, bReset)
+        ucrReceiverSelected.SetRCode(ClsSample, bReset)
+        ucrChkWithReplacement.SetRCode(ClsSample, bReset)
+        ucrNudNumberOfColumns.SetRCode(clsReplicate, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
-        ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
+        ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
+        ucrNewDataframe.SetRCode(clsDataFrame, bReset)
     End Sub
-
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkSetSeed.Checked Then
@@ -142,15 +144,15 @@ Public Class dlgRandomSubsets
 
     Private Sub sizes()
         ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
-        clsSampleFunc.AddParameter("size", ucrNudSampleSize.Value)
+        ClsSample.AddParameter("size", ucrNudSampleSize.Value)
     End Sub
 
     Private Sub ReplaceParameters()
         If ucrChkWithReplacement.Checked Then
-            clsSampleFunc.AddParameter("replace", "TRUE")
+            ClsSample.AddParameter("replace", "TRUE")
             ucrNudSampleSize.SetMinMax(1, Integer.MaxValue)
         Else
-            clsSampleFunc.AddParameter("replace", "FALSE")
+            ClsSample.AddParameter("replace", "FALSE")
             ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         End If
     End Sub
@@ -168,8 +170,8 @@ Public Class dlgRandomSubsets
     Private Sub ucrChkWithReplacement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithReplacement.ControlValueChanged
         ReplaceParameters()
     End Sub
-
+    'Keeping the size of the data frame updated whenever the value is changed in the nud 
     Private Sub ucrNudSampleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSampleSize.ControlValueChanged
-        clsSampleFunc.AddParameter("size", ucrNudSampleSize.Value)
+        ClsSample.AddParameter("size", ucrNudSampleSize.Value)
     End Sub
 End Class
