@@ -72,7 +72,7 @@ Partial Class dlgTransformText
         Me.lblColumnToTransform.Location = New System.Drawing.Point(250, 43)
         Me.lblColumnToTransform.Name = "lblColumnToTransform"
         Me.lblColumnToTransform.Size = New System.Drawing.Size(107, 13)
-        Me.lblColumnToTransform.TabIndex = 3
+        Me.lblColumnToTransform.TabIndex = 1
         Me.lblColumnToTransform.Text = "Column to Transform:"
         '
         'grpOperation
@@ -87,7 +87,7 @@ Partial Class dlgTransformText
         Me.grpOperation.Location = New System.Drawing.Point(11, 205)
         Me.grpOperation.Name = "grpOperation"
         Me.grpOperation.Size = New System.Drawing.Size(108, 181)
-        Me.grpOperation.TabIndex = 6
+        Me.grpOperation.TabIndex = 3
         Me.grpOperation.TabStop = False
         Me.grpOperation.Text = "Operation"
         '
@@ -97,7 +97,7 @@ Partial Class dlgTransformText
         Me.rdoSubstring.Location = New System.Drawing.Point(8, 138)
         Me.rdoSubstring.Name = "rdoSubstring"
         Me.rdoSubstring.Size = New System.Drawing.Size(69, 17)
-        Me.rdoSubstring.TabIndex = 21
+        Me.rdoSubstring.TabIndex = 6
         Me.rdoSubstring.TabStop = True
         Me.rdoSubstring.Text = "Substring"
         Me.rdoSubstring.UseVisualStyleBackColor = True
@@ -108,7 +108,7 @@ Partial Class dlgTransformText
         Me.rdoWords.Location = New System.Drawing.Point(8, 115)
         Me.rdoWords.Name = "rdoWords"
         Me.rdoWords.Size = New System.Drawing.Size(56, 17)
-        Me.rdoWords.TabIndex = 4
+        Me.rdoWords.TabIndex = 5
         Me.rdoWords.TabStop = True
         Me.rdoWords.Text = "Words"
         Me.rdoWords.UseVisualStyleBackColor = True
@@ -119,7 +119,7 @@ Partial Class dlgTransformText
         Me.rdoTrim.Location = New System.Drawing.Point(8, 92)
         Me.rdoTrim.Name = "rdoTrim"
         Me.rdoTrim.Size = New System.Drawing.Size(45, 17)
-        Me.rdoTrim.TabIndex = 3
+        Me.rdoTrim.TabIndex = 4
         Me.rdoTrim.TabStop = True
         Me.rdoTrim.Text = "Trim"
         Me.rdoTrim.UseVisualStyleBackColor = True
@@ -130,7 +130,7 @@ Partial Class dlgTransformText
         Me.rdoConvertCase.Location = New System.Drawing.Point(8, 23)
         Me.rdoConvertCase.Name = "rdoConvertCase"
         Me.rdoConvertCase.Size = New System.Drawing.Size(89, 17)
-        Me.rdoConvertCase.TabIndex = 0
+        Me.rdoConvertCase.TabIndex = 1
         Me.rdoConvertCase.TabStop = True
         Me.rdoConvertCase.Text = "Convert Case"
         Me.rdoConvertCase.UseVisualStyleBackColor = True
@@ -141,7 +141,7 @@ Partial Class dlgTransformText
         Me.rdoPad.Location = New System.Drawing.Point(8, 69)
         Me.rdoPad.Name = "rdoPad"
         Me.rdoPad.Size = New System.Drawing.Size(44, 17)
-        Me.rdoPad.TabIndex = 2
+        Me.rdoPad.TabIndex = 3
         Me.rdoPad.TabStop = True
         Me.rdoPad.Text = "Pad"
         Me.rdoPad.UseVisualStyleBackColor = True
@@ -152,7 +152,7 @@ Partial Class dlgTransformText
         Me.rdoLength.Location = New System.Drawing.Point(8, 46)
         Me.rdoLength.Name = "rdoLength"
         Me.rdoLength.Size = New System.Drawing.Size(58, 17)
-        Me.rdoLength.TabIndex = 1
+        Me.rdoLength.TabIndex = 2
         Me.rdoLength.TabStop = True
         Me.rdoLength.Text = "Length"
         Me.rdoLength.UseVisualStyleBackColor = True
@@ -162,7 +162,7 @@ Partial Class dlgTransformText
         Me.ucrPnlOperation.Location = New System.Drawing.Point(4, 15)
         Me.ucrPnlOperation.Name = "ucrPnlOperation"
         Me.ucrPnlOperation.Size = New System.Drawing.Size(98, 156)
-        Me.ucrPnlOperation.TabIndex = 9
+        Me.ucrPnlOperation.TabIndex = 0
         '
         'lblToSubstring
         '
@@ -215,7 +215,7 @@ Partial Class dlgTransformText
         Me.grpParameters.Location = New System.Drawing.Point(127, 205)
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.Size = New System.Drawing.Size(267, 181)
-        Me.grpParameters.TabIndex = 8
+        Me.grpParameters.TabIndex = 4
         Me.grpParameters.TabStop = False
         Me.grpParameters.Text = "Options"
         '
@@ -459,7 +459,7 @@ Partial Class dlgTransformText
         Me.ucrNewColName.Location = New System.Drawing.Point(10, 399)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(272, 24)
-        Me.ucrNewColName.TabIndex = 1
+        Me.ucrNewColName.TabIndex = 5
         '
         'ucrSelectorForTransformText
         '
@@ -469,7 +469,7 @@ Partial Class dlgTransformText
         Me.ucrSelectorForTransformText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForTransformText.Name = "ucrSelectorForTransformText"
         Me.ucrSelectorForTransformText.Size = New System.Drawing.Size(242, 185)
-        Me.ucrSelectorForTransformText.TabIndex = 1
+        Me.ucrSelectorForTransformText.TabIndex = 0
         '
         'dlgTransformText
         '
