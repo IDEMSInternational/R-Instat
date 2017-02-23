@@ -41,23 +41,15 @@ Public Class dlgOneVarUseModel
     '' if bootstrap isn't checked:
     'UseModel1 <- quantile(x=x1)
 
+    ' this currently works
 
-    'GOT:
-    'x1 <- InstatDataObject$get_models(model_name="x1", data_name="Blocking")
-    'UseModel1 <- quantile(x=x1)
-    'InstatDataObject$import_data(data_tables = List(Blocking = UseModel1)) ' don't want this
-    'InstatDataObject$get_data_frame(data_name = "Blocking") ' don't want this
 
     '' if bootstrap checked
     'Want:
     ' bootdist(f=x22)
     ' quantile(x=bootdist(f=x22))
 
-    'got:
-    'bootdist(f=x22)
-    'Bootstrap <- quantile(x=bootdist(f=x22))
-    'InstatDataObject$add_model(data_name = "Blocking", model = Bootstrap, model_name = "Bootstrap")
-    'InstatDataObject$get_models(model_name = "Bootstrap", data_name = "Blocking")
+    'get an error currently
 
     Private Sub InitialiseDialog()
         'sdgOneVarUseModBootstrap.InitialiseDialog()
@@ -71,10 +63,8 @@ Public Class dlgOneVarUseModel
         ucrReceiver.SetParameterIsRFunction()
         ucrReceiver.Selector = ucrSelector
         ucrReceiver.SetMeAsReceiver()
-        '        ucrReceiver.AddToLinkedControls(ucrLinked:=ucrChkProduceBootstrap, objValues:={Not vbEmpty}, bNewLinkedDisabledIfParameterMissing:=True)
-        ' obj value = true? Perhaps obj value is that it's full?
+        '       ucrReceiver.AddToLinkedControls(ucrLinked:=ucrChkProduceBootstrap, objValues:={not empty}, bNewLinkedDisabledIfParameterMissing:=True)
 
-        ' I know this will be an issue elsewhere, such as with ucrDistributions
         ucrSelector.SetItemType("model")
 
         ' ucrSave
@@ -96,7 +86,7 @@ Public Class dlgOneVarUseModel
         ucrSaveBootstrapObjects.SetIsComboBox()
         ucrSaveBootstrapObjects.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
         ucrSaveBootstrapObjects.SetAssignToIfUncheckedValue("last_bootstrap")
-        'ucrSaveBootstrapObjects.SetAssignToBooleans(bTempInsertColumnBefore:=True)
+        '        ucrSaveBootstrapObjects.SetAssignToBooleans(bTempInsertColumnBefore:=True)
 
         'sdgOneVarUseModBootstrap.SetMyBootFunction(clsRbootFunction)
         'sdgOneVarUseModBootstrap.SetMyRSyntax(ucrBase.clsRsyntax)
@@ -106,22 +96,24 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction, clsDefaultProduceBootstrap As New RFunction
+        clsOverallFunction = New RFunction
+        clsProduceBootstrap = New RFunction
+
         ucrSelector.Reset()
         ucrSaveBootstrapObjects.Reset()
         ucrSaveToDataframe.Reset()
+
         ucrChkProduceBootstrap.Checked = False
         cmdBootstrapOptions.Visible = False
 
-        'clsDefaultFunction.SetR, .SetAssignTo
-        clsDefaultFunction.SetRCommand("quantile")
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveToDataframe.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        clsDefaultProduceBootstrap.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempModel:=ucrSaveBootstrapObjects.GetText(), strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ', bInsertColumnBefore:=True)
+        clsOverallFunction.SetRCommand("quantile")
+        clsOverallFunction.SetAssignTo(strTemp:=ucrSaveToDataframe.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
-        clsProduceBootstrap = clsDefaultProduceBootstrap.Clone
-        clsOverallFunction = clsDefaultFunction.Clone
+        clsProduceBootstrap.SetRCommand("bootdist")
+        clsProduceBootstrap.SetAssignTo(strTemp:=ucrSaveBootstrapObjects.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ', bInsertColumnBefore:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
+
         'bResetSubdialog = True
 
         'sdgOneVarUseModBootstrap.SetDefaults()
@@ -143,11 +135,10 @@ Public Class dlgOneVarUseModel
     ' Base Function parameters change depending if check box is checked
     Private Sub SetFunctions()
         If ucrChkProduceBootstrap.Checked Then
-            clsProduceBootstrap.SetRCommand("bootdist")
             clsProduceBootstrap.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsProduceBootstrap)
+            clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsProduceBootstrap)
         Else
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiver.GetVariables())
+            clsOverallFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiver.GetVariables())
         End If
     End Sub
 
@@ -179,9 +170,9 @@ Public Class dlgOneVarUseModel
         End If
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiver.SetRCode(clsOverallFunction, bReset)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiver.SetRCode(clsProduceBootstrap, bReset)
+        ucrReceiver.SetRCode(clsOverallFunction, bReset)
         ucrSaveToDataframe.SetRCode(clsOverallFunction, bReset)
         ucrChkProduceBootstrap.SetRCode(clsProduceBootstrap, bReset)
         ucrSaveBootstrapObjects.SetRCode(clsProduceBootstrap, bReset)
