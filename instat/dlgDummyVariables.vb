@@ -14,10 +14,12 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgDummyVariables
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDummy As New RFunction
     Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -32,27 +34,13 @@ Public Class dlgDummyVariables
         TestOkEnabled()
     End Sub
 
-    Private Sub TestOkEnabled()
-        If Not ucrReceiverFactor.IsEmpty OrElse (ucrChkWithXVariable.Checked AndAlso (Not ucrVariateReceiver.IsEmpty)) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
     Private Sub SetDefaults()
-        ' Set default RFunction as the base function
-        Dim clsDefaultFunction As New RFunction
         'reset
         ucrSelectorDummyVariable.Reset()
-
-        clsDefaultFunction.SetRCommand("dummy")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        'set default function
+        clsDummy.SetRCommand("dummy")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDummy)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub InitialiseDialog()
@@ -72,10 +60,12 @@ Public Class dlgDummyVariables
         'ucrPnlLevelOmitted.AddRadioButton(rdoLast, "")
         'ucrPnlLevelOmitted.AddRadioButton(rdoLevelNumber, "")
 
+        'currently disabled sice the functions and parameters are yet to be set
         ucrChkWithXVariable.Enabled = False
+        lblVariate.Enabled = False
+        ucrVariateReceiver.Enabled = False
         ucrChkWithXVariable.SetText("With X Variable")
         ' ucrChkWithXVariable.SetParameter(New RParameter(""))
-        VariateVisible()
         grpLevelOmitted.Enabled = False
 
         'Note: This was not implemented (Additions of ucrInputColumns were added for appending new columns with prefix "dummy" ): Just added if incase it was to be added otherwise it can be deleted
@@ -88,17 +78,33 @@ Public Class dlgDummyVariables
 
     End Sub
 
-    Private Sub VariateVisible()
-        If ucrChkWithXVariable.Checked Then
-            ucrVariateReceiver.Visible = True
-            lblVariate.Visible = True
-            ucrVariateReceiver.SetMeAsReceiver()
+    Private Sub TestOkEnabled()
+        If Not ucrReceiverFactor.IsEmpty AndAlso ((ucrChkWithXVariable.Checked AndAlso Not ucrVariateReceiver.IsEmpty) OrElse Not ucrChkWithXVariable.Checked) Then
+            ucrBase.OKEnabled(True)
         Else
-            ucrVariateReceiver.Visible = False
-            lblVariate.Visible = False
-            ucrReceiverFactor.SetMeAsReceiver()
+            ucrBase.OKEnabled(False)
         End If
     End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    'Private Sub VariateVisible()
+    '    If ucrChkWithXVariable.Checked Then
+    '        ucrVariateReceiver.Visible = True
+    '        lblVariate.Visible = True
+    '        ucrVariateReceiver.SetMeAsReceiver()
+    '    Else
+    '        ucrVariateReceiver.Visible = False
+    '        lblVariate.Visible = False
+    '        ucrReceiverFactor.SetMeAsReceiver()
+    '    End If
+    'End Sub
+
+    'Private Sub ucrChkWithXVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithXVariable.ControlValueChanged
+    '    VariateVisible()
+    'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -106,7 +112,7 @@ Public Class dlgDummyVariables
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrChkWithXVariable.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrChkWithXVariable.ControlContentsChanged, ucrVariateReceiver.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
