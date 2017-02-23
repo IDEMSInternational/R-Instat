@@ -144,7 +144,7 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub ucrChkLong_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkLong.ControlContentsChanged
-        ucrReceiverYears.Focus()
+        ucrReceiverYears.SetMeAsReceiver()
         ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutPut)
         TestOkEnabled()
     End Sub
