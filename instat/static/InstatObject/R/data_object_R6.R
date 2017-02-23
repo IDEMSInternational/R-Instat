@@ -2001,27 +2001,109 @@ data_object$set("public","get_key_names", function(include_overall = TRUE, inclu
 }
 )
 
-# labels for climatic column types
+# Labels for climatic column types
+### Primary corruption column types
 corruption_country_label="country"
+corruption_region_label="region"
 corruption_procuring_authority_label="procuring_authority"
-corruption_procuring_authority_id_label="procuring_authority_id"
 corruption_award_date_label="award_date"
+corruption_fiscal_year_label="fiscal_year"
 corruption_signature_date_label="signature_date"
-corruption_contract_name_label="contract_name"
-corruption_sector_label="sector"
+corruption_contract_title_label="contract_title"
+corruption_contract_sector_label="contract_sector"
 corruption_procurement_category_label="procurement_category"
 corruption_winner_name_label="winner_name"
 corruption_winner_id_label="winner_id"
 corruption_winner_country_label="winner_country"
 corruption_original_contract_value_label="original_contract_value"
+corruption_no_bids_received_label="no_bids_received"
+corruption_no_bids_considered_label="no_bids_considered"
+corruption_method_type_label="method_type"
+
+all_primary_corruption_column_types <- c(corruption_country_label,
+                                         corruption_region_label,
+                                         corruption_procuring_authority_label,
+                                         corruption_award_date_label,
+                                         corruption_fiscal_year_label,
+                                         corruption_signature_date_label,
+                                         corruption_contract_title_label,
+                                         corruption_contract_sector_label,
+                                         corruption_procurement_category_label,
+                                         corruption_winner_name_label,
+                                         corruption_winner_id_label,
+                                         corruption_winner_country_label,
+                                         corruption_original_contract_value_label,
+                                         corruption_no_bids_received_label,
+                                         corruption_no_bids_considered_label,
+                                         corruption_method_type_label)
+
+### Calculated corruption column types
+corruption_award_year_label="award_year"
 corruption_procedure_type_label="procedure_type"
-corruption_no_bids_label="no_bids"
-corruption_no_considered_bids_label="no_considered_bids"
-corruption_country_iso_label="country_iso"
+corruption_country_iso2_label="country_iso2"
+corruption_country_iso3_label="country_iso3"
+corruption_w_country_iso2_label="w_country_iso2"
+corruption_w_country_iso3_label="w_country_iso3"
+corruption_procuring_authority_id_label="procuring_authority_id"
+corruption_winner_id_label="winner_id"
+corruption_main_proc_type_label="main_proc_type"
 corruption_foreign_winner_label="foreign_winner"
 corruption_ppp_conversion_rate_label="ppp_conversion_rate"
+corruption_ppp_adjusted_contract_value_label="ppp_adjusted_contr_value"
+corruption_contract_value_cats_label="contr_value_cats"
+corruption_proc_type_label="proc_type"
+corruption_proc_type3_label="proc_type3"
+corruption_signature_period_label="signature_period"
+corruption_signature_period5Q_label="signature_period5Q"
+corruption_signature_period25Q_label="signature_period25Q"
+corruption_signature_period_cats_label="signature_period_cats"
+corruption_secrecy_score_label="secrecy_score"
+corruption_tax_haven_label="tax_haven"
+corruption_tax_haven2_label="tax_haven2"
+corruption_tax_haven3_label="tax_haven3"
+corruption_tax_haven3bi_label="tax_haven3bi"
+corruption_roll_num_winner_label="roll_num_winner"
+corruption_roll_num_issuer_label="roll_num_issuer"
+corruption_roll_sum_winner_label="roll_sum_winner"
+corruption_roll_sum_issuer_label="roll_sum_issuer"
+corruption_roll_share_winner_label="roll_share_winner"
+corruption_single_bidder_label="single_bidder"
+corruption_all_bids_label="all_bids"
+corruption_all_bids_trimmed_label="all_bids_trimmed"
 
-all_corruption_column_types <- c(corruption_country_label, corruption_procuring_authority_label, corruption_procuring_authority_id_label, corruption_award_date_label, corruption_signature_date_label, corruption_contract_name_label, corruption_sector_label, corruption_procurement_category_label, corruption_winner_name_label, corruption_winner_id_label, corruption_winner_country_label, corruption_original_contract_value_label, corruption_procedure_type_label, corruption_no_bids_label, corruption_no_considered_bids_label, corruption_country_iso_label, corruption_foreign_winner_label, corruption_ppp_conversion_rate_label)
+all_calculated_corruption_column_types <- c(corruption_award_year_label,
+                                            corruption_procedure_type_label,
+                                            corruption_country_iso2_label,
+                                            corruption_country_iso3_label,
+                                            corruption_w_country_iso2_label,
+                                            corruption_w_country_iso3_label,
+                                            corruption_procuring_authority_id_label,
+                                            corruption_winner_id_label,
+                                            corruption_main_proc_type_label,
+                                            corruption_foreign_winner_label,
+                                            corruption_ppp_conversion_rate_label,
+                                            corruption_ppp_adjusted_contract_value_label,
+                                            corruption_contract_value_cats_label,
+                                            corruption_proc_type_label,
+                                            corruption_proc_type3_label,
+                                            corruption_signature_period_label,
+                                            corruption_signature_period5Q_label,
+                                            corruption_signature_period25Q_label,
+                                            corruption_signature_period_cats_label,
+                                            corruption_secrecy_score_label,
+                                            corruption_tax_haven_label,
+                                            corruption_tax_haven2_label,
+                                            corruption_tax_haven3_label,
+                                            corruption_tax_haven3bi_label,
+                                            corruption_roll_num_winner_label,
+                                            corruption_roll_num_issuer_label,
+                                            corruption_roll_sum_winner_label,
+                                            corruption_roll_sum_issuer_label,
+                                            corruption_roll_share_winner_label,
+                                            corruption_single_bidder_label,
+                                            corruption_all_bids_label,
+                                            corruption_all_bids_trimmed_label)
+
 
 # Column metadata for corruption colums
 corruption_type_label = "Corruption_Type"
@@ -2029,19 +2111,91 @@ corruption_type_label = "Corruption_Type"
 # Data frame metadata for corruption dataframes
 is_corruption_label = "Is_Corruption"
 
-instat_object$set("public","define_as_corruption", function(data_name, types) {
+instat_object$set("public","define_as_corruption", function(data_name, primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, is_corruption_label, TRUE)
   for(curr_data_name in self$get_data_names()) {
     if(!self$get_data_objects(data_name)$is_metadata(is_corruption_label)) {
       self$append_to_dataframe_metadata(curr_data_name, is_corruption_label, FALSE)
     }
   }
-  self$get_data_objects(data_name)$set_corruption_types(types)
+  self$get_data_objects(data_name)$set_corruption_types(types, auto_generate)
 }
 )
 
-data_object$set("public","set_corruption_types", function(types) {
-  if(!all(names(types) %in% all_corruption_column_types)) stop("Cannot recognise the following corruption data types: ", paste(names(types)[!names(types) %in% all_corruption_column_types], collapse = ", "))
-  invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], corruption_type_label, name)))
+data_object$set("public","is_corruption_type_present", function(type) {
+  return(self$is_metadata(is_corruption_label) && self$get_metadata(is_corruption_label) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(corruption_type_label)))
+}
+)
+
+data_object$set("public","get_corruption_column_name", function(type) {
+  if(self$is_corruption_type_present(type)) {
+    var_metadata <- InstatDataObject$get_variables_metadata(data_name)
+    col_name <- var_metadata[var_metadata[[corruption_type_label]] == type, name_label]
+    if(length(col_name == 1)) return(col_name)
+    else return("")
+  }
+  return("")
+}
+)
+
+data_object$set("public","set_corruption_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
+  if(!all(names(primary_types) %in% all_primary_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_primary_corruption_column_types], collapse = ", "))
+  if(!all(names(calculated_types) %in% all_calculated_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_calculated_corruption_column_types], collapse = ", "))
+  invisible(sapply(names(primary_types), function(name) self$append_to_variables_metadata(primary_types[name], corruption_type_label, name)))
+  invisible(sapply(names(calculated_types), function(name) self$append_to_variables_metadata(primary_types[name], corruption_type_label, name)))
+  if(auto_generate) {
+    # Possibly need to be careful about the order of these
+    self$generate_award_date()
+    self$generate_procedure_type()
+    self$generate_procuring_authority_id()
+  }
+}
+)
+
+data_object$set("public","generate_award_year", function() {
+  if(!self$is_corruption_type_present(corruption_award_year_label)) {
+    if(!self$is_corruption_type_present(corruption_award_date_label)) message("Cannot auto generate ", corruption_award_year_label, " because ", corruption_award_date_label, " column is not present.")
+    else {
+      award_date <- self$get_columns_from_data(self$get_corruption_column_name(corruption_award_date_label))
+      if(!is.Date(award_date)) message(message("Cannot auto generate ", corruption_award_year_label, " because ", corruption_award_date_label, " column is not of type Date."))
+      else {
+        col_name <- next_default_item(corruption_award_year_label, self$get_column_names(), include_index = FALSE)
+        self$add_columns_to_data(col_name, year(award_date))
+        self$append_to_variables_metadata(col_name, corruption_type_label, corruption_award_year_label)
+        self$append_to_variables_metadata(col_name, "label", "Award year")
+      }
+    }
+  }
+}
+)
+
+data_object$set("public","generate_procedure_type", function() {
+  if(!self$is_corruption_type_present(corruption_proc_type_label)) {
+    if(!self$is_corruption_type_present(corruption_method_type_label)) message("Cannot auto generate ", corruption_proc_type_label, " because ", corruption_method_type_label, " is not defined.")
+    else {
+      procedure_type <- self$get_columns_from_data(self$get_corruption_column_name(corruption_method_type_label))
+      procedure_type[procedure_type == "CQS"] <- "Selection Based On Consultant's Qualification"
+      procedure_type[procedure_type == "SHOP"] <- "International Shopping"
+      procedure_type <- factor(procedure_type, levels = c("Commercial Practices", "Direct Contracting", "Force Account", "INDB", "Individual", "International Competitive Bidding", "International Shopping", "Least Cost Selection", "Limited International Bidding", "National Competitive Bidding", "National Shopping", "Quality And Cost-Based Selection", "Quality Based Selection", "Selection Based On Consultant's Qualification", "Selection Under a Fixed Budget", "Service Delivery Contracts", "Single Source Selection"))
+      col_name <- next_default_item(corruption_proc_type_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, procedure_type)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_proc_type_label)
+      self$append_to_variables_metadata(col_name, "label", "Procedure type")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_procuring_authority_id", function() {
+  if(!self$is_corruption_type_present(corruption_procuring_authority_id_label)) {
+    if(!self$is_corruption_type_present(corruption_procuring_authority_label) | !self$is_corruption_type_present(corruption_country_label)) message("Cannot auto generate ", corruption_procuring_authority_id_label, " because ", corruption_procuring_authority_label, "or ", corruption_award_year_label, " is not defined.")
+    else {
+      id <- as.numeric(factor(paste0(WB_rawdata$country, WB_rawdata$anb_name), levels = unique(paste0(WB_rawdata$country, WB_rawdata$anb_name))))
+      col_name <- next_default_item(corruption_procuring_authority_id_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, year(award_date))
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_award_year_label)
+      self$append_to_variables_metadata(col_name, "label", "Award year")
+    }
+  }
 }
 )
