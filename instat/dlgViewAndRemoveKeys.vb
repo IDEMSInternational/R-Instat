@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgViewAndRemoveKeys
     Private bFirstLoad As Boolean = True
@@ -97,16 +96,12 @@ Public Class dlgViewAndRemoveKeys
         TestOKEnabled()
     End Sub
 
-    Private Sub ChangeBaseFunc()
+    Private Sub ucrChkRemoveKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveKey.ControlValueChanged
         If ucrChkRemoveKey.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveKey)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetKey)
         End If
         SetRCodeForControls(False)
-    End Sub
-
-    Private Sub ucrChkRemoveKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveKey.ControlValueChanged
-        ChangeBaseFunc()
     End Sub
 End Class
