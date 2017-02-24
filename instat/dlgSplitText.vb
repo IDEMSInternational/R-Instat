@@ -17,15 +17,19 @@ Imports instat
 Imports instat.Translations
 Public Class dlgSplitText
     Public bFirstLoad As Boolean = True
-    Public clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOKEnabled()
     End Sub
 
@@ -34,7 +38,7 @@ Public Class dlgSplitText
 
         ucrBase.iHelpTopicID = 344
 
-        ucrInputPattern.SetParameter(New RParameter("pattern"))
+        ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
         dctPatternPairs.Add("Period .", "fixed(" & Chr(34) & "." & Chr(34) & ")")
         dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
@@ -44,32 +48,33 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputPattern.SetItems(dctPatternPairs)
 
-        ucrReceiverSplitTextColumn.SetParameter(New RParameter("string"))
+        ucrReceiverSplitTextColumn.SetParameter(New RParameter("string", 0))
         ucrReceiverSplitTextColumn.SetParameterIsRFunction()
         ucrReceiverSplitTextColumn.Selector = ucrSelectorSplitTextColumn
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrReceiverSplitTextColumn.bUseFilteredData = False
         ucrReceiverSplitTextColumn.SetIncludedDataTypes({"factor", "character"})
 
-        ucrSaveColumn.SetIsTextBox()
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
-        ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
+        ucrSaveColumn.SetIsTextBox()
+        ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
-        ucrNudPieces.SetParameter(New RParameter("n"))
+        ucrNudPieces.SetParameter(New RParameter("n", 2))
+        ucrNudPieces.SetMinMax(2, Integer.MaxValue)
+    End Sub
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        ucrSelectorSplitTextColumn.Reset()
 
         clsDefaultFunction.SetRCommand("str_split_fixed")
         clsDefaultFunction.AddParameter("pattern", Chr(34) & "," & Chr(34))
         clsDefaultFunction.AddParameter("n", 2)
         clsDefaultFunction.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
-    End Sub
 
-    Private Sub SetDefaults()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrSelectorSplitTextColumn.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -82,9 +87,15 @@ Public Class dlgSplitText
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrSelectorSplitTextColumn.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
