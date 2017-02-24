@@ -49,8 +49,8 @@ Public Class dlgWindrose
         ucrBase.clsRsyntax.AddOperatorParameter("coord_polar", clsRFunc:=clsCoordPolarFunction)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        ucrXReceiver.Selector = ucrWindRoseSelector
-        ucrYReceiver.Selector = ucrWindRoseSelector
+        ucrReceiverWindSpeed.Selector = ucrWindRoseSelector
+        ucrReceiverWindDirection.Selector = ucrWindRoseSelector
         ucrFillReceiver.Selector = ucrWindRoseSelector
 
         ucrSaveWindRose.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
@@ -60,7 +60,7 @@ Public Class dlgWindrose
     Private Sub SetDefaults()
         ucrSaveWindRose.strPrefix = "Windrose"
         ucrWindRoseSelector.Reset()
-        ucrXReceiver.SetMeAsReceiver()
+        ucrReceiverWindSpeed.SetMeAsReceiver()
         TestOkEnabled()
         ucrSaveWindRose.chkSaveGraph.Checked = False
     End Sub
@@ -70,7 +70,7 @@ Public Class dlgWindrose
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrXReceiver.IsEmpty AndAlso Not ucrYReceiver.IsEmpty AndAlso ((ucrSaveWindRose.chkSaveGraph.Checked AndAlso Not ucrSaveWindRose.ucrInputGraphName.IsEmpty) OrElse Not ucrSaveWindRose.chkSaveGraph.Checked) Then
+        If Not ucrReceiverWindSpeed.IsEmpty AndAlso Not ucrReceiverWindDirection.IsEmpty AndAlso ((ucrSaveWindRose.chkSaveGraph.Checked AndAlso Not ucrSaveWindRose.ucrInputGraphName.IsEmpty) OrElse Not ucrSaveWindRose.chkSaveGraph.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -80,18 +80,18 @@ Public Class dlgWindrose
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
-    Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.SelectionChanged
-        If Not ucrXReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
+    Private Sub ucrReceiverWindSpeed_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverWindSpeed.SelectionChanged
+        If Not ucrReceiverWindSpeed.IsEmpty Then
+            clsRaesFunction.AddParameter("x", ucrReceiverWindSpeed.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("x")
         End If
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrYReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYReceiver.SelectionChanged
-        If Not ucrYReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("y", ucrYReceiver.GetVariableNames(False))
+    Private Sub ucrReceiverWindDirection_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverWindDirection.SelectionChanged
+        If Not ucrReceiverWindDirection.IsEmpty Then
+            clsRaesFunction.AddParameter("y", ucrReceiverWindDirection.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
