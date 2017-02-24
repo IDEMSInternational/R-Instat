@@ -42,6 +42,7 @@ Public Class sdgCombineGraphOptions
     Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.BringToFront()
         LoadGraphs()
+        SetDefaultRowAndColumns()
     End Sub
 
     Private Sub InitialiseControls()
@@ -57,6 +58,7 @@ Public Class sdgCombineGraphOptions
         ucrInputTop.SetParameter(New RParameter("top"))
 
         ucrChkSpecifyOrder.SetText("Specify Order")
+        ucrChkSpecifyOrder.AddToLinkedControls({ucrInputTop, ucrInputRight}, objValues:={True})
         bInitialiseControls = True
     End Sub
 
