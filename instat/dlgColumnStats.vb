@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgColumnStats
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsSummariesList As New RFunction
+    Private bResetSubdialog As Boolean = False
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -51,13 +52,23 @@ Public Class dlgColumnStats
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
 
+        clsSummariesList = New RFunction
+
+        clsSummariesList.SetRCommand("c")
+        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
+
         ucrSelectorForColumnStatistics.Reset()
         ucrReceiverSelectedVariables.SetMeAsReceiver()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
-        clsDefaultFunction.AddParameter("summaries", "c(" & Chr(34) & "summary_count" & Chr(34) & "," & Chr(34) & "summary_count_non_missing" & Chr(34) & "," & Chr(34) & "summary_sum" & Chr(34) & ")")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        'clsDefaultFunction.AddParameter("summaries", "c(" & Chr(34) & "summary_count" & Chr(34) & "," & Chr(34) & "summary_count_non_missing" & Chr(34) & "," & Chr(34) & "summary_sum" & Chr(34) & ")")
+        clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
 
+        'clsDefaultFunction.AddParameter("summaries", "c(" & Chr(34) & "summary_count" & Chr(34) & "," & Chr(34) & "summary_count_non_missing" & Chr(34) & "," & Chr(34) & "summary_sum" & Chr(34) & ")")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        bResetSubdialog = True
         'TODO get the subdilog stuff working
         ' TestOKEnabled()
     End Sub
@@ -103,7 +114,7 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetRDefault("FALSE")
 
         'disbling the cmdSummaries for the moment
-        cmdSummaries.Enabled = False
+        'cmdSummaries.Enabled = False
         'i leave the subdialog stuff for now
         'sdgSummaries.SetMyRFunction(clsDefaultFunction)
         'ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
@@ -115,6 +126,10 @@ Public Class dlgColumnStats
         TestOKEnabled()
     End Sub
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        bResetSubdialog = False
+        sdgSummaries.ShowDialog()
+        TestOKEnabled()
         'sdgSummaries.ShowDialog()
         'sdgSummaries.TestSummaries()
         'TestOKEnabled()
