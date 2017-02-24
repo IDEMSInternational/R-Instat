@@ -44,8 +44,6 @@ Public Class dlgMakeDate
         ucrBase.iHelpTopicID = 461
 
         'ucrReceiver
-
-
         ucrReceiverDayTwo.Selector = ucrSelectorMakeDate
         ucrReceiverYearThree.Selector = ucrSelectorMakeDate
         ucrReceiverMonthThree.Selector = ucrSelectorMakeDate
@@ -59,7 +57,7 @@ Public Class dlgMakeDate
         ucrReceiverMonthThree.bUseFilteredData = False
         ucrReceiverDayThree.bUseFilteredData = False
 
-        ' ucrChkTwoDigitYear.SetText("2-digit years")
+        ucrChkTwoDigitYear.SetText("2-digit years")
         ' ucrChkMore.SetText("More")
 
         'ucrSave Date Column
@@ -110,7 +108,6 @@ Public Class dlgMakeDate
         ucrInputFormat.SetItems(dctDateFormat)
 
         ucrInputOrigin.SetParameter(New RParameter("origin", 1))
-        ucrInputOrigin.SetItems({"Excel", "Gregorian"})
         Dim dctdateorigin As New Dictionary(Of String, String)
         dctdateorigin.Add("excel", Chr(34) & "30-12-1899" & Chr(34))
         dctdateorigin.Add("gregorian", Chr(34) & "01-03-1600" & Chr(34))
@@ -140,22 +137,38 @@ Public Class dlgMakeDate
         ucrReceiverDayThree.SetParameter(New RParameter("day"))
         ucrReceiverDayThree.SetParameterIsString()
 
+        ucrPanelDate.AddRadioButton(rdoSingleColumn)
+        ucrPanelDate.AddRadioButton(rdoYearandDayofYear)
+        ucrPanelDate.AddRadioButton(rdoYearMonthDay)
+
+        ucrPanelFormat.AddRadioButton(rdoDefaultFormat)
+        ucrPanelFormat.AddRadioButton(rdoSpecifyFormat)
+        ucrPanelFormat.AddRadioButton(rdoSpecifyOrigin)
+
+
+        ucrPanelDate.AddFunctionNamesCondition(rdoYearandDayofYear, "as.Date")
+        ucrPanelDate.AddFunctionNamesCondition(rdoYearandDayofYear, frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
+        ucrPanelDate.AddFunctionNamesCondition(rdoYearandDayofYear, frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
+
         ' Single
         ucrPanelDate.AddToLinkedControls(ucrReceiverForDate, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPanelDate.AddToLinkedControls(ucrPanelFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'Not implemented 
         grpFormatField.Enabled = False
         ucrChkMore.Enabled = False
-        ucrChkTwoDigitYear.Enabled = False
-        'ucrPanelDate.AddToLinkedControls(ucrChkMore, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPanelDate.AddToLinkedControls(ucrInputMonth, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputMonth.SetLinkedDisplayControl(lblMonth)
-        'ucrPanelDate.AddToLinkedControls(ucrInputYear, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputYear.SetLinkedDisplayControl(lblYear)
-        'ucrPanelDate.AddToLinkedControls(ucrInputDay, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputDay.SetLinkedDisplayControl(lblDay)
-        'ucrPanelDate.AddToLinkedControls(ucrInputSeparator, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
+
+        ucrPanelDate.AddToLinkedControls(ucrChkMore, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPanelDate.AddToLinkedControls(ucrInputMonth, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMonth.SetLinkedDisplayControl(lblMonth)
+        ucrPanelDate.AddToLinkedControls(ucrInputYear, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputYear.SetLinkedDisplayControl(lblYear)
+        ucrPanelDate.AddToLinkedControls(ucrInputDay, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputDay.SetLinkedDisplayControl(lblDay)
+        ucrPanelDate.AddToLinkedControls(ucrInputSeparator, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
+        ucrPanelDate.AddToLinkedControls(ucrInputOrigin, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPanelDate.AddToLinkedControls(ucrInputFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
 
         ucrPanelDate.AddToLinkedControls(ucrReceiverYearThree, {rdoYearMonthDay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -181,7 +194,9 @@ Public Class dlgMakeDate
         'ucrNudCutoff.SetLinkedDisplayControl(lblCutOffTwo)
         ucrPanelDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoYearandDayofYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ' ucrReceiverForDate.SetLinkedDisplayControl(grpSingleColumn)
+        ucrPanelDate.SetLinkedDisplayControl(grpSingleColumn)
+        ucrPanelDate.SetLinkedDisplayControl(grpFormatField)
+
 
         'ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
         'ucrInputYearOption.SetItems({"4 Digit", "2 Digit"})
@@ -213,12 +228,13 @@ Public Class dlgMakeDate
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverForDate.SetRCode(clsDateFunction, bReset)
-        'ucrInputComboBoxMonthTwo.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        'ucrInputDayOption.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ' ucrInputMonthOption.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        '  ucrInputYearOption.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputComboBoxMonthTwo.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputDayOption.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputMonthOption.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputYearOption.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverDayThree.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverDayTwo.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkTwoDigitYear.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
     End Sub
 
@@ -292,7 +308,7 @@ Public Class dlgMakeDate
 
     Private Sub Formats()
         If rdoSingleColumn.Checked Then
-            ' clsDateFunction.SetRCommand("as.Date")
+            clsDateFunction.SetRCommand("as.Date")
             If rdoDefaultFormat.Checked Then
                 ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
             ElseIf rdoSpecifyOrigin.Checked
@@ -322,15 +338,6 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
             ucrSelectorMakeDate.SetParameter(New RParameter("data_name", 0))
             ucrSelectorMakeDate.SetParameterIsString()
-
-            ucrReceiverYearThree.SetParameter(New RParameter("year"))
-            ucrReceiverYearThree.SetParameterIsString()
-
-            ucrReceiverMonthThree.SetParameter(New RParameter("month"))
-            ucrReceiverMonthThree.SetParameterIsString()
-
-            ucrReceiverDayThree.SetParameter(New RParameter("day"))
-            ucrReceiverDayThree.SetParameterIsString()
         End If
 
     End Sub
@@ -339,8 +346,12 @@ Public Class dlgMakeDate
         Formats()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
+
     End Sub
 
 End Class
