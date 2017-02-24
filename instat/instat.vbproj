@@ -221,6 +221,12 @@
     <Compile Include="dlgCorruptionDescribe.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineCorruption.Designer.vb">
+      <DependentUpon>dlgDefineCorruption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineCorruption.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -2136,6 +2142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DlgDefineClimaticData.resx">
       <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineCorruption.resx">
+      <DependentUpon>dlgDefineCorruption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
@@ -4473,7 +4482,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\zoo_1.7-13.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Recent_Files\recent.mru">
+    <Content Include="Recent_Files\recent.mru">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\arrows_bottom.png" />
@@ -4733,7 +4742,7 @@
     <Content Include="static\Library\ExperimentalSurveyData.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Samaru56.RDS">
+    <Content Include="static\Library\Climatic\Samaru56.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\labels_and_defaults.R">
@@ -4751,13 +4760,13 @@
     <Content Include="static\InstatObject\R\instat_object_R6.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\RainGalle.xlsx">
+    <Content Include="static\Library\Climatic\RainGalle.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Introductory_guide_datasets.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic_guide_datasets.xlsx">
+    <Content Include="static\Library\Climatic\Climatic_guide_datasets.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\Backend_Components\calculations.R">
@@ -4935,6 +4944,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\Help\LICENSE" />
+    <Content Include="static\Library\Corruption\country_codes_WB_Alpha_170120.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Corruption\wb_fsi.dta">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Corruption\wb_ppp_1990-2014_long.dta">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Corruption\KocsisG_FSI_short_160612.dta">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

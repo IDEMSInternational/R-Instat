@@ -8,7 +8,7 @@ Public Class ucrSave
     Private strPrefix As String
     Private bIsComboBox As Boolean = True
     Private bHideIfUnchecked As Boolean = True
-    Private ucrDataFrameSelector As ucrDataFrame
+    Private WithEvents ucrDataFrameSelector As ucrDataFrame
     Private bAssignToIsPrefix As Boolean = False
     Private bAssignToColumnWithoutNames As Boolean = False
     Private bInsertColumnBefore As Boolean = False
@@ -214,13 +214,13 @@ Public Class ucrSave
         End If
     End Sub
 
-    Private Sub ucrInputControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlValueChanged, ucrInputTextSave.ControlValueChanged
+    Private Sub ucrInputControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlValueChanged, ucrInputTextSave.ControlValueChanged, ucrDataFrameSelector.ControlValueChanged
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateRCode()
+    Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
         UpdateAssignTo()
-        UpdateLinkedControls()
+        UpdateLinkedControls(bReset)
     End Sub
 
     Private Sub UpdateAssignTo(Optional bRemove As Boolean = False)

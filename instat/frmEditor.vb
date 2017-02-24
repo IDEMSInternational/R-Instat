@@ -676,6 +676,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
+        dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgAddComment.ShowDialog()
     End Sub
 End Class
