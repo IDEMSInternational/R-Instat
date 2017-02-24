@@ -2046,13 +2046,14 @@ corruption_w_country_iso2_label="w_country_iso2"
 corruption_w_country_iso3_label="w_country_iso3"
 corruption_procuring_authority_id_label="procuring_authority_id"
 corruption_winner_id_label="winner_id"
-corruption_main_proc_type_label="main_proc_type"
+corruption_procedure_type_label="procedure_type"
 corruption_foreign_winner_label="foreign_winner"
 corruption_ppp_conversion_rate_label="ppp_conversion_rate"
 corruption_ppp_adjusted_contract_value_label="ppp_adjusted_contr_value"
 corruption_contract_value_cats_label="contr_value_cats"
-corruption_proc_type_label="proc_type"
-corruption_proc_type3_label="proc_type3"
+corruption_procurement_type_cats_label="procurement_type_cats"
+corruption_procurement_type2_label="procurement_type2"
+corruption_procurement_type3_label="procurement_type3"
 corruption_signature_period_label="signature_period"
 corruption_signature_period5Q_label="signature_period5Q"
 corruption_signature_period25Q_label="signature_period25Q"
@@ -2079,13 +2080,14 @@ all_calculated_corruption_column_types <- c(corruption_award_year_label,
                                             corruption_w_country_iso3_label,
                                             corruption_procuring_authority_id_label,
                                             corruption_winner_id_label,
-                                            corruption_main_proc_type_label,
+                                            corruption_procedure_type_label,
                                             corruption_foreign_winner_label,
                                             corruption_ppp_conversion_rate_label,
                                             corruption_ppp_adjusted_contract_value_label,
                                             corruption_contract_value_cats_label,
-                                            corruption_proc_type_label,
-                                            corruption_proc_type3_label,
+                                            corruption_procurement_type_cats_label,
+                                            corruption_procurement_type2_label,
+                                            corruption_procurement_type3_label,
                                             corruption_signature_period_label,
                                             corruption_signature_period5Q_label,
                                             corruption_signature_period25Q_label,
@@ -2148,6 +2150,11 @@ data_object$set("public","set_corruption_types", function(primary_types = c(), c
     self$generate_award_date()
     self$generate_procedure_type()
     self$generate_procuring_authority_id()
+    self$generate_winner_id()
+    self$generate_main_proc_type()
+    self$generate_foreign_winner()
+    self$generate_procurement_type()
+    self$generate_procurement_type_categories()
   }
 }
 )
@@ -2190,11 +2197,84 @@ data_object$set("public","generate_procuring_authority_id", function() {
   if(!self$is_corruption_type_present(corruption_procuring_authority_id_label)) {
     if(!self$is_corruption_type_present(corruption_procuring_authority_label) | !self$is_corruption_type_present(corruption_country_label)) message("Cannot auto generate ", corruption_procuring_authority_id_label, " because ", corruption_procuring_authority_label, "or ", corruption_award_year_label, " is not defined.")
     else {
-      id <- as.numeric(factor(paste0(WB_rawdata$country, WB_rawdata$anb_name), levels = unique(paste0(WB_rawdata$country, WB_rawdata$anb_name))))
+      id <- as.numeric(factor(paste0(self$get_columns_from_data(self$get_corruption_column_name(corruption_country_label)), self$get_columns_from_data(self$get_corruption_column_name(corruption_procuring_authority_label))), levels = unique(paste0(self$get_columns_from_data(self$get_corruption_column_name(corruption_country_label)), self$get_columns_from_data(self$get_corruption_column_name(corruption_procuring_authority_label))))))
       col_name <- next_default_item(corruption_procuring_authority_id_label, self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name, year(award_date))
-      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_award_year_label)
-      self$append_to_variables_metadata(col_name, "label", "Award year")
+      self$add_columns_to_data(col_name, id)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procuring_authority_id_label)
+      self$append_to_variables_metadata(col_name, "label", "Procurement Auth. ID")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_winner_id", function() {
+  if(!self$is_corruption_type_present(corruption_winner_id_label)) {
+    if(!self$is_corruption_type_present(corruption_winner_name_label)) message("Cannot auto generate ", corruption_winner_id_label, " because ", corruption_winner_name_label, " is not defined.")
+    else {
+      id <- as.numeric(factor(self$get_columns_from_data(self$get_corruption_column_name(corruption_winner_name_label)), levels = unique(self$get_columns_from_data(self$get_corruption_column_name(corruption_winner_name_label)))))
+      col_name <- next_default_item(corruption_winner_id_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, id)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_winner_id_label)
+      self$append_to_variables_metadata(col_name, "label", "w_name ID")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_procedure_type", function() {
+  if(!self$is_corruption_type_present(corruption_procedure_type_label)) {
+    if(!self$is_corruption_type_present(corruption_method_type_label)) message("Cannot auto generate ", corruption_procedure_type_label, " because ", corruption_method_type_label, " is not defined.")
+    else {
+      procedure_type <- self$get_columns_from_data(self$get_corruption_column_name(corruption_method_type_label))
+      procedure_type[procedure_type == "CQS"] <- "Selection Based On Consultant's Qualification"
+      procedure_type[procedure_type == "SHOP"] <- "International Shopping"
+      levels <- c("Commercial Practices", "Direct Contracting", "Force Account", "INDB", "Individual", "International Competitive Bidding", "International Shopping", "Least Cost Selection", "Limited International Bidding", "National Competitive Bidding", "National Shopping", "Quality And Cost-Based Selection", "Quality Based Selection", "Selection Based On Consultant's Qualification", "Selection Under a Fixed Budget", "Service Delivery Contracts", "Single Source Selection")
+      if(!all(procedure_type[!is.na(procedure_type)] %in% levels)) {
+        procedure_type <- factor(procedure_type)
+      }
+      else {
+        procedure_type <- factor(procedure_type, levels = levels)
+      }
+      col_name <- next_default_item(corruption_procedure_type_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, id)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procedure_type_label)
+      self$append_to_variables_metadata(col_name, "label", "Procedure type")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_foreign_winner", function() {
+  if(!self$is_corruption_type_present(corruption_foreign_winner_label)) {
+    if(!self$is_corruption_type_present(corruption_country_label) || !self$is_corruption_type_present(corruption_winner_country_label)) message("Cannot auto generate ", corruption_foreign_winner_label, " because ", corruption_country_label, " or ", corruption_winner_country_label, " are not defined.")
+    else {
+      f_winner <- (self$get_columns_from_data(self$get_corruption_column_name(corruption_country_label)) != self$get_columns_from_data(self$get_corruption_column_name(corruption_winner_country_label)))
+      col_name <- next_default_item(corruption_foreign_winner_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, f_winner)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_foreign_winner_label)
+      self$append_to_variables_metadata(col_name, "label", "Foreign w_name dummy")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_procurement_type_categories", function() {
+  if(!self$is_corruption_type_present(corruption_procurement_type_cats_label)) {
+    if(!self$is_corruption_type_present(corruption_procedure_type_label)) message("Cannot auto generate ", corruption_procurement_type_cats_label, " because ", corruption_procedure_type_label, " are not defined.")
+    else {
+      procedure_type <- self$get_columns_from_data(self$get_corruption_column_name(corruption_procedure_type_label))
+      procurement_type <- "other, missing"
+      procurement_type[procedure_type == "Direct Contracting" | procedure_type == "Individual" | procedure_type == "Single Source Selection"] <- "single source"
+      procurement_type[procedure_type == "Force Account" | procedure_type == "Service Delivery Contracts"] <- "own provision"
+      procurement_type[procedure_type == "International Competitive Bidding" | procedure_type == "National Competitive Bidding"] <- "open"
+      procurement_type[procedure_type == "International Shopping" | procedure_type == "Limited International Bidding" | procedure_type == "National Shopping"] <- "restricted"
+      procurement_type[procedure_type == "Quality And Cost-Based Selection" | procedure_type == "Quality Based Selection" | procedure_type == "Selection Under a Fixed Budget"] <- "consultancy,cost"
+      procurement_type[procedure_type == "Least Cost Selection" | procedure_type == "Selection Based On Consultant's Qualification"] <- "consultancy,cost"
+      procurement_type <- factor(procurement_type, levels = c("open", "restricted", "single source", "consultancy,quality", "consultancy,cost", "own provision", "other, missing"))
+      col_name <- next_default_item(corruption_procurement_type_cats_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, procurement_type)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procurement_type_cats_label)
+      self$append_to_variables_metadata(col_name, "label", "Main procurement type category")
     }
   }
 }
