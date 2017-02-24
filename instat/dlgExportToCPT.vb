@@ -110,7 +110,7 @@ Public Class dlgExportToCPT
 
     Private Sub TestOkEnabled()
         'checking that the data frames are different is here temporarily since lat-lon information will be obtained from metadata
-        If (Not ucrSSTDataframe.ucrAvailableDataFrames.strCurrDataFrame = ucrLocationDataFrame.cboAvailableDataFrames.SelectedItem AndAlso Not ucrInputExportFile.IsEmpty AndAlso (Not ucrReceiverYears.IsEmpty) AndAlso ((ucrChkLong.Checked AndAlso (Not ucrReceiverStations.IsEmpty) AndAlso (Not ucrReceiverDataColumn.IsEmpty)) OrElse ((Not ucrChkLong.Checked) AndAlso (Not ucrReceiverMultipleDataColumns.IsEmpty)))) Then
+        If (ucrLocationDataFrame.cboAvailableDataFrames.Text <> "" AndAlso Not ucrSSTDataframe.ucrAvailableDataFrames.strCurrDataFrame = ucrLocationDataFrame.cboAvailableDataFrames.SelectedItem AndAlso Not ucrInputExportFile.IsEmpty AndAlso (Not ucrReceiverYears.IsEmpty) AndAlso ((ucrChkLong.Checked AndAlso (Not ucrReceiverStations.IsEmpty) AndAlso (Not ucrReceiverDataColumn.IsEmpty)) OrElse ((Not ucrChkLong.Checked) AndAlso (Not ucrReceiverMultipleDataColumns.IsEmpty)))) Then
             ucrBaseExportToCPT.OKEnabled(True)
         Else
             ucrBaseExportToCPT.OKEnabled(False)
