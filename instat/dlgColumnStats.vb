@@ -25,11 +25,9 @@ Public Class dlgColumnStats
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
-
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
@@ -63,14 +61,9 @@ Public Class dlgColumnStats
         ucrReceiverSelectedVariables.SetMeAsReceiver()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
-        'clsDefaultFunction.AddParameter("summaries", "c(" & Chr(34) & "summary_count" & Chr(34) & "," & Chr(34) & "summary_count_non_missing" & Chr(34) & "," & Chr(34) & "summary_sum" & Chr(34) & ")")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
-
-        'clsDefaultFunction.AddParameter("summaries", "c(" & Chr(34) & "summary_count" & Chr(34) & "," & Chr(34) & "summary_count_non_missing" & Chr(34) & "," & Chr(34) & "summary_sum" & Chr(34) & ")")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         bResetSubdialog = True
-        'TODO get the subdilog stuff working
-        ' TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -96,7 +89,6 @@ Public Class dlgColumnStats
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStoreResults.SetRDefault("TRUE")
 
-
         ucrChkPrintOutput.SetText("Print Results to Output Window")
         ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
         ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -107,17 +99,10 @@ Public Class dlgColumnStats
         ucrChkdropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkdropUnusedLevels.SetRDefault("FALSE")
 
-
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
-
-        'disbling the cmdSummaries for the moment
-        'cmdSummaries.Enabled = False
-        'i leave the subdialog stuff for now
-        'sdgSummaries.SetMyRFunction(clsDefaultFunction)
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -130,9 +115,6 @@ Public Class dlgColumnStats
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
-        'sdgSummaries.ShowDialog()
-        'sdgSummaries.TestSummaries()
-        'TestOKEnabled()
     End Sub
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged
         TestOKEnabled()
