@@ -2221,29 +2221,6 @@ data_object$set("public","generate_winner_id", function() {
 }
 )
 
-data_object$set("public","generate_procedure_type", function() {
-  if(!self$is_corruption_type_present(corruption_procedure_type_label)) {
-    if(!self$is_corruption_type_present(corruption_method_type_label)) message("Cannot auto generate ", corruption_procedure_type_label, " because ", corruption_method_type_label, " is not defined.")
-    else {
-      procedure_type <- self$get_columns_from_data(self$get_corruption_column_name(corruption_method_type_label))
-      procedure_type[procedure_type == "CQS"] <- "Selection Based On Consultant's Qualification"
-      procedure_type[procedure_type == "SHOP"] <- "International Shopping"
-      levels <- c("Commercial Practices", "Direct Contracting", "Force Account", "INDB", "Individual", "International Competitive Bidding", "International Shopping", "Least Cost Selection", "Limited International Bidding", "National Competitive Bidding", "National Shopping", "Quality And Cost-Based Selection", "Quality Based Selection", "Selection Based On Consultant's Qualification", "Selection Under a Fixed Budget", "Service Delivery Contracts", "Single Source Selection")
-      if(!all(procedure_type[!is.na(procedure_type)] %in% levels)) {
-        procedure_type <- factor(procedure_type)
-      }
-      else {
-        procedure_type <- factor(procedure_type, levels = levels)
-      }
-      col_name <- next_default_item(corruption_procedure_type_label, self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name, id)
-      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procedure_type_label)
-      self$append_to_variables_metadata(col_name, "label", "Procedure type")
-    }
-  }
-}
-)
-
 data_object$set("public","generate_foreign_winner", function() {
   if(!self$is_corruption_type_present(corruption_foreign_winner_label)) {
     if(!self$is_corruption_type_present(corruption_country_label) || !self$is_corruption_type_present(corruption_winner_country_label)) message("Cannot auto generate ", corruption_foreign_winner_label, " because ", corruption_country_label, " or ", corruption_winner_country_label, " are not defined.")
