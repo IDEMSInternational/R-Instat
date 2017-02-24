@@ -214,6 +214,7 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulationStartOfRain = New System.Windows.Forms.ToolStripMenuItem()
@@ -412,6 +413,7 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruption = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCorruptionDefineCorruptionData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -424,7 +426,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruptionDefineCorruptionData = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1446,7 +1447,6 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareEventsStartoftheRains
         '
-        Me.mnuClimaticPrepareEventsStartoftheRains.Enabled = False
         Me.mnuClimaticPrepareEventsStartoftheRains.Name = "mnuClimaticPrepareEventsStartoftheRains"
         Me.mnuClimaticPrepareEventsStartoftheRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticPrepareEventsStartoftheRains.Text = "Start of the Rains..."
@@ -1705,7 +1705,7 @@ Partial Class frmMain
         '
         'mnuClimaticSCF
         '
-        Me.mnuClimaticSCF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticSCFSupportOpenSST, Me.mnuClimaticSCFSupportExporttoCPT, Me.ToolStripSeparator32, Me.mnuClimaticSCFSupportCorrelations, Me.mnuClimaticSCFSupportPrincipalComponents, Me.mnuClimaticSCFSupportCanonicalCorrelations})
+        Me.mnuClimaticSCF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticSCFSupportOpenSST, Me.mnuClimaticSCFSupportExporttoCPT, Me.ToolStripSeparator32, Me.mnuClimaticSCFSupportCorrelations, Me.mnuClimaticSCFSupportPrincipalComponents, Me.mnuClimaticSCFSupportCanonicalCorrelations, Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs})
         Me.mnuClimaticSCF.Name = "mnuClimaticSCF"
         Me.mnuClimaticSCF.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticSCF.Text = "SCF Support"
@@ -1713,38 +1713,44 @@ Partial Class frmMain
         'mnuClimaticSCFSupportOpenSST
         '
         Me.mnuClimaticSCFSupportOpenSST.Name = "mnuClimaticSCFSupportOpenSST"
-        Me.mnuClimaticSCFSupportOpenSST.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportOpenSST.Size = New System.Drawing.Size(250, 22)
         Me.mnuClimaticSCFSupportOpenSST.Text = "Open SST..."
         '
         'mnuClimaticSCFSupportExporttoCPT
         '
         Me.mnuClimaticSCFSupportExporttoCPT.Name = "mnuClimaticSCFSupportExporttoCPT"
-        Me.mnuClimaticSCFSupportExporttoCPT.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportExporttoCPT.Size = New System.Drawing.Size(250, 22)
         Me.mnuClimaticSCFSupportExporttoCPT.Tag = "Export_to_CPT"
         Me.mnuClimaticSCFSupportExporttoCPT.Text = "Export to CPT..."
         '
         'ToolStripSeparator32
         '
         Me.ToolStripSeparator32.Name = "ToolStripSeparator32"
-        Me.ToolStripSeparator32.Size = New System.Drawing.Size(200, 6)
+        Me.ToolStripSeparator32.Size = New System.Drawing.Size(247, 6)
         '
         'mnuClimaticSCFSupportCorrelations
         '
         Me.mnuClimaticSCFSupportCorrelations.Name = "mnuClimaticSCFSupportCorrelations"
-        Me.mnuClimaticSCFSupportCorrelations.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportCorrelations.Size = New System.Drawing.Size(250, 22)
         Me.mnuClimaticSCFSupportCorrelations.Text = "Correlations..."
         '
         'mnuClimaticSCFSupportPrincipalComponents
         '
         Me.mnuClimaticSCFSupportPrincipalComponents.Name = "mnuClimaticSCFSupportPrincipalComponents"
-        Me.mnuClimaticSCFSupportPrincipalComponents.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportPrincipalComponents.Size = New System.Drawing.Size(250, 22)
         Me.mnuClimaticSCFSupportPrincipalComponents.Text = "Principal Components..."
         '
         'mnuClimaticSCFSupportCanonicalCorrelations
         '
         Me.mnuClimaticSCFSupportCanonicalCorrelations.Name = "mnuClimaticSCFSupportCanonicalCorrelations"
-        Me.mnuClimaticSCFSupportCanonicalCorrelations.Size = New System.Drawing.Size(203, 22)
+        Me.mnuClimaticSCFSupportCanonicalCorrelations.Size = New System.Drawing.Size(250, 22)
         Me.mnuClimaticSCFSupportCanonicalCorrelations.Text = "Canonical Correlations..."
+        '
+        'mnuClimaticSCFSupportCumulativeExceedanceGraphs
+        '
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Name = "mnuClimaticSCFSupportCumulativeExceedanceGraphs"
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Size = New System.Drawing.Size(250, 22)
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Text = "Cumulative/Exceedance Graphs..."
         '
         'mnuClimateMethods
         '
@@ -3178,6 +3184,12 @@ Partial Class frmMain
         Me.mnuCorruptionFile.Size = New System.Drawing.Size(205, 22)
         Me.mnuCorruptionFile.Text = "File..."
         '
+        'mnuCorruptionDefineCorruptionData
+        '
+        Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
+        Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(205, 22)
+        Me.mnuCorruptionDefineCorruptionData.Text = "Define Corruption Data..."
+        '
         'mnuCorruptionPrepare
         '
         Me.mnuCorruptionPrepare.Name = "mnuCorruptionPrepare"
@@ -3261,12 +3273,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuCorruptionDefineCorruptionData
-        '
-        Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
-        Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(205, 22)
-        Me.mnuCorruptionDefineCorruptionData.Text = "Define Corruption Data..."
         '
         'frmMain
         '
@@ -3694,4 +3700,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator18 As ToolStripSeparator
     Friend WithEvents Extremes As ToolStripMenuItem
     Friend WithEvents mnuCorruptionDefineCorruptionData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticSCFSupportCumulativeExceedanceGraphs As ToolStripMenuItem
 End Class
