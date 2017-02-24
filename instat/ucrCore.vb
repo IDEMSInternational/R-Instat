@@ -163,13 +163,13 @@ Public Class ucrCore
             If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
                 ucrControl.SetRCode(clsRCode)
             End If
-            If ucrControl.bLinkedAddRemoveParameter Then
-                ucrControl.AddOrRemoveParameter(bTemp)
-            End If
             If ucrControl.bLinkedChangeToDefaultState AndAlso bReset Then
                 If ucrControl.clsRCode Is Nothing OrElse ucrControl.clsParameter Is Nothing OrElse (ucrControl.clsRCode IsNot Nothing AndAlso ucrControl.clsParameter IsNot Nothing AndAlso ucrControl.clsParameter.strArgumentName IsNot Nothing AndAlso (Not ucrControl.clsRCode.ContainsParameter(ucrControl.clsParameter.strArgumentName))) Then
                     ucrControl.SetToDefaultState()
                 End If
+            End If
+            If ucrControl.bLinkedAddRemoveParameter Then
+                ucrControl.AddOrRemoveParameter(bTemp)
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
                 ucrControl.SetVisible(bTemp)
@@ -183,7 +183,9 @@ Public Class ucrCore
 
     'Update the RCode based on the contents of the control (reverse of above)
     Public Overridable Sub UpdateRCode(Optional bReset As Boolean = False)
-        AddOrRemoveParameter(CanAddParameter())
+        If bAddRemoveParameter Then
+            AddOrRemoveParameter(CanAddParameter())
+        End If
         UpdateLinkedControls(bReset)
     End Sub
 
