@@ -102,7 +102,7 @@ Partial Class dlgStartofRains
         '
         'nudMinimum
         '
-        Me.nudMinimum.Location = New System.Drawing.Point(56, 8)
+        Me.nudMinimum.Location = New System.Drawing.Point(64, 7)
         Me.nudMinimum.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMinimum.Name = "nudMinimum"
         Me.nudMinimum.Size = New System.Drawing.Size(47, 20)
@@ -566,7 +566,7 @@ Partial Class dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(594, 489)
+        Me.ClientSize = New System.Drawing.Size(594, 459)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
