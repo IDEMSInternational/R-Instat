@@ -46,12 +46,13 @@ Partial Class dlgMakeDate
         Me.ucrReceiverDayThree = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
-        Me.ucrChkMore = New instat.ucrCheck()
         Me.ucrInputFormat = New instat.ucrInputComboBox()
         Me.ucrInputOrigin = New instat.ucrInputComboBox()
         Me.rdoSpecifyFormat = New System.Windows.Forms.RadioButton()
         Me.rdoSpecifyOrigin = New System.Windows.Forms.RadioButton()
         Me.rdoDefaultFormat = New System.Windows.Forms.RadioButton()
+        Me.ucrPanelFormat = New instat.UcrPanel()
+        Me.ucrChkMore = New instat.ucrCheck()
         Me.ucrReceiverForDate = New instat.ucrReceiverSingle()
         Me.grpFormatField = New System.Windows.Forms.GroupBox()
         Me.lblDay = New System.Windows.Forms.Label()
@@ -305,12 +306,13 @@ Partial Class dlgMakeDate
         '
         'grpSingleColumn
         '
-        Me.grpSingleColumn.Controls.Add(Me.ucrChkMore)
         Me.grpSingleColumn.Controls.Add(Me.ucrInputFormat)
         Me.grpSingleColumn.Controls.Add(Me.ucrInputOrigin)
         Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyFormat)
         Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyOrigin)
         Me.grpSingleColumn.Controls.Add(Me.rdoDefaultFormat)
+        Me.grpSingleColumn.Controls.Add(Me.ucrPanelFormat)
+        Me.grpSingleColumn.Controls.Add(Me.ucrChkMore)
         Me.grpSingleColumn.Controls.Add(Me.ucrReceiverForDate)
         Me.grpSingleColumn.Controls.Add(Me.grpFormatField)
         Me.grpSingleColumn.Location = New System.Drawing.Point(257, 55)
@@ -320,37 +322,29 @@ Partial Class dlgMakeDate
         Me.grpSingleColumn.TabStop = False
         Me.grpSingleColumn.Text = "Single Column"
         '
-        'ucrChkMore
-        '
-        Me.ucrChkMore.Checked = False
-        Me.ucrChkMore.Location = New System.Drawing.Point(159, 24)
-        Me.ucrChkMore.Name = "ucrChkMore"
-        Me.ucrChkMore.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMore.TabIndex = 40
-        '
         'ucrInputFormat
         '
         Me.ucrInputFormat.IsReadOnly = False
-        Me.ucrInputFormat.Location = New System.Drawing.Point(114, 117)
+        Me.ucrInputFormat.Location = New System.Drawing.Point(114, 122)
         Me.ucrInputFormat.Name = "ucrInputFormat"
         Me.ucrInputFormat.Size = New System.Drawing.Size(103, 21)
-        Me.ucrInputFormat.TabIndex = 39
+        Me.ucrInputFormat.TabIndex = 45
         '
         'ucrInputOrigin
         '
         Me.ucrInputOrigin.IsReadOnly = False
-        Me.ucrInputOrigin.Location = New System.Drawing.Point(115, 82)
+        Me.ucrInputOrigin.Location = New System.Drawing.Point(115, 87)
         Me.ucrInputOrigin.Name = "ucrInputOrigin"
         Me.ucrInputOrigin.Size = New System.Drawing.Size(103, 21)
-        Me.ucrInputOrigin.TabIndex = 38
+        Me.ucrInputOrigin.TabIndex = 44
         '
         'rdoSpecifyFormat
         '
         Me.rdoSpecifyFormat.AutoSize = True
-        Me.rdoSpecifyFormat.Location = New System.Drawing.Point(13, 116)
+        Me.rdoSpecifyFormat.Location = New System.Drawing.Point(13, 121)
         Me.rdoSpecifyFormat.Name = "rdoSpecifyFormat"
         Me.rdoSpecifyFormat.Size = New System.Drawing.Size(95, 17)
-        Me.rdoSpecifyFormat.TabIndex = 37
+        Me.rdoSpecifyFormat.TabIndex = 43
         Me.rdoSpecifyFormat.TabStop = True
         Me.rdoSpecifyFormat.Text = "Specify Format"
         Me.rdoSpecifyFormat.UseVisualStyleBackColor = True
@@ -358,10 +352,10 @@ Partial Class dlgMakeDate
         'rdoSpecifyOrigin
         '
         Me.rdoSpecifyOrigin.AutoSize = True
-        Me.rdoSpecifyOrigin.Location = New System.Drawing.Point(13, 83)
+        Me.rdoSpecifyOrigin.Location = New System.Drawing.Point(13, 88)
         Me.rdoSpecifyOrigin.Name = "rdoSpecifyOrigin"
         Me.rdoSpecifyOrigin.Size = New System.Drawing.Size(90, 17)
-        Me.rdoSpecifyOrigin.TabIndex = 36
+        Me.rdoSpecifyOrigin.TabIndex = 42
         Me.rdoSpecifyOrigin.TabStop = True
         Me.rdoSpecifyOrigin.Text = "Specify Origin"
         Me.rdoSpecifyOrigin.UseVisualStyleBackColor = True
@@ -369,13 +363,28 @@ Partial Class dlgMakeDate
         'rdoDefaultFormat
         '
         Me.rdoDefaultFormat.AutoSize = True
-        Me.rdoDefaultFormat.Location = New System.Drawing.Point(13, 53)
+        Me.rdoDefaultFormat.Location = New System.Drawing.Point(13, 58)
         Me.rdoDefaultFormat.Name = "rdoDefaultFormat"
         Me.rdoDefaultFormat.Size = New System.Drawing.Size(94, 17)
-        Me.rdoDefaultFormat.TabIndex = 35
+        Me.rdoDefaultFormat.TabIndex = 41
         Me.rdoDefaultFormat.TabStop = True
         Me.rdoDefaultFormat.Text = "Default Format"
         Me.rdoDefaultFormat.UseVisualStyleBackColor = True
+        '
+        'ucrPanelFormat
+        '
+        Me.ucrPanelFormat.Location = New System.Drawing.Point(13, 81)
+        Me.ucrPanelFormat.Name = "ucrPanelFormat"
+        Me.ucrPanelFormat.Size = New System.Drawing.Size(219, 74)
+        Me.ucrPanelFormat.TabIndex = 18
+        '
+        'ucrChkMore
+        '
+        Me.ucrChkMore.Checked = False
+        Me.ucrChkMore.Location = New System.Drawing.Point(159, 24)
+        Me.ucrChkMore.Name = "ucrChkMore"
+        Me.ucrChkMore.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMore.TabIndex = 40
         '
         'ucrReceiverForDate
         '
@@ -611,10 +620,11 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrReceiverMonthThree As ucrReceiverSingle
     Friend WithEvents ucrChkTwoDigitYear As ucrCheck
     Friend WithEvents ucrNudCutoff As ucrNud
+    Friend WithEvents ucrChkMore As ucrCheck
     Friend WithEvents ucrInputFormat As ucrInputComboBox
     Friend WithEvents ucrInputOrigin As ucrInputComboBox
     Friend WithEvents rdoSpecifyFormat As RadioButton
     Friend WithEvents rdoSpecifyOrigin As RadioButton
     Friend WithEvents rdoDefaultFormat As RadioButton
-    Friend WithEvents ucrChkMore As ucrCheck
+    Friend WithEvents ucrPanelFormat As UcrPanel
 End Class
