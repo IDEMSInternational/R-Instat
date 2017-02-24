@@ -325,7 +325,7 @@ Partial Class dlgMakeDate
         'ucrInputFormat
         '
         Me.ucrInputFormat.IsReadOnly = False
-        Me.ucrInputFormat.Location = New System.Drawing.Point(114, 122)
+        Me.ucrInputFormat.Location = New System.Drawing.Point(122, 122)
         Me.ucrInputFormat.Name = "ucrInputFormat"
         Me.ucrInputFormat.Size = New System.Drawing.Size(103, 21)
         Me.ucrInputFormat.TabIndex = 45
@@ -333,7 +333,7 @@ Partial Class dlgMakeDate
         'ucrInputOrigin
         '
         Me.ucrInputOrigin.IsReadOnly = False
-        Me.ucrInputOrigin.Location = New System.Drawing.Point(115, 87)
+        Me.ucrInputOrigin.Location = New System.Drawing.Point(123, 87)
         Me.ucrInputOrigin.Name = "ucrInputOrigin"
         Me.ucrInputOrigin.Size = New System.Drawing.Size(103, 21)
         Me.ucrInputOrigin.TabIndex = 44
@@ -373,9 +373,9 @@ Partial Class dlgMakeDate
         '
         'ucrPanelFormat
         '
-        Me.ucrPanelFormat.Location = New System.Drawing.Point(13, 81)
+        Me.ucrPanelFormat.Location = New System.Drawing.Point(6, 45)
         Me.ucrPanelFormat.Name = "ucrPanelFormat"
-        Me.ucrPanelFormat.Size = New System.Drawing.Size(219, 74)
+        Me.ucrPanelFormat.Size = New System.Drawing.Size(106, 110)
         Me.ucrPanelFormat.TabIndex = 18
         '
         'ucrChkMore
