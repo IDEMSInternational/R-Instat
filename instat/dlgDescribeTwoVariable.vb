@@ -58,10 +58,10 @@ Public Class dlgDescribeTwoVariable
         cmdSummaries.Visible = False
         cmdDisplayOptions.Visible = False
         chkOmitMissing.Checked = False
-        sdgSummaries.SetMyRFunction(clsRCustomSummary)
+        'sdgSummaries.SetMyRFunction(clsRCustomSummary)
         sdgDescribeDisplay.SetAnovaDispOptions(clsRAnova)
         sdgDescribeDisplay.SetFreqDispOptions(clsRFreqTables)
-        sdgSummaries.SetDefaults()
+        'sdgSummaries.SetDefaults()
         sdgDescribeDisplay.SetDefaults()
         ucrReceiverFirstVar.SetMeAsReceiver()
         ucrSelectorDescribeTwoVar.Reset()
@@ -91,7 +91,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.ShowDialog()
-        sdgSummaries.TestSummaries()
+        'sdgSummaries.TestSummaries()
         TestOKEnabled()
     End Sub
 
