@@ -16,21 +16,24 @@
 Imports instat.Translations
 Public Class dlgInfill
     Private bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private bReset As Boolean = True
+
     Private Sub dlgInfill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
         autoTranslate(Me)
-        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         'Task: Help ID for this dialogue need to be added.
         ' ucrBase.iHelpTopicID=
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
 
         'Set receiver
         ucrReceiverDate.Selector = ucrInfillSelector
@@ -52,14 +55,20 @@ Public Class dlgInfill
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrInfillSelector.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-        TestOkEnabled()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub TestOkEnabled()
-        If Not (ucrReceiverDate.IsEmpty) OrElse Not (ucrReceiverFactors.IsEmpty) Then
+        If Not (ucrReceiverDate.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -68,6 +77,8 @@ Public Class dlgInfill
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
