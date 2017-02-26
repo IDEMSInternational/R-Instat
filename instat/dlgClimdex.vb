@@ -13,46 +13,39 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgClimdex
-    Public clsRClimdexInput, clsRMaxMisingDays, clsRTmax, clsRTmin, clsRPrec, clsRDate, clsRPCIct, clsRChar As New RFunction
     Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Public bSaveIndex As Boolean = True
+    Private bResetSubdialog As Boolean = False
+    Public clsDefaultFunction As New RFunction
+    Public clsRDataName, clsRTmax, clsRTmin, clsRPrec, clsRDate, clsRPCIct, clsRChar As New RFunction
 
     Private Sub dlgClimdex_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
+        TestOkEnabled()
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorClimdex.Reset()
         ucrSelectorClimdex.Focus()
         ucrReceiverDate.SetMeAsReceiver()
-        sdgClimdexIndices.SetDefaults()
-        chkNHemisphere.Checked = True
-        nudYearFrom.Value = 1961
-        nudYearTo.Value = 1990
-        nudN.Value = 5
-        nudAnnualMissingDays.Value = 15
-        nudMothlyMissingDays.Value = 3
-        nudMinBaseData.Value = 0.1
-        ucrInputFreq.cboInput.SelectedItem = "annual"
-        ucrMultipleInputPrecQtiles.txtNumericItems.Text = "0.95, 0.99"
-        ucrMultipleInputTempQtiles.txtNumericItems.Text = "0.1, 0.9"
-        TestOkEnabled()
-    End Sub
+        ucrChkSave.Checked = True
 
-    Private Sub InitialiseDialog()
-        ucrBaseClimdex.clsRsyntax.iCallType = 0
-        ucrBaseClimdex.iHelpTopicID = 190
-        clsRClimdexInput.SetRCommand("climdexInput.raw")
-        ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsRClimdexInput)
-        clsRMaxMisingDays.SetRCommand("c")
+        'Define the default RFunction
+        clsDefaultFunction.SetRCommand("climdexInput.raw")
         clsRTmax.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRTmin.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRPrec.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
@@ -60,19 +53,64 @@ Public Class dlgClimdex
         clsRPCIct.SetRCommand("as.PCICt")
         clsRChar.SetRCommand("as.character")
         clsRPCIct.AddParameter("cal", Chr(34) & "gregorian" & Chr(34))
-        ucrReceiverDate.SetDataType("Date")
-        ucrMultipleInputTempQtiles.bIsNumericInput = True
-        ucrMultipleInputPrecQtiles.bIsNumericInput = True
+
+        clsRChar.AddParameter("x", clsRFunctionParameter:=clsRDate)
+        clsRPCIct.AddParameter("x", clsRFunctionParameter:=clsRChar)
+        clsDefaultFunction.SetAssignTo("climdex_input")
+
+        ' Set default RFunction as the base function
+        ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        'add rfunction as parameters of the main function here
+        ucrBaseClimdex.clsRsyntax.AddParameter("tmax", clsRFunctionParameter:=clsRTmax)
+        ucrBaseClimdex.clsRsyntax.AddParameter("tmax.dates", clsRFunctionParameter:=clsRPCIct)
+        ucrBaseClimdex.clsRsyntax.AddParameter("tmin", clsRFunctionParameter:=clsRTmin)
+        ucrBaseClimdex.clsRsyntax.AddParameter("tmin.dates", clsRFunctionParameter:=clsRPCIct)
+        ucrBaseClimdex.clsRsyntax.AddParameter("prec", clsRFunctionParameter:=clsRPrec)
+        ucrBaseClimdex.clsRsyntax.AddParameter("prec.dates", clsRFunctionParameter:=clsRPCIct)
+        'ucrBaseClimdex.clsRsyntax.AddParameter("temp.qtiles", "c(0.1,0.9)")
+        'ucrBaseClimdex.clsRsyntax.AddParameter("prec.qtiles", "c(0.95, 0.99)")
+        bResetSubdialog = True
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBaseClimdex.iHelpTopicID = 190
+        ucrBaseClimdex.clsRsyntax.iCallType = 0
+
+        ucrSelectorClimdex.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorClimdex.SetParameterIsString()
+
         ucrReceiverDate.Selector = ucrSelectorClimdex
+        ucrReceiverDate.SetClimaticType("date")
+        'ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {"date"})
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.SetParameter(New RParameter("col_name"))
+        ucrReceiverDate.SetParameterIsString()
+
         ucrReceiverTmax.Selector = ucrSelectorClimdex
+        ucrReceiverTmax.SetClimaticType("temp_max")
+        ucrReceiverTmax.bAutoFill = True
+        ucrReceiverTmax.SetParameter(New RParameter("col_name"))
+        ucrReceiverTmax.SetParameterIsString()
+
         ucrReceiverTmin.Selector = ucrSelectorClimdex
+        ucrReceiverTmin.SetClimaticType("temp_min")
+        ucrReceiverTmin.bAutoFill = True
+        ucrReceiverTmin.SetParameter(New RParameter("col_name"))
+        ucrReceiverTmin.SetParameterIsString()
+
         ucrReceiverPrec.Selector = ucrSelectorClimdex
-        ucrInputFreq.SetItems({"monthly", "annual"})
-        AssignName()
+        ucrReceiverPrec.SetClimaticType("rain")
+        ucrReceiverPrec.bAutoFill = True
+        ucrReceiverPrec.SetParameter(New RParameter("col_name"))
+        ucrReceiverPrec.SetParameterIsString()
+
+        ucrChkSave.SetText("Save indices")
+        ucrChkSave.bChangeParameterValue = False
     End Sub
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverDate.IsEmpty AndAlso (Not ucrReceiverTmax.IsEmpty OrElse Not ucrReceiverTmin.IsEmpty OrElse Not ucrReceiverPrec.IsEmpty) Then
+            AddRemoveDates()
             ucrBaseClimdex.OKEnabled(True)
         Else
             ucrBaseClimdex.OKEnabled(False)
@@ -80,151 +118,75 @@ Public Class dlgClimdex
     End Sub
 
     Private Sub ReopenDialog()
+
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrSelectorClimdex.SetRCode(clsRDate, bReset)
+        ucrSelectorClimdex.SetRCode(clsRTmax, bReset)
+        ucrSelectorClimdex.SetRCode(clsRTmin, bReset)
+        ucrSelectorClimdex.SetRCode(clsRPrec, bReset)
+        ucrSelectorClimdex.SetRCode(sdgClimdexIndices.clsRWriteDf, bReset)
+        ucrReceiverDate.SetRCode(clsRDate, bReset)
+        ucrReceiverTmax.SetRCode(clsRTmax, bReset)
+        ucrReceiverTmin.SetRCode(clsRTmin, bReset)
+        ucrReceiverPrec.SetRCode(clsRPrec, bReset)
     End Sub
 
     Private Sub ucrBaseClimdex_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseClimdex.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrSelectorClimdex_DataFrameChanged() Handles ucrSelectorClimdex.DataFrameChanged
-        clsRDate.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        AssignName()
-    End Sub
-
-    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
-        clsRDate.AddParameter("col_name", ucrReceiverDate.GetVariableNames())
-        clsRChar.AddParameter("x", clsRFunctionParameter:=clsRDate)
-        clsRPCIct.AddParameter("x", clsRFunctionParameter:=clsRChar)
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverTmax_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverTmax.SelectionChanged
-        clsRTmax.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-
+    Private Sub AddRemoveDates()
         If Not ucrReceiverTmax.IsEmpty Then
-            clsRTmax.AddParameter("col_name", ucrReceiverTmax.GetVariableNames())
-            clsRClimdexInput.AddParameter("tmax", clsRFunctionParameter:=clsRTmax)
-            clsRClimdexInput.AddParameter("tmax.dates", clsRFunctionParameter:=clsRPCIct)
+            ucrBaseClimdex.clsRsyntax.AddParameter("tmax", clsRFunctionParameter:=clsRTmax)
+            ucrBaseClimdex.clsRsyntax.AddParameter("tmax.dates", clsRFunctionParameter:=clsRPCIct)
         Else
-            clsRClimdexInput.RemoveParameterByName("tmax")
-            clsRClimdexInput.RemoveParameterByName("tmax.dates")
+            ucrBaseClimdex.clsRsyntax.RemoveParameter("tmax.dates")
+            ucrBaseClimdex.clsRsyntax.RemoveParameter("tmax")
         End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverTmin_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverTmin.SelectionChanged
-        clsRTmin.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         If Not ucrReceiverTmin.IsEmpty Then
-            clsRTmin.AddParameter("col_name", ucrReceiverTmin.GetVariableNames())
-            clsRClimdexInput.AddParameter("tmin", clsRFunctionParameter:=clsRTmin)
-            clsRClimdexInput.AddParameter("tmin.dates", clsRFunctionParameter:=clsRPCIct)
+            ucrBaseClimdex.clsRsyntax.AddParameter("tmin", clsRFunctionParameter:=clsRTmin)
+            ucrBaseClimdex.clsRsyntax.AddParameter("tmin.dates", clsRFunctionParameter:=clsRPCIct)
         Else
-            clsRClimdexInput.RemoveParameterByName("tmin")
-            clsRClimdexInput.RemoveParameterByName("tmin.dates")
+            ucrBaseClimdex.clsRsyntax.RemoveParameter("tmin")
+            ucrBaseClimdex.clsRsyntax.RemoveParameter("tmin.dates")
         End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverPrec_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverPrec.SelectionChanged
-        clsRPrec.AddParameter("data_name", Chr(34) & ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         If Not ucrReceiverPrec.IsEmpty Then
-            clsRPrec.AddParameter("col_name", ucrReceiverPrec.GetVariableNames())
-            clsRClimdexInput.AddParameter("prec", clsRFunctionParameter:=clsRPrec)
-            clsRClimdexInput.AddParameter("prec.dates", clsRFunctionParameter:=clsRPCIct)
+            ucrBaseClimdex.clsRsyntax.AddParameter("prec", clsRFunctionParameter:=clsRPrec)
+            ucrBaseClimdex.clsRsyntax.AddParameter("prec.dates", clsRFunctionParameter:=clsRPCIct)
         Else
-            clsRClimdexInput.RemoveParameterByName("prec")
-            clsRClimdexInput.RemoveParameterByName("prec.dates")
+            ucrBaseClimdex.clsRsyntax.RemoveParameter("prec")
+            ucrBaseClimdex.clsRsyntax.RemoveParameter("prec.dates")
         End If
-        TestOkEnabled()
     End Sub
 
     Private Sub cmdIndices_Click(sender As Object, e As EventArgs) Handles cmdIndices.Click
+        sdgClimdexIndices.SetRFunction(ucrBaseClimdex.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        bResetSubdialog = False
         sdgClimdexIndices.ShowDialog()
     End Sub
 
     Private Sub ucrBaseClimdex_clickok(sender As Object, e As EventArgs) Handles ucrBaseClimdex.ClickOk
-        sdgClimdexIndices.IndicesOptions()
-    End Sub
-
-    Private Sub nudYearFromTo_ValueChanged(sender As Object, e As EventArgs) Handles nudYearFrom.ValueChanged, nudYearTo.ValueChanged
-        clsRClimdexInput.AddParameter("base.range", "c(" & nudYearFrom.Value & "," & nudYearTo.Value & ")")
-        If nudYearFrom.Value = 1961 AndAlso nudYearTo.Value = 1990 Then
-            clsRClimdexInput.RemoveParameterByName("base.range")
-        End If
-    End Sub
-
-    Private Sub nudN_ValueChanged(sender As Object, e As EventArgs) Handles nudN.ValueChanged
-        clsRClimdexInput.AddParameter("n", nudN.Value)
-        If nudN.Value = 5 Then
-            clsRClimdexInput.RemoveParameterByName("n")
-        End If
-    End Sub
-
-    Private Sub chkNHemisphere_CheckedChanged(sender As Object, e As EventArgs) Handles chkNHemisphere.CheckedChanged
-        If chkNHemisphere.Checked Then
-            clsRClimdexInput.RemoveParameterByName("northern.hemisphere")
-        Else
-            clsRClimdexInput.AddParameter("northern.hemisphere", "FALSE")
-        End If
-    End Sub
-
-    Private Sub nudAnnualMaxMissingDays_ValueChanged(sender As Object, e As EventArgs) Handles nudAnnualMissingDays.ValueChanged
-        clsRMaxMisingDays.AddParameter("annual", nudAnnualMissingDays.Value)
-        If nudAnnualMissingDays.Value = 15 AndAlso nudMothlyMissingDays.Value = 3 Then
-            clsRClimdexInput.RemoveParameterByName("max.missing.days")
-        Else
-            clsRClimdexInput.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
-        End If
-    End Sub
-
-    Private Sub nudMonthlyMaxMissingDays_ValueChanged(sender As Object, e As EventArgs) Handles nudMothlyMissingDays.ValueChanged
-        clsRMaxMisingDays.AddParameter("monthly", nudMothlyMissingDays.Value)
-        If nudAnnualMissingDays.Value = 15 AndAlso nudMothlyMissingDays.Value = 3 Then
-            clsRClimdexInput.RemoveParameterByName("max.missing.days")
-        Else
-            clsRClimdexInput.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
-        End If
-    End Sub
-
-    Private Sub ucrInputFreq_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub nudMinBaseData_ValueChanged(sender As Object, e As EventArgs) Handles nudMinBaseData.ValueChanged
-        clsRClimdexInput.AddParameter("min.base.data.fraction.present ", nudMinBaseData.Value)
-        If nudMinBaseData.Value = 0.1 Then
-            clsRClimdexInput.RemoveParameterByName("min.base.data.fraction.present ")
-        End If
-    End Sub
-
-    Private Sub ucrMultipleInputPrecQtiles_Leave(sender As Object, e As EventArgs) Handles ucrMultipleInputPrecQtiles.Leave
-        If ucrMultipleInputPrecQtiles.txtNumericItems.Text <> "0.95, 0.99" Then
-            clsRClimdexInput.AddParameter("prec.qtiles", ucrMultipleInputPrecQtiles.clsNumericList.ToScript)
-        Else
-            clsRClimdexInput.RemoveParameterByName("prec.qtiles")
-        End If
-    End Sub
-
-    Private Sub ucrMultipleInputTempQtiles_Leave(sender As Object, e As EventArgs) Handles ucrMultipleInputTempQtiles.Leave
-        If ucrMultipleInputTempQtiles.txtNumericItems.Text <> "0.1, 0.9" Then
-            clsRClimdexInput.AddParameter("temp.qtiles", ucrMultipleInputTempQtiles.clsNumericList.ToScript)
-        Else
-            clsRClimdexInput.RemoveParameterByName("temp.qtiles")
-        End If
-    End Sub
-
-    Private Sub ucrInputFreq_Leave(sender As Object, e As EventArgs) Handles ucrInputFreq.Leave
-        Select Case ucrInputFreq.GetText
-            Case "annual"
-                sdgClimdexIndices.clsRTwoArg1.AddParameter("freq", Chr(34) & "annual" & Chr(34))
-                sdgClimdexIndices.clsRThreeArg.AddParameter("freq", Chr(34) & "annual" & Chr(34))
-            Case "monthly"
-                sdgClimdexIndices.clsRTwoArg1.AddParameter("freq", Chr(34) & "monthly" & Chr(34))
-                sdgClimdexIndices.clsRThreeArg.AddParameter("freq", Chr(34) & "monthly" & Chr(34))
-        End Select
+        sdgClimdexIndices.IndicesOptions(bSaveIndex)
     End Sub
 
     Private Sub AssignName()
         ucrBaseClimdex.clsRsyntax.SetAssignTo("climdex_input")
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimdex.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged
+        TestOkEnabled()
+        sdgClimdexIndices.IndicesType() 'is this the right implementation?
+    End Sub
+
+    Private Sub ucrChkSave_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlContentsChanged
+        If ucrChkSave.Checked Then
+            bSaveIndex = True
+        Else
+            bSaveIndex = False
+        End If
     End Sub
 End Class
