@@ -380,4 +380,8 @@ Public Class ucrReceiver
             Return IsEmpty()
         End If
     End Function
+
+    Public Sub SetClimaticType(strTemp As String)
+        AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & strTemp & Chr(34)})
+    End Sub
 End Class
