@@ -13,10 +13,10 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
+
 Public Class dlgCliPlot
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
     Private Sub dlgCliPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -35,8 +35,6 @@ Public Class dlgCliPlot
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 0
-
         'ucrChks
         ucrChkStationName.SetText("Station Name")
         ucrChkStationName.SetParameter(New RParameter("station_name"))
