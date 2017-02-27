@@ -57,7 +57,6 @@ Public Class dlgStack
         ucrSaveNewDataName.SetLabelText("New Data Frame Name")
         ucrStackDataInto.SetValidationTypeAsRVariable()
         ucrFactorInto.SetValidationTypeAsRVariable()
-        ucrStackDataInto.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub ReopenDialog()
@@ -72,10 +71,22 @@ Public Class dlgStack
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverColumnsToBeStack.IsEmpty() OrElse Not ucrSaveNewDataName.IsComplete OrElse ucrStackDataInto.IsEmpty() OrElse ucrFactorInto.IsEmpty() Then
-            ucrBase.OKEnabled(False)
+        If ucrSaveNewDataName.IsComplete AndAlso Not ucrStackDataInto.IsEmpty() AndAlso Not ucrFactorInto.IsEmpty() Then
+            If ucrChkCarryColumns.Checked Then
+                If Not ucrColumnsToCarryReceiver.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            Else
+                If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            End If
         Else
-            ucrBase.OKEnabled(True)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -113,7 +124,7 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverColumnsToBeStack_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrStackDataInto.ControlContentsChanged, ucrFactorInto.ControlContentsChanged, ucrSaveNewDataName.ControlContentsChanged
+    Private Sub ucrReceiverColumnsToBeStack_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrStackDataInto.ControlContentsChanged, ucrFactorInto.ControlContentsChanged, ucrSaveNewDataName.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
