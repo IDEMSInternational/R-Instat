@@ -39,12 +39,12 @@ Public Class dlgStack
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 57
-        ucrChkCarryColumns.AddToLinkedControls(ucrColumnsToCarryReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
         ucrColumnsToCarryReceiver.Selector = ucrSelectorStack
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         ucrSelectorStack.SetParameter(New RParameter("data", 0))
         ucrSelectorStack.SetParameterIsrfunction()
+        ucrChkCarryColumns.AddToLinkedControls(ucrColumnsToCarryReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCarryColumns.SetText("Carry Columns")
         ucrReceiverColumnsToBeStack.SetParameter(New RParameter("measure.vars", 1))
         ucrReceiverColumnsToBeStack.SetParameterIsString()
@@ -72,14 +72,14 @@ Public Class dlgStack
 
     Private Sub TestOKEnabled()
         If ucrSaveNewDataName.IsComplete AndAlso Not ucrStackDataInto.IsEmpty() AndAlso Not ucrFactorInto.IsEmpty() Then
-            If ucrChkCarryColumns.Checked Then
-                If Not ucrColumnsToCarryReceiver.IsEmpty Then
+            If Not ucrChkCarryColumns.Checked Then
+                If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
             Else
-                If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
+                If Not ucrColumnsToCarryReceiver.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -124,7 +124,7 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverColumnsToBeStack_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrStackDataInto.ControlContentsChanged, ucrFactorInto.ControlContentsChanged, ucrSaveNewDataName.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged
+    Private Sub ucrReceiverColumnsToBeStack_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrStackDataInto.ControlContentsChanged, ucrFactorInto.ControlContentsChanged, ucrSaveNewDataName.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged, ucrColumnsToCarryReceiver.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
