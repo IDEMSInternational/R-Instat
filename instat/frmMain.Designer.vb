@@ -214,6 +214,7 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulationStartOfRain = New System.Windows.Forms.ToolStripMenuItem()
@@ -425,7 +426,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1447,7 +1447,6 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareEventsStartoftheRains
         '
-        Me.mnuClimaticPrepareEventsStartoftheRains.Enabled = False
         Me.mnuClimaticPrepareEventsStartoftheRains.Name = "mnuClimaticPrepareEventsStartoftheRains"
         Me.mnuClimaticPrepareEventsStartoftheRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuClimaticPrepareEventsStartoftheRains.Text = "Start of the Rains..."
@@ -1746,6 +1745,12 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportCanonicalCorrelations.Name = "mnuClimaticSCFSupportCanonicalCorrelations"
         Me.mnuClimaticSCFSupportCanonicalCorrelations.Size = New System.Drawing.Size(250, 22)
         Me.mnuClimaticSCFSupportCanonicalCorrelations.Text = "Canonical Correlations..."
+        '
+        'mnuClimaticSCFSupportCumulativeExceedanceGraphs
+        '
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Name = "mnuClimaticSCFSupportCumulativeExceedanceGraphs"
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Size = New System.Drawing.Size(250, 22)
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Text = "Cumulative/Exceedance Graphs..."
         '
         'mnuClimateMethods
         '
@@ -3268,12 +3273,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
-        '
-        'mnuClimaticSCFSupportCumulativeExceedanceGraphs
-        '
-        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Name = "mnuClimaticSCFSupportCumulativeExceedanceGraphs"
-        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Size = New System.Drawing.Size(250, 22)
-        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Text = "Cumulative/Exceedance Graphs..."
         '
         'frmMain
         '
