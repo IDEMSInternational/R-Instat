@@ -125,7 +125,7 @@ Public Class dlgJitter
         ucrInputMaximumDistanceFromZero.SetRCode(clsDefaultFunction, bReset)
         ucrSelectorForJitter.SetRCode(clsDefaultFunction, bReset)
         ucrInputNewColName.SetRCode(clsDefaultFunction, bReset)
-        '        ucrReceiver?
+        '        ucrReceiverJitter.SetRCode(clsOperatorParameter, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
