@@ -62,8 +62,7 @@ Partial Class dlgJitter
         '
         'ucrInputMaximum
         '
-        Me.ucrInputMaximum.bAddRemoveParameter = True
-        Me.ucrInputMaximum.bChangeParameterValue = True
+        Me.ucrInputMaximum.AddQuotesIfUnrecognised = True
         Me.ucrInputMaximum.IsMultiline = False
         Me.ucrInputMaximum.IsReadOnly = False
         Me.ucrInputMaximum.Location = New System.Drawing.Point(7, 120)
@@ -73,8 +72,7 @@ Partial Class dlgJitter
         '
         'ucrInputMinimum
         '
-        Me.ucrInputMinimum.bAddRemoveParameter = True
-        Me.ucrInputMinimum.bChangeParameterValue = True
+        Me.ucrInputMinimum.AddQuotesIfUnrecognised = True
         Me.ucrInputMinimum.IsMultiline = False
         Me.ucrInputMinimum.IsReadOnly = False
         Me.ucrInputMinimum.Location = New System.Drawing.Point(7, 94)
@@ -84,8 +82,7 @@ Partial Class dlgJitter
         '
         'ucrInputMaximumDistanceFromZero
         '
-        Me.ucrInputMaximumDistanceFromZero.bAddRemoveParameter = True
-        Me.ucrInputMaximumDistanceFromZero.bChangeParameterValue = True
+        Me.ucrInputMaximumDistanceFromZero.AddQuotesIfUnrecognised = True
         Me.ucrInputMaximumDistanceFromZero.IsMultiline = False
         Me.ucrInputMaximumDistanceFromZero.IsReadOnly = False
         Me.ucrInputMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 43)
@@ -117,8 +114,6 @@ Partial Class dlgJitter
         '
         'ucrPnlDistance
         '
-        Me.ucrPnlDistance.bAddRemoveParameter = True
-        Me.ucrPnlDistance.bChangeParameterValue = True
         Me.ucrPnlDistance.Location = New System.Drawing.Point(4, 11)
         Me.ucrPnlDistance.Name = "ucrPnlDistance"
         Me.ucrPnlDistance.Size = New System.Drawing.Size(157, 130)
@@ -126,8 +121,6 @@ Partial Class dlgJitter
         '
         'ucrReceiverJitter
         '
-        Me.ucrReceiverJitter.bAddRemoveParameter = True
-        Me.ucrReceiverJitter.bChangeParameterValue = True
         Me.ucrReceiverJitter.frmParent = Me
         Me.ucrReceiverJitter.Location = New System.Drawing.Point(249, 43)
         Me.ucrReceiverJitter.Margin = New System.Windows.Forms.Padding(0)
@@ -138,8 +131,6 @@ Partial Class dlgJitter
         '
         'ucrSelectorForJitter
         '
-        Me.ucrSelectorForJitter.bAddRemoveParameter = True
-        Me.ucrSelectorForJitter.bChangeParameterValue = True
         Me.ucrSelectorForJitter.bShowHiddenColumns = False
         Me.ucrSelectorForJitter.bUseCurrentFilter = True
         Me.ucrSelectorForJitter.Location = New System.Drawing.Point(10, 10)
@@ -157,11 +148,9 @@ Partial Class dlgJitter
         '
         'ucrInputNewColName
         '
-        Me.ucrInputNewColName.bAddRemoveParameter = True
-        Me.ucrInputNewColName.bChangeParameterValue = True
         Me.ucrInputNewColName.Location = New System.Drawing.Point(10, 219)
         Me.ucrInputNewColName.Name = "ucrInputNewColName"
-        Me.ucrInputNewColName.Size = New System.Drawing.Size(332, 24)
+        Me.ucrInputNewColName.Size = New System.Drawing.Size(286, 24)
         Me.ucrInputNewColName.TabIndex = 8
         '
         'dlgJitter

@@ -135,20 +135,11 @@ Public Class dlgJitter
     End Sub
 
     Private Sub TestOKEnabled()
-        '        If Not ucrReceiverJitter.IsEmpty() AndAlso ucrInputNewColName.IsComplete() Then
-        '            If Not ucrInputMaximumDistanceFromZero.IsEmpty Then
-        '            ucrBase.OKEnabled(True)
-        '        Else
-        '            ucrBase.OKEnabled(False)
-        '        End If
-        '            If ucrInputMinimum.IsEmpty = False And ucrInputMaximum.IsEmpty = False Then
-        ''           ucrBase.OKEnabled(True)
-        '       Else
-        '            ucrBase.OKEnabled(False)
-        '       End If
-        '       Else
-        '           ucrBase.OKEnabled(False)
-        '       End If
+        If Not ucrReceiverJitter.IsEmpty AndAlso ucrInputNewColName.IsComplete AndAlso ((rdoMaximumDistanceFromZero.Checked AndAlso Not ucrInputMaximumDistanceFromZero.IsEmpty) OrElse Not rdoMaximumDistanceFromZero.Checked) AndAlso ((rdoMinimumAndMaximum.Checked AndAlso Not ucrInputMaximum.IsEmpty AndAlso Not ucrInputMinimum.IsEmpty) OrElse Not rdoMinimumAndMaximum.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub Distance()
@@ -174,10 +165,6 @@ Public Class dlgJitter
         End If
     End Sub
 
-    Private Sub grpMaximumAndMinimumValues_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMaximumDistanceFromZero.CheckedChanged, rdoMinimumAndMaximum.CheckedChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrSelectorForJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForJitter.ControlValueChanged
         clsDefaultFunction.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
     End Sub
@@ -188,5 +175,13 @@ Public Class dlgJitter
 
     Private Sub ucrReceiverJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverJitter.ControlValueChanged
         clsOperatorParameter.AddParameter(1, clsRFunctionParameter:=ucrReceiverJitter.GetVariables)
+    End Sub
+
+    Private Sub ucrForTestOK_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverJitter.ControlContentsChanged, ucrInputNewColName.ControlContentsChanged, ucrPnlDistance.ControlContentsChanged, ucrInputMaximumDistanceFromZero.ControlContentsChanged, ucrInputMaximum.ControlContentsChanged, ucrInputMinimum.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlDistance_ControlValueChanged(ucrChangedControl As ucrCore)
+
     End Sub
 End Class
