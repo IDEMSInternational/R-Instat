@@ -387,7 +387,6 @@ data_object$set("public", "get_calculation_names", function() {
 )
 
 data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
-  
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -2052,11 +2051,12 @@ corruption_ppp_conversion_rate_label="ppp_conversion_rate"
 corruption_ppp_adjusted_contract_value_label="ppp_adjusted_contr_value"
 corruption_contract_value_cats_label="contr_value_cats"
 corruption_procurement_type_cats_label="procurement_type_cats"
-corruption_procurement_type2_label="procurement_type2"
-corruption_procurement_type3_label="procurement_type3"
+corruption_procurement_type_2_label="procurement_type2"
+corruption_procurement_type_3_label="procurement_type3"
 corruption_signature_period_label="signature_period"
-corruption_signature_period5Q_label="signature_period5Q"
-corruption_signature_period25Q_label="signature_period25Q"
+corruption_signature_period_corrected_label="signature_period_corrected"
+corruption_signature_period_5Q_label="signature_period5Q"
+corruption_signature_period_25Q_label="signature_period25Q"
 corruption_signature_period_cats_label="signature_period_cats"
 corruption_secrecy_score_label="secrecy_score"
 corruption_tax_haven_label="tax_haven"
@@ -2086,11 +2086,12 @@ all_calculated_corruption_column_types <- c(corruption_award_year_label,
                                             corruption_ppp_adjusted_contract_value_label,
                                             corruption_contract_value_cats_label,
                                             corruption_procurement_type_cats_label,
-                                            corruption_procurement_type2_label,
-                                            corruption_procurement_type3_label,
+                                            corruption_procurement_type_2_label,
+                                            corruption_procurement_type_3_label,
                                             corruption_signature_period_label,
-                                            corruption_signature_period5Q_label,
-                                            corruption_signature_period25Q_label,
+                                            corruption_signature_period_corrected_label,
+                                            corruption_signature_period_5Q_label,
+                                            corruption_signature_period_25Q_label,
                                             corruption_signature_period_cats_label,
                                             corruption_secrecy_score_label,
                                             corruption_tax_haven_label,
@@ -2120,19 +2121,19 @@ instat_object$set("public","define_as_corruption", function(data_name, primary_t
       self$append_to_dataframe_metadata(curr_data_name, is_corruption_label, FALSE)
     }
   }
-  self$get_data_objects(data_name)$set_corruption_types(types, auto_generate)
+  self$get_data_objects(data_name)$set_corruption_types(primary_types, calculated_types, auto_generate)
 }
 )
 
 data_object$set("public","is_corruption_type_present", function(type) {
-  return(self$is_metadata(is_corruption_label) && self$get_metadata(is_corruption_label) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(corruption_type_label)))
+  return(self$is_metadata(is_corruption_label) && self$get_metadata(is_corruption_label) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
 }
 )
 
 data_object$set("public","get_corruption_column_name", function(type) {
   if(self$is_corruption_type_present(type)) {
-    var_metadata <- InstatDataObject$get_variables_metadata(data_name)
-    col_name <- var_metadata[var_metadata[[corruption_type_label]] == type, name_label]
+    var_metadata <- self$get_variables_metadata()
+    col_name <- var_metadata[!is.na(var_metadata[[corruption_type_label]]) & var_metadata[[corruption_type_label]] == type, name_label]
     if(length(col_name == 1)) return(col_name)
     else return("")
   }
@@ -2143,8 +2144,8 @@ data_object$set("public","get_corruption_column_name", function(type) {
 data_object$set("public","set_corruption_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
   if(!all(names(primary_types) %in% all_primary_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_primary_corruption_column_types], collapse = ", "))
   if(!all(names(calculated_types) %in% all_calculated_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_calculated_corruption_column_types], collapse = ", "))
-  invisible(sapply(names(primary_types), function(name) self$append_to_variables_metadata(primary_types[name], corruption_type_label, name)))
-  invisible(sapply(names(calculated_types), function(name) self$append_to_variables_metadata(primary_types[name], corruption_type_label, name)))
+  invisible(sapply(names(primary_types), function(x) self$append_to_variables_metadata(primary_types[[x]], corruption_type_label, x)))
+  invisible(sapply(names(calculated_types), function(x) self$append_to_variables_metadata(calculated_types[[x]], corruption_type_label, x)))
   if(auto_generate) {
     # Possibly need to be careful about the order of these
     self$generate_award_date()
@@ -2155,6 +2156,17 @@ data_object$set("public","set_corruption_types", function(primary_types = c(), c
     self$generate_foreign_winner()
     self$generate_procurement_type()
     self$generate_procurement_type_categories()
+    self$generate_procurement_type_2()
+    self$generate_procurement_type_3()
+    self$generate_signature_period()
+    self$generate_signature_period_corrected()
+    self$generate_signature_period_5Q()
+    self$generate_signature_period_25Q()
+    self$generate_rolling_contract_no_winners()
+    self$generate_rolling_contract_no_issuer()
+    self$generate_rolling_contract_value_sum_issuer()
+    self$generate_rolling_contract_value_sum_winner()
+    self$generate_rolling_contract_value_share_winner()
   }
 }
 )
@@ -2184,6 +2196,7 @@ data_object$set("public","generate_procedure_type", function() {
       procedure_type[procedure_type == "CQS"] <- "Selection Based On Consultant's Qualification"
       procedure_type[procedure_type == "SHOP"] <- "International Shopping"
       procedure_type <- factor(procedure_type, levels = c("Commercial Practices", "Direct Contracting", "Force Account", "INDB", "Individual", "International Competitive Bidding", "International Shopping", "Least Cost Selection", "Limited International Bidding", "National Competitive Bidding", "National Shopping", "Quality And Cost-Based Selection", "Quality Based Selection", "Selection Based On Consultant's Qualification", "Selection Under a Fixed Budget", "Service Delivery Contracts", "Single Source Selection"))
+      
       col_name <- next_default_item(corruption_proc_type_label, self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name, procedure_type)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_proc_type_label)
@@ -2198,6 +2211,7 @@ data_object$set("public","generate_procuring_authority_id", function() {
     if(!self$is_corruption_type_present(corruption_procuring_authority_label) | !self$is_corruption_type_present(corruption_country_label)) message("Cannot auto generate ", corruption_procuring_authority_id_label, " because ", corruption_procuring_authority_label, "or ", corruption_award_year_label, " is not defined.")
     else {
       id <- as.numeric(factor(paste0(self$get_columns_from_data(self$get_corruption_column_name(corruption_country_label)), self$get_columns_from_data(self$get_corruption_column_name(corruption_procuring_authority_label))), levels = unique(paste0(self$get_columns_from_data(self$get_corruption_column_name(corruption_country_label)), self$get_columns_from_data(self$get_corruption_column_name(corruption_procuring_authority_label))))))
+      
       col_name <- next_default_item(corruption_procuring_authority_id_label, self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name, id)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procuring_authority_id_label)
@@ -2212,6 +2226,7 @@ data_object$set("public","generate_winner_id", function() {
     if(!self$is_corruption_type_present(corruption_winner_name_label)) message("Cannot auto generate ", corruption_winner_id_label, " because ", corruption_winner_name_label, " is not defined.")
     else {
       id <- as.numeric(factor(self$get_columns_from_data(self$get_corruption_column_name(corruption_winner_name_label)), levels = unique(self$get_columns_from_data(self$get_corruption_column_name(corruption_winner_name_label)))))
+      
       col_name <- next_default_item(corruption_winner_id_label, self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name, id)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_winner_id_label)
@@ -2226,6 +2241,7 @@ data_object$set("public","generate_foreign_winner", function() {
     if(!self$is_corruption_type_present(corruption_country_label) || !self$is_corruption_type_present(corruption_winner_country_label)) message("Cannot auto generate ", corruption_foreign_winner_label, " because ", corruption_country_label, " or ", corruption_winner_country_label, " are not defined.")
     else {
       f_winner <- (self$get_columns_from_data(self$get_corruption_column_name(corruption_country_label)) != self$get_columns_from_data(self$get_corruption_column_name(corruption_winner_country_label)))
+      
       col_name <- next_default_item(corruption_foreign_winner_label, self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name, f_winner)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_foreign_winner_label)
@@ -2248,10 +2264,237 @@ data_object$set("public","generate_procurement_type_categories", function() {
       procurement_type[procedure_type == "Quality And Cost-Based Selection" | procedure_type == "Quality Based Selection" | procedure_type == "Selection Under a Fixed Budget"] <- "consultancy,cost"
       procurement_type[procedure_type == "Least Cost Selection" | procedure_type == "Selection Based On Consultant's Qualification"] <- "consultancy,cost"
       procurement_type <- factor(procurement_type, levels = c("open", "restricted", "single source", "consultancy,quality", "consultancy,cost", "own provision", "other, missing"))
+      
       col_name <- next_default_item(corruption_procurement_type_cats_label, self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name, procurement_type)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procurement_type_cats_label)
       self$append_to_variables_metadata(col_name, "label", "Main procurement type category")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_procurement_type_2", function() {
+  if(!self$is_corruption_type_present(corruption_procurement_type_2_label)) {
+    if(!self$is_corruption_type_present(corruption_procurement_type_cats_label)) message("Cannot auto generate ", corruption_procurement_type_2_label, " because ", corruption_procurement_type_cats_label, " are not defined.")
+    else {
+      procurement_type_cats <- self$get_columns_from_data(self$get_corruption_column_name(corruption_procurement_type_cats_label))
+      procurement_type2 <- NA
+      procurement_type2[procurement_type_cats == "open"] <- FALSE
+      procurement_type2[procurement_type_cats == "restricted" | procurement_type_cats == "single source" | procurement_type_cats == "consultancy,quality" | procurement_type_cats == "consultancy,cost"] <- TRUE
+      
+      col_name <- next_default_item(corruption_procurement_type_2_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, procurement_type2)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procurement_type_2_label)
+      self$append_to_variables_metadata(col_name, "label", "Proc. type is restricted, single source, consultancy")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_procurement_type_3", function() {
+  if(!self$is_corruption_type_present(corruption_procurement_type_3_label)) {
+    if(!self$is_corruption_type_present(corruption_procurement_type_cats_label)) message("Cannot auto generate ", corruption_procurement_type_3_label, " because ", corruption_procurement_type_cats_label, " are not defined.")
+    else {
+      procurement_type_cats <- self$get_columns_from_data(self$get_corruption_column_name(corruption_procurement_type_cats_label))
+      procurement_type3 <- NA
+      procurement_type3[procurement_type_cats == "open"] <- "open procedure"
+      procurement_type3[procurement_type_cats == "restricted" | procurement_type_cats == "single source"] <- "closed procedure risk"
+      procurement_type3[procurement_type_cats == "consultancy,quality" | procurement_type_cats == "consultancy,cost"] <- "consultancy spending risk"
+      procurement_type3 <- factor(procurement_type3, levels = c("open procedure", "closed procedure risk", "consultancy spending risk"))
+      
+      col_name <- next_default_item(corruption_procurement_type_3_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, procurement_type3)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procurement_type_3_label)
+      self$append_to_variables_metadata(col_name, "label", "Procedure type (open, closed, consultancy)")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_signature_period", function() {
+  if(!self$is_corruption_type_present(corruption_signature_period_label)) {
+    if(!self$is_corruption_type_present(corruption_award_date_label) || !self$is_corruption_type_present(corruption_signature_date_label)) message("Cannot auto generate ", corruption_signature_period_label, " because ", corruption_award_date_label, "or", corruption_signature_date_label, " are not defined.")
+    else {
+      signature_period <- self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_date_label)) - self$get_columns_from_data(self$get_corruption_column_name(corruption_award_date_label))
+
+      col_name <- next_default_item(corruption_signature_period_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, signature_period)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_label)
+      self$append_to_variables_metadata(col_name, "label", "Signature period")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_signature_period_corrected", function() {
+  if(!self$is_corruption_type_present(corruption_signature_period_corrected_label)) {
+    if(!self$is_corruption_type_present(corruption_signature_period_label)) self$generate_signature_period()
+    signature_period_corrected <- self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label))
+    signature_period_corrected[signature_period_corrected < 0 | signature_period_corrected > 730] <- NA
+      
+    col_name <- next_default_item(corruption_signature_period_corrected_label, self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name, signature_period_corrected)
+    self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_corrected_label)
+    self$append_to_variables_metadata(col_name, "label", "Signature period - corrected")
+  }
+}
+)
+
+data_object$set("public","generate_signature_period_5Q", function() {
+  if(!self$is_corruption_type_present(corruption_signature_period_5Q_label)) {
+    if(!self$is_corruption_type_present(corruption_signature_period_label)) self$generate_signature_period()
+    signature_period_5Q <- .bincode(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), quantile(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), seq(0, 1, length.out = 5 + 1), type = 2, na.rm = TRUE), include.lowest = TRUE)
+
+    col_name <- next_default_item(corruption_signature_period_5Q_label, self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name, signature_period_5Q)
+    self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_5Q_label)
+  }
+}
+)
+
+data_object$set("public","generate_signature_period_25Q", function() {
+  if(!self$is_corruption_type_present(corruption_signature_period_25Q_label)) {
+    if(!self$is_corruption_type_present(corruption_signature_period_label)) self$generate_signature_period()
+    signature_period_25Q <- .bincode(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), quantile(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), seq(0, 1, length.out = 25 + 1), type = 2, na.rm = TRUE), include.lowest = TRUE)
+    
+    col_name <- next_default_item(corruption_signature_period_25Q_label, self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name, signature_period_25Q)
+    self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_25Q_label)
+  }
+}
+)
+
+data_object$set("public","generate_rolling_contract_no_winners", function() {
+  if(!self$is_corruption_type_present(corruption_roll_num_winner_label)) {
+    self$generate_procuring_authority_id()
+    self$generate_winner_id()
+    if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_winner_id_label) | !self$is_corruption_type_present(corruption_award_date_label)) {
+      message("Cannot auto generate ", corruption_roll_num_winner_label, " because ", corruption_procuring_authority_id_label, " or ", corruption_winner_id_label, " or ", corruption_award_date_label, " are not defined.")
+    }
+    else {
+      temp <- self$get_data_frame(use_current_filter = FALSE)
+      authority_id_label <- self$get_corruption_column_name(corruption_procuring_authority_id_label)
+      winner_id_label <- self$get_corruption_column_name(corruption_winner_id_label)
+      award_date_label <- self$get_corruption_column_name(corruption_award_date_label)
+      col_name <- next_default_item(corruption_roll_num_winner_label, self$get_column_names(), include_index = FALSE)
+      exp <- interp(~ sum(temp[[authority_id1]] == authority_id2 & temp[[winner_id1]] == winner_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), winner_id1 = winner_id_label, winner_id2 = as.name(winner_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label))
+      temp <- self$get_data_frame(use_current_filter = FALSE)
+      temp <- temp %>% rowwise() %>% mutate_(.dots = setNames(list(exp), col_name))
+      self$add_columns_to_data(col_name, temp[[col_name]])
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_num_winner_label)
+      self$append_to_variables_metadata(col_name, "label", "12 month rolling contract number of winner for each contract awarded")
+    }
+    
+  }
+}
+)
+
+data_object$set("public","generate_rolling_contract_no_issuer", function() {
+  if(!self$is_corruption_type_present(corruption_roll_num_issuer_label)) {
+    self$generate_procuring_authority_id()
+    if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_award_date_label)) {
+      message("Cannot auto generate ", corruption_roll_num_issuer_label, " because ", corruption_procuring_authority_id_label, " or ", corruption_award_date_label, " are not defined.")
+    }
+    else {
+      temp <- self$get_data_frame(use_current_filter = FALSE)
+      authority_id_label <- self$get_corruption_column_name(corruption_procuring_authority_id_label)
+      award_date_label <- self$get_corruption_column_name(corruption_award_date_label)
+      col_name <- next_default_item(corruption_roll_num_issuer_label, self$get_column_names(), include_index = FALSE)
+      exp <- interp(~ sum(temp[[authority_id1]] == authority_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label))
+      temp <- self$get_data_frame(use_current_filter = FALSE)
+      temp <- temp %>% rowwise() %>% mutate_(.dots = setNames(list(exp), col_name))
+      self$add_columns_to_data(col_name, temp[[col_name]])
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_num_issuer_label)
+      self$append_to_variables_metadata(col_name, "label", "12 month rolling contract number of issuer for each contract awarded")
+    }
+    
+  }
+}
+)
+
+data_object$set("public","generate_rolling_contract_value_sum_issuer", function() {
+  if(!self$is_corruption_type_present(corruption_roll_sum_issuer_label)) {
+    self$generate_procuring_authority_id()
+    # Need better checks than just for original contract value
+    if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_award_date_label) !self$is_corruption_type_present(corruption_original_contract_value_label)) {
+      message("Cannot auto generate ", corruption_roll_num_issuer_label, " because ", corruption_procuring_authority_id_label, " or ", corruption_award_date_label, " are not defined.")
+    }
+    else {
+      temp <- self$get_data_frame(use_current_filter = FALSE)
+      authority_id_label <- self$get_corruption_column_name(corruption_procuring_authority_id_label)
+      award_date_label <- self$get_corruption_column_name(corruption_award_date_label)
+      if(self$is_corruption_type_present(corruption_ppp_adjusted_contract_value_label)) {
+        contract_value_label <- self$get_corruption_column_name(corruption_ppp_adjusted_contract_value_label)
+      }
+      else if(self$is_corruption_type_present(corruption_ppp_conversion_rate_label)) {
+        self$generate_ppp_adjusted_contract_value()
+        contract_value_label <- self$get_corruption_column_name(corruption_ppp_adjusted_contract_value_label)
+      }
+      else {
+        contract_value_label <- self$get_corruption_column_name(corruption_original_contract_value_label)
+      }
+      col_name <- next_default_item(corruption_roll_sum_issuer_label, self$get_column_names(), include_index = FALSE)
+      exp <- interp(~ sum(temp[contract_value[temp[[authority_id1]] == authority_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365]), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label), contract_value = contract_value_label)
+      temp <- self$get_data_frame(use_current_filter = FALSE)
+      temp <- temp %>% rowwise() %>% mutate_(.dots = setNames(list(exp), col_name))
+      self$add_columns_to_data(col_name, temp[[col_name]])
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_sum_issuer_label)
+      self$append_to_variables_metadata(col_name, "label", "12 month rolling sum of contract value of issuer")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_rolling_contract_value_sum_winner", function() {
+  if(!self$is_corruption_type_present(corruption_roll_sum_winner_label)) {
+    self$generate_procuring_authority_id()
+    self$generate_winner_id()
+    # Need better checks than just for original contract value
+    if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_winner_id_label) | !self$is_corruption_type_present(corruption_award_date_label) !self$is_corruption_type_present(corruption_original_contract_value_label)) {
+      message("Cannot auto generate ", corruption_roll_num_issuer_label, " because ", corruption_procuring_authority_id_label, " or ", corruption_winner_id_label, " or ", corruption_award_date_label, " are not defined.")
+    }
+    else {
+      temp <- self$get_data_frame(use_current_filter = FALSE)
+      authority_id_label <- self$get_corruption_column_name(corruption_procuring_authority_id_label)
+      winner_id_label <- self$get_corruption_column_name(corruption_winner_id_label)
+      award_date_label <- self$get_corruption_column_name(corruption_award_date_label)
+      if(self$is_corruption_type_present(corruption_ppp_adjusted_contract_value_label)) {
+        contract_value_label <- self$get_corruption_column_name(corruption_ppp_adjusted_contract_value_label)
+      }
+      else if(self$is_corruption_type_present(corruption_ppp_conversion_rate_label)) {
+        self$generate_ppp_adjusted_contract_value()
+        contract_value_label <- self$get_corruption_column_name(corruption_ppp_adjusted_contract_value_label)
+      }
+      else {
+        contract_value_label <- self$get_corruption_column_name(corruption_original_contract_value_label)
+      }
+      col_name <- next_default_item(corruption_roll_sum_winner_label, self$get_column_names(), include_index = FALSE)
+      exp <- interp(~ sum(temp[contract_value[temp[[authority_id1]] == authority_id2 & temp[[winner_id1]] == winner_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365]), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), winner_id1 = winner_id_label, winner_id2 = as.name(winner_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label), contract_value = contract_value_label)
+      temp <- self$get_data_frame(use_current_filter = FALSE)
+      temp <- temp %>% rowwise() %>% mutate_(.dots = setNames(list(exp), col_name))
+      self$add_columns_to_data(col_name, temp[[col_name]])
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_sum_winner_label)
+      self$append_to_variables_metadata(col_name, "label", "12 month rolling sum of contract value of winner")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_rolling_contract_value_share_winner", function() {
+  if(!self$is_corruption_type_present(corruption_roll_share_winner_label)) {
+    self$generate_rolling_contract_value_sum_issuer()
+    self$generate_rolling_contract_value_sum_winner()
+    if(!self$is_corruption_type_present(corruption_roll_sum_winner_label) | !self$is_corruption_type_present(corruption_roll_sum_issuer_label)) {
+      message("Cannot auto generate ", corruption_roll_share_winner_label, " because ", corruption_roll_sum_winner_label, " or ", corruption_roll_sum_issuer_label, " are not defined.")
+    }
+    else {
+      share <- self$get_columns_from_data(self$get_corruption_column_name(corruption_roll_sum_winner_label)) / self$get_columns_from_data(self$get_corruption_column_name(corruption_roll_sum_issuer_label))
+      
+      col_name <- next_default_item(corruption_roll_share_winner_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, share)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_share_winner_label)
+      self$append_to_variables_metadata(col_name, "label", "12 month rolling contract share of winner for each contract awarded")
     }
   }
 }
