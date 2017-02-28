@@ -187,13 +187,13 @@ Public Class sdgClimdexIndices
 
         ucrInputTempQtiles.SetParameter(New RParameter("x"))
         ucrInputTempQtiles.SetValidationTypeAsNumericList()
-        ucrInputTempQtiles.bAddQuotesIfUnrecognised = False
+        ucrInputTempQtiles.AddQuotesIfUnrecognised = False
         ucrInputTempQtiles.clsParameter.bIncludeArgumentName = False
         ucrInputTempQtiles.SetRDefault("0.1, 0.9")
 
         ucrInputPrecQtiles.SetParameter(New RParameter("x"))
         ucrInputPrecQtiles.SetValidationTypeAsNumericList()
-        ucrInputPrecQtiles.bAddQuotesIfUnrecognised = False
+        ucrInputPrecQtiles.AddQuotesIfUnrecognised = False
         ucrInputPrecQtiles.clsParameter.bIncludeArgumentName = False
         ucrInputPrecQtiles.SetRDefault("0.95, 0.99")
 
