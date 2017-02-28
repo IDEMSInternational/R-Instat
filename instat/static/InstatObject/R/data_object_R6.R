@@ -2012,7 +2012,6 @@ corruption_contract_title_label="contract_title"
 corruption_contract_sector_label="contract_sector"
 corruption_procurement_category_label="procurement_category"
 corruption_winner_name_label="winner_name"
-corruption_winner_id_label="winner_id"
 corruption_winner_country_label="winner_country"
 corruption_original_contract_value_label="original_contract_value"
 corruption_no_bids_received_label="no_bids_received"
@@ -2029,7 +2028,6 @@ all_primary_corruption_column_types <- c(corruption_country_label,
                                          corruption_contract_sector_label,
                                          corruption_procurement_category_label,
                                          corruption_winner_name_label,
-                                         corruption_winner_id_label,
                                          corruption_winner_country_label,
                                          corruption_original_contract_value_label,
                                          corruption_no_bids_received_label,
@@ -2045,7 +2043,6 @@ corruption_w_country_iso2_label="w_country_iso2"
 corruption_w_country_iso3_label="w_country_iso3"
 corruption_procuring_authority_id_label="procuring_authority_id"
 corruption_winner_id_label="winner_id"
-corruption_procedure_type_label="procedure_type"
 corruption_foreign_winner_label="foreign_winner"
 corruption_ppp_conversion_rate_label="ppp_conversion_rate"
 corruption_ppp_adjusted_contract_value_label="ppp_adjusted_contr_value"
@@ -2071,6 +2068,7 @@ corruption_roll_share_winner_label="roll_share_winner"
 corruption_single_bidder_label="single_bidder"
 corruption_all_bids_label="all_bids"
 corruption_all_bids_trimmed_label="all_bids_trimmed"
+corruption_contract_value_share_over_threshold_label="contract_value_share_over_threshold"
 
 all_calculated_corruption_column_types <- c(corruption_award_year_label,
                                             corruption_procedure_type_label,
@@ -2105,8 +2103,8 @@ all_calculated_corruption_column_types <- c(corruption_award_year_label,
                                             corruption_roll_share_winner_label,
                                             corruption_single_bidder_label,
                                             corruption_all_bids_label,
-                                            corruption_all_bids_trimmed_label)
-
+                                            corruption_all_bids_trimmed_label,
+                                            corruption_contract_value_share_over_threshold_label)
 
 # Column metadata for corruption colums
 corruption_type_label = "Corruption_Type"
@@ -2143,18 +2141,16 @@ data_object$set("public","get_corruption_column_name", function(type) {
 
 data_object$set("public","set_corruption_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
   if(!all(names(primary_types) %in% all_primary_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_primary_corruption_column_types], collapse = ", "))
-  if(!all(names(calculated_types) %in% all_calculated_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_calculated_corruption_column_types], collapse = ", "))
+  if(!all(names(calculated_types) %in% all_calculated_corruption_column_types)) stop("Cannot recognise the following calculated corruption data types: ", paste(names(calculated_types)[!names(calculated_types) %in% all_calculated_corruption_column_types], collapse = ", "))
   invisible(sapply(names(primary_types), function(x) self$append_to_variables_metadata(primary_types[[x]], corruption_type_label, x)))
   invisible(sapply(names(calculated_types), function(x) self$append_to_variables_metadata(calculated_types[[x]], corruption_type_label, x)))
   if(auto_generate) {
-    # Possibly need to be careful about the order of these
-    self$generate_award_date()
+    # Tried to make these independent of order called, but need to test
+    self$generate_award_year()
     self$generate_procedure_type()
     self$generate_procuring_authority_id()
     self$generate_winner_id()
-    self$generate_main_proc_type()
     self$generate_foreign_winner()
-    self$generate_procurement_type()
     self$generate_procurement_type_categories()
     self$generate_procurement_type_2()
     self$generate_procurement_type_3()
@@ -2167,6 +2163,10 @@ data_object$set("public","set_corruption_types", function(primary_types = c(), c
     self$generate_rolling_contract_value_sum_issuer()
     self$generate_rolling_contract_value_sum_winner()
     self$generate_rolling_contract_value_share_winner()
+    self$generate_single_bidder()
+    self$generate_contract_value_share_over_threshold()
+    self$generate_all_bids()
+    self$generate_all_bids_trimmed()
   }
 }
 )
@@ -2189,17 +2189,17 @@ data_object$set("public","generate_award_year", function() {
 )
 
 data_object$set("public","generate_procedure_type", function() {
-  if(!self$is_corruption_type_present(corruption_proc_type_label)) {
-    if(!self$is_corruption_type_present(corruption_method_type_label)) message("Cannot auto generate ", corruption_proc_type_label, " because ", corruption_method_type_label, " is not defined.")
+  if(!self$is_corruption_type_present(corruption_procedure_type_label)) {
+    if(!self$is_corruption_type_present(corruption_method_type_label)) message("Cannot auto generate ", corruption_procedure_type_label, " because ", corruption_method_type_label, " is not defined.")
     else {
       procedure_type <- self$get_columns_from_data(self$get_corruption_column_name(corruption_method_type_label))
       procedure_type[procedure_type == "CQS"] <- "Selection Based On Consultant's Qualification"
       procedure_type[procedure_type == "SHOP"] <- "International Shopping"
       procedure_type <- factor(procedure_type, levels = c("Commercial Practices", "Direct Contracting", "Force Account", "INDB", "Individual", "International Competitive Bidding", "International Shopping", "Least Cost Selection", "Limited International Bidding", "National Competitive Bidding", "National Shopping", "Quality And Cost-Based Selection", "Quality Based Selection", "Selection Based On Consultant's Qualification", "Selection Under a Fixed Budget", "Service Delivery Contracts", "Single Source Selection"))
       
-      col_name <- next_default_item(corruption_proc_type_label, self$get_column_names(), include_index = FALSE)
+      col_name <- next_default_item(corruption_procedure_type_label, self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name, procedure_type)
-      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_proc_type_label)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_procedure_type_label)
       self$append_to_variables_metadata(col_name, "label", "Procedure type")
     }
   }
@@ -2417,7 +2417,7 @@ data_object$set("public","generate_rolling_contract_value_sum_issuer", function(
   if(!self$is_corruption_type_present(corruption_roll_sum_issuer_label)) {
     self$generate_procuring_authority_id()
     # Need better checks than just for original contract value
-    if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_award_date_label) !self$is_corruption_type_present(corruption_original_contract_value_label)) {
+    if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_award_date_label) | !self$is_corruption_type_present(corruption_original_contract_value_label)) {
       message("Cannot auto generate ", corruption_roll_num_issuer_label, " because ", corruption_procuring_authority_id_label, " or ", corruption_award_date_label, " are not defined.")
     }
     else {
@@ -2435,7 +2435,7 @@ data_object$set("public","generate_rolling_contract_value_sum_issuer", function(
         contract_value_label <- self$get_corruption_column_name(corruption_original_contract_value_label)
       }
       col_name <- next_default_item(corruption_roll_sum_issuer_label, self$get_column_names(), include_index = FALSE)
-      exp <- interp(~ sum(temp[contract_value[temp[[authority_id1]] == authority_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365]), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label), contract_value = contract_value_label)
+      exp <- interp(~ sum(temp[[contract_value]][temp[[authority_id1]] == authority_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365]), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label), contract_value = contract_value_label)
       temp <- self$get_data_frame(use_current_filter = FALSE)
       temp <- temp %>% rowwise() %>% mutate_(.dots = setNames(list(exp), col_name))
       self$add_columns_to_data(col_name, temp[[col_name]])
@@ -2451,7 +2451,7 @@ data_object$set("public","generate_rolling_contract_value_sum_winner", function(
     self$generate_procuring_authority_id()
     self$generate_winner_id()
     # Need better checks than just for original contract value
-    if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_winner_id_label) | !self$is_corruption_type_present(corruption_award_date_label) !self$is_corruption_type_present(corruption_original_contract_value_label)) {
+    if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_winner_id_label) | !self$is_corruption_type_present(corruption_award_date_label) | !self$is_corruption_type_present(corruption_original_contract_value_label)) {
       message("Cannot auto generate ", corruption_roll_num_issuer_label, " because ", corruption_procuring_authority_id_label, " or ", corruption_winner_id_label, " or ", corruption_award_date_label, " are not defined.")
     }
     else {
@@ -2470,7 +2470,7 @@ data_object$set("public","generate_rolling_contract_value_sum_winner", function(
         contract_value_label <- self$get_corruption_column_name(corruption_original_contract_value_label)
       }
       col_name <- next_default_item(corruption_roll_sum_winner_label, self$get_column_names(), include_index = FALSE)
-      exp <- interp(~ sum(temp[contract_value[temp[[authority_id1]] == authority_id2 & temp[[winner_id1]] == winner_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365]), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), winner_id1 = winner_id_label, winner_id2 = as.name(winner_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label), contract_value = contract_value_label)
+      exp <- interp(~ sum(temp[[contract_value]][temp[[authority_id1]] == authority_id2 & temp[[winner_id1]] == winner_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365]), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), winner_id1 = winner_id_label, winner_id2 = as.name(winner_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label), contract_value = contract_value_label)
       temp <- self$get_data_frame(use_current_filter = FALSE)
       temp <- temp %>% rowwise() %>% mutate_(.dots = setNames(list(exp), col_name))
       self$add_columns_to_data(col_name, temp[[col_name]])
@@ -2495,6 +2495,84 @@ data_object$set("public","generate_rolling_contract_value_share_winner", functio
       self$add_columns_to_data(col_name, share)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_share_winner_label)
       self$append_to_variables_metadata(col_name, "label", "12 month rolling contract share of winner for each contract awarded")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_single_bidder", function() {
+  if(!self$is_corruption_type_present(corruption_single_bidder_label)) {
+    self$generate_all_bids_trimmed()
+    if(!self$is_corruption_type_present(corruption_all_bids_trimmed_label)) {
+      message("Cannot auto generate ", corruption_single_bidder_label, " because ", corruption_all_bids_trimmed_label, " is not defined.")
+    }
+    else {
+      single_bidder <- (self$get_columns_from_data(self$get_corruption_column_name(corruption_all_bids_trimmed_label)) == 1) 
+      
+      col_name <- next_default_item(corruption_single_bidder_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, single_bidder)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_single_bidder_label)
+      self$append_to_variables_metadata(col_name, "label", "Single bidder dummy")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_contract_value_share_over_threshold", function() {
+  if(!self$is_corruption_type_present(corruption_contract_value_share_over_threshold_label)) {
+    self$generate_rolling_contract_value_share_winner()
+    self$generate_rolling_contract_no_issuer()
+    if(!self$is_corruption_type_present(corruption_roll_share_winner_label) | !self$is_corruption_type_present(corruption_roll_num_issuer_label)) {
+      message("Cannot auto generate ", corruption_contract_value_share_over_threshold_label, " because ", corruption_roll_share_winner_label, " or ", corruption_roll_num_issuer_label, " are not defined.")
+    }
+    else {
+      contr_share_over_threshold <- rep(NA, self$get_data_frame_length())
+      contr_share_over_threshold[(self$get_columns_from_data(self$get_corruption_column_name(corruption_roll_num_issuer_label)) >= 3) & (self$get_columns_from_data(self$get_corruption_column_name(corruption_roll_share_winner_label)) >= 0.5)] <- TRUE
+      contr_share_over_threshold[(self$get_columns_from_data(self$get_corruption_column_name(corruption_roll_num_issuer_label)) >= 3) & (self$get_columns_from_data(self$get_corruption_column_name(corruption_roll_share_winner_label)) < 0.5)] <- FALSE
+      
+      col_name <- next_default_item(corruption_contract_value_share_over_threshold_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, contr_share_over_threshold)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_contract_value_share_over_threshold_label)
+      self$append_to_variables_metadata(col_name, "label", "Winner share at least 50% where issuers awarded at least 3 contracts")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_all_bids", function() {
+  if(!self$is_corruption_type_present(corruption_all_bids_label)) {
+    if(!self$is_corruption_type_present(corruption_no_bids_considered_label)) {
+      message("Cannot auto generate ", corruption_all_bids_label, " because ", corruption_no_bids_considered_label, " is not defined.")
+    }
+    else {
+      all_bids <- self$get_columns_from_data(self$get_corruption_column_name(corruption_no_bids_considered_label))
+      if(self$is_corruption_type_present(corruption_no_bids_received_label)) {
+        all_bids[is.na(all_bids)] <- self$get_columns_from_data(self$get_corruption_column_name(corruption_no_bids_received_label))[is.na(all_bids)]
+      }
+
+      col_name <- next_default_item(corruption_all_bids_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, all_bids)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_all_bids_label)
+      self$append_to_variables_metadata(col_name, "label", "# Bids (all)")
+    }
+  }
+}
+)
+
+data_object$set("public","generate_all_bids_trimmed", function() {
+  if(!self$is_corruption_type_present(corruption_all_bids_trimmed_label)) {
+    self$generate_all_bids()
+    if(!self$is_corruption_type_present(corruption_all_bids_label)) {
+      message("Cannot auto generate ", corruption_all_bids_trimmed_label, " because ", corruption_all_bids_label, " is not defined.")
+    }
+    else {
+      all_bids_trimmed <- self$get_columns_from_data(self$get_corruption_column_name(corruption_all_bids_label))
+      all_bids_trimmed[all_bids_trimmed > 50] <- 50
+      
+      col_name <- next_default_item(corruption_all_bids_trimmed_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, all_bids_trimmed)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_all_bids_trimmed_label)
+      self$append_to_variables_metadata(col_name, "label", "# Bids (trimmed at 50)")
     }
   }
 }
