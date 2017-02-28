@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
 Public Class dlgMakeDate
     Public clsPaste As New RFunction
@@ -58,7 +57,7 @@ Public Class dlgMakeDate
         ucrReceiverMonthThree.bUseFilteredData = False
         ucrReceiverDayThree.bUseFilteredData = False
 
-        ucrChkTwoDigitYear.SetParameter(New RParameter("year_format"))
+        ' ucrChkTwoDigitYear.SetParameter(New RParameter("year_format"))
         ucrChkTwoDigitYear.SetText("2-digit years")
         ucrChkMore.SetText("More")
 
@@ -155,6 +154,7 @@ Public Class dlgMakeDate
 
         'when rdoSingleColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrReceiverForDate, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDate.AddToLinkedControls(ucrChkMore, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMore.AddToLinkedControls(ucrInputMonth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -187,7 +187,7 @@ Public Class dlgMakeDate
         ucrReceiverYearTwo.SetLinkedDisplayControl(lblYearTwo)
         ucrPnlDate.AddToLinkedControls(ucrReceiverDayTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverDayTwo.SetLinkedDisplayControl(lblDayofYear)
-        ucrPnlDate.AddToLinkedControls(ucrChkTwoDigitYear, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDate.AddToLinkedControls(ucrChkTwoDigitYear, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudCutoff.SetLinkedDisplayControl(lblCutOffTwo)
         ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -221,7 +221,6 @@ Public Class dlgMakeDate
         clsMakeYearMonthDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
         clsDateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
 
-        ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
         clsDateFunction.AddParameter("format", Chr(34) & "%Y-%m-%d" & Chr(34))
         clsDateFunction.AddParameter("origin", Chr(34) & "30-12-1899" & Chr(34))
 
@@ -334,14 +333,22 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged
-        ' ChooseParameter()
 
         If rdoDefaultFormat.Checked Then
             ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
+
         ElseIf rdoSpecifyOrigin.Checked
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
         Else
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
+        End If
+    End Sub
+
+    Private Sub ucrChkTwoDigitYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTwoDigitYear.ControlValueChanged
+        If ucrChkTwoDigitYear.Checked Then
+            ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%y" & Chr(34))
+        Else
+            ucrBase.clsRsyntax.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
         End If
     End Sub
 End Class
