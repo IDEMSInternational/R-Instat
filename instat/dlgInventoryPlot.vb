@@ -37,43 +37,70 @@ Public Class dlgInventoryPlot
         ucrBase.iHelpTopicID = 359
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrYearReceiver.Selector = ucrInventoryPlotSelector
-        ucrColourReceiver.Selector = ucrInventoryPlotSelector
-        ucrDayOfYearReceiver.Selector = ucrInventoryPlotSelector
-        ucrFacetsReceiver.Selector = ucrInventoryPlotSelector
+        'ucrYearReceiver.Selector = ucrInventoryPlotSelector
+        'ucrColourReceiver.Selector = ucrInventoryPlotSelector
+        'ucrDayOfYearReceiver.Selector = ucrInventoryPlotSelector
+        'ucrFacetsReceiver.Selector = ucrInventoryPlotSelector
 
-        ucrYearReceiver.Selector = ucrInventoryPlotSelector
-        ucrYearReceiver.SetMeAsReceiver()
-        ucrYearReceiver.SetParameter(New RParameter("year"))
-        ucrYearReceiver.SetParameterIsString()
+        ucrReceiverStation.Selector = ucrInventoryPlotSelector
+        ucrReceiverElements.Selector = ucrInventoryPlotSelector
+        ucrReceiverStation.SetIncludedDataTypes({"factor"})
 
-        ucrColourReceiver.Selector = ucrInventoryPlotSelector
-        ucrColourReceiver.SetIncludedDataTypes({"numeric"})
-        ucrColourReceiver.SetParameter(New RParameter("col_name"))
-        ucrColourReceiver.SetParameterIsString()
+        ucrpnlOptions.AddRadioButton(rdoSingleStationSingleElement)
+        ucrpnlOptions.AddRadioButton(rdoSingleStationMultipleElments)
+        ucrpnlOptions.AddRadioButton(rdoMultipleStationsSingleElement)
+        ucrpnlOptions.AddRadioButton(rdoMultipleStationsMultipleElements)
+        ucrpnlOptions.bAllowNonConditionValues = True
 
-        ucrDayOfYearReceiver.Selector = ucrInventoryPlotSelector
-        ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric"})
-        ucrDayOfYearReceiver.SetParameter(New RParameter("doy"))
-        ucrDayOfYearReceiver.SetParameterIsString()
 
-        ucrFacetsReceiver.Selector = ucrInventoryPlotSelector
-        ucrFacetsReceiver.SetParameter(New RParameter("facets"))
-        ucrFacetsReceiver.SetParameterIsString()
+        'first option- single station single element
+        ucrpnlOptions.AddToLinkedControls(ucrReceiverElement, {rdoSingleStationSingleElement, rdoMultipleStationsSingleElement}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        '2nd option- single station multiple elements
+        ucrpnlOptions.AddToLinkedControls(ucrReceiverElements, {rdoSingleStationMultipleElments}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        '3rd option- multiple stations single element
+        ucrpnlOptions.AddToLinkedControls(ucrReceiverStation, {rdoMultipleStationsSingleElement}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverStation.SetLinkedDisplayControl(lblStation)
+
+        ucrChkTitle.AddToLinkedControls(ucrInputTitle, objValues:={True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+        'ucrYearReceiver.Selector = ucrInventoryPlotSelector
+        'ucrYearReceiver.SetMeAsReceiver()
+        'ucrYearReceiver.SetParameter(New RParameter("year"))
+        'ucrYearReceiver.SetParameterIsString()
+
+        'ucrColourReceiver.Selector = ucrInventoryPlotSelector
+        'ucrColourReceiver.SetIncludedDataTypes({"numeric"})
+        'ucrColourReceiver.SetParameter(New RParameter("col_name"))
+        'ucrColourReceiver.SetParameterIsString()
+
+        'ucrDayOfYearReceiver.Selector = ucrInventoryPlotSelector
+        'ucrDayOfYearReceiver.SetIncludedDataTypes({"numeric"})
+        'ucrDayOfYearReceiver.SetParameter(New RParameter("doy"))
+        'ucrDayOfYearReceiver.SetParameterIsString()
+
+        'ucrFacetsReceiver.Selector = ucrInventoryPlotSelector
+        'ucrFacetsReceiver.SetParameter(New RParameter("facets"))
+        'ucrFacetsReceiver.SetParameterIsString()
 
         ucrInventoryPlotSelector.SetParameter(New RParameter("data_name", 0))
         ucrInventoryPlotSelector.SetParameterIsString()
 
-        ucrChkAddRecodetoData.SetText("Add Recode to Data")
-        ucrChkAddRecodetoData.SetParameter(New RParameter("add_to_data"))
-        ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAddRecodetoData.SetRDefault("FALSE")
+        'ucrChkAddRecodetoData.SetText("Add Recode to Data")
+        'ucrChkAddRecodetoData.SetParameter(New RParameter("add_to_data"))
+        'ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkAddRecodetoData.SetRDefault("FALSE")
 
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
+        ucrChkTitle.SetText("Title")
 
-        ucrChkAddRecodetoData.SetParameter(New RParameter("coord_flip"))
-        ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAddRecodetoData.SetRDefault("FALSE")
+        'ucrChkAddRecodetoData.SetParameter(New RParameter("coord_flip"))
+        'ucrChkAddRecodetoData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkAddRecodetoData.SetRDefault("FALSE")
+
+        ucrChkShowNonMissing.SetText("Show Non Missing")
+        ucrChkShowNonMissing.SetParameter(New RParameter(""))
 
         ucrSaveGraph.SetPrefix("Inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -82,19 +109,19 @@ Public Class dlgInventoryPlot
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
-        ucrNudThreashold.SetParameter(New RParameter("threshold"))
-        ucrNudThreashold.Minimum = 0.85
-        ucrNudThreashold.Increment = 0.01
-        ucrNudThreashold.DecimalPlaces = 2
-        ucrNudThreashold.SetRDefault("0.85")
+        'ucrNudThreashold.SetParameter(New RParameter("threshold"))
+        'ucrNudThreashold.Minimum = 0.85
+        'ucrNudThreashold.Increment = 0.01
+        'ucrNudThreashold.DecimalPlaces = 2
+        'ucrNudThreashold.SetRDefault("0.85")
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not ucrColourReceiver.IsEmpty) AndAlso ucrSaveGraph.IsComplete() Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If (Not ucrYearReceiver.IsEmpty AndAlso Not ucrDayOfYearReceiver.IsEmpty AndAlso Not ucrColourReceiver.IsEmpty) AndAlso ucrSaveGraph.IsComplete() Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
     End Sub
 
     Private Sub SetDefaults()
@@ -102,7 +129,7 @@ Public Class dlgInventoryPlot
 
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
-        ucrYearReceiver.SetMeAsReceiver()
+        rdoSingleStationSingleElement.Checked = True
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter("threshold", "0.85")
@@ -124,9 +151,18 @@ Public Class dlgInventoryPlot
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrYearReceiver.ControlContentsChanged, ucrColourReceiver.ControlContentsChanged, ucrDayOfYearReceiver.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverElement_VisibleChanged(sender As Object, e As EventArgs) Handles ucrReceiverElement.VisibleChanged, ucrReceiverElements.VisibleChanged
+        If ucrReceiverElement.Visible Then
+            lblElement.Text = "Element:"
+        ElseIf ucrReceiverElements.Visible Then
+            lblElement.Text = "Elements:"
+        End If
     End Sub
 End Class
