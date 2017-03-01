@@ -107,9 +107,9 @@ Partial Class sdgImportFromClimSoft
         Me.lblUserName.AutoSize = True
         Me.lblUserName.Location = New System.Drawing.Point(10, 119)
         Me.lblUserName.Name = "lblUserName"
-        Me.lblUserName.Size = New System.Drawing.Size(60, 13)
+        Me.lblUserName.Size = New System.Drawing.Size(58, 13)
         Me.lblUserName.TabIndex = 6
-        Me.lblUserName.Text = "UserName:"
+        Me.lblUserName.Text = "Username:"
         '
         'lblConnection
         '
