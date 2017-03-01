@@ -45,6 +45,7 @@ Public Class dlgClimSoft
 
     Private Sub SetDefaults()
         TestOKEnabled()
+        ucrSelectorForClimSoft.Reset()
     End Sub
 
     Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
