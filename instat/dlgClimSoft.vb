@@ -27,7 +27,6 @@ Public Class dlgClimSoft
         If bReset Then
             SetDefaults()
         End If
-
         bReset = False
         TestOKEnabled()
     End Sub
