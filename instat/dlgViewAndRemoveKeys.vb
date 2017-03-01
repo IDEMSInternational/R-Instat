@@ -54,7 +54,6 @@ Public Class dlgViewAndRemoveKeys
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkRemoveKey.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
