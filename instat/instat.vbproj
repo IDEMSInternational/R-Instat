@@ -456,6 +456,12 @@
     <Compile Include="sdgFactorDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgImportFromClimSoft.Designer.vb">
+      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportFromClimSoft.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgMerge.Designer.vb">
       <DependentUpon>sdgMerge.vb</DependentUpon>
     </Compile>
@@ -2821,6 +2827,9 @@
     <EmbeddedResource Include="sdgFactorDataFrame.resx">
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportFromClimSoft.resx">
+      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgMerge.fr-FR.resx">
       <DependentUpon>sdgMerge.vb</DependentUpon>
     </EmbeddedResource>
@@ -3646,6 +3655,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.fr-FR.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>

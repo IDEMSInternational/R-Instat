@@ -16,18 +16,27 @@
 
 Imports instat.Translations
 Public Class dlgClimSoft
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+
+        bReset = False
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 329
+        ucrReceiverMultipleStations.Selector = ucrSelectorForClimSoft
+        ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
+        ucrReceiverMultipleStations.SetMeAsReceiver()
+        ucrChkObservationData.SetText("Observation Data")
     End Sub
 
     Private Sub TestOKEnabled()
@@ -36,5 +45,13 @@ Public Class dlgClimSoft
 
     Private Sub SetDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
+        sdgImportFromClimSoft.ShowDialog()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
