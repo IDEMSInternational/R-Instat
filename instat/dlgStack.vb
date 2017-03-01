@@ -55,7 +55,7 @@ Public Class dlgStack
         ucrStackDataInto.SetParameter(New RParameter("value.name", 4))
         'TODO Should this be enforced for column names?
         ucrSaveNewDataName.SetIsTextBox()
-        ucrSaveNewDataName.SetLabelText("New Data Frame Name")
+        ucrSaveNewDataName.SetLabelText("New Data Frame Name:")
         ucrStackDataInto.SetValidationTypeAsRVariable()
         ucrFactorInto.SetValidationTypeAsRVariable()
     End Sub
