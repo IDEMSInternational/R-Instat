@@ -28,7 +28,8 @@ instat_object <- R6Class("instat_object",
                   .metadata = list(),
                   .objects = list(),
                   .links = list(),
-                  .data_objects_changed = FALSE
+                  .data_objects_changed = FALSE,
+                  .database_connection = NULL
                 ),
                 active = list(
                   data_objects_changed = function(new_value) {
@@ -113,6 +114,18 @@ instat_object$set("public", "set_data_objects", function(new_data_objects) {
   else private$.data_objects <- new_data_objects
 }
 )
+
+instat_object$set("public", "copy_data_object", function(data_name, new_name, filter_name = "", reset_row_names = TRUE) {
+  new_obj <- self$get_data_objects(data_name)$data_clone()
+  if(filter_name != "") {
+    subset_data <- self$get_data_objects(data_name)$get_data_frame(use_current_filter = FALSE, filter_name = filter_name, retain_attr = TRUE)
+    if(reset_row_names) rownames(subset_data) <- 1:nrow(subset_data)
+    new_obj$set_data(subset_data)
+  }
+  self$append_data_object(new_name, new_obj)
+}
+)
+
 
 instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
                                          include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
@@ -223,17 +236,17 @@ instat_object$set("public", "get_data_objects", function(data_name, as_list = FA
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, ...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, ...) {
   if(!stack_data) {
     if(missing(data_name)) data_name <- self$get_data_names()
     if(length(data_name) > 1) {
       retlist <- list()
       for (curr_name in data_name) {
-        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr)
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
@@ -1178,5 +1191,63 @@ instat_object$set("public", "get_climatic_column_name", function(data_name, col_
 
 instat_object$set("public", "merge_data", function(data_name, new_data, by = NULL, type = "left", match = "all") {
   self$get_data_objects(data_name)$merge_data(new_data = new_data, by = by, type = type, match = match)
+}
+)
+
+instat_object$set("public", "get_corruption_data_names", function() {
+  corruption_names <- c()
+  for(curr_name in self$get_data_names()) {
+    if(self$get_data_objects(curr_name)$is_metadata(is_corruption_label) && self$get_data_objects(curr_name)$get_metadata(is_corruption_label)) {
+      corruption_names <- c(corruption_names, curr_name)
+    }
+  }
+  return(corruption_names)
+}
+)
+
+instat_object$set("public", "get_database_variable_names", function(query, data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  if(self$has_database_connection) {
+    temp_data <- dbGetQuery(self$get_database_connection(), query)
+    if(as_list) {
+      out <- list()
+      out[["database"]] <- tempdata[[1]]
+      return(out)
+    }
+    else return(tempdata[[1]])
+  }
+  else return(list())
+}
+)
+
+instat_object$set("public", "has_database_connection", function() {
+  return(!is.null(self$get_database_connection()))
+}
+)
+
+instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL()) {
+  password <- getPass(paste0(username, " password:"))
+  out <- NULL
+  out <- dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
+  if(!is.null(out)) {
+    self$set_database_connection(out)
+  }
+}
+)
+
+instat_object$set("public", "get_database_connection", function() {
+  return(private$.database_connection)
+}
+)
+
+instat_object$set("public", "set_database_connection", function(dbi_connection) {
+  private$.database_connection <- dbi_connection
+}
+)
+
+instat_object$set("public", "database_disconnect", function() {
+  if(!is.null(self$get_database_connection())) {
+    dbDisconnect(private$.database_connection)
+    self$set_database_connection(NULL)
+  }
 }
 )
