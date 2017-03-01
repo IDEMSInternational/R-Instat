@@ -1219,6 +1219,12 @@ instat_object$set("public", "get_database_variable_names", function(query, data_
 }
 )
 
+instat_object$set("public", "import_from_climsoft", function() {
+	
+}
+)
+
+
 instat_object$set("public", "has_database_connection", function() {
   return(!is.null(self$get_database_connection()))
 }

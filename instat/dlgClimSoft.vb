@@ -18,6 +18,13 @@ Imports instat.Translations
 Public Class dlgClimSoft
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsRDatabaseConnect As New RFunction
+    Public bConnectionActive As Boolean = False
+    Private clsRDatabaseDisconnect As New RFunction
+    Private clsRImportFromClimsoft As New RFunction
+    Private bResetSubdialog As Boolean = False
+
+
     Private Sub dlgClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -33,7 +40,11 @@ Public Class dlgClimSoft
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 329
         ucrReceiverMultipleStations.Selector = ucrSelectorForClimSoft
+        ucrReceiverMultipleStations.SetItemType("database_variables")
+        ucrReceiverMultipleStations.strDatabaseQuery = "SELECT stationName FROM station;"
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
+        ucrReceiverMultipleElements.SetItemType("database_variables")
+        ucrReceiverMultipleStations.strDatabaseQuery = "SELECT * FROM station;"
         ucrReceiverMultipleStations.SetMeAsReceiver()
         ucrChkObservationData.SetText("Observation Data")
     End Sub
@@ -43,12 +54,22 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub SetDefaults()
+        clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
+        clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
+        clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
         TestOKEnabled()
         ucrSelectorForClimSoft.Reset()
     End Sub
 
     Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
-        sdgImportFromClimSoft.ShowDialog()
+        sdgImportFromDatabase.Set_RDatabaseConnection(clsRDatabaseConnect, bConnectionActive, bResetSubdialog)
+        bResetSubdialog = False
+        sdgImportFromDatabase.ShowDialog()
+        SetConnectionActiveStatus(sdgImportFromDatabase.GetConnectionActiveStatus())
+    End Sub
+
+    Private Sub SetConnectionActiveStatus(bCurrentStatus As Boolean)
+        bConnectionActive = bCurrentStatus
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
