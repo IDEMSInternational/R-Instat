@@ -134,7 +134,7 @@ Partial Class dlgStack
         '
         'ucrSaveNewDataName
         '
-        Me.ucrSaveNewDataName.Location = New System.Drawing.Point(13, 201)
+        Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 201)
         Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
         Me.ucrSaveNewDataName.Size = New System.Drawing.Size(263, 24)
         Me.ucrSaveNewDataName.TabIndex = 12
