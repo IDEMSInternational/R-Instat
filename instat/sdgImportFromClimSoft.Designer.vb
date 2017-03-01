@@ -50,9 +50,9 @@ Partial Class sdgImportFromClimSoft
         Me.lblDatabaseName.AutoSize = True
         Me.lblDatabaseName.Location = New System.Drawing.Point(10, 15)
         Me.lblDatabaseName.Name = "lblDatabaseName"
-        Me.lblDatabaseName.Size = New System.Drawing.Size(84, 13)
+        Me.lblDatabaseName.Size = New System.Drawing.Size(87, 13)
         Me.lblDatabaseName.TabIndex = 0
-        Me.lblDatabaseName.Text = "Database Name"
+        Me.lblDatabaseName.Text = "Database Name:"
         '
         'ucrInputHost
         '
@@ -69,9 +69,9 @@ Partial Class sdgImportFromClimSoft
         Me.lblHost.AutoSize = True
         Me.lblHost.Location = New System.Drawing.Point(10, 50)
         Me.lblHost.Name = "lblHost"
-        Me.lblHost.Size = New System.Drawing.Size(29, 13)
+        Me.lblHost.Size = New System.Drawing.Size(32, 13)
         Me.lblHost.TabIndex = 2
-        Me.lblHost.Text = "Host"
+        Me.lblHost.Text = "Host:"
         '
         'ucrInputPart
         '
@@ -88,9 +88,9 @@ Partial Class sdgImportFromClimSoft
         Me.lblPart.AutoSize = True
         Me.lblPart.Location = New System.Drawing.Point(10, 85)
         Me.lblPart.Name = "lblPart"
-        Me.lblPart.Size = New System.Drawing.Size(26, 13)
+        Me.lblPart.Size = New System.Drawing.Size(29, 13)
         Me.lblPart.TabIndex = 4
-        Me.lblPart.Text = "Part"
+        Me.lblPart.Text = "Part:"
         '
         'ucrInputUserName
         '
@@ -109,7 +109,7 @@ Partial Class sdgImportFromClimSoft
         Me.lblUserName.Name = "lblUserName"
         Me.lblUserName.Size = New System.Drawing.Size(60, 13)
         Me.lblUserName.TabIndex = 6
-        Me.lblUserName.Text = "User Name"
+        Me.lblUserName.Text = "UserName:"
         '
         'lblConnection
         '
