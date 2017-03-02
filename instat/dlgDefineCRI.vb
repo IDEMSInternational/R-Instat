@@ -98,6 +98,19 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub TestOKEnabled()
+        If Not ucrReceiverRedFlag.IsEmpty() Then
+            If (ucrReceiverRedFlag.strCurrDataType = "numeric" OrElse ucrReceiverRedFlag.strCurrDataType = "logical" OrElse ucrReceiverRedFlag.strCurrDataType = "integer") Then
+                If ucrNudWeights.GetText <> "" Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            Else
+                ucrBase.OKEnabled(True)
+            End If
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub DisplayRedFlag()
@@ -121,7 +134,7 @@ Public Class dlgDefineCRI
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOutput.ControlContentsChanged, ucrReceiverIndicators.ControlContentsChanged, ucrReceiverControlVariables.ControlContentsChanged, ucrSaveCorruptionModel.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRedFlag.ControlContentsChanged, ucrNudWeights.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
