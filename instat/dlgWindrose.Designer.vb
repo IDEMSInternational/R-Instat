@@ -83,9 +83,9 @@ Partial Class dlgWindrose
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(13, 215)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 218)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(244, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(251, 24)
         Me.ucrSaveGraph.TabIndex = 11
         '
         'ucrNudNoOfColumns
@@ -132,7 +132,7 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 252)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 249)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
