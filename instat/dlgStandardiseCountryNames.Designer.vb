@@ -22,20 +22,20 @@ Partial Class dlgStandardiseCountryNames
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblCountryNames = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverCountryNames = New instat.ucrReceiverMultiple()
         Me.ucrSelectorStandardiseCountry = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblCountryNames
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(267, 43)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(82, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Country Names:"
+        Me.lblCountryNames.AutoSize = True
+        Me.lblCountryNames.Location = New System.Drawing.Point(267, 43)
+        Me.lblCountryNames.Name = "lblCountryNames"
+        Me.lblCountryNames.Size = New System.Drawing.Size(82, 13)
+        Me.lblCountryNames.TabIndex = 1
+        Me.lblCountryNames.Text = "Country Names:"
         '
         'ucrBase
         '
@@ -69,7 +69,7 @@ Partial Class dlgStandardiseCountryNames
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 283)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblCountryNames)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverCountryNames)
         Me.Controls.Add(Me.ucrSelectorStandardiseCountry)
@@ -84,7 +84,7 @@ Partial Class dlgStandardiseCountryNames
 
     End Sub
 
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblCountryNames As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverCountryNames As ucrReceiverMultiple
     Friend WithEvents ucrSelectorStandardiseCountry As ucrSelectorByDataFrameAddRemove

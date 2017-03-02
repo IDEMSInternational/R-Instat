@@ -23,8 +23,8 @@ Partial Class dlgDefineCorruptionOutputs
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverCorruptionOutput = New instat.ucrReceiverMultiple()
-        Me.ucrSelectorCorruptionOutput = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverCorruptionOutputs = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorCorruptionOutputs = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblCorruptionOutputs = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -35,25 +35,25 @@ Partial Class dlgDefineCorruptionOutputs
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
         '
-        'ucrReceiverCorruptionOutput
+        'ucrReceiverCorruptionOutputs
         '
-        Me.ucrReceiverCorruptionOutput.frmParent = Me
-        Me.ucrReceiverCorruptionOutput.Location = New System.Drawing.Point(271, 60)
-        Me.ucrReceiverCorruptionOutput.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverCorruptionOutput.Name = "ucrReceiverCorruptionOutput"
-        Me.ucrReceiverCorruptionOutput.Selector = Nothing
-        Me.ucrReceiverCorruptionOutput.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverCorruptionOutput.TabIndex = 2
+        Me.ucrReceiverCorruptionOutputs.frmParent = Me
+        Me.ucrReceiverCorruptionOutputs.Location = New System.Drawing.Point(271, 60)
+        Me.ucrReceiverCorruptionOutputs.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverCorruptionOutputs.Name = "ucrReceiverCorruptionOutputs"
+        Me.ucrReceiverCorruptionOutputs.Selector = Nothing
+        Me.ucrReceiverCorruptionOutputs.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverCorruptionOutputs.TabIndex = 2
         '
-        'ucrSelectorCorruptionOutput
+        'ucrSelectorCorruptionOutputs
         '
-        Me.ucrSelectorCorruptionOutput.bShowHiddenColumns = False
-        Me.ucrSelectorCorruptionOutput.bUseCurrentFilter = True
-        Me.ucrSelectorCorruptionOutput.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorCorruptionOutput.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCorruptionOutput.Name = "ucrSelectorCorruptionOutput"
-        Me.ucrSelectorCorruptionOutput.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorCorruptionOutput.TabIndex = 0
+        Me.ucrSelectorCorruptionOutputs.bShowHiddenColumns = False
+        Me.ucrSelectorCorruptionOutputs.bUseCurrentFilter = True
+        Me.ucrSelectorCorruptionOutputs.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorCorruptionOutputs.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorCorruptionOutputs.Name = "ucrSelectorCorruptionOutputs"
+        Me.ucrSelectorCorruptionOutputs.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorCorruptionOutputs.TabIndex = 0
         '
         'lblCorruptionOutputs
         '
@@ -71,8 +71,8 @@ Partial Class dlgDefineCorruptionOutputs
         Me.ClientSize = New System.Drawing.Size(430, 274)
         Me.Controls.Add(Me.lblCorruptionOutputs)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrReceiverCorruptionOutput)
-        Me.Controls.Add(Me.ucrSelectorCorruptionOutput)
+        Me.Controls.Add(Me.ucrReceiverCorruptionOutputs)
+        Me.Controls.Add(Me.ucrSelectorCorruptionOutputs)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -85,7 +85,7 @@ Partial Class dlgDefineCorruptionOutputs
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverCorruptionOutput As ucrReceiverMultiple
-    Friend WithEvents ucrSelectorCorruptionOutput As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverCorruptionOutputs As ucrReceiverMultiple
+    Friend WithEvents ucrSelectorCorruptionOutputs As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblCorruptionOutputs As Label
 End Class
