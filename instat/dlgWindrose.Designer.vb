@@ -68,7 +68,7 @@ Partial Class dlgWindrose
         Me.lblNoOfColumns.Location = New System.Drawing.Point(255, 196)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
         Me.lblNoOfColumns.Size = New System.Drawing.Size(76, 13)
-        Me.lblNoOfColumns.TabIndex = 10
+        Me.lblNoOfColumns.TabIndex = 7
         Me.lblNoOfColumns.Text = "No of Columns"
         '
         'ucrReceiverFacet
@@ -79,14 +79,14 @@ Partial Class dlgWindrose
         Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
         Me.ucrReceiverFacet.Selector = Nothing
         Me.ucrReceiverFacet.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFacet.TabIndex = 12
+        Me.ucrReceiverFacet.TabIndex = 6
         '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 218)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(251, 24)
-        Me.ucrSaveGraph.TabIndex = 11
+        Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrNudNoOfColumns
         '
@@ -97,7 +97,7 @@ Partial Class dlgWindrose
         Me.ucrNudNoOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Name = "ucrNudNoOfColumns"
         Me.ucrNudNoOfColumns.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNoOfColumns.TabIndex = 9
+        Me.ucrNudNoOfColumns.TabIndex = 8
         Me.ucrNudNoOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverWindDirection
@@ -135,7 +135,7 @@ Partial Class dlgWindrose
         Me.ucrBase.Location = New System.Drawing.Point(9, 249)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 8
+        Me.ucrBase.TabIndex = 10
         '
         'dlgWindrose
         '
