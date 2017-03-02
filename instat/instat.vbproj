@@ -468,6 +468,18 @@
     <Compile Include="sdgClimdexIndices.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgCorruptionCalculatedColumns.Designer.vb">
+      <DependentUpon>sdgCorruptionCalculatedColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCorruptionCalculatedColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgCorruptionCountryLevelColumns.Designer.vb">
+      <DependentUpon>sdgCorruptionCountryLevelColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCorruptionCountryLevelColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDescribeDisplay.Designer.vb">
       <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </Compile>
@@ -2853,6 +2865,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCorruptionCalculatedColumns.resx">
+      <DependentUpon>sdgCorruptionCalculatedColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCorruptionCountryLevelColumns.resx">
+      <DependentUpon>sdgCorruptionCountryLevelColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCreateFilter.fr-FR.resx">
       <DependentUpon>sdgCreateFilter.vb</DependentUpon>
