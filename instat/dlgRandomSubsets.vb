@@ -84,7 +84,8 @@ Public Class dlgRandomSubsets
         ClsSample.SetRCommand("sample")
         ClsSample.AddParameter("replace", "FALSE")
         ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
-        ClsSample.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
+        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+        ClsSample.AddParameter("size", ucrNudSampleSize.Value)
 
         'setseed fuction
         clsSetSeed = New RFunction
@@ -107,8 +108,16 @@ Public Class dlgRandomSubsets
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverSelected.IsEmpty) AndAlso (ucrNudNumberOfColumns.GetText() <> "") AndAlso (ucrNudSampleSize.GetText() <> "") AndAlso (ucrNewDataframe.IsComplete) AndAlso ((ucrChkSetSeed.Checked AndAlso (ucrNudSetSeed.GetText <> "") OrElse Not ucrChkSetSeed.Checked))) Then
-            ucrBase.OKEnabled(True)
+        If (Not ucrReceiverSelected.IsEmpty AndAlso ucrNudNumberOfColumns.GetText() <> "" AndAlso ucrNudSampleSize.GetText() <> "" AndAlso ucrNewDataframe.IsComplete) Then
+            If ucrChkSetSeed.Checked Then
+                If ucrNudSetSeed.GetText <> "" Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -122,6 +131,7 @@ Public Class dlgRandomSubsets
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNewDataframe.SetRCode(clsDataFrame, bReset)
+        ucrNudSampleSize.SetRCode(ClsSample,bReset)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -157,7 +167,7 @@ Public Class dlgRandomSubsets
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrNewDataframe.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelected.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrNewDataframe.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
