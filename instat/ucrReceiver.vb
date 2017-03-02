@@ -29,6 +29,9 @@ Public Class ucrReceiver
     Public bExcludeFromSelector As Boolean = False
     Public Event SelectionChanged(sender As Object, e As EventArgs)
     Public WithEvents frmParent As Form
+
+    Public strDatabaseQuery As String = ""
+
     Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
     Private bParameterIsString As Boolean = False
@@ -380,4 +383,8 @@ Public Class ucrReceiver
             Return IsEmpty()
         End If
     End Function
+
+    Public Sub SetClimaticType(strTemp As String)
+        AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & strTemp & Chr(34)})
+    End Sub
 End Class
