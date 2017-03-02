@@ -231,7 +231,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, ...) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -259,6 +259,19 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
         attributes(out[[i]])[!names(attributes(out[[i]])) %in% c("class", "levels")] <- NULL
       }
     }
+    
+    # If a filter has been done, some column attributes are lost.
+    # This ensures they are present in the returned data.
+    if(retain_attr) {
+      for(col_name in names(out)) {
+        for(attr_name in names(attributes(private$data[[col_name]]))) {
+          if(!attr_name %in% c("class", "levels")) {
+            attr(out[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
+          }
+        }
+      }
+    }
+    
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
       decimal_places[is.na(decimal_places)] <- 0
@@ -2112,7 +2125,27 @@ all_calculated_corruption_column_types <- c(corruption_award_year_label,
                                             corruption_single_bidder_label,
                                             corruption_all_bids_label,
                                             corruption_all_bids_trimmed_label,
-                                            corruption_contract_value_share_over_threshold_label)
+                                            corruption_contract_value_share_over_threshold_label
+                                            )
+
+corruption_ctry_iso2_label="iso2"
+corruption_ctry_iso3_label="iso3"
+corruption_ctry_wb_ppp_label="wb_ppp"
+corruption_ctry_ss_2009_label="ss_2009"
+corruption_ctry_ss_2011_label="ss_2011"
+corruption_ctry_ss_2013_label="ss_2013"
+corruption_ctry_ss_2015_label="ss_2015"
+corruption_ctry_small_state_label="small_state"
+
+all_primary_corruption_country_level_column_types <- c(corruption_ctry_iso2_label,
+                                                       corruption_ctry_iso3_label,
+                                                       corruption_ctry_wb_ppp_label,
+                                                       corruption_ctry_ss_2009_label,
+                                                       corruption_ctry_ss_2011_label,
+                                                       corruption_ctry_ss_2013_label,
+                                                       corruption_ctry_ss_2015_label,
+                                                       corruption_ctry_small_state_label
+                                                       )
 
 # Column metadata for corruption colums
 corruption_type_label = "Corruption_Type"
@@ -2131,8 +2164,23 @@ instat_object$set("public","define_as_corruption", function(data_name, primary_t
 }
 )
 
+instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
+  self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
+}
+)
+
+data_object$set("public","define_as_corruption_country_level_data", function(contract_level_data_name, types = c(), auto_generate = TRUE) {
+  invisible(sapply(names(primary_types), function(x) self$append_to_variables_metadata(primary_types[[x]], corruption_type_label, x)))
+}
+)
+
 data_object$set("public","is_corruption_type_present", function(type) {
   return(self$is_metadata(is_corruption_label) && self$get_metadata(is_corruption_label) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
+}
+)
+
+instat_object$set("public","get_corruption_column_name", function(data_name, type) {
+  self$get_data_objects(data_name)$get_corruption_column_name(type)
 }
 )
 
@@ -2140,7 +2188,7 @@ data_object$set("public","get_corruption_column_name", function(type) {
   if(self$is_corruption_type_present(type)) {
     var_metadata <- self$get_variables_metadata()
     col_name <- var_metadata[!is.na(var_metadata[[corruption_type_label]]) & var_metadata[[corruption_type_label]] == type, name_label]
-    if(length(col_name == 1)) return(col_name)
+    if(length(col_name >= 1)) return(col_name)
     else return("")
   }
   return("")
