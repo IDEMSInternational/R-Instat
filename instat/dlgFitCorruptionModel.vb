@@ -148,9 +148,9 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        '        sdgFitCorruptionModelDisplay.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        '        sdgSimpleRegOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
         bResetSubdialog = False
-        sdgFitCorruptionModelDisplay.Show()
+        sdgSimpleRegOptions.Show()
     End Sub
 
     Private Sub ucrReceiverOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOutput.ControlValueChanged, ucrReceiverControlVariables.ControlValueChanged, ucrReceiverIndicators.ControlValueChanged
