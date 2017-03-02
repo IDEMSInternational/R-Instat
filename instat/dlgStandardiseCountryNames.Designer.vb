@@ -34,7 +34,7 @@ Partial Class dlgStandardiseCountryNames
         Me.Label1.Location = New System.Drawing.Point(267, 43)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(82, 13)
-        Me.Label1.TabIndex = 7
+        Me.Label1.TabIndex = 1
         Me.Label1.Text = "Country Names:"
         '
         'ucrBase
@@ -42,7 +42,7 @@ Partial Class dlgStandardiseCountryNames
         Me.ucrBase.Location = New System.Drawing.Point(9, 220)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 6
+        Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverCountryNames
         '
@@ -52,7 +52,7 @@ Partial Class dlgStandardiseCountryNames
         Me.ucrReceiverCountryNames.Name = "ucrReceiverCountryNames"
         Me.ucrReceiverCountryNames.Selector = Nothing
         Me.ucrReceiverCountryNames.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverCountryNames.TabIndex = 5
+        Me.ucrReceiverCountryNames.TabIndex = 2
         '
         'ucrSelectorStandardiseCountry
         '
@@ -62,7 +62,7 @@ Partial Class dlgStandardiseCountryNames
         Me.ucrSelectorStandardiseCountry.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStandardiseCountry.Name = "ucrSelectorStandardiseCountry"
         Me.ucrSelectorStandardiseCountry.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorStandardiseCountry.TabIndex = 4
+        Me.ucrSelectorStandardiseCountry.TabIndex = 0
         '
         'dlgStandardiseCountryNames
         '
