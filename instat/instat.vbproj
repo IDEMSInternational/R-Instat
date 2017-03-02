@@ -227,6 +227,18 @@
     <Compile Include="dlgDefineCorruption.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineCorruptionOutputs.Designer.vb">
+      <DependentUpon>dlgDefineCorruptionOutputs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineCorruptionOutputs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDefineRedFlags.Designer.vb">
+      <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineRedFlags.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -369,6 +381,12 @@
       <DependentUpon>dlgShowModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgShowModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgStandardiseCountryNames.Designer.vb">
+      <DependentUpon>dlgStandardiseCountryNames.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgStandardiseCountryNames.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSunshine.Designer.vb">
@@ -2152,6 +2170,12 @@
     <EmbeddedResource Include="dlgDefineCorruption.resx">
       <DependentUpon>dlgDefineCorruption.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineCorruptionOutputs.resx">
+      <DependentUpon>dlgDefineCorruptionOutputs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineRedFlags.resx">
+      <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -2595,6 +2619,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSplitText.sw-KE.resx">
       <DependentUpon>dlgSplitText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStandardiseCountryNames.resx">
+      <DependentUpon>dlgStandardiseCountryNames.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
