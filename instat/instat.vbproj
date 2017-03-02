@@ -233,6 +233,12 @@
     <Compile Include="dlgDefineCorruptionOutputs.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineCRI.Designer.vb">
+      <DependentUpon>dlgDefineCRI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineCRI.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDefineRedFlags.Designer.vb">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </Compile>
@@ -273,6 +279,12 @@
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCorruptionFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFitCorruptionModel.Designer.vb">
+      <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFitCorruptionModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFitModel.Designer.vb">
@@ -472,6 +484,12 @@
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgFactorDataFrame.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFitCorruptionModelDisplay.Designer.vb">
+      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFitCorruptionModelDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgImportFromClimSoft.Designer.vb">
@@ -2179,6 +2197,9 @@
     <EmbeddedResource Include="dlgDefineCorruptionOutputs.resx">
       <DependentUpon>dlgDefineCorruptionOutputs.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineCRI.resx">
+      <DependentUpon>dlgDefineCRI.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
@@ -2268,6 +2289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionFile.resx">
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFitCorruptionModel.resx">
+      <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFitModel.fr-FR.resx">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
@@ -2859,6 +2883,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFactorDataFrame.resx">
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFitCorruptionModelDisplay.resx">
+      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgImportFromClimSoft.resx">
       <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
