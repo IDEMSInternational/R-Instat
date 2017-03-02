@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgHideShowColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgHideShowColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()

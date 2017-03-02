@@ -41,7 +41,7 @@ Partial Class dlgView
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(254, 46)
+        Me.lblSelected.Location = New System.Drawing.Point(248, 36)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(104, 13)
         Me.lblSelected.TabIndex = 2
@@ -72,8 +72,6 @@ Partial Class dlgView
         '
         'ucrReceiverView
         '
-        Me.ucrReceiverView.bAddRemoveParameter = True
-        Me.ucrReceiverView.bChangeParameterValue = True
         Me.ucrReceiverView.frmParent = Me
         Me.ucrReceiverView.Location = New System.Drawing.Point(248, 60)
         Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
@@ -84,8 +82,6 @@ Partial Class dlgView
         '
         'ucrSelectorForView
         '
-        Me.ucrSelectorForView.bAddRemoveParameter = True
-        Me.ucrSelectorForView.bChangeParameterValue = True
         Me.ucrSelectorForView.bShowHiddenColumns = False
         Me.ucrSelectorForView.bUseCurrentFilter = True
         Me.ucrSelectorForView.Location = New System.Drawing.Point(10, 10)
@@ -96,15 +92,13 @@ Partial Class dlgView
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 319)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 319)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 12
         '
         'ucrPnlDisplayWindow
         '
-        Me.ucrPnlDisplayWindow.bAddRemoveParameter = True
-        Me.ucrPnlDisplayWindow.bChangeParameterValue = True
         Me.ucrPnlDisplayWindow.Location = New System.Drawing.Point(10, 200)
         Me.ucrPnlDisplayWindow.Name = "ucrPnlDisplayWindow"
         Me.ucrPnlDisplayWindow.Size = New System.Drawing.Size(170, 46)
@@ -112,8 +106,6 @@ Partial Class dlgView
         '
         'ucrNudNumberRows
         '
-        Me.ucrNudNumberRows.bAddRemoveParameter = True
-        Me.ucrNudNumberRows.bChangeParameterValue = True
         Me.ucrNudNumberRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNumberRows.Location = New System.Drawing.Point(318, 217)
@@ -148,8 +140,6 @@ Partial Class dlgView
         '
         'ucrPnlDisplayFrom
         '
-        Me.ucrPnlDisplayFrom.bAddRemoveParameter = True
-        Me.ucrPnlDisplayFrom.bChangeParameterValue = True
         Me.ucrPnlDisplayFrom.Location = New System.Drawing.Point(299, 243)
         Me.ucrPnlDisplayFrom.Name = "ucrPnlDisplayFrom"
         Me.ucrPnlDisplayFrom.Size = New System.Drawing.Size(66, 40)
@@ -157,8 +147,6 @@ Partial Class dlgView
         '
         'ucrChkSpecifyRows
         '
-        Me.ucrChkSpecifyRows.bAddRemoveParameter = True
-        Me.ucrChkSpecifyRows.bChangeParameterValue = True
         Me.ucrChkSpecifyRows.Checked = False
         Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(226, 195)
         Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
