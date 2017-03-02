@@ -53,11 +53,11 @@ Public Class dlgDefineCorruptionOutputs
         '  ucrBase.iHelpTopicID =
 
         'selector
-        ucrSelectorCorruptionOutputs.SetParameter(New RParameter("data_name"))
+        ucrSelectorCorruptionOutputs.SetParameter(New RParameter("data_name", 0))
         ucrSelectorCorruptionOutputs.SetParameterIsString()
 
         'ucrreceiver
-        ucrReceiverCorruptionOutputs.SetParameter(New RParameter("output_columns"))
+        ucrReceiverCorruptionOutputs.SetParameter(New RParameter("output_columns", 1))
         ucrReceiverCorruptionOutputs.SetParameterIsString()
     End Sub
 
@@ -73,7 +73,7 @@ Public Class dlgDefineCorruptionOutputs
         bUseSelectedColumn = False
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 

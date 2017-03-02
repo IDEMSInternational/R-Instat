@@ -50,10 +50,10 @@ Public Class dlgDefineRedFlags
         'helpID
         '  ucrBase.iHelpTopicID =
         'selector
-        ucrSelectorDefineRedFlag.SetParameter(New RParameter("data_name"))
+        ucrSelectorDefineRedFlag.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineRedFlag.SetParameterIsString()
         'ucrreceiver
-        ucrReceiverRedFlag.SetParameter(New RParameter("red_flags"))
+        ucrReceiverRedFlag.SetParameter(New RParameter("red_flags", 1))
         ucrReceiverRedFlag.SetParameterIsString()
     End Sub
 
@@ -69,7 +69,7 @@ Public Class dlgDefineRedFlags
         bUseSelectedColumn = False
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 

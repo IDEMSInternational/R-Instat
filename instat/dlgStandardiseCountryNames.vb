@@ -52,11 +52,11 @@ Public Class dlgStandardiseCountryNames
         '  ucrBase.iHelpTopicID =
 
         'selector
-        ucrSelectorStandardiseCountry.SetParameter(New RParameter("data_name"))
+        ucrSelectorStandardiseCountry.SetParameter(New RParameter("data_name", 0))
         ucrSelectorStandardiseCountry.SetParameterIsString()
 
         'ucrreceiver
-        ucrReceiverCountryNames.SetParameter(New RParameter("country_columns"))
+        ucrReceiverCountryNames.SetParameter(New RParameter("country_columns", 1))
         ucrReceiverCountryNames.SetParameterIsString()
     End Sub
 
