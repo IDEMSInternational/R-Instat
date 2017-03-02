@@ -68,6 +68,7 @@ Public Class dlgCombineforGraphics
 
         clsDefaultRFunction = New RFunction
         clsDefaultRFunction.SetRCommand("gridExtra::grid.arrange")
+        clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrCombineGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
         bResetSubDialog = True
     End Sub
@@ -93,5 +94,9 @@ Public Class dlgCombineforGraphics
         sdgCombineGraphOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
         bResetSubDialog = False
         sdgCombineGraphOptions.ShowDialog()
+    End Sub
+
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrCombineGraphReceiver.ControlContentsChanged
+
     End Sub
 End Class
