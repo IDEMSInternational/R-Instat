@@ -227,6 +227,12 @@
     <Compile Include="dlgDefineCorruption.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineRedFlags.Designer.vb">
+      <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineRedFlags.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -2151,6 +2157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDefineCorruption.resx">
       <DependentUpon>dlgDefineCorruption.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineRedFlags.resx">
+      <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
