@@ -474,10 +474,10 @@
     <Compile Include="sdgFactorDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgImportFromClimSoft.Designer.vb">
-      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
+    <Compile Include="sdgImportFromDatabase.Designer.vb">
+      <DependentUpon>sdgImportFromDatabase.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgImportFromClimSoft.vb">
+    <Compile Include="sdgImportFromDatabase.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMerge.Designer.vb">
@@ -2860,8 +2860,8 @@
     <EmbeddedResource Include="sdgFactorDataFrame.resx">
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgImportFromClimSoft.resx">
-      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
+    <EmbeddedResource Include="sdgImportFromDatabase.resx">
+      <DependentUpon>sdgImportFromDatabase.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMerge.fr-FR.resx">
       <DependentUpon>sdgMerge.vb</DependentUpon>
