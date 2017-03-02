@@ -32,7 +32,7 @@ Public Class ucrInput
     Protected bIsReadOnly As Boolean = False
     Public bAutoChangeOnLeave As Boolean = False
     Private bLastSilent As Boolean = False
-    Public bAddQuotesIfUnrecognised As Boolean = True
+    Private bPrivateAddQuotesIfUnrecognised As Boolean = True
     Protected dctDisplayParameterValues As New Dictionary(Of String, String)
 
     Public Sub New()
@@ -62,7 +62,7 @@ Public Class ucrInput
             If dctDisplayParameterValues.ContainsKey(GetText()) Then
                 clsParameter.SetArgumentValue(dctDisplayParameterValues(GetText()))
             Else
-                If bAddQuotesIfUnrecognised Then
+                If AddQuotesIfUnrecognised Then
                     clsParameter.SetArgumentValue(Chr(34) & GetText() & Chr(34))
                 Else
                     clsParameter.SetArgumentValue(GetText())
@@ -413,7 +413,7 @@ Public Class ucrInput
                 If dctDisplayParameterValues.ContainsKey(clsParameter.strArgumentValue) Then
                     Return clsParameter.strArgumentValue
                 Else
-                    If bAddQuotesIfUnrecognised Then
+                    If AddQuotesIfUnrecognised Then
                         Return clsParameter.strArgumentValue.Trim(Chr(34))
                     Else
                         Return clsParameter.strArgumentValue
@@ -442,4 +442,16 @@ Public Class ucrInput
     Public Sub AddToParameterValueItemsPairs(strDisplayValue As String, strParameterValue As String)
         dctDisplayParameterValues.Add(strDisplayValue, strParameterValue)
     End Sub
+
+    Public Property AddQuotesIfUnrecognised As Boolean
+        Get
+            Return bPrivateAddQuotesIfUnrecognised
+        End Get
+        Set(bValue As Boolean)
+            bPrivateAddQuotesIfUnrecognised = bValue
+            If GetText() IsNot Nothing Then
+                SetName(GetText().Trim(Chr(34)))
+            End If
+        End Set
+    End Property
 End Class

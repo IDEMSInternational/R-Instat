@@ -227,6 +227,18 @@
     <Compile Include="dlgDefineCorruption.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineCorruptionOutputs.Designer.vb">
+      <DependentUpon>dlgDefineCorruptionOutputs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineCorruptionOutputs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDefineRedFlags.Designer.vb">
+      <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineRedFlags.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -371,6 +383,12 @@
     <Compile Include="dlgShowModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgStandardiseCountryNames.Designer.vb">
+      <DependentUpon>dlgStandardiseCountryNames.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgStandardiseCountryNames.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSunshine.Designer.vb">
       <DependentUpon>dlgSunshine.vb</DependentUpon>
     </Compile>
@@ -456,6 +474,12 @@
     <Compile Include="sdgFactorDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgImportFromClimSoft.Designer.vb">
+      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportFromClimSoft.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgMerge.Designer.vb">
       <DependentUpon>sdgMerge.vb</DependentUpon>
     </Compile>
@@ -502,6 +526,12 @@
       <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCalculationsSummmary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgWindrose.Designer.vb">
+      <DependentUpon>sdgWindrose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgWindrose.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -2146,6 +2176,12 @@
     <EmbeddedResource Include="dlgDefineCorruption.resx">
       <DependentUpon>dlgDefineCorruption.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineCorruptionOutputs.resx">
+      <DependentUpon>dlgDefineCorruptionOutputs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineRedFlags.resx">
+      <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -2590,6 +2626,9 @@
     <EmbeddedResource Include="dlgSplitText.sw-KE.resx">
       <DependentUpon>dlgSplitText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgStandardiseCountryNames.resx">
+      <DependentUpon>dlgStandardiseCountryNames.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
@@ -2820,6 +2859,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFactorDataFrame.resx">
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportFromClimSoft.resx">
+      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMerge.fr-FR.resx">
       <DependentUpon>sdgMerge.vb</DependentUpon>
@@ -3646,6 +3688,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.fr-FR.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
@@ -3848,6 +3891,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgWindrose.resx">
+      <DependentUpon>sdgWindrose.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.fr-FR.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>

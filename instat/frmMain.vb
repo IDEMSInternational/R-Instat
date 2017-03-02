@@ -1147,6 +1147,24 @@ Public Class frmMain
         dlgDefineCorruption.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraphs.Click
+        dlgCumulativeDistribution.ShowDialog()
+    End Sub
+
+    Private Sub FilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FilterToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+
+        dlgRestrict.bIsSubsetDialog = True
+        lstDataNames = clsRLink.GetCorruptionDataFrameNames()
+        If lstDataNames.Count = 1 Then
+            dlgRestrict.strDefaultDataframe = lstDataNames(0)
+            dlgRestrict.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
+        Else
+            dlgRestrict.strDefaultDataframe = ""
+            dlgRestrict.strDefaultColumn = ""
+        End If
+        dlgRestrict.ShowDialog()
+    End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
