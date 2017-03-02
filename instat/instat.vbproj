@@ -275,6 +275,12 @@
     <Compile Include="dlgCorruptionFile.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFitCorruptionModel.Designer.vb">
+      <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFitCorruptionModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFitModel.Designer.vb">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </Compile>
@@ -472,6 +478,12 @@
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgFactorDataFrame.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFitCorruptionModelDisplay.Designer.vb">
+      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFitCorruptionModelDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgImportFromClimSoft.Designer.vb">
@@ -2263,6 +2275,9 @@
     <EmbeddedResource Include="dlgCorruptionFile.resx">
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFitCorruptionModel.resx">
+      <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFitModel.fr-FR.resx">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -2853,6 +2868,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFactorDataFrame.resx">
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFitCorruptionModelDisplay.resx">
+      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgImportFromClimSoft.resx">
       <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
