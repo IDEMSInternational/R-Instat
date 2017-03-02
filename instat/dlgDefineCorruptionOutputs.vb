@@ -42,7 +42,7 @@ Public Class dlgDefineCorruptionOutputs
 
     Private Sub SetDefaults()
         'Reset 
-        ucrSelectorCorruptionOutput.Reset()
+        ucrSelectorCorruptionOutputs.Reset()
         clsCorruptionOutputs = New RFunction
         clsCorruptionOutputs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_corruption_outputs")
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorruptionOutputs)
@@ -53,12 +53,12 @@ Public Class dlgDefineCorruptionOutputs
         '  ucrBase.iHelpTopicID =
 
         'selector
-        ucrSelectorCorruptionOutput.SetParameter(New RParameter("data_name"))
-        ucrSelectorCorruptionOutput.SetParameterIsString()
+        ucrSelectorCorruptionOutputs.SetParameter(New RParameter("data_name"))
+        ucrSelectorCorruptionOutputs.SetParameterIsString()
 
         'ucrreceiver
-        ucrReceiverCorruptionOutput.SetParameter(New RParameter("output_columns"))
-        ucrReceiverCorruptionOutput.SetParameterIsString()
+        ucrReceiverCorruptionOutputs.SetParameter(New RParameter("output_columns"))
+        ucrReceiverCorruptionOutputs.SetParameterIsString()
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -68,8 +68,8 @@ Public Class dlgDefineCorruptionOutputs
     End Sub
 
     Private Sub SetDefaultColumn()
-        ucrSelectorCorruptionOutput.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
-        ucrReceiverCorruptionOutput.Add(strSelectedColumn, strSelectedDataFrame)
+        ucrSelectorCorruptionOutputs.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverCorruptionOutputs.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
     End Sub
 
@@ -78,7 +78,7 @@ Public Class dlgDefineCorruptionOutputs
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverCorruptionOutput.IsEmpty Then
+        If Not ucrReceiverCorruptionOutputs.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -91,7 +91,7 @@ Public Class dlgDefineCorruptionOutputs
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCorruptionOutput.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCorruptionOutputs.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

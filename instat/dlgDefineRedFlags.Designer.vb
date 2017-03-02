@@ -25,7 +25,7 @@ Partial Class dlgDefineRedFlags
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverRedFlag = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDefineRedFlag = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblRedFlags = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -55,21 +55,21 @@ Partial Class dlgDefineRedFlags
         Me.ucrSelectorDefineRedFlag.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDefineRedFlag.TabIndex = 0
         '
-        'Label1
+        'lblRedFlags
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(268, 44)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Red Flags:"
+        Me.lblRedFlags.AutoSize = True
+        Me.lblRedFlags.Location = New System.Drawing.Point(268, 44)
+        Me.lblRedFlags.Name = "lblRedFlags"
+        Me.lblRedFlags.Size = New System.Drawing.Size(58, 13)
+        Me.lblRedFlags.TabIndex = 1
+        Me.lblRedFlags.Text = "Red Flags:"
         '
         'dlgDefineRedFlags
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 266)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblRedFlags)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverRedFlag)
         Me.Controls.Add(Me.ucrSelectorDefineRedFlag)
@@ -87,5 +87,5 @@ Partial Class dlgDefineRedFlags
     Friend WithEvents ucrSelectorDefineRedFlag As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRedFlag As ucrReceiverMultiple
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblRedFlags As Label
 End Class
