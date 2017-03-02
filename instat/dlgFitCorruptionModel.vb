@@ -21,8 +21,8 @@ Public Class dlgFitCorruptionModel
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private bResetSubdialog As Boolean = False
-    Private clsCorruptionModel As New RFunction
-    Private clsModel As New ROperator
+    Private clsCorruptionModel, clsBinomialModel As New RFunction
+    Private clsModel, clsModel1 As New ROperator
 
     Private Sub dlgFitCorruptionModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -46,6 +46,13 @@ Public Class dlgFitCorruptionModel
         '  ucrBase.iHelpTopicID =
         ucrInputModelPreview.IsReadOnly = True
         clsModel.SetOperation("~")
+        clsModel1.SetOperation("+")
+        clsModel.AddParameter(clsROperatorParameter:=clsModel1)
+        clsModel1.bBrackets = False
+
+        clsCorruptionModel.AddParameter("family", clsRFunctionParameter:=clsBinomialModel)
+        clsBinomialModel.SetRCommand("binomial")
+        clsBinomialModel.AddParameter("link", Chr(34) & "logit" & Chr(34))
 
         'Selector
         ucrSelectorFitModel.SetParameter(New RParameter("data", 0))
@@ -99,8 +106,6 @@ Public Class dlgFitCorruptionModel
     Private Sub SetDefaultColumn()
         ucrSelectorFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
         ucrReceiverControlVariables.Add(strSelectedColumn, strSelectedDataFrame)
-        ucrReceiverIndicators.Add(strSelectedColumn, strSelectedDataFrame)
-        ucrReceiverOutput.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
     End Sub
 
@@ -131,6 +136,9 @@ Public Class dlgFitCorruptionModel
         If Not ucrReceiverOutput.IsEmpty AndAlso Not ucrReceiverIndicators.IsEmpty AndAlso Not ucrReceiverControlVariables.IsEmpty Then
             ucrBase.clsRsyntax.RemoveParameter("formula")
             clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverOutput.GetVariables())
+            clsModel.AddParameter(iPosition:=1, clsROperatorParameter:=clsModel1)
+            clsModel1.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverControlVariables.GetVariableNames(False))
+            clsModel1.AddParameter(iPosition:=1, strParameterValue:=ucrReceiverIndicators.GetVariableNames(False))
             ' not sure about the right hand side of the formula
             ucrBase.clsRsyntax.clsBaseFunction.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrInputModelPreview.SetName(clsModel.ToScript)
