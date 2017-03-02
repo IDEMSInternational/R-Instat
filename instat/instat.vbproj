@@ -233,6 +233,12 @@
     <Compile Include="dlgDefineCorruptionOutputs.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineCRI.Designer.vb">
+      <DependentUpon>dlgDefineCRI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineCRI.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDefineRedFlags.Designer.vb">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </Compile>
@@ -2184,6 +2190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDefineCorruptionOutputs.resx">
       <DependentUpon>dlgDefineCorruptionOutputs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineCRI.resx">
+      <DependentUpon>dlgDefineCRI.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>

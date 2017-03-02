@@ -67,7 +67,7 @@ Public Class dlgFitCorruptionModel
 
         'ucrSave
         ucrSaveCorruptionModel.SetPrefix("Corruption_Model")
-        ucrSaveCorruptionModel.SetSaveTypeAsGraph()
+        ucrSaveCorruptionModel.SetSaveTypeAsModel()
         ucrSaveCorruptionModel.SetDataFrameSelector(ucrSelectorFitModel.ucrAvailableDataFrames)
         ucrSaveCorruptionModel.SetCheckBoxText("Save Graph")
         ucrSaveCorruptionModel.SetIsComboBox()
