@@ -60,16 +60,16 @@ Public Class dlgFitCorruptionModel
 
         'Receivers
         ucrReceiverOutput.SetParameter(New RParameter("y", 1))
-        ucrReceiverOutput.SetParameterIsString()
+        ucrReceiverOutput.SetParameterIsRFunction() ' i think isRfunction here
         ucrReceiverOutput.Selector = ucrSelectorFitModel
         ucrReceiverOutput.SetIncludedDataTypes({"integer", "numeric", "logical"})
 
-        'ucrReceiverControlVariables.SetParameter(New RParameter("", 2))
-        'ucrReceiverControlVariables.SetParameterIsString()
+        ucrReceiverControlVariables.SetParameter(New RParameter("x", 2))
+        ucrReceiverControlVariables.SetParameterIsString()
         ucrReceiverControlVariables.Selector = ucrSelectorFitModel
 
-        'ucrReceiverIndicators.SetParameter(New RParameter("", 3))
-        'ucrReceiverIndicators.SetParameterIsString()
+        ucrReceiverIndicators.SetParameter(New RParameter("z", 3))
+        ucrReceiverIndicators.SetParameterIsString()
         ucrReceiverIndicators.Selector = ucrSelectorFitModel
 
         'ucrSave
