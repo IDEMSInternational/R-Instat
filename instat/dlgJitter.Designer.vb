@@ -40,7 +40,7 @@ Partial Class dlgJitter
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(249, 28)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(242, 35)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
         Me.lblSelectedVariable.TabIndex = 1
@@ -54,9 +54,9 @@ Partial Class dlgJitter
         Me.grpMaximumAndMinimumValues.Controls.Add(Me.rdoMinimumAndMaximum)
         Me.grpMaximumAndMinimumValues.Controls.Add(Me.rdoMaximumDistanceFromZero)
         Me.grpMaximumAndMinimumValues.Controls.Add(Me.ucrPnlDistance)
-        Me.grpMaximumAndMinimumValues.Location = New System.Drawing.Point(242, 66)
+        Me.grpMaximumAndMinimumValues.Location = New System.Drawing.Point(241, 73)
         Me.grpMaximumAndMinimumValues.Name = "grpMaximumAndMinimumValues"
-        Me.grpMaximumAndMinimumValues.Size = New System.Drawing.Size(167, 147)
+        Me.grpMaximumAndMinimumValues.Size = New System.Drawing.Size(167, 140)
         Me.grpMaximumAndMinimumValues.TabIndex = 3
         Me.grpMaximumAndMinimumValues.TabStop = False
         '
@@ -65,7 +65,7 @@ Partial Class dlgJitter
         Me.ucrInputMaximum.AddQuotesIfUnrecognised = True
         Me.ucrInputMaximum.IsMultiline = False
         Me.ucrInputMaximum.IsReadOnly = False
-        Me.ucrInputMaximum.Location = New System.Drawing.Point(7, 120)
+        Me.ucrInputMaximum.Location = New System.Drawing.Point(7, 112)
         Me.ucrInputMaximum.Name = "ucrInputMaximum"
         Me.ucrInputMaximum.Size = New System.Drawing.Size(59, 21)
         Me.ucrInputMaximum.TabIndex = 4
@@ -75,7 +75,7 @@ Partial Class dlgJitter
         Me.ucrInputMinimum.AddQuotesIfUnrecognised = True
         Me.ucrInputMinimum.IsMultiline = False
         Me.ucrInputMinimum.IsReadOnly = False
-        Me.ucrInputMinimum.Location = New System.Drawing.Point(7, 94)
+        Me.ucrInputMinimum.Location = New System.Drawing.Point(7, 86)
         Me.ucrInputMinimum.Name = "ucrInputMinimum"
         Me.ucrInputMinimum.Size = New System.Drawing.Size(59, 21)
         Me.ucrInputMinimum.TabIndex = 3
@@ -85,7 +85,7 @@ Partial Class dlgJitter
         Me.ucrInputMaximumDistanceFromZero.AddQuotesIfUnrecognised = True
         Me.ucrInputMaximumDistanceFromZero.IsMultiline = False
         Me.ucrInputMaximumDistanceFromZero.IsReadOnly = False
-        Me.ucrInputMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 43)
+        Me.ucrInputMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 35)
         Me.ucrInputMaximumDistanceFromZero.Name = "ucrInputMaximumDistanceFromZero"
         Me.ucrInputMaximumDistanceFromZero.Size = New System.Drawing.Size(59, 21)
         Me.ucrInputMaximumDistanceFromZero.TabIndex = 1
@@ -93,7 +93,7 @@ Partial Class dlgJitter
         'rdoMinimumAndMaximum
         '
         Me.rdoMinimumAndMaximum.AutoSize = True
-        Me.rdoMinimumAndMaximum.Location = New System.Drawing.Point(7, 71)
+        Me.rdoMinimumAndMaximum.Location = New System.Drawing.Point(7, 63)
         Me.rdoMinimumAndMaximum.Name = "rdoMinimumAndMaximum"
         Me.rdoMinimumAndMaximum.Size = New System.Drawing.Size(134, 17)
         Me.rdoMinimumAndMaximum.TabIndex = 2
@@ -104,7 +104,7 @@ Partial Class dlgJitter
         'rdoMaximumDistanceFromZero
         '
         Me.rdoMaximumDistanceFromZero.AutoSize = True
-        Me.rdoMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 19)
+        Me.rdoMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 11)
         Me.rdoMaximumDistanceFromZero.Name = "rdoMaximumDistanceFromZero"
         Me.rdoMaximumDistanceFromZero.Size = New System.Drawing.Size(146, 17)
         Me.rdoMaximumDistanceFromZero.TabIndex = 0
@@ -116,13 +116,13 @@ Partial Class dlgJitter
         '
         Me.ucrPnlDistance.Location = New System.Drawing.Point(4, 11)
         Me.ucrPnlDistance.Name = "ucrPnlDistance"
-        Me.ucrPnlDistance.Size = New System.Drawing.Size(157, 130)
+        Me.ucrPnlDistance.Size = New System.Drawing.Size(157, 122)
         Me.ucrPnlDistance.TabIndex = 7
         '
         'ucrReceiverJitter
         '
         Me.ucrReceiverJitter.frmParent = Me
-        Me.ucrReceiverJitter.Location = New System.Drawing.Point(249, 43)
+        Me.ucrReceiverJitter.Location = New System.Drawing.Point(241, 50)
         Me.ucrReceiverJitter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverJitter.Name = "ucrReceiverJitter"
         Me.ucrReceiverJitter.Selector = Nothing
@@ -150,7 +150,7 @@ Partial Class dlgJitter
         '
         Me.ucrInputNewColName.Location = New System.Drawing.Point(10, 219)
         Me.ucrInputNewColName.Name = "ucrInputNewColName"
-        Me.ucrInputNewColName.Size = New System.Drawing.Size(286, 24)
+        Me.ucrInputNewColName.Size = New System.Drawing.Size(261, 24)
         Me.ucrInputNewColName.TabIndex = 8
         '
         'dlgJitter
