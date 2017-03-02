@@ -28,7 +28,7 @@ Partial Class dlgDefineCRI
         Me.lblReceiverRedFlag = New System.Windows.Forms.Label()
         Me.lblWeights = New System.Windows.Forms.Label()
         Me.lblRedFlagsList = New System.Windows.Forms.Label()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.lstRedFlags = New System.Windows.Forms.ListBox()
         Me.ucrReceiverRedFlag = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorCRI = New instat.ucrSelectorByDataFrameAddRemove()
@@ -57,7 +57,7 @@ Partial Class dlgDefineCRI
         '
         'cmdAddComponent
         '
-        Me.cmdAddComponent.Location = New System.Drawing.Point(275, 283)
+        Me.cmdAddComponent.Location = New System.Drawing.Point(275, 262)
         Me.cmdAddComponent.Name = "cmdAddComponent"
         Me.cmdAddComponent.Size = New System.Drawing.Size(133, 23)
         Me.cmdAddComponent.TabIndex = 6
@@ -91,13 +91,13 @@ Partial Class dlgDefineCRI
         Me.lblRedFlagsList.TabIndex = 9
         Me.lblRedFlagsList.Text = "Red Flags"
         '
-        'ListBox1
+        'lstRedFlags
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(427, 59)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(120, 95)
-        Me.ListBox1.TabIndex = 10
+        Me.lstRedFlags.FormattingEnabled = True
+        Me.lstRedFlags.Location = New System.Drawing.Point(427, 59)
+        Me.lstRedFlags.Name = "lstRedFlags"
+        Me.lstRedFlags.Size = New System.Drawing.Size(120, 95)
+        Me.lstRedFlags.TabIndex = 10
         '
         'ucrReceiverRedFlag
         '
@@ -111,7 +111,7 @@ Partial Class dlgDefineCRI
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 312)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 291)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
@@ -161,11 +161,11 @@ Partial Class dlgDefineCRI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(569, 369)
+        Me.ClientSize = New System.Drawing.Size(569, 350)
         Me.Controls.Add(Me.ucrNudWeights)
         Me.Controls.Add(Me.ucrGridWeights)
         Me.Controls.Add(Me.ucrReceiverRedFlag)
-        Me.Controls.Add(Me.ListBox1)
+        Me.Controls.Add(Me.lstRedFlags)
         Me.Controls.Add(Me.lblRedFlagsList)
         Me.Controls.Add(Me.lblWeights)
         Me.Controls.Add(Me.lblReceiverRedFlag)
@@ -195,7 +195,7 @@ Partial Class dlgDefineCRI
     Friend WithEvents lblReceiverRedFlag As Label
     Friend WithEvents lblWeights As Label
     Friend WithEvents lblRedFlagsList As Label
-    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents lstRedFlags As ListBox
     Friend WithEvents ucrReceiverRedFlag As ucrReceiverSingle
     Friend WithEvents ucrNudWeights As ucrNud
     Friend WithEvents ucrGridWeights As ucrFactor

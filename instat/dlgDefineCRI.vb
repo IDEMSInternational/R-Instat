@@ -20,6 +20,7 @@ Public Class dlgDefineCRI
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
+    Private lstFlagList As New List(Of KeyValuePair(Of String, RFunction))
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction As New RFunction
 
@@ -52,8 +53,6 @@ Public Class dlgDefineCRI
         '        ucrReceiverRedFlag.SetParameter(New RParameter("", 1))
         ucrReceiverRedFlag.SetParameterIsString()
         ucrReceiverRedFlag.Selector = ucrSelectorCRI
-        'if the item in the receiver is of type logical/numeric then display nud, otherwise show weights.
-        '        ucrReceiverRedFlag.AddToLinkedControls(ucrLinked:=ucrNudWeights, objValues:={"numeric", "logical"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrChk
         ucrChkScaleNumeric.SetText("Scale Numeric")
@@ -79,6 +78,7 @@ Public Class dlgDefineCRI
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
         DisplayRedFlag()
+        EnableDeleteButton()
     End Sub
 
     Private Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -145,6 +145,25 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+        '        Dim iIndex As Integer
+
+        '        For Each lviTemp As ListViewItem In lstRedFlags.SelectedItems
+        '            iIndex = lstRedFlags.Items.IndexOf(lviTemp)
+        '            lstRedFlags.Items.Remove(lviTemp)
+        '            lstFlagList.RemoveAt(iIndex)
+        '        Next
+    End Sub
+
+    Private Sub lstRedFlags_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRedFlags.SelectedIndexChanged
+        EnableDeleteButton()
+    End Sub
+
+    Private Sub EnableDeleteButton()
+        If lstRedFlags.SelectedItems.Count > 0 Then
+            cmdDelete.Enabled = True
+        Else
+            cmdDelete.Enabled = False
+        End If
     End Sub
 
     Private Sub ucrReceiverOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRedFlag.ControlValueChanged
