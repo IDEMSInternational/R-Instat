@@ -16,108 +16,61 @@
 Imports instat.Translations
 
 Public Class dlgExtremes
-    Private bFirstLoad As Boolean = True
-    Private bReset As Boolean = True
-
     Private Sub dlgExtremes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-        If bFirstLoad Then
-            InitialiseDialog()
-            bFirstLoad = False
-        End If
-        If bReset Then
-            SetDefaults()
-        End If
-        SetRCodeForControls(bReset)
-        bReset = False
-        TestOKEnabled()
-    End Sub
+        chkRestrictValues.Checked = False
+        lblBetween.Visible = False
+        txtBetween.Visible = False
+        lblAnd.Visible = False
+        txtAnd.Visible = False
+        chkMaximumLikelihood.Checked = False
+        chkMethodOfMoments.Checked = False
+        cboMaximumLikelihood.Visible = True
 
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 488
-        ucrBase.clsRsyntax.iCallType = 1
+        cboMethodOfMoments.Visible = False
+        chkProbabilityPlot.Checked = False
+
         ucrBase.OKEnabled(False) ' temporarily for beta
 
-        'ucrReceiverDataToFit
-        ucrReceiverDataToFit.SetParameter(New RParameter("xdat", 0))
-        ucrReceiverDataToFit.SetParameterIsRFunction()
+        ucrBase.clsRsyntax.SetFunction("gev.fit")
+        ucrBase.clsRsyntax.iCallType = 1
+        autoTranslate(Me)
         ucrReceiverDataToFit.Selector = ucrAddRemove
         ucrReceiverDataToFit.SetMeAsReceiver()
-
-        'ucrChkRestrictDataValues
-        '      ucrInputTo.SetParameter(New RParameter(" "))
-        ucrChkRestrictDataValues.SetParameter(ucrInputTo.GetParameter(), bNewChangeParameterValue:=False) ' bNewAddRemoveParameter:=True)
-        ucrInputTo.bAddRemoveParameter = False
-        ucrInputTo.SetLinkedDisplayControl(lblBetween)
-        'set default value
-
-        '        ucrInputFrom.SetParameter(New RParameter(" "))
-        ucrChkRestrictDataValues.SetParameter(ucrInputFrom.GetParameter(), bNewChangeParameterValue:=False) ' bNewAddRemoveParameter:=True)
-        ucrInputFrom.bAddRemoveParameter = False
-        ucrInputFrom.SetLinkedDisplayControl(lblAnd)
-
-        ucrChkRestrictDataValues.SetText("Restrict Data Values")
-        ucrChkRestrictDataValues.bChangeParameterValue = False
-        ucrChkRestrictDataValues.AddToLinkedControls(ucrLinked:=ucrInputTo, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkRestrictDataValues.AddToLinkedControls(ucrLinked:=ucrInputFrom, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkRestrictDataValues.SetRDefault("FALSE")
-
-        'ucrChkProbabilityPlot
-        '        ucrChkProbPlot.SetParameter(New RParameter(" "))
-        ucrChkProbPlot.SetText("Probability Plot")
-        ucrChkProbPlot.SetRDefault("FALSE")
-
-        'ucrChkMLE
-        '        ucrChkMLE.SetParameter(New RParameter(" "))
-        ucrChkMLE.SetText("Maximum Likelihood")
-        ucrChkMLE.SetRDefault("FALSE")
-        ucrChkMLE.SetParameter(ucrInputMLE.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkMLE.AddToLinkedControls(ucrLinked:=ucrInputMLE, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputMLE.bAddRemoveParameter = False
-        ucrInputMLE.SetLinkedDisplayControl(lblSaveInMLE)
-
-        'ucrChkMOM
-        '        ucrChkMOM.SetParameter(New RParameter(" "))
-        ucrChkMOM.SetText("Method of Moments")
-        ucrChkMOM.SetRDefault("FALSE")
-        ucrChkMOM.SetParameter(ucrInputMOM.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkMOM.AddToLinkedControls(ucrLinked:=ucrInputMOM, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputMOM.bAddRemoveParameter = False
-        ucrInputMOM.SetLinkedDisplayControl(lblSaveInMOM)
-
-        ' not sure if "Save in" for the cbos refers to where to display the output (i.e., output window, column) or something else.
-        ' Kept it as cbo for the time being.
-
-        'rdos
-        '        ucrPnlDistributions.SetParameter(New RParameter(" "))
-        '        ucrPnlDistributions.AddRadioButton(rdoGEV, Chr(34) & "" & Chr(34))
-        '        ucrPnlDistributions.AddRadioButton(rdoGumbel, Chr(34) & " " & Chr(34))
-        '        ucrPnlDistributions.SetRDefault(Chr(34) & " " & Chr(34)) ' gumbel as default
-
+        ucrBase.iHelpTopicID = 488
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-
-        ucrAddRemove.Reset()
-
-        ucrBase.clsRsyntax.SetFunction("gev.fit")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
-    Private Sub TestOKEnabled()
-
+    Private Sub chkRestrictValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkRestrictValues.CheckedChanged
+        If chkRestrictValues.Checked = True Then
+            lblBetween.Visible = True
+            txtBetween.Visible = True
+            lblAnd.Visible = True
+            txtAnd.Visible = True
+        Else
+            lblBetween.Visible = False
+            txtBetween.Visible = False
+            lblAnd.Visible = False
+            txtAnd.Visible = False
+        End If
     End Sub
 
-    'ControlContentsChanged sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    Private Sub chkMaximumLikelihood_CheckedChanged(sender As Object, e As EventArgs) Handles chkMaximumLikelihood.CheckedChanged
+        If chkMaximumLikelihood.Checked = True Then
+            cboMaximumLikelihood.Visible = True
+        End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOKEnabled()
+    Private Sub chkMethodofMoments_CheckedChanged(sender As Object, e As EventArgs) Handles chkMethodOfMoments.CheckedChanged
+        If chkMethodOfMoments.Checked = True Then
+            cboMethodOfMoments.Visible = True
+        Else
+            cboMethodOfMoments.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrReceiverDataToFit_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDataToFit.Leave
+        ucrBase.clsRsyntax.AddParameter("xdat", clsRFunctionParameter:=ucrReceiverDataToFit.GetVariables())
     End Sub
 End Class
