@@ -528,6 +528,12 @@
     <Compile Include="sdgCalculationsSummmary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgWindrose.Designer.vb">
+      <DependentUpon>sdgWindrose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgWindrose.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -3885,6 +3891,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgWindrose.resx">
+      <DependentUpon>sdgWindrose.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.fr-FR.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
