@@ -33,7 +33,7 @@ Partial Class dlgDefineCorruptionOutputs
         Me.ucrBase.Location = New System.Drawing.Point(10, 216)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverCorruptionOutput
         '
@@ -43,7 +43,7 @@ Partial Class dlgDefineCorruptionOutputs
         Me.ucrReceiverCorruptionOutput.Name = "ucrReceiverCorruptionOutput"
         Me.ucrReceiverCorruptionOutput.Selector = Nothing
         Me.ucrReceiverCorruptionOutput.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverCorruptionOutput.TabIndex = 8
+        Me.ucrReceiverCorruptionOutput.TabIndex = 2
         '
         'ucrSelectorCorruptionOutput
         '
@@ -53,7 +53,7 @@ Partial Class dlgDefineCorruptionOutputs
         Me.ucrSelectorCorruptionOutput.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCorruptionOutput.Name = "ucrSelectorCorruptionOutput"
         Me.ucrSelectorCorruptionOutput.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorCorruptionOutput.TabIndex = 7
+        Me.ucrSelectorCorruptionOutput.TabIndex = 0
         '
         'lblCorruptionOutputs
         '
@@ -61,7 +61,7 @@ Partial Class dlgDefineCorruptionOutputs
         Me.lblCorruptionOutputs.Location = New System.Drawing.Point(268, 45)
         Me.lblCorruptionOutputs.Name = "lblCorruptionOutputs"
         Me.lblCorruptionOutputs.Size = New System.Drawing.Size(98, 13)
-        Me.lblCorruptionOutputs.TabIndex = 10
+        Me.lblCorruptionOutputs.TabIndex = 1
         Me.lblCorruptionOutputs.Text = "Corruption Outputs:"
         '
         'dlgDefineCorruptionOutputs

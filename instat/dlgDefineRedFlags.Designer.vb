@@ -33,7 +33,7 @@ Partial Class dlgDefineRedFlags
         Me.ucrBase.Location = New System.Drawing.Point(10, 206)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 2
+        Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverRedFlag
         '
@@ -43,7 +43,7 @@ Partial Class dlgDefineRedFlags
         Me.ucrReceiverRedFlag.Name = "ucrReceiverRedFlag"
         Me.ucrReceiverRedFlag.Selector = Nothing
         Me.ucrReceiverRedFlag.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverRedFlag.TabIndex = 1
+        Me.ucrReceiverRedFlag.TabIndex = 2
         '
         'ucrSelectorDefineRedFlag
         '
@@ -61,7 +61,7 @@ Partial Class dlgDefineRedFlags
         Me.Label1.Location = New System.Drawing.Point(268, 44)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
-        Me.Label1.TabIndex = 3
+        Me.Label1.TabIndex = 1
         Me.Label1.Text = "Red Flags:"
         '
         'dlgDefineRedFlags
