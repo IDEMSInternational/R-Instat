@@ -52,8 +52,8 @@ Public Class dlgFitCorruptionModel
         ucrSelectorFitModel.SetParameterIsString()
 
         'Receivers
-        'ucrReceiverOutput.SetParameter(New RParameter("", 1))
-        'ucrReceiverOutput.SetParameterIsString()
+        ucrReceiverOutput.SetParameter(New RParameter("y", 1))
+        ucrReceiverOutput.SetParameterIsString()
         ucrReceiverOutput.Selector = ucrSelectorFitModel
         ucrReceiverOutput.SetIncludedDataTypes({"integer", "numeric", "logical"})
 
