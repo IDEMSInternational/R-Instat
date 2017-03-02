@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Public Class dlgJitter
     Public bReset As Boolean = True
@@ -98,7 +98,7 @@ Public Class dlgJitter
         ucrInputNewColName.SetIsComboBox()
         ucrInputNewColName.SetSaveTypeAsColumn()
         ucrInputNewColName.SetDataFrameSelector(ucrSelectorForJitter.ucrAvailableDataFrames)
-        ucrInputNewColName.SetLabelText("New Column Name:")
+        ucrInputNewColName.SetLabelText("Column Name:")
         ucrInputNewColName.SetPrefix("Jitter_values")
 
         clsDefaultFunction.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
