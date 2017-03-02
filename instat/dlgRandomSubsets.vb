@@ -40,11 +40,11 @@ Public Class dlgRandomSubsets
         ucrReceiverSelected.SetParameter(New RParameter("x", 2))
         ucrReceiverSelected.SetParameterIsRFunction()
 
+        ucrChkSetSeed.AddFunctionNamesCondition(False, "set.seed")
         'Set seed
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.SetMinMax(1, Integer.MaxValue)
         ucrChkSetSeed.SetText("Seed")
-        ucrChkSetSeed.bChangeParameterValue = False
 
         ucrSelectorRandomSubsets.ucrAvailableDataFrames.SetParameter(New RParameter("size", 2))
         ucrSelectorRandomSubsets.SetParameterIsrfunction()
@@ -75,7 +75,6 @@ Public Class dlgRandomSubsets
         'reset
         ucrSelectorRandomSubsets.Reset()
         ucrNewDataframe.Reset()
-        ucrChkSetSeed.Checked = False
         NewDefaultName()
         ReplaceParameters()
 
@@ -128,10 +127,10 @@ Public Class dlgRandomSubsets
         ucrReceiverSelected.SetRCode(ClsSample, bReset)
         ucrChkWithReplacement.SetRCode(ClsSample, bReset)
         ucrNudNumberOfColumns.SetRCode(clsReplicate, bReset)
+        ucrNewDataframe.SetRCode(clsDataFrame, bReset)
+        ucrNudSampleSize.SetRCode(ClsSample, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
-        ucrNewDataframe.SetRCode(clsDataFrame, bReset)
-        ucrNudSampleSize.SetRCode(ClsSample,bReset)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
