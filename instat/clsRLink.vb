@@ -486,7 +486,7 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing)
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "")
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -517,6 +517,9 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_link_names")
                 Case "key"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_key_names")
+                Case "database_variables"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_database_variable_names")
+                    clsGetItems.AddParameter("query", Chr(34) & strDatabaseQuery & Chr(34))
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             lstView.Clear()
@@ -740,5 +743,30 @@ Public Class RLink
         clsMakeNames.AddParameter("names", Chr(34) & strText & Chr(34))
         strOut = RunInternalScriptGetValue(clsMakeNames.ToScript()).AsCharacter(0)
         Return strOut
+    End Function
+
+    'Corruption analysis functions
+    Public Function GetCorruptionDataFrameNames() As List(Of String)
+        Dim clsGetDataNames As New RFunction
+        Dim lstNames As New List(Of String)
+        Dim expDataNames As SymbolicExpression
+
+        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_data_names")
+        expDataNames = RunInternalScriptGetValue(clsGetDataNames.ToScript())
+        If Not expDataNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstNames = expDataNames.AsCharacter.ToList()
+        End If
+        Return lstNames
+    End Function
+
+    Public Function GetCorruptionColumnOfType(strDataName As String, strType As String) As String
+        Dim clsGetColumnName As New RFunction
+        Dim strColumn As String
+
+        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_corruption_column_name")
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumnName.AddParameter("type", Chr(34) & strType & Chr(34))
+        strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
+        Return strColumn
     End Function
 End Class
