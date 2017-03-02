@@ -111,6 +111,9 @@ Public Class dlgFitCorruptionModel
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        '        ucrReceiverOutput.SetRCode(clsModel, bReset)
+        '        ucrReceiverIndicators.SetRCode(clsModel1, bReset)
+        '        ucrReceiverOutput.SetRCode(clsModel1, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
