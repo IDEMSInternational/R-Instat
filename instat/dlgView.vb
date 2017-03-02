@@ -42,11 +42,10 @@ Public Class dlgView
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        Dim clsMainFunction = New RFunction
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
-        clsDefaultFunction.SetRCommand("View")
-        clsMainFunction = clsDefaultFunction.Clone()
+        clsMainFunction.SetRCommand("View")
         ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
     End Sub
 
