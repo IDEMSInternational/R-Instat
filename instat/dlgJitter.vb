@@ -71,9 +71,9 @@ Public Class dlgJitter
         ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "min")
 
         ' link
-        ucrPnlDistance.AddToLinkedControls(ucrInputMaximumDistanceFromZero, {rdoMaximumDistanceFromZero}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDistance.AddToLinkedControls(ucrInputMinimum, {rdoMinimumAndMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDistance.AddToLinkedControls(ucrInputMaximum, {rdoMinimumAndMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDistance.AddToLinkedControls(ucrInputMaximumDistanceFromZero, {rdoMaximumDistanceFromZero}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
+        ucrPnlDistance.AddToLinkedControls(ucrInputMinimum, {rdoMinimumAndMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=0)
+        ucrPnlDistance.AddToLinkedControls(ucrInputMaximum, {rdoMinimumAndMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
 
         'ucrInputs
         '        ucrInputMaximumDistanceFromZero.SetParameter(New RParameter("max", ))
@@ -106,11 +106,13 @@ Public Class dlgJitter
     End Sub
 
     Private Sub SetDefaults()
+        clsDefaultFunction = New RFunction
+        clsOperatorParameter = New ROperator
+
         ucrSelectorForJitter.Reset()
-        rdoMinimumAndMaximum.Checked = True
 
         clsDefaultFunction.SetRCommand("runif")
-        clsDefaultFunction.AddParameter("min", "0")
+        clsDefaultFunction.AddParameter("min", "-1")
         clsDefaultFunction.AddParameter("max", "1")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
