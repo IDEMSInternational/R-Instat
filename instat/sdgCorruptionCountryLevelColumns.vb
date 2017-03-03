@@ -1,25 +1,67 @@
-﻿Public Class sdgCorruptionCountryLevelColumns
-    '           ucrReceiverProcuringAuthorityID.SetParameter(New RParameter("procuring_authority_id"))
-    '       ucrReceiverCountryISO.SetParameter(New RParameter("country_iso"))
-    '       ucrReceiverForeignWinner.SetParameter(New RParameter("foreign_winner"))
-    '       ucrReceiverPPPConversionRate.SetParameter(New RParameter("ppp_conversion_rate"))
-    '
-    ''
-    '   ucrReceiverWinnerID.SetParameter(New RParameter("winner_id"))
+﻿' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 
-    '        dctRecognisedCorruptionTypes.Add("procuring_authority_id", {"anb_id"})
+Public Class sdgCorruptionCountryLevelColumns
+    Public bControlsInitialised As Boolean = False
+    Public clsCountryLevel As New RFunction
+    Dim lstReceivers As New List(Of ucrReceiverSingle)
+    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
-    '       dctRecognisedCorruptionTypes.Add()
-    '        dctRecognisedCorruptionTypes.Add()
-    '       dctRecognisedCorruptionTypes.Add()
-    '      dctRecognisedCorruptionTypes.Add("winner_id", {"w_id"})
-    '      dctRecognisedCorruptionTypes.Add()
-    ''     dctRecognisedCorruptionTypes.Add()
-    '   dctRecognisedCorruptionTypes.Add("procedure_type", {"ctf_methodtype"})
-    '  dctRecognisedCorruptionTypes.Add()
-    '' dctRecognisedCorruptionTypes.Add("country_iso", {"iso"})
-    'dctRecognisedCorruptionTypes.Add("foreign_winner", {"f_winner"})
-    'dctRecognisedCorruptionTypes.Add("ppp_conversion_rate", {"ppp"})
+    Private Sub sdgCorruptionCountryLevelColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
+        autoTranslate(Me)
+    End Sub
 
+    Public Sub InitialiseControls()
+
+        Dim kvpCountry As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("country", {"country"}.ToList())
+        Dim kvpCountryISO2 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("iso2", {"iso2"}.ToList())
+        Dim kvpCountryISO3 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("iso3", {"iso3"}.ToList())
+        Dim kvpWBPPP As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wb_ppp", {"ppp"}.ToList())
+        Dim kvpSS2009 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("ss_2009", {"ss2009"}.ToList())
+        Dim kvpSS2011 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("ss_2011", {"ss2011"}.ToList())
+        Dim kvpSS2013 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("ss_2013", {"ss2013"}.ToList())
+        Dim kvpSS2015 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("ss_2015", {"ss2015"}.ToList())
+        Dim kvpSmallState As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("small_state", {"smallstate"}.ToList())
+
+        lstRecognisedTypes.AddRange({kvpCountry, kvpCountryISO2, kvpCountryISO3, kvpWBPPP, kvpSS2009, kvpSS2011, kvpSS2013, kvpSS2015, kvpSmallState})
+        lstReceivers.AddRange({ucrReceiverCountry, ucrReceiverISO2, ucrReceiverISO3, ucrReceiverWBPPP, ucrReceiverSS2009, ucrReceiverSS2011, ucrReceiverSS2013, ucrReceiverSS2015, ucrReceiverSmallState})
+
+        ucrCountryLevelSelector.SetParameter(New RParameter("country_data_name", 4))
+        ucrCountryLevelSelector.SetParameterIsString()
+
+        ucrReceiverCountry.Tag = "country"
+        ucrReceiverISO2.Tag = "iso2"
+        ucrReceiverISO3.Tag = "iso3"
+        ucrReceiverWBPPP.Tag = "wb_ppp"
+        ucrReceiverSS2009.Tag = "ss_2009"
+        ucrReceiverSS2011.Tag = "ss_2011"
+        ucrReceiverSS2013.Tag = "ss_2013"
+        ucrReceiverSS2015.Tag = "ss_2015"
+        ucrReceiverSmallState.Tag = "small_state"
+
+        bControlsInitialised = True
+    End Sub
+
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsCountryLevel = clsNewRFunction
+        SetRCode(Me, clsCountryLevel, bReset)
+    End Sub
 End Class

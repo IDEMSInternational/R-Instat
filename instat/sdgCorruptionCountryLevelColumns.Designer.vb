@@ -22,128 +22,241 @@ Partial Class sdgCorruptionCountryLevelColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblPPPConversionRate = New System.Windows.Forms.Label()
-        Me.ucrReceiverPPPConversionRate = New instat.ucrReceiverSingle()
-        Me.ucrReceiverForeignWinner = New instat.ucrReceiverSingle()
-        Me.lblForeignWinner = New System.Windows.Forms.Label()
-        Me.lblProcuringAuthorityID = New System.Windows.Forms.Label()
-        Me.ucrReceiverCountryISO = New instat.ucrReceiverSingle()
-        Me.lblCountryISO = New System.Windows.Forms.Label()
-        Me.ucrReceiverProcuringAuthorityID = New instat.ucrReceiverSingle()
-        Me.lblWinnerID = New System.Windows.Forms.Label()
-        Me.ucrReceiverWinnerID = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSmallState = New instat.ucrReceiverSingle()
+        Me.lblSmallState = New System.Windows.Forms.Label()
+        Me.lblCountryISO2 = New System.Windows.Forms.Label()
+        Me.ucrReceiverISO2 = New instat.ucrReceiverSingle()
+        Me.ucrCountryLevelSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblCountry = New System.Windows.Forms.Label()
+        Me.ucrReceiverCountry = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSS2015 = New instat.ucrReceiverSingle()
+        Me.lblSS2015 = New System.Windows.Forms.Label()
+        Me.ucrReceiverISO3 = New instat.ucrReceiverSingle()
+        Me.lblCountryISO3 = New System.Windows.Forms.Label()
+        Me.ucrReceiverSS2011 = New instat.ucrReceiverSingle()
+        Me.lblSS2013 = New System.Windows.Forms.Label()
+        Me.ucrReceiverWBPPP = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSS2013 = New instat.ucrReceiverSingle()
+        Me.lblWBPPP = New System.Windows.Forms.Label()
+        Me.lblSS2011 = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
+        Me.lblSS2009 = New System.Windows.Forms.Label()
+        Me.ucrReceiverSS2009 = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
-        'lblPPPConversionRate
+        'ucrReceiverSmallState
         '
-        Me.lblPPPConversionRate.AutoSize = True
-        Me.lblPPPConversionRate.Location = New System.Drawing.Point(81, 199)
-        Me.lblPPPConversionRate.Name = "lblPPPConversionRate"
-        Me.lblPPPConversionRate.Size = New System.Drawing.Size(113, 13)
-        Me.lblPPPConversionRate.TabIndex = 34
-        Me.lblPPPConversionRate.Text = "PPP Conversion Rate:"
+        Me.ucrReceiverSmallState.frmParent = Me
+        Me.ucrReceiverSmallState.Location = New System.Drawing.Point(251, 216)
+        Me.ucrReceiverSmallState.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSmallState.Name = "ucrReceiverSmallState"
+        Me.ucrReceiverSmallState.Selector = Nothing
+        Me.ucrReceiverSmallState.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSmallState.TabIndex = 31
         '
-        'ucrReceiverPPPConversionRate
+        'lblSmallState
         '
-        Me.ucrReceiverPPPConversionRate.frmParent = Me
-        Me.ucrReceiverPPPConversionRate.Location = New System.Drawing.Point(81, 217)
-        Me.ucrReceiverPPPConversionRate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverPPPConversionRate.Name = "ucrReceiverPPPConversionRate"
-        Me.ucrReceiverPPPConversionRate.Selector = Nothing
-        Me.ucrReceiverPPPConversionRate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPPPConversionRate.TabIndex = 35
+        Me.lblSmallState.AutoSize = True
+        Me.lblSmallState.Location = New System.Drawing.Point(251, 201)
+        Me.lblSmallState.Name = "lblSmallState"
+        Me.lblSmallState.Size = New System.Drawing.Size(63, 13)
+        Me.lblSmallState.TabIndex = 30
+        Me.lblSmallState.Text = "Small State:"
         '
-        'ucrReceiverForeignWinner
+        'lblCountryISO2
         '
-        Me.ucrReceiverForeignWinner.frmParent = Me
-        Me.ucrReceiverForeignWinner.Location = New System.Drawing.Point(81, 174)
-        Me.ucrReceiverForeignWinner.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverForeignWinner.Name = "ucrReceiverForeignWinner"
-        Me.ucrReceiverForeignWinner.Selector = Nothing
-        Me.ucrReceiverForeignWinner.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverForeignWinner.TabIndex = 33
+        Me.lblCountryISO2.AutoSize = True
+        Me.lblCountryISO2.Location = New System.Drawing.Point(251, 70)
+        Me.lblCountryISO2.Name = "lblCountryISO2"
+        Me.lblCountryISO2.Size = New System.Drawing.Size(73, 13)
+        Me.lblCountryISO2.TabIndex = 45
+        Me.lblCountryISO2.Text = "Country ISO2:"
         '
-        'lblForeignWinner
+        'ucrReceiverISO2
         '
-        Me.lblForeignWinner.AutoSize = True
-        Me.lblForeignWinner.Location = New System.Drawing.Point(81, 156)
-        Me.lblForeignWinner.Name = "lblForeignWinner"
-        Me.lblForeignWinner.Size = New System.Drawing.Size(82, 13)
-        Me.lblForeignWinner.TabIndex = 32
-        Me.lblForeignWinner.Text = "Foreign Winner:"
+        Me.ucrReceiverISO2.frmParent = Me
+        Me.ucrReceiverISO2.Location = New System.Drawing.Point(251, 85)
+        Me.ucrReceiverISO2.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverISO2.Name = "ucrReceiverISO2"
+        Me.ucrReceiverISO2.Selector = Nothing
+        Me.ucrReceiverISO2.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverISO2.TabIndex = 46
         '
-        'lblProcuringAuthorityID
+        'ucrCountryLevelSelector
         '
-        Me.lblProcuringAuthorityID.AutoSize = True
-        Me.lblProcuringAuthorityID.Location = New System.Drawing.Point(83, 24)
-        Me.lblProcuringAuthorityID.Name = "lblProcuringAuthorityID"
-        Me.lblProcuringAuthorityID.Size = New System.Drawing.Size(113, 13)
-        Me.lblProcuringAuthorityID.TabIndex = 28
-        Me.lblProcuringAuthorityID.Text = "Procuring Authority ID:"
+        Me.ucrCountryLevelSelector.bShowHiddenColumns = False
+        Me.ucrCountryLevelSelector.bUseCurrentFilter = True
+        Me.ucrCountryLevelSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrCountryLevelSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrCountryLevelSelector.Name = "ucrCountryLevelSelector"
+        Me.ucrCountryLevelSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrCountryLevelSelector.TabIndex = 32
         '
-        'ucrReceiverCountryISO
+        'lblCountry
         '
-        Me.ucrReceiverCountryISO.frmParent = Me
-        Me.ucrReceiverCountryISO.Location = New System.Drawing.Point(81, 131)
-        Me.ucrReceiverCountryISO.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverCountryISO.Name = "ucrReceiverCountryISO"
-        Me.ucrReceiverCountryISO.Selector = Nothing
-        Me.ucrReceiverCountryISO.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCountryISO.TabIndex = 31
+        Me.lblCountry.AutoSize = True
+        Me.lblCountry.Location = New System.Drawing.Point(251, 27)
+        Me.lblCountry.Name = "lblCountry"
+        Me.lblCountry.Size = New System.Drawing.Size(46, 13)
+        Me.lblCountry.TabIndex = 33
+        Me.lblCountry.Text = "Country:"
         '
-        'lblCountryISO
+        'ucrReceiverCountry
         '
-        Me.lblCountryISO.AutoSize = True
-        Me.lblCountryISO.Location = New System.Drawing.Point(81, 113)
-        Me.lblCountryISO.Name = "lblCountryISO"
-        Me.lblCountryISO.Size = New System.Drawing.Size(67, 13)
-        Me.lblCountryISO.TabIndex = 30
-        Me.lblCountryISO.Text = "Country ISO:"
+        Me.ucrReceiverCountry.frmParent = Me
+        Me.ucrReceiverCountry.Location = New System.Drawing.Point(251, 42)
+        Me.ucrReceiverCountry.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
+        Me.ucrReceiverCountry.Selector = Nothing
+        Me.ucrReceiverCountry.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverCountry.TabIndex = 34
         '
-        'ucrReceiverProcuringAuthorityID
+        'ucrReceiverSS2015
         '
-        Me.ucrReceiverProcuringAuthorityID.frmParent = Me
-        Me.ucrReceiverProcuringAuthorityID.Location = New System.Drawing.Point(83, 42)
-        Me.ucrReceiverProcuringAuthorityID.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverProcuringAuthorityID.Name = "ucrReceiverProcuringAuthorityID"
-        Me.ucrReceiverProcuringAuthorityID.Selector = Nothing
-        Me.ucrReceiverProcuringAuthorityID.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcuringAuthorityID.TabIndex = 29
+        Me.ucrReceiverSS2015.frmParent = Me
+        Me.ucrReceiverSS2015.Location = New System.Drawing.Point(395, 171)
+        Me.ucrReceiverSS2015.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSS2015.Name = "ucrReceiverSS2015"
+        Me.ucrReceiverSS2015.Selector = Nothing
+        Me.ucrReceiverSS2015.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSS2015.TabIndex = 44
         '
-        'lblWinnerID
+        'lblSS2015
         '
-        Me.lblWinnerID.AutoSize = True
-        Me.lblWinnerID.Location = New System.Drawing.Point(81, 78)
-        Me.lblWinnerID.Name = "lblWinnerID"
-        Me.lblWinnerID.Size = New System.Drawing.Size(83, 13)
-        Me.lblWinnerID.TabIndex = 36
-        Me.lblWinnerID.Text = "Winner Country:"
+        Me.lblSS2015.AutoSize = True
+        Me.lblSS2015.Location = New System.Drawing.Point(395, 156)
+        Me.lblSS2015.Name = "lblSS2015"
+        Me.lblSS2015.Size = New System.Drawing.Size(51, 13)
+        Me.lblSS2015.TabIndex = 43
+        Me.lblSS2015.Text = "SS 2015:"
         '
-        'ucrReceiverWinnerID
+        'ucrReceiverISO3
         '
-        Me.ucrReceiverWinnerID.frmParent = Me
-        Me.ucrReceiverWinnerID.Location = New System.Drawing.Point(81, 93)
-        Me.ucrReceiverWinnerID.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWinnerID.Name = "ucrReceiverWinnerID"
-        Me.ucrReceiverWinnerID.Selector = Nothing
-        Me.ucrReceiverWinnerID.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWinnerID.TabIndex = 37
+        Me.ucrReceiverISO3.frmParent = Me
+        Me.ucrReceiverISO3.Location = New System.Drawing.Point(251, 128)
+        Me.ucrReceiverISO3.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverISO3.Name = "ucrReceiverISO3"
+        Me.ucrReceiverISO3.Selector = Nothing
+        Me.ucrReceiverISO3.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverISO3.TabIndex = 36
+        '
+        'lblCountryISO3
+        '
+        Me.lblCountryISO3.AutoSize = True
+        Me.lblCountryISO3.Location = New System.Drawing.Point(251, 113)
+        Me.lblCountryISO3.Name = "lblCountryISO3"
+        Me.lblCountryISO3.Size = New System.Drawing.Size(73, 13)
+        Me.lblCountryISO3.TabIndex = 35
+        Me.lblCountryISO3.Text = "Country ISO3:"
+        '
+        'ucrReceiverSS2011
+        '
+        Me.ucrReceiverSS2011.frmParent = Me
+        Me.ucrReceiverSS2011.Location = New System.Drawing.Point(395, 85)
+        Me.ucrReceiverSS2011.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSS2011.Name = "ucrReceiverSS2011"
+        Me.ucrReceiverSS2011.Selector = Nothing
+        Me.ucrReceiverSS2011.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSS2011.TabIndex = 40
+        '
+        'lblSS2013
+        '
+        Me.lblSS2013.AutoSize = True
+        Me.lblSS2013.Location = New System.Drawing.Point(395, 113)
+        Me.lblSS2013.Name = "lblSS2013"
+        Me.lblSS2013.Size = New System.Drawing.Size(48, 13)
+        Me.lblSS2013.TabIndex = 41
+        Me.lblSS2013.Text = "SS 2013"
+        '
+        'ucrReceiverWBPPP
+        '
+        Me.ucrReceiverWBPPP.frmParent = Me
+        Me.ucrReceiverWBPPP.Location = New System.Drawing.Point(251, 171)
+        Me.ucrReceiverWBPPP.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWBPPP.Name = "ucrReceiverWBPPP"
+        Me.ucrReceiverWBPPP.Selector = Nothing
+        Me.ucrReceiverWBPPP.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWBPPP.TabIndex = 38
+        '
+        'ucrReceiverSS2013
+        '
+        Me.ucrReceiverSS2013.frmParent = Me
+        Me.ucrReceiverSS2013.Location = New System.Drawing.Point(395, 128)
+        Me.ucrReceiverSS2013.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSS2013.Name = "ucrReceiverSS2013"
+        Me.ucrReceiverSS2013.Selector = Nothing
+        Me.ucrReceiverSS2013.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSS2013.TabIndex = 42
+        '
+        'lblWBPPP
+        '
+        Me.lblWBPPP.AutoSize = True
+        Me.lblWBPPP.Location = New System.Drawing.Point(251, 156)
+        Me.lblWBPPP.Name = "lblWBPPP"
+        Me.lblWBPPP.Size = New System.Drawing.Size(52, 13)
+        Me.lblWBPPP.TabIndex = 37
+        Me.lblWBPPP.Text = "WB PPP:"
+        '
+        'lblSS2011
+        '
+        Me.lblSS2011.AutoSize = True
+        Me.lblSS2011.Location = New System.Drawing.Point(395, 70)
+        Me.lblSS2011.Name = "lblSS2011"
+        Me.lblSS2011.Size = New System.Drawing.Size(51, 13)
+        Me.lblSS2011.TabIndex = 39
+        Me.lblSS2011.Text = "SS 2011:"
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(186, 252)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.TabIndex = 47
+        '
+        'lblSS2009
+        '
+        Me.lblSS2009.AutoSize = True
+        Me.lblSS2009.Location = New System.Drawing.Point(395, 27)
+        Me.lblSS2009.Name = "lblSS2009"
+        Me.lblSS2009.Size = New System.Drawing.Size(51, 13)
+        Me.lblSS2009.TabIndex = 48
+        Me.lblSS2009.Text = "SS 2009:"
+        '
+        'ucrReceiverSS2009
+        '
+        Me.ucrReceiverSS2009.frmParent = Me
+        Me.ucrReceiverSS2009.Location = New System.Drawing.Point(395, 42)
+        Me.ucrReceiverSS2009.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSS2009.Name = "ucrReceiverSS2009"
+        Me.ucrReceiverSS2009.Selector = Nothing
+        Me.ucrReceiverSS2009.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSS2009.TabIndex = 49
         '
         'sdgCorruptionCountryLevelColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Controls.Add(Me.lblWinnerID)
-        Me.Controls.Add(Me.ucrReceiverWinnerID)
-        Me.Controls.Add(Me.lblPPPConversionRate)
-        Me.Controls.Add(Me.ucrReceiverPPPConversionRate)
-        Me.Controls.Add(Me.ucrReceiverForeignWinner)
-        Me.Controls.Add(Me.lblForeignWinner)
-        Me.Controls.Add(Me.lblProcuringAuthorityID)
-        Me.Controls.Add(Me.ucrReceiverCountryISO)
-        Me.Controls.Add(Me.lblCountryISO)
-        Me.Controls.Add(Me.ucrReceiverProcuringAuthorityID)
+        Me.ClientSize = New System.Drawing.Size(523, 288)
+        Me.Controls.Add(Me.lblSS2009)
+        Me.Controls.Add(Me.ucrReceiverSS2009)
+        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.lblCountryISO2)
+        Me.Controls.Add(Me.ucrReceiverISO2)
+        Me.Controls.Add(Me.ucrCountryLevelSelector)
+        Me.Controls.Add(Me.lblCountry)
+        Me.Controls.Add(Me.lblSS2011)
+        Me.Controls.Add(Me.lblWBPPP)
+        Me.Controls.Add(Me.ucrReceiverSS2013)
+        Me.Controls.Add(Me.ucrReceiverWBPPP)
+        Me.Controls.Add(Me.lblSS2013)
+        Me.Controls.Add(Me.ucrReceiverSS2011)
+        Me.Controls.Add(Me.ucrReceiverCountry)
+        Me.Controls.Add(Me.lblCountryISO3)
+        Me.Controls.Add(Me.ucrReceiverISO3)
+        Me.Controls.Add(Me.lblSS2015)
+        Me.Controls.Add(Me.ucrReceiverSS2015)
+        Me.Controls.Add(Me.ucrReceiverSmallState)
+        Me.Controls.Add(Me.lblSmallState)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -154,15 +267,24 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents lblPPPConversionRate As Label
-    Friend WithEvents ucrReceiverPPPConversionRate As ucrReceiverSingle
-    Friend WithEvents ucrReceiverForeignWinner As ucrReceiverSingle
-    Friend WithEvents lblForeignWinner As Label
-    Friend WithEvents lblProcuringAuthorityID As Label
-    Friend WithEvents ucrReceiverCountryISO As ucrReceiverSingle
-    Friend WithEvents lblCountryISO As Label
-    Friend WithEvents ucrReceiverProcuringAuthorityID As ucrReceiverSingle
-    Friend WithEvents lblWinnerID As Label
-    Friend WithEvents ucrReceiverWinnerID As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSmallState As ucrReceiverSingle
+    Friend WithEvents lblSmallState As Label
+    Friend WithEvents lblCountryISO2 As Label
+    Friend WithEvents ucrReceiverISO2 As ucrReceiverSingle
+    Friend WithEvents ucrCountryLevelSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblCountry As Label
+    Friend WithEvents lblSS2011 As Label
+    Friend WithEvents lblWBPPP As Label
+    Friend WithEvents ucrReceiverSS2013 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWBPPP As ucrReceiverSingle
+    Friend WithEvents lblSS2013 As Label
+    Friend WithEvents ucrReceiverSS2011 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverCountry As ucrReceiverSingle
+    Friend WithEvents lblCountryISO3 As Label
+    Friend WithEvents ucrReceiverISO3 As ucrReceiverSingle
+    Friend WithEvents lblSS2015 As Label
+    Friend WithEvents ucrReceiverSS2015 As ucrReceiverSingle
+    Friend WithEvents ucrBase As ucrButtonsSubdialogue
+    Friend WithEvents lblSS2009 As Label
+    Friend WithEvents ucrReceiverSS2009 As ucrReceiverSingle
 End Class
