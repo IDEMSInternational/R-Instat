@@ -22,6 +22,7 @@ Public Class dlgDefineCorruption
     Dim clsTypesFunction As New RFunction
     Dim lstReceivers As New List(Of ucrReceiverSingle)
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgDefineCorruption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -88,8 +89,9 @@ Public Class dlgDefineCorruption
         ucrChkAutoGenerate.SetText("Auto-Generate")
         ucrChkAutoGenerate.SetParameter(New RParameter("auto_generate", 1))
         ucrChkAutoGenerate.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAutoGenerate.SetRDefault("TRUE")
 
+        sdgCorruptionCountryLevelColumns.ucrCountryLevelSelector.SetDataframe(ucrDefineCorruptionSelector.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
+        'sdgCorruptionCalculatedColumns.ucrCalculatedColumnsSelector.SetDataframe(ucrDefineCorruptionSelector.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         SetRSelector()
     End Sub
 
@@ -102,8 +104,9 @@ Public Class dlgDefineCorruption
         clsDefaultFunction.AddParameter("auto_generate", "TRUE")
         clsTypesFunction.SetRCommand("c")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+        ucrBase.clsRsyntax.AddParameter("country_types", clsRFunctionParameter:=clsTypesFunction)
 
+        bResetSubdialog = True
         AutoFillReceivers()
     End Sub
 
@@ -192,5 +195,11 @@ Public Class dlgDefineCorruption
 
     Private Sub ucrDefineCorruptionSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDefineCorruptionSelector.ControlValueChanged
         AutoFillReceivers()
+    End Sub
+
+    Private Sub cmdCountryLevel_Click(sender As Object, e As EventArgs) Handles cmdCountryLevel.Click
+        sdgCorruptionCountryLevelColumns.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        bResetSubdialog = False
+        sdgOneVarGraph.ShowDialog()
     End Sub
 End Class

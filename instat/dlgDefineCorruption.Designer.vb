@@ -55,6 +55,8 @@ Partial Class dlgDefineCorruption
         Me.lblRegion = New System.Windows.Forms.Label()
         Me.ucrReceiverRegion = New instat.ucrReceiverSingle()
         Me.ucrChkAutoGenerate = New instat.ucrCheck()
+        Me.cmdCountryLevel = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrDefineCorruptionSelector
@@ -367,11 +369,31 @@ Partial Class dlgDefineCorruption
         Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkAutoGenerate.TabIndex = 32
         '
+        'cmdCountryLevel
+        '
+        Me.cmdCountryLevel.Location = New System.Drawing.Point(10, 203)
+        Me.cmdCountryLevel.Name = "cmdCountryLevel"
+        Me.cmdCountryLevel.Size = New System.Drawing.Size(91, 23)
+        Me.cmdCountryLevel.TabIndex = 33
+        Me.cmdCountryLevel.Text = "Country Level"
+        Me.cmdCountryLevel.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(10, 237)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 34
+        Me.Button2.Text = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'dlgDefineCorruption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(553, 437)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.cmdCountryLevel)
         Me.Controls.Add(Me.ucrChkAutoGenerate)
         Me.Controls.Add(Me.lblRegion)
         Me.Controls.Add(Me.ucrReceiverRegion)
@@ -449,4 +471,6 @@ Partial Class dlgDefineCorruption
     Friend WithEvents lblFiscalYear As Label
     Friend WithEvents ucrReceiverFiscalYear As ucrReceiverSingle
     Friend WithEvents ucrChkAutoGenerate As ucrCheck
+    Friend WithEvents Button2 As Button
+    Friend WithEvents cmdCountryLevel As Button
 End Class
