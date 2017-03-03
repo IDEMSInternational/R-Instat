@@ -112,6 +112,8 @@ Public Class dlgDefineCorruption
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrDefineCorruptionSelector.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        sdgCorruptionCountryLevelColumns.ucrCountryLevelSelector.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        sdgCorruptionCalculatedColumns.ucrCalculatedColumnsSelector.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkAutoGenerate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         SetRCodesforReceivers(bReset)
     End Sub

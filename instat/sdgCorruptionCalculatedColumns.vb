@@ -117,6 +117,16 @@ Public Class sdgCorruptionCalculatedColumns
         SetRCode(Me, clsCalculatedColumns, bReset)
     End Sub
 
+    Private Sub SetRSelector()
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
+            ucrTempReceiver.Selector = ucrCalculatedColumnsSelector
+            ucrTempReceiver.SetParameterIsString()
+            ucrTempReceiver.bExcludeFromSelector = True
+        Next
+    End Sub
+
     Private Sub AutoFillReceivers()
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
