@@ -47,7 +47,6 @@ Public Class dlgRandomSubsets
         ucrChkSetSeed.SetText("Seed")
 
         ucrNudSampleSize.SetParameter(New RParameter("size", 2))
-        ucrNudSampleSize.SetParameterValue(ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
 
         'Replace checkbox
         ucrChkWithReplacement.SetParameter(New RParameter("replace", 1))
@@ -166,13 +165,13 @@ Public Class dlgRandomSubsets
     Private Sub ucrSelectorRandomSubsets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSubsets.ControlValueChanged
         NewDefaultName()
         ReplaceParameters()
+        If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrNudSampleSize.Value = frmMain.clsRLink.GetDataFrameLength(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
     End Sub
 
     Private Sub ucrChkWithReplacement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithReplacement.ControlValueChanged
         ReplaceParameters()
     End Sub
 
-    Private Sub ucrSelectorRandomSubsets_DataFrameChanged() Handles ucrSelectorRandomSubsets.DataFrameChanged
-        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
-    End Sub
 End Class
