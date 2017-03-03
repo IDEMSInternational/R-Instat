@@ -91,7 +91,7 @@ Public Class dlgDefineCorruption
         ucrChkAutoGenerate.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         sdgCorruptionCountryLevelColumns.ucrCountryLevelSelector.SetDataframe(ucrDefineCorruptionSelector.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
-        'sdgCorruptionCalculatedColumns.ucrCalculatedColumnsSelector.SetDataframe(ucrDefineCorruptionSelector.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
+        sdgCorruptionCalculatedColumns.ucrCalculatedColumnsSelector.SetDataframe(ucrDefineCorruptionSelector.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         SetRSelector()
     End Sub
 
@@ -200,6 +200,12 @@ Public Class dlgDefineCorruption
     Private Sub cmdCountryLevel_Click(sender As Object, e As EventArgs) Handles cmdCountryLevel.Click
         sdgCorruptionCountryLevelColumns.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
         bResetSubdialog = False
-        sdgOneVarGraph.ShowDialog()
+        sdgCorruptionCountryLevelColumns.ShowDialog()
+    End Sub
+
+    Private Sub cmdCalculatedColumns_Click(sender As Object, e As EventArgs) Handles cmdCalculatedColumns.Click
+        sdgCorruptionCalculatedColumns.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        bResetSubdialog = False
+        sdgCorruptionCalculatedColumns.ShowDialog()
     End Sub
 End Class
