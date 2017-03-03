@@ -85,33 +85,17 @@ Public Class dlgDefineCorruption
         ucrReceiverFiscalYear.Tag = "fiscal_year"
 
         SetRSelector()
-
-
-        ''    For Each tmpControl As Control In panClimateType.Controls
-        '     If TypeOf tmpControl Is ucrReceiver Then
-        '      tmpReceiver = DirectCast(tmpControl, ucrReceiver)
-        '       tmpReceiver.Selector = ucrDefineCorruptionSelector
-        '        tmpReceiver.SetParameterIsString()'
-        '      tmpReceiver.Tag = tmpReceiver.GetParameter(').strArgumentName
-        '      tmpReceiver.bExcludeFromSelector = 'True
-        '       lstReceivers.Add(tmpReceiver)'
-        '       End If
-        '       Next
     End Sub
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
-        '        Dim clsDefaultTypesFunction As New RFunction
 
         ucrDefineCorruptionSelector.Reset()
         ucrReceiverCountry.SetMeAsReceiver()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_corruption")
         clsTypesFunction.SetRCommand("c")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
-
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
 
         AutoFillReceivers()
     End Sub
