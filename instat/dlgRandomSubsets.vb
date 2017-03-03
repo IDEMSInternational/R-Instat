@@ -46,8 +46,8 @@ Public Class dlgRandomSubsets
         ucrNudSetSeed.SetMinMax(1, Integer.MaxValue)
         ucrChkSetSeed.SetText("Seed")
 
-        ucrSelectorRandomSubsets.ucrAvailableDataFrames.SetParameter(New RParameter("size", 2))
-        ucrSelectorRandomSubsets.SetParameterIsrfunction()
+        ucrNudSampleSize.SetParameter(New RParameter("size", 2))
+        ucrNudSampleSize.SetParameterValue(ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
 
         'Replace checkbox
         ucrChkWithReplacement.SetParameter(New RParameter("replace", 1))
@@ -71,7 +71,6 @@ Public Class dlgRandomSubsets
     End Sub
 
     Private Sub SetDefaults()
-
         'reset
         ucrSelectorRandomSubsets.Reset()
         ucrNewDataframe.Reset()
@@ -83,8 +82,7 @@ Public Class dlgRandomSubsets
         ClsSample.SetRCommand("sample")
         ClsSample.AddParameter("replace", "FALSE")
         ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
-        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
-        ClsSample.AddParameter("size", ucrNudSampleSize.Value)
+        ClsSample.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
 
         'setseed fuction
         clsSetSeed = New RFunction
@@ -101,8 +99,8 @@ Public Class dlgRandomSubsets
         clsDataFrame = New RFunction
         clsDataFrame.SetRCommand("data.frame")
         clsDataFrame.AddParameter("X", clsRFunctionParameter:=clsReplicate)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrame)
         clsDataFrame.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrame)
 
     End Sub
 
@@ -151,11 +149,6 @@ Public Class dlgRandomSubsets
         TestOKEnabled()
     End Sub
 
-    Private Sub sizes()
-        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
-        ClsSample.AddParameter("size", ucrNudSampleSize.Value)
-    End Sub
-
     Private Sub ReplaceParameters()
         If ucrChkWithReplacement.Checked Then
             ClsSample.AddParameter("replace", "TRUE")
@@ -173,14 +166,13 @@ Public Class dlgRandomSubsets
     Private Sub ucrSelectorRandomSubsets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSubsets.ControlValueChanged
         NewDefaultName()
         ReplaceParameters()
-        sizes()
     End Sub
 
     Private Sub ucrChkWithReplacement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithReplacement.ControlValueChanged
         ReplaceParameters()
     End Sub
-    'Keeping the size of the data frame updated whenever the value is changed in the nud 
-    Private Sub ucrNudSampleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSampleSize.ControlValueChanged
-        ClsSample.AddParameter("size", ucrNudSampleSize.Value)
+
+    Private Sub ucrSelectorRandomSubsets_DataFrameChanged() Handles ucrSelectorRandomSubsets.DataFrameChanged
+        ucrNudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 End Class
