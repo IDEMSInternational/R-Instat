@@ -51,13 +51,25 @@ Public Class sdgCorruptionCalculatedColumns
         Dim kvpContractValueShareThreshold As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("contract_value_share_over_threshold", {"corr_spendc2"}.ToList())
         Dim kvpCountryISO2 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("iso2", {"iso2"}.ToList())
         Dim kvpCountryISO3 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("iso3", {"iso3"}.ToList())
+        Dim kvpAllBids As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("all_bids", {"ca_bids_all"}.ToList())
+        Dim kvpAllBidsTrimmed As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("all_bids_trimmed", {"ca_bids"}.ToList())
+        Dim kvpWinnerCountryISO2 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("w_country_iso2", {"w_country_iso2"}.ToList())
+        Dim kvpWinnerCountryISO3 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("w_country_iso3", {"w_country_iso3"}.ToList())
+        Dim kvpWBPPP As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("ppp_conversion_rate", {"ppp"}.ToList())
+        Dim kvpPPPAdjustedContractValue As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("ppp_adjusted_contr_value", {"ca_contract_value"}.ToList())
+        Dim kvpSecrecyScore As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("secrecy_score", {"sec_score"}.ToList())
+        Dim kvpTaxHaven As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("tax_haven", {"taxhav"}.ToList())
+        Dim kvpTaxHaven2 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("tax_haven2", {"taxhav2"}.ToList())
+        Dim kvpTaxHaven3 As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("tax_haven3", {"taxhav3"}.ToList())
+        Dim kvpTaxHaven3bi As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("tax_haven3bi", {"taxhav3bi"}.ToList())
 
         lstRecognisedTypes.AddRange({kvpAwardYear, kvpProcedureType, kvpProcuringAuthorityID, kvpWinnerID, kvpForeignWinner, kvpContractValueCategories, kvpProcurementTypeCategories, kvpProcurementType2, kvpProcurementType3, kvpSignaturePeriod,
                                     kvpSignaturePeriodCorrected, kvpSignaturePeriod5, kvpSignaturePeriod25, kvpSignaturePeriodCat, kvpRollNumberWinner, kvpRollNumberIssuer, kvpRollSumWinner, kvpRollSumIssuer, kvpRollShareWinner, kvpSingleBidder, kvpContractValueShareThreshold, kvpCountryISO2, kvpCountryISO3,
-                                    })
+                                    kvpAllBids, kvpAllBidsTrimmed, kvpWinnerCountryISO2, kvpWinnerCountryISO3, kvpWBPPP, kvpPPPAdjustedContractValue, kvpSecrecyScore, kvpTaxHaven, kvpTaxHaven2, kvpTaxHaven3, kvpTaxHaven3bi})
 
         lstReceivers.AddRange({ucrReceiverAwardYear, ucrReceiverProcedureType, ucrReceiverProcuringAuthority, ucrReceiverWinnerID, ucrReceiverForeignWinner, ucrReceiverContractValueCategories, ucrReceiverProcurementTypeCat, ucrReceiverProcurementType2, ucrReceiverProcurementType3, ucrReceiverSignaturePeriod,
-                              ucrReceiverSignaturePeriodCorrected, ucrReceiverPeriod5, ucrReceiverPeriod25, ucrReceiverPeriodCat, ucrReceiverRollingNumberWinner, ucrReceiverRollingNumberIssuer, ucrReceiverValueSumWinner, ucrReceiverValueSumIssuer, ucrReceiverValueShareWinner, ucrReceiverSingleBidder, ucrReceiverContractShareThreshold, ucrReceiverCountryISO2, ucrReceiverCountryISO3})
+                              ucrReceiverSignaturePeriodCorrected, ucrReceiverPeriod5, ucrReceiverPeriod25, ucrReceiverPeriodCat, ucrReceiverRollingNumberWinner, ucrReceiverRollingNumberIssuer, ucrReceiverValueSumWinner, ucrReceiverValueSumIssuer, ucrReceiverValueShareWinner, ucrReceiverSingleBidder, ucrReceiverContractShareThreshold, ucrReceiverCountryISO2, ucrReceiverCountryISO3,
+                              ucrReceiverAllBids, ucrReceiverAllBidsTrimmed, ucrReceiverWinnerCountryISO2, ucrReceiverWinnerCountryISO3, ucrReceiverWBPPP, ucrReceiverPPPAdjustedContractValue, ucrReceiverSecrecyScore, ucrReceiverTaxHaven, ucrReceiverTaxHaven2, ucrReceiverTaxHaven3, ucrReceiverTaxHaven3bi})
 
         ucrReceiverAwardYear.Tag = "award_year"
         ucrReceiverProcedureType.Tag = "procedure_type"
@@ -82,9 +94,17 @@ Public Class sdgCorruptionCalculatedColumns
         ucrReceiverContractShareThreshold.Tag = "contract_value_share_over_threshold"
         ucrReceiverCountryISO2.Tag = "iso2"
         ucrReceiverCountryISO3.Tag = "iso3"
-
-
-
+        ucrReceiverAllBids.Tag = "all_bids"
+        ucrReceiverAllBidsTrimmed.Tag = "all_bids_trimmed"
+        ucrReceiverWinnerCountryISO2.Tag = "w_country_iso2"
+        ucrReceiverWinnerCountryISO3.Tag = "w_country_iso3"
+        ucrReceiverWBPPP.Tag = "ppp_conversion_rate"
+        ucrReceiverPPPAdjustedContractValue.Tag = "ppp_adjusted_contr_value"
+        ucrReceiverSecrecyScore.Tag = "secrecy_score"
+        ucrReceiverTaxHaven.Tag = "tax_haven"
+        ucrReceiverTaxHaven.Tag = "tax_haven2"
+        ucrReceiverTaxHaven.Tag = "tax_haven3"
+        ucrReceiverTaxHaven.Tag = "tax_haven3bi"
         bControlsInitialised = True
     End Sub
 
