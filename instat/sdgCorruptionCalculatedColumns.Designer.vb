@@ -64,26 +64,26 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverPeriod25 = New instat.ucrReceiverSingle()
         Me.ucrReceiverRollingNumberWinner = New instat.ucrReceiverSingle()
         Me.lblRollNumWinner = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.UcrReceiverSingle16 = New instat.ucrReceiverSingle()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.UcrReceiverSingle17 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle18 = New instat.ucrReceiverSingle()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.UcrReceiverSingle19 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle20 = New instat.ucrReceiverSingle()
-        Me.Label20 = New System.Windows.Forms.Label()
+        Me.lblWinnerCountryISO3 = New System.Windows.Forms.Label()
+        Me.ucrReceiverWinnerCountryISO3 = New instat.ucrReceiverSingle()
+        Me.lblWinnerCountryISO2 = New System.Windows.Forms.Label()
+        Me.lblWBPPP = New System.Windows.Forms.Label()
+        Me.ucrReceiverPPPAdjustedContractValue = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWinnerCountryISO2 = New instat.ucrReceiverSingle()
+        Me.lblPPPAdjustedContractValue = New System.Windows.Forms.Label()
+        Me.ucrReceiverWBPPP = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSecrecyScore = New instat.ucrReceiverSingle()
+        Me.lblSecrecyScore = New System.Windows.Forms.Label()
         Me.lblCountryISO2 = New System.Windows.Forms.Label()
         Me.ucrReceiverCountryISO2 = New instat.ucrReceiverSingle()
         Me.lblContractValueShareOverThreshold = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.UcrReceiverSingle22 = New instat.ucrReceiverSingle()
+        Me.lblAddBids = New System.Windows.Forms.Label()
+        Me.ucrReceiverAllBids = New instat.ucrReceiverSingle()
         Me.ucrReceiverContractShareThreshold = New instat.ucrReceiverSingle()
         Me.lblCountryISO3 = New System.Windows.Forms.Label()
         Me.ucrReceiverCountryISO3 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle25 = New instat.ucrReceiverSingle()
-        Me.Label25 = New System.Windows.Forms.Label()
+        Me.ucrReceiverAllBidsTrimmed = New instat.ucrReceiverSingle()
+        Me.lblAllBidsTrimmed = New System.Windows.Forms.Label()
         Me.lblTaxHaven2 = New System.Windows.Forms.Label()
         Me.ucrReceiverTaxHaven2 = New instat.ucrReceiverSingle()
         Me.lblTaxHaven = New System.Windows.Forms.Label()
@@ -491,100 +491,100 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblRollNumWinner.TabIndex = 79
         Me.lblRollNumWinner.Text = "Rolling Contract Number Winner:"
         '
-        'Label16
+        'lblWinnerCountryISO3
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(567, 268)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(73, 13)
-        Me.Label16.TabIndex = 117
-        Me.Label16.Text = "Country ISO2:"
+        Me.lblWinnerCountryISO3.AutoSize = True
+        Me.lblWinnerCountryISO3.Location = New System.Drawing.Point(567, 268)
+        Me.lblWinnerCountryISO3.Name = "lblWinnerCountryISO3"
+        Me.lblWinnerCountryISO3.Size = New System.Drawing.Size(110, 13)
+        Me.lblWinnerCountryISO3.TabIndex = 117
+        Me.lblWinnerCountryISO3.Text = "Winner Country ISO3:"
         '
-        'UcrReceiverSingle16
+        'ucrReceiverWinnerCountryISO3
         '
-        Me.UcrReceiverSingle16.frmParent = Me
-        Me.UcrReceiverSingle16.Location = New System.Drawing.Point(567, 283)
-        Me.UcrReceiverSingle16.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle16.Name = "UcrReceiverSingle16"
-        Me.UcrReceiverSingle16.Selector = Nothing
-        Me.UcrReceiverSingle16.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle16.TabIndex = 118
+        Me.ucrReceiverWinnerCountryISO3.frmParent = Me
+        Me.ucrReceiverWinnerCountryISO3.Location = New System.Drawing.Point(567, 283)
+        Me.ucrReceiverWinnerCountryISO3.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWinnerCountryISO3.Name = "ucrReceiverWinnerCountryISO3"
+        Me.ucrReceiverWinnerCountryISO3.Selector = Nothing
+        Me.ucrReceiverWinnerCountryISO3.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWinnerCountryISO3.TabIndex = 118
         '
-        'Label17
+        'lblWinnerCountryISO2
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(567, 225)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(46, 13)
-        Me.Label17.TabIndex = 111
-        Me.Label17.Text = "Country:"
+        Me.lblWinnerCountryISO2.AutoSize = True
+        Me.lblWinnerCountryISO2.Location = New System.Drawing.Point(567, 225)
+        Me.lblWinnerCountryISO2.Name = "lblWinnerCountryISO2"
+        Me.lblWinnerCountryISO2.Size = New System.Drawing.Size(110, 13)
+        Me.lblWinnerCountryISO2.TabIndex = 111
+        Me.lblWinnerCountryISO2.Text = "Winner Country ISO2:"
         '
-        'Label18
+        'lblWBPPP
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(567, 354)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(52, 13)
-        Me.Label18.TabIndex = 115
-        Me.Label18.Text = "WB PPP:"
+        Me.lblWBPPP.AutoSize = True
+        Me.lblWBPPP.Location = New System.Drawing.Point(568, 311)
+        Me.lblWBPPP.Name = "lblWBPPP"
+        Me.lblWBPPP.Size = New System.Drawing.Size(52, 13)
+        Me.lblWBPPP.TabIndex = 115
+        Me.lblWBPPP.Text = "WB PPP:"
         '
-        'UcrReceiverSingle17
+        'ucrReceiverPPPAdjustedContractValue
         '
-        Me.UcrReceiverSingle17.frmParent = Me
-        Me.UcrReceiverSingle17.Location = New System.Drawing.Point(567, 369)
-        Me.UcrReceiverSingle17.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle17.Name = "UcrReceiverSingle17"
-        Me.UcrReceiverSingle17.Selector = Nothing
-        Me.UcrReceiverSingle17.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle17.TabIndex = 116
+        Me.ucrReceiverPPPAdjustedContractValue.frmParent = Me
+        Me.ucrReceiverPPPAdjustedContractValue.Location = New System.Drawing.Point(567, 369)
+        Me.ucrReceiverPPPAdjustedContractValue.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPPPAdjustedContractValue.Name = "ucrReceiverPPPAdjustedContractValue"
+        Me.ucrReceiverPPPAdjustedContractValue.Selector = Nothing
+        Me.ucrReceiverPPPAdjustedContractValue.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPPPAdjustedContractValue.TabIndex = 116
         '
-        'UcrReceiverSingle18
+        'ucrReceiverWinnerCountryISO2
         '
-        Me.UcrReceiverSingle18.frmParent = Me
-        Me.UcrReceiverSingle18.Location = New System.Drawing.Point(567, 240)
-        Me.UcrReceiverSingle18.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle18.Name = "UcrReceiverSingle18"
-        Me.UcrReceiverSingle18.Selector = Nothing
-        Me.UcrReceiverSingle18.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle18.TabIndex = 112
+        Me.ucrReceiverWinnerCountryISO2.frmParent = Me
+        Me.ucrReceiverWinnerCountryISO2.Location = New System.Drawing.Point(567, 240)
+        Me.ucrReceiverWinnerCountryISO2.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWinnerCountryISO2.Name = "ucrReceiverWinnerCountryISO2"
+        Me.ucrReceiverWinnerCountryISO2.Selector = Nothing
+        Me.ucrReceiverWinnerCountryISO2.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWinnerCountryISO2.TabIndex = 112
         '
-        'Label19
+        'lblPPPAdjustedContractValue
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(567, 311)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(73, 13)
-        Me.Label19.TabIndex = 113
-        Me.Label19.Text = "Country ISO3:"
+        Me.lblPPPAdjustedContractValue.AutoSize = True
+        Me.lblPPPAdjustedContractValue.Location = New System.Drawing.Point(567, 354)
+        Me.lblPPPAdjustedContractValue.Name = "lblPPPAdjustedContractValue"
+        Me.lblPPPAdjustedContractValue.Size = New System.Drawing.Size(148, 13)
+        Me.lblPPPAdjustedContractValue.TabIndex = 113
+        Me.lblPPPAdjustedContractValue.Text = "PPP Adjusted Contract Value:"
         '
-        'UcrReceiverSingle19
+        'ucrReceiverWBPPP
         '
-        Me.UcrReceiverSingle19.frmParent = Me
-        Me.UcrReceiverSingle19.Location = New System.Drawing.Point(567, 326)
-        Me.UcrReceiverSingle19.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle19.Name = "UcrReceiverSingle19"
-        Me.UcrReceiverSingle19.Selector = Nothing
-        Me.UcrReceiverSingle19.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle19.TabIndex = 114
+        Me.ucrReceiverWBPPP.frmParent = Me
+        Me.ucrReceiverWBPPP.Location = New System.Drawing.Point(567, 326)
+        Me.ucrReceiverWBPPP.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWBPPP.Name = "ucrReceiverWBPPP"
+        Me.ucrReceiverWBPPP.Selector = Nothing
+        Me.ucrReceiverWBPPP.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWBPPP.TabIndex = 114
         '
-        'UcrReceiverSingle20
+        'ucrReceiverSecrecyScore
         '
-        Me.UcrReceiverSingle20.frmParent = Me
-        Me.UcrReceiverSingle20.Location = New System.Drawing.Point(567, 414)
-        Me.UcrReceiverSingle20.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle20.Name = "UcrReceiverSingle20"
-        Me.UcrReceiverSingle20.Selector = Nothing
-        Me.UcrReceiverSingle20.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle20.TabIndex = 110
+        Me.ucrReceiverSecrecyScore.frmParent = Me
+        Me.ucrReceiverSecrecyScore.Location = New System.Drawing.Point(567, 414)
+        Me.ucrReceiverSecrecyScore.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecrecyScore.Name = "ucrReceiverSecrecyScore"
+        Me.ucrReceiverSecrecyScore.Selector = Nothing
+        Me.ucrReceiverSecrecyScore.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecrecyScore.TabIndex = 110
         '
-        'Label20
+        'lblSecrecyScore
         '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(567, 399)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(63, 13)
-        Me.Label20.TabIndex = 109
-        Me.Label20.Text = "Small State:"
+        Me.lblSecrecyScore.AutoSize = True
+        Me.lblSecrecyScore.Location = New System.Drawing.Point(567, 399)
+        Me.lblSecrecyScore.Name = "lblSecrecyScore"
+        Me.lblSecrecyScore.Size = New System.Drawing.Size(80, 13)
+        Me.lblSecrecyScore.TabIndex = 109
+        Me.lblSecrecyScore.Text = "Secrecy Score:"
         '
         'lblCountryISO2
         '
@@ -614,24 +614,24 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblContractValueShareOverThreshold.TabIndex = 101
         Me.lblContractValueShareOverThreshold.Text = "Contract Value Share Threshold:"
         '
-        'Label23
+        'lblAddBids
         '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(567, 140)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(52, 13)
-        Me.Label23.TabIndex = 105
-        Me.Label23.Text = "WB PPP:"
+        Me.lblAddBids.AutoSize = True
+        Me.lblAddBids.Location = New System.Drawing.Point(567, 140)
+        Me.lblAddBids.Name = "lblAddBids"
+        Me.lblAddBids.Size = New System.Drawing.Size(44, 13)
+        Me.lblAddBids.TabIndex = 105
+        Me.lblAddBids.Text = "All Bids:"
         '
-        'UcrReceiverSingle22
+        'ucrReceiverAllBids
         '
-        Me.UcrReceiverSingle22.frmParent = Me
-        Me.UcrReceiverSingle22.Location = New System.Drawing.Point(567, 155)
-        Me.UcrReceiverSingle22.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle22.Name = "UcrReceiverSingle22"
-        Me.UcrReceiverSingle22.Selector = Nothing
-        Me.UcrReceiverSingle22.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle22.TabIndex = 106
+        Me.ucrReceiverAllBids.frmParent = Me
+        Me.ucrReceiverAllBids.Location = New System.Drawing.Point(567, 155)
+        Me.ucrReceiverAllBids.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverAllBids.Name = "ucrReceiverAllBids"
+        Me.ucrReceiverAllBids.Selector = Nothing
+        Me.ucrReceiverAllBids.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverAllBids.TabIndex = 106
         '
         'ucrReceiverContractShareThreshold
         '
@@ -662,24 +662,24 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverCountryISO3.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverCountryISO3.TabIndex = 104
         '
-        'UcrReceiverSingle25
+        'ucrReceiverAllBidsTrimmed
         '
-        Me.UcrReceiverSingle25.frmParent = Me
-        Me.UcrReceiverSingle25.Location = New System.Drawing.Point(567, 200)
-        Me.UcrReceiverSingle25.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle25.Name = "UcrReceiverSingle25"
-        Me.UcrReceiverSingle25.Selector = Nothing
-        Me.UcrReceiverSingle25.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle25.TabIndex = 100
+        Me.ucrReceiverAllBidsTrimmed.frmParent = Me
+        Me.ucrReceiverAllBidsTrimmed.Location = New System.Drawing.Point(567, 200)
+        Me.ucrReceiverAllBidsTrimmed.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverAllBidsTrimmed.Name = "ucrReceiverAllBidsTrimmed"
+        Me.ucrReceiverAllBidsTrimmed.Selector = Nothing
+        Me.ucrReceiverAllBidsTrimmed.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverAllBidsTrimmed.TabIndex = 100
         '
-        'Label25
+        'lblAllBidsTrimmed
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(567, 185)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(63, 13)
-        Me.Label25.TabIndex = 99
-        Me.Label25.Text = "Small State:"
+        Me.lblAllBidsTrimmed.AutoSize = True
+        Me.lblAllBidsTrimmed.Location = New System.Drawing.Point(567, 185)
+        Me.lblAllBidsTrimmed.Name = "lblAllBidsTrimmed"
+        Me.lblAllBidsTrimmed.Size = New System.Drawing.Size(93, 13)
+        Me.lblAllBidsTrimmed.TabIndex = 99
+        Me.lblAllBidsTrimmed.Text = "All Bids (Trimmed):"
         '
         'lblTaxHaven2
         '
@@ -770,26 +770,26 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.Controls.Add(Me.ucrReceiverTaxHaven)
         Me.Controls.Add(Me.lblTaxHaven3)
         Me.Controls.Add(Me.ucrReceiverTaxHaven3)
-        Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.UcrReceiverSingle16)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.UcrReceiverSingle17)
-        Me.Controls.Add(Me.UcrReceiverSingle18)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.UcrReceiverSingle19)
-        Me.Controls.Add(Me.UcrReceiverSingle20)
-        Me.Controls.Add(Me.Label20)
+        Me.Controls.Add(Me.lblWinnerCountryISO3)
+        Me.Controls.Add(Me.ucrReceiverWinnerCountryISO3)
+        Me.Controls.Add(Me.lblWinnerCountryISO2)
+        Me.Controls.Add(Me.lblWBPPP)
+        Me.Controls.Add(Me.ucrReceiverPPPAdjustedContractValue)
+        Me.Controls.Add(Me.ucrReceiverWinnerCountryISO2)
+        Me.Controls.Add(Me.lblPPPAdjustedContractValue)
+        Me.Controls.Add(Me.ucrReceiverWBPPP)
+        Me.Controls.Add(Me.ucrReceiverSecrecyScore)
+        Me.Controls.Add(Me.lblSecrecyScore)
         Me.Controls.Add(Me.lblCountryISO2)
         Me.Controls.Add(Me.ucrReceiverCountryISO2)
         Me.Controls.Add(Me.lblContractValueShareOverThreshold)
-        Me.Controls.Add(Me.Label23)
-        Me.Controls.Add(Me.UcrReceiverSingle22)
+        Me.Controls.Add(Me.lblAddBids)
+        Me.Controls.Add(Me.ucrReceiverAllBids)
         Me.Controls.Add(Me.ucrReceiverContractShareThreshold)
         Me.Controls.Add(Me.lblCountryISO3)
         Me.Controls.Add(Me.ucrReceiverCountryISO3)
-        Me.Controls.Add(Me.UcrReceiverSingle25)
-        Me.Controls.Add(Me.Label25)
+        Me.Controls.Add(Me.ucrReceiverAllBidsTrimmed)
+        Me.Controls.Add(Me.lblAllBidsTrimmed)
         Me.Controls.Add(Me.lblRollSumWinner)
         Me.Controls.Add(Me.ucrReceiverValueSumWinner)
         Me.Controls.Add(Me.lblRollNumIssuer)
@@ -854,26 +854,26 @@ Partial Class sdgCorruptionCalculatedColumns
     Friend WithEvents ucrReceiverTaxHaven3bi As ucrReceiverSingle
     Friend WithEvents ucrReceiverTaxHaven As ucrReceiverSingle
     Friend WithEvents lblTaxHaven3 As Label
-    Friend WithEvents Label16 As Label
-    Friend WithEvents UcrReceiverSingle16 As ucrReceiverSingle
-    Friend WithEvents Label17 As Label
-    Friend WithEvents Label18 As Label
-    Friend WithEvents UcrReceiverSingle17 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle18 As ucrReceiverSingle
-    Friend WithEvents Label19 As Label
-    Friend WithEvents UcrReceiverSingle19 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle20 As ucrReceiverSingle
-    Friend WithEvents Label20 As Label
+    Friend WithEvents lblWinnerCountryISO3 As Label
+    Friend WithEvents ucrReceiverWinnerCountryISO3 As ucrReceiverSingle
+    Friend WithEvents lblWinnerCountryISO2 As Label
+    Friend WithEvents lblWBPPP As Label
+    Friend WithEvents ucrReceiverPPPAdjustedContractValue As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWinnerCountryISO2 As ucrReceiverSingle
+    Friend WithEvents lblPPPAdjustedContractValue As Label
+    Friend WithEvents ucrReceiverWBPPP As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSecrecyScore As ucrReceiverSingle
+    Friend WithEvents lblSecrecyScore As Label
     Friend WithEvents lblCountryISO2 As Label
     Friend WithEvents ucrReceiverCountryISO2 As ucrReceiverSingle
     Friend WithEvents lblContractValueShareOverThreshold As Label
-    Friend WithEvents Label23 As Label
-    Friend WithEvents UcrReceiverSingle22 As ucrReceiverSingle
+    Friend WithEvents lblAddBids As Label
+    Friend WithEvents ucrReceiverAllBids As ucrReceiverSingle
     Friend WithEvents ucrReceiverContractShareThreshold As ucrReceiverSingle
     Friend WithEvents lblCountryISO3 As Label
     Friend WithEvents ucrReceiverCountryISO3 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle25 As ucrReceiverSingle
-    Friend WithEvents Label25 As Label
+    Friend WithEvents ucrReceiverAllBidsTrimmed As ucrReceiverSingle
+    Friend WithEvents lblAllBidsTrimmed As Label
     Friend WithEvents lblRollSumWinner As Label
     Friend WithEvents ucrReceiverValueSumWinner As ucrReceiverSingle
     Friend WithEvents lblRollNumIssuer As Label
