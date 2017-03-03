@@ -56,7 +56,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverRegion = New instat.ucrReceiverSingle()
         Me.ucrChkAutoGenerate = New instat.ucrCheck()
         Me.cmdCountryLevel = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.cmdCalculatedColumns = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrDefineCorruptionSelector
@@ -74,7 +74,7 @@ Partial Class dlgDefineCorruption
         Me.ucrBase.Location = New System.Drawing.Point(10, 377)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 34
         '
         'lblNoBidsReceived
         '
@@ -82,7 +82,7 @@ Partial Class dlgDefineCorruption
         Me.lblNoBidsReceived.Location = New System.Drawing.Point(414, 27)
         Me.lblNoBidsReceived.Name = "lblNoBidsReceived"
         Me.lblNoBidsReceived.Size = New System.Drawing.Size(99, 13)
-        Me.lblNoBidsReceived.TabIndex = 26
+        Me.lblNoBidsReceived.TabIndex = 17
         Me.lblNoBidsReceived.Text = "No. Bids Received:"
         '
         'ucrReceiverNoBids
@@ -93,7 +93,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverNoBids.Name = "ucrReceiverNoBids"
         Me.ucrReceiverNoBids.Selector = Nothing
         Me.ucrReceiverNoBids.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverNoBids.TabIndex = 27
+        Me.ucrReceiverNoBids.TabIndex = 18
         '
         'ucrReceiverProcedureType
         '
@@ -103,7 +103,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverProcedureType.Name = "ucrReceiverProcedureType"
         Me.ucrReceiverProcedureType.Selector = Nothing
         Me.ucrReceiverProcedureType.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcedureType.TabIndex = 25
+        Me.ucrReceiverProcedureType.TabIndex = 22
         '
         'lblProcedureType
         '
@@ -111,7 +111,7 @@ Partial Class dlgDefineCorruption
         Me.lblProcedureType.Location = New System.Drawing.Point(414, 113)
         Me.lblProcedureType.Name = "lblProcedureType"
         Me.lblProcedureType.Size = New System.Drawing.Size(86, 13)
-        Me.lblProcedureType.TabIndex = 24
+        Me.lblProcedureType.TabIndex = 21
         Me.lblProcedureType.Text = "Procedure Type:"
         '
         'ucrReceiverContractValue
@@ -122,7 +122,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverContractValue.Name = "ucrReceiverContractValue"
         Me.ucrReceiverContractValue.Selector = Nothing
         Me.ucrReceiverContractValue.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverContractValue.TabIndex = 23
+        Me.ucrReceiverContractValue.TabIndex = 28
         '
         'lblContractValue
         '
@@ -130,7 +130,7 @@ Partial Class dlgDefineCorruption
         Me.lblContractValue.Location = New System.Drawing.Point(414, 242)
         Me.lblContractValue.Name = "lblContractValue"
         Me.lblContractValue.Size = New System.Drawing.Size(80, 13)
-        Me.lblContractValue.TabIndex = 22
+        Me.lblContractValue.TabIndex = 27
         Me.lblContractValue.Text = "Contract Value:"
         '
         'ucrReceiverNoConsideredBids
@@ -141,7 +141,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverNoConsideredBids.Name = "ucrReceiverNoConsideredBids"
         Me.ucrReceiverNoConsideredBids.Selector = Nothing
         Me.ucrReceiverNoConsideredBids.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverNoConsideredBids.TabIndex = 21
+        Me.ucrReceiverNoConsideredBids.TabIndex = 20
         '
         'ucrReceiverWinnerCountry
         '
@@ -151,7 +151,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverWinnerCountry.Name = "ucrReceiverWinnerCountry"
         Me.ucrReceiverWinnerCountry.Selector = Nothing
         Me.ucrReceiverWinnerCountry.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWinnerCountry.TabIndex = 21
+        Me.ucrReceiverWinnerCountry.TabIndex = 26
         '
         'lblNoConsideredBids
         '
@@ -159,7 +159,7 @@ Partial Class dlgDefineCorruption
         Me.lblNoConsideredBids.Location = New System.Drawing.Point(414, 70)
         Me.lblNoConsideredBids.Name = "lblNoConsideredBids"
         Me.lblNoConsideredBids.Size = New System.Drawing.Size(106, 13)
-        Me.lblNoConsideredBids.TabIndex = 20
+        Me.lblNoConsideredBids.TabIndex = 19
         Me.lblNoConsideredBids.Text = "No. Considered Bids:"
         '
         'lblWinnerCountry
@@ -168,7 +168,7 @@ Partial Class dlgDefineCorruption
         Me.lblWinnerCountry.Location = New System.Drawing.Point(414, 199)
         Me.lblWinnerCountry.Name = "lblWinnerCountry"
         Me.lblWinnerCountry.Size = New System.Drawing.Size(83, 13)
-        Me.lblWinnerCountry.TabIndex = 20
+        Me.lblWinnerCountry.TabIndex = 25
         Me.lblWinnerCountry.Text = "Winner Country:"
         '
         'ucrReceiverProcuringAuthority
@@ -179,7 +179,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverProcuringAuthority.Name = "ucrReceiverProcuringAuthority"
         Me.ucrReceiverProcuringAuthority.Selector = Nothing
         Me.ucrReceiverProcuringAuthority.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcuringAuthority.TabIndex = 3
+        Me.ucrReceiverProcuringAuthority.TabIndex = 6
         '
         'lblProcuringAuthority
         '
@@ -187,7 +187,7 @@ Partial Class dlgDefineCorruption
         Me.lblProcuringAuthority.Location = New System.Drawing.Point(251, 113)
         Me.lblProcuringAuthority.Name = "lblProcuringAuthority"
         Me.lblProcuringAuthority.Size = New System.Drawing.Size(99, 13)
-        Me.lblProcuringAuthority.TabIndex = 2
+        Me.lblProcuringAuthority.TabIndex = 5
         Me.lblProcuringAuthority.Text = "Procuring Authority:"
         '
         'ucrReceiverCountry
@@ -198,7 +198,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
         Me.ucrReceiverCountry.Selector = Nothing
         Me.ucrReceiverCountry.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCountry.TabIndex = 1
+        Me.ucrReceiverCountry.TabIndex = 2
         '
         'ucrReceiverSignatureDate
         '
@@ -208,7 +208,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverSignatureDate.Name = "ucrReceiverSignatureDate"
         Me.ucrReceiverSignatureDate.Selector = Nothing
         Me.ucrReceiverSignatureDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSignatureDate.TabIndex = 9
+        Me.ucrReceiverSignatureDate.TabIndex = 10
         '
         'ucrReceiverContractSector
         '
@@ -218,7 +218,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverContractSector.Name = "ucrReceiverContractSector"
         Me.ucrReceiverContractSector.Selector = Nothing
         Me.ucrReceiverContractSector.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverContractSector.TabIndex = 13
+        Me.ucrReceiverContractSector.TabIndex = 14
         '
         'ucrReceiverProcurementCategory
         '
@@ -228,7 +228,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverProcurementCategory.Name = "ucrReceiverProcurementCategory"
         Me.ucrReceiverProcurementCategory.Selector = Nothing
         Me.ucrReceiverProcurementCategory.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcurementCategory.TabIndex = 15
+        Me.ucrReceiverProcurementCategory.TabIndex = 16
         '
         'ucrReceiverWinnerName
         '
@@ -238,7 +238,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverWinnerName.Name = "ucrReceiverWinnerName"
         Me.ucrReceiverWinnerName.Selector = Nothing
         Me.ucrReceiverWinnerName.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWinnerName.TabIndex = 17
+        Me.ucrReceiverWinnerName.TabIndex = 24
         '
         'lblWinnerName
         '
@@ -246,7 +246,7 @@ Partial Class dlgDefineCorruption
         Me.lblWinnerName.Location = New System.Drawing.Point(414, 156)
         Me.lblWinnerName.Name = "lblWinnerName"
         Me.lblWinnerName.Size = New System.Drawing.Size(75, 13)
-        Me.lblWinnerName.TabIndex = 16
+        Me.lblWinnerName.TabIndex = 23
         Me.lblWinnerName.Text = "Winner Name:"
         '
         'lblContractSector
@@ -255,7 +255,7 @@ Partial Class dlgDefineCorruption
         Me.lblContractSector.Location = New System.Drawing.Point(251, 285)
         Me.lblContractSector.Name = "lblContractSector"
         Me.lblContractSector.Size = New System.Drawing.Size(84, 13)
-        Me.lblContractSector.TabIndex = 12
+        Me.lblContractSector.TabIndex = 13
         Me.lblContractSector.Text = "Contract Sector:"
         '
         'lblProcurementCategory
@@ -264,7 +264,7 @@ Partial Class dlgDefineCorruption
         Me.lblProcurementCategory.Location = New System.Drawing.Point(251, 331)
         Me.lblProcurementCategory.Name = "lblProcurementCategory"
         Me.lblProcurementCategory.Size = New System.Drawing.Size(115, 13)
-        Me.lblProcurementCategory.TabIndex = 14
+        Me.lblProcurementCategory.TabIndex = 15
         Me.lblProcurementCategory.Text = "Procurement Category:"
         '
         'lblContractTitle
@@ -273,7 +273,7 @@ Partial Class dlgDefineCorruption
         Me.lblContractTitle.Location = New System.Drawing.Point(251, 242)
         Me.lblContractTitle.Name = "lblContractTitle"
         Me.lblContractTitle.Size = New System.Drawing.Size(73, 13)
-        Me.lblContractTitle.TabIndex = 10
+        Me.lblContractTitle.TabIndex = 11
         Me.lblContractTitle.Text = "Contract Title:"
         '
         'ucrReceiverAwardDate
@@ -284,7 +284,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverAwardDate.Name = "ucrReceiverAwardDate"
         Me.ucrReceiverAwardDate.Selector = Nothing
         Me.ucrReceiverAwardDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverAwardDate.TabIndex = 7
+        Me.ucrReceiverAwardDate.TabIndex = 8
         '
         'ucrReceiverContractTitle
         '
@@ -294,7 +294,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverContractTitle.Name = "ucrReceiverContractTitle"
         Me.ucrReceiverContractTitle.Selector = Nothing
         Me.ucrReceiverContractTitle.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverContractTitle.TabIndex = 11
+        Me.ucrReceiverContractTitle.TabIndex = 12
         '
         'lblAwardDate
         '
@@ -302,7 +302,7 @@ Partial Class dlgDefineCorruption
         Me.lblAwardDate.Location = New System.Drawing.Point(251, 156)
         Me.lblAwardDate.Name = "lblAwardDate"
         Me.lblAwardDate.Size = New System.Drawing.Size(66, 13)
-        Me.lblAwardDate.TabIndex = 6
+        Me.lblAwardDate.TabIndex = 7
         Me.lblAwardDate.Text = "Award Date:"
         '
         'lblSignatureDate
@@ -311,7 +311,7 @@ Partial Class dlgDefineCorruption
         Me.lblSignatureDate.Location = New System.Drawing.Point(251, 199)
         Me.lblSignatureDate.Name = "lblSignatureDate"
         Me.lblSignatureDate.Size = New System.Drawing.Size(81, 13)
-        Me.lblSignatureDate.TabIndex = 8
+        Me.lblSignatureDate.TabIndex = 9
         Me.lblSignatureDate.Text = "Signature Date:"
         '
         'lblCountry
@@ -320,7 +320,7 @@ Partial Class dlgDefineCorruption
         Me.lblCountry.Location = New System.Drawing.Point(251, 27)
         Me.lblCountry.Name = "lblCountry"
         Me.lblCountry.Size = New System.Drawing.Size(46, 13)
-        Me.lblCountry.TabIndex = 0
+        Me.lblCountry.TabIndex = 1
         Me.lblCountry.Text = "Country:"
         '
         'lblFiscalYear
@@ -329,7 +329,7 @@ Partial Class dlgDefineCorruption
         Me.lblFiscalYear.Location = New System.Drawing.Point(414, 285)
         Me.lblFiscalYear.Name = "lblFiscalYear"
         Me.lblFiscalYear.Size = New System.Drawing.Size(62, 13)
-        Me.lblFiscalYear.TabIndex = 28
+        Me.lblFiscalYear.TabIndex = 29
         Me.lblFiscalYear.Text = "Fiscal Year:"
         '
         'ucrReceiverFiscalYear
@@ -340,7 +340,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverFiscalYear.Name = "ucrReceiverFiscalYear"
         Me.ucrReceiverFiscalYear.Selector = Nothing
         Me.ucrReceiverFiscalYear.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFiscalYear.TabIndex = 29
+        Me.ucrReceiverFiscalYear.TabIndex = 30
         '
         'lblRegion
         '
@@ -348,7 +348,7 @@ Partial Class dlgDefineCorruption
         Me.lblRegion.Location = New System.Drawing.Point(251, 70)
         Me.lblRegion.Name = "lblRegion"
         Me.lblRegion.Size = New System.Drawing.Size(44, 13)
-        Me.lblRegion.TabIndex = 30
+        Me.lblRegion.TabIndex = 3
         Me.lblRegion.Text = "Region:"
         '
         'ucrReceiverRegion
@@ -359,7 +359,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverRegion.Name = "ucrReceiverRegion"
         Me.ucrReceiverRegion.Selector = Nothing
         Me.ucrReceiverRegion.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRegion.TabIndex = 31
+        Me.ucrReceiverRegion.TabIndex = 4
         '
         'ucrChkAutoGenerate
         '
@@ -367,32 +367,32 @@ Partial Class dlgDefineCorruption
         Me.ucrChkAutoGenerate.Location = New System.Drawing.Point(414, 331)
         Me.ucrChkAutoGenerate.Name = "ucrChkAutoGenerate"
         Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkAutoGenerate.TabIndex = 32
+        Me.ucrChkAutoGenerate.TabIndex = 31
         '
         'cmdCountryLevel
         '
         Me.cmdCountryLevel.Location = New System.Drawing.Point(10, 203)
         Me.cmdCountryLevel.Name = "cmdCountryLevel"
-        Me.cmdCountryLevel.Size = New System.Drawing.Size(91, 23)
-        Me.cmdCountryLevel.TabIndex = 33
+        Me.cmdCountryLevel.Size = New System.Drawing.Size(119, 23)
+        Me.cmdCountryLevel.TabIndex = 32
         Me.cmdCountryLevel.Text = "Country Level"
         Me.cmdCountryLevel.UseVisualStyleBackColor = True
         '
-        'Button2
+        'cmdCalculatedColumns
         '
-        Me.Button2.Location = New System.Drawing.Point(10, 237)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 34
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.cmdCalculatedColumns.Location = New System.Drawing.Point(10, 233)
+        Me.cmdCalculatedColumns.Name = "cmdCalculatedColumns"
+        Me.cmdCalculatedColumns.Size = New System.Drawing.Size(119, 23)
+        Me.cmdCalculatedColumns.TabIndex = 33
+        Me.cmdCalculatedColumns.Text = "Calculated Columns"
+        Me.cmdCalculatedColumns.UseVisualStyleBackColor = True
         '
         'dlgDefineCorruption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(553, 437)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.cmdCalculatedColumns)
         Me.Controls.Add(Me.cmdCountryLevel)
         Me.Controls.Add(Me.ucrChkAutoGenerate)
         Me.Controls.Add(Me.lblRegion)
@@ -471,6 +471,6 @@ Partial Class dlgDefineCorruption
     Friend WithEvents lblFiscalYear As Label
     Friend WithEvents ucrReceiverFiscalYear As ucrReceiverSingle
     Friend WithEvents ucrChkAutoGenerate As ucrCheck
-    Friend WithEvents Button2 As Button
+    Friend WithEvents cmdCalculatedColumns As Button
     Friend WithEvents cmdCountryLevel As Button
 End Class

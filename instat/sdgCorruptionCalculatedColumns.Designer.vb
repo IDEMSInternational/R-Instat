@@ -102,14 +102,14 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrCalculatedColumnsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCalculatedColumnsSelector.Name = "ucrCalculatedColumnsSelector"
         Me.ucrCalculatedColumnsSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrCalculatedColumnsSelector.TabIndex = 33
+        Me.ucrCalculatedColumnsSelector.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(202, 453)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 66
+        Me.ucrBase.TabIndex = 69
         '
         'lblProcedureType
         '
@@ -117,7 +117,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblProcedureType.Location = New System.Drawing.Point(234, 54)
         Me.lblProcedureType.Name = "lblProcedureType"
         Me.lblProcedureType.Size = New System.Drawing.Size(86, 13)
-        Me.lblProcedureType.TabIndex = 64
+        Me.lblProcedureType.TabIndex = 3
         Me.lblProcedureType.Text = "Procedure Type:"
         '
         'ucrReceiverProcedureType
@@ -128,7 +128,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverProcedureType.Name = "ucrReceiverProcedureType"
         Me.ucrReceiverProcedureType.Selector = Nothing
         Me.ucrReceiverProcedureType.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcedureType.TabIndex = 65
+        Me.ucrReceiverProcedureType.TabIndex = 4
         '
         'lblAwardYear
         '
@@ -136,7 +136,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblAwardYear.Location = New System.Drawing.Point(234, 11)
         Me.lblAwardYear.Name = "lblAwardYear"
         Me.lblAwardYear.Size = New System.Drawing.Size(65, 13)
-        Me.lblAwardYear.TabIndex = 52
+        Me.lblAwardYear.TabIndex = 1
         Me.lblAwardYear.Text = "Award Year:"
         '
         'lblWinnerID
@@ -145,7 +145,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblWinnerID.Location = New System.Drawing.Point(234, 140)
         Me.lblWinnerID.Name = "lblWinnerID"
         Me.lblWinnerID.Size = New System.Drawing.Size(58, 13)
-        Me.lblWinnerID.TabIndex = 56
+        Me.lblWinnerID.TabIndex = 7
         Me.lblWinnerID.Text = "Winner ID:"
         '
         'ucrReceiverWinnerID
@@ -156,7 +156,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverWinnerID.Name = "ucrReceiverWinnerID"
         Me.ucrReceiverWinnerID.Selector = Nothing
         Me.ucrReceiverWinnerID.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWinnerID.TabIndex = 57
+        Me.ucrReceiverWinnerID.TabIndex = 8
         '
         'ucrReceiverAwardYear
         '
@@ -166,7 +166,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverAwardYear.Name = "ucrReceiverAwardYear"
         Me.ucrReceiverAwardYear.Selector = Nothing
         Me.ucrReceiverAwardYear.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverAwardYear.TabIndex = 53
+        Me.ucrReceiverAwardYear.TabIndex = 2
         '
         'lblProcuringAuthority
         '
@@ -174,7 +174,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblProcuringAuthority.Location = New System.Drawing.Point(234, 97)
         Me.lblProcuringAuthority.Name = "lblProcuringAuthority"
         Me.lblProcuringAuthority.Size = New System.Drawing.Size(113, 13)
-        Me.lblProcuringAuthority.TabIndex = 54
+        Me.lblProcuringAuthority.TabIndex = 5
         Me.lblProcuringAuthority.Text = "Procuring Authority ID:"
         '
         'ucrReceiverProcuringAuthority
@@ -185,7 +185,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverProcuringAuthority.Name = "ucrReceiverProcuringAuthority"
         Me.ucrReceiverProcuringAuthority.Selector = Nothing
         Me.ucrReceiverProcuringAuthority.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcuringAuthority.TabIndex = 55
+        Me.ucrReceiverProcuringAuthority.TabIndex = 6
         '
         'ucrReceiverForeignWinner
         '
@@ -195,7 +195,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverForeignWinner.Name = "ucrReceiverForeignWinner"
         Me.ucrReceiverForeignWinner.Selector = Nothing
         Me.ucrReceiverForeignWinner.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverForeignWinner.TabIndex = 51
+        Me.ucrReceiverForeignWinner.TabIndex = 10
         '
         'lblForeignWinner
         '
@@ -203,7 +203,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblForeignWinner.Location = New System.Drawing.Point(234, 185)
         Me.lblForeignWinner.Name = "lblForeignWinner"
         Me.lblForeignWinner.Size = New System.Drawing.Size(82, 13)
-        Me.lblForeignWinner.TabIndex = 50
+        Me.lblForeignWinner.TabIndex = 9
         Me.lblForeignWinner.Text = "Foreign Winner:"
         '
         'lblProcurementTypeCat
@@ -212,7 +212,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblProcurementTypeCat.Location = New System.Drawing.Point(234, 268)
         Me.lblProcurementTypeCat.Name = "lblProcurementTypeCat"
         Me.lblProcurementTypeCat.Size = New System.Drawing.Size(150, 13)
-        Me.lblProcurementTypeCat.TabIndex = 77
+        Me.lblProcurementTypeCat.TabIndex = 13
         Me.lblProcurementTypeCat.Text = "Procurement Type Categories:"
         '
         'ucrReceiverProcurementTypeCat
@@ -223,7 +223,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverProcurementTypeCat.Name = "ucrReceiverProcurementTypeCat"
         Me.ucrReceiverProcurementTypeCat.Selector = Nothing
         Me.ucrReceiverProcurementTypeCat.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcurementTypeCat.TabIndex = 78
+        Me.ucrReceiverProcurementTypeCat.TabIndex = 14
         '
         'lblContractValueCategories
         '
@@ -231,7 +231,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblContractValueCategories.Location = New System.Drawing.Point(234, 225)
         Me.lblContractValueCategories.Name = "lblContractValueCategories"
         Me.lblContractValueCategories.Size = New System.Drawing.Size(133, 13)
-        Me.lblContractValueCategories.TabIndex = 71
+        Me.lblContractValueCategories.TabIndex = 11
         Me.lblContractValueCategories.Text = "Contract Value Categories:"
         '
         'lblProcurementType3
@@ -240,7 +240,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblProcurementType3.Location = New System.Drawing.Point(234, 354)
         Me.lblProcurementType3.Name = "lblProcurementType3"
         Me.lblProcurementType3.Size = New System.Drawing.Size(106, 13)
-        Me.lblProcurementType3.TabIndex = 75
+        Me.lblProcurementType3.TabIndex = 17
         Me.lblProcurementType3.Text = "Procurement Type 3:"
         '
         'ucrReceiverProcurementType3
@@ -251,7 +251,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverProcurementType3.Name = "ucrReceiverProcurementType3"
         Me.ucrReceiverProcurementType3.Selector = Nothing
         Me.ucrReceiverProcurementType3.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcurementType3.TabIndex = 76
+        Me.ucrReceiverProcurementType3.TabIndex = 18
         '
         'ucrReceiverContractValueCategories
         '
@@ -261,7 +261,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverContractValueCategories.Name = "ucrReceiverContractValueCategories"
         Me.ucrReceiverContractValueCategories.Selector = Nothing
         Me.ucrReceiverContractValueCategories.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverContractValueCategories.TabIndex = 72
+        Me.ucrReceiverContractValueCategories.TabIndex = 12
         '
         'lblProcurementType2
         '
@@ -269,7 +269,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblProcurementType2.Location = New System.Drawing.Point(234, 311)
         Me.lblProcurementType2.Name = "lblProcurementType2"
         Me.lblProcurementType2.Size = New System.Drawing.Size(106, 13)
-        Me.lblProcurementType2.TabIndex = 73
+        Me.lblProcurementType2.TabIndex = 15
         Me.lblProcurementType2.Text = "Procurement Type 2:"
         '
         'ucrReceiverProcurementType2
@@ -280,7 +280,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverProcurementType2.Name = "ucrReceiverProcurementType2"
         Me.ucrReceiverProcurementType2.Selector = Nothing
         Me.ucrReceiverProcurementType2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcurementType2.TabIndex = 74
+        Me.ucrReceiverProcurementType2.TabIndex = 16
         '
         'ucrReceiverSignaturePeriod
         '
@@ -290,7 +290,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverSignaturePeriod.Name = "ucrReceiverSignaturePeriod"
         Me.ucrReceiverSignaturePeriod.Selector = Nothing
         Me.ucrReceiverSignaturePeriod.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSignaturePeriod.TabIndex = 70
+        Me.ucrReceiverSignaturePeriod.TabIndex = 22
         '
         'lblSignaturePeriod
         '
@@ -298,7 +298,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblSignaturePeriod.Location = New System.Drawing.Point(399, 11)
         Me.lblSignaturePeriod.Name = "lblSignaturePeriod"
         Me.lblSignaturePeriod.Size = New System.Drawing.Size(88, 13)
-        Me.lblSignaturePeriod.TabIndex = 69
+        Me.lblSignaturePeriod.TabIndex = 21
         Me.lblSignaturePeriod.Text = "Signature Period:"
         '
         'lblRollSumWinner
@@ -307,7 +307,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblRollSumWinner.Location = New System.Drawing.Point(399, 311)
         Me.lblRollSumWinner.Name = "lblRollSumWinner"
         Me.lblRollSumWinner.Size = New System.Drawing.Size(146, 13)
-        Me.lblRollSumWinner.TabIndex = 97
+        Me.lblRollSumWinner.TabIndex = 35
         Me.lblRollSumWinner.Text = "Rolling Contract Sum Winner:"
         '
         'ucrReceiverValueSumWinner
@@ -318,7 +318,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverValueSumWinner.Name = "ucrReceiverValueSumWinner"
         Me.ucrReceiverValueSumWinner.Selector = Nothing
         Me.ucrReceiverValueSumWinner.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverValueSumWinner.TabIndex = 98
+        Me.ucrReceiverValueSumWinner.TabIndex = 36
         '
         'lblRollNumIssuer
         '
@@ -326,7 +326,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblRollNumIssuer.Location = New System.Drawing.Point(399, 268)
         Me.lblRollNumIssuer.Name = "lblRollNumIssuer"
         Me.lblRollNumIssuer.Size = New System.Drawing.Size(156, 13)
-        Me.lblRollNumIssuer.TabIndex = 91
+        Me.lblRollNumIssuer.TabIndex = 33
         Me.lblRollNumIssuer.Text = "Rolling Contract Number Issuer:"
         '
         'lblRollShareWinner
@@ -335,7 +335,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblRollShareWinner.Location = New System.Drawing.Point(399, 397)
         Me.lblRollShareWinner.Name = "lblRollShareWinner"
         Me.lblRollShareWinner.Size = New System.Drawing.Size(153, 13)
-        Me.lblRollShareWinner.TabIndex = 95
+        Me.lblRollShareWinner.TabIndex = 39
         Me.lblRollShareWinner.Text = "Rolling Contract Share Winner:"
         '
         'ucrReceiverValueShareWinner
@@ -346,7 +346,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverValueShareWinner.Name = "ucrReceiverValueShareWinner"
         Me.ucrReceiverValueShareWinner.Selector = Nothing
         Me.ucrReceiverValueShareWinner.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverValueShareWinner.TabIndex = 96
+        Me.ucrReceiverValueShareWinner.TabIndex = 40
         '
         'ucrReceiverRollingNumberIssuer
         '
@@ -356,7 +356,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverRollingNumberIssuer.Name = "ucrReceiverRollingNumberIssuer"
         Me.ucrReceiverRollingNumberIssuer.Selector = Nothing
         Me.ucrReceiverRollingNumberIssuer.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRollingNumberIssuer.TabIndex = 92
+        Me.ucrReceiverRollingNumberIssuer.TabIndex = 34
         '
         'lblRollSumIssuer
         '
@@ -364,7 +364,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblRollSumIssuer.Location = New System.Drawing.Point(399, 354)
         Me.lblRollSumIssuer.Name = "lblRollSumIssuer"
         Me.lblRollSumIssuer.Size = New System.Drawing.Size(140, 13)
-        Me.lblRollSumIssuer.TabIndex = 93
+        Me.lblRollSumIssuer.TabIndex = 37
         Me.lblRollSumIssuer.Text = "Rolling Contract Sum Issuer:"
         '
         'ucrReceiverValueSumIssuer
@@ -375,7 +375,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverValueSumIssuer.Name = "ucrReceiverValueSumIssuer"
         Me.ucrReceiverValueSumIssuer.Selector = Nothing
         Me.ucrReceiverValueSumIssuer.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverValueSumIssuer.TabIndex = 94
+        Me.ucrReceiverValueSumIssuer.TabIndex = 38
         '
         'ucrReceiverSingleBidder
         '
@@ -385,7 +385,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverSingleBidder.Name = "ucrReceiverSingleBidder"
         Me.ucrReceiverSingleBidder.Selector = Nothing
         Me.ucrReceiverSingleBidder.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSingleBidder.TabIndex = 90
+        Me.ucrReceiverSingleBidder.TabIndex = 20
         '
         'lblSingleBidder
         '
@@ -393,7 +393,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblSingleBidder.Location = New System.Drawing.Point(234, 397)
         Me.lblSingleBidder.Name = "lblSingleBidder"
         Me.lblSingleBidder.Size = New System.Drawing.Size(72, 13)
-        Me.lblSingleBidder.TabIndex = 89
+        Me.lblSingleBidder.TabIndex = 19
         Me.lblSingleBidder.Text = "Single Bidder:"
         '
         'lblSignaturePeriod5
@@ -402,7 +402,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblSignaturePeriod5.Location = New System.Drawing.Point(396, 97)
         Me.lblSignaturePeriod5.Name = "lblSignaturePeriod5"
         Me.lblSignaturePeriod5.Size = New System.Drawing.Size(147, 13)
-        Me.lblSignaturePeriod5.TabIndex = 87
+        Me.lblSignaturePeriod5.TabIndex = 25
         Me.lblSignaturePeriod5.Text = "Signature Period (5 Quartiles):"
         '
         'ucrReceiverPeriod5
@@ -413,7 +413,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverPeriod5.Name = "ucrReceiverPeriod5"
         Me.ucrReceiverPeriod5.Selector = Nothing
         Me.ucrReceiverPeriod5.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPeriod5.TabIndex = 88
+        Me.ucrReceiverPeriod5.TabIndex = 26
         '
         'lblSignaturePeriodCorrected
         '
@@ -421,7 +421,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblSignaturePeriodCorrected.Location = New System.Drawing.Point(399, 54)
         Me.lblSignaturePeriodCorrected.Name = "lblSignaturePeriodCorrected"
         Me.lblSignaturePeriodCorrected.Size = New System.Drawing.Size(137, 13)
-        Me.lblSignaturePeriodCorrected.TabIndex = 81
+        Me.lblSignaturePeriodCorrected.TabIndex = 23
         Me.lblSignaturePeriodCorrected.Text = "Signature Period Corrected:"
         '
         'lblSignaturePeriodCat
@@ -430,7 +430,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblSignaturePeriodCat.Location = New System.Drawing.Point(399, 183)
         Me.lblSignaturePeriodCat.Name = "lblSignaturePeriodCat"
         Me.lblSignaturePeriodCat.Size = New System.Drawing.Size(141, 13)
-        Me.lblSignaturePeriodCat.TabIndex = 85
+        Me.lblSignaturePeriodCat.TabIndex = 29
         Me.lblSignaturePeriodCat.Text = "Signature Period Categories:"
         '
         'ucrReceiverPeriodCat
@@ -441,7 +441,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverPeriodCat.Name = "ucrReceiverPeriodCat"
         Me.ucrReceiverPeriodCat.Selector = Nothing
         Me.ucrReceiverPeriodCat.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPeriodCat.TabIndex = 86
+        Me.ucrReceiverPeriodCat.TabIndex = 30
         '
         'ucrReceiverSignaturePeriodCorrected
         '
@@ -451,7 +451,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverSignaturePeriodCorrected.Name = "ucrReceiverSignaturePeriodCorrected"
         Me.ucrReceiverSignaturePeriodCorrected.Selector = Nothing
         Me.ucrReceiverSignaturePeriodCorrected.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSignaturePeriodCorrected.TabIndex = 82
+        Me.ucrReceiverSignaturePeriodCorrected.TabIndex = 24
         '
         'lblSignaturePeriod25
         '
@@ -459,7 +459,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblSignaturePeriod25.Location = New System.Drawing.Point(398, 140)
         Me.lblSignaturePeriod25.Name = "lblSignaturePeriod25"
         Me.lblSignaturePeriod25.Size = New System.Drawing.Size(153, 13)
-        Me.lblSignaturePeriod25.TabIndex = 83
+        Me.lblSignaturePeriod25.TabIndex = 27
         Me.lblSignaturePeriod25.Text = "Signature Period (25 Quartiles):"
         '
         'ucrReceiverPeriod25
@@ -470,7 +470,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverPeriod25.Name = "ucrReceiverPeriod25"
         Me.ucrReceiverPeriod25.Selector = Nothing
         Me.ucrReceiverPeriod25.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPeriod25.TabIndex = 84
+        Me.ucrReceiverPeriod25.TabIndex = 28
         '
         'ucrReceiverRollingNumberWinner
         '
@@ -480,7 +480,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverRollingNumberWinner.Name = "ucrReceiverRollingNumberWinner"
         Me.ucrReceiverRollingNumberWinner.Selector = Nothing
         Me.ucrReceiverRollingNumberWinner.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRollingNumberWinner.TabIndex = 80
+        Me.ucrReceiverRollingNumberWinner.TabIndex = 32
         '
         'lblRollNumWinner
         '
@@ -488,7 +488,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblRollNumWinner.Location = New System.Drawing.Point(399, 228)
         Me.lblRollNumWinner.Name = "lblRollNumWinner"
         Me.lblRollNumWinner.Size = New System.Drawing.Size(162, 13)
-        Me.lblRollNumWinner.TabIndex = 79
+        Me.lblRollNumWinner.TabIndex = 31
         Me.lblRollNumWinner.Text = "Rolling Contract Number Winner:"
         '
         'lblWinnerCountryISO3
@@ -497,7 +497,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblWinnerCountryISO3.Location = New System.Drawing.Point(567, 268)
         Me.lblWinnerCountryISO3.Name = "lblWinnerCountryISO3"
         Me.lblWinnerCountryISO3.Size = New System.Drawing.Size(110, 13)
-        Me.lblWinnerCountryISO3.TabIndex = 117
+        Me.lblWinnerCountryISO3.TabIndex = 53
         Me.lblWinnerCountryISO3.Text = "Winner Country ISO3:"
         '
         'ucrReceiverWinnerCountryISO3
@@ -508,7 +508,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverWinnerCountryISO3.Name = "ucrReceiverWinnerCountryISO3"
         Me.ucrReceiverWinnerCountryISO3.Selector = Nothing
         Me.ucrReceiverWinnerCountryISO3.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWinnerCountryISO3.TabIndex = 118
+        Me.ucrReceiverWinnerCountryISO3.TabIndex = 54
         '
         'lblWinnerCountryISO2
         '
@@ -516,7 +516,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblWinnerCountryISO2.Location = New System.Drawing.Point(567, 225)
         Me.lblWinnerCountryISO2.Name = "lblWinnerCountryISO2"
         Me.lblWinnerCountryISO2.Size = New System.Drawing.Size(110, 13)
-        Me.lblWinnerCountryISO2.TabIndex = 111
+        Me.lblWinnerCountryISO2.TabIndex = 51
         Me.lblWinnerCountryISO2.Text = "Winner Country ISO2:"
         '
         'lblWBPPP
@@ -525,7 +525,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblWBPPP.Location = New System.Drawing.Point(568, 311)
         Me.lblWBPPP.Name = "lblWBPPP"
         Me.lblWBPPP.Size = New System.Drawing.Size(52, 13)
-        Me.lblWBPPP.TabIndex = 115
+        Me.lblWBPPP.TabIndex = 55
         Me.lblWBPPP.Text = "WB PPP:"
         '
         'ucrReceiverPPPAdjustedContractValue
@@ -536,7 +536,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverPPPAdjustedContractValue.Name = "ucrReceiverPPPAdjustedContractValue"
         Me.ucrReceiverPPPAdjustedContractValue.Selector = Nothing
         Me.ucrReceiverPPPAdjustedContractValue.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPPPAdjustedContractValue.TabIndex = 116
+        Me.ucrReceiverPPPAdjustedContractValue.TabIndex = 58
         '
         'ucrReceiverWinnerCountryISO2
         '
@@ -546,7 +546,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverWinnerCountryISO2.Name = "ucrReceiverWinnerCountryISO2"
         Me.ucrReceiverWinnerCountryISO2.Selector = Nothing
         Me.ucrReceiverWinnerCountryISO2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWinnerCountryISO2.TabIndex = 112
+        Me.ucrReceiverWinnerCountryISO2.TabIndex = 52
         '
         'lblPPPAdjustedContractValue
         '
@@ -554,7 +554,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblPPPAdjustedContractValue.Location = New System.Drawing.Point(567, 354)
         Me.lblPPPAdjustedContractValue.Name = "lblPPPAdjustedContractValue"
         Me.lblPPPAdjustedContractValue.Size = New System.Drawing.Size(148, 13)
-        Me.lblPPPAdjustedContractValue.TabIndex = 113
+        Me.lblPPPAdjustedContractValue.TabIndex = 57
         Me.lblPPPAdjustedContractValue.Text = "PPP Adjusted Contract Value:"
         '
         'ucrReceiverWBPPP
@@ -565,7 +565,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverWBPPP.Name = "ucrReceiverWBPPP"
         Me.ucrReceiverWBPPP.Selector = Nothing
         Me.ucrReceiverWBPPP.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWBPPP.TabIndex = 114
+        Me.ucrReceiverWBPPP.TabIndex = 56
         '
         'ucrReceiverSecrecyScore
         '
@@ -575,7 +575,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverSecrecyScore.Name = "ucrReceiverSecrecyScore"
         Me.ucrReceiverSecrecyScore.Selector = Nothing
         Me.ucrReceiverSecrecyScore.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecrecyScore.TabIndex = 110
+        Me.ucrReceiverSecrecyScore.TabIndex = 60
         '
         'lblSecrecyScore
         '
@@ -583,7 +583,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblSecrecyScore.Location = New System.Drawing.Point(567, 399)
         Me.lblSecrecyScore.Name = "lblSecrecyScore"
         Me.lblSecrecyScore.Size = New System.Drawing.Size(80, 13)
-        Me.lblSecrecyScore.TabIndex = 109
+        Me.lblSecrecyScore.TabIndex = 59
         Me.lblSecrecyScore.Text = "Secrecy Score:"
         '
         'lblCountryISO2
@@ -592,7 +592,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblCountryISO2.Location = New System.Drawing.Point(567, 54)
         Me.lblCountryISO2.Name = "lblCountryISO2"
         Me.lblCountryISO2.Size = New System.Drawing.Size(73, 13)
-        Me.lblCountryISO2.TabIndex = 107
+        Me.lblCountryISO2.TabIndex = 43
         Me.lblCountryISO2.Text = "Country ISO2:"
         '
         'ucrReceiverCountryISO2
@@ -603,7 +603,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverCountryISO2.Name = "ucrReceiverCountryISO2"
         Me.ucrReceiverCountryISO2.Selector = Nothing
         Me.ucrReceiverCountryISO2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCountryISO2.TabIndex = 108
+        Me.ucrReceiverCountryISO2.TabIndex = 44
         '
         'lblContractValueShareOverThreshold
         '
@@ -611,7 +611,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblContractValueShareOverThreshold.Location = New System.Drawing.Point(567, 11)
         Me.lblContractValueShareOverThreshold.Name = "lblContractValueShareOverThreshold"
         Me.lblContractValueShareOverThreshold.Size = New System.Drawing.Size(161, 13)
-        Me.lblContractValueShareOverThreshold.TabIndex = 101
+        Me.lblContractValueShareOverThreshold.TabIndex = 41
         Me.lblContractValueShareOverThreshold.Text = "Contract Value Share Threshold:"
         '
         'lblAddBids
@@ -620,7 +620,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblAddBids.Location = New System.Drawing.Point(567, 140)
         Me.lblAddBids.Name = "lblAddBids"
         Me.lblAddBids.Size = New System.Drawing.Size(44, 13)
-        Me.lblAddBids.TabIndex = 105
+        Me.lblAddBids.TabIndex = 47
         Me.lblAddBids.Text = "All Bids:"
         '
         'ucrReceiverAllBids
@@ -631,7 +631,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverAllBids.Name = "ucrReceiverAllBids"
         Me.ucrReceiverAllBids.Selector = Nothing
         Me.ucrReceiverAllBids.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverAllBids.TabIndex = 106
+        Me.ucrReceiverAllBids.TabIndex = 48
         '
         'ucrReceiverContractShareThreshold
         '
@@ -641,7 +641,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverContractShareThreshold.Name = "ucrReceiverContractShareThreshold"
         Me.ucrReceiverContractShareThreshold.Selector = Nothing
         Me.ucrReceiverContractShareThreshold.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverContractShareThreshold.TabIndex = 102
+        Me.ucrReceiverContractShareThreshold.TabIndex = 42
         '
         'lblCountryISO3
         '
@@ -649,7 +649,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblCountryISO3.Location = New System.Drawing.Point(567, 97)
         Me.lblCountryISO3.Name = "lblCountryISO3"
         Me.lblCountryISO3.Size = New System.Drawing.Size(73, 13)
-        Me.lblCountryISO3.TabIndex = 103
+        Me.lblCountryISO3.TabIndex = 45
         Me.lblCountryISO3.Text = "Country ISO3:"
         '
         'ucrReceiverCountryISO3
@@ -660,7 +660,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverCountryISO3.Name = "ucrReceiverCountryISO3"
         Me.ucrReceiverCountryISO3.Selector = Nothing
         Me.ucrReceiverCountryISO3.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCountryISO3.TabIndex = 104
+        Me.ucrReceiverCountryISO3.TabIndex = 46
         '
         'ucrReceiverAllBidsTrimmed
         '
@@ -670,7 +670,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverAllBidsTrimmed.Name = "ucrReceiverAllBidsTrimmed"
         Me.ucrReceiverAllBidsTrimmed.Selector = Nothing
         Me.ucrReceiverAllBidsTrimmed.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverAllBidsTrimmed.TabIndex = 100
+        Me.ucrReceiverAllBidsTrimmed.TabIndex = 50
         '
         'lblAllBidsTrimmed
         '
@@ -678,7 +678,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblAllBidsTrimmed.Location = New System.Drawing.Point(567, 185)
         Me.lblAllBidsTrimmed.Name = "lblAllBidsTrimmed"
         Me.lblAllBidsTrimmed.Size = New System.Drawing.Size(93, 13)
-        Me.lblAllBidsTrimmed.TabIndex = 99
+        Me.lblAllBidsTrimmed.TabIndex = 49
         Me.lblAllBidsTrimmed.Text = "All Bids (Trimmed):"
         '
         'lblTaxHaven2
@@ -687,7 +687,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblTaxHaven2.Location = New System.Drawing.Point(731, 54)
         Me.lblTaxHaven2.Name = "lblTaxHaven2"
         Me.lblTaxHaven2.Size = New System.Drawing.Size(72, 13)
-        Me.lblTaxHaven2.TabIndex = 127
+        Me.lblTaxHaven2.TabIndex = 63
         Me.lblTaxHaven2.Text = "Tax Haven 2:"
         '
         'ucrReceiverTaxHaven2
@@ -698,7 +698,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverTaxHaven2.Name = "ucrReceiverTaxHaven2"
         Me.ucrReceiverTaxHaven2.Selector = Nothing
         Me.ucrReceiverTaxHaven2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTaxHaven2.TabIndex = 128
+        Me.ucrReceiverTaxHaven2.TabIndex = 64
         '
         'lblTaxHaven
         '
@@ -706,7 +706,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblTaxHaven.Location = New System.Drawing.Point(731, 11)
         Me.lblTaxHaven.Name = "lblTaxHaven"
         Me.lblTaxHaven.Size = New System.Drawing.Size(63, 13)
-        Me.lblTaxHaven.TabIndex = 121
+        Me.lblTaxHaven.TabIndex = 61
         Me.lblTaxHaven.Text = "Tax Haven:"
         '
         'lblTaxHaven3bi
@@ -715,7 +715,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblTaxHaven3bi.Location = New System.Drawing.Point(731, 140)
         Me.lblTaxHaven3bi.Name = "lblTaxHaven3bi"
         Me.lblTaxHaven3bi.Size = New System.Drawing.Size(80, 13)
-        Me.lblTaxHaven3bi.TabIndex = 125
+        Me.lblTaxHaven3bi.TabIndex = 67
         Me.lblTaxHaven3bi.Text = "Tax Haven 3bi:"
         '
         'ucrReceiverTaxHaven3bi
@@ -726,7 +726,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverTaxHaven3bi.Name = "ucrReceiverTaxHaven3bi"
         Me.ucrReceiverTaxHaven3bi.Selector = Nothing
         Me.ucrReceiverTaxHaven3bi.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTaxHaven3bi.TabIndex = 126
+        Me.ucrReceiverTaxHaven3bi.TabIndex = 68
         '
         'ucrReceiverTaxHaven
         '
@@ -736,7 +736,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverTaxHaven.Name = "ucrReceiverTaxHaven"
         Me.ucrReceiverTaxHaven.Selector = Nothing
         Me.ucrReceiverTaxHaven.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTaxHaven.TabIndex = 122
+        Me.ucrReceiverTaxHaven.TabIndex = 62
         '
         'lblTaxHaven3
         '
@@ -744,7 +744,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.lblTaxHaven3.Location = New System.Drawing.Point(731, 97)
         Me.lblTaxHaven3.Name = "lblTaxHaven3"
         Me.lblTaxHaven3.Size = New System.Drawing.Size(72, 13)
-        Me.lblTaxHaven3.TabIndex = 123
+        Me.lblTaxHaven3.TabIndex = 65
         Me.lblTaxHaven3.Text = "Tax Haven 3:"
         '
         'ucrReceiverTaxHaven3
@@ -755,7 +755,7 @@ Partial Class sdgCorruptionCalculatedColumns
         Me.ucrReceiverTaxHaven3.Name = "ucrReceiverTaxHaven3"
         Me.ucrReceiverTaxHaven3.Selector = Nothing
         Me.ucrReceiverTaxHaven3.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTaxHaven3.TabIndex = 124
+        Me.ucrReceiverTaxHaven3.TabIndex = 66
         '
         'sdgCorruptionCalculatedColumns
         '

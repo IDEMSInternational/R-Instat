@@ -52,7 +52,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverSmallState.Name = "ucrReceiverSmallState"
         Me.ucrReceiverSmallState.Selector = Nothing
         Me.ucrReceiverSmallState.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSmallState.TabIndex = 31
+        Me.ucrReceiverSmallState.TabIndex = 10
         '
         'lblSmallState
         '
@@ -60,7 +60,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblSmallState.Location = New System.Drawing.Point(251, 201)
         Me.lblSmallState.Name = "lblSmallState"
         Me.lblSmallState.Size = New System.Drawing.Size(63, 13)
-        Me.lblSmallState.TabIndex = 30
+        Me.lblSmallState.TabIndex = 9
         Me.lblSmallState.Text = "Small State:"
         '
         'lblCountryISO2
@@ -69,7 +69,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblCountryISO2.Location = New System.Drawing.Point(251, 70)
         Me.lblCountryISO2.Name = "lblCountryISO2"
         Me.lblCountryISO2.Size = New System.Drawing.Size(73, 13)
-        Me.lblCountryISO2.TabIndex = 45
+        Me.lblCountryISO2.TabIndex = 3
         Me.lblCountryISO2.Text = "Country ISO2:"
         '
         'ucrReceiverISO2
@@ -80,7 +80,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverISO2.Name = "ucrReceiverISO2"
         Me.ucrReceiverISO2.Selector = Nothing
         Me.ucrReceiverISO2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverISO2.TabIndex = 46
+        Me.ucrReceiverISO2.TabIndex = 4
         '
         'ucrCountryLevelSelector
         '
@@ -90,7 +90,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrCountryLevelSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCountryLevelSelector.Name = "ucrCountryLevelSelector"
         Me.ucrCountryLevelSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrCountryLevelSelector.TabIndex = 32
+        Me.ucrCountryLevelSelector.TabIndex = 0
         '
         'lblCountry
         '
@@ -98,7 +98,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblCountry.Location = New System.Drawing.Point(251, 27)
         Me.lblCountry.Name = "lblCountry"
         Me.lblCountry.Size = New System.Drawing.Size(46, 13)
-        Me.lblCountry.TabIndex = 33
+        Me.lblCountry.TabIndex = 1
         Me.lblCountry.Text = "Country:"
         '
         'ucrReceiverCountry
@@ -109,7 +109,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
         Me.ucrReceiverCountry.Selector = Nothing
         Me.ucrReceiverCountry.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCountry.TabIndex = 34
+        Me.ucrReceiverCountry.TabIndex = 2
         '
         'ucrReceiverSS2015
         '
@@ -119,7 +119,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverSS2015.Name = "ucrReceiverSS2015"
         Me.ucrReceiverSS2015.Selector = Nothing
         Me.ucrReceiverSS2015.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSS2015.TabIndex = 44
+        Me.ucrReceiverSS2015.TabIndex = 18
         '
         'lblSS2015
         '
@@ -127,7 +127,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblSS2015.Location = New System.Drawing.Point(395, 156)
         Me.lblSS2015.Name = "lblSS2015"
         Me.lblSS2015.Size = New System.Drawing.Size(51, 13)
-        Me.lblSS2015.TabIndex = 43
+        Me.lblSS2015.TabIndex = 17
         Me.lblSS2015.Text = "SS 2015:"
         '
         'ucrReceiverISO3
@@ -138,7 +138,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverISO3.Name = "ucrReceiverISO3"
         Me.ucrReceiverISO3.Selector = Nothing
         Me.ucrReceiverISO3.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverISO3.TabIndex = 36
+        Me.ucrReceiverISO3.TabIndex = 6
         '
         'lblCountryISO3
         '
@@ -146,7 +146,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblCountryISO3.Location = New System.Drawing.Point(251, 113)
         Me.lblCountryISO3.Name = "lblCountryISO3"
         Me.lblCountryISO3.Size = New System.Drawing.Size(73, 13)
-        Me.lblCountryISO3.TabIndex = 35
+        Me.lblCountryISO3.TabIndex = 5
         Me.lblCountryISO3.Text = "Country ISO3:"
         '
         'ucrReceiverSS2011
@@ -157,7 +157,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverSS2011.Name = "ucrReceiverSS2011"
         Me.ucrReceiverSS2011.Selector = Nothing
         Me.ucrReceiverSS2011.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSS2011.TabIndex = 40
+        Me.ucrReceiverSS2011.TabIndex = 14
         '
         'lblSS2013
         '
@@ -165,7 +165,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblSS2013.Location = New System.Drawing.Point(395, 113)
         Me.lblSS2013.Name = "lblSS2013"
         Me.lblSS2013.Size = New System.Drawing.Size(48, 13)
-        Me.lblSS2013.TabIndex = 41
+        Me.lblSS2013.TabIndex = 15
         Me.lblSS2013.Text = "SS 2013"
         '
         'ucrReceiverWBPPP
@@ -176,7 +176,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverWBPPP.Name = "ucrReceiverWBPPP"
         Me.ucrReceiverWBPPP.Selector = Nothing
         Me.ucrReceiverWBPPP.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWBPPP.TabIndex = 38
+        Me.ucrReceiverWBPPP.TabIndex = 8
         '
         'ucrReceiverSS2013
         '
@@ -186,7 +186,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverSS2013.Name = "ucrReceiverSS2013"
         Me.ucrReceiverSS2013.Selector = Nothing
         Me.ucrReceiverSS2013.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSS2013.TabIndex = 42
+        Me.ucrReceiverSS2013.TabIndex = 16
         '
         'lblWBPPP
         '
@@ -194,7 +194,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblWBPPP.Location = New System.Drawing.Point(251, 156)
         Me.lblWBPPP.Name = "lblWBPPP"
         Me.lblWBPPP.Size = New System.Drawing.Size(52, 13)
-        Me.lblWBPPP.TabIndex = 37
+        Me.lblWBPPP.TabIndex = 7
         Me.lblWBPPP.Text = "WB PPP:"
         '
         'lblSS2011
@@ -203,7 +203,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblSS2011.Location = New System.Drawing.Point(395, 70)
         Me.lblSS2011.Name = "lblSS2011"
         Me.lblSS2011.Size = New System.Drawing.Size(51, 13)
-        Me.lblSS2011.TabIndex = 39
+        Me.lblSS2011.TabIndex = 13
         Me.lblSS2011.Text = "SS 2011:"
         '
         'ucrBase
@@ -211,7 +211,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrBase.Location = New System.Drawing.Point(186, 252)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 47
+        Me.ucrBase.TabIndex = 19
         '
         'lblSS2009
         '
@@ -219,7 +219,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.lblSS2009.Location = New System.Drawing.Point(395, 27)
         Me.lblSS2009.Name = "lblSS2009"
         Me.lblSS2009.Size = New System.Drawing.Size(51, 13)
-        Me.lblSS2009.TabIndex = 48
+        Me.lblSS2009.TabIndex = 11
         Me.lblSS2009.Text = "SS 2009:"
         '
         'ucrReceiverSS2009
@@ -230,7 +230,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.ucrReceiverSS2009.Name = "ucrReceiverSS2009"
         Me.ucrReceiverSS2009.Selector = Nothing
         Me.ucrReceiverSS2009.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSS2009.TabIndex = 49
+        Me.ucrReceiverSS2009.TabIndex = 12
         '
         'sdgCorruptionCountryLevelColumns
         '
