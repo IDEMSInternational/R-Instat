@@ -22,7 +22,7 @@ Partial Class dlgCombineforGraphics
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblGraphsToCombine = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSave = New instat.ucrSave()
         Me.ucrCombineGraphReceiver = New instat.ucrReceiverMultiple()
@@ -30,14 +30,14 @@ Partial Class dlgCombineforGraphics
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblGraphsToCombine
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(254, 44)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(104, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Graphs To Combine:"
+        Me.lblGraphsToCombine.AutoSize = True
+        Me.lblGraphsToCombine.Location = New System.Drawing.Point(255, 44)
+        Me.lblGraphsToCombine.Name = "lblGraphsToCombine"
+        Me.lblGraphsToCombine.Size = New System.Drawing.Size(104, 13)
+        Me.lblGraphsToCombine.TabIndex = 1
+        Me.lblGraphsToCombine.Text = "Graphs To Combine:"
         '
         'cmdOptions
         '
@@ -90,7 +90,7 @@ Partial Class dlgCombineforGraphics
         Me.ClientSize = New System.Drawing.Size(420, 312)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblGraphsToCombine)
         Me.Controls.Add(Me.ucrCombineGraphReceiver)
         Me.Controls.Add(Me.ucrCombineGraphSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -109,7 +109,7 @@ Partial Class dlgCombineforGraphics
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrCombineGraphSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrCombineGraphReceiver As ucrReceiverMultiple
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblGraphsToCombine As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSave As ucrSave
 End Class
