@@ -38,7 +38,7 @@ Partial Class dlgWindrose
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(258, 40)
+        Me.lblXVariable.Location = New System.Drawing.Point(260, 47)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(69, 13)
         Me.lblXVariable.TabIndex = 1
@@ -47,7 +47,7 @@ Partial Class dlgWindrose
         'lblYVariable
         '
         Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.Location = New System.Drawing.Point(257, 91)
+        Me.lblYVariable.Location = New System.Drawing.Point(260, 95)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(80, 13)
         Me.lblYVariable.TabIndex = 3
@@ -56,7 +56,7 @@ Partial Class dlgWindrose
         'lblFacet
         '
         Me.lblFacet.AutoSize = True
-        Me.lblFacet.Location = New System.Drawing.Point(258, 142)
+        Me.lblFacet.Location = New System.Drawing.Point(260, 142)
         Me.lblFacet.Name = "lblFacet"
         Me.lblFacet.Size = New System.Drawing.Size(37, 13)
         Me.lblFacet.TabIndex = 5
@@ -65,16 +65,16 @@ Partial Class dlgWindrose
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(255, 196)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(260, 196)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
-        Me.lblNoOfColumns.Size = New System.Drawing.Size(76, 13)
+        Me.lblNoOfColumns.Size = New System.Drawing.Size(79, 13)
         Me.lblNoOfColumns.TabIndex = 7
-        Me.lblNoOfColumns.Text = "No of Columns"
+        Me.lblNoOfColumns.Text = "No of Columns:"
         '
         'ucrReceiverFacet
         '
         Me.ucrReceiverFacet.frmParent = Me
-        Me.ucrReceiverFacet.Location = New System.Drawing.Point(261, 155)
+        Me.ucrReceiverFacet.Location = New System.Drawing.Point(260, 155)
         Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
         Me.ucrReceiverFacet.Selector = Nothing
@@ -92,18 +92,18 @@ Partial Class dlgWindrose
         '
         Me.ucrNudNoOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(333, 193)
+        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(345, 196)
         Me.ucrNudNoOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Name = "ucrNudNoOfColumns"
-        Me.ucrNudNoOfColumns.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNoOfColumns.Size = New System.Drawing.Size(35, 20)
         Me.ucrNudNoOfColumns.TabIndex = 8
         Me.ucrNudNoOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverWindDirection
         '
         Me.ucrReceiverWindDirection.frmParent = Me
-        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(260, 104)
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(260, 108)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
@@ -113,7 +113,7 @@ Partial Class dlgWindrose
         'ucrReceiverWindSpeed
         '
         Me.ucrReceiverWindSpeed.frmParent = Me
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(260, 53)
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(260, 60)
         Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
