@@ -176,7 +176,6 @@ Public Class dlgDefineCorruption
         End If
     End Sub
 
-
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
         Dim lstValues As New List(Of String)
 

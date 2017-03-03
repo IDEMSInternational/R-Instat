@@ -18,12 +18,13 @@ Imports instat.Translations
 
 Public Class sdgCorruptionCalculatedColumns
     Public bControlsInitialised As Boolean = False
-    Public clsCountryLevel As New RFunction
+    Public clsCalculatedColumns As New RFunction
     Dim lstReceivers As New List(Of ucrReceiverSingle)
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub sdgCorruptionCalculatedLevels_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
+        AutoFillReceivers()
     End Sub
 
     Public Sub InitialiseControls()
@@ -112,7 +113,56 @@ Public Class sdgCorruptionCalculatedColumns
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsCountryLevel = clsNewRFunction
-        SetRCode(Me, clsCountryLevel, bReset)
+        clsCalculatedColumns = clsNewRFunction
+        SetRCode(Me, clsCalculatedColumns, bReset)
+    End Sub
+
+    Private Sub AutoFillReceivers()
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver
+        Dim bFound As Boolean = False
+
+        ucrCurrentReceiver = ucrCalculatedColumnsSelector.CurrentReceiver
+
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                For Each lviTempVariable As ListViewItem In ucrCalculatedColumnsSelector.lstAvailableVariable.Items
+                    For Each strValue As String In lstRecognisedValues
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, ucrCalculatedColumnsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
+
+    Private Sub ucrCalculatedColumnsSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCalculatedColumnsSelector.ControlValueChanged
+        AutoFillReceivers()
     End Sub
 End Class
