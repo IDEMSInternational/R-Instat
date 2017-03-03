@@ -54,6 +54,7 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverFiscalYear = New instat.ucrReceiverSingle()
         Me.lblRegion = New System.Windows.Forms.Label()
         Me.ucrReceiverRegion = New instat.ucrReceiverSingle()
+        Me.ucrChkAutoGenerate = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'ucrDefineCorruptionSelector
@@ -358,11 +359,20 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverRegion.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverRegion.TabIndex = 31
         '
+        'ucrChkAutoGenerate
+        '
+        Me.ucrChkAutoGenerate.Checked = False
+        Me.ucrChkAutoGenerate.Location = New System.Drawing.Point(414, 331)
+        Me.ucrChkAutoGenerate.Name = "ucrChkAutoGenerate"
+        Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkAutoGenerate.TabIndex = 32
+        '
         'dlgDefineCorruption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(553, 437)
+        Me.Controls.Add(Me.ucrChkAutoGenerate)
         Me.Controls.Add(Me.lblRegion)
         Me.Controls.Add(Me.ucrReceiverRegion)
         Me.Controls.Add(Me.lblFiscalYear)
@@ -438,4 +448,5 @@ Partial Class dlgDefineCorruption
     Friend WithEvents ucrReceiverRegion As ucrReceiverSingle
     Friend WithEvents lblFiscalYear As Label
     Friend WithEvents ucrReceiverFiscalYear As ucrReceiverSingle
+    Friend WithEvents ucrChkAutoGenerate As ucrCheck
 End Class

@@ -84,6 +84,12 @@ Public Class dlgDefineCorruption
         ucrReceiverContractValue.Tag = "original_contract_value"
         ucrReceiverFiscalYear.Tag = "fiscal_year"
 
+        'ucrChk
+        ucrChkAutoGenerate.SetText("Auto-Generate")
+        ucrChkAutoGenerate.SetParameter(New RParameter("auto_generate", 1))
+        ucrChkAutoGenerate.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkAutoGenerate.SetRDefault("TRUE")
+
         SetRSelector()
     End Sub
 
@@ -93,6 +99,7 @@ Public Class dlgDefineCorruption
         ucrDefineCorruptionSelector.Reset()
         ucrReceiverCountry.SetMeAsReceiver()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_corruption")
+        clsDefaultFunction.AddParameter("auto_generate", "TRUE")
         clsTypesFunction.SetRCommand("c")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
         ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
@@ -102,6 +109,7 @@ Public Class dlgDefineCorruption
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrDefineCorruptionSelector.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkAutoGenerate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         SetRCodesforReceivers(bReset)
     End Sub
 
