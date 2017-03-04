@@ -63,20 +63,24 @@ Public Class dlgRugPlot
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrRugPlotSelector.SetParameter(New RParameter("data", 0))
+        ucrRugPlotSelector.SetParameterIsrfunction()
 
         ucrVariablesAsFactorForRugPlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForRugPlot.SetSelector(ucrRugPlotSelector)
         ucrVariablesAsFactorForRugPlot.SetIncludedDataType({"factor", "numeric"})
         ucrVariablesAsFactorForRugPlot.SetParameter(New RParameter("y"))
+        ' ucrVariablesAsFactorForRugPlot.SetParameterIsRFunction()
 
         ucrReceiverX.Selector = ucrRugPlotSelector
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverX.SetParameter(New RParameter("x"))
+        ucrReceiverX.SetParameterIsRFunction()
 
 
         ucrFactorOptionalReceiver.Selector = ucrRugPlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour"))
+        ucrFactorOptionalReceiver.SetParameterIsRFunction()
 
         ucrSaveGraph.SetPrefix("Rug")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -84,6 +88,7 @@ Public Class dlgRugPlot
         ucrSaveGraph.SetCheckBoxText("Save graph")
         ucrSaveGraph.SetDataFrameSelector(ucrRugPlotSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
     End Sub
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
@@ -93,17 +98,16 @@ Public Class dlgRugPlot
         ucrRugPlotSelector.Reset()
         ucrSaveGraph.Reset()
         ucrVariablesAsFactorForRugPlot.ResetControl()
-
         ucrBase.clsRsyntax.SetOperation("+")
         clsDefaultFunction.SetRCommand("ggplot")
+        clsRgeom_RugPlotFunction.SetRCommand("geom_rug")
         clsRaesFunction.SetRCommand("aes")
         clsDefaultFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsDefaultFunction)
-
-
+        ' clsGeomOp.AddParameter(iPosition:=5, clsRFunctionParameter:=clsRgeom_RugPlotFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_RugPlotFunction)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
+        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -117,7 +121,6 @@ Public Class dlgRugPlot
         sdgPlots.ShowDialog()
     End Sub
     Private Sub cmdRugPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdRugPlotOptions.Click
-
 
         ''''''' i wonder if all this will be needed for the new system
 
