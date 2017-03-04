@@ -62,6 +62,7 @@ Public Class dlgWindrose
 
         ucrNudNoOfColumns.SetParameter(New RParameter("n_col"))
         ucrNudNoOfColumns.SetLinkedDisplayControl(lblNoOfColumns)
+        ucrNudNoOfColumns.SetRDefault(1)
         ucrNudNoOfColumns.Minimum = 1
 
         ucrSaveGraph.SetPrefix("Windrose")
@@ -86,7 +87,7 @@ Public Class dlgWindrose
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverWindSpeed.IsEmpty AndAlso Not ucrReceiverWindDirection.IsEmpty AndAlso ucrSaveGraph.IsComplete AndAlso (Not ucrReceiverFacet.IsDisposed AndAlso ucrNudNoOfColumns.GetText <> "") Then
+        If Not ucrReceiverWindSpeed.IsEmpty AndAlso Not ucrReceiverWindDirection.IsEmpty AndAlso ucrSaveGraph.IsComplete AndAlso ((Not ucrReceiverFacet.IsEmpty AndAlso ucrNudNoOfColumns.GetText <> "") OrElse ucrReceiverFacet.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -126,13 +127,5 @@ Public Class dlgWindrose
 
     Private Sub ucrWindRoseSelector_DataFrameChanged() Handles ucrWindRoseSelector.ControlValueChanged
         clsFactorColumn.AddParameter("data_name", Chr(34) & ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverFacet_Load(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrWindRoseSelector_DataFrameChanged(ucrChangedControl As ucrCore) Handles ucrWindRoseSelector.ControlValueChanged
-
     End Sub
 End Class

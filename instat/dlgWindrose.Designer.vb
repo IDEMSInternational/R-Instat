@@ -132,7 +132,7 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 249)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 249)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
