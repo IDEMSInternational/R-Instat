@@ -2151,21 +2151,28 @@ all_primary_corruption_country_level_column_types <- c(corruption_ctry_iso2_labe
 corruption_type_label = "Corruption_Type"
 
 # Data frame metadata for corruption dataframes
-is_corruption_label = "Is_Corruption"
+corruption_data_label = "Corruption_Data"
+corruption_contract_level_label = "Contract Level"
+corruption_coountry_level_label = "Country Level"
 
-instat_object$set("public","define_as_corruption", function(data_name, primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
-  self$append_to_dataframe_metadata(data_name, is_corruption_label, TRUE)
-  for(curr_data_name in self$get_data_names()) {
-    if(!self$get_data_objects(data_name)$is_metadata(is_corruption_label)) {
-      self$append_to_dataframe_metadata(curr_data_name, is_corruption_label, FALSE)
-    }
-  }
+instat_object$set("public","define_as_corruption", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
+  self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_contract_level_label)
   self$get_data_objects(data_name)$set_corruption_types(primary_types, calculated_types, auto_generate)
+  if(!missing(country_data_name)) {
+    self$define_as_corruption_country_level_data(data_name = country_data_name, contract_level_data_name = data_name, types = country_types, auto_generate = auto_generate)
+  }
 }
 )
 
 instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
+  self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_coountry_level_label)
   self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
+  contract_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
+  country_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
+  if(contract_level_country_name == "" || country_level_country_name == "") stop("country column must be defined in the contract level data and country level data.")
+  link_pairs <- country_level_country_name
+  names(link_pairs) <- contract_level_country_name
+  self$add_link(from_data_name = contract_level_data_name, to_data_frame = data_name, link_pairs = link_pairs, type = keyed_link_label)
 }
 )
 
@@ -2175,7 +2182,7 @@ data_object$set("public","define_as_corruption_country_level_data", function(con
 )
 
 data_object$set("public","is_corruption_type_present", function(type) {
-  return(self$is_metadata(is_corruption_label) && self$get_metadata(is_corruption_label) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
+  return(self$is_metadata(corruption_data_label) && !is.na(self$get_metadata(corruption_data_label)) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
 }
 )
 
@@ -2198,6 +2205,7 @@ data_object$set("public","get_corruption_column_name", function(type) {
 data_object$set("public","set_corruption_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
   if(!all(names(primary_types) %in% all_primary_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_primary_corruption_column_types], collapse = ", "))
   if(!all(names(calculated_types) %in% all_calculated_corruption_column_types)) stop("Cannot recognise the following calculated corruption data types: ", paste(names(calculated_types)[!names(calculated_types) %in% all_calculated_corruption_column_types], collapse = ", "))
+  if(!all(c(primary_types, calculated_types) %in% self$get_column_names())) stop("The following columns do not exist in the data:", paste(c(primary_types, calculated_types)[!(c(primary_types, calculated_types) %in% self$get_column_names())], collapse = ", "))
   invisible(sapply(names(primary_types), function(x) self$append_to_variables_metadata(primary_types[[x]], corruption_type_label, x)))
   invisible(sapply(names(calculated_types), function(x) self$append_to_variables_metadata(calculated_types[[x]], corruption_type_label, x)))
   if(auto_generate) {
@@ -2371,9 +2379,11 @@ data_object$set("public","generate_procurement_type_3", function() {
 data_object$set("public","generate_signature_period", function() {
   if(!self$is_corruption_type_present(corruption_signature_period_label)) {
     if(!self$is_corruption_type_present(corruption_award_date_label) || !self$is_corruption_type_present(corruption_signature_date_label)) message("Cannot auto generate ", corruption_signature_period_label, " because ", corruption_award_date_label, "or", corruption_signature_date_label, " are not defined.")
+    award_date <- self$get_columns_from_data(self$get_corruption_column_name(corruption_award_date_label))
+    sign_date <- self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_date_label))
+    if(!is.Date(award_date) || !is.Date(sign_date)) message("Cannot auto generate ", corruption_signature_period_label, " because ", corruption_award_date_label, " or ", corruption_signature_date_label, " are not of type Date.")
     else {
       signature_period <- self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_date_label)) - self$get_columns_from_data(self$get_corruption_column_name(corruption_award_date_label))
-
       col_name <- next_default_item(corruption_signature_period_label, self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name, signature_period)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_label)
@@ -2385,38 +2395,47 @@ data_object$set("public","generate_signature_period", function() {
 
 data_object$set("public","generate_signature_period_corrected", function() {
   if(!self$is_corruption_type_present(corruption_signature_period_corrected_label)) {
-    if(!self$is_corruption_type_present(corruption_signature_period_label)) self$generate_signature_period()
-    signature_period_corrected <- self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label))
-    signature_period_corrected[signature_period_corrected < 0 | signature_period_corrected > 730] <- NA
+    self$generate_signature_period()
+    if(!self$is_corruption_type_present(corruption_signature_period_label)) message("Cannot auto generate ", corruption_signature_period_corrected_label, " because ", corruption_signature_period_label, " is not defined.")
+    else {
+      signature_period_corrected <- self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label))
+      signature_period_corrected[signature_period_corrected < 0 | signature_period_corrected > 730] <- NA
       
-    col_name <- next_default_item(corruption_signature_period_corrected_label, self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name, signature_period_corrected)
-    self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_corrected_label)
-    self$append_to_variables_metadata(col_name, "label", "Signature period - corrected")
+      col_name <- next_default_item(corruption_signature_period_corrected_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, signature_period_corrected)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_corrected_label)
+      self$append_to_variables_metadata(col_name, "label", "Signature period - corrected")
+    }
   }
 }
 )
 
 data_object$set("public","generate_signature_period_5Q", function() {
   if(!self$is_corruption_type_present(corruption_signature_period_5Q_label)) {
-    if(!self$is_corruption_type_present(corruption_signature_period_label)) self$generate_signature_period()
-    signature_period_5Q <- .bincode(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), quantile(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), seq(0, 1, length.out = 5 + 1), type = 2, na.rm = TRUE), include.lowest = TRUE)
-
-    col_name <- next_default_item(corruption_signature_period_5Q_label, self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name, signature_period_5Q)
-    self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_5Q_label)
+    self$generate_signature_period()
+    if(!self$is_corruption_type_present(corruption_signature_period_label)) message("Cannot auto generate ", corruption_signature_period_5Q_label, " because ", corruption_signature_period_label, " is not defined.")
+    else {
+      signature_period_5Q <- .bincode(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), quantile(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), seq(0, 1, length.out = 5 + 1), type = 2, na.rm = TRUE), include.lowest = TRUE)
+      
+      col_name <- next_default_item(corruption_signature_period_5Q_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, signature_period_5Q)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_5Q_label)
+    }
   }
 }
 )
 
 data_object$set("public","generate_signature_period_25Q", function() {
   if(!self$is_corruption_type_present(corruption_signature_period_25Q_label)) {
-    if(!self$is_corruption_type_present(corruption_signature_period_label)) self$generate_signature_period()
-    signature_period_25Q <- .bincode(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), quantile(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), seq(0, 1, length.out = 25 + 1), type = 2, na.rm = TRUE), include.lowest = TRUE)
-    
-    col_name <- next_default_item(corruption_signature_period_25Q_label, self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name, signature_period_25Q)
-    self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_25Q_label)
+    self$generate_signature_period()
+    if(!self$is_corruption_type_present(corruption_signature_period_label)) message("Cannot auto generate ", corruption_signature_period_25Q_label, " because ", corruption_signature_period_label, " is not defined.")
+    else {
+      signature_period_25Q <- .bincode(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), quantile(self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_period_label)), seq(0, 1, length.out = 25 + 1), type = 2, na.rm = TRUE), include.lowest = TRUE)
+      
+      col_name <- next_default_item(corruption_signature_period_25Q_label, self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name, signature_period_25Q)
+      self$append_to_variables_metadata(col_name, corruption_type_label, corruption_signature_period_25Q_label)
+    }
   }
 }
 )
