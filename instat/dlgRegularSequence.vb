@@ -84,7 +84,7 @@ Public Class dlgRegularSequence
     Private Sub TestOKEnabled()
         If Not ucrNewColumnName.IsEmpty Then
             If rdoNumeric.Checked Then
-                If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso nudInStepsOf.Text <> "" AndAlso nudRepeatValues.Text <> "" AndAlso ucrDataFrameLengthForRegularSequence.clsDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
+                If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso nudInStepsOf.Text <> "" AndAlso nudRepeatValues.Text <> "" AndAlso ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
