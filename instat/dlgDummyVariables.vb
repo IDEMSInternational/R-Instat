@@ -76,6 +76,8 @@ Public Class dlgDummyVariables
         'ucrSaveDummy.SetCheckBoxText("Save Dummy:")
         'ucrSaveDummy.SetIsComboBox()
 
+        ' ucrChkWithXVariable.AddToLinkedControls(ucrVariateReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        'ucrVariateReceiver.SetLinkedDisplayControl(lblVariate)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -90,14 +92,10 @@ Public Class dlgDummyVariables
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    'Private Sub VariateVisible()
+    'Private Sub SetReceiver()
     '    If ucrChkWithXVariable.Checked Then
-    '        ucrVariateReceiver.Visible = True
-    '        lblVariate.Visible = True
     '        ucrVariateReceiver.SetMeAsReceiver()
     '    Else
-    '        ucrVariateReceiver.Visible = False
-    '        lblVariate.Visible = False
     '        ucrReceiverFactor.SetMeAsReceiver()
     '    End If
     'End Sub
@@ -116,4 +114,7 @@ Public Class dlgDummyVariables
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged, ucrVariateReceiver.ControlValueChanged
+        ' SetReceiver()
+    End Sub
 End Class
