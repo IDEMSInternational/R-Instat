@@ -13,7 +13,7 @@
 
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Public Class dlgReorderColumns
     Dim bFirstLoad As Boolean = True
@@ -48,10 +48,9 @@ Public Class dlgReorderColumns
         ucrDataFrameSelector.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameSelector.SetParameterIsString()
 
+        ucrReorderColumns.SetParameter(New RParameter("col_order", 1))
         ucrReorderColumns.setDataframes(ucrDataFrameSelector)
         ucrReorderColumns.setDataType("column")
-        'ucrReorderColumns.SetParameter(New RParameter("col_order", 1))
-        'ucrReorderColumns.SetParameterIsString()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -69,14 +68,6 @@ Public Class dlgReorderColumns
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReorderColumns_OrderChanged() Handles ucrReorderColumns.OrderChanged
-        If Not ucrReorderColumns.isEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_order", ucrReorderColumns.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_order")
-        End If
     End Sub
 
     Private Sub TestOkEnabled()
