@@ -26,8 +26,8 @@ Partial Class dlgWindrose
         Me.lblYVariable = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrFillReceiver = New instat.ucrReceiverSingle()
-        Me.ucrYReceiver = New instat.ucrReceiverSingle()
-        Me.ucrXReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrSaveWindRose = New instat.ucrSaveGraph()
         Me.ucrWindRoseSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -38,22 +38,23 @@ Partial Class dlgWindrose
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.Location = New System.Drawing.Point(256, 40)
         Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblXVariable.Size = New System.Drawing.Size(69, 13)
         Me.lblXVariable.TabIndex = 1
-        Me.lblXVariable.Text = "X Variable:"
+        Me.lblXVariable.Text = "Wind Speed:"
         '
         'lblYVariable
         '
         Me.lblYVariable.AutoSize = True
         Me.lblYVariable.Location = New System.Drawing.Point(257, 91)
         Me.lblYVariable.Name = "lblYVariable"
-        Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblYVariable.Size = New System.Drawing.Size(80, 13)
         Me.lblYVariable.TabIndex = 3
-        Me.lblYVariable.Text = "Y Variable:"
+        Me.lblYVariable.Text = "Wind Direction:"
         '
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
+        Me.lblFactor.Enabled = False
         Me.lblFactor.Location = New System.Drawing.Point(258, 142)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(40, 13)
@@ -62,6 +63,8 @@ Partial Class dlgWindrose
         '
         'ucrFillReceiver
         '
+        Me.ucrFillReceiver.Enabled = False
+        Me.ucrFillReceiver.frmParent = Me
         Me.ucrFillReceiver.Location = New System.Drawing.Point(255, 157)
         Me.ucrFillReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFillReceiver.Name = "ucrFillReceiver"
@@ -69,23 +72,25 @@ Partial Class dlgWindrose
         Me.ucrFillReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrFillReceiver.TabIndex = 6
         '
-        'ucrYReceiver
+        'ucrReceiverWindDirection
         '
-        Me.ucrYReceiver.Location = New System.Drawing.Point(255, 106)
-        Me.ucrYReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrYReceiver.Name = "ucrYReceiver"
-        Me.ucrYReceiver.Selector = Nothing
-        Me.ucrYReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrYReceiver.TabIndex = 4
+        Me.ucrReceiverWindDirection.frmParent = Me
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(255, 106)
+        Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
+        Me.ucrReceiverWindDirection.Selector = Nothing
+        Me.ucrReceiverWindDirection.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWindDirection.TabIndex = 4
         '
-        'ucrXReceiver
+        'ucrReceiverWindSpeed
         '
-        Me.ucrXReceiver.Location = New System.Drawing.Point(255, 55)
-        Me.ucrXReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrXReceiver.Name = "ucrXReceiver"
-        Me.ucrXReceiver.Selector = Nothing
-        Me.ucrXReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrXReceiver.TabIndex = 2
+        Me.ucrReceiverWindSpeed.frmParent = Me
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(255, 55)
+        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
+        Me.ucrReceiverWindSpeed.Selector = Nothing
+        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWindSpeed.TabIndex = 2
         '
         'ucrSaveWindRose
         '
@@ -117,8 +122,8 @@ Partial Class dlgWindrose
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 287)
         Me.Controls.Add(Me.ucrFillReceiver)
-        Me.Controls.Add(Me.ucrYReceiver)
-        Me.Controls.Add(Me.ucrXReceiver)
+        Me.Controls.Add(Me.ucrReceiverWindDirection)
+        Me.Controls.Add(Me.ucrReceiverWindSpeed)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblYVariable)
         Me.Controls.Add(Me.lblXVariable)
@@ -140,9 +145,9 @@ Partial Class dlgWindrose
     Friend WithEvents ucrWindRoseSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveWindRose As ucrSaveGraph
     Friend WithEvents lblXVariable As Label
-    Friend WithEvents ucrXReceiver As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
     Friend WithEvents lblYVariable As Label
-    Friend WithEvents ucrYReceiver As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWindDirection As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrFillReceiver As ucrReceiverSingle
 End Class
