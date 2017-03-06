@@ -30,6 +30,9 @@ Public Class ucrReceiver
     Public Event SelectionChanged(sender As Object, e As EventArgs)
     Public WithEvents frmParent As Form
 
+    Public strDatabaseQuery As String = ""
+
+    Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
     Private bParameterIsString As Boolean = False
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
@@ -318,19 +321,18 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Protected Overrides Sub SetControlValue()
         Dim clsTempDataParameter As RParameter
         Dim lstCurrentVariables As String() = Nothing
 
-        MyBase.UpdateControl(bReset)
         If clsParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsParameter.bIsString Then
-                    lstCurrentVariables = ExtractVariableNames(clsParameter.strArgumentValue)
+                    lstCurrentVariables = ExtractItemsFromRList(clsParameter.strArgumentValue)
                 ElseIf bParameterIsRFunction AndAlso clsParameter.bIsFunction Then
                     clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractVariableNames(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
                 Clear()
@@ -374,19 +376,15 @@ Public Class ucrReceiver
         UpdateParameter()
     End Sub
 
-    Public Function ExtractVariableNames(strTemp As String) As String()
-        Dim lstVariables As String()
-        If strTemp.StartsWith("c(") Then
-            strTemp = strTemp.Substring(2)
+    Public Overrides Function IsRDefault() As Boolean
+        If bAddParameterIfEmpty Then
+            Return False
+        Else
+            Return IsEmpty()
         End If
-        lstVariables = strTemp.Split(",")
-        For i As Integer = 0 To lstVariables.Count - 1
-            lstVariables(i) = lstVariables(i).Trim(Chr(34), " ", Chr(39), ")")
-        Next
-        Return lstVariables
     End Function
 
-    Public Overrides Function IsDefault() As Boolean
-        Return IsEmpty()
-    End Function
+    Public Sub SetClimaticType(strTemp As String)
+        AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & strTemp & Chr(34)})
+    End Sub
 End Class
