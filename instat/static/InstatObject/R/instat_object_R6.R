@@ -1251,3 +1251,8 @@ instat_object$set("public", "database_disconnect", function() {
   }
 }
 )
+
+instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date, end_date) {
+  
+}
+)
