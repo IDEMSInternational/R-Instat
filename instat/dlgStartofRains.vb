@@ -478,6 +478,7 @@ Public Class dlgStartofRains
 
         strTempFunExpression = strTempFunExpression & ucrReceiverRainfall.GetVariableNames(False) & ">" & nudThreshold.Value & Chr(34)
 
+        clsCombinedFilter.AddParameter("function_exp", strTempFunExpression)
     End Sub
 
     Private Sub FirstDOYPerYear()

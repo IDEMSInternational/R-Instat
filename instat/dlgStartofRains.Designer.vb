@@ -126,8 +126,8 @@ Partial Class dlgStartofRains
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.pnlDryPeriod)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkDryPeriod)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkDrySpell)
-        Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkTotalRainfall)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkConsecutiveRainyDays)
+        Me.grpConditionsForSatrtofRains.Controls.Add(Me.chkTotalRainfall)
         Me.grpConditionsForSatrtofRains.Location = New System.Drawing.Point(9, 238)
         Me.grpConditionsForSatrtofRains.Name = "grpConditionsForSatrtofRains"
         Me.grpConditionsForSatrtofRains.Size = New System.Drawing.Size(579, 160)
@@ -144,7 +144,7 @@ Partial Class dlgStartofRains
         Me.pnlTotalRainfall.Controls.Add(Me.nudOverDays)
         Me.pnlTotalRainfall.Controls.Add(Me.rdoPercentile)
         Me.pnlTotalRainfall.Controls.Add(Me.rdoAmount)
-        Me.pnlTotalRainfall.Location = New System.Drawing.Point(145, 45)
+        Me.pnlTotalRainfall.Location = New System.Drawing.Point(144, 16)
         Me.pnlTotalRainfall.Name = "pnlTotalRainfall"
         Me.pnlTotalRainfall.Size = New System.Drawing.Size(398, 49)
         Me.pnlTotalRainfall.TabIndex = 3
@@ -263,7 +263,7 @@ Partial Class dlgStartofRains
         Me.pnlConsecutiveRainyDays.Controls.Add(Me.nudMinimum)
         Me.pnlConsecutiveRainyDays.Controls.Add(Me.lblWidth)
         Me.pnlConsecutiveRainyDays.Controls.Add(Me.nudOutOfDays)
-        Me.pnlConsecutiveRainyDays.Location = New System.Drawing.Point(145, 10)
+        Me.pnlConsecutiveRainyDays.Location = New System.Drawing.Point(144, 62)
         Me.pnlConsecutiveRainyDays.Name = "pnlConsecutiveRainyDays"
         Me.pnlConsecutiveRainyDays.Size = New System.Drawing.Size(258, 32)
         Me.pnlConsecutiveRainyDays.TabIndex = 1
@@ -385,7 +385,7 @@ Partial Class dlgStartofRains
         'chkTotalRainfall
         '
         Me.chkTotalRainfall.AutoSize = True
-        Me.chkTotalRainfall.Location = New System.Drawing.Point(7, 45)
+        Me.chkTotalRainfall.Location = New System.Drawing.Point(6, 16)
         Me.chkTotalRainfall.Name = "chkTotalRainfall"
         Me.chkTotalRainfall.Size = New System.Drawing.Size(88, 17)
         Me.chkTotalRainfall.TabIndex = 2
@@ -395,7 +395,7 @@ Partial Class dlgStartofRains
         'chkConsecutiveRainyDays
         '
         Me.chkConsecutiveRainyDays.AutoSize = True
-        Me.chkConsecutiveRainyDays.Location = New System.Drawing.Point(7, 20)
+        Me.chkConsecutiveRainyDays.Location = New System.Drawing.Point(6, 72)
         Me.chkConsecutiveRainyDays.Name = "chkConsecutiveRainyDays"
         Me.chkConsecutiveRainyDays.Size = New System.Drawing.Size(142, 17)
         Me.chkConsecutiveRainyDays.TabIndex = 0
