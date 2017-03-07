@@ -35,9 +35,9 @@ Public Class sdgImportFromClimSoft
     Private Sub InitialiseControls()
         ucrInputDatabaseName.SetParameter(New RParameter("dbname"))
         ucrInputHost.SetParameter(New RParameter("host"))
-        ucrInputPart.SetParameter(New RParameter("port"))
+        ucrInputPort.SetParameter(New RParameter("port"))
+        ucrInputPort.AddQuotesIfUnrecognised = False
         ucrInputUserName.SetParameter(New RParameter("user"))
-
         bControlsInitialised = True
     End Sub
 
@@ -57,6 +57,15 @@ Public Class sdgImportFromClimSoft
 
     Private Sub cmdEnterPassword_Click(sender As Object, e As EventArgs) Handles cmdEnterPassword.Click
         Dim expTemp As SymbolicExpression
+        Dim message, title, defaultPassword As String
+        Dim myValue As Object
+        ' Set prompt.
+        message = "Enter the password"
+        ' Set title.
+        title = "Climsoft Password"
+        defaultPassword = "admin"
+        myValue = InputBox(message, title, defaultPassword)
+        clsRDatabaseConnect.AddParameter("password", Chr(34) & myValue & Chr(34))
 
         If bConnected Then
             frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
