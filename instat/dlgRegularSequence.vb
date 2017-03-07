@@ -36,9 +36,12 @@ Public Class dlgRegularSequence
         TestOKEnabled()
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrDataFrameLengthForRegularSequence.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNudFrom.SetRCode(clsSeqFunction, bReset)
         ucrNudTo.SetRCode(clsSeqFunction, bReset)
-        ucrNudRepeatValues.SetRCode(clsRepFunction)
+        ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
+        ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
+
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 30
@@ -83,8 +86,9 @@ Public Class dlgRegularSequence
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1)
-        clsSeqFunction.AddParameter("to")
+        clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength)
         clsSeqFunction.AddParameter("by", 1)
+
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction)
         clsRepFunction.AddParameter("each", 1)
@@ -98,9 +102,20 @@ Public Class dlgRegularSequence
         ucrNudNumberOfDecimalPlaces.Value = 2
         ucrNewColumnName.SetPrefix("Regular")
     End Sub
+    Private Sub ucrPnlSequenceTyp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSequenceType.ControlValueChanged
+        If rdoNumeric.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
+        ElseIf rdoDates.Checked Then
+            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$as.Date")
+
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -159,14 +174,8 @@ Public Class dlgRegularSequence
                     Else
                         clsSeqFunction.AddParameter("by", -ucrNudInStepsOf.Value)
                     End If
-                Else
-                    clsSeqFunction.RemoveParameterByName("by")
                 End If
-            Else
-                clsSeqFunction.RemoveParameterByName("by")
             End If
-        Else
-            clsSeqFunction.RemoveParameterByName("by")
         End If
     End Sub
     Private Sub nudRepeatValues_TextChanged(sender As Object, e As EventArgs)
@@ -192,42 +201,6 @@ Public Class dlgRegularSequence
         CheckSequenceLength()
     End Sub
 
-    Private Sub nudFrom_TextChanged(sender As Object, e As EventArgs)
-        SetFromParameter()
-        CheckSequenceLength()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub SetFromParameter()
-        If rdoNumeric.Checked Then
-            If ucrNudFrom.Text <> "" Then
-                clsSeqFunction.AddParameter("from", ucrNudFrom.Value)
-            Else
-                clsSeqFunction.RemoveParameterByName("from")
-            End If
-        Else
-            clsSeqFunction.RemoveParameterByName("from")
-        End If
-    End Sub
-
-    Private Sub nudTo_TextChanged(sender As Object, e As EventArgs)
-        SetToParameter()
-        CheckSequenceLength()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub SetToParameter()
-        If rdoNumeric.Checked Then
-            If ucrNudTo.Text <> "" Then
-                clsSeqFunction.AddParameter("to", ucrNudTo.Value)
-            Else
-                clsSeqFunction.RemoveParameterByName("to")
-            End If
-        Else
-            clsSeqFunction.RemoveParameterByName("to")
-        End If
-    End Sub
-
     Private Sub dtpSelectorA_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorA.ValueChanged
         ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
         CheckSequenceLength()
@@ -249,7 +222,6 @@ Public Class dlgRegularSequence
     Private Sub ucrSelectDataFrameRegularSequence_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectDataFrameRegularSequence.DataFrameChanged
         ucrNudTo.Value = ucrSelectDataFrameRegularSequence.iDataFrameLength
         ucrNudFrom.Value = 1
-        ucrNudTo.Value = ucrSelectDataFrameRegularSequence.iDataFrameLength
         '  SetNumericOrDatesParameters()
         CheckSequenceLength()
         TestOKEnabled()
