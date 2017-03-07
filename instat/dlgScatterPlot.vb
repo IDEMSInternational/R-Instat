@@ -19,6 +19,7 @@ Public Class dlgScatterPlot
     Private clsOverallFunction As New RFunction
     Private clsRGeomScatterplotFunction As New RFunction
     Private clsRaesFunction As New RFunction
+    '    Private clsOperation As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     '    Private bResetSubdialog As Boolean = False
@@ -90,9 +91,6 @@ Public Class dlgScatterPlot
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
-        ' Functions and Operations
-        ucrBase.clsRsyntax.SetOperation("+")
-
         '        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
@@ -100,6 +98,7 @@ Public Class dlgScatterPlot
         clsRaesFunction = New RFunction
         clsOverallFunction = New RFunction
         clsRGeomScatterplotFunction = New RFunction
+        '        clsOperation = New ROperator
 
         ucrSaveGraph.Reset()
         ucrSelectorForScatter.Reset()
@@ -118,8 +117,8 @@ Public Class dlgScatterPlot
 
         'aes(colour = "", y = "", x = "")
         clsRaesFunction.SetRCommand("aes")
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
+        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34)) ' y is an empty string if it has nothing in it
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34)) ' x is an empty string if it has nothing in it
 
         'mapping = aes (colour = ...)
         clsOverallFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
@@ -127,16 +126,21 @@ Public Class dlgScatterPlot
         'clsRGeom
         clsRGeomScatterplotFunction.SetRCommand("geom_point")
 
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
+
         'Operations Set
+        ucrBase.clsRsyntax.SetOperation("+")
         ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsOverallFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(1, clsRFunc:=clsRGeomScatterplotFunction)
+
+        ucrBase.clsRsyntax.SetBaseROperator(ucrBase.clsRsyntax.clsBaseOperator)
 
         '        bResetSubdialog = True
     End Sub
 
     Private Sub TestOkEnabled()
         'tests when okay Is enable. Both x and y aesthetics are mandatory but can be set to x="" or(exclusive) y="" in case the other one is filled. 
-        If (Not ucrReceiverX.IsEmpty() OrElse Not ucrVariablesAsFactorForScatter.IsEmpty) AndAlso ucrSaveGraph.IsComplete AndAlso Not ucrVariablesAsFactorForScatter.IsEmpty Then
+        If (Not ucrReceiverX.IsEmpty() OrElse Not ucrVariablesAsFactorForScatter.IsEmpty) AndAlso ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -163,7 +167,10 @@ Public Class dlgScatterPlot
         '        sdgPlots.ShowDialog()
     End Sub
 
+    'this needs to be controlcontentschanged once it inherits ucrCore
+    ' currently this only runs when I change the ucrVariablesAsFactor receiver, what if I open the dialog and don't put anything in at all? Then we don't get y = "" as we want
     Private Sub ucrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForScatter.SelectionChanged
+        clsRaesFunction.RemoveParameterByName("y")
         If Not ucrVariablesAsFactorForScatter.IsEmpty Then
             clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForScatter.GetVariableNames(False))
         Else
@@ -199,12 +206,11 @@ Public Class dlgScatterPlot
         'Next
     End Sub
 
-    Private Sub ucrSaveGraph_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged ', ucrVariablesAsFactorForScatter.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverX.ControlContentsChanged ', ucrVariablesAsFactorForScatter.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     ' currently this only runs when I change the ucrReceiverX, what if I open the dialog and don't put anything in at all? Then we don't get x = "" as we want
-
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
         clsRaesFunction.RemoveParameterByName("x")
         If Not ucrReceiverX.IsEmpty Then
