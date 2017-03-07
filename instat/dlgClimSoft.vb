@@ -27,7 +27,6 @@ Public Class dlgClimSoft
     Private bResetSubdialog As Boolean = False
 
     Private Sub dlgClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -35,24 +34,43 @@ Public Class dlgClimSoft
         If bReset Then
             SetDefaults()
         End If
+        SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 329
 
+        ucrReceiverMultipleStations.SetParameter(New RParameter("stations", 0))
+        ucrReceiverMultipleStations.SetParameterIsString()
         ucrReceiverMultipleStations.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleStations.SetItemType("database_variables")
         ucrReceiverMultipleStations.strDatabaseQuery = "SELECT stationId FROM station;"
+        ucrReceiverMultipleStations.bWithQuotes = False
 
+        ucrReceiverMultipleElements.SetParameter(New RParameter("elements", 1))
+        ucrReceiverMultipleElements.SetParameterIsString()
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleElements.SetItemType("database_variables")
         ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom in (10202200,10306100) GROUP BY observationfinal.describedBy;"
+        ucrReceiverMultipleElements.bWithQuotes = False
+
         ucrChkObservationData.SetText("Observation Data")
+        ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
+        ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrInputStartDate.SetParameter(New RParameter("start_date", 3))
+        ucrInputEndDate.SetParameter(New RParameter("end_date", 4))
+
     End Sub
 
     Private Sub TestOKEnabled()
 
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -63,10 +81,14 @@ Public Class dlgClimSoft
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
         clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
         clsHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
-        TestOKEnabled()
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
+        'TestOKEnabled()
+        bResetSubdialog = True
     End Sub
 
     Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
+
         sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bResetSubdialog)
         bResetSubdialog = False
         sdgImportFromClimSoft.ShowDialog()
@@ -79,6 +101,8 @@ Public Class dlgClimSoft
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged

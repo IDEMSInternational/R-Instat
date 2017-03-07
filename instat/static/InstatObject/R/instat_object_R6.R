@@ -1206,14 +1206,14 @@ instat_object$set("public", "get_corruption_data_names", function() {
 )
 
 instat_object$set("public", "get_database_variable_names", function(query, data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
-  if(self$has_database_connection) {
+  if(self$has_database_connection()) {
     temp_data <- dbGetQuery(self$get_database_connection(), query)
     if(as_list) {
       out <- list()
-      out[["database"]] <- tempdata[[1]]
+      out[["database"]] <- temp_data[[1]]
       return(out)
     }
-    else return(tempdata[[1]])
+    else return(temp_data[[1]])
   }
   else return(list())
 }
@@ -1224,8 +1224,8 @@ instat_object$set("public", "has_database_connection", function() {
 }
 )
 
-instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL()) {
-  password <- getPass(paste0(username, " password:"))
+instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL(), password) {
+  #password <- getPass(paste0(username, " password:"))
   out <- NULL
   out <- dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
@@ -1253,6 +1253,17 @@ instat_object$set("public", "database_disconnect", function() {
 )
 
 instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date, end_date) {
-  
+  con = self$get_database_connection()
+  print(summary(con))
+  my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
+  res <- dbFetch(dbSendQuery(con, paste0("SELECT stationName FROM station WHERE stationID in ", my_stations, ";")))
+ 
+  data_list <- list(res)
+  #if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
+  #names(data_list) = data_names
+  names(data_list) = "climsoft_data"
+  self$import_data(data_tables = data_list)
+  #self$add_key(data_names[2], c("lat", "lon"))
+  #self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
 )
