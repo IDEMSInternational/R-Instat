@@ -2149,6 +2149,7 @@ all_primary_corruption_country_level_column_types <- c(corruption_ctry_iso2_labe
 
 # Column metadata for corruption colums
 corruption_type_label = "Corruption_Type"
+corruption_output_label = "Is_Corruption_Output"
 
 # Data frame metadata for corruption dataframes
 corruption_data_label = "Corruption_Data"
