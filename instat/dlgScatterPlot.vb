@@ -13,11 +13,11 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
+
 Public Class dlgScatterPlot
     Private clsOverallFunction As New RFunction
-    Private clsRgeom_scatterplotFunction As New RFunction
+    Private clsRGeomScatterplotFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -59,7 +59,7 @@ Public Class dlgScatterPlot
         ucrBase.iHelpTopicID = 433
 
         'ucrSelectorForScatter
-        ucrSelectorForScatter.SetParameter(New RParameter("data", 0)) ' for clsRggplotFunction
+        ucrSelectorForScatter.SetParameter(New RParameter("data", 0))
         ucrSelectorForScatter.SetParameterIsString()
 
         'ucrMainReceiver
@@ -69,7 +69,7 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.SetIncludedDataType({"factor", "numeric"})
 
         'ucrReceiverX
-        ucrReceiverX.SetParameter(New RParameter("x",)) ' only x = this if it is full, otherwise x = "", clsaes
+        ucrReceiverX.SetParameter(New RParameter("x",)) ' only x = this if it is full, otherwise x = ""
         ucrReceiverX.Selector = ucrSelectorForScatter
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverX.SetParameterIsString()
@@ -91,20 +91,24 @@ Public Class dlgScatterPlot
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ' Functions and Operations
-        clsRgeom_scatterplotFunction.SetRCommand("geom_point")
         ucrBase.clsRsyntax.SetOperation("+")
 
         '        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsRAesDefaultFunction As New RFunction
+        clsRaesFunction = New RFunction
         clsOverallFunction = New RFunction
+        clsRGeomScatterplotFunction = New RFunction
 
         ucrSaveGraph.Reset()
         ucrSelectorForScatter.Reset()
         ucrVariablesAsFactorForScatter.ResetControl()
         '        sdgPlots.Reset()
+
+        'SetDefaults
+        clsRaesFunction.ClearParameters()
+        clsRGeomScatterplotFunction.ClearParameters()
 
         ' Default R
         clsOverallFunction.SetRCommand("ggplot")
@@ -112,24 +116,20 @@ Public Class dlgScatterPlot
         ' the above line we usually wouldn't have, but if I don't put it here Blocking_temp <- InstatDataObject$get_data_frame(data_name="Blocking") doesn't run?
         clsOverallFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        'matrix(nrow = 10, ncol = 2, Data = NA)
-        clsRAesDefaultFunction.SetRCommand("aes")
-        clsRAesDefaultFunction.AddParameter("colour", "")
-        clsRAesDefaultFunction.AddParameter("y", "") ' don't think these are needed.
-        clsRAesDefaultFunction.AddParameter("x", "")
+        'aes(colour = "", y = "", x = "")
+        clsRaesFunction.SetRCommand("aes")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
-        clsRaesFunction = clsRAesDefaultFunction.Clone()
 
+        'mapping = aes (colour = ...)
         clsOverallFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
 
-        'setDefaults
-        clsRaesFunction.ClearParameters()
-        clsRgeom_scatterplotFunction.ClearParameters()
+        'clsRGeom
+        clsRGeomScatterplotFunction.SetRCommand("geom_point")
 
-        ' Operations Set
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsOverallFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
+        'Operations Set
+        ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsOverallFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(1, clsRFunc:=clsRGeomScatterplotFunction)
 
         '        bResetSubdialog = True
     End Sub
@@ -203,7 +203,10 @@ Public Class dlgScatterPlot
         TestOkEnabled()
     End Sub
 
+    ' currently this only runs when I change the ucrReceiverX, what if I open the dialog and don't put anything in at all? Then we don't get x = "" as we want
+
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
+        clsRaesFunction.RemoveParameterByName("x")
         If Not ucrReceiverX.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
         Else
