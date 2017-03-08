@@ -1272,6 +1272,6 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
   self$import_data(data_tables = data_list)
   
   self$add_key("station_info", c("stationId"))
-  self$add_link(from_data_frame = "station_data", to_data_frame = "station_info", link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label)
+  if(include_observation_data)(self$add_link(from_data_frame = "station_data", to_data_frame = "station_info", link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label))
 }
 )
