@@ -37,6 +37,7 @@ Public Class dlgClimSoft
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        ReopenDialog()
         autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
@@ -67,6 +68,11 @@ Public Class dlgClimSoft
 
     Private Sub TestOKEnabled()
 
+    End Sub
+
+    Private Sub ReopenDialog()
+        sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bResetSubdialog)
+        SetConnectionActiveStatus(sdgImportFromClimSoft.GetConnectionActiveStatus())
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)

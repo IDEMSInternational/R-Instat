@@ -34,10 +34,14 @@ Public Class sdgImportFromClimSoft
 
     Private Sub InitialiseControls()
         ucrInputDatabaseName.SetParameter(New RParameter("dbname"))
+        ucrInputDatabaseName.SetRDefault("mariadb_climsoft_test_db_v4")
         ucrInputHost.SetParameter(New RParameter("host"))
+        ucrInputHost.SetRDefault("127.0.0.1")
         ucrInputPort.SetParameter(New RParameter("port"))
+        'ucrInputPort.SetRDefault("3308")
         ucrInputPort.AddQuotesIfUnrecognised = False
         ucrInputUserName.SetParameter(New RParameter("user"))
+        ucrInputUserName.SetRDefault("root")
         bControlsInitialised = True
     End Sub
 
