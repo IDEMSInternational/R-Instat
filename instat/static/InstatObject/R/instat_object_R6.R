@@ -1208,6 +1208,7 @@ instat_object$set("public", "get_corruption_data_names", function() {
 instat_object$set("public", "get_database_variable_names", function(query, data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(self$has_database_connection()) {
     temp_data <- dbGetQuery(self$get_database_connection(), query)
+   
     if(as_list) {
       out <- list()
       out[["database"]] <- temp_data[[1]]
@@ -1255,13 +1256,21 @@ instat_object$set("public", "database_disconnect", function() {
 instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date, end_date) {
   con = self$get_database_connection()
   my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
-  res <- dbFetch(dbSendQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";")))
- 
-  data_list <- list(res)
-  #if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
-  #names(data_list) = data_names
-  names(data_list) = "climsoft_data"
+  my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
+  element_ids = dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
+  element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
+  station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  if(include_observation_data){
+    station_data <- dbGetQuery(con, paste0("SELECT recordedFrom, describedBy, obsDatetime, obsValue FROM observationfinal WHERE recordedFrom IN", my_stations, "AND describedBy IN", element_id_vec,";"))
+    data_list <- list(station_info, station_data)
+    names(data_list) = c("station_info","station_data")
+  }
+  else{
+    data_list <- list(station_info)
+    names(data_list) = "station_info"
+  }
   self$import_data(data_tables = data_list)
+  
   #self$add_key(data_names[2], c("lat", "lon"))
   #self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
