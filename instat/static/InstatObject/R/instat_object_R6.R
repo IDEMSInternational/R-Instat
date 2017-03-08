@@ -1254,9 +1254,8 @@ instat_object$set("public", "database_disconnect", function() {
 
 instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date, end_date) {
   con = self$get_database_connection()
-  print(summary(con))
   my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
-  res <- dbFetch(dbSendQuery(con, paste0("SELECT stationName FROM station WHERE stationID in ", my_stations, ";")))
+  res <- dbFetch(dbSendQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";")))
  
   data_list <- list(res)
   #if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")

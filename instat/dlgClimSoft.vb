@@ -54,7 +54,7 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleElements.SetItemType("database_variables")
         ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom in (10202200,10306100) GROUP BY observationfinal.describedBy;"
-        ucrReceiverMultipleElements.bWithQuotes = False
+        'ucrReceiverMultipleElements.bWithQuotes = False
 
         ucrChkObservationData.SetText("Observation Data")
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
@@ -109,7 +109,7 @@ Public Class dlgClimSoft
         If ucrReceiverMultipleStations.IsEmpty Then
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
         Else
-            ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList) & ") GROUP BY observationfinal.describedBy;"
+            ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList(bWithQuotes:=False)) & ") GROUP BY observationfinal.describedBy;"
         End If
     End Sub
 End Class
