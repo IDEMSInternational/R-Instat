@@ -113,7 +113,6 @@ Public Class dlgScatterPlot
         clsOverallFunction.SetRCommand("ggplot")
         clsOverallFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForScatter.ucrAvailableDataFrames.clsCurrDataFrame)
         ' the above line we usually wouldn't have, but if I don't put it here Blocking_temp <- InstatDataObject$get_data_frame(data_name="Blocking") doesn't run?
-        clsOverallFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         'aes(colour = "", y = "", x = "")
         clsRaesFunction.SetRCommand("aes")
@@ -132,6 +131,8 @@ Public Class dlgScatterPlot
         ucrBase.clsRsyntax.SetOperation("+")
         ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsOverallFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(1, clsRFunc:=clsRGeomScatterplotFunction)
+
+        ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseROperator(ucrBase.clsRsyntax.clsBaseOperator)
 
