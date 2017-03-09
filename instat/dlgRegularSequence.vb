@@ -51,17 +51,6 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, "seq")
         ucrPnlSequenceType.AddFunctionNamesCondition(rdoDates, "as.Date")
 
-        ucrPnlSequenceType.AddToLinkedControls(ucrNudFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudFrom.SetLinkedDisplayControl(lblFrom)
-        ucrPnlSequenceType.AddToLinkedControls(ucrNudTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudTo.SetLinkedDisplayControl(lblTo)
-        ucrPnlSequenceType.AddToLinkedControls(ucrNudInStepsOf, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudInStepsOf.SetLinkedDisplayControl(lblSteps)
-        ucrPnlSequenceType.AddToLinkedControls(ucrNudRepeatValues, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudRepeatValues.SetLinkedDisplayControl(lblRepeatValues)
-        'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorA, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorB, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrNudFrom.SetParameter(New RParameter("from", 0))
         ucrNudTo.SetParameter(New RParameter("to", 1))
         ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
@@ -71,19 +60,32 @@ Public Class dlgRegularSequence
         ucrNudInStepsOf.Maximum = Integer.MaxValue
         ucrNudRepeatValues.Maximum = Integer.MaxValue
 
+        ucrPnlSequenceType.AddToLinkedControls(ucrNudFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+        ucrPnlSequenceType.AddToLinkedControls(ucrNudTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudTo.SetLinkedDisplayControl(lblTo)
+        ucrPnlSequenceType.AddToLinkedControls(ucrNudInStepsOf, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudRepeatValues.SetLinkedDisplayControl(lblRepeatValues)
+        ucrPnlSequenceType.AddToLinkedControls(ucrNudRepeatValues, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudInStepsOf.SetLinkedDisplayControl(lblSteps)
+        'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorA, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorB, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+
 
         ucrNewColumnName.SetPrefix("Regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
         ucrNewColumnName.SetIsComboBox()
         ucrNewColumnName.SetSaveTypeAsColumn()
+        ucrNewColumnName.SetLabelText("New Column Name")
 
         'TODO complete dates option
         rdoDates.Enabled = False
         dtpSelectorB.Visible = False
         dtpSelectorA.Visible = False
-        ucrNudFrom.Visible = False
-        ucrNudTo.Visible = False
-        chkDefineAsFactor.Visible = False
+        'ucrNudFrom.Visible = False
+        ' ucrNudTo.Visible = False
+        'chkDefineAsFactor.Visible = False
     End Sub
 
     Private Sub SetDefaults()
