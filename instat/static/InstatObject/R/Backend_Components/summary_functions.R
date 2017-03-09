@@ -100,6 +100,7 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
   alltypes_collection = c(count_non_missing_label, count_missing_label, count_label, mode_label)
   numeric_collection = c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label)
   factor_collection =  c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
+  ordered_factor_collection =  c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label)
   i = 1
   for(col_new in columns_to_summarise){
     col_data_type = self$get_variables_metadata(data_name = data_name, column = col_new, property = data_type_label)
@@ -108,6 +109,9 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
     }
     else if(col_data_type == "factor"){
       column_summaries = intersect(summaries, factor_collection)
+    }
+    else if(col_data_type == paste0(c("ordered","factor"), collapse = ",")){
+      column_summaries = intersect(summaries, ordered_factor_collection)
     }
     else if(col_data_type == "character"){
       column_summaries = intersect(summaries, alltypes_collection)
