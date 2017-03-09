@@ -14,20 +14,41 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgClimSoft
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsRDatabaseConnect As New RFunction
+    Public bConnectionActive As Boolean = False
+    Private clsRDatabaseDisconnect As New RFunction
+    Private clsRImportFromClimsoft As New RFunction
+    Private clsHasConnection As New RFunction
+    Private bResetSubdialog As Boolean = False
+
     Private Sub dlgClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        bReset = False
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 329
+
+        ucrReceiverMultipleStations.Selector = ucrSelectorForClimSoft
+        ucrReceiverMultipleStations.SetItemType("database_variables")
+        ucrReceiverMultipleStations.strDatabaseQuery = "SELECT stationId FROM station;"
+
+        ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
+        ucrReceiverMultipleElements.SetItemType("database_variables")
+        ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom in (10202200,10306100) GROUP BY observationfinal.describedBy;"
+        ucrChkObservationData.SetText("Observation Data")
     End Sub
 
     Private Sub TestOKEnabled()
@@ -35,6 +56,36 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorForClimSoft.Reset()
+        ucrReceiverMultipleStations.SetMeAsReceiver()
+
+        clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
+        clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
+        clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
+        clsHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
+        sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bResetSubdialog)
+        bResetSubdialog = False
+        sdgImportFromClimSoft.ShowDialog()
+        SetConnectionActiveStatus(sdgImportFromClimSoft.GetConnectionActiveStatus())
+    End Sub
+
+    Private Sub SetConnectionActiveStatus(bCurrentStatus As Boolean)
+        bConnectionActive = bCurrentStatus
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged
+        If ucrReceiverMultipleStations.IsEmpty Then
+            ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
+        Else
+            ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList) & ") GROUP BY observationfinal.describedBy;"
+        End If
     End Sub
 End Class

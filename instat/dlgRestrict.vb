@@ -24,6 +24,7 @@ Public Class dlgRestrict
     Private clsFilterView As RFunction
     Public bIsSubsetDialog As Boolean
     Public strDefaultDataframe As String = ""
+    Public strDefaultColumn As String = ""
 
     Public Sub New()
 
@@ -31,15 +32,15 @@ Public Class dlgRestrict
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        bFirstLoad = True
-        clsRemoveFilter = New RFunction
-        clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
-        clsSetCurrentFilter = New RFunction
-        clsSetCurrentFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
         clsSubset = New RFunction
-        clsSubset.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsSubset.AddParameter("use_current_filter", "FALSE")
+        clsRemoveFilter = New RFunction
+        clsSetCurrentFilter = New RFunction
         clsFilterView = New RFunction
+
+        bFirstLoad = True
+        clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+        clsSetCurrentFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
+        clsSubset.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_object")
         clsFilterView.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_string")
     End Sub
 
@@ -62,7 +63,7 @@ Public Class dlgRestrict
         ucrReceiverFilter.SetMeAsReceiver()
         ucrNewDataFrameName.SetValidationTypeAsRVariable()
         ucrBase.iHelpTopicID = 340
-        rdoApplyAsSubset.Enabled = False
+        'rdoApplyAsSubset.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -71,8 +72,8 @@ Public Class dlgRestrict
         SetDefaultNewDataFrameName()
         SetFilterSubsetStatus()
         SetDefaultDataFrame()
-        ucrNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
-        lblNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
+        'ucrNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
+        'lblNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
     End Sub
 
     Private Sub TestOkEnabled()
@@ -109,7 +110,11 @@ Public Class dlgRestrict
 
     Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdDefineNewFilter.Click
         sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.SetDataframe(ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If strDefaultColumn <> "" Then
+            sdgCreateFilter.ucrCreateFilter.ucrFilterByReceiver.Add(strDefaultColumn)
+        End If
         sdgCreateFilter.ShowDialog()
+        strDefaultColumn = ""
         If sdgCreateFilter.bFilterDefined Then
             frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
             ucrSelectorFilter.SetDataframe(sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -148,7 +153,11 @@ Public Class dlgRestrict
             clsFilterView.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
             clsSubset.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
             clsSetCurrentFilter.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
-            ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterView.ToScript()).AsCharacter(0))
+            Try
+                ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterView.ToScript()).AsCharacter(0))
+            Catch ex As Exception
+                ucrInputFilterPreview.SetName("Preview not available")
+            End Try
         End If
         TestOkEnabled()
     End Sub
@@ -162,6 +171,7 @@ Public Class dlgRestrict
             ucrNewDataFrameName.Visible = True
         End If
         SetFilterOptions()
+        SetBaseFunction()
     End Sub
 
     Private Sub ucrNewDataFrameName_NameChanged() Handles ucrNewDataFrameName.NameChanged
@@ -178,10 +188,11 @@ Public Class dlgRestrict
             ucrBase.clsRsyntax.RemoveAssignTo()
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsSubset)
+            clsSubset.AddParameter("new_name", Chr(34) & ucrNewDataFrameName.GetText() & Chr(34))
             If Not ucrNewDataFrameName.IsEmpty() Then
-                ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+                'ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
             Else
-                ucrBase.clsRsyntax.RemoveAssignTo()
+                'ucrBase.clsRsyntax.RemoveAssignTo()
             End If
         End If
     End Sub
