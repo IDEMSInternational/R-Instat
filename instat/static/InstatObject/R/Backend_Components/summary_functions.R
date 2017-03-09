@@ -97,10 +97,10 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
-  alltypes_collection = c(count_non_missing_label, count_missing_label, count_label, mode_label)
-  numeric_collection = c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label)
-  factor_collection =  c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
-  ordered_factor_collection =  c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label)
+  alltypes_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label)
+  numeric_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label, var_label)
+  factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
+  ordered_factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label)
   i = 1
   for(col_new in columns_to_summarise){
     col_data_type = self$get_variables_metadata(data_name = data_name, column = col_new, property = data_type_label)
@@ -239,15 +239,16 @@ count_label="summary_count"
 count_missing_label="summary_count_missing"
 count_non_missing_label="summary_count_non_missing"
 sd_label = "summary_sd"
+var_label = "summary_var"
 median_label = "summary_median"
 range_label = "summary_range"
 min_label="summary_min"
 max_label="summary_max"
 mean_label="summary_mean"
-
+#quartiles need to be added as a summary
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, median_label, range_label, min_label, max_label, mean_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -279,6 +280,10 @@ summary_count_non_missing <- function(x,...) {
 
 summary_sd <- function(x, na.rm = FALSE,...) {
   return(sd(x,na.rm = na.rm))
+}
+
+summary_var <- function(x, na.rm = FALSE,...) {
+  return((sd(x,na.rm = na.rm))**2)
 }
 
 summary_max <- function (x, na.rm = FALSE,...) {
