@@ -55,7 +55,6 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleElements.SetItemType("database_variables")
         ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom in (10202200,10306100) GROUP BY observationfinal.describedBy;"
-        'ucrReceiverMultipleElements.bWithQuotes = False
 
         ucrChkObservationData.SetText("Observation Data")
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
@@ -63,16 +62,18 @@ Public Class dlgClimSoft
 
         ucrInputStartDate.SetParameter(New RParameter("start_date", 3))
         ucrInputEndDate.SetParameter(New RParameter("end_date", 4))
-
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrChkObservationData.Checked) OrElse (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrReceiverMultipleElements.IsEmpty() AndAlso ucrChkObservationData.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ReopenDialog()
-        sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bResetSubdialog)
-        SetConnectionActiveStatus(sdgImportFromClimSoft.GetConnectionActiveStatus())
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -89,7 +90,6 @@ Public Class dlgClimSoft
         clsHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
-        'TestOKEnabled()
         bResetSubdialog = True
     End Sub
 
@@ -117,5 +117,10 @@ Public Class dlgClimSoft
         Else
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList(bWithQuotes:=False)) & ") GROUP BY observationfinal.describedBy;"
         End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrControlsContents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlValueChanged, ucrChkObservationData.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

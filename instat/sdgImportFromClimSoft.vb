@@ -67,8 +67,8 @@ Public Class sdgImportFromClimSoft
         message = "Enter the password"
         ' Set title.
         title = "Climsoft Password"
-        defaultPassword = "admin"
-        myValue = InputBox(message, title, defaultPassword)
+        'defaultPassword = "admin"
+        myValue = InputBox(message, title)
         clsRDatabaseConnect.AddParameter("password", Chr(34) & myValue & Chr(34))
 
         If bConnected Then
@@ -87,5 +87,6 @@ Public Class sdgImportFromClimSoft
         Else
             lblConnection.Text = strNoConnection
         End If
+        dlgClimSoft.ucrReceiverMultipleStations.SetMeAsReceiver() 'this is necessary to refresh the selector in the main dialog. Should happen on click return from subdialog
     End Sub
 End Class

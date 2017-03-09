@@ -1254,12 +1254,15 @@ instat_object$set("public", "database_disconnect", function() {
 )
 
 instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date, end_date) {
+  #need to perform checks here
   con = self$get_database_connection()
   my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
-  my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
-  element_ids = dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
-  element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
   station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  if (length(elements)>0){
+    my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
+    element_ids = dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
+    element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
+  }
   if(include_observation_data){
     station_data <- dbGetQuery(con, paste0("SELECT recordedFrom, describedBy, obsDatetime, obsValue FROM observationfinal WHERE recordedFrom IN", my_stations, "AND describedBy IN", element_id_vec,";"))
     data_list <- list(station_info, station_data)
