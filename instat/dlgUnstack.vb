@@ -38,8 +38,6 @@ Public Class dlgUnstack
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-
-
     ' for factor = month, other col = dayy
     'Damango_temp <- InstatDataObject$get_data_frame(data_name="Damango")
     'Unstack <- dcast(value.var="Day", , data=Damango_temp, "Month")
@@ -62,14 +60,10 @@ Public Class dlgUnstack
         ' 
         ' formula = FACTOR ~ COLUMN + ...
         ' ucrbase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsFormula)
-        clsFormula.SetParameter(New RParameter("formula"))
         clsFormula.SetOperation("~")
         clsFormula.bBrackets = False
         clsFormula.AddParameter(0, strParameterValue:=ucrFactorToUnstackReceiver.GetVariableNames(False))
         clsFormula.AddParameter(1, clsROperatorParameter:=clsIDColumns)
-
-        clsIDColumns.SetOperation("+")
-
 
         'ucrID
         ucrIDColumns.Selector = ucrSelectorForunstack
@@ -83,7 +77,6 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForunstack
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrFactorToUnstackReceiver.SetDataType("factor")
-        'clsFormula = ~
 
         'ucrSelector
         ' I did ucrBase.clsRsyntax("data", dataname)
@@ -110,14 +103,15 @@ Public Class dlgUnstack
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
+        Dim clsFormula As New ROperator
         ucrSelectorForunstack.Reset()
         ucrNewDFName.Reset()
 
         clsDefaultFunction.SetRCommand("dcast")
-        clsDefaultFunction.SetAssignTo(strTemp:="Unstack", strTempDataframe:="Unstack")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
-        TestOKEnabled()
+        clsFormula.SetAssignTo(strTemp:="Unstack", strTempDataframe:="Unstack")
+        ucrBase.clsRsyntax.SetBaseROperator(clsFormula) ' we have two operators however.
     End Sub
 
     Private Sub ReopenDialog()
@@ -193,7 +187,6 @@ Public Class dlgUnstack
     '   TestOKEnabled()
     'End Sub
 
-
     Private Sub ucrIDColumns_SelectionChanged() Handles ucrIDColumns.SelectionChanged
         Dim lstColumns As List(Of String)
 
@@ -210,6 +203,5 @@ Public Class dlgUnstack
         Next
         TestOKEnabled()
     End Sub
-
 End Class
 
