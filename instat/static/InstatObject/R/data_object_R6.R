@@ -2150,11 +2150,43 @@ all_primary_corruption_country_level_column_types <- c(corruption_ctry_iso2_labe
 # Column metadata for corruption colums
 corruption_type_label = "Corruption_Type"
 corruption_output_label = "Is_Corruption_Output"
+corruption_red_flag_label = "Is_Corruption_Red_Flag"
 
 # Data frame metadata for corruption dataframes
 corruption_data_label = "Corruption_Data"
 corruption_contract_level_label = "Contract Level"
-corruption_coountry_level_label = "Country Level"
+corruption_country_level_label = "Country Level"
+
+
+instat_object$set("public","define_corruption_outputs", function(data_name, output_columns = c()) {
+  self$get_data_objects(data_name)$define_corruption_outputs(output_columns)
+}
+)
+
+data_object$set("public","define_corruption_outputs", function(output_columns = c()) {
+  if(!self$is_metadata(corruption_data_label)) {
+    stop("Cannot define corruption outputs when data frame is not defined as corruption data.")
+  }
+  self$append_to_variables_metadata(output_columns, corruption_output_label, TRUE)
+  other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
+  self$append_to_variables_metadata(other_cols, corruption_output_label, FALSE)
+}
+)
+
+instat_object$set("public","define_red_flags", function(data_name, red_flags = c()) {
+  self$get_data_objects(data_name)$define_red_flags(red_flags)
+}
+)
+
+data_object$set("public","define_red_flags", function(red_flags = c()) {
+  if(!self$is_metadata(corruption_data_label)) {
+    stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
+  }
+  self$append_to_variables_metadata(output_columns, corruption_red_flag_label, TRUE)
+  other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
+  self$append_to_variables_metadata(other_cols, corruption_red_flag_label, FALSE)
+}
+)
 
 instat_object$set("public","define_as_corruption", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_contract_level_label)
@@ -2166,7 +2198,7 @@ instat_object$set("public","define_as_corruption", function(data_name, primary_t
 )
 
 instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
-  self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_coountry_level_label)
+  self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
   self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
   contract_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
   country_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
@@ -2649,6 +2681,68 @@ data_object$set("public","generate_all_bids_trimmed", function() {
       self$add_columns_to_data(col_name, all_bids_trimmed)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_all_bids_trimmed_label)
       self$append_to_variables_metadata(col_name, "label", "# Bids (trimmed at 50)")
+    }
+  }
+}
+)
+
+standard_country_names <- function(country) {
+  country_names <- country
+  country_names[country_names == "Antigua and Bar"] <- "Antigua and Barbuda"
+  country_names[country_names == "Bosnia and Herz"] <- "Bosnia and Herzegovina"
+  country_names[country_names == "Cabo Verde"] <- "Cape Verde"
+  country_names[country_names == "Central African"] <- "Central African Republic"
+  country_names[country_names == "Cote d'Ivoire"] <- "Cote d'Ivoire"
+  country_names[country_names == "Congo, Democrat"] <- "Democratic Republic of the Congo"
+  country_names[country_names == "Dominican Repub"] <- "Dominican Republic"
+  country_names[country_names == "Egypt, Arab Rep"] <- "Egypt"
+  country_names[country_names == "Equatorial Guin"] <- "Equatorial Guinea"
+  country_names[country_names == "Gambia, The"] <- "Gambia"
+  country_names[country_names == "Iran, Islamic R"] <- "Iran, Islamic Republic of"
+  country_names[country_names == "Korea, Republic"] <- "Korea, Republic of"
+  country_names[country_names == "Kyrgyz Republic"] <- "Kyrgyzstan"
+  country_names[country_names == "Lao People's De"] <- "Lao People's Democratic Republic"
+  country_names[country_names == "Macedonia, form"] <- "Macedonia, the Former Yugoslav Republic of"
+  country_names[country_names == "Moldova"] <- "Moldova, Republic of"
+  country_names[country_names == "Papua New Guine"] <- "Papua New Guinea"
+  country_names[country_names == "Russian Federat"] <- "Russian Federation"
+  country_names[country_names == "St. Kitts and N"] <- "Saint Kitts and Nevis"
+  country_names[country_names == "St. Lucia"] <- "Saint Lucia"
+  country_names[country_names == "St. Vincent and"] <- "Saint Vincent and the Grenadines"
+  country_names[country_names == "Sao Tome and Pr"] <- "Sao Tome and Principe"
+  country_names[country_names == "Slovak Republic"] <- "Slovakia"
+  country_names[country_names == "Syrian Arab Rep"] <- "Syrian Arab Republic"
+  country_names[country_names == "Trinidad and To"] <- "Trinidad and Tobago"
+  country_names[country_names == "Tanzania"] <- "United Republic of Tanzania"
+  country_names[country_names == "Venezuela, Repu"] <- "Venezuela"
+  country_names[country_names == "Vietnam"] <- "Viet Nam"
+  country_names[country_names == "West Bank and G"] <- "West Bank and Gaza"
+  country_names[country_names == "Yemen, Republic"] <- "Yemen"
+  return(country_names)
+}
+
+instat_object$set("public","standard_country_names", function(data_name, country_columns = c()) {
+  self$get_data_objects(data_name)$standard_country_names(country_columns)
+}
+)
+
+data_object$set("public","standard_country_names", function(country_columns = c()) {
+  for(col_name in country_columns) {
+    corrected_col <- standard_country_names(self$get_columns_from_data(col_name))
+    new_col_name <- next_default_item(paste(col_name, "standardised", sep = "_"), self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(new_col_name, corrected_col)
+    type <- self$get_variables_metadata(column = col_name, property = corruption_type_label)
+    if(!is.na(type)) {
+      if(type == corruption_country_label) {
+        self$append_to_variables_metadata(new_col_name, corruption_type_label, corruption_country_label)
+        self$append_to_variables_metadata(col_name, corruption_type_label, NA)
+        self$append_to_variables_metadata(new_col_name, "label", "Country name - standardised")
+      }
+      else if(type == corruption_winner_country_label) {
+        self$append_to_variables_metadata(new_col_name, corruption_type_label, corruption_winner_country_label)
+        self$append_to_variables_metadata(col_name, corruption_type_label, NA)
+        self$append_to_variables_metadata(new_col_name, "label", "Winner country name - standardised")
+      }
     }
   }
 }
