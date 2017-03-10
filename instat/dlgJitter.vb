@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgJitter
     Public bReset As Boolean = True
     Public bFirstLoad As Boolean = True
-    Private clsOperatorParameter As New ROperator
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgJitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -54,9 +53,6 @@ Public Class dlgJitter
         ucrReceiverJitter.SetMeAsReceiver()
         ucrReceiverJitter.SetIncludedDataTypes({"numeric"})
         ucrReceiverJitter.SetParameterIsRFunction()
-
-        'operator parameter
-        clsOperatorParameter.SetOperation("+")
 
         'rdo Buttons
         ' have two radio buttons - each with two parameters which are the same name but different selector
@@ -106,7 +102,6 @@ Public Class dlgJitter
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-        '        clsOperatorParameter = New ROperator
 
         ucrSelectorForJitter.Reset()
 
@@ -117,20 +112,20 @@ Public Class dlgJitter
 
         'Operations Set
         ucrBase.clsRsyntax.SetOperation("+")
-        ucrBase.clsRsyntax.AddParameter(0, clsRFunctionParameter:=clsDefaultFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsDefaultFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
         ucrBase.clsRsyntax.SetBaseROperator(ucrBase.clsRsyntax.clsBaseOperator)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        'ucrPnlDistance.SetRCode(clsDefaultFunction, bReset)
-        'ucrInputMaximum.SetRCode(clsDefaultFunction, bReset)
-        'ucrInputMinimum.SetRCode(clsDefaultFunction, bReset)
-        'ucrInputMaximumDistanceFromZero.SetRCode(clsDefaultFunction, bReset)
-        'ucrSelectorForJitter.SetRCode(clsDefaultFunction, bReset)
-        'ucrInputNewColName.SetRCode(clsOperatorParameter, bReset)
-        'ucrReceiverJitter.SetRCode(clsOperatorParameter, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlDistance.SetRCode(clsDefaultFunction, bReset)
+        ucrInputMaximum.SetRCode(clsDefaultFunction, bReset)
+        ucrInputMinimum.SetRCode(clsDefaultFunction, bReset)
+        ucrInputMaximumDistanceFromZero.SetRCode(clsDefaultFunction, bReset)
+        ucrSelectorForJitter.SetRCode(clsDefaultFunction, bReset)
+        ucrInputNewColName.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
+        ucrReceiverJitter.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -179,7 +174,7 @@ Public Class dlgJitter
     End Sub
 
     Private Sub ucrReceiverJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverJitter.ControlValueChanged
-        clsOperatorParameter.AddParameter(1, clsRFunctionParameter:=ucrReceiverJitter.GetVariables)
+        ucrBase.clsRsyntax.SetOperatorParameter(1, clsRFunc:=ucrReceiverJitter.GetVariables)
     End Sub
 
     Private Sub ucrForTestOK_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverJitter.ControlContentsChanged, ucrInputNewColName.ControlContentsChanged, ucrPnlDistance.ControlContentsChanged, ucrInputMaximumDistanceFromZero.ControlContentsChanged, ucrInputMaximum.ControlContentsChanged, ucrInputMinimum.ControlContentsChanged
