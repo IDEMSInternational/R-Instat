@@ -118,18 +118,19 @@ Public Class dlgJitter
         'Operations Set
         ucrBase.clsRsyntax.SetOperation("+")
         ucrBase.clsRsyntax.AddParameter(0, clsRFunctionParameter:=clsDefaultFunction)
-        ucrBase.clsRsyntax.SetAssignTo(strTemp:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
-        ucrBase.clsRsyntax.SetBaseROperator(clsOperatorParameter)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
+        ucrBase.clsRsyntax.SetBaseROperator(ucrBase.clsRsyntax.clsBaseOperator)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrPnlDistance.SetRCode(clsDefaultFunction, bReset)
-        ucrInputMaximum.SetRCode(clsDefaultFunction, bReset)
-        ucrInputMinimum.SetRCode(clsDefaultFunction, bReset)
-        ucrInputMaximumDistanceFromZero.SetRCode(clsDefaultFunction, bReset)
-        ucrSelectorForJitter.SetRCode(clsDefaultFunction, bReset)
-        ucrInputNewColName.SetRCode(clsDefaultFunction, bReset)
-        '        ucrReceiverJitter.SetRCode(clsOperatorParameter, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrPnlDistance.SetRCode(clsDefaultFunction, bReset)
+        'ucrInputMaximum.SetRCode(clsDefaultFunction, bReset)
+        'ucrInputMinimum.SetRCode(clsDefaultFunction, bReset)
+        'ucrInputMaximumDistanceFromZero.SetRCode(clsDefaultFunction, bReset)
+        'ucrSelectorForJitter.SetRCode(clsDefaultFunction, bReset)
+        'ucrInputNewColName.SetRCode(clsOperatorParameter, bReset)
+        'ucrReceiverJitter.SetRCode(clsOperatorParameter, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -183,9 +184,5 @@ Public Class dlgJitter
 
     Private Sub ucrForTestOK_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverJitter.ControlContentsChanged, ucrInputNewColName.ControlContentsChanged, ucrPnlDistance.ControlContentsChanged, ucrInputMaximumDistanceFromZero.ControlContentsChanged, ucrInputMaximum.ControlContentsChanged, ucrInputMinimum.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrPnlDistance_ControlValueChanged(ucrChangedControl As ucrCore)
-
     End Sub
 End Class
