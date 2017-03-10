@@ -102,22 +102,24 @@ Public Class dlgJitter
         ucrInputNewColName.SetPrefix("Jitter_values")
 
         clsDefaultFunction.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
-        clsOperatorParameter.AddParameter(0, clsRFunctionParameter:=clsDefaultFunction)
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-        clsOperatorParameter = New ROperator
+        '        clsOperatorParameter = New ROperator
 
         ucrSelectorForJitter.Reset()
 
         clsDefaultFunction.SetRCommand("runif")
         clsDefaultFunction.AddParameter("min", "-1")
         clsDefaultFunction.AddParameter("max", "1")
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
-        clsOperatorParameter.AddParameter(0, clsRFunctionParameter:=clsDefaultFunction)
+        'Operations Set
+        ucrBase.clsRsyntax.SetOperation("+")
+        ucrBase.clsRsyntax.AddParameter(0, clsRFunctionParameter:=clsDefaultFunction)
+        ucrBase.clsRsyntax.SetAssignTo(strTemp:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
+        ucrBase.clsRsyntax.SetBaseROperator(clsOperatorParameter)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
