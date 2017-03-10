@@ -1264,7 +1264,7 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
     element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
   }
   if(include_observation_data){
-    station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, "ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, "ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
     data_list <- list(station_info, station_data)
     names(data_list) = c("station_info","station_data")
   }
