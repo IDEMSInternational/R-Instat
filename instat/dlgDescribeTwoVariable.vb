@@ -307,28 +307,6 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    'Private Sub ChangeBaseFunction()
-    '    If ucrChkCustomise.Checked Then
-    '        ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
-    '        'For the receiver we set the parameter as new because the value will be different to the current value (one is string and one is RFunction)
-    '        ucrReceiverDescribeOneVar.SetParameter(New RParameter("columns_to_summarise", 1))
-    '        ucrReceiverDescribeOneVar.SetParameterIsString()
-    '        'For the checkbox we just change the parameter name, because we want to keep the same value in the control for the new function.
-    '        'Changing the parameter name should be used very cautiously. Normally it is safer to set a new parameter.
-    '        ucrChkOmitMissing.ChangeParameterName("drop")
-    '        cmdSummaries.Enabled = True
-    '    Else
-    '        ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-    '        ucrReceiverDescribeOneVar.SetParameter(New RParameter("object", 0))
-    '        ucrReceiverDescribeOneVar.SetParameterIsRFunction()
-    '        ucrChkOmitMissing.ChangeParameterName("na.rm")
-    '        cmdSummaries.Enabled = False
-    '    End If
-    '    'We need to update the base function to include the 
-    '    'ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction.AddParameter(ucrChkOmitMissing.GetParameter())
-    '    SetRCodeForControls(False)
-    'End Sub
-
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVar.ControlContentsChanged, ucrReceiverSecondVar.ControlContentsChanged
         Results()
         TestOKEnabled()
