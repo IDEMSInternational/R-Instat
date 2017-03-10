@@ -26,12 +26,12 @@ Partial Class dlgScatterPlot
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.cmdScatterPlotOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrSelectorForScatter = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrVariablesAsFactorForScatter = New instat.ucrVariablesAsFactor()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrVariablesAsFactorForScatter = New instat.ucrVariablesAsFactor()
-        Me.ucrSelectorForScatter = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -74,6 +74,31 @@ Partial Class dlgScatterPlot
         Me.cmdScatterPlotOptions.Text = "Scatter Plot Options"
         Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 269)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(299, 24)
+        Me.ucrSaveGraph.TabIndex = 8
+        '
+        'ucrSelectorForScatter
+        '
+        Me.ucrSelectorForScatter.bShowHiddenColumns = False
+        Me.ucrSelectorForScatter.bUseCurrentFilter = True
+        Me.ucrSelectorForScatter.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForScatter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForScatter.Name = "ucrSelectorForScatter"
+        Me.ucrSelectorForScatter.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForScatter.TabIndex = 0
+        '
+        'ucrVariablesAsFactorForScatter
+        '
+        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(261, 27)
+        Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
+        Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForScatter.TabIndex = 1
+        Me.ucrVariablesAsFactorForScatter.ucrVariableSelector = Nothing
+        '
         'ucrFactorOptionalReceiver
         '
         Me.ucrFactorOptionalReceiver.frmParent = Me
@@ -100,31 +125,6 @@ Partial Class dlgScatterPlot
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
-        '
-        'ucrVariablesAsFactorForScatter
-        '
-        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(261, 27)
-        Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
-        Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorForScatter.TabIndex = 1
-        Me.ucrVariablesAsFactorForScatter.ucrVariableSelector = Nothing
-        '
-        'ucrSelectorForScatter
-        '
-        Me.ucrSelectorForScatter.bShowHiddenColumns = False
-        Me.ucrSelectorForScatter.bUseCurrentFilter = True
-        Me.ucrSelectorForScatter.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForScatter.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForScatter.Name = "ucrSelectorForScatter"
-        Me.ucrSelectorForScatter.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForScatter.TabIndex = 0
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 269)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(335, 24)
-        Me.ucrSaveGraph.TabIndex = 8
         '
         'dlgScatterPlot
         '

@@ -149,7 +149,7 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveGraph.SetRCode(clsOverallFunction, bReset)
+        ucrSaveGraph.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrSelectorForScatter.SetRCode(clsOverallFunction, bReset)
 
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
