@@ -70,6 +70,23 @@ Public Class dlgDescribeTwoVariable
     Private Sub SetDefaults()
         ucrSelectorDescribeTwoVar.Reset()
 
+        'addmargins
+        clsRFreqTables = New RFunction
+        clsRAnova = New RFunction
+        clsRFreqTables.AddParameter("addmargins", "FALSE")
+        'transpose
+        clsRFreqTables.AddParameter("transpose", "FALSE")
+        'proportions
+        clsRFreqTables.AddParameter("proportions", "FALSE")
+        'percentages
+        clsRFreqTables.AddParameter("percentages", "FALSE")
+        'means
+        clsRAnova.AddParameter("means", "FALSE")
+        'signif.stars
+        clsRAnova.AddParameter("signif.stars", "FALSE")
+        'sign_level
+        clsRAnova.AddParameter("sign_level", "FALSE")
+
         clsSummariesList = New RFunction
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
@@ -104,10 +121,10 @@ Public Class dlgDescribeTwoVariable
         cmdDisplayOptions.Visible = False
         ucrChkOmitMissing.Checked = False
         'sdgSummaries.SetMyRFunction(clsRCustomSummary)
-        sdgDescribeDisplay.SetAnovaDispOptions(clsRAnova)
-        sdgDescribeDisplay.SetFreqDispOptions(clsRFreqTables)
+        'sdgDescribeDisplay.SetAnovaDispOptions(clsRAnova)
+        'sdgDescribeDisplay.SetFreqDispOptions(clsRFreqTables)
         'sdgSummaries.SetDefaults()
-        sdgDescribeDisplay.SetDefaults()
+        'sdgDescribeDisplay.SetDefaults()
         ucrReceiverFirstVar.SetMeAsReceiver()
         ucrSelectorDescribeTwoVar.Reset()
         ucrSelectorDescribeTwoVar.Focus()
@@ -160,8 +177,11 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgDescribeDisplay.SetRFunction(clsRFreqTables, clsRAnova, bResetSubdialog)
+        bResetSubdialog = False
         sdgDescribeDisplay.GrpBoxEnable()
         sdgDescribeDisplay.ShowDialog()
+        TestOKEnabled()
     End Sub
 
     Private Sub Correlation()
