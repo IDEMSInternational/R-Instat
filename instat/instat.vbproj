@@ -293,6 +293,12 @@
     <Compile Include="dlgFitModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportFromCSPRO.Designer.vb">
+      <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromCSPRO.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromODK.Designer.vb">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
     </Compile>
@@ -351,6 +357,12 @@
       <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOneVarUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneWayFrequencies.Designer.vb">
+      <DependentUpon>dlgOneWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOpenSST.Designer.vb">
@@ -447,6 +459,12 @@
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </Compile>
     <Compile Include="frmOutputWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportFromDatabases.Designer.vb">
+      <DependentUpon>ImportFromDatabases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImportFromDatabases.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="mdlCoreControl.vb" />
@@ -2389,6 +2407,9 @@
     <EmbeddedResource Include="dlgHideShowColumns.sw-KE.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromCSPRO.resx">
+      <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromODK.resx">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
     </EmbeddedResource>
@@ -2472,6 +2493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayFrequencies.resx">
+      <DependentUpon>dlgOneWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenSST.fr-FR.resx">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
@@ -2823,6 +2847,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportFromDatabases.resx">
+      <DependentUpon>ImportFromDatabases.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAddLink.resx">
       <DependentUpon>sdgAddLink.vb</DependentUpon>
