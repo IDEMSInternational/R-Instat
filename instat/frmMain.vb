@@ -1166,6 +1166,10 @@ Public Class frmMain
         dlgRestrict.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableFrequencies.Click
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
