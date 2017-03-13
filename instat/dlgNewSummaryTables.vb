@@ -31,40 +31,65 @@ Public Class dlgNewSummaryTables
         bReset = False
         TestOKEnabled()
     End Sub
+
     Public Sub SetRCodeForControls(bReset As Boolean)
 
     End Sub
+
     Private Sub SetDefaults()
         ucrFactorsSelector.Reset()
-        ucrReceiverFactor.SetMeAsReceiver()
+        TestOKEnabled()
     End Sub
 
-    Private Sub initialiseDialog()
+    Private Sub InitialiseDialog()
         ucrReceiverFactor.Selector = ucrFactorsSelector
         ucrReceiverNumeric.Selector = ucrFactorsSelector
+        ucrReceiverFactor.SetMeAsReceiver()
+        ucrReceiverFactor.SetDataType("factor")
+        ucrReceiverNumeric.SetDataType("numeric")
         ucrCheckWeight.SetText("Weights")
-        ucrCheckSummaries.SetText("Summary Columns")
+        ucrCheckSummaries.SetText("Treat Summary Columns as a Further Factor")
         ucrCheckDisplayMargins.SetText("Dispaly Margins")
     End Sub
 
-    Private Sub TestOKEnabled()
-        If Not ucrReceiverFactor.IsEmpty Then
-            If ucrCheckWeight.Checked Then
-                If ucrReceiverNumberColn.IsEmpty() Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
-            End If
-
+    Private Sub EnableCheckSummaries()
+        If ucrReceiverNumeric.lstSelectedVariables.Items.Count > 1 Then
+            ucrCheckSummaries.Enabled = True
+        Else
+            ucrCheckSummaries.Enabled = False
         End If
     End Sub
+
+    Private Sub TestOKEnabled()
+        'If Not ucrReceiverFactor.IsEmpty Then
+        '    If ucrCheckWeight.Checked Then
+        '        If ucrSingleReceiver.IsEmpty() Then
+        '            ucrBase.OKEnabled(True)
+        '        Else
+
+        '        End If
+        '        ucrBase.OKEnabled(False)
+        '    End If
+        '    ucrBase.OKEnabled(False)
+        'End If
+    End Sub
+
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.ShowDialog()
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+
+    End Sub
+
+    Private Sub ucrReceiverNumeric_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlValueChanged
+        EnableCheckSummaries()
+    End Sub
+
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
