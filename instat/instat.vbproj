@@ -233,6 +233,12 @@
     <Compile Include="dlgDefineCorruptionOutputs.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineCRI.Designer.vb">
+      <DependentUpon>dlgDefineCRI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineCRI.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDefineRedFlags.Designer.vb">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </Compile>
@@ -275,10 +281,22 @@
     <Compile Include="dlgCorruptionFile.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFitCorruptionModel.Designer.vb">
+      <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFitCorruptionModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFitModel.Designer.vb">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFitModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromCSPRO.Designer.vb">
+      <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromCSPRO.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgImportFromODK.Designer.vb">
@@ -339,6 +357,12 @@
       <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOneVarUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneWayFrequencies.Designer.vb">
+      <DependentUpon>dlgOneWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOpenSST.Designer.vb">
@@ -437,6 +461,12 @@
     <Compile Include="frmOutputWindow.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ImportFromDatabases.Designer.vb">
+      <DependentUpon>ImportFromDatabases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImportFromDatabases.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="mdlCoreControl.vb" />
     <Compile Include="sdgAddLink.Designer.vb">
       <DependentUpon>sdgAddLink.vb</DependentUpon>
@@ -456,6 +486,18 @@
     <Compile Include="sdgClimdexIndices.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgCorruptionCalculatedColumns.Designer.vb">
+      <DependentUpon>sdgCorruptionCalculatedColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCorruptionCalculatedColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgCorruptionCountryLevelColumns.Designer.vb">
+      <DependentUpon>sdgCorruptionCountryLevelColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCorruptionCountryLevelColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDescribeDisplay.Designer.vb">
       <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </Compile>
@@ -472,6 +514,12 @@
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgFactorDataFrame.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFitCorruptionModelDisplay.Designer.vb">
+      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFitCorruptionModelDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgImportFromClimSoft.Designer.vb">
@@ -526,6 +574,12 @@
       <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCalculationsSummmary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgWindrose.Designer.vb">
+      <DependentUpon>sdgWindrose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgWindrose.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -2173,6 +2227,9 @@
     <EmbeddedResource Include="dlgDefineCorruptionOutputs.resx">
       <DependentUpon>dlgDefineCorruptionOutputs.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineCRI.resx">
+      <DependentUpon>dlgDefineCRI.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
@@ -2263,6 +2320,9 @@
     <EmbeddedResource Include="dlgCorruptionFile.resx">
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFitCorruptionModel.resx">
+      <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFitModel.fr-FR.resx">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -2347,6 +2407,9 @@
     <EmbeddedResource Include="dlgHideShowColumns.sw-KE.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromCSPRO.resx">
+      <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromODK.resx">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
     </EmbeddedResource>
@@ -2430,6 +2493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayFrequencies.resx">
+      <DependentUpon>dlgOneWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenSST.fr-FR.resx">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
@@ -2782,6 +2848,9 @@
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImportFromDatabases.resx">
+      <DependentUpon>ImportFromDatabases.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgAddLink.resx">
       <DependentUpon>sdgAddLink.vb</DependentUpon>
     </EmbeddedResource>
@@ -2824,6 +2893,12 @@
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgCorruptionCalculatedColumns.resx">
+      <DependentUpon>sdgCorruptionCalculatedColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCorruptionCountryLevelColumns.resx">
+      <DependentUpon>sdgCorruptionCountryLevelColumns.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgCreateFilter.fr-FR.resx">
       <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </EmbeddedResource>
@@ -2853,6 +2928,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFactorDataFrame.resx">
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFitCorruptionModelDisplay.resx">
+      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgImportFromClimSoft.resx">
       <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
@@ -3885,6 +3963,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgWindrose.resx">
+      <DependentUpon>sdgWindrose.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.fr-FR.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
