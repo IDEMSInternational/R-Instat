@@ -365,12 +365,6 @@
     <Compile Include="dlgOneVarUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgOneWayFrequencies.Designer.vb">
-      <DependentUpon>dlgOneWayFrequencies.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgOneWayFrequencies.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgOpenSST.Designer.vb">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
     </Compile>
@@ -2502,9 +2496,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneWayFrequencies.resx">
-      <DependentUpon>dlgOneWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenSST.fr-FR.resx">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
