@@ -42,6 +42,7 @@ Public Class dlgOneWayFrequencies
         ucrChkGraph.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkweights.SetRCode(clsSjtFreq, bReset)
         ucrChkweights.SetRCode(clsSjpFrq, bReset)
+        ucrChkFlip.SetRCode(clsSjpFrq, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -98,7 +99,7 @@ Public Class dlgOneWayFrequencies
         'clsSjtFreq.AddParameter("use.viewer", "TRUE")
         clsSjpFrq.SetRCommand("sjPlot::sjp.frq")
         clsSjpFrq.AddParameter("var.cnt", clsRFunctionParameter:=ucrReceiverOneWayFreq.GetVariables)
-        clsSjpFrq.AddParameter("weight.by", ucrReceiverOneWayFreq.GetVariableNames)
+        ' clsSjpFrq.AddParameter("weight.by", ucrReceiverOneWayFreq.GetVariableNames)
 
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
