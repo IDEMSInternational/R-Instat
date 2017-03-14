@@ -108,7 +108,6 @@ Partial Class dlgRandomSample
         '
         'ucrNewColumnName
         '
-        Me.ucrNewColumnName.AddQuotesIfUnrecognised = True
         Me.ucrNewColumnName.IsReadOnly = False
         Me.ucrNewColumnName.Location = New System.Drawing.Point(131, 221)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
@@ -117,8 +116,6 @@ Partial Class dlgRandomSample
         '
         'ucrPrefixNewColumns
         '
-        Me.ucrPrefixNewColumns.AddQuotesIfUnrecognised = True
-        Me.ucrPrefixNewColumns.IsMultiline = False
         Me.ucrPrefixNewColumns.IsReadOnly = False
         Me.ucrPrefixNewColumns.Location = New System.Drawing.Point(131, 222)
         Me.ucrPrefixNewColumns.Name = "ucrPrefixNewColumns"
@@ -127,11 +124,11 @@ Partial Class dlgRandomSample
         '
         'ucrSampleSize
         '
+        Me.ucrSampleSize.ucrDataFrameSelector = Nothing
         Me.ucrSampleSize.Location = New System.Drawing.Point(344, 120)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
         Me.ucrSampleSize.TabIndex = 13
-        Me.ucrSampleSize.ucrDataFrameSelector = Nothing
         '
         'ucrSelectorRandomSamples
         '
@@ -153,14 +150,14 @@ Partial Class dlgRandomSample
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 248)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(407, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 300)
+        Me.ClientSize = New System.Drawing.Size(419, 300)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.chkSetSeed)
