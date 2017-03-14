@@ -46,7 +46,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 198)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 202)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 8
@@ -113,7 +113,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrChkSaveResult
         '
         Me.ucrChkSaveResult.Checked = False
-        Me.ucrChkSaveResult.Location = New System.Drawing.Point(155, 5)
+        Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 203)
         Me.ucrChkSaveResult.Name = "ucrChkSaveResult"
         Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSaveResult.TabIndex = 11
@@ -121,7 +121,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(315, 5)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(176, 203)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkOmitMissing.TabIndex = 10
