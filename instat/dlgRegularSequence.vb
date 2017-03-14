@@ -106,7 +106,7 @@ Public Class dlgRegularSequence
 
         'SetNumericOrDatesParameters()
         CheckSequenceLength()
-        clsSeqFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
+        clsSeqFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
 
     End Sub
@@ -232,10 +232,13 @@ Public Class dlgRegularSequence
         ucrNudInStepsOf.Increment = 10 ^ -(ucrNudNumberOfDecimalPlaces.Value)
     End Sub
 
-    Private Sub ucrSelectDataFrameRegularSequence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectDataFrameRegularSequence.ControlValueChanged, ucrNudRepeatValues.ControlValueChanged, ucrNudInStepsOf.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
-        CheckSequenceLength()
+    Private Sub ucrSelectDataFrameRegularSequence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectDataFrameRegularSequence.ControlValueChanged, ucrNudInStepsOf.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
         SetBaseFunction()
         SetInStepsOfParameter()
+    End Sub
+
+    Private Sub ucrNudRepeatValues_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged
+        SetBaseFunction()
     End Sub
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged
