@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgNewSummaryTables
     Private bFirstload As Boolean = True
@@ -74,21 +73,21 @@ Public Class dlgNewSummaryTables
         'End If
     End Sub
 
-    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs)
         sdgSummaries.ShowDialog()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverNumeric_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlValueChanged
         EnableCheckSummaries()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrCheckWeight.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

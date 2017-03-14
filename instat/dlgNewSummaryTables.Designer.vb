@@ -24,13 +24,6 @@ Partial Class dlgNewSummaryTables
     Private Sub InitializeComponent()
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.lblSummaryColumns = New System.Windows.Forms.Label()
-        Me.lblColumnFactors = New System.Windows.Forms.Label()
-        Me.lblDecimals = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ucrNudDecimals = New instat.ucrNud()
-        Me.ucrNudColumnFactors = New instat.ucrNud()
-        Me.ucrCheckDisplayMargins = New instat.ucrCheck()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrCheckSummaries = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverNumeric = New instat.ucrReceiverMultiple()
@@ -38,6 +31,13 @@ Partial Class dlgNewSummaryTables
         Me.ucrSingleReceiver = New instat.ucrReceiverSingle()
         Me.ucrCheckWeight = New instat.ucrCheck()
         Me.ucrFactorsSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrNudDecimals = New instat.ucrNud()
+        Me.lblDecimals = New System.Windows.Forms.Label()
+        Me.ucrNudColumnFactors = New instat.ucrNud()
+        Me.lblColumnFactors = New System.Windows.Forms.Label()
+        Me.ucrCheckDisplayMargins = New instat.ucrCheck()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,7 +47,7 @@ Partial Class dlgNewSummaryTables
         Me.lblFactors.Location = New System.Drawing.Point(226, 7)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(45, 13)
-        Me.lblFactors.TabIndex = 5
+        Me.lblFactors.TabIndex = 1
         Me.lblFactors.Tag = "Factors:"
         Me.lblFactors.Text = "Factors:"
         '
@@ -57,29 +57,72 @@ Partial Class dlgNewSummaryTables
         Me.lblSummaryColumns.Location = New System.Drawing.Point(229, 129)
         Me.lblSummaryColumns.Name = "lblSummaryColumns"
         Me.lblSummaryColumns.Size = New System.Drawing.Size(96, 13)
-        Me.lblSummaryColumns.TabIndex = 10
+        Me.lblSummaryColumns.TabIndex = 3
         Me.lblSummaryColumns.Tag = "Summary_Columns"
         Me.lblSummaryColumns.Text = "Summary Columns:"
         '
-        'lblColumnFactors
+        'ucrCheckSummaries
         '
-        Me.lblColumnFactors.AutoSize = True
-        Me.lblColumnFactors.Location = New System.Drawing.Point(5, 42)
-        Me.lblColumnFactors.Name = "lblColumnFactors"
-        Me.lblColumnFactors.Size = New System.Drawing.Size(83, 13)
-        Me.lblColumnFactors.TabIndex = 8
-        Me.lblColumnFactors.Tag = "Column_Factors"
-        Me.lblColumnFactors.Text = "Column Factors:"
+        Me.ucrCheckSummaries.Checked = False
+        Me.ucrCheckSummaries.Location = New System.Drawing.Point(10, 231)
+        Me.ucrCheckSummaries.Name = "ucrCheckSummaries"
+        Me.ucrCheckSummaries.Size = New System.Drawing.Size(206, 16)
+        Me.ucrCheckSummaries.TabIndex = 7
         '
-        'lblDecimals
+        'ucrBase
         '
-        Me.lblDecimals.AutoSize = True
-        Me.lblDecimals.Location = New System.Drawing.Point(5, 65)
-        Me.lblDecimals.Name = "lblDecimals"
-        Me.lblDecimals.Size = New System.Drawing.Size(53, 13)
-        Me.lblDecimals.TabIndex = 10
-        Me.lblDecimals.Tag = "Decimals"
-        Me.lblDecimals.Text = "Decimals:"
+        Me.ucrBase.Location = New System.Drawing.Point(10, 366)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(382, 50)
+        Me.ucrBase.TabIndex = 10
+        '
+        'ucrReceiverNumeric
+        '
+        Me.ucrReceiverNumeric.frmParent = Me
+        Me.ucrReceiverNumeric.Location = New System.Drawing.Point(225, 146)
+        Me.ucrReceiverNumeric.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverNumeric.Name = "ucrReceiverNumeric"
+        Me.ucrReceiverNumeric.Selector = Nothing
+        Me.ucrReceiverNumeric.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverNumeric.TabIndex = 4
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.frmParent = Me
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(225, 24)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFactor.TabIndex = 2
+        '
+        'ucrSingleReceiver
+        '
+        Me.ucrSingleReceiver.frmParent = Me
+        Me.ucrSingleReceiver.Location = New System.Drawing.Point(96, 204)
+        Me.ucrSingleReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSingleReceiver.Name = "ucrSingleReceiver"
+        Me.ucrSingleReceiver.Selector = Nothing
+        Me.ucrSingleReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSingleReceiver.TabIndex = 6
+        '
+        'ucrCheckWeight
+        '
+        Me.ucrCheckWeight.Checked = False
+        Me.ucrCheckWeight.Location = New System.Drawing.Point(10, 204)
+        Me.ucrCheckWeight.Name = "ucrCheckWeight"
+        Me.ucrCheckWeight.Size = New System.Drawing.Size(84, 20)
+        Me.ucrCheckWeight.TabIndex = 5
+        '
+        'ucrFactorsSelector
+        '
+        Me.ucrFactorsSelector.bShowHiddenColumns = False
+        Me.ucrFactorsSelector.bUseCurrentFilter = True
+        Me.ucrFactorsSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrFactorsSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFactorsSelector.Name = "ucrFactorsSelector"
+        Me.ucrFactorsSelector.Size = New System.Drawing.Size(210, 182)
+        Me.ucrFactorsSelector.TabIndex = 0
         '
         'GroupBox1
         '
@@ -88,10 +131,10 @@ Partial Class dlgNewSummaryTables
         Me.GroupBox1.Controls.Add(Me.ucrNudColumnFactors)
         Me.GroupBox1.Controls.Add(Me.lblColumnFactors)
         Me.GroupBox1.Controls.Add(Me.ucrCheckDisplayMargins)
-        Me.GroupBox1.Location = New System.Drawing.Point(215, 259)
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 255)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(159, 101)
-        Me.GroupBox1.TabIndex = 9
+        Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Layout:"
         '
@@ -104,8 +147,18 @@ Partial Class dlgNewSummaryTables
         Me.ucrNudDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimals.Name = "ucrNudDecimals"
         Me.ucrNudDecimals.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDecimals.TabIndex = 11
+        Me.ucrNudDecimals.TabIndex = 4
         Me.ucrNudDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblDecimals
+        '
+        Me.lblDecimals.AutoSize = True
+        Me.lblDecimals.Location = New System.Drawing.Point(5, 65)
+        Me.lblDecimals.Name = "lblDecimals"
+        Me.lblDecimals.Size = New System.Drawing.Size(53, 13)
+        Me.lblDecimals.TabIndex = 3
+        Me.lblDecimals.Tag = "Decimals"
+        Me.lblDecimals.Text = "Decimals:"
         '
         'ucrNudColumnFactors
         '
@@ -116,8 +169,18 @@ Partial Class dlgNewSummaryTables
         Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
         Me.ucrNudColumnFactors.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudColumnFactors.TabIndex = 9
+        Me.ucrNudColumnFactors.TabIndex = 2
         Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblColumnFactors
+        '
+        Me.lblColumnFactors.AutoSize = True
+        Me.lblColumnFactors.Location = New System.Drawing.Point(5, 42)
+        Me.lblColumnFactors.Name = "lblColumnFactors"
+        Me.lblColumnFactors.Size = New System.Drawing.Size(83, 13)
+        Me.lblColumnFactors.TabIndex = 1
+        Me.lblColumnFactors.Tag = "Column_Factors"
+        Me.lblColumnFactors.Text = "Column Factors:"
         '
         'ucrCheckDisplayMargins
         '
@@ -125,91 +188,28 @@ Partial Class dlgNewSummaryTables
         Me.ucrCheckDisplayMargins.Location = New System.Drawing.Point(5, 19)
         Me.ucrCheckDisplayMargins.Name = "ucrCheckDisplayMargins"
         Me.ucrCheckDisplayMargins.Size = New System.Drawing.Size(104, 20)
-        Me.ucrCheckDisplayMargins.TabIndex = 7
+        Me.ucrCheckDisplayMargins.TabIndex = 0
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(10, 314)
+        Me.cmdSummaries.Location = New System.Drawing.Point(270, 255)
         Me.cmdSummaries.Name = "cmdSummaries"
         Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSummaries.TabIndex = 13
+        Me.cmdSummaries.TabIndex = 9
         Me.cmdSummaries.Text = "Summaries"
         Me.cmdSummaries.UseVisualStyleBackColor = True
-        '
-        'ucrCheckSummaries
-        '
-        Me.ucrCheckSummaries.Checked = False
-        Me.ucrCheckSummaries.Location = New System.Drawing.Point(10, 237)
-        Me.ucrCheckSummaries.Name = "ucrCheckSummaries"
-        Me.ucrCheckSummaries.Size = New System.Drawing.Size(206, 16)
-        Me.ucrCheckSummaries.TabIndex = 14
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 366)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(382, 50)
-        Me.ucrBase.TabIndex = 12
-        '
-        'ucrReceiverNumeric
-        '
-        Me.ucrReceiverNumeric.frmParent = Me
-        Me.ucrReceiverNumeric.Location = New System.Drawing.Point(228, 146)
-        Me.ucrReceiverNumeric.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverNumeric.Name = "ucrReceiverNumeric"
-        Me.ucrReceiverNumeric.Selector = Nothing
-        Me.ucrReceiverNumeric.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverNumeric.TabIndex = 11
-        '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.frmParent = Me
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(225, 24)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactor.TabIndex = 8
-        '
-        'ucrSingleReceiver
-        '
-        Me.ucrSingleReceiver.frmParent = Me
-        Me.ucrSingleReceiver.Location = New System.Drawing.Point(96, 204)
-        Me.ucrSingleReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSingleReceiver.Name = "ucrSingleReceiver"
-        Me.ucrSingleReceiver.Selector = Nothing
-        Me.ucrSingleReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrSingleReceiver.TabIndex = 7
-        '
-        'ucrCheckWeight
-        '
-        Me.ucrCheckWeight.Checked = False
-        Me.ucrCheckWeight.Location = New System.Drawing.Point(10, 204)
-        Me.ucrCheckWeight.Name = "ucrCheckWeight"
-        Me.ucrCheckWeight.Size = New System.Drawing.Size(84, 20)
-        Me.ucrCheckWeight.TabIndex = 6
-        '
-        'ucrFactorsSelector
-        '
-        Me.ucrFactorsSelector.bShowHiddenColumns = False
-        Me.ucrFactorsSelector.bUseCurrentFilter = True
-        Me.ucrFactorsSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrFactorsSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFactorsSelector.Name = "ucrFactorsSelector"
-        Me.ucrFactorsSelector.Size = New System.Drawing.Size(210, 182)
-        Me.ucrFactorsSelector.TabIndex = 1
         '
         'dlgNewSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(404, 428)
-        Me.Controls.Add(Me.ucrCheckSummaries)
         Me.Controls.Add(Me.cmdSummaries)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.ucrCheckSummaries)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverNumeric)
         Me.Controls.Add(Me.lblSummaryColumns)
-        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ucrReceiverFactor)
         Me.Controls.Add(Me.ucrSingleReceiver)
         Me.Controls.Add(Me.ucrCheckWeight)
@@ -235,13 +235,13 @@ Partial Class dlgNewSummaryTables
     Friend WithEvents ucrReceiverFactor As ucrReceiverMultiple
     Friend WithEvents ucrReceiverNumeric As ucrReceiverMultiple
     Friend WithEvents lblSummaryColumns As Label
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrCheckSummaries As ucrCheck
+    Friend WithEvents cmdSummaries As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents ucrNudDecimals As ucrNud
     Friend WithEvents lblDecimals As Label
     Friend WithEvents ucrNudColumnFactors As ucrNud
     Friend WithEvents lblColumnFactors As Label
     Friend WithEvents ucrCheckDisplayMargins As ucrCheck
-    Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdSummaries As Button
-    Friend WithEvents ucrCheckSummaries As ucrCheck
 End Class
