@@ -1166,9 +1166,35 @@ Public Class frmMain
         dlgRestrict.ShowDialog()
     End Sub
 
-    Private Sub NewSummaryTablesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NewSummaryTablesToolStripMenuItem1.Click
+    Private Sub AaToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AaToolStripMenuItem1.Click
+        dlgFitCorruptionModel.ShowDialog()
+    End Sub
+
+    Private Sub DefineRedFlagsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineRedFlagsToolStripMenuItem.Click
+        dlgDefineRedFlags.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoVariablesTabulate_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub mnuDescribeTwoVariablesFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesFrequencies.Click
+        dlgTwoWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem.Click
         dlgNewSummaryTables.ShowDialog()
     End Sub
+
+    Private Sub ImportFromCSPROToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromCSPROToolStripMenuItem.Click
+        dlgImportFromCSPRO.ShowDialog()
+    End Sub
+
+    Private Sub ImportFromToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromToolStripMenuItem.Click
+        dlgImportFromDatabases.ShowDialog()
+    End Sub
+
+
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
