@@ -43,10 +43,10 @@ Partial Class dlgDummyVariables
         Me.lblSelected.AutoSize = True
         Me.lblSelected.Location = New System.Drawing.Point(258, 39)
         Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(52, 13)
+        Me.lblSelected.Size = New System.Drawing.Size(90, 13)
         Me.lblSelected.TabIndex = 1
         Me.lblSelected.Tag = "Selected"
-        Me.lblSelected.Text = "Selected:"
+        Me.lblSelected.Text = "Selected Column:"
         '
         'lblVariate
         '
