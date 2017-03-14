@@ -1787,7 +1787,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   }
 )
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
+data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
@@ -1935,21 +1935,41 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(year, doy, col_name, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
-  curr_data <- self$get_data_frame()
-  col_data <- self$get_columns_from_data(col_name)
-  if(!is.numeric(col_data)) stop("The rainfall column should be numeric")
-  recode <- ifelse(is.na(col_data), "missing", ifelse(col_data>threshold, "rain", "dry"))
-  recode <- as.factor(recode)
-  new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
-  curr_data[[new_col]] <- recode
-  if(add_to_data) {
-    self$add_columns_to_data(col_name = new_col, col_data = recode)
+data_object$set("public","make_inventory_plot", function(date_col, station_col, elements_cols, add_to_data = FALSE, coord_flip = FALSE) {
+  if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
+  if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
+  if(!all(elements_cols %in% self$get_column_names())) {
+    stop("Not all elements columns found in the data")
   }
-  
-  g <- ggplot(data = curr_data, mapping = aes_(x = as.name(year), y = as.name(doy), colour = as.name(new_col), group = as.name(year))) + geom_point() + xlab(year) + ylab(col_name) + labs(color="Recode")
-  if(!missing(facets)) {
-    g <- g + facet_wrap(as.name(facets))
+  self$split_date(col_name=date_col, day_in_year=TRUE)
+  self$split_date(col_name=date_col, year=TRUE)
+  curr_data <- self$get_data_frame()
+  if(length(elements_cols)!=1){
+    col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, "year", "day_in_year"))
+    recode <- ifelse(is.na(col_data$value), "missing", "present")
+    recode <- as.factor(recode)
+    new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
+    col_data[[new_col]] <- recode
+    g <- ggplot(data = col_data, mapping = aes(x = year, y = day_in_year, colour = recode, group = year)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    if(!is.null(station_col)){
+      stop("multiple stations multiple elements will be implemented")
+    }
+    else{
+      g <- g + facet_wrap(~variable)
+    }
+  }
+  else{
+    col_data <- self$get_columns_from_data(elements_cols)
+    recode <- ifelse(is.na(col_data),"missing", "present")
+    recode <- as.factor(recode)
+    new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
+    curr_data[[new_col]] <- recode
+    print(curr_data)
+    #g <- ggplot(data = curr_data, mapping = aes(x = year, y = day_in_year, colour = new_col, group = year))
+    g <- ggplot(data = curr_data, mapping = aes(x = year, y = day_in_year, colour = recode, group = year)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    if(!is.null(station_col)){
+      g <- g + facet_wrap(as.name(station_col))
+    }
   }
   if(coord_flip) {
     g <- g + coord_flip()
