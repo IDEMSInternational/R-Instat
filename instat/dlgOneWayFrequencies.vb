@@ -37,9 +37,9 @@ Public Class dlgOneWayFrequencies
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkTable.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkGraph.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlSort.SetRCode(clsSjtFreq, bReset)
+        ucrChkTable.SetRCode(clsSjtFreq, bReset)
+        ucrChkGraph.SetRCode(clsSjpFrq, bReset)
         ucrChkweights.SetRCode(clsSjtFreq, bReset)
         ucrChkweights.SetRCode(clsSjpFrq, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
