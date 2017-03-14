@@ -38,7 +38,7 @@ Partial Class dlgWindrose
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(260, 47)
+        Me.lblXVariable.Location = New System.Drawing.Point(260, 45)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(69, 13)
         Me.lblXVariable.TabIndex = 1
@@ -47,7 +47,7 @@ Partial Class dlgWindrose
         'lblYVariable
         '
         Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.Location = New System.Drawing.Point(260, 95)
+        Me.lblYVariable.Location = New System.Drawing.Point(260, 93)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(80, 13)
         Me.lblYVariable.TabIndex = 3
@@ -56,7 +56,7 @@ Partial Class dlgWindrose
         'lblFacet
         '
         Me.lblFacet.AutoSize = True
-        Me.lblFacet.Location = New System.Drawing.Point(260, 142)
+        Me.lblFacet.Location = New System.Drawing.Point(260, 140)
         Me.lblFacet.Name = "lblFacet"
         Me.lblFacet.Size = New System.Drawing.Size(37, 13)
         Me.lblFacet.TabIndex = 5
@@ -65,7 +65,7 @@ Partial Class dlgWindrose
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(260, 196)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(260, 194)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
         Me.lblNoOfColumns.Size = New System.Drawing.Size(79, 13)
         Me.lblNoOfColumns.TabIndex = 7
@@ -92,7 +92,7 @@ Partial Class dlgWindrose
         '
         Me.ucrNudNoOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(345, 196)
+        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(345, 191)
         Me.ucrNudNoOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Name = "ucrNudNoOfColumns"
@@ -132,7 +132,7 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 249)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -141,7 +141,7 @@ Partial Class dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 316)
+        Me.ClientSize = New System.Drawing.Size(419, 307)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblNoOfColumns)
