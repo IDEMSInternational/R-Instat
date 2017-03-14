@@ -15,7 +15,7 @@ Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrame, clsSetSeed, ClsSample, clsReplicate As New RFunction
+    Private clsDataFrame, clsSetSeed, clsSample, clsReplicate As New RFunction
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -77,11 +77,11 @@ Public Class dlgRandomSubsets
         ReplaceParameters()
 
         'sample function
-        ClsSample = New RFunction
-        ClsSample.SetRCommand("sample")
-        ClsSample.AddParameter("replace", "FALSE")
+        clsSample = New RFunction
+        clsSample.SetRCommand("sample")
+        clsSample.AddParameter("replace", "FALSE")
         ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
-        ClsSample.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
+        clsSample.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
 
         'setseed fuction
         clsSetSeed = New RFunction
@@ -92,7 +92,7 @@ Public Class dlgRandomSubsets
         clsReplicate = New RFunction
         clsReplicate.SetRCommand("replicate")
         clsReplicate.AddParameter("n", 1)
-        clsReplicate.AddParameter("expr", clsRFunctionParameter:=ClsSample)
+        clsReplicate.AddParameter("expr", clsRFunctionParameter:=clsSample)
 
         'setting the main fuction
         clsDataFrame = New RFunction
@@ -121,11 +121,11 @@ Public Class dlgRandomSubsets
     End Sub
     'updating rcode of the controls
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverSelected.SetRCode(ClsSample, bReset)
-        ucrChkWithReplacement.SetRCode(ClsSample, bReset)
+        ucrReceiverSelected.SetRCode(clsSample, bReset)
+        ucrChkWithReplacement.SetRCode(clsSample, bReset)
         ucrNudNumberOfColumns.SetRCode(clsReplicate, bReset)
         ucrNewDataframe.SetRCode(clsDataFrame, bReset)
-        ucrNudSampleSize.SetRCode(ClsSample, bReset)
+        ucrNudSampleSize.SetRCode(clsSample, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
     End Sub
@@ -150,10 +150,10 @@ Public Class dlgRandomSubsets
 
     Private Sub ReplaceParameters()
         If ucrChkWithReplacement.Checked Then
-            ClsSample.AddParameter("replace", "TRUE")
+            clsSample.AddParameter("replace", "TRUE")
             ucrNudSampleSize.SetMinMax(1, Integer.MaxValue)
         Else
-            ClsSample.AddParameter("replace", "FALSE")
+            clsSample.AddParameter("replace", "FALSE")
             ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         End If
     End Sub
