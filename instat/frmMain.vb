@@ -1170,6 +1170,18 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
+    Private Sub AaToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AaToolStripMenuItem1.Click
+        dlgFitCorruptionModel.ShowDialog()
+    End Sub
+
+    Private Sub DefineRedFlagsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineRedFlagsToolStripMenuItem.Click
+        dlgDefineRedFlags.ShowDialog()
+    End Sub
+
+    Private Sub CountryNamesCorrectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountryNamesCorrectionsToolStripMenuItem.Click
+        dlgStandardiseCountryNames.ShowDialog()
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!

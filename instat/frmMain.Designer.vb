@@ -464,26 +464,26 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator33
         '
         Me.ToolStripSeparator33.Name = "ToolStripSeparator33"
-        Me.ToolStripSeparator33.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator33.Size = New System.Drawing.Size(139, 6)
         '
         'mnuDescribeOneVariableFrequencies
         '
         Me.mnuDescribeOneVariableFrequencies.Name = "mnuDescribeOneVariableFrequencies"
-        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies"
         '
         'mnuDescribeTwoVariables
@@ -3232,7 +3232,7 @@ Partial Class frmMain
         '
         Me.MergeAdditionalDataToolStripMenuItem.Name = "MergeAdditionalDataToolStripMenuItem"
         Me.MergeAdditionalDataToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
-        Me.MergeAdditionalDataToolStripMenuItem.Text = "Merge additional data..."
+        Me.MergeAdditionalDataToolStripMenuItem.Text = "Merge Additional Data..."
         '
         'FilterToolStripMenuItem
         '
@@ -3274,7 +3274,7 @@ Partial Class frmMain
         'AaToolStripMenuItem
         '
         Me.AaToolStripMenuItem.Name = "AaToolStripMenuItem"
-        Me.AaToolStripMenuItem.Size = New System.Drawing.Size(86, 22)
+        Me.AaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AaToolStripMenuItem.Text = "aa"
         '
         'mnuCorruptionModel
@@ -3287,8 +3287,8 @@ Partial Class frmMain
         'AaToolStripMenuItem1
         '
         Me.AaToolStripMenuItem1.Name = "AaToolStripMenuItem1"
-        Me.AaToolStripMenuItem1.Size = New System.Drawing.Size(86, 22)
-        Me.AaToolStripMenuItem1.Text = "aa"
+        Me.AaToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.AaToolStripMenuItem1.Text = "Fit Model"
         '
         'DefineRedFlagsToolStripMenuItem
         '
