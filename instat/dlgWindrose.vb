@@ -46,21 +46,21 @@ Public Class dlgWindrose
         ucrNudNoOfColumns.Visible = False
 
         ucrReceiverWindSpeed.Selector = ucrWindRoseSelector
-        ucrReceiverWindSpeed.SetParameter(New RParameter("speed"))
+        ucrReceiverWindSpeed.SetParameter(New RParameter("speed", 0))
         ucrReceiverWindSpeed.SetIncludedDataTypes({"numeric"})
         ucrReceiverWindSpeed.SetParameterIsRFunction()
 
         ucrReceiverWindDirection.Selector = ucrWindRoseSelector
-        ucrReceiverWindDirection.SetParameter(New RParameter("direction"))
+        ucrReceiverWindDirection.SetParameter(New RParameter("direction", 1))
         ucrReceiverWindDirection.SetIncludedDataTypes({"numeric"})
         ucrReceiverWindDirection.SetParameterIsRFunction()
 
         ucrReceiverFacet.Selector = ucrWindRoseSelector
         ucrReceiverFacet.SetIncludedDataTypes({"factor"})
-        ucrReceiverFacet.SetParameter(New RParameter("facet"))
+        ucrReceiverFacet.SetParameter(New RParameter("facet", 2))
         ucrReceiverFacet.SetParameterIsRFunction()
 
-        ucrNudNoOfColumns.SetParameter(New RParameter("n_col"))
+        ucrNudNoOfColumns.SetParameter(New RParameter("n_col", 3))
         ucrNudNoOfColumns.SetLinkedDisplayControl(lblNoOfColumns)
         ucrNudNoOfColumns.SetRDefault(1)
         ucrNudNoOfColumns.Minimum = 1
