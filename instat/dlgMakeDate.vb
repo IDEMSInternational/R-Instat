@@ -66,7 +66,7 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoSpecifyOrigin)
 
 
-        ucrPnlDate.AddFunctionNamesCondition(rdoSingleColumn, "as.date")
+        ucrPnlDate.AddFunctionNamesCondition(rdoSingleColumn, "as.Date")
         ucrPnlDate.AddFunctionNamesCondition(rdoTwoColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         ucrPnlDate.AddFunctionNamesCondition(rdoThreeColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
 
@@ -197,9 +197,10 @@ Public Class dlgMakeDate
 
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
 
-
+        ucrPnlDate.AddParameterPresentCondition(rdoDefaultFormat, "format")
+        ucrPnlDate.AddParameterPresentCondition(rdoSpecifyFormat, "format")
         ucrPnlDate.AddParameterPresentCondition(rdoSpecifyOrigin, "origin")
-        ucrPnlDate.AddParameterPresentCondition(rdoSpecifyOrigin, "format")
+
         'Not Implemented yet
         ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
         ucrInputYearOption.SetItems({"4 Digit", "2 Digit"})
@@ -209,7 +210,6 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SetDefaults()
-
         'reset
         ucrSaveDate.Reset()
         ucrSelectorMakeDate.Reset()
@@ -253,7 +253,6 @@ Public Class dlgMakeDate
 
         ucrChkMore.SetRCode(clsDateFunction, bReset)
 
-        ucrReceiverForDate.SetRCode(clsDateFunction, bReset)
         ucrReceiverDayTwo.SetRCode(clsMakeYearDay, bReset)
         ucrReceiverYearTwo.SetRCode(clsMakeYearDay, bReset)
         ucrReceiverYearThree.SetRCode(clsMakeYearMonthDay, bReset)
@@ -349,13 +348,16 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged
-
         If rdoDefaultFormat.Checked Then
+            'clsDateFunction.RemoveParameterByName("origin")
+            'clsDateFunction.RemoveParameterByName("format")
             ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
         ElseIf rdoSpecifyOrigin.Checked
+            'clsDateFunction.RemoveParameterByName("format")
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
         Else
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
+            'clsDateFunction.RemoveParameterByName("origin")
         End If
     End Sub
 
