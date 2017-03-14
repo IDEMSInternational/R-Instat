@@ -36,7 +36,8 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkweights = New instat.ucrCheck()
+        Me.ucrChkWeights = New instat.ucrCheck()
+        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.grpSort.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -46,7 +47,7 @@ Partial Class dlgOneWayFrequencies
         Me.grpSort.Controls.Add(Me.rdoAscending)
         Me.grpSort.Controls.Add(Me.rdoNone)
         Me.grpSort.Controls.Add(Me.ucrPnlSort)
-        Me.grpSort.Location = New System.Drawing.Point(267, 114)
+        Me.grpSort.Location = New System.Drawing.Point(267, 92)
         Me.grpSort.Name = "grpSort"
         Me.grpSort.Size = New System.Drawing.Size(123, 91)
         Me.grpSort.TabIndex = 4
@@ -95,7 +96,7 @@ Partial Class dlgOneWayFrequencies
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(280, 216)
+        Me.cmdOptions.Location = New System.Drawing.Point(296, 198)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(69, 23)
         Me.cmdOptions.TabIndex = 9
@@ -105,7 +106,7 @@ Partial Class dlgOneWayFrequencies
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(267, 61)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(267, 43)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
         Me.lblSelectedVariable.TabIndex = 2
@@ -114,7 +115,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 202)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 231)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkFlip.TabIndex = 5
@@ -122,7 +123,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkGraph
         '
         Me.ucrChkGraph.Checked = False
-        Me.ucrChkGraph.Location = New System.Drawing.Point(9, 252)
+        Me.ucrChkGraph.Location = New System.Drawing.Point(9, 281)
         Me.ucrChkGraph.Name = "ucrChkGraph"
         Me.ucrChkGraph.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkGraph.TabIndex = 7
@@ -130,21 +131,21 @@ Partial Class dlgOneWayFrequencies
         'ucrChkTable
         '
         Me.ucrChkTable.Checked = False
-        Me.ucrChkTable.Location = New System.Drawing.Point(10, 227)
+        Me.ucrChkTable.Location = New System.Drawing.Point(10, 256)
         Me.ucrChkTable.Name = "ucrChkTable"
         Me.ucrChkTable.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkTable.TabIndex = 6
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 302)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 340)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 277)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 306)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
         Me.ucrSaveGraph.TabIndex = 8
@@ -152,7 +153,7 @@ Partial Class dlgOneWayFrequencies
         'ucrReceiverOneWayFreq
         '
         Me.ucrReceiverOneWayFreq.frmParent = Me
-        Me.ucrReceiverOneWayFreq.Location = New System.Drawing.Point(270, 77)
+        Me.ucrReceiverOneWayFreq.Location = New System.Drawing.Point(270, 60)
         Me.ucrReceiverOneWayFreq.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOneWayFreq.Name = "ucrReceiverOneWayFreq"
         Me.ucrReceiverOneWayFreq.Selector = Nothing
@@ -169,20 +170,31 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSelectorOneWayFreq.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorOneWayFreq.TabIndex = 0
         '
-        'ucrChkweights
+        'ucrChkWeights
         '
-        Me.ucrChkweights.Checked = False
-        Me.ucrChkweights.Location = New System.Drawing.Point(270, 27)
-        Me.ucrChkweights.Name = "ucrChkweights"
-        Me.ucrChkweights.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkweights.TabIndex = 1
+        Me.ucrChkWeights.Checked = False
+        Me.ucrChkWeights.Location = New System.Drawing.Point(9, 205)
+        Me.ucrChkWeights.Name = "ucrChkWeights"
+        Me.ucrChkWeights.Size = New System.Drawing.Size(129, 20)
+        Me.ucrChkWeights.TabIndex = 11
+        '
+        'ucrReceiverWeights
+        '
+        Me.ucrReceiverWeights.frmParent = Me
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(154, 203)
+        Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
+        Me.ucrReceiverWeights.Selector = Nothing
+        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWeights.TabIndex = 12
         '
         'dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 361)
-        Me.Controls.Add(Me.ucrChkweights)
+        Me.ClientSize = New System.Drawing.Size(427, 397)
+        Me.Controls.Add(Me.ucrReceiverWeights)
+        Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.cmdOptions)
@@ -220,5 +232,6 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents cmdOptions As Button
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents ucrChkFlip As ucrCheck
-    Friend WithEvents ucrChkweights As ucrCheck
+    Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
+    Friend WithEvents ucrChkWeights As ucrCheck
 End Class
