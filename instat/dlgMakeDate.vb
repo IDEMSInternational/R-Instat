@@ -150,8 +150,13 @@ Public Class dlgMakeDate
         ucrSelectorMakeDate.SetParameter(New RParameter("data_name", 0))
         ucrSelectorMakeDate.SetParameterIsString()
 
+        ucrPnlDate.AddParameterPresentCondition(rdoDefaultFormat, "format")
+        ucrPnlDate.AddParameterPresentCondition(rdoSpecifyFormat, "format")
+        ucrPnlDate.AddParameterPresentCondition(rdoSpecifyOrigin, "origin")
+
+
+        ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
         'when rdoSingleColumn is checked
-        ucrPnlDate.AddToLinkedControls(ucrReceiverForDate, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoSingleColumn)
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDate.AddToLinkedControls(ucrChkMore, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMore.AddToLinkedControls(ucrInputMonth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -197,9 +202,6 @@ Public Class dlgMakeDate
 
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
 
-        ucrPnlDate.AddParameterPresentCondition(rdoDefaultFormat, "format")
-        ucrPnlDate.AddParameterPresentCondition(rdoSpecifyFormat, "format")
-        ucrPnlDate.AddParameterPresentCondition(rdoSpecifyOrigin, "origin")
 
         'Not Implemented yet
         ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
@@ -349,15 +351,11 @@ Public Class dlgMakeDate
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged
         If rdoDefaultFormat.Checked Then
-            'clsDateFunction.RemoveParameterByName("origin")
-            'clsDateFunction.RemoveParameterByName("format")
             ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
         ElseIf rdoSpecifyOrigin.Checked
-            'clsDateFunction.RemoveParameterByName("format")
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
         Else
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
-            'clsDateFunction.RemoveParameterByName("origin")
         End If
     End Sub
 
