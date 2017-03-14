@@ -59,7 +59,7 @@ Public Class dlgDummyVariables
         'ucrPnlLevelOmitted.AddRadioButton(rdoFirst, "")
         'ucrPnlLevelOmitted.AddRadioButton(rdoLast, "")
         'ucrPnlLevelOmitted.AddRadioButton(rdoLevelNumber, "")
-
+        ucrPnlLevelOmitted.bAllowNonConditionValues = True
         'currently disabled sice the functions and parameters are yet to be set
         ucrChkWithXVariable.Enabled = False
         lblVariate.Enabled = False
@@ -92,7 +92,7 @@ Public Class dlgDummyVariables
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    'Private Sub SetReceiver()
+    'Private Sub SetMeAsReceiver()
     '    If ucrChkWithXVariable.Checked Then
     '        ucrVariateReceiver.SetMeAsReceiver()
     '    Else
@@ -102,6 +102,7 @@ Public Class dlgDummyVariables
 
     'Private Sub ucrChkWithXVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithXVariable.ControlValueChanged
     '    VariateVisible()
+    ' SetReceiver()
     'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -112,9 +113,5 @@ Public Class dlgDummyVariables
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrChkWithXVariable.ControlContentsChanged, ucrVariateReceiver.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged, ucrVariateReceiver.ControlValueChanged
-        ' SetReceiver()
     End Sub
 End Class
