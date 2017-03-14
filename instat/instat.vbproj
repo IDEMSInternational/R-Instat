@@ -257,6 +257,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDrySpells.Designer.vb">
+      <DependentUpon>dlgDrySpells.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDrySpells.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgEnter.Designer.vb">
       <DependentUpon>dlgEnter.vb</DependentUpon>
     </Compile>
