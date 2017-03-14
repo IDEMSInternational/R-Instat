@@ -33,7 +33,7 @@ Partial Class dlgCombineforGraphics
         'lblGraphsToCombine
         '
         Me.lblGraphsToCombine.AutoSize = True
-        Me.lblGraphsToCombine.Location = New System.Drawing.Point(255, 44)
+        Me.lblGraphsToCombine.Location = New System.Drawing.Point(255, 45)
         Me.lblGraphsToCombine.Name = "lblGraphsToCombine"
         Me.lblGraphsToCombine.Size = New System.Drawing.Size(104, 13)
         Me.lblGraphsToCombine.TabIndex = 1
@@ -78,7 +78,7 @@ Partial Class dlgCombineforGraphics
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 254)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 258)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 5
