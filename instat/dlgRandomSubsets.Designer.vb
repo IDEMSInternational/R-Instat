@@ -39,7 +39,7 @@ Partial Class dlgRandomSubsets
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(258, 30)
+        Me.lblSelected.Location = New System.Drawing.Point(258, 43)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(93, 13)
         Me.lblSelected.TabIndex = 1
@@ -49,7 +49,7 @@ Partial Class dlgRandomSubsets
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(254, 80)
+        Me.lblSampleSize.Location = New System.Drawing.Point(254, 91)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
         Me.lblSampleSize.TabIndex = 3
@@ -59,7 +59,7 @@ Partial Class dlgRandomSubsets
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(254, 110)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(254, 121)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         Me.lblNumberOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberOfColumns.TabIndex = 5
@@ -83,7 +83,7 @@ Partial Class dlgRandomSubsets
         'ucrChkWithReplacement
         '
         Me.ucrChkWithReplacement.Checked = False
-        Me.ucrChkWithReplacement.Location = New System.Drawing.Point(257, 167)
+        Me.ucrChkWithReplacement.Location = New System.Drawing.Point(257, 178)
         Me.ucrChkWithReplacement.Name = "ucrChkWithReplacement"
         Me.ucrChkWithReplacement.Size = New System.Drawing.Size(171, 20)
         Me.ucrChkWithReplacement.TabIndex = 9
@@ -91,7 +91,7 @@ Partial Class dlgRandomSubsets
         'ucrChkSetSeed
         '
         Me.ucrChkSetSeed.Checked = False
-        Me.ucrChkSetSeed.Location = New System.Drawing.Point(257, 138)
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(257, 149)
         Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
         Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSetSeed.TabIndex = 7
@@ -100,7 +100,7 @@ Partial Class dlgRandomSubsets
         '
         Me.ucrNudSetSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSetSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSetSeed.Location = New System.Drawing.Point(363, 138)
+        Me.ucrNudSetSeed.Location = New System.Drawing.Point(363, 149)
         Me.ucrNudSetSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSetSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSetSeed.Name = "ucrNudSetSeed"
@@ -112,7 +112,7 @@ Partial Class dlgRandomSubsets
         '
         Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(363, 107)
+        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(363, 118)
         Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
@@ -124,7 +124,7 @@ Partial Class dlgRandomSubsets
         '
         Me.ucrNudSampleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSampleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSampleSize.Location = New System.Drawing.Point(363, 77)
+        Me.ucrNudSampleSize.Location = New System.Drawing.Point(363, 88)
         Me.ucrNudSampleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSampleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSampleSize.Name = "ucrNudSampleSize"
@@ -135,7 +135,7 @@ Partial Class dlgRandomSubsets
         'ucrReceiverSelected
         '
         Me.ucrReceiverSelected.frmParent = Me
-        Me.ucrReceiverSelected.Location = New System.Drawing.Point(257, 44)
+        Me.ucrReceiverSelected.Location = New System.Drawing.Point(257, 60)
         Me.ucrReceiverSelected.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelected.Name = "ucrReceiverSelected"
         Me.ucrReceiverSelected.Selector = Nothing
