@@ -23,6 +23,9 @@ Public Class sdgWindrose
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctThemePairs As New Dictionary(Of String, String)
+
+
         ucrNudCalmWind.SetParameter(New RParameter("calm_wind"))
         ucrNudCalmWind.SetRDefault(0)
 
@@ -34,6 +37,16 @@ Public Class sdgWindrose
 
         ucrInputSpeedCuts.SetParameter(New RParameter("speed_cuts "))
         ucrInputSpeedCuts.SetRDefault("NA")
+
+        ucrInputTheme.SetParameter(New RParameter("ggtheme "))
+        dctThemePairs.Add("grey", Chr(34) & "grey" & Chr(34))
+        dctThemePairs.Add("gray", Chr(34) & "gray" & Chr(34))
+        dctThemePairs.Add("bw", Chr(34) & "bw" & Chr(34))
+        dctThemePairs.Add("linedraw", Chr(34) & "linedraw" & Chr(34))
+        dctThemePairs.Add("light", Chr(34) & "light" & Chr(34))
+        dctThemePairs.Add("minimal", Chr(34) & "minimal" & Chr(34))
+        dctThemePairs.Add("classic", Chr(34) & "classic" & Chr(34))
+        ucrInputTheme.SetItems(dctThemePairs)
 
         bControlsInitialised = True
     End Sub
