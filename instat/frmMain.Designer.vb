@@ -36,6 +36,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecific = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NewSummaryTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMultipleResponse = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator26 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeSpecificScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
@@ -46,6 +47,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificRugPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificBarChart = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificBarChartFromSummary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralTabulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -440,7 +442,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NewSummaryTablesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -465,26 +467,26 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator33
         '
         Me.ToolStripSeparator33.Name = "ToolStripSeparator33"
-        Me.ToolStripSeparator33.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator33.Size = New System.Drawing.Size(139, 6)
         '
         'mnuDescribeOneVariableFrequencies
         '
         Me.mnuDescribeOneVariableFrequencies.Name = "mnuDescribeOneVariableFrequencies"
-        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies"
         '
         'mnuDescribeTwoVariables
@@ -535,11 +537,18 @@ Partial Class frmMain
         '
         'mnuDescribeSpecificSummary
         '
+        Me.mnuDescribeSpecificSummary.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewSummaryTablesToolStripMenuItem})
         Me.mnuDescribeSpecificSummary.Enabled = False
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
         Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(217, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
         Me.mnuDescribeSpecificSummary.Text = "Summary..."
+        '
+        'NewSummaryTablesToolStripMenuItem
+        '
+        Me.NewSummaryTablesToolStripMenuItem.Name = "NewSummaryTablesToolStripMenuItem"
+        Me.NewSummaryTablesToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.NewSummaryTablesToolStripMenuItem.Text = "New Summary Tables"
         '
         'mnuDescribeSpecificMultipleResponse
         '
@@ -608,6 +617,13 @@ Partial Class frmMain
         Me.mnuDescribeSpecificBarChartFromSummary.Size = New System.Drawing.Size(217, 22)
         Me.mnuDescribeSpecificBarChartFromSummary.Tag = "Bar_Chart_From_Summary..."
         Me.mnuDescribeSpecificBarChartFromSummary.Text = "Bar Chart From Summary..."
+        '
+        'SummaryToolStripMenuItem
+        '
+        Me.SummaryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewSummaryTablesToolStripMenuItem1})
+        Me.SummaryToolStripMenuItem.Name = "SummaryToolStripMenuItem"
+        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
+        Me.SummaryToolStripMenuItem.Text = "summary"
         '
         'mnuDescribeGeneral
         '
@@ -3375,11 +3391,11 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
-        'SummaryToolStripMenuItem
+        'NewSummaryTablesToolStripMenuItem1
         '
-        Me.SummaryToolStripMenuItem.Name = "SummaryToolStripMenuItem"
-        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
-        Me.SummaryToolStripMenuItem.Text = "summary"
+        Me.NewSummaryTablesToolStripMenuItem1.Name = "NewSummaryTablesToolStripMenuItem1"
+        Me.NewSummaryTablesToolStripMenuItem1.Size = New System.Drawing.Size(189, 22)
+        Me.NewSummaryTablesToolStripMenuItem1.Text = "New Summary Tables"
         '
         'frmMain
         '
@@ -3823,4 +3839,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator33 As ToolStripSeparator
     Friend WithEvents mnuDescribeOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents SummaryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NewSummaryTablesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NewSummaryTablesToolStripMenuItem1 As ToolStripMenuItem
 End Class

@@ -1166,11 +1166,7 @@ Public Class frmMain
         dlgRestrict.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableFrequencies.Click
-        dlgOneWayFrequencies.ShowDialog()
-    End Sub
-
-    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem.Click
+    Private Sub NewSummaryTablesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NewSummaryTablesToolStripMenuItem1.Click
         dlgNewSummaryTables.ShowDialog()
     End Sub
 
