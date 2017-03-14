@@ -46,31 +46,25 @@ Public Class dlgNewSummaryTables
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetDataType("factor")
         ucrReceiverNumeric.SetDataType("numeric")
-        ucrCheckWeight.SetText("Weights")
-        ucrCheckSummaries.SetText("Treat Summary Columns as a Further Factor")
-        ucrCheckDisplayMargins.SetText("Dispaly Margins")
+        ucrchkCheckWeight.SetText("Weights")
+        ucrchkCheckSummaries.SetText("Treat Summary Columns as a Further Factor")
+        ucrchkCheckDisplayMargins.SetText("Dispaly Margins")
     End Sub
 
     Private Sub EnableCheckSummaries()
         If ucrReceiverNumeric.lstSelectedVariables.Items.Count > 1 Then
-            ucrCheckSummaries.Enabled = True
+            ucrchkCheckSummaries.Enabled = True
         Else
-            ucrCheckSummaries.Enabled = False
+            ucrchkCheckSummaries.Enabled = False
         End If
     End Sub
 
     Private Sub TestOKEnabled()
-        'If Not ucrReceiverFactor.IsEmpty Then
-        '    If ucrCheckWeight.Checked Then
-        '        If ucrSingleReceiver.IsEmpty() Then
-        '            ucrBase.OKEnabled(True)
-        '        Else
-
-        '        End If
-        '        ucrBase.OKEnabled(False)
-        '    End If
-        '    ucrBase.OKEnabled(False)
-        'End If
+        If (Not ucrReceiverFactor.IsEmpty OrElse Not ucrReceiverNumeric.IsEmpty) AndAlso ucrNudColumnFactors.GetText <> "" AndAlso ucrNudDecimals.GetText <> "" AndAlso (Not ucrchkCheckWeight.Checked OrElse (ucrchkCheckWeight.Checked AndAlso Not ucrSingleReceiver.IsEmpty)) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs)
@@ -87,7 +81,7 @@ Public Class dlgNewSummaryTables
         EnableCheckSummaries()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrCheckWeight.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrchkCheckWeight.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged, ucrNudDecimals.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
