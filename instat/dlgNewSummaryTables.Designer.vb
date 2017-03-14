@@ -44,7 +44,7 @@ Partial Class dlgNewSummaryTables
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(226, 45)
+        Me.lblFactors.Location = New System.Drawing.Point(265, 45)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(45, 13)
         Me.lblFactors.TabIndex = 1
@@ -54,7 +54,7 @@ Partial Class dlgNewSummaryTables
         'lblSummaryColumns
         '
         Me.lblSummaryColumns.AutoSize = True
-        Me.lblSummaryColumns.Location = New System.Drawing.Point(227, 170)
+        Me.lblSummaryColumns.Location = New System.Drawing.Point(266, 170)
         Me.lblSummaryColumns.Name = "lblSummaryColumns"
         Me.lblSummaryColumns.Size = New System.Drawing.Size(96, 13)
         Me.lblSummaryColumns.TabIndex = 3
@@ -68,7 +68,7 @@ Partial Class dlgNewSummaryTables
         Me.GroupBox1.Controls.Add(Me.ucrNudColumnFactors)
         Me.GroupBox1.Controls.Add(Me.lblColumnFactors)
         Me.GroupBox1.Controls.Add(Me.ucrchkCheckDisplayMargins)
-        Me.GroupBox1.Location = New System.Drawing.Point(10, 255)
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 257)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(159, 101)
         Me.GroupBox1.TabIndex = 8
@@ -97,7 +97,7 @@ Partial Class dlgNewSummaryTables
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(270, 294)
+        Me.cmdSummaries.Location = New System.Drawing.Point(309, 288)
         Me.cmdSummaries.Name = "cmdSummaries"
         Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
         Me.cmdSummaries.TabIndex = 9
@@ -139,22 +139,22 @@ Partial Class dlgNewSummaryTables
         'ucrchkCheckSummaries
         '
         Me.ucrchkCheckSummaries.Checked = False
-        Me.ucrchkCheckSummaries.Location = New System.Drawing.Point(10, 231)
+        Me.ucrchkCheckSummaries.Location = New System.Drawing.Point(10, 229)
         Me.ucrchkCheckSummaries.Name = "ucrchkCheckSummaries"
-        Me.ucrchkCheckSummaries.Size = New System.Drawing.Size(206, 16)
+        Me.ucrchkCheckSummaries.Size = New System.Drawing.Size(242, 20)
         Me.ucrchkCheckSummaries.TabIndex = 7
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 366)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 364)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(382, 50)
+        Me.ucrBase.Size = New System.Drawing.Size(435, 52)
         Me.ucrBase.TabIndex = 10
         '
         'ucrReceiverNumeric
         '
         Me.ucrReceiverNumeric.frmParent = Me
-        Me.ucrReceiverNumeric.Location = New System.Drawing.Point(225, 185)
+        Me.ucrReceiverNumeric.Location = New System.Drawing.Point(264, 185)
         Me.ucrReceiverNumeric.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverNumeric.Name = "ucrReceiverNumeric"
         Me.ucrReceiverNumeric.Selector = Nothing
@@ -164,7 +164,7 @@ Partial Class dlgNewSummaryTables
         'ucrReceiverFactor
         '
         Me.ucrReceiverFactor.frmParent = Me
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(225, 60)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(264, 60)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
@@ -203,7 +203,7 @@ Partial Class dlgNewSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 428)
+        Me.ClientSize = New System.Drawing.Size(409, 428)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ucrchkCheckSummaries)

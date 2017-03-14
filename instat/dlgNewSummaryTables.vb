@@ -36,6 +36,7 @@ Public Class dlgNewSummaryTables
     End Sub
 
     Private Sub SetDefaults()
+        ucrReceiverFactor.SetMeAsReceiver()
         ucrFactorsSelector.Reset()
         TestOKEnabled()
     End Sub
@@ -43,12 +44,13 @@ Public Class dlgNewSummaryTables
     Private Sub InitialiseDialog()
         ucrReceiverFactor.Selector = ucrFactorsSelector
         ucrReceiverNumeric.Selector = ucrFactorsSelector
-        ucrReceiverFactor.SetMeAsReceiver()
+        ucrSingleReceiver.Selector = ucrFactorsSelector
         ucrReceiverFactor.SetDataType("factor")
         ucrReceiverNumeric.SetDataType("numeric")
         ucrchkCheckWeight.SetText("Weights")
         ucrchkCheckSummaries.SetText("Treat Summary Columns as a Further Factor")
-        ucrchkCheckDisplayMargins.SetText("Dispaly Margins")
+        ucrchkCheckDisplayMargins.SetText("Display Margins")
+        ucrchkCheckWeight.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub EnableCheckSummaries()
@@ -81,7 +83,7 @@ Public Class dlgNewSummaryTables
         EnableCheckSummaries()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrchkCheckWeight.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged, ucrNudDecimals.ControlContentsChanged
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrchkCheckWeight.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged, ucrNudDecimals.ControlContentsChanged, ucrReceiverNumeric.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

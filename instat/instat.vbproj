@@ -401,6 +401,12 @@
     <Compile Include="dlgPICSATemperature.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRatingScales.Designer.vb">
+      <DependentUpon>dlgRatingScales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRatingScales.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </Compile>
@@ -435,6 +441,12 @@
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTwoWayFrequencies.Designer.vb">
+      <DependentUpon>dlgTwoWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DlgUseDate.Designer.vb">
@@ -2569,6 +2581,9 @@
     <EmbeddedResource Include="dlgRandomSubsets.sw-KE.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRatingScales.resx">
+      <DependentUpon>dlgRatingScales.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeNumeric.fr-FR.resx">
       <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
     </EmbeddedResource>
@@ -2766,6 +2781,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoVariableUseModel.resx">
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayFrequencies.resx">
+      <DependentUpon>dlgTwoWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
