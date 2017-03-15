@@ -79,7 +79,6 @@ Public Class dlgRandomSubsets
         'sample function
         clsSample = New RFunction
         clsSample.SetRCommand("sample")
-        clsSample.AddParameter("replace", "FALSE")
         ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         clsSample.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
 
@@ -150,10 +149,8 @@ Public Class dlgRandomSubsets
 
     Private Sub ReplaceParameters()
         If ucrChkWithReplacement.Checked Then
-            clsSample.AddParameter("replace", "TRUE")
             ucrNudSampleSize.SetMinMax(1, Integer.MaxValue)
         Else
-            clsSample.AddParameter("replace", "FALSE")
             ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         End If
     End Sub
