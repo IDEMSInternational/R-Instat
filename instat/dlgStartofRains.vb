@@ -484,7 +484,7 @@ Public Class dlgStartofRains
             clsCombinedList.RemoveParameterByName("sub5")
         End If
 
-        strTempFunExpression = strTempFunExpression & ucrReceiverRainfall.GetVariableNames(False) & ">" & nudThreshold.Value & Chr(34)
+        strTempFunExpression = strTempFunExpression & ucrReceiverRainfall.GetVariableNames(False) & ">=" & nudThreshold.Value & Chr(34)
 
         clsCombinedFilter.AddParameter("function_exp", strTempFunExpression)
     End Sub
