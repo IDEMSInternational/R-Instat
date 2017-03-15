@@ -95,8 +95,4 @@ Public Class dlgCombineforGraphics
         bResetSubDialog = False
         sdgCombineGraphOptions.ShowDialog()
     End Sub
-
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrCombineGraphReceiver.ControlContentsChanged
-
-    End Sub
 End Class
