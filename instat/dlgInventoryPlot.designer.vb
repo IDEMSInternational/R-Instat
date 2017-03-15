@@ -36,7 +36,6 @@ Partial Class dlgInventoryPlot
         Me.ucrChkTitle = New instat.ucrCheck()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrpnlOptions = New instat.UcrPanel()
-        Me.ucrInputDate = New instat.ucrInputTextBox()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrChkShowNonMissing = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
@@ -44,6 +43,7 @@ Partial Class dlgInventoryPlot
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblDayOfyear
@@ -179,16 +179,6 @@ Partial Class dlgInventoryPlot
         Me.ucrpnlOptions.Size = New System.Drawing.Size(391, 58)
         Me.ucrpnlOptions.TabIndex = 41
         '
-        'ucrInputDate
-        '
-        Me.ucrInputDate.AddQuotesIfUnrecognised = True
-        Me.ucrInputDate.IsMultiline = False
-        Me.ucrInputDate.IsReadOnly = False
-        Me.ucrInputDate.Location = New System.Drawing.Point(260, 92)
-        Me.ucrInputDate.Name = "ucrInputDate"
-        Me.ucrInputDate.Size = New System.Drawing.Size(101, 21)
-        Me.ucrInputDate.TabIndex = 39
-        '
         'ucrReceiverElements
         '
         Me.ucrReceiverElements.frmParent = Me
@@ -249,11 +239,22 @@ Partial Class dlgInventoryPlot
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 12
         '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(260, 92)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.TabIndex = 49
+        '
         'dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(427, 458)
+        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrInputTitle)
         Me.Controls.Add(Me.ucrChkTitle)
         Me.Controls.Add(Me.ucrReceiverElement)
@@ -263,7 +264,6 @@ Partial Class dlgInventoryPlot
         Me.Controls.Add(Me.rdoSingleStationSingleElement)
         Me.Controls.Add(Me.ucrpnlOptions)
         Me.Controls.Add(Me.cmdInventoryPlotOptions)
-        Me.Controls.Add(Me.ucrInputDate)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverElements)
@@ -294,7 +294,6 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrChkShowNonMissing As ucrCheck
-    Friend WithEvents ucrInputDate As ucrInputTextBox
     Friend WithEvents lblDate As Label
     Friend WithEvents lblElement As Label
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
@@ -309,4 +308,5 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrInputTitle As ucrInputTextBox
     Friend WithEvents ucrChkTitle As ucrCheck
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
 End Class
