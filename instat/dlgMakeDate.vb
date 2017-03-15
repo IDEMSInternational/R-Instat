@@ -70,9 +70,6 @@ Public Class dlgMakeDate
         ucrPnlDate.AddFunctionNamesCondition(rdoTwoColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         ucrPnlDate.AddFunctionNamesCondition(rdoThreeColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
 
-        ucrChkTwoDigitYear.SetText("2-digit years")
-        ucrChkMore.SetText("More")
-
         'ucrSave Date Column
         ucrSaveDate.SetPrefix("Date")
         ucrSaveDate.SetSaveTypeAsColumn()
@@ -86,6 +83,7 @@ Public Class dlgMakeDate
         dctYearItems.Add("2 Digit", Chr(34) & "%y" & Chr(34))
         ucrInputYearOption.SetItems(dctYearItems)
 
+        ucrChkTwoDigitYear.SetText("2-digit years")
         ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="%y", strNewValueIfUnchecked:="%Y")
         ucrChkTwoDigitYear.SetRDefault("%Y")
 
@@ -144,10 +142,6 @@ Public Class dlgMakeDate
         ucrSelectorMakeDate.SetParameter(New RParameter("data_name", 0))
         ucrSelectorMakeDate.SetParameterIsString()
 
-        'ucrPnlFormat.AddParameterPresentCondition(rdoDefaultFormat, "format")
-        'ucrPnlFormat.AddParameterPresentCondition(rdoSpecifyFormat, "format")
-        'ucrPnlFormat.AddParameterPresentCondition(rdoSpecifyOrigin, "origin")
-
         'when rdoSingleColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -186,6 +180,7 @@ Public Class dlgMakeDate
         ucrReceiverYearThree.SetLinkedDisplayControl(grpThreeColumns)
 
         'TODO - To be linked uplater with the ucrinputFomat
+        ucrChkMore.SetText("More")
         ucrChkMore.Enabled = False
         grpFormatField.Enabled = False
         ucrPnlDate.AddToLinkedControls(ucrChkMore, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -243,7 +238,6 @@ Public Class dlgMakeDate
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ' ucrPnlFormat.SetRCode(clsDateFunction, bReset)
 
         ucrReceiverForDate.SetRCode(clsDateFunction, bReset)
         ucrInputFormat.SetRCode(clsDateFunction, bReset)
