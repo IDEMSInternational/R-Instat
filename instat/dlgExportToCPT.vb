@@ -90,9 +90,10 @@ Public Class dlgExportToCPT
         ucrChkLong.SetParameter(New RParameter("long"))
         ucrChkLong.SetText("Long Data Format")
         ucrChkLong.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkLong.bUpdateRCodeFromControl = True
 
-        ucrChkLong.AddToLinkedControls(ucrReceiverMultipleDataColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLong.AddToLinkedControls(ucrReceiverDataColumn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLong.AddToLinkedControls(ucrReceiverMultipleDataColumns, {False}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLong.AddToLinkedControls(ucrReceiverDataColumn, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLong.AddToLinkedControls(ucrReceiverStations, {True}, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
@@ -140,12 +141,12 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrSSTDataframe.ControlContentsChanged, ucrLocationDataFrame.ControlContentsChanged, ucrReceiverDataColumn.ControlContentsChanged, ucrReceiverMultipleDataColumns.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverYears.ControlContentsChanged
+        ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutPut)
         TestOkEnabled()
     End Sub
 
     Private Sub ucrChkLong_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkLong.ControlContentsChanged
         ucrReceiverYears.SetMeAsReceiver()
         ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutPut)
-        TestOkEnabled()
     End Sub
 End Class
