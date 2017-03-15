@@ -85,7 +85,6 @@ Public Class dlgMakeDate
 
         ucrChkTwoDigitYear.SetText("2-digit years")
         ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="%y", strNewValueIfUnchecked:="%Y")
-        ucrChkTwoDigitYear.SetRDefault("%Y")
 
         ucrInputMonthOption.SetParameter(New RParameter("month_format", 5))
         Dim dctMonthItems As New Dictionary(Of String, String)
