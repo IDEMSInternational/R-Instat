@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class dlgSpells
     Public clsAddKey, clsDayFromAndTo, clsAdditionalCondition, clsRainyDays, clsMaxValue, clsYearGroupDaily, clsManipulationFirstDOYPerYear, clsCombinedFilter, clsCombinedList As New RFunction
-    Private clsMaxValueList, clsDSDrySpell, clsSubDSRainDays1, clsSubDSRainDays2 As New RFunction
+    Private clsMaxValueList, clsDSDrySpell, clsSubDSRainDays1, clsSubDSRainDays2, clsAdditionalConditionList As New RFunction
     Private strCurrDataName As String = ""
     Public bFirstLoad As Boolean = True
 
@@ -60,7 +60,7 @@ Public Class dlgSpells
 
         clsCombinedFilter.SetRCommand("instat_calculation$new")
         clsCombinedFilter.SetAssignTo("combined_filter")
-
+        clsMaxValueList.SetRCommand("list")
         ucrReceiverRainfall.Selector = ucrSelectorForStartofRains
         ucrReceiverYear.Selector = ucrSelectorForStartofRains
         ucrReceiverDate.Selector = ucrSelectorForStartofRains
@@ -85,7 +85,7 @@ Public Class dlgSpells
         'dctCondition.Add("Greater than", Chr(34) & ">" & Chr(34))
         'ucrInputCondition.SetItems(dctCondition)
 
-        ucrInputCondition.SetItems({"<=", "Between", ">="})
+        ucrInputCondition.SetItems({"<= Amount of Rain", "Between", ">= Amount of Rain"})
         nudFrom.Minimum = 1
         nudFrom.Maximum = 366
         nudTo.Minimum = 1
@@ -96,9 +96,12 @@ Public Class dlgSpells
         ucrSelectorForStartofRains.Reset()
         TestOKEnabled()
 
+        chkConditionRain.Checked = False
         nudFrom.Value = 1
         nudTo.Value = 366
         nudConditionLeft.Value = 0
+        nudConditionLeft.Maximum = Integer.MaxValue
+        NudConditionRight.Maximum = Integer.MaxValue
         NudConditionRight.Value = 0.85
         ucrInputCondition.SetName("Between")
     End Sub
@@ -112,11 +115,9 @@ Public Class dlgSpells
             Case "Between"
                 nudConditionLeft.Visible = True
                 NudConditionRight.Visible = True
-                lblRain.Visible = False
             Case Else
                 nudConditionLeft.Visible = True
                 NudConditionRight.Visible = False
-                lblRain.Visible = True
         End Select
     End Sub
 
@@ -148,48 +149,47 @@ Public Class dlgSpells
 
     Private Sub RainyDaysMethod()
 
+        clsRainyDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        Select Case ucrInputCondition.GetText
+            Case "<= Amount of Rain"
+                clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & nudConditionLeft.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
+            Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
+                clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & nudConditionLeft.Value & "&" & ucrReceiverRainfall.GetVariableNames(False) & "<=" & NudConditionRight.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
+            Case Else
+                clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & "<=" & nudConditionLeft.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
+        End Select
+        clsRainyDays.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34))
+        clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames(True) & ")")
+        clsRainyDays.AddParameter("save", 0)
+
         If chkConditionRain.Checked Then
-            clsRainyDays.RemoveParameterByName("type")
-            clsRainyDays.RemoveParameterByName("function_exp")
-            clsRainyDays.RemoveParameterByName("result_name")
-            clsRainyDays.RemoveParameterByName("calculated_from")
-            clsRainyDays.RemoveParameterByName("save")
             clsDSDrySpell.RemoveParameterByName("function_exp")
             clsDSDrySpell.RemoveParameterByName("sub_calculations")
             clsSubDSRainDays1.RemoveParameterByName("sub1")
+
             clsAdditionalCondition.AddParameter("type", "calculation")
-            clsAdditionalCondition.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", " & (nudConditionLeft.Value - 1) & ", 0)" & Chr(34))
+            clsAdditionalCondition.AddParameter("function_exp", Chr(34) & "replace(rain_day, " & (nudConditionLeft.Value - 1) & ", 0)" & Chr(34))
             clsAdditionalCondition.AddParameter("result_name", "rain_day2")
-            clsAdditionalCondition.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames(True) & ")")
+            clsAdditionalCondition.AddParameter("sub_calculation", clsRFunctionParameter:=clsAdditionalConditionList)
+            clsAdditionalConditionList.SetRCommand("list")
+            clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays)
             clsAdditionalCondition.AddParameter("save", 0)
 
-            clsDSDrySpell.AddParameter("function_exp", Chr(34) & "cumsum(rain_day2==0)-cummax((rain_day2)*cumsum(rain_day2==0))" & Chr(34))
+            clsDSDrySpell.AddParameter("function_exp", Chr(34) & "cumsum(rain_day2)-cummax((rain_day2==0)*cumsum(rain_day2))" & Chr(34))
             clsDSDrySpell.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubDSRainDays2)
             clsSubDSRainDays2.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
-
         Else
             clsAdditionalCondition.RemoveParameterByName("type")
             clsAdditionalCondition.RemoveParameterByName("function_exp")
             clsAdditionalCondition.RemoveParameterByName("result_name")
-            clsAdditionalCondition.RemoveParameterByName("calculated_from")
+            clsAdditionalCondition.RemoveParameterByName("sub_calculation")
             clsAdditionalCondition.RemoveParameterByName("save")
+            clsAdditionalConditionList.RemoveParameterByName("sub1")
             clsDSDrySpell.RemoveParameterByName("function_exp")
             clsDSDrySpell.RemoveParameterByName("sub_calculations")
             clsSubDSRainDays2.RemoveParameterByName("sub1")
 
-            clsRainyDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-            Select Case ucrInputCondition.GetText
-                Case "<="
-                    clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & "<=" & nudConditionLeft.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
-                Case "Between"
-                    clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & "<=" & nudConditionLeft.Value & "&" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & NudConditionRight.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
-                Case Else
-                    clsRainyDays.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & nudConditionLeft.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
-            End Select
-            clsRainyDays.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34))
-            clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames(True) & ")")
-            clsRainyDays.AddParameter("save", 0)
-            clsDSDrySpell.AddParameter("function_exp", Chr(34) & "cumsum(rain_day==0)-cummax((rain_day)*cumsum(rain_day==0))" & Chr(34))
+            clsDSDrySpell.AddParameter("function_exp", Chr(34) & "cumsum(rain_day)-cummax((rain_day==0)*cumsum(rain_day))" & Chr(34))
             clsDSDrySpell.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubDSRainDays1)
             clsSubDSRainDays1.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
         End If
@@ -205,6 +205,7 @@ Public Class dlgSpells
 
     Private Sub MaxValue()
         ' run these when things are checked
+        clsManipulationFirstDOYPerYear.SetRCommand("list")
         clsManipulationFirstDOYPerYear.AddParameter("sub2", clsRFunctionParameter:=clsYearGroupDaily, bIncludeArgumentName:=False)
         clsManipulationFirstDOYPerYear.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
 
