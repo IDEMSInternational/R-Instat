@@ -1945,14 +1945,25 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col, 
   self$split_date(col_name=date_col, year=TRUE)
   curr_data <- self$get_data_frame()
   if(length(elements_cols)!=1){
-    col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, "year", "day_in_year"))
+    if(!is.null(station_col)){
+      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, station_col, "year", "day_in_year"))
+      #stop("multiple stations multiple elements will be implemented")
+    }
+    else{
+      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, "year", "day_in_year"))
+      #g <- g + facet_wrap(~variable)
+    }
+    print(col_data)
+    #col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, "year", "day_in_year"))
     recode <- ifelse(is.na(col_data$value), "missing", "present")
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
     col_data[[new_col]] <- recode
     g <- ggplot(data = col_data, mapping = aes(x = year, y = day_in_year, colour = recode, group = year)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      stop("multiple stations multiple elements will be implemented")
+      #print(as.name(station_col))
+      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~variable")))
+      #stop("multiple stations multiple elements will be implemented")
     }
     else{
       g <- g + facet_wrap(~variable)
@@ -1964,7 +1975,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col, 
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
     curr_data[[new_col]] <- recode
-    print(curr_data)
+    #print(curr_data)
     #g <- ggplot(data = curr_data, mapping = aes(x = year, y = day_in_year, colour = new_col, group = year))
     g <- ggplot(data = curr_data, mapping = aes(x = year, y = day_in_year, colour = recode, group = year)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
