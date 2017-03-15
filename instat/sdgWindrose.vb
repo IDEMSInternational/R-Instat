@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
 Public Class sdgWindrose
@@ -24,7 +25,6 @@ Public Class sdgWindrose
 
     Public Sub InitialiseControls()
         Dim dctThemePairs As New Dictionary(Of String, String)
-
 
         ucrNudCalmWind.SetParameter(New RParameter("calm_wind"))
         ucrNudCalmWind.SetRDefault(0)
@@ -47,8 +47,10 @@ Public Class sdgWindrose
         dctThemePairs.Add("minimal", Chr(34) & "minimal" & Chr(34))
         dctThemePairs.Add("classic", Chr(34) & "classic" & Chr(34))
         ucrInputTheme.SetItems(dctThemePairs)
+        ucrInputTheme.SetRDefault(Chr(34) & "minimal" & Chr(34))
 
         bControlsInitialised = True
+
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
@@ -57,5 +59,19 @@ Public Class sdgWindrose
         End If
         clsWindRoseFunc = clsNewRFunction
         SetRCode(Me, clsWindRoseFunc, bReset)
+    End Sub
+
+    Private Sub UseNoOfSpeeds()
+        'Number of speeds used when Speed cuts is NA
+        If ucrInputSpeedCuts.GetText <> "NA" Then
+            ucrNudNoOfSpeeds.Enabled = False
+            clsWindRoseFunc.RemoveParameterByName("n_speeds")
+        Else
+            ucrNudNoOfSpeeds.Enabled = True
+        End If
+    End Sub
+
+    Private Sub ucrInputSpeedCuts_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputSpeedCuts.ControlContentsChanged
+        UseNoOfSpeeds()
     End Sub
 End Class
