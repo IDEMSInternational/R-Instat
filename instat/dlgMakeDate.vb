@@ -66,11 +66,9 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
         ucrPnlFormat.AddRadioButton(rdoSpecifyOrigin)
 
-
         ucrPnlDate.AddFunctionNamesCondition(rdoSingleColumn, "as.Date")
         ucrPnlDate.AddFunctionNamesCondition(rdoTwoColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         ucrPnlDate.AddFunctionNamesCondition(rdoThreeColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
-
 
         ucrChkTwoDigitYear.SetText("2-digit years")
         ucrChkMore.SetText("More")
@@ -103,12 +101,6 @@ Public Class dlgMakeDate
         dctDayItems.Add("By Month", Chr(34) & "%d" & Chr(34))
         ucrInputDayOption.SetItems(dctDayItems)
 
-        'ucrInputDay.SetParameter(New RParameter(""))
-        'Dim dctDayItemsDOY As New Dictionary(Of String, String)
-        'dctDayItemsDOY.Add("By Month", Chr(34) & "%d" & Chr(34))
-        'dctDayItemsDOY.Add("By Year", Chr(34) & "%j" & Chr(34))
-        'ucrInputDay.SetItems(dctDayItemsDOY)
-
         ucrInputComboBoxMonthTwo.SetParameter(New RParameter("doy_typical_length", 3))
         Dim dctMonthTwoItems As New Dictionary(Of String, String)
         dctMonthTwoItems.Add("365/366", Chr(34) & "365/366" & Chr(34))
@@ -133,7 +125,6 @@ Public Class dlgMakeDate
         ucrReceiverForDate.SetParameterIsRFunction()
 
         'rdoYearDayofMonth
-
         ucrReceiverYearTwo.SetParameter(New RParameter("year", 2))
         ucrReceiverYearTwo.SetParameterIsString()
 
@@ -141,7 +132,6 @@ Public Class dlgMakeDate
         ucrReceiverDayTwo.SetParameterIsString()
 
         'rdoYearMonthDay
-
         ucrReceiverYearThree.SetParameter(New RParameter("year", 3))
         ucrReceiverYearThree.SetParameterIsString()
 
@@ -157,14 +147,17 @@ Public Class dlgMakeDate
         'ucrPnlFormat.AddParameterPresentCondition(rdoDefaultFormat, "format")
         'ucrPnlFormat.AddParameterPresentCondition(rdoSpecifyFormat, "format")
         'ucrPnlFormat.AddParameterPresentCondition(rdoSpecifyOrigin, "origin")
-        ucrPnlDate.bAllowNonConditionValues = False
-        ucrPnlFormat.bAllowNonConditionValues = False
 
         'when rdoSingleColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDate.AddToLinkedControls(ucrReceiverForDate, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverForDate.SetLinkedDisplayControl(grpSingleColumn)
+        ucrPnlDate.bAllowNonConditionValues = False
+        ''linking up ucrinputs for format and origin
+        ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoSpecifyOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormat.bAllowNonConditionValues = False
 
         'when rdoTwoColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrReceiverYearTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -192,11 +185,6 @@ Public Class dlgMakeDate
         ucrInputDayOption.SetLinkedDisplayControl(lblDayOption)
         ucrReceiverYearThree.SetLinkedDisplayControl(grpThreeColumns)
 
-
-
-        ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoSpecifyOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         'TODO - To be linked uplater with the ucrinputFomat
         ucrChkMore.Enabled = False
         grpFormatField.Enabled = False
@@ -207,6 +195,12 @@ Public Class dlgMakeDate
         'ucrInputYearOption.SetItems({"4 Digit", "2 Digit"})
         'ucrInputYear.SetItems({"4 Digit", "2 Digit"})
         'ucrInputMonth.SetItems({"Numerical", "Partial Word", "Full Word"})
+
+        'ucrInputDay.SetParameter(New RParameter(""))
+        'Dim dctDayItemsDOY As New Dictionary(Of String, String)
+        'dctDayItemsDOY.Add("By Month", Chr(34) & "%d" & Chr(34))
+        'dctDayItemsDOY.Add("By Year", Chr(34) & "%j" & Chr(34))
+        'ucrInputDay.SetItems(dctDayItemsDOY)
 
         'ucrChkMore.AddToLinkedControls(ucrInputMonth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrInputMonth.SetLinkedDisplayControl(lblMonth)
