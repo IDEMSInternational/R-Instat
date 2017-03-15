@@ -864,7 +864,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticOrganiseEventsSpells_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsSpells.Click
-        dlgDrySpells.ShowDialog()
+        dlgSpells.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticOrganiseEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsWaterBalance.Click
