@@ -85,8 +85,6 @@ Public Class dlgMakeDate
         dctDayItems.Add("By Month", Chr(34) & "%d" & Chr(34))
         ucrInputDayOption.SetItems(dctDayItems)
 
-        ucrPnlDate.AddFunctionNamesCondition(True, "as.Date")
-
         'ucrInputDay.SetParameter(New RParameter(""))
         'Dim dctDayItemsDOY As New Dictionary(Of String, String)
         'dctDayItemsDOY.Add("By Month", Chr(34) & "%d" & Chr(34))
@@ -205,7 +203,6 @@ Public Class dlgMakeDate
         ucrInputYear.SetItems({"4 Digit", "2 Digit"})
         ucrInputMonth.SetItems({"Numerical", "Partial Word", "Full Word"})
 
-
     End Sub
 
     Private Sub SetDefaults()
@@ -245,7 +242,7 @@ Public Class dlgMakeDate
         ucrInputOrigin.SetRCode(clsDateFunction, bReset)
 
         'ucrPnlFormat.SetRCode(clsDateFunction, bReset)
-        ucrPnlDate.SetRCode(clsDateFunction, bReset)
+        'ucrPnlDate.SetRCode(clsMakeYearDay, bReset)
         'ucrPnlDate.SetRCode(clsMakeYearMonthDay, bReset)
 
         ucrInputDayOption.SetRCode(clsMakeYearMonthDay, bReset)
