@@ -756,6 +756,7 @@ data_object$set("public", "append_to_variables_metadata", function(col_names, pr
   if(missing(property)) stop("property must be specified.")
   if(!is.character(property)) stop("property must be a character")
   if(!missing(col_names)) {
+    print(col_names)
     if(!all(col_names %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     for(curr_col in col_names) {
       attr(private$data[[curr_col]], property) <- new_val
@@ -2182,7 +2183,7 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
   }
-  self$append_to_variables_metadata(output_columns, corruption_red_flag_label, TRUE)
+  self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
   other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
   self$append_to_variables_metadata(other_cols, corruption_red_flag_label, FALSE)
 }
