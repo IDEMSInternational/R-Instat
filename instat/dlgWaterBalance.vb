@@ -116,26 +116,88 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub WaterBalance()
-
         ' if the evaporation column is empty then:
 
-        clsWaterBalanceCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsWaterBalanceCalc.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & nudCapacity.Value & "), " & ucrReceiverRainfall.GetVariableNames(False) & ", accumulate=TRUE)" & Chr(34))
-        clsWaterBalanceCalc.AddParameter("result_name", Chr(34) & "Water_Balance_0" & Chr(34))
-        clsWaterBalanceCalc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
-        clsWaterBalanceCalc.AddParameter("save", "0")
+        ' Replace_NA_60
+        '
+        '        clsReplaceNA60
+        '        clsWaterBalance60
+        '        clsWaterFilter60
+        '        clsFirstWaterBalance60
 
-        'else
-        'remove parameters by name
-        'end if
+        '        clsWaterBalanceCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        '        clsWaterBalanceCalc.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & nudCapacity.Value & "), " & ucrReceiverRainfall.GetVariableNames(False) & ", accumulate=TRUE)" & Chr(34))
+        '        clsWaterBalanceCalc.AddParameter("result_name", Chr(34) & "Water_Balance_0" & Chr(34))
+        '        clsWaterBalanceCalc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
+        '        clsWaterBalanceCalc.AddParameter("save", "0")
 
-        clsWaterBalance.AddParameter("type", Chr(34) & "filter" & Chr(34))
-        clsWaterBalance.AddParameter("function_exp", Chr(34) & "Water_Balance_0 <= " & nudWBLessThan.Value & Chr(34))
-        clsWaterBalance.AddParameter("result_name", Chr(34) & "Water_Balance" & Chr(34))
-        clsWaterBalance.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalanceList)
-        clsWaterBalanceList.AddParameter("sub1", clsRFunctionParameter:=clsWaterBalanceCalc)
-        clsWaterBalance.AddParameter("save", "0")
+        '        'else
+        '        'remove parameters by name
+        '        'end if
+
+        '        clsWaterBalance.AddParameter("type", Chr(34) & "filter" & Chr(34))
+        '        clsWaterBalance.AddParameter("function_exp", Chr(34) & "Water_Balance_0 <= " & nudWBLessThan.Value & Chr(34))
+        '        clsWaterBalance.AddParameter("result_name", Chr(34) & "Water_Balance" & Chr(34))
+        '        clsWaterBalance.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalanceList)
+        '        clsWaterBalanceList.AddParameter("sub1", clsRFunctionParameter:=clsWaterBalanceCalc)
+        '        clsWaterBalance.AddParameter("save", "0")
+        '    End Sub
+
+
+        '        Replace_NA_60 <- instat_calculation$new(type = "calculation",
+        '                                     function_exp = "replace(Rain, is.na(Rain), 60)",
+        '                                     result_name = "Replace_NA_60", calculated_from = list(Damango = "Rain"), save = 2)
+
+        'Water_Balance_60 <- instat_calculation$new(type = "calculation",
+        '                                        function_exp = "Reduce(function(x, y) pmin(pmax(x + y - 5, 0), 60), Replace_NA_60, accumulate=TRUE)",
+        '                                        result_name = "Water_Balance_60", sub_calculations = list(Replace_NA_60), save = 0)
+
+        '#### Filter to only values where cumsum(RemoveValues <= 0.5) as this is end of rains
+        'Water_Filter_60 <- instat_calculation$new(function_exp = "Water_Balance_60 <= 0.5", type="filter",
+        '                                        sub_calculations = list(Water_Balance_60))
+
+        '### First Instance of Each Year
+        'First_Water_Balance_60 <- instat_calculation$new(type = "summary", function_exp = "doy_366[1]", calculated_from = list(Damango = "doy_366"),
+        '                                              manipulations = list(Water_Filter_60, Year_group_for_Damango, Day_From_and_To),
+        '                                              result_name = "First_Water_Balance_60", save = 2)
+
+
+
+        '# Replace_NA_0
+        'Replace_NA_0 <- instat_calculation$new(type = "calculation",
+        '                                        function_exp = "replace(Rain, is.na(Rain), 0)",
+        '                                        result_name = "Replace_NA_0", calculated_from = list(Damango = "Rain"), save = 0)
+
+        'Water_Balance_0 <- instat_calculation$new(type = "calculation",
+        '                                           function_exp = "Reduce(function(x, y) pmin(pmax(x + y - 5, 0), 60), Replace_NA_0, accumulate=TRUE)",
+        '                                           result_name = "Water_Balance_0", sub_calculations = list(Replace_NA_0), save = 0)
+
+        '#### Filter to only values where cumsum(RemoveValues <= 0.5) as this is end of rains
+        'Water_Filter_0 <- instat_calculation$new(function_exp = "Water_Balance_0 <= 0.5", type="filter",
+        '                                          sub_calculations = list(Water_Balance_0))
+
+        '### First Instance of Each Year
+        'First_Water_Balance_0 <- instat_calculation$new(type = "summary", function_exp = "doy_366[1]", calculated_from = list(Damango = "doy_366"),
+        '                                                 manipulations = list(Water_Filter_0, Year_group_for_Damango, Day_From_and_To),
+        '                                                 result_name = "First_Water_Balance_0", save = 0)
+
+        '## Are they the same value?
+
+        'Na1_minus_2 <- instat_calculation$new(type = "calculation",
+        '                                      function_exp = "First_Water_Balance_0 - First_Water_Balance_60",
+        '                                      result_name = "Difference", sub_calculations = list(First_Water_Balance_0, First_Water_Balance_60), save = 0)
+
+
+        '## Where Difference =/= 0, replace First_Water_Balance_0 with NA
+        '## replace(First_Water_Balance_0, Difference == 0, NA)
+
+        'Replace_Final <- instat_calculation$new(type = "calculation",
+        '                                      function_exp = "replace(First_Water_Balance_0, Difference != 0, NA)",
+        '                                      result_name = "Final_water", sub_calculations = list(First_Water_Balance_0, Na1_minus_2), save = 2)
+        'InstatDataObject$apply_instat_calculation(Replace_Final)
+
     End Sub
+
 
     Private Sub FirstWaterBalancePerYear()
 
