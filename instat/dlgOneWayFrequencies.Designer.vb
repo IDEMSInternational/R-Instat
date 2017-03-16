@@ -33,7 +33,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkGraph = New instat.ucrCheck()
         Me.ucrChkTable = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkWeights = New instat.ucrCheck()
@@ -138,17 +137,10 @@ Partial Class dlgOneWayFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 340)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 311)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 306)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSaveGraph.TabIndex = 8
         '
         'ucrReceiverOneWayFreq
         '
@@ -181,7 +173,7 @@ Partial Class dlgOneWayFrequencies
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(154, 203)
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(123, 205)
         Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
@@ -192,7 +184,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 397)
+        Me.ClientSize = New System.Drawing.Size(427, 371)
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.ucrChkFlip)
@@ -202,7 +194,6 @@ Partial Class dlgOneWayFrequencies
         Me.Controls.Add(Me.ucrChkGraph)
         Me.Controls.Add(Me.ucrChkTable)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.Controls.Add(Me.ucrSelectorOneWayFreq)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -220,7 +211,6 @@ Partial Class dlgOneWayFrequencies
 
     Friend WithEvents ucrSelectorOneWayFreq As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverOneWayFreq As ucrReceiverSingle
-    Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrChkGraph As ucrCheck
     Friend WithEvents ucrChkTable As ucrCheck
