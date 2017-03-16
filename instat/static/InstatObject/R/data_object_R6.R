@@ -1936,34 +1936,38 @@ data_object$set("public","set_climatic_types", function(types) {
 
 #Method for creating inventory plot
 data_object$set("public","make_inventory_plot", function(date_col, station_col, elements_cols, add_to_data = FALSE, coord_flip = FALSE) {
+  if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
   if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
   if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
   if(!all(elements_cols %in% self$get_column_names())) {
     stop("Not all elements columns found in the data")
   }
-  self$split_date(col_name=date_col, day_in_year=TRUE)
-  self$split_date(col_name=date_col, year=TRUE)
+  #add year and doy columns if missing in data
+  if(is.null(self$get_climatic_column_name(year_label)))(self$split_date(col_name=date_col, year=TRUE))
+  if(is.null(self$get_climatic_column_name(doy_label)))(self$split_date(col_name=date_col, day_in_year=TRUE))
+  year_col_name = self$get_climatic_column_name(year_label)
+  doy_col_name = self$get_climatic_column_name(doy_label)
+
   curr_data <- self$get_data_frame()
+  #ggplot fails to get column names hence the ned to rename
+  colnames(curr_data)[colnames(curr_data)==year_col_name] <- "year_column" 
+  colnames(curr_data)[colnames(curr_data)==doy_col_name] <- "doy_column"
   if(length(elements_cols)!=1){
     if(!is.null(station_col)){
-      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, station_col, "year", "day_in_year"))
-      #stop("multiple stations multiple elements will be implemented")
+      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, station_col, year_col_name, doy_col_name))
     }
     else{
-      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, "year", "day_in_year"))
-      #g <- g + facet_wrap(~variable)
+      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, year_col_name, doy_col_name))
     }
-    print(col_data)
-    #col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, "year", "day_in_year"))
+    colnames(col_data)[colnames(col_data)==year_col_name] <- "year_column"
+    colnames(col_data)[colnames(col_data)==doy_col_name] <- "doy_column"
     recode <- ifelse(is.na(col_data$value), "missing", "present")
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
     col_data[[new_col]] <- recode
-    g <- ggplot(data = col_data, mapping = aes(x = year, y = day_in_year, colour = recode, group = year)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      #print(as.name(station_col))
       g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~variable")))
-      #stop("multiple stations multiple elements will be implemented")
     }
     else{
       g <- g + facet_wrap(~variable)
@@ -1975,9 +1979,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col, 
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
     curr_data[[new_col]] <- recode
-    #print(curr_data)
-    #g <- ggplot(data = curr_data, mapping = aes(x = year, y = day_in_year, colour = new_col, group = year))
-    g <- ggplot(data = curr_data, mapping = aes(x = year, y = day_in_year, colour = recode, group = year)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
       g <- g + facet_wrap(as.name(station_col))
     }
@@ -2775,6 +2777,19 @@ data_object$set("public","standard_country_names", function(country_columns = c(
         self$append_to_variables_metadata(new_col_name, "label", "Winner country name - standardised")
       }
     }
+  }
+}
+)
+
+data_object$set("public", "get_climatic_column_name", function(col_name) {
+  if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
+  if(col_name %in% self$get_variables_metadata()$Climatic_Type){
+    new_data = subset(self$get_variables_metadata(), Climatic_Type==col_name, select = Name)
+    return(as.character(new_data))
+  }
+  else{
+    warning(paste(col_name, " column cannot be found in the data."))
+    return()
   }
 }
 )
