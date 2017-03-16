@@ -85,7 +85,7 @@ Partial Class dlgRegularSequence
         '
         Me.ucrNudNumberOfDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfDecimalPlaces.Location = New System.Drawing.Point(142, 180)
+        Me.ucrNudNumberOfDecimalPlaces.Location = New System.Drawing.Point(143, 178)
         Me.ucrNudNumberOfDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfDecimalPlaces.Name = "ucrNudNumberOfDecimalPlaces"
@@ -97,7 +97,7 @@ Partial Class dlgRegularSequence
         '
         Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(99, 105)
+        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(99, 103)
         Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
@@ -109,7 +109,7 @@ Partial Class dlgRegularSequence
         '
         Me.ucrNudInStepsOf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudInStepsOf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudInStepsOf.Location = New System.Drawing.Point(99, 75)
+        Me.ucrNudInStepsOf.Location = New System.Drawing.Point(99, 77)
         Me.ucrNudInStepsOf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudInStepsOf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudInStepsOf.Name = "ucrNudInStepsOf"
@@ -169,7 +169,7 @@ Partial Class dlgRegularSequence
         '
         Me.dtpSelectorA.Location = New System.Drawing.Point(98, 24)
         Me.dtpSelectorA.Name = "dtpSelectorA"
-        Me.dtpSelectorA.Size = New System.Drawing.Size(91, 20)
+        Me.dtpSelectorA.Size = New System.Drawing.Size(87, 20)
         Me.dtpSelectorA.TabIndex = 2
         '
         'lblLength
@@ -198,7 +198,7 @@ Partial Class dlgRegularSequence
         'lblTimes1
         '
         Me.lblTimes1.AutoSize = True
-        Me.lblTimes1.Location = New System.Drawing.Point(151, 108)
+        Me.lblTimes1.Location = New System.Drawing.Point(155, 105)
         Me.lblTimes1.Name = "lblTimes1"
         Me.lblTimes1.Size = New System.Drawing.Size(41, 13)
         Me.lblTimes1.TabIndex = 8
@@ -208,7 +208,7 @@ Partial Class dlgRegularSequence
         'lblRepeatValues
         '
         Me.lblRepeatValues.AutoSize = True
-        Me.lblRepeatValues.Location = New System.Drawing.Point(6, 105)
+        Me.lblRepeatValues.Location = New System.Drawing.Point(10, 105)
         Me.lblRepeatValues.Name = "lblRepeatValues"
         Me.lblRepeatValues.Size = New System.Drawing.Size(80, 13)
         Me.lblRepeatValues.TabIndex = 6
@@ -219,7 +219,7 @@ Partial Class dlgRegularSequence
         '
         Me.lblSteps.AutoSize = True
         Me.lblSteps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSteps.Location = New System.Drawing.Point(10, 75)
+        Me.lblSteps.Location = New System.Drawing.Point(10, 81)
         Me.lblSteps.Name = "lblSteps"
         Me.lblSteps.Size = New System.Drawing.Size(61, 13)
         Me.lblSteps.TabIndex = 4
@@ -241,7 +241,7 @@ Partial Class dlgRegularSequence
         '
         Me.lblFrom.AutoSize = True
         Me.lblFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFrom.Location = New System.Drawing.Point(10, 25)
+        Me.lblFrom.Location = New System.Drawing.Point(10, 24)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 0
@@ -281,7 +281,7 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.Controls.Add(Me.rdoNumeric)
         Me.grpSequenceType.Controls.Add(Me.rdoDates)
         Me.grpSequenceType.Controls.Add(Me.ucrPnlSequenceType)
-        Me.grpSequenceType.Location = New System.Drawing.Point(16, 53)
+        Me.grpSequenceType.Location = New System.Drawing.Point(10, 60)
         Me.grpSequenceType.Name = "grpSequenceType"
         Me.grpSequenceType.Size = New System.Drawing.Size(199, 52)
         Me.grpSequenceType.TabIndex = 1
