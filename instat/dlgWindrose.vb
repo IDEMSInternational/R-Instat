@@ -63,7 +63,7 @@ Public Class dlgWindrose
         ucrReceiverFacet.SetParameter(New RParameter("facet", 2))
         ucrReceiverFacet.SetParameterIsRFunction()
 
-        ucrNudNoOfColumns.SetParameter(New RParameter("n_col", 8))
+        ucrNudNoOfColumns.SetParameter(New RParameter("n_col", 7))
         ucrNudNoOfColumns.SetLinkedDisplayControl(lblNoOfColumns)
         ucrNudNoOfColumns.SetRDefault(1)
         ucrNudNoOfColumns.Minimum = 1
