@@ -22,11 +22,8 @@ Partial Class dlgWaterBalance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.lblDOY = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
         Me.nudCapacity = New System.Windows.Forms.NumericUpDown()
@@ -36,12 +33,16 @@ Partial Class dlgWaterBalance
         Me.nudTo = New System.Windows.Forms.NumericUpDown()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblRainfall = New System.Windows.Forms.Label()
+        Me.lblEvaporation = New System.Windows.Forms.Label()
+        Me.nudWBLessThan = New System.Windows.Forms.NumericUpDown()
+        Me.lblWBLessthan = New System.Windows.Forms.Label()
+        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblEvaporation = New System.Windows.Forms.Label()
-        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
-        Me.nudWBLessThan = New System.Windows.Forms.NumericUpDown()
         Me.grpRainParameters.SuspendLayout()
         CType(Me.nudCapacity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,20 +50,10 @@ Partial Class dlgWaterBalance
         CType(Me.nudWBLessThan, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(246, 127)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverYear.TabIndex = 18
-        '
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(248, 112)
+        Me.lblYear.Location = New System.Drawing.Point(248, 111)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 17
@@ -76,6 +67,151 @@ Partial Class dlgWaterBalance
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 13
         Me.lblDate.Text = "Date:"
+        '
+        'lblDOY
+        '
+        Me.lblDOY.AutoSize = True
+        Me.lblDOY.Location = New System.Drawing.Point(247, 153)
+        Me.lblDOY.Name = "lblDOY"
+        Me.lblDOY.Size = New System.Drawing.Size(66, 13)
+        Me.lblDOY.TabIndex = 19
+        Me.lblDOY.Text = "Day of Year:"
+        '
+        'grpRainParameters
+        '
+        Me.grpRainParameters.Controls.Add(Me.lblWBLessthan)
+        Me.grpRainParameters.Controls.Add(Me.nudWBLessThan)
+        Me.grpRainParameters.Controls.Add(Me.nudCapacity)
+        Me.grpRainParameters.Controls.Add(Me.lblCapacity)
+        Me.grpRainParameters.Controls.Add(Me.nudFrom)
+        Me.grpRainParameters.Controls.Add(Me.lblFrom)
+        Me.grpRainParameters.Controls.Add(Me.nudTo)
+        Me.grpRainParameters.Controls.Add(Me.lblTo)
+        Me.grpRainParameters.Location = New System.Drawing.Point(9, 240)
+        Me.grpRainParameters.Name = "grpRainParameters"
+        Me.grpRainParameters.Size = New System.Drawing.Size(318, 78)
+        Me.grpRainParameters.TabIndex = 21
+        Me.grpRainParameters.TabStop = False
+        '
+        'nudCapacity
+        '
+        Me.nudCapacity.DecimalPlaces = 2
+        Me.nudCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.nudCapacity.Location = New System.Drawing.Point(62, 47)
+        Me.nudCapacity.Name = "nudCapacity"
+        Me.nudCapacity.Size = New System.Drawing.Size(53, 20)
+        Me.nudCapacity.TabIndex = 1
+        Me.nudCapacity.Value = New Decimal(New Integer() {85, 0, 0, 131072})
+        '
+        'lblCapacity
+        '
+        Me.lblCapacity.AutoSize = True
+        Me.lblCapacity.Location = New System.Drawing.Point(6, 49)
+        Me.lblCapacity.Name = "lblCapacity"
+        Me.lblCapacity.Size = New System.Drawing.Size(51, 13)
+        Me.lblCapacity.TabIndex = 0
+        Me.lblCapacity.Tag = "Capacity:"
+        Me.lblCapacity.Text = "Capacity:"
+        '
+        'nudFrom
+        '
+        Me.nudFrom.Location = New System.Drawing.Point(62, 18)
+        Me.nudFrom.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
+        Me.nudFrom.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudFrom.Name = "nudFrom"
+        Me.nudFrom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.nudFrom.Size = New System.Drawing.Size(53, 20)
+        Me.nudFrom.TabIndex = 3
+        Me.nudFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudFrom.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left
+        Me.nudFrom.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'lblFrom
+        '
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(6, 20)
+        Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(55, 13)
+        Me.lblFrom.TabIndex = 2
+        Me.lblFrom.Text = "From Day:"
+        '
+        'nudTo
+        '
+        Me.nudTo.Location = New System.Drawing.Point(218, 19)
+        Me.nudTo.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
+        Me.nudTo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudTo.Name = "nudTo"
+        Me.nudTo.Size = New System.Drawing.Size(53, 20)
+        Me.nudTo.TabIndex = 5
+        Me.nudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'lblTo
+        '
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(148, 20)
+        Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(45, 13)
+        Me.lblTo.TabIndex = 4
+        Me.lblTo.Tag = ""
+        Me.lblTo.Text = "To Day:"
+        '
+        'lblRainfall
+        '
+        Me.lblRainfall.AutoSize = True
+        Me.lblRainfall.Location = New System.Drawing.Point(246, 69)
+        Me.lblRainfall.Name = "lblRainfall"
+        Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
+        Me.lblRainfall.TabIndex = 15
+        Me.lblRainfall.Text = "Rain Column:"
+        '
+        'lblEvaporation
+        '
+        Me.lblEvaporation.AutoSize = True
+        Me.lblEvaporation.Location = New System.Drawing.Point(247, 195)
+        Me.lblEvaporation.Name = "lblEvaporation"
+        Me.lblEvaporation.Size = New System.Drawing.Size(67, 13)
+        Me.lblEvaporation.TabIndex = 24
+        Me.lblEvaporation.Text = "Evaporation:"
+        '
+        'nudWBLessThan
+        '
+        Me.nudWBLessThan.DecimalPlaces = 2
+        Me.nudWBLessThan.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.nudWBLessThan.Location = New System.Drawing.Point(247, 47)
+        Me.nudWBLessThan.Name = "nudWBLessThan"
+        Me.nudWBLessThan.Size = New System.Drawing.Size(53, 20)
+        Me.nudWBLessThan.TabIndex = 6
+        Me.nudWBLessThan.Value = New Decimal(New Integer() {85, 0, 0, 131072})
+        '
+        'lblWBLessthan
+        '
+        Me.lblWBLessthan.AutoSize = True
+        Me.lblWBLessthan.Location = New System.Drawing.Point(148, 49)
+        Me.lblWBLessthan.Name = "lblWBLessthan"
+        Me.lblWBLessthan.Size = New System.Drawing.Size(93, 13)
+        Me.lblWBLessthan.TabIndex = 7
+        Me.lblWBLessthan.Tag = "Water Balance <="
+        Me.lblWBLessthan.Text = "Water Balance <="
+        '
+        'ucrInputEvaporation
+        '
+        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
+        Me.ucrInputEvaporation.IsMultiline = False
+        Me.ucrInputEvaporation.IsReadOnly = False
+        Me.ucrInputEvaporation.Location = New System.Drawing.Point(246, 211)
+        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
+        Me.ucrInputEvaporation.Size = New System.Drawing.Size(143, 21)
+        Me.ucrInputEvaporation.TabIndex = 26
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(246, 126)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverYear.TabIndex = 18
         '
         'ucrReceiverDate
         '
@@ -96,100 +232,6 @@ Partial Class dlgWaterBalance
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDOY.TabIndex = 20
-        '
-        'lblDOY
-        '
-        Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(247, 153)
-        Me.lblDOY.Name = "lblDOY"
-        Me.lblDOY.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOY.TabIndex = 19
-        Me.lblDOY.Text = "Day of Year:"
-        '
-        'grpRainParameters
-        '
-        Me.grpRainParameters.Controls.Add(Me.nudCapacity)
-        Me.grpRainParameters.Controls.Add(Me.lblCapacity)
-        Me.grpRainParameters.Controls.Add(Me.nudFrom)
-        Me.grpRainParameters.Controls.Add(Me.lblFrom)
-        Me.grpRainParameters.Controls.Add(Me.nudTo)
-        Me.grpRainParameters.Controls.Add(Me.lblTo)
-        Me.grpRainParameters.Location = New System.Drawing.Point(9, 240)
-        Me.grpRainParameters.Name = "grpRainParameters"
-        Me.grpRainParameters.Size = New System.Drawing.Size(380, 40)
-        Me.grpRainParameters.TabIndex = 21
-        Me.grpRainParameters.TabStop = False
-        '
-        'nudCapacity
-        '
-        Me.nudCapacity.DecimalPlaces = 2
-        Me.nudCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudCapacity.Location = New System.Drawing.Point(66, 11)
-        Me.nudCapacity.Name = "nudCapacity"
-        Me.nudCapacity.Size = New System.Drawing.Size(53, 20)
-        Me.nudCapacity.TabIndex = 1
-        Me.nudCapacity.Value = New Decimal(New Integer() {85, 0, 0, 131072})
-        '
-        'lblCapacity
-        '
-        Me.lblCapacity.AutoSize = True
-        Me.lblCapacity.Location = New System.Drawing.Point(6, 13)
-        Me.lblCapacity.Name = "lblCapacity"
-        Me.lblCapacity.Size = New System.Drawing.Size(51, 13)
-        Me.lblCapacity.TabIndex = 0
-        Me.lblCapacity.Tag = "Capacity:"
-        Me.lblCapacity.Text = "Capacity:"
-        '
-        'nudFrom
-        '
-        Me.nudFrom.Location = New System.Drawing.Point(188, 11)
-        Me.nudFrom.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
-        Me.nudFrom.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudFrom.Name = "nudFrom"
-        Me.nudFrom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.nudFrom.Size = New System.Drawing.Size(53, 20)
-        Me.nudFrom.TabIndex = 3
-        Me.nudFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudFrom.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left
-        Me.nudFrom.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'lblFrom
-        '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(149, 13)
-        Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 2
-        Me.lblFrom.Text = "From:"
-        '
-        'nudTo
-        '
-        Me.nudTo.Location = New System.Drawing.Point(321, 10)
-        Me.nudTo.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
-        Me.nudTo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudTo.Name = "nudTo"
-        Me.nudTo.Size = New System.Drawing.Size(53, 20)
-        Me.nudTo.TabIndex = 5
-        Me.nudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'lblTo
-        '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(284, 13)
-        Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 4
-        Me.lblTo.Tag = ""
-        Me.lblTo.Text = "To:"
-        '
-        'lblRainfall
-        '
-        Me.lblRainfall.AutoSize = True
-        Me.lblRainfall.Location = New System.Drawing.Point(246, 69)
-        Me.lblRainfall.Name = "lblRainfall"
-        Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
-        Me.lblRainfall.TabIndex = 15
-        Me.lblRainfall.Text = "Rain Column:"
         '
         'ucrReceiverRainfall
         '
@@ -213,46 +255,16 @@ Partial Class dlgWaterBalance
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 286)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 324)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 23
-        '
-        'lblEvaporation
-        '
-        Me.lblEvaporation.AutoSize = True
-        Me.lblEvaporation.Location = New System.Drawing.Point(247, 196)
-        Me.lblEvaporation.Name = "lblEvaporation"
-        Me.lblEvaporation.Size = New System.Drawing.Size(67, 13)
-        Me.lblEvaporation.TabIndex = 24
-        Me.lblEvaporation.Text = "Evaporation:"
-        '
-        'ucrInputEvaporation
-        '
-        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
-        Me.ucrInputEvaporation.IsMultiline = False
-        Me.ucrInputEvaporation.IsReadOnly = False
-        Me.ucrInputEvaporation.Location = New System.Drawing.Point(245, 211)
-        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
-        Me.ucrInputEvaporation.Size = New System.Drawing.Size(143, 21)
-        Me.ucrInputEvaporation.TabIndex = 26
-        '
-        'nudWBLessThan
-        '
-        Me.nudWBLessThan.DecimalPlaces = 2
-        Me.nudWBLessThan.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudWBLessThan.Location = New System.Drawing.Point(138, 214)
-        Me.nudWBLessThan.Name = "nudWBLessThan"
-        Me.nudWBLessThan.Size = New System.Drawing.Size(53, 20)
-        Me.nudWBLessThan.TabIndex = 6
-        Me.nudWBLessThan.Value = New Decimal(New Integer() {85, 0, 0, 131072})
         '
         'dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 345)
-        Me.Controls.Add(Me.nudWBLessThan)
+        Me.ClientSize = New System.Drawing.Size(413, 382)
         Me.Controls.Add(Me.ucrInputEvaporation)
         Me.Controls.Add(Me.lblEvaporation)
         Me.Controls.Add(Me.ucrReceiverYear)
@@ -304,4 +316,5 @@ Partial Class dlgWaterBalance
     Friend WithEvents ucrSelectorForStartofRains As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents nudWBLessThan As NumericUpDown
+    Friend WithEvents lblWBLessthan As Label
 End Class
