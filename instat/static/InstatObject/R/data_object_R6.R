@@ -756,7 +756,6 @@ data_object$set("public", "append_to_variables_metadata", function(col_names, pr
   if(missing(property)) stop("property must be specified.")
   if(!is.character(property)) stop("property must be a character")
   if(!missing(col_names)) {
-    print(col_names)
     if(!all(col_names %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     for(curr_col in col_names) {
       attr(private$data[[curr_col]], property) <- new_val
