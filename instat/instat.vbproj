@@ -299,6 +299,12 @@
     <Compile Include="dlgFitModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFrequency.Designer.vb">
+      <DependentUpon>dlgFrequency.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFrequency.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromCSPRO.Designer.vb">
       <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
     </Compile>
@@ -2361,6 +2367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFreezeColumns.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFrequency.resx">
+      <DependentUpon>dlgFrequency.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
