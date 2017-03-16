@@ -37,11 +37,15 @@ Public Class dlgOneWayFrequencies
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ucrChkWeights.SetRCode(clsSjpFrq, bReset)
+        ucrChkWeights.SetRCode(clsSjtFreq, bReset)
+
         ucrPnlSort.SetRCode(clsSjtFreq, bReset)
         ucrChkTable.SetRCode(clsSjtFreq, bReset)
         ucrChkGraph.SetRCode(clsSjpFrq, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
-        ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -57,6 +61,7 @@ Public Class dlgOneWayFrequencies
 
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
+        ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.SetDataType("numeric")
 
         ucrPnlSort.SetParameter(New RParameter("sort.frq", 2))
@@ -68,35 +73,25 @@ Public Class dlgOneWayFrequencies
 
         ucrChkTable.SetText("Table")
         ucrChkWeights.SetText("Weights")
-        '   ucrChkweights.SetParameter(New RParameter("weight.by"))
+        ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkGraph.SetText("Graph")
-
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameter(New RParameter("coord.flip"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkFlip.SetRDefault("FALSE")
 
-        ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrReceiverWeights.SetLinkedDisplayControl(lblSelectedVariable)
-
-        ucrSaveGraph.SetPrefix("one_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(ucrSelectorOneWayFreq.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
     End Sub
 
     Private Sub SetDefaults()
         clsSjtFreq = New RFunction
         clsSjpFrq = New RFunction
         ucrSelectorOneWayFreq.Reset()
-        ucrSaveGraph.Reset()
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         clsSjtFreq.SetRCommand("sjPlot::sjt.frq")
         clsSjtFreq.AddParameter("data", clsRFunctionParameter:=ucrReceiverOneWayFreq.GetVariables)
         clsSjtFreq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
-        'clsSjtFreq.AddParameter("use.viewer", "TRUE")
         clsSjpFrq.SetRCommand("sjPlot::sjp.frq")
         clsSjpFrq.AddParameter("var.cnt", clsRFunctionParameter:=ucrReceiverOneWayFreq.GetVariables)
 
@@ -105,7 +100,14 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverOneWayFreq.IsEmpty() AndAlso ucrSaveGraph.IsComplete() Then
+        If Not ucrReceiverOneWayFreq.IsEmpty() Then
+            If ucrChkWeights.Checked Then
+                If Not ucrReceiverWeights.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            End If
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -141,7 +143,7 @@ Public Class dlgOneWayFrequencies
         ChangeBaseFunction()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
