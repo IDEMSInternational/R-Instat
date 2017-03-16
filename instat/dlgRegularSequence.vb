@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Imports RDotNet
 
@@ -42,6 +42,8 @@ Public Class dlgRegularSequence
         ucrNudTo.SetRCode(clsSeqFunction, bReset)
         ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
         ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
+        ucrNudNumberOfDecimalPlaces.SetRCode(clsSeqFunction, bReset)
+        ucrNudNumberOfDecimalPlaces.SetRCode(clsRepFunction, bReset)
 
     End Sub
 
@@ -134,7 +136,9 @@ Public Class dlgRegularSequence
                 ucrBase.OKEnabled(False)
             End If
         Else
-            ucrBase.OKEnabled(False)
+            If ucrNudTo.Value < ucrNudFrom.Value Then
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -227,7 +231,7 @@ Public Class dlgRegularSequence
         SetInStepsOfParameter()
     End Sub
 
-    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged
+    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -244,7 +248,7 @@ Public Class dlgRegularSequence
         ucrNudInStepsOf.Increment = 10 ^ -(ucrNudNumberOfDecimalPlaces.Value)
     End Sub
 
-    Private Sub txtGetPreview_TextChanged(sender As Object, e As EventArgs) Handles txtGetPreview.TextChanged
+    Private Sub txtGetPreview_TextChanged(sender As Object, e As EventArgs) Handles txtGetPreview.TextChanged, rdoDates.TextChanged, rdoNumeric.TextChanged
         TestOKEnabled()
     End Sub
 End Class
