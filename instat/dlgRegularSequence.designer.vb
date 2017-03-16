@@ -46,7 +46,7 @@ Partial Class dlgRegularSequence
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoDates = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSequenceType = New instat.UcrPanel()
-        Me.ucrNewColumnName = New instat.ucrSave()
+        Me.ucrSequenceColumn = New instat.ucrSave()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSequenceDefinition.SuspendLayout()
@@ -321,12 +321,12 @@ Partial Class dlgRegularSequence
         Me.ucrPnlSequenceType.Size = New System.Drawing.Size(189, 29)
         Me.ucrPnlSequenceType.TabIndex = 0
         '
-        'ucrNewColumnName
+        'ucrSequenceColumn
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(11, 321)
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(294, 24)
-        Me.ucrNewColumnName.TabIndex = 6
+        Me.ucrSequenceColumn.Location = New System.Drawing.Point(11, 321)
+        Me.ucrSequenceColumn.Name = "ucrSequenceColumn"
+        Me.ucrSequenceColumn.Size = New System.Drawing.Size(294, 24)
+        Me.ucrSequenceColumn.TabIndex = 6
         '
         'ucrSelectDataFrameRegularSequence
         '
@@ -350,7 +350,7 @@ Partial Class dlgRegularSequence
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 412)
         Me.Controls.Add(Me.grpSequenceType)
-        Me.Controls.Add(Me.ucrNewColumnName)
+        Me.Controls.Add(Me.ucrSequenceColumn)
         Me.Controls.Add(Me.txtMessage)
         Me.Controls.Add(Me.txtGetPreview)
         Me.Controls.Add(Me.grpSequenceDefinition)
@@ -394,7 +394,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents lblNumberDecimalPlaces As Label
-    Friend WithEvents ucrNewColumnName As ucrSave
+    Friend WithEvents ucrSequenceColumn As ucrSave
     Friend WithEvents grpSequenceType As GroupBox
     Friend WithEvents rdoNumeric As RadioButton
     Friend WithEvents rdoDates As RadioButton
