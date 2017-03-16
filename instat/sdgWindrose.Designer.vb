@@ -40,18 +40,18 @@ Partial Class sdgWindrose
         Me.lblNoofDirections.AutoSize = True
         Me.lblNoofDirections.Location = New System.Drawing.Point(13, 28)
         Me.lblNoofDirections.Name = "lblNoofDirections"
-        Me.lblNoofDirections.Size = New System.Drawing.Size(88, 13)
+        Me.lblNoofDirections.Size = New System.Drawing.Size(89, 13)
         Me.lblNoofDirections.TabIndex = 0
-        Me.lblNoofDirections.Text = "No Of Directions:"
+        Me.lblNoofDirections.Text = "No. of Directions:"
         '
         'lblNoOfSpeeds
         '
         Me.lblNoOfSpeeds.AutoSize = True
         Me.lblNoOfSpeeds.Location = New System.Drawing.Point(13, 87)
         Me.lblNoOfSpeeds.Name = "lblNoOfSpeeds"
-        Me.lblNoOfSpeeds.Size = New System.Drawing.Size(77, 13)
+        Me.lblNoOfSpeeds.Size = New System.Drawing.Size(78, 13)
         Me.lblNoOfSpeeds.TabIndex = 2
-        Me.lblNoOfSpeeds.Text = "No Of Speeds:"
+        Me.lblNoOfSpeeds.Text = "No. of Speeds:"
         '
         'lblCalmWind
         '
