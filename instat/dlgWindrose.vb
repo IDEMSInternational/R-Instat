@@ -86,6 +86,7 @@ Public Class dlgWindrose
         clsDefaultRFunction.SetRCommand("windrose")
         clsDefaultRFunction.AddParameter("n_col", 1)
         clsDefaultRFunction.AddParameter("ggtheme", Chr(34) & "minimal" & Chr(34))
+        clsDefaultRFunction.AddParameter("speed_cuts", Chr(34) & "NA" & Chr(34))
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
         bResetSubDialog = True
