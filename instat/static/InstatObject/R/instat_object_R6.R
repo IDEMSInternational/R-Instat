@@ -1183,9 +1183,7 @@ instat_object$set("public", "is_metadata", function(data_name, str) {
 )
 
 instat_object$set("public", "get_climatic_column_name", function(data_name, col_name) {
-  new_data = subset(InstatDataObject$get_variables_metadata(data_name), Climatic_Type==col_name, select = Name)
-  if(!nrow(new_data==1))stop(paste(col_name, " column cannot be found in the data."))
-  return(as.character(new_data))
+   self$get_data_objects(data_name)$get_climatic_column_name(col_name = col_name)
 }
 )
 
