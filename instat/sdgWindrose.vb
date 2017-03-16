@@ -26,16 +26,16 @@ Public Class sdgWindrose
     Public Sub InitialiseControls()
         Dim dctThemePairs As New Dictionary(Of String, String)
 
-        ucrNudCalmWind.SetParameter(New RParameter("calm_wind", 4))
+        ucrNudCalmWind.SetParameter(New RParameter("calm_wind", 6))
         ucrNudCalmWind.SetRDefault(0)
 
-        ucrNudNoOfDirections.SetParameter(New RParameter("n_directions", 5))
+        ucrNudNoOfDirections.SetParameter(New RParameter("n_directions", 3))
         ucrNudNoOfDirections.SetRDefault(12)
 
-        ucrNudNoOfSpeeds.SetParameter(New RParameter("n_speeds", 6))
+        ucrNudNoOfSpeeds.SetParameter(New RParameter("n_speeds", 4))
         ucrNudNoOfSpeeds.SetRDefault(5)
 
-        ucrInputSpeedCuts.SetParameter(New RParameter("speed_cuts", 7))
+        ucrInputSpeedCuts.SetParameter(New RParameter("speed_cuts", 5))
         ucrInputSpeedCuts.SetRDefault("NA")
 
         ucrInputTheme.SetParameter(New RParameter("ggtheme"))
