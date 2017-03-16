@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgReorderColumns
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgReorderColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -34,11 +35,13 @@ Public Class dlgReorderColumns
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
+        ucrReorderColumns.Reset()
         ucrDataFrameSelector.Reset()
-
+        'ucrReorderColumns.SetRDefault("")
+        'ucrReorderColumns.Reset()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub initialiseDialog()
@@ -48,8 +51,8 @@ Public Class dlgReorderColumns
         ucrDataFrameSelector.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameSelector.SetParameterIsString()
 
-        ucrReorderColumns.SetParameter(New RParameter("col_order", 1))
         ucrReorderColumns.setDataframes(ucrDataFrameSelector)
+        ucrReorderColumns.SetParameter(New RParameter("col_order", 1))
         ucrReorderColumns.setDataType("column")
     End Sub
 
