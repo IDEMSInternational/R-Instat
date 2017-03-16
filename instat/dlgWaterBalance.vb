@@ -16,10 +16,9 @@
 
 Imports instat.Translations
 Public Class dlgWaterBalance
-    Public clsAddKey, clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear, clsFirstWaterBalanceManipulation, clsWaterBalanceList, clsWaterBalanceCalc, clsWaterBalance As New RFunction
-    Public clsReplaceNA60, clsWaterBalance60, clsWaterFilter60, clsFirstWaterBalance60, clsReplaceNA0, clsWaterBalance60List, clsWaterBalance0List, clsWaterBalance0, clsWaterFilter0, clsFirstWaterBalance0 As New RFunction
+    Public clsAddKey, clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear, clsFirstWaterBalanceManipulation60, clsWaterBalanceList, clsWaterBalanceCalc, clsWaterBalance As New RFunction
+    Public clsReplaceNA60, clsWaterBalance60, clsWaterFilter60, clsFirstWaterBalance60, clsFirstWaterBalance60List, clsFirstWaterBalance0List, clsWaterFilter60List, clsWaterFilter0List, clsReplaceNA0, clsWaterBalance60List, clsWaterBalance0List, clsWaterBalance0, clsWaterFilter0, clsFirstWaterBalance0 As New RFunction
     Private strCurrDataName As String = ""
-
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgWaterBalance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -53,7 +52,7 @@ Public Class dlgWaterBalance
         clsFirstWaterBalanceYear.SetRCommand("instat_calculation$new")
         clsFirstWaterBalanceYear.SetAssignTo("First_Water_Balance")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
-        clsFirstWaterBalanceManipulation.SetRCommand("list")
+        clsFirstWaterBalanceManipulation60.SetRCommand("list")
         clsWaterBalanceList.SetRCommand("list")
         clsReplaceNA60.SetRCommand("instat_calculation$new")
         clsReplaceNA0.SetRCommand("instat_calculation$new")
@@ -65,6 +64,10 @@ Public Class dlgWaterBalance
         clsFirstWaterBalance0.SetRCommand("instat_calculation$new")
         clsWaterBalance60List.SetRCommand("list")
         clsWaterBalance0List.SetRCommand("list")
+        clsWaterFilter60List.SetRCommand("list")
+        clsWaterFilter0List.SetRCommand("list")
+        clsFirstWaterBalance60List.SetRCommand("list")
+        clsFirstWaterBalance0List.SetRCommand("list")
 
         ucrReceiverRainfall.Selector = ucrSelectorForStartofRains
         ucrReceiverYear.Selector = ucrSelectorForStartofRains
@@ -123,7 +126,7 @@ Public Class dlgWaterBalance
     Private Sub DayFromAndToMethod()
         clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & nudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & nudTo.Value & Chr(34))
         clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-            clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34))
+        clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34))
     End Sub
 
     Private Sub WaterBalance()
@@ -146,12 +149,7 @@ Public Class dlgWaterBalance
         '        'remove parameters by name
         '        'end if
 
-        '        clsWaterBalance.AddParameter("type", Chr(34) & "filter" & Chr(34))
-        '        clsWaterBalance.AddParameter("function_exp", Chr(34) & "Water_Balance_0 <= " & nudWBLessThan.Value & Chr(34))
-        '        clsWaterBalance.AddParameter("result_name", Chr(34) & "Water_Balance" & Chr(34))
-        '        clsWaterBalance.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalanceList)
-        '        clsWaterBalanceList.AddParameter("sub1", clsRFunctionParameter:=clsWaterBalanceCalc)
-        '        clsWaterBalance.AddParameter("save", "0")
+
         '    End Sub
 
 
@@ -168,17 +166,25 @@ Public Class dlgWaterBalance
         clsWaterBalance60List.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA60)
         clsWaterBalance60.AddParameter("save", "0")
 
+        clsWaterFilter60.AddParameter("type", Chr(34) & "filter" & Chr(34))
+        clsWaterFilter60.AddParameter("function_exp", Chr(34) & "Water_Balance_60 <= " & nudWBLessThan.Value & Chr(34))
+        clsWaterFilter60.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterFilter60List)
+        clsWaterFilter60List.AddParameter("sub1", clsRFunctionParameter:=clsWaterBalance60)
 
+        clsFirstWaterBalance60.AddParameter("type", Chr(34) & "summary" & Chr(34))
+        clsFirstWaterBalance60.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & "[" & 1 & "]" & Chr(34))
+        clsFirstWaterBalance60.AddParameter("result_name", Chr(34) & "First_Water_Balance_60" & Chr(34))
+        clsFirstWaterBalance60.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+        clsFirstWaterBalance60.AddParameter("manipulations", clsRFunctionParameter:=clsFirstWaterBalanceManipulation60)
+        clsFirstWaterBalance60.AddParameter("save", "0")
+        clsFirstWaterBalanceManipulation60.AddParameter("sub2", clsRFunctionParameter:=clsYearGroup, bIncludeArgumentName:=False)
+        clsFirstWaterBalanceManipulation60.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
+        clsFirstWaterBalanceManipulation60.AddParameter("sub1", clsRFunctionParameter:=clsWaterFilter60, bIncludeArgumentName:=False)
 
-
-        '#### Filter to only values where cumsum(RemoveValues <= 0.5) as this is end of rains
-        'Water_Filter_60 <- instat_calculation$new(function_exp = "Water_Balance_60 <= 0.5", type="filter",
-        '                                        sub_calculations = list(Water_Balance_60))
 
         '### First Instance of Each Year
         'First_Water_Balance_60 <- instat_calculation$new(type = "summary", function_exp = "doy_366[1]", calculated_from = list(Damango = "doy_366"),
         '                                              manipulations = list(Water_Filter_60, Year_group_for_Damango, Day_From_and_To),
-        '                                              result_name = "First_Water_Balance_60", save = 2)
 
 
         clsReplaceNA0.AddParameter("type", Chr(34) & "calculation" & Chr(34))
@@ -194,16 +200,22 @@ Public Class dlgWaterBalance
         clsWaterBalance0List.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA0)
         clsWaterBalance0.AddParameter("save", "0")
 
+        clsWaterFilter0.AddParameter("type", Chr(34) & "filter" & Chr(34))
+        clsWaterFilter0.AddParameter("function_exp", Chr(34) & "Water_Balance_0 <= " & nudWBLessThan.Value & Chr(34))
+        clsWaterFilter0.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterFilter0List)
+        clsWaterFilter0List.AddParameter("sub1", clsRFunctionParameter:=clsWaterFilter0)
+
+        clsFirstWaterBalance0.AddParameter("type", Chr(34) & "summary" & Chr(34))
+        clsFirstWaterBalance0.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & "[" & 1 & "]" & Chr(34))
+        clsFirstWaterBalance0.AddParameter("result_name", Chr(34) & "First_Water_Balance_0" & Chr(34))
+        clsFirstWaterBalance0.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+        clsFirstWaterBalance0.AddParameter("manipulations", clsRFunctionParameter:=clsFirstWaterBalance0List)
+        clsFirstWaterBalance0.AddParameter("save", "2")
+        clsFirstWaterBalance0List.AddParameter("sub2", clsRFunctionParameter:=clsYearGroup, bIncludeArgumentName:=False)
+        clsFirstWaterBalance0List.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
+        clsFirstWaterBalance0List.AddParameter("sub1", clsRFunctionParameter:=clsFirstWaterBalance0, bIncludeArgumentName:=False)
 
 
-        '#### Filter to only values where cumsum(RemoveValues <= 0.5) as this is end of rains
-        'Water_Filter_0 <- instat_calculation$new(function_exp = "Water_Balance_0 <= 0.5", type="filter",
-        '                                          sub_calculations = list(Water_Balance_0))
-
-        '### First Instance of Each Year
-        'First_Water_Balance_0 <- instat_calculation$new(type = "summary", function_exp = "doy_366[1]", calculated_from = list(Damango = "doy_366"),
-        '                                                 manipulations = list(Water_Filter_0, Year_group_for_Damango, Day_From_and_To),
-        '                                                 result_name = "First_Water_Balance_0", save = 0)
 
         '## Are they the same value?
 
@@ -225,16 +237,7 @@ Public Class dlgWaterBalance
 
     Private Sub FirstWaterBalancePerYear()
 
-        clsFirstWaterBalanceManipulation.AddParameter("sub1", clsRFunctionParameter:=clsWaterBalance, bIncludeArgumentName:=False)
-        clsFirstWaterBalanceManipulation.AddParameter("sub2", clsRFunctionParameter:=clsYearGroup, bIncludeArgumentName:=False)
-        clsFirstWaterBalanceManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
 
-        clsFirstWaterBalanceYear.AddParameter("type", Chr(34) & "summary" & Chr(34))
-        clsFirstWaterBalanceYear.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & "[" & 1 & "]" & Chr(34))
-        clsFirstWaterBalanceYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-        clsFirstWaterBalanceYear.AddParameter("manipulations", clsRFunctionParameter:=clsFirstWaterBalanceManipulation)
-        clsFirstWaterBalanceYear.AddParameter("result_name", Chr(34) & "Water_Balance_First" & Chr(34))
-        clsFirstWaterBalanceYear.AddParameter("save", 2)
     End Sub
 
     Private Sub YearGroupDaily()
