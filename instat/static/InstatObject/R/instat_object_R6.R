@@ -1074,8 +1074,8 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
 }
 )
 
-instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col, elements_cols, add_to_data = FALSE, coord_flip = FALSE) {
-  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col , station_col = station_col, elements_cols =elements_cols, add_to_data = add_to_data, coord_flip = coord_flip)
+instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col, elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col , station_col = station_col, elements_cols =elements_cols, add_to_data = add_to_data, coord_flip = coord_flip, graph_title = graph_title)
 }
 )
 
@@ -1183,9 +1183,7 @@ instat_object$set("public", "is_metadata", function(data_name, str) {
 )
 
 instat_object$set("public", "get_climatic_column_name", function(data_name, col_name) {
-  new_data = subset(InstatDataObject$get_variables_metadata(data_name), Climatic_Type==col_name, select = Name)
-  if(!nrow(new_data==1))stop(paste(col_name, " column cannot be found in the data."))
-  return(as.character(new_data))
+   self$get_data_objects(data_name)$get_climatic_column_name(col_name = col_name)
 }
 )
 
