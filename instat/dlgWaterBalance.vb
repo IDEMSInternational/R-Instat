@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgWaterBalance
     Public clsAddKey, clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear, clsFirstWaterBalanceManipulation, clsWaterBalanceList, clsWaterBalanceCalc, clsWaterBalance As New RFunction
     Private strCurrDataName As String = ""
@@ -37,7 +36,7 @@ Public Class dlgWaterBalance
     Private Sub ucrSelectorForStartofRains_DataFrameChanged() Handles ucrSelectorForStartofRains.DataFrameChanged
         strCurrDataName = Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         clsAddKey.AddParameter("data_name", strCurrDataName)
-        '    firstDayofTheYear()
+        FirstDayofTheYear()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -70,8 +69,6 @@ Public Class dlgWaterBalance
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverRainfall.bAutoFill = True
         ucrReceiverYear.bAutoFill = True
-
-        '    chkDryPeriod.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -113,14 +110,9 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub DayFromAndToMethod()
-        If nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso (Not ucrReceiverDOY.IsEmpty) Then
-            clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & nudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & nudTo.Value & Chr(34))
-            clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & nudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & nudTo.Value & Chr(34))
+        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
             clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34))
-        Else
-            clsDayFromAndTo.RemoveParameterByName("function_exp")
-            clsDayFromAndTo.RemoveParameterByName("calculated_from")
-        End If
     End Sub
 
     Private Sub WaterBalance()
@@ -128,9 +120,9 @@ Public Class dlgWaterBalance
         ' if the evaporation column is empty then:
 
         clsWaterBalanceCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsWaterBalanceCalc.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & "0), " & nudCapacity.Value & "), " & ucrReceiverRainfall.GetVariableNames & ", accumulate=TRUE)" & Chr(34))
+        clsWaterBalanceCalc.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & nudCapacity.Value & "), " & ucrReceiverRainfall.GetVariableNames(False) & ", accumulate=TRUE)" & Chr(34))
         clsWaterBalanceCalc.AddParameter("result_name", Chr(34) & "Water_Balance_0" & Chr(34))
-        clsWaterBalanceCalc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & Chr(34) & ucrReceiverRainfall.GetVariableNames() & Chr(34) & ")")
+        clsWaterBalanceCalc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
         clsWaterBalanceCalc.AddParameter("save", "0")
 
         'else
@@ -164,12 +156,17 @@ Public Class dlgWaterBalance
         clsYearGroup.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
     End Sub
 
-    Private Sub firstDayofTheYear()
+    Private Sub FirstDayofTheYear()
         ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsFirstWaterBalanceYear)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Water Balance: Defining Date column as key")
+
+        FirstDayofTheYear()
+        DayFromAndToMethod()
+        WaterBalance()
+        FirstWaterBalancePerYear()
     End Sub
 
     Private Sub ucrReceiverYear_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYear.SelectionChanged
