@@ -1935,7 +1935,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(date_col, station_col, elements_cols, add_to_data = FALSE, coord_flip = FALSE) {
+data_object$set("public","make_inventory_plot", function(date_col, station_col, elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
   if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
   if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
   if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
@@ -1987,7 +1987,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col, 
   if(coord_flip) {
     g <- g + coord_flip()
   }
-  return(g)
+  return(g+ggtitle(graph_title))
 }
 )
 
