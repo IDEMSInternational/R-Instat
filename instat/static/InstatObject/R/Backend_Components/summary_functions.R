@@ -283,7 +283,7 @@ summary_sd <- function(x, na.rm = FALSE,...) {
 }
 
 summary_var <- function(x, na.rm = FALSE,...) {
-  return((sd(x,na.rm = na.rm))**2)
+  return(var(x,na.rm = na.rm))
 }
 
 summary_max <- function (x, na.rm = FALSE,...) {
