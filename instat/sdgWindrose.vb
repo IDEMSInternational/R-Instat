@@ -26,19 +26,19 @@ Public Class sdgWindrose
     Public Sub InitialiseControls()
         Dim dctThemePairs As New Dictionary(Of String, String)
 
-        ucrNudCalmWind.SetParameter(New RParameter("calm_wind"))
+        ucrNudCalmWind.SetParameter(New RParameter("calm_wind", 4))
         ucrNudCalmWind.SetRDefault(0)
 
-        ucrNudNoOfDirections.SetParameter(New RParameter("n_directions"))
+        ucrNudNoOfDirections.SetParameter(New RParameter("n_directions", 5))
         ucrNudNoOfDirections.SetRDefault(12)
 
-        ucrNudNoOfSpeeds.SetParameter(New RParameter("n_speeds "))
+        ucrNudNoOfSpeeds.SetParameter(New RParameter("n_speeds", 6))
         ucrNudNoOfSpeeds.SetRDefault(5)
 
-        ucrInputSpeedCuts.SetParameter(New RParameter("speed_cuts "))
+        ucrInputSpeedCuts.SetParameter(New RParameter("speed_cuts", 7))
         ucrInputSpeedCuts.SetRDefault("NA")
 
-        ucrInputTheme.SetParameter(New RParameter("ggtheme "))
+        ucrInputTheme.SetParameter(New RParameter("ggtheme"))
         dctThemePairs.Add("grey", Chr(34) & "grey" & Chr(34))
         dctThemePairs.Add("gray", Chr(34) & "gray" & Chr(34))
         dctThemePairs.Add("bw", Chr(34) & "bw" & Chr(34))
@@ -47,8 +47,6 @@ Public Class sdgWindrose
         dctThemePairs.Add("minimal", Chr(34) & "minimal" & Chr(34))
         dctThemePairs.Add("classic", Chr(34) & "classic" & Chr(34))
         ucrInputTheme.SetItems(dctThemePairs)
-        ucrInputTheme.SetRDefault(Chr(34) & "minimal" & Chr(34))
-
         bControlsInitialised = True
 
     End Sub
