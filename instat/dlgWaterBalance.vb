@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class dlgWaterBalance
     Public clsAddKey, clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear, clsFirstWaterBalanceManipulation, clsWaterBalanceList, clsWaterBalanceCalc, clsWaterBalance As New RFunction
+    Public clsReplaceNA60, clsWaterBalance60, clsWaterFilter60, clsFirstWaterBalance60, clsReplaceNA0, clsWaterBalance60List, clsWaterBalance0List, clsWaterBalance0, clsWaterFilter0, clsFirstWaterBalance0 As New RFunction
     Private strCurrDataName As String = ""
 
     Public bFirstLoad As Boolean = True
@@ -54,6 +55,16 @@ Public Class dlgWaterBalance
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
         clsFirstWaterBalanceManipulation.SetRCommand("list")
         clsWaterBalanceList.SetRCommand("list")
+        clsReplaceNA60.SetRCommand("instat_calculation$new")
+        clsReplaceNA0.SetRCommand("instat_calculation$new")
+        clsWaterBalance60.SetRCommand("instat_calculation$new")
+        clsWaterBalance0.SetRCommand("instat_calculation$new")
+        clsWaterFilter60.SetRCommand("instat_calculation$new")
+        clsWaterFilter0.SetRCommand("instat_calculation$new")
+        clsFirstWaterBalance60.SetRCommand("instat_calculation$new")
+        clsFirstWaterBalance0.SetRCommand("instat_calculation$new")
+        clsWaterBalance60List.SetRCommand("list")
+        clsWaterBalance0List.SetRCommand("list")
 
         ucrReceiverRainfall.Selector = ucrSelectorForStartofRains
         ucrReceiverYear.Selector = ucrSelectorForStartofRains
@@ -144,13 +155,21 @@ Public Class dlgWaterBalance
         '    End Sub
 
 
-        '        Replace_NA_60 <- instat_calculation$new(type = "calculation",
-        '                                     function_exp = "replace(Rain, is.na(Rain), 60)",
-        '                                     result_name = "Replace_NA_60", calculated_from = list(Damango = "Rain"), save = 2)
+        clsReplaceNA60.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsReplaceNA60.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & ", 60)" & Chr(34))
+        clsReplaceNA60.AddParameter("result_name", Chr(34) & "Replace_NA_60" & Chr(34))
+        clsReplaceNA60.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
+        clsReplaceNA60.AddParameter("save", "0") ' has save = 2on rcode
 
-        'Water_Balance_60 <- instat_calculation$new(type = "calculation",
-        '                                        function_exp = "Reduce(function(x, y) pmin(pmax(x + y - 5, 0), 60), Replace_NA_60, accumulate=TRUE)",
-        '                                        result_name = "Water_Balance_60", sub_calculations = list(Replace_NA_60), save = 0)
+        clsWaterBalance60.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsWaterBalance60.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & nudCapacity.Value & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
+        clsWaterBalance60.AddParameter("result_name", Chr(34) & "Water_Balance_60" & Chr(34))
+        clsWaterBalance60.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance60List)
+        clsWaterBalance60List.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA60)
+        clsWaterBalance60.AddParameter("save", "0")
+
+
+
 
         '#### Filter to only values where cumsum(RemoveValues <= 0.5) as this is end of rains
         'Water_Filter_60 <- instat_calculation$new(function_exp = "Water_Balance_60 <= 0.5", type="filter",
@@ -162,15 +181,20 @@ Public Class dlgWaterBalance
         '                                              result_name = "First_Water_Balance_60", save = 2)
 
 
+        clsReplaceNA0.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsReplaceNA0.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & ", 0)" & Chr(34))
+        clsReplaceNA0.AddParameter("result_name", Chr(34) & "clsReplaceNA0" & Chr(34))
+        clsReplaceNA0.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
+        clsReplaceNA0.AddParameter("save", "0")
 
-        '# Replace_NA_0
-        'Replace_NA_0 <- instat_calculation$new(type = "calculation",
-        '                                        function_exp = "replace(Rain, is.na(Rain), 0)",
-        '                                        result_name = "Replace_NA_0", calculated_from = list(Damango = "Rain"), save = 0)
+        clsWaterBalance0.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsWaterBalance0.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & nudCapacity.Value & "), Replace_NA_0, accumulate=TRUE)" & Chr(34))
+        clsWaterBalance0.AddParameter("result_name", Chr(34) & "Water_Balance_0" & Chr(34))
+        clsWaterBalance0.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance0List)
+        clsWaterBalance0List.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA0)
+        clsWaterBalance0.AddParameter("save", "0")
 
-        'Water_Balance_0 <- instat_calculation$new(type = "calculation",
-        '                                           function_exp = "Reduce(function(x, y) pmin(pmax(x + y - 5, 0), 60), Replace_NA_0, accumulate=TRUE)",
-        '                                           result_name = "Water_Balance_0", sub_calculations = list(Replace_NA_0), save = 0)
+
 
         '#### Filter to only values where cumsum(RemoveValues <= 0.5) as this is end of rains
         'Water_Filter_0 <- instat_calculation$new(function_exp = "Water_Balance_0 <= 0.5", type="filter",
