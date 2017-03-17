@@ -1032,15 +1032,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuCorruptionOrganise_Click(sender As Object, e As EventArgs) Handles mnuCorruptionPrepare.Click
-        dlgCorruptionOrganise.ShowDialog()
     End Sub
 
     Private Sub mnuCorruptionDescribe_Click(sender As Object, e As EventArgs) Handles mnuCorruptionDescribe.Click
-        dlgCorruptionDescribe.ShowDialog()
     End Sub
 
     Private Sub mnuCorruptionModel_Click(sender As Object, e As EventArgs) Handles mnuCorruptionModel.Click
-        dlgCorruptionModel.ShowDialog()
     End Sub
 
     Private Sub GeneralSummariesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeGeneralSummaries.Click
@@ -1198,6 +1195,9 @@ Public Class frmMain
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
+    Private Sub DefineOutputsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineOutputsToolStripMenuItem.Click
+        dlgDefineCorruptionOutputs.ShowDialog()
+    End Sub
 
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click

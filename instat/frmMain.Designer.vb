@@ -156,11 +156,11 @@ Partial Class frmMain
         Me.mnuClimatic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenNetCDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateFileClimSoft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenNetCDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuCliDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
@@ -445,6 +445,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DefineOutputsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1376,38 +1377,38 @@ Partial Class frmMain
         'mnuClimaticFileOpensst
         '
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
-        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(155, 22)
+        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(156, 22)
         Me.mnuClimaticFileOpensst.Text = "Open SST..."
+        '
+        'OpenNetCDFToolStripMenuItem
+        '
+        Me.OpenNetCDFToolStripMenuItem.Name = "OpenNetCDFToolStripMenuItem"
+        Me.OpenNetCDFToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.OpenNetCDFToolStripMenuItem.Text = "Open NetCDF..."
         '
         'mnuClimateFileClimSoft
         '
         Me.mnuClimateFileClimSoft.Name = "mnuClimateFileClimSoft"
-        Me.mnuClimateFileClimSoft.Size = New System.Drawing.Size(155, 22)
+        Me.mnuClimateFileClimSoft.Size = New System.Drawing.Size(156, 22)
         Me.mnuClimateFileClimSoft.Text = "ClimSoft..."
         '
         'mnuClimaticFileCliData
         '
         Me.mnuClimaticFileCliData.Name = "mnuClimaticFileCliData"
-        Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(155, 22)
+        Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(156, 22)
         Me.mnuClimaticFileCliData.Text = "CliData..."
         '
         'ToolStripSeparator15
         '
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
-        Me.ToolStripSeparator15.Size = New System.Drawing.Size(152, 6)
+        Me.ToolStripSeparator15.Size = New System.Drawing.Size(153, 6)
         '
         'mnuClimaticFileExportToCPT
         '
         Me.mnuClimaticFileExportToCPT.Name = "mnuClimaticFileExportToCPT"
-        Me.mnuClimaticFileExportToCPT.Size = New System.Drawing.Size(155, 22)
+        Me.mnuClimaticFileExportToCPT.Size = New System.Drawing.Size(156, 22)
         Me.mnuClimaticFileExportToCPT.Tag = "Export_to_CPT"
         Me.mnuClimaticFileExportToCPT.Text = "Export to CPT..."
-        '
-        'OpenNetCDFToolStripMenuItem
-        '
-        Me.OpenNetCDFToolStripMenuItem.Name = "OpenNetCDFToolStripMenuItem"
-        Me.OpenNetCDFToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
-        Me.OpenNetCDFToolStripMenuItem.Text = "Open NetCDF"
         '
         'ToolStripSeparator18
         '
@@ -2413,7 +2414,7 @@ Partial Class frmMain
         '
         Me.mnuBar.AllowMerge = False
         Me.mnuBar.ImeMode = System.Windows.Forms.ImeMode.[On]
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuModel, Me.mnuDescribe, Me.mnuClimatic, Me.mnuCorruption, Me.mnuTools, Me.mnuView, Me.mnuHelp})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuCorruption, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
@@ -3230,7 +3231,7 @@ Partial Class frmMain
         '
         'mnuCorruption
         '
-        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionDefineCorruptionData, Me.mnuCorruptionPrepare, Me.mnuCorruptionDescribe, Me.mnuCorruptionModel, Me.DefineRedFlagsToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.TestsAndChecksToolStripMenuItem})
+        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionDefineCorruptionData, Me.mnuCorruptionPrepare, Me.mnuCorruptionDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuCorruptionModel, Me.DefineRedFlagsToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.TestsAndChecksToolStripMenuItem})
         Me.mnuCorruption.Name = "mnuCorruption"
         Me.mnuCorruption.Size = New System.Drawing.Size(77, 20)
         Me.mnuCorruption.Text = "Corruption"
@@ -3306,7 +3307,7 @@ Partial Class frmMain
         'AaToolStripMenuItem
         '
         Me.AaToolStripMenuItem.Name = "AaToolStripMenuItem"
-        Me.AaToolStripMenuItem.Size = New System.Drawing.Size(86, 22)
+        Me.AaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AaToolStripMenuItem.Text = "aa"
         '
         'mnuCorruptionModel
@@ -3319,7 +3320,7 @@ Partial Class frmMain
         'AaToolStripMenuItem1
         '
         Me.AaToolStripMenuItem1.Name = "AaToolStripMenuItem1"
-        Me.AaToolStripMenuItem1.Size = New System.Drawing.Size(124, 22)
+        Me.AaToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.AaToolStripMenuItem1.Text = "Fit Model"
         '
         'DefineRedFlagsToolStripMenuItem
@@ -3338,7 +3339,7 @@ Partial Class frmMain
         '
         Me.TestsAndChecksToolStripMenuItem.Name = "TestsAndChecksToolStripMenuItem"
         Me.TestsAndChecksToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.TestsAndChecksToolStripMenuItem.Text = "Tests and checks..."
+        Me.TestsAndChecksToolStripMenuItem.Text = "Tests and Checks..."
         '
         'mnuTools
         '
@@ -3405,6 +3406,12 @@ Partial Class frmMain
         Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
+        '
+        'DefineOutputsToolStripMenuItem
+        '
+        Me.DefineOutputsToolStripMenuItem.Name = "DefineOutputsToolStripMenuItem"
+        Me.DefineOutputsToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
+        Me.DefineOutputsToolStripMenuItem.Text = "Define Outputs..."
         '
         'frmMain
         '
@@ -3854,4 +3861,5 @@ Partial Class frmMain
     Friend WithEvents ImportFromCSPROToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportFromToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenNetCDFToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DefineOutputsToolStripMenuItem As ToolStripMenuItem
 End Class
