@@ -90,11 +90,11 @@ Public Class sdgCorruptionCountryLevelColumns
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrCountryLevelSelector.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrCountryLevelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                            bFound = True
-                            Exit For
-                        End If
+                        'If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                        '    ucrTempReceiver.Add(lviTempVariable.Text, ucrCountryLevelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                        '    bFound = True
+                        '    Exit For
+                        'End If
                     Next
                     If bFound Then
                         bFound = False
