@@ -19,7 +19,8 @@ Imports System.IO
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRDefaultFunction, clsRCDF As New RFunction
+    Private clsRDefaultFunction, clsRCDF, clsRDatanames As New RFunction
+
     'Private clsBaseNetCDF, clsRCDF As New RFunction
     'Dim bFirstLoad As Boolean
     Dim strFileType As String
@@ -72,14 +73,18 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-
+        ucrInputDataName.SetRCode(clsRDatanames, bReset)
+        ucrInputLocDataName.SetRCode(clsRDatanames, bReset)
+        ucrInputFilePath.SetRCode(clsRCDF, bReset)
     End Sub
 
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
+        ucrInputLocDataName.SetName("lat_lon_data")
+
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
-
+        clsRDefaultFunction.AddParameter("data_names", clsRFunctionParameter:=clsRDatanames)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
 
@@ -87,16 +92,24 @@ Public Class dlgOpenNetCDF
         ucrBase.iHelpTopicID = 102
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
-        ucrInputLocDataName.SetName("lat_lon_data")
+        'clsSummariesList = New RFunction
+        clsRDatanames.SetRCommand("c")
+        ucrInputDataName.SetParameter(New RParameter("data_df_name", 0))
+        ucrInputDataName.clsParameter.bIncludeArgumentName = False
+        ucrInputLocDataName.SetParameter(New RParameter("location_df_name", 1))
+        ucrInputLocDataName.clsParameter.bIncludeArgumentName = False
+        ucrInputFilePath.SetParameter(New RParameter("filename", 0))
     End Sub
 
-    Private Sub ucrInputDataName_NameChanged() Handles ucrInputDataName.NameChanged, ucrInputLocDataName.NameChanged
-        ucrBase.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputDataName.GetText() & Chr(34) & "," & Chr(34) & ucrInputLocDataName.GetText() & Chr(34) & ")")
-    End Sub
+    'Private Sub ucrInputDataName_NameChanged() Handles ucrInputDataName.NameChanged, ucrInputLocDataName.NameChanged
+    '    ucrBase.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputDataName.GetText() & Chr(34) & "," & Chr(34) & ucrInputLocDataName.GetText() & Chr(34) & ")")
+    'End Sub
 
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetCSVDefault()
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -143,18 +156,12 @@ Public Class dlgOpenNetCDF
                     End If
                 End If
             End If
-            TestOkEnabled()
+            'TestOkEnabled()
         End Using
-    End Sub
-
-    Private Sub SetCSVDefault()
-
     End Sub
 
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
         GetFileFromOpenDialog()
+        TestOkEnabled()
     End Sub
-
-
-
 End Class
