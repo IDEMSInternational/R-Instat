@@ -1935,7 +1935,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(date_col, station_col, elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
+data_object$set("public","make_inventory_plot", function(date_col, station_col= c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
   if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
   if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
   if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
@@ -1943,8 +1943,14 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col, 
     stop("Not all elements columns found in the data")
   }
   #add year and doy columns if missing in data
-  if(is.null(self$get_climatic_column_name(year_label)))(self$split_date(col_name=date_col, year=TRUE))
-  if(is.null(self$get_climatic_column_name(doy_label)))(self$split_date(col_name=date_col, day_in_year=TRUE))
+  if(is.null(self$get_climatic_column_name(year_label))){
+    self$split_date(col_name=date_col, year=TRUE)
+    self$set_climatic_types(types= c(year=year_label))
+  }
+  if(is.null(self$get_climatic_column_name(doy_label))){
+    self$split_date(col_name=date_col, day_in_year=TRUE)
+    self$set_climatic_types(types=c(doy = doy_label))
+  }
   year_col_name = self$get_climatic_column_name(year_label)
   doy_col_name = self$get_climatic_column_name(doy_label)
 
@@ -1987,7 +1993,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col, 
   if(coord_flip) {
     g <- g + coord_flip()
   }
-  return(g+ggtitle(graph_title))
+  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5)))
 }
 )
 
@@ -2215,8 +2221,8 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
   }
-  self$append_to_variables_metadata(output_columns, corruption_red_flag_label, TRUE)
-  other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
+  self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
+  other_cols <- self$get_column_names()[!self$get_column_names() %in% red_flags]
   self$append_to_variables_metadata(other_cols, corruption_red_flag_label, FALSE)
 }
 )
