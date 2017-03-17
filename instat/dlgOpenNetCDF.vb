@@ -81,7 +81,9 @@ Public Class dlgOpenNetCDF
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
         ucrInputLocDataName.SetName("lat_lon_data")
-
+        ucrInputDataName.SetName("")
+        ucrInputFilePath.IsReadOnly = True
+        ucrInputFilePath.SetName("")
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
         clsRDefaultFunction.AddParameter("data_names", clsRFunctionParameter:=clsRDatanames)
