@@ -1945,17 +1945,17 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col= 
   #add year and doy columns if missing in data
   if(is.null(self$get_climatic_column_name(year_label))){
     self$split_date(col_name=date_col, year=TRUE)
-    self$set_climatic_types(types= c(year=year_label))
+    self$set_climatic_types(types= c(year="year")) #calling year column by name is just a temporary fix.
   }
   if(is.null(self$get_climatic_column_name(doy_label))){
     self$split_date(col_name=date_col, day_in_year=TRUE)
-    self$set_climatic_types(types=c(doy = doy_label))
+    self$set_climatic_types(types=c(doy = "day_in_year"))
   }
   year_col_name = self$get_climatic_column_name(year_label)
   doy_col_name = self$get_climatic_column_name(doy_label)
 
   curr_data <- self$get_data_frame()
-  #ggplot fails to get column names hence the ned to rename
+  #ggplot fails to get column names hence the need to rename
   colnames(curr_data)[colnames(curr_data)==year_col_name] <- "year_column" 
   colnames(curr_data)[colnames(curr_data)==doy_col_name] <- "doy_column"
   if(length(elements_cols)!=1){
@@ -1973,7 +1973,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col= 
     col_data[[new_col]] <- recode
     g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~variable")))
+      g <- g + facet_wrap(as.formula(paste0("variable~", as.name(station_col))))
     }
     else{
       g <- g + facet_wrap(~variable)
