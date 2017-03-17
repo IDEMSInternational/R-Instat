@@ -22,7 +22,6 @@ Partial Class dlgOpenNetCDF
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblLocationName = New System.Windows.Forms.Label()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
@@ -30,14 +29,8 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputLocDataName = New instat.ucrInputTextBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 116)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 7
         '
         'lblLocationName
         '
@@ -46,8 +39,8 @@ Partial Class dlgOpenNetCDF
         Me.lblLocationName.Name = "lblLocationName"
         Me.lblLocationName.Size = New System.Drawing.Size(134, 13)
         Me.lblLocationName.TabIndex = 5
-        Me.lblLocationName.Tag = "Location_Dataframe_Name:"
-        Me.lblLocationName.Text = "Location Dataframe Name:"
+        Me.lblLocationName.Tag = "Lat_Lon_Data_Name_Prefix:"
+        Me.lblLocationName.Text = "Lat/Lon Data Name Prefix:"
         '
         'cmdOpenDataSet
         '
@@ -107,6 +100,13 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputDataName.Name = "ucrInputDataName"
         Me.ucrInputDataName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputDataName.TabIndex = 4
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 116)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 7
         '
         'dlgOpenNetCDF
         '
