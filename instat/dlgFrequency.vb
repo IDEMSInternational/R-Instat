@@ -46,13 +46,15 @@ Public Class dlgFrequency
         ucrReceiverFactors.SetDataType("factor")
         ucrReceiverSingle.SetDataType("numeric")
         ucrSingleReceiver.SetDataType("factor")
-        ucrchhWeights.SetText("Weights")
+        ucrchkWeights.SetText("Weights")
         ucrchkCheckDisplayMargins.SetText("Display Margins")
         ucrchkCounts.SetText("Counts")
         ucrchkOverallPercentages.SetText("Overall Percentages")
         ucrchkPercentagesOf.SetText("Percentages Of")
         ucrchkDisplay.SetText("How to Display")
         ucrchkMargins.SetText("Margins to Dispaly")
+        ucrchkWeights.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrchkPercentagesOf.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub TestOkEnabled()

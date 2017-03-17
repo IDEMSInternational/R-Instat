@@ -31,7 +31,7 @@ Partial Class dlgFrequency
         Me.ucrchkPercentagesOf = New instat.ucrCheck()
         Me.ucrchkOverallPercentages = New instat.ucrCheck()
         Me.ucrchkCounts = New instat.ucrCheck()
-        Me.ucrchhWeights = New instat.ucrCheck()
+        Me.ucrchkWeights = New instat.ucrCheck()
         Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.ucrNudDecimals = New instat.ucrNud()
@@ -135,13 +135,13 @@ Partial Class dlgFrequency
         Me.ucrchkCounts.Size = New System.Drawing.Size(104, 20)
         Me.ucrchkCounts.TabIndex = 0
         '
-        'ucrchhWeights
+        'ucrchkWeights
         '
-        Me.ucrchhWeights.Checked = False
-        Me.ucrchhWeights.Location = New System.Drawing.Point(10, 195)
-        Me.ucrchhWeights.Name = "ucrchhWeights"
-        Me.ucrchhWeights.Size = New System.Drawing.Size(104, 20)
-        Me.ucrchhWeights.TabIndex = 10
+        Me.ucrchkWeights.Checked = False
+        Me.ucrchkWeights.Location = New System.Drawing.Point(10, 195)
+        Me.ucrchkWeights.Name = "ucrchkWeights"
+        Me.ucrchkWeights.Size = New System.Drawing.Size(104, 20)
+        Me.ucrchkWeights.TabIndex = 10
         '
         'ucrReceiverSingle
         '
@@ -306,7 +306,7 @@ Partial Class dlgFrequency
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.ucrReceiverSingle)
-        Me.Controls.Add(Me.ucrchhWeights)
+        Me.Controls.Add(Me.ucrchkWeights)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrReceiverFactors)
@@ -336,7 +336,7 @@ Partial Class dlgFrequency
     Friend WithEvents ucrchkCounts As ucrCheck
     Friend WithEvents ucrSingleReceiver As ucrReceiverSingle
     Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
-    Friend WithEvents ucrchhWeights As ucrCheck
+    Friend WithEvents ucrchkWeights As ucrCheck
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents ucrNudDecimals As ucrNud
     Friend WithEvents lblDecimals As Label
