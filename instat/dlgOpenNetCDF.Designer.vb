@@ -23,10 +23,10 @@ Partial Class dlgOpenNetCDF
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputNameLocation = New instat.ucrInputTextBox()
+        Me.ucrInputLocDataName = New instat.ucrInputTextBox()
         Me.lblLocationName = New System.Windows.Forms.Label()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrInputName = New instat.ucrInputTextBox()
+        Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblSSTName = New System.Windows.Forms.Label()
@@ -39,15 +39,15 @@ Partial Class dlgOpenNetCDF
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 1
         '
-        'ucrInputNameLocation
+        'ucrInputLocDataName
         '
-        Me.ucrInputNameLocation.AddQuotesIfUnrecognised = True
-        Me.ucrInputNameLocation.IsMultiline = False
-        Me.ucrInputNameLocation.IsReadOnly = False
-        Me.ucrInputNameLocation.Location = New System.Drawing.Point(158, 77)
-        Me.ucrInputNameLocation.Name = "ucrInputNameLocation"
-        Me.ucrInputNameLocation.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputNameLocation.TabIndex = 15
+        Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
+        Me.ucrInputLocDataName.IsMultiline = False
+        Me.ucrInputLocDataName.IsReadOnly = False
+        Me.ucrInputLocDataName.Location = New System.Drawing.Point(158, 77)
+        Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
+        Me.ucrInputLocDataName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputLocDataName.TabIndex = 15
         '
         'lblLocationName
         '
@@ -69,15 +69,15 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFilePath.Size = New System.Drawing.Size(161, 21)
         Me.ucrInputFilePath.TabIndex = 10
         '
-        'ucrInputName
+        'ucrInputDataName
         '
-        Me.ucrInputName.AddQuotesIfUnrecognised = True
-        Me.ucrInputName.IsMultiline = False
-        Me.ucrInputName.IsReadOnly = False
-        Me.ucrInputName.Location = New System.Drawing.Point(142, 45)
-        Me.ucrInputName.Name = "ucrInputName"
-        Me.ucrInputName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputName.TabIndex = 13
+        Me.ucrInputDataName.AddQuotesIfUnrecognised = True
+        Me.ucrInputDataName.IsMultiline = False
+        Me.ucrInputDataName.IsReadOnly = False
+        Me.ucrInputDataName.Location = New System.Drawing.Point(142, 45)
+        Me.ucrInputDataName.Name = "ucrInputDataName"
+        Me.ucrInputDataName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputDataName.TabIndex = 13
         '
         'cmdOpenDataSet
         '
@@ -113,10 +113,10 @@ Partial Class dlgOpenNetCDF
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(434, 190)
-        Me.Controls.Add(Me.ucrInputNameLocation)
+        Me.Controls.Add(Me.ucrInputLocDataName)
         Me.Controls.Add(Me.lblLocationName)
         Me.Controls.Add(Me.ucrInputFilePath)
-        Me.Controls.Add(Me.ucrInputName)
+        Me.Controls.Add(Me.ucrInputDataName)
         Me.Controls.Add(Me.cmdOpenDataSet)
         Me.Controls.Add(Me.lblFileOpenPath)
         Me.Controls.Add(Me.lblSSTName)
@@ -133,10 +133,10 @@ Partial Class dlgOpenNetCDF
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrInputNameLocation As ucrInputTextBox
+    Friend WithEvents ucrInputLocDataName As ucrInputTextBox
     Friend WithEvents lblLocationName As Label
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
-    Friend WithEvents ucrInputName As ucrInputTextBox
+    Friend WithEvents ucrInputDataName As ucrInputTextBox
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblSSTName As Label

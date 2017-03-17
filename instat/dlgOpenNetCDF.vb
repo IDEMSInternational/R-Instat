@@ -17,8 +17,11 @@ Imports instat.Translations
 Imports System.IO
 
 Public Class dlgOpenNetCDF
-    Private clsBaseNetCDF, clsRCDF As New RFunction
-    Dim bFirstLoad As Boolean
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsRDefaultFunction, clsRCDF As New RFunction
+    'Private clsBaseNetCDF, clsRCDF As New RFunction
+    'Dim bFirstLoad As Boolean
     Dim strFileType As String
     Dim bCanImport As Boolean
     Dim bComponentsInitialised As Boolean
@@ -27,39 +30,68 @@ Public Class dlgOpenNetCDF
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
-        clsBaseNetCDF.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
-        clsBaseNetCDF.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
+        'clsBaseNetCDF.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
+        'clsBaseNetCDF.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
         bFirstLoad = True
         bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
-        ucrInputName.bAutoChangeOnLeave = True
+        ucrInputDataName.bAutoChangeOnLeave = True
     End Sub
 
-    Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         Me.Show()
         If bFirstLoad Then
             InitialiseDialog()
-            SetCSVDefault()
             bFirstLoad = False
         End If
         If bStartOpenDialog Then
             GetFileFromOpenDialog()
             bStartOpenDialog = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOkEnabled()
+
+        'autoTranslate(Me)
+        'Me.Show()
+        'If bFirstLoad Then
+        '    InitialiseDialog()
+        '    SetCSVDefault()
+        '    bFirstLoad = False
+        'End If
+        'If bStartOpenDialog Then
+        '    GetFileFromOpenDialog()
+        '    bStartOpenDialog = False
+        'End If
+        'TestOkEnabled()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+
+    Private Sub SetDefaults()
+        clsRDefaultFunction = New RFunction
+        clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
+        clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 102
-        ucrInputName.SetValidationTypeAsRVariable()
-        ucrInputNameLocation.SetValidationTypeAsRVariable()
-        ucrInputNameLocation.SetName("lat_lon_data")
+        ucrInputDataName.SetValidationTypeAsRVariable()
+        ucrInputLocDataName.SetValidationTypeAsRVariable()
+        ucrInputLocDataName.SetName("lat_lon_data")
     End Sub
 
-    Private Sub ucrInputDataName_NameChanged() Handles ucrInputName.NameChanged, ucrInputNameLocation.NameChanged
-        ucrBase.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputName.GetText() & Chr(34) & "," & Chr(34) & ucrInputNameLocation.GetText() & Chr(34) & ")")
+    Private Sub ucrInputDataName_NameChanged() Handles ucrInputDataName.NameChanged, ucrInputLocDataName.NameChanged
+        ucrBase.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputDataName.GetText() & Chr(34) & "," & Chr(34) & ucrInputLocDataName.GetText() & Chr(34) & ")")
     End Sub
 
 
@@ -90,24 +122,24 @@ Public Class dlgOpenNetCDF
             End If
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
-                ucrInputName.SetName("")
-                ucrInputName.Reset()
+                ucrInputDataName.SetName("")
+                ucrInputDataName.Reset()
                 'checks if the file name is not blank'
                 If dlgOpen.FileName <> "" Then
                     strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
                     strFilePath = Replace(dlgOpen.FileName, "\", "/")
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(strFilePath)
-                    ucrInputName.Show()
+                    ucrInputDataName.Show()
                     lblSSTName.Show()
 
                     If strFileExt = ".nc" Then
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseNetCDF)
+                        'ucrBase.clsRsyntax.SetBaseRFunction(clsBaseNetCDF)
                         clsRCDF.SetRCommand("nc_open")
                         clsRCDF.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
                         strFileType = "nc"
-                        ucrInputName.SetName(strFileName, bSilent:=True)
-                        ucrInputName.Focus()
+                        ucrInputDataName.SetName(strFileName, bSilent:=True)
+                        ucrInputDataName.Focus()
                     End If
                 End If
             End If
@@ -122,4 +154,7 @@ Public Class dlgOpenNetCDF
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
         GetFileFromOpenDialog()
     End Sub
+
+
+
 End Class
