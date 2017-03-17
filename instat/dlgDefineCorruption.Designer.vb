@@ -364,7 +364,7 @@ Partial Class dlgDefineCorruption
         'ucrChkAutoGenerate
         '
         Me.ucrChkAutoGenerate.Checked = False
-        Me.ucrChkAutoGenerate.Location = New System.Drawing.Point(414, 331)
+        Me.ucrChkAutoGenerate.Location = New System.Drawing.Point(10, 265)
         Me.ucrChkAutoGenerate.Name = "ucrChkAutoGenerate"
         Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkAutoGenerate.TabIndex = 31
