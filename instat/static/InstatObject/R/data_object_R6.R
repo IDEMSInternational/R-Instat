@@ -2130,16 +2130,15 @@ all_calculated_corruption_column_types <- c(corruption_award_year_label,
 
 corruption_ctry_iso2_label="iso2"
 corruption_ctry_iso3_label="iso3"
-corruption_ctry_wb_ppp_label="wb_ppp"
 corruption_ctry_ss_2009_label="ss_2009"
 corruption_ctry_ss_2011_label="ss_2011"
 corruption_ctry_ss_2013_label="ss_2013"
 corruption_ctry_ss_2015_label="ss_2015"
 corruption_ctry_small_state_label="small_state"
 
-all_primary_corruption_country_level_column_types <- c(corruption_ctry_iso2_label,
+all_primary_corruption_country_level_column_types <- c(corruption_country_label,
+                                                       corruption_ctry_iso2_label,
                                                        corruption_ctry_iso3_label,
-                                                       corruption_ctry_wb_ppp_label,
                                                        corruption_ctry_ss_2009_label,
                                                        corruption_ctry_ss_2011_label,
                                                        corruption_ctry_ss_2013_label,
@@ -2205,12 +2204,12 @@ instat_object$set("public","define_as_corruption_country_level_data", function(d
   if(contract_level_country_name == "" || country_level_country_name == "") stop("country column must be defined in the contract level data and country level data.")
   link_pairs <- country_level_country_name
   names(link_pairs) <- contract_level_country_name
-  self$add_link(from_data_name = contract_level_data_name, to_data_frame = data_name, link_pairs = link_pairs, type = keyed_link_label)
+  self$add_link(from_data_frame = contract_level_data_name, to_data_frame = data_name, link_pairs = link_pairs, type = keyed_link_label)
 }
 )
 
-data_object$set("public","define_as_corruption_country_level_data", function(contract_level_data_name, types = c(), auto_generate = TRUE) {
-  invisible(sapply(names(primary_types), function(x) self$append_to_variables_metadata(primary_types[[x]], corruption_type_label, x)))
+data_object$set("public","define_as_corruption_country_level_data", function(types = c(), auto_generate = TRUE) {
+  invisible(sapply(names(types), function(x) self$append_to_variables_metadata(types[[x]], corruption_type_label, x)))
 }
 )
 
