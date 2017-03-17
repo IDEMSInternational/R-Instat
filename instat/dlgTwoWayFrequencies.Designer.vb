@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgTwoWayFrequencies
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgTwoWayFrequencies
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpFrequencies = New System.Windows.Forms.GroupBox()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
@@ -32,7 +32,6 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrChkCount = New instat.ucrCheck()
         Me.ucrChkColumn = New instat.ucrCheck()
         Me.ucrChkRow = New instat.ucrCheck()
-        Me.UcrPanel1 = New instat.UcrPanel()
         Me.lblRowFactor = New System.Windows.Forms.Label()
         Me.lblColumnFactor = New System.Windows.Forms.Label()
         Me.ucrChkWeights = New instat.ucrCheck()
@@ -107,7 +106,6 @@ Partial Class dlgTwoWayFrequencies
         Me.grpFreq.Controls.Add(Me.ucrChkCount)
         Me.grpFreq.Controls.Add(Me.ucrChkColumn)
         Me.grpFreq.Controls.Add(Me.ucrChkRow)
-        Me.grpFreq.Controls.Add(Me.UcrPanel1)
         Me.grpFreq.Location = New System.Drawing.Point(248, 139)
         Me.grpFreq.Name = "grpFreq"
         Me.grpFreq.Size = New System.Drawing.Size(152, 126)
@@ -146,13 +144,6 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrChkRow.Name = "ucrChkRow"
         Me.ucrChkRow.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkRow.TabIndex = 1
-        '
-        'UcrPanel1
-        '
-        Me.UcrPanel1.Location = New System.Drawing.Point(5, 17)
-        Me.UcrPanel1.Name = "UcrPanel1"
-        Me.UcrPanel1.Size = New System.Drawing.Size(141, 96)
-        Me.UcrPanel1.TabIndex = 15
         '
         'lblRowFactor
         '
@@ -304,5 +295,4 @@ Partial Class dlgTwoWayFrequencies
     Friend WithEvents ucrChkCount As ucrCheck
     Friend WithEvents ucrChkColumn As ucrCheck
     Friend WithEvents ucrChkRow As ucrCheck
-    Friend WithEvents UcrPanel1 As UcrPanel
 End Class

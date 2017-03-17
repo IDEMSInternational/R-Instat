@@ -174,7 +174,7 @@ Public Class dlgTwoWayFrequencies
     '    End If
     'End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRowFactor.ControlValueChanged, ucrReceiverColumnFactor.ControlValueChanged, ucrChkTable.ControlValueChanged, ucrChkGraph.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTable.ControlValueChanged, ucrChkGraph.ControlValueChanged
         ChangeBaseFunction()
     End Sub
 
