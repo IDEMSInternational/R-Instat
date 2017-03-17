@@ -2199,8 +2199,8 @@ instat_object$set("public","define_as_corruption", function(data_name, primary_t
 instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
   self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
-  contract_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
-  country_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
+  contract_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
+  country_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
   if(contract_level_country_name == "" || country_level_country_name == "") stop("country column must be defined in the contract level data and country level data.")
   link_pairs <- country_level_country_name
   names(link_pairs) <- contract_level_country_name
