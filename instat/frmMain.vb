@@ -1032,15 +1032,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuCorruptionOrganise_Click(sender As Object, e As EventArgs) Handles mnuCorruptionPrepare.Click
-        dlgCorruptionOrganise.ShowDialog()
     End Sub
 
     Private Sub mnuCorruptionDescribe_Click(sender As Object, e As EventArgs) Handles mnuCorruptionDescribe.Click
-        dlgCorruptionDescribe.ShowDialog()
     End Sub
 
     Private Sub mnuCorruptionModel_Click(sender As Object, e As EventArgs) Handles mnuCorruptionModel.Click
-        dlgCorruptionModel.ShowDialog()
     End Sub
 
     Private Sub GeneralSummariesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeGeneralSummaries.Click
@@ -1165,6 +1162,43 @@ Public Class frmMain
         End If
         dlgRestrict.ShowDialog()
     End Sub
+
+    Private Sub AaToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AaToolStripMenuItem1.Click
+        dlgFitCorruptionModel.ShowDialog()
+    End Sub
+
+    Private Sub DefineRedFlagsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineRedFlagsToolStripMenuItem.Click
+        dlgDefineRedFlags.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoVariablesTabulate_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub mnuDescribeTwoVariablesFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesFrequencies.Click
+        dlgTwoWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem.Click
+        dlgNewSummaryTables.ShowDialog()
+    End Sub
+
+    Private Sub ImportFromCSPROToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromCSPROToolStripMenuItem.Click
+        dlgImportFromCSPRO.ShowDialog()
+    End Sub
+
+    Private Sub ImportFromToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromToolStripMenuItem.Click
+        dlgImportFromDatabases.ShowDialog()
+    End Sub
+
+    Private Sub OpenNetCDFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNetCDFToolStripMenuItem.Click
+        dlgOpenNetCDF.ShowDialog()
+    End Sub
+
+    Private Sub DefineOutputsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineOutputsToolStripMenuItem.Click
+        dlgDefineCorruptionOutputs.ShowDialog()
+    End Sub
+
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
