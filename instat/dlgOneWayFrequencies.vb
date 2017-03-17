@@ -38,13 +38,13 @@ Public Class dlgOneWayFrequencies
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkTable.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkGraph.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrChkWeights.SetRCode(clsSjpFrq, bReset)
         ucrChkWeights.SetRCode(clsSjtFreq, bReset)
 
         ucrPnlSort.SetRCode(clsSjtFreq, bReset)
-        ucrChkTable.SetRCode(clsSjtFreq, bReset)
-        ucrChkGraph.SetRCode(clsSjpFrq, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
     End Sub
 
@@ -70,8 +70,9 @@ Public Class dlgOneWayFrequencies
         ucrPnlSort.AddRadioButton(rdoDescending, Chr(34) & "desc" & Chr(34))
         ucrPnlSort.SetRDefault(Chr(34) & "none" & Chr(34))
 
-
         ucrChkTable.SetText("Table")
+        ucrChkTable.AddFunctionNamesCondition(True, "sjPlot::sjt.frq")
+
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -94,8 +95,6 @@ Public Class dlgOneWayFrequencies
         clsSjtFreq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         clsSjpFrq.SetRCommand("sjPlot::sjp.frq")
         clsSjpFrq.AddParameter("var.cnt", clsRFunctionParameter:=ucrReceiverOneWayFreq.GetVariables)
-
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
     End Sub
 
@@ -119,7 +118,7 @@ Public Class dlgOneWayFrequencies
             ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
-        Else
+        ElseIf ucrChkGraph.Checked Then
             ucrReceiverOneWayFreq.SetParameter(New RParameter("var.cnt", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
