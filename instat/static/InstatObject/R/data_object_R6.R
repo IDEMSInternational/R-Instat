@@ -1973,7 +1973,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col= 
     col_data[[new_col]] <- recode
     g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_wrap(as.formula(paste0("variable~", as.name(station_col))))
+      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~variable")))
     }
     else{
       g <- g + facet_wrap(~variable)
