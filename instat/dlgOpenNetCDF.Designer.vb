@@ -23,13 +23,13 @@ Partial Class dlgOpenNetCDF
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputLocDataName = New instat.ucrInputTextBox()
         Me.lblLocationName = New System.Windows.Forms.Label()
-        Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblSSTName = New System.Windows.Forms.Label()
+        Me.ucrInputLocDataName = New instat.ucrInputTextBox()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
+        Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -38,16 +38,6 @@ Partial Class dlgOpenNetCDF
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 1
-        '
-        'ucrInputLocDataName
-        '
-        Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
-        Me.ucrInputLocDataName.IsMultiline = False
-        Me.ucrInputLocDataName.IsReadOnly = False
-        Me.ucrInputLocDataName.Location = New System.Drawing.Point(158, 77)
-        Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
-        Me.ucrInputLocDataName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputLocDataName.TabIndex = 15
         '
         'lblLocationName
         '
@@ -58,26 +48,6 @@ Partial Class dlgOpenNetCDF
         Me.lblLocationName.TabIndex = 14
         Me.lblLocationName.Tag = "Location_Dataframe_Name:"
         Me.lblLocationName.Text = "Location Dataframe Name:"
-        '
-        'ucrInputFilePath
-        '
-        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilePath.IsMultiline = False
-        Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(43, 15)
-        Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(161, 21)
-        Me.ucrInputFilePath.TabIndex = 10
-        '
-        'ucrInputDataName
-        '
-        Me.ucrInputDataName.AddQuotesIfUnrecognised = True
-        Me.ucrInputDataName.IsMultiline = False
-        Me.ucrInputDataName.IsReadOnly = False
-        Me.ucrInputDataName.Location = New System.Drawing.Point(142, 45)
-        Me.ucrInputDataName.Name = "ucrInputDataName"
-        Me.ucrInputDataName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputDataName.TabIndex = 13
         '
         'cmdOpenDataSet
         '
@@ -107,6 +77,36 @@ Partial Class dlgOpenNetCDF
         Me.lblSSTName.TabIndex = 12
         Me.lblSSTName.Tag = "SST_Dataframe_Name:"
         Me.lblSSTName.Text = "SST Dataframe Name:"
+        '
+        'ucrInputLocDataName
+        '
+        Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
+        Me.ucrInputLocDataName.IsMultiline = False
+        Me.ucrInputLocDataName.IsReadOnly = False
+        Me.ucrInputLocDataName.Location = New System.Drawing.Point(158, 77)
+        Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
+        Me.ucrInputLocDataName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputLocDataName.TabIndex = 15
+        '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
+        Me.ucrInputFilePath.IsReadOnly = False
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(43, 15)
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(161, 21)
+        Me.ucrInputFilePath.TabIndex = 10
+        '
+        'ucrInputDataName
+        '
+        Me.ucrInputDataName.AddQuotesIfUnrecognised = True
+        Me.ucrInputDataName.IsMultiline = False
+        Me.ucrInputDataName.IsReadOnly = False
+        Me.ucrInputDataName.Location = New System.Drawing.Point(142, 45)
+        Me.ucrInputDataName.Name = "ucrInputDataName"
+        Me.ucrInputDataName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputDataName.TabIndex = 13
         '
         'dlgOpenNetCDF
         '
