@@ -167,6 +167,22 @@ Public Class dlgOpenNetCDF
         End Using
     End Sub
 
+    Private Sub lblLocationName_Click(sender As Object, e As EventArgs) Handles lblLocationName.Click
+
+    End Sub
+
+    Private Sub lblSSTName_Click(sender As Object, e As EventArgs) Handles lblSSTName.Click
+
+    End Sub
+
+    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+
+    End Sub
+
+    Private Sub lblFileOpenPath_Click(sender As Object, e As EventArgs) Handles lblFileOpenPath.Click
+
+    End Sub
+
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
         GetFileFromOpenDialog()
         TestOkEnabled()

@@ -34,10 +34,10 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 124)
+        Me.ucrBase.Location = New System.Drawing.Point(14, 116)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 7
         '
         'lblLocationName
         '
@@ -45,16 +45,16 @@ Partial Class dlgOpenNetCDF
         Me.lblLocationName.Location = New System.Drawing.Point(14, 82)
         Me.lblLocationName.Name = "lblLocationName"
         Me.lblLocationName.Size = New System.Drawing.Size(134, 13)
-        Me.lblLocationName.TabIndex = 14
+        Me.lblLocationName.TabIndex = 5
         Me.lblLocationName.Tag = "Location_Dataframe_Name:"
         Me.lblLocationName.Text = "Location Dataframe Name:"
         '
         'cmdOpenDataSet
         '
-        Me.cmdOpenDataSet.Location = New System.Drawing.Point(210, 15)
+        Me.cmdOpenDataSet.Location = New System.Drawing.Point(225, 15)
         Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
         Me.cmdOpenDataSet.Size = New System.Drawing.Size(66, 23)
-        Me.cmdOpenDataSet.TabIndex = 11
+        Me.cmdOpenDataSet.TabIndex = 2
         Me.cmdOpenDataSet.Tag = "select_file"
         Me.cmdOpenDataSet.Text = "Select File"
         Me.cmdOpenDataSet.UseVisualStyleBackColor = True
@@ -65,7 +65,7 @@ Partial Class dlgOpenNetCDF
         Me.lblFileOpenPath.Location = New System.Drawing.Point(14, 18)
         Me.lblFileOpenPath.Name = "lblFileOpenPath"
         Me.lblFileOpenPath.Size = New System.Drawing.Size(26, 13)
-        Me.lblFileOpenPath.TabIndex = 9
+        Me.lblFileOpenPath.TabIndex = 0
         Me.lblFileOpenPath.Text = "File:"
         '
         'lblSSTName
@@ -74,7 +74,7 @@ Partial Class dlgOpenNetCDF
         Me.lblSSTName.Location = New System.Drawing.Point(14, 49)
         Me.lblSSTName.Name = "lblSSTName"
         Me.lblSSTName.Size = New System.Drawing.Size(114, 13)
-        Me.lblSSTName.TabIndex = 12
+        Me.lblSSTName.TabIndex = 3
         Me.lblSSTName.Tag = "SST_Dataframe_Name:"
         Me.lblSSTName.Text = "SST Dataframe Name:"
         '
@@ -83,36 +83,36 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputLocDataName.IsMultiline = False
         Me.ucrInputLocDataName.IsReadOnly = False
-        Me.ucrInputLocDataName.Location = New System.Drawing.Point(158, 77)
+        Me.ucrInputLocDataName.Location = New System.Drawing.Point(163, 77)
         Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
         Me.ucrInputLocDataName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputLocDataName.TabIndex = 15
+        Me.ucrInputLocDataName.TabIndex = 6
         '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(43, 15)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(52, 15)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.Size = New System.Drawing.Size(161, 21)
-        Me.ucrInputFilePath.TabIndex = 10
+        Me.ucrInputFilePath.TabIndex = 1
         '
         'ucrInputDataName
         '
         Me.ucrInputDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputDataName.IsMultiline = False
         Me.ucrInputDataName.IsReadOnly = False
-        Me.ucrInputDataName.Location = New System.Drawing.Point(142, 45)
+        Me.ucrInputDataName.Location = New System.Drawing.Point(147, 45)
         Me.ucrInputDataName.Name = "ucrInputDataName"
         Me.ucrInputDataName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputDataName.TabIndex = 13
+        Me.ucrInputDataName.TabIndex = 4
         '
         'dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(434, 190)
+        Me.ClientSize = New System.Drawing.Size(434, 181)
         Me.Controls.Add(Me.ucrInputLocDataName)
         Me.Controls.Add(Me.lblLocationName)
         Me.Controls.Add(Me.ucrInputFilePath)
