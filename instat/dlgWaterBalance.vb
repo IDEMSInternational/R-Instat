@@ -62,6 +62,17 @@ Public Class dlgWaterBalance
         clsWaterFilter0.SetRCommand("instat_calculation$new")
         clsFirstWaterBalance60.SetRCommand("instat_calculation$new")
         clsFirstWaterBalance0.SetRCommand("instat_calculation$new")
+
+        ' for clarity when it runs
+        clsReplaceNA60.SetAssignTo("Replace_NA_60")
+        clsReplaceNA0.SetAssignTo("Replace_NA_0")
+        clsWaterBalance60.SetAssignTo("Water_Balance_60")
+        clsWaterBalance0.SetAssignTo("Water_Balance_0")
+        clsWaterFilter60.SetAssignTo("Water_Filter_60")
+        clsWaterFilter0.SetAssignTo("Water_Filter_0")
+        clsFirstWaterBalance60.SetAssignTo("First_Water_Balance_60")
+        clsFirstWaterBalance0.SetAssignTo("First_Water_Balance_0")
+
         clsWaterBalance60List.SetRCommand("list")
         clsWaterBalance0List.SetRCommand("list")
         clsWaterFilter60List.SetRCommand("list")
