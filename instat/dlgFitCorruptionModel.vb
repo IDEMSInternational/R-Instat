@@ -62,6 +62,7 @@ Public Class dlgFitCorruptionModel
         ucrReceiverOutput.SetParameterIsRFunction()
         ucrReceiverOutput.Selector = ucrSelectorFitModel
         ucrReceiverOutput.SetIncludedDataTypes({"integer", "numeric", "logical"})
+        ucrReceiverOutput.AddIncludedMetadataProperty("Is_Corruption_Output", {Chr(34) & "TRUE" & Chr(34)})
 
         ucrReceiverControlVariables.SetParameter(New RParameter("x", 2))
         ucrReceiverControlVariables.SetParameterIsString()
