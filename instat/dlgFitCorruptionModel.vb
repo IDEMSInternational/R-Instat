@@ -171,8 +171,7 @@ Public Class dlgFitCorruptionModel
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         'sdgSimpleRegOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
         'bResetSubdialog = False
-        LoadSubdialog()
-        sdgSimpleRegOptions.Show()
+        sdgSimpleRegOptions.ShowDialog()
     End Sub
 
     Private Sub LoadSubdialog()
