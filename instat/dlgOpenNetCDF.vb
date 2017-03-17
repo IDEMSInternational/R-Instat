@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Imports System.IO
+Imports instat
 
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
@@ -47,12 +48,12 @@ Public Class dlgOpenNetCDF
             InitialiseDialog()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
         If bStartOpenDialog Then
             GetFileFromOpenDialog()
             bStartOpenDialog = False
-        End If
-        If bReset Then
-            SetDefaults()
         End If
         SetRCodeForControls(bReset)
         bReset = False
@@ -115,11 +116,15 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub TestOkEnabled()
-        If bCanImport Then
+        If (ucrInputDataName.Text <> "" AndAlso ucrInputLocDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" AndAlso (Not ucrInputDataName.Text = ucrInputLocDataName.Text)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub ucrInputFilePath_Load(sender As Object, e As EventArgs) Handles ucrInputFilePath.Load
+
     End Sub
 
     'Loads the open dialog on load and click
@@ -164,6 +169,10 @@ Public Class dlgOpenNetCDF
 
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
         GetFileFromOpenDialog()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
