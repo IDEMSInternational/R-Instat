@@ -38,12 +38,12 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverRowFactor.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverColumnFactor.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkWeights.SetRCode(clsSjpXtab, bReset)
-        ucrChkWeights.SetRCode(clsSjtXtab, bReset)
-        ucrPnlFrequencies.SetRCode(clsSjpXtab, bReset)
 
+        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
         ucrChkFlip.SetRCode(clsSjpXtab, bReset)
+        ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkCell.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkColumn.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkCount.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -65,10 +65,6 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverWeights.SetDataType("numeric")
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
         ucrReceiverWeights.SetParameterIsRFunction()
-
-        'ucrPnlFrequencies.AddRadioButton(rdoRow)
-        'ucrPnlFrequencies.AddRadioButton(rdoColumn)
-        'ucrPnlFrequencies.AddRadioButton(rdoCell)
 
         ucrPnlFrequencies.SetParameter(New RParameter("margin", 3))
         ucrPnlFrequencies.AddRadioButton(rdoRow, Chr(34) & "row" & Chr(34))
@@ -104,16 +100,13 @@ Public Class dlgTwoWayFrequencies
 
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjPlot::sjt.xtab")
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.xtab")
-        ' ucrPnlFreqDisplay.bAllowNonConditionValues = False
-        'ucrPnlFrequencies.bAllowNonConditionValues = False
+
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoTable)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCell, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkRow.SetLinkedDisplayControl(grpFreq)
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFrequencies, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencies.SetLinkedDisplayControl(grpFrequencies)
 
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFrequencies, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
