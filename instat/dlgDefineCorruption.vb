@@ -198,15 +198,15 @@ Public Class dlgDefineCorruption
         AutoFillReceivers()
     End Sub
 
-    Private Sub cmdCountryLevel_Click(sender As Object, e As EventArgs) Handles cmdCountryLevel.Click
-        sdgCorruptionCountryLevelColumns.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
-        bResetSubdialog = False
-        sdgCorruptionCountryLevelColumns.ShowDialog()
-    End Sub
+    'Private Sub cmdCountryLevel_Click(sender As Object, e As EventArgs) Handles cmdCountryLevel.Click
+    '    sdgCorruptionCountryLevelColumns.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+    '    bResetSubdialog = False
+    '    sdgCorruptionCountryLevelColumns.ShowDialog()
+    'End Sub
 
-    Private Sub cmdCalculatedColumns_Click(sender As Object, e As EventArgs) Handles cmdCalculatedColumns.Click
-        sdgCorruptionCalculatedColumns.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
-        bResetSubdialog = False
-        sdgCorruptionCalculatedColumns.ShowDialog()
-    End Sub
+    'Private Sub cmdCalculatedColumns_Click(sender As Object, e As EventArgs) Handles cmdCalculatedColumns.Click
+    '    sdgCorruptionCalculatedColumns.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+    '    bResetSubdialog = False
+    '    sdgCorruptionCalculatedColumns.ShowDialog()
+    'End Sub
 End Class
