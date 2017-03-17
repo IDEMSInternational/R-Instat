@@ -46,9 +46,9 @@ Partial Class dlgOneWayFrequencies
         Me.grpSort.Controls.Add(Me.rdoAscending)
         Me.grpSort.Controls.Add(Me.rdoNone)
         Me.grpSort.Controls.Add(Me.ucrPnlSort)
-        Me.grpSort.Location = New System.Drawing.Point(267, 92)
+        Me.grpSort.Location = New System.Drawing.Point(270, 99)
         Me.grpSort.Name = "grpSort"
-        Me.grpSort.Size = New System.Drawing.Size(123, 91)
+        Me.grpSort.Size = New System.Drawing.Size(120, 91)
         Me.grpSort.TabIndex = 4
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
@@ -95,7 +95,7 @@ Partial Class dlgOneWayFrequencies
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(296, 198)
+        Me.cmdOptions.Location = New System.Drawing.Point(321, 203)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(69, 23)
         Me.cmdOptions.TabIndex = 9
@@ -114,7 +114,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 231)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(9, 231)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkFlip.TabIndex = 5
@@ -130,14 +130,14 @@ Partial Class dlgOneWayFrequencies
         'ucrChkTable
         '
         Me.ucrChkTable.Checked = False
-        Me.ucrChkTable.Location = New System.Drawing.Point(10, 256)
+        Me.ucrChkTable.Location = New System.Drawing.Point(9, 256)
         Me.ucrChkTable.Name = "ucrChkTable"
         Me.ucrChkTable.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkTable.TabIndex = 6
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 311)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 307)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -184,7 +184,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 371)
+        Me.ClientSize = New System.Drawing.Size(427, 367)
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.ucrChkFlip)
