@@ -52,6 +52,8 @@ Public Class dlgInventoryPlot
 
         ucrReceiverDate.Selector = ucrInventoryPlotSelector
         ucrReceiverDate.SetParameter(New RParameter("date_col"))
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.SetParameterIsString()
 
         ucrInventoryPlotSelector.SetParameter(New RParameter("data_name", 0))
@@ -62,7 +64,7 @@ Public Class dlgInventoryPlot
         ucrChkFlipCoordinates.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkTitle.SetText("Title:")
-        ucrInputTitle.SetParameter(New RParameter(""))
+        ucrInputTitle.SetParameter(New RParameter("graph_title"))
 
         ucrChkShowNonMissing.SetText("Show Non Missing")
         ucrChkShowNonMissing.SetParameter(New RParameter(""))
@@ -77,7 +79,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverDate.IsEmpty AndAlso ucrReceiverElements.IsEmpty AndAlso ucrSaveGraph.IsComplete) AndAlso (ucrChkTitle.Checked AndAlso ucrInputTitle.IsEmpty) Then
+        If (Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrSaveGraph.IsComplete) AndAlso (ucrChkTitle.Checked AndAlso Not ucrInputTitle.IsEmpty OrElse ucrChkTitle.Checked = False) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -89,6 +91,8 @@ Public Class dlgInventoryPlot
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverDate.SetMeAsReceiver()
+        ucrChkTitle.Checked = False
+        ucrInputTitle.Reset()
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
