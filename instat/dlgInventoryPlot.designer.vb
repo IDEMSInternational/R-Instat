@@ -24,19 +24,13 @@ Partial Class dlgInventoryPlot
     Private Sub InitializeComponent()
         Me.lblDayOfyear = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.lblElement = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.cmdInventoryPlotOptions = New System.Windows.Forms.Button()
-        Me.rdoMultipleStationsMultipleElements = New System.Windows.Forms.RadioButton()
-        Me.rdoMultipleStationsSingleElement = New System.Windows.Forms.RadioButton()
-        Me.rdoSingleStationMultipleElments = New System.Windows.Forms.RadioButton()
-        Me.rdoSingleStationSingleElement = New System.Windows.Forms.RadioButton()
+        Me.lblElement = New System.Windows.Forms.Label()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.ucrChkTitle = New instat.ucrCheck()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrpnlOptions = New instat.UcrPanel()
-        Me.ucrInputDate = New instat.ucrInputTextBox()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrChkShowNonMissing = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
@@ -49,223 +43,158 @@ Partial Class dlgInventoryPlot
         'lblDayOfyear
         '
         Me.lblDayOfyear.AutoSize = True
-        Me.lblDayOfyear.Location = New System.Drawing.Point(289, 152)
+        Me.lblDayOfyear.Location = New System.Drawing.Point(289, 88)
         Me.lblDayOfyear.Name = "lblDayOfyear"
         Me.lblDayOfyear.Size = New System.Drawing.Size(0, 13)
-        Me.lblDayOfyear.TabIndex = 19
+        Me.lblDayOfyear.TabIndex = 15
         '
         'cmdOptions
         '
         Me.cmdOptions.Enabled = False
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 269)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 205)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 23
+        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'lblElement
-        '
-        Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(260, 119)
-        Me.lblElement.Name = "lblElement"
-        Me.lblElement.Size = New System.Drawing.Size(50, 13)
-        Me.lblElement.TabIndex = 37
-        Me.lblElement.Text = "Elements"
         '
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(260, 75)
+        Me.lblDate.Location = New System.Drawing.Point(260, 45)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(30, 13)
-        Me.lblDate.TabIndex = 38
-        Me.lblDate.Text = "Date"
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.TabIndex = 1
+        Me.lblDate.Text = "Date:"
         '
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(260, 238)
+        Me.lblStation.Location = New System.Drawing.Point(261, 204)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(40, 13)
-        Me.lblStation.TabIndex = 16
-        Me.lblStation.Text = "Station"
+        Me.lblStation.Size = New System.Drawing.Size(88, 13)
+        Me.lblStation.TabIndex = 5
+        Me.lblStation.Text = "Station(Optional):"
         '
         'cmdInventoryPlotOptions
         '
-        Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 302)
+        Me.cmdInventoryPlotOptions.Enabled = False
+        Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 238)
         Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
         Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(124, 23)
-        Me.cmdInventoryPlotOptions.TabIndex = 40
+        Me.cmdInventoryPlotOptions.TabIndex = 8
         Me.cmdInventoryPlotOptions.Text = "Inventory Plot Options"
         Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
         '
-        'rdoMultipleStationsMultipleElements
+        'lblElement
         '
-        Me.rdoMultipleStationsMultipleElements.AutoSize = True
-        Me.rdoMultipleStationsMultipleElements.Location = New System.Drawing.Point(217, 41)
-        Me.rdoMultipleStationsMultipleElements.Name = "rdoMultipleStationsMultipleElements"
-        Me.rdoMultipleStationsMultipleElements.Size = New System.Drawing.Size(187, 17)
-        Me.rdoMultipleStationsMultipleElements.TabIndex = 42
-        Me.rdoMultipleStationsMultipleElements.TabStop = True
-        Me.rdoMultipleStationsMultipleElements.Text = "Multiple Stations Multiple Elements"
-        Me.rdoMultipleStationsMultipleElements.UseVisualStyleBackColor = True
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Location = New System.Drawing.Point(260, 86)
+        Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(59, 13)
+        Me.lblElement.TabIndex = 3
+        Me.lblElement.Text = "Element(s):"
         '
-        'rdoMultipleStationsSingleElement
+        'ucrReceiverDate
         '
-        Me.rdoMultipleStationsSingleElement.AutoSize = True
-        Me.rdoMultipleStationsSingleElement.Location = New System.Drawing.Point(217, 12)
-        Me.rdoMultipleStationsSingleElement.Name = "rdoMultipleStationsSingleElement"
-        Me.rdoMultipleStationsSingleElement.Size = New System.Drawing.Size(175, 17)
-        Me.rdoMultipleStationsSingleElement.TabIndex = 43
-        Me.rdoMultipleStationsSingleElement.TabStop = True
-        Me.rdoMultipleStationsSingleElement.Text = "Multiple Stations Single Element"
-        Me.rdoMultipleStationsSingleElement.UseVisualStyleBackColor = True
-        '
-        'rdoSingleStationMultipleElments
-        '
-        Me.rdoSingleStationMultipleElments.AutoSize = True
-        Me.rdoSingleStationMultipleElments.Location = New System.Drawing.Point(11, 41)
-        Me.rdoSingleStationMultipleElments.Name = "rdoSingleStationMultipleElments"
-        Me.rdoSingleStationMultipleElments.Size = New System.Drawing.Size(169, 17)
-        Me.rdoSingleStationMultipleElments.TabIndex = 44
-        Me.rdoSingleStationMultipleElments.TabStop = True
-        Me.rdoSingleStationMultipleElments.Text = "Single Station Multiple Elments"
-        Me.rdoSingleStationMultipleElments.UseVisualStyleBackColor = True
-        '
-        'rdoSingleStationSingleElement
-        '
-        Me.rdoSingleStationSingleElement.AutoSize = True
-        Me.rdoSingleStationSingleElement.Location = New System.Drawing.Point(11, 12)
-        Me.rdoSingleStationSingleElement.Name = "rdoSingleStationSingleElement"
-        Me.rdoSingleStationSingleElement.Size = New System.Drawing.Size(163, 17)
-        Me.rdoSingleStationSingleElement.TabIndex = 45
-        Me.rdoSingleStationSingleElement.TabStop = True
-        Me.rdoSingleStationSingleElement.Text = "Single Station Single Element"
-        Me.rdoSingleStationSingleElement.UseVisualStyleBackColor = True
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(263, 60)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.TabIndex = 2
         '
         'ucrInputTitle
         '
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(101, 334)
+        Me.ucrInputTitle.Location = New System.Drawing.Point(124, 295)
         Me.ucrInputTitle.Name = "ucrInputTitle"
-        Me.ucrInputTitle.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTitle.TabIndex = 48
+        Me.ucrInputTitle.Size = New System.Drawing.Size(259, 21)
+        Me.ucrInputTitle.TabIndex = 12
         '
         'ucrChkTitle
         '
         Me.ucrChkTitle.Checked = False
-        Me.ucrChkTitle.Location = New System.Drawing.Point(10, 336)
+        Me.ucrChkTitle.Location = New System.Drawing.Point(9, 297)
         Me.ucrChkTitle.Name = "ucrChkTitle"
         Me.ucrChkTitle.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkTitle.TabIndex = 47
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(260, 132)
-        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverElement.TabIndex = 46
-        '
-        'ucrpnlOptions
-        '
-        Me.ucrpnlOptions.Location = New System.Drawing.Point(10, 10)
-        Me.ucrpnlOptions.Name = "ucrpnlOptions"
-        Me.ucrpnlOptions.Size = New System.Drawing.Size(391, 58)
-        Me.ucrpnlOptions.TabIndex = 41
-        '
-        'ucrInputDate
-        '
-        Me.ucrInputDate.AddQuotesIfUnrecognised = True
-        Me.ucrInputDate.IsMultiline = False
-        Me.ucrInputDate.IsReadOnly = False
-        Me.ucrInputDate.Location = New System.Drawing.Point(260, 92)
-        Me.ucrInputDate.Name = "ucrInputDate"
-        Me.ucrInputDate.Size = New System.Drawing.Size(101, 21)
-        Me.ucrInputDate.TabIndex = 39
+        Me.ucrChkTitle.TabIndex = 11
         '
         'ucrReceiverElements
         '
         Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(260, 132)
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(263, 101)
         Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
         Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverElements.TabIndex = 36
+        Me.ucrReceiverElements.TabIndex = 4
         '
         'ucrChkShowNonMissing
         '
         Me.ucrChkShowNonMissing.Checked = False
-        Me.ucrChkShowNonMissing.Location = New System.Drawing.Point(260, 305)
+        Me.ucrChkShowNonMissing.Location = New System.Drawing.Point(263, 270)
         Me.ucrChkShowNonMissing.Name = "ucrChkShowNonMissing"
-        Me.ucrChkShowNonMissing.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkShowNonMissing.TabIndex = 34
+        Me.ucrChkShowNonMissing.Size = New System.Drawing.Size(151, 20)
+        Me.ucrChkShowNonMissing.TabIndex = 10
+        Me.ucrChkShowNonMissing.Visible = False
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 361)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 322)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(277, 24)
-        Me.ucrSaveGraph.TabIndex = 33
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(283, 24)
+        Me.ucrSaveGraph.TabIndex = 13
         '
         'ucrChkFlipCoordinates
         '
         Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(260, 282)
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(263, 244)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkFlipCoordinates.TabIndex = 32
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(151, 20)
+        Me.ucrChkFlipCoordinates.TabIndex = 9
         '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(260, 252)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(263, 218)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.TabIndex = 15
+        Me.ucrReceiverStation.TabIndex = 6
         '
         'ucrInventoryPlotSelector
         '
         Me.ucrInventoryPlotSelector.bShowHiddenColumns = False
         Me.ucrInventoryPlotSelector.bUseCurrentFilter = True
-        Me.ucrInventoryPlotSelector.Location = New System.Drawing.Point(11, 75)
+        Me.ucrInventoryPlotSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrInventoryPlotSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrInventoryPlotSelector.Name = "ucrInventoryPlotSelector"
         Me.ucrInventoryPlotSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrInventoryPlotSelector.TabIndex = 13
+        Me.ucrInventoryPlotSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 394)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 352)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 12
+        Me.ucrBase.TabIndex = 14
         '
         'dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 458)
+        Me.ClientSize = New System.Drawing.Size(417, 413)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrInputTitle)
         Me.Controls.Add(Me.ucrChkTitle)
-        Me.Controls.Add(Me.ucrReceiverElement)
-        Me.Controls.Add(Me.rdoMultipleStationsMultipleElements)
-        Me.Controls.Add(Me.rdoMultipleStationsSingleElement)
-        Me.Controls.Add(Me.rdoSingleStationMultipleElments)
-        Me.Controls.Add(Me.rdoSingleStationSingleElement)
-        Me.Controls.Add(Me.ucrpnlOptions)
         Me.Controls.Add(Me.cmdInventoryPlotOptions)
-        Me.Controls.Add(Me.ucrInputDate)
         Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.ucrChkShowNonMissing)
         Me.Controls.Add(Me.ucrSaveGraph)
@@ -294,19 +223,13 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrChkShowNonMissing As ucrCheck
-    Friend WithEvents ucrInputDate As ucrInputTextBox
     Friend WithEvents lblDate As Label
-    Friend WithEvents lblElement As Label
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents cmdInventoryPlotOptions As Button
-    Friend WithEvents ucrpnlOptions As UcrPanel
-    Friend WithEvents rdoMultipleStationsMultipleElements As RadioButton
-    Friend WithEvents rdoMultipleStationsSingleElement As RadioButton
-    Friend WithEvents rdoSingleStationMultipleElments As RadioButton
-    Friend WithEvents rdoSingleStationSingleElement As RadioButton
-    Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrInputTitle As ucrInputTextBox
     Friend WithEvents ucrChkTitle As ucrCheck
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents lblElement As Label
 End Class
