@@ -24,7 +24,7 @@ Public Class dlgOpenNetCDF
     'Private clsBaseNetCDF, clsRCDF As New RFunction
     'Dim bFirstLoad As Boolean
     Dim strFileType As String
-    Dim bCanImport As Boolean
+    'Dim bCanImport As Boolean
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
 
@@ -34,7 +34,7 @@ Public Class dlgOpenNetCDF
         'clsBaseNetCDF.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         'clsBaseNetCDF.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
         bFirstLoad = True
-        bCanImport = True
+        'bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
         ucrInputDataName.bAutoChangeOnLeave = True
@@ -91,7 +91,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 102
+        'ucrBase.iHelpTopicID = 
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
         'clsSummariesList = New RFunction
@@ -138,7 +138,7 @@ Public Class dlgOpenNetCDF
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
                 ucrInputDataName.SetName("")
-                ucrInputDataName.Reset()
+                'ucrInputDataName.Reset()
                 'checks if the file name is not blank'
                 If dlgOpen.FileName <> "" Then
                     strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
