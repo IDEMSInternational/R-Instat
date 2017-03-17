@@ -80,15 +80,15 @@ Public Class dlgTwoWayFrequencies
         ucrChkCount.SetParameter(New RParameter("show.obs"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkCount.SetRDefault("FALSE")
 
-        ucrChkRow.SetText("Row%")
+        ucrChkRow.SetText("Row (%)")
         ucrChkRow.SetParameter(New RParameter("show.row.prc"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetRDefault("FALSE")
 
-        ucrChkColumn.SetText("Column%")
+        ucrChkColumn.SetText("Column (%)")
         ucrChkColumn.SetParameter(New RParameter("show.col.prc"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkColumn.SetRDefault("FALSE")
 
-        ucrChkCell.SetText("Cell%")
+        ucrChkCell.SetText("Cell (%)")
         ucrChkCell.SetParameter(New RParameter("show.cell.prc"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkCell.SetRDefault("FALSE")
 
@@ -100,6 +100,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkFlip.SetRDefault("FALSE")
 
+        ucrChkTable.AddFunctionNamesCondition(True, "sjPlot::sjt.xtab")
         ucrChkTable.AddToLinkedControls(ucrChkCount, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         ucrChkTable.AddToLinkedControls(ucrChkRow, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTable.AddToLinkedControls(ucrChkCell, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -121,12 +122,10 @@ Public Class dlgTwoWayFrequencies
         clsSjtXtab.SetRCommand("sjPlot::sjt.xtab")
         clsSjtXtab.AddParameter("var.row", clsRFunctionParameter:=ucrReceiverRowFactor.GetVariables)
         clsSjtXtab.AddParameter("var.col", clsRFunctionParameter:=ucrReceiverColumnFactor.GetVariables)
-        ' clsSjtXtab.AddParameter("weight.by", clsRFunctionParameter:=ucrReceiverWeights.GetVariables)
         clsSjtXtab.AddParameter("show.obs", "TRUE")
         clsSjpXtab.SetRCommand("sjPlot::sjp.xtab")
         clsSjpXtab.AddParameter("x", clsRFunctionParameter:=ucrReceiverRowFactor.GetVariables)
         clsSjpXtab.AddParameter("grp", clsRFunctionParameter:=ucrReceiverColumnFactor.GetVariables)
-        'clsSjpXtab.AddParameter("weight.by", clsRFunctionParameter:=ucrReceiverWeights.GetVariables)
         clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
     End Sub
