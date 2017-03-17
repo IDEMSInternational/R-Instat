@@ -93,6 +93,8 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
+        ucrInputLocDataName.SetDefaultTypeAsDataFrame()
+        'ucrInputLocDataName.
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
         'clsSummariesList = New RFunction

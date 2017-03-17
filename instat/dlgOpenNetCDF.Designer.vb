@@ -34,7 +34,7 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(14, 116)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 116)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 7
@@ -42,7 +42,7 @@ Partial Class dlgOpenNetCDF
         'lblLocationName
         '
         Me.lblLocationName.AutoSize = True
-        Me.lblLocationName.Location = New System.Drawing.Point(14, 82)
+        Me.lblLocationName.Location = New System.Drawing.Point(10, 82)
         Me.lblLocationName.Name = "lblLocationName"
         Me.lblLocationName.Size = New System.Drawing.Size(134, 13)
         Me.lblLocationName.TabIndex = 5
@@ -62,7 +62,7 @@ Partial Class dlgOpenNetCDF
         'lblFileOpenPath
         '
         Me.lblFileOpenPath.AutoSize = True
-        Me.lblFileOpenPath.Location = New System.Drawing.Point(14, 18)
+        Me.lblFileOpenPath.Location = New System.Drawing.Point(10, 18)
         Me.lblFileOpenPath.Name = "lblFileOpenPath"
         Me.lblFileOpenPath.Size = New System.Drawing.Size(26, 13)
         Me.lblFileOpenPath.TabIndex = 0
@@ -71,7 +71,7 @@ Partial Class dlgOpenNetCDF
         'lblSSTName
         '
         Me.lblSSTName.AutoSize = True
-        Me.lblSSTName.Location = New System.Drawing.Point(14, 49)
+        Me.lblSSTName.Location = New System.Drawing.Point(10, 49)
         Me.lblSSTName.Name = "lblSSTName"
         Me.lblSSTName.Size = New System.Drawing.Size(114, 13)
         Me.lblSSTName.TabIndex = 3
