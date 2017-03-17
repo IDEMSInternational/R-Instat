@@ -2215,8 +2215,8 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
   }
-  self$append_to_variables_metadata(output_columns, corruption_red_flag_label, TRUE)
-  other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
+  self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
+  other_cols <- self$get_column_names()[!self$get_column_names() %in% red_flags]
   self$append_to_variables_metadata(other_cols, corruption_red_flag_label, FALSE)
 }
 )
