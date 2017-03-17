@@ -97,6 +97,8 @@ Public Class dlgWaterBalance
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverRainfall.bAutoFill = True
         ucrReceiverYear.bAutoFill = True
+
+        ucrInputEvaporation.SetValidationTypeAsNumeric()
     End Sub
 
     Private Sub SetDefaults()
