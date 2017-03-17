@@ -38,29 +38,28 @@ Public Class dlgFitCorruptionModel
         End If
         SetRCodeForControls(bReset)
         bReset = False
-
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
         'helpID
         '  ucrBase.iHelpTopicID =
         ucrInputModelPreview.IsReadOnly = True
-        clsModel.SetOperation("~")
-        clsModel1.SetOperation("+")
-        clsModel.AddParameter(clsROperatorParameter:=clsModel1)
-        clsModel1.bBrackets = False
 
-        clsCorruptionModel.AddParameter("family", clsRFunctionParameter:=clsBinomialModel)
         clsBinomialModel.SetRCommand("binomial")
         clsBinomialModel.AddParameter("link", Chr(34) & "logit" & Chr(34))
 
+        clsModel.SetOperation("~")
+        clsModel.AddParameter("input", clsROperatorParameter:=clsModel1, iPosition:=1)
+
         'Selector
         ucrSelectorFitModel.SetParameter(New RParameter("data", 0))
-        ucrSelectorFitModel.SetParameterIsString()
+        ucrSelectorFitModel.SetParameterIsrfunction()
 
         'Receivers
         ucrReceiverOutput.SetParameter(New RParameter("y", 1))
-        ucrReceiverOutput.SetParameterIsRFunction() ' i think isRfunction here
+        ucrReceiverOutput.SetParameterIsRFunction()
         ucrReceiverOutput.Selector = ucrSelectorFitModel
         ucrReceiverOutput.SetIncludedDataTypes({"integer", "numeric", "logical"})
 
@@ -83,6 +82,7 @@ Public Class dlgFitCorruptionModel
 
     Private Sub SetDefaults()
         clsCorruptionModel = New RFunction
+        ucrReceiverOutput.SetMeAsReceiver()
 
         'Reset 
         ucrSelectorFitModel.Reset()
@@ -95,6 +95,7 @@ Public Class dlgFitCorruptionModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorruptionModel)
         bResetSubdialog = True
         ChangeBaseFunction()
+        LoadSubdialog()
     End Sub
 
     Private Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -106,22 +107,21 @@ Public Class dlgFitCorruptionModel
     Private Sub SetDefaultColumn()
         ucrSelectorFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
         ucrReceiverControlVariables.Add(strSelectedColumn, strSelectedDataFrame)
+        ucrReceiverIndicators.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        '        ucrReceiverOutput.SetRCode(clsModel, bReset)
-        '        ucrReceiverIndicators.SetRCode(clsModel1, bReset)
-        '        ucrReceiverOutput.SetRCode(clsModel1, bReset)
+        'ucrReceiverOutput.SetRCode(clsModel, bReset)
+        'ucrReceiverControlVariables.SetRCode(clsModel1, bReset)
+        'ucrReceiverIndicators.SetRCode(clsModel1, bReset)
+        ucrSelectorFitModel.SetRCode(clsCorruptionModel, bReset)
+        ucrSaveCorruptionModel.SetRCode(clsCorruptionModel, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverOutput.IsEmpty AndAlso Not ucrReceiverIndicators.IsEmpty AndAlso Not ucrReceiverControlVariables.IsEmpty AndAlso ucrSaveCorruptionModel.IsComplete Then
+        If Not ucrReceiverOutput.IsEmpty AndAlso (Not ucrReceiverIndicators.IsEmpty OrElse Not ucrReceiverControlVariables.IsEmpty) AndAlso ucrSaveCorruptionModel.IsComplete Then
             ucrBase.OKEnabled(True)
-            ucrBase.clsRsyntax.RemoveParameter("formula")
-            ucrBase.clsRsyntax.clsBaseFunction.AddParameter("formula", clsROperatorParameter:=clsModel)
-            ucrInputModelPreview.SetName(clsModel.ToScript)
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -129,21 +129,31 @@ Public Class dlgFitCorruptionModel
 
     Private Sub ChangeBaseFunction()
         If ucrReceiverOutput.strCurrDataType = "numeric" OrElse ucrReceiverOutput.strCurrDataType = "integer" Then
-            ucrBase.clsRsyntax.SetFunction("lm")
+            clsCorruptionModel.SetRCommand("lm")
+            clsCorruptionModel.RemoveParameterByName("family")
         Else
-            ucrBase.clsRsyntax.SetFunction("glm")
+            clsCorruptionModel.SetRCommand("glm")
+            clsCorruptionModel.AddParameter("family", clsRFunctionParameter:=clsBinomialModel)
         End If
     End Sub
 
     Private Sub SetFormula()
-        If Not ucrReceiverOutput.IsEmpty AndAlso Not ucrReceiverIndicators.IsEmpty AndAlso Not ucrReceiverControlVariables.IsEmpty Then
-            ucrBase.clsRsyntax.RemoveParameter("formula")
-            clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverOutput.GetVariables())
-            clsModel.AddParameter(iPosition:=1, clsROperatorParameter:=clsModel1)
-            clsModel1.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverControlVariables.GetVariableNames(False))
-            clsModel1.AddParameter(iPosition:=1, strParameterValue:=ucrReceiverIndicators.GetVariableNames(False))
-            ' not sure about the right hand side of the formula
-            ucrBase.clsRsyntax.clsBaseFunction.AddParameter("formula", clsROperatorParameter:=clsModel)
+        Dim i As Integer = 0
+        If Not ucrReceiverOutput.IsEmpty AndAlso (Not ucrReceiverIndicators.IsEmpty OrElse Not ucrReceiverControlVariables.IsEmpty) Then
+            clsCorruptionModel.AddParameter("formula", clsROperatorParameter:=clsModel)
+
+            clsModel.AddParameter("output", ucrReceiverOutput.GetVariableNames(False), iPosition:=0)
+
+            clsModel1.SetOperation("+")
+            clsModel1.ClearParameters()
+            For Each strControlVar As String In ucrReceiverControlVariables.GetVariableNamesAsList
+                clsModel1.AddParameter(i, strControlVar, iPosition:=i)
+                i = i + 1
+            Next
+            For Each strIndicatorVar As String In ucrReceiverIndicators.GetVariableNamesAsList
+                clsModel1.AddParameter(i, strIndicatorVar, iPosition:=i)
+                i = i + 1
+            Next
             ucrInputModelPreview.SetName(clsModel.ToScript)
         End If
     End Sub
@@ -159,13 +169,28 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        '        sdgSimpleRegOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
-        bResetSubdialog = False
+        'sdgSimpleRegOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        'bResetSubdialog = False
+        LoadSubdialog()
         sdgSimpleRegOptions.Show()
+    End Sub
+
+    Private Sub LoadSubdialog()
+        sdgSimpleRegOptions.SetRModelFunction(clsCorruptionModel)
+        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFitModel.ucrAvailableDataFrames)
+        sdgSimpleRegOptions.SetRYVariable(ucrReceiverOutput)
+        sdgSimpleRegOptions.SetDefaults()
+        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
+        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
     End Sub
 
     Private Sub ucrReceiverOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOutput.ControlValueChanged, ucrReceiverControlVariables.ControlValueChanged, ucrReceiverIndicators.ControlValueChanged
         ChangeBaseFunction()
         SetFormula()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        sdgSimpleRegOptions.RegOptions()
     End Sub
 End Class
