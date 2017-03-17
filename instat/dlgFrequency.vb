@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgFrequency
     Private bFirstLoad As Boolean = True
@@ -30,13 +31,16 @@ Public Class dlgFrequency
         bReset = False
         TestOkEnabled()
     End Sub
-    Private Sub SetRCodeForControls()
+    Private Sub SetRCodeForControls(bReset As Boolean)
 
     End Sub
 
     Private Sub SetDefaults()
         ucrReceiverFactors.SetMeAsReceiver()
         ucrFactorsSelector.Reset()
+        TestOkEnabled()
+        cmdOptions.Enabled = False
+        ucrPnlDisplayType.Enabled = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -53,12 +57,32 @@ Public Class dlgFrequency
         ucrchkPercentagesOf.SetText("Percentages Of")
         ucrchkDisplay.SetText("How to Display")
         ucrchkMargins.SetText("Margins to Dispaly")
-        ucrchkWeights.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrchkPercentagesOf.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrchkWeights.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrchkPercentagesOf.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrchkDisplay.AddToLinkedControls(ucrPnlDisplayType, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudColumnFactors.SetMinMax(0, frmMain.clsRLink.GetDataFrameLength(ucrFactorsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
+        ucrNudDecimals.SetMinMax(0, 5)
+        ucrPnlDisplayType.AddRadioButton(rdoSeparateTables)
+        ucrPnlDisplayType.AddRadioButton(rdoVertically)
+        ucrPnlDisplayType.AddRadioButton(rdoHorizontally)
+
     End Sub
 
     Private Sub TestOkEnabled()
+        If Not ucrReceiverFactors.IsEmpty AndAlso (Not ucrchkWeights.Checked OrElse (ucrchkWeights.Checked AndAlso Not ucrSingleReceiver.IsEmpty)) AndAlso (ucrchkCounts.Checked OrElse ucrchkOverallPercentages.Checked OrElse (ucrchkPercentagesOf.Checked AndAlso Not ucrSingleReceiver.IsEmpty)) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
+    Private Sub ucrchkWeights_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingle.ControlContentsChanged, ucrReceiverFactors.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrchkWeights.ControlContentsChanged, ucrchkPercentagesOf.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 End Class

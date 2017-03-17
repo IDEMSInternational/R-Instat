@@ -40,13 +40,12 @@ Partial Class dlgFrequency
         Me.lblColumnFactors = New System.Windows.Forms.Label()
         Me.ucrchkCheckDisplayMargins = New instat.ucrCheck()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.ucrPnlDisplay = New instat.UcrPanel()
         Me.ucrPnlDisplayType = New instat.UcrPanel()
+        Me.ucrchkDisplay = New instat.ucrCheck()
+        Me.ucrchkMargins = New instat.ucrCheck()
         Me.rdoHorizontally = New System.Windows.Forms.RadioButton()
         Me.rdoVertically = New System.Windows.Forms.RadioButton()
         Me.rdoSeparateTables = New System.Windows.Forms.RadioButton()
-        Me.ucrchkDisplay = New instat.ucrCheck()
-        Me.ucrchkMargins = New instat.ucrCheck()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -228,27 +227,36 @@ Partial Class dlgFrequency
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'ucrPnlDisplay
-        '
-        Me.ucrPnlDisplay.Location = New System.Drawing.Point(240, 314)
-        Me.ucrPnlDisplay.Name = "ucrPnlDisplay"
-        Me.ucrPnlDisplay.Size = New System.Drawing.Size(114, 90)
-        Me.ucrPnlDisplay.TabIndex = 48
-        '
         'ucrPnlDisplayType
         '
-        Me.ucrPnlDisplayType.Location = New System.Drawing.Point(382, 314)
+        Me.ucrPnlDisplayType.Location = New System.Drawing.Point(377, 288)
         Me.ucrPnlDisplayType.Name = "ucrPnlDisplayType"
         Me.ucrPnlDisplayType.Size = New System.Drawing.Size(114, 90)
         Me.ucrPnlDisplayType.TabIndex = 52
         '
+        'ucrchkDisplay
+        '
+        Me.ucrchkDisplay.Checked = False
+        Me.ucrchkDisplay.Location = New System.Drawing.Point(240, 318)
+        Me.ucrchkDisplay.Name = "ucrchkDisplay"
+        Me.ucrchkDisplay.Size = New System.Drawing.Size(131, 20)
+        Me.ucrchkDisplay.TabIndex = 56
+        '
+        'ucrchkMargins
+        '
+        Me.ucrchkMargins.Checked = False
+        Me.ucrchkMargins.Location = New System.Drawing.Point(240, 344)
+        Me.ucrchkMargins.Name = "ucrchkMargins"
+        Me.ucrchkMargins.Size = New System.Drawing.Size(131, 20)
+        Me.ucrchkMargins.TabIndex = 57
+        '
         'rdoHorizontally
         '
         Me.rdoHorizontally.AutoSize = True
-        Me.rdoHorizontally.Location = New System.Drawing.Point(391, 366)
+        Me.rdoHorizontally.Location = New System.Drawing.Point(393, 349)
         Me.rdoHorizontally.Name = "rdoHorizontally"
         Me.rdoHorizontally.Size = New System.Drawing.Size(79, 17)
-        Me.rdoHorizontally.TabIndex = 55
+        Me.rdoHorizontally.TabIndex = 60
         Me.rdoHorizontally.TabStop = True
         Me.rdoHorizontally.Text = "Horizontally"
         Me.rdoHorizontally.UseVisualStyleBackColor = True
@@ -256,10 +264,10 @@ Partial Class dlgFrequency
         'rdoVertically
         '
         Me.rdoVertically.AutoSize = True
-        Me.rdoVertically.Location = New System.Drawing.Point(391, 342)
+        Me.rdoVertically.Location = New System.Drawing.Point(393, 325)
         Me.rdoVertically.Name = "rdoVertically"
         Me.rdoVertically.Size = New System.Drawing.Size(67, 17)
-        Me.rdoVertically.TabIndex = 54
+        Me.rdoVertically.TabIndex = 59
         Me.rdoVertically.TabStop = True
         Me.rdoVertically.Text = "Vertically"
         Me.rdoVertically.UseVisualStyleBackColor = True
@@ -267,42 +275,25 @@ Partial Class dlgFrequency
         'rdoSeparateTables
         '
         Me.rdoSeparateTables.AutoSize = True
-        Me.rdoSeparateTables.Location = New System.Drawing.Point(391, 318)
+        Me.rdoSeparateTables.Location = New System.Drawing.Point(393, 301)
         Me.rdoSeparateTables.Name = "rdoSeparateTables"
         Me.rdoSeparateTables.Size = New System.Drawing.Size(103, 17)
-        Me.rdoSeparateTables.TabIndex = 53
+        Me.rdoSeparateTables.TabIndex = 58
         Me.rdoSeparateTables.TabStop = True
         Me.rdoSeparateTables.Text = "Separate Tables"
         Me.rdoSeparateTables.UseVisualStyleBackColor = True
-        '
-        'ucrchkDisplay
-        '
-        Me.ucrchkDisplay.Checked = False
-        Me.ucrchkDisplay.Location = New System.Drawing.Point(245, 324)
-        Me.ucrchkDisplay.Name = "ucrchkDisplay"
-        Me.ucrchkDisplay.Size = New System.Drawing.Size(104, 20)
-        Me.ucrchkDisplay.TabIndex = 56
-        '
-        'ucrchkMargins
-        '
-        Me.ucrchkMargins.Checked = False
-        Me.ucrchkMargins.Location = New System.Drawing.Point(245, 350)
-        Me.ucrchkMargins.Name = "ucrchkMargins"
-        Me.ucrchkMargins.Size = New System.Drawing.Size(104, 20)
-        Me.ucrchkMargins.TabIndex = 57
         '
         'dlgFrequency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(524, 478)
-        Me.Controls.Add(Me.ucrchkMargins)
-        Me.Controls.Add(Me.ucrchkDisplay)
+        Me.ClientSize = New System.Drawing.Size(525, 478)
         Me.Controls.Add(Me.rdoHorizontally)
         Me.Controls.Add(Me.rdoVertically)
         Me.Controls.Add(Me.rdoSeparateTables)
+        Me.Controls.Add(Me.ucrchkMargins)
+        Me.Controls.Add(Me.ucrchkDisplay)
         Me.Controls.Add(Me.ucrPnlDisplayType)
-        Me.Controls.Add(Me.ucrPnlDisplay)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.ucrReceiverSingle)
@@ -345,7 +336,6 @@ Partial Class dlgFrequency
     Friend WithEvents ucrchkCheckDisplayMargins As ucrCheck
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrPnlDisplayType As UcrPanel
-    Friend WithEvents ucrPnlDisplay As UcrPanel
     Friend WithEvents ucrchkMargins As ucrCheck
     Friend WithEvents ucrchkDisplay As ucrCheck
     Friend WithEvents rdoHorizontally As RadioButton
