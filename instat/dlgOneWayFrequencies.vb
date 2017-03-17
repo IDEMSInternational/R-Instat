@@ -81,10 +81,6 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameter(New RParameter("coord.flip"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkFlip.SetRDefault("FALSE")
-
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlSort, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSort.SetLinkedDisplayControl(grpSort)
-
     End Sub
 
     Private Sub SetDefaults()
