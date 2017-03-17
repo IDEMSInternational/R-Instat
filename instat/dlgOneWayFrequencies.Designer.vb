@@ -38,6 +38,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFreqDisplay = New instat.UcrPanel()
+        Me.ucrSave = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -122,7 +123,7 @@ Partial Class dlgOneWayFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 307)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -194,11 +195,19 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(91, 49)
         Me.ucrPnlFreqDisplay.TabIndex = 4
         '
+        'ucrSave
+        '
+        Me.ucrSave.Location = New System.Drawing.Point(9, 302)
+        Me.ucrSave.Name = "ucrSave"
+        Me.ucrSave.Size = New System.Drawing.Size(303, 24)
+        Me.ucrSave.TabIndex = 13
+        '
         'dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 367)
+        Me.ClientSize = New System.Drawing.Size(427, 387)
+        Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.rdoTable)
@@ -240,4 +249,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents rdoGraph As RadioButton
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents ucrPnlFreqDisplay As UcrPanel
+    Friend WithEvents ucrSave As ucrSave
 End Class
