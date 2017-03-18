@@ -16,10 +16,10 @@
 Imports instat.Translations
 
 Public Class dlgSpells
-    Public clsAddKey, clsDayFromAndTo, clsAdditionalCondition, clsRainyDays, clsMaxValue, clsYearGroupDaily, clsMaxValueManipulation As New RFunction
+    Private clsAddKey, clsDayFromAndTo, clsAdditionalCondition, clsRainyDays, clsMaxValue, clsYearGroupDaily, clsMaxValueManipulation As New RFunction
     Private clsMaxValueList, clsSpellLength, clsSubSpellLength1, clsSubSpellLength2, clsAdditionalConditionList As New RFunction
     Private strCurrDataName As String = ""
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
 
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -261,7 +261,7 @@ Public Class dlgSpells
         TestOKEnabled()
     End Sub
 
-    Private Sub conditionnuds_valuechanged(sender As Object, e As EventArgs) Handles NudConditionRight.TextChanged, nudConditionLeft.TextChanged
+    Private Sub ConditionalRainNuds_valuechanged(sender As Object, e As EventArgs) Handles NudConditionRight.TextChanged, nudConditionLeft.TextChanged
         RainyDaysMethod()
         TestOKEnabled()
     End Sub
