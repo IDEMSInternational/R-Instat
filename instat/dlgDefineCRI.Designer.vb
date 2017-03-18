@@ -42,7 +42,7 @@ Partial Class dlgDefineCRI
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(552, 158)
+        Me.cmdEdit.Location = New System.Drawing.Point(533, 158)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(58, 23)
         Me.cmdEdit.TabIndex = 4
@@ -51,7 +51,7 @@ Partial Class dlgDefineCRI
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(616, 158)
+        Me.cmdDelete.Location = New System.Drawing.Point(597, 158)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(58, 23)
         Me.cmdDelete.TabIndex = 5
@@ -60,7 +60,7 @@ Partial Class dlgDefineCRI
         '
         'cmdAddComponent
         '
-        Me.cmdAddComponent.Location = New System.Drawing.Point(414, 261)
+        Me.cmdAddComponent.Location = New System.Drawing.Point(396, 92)
         Me.cmdAddComponent.Name = "cmdAddComponent"
         Me.cmdAddComponent.Size = New System.Drawing.Size(133, 23)
         Me.cmdAddComponent.TabIndex = 6
@@ -88,7 +88,7 @@ Partial Class dlgDefineCRI
         'lblIndexComponentsList
         '
         Me.lblIndexComponentsList.AutoSize = True
-        Me.lblIndexComponentsList.Location = New System.Drawing.Point(554, 42)
+        Me.lblIndexComponentsList.Location = New System.Drawing.Point(535, 42)
         Me.lblIndexComponentsList.Name = "lblIndexComponentsList"
         Me.lblIndexComponentsList.Size = New System.Drawing.Size(98, 13)
         Me.lblIndexComponentsList.TabIndex = 9
@@ -96,7 +96,8 @@ Partial Class dlgDefineCRI
         '
         'lstIndexComponents
         '
-        Me.lstIndexComponents.Location = New System.Drawing.Point(553, 59)
+        Me.lstIndexComponents.FullRowSelect = True
+        Me.lstIndexComponents.Location = New System.Drawing.Point(534, 59)
         Me.lstIndexComponents.Name = "lstIndexComponents"
         Me.lstIndexComponents.Size = New System.Drawing.Size(122, 93)
         Me.lstIndexComponents.TabIndex = 14
@@ -126,7 +127,7 @@ Partial Class dlgDefineCRI
         Me.ucrInputCRIPreview.IsReadOnly = False
         Me.ucrInputCRIPreview.Location = New System.Drawing.Point(92, 292)
         Me.ucrInputCRIPreview.Name = "ucrInputCRIPreview"
-        Me.ucrInputCRIPreview.Size = New System.Drawing.Size(316, 21)
+        Me.ucrInputCRIPreview.Size = New System.Drawing.Size(437, 21)
         Me.ucrInputCRIPreview.TabIndex = 16
         '
         'ucrNudWeights
@@ -149,7 +150,7 @@ Partial Class dlgDefineCRI
         Me.ucrGridWeights.Location = New System.Drawing.Point(239, 114)
         Me.ucrGridWeights.Name = "ucrGridWeights"
         Me.ucrGridWeights.shtCurrSheet = Nothing
-        Me.ucrGridWeights.Size = New System.Drawing.Size(308, 141)
+        Me.ucrGridWeights.Size = New System.Drawing.Size(290, 141)
         Me.ucrGridWeights.TabIndex = 12
         '
         'ucrReceiverRedFlag
@@ -182,7 +183,7 @@ Partial Class dlgDefineCRI
         'ucrChkScaleNumeric
         '
         Me.ucrChkScaleNumeric.Checked = False
-        Me.ucrChkScaleNumeric.Location = New System.Drawing.Point(553, 187)
+        Me.ucrChkScaleNumeric.Location = New System.Drawing.Point(535, 187)
         Me.ucrChkScaleNumeric.Name = "ucrChkScaleNumeric"
         Me.ucrChkScaleNumeric.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkScaleNumeric.TabIndex = 1
