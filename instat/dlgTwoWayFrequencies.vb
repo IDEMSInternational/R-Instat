@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgTwoWayFrequencies
     Private bFirstLoad As Boolean = True
@@ -43,10 +44,10 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrChkFlip.SetRCode(clsSjpXtab, bReset)
-        ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkCell.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkColumn.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkRow.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkWeights.SetRCode(clsSjtXtab, bReset)
+        ucrChkCell.SetRCode(clsSjtXtab, bReset)
+        ucrChkColumn.SetRCode(clsSjtXtab, bReset)
+        ucrChkRow.SetRCode(clsSjtXtab, bReset)
 
     End Sub
 
@@ -113,13 +114,15 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 1))
         ucrReceiverColumnFactor.SetParameterIsRFunction()
         clsSjtXtab.SetRCommand("sjPlot::sjt.xtab")
-        clsSjtXtab.AddParameter("var.row", clsRFunctionParameter:=ucrReceiverRowFactor.GetVariables)
-        clsSjtXtab.AddParameter("var.col", clsRFunctionParameter:=ucrReceiverColumnFactor.GetVariables)
-        clsSjtXtab.AddParameter("show.obs", "TRUE")
         clsSjpXtab.SetRCommand("sjPlot::sjp.xtab")
-        clsSjpXtab.AddParameter("x", clsRFunctionParameter:=ucrReceiverRowFactor.GetVariables)
-        clsSjpXtab.AddParameter("grp", clsRFunctionParameter:=ucrReceiverColumnFactor.GetVariables)
         clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
+
+        clsSjtXtab.AddParameter("show.col.prc", "FALSE")
+        clsSjtXtab.AddParameter("show.cell.prc", "FALSE")
+        clsSjtXtab.AddParameter("show.row.prc", "FALSE")
+
+
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
     End Sub
 
@@ -175,4 +178,11 @@ Public Class dlgTwoWayFrequencies
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
+        If ucrChkWeights.Checked Then
+            ucrReceiverWeights.SetMeAsReceiver()
+        Else
+            ucrReceiverRowFactor.SetMeAsReceiver()
+        End If
+    End Sub
 End Class
