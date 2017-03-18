@@ -371,6 +371,12 @@
     <Compile Include="dlgOneVarUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOpenNetCDF.Designer.vb">
+      <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOpenNetCDF.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOpenSST.Designer.vb">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
     </Compile>
@@ -2515,6 +2521,9 @@
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOpenNetCDF.resx">
+      <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenSST.fr-FR.resx">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
     </EmbeddedResource>
@@ -2697,6 +2706,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDataFrameMetadata.sw-KE.resx">
       <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSpells.resx">
+      <DependentUpon>dlgSpells.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSplitText.fr-FR.resx">
       <DependentUpon>dlgSplitText.vb</DependentUpon>
