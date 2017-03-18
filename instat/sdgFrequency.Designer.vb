@@ -111,7 +111,7 @@ Partial Class sdgFrequency
         Me.MinimizeBox = False
         Me.Name = "sdgFrequency"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "sdgFrequency"
+        Me.Text = "Frequency"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
