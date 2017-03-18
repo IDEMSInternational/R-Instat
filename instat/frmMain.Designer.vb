@@ -490,7 +490,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeOneVariableFrequencies.Name = "mnuDescribeOneVariableFrequencies"
         Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(142, 22)
-        Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies"
+        Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies..."
         '
         'mnuDescribeTwoVariables
         '
@@ -3256,6 +3256,7 @@ Partial Class frmMain
         '
         'CountryNamesCorrectionsToolStripMenuItem
         '
+        Me.CountryNamesCorrectionsToolStripMenuItem.Enabled = False
         Me.CountryNamesCorrectionsToolStripMenuItem.Name = "CountryNamesCorrectionsToolStripMenuItem"
         Me.CountryNamesCorrectionsToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
         Me.CountryNamesCorrectionsToolStripMenuItem.Text = "Country Names Corrections..."
