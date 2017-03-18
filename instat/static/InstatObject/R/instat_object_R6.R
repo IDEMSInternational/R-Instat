@@ -1195,7 +1195,7 @@ instat_object$set("public", "merge_data", function(data_name, new_data, by = NUL
 instat_object$set("public", "get_corruption_data_names", function() {
   corruption_names <- c()
   for(curr_name in self$get_data_names()) {
-    if(self$get_data_objects(curr_name)$is_metadata(is_corruption_label) && self$get_data_objects(curr_name)$get_metadata(is_corruption_label)) {
+    if(self$get_data_objects(curr_name)$is_metadata(corruption_data_label) && self$get_data_objects(curr_name)$get_metadata(corruption_data_label)) {
       corruption_names <- c(corruption_names, curr_name)
     }
   }
