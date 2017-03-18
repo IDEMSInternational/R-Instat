@@ -2707,6 +2707,9 @@
     <EmbeddedResource Include="dlgDataFrameMetadata.sw-KE.resx">
       <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSpells.resx">
+      <DependentUpon>dlgSpells.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSplitText.fr-FR.resx">
       <DependentUpon>dlgSplitText.vb</DependentUpon>
     </EmbeddedResource>
