@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 Public Class dlgDefineCRI
     Private bFirstLoad As Boolean = True
@@ -62,8 +61,8 @@ Public Class dlgDefineCRI
         ucrReceiverRedFlag.Selector = ucrSelectorCRI
         ucrReceiverRedFlag.SetMeAsReceiver()
         ucrReceiverRedFlag.SetIncludedDataTypes({"numeric", "logical", "factor"})
-        'ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Output", {"TRUE"})
-        'ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Red_Flag", {"TRUE"})
+        ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Output", {"TRUE"})
+        ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Red_Flag", {"TRUE"})
 
         'ucrChk
         ucrChkScaleNumeric.SetText("Scale Numeric")
