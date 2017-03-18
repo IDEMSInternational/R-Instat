@@ -44,7 +44,7 @@ Partial Class dlgOpenNetCDF
         '
         'cmdOpenDataSet
         '
-        Me.cmdOpenDataSet.Location = New System.Drawing.Point(225, 18)
+        Me.cmdOpenDataSet.Location = New System.Drawing.Point(226, 18)
         Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
         Me.cmdOpenDataSet.Size = New System.Drawing.Size(66, 23)
         Me.cmdOpenDataSet.TabIndex = 2
@@ -76,7 +76,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputLocDataName.IsMultiline = False
         Me.ucrInputLocDataName.IsReadOnly = False
-        Me.ucrInputLocDataName.Location = New System.Drawing.Point(152, 82)
+        Me.ucrInputLocDataName.Location = New System.Drawing.Point(150, 82)
         Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
         Me.ucrInputLocDataName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputLocDataName.TabIndex = 6
@@ -96,7 +96,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputDataName.IsMultiline = False
         Me.ucrInputDataName.IsReadOnly = False
-        Me.ucrInputDataName.Location = New System.Drawing.Point(134, 49)
+        Me.ucrInputDataName.Location = New System.Drawing.Point(150, 49)
         Me.ucrInputDataName.Name = "ucrInputDataName"
         Me.ucrInputDataName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputDataName.TabIndex = 4
