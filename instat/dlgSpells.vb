@@ -227,7 +227,7 @@ Public Class dlgSpells
         MaxValue()
     End Sub
 
-    Private Sub nudToAndFrom_ControlValueChanged(sender As Object, e As EventArgs) Handles nudTo.ValueChanged, nudFrom.ValueChanged
+    Private Sub nudToAndFrom_ControlValueChanged(sender As Object, e As EventArgs) Handles nudTo.TextChanged, nudFrom.TextChanged
         nudValues()
         DayFromAndToMethod()
         RainyDaysMethod()
@@ -261,7 +261,7 @@ Public Class dlgSpells
         TestOKEnabled()
     End Sub
 
-    Private Sub conditionnuds_valuechanged(sender As Object, e As EventArgs) Handles NudConditionRight.ValueChanged, nudConditionLeft.ValueChanged
+    Private Sub conditionnuds_valuechanged(sender As Object, e As EventArgs) Handles NudConditionRight.TextChanged, nudConditionLeft.TextChanged
         RainyDaysMethod()
         TestOKEnabled()
     End Sub
