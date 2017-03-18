@@ -54,9 +54,7 @@ Public Class dlgTwoWayFrequencies
     Private Sub InitialiseDialog()
         'HelpID
         ' ucrBase.iHelpTopicID = 
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
-
+        ' ICallType()
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
@@ -121,24 +119,35 @@ Public Class dlgTwoWayFrequencies
         clsSjtXtab.AddParameter("show.cell.prc", "FALSE")
         clsSjtXtab.AddParameter("show.row.prc", "FALSE")
 
-
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
     End Sub
 
+    Public Sub ICallType()
+        If rdoTable.Checked Then
+            'temporary
+            ucrBase.clsRsyntax.bHTMLOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
+        ElseIf rdoGraph.Checked
+            ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.iCallType = 3
+        End If
+    End Sub
+
     Private Sub TestOkEnabled()
-        If Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty Then
-            If ucrChkWeights.Checked Then
+        If Not ucrReceiverColumnFactor.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() Then
+            If Not ucrChkWeights.Checked Then
+                ucrBase.OKEnabled(True)
+            Else
                 If Not ucrReceiverWeights.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
             End If
-            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+
     End Sub
 
     Private Sub ChangeBaseFunction()
@@ -164,14 +173,9 @@ Public Class dlgTwoWayFrequencies
         TestOkEnabled()
     End Sub
 
-    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-    '    If ucrChkTable.Checked Then
-    '        frmMain.clsRLink.RunScript(clsSjtFreq.ToScript(), iCallType:=2)
-    '    End If
-    'End Sub
-
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqDisplay.ControlValueChanged
         ChangeBaseFunction()
+        ICallType()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged
