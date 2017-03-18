@@ -42,7 +42,7 @@ Public Class dlgFrequency
         TestOkEnabled()
         ucrchkCounts.Checked = True
         ucrchkCheckDisplayMargins.Checked = True
-        cmdOptions.Enabled = False
+        ' cmdOptions.Enabled = False
         ucrNudColumnFactors.Value = 1
         ucrNudDecimals.Value = 0
     End Sub
@@ -60,11 +60,20 @@ Public Class dlgFrequency
         ucrchkOverallPercentages.SetText("Overall Percentages")
         ucrchkPercentagesOf.SetText("Percentages Of")
 
-        ucrchkWeights.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrchkWeights.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrchkPercentagesOf.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudColumnFactors.SetMinMax(0, frmMain.clsRLink.GetDataFrameLength(ucrFactorsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
         ucrNudDecimals.SetMinMax(0, 5)
 
+    End Sub
+    Private Sub UpdateReceiver()
+        If ucrchkWeights.Checked Then
+            ucrReceiverSingle.SetMeAsReceiver()
+        ElseIf ucrchkPercentagesOf.Checked Then
+            ucrSingleReceiver.SetMeAsReceiver()
+        Else
+            ucrReceiverFactors.SetMeAsReceiver()
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -88,5 +97,9 @@ Public Class dlgFrequency
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgFrequency.ShowDialog()
+    End Sub
+
+    Private Sub ucrchkOverallPercentages_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrchkWeights.ControlValueChanged, ucrchkPercentagesOf.ControlValueChanged
+        UpdateReceiver()
     End Sub
 End Class
