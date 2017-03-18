@@ -1203,6 +1203,17 @@ instat_object$set("public", "get_corruption_data_names", function() {
 }
 )
 
+instat_object$set("public", "get_corruption_contract_data_names", function() {
+  corruption_names <- c()
+  for(curr_name in self$get_data_names()) {
+    if(self$get_data_objects(curr_name)$is_metadata(corruption_data_label) && self$get_data_objects(curr_name)$get_metadata(corruption_data_label) == corruption_contract_level_label) {
+      corruption_names <- c(corruption_names, curr_name)
+    }
+  }
+  return(corruption_names)
+}
+)
+
 instat_object$set("public", "get_database_variable_names", function(query, data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(self$has_database_connection) {
     temp_data <- dbGetQuery(self$get_database_connection(), query)
