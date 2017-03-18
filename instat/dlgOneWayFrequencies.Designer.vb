@@ -29,16 +29,16 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
+        Me.rdoGraph = New System.Windows.Forms.RadioButton()
+        Me.rdoTable = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
+        Me.ucrPnlFreqDisplay = New instat.UcrPanel()
+        Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkWeights = New instat.ucrCheck()
-        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
-        Me.rdoGraph = New System.Windows.Forms.RadioButton()
-        Me.rdoTable = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlFreqDisplay = New instat.UcrPanel()
-        Me.ucrSave = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -51,7 +51,7 @@ Partial Class dlgOneWayFrequencies
         Me.grpSort.Location = New System.Drawing.Point(270, 99)
         Me.grpSort.Name = "grpSort"
         Me.grpSort.Size = New System.Drawing.Size(120, 91)
-        Me.grpSort.TabIndex = 4
+        Me.grpSort.TabIndex = 3
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
         '
@@ -100,7 +100,7 @@ Partial Class dlgOneWayFrequencies
         Me.cmdOptions.Location = New System.Drawing.Point(321, 203)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(69, 23)
-        Me.cmdOptions.TabIndex = 9
+        Me.cmdOptions.TabIndex = 6
         Me.cmdOptions.Text = " Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
@@ -110,8 +110,62 @@ Partial Class dlgOneWayFrequencies
         Me.lblSelectedVariable.Location = New System.Drawing.Point(267, 43)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
-        Me.lblSelectedVariable.TabIndex = 2
+        Me.lblSelectedVariable.TabIndex = 1
         Me.lblSelectedVariable.Text = "Selected Variable:"
+        '
+        'rdoGraph
+        '
+        Me.rdoGraph.AutoSize = True
+        Me.rdoGraph.Location = New System.Drawing.Point(9, 279)
+        Me.rdoGraph.Name = "rdoGraph"
+        Me.rdoGraph.Size = New System.Drawing.Size(54, 17)
+        Me.rdoGraph.TabIndex = 9
+        Me.rdoGraph.TabStop = True
+        Me.rdoGraph.Text = "Graph"
+        Me.rdoGraph.UseVisualStyleBackColor = True
+        '
+        'rdoTable
+        '
+        Me.rdoTable.AutoSize = True
+        Me.rdoTable.Location = New System.Drawing.Point(9, 257)
+        Me.rdoTable.Name = "rdoTable"
+        Me.rdoTable.Size = New System.Drawing.Size(52, 17)
+        Me.rdoTable.TabIndex = 8
+        Me.rdoTable.TabStop = True
+        Me.rdoTable.Text = "Table"
+        Me.rdoTable.UseVisualStyleBackColor = True
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 302)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(284, 24)
+        Me.ucrSaveGraph.TabIndex = 10
+        '
+        'ucrReceiverWeights
+        '
+        Me.ucrReceiverWeights.frmParent = Me
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(119, 205)
+        Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
+        Me.ucrReceiverWeights.Selector = Nothing
+        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWeights.TabIndex = 5
+        '
+        'ucrPnlFreqDisplay
+        '
+        Me.ucrPnlFreqDisplay.Location = New System.Drawing.Point(2, 252)
+        Me.ucrPnlFreqDisplay.Name = "ucrPnlFreqDisplay"
+        Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(91, 49)
+        Me.ucrPnlFreqDisplay.TabIndex = 4
+        '
+        'ucrChkWeights
+        '
+        Me.ucrChkWeights.Checked = False
+        Me.ucrChkWeights.Location = New System.Drawing.Point(9, 205)
+        Me.ucrChkWeights.Name = "ucrChkWeights"
+        Me.ucrChkWeights.Size = New System.Drawing.Size(129, 20)
+        Me.ucrChkWeights.TabIndex = 4
         '
         'ucrChkFlip
         '
@@ -119,14 +173,14 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkFlip.Location = New System.Drawing.Point(9, 231)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkFlip.TabIndex = 5
+        Me.ucrChkFlip.TabIndex = 7
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 329)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 11
         '
         'ucrReceiverOneWayFreq
         '
@@ -136,7 +190,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverOneWayFreq.Name = "ucrReceiverOneWayFreq"
         Me.ucrReceiverOneWayFreq.Selector = Nothing
         Me.ucrReceiverOneWayFreq.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverOneWayFreq.TabIndex = 3
+        Me.ucrReceiverOneWayFreq.TabIndex = 2
         '
         'ucrSelectorOneWayFreq
         '
@@ -148,66 +202,12 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSelectorOneWayFreq.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorOneWayFreq.TabIndex = 0
         '
-        'ucrChkWeights
-        '
-        Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(9, 205)
-        Me.ucrChkWeights.Name = "ucrChkWeights"
-        Me.ucrChkWeights.Size = New System.Drawing.Size(129, 20)
-        Me.ucrChkWeights.TabIndex = 11
-        '
-        'ucrReceiverWeights
-        '
-        Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(123, 205)
-        Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
-        Me.ucrReceiverWeights.Selector = Nothing
-        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWeights.TabIndex = 12
-        '
-        'rdoGraph
-        '
-        Me.rdoGraph.AutoSize = True
-        Me.rdoGraph.Location = New System.Drawing.Point(9, 279)
-        Me.rdoGraph.Name = "rdoGraph"
-        Me.rdoGraph.Size = New System.Drawing.Size(54, 17)
-        Me.rdoGraph.TabIndex = 5
-        Me.rdoGraph.TabStop = True
-        Me.rdoGraph.Text = "Graph"
-        Me.rdoGraph.UseVisualStyleBackColor = True
-        '
-        'rdoTable
-        '
-        Me.rdoTable.AutoSize = True
-        Me.rdoTable.Location = New System.Drawing.Point(9, 257)
-        Me.rdoTable.Name = "rdoTable"
-        Me.rdoTable.Size = New System.Drawing.Size(52, 17)
-        Me.rdoTable.TabIndex = 3
-        Me.rdoTable.TabStop = True
-        Me.rdoTable.Text = "Table"
-        Me.rdoTable.UseVisualStyleBackColor = True
-        '
-        'ucrPnlFreqDisplay
-        '
-        Me.ucrPnlFreqDisplay.Location = New System.Drawing.Point(2, 252)
-        Me.ucrPnlFreqDisplay.Name = "ucrPnlFreqDisplay"
-        Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(91, 49)
-        Me.ucrPnlFreqDisplay.TabIndex = 4
-        '
-        'ucrSave
-        '
-        Me.ucrSave.Location = New System.Drawing.Point(9, 302)
-        Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(303, 24)
-        Me.ucrSave.TabIndex = 13
-        '
         'dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(427, 387)
-        Me.Controls.Add(Me.ucrSave)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.rdoTable)
@@ -249,5 +249,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents rdoGraph As RadioButton
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents ucrPnlFreqDisplay As UcrPanel
-    Friend WithEvents ucrSave As ucrSave
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
