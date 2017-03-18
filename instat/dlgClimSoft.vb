@@ -59,11 +59,15 @@ Public Class dlgClimSoft
         ucrChkObservationData.SetText("Observation Data")
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
         ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkObservationData.SetRDefault("FALSE")
 
         ucrInputStartDate.SetParameter(New RParameter("start_date", 3))
+        ucrInputStartDate.SetLinkedDisplayControl(lblStartDate)
         ttClimsoft.SetToolTip(ucrInputStartDate.txtInput, "yyyy-mm-dd")
         ucrInputEndDate.SetParameter(New RParameter("end_date", 4))
+        ucrInputEndDate.SetLinkedDisplayControl(lblEndDate)
         ttClimsoft.SetToolTip(ucrInputEndDate.txtInput, "yyyy-mm-dd")
+        ucrChkObservationData.AddToLinkedControls({ucrInputStartDate, ucrInputEndDate}, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -83,15 +87,17 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub SetDefaults()
+        clsRImportFromClimsoft = New RFunction
         ucrSelectorForClimSoft.Reset()
         ucrReceiverMultipleStations.SetMeAsReceiver()
         ucrInputStartDate.SetText("")
         ucrInputEndDate.SetText("")
+
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
         clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
         clsHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
-
+        ucrBase.clsRsyntax.AddParameter("include_observation_data", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
         bResetSubdialog = True
     End Sub

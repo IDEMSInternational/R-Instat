@@ -1253,13 +1253,13 @@ instat_object$set("public", "database_disconnect", function() {
 }
 )
 
-instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date, end_date) {
+instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = "", end_date = "") {
   #need to perform checks here
   con = self$get_database_connection()
   my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
   station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
   date_bounds=""
-  if(!missing(start_date)){
+  if(start_date!=""){
     if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
       date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
     }
@@ -1268,7 +1268,7 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
     }
   }
   
-  if(!missing(end_date)){
+  if(end_date!=""){
     if(try(!is.na(as.Date(end_date, format= "%Y-%m-%d")))){
       date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
     }
