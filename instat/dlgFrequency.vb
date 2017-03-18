@@ -31,6 +31,7 @@ Public Class dlgFrequency
         bReset = False
         TestOkEnabled()
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
 
     End Sub
@@ -39,8 +40,11 @@ Public Class dlgFrequency
         ucrReceiverFactors.SetMeAsReceiver()
         ucrFactorsSelector.Reset()
         TestOkEnabled()
+        ucrchkCounts.Checked = True
+        ucrchkCheckDisplayMargins.Checked = True
         cmdOptions.Enabled = False
-        ucrPnlDisplayType.Enabled = False
+        ucrNudColumnFactors.Value = 1
+        ucrNudDecimals.Value = 0
     End Sub
 
     Private Sub InitialiseDialog()
@@ -55,16 +59,11 @@ Public Class dlgFrequency
         ucrchkCounts.SetText("Counts")
         ucrchkOverallPercentages.SetText("Overall Percentages")
         ucrchkPercentagesOf.SetText("Percentages Of")
-        ucrchkDisplay.SetText("How to Display")
-        ucrchkMargins.SetText("Margins to Dispaly")
+
         ucrchkWeights.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrchkPercentagesOf.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrchkDisplay.AddToLinkedControls(ucrPnlDisplayType, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudColumnFactors.SetMinMax(0, frmMain.clsRLink.GetDataFrameLength(ucrFactorsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
         ucrNudDecimals.SetMinMax(0, 5)
-        ucrPnlDisplayType.AddRadioButton(rdoSeparateTables)
-        ucrPnlDisplayType.AddRadioButton(rdoVertically)
-        ucrPnlDisplayType.AddRadioButton(rdoHorizontally)
 
     End Sub
 
@@ -80,9 +79,14 @@ Public Class dlgFrequency
     Private Sub ucrchkWeights_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingle.ControlContentsChanged, ucrReceiverFactors.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrchkWeights.ControlContentsChanged, ucrchkPercentagesOf.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgFrequency.ShowDialog()
     End Sub
 End Class
