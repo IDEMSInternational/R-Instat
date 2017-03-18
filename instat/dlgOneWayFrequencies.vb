@@ -101,10 +101,8 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         clsSjtFreq.SetRCommand("sjPlot::sjt.frq")
-        clsSjtFreq.AddParameter("data", clsRFunctionParameter:=ucrReceiverOneWayFreq.GetVariables)
         clsSjtFreq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         clsSjpFrq.SetRCommand("sjPlot::sjp.frq")
-        clsSjpFrq.AddParameter("var.cnt", clsRFunctionParameter:=ucrReceiverOneWayFreq.GetVariables)
         clsSjpFrq.AddParameter("coord.flip", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
     End Sub
@@ -141,6 +139,14 @@ Public Class dlgOneWayFrequencies
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
+        If ucrChkWeights.Checked Then
+            ucrReceiverWeights.SetMeAsReceiver()
+        Else
+            ucrReceiverOneWayFreq.SetMeAsReceiver()
+        End If
     End Sub
 
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqDisplay.ControlValueChanged
