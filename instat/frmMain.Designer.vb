@@ -419,7 +419,6 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruption = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruptionFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionDefineCorruptionData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.CountryNamesCorrectionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -430,7 +429,6 @@ Partial Class frmMain
         Me.DefineCorruptionFreeCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineContractValueCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionDescribe = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineOutputsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.AaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -3230,16 +3228,10 @@ Partial Class frmMain
         '
         'mnuCorruption
         '
-        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionFile, Me.mnuCorruptionDefineCorruptionData, Me.mnuCorruptionPrepare, Me.mnuCorruptionDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuCorruptionModel, Me.DefineRedFlagsToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.TestsAndChecksToolStripMenuItem})
+        Me.mnuCorruption.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionDefineCorruptionData, Me.mnuCorruptionPrepare, Me.mnuCorruptionDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuCorruptionModel, Me.DefineRedFlagsToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.TestsAndChecksToolStripMenuItem})
         Me.mnuCorruption.Name = "mnuCorruption"
         Me.mnuCorruption.Size = New System.Drawing.Size(77, 20)
         Me.mnuCorruption.Text = "Corruption"
-        '
-        'mnuCorruptionFile
-        '
-        Me.mnuCorruptionFile.Name = "mnuCorruptionFile"
-        Me.mnuCorruptionFile.Size = New System.Drawing.Size(205, 22)
-        Me.mnuCorruptionFile.Text = "Open from Library..."
         '
         'mnuCorruptionDefineCorruptionData
         '
@@ -3299,16 +3291,10 @@ Partial Class frmMain
         '
         'mnuCorruptionDescribe
         '
-        Me.mnuCorruptionDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AaToolStripMenuItem})
+        Me.mnuCorruptionDescribe.Enabled = False
         Me.mnuCorruptionDescribe.Name = "mnuCorruptionDescribe"
         Me.mnuCorruptionDescribe.Size = New System.Drawing.Size(205, 22)
         Me.mnuCorruptionDescribe.Text = "Describe..."
-        '
-        'AaToolStripMenuItem
-        '
-        Me.AaToolStripMenuItem.Name = "AaToolStripMenuItem"
-        Me.AaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.AaToolStripMenuItem.Text = "aa"
         '
         'DefineOutputsToolStripMenuItem
         '
@@ -3343,6 +3329,7 @@ Partial Class frmMain
         '
         'TestsAndChecksToolStripMenuItem
         '
+        Me.TestsAndChecksToolStripMenuItem.Enabled = False
         Me.TestsAndChecksToolStripMenuItem.Name = "TestsAndChecksToolStripMenuItem"
         Me.TestsAndChecksToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.TestsAndChecksToolStripMenuItem.Text = "Tests and Checks..."
@@ -3817,7 +3804,6 @@ Partial Class frmMain
     Friend WithEvents mnuCliDefineClimaticData As ToolStripMenuItem
     Friend WithEvents mnuPrepareCalculateDuplicateColumn As ToolStripMenuItem
     Friend WithEvents mnuCorruption As ToolStripMenuItem
-    Friend WithEvents mnuCorruptionFile As ToolStripMenuItem
     Friend WithEvents mnuCorruptionPrepare As ToolStripMenuItem
     Friend WithEvents mnuCorruptionDescribe As ToolStripMenuItem
     Friend WithEvents mnuCorruptionModel As ToolStripMenuItem
@@ -3848,7 +3834,6 @@ Partial Class frmMain
     Friend WithEvents DefineCorruptionFreeCategoriesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DefineContractValueCategoriesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DefineRedFlagsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AaToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents CalculateCRIToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TestsAndChecksToolStripMenuItem As ToolStripMenuItem
