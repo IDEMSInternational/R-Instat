@@ -84,7 +84,7 @@ data_object <- R6Class("data_object",
                             variables_metadata_changed = function(new_value) {
                               if(missing(new_value)) return(private$.variables_metadata_changed)
                               else {
-                                if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
+                                if(new_value != TRUE && new_geom_jittervalue != FALSE) stop("new_val must be TRUE or FALSE")
                                 private$.variables_metadata_changed <- new_value
                                 self$append_to_changes(list(Set_property, "variable_data_changed"))
                               }
@@ -1637,10 +1637,10 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
     
     if(curr_geom_name == "box_jitter") {
-      g <- g + geom_boxplot() + geom_jitter() 
+      g <- g + geom_boxplot() + geom_jitter(width = 0.2, height = 0.2)
     }
     else if(curr_geom_name == "violin_jitter") {
-      g <- g + geom_violin() + geom_jitter() 
+      g <- g + geom_violin() + geom_jitter(width = 0.2, height = 0.2)
     }
     else if(curr_geom_name == "violin_box") {
       g <- g + geom_violin() + geom_boxplot() 
@@ -1689,10 +1689,10 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
         g <- g + coord_flip()
       } 
       if(curr_geom_name == "box_jitter") {
-        g <- g + geom_boxplot() + geom_jitter()
+        g <- g + geom_boxplot() + geom_jitter(width = 0.2, height = 0.2)
       }
       else if(curr_geom_name == "violin_jitter") {
-        g <- g + geom_violin() + geom_jitter()
+        g <- g + geom_violin() + geom_jitter(width = 0.2, height = 0.2)
       }
       else if(curr_geom_name == "violin_box") {
         g <- g + geom_violin() + geom_boxplot()
