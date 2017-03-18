@@ -42,16 +42,17 @@ Public Class dlgInventoryPlot
 
         ucrReceiverElements.Selector = ucrInventoryPlotSelector
         ucrReceiverElements.SetIncludedDataTypes({"numeric"})
-        ucrReceiverElements.SetParameter(New RParameter("elements_col"))
+        ucrReceiverElements.SetParameter(New RParameter("elements_col", 2))
         ucrReceiverElements.SetParameterIsString()
 
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
         ucrReceiverStation.SetIncludedDataTypes({"factor"})
-        ucrReceiverStation.SetParameter(New RParameter("station_col"))
+        ucrReceiverStation.SetParameter(New RParameter("station_col", 3))
+        ucrReceiverDate.SetClimaticType("station")
         ucrReceiverStation.SetParameterIsString()
 
         ucrReceiverDate.Selector = ucrInventoryPlotSelector
-        ucrReceiverDate.SetParameter(New RParameter("date_col"))
+        ucrReceiverDate.SetParameter(New RParameter("date_col", 1))
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.SetParameterIsString()
@@ -60,11 +61,11 @@ Public Class dlgInventoryPlot
         ucrInventoryPlotSelector.SetParameterIsString()
 
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
-        ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip"))
+        ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip", 4))
         ucrChkFlipCoordinates.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrChkTitle.SetText("Title:")
-        ucrInputTitle.SetParameter(New RParameter("graph_title"))
+        ucrChkTitle.SetText("Title")
+        ucrInputTitle.SetParameter(New RParameter("graph_title", 5))
 
         ucrChkShowNonMissing.SetText("Show Non Missing")
         ucrChkShowNonMissing.SetParameter(New RParameter(""))
@@ -73,7 +74,7 @@ Public Class dlgInventoryPlot
         ucrSaveGraph.SetPrefix("Inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph:")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
@@ -92,9 +93,10 @@ Public Class dlgInventoryPlot
         ucrSaveGraph.Reset()
         ucrReceiverDate.SetMeAsReceiver()
         ucrChkTitle.Checked = False
-        ucrInputTitle.Reset()
+        ucrInputTitle.SetName("")
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
+        clsDefaultRFunction.AddParameter("coord_flip", Chr(34) & "FALSE" & Chr(34))
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
 
@@ -117,7 +119,7 @@ Public Class dlgInventoryPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrChkTitle.ControlContentsChanged, ucrInputTitle.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrChkTitle.ControlContentsChanged, ucrInputTitle.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
