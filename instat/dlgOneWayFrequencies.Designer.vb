@@ -116,7 +116,7 @@ Partial Class dlgOneWayFrequencies
         'rdoGraph
         '
         Me.rdoGraph.AutoSize = True
-        Me.rdoGraph.Location = New System.Drawing.Point(9, 279)
+        Me.rdoGraph.Location = New System.Drawing.Point(10, 279)
         Me.rdoGraph.Name = "rdoGraph"
         Me.rdoGraph.Size = New System.Drawing.Size(54, 17)
         Me.rdoGraph.TabIndex = 9
@@ -127,7 +127,7 @@ Partial Class dlgOneWayFrequencies
         'rdoTable
         '
         Me.rdoTable.AutoSize = True
-        Me.rdoTable.Location = New System.Drawing.Point(9, 257)
+        Me.rdoTable.Location = New System.Drawing.Point(10, 257)
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.Size = New System.Drawing.Size(52, 17)
         Me.rdoTable.TabIndex = 8
@@ -137,7 +137,7 @@ Partial Class dlgOneWayFrequencies
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 302)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 302)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(284, 24)
         Me.ucrSaveGraph.TabIndex = 10
@@ -162,7 +162,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkWeights
         '
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(9, 205)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 205)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(129, 20)
         Me.ucrChkWeights.TabIndex = 4
@@ -170,7 +170,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(9, 231)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 231)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkFlip.TabIndex = 7
