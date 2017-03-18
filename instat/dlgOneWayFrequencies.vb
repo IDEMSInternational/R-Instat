@@ -41,7 +41,7 @@ Public Class dlgOneWayFrequencies
         ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
+        ucrSaveGraph.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSort.SetRCode(clsSjtFreq, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
     End Sub
@@ -51,6 +51,7 @@ Public Class dlgOneWayFrequencies
         ' ucrBase.iHelpTopicID = 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
+        cmdOptions.Enabled = False
 
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
         ucrReceiverOneWayFreq.SetMeAsReceiver()
@@ -98,12 +99,14 @@ Public Class dlgOneWayFrequencies
         clsSjtFreq = New RFunction
         clsSjpFrq = New RFunction
         ucrSelectorOneWayFreq.Reset()
+        ucrSaveGraph.Reset()
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         clsSjtFreq.SetRCommand("sjPlot::sjt.frq")
         clsSjtFreq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         clsSjpFrq.SetRCommand("sjPlot::sjp.frq")
         clsSjpFrq.AddParameter("coord.flip", "FALSE")
+        clsSjtFreq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
     End Sub
 
