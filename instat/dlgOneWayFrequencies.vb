@@ -50,7 +50,6 @@ Public Class dlgOneWayFrequencies
         ' ucrBase.iHelpTopicID = 
 
         cmdOptions.Enabled = False
-        ICallType()
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
         ucrReceiverOneWayFreq.SetMeAsReceiver()
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
@@ -116,9 +115,9 @@ Public Class dlgOneWayFrequencies
     Public Sub ICallType()
         If rdoTable.Checked Then
             ucrBase.clsRsyntax.bHTMLOutput = True
-            ucrBase.clsRsyntax.iCallType = 1
+            ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
