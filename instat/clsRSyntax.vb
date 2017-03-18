@@ -33,6 +33,7 @@ Public Class RSyntax
     Public bUseCommandString As Boolean = False
     'Above, the three types of Base R-commands, and their associated "radio bottons booleans".
     Public iCallType As Integer = 0
+    Public bHTMLOutput As Boolean = False
     Public strScript As String
     Public i As Integer
     Public bExcludeAssignedFunctionOutput As Boolean = True
