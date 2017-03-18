@@ -126,10 +126,11 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
 )
 
 data_object$set("public", "set_meta", function(new_meta) {
+  meta_data_copy <- new_meta
   self$clear_metadata()
-  if(!is.list(new_meta)) stop("new_meta must be of type: list")
-  for(name in names(new_meta)) {
-    self$append_to_metadata(name, new_meta[[name]])
+  if(!is.list(meta_data_copy)) stop("new_meta must be of type: list")
+  for(name in names(meta_data_copy)) {
+    self$append_to_metadata(name, meta_data_copy[[name]])
   }
   self$metadata_changed <- TRUE
   self$append_to_changes(list(Set_property, "meta data"))
@@ -1430,7 +1431,7 @@ data_object$set("public", "data_clone", function(include_objects = TRUE, include
   else new_filters <- list()
   if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
   else new_calculations <- list()
-  
+
   ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, keep_attributes = include_metadata)
   if(include_logs) ret$set_changes(private$changes)
   else ret$set_changes(list())
@@ -2199,8 +2200,8 @@ instat_object$set("public","define_as_corruption", function(data_name, primary_t
 instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
   self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
-  contract_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
-  country_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
+  contract_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
+  country_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
   if(contract_level_country_name == "" || country_level_country_name == "") stop("country column must be defined in the contract level data and country level data.")
   link_pairs <- country_level_country_name
   names(link_pairs) <- contract_level_country_name
