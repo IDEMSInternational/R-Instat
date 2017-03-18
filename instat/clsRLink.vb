@@ -746,12 +746,12 @@ Public Class RLink
     End Function
 
     'Corruption analysis functions
-    Public Function GetCorruptionDataFrameNames() As List(Of String)
+    Public Function GetCorruptionContractDataFrameNames() As List(Of String)
         Dim clsGetDataNames As New RFunction
         Dim lstNames As New List(Of String)
         Dim expDataNames As SymbolicExpression
 
-        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_data_names")
+        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_contract_data_names")
         expDataNames = RunInternalScriptGetValue(clsGetDataNames.ToScript())
         If Not expDataNames.Type = Internals.SymbolicExpressionType.Null Then
             lstNames = expDataNames.AsCharacter.ToList()
@@ -765,7 +765,7 @@ Public Class RLink
 
         clsGetColumnName.SetRCommand(strInstatDataObject & "$get_corruption_column_name")
         clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        clsGetColumnName.AddParameter("type", Chr(34) & strType & Chr(34))
+        clsGetColumnName.AddParameter("type", strType)
         strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
         Return strColumn
     End Function
