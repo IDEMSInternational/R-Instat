@@ -15,27 +15,19 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Imports System.IO
-Imports instat
 
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsRDefaultFunction, clsRCDF, clsRDatanames As New RFunction
-
-    'Private clsBaseNetCDF, clsRCDF As New RFunction
-    'Dim bFirstLoad As Boolean
     Dim strFileType As String
-    'Dim bCanImport As Boolean
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
-        'clsBaseNetCDF.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
-        'clsBaseNetCDF.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
         bFirstLoad = True
-        'bCanImport = True
         bComponentsInitialised = True
         bStartOpenDialog = True
         ucrInputDataName.bAutoChangeOnLeave = True
@@ -58,19 +50,6 @@ Public Class dlgOpenNetCDF
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-
-        'autoTranslate(Me)
-        'Me.Show()
-        'If bFirstLoad Then
-        '    InitialiseDialog()
-        '    SetCSVDefault()
-        '    bFirstLoad = False
-        'End If
-        'If bStartOpenDialog Then
-        '    GetFileFromOpenDialog()
-        '    bStartOpenDialog = False
-        'End If
-        'TestOkEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -94,10 +73,8 @@ Public Class dlgOpenNetCDF
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
         ucrInputLocDataName.SetDefaultTypeAsDataFrame()
-        'ucrInputLocDataName.
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
-        'clsSummariesList = New RFunction
         clsRDatanames.SetRCommand("c")
         ucrInputDataName.SetParameter(New RParameter("data_df_name", 0))
         ucrInputDataName.clsParameter.bIncludeArgumentName = False
@@ -105,11 +82,6 @@ Public Class dlgOpenNetCDF
         ucrInputLocDataName.clsParameter.bIncludeArgumentName = False
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
     End Sub
-
-    'Private Sub ucrInputDataName_NameChanged() Handles ucrInputDataName.NameChanged, ucrInputLocDataName.NameChanged
-    '    ucrBase.clsRsyntax.AddParameter("data_names", "c(" & Chr(34) & ucrInputDataName.GetText() & Chr(34) & "," & Chr(34) & ucrInputLocDataName.GetText() & Chr(34) & ")")
-    'End Sub
-
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -145,7 +117,6 @@ Public Class dlgOpenNetCDF
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
                 ucrInputDataName.SetName("")
-                'ucrInputDataName.Reset()
                 'checks if the file name is not blank'
                 If dlgOpen.FileName <> "" Then
                     strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
@@ -156,7 +127,6 @@ Public Class dlgOpenNetCDF
                     lblSSTName.Show()
 
                     If strFileExt = ".nc" Then
-                        'ucrBase.clsRsyntax.SetBaseRFunction(clsBaseNetCDF)
                         clsRCDF.SetRCommand("nc_open")
                         clsRCDF.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
                         strFileType = "nc"
@@ -165,24 +135,7 @@ Public Class dlgOpenNetCDF
                     End If
                 End If
             End If
-            'TestOkEnabled()
         End Using
-    End Sub
-
-    Private Sub lblLocationName_Click(sender As Object, e As EventArgs) Handles lblLocationName.Click
-
-    End Sub
-
-    Private Sub lblSSTName_Click(sender As Object, e As EventArgs) Handles lblSSTName.Click
-
-    End Sub
-
-    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
-
-    End Sub
-
-    Private Sub lblFileOpenPath_Click(sender As Object, e As EventArgs) Handles lblFileOpenPath.Click
-
     End Sub
 
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
