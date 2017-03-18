@@ -257,6 +257,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDrySpells.Designer.vb">
+      <DependentUpon>dlgDrySpells.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDrySpells.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgEnter.Designer.vb">
       <DependentUpon>dlgEnter.vb</DependentUpon>
     </Compile>
@@ -291,6 +297,12 @@
       <DependentUpon>dlgFitModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFitModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromCSPRO.Designer.vb">
+      <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromCSPRO.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgImportFromODK.Designer.vb">
@@ -329,6 +341,12 @@
     <Compile Include="dlgNewMarkovChains.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgNewSummaryTables.Designer.vb">
+      <DependentUpon>dlgNewSummaryTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgNewSummaryTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneVarCompareModels.Designer.vb">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
     </Compile>
@@ -351,6 +369,12 @@
       <DependentUpon>dlgOneVarUseModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOneVarUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOpenNetCDF.Designer.vb">
+      <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOpenNetCDF.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOpenSST.Designer.vb">
@@ -381,6 +405,12 @@
       <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgPICSATemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRatingScales.Designer.vb">
+      <DependentUpon>dlgRatingScales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRatingScales.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
@@ -419,6 +449,12 @@
     <Compile Include="dlgTwoVariableUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTwoWayFrequencies.Designer.vb">
+      <DependentUpon>dlgTwoWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoWayFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DlgUseDate.Designer.vb">
       <DependentUpon>DlgUseDate.vb</DependentUpon>
     </Compile>
@@ -447,6 +483,12 @@
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </Compile>
     <Compile Include="frmOutputWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportFromDatabases.Designer.vb">
+      <DependentUpon>ImportFromDatabases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImportFromDatabases.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="mdlCoreControl.vb" />
@@ -2389,6 +2431,9 @@
     <EmbeddedResource Include="dlgHideShowColumns.sw-KE.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromCSPRO.resx">
+      <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromODK.resx">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
     </EmbeddedResource>
@@ -2446,6 +2491,9 @@
     <EmbeddedResource Include="dlgNewMarkovChains.resx">
       <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgNewSummaryTables.resx">
+      <DependentUpon>dlgNewSummaryTables.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarCompareModels.resx">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
     </EmbeddedResource>
@@ -2472,6 +2520,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOpenNetCDF.resx">
+      <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenSST.fr-FR.resx">
       <DependentUpon>dlgOpenSST.vb</DependentUpon>
@@ -2538,6 +2589,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.sw-KE.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRatingScales.resx">
+      <DependentUpon>dlgRatingScales.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeNumeric.fr-FR.resx">
       <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
@@ -2737,6 +2791,9 @@
     <EmbeddedResource Include="dlgTwoVariableUseModel.resx">
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayFrequencies.resx">
+      <DependentUpon>dlgTwoWayFrequencies.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
@@ -2823,6 +2880,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportFromDatabases.resx">
+      <DependentUpon>ImportFromDatabases.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAddLink.resx">
       <DependentUpon>sdgAddLink.vb</DependentUpon>

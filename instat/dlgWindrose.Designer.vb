@@ -24,11 +24,13 @@ Partial Class dlgWindrose
     Private Sub InitializeComponent()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblYVariable = New System.Windows.Forms.Label()
-        Me.lblFactor = New System.Windows.Forms.Label()
-        Me.ucrFillReceiver = New instat.ucrReceiverSingle()
+        Me.lblFacet = New System.Windows.Forms.Label()
+        Me.lblNoOfColumns = New System.Windows.Forms.Label()
+        Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrNudNoOfColumns = New instat.ucrNud()
         Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
-        Me.ucrSaveWindRose = New instat.ucrSaveGraph()
         Me.ucrWindRoseSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
@@ -36,7 +38,7 @@ Partial Class dlgWindrose
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(256, 40)
+        Me.lblXVariable.Location = New System.Drawing.Point(260, 45)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(69, 13)
         Me.lblXVariable.TabIndex = 1
@@ -45,37 +47,63 @@ Partial Class dlgWindrose
         'lblYVariable
         '
         Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.Location = New System.Drawing.Point(257, 91)
+        Me.lblYVariable.Location = New System.Drawing.Point(260, 93)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(80, 13)
         Me.lblYVariable.TabIndex = 3
         Me.lblYVariable.Text = "Wind Direction:"
         '
-        'lblFactor
+        'lblFacet
         '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Enabled = False
-        Me.lblFactor.Location = New System.Drawing.Point(258, 142)
-        Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(40, 13)
-        Me.lblFactor.TabIndex = 5
-        Me.lblFactor.Text = "Factor:"
+        Me.lblFacet.AutoSize = True
+        Me.lblFacet.Location = New System.Drawing.Point(260, 140)
+        Me.lblFacet.Name = "lblFacet"
+        Me.lblFacet.Size = New System.Drawing.Size(37, 13)
+        Me.lblFacet.TabIndex = 5
+        Me.lblFacet.Text = "Facet:"
         '
-        'ucrFillReceiver
+        'lblNoOfColumns
         '
-        Me.ucrFillReceiver.Enabled = False
-        Me.ucrFillReceiver.frmParent = Me
-        Me.ucrFillReceiver.Location = New System.Drawing.Point(255, 157)
-        Me.ucrFillReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFillReceiver.Name = "ucrFillReceiver"
-        Me.ucrFillReceiver.Selector = Nothing
-        Me.ucrFillReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFillReceiver.TabIndex = 6
+        Me.lblNoOfColumns.AutoSize = True
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(260, 194)
+        Me.lblNoOfColumns.Name = "lblNoOfColumns"
+        Me.lblNoOfColumns.Size = New System.Drawing.Size(79, 13)
+        Me.lblNoOfColumns.TabIndex = 7
+        Me.lblNoOfColumns.Text = "No of Columns:"
+        '
+        'ucrReceiverFacet
+        '
+        Me.ucrReceiverFacet.frmParent = Me
+        Me.ucrReceiverFacet.Location = New System.Drawing.Point(260, 155)
+        Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
+        Me.ucrReceiverFacet.Selector = Nothing
+        Me.ucrReceiverFacet.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFacet.TabIndex = 6
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 218)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(251, 24)
+        Me.ucrSaveGraph.TabIndex = 9
+        '
+        'ucrNudNoOfColumns
+        '
+        Me.ucrNudNoOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(345, 191)
+        Me.ucrNudNoOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNoOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoOfColumns.Name = "ucrNudNoOfColumns"
+        Me.ucrNudNoOfColumns.Size = New System.Drawing.Size(35, 20)
+        Me.ucrNudNoOfColumns.TabIndex = 8
+        Me.ucrNudNoOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverWindDirection
         '
         Me.ucrReceiverWindDirection.frmParent = Me
-        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(255, 106)
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(260, 108)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
@@ -85,19 +113,12 @@ Partial Class dlgWindrose
         'ucrReceiverWindSpeed
         '
         Me.ucrReceiverWindSpeed.frmParent = Me
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(255, 55)
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(260, 60)
         Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
         Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWindSpeed.TabIndex = 2
-        '
-        'ucrSaveWindRose
-        '
-        Me.ucrSaveWindRose.Location = New System.Drawing.Point(10, 200)
-        Me.ucrSaveWindRose.Name = "ucrSaveWindRose"
-        Me.ucrSaveWindRose.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveWindRose.TabIndex = 7
         '
         'ucrWindRoseSelector
         '
@@ -111,23 +132,25 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 226)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 8
+        Me.ucrBase.TabIndex = 10
         '
         'dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 287)
-        Me.Controls.Add(Me.ucrFillReceiver)
+        Me.ClientSize = New System.Drawing.Size(419, 307)
+        Me.Controls.Add(Me.ucrReceiverFacet)
+        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.lblNoOfColumns)
+        Me.Controls.Add(Me.ucrNudNoOfColumns)
         Me.Controls.Add(Me.ucrReceiverWindDirection)
         Me.Controls.Add(Me.ucrReceiverWindSpeed)
-        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.lblFacet)
         Me.Controls.Add(Me.lblYVariable)
         Me.Controls.Add(Me.lblXVariable)
-        Me.Controls.Add(Me.ucrSaveWindRose)
         Me.Controls.Add(Me.ucrWindRoseSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -143,11 +166,13 @@ Partial Class dlgWindrose
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrWindRoseSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrSaveWindRose As ucrSaveGraph
     Friend WithEvents lblXVariable As Label
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
     Friend WithEvents lblYVariable As Label
     Friend WithEvents ucrReceiverWindDirection As ucrReceiverSingle
-    Friend WithEvents lblFactor As Label
-    Friend WithEvents ucrFillReceiver As ucrReceiverSingle
+    Friend WithEvents lblFacet As Label
+    Friend WithEvents lblNoOfColumns As Label
+    Friend WithEvents ucrNudNoOfColumns As ucrNud
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrReceiverFacet As ucrReceiverSingle
 End Class

@@ -1074,8 +1074,8 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
 }
 )
 
-instat_object$set("public","make_inventory_plot", function(data_name,col_name = "", year , doy, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
-  self$get_data_objects(data_name)$make_inventory_plot(col_name = col_name , year = year, doy =doy,add_to_data = add_to_data, coord_flip = coord_flip, threshold = threshold, facets = facets)
+instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col , station_col = station_col, elements_cols =elements_cols, add_to_data = add_to_data, coord_flip = coord_flip, graph_title = graph_title)
 }
 )
 
@@ -1183,9 +1183,7 @@ instat_object$set("public", "is_metadata", function(data_name, str) {
 )
 
 instat_object$set("public", "get_climatic_column_name", function(data_name, col_name) {
-  new_data = subset(InstatDataObject$get_variables_metadata(data_name), Climatic_Type==col_name, select = Name)
-  if(!nrow(new_data==1))stop(paste(col_name, " column cannot be found in the data."))
-  return(as.character(new_data))
+   self$get_data_objects(data_name)$get_climatic_column_name(col_name = col_name)
 }
 )
 
@@ -1197,7 +1195,7 @@ instat_object$set("public", "merge_data", function(data_name, new_data, by = NUL
 instat_object$set("public", "get_corruption_data_names", function() {
   corruption_names <- c()
   for(curr_name in self$get_data_names()) {
-    if(self$get_data_objects(curr_name)$is_metadata(is_corruption_label) && self$get_data_objects(curr_name)$get_metadata(is_corruption_label)) {
+    if(self$get_data_objects(curr_name)$is_metadata(corruption_data_label) && self$get_data_objects(curr_name)$get_metadata(corruption_data_label)) {
       corruption_names <- c(corruption_names, curr_name)
     }
   }
