@@ -371,6 +371,12 @@
     <Compile Include="dlgOneVarUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneWayFrequencies.Designer.vb">
+      <DependentUpon>dlgOneWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneWayFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOpenNetCDF.Designer.vb">
       <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
     </Compile>
@@ -2520,6 +2526,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayFrequencies.resx">
+      <DependentUpon>dlgOneWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenNetCDF.resx">
       <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
@@ -5189,6 +5198,22 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\visreg_2.3-0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="static\Help\LICENSE" />
+    <Content Include="static\Library\Corruption\wb_ppp_1990-2014_long.dta">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Corruption\country_level.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Corruption\country_level.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Corruption\WB_raw_and_calculated_df.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Corruption\wb_raw_calc_instat_obj.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\whisker_0.3-2.zip">
