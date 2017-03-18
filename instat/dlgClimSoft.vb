@@ -61,7 +61,9 @@ Public Class dlgClimSoft
         ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrInputStartDate.SetParameter(New RParameter("start_date", 3))
+        ttClimsoft.SetToolTip(ucrInputStartDate.txtInput, "yyyy-mm-dd")
         ucrInputEndDate.SetParameter(New RParameter("end_date", 4))
+        ttClimsoft.SetToolTip(ucrInputEndDate.txtInput, "yyyy-mm-dd")
     End Sub
 
     Private Sub TestOKEnabled()
@@ -83,7 +85,8 @@ Public Class dlgClimSoft
     Private Sub SetDefaults()
         ucrSelectorForClimSoft.Reset()
         ucrReceiverMultipleStations.SetMeAsReceiver()
-
+        ucrInputStartDate.SetText("")
+        ucrInputEndDate.SetText("")
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
         clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")

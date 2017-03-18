@@ -1258,13 +1258,32 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
   con = self$get_database_connection()
   my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
   station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
-  if (length(elements)>0){
+  date_bounds=""
+  if(!missing(start_date)){
+    if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
+      date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
+    }
+    else{
+      stop("start_date format should be yyyy-mm-yy.")
+    }
+  }
+  
+  if(!missing(end_date)){
+    if(try(!is.na(as.Date(end_date, format= "%Y-%m-%d")))){
+      date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
+    }
+    else{
+      stop("end_date format should be yyyy-mm-yy.")
+    }
+  }
+  
+  if (length(elements) > 0){
     my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
     element_ids = dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
     element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
   }
   if(include_observation_data){
-    station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, "ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
     data_list <- list(station_info, station_data)
     names(data_list) = c("station_info","station_data")
   }
