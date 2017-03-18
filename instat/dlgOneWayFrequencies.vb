@@ -40,7 +40,6 @@ Public Class dlgOneWayFrequencies
         ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkTable.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkGraph.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
     End Sub
 
     Private Sub InitialiseDialog()
