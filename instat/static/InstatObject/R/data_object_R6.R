@@ -1935,7 +1935,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(date_col, station_col= c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
+data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
   if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
   if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
   if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
@@ -1944,20 +1944,20 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col= 
   }
   #add year and doy columns if missing in data
   if(is.null(self$get_climatic_column_name(year_label))){
-    self$split_date(col_name=date_col, year=TRUE)
-    self$set_climatic_types(types= c(year="year")) #calling year column by name is just a temporary fix.
+    self$split_date(col_name = date_col, year = TRUE)
+    self$set_climatic_types(types = c(year = "year")) #calling year column by name is just a temporary fix.
   }
   if(is.null(self$get_climatic_column_name(doy_label))){
-    self$split_date(col_name=date_col, day_in_year=TRUE)
-    self$set_climatic_types(types=c(doy = "day_in_year"))
+    self$split_date(col_name = date_col, day_in_year = TRUE)
+    self$set_climatic_types(types = c(doy = "day_in_year"))
   }
   year_col_name = self$get_climatic_column_name(year_label)
   doy_col_name = self$get_climatic_column_name(doy_label)
 
   curr_data <- self$get_data_frame()
   #ggplot fails to get column names hence the need to rename
-  colnames(curr_data)[colnames(curr_data)==year_col_name] <- "year_column" 
-  colnames(curr_data)[colnames(curr_data)==doy_col_name] <- "doy_column"
+  colnames(curr_data)[colnames(curr_data) == year_col_name] <- "year_column" 
+  colnames(curr_data)[colnames(curr_data) == doy_col_name] <- "doy_column"
   if(length(elements_cols)!=1){
     if(!is.null(station_col)){
       col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, station_col, year_col_name, doy_col_name))
@@ -1965,15 +1965,15 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col= 
     else{
       col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, year_col_name, doy_col_name))
     }
-    colnames(col_data)[colnames(col_data)==year_col_name] <- "year_column"
-    colnames(col_data)[colnames(col_data)==doy_col_name] <- "doy_column"
+    colnames(col_data)[colnames(col_data) == year_col_name] <- "year_column"
+    colnames(col_data)[colnames(col_data) == doy_col_name] <- "doy_column"
     recode <- ifelse(is.na(col_data$value), "missing", "present")
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
     col_data[[new_col]] <- recode
     g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~variable")))
+      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~ variable")))
     }
     else{
       g <- g + facet_wrap(~variable)

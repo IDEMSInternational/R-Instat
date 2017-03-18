@@ -53,7 +53,7 @@ Partial Class dlgInventoryPlot
         Me.cmdOptions.Enabled = False
         Me.cmdOptions.Location = New System.Drawing.Point(10, 205)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -81,7 +81,7 @@ Partial Class dlgInventoryPlot
         Me.cmdInventoryPlotOptions.Enabled = False
         Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 238)
         Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
-        Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(124, 23)
+        Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdInventoryPlotOptions.TabIndex = 8
         Me.cmdInventoryPlotOptions.Text = "Inventory Plot Options"
         Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
@@ -110,7 +110,7 @@ Partial Class dlgInventoryPlot
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(124, 295)
+        Me.ucrInputTitle.Location = New System.Drawing.Point(119, 295)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(259, 21)
         Me.ucrInputTitle.TabIndex = 12
@@ -118,7 +118,7 @@ Partial Class dlgInventoryPlot
         'ucrChkTitle
         '
         Me.ucrChkTitle.Checked = False
-        Me.ucrChkTitle.Location = New System.Drawing.Point(9, 297)
+        Me.ucrChkTitle.Location = New System.Drawing.Point(10, 297)
         Me.ucrChkTitle.Name = "ucrChkTitle"
         Me.ucrChkTitle.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkTitle.TabIndex = 11
@@ -160,7 +160,7 @@ Partial Class dlgInventoryPlot
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(263, 218)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(263, 219)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
