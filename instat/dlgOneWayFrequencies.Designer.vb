@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOneWayFrequencies
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgOneWayFrequencies
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpSort = New System.Windows.Forms.GroupBox()
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
@@ -31,7 +31,6 @@ Partial Class dlgOneWayFrequencies
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrPnlFreqDisplay = New instat.UcrPanel()
         Me.ucrChkWeights = New instat.ucrCheck()
@@ -135,13 +134,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoTable.Text = "Table"
         Me.rdoTable.UseVisualStyleBackColor = True
         '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 302)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(284, 24)
-        Me.ucrSaveGraph.TabIndex = 10
-        '
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
@@ -177,7 +169,7 @@ Partial Class dlgOneWayFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 302)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 11
@@ -206,8 +198,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 387)
-        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.ClientSize = New System.Drawing.Size(427, 360)
         Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.rdoTable)
@@ -249,5 +240,4 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents rdoGraph As RadioButton
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents ucrPnlFreqDisplay As UcrPanel
-    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
