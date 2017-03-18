@@ -108,7 +108,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverOneWayFreq.IsEmpty() Then
+        If Not ucrReceiverOneWayFreq.IsEmpty() AndAlso ucrSaveGraph.IsComplete Then
             If ucrChkWeights.Checked Then
                 If Not ucrReceiverWeights.IsEmpty Then
                     ucrBase.OKEnabled(True)
@@ -153,7 +153,7 @@ Public Class dlgOneWayFrequencies
         ChangeBaseFunction()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
