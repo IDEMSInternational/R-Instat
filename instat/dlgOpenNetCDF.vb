@@ -35,7 +35,6 @@ Public Class dlgOpenNetCDF
 
     Private Sub dlgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        Me.Show()
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
