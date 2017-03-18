@@ -47,6 +47,8 @@ Public Class sdgWindrose
         dctThemePairs.Add("minimal", Chr(34) & "minimal" & Chr(34))
         dctThemePairs.Add("classic", Chr(34) & "classic" & Chr(34))
         ucrInputTheme.SetItems(dctThemePairs)
+        ucrInputSpeedCuts.AddToLinkedControls(ucrNudNoOfSpeeds, {"NA"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+
         bControlsInitialised = True
 
     End Sub
@@ -57,19 +59,5 @@ Public Class sdgWindrose
         End If
         clsWindRoseFunc = clsNewRFunction
         SetRCode(Me, clsWindRoseFunc, bReset)
-    End Sub
-
-    Private Sub UseNoOfSpeeds()
-        'Number of speeds used when Speed cuts is NA
-        If ucrInputSpeedCuts.GetText <> "NA" Then
-            ucrNudNoOfSpeeds.Enabled = False
-            clsWindRoseFunc.RemoveParameterByName("n_speeds")
-        Else
-            ucrNudNoOfSpeeds.Enabled = True
-        End If
-    End Sub
-
-    Private Sub ucrInputSpeedCuts_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputSpeedCuts.ControlContentsChanged
-        UseNoOfSpeeds()
     End Sub
 End Class
