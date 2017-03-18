@@ -267,12 +267,12 @@ Public Class dlgWaterBalance
         TestOKEnabled()
     End Sub
 
-    Private Sub nudWBLessThan_ValueChanged(sender As Object, e As EventArgs) Handles nudWBLessThan.ValueChanged
+    Private Sub nudWBLessThan_ValueChanged(sender As Object, e As EventArgs) Handles nudWBLessThan.TextChanged
         WaterBalance()
         TestOKEnabled()
     End Sub
 
-    Private Sub nudCapacity_ValueChanged(sender As Object, e As EventArgs) Handles nudCapacity.ValueChanged
+    Private Sub nudCapacity_ValueChanged(sender As Object, e As EventArgs) Handles nudCapacity.TextChanged
         WaterBalance()
         TestOKEnabled()
     End Sub
