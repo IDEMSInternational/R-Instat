@@ -2192,7 +2192,7 @@ corruption_output_label = "Is_Corruption_Output"
 corruption_red_flag_label = "Is_Corruption_Red_Flag"
 
 # Data frame metadata for corruption dataframes
-corruption_data_label = "Corruption_Data"
+corruption_data_label = "Is_Corruption_Data"
 corruption_contract_level_label = "Contract Level"
 corruption_country_level_label = "Country Level"
 
@@ -2228,7 +2228,7 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
 )
 
 instat_object$set("public","define_as_corruption", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
-  self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_contract_level_label)
+  self$append_to_dataframe_metadata(data_name, corruption_data_label, TRUE)
   self$get_data_objects(data_name)$set_corruption_types(primary_types, calculated_types, auto_generate)
   if(!missing(country_data_name)) {
     self$define_as_corruption_country_level_data(data_name = country_data_name, contract_level_data_name = data_name, types = country_types, auto_generate = auto_generate)
@@ -2237,7 +2237,7 @@ instat_object$set("public","define_as_corruption", function(data_name, primary_t
 )
 
 instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
-  self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
+  #self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
   self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
   contract_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
   country_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
@@ -2254,7 +2254,7 @@ data_object$set("public","define_as_corruption_country_level_data", function(typ
 )
 
 data_object$set("public","is_corruption_type_present", function(type) {
-  return(self$is_metadata(corruption_data_label) && !is.na(self$get_metadata(corruption_data_label)) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
+  return(self$is_metadata(corruption_data_label) && !is.na(self$get_metadata(corruption_data_label)) && self$get_metadata(corruption_data_label) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
 }
 )
 
