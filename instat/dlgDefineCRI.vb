@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgDefineCRI
     Private bFirstLoad As Boolean = True
@@ -20,6 +21,7 @@ Public Class dlgDefineCRI
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
+    Private strCurrDataName As String = ""
     Private bResetSubdialog As Boolean = False
     Private clsCalculation As New ROperator
     Private clsDefineFunction As New RFunction
@@ -38,16 +40,15 @@ Public Class dlgDefineCRI
         End If
         SetRCodeForControls(bReset)
         bReset = False
-
+        TestOKEnabled()
     End Sub
-
+    ' + between objects
+    ' updating the cls param.
     Private Sub InitialiseDialog()
         'helpID
         ucrInputCRIPreview.IsReadOnly = True
 
-        clsDefineFunction.SetRCommand("instat_calculation$new")
-        clsDefineFunction.SetAssignTo("Define_CRI")
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
+        cmdEdit.Enabled = False
 
         '  ucrBase.iHelpTopicID =
 
@@ -57,6 +58,8 @@ Public Class dlgDefineCRI
         ucrReceiverRedFlag.Selector = ucrSelectorCRI
         ucrReceiverRedFlag.SetMeAsReceiver()
         ucrReceiverRedFlag.SetIncludedDataTypes({"numeric", "logical", "factor"})
+        'ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Output", {"TRUE"})
+        'ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Red_Flag", {"TRUE"})
 
         'ucrChk
         ucrChkScaleNumeric.SetText("Scale Numeric")
@@ -70,11 +73,16 @@ Public Class dlgDefineCRI
         'lstbox
         lstIndexComponents.Columns.Add("Component")
         lstIndexComponents.Columns.Add("Weight(s)")
+
+        'save
+        ucrSaveCRI.SetDataFrameSelector(ucrSelectorCRI.ucrAvailableDataFrames)
+        ucrSaveCRI.SetLabelText("New Column Name:")
+        ucrSaveCRI.SetIsTextBox()
     End Sub
 
     Private Sub SetDefaults()
         clsCalculation = New ROperator
-        'clsDefineFunction = New RFunction
+        clsDefineFunction = New RFunction
 
         'Reset 
         ucrSelectorCRI.Reset()
@@ -83,8 +91,14 @@ Public Class dlgDefineCRI
 
         clsCalculation.SetOperation("+")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefineFunction)
-        ucrBase.clsRsyntax.SetBaseROperator(clsCalculation)
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
+        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsDefineFunction)
+
+        clsDefineFunction.SetRCommand("instat_calculation$new")
+        clsDefineFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsDefineFunction.AddParameter("function_exp", clsROperatorParameter:=clsCalculation)
+        clsDefineFunction.AddParameter("save", 2)
+
         bResetSubdialog = True
         DisplayRedFlag()
         EnableDeleteButton()
@@ -107,27 +121,30 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub TestOKEnabled()
-        'if the list box is not empty then OK is enabled
+        If lstIndexComponents.Items.Count > 0 AndAlso ucrNudWeights.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub EnableAddButton()
         If Not ucrReceiverRedFlag.IsEmpty() Then
             If (ucrReceiverRedFlag.strCurrDataType = "numeric" OrElse ucrReceiverRedFlag.strCurrDataType = "logical" OrElse ucrReceiverRedFlag.strCurrDataType = "integer") Then
-                '        If ucrNudWeights.GetText <> "" Then
-                ucrInputCRIPreview.SetName(clsCalculation.ToScript) ' will be the overall function
-                '            cmdAddComponent.Enabled = True
-                '        Else
-                '            cmdAddComponent.Enabled = False
-                '        End If
-                '    Else
-                '        If ucrGridWeights.GetSelectedLevels() <> "" Then
-                '            cmdAddComponent.Enabled = True
-                'ucrInputCRIPreview.SetName(clsCalculation.ToScript) ' will be the overall function
-
-                '        Else
-                '            cmdAddComponent.Enabled = False
-                '        End If
+                If ucrNudWeights.GetText <> "" Then
+                    cmdAddComponent.Enabled = True
+                Else
+                    cmdAddComponent.Enabled = False
+                End If
+            Else
+                If ucrGridWeights.IsColumnComplete(2) Then
+                    cmdAddComponent.Enabled = True
+                Else
+                    cmdAddComponent.Enabled = False
+                End If
             End If
+        Else
+            cmdAddComponent.Enabled = False
         End If
     End Sub
 
@@ -154,38 +171,17 @@ Public Class dlgDefineCRI
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRedFlag.ControlContentsChanged, ucrNudWeights.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudWeights.ControlContentsChanged
+        EnableAddButton()
         TestOKEnabled()
     End Sub
 
     Private Sub cmdAddComponent_Click(sender As Object, e As EventArgs) Handles cmdAddComponent.Click
-        'Dim clsCurrentConditionView As New ROperator
-        'Dim clsCurrentConditionList As New RFunction
         Dim lviCondition As ListViewItem
         Dim clsTempOp As ROperator
         Dim clsTempFactorOp As ROperator
+        Dim clsList As New RFunction
         Dim i As Integer = 0
-
-        'Dim strCondition As String
-
-        ''clsCurrentConditionList.SetRCommand("list")
-        ''clsCurrentConditionView.AddParameter(iPosition:=0, strParameterValue:=ucrFilterByReceiver.GetVariableNames(False))
-        ''clsCurrentConditionList.AddParameter("column", ucrFilterByReceiver.GetVariableNames())
-        'If ucrReceiverRedFlag.strCurrDataType.Contains("factor") Then
-        '    clsCurrentConditionView.SetOperation("%in%")
-        '    clsCurrentConditionList.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
-        '    strCondition = ucrGridWeights.GetSelectedLevels()
-        'Else
-        '    clsCurrentConditionView.SetOperation(ucrNudWeights.Value)
-        '    clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrNudWeights.Value & Chr(34))
-        '    If ucrReceiverRedFlag.strCurrDataType = "?" AndAlso ucrNudWeights.GetText() <> "" Then
-        '        strCondition = Chr(34) & ucrNudWeights.GetText() & Chr(34)
-        '    Else
-        '    End If
-        'End If
-        'clsCurrentConditionView.AddParameter(strParameterValue:=strCondition.Replace(Chr(34), Chr(39)))
-        'clsCurrentConditionList.AddParameter("value", strCondition)
-        'clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
 
         clsTempOp = New ROperator
         If ucrReceiverRedFlag.strCurrDataType = "numeric" OrElse ucrReceiverRedFlag.strCurrDataType = "integer" OrElse ucrReceiverRedFlag.strCurrDataType = "logical" Then
@@ -194,11 +190,12 @@ Public Class dlgDefineCRI
             clsTempOp.AddParameter("column", ucrReceiverRedFlag.GetVariableNames(False), iPosition:=0)
             clsTempOp.AddParameter("weight", ucrNudWeights.Value, iPosition:=1)
         ElseIf ucrReceiverRedFlag.strCurrDataType = "factor" Then
-            lviCondition = New ListViewItem({ucrReceiverRedFlag.GetVariableNames(False), ucrGridWeights.GetColumnInFactorSheet(1, False)})
+            lviCondition = New ListViewItem({ucrReceiverRedFlag.GetVariableNames(False), ucrGridWeights.GetColumnInFactorSheet(2, False)})
+            clsTempOp.SetOperation("+")
             For j As Integer = 0 To ucrGridWeights.grdFactorData.CurrentWorksheet.RowCount - 1
                 clsTempFactorOp = New ROperator
                 clsTempFactorOp.SetOperation("*")
-                clsTempFactorOp.AddParameter("factor_level" & j, ucrReceiverRedFlag.GetVariableNames(False) & "==" & Chr(39) & ucrGridWeights.grdFactorData.CurrentWorksheet(j, 0) & Chr(39), iPosition:=1)
+                clsTempFactorOp.AddParameter("factor_level" & j, "(" & ucrReceiverRedFlag.GetVariableNames(False) & "==" & Chr(39) & ucrGridWeights.grdFactorData.CurrentWorksheet(j, 0) & Chr(39) & ")", iPosition:=1)
                 clsTempFactorOp.AddParameter("level_weight" & j, ucrGridWeights.grdFactorData.CurrentWorksheet(j, 2), iPosition:=1)
                 clsTempOp.AddParameter("factor_comp" & j, clsROperatorParameter:=clsTempFactorOp, iPosition:=j)
             Next
@@ -220,6 +217,14 @@ Public Class dlgDefineCRI
         ucrReceiverRedFlag.Clear()
         'RaiseEvent FilterChanged()
         'CheckAddEnabled()
+
+        clsList.SetRCommand("list")
+        For Each lviTemp As ListViewItem In lstIndexComponents.Items
+            clsList.AddParameter(ucrSelectorCRI.ucrAvailableDataFrames.cboAvailableDataFrames.Text, Chr(34) & lviTemp.Text & Chr(34))
+        Next
+        clsDefineFunction.AddParameter("calculated_from", clsRFunctionParameter:=clsList)
+        ucrInputCRIPreview.SetName(clsCalculation.ToScript)
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
@@ -248,16 +253,22 @@ Public Class dlgDefineCRI
         End If
     End Sub
 
-    Private Sub OverallCalculation() ' run this at right times
-        clsDefineFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsDefineFunction.AddParameter("function_exp", clsROperatorParameter:=clsCalculation) ' item in preview box
-        clsDefineFunction.AddParameter("result_name", Chr(34) & "Define_CRI" & Chr(34))
-        clsDefineFunction.AddParameter("save", 2)
-
-        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsDefineFunction)
-    End Sub
-
     Private Sub ucrReceiverOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRedFlag.ControlValueChanged
         DisplayRedFlag()
+        EnableAddButton()
+    End Sub
+
+    Private Sub ucrSelectorCRI_DataFrameChanged() Handles ucrSelectorCRI.DataFrameChanged
+        lstIndexComponents.Clear() ' sort this
+        ucrInputCRIPreview.SetName("")
+    End Sub
+
+    Private Sub ucrGridWeights_GridContentChanged() Handles ucrGridWeights.GridContentChanged
+        EnableAddButton()
+    End Sub
+
+    Private Sub ucrSaveCRI_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveCRI.ControlValueChanged
+        clsDefineFunction.AddParameter("result_name", Chr(34) & ucrSaveCRI.ucrInputTextSave.GetText & Chr(34))
+        clsDefineFunction.SetAssignTo(ucrSaveCRI.ucrInputTextSave.GetText)
     End Sub
 End Class
