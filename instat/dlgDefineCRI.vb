@@ -21,10 +21,10 @@ Public Class dlgDefineCRI
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
-    Private strCurrDataName As String = ""
     Private bResetSubdialog As Boolean = False
     Private clsCalculation As New ROperator
     Private clsDefineFunction As New RFunction
+    Private i As Integer = 0
 
     Private Sub dlgDefineCRI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -42,19 +42,23 @@ Public Class dlgDefineCRI
         bReset = False
         TestOKEnabled()
     End Sub
-    ' + between objects
-    ' updating the cls param.
+
     Private Sub InitialiseDialog()
         'helpID
         ucrInputCRIPreview.IsReadOnly = True
-
         cmdEdit.Enabled = False
+        cmdDelete.Enabled = False
+        ucrChkScaleNumeric.Enabled = False
 
         '  ucrBase.iHelpTopicID =
 
-        'Selector
+        'ucrnud
+        ucrNudWeights.Minimum = 0
+        ucrNudWeights.Maximum = 1
+        ucrNudWeights.DecimalPlaces = 2
+        ucrNudWeights.Increment = 0.05
 
-        'Receivers
+        'Receiver
         ucrReceiverRedFlag.Selector = ucrSelectorCRI
         ucrReceiverRedFlag.SetMeAsReceiver()
         ucrReceiverRedFlag.SetIncludedDataTypes({"numeric", "logical", "factor"})
@@ -78,6 +82,8 @@ Public Class dlgDefineCRI
         ucrSaveCRI.SetDataFrameSelector(ucrSelectorCRI.ucrAvailableDataFrames)
         ucrSaveCRI.SetLabelText("New Column Name:")
         ucrSaveCRI.SetIsTextBox()
+        ucrSaveCRI.SetPrefix("CRI")
+        ucrSaveCRI.SetSaveTypeAsColumn()
     End Sub
 
     Private Sub SetDefaults()
@@ -88,7 +94,7 @@ Public Class dlgDefineCRI
         ucrSelectorCRI.Reset()
         lstIndexComponents.Items.Clear()
         ucrInputCRIPreview.SetName("")
-
+        ucrNudWeights.Value = 0
         clsCalculation.SetOperation("+")
 
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
@@ -96,9 +102,8 @@ Public Class dlgDefineCRI
 
         clsDefineFunction.SetRCommand("instat_calculation$new")
         clsDefineFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsDefineFunction.AddParameter("function_exp", clsROperatorParameter:=clsCalculation)
         clsDefineFunction.AddParameter("save", 2)
-
+        clsDefineFunction.AddParameter("result_name", Chr(34) & ucrSaveCRI.GetText() & Chr(34))
         bResetSubdialog = True
         DisplayRedFlag()
         EnableDeleteButton()
@@ -117,11 +122,12 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        '        ucrSaveCRI.SetRCode(clsDefineFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If lstIndexComponents.Items.Count > 0 AndAlso ucrNudWeights.GetText <> "" Then
+        If lstIndexComponents.Items.Count > 0 AndAlso ucrNudWeights.GetText <> "" AndAlso ucrSaveCRI.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -180,8 +186,8 @@ Public Class dlgDefineCRI
         Dim lviCondition As ListViewItem
         Dim clsTempOp As ROperator
         Dim clsTempFactorOp As ROperator
-        Dim clsList As New RFunction
-        Dim i As Integer = 0
+        Dim strList As String = ""
+        Dim strExpression As String
 
         clsTempOp = New ROperator
         If ucrReceiverRedFlag.strCurrDataType = "numeric" OrElse ucrReceiverRedFlag.strCurrDataType = "integer" OrElse ucrReceiverRedFlag.strCurrDataType = "logical" Then
@@ -218,13 +224,20 @@ Public Class dlgDefineCRI
         'RaiseEvent FilterChanged()
         'CheckAddEnabled()
 
-        clsList.SetRCommand("list")
+        strList = "list("
         For Each lviTemp As ListViewItem In lstIndexComponents.Items
-            clsList.AddParameter(ucrSelectorCRI.ucrAvailableDataFrames.cboAvailableDataFrames.Text, Chr(34) & lviTemp.Text & Chr(34))
+            If lviTemp.Index <> 0 Then
+                strList = strList & ", "
+            End If
+            strList = strList & ucrSelectorCRI.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " = " & Chr(34) & lviTemp.Text & Chr(34)
         Next
-        clsDefineFunction.AddParameter("calculated_from", clsRFunctionParameter:=clsList)
-        ucrInputCRIPreview.SetName(clsCalculation.ToScript)
+        strList = strList & ")"
+        clsDefineFunction.AddParameter("calculated_from", strList)
+        strExpression = Chr(34) & "(" & clsCalculation.ToScript() & ")" & "/" & lstIndexComponents.Items.Count & Chr(34)
+        clsDefineFunction.AddParameter("function_exp", strExpression)
+        ucrInputCRIPreview.SetName(strExpression)
         TestOKEnabled()
+        i = i + 1
     End Sub
 
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
@@ -260,6 +273,10 @@ Public Class dlgDefineCRI
 
     Private Sub ucrSelectorCRI_DataFrameChanged() Handles ucrSelectorCRI.DataFrameChanged
         lstIndexComponents.Clear() ' sort this
+        clsCalculation.ClearParameters()
+        clsDefineFunction.RemoveParameterByName("function_expression")
+        clsDefineFunction.RemoveParameterByName("calculated_from")
+        i = 0
         ucrInputCRIPreview.SetName("")
     End Sub
 
@@ -268,7 +285,11 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub ucrSaveCRI_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveCRI.ControlValueChanged
-        clsDefineFunction.AddParameter("result_name", Chr(34) & ucrSaveCRI.ucrInputTextSave.GetText & Chr(34))
+        clsDefineFunction.AddParameter("result_name", Chr(34) & ucrSaveCRI.GetText() & Chr(34))
         clsDefineFunction.SetAssignTo(ucrSaveCRI.ucrInputTextSave.GetText)
+    End Sub
+
+    Private Sub ucrSaveCRI_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveCRI.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
