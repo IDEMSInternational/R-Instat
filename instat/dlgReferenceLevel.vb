@@ -17,16 +17,13 @@ Imports instat.Translations
 Public Class dlgReferenceLevel
     Public bFirstLoad As Boolean = True
     Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
         TestOKEnabled()
-
     End Sub
 
     Private Sub InitialiseDialog()
