@@ -137,7 +137,7 @@ Public Class dlgStartofRains
         nudDPOverallInterval.Value = 45
         nudFrom.Value = 1
         nudTo.Value = 366
-        DefaultNudValue()
+        'DefaultNudValue()
     End Sub
 
     Private Sub ReopenDialog()
@@ -177,7 +177,7 @@ Public Class dlgStartofRains
         RollingSumMethod()
         TotalRainPercentileWetSpell()
         nudValues() ' new
-        DefaultNudValue() ' new
+        'DefaultNudValue()
         TestOKEnabled()
     End Sub
 
@@ -528,7 +528,7 @@ Public Class dlgStartofRains
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Start of Rains: Defining Date column as key")
     End Sub
 
-    Private Sub DefaultNudValue()
-        nudRDOutOfDays.Value = nudTROverDays.Value ' crashes if I go to 100+, can crash upon a reset, also what if I change the nudOverDays then the nudOutofDays - then I lose my nudOverDays value I put in
-    End Sub
+    'Private Sub DefaultNudValue()
+    '    nudRDOutOfDays.Value = nudTROverDays.Value ' crashes if I go to 100+, can crash upon a reset, also what if I change the nudOverDays then the nudOutofDays - then I lose my nudOverDays value I put in
+    'End Sub
 End Class
