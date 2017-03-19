@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgWindrose
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubDialog As Boolean = False
     Private clsDefaultRFunction As New RFunction
     Private clsFactorColumn As New RFunction
     Private clsLevelofFactor As New RFunction
@@ -36,9 +37,11 @@ Public Class dlgWindrose
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 452
@@ -60,7 +63,7 @@ Public Class dlgWindrose
         ucrReceiverFacet.SetParameter(New RParameter("facet", 2))
         ucrReceiverFacet.SetParameterIsRFunction()
 
-        ucrNudNoOfColumns.SetParameter(New RParameter("n_col", 3))
+        ucrNudNoOfColumns.SetParameter(New RParameter("n_col", 7))
         ucrNudNoOfColumns.SetLinkedDisplayControl(lblNoOfColumns)
         ucrNudNoOfColumns.SetRDefault(1)
         ucrNudNoOfColumns.Minimum = 1
@@ -82,8 +85,11 @@ Public Class dlgWindrose
 
         clsDefaultRFunction.SetRCommand("windrose")
         clsDefaultRFunction.AddParameter("n_col", 1)
+        clsDefaultRFunction.AddParameter("ggtheme", Chr(34) & "minimal" & Chr(34))
+        clsDefaultRFunction.AddParameter("speed_cuts", Chr(34) & "NA" & Chr(34))
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+        bResetSubDialog = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -128,4 +134,11 @@ Public Class dlgWindrose
     Private Sub ucrWindRoseSelector_DataFrameChanged() Handles ucrWindRoseSelector.ControlValueChanged
         clsFactorColumn.AddParameter("data_name", Chr(34) & ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
+
+    Private Sub cmdWindroseOptions_Click(sender As Object, e As EventArgs) Handles cmdWindroseOptions.Click
+        sdgWindrose.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
+        bResetSubDialog = False
+        sdgWindrose.ShowDialog()
+    End Sub
+
 End Class

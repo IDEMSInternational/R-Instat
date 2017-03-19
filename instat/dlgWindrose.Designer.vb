@@ -33,6 +33,7 @@ Partial Class dlgWindrose
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrWindRoseSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdWindroseOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -137,11 +138,21 @@ Partial Class dlgWindrose
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
+        'cmdWindroseOptions
+        '
+        Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 192)
+        Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
+        Me.cmdWindroseOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdWindroseOptions.TabIndex = 11
+        Me.cmdWindroseOptions.Text = "Options"
+        Me.cmdWindroseOptions.UseVisualStyleBackColor = True
+        '
         'dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 307)
+        Me.Controls.Add(Me.cmdWindroseOptions)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblNoOfColumns)
@@ -175,4 +186,5 @@ Partial Class dlgWindrose
     Friend WithEvents ucrNudNoOfColumns As ucrNud
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrReceiverFacet As ucrReceiverSingle
+    Friend WithEvents cmdWindroseOptions As Button
 End Class
