@@ -171,13 +171,18 @@ Public Class dlgStartofRains
         TestOKEnabled()
     End Sub
 
-    Private Sub TotalRainfall(sender As Object, e As EventArgs) Handles nudTRAmount.TextChanged, nudTROverDays.TextChanged, nudTRPercentile.TextChanged, chkTotalRainfall.CheckedChanged, rdoTRAmount.CheckedChanged, rdoTRPercentile.CheckedChanged
+    Private Sub TotalRainfall(sender As Object, e As EventArgs) Handles nudTROverDays.TextChanged, chkTotalRainfall.CheckedChanged, rdoTRAmount.CheckedChanged, rdoTRPercentile.CheckedChanged
         CheckBoxesSetting()
         CombinedFilter()
         RollingSumMethod()
         TotalRainPercentileWetSpell()
         nudValues() ' new
         'DefaultNudValue()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TotalRainfallNuds(sender As Object, e As EventArgs) Handles nudTRAmount.TextChanged, nudTRPercentile.TextChanged
+        CombinedFilter()
         TestOKEnabled()
     End Sub
 
