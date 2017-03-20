@@ -33,12 +33,14 @@ Public Class dlgOneWayFrequencies
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkGraph.SetRCode(clsSjpFrq, bReset)
+        ucrChkTable.SetRCode(clsSjtFreq, bReset)
 
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSort.SetRCode(clsSjtFreq, bReset)
@@ -66,23 +68,22 @@ Public Class dlgOneWayFrequencies
         ucrPnlSort.AddRadioButton(rdoDescending, Chr(34) & "desc" & Chr(34))
         ucrPnlSort.SetRDefault(Chr(34) & "none" & Chr(34))
 
-        ucrPnlFreqDisplay.AddRadioButton(rdoTable)
-        ucrPnlFreqDisplay.AddRadioButton(rdoGraph)
-
-        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjPlot::sjt.frq")
-        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.frq")
-
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlSort, {rdoTable}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkTable.AddToLinkedControls(ucrPnlSort, {True}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkGraph.AddToLinkedControls(ucrChkFlip, {True}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
+
+        ucrChkGraph.SetText("Graph")
+        ucrChkTable.SetText("Table")
+        ucrChkTable.AddFunctionNamesCondition(True, "sjPlot::sjt.frq")
+        ucrChkGraph.AddFunctionNamesCondition(True, "sjPlot::sjp.frq")
     End Sub
 
     Private Sub SetDefaults()
@@ -100,7 +101,7 @@ Public Class dlgOneWayFrequencies
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverOneWayFreq.IsEmpty() Then
-            If Not ucrChkWeights.Checked Then
+            If (Not ucrChkWeights.Checked) Then
                 ucrBase.OKEnabled(True)
             Else
                 If Not ucrReceiverWeights.IsEmpty Then
@@ -109,25 +110,31 @@ Public Class dlgOneWayFrequencies
                     ucrBase.OKEnabled(False)
                 End If
             End If
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
     Public Sub ICallType()
-        If rdoTable.Checked Then
+        If ucrChkTable.Checked Then
             ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
-        ElseIf rdoGraph.Checked
-            ucrBase.clsRsyntax.bHTMLOutput = False
+        ElseIf ucrChkGraph.Checked
+            ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
 
     Private Sub ChangeBaseFunction()
-        If rdoTable.Checked Then
+        If ucrChkTable.Checked Then
             ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
-        ElseIf rdoGraph.Checked Then
+        ElseIf ucrChkGraph.Checked Then
+            ucrReceiverOneWayFreq.SetParameter(New RParameter("var.cnt", 1))
+            ucrReceiverOneWayFreq.SetParameterIsRFunction()
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
+        Else
             ucrReceiverOneWayFreq.SetParameter(New RParameter("var.cnt", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
@@ -149,7 +156,7 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqDisplay.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTable.ControlValueChanged, ucrChkGraph.ControlValueChanged
         ChangeBaseFunction()
         ICallType()
     End Sub
