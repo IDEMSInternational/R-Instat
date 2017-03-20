@@ -48,10 +48,8 @@ Public Class dlgOneWayFrequencies
     Private Sub InitialiseDialog()
         'HelpID
         ' ucrBase.iHelpTopicID = 
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
-        cmdOptions.Enabled = False
 
+        cmdOptions.Enabled = False
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
         ucrReceiverOneWayFreq.SetMeAsReceiver()
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
@@ -102,16 +100,25 @@ Public Class dlgOneWayFrequencies
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverOneWayFreq.IsEmpty() Then
-            If ucrChkWeights.Checked Then
+            If Not ucrChkWeights.Checked Then
+                ucrBase.OKEnabled(True)
+            Else
                 If Not ucrReceiverWeights.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
             End If
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Public Sub ICallType()
+        If rdoTable.Checked Then
+            ucrBase.clsRsyntax.bHTMLOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
+        ElseIf rdoGraph.Checked
+            ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
 
@@ -144,9 +151,10 @@ Public Class dlgOneWayFrequencies
 
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqDisplay.ControlValueChanged
         ChangeBaseFunction()
+        ICallType()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged
         TestOkEnabled()
     End Sub
 

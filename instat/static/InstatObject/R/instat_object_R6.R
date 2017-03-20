@@ -1215,14 +1215,15 @@ instat_object$set("public", "get_corruption_contract_data_names", function() {
 )
 
 instat_object$set("public", "get_database_variable_names", function(query, data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
-  if(self$has_database_connection) {
+  if(self$has_database_connection()) {
     temp_data <- dbGetQuery(self$get_database_connection(), query)
+   
     if(as_list) {
       out <- list()
-      out[["database"]] <- tempdata[[1]]
+      out[["database"]] <- temp_data[[1]]
       return(out)
     }
-    else return(tempdata[[1]])
+    else return(temp_data[[1]])
   }
   else return(list())
 }
@@ -1233,8 +1234,8 @@ instat_object$set("public", "has_database_connection", function() {
 }
 )
 
-instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL()) {
-  password <- getPass(paste0(username, " password:"))
+instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL(), password) {
+  #password <- getPass(paste0(username, " password:"))
   out <- NULL
   out <- dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
@@ -1261,7 +1262,47 @@ instat_object$set("public", "database_disconnect", function() {
 }
 )
 
-instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date, end_date) {
+instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = "", end_date = "") {
+  #need to perform checks here
+  con = self$get_database_connection()
+  my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
+  station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  date_bounds=""
+  if(start_date!=""){
+    if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
+      date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
+    }
+    else{
+      stop("start_date format should be yyyy-mm-yy.")
+    }
+  }
   
+  if(end_date!=""){
+    if(try(!is.na(as.Date(end_date, format= "%Y-%m-%d")))){
+      date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
+    }
+    else{
+      stop("end_date format should be yyyy-mm-yy.")
+    }
+  }
+  
+  if (length(elements) > 0){
+    my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
+    element_ids = dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
+    element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
+  }
+  if(include_observation_data){
+    station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    data_list <- list(station_info, station_data)
+    names(data_list) = c("station_info","station_data")
+  }
+  else{
+    data_list <- list(station_info)
+    names(data_list) = "station_info"
+  }
+  self$import_data(data_tables = data_list)
+  
+  self$add_key("station_info", c("stationId"))
+  if(include_observation_data)(self$add_link(from_data_frame = "station_data", to_data_frame = "station_info", link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label))
 }
 )
