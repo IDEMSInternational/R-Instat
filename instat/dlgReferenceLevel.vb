@@ -16,8 +16,9 @@
 Imports instat.Translations
 Public Class dlgReferenceLevel
     Public bFirstLoad As Boolean = True
-    Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public strDefaultDataFrame As String = ""
 
+    Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
         If bFirstLoad Then
@@ -25,8 +26,8 @@ Public Class dlgReferenceLevel
             SetDefaults()
             bFirstLoad = False
         End If
+        SetDefaultDataFrame()
         TestOKEnabled()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -43,8 +44,13 @@ Public Class dlgReferenceLevel
     Private Sub SetDefaults()
         ucrSelectorForReferenceLevels.Reset()
         ucrSelectorForReferenceLevels.Focus()
+    End Sub
 
-
+    Private Sub SetDefaultDataFrame()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorForReferenceLevels.SetDataframe(strDefaultDataFrame)
+        End If
+        strDefaultDataFrame = ""
     End Sub
 
     Private Sub TestOKEnabled()
