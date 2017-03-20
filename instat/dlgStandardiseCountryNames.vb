@@ -54,6 +54,7 @@ Public Class dlgStandardiseCountryNames
         'selector
         ucrSelectorStandardiseCountry.SetParameter(New RParameter("data_name", 0))
         ucrSelectorStandardiseCountry.SetParameterIsString()
+        ucrReceiverCountryNames.SetIncludedDataTypes({"factor", "character"})
 
         'ucrreceiver
         ucrReceiverCountryNames.SetParameter(New RParameter("country_columns", 1))
