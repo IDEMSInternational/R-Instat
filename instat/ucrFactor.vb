@@ -31,6 +31,7 @@ Public Class ucrFactor
     Private bIsEditable As Boolean
     Private lstEditableColumns As List(Of String)
     Public bIncludeCopyOfLevels As Boolean
+    Public strExtraColumn As String = ""
 
     Public Sub New()
 
@@ -122,6 +123,10 @@ Public Class ucrFactor
                 For i = 0 To shtCurrSheet.RowCount - 1
                     shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, 0)
                 Next
+            End If
+            If strExtraColumn <> "" Then
+                shtCurrSheet.AppendCols(1)
+                shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = strExtraColumn
             End If
             If bIsSelector Then
                 iSelectorColumnIndex = shtCurrSheet.ColumnCount

@@ -258,9 +258,9 @@ Public Class RLink
             End If
         End If
 
-            'If strScript.Length > 2000 Then
-            '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-            If iCallType = 0 OrElse iCallType = 3 Then
+        'If strScript.Length > 2000 Then
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
@@ -273,7 +273,7 @@ Public Class RLink
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                    clsEngine.Evaluate(strScript)
+                clsEngine.Evaluate(strScript)
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
@@ -746,12 +746,12 @@ Public Class RLink
     End Function
 
     'Corruption analysis functions
-    Public Function GetCorruptionDataFrameNames() As List(Of String)
+    Public Function GetCorruptionContractDataFrameNames() As List(Of String)
         Dim clsGetDataNames As New RFunction
         Dim lstNames As New List(Of String)
         Dim expDataNames As SymbolicExpression
 
-        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_data_names")
+        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_contract_data_names")
         expDataNames = RunInternalScriptGetValue(clsGetDataNames.ToScript())
         If Not expDataNames.Type = Internals.SymbolicExpressionType.Null Then
             lstNames = expDataNames.AsCharacter.ToList()
@@ -765,7 +765,7 @@ Public Class RLink
 
         clsGetColumnName.SetRCommand(strInstatDataObject & "$get_corruption_column_name")
         clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        clsGetColumnName.AddParameter("type", Chr(34) & strType & Chr(34))
+        clsGetColumnName.AddParameter("type", strType)
         strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
         Return strColumn
     End Function
