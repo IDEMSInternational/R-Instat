@@ -3252,7 +3252,7 @@ Partial Class frmMain
         Me.CountryNamesCorrectionsToolStripMenuItem.Enabled = False
         Me.CountryNamesCorrectionsToolStripMenuItem.Name = "CountryNamesCorrectionsToolStripMenuItem"
         Me.CountryNamesCorrectionsToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
-        Me.CountryNamesCorrectionsToolStripMenuItem.Text = "Country Names Corrections..."
+        Me.CountryNamesCorrectionsToolStripMenuItem.Text = "Standardise Country Names..."
         '
         'MergeAdditionalDataToolStripMenuItem
         '
