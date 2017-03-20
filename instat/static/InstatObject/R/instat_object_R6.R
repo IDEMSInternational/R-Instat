@@ -639,6 +639,14 @@ instat_object$set("public", "replace_value_in_data", function(data_name, col_nam
 
 instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val) {
   self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val)
+  for(i in seq_along(private$.links)) {
+    if(private$.links[[i]]$from_data_frame == data_name) {
+      private$.links[[i]]$from_data_frame <- new_value
+    }
+    if(private$.links[[i]]$to_data_frame == data_name) {
+      private$.links[[i]]$to_data_frame <- new_value
+    }
+  }
 } 
 )
 
@@ -719,16 +727,15 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
-  link_name <- ""
+  link_names <- c()
   for(i in seq_along(private$.links)) {
     if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
-      link_name <- names(private$.links)[i]
-      break
+      link_names <- c(link_names, names(private$.links)[i])
     }
   }
-  if(link_name != "") {
+  for(name in link_names) {
     #TODO Should this be delete or disable?
-    self$remove_link(link_name)
+    self$remove_link(name)
   }
 } 
 )
@@ -758,6 +765,14 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
   data_obj = self$get_data_objects(data_name)
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
+  for(i in seq_along(private$.links)) {
+    if(private$.links[[i]]$from_data_frame == data_name) {
+      private$.links[[i]]$from_data_frame <- new_value
+    }
+    if(private$.links[[i]]$to_data_frame == data_name) {
+      private$.links[[i]]$to_data_frame <- new_value
+    }
+  }
   data_obj$set_data_changed(TRUE)
  } 
 )
