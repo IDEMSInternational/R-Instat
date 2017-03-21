@@ -30,6 +30,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.lblQuantileAlgorithm = New System.Windows.Forms.Label()
         Me.ucrNudQuantileAlgorithm = New instat.ucrNud()
         Me.ucrNewColumnName = New instat.ucrSave()
+        Me.lblSelected = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrSelectorStandardiseCountry
@@ -110,11 +111,22 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.ucrNewColumnName.Size = New System.Drawing.Size(127, 24)
         Me.ucrNewColumnName.TabIndex = 10
         '
+        'lblSelected
+        '
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.Location = New System.Drawing.Point(242, 43)
+        Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(93, 13)
+        Me.lblSelected.TabIndex = 11
+        Me.lblSelected.Tag = "Selected_Variable:"
+        Me.lblSelected.Text = "Selected Variable:"
+        '
         'dlgRecodeNumericIntoQuantiles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 313)
+        Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.ucrNudQuantileAlgorithm)
         Me.Controls.Add(Me.lblQuantileAlgorithm)
@@ -142,4 +154,5 @@ Partial Class dlgRecodeNumericIntoQuantiles
     Friend WithEvents lblQuantileAlgorithm As Label
     Friend WithEvents ucrNudNumberOfQuantiles As ucrNud
     Friend WithEvents ucrNewColumnName As ucrSave
+    Friend WithEvents lblSelected As Label
 End Class
