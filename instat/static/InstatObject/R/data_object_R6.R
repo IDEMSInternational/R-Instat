@@ -541,8 +541,8 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
   
   else {
     if(sum(names(curr_data) == curr_col_name) > 1) {
-      warning(paste0("Multiple columns have name: '", curr_col_name,"'. All such columns will be 
-                     renamed."))
+      # Should never happen since column names must be unique
+      warning(paste0("Multiple columns have name: '", curr_col_name,"'. All such columns will be renamed."))
     }
     # Need to use private$data here because changing names of data field
     names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
