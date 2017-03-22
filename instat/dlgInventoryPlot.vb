@@ -96,7 +96,7 @@ Public Class dlgInventoryPlot
         ucrInputTitle.SetName("")
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
-        clsDefaultRFunction.AddParameter("coord_flip", Chr(34) & "FALSE" & Chr(34))
+        clsDefaultRFunction.AddParameter("coord_flip", "FALSE")
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
 
