@@ -1116,7 +1116,7 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
     if(length(include) > 0 || length(exclude) > 0) {
       curr_var_metadata = var_metadata[col, ]
       if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
-         && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
+         && !all(sapply(names(exclude), function(prop) curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
         out <- c(out, col)
       }
     }
@@ -2726,7 +2726,7 @@ data_object$set("public","generate_all_bids_trimmed", function() {
 }
 )
 
-standard_country_names <- function(country) {
+standardise_country_names <- function(country) {
   country_names <- country
   country_names[country_names == "Antigua and Bar"] <- "Antigua and Barbuda"
   country_names[country_names == "Bosnia and Herz"] <- "Bosnia and Herzegovina"
@@ -2761,14 +2761,14 @@ standard_country_names <- function(country) {
   return(country_names)
 }
 
-instat_object$set("public","standard_country_names", function(data_name, country_columns = c()) {
-  self$get_data_objects(data_name)$standard_country_names(country_columns)
+instat_object$set("public","standardise_country_names", function(data_name, country_columns = c()) {
+  self$get_data_objects(data_name)$standardise_country_names(country_columns)
 }
 )
 
-data_object$set("public","standard_country_names", function(country_columns = c()) {
+data_object$set("public","standardise_country_names", function(country_columns = c()) {
   for(col_name in country_columns) {
-    corrected_col <- standard_country_names(self$get_columns_from_data(col_name))
+    corrected_col <- standardise_country_names(self$get_columns_from_data(col_name))
     new_col_name <- next_default_item(paste(col_name, "standardised", sep = "_"), self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(new_col_name, corrected_col)
     type <- self$get_variables_metadata(column = col_name, property = corruption_type_label)
