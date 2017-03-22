@@ -32,6 +32,7 @@ Public Class dlgRecodeNumericIntoQuantiles
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrNewColumnName.SetRCode(clsBincodeFunction, bReset)
         ucrReceiverSingle.SetRCode(clsBincodeFunction, bReset)
         ucrNudNumberOfQuantiles.SetRCode(clsSeqFunction, bReset)
         ucrNudQuantileAlgorithm.SetRCode(clsQuantileFunction, bReset)
