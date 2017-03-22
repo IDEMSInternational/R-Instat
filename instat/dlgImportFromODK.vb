@@ -33,11 +33,7 @@ Public Class dlgImportFromODK
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlPlatform.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputUsername.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputChooseForm.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlPlatform.SetRCode(clsGetFormsFunction, bReset)
-        ucrInputUsername.SetRCode(clsGetFormsFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -69,9 +65,8 @@ Public Class dlgImportFromODK
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_ODK")
         clsDefaultRFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
-        clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
-
         clsGetFormsFunction.SetRCommand("get_odk_form_names")
+        clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
@@ -81,13 +76,13 @@ Public Class dlgImportFromODK
         TestOKEnabled()
     End Sub
 
-    'Private Sub pnlPlatform_ControlContentsChanged() Handles ucrPnlPlatform.ControlValueChanged
-    '    If rdoOna.Checked Then
-    '        clsGetFormsFunction.AddParameter("platform", Chr(34) & "ona" & Chr(34))
-    '    ElseIf rdoKobo.Checked Then
-    '        clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
-    '    End If
-    'End Sub
+    Private Sub pnlPlatform_ControlContentsChanged() Handles ucrPnlPlatform.ControlValueChanged
+        If rdoOna.Checked Then
+            clsGetFormsFunction.AddParameter("platform", Chr(34) & "ona" & Chr(34))
+        ElseIf rdoKobo.Checked Then
+            clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
+        End If
+    End Sub
 
     Private Sub ucrInputUsername_NameChanged() Handles ucrInputUsername.ControlValueChanged
         If ucrInputUsername.IsEmpty() Then
