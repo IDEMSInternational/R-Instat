@@ -22,7 +22,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrSelectorStandardiseCountry = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorRecodeNumeric = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
         Me.lblNumberOfQuantiles = New System.Windows.Forms.Label()
@@ -33,15 +33,15 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'ucrSelectorStandardiseCountry
+        'ucrSelectorRecodeNumeric
         '
-        Me.ucrSelectorStandardiseCountry.bShowHiddenColumns = False
-        Me.ucrSelectorStandardiseCountry.bUseCurrentFilter = True
-        Me.ucrSelectorStandardiseCountry.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorStandardiseCountry.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorStandardiseCountry.Name = "ucrSelectorStandardiseCountry"
-        Me.ucrSelectorStandardiseCountry.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorStandardiseCountry.TabIndex = 1
+        Me.ucrSelectorRecodeNumeric.bShowHiddenColumns = False
+        Me.ucrSelectorRecodeNumeric.bUseCurrentFilter = True
+        Me.ucrSelectorRecodeNumeric.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorRecodeNumeric.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorRecodeNumeric.Name = "ucrSelectorRecodeNumeric"
+        Me.ucrSelectorRecodeNumeric.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorRecodeNumeric.TabIndex = 1
         '
         'ucrBase
         '
@@ -108,7 +108,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 218)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(127, 24)
+        Me.ucrNewColumnName.Size = New System.Drawing.Size(180, 24)
         Me.ucrNewColumnName.TabIndex = 10
         '
         'lblSelected
@@ -134,7 +134,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.Controls.Add(Me.lblNumberOfQuantiles)
         Me.Controls.Add(Me.ucrReceiverSingle)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrSelectorStandardiseCountry)
+        Me.Controls.Add(Me.ucrSelectorRecodeNumeric)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -146,7 +146,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
 
     End Sub
 
-    Friend WithEvents ucrSelectorStandardiseCountry As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorRecodeNumeric As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
     Friend WithEvents lblNumberOfQuantiles As Label
