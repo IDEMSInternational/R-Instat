@@ -16,70 +16,63 @@
 Imports instat
 Imports instat.Translations
 Public Class sdgOneVarGraph
-    Public bFirstLoad As Boolean = True
+    Public bControlsInitialised As Boolean = False
     Public clsGraphOneVariable As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            bFirstLoad = False
-        End If
         autoTranslate(Me)
-        UpdateControls(Me, clsGraphOneVariable)
     End Sub
 
+    Private Sub sdgOneVarGraph_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
-    Public Sub InitialiseDialog()
-        Dim lstNumericPairs As New List(Of KeyValuePair(Of String, String))
-        Dim lstCategoricalPairs As New List(Of KeyValuePair(Of String, String))
+    End Sub
 
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Boxplot", Chr(34) & "geom_boxplot" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Histogram", Chr(34) & "geom_histogram" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Dotplot", Chr(34) & "geom_dotplot" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Point Plot", Chr(34) & "geom_point" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Density Plot", Chr(34) & "geom_density" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Frequency Polygon", Chr(34) & "geom_freqpoly" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Violin Plot", Chr(34) & "geom_violin" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Jitter Plot", Chr(34) & "geom_jitter" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Boxplot + Jitter", Chr(34) & "box_jitter" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Violin + Jitter", Chr(34) & "violin_jitter" & Chr(34)))
-        lstNumericPairs.Add(New KeyValuePair(Of String, String)("Violin + Boxplot", Chr(34) & "violin_box" & Chr(34)))
-        ucrInputNumeric.SetItems(lstNumericPairs)
+    Public Sub InitialiseControls()
+        Dim dctNumericPairs As New Dictionary(Of String, String)
+        Dim dctCategoricalPairs As New Dictionary(Of String, String)
 
-        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Bar Chart", Chr(34) & "geom_bar" & Chr(34)))
-        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Pie Chart", Chr(34) & "pie_chart" & Chr(34)))
-        lstCategoricalPairs.Add(New KeyValuePair(Of String, String)("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34)))
-        ucrInputCategorical.SetItems(lstCategoricalPairs)
+        ucrInputNumeric.SetParameter(New RParameter("numeric"))
+        dctNumericPairs.Add("Boxplot", Chr(34) & "geom_boxplot" & Chr(34))
+        dctNumericPairs.Add("Histogram", Chr(34) & "geom_histogram" & Chr(34))
+        dctNumericPairs.Add("Dotplot", Chr(34) & "geom_dotplot" & Chr(34))
+        dctNumericPairs.Add("Point Plot", Chr(34) & "geom_point" & Chr(34))
+        dctNumericPairs.Add("Density Plot", Chr(34) & "geom_density" & Chr(34))
+        dctNumericPairs.Add("Frequency Polygon", Chr(34) & "geom_freqpoly" & Chr(34))
+        dctNumericPairs.Add("Violin Plot", Chr(34) & "geom_violin" & Chr(34))
+        dctNumericPairs.Add("Jitter Plot", Chr(34) & "geom_jitter" & Chr(34))
+        dctNumericPairs.Add("Boxplot + Jitter", Chr(34) & "box_jitter" & Chr(34))
+        dctNumericPairs.Add("Violin + Jitter", Chr(34) & "violin_jitter" & Chr(34))
+        dctNumericPairs.Add("Violin + Boxplot", Chr(34) & "violin_box" & Chr(34))
+        ucrInputNumeric.SetItems(dctNumericPairs)
 
-        ucrInputNumeric.SetParameterName("numeric")
-        ucrInputCategorical.SetParameterName("categorical")
+        ucrInputCategorical.SetParameter(New RParameter("categorical"))
+        dctCategoricalPairs.Add("Bar Chart", Chr(34) & "geom_bar" & Chr(34))
+        dctCategoricalPairs.Add("Pie Chart", Chr(34) & "pie_chart" & Chr(34))
+        dctCategoricalPairs.Add("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34))
+        ucrInputCategorical.SetItems(dctCategoricalPairs)
 
-        'TODO See if we can get the Text property on the Properties tab in design view to avoid this
-        ucrChkSpecifyLayout.SetParameterName("ncol")
+        ucrNudNumberofColumns.SetParameter(New RParameter("ncol"))
+        ucrNudNumberofColumns.SetMinMax(1, 10)
+        ucrNudNumberofColumns.bAddRemoveParameter = False
+        ucrNudNumberofColumns.SetLinkedDisplayControl(lblNumberofColumns)
+
+        ucrChkSpecifyLayout.SetParameter(ucrNudNumberofColumns.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkSpecifyLayout.SetText("Specify Layout")
-        ucrChkSpecifyLayout.SetLinkedControl(ucrNudNumberofColumns)
-        ucrChkSpecifyLayout.SetIsParameterPresent()
+        ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
+        ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis"))
+        ucrChkFreeScaleAxisforFacets.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFreeScaleAxisforFacets.SetRDefault("FALSE")
 
-        ucrNudNumberofColumns.SetParameterName("ncol")
-        ucrNudNumberofColumns.SetLinkedParameterName("ncol", True)
-        ucrNudNumberofColumns.bAddIfParameterNotPresent = False
-        'This needs to be done last as it changes the Value because default value is 0.
-        'If not done last then R code may be updated worngly because its happening before all properties of the control are set
-        'This line is needed if there already a value for the nud in the RFunction, otherwise setting min/max may override the RFunction's value
-        ucrNudNumberofColumns.UpdateControl(clsGraphOneVariable)
-        ucrNudNumberofColumns.SetMinMax(1, 10)
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
         clsGraphOneVariable = clsNewRFunction
-    End Sub
-
-    Private Sub CoreControlsValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScaleAxisforFacets.ControlValueChanged, ucrChkSpecifyLayout.ControlContentsChanged, ucrInputCategorical.ControlContentsChanged, ucrInputNumeric.ControlContentsChanged, ucrNudNumberofColumns.ControlContentsChanged
-        ucrChangedControl.UpdateRCode(clsGraphOneVariable)
-        'After one control has edited the code, other controls may need to be updated
-        'Could make more efficient by only updating controls "linked" to ucrChangedControl, but for this this seems a simple solution.
-        UpdateControls(Me, clsGraphOneVariable)
+        SetRCode(Me, clsGraphOneVariable, bReset)
     End Sub
 End Class

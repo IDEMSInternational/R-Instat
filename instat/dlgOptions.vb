@@ -32,7 +32,6 @@ Public Class dlgOptions
     Dim fntOutput, fntCommand, fntComment, fntEditor As Font
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
 
-
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -57,7 +56,8 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
-        rdoDisplayinSeparateWindows.Enabled = False
+        nudDigits.Minimum = 0
+        nudDigits.Maximum = 22
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -72,6 +72,8 @@ Public Class dlgOptions
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
         chkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
         chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
+        nudDigits.Value = frmMain.clsInstatOptions.iDigits
+        chkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -100,8 +102,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
-        frmMain.clsInstatOptions.SetFormatCommand(fntCommand, clrCommand)
-        frmMain.clsInstatOptions.SetEditorFormat(fntEditor, clrEditor)
+        frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
+        frmMain.clsInstatOptions.SetFormatEditor(fntEditor, clrEditor)
         frmMain.clsInstatOptions.SetComment(txtComment.Text)
         frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
@@ -110,8 +112,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
         frmMain.clsInstatOptions.bIncludeCommentDefault = chkIncludeCommentsbyDefault.Checked
         frmMain.clsInstatOptions.SetCommandInOutpt(chkShowRCommandsinOutputWindow.Checked)
-
-
+        frmMain.clsInstatOptions.SetDigits(nudDigits.Value)
+        frmMain.clsInstatOptions.SetSignifStars(chkShowSignifStars.Checked)
     End Sub
 
     Private Sub SetView()
@@ -322,6 +324,15 @@ Public Class dlgOptions
         rtbOutputPreview.SelectionLength = 0
     End Sub
 
+    Private Sub cmdFactoryReset_Click(sender As Object, e As EventArgs) Handles cmdFactoryReset.Click
+        Dim msgFactoryReset = MsgBox("Are you sure you want to reset to factory defaults?", MessageBoxButtons.YesNo, "Factory Reset")
+        If msgFactoryReset = DialogResult.Yes Then
+            frmMain.clsInstatOptions = New InstatOptions(False)
+            LoadInstatOptions()
+            ApplyEnabled(True)
+        End If
+    End Sub
+
     Private Sub SetCommandFont(fntNew As Font, clrNew As Color)
         fntCommand = fntNew
         clrCommand = clrNew
@@ -352,5 +363,13 @@ Public Class dlgOptions
             ucrWorkingDirectory.SetName(strWorkingDirectory)
             ApplyEnabled(True)
         End If
+    End Sub
+
+    Private Sub nudDigits_ValueChanged(sender As Object, e As EventArgs) Handles nudDigits.ValueChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkShowSignifStars_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSignifStars.CheckedChanged
+        ApplyEnabled(True)
     End Sub
 End Class

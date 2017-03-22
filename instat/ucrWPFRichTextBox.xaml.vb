@@ -12,15 +12,45 @@ Public Class ucrWPFRichTextBox
             'NewWebBrowser.Height = NewWebBrowser.Document.Body.ScrollRectangle.Size.Height 'Unfortunately this is for the windows forms webbrowser... 
         End Sub
     End Class
+
     Public Sub AppendText(color As Color, font As Font, text As String, Optional color2 As Color = Nothing, Optional font2 As Font = Nothing, Optional text2 As String = Nothing)
         'Adds a block (paragraph) of text to the output window in the required font and color. Can add up to two "lines" of distinct text for now (e.g. one line comment other line RCommand). 
         Dim run1 As New Documents.Run(text)
+
+        'TODO Need to extract more options from font into run1
+        If font.Bold Then
+            run1.FontWeight = FontWeights.Bold
+        End If
+        If font.Italic Then
+            run1.FontStyle = FontStyles.Italic
+        End If
+        If font.Strikeout Then
+            run1.TextDecorations = TextDecorations.Strikethrough
+        End If
+        If font.Underline Then
+            run1.TextDecorations = TextDecorations.Underline
+        End If
+        run1.FontSize = font.SizeInPoints
         run1.FontFamily = New Media.FontFamily(font.FontFamily.Name)
         run1.Foreground = New Media.BrushConverter().ConvertFromString(color.Name)
         Dim blkParagraph As New Documents.Paragraph(run1)
         'blkParagraph.Inlines.Add(New Documents.LineBreak)
         If font2 IsNot Nothing AndAlso text2 IsNot Nothing AndAlso color2 <> Nothing Then 'Note: IsNot only works for reference types...
             Dim run2 As New Documents.Run(text2)
+            If font2.Bold Then
+                run2.FontWeight = FontWeights.Bold
+            End If
+            If font2.Italic Then
+                run2.FontStyle = FontStyles.Italic
+            End If
+            run2.FontSize = font2.Size
+            'TODO This will not allow strikethrough and underline
+            If font2.Strikeout Then
+                run2.TextDecorations = TextDecorations.Strikethrough
+            End If
+            If font2.Underline Then
+                run2.TextDecorations = TextDecorations.Underline
+            End If
             run2.FontFamily = New Media.FontFamily(font2.FontFamily.Name)
             run2.Foreground = New Media.BrushConverter().ConvertFromString(color2.Name)
             blkParagraph.Inlines.Add(run2)
@@ -52,33 +82,6 @@ Public Class ucrWPFRichTextBox
         End Try
     End Sub
 
-    Public Sub TestForGraphics()
-        'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
-        'It is called from RLink at the end of RunScript.
-        Dim strTempGraphsDirectory As String
-        Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
-        Dim iNumberOfFiles As Integer = -1
-        strTempGraphsDirectory = Path.Combine(IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
-        Try
-            lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
-        Catch e As Exception
-            lstTempGraphFiles = Nothing
-            MsgBox(e.Message & vbNewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
-        End Try
-        If lstTempGraphFiles IsNot Nothing Then
-            iNumberOfFiles = CStr(lstTempGraphFiles.Count)
-        End If
-        If iNumberOfFiles > 0 Then
-            For Each strFileName As String In lstTempGraphFiles
-                DisplayGraph(strFileName)
-                Try
-                    My.Computer.FileSystem.DeleteFile(strFileName)
-                Catch e As Exception
-                    MsgBox(e.Message & vbNewLine & "A problem occured in attempting to delete the temporary file: " & strFileName & " The possible exceptions are described here: https://msdn.microsoft.com/en-us/library/tdx72k4b.aspx", MsgBoxStyle.Critical)
-                End Try
-            Next
-        End If
-    End Sub
     Public Sub DisplayGraph(strImageLocation As String)
         'Adds a graph to the output window.
         Dim blkParagraph As Documents.Paragraph

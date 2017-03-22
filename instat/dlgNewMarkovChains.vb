@@ -43,9 +43,20 @@ Public Class dlgNewMarkovChains
 
     Private Sub InitialiseDialog()
         ucrReceiverStation.Selector = ucrSelectorMarkovChains
+        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverStation.bAutoFill = True
         ucrReceiverDate.Selector = ucrSelectorMarkovChains
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.bAutoFill = True
+
         ucrReceiverDOY.Selector = ucrSelectorMarkovChains
+        ucrReceiverDOY.bAutoFill = True
+
+        'ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverRainfall.Selector = ucrSelectorMarkovChains
+        ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
+        ucrReceiverRainfall.bAutoFill = True
+
         ucrReceiverAdditionalVariables.Selector = ucrSelectorMarkovChains
         ucrBase.iHelpTopicID = 491
         ucrInputExcludeSep.SetItems({"Exclude", "Separate"})
@@ -87,6 +98,7 @@ Public Class dlgNewMarkovChains
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorMarkovChains.Reset()
         ucrReceiverStation.SetMeAsReceiver()
         nudSeasonalityFrom.Maximum = 6
         nudSeasonalityTo.Maximum = 6

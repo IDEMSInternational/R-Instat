@@ -71,7 +71,7 @@ Public Class ucrButtons
         bToBeAssigned = clsRsyntax.GetbToBeAssigned()
         strAssignTo = clsRsyntax.GetstrAssignTo()
         'Also need to be getting strAssignToColumn, strAssignToDataFrame etc. maybe one method to get all as a list
-        frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
+        frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, bHtmlOutput:=clsRsyntax.bHTMLOutput, strComment:=strComments)
 
         'This clears the script after it has been run, but leave the function and parameters in the base function
         'so that it can be run exactly the same when reopened.
@@ -113,7 +113,11 @@ Public Class ucrButtons
     End Sub
 
     Private Sub SetDefaults()
-        chkComment.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            chkComment.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        Else
+            chkComment.Checked = True
+        End If
         SetCommentEditable()
         'TODO default text should be translatable
         'This is needed only so that the designer displays correctly in VS

@@ -38,5 +38,4 @@ Public Class dlgViewAndRemoveLinks
     Private Sub SetDefaults()
 
     End Sub
-
 End Class

@@ -128,17 +128,20 @@ Public Class ucrInputComboBox
         AdjustComboBoxWidth(cboInput)
     End Sub
 
-    Public Sub SetItems(lstItemParameterValuePairs As List(Of KeyValuePair(Of String, String)), Optional bClearExisting As Boolean = True)
+    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True)
         Dim kvpTemp As KeyValuePair(Of String, String)
 
         If bClearExisting Then
             cboInput.Items.Clear()
-            lstRecognisedItemParameterValuePairs.Clear()
         End If
-        For Each kvpTemp In lstItemParameterValuePairs
+        If clsParameter Is Nothing Then
+            MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+        End If
+        For Each kvpTemp In dctItemParameterValuePairs
             cboInput.Items.Add(kvpTemp.Key)
+            dctDisplayParameterValues.Add(kvpTemp.Key, kvpTemp.Value)
+            AddParameterValuesCondition(kvpTemp.Key, clsParameter.strArgumentName, kvpTemp.Value)
         Next
-        lstRecognisedItemParameterValuePairs.AddRange(lstItemParameterValuePairs)
         AdjustComboBoxWidth(cboInput)
     End Sub
 
@@ -163,6 +166,7 @@ Public Class ucrInputComboBox
     End Function
 
     Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+        bAllowNonConditionValues = False
         FillItemTypes()
     End Sub
 
@@ -210,7 +214,7 @@ Public Class ucrInputComboBox
         cboCurrent.DropDownWidth = iWidth
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        MyBase.UpdateControl(clsRCodeObject)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
     End Sub
 End Class

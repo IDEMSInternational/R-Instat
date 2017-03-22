@@ -20,6 +20,7 @@ Public Class ucrReceiverSingle
     Dim strDataFrameName As String
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
+    Public bAutoFill As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -130,7 +131,7 @@ Public Class ucrReceiverSingle
             Select Case strCurrentType
                 Case "column"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-                    clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
+                    clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
                     If bForceAsDataFrame Then
                         clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
                     Else
@@ -162,6 +163,12 @@ Public Class ucrReceiverSingle
                 Case "dataframe"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                     clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
+                Case "key"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+                    clsGetVariablesFunc.AddParameter("key_name", GetVariableNames())
+                Case "link"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_links")
+                    clsGetVariablesFunc.AddParameter("link_name", GetVariableNames())
             End Select
 
             'TODO make this an option set in Options menu
@@ -237,7 +244,43 @@ Public Class ucrReceiverSingle
         RemoveSelected()
     End Sub
 
-    Public Overrides Sub UpdateControl(clsRCodeObject As RCodeStructure)
-        Throw New NotImplementedException()
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
+    End Sub
+
+    Private Sub Selector_DataFrameChanged() Handles Selector.DataFrameChanged
+        CheckAutoFill()
+    End Sub
+
+    Public Sub CheckAutoFill()
+        If bAutoFill Then
+            If Selector IsNot Nothing Then
+                If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
+                    SetMeAsReceiver()
+                    If Selector.lstAvailableVariable.Items.Count = 1 Then
+                        Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub ParentForm_Shown()
+        If bFirstShown Then
+            CheckAutoFill()
+            bFirstShown = False
+        End If
+    End Sub
+
+    Protected Overrides Sub Selector_ResetAll()
+        MyBase.Selector_ResetAll()
+        CheckAutoFill()
+    End Sub
+
+    Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
+            bFirstLoad = False
+        End If
     End Sub
 End Class
