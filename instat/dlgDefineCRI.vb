@@ -61,8 +61,8 @@ Public Class dlgDefineCRI
         ucrReceiverRedFlag.Selector = ucrSelectorCRI
         ucrReceiverRedFlag.SetMeAsReceiver()
         ucrReceiverRedFlag.SetIncludedDataTypes({"numeric", "logical", "factor"})
-        ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Output", {"TRUE"})
-        ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Red_Flag", {"TRUE"})
+        ucrReceiverRedFlag.AddExcludedMetadataProperty("Is_Corruption_Output", {"FALSE"})
+        ucrReceiverRedFlag.AddExcludedMetadataProperty("Is_Corruption_Red_Flag", {"FALSE"})
 
         'ucrChk
         ucrChkScaleNumeric.SetText("Scale Numeric")
