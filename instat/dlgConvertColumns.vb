@@ -133,7 +133,7 @@ Public Class dlgConvertColumns
         If ucrChkSpecifyDecimalsToDisplay.Checked Then
             ucrReceiverColumnsToConvert.SetDataType("numeric")
         Else
-            ucrReceiverColumnsToConvert.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+            ucrReceiverColumnsToConvert.SetIncludedDataTypes({"integer", "numeric", "character", "ordered", "factor"})
         End If
     End Sub
 End Class
