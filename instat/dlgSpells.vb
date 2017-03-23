@@ -22,7 +22,7 @@ Public Class dlgSpells
     Private strCurrDataName As String = ""
     Private bFirstLoad As Boolean = True
 
-    Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgSpells_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
