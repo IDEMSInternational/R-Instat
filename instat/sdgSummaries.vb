@@ -48,7 +48,6 @@ Public Class sdgSummaries
         ucrChkMaximum.SetText("Maximum")
         ucrChkMaximum.SetParameter(New RParameter("summary_max"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        'ucrChkMedian.Enabled = False
         ucrChkMedian.SetText("Median")
         ucrChkMedian.SetParameter(New RParameter("summary_median"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
@@ -64,6 +63,7 @@ Public Class sdgSummaries
         ucrChkVariance.SetText("Variance")
         ucrChkVariance.SetParameter(New RParameter("summary_var"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
+        ucrChkQuartiles.Enabled = False 'To be enabled once quartiles summary function has is implemented in Instat object
         ucrChkQuartiles.SetText("Quartiles")
         ucrChkQuartiles.SetParameter(New RParameter("summary_quartiles"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
