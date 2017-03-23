@@ -86,8 +86,8 @@ Partial Class dlgSaveAs
         Me.MinimizeBox = False
         Me.Name = "dlgSaveAs"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Save_As"
-        Me.Text = "Save As"
+        Me.Tag = "Save_Data_As"
+        Me.Text = "Save  Data As"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
