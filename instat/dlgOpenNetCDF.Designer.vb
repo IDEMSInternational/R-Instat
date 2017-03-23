@@ -66,10 +66,10 @@ Partial Class dlgOpenNetCDF
         Me.lblMainDataName.AutoSize = True
         Me.lblMainDataName.Location = New System.Drawing.Point(10, 49)
         Me.lblMainDataName.Name = "lblMainDataName"
-        Me.lblMainDataName.Size = New System.Drawing.Size(116, 13)
+        Me.lblMainDataName.Size = New System.Drawing.Size(122, 13)
         Me.lblMainDataName.TabIndex = 3
-        Me.lblMainDataName.Tag = "Main_Dataframe_Name:"
-        Me.lblMainDataName.Text = "Main Dataframe Name:"
+        Me.lblMainDataName.Tag = "Main_Data_Frame_Name:"
+        Me.lblMainDataName.Text = "Main Data Frame Name:"
         '
         'ucrInputLocDataName
         '
