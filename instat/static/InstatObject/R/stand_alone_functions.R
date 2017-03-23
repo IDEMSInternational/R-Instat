@@ -60,27 +60,29 @@ next_default_item = function(prefix, existing_names = c(), include_index = TRUE,
   return(out)
 }
 
-import_from_ODK = function(username, password, form_name, platform) {
-  if(platform == "kobo") {
-    url <- "https://kc.kobotoolbox.org/api/v1/data"
-  }
-  else if(platform == "ona") {
-    url <- "https://api.ona.io/api/v1/data"
-  }
-  else stop("Unrecognised platform.")
-  
-  if(!missing(username) && !missing(password)) {
-    has_authentication <- TRUE
-    user <- authenticate(username, password)
-    odk_data <- GET(url, user)
-  }
-  else {
-    has_authentication <- FALSE
-    odk_data <- GET(url)
-  }
-  
-  forms <- content(odk_data, "parse")
-  form_names <- sapply(forms, function(x) x$title)
+import_from_ODK = function(username, form_name, platform) {
+   if(platform == "kobo") {
+     url <- "https://kc.kobotoolbox.org/api/v1/data"
+   }
+   else if(platform == "ona") {
+     url <- "https://api.ona.io/api/v1/data"
+   }
+   else stop("Unrecognised platform.")
+   password <- getPass(paste0(username, " password:"))
+   if(!missing(username) && !missing(password)) {
+     has_authentication <- TRUE
+     user <- authenticate(username, password)
+     odk_data <- GET(url, user)
+   }
+   else {
+     has_authentication <- FALSE
+     odk_data <- GET(url)
+   }
+
+   forms <- content(odk_data, "parse")
+   form_names <- sapply(forms, function(x) x$title)    # get_odk_form_names_results <- get_odk_form_names(username, platform)
+  # form_names <- get_odk_form_names_results[1]
+  # forms <- get_odk_form_names_results[2]
   
   if(!form_name %in% form_names) stop(form_name, " not found in available forms:", paste(form_names, collapse = ", "))
   form_num <- which(form_names == form_name)
@@ -96,7 +98,7 @@ import_from_ODK = function(username, password, form_name, platform) {
   return(out)
 }
 
-get_odk_form_names = function(username, password, platform) {
+get_odk_form_names = function(username, platform) {
   #TODO This should not be repeated
   if(platform == "kobo") {
     url <- "https://kc.kobotoolbox.org/api/v1/data"
@@ -105,7 +107,7 @@ get_odk_form_names = function(username, password, platform) {
     url <- "https://api.ona.io/api/v1/data"
   }
   else stop("Unrecognised platform.")
-  
+  password <- getPass(paste0(username, " password:"))
   if(!missing(username) && !missing(password)) {
     has_authentication <- TRUE
     user <- authenticate(username, password)
