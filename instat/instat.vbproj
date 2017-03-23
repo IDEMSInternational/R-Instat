@@ -419,6 +419,12 @@
     <Compile Include="dlgRatingScales.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRecodeNumericIntoQuantiles.Designer.vb">
+      <DependentUpon>dlgRecodeNumericIntoQuantiles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRecodeNumericIntoQuantiles.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </Compile>
@@ -2610,6 +2616,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeNumeric.sw-KE.resx">
       <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeNumericIntoQuantiles.resx">
+      <DependentUpon>dlgRecodeNumericIntoQuantiles.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
