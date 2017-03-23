@@ -49,6 +49,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkCell.SetRCode(clsSjtXtab, bReset)
         ucrChkColumn.SetRCode(clsSjtXtab, bReset)
         ucrChkRow.SetRCode(clsSjtXtab, bReset)
+        ucrChkCount.SetRCode(clsSjtXtab, bReset)
 
     End Sub
 
@@ -98,7 +99,6 @@ Public Class dlgTwoWayFrequencies
         ucrChkGraph.SetText("Graph")
 
         ucrChkTable.AddFunctionNamesCondition(True, "sjPlot::sjt.xtab")
-        ucrChkGraph.AddFunctionNamesCondition(True, "sjPlot::sjp.xtab")
 
         ucrChkTable.AddToLinkedControls(ucrChkCount, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTable.AddToLinkedControls(ucrChkRow, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -120,7 +120,7 @@ Public Class dlgTwoWayFrequencies
         clsSjtXtab.SetRCommand("sjPlot::sjt.xtab")
         clsSjpXtab.SetRCommand("sjPlot::sjp.xtab")
         clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
-        clsSjpXtab.AddParameter("show.obs", "TRUE")
+        clsSjtXtab.AddParameter("show.obs", "TRUE")
         clsSjtXtab.AddParameter("show.col.prc", "FALSE")
         clsSjtXtab.AddParameter("show.cell.prc", "FALSE")
         clsSjtXtab.AddParameter("show.row.prc", "FALSE")
