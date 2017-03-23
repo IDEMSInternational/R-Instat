@@ -56,13 +56,12 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
-
+        ucrPnlDisplayWindow.bAllowNonConditionValues = True
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
         ucrPnlDisplayFrom.AddRadioButton(rdoTop)
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
-        ucrPnlDisplayFrom.bAllowNonConditionValues = True
 
         ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()

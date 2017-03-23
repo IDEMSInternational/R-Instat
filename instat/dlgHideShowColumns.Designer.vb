@@ -58,7 +58,7 @@ Partial Class dlgHideShowColumns
         'lblHiddenColumns
         '
         Me.lblHiddenColumns.AutoSize = True
-        Me.lblHiddenColumns.Location = New System.Drawing.Point(249, 38)
+        Me.lblHiddenColumns.Location = New System.Drawing.Point(249, 44)
         Me.lblHiddenColumns.Name = "lblHiddenColumns"
         Me.lblHiddenColumns.Size = New System.Drawing.Size(93, 13)
         Me.lblHiddenColumns.TabIndex = 3
