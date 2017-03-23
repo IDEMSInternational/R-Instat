@@ -11,7 +11,7 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
 Imports instat.Translations
 Public Class dlgRecodeNumericIntoQuantiles
     Public bFirstLoad As Boolean = True
@@ -49,7 +49,7 @@ Public Class dlgRecodeNumericIntoQuantiles
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
-        clsSeqFunction.AddParameter("length.out", 5)
+        clsSeqFunction.AddParameter("length.out", 4)
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter(clsRFunctionParameter:=clsSeqFunction)
@@ -59,6 +59,7 @@ Public Class dlgRecodeNumericIntoQuantiles
         clsBincodeFunction.SetRCommand(".bincode")
         clsBincodeFunction.AddParameter("breaks", clsRFunctionParameter:=clsQuantileFunction)
         clsBincodeFunction.AddParameter("include.lowest", "TRUE")
+
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorRecodeNumeric.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsBincodeFunction)
 
@@ -72,15 +73,16 @@ Public Class dlgRecodeNumericIntoQuantiles
         ucrReceiverNumeric.SetParameterIsRFunction()
 
         ucrNudNumberOfQuantiles.SetParameter(New RParameter("length.out", 3))
-        ucrNudNumberOfQuantiles.SetMinMax(1, 9)
+        ucrNudNumberOfQuantiles.SetMinMax(1, Integer.MaxValue)
         ucrNudQuantileAlgorithm.SetParameter(New RParameter("type", 1))
+        ucrNudQuantileAlgorithm.SetMinMax(1, 9)
         ilength = ucrNudNumberOfQuantiles.Value + 1
 
-        ucrNewColumnName.SetPrefix("bin")
+        ucrNewColumnName.SetPrefix("quantiles")
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRecodeNumeric.ucrAvailableDataFrames)
         ucrNewColumnName.SetIsComboBox()
-        ucrNewColumnName.SetLabelText("New Column Name")
+        ucrNewColumnName.SetLabelText("New Column Name:")
     End Sub
 
     Private Sub TestOkEnabled()
