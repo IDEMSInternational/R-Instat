@@ -25,6 +25,7 @@ Public Class dlgRestrict
     Public bIsSubsetDialog As Boolean
     Public strDefaultDataframe As String = ""
     Public strDefaultColumn As String = ""
+    Public bAutoOpenSubDialog As Boolean = False
 
     Public Sub New()
 
@@ -53,6 +54,9 @@ Public Class dlgRestrict
         End If
         SetFilterSubsetStatus()
         SetDefaultDataFrame()
+        If bAutoOpenSubDialog Then
+            OpenNewFilterSubDialog()
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -109,9 +113,13 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdDefineNewFilter.Click
-        sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.SetDataframe(ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        OpenNewFilterSubDialog()
+    End Sub
+
+    Private Sub OpenNewFilterSubDialog()
+        sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(strDefaultDataframe)
         If strDefaultColumn <> "" Then
-            sdgCreateFilter.ucrCreateFilter.ucrFilterByReceiver.Add(strDefaultColumn)
+            sdgCreateFilter.ucrCreateFilter.SetDefaultColumn(strDefaultColumn)
         End If
         sdgCreateFilter.ShowDialog()
         strDefaultColumn = ""
