@@ -33,6 +33,7 @@ Public Class dlgTwoWayFrequencies
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -57,6 +58,9 @@ Public Class dlgTwoWayFrequencies
         'HelpID
         ' ucrBase.iHelpTopicID = 
         ' ICallType()
+        'temporary: its parameter to be added
+        rdoCount.Enabled = False
+
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
