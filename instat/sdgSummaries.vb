@@ -63,7 +63,7 @@ Public Class sdgSummaries
         ucrChkVariance.SetText("Variance")
         ucrChkVariance.SetParameter(New RParameter("summary_var"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrChkQuartiles.Enabled = False
+        ucrChkQuartiles.Enabled = False 'To be enabled once quartiles summary function has is implemented in Instat object
         ucrChkQuartiles.SetText("Quartiles")
         ucrChkQuartiles.SetParameter(New RParameter("summary_quartiles"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
