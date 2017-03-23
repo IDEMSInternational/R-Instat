@@ -167,7 +167,7 @@ Partial Class dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 323)
+        Me.ClientSize = New System.Drawing.Size(421, 323)
         Me.Controls.Add(Me.ucrSelectForSort)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.lblColumnsToSort)
