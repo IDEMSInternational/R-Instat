@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgHideShowColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsHiddenColumns As New RFunction
     Private Sub dlgHideShowColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -58,11 +58,11 @@ Public Class dlgHideShowColumns
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        Dim clsHiddenColumns = New RFunction
         SetHiddenColumnsInReceiver()
-        clsDefaultFunction.AddParameter("col_names", "c()")
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsHiddenColumns.AddParameter("col_names", "c()")
+        clsHiddenColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsHiddenColumns)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
