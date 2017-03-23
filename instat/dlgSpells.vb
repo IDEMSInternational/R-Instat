@@ -13,7 +13,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgSpells
@@ -99,6 +98,8 @@ Public Class dlgSpells
 
     Private Sub SetDefaults()
         ucrSelectorForSpells.Reset()
+        ucrSaveSpells.Reset()
+
         TestOKEnabled()
 
         chkConditionRain.Checked = False
