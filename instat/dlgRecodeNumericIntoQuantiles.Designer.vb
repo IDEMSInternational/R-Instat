@@ -74,7 +74,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.ucrNudQuantileAlgorithm.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudQuantileAlgorithm.Location = New System.Drawing.Point(356, 133)
+        Me.ucrNudQuantileAlgorithm.Location = New System.Drawing.Point(350, 133)
         Me.ucrNudQuantileAlgorithm.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Name = "ucrNudQuantileAlgorithm"
@@ -86,7 +86,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.ucrNudNumberOfQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(356, 103)
+        Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(350, 103)
         Me.ucrNudNumberOfQuantiles.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Name = "ucrNudNumberOfQuantiles"
@@ -106,7 +106,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 248)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8

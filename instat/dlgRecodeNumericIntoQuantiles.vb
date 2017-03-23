@@ -33,7 +33,7 @@ Public Class dlgRecodeNumericIntoQuantiles
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNewColumnName.SetRCode(clsBincodeFunction, bReset)
-        ucrReceiverNumeric.SetRCode(clsQuantileFunction, bReset)
+        ' ucrReceiverNumeric.SetRCode(clsQuantileFunction, bReset)
         ucrReceiverNumeric.SetRCode(clsBincodeFunction, bReset)
         ucrNudNumberOfQuantiles.SetRCode(clsSeqFunction, bReset)
         ucrNudQuantileAlgorithm.SetRCode(clsQuantileFunction, bReset)
@@ -53,13 +53,11 @@ Public Class dlgRecodeNumericIntoQuantiles
         'ilength = ucrNudNumberOfQuantiles.Value + 1
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter(clsRFunctionParameter:=clsSeqFunction)
-        clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverNumeric.GetVariables)
         clsQuantileFunction.AddParameter("type", 7)
         clsQuantileFunction.AddParameter("na.rm", "TRUE")
 
         clsBincodeFunction.SetRCommand(".bincode")
         clsBincodeFunction.AddParameter("breaks", clsRFunctionParameter:=clsQuantileFunction)
-        ' clsBincodeFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverNumeric.GetVariables)
         clsBincodeFunction.AddParameter("include.lowest", "TRUE")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorRecodeNumeric.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsBincodeFunction)
@@ -76,7 +74,9 @@ Public Class dlgRecodeNumericIntoQuantiles
         ucrNudNumberOfQuantiles.SetParameter(New RParameter("length.out", 3))
         ucrNudNumberOfQuantiles.SetMinMax(1, 9)
         ucrNudQuantileAlgorithm.SetParameter(New RParameter("type", 1))
+        ilength = ucrNudNumberOfQuantiles.Value + 1
 
+        ucrNewColumnName.SetPrefix("bin")
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRecodeNumeric.ucrAvailableDataFrames)
         ucrNewColumnName.SetIsComboBox()
@@ -96,6 +96,10 @@ Public Class dlgRecodeNumericIntoQuantiles
         clsSeqFunction.AddParameter("length.out", ilength)
     End Sub
 
+    Private Sub ucrReceiverNumeric_Load(sender As Object, e As EventArgs) Handles ucrReceiverNumeric.Load
+
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -104,5 +108,9 @@ Public Class dlgRecodeNumericIntoQuantiles
 
     Private Sub ucrReceiverSingle_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlContentsChanged, ucrNudQuantileAlgorithm.ControlContentsChanged, ucrNudNumberOfQuantiles.ControlContentsChanged, ucrNewColumnName.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverNumeric_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlValueChanged
+        clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverNumeric.GetVariables)
     End Sub
 End Class
