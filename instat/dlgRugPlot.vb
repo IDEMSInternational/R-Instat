@@ -21,6 +21,7 @@ Public Class dlgRugPlot
     Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgRugPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -39,7 +40,8 @@ Public Class dlgRugPlot
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveGraph.SetRCode(clsDefaultFunction, bReset)
+
+        ucrSaveGraph.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrRugPlotSelector.SetRCode(clsDefaultFunction, bReset)
 
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
@@ -91,23 +93,37 @@ Public Class dlgRugPlot
 
     End Sub
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
         clsRaesFunction = New RFunction
+        clsDefaultFunction = New RFunction
         clsRgeom_RugPlotFunction = New RFunction
 
-        ucrRugPlotSelector.Reset()
         ucrSaveGraph.Reset()
+        ucrRugPlotSelector.Reset()
         ucrVariablesAsFactorForRugPlot.ResetControl()
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsDefaultFunction.SetRCommand("ggplot")
-        clsRgeom_RugPlotFunction.SetRCommand("geom_rug")
-        clsRaesFunction.SetRCommand("aes")
-        clsDefaultFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ' clsGeomOp.AddParameter(iPosition:=5, clsRFunctionParameter:=clsRgeom_RugPlotFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_RugPlotFunction)
 
-        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsRaesFunction.ClearParameters()
+        clsRgeom_RugPlotFunction.ClearParameters()
+
+        clsDefaultFunction.SetRCommand("ggplot")
+        clsDefaultFunction.AddParameter("data", clsRFunctionParameter:=ucrRugPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+
+        clsRaesFunction.SetRCommand("aes")
+
+        clsDefaultFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+
+        clsRgeom_RugPlotFunction.SetRCommand("geom_rug")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+
+        ucrBase.clsRsyntax.SetOperation("+")
+        ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsDefaultFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(1, clsRFunc:=clsRgeom_RugPlotFunction)
+
+        ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(ucrBase.clsRsyntax.clsBaseOperator)
+
+        bResetSubdialog = True
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -137,5 +153,4 @@ Public Class dlgRugPlot
         '    End If
         'Next
     End Sub
-
 End Class
