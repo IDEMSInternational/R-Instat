@@ -110,6 +110,8 @@ Public Class dlgWaterBalance
 
     Private Sub SetDefaults()
         ucrSelectorForWaterBalance.Reset()
+        ucrSaveWaterBalance.Reset()
+
         nudFrom.Value = 1
         nudTo.Value = 366
         nudCapacity.Value = 60
@@ -290,8 +292,11 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub ucrSaveWaterBalance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveWaterBalance.ControlValueChanged
-        clsWaterBalance.AddParameter("result_name", Chr(34) & ucrSaveWaterBalance.GetText() & Chr(34))
         clsWaterBalance.SetAssignTo(ucrSaveWaterBalance.ucrInputTextSave.GetText)
         FirstWaterBalancePerYear()
+    End Sub
+
+    Private Sub ucrSaveWaterBalance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveWaterBalance.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
