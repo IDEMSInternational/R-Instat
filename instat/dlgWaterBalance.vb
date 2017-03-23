@@ -105,6 +105,13 @@ Public Class dlgWaterBalance
         ucrSaveWaterBalance.SetPrefix("Water_Balance")
         ucrSaveWaterBalance.SetSaveTypeAsColumn()
 
+        nudCapacity.Maximum = Integer.MaxValue
+        nudCapacity.Increment = 10
+        nudCapacity.DecimalPlaces = 0
+
+        nudWBLessThan.Increment = 10
+        nudWBLessThan.Maximum = Integer.MaxValue
+
         ucrInputEvaporation.SetValidationTypeAsNumeric()
     End Sub
 
@@ -115,7 +122,7 @@ Public Class dlgWaterBalance
         nudFrom.Value = 1
         nudTo.Value = 366
         nudCapacity.Value = 60
-        nudWBLessThan.Value = 0.5
+        nudWBLessThan.Value = 40
         ucrInputEvaporation.SetName("5")
     End Sub
 
