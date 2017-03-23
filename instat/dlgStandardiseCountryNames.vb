@@ -43,7 +43,7 @@ Public Class dlgStandardiseCountryNames
         'Reset 
         ucrSelectorStandardiseCountry.Reset()
         clsStandardiseCountryNames = New RFunction
-        clsStandardiseCountryNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$standardise_country_names")
+        clsStandardiseCountryNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$standard_country_names")
         ucrBase.clsRsyntax.SetBaseRFunction(clsStandardiseCountryNames)
     End Sub
 
@@ -59,6 +59,8 @@ Public Class dlgStandardiseCountryNames
         'ucrreceiver
         ucrReceiverCountryNames.SetParameter(New RParameter("country_columns", 1))
         ucrReceiverCountryNames.SetParameterIsString()
+        ucrReceiverCountryNames.Selector = ucrSelectorStandardiseCountry
+        ucrReceiverCountryNames.SetMeAsReceiver()
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
