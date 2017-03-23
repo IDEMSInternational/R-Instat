@@ -22,43 +22,16 @@ Partial Class dlgRecodeNumericIntoQuantiles
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrSelectorRecodeNumeric = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
         Me.lblNumberOfQuantiles = New System.Windows.Forms.Label()
-        Me.ucrNudNumberOfQuantiles = New instat.ucrNud()
         Me.lblQuantileAlgorithm = New System.Windows.Forms.Label()
-        Me.ucrNudQuantileAlgorithm = New instat.ucrNud()
+        Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.ucrNewColumnName = New instat.ucrSave()
-        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.ucrNudQuantileAlgorithm = New instat.ucrNud()
+        Me.ucrNudNumberOfQuantiles = New instat.ucrNud()
+        Me.ucrReceiverNumeric = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorRecodeNumeric = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
-        '
-        'ucrSelectorRecodeNumeric
-        '
-        Me.ucrSelectorRecodeNumeric.bShowHiddenColumns = False
-        Me.ucrSelectorRecodeNumeric.bUseCurrentFilter = True
-        Me.ucrSelectorRecodeNumeric.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorRecodeNumeric.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorRecodeNumeric.Name = "ucrSelectorRecodeNumeric"
-        Me.ucrSelectorRecodeNumeric.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorRecodeNumeric.TabIndex = 1
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 248)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 4
-        '
-        'ucrReceiverSingle
-        '
-        Me.ucrReceiverSingle.frmParent = Me
-        Me.ucrReceiverSingle.Location = New System.Drawing.Point(245, 60)
-        Me.ucrReceiverSingle.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
-        Me.ucrReceiverSingle.Selector = Nothing
-        Me.ucrReceiverSingle.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSingle.TabIndex = 5
         '
         'lblNumberOfQuantiles
         '
@@ -66,21 +39,9 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.lblNumberOfQuantiles.Location = New System.Drawing.Point(242, 103)
         Me.lblNumberOfQuantiles.Name = "lblNumberOfQuantiles"
         Me.lblNumberOfQuantiles.Size = New System.Drawing.Size(108, 13)
-        Me.lblNumberOfQuantiles.TabIndex = 6
+        Me.lblNumberOfQuantiles.TabIndex = 3
         Me.lblNumberOfQuantiles.Tag = ""
         Me.lblNumberOfQuantiles.Text = "Number Of Quantiles:"
-        '
-        'ucrNudNumberOfQuantiles
-        '
-        Me.ucrNudNumberOfQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(356, 103)
-        Me.ucrNudNumberOfQuantiles.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumberOfQuantiles.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfQuantiles.Name = "ucrNudNumberOfQuantiles"
-        Me.ucrNudNumberOfQuantiles.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberOfQuantiles.TabIndex = 7
-        Me.ucrNudNumberOfQuantiles.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblQuantileAlgorithm
         '
@@ -88,9 +49,26 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.lblQuantileAlgorithm.Location = New System.Drawing.Point(242, 133)
         Me.lblQuantileAlgorithm.Name = "lblQuantileAlgorithm"
         Me.lblQuantileAlgorithm.Size = New System.Drawing.Size(95, 13)
-        Me.lblQuantileAlgorithm.TabIndex = 8
+        Me.lblQuantileAlgorithm.TabIndex = 5
         Me.lblQuantileAlgorithm.Tag = ""
         Me.lblQuantileAlgorithm.Text = "Quantile Algorithm:"
+        '
+        'lblSelectedVariable
+        '
+        Me.lblSelectedVariable.AutoSize = True
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(242, 43)
+        Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
+        Me.lblSelectedVariable.TabIndex = 1
+        Me.lblSelectedVariable.Tag = "Selected Variable:"
+        Me.lblSelectedVariable.Text = "Selected Variable:"
+        '
+        'ucrNewColumnName
+        '
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 218)
+        Me.ucrNewColumnName.Name = "ucrNewColumnName"
+        Me.ucrNewColumnName.Size = New System.Drawing.Size(180, 24)
+        Me.ucrNewColumnName.TabIndex = 7
         '
         'ucrNudQuantileAlgorithm
         '
@@ -101,38 +79,60 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.ucrNudQuantileAlgorithm.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Name = "ucrNudQuantileAlgorithm"
         Me.ucrNudQuantileAlgorithm.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudQuantileAlgorithm.TabIndex = 9
+        Me.ucrNudQuantileAlgorithm.TabIndex = 6
         Me.ucrNudQuantileAlgorithm.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNewColumnName
+        'ucrNudNumberOfQuantiles
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 218)
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(180, 24)
-        Me.ucrNewColumnName.TabIndex = 10
+        Me.ucrNudNumberOfQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(356, 103)
+        Me.ucrNudNumberOfQuantiles.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfQuantiles.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfQuantiles.Name = "ucrNudNumberOfQuantiles"
+        Me.ucrNudNumberOfQuantiles.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfQuantiles.TabIndex = 4
+        Me.ucrNudNumberOfQuantiles.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblSelected
+        'ucrReceiverNumeric
         '
-        Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(242, 43)
-        Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(93, 13)
-        Me.lblSelected.TabIndex = 11
-        Me.lblSelected.Tag = "Selected_Variable:"
-        Me.lblSelected.Text = "Selected Variable:"
+        Me.ucrReceiverNumeric.frmParent = Me
+        Me.ucrReceiverNumeric.Location = New System.Drawing.Point(245, 60)
+        Me.ucrReceiverNumeric.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverNumeric.Name = "ucrReceiverNumeric"
+        Me.ucrReceiverNumeric.Selector = Nothing
+        Me.ucrReceiverNumeric.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverNumeric.TabIndex = 2
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 248)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 8
+        '
+        'ucrSelectorRecodeNumeric
+        '
+        Me.ucrSelectorRecodeNumeric.bShowHiddenColumns = False
+        Me.ucrSelectorRecodeNumeric.bUseCurrentFilter = True
+        Me.ucrSelectorRecodeNumeric.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorRecodeNumeric.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorRecodeNumeric.Name = "ucrSelectorRecodeNumeric"
+        Me.ucrSelectorRecodeNumeric.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorRecodeNumeric.TabIndex = 0
         '
         'dlgRecodeNumericIntoQuantiles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 313)
-        Me.Controls.Add(Me.lblSelected)
+        Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.ucrNudQuantileAlgorithm)
         Me.Controls.Add(Me.lblQuantileAlgorithm)
         Me.Controls.Add(Me.ucrNudNumberOfQuantiles)
         Me.Controls.Add(Me.lblNumberOfQuantiles)
-        Me.Controls.Add(Me.ucrReceiverSingle)
+        Me.Controls.Add(Me.ucrReceiverNumeric)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorRecodeNumeric)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -148,11 +148,11 @@ Partial Class dlgRecodeNumericIntoQuantiles
 
     Friend WithEvents ucrSelectorRecodeNumeric As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
+    Friend WithEvents ucrReceiverNumeric As ucrReceiverSingle
     Friend WithEvents lblNumberOfQuantiles As Label
     Friend WithEvents ucrNudQuantileAlgorithm As ucrNud
     Friend WithEvents lblQuantileAlgorithm As Label
     Friend WithEvents ucrNudNumberOfQuantiles As ucrNud
     Friend WithEvents ucrNewColumnName As ucrSave
-    Friend WithEvents lblSelected As Label
+    Friend WithEvents lblSelectedVariable As Label
 End Class
