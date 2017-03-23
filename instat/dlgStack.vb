@@ -66,13 +66,13 @@ Public Class dlgStack
 
     Private Sub StackDataFrame()
         'TODO this is a work around for AssignTo not clearing in RSyntax
-        If ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+        If ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrSaveNewDataName.bUserTyped) Then
             ucrSaveNewDataName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         End If
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSaveNewDataName.IsComplete AndAlso Not ucrStackDataInto.IsEmpty() AndAlso Not ucrFactorInto.IsEmpty() Then
+        If ucrSaveNewDataName.IsComplete AndAlso Not ucrStackDataInto.IsEmpty() AndAlso Not ucrFactorInto.IsEmpty() AndAlso ucrSaveNewDataName.GetText <> ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem Then
             If Not ucrChkCarryColumns.Checked Then
                 If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
                     ucrBase.OKEnabled(True)
