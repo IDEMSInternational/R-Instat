@@ -1986,9 +1986,21 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
     curr_data[[new_col]] <- recode
-    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    
+    curr_data$sequ <- seq(1:nrow(curr_data))
+    #ggplot(dt.df, aes(x = time, y = value)) +
+    #  geom_line(aes(color = variable)) +
+    #  facet_grid(variable ~ ., scales = "free_") +
+    #  # Suppress the legend since color isn't actually providing any information
+    #  opts(legend.position = "none")
+    
+    #g <- ggplot(data = curr_data, mapping = aes(x = year_column, colour = recode, group=doy_column)) + geom_histogram(stat = "count") + xlab("Year") + labs(color="Recode")
+    #g <- ggplot(data = curr_data, mapping = aes(x = year_column, y="" , colour = recode)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(shape=22) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_wrap(as.name(station_col))
+      g <- g + facet_grid(paste0(as.name(station_col), "~ ."), scales = "free_y", switch = "both") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 180))
+      #g <- g + facet_wrap(as.name(station_col))
+      
     }
   }
   if(coord_flip) {
