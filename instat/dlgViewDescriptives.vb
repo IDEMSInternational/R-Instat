@@ -30,6 +30,7 @@ Public Class dlgViewDescriptives
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
