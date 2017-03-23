@@ -33,7 +33,6 @@ Public Class dlgRecodeNumericIntoQuantiles
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNewColumnName.SetRCode(clsBincodeFunction, bReset)
-        ' ucrReceiverNumeric.SetRCode(clsQuantileFunction, bReset)
         ucrReceiverNumeric.SetRCode(clsBincodeFunction, bReset)
         ucrNudNumberOfQuantiles.SetRCode(clsSeqFunction, bReset)
         ucrNudQuantileAlgorithm.SetRCode(clsQuantileFunction, bReset)
@@ -46,11 +45,12 @@ Public Class dlgRecodeNumericIntoQuantiles
         clsBincodeFunction = New RFunction
         clsQuantileFunction = New RFunction
         clsSeqFunction = New RFunction
+
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
         clsSeqFunction.AddParameter("length.out", 5)
-        'ilength = ucrNudNumberOfQuantiles.Value + 1
+
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter(clsRFunctionParameter:=clsSeqFunction)
         clsQuantileFunction.AddParameter("type", 7)
@@ -94,10 +94,6 @@ Public Class dlgRecodeNumericIntoQuantiles
     Private Sub ucrNudNumberOfQuantiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfQuantiles.ControlValueChanged
         ilength = ucrNudNumberOfQuantiles.Value + 1
         clsSeqFunction.AddParameter("length.out", ilength)
-    End Sub
-
-    Private Sub ucrReceiverNumeric_Load(sender As Object, e As EventArgs) Handles ucrReceiverNumeric.Load
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
