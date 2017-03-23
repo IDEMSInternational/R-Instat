@@ -253,7 +253,7 @@ Partial Class dlgSpells
         '
         Me.ucrSaveSpells.Location = New System.Drawing.Point(9, 295)
         Me.ucrSaveSpells.Name = "ucrSaveSpells"
-        Me.ucrSaveSpells.Size = New System.Drawing.Size(231, 24)
+        Me.ucrSaveSpells.Size = New System.Drawing.Size(290, 24)
         Me.ucrSaveSpells.TabIndex = 14
         '
         'dlgSpells
