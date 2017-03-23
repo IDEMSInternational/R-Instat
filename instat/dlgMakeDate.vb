@@ -139,7 +139,7 @@ Public Class dlgMakeDate
         ucrSaveDate.SetIsComboBox()
 
         ucrChkTwoDigitYear.SetText("2-digit years")
-        ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="%y", strNewValueIfUnchecked:="%Y")
+        ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "%y" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "%Y" & Chr(34))
 
         'rdoSingle
         ucrReceiverForDate.SetParameter(New RParameter("x", 0))
@@ -227,9 +227,11 @@ Public Class dlgMakeDate
         ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
         ucrInputOrigin.Reset()
+
         clsDateFunction = New RFunction
         clsMakeYearDay = New RFunction
         clsMakeYearMonthDay = New RFunction
+
         clsDateFunction.SetRCommand("as.Date")
         clsMakeYearDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         clsMakeYearMonthDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
@@ -238,6 +240,7 @@ Public Class dlgMakeDate
 
         clsDateFunction.AddParameter("format", Chr(34) & "%Y-%m-%d" & Chr(34))
         clsDateFunction.AddParameter("origin", Chr(34) & "1899-12-30" & Chr(34))
+        clsMakeYearDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
 
         clsMakeYearDay.AddParameter("doy_typical_length", Chr(34) & "365/366" & Chr(34))
         clsMakeYearMonthDay.AddParameter("day_format", Chr(34) & "%d" & Chr(34))
@@ -282,6 +285,7 @@ Public Class dlgMakeDate
 
     Private Sub SetDefaultColumn()
         rdoSingleColumn.Checked = True
+        SetRCodeForControls(True)
         ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
         ucrReceiverForDate.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
