@@ -84,7 +84,7 @@ data_object <- R6Class("data_object",
                             variables_metadata_changed = function(new_value) {
                               if(missing(new_value)) return(private$.variables_metadata_changed)
                               else {
-                                if(new_value != TRUE && new_geom_jittervalue != FALSE) stop("new_val must be TRUE or FALSE")
+                                if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
                                 private$.variables_metadata_changed <- new_value
                                 self$append_to_changes(list(Set_property, "variable_data_changed"))
                               }
