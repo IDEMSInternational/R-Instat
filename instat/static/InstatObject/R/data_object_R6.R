@@ -2190,6 +2190,7 @@ all_primary_corruption_country_level_column_types <- c(corruption_country_label,
 corruption_type_label = "Corruption_Type"
 corruption_output_label = "Is_Corruption_Output"
 corruption_red_flag_label = "Is_Corruption_Red_Flag"
+corruption_index_label = "Is_Corruption_Index"
 
 # Data frame metadata for corruption dataframes
 corruption_data_label = "Is_Corruption_Data"
@@ -2207,6 +2208,7 @@ data_object$set("public","define_corruption_outputs", function(output_columns = 
     stop("Cannot define corruption outputs when data frame is not defined as corruption data.")
   }
   self$append_to_variables_metadata(output_columns, corruption_output_label, TRUE)
+  self$append_to_variables_metadata(output_columns, corruption_index_label, TRUE)
   other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
   self$append_to_variables_metadata(other_cols, corruption_output_label, FALSE)
 }
@@ -2222,6 +2224,7 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
     stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
   }
   self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
+  self$append_to_variables_metadata(red_flags, corruption_index_label, TRUE)
   other_cols <- self$get_column_names()[!self$get_column_names() %in% red_flags]
   self$append_to_variables_metadata(other_cols, corruption_red_flag_label, FALSE)
 }
