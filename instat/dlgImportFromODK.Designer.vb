@@ -38,7 +38,7 @@ Partial Class dlgImportFromODK
         'lblUsername
         '
         Me.lblUsername.AutoSize = True
-        Me.lblUsername.Location = New System.Drawing.Point(7, 74)
+        Me.lblUsername.Location = New System.Drawing.Point(12, 74)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(58, 13)
         Me.lblUsername.TabIndex = 1
@@ -47,7 +47,7 @@ Partial Class dlgImportFromODK
         'lblChooseForm
         '
         Me.lblChooseForm.AutoSize = True
-        Me.lblChooseForm.Location = New System.Drawing.Point(7, 134)
+        Me.lblChooseForm.Location = New System.Drawing.Point(12, 134)
         Me.lblChooseForm.Name = "lblChooseForm"
         Me.lblChooseForm.Size = New System.Drawing.Size(72, 13)
         Me.lblChooseForm.TabIndex = 4
@@ -55,7 +55,7 @@ Partial Class dlgImportFromODK
         '
         'cmdFindForms
         '
-        Me.cmdFindForms.Location = New System.Drawing.Point(10, 102)
+        Me.cmdFindForms.Location = New System.Drawing.Point(12, 102)
         Me.cmdFindForms.Name = "cmdFindForms"
         Me.cmdFindForms.Size = New System.Drawing.Size(102, 23)
         Me.cmdFindForms.TabIndex = 3
@@ -67,7 +67,7 @@ Partial Class dlgImportFromODK
         Me.grpPlatform.Controls.Add(Me.rdoOna)
         Me.grpPlatform.Controls.Add(Me.rdoKobo)
         Me.grpPlatform.Controls.Add(Me.ucrPnlPlatform)
-        Me.grpPlatform.Location = New System.Drawing.Point(12, 12)
+        Me.grpPlatform.Location = New System.Drawing.Point(12, 10)
         Me.grpPlatform.Name = "grpPlatform"
         Me.grpPlatform.Size = New System.Drawing.Size(406, 46)
         Me.grpPlatform.TabIndex = 0
