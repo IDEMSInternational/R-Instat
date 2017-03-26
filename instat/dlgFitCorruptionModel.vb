@@ -76,9 +76,9 @@ Public Class dlgFitCorruptionModel
         ucrSaveCorruptionModel.SetPrefix("Corruption_Model")
         ucrSaveCorruptionModel.SetSaveTypeAsModel()
         ucrSaveCorruptionModel.SetDataFrameSelector(ucrSelectorFitModel.ucrAvailableDataFrames)
-        ucrSaveCorruptionModel.SetCheckBoxText("Save Graph")
+        ucrSaveCorruptionModel.SetCheckBoxText("Save Model")
         ucrSaveCorruptionModel.SetIsComboBox()
-        ucrSaveCorruptionModel.SetAssignToIfUncheckedValue("last_graph")
+        ucrSaveCorruptionModel.SetAssignToIfUncheckedValue("last_model")
     End Sub
 
     Private Sub SetDefaults()
@@ -113,9 +113,6 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrReceiverOutput.SetRCode(clsModel, bReset)
-        'ucrReceiverControlVariables.SetRCode(clsModel1, bReset)
-        'ucrReceiverIndicators.SetRCode(clsModel1, bReset)
         ucrSelectorFitModel.SetRCode(clsCorruptionModel, bReset)
         ucrSaveCorruptionModel.SetRCode(clsCorruptionModel, bReset)
     End Sub
