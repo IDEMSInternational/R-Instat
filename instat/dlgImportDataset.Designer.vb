@@ -103,69 +103,69 @@ Partial Class dlgImportDataset
         Me.lblName.AutoSize = True
         Me.lblName.Location = New System.Drawing.Point(8, 61)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(115, 13)
+        Me.lblName.Size = New System.Drawing.Size(121, 13)
         Me.lblName.TabIndex = 2
-        Me.lblName.Tag = "New Dataframe  Name"
-        Me.lblName.Text = "New Dataframe Name:"
+        Me.lblName.Tag = "New Data Frame Name:"
+        Me.lblName.Text = "New Data Frame Name:"
         '
         'lblEncoding
         '
         Me.lblEncoding.AutoSize = True
-        Me.lblEncoding.Location = New System.Drawing.Point(6, 27)
+        Me.lblEncoding.Location = New System.Drawing.Point(10, 28)
         Me.lblEncoding.Name = "lblEncoding"
-        Me.lblEncoding.Size = New System.Drawing.Size(52, 13)
+        Me.lblEncoding.Size = New System.Drawing.Size(55, 13)
         Me.lblEncoding.TabIndex = 3
-        Me.lblEncoding.Tag = "Encoding"
-        Me.lblEncoding.Text = "Encoding"
+        Me.lblEncoding.Tag = "Encoding:"
+        Me.lblEncoding.Text = "Encoding:"
         '
         'lblHeaders
         '
         Me.lblHeaders.AutoSize = True
-        Me.lblHeaders.Location = New System.Drawing.Point(6, 63)
+        Me.lblHeaders.Location = New System.Drawing.Point(10, 75)
         Me.lblHeaders.Name = "lblHeaders"
-        Me.lblHeaders.Size = New System.Drawing.Size(142, 13)
+        Me.lblHeaders.Size = New System.Drawing.Size(145, 13)
         Me.lblHeaders.TabIndex = 4
-        Me.lblHeaders.Tag = "Heading"
-        Me.lblHeaders.Text = "First Row is Column Headers"
+        Me.lblHeaders.Tag = "Heading:"
+        Me.lblHeaders.Text = "First Row is Column Headers:"
         '
         'lblRowNames
         '
         Me.lblRowNames.AutoSize = True
-        Me.lblRowNames.Location = New System.Drawing.Point(6, 108)
+        Me.lblRowNames.Location = New System.Drawing.Point(10, 119)
         Me.lblRowNames.Name = "lblRowNames"
-        Me.lblRowNames.Size = New System.Drawing.Size(133, 13)
+        Me.lblRowNames.Size = New System.Drawing.Size(138, 13)
         Me.lblRowNames.TabIndex = 5
-        Me.lblRowNames.Tag = "Row_names"
-        Me.lblRowNames.Text = "First Column is Row names"
+        Me.lblRowNames.Tag = "Row_Names:"
+        Me.lblRowNames.Text = "First Column is Row Names:"
         '
         'lblSeparator
         '
         Me.lblSeparator.AutoSize = True
-        Me.lblSeparator.Location = New System.Drawing.Point(6, 160)
+        Me.lblSeparator.Location = New System.Drawing.Point(10, 165)
         Me.lblSeparator.Name = "lblSeparator"
-        Me.lblSeparator.Size = New System.Drawing.Size(53, 13)
+        Me.lblSeparator.Size = New System.Drawing.Size(56, 13)
         Me.lblSeparator.TabIndex = 6
-        Me.lblSeparator.Tag = "Separator"
-        Me.lblSeparator.Text = "Separator"
+        Me.lblSeparator.Tag = "Separator:"
+        Me.lblSeparator.Text = "Separator:"
         '
         'lblDecimal
         '
         Me.lblDecimal.AutoSize = True
-        Me.lblDecimal.Location = New System.Drawing.Point(8, 199)
+        Me.lblDecimal.Location = New System.Drawing.Point(10, 212)
         Me.lblDecimal.Name = "lblDecimal"
-        Me.lblDecimal.Size = New System.Drawing.Size(45, 13)
+        Me.lblDecimal.Size = New System.Drawing.Size(48, 13)
         Me.lblDecimal.TabIndex = 7
-        Me.lblDecimal.Tag = "Decimal"
-        Me.lblDecimal.Text = "Decimal"
+        Me.lblDecimal.Tag = "Decimal:"
+        Me.lblDecimal.Text = "Decimal:"
         '
         'lblNAStrings
         '
         Me.lblNAStrings.AutoSize = True
-        Me.lblNAStrings.Location = New System.Drawing.Point(6, 231)
+        Me.lblNAStrings.Location = New System.Drawing.Point(10, 239)
         Me.lblNAStrings.Name = "lblNAStrings"
-        Me.lblNAStrings.Size = New System.Drawing.Size(102, 13)
+        Me.lblNAStrings.Size = New System.Drawing.Size(105, 13)
         Me.lblNAStrings.TabIndex = 10
-        Me.lblNAStrings.Text = "Missing Value String"
+        Me.lblNAStrings.Text = "Missing Value String:"
         '
         'txtPreview
         '
@@ -179,7 +179,7 @@ Partial Class dlgImportDataset
         'chkStringsAsFactors
         '
         Me.chkStringsAsFactors.AutoSize = True
-        Me.chkStringsAsFactors.Location = New System.Drawing.Point(5, 306)
+        Me.chkStringsAsFactors.Location = New System.Drawing.Point(10, 321)
         Me.chkStringsAsFactors.Name = "chkStringsAsFactors"
         Me.chkStringsAsFactors.Size = New System.Drawing.Size(186, 17)
         Me.chkStringsAsFactors.TabIndex = 26
@@ -216,15 +216,15 @@ Partial Class dlgImportDataset
         'lblLinesToSkip
         '
         Me.lblLinesToSkip.AutoSize = True
-        Me.lblLinesToSkip.Location = New System.Drawing.Point(3, 280)
+        Me.lblLinesToSkip.Location = New System.Drawing.Point(10, 288)
         Me.lblLinesToSkip.Name = "lblLinesToSkip"
-        Me.lblLinesToSkip.Size = New System.Drawing.Size(72, 13)
+        Me.lblLinesToSkip.Size = New System.Drawing.Size(75, 13)
         Me.lblLinesToSkip.TabIndex = 30
-        Me.lblLinesToSkip.Text = "Lines To Skip"
+        Me.lblLinesToSkip.Text = "Lines To Skip:"
         '
         'nudSkip
         '
-        Me.nudSkip.Location = New System.Drawing.Point(83, 278)
+        Me.nudSkip.Location = New System.Drawing.Point(88, 285)
         Me.nudSkip.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudSkip.Name = "nudSkip"
         Me.nudSkip.Size = New System.Drawing.Size(59, 20)
@@ -259,18 +259,19 @@ Partial Class dlgImportDataset
         Me.grpCSV.Controls.Add(Me.lblDecimal)
         Me.grpCSV.Controls.Add(Me.lblNAStrings)
         Me.grpCSV.Controls.Add(Me.chkStringsAsFactors)
-        Me.grpCSV.Location = New System.Drawing.Point(15, 87)
+        Me.grpCSV.Location = New System.Drawing.Point(10, 85)
         Me.grpCSV.Name = "grpCSV"
-        Me.grpCSV.Size = New System.Drawing.Size(217, 342)
+        Me.grpCSV.Size = New System.Drawing.Size(209, 357)
         Me.grpCSV.TabIndex = 34
         Me.grpCSV.TabStop = False
-        Me.grpCSV.Text = "Import csv Options"
+        Me.grpCSV.Text = "Import CSV Options"
         Me.grpCSV.Visible = False
         '
         'ucrInputHeaders
         '
+        Me.ucrInputHeaders.AddQuotesIfUnrecognised = True
         Me.ucrInputHeaders.IsReadOnly = False
-        Me.ucrInputHeaders.Location = New System.Drawing.Point(9, 82)
+        Me.ucrInputHeaders.Location = New System.Drawing.Point(10, 90)
         Me.ucrInputHeaders.Name = "ucrInputHeaders"
         Me.ucrInputHeaders.Size = New System.Drawing.Size(149, 21)
         Me.ucrInputHeaders.TabIndex = 43
@@ -279,7 +280,7 @@ Partial Class dlgImportDataset
         '
         Me.pnlRowNames.Controls.Add(Me.rdoRowNamesNo)
         Me.pnlRowNames.Controls.Add(Me.rdoRowNamesYes)
-        Me.pnlRowNames.Location = New System.Drawing.Point(9, 126)
+        Me.pnlRowNames.Location = New System.Drawing.Point(10, 134)
         Me.pnlRowNames.Name = "pnlRowNames"
         Me.pnlRowNames.Size = New System.Drawing.Size(106, 24)
         Me.pnlRowNames.TabIndex = 42
@@ -310,32 +311,37 @@ Partial Class dlgImportDataset
         '
         'ucrInputNAStrings
         '
+        Me.ucrInputNAStrings.AddQuotesIfUnrecognised = True
+        Me.ucrInputNAStrings.IsMultiline = False
         Me.ucrInputNAStrings.IsReadOnly = False
-        Me.ucrInputNAStrings.Location = New System.Drawing.Point(5, 247)
+        Me.ucrInputNAStrings.Location = New System.Drawing.Point(10, 254)
         Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
         Me.ucrInputNAStrings.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputNAStrings.TabIndex = 39
         '
         'ucrInputDecimal
         '
+        Me.ucrInputDecimal.AddQuotesIfUnrecognised = True
         Me.ucrInputDecimal.IsReadOnly = False
-        Me.ucrInputDecimal.Location = New System.Drawing.Point(74, 196)
+        Me.ucrInputDecimal.Location = New System.Drawing.Point(70, 204)
         Me.ucrInputDecimal.Name = "ucrInputDecimal"
-        Me.ucrInputDecimal.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDecimal.Size = New System.Drawing.Size(133, 21)
         Me.ucrInputDecimal.TabIndex = 36
         '
         'ucrInputSeparator
         '
+        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
         Me.ucrInputSeparator.IsReadOnly = False
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(74, 154)
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(70, 162)
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(133, 21)
         Me.ucrInputSeparator.TabIndex = 35
         '
         'ucrInputEncoding
         '
+        Me.ucrInputEncoding.AddQuotesIfUnrecognised = True
         Me.ucrInputEncoding.IsReadOnly = False
-        Me.ucrInputEncoding.Location = New System.Drawing.Point(62, 25)
+        Me.ucrInputEncoding.Location = New System.Drawing.Point(10, 43)
         Me.ucrInputEncoding.Name = "ucrInputEncoding"
         Me.ucrInputEncoding.Size = New System.Drawing.Size(149, 21)
         Me.ucrInputEncoding.TabIndex = 33
@@ -351,77 +357,81 @@ Partial Class dlgImportDataset
         Me.grpExcel.Controls.Add(Me.lblSheets)
         Me.grpExcel.Controls.Add(Me.nudxlRowsToSkip)
         Me.grpExcel.Controls.Add(Me.chkColumnNames)
-        Me.grpExcel.Location = New System.Drawing.Point(15, 87)
+        Me.grpExcel.Location = New System.Drawing.Point(10, 85)
         Me.grpExcel.Name = "grpExcel"
-        Me.grpExcel.Size = New System.Drawing.Size(217, 392)
+        Me.grpExcel.Size = New System.Drawing.Size(209, 357)
         Me.grpExcel.TabIndex = 35
         Me.grpExcel.TabStop = False
-        Me.grpExcel.Text = "Import Excel options"
+        Me.grpExcel.Text = "Import Excel Options"
         Me.grpExcel.Visible = False
         '
         'lblMissingValueString
         '
         Me.lblMissingValueString.AutoSize = True
-        Me.lblMissingValueString.Location = New System.Drawing.Point(6, 126)
+        Me.lblMissingValueString.Location = New System.Drawing.Point(10, 145)
         Me.lblMissingValueString.Name = "lblMissingValueString"
-        Me.lblMissingValueString.Size = New System.Drawing.Size(102, 13)
+        Me.lblMissingValueString.Size = New System.Drawing.Size(105, 13)
         Me.lblMissingValueString.TabIndex = 19
-        Me.lblMissingValueString.Text = "Missing Value String"
+        Me.lblMissingValueString.Text = "Missing Value String:"
         '
         'ucrInputXlMissingValueString
         '
+        Me.ucrInputXlMissingValueString.AddQuotesIfUnrecognised = True
+        Me.ucrInputXlMissingValueString.IsMultiline = False
         Me.ucrInputXlMissingValueString.IsReadOnly = False
-        Me.ucrInputXlMissingValueString.Location = New System.Drawing.Point(5, 144)
+        Me.ucrInputXlMissingValueString.Location = New System.Drawing.Point(10, 160)
         Me.ucrInputXlMissingValueString.Name = "ucrInputXlMissingValueString"
-        Me.ucrInputXlMissingValueString.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputXlMissingValueString.Size = New System.Drawing.Size(141, 21)
         Me.ucrInputXlMissingValueString.TabIndex = 18
         '
         'lblNamedRegion
         '
         Me.lblNamedRegion.AutoSize = True
-        Me.lblNamedRegion.Location = New System.Drawing.Point(6, 73)
+        Me.lblNamedRegion.Location = New System.Drawing.Point(10, 75)
         Me.lblNamedRegion.Name = "lblNamedRegion"
-        Me.lblNamedRegion.Size = New System.Drawing.Size(90, 13)
+        Me.lblNamedRegion.Size = New System.Drawing.Size(93, 13)
         Me.lblNamedRegion.TabIndex = 17
-        Me.lblNamedRegion.Text = "or Named Region"
+        Me.lblNamedRegion.Text = "or Named Region:"
         '
         'ucrInputNamedRegions
         '
+        Me.ucrInputNamedRegions.AddQuotesIfUnrecognised = True
         Me.ucrInputNamedRegions.IsReadOnly = False
-        Me.ucrInputNamedRegions.Location = New System.Drawing.Point(4, 96)
+        Me.ucrInputNamedRegions.Location = New System.Drawing.Point(10, 90)
         Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
-        Me.ucrInputNamedRegions.Size = New System.Drawing.Size(154, 21)
+        Me.ucrInputNamedRegions.Size = New System.Drawing.Size(141, 21)
         Me.ucrInputNamedRegions.TabIndex = 16
         '
         'ucrInputSheets
         '
+        Me.ucrInputSheets.AddQuotesIfUnrecognised = True
         Me.ucrInputSheets.IsReadOnly = False
-        Me.ucrInputSheets.Location = New System.Drawing.Point(6, 43)
+        Me.ucrInputSheets.Location = New System.Drawing.Point(10, 43)
         Me.ucrInputSheets.Name = "ucrInputSheets"
-        Me.ucrInputSheets.Size = New System.Drawing.Size(154, 21)
+        Me.ucrInputSheets.Size = New System.Drawing.Size(141, 21)
         Me.ucrInputSheets.TabIndex = 15
         '
         'lblRowToSkip
         '
         Me.lblRowToSkip.AutoSize = True
-        Me.lblRowToSkip.Location = New System.Drawing.Point(3, 96)
+        Me.lblRowToSkip.Location = New System.Drawing.Point(10, 119)
         Me.lblRowToSkip.Name = "lblRowToSkip"
-        Me.lblRowToSkip.Size = New System.Drawing.Size(70, 13)
+        Me.lblRowToSkip.Size = New System.Drawing.Size(73, 13)
         Me.lblRowToSkip.TabIndex = 7
-        Me.lblRowToSkip.Text = "Rows to Skip"
+        Me.lblRowToSkip.Text = "Rows to Skip:"
         '
         'lblSheets
         '
         Me.lblSheets.AutoSize = True
-        Me.lblSheets.Location = New System.Drawing.Point(6, 27)
+        Me.lblSheets.Location = New System.Drawing.Point(10, 28)
         Me.lblSheets.Name = "lblSheets"
-        Me.lblSheets.Size = New System.Drawing.Size(68, 13)
+        Me.lblSheets.Size = New System.Drawing.Size(71, 13)
         Me.lblSheets.TabIndex = 6
-        Me.lblSheets.Text = "Select Sheet"
+        Me.lblSheets.Text = "Select Sheet:"
         '
         'nudxlRowsToSkip
         '
-        Me.nudxlRowsToSkip.Location = New System.Drawing.Point(77, 94)
+        Me.nudxlRowsToSkip.Location = New System.Drawing.Point(87, 116)
         Me.nudxlRowsToSkip.Name = "nudxlRowsToSkip"
         Me.nudxlRowsToSkip.Size = New System.Drawing.Size(49, 20)
         Me.nudxlRowsToSkip.TabIndex = 5
@@ -429,7 +439,7 @@ Partial Class dlgImportDataset
         'chkColumnNames
         '
         Me.chkColumnNames.AutoSize = True
-        Me.chkColumnNames.Location = New System.Drawing.Point(5, 73)
+        Me.chkColumnNames.Location = New System.Drawing.Point(10, 74)
         Me.chkColumnNames.Name = "chkColumnNames"
         Me.chkColumnNames.Size = New System.Drawing.Size(154, 17)
         Me.chkColumnNames.TabIndex = 2
@@ -445,9 +455,9 @@ Partial Class dlgImportDataset
         Me.grpRDS.Controls.Add(Me.chkImportMetadata)
         Me.grpRDS.Controls.Add(Me.chkImportObjects)
         Me.grpRDS.Controls.Add(Me.chkExistingData)
-        Me.grpRDS.Location = New System.Drawing.Point(16, 88)
+        Me.grpRDS.Location = New System.Drawing.Point(10, 85)
         Me.grpRDS.Name = "grpRDS"
-        Me.grpRDS.Size = New System.Drawing.Size(217, 150)
+        Me.grpRDS.Size = New System.Drawing.Size(209, 209)
         Me.grpRDS.TabIndex = 36
         Me.grpRDS.TabStop = False
         Me.grpRDS.Text = "Import RDS options"
@@ -456,61 +466,61 @@ Partial Class dlgImportDataset
         'chkImportCalculations
         '
         Me.chkImportCalculations.AutoSize = True
-        Me.chkImportCalculations.Location = New System.Drawing.Point(3, 91)
+        Me.chkImportCalculations.Location = New System.Drawing.Point(3, 111)
         Me.chkImportCalculations.Name = "chkImportCalculations"
-        Me.chkImportCalculations.Size = New System.Drawing.Size(114, 17)
+        Me.chkImportCalculations.Size = New System.Drawing.Size(115, 17)
         Me.chkImportCalculations.TabIndex = 7
-        Me.chkImportCalculations.Text = "Import calculations"
+        Me.chkImportCalculations.Text = "Import Calculations"
         Me.chkImportCalculations.UseVisualStyleBackColor = True
         '
         'chkImportFilters
         '
         Me.chkImportFilters.AutoSize = True
-        Me.chkImportFilters.Location = New System.Drawing.Point(3, 73)
+        Me.chkImportFilters.Location = New System.Drawing.Point(3, 88)
         Me.chkImportFilters.Name = "chkImportFilters"
-        Me.chkImportFilters.Size = New System.Drawing.Size(82, 17)
+        Me.chkImportFilters.Size = New System.Drawing.Size(85, 17)
         Me.chkImportFilters.TabIndex = 6
-        Me.chkImportFilters.Text = "Import filters"
+        Me.chkImportFilters.Text = "Import Filters"
         Me.chkImportFilters.UseVisualStyleBackColor = True
         '
         'chkImportChangesLog
         '
         Me.chkImportChangesLog.AutoSize = True
-        Me.chkImportChangesLog.Location = New System.Drawing.Point(3, 109)
+        Me.chkImportChangesLog.Location = New System.Drawing.Point(3, 134)
         Me.chkImportChangesLog.Name = "chkImportChangesLog"
-        Me.chkImportChangesLog.Size = New System.Drawing.Size(116, 17)
+        Me.chkImportChangesLog.Size = New System.Drawing.Size(121, 17)
         Me.chkImportChangesLog.TabIndex = 5
-        Me.chkImportChangesLog.Text = "Import changes log"
+        Me.chkImportChangesLog.Text = "Import Changes Log"
         Me.chkImportChangesLog.UseVisualStyleBackColor = True
         '
         'chkOverWrite
         '
         Me.chkOverWrite.AutoSize = True
-        Me.chkOverWrite.Location = New System.Drawing.Point(3, 127)
+        Me.chkOverWrite.Location = New System.Drawing.Point(3, 157)
         Me.chkOverWrite.Name = "chkOverWrite"
-        Me.chkOverWrite.Size = New System.Drawing.Size(198, 17)
+        Me.chkOverWrite.Size = New System.Drawing.Size(204, 17)
         Me.chkOverWrite.TabIndex = 4
-        Me.chkOverWrite.Text = "Overwrite existing if duplicates found"
+        Me.chkOverWrite.Text = "Overwrite Existing if Duplicates Found"
         Me.chkOverWrite.UseVisualStyleBackColor = True
         '
         'chkImportMetadata
         '
         Me.chkImportMetadata.AutoSize = True
-        Me.chkImportMetadata.Location = New System.Drawing.Point(3, 37)
+        Me.chkImportMetadata.Location = New System.Drawing.Point(3, 42)
         Me.chkImportMetadata.Name = "chkImportMetadata"
-        Me.chkImportMetadata.Size = New System.Drawing.Size(102, 17)
+        Me.chkImportMetadata.Size = New System.Drawing.Size(103, 17)
         Me.chkImportMetadata.TabIndex = 2
-        Me.chkImportMetadata.Text = "Import metadata"
+        Me.chkImportMetadata.Text = "Import Metadata"
         Me.chkImportMetadata.UseVisualStyleBackColor = True
         '
         'chkImportObjects
         '
         Me.chkImportObjects.AutoSize = True
-        Me.chkImportObjects.Location = New System.Drawing.Point(3, 55)
+        Me.chkImportObjects.Location = New System.Drawing.Point(3, 65)
         Me.chkImportObjects.Name = "chkImportObjects"
-        Me.chkImportObjects.Size = New System.Drawing.Size(92, 17)
+        Me.chkImportObjects.Size = New System.Drawing.Size(94, 17)
         Me.chkImportObjects.TabIndex = 1
-        Me.chkImportObjects.Text = "Import objects"
+        Me.chkImportObjects.Text = "Import Objects"
         Me.chkImportObjects.UseVisualStyleBackColor = True
         '
         'chkExistingData
@@ -518,9 +528,9 @@ Partial Class dlgImportDataset
         Me.chkExistingData.AutoSize = True
         Me.chkExistingData.Location = New System.Drawing.Point(3, 19)
         Me.chkExistingData.Name = "chkExistingData"
-        Me.chkExistingData.Size = New System.Drawing.Size(147, 17)
+        Me.chkExistingData.Size = New System.Drawing.Size(153, 17)
         Me.chkExistingData.TabIndex = 0
-        Me.chkExistingData.Text = "Keep existing data frames"
+        Me.chkExistingData.Text = "Keep Existing Data Frames"
         Me.chkExistingData.UseVisualStyleBackColor = True
         '
         'lblCannotImport
@@ -550,6 +560,8 @@ Partial Class dlgImportDataset
         '
         'ucrInputFilePath
         '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(39, 23)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
@@ -558,6 +570,8 @@ Partial Class dlgImportDataset
         '
         'ucrInputName
         '
+        Me.ucrInputName.AddQuotesIfUnrecognised = True
+        Me.ucrInputName.IsMultiline = False
         Me.ucrInputName.IsReadOnly = False
         Me.ucrInputName.Location = New System.Drawing.Point(128, 58)
         Me.ucrInputName.Name = "ucrInputName"

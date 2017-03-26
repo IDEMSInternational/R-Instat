@@ -259,7 +259,7 @@ Public Class dlgImportDataset
             grdDataPreview.Enabled = True
             If strFileExt = ".xlsx" Then
                 strFileType = "xlsx"
-                clsReadXL.AddParameter("readxl", "FALSE")
+                clsReadXL.AddParameter("readxl", "FALSE") ' this is not removing properly first time, it is upon reopening
             Else
                 strFileType = "xls"
                 clsReadXL.RemoveParameterByName("readxl")
@@ -802,4 +802,11 @@ Public Class dlgImportDataset
     'End Sub
 
 #End Region
+
+    Private Sub ucrInputName_TextChanged(sender As Object, e As EventArgs) Handles ucrInputName.TextChanged
+        ' text changed? I want this to run after leaving the text box, this means the new automatic name must have "1" after it if it already exists too
+        ' If the name in the ucrInputName is the same as as on the sheets opened
+        'MsgBox("")
+        'End If
+    End Sub
 End Class
