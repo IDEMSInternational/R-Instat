@@ -1,7 +1,7 @@
 get_default_decimal_places <- function(data) {
   if(is.numeric(data)) {
     min_data <- min(data, na.rm = TRUE)
-    if(class(data) %in% "integer" || min_data > 100) {
+    if(is.integer(data) || min_data > 100 || all((data %% 1) == 0, na.rm = TRUE)) {
       return(0)
     }
     else {
@@ -30,7 +30,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         out[,i] <- as.character(data[[i]])
       }
       else {
-        out[,i] <- as.character(format(data[[i]], nsmall = decimal_places[i]))
+        out[,i] <- as.character(format(data[[i]], nsmall = decimal_places[i], scientific = FALSE))
       }
       i = i + 1
     }
