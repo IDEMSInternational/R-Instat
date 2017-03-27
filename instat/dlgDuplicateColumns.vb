@@ -71,13 +71,13 @@ Public Class dlgDuplicateColumns
         ucrInputColumnName.SetItemsTypeAsColumns()
         ucrInputColumnName.SetDefaultTypeAsColumn()
         ucrInputColumnName.SetValidationTypeAsRVariable()
-        ucrInputColumnName.bAllowNonConditionValues = True
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
 
         ucrSelectorForDuplicateColumn.Reset()
+        ucrInputColumnName.bAllowNonConditionValues = True
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDefaultFunction.AddParameter("before", "FALSE")
