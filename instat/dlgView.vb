@@ -13,13 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsMainFunction As RFunction
+    Private clsMainFunction As New RFunction
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -37,7 +36,7 @@ Public Class dlgView
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrNudNumberRows.Maximum = Decimal.MaxValue
-        SetRCode(Me, clsMainFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         DataFrameLength()
     End Sub
 
@@ -57,6 +56,7 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
         ucrPnlDisplayWindow.bAllowNonConditionValues = True
+        ucrPnlDisplayFrom.bAllowNonConditionValues = True
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
         ucrPnlDisplayFrom.AddRadioButton(rdoTop)
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
@@ -130,7 +130,6 @@ Public Class dlgView
                 ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables())
             End If
         ElseIf rdoDispSepOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
             clsMainFunction.SetRCommand("View")
         End If
     End Sub
