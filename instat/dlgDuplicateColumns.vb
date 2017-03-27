@@ -14,11 +14,11 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
@@ -40,12 +40,6 @@ Public Class dlgDuplicateColumns
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-
-    'Month <- InstatDataObject$get_columns_from_data(use_current_filter=FALSE,
-    ''''' 'col_name="Month", data_name="Damango")
-    'InstatDataObject$add_columns_to_data(col_data=UCRRECEIVERFORCOPYCOLUMNS, col_name="RECEIVERNAME1",
-    ''''' 'data_name="DATASET NAME", before=TRUE, adjacent_column )
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 512
 
@@ -55,7 +49,7 @@ Public Class dlgDuplicateColumns
 
         ' For ucrReceiver
         ucrReceiverForCopyColumns.SetParameter(New RParameter("col_data"))
-        ucrReceiverForCopyColumns.SetParameterIsString()
+        ucrReceiverForCopyColumns.SetParameterIsRFunction()
         ucrReceiverForCopyColumns.Selector = ucrSelectorForDuplicateColumn
         ucrReceiverForCopyColumns.SetMeAsReceiver()
         ucrReceiverForCopyColumns.bUseFilteredData = False
@@ -74,20 +68,20 @@ Public Class dlgDuplicateColumns
         ' For ucrSaveColumn
         ucrInputColumnName.SetParameter(New RParameter("col_name"))
         ucrInputColumnName.SetDataFrameSelector(ucrSelectorForDuplicateColumn.ucrAvailableDataFrames)
-        ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
         ucrInputColumnName.SetItemsTypeAsColumns()
         ucrInputColumnName.SetDefaultTypeAsColumn()
         ucrInputColumnName.SetValidationTypeAsRVariable()
-
+        ucrInputColumnName.bAllowNonConditionValues = True
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
         ucrSelectorForDuplicateColumn.Reset()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDefaultFunction.AddParameter("before", "FALSE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
