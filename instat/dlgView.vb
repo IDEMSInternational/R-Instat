@@ -122,6 +122,8 @@ Public Class dlgView
             If ucrChkSpecifyRows.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
                 If rdoTop.Checked Then
+                    clsMainFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+                    clsMainFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
                     clsMainFunction.SetRCommand("head")
                 Else
                     clsMainFunction.SetRCommand("tail")
