@@ -58,7 +58,7 @@ Public Class dlgFrequency
         ucrchkCheckDisplayMargins.SetText("Display Margins")
         ucrchkCounts.SetText("Counts")
         ucrchkOverallPercentages.SetText("Overall Percentages")
-        ucrchkPercentagesOf.SetText("Percentages Of")
+        ucrchkPercentagesOf.SetText("Percentages of")
 
         ucrchkWeights.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrchkPercentagesOf.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -102,4 +102,5 @@ Public Class dlgFrequency
     Private Sub ucrchkOverallPercentages_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrchkWeights.ControlValueChanged, ucrchkPercentagesOf.ControlValueChanged
         UpdateReceiver()
     End Sub
+
 End Class

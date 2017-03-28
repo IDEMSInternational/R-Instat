@@ -39,17 +39,17 @@ Partial Class dlgFrequency
         Me.ucrchkOverallPercentages = New instat.ucrCheck()
         Me.ucrchkPercentagesOf = New instat.ucrCheck()
         Me.ucrSingleReceiver = New instat.ucrReceiverSingle()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpDisplay = New System.Windows.Forms.GroupBox()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpDisplay.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 332)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(430, 55)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.Size = New System.Drawing.Size(425, 55)
+        Me.ucrBase.TabIndex = 8
         '
         'ucrFactorsSelector
         '
@@ -59,7 +59,7 @@ Partial Class dlgFrequency
         Me.ucrFactorsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorsSelector.Name = "ucrFactorsSelector"
         Me.ucrFactorsSelector.Size = New System.Drawing.Size(210, 182)
-        Me.ucrFactorsSelector.TabIndex = 2
+        Me.ucrFactorsSelector.TabIndex = 0
         '
         'ucrReceiverFactors
         '
@@ -69,7 +69,7 @@ Partial Class dlgFrequency
         Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
         Me.ucrReceiverFactors.Selector = Nothing
         Me.ucrReceiverFactors.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactors.TabIndex = 3
+        Me.ucrReceiverFactors.TabIndex = 2
         '
         'lblFactors
         '
@@ -77,7 +77,7 @@ Partial Class dlgFrequency
         Me.lblFactors.Location = New System.Drawing.Point(218, 55)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(45, 13)
-        Me.lblFactors.TabIndex = 4
+        Me.lblFactors.TabIndex = 1
         Me.lblFactors.Tag = "Factors:"
         Me.lblFactors.Text = "Factors:"
         '
@@ -87,7 +87,7 @@ Partial Class dlgFrequency
         Me.ucrchkWeights.Location = New System.Drawing.Point(10, 195)
         Me.ucrchkWeights.Name = "ucrchkWeights"
         Me.ucrchkWeights.Size = New System.Drawing.Size(75, 20)
-        Me.ucrchkWeights.TabIndex = 10
+        Me.ucrchkWeights.TabIndex = 3
         '
         'ucrReceiverSingle
         '
@@ -97,7 +97,7 @@ Partial Class dlgFrequency
         Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
         Me.ucrReceiverSingle.Selector = Nothing
         Me.ucrReceiverSingle.Size = New System.Drawing.Size(93, 20)
-        Me.ucrReceiverSingle.TabIndex = 11
+        Me.ucrReceiverSingle.TabIndex = 4
         '
         'GroupBox2
         '
@@ -109,7 +109,7 @@ Partial Class dlgFrequency
         Me.GroupBox2.Location = New System.Drawing.Point(10, 222)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(159, 104)
-        Me.GroupBox2.TabIndex = 12
+        Me.GroupBox2.TabIndex = 6
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Layout:"
         '
@@ -170,7 +170,7 @@ Partial Class dlgFrequency
         Me.cmdOptions.Location = New System.Drawing.Point(222, 280)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 13
+        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
@@ -206,31 +206,31 @@ Partial Class dlgFrequency
         Me.ucrSingleReceiver.Name = "ucrSingleReceiver"
         Me.ucrSingleReceiver.Selector = Nothing
         Me.ucrSingleReceiver.Size = New System.Drawing.Size(86, 20)
-        Me.ucrSingleReceiver.TabIndex = 7
+        Me.ucrSingleReceiver.TabIndex = 3
         '
-        'GroupBox1
+        'grpDisplay
         '
-        Me.GroupBox1.Controls.Add(Me.ucrSingleReceiver)
-        Me.GroupBox1.Controls.Add(Me.ucrchkPercentagesOf)
-        Me.GroupBox1.Controls.Add(Me.ucrchkOverallPercentages)
-        Me.GroupBox1.Controls.Add(Me.ucrchkCounts)
-        Me.GroupBox1.Location = New System.Drawing.Point(222, 175)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(213, 101)
-        Me.GroupBox1.TabIndex = 9
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Display"
+        Me.grpDisplay.Controls.Add(Me.ucrSingleReceiver)
+        Me.grpDisplay.Controls.Add(Me.ucrchkPercentagesOf)
+        Me.grpDisplay.Controls.Add(Me.ucrchkOverallPercentages)
+        Me.grpDisplay.Controls.Add(Me.ucrchkCounts)
+        Me.grpDisplay.Location = New System.Drawing.Point(222, 175)
+        Me.grpDisplay.Name = "grpDisplay"
+        Me.grpDisplay.Size = New System.Drawing.Size(213, 101)
+        Me.grpDisplay.TabIndex = 5
+        Me.grpDisplay.TabStop = False
+        Me.grpDisplay.Text = "Display"
         '
         'dlgFrequency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(449, 407)
+        Me.ClientSize = New System.Drawing.Size(444, 403)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.ucrReceiverSingle)
         Me.Controls.Add(Me.ucrchkWeights)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrReceiverFactors)
         Me.Controls.Add(Me.ucrFactorsSelector)
@@ -243,7 +243,7 @@ Partial Class dlgFrequency
         Me.Text = "Frequency"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
+        Me.grpDisplay.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -262,7 +262,7 @@ Partial Class dlgFrequency
     Friend WithEvents lblColumnFactors As Label
     Friend WithEvents ucrchkCheckDisplayMargins As ucrCheck
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents grpDisplay As GroupBox
     Friend WithEvents ucrSingleReceiver As ucrReceiverSingle
     Friend WithEvents ucrchkPercentagesOf As ucrCheck
     Friend WithEvents ucrchkOverallPercentages As ucrCheck
