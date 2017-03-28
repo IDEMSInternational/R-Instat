@@ -69,6 +69,7 @@ Partial Class dlgStartofRains
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveStartofRains = New instat.ucrSave()
         CType(Me.nudTRAmount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudRDMinimum, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpConditionsForSatrtofRains.SuspendLayout()
@@ -557,16 +558,24 @@ Partial Class dlgStartofRains
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 404)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 434)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 11
+        '
+        'ucrSaveStartofRains
+        '
+        Me.ucrSaveStartofRains.Location = New System.Drawing.Point(9, 404)
+        Me.ucrSaveStartofRains.Name = "ucrSaveStartofRains"
+        Me.ucrSaveStartofRains.Size = New System.Drawing.Size(316, 24)
+        Me.ucrSaveStartofRains.TabIndex = 12
         '
         'dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(594, 459)
+        Me.ClientSize = New System.Drawing.Size(594, 488)
+        Me.Controls.Add(Me.ucrSaveStartofRains)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
@@ -663,4 +672,5 @@ Partial Class dlgStartofRains
     Friend WithEvents pnlDryPeriod As Panel
     Friend WithEvents pnlDrySpell As Panel
     Friend WithEvents pnlTotalRainfall As Panel
+    Friend WithEvents ucrSaveStartofRains As ucrSave
 End Class
