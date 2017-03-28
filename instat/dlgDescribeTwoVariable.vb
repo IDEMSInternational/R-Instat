@@ -39,22 +39,22 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverFirstVar.SetRCode(ucrBaseDescribeTwoVar.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverSecondVar.SetRCode(ucrBaseDescribeTwoVar.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverFirstVar.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverSecondVar.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsRCustomSummary, bReset)
         ucrChkSaveResult.SetRCode(clsRCustomSummary, bReset)
-        ucrSelectorDescribeTwoVar.SetRCode(ucrBaseDescribeTwoVar.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorDescribeTwoVar.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
         If ((Not ucrReceiverFirstVar.IsEmpty()) AndAlso (Not ucrReceiverSecondVar.IsEmpty())) Then
-            If ((strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType = "factor")) AndAlso sdgSummaries.strSummariesParameter = "c()" Then
-                ucrBaseDescribeTwoVar.OKEnabled(False)
+            If ((strSecondVarType = "numeric" OrElse strSecondVarType = "integer") AndAlso (strVarType = "factor")) AndAlso sdgSummaries.strSummariesParameter = "c()" Then
+                ucrBase.OKEnabled(False)
             Else
-                ucrBaseDescribeTwoVar.OKEnabled(True)
+                ucrBase.OKEnabled(True)
             End If
         Else
-            ucrBaseDescribeTwoVar.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -89,10 +89,10 @@ Public Class dlgDescribeTwoVariable
         clsRCustomSummary.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsRCustomSummary.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
 
-        ucrReceiverFirstVar.SetParameter(New RParameter("columns_to_summarise", 1))
+        ucrReceiverFirstVar.SetParameter(New RParameter("factors", 2))
         ucrReceiverFirstVar.SetParameterIsString()
 
-        ucrReceiverSecondVar.SetParameter(New RParameter("factors", 2))
+        ucrReceiverSecondVar.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSecondVar.SetParameterIsString()
 
         'this should go to initialise
@@ -117,28 +117,28 @@ Public Class dlgDescribeTwoVariable
         cmdSummaries.Visible = False
         cmdDisplayOptions.Visible = False
 
-        ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
         bResetSubdialog = True
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBaseDescribeTwoVar.iHelpTopicID = 414
-        ucrBaseDescribeTwoVar.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 414
+        ucrBase.clsRsyntax.iCallType = 2
 
         ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDescribeTwoVar.SetParameterIsString()
 
-        ucrReceiverFirstVar.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverFirstVar.SetSingleTypeStatus(True)
-
         ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverSecondVar.SetSingleTypeStatus(True)
+
+        ucrReceiverFirstVar.Selector = ucrSelectorDescribeTwoVar
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
         clsGetSecondDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetSecondDataType.AddParameter("property", "data_type_label")
     End Sub
 
-    Private Sub ucrBaseDescribeTwoVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeTwoVar.ClickReset
+    Private Sub ucrBaseDescribeTwoVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
@@ -160,13 +160,13 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Public Sub Results()
-        If ucrReceiverFirstVar.GetCurrentItemTypes.Count > 0 Then
-            strVarType = ucrReceiverFirstVar.GetCurrentItemTypes.Item(0)
+        If Not ucrReceiverFirstVar.IsEmpty() Then
+            strVarType = ucrReceiverFirstVar.strCurrDataType
         Else
             strVarType = ""
         End If
-        If (Not ucrReceiverSecondVar.IsEmpty()) Then
-            strSecondVarType = ucrReceiverSecondVar.strCurrDataType
+        If (ucrReceiverSecondVar.GetCurrentItemTypes.Count > 0) Then
+            strSecondVarType = ucrReceiverSecondVar.GetCurrentItemTypes.Item(0)
         Else
             strSecondVarType = ""
         End If
@@ -177,29 +177,15 @@ Public Class dlgDescribeTwoVariable
             cmdDisplayOptions.Visible = False
             ucrChkOmitMissing.Visible = False
 
-            ucrBaseDescribeTwoVar.clsRsyntax.RemoveParameter("data_name")
+            ucrBase.clsRsyntax.RemoveParameter("data_name")
 
-            ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRCorelation)
-            ucrReceiverFirstVar.SetParameter(New RParameter("x", 0))
-            ucrReceiverFirstVar.SetParameterIsRFunction()
-            ucrReceiverSecondVar.SetParameter(New RParameter("y", 1))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRCorelation)
+            ucrReceiverSecondVar.SetParameter(New RParameter("x", 0))
             ucrReceiverSecondVar.SetParameterIsRFunction()
+            ucrReceiverFirstVar.SetParameter(New RParameter("y", 1))
+            ucrReceiverFirstVar.SetParameterIsRFunction()
 
         ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "factor")) Then
-            ucrChkSaveResult.Visible = True
-            cmdSummaries.Visible = True
-            cmdDisplayOptions.Visible = False
-            ucrChkOmitMissing.Visible = True
-
-            ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
-            ucrSelectorDescribeTwoVar.SetParameterIsString()
-
-            ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
-            ucrReceiverFirstVar.SetParameter(New RParameter("columns_to_summarise", 1))
-            ucrReceiverFirstVar.SetParameterIsString()
-            ucrReceiverSecondVar.SetParameter(New RParameter("factors", 2))
-            ucrReceiverSecondVar.SetParameterIsString()
-        ElseIf ((strVarType = "factor") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
             ucrChkSaveResult.Visible = False
             cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = True
@@ -209,11 +195,27 @@ Public Class dlgDescribeTwoVariable
             ucrSelectorDescribeTwoVar.SetParameterIsString()
 
 
-            ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRAnova)
-            ucrReceiverFirstVar.SetParameter(New RParameter("x_col_names", 1))
-            ucrReceiverFirstVar.SetParameterIsString()
-            ucrReceiverSecondVar.SetParameter(New RParameter("y_col_name", 2))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRAnova)
+            ucrReceiverSecondVar.SetParameter(New RParameter("x_col_names", 1))
             ucrReceiverSecondVar.SetParameterIsString()
+            ucrReceiverFirstVar.SetParameter(New RParameter("y_col_name", 2))
+            ucrReceiverFirstVar.SetParameterIsString()
+        ElseIf ((strVarType = "factor") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
+            ucrChkSaveResult.Visible = True
+            cmdSummaries.Visible = True
+            cmdDisplayOptions.Visible = False
+            ucrChkOmitMissing.Visible = True
+
+            ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
+            ucrSelectorDescribeTwoVar.SetParameterIsString()
+
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
+            ucrReceiverSecondVar.SetParameter(New RParameter("columns_to_summarise", 1))
+            ucrReceiverSecondVar.SetParameterIsString()
+            ucrReceiverFirstVar.SetParameter(New RParameter("factors", 2))
+            ucrReceiverFirstVar.SetParameterIsString()
+
+
         ElseIf ((strVarType = "factor") And (strSecondVarType = "factor")) Then
             ucrChkSaveResult.Visible = False
             cmdSummaries.Visible = False
@@ -223,11 +225,11 @@ Public Class dlgDescribeTwoVariable
             ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
             ucrSelectorDescribeTwoVar.SetParameterIsString()
 
-            ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRFreqTables)
-            ucrReceiverFirstVar.SetParameter(New RParameter("x_col_names", 1))
-            ucrReceiverFirstVar.SetParameterIsString()
-            ucrReceiverSecondVar.SetParameter(New RParameter("y_col_name", 2))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRFreqTables)
+            ucrReceiverSecondVar.SetParameter(New RParameter("x_col_names", 1))
             ucrReceiverSecondVar.SetParameterIsString()
+            ucrReceiverFirstVar.SetParameter(New RParameter("y_col_name", 2))
+            ucrReceiverFirstVar.SetParameterIsString()
         Else
             ucrChkSaveResult.Visible = False
             ucrChkOmitMissing.Visible = False
@@ -237,7 +239,7 @@ Public Class dlgDescribeTwoVariable
         SetRCodeForControls(False)
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVar.ControlContentsChanged, ucrReceiverSecondVar.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged, ucrReceiverFirstVar.ControlContentsChanged
         Results()
         TestOKEnabled()
     End Sub
