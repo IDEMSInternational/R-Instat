@@ -123,7 +123,7 @@ Public Class dlgOpenNetCDF
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(strFilePath)
                     ucrInputDataName.Show()
-                    lblSSTName.Show()
+                    lblMainDataName.Show()
 
                     If strFileExt = ".nc" Then
                         clsRCDF.SetRCommand("nc_open")

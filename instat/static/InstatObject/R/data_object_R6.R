@@ -2190,6 +2190,7 @@ all_primary_corruption_country_level_column_types <- c(corruption_country_label,
 corruption_type_label = "Corruption_Type"
 corruption_output_label = "Is_Corruption_Output"
 corruption_red_flag_label = "Is_Corruption_Red_Flag"
+corruption_index_label = "Is_Corruption_Index"
 
 # Data frame metadata for corruption dataframes
 corruption_data_label = "Is_Corruption_Data"
@@ -2207,6 +2208,7 @@ data_object$set("public","define_corruption_outputs", function(output_columns = 
     stop("Cannot define corruption outputs when data frame is not defined as corruption data.")
   }
   self$append_to_variables_metadata(output_columns, corruption_output_label, TRUE)
+  self$append_to_variables_metadata(output_columns, corruption_index_label, TRUE)
   other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
   self$append_to_variables_metadata(other_cols, corruption_output_label, FALSE)
 }
@@ -2222,6 +2224,7 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
     stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
   }
   self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
+  self$append_to_variables_metadata(red_flags, corruption_index_label, TRUE)
   other_cols <- self$get_column_names()[!self$get_column_names() %in% red_flags]
   self$append_to_variables_metadata(other_cols, corruption_red_flag_label, FALSE)
 }
@@ -2726,7 +2729,7 @@ data_object$set("public","generate_all_bids_trimmed", function() {
 }
 )
 
-standard_country_names <- function(country) {
+standardise_country_names <- function(country) {
   country_names <- country
   country_names[country_names == "Antigua and Bar"] <- "Antigua and Barbuda"
   country_names[country_names == "Bosnia and Herz"] <- "Bosnia and Herzegovina"
@@ -2761,14 +2764,14 @@ standard_country_names <- function(country) {
   return(country_names)
 }
 
-instat_object$set("public","standard_country_names", function(data_name, country_columns = c()) {
-  self$get_data_objects(data_name)$standard_country_names(country_columns)
+instat_object$set("public","standardise_country_names", function(data_name, country_columns = c()) {
+  self$get_data_objects(data_name)$standardise_country_names(country_columns)
 }
 )
 
-data_object$set("public","standard_country_names", function(country_columns = c()) {
+data_object$set("public","standardise_country_names", function(country_columns = c()) {
   for(col_name in country_columns) {
-    corrected_col <- standard_country_names(self$get_columns_from_data(col_name))
+    corrected_col <- standardise_country_names(self$get_columns_from_data(col_name))
     new_col_name <- next_default_item(paste(col_name, "standardised", sep = "_"), self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(new_col_name, corrected_col)
     type <- self$get_variables_metadata(column = col_name, property = corruption_type_label)
