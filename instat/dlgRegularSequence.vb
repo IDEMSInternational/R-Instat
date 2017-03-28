@@ -221,7 +221,10 @@ Public Class dlgRegularSequence
 
     Private Sub ucrSelectDataFrameRegularSequence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectDataFrameRegularSequence.ControlValueChanged
         If ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
-            ucrNudTo.Value = frmMain.clsRLink.GetDataFrameLength(ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text)
+            Try
+                ucrNudTo.Value = frmMain.clsRLink.GetDataFrameLength(ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text)
+            Catch ex As Exception
+            End Try
         End If
         CheckSequenceLength()
     End Sub
