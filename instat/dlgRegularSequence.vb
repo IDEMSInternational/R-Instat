@@ -87,6 +87,7 @@ Public Class dlgRegularSequence
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetLabelText("New Column Name:")
 
+
         'TODO complete dates option
         rdoDates.Enabled = False
         dtpSelectorB.Visible = False
@@ -95,6 +96,7 @@ Public Class dlgRegularSequence
         ' ucrNudTo.Visible = False
         'chkDefineAsFactor.Visible = False
     End Sub
+
 
     Private Sub SetDefaults()
         clsRepFunction = New RFunction
@@ -110,8 +112,7 @@ Public Class dlgRegularSequence
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction)
         clsRepFunction.AddParameter("each", 1)
         clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength)
-
-        clsSeqFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
+        clsSeqFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
 
     End Sub
@@ -156,13 +157,13 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
-    Private Sub SetBaseFunction()
+    Private Sub setbasefunction()
         If ucrNudRepeatValues.Value > 1 Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
-        Else
+        ElseIf ucrNudRepeatValues.Value = 1 Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
         End If
-        CheckSequenceLength()
+
     End Sub
 
     'Private Sub dtpSelectorA_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorA.ValueChanged
@@ -226,18 +227,21 @@ Public Class dlgRegularSequence
     End Sub
 
 
-    Private Sub ucrNudRepeatValues_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged
-        SetBaseFunction()
-        SetInStepsOfParameter()
+    Private Sub ucrNudRepeatValues_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged, ucrNudInStepsOf.ControlValueChanged
+        CheckSequenceLength()
+        '  SetBaseFunction()
+        'SetInStepsOfParameter()
     End Sub
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrNudFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudFrom.ControlValueChanged, ucrNudInStepsOf.ControlValueChanged, ucrNudTo.ControlValueChanged, ucrPnlSequenceType.ControlValueChanged
+    Private Sub ucrNudFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudInStepsOf.ControlValueChanged, ucrPnlSequenceType.ControlValueChanged
+        'SetBaseFunction()
         SetInStepsOfParameter()
     End Sub
+
 
     Private Sub ucrNudNumberOfDecimalPlaces_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfDecimalPlaces.ControlContentsChanged
         ucrNudFrom.DecimalPlaces = ucrNudNumberOfDecimalPlaces.Value
@@ -248,7 +252,7 @@ Public Class dlgRegularSequence
         ucrNudInStepsOf.Increment = 10 ^ -(ucrNudNumberOfDecimalPlaces.Value)
     End Sub
 
-    Private Sub txtGetPreview_TextChanged(sender As Object, e As EventArgs) Handles txtGetPreview.TextChanged, rdoDates.TextChanged, rdoNumeric.TextChanged
+    Private Sub txtGetPreview_TextChanged(sender As Object, e As EventArgs) Handles txtGetPreview.TextChanged
         TestOKEnabled()
     End Sub
 End Class
