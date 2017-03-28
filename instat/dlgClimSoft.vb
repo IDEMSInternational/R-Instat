@@ -54,12 +54,14 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetParameterIsString()
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleElements.SetItemType("database_variables")
-        ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom in (10202200,10306100) GROUP BY observationfinal.describedBy;"
+        ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom in (102,104) GROUP BY observationfinal.describedBy;"
+        ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
         ucrChkObservationData.SetText("Observation Data")
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
         ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkObservationData.SetRDefault("FALSE")
+
 
         ucrInputStartDate.SetParameter(New RParameter("start_date", 3))
         ucrInputStartDate.SetLinkedDisplayControl(lblStartDate)
@@ -67,7 +69,7 @@ Public Class dlgClimSoft
         ucrInputEndDate.SetParameter(New RParameter("end_date", 4))
         ucrInputEndDate.SetLinkedDisplayControl(lblEndDate)
         ttClimsoft.SetToolTip(ucrInputEndDate.txtInput, "yyyy-mm-dd")
-        ucrChkObservationData.AddToLinkedControls({ucrInputStartDate, ucrInputEndDate}, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkObservationData.AddToLinkedControls({ucrInputStartDate, ucrInputEndDate, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -103,7 +105,6 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
-
         sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bResetSubdialog)
         bResetSubdialog = False
         sdgImportFromClimSoft.ShowDialog()
@@ -122,6 +123,7 @@ Public Class dlgClimSoft
 
     Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged
         If ucrReceiverMultipleStations.IsEmpty Then
+            'Danny needs to clarify this.
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
         Else
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList(bWithQuotes:=False)) & ") GROUP BY observationfinal.describedBy;"
