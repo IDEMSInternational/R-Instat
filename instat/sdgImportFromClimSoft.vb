@@ -27,21 +27,18 @@ Public Class sdgImportFromClimSoft
     Private strNoConnection As String = "No Connection"
 
     Private Sub sdgImportFromClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
     End Sub
 
     Private Sub InitialiseControls()
-        ucrInputDatabaseName.SetParameter(New RParameter("dbname"))
-        'ucrInputDatabaseName.SetRDefault("mariadb_climsoft_test_db_v4")
-        ucrInputHost.SetParameter(New RParameter("host"))
-        'ucrInputHost.SetRDefault("127.0.0.1")
-        ucrInputPort.SetParameter(New RParameter("port"))
-        'ucrInputPort.SetRDefault("3308")
+        ucrInputDatabaseName.SetParameter(New RParameter("dbname", 0))
+        ucrInputHost.SetParameter(New RParameter("host", 1))
+        ucrInputPort.SetParameter(New RParameter("port", 2))
         ucrInputPort.AddQuotesIfUnrecognised = False
-        ucrInputUserName.SetParameter(New RParameter("user"))
-        'ucrInputUserName.SetRDefault("root")
+        ucrInputUserName.SetParameter(New RParameter("user", 3))
         bControlsInitialised = True
     End Sub
 
