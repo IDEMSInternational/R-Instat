@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgTwoWayFrequencies
     Private bFirstLoad As Boolean = True
@@ -57,7 +56,6 @@ Public Class dlgTwoWayFrequencies
     Private Sub InitialiseDialog()
         'HelpID
         ' ucrBase.iHelpTopicID = 
-        ' ICallType()
         'temporary: its parameter to be added
         rdoCount.Enabled = False
 
@@ -102,14 +100,24 @@ Public Class dlgTwoWayFrequencies
         ucrChkTable.SetText("Table")
         ucrChkGraph.SetText("Graph")
 
-        ucrChkTable.AddFunctionNamesCondition(True, "sjPlot::sjt.xtab")
+        ucrChkTable.AddFunctionNamesCondition(True, "sjt.xtab")
 
-        ucrChkTable.AddToLinkedControls(ucrChkCount, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTable.AddToLinkedControls(ucrChkRow, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTable.AddToLinkedControls(ucrChkCell, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTable.AddToLinkedControls(ucrChkColumn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTable.AddToLinkedControls(ucrChkFlip, {ucrChkGraph.Checked}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkTable.AddToLinkedControls(ucrPnlFrequencies, {ucrChkGraph.Checked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTable.AddToLinkedControls(ucrChkCount, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkTable.AddToLinkedControls(ucrChkRow, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkTable.AddToLinkedControls(ucrChkCell, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkTable.AddToLinkedControls(ucrChkColumn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+
+        ucrChkGraph.AddToLinkedControls(ucrChkFlip, {True}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkGraph.AddToLinkedControls(ucrPnlFrequencies, {True}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+        ucrSaveGraph.SetPrefix("two_way_freq")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+
+
+
     End Sub
 
     Private Sub SetDefaults()
@@ -121,14 +129,12 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverRowFactor.SetMeAsReceiver()
         ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 1))
         ucrReceiverColumnFactor.SetParameterIsRFunction()
-        clsSjtXtab.SetRCommand("sjPlot::sjt.xtab")
-        clsSjpXtab.SetRCommand("sjPlot::sjp.xtab")
+        clsSjtXtab.SetRCommand("sjt.xtab")
+        clsSjpXtab.SetRCommand("sjp.xtab")
         clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
         clsSjtXtab.AddParameter("show.obs", "TRUE")
-        clsSjtXtab.AddParameter("show.col.prc", "FALSE")
-        clsSjtXtab.AddParameter("show.cell.prc", "FALSE")
-        clsSjtXtab.AddParameter("show.row.prc", "FALSE")
 
+        clsSjpXtab.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
     End Sub
 
@@ -139,6 +145,8 @@ Public Class dlgTwoWayFrequencies
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf ucrChkGraph.Checked
             ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.iCallType = 3
+        Else 'temporary fix
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
@@ -172,6 +180,14 @@ Public Class dlgTwoWayFrequencies
             ucrReceiverRowFactor.SetParameterIsRFunction()
             ucrReceiverColumnFactor.SetParameter(New RParameter("grp", 1))
             ucrReceiverColumnFactor.SetParameterIsRFunction()
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjpXtab)
+        Else
+            ucrReceiverRowFactor.SetParameter(New RParameter("x", 0))
+            ucrReceiverRowFactor.SetParameterIsRFunction()
+            ucrReceiverColumnFactor.SetParameter(New RParameter("grp", 1))
+            ucrReceiverColumnFactor.SetParameterIsRFunction()
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpXtab)
         End If
         SetRCodeForControls(False)
