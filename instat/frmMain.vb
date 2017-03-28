@@ -208,9 +208,9 @@ Public Class frmMain
         dlgThreeVariableModelling.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Click
-        dlgNon_ParametricTwoWayAnova.ShowDialog()
-    End Sub
+    'Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Click
+    '    dlgNon_ParametricTwoWayAnova.ShowDialog()
+    'End Sub
 
     Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareNewWorksheet.Click
         dlgNewWorksheet.ShowDialog()
@@ -434,11 +434,11 @@ Public Class frmMain
         dlgReferenceLevel.ShowDialog()
     End Sub
 
-    Private Sub mnuMangeFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
+    Private Sub mnuManageFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
         dlgLabels.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorConvertToFactor.Click
+    Private Sub mnuManageFactorConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorConvertToFactor.Click
         dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
     End Sub
@@ -509,13 +509,13 @@ Public Class frmMain
         dlgDummyVariables.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
-        dlgGeneralANOVA.ShowDialog()
-    End Sub
+    'Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
+    '    dlgGeneralANOVA.ShowDialog()
+    'End Sub
 
-    Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
-        dlgGeneralRegression.ShowDialog()
-    End Sub
+    'Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
+    '    dlgGeneralRegression.ShowDialog()
+    'End Sub
 
     Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeGeneralGraphics.Click
         dlgGeneralForGraphics.ShowDialog()
@@ -1027,17 +1027,8 @@ Public Class frmMain
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuCorruptionFile_Click(sender As Object, e As EventArgs) Handles mnuCorruptionFile.Click
+    Private Sub mnuCorruptionFile_Click(sender As Object, e As EventArgs)
         dlgCorruptionFile.ShowDialog()
-    End Sub
-
-    Private Sub mnuCorruptionOrganise_Click(sender As Object, e As EventArgs) Handles mnuCorruptionPrepare.Click
-    End Sub
-
-    Private Sub mnuCorruptionDescribe_Click(sender As Object, e As EventArgs) Handles mnuCorruptionDescribe.Click
-    End Sub
-
-    Private Sub mnuCorruptionModel_Click(sender As Object, e As EventArgs) Handles mnuCorruptionModel.Click
     End Sub
 
     Private Sub GeneralSummariesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeGeneralSummaries.Click
@@ -1259,6 +1250,22 @@ Public Class frmMain
             dlgUseDate.strDefaultColumn = ""
         End If
         dlgUseDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableFrequencies.Click
+        dlgOneWayFrequencies.showdialog()
+    End Sub
+
+    Private Sub CalculateCRIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculateCRIToolStripMenuItem.Click
+        dlgDefineCRI.ShowDialog()
+    End Sub
+
+    Private Sub CountryNamesCorrectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountryNamesCorrectionsToolStripMenuItem.Click
+        dlgStandardiseCountryNames.ShowDialog()
+    End Sub
+
+    Private Sub RecodeNumericIntoQuantilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeNumericIntoQuantilesToolStripMenuItem.Click
+        dlgRecodeNumericIntoQuantiles.ShowDialog()
     End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click

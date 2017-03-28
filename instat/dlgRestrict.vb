@@ -162,7 +162,7 @@ Public Class dlgRestrict
             clsSubset.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
             clsSetCurrentFilter.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
             Try
-                ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterView.ToScript()).AsCharacter(0))
+                ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterView.ToScript(), bSilent:=True).AsCharacter(0))
             Catch ex As Exception
                 ucrInputFilterPreview.SetName("Preview not available")
             End Try

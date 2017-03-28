@@ -74,16 +74,17 @@ Public Class dlgSort
         ucrSelectForSort.SetParameterIsString()
 
         'Set radiobutton parameters
-        ucrPanelOrder.SetParameter(New RParameter("decreasing", 2))
-        ucrPanelOrder.AddRadioButton(rdoAscending, "FALSE")
-        ucrPanelOrder.AddRadioButton(rdoDescending, "TRUE")
-        ucrPanelOrder.SetRDefault("FALSE")
+        ucrPnlOrder.SetParameter(New RParameter("decreasing", 2))
+        ucrPnlOrder.AddRadioButton(rdoAscending, "FALSE")
+        ucrPnlOrder.AddRadioButton(rdoDescending, "TRUE")
+        ucrPnlOrder.SetRDefault("FALSE")
 
         'Currently Disabled
         'ucrPanelMissingValues.SetParameter(New RParameter("na.last", 3))
         'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
         'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
         'ucrPanelMissingValues.SetRDefault("TRUE")
+        ucrPnlMissingValues.bAllowNonConditionValues = True
     End Sub
 
     'Setting Defaults on Reset 
