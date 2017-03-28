@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgDescribeTwoVariable
     Private bFirstLoad As Boolean = True
@@ -42,9 +43,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondVar.SetRCode(ucrBaseDescribeTwoVar.clsRsyntax.clsBaseFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsRCustomSummary, bReset)
         ucrChkSaveResult.SetRCode(clsRCustomSummary, bReset)
-        ucrSelectorDescribeTwoVar.SetRCode(clsRCustomSummary, bReset)
-        ucrSelectorDescribeTwoVar.SetRCode(clsRAnova, bReset)
-        ucrSelectorDescribeTwoVar.SetRCode(clsRFreqTables, bReset)
+        ucrSelectorDescribeTwoVar.SetRCode(ucrBaseDescribeTwoVar.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
@@ -68,6 +67,8 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVar.SetMeAsReceiver()
         clsRFreqTables = New RFunction
         clsRAnova = New RFunction
+        clsRCorelation = New RFunction
+
         clsRFreqTables.AddParameter("addmargins", "FALSE")
         clsRFreqTables.AddParameter("transpose", "FALSE")
         clsRFreqTables.AddParameter("proportions", "FALSE")
@@ -75,6 +76,8 @@ Public Class dlgDescribeTwoVariable
         clsRAnova.AddParameter("means", "FALSE")
         clsRAnova.AddParameter("signif.stars", "FALSE")
         clsRAnova.AddParameter("sign_level", "FALSE")
+        clsRCorelation.AddParameter("method", Chr(34) & "pearson" & Chr(34))
+        clsRCorelation.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
 
         clsSummariesList = New RFunction
         clsSummariesList.SetRCommand("c")
@@ -92,6 +95,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondVar.SetParameter(New RParameter("factors", 2))
         ucrReceiverSecondVar.SetParameterIsString()
 
+        'this should go to initialise
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm"))
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -109,7 +113,7 @@ Public Class dlgDescribeTwoVariable
         clsRFreqTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$frequency_tables")
         clsRAnova.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
 
-        ucrChkSaveResult.Enabled = False
+        'ucrChkSaveResult.Enabled = False
         cmdSummaries.Visible = False
         cmdDisplayOptions.Visible = False
 
@@ -125,7 +129,7 @@ Public Class dlgDescribeTwoVariable
         ucrSelectorDescribeTwoVar.SetParameterIsString()
 
         ucrReceiverFirstVar.Selector = ucrSelectorDescribeTwoVar
-        'ucrReceiverFirstVar.SetSingleTypeStatus(True)
+        ucrReceiverFirstVar.SetSingleTypeStatus(True)
 
         ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
@@ -155,18 +159,6 @@ Public Class dlgDescribeTwoVariable
         TestOKEnabled()
     End Sub
 
-    Private Sub Correlation()
-        ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRCorelation)
-        ucrReceiverFirstVar.SetParameter(New RParameter("x", 0))
-        ucrReceiverFirstVar.SetParameterIsRFunction()
-        ucrReceiverSecondVar.SetParameter(New RParameter("y", 1))
-        ucrReceiverSecondVar.SetParameterIsRFunction()
-        clsRCorelation.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-        clsRCorelation.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
-        'ucrChkOmitMissing.ChangeParameterName("drop")
-        cmdSummaries.Enabled = True
-    End Sub
-
     Public Sub Results()
         If ucrReceiverFirstVar.GetCurrentItemTypes.Count > 0 Then
             strVarType = ucrReceiverFirstVar.GetCurrentItemTypes.Item(0)
@@ -180,38 +172,65 @@ Public Class dlgDescribeTwoVariable
         End If
 
         If ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
-            ucrChkSaveResult.Enabled = False
+            ucrChkSaveResult.Visible = False
             cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = False
-            Correlation()
+            ucrChkOmitMissing.Visible = False
+
+            ucrBaseDescribeTwoVar.clsRsyntax.RemoveParameter("data_name")
+
+            ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRCorelation)
+            ucrReceiverFirstVar.SetParameter(New RParameter("x", 0))
+            ucrReceiverFirstVar.SetParameterIsRFunction()
+            ucrReceiverSecondVar.SetParameter(New RParameter("y", 1))
+            ucrReceiverSecondVar.SetParameterIsRFunction()
+
         ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "factor")) Then
-            ucrChkSaveResult.Enabled = True
+            ucrChkSaveResult.Visible = True
             cmdSummaries.Visible = True
             cmdDisplayOptions.Visible = False
+            ucrChkOmitMissing.Visible = True
+
+            ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
+            ucrSelectorDescribeTwoVar.SetParameterIsString()
+
             ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
             ucrReceiverFirstVar.SetParameter(New RParameter("columns_to_summarise", 1))
             ucrReceiverFirstVar.SetParameterIsString()
             ucrReceiverSecondVar.SetParameter(New RParameter("factors", 2))
             ucrReceiverSecondVar.SetParameterIsString()
         ElseIf ((strVarType = "factor") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
-            ucrChkSaveResult.Enabled = False
+            ucrChkSaveResult.Visible = False
             cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = True
+            ucrChkOmitMissing.Visible = False
+
+            ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
+            ucrSelectorDescribeTwoVar.SetParameterIsString()
+
+
             ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRAnova)
             ucrReceiverFirstVar.SetParameter(New RParameter("x_col_names", 1))
             ucrReceiverFirstVar.SetParameterIsString()
             ucrReceiverSecondVar.SetParameter(New RParameter("y_col_name", 2))
             ucrReceiverSecondVar.SetParameterIsString()
         ElseIf ((strVarType = "factor") And (strSecondVarType = "factor")) Then
-            ucrChkSaveResult.Enabled = False
+            ucrChkSaveResult.Visible = False
             cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = True
+            ucrChkOmitMissing.Visible = False
+
+            ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
+            ucrSelectorDescribeTwoVar.SetParameterIsString()
+
             ucrBaseDescribeTwoVar.clsRsyntax.SetBaseRFunction(clsRFreqTables)
             ucrReceiverFirstVar.SetParameter(New RParameter("x_col_names", 1))
             ucrReceiverFirstVar.SetParameterIsString()
             ucrReceiverSecondVar.SetParameter(New RParameter("y_col_name", 2))
             ucrReceiverSecondVar.SetParameterIsString()
         Else
+            ucrChkSaveResult.Visible = False
+            ucrChkOmitMissing.Visible = False
             cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = False
         End If
