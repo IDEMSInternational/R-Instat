@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
 Public Class dlgConvertColumns
@@ -126,5 +127,13 @@ Public Class dlgConvertColumns
 
     Private Sub Controls_ControlContentsChanged() Handles ucrReceiverColumnsToConvert.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrChkSpecifyDecimalsToDisplay.ControlContentsChanged, ucrNudDisplayDecimals.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkSpecifyDecimalsToDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDecimalsToDisplay.ControlValueChanged
+        If ucrChkSpecifyDecimalsToDisplay.Checked Then
+            ucrReceiverColumnsToConvert.SetDataType("numeric")
+        Else
+            ucrReceiverColumnsToConvert.SetIncludedDataTypes({"integer", "numeric", "character", "ordered", "factor"})
+        End If
     End Sub
 End Class
