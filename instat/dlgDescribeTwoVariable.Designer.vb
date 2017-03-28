@@ -23,15 +23,15 @@ Partial Class dlgDescribeTwoVariable
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cmdSummaries = New System.Windows.Forms.Button()
-        Me.chkSaveResult = New System.Windows.Forms.CheckBox()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblFirstVariables = New System.Windows.Forms.Label()
         Me.lbSecondVariable = New System.Windows.Forms.Label()
-        Me.chkOmitMissing = New System.Windows.Forms.CheckBox()
         Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVar = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseDescribeTwoVar = New instat.ucrButtons()
+        Me.ucrChkSaveResult = New instat.ucrCheck()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdSummaries
@@ -44,19 +44,9 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
-        'chkSaveResult
-        '
-        Me.chkSaveResult.Location = New System.Drawing.Point(10, 199)
-        Me.chkSaveResult.Name = "chkSaveResult"
-        Me.chkSaveResult.Size = New System.Drawing.Size(104, 24)
-        Me.chkSaveResult.TabIndex = 5
-        Me.chkSaveResult.Tag = "Save_Result"
-        Me.chkSaveResult.Text = "Save Result"
-        Me.chkSaveResult.UseVisualStyleBackColor = True
-        '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 198)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 202)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 8
@@ -83,17 +73,9 @@ Partial Class dlgDescribeTwoVariable
         Me.lbSecondVariable.Tag = "Second_Variable:"
         Me.lbSecondVariable.Text = "Second Variable:"
         '
-        'chkOmitMissing
-        '
-        Me.chkOmitMissing.Location = New System.Drawing.Point(140, 199)
-        Me.chkOmitMissing.Name = "chkOmitMissing"
-        Me.chkOmitMissing.Size = New System.Drawing.Size(126, 25)
-        Me.chkOmitMissing.TabIndex = 6
-        Me.chkOmitMissing.Text = "Omit Missing Values"
-        Me.chkOmitMissing.UseVisualStyleBackColor = True
-        '
         'ucrReceiverSecondVar
         '
+        Me.ucrReceiverSecondVar.frmParent = Me
         Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(247, 170)
         Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
@@ -103,6 +85,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'ucrReceiverFirstVar
         '
+        Me.ucrReceiverFirstVar.frmParent = Me
         Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(247, 61)
         Me.ucrReceiverFirstVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstVar.Name = "ucrReceiverFirstVar"
@@ -127,16 +110,32 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrBaseDescribeTwoVar.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseDescribeTwoVar.TabIndex = 9
         '
+        'ucrChkSaveResult
+        '
+        Me.ucrChkSaveResult.Checked = False
+        Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 203)
+        Me.ucrChkSaveResult.Name = "ucrChkSaveResult"
+        Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSaveResult.TabIndex = 11
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(176, 203)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkOmitMissing.TabIndex = 10
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 288)
-        Me.Controls.Add(Me.chkOmitMissing)
+        Me.Controls.Add(Me.ucrChkSaveResult)
+        Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.lbSecondVariable)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.cmdDisplayOptions)
-        Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.ucrReceiverSecondVar)
         Me.Controls.Add(Me.ucrReceiverFirstVar)
         Me.Controls.Add(Me.cmdSummaries)
@@ -158,10 +157,10 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrSelectorDescribeTwoVar As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverFirstVar As ucrReceiverMultiple
     Friend WithEvents cmdSummaries As Button
-    Friend WithEvents chkSaveResult As CheckBox
     Friend WithEvents ucrReceiverSecondVar As ucrReceiverSingle
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents lblFirstVariables As Label
     Friend WithEvents lbSecondVariable As Label
-    Friend WithEvents chkOmitMissing As CheckBox
+    Friend WithEvents ucrChkSaveResult As ucrCheck
+    Friend WithEvents ucrChkOmitMissing As ucrCheck
 End Class
