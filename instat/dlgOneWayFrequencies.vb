@@ -43,7 +43,7 @@ Public Class dlgOneWayFrequencies
         ucrChkTable.SetRCode(clsSjtFreq, bReset)
 
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSort.SetRCode(clsSjtFreq, bReset)
+        ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
     End Sub
 
@@ -72,7 +72,10 @@ Public Class dlgOneWayFrequencies
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkTable.AddToLinkedControls(ucrPnlSort, {True}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkGraph.SetText("Graph")
+        ucrChkTable.SetText("Table")
+        ucrChkTable.AddFunctionNamesCondition(True, "sjPlot::sjt.frq")
+        'ucrChkGraph.AddFunctionNamesCondition(True, "sjPlot::sjp.frq")
         ucrChkGraph.AddToLinkedControls(ucrChkFlip, {True}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrChkFlip.SetText("Flip Coordinates")
@@ -80,10 +83,12 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
 
-        ucrChkGraph.SetText("Graph")
-        ucrChkTable.SetText("Table")
-        ucrChkTable.AddFunctionNamesCondition(True, "sjPlot::sjt.frq")
-        ucrChkGraph.AddFunctionNamesCondition(True, "sjPlot::sjp.frq")
+        ucrSaveGraph.SetPrefix("one_way_freq")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorOneWayFreq.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+
     End Sub
 
     Private Sub SetDefaults()
@@ -95,7 +100,9 @@ Public Class dlgOneWayFrequencies
         clsSjtFreq.SetRCommand("sjPlot::sjt.frq")
         clsSjtFreq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         clsSjpFrq.SetRCommand("sjPlot::sjp.frq")
-        clsSjpFrq.AddParameter("coord.flip", "FALSE")
+        ' clsSjpFrq.AddParameter("coord.flip", "FALSE")
+        clsSjpFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
+        clsSjpFrq.SetAssignTo("onevar_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="onevar_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
     End Sub
 
@@ -117,10 +124,12 @@ Public Class dlgOneWayFrequencies
 
     Public Sub ICallType()
         If ucrChkTable.Checked Then
-            ucrBase.clsRsyntax.bHTMLOutput = True
+            ' ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf ucrChkGraph.Checked
             ' ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.iCallType = 3
+        Else 'temporary fix to ensure graphs are displayed in the output window before a wrapper for displaying both tables and graphs at the same time on the output window is implemented
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
@@ -134,10 +143,12 @@ Public Class dlgOneWayFrequencies
             ucrReceiverOneWayFreq.SetParameter(New RParameter("var.cnt", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("onevar_graph")
         Else
             ucrReceiverOneWayFreq.SetParameter(New RParameter("var.cnt", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("onevar_graph")
         End If
         SetRCodeForControls(False)
     End Sub
