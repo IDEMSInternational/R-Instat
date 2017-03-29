@@ -25,28 +25,28 @@ Partial Class dlgView
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.rdoDispSepOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoDispOutputWindow = New System.Windows.Forms.RadioButton()
+        Me.rdoBottom = New System.Windows.Forms.RadioButton()
+        Me.rdoTop = New System.Windows.Forms.RadioButton()
+        Me.lblDisplayFrom = New System.Windows.Forms.Label()
+        Me.lblNumberofRows = New System.Windows.Forms.Label()
+        Me.ucrNudNumberRows = New instat.ucrNud()
+        Me.ucrPnlDisplayFrom = New instat.UcrPanel()
+        Me.ucrChkSpecifyRows = New instat.ucrCheck()
+        Me.ucrPnlDisplayWindow = New instat.UcrPanel()
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlDisplayWindow = New instat.UcrPanel()
-        Me.ucrNudNumberRows = New instat.ucrNud()
-        Me.rdoBottom = New System.Windows.Forms.RadioButton()
-        Me.rdoTop = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlDisplayFrom = New instat.UcrPanel()
-        Me.ucrChkSpecifyRows = New instat.ucrCheck()
-        Me.lblDisplayFrom = New System.Windows.Forms.Label()
-        Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(248, 36)
+        Me.lblSelected.Location = New System.Drawing.Point(248, 45)
         Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(104, 13)
+        Me.lblSelected.Size = New System.Drawing.Size(97, 13)
         Me.lblSelected.TabIndex = 2
         Me.lblSelected.Tag = ""
-        Me.lblSelected.Text = "Selected Variable(s):"
+        Me.lblSelected.Text = "Variable(s) to View:"
         '
         'rdoDispSepOutputWindow
         '
@@ -70,52 +70,6 @@ Partial Class dlgView
         Me.rdoDispOutputWindow.Text = "Display in Output Window"
         Me.rdoDispOutputWindow.UseVisualStyleBackColor = True
         '
-        'ucrReceiverView
-        '
-        Me.ucrReceiverView.frmParent = Me
-        Me.ucrReceiverView.Location = New System.Drawing.Point(248, 60)
-        Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverView.Name = "ucrReceiverView"
-        Me.ucrReceiverView.Selector = Nothing
-        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 130)
-        Me.ucrReceiverView.TabIndex = 3
-        '
-        'ucrSelectorForView
-        '
-        Me.ucrSelectorForView.bShowHiddenColumns = False
-        Me.ucrSelectorForView.bUseCurrentFilter = True
-        Me.ucrSelectorForView.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForView.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForView.Name = "ucrSelectorForView"
-        Me.ucrSelectorForView.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForView.TabIndex = 0
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 319)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 12
-        '
-        'ucrPnlDisplayWindow
-        '
-        Me.ucrPnlDisplayWindow.Location = New System.Drawing.Point(10, 200)
-        Me.ucrPnlDisplayWindow.Name = "ucrPnlDisplayWindow"
-        Me.ucrPnlDisplayWindow.Size = New System.Drawing.Size(170, 46)
-        Me.ucrPnlDisplayWindow.TabIndex = 6
-        '
-        'ucrNudNumberRows
-        '
-        Me.ucrNudNumberRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberRows.Location = New System.Drawing.Point(318, 217)
-        Me.ucrNudNumberRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
-        Me.ucrNudNumberRows.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberRows.TabIndex = 8
-        Me.ucrNudNumberRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'rdoBottom
         '
         Me.rdoBottom.AutoSize = True
@@ -138,21 +92,6 @@ Partial Class dlgView
         Me.rdoTop.Text = "Top"
         Me.rdoTop.UseVisualStyleBackColor = True
         '
-        'ucrPnlDisplayFrom
-        '
-        Me.ucrPnlDisplayFrom.Location = New System.Drawing.Point(299, 243)
-        Me.ucrPnlDisplayFrom.Name = "ucrPnlDisplayFrom"
-        Me.ucrPnlDisplayFrom.Size = New System.Drawing.Size(66, 40)
-        Me.ucrPnlDisplayFrom.TabIndex = 16
-        '
-        'ucrChkSpecifyRows
-        '
-        Me.ucrChkSpecifyRows.Checked = False
-        Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(226, 195)
-        Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
-        Me.ucrChkSpecifyRows.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSpecifyRows.TabIndex = 6
-        '
         'lblDisplayFrom
         '
         Me.lblDisplayFrom.AutoSize = True
@@ -173,11 +112,72 @@ Partial Class dlgView
         Me.lblNumberofRows.Tag = "Number_of_rows"
         Me.lblNumberofRows.Text = "Number of Rows:"
         '
+        'ucrNudNumberRows
+        '
+        Me.ucrNudNumberRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberRows.Location = New System.Drawing.Point(318, 217)
+        Me.ucrNudNumberRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
+        Me.ucrNudNumberRows.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberRows.TabIndex = 8
+        Me.ucrNudNumberRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlDisplayFrom
+        '
+        Me.ucrPnlDisplayFrom.Location = New System.Drawing.Point(299, 243)
+        Me.ucrPnlDisplayFrom.Name = "ucrPnlDisplayFrom"
+        Me.ucrPnlDisplayFrom.Size = New System.Drawing.Size(66, 40)
+        Me.ucrPnlDisplayFrom.TabIndex = 16
+        '
+        'ucrChkSpecifyRows
+        '
+        Me.ucrChkSpecifyRows.Checked = False
+        Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(223, 195)
+        Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
+        Me.ucrChkSpecifyRows.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSpecifyRows.TabIndex = 6
+        '
+        'ucrPnlDisplayWindow
+        '
+        Me.ucrPnlDisplayWindow.Location = New System.Drawing.Point(10, 200)
+        Me.ucrPnlDisplayWindow.Name = "ucrPnlDisplayWindow"
+        Me.ucrPnlDisplayWindow.Size = New System.Drawing.Size(170, 46)
+        Me.ucrPnlDisplayWindow.TabIndex = 6
+        '
+        'ucrReceiverView
+        '
+        Me.ucrReceiverView.frmParent = Me
+        Me.ucrReceiverView.Location = New System.Drawing.Point(248, 60)
+        Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverView.Name = "ucrReceiverView"
+        Me.ucrReceiverView.Selector = Nothing
+        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 130)
+        Me.ucrReceiverView.TabIndex = 3
+        '
+        'ucrSelectorForView
+        '
+        Me.ucrSelectorForView.bShowHiddenColumns = False
+        Me.ucrSelectorForView.bUseCurrentFilter = True
+        Me.ucrSelectorForView.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForView.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForView.Name = "ucrSelectorForView"
+        Me.ucrSelectorForView.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForView.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 289)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 12
+        '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 374)
+        Me.ClientSize = New System.Drawing.Size(416, 343)
         Me.Controls.Add(Me.ucrNudNumberRows)
         Me.Controls.Add(Me.rdoBottom)
         Me.Controls.Add(Me.rdoTop)
