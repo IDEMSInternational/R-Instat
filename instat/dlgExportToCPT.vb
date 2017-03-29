@@ -34,10 +34,6 @@ Public Class dlgExportToCPT
         TestOkEnabled()
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
         ucrInputExportFile.IsReadOnly = True
@@ -52,7 +48,7 @@ Public Class dlgExportToCPT
         clsDefaultFunction.AddParameter("quote", "FALSE")
         clsDefaultFunction.AddParameter("row.names", "FALSE")
         clsDefaultFunction.AddParameter("col.names", "TRUE")
-        ucrBaseExportToCPT.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBaseExportToCPT.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -68,30 +64,30 @@ Public Class dlgExportToCPT
         ucrLocationDataFrame.lblDataFrame.Text = "Location Data Frame:"
 
         ucrReceiverMultipleDataColumns.Selector = ucrSSTDataframe
-        ucrReceiverMultipleDataColumns.SetParameter(New RParameter("sst_cols"))
+        ucrReceiverMultipleDataColumns.SetParameter(New RParameter("sst_cols", 3))
         ucrReceiverMultipleDataColumns.SetParameterIsString()
         ucrReceiverMultipleDataColumns.SetLinkedDisplayControl(lblDataColumns)
 
         ucrReceiverDataColumn.Selector = ucrSSTDataframe
-        ucrReceiverDataColumn.SetParameter(New RParameter("sst_cols"))
+        ucrReceiverDataColumn.SetParameter(New RParameter("sst_cols", 4))
         ucrReceiverDataColumn.SetParameterIsString()
         ucrReceiverDataColumn.SetLinkedDisplayControl(lblDataColumn)
 
         ucrReceiverYears.Selector = ucrSSTDataframe
-        ucrReceiverYears.SetParameter(New RParameter("year_col"))
+        ucrReceiverYears.SetParameter(New RParameter("year_col", 5))
         ucrReceiverYears.SetParameterIsString()
 
         ucrReceiverStations.Selector = ucrSSTDataframe
-        ucrReceiverStations.SetParameter(New RParameter("station_col"))
+        ucrReceiverStations.SetParameter(New RParameter("station_col", 6))
         ucrReceiverStations.SetParameterIsString()
         ucrReceiverStations.SetLinkedDisplayControl(lblStations)
 
-        ucrInputExportFile.SetParameter(New RParameter("file", 1))
-
-        ucrChkLong.SetParameter(New RParameter("long"))
+        ucrChkLong.SetParameter(New RParameter("long", 7))
         ucrChkLong.SetText("Long Data Format")
         ucrChkLong.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkLong.bUpdateRCodeFromControl = True
+
+        ucrInputExportFile.SetParameter(New RParameter("file", 0))
 
         ucrChkLong.AddToLinkedControls(ucrReceiverMultipleDataColumns, {False}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLong.AddToLinkedControls(ucrReceiverDataColumn, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
