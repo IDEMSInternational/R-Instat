@@ -24,8 +24,8 @@ Partial Class dlgDescribeTwoVariable
     Private Sub InitializeComponent()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
-        Me.lblFirstVariables = New System.Windows.Forms.Label()
-        Me.lbSecondVariable = New System.Windows.Forms.Label()
+        Me.lblFirstVariable = New System.Windows.Forms.Label()
+        Me.lbMultipleVariables = New System.Windows.Forms.Label()
         Me.ucrReceiverFirstVar = New instat.ucrReceiverSingle()
         Me.ucrReceiverSecondVar = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
@@ -39,14 +39,14 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdSummaries.Location = New System.Drawing.Point(300, 198)
         Me.cmdSummaries.Name = "cmdSummaries"
         Me.cmdSummaries.Size = New System.Drawing.Size(105, 23)
-        Me.cmdSummaries.TabIndex = 6
+        Me.cmdSummaries.TabIndex = 7
         Me.cmdSummaries.Tag = "Summaries"
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 202)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 198)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 8
@@ -54,44 +54,44 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdDisplayOptions.Text = "Display Options..."
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
-        'lblFirstVariables
+        'lblFirstVariable
         '
-        Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(248, 10)
-        Me.lblFirstVariables.Name = "lblFirstVariables"
-        Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
-        Me.lblFirstVariables.TabIndex = 1
-        Me.lblFirstVariables.Tag = "First_Variable(s):"
-        Me.lblFirstVariables.Text = "First Variable(s):"
+        Me.lblFirstVariable.AutoSize = True
+        Me.lblFirstVariable.Location = New System.Drawing.Point(285, 15)
+        Me.lblFirstVariable.Name = "lblFirstVariable"
+        Me.lblFirstVariable.Size = New System.Drawing.Size(70, 13)
+        Me.lblFirstVariable.TabIndex = 1
+        Me.lblFirstVariable.Tag = "First_Variable"
+        Me.lblFirstVariable.Text = "First Variable:"
         '
-        'lbSecondVariable
+        'lbMultipleVariables
         '
-        Me.lbSecondVariable.Location = New System.Drawing.Point(257, 78)
-        Me.lbSecondVariable.Name = "lbSecondVariable"
-        Me.lbSecondVariable.Size = New System.Drawing.Size(100, 15)
-        Me.lbSecondVariable.TabIndex = 3
-        Me.lbSecondVariable.Tag = "Second_Variable:"
-        Me.lbSecondVariable.Text = "Second Variable:"
+        Me.lbMultipleVariables.Location = New System.Drawing.Point(285, 61)
+        Me.lbMultipleVariables.Name = "lbMultipleVariables"
+        Me.lbMultipleVariables.Size = New System.Drawing.Size(100, 15)
+        Me.lbMultipleVariables.TabIndex = 3
+        Me.lbMultipleVariables.Tag = "Multiple_Variables"
+        Me.lbMultipleVariables.Text = "Multiple Variables:"
         '
         'ucrReceiverFirstVar
         '
         Me.ucrReceiverFirstVar.frmParent = Me
-        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(251, 33)
+        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(285, 33)
         Me.ucrReceiverFirstVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstVar.Name = "ucrReceiverFirstVar"
         Me.ucrReceiverFirstVar.Selector = Nothing
         Me.ucrReceiverFirstVar.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFirstVar.TabIndex = 4
+        Me.ucrReceiverFirstVar.TabIndex = 2
         '
         'ucrReceiverSecondVar
         '
         Me.ucrReceiverSecondVar.frmParent = Me
-        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(251, 103)
+        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(285, 80)
         Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
         Me.ucrReceiverSecondVar.Selector = Nothing
         Me.ucrReceiverSecondVar.Size = New System.Drawing.Size(120, 87)
-        Me.ucrReceiverSecondVar.TabIndex = 2
+        Me.ucrReceiverSecondVar.TabIndex = 4
         '
         'ucrSelectorDescribeTwoVar
         '
@@ -113,28 +113,28 @@ Partial Class dlgDescribeTwoVariable
         'ucrChkSaveResult
         '
         Me.ucrChkSaveResult.Checked = False
-        Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 203)
+        Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 198)
         Me.ucrChkSaveResult.Name = "ucrChkSaveResult"
         Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSaveResult.TabIndex = 11
+        Me.ucrChkSaveResult.TabIndex = 5
         '
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(176, 203)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(176, 198)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkOmitMissing.TabIndex = 10
+        Me.ucrChkOmitMissing.TabIndex = 6
         '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 288)
+        Me.ClientSize = New System.Drawing.Size(426, 288)
         Me.Controls.Add(Me.ucrChkSaveResult)
         Me.Controls.Add(Me.ucrChkOmitMissing)
-        Me.Controls.Add(Me.lbSecondVariable)
-        Me.Controls.Add(Me.lblFirstVariables)
+        Me.Controls.Add(Me.lbMultipleVariables)
+        Me.Controls.Add(Me.lblFirstVariable)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.ucrReceiverFirstVar)
         Me.Controls.Add(Me.ucrReceiverSecondVar)
@@ -159,8 +159,8 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents cmdSummaries As Button
     Friend WithEvents ucrReceiverFirstVar As ucrReceiverSingle
     Friend WithEvents cmdDisplayOptions As Button
-    Friend WithEvents lblFirstVariables As Label
-    Friend WithEvents lbSecondVariable As Label
+    Friend WithEvents lblFirstVariable As Label
+    Friend WithEvents lbMultipleVariables As Label
     Friend WithEvents ucrChkSaveResult As ucrCheck
     Friend WithEvents ucrChkOmitMissing As ucrCheck
 End Class
