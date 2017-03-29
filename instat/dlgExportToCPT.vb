@@ -14,11 +14,12 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.IO
+Imports instat
 Imports instat.Translations
 Public Class dlgExportToCPT
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOutPut As New RFunction
+    Private clsDefaultFunction, clsOutput As New RFunction
     Private Sub dlgExportToCPT_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -38,7 +39,7 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
         ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.SetName("")
         ucrSSTDataframe.Reset()
@@ -46,7 +47,7 @@ Public Class dlgExportToCPT
         ucrReceiverYears.SetMeAsReceiver()
         ucrChkLong.Checked = True
         clsDefaultFunction.SetRCommand("rio::export")
-        clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsOutPut)
+        clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsOutput)
         clsDefaultFunction.AddParameter("sep", Chr(34) & "\t" & Chr(34))
         clsDefaultFunction.AddParameter("quote", "FALSE")
         clsDefaultFunction.AddParameter("row.names", "FALSE")
@@ -56,7 +57,7 @@ Public Class dlgExportToCPT
 
     Private Sub InitialiseDialog()
         ucrBaseExportToCPT.iHelpTopicID = 355
-        clsOutPut.SetRCommand("output_for_CPT")
+        clsOutput.SetRCommand("output_for_CPT")
 
         ucrSSTDataframe.SetParameter(New RParameter("data_name", 0))
         ucrSSTDataframe.SetParameterIsrfunction()
@@ -98,13 +99,13 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkLong.SetRCode(clsOutPut, bReset)
-        ucrSSTDataframe.SetRCode(clsOutPut, bReset)
-        ucrLocationDataFrame.SetRCode(clsOutPut, bReset)
-        ucrReceiverYears.SetRCode(clsOutPut, bReset)
-        ucrReceiverMultipleDataColumns.SetRCode(clsOutPut, bReset)
-        ucrReceiverDataColumn.SetRCode(clsOutPut, bReset)
-        ucrReceiverStations.SetRCode(clsOutPut, bReset)
+        ucrChkLong.SetRCode(clsOutput, bReset)
+        ucrSSTDataframe.SetRCode(clsOutput, bReset)
+        ucrLocationDataFrame.SetRCode(clsOutput, bReset)
+        ucrReceiverYears.SetRCode(clsOutput, bReset)
+        ucrReceiverMultipleDataColumns.SetRCode(clsOutput, bReset)
+        ucrReceiverDataColumn.SetRCode(clsOutput, bReset)
+        ucrReceiverStations.SetRCode(clsOutput, bReset)
         ucrInputExportFile.SetRCode(ucrBaseExportToCPT.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -140,12 +141,12 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrSSTDataframe.ControlContentsChanged, ucrLocationDataFrame.ControlContentsChanged, ucrReceiverDataColumn.ControlContentsChanged, ucrReceiverMultipleDataColumns.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverYears.ControlContentsChanged
-        ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutPut)
+        ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutput)
         TestOkEnabled()
     End Sub
 
     Private Sub ucrChkLong_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkLong.ControlContentsChanged
         ucrReceiverYears.SetMeAsReceiver()
-        ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutPut)
+        ucrBaseExportToCPT.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsOutput)
     End Sub
 End Class
