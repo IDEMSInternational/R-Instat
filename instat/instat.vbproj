@@ -612,6 +612,12 @@
     <Compile Include="sdgCalculationsSummmary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgOneWayFrequencies.Designer.vb">
+      <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneWayFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </Compile>
