@@ -41,7 +41,7 @@ Partial Class dlgExportToCPT
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(347, 251)
+        Me.cmdBrowse.Location = New System.Drawing.Point(347, 252)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
         Me.cmdBrowse.TabIndex = 11
@@ -51,7 +51,7 @@ Partial Class dlgExportToCPT
         'lblExport
         '
         Me.lblExport.AutoSize = True
-        Me.lblExport.Location = New System.Drawing.Point(10, 251)
+        Me.lblExport.Location = New System.Drawing.Point(10, 249)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(56, 13)
         Me.lblExport.TabIndex = 9
@@ -60,7 +60,7 @@ Partial Class dlgExportToCPT
         'lblYears
         '
         Me.lblYears.AutoSize = True
-        Me.lblYears.Location = New System.Drawing.Point(280, 40)
+        Me.lblYears.Location = New System.Drawing.Point(280, 45)
         Me.lblYears.Name = "lblYears"
         Me.lblYears.Size = New System.Drawing.Size(37, 13)
         Me.lblYears.TabIndex = 2
@@ -80,7 +80,7 @@ Partial Class dlgExportToCPT
         'lblDataColumn
         '
         Me.lblDataColumn.AutoSize = True
-        Me.lblDataColumn.Location = New System.Drawing.Point(280, 146)
+        Me.lblDataColumn.Location = New System.Drawing.Point(280, 149)
         Me.lblDataColumn.Name = "lblDataColumn"
         Me.lblDataColumn.Size = New System.Drawing.Size(71, 13)
         Me.lblDataColumn.TabIndex = 6
@@ -90,7 +90,7 @@ Partial Class dlgExportToCPT
         'lblDataColumns
         '
         Me.lblDataColumns.AutoSize = True
-        Me.lblDataColumns.Location = New System.Drawing.Point(280, 93)
+        Me.lblDataColumns.Location = New System.Drawing.Point(280, 96)
         Me.lblDataColumns.Name = "lblDataColumns"
         Me.lblDataColumns.Size = New System.Drawing.Size(76, 13)
         Me.lblDataColumns.TabIndex = 4
@@ -146,7 +146,7 @@ Partial Class dlgExportToCPT
         'ucrReceiverYears
         '
         Me.ucrReceiverYears.frmParent = Me
-        Me.ucrReceiverYears.Location = New System.Drawing.Point(280, 55)
+        Me.ucrReceiverYears.Location = New System.Drawing.Point(280, 60)
         Me.ucrReceiverYears.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYears.Name = "ucrReceiverYears"
         Me.ucrReceiverYears.Selector = Nothing
@@ -157,7 +157,7 @@ Partial Class dlgExportToCPT
         '
         Me.ucrSSTDataframe.bShowHiddenColumns = False
         Me.ucrSSTDataframe.bUseCurrentFilter = True
-        Me.ucrSSTDataframe.Location = New System.Drawing.Point(10, 5)
+        Me.ucrSSTDataframe.Location = New System.Drawing.Point(10, 10)
         Me.ucrSSTDataframe.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSSTDataframe.Name = "ucrSSTDataframe"
         Me.ucrSSTDataframe.Size = New System.Drawing.Size(210, 180)
