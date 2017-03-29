@@ -32,19 +32,19 @@ Partial Class dlgRatingScales
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.grpSort = New System.Windows.Forms.GroupBox()
+        Me.rdoHighDescending = New System.Windows.Forms.RadioButton()
+        Me.rdoHighAscending = New System.Windows.Forms.RadioButton()
         Me.rdoLowDescending = New System.Windows.Forms.RadioButton()
         Me.rdoLowAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSort = New instat.UcrPanel()
-        Me.rdoHighAscending = New System.Windows.Forms.RadioButton()
-        Me.rdoHighDescending = New System.Windows.Forms.RadioButton()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.grpGraphType = New System.Windows.Forms.GroupBox()
+        Me.ucrNudNeutralLevel = New instat.ucrNud()
+        Me.lblNeutralLevel = New System.Windows.Forms.Label()
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
         Me.rdoLikert = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
-        Me.ucrNudNeutralLevel = New instat.ucrNud()
-        Me.lblNeutralLevel = New System.Windows.Forms.Label()
         Me.grpSort.SuspendLayout()
         Me.grpGraphType.SuspendLayout()
         Me.SuspendLayout()
@@ -141,6 +141,28 @@ Partial Class dlgRatingScales
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
         '
+        'rdoHighDescending
+        '
+        Me.rdoHighDescending.AutoSize = True
+        Me.rdoHighDescending.Location = New System.Drawing.Point(10, 109)
+        Me.rdoHighDescending.Name = "rdoHighDescending"
+        Me.rdoHighDescending.Size = New System.Drawing.Size(107, 17)
+        Me.rdoHighDescending.TabIndex = 4
+        Me.rdoHighDescending.TabStop = True
+        Me.rdoHighDescending.Text = "High Descending"
+        Me.rdoHighDescending.UseVisualStyleBackColor = True
+        '
+        'rdoHighAscending
+        '
+        Me.rdoHighAscending.AutoSize = True
+        Me.rdoHighAscending.Location = New System.Drawing.Point(10, 87)
+        Me.rdoHighAscending.Name = "rdoHighAscending"
+        Me.rdoHighAscending.Size = New System.Drawing.Size(100, 17)
+        Me.rdoHighAscending.TabIndex = 3
+        Me.rdoHighAscending.TabStop = True
+        Me.rdoHighAscending.Text = "High Ascending"
+        Me.rdoHighAscending.UseVisualStyleBackColor = True
+        '
         'rdoLowDescending
         '
         Me.rdoLowDescending.AutoSize = True
@@ -181,28 +203,6 @@ Partial Class dlgRatingScales
         Me.ucrPnlSort.Size = New System.Drawing.Size(114, 111)
         Me.ucrPnlSort.TabIndex = 0
         '
-        'rdoHighAscending
-        '
-        Me.rdoHighAscending.AutoSize = True
-        Me.rdoHighAscending.Location = New System.Drawing.Point(10, 87)
-        Me.rdoHighAscending.Name = "rdoHighAscending"
-        Me.rdoHighAscending.Size = New System.Drawing.Size(100, 17)
-        Me.rdoHighAscending.TabIndex = 3
-        Me.rdoHighAscending.TabStop = True
-        Me.rdoHighAscending.Text = "High Ascending"
-        Me.rdoHighAscending.UseVisualStyleBackColor = True
-        '
-        'rdoHighDescending
-        '
-        Me.rdoHighDescending.AutoSize = True
-        Me.rdoHighDescending.Location = New System.Drawing.Point(10, 109)
-        Me.rdoHighDescending.Name = "rdoHighDescending"
-        Me.rdoHighDescending.Size = New System.Drawing.Size(107, 17)
-        Me.rdoHighDescending.TabIndex = 4
-        Me.rdoHighDescending.TabStop = True
-        Me.rdoHighDescending.Text = "High Descending"
-        Me.rdoHighDescending.UseVisualStyleBackColor = True
-        '
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
@@ -227,6 +227,28 @@ Partial Class dlgRatingScales
         Me.grpGraphType.TabStop = False
         Me.grpGraphType.Tag = "Graph_type"
         Me.grpGraphType.Text = "Graph Type"
+        '
+        'ucrNudNeutralLevel
+        '
+        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Location = New System.Drawing.Point(78, 44)
+        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
+        Me.ucrNudNeutralLevel.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNeutralLevel.TabIndex = 8
+        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblNeutralLevel
+        '
+        Me.lblNeutralLevel.AutoSize = True
+        Me.lblNeutralLevel.Location = New System.Drawing.Point(3, 48)
+        Me.lblNeutralLevel.Name = "lblNeutralLevel"
+        Me.lblNeutralLevel.Size = New System.Drawing.Size(73, 13)
+        Me.lblNeutralLevel.TabIndex = 7
+        Me.lblNeutralLevel.Tag = "Neutral_Level"
+        Me.lblNeutralLevel.Text = "Neutral Level:"
         '
         'rdoStacked
         '
@@ -260,28 +282,6 @@ Partial Class dlgRatingScales
         Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
         Me.ucrPnlGraphType.Size = New System.Drawing.Size(133, 22)
         Me.ucrPnlGraphType.TabIndex = 2
-        '
-        'ucrNudNeutralLevel
-        '
-        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Location = New System.Drawing.Point(78, 44)
-        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
-        Me.ucrNudNeutralLevel.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNeutralLevel.TabIndex = 8
-        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblNeutralLevel
-        '
-        Me.lblNeutralLevel.AutoSize = True
-        Me.lblNeutralLevel.Location = New System.Drawing.Point(3, 48)
-        Me.lblNeutralLevel.Name = "lblNeutralLevel"
-        Me.lblNeutralLevel.Size = New System.Drawing.Size(73, 13)
-        Me.lblNeutralLevel.TabIndex = 7
-        Me.lblNeutralLevel.Tag = "Neutral_Level"
-        Me.lblNeutralLevel.Text = "Neutral Level:"
         '
         'dlgRatingScales
         '
