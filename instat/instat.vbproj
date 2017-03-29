@@ -335,6 +335,12 @@
     <Compile Include="dlgCorruptionModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgNewDialogue.Designer.vb">
+      <DependentUpon>dlgNewDialogue.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgNewDialogue.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgNewMarkovChains.Designer.vb">
       <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
     </Compile>
@@ -2044,6 +2050,9 @@
     <EmbeddedResource Include="dlgAddComment.resx">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgAddKey.resx">
+      <DependentUpon>dlgAddKey.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
     </EmbeddedResource>
@@ -2499,6 +2508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionModel.resx">
       <DependentUpon>dlgCorruptionModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNewDialogue.resx">
+      <DependentUpon>dlgNewDialogue.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgNewMarkovChains.resx">
       <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
