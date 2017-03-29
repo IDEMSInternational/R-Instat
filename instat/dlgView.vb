@@ -44,6 +44,7 @@ Public Class dlgView
         Dim clsMainFunction = New RFunction
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
+        ucrPnlDisplayFrom.SetDefaultState(rdoTop)
         clsMainFunction.SetRCommand("View")
         ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
     End Sub
@@ -51,17 +52,19 @@ Public Class dlgView
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 32
 
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
+        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
+        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
+
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
+
         ucrPnlDisplayWindow.bAllowNonConditionValues = True
         ucrPnlDisplayFrom.bAllowNonConditionValues = True
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
         ucrPnlDisplayFrom.AddRadioButton(rdoTop)
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
-        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
-        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
 
         ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
@@ -75,7 +78,6 @@ Public Class dlgView
         ucrSelectorForView.SetParameterIsString()
 
         ucrNudNumberRows.SetParameter(New RParameter("n", 1))
-        ucrNudNumberRows.SetRDefault(6)
         ucrNudNumberRows.Minimum = 1
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
     End Sub
@@ -121,9 +123,9 @@ Public Class dlgView
             ucrBase.clsRsyntax.iCallType = 2
             If ucrChkSpecifyRows.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+                clsMainFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+                clsMainFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
                 If rdoTop.Checked Then
-                    clsMainFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-                    clsMainFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
                     clsMainFunction.SetRCommand("head")
                 Else
                     clsMainFunction.SetRCommand("tail")
@@ -140,7 +142,7 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
+    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
         SetIcallType()
     End Sub
 End Class
