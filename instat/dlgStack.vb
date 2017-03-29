@@ -29,7 +29,6 @@ Public Class dlgStack
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
         TestOKEnabled()
     End Sub
 
@@ -58,10 +57,6 @@ Public Class dlgStack
         ucrSaveNewDataName.SetLabelText("New Data Frame Name:")
         ucrStackDataInto.SetValidationTypeAsRVariable()
         ucrFactorInto.SetValidationTypeAsRVariable()
-    End Sub
-
-    Private Sub ReopenDialog()
-        StackDataFrame()
     End Sub
 
     Private Sub StackDataFrame()
