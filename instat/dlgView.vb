@@ -44,7 +44,6 @@ Public Class dlgView
         Dim clsMainFunction = New RFunction
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
-        ucrPnlDisplayFrom.SetDefaultState(rdoTop)
         clsMainFunction.SetRCommand("View")
         ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
     End Sub
@@ -52,16 +51,10 @@ Public Class dlgView
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 32
 
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
-        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
-        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
-
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
 
-        ucrPnlDisplayWindow.bAllowNonConditionValues = True
-        ucrPnlDisplayFrom.bAllowNonConditionValues = True
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
         ucrPnlDisplayFrom.AddRadioButton(rdoTop)
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
@@ -74,6 +67,15 @@ Public Class dlgView
         ucrChkSpecifyRows.SetText("Specify Rows")
         ucrChkSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoTop)
         ucrChkSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=6)
+
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
+        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
+        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
+
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail"})
+        ucrPnlDisplayWindow.SetDefaultState(rdoTop)
+
+
         ucrSelectorForView.SetParameter(New RParameter("title", 1))
         ucrSelectorForView.SetParameterIsString()
 
